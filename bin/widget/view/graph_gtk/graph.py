@@ -27,32 +27,68 @@
 #
 ##############################################################################
 
+
 import locale
 import gtk
 from gtk import glade
 
 import tools
-import graph
-
 from rpc import RPCProxy
 from widget.view import interface
 
-class parser_graph(interface.parser_interface):
-	def parse(self, model, root_node, fields):
-		on_write = '' #attrs.get('on_write', '')
+from pychart import *
 
-		img = gtk.Image()
-		img.set_from_stock('gtk-cancel', gtk.ICON_SIZE_BUTTON)
-		img.show()
+import StringIO
+
+class ViewGraph(object):
+	def __init__(self, widget, model, axis, fields):
+		self.widget = widget
+		self.fields = fields
+		self.model = model
+		axis = ['user_id', 'amount_revenue_prob']
+		self.axis = axis
+
+	def display(self, models):
+		import os
+		data = []
+		for m in models:
+			res = []
+			for x in self.axis:
+				res.append(m[x].get_client())
+			data.append(res)
 
 		#
-		# TODO: parse root_node to fill in axis
+		# Try to find another solution
 		#
-		axis = ['name','amount_revenue_prob']
+		png_string = StringIO.StringIO()
+		can = canvas.init(fname=png_string, format='png')
 
-		view = graph.ViewGraph(img, model, axis, fields)
-		return view, {}, [], on_write
+		ar = area.T(
+			size=(150,150),
+			legend=legend.T(),
+			x_grid_style = None,
+			y_grid_style = None
+		)
+
+		plot = pie_plot.T(
+			data=data,
+			arc_offsets=[0,10,0,10],
+			shadow = (2, -2, fill_style.gray50),
+			label_offset = 25,
+			arrow_style = arrow.a3
+		)
+		ar.add_plot(plot)
+		ar.draw(can)
+		can.close()
+
+		data = png_string.getvalue()
+		loader = gtk.gdk.PixbufLoader ('png')
+
+		loader.write (data, len(data))
+		pixbuf = loader.get_pixbuf()
+		loader.close()
+
+		self.widget.set_from_pixbuf(pixbuf)
 
 
-# vim:noexpandtab:
 
