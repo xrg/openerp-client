@@ -33,19 +33,23 @@ import xml.dom.minidom
 
 import form_gtk
 import tree_gtk
+import graph_gtk
 
 from form import ViewForm
 from list import ViewList
+from graph import ViewGraph
 
 parsers = {
 	'form': form_gtk.parser_form,
 	'tree': tree_gtk.parser_tree,
+	'graph': graph_gtk.parser_graph,
 }
 
 
 parsers2 = {
 	'form': ViewForm,
-	'tree': ViewList
+	'tree': ViewList,
+	'graph': ViewGraph
 }
 
 class widget_parse(interface.parser_interface):
