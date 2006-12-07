@@ -1,0 +1,225 @@
+##############################################################################
+#
+# Copyright (c) 2004-2006 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#
+# $Id$
+#
+# WARNING: This program as such is intended to be used by professional
+# programmers who take the whole responsability of assessing all potential
+# consequences resulting from its eventual inadequacies and bugs
+# End users who are looking for a ready-to-use solution with commercial
+# garantees and support are strongly adviced to contract a Free Software
+# Service Company
+#
+# This program is Free Software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#
+##############################################################################
+
+import gtk
+import parser
+import observator
+
+
+class EditableTreeView(gtk.TreeView, observator.Observable):
+
+	leaving_model_events = (gtk.keysyms.Up, gtk.keysyms.Down,
+							gtk.keysyms.Return, gtk.keysyms.KP_Enter)
+	leaving_events = leaving_model_events + (gtk.keysyms.Tab,
+											 gtk.keysyms.ISO_Left_Tab) 
+
+	def __init__(self, position):
+		super(EditableTreeView, self).__init__()
+		self.editable = position
+
+	def on_quit_cell(self, current_model, fieldname, value):
+		modelfield = current_model[fieldname]
+		col_type = modelfield.attrs['type']
+		cell = parser.Cell(col_type)(fieldname)
+
+		# The value has not changed ... do nothing.
+		if value == cell.get_textual_value(current_model):
+			return
+
+		try:
+			real_value = cell.value_from_text(current_model, value)
+			modelfield.set_client(real_value)
+			modelfield.modified = False
+		except parser.UnsettableColumn:
+			return
+
+		# And now the on_change stuff ... only 3 lines are enough.
+		#callback = modelfield.attrs.get('on_change', '')
+		#if callback:
+		#	current_model.on_change(callback)
+
+		# And finally the conditional default
+		#if modelfield.attrs.get('change_default', False):
+		#	current_model.cond_default(fieldname, real_value)
+
+	def on_open_remote(self, current_model, fieldname, create, value):
+		modelfield = current_model[fieldname]
+		col_type = modelfield.attrs['type']
+		cell = parser.Cell(col_type)(fieldname)
+		if value != cell.get_textual_value(current_model) or not value:
+			changed = True
+		else:
+			changed=False
+		try:
+			valid, value = cell.open_remote(current_model, create, changed, value)
+			if valid:
+				modelfield.set_client(value)
+				modelfield.modified = False
+		except NotImplementedError:
+			pass
+
+	def on_create_line(self):
+		model = self.get_model()
+		if self.editable == 'top':
+			method = model.prepend
+		else:
+			method = model.append
+		new_model = model.model_group.model_new(domain=self.screen.domain, context=self.screen.context)
+		res = method(new_model)
+		return res
+
+	def __next_column(self, col):
+		cols = self.get_columns()
+		current = cols.index(col)
+		idx = (current + 1) % len(cols)
+		return cols[idx]
+
+	def __prev_column(self, col):
+		cols = self.get_columns()
+		current = cols.index(col)
+		idx = (current - 1) % len(cols)
+		return cols[idx]
+
+	def set_cursor(self, path, col, *args, **argv):
+		if col._type in ('many2one',):
+			self.warn('misc-message', _('Relation Field: F1 New   F2 Open/Search'))
+		else:
+			self.warn('misc-message', '')
+		return super(EditableTreeView, self).set_cursor(path, col, *args, **argv)
+
+	def set_value(self):
+		return True
+
+	def on_keypressed(self, entry, event):
+		path, column = self.get_cursor()
+		store = self.get_model()
+		model = store.get_value(store.get_iter(path), 0)
+		
+		if event.keyval in self.leaving_events:
+			shift_pressed = bool(gtk.gdk.SHIFT_MASK & event.state)
+			if isinstance(entry, gtk.Entry):
+				txt = entry.get_text()
+			elif isinstance(entry, gtk.ComboBoxEntry) and shift_pressed and event.keyval != gtk.keysyms.ISO_Left_Tab:
+				model = entry.get_property('model')
+				txt = entry.get_active_text()
+				for idx, line in enumerate(model):
+					if line[1] == txt:
+						break
+				if event.keyval == gtk.keysyms.Up:
+					entry.set_active((idx - 1) % 3)
+				elif event.keyval == gtk.keysyms.Down:
+					entry.set_active((idx + 1) % 3)
+				return True
+			else:
+				txt = entry.get_active_text()
+			self.on_quit_cell(model, column.name, txt)
+		if event.keyval in self.leaving_model_events:
+			if model.validate() and self.screen.tree_saves:
+				id = model.save()
+				if not id:
+					return True
+				else:
+					res = store.saved(id)
+					if res:
+						self.screen.display(res.id)
+
+			elif self.screen.tree_saves:
+				invalid_fields = model.invalid_fields
+				for col in self.get_columns():
+					if col.name in invalid_fields:
+						break
+				self.set_cursor(path, col, True)
+				self.warn('misc-message', _('Warning; field "%s" is required !') % invalid_fields[col.name])
+				return True
+
+		if event.keyval == gtk.keysyms.Tab:
+			new_col = self.__next_column(column)
+			self.set_cursor(path, new_col, True)
+		elif event.keyval == gtk.keysyms.ISO_Left_Tab:
+			new_col = self.__prev_column(column)
+			self.set_cursor(path, new_col, True)
+		elif event.keyval == gtk.keysyms.Up:
+			self._key_up(path, store, column)
+		elif event.keyval == gtk.keysyms.Down:
+			self._key_down(path,store,column)
+		elif event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):
+			if self.editable == 'top':
+				new_path = self._key_up(path, store, column)
+			else:
+				new_path = self._key_down(path,store,column)
+			col = self.get_columns()[0]
+			self.set_cursor(new_path, col, True)
+		elif event.keyval == gtk.keysyms.Escape:
+			if model.id is None:
+				store.remove(store.get_iter(path))
+			self.screen.current_model = False
+			self.screen.display()
+			self.set_cursor(path, column, False)
+		elif event.keyval in (gtk.keysyms.F1, gtk.keysyms.F2):
+			if isinstance(entry, gtk.Entry):
+				value=entry.get_text()
+			else:
+				value=get_active_text()
+			self.on_open_remote(model, column.name,
+								create=(event.keyval==gtk.keysyms.F1), value=value)
+			self.set_cursor(path, column, True)
+		else:
+			if event.keyval >= 48 and event.keyval <= 200:
+				modelfield = model[column.name]
+				modelfield.modified = True
+			return False
+
+		return True
+
+	def _key_down(self, path, store, column):
+		if path[0] == len(store) - 1 and self.editable == 'bottom':
+			self.on_create_line()
+		new_path = (path[0] + 1) % len(store)
+		self.set_cursor(new_path, column, True)
+		return new_path
+
+	def _key_up(self, path, store, column):
+		if path[0] == 0 and self.editable == 'top':
+			self.on_create_line()
+			new_path = 0
+		else:
+			new_path = (path[0] - 1) % len(store)
+		self.set_cursor(new_path, column, True)
+		return new_path
+
+	def on_editing_done(self, entry):
+		path, column = self.get_cursor()
+		store = self.get_model()
+		model = store.get_value(store.get_iter(path), 0)
+		if isinstance(entry, gtk.Entry):
+			self.on_quit_cell(model, column.name, entry.get_text())
+		elif isinstance(entry, gtk.ComboBoxEntry):
+			self.on_quit_cell(model, column.name, entry.get_active_text())
+
+# vim:noexpandtab:

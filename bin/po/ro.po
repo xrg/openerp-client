@@ -1,0 +1,2226 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Tiny ERP V2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-10-28 13:16+0200\n"
+"PO-Revision-Date: 2005-04-05 09:43+0200\n"
+"Last-Translator: Fabien Pinckaers <fp@tiny.be>\n"
+"Language-Team: FR <i18n-info@tinyerp.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: bin/plugins/__init__.py:20
+#, fuzzy
+msgid "No available plugin for this resource !"
+msgstr "Plugin invalid pentru aceasta resursa!"
+
+#: bin/plugins/__init__.py:22
+msgid "Choose a Plugin"
+msgstr "Alege un plugin"
+
+#: bin/printer/printer.py:136
+msgid "Write Report to File"
+msgstr "Scrie raportul in fisier"
+
+#: bin/printer/printer.py:142 bin/widget/view/form_gtk/binary.py:70
+msgid "Error writing the file!"
+msgstr "Erroare in scriere  fisier!"
+
+#: bin/widget/view/tree_gtk/editabletree.py:105
+msgid "Relation Field: F1 New   F2 Open/Search"
+msgstr ""
+
+#: bin/widget/view/tree_gtk/editabletree.py:152
+#, python-format
+msgid "Warning; field \"%s\" is required !"
+msgstr ""
+
+#: bin/widget/view/form_gtk/many2one.py:93 bin/terp.glade:1704
+msgid "Action"
+msgstr "Actiune"
+
+#: bin/widget/view/form_gtk/many2one.py:94
+msgid "Report"
+msgstr ""
+
+#: bin/widget/view/form_gtk/wid_common.py:54
+msgid "Always applicable !"
+msgstr "Intotdeauna aplicabil(a)!"
+
+#: bin/widget/view/form_gtk/interface.py:52 bin/terp.glade:2889
+msgid "Set to default value"
+msgstr "Pune valoarea implicita"
+
+#: bin/widget/view/form_gtk/interface.py:53
+#, fuzzy
+msgid "Set default"
+msgstr "pune la _Default (implicit)"
+
+#: bin/widget/view/form_gtk/form.py:86
+#, fuzzy
+msgid "Invalid Form, correct red fields !"
+msgstr "Formular invalid, corectati cimpurile in rosu!"
+
+#: bin/widget/view/form_gtk/calendar.py:95
+#: bin/widget/view/form_gtk/calendar.py:173
+msgid "This widget is readonly !"
+msgstr ""
+
+#: bin/widget/view/form_gtk/image.py:43
+#, fuzzy
+msgid "Select a file"
+msgstr "Alege o data"
+
+#: bin/widget/view/form_gtk/image.py:89
+#, fuzzy
+msgid "Save as ..."
+msgstr "Salavare atasare ..."
+
+#: bin/widget/view/form_gtk/image.py:95
+msgid "Open file ..."
+msgstr ""
+
+#: bin/widget/view/form_gtk/one2many_list.py:139
+#, fuzzy
+msgid "You have to select a resource !"
+msgstr "Selectiati o resursa !"
+
+#: bin/widget/view/form_gtk/binary.py:54
+msgid "Select the file to attach"
+msgstr "Selectionati le fisierul atasat"
+
+#: bin/widget/view/form_gtk/binary.py:61
+msgid "Error reading the file"
+msgstr "Eroare in citire fisier"
+
+#: bin/widget/view/form_gtk/binary.py:65
+msgid "Save attachment as..."
+msgstr "Salavare atasare ..."
+
+#: bin/widget/view/form_gtk/binary.py:93
+#, python-format
+msgid "%d bytes"
+msgstr ""
+
+#: bin/widget/view/form.py:98 bin/widget/view/form.py:106
+msgid "You must select a record to use the relate button !"
+msgstr ""
+
+#: bin/common/common.py:69
+#, fuzzy
+msgid "Unable to launch this file !"
+msgstr "Imposibil de a executa acest fisier !"
+
+#: bin/common/common.py:84
+msgid "Unable to launch the application associated to this content !"
+msgstr ""
+"Impossible de a executa applicatia associta acestui content (continut)!"
+
+#: bin/common/common.py:302 bin/common/common.py:356
+#, fuzzy
+msgid "Support request sent !"
+msgstr "Trimite cererea de suport"
+
+#: bin/modules/gui/window/view_tree/view_tree_sc.py:41
+#: bin/modules/gui/window/form.py:203
+msgid "ID"
+msgstr "ID"
+
+#: bin/modules/gui/window/view_tree/view_tree_sc.py:46
+msgid "Description"
+msgstr "Descriere"
+
+#: bin/modules/gui/window/view_tree/parse.py:42
+msgid "Tree"
+msgstr "Arbore"
+
+#: bin/modules/gui/window/win_export.py:58
+msgid " record(s) saved !"
+msgstr " inregistrare(i) salvata(e) !"
+
+#: bin/modules/gui/window/win_export.py:61
+msgid ""
+"Operation failed !\n"
+"I/O error"
+msgstr ""
+"Operatiune esuata !\n"
+"I/O erreur"
+
+#: bin/modules/gui/window/win_export.py:85
+msgid "Error Opening Excel !"
+msgstr "Eroare la deschidere Excell !"
+
+#: bin/modules/gui/window/win_export.py:87
+#, fuzzy
+msgid ""
+"Function only available for MS Office !\n"
+"Sorry, OOo users :("
+msgstr ""
+"Fonctie disponibila numai in MS Office!\n"
+"Cu parere de rau, OOo utilizatori :("
+
+#: bin/modules/gui/window/win_export.py:273
+#, fuzzy
+msgid "Export Data"
+msgstr "Date exportate"
+
+#: bin/modules/gui/window/win_preference.py:49
+msgid "Preferences"
+msgstr "Preferinte"
+
+#: bin/modules/gui/window/win_preference.py:73
+msgid "Preference"
+msgstr "Preferinte"
+
+#: bin/modules/gui/window/__init__.py:38
+msgid "Unknown Window"
+msgstr "Fereastra necunoscuta"
+
+#: bin/modules/gui/window/tree.py:78 bin/modules/gui/window/form.py:105
+msgid "Reload"
+msgstr "Reincarca"
+
+#: bin/modules/gui/window/tree.py:79
+msgid "Switch View"
+msgstr ""
+
+#: bin/modules/gui/window/tree.py:80
+#, fuzzy
+msgid "Changt root"
+msgstr "Schimba radacina"
+
+#: bin/modules/gui/window/tree.py:81 bin/modules/gui/window/tree.py:82
+msgid "Open"
+msgstr "Deschide"
+
+#: bin/modules/gui/window/tree.py:83 bin/modules/gui/window/tree.py:84
+msgid "Print"
+msgstr "Imprima"
+
+#: bin/modules/gui/window/tree.py:85
+msgid "Close"
+msgstr "Inchide"
+
+#: bin/modules/gui/window/tree.py:179 bin/modules/gui/window/tree.py:224
+msgid "No resource selected!"
+msgstr "Nici o resursa selectionata"
+
+#: bin/modules/gui/window/tree.py:190
+msgid ""
+"Are you sure you want\n"
+"to remove this record?"
+msgstr ""
+"Sunteti sigur(a) ca vreti \n"
+"sa stergeti acest inregistrement?"
+
+#: bin/modules/gui/window/tree.py:195
+msgid "Error removing resource!"
+msgstr "O eroare atunci cond ati sters resursele!"
+
+#: bin/modules/gui/window/tree.py:206
+#, fuzzy
+msgid "Unable to chroot: no tree resource selected"
+msgstr ""
+"Imposibil de crea radacina arbore: nici o resursa in arbore selectionata"
+
+#: bin/modules/gui/window/win_attach.py:108
+#, fuzzy
+msgid "Are you sure you want to remove this attachment ?"
+msgstr ""
+"Sunteti sigur(a) ca vreti \n"
+"sa stergeti acest inregistrement?"
+
+#: bin/modules/gui/window/win_attach.py:113
+#: bin/modules/gui/window/win_attach.py:135
+msgid "Select the destination file"
+msgstr "Selectionati la fisa de destinatie"
+
+#: bin/modules/gui/window/win_attach.py:124
+msgid "Can not open file !"
+msgstr "Imposibil de a deschide fisierul !"
+
+#: bin/modules/gui/window/win_attach.py:144
+#: bin/modules/gui/window/win_attach.py:255
+msgid "Can not write file !"
+msgstr "Imposibil de a scrie fisierul !"
+
+#: bin/modules/gui/window/win_attach.py:242
+msgid ""
+"Unable to preview image file !\n"
+"Verify the format."
+msgstr ""
+
+#: bin/modules/gui/window/win_search.py:74
+#, fuzzy, python-format
+msgid "Tiny ERP Search: %s"
+msgstr "Tiny ERP - Cauta"
+
+#: bin/modules/gui/window/win_search.py:75
+#, fuzzy, python-format
+msgid "Tiny ERP Search: %s (%%d result(s))"
+msgstr "Tiny ERP - Cauta"
+
+#: bin/modules/gui/window/win_selection.py:55
+msgid "Name"
+msgstr "Nume"
+
+#: bin/modules/gui/window/win_selection.py:59
+msgid "Ressource Name"
+msgstr "Nume resursa"
+
+#: bin/modules/gui/window/win_selection.py:59
+msgid "Names"
+msgstr "Nume"
+
+#: bin/modules/gui/window/form.py:177 bin/modules/gui/window/form.py:367
+#, fuzzy
+msgid "No resource selected !"
+msgstr "Nici o resursa selectionata !"
+
+#: bin/modules/gui/window/form.py:197
+#, fuzzy
+msgid "You have to select one resource!"
+msgstr "Selectiati o resursa !"
+
+#: bin/modules/gui/window/form.py:204
+msgid "Creation User"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:205
+msgid "Creation Date"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:206
+msgid "Latest Modification by"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:207
+msgid "Latest Modification Date"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:208
+msgid "Owner"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:209
+msgid "Group Owner"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:210
+msgid "Access Level"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:220
+#, fuzzy
+msgid "Are you sure to remove this record ?"
+msgstr ""
+"Sunteti sigur(a) ca vreti \n"
+"sa stergeti acest inregistrement?"
+
+#: bin/modules/gui/window/form.py:223
+#, fuzzy
+msgid "Resource not removed !"
+msgstr "Resursa stearsa"
+
+#: bin/modules/gui/window/form.py:225
+msgid "Resource removed."
+msgstr "Resursa stearsa"
+
+#: bin/modules/gui/window/form.py:249
+msgid "Working now on the duplicated document !"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:258
+#, fuzzy
+msgid "Document saved !"
+msgstr "Optiuni salvate!"
+
+#: bin/modules/gui/window/form.py:262
+msgid "Invalid form !"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:314
+msgid "No record selected!"
+msgstr "Nici o inregistrare selectionata!"
+
+#: bin/modules/gui/window/form.py:342
+#, fuzzy
+msgid "No record selected"
+msgstr "Nici o inregistrare selectionata!"
+
+#: bin/modules/gui/window/form.py:347
+msgid "New document"
+msgstr "Document nou"
+
+#: bin/modules/gui/window/form.py:349
+#, fuzzy
+msgid "Editing document (id: "
+msgstr "Document in cours de editare: "
+
+#: bin/modules/gui/window/form.py:350
+msgid "Record: "
+msgstr "Inregistare: "
+
+#: bin/modules/gui/window/form.py:365
+#, fuzzy
+msgid "No preference available for this resource !"
+msgstr "Nici o preferinta disponibila pentru aceasta  resursa!"
+
+#: bin/modules/gui/window/form.py:371
+msgid ""
+"This record has been modified\n"
+"do you want to save it ?"
+msgstr ""
+
+#: bin/modules/gui/window/win_import.py:53
+#, python-format
+msgid "Imported %d objects !"
+msgstr ""
+
+#: bin/modules/gui/window/win_import.py:79
+#: bin/modules/gui/window/win_import.py:83
+msgid "Field name"
+msgstr "Nume cimp"
+
+#: bin/modules/gui/main.py:173 bin/modules/gui/main.py:435
+msgid "Press Ctrl+O to login"
+msgstr ""
+
+#: bin/modules/gui/main.py:214 bin/terp.glade:1234
+#, fuzzy
+msgid "Default Theme"
+msgstr "Valoare implicita:"
+
+#: bin/modules/gui/main.py:383
+#, fuzzy, python-format
+msgid "%s request(s)"
+msgstr "Cereri"
+
+#: bin/modules/gui/main.py:385
+msgid "No request"
+msgstr "Nici o cerere"
+
+#: bin/modules/gui/main.py:387
+#, fuzzy, python-format
+msgid " - %s pending request(s)"
+msgstr "Cereri in asteptatre"
+
+#: bin/modules/gui/main.py:418
+#, fuzzy
+msgid ""
+"Connection error !\n"
+"Unable to connect to the server !"
+msgstr ""
+"Eroare de conectare !\n"
+"Nume gresit de utilisator sau parola gresita!"
+
+#: bin/modules/gui/main.py:420
+msgid ""
+"Connection error !\n"
+"Bad username or password !"
+msgstr ""
+"Eroare de conectare !\n"
+"Nume gresit de utilisator sau parola gresita!"
+
+#: bin/modules/gui/main.py:424
+msgid "Connection Error !"
+msgstr "Eroare de conectare!"
+
+#: bin/modules/gui/main.py:433
+msgid "Not logged !"
+msgstr ""
+
+#: bin/modules/gui/main.py:494 bin/modules/gui/main.py:498
+msgid "Do you really want to quit ?"
+msgstr ""
+
+#: bin/modules/gui/main.py:592
+msgid "The database name must contain only normal characters or \"_\""
+msgstr ""
+
+#: bin/modules/gui/main.py:592
+msgid "Bad database name !"
+msgstr ""
+
+#: bin/modules/gui/main.py:605 bin/modules/gui/main.py:620
+#: bin/modules/gui/main.py:650
+msgid "Bad database administrator password !"
+msgstr ""
+
+#: bin/modules/gui/main.py:605 bin/modules/gui/main.py:607
+msgid "Could not create database."
+msgstr ""
+
+#: bin/modules/gui/main.py:607 bin/modules/gui/main.py:780
+msgid "Error during database creation !"
+msgstr ""
+
+#: bin/modules/gui/main.py:611
+#, fuzzy
+msgid "Delete a database"
+msgstr "Alege o data"
+
+#: bin/modules/gui/main.py:617
+msgid "Database dropped successfully !"
+msgstr ""
+
+#: bin/modules/gui/main.py:620
+msgid "Could not drop database."
+msgstr ""
+
+#: bin/modules/gui/main.py:622
+msgid "Couldn't drop database"
+msgstr ""
+
+#: bin/modules/gui/main.py:647
+msgid "Database restored successfully !"
+msgstr ""
+
+#: bin/modules/gui/main.py:650
+msgid "Could not restore database."
+msgstr ""
+
+#: bin/modules/gui/main.py:652
+msgid "Couldn't restore database"
+msgstr ""
+
+#: bin/modules/gui/main.py:670
+msgid "Confirmation password do not match new password, operation cancelled!"
+msgstr ""
+
+#: bin/modules/gui/main.py:670
+#, fuzzy
+msgid "Validation Error."
+msgstr "Eroare aplicatie"
+
+#: bin/modules/gui/main.py:676
+msgid "Could not change password database."
+msgstr ""
+
+#: bin/modules/gui/main.py:676
+msgid "Bas password provided !"
+msgstr ""
+
+#: bin/modules/gui/main.py:678
+msgid "Error, password not changed."
+msgstr ""
+
+#: bin/modules/gui/main.py:683 bin/modules/gui/main.py:708
+msgid "Backup a database"
+msgstr ""
+
+#: bin/modules/gui/main.py:704
+msgid "Database backuped successfully !"
+msgstr ""
+
+#: bin/modules/gui/main.py:706
+msgid "Couldn't backup database."
+msgstr ""
+
+#: bin/modules/gui/main.py:773
+msgid "Database created successfully !"
+msgstr ""
+
+#: bin/modules/gui/main.py:780
+msgid ""
+"The server crashed during installation.\n"
+"We suggest you to drop this database."
+msgstr ""
+
+#: bin/modules/action/main.py:51
+msgid "Nothing to print!"
+msgstr ""
+
+#: bin/modules/action/main.py:65
+msgid "Printing aborted, too long delay !"
+msgstr "Imprimare intrerupta, timp mare de asteptare!"
+
+#: bin/modules/action/main.py:69 bin/modules/action/main.py:122
+msgid "Error: "
+msgstr "Eroare: "
+
+#: bin/modules/action/main.py:129
+msgid "Select your action"
+msgstr "Selectioneaza actiune"
+
+#: bin/modules/action/main.py:135
+msgid "No action defined!"
+msgstr "Nici o actiune definita!"
+
+#: bin/options.py:88
+#, fuzzy, python-format
+msgid "Tiny ERP Client %s"
+msgstr "Tiny ERP Client v2.0"
+
+#: bin/options.py:89
+msgid "specify alternate config file"
+msgstr "specificati un fisier de configurare"
+
+#: bin/options.py:90
+msgid "enable basic debugging"
+msgstr "activare debbuger (depanator) implicit"
+
+#: bin/options.py:91
+msgid "specify channels to log"
+msgstr "specificati un canal pt. logger"
+
+#: bin/options.py:92
+msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+msgstr "specificati nivelul de log: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+
+#: bin/options.py:93
+#, fuzzy
+msgid "specify the user login"
+msgstr "specificati un canal pt. logger"
+
+#: bin/options.py:94
+msgid "specify the server port"
+msgstr ""
+
+#: bin/options.py:95
+msgid "specify the server ip/name"
+msgstr ""
+
+#: bin/tinyerp-client.py:143
+msgid "Closing Tiny ERP, KeyboardInterrupt"
+msgstr "Fermeture de Tiny ERP, Interruption Clavier"
+
+#: bin/rpc.py:113 bin/rpc.py:138
+msgid "Connection refused !"
+msgstr "Conectare refuzata!"
+
+#: bin/rpc.py:114
+msgid "Connection refused!"
+msgstr "Conectare refuzata!"
+
+#: bin/rpc.py:149
+msgid "Application Error"
+msgstr "Eroare aplicatie"
+
+#: bin/rpc.py:149
+msgid "View details"
+msgstr "Verifica detalii"
+
+#: bin/terp.glade:10
+msgid "Tiny ERP - Login"
+msgstr "Tiny ERP - Login"
+
+#: bin/terp.glade:106
+msgid "User:"
+msgstr "Utilisator:"
+
+#: bin/terp.glade:130 bin/terp.glade:13101 bin/terp.glade:13286
+#: bin/terp.glade:13914
+msgid "Password:"
+msgstr "Parola:"
+
+#: bin/terp.glade:155 bin/terp.glade:13041 bin/terp.glade:13424
+#: bin/terp.glade:13832 bin/terp.glade:14341
+#, fuzzy
+msgid "Change"
+msgstr "Schimba radacina"
+
+#: bin/terp.glade:178 bin/terp.glade:12718
+msgid "localhost"
+msgstr "localhost"
+
+#: bin/terp.glade:196
+msgid "Database:"
+msgstr ""
+
+#: bin/terp.glade:221 bin/terp.glade:12807 bin/terp.glade:13077
+#: bin/terp.glade:13335 bin/terp.glade:13743 bin/terp.glade:14252
+msgid "Server:"
+msgstr "Server:"
+
+#: bin/terp.glade:249
+msgid "demo"
+msgstr "demo"
+
+#: bin/terp.glade:321
+msgid "Tiny ERP"
+msgstr "Tiny ERP"
+
+#: bin/terp.glade:359
+msgid "_File"
+msgstr "_Fisier"
+
+#: bin/terp.glade:368
+#, fuzzy
+msgid "_Connect..."
+msgstr "Conectare..."
+
+#: bin/terp.glade:390
+#, fuzzy
+msgid "_Disconnect"
+msgstr "Deconectare"
+
+#: bin/terp.glade:417
+msgid "_New database"
+msgstr ""
+
+#: bin/terp.glade:438
+msgid "_Restore database"
+msgstr ""
+
+#: bin/terp.glade:459
+msgid "_Backup database"
+msgstr ""
+
+#: bin/terp.glade:480
+msgid "Dro_p database"
+msgstr ""
+
+#: bin/terp.glade:507
+msgid "Administrator Password"
+msgstr ""
+
+#: bin/terp.glade:547
+msgid "_User"
+msgstr "_Utilisator"
+
+#: bin/terp.glade:557
+#, fuzzy
+msgid "_Preferences"
+msgstr "Preferinte"
+
+#: bin/terp.glade:584
+#, fuzzy
+msgid "_Send a request"
+msgstr "Trimite o cerere"
+
+#: bin/terp.glade:605
+#, fuzzy
+msgid "_Read my requests"
+msgstr "Citeste cererile mele"
+
+#: bin/terp.glade:632
+#, fuzzy
+msgid "_Waiting Requests"
+msgstr "Cereri:"
+
+#: bin/terp.glade:645
+#, fuzzy
+msgid "For_m"
+msgstr "_Formular"
+
+#: bin/terp.glade:655
+#, fuzzy
+msgid "_New"
+msgstr "Nou"
+
+#: bin/terp.glade:677
+#, fuzzy
+msgid "_Save"
+msgstr "Salvare"
+
+#: bin/terp.glade:699
+#, fuzzy
+msgid "Copy this resource"
+msgstr "Sterge aceasta resursa"
+
+#: bin/terp.glade:700
+msgid "Duplicate"
+msgstr ""
+
+#: bin/terp.glade:721
+#, fuzzy
+msgid "_Delete"
+msgstr "Sterge"
+
+#: bin/terp.glade:749
+#, fuzzy
+msgid "Find"
+msgstr "Cimp:"
+
+#: bin/terp.glade:771
+#, fuzzy
+msgid "Ne_xt"
+msgstr "Urmator"
+
+#: bin/terp.glade:793
+#, fuzzy
+msgid "Pre_vious"
+msgstr "Precedent"
+
+#: bin/terp.glade:815
+msgid "Switch to list/form"
+msgstr ""
+
+#: bin/terp.glade:843
+msgid "_New Menu Tab"
+msgstr ""
+
+#: bin/terp.glade:865 bin/terp.glade:11161
+#, fuzzy
+msgid "Close Tab"
+msgstr "Inchide"
+
+#: bin/terp.glade:887
+#, fuzzy
+msgid "Previous Tab"
+msgstr "Notita precedenta"
+
+#: bin/terp.glade:897 bin/terp.glade:11065
+#, fuzzy
+msgid "Next Tab"
+msgstr "Notita urmatoare"
+
+#: bin/terp.glade:913
+#, fuzzy
+msgid "View _logs"
+msgstr "Verifica detalii"
+
+#: bin/terp.glade:922
+msgid "_Go to resource ID..."
+msgstr ""
+
+#: bin/terp.glade:938
+#, fuzzy
+msgid "_Open"
+msgstr "Deschide"
+
+#: bin/terp.glade:959
+#, fuzzy
+msgid "Reloa_d / Undo"
+msgstr "Reincarca"
+
+#: bin/terp.glade:987
+#, fuzzy
+msgid "Repeat latest _action"
+msgstr "Repeta ultima actiune"
+
+#: bin/terp.glade:1003
+msgid "_Preview in PDF"
+msgstr ""
+
+#: bin/terp.glade:1025
+msgid "Previe_w in editor"
+msgstr ""
+
+#: bin/terp.glade:1052
+#, fuzzy
+msgid "Expor_t data..."
+msgstr "Exporta datele..."
+
+#: bin/terp.glade:1073
+#, fuzzy
+msgid "I_mport data..."
+msgstr "Importa datele..."
+
+#: bin/terp.glade:1086
+msgid "_Options"
+msgstr "_Optiuni"
+
+#: bin/terp.glade:1095
+#, fuzzy
+msgid "_Menubar"
+msgstr "Bara meniu"
+
+#: bin/terp.glade:1105
+#, fuzzy
+msgid "Text _and Icons"
+msgstr "Texte si Iconite"
+
+#: bin/terp.glade:1115
+#, fuzzy
+msgid "_Icons only"
+msgstr "Numai iconite"
+
+#: bin/terp.glade:1126
+#, fuzzy
+msgid "_Text only"
+msgstr "Numai texte"
+
+#: bin/terp.glade:1141
+msgid "Client Mode"
+msgstr ""
+
+#: bin/terp.glade:1163
+msgid "Normal"
+msgstr ""
+
+#: bin/terp.glade:1173
+msgid "Mode PDA"
+msgstr ""
+
+#: bin/terp.glade:1188
+#, fuzzy
+msgid "_Theme"
+msgstr "Arbore"
+
+#: bin/terp.glade:1210
+#, fuzzy
+msgid "Tiny ERP Theme"
+msgstr "Licenta de Tiny ERP"
+
+#: bin/terp.glade:1219
+msgid "Aqua OS X"
+msgstr ""
+
+#: bin/terp.glade:1247
+#, fuzzy
+msgid "_Forms"
+msgstr "_Formular"
+
+#: bin/terp.glade:1257
+msgid "Right Toolbar"
+msgstr ""
+
+#: bin/terp.glade:1271
+#, fuzzy
+msgid "_Print"
+msgstr "Imprima"
+
+#: bin/terp.glade:1292
+#, fuzzy
+msgid "Previe_w before print"
+msgstr "Visualizare inainte imprimare"
+
+#: bin/terp.glade:1312
+#, fuzzy
+msgid "_Save options"
+msgstr "Salveaza optiuni"
+
+#: bin/terp.glade:1337
+#, fuzzy
+msgid "_Plugins"
+msgstr "Plugins"
+
+#: bin/terp.glade:1347
+#, fuzzy
+msgid "_Execute a plugin"
+msgstr "Executa un plugin"
+
+#: bin/terp.glade:1372
+#, fuzzy
+msgid "_Help"
+msgstr "Ajutor"
+
+#: bin/terp.glade:1381 bin/terp.glade:10060
+#, fuzzy
+msgid "Support Request"
+msgstr "Trimite cererea de suport"
+
+#: bin/terp.glade:1408
+msgid "User _Manual"
+msgstr ""
+
+#: bin/terp.glade:1429
+msgid "_Contextual Help"
+msgstr ""
+
+#: bin/terp.glade:1451
+#, fuzzy
+msgid "_Tips"
+msgstr "Note"
+
+#: bin/terp.glade:1472
+#, fuzzy
+msgid "Keyboard Shortcuts"
+msgstr "Scurtaturi"
+
+#: bin/terp.glade:1487
+#, fuzzy
+msgid "_Licence"
+msgstr "Licenta"
+
+#: bin/terp.glade:1508
+#, fuzzy
+msgid "_About..."
+msgstr "Despre ..."
+
+#: bin/terp.glade:1550 bin/terp.glade:2733
+msgid "Create a new resource"
+msgstr "Creare resursa noua"
+
+#: bin/terp.glade:1566
+msgid "Edit / Save this resource"
+msgstr "Editare / salvare acesta resursa"
+
+#: bin/terp.glade:1595
+msgid "Delete this resource"
+msgstr "Sterge acesta resursa"
+
+#: bin/terp.glade:1624
+#, fuzzy
+msgid "Find a resource"
+msgstr "Cauta o resursa"
+
+#: bin/terp.glade:1640
+msgid "Go to previous matched search"
+msgstr "Mergi inapoi in cautari"
+
+#: bin/terp.glade:1656
+msgid "Go to next matched resource"
+msgstr "Mergi inapoi in cautari"
+
+#: bin/terp.glade:1672
+msgid "Switch current view: form / list"
+msgstr ""
+
+#: bin/terp.glade:1673
+#, fuzzy
+msgid "Other View"
+msgstr "Alta vedere"
+
+#: bin/terp.glade:1703
+msgid "Launch actions about this resource"
+msgstr "Executa actiunile legate de aceasta resursa"
+
+#: bin/terp.glade:1721
+msgid "Print documents"
+msgstr "Imprima documentele"
+
+#: bin/terp.glade:1750
+#, fuzzy
+msgid "Add an attachment to this resource"
+msgstr "Executa actiunile legate de aceasta resursa"
+
+#: bin/terp.glade:1751
+#, fuzzy
+msgid "Attachement"
+msgstr "Atasament"
+
+#: bin/terp.glade:1781
+msgid "Close this window"
+msgstr "Inchide fereastra"
+
+#: bin/terp.glade:1842
+msgid "Requests:"
+msgstr "Cereri:"
+
+#: bin/terp.glade:1877
+msgid "Read my Requests"
+msgstr "Citeste cererile"
+
+#: bin/terp.glade:1905
+msgid "Send a new request"
+msgstr "Trimite o noua cerere"
+
+#: bin/terp.glade:1960
+msgid "Tiny ERP - Tree Resources"
+msgstr "Tiny ERP - Arborele cu resurse"
+
+#: bin/terp.glade:2093
+msgid "Shortcuts"
+msgstr "Scurtaturi"
+
+#: bin/terp.glade:2190
+msgid "Tiny ERP - Forms"
+msgstr "Tiny ERP - Formulare"
+
+#: bin/terp.glade:2236
+msgid "State:"
+msgstr "Stare:"
+
+#: bin/terp.glade:2282
+msgid "Tiny ERP - About"
+msgstr "Tiny ERP - Despre"
+
+#: bin/terp.glade:2337
+msgid ""
+"<b>About Tiny ERP</b>\n"
+"<i>The most advanced Open Source ERP &amp; CRM !</i>"
+msgstr ""
+
+#: bin/terp.glade:2402
+#, fuzzy
+msgid ""
+"\n"
+"Tiny ERP - GTK Client - v%s\n"
+"\n"
+"Tiny ERP is an Open Source ERP+CRM\n"
+"for small to medium businesses.\n"
+"\n"
+"The whole source code is distributed under\n"
+"the terms of the GNU Public Licence.\n"
+"\n"
+"(c) 2003-TODAY, Tiny sprl\n"
+"\n"
+"More Info on www.TinyERP.com !"
+msgstr ""
+"\n"
+"Tiny ERP - Client GTK - v2.0\n"
+"\n"
+"Tiny ERP este un ERP+CRM Open Source pentru\n"
+"firme mici si medii.\n"
+"\n"
+"Codul sursa este distribuit in acord cu \n"
+"textul dat de GNU Public Licence.\n"
+"\n"
+"(c) 2003-TODAY, Tiny sprl\n"
+"\n"
+"Mai multe informatii la www.TinyERP.com !"
+
+#: bin/terp.glade:2449
+#, fuzzy
+msgid "_Tiny ERP"
+msgstr "Tiny ERP"
+
+#: bin/terp.glade:2497
+#, fuzzy
+msgid ""
+"\n"
+"(c) 2003-TODAY - Tiny sprl\n"
+"Tiny ERP is a product of Tiny sprl:\n"
+"\n"
+"Tiny sprl\n"
+"21 Rue du Vieux Chateau\n"
+"BE-1457 Walhain\n"
+"Belgium\n"
+"\n"
+"Tel/Fax: +32.10.68.94.39\n"
+"Mail: sales@tiny.be\n"
+"Web: http://tiny.be"
+msgstr ""
+"\n"
+"(c) 2003- - Tiny sprl\n"
+"Tiny ERP este un produs al firmei Tiny sprl:\n"
+"\n"
+"Tiny sprl\n"
+"21 Rue du Vieux Chateau\n"
+"BE-1457 Walhain\n"
+"Belgique\n"
+"\n"
+"Tel/Fax: +32.10.68.94.39\n"
+"Mail: fp@tiny.be\n"
+"Web: http://tiny.be"
+
+#: bin/terp.glade:2544
+#, fuzzy
+msgid "_Contact"
+msgstr "Contact"
+
+#: bin/terp.glade:2586
+msgid "Tiny ERP - forms widget"
+msgstr "Tiny ERP - Formulare"
+
+#: bin/terp.glade:2637
+msgid "Open the calendar widget"
+msgstr "Deschide calendar"
+
+#: bin/terp.glade:2760
+#, fuzzy
+msgid "Search / Open a resource"
+msgstr "Cauta o resursa"
+
+#: bin/terp.glade:2868
+#, fuzzy
+msgid "Titre"
+msgstr "Titlu"
+
+#: bin/terp.glade:2898
+#, fuzzy
+msgid "Set Default"
+msgstr "pune la _Default (implicit)"
+
+#: bin/terp.glade:2918 bin/terp.glade:3200
+msgid "Create a new entry"
+msgstr "Creare unei noi intrari"
+
+#: bin/terp.glade:2945
+#, fuzzy
+msgid "Edit this entry"
+msgstr "Sterge aceasta intrare"
+
+#: bin/terp.glade:2972
+msgid "Remove this entry"
+msgstr "Sterge aceasta intrare"
+
+#: bin/terp.glade:3010
+msgid "Previous"
+msgstr "Precedent"
+
+#: bin/terp.glade:3037
+#, fuzzy
+msgid "(0/0)"
+msgstr "(1/1)"
+
+#: bin/terp.glade:3058
+msgid "Next"
+msgstr "Urmator"
+
+#: bin/terp.glade:3218
+msgid "Remove selected entry"
+msgstr "Sterge intrarea selectionata"
+
+#: bin/terp.glade:3283
+msgid "label74"
+msgstr "label74"
+
+#: bin/terp.glade:3470 bin/terp.glade:6027 bin/terp.glade:6128
+#: bin/terp.glade:6328
+msgid "-"
+msgstr "-"
+
+#: bin/terp.glade:3867
+msgid "Tiny ERP - Date selection"
+msgstr "Tiny ERP - Selectie data"
+
+#: bin/terp.glade:3948 bin/terp.glade:10603
+msgid "Tiny ERP - Confirmation"
+msgstr "Tiny ERP - Confirmare"
+
+#: bin/terp.glade:4034 bin/terp.glade:10702
+msgid "Hello World!"
+msgstr "Salut lume!"
+
+#: bin/terp.glade:4064
+msgid "Tiny ERP - selection"
+msgstr "Tiny ERP - selectie"
+
+#: bin/terp.glade:4135
+msgid "Your selection:"
+msgstr "Selectie dvs"
+
+#: bin/terp.glade:4203
+msgid "Tiny ERP - Filter"
+msgstr "Tiny ERP - Filtru"
+
+#: bin/terp.glade:4273
+#, fuzzy
+msgid "S_earch:"
+msgstr "Recherche:"
+
+#: bin/terp.glade:4315
+#, fuzzy
+msgid "on _field:"
+msgstr "in cimpul:"
+
+#: bin/terp.glade:4336
+msgid "test"
+msgstr ""
+
+#: bin/terp.glade:4349
+#, fuzzy
+msgid "_Select"
+msgstr "Selectioaza"
+
+#: bin/terp.glade:4366
+#, fuzzy
+msgid "_Unselect"
+msgstr "Deselectionaza"
+
+#: bin/terp.glade:4393
+msgid "Filter: "
+msgstr "Filtru"
+
+#: bin/terp.glade:4415
+#, fuzzy
+msgid "AL_L"
+msgstr "Toate"
+
+#: bin/terp.glade:4432
+#, fuzzy
+msgid "N_ONE"
+msgstr "Nimic"
+
+#: bin/terp.glade:4504
+msgid "<b><u>Actions</u></b>"
+msgstr "<b><u>Actiuni</u></b>"
+
+#: bin/terp.glade:4540
+msgid "Tiny ERP - Dialog"
+msgstr "Tiny ERP - Dialog"
+
+#: bin/terp.glade:4584
+msgid "Set to _Default"
+msgstr "pune la _Default (implicit)"
+
+#: bin/terp.glade:4611
+msgid "Value _Preference"
+msgstr "Valeur _Preference (preferinte)"
+
+#: bin/terp.glade:4634
+msgid "Tiny ERP, Field Preference target"
+msgstr "Tiny ERP, Preferinte cimp destinatie"
+
+#: bin/terp.glade:4705
+#, fuzzy
+msgid "Default _value:"
+msgstr "Valoare implicita:"
+
+#: bin/terp.glade:4796
+#, fuzzy
+msgid "_Domain:"
+msgstr "Domeniu:"
+
+#: bin/terp.glade:4821
+#, fuzzy
+msgid "Field _Name:"
+msgstr "Nume cimp:"
+
+#: bin/terp.glade:4879
+msgid "<b>Value applicable if:</b>"
+msgstr "<b>Valoare aplicabila daca:</b>"
+
+#: bin/terp.glade:4934
+#, fuzzy
+msgid "_only for you"
+msgstr "numai pentru dvs"
+
+#: bin/terp.glade:4953
+#, fuzzy
+msgid "for _all users"
+msgstr "pentru toti utilizatorii"
+
+#: bin/terp.glade:4976
+msgid "<b>Value applicable for:</b>"
+msgstr "<b>Valoare aplicabila pentru:</b>"
+
+#: bin/terp.glade:5016
+msgid "Tiny ERP - Export to CSV"
+msgstr "Tiny ERP - Exporta CSV"
+
+#: bin/terp.glade:5129
+#, fuzzy
+msgid "<b>Predefined exports</b>"
+msgstr "<b>Cimpuri pentru a fi exportate</b>"
+
+#: bin/terp.glade:5204 bin/terp.glade:12005
+msgid "<b>All fields</b>"
+msgstr "<b>Toate cimpurile</b>"
+
+#: bin/terp.glade:5280 bin/terp.glade:12081
+#, fuzzy
+msgid "_Add"
+msgstr "Adauga"
+
+#: bin/terp.glade:5355 bin/terp.glade:12156
+#, fuzzy
+msgid "_Remove"
+msgstr "Sterge"
+
+#: bin/terp.glade:5430
+#, fuzzy
+msgid "_Nothing"
+msgstr "Nimic"
+
+#: bin/terp.glade:5516
+#, fuzzy
+msgid "Save List"
+msgstr "Salveaza optiuni"
+
+#: bin/terp.glade:5598
+msgid "<b>Fields to export</b>"
+msgstr "<b>Cimpuri pentru a fi exportate</b>"
+
+#: bin/terp.glade:5646
+#, fuzzy
+msgid ""
+"Open in Excel\n"
+"Save as CSV"
+msgstr "Deschide in Excell"
+
+#: bin/terp.glade:5671
+#, fuzzy
+msgid "Add _field names"
+msgstr "Adauaga un cimp nou"
+
+#: bin/terp.glade:5691
+#, fuzzy
+msgid "<b>Opti_ons</b>"
+msgstr "<b>Optiuni</b>"
+
+#: bin/terp.glade:5728
+msgid "Tiny ERP - Search"
+msgstr "Tiny ERP - Cauta"
+
+#: bin/terp.glade:5868
+#, fuzzy
+msgid "_Limit:"
+msgstr "Limite:"
+
+#: bin/terp.glade:5909
+#, fuzzy
+msgid "Off_set:"
+msgstr "Decalaj (offset):"
+
+#: bin/terp.glade:5952
+msgid "Advanced search parameters"
+msgstr ""
+
+#: bin/terp.glade:5980
+msgid "Tiny ERP - Search Widgets"
+msgstr "Tiny ERP - Cauta"
+
+#: bin/terp.glade:6081
+msgid "Date de début"
+msgstr ""
+
+#: bin/terp.glade:6250
+msgid "Search with this name"
+msgstr "Cauta cu acest nume"
+
+#: bin/terp.glade:6277
+msgid "Clear the field"
+msgstr "Sterge cimp"
+
+#: bin/terp.glade:6342
+msgid "Yes"
+msgstr "Da"
+
+#: bin/terp.glade:6362
+msgid "No"
+msgstr "Nu"
+
+#: bin/terp.glade:6405
+msgid ""
+"\n"
+"Yes\n"
+"No"
+msgstr ""
+"\n"
+"Da\n"
+"Nu"
+
+#: bin/terp.glade:6428
+msgid "Tiny ERP - Attachment"
+msgstr "Tiny ERP - Attachement"
+
+#: bin/terp.glade:6496
+msgid "Filename:"
+msgstr "Nume fisier:"
+
+#: bin/terp.glade:6564
+msgid "Description:"
+msgstr "Descriere:"
+
+#: bin/terp.glade:6664
+#, fuzzy
+msgid "Save text"
+msgstr "Salvare"
+
+#: bin/terp.glade:6911
+msgid "Tiny ERP - Error"
+msgstr "Tiny ERP - Eroare"
+
+#: bin/terp.glade:6968
+msgid "Application Error !"
+msgstr "Eroare aplicatie!"
+
+#: bin/terp.glade:7039
+msgid "Error 404"
+msgstr "Eroare 404"
+
+#: bin/terp.glade:7060
+msgid "<b>Error code:</b>"
+msgstr "<b>Eroare de cod:</b>"
+
+#: bin/terp.glade:7081
+msgid ""
+"This Page does not exist !\n"
+"Please retry"
+msgstr ""
+"Acesta pagina nu exista!\n"
+"Veuillez réessayer"
+
+#: bin/terp.glade:7103
+msgid "<i>Click on the Support Request tab if you need more help !</i>"
+msgstr "<i>Clic pe tabul support daca aveti nevoi de ajutor!</i>"
+
+#: bin/terp.glade:7137
+#, fuzzy
+msgid "De_scription"
+msgstr "Descriere"
+
+#: bin/terp.glade:7183
+#, fuzzy
+msgid ""
+"Error details\n"
+"dqsdsqdqsdsd"
+msgstr "Detalii eroare\n"
+
+#: bin/terp.glade:7200
+#, fuzzy
+msgid "_Details"
+msgstr "Detali"
+
+#: bin/terp.glade:7239
+#, fuzzy
+msgid ""
+"<b>Complete this form to submit your bug and/or request a support.</b>\n"
+"<i>\n"
+"Your request will be send to Tiny ERP and we will reply you shortly.\n"
+"Note that we may not reply you if your Service Company is not a Tiny ERP "
+"partner.\n"
+"</i>"
+msgstr ""
+"<b>Completeaza acest formular pentru a trimite un bug si/sau o cerere de "
+"support.</b>\n"
+"<i>\n"
+"Cererea va fi trimisa dezvoltatorilor (programatorilor) si un raspuns va fi "
+"trimis in scurt timp.\n"
+"Notati ca e posibil sa nu primiti nici un raspuns de support daca nu sunteti "
+"partener Tiny ERP.\n"
+"</i>"
+
+#: bin/terp.glade:7285
+msgid "<b>Your name: </b>"
+msgstr ""
+
+#: bin/terp.glade:7309
+msgid "<b>Your Company: </b>"
+msgstr "<b>Societatea : </b>"
+
+#: bin/terp.glade:7333
+msgid "<b>Your Email: </b>"
+msgstr "<b>Email: </b>"
+
+#: bin/terp.glade:7399
+msgid "Explain what you did: "
+msgstr "Explicati ce ati facut: "
+
+#: bin/terp.glade:7423
+#, fuzzy
+msgid "Others Comments: "
+msgstr "Alte remarci: "
+
+#: bin/terp.glade:7574
+msgid "Send Support Request"
+msgstr "Trimite cererea de suport"
+
+#: bin/terp.glade:7617
+#, fuzzy
+msgid "<b>support contract id  </b>"
+msgstr "<b>Cerere de support</b>"
+
+#: bin/terp.glade:7662 bin/terp.glade:10473
+msgid ""
+"Not Urgent\n"
+"Medium\n"
+"Urgent\n"
+"Very Urgent"
+msgstr ""
+"Fara urgenta\n"
+"Mediu\n"
+"Urgent\n"
+"Foarte urgent"
+
+#: bin/terp.glade:7680 bin/terp.glade:10491
+#, fuzzy
+msgid "Emergency: "
+msgstr "Urgent: "
+
+#: bin/terp.glade:7704
+msgid "Phone Number: "
+msgstr "Numar de telefon: "
+
+#: bin/terp.glade:7788
+#, fuzzy
+msgid "<b>_Support Request</b>"
+msgstr "<b>Cerere de support</b>"
+
+#: bin/terp.glade:7823
+msgid "Tiny ERP - Ressource Edit"
+msgstr "Tiny ERP - Editare unei resurse"
+
+#: bin/terp.glade:7892
+msgid "Tiny ERP - Link"
+msgstr "Tiny ERP - Legaturi (link)"
+
+#: bin/terp.glade:7988
+msgid "Tiny ERP - List"
+msgstr "Tiny ERP - Liste"
+
+#: bin/terp.glade:8056
+msgid "Tiny ERP - Preferences"
+msgstr "Tiny ERP - Preferinte"
+
+#: bin/terp.glade:8123
+#, fuzzy
+msgid "<b>Edit resource preferences</b>"
+msgstr "<b>Editarea de preferinte</b>"
+
+#: bin/terp.glade:8170
+msgid "Tip of the Day"
+msgstr "Notita Zilei"
+
+#: bin/terp.glade:8244
+#, fuzzy
+msgid "Pre_vious Tip"
+msgstr "Notita precedenta"
+
+#: bin/terp.glade:8316
+#, fuzzy
+msgid "Ne_xt Tip"
+msgstr "Notita urmatoare"
+
+#: bin/terp.glade:8412
+#, fuzzy
+msgid "_Display a new tip next time ?"
+msgstr "Affiseaz o noua notita data viitoare ?"
+
+#: bin/terp.glade:8453
+msgid "Tiny ERP - Licence"
+msgstr "Tiny ERP - Licenta"
+
+#: bin/terp.glade:8510
+msgid "Tiny ERP license"
+msgstr "Licenta de Tiny ERP"
+
+#: bin/terp.glade:8680
+#, fuzzy
+msgid "Tiny ERP - Date & Time selection"
+msgstr "Tiny ERP - Selectie data"
+
+#: bin/terp.glade:8756
+msgid "Hour :"
+msgstr ""
+
+#: bin/terp.glade:8796
+msgid "Minute :"
+msgstr ""
+
+#: bin/terp.glade:8867 bin/terp.glade:11876
+msgid "dialog1"
+msgstr "dialog1"
+
+#: bin/terp.glade:8939
+#, fuzzy
+msgid "Search ID:"
+msgstr "Recherche:"
+
+#: bin/terp.glade:9018
+#, fuzzy
+msgid "Tiny ERP Survey"
+msgstr "Tiny ERP"
+
+#: bin/terp.glade:9075
+msgid "<b>Tiny ERP Survey</b>"
+msgstr ""
+
+#: bin/terp.glade:9096
+msgid ""
+"<i>Please fill in the following form in order to help us to improve Tiny ERP "
+"and better target new developments.</i>"
+msgstr ""
+
+#: bin/terp.glade:9145
+msgid "Industry:"
+msgstr ""
+
+#: bin/terp.glade:9170
+msgid "# Employees:"
+msgstr ""
+
+#: bin/terp.glade:9261
+msgid "Country:"
+msgstr ""
+
+#: bin/terp.glade:9285
+#, fuzzy
+msgid "Your Role:"
+msgstr "Selectie dvs"
+
+#: bin/terp.glade:9342
+#, fuzzy
+msgid "System:"
+msgstr "Stare:"
+
+#: bin/terp.glade:9402
+msgid "How did you hear about us:"
+msgstr ""
+
+#: bin/terp.glade:9448
+msgid "Open Source: "
+msgstr ""
+
+#: bin/terp.glade:9767
+#, fuzzy
+msgid "<b>Your company</b>"
+msgstr "<b>Societatea : </b>"
+
+#: bin/terp.glade:9819
+msgid "We plan to use Tiny ERP"
+msgstr ""
+
+#: bin/terp.glade:9838
+msgid "We plan to offer services on Tiny ERP"
+msgstr ""
+
+#: bin/terp.glade:9878
+msgid ""
+"Write here any comment, note or suggestion you have concerning Tiny ERP. \n"
+"Tell us which ERP systems you used before, and what you plan to do with Tiny "
+"ERP..."
+msgstr ""
+
+#: bin/terp.glade:9897
+#, fuzzy
+msgid "<b>Your interrest</b>"
+msgstr "<b>Note</b>"
+
+#: bin/terp.glade:9952
+msgid "E-Mail:"
+msgstr ""
+
+#: bin/terp.glade:9997
+msgid ""
+"(Get Tiny ERP announces, documentation and new releases by email, maximum 6 "
+"mails a year.)"
+msgstr ""
+
+#: bin/terp.glade:10025
+msgid "<b>Keep Informed</b>"
+msgstr ""
+
+#: bin/terp.glade:10143
+#, fuzzy
+msgid ""
+"<b>Complete this form to submit your bug and/or make a request for support.</"
+"b>\n"
+"<i>\n"
+"Your request will be sent to the Tiny ERP team and we will reply shortly.\n"
+"Note that we may not reply if you do not have a support contract with Tiny "
+"or an official partner.</i>"
+msgstr ""
+"<b>Completeaza acest formular pentru a trimite un bug si/sau o cerere de "
+"support.</b>\n"
+"<i>\n"
+"Cererea va fi trimisa dezvoltatorilor (programatorilor) si un raspuns va fi "
+"trimis in scurt timp.\n"
+"Notati ca e posibil sa nu primiti nici un raspuns de support daca nu sunteti "
+"partener Tiny ERP.\n"
+"</i>"
+
+#: bin/terp.glade:10188
+#, fuzzy
+msgid "<b>Your name:</b>"
+msgstr "<b>Email: </b>"
+
+#: bin/terp.glade:10212
+#, fuzzy
+msgid "<b>Your Company:</b>"
+msgstr "<b>Societatea : </b>"
+
+#: bin/terp.glade:10236
+#, fuzzy
+msgid "<b>Your email:</b>"
+msgstr "<b>Email: </b>"
+
+#: bin/terp.glade:10302
+#, fuzzy
+msgid "Explain your problem:"
+msgstr "Explicati ce ati facut: "
+
+#: bin/terp.glade:10326
+msgid "Other comments:"
+msgstr ""
+
+#: bin/terp.glade:10428
+#, fuzzy
+msgid "<b>Support contract id:</b>"
+msgstr "<b>Cerere de support</b>"
+
+#: bin/terp.glade:10515
+#, fuzzy
+msgid "Phone number:"
+msgstr "Numar de telefon: "
+
+#: bin/terp.glade:10732
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: bin/terp.glade:10801
+msgid "<Ctrl> + O"
+msgstr ""
+
+#: bin/terp.glade:10825
+#, fuzzy
+msgid "Connect"
+msgstr "Conectare..."
+
+#: bin/terp.glade:10849
+msgid "<Ctrl> + F"
+msgstr ""
+
+#: bin/terp.glade:10873
+#, fuzzy
+msgid "Find / Search"
+msgstr "Terminat cautare"
+
+#: bin/terp.glade:10897
+msgid "<Ctrl> + D"
+msgstr ""
+
+#: bin/terp.glade:10921
+msgid "Delete"
+msgstr "Sterge"
+
+#: bin/terp.glade:10945
+msgid "<Ctrl> + N"
+msgstr ""
+
+#: bin/terp.glade:10969
+msgid "New"
+msgstr "Nou"
+
+#: bin/terp.glade:10993
+msgid "<Ctrl> + <PgUp>"
+msgstr ""
+
+#: bin/terp.glade:11017
+#, fuzzy
+msgid "Previous tab"
+msgstr "Precedent"
+
+#: bin/terp.glade:11041
+msgid "<Ctrl> + <PgDn>"
+msgstr ""
+
+#: bin/terp.glade:11089
+msgid "<Ctrl> + S"
+msgstr ""
+
+#: bin/terp.glade:11113
+msgid "<Ctrl> + W"
+msgstr ""
+
+#: bin/terp.glade:11137
+msgid "Save"
+msgstr "Salvare"
+
+#: bin/terp.glade:11185
+msgid "<PgUp>"
+msgstr ""
+
+#: bin/terp.glade:11209
+msgid "<PgDn>"
+msgstr ""
+
+#: bin/terp.glade:11233
+#, fuzzy
+msgid "Previous record"
+msgstr "Precedent"
+
+#: bin/terp.glade:11257
+#, fuzzy
+msgid "Next record"
+msgstr "Urmator: Nici o inregistrare selectionata"
+
+#: bin/terp.glade:11281
+msgid "<Ctrl> + L"
+msgstr ""
+
+#: bin/terp.glade:11305
+msgid "Switch view mode"
+msgstr ""
+
+#: bin/terp.glade:11329
+msgid "<b>Shortcuts for TinyERP</b>"
+msgstr ""
+
+#: bin/terp.glade:11376
+msgid "<Ctrl> + <Enter>"
+msgstr ""
+
+#: bin/terp.glade:11400
+#, fuzzy
+msgid "Save and Close window"
+msgstr "Inchde fereastra"
+
+#: bin/terp.glade:11424
+msgid "<i>When editing a resource in a popup window</i>"
+msgstr ""
+
+#: bin/terp.glade:11448
+msgid "<Esc>"
+msgstr ""
+
+#: bin/terp.glade:11472
+msgid "Close window without saving"
+msgstr ""
+
+#: bin/terp.glade:11502
+#, fuzzy
+msgid "Main Shortcuts"
+msgstr "Scurtaturi"
+
+#: bin/terp.glade:11530
+msgid "<b>Shortcuts in text entries</b>"
+msgstr ""
+
+#: bin/terp.glade:11554
+msgid "<CTRL> + X"
+msgstr ""
+
+#: bin/terp.glade:11578
+msgid "<CTRL> + C"
+msgstr ""
+
+#: bin/terp.glade:11602
+msgid "<CTRL> + V"
+msgstr ""
+
+#: bin/terp.glade:11626
+#, fuzzy
+msgid "Cut selected text"
+msgstr "Sterge intrarea selectionata"
+
+#: bin/terp.glade:11650
+#, fuzzy
+msgid "Copy selected text"
+msgstr "Sterge intrarea selectionata"
+
+#: bin/terp.glade:11674
+#, fuzzy
+msgid "Paste selected text"
+msgstr "Sterge intrarea selectionata"
+
+#: bin/terp.glade:11698
+msgid "<TAB>"
+msgstr ""
+
+#: bin/terp.glade:11722
+msgid "Next editable widget"
+msgstr ""
+
+#: bin/terp.glade:11746
+msgid "<SHIFT> + <TAB>"
+msgstr ""
+
+#: bin/terp.glade:11770
+msgid "Previous editable widget"
+msgstr ""
+
+#: bin/terp.glade:11794
+msgid "<ENTER>"
+msgstr ""
+
+#: bin/terp.glade:11818
+#, fuzzy
+msgid "Auto-Complete text field"
+msgstr "Sterge cimp"
+
+#: bin/terp.glade:11848
+#, fuzzy
+msgid "Edition Widgets"
+msgstr "Document in cours de editare: "
+
+#: bin/terp.glade:12231
+#, fuzzy
+msgid "N_othing"
+msgstr "Nimic"
+
+#: bin/terp.glade:12317
+msgid "Auto-Detect"
+msgstr ""
+
+#: bin/terp.glade:12399
+msgid "<b>Fields to import</b>"
+msgstr "<b>Cimpuri pentru import</b>"
+
+#: bin/terp.glade:12463
+#, fuzzy
+msgid "File to Import: "
+msgstr "<b>Cimpuri pentru import</b>"
+
+#: bin/terp.glade:12587
+#, fuzzy
+msgid "Server"
+msgstr "Server:"
+
+#: bin/terp.glade:12648
+msgid "<b>Connect to a Tiny ERP server</b>"
+msgstr ""
+
+#: bin/terp.glade:12690
+msgid "Port:"
+msgstr "Port:"
+
+#: bin/terp.glade:12740
+msgid "8069"
+msgstr "8069"
+
+#: bin/terp.glade:12758
+#, fuzzy
+msgid "Secure connection:"
+msgstr "Selectioneaza actiune"
+
+#: bin/terp.glade:12842
+msgid "Choose a database..."
+msgstr ""
+
+#: bin/terp.glade:12910
+msgid "<b>Backup a database</b>"
+msgstr ""
+
+#: bin/terp.glade:12952
+msgid "Database: "
+msgstr ""
+
+#: bin/terp.glade:12980 bin/terp.glade:13363 bin/terp.glade:13771
+#: bin/terp.glade:14280
+#, fuzzy
+msgid "http://localhost:8069"
+msgstr "localhost"
+
+#: bin/terp.glade:13177
+msgid "Restore a database"
+msgstr ""
+
+#: bin/terp.glade:13244
+msgid "<b>Restore a database</b>"
+msgstr ""
+
+#: bin/terp.glade:13310 bin/terp.glade:13718
+msgid "New database name: "
+msgstr ""
+
+#: bin/terp.glade:13481 bin/terp.glade:13890
+msgid "(must not contain any special char)"
+msgstr ""
+
+#: bin/terp.glade:13544
+#, fuzzy
+msgid "Operation in progress"
+msgstr ""
+"Operatiune esuata !\n"
+"I/O erreur"
+
+#: bin/terp.glade:13571
+msgid "Please wait, this operation may take a while..."
+msgstr ""
+
+#: bin/terp.glade:13615
+#, fuzzy
+msgid "Create a new database"
+msgstr "Creare unei noi intrari"
+
+#: bin/terp.glade:13676
+#, fuzzy
+msgid "<b>Create a new database</b>"
+msgstr "Creare resursa noua"
+
+#: bin/terp.glade:13974
+#, fuzzy
+msgid "Default language:"
+msgstr "Valoare implicita:"
+
+#: bin/terp.glade:13998
+msgid "Load demonstration data: "
+msgstr ""
+
+#: bin/terp.glade:14067
+#, fuzzy
+msgid "Change password"
+msgstr "Schimba radacina"
+
+#: bin/terp.glade:14137
+msgid "<b>Change your DB administration password</b>"
+msgstr ""
+
+#: bin/terp.glade:14179
+msgid "New password confirmation:"
+msgstr ""
+
+#: bin/terp.glade:14203
+#, fuzzy
+msgid "New password:"
+msgstr "Parola:"
+
+#: bin/terp.glade:14227
+#, fuzzy
+msgid "Old password:"
+msgstr "Parola:"
+
+#~ msgid "Welcome to Tiny Entreprise Resource Planing !"
+#~ msgstr "Bine ati venit! - Tiny ERP "
+
+#~ msgid "You are already logged!"
+#~ msgstr "Sunteti deja conectact (logat)!"
+
+#~ msgid "you are logged out. ^l to login"
+#~ msgstr "Ati fost  deconectat. ^l pentru a se reconecta"
+
+#~ msgid ""
+#~ "^N New   ^S Save   ^D Delete   ^F Search   ^X Next   ^W Previous   ^R "
+#~ "Repeat"
+#~ msgstr ""
+#~ " N Nou   S Salveaza   D Sterge   F Cauta   X Urmator   W Precedent   R "
+#~ "Repeta"
+
+#~ msgid "^L to login"
+#~ msgstr "^L pentru a se conecta"
+
+#~ msgid "select field value:"
+#~ msgstr "sectioneaza valoare cimpului:"
+
+#~ msgid "No ressource selected!"
+#~ msgstr "Nici o resursa selectionata"
+
+#~ msgid "None resource selected"
+#~ msgstr "Nici o resursa selectionata"
+
+#~ msgid "Search error!"
+#~ msgstr "Erroare cautare!"
+
+#~ msgid "New root"
+#~ msgstr "Radacina noua"
+
+#~ msgid "Import Done"
+#~ msgstr "Importare facuta"
+
+#~ msgid "Import CSV File"
+#~ msgstr "Importation du fichier CSV"
+
+#~ msgid "View Create Error:"
+#~ msgstr "Eroare de creare view (visualizare):"
+
+#~ msgid "Attachement: "
+#~ msgstr "Atasare: "
+
+#~ msgid "Value preference"
+#~ msgstr "Valoare preferata "
+
+#~ msgid "Unable to read ressource"
+#~ msgstr "Incapabil de a citi resursa"
+
+#~ msgid "This record did not exist !"
+#~ msgstr "Aceasta inregistrare nu exista!"
+
+#~ msgid "unknown tag: "
+#~ msgstr "Eticheta necunoscuta: "
+
+#~ msgid "New Window"
+#~ msgstr "Fereastra noua"
+
+#~ msgid "Search"
+#~ msgstr "Cauta"
+
+#~ msgid "Filter"
+#~ msgstr "Filtrare"
+
+#~ msgid "General"
+#~ msgstr "General"
+
+#~ msgid "Autosave"
+#~ msgstr "Salvare automata"
+
+#~ msgid "Plugin Manager"
+#~ msgstr "Gestionare plugin"
+
+#~ msgid "About Tiny ERP"
+#~ msgstr "Despre Tiny ERP"
+
+#~ msgid ""
+#~ "\n"
+#~ "Main Tiny ERP developers;\n"
+#~ "\n"
+#~ "Server Development:\n"
+#~ "Fabien Pinckaers\n"
+#~ "Gaetan de Menten\n"
+#~ "Antony Lesuisse\n"
+#~ "Jerome\n"
+#~ "\n"
+#~ "Client Development:\n"
+#~ "Fabien Pinckaers\n"
+#~ "\n"
+#~ "Web Client Development:\n"
+#~ "Nicolas Di Pietro\n"
+#~ "\n"
+#~ "...we still have to write the list of all others contributors..."
+#~ msgstr ""
+#~ "\n"
+#~ "Developeri aplicatiei Tiny ERP;\n"
+#~ "\n"
+#~ "Dezvolatare  server:\n"
+#~ "Fabien Pinckaers\n"
+#~ "Gaetan de Menten\n"
+#~ "Antony Lesuisse\n"
+#~ "Jerome\n"
+#~ "\n"
+#~ "Dezvoltare client:\n"
+#~ "Fabien Pinckaers\n"
+#~ "\n"
+#~ "Dezvoltare client web:\n"
+#~ "Nicolas Di Pietro\n"
+#~ "\n"
+#~ "...va trebui sa scriem o lista cu toti cei care au contribuit..."
+
+#~ msgid "Credits"
+#~ msgstr "Credite"
+
+#~ msgid "Create a new ressource"
+#~ msgstr "Crearea unei noi resurse"
+
+#~ msgid "Modify/Open this resource"
+#~ msgstr "Modifica/Deschide aceasta resursa"
+
+#~ msgid "All"
+#~ msgstr "Toate"
+
+#~ msgid "Order:"
+#~ msgstr "Sortare:"
+
+#~ msgid "ascendent"
+#~ msgstr "ascendenta"
+
+#~ msgid "descentdent"
+#~ msgstr "descendenta"
+
+#~ msgid "Action:"
+#~ msgstr "Actiune:"
+
+#~ msgid "Save to file (.CSV)"
+#~ msgstr "Sauveaza in fisierul (.CSV)"
+
+#~ msgid "Date of begining"
+#~ msgstr "Data de inceput"
+
+#~ msgid "Preferred Langage: "
+#~ msgstr "Limba: "
+
+#~ msgid ""
+#~ "English\n"
+#~ "French"
+#~ msgstr ""
+#~ "Engleza\n"
+#~ "Franceza"
+
+#~ msgid "All Tiny ERP users"
+#~ msgstr "Toti utilizatori Tiny ERP"
+
+#~ msgid "Only for you"
+#~ msgstr "Numai pentru dvs"
+
+#~ msgid "<b>Preference active for:</b>"
+#~ msgstr "<b>Preferinta activa pentru:</b>"
+
+#~ msgid ""
+#~ "\n"
+#~ "This is the tip of the day.\n"
+#~ "Put Important stuff in bold\n"
+#~ "We should start a database of tips (using fortune ?)"
+#~ msgstr ""
+#~ "\n"
+#~ "Aceasta este nota Zilei.\n"
+#~ "Pune cuvinte importante ingrosate\n"
+#~ "Trebuie sa creem o baza de date cu Notitele"
+
+#~ msgid "Tiny ERP - Import a CSV"
+#~ msgstr "Tiny ERP - Importa un CSV"
+
+#~ msgid "The CSV file must be encoded in UTF-8 !"
+#~ msgstr "Fisierul CSV trebuie codat UTF-8!"
+
+#~ msgid "Be carefull with the fields order."
+#~ msgstr "Atentie cum ordinea cimpurilor."
+
+#~ msgid "Number: "
+#~ msgstr "Numar: "
+
+#~ msgid "Description : "
+#~ msgstr "Descriere :"
+
+#~ msgid "Next: left click - Previous : right click on the image"
+#~ msgstr "Urmatort: buton sting - Precendent : buton drept pe imagine"

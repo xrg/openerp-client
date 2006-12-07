@@ -1,0 +1,1934 @@
+# FR translation of Tiny ERP.
+# Copyright (C) 2005 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Fabien Pinckaers <fp@tiny.be>, 2005.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Tiny ERP V2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-10-28 13:16+0200\n"
+"PO-Revision-Date: 2005-04-08 19:55+0200\n"
+"Last-Translator: Fabien Pinckaers <fp@tiny.be>\n"
+"Language-Team: FR <i18n-info@tinyerp.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: bin/plugins/__init__.py:20
+#, fuzzy
+msgid "No available plugin for this resource !"
+msgstr "Ingen inställning tillgänglig för denna resurs!"
+
+#: bin/plugins/__init__.py:22
+msgid "Choose a Plugin"
+msgstr ""
+
+#: bin/printer/printer.py:136
+msgid "Write Report to File"
+msgstr ""
+
+#: bin/printer/printer.py:142 bin/widget/view/form_gtk/binary.py:70
+msgid "Error writing the file!"
+msgstr "Fel vid skrivning till fil!"
+
+#: bin/widget/view/tree_gtk/editabletree.py:105
+msgid "Relation Field: F1 New   F2 Open/Search"
+msgstr ""
+
+#: bin/widget/view/tree_gtk/editabletree.py:152
+#, python-format
+msgid "Warning; field \"%s\" is required !"
+msgstr ""
+
+#: bin/widget/view/form_gtk/many2one.py:93 bin/terp.glade:1704
+msgid "Action"
+msgstr ""
+
+#: bin/widget/view/form_gtk/many2one.py:94
+msgid "Report"
+msgstr ""
+
+#: bin/widget/view/form_gtk/wid_common.py:54
+msgid "Always applicable !"
+msgstr ""
+
+#: bin/widget/view/form_gtk/interface.py:52 bin/terp.glade:2889
+msgid "Set to default value"
+msgstr "Sätt till standardvärde"
+
+#: bin/widget/view/form_gtk/interface.py:53
+#, fuzzy
+msgid "Set default"
+msgstr "Sätt till standardvärde"
+
+#: bin/widget/view/form_gtk/form.py:86
+#, fuzzy
+msgid "Invalid Form, correct red fields !"
+msgstr "Ogiltligt formulär, korrigera röda fält!"
+
+#: bin/widget/view/form_gtk/calendar.py:95
+#: bin/widget/view/form_gtk/calendar.py:173
+msgid "This widget is readonly !"
+msgstr ""
+
+#: bin/widget/view/form_gtk/image.py:43
+#, fuzzy
+msgid "Select a file"
+msgstr "Välj destinations fil"
+
+#: bin/widget/view/form_gtk/image.py:89
+#, fuzzy
+msgid "Save as ..."
+msgstr "Spara som.."
+
+#: bin/widget/view/form_gtk/image.py:95
+msgid "Open file ..."
+msgstr ""
+
+#: bin/widget/view/form_gtk/one2many_list.py:139
+#, fuzzy
+msgid "You have to select a resource !"
+msgstr "Välj en resurs!"
+
+#: bin/widget/view/form_gtk/binary.py:54
+msgid "Select the file to attach"
+msgstr "Välj fil att bifoga"
+
+#: bin/widget/view/form_gtk/binary.py:61
+msgid "Error reading the file"
+msgstr "Fel vid läsning av fil"
+
+#: bin/widget/view/form_gtk/binary.py:65
+msgid "Save attachment as..."
+msgstr "Spara som.."
+
+#: bin/widget/view/form_gtk/binary.py:93
+#, python-format
+msgid "%d bytes"
+msgstr ""
+
+#: bin/widget/view/form.py:98 bin/widget/view/form.py:106
+msgid "You must select a record to use the relate button !"
+msgstr ""
+
+#: bin/common/common.py:69
+#, fuzzy
+msgid "Unable to launch this file !"
+msgstr "Kan inte exekvera fil"
+
+#: bin/common/common.py:84
+msgid "Unable to launch the application associated to this content !"
+msgstr "Kan inte exekvera associerad applikation"
+
+#: bin/common/common.py:302 bin/common/common.py:356
+msgid "Support request sent !"
+msgstr ""
+
+#: bin/modules/gui/window/view_tree/view_tree_sc.py:41
+#: bin/modules/gui/window/form.py:203
+msgid "ID"
+msgstr "ID"
+
+#: bin/modules/gui/window/view_tree/view_tree_sc.py:46
+msgid "Description"
+msgstr "Beskrivning"
+
+#: bin/modules/gui/window/view_tree/parse.py:42
+msgid "Tree"
+msgstr "Träd"
+
+#: bin/modules/gui/window/win_export.py:58
+msgid " record(s) saved !"
+msgstr "poster sparade!"
+
+#: bin/modules/gui/window/win_export.py:61
+msgid ""
+"Operation failed !\n"
+"I/O error"
+msgstr ""
+"Operationen misslyckades! \n"
+"In/Ut fel"
+
+#: bin/modules/gui/window/win_export.py:85
+msgid "Error Opening Excel !"
+msgstr "Fel vid öppnandet av Excel!"
+
+#: bin/modules/gui/window/win_export.py:87
+#, fuzzy
+msgid ""
+"Function only available for MS Office !\n"
+"Sorry, OOo users :("
+msgstr ""
+"Funktionen finns endast tillgänglig för Ms Office !\n"
+"OpenOffice kan inte hantera detta ännu"
+
+#: bin/modules/gui/window/win_export.py:273
+#, fuzzy
+msgid "Export Data"
+msgstr "Exportera Data"
+
+#: bin/modules/gui/window/win_preference.py:49
+msgid "Preferences"
+msgstr "Inställningar"
+
+#: bin/modules/gui/window/win_preference.py:73
+msgid "Preference"
+msgstr "Inställning"
+
+#: bin/modules/gui/window/__init__.py:38
+msgid "Unknown Window"
+msgstr "Okänt fönster"
+
+#: bin/modules/gui/window/tree.py:78 bin/modules/gui/window/form.py:105
+msgid "Reload"
+msgstr "Uppdatera"
+
+#: bin/modules/gui/window/tree.py:79
+msgid "Switch View"
+msgstr ""
+
+#: bin/modules/gui/window/tree.py:80
+msgid "Changt root"
+msgstr ""
+
+#: bin/modules/gui/window/tree.py:81 bin/modules/gui/window/tree.py:82
+msgid "Open"
+msgstr "Öppna"
+
+#: bin/modules/gui/window/tree.py:83 bin/modules/gui/window/tree.py:84
+msgid "Print"
+msgstr "Skriv ut"
+
+#: bin/modules/gui/window/tree.py:85
+msgid "Close"
+msgstr "Stäng"
+
+#: bin/modules/gui/window/tree.py:179 bin/modules/gui/window/tree.py:224
+msgid "No resource selected!"
+msgstr "Ingen resurs vald!"
+
+#: bin/modules/gui/window/tree.py:190
+msgid ""
+"Are you sure you want\n"
+"to remove this record?"
+msgstr ""
+"Bekräfta borttagning\n"
+"av denna post!"
+
+#: bin/modules/gui/window/tree.py:195
+msgid "Error removing resource!"
+msgstr "Fel vid radering av resurs!"
+
+#: bin/modules/gui/window/tree.py:206
+msgid "Unable to chroot: no tree resource selected"
+msgstr "Kan inte ändra root: ingen trädreurs vald"
+
+#: bin/modules/gui/window/win_attach.py:108
+#, fuzzy
+msgid "Are you sure you want to remove this attachment ?"
+msgstr ""
+"Bekräfta borttagning\n"
+"av denna post!"
+
+#: bin/modules/gui/window/win_attach.py:113
+#: bin/modules/gui/window/win_attach.py:135
+msgid "Select the destination file"
+msgstr "Välj destinations fil"
+
+#: bin/modules/gui/window/win_attach.py:124
+msgid "Can not open file !"
+msgstr "Kan inte öppna fil!"
+
+#: bin/modules/gui/window/win_attach.py:144
+#: bin/modules/gui/window/win_attach.py:255
+msgid "Can not write file !"
+msgstr "Kan inte skriva fil!"
+
+#: bin/modules/gui/window/win_attach.py:242
+msgid ""
+"Unable to preview image file !\n"
+"Verify the format."
+msgstr ""
+
+#: bin/modules/gui/window/win_search.py:74
+#, python-format
+msgid "Tiny ERP Search: %s"
+msgstr ""
+
+#: bin/modules/gui/window/win_search.py:75
+#, python-format
+msgid "Tiny ERP Search: %s (%%d result(s))"
+msgstr ""
+
+#: bin/modules/gui/window/win_selection.py:55
+msgid "Name"
+msgstr "Namn"
+
+#: bin/modules/gui/window/win_selection.py:59
+msgid "Ressource Name"
+msgstr "Resursnamn"
+
+#: bin/modules/gui/window/win_selection.py:59
+msgid "Names"
+msgstr "Namn"
+
+#: bin/modules/gui/window/form.py:177 bin/modules/gui/window/form.py:367
+#, fuzzy
+msgid "No resource selected !"
+msgstr "Ingen vald resurs!"
+
+#: bin/modules/gui/window/form.py:197
+#, fuzzy
+msgid "You have to select one resource!"
+msgstr "Välj en resurs!"
+
+#: bin/modules/gui/window/form.py:204
+msgid "Creation User"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:205
+msgid "Creation Date"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:206
+msgid "Latest Modification by"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:207
+msgid "Latest Modification Date"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:208
+msgid "Owner"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:209
+msgid "Group Owner"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:210
+msgid "Access Level"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:220
+#, fuzzy
+msgid "Are you sure to remove this record ?"
+msgstr ""
+"Bekräfta borttagning\n"
+"av denna post!"
+
+#: bin/modules/gui/window/form.py:223
+#, fuzzy
+msgid "Resource not removed !"
+msgstr "Resurs är borttagen"
+
+#: bin/modules/gui/window/form.py:225
+msgid "Resource removed."
+msgstr "Resurs är borttagen"
+
+#: bin/modules/gui/window/form.py:249
+msgid "Working now on the duplicated document !"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:258
+#, fuzzy
+msgid "Document saved !"
+msgstr "Alternativ sparade"
+
+#: bin/modules/gui/window/form.py:262
+msgid "Invalid form !"
+msgstr ""
+
+#: bin/modules/gui/window/form.py:314
+msgid "No record selected!"
+msgstr "Ingen post vald!"
+
+#: bin/modules/gui/window/form.py:342
+#, fuzzy
+msgid "No record selected"
+msgstr "Ingen post vald!"
+
+#: bin/modules/gui/window/form.py:347
+msgid "New document"
+msgstr "Nytt dokument"
+
+#: bin/modules/gui/window/form.py:349
+#, fuzzy
+msgid "Editing document (id: "
+msgstr "Redigerar dokument:"
+
+#: bin/modules/gui/window/form.py:350
+msgid "Record: "
+msgstr "Post:"
+
+#: bin/modules/gui/window/form.py:365
+#, fuzzy
+msgid "No preference available for this resource !"
+msgstr "Ingen inställning tillgänglig för denna resurs!"
+
+#: bin/modules/gui/window/form.py:371
+msgid ""
+"This record has been modified\n"
+"do you want to save it ?"
+msgstr ""
+
+#: bin/modules/gui/window/win_import.py:53
+#, python-format
+msgid "Imported %d objects !"
+msgstr ""
+
+#: bin/modules/gui/window/win_import.py:79
+#: bin/modules/gui/window/win_import.py:83
+msgid "Field name"
+msgstr "Fältnamn"
+
+#: bin/modules/gui/main.py:173 bin/modules/gui/main.py:435
+msgid "Press Ctrl+O to login"
+msgstr ""
+
+#: bin/modules/gui/main.py:214 bin/terp.glade:1234
+msgid "Default Theme"
+msgstr ""
+
+#: bin/modules/gui/main.py:383
+#, fuzzy, python-format
+msgid "%s request(s)"
+msgstr "anrop"
+
+#: bin/modules/gui/main.py:385
+msgid "No request"
+msgstr "Inget anrop"
+
+#: bin/modules/gui/main.py:387
+#, fuzzy, python-format
+msgid " - %s pending request(s)"
+msgstr "köande anrop"
+
+#: bin/modules/gui/main.py:418
+#, fuzzy
+msgid ""
+"Connection error !\n"
+"Unable to connect to the server !"
+msgstr ""
+"Anslutning misslyckades!\n"
+"Felaktigt användarenamn eller lösenord!"
+
+#: bin/modules/gui/main.py:420
+msgid ""
+"Connection error !\n"
+"Bad username or password !"
+msgstr ""
+"Anslutning misslyckades!\n"
+"Felaktigt användarenamn eller lösenord!"
+
+#: bin/modules/gui/main.py:424
+msgid "Connection Error !"
+msgstr "Anslutning misslyckades"
+
+#: bin/modules/gui/main.py:433
+msgid "Not logged !"
+msgstr ""
+
+#: bin/modules/gui/main.py:494 bin/modules/gui/main.py:498
+msgid "Do you really want to quit ?"
+msgstr ""
+
+#: bin/modules/gui/main.py:592
+msgid "The database name must contain only normal characters or \"_\""
+msgstr ""
+
+#: bin/modules/gui/main.py:592
+msgid "Bad database name !"
+msgstr ""
+
+#: bin/modules/gui/main.py:605 bin/modules/gui/main.py:620
+#: bin/modules/gui/main.py:650
+msgid "Bad database administrator password !"
+msgstr ""
+
+#: bin/modules/gui/main.py:605 bin/modules/gui/main.py:607
+msgid "Could not create database."
+msgstr ""
+
+#: bin/modules/gui/main.py:607 bin/modules/gui/main.py:780
+msgid "Error during database creation !"
+msgstr ""
+
+#: bin/modules/gui/main.py:611
+msgid "Delete a database"
+msgstr ""
+
+#: bin/modules/gui/main.py:617
+msgid "Database dropped successfully !"
+msgstr ""
+
+#: bin/modules/gui/main.py:620
+msgid "Could not drop database."
+msgstr ""
+
+#: bin/modules/gui/main.py:622
+msgid "Couldn't drop database"
+msgstr ""
+
+#: bin/modules/gui/main.py:647
+msgid "Database restored successfully !"
+msgstr ""
+
+#: bin/modules/gui/main.py:650
+msgid "Could not restore database."
+msgstr ""
+
+#: bin/modules/gui/main.py:652
+msgid "Couldn't restore database"
+msgstr ""
+
+#: bin/modules/gui/main.py:670
+msgid "Confirmation password do not match new password, operation cancelled!"
+msgstr ""
+
+#: bin/modules/gui/main.py:670
+#, fuzzy
+msgid "Validation Error."
+msgstr "Applikationsfel"
+
+#: bin/modules/gui/main.py:676
+msgid "Could not change password database."
+msgstr ""
+
+#: bin/modules/gui/main.py:676
+msgid "Bas password provided !"
+msgstr ""
+
+#: bin/modules/gui/main.py:678
+msgid "Error, password not changed."
+msgstr ""
+
+#: bin/modules/gui/main.py:683 bin/modules/gui/main.py:708
+msgid "Backup a database"
+msgstr ""
+
+#: bin/modules/gui/main.py:704
+msgid "Database backuped successfully !"
+msgstr ""
+
+#: bin/modules/gui/main.py:706
+msgid "Couldn't backup database."
+msgstr ""
+
+#: bin/modules/gui/main.py:773
+msgid "Database created successfully !"
+msgstr ""
+
+#: bin/modules/gui/main.py:780
+msgid ""
+"The server crashed during installation.\n"
+"We suggest you to drop this database."
+msgstr ""
+
+#: bin/modules/action/main.py:51
+msgid "Nothing to print!"
+msgstr ""
+
+#: bin/modules/action/main.py:65
+msgid "Printing aborted, too long delay !"
+msgstr "Utskrift avbruten, tid överskriden!"
+
+#: bin/modules/action/main.py:69 bin/modules/action/main.py:122
+msgid "Error: "
+msgstr "Fel:"
+
+#: bin/modules/action/main.py:129
+msgid "Select your action"
+msgstr "Välj aktivitet"
+
+#: bin/modules/action/main.py:135
+msgid "No action defined!"
+msgstr "Ingen aktivitet definierad!"
+
+#: bin/options.py:88
+#, fuzzy, python-format
+msgid "Tiny ERP Client %s"
+msgstr "Tiny ERP Client v2.0"
+
+#: bin/options.py:89
+msgid "specify alternate config file"
+msgstr "ange alternativ konfigurationsfil"
+
+#: bin/options.py:90
+msgid "enable basic debugging"
+msgstr "aktivera grundläggande debugging"
+
+#: bin/options.py:91
+msgid "specify channels to log"
+msgstr "specifiera kanaler att logga"
+
+#: bin/options.py:92
+msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+msgstr "ange nivå för log: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+
+#: bin/options.py:93
+#, fuzzy
+msgid "specify the user login"
+msgstr "specifiera kanaler att logga"
+
+#: bin/options.py:94
+msgid "specify the server port"
+msgstr ""
+
+#: bin/options.py:95
+msgid "specify the server ip/name"
+msgstr ""
+
+#: bin/tinyerp-client.py:143
+msgid "Closing Tiny ERP, KeyboardInterrupt"
+msgstr "Stänger ner Tiny ERP, Användareavbrott"
+
+#: bin/rpc.py:113 bin/rpc.py:138
+msgid "Connection refused !"
+msgstr "Anslutning vägrad!"
+
+#: bin/rpc.py:114
+msgid "Connection refused!"
+msgstr "Anslutning vägrad!"
+
+#: bin/rpc.py:149
+msgid "Application Error"
+msgstr "Applikationsfel"
+
+#: bin/rpc.py:149
+msgid "View details"
+msgstr "Visa detaljer"
+
+#: bin/terp.glade:10
+msgid "Tiny ERP - Login"
+msgstr ""
+
+#: bin/terp.glade:106
+msgid "User:"
+msgstr ""
+
+#: bin/terp.glade:130 bin/terp.glade:13101 bin/terp.glade:13286
+#: bin/terp.glade:13914
+msgid "Password:"
+msgstr ""
+
+#: bin/terp.glade:155 bin/terp.glade:13041 bin/terp.glade:13424
+#: bin/terp.glade:13832 bin/terp.glade:14341
+msgid "Change"
+msgstr ""
+
+#: bin/terp.glade:178 bin/terp.glade:12718
+msgid "localhost"
+msgstr "localhost"
+
+#: bin/terp.glade:196
+msgid "Database:"
+msgstr ""
+
+#: bin/terp.glade:221 bin/terp.glade:12807 bin/terp.glade:13077
+#: bin/terp.glade:13335 bin/terp.glade:13743 bin/terp.glade:14252
+msgid "Server:"
+msgstr "Server:"
+
+#: bin/terp.glade:249
+msgid "demo"
+msgstr "demo"
+
+#: bin/terp.glade:321
+msgid "Tiny ERP"
+msgstr "Tiny ERP"
+
+#: bin/terp.glade:359
+msgid "_File"
+msgstr "_Arkiv"
+
+#: bin/terp.glade:368
+msgid "_Connect..."
+msgstr ""
+
+#: bin/terp.glade:390
+msgid "_Disconnect"
+msgstr ""
+
+#: bin/terp.glade:417
+msgid "_New database"
+msgstr ""
+
+#: bin/terp.glade:438
+msgid "_Restore database"
+msgstr ""
+
+#: bin/terp.glade:459
+msgid "_Backup database"
+msgstr ""
+
+#: bin/terp.glade:480
+msgid "Dro_p database"
+msgstr ""
+
+#: bin/terp.glade:507
+msgid "Administrator Password"
+msgstr ""
+
+#: bin/terp.glade:547
+msgid "_User"
+msgstr ""
+
+#: bin/terp.glade:557
+#, fuzzy
+msgid "_Preferences"
+msgstr "Inställningar"
+
+#: bin/terp.glade:584
+#, fuzzy
+msgid "_Send a request"
+msgstr "köande anrop"
+
+#: bin/terp.glade:605
+#, fuzzy
+msgid "_Read my requests"
+msgstr "anrop"
+
+#: bin/terp.glade:632
+#, fuzzy
+msgid "_Waiting Requests"
+msgstr "köande anrop"
+
+#: bin/terp.glade:645
+msgid "For_m"
+msgstr ""
+
+#: bin/terp.glade:655
+#, fuzzy
+msgid "_New"
+msgstr "Ny"
+
+#: bin/terp.glade:677
+msgid "_Save"
+msgstr ""
+
+#: bin/terp.glade:699
+msgid "Copy this resource"
+msgstr ""
+
+#: bin/terp.glade:700
+msgid "Duplicate"
+msgstr ""
+
+#: bin/terp.glade:721
+msgid "_Delete"
+msgstr ""
+
+#: bin/terp.glade:749
+msgid "Find"
+msgstr ""
+
+#: bin/terp.glade:771
+msgid "Ne_xt"
+msgstr ""
+
+#: bin/terp.glade:793
+msgid "Pre_vious"
+msgstr ""
+
+#: bin/terp.glade:815
+msgid "Switch to list/form"
+msgstr ""
+
+#: bin/terp.glade:843
+msgid "_New Menu Tab"
+msgstr ""
+
+#: bin/terp.glade:865 bin/terp.glade:11161
+#, fuzzy
+msgid "Close Tab"
+msgstr "Stäng"
+
+#: bin/terp.glade:887
+msgid "Previous Tab"
+msgstr ""
+
+#: bin/terp.glade:897 bin/terp.glade:11065
+msgid "Next Tab"
+msgstr ""
+
+#: bin/terp.glade:913
+#, fuzzy
+msgid "View _logs"
+msgstr "Visa detaljer"
+
+#: bin/terp.glade:922
+msgid "_Go to resource ID..."
+msgstr ""
+
+#: bin/terp.glade:938
+#, fuzzy
+msgid "_Open"
+msgstr "Öppna"
+
+#: bin/terp.glade:959
+#, fuzzy
+msgid "Reloa_d / Undo"
+msgstr "Uppdatera"
+
+#: bin/terp.glade:987
+msgid "Repeat latest _action"
+msgstr ""
+
+#: bin/terp.glade:1003
+msgid "_Preview in PDF"
+msgstr ""
+
+#: bin/terp.glade:1025
+msgid "Previe_w in editor"
+msgstr ""
+
+#: bin/terp.glade:1052
+#, fuzzy
+msgid "Expor_t data..."
+msgstr "Exportera Data"
+
+#: bin/terp.glade:1073
+msgid "I_mport data..."
+msgstr ""
+
+#: bin/terp.glade:1086
+msgid "_Options"
+msgstr ""
+
+#: bin/terp.glade:1095
+msgid "_Menubar"
+msgstr ""
+
+#: bin/terp.glade:1105
+msgid "Text _and Icons"
+msgstr ""
+
+#: bin/terp.glade:1115
+msgid "_Icons only"
+msgstr ""
+
+#: bin/terp.glade:1126
+msgid "_Text only"
+msgstr ""
+
+#: bin/terp.glade:1141
+msgid "Client Mode"
+msgstr ""
+
+#: bin/terp.glade:1163
+msgid "Normal"
+msgstr ""
+
+#: bin/terp.glade:1173
+msgid "Mode PDA"
+msgstr ""
+
+#: bin/terp.glade:1188
+#, fuzzy
+msgid "_Theme"
+msgstr "Träd"
+
+#: bin/terp.glade:1210
+#, fuzzy
+msgid "Tiny ERP Theme"
+msgstr "Tiny ERP"
+
+#: bin/terp.glade:1219
+msgid "Aqua OS X"
+msgstr ""
+
+#: bin/terp.glade:1247
+msgid "_Forms"
+msgstr ""
+
+#: bin/terp.glade:1257
+msgid "Right Toolbar"
+msgstr ""
+
+#: bin/terp.glade:1271
+#, fuzzy
+msgid "_Print"
+msgstr "Skriv ut"
+
+#: bin/terp.glade:1292
+msgid "Previe_w before print"
+msgstr ""
+
+#: bin/terp.glade:1312
+msgid "_Save options"
+msgstr ""
+
+#: bin/terp.glade:1337
+msgid "_Plugins"
+msgstr ""
+
+#: bin/terp.glade:1347
+msgid "_Execute a plugin"
+msgstr ""
+
+#: bin/terp.glade:1372
+msgid "_Help"
+msgstr ""
+
+#: bin/terp.glade:1381 bin/terp.glade:10060
+#, fuzzy
+msgid "Support Request"
+msgstr "Inget anrop"
+
+#: bin/terp.glade:1408
+msgid "User _Manual"
+msgstr ""
+
+#: bin/terp.glade:1429
+msgid "_Contextual Help"
+msgstr ""
+
+#: bin/terp.glade:1451
+msgid "_Tips"
+msgstr ""
+
+#: bin/terp.glade:1472
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: bin/terp.glade:1487
+msgid "_Licence"
+msgstr ""
+
+#: bin/terp.glade:1508
+msgid "_About..."
+msgstr ""
+
+#: bin/terp.glade:1550 bin/terp.glade:2733
+msgid "Create a new resource"
+msgstr ""
+
+#: bin/terp.glade:1566
+msgid "Edit / Save this resource"
+msgstr ""
+
+#: bin/terp.glade:1595
+msgid "Delete this resource"
+msgstr ""
+
+#: bin/terp.glade:1624
+#, fuzzy
+msgid "Find a resource"
+msgstr "Välj en resurs!"
+
+#: bin/terp.glade:1640
+msgid "Go to previous matched search"
+msgstr ""
+
+#: bin/terp.glade:1656
+msgid "Go to next matched resource"
+msgstr ""
+
+#: bin/terp.glade:1672
+msgid "Switch current view: form / list"
+msgstr ""
+
+#: bin/terp.glade:1673
+msgid "Other View"
+msgstr ""
+
+#: bin/terp.glade:1703
+msgid "Launch actions about this resource"
+msgstr ""
+
+#: bin/terp.glade:1721
+msgid "Print documents"
+msgstr ""
+
+#: bin/terp.glade:1750
+msgid "Add an attachment to this resource"
+msgstr ""
+
+#: bin/terp.glade:1751
+msgid "Attachement"
+msgstr ""
+
+#: bin/terp.glade:1781
+msgid "Close this window"
+msgstr ""
+
+#: bin/terp.glade:1842
+msgid "Requests:"
+msgstr ""
+
+#: bin/terp.glade:1877
+msgid "Read my Requests"
+msgstr ""
+
+#: bin/terp.glade:1905
+msgid "Send a new request"
+msgstr ""
+
+#: bin/terp.glade:1960
+msgid "Tiny ERP - Tree Resources"
+msgstr ""
+
+#: bin/terp.glade:2093
+msgid "Shortcuts"
+msgstr ""
+
+#: bin/terp.glade:2190
+msgid "Tiny ERP - Forms"
+msgstr ""
+
+#: bin/terp.glade:2236
+msgid "State:"
+msgstr ""
+
+#: bin/terp.glade:2282
+msgid "Tiny ERP - About"
+msgstr ""
+
+#: bin/terp.glade:2337
+msgid ""
+"<b>About Tiny ERP</b>\n"
+"<i>The most advanced Open Source ERP &amp; CRM !</i>"
+msgstr ""
+
+#: bin/terp.glade:2402
+msgid ""
+"\n"
+"Tiny ERP - GTK Client - v%s\n"
+"\n"
+"Tiny ERP is an Open Source ERP+CRM\n"
+"for small to medium businesses.\n"
+"\n"
+"The whole source code is distributed under\n"
+"the terms of the GNU Public Licence.\n"
+"\n"
+"(c) 2003-TODAY, Tiny sprl\n"
+"\n"
+"More Info on www.TinyERP.com !"
+msgstr ""
+
+#: bin/terp.glade:2449
+#, fuzzy
+msgid "_Tiny ERP"
+msgstr "Tiny ERP"
+
+#: bin/terp.glade:2497
+msgid ""
+"\n"
+"(c) 2003-TODAY - Tiny sprl\n"
+"Tiny ERP is a product of Tiny sprl:\n"
+"\n"
+"Tiny sprl\n"
+"21 Rue du Vieux Chateau\n"
+"BE-1457 Walhain\n"
+"Belgium\n"
+"\n"
+"Tel/Fax: +32.10.68.94.39\n"
+"Mail: sales@tiny.be\n"
+"Web: http://tiny.be"
+msgstr ""
+
+#: bin/terp.glade:2544
+msgid "_Contact"
+msgstr ""
+
+#: bin/terp.glade:2586
+msgid "Tiny ERP - forms widget"
+msgstr ""
+
+#: bin/terp.glade:2637
+msgid "Open the calendar widget"
+msgstr ""
+
+#: bin/terp.glade:2760
+#, fuzzy
+msgid "Search / Open a resource"
+msgstr "Välj en resurs!"
+
+#: bin/terp.glade:2868
+msgid "Titre"
+msgstr ""
+
+#: bin/terp.glade:2898
+#, fuzzy
+msgid "Set Default"
+msgstr "Sätt till standardvärde"
+
+#: bin/terp.glade:2918 bin/terp.glade:3200
+msgid "Create a new entry"
+msgstr ""
+
+#: bin/terp.glade:2945
+msgid "Edit this entry"
+msgstr ""
+
+#: bin/terp.glade:2972
+msgid "Remove this entry"
+msgstr ""
+
+#: bin/terp.glade:3010
+msgid "Previous"
+msgstr ""
+
+#: bin/terp.glade:3037
+msgid "(0/0)"
+msgstr ""
+
+#: bin/terp.glade:3058
+msgid "Next"
+msgstr ""
+
+#: bin/terp.glade:3218
+msgid "Remove selected entry"
+msgstr ""
+
+#: bin/terp.glade:3283
+msgid "label74"
+msgstr ""
+
+#: bin/terp.glade:3470 bin/terp.glade:6027 bin/terp.glade:6128
+#: bin/terp.glade:6328
+msgid "-"
+msgstr ""
+
+#: bin/terp.glade:3867
+msgid "Tiny ERP - Date selection"
+msgstr ""
+
+#: bin/terp.glade:3948 bin/terp.glade:10603
+msgid "Tiny ERP - Confirmation"
+msgstr ""
+
+#: bin/terp.glade:4034 bin/terp.glade:10702
+msgid "Hello World!"
+msgstr "Hello World"
+
+#: bin/terp.glade:4064
+msgid "Tiny ERP - selection"
+msgstr ""
+
+#: bin/terp.glade:4135
+msgid "Your selection:"
+msgstr ""
+
+#: bin/terp.glade:4203
+msgid "Tiny ERP - Filter"
+msgstr ""
+
+#: bin/terp.glade:4273
+msgid "S_earch:"
+msgstr ""
+
+#: bin/terp.glade:4315
+msgid "on _field:"
+msgstr ""
+
+#: bin/terp.glade:4336
+msgid "test"
+msgstr ""
+
+#: bin/terp.glade:4349
+msgid "_Select"
+msgstr ""
+
+#: bin/terp.glade:4366
+msgid "_Unselect"
+msgstr ""
+
+#: bin/terp.glade:4393
+#, fuzzy
+msgid "Filter: "
+msgstr "_Arkiv"
+
+#: bin/terp.glade:4415
+msgid "AL_L"
+msgstr ""
+
+#: bin/terp.glade:4432
+msgid "N_ONE"
+msgstr ""
+
+#: bin/terp.glade:4504
+msgid "<b><u>Actions</u></b>"
+msgstr ""
+
+#: bin/terp.glade:4540
+msgid "Tiny ERP - Dialog"
+msgstr ""
+
+#: bin/terp.glade:4584
+msgid "Set to _Default"
+msgstr ""
+
+#: bin/terp.glade:4611
+msgid "Value _Preference"
+msgstr ""
+
+#: bin/terp.glade:4634
+msgid "Tiny ERP, Field Preference target"
+msgstr ""
+
+#: bin/terp.glade:4705
+#, fuzzy
+msgid "Default _value:"
+msgstr "Sätt till standardvärde"
+
+#: bin/terp.glade:4796
+msgid "_Domain:"
+msgstr ""
+
+#: bin/terp.glade:4821
+#, fuzzy
+msgid "Field _Name:"
+msgstr "Fältnamn"
+
+#: bin/terp.glade:4879
+msgid "<b>Value applicable if:</b>"
+msgstr ""
+
+#: bin/terp.glade:4934
+msgid "_only for you"
+msgstr ""
+
+#: bin/terp.glade:4953
+msgid "for _all users"
+msgstr ""
+
+#: bin/terp.glade:4976
+msgid "<b>Value applicable for:</b>"
+msgstr ""
+
+#: bin/terp.glade:5016
+msgid "Tiny ERP - Export to CSV"
+msgstr ""
+
+#: bin/terp.glade:5129
+msgid "<b>Predefined exports</b>"
+msgstr ""
+
+#: bin/terp.glade:5204 bin/terp.glade:12005
+msgid "<b>All fields</b>"
+msgstr ""
+
+#: bin/terp.glade:5280 bin/terp.glade:12081
+msgid "_Add"
+msgstr ""
+
+#: bin/terp.glade:5355 bin/terp.glade:12156
+msgid "_Remove"
+msgstr ""
+
+#: bin/terp.glade:5430
+msgid "_Nothing"
+msgstr ""
+
+#: bin/terp.glade:5516
+msgid "Save List"
+msgstr ""
+
+#: bin/terp.glade:5598
+msgid "<b>Fields to export</b>"
+msgstr ""
+
+#: bin/terp.glade:5646
+msgid ""
+"Open in Excel\n"
+"Save as CSV"
+msgstr ""
+
+#: bin/terp.glade:5671
+#, fuzzy
+msgid "Add _field names"
+msgstr "Fältnamn"
+
+#: bin/terp.glade:5691
+msgid "<b>Opti_ons</b>"
+msgstr ""
+
+#: bin/terp.glade:5728
+msgid "Tiny ERP - Search"
+msgstr ""
+
+#: bin/terp.glade:5868
+msgid "_Limit:"
+msgstr ""
+
+#: bin/terp.glade:5909
+msgid "Off_set:"
+msgstr ""
+
+#: bin/terp.glade:5952
+msgid "Advanced search parameters"
+msgstr ""
+
+#: bin/terp.glade:5980
+msgid "Tiny ERP - Search Widgets"
+msgstr ""
+
+#: bin/terp.glade:6081
+msgid "Date de début"
+msgstr ""
+
+#: bin/terp.glade:6250
+msgid "Search with this name"
+msgstr ""
+
+#: bin/terp.glade:6277
+msgid "Clear the field"
+msgstr ""
+
+#: bin/terp.glade:6342
+msgid "Yes"
+msgstr ""
+
+#: bin/terp.glade:6362
+msgid "No"
+msgstr ""
+
+#: bin/terp.glade:6405
+msgid ""
+"\n"
+"Yes\n"
+"No"
+msgstr ""
+
+#: bin/terp.glade:6428
+msgid "Tiny ERP - Attachment"
+msgstr ""
+
+#: bin/terp.glade:6496
+msgid "Filename:"
+msgstr ""
+
+#: bin/terp.glade:6564
+msgid "Description:"
+msgstr ""
+
+#: bin/terp.glade:6664
+msgid "Save text"
+msgstr ""
+
+#: bin/terp.glade:6911
+msgid "Tiny ERP - Error"
+msgstr ""
+
+#: bin/terp.glade:6968
+msgid "Application Error !"
+msgstr ""
+
+#: bin/terp.glade:7039
+msgid "Error 404"
+msgstr ""
+
+#: bin/terp.glade:7060
+msgid "<b>Error code:</b>"
+msgstr ""
+
+#: bin/terp.glade:7081
+msgid ""
+"This Page does not exist !\n"
+"Please retry"
+msgstr ""
+
+#: bin/terp.glade:7103
+msgid "<i>Click on the Support Request tab if you need more help !</i>"
+msgstr ""
+
+#: bin/terp.glade:7137
+#, fuzzy
+msgid "De_scription"
+msgstr "Beskrivning"
+
+#: bin/terp.glade:7183
+msgid ""
+"Error details\n"
+"dqsdsqdqsdsd"
+msgstr ""
+
+#: bin/terp.glade:7200
+#, fuzzy
+msgid "_Details"
+msgstr "Visa detaljer"
+
+#: bin/terp.glade:7239
+msgid ""
+"<b>Complete this form to submit your bug and/or request a support.</b>\n"
+"<i>\n"
+"Your request will be send to Tiny ERP and we will reply you shortly.\n"
+"Note that we may not reply you if your Service Company is not a Tiny ERP "
+"partner.\n"
+"</i>"
+msgstr ""
+
+#: bin/terp.glade:7285
+msgid "<b>Your name: </b>"
+msgstr ""
+
+#: bin/terp.glade:7309
+msgid "<b>Your Company: </b>"
+msgstr ""
+
+#: bin/terp.glade:7333
+msgid "<b>Your Email: </b>"
+msgstr ""
+
+#: bin/terp.glade:7399
+msgid "Explain what you did: "
+msgstr ""
+
+#: bin/terp.glade:7423
+#, fuzzy
+msgid "Others Comments: "
+msgstr "Tillbehör:"
+
+#: bin/terp.glade:7574
+msgid "Send Support Request"
+msgstr ""
+
+#: bin/terp.glade:7617
+msgid "<b>support contract id  </b>"
+msgstr ""
+
+#: bin/terp.glade:7662 bin/terp.glade:10473
+msgid ""
+"Not Urgent\n"
+"Medium\n"
+"Urgent\n"
+"Very Urgent"
+msgstr ""
+
+#: bin/terp.glade:7680 bin/terp.glade:10491
+msgid "Emergency: "
+msgstr ""
+
+#: bin/terp.glade:7704
+msgid "Phone Number: "
+msgstr ""
+
+#: bin/terp.glade:7788
+msgid "<b>_Support Request</b>"
+msgstr ""
+
+#: bin/terp.glade:7823
+msgid "Tiny ERP - Ressource Edit"
+msgstr ""
+
+#: bin/terp.glade:7892
+msgid "Tiny ERP - Link"
+msgstr ""
+
+#: bin/terp.glade:7988
+msgid "Tiny ERP - List"
+msgstr ""
+
+#: bin/terp.glade:8056
+msgid "Tiny ERP - Preferences"
+msgstr ""
+
+#: bin/terp.glade:8123
+msgid "<b>Edit resource preferences</b>"
+msgstr ""
+
+#: bin/terp.glade:8170
+msgid "Tip of the Day"
+msgstr ""
+
+#: bin/terp.glade:8244
+msgid "Pre_vious Tip"
+msgstr ""
+
+#: bin/terp.glade:8316
+msgid "Ne_xt Tip"
+msgstr ""
+
+#: bin/terp.glade:8412
+msgid "_Display a new tip next time ?"
+msgstr ""
+
+#: bin/terp.glade:8453
+msgid "Tiny ERP - Licence"
+msgstr ""
+
+#: bin/terp.glade:8510
+msgid "Tiny ERP license"
+msgstr ""
+
+#: bin/terp.glade:8680
+msgid "Tiny ERP - Date & Time selection"
+msgstr ""
+
+#: bin/terp.glade:8756
+msgid "Hour :"
+msgstr ""
+
+#: bin/terp.glade:8796
+msgid "Minute :"
+msgstr ""
+
+#: bin/terp.glade:8867 bin/terp.glade:11876
+msgid "dialog1"
+msgstr ""
+
+#: bin/terp.glade:8939
+#, fuzzy
+msgid "Search ID:"
+msgstr "Fel i sökning!"
+
+#: bin/terp.glade:9018
+#, fuzzy
+msgid "Tiny ERP Survey"
+msgstr "Tiny ERP"
+
+#: bin/terp.glade:9075
+msgid "<b>Tiny ERP Survey</b>"
+msgstr ""
+
+#: bin/terp.glade:9096
+msgid ""
+"<i>Please fill in the following form in order to help us to improve Tiny ERP "
+"and better target new developments.</i>"
+msgstr ""
+
+#: bin/terp.glade:9145
+msgid "Industry:"
+msgstr ""
+
+#: bin/terp.glade:9170
+msgid "# Employees:"
+msgstr ""
+
+#: bin/terp.glade:9261
+msgid "Country:"
+msgstr ""
+
+#: bin/terp.glade:9285
+msgid "Your Role:"
+msgstr ""
+
+#: bin/terp.glade:9342
+msgid "System:"
+msgstr ""
+
+#: bin/terp.glade:9402
+msgid "How did you hear about us:"
+msgstr ""
+
+#: bin/terp.glade:9448
+msgid "Open Source: "
+msgstr ""
+
+#: bin/terp.glade:9767
+msgid "<b>Your company</b>"
+msgstr ""
+
+#: bin/terp.glade:9819
+msgid "We plan to use Tiny ERP"
+msgstr ""
+
+#: bin/terp.glade:9838
+msgid "We plan to offer services on Tiny ERP"
+msgstr ""
+
+#: bin/terp.glade:9878
+msgid ""
+"Write here any comment, note or suggestion you have concerning Tiny ERP. \n"
+"Tell us which ERP systems you used before, and what you plan to do with Tiny "
+"ERP..."
+msgstr ""
+
+#: bin/terp.glade:9897
+msgid "<b>Your interrest</b>"
+msgstr ""
+
+#: bin/terp.glade:9952
+msgid "E-Mail:"
+msgstr ""
+
+#: bin/terp.glade:9997
+msgid ""
+"(Get Tiny ERP announces, documentation and new releases by email, maximum 6 "
+"mails a year.)"
+msgstr ""
+
+#: bin/terp.glade:10025
+msgid "<b>Keep Informed</b>"
+msgstr ""
+
+#: bin/terp.glade:10143
+msgid ""
+"<b>Complete this form to submit your bug and/or make a request for support.</"
+"b>\n"
+"<i>\n"
+"Your request will be sent to the Tiny ERP team and we will reply shortly.\n"
+"Note that we may not reply if you do not have a support contract with Tiny "
+"or an official partner.</i>"
+msgstr ""
+
+#: bin/terp.glade:10188
+msgid "<b>Your name:</b>"
+msgstr ""
+
+#: bin/terp.glade:10212
+msgid "<b>Your Company:</b>"
+msgstr ""
+
+#: bin/terp.glade:10236
+msgid "<b>Your email:</b>"
+msgstr ""
+
+#: bin/terp.glade:10302
+msgid "Explain your problem:"
+msgstr ""
+
+#: bin/terp.glade:10326
+msgid "Other comments:"
+msgstr ""
+
+#: bin/terp.glade:10428
+msgid "<b>Support contract id:</b>"
+msgstr ""
+
+#: bin/terp.glade:10515
+msgid "Phone number:"
+msgstr ""
+
+#: bin/terp.glade:10732
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: bin/terp.glade:10801
+msgid "<Ctrl> + O"
+msgstr ""
+
+#: bin/terp.glade:10825
+msgid "Connect"
+msgstr ""
+
+#: bin/terp.glade:10849
+msgid "<Ctrl> + F"
+msgstr ""
+
+#: bin/terp.glade:10873
+#, fuzzy
+msgid "Find / Search"
+msgstr "Slut sökning"
+
+#: bin/terp.glade:10897
+msgid "<Ctrl> + D"
+msgstr ""
+
+#: bin/terp.glade:10921
+msgid "Delete"
+msgstr ""
+
+#: bin/terp.glade:10945
+msgid "<Ctrl> + N"
+msgstr ""
+
+#: bin/terp.glade:10969
+msgid "New"
+msgstr "Ny"
+
+#: bin/terp.glade:10993
+msgid "<Ctrl> + <PgUp>"
+msgstr ""
+
+#: bin/terp.glade:11017
+msgid "Previous tab"
+msgstr ""
+
+#: bin/terp.glade:11041
+msgid "<Ctrl> + <PgDn>"
+msgstr ""
+
+#: bin/terp.glade:11089
+msgid "<Ctrl> + S"
+msgstr ""
+
+#: bin/terp.glade:11113
+msgid "<Ctrl> + W"
+msgstr ""
+
+#: bin/terp.glade:11137
+msgid "Save"
+msgstr ""
+
+#: bin/terp.glade:11185
+msgid "<PgUp>"
+msgstr ""
+
+#: bin/terp.glade:11209
+msgid "<PgDn>"
+msgstr ""
+
+#: bin/terp.glade:11233
+msgid "Previous record"
+msgstr ""
+
+#: bin/terp.glade:11257
+#, fuzzy
+msgid "Next record"
+msgstr "Nästa: Ingen post vald!"
+
+#: bin/terp.glade:11281
+msgid "<Ctrl> + L"
+msgstr ""
+
+#: bin/terp.glade:11305
+msgid "Switch view mode"
+msgstr ""
+
+#: bin/terp.glade:11329
+msgid "<b>Shortcuts for TinyERP</b>"
+msgstr ""
+
+#: bin/terp.glade:11376
+msgid "<Ctrl> + <Enter>"
+msgstr ""
+
+#: bin/terp.glade:11400
+msgid "Save and Close window"
+msgstr ""
+
+#: bin/terp.glade:11424
+msgid "<i>When editing a resource in a popup window</i>"
+msgstr ""
+
+#: bin/terp.glade:11448
+msgid "<Esc>"
+msgstr ""
+
+#: bin/terp.glade:11472
+msgid "Close window without saving"
+msgstr ""
+
+#: bin/terp.glade:11502
+msgid "Main Shortcuts"
+msgstr ""
+
+#: bin/terp.glade:11530
+msgid "<b>Shortcuts in text entries</b>"
+msgstr ""
+
+#: bin/terp.glade:11554
+msgid "<CTRL> + X"
+msgstr ""
+
+#: bin/terp.glade:11578
+msgid "<CTRL> + C"
+msgstr ""
+
+#: bin/terp.glade:11602
+msgid "<CTRL> + V"
+msgstr ""
+
+#: bin/terp.glade:11626
+msgid "Cut selected text"
+msgstr ""
+
+#: bin/terp.glade:11650
+msgid "Copy selected text"
+msgstr ""
+
+#: bin/terp.glade:11674
+msgid "Paste selected text"
+msgstr ""
+
+#: bin/terp.glade:11698
+msgid "<TAB>"
+msgstr ""
+
+#: bin/terp.glade:11722
+msgid "Next editable widget"
+msgstr ""
+
+#: bin/terp.glade:11746
+msgid "<SHIFT> + <TAB>"
+msgstr ""
+
+#: bin/terp.glade:11770
+msgid "Previous editable widget"
+msgstr ""
+
+#: bin/terp.glade:11794
+msgid "<ENTER>"
+msgstr ""
+
+#: bin/terp.glade:11818
+msgid "Auto-Complete text field"
+msgstr ""
+
+#: bin/terp.glade:11848
+#, fuzzy
+msgid "Edition Widgets"
+msgstr "Redigerar dokument:"
+
+#: bin/terp.glade:12231
+msgid "N_othing"
+msgstr ""
+
+#: bin/terp.glade:12317
+msgid "Auto-Detect"
+msgstr ""
+
+#: bin/terp.glade:12399
+msgid "<b>Fields to import</b>"
+msgstr ""
+
+#: bin/terp.glade:12463
+msgid "File to Import: "
+msgstr ""
+
+#: bin/terp.glade:12587
+#, fuzzy
+msgid "Server"
+msgstr "Server:"
+
+#: bin/terp.glade:12648
+msgid "<b>Connect to a Tiny ERP server</b>"
+msgstr ""
+
+#: bin/terp.glade:12690
+msgid "Port:"
+msgstr "Port:"
+
+#: bin/terp.glade:12740
+msgid "8069"
+msgstr "8069"
+
+#: bin/terp.glade:12758
+#, fuzzy
+msgid "Secure connection:"
+msgstr "Välj aktivitet"
+
+#: bin/terp.glade:12842
+msgid "Choose a database..."
+msgstr ""
+
+#: bin/terp.glade:12910
+msgid "<b>Backup a database</b>"
+msgstr ""
+
+#: bin/terp.glade:12952
+msgid "Database: "
+msgstr ""
+
+#: bin/terp.glade:12980 bin/terp.glade:13363 bin/terp.glade:13771
+#: bin/terp.glade:14280
+#, fuzzy
+msgid "http://localhost:8069"
+msgstr "localhost"
+
+#: bin/terp.glade:13177
+msgid "Restore a database"
+msgstr ""
+
+#: bin/terp.glade:13244
+msgid "<b>Restore a database</b>"
+msgstr ""
+
+#: bin/terp.glade:13310 bin/terp.glade:13718
+msgid "New database name: "
+msgstr ""
+
+#: bin/terp.glade:13481 bin/terp.glade:13890
+msgid "(must not contain any special char)"
+msgstr ""
+
+#: bin/terp.glade:13544
+#, fuzzy
+msgid "Operation in progress"
+msgstr ""
+"Operationen misslyckades! \n"
+"In/Ut fel"
+
+#: bin/terp.glade:13571
+msgid "Please wait, this operation may take a while..."
+msgstr ""
+
+#: bin/terp.glade:13615
+msgid "Create a new database"
+msgstr ""
+
+#: bin/terp.glade:13676
+msgid "<b>Create a new database</b>"
+msgstr ""
+
+#: bin/terp.glade:13974
+msgid "Default language:"
+msgstr ""
+
+#: bin/terp.glade:13998
+msgid "Load demonstration data: "
+msgstr ""
+
+#: bin/terp.glade:14067
+msgid "Change password"
+msgstr ""
+
+#: bin/terp.glade:14137
+msgid "<b>Change your DB administration password</b>"
+msgstr ""
+
+#: bin/terp.glade:14179
+msgid "New password confirmation:"
+msgstr ""
+
+#: bin/terp.glade:14203
+msgid "New password:"
+msgstr ""
+
+#: bin/terp.glade:14227
+msgid "Old password:"
+msgstr ""
+
+#~ msgid "Welcome to Tiny Entreprise Resource Planing !"
+#~ msgstr "Välkommen till Tiny Enterprise's Resurs Planering"
+
+#~ msgid "You are already logged!"
+#~ msgstr "Ni är redan loggad"
+
+#~ msgid "you are logged out. ^l to login"
+#~ msgstr "ni är utloggad. ^l för att logga in på nytt"
+
+#~ msgid ""
+#~ "^N New   ^S Save   ^D Delete   ^F Search   ^X Next   ^W Previous   ^R "
+#~ "Repeat"
+#~ msgstr ""
+#~ "^N Ny    ^S spara  ^D Radera   ^F Search   ^X Nästa  ^W Föregående ^R "
+#~ "Repetera"
+
+#~ msgid "^L to login"
+#~ msgstr "^L för att logga in"
+
+#~ msgid "select field value:"
+#~ msgstr "välj fält värde"
+
+#~ msgid "No ressource selected!"
+#~ msgstr "Ingen vald resurs!"
+
+#~ msgid "None resource selected"
+#~ msgstr "Ingen vald resurs!"
+
+#~ msgid "New root"
+#~ msgstr "Ny root"
+
+#~ msgid "Import Done"
+#~ msgstr "Import klar"
+
+#~ msgid "Import CSV File"
+#~ msgstr "Importera CSV fil"
+
+#~ msgid "View Create Error:"
+#~ msgstr "Fel vid skapad vy:"
+
+#~ msgid "Value preference"
+#~ msgstr "Föredraget värde"
+
+#~ msgid "Unable to read ressource"
+#~ msgstr "Kan inte läsa resurs"
+
+#~ msgid "This record did not exist !"
+#~ msgstr "Posten existerade inte!"

@@ -1,0 +1,147 @@
+##############################################################################
+#
+# Copyright (c) 2004 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#					Fabien Pinckaers <fp@tiny.Be>
+#
+# WARNING: This program as such is intended to be used by professional
+# programmers who take the whole responsability of assessing all potential
+# consequences resulting from its eventual inadequacies and bugs
+# End users who are looking for a ready-to-use solution with commercial
+# garantees and support are strongly adviced to contract a Free Software
+# Service Company
+#
+# This program is Free Software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#
+##############################################################################
+
+import copy
+import gtk
+from gtk import glade
+import wid_common
+
+import rpc
+import common
+
+_attrs_boolean = {
+	'required': False,
+	'readonly': False
+}
+
+class widget_interface(object):
+	def __init__(self, window, parent=None, view=None, attrs={}):
+		self.parent = parent
+		self._window = window
+		self._view = None
+		self.attrs = attrs
+		for key,val in _attrs_boolean.items():
+			self.attrs[key] = attrs.get(key, False) not in ('False', '0', False)
+		self.default_readonly = self.attrs.get('readonly', False)
+		self._menu_entries = [
+			(_('Set to default value'), lambda x: self._menu_sig_default_get(), 1),
+			(_('Set default'), lambda x: self._menu_sig_default_set(), 1),
+		]
+
+	def destroy(self):
+		pass
+
+	def _menu_sig_default_get(self):
+		try:
+			model = self._view.modelfield.parent.resource
+			res = rpc.session.rpc_exec_auth_try('/object', 'execute', model, 'default_get', [self.attrs['name']])
+			model = self._view.modelfield.set(res.get(self.attrs['name'], False))
+			self.display(self._view.modelfield)
+		except:
+			common.warning('You can not set to the default value here !', 'Operation not permited')
+			return False
+		print 'LA'
+
+	def sig_activate(self, widget=None):
+		# emulate a focus_out so that the onchange is called if needed
+		self._focus_out()
+
+	def refresh(self):
+		self._readonly_set(self.attrs.get('readonly', False))
+		if not self.attrs.get('valid', True):
+			self.color_set('invalid')
+		elif self.attrs.get('required', False):
+			self.color_set('required')
+		else:
+			self.color_set('normal')
+
+	def _readonly_set(self, ro):
+		pass
+
+	def _color_widget(self):
+		return self.widget
+
+	def color_set(self, name):
+		colors = {'invalid':'#ffdddd', 'readonly':'grey', 'required':'#ddddff', 'normal':'white'}
+		widget = self._color_widget()
+		map = widget.get_colormap()
+		colour = map.alloc_color(colors.get(name,'white'))
+		widget.modify_bg(gtk.STATE_ACTIVE, colour)
+		widget.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
+		widget.modify_base(gtk.STATE_NORMAL, colour)
+		widget.modify_text(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
+
+	def state_set(self, state):
+		state_changes = dict(self.attrs.get('states',{}).get(state,[]))
+		for key, value in state_changes.items():
+			self.attrs[key] = value
+		else:
+			if 'readonly' not in state_changes:
+				self.attrs['readonly'] = self.default_readonly
+
+	def _menu_sig_default_set(self):
+		deps = []
+		wid = self._view.view_form.widgets
+		for wname, wview in self._view.view_form.widgets.items():
+			if wview.modelfield.attrs.get('change_default', False):
+				value = wview.modelfield.get()
+				deps.append((wname, wname, value, value))
+		value = self._view.modelfield.get_default()
+		model = self._view.modelfield.parent.resource
+		wid_common.field_pref_set(self._view.widget_name, self.attrs.get('string', self._view.widget_name), model, value, deps)
+
+	def _menu_open(self, obj, event):
+		if event.button == 3:
+			menu = gtk.Menu()
+			for stock_id,callback,sensitivity in self._menu_entries:
+				if stock_id:
+					item = gtk.ImageMenuItem(stock_id)
+					if callback:
+						item.connect("activate",callback)
+					item.set_sensitive(sensitivity)
+				else:
+					item=gtk.SeparatorMenuItem()
+				item.show()
+				menu.append(item)
+			menu.popup(None,None,None,event.button,event.time)
+			return True
+
+	def _focus_in(self):
+		pass
+
+	def _focus_out(self):
+		if not self._view.modelfield:
+			return False
+		self.set_value(self._view.modelfield)
+
+	def display(self, modelfield):
+		self.refresh()
+
+	def sig_changed(self):
+		if self.attrs.get('on_change',False):
+			self._view.view_form.screen.on_change(self.attrs['on_change'])

@@ -1,0 +1,157 @@
+# Glacier GTK+ 2.0 theme (Requires ThinIce & Pixmap engines)
+# by R.V.Vindenes <sublett@dc-s.com>
+#
+# Inspiration came from IceCube & Fishing_The_Sky themes and MacOS X
+# I tried to keep it calm, simple and unintrusive.
+#
+
+style "default"
+{
+  GtkScrollbar::has_backward_stepper = 0
+  GtkScrollbar::has_secondary_backward_stepper = 1
+  GtkScrollbar::min_slider_length = 14
+
+  base[NORMAL]        = "#F7F7F7"
+  base[ACTIVE]        = "#D3D3D3"
+  base[SELECTED]      = "#4a4a4a"
+  base[PRELIGHT]      = "#E5E5e5"
+  base[INSENSITIVE]   = "#d0d0d0"
+
+  bg[NORMAL]          = "#E6E6E6"
+  bg[ACTIVE]          = "#F4F4F4"
+  bg[SELECTED]        = "#828282"
+  bg[PRELIGHT]        = "#8a8a8a"
+  bg[INSENSITIVE]     = "#D3D3D3"
+
+  fg[NORMAL]          = "#000000"
+  fg[ACTIVE]          = "#000000"
+  fg[SELECTED]        = "#ffffff"
+  fg[PRELIGHT]        = "#000000"
+  fg[INSENSITIVE]     = "#747474"
+
+  text[SELECTED]      = "#ffffff"
+  text[INSENSITIVE]   = "#747474"
+
+  bg_pixmap[NORMAL]   = "bgpixmap_normal.png"
+  bg_pixmap[PRELIGHT] = "bgpixmap_prelight.png"
+
+  engine "thinice"
+  {
+    rect_scrollbar = TRUE
+    mark_type1 = DOT
+    mark_type2 = ARROW
+    paned_dots = FULL
+  }
+}
+
+style "button" {
+  engine "pixmap" {
+#
+# Check marks
+#
+    image 
+      {
+        function        = CHECK
+	recolorable     = TRUE
+        shadow          = OUT
+	overlay_file    = "check_out.png"
+	overlay_stretch = FALSE
+      }
+    image 
+      {
+        function        = CHECK
+	recolorable     = TRUE
+	shadow          = IN
+	overlay_file    = "check_in.png"
+	overlay_stretch = FALSE
+      }
+#
+# Option marks
+#
+    image 
+      {
+        function        = OPTION
+	recolorable     = TRUE
+	shadow          = OUT
+	overlay_file    = "option_out.png"
+	overlay_border  = { 0, 0, 0, 0 }
+	overlay_stretch = FALSE
+      }
+    image 
+      {
+        function        = OPTION
+	recolorable     = TRUE
+	shadow          = IN
+	overlay_file    = "option_in.png"
+	overlay_border  = { 0, 0, 0, 0 }
+	overlay_stretch = FALSE
+      }
+#
+# Regular buttons
+#
+    image {
+        function        = BOX
+	file            = "button_normal.png"
+	state		= NORMAL
+	border          = {10,5,5,10}
+	stretch         = TRUE
+    }
+    image {
+        function        = BOX
+	file            = "button_normal.png"
+	state		= INSENSITIVE
+	border          = {10,5,5,10}
+	stretch         = TRUE
+    }
+    image {
+        function        = BOX
+	file            = "button_prelight.png"
+	state		= PRELIGHT
+	border          = {10,5,5,10}
+	stretch         = TRUE
+    }
+    image {
+        function        = BOX
+	file            = "button_active.png"
+	state		= ACTIVE
+	border          = {10,5,5,10}
+	stretch         = TRUE
+    }
+  }
+}
+
+style "tooltip"{
+ bg_pixmap[NORMAL]      = "<none>"
+ bg_pixmap[PRELIGHT]    = "<none>"
+}
+
+class "GtkButton" style "default"
+class "GtkMenuItem" style "button"
+
+widget "gtk-tooltips" style "tooltip"
+
+style "default"
+{    
+    stock["gtk-go-down"]  =  {{"Down.png"}}
+    stock["gtk-go-back"]  =  {{"Back.png"}}
+    stock["gtk-go-forward"] =  {{"Forward.png"}}
+    stock["gtk-go-up"]    =  {{"Up.png"}}
+    stock["gtk-home"] =  {{"Home.png"}}
+    stock["gtk-refresh"] = {{"Refresh.png"}}
+    stock["gtk-stop"] =   {{"Stop.png"}}
+
+}
+
+class "GtkWidget" style "default"
+
+
+style "panel-icons" 
+{
+    stock["panel-arrow-down"]  =  {{"Down.png"}}
+    stock["panel-arrow-left"]  =  {{"Back.png"}}
+    stock["panel-arrow-right"] =  {{"Forward.png"}}
+    stock["panel-arrow-up"]    =  {{"Up.png"}}
+}
+class "GtkWidget" style "panel-icons"
+
+#widget "Nautilus*" style "icons"

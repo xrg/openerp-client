@@ -1,0 +1,491 @@
+# Theme Name  : YattaBlues based on Office by Gianluca Sartoru
+# Author(s)   : Massimiliano (Yatta) Dal Cero < yattamax<at>gmail.com >
+#
+# Description :
+# UserLinux GTK2 theme using the Smooth engine.
+
+include "iconrc"
+gtk-icon-sizes = "panel-menu=24,24:gtk-menu=16,16"
+
+style "default" {
+	GtkWidget::interior_focus = 5
+	GtkButton::default_border = {0, 0, 0, 0}
+	GtkButton::default_outside_border = {0, 0, 0, 0}
+
+	GtkRange::trough_border = 0
+	GtkWidget::focus_padding = 1
+
+	GtkPaned::handle_size = 7
+  
+	GtkRange::slider_width = 15
+	GtkRange::stepper_size = 15
+	GtkScrollbar::min_slider_length = 30
+	GtkCheckButton::indicator_size = 16
+	GtkRadioButton::indicator_size = 12
+	GtkMenuBar::internal-padding = 0
+
+	GtkButton::child_displacement_x = 0
+	GtkButton::child_displacement_y = 1
+
+	GtkMenuItem::selected_shadow_type = GTK_SHADOW_OUT
+
+	bg[NORMAL] = "#f7f7f7"
+	bg[PRELIGHT] = "#f7f7f7"
+	bg[SELECTED] = "#a0b1d7"
+	bg[ACTIVE] = "#e7e7e7"
+	bg[INSENSITIVE] = "#e7e7e7"
+
+	fg[NORMAL] = "#000000"
+	fg[PRELIGHT] = "#000000"
+	fg[SELECTED] = "#ffffff"
+	fg[ACTIVE] = "#000000"
+
+	engine "smooth" {
+		tab_style = round
+
+		   focus {
+		      foreground[ACTIVE] = "#4585c7"
+		      foreground[SELECTED] = "#4585c7"
+		      foreground[NORMAL] = "#4585c7"
+		      foreground[PRELIGHT] = "#4585c7"
+		   }
+									
+
+		line {
+			style = smooth
+			thickness = 0
+		}
+
+		grip {
+			#style = mac_buds_in
+			style = none
+			fill {
+				style = shaded
+				hdirection = vertical
+				vdirection = horizontal
+				shade1 = 1.3
+				shade2 = 0.9
+			}
+		}
+
+		trough {
+			#fill {
+			#	style = solid
+			#}
+		}
+
+		arrow {
+			style = cleanice
+			solid = TRUE
+		        etched = FALSE
+		}
+
+		check {
+			style = clean
+			motif = FALSE
+
+			fill {
+				style = shaded
+				hdirection = fdiagonal
+				vdirection = fdiagonal
+				shade1 = 1.3
+				shade2 = 0.9
+			}
+		}
+	}
+
+} widget_class "*" style "default"
+
+style "panned" {
+	engine "smooth" {
+		grip {
+			style = mac_buds_in
+		}
+		   focus {
+		      foreground[ACTIVE] = "#4585c7"
+		      foreground[SELECTED] = "#4585c7"
+		      foreground[NORMAL] = "#4585c7"
+		      foreground[PRELIGHT] = "#4585c7"
+		   }
+	}
+}
+
+style "tooltips" {
+	bg[NORMAL] = "#ffff96"
+	bg[PRELIGHT] = "#ffff96"
+	bg[SELECTED] = "#ffff96"
+	bg[ACTIVE] = "#ffff96"
+	bg[INSENSITIVE] = "#ffff96"
+}
+
+style "handle" {
+	#bg[NORMAL] = "#000"
+
+	engine "smooth" {
+		line {
+			style = smooth
+			thickness = 0
+		}
+
+		grip {
+			style = bars
+			fill {
+				style = shaded
+				hdirection = vertical
+				vdirection = horizontal
+				shade1 = 1.0
+				shade2 = 0.95
+			}
+		}
+	}
+}
+
+style "menubar" {
+	engine "smooth" {
+		line {
+			style = bevel
+			thickness = 0
+		}
+	}
+}
+
+style "menu" {
+	engine "smooth" {
+		line {
+			style = smooth
+			thickness = 1
+		}
+
+		arrow {
+			style = cleanice
+			solid = TRUE
+		}
+	}
+}
+
+style "toolbar" {
+	engine "smooth" {
+		line {
+			style = bevel
+			thickness = 0
+		}
+
+		grip {
+			#style = mac_buds_in
+			style = none
+			toolbar_overlap = TRUE
+		}
+	}
+}
+
+style "button" {
+	fg[PRELIGHT] = "#ffffff"
+	bg[PRELIGHT] = "#a0b1d7"
+
+	engine "smooth" {
+		fill {
+			style = shaded
+			hdirection = vertical
+			vdirection = horizontal
+			shade1 = 1.3
+			shade2 = 0.9
+		}
+
+		line {
+			style = smooth
+			thickness = 1
+		}
+
+		check {
+			style = clean
+			motif = FALSE
+
+			fill {
+				style = shaded
+				hdirection = fdiagonal
+				vdirection = fdiagonal
+				shade1 = 1.3
+				shade2 = 0.9
+			}
+		}
+
+		option {
+			style = round
+			motif = FALSE
+			fill {
+				style = shaded
+				hdirection = fdiagonal
+				vdirection = fdiagonal
+				shade1 = 1.3
+				shade2 = 0.9
+			}
+		}
+
+		trough {
+			fill {
+				style = solid
+			}
+			
+			line {
+				style = none
+			}
+		}
+
+		arrow {
+			style = cleanice
+			solid = TRUE
+		}
+	}
+}
+
+style "menu-item" {
+	fg[PRELIGHT] = "#ffffff"
+	bg[PRELIGHT] = "#a0b1d7"
+	#bg[PRELIGHT] = "#000"
+
+	engine "smooth" {
+		fill {
+			style = solid
+			hdirection = vertical
+			vdirection = horizontal
+			#shade1 = 0
+			#shade2 = 0
+		}
+
+		line {
+			style = smooth
+			thickness = 2
+		}
+		
+		edge {
+		    line {
+			style = flat
+			thuckness = 1
+		    }
+		}
+
+		check {
+			style = clean
+			motif = FALSE
+			
+			#line {
+			#    style = none
+			#    thickness = 1
+			#}
+		}
+
+		option {
+			style = clean
+			motif = FALSE
+			fill {
+				style = shaded
+				hdirection = fdiagonal
+				vdirection = fdiagonal
+				shade1 = 1.3
+				shade2 = 0.9
+			}
+		}
+
+		arrow {
+			style = xfce
+			solid = TRUE
+		}
+	}
+}
+
+style "scrollbar" {
+	bg[PRELIGHT] = "#a0b1d7"
+
+	GtkRange::trough_border = 0
+	GtkRange::slider_width = 15
+	GtkRange::stepper_size = 15
+	GtkRange::stepper_spacing = 0
+
+	engine "smooth" {
+		fill {
+			style = shaded
+			hdirection = vertical
+			vdirection = horizontal
+			shade1 = 1.3
+			shade2 = 0.9
+		}
+
+		line {
+			style = smooth
+			thickness = 1
+		}
+
+		trough {
+			fill {
+				style = solid
+			}
+			line {
+				style = none
+				thickness = 0
+			}
+		}
+
+		grip {
+			#style = mac_buds_in
+			style = none
+			#line {
+			#	style = smooth
+			#	thickness = 1
+			#}
+		}
+
+		arrow {
+			style = cleanice
+			solid = TRUE
+			xpadding = 1
+			ypadding = 1
+		}
+	}
+}
+
+style "hscales"  {
+	bg[PRELIGHT] = "#a0b1d7"
+
+	GtkRange::trough_border = 0
+	GtkRange::slider-width = 15
+	GtkScale::slider-length = 10
+
+	engine "smooth" {	
+		line {
+			style = smooth
+			thickness = 1
+		}
+
+		fill {
+			style = shaded
+			hdirection = vertical
+			vdirection = horizontal
+			shade1 = 1.3
+			shade2 = 0.9
+		}
+
+		trough {
+			xpadding = 2
+			ypadding = 1
+			show_value = TRUE
+			fill {
+				style = solid
+			}
+		}
+
+		grip {
+			#style = mac_buds_in
+			style = none
+		}
+
+		real_sliders = FALSE
+	}
+}
+
+style "vscales"  {
+	bg[PRELIGHT] = "#a0b1d7"
+
+	GtkRange::trough_border	= 0
+	GtkRange::slider-width	= 15
+	GtkScale::slider-length	= 10
+
+	engine "smooth" {
+		line {
+			style = smooth
+			thickness = 1
+		}
+
+		fill {
+			style = shaded
+			hdirection = vertical
+			vdirection = horizontal
+			shade1 = 1.3
+			shade2 = 0.9
+		}
+
+		trough {
+			xpadding = 1
+			ypadding = 2
+			show_value = TRUE
+			fill {
+				style = solid
+			}
+		}
+
+		grip {
+			#style = mac_buds_in
+			style = none
+		}
+
+		real_sliders = FALSE
+	}
+}
+
+style "infobar" {
+	bg[PRELIGHT] = "#a0b1d7"
+
+	xthickness = 1
+	ythickness = 2
+
+	engine "smooth" {
+		line {
+			style = smooth
+			thickness = 1
+		}
+
+		fill {
+			style = shaded
+			hdirection = vertical
+			vdirection = horizontal
+			shade1 = 1.3
+			shade2 = 0.9
+		}
+
+		trough {
+			fill {
+				style = solid
+			}
+		}
+	}
+}
+
+class "*Progress*" style "infobar"
+widget_class "*Progress*" style "infobar"
+class "*BonoboDockItem" style "handle"
+class "*HandleBox" style "handle"
+class "*Toolbar" style "toolbar"
+
+class "GtkMenuBar" style "menubar"
+widget_class "GtkMenuBar" style "menubar"
+class "GtkMenu" style "menu"
+class "*MenuItem*" style "menu-item"
+widget_class "*MenuItem*" style "menu-item"
+class "GtkStatusbar" style "menubar"
+
+class "*Button*" style "button"
+widget_class "*Button*" style "button"
+
+class "*OptionMenu*" style "button"
+widget_class "*OptionMenu*" style "button"
+
+class "*Button*" style "button"
+widget_class "*Button*" style "button"
+
+class "*OptionMenu*" style "button"
+widget_class "*OptionMenu*" style "button"
+class "*RadioButton*" style "button"
+widget_class "*RadioButton*" style "button"
+class "*CheckButton*" style "button"
+widget_class "*CheckButton*" style "button"
+
+widget_class "*Scrollbar*" style "scrollbar"
+class "*Scrollbar*" style "scrollbar"
+widget_class "*HScale*" style "hscales"
+class "*HScale*" style "hscales"
+widget_class "*VScale*" style "vscales"
+class "*VScale*" style "vscales"
+
+class "*Paned" style "panned"
+widget_class "*Paned" style "panned"
+
+class "GtkTooltips" style "tooltips"

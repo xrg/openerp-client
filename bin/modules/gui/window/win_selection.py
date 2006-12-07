@@ -1,0 +1,115 @@
+##############################################################################
+#
+# Copyright (c) 2004 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#                    Fabien Pinckaers <fp@tiny.Be>
+#
+# WARNING: This program as such is intended to be used by professional
+# programmers who take the whole responsability of assessing all potential
+# consequences resulting from its eventual inadequacies and bugs
+# End users who are looking for a ready-to-use solution with commercial
+# garantees and support are strongly adviced to contract a Free Software
+# Service Company
+#
+# This program is Free Software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#
+##############################################################################
+
+import gtk
+from gtk import glade
+import gettext
+import common
+
+from view_tree import parse
+import gobject
+import rpc
+
+fields_list_type = {
+	'checkbox': gobject.TYPE_BOOLEAN
+}
+
+#
+# Should be replaced by win_browse
+#
+
+class win_selection_class(object):
+	def __init__(self, ids, model, view=None):
+		self.glade = glade.XML(common.terp_path("terp.glade"), "win_selection",gettext.textdomain())
+		self.win = self.glade.get_widget('win_selection')
+
+		self.ids = ids
+		self.view = self.glade.get_widget('win_sel_tree')
+		self.view.get_selection().set_mode('single')
+		if view==None:
+			fields = { 'name': {'type': 'char', 'string':_('Name')} }
+			xml = '''<?xml version="1.0"?>
+<tree string="%s">
+	<field name="name" string="%s"></field>
+</tree>''' % (_('Ressource Name'), _('Names'))
+		else:
+			fields = None
+			xml = None
+
+		p = parse.parse(fields)
+		p.parse(xml, self.view)
+		self.view.set_expander_column(self.view.get_column(1))
+		self.fields_order = p.fields_order
+
+		types=[ gobject.TYPE_STRING ]
+		for x in self.fields_order:
+			types.append( fields_list_type.get(fields[x]['type'], gobject.TYPE_STRING))
+		self.model = gtk.ListStore(*types)
+
+		if view==None:
+			res_ids = rpc.session.rpc_exec_auth('/object', 'execute', model, 'name_get', self.ids, rpc.session.context)
+			for res in res_ids:
+				num = self.model.append()
+				self.model.set(num, 0, res[0], 1, res[1])
+		else:
+			pass # Todo
+
+		self.view.set_model(self.model)
+		self.view.show_all()
+
+	def id_name_get(self):
+		id = self.value_get(0)
+		if id:
+			return (id, self.value_get(1))
+		return None
+
+	def value_get(self, col):
+		sel = self.view.get_selection().get_selected()
+		if sel==None:
+			return None
+		(model, iter) = sel
+		return model.get_value(iter, col)
+
+	def go(self):
+		button = self.win.run()
+		if button==gtk.RESPONSE_OK:
+			res = self.id_name_get()
+		else:
+			res=None
+		self.win.destroy()
+		return res
+
+def win_selection_h(from_resource, ids, model, view=None):
+	return win_selection(ids, model, view)
+
+def win_selection(ids, model, view=None):
+	if len(ids)==1:
+		return rpc.session.rpc_exec_auth('/object', 'execute', model, 'name_get', ids, rpc.session.context)[0]
+	win = win_selection_class(ids, model, view)
+	res = win.go()
+	return res
