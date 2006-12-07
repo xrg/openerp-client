@@ -43,6 +43,8 @@ import rpc
 from widget.screen import Screen
 import time
 import gettext
+from modules.gui.window import win_search
+from modules import action
 
 class Button(Observable):
 	def __init__(self, attrs={}):
@@ -333,18 +335,32 @@ class parser_form(widget.view.interface.parser_interface):
 					if action['view_type']=='form':
 						def sig_switch(widget, event, screen):
 							screen.switch_view()
+						def sig_search(widget, event, screen, model, domain, context):
+							win = win_search.win_search(model, domain, context=context)
+							res = win.go()
+							if res:
+								screen.clear()
+								screen.load(res)
+						def sig_open(widget, event, act_id):
+							obj = service.LocalService('action.main')
+							obj.execute(act_id, {})
+
 						mode = (action['view_mode'] or 'form,tree').split(',')
 						res_id = rpc.session.rpc_exec_auth('/object', 'execute', action['res_model'], 'search', domain)
 						screen = Screen(action['res_model'], view_type=mode, context=context, view_ids = view_id, domain=domain)
 						screen.load(res_id)
 						gl = glade.XML(common.terp_path("terp.glade"), 'widget_paned', gettext.textdomain())
 						gl.signal_connect('on_switch_button_press_event', sig_switch, screen)
-						widget=gl.get_widget('widget_paned')
+						gl.signal_connect('on_search_button_press_event', sig_search, screen, action['res_model'], domain, context)
+						gl.signal_connect('on_open_button_press_event', sig_open, act_id)
+
 						label=gl.get_widget('widget_paned_lab')
 						label.set_text(screen.current_view.title)
 						vbox=gl.get_widget('widget_paned_vbox')
 						vbox.add(screen.widget)
+						widget=gl.get_widget('widget_paned')
 						container.wid_add(widget, colspan=int(attrs.get('colspan', 4)), expand=True)
+
 					elif action['view_type']=='tree':
 						continue
 
