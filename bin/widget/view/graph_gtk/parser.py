@@ -45,10 +45,15 @@ class parser_graph(interface.parser_interface):
 		img.set_from_stock('gtk-cancel', gtk.ICON_SIZE_BUTTON)
 		img.show()
 
+		axis = []
+		for node in root_node.childNodes:
+			node_attrs = tools.node_attributes(node)
+			if node.localName == 'field':
+				axis.append(node_attrs['name'])
+
 		#
 		# TODO: parse root_node to fill in axis
 		#
-		axis = ['name','amount_revenue_prob']
 
 		view = graph.ViewGraph(img, model, axis, fields)
 		return view, {}, [], on_write

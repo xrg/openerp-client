@@ -43,20 +43,14 @@ class screen_container(object):
 		return self.sw
 
 	def set(self, widget):
-		if isinstance(widget, gtk.TreeView):
-			self.vp.hide()
-			if self.old_widget:
-				self.vp.remove(self.old_widget)
-			if self.sw.get_child() is self.vp:
-				self.sw.remove(self.vp)
-			self.sw.add(widget)
-		else:
-			if self.old_widget:
-				self.sw.remove(self.old_widget)
+		if self.vp.get_child():
+			self.vp.remove(self.vp.get_child())
+		if self.sw.get_child():
+			self.sw.remove(self.sw.get_child())
+		if not isinstance(widget, gtk.TreeView):
 			self.vp.add(widget)
-			self.sw.add(self.vp)
-			self.vp.show_all()
-		self.old_widget = widget
+			widget = self.vp
+		self.sw.add(widget)
 		self.sw.show_all()
 
 	def size_get(self):

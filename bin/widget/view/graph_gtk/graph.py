@@ -40,13 +40,17 @@ from pychart import *
 
 import StringIO
 
+theme.use_color = 1
+theme.reinitialize()
+
 class ViewGraph(object):
 	def __init__(self, widget, model, axis, fields):
 		self.widget = widget
 		self.fields = fields
 		self.model = model
-		axis = ['user_id', 'amount_revenue_prob']
 		self.axis = axis
+		self.editable = False
+		self.widget.editable = False
 
 	def display(self, models):
 		import os
@@ -54,41 +58,50 @@ class ViewGraph(object):
 		for m in models:
 			res = []
 			for x in self.axis:
-				res.append(m[x].get_client())
+				if not res:
+					res.append(str(m[x].get_client()))
+				else:
+					res.append(float(m[x].get_client()))
 			data.append(res)
+		if not data:
+			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)
+			return False
 
-		#
-		# Try to find another solution
-		#
-		png_string = StringIO.StringIO()
-		can = canvas.init(fname=png_string, format='png')
+		try:
 
-		ar = area.T(
-			size=(150,150),
-			legend=legend.T(),
-			x_grid_style = None,
-			y_grid_style = None
-		)
+			#
+			# Try to find another solution
+			#
+			png_string = StringIO.StringIO()
+			can = canvas.init(fname=png_string, format='png')
 
-		plot = pie_plot.T(
-			data=data,
-			arc_offsets=[0,10,0,10],
-			shadow = (2, -2, fill_style.gray50),
-			label_offset = 25,
-			arrow_style = arrow.a3
-		)
-		ar.add_plot(plot)
-		ar.draw(can)
-		can.close()
+			ar = area.T(
+				size=(150,150),
+				legend=legend.T(),
+				x_grid_style = None,
+				y_grid_style = None
+			)
 
-		data = png_string.getvalue()
-		loader = gtk.gdk.PixbufLoader ('png')
+			plot = pie_plot.T(
+				data=data,
+				arc_offsets=[0,10,0,10],
+				shadow = (2, -2, fill_style.gray50),
+				label_offset = 25,
+				arrow_style = arrow.a3
+			)
+			ar.add_plot(plot)
+			ar.draw(can)
+			can.close()
 
-		loader.write (data, len(data))
-		pixbuf = loader.get_pixbuf()
-		loader.close()
+			data = png_string.getvalue()
+			loader = gtk.gdk.PixbufLoader ('png')
 
-		self.widget.set_from_pixbuf(pixbuf)
-
-
+			loader.write (data, len(data))
+			pixbuf = loader.get_pixbuf()
+			npixbuf = pixbuf.add_alpha(True, chr(0xff), chr(0xff), chr(0xff))
+			loader.close()
+			self.widget.set_from_pixbuf(npixbuf)
+		except:
+			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)
+			return False
 
