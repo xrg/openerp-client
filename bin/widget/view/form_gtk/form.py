@@ -40,6 +40,9 @@ import common
 import service
 import rpc
 
+from widget.screen import Screen
+import time
+import gettext
 
 class Button(Observable):
 	def __init__(self, attrs={}):
@@ -177,7 +180,7 @@ class _container(object):
 		table.set_focus_chain(wid_list)
 
 class parser_form(widget.view.interface.parser_interface):
-	def parse(self, model, root_node, fields, notebook=None):
+	def parse(self, model, root_node, fields, notebook=None, paned=None):
 		dict_widget = {}
 		button_list = []
 		attrs = tools.node_attributes(root_node)
@@ -294,6 +297,56 @@ class parser_form(widget.view.interface.parser_interface):
 					frame.set_shadow_type(gtk.SHADOW_NONE)
 					container.get().set_border_width(0)
 				container.pop()
+			elif node.localName=='hpaned':
+				hp = gtk.HPaned()
+				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True)
+				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp)
+				button_list += buttons
+				dict_widget.update(widgets)
+			elif node.localName=='child1':
+				widget, widgets, buttons, on_write = self.parse(model, node, fields, paned=paned)
+				button_list += buttons
+				dict_widget.update(widgets)
+				paned.add1(widget)
+			elif node.localName=='child2':
+				widget, widgets, buttons, on_write = self.parse(model, node, fields, paned=paned)
+				button_list += buttons
+				dict_widget.update(widgets)
+				paned.add2(widget)
+			elif node.localName=='action':
+				act_id=attrs['name']
+				res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [act_id], ['type'], rpc.session.context)
+				if not res:
+					raise 'ActionNotFound'
+				type=res[0]['type']
+				action = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [act_id], False, rpc.session.context)[0]
+				if action['type']=='ir.actions.act_window':
+					if not action.get('domain', False):
+						action['domain']='[]'
+					context = {'active_id': False, 'active_ids': []}
+					context.update(eval(action.get('context','{}'), context.copy()))
+					a = context.copy()
+					a['time'] = time
+					domain = tools.expr_eval(action['domain'], a)
+
+					view_id = action['view_id'] or []
+					if action['view_type']=='form':
+						def sig_switch(widget, event, screen):
+							screen.switch_view()
+						mode = (action['view_mode'] or 'form,tree').split(',')
+						res_id = rpc.session.rpc_exec_auth('/object', 'execute', action['res_model'], 'search', domain)
+						screen = Screen(action['res_model'], view_type=mode, context=context, view_ids = view_id, domain=domain)
+						screen.load(res_id)
+						gl = glade.XML(common.terp_path("terp.glade"), 'widget_paned', gettext.textdomain())
+						gl.signal_connect('on_switch_button_press_event', sig_switch, screen)
+						widget=gl.get_widget('widget_paned')
+						label=gl.get_widget('widget_paned_lab')
+						label.set_text(screen.current_view.title)
+						vbox=gl.get_widget('widget_paned_vbox')
+						vbox.add(screen.widget)
+						container.wid_add(widget, colspan=int(attrs.get('colspan', 4)), expand=True)
+					elif action['view_type']=='tree':
+						continue
 
 		for (ebox,src,name,widget) in container.trans_box:
 			ebox.connect('button_press_event',self.translate, model, name, src, widget)
