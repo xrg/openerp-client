@@ -69,7 +69,41 @@ class ViewGraph(object):
 			print self.screen.models
 			self.image.set_from_stock('gtk-close', gtk.ICON_SIZE_BUTTON)
 		print 'DISPLAY'
+
+		from pychart import *
+		import os
+
+		data = [("foo", 10),("bar", 20), ("baz", 30), ("ao", 40)]
+
+		png_string = file(os.tempnam(), 'w')
+		can = canvas.init(fname=png_string, format='png')
+
+		ar = area.T(
+			size=(150,150),
+			legend=legend.T(),
+			x_grid_style = None,
+			y_grid_style = None
+		)
+
+		plot = pie_plot.T(
+			data=data,
+			arc_offsets=[0,10,0,10],
+			shadow = (2, -2, fill_style.gray50),
+			label_offset = 25,
+			arrow_style = arrow.a3
+		)
+		ar.add_plot(plot)
+		ar.draw(can)
+		can.close()
+
+		png_string.flush()
+
+		pixbuf = gtk.gdk.pixbuf_new_from_file(png_string.name)
+		self.image.set_from_pixbuf(pixbuf)
 		return None
+
+	def signal_record_changed(self, *args):
+		pass
 
 	def sel_ids_get(self):
 		return []
