@@ -97,8 +97,6 @@ class ViewGraph(object):
 				else:
 					res.append(d[x])
 			data.append(res)
-		print datas
-		print data
 
 		if not data:
 			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)

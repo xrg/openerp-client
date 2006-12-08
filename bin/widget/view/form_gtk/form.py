@@ -342,7 +342,6 @@ class parser_form(widget.view.interface.parser_interface):
 					context.update(eval(action.get('context','{}'), context.copy()))
 					a = context.copy()
 					a['time'] = time
-					print "action domain:", action['domain']
 					domain = tools.expr_eval(action['domain'], a)
 
 					view_id = action['view_id'] or []
@@ -360,7 +359,6 @@ class parser_form(widget.view.interface.parser_interface):
 							obj.execute(act_id, {})
 
 						mode = (action['view_mode'] or 'form,tree').split(',')
-						print  "domain:", domain
 						res_id = rpc.session.rpc_exec_auth('/object', 'execute', action['res_model'], 'search', domain)
 						screen = Screen(action['res_model'], view_type=mode, context=context, view_ids = view_id, domain=domain)
 						screen.load(res_id)
