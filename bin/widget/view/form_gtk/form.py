@@ -301,6 +301,16 @@ class parser_form(widget.view.interface.parser_interface):
 				container.pop()
 			elif node.localName=='hpaned':
 				hp = gtk.HPaned()
+				if 'position' in attrs:
+					hp.set_position(int(attrs['position']))
+				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True)
+				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp)
+				button_list += buttons
+				dict_widget.update(widgets)
+			elif node.localName=='vpaned':
+				hp = gtk.VPaned()
+				if 'position' in attrs:
+					hp.set_position(int(attrs['position']))
 				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True)
 				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp)
 				button_list += buttons
@@ -309,12 +319,12 @@ class parser_form(widget.view.interface.parser_interface):
 				widget, widgets, buttons, on_write = self.parse(model, node, fields, paned=paned)
 				button_list += buttons
 				dict_widget.update(widgets)
-				paned.add1(widget)
+				paned.pack1(widget, resize=True, shrink=True)
 			elif node.localName=='child2':
 				widget, widgets, buttons, on_write = self.parse(model, node, fields, paned=paned)
 				button_list += buttons
 				dict_widget.update(widgets)
-				paned.add2(widget)
+				paned.pack2(widget, resize=True, shrink=True)
 			elif node.localName=='action':
 				act_id=attrs['name']
 				res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [act_id], ['type'], rpc.session.context)
@@ -322,6 +332,9 @@ class parser_form(widget.view.interface.parser_interface):
 					raise 'ActionNotFound'
 				type=res[0]['type']
 				action = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [act_id], False, rpc.session.context)[0]
+				if 'view_mode' in attrs:
+					action['view_mode'] = attrs['view_mode']
+
 				if action['type']=='ir.actions.act_window':
 					if not action.get('domain', False):
 						action['domain']='[]'
@@ -329,6 +342,7 @@ class parser_form(widget.view.interface.parser_interface):
 					context.update(eval(action.get('context','{}'), context.copy()))
 					a = context.copy()
 					a['time'] = time
+					print "action domain:", action['domain']
 					domain = tools.expr_eval(action['domain'], a)
 
 					view_id = action['view_id'] or []
@@ -346,6 +360,7 @@ class parser_form(widget.view.interface.parser_interface):
 							obj.execute(act_id, {})
 
 						mode = (action['view_mode'] or 'form,tree').split(',')
+						print  "domain:", domain
 						res_id = rpc.session.rpc_exec_auth('/object', 'execute', action['res_model'], 'search', domain)
 						screen = Screen(action['res_model'], view_type=mode, context=context, view_ids = view_id, domain=domain)
 						screen.load(res_id)
@@ -355,11 +370,11 @@ class parser_form(widget.view.interface.parser_interface):
 						gl.signal_connect('on_open_button_press_event', sig_open, act_id)
 
 						label=gl.get_widget('widget_paned_lab')
-						label.set_text(screen.current_view.title)
+						label.set_text(attrs.get('string', screen.current_view.title))
 						vbox=gl.get_widget('widget_paned_vbox')
 						vbox.add(screen.widget)
 						widget=gl.get_widget('widget_paned')
-						container.wid_add(widget, colspan=int(attrs.get('colspan', 4)), expand=True)
+						container.wid_add(widget, colspan=int(attrs.get('colspan', 3)), expand=True)
 
 					elif action['view_type']=='tree':
 						continue

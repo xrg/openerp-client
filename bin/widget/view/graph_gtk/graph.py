@@ -92,8 +92,13 @@ class ViewGraph(object):
 		for d in datas:
 			res = []
 			for x in self.axis:
-				res.append(d[x])
+				if isinstance(d[x], str):
+					res.append(d[x].replace('/', '-'))
+				else:
+					res.append(d[x])
 			data.append(res)
+		print datas
+		print data
 
 		if not data:
 			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)
