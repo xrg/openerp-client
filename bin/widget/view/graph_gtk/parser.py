@@ -61,7 +61,7 @@ class parser_graph(interface.parser_interface):
 		# TODO: parse root_node to fill in axis
 		#
 
-		view = graph.ViewGraph(img, model, axis, fields, axis_data)
+		view = graph.ViewGraph(img, model, axis, fields, axis_data, attrs)
 		return view, {}, [], on_write
 
 

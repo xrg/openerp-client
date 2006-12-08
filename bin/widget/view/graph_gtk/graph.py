@@ -44,7 +44,7 @@ theme.use_color = 1
 theme.reinitialize()
 
 class ViewGraph(object):
-	def __init__(self, widget, model, axis, fields, axis_data={}):
+	def __init__(self, widget, model, axis, fields, axis_data={}, attrs={}):
 		self.widget = widget
 		self.fields = fields
 		self.model = model
@@ -52,6 +52,7 @@ class ViewGraph(object):
 		self.editable = False
 		self.widget.editable = False
 		self.axis_data = axis_data
+		self.attrs = attrs
 
 	def display(self, models):
 		import os
@@ -102,21 +103,39 @@ class ViewGraph(object):
 			png_string = StringIO.StringIO()
 			can = canvas.init(fname=png_string, format='png')
 
-			ar = area.T(
-				size=(150,150),
-				legend=legend.T(),
-				x_grid_style = None,
-				y_grid_style = None
-			)
-
-			plot = pie_plot.T(
-				data=data,
-				arc_offsets=[0,10,0,10],
-				shadow = (2, -2, fill_style.gray50),
-				label_offset = 25,
-				arrow_style = arrow.a3
-			)
+			area_args = {
+				'size': (200,150)
+			}
+			if self.attrs.get('type','pie')=='pie':
+				ar = area.T(
+					x_grid_style= None,
+					y_grid_style= None,
+					legend= legend.T(),
+					**area_args
+				)
+				plot = pie_plot.T(
+					data=data,
+					arc_offsets=[0,10,0,10],
+					shadow = (2, -2, fill_style.gray50),
+					label_offset = 25,
+					arrow_style = arrow.a3
+				)
+			elif self.attrs['type']=='bar':
+				print 'ici', self.fields[self.axis[0]]['string'], self.fields[self.axis[1]]['string']
+				ar = area.T(
+					x_coord = category_coord.T(data, 0),
+					x_axis = axis.X(label=self.fields[self.axis[0]]['string']),
+					y_axis = axis.Y(label=self.fields[self.axis[1]]['string']),
+					y_range = (0, None),
+					**area_args
+				)
+				plot = bar_plot.T(
+					data=data
+				)
+			else:
+				raise 'Graph type '+self.attrs['type']+' does not exist !'
 			ar.add_plot(plot)
+
 			ar.draw(can)
 			can.close()
 
@@ -128,7 +147,8 @@ class ViewGraph(object):
 			loader.close()
 			npixbuf = pixbuf.add_alpha(True, chr(0xff), chr(0xff), chr(0xff))
 			self.widget.set_from_pixbuf(npixbuf)
-		except:
+		except Exception,e:
+			print e
 			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)
 			return False
 
