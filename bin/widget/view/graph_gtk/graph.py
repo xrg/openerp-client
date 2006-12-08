@@ -121,7 +121,6 @@ class ViewGraph(object):
 					arrow_style = arrow.a3
 				)
 			elif self.attrs['type']=='bar':
-				print 'ici', self.fields[self.axis[0]]['string'], self.fields[self.axis[1]]['string']
 				ar = area.T(
 					x_coord = category_coord.T(data, 0),
 					x_axis = axis.X(label=self.fields[self.axis[0]]['string']),
