@@ -44,34 +44,61 @@ theme.use_color = 1
 theme.reinitialize()
 
 class ViewGraph(object):
-	def __init__(self, widget, model, axis, fields):
+	def __init__(self, widget, model, axis, fields, axis_data={}):
 		self.widget = widget
 		self.fields = fields
 		self.model = model
 		self.axis = axis
 		self.editable = False
 		self.widget.editable = False
+		self.axis_data = axis_data
 
 	def display(self, models):
 		import os
-		data = []
+		datas = []
 		for m in models:
+			res = {}
+			for x in self.axis:
+				if self.fields[x]['type'] in ('many2one', 'char', 'text','selection'):
+					res[x] = str(m[x].get_client())
+				else:
+					res[x] = float(m[x].get_client())
+			datas.append(res)
+
+
+		operators = {
+			'+': lambda x,y: x+y,
+			'*': lambda x,y: x*y,
+			'min': lambda x,y: min(x,y),
+			'max': lambda x,y: max(x,y),
+			'**': lambda x,y: x**y
+		}
+		for field in self.axis_data:
+			group = self.axis_data[field].get('group', False)
+			if group:
+				keys = {}
+				for d in datas:
+					if d[field] in keys:
+						for a in self.axis:
+							if a<>field:
+								oper = operators[self.axis_data[a].get('operator', '+')]
+								keys[d[field]][a] = oper(keys[d[field]][a], d[a])
+					else:
+						keys[d[field]] = d
+				datas = keys.values()
+
+		data = []
+		for d in datas:
 			res = []
 			for x in self.axis:
-				if not res:
-					res.append(str(m[x].get_client()))
-				else:
-					res.append(float(m[x].get_client()))
+				res.append(d[x])
 			data.append(res)
+
 		if not data:
 			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)
 			return False
 
 		try:
-
-			#
-			# Try to find another solution
-			#
 			png_string = StringIO.StringIO()
 			can = canvas.init(fname=png_string, format='png')
 
@@ -98,8 +125,8 @@ class ViewGraph(object):
 
 			loader.write (data, len(data))
 			pixbuf = loader.get_pixbuf()
-			npixbuf = pixbuf.add_alpha(True, chr(0xff), chr(0xff), chr(0xff))
 			loader.close()
+			npixbuf = pixbuf.add_alpha(True, chr(0xff), chr(0xff), chr(0xff))
 			self.widget.set_from_pixbuf(npixbuf)
 		except:
 			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)

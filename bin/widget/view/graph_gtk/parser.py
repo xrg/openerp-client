@@ -39,23 +39,29 @@ from widget.view import interface
 
 class parser_graph(interface.parser_interface):
 	def parse(self, model, root_node, fields):
+		attrs = tools.node_attributes(root_node)
+		self.title = attrs.get('string', 'Unknown')
+
 		on_write = '' #attrs.get('on_write', '')
 
 		img = gtk.Image()
 		img.set_from_stock('gtk-cancel', gtk.ICON_SIZE_BUTTON)
 		img.show()
 
+
 		axis = []
+		axis_data = {}
 		for node in root_node.childNodes:
 			node_attrs = tools.node_attributes(node)
 			if node.localName == 'field':
 				axis.append(node_attrs['name'])
+				axis_data[node_attrs['name']] = node_attrs
 
 		#
 		# TODO: parse root_node to fill in axis
 		#
 
-		view = graph.ViewGraph(img, model, axis, fields)
+		view = graph.ViewGraph(img, model, axis, fields, axis_data)
 		return view, {}, [], on_write
 
 
