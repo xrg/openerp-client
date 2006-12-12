@@ -92,8 +92,8 @@ class ViewGraph(object):
 		for d in datas:
 			res = []
 			for x in self.axis:
-				if isinstance(d[x], str):
-					res.append(d[x].replace('/', '-'))
+				if hasattr(d[x], 'replace'):
+					res.append(d[x].replace('/', '//'))
 				else:
 					res.append(d[x])
 			data.append(res)

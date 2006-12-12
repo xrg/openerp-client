@@ -373,8 +373,8 @@ class parser_form(widget.view.interface.parser_interface):
 						vbox.add(screen.widget)
 						widget=gl.get_widget('widget_paned')
 						container.wid_add(widget, colspan=int(attrs.get('colspan', 3)), expand=True)
-
 					elif action['view_type']=='tree':
+						#TODO
 						continue
 
 		for (ebox,src,name,widget) in container.trans_box:
