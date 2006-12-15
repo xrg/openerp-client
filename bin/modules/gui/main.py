@@ -871,10 +871,20 @@ class terp_main(service.Service):
 	def _choose_db_ent(self):
 		dialog = glade.XML(common.terp_path("terp.glade"), "win_db_ent", gettext.textdomain())
 		win = dialog.get_widget('win_db_ent')
+
 		db_widget = dialog.get_widget('ent_db')
 		widget_pass = dialog.get_widget('ent_password')
 		widget_url = dialog.get_widget('ent_server')
+
+		protocol = options.options['login.secure'] and 'https' or 'http'
+		url = '%s://%s:%s' % (protocol, options.options['login.server'], options.options['login.port'])
+		widget_url.set_text(url)
+
+		change_button = dialog.get_widget('but_server_change')
+		change_button.connect_after('clicked', lambda a,b: _server_ask(b), widget_url)
+
 		res = win.run()
+
 		db = False
 		passwd = False
 		url = False
