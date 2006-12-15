@@ -48,7 +48,11 @@ def import_csv(csv_data, f, model, fields):
 	#if csv_data['combo']:
 	for line in data:
 		datas.append(map(lambda x:x.decode(csv_data['combo']).encode('utf-8'), line))
-	res = rpc.session.rpc_exec_auth('/object', 'execute', model, 'import_data', f, datas)
+	try:
+		res = rpc.session.rpc_exec_auth('/object', 'execute', model, 'import_data', f, datas)
+	except Exception, e:
+		common.warning(str(e), _('XML-RPC error !'))
+		return False
 	if res[0]>=0:
 		common.message(_('Imported %d objects !') % (res[0],))
 	else:
