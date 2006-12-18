@@ -301,20 +301,22 @@ class parser_form(widget.view.interface.parser_interface):
 				container.pop()
 			elif node.localName=='hpaned':
 				hp = gtk.HPaned()
-				if 'position' in attrs:
-					hp.set_position(int(attrs['position']))
 				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True)
 				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp)
 				button_list += buttons
 				dict_widget.update(widgets)
+				if 'position' in attrs:
+					#hp.set_position(int(attrs['position']))
+					print
+				print 'Done'
 			elif node.localName=='vpaned':
 				hp = gtk.VPaned()
-				if 'position' in attrs:
-					hp.set_position(int(attrs['position']))
 				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True)
 				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp)
 				button_list += buttons
 				dict_widget.update(widgets)
+				if 'position' in attrs:
+					hp.set_position(int(attrs['position']))
 			elif node.localName=='child1':
 				widget, widgets, buttons, on_write = self.parse(model, node, fields, paned=paned)
 				button_list += buttons
@@ -372,6 +374,8 @@ class parser_form(widget.view.interface.parser_interface):
 						vbox=gl.get_widget('widget_paned_vbox')
 						vbox.add(screen.widget)
 						widget=gl.get_widget('widget_paned')
+
+						widget.set_size_request(int(attrs.get('width',-1)),int(attrs.get('height',-1)))
 						container.wid_add(widget, colspan=int(attrs.get('colspan', 3)), expand=True)
 					elif action['view_type']=='tree':
 						#TODO
