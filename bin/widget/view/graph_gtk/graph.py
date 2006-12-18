@@ -60,7 +60,7 @@ class ViewGraph(object):
 		for m in models:
 			res = {}
 			for x in self.axis:
-				if self.fields[x]['type'] in ('many2one', 'char', 'text','selection'):
+				if self.fields[x]['type'] in ('many2one', 'char', 'date','datetime','time','text','selection'):
 					res[x] = str(m[x].get_client())
 				else:
 					res[x] = float(m[x].get_client())
@@ -102,55 +102,66 @@ class ViewGraph(object):
 			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)
 			return False
 
-		try:
-			png_string = StringIO.StringIO()
-			can = canvas.init(fname=png_string, format='png')
+#		try:
+		png_string = StringIO.StringIO()
+		can = canvas.init(fname=png_string, format='png')
 
-			area_args = {
-				'size': (200,150)
-			}
-			if self.attrs.get('type','pie')=='pie':
-				ar = area.T(
-					x_grid_style= None,
-					y_grid_style= None,
-					legend= legend.T(),
-					**area_args
-				)
-				plot = pie_plot.T(
-					data=data,
-					arc_offsets=[0,10,0,10],
-					shadow = (2, -2, fill_style.gray50),
-					label_offset = 25,
-					arrow_style = arrow.a3
-				)
-			elif self.attrs['type']=='bar':
-				ar = area.T(
-					x_coord = category_coord.T(data, 0),
-					x_axis = axis.X(label=self.fields[self.axis[0]]['string']),
-					y_axis = axis.Y(label=self.fields[self.axis[1]]['string']),
-					y_range = (0, None),
-					**area_args
-				)
-				plot = bar_plot.T(
-					data=data
-				)
-			else:
-				raise 'Graph type '+self.attrs['type']+' does not exist !'
+		area_args = {
+			'size': (200,150)
+		}
+		if self.attrs.get('type','pie')=='pie':
+			ar = area.T(
+				x_grid_style= None,
+				y_grid_style= None,
+				legend= legend.T(),
+				**area_args
+			)
+			plot = pie_plot.T(
+				data=data,
+				arc_offsets=[0,10,0,10],
+				shadow = (2, -2, fill_style.gray50),
+				label_offset = 25,
+				arrow_style = arrow.a3
+			)
 			ar.add_plot(plot)
+		elif self.attrs['type']=='bar':
+			valmin = valmax = 0
+			for i in range(1,len(self.axis)):
+				for d in data:
+					valmin = min(valmin,d[i])
+					valmax = max(valmax,d[i])
+			ar = area.T(
+				x_coord = category_coord.T(data, 0),
+				x_axis = axis.X(label=self.fields[self.axis[0]]['string'].replace('/','//'), format="/a45 %s"),
+				y_axis = axis.Y(label=None, minor_tic_interval=(valmax - valmin)/10),
+				y_range = (valmin, valmax),
+				y_grid_interval = (valmax - valmin)/10,
+				**area_args
+			)
+			for i in range(1,len(self.axis)):
+				plot = bar_plot.T(
+					data=data,
+					label = self.fields[self.axis[i]]['string'],
+					cluster = (i-1, len(self.axis)-1),
+					hcol = i
+				)
+				ar.add_plot(plot)
+		else:
+			raise 'Graph type '+self.attrs['type']+' does not exist !'
 
-			ar.draw(can)
-			can.close()
+		ar.draw(can)
+		can.close()
 
-			data = png_string.getvalue()
-			loader = gtk.gdk.PixbufLoader ('png')
+		data = png_string.getvalue()
+		loader = gtk.gdk.PixbufLoader ('png')
 
-			loader.write (data, len(data))
-			pixbuf = loader.get_pixbuf()
-			loader.close()
-			npixbuf = pixbuf.add_alpha(True, chr(0xff), chr(0xff), chr(0xff))
-			self.widget.set_from_pixbuf(npixbuf)
-		except Exception,e:
-			print e
-			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)
-			return False
+		loader.write (data, len(data))
+		pixbuf = loader.get_pixbuf()
+		loader.close()
+		npixbuf = pixbuf.add_alpha(True, chr(0xff), chr(0xff), chr(0xff))
+		self.widget.set_from_pixbuf(npixbuf)
+#		except Exception,e:
+#			print e
+#			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)
+#			return False
 
