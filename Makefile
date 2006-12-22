@@ -1,7 +1,7 @@
 LANG=fr
 PYTHON_FILES=$(shell find -name "*py")
 PYTHONC_FILES=$(shell find -name "*pyc")
-LANGS = es fr hu it pt ro ru sv uk zh al cs
+LANGS = es fr hu it pt ro ru sv uk zh al cs de
 
 all:
 
@@ -28,6 +28,7 @@ translate_set:
 	msgfmt bin/po/zh.po -o bin/po/zh/LC_MESSAGES/terp.mo
 	msgfmt bin/po/al.po -o bin/po/al/LC_MESSAGES/terp.mo
 	msgfmt bin/po/cs.po -o bin/po/cs/LC_MESSAGES/terp.mo
+	msgfmt bin/po/de.po -o bin/po/de/LC_MESSAGES/terp.mo
 
 merge:
 	msgmerge bin/po/es.po bin/po/terp-msg.pot -o bin/po/es.po
@@ -42,3 +43,4 @@ merge:
 	msgmerge bin/po/zh.po bin/po/terp-msg.pot -o bin/po/zh.po
 	msgmerge bin/po/al.po bin/po/terp-msg.pot -o bin/po/al.po
 	msgmerge bin/po/cs.po bin/po/terp-msg.pot -o bin/po/cs.po
+	msgmerge bin/po/de.po bin/po/terp-msg.pot -o bin/po/de.po
