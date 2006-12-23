@@ -323,62 +323,11 @@ class parser_form(widget.view.interface.parser_interface):
 				dict_widget.update(widgets)
 				paned.pack2(widget, resize=True, shrink=True)
 			elif node.localName=='action':
+				from action import action
 				name = attrs['name']
 				widget_act = action(self.window, self.parent, model, attrs)
 				dict_widget[name] = widget_act
 				container.wid_add(widget_act.widget, colspan=int(attrs.get('colspan', 3)), expand=True)
-#				act_id=attrs['name']
-#				res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [act_id], ['type'], rpc.session.context)
-#				if not res:
-#					raise 'ActionNotFound'
-#				type=res[0]['type']
-#				action = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [act_id], False, rpc.session.context)[0]
-#				if 'view_mode' in attrs:
-#					action['view_mode'] = attrs['view_mode']
-
-#				if action['type']=='ir.actions.act_window':
-#					if not action.get('domain', False):
-#						action['domain']='[]'
-#					context = {'active_id': False, 'active_ids': []}
-#					context.update(eval(action.get('context','{}'), context.copy()))
-#					a = context.copy()
-#					a['time'] = time
-#					domain = tools.expr_eval(action['domain'], a)
-
-#					view_id = action['view_id'] or []
-#					if action['view_type']=='form':
-#						def sig_switch(widget, event, screen):
-#							screen.switch_view()
-#						def sig_search(widget, event, screen, model, domain, context):
-#							win = win_search.win_search(model, domain, context=context)
-#							res = win.go()
-#							if res:
-#								screen.clear()
-#								screen.load(res)
-#						def sig_open(widget, event, act_id):
-#							obj = service.LocalService('action.main')
-#							obj.execute(act_id, {})
-
-#						mode = (action['view_mode'] or 'form,tree').split(',')
-#						res_id = rpc.session.rpc_exec_auth('/object', 'execute', action['res_model'], 'search', domain)
-#						screen = Screen(action['res_model'], view_type=mode, context=context, view_ids = view_id, domain=domain)
-#						screen.load(res_id)
-#						gl = glade.XML(common.terp_path("terp.glade"), 'widget_paned', gettext.textdomain())
-#						gl.signal_connect('on_switch_button_press_event', sig_switch, screen)
-#						gl.signal_connect('on_search_button_press_event', sig_search, screen, action['res_model'], domain, context)
-#						gl.signal_connect('on_open_button_press_event', sig_open, act_id)
-#
-#						label=gl.get_widget('widget_paned_lab')
-#						label.set_text(attrs.get('string', screen.current_view.title))
-#						vbox=gl.get_widget('widget_paned_vbox')
-#						vbox.add(screen.widget)
-#						widget=gl.get_widget('widget_paned')
-#						widget.set_size_request(int(attrs.get('width',-1)),int(attrs.get('height',-1)))
-#						container.wid_add(widget, colspan=int(attrs.get('colspan', 3)), expand=True)
-#					elif action['view_type']=='tree':
-#						#TODO
-#						continue
-
 		for (ebox,src,name,widget) in container.trans_box:
 			ebox.connect('button_press_event',self.translate, model, name, src, widget)
 		return container.pop(), dict_widget, button_list, on_write
