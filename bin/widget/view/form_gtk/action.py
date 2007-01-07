@@ -65,7 +65,9 @@ class action(interface.widget_interface):
 			a['time'] = time
 			self.domain = tools.expr_eval(self.action['domain'], a)
 
-			view_id = self.action['view_id'] or []
+			view_id = []
+			if self.action['view_id']:
+				view_id = [self.action['view_id'][0]]
 			if self.action['view_type']=='form':
 				mode = (self.action['view_mode'] or 'form,tree').split(',')
 				self.screen = Screen(self.action['res_model'], view_type=mode, context=self.context, view_ids = view_id, domain=self.domain)

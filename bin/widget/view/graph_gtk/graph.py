@@ -41,7 +41,6 @@ from pychart import *
 import StringIO
 
 theme.use_color = 1
-theme.reinitialize()
 
 class ViewGraph(object):
 	def __init__(self, widget, model, axis, fields, axis_data={}, attrs={}):
@@ -57,6 +56,7 @@ class ViewGraph(object):
 	def display(self, models):
 		import os
 		datas = []
+		theme.reinitialize()
 		for m in models:
 			res = {}
 			for x in self.axis:
@@ -132,7 +132,7 @@ class ViewGraph(object):
 					valmax = max(valmax,d[i])
 			ar = area.T(
 				x_coord = category_coord.T(data, 0),
-				x_axis = axis.X(label=self.fields[self.axis[0]]['string'].replace('/','//'), format="/a45 %s"),
+				x_axis = axis.X(label=self.fields[self.axis[0]]['string'].replace('/','//'), format="/a90 %s"),
 				y_axis = axis.Y(label=None, minor_tic_interval=(valmax - valmin)/10),
 				y_range = (valmin, valmax),
 				y_grid_interval = (valmax - valmin)/10,

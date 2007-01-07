@@ -300,10 +300,8 @@ class parser_form(widget.view.interface.parser_interface):
 				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp)
 				button_list += buttons
 				dict_widget.update(widgets)
-				if 'position' in attrs:
-					#hp.set_position(int(attrs['position']))
-					print
-				print 'Done'
+				#if 'position' in attrs:
+				#	hp.set_position(int(attrs['position']))
 			elif node.localName=='vpaned':
 				hp = gtk.VPaned()
 				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True)
