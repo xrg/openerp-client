@@ -7170,6 +7170,7 @@ No</property>
 
 	      <child>
 		<widget class="GtkVBox" id="vbox27">
+		  <property name="width_request">121</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">0</property>
