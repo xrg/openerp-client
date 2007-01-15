@@ -59,7 +59,7 @@ class widget_parse(interface.parser_interface):
 			if not node.nodeType == node.ELEMENT_NODE:
 				continue
 			if node.localName in parsers:
-				widget = parsers[node.localName](self.window, self.parent, self.attrs)
+				widget = parsers[node.localName](self.window, self.parent, self.attrs, screen)
 				wid, child, buttons, on_write = widget.parse(screen.resource, node, fields)
 				screen.set_on_write(on_write)
 				res = parsers2[node.localName](screen, wid, child, buttons, toolbar)

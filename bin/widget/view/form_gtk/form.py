@@ -40,6 +40,8 @@ import common
 import service
 import rpc
 
+import copy
+
 
 class Button(Observable):
 	def __init__(self, attrs={}):
@@ -331,25 +333,22 @@ class parser_form(widget.view.interface.parser_interface):
 		return container.pop(), dict_widget, button_list, on_write
 
 	def translate(self, widget, event, model, name, src, widget_entry):
-		#value = [self.id, model, name,src, widget_entry]
-		id = model.id_get()
+		id = self.screen.current_model.id
 		if not id:
 			common.message('You need to save ressource before adding translations')
 			return False
 		uid = rpc.session.uid
 
-		win = gtk.Dialog('Add Translation')
-
 		lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable','=','1')])
-		langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code'])
+		langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
 
 		#Add english ; default value not in res.lang
-		langs.append({'code':'en'})
-		code = rpc.session.context.get('lang', 'en')
+		langs.append({'code':'en_EN', 'name': 'English'})
+		code = rpc.session.context.get('lang', 'en_EN')
 
 		#change 'en' to false for context
 		def adapt_context(val):
-			if val == 'en':
+			if val == 'en_EN':
 				return False
 			else:
 				return val
@@ -391,37 +390,44 @@ class parser_form(widget.view.interface.parser_interface):
 				return sw
 			else:
 				return None
-		entries_list = []
+
+
+		win = gtk.Dialog('Add Translation')
 		win.vbox.set_spacing(5)
-		vbox = gtk.VBox()
+		vbox = gtk.VBox(spacing=5)
 		
+		entries_list = []
 		for lang in langs:
 			context = copy.copy(rpc.session.context)
 			context['lang'] = adapt_context(lang['code'])
-			val = rpc.session.rpc_exec_auth('/object', 'execute', value[1], 'read', [value[0]], [value[2]], context)
+			val = rpc.session.rpc_exec_auth('/object', 'execute', model, 'read', [id], [name], context)
 			val = val[0]
 			
-			label = gtk.Label(lang['code'] or 'en')
-			entry = widget_duplicate(value[4])
+			label = gtk.Label(lang['name'])
+			entry = widget_duplicate(widget_entry)
 
-			hbox = gtk.HBox(homogeneous=True, spacing=0)
+			hbox = gtk.HBox(homogeneous=True)
 			if code == lang['code']:
-				value_set(entry,value_get(value[4]))
+				value_set(entry,value_get(widget_entry))
 			else:
-				value_set(entry,val[value[2]])
+				value_set(entry,val[name])
 			
 			entries_list.append((val['id'], lang['code'], entry))
 			hbox.pack_start(label, expand=False, fill=False)
 			hbox.pack_start(entry, expand=True, fill=True)
-			vbox.pack_start(hbox, expand=True, fill=True)
+			vbox.pack_start(hbox, expand=False,fill=True)
 		
+		vp = gtk.Viewport()
+		vp.set_shadow_type(gtk.SHADOW_NONE)
+		vp.add(vbox)
 		sv = gtk.ScrolledWindow()
 		sv.set_policy(gtk.POLICY_AUTOMATIC,gtk.POLICY_AUTOMATIC )
-		sv.add_with_viewport(vbox)
-		win.vbox.pack_start(sv)
+		sv.set_shadow_type(gtk.SHADOW_NONE)
+		sv.add(vp)
+		win.vbox.add(sv)
 		win.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
 		win.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
-		win.resize(320,240)
+		win.resize(400,200)
 		win.show_all()
 		
 		ok = False
@@ -434,22 +440,19 @@ class parser_form(widget.view.interface.parser_interface):
 				to_save = map(lambda x : (x[0], x[1], value_get(x[2])), entries_list)
 				while to_save != []:
 					new_val = {}
-					new_val['id'],new_val['lang'], new_val['value'] = to_save.pop()
+					new_val['id'],new_val['code'], new_val['value'] = to_save.pop()
 					#update form field
-					if new_val['lang'] == code:
-						value_set(value[4],new_val['value'])
+					if new_val['code'] == code:
+						value_set(widget_entry, new_val['value'])
 				
 					context = copy.copy(rpc.session.context)
-					context['lang'] = adapt_context(new_val['lang'])
-					rpc.session.rpc_exec_auth('/object', 'execute', value[1], 'write', [value[0]], {str(value[2]):  new_val['value']}, context)
+					context['lang'] = adapt_context(new_val['code'])
+					rpc.session.rpc_exec_auth('/object', 'execute', model, 'write', [id], {str(name):  new_val['value']}, context)
 			if response == gtk.RESPONSE_CANCEL:
 				win.destroy()
 				return
 		win.destroy()
 		return True
-
-
-		pass
 
 
 import calendar

@@ -27,9 +27,10 @@
 ##############################################################################
 
 class parser_interface(object):
-	def __init__(self, window=None, parent=None, attrs={}):
+	def __init__(self, window=None, parent=None, attrs={}, screen=None):
 		self.window = window
 		self.parent = parent
 		self.attrs = attrs
 		self.title = None
 		self.buttons = {}
+		self.screen = screen

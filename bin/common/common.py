@@ -278,8 +278,7 @@ def file_selection(title, filename=''):
 	if button!=gtk.RESPONSE_OK:
 		win.destroy()
 		return False
-	res = win.get_selections()
-	filepath = res[0]
+	filepath = win.get_filename()
 	if filepath:
 		filepath = filepath.decode('utf8')
 		try:
