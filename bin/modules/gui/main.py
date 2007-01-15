@@ -83,7 +83,7 @@ def _server_ask(server_widget):
 	host_widget = win_gl.get_widget('ent_host')
 	port_widget = win_gl.get_widget('ent_port')
 	secure_widget = win_gl.get_widget('check_secure')
-	m = re.match('^(http[s]?)://([\w.]+):(\d{1,5})$', server_widget.get_text())
+	m = re.match('^(http[s]?)://([\w.-]+):(\d{1,5})$', server_widget.get_text())
 	if m:
 		secure_widget.set_active(m.group(1) == 'https')
 		host_widget.set_text(m.group(2))
