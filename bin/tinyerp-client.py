@@ -50,10 +50,10 @@ logging.basicConfig()
 #log.setLevel(logging.DEBUG)
 
 if os.name == 'nt':
-	sys.path.append('.//GTK-2.0//lib')
-	sys.path.append('.//GTK-2.0//bin')
-	os.environ['PATH']=";GTK-2.0//lib;GTK-2.0//bin;" + os.environ['PATH']
-	sys.path.append('.')
+	sys.path.insert(0,'.//GTK-2.0//lib')
+	sys.path.insert(0,'.//GTK-2.0//bin')
+	os.environ['PATH']=".;GTK-2.0//lib;GTK-2.0//bin;" + os.environ['PATH']
+	sys.path.insert(0,'.')
 
 from distutils.sysconfig import get_python_lib
 terp_path = "/".join([get_python_lib(), 'tinyerp-client'])
