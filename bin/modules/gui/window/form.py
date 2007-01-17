@@ -76,12 +76,13 @@ class form(object):
 		oregistry.add_receiver('misc-message', self._misc_message)
 
 		self.name = self.screen.current_view.title
+		vp = gtk.Viewport()
+		vp.set_shadow_type(gtk.SHADOW_NONE)
+		vp.add(self.screen.widget)
 		self.sw = gtk.ScrolledWindow()
 		self.sw.set_shadow_type(gtk.SHADOW_NONE)
 		self.sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-		self.sw.add_with_viewport(self.screen.widget)
-		vp = self.sw.get_child()
-		vp.set_shadow_type(gtk.SHADOW_NONE)
+		self.sw.add(vp)
 		self.sw.show_all()
 		
 		self.has_backup = False
