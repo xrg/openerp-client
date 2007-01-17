@@ -79,7 +79,8 @@ class T(pscanvas.T):
             (gs_path, arg,
              self.bbox[2] - self.bbox[0],
              self.bbox[3] - self.bbox[1], fname)
-            os.system(cmdline)
+#            os.system(cmdline)
+            os.popen2(cmdline)
             os.unlink(fname)
     def close_gs(self):
         if self.pipe_fp:
