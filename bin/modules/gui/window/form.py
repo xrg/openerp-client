@@ -62,6 +62,7 @@ class form(object):
 
 		fields = {}
 		self.model = model
+		self.window = window
 		self.previous_action = None
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_form_container',gettext.textdomain())
 		self.widget = self.glade.get_widget('win_form_container')
@@ -171,7 +172,7 @@ class form(object):
 		id = self.screen.id_get()
 		if id:
 			import win_attach
-			win = win_attach.win_attach(self.model, id)
+			win = win_attach.win_attach(self.model, id, parent=self.window)
 			win.go()
 		else:
 			self.message_state(_('No resource selected !'))

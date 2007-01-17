@@ -38,7 +38,7 @@ import rpc
 import options
 
 class tree(object):
-	def __init__(self, view, model, res_id=False, domain=[], context={}):
+	def __init__(self, view, model, res_id=False, domain=[], context={}, window=None):
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_tree_container',gettext.textdomain())
 		self.widget = self.glade.get_widget('win_tree_container')
 		self.widget.show_all()
@@ -49,6 +49,7 @@ class tree(object):
 		else:
 			self.domain = domain
 		self.view = view
+		self.window=window
 
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', self.domain2)
 		self.context=context
@@ -175,7 +176,7 @@ class tree(object):
 		if id:
 			obj = service.LocalService('action.main')
 			obj.exec_keyword(keyword, {'model':self.model, 'id':id,
-							  'ids':ids, 'report_type':report_type})
+				'ids':ids, 'report_type':report_type, 'window': self.window})
 		else:
 			common.message(_('No resource selected!'))
 

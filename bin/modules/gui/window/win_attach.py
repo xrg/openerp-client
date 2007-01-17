@@ -43,9 +43,11 @@ import sys
 import tempfile
 
 class win_attach(object):
-	def __init__(self, model, id):
+	def __init__(self, model, id, parent=None):
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_attach',gettext.textdomain())
 		self.win = self.glade.get_widget('win_attach')
+		if parent:
+			self.win.set_transient_for(parent)
 		self.ressource = (model, id)
 
 		self.view = gtk.TreeView()
