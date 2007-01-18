@@ -26,7 +26,7 @@
 #
 ##############################################################################
 
-import os, time, base64
+import os, time, base64, datetime
 
 import service
 import rpc
@@ -92,6 +92,7 @@ class main(service.Service):
 
 			a = context.copy()
 			a['time'] = time
+			a['datetime'] = datetime
 			domain = tools.expr_eval(action['domain'], a)
 
 			if datas.get('domain', False):
