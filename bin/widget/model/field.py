@@ -193,7 +193,7 @@ class O2MField(CharField):
 	def __init__(self, parent, attrs):
 		super(O2MField, self).__init__(parent, attrs)
 		from widget.model.group import ModelRecordGroup
-		self.internal = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent)
+		self.internal = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent, context=self.context_get())
 
 	def _get_modified(self):
 		for model in self.internal.models:
@@ -229,7 +229,7 @@ class O2MField(CharField):
 
 	def set(self, value, test_state=False, modified=False):
 		from widget.model.group import ModelRecordGroup
-		self.internal = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent)
+		self.internal = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent, context=self.context_get())
 		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 		self.internal.pre_load(value, display=False)
 		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
