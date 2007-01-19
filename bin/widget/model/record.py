@@ -198,10 +198,11 @@ class ModelRecord(signal_event.signal_event):
 		value = self.rpc.read([self.id], self.fields.keys(), c)[0]
 		self.set(value)
 
-	def expr_eval(self, dom):
+	def expr_eval(self, dom, check_load=True):
 		if not isinstance(dom, basestring):
 			return dom
-		self._check_load()
+		if check_load:
+			self._check_load()
 		d = {}
 		for name, mfield in self.fields.items():
 			if not isinstance(mfield, field.O2MField):

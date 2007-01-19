@@ -64,11 +64,11 @@ class CharField(object):
 		dom = self.attrs.get('domain', '[]')
 		return self.parent.expr_eval(dom)
 
-	def context_get(self):
+	def context_get(self, check_load=True):
 		context = {}
 		context.update(self.parent.context_get())
 		field_context_str = self.attrs.get('context', '{}') or '{}'
-		field_context = self.parent.expr_eval('dict(%s)' % field_context_str)
+		field_context = self.parent.expr_eval('dict(%s)' % field_context_str, check_load=check_load)
 		context.update(field_context)
 		return context
 
@@ -193,6 +193,7 @@ class O2MField(CharField):
 	def __init__(self, parent, attrs):
 		super(O2MField, self).__init__(parent, attrs)
 		from widget.model.group import ModelRecordGroup
+		self.context={}
 		self.internal = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent, context=self.context_get())
 
 	def _get_modified(self):
@@ -229,7 +230,7 @@ class O2MField(CharField):
 
 	def set(self, value, test_state=False, modified=False):
 		from widget.model.group import ModelRecordGroup
-		self.internal = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent, context=self.context_get())
+		self.internal = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent, context=self.context_get(False))
 		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 		self.internal.pre_load(value, display=False)
 		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
