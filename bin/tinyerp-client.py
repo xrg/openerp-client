@@ -37,7 +37,7 @@ GNU Public Licence.
 (c) 2003-TODAY, Fabien Pinckaers - Tiny sprl
 """
 __author__ = 'Fabien Pinckaers, <fp@tiny.be>'
-__version__ = "4.1.0"
+__version__ = "4.1.1"
 
 import __builtin__
 __builtin__.__dict__['tinyerp_version'] = __version__
