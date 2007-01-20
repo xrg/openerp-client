@@ -182,9 +182,16 @@ class ModelRecord(signal_event.signal_event):
 		self.signal('record-changed')
 
 	def set(self, val, modified=False):
+		later={}
 		for fieldname, value in val.items():
 			if fieldname not in self.fields:
 				continue
+			if isinstance(self.fields[fieldname], field.O2MField):
+				later[fieldname]=value
+				continue
+			self.fields[fieldname].set(value)
+			self.fields[fieldname].modified = modified
+		for fieldname, value in later.items():
 			self.fields[fieldname].set(value)
 			self.fields[fieldname].modified = modified
 		self._loaded = True
