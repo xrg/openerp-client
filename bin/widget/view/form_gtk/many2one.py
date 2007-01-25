@@ -84,7 +84,7 @@ class many2one(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		self._readonly = False
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_reference")
+		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_reference", gettext.textdomain())
 		self.win_gl.signal_connect('on_reference_new_button_press', self.sig_new )
 		self.win_gl.signal_connect('on_reference_edit_button_press', self.sig_edit )
 		self.widget = self.win_gl.get_widget('widget_reference')

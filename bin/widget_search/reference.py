@@ -28,6 +28,7 @@
 
 import gtk
 from gtk import glade
+import gettext
 
 import common
 import wid_int
@@ -36,7 +37,7 @@ import rpc
 class reference(wid_int.wid_int):
 	def __init__(self, name, parent, attrs={}):
 		wid_int.wid_int.__init__(self, name, parent, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_reference")
+		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_reference", gettext.textdomain())
 		self.win_gl.signal_connect('on_but_clear_clicked', self.clear)
 		self.widget = self.win_gl.get_widget('widget_reference')
 

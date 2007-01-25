@@ -29,6 +29,7 @@ import time
 import gtk
 import common
 from gtk import glade
+import gettext
 
 import wid_int
 
@@ -37,7 +38,7 @@ DT_FORMAT = '%Y-%m-%d'
 class calendar(wid_int.wid_int):
 	def __init__(self, name, parent, attrs={}):
 		wid_int.wid_int.__init__(self, name, parent, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"wid_sea_cal")
+		self.win_gl = glade.XML(common.terp_path("terp.glade"),"wid_sea_cal", gettext.textdomain())
 
 		self.widget = self.win_gl.get_widget('wid_sea_cal')
 		self.entry1 = self.win_gl.get_widget('sea_ent1')
@@ -71,7 +72,7 @@ class calendar(wid_int.wid_int):
 
 	# dest = the first or the second entry (dates are inputed in range of dates)
 	def cal_open(self, widget, event, dest):
-		win_gl = glade.XML(common.terp_path("terp.glade"),"dia_form_wid_calendar")
+		win_gl = glade.XML(common.terp_path("terp.glade"),"dia_form_wid_calendar", gettext.textdomain())
 		win = win_gl.get_widget('dia_form_wid_calendar')
 		cal = win_gl.get_widget('cal_calendar')
 		try:

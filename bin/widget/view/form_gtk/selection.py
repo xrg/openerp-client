@@ -33,6 +33,8 @@ import gtk
 import gobject
 from gtk import glade
 
+import gettext
+
 
 # Can be improved !!!
 
@@ -40,7 +42,7 @@ class selection(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-		win_gl = glade.XML(common.terp_path("terp.glade"),"widget_combobox")
+		win_gl = glade.XML(common.terp_path("terp.glade"),"widget_combobox", gettext.textdomain())
 		self.widget = win_gl.get_widget('widget_combobox')
 
 		#self.widget = gtk.combo_box_entry_new_text()

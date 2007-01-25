@@ -31,6 +31,8 @@ import base64
 import gtk
 from gtk import glade
 
+import gettext
+
 import interface
 import os
 
@@ -39,7 +41,7 @@ import common
 class wid_binary(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_binary")
+		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_binary",gettext.textdomain())
 		self.win_gl.signal_connect('on_but_new_clicked', self.sig_new)
 #		self.win_gl.signal_connect('on_but_open_clicked', self.sig_open)
 		self.win_gl.signal_connect('on_but_remove_clicked', self.sig_remove)

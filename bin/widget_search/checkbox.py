@@ -28,6 +28,7 @@
 
 import gtk
 from gtk import glade
+import gettext
 
 import common
 import wid_int
@@ -35,7 +36,7 @@ import wid_int
 class checkbox(wid_int.wid_int):
 	def __init__(self, name, parent, attrs={}):
 		wid_int.wid_int.__init__(self, name, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"wid_sea_check2")
+		self.win_gl = glade.XML(common.terp_path("terp.glade"),"wid_sea_check2", gettext.textdomain())
 		self.widget = self.win_gl.get_widget('wid_sea_check2')
 
 		self.entry = self.win_gl.get_widget('combobox_checkbox').child

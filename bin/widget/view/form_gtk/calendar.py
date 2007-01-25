@@ -32,6 +32,8 @@ import datetime as DT
 import gtk
 from gtk import glade
 
+import gettext
+
 import common
 import interface
 import locale
@@ -49,7 +51,7 @@ if not hasattr(locale, 'D_FMT'):
 class calendar(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, attrs=attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_calendar")
+		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_calendar", gettext.textdomain())
 		self.win_gl.signal_connect('on_but_calendar_clicked', self.cal_open)
 		self.widget = self.win_gl.get_widget('widget_calendar')
 		self.entry = self.win_gl.get_widget('ent_calendar')
@@ -100,7 +102,7 @@ class calendar(interface.widget_interface):
 		if self.readonly:
 			common.message(_('This widget is readonly !'))
 			return True
-		win_gl = glade.XML(common.terp_path("terp.glade"),"dia_form_wid_calendar")
+		win_gl = glade.XML(common.terp_path("terp.glade"),"dia_form_wid_calendar", gettext.textdomain())
 		win = win_gl.get_widget('dia_form_wid_calendar')
 		cal = win_gl.get_widget('cal_calendar')
 		win.set_destroy_with_parent(True)
@@ -126,7 +128,7 @@ class calendar(interface.widget_interface):
 class datetime(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs=attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_calendar")
+		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_calendar", gettext.textdomain())
 		self.win_gl.signal_connect('on_but_calendar_clicked', self.cal_open)
 		self.widget = self.win_gl.get_widget('widget_calendar')
 		self.entry = self.win_gl.get_widget('ent_calendar')
@@ -178,7 +180,7 @@ class datetime(interface.widget_interface):
 		if self.readonly:
 			common.message(_('This widget is readonly !'))
 			return True
-		win_gl = glade.XML(common.terp_path("terp.glade"),"dia_form_wid_datetime")
+		win_gl = glade.XML(common.terp_path("terp.glade"),"dia_form_wid_datetime", gettext.textdomain())
 		win = win_gl.get_widget('dia_form_wid_datetime')
 		hour = win_gl.get_widget('hour')
 		minute = win_gl.get_widget('minute')
@@ -216,7 +218,7 @@ class datetime(interface.widget_interface):
 class stime(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, parent, attrs=attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_time")
+		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_time", gettext.textdomain())
 		self.widget = self.win_gl.get_widget('widget_time')
 		self.entry = self.win_gl.get_widget('widget_time_entry')
 		self.value=False

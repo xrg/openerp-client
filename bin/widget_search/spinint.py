@@ -28,6 +28,7 @@
 
 import gtk
 from gtk import glade
+import gettext
 
 import common
 import wid_int
@@ -37,7 +38,7 @@ class spinint(wid_int.wid_int):
 		wid_int.wid_int.__init__(self, name, attrs)
 		adj1 = gtk.Adjustment(0.0, 0.0, 1000000000, 1.0, 5.0, 5.0)
 		adj2 = gtk.Adjustment(0.0, 0.0, 1000000000, 1.0, 5.0, 5.0)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"wid_sea_int")
+		self.win_gl = glade.XML(common.terp_path("terp.glade"),"wid_sea_int", gettext.textdomain())
 		self.widget = self.win_gl.get_widget('wid_sea_int')
 		self.spin1 = self.win_gl.get_widget('sea_spin1')
 		self.spin2 = self.win_gl.get_widget('sea_spin2')

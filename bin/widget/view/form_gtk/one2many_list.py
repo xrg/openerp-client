@@ -93,7 +93,7 @@ class one2many_list(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-		self.win_gl = glade.XML(common.terp_path("terp.glade"), "widget_one2many_list")
+		self.win_gl = glade.XML(common.terp_path("terp.glade"), "widget_one2many_list", gettext.textdomain())
 
 		self.win_gl.signal_connect('on_o2m_but_new_button_press_event', self._sig_new)
 		self.win_gl.signal_connect('on_o2m_but_open_button_press_event', self._sig_edit)
