@@ -82,16 +82,35 @@ def _server_ask(server_widget):
 	win.set_default_response(gtk.RESPONSE_OK)
 	host_widget = win_gl.get_widget('ent_host')
 	port_widget = win_gl.get_widget('ent_port')
-	secure_widget = win_gl.get_widget('check_secure')
-	m = re.match('^(http[s]?)://([\w.-]+):(\d{1,5})$', server_widget.get_text())
+	protocol_widget = win_gl.get_widget('protocol')
+
+	protocol={'XML-RPC': 'http://',
+			'XML-RPC secure': 'https://',
+			'TinySocket (faster)': 'socket://',}
+	listprotocol = gtk.ListStore(str)
+	protocol_widget.set_model(listprotocol)
+
+
+	m = re.match('^(http[s]?://|socket://)([\w.-]+):(\d{1,5})$', server_widget.get_text())
 	if m:
-		secure_widget.set_active(m.group(1) == 'https')
+#		secure_widget.set_active(m.group(1) == 'https://')
 		host_widget.set_text(m.group(2))
 		port_widget.set_text(m.group(3))
+
+	index = 0
+	i = 0
+	for p in protocol:
+		listprotocol.append([p])
+		if m and protocol[p] == m.group(1):
+			index = i
+		i += 1
+	protocol_widget.set_active(index)
+
 	res = win.run()
 	if res == gtk.RESPONSE_OK:
-		protocol = secure_widget.get_active() and 'https' or 'http'
-		url = '%s://%s:%s' % (protocol, host_widget.get_text(), port_widget.get_text())
+#		protocol = secure_widget.get_active() and 'https://' or 'http://'
+		protocol = protocol[protocol_widget.get_active_text()]
+		url = '%s%s:%s' % (protocol, host_widget.get_text(), port_widget.get_text())
 		server_widget.set_text(url)
 		result = url
 	win.destroy()
@@ -140,10 +159,9 @@ class db_login(object):
 
 		host = options.options['login.server']
 		port = options.options['login.port']
-		secure = options.options['login.secure']
+		protocol = options.options['login.protocol']
 		
-		protocol = secure and 'https' or 'http'
-		url = '%s://%s:%s' % (protocol, host, port)
+		url = '%s%s:%s' % (protocol, host, port)
 		server_widget.set_text(url)
 		login.set_text(options.options['login.login'])
 
@@ -169,9 +187,9 @@ class db_login(object):
 		if res == gtk.RESPONSE_CANCEL:
 			win.destroy()
 			raise 'QueryCanceled'
-		m = re.match('^(http[s]?)://([\w.\-]+):(\d{1,5})$', server_widget.get_text() or '')
+		m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', server_widget.get_text() or '')
 		if m:
-			result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1) == 'https', db_widget.get_active_text())
+			result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), db_widget.get_active_text())
 		else:
 			win.destroy()
 			raise 'QueryCanceled'
@@ -217,8 +235,8 @@ class db_create(object):
 		demo_widget.set_active(True)
 
 		change_button.connect_after('clicked', self.server_change)
-		protocol = options.options['login.secure'] and 'https' or 'http'
-		url = '%s://%s:%s' % (protocol, options.options['login.server'], options.options['login.port'])
+		protocol = options.options['login.protocol']
+		url = '%s%s:%s' % (protocol, options.options['login.server'], options.options['login.port'])
 
 		self.server_widget.set_text(url)
 		liststore = gtk.ListStore(str, str)
@@ -550,11 +568,11 @@ class terp_main(service.Service):
 				options.options['login.server'] = res[2]
 				options.options['login.login'] = res[0]
 				options.options['login.port'] = res[3]
-				options.options['login.secure'] = res[4]
+				options.options['login.protocol'] = res[4]
 				options.options['login.db'] = res[5]
 				options.options.save()
 				self.sig_win_new()
-				if res[4]:
+				if res[4] == 'https://':
 					self.secure_img.show()
 				else:
 					self.secure_img.hide()
@@ -757,9 +775,8 @@ class terp_main(service.Service):
 
 		host = options.options['login.server']
 		port = options.options['login.port']
-		secure = options.options['login.secure']
-		protocol = secure and 'https' or 'http'
-		url = '%s://%s:%s' % (protocol, host, port)
+		protocol = options.options['login.protocol']
+		url = '%s%s:%s' % (protocol, host, port)
 		server_widget.set_text(url)
 
 		res = win.run()
@@ -841,8 +858,8 @@ class terp_main(service.Service):
 
 		dialog.get_widget('db_select_label').set_markup('<b>'+title+'</b>')
 
-		protocol = options.options['login.secure'] and 'https' or 'http'
-		url = '%s://%s:%s' % (protocol, options.options['login.server'], options.options['login.port'])
+		protocol = options.options['login.protocol']
+		url = '%s%s:%s' % (protocol, options.options['login.server'], options.options['login.port'])
 		server_widget.set_text(url)
 
 		liststore = gtk.ListStore(str)
@@ -876,7 +893,7 @@ class terp_main(service.Service):
 		widget_pass = dialog.get_widget('ent_password')
 		widget_url = dialog.get_widget('ent_server')
 
-		protocol = options.options['login.secure'] and 'https' or 'http'
+		protocol = options.options['login.protocol']
 		url = '%s://%s:%s' % (protocol, options.options['login.server'], options.options['login.port'])
 		widget_url.set_text(url)
 

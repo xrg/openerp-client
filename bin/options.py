@@ -61,7 +61,7 @@ class configmanager(object):
 			'login.login': 'demo',
 			'login.server': 'localhost',
 			'login.port': '8069',
-			'login.secure': False,
+			'login.protocol': 'http://',
 			'login.db': 'terp',
 			'client.modepda': False,
 			'client.toolbar': 'both',

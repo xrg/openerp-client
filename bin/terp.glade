@@ -14040,7 +14040,7 @@ Latin1</property>
 	  <child>
 	    <widget class="GtkLabel" id="label269">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Secure connection:</property>
+	      <property name="label" translatable="yes">Protocol connection:</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -14058,30 +14058,6 @@ Latin1</property>
 	    <packing>
 	      <property name="left_attach">0</property>
 	      <property name="right_attach">1</property>
-	      <property name="top_attach">2</property>
-	      <property name="bottom_attach">3</property>
-	      <property name="x_options">fill</property>
-	      <property name="y_options"></property>
-	    </packing>
-	  </child>
-
-	  <child>
-	    <widget class="GtkCheckButton" id="check_secure">
-	      <property name="visible">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="relief">GTK_RELIEF_NORMAL</property>
-	      <property name="focus_on_click">True</property>
-	      <property name="active">False</property>
-	      <property name="inconsistent">False</property>
-	      <property name="draw_indicator">True</property>
-
-	      <child>
-		<placeholder/>
-	      </child>
-	    </widget>
-	    <packing>
-	      <property name="left_attach">1</property>
-	      <property name="right_attach">2</property>
 	      <property name="top_attach">2</property>
 	      <property name="bottom_attach">3</property>
 	      <property name="x_options">fill</property>
@@ -14115,6 +14091,23 @@ Latin1</property>
 	      <property name="bottom_attach">1</property>
 	      <property name="x_options">fill</property>
 	      <property name="y_options"></property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkComboBox" id="protocol">
+	      <property name="visible">True</property>
+	      <property name="items" translatable="yes"></property>
+	      <property name="add_tearoffs">False</property>
+	      <property name="focus_on_click">True</property>
+	    </widget>
+	    <packing>
+	      <property name="left_attach">1</property>
+	      <property name="right_attach">2</property>
+	      <property name="top_attach">2</property>
+	      <property name="bottom_attach">3</property>
+	      <property name="x_options">fill</property>
+	      <property name="y_options">fill</property>
 	    </packing>
 	  </child>
 	</widget>
