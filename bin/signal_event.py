@@ -33,6 +33,7 @@ class signal_event(object):
 
 	def signal(self, signal, signal_data=None):
 		for fnct,data,key in self.__connects.get(signal, []):
+			#print "SIGNAL", signal, fnct
 			fnct(self, signal_data, *data)
 		return True
 

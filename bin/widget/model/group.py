@@ -119,6 +119,14 @@ class ModelRecordGroup(signal_event.signal_event):
 				self.signal('model-changed', newmod)
 		return True
 
+	def load_for(self, values):
+		for value in values:
+			newmod = ModelRecord(self.resource, value['id'], self.fields,
+						parent=self.parent, group=self)
+			newmod.set(value)
+			self.models.append(newmod)
+			newmod.signal_connect(self, 'record-changed', self._record_changed)
+
 	def load(self, ids, display=True):
 		if not ids:
 			return True
@@ -128,12 +136,12 @@ class ModelRecordGroup(signal_event.signal_event):
 		c.update(self.context)
 		values = self.rpc.read(ids, self.fields.keys(), c)
 		newmod = False
-		for value in values:
-			newmod = ModelRecord(self.resource, value['id'], self.fields,
-						parent=self.parent, group=self)
-			newmod.set(value)
-			self.models.append(newmod)
-			newmod.signal_connect(self, 'record-changed', self._record_changed)
+		print 'Start Filling'
+		import hotshot
+		prof = hotshot.Profile("/tmp/debug2.prof")
+		prof.runcall(self.load_for, values)
+		prof.close()
+		print 'End Filling'
 		if newmod and display:
 			self.signal('model-changed', newmod)
 		self.current_idx = 0

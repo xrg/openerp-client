@@ -239,6 +239,7 @@ class ViewList(object):
 	# has not changed -> better ergonomy. To test
 	#
 	def display(self):
+		print 'DISPALY VIEW LIST'
 		if (not self.widget.get_model()) or self.screen.models<>self.widget.get_model().model_group:
 			self.store = AdaptModelGroup(self.screen.models)
 			self.widget.set_model(self.store)

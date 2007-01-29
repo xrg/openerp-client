@@ -81,7 +81,7 @@ class parser_tree(interface.parser_interface):
 				node_attrs.update(fields[fname])
 				cell = Cell(fields[fname]['type'])(fname, treeview, node_attrs)
 				renderer = cell.renderer
-				if editable:
+				if editable and not node_attrs.get('readonly', False):
 					renderer.set_property('editable', True)
 					renderer.connect_after('editing-started', send_keys, treeview)
 #					renderer.connect_after('editing-canceled', self.editing_canceled)
