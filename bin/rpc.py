@@ -179,6 +179,7 @@ class rpc_session(object):
 		if _protocol == 'http://' or _protocol == 'https://':
 			_url = _protocol + url+':'+str(port)+'/xmlrpc'
 			_sock = xmlrpclib.ServerProxy(_url+'/common')
+			self._gw = xmlrpc_gw
 			try:
 				res = _sock.login(db or '', uname or '', passwd or '')
 			except socket.error,e:
