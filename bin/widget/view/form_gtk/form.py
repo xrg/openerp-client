@@ -261,7 +261,7 @@ class parser_form(widget.view.interface.parser_interface):
 				notebook.append_page(widget, l)
 
 			elif node.localName=='field':
-				name = attrs['name']
+				name = str(attrs['name'])
 				del attrs['name']
 				type = attrs.get('widget', fields[name]['type'])
 				fields[name].update(attrs)
@@ -324,7 +324,7 @@ class parser_form(widget.view.interface.parser_interface):
 				paned.pack2(widget, resize=True, shrink=True)
 			elif node.localName=='action':
 				from action import action
-				name = attrs['name']
+				name = str(attrs['name'])
 				widget_act = action(self.window, self.parent, model, attrs)
 				dict_widget[name] = widget_act
 				container.wid_add(widget_act.widget, colspan=int(attrs.get('colspan', 3)), expand=True)

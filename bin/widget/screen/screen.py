@@ -161,7 +161,7 @@ class Screen(signal_event.signal_event):
 							attrs['widget']='one2many'
 						attrs['type'] = attrs['widget']
 					try:
-						fields[attrs['name']].update(attrs)
+						fields[str(attrs['name'])].update(attrs)
 					except:
 						print "-"*30,"\n malformed tag for :", attrs
 						print "-"*30

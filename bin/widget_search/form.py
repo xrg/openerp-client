@@ -97,20 +97,20 @@ class parse(object):
 			self.title = attrs.get('string','Form')
 			self.container.new(self.col)
 		elif name=='field':
-			if attrs.get('select', False) or self.fields[attrs['name']].get('select', False):
-				type = attrs.get('widget', self.fields[attrs['name']]['type'])
-				self.fields[attrs['name']].update(attrs)
-				self.fields[attrs['name']]['model']=self.model
-				widget_act = widgets_type[ type ][0](attrs['name'], self.parent, self.fields[attrs['name']])
-				if 'string' in self.fields[attrs['name']]:
-					label = self.fields[attrs['name']]['string']+' :'
+			if attrs.get('select', False) or self.fields[str(attrs['name'])].get('select', False):
+				type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
+				self.fields[str(attrs['name'])].update(attrs)
+				self.fields[str(attrs['name'])]['model']=self.model
+				widget_act = widgets_type[ type ][0](str(attrs['name']), self.parent, self.fields[attrs['name']])
+				if 'string' in self.fields[str(attrs['name'])]:
+					label = self.fields[str(attrs['name'])]['string']+' :'
 				else:
 					label = None
 				self.dict_widget[str(attrs['name'])] = widget_act
 				size = widgets_type[ type ][1]
 				if not self.focusable:
 					self.focusable = widget_act.widget
-				self.container.wid_add(widget_act.widget, size, label, int(self.fields[attrs['name']].get('expand',0)))
+				self.container.wid_add(widget_act.widget, size, label, int(self.fields[str(attrs['name'])].get('expand',0)))
 
 	def _psr_end(self, name):
 		pass

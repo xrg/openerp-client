@@ -54,8 +54,8 @@ class parser_graph(interface.parser_interface):
 		for node in root_node.childNodes:
 			node_attrs = tools.node_attributes(node)
 			if node.localName == 'field':
-				axis.append(node_attrs['name'])
-				axis_data[node_attrs['name']] = node_attrs
+				axis.append(str(node_attrs['name']))
+				axis_data[str(node_attrs['name'])] = node_attrs
 
 		#
 		# TODO: parse root_node to fill in axis

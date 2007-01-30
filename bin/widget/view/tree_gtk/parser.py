@@ -73,7 +73,7 @@ class parser_tree(interface.parser_interface):
 		for node in root_node.childNodes:
 			node_attrs = tools.node_attributes(node)
 			if node.localName == 'field':
-				fname = node_attrs['name']
+				fname = str(node_attrs['name'])
 				for boolean_fields in ('readonly', 'required'):
 					if boolean_fields in node_attrs:
 						node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
