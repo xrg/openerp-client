@@ -10,8 +10,10 @@ class mysocket:
 		else:
 			self.sock = sock
 		self.sock.settimeout(60)
-	def connect(self, host, port):
-		self.sock.connect((host, port))
+	def connect(self, url):
+		protocol, buf = url.split('//')
+		host, port = buf.split(':')
+		self.sock.connect((host, int(port)))
 	def disconnect(self):
 		self.sock.shutdown(socket.SHUT_RDWR)
 		self.sock.close()

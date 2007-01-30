@@ -110,7 +110,7 @@ class tinySocket_gw(gw_inter):
 		logging.getLogger('rpc.result').debug(str(res))
 		return res
 	def execute(self, method, *args):
-		self._sock.connect(self._url, 8085)
+		self._sock.connect(self._url)
 		self._sock.mysend((self._obj, method, self._db)+args)
 		res = self._sock.myreceive()
 		self._sock.disconnect()
@@ -190,11 +190,11 @@ class rpc_session(object):
 				self.uid=False
 				return -2
 		else:
-			_url = url
+			_url = _protocol+url+':'+str(port)
 			_sock = tiny_socket.mysocket()
 			self._gw = tinySocket_gw
 			try:
-				_sock.connect(_url, 8085)
+				_sock.connect(_url)
 				_sock.mysend(('common', 'login', db or '', uname or '', passwd or ''))
 				res = _sock.myreceive()
 				_sock.disconnect()
@@ -229,7 +229,7 @@ class rpc_session(object):
 		else:
 			sock = tiny_socket.mysocket()
 			try:
-				sock.connect(m.group(2), 8085)
+				sock.connect(url)
 				sock.mysend(('db', 'list'))
 				res = sock.myreceive()
 				sock.disconnect()
@@ -245,9 +245,10 @@ class rpc_session(object):
 		else:
 			sock = tiny_socket.mysocket()
 			try:
-				sock.connect(m.group(2), 8085)
+				sock.connect(url)
 				sock.mysend(('db', method)+args)
 				res = sock.myreceive()
+				print "res:", res
 				sock.disconnect()
 				return res
 			except:

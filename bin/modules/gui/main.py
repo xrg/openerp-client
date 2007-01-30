@@ -301,12 +301,12 @@ class db_create(object):
 			win.destroy()
 
 			if res == gtk.RESPONSE_OK:
-				m = re.match('^(http[s]?)://([\w.]+):(\d{1,5})$', url)
+				m = re.match('^(http[s]?://|socket://)([\w.]+):(\d{1,5})$', url)
 				res = ['admin', 'admin']
 				if m:
 					res.append( m.group(2) )
 					res.append( m.group(3) )
-					res.append( m.group(1) == 'https' )
+					res.append( m.group(1) )
 					res.append( dbname )
 
 				self.sig_login(dbname=dbname, res=res)
@@ -630,8 +630,9 @@ class terp_main(service.Service):
 		id = self.sb_username.get_context_id('message')
 		self.sb_username.push(id, act_id[0]['name'] or '')
 		id = self.sb_servername.get_context_id('message')
+		print "url:", rpc.session._url
 		data = urlparse.urlsplit(rpc.session._url)
-		self.sb_servername.push(id, data[0]+'//'+data[1]+' ['+options.options['login.db']+']')
+		self.sb_servername.push(id, data[0]+':'+(data[1] and '//'+data[1] or data[2])+' ['+options.options['login.db']+']')
 		if not act_id[0]['action_id']:
 			common.warning('You can not log into the system !\nAsk the administrator to verify\nyou have an action defined for your user.','Access Denied !')
 			rpc.session.logout()
