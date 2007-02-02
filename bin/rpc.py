@@ -78,7 +78,6 @@ class xmlrpc_gw(gw_inter):
 		logging.getLogger('rpc.request').info(str((method, self._db, self._uid, self._passwd, args)))
 		res = self.execute(method, self._uid, self._passwd, *args)
 		logging.getLogger('rpc.result').debug(str(res))
-		print len(res)
 		return res
 
 	def __convert(self, result):
