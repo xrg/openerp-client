@@ -247,7 +247,7 @@ class O2MField(CharField):
 			fields = rpc2.fields_get(value[0].keys(), context)
 
 		self.internal = ModelRecordGroup(resource=self.attrs['relation'], fields=fields, parent=self.parent)
-		self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
+		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 		mod=None
 		for record in value:
 			mod = self.internal.model_new(default=False)

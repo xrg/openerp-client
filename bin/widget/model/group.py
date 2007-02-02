@@ -187,6 +187,7 @@ class ModelRecordGroup(signal_event.signal_event):
 		newmod.signal_connect(self, 'record-changed', self._record_changed)
 		if default:
 			newmod.default_get(domain, context)
+		self.signal('model-changed', newmod)
 		return newmod
 	
 	def model_remove(self, model):
