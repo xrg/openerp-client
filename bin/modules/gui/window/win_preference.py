@@ -40,10 +40,10 @@ import copy
 from widget.screen import Screen
 
 class win_preference(object):
-	def __init__(self, model, id, preferences):
-		print gettext.textdomain()
+	def __init__(self, model, id, preferences, parent=None):
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_preference', gettext.textdomain())
 		self.win = self.glade.get_widget('win_preference')
+		self.win.set_transient_for(parent)
 		self.id = id
 		self.model = model
 

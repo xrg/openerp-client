@@ -36,6 +36,7 @@ import os
 import common
 import logging
 from options import options
+import service
 
 import ConfigParser
 
@@ -91,7 +92,7 @@ def start_content(content, fname=None):
 #
 # TODO: this code sucks
 #
-def selection(title, values, alwaysask=False):
+def selection(title, values, alwaysask=False, parent=None):
 	if len(values)==0:
 		return None
 	elif len(values)==1 and (not alwaysask):
@@ -99,6 +100,9 @@ def selection(title, values, alwaysask=False):
 		return (key, values[key])
 	xml = glade.XML(terp_path("terp.glade"), "win_selection", gettext.textdomain())
 	win = xml.get_widget('win_selection')
+	if not parent:
+		parent = service.LocalService('gui.main')
+	win.set_transient_for(parent)
 	label = xml.get_widget('win_sel_title')
 	if title:
 		label.set_text(title)
@@ -138,9 +142,9 @@ def selection(title, values, alwaysask=False):
 	win.destroy()
 	return res
 
-def tipoftheday():
+def tipoftheday(parent=None):
 	class tip(object):
-		def __init__(self):
+		def __init__(self, parent=None):
 			try:
 				self.number = int(options.options['tip.position'])
 			except:
@@ -149,6 +153,8 @@ def tipoftheday():
 				log.error('Invalid value for option tip.position ! See ~/.terprc !')
 			winglade=glade.XML(common.terp_path("terp.glade"), "win_tips", gettext.textdomain())
 			self.win = winglade.get_widget('win_tips')
+			if parent:
+				self.win.set_transient_for(parent)
 			self.label = winglade.get_widget('tip_label')
 			self.check = winglade.get_widget('tip_checkbutton')
 			dict = {
@@ -183,7 +189,7 @@ def tipoftheday():
 			options.options['tip.position'] = self.number+1
 			options.save()
 			self.win.destroy()
-	tip2 = tip()
+	tip2 = tip(parent)
 	return True
 
 def upload_email(email):
@@ -328,7 +334,7 @@ def support(*args):
 	win.destroy()
 	return True
 
-def error(title, message, details=''):
+def error(title, message, details='', parent=None):
 
 	log = logging.getLogger('common.message')
 	log.error('MSG %s: %s' % (str(message),details))
@@ -342,6 +348,9 @@ def error(title, message, details=''):
 
 	sur = glade.XML(terp_path("terp.glade"), "win_error",gettext.textdomain())
 	win = sur.get_widget('win_error')
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 	sur.get_widget('error_title').set_text(str(title))
 	sur.get_widget('error_info').set_text(str(message))
 	buf = gtk.TextBuffer()
@@ -388,6 +397,8 @@ def error(title, message, details=''):
 	return True
 
 def message(msg, type=gtk.MESSAGE_INFO, parent=None):
+	if not parent:
+		parent=service.LocalService('gui.main').window
 	dialog = gtk.MessageDialog(parent,
 	  gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
 	  type, gtk.BUTTONS_OK,
@@ -409,8 +420,9 @@ def message_box(title, msg, parent=None):
 	iter_start = buffer.get_start_iter()
 	buffer.insert(iter_start, msg)
 
-	if parent:
-		win.set_transient_for(parent)
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 
 	response = win.run()
 	win.destroy()
@@ -418,6 +430,8 @@ def message_box(title, msg, parent=None):
 
 
 def warning(msg, title='', parent=None):
+	if not parent:
+		parent=service.LocalService('gui.main').window
 	dialog = gtk.MessageDialog(parent, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK)
 	dialog.set_markup('<b>%s</b>\n\n%s' % (to_xml(title),to_xml(msg)))
 	dialog.show_all()
@@ -431,8 +445,9 @@ def sur(msg, parent=None):
 	l = sur.get_widget('lab_question')
 	l.set_text(msg)
 
-	if parent:
-		win.set_transient_for(parent)
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 
 	response = win.run()
 	win.destroy()
@@ -444,8 +459,9 @@ def sur_3b(msg, parent=None):
 	l = sur.get_widget('label')
 	l.set_text(msg)
 
-	if parent:
-		win.set_transient_for(parent)
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 
 	response = win.run()
 	win.destroy()
@@ -468,8 +484,9 @@ def ask(question, parent=None):
 	label.set_text(question)
 	entry = dia.get_widget('entry')
 
-	if parent:
-		win.set_transient_for(parent)
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 
 	response = win.run()
 	win.destroy()
@@ -508,9 +525,12 @@ class progress(object):
 			while not self.waiting:
 				time.sleep(0.01)
 
-	def __init__(self):
+	def __init__(self, parent=None):
 		self.dialog = glade.XML(common.terp_path("terp.glade"), "win_progress", gettext.textdomain())
 		self.win = self.dialog.get_widget('win_progress')
+		if not parent:
+			parent=service.LocalService('gui.main').window
+		self.win.set_transient_for(parent)
 		self.pb_widget = self.dialog.get_widget('progressbar')
 		self.thread=self._progress_thread(self.win, self.pb_widget)
 		

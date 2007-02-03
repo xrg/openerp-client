@@ -87,7 +87,7 @@ class widget_interface(object):
 		return self.widget
 
 	def color_set(self, name):
-		colors = {'invalid':'#ffdddd', 'readonly':'grey', 'required':'#ddddff', 'normal':'white'}
+		colors = {'invalid':'#ff6969', 'readonly':'grey', 'required':'#cbcbff', 'normal':'white'}
 		widget = self._color_widget()
 		map = widget.get_colormap()
 		colour = map.alloc_color(colors.get(name,'white'))

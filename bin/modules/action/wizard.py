@@ -39,10 +39,10 @@ from widget.screen import Screen
 
 
 class dialog(object):
-	def __init__(self, arch, fields, state, name):
+	def __init__(self, arch, fields, state, name, parent=None):
 		buttons = []
 		self.states=[]
-		self.dia = gtk.Dialog('Tiny ERP', None,
+		self.dia = gtk.Dialog('Tiny ERP', parent,
 			gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
 		for x in state:
 			#buttons.append(x[1])
@@ -89,12 +89,12 @@ class dialog(object):
 			return False
 	
 
-def execute(action, datas, state='init'):
+def execute(action, datas, state='init', parent=None):
 	if not 'form' in datas:
 		datas['form'] = {}
 	wiz_id = rpc.session.rpc_exec_auth('/wizard', 'create', action)
 	while state!='end':
-		thread_progress=common.progress()
+		thread_progress=common.progress(parent)
 		thread_progress.start()
 		try:
 			res = rpc.session.rpc_exec_auth('/wizard', 'execute', wiz_id, datas, state, rpc.session.context)
@@ -104,7 +104,7 @@ def execute(action, datas, state='init'):
 		if 'datas' in res:
 			datas['form'].update( res['datas'] )
 		if res['type']=='form':
-			dia = dialog(res['arch'], res['fields'], res['state'], action)
+			dia = dialog(res['arch'], res['fields'], res['state'], action, parent)
 			dia.screen.current_model.set( datas['form'] )
 			res = dia.run(datas['form'])
 			if not res:

@@ -145,9 +145,11 @@ class db_login(object):
 		url = _server_ask(server_widget)
 		return self.refreshlist(widget, db_widget, label, url, butconnect)
 
-	def run(self, dbname=None):
+	def run(self, dbname=None, parent=None):
 		uid = 0
 		win = self.win_gl.get_widget('win_login')
+		if parent:
+			win.set_transient_for(parent)
 		login = self.win_gl.get_widget('ent_login')
 		passwd = self.win_gl.get_widget('ent_passwd')
 		server_widget = self.win_gl.get_widget('ent_server')
@@ -223,8 +225,10 @@ class db_create(object):
 		self.dialog = glade.XML(common.terp_path("terp.glade"), "win_createdb", gettext.textdomain())
 		self.sig_login = sig_login
 
-	def run(self):
+	def run(self, parent=None):
 		win = self.dialog.get_widget('win_createdb')
+		if parent:
+			win.set_transient_for(parent)
 		lang_dict = {}
 		pass_widget = self.dialog.get_widget('ent_password_new')
 		self.server_widget = self.dialog.get_widget('ent_server_new')
@@ -250,7 +254,7 @@ class db_create(object):
 			res = win.run()
 			db_name = self.db_widget.get_text()
 			if (res==gtk.RESPONSE_OK) and ((not db_name) or (not re.match('^[a-zA-Z][a-zA-Z0-9_]+$', db_name))):
-				common.warning(_('The database name must contain only normal characters or "_".\nYou must avoid all accents, space or special characters.'), _('Bad database name !'))
+				common.warning(_('The database name must contain only normal characters or "_".\nYou must avoid all accents, space or special characters.'), _('Bad database name !'), parent=parent)
 
 			else:
 				break
@@ -267,16 +271,19 @@ class db_create(object):
 				id = rpc.session.db_exec(url, 'create', passwd, db_name, demo_data, langreal)
 				dialog = glade.XML(common.terp_path("terp.glade"), "win_progress", gettext.textdomain())
 				win = dialog.get_widget('win_progress')
+				if parent:
+					win.set_transient_for(parent)
 				pb_widget = dialog.get_widget('progressbar')
-				self.timer = gobject.timeout_add(1000, self.progress_timeout, pb_widget, url, passwd, id, win, db_name)
+				self.timer = gobject.timeout_add(1000, self.progress_timeout, pb_widget, url, passwd, id, win, db_name, parent)
 				win.show()
 			except Exception, e:
+				print e
 				if e.faultString=='AccessDenied:None':
 					common.warning(_('Bad database administrator password !'), _("Could not create database."))
 				else:
 					common.warning(_("Could not create database."),_('Error during database creation !'))
 	
-	def progress_timeout(self, pbar, url, passwd, id, win, dbname):
+	def progress_timeout(self, pbar, url, passwd, id, win, dbname, parent=None):
 		try:
 			progress,users = rpc.session.db_exec_no_except(url, 'get_progress', passwd, id)
 		except:
@@ -292,6 +299,8 @@ class db_create(object):
 			pwdlst = '\n'.join(map(lambda x: '    - %s: %s / %s' % (x['name'],x['login'],x['password']), users))
 			dialog = glade.XML(common.terp_path("terp.glade"), "dia_dbcreate_ok", gettext.textdomain())
 			win = dialog.get_widget('dia_dbcreate_ok')
+			if parent:
+				win.set_transient_for(parent)
 			buffer = dialog.get_widget('dia_tv').get_buffer()
 
 			buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
@@ -464,7 +473,12 @@ class terp_main(service.Service):
 			'on_opt_print_preview_activate': (fnc_menuitem, 'printer.preview', 'opt_print_preview'),
 			'on_opt_form_toolbar_activate': (fnc_menuitem, 'form.toolbar', 'opt_form_toolbar'),
 		}
+		self.glade.get_widget('menubar_'+(options.options['client.toolbar'] or 'both')).set_active(True)
 		self.sig_menubar(options.options['client.toolbar'] or 'both')
+		if options.options['client.modepda']:
+			self.glade.get_widget('mode_pda').set_active(True)
+		else:
+			self.glade.get_widget('mode_normal').set_active(True)
 		self.sig_mode()
 		for signal in dict:
 			self.glade.signal_connect(signal, dict[signal][0], dict[signal][1])
@@ -516,7 +530,7 @@ class terp_main(service.Service):
 	def sig_user_preferences(self, *args):
 		actions = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'meta', False, [('res.users',False)], True, rpc.session.context, True)
 
-		win = win_preference.win_preference('res.users', rpc.session.uid, actions)
+		win = win_preference.win_preference('res.users', rpc.session.uid, actions, parent=self.window)
 		if win.run():
 			rpc.session.context_reload()
 		return True
@@ -559,7 +573,7 @@ class terp_main(service.Service):
 			if not res:
 				try:
 					l = db_login()
-					res = l.run(dbname=dbname)
+					res = l.run(dbname=dbname, parent=self.window)
 				except 'QueryCanceled':
 					return False
 			self.sig_logout(widget)
@@ -608,14 +622,16 @@ class terp_main(service.Service):
 		tools.launch_browser('http://tinyerp.org/scripts/context_index.php?model=%s&lang=%s' % (model,l))
 
 	def sig_tips(self, *args):
-		common.tipoftheday()
+		common.tipoftheday(self.window)
 		
 	def sig_licence(self, widget):
 		dialog = glade.XML(common.terp_path("terp.glade"), "win_licence", gettext.textdomain())
+		dialog.get_widget('win_licence').set_transient_for(self.window)
 		dialog.signal_connect("on_but_ok_pressed", lambda obj: dialog.get_widget('win_licence').destroy())
 
 	def sig_about(self, widget):
 		about = glade.XML(common.terp_path("terp.glade"), "win_about", gettext.textdomain())
+		about.get_widget('win_about').set_transient_for(self.window)
 		buffer = about.get_widget('textview2').get_buffer()
 		about_txt = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 		buffer.set_text(about_txt % tinyerp_version)
@@ -623,6 +639,7 @@ class terp_main(service.Service):
 
 	def sig_shortcuts(self, widget):
 		shortcuts_win = glade.XML(common.terp_path('terp.glade'), 'shortcuts_dia', gettext.textdomain())
+		shortcuts_win.get_widget('shortcuts_dia').set_transient_for(self.window)
 		shortcuts_win.signal_connect("on_but_ok_pressed", lambda obj: shortcuts_win.get_widget('shortcuts_dia').destroy())
 
 	def sig_win_new(self, widget=None):
@@ -653,14 +670,16 @@ class terp_main(service.Service):
 		rpc.session.logout()
 
 	def sig_quit(self, widget):
+		options.options.save()
 		gtk.main_quit()
 
 	def sig_close(self, widget):
-		if common.sur(_("Do you really want to quit ?")):
+		if common.sur(_("Do you really want to quit ?"), parent=self.window):
+			options.options.save()
 			gtk.main_quit()
 
 	def sig_delete(self, widget, event, data=None):
-		return not common.sur(_("Do you really want to quit ?"))
+		return not common.sur(_("Do you really want to quit ?"), parent=self.window)
 
 	def win_add(self, win, datas):
 		self.pages.append(win)
@@ -717,7 +736,7 @@ class terp_main(service.Service):
 
 	def sig_db_new(self, widget):
 		dia = db_create(self.sig_login)
-		res = dia.run()
+		res = dia.run(self.window)
 
 	def sig_db_drop(self, widget):
 		# 1) choose db (selection)
@@ -727,18 +746,18 @@ class terp_main(service.Service):
 
 		try:
 			rpc.session.db_exec(url, 'drop', passwd, db_name)
-			common.message(_("Database dropped successfully !"))
+			common.message(_("Database dropped successfully !"), parent=self.window)
 		except Exception, e:
 			if e.faultString=='AccessDenied:None':
-				common.warning(_('Bad database administrator password !'),_("Could not drop database."))
+				common.warning(_('Bad database administrator password !'),_("Could not drop database."), parent=self.window)
 			else:
-				common.warning(_("Couldn't drop database"))
+				common.warning(_("Couldn't drop database"), parent=self.window)
 
 	def sig_db_restore(self, widget):
 		# 1) choose file
 			
 		chooser = gtk.FileChooserDialog(title='Open...', action=gtk.FILE_CHOOSER_ACTION_OPEN,
-										buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK))
+										buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK), parent=self.window)
 		filename = False
 		res = chooser.run()
 		if res == gtk.RESPONSE_OK:
@@ -757,16 +776,17 @@ class terp_main(service.Service):
 				data_b64 = base64.encodestring(f.read())
 				f.close()
 				rpc.session.db_exec(url, 'restore', passwd, db_name, data_b64)
-				common.message(_("Database restored successfully !"))
+				common.message(_("Database restored successfully !"), parent=self.window)
 			except Exception,e:
 				if e.faultString=='AccessDenied:None':
-					common.warning(_('Bad database administrator password !'),_("Could not restore database."))
+					common.warning(_('Bad database administrator password !'),_("Could not restore database."), parent=self.window)
 				else:
-					common.warning(_("Couldn't restore database"))
+					common.warning(_("Couldn't restore database"), parent=self.window)
 		
 	def sig_db_password(self, widget):
 		dialog = glade.XML(common.terp_path("terp.glade"), "dia_passwd_change", gettext.textdomain())
 		win = dialog.get_widget('dia_passwd_change')
+		win.set_transient_for(self.window)
 		server_widget = dialog.get_widget('ent_server')
 		old_pass_widget = dialog.get_widget('old_passwd')
 		new_pass_widget = dialog.get_widget('new_passwd')
@@ -787,15 +807,15 @@ class terp_main(service.Service):
 			new_passwd = new_pass_widget.get_text()
 			new_passwd2 = new_pass2_widget.get_text()
 			if new_passwd != new_passwd2:
-				common.warning(_("Confirmation password do not match new password, operation cancelled!"), _("Validation Error."))
+				common.warning(_("Confirmation password do not match new password, operation cancelled!"), _("Validation Error."), parent=self.window)
 			else:
 				try:
 					rpc.session.db_exec(url, 'change_admin_password', old_passwd, new_passwd)
 				except Exception,e:
 					if e.faultString=='AccessDenied:None':
-						common.warning(_("Could not change password database."),_('Bas password provided !'))
+						common.warning(_("Could not change password database."),_('Bas password provided !'), parent=self.window)
 					else:
-						common.warning(_("Error, password not changed."))
+						common.warning(_("Error, password not changed."), parent=self.window)
 		win.destroy()
 
 	def sig_db_dump(self, widget):
@@ -806,7 +826,7 @@ class terp_main(service.Service):
 
 		# 2) choose file
 		chooser = gtk.FileChooserDialog(title='Save As...', action=gtk.FILE_CHOOSER_ACTION_SAVE,
-			buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK))
+			buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK), parent=self.window)
 		res = chooser.run()
 
 		filename = False
@@ -821,9 +841,9 @@ class terp_main(service.Service):
 				f = file(filename, 'wb')
 				f.write(dump)
 				f.close()
-				common.message(_("Database backuped successfully !"))
+				common.message(_("Database backuped successfully !"), parent=self.window)
 			except:
-				common.warning(_("Couldn't backup database."))
+				common.warning(_("Couldn't backup database."), parent=self.window)
 
 	def _choose_db_select(self, title=_("Backup a database")):
 		def refreshlist(widget, db_widget, label, url):
@@ -850,6 +870,7 @@ class terp_main(service.Service):
 
 		dialog = glade.XML(common.terp_path("terp.glade"), "win_db_select", gettext.textdomain())
 		win = dialog.get_widget('win_db_select')
+		win.set_transient_for(self.window)
 
 		pass_widget = dialog.get_widget('ent_passwd_select')
 		server_widget = dialog.get_widget('ent_server_select')
@@ -889,6 +910,7 @@ class terp_main(service.Service):
 	def _choose_db_ent(self):
 		dialog = glade.XML(common.terp_path("terp.glade"), "win_db_ent", gettext.textdomain())
 		win = dialog.get_widget('win_db_ent')
+		win.set_transient_for(self.window)
 
 		db_widget = dialog.get_widget('ent_db')
 		widget_pass = dialog.get_widget('ent_password')

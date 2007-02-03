@@ -33,6 +33,7 @@ import socket
 
 import tiny_socket
 
+import service
 import common
 import options
 

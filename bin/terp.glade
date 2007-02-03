@@ -9,7 +9,7 @@
   <property name="visible">True</property>
   <property name="title" translatable="yes">Tiny ERP - Login</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_CENTER</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">True</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">True</property>
@@ -1252,7 +1252,7 @@
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Normal</property>
 				  <property name="use_underline">True</property>
-				  <property name="active">False</property>
+				  <property name="active">True</property>
 				  <signal name="activate" handler="on_mode_normal_activate" last_modification_time="Mon, 20 Mar 2006 17:20:58 GMT"/>
 				</widget>
 			      </child>
@@ -1262,7 +1262,7 @@
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Mode PDA</property>
 				  <property name="use_underline">True</property>
-				  <property name="active">True</property>
+				  <property name="active">False</property>
 				  <property name="group">mode_normal</property>
 				  <signal name="activate" handler="on_mode_pda_activate" last_modification_time="Mon, 20 Mar 2006 17:20:58 GMT"/>
 				</widget>

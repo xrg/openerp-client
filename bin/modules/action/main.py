@@ -105,9 +105,11 @@ class main(service.Service):
 			#	del rpc.session.context[key]
 
 		elif action['type']=='ir.actions.wizard':
+			win=None
 			if 'window' in datas:
+				win=datas['window']
 				del datas['window']
-			wizard.execute(action['wiz_name'], datas)
+			wizard.execute(action['wiz_name'], datas, parent=win)
 
 		elif action['type']=='ir.actions.report.custom':
 			datas['report_id'] = action['report_id']
@@ -124,7 +126,8 @@ class main(service.Service):
 				actions = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', keyword, [(data['model'], id)], False, rpc.session.context)
 				actions = map(lambda x: x[2], actions)
 			except rpc.rpc_exception, e:
-				common.error(_('Error: ')+str(e.type), e.message, e.data)
+#				common.error(_('Error: ')+str(e.type), e.message, e.data)
+				return False
 
 		keyact = {}
 		for action in actions:
