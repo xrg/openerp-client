@@ -86,7 +86,7 @@ def _server_ask(server_widget):
 
 	protocol={'XML-RPC': 'http://',
 			'XML-RPC secure': 'https://',
-			'TinySocket (faster)': 'socket://',}
+			'NET-RPC (faster)': 'socket://',}
 	listprotocol = gtk.ListStore(str)
 	protocol_widget.set_model(listprotocol)
 
@@ -141,8 +141,8 @@ class db_login(object):
 				butconnect.set_sensitive(True)
 		return res
 
-	def refreshlist_ask(self,widget, server_widget, db_widget, label, butconnect = False):
-		url = _server_ask(server_widget)
+	def refreshlist_ask(self,widget, server_widget, db_widget, label, butconnect = False, url=False):
+		url = _server_ask(server_widget) or url
 		return self.refreshlist(widget, db_widget, label, url, butconnect)
 
 	def run(self, dbname=None, parent=None):
@@ -175,7 +175,7 @@ class db_login(object):
 		db_widget.add_attribute(cell, 'text', 0)
 
 		res = self.refreshlist(None, db_widget, label, url, but_connect)
-		change_button.connect_after('clicked', self.refreshlist_ask, server_widget, db_widget, label, but_connect)
+		change_button.connect_after('clicked', self.refreshlist_ask, server_widget, db_widget, label, but_connect, url)
 
 		if dbname:
 			iter = liststore.get_iter_root()
@@ -277,8 +277,7 @@ class db_create(object):
 				self.timer = gobject.timeout_add(1000, self.progress_timeout, pb_widget, url, passwd, id, win, db_name, parent)
 				win.show()
 			except Exception, e:
-				print e
-				if e.faultString=='AccessDenied:None':
+				if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
 					common.warning(_('Bad database administrator password !'), _("Could not create database."))
 				else:
 					common.warning(_("Could not create database."),_('Error during database creation !'))
@@ -528,29 +527,41 @@ class terp_main(service.Service):
 		self.notebook.set_current_page(pn-1)
 
 	def sig_user_preferences(self, *args):
-		actions = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'meta', False, [('res.users',False)], True, rpc.session.context, True)
+		try:
+			actions = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'meta', False, [('res.users',False)], True, rpc.session.context, True)
 
-		win = win_preference.win_preference('res.users', rpc.session.uid, actions, parent=self.window)
-		if win.run():
-			rpc.session.context_reload()
-		return True
+			win = win_preference.win_preference('res.users', rpc.session.uid, actions, parent=self.window)
+			if win.run():
+				rpc.session.context_reload()
+			return True
+		except:
+			return False
 
 	def sig_win_close(self, *args):
 		self._sig_child_call(args[0], 'but_close')
 
 	def sig_request_new(self, args=None):
 		obj = service.LocalService('gui.window')
-		obj.create(None, 'res.request', False, [('act_from','=',rpc.session.uid)], 'form', mode='form,tree')
+		try:
+			return obj.create(None, 'res.request', False, [('act_from','=',rpc.session.uid)], 'form', mode='form,tree')
+		except:
+			return False
 
 	def sig_request_open(self, args=None):
 		ids,ids2 = self.request_set()
 		obj = service.LocalService('gui.window')
-		obj.create(False, 'res.request', ids, [('act_to','=',rpc.session.uid)], 'form', mode='tree,form')
+		try:
+			return obj.create(False, 'res.request', ids, [('act_to','=',rpc.session.uid)], 'form', mode='tree,form')
+		except:
+			return False
 
 	def sig_request_wait(self, args=None):
 		ids,ids2 = self.request_set()
 		obj = service.LocalService('gui.window')
-		obj.create(False, 'res.request', ids, [('act_from','=',rpc.session.uid), ('state','=','waiting')], 'form', mode='tree,form')
+		try:
+			return obj.create(False, 'res.request', ids, [('act_from','=',rpc.session.uid), ('state','=','waiting')], 'form', mode='tree,form')
+		except:
+			return False
 
 	def request_set(self):
 		try:
@@ -643,11 +654,13 @@ class terp_main(service.Service):
 		shortcuts_win.signal_connect("on_but_ok_pressed", lambda obj: shortcuts_win.get_widget('shortcuts_dia').destroy())
 
 	def sig_win_new(self, widget=None):
-		act_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'read', [rpc.session.uid], ['action_id','name'], rpc.session.context)
+		try:
+			act_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'read', [rpc.session.uid], ['action_id','name'], rpc.session.context)
+		except:
+			return False
 		id = self.sb_username.get_context_id('message')
 		self.sb_username.push(id, act_id[0]['name'] or '')
 		id = self.sb_servername.get_context_id('message')
-		print "url:", rpc.session._url
 		data = urlparse.urlsplit(rpc.session._url)
 		self.sb_servername.push(id, data[0]+':'+(data[1] and '//'+data[1] or data[2])+' ['+options.options['login.db']+']')
 		if not act_id[0]['action_id']:
@@ -748,7 +761,7 @@ class terp_main(service.Service):
 			rpc.session.db_exec(url, 'drop', passwd, db_name)
 			common.message(_("Database dropped successfully !"), parent=self.window)
 		except Exception, e:
-			if e.faultString=='AccessDenied:None':
+			if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
 				common.warning(_('Bad database administrator password !'),_("Could not drop database."), parent=self.window)
 			else:
 				common.warning(_("Couldn't drop database"), parent=self.window)
@@ -778,7 +791,7 @@ class terp_main(service.Service):
 				rpc.session.db_exec(url, 'restore', passwd, db_name, data_b64)
 				common.message(_("Database restored successfully !"), parent=self.window)
 			except Exception,e:
-				if e.faultString=='AccessDenied:None':
+				if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
 					common.warning(_('Bad database administrator password !'),_("Could not restore database."), parent=self.window)
 				else:
 					common.warning(_("Couldn't restore database"), parent=self.window)
@@ -812,7 +825,7 @@ class terp_main(service.Service):
 				try:
 					rpc.session.db_exec(url, 'change_admin_password', old_passwd, new_passwd)
 				except Exception,e:
-					if e.faultString=='AccessDenied:None':
+					if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
 						common.warning(_("Could not change password database."),_('Bas password provided !'), parent=self.window)
 					else:
 						common.warning(_("Error, password not changed."), parent=self.window)

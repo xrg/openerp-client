@@ -220,6 +220,8 @@ class rpc_session(object):
 		
 	def list_db(self, url):
 		m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
+		if not m:
+			return -1
 		if m.group(1) == 'http://' or m.group(1) == 'https://':
 			sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
 			try:
@@ -244,15 +246,11 @@ class rpc_session(object):
 			return getattr(sock, method)(*args)
 		else:
 			sock = tiny_socket.mysocket()
-			try:
-				sock.connect(url)
-				sock.mysend(('db', method)+args)
-				res = sock.myreceive()
-				print "res:", res
-				sock.disconnect()
-				return res
-			except:
-				return -1
+			sock.connect(url)
+			sock.mysend(('db', method)+args)
+			res = sock.myreceive()
+			sock.disconnect()
+			return res
 
 	def db_exec(self, url, method, *args):
 		res = False

@@ -101,7 +101,7 @@ def selection(title, values, alwaysask=False, parent=None):
 	xml = glade.XML(terp_path("terp.glade"), "win_selection", gettext.textdomain())
 	win = xml.get_widget('win_selection')
 	if not parent:
-		parent = service.LocalService('gui.main')
+		parent = service.LocalService('gui.main').window
 	win.set_transient_for(parent)
 	label = xml.get_widget('win_sel_title')
 	if title:
