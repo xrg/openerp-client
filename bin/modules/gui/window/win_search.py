@@ -44,13 +44,15 @@ fields_list_type = {
 }
 
 class win_search(object):
-	def __init__(self, model, sel_multi=True, ids=[], context={}, domain = []):
+	def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None):
 		self.domain =domain
 		self.context = context
 		self.context.update(rpc.session.context)
 		self.sel_multi = sel_multi
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_search',gettext.textdomain())
 		self.win = self.glade.get_widget('win_search')
+		if parent:
+			self.win.set_transient_for(parent)
 		#self.glade.signal_connect('on_sea_but_find_clicked', self.find)
 
 		self.screen = Screen(model, view_type=['tree'], context=context)

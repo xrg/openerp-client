@@ -228,12 +228,12 @@ class form(object):
 
 	def sig_import(self, widget=None):
 		fields = []
-		win = win_import.win_import(self.model, self.screen.fields, fields)
+		win = win_import.win_import(self.model, self.screen.fields, fields, parent=self.window)
 		res = win.go()
 
 	def sig_save_as(self, widget=None):
 		fields = []
-		win = win_export.win_export(self.model, self.screen.ids_get(), self.screen.fields, fields)
+		win = win_export.win_export(self.model, self.screen.ids_get(), self.screen.fields, fields, parent=self.window)
 		res = win.go()
 
 	def sig_new(self, widget=None, autosave=True):
@@ -328,7 +328,7 @@ class form(object):
 		if not self.modified_save():
 			return
 		dom = self.domain
-		win = win_search.win_search(self.model, domain=self.domain, context=self.context)
+		win = win_search.win_search(self.model, domain=self.domain, context=self.context, parent=self.window)
 		res = win.go()
 		if res:
 			self.screen.clear()
