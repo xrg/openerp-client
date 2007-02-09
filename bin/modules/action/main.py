@@ -52,6 +52,10 @@ class main(service.Service):
 				return False
 			datas['id'] = ids[0]
 		try:
+			print "name:", name
+			print "ids:", ids
+			print "datas:", datas
+			print "rpc.session.context:", rpc.session.context
 			report_id = rpc.session.rpc_exec_auth('/report', 'report', name, ids, datas, rpc.session.context)
 			state = False
 			attempt = 0
@@ -112,10 +116,16 @@ class main(service.Service):
 			wizard.execute(action['wiz_name'], datas, parent=win)
 
 		elif action['type']=='ir.actions.report.custom':
+			if 'window' in datas:
+				win=datas['window']
+				del datas['window']
 			datas['report_id'] = action['report_id']
 			self.exec_report('custom', datas)
 
 		elif action['type']=='ir.actions.report.xml':
+			if 'window' in datas:
+				win=datas['window']
+				del datas['window']
 			self.exec_report(action['report_name'], datas)
 
 	def exec_keyword(self, keyword, data={}, adds={}):
