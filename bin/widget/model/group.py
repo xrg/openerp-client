@@ -135,6 +135,8 @@ class ModelRecordGroup(signal_event.signal_event):
 		c = rpc.session.context.copy()
 		c.update(self.context)
 		values = self.rpc.read(ids, self.fields.keys(), c)
+		if not values:
+			return False
 		newmod = False
 		print 'Start Filling'
 		import hotshot
