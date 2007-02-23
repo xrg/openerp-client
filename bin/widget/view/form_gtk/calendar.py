@@ -95,7 +95,10 @@ class calendar(interface.widget_interface):
 			if len(value)>10:
 				value=value[:10]
 			date = time.strptime(value, DT_FORMAT)
-			self.entry.set_text(time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'), date))
+			t=time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'), date)
+			if len(t) > self.entry.get_width_chars():
+				self.entry.set_width_chars(len(t))
+			self.entry.set_text(t)
 		return True
 
 	def cal_open(self, widget=None, val=None):
@@ -173,7 +176,10 @@ class datetime(interface.widget_interface):
 			self.entry.set_text('')
 		else:
 			date = time.strptime(dt_val, DHM_FORMAT)
-			self.entry.set_text(time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S', date))
+			t=time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S', date)
+			if len(t) > self.entry.get_width_chars():
+				self.entry.set_width_chars(len(t))
+			self.entry.set_text(t)
 		return True
 
 	def cal_open(self, widget=None, val=None):
