@@ -32,7 +32,6 @@ from rpc import RPCProxy
 import rpc
 
 from widget.model.group import ModelRecordGroup
-from widget.model.record import ModelRecord
 
 from widget.view.screen_container import screen_container
 
@@ -75,6 +74,8 @@ class Screen(signal_event.signal_event):
 			self.screen_container.set(view.widget)
 
 	def models_set(self, models):
+		import time
+		c = time.time()
 		if self.models:
 			self.models.signal_unconnect(self.models)
 		self.models = models
@@ -83,10 +84,15 @@ class Screen(signal_event.signal_event):
 			self.current_model = models.models[0]
 		else:
 			self.current_model = None
+		self.models.signal_connect(self, 'record-cleared', self._record_cleared)
 		self.models.signal_connect(self, 'record-changed', self._record_changed)
 		self.models.signal_connect(self, 'model-changed', self._model_changed)
-		models.add_fields(self.fields, models.models)
+		models.add_fields(self.fields, models)
 		self.fields.update(models.fields)
+
+	def _record_cleared(self, model_group, signal, *args):
+		for view in self.views:
+			view.reload = True
 
 	def _record_changed(self, model_group, signal, *args):
 		for view in self.views:
@@ -163,9 +169,7 @@ class Screen(signal_event.signal_event):
 					try:
 						fields[str(attrs['name'])].update(attrs)
 					except:
-						print "-"*30,"\n malformed tag for :", attrs
-						print "-"*30
-						raise						
+						raise
 			for node2 in node.childNodes:
 				_parse_fields(node2, fields)
 		dom = xml.dom.minidom.parseString(arch)
@@ -176,9 +180,9 @@ class Screen(signal_event.signal_event):
 		if self.current_model and (self.current_model not in models):
 			models = models + [self.current_model]
 		if custom:
-			self.models.add_fields_custom(fields, models)
+			self.models.add_fields_custom(fields, self.models)
 		else:
-			self.models.add_fields(fields, models)
+			self.models.add_fields(fields, self.models)
 		self.fields = self.models.fields
 
 		parser = widget_parse(parent=self.parent)

@@ -51,160 +51,189 @@ class CharField(object):
 		self.parent = parent
 		self.attrs = attrs
 		self.real_attrs = attrs.copy()
-		self.internal = False
-		self.modified = False
+		self.name = attrs['name']
 
-	def sig_changed(self):
+	def sig_changed(self, model):
 		if self.attrs.get('on_change',False):
-			self.parent.on_change(self.attrs['on_change'])
+			model.on_change(self.attrs['on_change'])
 		if self.attrs.get('change_default', False):
-			self.parent.cond_default(self.attrs['name'], self.get())
+			model.cond_default(self.attrs['name'], self.get(model))
 
-	def domain_get(self):
+	def domain_get(self, model):
 		dom = self.attrs.get('domain', '[]')
-		return self.parent.expr_eval(dom)
+		return model.expr_eval(dom)
 
-	def context_get(self, check_load=True):
+	def context_get(self, model, check_load=True):
 		context = {}
-		context.update(self.parent.context_get())
+		context.update(self.parent.context)
 		field_context_str = self.attrs.get('context', '{}') or '{}'
-		field_context = self.parent.expr_eval('dict(%s)' % field_context_str, check_load=check_load)
+		field_context = model.expr_eval('dict(%s)' % field_context_str, check_load=check_load)
 		context.update(field_context)
 		return context
 
-	def validate(self):
+	def validate(self, model):
 		ok = True
 		if self.attrs.get('required', False):
-			if not self.internal:
+			if not model.value[self.name]:
 				ok=False
 		return ok
 
-	def state_set(self, state):
+	def state_set(self, model, state):
 		if 'states' in self.attrs:
 			for key,val in self.real_attrs.items():
 				self.attrs[key] = self.real_attrs[key]
 			if state in self.attrs['states']:
 				for key,val in self.attrs['states'][state]:
 					if key=='value':
-						self.set(value, test_state=False)
-						self.modified = True
+						self.set(model, value, test_state=False)
+						model.modified = True
 					else:
 						self.attrs[key] = val
 
-	def set(self, value, test_state=True, modified=False):
-		self.internal = value
+	def set(self, model, value, test_state=True, modified=False):
+		model.value[self.name] = value
 		return True
 
-	def get(self):
-		return self.internal or False
+	def get(self, model):
+		return model.value.get(self.name, False) or False
 
-	def set_client(self, value, test_state=True):
-		internal = self.internal
-		self.set(value, test_state)
-		if (internal or False) != (self.internal or False):
-			self.modified = True
-			self.sig_changed()
+	def set_client(self, model, value, test_state=True):
+		internal = model.value.get(self.name, False)
+		self.set(model, value, test_state)
+		if (internal or False) != (model.value.get(self.name,False) or False):
+			model.modified = True
+			self.sig_changed(model)
 
-	def get_client(self):
-		return self.internal or False
+	def get_client(self, model):
+		return model.value[self.name] or False
 
-	def set_default(self, value):
-		return self.set(value)
+	def set_default(self, model, value):
+		return self.set(model, value)
 
-	def get_default(self):
-		return self.get()
+	def get_default(self, model):
+		return self.get(model)
+
+	def create(self, model):
+		return False
 
 class SelectionField(CharField):
-	def set(self, value, test_state=True, modified=False):
+	def set(self, model, value, test_state=True, modified=False):
 		if value in [sel[0] for sel in self.attrs['selection']]:
-			super(SelectionField, self).set(value, test_state, modified)
+			super(SelectionField, self).set(model, value, test_state, modified)
 
 class FloatField(CharField):
-	def validate(self):
+	def validate(self, model):
 		return True
 
-	def set_client(self, value, test_state=True):
-		internal = self.internal
-		self.set(value, test_state)
-		if abs(float(internal or 0.0) - float(self.internal or 0.0)) >= (10.0**(-self.attrs.get('digits', (12,4))[1])):
-			self.modified = True
-			self.sig_changed()
-
+	def set_client(self, model, value, test_state=True):
+		internal = model.value[self.name]
+		self.set(model, value, test_state)
+		if abs(float(internal or 0.0) - float(model.value[self.name] or 0.0)) >= (10.0**(-self.attrs.get('digits', (12,4))[1])):
+			model.modified = True
+			self.sig_changed(model)
 
 class IntegerField(CharField):
-	def validate(self):
+	def validate(self, model):
 		return True
 
 
 # internal = (id, name)
 class M2OField(CharField):
-	def get(self):
-		if self.internal:
-			return self.internal[0] or False
+	def create(self, model):
 		return False
 
-	def get_client(self):
-		if self.internal:
-			return self.internal[1]
+	def get(self, model):
+		if model.value[self.name]:
+			return model.value[self.name][0] or False
 		return False
 
-	def set(self, value, test_state=False, modified=False):
+	def get_client(self, model):
+		#model._check_load()
+		if model.value[self.name]:
+			return model.value[self.name][1]
+		return False
+
+	def set(self, model, value, test_state=False, modified=False):
 		if value and isinstance(value, (int, str, unicode, long)):
 			rpc2 = RPCProxy(self.attrs['relation'])
 			result = rpc2.name_get([value], rpc.session.context)
-			self.internal = result[0]
+			model.value[self.name] = result[0]
 		else:
-			self.internal = value
+			model.value[self.name] = value
 
-	def set_client(self, value, test_state=False):
-		internal = self.internal
-		self.set(value, test_state)
-		if internal != self.internal:
-			self.modified = True
-			self.sig_changed()
+	def set_client(self, model, value, test_state=False):
+		internal = model.value[self.name]
+		self.set(model, value, test_state)
+		if internal != model.value[self.name]:
+			model.modified = True
+			self.sig_changed(model)
 
 # internal = [id]
 class M2MField(CharField):
 	def __init__(self, parent, attrs):
 		super(M2MField, self).__init__(parent, attrs)
-		self.internal = []
 
-	def get(self):
-		return [(6, 0, self.internal or [])]
+	def create(self, model):
+		return []
 
-	def get_client(self):
-		return self.internal or []
+	def get(self, model):
+		return [(6, 0, model.value[self.name] or [])]
 
-	def set(self, value, test_state=False, modified=False):
-		self.internal = value or []
+	def get_client(self, model):
+		return model.value[self.name] or []
 
-	def set_client(self, value, test_state=False):
-		internal = self.internal
-		self.set(value, test_state, modified=False)
+	def set(self, model, value, test_state=False, modified=False):
+		model.value[self.name] = value or []
+
+	def set_client(self, model, value, test_state=False):
+		internal = model.value[self.name]
+		self.set(model, value, test_state, modified=False)
 		if set(internal) != set(value):
-			self.modified = True
-			self.sig_changed()
+			model.modified = True
+			self.sig_changed(model)
 
-	def get_default(self):
-		return self.get_client()
+	def get_default(self, model):
+		return self.get_client(model)
+
+# Decorator printing debugging output.
+def debugger(f):
+	def debugf(*args,**kwargs):
+		print "DEBUG:", f.__name__, args, kwargs
+		retv = f(*args,**kwargs)
+		print "Function returned:", repr(retv)
+		return retv
+	return debugf
+
+class debug_function(object):
+	def __init__(self, f):
+		self.__f = f
+
+	def __call__(self, *args, **kwargs):
+		print 'CALL', args, kwargs
+		self.__numCalls += 1
+		return self.__f(*args, **kwargs)
 
 # internal = ModelRecordGroup of the related objects
 class O2MField(CharField):
 	def __init__(self, parent, attrs):
 		super(O2MField, self).__init__(parent, attrs)
-		from widget.model.group import ModelRecordGroup
 		self.context={}
-		self.internal = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent, context=self.context_get())
 
-	def _get_modified(self):
-		for model in self.internal.models:
+	def create(self, model):
+		from widget.model.group import ModelRecordGroup
+		#mod = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent)
+		mod = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model)
+		return mod
+
+	def _get_modified(self, model):
+		for model in model.value[self.name].models:
 			if model.is_modified():
 				return True
-		if self.internal.model_removed:
+		if model.value[self.name].model_removed:
 			return True
 		return False
 
-	def _set_modified(self, value):
+	def _set_modified(self, model, value):
 		pass
 		
 	modified = property(_get_modified, _set_modified)
@@ -212,83 +241,85 @@ class O2MField(CharField):
 	def _model_changed(self, group, model):
 		self.parent.signal('record-changed')
 
-	def get_client(self):
-		return self.internal
+	def get_client(self, model):
+		return model.value[self.name]
 
-	def get(self):
-		if not self.internal:
+	def get(self, model):
+		if not model.value[self.name]:
 			return []
 		result = []
-		for model in self.internal.models:
-			if model.id:
-				result.append((1,model.id, model.get()))
+		for model2 in model.value[self.name].models:
+			if model2.id:
+				result.append((1,model2.id, model2.get()))
 			else:
-				result.append((0,0, model.get()))
-		for id in self.internal.model_removed:
+				result.append((0,0, model2.get()))
+		for id in model.value[self.name].model_removed:
 			result.append((2,id, False))
 		return result
 
-	def set(self, value, test_state=False, modified=False):
+	def set(self, model, value, test_state=False, modified=False):
 		from widget.model.group import ModelRecordGroup
-		self.internal = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent, context=self.context_get(False))
+		#model.value[self.name] = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent, context=self.context_get(model,False))
+		model.value[self.name] = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model, context={}) #self.context_get(model,False))
 		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
-		self.internal.pre_load(value, display=False)
+		model.value[self.name].pre_load(value, display=False)
 		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 
-	def set_client(self, value, test_state=False):
-		self.set(value, test_state=test_state)
+	def set_client(self, model, value, test_state=False):
+		self.set(model, value, test_state=test_state)
 
-	def set_default(self, value):
+	def set_default(self, model, value):
 		from widget.model.group import ModelRecordGroup
 		fields = {}
-		if len(value):
-			context = self.context_get()
+		if value and len(value):
+			context = self.context_get(model)
 			rpc2 = RPCProxy(self.attrs['relation'])
 			fields = rpc2.fields_get(value[0].keys(), context)
 
-		self.internal = ModelRecordGroup(resource=self.attrs['relation'], fields=fields, parent=self.parent)
-		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
+		#model.value[self.name] = ModelRecordGroup(resource=self.attrs['relation'], fields=fields, parent=self.parent)
+		model.value[self.name] = ModelRecordGroup(resource=self.attrs['relation'], fields=fields, parent=model)
+		model.value[self.name].signal_connect(model.value[self.name], 'model-changed', self._model_changed)
 		mod=None
-		for record in value:
-			mod = self.internal.model_new(default=False)
+		for record in (value or []):
+			mod = model.value[self.name].model_new(default=False)
 			mod.set_default(record)
-			self.internal.model_add(mod)
-		self.internal.current_model = mod
+			model.value[self.name].model_add(mod)
+		model.value[self.name].current_model = mod
 		#mod.signal('record-changed')
 		return True
 
-	def get_default(self):
-		res = map(lambda x: x.get_default(), self.internal.models or [])
+	def get_default(self, model):
+		res = map(lambda x: x.get_default(x), model.value[self.name].models or [])
 		return res
 
 class ReferenceField(CharField):
-	def get_client(self):
-		if self.internal:
-			return self.internal
+	def get_client(self, model):
+		if model.value[self.name]:
+			return model.value[self.name]
 		return False
 
-	def get(self):
-		if self.internal:
-			return '%s,%d' % (self.internal[0], self.internal[1][0])
+	def get(self, model):
+		if model.value[self.name]:
+			return '%s,%d' % (model.value[self.name][0], model.value[self.name][1][0])
 		return False
 
-	def set_client(self, value):
-		internal = self.internal
-		self.internal = value
-		if (internal or False) != (self.internal or False):
-			self.sig_changed()
+	def set_client(self, model, value):
+		internal = model.value[self.name]
+		model.value[self.name] = value
+		if (internal or False) != (model.value[self.name] or False):
+			self.sig_changed(model)
 
-	def set(self, value, test_state=False, modified=False):
+	def set(self, model, value, test_state=False, modified=False):
 		if not value:
-			self.internal = False
+			model.value[self.name] = False
 			return
 		model, id = value.split(',')
 		rpc2 = RPCProxy(model)
 		result = rpc2.name_get([id], rpc.session.context)
 		if result:
-			self.internal = model, result[0]
+			model.value[self.name] = model, result[0]
 		else:
-			self.internal = False
+			model.value[self.name] = False
 
 TYPES = {
 	'char' : CharField,

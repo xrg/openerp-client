@@ -53,15 +53,15 @@ class url(interface.widget_interface):
 		
 		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
 
-	def set_value(self, model_field):
-		return model_field.set_client(self.entry.get_text() or False)
+	def set_value(self, model,model_field):
+		return model_field.set_client(model, self.entry.get_text() or False)
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.entry.set_text('')
 			return False
-		super(url, self).display(model_field)
-		self.entry.set_text(model_field.get() or '')
+		super(url, self).display(model, model_field)
+		self.entry.set_text(model_field.get(model) or '')
 
 	def _readonly_set(self, value):
 		self.entry.set_editable(not value)

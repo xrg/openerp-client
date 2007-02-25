@@ -64,11 +64,11 @@ class wid_binary(interface.widget_interface):
 	def sig_new(self, widget=None):
 		try:
 			filename = common.file_selection(_('Select the file to attach'))
-			self.model_field.set_client(base64.encodestring(file(filename).read()))
+			self.model_field.set_client(self._view.model, base64.encodestring(file(filename).read()))
 			fname = self.attrs.get('fname_widget', False)
 			if fname:
 				self.parent.value = {fname:os.path.basename(filename)}
-			self.display(self.model_field)
+			self.display(self._view.model, self.model_field)
 		except:
 			common.message(_('Error reading the file'))
 
@@ -77,7 +77,7 @@ class wid_binary(interface.widget_interface):
 			filename = common.file_selection(_('Save attachment as...'))
 			if filename:
 				fp = file(filename,'wb+')
-				fp.write(base64.decodestring(self.model_field.get()))
+				fp.write(base64.decodestring(self.model_field.get(self._view.model)))
 				fp.close()
 		except:
 			common.message(_('Error writing the file!'))
@@ -93,17 +93,17 @@ class wid_binary(interface.widget_interface):
 			self.parent.value = {fname:False}
 		self.display(self.model_field)
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.widget.set_text('')
 			return False
-		super(wid_binary, self).display(model_field)
+		super(wid_binary, self).display(model, model_field)
 		self.model_field = model_field
-		self.wid_text.set_text(self._size_get(model_field.get()))
+		self.wid_text.set_text(self._size_get(model_field.get(model)))
 		return True
 
 	def _size_get(self, l):
 		return l and _('%d bytes') % len(l) or ''
 
-	def set_value(self, model_field):
+	def set_value(self, model, model_field):
 		return

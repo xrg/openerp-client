@@ -104,11 +104,11 @@ class image_wid(interface.widget_interface):
 		self.widget.add(new_box)
 		new_box.show()
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			return False
-		self._value = model_field.get()
-		super(image_wid, self).display(model_field)
+		self._value = model_field.get(model)
+		super(image_wid, self).display(model, model_field)
 		if self._value:
 			fname = file(os.tempnam(), 'w')
 			fname.write(decodestring(self._value))
@@ -117,8 +117,8 @@ class image_wid(interface.widget_interface):
 		else:
 			self.update_img('tinyerp.png')
 
-	def set_value(self, model_field):
-		return model_field.set_client(self._value or False)
+	def set_value(self, model, model_field):
+		return model_field.set_client(model, self._value or False)
 
 	def create_image(self, img_filename):
 		box1 = gtk.VBox(True)

@@ -156,10 +156,9 @@ class one2many_list(interface.widget_interface):
 				self.screen.new()
 				self.screen.current_view.widget.set_sensitive(True)
 			else:
-				#self._view.modelfield.parent
-				parent = self._view.modelfield.parent
+				parent = self._view.model
 				ok = 1
-				dia = dialog(self.attrs['relation'], parent=parent, attrs=self.attrs) #screen.current_model.parent)
+				dia = dialog(self.attrs['relation'], parent=parent, attrs=self.attrs)
 				while ok:
 					ok, value = dia.run()
 					if ok:
@@ -169,7 +168,7 @@ class one2many_list(interface.widget_interface):
 				dia.destroy()
 
 	def _sig_edit(self, *args):
-		dia = dialog(self.attrs['relation'], parent=self.screen.current_model.parent,  model=self.screen.current_model, attrs=self.attrs)
+		dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs) 
 		ok, value = dia.run()
 		dia.destroy()
 #		self.screen.display()
@@ -204,13 +203,13 @@ class one2many_list(interface.widget_interface):
 	def _sig_sequence(self, *args):
 		pass
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.screen.current_model = None
 			self.screen.display()
 			return False
-		super(one2many_list, self).display(model_field)
-		new_models = model_field.get_client()
+		super(one2many_list, self).display(model, model_field)
+		new_models = model_field.get_client(model)
 		if self.screen.models != new_models:
 			self.screen.models_set(new_models)
 			if (self.screen.current_view.view_type=='tree') and self.screen.editable_get():
@@ -220,6 +219,6 @@ class one2many_list(interface.widget_interface):
 			self.screen.display()
 		return True
 
-	def set_value(self, model_field):
+	def set_value(self, model, model_field):
 		self.screen.current_view.set_value()
 		return True

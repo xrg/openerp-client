@@ -160,8 +160,8 @@ class ViewForm(object):
 
 	def display(self):
 		model = self.screen.current_model
-		if model and ('state' in model.fields):
-			state = model['state'].get()
+		if model and ('state' in model.mgroup.fields):
+			state = model['state'].get(model)
 		else:
 			state = 'draft'
 		for widget in self.widgets.values():

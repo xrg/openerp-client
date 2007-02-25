@@ -99,11 +99,11 @@ class action(interface.widget_interface):
 		obj = service.LocalService('action.main')
 		obj.execute(self.act_id, {})
 
-	def set_value(self, model_field):
+	def set_value(self, mode, model_field):
 		self.screen.current_view.set_value()
 		return True
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		res_id = rpc.session.rpc_exec_auth('/object', 'execute', self.action['res_model'], 'search', self.domain)
 		self.screen.clear()
 		self.screen.load(res_id)

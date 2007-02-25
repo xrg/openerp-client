@@ -54,8 +54,8 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 
 		try:
 			real_value = cell.value_from_text(current_model, value)
-			modelfield.set_client(real_value)
-			modelfield.modified = False
+			modelfield.set_client(current_model, real_value)
+			current_model.modified = False
 		except parser.UnsettableColumn:
 			return
 
@@ -79,8 +79,8 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 		try:
 			valid, value = cell.open_remote(current_model, create, changed, value)
 			if valid:
-				modelfield.set_client(value)
-				modelfield.modified = False
+				modelfield.set_client(current_model, value)
+				current_model.modified = False
 		except NotImplementedError:
 			pass
 
@@ -192,7 +192,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 		else:
 			if event.keyval >= 48 and event.keyval <= 200:
 				modelfield = model[column.name]
-				modelfield.modified = True
+				model.modified = True
 			return False
 
 		return True

@@ -84,8 +84,8 @@ class many2many(interface.widget_interface):
 		self.value = res.get(self.attrs['name'], False)
 
 	def _sig_add(self, *args):
-		domain = self._view.modelfield.domain_get()
-		context = self._view.modelfield.context_get()
+		domain = self._view.modelfield.domain_get(self._view.model)
+		context = self._view.modelfield.context_get(self._view.model)
 
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
 		ids = map(lambda x: x[0], ids)
@@ -110,11 +110,11 @@ class many2many(interface.widget_interface):
 		self.wid_but_remove.set_sensitive(not ro)
 		self.wid_but_add.set_sensitive(not ro)
 
-	def display(self, model_field):
-		super(many2many, self).display(model_field)
+	def display(self, model, model_field):
+		super(many2many, self).display(model, model_field)
 		ids = []
 		if model_field:
-			ids = model_field.get_client()
+			ids = model_field.get_client(model)
 		if ids<>self.old:
 			self.screen.clear()
 			self.screen.load(ids)
@@ -122,6 +122,6 @@ class many2many(interface.widget_interface):
 		self.screen.display()
 		return True
 
-	def set_value(self, model_field):
-		model_field.set_client([x.id for x in self.screen.models.models])
+	def set_value(self, model, model_field):
+		model_field.set_client(model, [x.id for x in self.screen.models.models])
 

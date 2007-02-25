@@ -46,19 +46,19 @@ class spinbutton(interface.widget_interface):
 		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
 		self.widget.connect('activate', self.sig_activate)
 
-	def set_value(self, model_field):
+	def set_value(self, model, model_field):
 		try:
 			res = float(self.widget.get_text())
 		except:
 			res = 0.0
-		model_field.set_client(res)
+		model_field.set_client(model, res)
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.widget.set_value( 0.0 )
 			return False
-		super(spinbutton, self).display(model_field)
-		value = model_field.get() or 0.0
+		super(spinbutton, self).display(model, model_field)
+		value = model_field.get(model) or 0.0
 		self.widget.set_value( float(value) )
 
 	def _readonly_set(self, value):

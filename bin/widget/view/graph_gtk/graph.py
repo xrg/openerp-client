@@ -61,9 +61,9 @@ class ViewGraph(object):
 			res = {}
 			for x in self.axis:
 				if self.fields[x]['type'] in ('many2one', 'char', 'date','datetime','time','text','selection'):
-					res[x] = str(m[x].get_client())
+					res[x] = str(m[x].get_client(m))
 				else:
-					res[x] = float(m[x].get_client())
+					res[x] = float(m[x].get_client(m))
 			datas.append(res)
 
 

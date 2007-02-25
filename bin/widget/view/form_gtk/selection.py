@@ -84,21 +84,21 @@ class selection(interface.widget_interface):
 		res = self.widget.child.get_text()
 		return self._selection.get(res, False)
 
-	def set_value(self, model_field):
-		model_field.set_client(self.value_get())
+	def set_value(self, model, model_field):
+		model_field.set_client(model, self.value_get())
 
 	def _menu_sig_default_set(self):
 		self.set_value(self._view.modelfield)
 		super(selection, self)._menu_sig_default_set()
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		self.ok = False
 		if not model_field:
 			self.widget.child.set_text('')
 			self.ok = True
 			return False
-		super(selection, self).display(model_field)
-		value = model_field.get()
+		super(selection, self).display(model, model_field)
+		value = model_field.get(model)
 		if not value:
 			self.widget.child.set_text('')
 		else:

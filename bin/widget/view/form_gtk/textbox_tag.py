@@ -430,18 +430,18 @@ class textbox_tag(interface.widget_interface):
 				widg.set_active(active)
 				self.internal_toggle=False
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			return False
-		super(textbox_tag, self).display(model_field)
-		model_field.set(self.get_text())
+		super(textbox_tag, self).display(model, model_field)
+		model_field.set(model, self.get_text())
 		return True
 
-	def set_value(self, model_field):
-		value = model_field.get()
+	def set_value(self, model, model_field):
+		value = model_field.get(model)
 		if value==False:
 			value=''
 		buffer = self.tv.get_buffer()
 		buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-		self.set_text(value)
+		self.set_text(model, value)
 		return True

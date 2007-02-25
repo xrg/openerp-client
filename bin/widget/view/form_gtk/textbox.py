@@ -59,16 +59,16 @@ class textbox(interface.widget_interface):
 	def _color_widget(self):
 		return self.tv
 
-	def set_value(self, model_field):
+	def set_value(self, model, model_field):
 		buffer = self.tv.get_buffer()
 		iter_start = buffer.get_start_iter()
 		iter_end = buffer.get_end_iter()
 		current_text = buffer.get_text(iter_start,iter_end,False)
-		model_field.set_client(current_text or False)
+		model_field.set_client(model, current_text or False)
 
-	def display(self, model_field):
-		super(textbox, self).display(model_field)
-		value = model_field and model_field.get()
+	def display(self, model, model_field):
+		super(textbox, self).display(model, model_field)
+		value = model_field and model_field.get(model)
 		if not value:
 			value=''
 		buffer = self.tv.get_buffer()

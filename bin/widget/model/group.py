@@ -30,6 +30,7 @@
 from rpc import RPCProxy
 import rpc
 from record import ModelRecord
+import field
 
 import signal_event
 
@@ -41,29 +42,35 @@ except NameError:
 class ModelList(list):
 	def __init__(self, screen):
 		super(ModelList, self).__init__()
+		self.lock_signal = False
 		self.__screen = screen
 
 	def insert(self, pos, obj):
 		super(ModelList, self).insert(pos, obj)
-		self.__screen.signal('record-changed', ('record-added', pos))
+		if not self.lock_signal:
+			self.__screen.signal('record-changed', ('record-added', pos))
 
 	def append(self, obj):
 		super(ModelList, self).append(obj)
-		self.__screen.signal('record-changed', ('record-added', -1))
-	
+		if not self.lock_signal:
+			self.__screen.signal('record-changed', ('record-added', -1))
+
 	def remove(self, obj):
 		idx = self.index(obj)
 		super(ModelList, self).remove(obj)
-		self.__screen.signal('record-changed', ('record-removed', idx))
+		if not self.lock_signal:
+			self.__screen.signal('record-changed', ('record-removed', idx))
 	
 	def clear(self):
 		for obj in range(len(self)):
 			self.pop()
-			self.__screen.signal('record-changed', ('record-removed', len(self)))
+			if not self.lock_signal:
+				self.__screen.signal('record-changed', ('record-removed', len(self)))
 
 	def __setitem__(self, key, value):
 		super(ModelList, self).__setitem__(key, value)
-		self.__screen.signal('record-changed', ('record-changed', key))
+		if not self.lock_signal:
+			self.__screen.signal('record-changed', ('record-changed', key))
 
 class ModelRecordGroup(signal_event.signal_event):
 	def __init__(self, resource, fields, ids=[], parent=None, context={}):
@@ -74,11 +81,22 @@ class ModelRecordGroup(signal_event.signal_event):
 		self.resource = resource
 		self.rpc = RPCProxy(resource)
 		self.fields = fields
+		self.mfields = {}
+		self.mfields_load(fields.keys(), self)
+
 		self.models = ModelList(self)
 		self.current_idx = None
+
 		self.load(ids)
 		self.model_removed = []
 		self.on_write = ''
+
+	def mfields_load(self, fkeys, models):
+		for fname in fkeys:
+			fvalue = models.fields[fname]
+			modelfield = field.ModelField(fvalue['type'])
+			fvalue['name'] = fname
+			models.mfields[fname] = modelfield(models, fvalue)
 
 	def save(self):
 		for model in self.models:
@@ -99,8 +117,7 @@ class ModelRecordGroup(signal_event.signal_event):
 					m.reload()
 			if cont:
 				continue
-			newmod = ModelRecord(self.resource, id, self.fields,
-								 parent=self.parent, group=self)
+			newmod = ModelRecord(self.resource, id, parent=self.parent, group=self)
 			newmod.reload()
 			if not result:
 				result = newmod
@@ -111,21 +128,29 @@ class ModelRecordGroup(signal_event.signal_event):
 	def pre_load(self, ids, display=True):
 		if not ids:
 			return True
+		if len(ids)>10:
+			self.models.lock_signal = True
 		for id in ids:
-			newmod = ModelRecord(self.resource, id, self.fields,
-						parent=self.parent, group=self)
+			newmod = ModelRecord(self.resource, id, parent=self.parent, group=self)
 			self.model_add(newmod)
 			if display:
 				self.signal('model-changed', newmod)
+		if len(ids)>10:
+			self.models.lock_signal = False
+			self.signal('record-cleared')
 		return True
 
 	def load_for(self, values):
+		if len(values)>10:
+			self.models.lock_signal = True
 		for value in values:
-			newmod = ModelRecord(self.resource, value['id'], self.fields,
-						parent=self.parent, group=self)
+			newmod = ModelRecord(self.resource, value['id'], parent=self.parent, group=self)
 			newmod.set(value)
 			self.models.append(newmod)
 			newmod.signal_connect(self, 'record-changed', self._record_changed)
+		if len(values)>10:
+			self.models.lock_signal = False
+			self.signal('record-cleared')
 
 	def load(self, ids, display=True):
 		if not ids:
@@ -138,12 +163,15 @@ class ModelRecordGroup(signal_event.signal_event):
 		if not values:
 			return False
 		newmod = False
-		print 'Start Filling'
-		import hotshot
-		prof = hotshot.Profile("/tmp/debug2.prof")
-		prof.runcall(self.load_for, values)
-		prof.close()
-		print 'End Filling'
+		import time
+		ttime = time.time()
+		#print 'Start Filling'
+		#import hotshot
+		#prof = hotshot.Profile("/tmp/debug2.prof")
+		#prof.runcall(self.load_for, values)
+		#prof.close()
+		self.load_for(values)
+		#print 'End Filling', time.time() - ttime
 		if newmod and display:
 			self.signal('model-changed', newmod)
 		self.current_idx = 0
@@ -165,14 +193,16 @@ class ModelRecordGroup(signal_event.signal_event):
 	context = property(getContext)
 
 	def model_add(self, model, position=-1):
-		#assert model.mgroup is self
-		fields = {}
-		for mf in model.fields:
-			fields[model.fields[mf].attrs['name']] = model.fields[mf].attrs
-			self.fields[model.fields[mf].attrs['name']] = model.fields[mf].attrs
-
-		self.add_fields(fields, self.models)
-		self.add_fields(self.fields, [model])
+		#
+		# To be checked
+		#
+		if not model.mgroup is self:
+			fields = {}
+			for mf in model.mgroup.fields:
+				fields[model.mgroup.fields[mf]['name']] = model.mgroup.fields[mf]
+			self.add_fields(fields, self)
+			self.add_fields(self.fields, model.mgroup)
+			model.mgroup = self
 
 		if position==-1:
 			self.models.append(model)
@@ -184,7 +214,7 @@ class ModelRecordGroup(signal_event.signal_event):
 		return model
 
 	def model_new(self, default=True, domain=[], context={}):
-		newmod = ModelRecord(self.resource, None, self.fields, group=self, 
+		newmod = ModelRecord(self.resource, None, group=self, 
 					   parent=self.parent, new=True)
 		newmod.signal_connect(self, 'record-changed', self._record_changed)
 		if default:
@@ -230,27 +260,27 @@ class ModelRecordGroup(signal_event.signal_event):
 		except:
 			pass
 
+	#
+	# 2 cas:
+	#     models a plus de fields que fields -> On s'en fou
+	#     plus de fields dans models
+	#
 	def add_fields_custom(self, fields, models):
+		to_add = []
 		for f in fields.keys():
-			if not f in self.fields:
-				self.fields[f] = fields[f]
-				self.fields[f]['name'] = f
-		if not len(models):
-			return True
-
-		to_add = set() 
-		base = set(fields.keys())
-		for model in models:
-			to_add.update(base - set(model.fields_get().keys()))
-
-		for fname in to_add:
-			for model in models:
-				fields[fname]['name'] = fname
-				model.add_field(fields[fname])
-		return list(to_add)
+			if not f in models.fields:
+				models.fields[f] = fields[f]
+				models.fields[f]['name'] = f
+				to_add.append(f)
+		self.mfields_load(to_add, models)
+		return to_add
 
 	def add_fields(self, fields, models):
+		import time
+		ct = time.time()
 		to_add = self.add_fields_custom(fields, models)
+		models2 = models
+		models = models.models
 		if not len(models):
 			return True
 
@@ -268,9 +298,12 @@ class ModelRecordGroup(signal_event.signal_event):
 			for v in values:
 				id = v['id']
 				del v['id']
-				self[id].set(v)
+				self[id].set(v, signal=False)
 		if len(new) and len(to_add):
 			values = self.rpc.default_get(to_add, self.context)
+			for t in to_add:
+				if t not in values:
+					values[t] = False
 			for mod in new:
 				mod.set_default(values)
 
@@ -283,7 +316,5 @@ class ModelRecordGroup(signal_event.signal_event):
 				return model
 
 	__getitem__ = get_by_id
-
-
 
 # vim:noexpandtab:

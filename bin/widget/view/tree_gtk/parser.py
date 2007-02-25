@@ -152,7 +152,7 @@ class Char(object):
 		raise NotImplementedError
 
 	def get_textual_value(self, model):
-		return model[self.field_name].get_client() or ''
+		return model[self.field_name].get_client(model) or ''
 
 	def value_from_text(self, model, text):
 		return text
@@ -165,7 +165,7 @@ class Int(Char):
 class GenericDate(Char):
 
 	def get_textual_value(self, model):
-		value = model[self.field_name].get_client()
+		value = model[self.field_name].get_client(model)
 		if not value:
 			return ''
 		date = time.strptime(value, self.server_format)
@@ -196,7 +196,7 @@ class Datetime(GenericDate):
 class Float(Char):
 	def get_textual_value(self, model):
 		_, digit = self.attrs.get('digits', (16,2) )
-		return locale.format('%.'+str(digit)+'f', model[self.field_name].get_client() or 0.0)
+		return locale.format('%.'+str(digit)+'f', model[self.field_name].get_client(model) or 0.0)
 
 	def value_from_text(self, model, text):
 		return locale.atof(text)
@@ -210,8 +210,8 @@ class M2O(Char):
 		relation = model[self.field_name].attrs['relation']
 		rpc = RPCProxy(relation)
 
-		domain = model[self.field_name].domain_get()
-		context = model[self.field_name].context_get()
+		domain = model[self.field_name].domain_get(model)
+		context = model[self.field_name].context_get(model)
 
 		names = rpc.name_search(text, domain, 'ilike', context)
 		if len(names) != 1:
@@ -220,19 +220,18 @@ class M2O(Char):
 		return names[0]
 
 	def open_remote(self, model, create=True, changed=False, text=None):
-		modelfield = model[self.field_name]
-		print modelfield.modified
+		modelfield = model.mgroup.mfields[self.field_name]
 		relation = modelfield.attrs['relation']
 		
 		if create:
 			id = None
-		elif modelfield.internal and not modelfield.modified and not changed:
+		elif modelfield.internal and not model.modified and not changed:
 			id = modelfield.internal[0]
 		else:
 			rpc = RPCProxy(relation)
 
-			domain=modelfield.domain_get()
-			context=modelfield.context_get()
+			domain=modelfield.domain_get(model)
+			context=modelfield.context_get(model)
 
 			names = rpc.name_search(text, domain, 'ilike', context)
 			if len(names) == 1:
@@ -262,7 +261,7 @@ class M2O(Char):
 
 class O2M(Char):
 	def get_textual_value(self, model):
-		return '( '+str(len(model[self.field_name].internal.models or [])) + ' )'
+		return '( '+str(len(model[self.field_name].get_client(model).models)) + ' )'
 
 	def value_from_text(self, model, text):
 		raise UnsettableColumn('Can not set column of type o2m')
@@ -270,7 +269,7 @@ class O2M(Char):
 
 class M2M(Char):
 	def get_textual_value(self, model):
-		value = model[self.field_name].internal
+		value = model[self.field_name].get_client(model)
 		if value:
 			return '(%s)' % len(value)
 		else:
@@ -293,7 +292,7 @@ class Selection(Char):
 
 	def get_textual_value(self, model):
 		selection = dict(model[self.field_name].attrs['selection'])
-		return selection.get(model[self.field_name].internal, '')
+		return selection.get(model[self.field_name].get(model), '')
 
 	def value_from_text(self, model, text):
 		selection = model[self.field_name].attrs['selection']

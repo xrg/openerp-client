@@ -60,12 +60,11 @@ class widget_interface(object):
 		try:
 			model = self._view.modelfield.parent.resource
 			res = rpc.session.rpc_exec_auth_try('/object', 'execute', model, 'default_get', [self.attrs['name']])
-			model = self._view.modelfield.set(res.get(self.attrs['name'], False))
-			self.display(self._view.modelfield)
+			model = self._view.modelfield.set(self._view.model, res.get(self.attrs['name'], False))
+			self.display(self._view.model, self._view.modelfield)
 		except:
 			common.warning('You can not set to the default value here !', 'Operation not permited')
 			return False
-		print 'LA'
 
 	def sig_activate(self, widget=None):
 		# emulate a focus_out so that the onchange is called if needed
@@ -109,9 +108,9 @@ class widget_interface(object):
 		wid = self._view.view_form.widgets
 		for wname, wview in self._view.view_form.widgets.items():
 			if wview.modelfield.attrs.get('change_default', False):
-				value = wview.modelfield.get()
+				value = wview.modelfield.get(self._view.model)
 				deps.append((wname, wname, value, value))
-		value = self._view.modelfield.get_default()
+		value = self._view.modelfield.get_default(self._view.model)
 		model = self._view.modelfield.parent.resource
 		wid_common.field_pref_set(self._view.widget_name, self.attrs.get('string', self._view.widget_name), model, value, deps)
 
@@ -137,9 +136,9 @@ class widget_interface(object):
 	def _focus_out(self):
 		if not self._view.modelfield:
 			return False
-		self.set_value(self._view.modelfield)
+		self.set_value(self._view.model, self._view.modelfield)
 
-	def display(self, modelfield):
+	def display(self, model, modelfield):
 		self.refresh()
 
 	def sig_changed(self):

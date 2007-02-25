@@ -49,15 +49,15 @@ class char(interface.widget_interface):
 		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
 		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
 
-	def set_value(self, model_field):
-		return model_field.set_client(self.widget.get_text() or False)
+	def set_value(self, model, model_field):
+		return model_field.set_client(model, self.widget.get_text() or False)
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.widget.set_text('')
 			return False
-		super(char, self).display(model_field)
-		self.widget.set_text(model_field.get() or '')
+		super(char, self).display(model, model_field)
+		self.widget.set_text(model_field.get(model) or '')
 
 	def _readonly_set(self, value):
 		self.widget.set_editable(not value)

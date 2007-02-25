@@ -47,21 +47,21 @@ class spinint(interface.widget_interface):
 		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
 		self.widget.connect('activate', self.sig_activate)
 
-	def set_value(self, model_field):
+	def set_value(self, model, model_field):
 		try:
 			# we must use get_text and not get_value because get_value
 			# is only updated when the widget loose focus. This is a problem 
 			# if we save a form just after we modified the value of a field
-			model_field.set_client(int(self.widget.get_text()))
+			model_field.set_client(model, int(self.widget.get_text()))
 		except:
-			model_field.set_client(0)
+			model_field.set_client(model, 0)
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.widget.set_value(0)
 			return False
-		super(spinint, self).display(model_field)
-		value = model_field.get()
+		super(spinint, self).display(model, model_field)
+		value = model_field.get(model)
 		if isinstance(value, int):
 			self.widget.set_value(value)
 		elif isinstance(value, float):

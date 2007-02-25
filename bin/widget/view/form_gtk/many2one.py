@@ -148,8 +148,8 @@ class many2one(interface.widget_interface):
 		context = self._view.modelfield.context_get()
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', name, domain, 'ilike', context)
 		if len(ids)==1:
-			self._view.modelfield.set_client(ids[0])
-			self.display(self._view.modelfield)
+			self._view.modelfield.set_client(self._view.model, ids[0])
+			self.display(self._view.model, self._view.modelfield)
 			self.ok = True
 			# return True
 		else:
@@ -157,7 +157,7 @@ class many2one(interface.widget_interface):
 			ids = win.go()
 			if ids:
 				name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
-				self._view.modelfield.set_client(name)
+				self._view.modelfield.set_client(self._view.model, name)
 		return True
 
 
@@ -180,24 +180,24 @@ class many2one(interface.widget_interface):
 
 	def sig_activate(self, *args):
 		self.ok = False
-		value = self._view.modelfield.get()
+		value = self._view.modelfield.get(self._view.model)
 
 		if value:
-			dia = dialog(self.attrs['relation'], self._view.modelfield.get(), attrs=self.attrs)
+			dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs)
 			ok, value = dia.run()
 			if ok:
-				self._view.modelfield.set_client(value)
+				self._view.modelfield.set_client(self._view.model, value)
 				self.value = value
 			dia.destroy()
 		else:
 			if not self._readonly:
-				domain = self._view.modelfield.domain_get()
-				context = self._view.modelfield.context_get()
+				domain = self._view.modelfield.domain_get(self._view.model)
+				context = self._view.modelfield.context_get(self._view.model)
 
 				ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
 				if len(ids)==1:
-					self._view.modelfield.set_client(ids[0])
-					self.display(self._view.modelfield)
+					self._view.modelfield.set_client(self._view.model, ids[0])
+					self.display(self._view.model, self._view.modelfield)
 					self.ok = True
 					return True
 
@@ -205,16 +205,16 @@ class many2one(interface.widget_interface):
 				ids = win.go()
 				if ids:
 					name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
-					self._view.modelfield.set_client(name)
-		self.display(self._view.modelfield)
+					self._view.modelfield.set_client(self._view.model, name)
+		self.display(self._view.model, self._view.modelfield)
 		self.ok=True
 
 	def sig_new(self, *args):
 		dia = dialog(self.attrs['relation'], attrs=self.attrs)
 		ok, value = dia.run()
 		if ok:
-			self._view.modelfield.set_client(value)
-			self.display(self._view.modelfield)
+			self._view.modelfield.set_client(self._view.model, value)
+			self.display(self._view.model, self._view.modelfield)
 		dia.destroy()
 	sig_edit = sig_activate
 
@@ -227,25 +227,25 @@ class many2one(interface.widget_interface):
 
 	def sig_changed(self, *args):
 		if self.ok:
-			if self._view.modelfield.get():
-				self._view.modelfield.set_client(False)
-				self.display(self._view.modelfield)
+			if self._view.modelfield.get(self._view.model):
+				self._view.modelfield.set_client(self._view.model, False)
+				self.display(self._view.model, self._view.modelfield)
 		return False
 
 	#
 	# No update of the model, the model is updated in real time !
 	#
-	def set_value(self, model_field):
+	def set_value(self, model, model_field):
 		pass
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.ok = False
 			self.wid_text.set_text('')
 			return False
-		super(many2one, self).display(model_field)
+		super(many2one, self).display(model, model_field)
 		self.ok=False
-		res = model_field.get_client()
+		res = model_field.get_client(model)
 		self.wid_text.set_text(res or '')
 		if res:
 			self.image_search.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
@@ -255,7 +255,7 @@ class many2one(interface.widget_interface):
 
 	def _menu_open(self, obj, event):
 		if event.button == 3:
-			value = self._view.modelfield.get()
+			value = self._view.modelfield.get(self._view.model)
 			if not self._menu_loaded:
 				fields_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search',[('relation','=',self.model_type),('ttype','=','many2one'),('relate','=',True)])
 				fields = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'read', fields_id, ['name','model_id'], rpc.session.context)
@@ -289,7 +289,7 @@ class many2one(interface.widget_interface):
 	# Open a view with ids: [(field,'=',value)]
 	#
 	def click_and_relate(self, model, field):
-		value = self._view.modelfield.get()
+		value = self._view.modelfield.get(self._view.model)
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', model, 'search',[(field,'=',value)])
 		obj = service.LocalService('gui.window')
 		#view_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'search', [('model','=',model),('type','=','form')])
@@ -297,7 +297,7 @@ class many2one(interface.widget_interface):
 		return True
 
 	def click_and_action(self, type):
-		id = self._view.modelfield.get()
+		id = self._view.modelfield.get(self._view.model)
 		obj = service.LocalService('action.main')
 		res = obj.exec_keyword(type, {'model':self.model_type, 'id': id or False, 'ids':[id], 'report_type': 'pdf'})
 		return True

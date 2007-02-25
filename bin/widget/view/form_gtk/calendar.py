@@ -69,7 +69,7 @@ class calendar(interface.widget_interface):
 		self.entry.set_editable(not value)
 		self.entry.set_sensitive(not value)
 
-	def get_value(self):
+	def get_value(self, model):
 		str = self.entry.get_text()
 		if str=='':
 			return False
@@ -79,16 +79,16 @@ class calendar(interface.widget_interface):
 			return False
 		return time.strftime(DT_FORMAT, date)
 
-	def set_value(self, model_field):
-		model_field.set_client(self.get_value())
+	def set_value(self, model, model_field):
+		model_field.set_client(model, self.get_value(model))
 		return True
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.entry.set_text('')
 			return False
-		super(calendar, self).display(model_field)
-		value = model_field.get()
+		super(calendar, self).display(model, model_field)
+		value = model_field.get(model)
 		if not value:
 			self.entry.set_text('')
 		else:
@@ -150,7 +150,7 @@ class datetime(interface.widget_interface):
 		self.entry.set_editable(not value)
 		self.entry.set_sensitive(not value)
 
-	def get_value(self):
+	def get_value(self, model):
 		str = self.entry.get_text()
 		if str=='':
 			return False
@@ -160,15 +160,15 @@ class datetime(interface.widget_interface):
 			return False
 		return time.strftime(DHM_FORMAT, date)
 
-	def set_value(self, model_field):
-		model_field.set_client(self.get_value())
+	def set_value(self, model, model_field):
+		model_field.set_client(model, self.get_value(model))
 		return True
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			return self.show(False)
-		super(datetime, self).display(model_field)
-		self.value = model_field.get()
+		super(datetime, self).display(model, model_field)
+		self.value = model_field.get(model)
 		self.show(self.value)
 	
 	def show(self, dt_val):
@@ -237,7 +237,7 @@ class stime(interface.widget_interface):
 	def _color_widget(self):
 		return self.entry
 
-	def get_value(self):
+	def get_value(self, model):
 		str = self.entry.get_text()
 		if str=='':
 			res = False 
@@ -247,15 +247,15 @@ class stime(interface.widget_interface):
 			res = False
 		return time.strftime(HM_FORMAT, t)
 		
-	def set_value(self, model_field):
-		res = self.get_value()
-		model_field.set_client(res)
+	def set_value(self, model, model_field):
+		res = self.get_value(model)
+		model_field.set_client(model, res)
 		return True
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			return self.show(False)
-		super(stime, self).display(model_field)
-		self.entry.set_text(model_field.get() or '00:00:00')
+		super(stime, self).display(model, model_field)
+		self.entry.set_text(model_field.get(model) or '00:00:00')
 		return True
 

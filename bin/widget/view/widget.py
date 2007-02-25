@@ -38,11 +38,11 @@ class ViewWidget(object):
 	def display(self, model, state='draft'):
 		if not model:
 			self.widget.state_set('readonly')
-			self.widget.display(False)
+			self.widget.display(model, False)
 			return False
 		self.widget.state_set(state)
 		self.widget.refresh()
-		self.widget.display(model[self.widget_name])
+		self.widget.display(model, model.mgroup.mfields.get(self.widget_name, False))
 	
 	def reset(self):
 		if 'valid' in self.widget.attrs:
@@ -50,7 +50,7 @@ class ViewWidget(object):
 		self.widget.refresh()
 
 	def set_value(self, model):
-		self.widget.set_value(model[self.widget_name])
+		self.widget.set_value(model, model.mgroup.mfields[self.widget_name])
 
 	def _get_model(self):
 		return self.view_form.screen.current_model
@@ -59,6 +59,6 @@ class ViewWidget(object):
 
 	def _get_modelfield(self):
 		if self.model:
-			return self.model[self.widget_name]
+			return self.model.mgroup.mfields[self.widget_name]
 
 	modelfield = property(_get_modelfield)

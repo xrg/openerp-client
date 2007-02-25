@@ -161,12 +161,12 @@ class reference(interface.widget_interface):
 				self._view.modelfield.set_client(False)
 				self.display(self._view.modelfield)
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.widget_combo.child.set_text('')
 			return False
-		super(reference, self).display(model_field)
-		value = model_field.get_client()
+		super(reference, self).display(model, model_field)
+		value = model_field.get_client(model)
 		self.ok = False
 		if value:
 			model, (id, name) = value

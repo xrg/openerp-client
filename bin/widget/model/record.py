@@ -52,47 +52,40 @@ class EvalEnvironment(object):
 
 
 class ModelRecord(signal_event.signal_event):
-	def __init__(self, resource, id, fields, group=None, parent=None, new=False):
+	def __init__(self, resource, id, group=None, parent=None, new=False):
 		super(ModelRecord, self).__init__()
 		self.resource = resource
 		self.rpc = RPCProxy(self.resource)
 		self.id = id
 		self._loaded = False
-		self.fields = {}
 		self.parent = parent
 		self.mgroup = group
-		for fname, fvalue in fields.items():
-			modelfield = field.ModelField(fvalue['type'])
-			fvalue['name'] = fname
-			self.fields[fname] = modelfield(self, fvalue)
-			if (new and fvalue['type']=='one2many') and (fvalue.get('mode','tree,form').startswith('form')):
-				mod = self.fields[fname].internal.model_new(domain=self.fields[fname].domain_get(), context=self.fields[fname].context_get())
-				self.fields[fname].internal.model_add(mod)
+		self.value = {}
+		self.modified = False
+		for key,val in self.mgroup.mfields.items():
+			self.value[key] = val.create(self)
+			if (new and val.attrs['type']=='one2many') and (val.attrs.get('mode','tree,form').startswith('form')):
+				mod = self.value[key].model_new()
+				self.value[key].model_add(mod)
 
 	def __getitem__(self, name):
-		return self.fields.get(name, False)
+		return self.mgroup.mfields.get(name, False)
 	
 	def __repr__(self):
 		return '<ModelRecord %s@%s>' % (self.id, self.resource)
 
-	def __str__(self):
-		res = self.__repr__()
-		for name, value in self.fields.items():
-			res += '\n   - %s : %s' % (name, value.get())
-		res += '\n</ModelRecord>'
-		return res
+	#def __str__(self):
+	#	res = self.__repr__()
+	#	for name, value in self.fields.items():
+	#		res += '\n   - %s : %s' % (name, value.get())
+	#	res += '\n</ModelRecord>'
+	#	return res
 
 	def is_modified(self):
-		for name, field in self.fields.items():
-			if field.modified:
-				return True
-		return False
+		return self.modified
 
 	def fields_get(self):
-		fields = {}
-		for fname,fval in self.fields.items():
-			fields[fname] = fval.attrs
-		return fields
+		return self.mgroup.mfields
 
 	def _check_load(self):
 		if not self._loaded:
@@ -102,8 +95,8 @@ class ModelRecord(signal_event.signal_event):
 
 	def get(self, get_readonly=True):
 		self._check_load()
-		value = dict([(name, field.get())
-					  for name, field in self.fields.items()
+		value = dict([(name, field.get(self))
+					  for name, field in self.mgroup.mfields.items()
 					  if get_readonly or not field.attrs.get('readonly', False)])
 		return value
 
@@ -116,6 +109,7 @@ class ModelRecord(signal_event.signal_event):
 		value = self.get(get_readonly=False)
 		if not self.id:
 			self.id = self.rpc.create(value, self.context_get())
+			reload = False
 		else:
 			if not self.rpc.write([self.id], value, self.context_get()):
 				return False
@@ -125,26 +119,22 @@ class ModelRecord(signal_event.signal_event):
 		return self.id
 
 	def default_get(self, domain=[], context={}):
-		if len(self.fields):
-			val = self.rpc.default_get(self.fields.keys(), context)
+		if len(self.mgroup.fields):
+			val = self.rpc.default_get(self.mgroup.fields.keys(), context)
 			for d in domain:
-				if d[0] in self.fields and d[1]=='=':
+				if d[0] in self.mgroup.fields and d[1]=='=':
 					val[d[0]]=d[2]
 			self.set_default(val)
 
-	def add_field(self, field_dict):
-		modelfield = field.ModelField(field_dict['type'])
-		self.fields[field_dict['name']] = modelfield(self, field_dict)
-	
 	def name_get(self):
 		name = self.rpc.name_get([self.id], rpc.session.context)[0]
 		return name
 
 	def validate_set(self):
 		change = self._check_load()
-		for fname in self.fields:
-			change = change or not self.fields[fname].attrs.get('valid', True)
-			self.fields[fname].attrs['valid'] = True
+		for fname in self.mgroup.mfields:
+			change = change or not self.mgroup.mfields[fname].attrs.get('valid', True)
+			self.mgroup.mfields[fname].attrs['valid'] = True
 		if change:
 			self.signal('record-changed')
 		return change
@@ -152,16 +142,16 @@ class ModelRecord(signal_event.signal_event):
 	def validate(self):
 		self._check_load()
 		ok = True
-		for fname in self.fields:
-			if not self.fields[fname].validate():
-				self.fields[fname].attrs['valid'] = False
+		for fname in self.mgroup.mfields:
+			if not self.mgroup.mfields[fname].validate(self):
+				self.mgroup.mfields[fname].attrs['valid'] = False
 				ok = False
 			else:
-				self.fields[fname].attrs['valid'] = True
+				self.mgroup.mfields[fname].attrs['valid'] = True
 		return ok
 
 	def _get_invalid_fields(self):
-		return dict([(fname, field.attrs['string']) for fname, field in self.fields.items() if not field.attrs['valid']])
+		return dict([(fname, field.attrs['string']) for fname, field in self.mgroup.mfields.items() if not field.attrs['valid']])
 	invalid_fields = property(_get_invalid_fields)
 
 	def context_get(self):
@@ -170,39 +160,39 @@ class ModelRecord(signal_event.signal_event):
 	def get_default(self):
 		self._check_load()
 		value = dict([(name, field.get_default())
-					  for name, field in self.fields.items()])
+					  for name, field in self.mgroup.mfields.items()])
 		return value
 
 	def set_default(self, val):
 		for fieldname, value in val.items():
-			if fieldname not in self.fields:
+			if fieldname not in self.mgroup.mfields:
 				continue
-			self.fields[fieldname].set_default(value)
+			self.mgroup.mfields[fieldname].set_default(self, value)
 		self._loaded = True
 		self.signal('record-changed')
 
-	def set(self, val, modified=False):
-		later={}
+	def set(self, val, modified=False, signal=True):
+#		later={}
+		self.modified = modified
 		for fieldname, value in val.items():
-			if fieldname not in self.fields:
+			if fieldname not in self.mgroup.mfields:
 				continue
-			if isinstance(self.fields[fieldname], field.O2MField):
-				later[fieldname]=value
-				continue
-			self.fields[fieldname].set(value)
-			self.fields[fieldname].modified = modified
-		for fieldname, value in later.items():
-			self.fields[fieldname].set(value)
-			self.fields[fieldname].modified = modified
+#			if isinstance(self.mgroup.mfields[fieldname], field.O2MField):
+#				later[fieldname]=value
+#				continue
+			self.mgroup.mfields[fieldname].set(self, value)
+#		for fieldname, value in later.items():
+#			self.mgroup.mfields[fieldname].set(self, value)
 		self._loaded = True
-		self.signal('record-changed')
+		if signal:
+			self.signal('record-changed')
 
 	def reload(self):
 		if not self.id:
 			return
 		c= rpc.session.context.copy()
 		c.update(self.context_get())
-		value = self.rpc.read([self.id], self.fields.keys(), c)[0]
+		value = self.rpc.read([self.id], self.mgroup.mfields.keys(), c)[0]
 		self.set(value)
 
 	def expr_eval(self, dom, check_load=True):
@@ -211,9 +201,9 @@ class ModelRecord(signal_event.signal_event):
 		if check_load:
 			self._check_load()
 		d = {}
-		for name, mfield in self.fields.items():
+		for name, mfield in self.mgroup.mfields.items():
 			if not isinstance(mfield, field.O2MField):
-				d[name] = mfield.get()
+				d[name] = mfield.get(self)
 
 		d['current_date'] = time.strftime('%Y-%m-%d')
 		d['time'] = time
@@ -238,9 +228,9 @@ class ModelRecord(signal_event.signal_event):
 		self.set(response.get('value', {}), modified=True)
 		if 'domain' in response:
 			for fieldname, value in response['domain'].items():
-				if fieldname not in self.fields:
+				if fieldname not in self.mgroup.mfields:
 					continue
-				self.fields[fieldname].attrs['domain'] = value
+				self.mgroup.mfields[fieldname].attrs['domain'] = value
 		self.signal('record-changed')
 	
 	def cond_default(self, field, value):

@@ -75,9 +75,9 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 		self.sort_asc = not (self.sort_asc and (self.last_sort == name))
 		self.last_sort = name
 		if self.sort_asc:
-			f = lambda x,y: cmp(x[name].get_client(), y[name].get_client())
+			f = lambda x,y: cmp(x[name].get_client(x), y[name].get_client(y))
 		else:
-			f = lambda x,y: -1 * cmp(x[name].get_client(), y[name].get_client())
+			f = lambda x,y: -1 * cmp(x[name].get_client(x), y[name].get_client(y))
 		self.models.sort(f)
 		for idx, row in enumerate(self.models):
 			iter = self.get_iter(idx)
@@ -150,6 +150,7 @@ class ViewList(object):
 		self.model_add_new = True
 		self.widget = widget
 		self.widget.screen = screen
+		self.reload = False
 
 		self.display()
 
@@ -239,10 +240,10 @@ class ViewList(object):
 	# has not changed -> better ergonomy. To test
 	#
 	def display(self):
-		print 'DISPALY VIEW LIST'
-		if (not self.widget.get_model()) or self.screen.models<>self.widget.get_model().model_group:
+		if self.reload or (not self.widget.get_model()) or self.screen.models<>self.widget.get_model().model_group:
 			self.store = AdaptModelGroup(self.screen.models)
 			self.widget.set_model(self.store)
+		self.reload = False
 		if self.screen.current_model:
 			path = self.store.on_get_path(self.screen.current_model)
 			self.widget.set_cursor(path, self.widget.get_columns()[0], bool(self.widget.editable))
