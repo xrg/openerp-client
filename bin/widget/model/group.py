@@ -273,13 +273,15 @@ class ModelRecordGroup(signal_event.signal_event):
 				models.fields[f]['name'] = f
 				to_add.append(f)
 		self.mfields_load(to_add, models)
+		for fname in to_add:
+			for m in models.models:
+				m.value[fname] = self.mfields[fname].create(m)
 		return to_add
 
 	def add_fields(self, fields, models):
 		import time
 		ct = time.time()
 		to_add = self.add_fields_custom(fields, models)
-		models2 = models
 		models = models.models
 		if not len(models):
 			return True

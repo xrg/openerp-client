@@ -57,3 +57,5 @@ def node_attributes(node):
 		if attrs.item(i).localName == "digits" and isinstance(attrs.item(i).nodeValue, (str, unicode)):
 			result[attrs.item(i).localName] = eval(attrs.item(i).nodeValue)
 	return result
+
+

@@ -185,6 +185,7 @@ class Screen(signal_event.signal_event):
 			self.models.add_fields(fields, self.models)
 		self.fields = self.models.fields
 
+
 		parser = widget_parse(parent=self.parent)
 		dom = xml.dom.minidom.parseString(arch)
 		view = parser.parse(self, dom, self.fields, toolbar=toolbar)
