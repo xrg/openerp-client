@@ -109,6 +109,7 @@ class _container(object):
 		self.sg = gtk.SizeGroup(gtk.SIZE_GROUP_HORIZONTAL)
 		self.tooltips = gtk.Tooltips()
 		self.trans_box = []
+		self.trans_box_label = []
 
 	def new(self, col=4):
 		table = gtk.Table(1, col)
@@ -144,14 +145,14 @@ class _container(object):
 			yopt = False
 		if name:
 			label = gtk.Label(name)
+			eb = gtk.EventBox()
+			eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
+			self.trans_box_label.append((eb, name, fname))
+			eb.add(label)
 			if help:
-				eb = gtk.EventBox()
-				eb.add(label)
 				self.tooltips.set_tip(eb, help)
 				self.tooltips.enable()
 				eb.show()
-			else:
-				eb = label
 			if '_' in name:
 				label.set_text_with_mnemonic(name)
 				label.set_mnemonic_widget(widget)
@@ -330,6 +331,8 @@ class parser_form(widget.view.interface.parser_interface):
 				container.wid_add(widget_act.widget, colspan=int(attrs.get('colspan', 3)), expand=True)
 		for (ebox,src,name,widget) in container.trans_box:
 			ebox.connect('button_press_event',self.translate, model, name, src, widget)
+		for (ebox,src,name) in container.trans_box_label:
+			ebox.connect('button_press_event', self.translate_label, model, name, src)
 		return container.pop(), dict_widget, button_list, on_write
 
 	def translate(self, widget, event, model, name, src, widget_entry):
@@ -454,6 +457,59 @@ class parser_form(widget.view.interface.parser_interface):
 		win.destroy()
 		return True
 
+	def translate_label(self, widget, event, model, name, src):
+		if event.button != 3:
+			return
+		lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable', '=', '1')])
+		langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
+		#langs.append({'code': 'en_EN', 'name': 'English'})
+
+		win = gtk.Dialog('Add Translation')
+		win.vbox.set_spacing(5)
+		vbox = gtk.VBox(spacing=5)
+
+		entries_list = []
+		for lang in langs:
+			code=lang['code']
+			val = rpc.session.rpc_exec_auth('/object', 'execute', model, 'read_string', False, [code], [name])
+			if val and code in val:
+				val = val[code]
+			else:
+				val={'code': code, 'name': src}
+			label = gtk.Label(lang['name'])
+			entry = gtk.Entry()
+			entry.set_text(val[name])
+			entries_list.append((code, entry))
+			hbox = gtk.HBox(homogeneous=True)
+			hbox.pack_start(label, expand=False, fill=False)
+			hbox.pack_start(entry, expand=True, fill=True)
+			vbox.pack_start(hbox, expand=False, fill=True)
+		vp = gtk.Viewport()
+		vp.set_shadow_type(gtk.SHADOW_NONE)
+		vp.add(vbox)
+		sv = gtk.ScrolledWindow()
+		sv.set_policy(gtk.POLICY_AUTOMATIC,gtk.POLICY_AUTOMATIC )
+		sv.set_shadow_type(gtk.SHADOW_NONE)
+		sv.add(vp)
+		win.vbox.add(sv)
+		win.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+		win.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
+		win.resize(400,200)
+		win.show_all()
+		ok = False
+		while not ok:
+			res = win.run()
+			ok = True
+			if res == gtk.RESPONSE_OK:
+				to_save = map(lambda x: (x[0], x[1].get_text()), entries_list)
+				while to_save:
+					code, val = to_save.pop()
+					rpc.session.rpc_exec_auth('/object', 'execute', model, 'write_string', False, [code], {name: val})
+			if res == gtk.RESPONSE_CANCEL:
+				win.destroy()
+				return
+		win.destroy()
+		return True
 
 import calendar
 import spinbutton
