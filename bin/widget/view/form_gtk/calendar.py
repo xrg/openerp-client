@@ -52,7 +52,7 @@ class calendar(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, attrs=attrs)
 		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_calendar", gettext.textdomain())
-		self.win_gl.signal_connect('on_but_calendar_clicked', self.cal_open)
+		self.win_gl.signal_connect('on_but_calendar_clicked', self.cal_open, model)
 		self.widget = self.win_gl.get_widget('widget_calendar')
 		self.entry = self.win_gl.get_widget('ent_calendar')
 		self.entry.connect('button_press_event', self._menu_open)
@@ -101,7 +101,7 @@ class calendar(interface.widget_interface):
 			self.entry.set_text(t)
 		return True
 
-	def cal_open(self, widget=None, val=None):
+	def cal_open(self, model, widget=None, val=None):
 		if self.readonly:
 			common.message(_('This widget is readonly !'))
 			return True
@@ -110,7 +110,7 @@ class calendar(interface.widget_interface):
 		cal = win_gl.get_widget('cal_calendar')
 		win.set_destroy_with_parent(True)
 		try:
-			val = self.get_value()
+			val = self.get_value(model)
 			if val:
 				cal.select_month(int(val[5:7])-1, int(val[0:4]))
 				cal.select_day(int(val[8:10]))
@@ -132,7 +132,7 @@ class datetime(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs=attrs)
 		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_calendar", gettext.textdomain())
-		self.win_gl.signal_connect('on_but_calendar_clicked', self.cal_open)
+		self.win_gl.signal_connect('on_but_calendar_clicked', self.cal_open, model)
 		self.widget = self.win_gl.get_widget('widget_calendar')
 		self.entry = self.win_gl.get_widget('ent_calendar')
 		self.entry.connect('button_press_event', self._menu_open)
@@ -182,7 +182,7 @@ class datetime(interface.widget_interface):
 			self.entry.set_text(t)
 		return True
 
-	def cal_open(self, widget=None, val=None):
+	def cal_open(self, model, widget=None, val=None):
 		if self.readonly:
 			common.message(_('This widget is readonly !'))
 			return True
@@ -193,7 +193,7 @@ class datetime(interface.widget_interface):
 		cal = win_gl.get_widget('calendar')
 		win.set_destroy_with_parent(True)
 		try:
-			val = self.get_value()
+			val = self.get_value(model)
 			if val:
 				hour.set_value(int(val[11:13]))
 				minute.set_value(int(val[-5:-3]))
