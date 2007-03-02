@@ -458,58 +458,68 @@ class parser_form(widget.view.interface.parser_interface):
 		return True
 
 	def translate_label(self, widget, event, model, name, src):
+		def callback(self, widget, event, model, name, src):
+			lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable', '=', '1')])
+			langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
+			#langs.append({'code': 'en_EN', 'name': 'English'})
+	
+			win = gtk.Dialog('Add Translation')
+			win.vbox.set_spacing(5)
+			vbox = gtk.VBox(spacing=5)
+	
+			entries_list = []
+			for lang in langs:
+				code=lang['code']
+				val = rpc.session.rpc_exec_auth('/object', 'execute', model, 'read_string', False, [code], [name])
+				if val and code in val:
+					val = val[code]
+				else:
+					val={'code': code, 'name': src}
+				label = gtk.Label(lang['name'])
+				entry = gtk.Entry()
+				entry.set_text(val[name])
+				entries_list.append((code, entry))
+				hbox = gtk.HBox(homogeneous=True)
+				hbox.pack_start(label, expand=False, fill=False)
+				hbox.pack_start(entry, expand=True, fill=True)
+				vbox.pack_start(hbox, expand=False, fill=True)
+			vp = gtk.Viewport()
+			vp.set_shadow_type(gtk.SHADOW_NONE)
+			vp.add(vbox)
+			sv = gtk.ScrolledWindow()
+			sv.set_policy(gtk.POLICY_AUTOMATIC,gtk.POLICY_AUTOMATIC )
+			sv.set_shadow_type(gtk.SHADOW_NONE)
+			sv.add(vp)
+			win.vbox.add(sv)
+			win.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+			win.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
+			win.resize(400,200)
+			win.show_all()
+			ok = False
+			while not ok:
+				res = win.run()
+				ok = True
+				if res == gtk.RESPONSE_OK:
+					to_save = map(lambda x: (x[0], x[1].get_text()), entries_list)
+					while to_save:
+						code, val = to_save.pop()
+						rpc.session.rpc_exec_auth('/object', 'execute', model, 'write_string', False, [code], {name: val})
+				if res == gtk.RESPONSE_CANCEL:
+					win.destroy()
+					return
+			win.destroy()
+			return True
 		if event.button != 3:
 			return
-		lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable', '=', '1')])
-		langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
-		#langs.append({'code': 'en_EN', 'name': 'English'})
-
-		win = gtk.Dialog('Add Translation')
-		win.vbox.set_spacing(5)
-		vbox = gtk.VBox(spacing=5)
-
-		entries_list = []
-		for lang in langs:
-			code=lang['code']
-			val = rpc.session.rpc_exec_auth('/object', 'execute', model, 'read_string', False, [code], [name])
-			if val and code in val:
-				val = val[code]
-			else:
-				val={'code': code, 'name': src}
-			label = gtk.Label(lang['name'])
-			entry = gtk.Entry()
-			entry.set_text(val[name])
-			entries_list.append((code, entry))
-			hbox = gtk.HBox(homogeneous=True)
-			hbox.pack_start(label, expand=False, fill=False)
-			hbox.pack_start(entry, expand=True, fill=True)
-			vbox.pack_start(hbox, expand=False, fill=True)
-		vp = gtk.Viewport()
-		vp.set_shadow_type(gtk.SHADOW_NONE)
-		vp.add(vbox)
-		sv = gtk.ScrolledWindow()
-		sv.set_policy(gtk.POLICY_AUTOMATIC,gtk.POLICY_AUTOMATIC )
-		sv.set_shadow_type(gtk.SHADOW_NONE)
-		sv.add(vp)
-		win.vbox.add(sv)
-		win.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
-		win.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
-		win.resize(400,200)
-		win.show_all()
-		ok = False
-		while not ok:
-			res = win.run()
-			ok = True
-			if res == gtk.RESPONSE_OK:
-				to_save = map(lambda x: (x[0], x[1].get_text()), entries_list)
-				while to_save:
-					code, val = to_save.pop()
-					rpc.session.rpc_exec_auth('/object', 'execute', model, 'write_string', False, [code], {name: val})
-			if res == gtk.RESPONSE_CANCEL:
-				win.destroy()
-				return
-		win.destroy()
+		menu = gtk.Menu()
+		item = gtk.ImageMenuItem(_('Translate label'))
+		item.connect("activate", callback, widget, event, model, name, src)
+		item.set_sensitive(1)
+		item.show()
+		menu.append(item)
+		menu.popup(None,None,None,event.button,event.time)
 		return True
+
 
 import calendar
 import spinbutton

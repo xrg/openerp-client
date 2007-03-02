@@ -50,6 +50,7 @@ class ViewForm(object):
 							 for name, widget in children.items()])
 
 		if toolbar:
+			print "toolbar:", toolbar
 			hb = gtk.HBox()
 			hb.pack_start(self.widget)
 
@@ -116,10 +117,72 @@ class ViewForm(object):
 						self.screen.reload()
 						return value
 
+					def _translate_label(self, event, tool):
+						if event.button != 3:
+							return False
+						def callback(self, tool):
+							lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable', '=', '1')])
+							langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
+
+							win = gtk.Dialog('Add Translation')
+							win.vbox.set_spacing(5)
+							vbox = gtk.VBox(spacing=5)
+
+							entries_list = []
+							for lang in langs:
+								code = lang['code']
+								val = rpc.session.rpc_exec_auth('/object', 'execute', tool['type'], 'read', [tool['id']], ['name'], {'lang': code})
+								val = val[0]
+
+								label = gtk.Label(lang['name'])
+								entry = gtk.Entry()
+								entry.set_text(val['name'])
+								entries_list.append((code, entry))
+								hbox = gtk.HBox(homogeneous=True)
+								hbox.pack_start(label, expand=False, fill=False)
+								hbox.pack_start(entry, expand=True, fill=True)
+								vbox.pack_start(hbox, expand=False, fill=True)
+							vp = gtk.Viewport()
+							vp.set_shadow_type(gtk.SHADOW_NONE)
+							vp.add(vbox)
+							sv = gtk.ScrolledWindow()
+							sv.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+							sv.set_shadow_type(gtk.SHADOW_NONE)
+							sv.add(vp)
+							win.vbox.add(sv)
+							win.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+							win.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
+							win.resize(400,200)
+							win.show_all()
+							ok = False
+							while not ok:
+								res = win.run()
+								ok = True
+								if res == gtk.RESPONSE_OK:
+									to_save = map(lambda x: (x[0], x[1].get_text()), entries_list)
+									while to_save:
+										code, val = to_save.pop()
+										rpc.session.rpc_exec_auth('/object', 'execute', tool['type'], 'write', [tool['id']], {'name': val}, {'lang': code})
+								if res == gtk.RESPONSE_CANCEL:
+									win.destroy()
+									return
+							win.destroy()
+							return True
+						menu = gtk.Menu()
+						item = gtk.ImageMenuItem(_('Translate label'))
+						item.connect("activate", callback, tool)
+						item.set_sensitive(1)
+						item.show()
+						menu.append(item)
+						menu.popup(None,None,None,event.button,event.time)
+						return True
+
 					if icontype in ('relate',):
 						tbutton.connect('clicked', _relate, (tool['model_id'][1], tool['name']))
 					elif icontype in ('action','print'):
 						tbutton.connect('clicked', _action, tool)
+
+					tbutton.connect('button_press_event', _translate_label, tool)
 
 					sep = True
 
