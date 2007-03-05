@@ -199,7 +199,10 @@ class Float(Char):
 		return locale.format('%.'+str(digit)+'f', model[self.field_name].get_client(model) or 0.0)
 
 	def value_from_text(self, model, text):
-		return locale.atof(text)
+		try:
+			return locale.atof(text)
+		except:
+			return 0.0
 
 class M2O(Char):
 

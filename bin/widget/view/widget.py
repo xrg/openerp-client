@@ -50,7 +50,8 @@ class ViewWidget(object):
 		self.widget.refresh()
 
 	def set_value(self, model):
-		self.widget.set_value(model, model.mgroup.mfields[self.widget_name])
+		if self.widget_name in model.mgroup.mfields:
+			self.widget.set_value(model, model.mgroup.mfields[self.widget_name])
 
 	def _get_model(self):
 		return self.view_form.screen.current_model
