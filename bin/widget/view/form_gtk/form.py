@@ -50,14 +50,13 @@ class Button(Observable):
 		args = {
 			'label': attrs.get('string', 'unknown')
 		}
-#		if 'icon' in attrs:
-#			args['stock'] = eval('gtk.'+attrs['icon'])
 		self.widget = gtk.Button(**args)
 		if attrs.get('icon', False):
+			stock = eval('gtk.'+attrs['icon'])
 			icon = gtk.Image()
-			icon.set_from_stock(attrs['icon'], gtk.ICON_SIZE_BUTTON)
+			icon.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
 			self.widget.set_image(icon)
-#		self.widget.set_use_stock(True)
+#			self.widget.set_use_stock(True)
 #		self.widget.set_label(args['label'])
 
 		self.widget.show()

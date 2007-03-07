@@ -107,6 +107,7 @@ class parser_tree(interface.parser_interface):
 				col.set_min_width(width)
 				col.connect('clicked', sort_model, treeview)
 				col.set_resizable(True)
+				col.set_visible(not fields[fname].get('invisible', False))
 				treeview.append_column(col)
 		return treeview, {}, [], on_write
 
