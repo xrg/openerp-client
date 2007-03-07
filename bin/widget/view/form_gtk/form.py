@@ -520,6 +520,7 @@ class parser_form(widget.view.interface.parser_interface):
 		return True
 
 
+import float_time
 import calendar
 import spinbutton
 import spinint
@@ -548,6 +549,7 @@ widgets_type = {
 	'integer': (spinint.spinint, 1, False),
 	'selection': (selection.selection, 1, False),
 	'char': (char.char, 1, False),
+	'float_time': (float_time.float_time, 1, False),
 	'boolean': (checkbox.checkbox, 1, False),
 	'button': (button.button, 1, False),
 	'reference': (reference.reference, 1, False),
