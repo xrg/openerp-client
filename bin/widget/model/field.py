@@ -323,6 +323,7 @@ class ReferenceField(CharField):
 
 TYPES = {
 	'char' : CharField,
+	'float_time': FloatField,
 	'integer' : IntegerField,
 	'float' : FloatField,
 	'many2one' : M2OField,

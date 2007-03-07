@@ -94,6 +94,7 @@ class parser_tree(interface.parser_interface):
 				twidth = {
 					'integer': 60,
 					'float': 80,
+					'float_time': 80,
 					'date': 70,
 					'datetime': 120,
 					'selection': 90,
@@ -205,6 +206,23 @@ class Float(Char):
 		except:
 			return 0.0
 
+from mx.DateTime import DateTimeDelta
+
+class FloatTime(Char):
+	def get_textual_value(self, model):
+		_, digit = self.attrs.get('digits', (16,2) )
+		return DateTimeDelta(0, model[self.field_name].get_client(model) or 0.0).strftime('%H:%M')
+
+	def value_from_text(self, model, text):
+		try:
+			if text and ':' in text:
+				return round(DateTimeDelta(0,int(text.split(':')[0]), int(text.split(':')[1])).hours, 2)
+			else:
+				return locale.atof(text)
+		except:
+			pass
+		return 0.0
+
 class M2O(Char):
 
 	def value_from_text(self, model, text):
@@ -312,6 +330,7 @@ CELLTYPES = dict(char=Char,
 				 many2many=M2M,
 				 selection=Selection,
 				 float=Float,
+				 float_time=FloatTime,
 				 int=Int,
 				 datetime=Datetime)
 
