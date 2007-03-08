@@ -55,7 +55,6 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 		try:
 			real_value = cell.value_from_text(current_model, value)
 			modelfield.set_client(current_model, real_value)
-			current_model.modified = False
 		except parser.UnsettableColumn:
 			return
 
@@ -114,6 +113,17 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 		return super(EditableTreeView, self).set_cursor(path, col, *args, **argv)
 
 	def set_value(self):
+		path, column = self.get_cursor()
+		store = self.get_model()
+		model = store.get_value(store.get_iter(path), 0)
+		modelfield = model[column.name]
+		if hasattr(modelfield, 'editabletree_entry'):
+			entry = modelfield.editabletree_entry
+			if isinstance(entry, gtk.Entry):
+				txt = entry.get_text()
+			else:
+				txt = entry.get_active_text()
+			self.on_quit_cell(model, column.name, txt)
 		return True
 
 	def on_keypressed(self, entry, event):
@@ -190,9 +200,10 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 								create=(event.keyval==gtk.keysyms.F1), value=value)
 			self.set_cursor(path, column, True)
 		else:
-			if event.keyval >= 48 and event.keyval <= 200:
-				modelfield = model[column.name]
-				model.modified = True
+			modelfield = model[column.name]
+			# store in the model the entry widget to get the value in set_value
+			modelfield.editabletree_entry = entry
+			model.modified = True
 			return False
 
 		return True
