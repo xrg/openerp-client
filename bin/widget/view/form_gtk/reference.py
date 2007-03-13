@@ -101,8 +101,8 @@ class reference(interface.widget_interface):
 	def _color_widget(self):
 		return self.wid_text
 
-	def set_value(self, model_field):
-		model_field.set_client(self._value)
+	def set_value(self, model, model_field):
+		return model_field.set_client(model, self._value)
 
 	def _menu_sig_pref(self, obj):
 		self._menu_sig_default_set()

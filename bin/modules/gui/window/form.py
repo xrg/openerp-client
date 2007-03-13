@@ -54,8 +54,6 @@ from widget.screen import Screen
 
 class form(object):
 	def __init__(self, model, res_id=False, domain=[], view_type=None, view_ids=[], window=None, context={}):
-		import time
-		ttime = time.time()
 		if not view_type:
 			view_type = ['form','tree']
 		else:
@@ -120,7 +118,6 @@ class form(object):
 		else:
 			if len(view_type) and view_type[0]=='form':
 				self.sig_new(autosave=False)
-		print 'TOTAL TIME', ttime- time.time()
 
 	def sig_goto(self, *args):
 		if not self.modified_save():
