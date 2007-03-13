@@ -52,6 +52,7 @@ class CharField(object):
 		self.attrs = attrs
 		self.real_attrs = attrs.copy()
 		self.name = attrs['name']
+		self.internal = False
 
 	def sig_changed(self, model):
 		if self.attrs.get('on_change',False):
