@@ -170,6 +170,14 @@ class rpc_session(object):
 				else:
 					pass
 					common.error(_('Application Error'), _('View details'), err.faultString)
+			except tiny_socket.Myexception, err:
+				a = rpc_exception(err.faultCode, err.faultString)
+				if a.type in ('warning', 'UserError'):
+					common.warning(a.data, a.message)
+					pass
+				else:
+					pass
+					common.error(_('Application Error'), _('View details'), err.faultString)
 			except Exception, e:
 				common.error(_('Application Error'), _('View details'), str(e))
 		else:
@@ -194,12 +202,11 @@ class rpc_session(object):
 			_sock = tiny_socket.mysocket()
 			self._gw = tinySocket_gw
 			try:
-				_sock.connect(_url)
+				_sock.connect(url, int(port))
 				_sock.mysend(('common', 'login', db or '', uname or '', passwd or ''))
 				res = _sock.myreceive()
 				_sock.disconnect()
 			except socket.error,e:
-				print "exception", e
 				return -1
 			if not res:
 				self._open=False
@@ -231,12 +238,12 @@ class rpc_session(object):
 		else:
 			sock = tiny_socket.mysocket()
 			try:
-				sock.connect(url)
+				sock.connect(m.group(2), int(m.group(3)))
 				sock.mysend(('db', 'list'))
 				res = sock.myreceive()
 				sock.disconnect()
 				return res
-			except:
+			except Exception, e:
 				return -1
 	
 	def db_exec_no_except(self, url, method, *args):
@@ -246,7 +253,7 @@ class rpc_session(object):
 			return getattr(sock, method)(*args)
 		else:
 			sock = tiny_socket.mysocket()
-			sock.connect(url)
+			sock.connect(m.group(2), int(m.group(3)))
 			sock.mysend(('db', method)+args)
 			res = sock.myreceive()
 			sock.disconnect()
@@ -257,8 +264,6 @@ class rpc_session(object):
 		try:
 			res = self.db_exec_no_except(url, method, *args)
 		except socket.error, msg:
-			print '-'*50
-			print msg
 			common.warning('Could not contact server!')
 		return res
 
