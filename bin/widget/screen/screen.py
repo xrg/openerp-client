@@ -224,8 +224,10 @@ class Screen(signal_event.signal_event):
 		self.models.on_write = func_name
 
 	def cancel_current(self):
-		self.current_model.cancel()
-		self.current_view.cancel()
+		if self.current_model:
+			self.current_model.cancel()
+		if self.current_view:
+			self.current_view.cancel()
 
 	def save_current(self):
 		if not self.current_model:
