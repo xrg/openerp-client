@@ -105,10 +105,13 @@ class tree(object):
 				rb.set_label_widget(l)
 
 				icon = gtk.Image() 
-				if r[icon_name].startswith('STOCK_'):
+				if hasattr(r[icon_name], 'startswith') and r[icon_name].startswith('STOCK_'):
 					icon.set_from_stock(getattr(gtk, r[icon_name]), gtk.ICON_SIZE_BUTTON)
 				else:
-					icon.set_from_stock(r[icon_name], gtk.ICON_SIZE_BUTTON)
+					try:
+						icon.set_from_stock(r[icon_name], gtk.ICON_SIZE_BUTTON)
+					except:
+						pass
 
 				hb = gtk.HBox(spacing=6)
 				hb.pack_start(icon)
