@@ -37,6 +37,7 @@
 
 import os, base64, options
 import gc
+import common
 
 class Printer(object):
 
@@ -117,6 +118,8 @@ def print_w32_filename(filename):
 	win32api.ShellExecute (0, "print", filename, None, ".", 0)
 
 def print_data(data):
+	if 'result' not in data:
+		common.message(_('Error no report'))
 	if data.get('code','normal')=='zlib':
 		import zlib
 		content = zlib.decompress(base64.decodestring(data['result']))
