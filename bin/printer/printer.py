@@ -101,6 +101,8 @@ class Printer(object):
 					def opener(fn):
 						os.spawnv(os.P_NOWAIT, options.options['printer.softpath'], (os.path.basename(options.options['printer.softpath']),fn))
 					return opener
+			else:
+				return lambda fn: print_linux_filename(fn)
 
 	def print_file(self, fname, ftype):
 		finderfunc = self.openers[ftype]
@@ -111,7 +113,7 @@ class Printer(object):
 printer = Printer()
 
 def print_linux_filename(filename):
-	print 'Linux Automatic Printing not implemented. Use XPDF !'
+	common.message(_('Linux Automatic Printing not implemented.\nUse preview option !'))
 
 def print_w32_filename(filename):
 	import win32api

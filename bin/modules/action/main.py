@@ -52,10 +52,6 @@ class main(service.Service):
 				return False
 			datas['id'] = ids[0]
 		try:
-			print "name:", name
-			print "ids:", ids
-			print "datas:", datas
-			print "rpc.session.context:", rpc.session.context
 			report_id = rpc.session.rpc_exec_auth('/report', 'report', name, ids, datas, rpc.session.context)
 			state = False
 			attempt = 0
