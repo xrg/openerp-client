@@ -1,3 +1,42 @@
+16/03/2007
+4.0.3
+	Summary:
+		Some bugfixes
+	Bugfixes:
+		Fix the set default value fonctionality
+		Fix translation of some text field
+		Fix double signal emit in some cases
+		Improve color fields
+		Fix transient of some windows
+		Fix local date to force 4 digits for years
+		Fix print report from tree view
+		Improve load data when exception occurs
+		Fix height of wizard dialog
+		Add epdfview to the pdf viewers
+		Fix cancel if there is no current model
+		Fix set icon if there is no icon selected
+		Fix print workflow on win32
+		Add error message when printing from linux without preview
+
+Wed Jan 17 15:13:18 CET 2007
+4.0.2
+	Summary:
+		Some bugfixes
+
+	Bugfixes:
+		Fix transient for windows for win attachement
+		Fix regexp for name server
+		Fix filename on selection dialog
+
+Fri Dec 22 12:12:24 CET 2006
+4.0.1
+	Summary:
+		Some bugfixes
+	
+	Bugfixes:
+		Fix restore DB to be able to change server
+		Add error message on xmlrpc exception in import window
+
 Mon Dec 4 18:01:55 CET 2006
 4.0.0
 	Summary:
