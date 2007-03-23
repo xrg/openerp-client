@@ -190,7 +190,8 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 		elif event.keyval == gtk.keysyms.Escape:
 			if model.id is None:
 				store.remove(store.get_iter(path))
-			self.screen.current_model = False
+			if not path[0]:
+				self.screen.current_model = False
 			self.screen.display()
 			self.set_cursor(path, column, False)
 		elif event.keyval in (gtk.keysyms.F1, gtk.keysyms.F2):
