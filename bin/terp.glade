@@ -373,8 +373,8 @@
 </widget>
 
 <widget class="GtkWindow" id="win_main">
-  <property name="width_request">920</property>
-  <property name="height_request">780</property>
+  <property name="width_request">600</property>
+  <property name="height_request">400</property>
   <property name="visible">True</property>
   <property name="title" translatable="yes">Tiny ERP</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
