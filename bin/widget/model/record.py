@@ -48,7 +48,7 @@ class EvalEnvironment(object):
 			return time.strftime('%Y-%m-%d')
 		if item=="time":
 			return time
-		return self.parent.get()[item]
+		return self.parent.get(includeid=True)[item]
 
 
 class ModelRecord(signal_event.signal_event):
@@ -93,11 +93,13 @@ class ModelRecord(signal_event.signal_event):
 			return True
 		return False
 
-	def get(self, get_readonly=True):
+	def get(self, get_readonly=True, includeid=False):
 		self._check_load()
 		value = dict([(name, field.get(self))
 					  for name, field in self.mgroup.mfields.items()
 					  if get_readonly or not field.attrs.get('readonly', False)])
+		if includeid:
+			value['id'] = self.id
 		return value
 
 	def cancel(self):
@@ -172,17 +174,17 @@ class ModelRecord(signal_event.signal_event):
 		self.signal('record-changed')
 
 	def set(self, val, modified=False, signal=True):
-#		later={}
+		later={}
 		self.modified = modified
 		for fieldname, value in val.items():
 			if fieldname not in self.mgroup.mfields:
 				continue
-#			if isinstance(self.mgroup.mfields[fieldname], field.O2MField):
-#				later[fieldname]=value
-#				continue
+			if isinstance(self.mgroup.mfields[fieldname], field.O2MField):
+				later[fieldname]=value
+				continue
 			self.mgroup.mfields[fieldname].set(self, value)
-#		for fieldname, value in later.items():
-#			self.mgroup.mfields[fieldname].set(self, value)
+		for fieldname, value in later.items():
+			self.mgroup.mfields[fieldname].set(self, value)
 		self._loaded = True
 		if signal:
 			self.signal('record-changed')

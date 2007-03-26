@@ -72,18 +72,20 @@ class Button(Observable):
 				button_type = self.attrs.get('type', 'workflow')
 				if button_type == 'workflow':
 					rpc.session.rpc_exec_auth('/object', 'exec_workflow',
-											  self.form.screen.name,
-											  self.attrs['name'], id)
+											self.form.screen.name,
+											self.attrs['name'], id)
 				elif button_type == 'object':
+					if not id:
+						return
 					rpc.session.rpc_exec_auth('/object', 'execute',
-											  self.form.screen.name,
-											  self.attrs['name'],
-											  [id], model.context_get())
+											self.form.screen.name,
+											self.attrs['name'],
+											[id], model.context_get())
 				elif button_type == 'action':
 					obj = service.LocalService('action.main')
 					action_id = int(self.attrs['name'])
 					obj.execute(action_id, {'model':self.form.screen.name, 'id': id,
-									   'ids': [id]})
+									'ids': [id]})
 				else:
 					raise 'Unallowed button type'
 				self.form.screen.reload()
@@ -201,8 +203,6 @@ class parser_form(widget.view.interface.parser_interface):
 				icon.set_from_stock(attrs['name'], gtk.ICON_SIZE_DIALOG)
 				container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False))
 			elif node.localName=='separator':
-				print "node:", node
-				print "attrs:", attrs
 				vbox = gtk.VBox()
 				if 'string' in attrs:
 					text = attrs.get('string', 'No String Attr.')

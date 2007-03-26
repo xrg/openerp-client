@@ -218,7 +218,9 @@ class ModelRecordGroup(signal_event.signal_event):
 					   parent=self.parent, new=True)
 		newmod.signal_connect(self, 'record-changed', self._record_changed)
 		if default:
-			newmod.default_get(domain, context)
+			ctx=context.copy()
+			ctx.update(self.context)
+			newmod.default_get(domain, ctx)
 		self.signal('model-changed', newmod)
 		return newmod
 	

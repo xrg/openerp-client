@@ -64,12 +64,13 @@ class CharField(object):
 		dom = self.attrs.get('domain', '[]')
 		return model.expr_eval(dom)
 
-	def context_get(self, model, check_load=True):
+	def context_get(self, model, check_load=True, eval=True):
 		context = {}
 		context.update(self.parent.context)
 		field_context_str = self.attrs.get('context', '{}') or '{}'
-		field_context = model.expr_eval('dict(%s)' % field_context_str, check_load=check_load)
-		context.update(field_context)
+		if eval:
+			field_context = model.expr_eval('dict(%s)' % field_context_str, check_load=check_load)
+			context.update(field_context)
 		return context
 
 	def validate(self, model):
@@ -222,8 +223,7 @@ class O2MField(CharField):
 
 	def create(self, model):
 		from widget.model.group import ModelRecordGroup
-		#mod = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent)
-		mod = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model)
+		mod = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model, context=self.context_get(model, eval=False))
 		return mod
 
 	def _get_modified(self, model):
@@ -260,8 +260,7 @@ class O2MField(CharField):
 
 	def set(self, model, value, test_state=False, modified=False):
 		from widget.model.group import ModelRecordGroup
-		#model.value[self.name] = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=self.parent, context=self.context_get(model,False))
-		model.value[self.name] = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model, context={}) #self.context_get(model,False))
+		model.value[self.name] = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model, context=self.context_get(model, False))
 		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 		model.value[self.name].pre_load(value, display=False)
 		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
@@ -277,7 +276,6 @@ class O2MField(CharField):
 			rpc2 = RPCProxy(self.attrs['relation'])
 			fields = rpc2.fields_get(value[0].keys(), context)
 
-		#model.value[self.name] = ModelRecordGroup(resource=self.attrs['relation'], fields=fields, parent=self.parent)
 		model.value[self.name] = ModelRecordGroup(resource=self.attrs['relation'], fields=fields, parent=model)
 		model.value[self.name].signal_connect(model.value[self.name], 'model-changed', self._model_changed)
 		mod=None
