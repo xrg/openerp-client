@@ -88,7 +88,7 @@ class selection(interface.widget_interface):
 		model_field.set_client(model, self.value_get())
 
 	def _menu_sig_default_set(self):
-		self.set_value(self._view.modelfield)
+		self.set_value(self._view.model, self._view.modelfield)
 		super(selection, self)._menu_sig_default_set()
 
 	def display(self, model, model_field):
