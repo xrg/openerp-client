@@ -312,11 +312,11 @@ class ReferenceField(CharField):
 		if not value:
 			model.value[self.name] = False
 			return
-		model, id = value.split(',')
-		rpc2 = RPCProxy(model)
+		ref_model, id = value.split(',')
+		rpc2 = RPCProxy(ref_model)
 		result = rpc2.name_get([id], rpc.session.context)
 		if result:
-			model.value[self.name] = model, result[0]
+			model.value[self.name] = ref_model, result[0]
 		else:
 			model.value[self.name] = False
 
