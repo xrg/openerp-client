@@ -317,7 +317,7 @@ class db_create(object):
 					res.append( m.group(1) )
 					res.append( dbname )
 
-				self.sig_login(dbname=dbname, res=res)
+				self.sig_login(dbname=dbname)
 			return False
 		else:
 			pbar.pulse()
@@ -613,8 +613,17 @@ class terp_main(service.Service):
 		return True
 
 	def sig_logout(self, widget):
-		while self._win_del():
-			pass
+		res = True
+		while res:
+			wid = self._wid_get()
+			if wid:
+				if 'but_close' in wid.handlers:
+					res = wid.handlers['but_close'][1]()
+				if not res:
+					return False
+				res = self._win_del()
+			else:
+				res = False
 		id = self.sb_requests.get_context_id('message')
 		self.sb_requests.push(id, '')
 		id = self.sb_username.get_context_id('message')
@@ -623,6 +632,7 @@ class terp_main(service.Service):
 		self.sb_servername.push(id, _('Press Ctrl+O to login'))
 		self.secure_img.hide()
 		rpc.session.logout()
+		return True
 		
 	def sig_help_index(self, widget):
 		tools.launch_browser('http://tinyerp.com/documentation/user-manual/')
@@ -677,22 +687,23 @@ class terp_main(service.Service):
 		datas = {'model': self.pages[pn].model, 'ids':self.pages[pn].ids_get(), 'id' : self.pages[pn].id_get()}
 		plugins.execute(datas)
 
-	def sig_req_read(self, widget):
-		while self._win_del():
-			pass
-		rpc.session.logout()
-
 	def sig_quit(self, widget):
 		options.options.save()
 		gtk.main_quit()
 
 	def sig_close(self, widget):
 		if common.sur(_("Do you really want to quit ?"), parent=self.window):
+			if not self.sig_logout(widget):
+				return False
 			options.options.save()
 			gtk.main_quit()
 
 	def sig_delete(self, widget, event, data=None):
-		return not common.sur(_("Do you really want to quit ?"), parent=self.window)
+		if common.sur(_("Do you really want to quit ?"), parent=self.window):
+			if not self.sig_logout(widget):
+				return True
+			return False
+		return True
 
 	def win_add(self, win, datas):
 		self.pages.append(win)
@@ -748,10 +759,15 @@ class terp_main(service.Service):
 		self.sb_set()
 
 	def sig_db_new(self, widget):
+		if not self.sig_logout(widget):
+			return False
 		dia = db_create(self.sig_login)
 		res = dia.run(self.window)
+		return res
 
 	def sig_db_drop(self, widget):
+		if not self.sig_logout(widget):
+			return False
 		# 1) choose db (selection)
 		url, db_name, passwd = self._choose_db_select(_('Delete a database'))
 		if not db_name:
