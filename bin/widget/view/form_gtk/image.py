@@ -89,14 +89,14 @@ class image_wid(interface.widget_interface):
 		filechooser = FileChooser(multiple=False, title=_('Save as ...'))
 		filechooser.run()
 		if filechooser.ret:
-			file(filechooser.ret, 'w').write(decodestring(self._value))
+			file(filechooser.ret, 'wb').write(decodestring(self._value))
 
 	def load_file(self, widget):
 		filechooser = FileChooser(multiple=False, title=_('Open file ...'))
 		filechooser.run()
 		if filechooser.ret:
 			self.update_img(filechooser.ret)
-			self._value = encodestring(file(filechooser.ret).read())
+			self._value = encodestring(file(filechooser.ret).read('rb'))
 	
 	def update_img(self, path):
 		new_box = self.create_image(path)
@@ -111,10 +111,10 @@ class image_wid(interface.widget_interface):
 		super(image_wid, self).display(model, model_field)
 		if self._value:
 			try:
-				fname = file(os.tempnam()+'.jpg', 'w')
+				fname = file(os.tempnam(), 'wb')
 				fname.write(decodestring(self._value))
 				fname.flush()
-				self.update_img(fname.name+'.jpg')
+				self.update_img(fname.name)
 			except:
 				self.update_img('tinyerp.png')
 		else:
