@@ -110,10 +110,13 @@ class image_wid(interface.widget_interface):
 		self._value = model_field.get(model)
 		super(image_wid, self).display(model, model_field)
 		if self._value:
-			fname = file(os.tempnam(), 'w')
-			fname.write(decodestring(self._value))
-			fname.flush()
-			self.update_img(fname.name)
+			try:
+				fname = file(os.tempnam()+'.jpg', 'w')
+				fname.write(decodestring(self._value))
+				fname.flush()
+				self.update_img(fname.name+'.jpg')
+			except:
+				self.update_img('tinyerp.png')
 		else:
 			self.update_img('tinyerp.png')
 
