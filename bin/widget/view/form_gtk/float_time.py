@@ -54,17 +54,16 @@ class float_time(interface.widget_interface):
 	def text_to_float(self, text):
 		try:
 			if text and ':' in text:
-				rec = re.compile('([0-9]+)d +([0-9]+):([0-9]+)')
+				rec = re.compile('([\-0-9]+)d +([0-9]+):([0-9]+)')
 				res = rec.match(text)
 				if res:
-					return round(DateTimeDelta(res.group(1),int(res.group(2)), int(res.group(3))).hours + 0.008, 2)
-				return round(DateTimeDelta(0,int(text.split(':')[0]), int(text.split(':')[1])).hours + 0.008, 2)
+					return round(DateTimeDelta(int(res.group(1)),int(res.group(2)), int(res.group(3))).hours + 0.004, 2)
+				return round(DateTimeDelta(0,int(text.split(':')[0]), int(text.split(':')[1])).hours + 0.004, 2)
 			else:
 				return locale.atof(text)
 		except:
 			pass
 		return 0.0
-
 
 	def set_value(self, model, model_field):
 		v = self.widget.get_text()
