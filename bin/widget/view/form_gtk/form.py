@@ -289,6 +289,8 @@ class parser_form(widget.view.interface.parser_interface):
 				size = int(attrs.get('colspan', widgets_type[ type ][1]))
 				expand = widgets_type[ type ][2]
 				hlp = fields[name].get('help', attrs.get('help', False))
+				if attrs.get('height', False):
+					widget_act.widget.set_size_request(-1, int(attrs['height']))
 				container.wid_add(widget_act.widget, label, expand, translate=fields[name].get('translate',False), colspan=size, fname=name, help=hlp)
 
 			elif node.localName=='group':

@@ -27,6 +27,7 @@
 #
 ##############################################################################
 
+import re
 import gettext
 import gtk
 from gtk import glade
@@ -40,7 +41,7 @@ class float_time(interface.widget_interface):
 		self.win_gl = glade.XML(common.terp_path("terp.glade"), "widget_char", 
 								gettext.textdomain())
 		self.widget = self.win_gl.get_widget('widget_char')
-		self.widget.set_max_length(int(attrs.get('size',7)))
+		self.widget.set_max_length(int(attrs.get('size',11)))
 		self.widget.set_visibility(not attrs.get('invisible', False))
 		self.widget.set_width_chars(5)
 
@@ -53,7 +54,11 @@ class float_time(interface.widget_interface):
 	def text_to_float(self, text):
 		try:
 			if text and ':' in text:
-				return round(DateTimeDelta(0,int(text.split(':')[0]), int(text.split(':')[1])).hours, 2)
+				rec = re.compile('([0-9]+)d +([0-9]+):([0-9]+)')
+				res = rec.match(text)
+				if res:
+					return round(DateTimeDelta(res.group(1),int(res.group(2)), int(res.group(3))).hours + 0.008, 2)
+				return round(DateTimeDelta(0,int(text.split(':')[0]), int(text.split(':')[1])).hours + 0.008, 2)
 			else:
 				return locale.atof(text)
 		except:
@@ -72,7 +77,10 @@ class float_time(interface.widget_interface):
 			self.widget.set_text('00:00')
 			return False
 		super(float_time, self).display(model, model_field)
-		t = DateTimeDelta(0, model_field.get(model) or 0.0).strftime('%H:%M')
+		if abs(model_field.get(model) or 0.0) >=24:
+			t = DateTimeDelta(0, model_field.get(model) or 0.0).strftime('%dd %H:%M')
+		else:
+			t = DateTimeDelta(0, model_field.get(model) or 0.0).strftime('%H:%M')
 		if  model_field.get(model)<0:
 			t = '-'+t
 		self.widget.set_text(t)

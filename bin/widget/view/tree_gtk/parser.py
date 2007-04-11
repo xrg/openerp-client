@@ -27,6 +27,7 @@
 #
 ##############################################################################
 
+import re
 import locale
 import gtk
 from gtk import glade
@@ -210,13 +211,24 @@ from mx.DateTime import DateTimeDelta
 
 class FloatTime(Char):
 	def get_textual_value(self, model):
+		val = model[self.field_name].get_client(model)
+		if abs(val or 0.0) >=24:
+			t = DateTimeDelta(0, val or 0.0).strftime('%dd %H:%M')
+		else:
+			t = DateTimeDelta(0, val or 0.0).strftime('%H:%M')
+		if val<0:
+			t = '-'+t
 		_, digit = self.attrs.get('digits', (16,2) )
-		return DateTimeDelta(0, model[self.field_name].get_client(model) or 0.0).strftime('%H:%M')
+		return t
 
 	def value_from_text(self, model, text):
 		try:
 			if text and ':' in text:
-				return round(DateTimeDelta(0,int(text.split(':')[0]), int(text.split(':')[1])).hours, 2)
+				rec = re.compile('([0-9]+)d +([0-9]+):([0-9]+)')
+				res = rec.match(text)
+				if res:
+					return round(DateTimeDelta(res.group(1),int(res.group(2)), int(res.group(3))).hours + 0.008, 2)
+				return round(DateTimeDelta(0,int(text.split(':')[0]), int(text.split(':')[1])).hours + 0.008, 2)
 			else:
 				return locale.atof(text)
 		except:
