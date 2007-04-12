@@ -97,8 +97,9 @@ class win_search(object):
 
 	def sig_activate(self, treeview, path, column, *args):
 		self.view.widget.emit_stop_by_name('row_activated')
-		self.win.response(gtk.RESPONSE_OK)
-		return True
+		if not self.sel_multi:
+			self.win.response(gtk.RESPONSE_OK)
+		return False
 
 	def find(self, widget=None, *args):
 		limit = self.glade.get_widget('search_spin_limit').get_value_as_int()
@@ -143,7 +144,7 @@ class win_search(object):
 				end = not self.find()
 				if end:
 					res = self.sel_ids_get() or self.ids
-			else: # button == gtk.RESPONSE_CANCEL:
+			else:
 				res = None
 				end = True
 		self.destroy()
