@@ -40,13 +40,14 @@ import interface
 from widget.screen import Screen
 
 class dialog(object):
-	def __init__(self, model_name, parent, model=None, attrs={}):
+	def __init__(self, model_name, parent, model=None, attrs={}, model_ctx={}):
 		self.win_gl = glade.XML(common.terp_path("terp.glade"),"dia_form_win_many2one",gettext.textdomain())
 		self.dia = self.win_gl.get_widget('dia_form_win_many2one')
 		if ('string' in attrs) and attrs['string']:
 			self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
 		self.sw = self.win_gl.get_widget('many2one_vp')
 		self.screen = Screen(model_name, view_type=[], parent=parent)
+		self.screen.models._context.update(model_ctx)
 		if not model:
 			model = self.screen.new()
 		self.screen.models.model_add(model)
@@ -156,9 +157,8 @@ class one2many_list(interface.widget_interface):
 				self.screen.new()
 				self.screen.current_view.widget.set_sensitive(True)
 			else:
-				parent = self._view.model
 				ok = 1
-				dia = dialog(self.attrs['relation'], parent=parent, attrs=self.attrs)
+				dia = dialog(self.attrs['relation'], parent=self._view_model, attrs=self.attrs, model_ctx=self.screen.models._context)
 				while ok:
 					ok, value = dia.run()
 					if ok:
