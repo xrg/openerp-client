@@ -31,6 +31,7 @@ import re
 import locale
 import gtk
 from gtk import glade
+import math
 
 import tools
 from rpc import RPCProxy
@@ -212,23 +213,14 @@ from mx.DateTime import DateTimeDelta
 class FloatTime(Char):
 	def get_textual_value(self, model):
 		val = model[self.field_name].get_client(model)
-		if abs(val or 0.0) >=24:
-			t = DateTimeDelta(0, val or 0.0).strftime('%dd %H:%M')
-		else:
-			t = DateTimeDelta(0, val or 0.0).strftime('%H:%M')
-		if val<0:
-			t = '-'+t
+		t = '%02d:%02d' % (math.floor(val),round(val%1+0.01,2) * 60)
 		_, digit = self.attrs.get('digits', (16,2) )
 		return t
 
 	def value_from_text(self, model, text):
 		try:
 			if text and ':' in text:
-				rec = re.compile('([0-9]+)d +([0-9]+):([0-9]+)')
-				res = rec.match(text)
-				if res:
-					return round(DateTimeDelta(res.group(1),int(res.group(2)), int(res.group(3))).hours + 0.004, 2)
-				return round(DateTimeDelta(0,int(text.split(':')[0]), int(text.split(':')[1])).hours + 0.004, 2)
+				return round(int(text.split(':')[0]) + int(text.split(':')[1]) / 60.0,2)
 			else:
 				return locale.atof(text)
 		except:

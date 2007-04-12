@@ -32,6 +32,8 @@ import gettext
 import gtk
 from gtk import glade
 
+import math
+
 import common
 import interface
 from mx.DateTime import DateTimeDelta
@@ -54,11 +56,7 @@ class float_time(interface.widget_interface):
 	def text_to_float(self, text):
 		try:
 			if text and ':' in text:
-				rec = re.compile('([\-0-9]+)d +([0-9]+):([0-9]+)')
-				res = rec.match(text)
-				if res:
-					return round(DateTimeDelta(int(res.group(1)),int(res.group(2)), int(res.group(3))).hours + 0.004, 2)
-				return round(DateTimeDelta(0,int(text.split(':')[0]), int(text.split(':')[1])).hours + 0.004, 2)
+				return round(int(text.split(':')[0]) + int(text.split(':')[1]) / 60.0,2)
 			else:
 				return locale.atof(text)
 		except:
@@ -76,12 +74,8 @@ class float_time(interface.widget_interface):
 			self.widget.set_text('00:00')
 			return False
 		super(float_time, self).display(model, model_field)
-		if abs(model_field.get(model) or 0.0) >=24:
-			t = DateTimeDelta(0, model_field.get(model) or 0.0).strftime('%dd %H:%M')
-		else:
-			t = DateTimeDelta(0, model_field.get(model) or 0.0).strftime('%H:%M')
-		if  model_field.get(model)<0:
-			t = '-'+t
+		val = model_field.get(model)
+		t = '%02d:%02d' % (math.floor(val),round(val%1+0.01,2) * 60)
 		self.widget.set_text(t)
 
 	def _readonly_set(self, value):
