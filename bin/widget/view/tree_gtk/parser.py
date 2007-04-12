@@ -213,7 +213,9 @@ from mx.DateTime import DateTimeDelta
 class FloatTime(Char):
 	def get_textual_value(self, model):
 		val = model[self.field_name].get_client(model)
-		t = '%02d:%02d' % (math.floor(val),round(val%1+0.01,2) * 60)
+		t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,2) * 60)
+		if val<0:
+			t = '-'+t
 		_, digit = self.attrs.get('digits', (16,2) )
 		return t
 

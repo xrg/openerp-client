@@ -51,7 +51,7 @@ class Button(Observable):
 			'label': attrs.get('string', 'unknown')
 		}
 		self.widget = gtk.Button(**args)
-		if attrs.get('icon', False):
+		if attrs.get('icon', False) and False:
 			stock = eval('gtk.'+attrs['icon'])
 			icon = gtk.Image()
 			icon.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)

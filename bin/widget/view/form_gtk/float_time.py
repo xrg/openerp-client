@@ -75,7 +75,9 @@ class float_time(interface.widget_interface):
 			return False
 		super(float_time, self).display(model, model_field)
 		val = model_field.get(model)
-		t = '%02d:%02d' % (math.floor(val),round(val%1+0.01,2) * 60)
+		t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,2) * 60)
+		if val<0:
+			t = '-'+t
 		self.widget.set_text(t)
 
 	def _readonly_set(self, value):
