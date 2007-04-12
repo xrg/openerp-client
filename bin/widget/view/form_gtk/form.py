@@ -51,11 +51,17 @@ class Button(Observable):
 			'label': attrs.get('string', 'unknown')
 		}
 		self.widget = gtk.Button(**args)
-		if attrs.get('icon', False) and False:
-			stock = eval('gtk.'+attrs['icon'])
-			icon = gtk.Image()
-			icon.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
-			self.widget.set_image(icon)
+		if attrs.get('icon', False):
+			try:
+				stock = attrs['icon']
+				icon = gtk.Image()
+				icon.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
+				self.widget.set_image(icon)
+			except Exception,e:
+				print attrs['icon']
+				import logging
+				log = logging.getLogger('common')
+				log.warning(_('Wrong icon for the button !'))
 #			self.widget.set_use_stock(True)
 #		self.widget.set_label(args['label'])
 
