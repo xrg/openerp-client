@@ -67,6 +67,7 @@ class win_search(object):
 		sw = self.glade.get_widget('search_sw')
 		sw.add_with_viewport(self.screen.widget)
 		self.view.widget.connect('row_activated', self.sig_activate)
+		self.view.widget.connect('button_press_event', self.sig_button)
 
 		self.model_name = model
 
@@ -96,8 +97,14 @@ class win_search(object):
 			self.form.focusable.grab_focus()
 
 	def sig_activate(self, treeview, path, column, *args):
+		print self.sel_ids_get()
 		self.view.widget.emit_stop_by_name('row_activated')
 		if not self.sel_multi:
+			self.win.response(gtk.RESPONSE_OK)
+		return False
+
+	def sig_button(self, view, event):
+		if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
 			self.win.response(gtk.RESPONSE_OK)
 		return False
 
