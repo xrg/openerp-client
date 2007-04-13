@@ -787,9 +787,10 @@
 			<widget class="GtkImageMenuItem" id="copy">
 			  <property name="visible">True</property>
 			  <property name="tooltip" translatable="yes">Copy this resource</property>
-			  <property name="label" translatable="yes">Duplicate</property>
+			  <property name="label" translatable="yes">_Duplicate</property>
 			  <property name="use_underline">True</property>
 			  <signal name="activate" handler="on_form_copy_activate" last_modification_time="Mon, 25 Jul 2005 07:15:08 GMT"/>
+			  <accelerator key="D" modifiers="GDK_CONTROL_MASK|GDK_SHIFT_MASK" signal="activate"/>
 
 			  <child internal-child="image">
 			    <widget class="GtkImage" id="image4139">
