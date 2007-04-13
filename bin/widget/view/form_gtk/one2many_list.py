@@ -158,7 +158,7 @@ class one2many_list(interface.widget_interface):
 				self.screen.current_view.widget.set_sensitive(True)
 			else:
 				ok = 1
-				dia = dialog(self.attrs['relation'], parent=self._view_model, attrs=self.attrs, model_ctx=self.screen.models._context)
+				dia = dialog(self.attrs['relation'], parent=self._view.model, attrs=self.attrs, model_ctx=self.screen.models._context)
 				while ok:
 					ok, value = dia.run()
 					if ok:
