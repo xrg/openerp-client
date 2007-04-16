@@ -49,7 +49,8 @@ class rpc_exception(Exception):
 		log.warning('CODE %s: %s' % (str(code),msg))
 
 		self.code = code
-		lines = msg.split('\n')
+#		lines = msg.split('\n')
+		lines = code.split('\n')
 		self.data = '\n'.join(lines[2:])
 		self.type = lines[0].split(' -- ')[0]
 		self.message = ''
@@ -169,7 +170,7 @@ class rpc_session(object):
 					pass
 				else:
 					pass
-					common.error(_('Application Error'), _('View details'), err.faultString)
+					common.error(_('Application Error'), err.faultCode, err.faultString)
 			except tiny_socket.Myexception, err:
 				a = rpc_exception(err.faultCode, err.faultString)
 				if a.type in ('warning', 'UserError'):
@@ -177,7 +178,7 @@ class rpc_session(object):
 					pass
 				else:
 					pass
-					common.error(_('Application Error'), _('View details'), err.faultString)
+					common.error(_('Application Error'), err.faultCode, err.faultString)
 			except Exception, e:
 				common.error(_('Application Error'), _('View details'), str(e))
 		else:
