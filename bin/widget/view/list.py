@@ -168,7 +168,7 @@ class ViewList(object):
 				return False
 			m = model.models[path[0][0]]
 			if path[1]._type=='many2one':
-				value = m[path[1].name].get()
+				value = m[path[1].name].get(m)
 				menu = gtk.Menu()
 				finfo = self.screen.fields[path[1].name]
 				fields_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search',[('relation','=',finfo['relation']),('ttype','=','many2one'),('relate','=',True)])
