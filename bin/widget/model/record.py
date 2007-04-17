@@ -227,12 +227,13 @@ class ModelRecord(signal_event.signal_event):
 		args = [self.expr_eval(arg) for arg in arg_names]
 		ids = self.id and [self.id] or []
 		response = getattr(self.rpc, func_name)(ids, *args)
-		self.set(response.get('value', {}), modified=True)
-		if 'domain' in response:
-			for fieldname, value in response['domain'].items():
-				if fieldname not in self.mgroup.mfields:
-					continue
-				self.mgroup.mfields[fieldname].attrs['domain'] = value
+		if response:
+			self.set(response.get('value', {}), modified=True)
+			if 'domain' in response:
+				for fieldname, value in response['domain'].items():
+					if fieldname not in self.mgroup.mfields:
+						continue
+					self.mgroup.mfields[fieldname].attrs['domain'] = value
 		self.signal('record-changed')
 	
 	def cond_default(self, field, value):
