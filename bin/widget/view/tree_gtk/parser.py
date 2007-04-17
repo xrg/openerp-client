@@ -152,7 +152,7 @@ class Char(object):
 				break
 		return to_display or 'black'
 
-	def open_remote(self, model, create):
+	def open_remote(self, model, create, changed=False, text=None):
 		raise NotImplementedError
 
 	def get_textual_value(self, model):
@@ -253,8 +253,8 @@ class M2O(Char):
 		
 		if create:
 			id = None
-		elif modelfield.internal and not model.modified and not changed:
-			id = modelfield.internal[0]
+		elif not model.modified and not changed:
+			id = modelfield.get(model)
 		else:
 			rpc = RPCProxy(relation)
 
