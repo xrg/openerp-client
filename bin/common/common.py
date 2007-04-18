@@ -465,7 +465,14 @@ def sur_3b(msg, parent=None):
 
 	response = win.run()
 	win.destroy()
-	return {gtk.RESPONSE_NO : 'ko', gtk.RESPONSE_CANCEL : 'cancel', gtk.RESPONSE_YES : 'ok'}[response]
+	if response == gtk.RESPONSE_YES:
+		return 'ok'
+	elif response == gtk.RESPONSE_NO:
+		return 'ko'
+	elif response == gtk.RESPONSE_CANCEL:
+		return 'cancel'
+	else:
+		return 'cancel'
 
 def theme_set():
 	theme = options['client.theme']

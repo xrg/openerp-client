@@ -43,7 +43,6 @@ import time
 from widget.view.form_gtk.many2one import dialog as M2ODialog
 from modules.gui.window.win_search import win_search
 
-
 def send_keys(renderer, editable, position, treeview):
 	editable.connect('key_press_event', treeview.on_keypressed)
 	editable.connect('editing_done', treeview.on_editing_done)
@@ -189,13 +188,19 @@ class GenericDate(Char):
 				return False
 		return time.strftime(self.server_format, dt)
 
+if not hasattr(locale, 'nl_langinfo'):
+	locale.nl_langinfo = lambda *a: '%x'
+
+if not hasattr(locale, 'D_FMT'):
+	locale.D_FMT = None
+
 class Date(GenericDate):
 	server_format = '%Y-%m-%d'
-	display_format = '%x'
+	display_format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')
 
 class Datetime(GenericDate):
 	server_format = '%Y-%m-%d %H:%M:%S'
-	display_format = '%x %H:%M:%S'
+	display_format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S'
 
 class Float(Char):
 	def get_textual_value(self, model):

@@ -229,6 +229,8 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 
 	def on_editing_done(self, entry):
 		path, column = self.get_cursor()
+		if not path:
+			return True
 		store = self.get_model()
 		model = store.get_value(store.get_iter(path), 0)
 		if isinstance(entry, gtk.Entry):
