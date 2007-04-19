@@ -48,14 +48,14 @@ import service
 
 
 class dialog(object):
-	def __init__(self, model, id=None, attrs={}):
+	def __init__(self, model, id=None, attrs={} ,domain=[], context={}):
 		self.win_gl = glade.XML(common.terp_path("terp.glade"), "dia_form_win_many2one", gettext.textdomain())
 		self.dia = self.win_gl.get_widget('dia_form_win_many2one')
 		if ('string' in attrs) and attrs['string']:
 			self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
 		self.sw = self.win_gl.get_widget('many2one_vp')
 
-		self.screen = Screen(model)
+		self.screen = Screen(model, domain=domain, context=context)
 		if id:
 			self.screen.load([id])
 		else:

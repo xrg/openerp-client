@@ -256,15 +256,14 @@ class M2O(Char):
 		modelfield = model.mgroup.mfields[self.field_name]
 		relation = modelfield.attrs['relation']
 		
+		domain=modelfield.domain_get(model)
+		context=modelfield.context_get(model)
 		if create:
 			id = None
 		elif not model.modified and not changed:
 			id = modelfield.get(model)
 		else:
 			rpc = RPCProxy(relation)
-
-			domain=modelfield.domain_get(model)
-			context=modelfield.context_get(model)
 
 			names = rpc.name_search(text, domain, 'ilike', context)
 			if len(names) == 1:
@@ -273,7 +272,7 @@ class M2O(Char):
 			if searched[0]:
 				return True, searched
 			return False, False
-		dia = M2ODialog(relation, id)
+		dia = M2ODialog(relation, id, domain=domain,context=context)
 		new_value = dia.run()
 		dia.destroy()
 		if new_value[0]:
