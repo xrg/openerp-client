@@ -241,6 +241,7 @@ class form(object):
 			if not self.modified_save():
 				return
 		self.screen.new()
+		self.message_state('')
 	
 	def sig_copy(self, *args):
 		if not self.modified_save():
@@ -255,12 +256,9 @@ class form(object):
 		pass
 
 	def sig_save(self, widget=None, sig_new=True, auto_continue=True):
-		modification = self.screen.current_model.id
 		id = self.screen.save_current()
 		if id:
 			self.message_state(_('Document saved !'))
-			if not modification:
-				self.screen.new()
 		else:
 			self.message_state(_('Invalid form !'))
 		return bool(id)
