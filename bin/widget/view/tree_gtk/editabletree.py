@@ -45,6 +45,8 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 
 	def on_quit_cell(self, current_model, fieldname, value):
 		modelfield = current_model[fieldname]
+		if hasattr(modelfield, 'editabletree_entry'):
+			del modelfield.editabletree_entry
 		col_type = modelfield.attrs['type']
 		cell = parser.Cell(col_type)(fieldname)
 
