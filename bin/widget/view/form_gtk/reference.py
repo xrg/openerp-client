@@ -112,15 +112,15 @@ class reference(interface.widget_interface):
 		self.value = res.get(self.attrs['name'], False)
 
 	def sig_activate(self, *args):
-		domain = self._view.modelfield.domain_get()
-		context = self._view.modelfield.context_get()
+		domain = self._view.modelfield.domain_get(self._view.model)
+		context = self._view.modelfield.context_get(self._view.model)
 		resource = self.get_model()
 
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
 		if len(ids)==1:
 			id, name = ids[0]
-			self._view.modelfield.set_client((resource, (id, name)))
-			self.display(self._view.modelfield)
+			self._view.modelfield.set_client(self._view.model, (resource, (id, name)))
+			self.display(self._view.model, self._view.modelfield)
 			self.ok = True
 			return True
 
@@ -129,14 +129,14 @@ class reference(interface.widget_interface):
 		if ids:
 			id, name = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_get', [ids[0]], rpc.session.context)[0]
 			self._view.modelfield.set_client((resource, (id, name)))
-		self.display(self._view.modelfield)
+		self.display(self._view.model, self._view.modelfield)
 
 	def sig_new(self, *args):
 		dia = dialog(self.get_model())
 		ok, value = dia.run()
 		if ok:
 			self._view.modelfield.set_client((self.get_model(), value))
-			self.display(self._view.modelfield)
+			self.display(self._view.model, self._view.modelfield)
 		dia.destroy()
 
 	def sig_edit(self, *args):
@@ -157,9 +157,9 @@ class reference(interface.widget_interface):
 			self.on_change(self.attrs['on_change'])
 			interface.widget_interface.sig_changed(self)
 		elif self.ok:
-			if self._view.modelfield.get():
-				self._view.modelfield.set_client(False)
-				self.display(self._view.modelfield)
+			if self._view.modelfield.get(self._view.model):
+				self._view.modelfield.set_client(self._view.model, False)
+				self.display(self._view.model, self._view.modelfield)
 
 	def display(self, model, model_field):
 		if not model_field:
