@@ -108,7 +108,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 		return cols[idx]
 
 	def set_cursor(self, path, col, *args, **argv):
-		if col._type in ('many2one',):
+		if col._type in ('many2one','many2many'):
 			self.warn('misc-message', _('Relation Field: F1 New   F2 Open/Search'))
 		else:
 			self.warn('misc-message', '')

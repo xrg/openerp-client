@@ -101,6 +101,7 @@ class parser_tree(interface.parser_interface):
 					'selection': 90,
 					'char': 100,
 					'one2many': 50,
+					'many2many': 50,
 				}
 				if 'width' in fields[fname]:
 					width = int(fields[fname]['width'])
@@ -142,8 +143,6 @@ class Char(object):
 		cell.set_property('xalign', align)
 
 	def get_color(self, model):
-		if (model.id is None) and self.treeview.editable:
-			return 'red'
 		to_display = ''
 		for color, expr in self.treeview.colors.items():
 			if model.expr_eval(expr):
@@ -308,8 +307,41 @@ class M2M(Char):
 			return '(0)'
 
 	def value_from_text(self, model, text):
-		raise UnsettableColumn('Can not set column of type m2m')
+		if not text:
+			return []
+		if not (text[0]<>'('):
+			return model[self.field_name].get(model)
+		relation = model[self.field_name].attrs['relation']
+		rpc = RPCProxy(relation)
+		domain = model[self.field_name].domain_get(model)
+		context = model[self.field_name].context_get(model)
+		names = rpc.name_search(text, domain, 'ilike', context)
+		ids = [x[0] for x in names]
+		win = win_search(relation, sel_multi=True, ids=ids, context=context, domain=domain)
+		found = win.go()
+		return found or []
 
+	def open_remote(self, model, create=True, changed=False, text=None):
+		modelfield = model[self.field_name]
+		relation = modelfield.attrs['relation']
+
+		rpc = RPCProxy(relation)
+		context = model[self.field_name].context_get(model)
+		domain = model[self.field_name].domain_get(model)
+		if create:
+			if text and len(text) and text[0]<>'(':
+				domain.append(('name','=',text))
+			ids = rpc.search(domain)
+			if ids and len(ids)==1:
+				return True, ids
+		else:
+			ids = model[self.field_name].get_client(model)
+		win = win_search(relation, sel_multi=True, ids=ids, context=context, domain=domain)
+		found = win.go()
+		if found:
+			return True, found
+		else:
+			return False, None
 
 class Selection(Char):
 
