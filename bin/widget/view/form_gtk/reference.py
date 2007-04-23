@@ -133,7 +133,7 @@ class reference(interface.widget_interface):
 		ids = win.go()
 		if ids:
 			id, name = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_get', [ids[0]], rpc.session.context)[0]
-			self._view.modelfield.set_client((resource, (id, name)))
+			self._view.modelfield.set_client(self._view.model, (resource, (id, name)))
 		self.display(self._view.model, self._view.modelfield)
 
 	def sig_new(self, *args):
