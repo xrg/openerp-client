@@ -150,6 +150,8 @@ class _container(object):
 			yopt = gtk.EXPAND | gtk.FILL
 		else:
 			yopt = False
+		if colspan == 1 and a == 1:
+			colspan = 2
 		if name:
 			label = gtk.Label(name)
 			eb = gtk.EventBox()
@@ -165,7 +167,6 @@ class _container(object):
 				label.set_mnemonic_widget(widget)
 			label.set_alignment(1.0, 0.5)
 			table.attach(eb, x, x+1, y, y+rowspan, yoptions=yopt, xoptions=gtk.FILL, ypadding=ypadding, xpadding=5)
-			x=x+1
 		hbox = widget
 		hbox.show_all()
 		if translate:
@@ -180,7 +181,7 @@ class _container(object):
 			ebox.add(img)
 			hbox.pack_start(ebox, fill=False, expand=False)
 			hbox.show_all()
-		table.attach(hbox, x, x+colspan, y, y+rowspan, yoptions=yopt, ypadding=ypadding, xpadding=5)
+		table.attach(hbox, x+a, x+colspan, y, y+rowspan, yoptions=yopt, ypadding=ypadding, xpadding=5)
 		self.cont[-1] = (table, x+colspan, y)
 		wid_list = table.get_children()
 		wid_list.reverse()
@@ -262,7 +263,7 @@ class parser_form(widget.view.interface.parser_interface):
 						'right':gtk.POS_RIGHT
 					}[attrs['tabpos']]
 				else:
-					pos = gtk.POS_LEFT
+					pos = gtk.POS_TOP
 				nb.set_tab_pos(pos)
 				nb.set_border_width(3)
 				container.wid_add(nb, colspan=attrs.get('colspan', 3), expand=True )
@@ -290,7 +291,11 @@ class parser_form(widget.view.interface.parser_interface):
 				widget_act = widgets_type[type][0](self.window, self.parent, model, fields[name])
 				label = None
 				if not int(attrs.get('nolabel', 0)):
-					label = fields[name]['string']+' :'
+					# TODO space before ':' depends of lang (ex: english no space)
+					if gtk.widget_get_default_direction() == gtk.TEXT_DIR_RTL:
+						label = ': '+fields[name]['string']
+					else:
+						label = fields[name]['string']+' :'
 				dict_widget[name] = widget_act
 				size = int(attrs.get('colspan', widgets_type[ type ][1]))
 				expand = widgets_type[ type ][2]

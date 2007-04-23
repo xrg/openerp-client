@@ -72,6 +72,11 @@ class selection(interface.widget_interface):
 			if l:
 				key = l[0].lower()
 				self.key_catalog.setdefault(key,[]).append(i)
+		# XXX this is a bug fix for gtk
+		if gtk.widget_get_default_direction() == gtk.TEXT_DIR_RTL:
+			self.widget.child.set_alignment(1.0)
+		else:
+			self.widget.child.set_alignment(0.0)
 		self.widget.set_model(model)
 		self.widget.set_text_column(0)
 		return lst

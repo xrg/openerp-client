@@ -275,6 +275,17 @@ class rpc_session(object):
 		for c in context:
 			if c[2]:
 				self.context[c[1]] = c[2]
+			if c[1] == 'lang':
+				ids = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('code', '=', c[2])])
+				if ids:
+					l = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', ids, ['direction'])
+					if l and 'direction' in l[0]:
+						common.DIRECTION = l[0]['direction']
+						import gtk
+						if common.DIRECTION == 'rtl':
+							gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
+						else:
+							gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
 
 	def logged(self):
 		return self._open

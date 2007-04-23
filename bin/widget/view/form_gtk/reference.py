@@ -89,6 +89,11 @@ class reference(interface.widget_interface):
 			i = model.append()
 			model.set(i, 0, l)
 			self.widget_combo.child.set_text(l)
+		# XXX this is a bug fix for gtk
+		if gtk.widget_get_default_direction() == gtk.TEXT_DIR_RTL:
+			self.widget_combo.child.set_alignment(1.0)
+		else:
+			self.widget_combo.child.set_alignment(0.0)
 		self.widget_combo.set_model(model)
 		self.widget_combo.set_text_column(0)
 		return lst
