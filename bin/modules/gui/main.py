@@ -419,6 +419,10 @@ class terp_main(service.Service):
 			'on_menubar_both_activate': lambda x: self.sig_menubar('both'),
 			'on_mode_normal_activate': lambda x: self.sig_mode_change(False),
 			'on_mode_pda_activate': lambda x: self.sig_mode_change(True),
+			'on_opt_form_tab_top_activate': lambda x: self.sig_form_tab('top'),
+			'on_opt_form_tab_left_activate': lambda x: self.sig_form_tab('left'),
+			'on_opt_form_tab_right_activate': lambda x: self.sig_form_tab('right'),
+			'on_opt_form_tab_bottom_activate': lambda x: self.sig_form_tab('bottom'),
 			'on_help_index_activate': self.sig_help_index,
 			'on_help_contextual_activate': self.sig_help_context,
 			'on_help_tips_activate': self.sig_tips,
@@ -474,6 +478,8 @@ class terp_main(service.Service):
 		}
 		self.glade.get_widget('menubar_'+(options.options['client.toolbar'] or 'both')).set_active(True)
 		self.sig_menubar(options.options['client.toolbar'] or 'both')
+		self.glade.get_widget('opt_form_tab_'+(options.options['client.form_tab'] or 'left')).set_active(True)
+		self.sig_form_tab(options.options['client.form_tab'] or 'left')
 		if options.options['client.modepda']:
 			self.glade.get_widget('mode_pda').set_active(True)
 		else:
@@ -515,6 +521,9 @@ class terp_main(service.Service):
 			self.toolbar.set_style(gtk.TOOLBAR_TEXT)
 		elif option=='icons':
 			self.toolbar.set_style(gtk.TOOLBAR_ICONS)
+	
+	def sig_form_tab(self, option):
+		options.options['client.form_tab'] = option
 
 	def sig_win_next(self, args):
 		pn = self.notebook.get_current_page()

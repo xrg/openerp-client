@@ -84,6 +84,7 @@ class configmanager(object):
 			'support.recipient': 'support@tiny.be',
 			'support.support_id' : '',
 			'form.toolbar': True,
+			'client.form_tab': 'left',
 		}
 		parser = optparse.OptionParser(version=_("Tiny ERP Client %s" % tinyerp_version))
 		parser.add_option("-c", "--config", dest="config",help=_("specify alternate config file"))

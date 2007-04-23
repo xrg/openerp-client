@@ -1351,6 +1351,46 @@
 				  <signal name="activate" handler="on_opt_form_toolbar_activate" last_modification_time="Tue, 17 Oct 2006 19:11:08 GMT"/>
 				</widget>
 			      </child>
+			      <child>
+				<widget class="GtkRadioMenuItem" id="opt_form_tab_top">
+				  <property name="visible">True</property>
+				  <property name="label" translatable="yes">Tabs on top</property>
+				  <property name="use_underline">True</property>
+				  <property name="active">False</property>
+				  <signal name="activate" handler="on_opt_form_tab_top_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
+				</widget>
+			      </child>
+			      <child>
+				<widget class="GtkRadioMenuItem" id="opt_form_tab_left">
+				  <property name="visible">True</property>
+				  <property name="label" translatable="yes">Tabs on left</property>
+				  <property name="use_underline">True</property>
+				  <property name="active">True</property>
+				  <property name="group">opt_form_tab_top</property>
+				  <signal name="activate" handler="on_opt_form_tab_top_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
+				</widget>
+			      </child>
+			      <child>
+				<widget class="GtkRadioMenuItem" id="opt_form_tab_right">
+				  <property name="visible">True</property>
+				  <property name="label" translatable="yes">Tabs on right</property>
+				  <property name="use_underline">True</property>
+				  <property name="active">False</property>
+				  <property name="group">opt_form_tab_top</property>
+				  <signal name="activate" handler="on_opt_form_tab_right_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
+				</widget>
+			      </child>
+			      <child>
+				<widget class="GtkRadioMenuItem" id="opt_form_tab_bottom">
+				  <property name="visible">True</property>
+				  <property name="label" translatable="yes">Tabs on bottom</property>
+				  <property name="use_underline">True</property>
+				  <property name="active">False</property>
+				  <property name="group">opt_form_tab_top</property>
+				  <signal name="activate" handler="on_opt_form_tab_bottom_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
+				</widget>
+			      </child>
+
 			    </widget>
 			  </child>
 			</widget>

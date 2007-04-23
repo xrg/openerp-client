@@ -42,6 +42,8 @@ import rpc
 
 import copy
 
+import options
+
 
 class Button(Observable):
 	def __init__(self, attrs={}):
@@ -263,7 +265,14 @@ class parser_form(widget.view.interface.parser_interface):
 						'right':gtk.POS_RIGHT
 					}[attrs['tabpos']]
 				else:
-					pos = gtk.POS_TOP
+					if options.options['client.form_tab'] == 'top':
+						pos = gtk.POS_TOP
+					elif options.options['client.form_tab'] == 'left':
+						pos = gtk.POS_LEFT
+					elif options.options['client.form_tab'] == 'right':
+						pos = gtk.POS_RIGHT
+					elif options.options['client.form_tab'] == 'bottom':
+						pos = gtk.POS_BOTTOM
 				nb.set_tab_pos(pos)
 				nb.set_border_width(3)
 				container.wid_add(nb, colspan=attrs.get('colspan', 3), expand=True )
