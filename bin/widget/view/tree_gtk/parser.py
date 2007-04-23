@@ -45,7 +45,7 @@ from modules.gui.window.win_search import win_search
 
 def send_keys(renderer, editable, position, treeview):
 	editable.connect('key_press_event', treeview.on_keypressed)
-	editable.connect('editing_done', treeview.on_editing_done)
+	editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
 
 def sort_model(column, treeview):
 	model = treeview.get_model()
