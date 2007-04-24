@@ -282,6 +282,7 @@ class parser_form(widget.view.interface.parser_interface):
 
 			elif node.localName=='page':
 				l = gtk.Label(attrs.get('string','No String Attr.'))
+				l.set_angle(options.options['client.form_tab_orientation'])
 				widget, widgets, buttons, on_write = self.parse(model, node, fields, notebook)
 				button_list += buttons
 				dict_widget.update(widgets)

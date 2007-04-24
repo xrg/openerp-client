@@ -423,6 +423,8 @@ class terp_main(service.Service):
 			'on_opt_form_tab_left_activate': lambda x: self.sig_form_tab('left'),
 			'on_opt_form_tab_right_activate': lambda x: self.sig_form_tab('right'),
 			'on_opt_form_tab_bottom_activate': lambda x: self.sig_form_tab('bottom'),
+			'on_opt_form_tab_orientation_horizontal_activate': lambda x: self.sig_form_tab_orientation(0),
+			'on_opt_form_tab_orientation_vertical_activate': lambda x: self.sig_form_tab_orientation(90),
 			'on_help_index_activate': self.sig_help_index,
 			'on_help_contextual_activate': self.sig_help_context,
 			'on_help_tips_activate': self.sig_tips,
@@ -480,6 +482,8 @@ class terp_main(service.Service):
 		self.sig_menubar(options.options['client.toolbar'] or 'both')
 		self.glade.get_widget('opt_form_tab_'+(options.options['client.form_tab'] or 'left')).set_active(True)
 		self.sig_form_tab(options.options['client.form_tab'] or 'left')
+		self.glade.get_widget('opt_form_tab_orientation_'+(str(options.options['client.form_tab_orientation']) or '0')).set_active(True)
+		self.sig_form_tab_orientation(options.options['client.form_tab_orientation'] or 0)
 		if options.options['client.modepda']:
 			self.glade.get_widget('mode_pda').set_active(True)
 		else:
@@ -524,6 +528,9 @@ class terp_main(service.Service):
 	
 	def sig_form_tab(self, option):
 		options.options['client.form_tab'] = option
+	
+	def sig_form_tab_orientation(self, option):
+		options.options['client.form_tab_orientation'] = option
 
 	def sig_win_next(self, args):
 		pn = self.notebook.get_current_page()

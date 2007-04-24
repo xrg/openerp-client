@@ -1351,10 +1351,19 @@
 				  <signal name="activate" handler="on_opt_form_toolbar_activate" last_modification_time="Tue, 17 Oct 2006 19:11:08 GMT"/>
 				</widget>
 			      </child>
+		      <child>
+			<widget class="GtkMenuItem" id="forms_tab">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes">Tabs default position</property>
+			  <property name="use_underline">True</property>
+			  <signal name="activate" handler="on_forms_tabs_activate" last_modification_time="Tue, 17 Oct 2006 19:11:08 GMT"/>
+
+			  <child>
+			    <widget class="GtkMenu" id="forms_tab_menu">
 			      <child>
 				<widget class="GtkRadioMenuItem" id="opt_form_tab_top">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">Tabs on top</property>
+				  <property name="label" translatable="yes">Top</property>
 				  <property name="use_underline">True</property>
 				  <property name="active">False</property>
 				  <signal name="activate" handler="on_opt_form_tab_top_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
@@ -1363,17 +1372,17 @@
 			      <child>
 				<widget class="GtkRadioMenuItem" id="opt_form_tab_left">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">Tabs on left</property>
+				  <property name="label" translatable="yes">Left</property>
 				  <property name="use_underline">True</property>
 				  <property name="active">True</property>
 				  <property name="group">opt_form_tab_top</property>
-				  <signal name="activate" handler="on_opt_form_tab_top_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
+				  <signal name="activate" handler="on_opt_form_tab_left_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
 				</widget>
 			      </child>
 			      <child>
 				<widget class="GtkRadioMenuItem" id="opt_form_tab_right">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">Tabs on right</property>
+				  <property name="label" translatable="yes">Right</property>
 				  <property name="use_underline">True</property>
 				  <property name="active">False</property>
 				  <property name="group">opt_form_tab_top</property>
@@ -1383,13 +1392,51 @@
 			      <child>
 				<widget class="GtkRadioMenuItem" id="opt_form_tab_bottom">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">Tabs on bottom</property>
+				  <property name="label" translatable="yes">Bottom</property>
 				  <property name="use_underline">True</property>
 				  <property name="active">False</property>
 				  <property name="group">opt_form_tab_top</property>
 				  <signal name="activate" handler="on_opt_form_tab_bottom_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
 				</widget>
 			      </child>
+
+			    </widget>
+			  </child>
+			    </widget>
+			  </child>
+			  <child>
+			<widget class="GtkMenuItem" id="forms_tab_orientation">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes">Tabs default orientation</property>
+			  <property name="use_underline">True</property>
+			  <signal name="activate" handler="on_forms_tabs_orientation_activate" last_modification_time="Tue, 17 Oct 2006 19:11:08 GMT"/>
+
+			  <child>
+			    <widget class="GtkMenu" id="forms_tab_orientation_menu">
+			      <child>
+				<widget class="GtkRadioMenuItem" id="opt_form_tab_orientation_0">
+				  <property name="visible">True</property>
+				  <property name="label" translatable="yes">Horizontal</property>
+				  <property name="use_underline">True</property>
+				  <property name="active">True</property>
+				  <signal name="activate" handler="on_opt_form_tab_orientation_horizontal_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
+				</widget>
+			      </child>
+			      <child>
+				<widget class="GtkRadioMenuItem" id="opt_form_tab_orientation_90">
+				  <property name="visible">True</property>
+				  <property name="label" translatable="yes">Vertical</property>
+				  <property name="use_underline">True</property>
+				  <property name="active">False</property>
+				  <property name="group">opt_form_tab_orientation_0</property>
+				  <signal name="activate" handler="on_opt_form_tab_orientation_vertical_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
+				</widget>
+			      </child>
+
+			    </widget>
+			  </child>
+			    </widget>
+			  </child>
 
 			    </widget>
 			  </child>
