@@ -292,6 +292,18 @@ class O2MField(CharField):
 		res = map(lambda x: x.get_default(x), model.value[self.name].models or [])
 		return res
 
+	def validate(self):
+		ok = True
+		for model in self.internal.models:
+			if not model.validate():
+				if not model.is_modified():
+					self.internal.model_remove(model)
+				else:
+					ok = False
+		if not super(O2MField, self).validate():
+			ok = False
+		return ok
+
 class ReferenceField(CharField):
 	def get_client(self, model):
 		if model.value[self.name]:
