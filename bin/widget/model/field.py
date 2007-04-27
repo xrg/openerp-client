@@ -292,15 +292,15 @@ class O2MField(CharField):
 		res = map(lambda x: x.get_default(x), model.value[self.name].models or [])
 		return res
 
-	def validate(self):
+	def validate(self, model):
 		ok = True
-		for model in self.internal.models:
-			if not model.validate():
-				if not model.is_modified():
-					self.internal.model_remove(model)
+		for model2 in model.value[self.name].models:
+			if not model2.validate():
+				if not model2.is_modified():
+					model.value[self.name].models.model_remove(model2)
 				else:
 					ok = False
-		if not super(O2MField, self).validate():
+		if not super(O2MField, self).validate(model):
 			ok = False
 		return ok
 
