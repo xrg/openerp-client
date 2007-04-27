@@ -93,6 +93,7 @@ class widget_interface(object):
 		widget.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
 		widget.modify_base(gtk.STATE_NORMAL, colour)
 		widget.modify_text(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
+		widget.modify_text(gtk.STATE_INSENSITIVE, gtk.gdk.color_parse("black"))
 
 	def state_set(self, state):
 		state_changes = dict(self.attrs.get('states',{}).get(state,[]))
