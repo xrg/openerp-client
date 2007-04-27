@@ -111,7 +111,6 @@ class ModelRecord(signal_event.signal_event):
 		value = self.get(get_readonly=False)
 		if not self.id:
 			self.id = self.rpc.create(value, self.context_get())
-			reload = False
 		else:
 			if not self.rpc.write([self.id], value, self.context_get()):
 				return False
