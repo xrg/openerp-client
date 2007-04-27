@@ -244,16 +244,18 @@ class ViewList(object):
 			self.store = AdaptModelGroup(self.screen.models)
 			self.widget.set_model(self.store)
 		self.reload = False
-		if self.screen.current_model:
-			path = self.store.on_get_path(self.screen.current_model)
-			self.widget.set_cursor(path, self.widget.get_columns()[0], bool(self.widget.editable))
-		else:
+		if not self.screen.current_model:
 			#
 			# Should find a simpler solution to do something like
 			#self.widget.set_cursor(None,None,False)
 			#
 			if self.store:
 				self.widget.set_model(self.store)
+
+	def set_cursor(self):
+		if self.screen.current_model:
+			path = self.store.on_get_path(self.screen.current_model)
+			self.widget.set_cursor(path, self.widget.get_columns()[0], bool(self.widget.editable))
 
 	def sel_ids_get(self):
 		def _func_sel_get(store, path, iter, ids):

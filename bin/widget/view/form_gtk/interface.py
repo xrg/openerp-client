@@ -86,10 +86,9 @@ class widget_interface(object):
 		return self.widget
 
 	def color_set(self, name):
-		colors = {'invalid':'#ff6969', 'readonly':'grey', 'required':'#cbcbff', 'normal':'white'}
 		widget = self._color_widget()
 		map = widget.get_colormap()
-		colour = map.alloc_color(colors.get(name,'white'))
+		colour = map.alloc_color(common.colors.get(name,'white'))
 		widget.modify_bg(gtk.STATE_ACTIVE, colour)
 		widget.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
 		widget.modify_base(gtk.STATE_NORMAL, colour)

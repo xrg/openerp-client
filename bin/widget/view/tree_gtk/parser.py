@@ -43,6 +43,8 @@ import time
 from widget.view.form_gtk.many2one import dialog as M2ODialog
 from modules.gui.window.win_search import win_search
 
+import common
+
 def send_keys(renderer, editable, position, treeview):
 	editable.connect('key_press_event', treeview.on_keypressed)
 	editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
@@ -110,7 +112,7 @@ class parser_tree(interface.parser_interface):
 				col.set_min_width(width)
 				col.connect('clicked', sort_model, treeview)
 				col.set_resizable(True)
-				col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
+				#col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
 				col.set_visible(not fields[fname].get('invisible', False))
 				treeview.append_column(col)
 		return treeview, {}, [], on_write
@@ -141,6 +143,11 @@ class Char(object):
 			align = 1
 		else:
 			align = 0
+		if self.treeview.editable:
+			if not model[self.field_name].attrs.get('valid', True):
+				cell.set_property('background', common.colors.get('invalid', 'white'))
+			elif model[self.field_name].attrs.get('required', False):
+				cell.set_property('background', common.colors.get('required', 'white'))
 		cell.set_property('xalign', align)
 
 	def get_color(self, model):
@@ -249,7 +256,7 @@ class M2O(Char):
 		names = rpc.name_search(text, domain, 'ilike', context)
 		if len(names) != 1:
 			return self.search_remote(relation, [x[0] for x in names],
-							 domain=domain, context=context)
+							 domain=domain, context=context)[0]
 		return names[0]
 
 	def open_remote(self, model, create=True, changed=False, text=None):

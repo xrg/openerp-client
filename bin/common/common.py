@@ -548,3 +548,14 @@ class progress(object):
 		self.thread.stop()
 		self.win.destroy()
 		gtk.main_iteration()
+
+
+# Color set
+
+colors = {
+	'invalid':'#ff6969',
+	'readonly':'grey',
+	'required':'#d2d2ff',
+	'normal':'white'
+}
+

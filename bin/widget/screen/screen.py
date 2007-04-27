@@ -211,6 +211,8 @@ class Screen(signal_event.signal_event):
 		self.current_model = model
 		self.current_model.validate_set()
 		self.display()
+		if self.current_view:
+			self.current_view.set_cursor()
 		return self.current_model
 
 	def new_model_position(self):
@@ -238,6 +240,20 @@ class Screen(signal_event.signal_event):
 			id = self.current_model.save(reload=True)
 		else:
 			self.current_view.display()
+			self.current_view.set_cursor()
+			return False
+		if self.current_view.view_type == 'tree':
+			for model in self.models.models:
+				if model.is_modified():
+					if model.validate():
+						id = model.save(reload=True)
+					else:
+						self.current_model = model
+						self.display()
+						self.current_view.set_cursor()
+						return False
+			self.display()
+			self.current_view.set_cursor()
 		if self.current_model not in self.models:
 			self.models.model_add(self.current_model)
 		return id
@@ -258,7 +274,14 @@ class Screen(signal_event.signal_event):
 		if not self.current_model:
 			return False
 		self.current_view.set_value()
-		return self.current_model.is_modified()
+		res = False
+		if self.current_view.view_type != 'tree':
+			res = self.current_model.is_modified()
+		else:
+			for model in self.models.models:
+				if model.is_modified():
+					res = True
+		return res
 
 	#
 	# To write
@@ -283,6 +306,7 @@ class Screen(signal_event.signal_event):
 			if unlink and id:
 				self.rpc.unlink([id])
 			self.display()
+			self.current_view.set_cursor()
 		return id
 
 	def load(self, ids):
@@ -314,6 +338,7 @@ class Screen(signal_event.signal_event):
 		if self.current_model:
 			self.current_model.validate_set()
 		self.display()
+		self.current_view.set_cursor()
 
 	def display_prev(self):
 		self.current_view.set_value()
@@ -328,6 +353,7 @@ class Screen(signal_event.signal_event):
 		if self.current_model:
 			self.current_model.validate_set()
 		self.display()
+		self.current_view.set_cursor()
 
 	def sel_ids_get(self):
 		return self.current_view.sel_ids_get()
