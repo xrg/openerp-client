@@ -46,7 +46,7 @@ import time
 #
 # Upgrade this number to force the client to ask the survey
 #
-SURVEY_VERSION = '2'
+SURVEY_VERSION = '3'
 
 def _search_file(x, dir='path.share'):
 	tests = [
