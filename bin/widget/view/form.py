@@ -108,8 +108,10 @@ class ViewForm(object):
 							common.message(_('You must save this record to use the relate button !'))
 							return False
 						data = {
+							'model': self.screen.name,
 							'id': id,
-							'ids': [id]
+							'ids': [id],
+							'report_type': 'pdf',
 						}
 						self.screen.display()
 						obj = service.LocalService('action.main')
