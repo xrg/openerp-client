@@ -121,7 +121,7 @@ class win_search(object):
 		for f in self.domain:
 			if f[0] not in v_keys:
 				v.append(f)
-		self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
+		self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, rpc.session.context, True)
 		self.reload()
 		self.old_search = self.form.value
 		self.win.set_title(self.title_results % len(self.ids))
