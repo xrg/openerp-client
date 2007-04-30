@@ -186,13 +186,18 @@ class db_login(object):
 				iter = liststore.iter_next(iter)
 
 		res = win.run()
-		if res == gtk.RESPONSE_CANCEL:
-			win.destroy()
-			raise 'QueryCanceled'
 		m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', server_widget.get_text() or '')
 		if m:
+			options.options['login.server'] = m.group(2)
+			options.options['login.login'] = login.get_text()
+			options.options['login.port'] = m.group(3)
+			options.options['login.protocol'] = m.group(1)
+			options.options['login.db'] = db_widget.get_active_text()
 			result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), db_widget.get_active_text())
 		else:
+			win.destroy()
+			raise 'QueryCanceled'
+		if res == gtk.RESPONSE_CANCEL:
 			win.destroy()
 			raise 'QueryCanceled'
 		win.destroy()
@@ -264,6 +269,11 @@ class db_create(object):
 		langreal = langidx and self.lang_widget.get_model().get_value(langidx,1)
 		passwd = pass_widget.get_text()
 		url = self.server_widget.get_text()
+		m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
+		if m:
+			options.options['login.server'] = m.group(2)
+			options.options['login.port'] = m.group(3)
+			options.options['login.protocol'] = m.group(1)
 		win.destroy()
 
 		if res == gtk.RESPONSE_OK:
@@ -606,11 +616,6 @@ class terp_main(service.Service):
 			self.sig_logout(widget)
 			log_response = rpc.session.login(*res)
 			if log_response==1:
-				options.options['login.server'] = res[2]
-				options.options['login.login'] = res[0]
-				options.options['login.port'] = res[3]
-				options.options['login.protocol'] = res[4]
-				options.options['login.db'] = res[5]
 				options.options.save()
 				self.sig_win_new()
 				if res[4] == 'https://':
@@ -779,6 +784,8 @@ class terp_main(service.Service):
 			return False
 		dia = db_create(self.sig_login)
 		res = dia.run(self.window)
+		if res:
+			options.options.save()
 		return res
 
 	def sig_db_drop(self, widget):
