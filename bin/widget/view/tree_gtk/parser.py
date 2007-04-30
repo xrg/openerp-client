@@ -44,6 +44,8 @@ from widget.view.form_gtk.many2one import dialog as M2ODialog
 from modules.gui.window.win_search import win_search
 
 import common
+import rpc
+import datetime as DT
 
 def send_keys(renderer, editable, position, treeview):
 	editable.connect('key_press_event', treeview.on_keypressed)
@@ -208,6 +210,49 @@ class Date(GenericDate):
 class Datetime(GenericDate):
 	server_format = '%Y-%m-%d %H:%M:%S'
 	display_format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S'
+
+	def get_textual_value(self, model):
+		value = model[self.field_name].get_client(model)
+		if not value:
+			return ''
+		date = time.strptime(value, self.server_format)
+		if 'tz' in rpc.session.context:
+			try:
+				import pytz
+				lzone = pytz.timezone(rpc.session.context['tz'])
+				szone = pytz.timezone(rpc.session.timezone)
+				dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+				sdt = szone.localize(dt, is_dst=True)
+				ldt = sdt.astimezone(lzone)
+				date = ldt.timetuple()
+			except:
+				pass
+		return time.strftime(self.display_format, date)
+
+	def value_from_text(self, model, text):
+		if not text:
+			return False
+		try:
+			date = time.strptime(text, self.display_format)
+		except:
+			try:
+				dt = list(time.localtime())
+				dt[2] = int(text)
+				date = tuple(dt)
+			except:
+				return False
+		if 'tz' in rpc.session.context:
+			try:
+				import pytz
+				lzone = pytz.timezone(rpc.session.context['tz'])
+				szone = pytz.timezone(rpc.session.timezone)
+				dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+				ldt = lzone.localize(dt, is_dst=True)
+				sdt = ldt.astimezone(szone)
+				date = sdt.timetuple()
+			except:
+				pass
+		return time.strftime(self.server_format, date)
 
 class Float(Char):
 	def get_textual_value(self, model):

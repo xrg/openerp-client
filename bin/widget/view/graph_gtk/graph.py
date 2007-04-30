@@ -33,12 +33,26 @@ import gtk
 from gtk import glade
 
 import tools
-from rpc import RPCProxy
+import rpc
 from widget.view import interface
 
 from pychart import *
 
 import StringIO
+
+import datetime as DT
+import time
+
+DT_FORMAT = '%Y-%m-%d'
+DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
+HM_FORMAT = '%H:%M:%S'
+
+if not hasattr(locale, 'nl_langinfo'):
+	locale.nl_langinfo = lambda *a: '%x'
+
+if not hasattr(locale, 'D_FMT'):
+	locale.D_FMT = None
+
 
 theme.use_color = 1
 
@@ -60,8 +74,25 @@ class ViewGraph(object):
 		for m in models:
 			res = {}
 			for x in self.axis:
-				if self.fields[x]['type'] in ('many2one', 'char', 'date','datetime','time','text','selection'):
+				if self.fields[x]['type'] in ('many2one', 'char','time','text','selection'):
 					res[x] = str(m[x].get_client(m))
+				elif self.fields[x]['type'] == 'date':
+					date = time.strptime(m[x].get_client(m), DT_FORMAT)
+					res[x] = time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'), date)
+				elif self.fields[x]['type'] == 'datetime':
+					date = time.strptime(m[x].get_client(m), DHM_FORMAT)
+					if 'tz' in rpc.session.context:
+						try:
+							import pytz
+							lzone = pytz.timezone(rpc.session.context['tz'])
+							szone = pytz.timezone(rpc.session.timezone)
+							dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+							sdt = szone.localize(dt, is_dst=True)
+							ldt = sdt.astimezone(lzone)
+							date = ldt.timetuple()
+						except:
+							pass
+					res[x] = time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S', date)
 				else:
 					res[x] = float(m[x].get_client(m))
 			datas.append(res)

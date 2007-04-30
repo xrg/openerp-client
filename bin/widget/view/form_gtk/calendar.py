@@ -37,6 +37,7 @@ import gettext
 import common
 import interface
 import locale
+import rpc
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
@@ -140,7 +141,6 @@ class datetime(interface.widget_interface):
 		self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
 		self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
 		self.readonly=False
-		self.value = ''
 
 	def _color_widget(self):
 		return self.entry
@@ -150,7 +150,7 @@ class datetime(interface.widget_interface):
 		self.entry.set_editable(not value)
 		self.entry.set_sensitive(not value)
 
-	def get_value(self, model):
+	def get_value(self, model, timezone=True):
 		str = self.entry.get_text()
 		if str=='':
 			return False
@@ -158,6 +158,17 @@ class datetime(interface.widget_interface):
 			date = time.strptime(str, locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S')
 		except:
 			return False
+		if 'tz' in rpc.session.context and timezone:
+			try:
+				import pytz
+				lzone = pytz.timezone(rpc.session.context['tz'])
+				szone = pytz.timezone(rpc.session.timezone)
+				dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+				ldt = lzone.localize(dt, is_dst=True)
+				sdt = ldt.astimezone(szone)
+				date = sdt.timetuple()
+			except:
+				pass
 		return time.strftime(DHM_FORMAT, date)
 
 	def set_value(self, model, model_field):
@@ -168,14 +179,24 @@ class datetime(interface.widget_interface):
 		if not model_field:
 			return self.show(False)
 		super(datetime, self).display(model, model_field)
-		self.value = model_field.get(model)
-		self.show(self.value)
+		self.show(model_field.get(model))
 	
-	def show(self, dt_val):
+	def show(self, dt_val, timezone=True):
 		if not dt_val:
 			self.entry.set_text('')
 		else:
 			date = time.strptime(dt_val, DHM_FORMAT)
+			if 'tz' in rpc.session.context and timezone:
+				try:
+					import pytz
+					lzone = pytz.timezone(rpc.session.context['tz'])
+					szone = pytz.timezone(rpc.session.timezone)
+					dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+					sdt = szone.localize(dt, is_dst=True)
+					ldt = sdt.astimezone(lzone)
+					date = ldt.timetuple()
+				except:
+					pass
 			t=time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S', date)
 			if len(t) > self.entry.get_width_chars():
 				self.entry.set_width_chars(len(t))
@@ -193,7 +214,7 @@ class datetime(interface.widget_interface):
 		cal = win_gl.get_widget('calendar')
 		win.set_destroy_with_parent(True)
 		try:
-			val = self.get_value(model)
+			val = self.get_value(model, timezone=False)
 			if val:
 				hour.set_value(int(val[11:13]))
 				minute.set_value(int(val[-5:-3]))
@@ -209,14 +230,11 @@ class datetime(interface.widget_interface):
 			hr = int(hour.get_value())
 			mi = int(minute.get_value())
 			dt = cal.get_date()
-			month = str(dt[1]+1)
-			if len(month)<2:
-				month='0'+month
-			day = str(dt[2])
-			if len(day)<2:
-				day='0'+day
-			self.value = '%s-%s-%s %s:%s:00' % (str(dt[0]), month, day, hr, mi)
-			self.show(self.value)
+			month = int(dt[1])+1
+			day = int(dt[2])
+			date = DT.datetime(dt[0], month, day, hr, mi)
+			value = time.strftime(DHM_FORMAT, date.timetuple())
+			self.show(value, timezone=False)
 		self._focus_out()
 		win.destroy()
 

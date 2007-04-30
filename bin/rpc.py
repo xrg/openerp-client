@@ -118,7 +118,7 @@ class tinySocket_gw(gw_inter):
 		return res
 
 class rpc_session(object):
-	__slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_gw', 'db', 'context')
+	__slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_gw', 'db', 'context', 'timezone')
 	def __init__(self):
 		self._open = False
 		self._url = None
@@ -128,6 +128,7 @@ class rpc_session(object):
 		self.uname = None
 		self._gw = xmlrpc_gw
 		self.db = None
+		self.timezone = 'utc'
 
 	def rpc_exec(self, obj, method, *args):
 		try:
@@ -270,6 +271,7 @@ class rpc_session(object):
 
 	def context_reload(self):
 		self.context = {}
+		self.timezone = 'utc'
 		# self.uid
 		context = self.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'meta', False, [('res.users', self.uid or False)], False, {}, True, True, False)
 		for c in context:
@@ -286,6 +288,12 @@ class rpc_session(object):
 							gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
 						else:
 							gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
+			elif c[1] == 'tz':
+				self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
+				try:
+					import pytz
+				except:
+					common.warning('You select a timezone but tinyERP could not find pytz library !\nThe timezone functionality will be disable.')
 
 	def logged(self):
 		return self._open
