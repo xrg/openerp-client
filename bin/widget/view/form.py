@@ -35,6 +35,7 @@ from gtk import glade
 import common
 import rpc
 import service
+import options
 
 class ViewForm(object):
 	def __init__(self, screen, widget, children, buttons=[], toolbar=None):
@@ -49,8 +50,7 @@ class ViewForm(object):
 		self.widgets = dict([(name, ViewWidget(self, widget, name))
 							 for name, widget in children.items()])
 
-		if toolbar:
-			print "toolbar:", toolbar
+		if toolbar and not options.options['client.modepda']:
 			hb = gtk.HBox()
 			hb.pack_start(self.widget)
 

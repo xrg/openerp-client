@@ -64,7 +64,7 @@ class tree(object):
 		self.vp = self.glade.get_widget('main_tree_sw')
 		
 		wid = self.glade.get_widget('widget_vbox')
-		if options.options['client.modepda']:
+		if options.options['client.modepda'] and not self.tree_res.toolbar:
 			wid.hide()
 		else:
 			wid.show()
