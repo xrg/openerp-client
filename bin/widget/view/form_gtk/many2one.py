@@ -68,8 +68,7 @@ class dialog(object):
 		while True:
 			res = self.dia.run()
 			if res==gtk.RESPONSE_OK:
-				if self.screen.current_model.validate():
-					self.screen.save_current()
+				if self.screen.current_model.validate() and self.screen.save_current():
 					return (True, self.screen.current_model.name_get())
 				else:
 					self.screen.display()
