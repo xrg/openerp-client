@@ -122,7 +122,7 @@ class win_search(object):
 			if f[0] not in v_keys:
 				v.append(f)
 		try:
-			self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, rpc.session.context, True)
+			self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, rpc.session.context)
 		except:
 			# Try if it is not an old server
 			self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
