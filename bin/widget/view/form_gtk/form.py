@@ -34,7 +34,6 @@ import widget.view.interface
 from observator import oregistry, Observable
 
 import gtk
-from gtk import glade
 
 import common
 import service
@@ -298,6 +297,8 @@ class parser_form(widget.view.interface.parser_interface):
 					continue
 
 				fields[name]['name'] = name
+				if 'saves' in attrs:
+					fields[name]['saves'] = attrs['saves']
 				widget_act = widgets_type[type][0](self.window, self.parent, model, fields[name])
 				label = None
 				if not int(attrs.get('nolabel', 0)):

@@ -31,26 +31,20 @@ import common
 import interface
 import gtk
 import gobject
-from gtk import glade
 
 import gettext
 
-
-# Can be improved !!!
 
 class selection(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-		win_gl = glade.XML(common.terp_path("terp.glade"),"widget_combobox", gettext.textdomain())
-		self.widget = win_gl.get_widget('widget_combobox')
+		self.widget = gtk.ComboBoxEntry()
 
-		#self.widget = gtk.combo_box_entry_new_text()
 		self.widget.child.connect('changed', self.sig_changed)
 		self.widget.child.set_editable(False)
 		self.widget.child.connect('button_press_event', self._menu_open)
 		self.widget.child.connect('key_press_event', self.sig_key_pressed)
-		#self.widget.set_has_frame(False)
 
 		self.ok = True
 		self._selection={}

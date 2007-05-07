@@ -32,7 +32,6 @@ import gettext
 
 import gobject
 import gtk
-from gtk import glade
 
 import gettext
 
@@ -49,27 +48,48 @@ from rpc import RPCProxy
 class reference(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_reference_model", gettext.textdomain())
-		self.win_gl.signal_connect('on_reference_new_button_press', self.sig_new )
-		self.win_gl.signal_connect('on_reference_edit_button_press', self.sig_edit )
-		self.widget = self.win_gl.get_widget('widget_reference_model')
 
-		self.widget_combo = self.win_gl.get_widget('reference_model')
+		self.widget = gtk.HBox(spacing=3)
+
+		self.widget_combo = gtk.ComboBoxEntry()
 		self.widget_combo.child.set_editable(False)
-		self.set_popdown(attrs.get('selection',[]))
+		self.widget.pack_start(self.widget_combo, expand=False, fill=True)
 
-		self.win_gl.get_widget('but_reference_new').set_property('can-focus',False)
-		self.win_gl.get_widget('but_reference_open').set_property('can-focus',False)
+		self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
 
-		self.wid_text = self.win_gl.get_widget('reference_entry')
-		self.ok=True
-		self.widget_combo.connect('changed', self.sig_changed_combo)
-		self.wid_text.connect('changed', self.sig_changed)
-		self.wid_text.connect('activate', self.sig_activate)
-		self.wid_text.connect('button_press_event', self._menu_open)
-		self.wid_text.connect('focus-out-event', lambda *a: self._focus_out())
-		self.image_search = self.win_gl.get_widget('ref_image_search')
+		self.wid_text = gtk.Entry()
+		self.wid_text.set_property('width-chars', 13)
+		self.widget.pack_start(self.wid_text, expand=True, fill=True)
+
+		self.but_new = gtk.Button()
+		img_new = gtk.Image()
+		img_new.set_from_stock('gtk-new',gtk.ICON_SIZE_BUTTON)
+		self.but_new.set_image(img_new)
+		self.but_new.set_relief(gtk.RELIEF_NONE)
+		self.but_new.connect('clicked', self.sig_new)
+		self.but_new.set_alignment(0.5, 0.5)
+		self.but_new.set_property('can-focus', False)
+		self.widget.pack_start(self.but_new, expand=False, fill=False)
+
+		self.but_open = gtk.Button()
+		img_find = gtk.Image()
+		img_find.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
+		img_open = gtk.Image()
+		img_open.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
+		self.but_open.set_image(img_find)
+		self.but_open.set_relief(gtk.RELIEF_NONE)
+		self.but_open.connect('clicked', self.sig_edit)
+		self.but_open.set_alignment(0.5, 0.5)
+		self.but_open.set_property('can-focus', False)
+		self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
+
+		tooltips = gtk.Tooltips()
+		tooltips.set_tip(self.but_new, _('Create a new resource'))
+		tooltips.set_tip(self.but_open, _('Search / Open a resource'))
+		tooltips.enable()
+
 		self._value=None
+		self.set_popdown(attrs.get('selection',[]))
 
 	def get_model(self):
 		res = self.widget_combo.child.get_text()
@@ -89,11 +109,6 @@ class reference(interface.widget_interface):
 			i = model.append()
 			model.set(i, 0, l)
 			self.widget_combo.child.set_text(l)
-		# XXX this is a bug fix for gtk
-		if gtk.widget_get_default_direction() == gtk.TEXT_DIR_RTL:
-			self.widget_combo.child.set_alignment(1.0)
-		else:
-			self.widget_combo.child.set_alignment(0.0)
 		self.widget_combo.set_model(model)
 		self.widget_combo.set_text_column(0)
 		return lst
@@ -173,6 +188,7 @@ class reference(interface.widget_interface):
 		super(reference, self).display(model, model_field)
 		value = model_field.get_client(model)
 		self.ok = False
+		img = gtk.Image()
 		if value:
 			model, (id, name) = value
 			self.widget_combo.child.set_text(self._selection2[model])
@@ -182,11 +198,13 @@ class reference(interface.widget_interface):
 			self._value = model, (id, name)
 			self.wid_text.set_text(name)
 			self.state_set('valid')
-			self.image_search.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
+			img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
+			self.but_open.set_image(img)
 		else:
 			self._value = False
 			self.wid_text.set_text('')
 			self.state_set('valid')
-			self.image_search.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
+			img.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
+			self.but_open.set_image(img)
 		self.ok = True
 

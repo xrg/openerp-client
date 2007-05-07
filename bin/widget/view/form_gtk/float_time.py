@@ -30,9 +30,9 @@
 import re
 import gettext
 import gtk
-from gtk import glade
 
 import math
+import locale
 
 import common
 import interface
@@ -40,9 +40,9 @@ from mx.DateTime import DateTimeDelta
 
 class float_time(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
-		self.win_gl = glade.XML(common.terp_path("terp.glade"), "widget_char", 
-								gettext.textdomain())
-		self.widget = self.win_gl.get_widget('widget_char')
+		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
+
+		self.widget = gtk.Entry()
 		self.widget.set_max_length(int(attrs.get('size',11)))
 		self.widget.set_visibility(not attrs.get('invisible', False))
 		self.widget.set_width_chars(5)
@@ -51,7 +51,6 @@ class float_time(interface.widget_interface):
 		self.widget.connect('activate', self.sig_activate)
 		self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
 		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
-		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
 
 	def text_to_float(self, text):
 		try:

@@ -28,28 +28,26 @@
 ##############################################################################
 
 import gtk
-from gtk import glade
 
 import interface
 
 class textbox(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
+
+		self.widget = gtk.ScrolledWindow()
+		self.widget.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_ALWAYS)
+		self.widget.set_shadow_type(gtk.SHADOW_NONE)
+		self.widget.set_size_request(-1, 80)
+
 		self.tv = gtk.TextView()
 		self.tv.set_wrap_mode(gtk.WRAP_WORD)
-		sw = gtk.ScrolledWindow()
-		sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_ALWAYS)
-		sw.set_shadow_type(gtk.SHADOW_NONE)
-		sw.set_size_request(-1, 80)
-		sw.add(self.tv)
-		self.widget=sw
 		self.tv.connect('button_press_event', self._menu_open)
 		self.tv.set_accepts_tab(False)
-#		if self.attrs['readonly']:
-#			self.tv.set_editable(False)
-#			self.widget.set_sensitive(False)
 		self.tv.connect('focus-out-event', lambda x,y: self._focus_out())
-		sw.show_all()
+		self.widget.add(self.tv)
+
+		self.widget.show_all()
 
 	def _readonly_set(self, value):
 		interface.widget_interface._readonly_set(self, value)

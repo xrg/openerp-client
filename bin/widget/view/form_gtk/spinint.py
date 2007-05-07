@@ -28,7 +28,6 @@
 ##############################################################################
 
 import gtk
-from gtk import glade
 
 import interface
 
@@ -50,7 +49,7 @@ class spinint(interface.widget_interface):
 	def set_value(self, model, model_field):
 		try:
 			# we must use get_text and not get_value because get_value
-			# is only updated when the widget loose focus. This is a problem 
+			# is only updated when the widget loose focus. This is a problem
 			# if we save a form just after we modified the value of a field
 			model_field.set_client(model, int(self.widget.get_text()))
 		except:

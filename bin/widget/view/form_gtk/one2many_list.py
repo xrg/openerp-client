@@ -29,7 +29,6 @@
 
 import gobject
 import gtk
-from gtk import glade
 
 import gettext
 
@@ -40,12 +39,27 @@ import interface
 from widget.screen import Screen
 
 class dialog(object):
-	def __init__(self, model_name, parent, model=None, attrs={}, model_ctx={}):
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"dia_form_win_many2one",gettext.textdomain())
-		self.dia = self.win_gl.get_widget('dia_form_win_many2one')
+	def __init__(self, model_name, parent, model=None, attrs={}, model_ctx={}, parent_win=None):
+
+		self.dia = gtk.Dialog(_('Tiny ERP - Link'), parent_win,
+				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
+				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+					gtk.STOCK_OK, gtk.RESPONSE_OK))
 		if ('string' in attrs) and attrs['string']:
 			self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
-		self.sw = self.win_gl.get_widget('many2one_vp')
+		self.dia.set_property('default-width', 760)
+		self.dia.set_property('default-height', 500)
+
+		scroll = gtk.ScrolledWindow()
+		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+		scroll.set_placement(gtk.CORNER_TOP_LEFT)
+		scroll.set_shadow_type(gtk.SHADOW_NONE)
+		self.dia.vbox.pack_start(scroll, expand=True, fill=True)
+
+		vp = gtk.Viewport()
+		vp.set_shadow_type(gtk.SHADOW_NONE)
+		scroll.add(vp)
+
 		self.screen = Screen(model_name, view_type=[], parent=parent)
 		self.screen.models._context.update(model_ctx)
 		if not model:
@@ -58,11 +72,11 @@ class dialog(object):
 			self.screen.add_view(arch, fields, display=True)
 		else:
 			self.screen.add_view_id(False, 'form', display=True)
-		self.sw.add(self.screen.widget)
+		vp.add(self.screen.widget)
 		self.screen.display()
 		x,y = self.screen.screen_container.size_get()
-		self.sw.set_size_request(x,y+30)
-		#self.sw.show_all()
+		vp.set_size_request(x,y+30)
+		self.dia.show_all()
 
 	def new(self):
 		model = self.screen.new()
@@ -94,38 +108,112 @@ class one2many_list(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-		self.win_gl = glade.XML(common.terp_path("terp.glade"), "widget_one2many_list", gettext.textdomain())
+		self.widget = gtk.VBox(homogeneous=False, spacing=5)
 
-		self.win_gl.signal_connect('on_o2m_but_new_button_press_event', self._sig_new)
-		self.win_gl.signal_connect('on_o2m_but_open_button_press_event', self._sig_edit)
-		self.win_gl.signal_connect('on_o2m_but_delete_button_press_event', self._sig_remove )
+		hb = gtk.HBox(homogeneous=False, spacing=5)
+		menubar = gtk.MenuBar()
+		menubar.set_pack_direction(gtk.PACK_DIRECTION_LTR)
+		menubar.set_child_pack_direction(gtk.PACK_DIRECTION_LTR)
 
-		self.win_gl.signal_connect('on_o2m_but_next_button_press_event', self._sig_next )
-		self.win_gl.signal_connect('on_o2m_but_previous_button_press_event', self._sig_previous )
+		menuitem_title = gtk.ImageMenuItem(stock_id='gtk-preferences')
 
-		self.win_gl.signal_connect('on_o2ml_but_refresh_button_press_event',
-								   self._sig_refresh )
-		self.win_gl.signal_connect('on_o2ml_but_sequence_clicked',
-								   self._sig_sequence )
-		self.win_gl.signal_connect('on_o2ml_but_switchview_clicked',
-								   self.switch_view)
+		menu_title = gtk.Menu()
+		menuitem_set_to_default = gtk.MenuItem(_('Set to default value'), True)
+		menuitem_set_to_default.connect('activate', lambda *x:self._menu_sig_default_get())
+		menu_title.add(menuitem_set_to_default)
+		menuitem_set_default = gtk.MenuItem(_('Set Default'), True)
+		menuitem_set_default.connect('activate', lambda *x: self._menu_sig_default_set())
+		menu_title.add(menuitem_set_default)
+		menuitem_title.set_submenu(menu_title)
 
-		self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=parent, views_preload=attrs.get('views', {}), tree_saves=False, create_new=True, row_activate=self._on_activate)
+		menubar.add(menuitem_title)
+		hb.pack_start(menubar, expand=True, fill=True)
+
+		tooltips = gtk.Tooltips()
+
+		self.eb_new = gtk.EventBox()
+		tooltips.set_tip(self.eb_new, _('Create a new entry'))
+		self.eb_new.set_events(gtk.gdk.BUTTON_PRESS)
+		self.eb_new.connect('button_press_event', self._sig_new)
+		img_new = gtk.Image()
+		img_new.set_from_stock('gtk-new', gtk.ICON_SIZE_MENU)
+		img_new.set_alignment(0.5, 0.5)
+		self.eb_new.add(img_new)
+		hb.pack_start(self.eb_new, expand=False, fill=False)
+
+		self.eb_open = gtk.EventBox()
+		tooltips.set_tip(self.eb_open, _('Edit this entry'))
+		self.eb_open.set_events(gtk.gdk.BUTTON_PRESS)
+		self.eb_open.connect('button_press_event', self._sig_edit)
+		img_open = gtk.Image()
+		img_open.set_from_stock('gtk-open', gtk.ICON_SIZE_MENU)
+		img_open.set_alignment(0.5, 0.5)
+		self.eb_open.add(img_open)
+		hb.pack_start(self.eb_open, expand=False, fill=False)
+
+		self.eb_del = gtk.EventBox()
+		tooltips.set_tip(self.eb_del, _('Remove this entry'))
+		self.eb_del.set_events(gtk.gdk.BUTTON_PRESS)
+		self.eb_del.connect('button_press_event', self._sig_remove)
+		img_del = gtk.Image()
+		img_del.set_from_stock('gtk-delete', gtk.ICON_SIZE_MENU)
+		img_del.set_alignment(0.5, 0.5)
+		self.eb_del.add(img_del)
+		hb.pack_start(self.eb_del, expand=False, fill=False)
+
+		hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
+
+		eb_pre = gtk.EventBox()
+		tooltips.set_tip(eb_pre, _('Previous'))
+		eb_pre.set_events(gtk.gdk.BUTTON_PRESS)
+		eb_pre.connect('button_press_event', self._sig_previous)
+		img_pre = gtk.Image()
+		img_pre.set_from_stock('gtk-go-back', gtk.ICON_SIZE_MENU)
+		img_pre.set_alignment(0.5, 0.5)
+		eb_pre.add(img_pre)
+		hb.pack_start(eb_pre, expand=False, fill=False)
+
+		self.label = gtk.Label('(0,0)')
+		hb.pack_start(self.label, expand=False, fill=False)
+
+		eb_next = gtk.EventBox()
+		tooltips.set_tip(eb_next, _('Next'))
+		eb_next.set_events(gtk.gdk.BUTTON_PRESS)
+		eb_next.connect('button_press_event', self._sig_next)
+		img_next = gtk.Image()
+		img_next.set_from_stock('gtk-go-forward', gtk.ICON_SIZE_MENU)
+		img_next.set_alignment(0.5, 0.5)
+		eb_next.add(img_next)
+		hb.pack_start(eb_next, expand=False, fill=False)
+
+		hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
+
+		eb_switch = gtk.EventBox()
+		tooltips.set_tip(eb_switch, _('Switch'))
+		eb_switch.set_events(gtk.gdk.BUTTON_PRESS)
+		eb_switch.connect('button_press_event', self.switch_view)
+		img_switch = gtk.Image()
+		img_switch.set_from_stock('gtk-justify-left', gtk.ICON_SIZE_MENU)
+		img_switch.set_alignment(0.5, 0.5)
+		eb_switch.add(img_switch)
+		hb.pack_start(eb_switch, expand=False, fill=False)
+
+		tooltips.enable()
+		self.widget.pack_start(hb, expand=False, fill=True)
+
+		self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate)
 		self.screen.signal_connect(self, 'record-message', self._sig_label)
+		menuitem_title.get_child().set_text(self.screen.current_view.title)
 
-		self.widget = self.win_gl.get_widget('widget_one2many_list')
-		self.sw = self.win_gl.get_widget('o2ml_sw')
-		self.sw.add_with_viewport(self.screen.widget)
-		
-		title = self.win_gl.get_widget('o2m_menuitem_titre')
-		title.get_child().set_text(self.screen.current_view.title)
-
-		self.win_gl.signal_connect('on_set_default_activate', lambda *x: self._menu_sig_default_set() )
-		self.win_gl.signal_connect('on_set_to_default_activate', lambda *x:self._menu_sig_default_get() )
+		scroll = gtk.ScrolledWindow()
+		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+		scroll.set_placement(gtk.CORNER_TOP_LEFT)
+		scroll.set_shadow_type(gtk.SHADOW_NONE)
+		scroll.add_with_viewport(self.screen.widget)
+		self.widget.pack_start(scroll, expand=True, fill=True)
 
 	def destroy(self):
 		self.screen.destroy()
-		del self.win_gl
 
 	def _on_activate(self, screen, *args):
 		self._sig_edit()
@@ -146,9 +234,9 @@ class one2many_list(interface.widget_interface):
 		self.screen.switch_view()
 
 	def _readonly_set(self, value):
-		self.win_gl.get_widget('o2m_but_new').set_sensitive(not value)
-		self.win_gl.get_widget('o2m_but_delete').set_sensitive(not value)
-		self.win_gl.get_widget('o2m_but_open').set_sensitive(not value)
+		self.eb_new.set_sensitive(not value)
+		self.eb_del.set_sensitive(not value)
+		self.eb_open.set_sensitive(not value)
 
 	def _sig_new(self, *args):
 		_, event = args
@@ -163,6 +251,7 @@ class one2many_list(interface.widget_interface):
 					ok, value = dia.run()
 					if ok:
 						self.screen.models.model_add(value)
+						value.signal('record-changed', value.parent)
 						self.screen.display()
 						dia.new()
 				dia.destroy()
@@ -171,7 +260,6 @@ class one2many_list(interface.widget_interface):
 		dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs) 
 		ok, value = dia.run()
 		dia.destroy()
-#		self.screen.display()
 
 	def _sig_next(self, *args):
 		_, event = args
@@ -195,7 +283,7 @@ class one2many_list(interface.widget_interface):
 		if signal_data[0] >= 0:
 			name = str(signal_data[0] + 1)
 		line = '(%s/%s)' % (name, signal_data[1])
-		self.win_gl.get_widget('one2many_label').set_text(line)
+		self.label.set_text(line)
 
 	def _sig_refresh(self, *args):
 		pass

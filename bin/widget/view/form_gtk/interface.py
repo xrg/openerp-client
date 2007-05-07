@@ -28,7 +28,6 @@
 
 import copy
 import gtk
-from gtk import glade
 import wid_common
 
 import rpc

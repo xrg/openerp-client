@@ -29,7 +29,6 @@
 
 import gettext
 import gtk
-from gtk import glade
 
 import common
 import interface
@@ -37,21 +36,29 @@ import tools
 
 class url(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
-		self.win_gl = glade.XML(common.terp_path("terp.glade"), "widget_url", 
-								gettext.textdomain())
-		self.widget = self.win_gl.get_widget('widget_url')
+		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
 
-		self.entry = self.win_gl.get_widget('entry_url')
+		self.widget = gtk.HBox(homogeneous=False)
+
+		self.entry = gtk.Entry()
+		self.entry.set_max_length(int(attrs.get('size',16)))
+		self.entry.set_visibility(not attrs.get('invisible', False))
+		self.entry.set_width_chars(5)
 		self.entry.connect('activate', self.sig_activate)
 		self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
 		self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
-		self.entry.set_max_length(int(attrs.get('size',16)))
-		self.entry.set_visibility(not attrs.get('invisible', False))
+		self.widget.pack_start(self.entry, expand=True, fill=True)
 
-		self.button = self.win_gl.get_widget('button_url')
+		self.button = gtk.Button()
+		img = gtk.Image()
+		img.set_from_stock('gtk-jump-to', gtk.ICON_SIZE_BUTTON)
+		self.button.set_image(img)
+		self.button.set_relief(gtk.RELIEF_NONE)
 		self.button.connect('clicked', self.button_clicked)
-		
-		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
+		self.button.set_alignment(0.5, 0.5)
+		self.button.set_property('can-focus', False)
+		self.widget.pack_start(self.button, expand=False, fill=False)
+
 
 	def set_value(self, model,model_field):
 		return model_field.set_client(model, self.entry.get_text() or False)

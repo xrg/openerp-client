@@ -82,8 +82,8 @@ class action(interface.widget_interface):
 				vbox.add(self.screen.widget)
 				self.widget=self.win_gl.get_widget('widget_paned')
 				self.widget.set_size_request(int(attrs.get('width', -1)), int(attrs.get('haight', -1)))
-#			elif self.action['view_type']=='tree':
-				#TODO
+			elif self.action['view_type']=='tree':
+				pass #TODO
 
 	def _sig_switch(self, *args):
 		self.screen.switch_view()

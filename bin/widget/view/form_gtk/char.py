@@ -29,16 +29,13 @@
 
 import gettext
 import gtk
-from gtk import glade
 
 import common
 import interface
 
 class char(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
-		self.win_gl = glade.XML(common.terp_path("terp.glade"), "widget_char", 
-								gettext.textdomain())
-		self.widget = self.win_gl.get_widget('widget_char')
+		self.widget = gtk.Entry()
 		self.widget.set_max_length(int(attrs.get('size',16)))
 		self.widget.set_visibility(not attrs.get('invisible', False))
 		self.widget.set_width_chars(5)

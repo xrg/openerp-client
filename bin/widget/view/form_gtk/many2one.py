@@ -29,7 +29,6 @@
 
 import gobject
 import gtk
-from gtk import glade
 import copy
 
 import gettext
@@ -48,12 +47,26 @@ import service
 
 
 class dialog(object):
-	def __init__(self, model, id=None, attrs={} ,domain=[], context={}):
-		self.win_gl = glade.XML(common.terp_path("terp.glade"), "dia_form_win_many2one", gettext.textdomain())
-		self.dia = self.win_gl.get_widget('dia_form_win_many2one')
+	def __init__(self, model, id=None, attrs={} ,domain=[], context={}, parent=None):
+
+		self.dia = gtk.Dialog(_('Tiny ERP - Link'), parent,
+				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
+				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+					gtk.STOCK_OK, gtk.RESPONSE_OK))
 		if ('string' in attrs) and attrs['string']:
 			self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
-		self.sw = self.win_gl.get_widget('many2one_vp')
+		self.dia.set_property('default-width', 760)
+		self.dia.set_property('default-height', 500)
+
+		scroll = gtk.ScrolledWindow()
+		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+		scroll.set_placement(gtk.CORNER_TOP_LEFT)
+		scroll.set_shadow_type(gtk.SHADOW_NONE)
+		self.dia.vbox.pack_start(scroll, expand=True, fill=True)
+
+		vp = gtk.Viewport()
+		vp.set_shadow_type(gtk.SHADOW_NONE)
+		scroll.add(vp)
 
 		self.screen = Screen(model, domain=domain, context=context)
 		if id:
@@ -61,8 +74,9 @@ class dialog(object):
 		else:
 			self.screen.new()
 		self.screen.display()
-		self.sw.add(self.screen.widget)
-		#self.sw.show_all()
+		vp.add(self.screen.widget)
+
+		self.dia.show_all()
 
 	def run(self, datas={}):
 		while True:
@@ -81,36 +95,58 @@ class dialog(object):
 
 class many2one(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
-		self._readonly = False
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_reference", gettext.textdomain())
-		self.win_gl.signal_connect('on_reference_new_button_press', self.sig_new )
-		self.win_gl.signal_connect('on_reference_edit_button_press', self.sig_edit )
-		self.widget = self.win_gl.get_widget('widget_reference')
+
+		self.widget = gtk.HBox(spacing=3)
+		self.widget.set_property('sensitive', True)
+		self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
+		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
+
+		self.wid_text = gtk.Entry()
+		self.wid_text.set_property('width-chars', 13)
+		self.wid_text.connect('key_press_event', self.sig_key_press)
+		self.wid_text.connect('button_press_event', self._menu_open)
+		self.wid_text.connect_after('changed', self.sig_changed)
+		self.wid_text.connect_after('activate', self.sig_activate)
+		self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+		self.widget.pack_start(self.wid_text, expand=True, fill=True)
+
+		self.but_new = gtk.Button()
+		img_new = gtk.Image()
+		img_new.set_from_stock('gtk-new',gtk.ICON_SIZE_BUTTON)
+		self.but_new.set_image(img_new)
+		self.but_new.set_relief(gtk.RELIEF_NONE)
+		self.but_new.connect('clicked', self.sig_new)
+		self.but_new.set_alignment(0.5, 0.5)
+		self.but_new.set_property('can-focus', False)
+		self.widget.pack_start(self.but_new, expand=False, fill=False)
+
+		self.but_open = gtk.Button()
+		img_find = gtk.Image()
+		img_find.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
+		img_open = gtk.Image()
+		img_open.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
+		self.but_open.set_image(img_find)
+		self.but_open.set_relief(gtk.RELIEF_NONE)
+		self.but_open.connect('clicked', self.sig_edit)
+		self.but_open.set_alignment(0.5, 0.5)
+		self.but_open.set_property('can-focus', False)
+		self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
+
+		tooltips = gtk.Tooltips()
+		tooltips.set_tip(self.but_new, _('Create a new resource'))
+		tooltips.set_tip(self.but_open, _('Search / Open a resource'))
+		tooltips.enable()
+
+		self.ok = True
+		self._readonly = False
+		self.parent = parent
 		self.model_type = attrs['relation']
-		
 		self._menu_loaded = False
 		self._menu_entries.append((None, None, None))
 		self._menu_entries.append((_('Action'), lambda x: self.click_and_action('client_action_multi'),0))
 		self._menu_entries.append((_('Report'), lambda x: self.click_and_action('client_print_multi'),0))
 
-		self.parent = parent
-		#self.widget.set_property('can-focus', True)
-		#self.widget.set_property('can-default', True)
-
-		#self.widget.set_property('sensitive', False)
-		self.widget.set_property('sensitive', True)
-
-		self.win_gl.get_widget('but_many2one_new').set_property('can-focus', False)
-		self.win_gl.get_widget('but_many2one_open').set_property('can-focus', False)
-
-		self.wid_text = self.win_gl.get_widget('ent_reference')
-		self.ok = True
-		self.wid_text.connect_after('changed', self.sig_changed)
-		self.wid_text.connect('key_press_event', self.sig_key_press)
-		self.wid_text.connect_after('activate', self.sig_activate)
-		self.wid_text.connect('button_press_event', self._menu_open)
-		self.image_search = self.win_gl.get_widget('but_m2o_image')
 
 		if attrs.get('completion',False):
 			ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', '', [], 'ilike', {})
@@ -150,7 +186,6 @@ class many2one(interface.widget_interface):
 			self._view.modelfield.set_client(self._view.model, ids[0])
 			self.display(self._view.model, self._view.modelfield)
 			self.ok = True
-			# return True
 		else:
 			win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain)
 			ids = win.go()
@@ -165,7 +200,7 @@ class many2one(interface.widget_interface):
 		self._readonly = value
 		self.wid_text.set_editable(not value)
 		self.wid_text.set_sensitive(not value)
-		self.win_gl.get_widget('but_many2one_new').set_sensitive(not value)
+		self.but_new.set_sensitive(not value)
 
 	def _color_widget(self):
 		return self.wid_text
@@ -177,19 +212,20 @@ class many2one(interface.widget_interface):
 		res = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['model'], 'default_get', [self.attrs['name']])
 		self.value = res.get(self.attrs['name'], False)
 
-	def sig_activate(self, *args):
+	def sig_activate(self, widget, event=None, leave=False):
 		self.ok = False
 		value = self._view.modelfield.get(self._view.model)
 
 		if value:
-			dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs)
-			ok, value = dia.run()
-			if ok:
-				self._view.modelfield.set_client(self._view.model, value)
-				self.value = value
-			dia.destroy()
+			if not leave:
+				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs)
+				ok, value = dia.run()
+				if ok:
+					self._view.modelfield.set_client(self._view.model, value)
+					self.value = value
+				dia.destroy()
 		else:
-			if not self._readonly:
+			if not self._readonly and ( self.wid_text.get_text() or not leave):
 				domain = self._view.modelfield.domain_get(self._view.model)
 				context = self._view.modelfield.context_get(self._view.model)
 
@@ -219,9 +255,9 @@ class many2one(interface.widget_interface):
 
 	def sig_key_press(self, widget, event, *args):
 		if event.keyval==gtk.keysyms.F1:
-			self.sig_new()
+			self.sig_new(widget, event)
 		elif event.keyval==gtk.keysyms.F2:
-			self.sig_activate()
+			self.sig_activate(widget, event)
 		return False
 
 	def sig_changed(self, *args):
@@ -231,11 +267,8 @@ class many2one(interface.widget_interface):
 				self.display(self._view.model, self._view.modelfield)
 		return False
 
-	#
-	# No update of the model, the model is updated in real time !
-	#
 	def set_value(self, model, model_field):
-		pass
+		pass # No update of the model, the model is updated in real time !
 
 	def display(self, model, model_field):
 		if not model_field:
@@ -246,10 +279,13 @@ class many2one(interface.widget_interface):
 		self.ok=False
 		res = model_field.get_client(model)
 		self.wid_text.set_text(res or '')
+		img = gtk.Image()
 		if res:
-			self.image_search.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
+			img.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
+			self.but_open.set_image(img)
 		else:
-			self.image_search.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
+			img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
+			self.but_open.set_image(img)
 		self.ok=True
 
 	def _menu_open(self, obj, event):
@@ -284,14 +320,10 @@ class many2one(interface.widget_interface):
 			return True
 		return False
 
-	#
-	# Open a view with ids: [(field,'=',value)]
-	#
 	def click_and_relate(self, model, field):
 		value = self._view.modelfield.get(self._view.model)
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', model, 'search',[(field,'=',value)])
 		obj = service.LocalService('gui.window')
-		#view_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'search', [('model','=',model),('type','=','form')])
 		obj.create(False, model, ids, [(field,'=',value)], 'form', None, mode='tree,form')
 		return True
 

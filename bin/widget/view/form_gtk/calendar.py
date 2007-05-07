@@ -30,7 +30,6 @@
 import time
 import datetime as DT
 import gtk
-from gtk import glade
 
 import gettext
 
@@ -52,14 +51,28 @@ if not hasattr(locale, 'D_FMT'):
 class calendar(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, attrs=attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_calendar", gettext.textdomain())
-		self.win_gl.signal_connect('on_but_calendar_clicked', self.cal_open, model)
-		self.widget = self.win_gl.get_widget('widget_calendar')
-		self.entry = self.win_gl.get_widget('ent_calendar')
+
+		self.widget = gtk.HBox(spacing=3)
+		self.entry = gtk.Entry()
+		self.entry.set_property('width-chars', 19)
 		self.entry.connect('button_press_event', self._menu_open)
-		self.state_set('valid')
 		self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
 		self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
+		self.widget.pack_start(self.entry, expand=False, fill=False)
+
+		tooltips = gtk.Tooltips()
+		eb = gtk.EventBox()
+		tooltips.set_tip(eb, _('Open the calendar widget'))
+		tooltips.enable()
+		eb.set_events(gtk.gdk.BUTTON_PRESS)
+		eb.connect('button_press_event', self.cal_open, model, parent)
+		img = gtk.Image()
+		img.set_from_stock('gtk-zoom-in', gtk.ICON_SIZE_MENU)
+		img.set_alignment(0.5, 0.5)
+		eb.add(img)
+		self.widget.pack_start(eb, expand=False, fill=False)
+
+		self.state_set('valid')
 		self.readonly=False
 
 	def _color_widget(self):
@@ -102,14 +115,22 @@ class calendar(interface.widget_interface):
 			self.entry.set_text(t)
 		return True
 
-	def cal_open(self, model, widget=None, val=None):
+	def cal_open(self, widget, event, model=None, parent=None):
 		if self.readonly:
 			common.message(_('This widget is readonly !'))
 			return True
-		win_gl = glade.XML(common.terp_path("terp.glade"),"dia_form_wid_calendar", gettext.textdomain())
-		win = win_gl.get_widget('dia_form_wid_calendar')
-		cal = win_gl.get_widget('cal_calendar')
-		win.set_destroy_with_parent(True)
+
+		win = gtk.Dialog(_('Tiny ERP - Date selection'), parent,
+				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
+				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+				gtk.STOCK_OK, gtk.RESPONSE_OK))
+
+		cal = gtk.Calendar()
+		cal.display_options(gtk.CALENDAR_SHOW_HEADING|gtk.CALENDAR_SHOW_DAY_NAMES|gtk.CALENDAR_SHOW_WEEK_NUMBERS)
+		cal.connect('day-selected-double-click', lambda *x: win.response(gtk.RESPONSE_OK))
+		win.vbox.pack_start(cal, expand=True, fill=True)
+		win.show_all()
+
 		try:
 			val = self.get_value(model)
 			if val:
@@ -117,6 +138,7 @@ class calendar(interface.widget_interface):
 				cal.select_day(int(val[8:10]))
 		except ValueError:
 			pass
+
 		response = win.run()
 		if response == gtk.RESPONSE_OK:
 			year, month, day = cal.get_date()
@@ -125,21 +147,31 @@ class calendar(interface.widget_interface):
 		self._focus_out()
 		win.destroy()
 
-#
-# To Bugfix
-#
-
 class datetime(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs=attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_calendar", gettext.textdomain())
-		self.win_gl.signal_connect('on_but_calendar_clicked', self.cal_open, model)
-		self.widget = self.win_gl.get_widget('widget_calendar')
-		self.entry = self.win_gl.get_widget('ent_calendar')
+
+		self.widget = gtk.HBox(spacing=3)
+		self.entry = gtk.Entry()
+		self.entry.set_property('width-chars', 19)
 		self.entry.connect('button_press_event', self._menu_open)
-		self.state_set('valid')
 		self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
 		self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
+		self.widget.pack_start(self.entry, expand=False, fill=False)
+
+		tooltips = gtk.Tooltips()
+		eb = gtk.EventBox()
+		tooltips.set_tip(eb, _('Open the calendar widget'))
+		tooltips.enable()
+		eb.set_events(gtk.gdk.BUTTON_PRESS)
+		eb.connect('button_press_event', self.cal_open, model, parent)
+		img = gtk.Image()
+		img.set_from_stock('gtk-zoom-in', gtk.ICON_SIZE_MENU)
+		img.set_alignment(0.5, 0.5)
+		eb.add(img)
+		self.widget.pack_start(eb, expand=False, fill=False)
+
+		self.state_set('valid')
 		self.readonly=False
 
 	def _color_widget(self):
@@ -203,16 +235,31 @@ class datetime(interface.widget_interface):
 			self.entry.set_text(t)
 		return True
 
-	def cal_open(self, model, widget=None, val=None):
+	def cal_open(self, widget, event, model=None, parent=None):
 		if self.readonly:
 			common.message(_('This widget is readonly !'))
 			return True
-		win_gl = glade.XML(common.terp_path("terp.glade"),"dia_form_wid_datetime", gettext.textdomain())
-		win = win_gl.get_widget('dia_form_wid_datetime')
-		hour = win_gl.get_widget('hour')
-		minute = win_gl.get_widget('minute')
-		cal = win_gl.get_widget('calendar')
-		win.set_destroy_with_parent(True)
+
+		win = gtk.Dialog(_('Tiny ERP - Date selection'), parent,
+				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
+				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+				gtk.STOCK_OK, gtk.RESPONSE_OK))
+
+		hbox = gtk.HBox()
+		hbox.pack_start(gtk.Label(_('Hour:')), expand=False, fill=False)
+		hour = gtk.SpinButton(gtk.Adjustment(0, 0, 23, 1, 5, 5), 1, 0)
+		hbox.pack_start(hour, expand=True, fill=True)
+		hbox.pack_start(gtk.Label(_('Minute:')), expand=False, fill=False)
+		minute = gtk.SpinButton(gtk.Adjustment(0, 0, 59, 1, 10, 10), 1, 0)
+		hbox.pack_start(minute, expand=True, fill=True)
+		win.vbox.pack_start(hbox, expand=False, fill=True)
+
+		cal = gtk.Calendar()
+		cal.display_options(gtk.CALENDAR_SHOW_HEADING|gtk.CALENDAR_SHOW_DAY_NAMES|gtk.CALENDAR_SHOW_WEEK_NUMBERS)
+		cal.connect('day-selected-double-click', lambda *x: win.response(gtk.RESPONSE_OK))
+		win.vbox.pack_start(cal, expand=True, fill=True)
+		win.show_all()
+
 		try:
 			val = self.get_value(model, timezone=False)
 			if val:
@@ -242,9 +289,11 @@ class datetime(interface.widget_interface):
 class stime(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, parent, attrs=attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_time", gettext.textdomain())
-		self.widget = self.win_gl.get_widget('widget_time')
-		self.entry = self.win_gl.get_widget('widget_time_entry')
+
+		self.widget = gtk.Entry()
+		self.entry = self.widget
+		self.entry.set_property('width-chars', 8)
+		self.entry.set_property('max-length', 8)
 		self.value=False
 
 	def _readonly_set(self, value):
@@ -262,7 +311,7 @@ class stime(interface.widget_interface):
 		try: 
 			t = time.strptime(str, '%H:%M:%S')
 		except:
-			res = False
+			return False
 		return time.strftime(HM_FORMAT, t)
 		
 	def set_value(self, model, model_field):

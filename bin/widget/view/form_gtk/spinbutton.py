@@ -28,7 +28,6 @@
 ##############################################################################
 
 import gtk
-from gtk import glade
 
 import interface
 

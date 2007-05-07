@@ -28,7 +28,6 @@
 ##############################################################################
 
 import gtk
-from gtk import glade
 
 import interface
 
@@ -36,9 +35,7 @@ class button(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 		self.widget = gtk.Button()
-		print 'ATTRS', attrs
 		if attrs.get('icon', False):
-			print 'ICI'
 			icon = gtk.Image()
 			icon.set_from_stock(attrs['icon'], gtk.ICON_SIZE_BUTTON)
 			self.widget.set_image(icon)
