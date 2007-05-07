@@ -112,8 +112,15 @@ class ModelRecord(signal_event.signal_event):
 		if not self.id:
 			self.id = self.rpc.create(value, self.context_get())
 		else:
-			if not self.rpc.write([self.id], value, self.context_get()):
-				return False
+			try:
+				rpc.session.rpc_exec_auth_wo('/object', 'execute', self.resource, 'write', [self.id], value, self.context_get())
+			except rpc.rpc_exception, e:
+				if e.code=='ConcurrencyException':
+					pass
+				else:
+					common.error(_('Application Error'), err.code, err.type)
+			#if not self.rpc.write([self.id], value, self.context_get()):
+			#	return False
 		self._loaded = False
 		if reload:
 			self.reload()

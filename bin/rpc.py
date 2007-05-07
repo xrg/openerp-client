@@ -151,8 +151,14 @@ class rpc_session(object):
 		try:
 			sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
 			return sock.exec_auth(method, *args)
-		except:
-			raise rpc_exception(1, 'not logged')
+		except xmlrpclib.Fault, err:
+			a = rpc_exception(err.faultCode, err.faultString)
+		except tiny_socket.Myexception, err:
+			a = rpc_exception(err.faultCode, err.faultString)
+		if a.type in ('warning', 'UserError'):
+			common.warning(a.data, a.message)
+			return None
+		raise a
 
 	def rpc_exec_auth(self, obj, method, *args):
 		if self._open:

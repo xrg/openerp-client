@@ -96,7 +96,7 @@ class image_wid(interface.widget_interface):
 		filechooser.run()
 		if filechooser.ret:
 			self.update_img(filechooser.ret)
-			self._value = encodestring(file(filechooser.ret).read('rb'))
+			self._value = encodestring(file(filechooser.ret,'rb').read())
 	
 	def update_img(self, path):
 		new_box = self.create_image(path)

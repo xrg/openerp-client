@@ -592,7 +592,7 @@ class terp_main(service.Service):
 	def request_set(self):
 		try:
 			uid = rpc.session.uid
-			ids,ids2 = rpc.session.rpc_exec_auth_wo('/object', 'execute', 'res.request', 'request_get')
+			ids,ids2 = rpc.session.rpc_exec_auth_try('/object', 'execute', 'res.request', 'request_get')
 			if len(ids):
 				message = _('%s request(s)') % len(ids)
 			else:
