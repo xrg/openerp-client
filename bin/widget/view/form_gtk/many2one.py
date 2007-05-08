@@ -281,10 +281,10 @@ class many2one(interface.widget_interface):
 		self.wid_text.set_text(res or '')
 		img = gtk.Image()
 		if res:
-			img.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
+			img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
 			self.but_open.set_image(img)
 		else:
-			img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
+			img.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
 			self.but_open.set_image(img)
 		self.ok=True
 

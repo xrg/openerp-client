@@ -150,7 +150,7 @@ class _container(object):
 		if expand:
 			yopt = gtk.EXPAND | gtk.FILL
 		else:
-			yopt = False
+			yopt = gtk.FILL
 		if colspan == 1 and a == 1:
 			colspan = 2
 		if name:
@@ -318,7 +318,6 @@ class parser_form(widget.view.interface.parser_interface):
 			elif node.localName=='group':
 				frame = gtk.Frame(attrs.get('string', None))
 				frame.set_border_width(0)
-
 
 				container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)))
 				container.new(int(attrs.get('col',4)))
