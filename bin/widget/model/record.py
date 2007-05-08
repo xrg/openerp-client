@@ -134,6 +134,7 @@ class ModelRecord(signal_event.signal_event):
 					if resp == gtk.RESPONSE_OK:
 						self.save(check_delta= False)
 					if resp == gtk.RESPONSE_APPLY:
+						reload = False
 						obj = service.LocalService('gui.window')
 						obj.create(False, self.resource, self.id, [], 'form', None, context,'form,tree')
 				else:
