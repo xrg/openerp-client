@@ -29,13 +29,16 @@
 
 import re
 import time
-
+import common
 import exceptions
 import rpc
 from rpc import RPCProxy
 import field
-
 import signal_event
+import gtk
+import gettext
+import service
+from gtk import glade
 
 class EvalEnvironment(object):
 	def __init__(self, parent):
@@ -52,7 +55,7 @@ class EvalEnvironment(object):
 
 
 class ModelRecord(signal_event.signal_event):
-	def __init__(self, resource, id, group=None, parent=None, new=False):
+	def __init__(self, resource, id, group=None, parent=None, new=False ):
 		super(ModelRecord, self).__init__()
 		self.resource = resource
 		self.rpc = RPCProxy(self.resource)
@@ -62,6 +65,7 @@ class ModelRecord(signal_event.signal_event):
 		self.mgroup = group
 		self.value = {}
 		self.modified = False
+		self.read_time = time.time()
 		for key,val in self.mgroup.mfields.items():
 			self.value[key] = val.create(self)
 			if (new and val.attrs['type']=='one2many') and (val.attrs.get('mode','tree,form').startswith('form')):
@@ -74,12 +78,12 @@ class ModelRecord(signal_event.signal_event):
 	def __repr__(self):
 		return '<ModelRecord %s@%s>' % (self.id, self.resource)
 
-	#def __str__(self):
-	#	res = self.__repr__()
-	#	for name, value in self.fields.items():
-	#		res += '\n   - %s : %s' % (name, value.get())
-	#	res += '\n</ModelRecord>'
-	#	return res
+# 	def __str__(self):
+# 		res = self.__repr__()
+# 		for name, value in self.fields_get().items():
+# 			res += '\n   - %s : %s' % (name, value.get())
+# 		res += '\n</ModelRecord>'
+# 		return res
 
 	def is_modified(self):
 		return self.modified
@@ -106,21 +110,35 @@ class ModelRecord(signal_event.signal_event):
 		self._loaded = False
 		self.reload()
 
-	def save(self, reload=True):
+	def save(self, reload=True,check_delta=True):
 		self._check_load()
 		value = self.get(get_readonly=False)
 		if not self.id:
 			self.id = self.rpc.create(value, self.context_get())
 		else:
+			context= self.context_get()
+			if check_delta:
+				context= context.copy()
+				context['read_delta']= time.time()-self.read_time
 			try:
-				rpc.session.rpc_exec_auth_wo('/object', 'execute', self.resource, 'write', [self.id], value, self.context_get())
+				if not rpc.session.rpc_exec_auth_wo('/object', 'execute', self.resource, 'write', [self.id], value, context):
+					return False
 			except rpc.rpc_exception, e:
-				if e.code=='ConcurrencyException':
-					pass
+				if e.message=='ConcurrencyException':
+					glade_win = glade.XML(common.terp_path("terp.glade"),'dialog_concurrency_exception',gettext.textdomain())
+					dialog = glade_win.get_widget('dialog_concurrency_exception')
+
+					resp= dialog.run()
+					dialog.destroy()
+
+					if resp == gtk.RESPONSE_OK:
+						self.save(check_delta= False)
+					if resp == gtk.RESPONSE_APPLY:
+						obj = service.LocalService('gui.window')
+						obj.create(False, self.resource, self.id, [], 'form', None, context,'form,tree')
 				else:
-					common.error(_('Application Error'), err.code, err.type)
-			#if not self.rpc.write([self.id], value, self.context_get()):
-			#	return False
+					common.error(_('Application Error'), e.code, e.type)
+
 		self._loaded = False
 		if reload:
 			self.reload()
@@ -194,13 +212,14 @@ class ModelRecord(signal_event.signal_event):
 		self._loaded = True
 		if signal:
 			self.signal('record-changed')
-
+		
 	def reload(self):
 		if not self.id:
 			return
 		c= rpc.session.context.copy()
 		c.update(self.context_get())
 		value = self.rpc.read([self.id], self.mgroup.mfields.keys(), c)[0]
+		self.read_time= time.time()
 		self.set(value)
 
 	def expr_eval(self, dom, check_load=True):

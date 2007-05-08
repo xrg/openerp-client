@@ -155,7 +155,7 @@ class rpc_session(object):
 			a = rpc_exception(err.faultCode, err.faultString)
 		except tiny_socket.Myexception, err:
 			a = rpc_exception(err.faultCode, err.faultString)
-		if a.type in ('warning', 'UserError'):
+		if a.code in ('warning', 'UserError'):
 			common.warning(a.data, a.message)
 			return None
 		raise a
