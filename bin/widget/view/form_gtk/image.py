@@ -116,9 +116,9 @@ class image_wid(interface.widget_interface):
 				fname.flush()
 				self.update_img(fname.name)
 			except:
-				self.update_img('tinyerp.png')
+				self.update_img('noimage.png')
 		else:
-			self.update_img('tinyerp.png')
+			self.update_img('noimage.png')
 
 	def set_value(self, model, model_field):
 		return model_field.set_client(model, self._value or False)

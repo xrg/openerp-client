@@ -1,8 +1,0 @@
-widget/view/list.py: 46
-	Appellé une fois par record, semble assez lent
-    Envoi le signal à la VUE gtk à l'ajout de chaque record et non
-    une fois en fin d'ajout.
-
-widget/model/field
-    Une instance est créée pour chaque field de chaque record
-    Super lent et consommateur de ressources
