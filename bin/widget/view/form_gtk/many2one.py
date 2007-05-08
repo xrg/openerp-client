@@ -108,7 +108,7 @@ class many2one(interface.widget_interface):
 		self.wid_text.connect('button_press_event', self._menu_open)
 		self.wid_text.connect_after('changed', self.sig_changed)
 		self.wid_text.connect_after('activate', self.sig_activate)
-		self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 		self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
 		self.but_new = gtk.Button()
@@ -216,6 +216,7 @@ class many2one(interface.widget_interface):
 		self.ok = False
 		value = self._view.modelfield.get(self._view.model)
 
+		self.wid_text.disconnect(self.wid_text_focus_out_id)
 		if value:
 			if not leave:
 				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs)
@@ -241,16 +242,19 @@ class many2one(interface.widget_interface):
 				if ids:
 					name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
 					self._view.modelfield.set_client(self._view.model, name)
+		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 		self.display(self._view.model, self._view.modelfield)
 		self.ok=True
 
 	def sig_new(self, *args):
+		self.wid_text.disconnect(self.wid_text_focus_out_id)
 		dia = dialog(self.attrs['relation'], attrs=self.attrs)
 		ok, value = dia.run()
 		if ok:
 			self._view.modelfield.set_client(self._view.model, value)
 			self.display(self._view.model, self._view.modelfield)
 		dia.destroy()
+		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 	sig_edit = sig_activate
 
 	def sig_key_press(self, widget, event, *args):
