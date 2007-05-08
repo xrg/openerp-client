@@ -167,7 +167,7 @@ class ModelRecord(signal_event.signal_event):
 
 	def get_default(self):
 		self._check_load()
-		value = dict([(name, field.get_default())
+		value = dict([(name, field.get_default(self))
 					  for name, field in self.mgroup.mfields.items()])
 		return value
 

@@ -105,6 +105,7 @@ class CharField(object):
 		if (internal or False) != (model.value.get(self.name,False) or False):
 			model.modified = True
 			self.sig_changed(model)
+			model.signal('record-changed', model)
 
 	def get_client(self, model):
 		return model.value[self.name] or False
@@ -134,6 +135,7 @@ class FloatField(CharField):
 			if not self.attrs.get('readonly', False):
 				model.modified = True
 				self.sig_changed(model)
+				model.signal('record-changed', model)
 
 class IntegerField(CharField):
 	def validate(self, model):
@@ -170,6 +172,7 @@ class M2OField(CharField):
 		if internal != model.value[self.name]:
 			model.modified = True
 			self.sig_changed(model)
+			model.signal('record-changed', model)
 
 # internal = [id]
 class M2MField(CharField):
@@ -194,6 +197,7 @@ class M2MField(CharField):
 		if set(internal) != set(value):
 			model.modified = True
 			self.sig_changed(model)
+			model.signal('record-changed', model)
 
 	def get_default(self, model):
 		return self.get_client(model)
@@ -225,6 +229,7 @@ class O2MField(CharField):
 	def create(self, model):
 		from widget.model.group import ModelRecordGroup
 		mod = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model, context=self.context_get(model, eval=False))
+		mod.signal_connect(mod, 'model-changed', self._model_changed)
 		return mod
 
 	def _get_modified(self, model):
@@ -241,7 +246,8 @@ class O2MField(CharField):
 	modified = property(_get_modified, _set_modified)
 
 	def _model_changed(self, group, model):
-		self.parent.signal('record-changed')
+		self.sig_changed(model.parent)
+		self.parent.signal('record-changed', model)
 
 	def get_client(self, model):
 		return model.value[self.name]
@@ -261,13 +267,16 @@ class O2MField(CharField):
 
 	def set(self, model, value, test_state=False, modified=False):
 		from widget.model.group import ModelRecordGroup
-		model.value[self.name] = ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model, context=self.context_get(model, False))
+		mod =  ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model, context=self.context_get(model, False))
+		mod.signal_connect(mod, 'model-changed', self._model_changed)
+		model.value[self.name] =mod
 		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 		model.value[self.name].pre_load(value, display=False)
 		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 
 	def set_client(self, model, value, test_state=False):
 		self.set(model, value, test_state=test_state)
+		model.signal('record-changed', model)
 
 	def set_default(self, model, value):
 		from widget.model.group import ModelRecordGroup
@@ -289,7 +298,7 @@ class O2MField(CharField):
 		return True
 
 	def get_default(self, model):
-		res = map(lambda x: x.get_default(x), model.value[self.name].models or [])
+		res = map(lambda x: x.get_default(), model.value[self.name].models or [])
 		return res
 
 	def validate(self, model):
@@ -320,6 +329,7 @@ class ReferenceField(CharField):
 		model.value[self.name] = value
 		if (internal or False) != (model.value[self.name] or False):
 			self.sig_changed(model)
+			model.signal('record-changed', model)
 
 	def set(self, model, value, test_state=False, modified=False):
 		if not value:
