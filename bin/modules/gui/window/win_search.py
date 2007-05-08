@@ -97,7 +97,6 @@ class win_search(object):
 			self.form.focusable.grab_focus()
 
 	def sig_activate(self, treeview, path, column, *args):
-		print self.sel_ids_get()
 		self.view.widget.emit_stop_by_name('row_activated')
 		if not self.sel_multi:
 			self.win.response(gtk.RESPONSE_OK)
