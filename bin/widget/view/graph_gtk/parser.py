@@ -44,11 +44,6 @@ class parser_graph(interface.parser_interface):
 
 		on_write = '' #attrs.get('on_write', '')
 
-		img = gtk.Image()
-		img.set_from_stock('gtk-cancel', gtk.ICON_SIZE_BUTTON)
-		img.show()
-
-
 		axis = []
 		axis_data = {}
 		for node in root_node.childNodes:
@@ -61,7 +56,7 @@ class parser_graph(interface.parser_interface):
 		# TODO: parse root_node to fill in axis
 		#
 
-		view = graph.ViewGraph(img, model, axis, fields, axis_data, attrs)
+		view = graph.ViewGraph(model, axis, fields, axis_data, attrs)
 		return view, {}, [], on_write
 
 
