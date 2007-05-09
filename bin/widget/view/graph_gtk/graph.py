@@ -71,7 +71,7 @@ class ViewGraph(object):
 		self._figure = Figure(figsize=(800,600), dpi=100, facecolor='w')
 		self._subplot = self._figure.add_subplot(111)
 		self._canvas = FigureCanvas(self._figure)
-		self.widget.pack_start(self._canvas)
+		self.widget.pack_start(self._canvas, expand=True, fill=True)
 
 		self.fields = fields
 		self.model = model
