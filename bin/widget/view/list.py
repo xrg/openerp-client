@@ -203,7 +203,7 @@ class ViewList(object):
 		elif signal=='record-removed':
 			self.store.removed(*args)
 		else:
-			assert False, 'Unknown Signal !'
+			pass
 
 	def cancel(self):
 		pass
