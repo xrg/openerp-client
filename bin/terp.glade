@@ -16808,7 +16808,7 @@ this operation may take a while...</property>
 
 	  <child>
 	    <widget class="GtkImage" id="image4169">
-	      <property name="width_request">100</property>
+	      <property name="width_request">33</property>
 	      <property name="visible">True</property>
 	      <property name="stock">gtk-dialog-info</property>
 	      <property name="icon_size">6</property>
@@ -16826,11 +16826,13 @@ this operation may take a while...</property>
 
 	  <child>
 	    <widget class="GtkLabel" id="label46562">
-	      <property name="height_request">135</property>
+	      <property name="width_request">421</property>
+	      <property name="height_request">164</property>
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">&lt;b&gt;
-This document has been modified while you where editing it.
+Write concurrency warning :
 &lt;/b&gt;
+This documents was modified while you where editing it.
   Choose :
    - &quot;Cancel&quot; to cancel saving.
    - &quot;Compare&quot; to see the modified version.

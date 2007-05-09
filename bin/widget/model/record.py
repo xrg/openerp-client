@@ -123,6 +123,7 @@ class ModelRecord(signal_event.signal_event):
 			try:
 				if not rpc.session.rpc_exec_auth_wo('/object', 'execute', self.resource, 'write', [self.id], value, context):
 					return False
+				self.read_time = time.time()
 			except rpc.rpc_exception, e:
 				if e.message=='ConcurrencyException':
 					glade_win = glade.XML(common.terp_path("terp.glade"),'dialog_concurrency_exception',gettext.textdomain())
