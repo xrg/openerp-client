@@ -91,7 +91,10 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 			method = model.prepend
 		else:
 			method = model.append
-		new_model = model.model_group.model_new(domain=self.screen.domain, context=self.screen.context)
+		ctx=self.screen.context.copy()
+		if self.screen.current_model.parent:
+			ctx.update(self.screen.current_model.parent.expr_eval(self.screen.default_get))
+		new_model = model.model_group.model_new(domain=self.screen.domain, context=ctx)
 		res = method(new_model)
 		return res
 

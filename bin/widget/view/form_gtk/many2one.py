@@ -235,6 +235,7 @@ class many2one(interface.widget_interface):
 					self._view.modelfield.set_client(self._view.model, ids[0])
 					self.display(self._view.model, self._view.modelfield)
 					self.ok = True
+					self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 					return True
 
 				win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain)

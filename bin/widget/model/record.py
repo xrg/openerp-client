@@ -231,8 +231,8 @@ class ModelRecord(signal_event.signal_event):
 			self._check_load()
 		d = {}
 		for name, mfield in self.mgroup.mfields.items():
-			if not isinstance(mfield, field.O2MField):
-				d[name] = mfield.get(self)
+#			if not isinstance(mfield, field.O2MField):
+			d[name] = mfield.get(self)
 
 		d['current_date'] = time.strftime('%Y-%m-%d')
 		d['time'] = time

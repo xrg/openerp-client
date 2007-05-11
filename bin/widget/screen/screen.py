@@ -39,9 +39,10 @@ import signal_event
 import tools
 
 class Screen(signal_event.signal_event):
-	def __init__(self, model_name, view_ids=[], view_type=['form','tree'], parent=None, context={}, views_preload={}, tree_saves=True, domain=[], create_new=False, row_activate=None, hastoolbar=False):
+	def __init__(self, model_name, view_ids=[], view_type=['form','tree'], parent=None, context={}, views_preload={}, tree_saves=True, domain=[], create_new=False, row_activate=None, hastoolbar=False, default_get={}):
 		super(Screen, self).__init__()
 		self.hastoolbar = hastoolbar
+		self.default_get=default_get
 		if not row_activate:
 			self.row_activate = self.switch_view
 		else:
@@ -201,11 +202,13 @@ class Screen(signal_event.signal_event):
 	def editable_get(self):
 		return self.current_view.widget.editable
 
-	def new(self, default=True):
+	def new(self, default=True, context={}):
 		if self.current_view and self.current_view.view_type == 'tree' \
 				and not self.current_view.widget.editable:
 			self.switch_view()
-		model = self.models.model_new(default, self.domain, self.context)
+		ctx = self.context.copy()
+		ctx.update(context)
+		model = self.models.model_new(default, self.domain, ctx)
 		if (not self.current_view) or self.current_view.model_add_new or self.create_new:
 			self.models.model_add(model, self.new_model_position())
 		self.current_model = model

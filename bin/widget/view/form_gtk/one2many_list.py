@@ -39,7 +39,7 @@ import interface
 from widget.screen import Screen
 
 class dialog(object):
-	def __init__(self, model_name, parent, model=None, attrs={}, model_ctx={}, parent_win=None):
+	def __init__(self, model_name, parent, model=None, attrs={}, model_ctx={}, parent_win=None, default_get_ctx={}):
 
 		self.dia = gtk.Dialog(_('Tiny ERP - Link'), parent_win,
 				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
@@ -63,7 +63,7 @@ class dialog(object):
 		self.screen = Screen(model_name, view_type=[], parent=parent)
 		self.screen.models._context.update(model_ctx)
 		if not model:
-			model = self.screen.new()
+			model = self.screen.new(context=default_get_ctx)
 		self.screen.models.model_add(model)
 		self.screen.current_model = model
 		if ('views' in attrs) and ('form' in attrs['views']):
@@ -201,7 +201,7 @@ class one2many_list(interface.widget_interface):
 		tooltips.enable()
 		self.widget.pack_start(hb, expand=False, fill=True)
 
-		self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate)
+		self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate, default_get=attrs.get('default_get', {}))
 		self.screen.signal_connect(self, 'record-message', self._sig_label)
 		menuitem_title.get_child().set_text(self.screen.current_view.title)
 
@@ -240,13 +240,14 @@ class one2many_list(interface.widget_interface):
 
 	def _sig_new(self, *args):
 		_, event = args
+		ctx = self._view.model.expr_eval(self.screen.default_get)
 		if event.type == gtk.gdk.BUTTON_PRESS :
 			if (self.screen.current_view.view_type=='form') or self.screen.editable_get():
-				self.screen.new()
+				self.screen.new(context=ctx)
 				self.screen.current_view.widget.set_sensitive(True)
 			else:
 				ok = 1
-				dia = dialog(self.attrs['relation'], parent=self._view.model, attrs=self.attrs, model_ctx=self.screen.models._context)
+				dia = dialog(self.attrs['relation'], parent=self._view.model, attrs=self.attrs, model_ctx=self.screen.models._context, default_get_ctx=ctx)
 				while ok:
 					ok, value = dia.run()
 					if ok:
