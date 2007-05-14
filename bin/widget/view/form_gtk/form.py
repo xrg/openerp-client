@@ -111,11 +111,11 @@ class Button(Observable):
 			self.widget.show()
 
 class _container(object):
-	def __init__(self):
+	def __init__(self, tooltips):
 		self.cont = []
 		self.col = []
 		self.sg = gtk.SizeGroup(gtk.SIZE_GROUP_HORIZONTAL)
-		self.tooltips = gtk.Tooltips()
+		self.tooltips = tooltips
 		self.trans_box = []
 		self.trans_box_label = []
 
@@ -190,12 +190,16 @@ class _container(object):
 		table.set_focus_chain(wid_list)
 
 class parser_form(widget.view.interface.parser_interface):
-	def parse(self, model, root_node, fields, notebook=None, paned=None):
+	def parse(self, model, root_node, fields, notebook=None, paned=None, tooltips=None):
 		dict_widget = {}
 		button_list = []
 		attrs = tools.node_attributes(root_node)
 		on_write = attrs.get('on_write', '')
-		container = _container()
+		if not tooltips:
+			self.tooltips = gtk.Tooltips()
+		else:
+			self.tooltips = tooltips
+		container = _container(self.tooltips)
 		container.new(col=int(attrs.get('col', 4)))
 		self.container = container
 
@@ -276,14 +280,14 @@ class parser_form(widget.view.interface.parser_interface):
 				nb.set_tab_pos(pos)
 				nb.set_border_width(3)
 				container.wid_add(nb, colspan=attrs.get('colspan', 3), expand=True, fill=True )
-				_, widgets, buttons, on_write = self.parse(model, node, fields, nb)
+				_, widgets, buttons, on_write = self.parse(model, node, fields, nb, tooltips=self.tooltips)
 				button_list += buttons
 				dict_widget.update(widgets)
 
 			elif node.localName=='page':
 				l = gtk.Label(attrs.get('string','No String Attr.'))
 				l.set_angle(int(options.options['client.form_tab_orientation']))
-				widget, widgets, buttons, on_write = self.parse(model, node, fields, notebook)
+				widget, widgets, buttons, on_write = self.parse(model, node, fields, notebook, tooltips=self.tooltips)
 				button_list += buttons
 				dict_widget.update(widgets)
 				notebook.append_page(widget, l)
@@ -324,7 +328,7 @@ class parser_form(widget.view.interface.parser_interface):
 				container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
 				container.new(int(attrs.get('col',4)))
 
-				widget, widgets, buttons, on_write = self.parse(model, node, fields)
+				widget, widgets, buttons, on_write = self.parse(model, node, fields, tooltips=self.tooltips)
 				dict_widget.update(widgets)
 				button_list += buttons
 				frame.add(widget)
@@ -335,7 +339,7 @@ class parser_form(widget.view.interface.parser_interface):
 			elif node.localName=='hpaned':
 				hp = gtk.HPaned()
 				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True, fill=True)
-				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp)
+				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp, tooltips=self.tooltips)
 				button_list += buttons
 				dict_widget.update(widgets)
 				#if 'position' in attrs:
@@ -343,18 +347,18 @@ class parser_form(widget.view.interface.parser_interface):
 			elif node.localName=='vpaned':
 				hp = gtk.VPaned()
 				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True, fill=True)
-				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp)
+				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp, tooltips=self.tooltips)
 				button_list += buttons
 				dict_widget.update(widgets)
 				if 'position' in attrs:
 					hp.set_position(int(attrs['position']))
 			elif node.localName=='child1':
-				widget, widgets, buttons, on_write = self.parse(model, node, fields, paned=paned)
+				widget, widgets, buttons, on_write = self.parse(model, node, fields, paned=paned, tooltips=self.tooltips)
 				button_list += buttons
 				dict_widget.update(widgets)
 				paned.pack1(widget, resize=True, shrink=True)
 			elif node.localName=='child2':
-				widget, widgets, buttons, on_write = self.parse(model, node, fields, paned=paned)
+				widget, widgets, buttons, on_write = self.parse(model, node, fields, paned=paned, tooltips=self.tooltips)
 				button_list += buttons
 				dict_widget.update(widgets)
 				paned.pack2(widget, resize=True, shrink=True)
