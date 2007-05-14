@@ -163,15 +163,7 @@ class ModelRecordGroup(signal_event.signal_event):
 		if not values:
 			return False
 		newmod = False
-		import time
-		ttime = time.time()
-		#print 'Start Filling'
-		#import hotshot
-		#prof = hotshot.Profile("/tmp/debug2.prof")
-		#prof.runcall(self.load_for, values)
-		#prof.close()
 		self.load_for(values)
-		#print 'End Filling', time.time() - ttime
 		if newmod and display:
 			self.signal('model-changed', newmod)
 		self.current_idx = 0

@@ -97,8 +97,9 @@ class ModelRecord(signal_event.signal_event):
 			return True
 		return False
 
-	def get(self, get_readonly=True, includeid=False):
-		self._check_load()
+	def get(self, get_readonly=True, includeid=False, check_load=True):
+		if check_load:
+			self._check_load()
 		value = dict([(name, field.get(self))
 					  for name, field in self.mgroup.mfields.items()
 					  if get_readonly or not field.attrs.get('readonly', False)])
@@ -231,8 +232,7 @@ class ModelRecord(signal_event.signal_event):
 			self._check_load()
 		d = {}
 		for name, mfield in self.mgroup.mfields.items():
-#			if not isinstance(mfield, field.O2MField):
-			d[name] = mfield.get(self)
+			d[name] = mfield.get(self, check_load=check_load)
 
 		d['current_date'] = time.strftime('%Y-%m-%d')
 		d['time'] = time

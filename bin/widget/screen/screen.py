@@ -286,9 +286,6 @@ class Screen(signal_event.signal_event):
 					res = True
 		return res
 
-	#
-	# To write
-	#
 	def reload(self):
 		self.current_model.reload()
 		if self.parent:
@@ -313,8 +310,6 @@ class Screen(signal_event.signal_event):
 		return id
 
 	def load(self, ids):
-
-
 		self.models.load(ids, display=False)
 		self.current_view.reset()
 		if ids:
