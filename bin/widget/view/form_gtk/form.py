@@ -139,7 +139,7 @@ class _container(object):
 		if x>0:
 			self.cont[-1] = (table, 0, y+1)
 		table.resize(y+1,self.col[-1])
-	def wid_add(self, widget, name=None, expand=False, ypadding=2, rowspan=1, colspan=1, translate=False, fname=None, help=False):
+	def wid_add(self, widget, name=None, expand=False, ypadding=2, rowspan=1, colspan=1, translate=False, fname=None, help=False, fill=False):
 		(table, x, y) = self.cont[-1]
 		if colspan>self.col[-1]:
 			colspan=self.col[-1]
@@ -147,10 +147,11 @@ class _container(object):
 		if colspan+x+a>self.col[-1]:
 			self.newline()
 			(table, x, y) = self.cont[-1]
+		yopt = False
 		if expand:
-			yopt = gtk.EXPAND | gtk.FILL
-		else:
-			yopt = gtk.FILL
+			yopt = yopt | gtk.EXPAND
+		if fill:
+			yopt = yopt | gtk.FILL
 		if colspan == 1 and a == 1:
 			colspan = 2
 		if name:
@@ -209,7 +210,7 @@ class parser_form(widget.view.interface.parser_interface):
 			if node.localName=='image':
 				icon = gtk.Image()
 				icon.set_from_stock(attrs['name'], gtk.ICON_SIZE_DIALOG)
-				container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False))
+				container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
 			elif node.localName=='separator':
 				vbox = gtk.VBox()
 				if 'string' in attrs:
@@ -222,7 +223,7 @@ class parser_form(widget.view.interface.parser_interface):
 					container.trans_box_label.append((eb, text, None))
 					vbox.pack_start(eb)
 				vbox.pack_start(gtk.HSeparator())
-				container.wid_add(vbox,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False))
+				container.wid_add(vbox,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
 			elif node.localName=='label':
 				text = attrs.get('string', '')
 				if not text:
@@ -245,7 +246,7 @@ class parser_form(widget.view.interface.parser_interface):
 				eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
 				eb.add(label)
 				container.trans_box_label.append((eb, text, None))
-				container.wid_add(eb, colspan=int(attrs.get('colspan', 1)), expand=False, help=attrs.get('help', False))
+				container.wid_add(eb, colspan=int(attrs.get('colspan', 1)), expand=False, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
 
 			elif node.localName=='newline':
 				container.newline()
@@ -274,7 +275,7 @@ class parser_form(widget.view.interface.parser_interface):
 						pos = gtk.POS_BOTTOM
 				nb.set_tab_pos(pos)
 				nb.set_border_width(3)
-				container.wid_add(nb, colspan=attrs.get('colspan', 3), expand=True )
+				container.wid_add(nb, colspan=attrs.get('colspan', 3), expand=True, fill=True )
 				_, widgets, buttons, on_write = self.parse(model, node, fields, nb)
 				button_list += buttons
 				dict_widget.update(widgets)
@@ -310,16 +311,17 @@ class parser_form(widget.view.interface.parser_interface):
 				dict_widget[name] = widget_act
 				size = int(attrs.get('colspan', widgets_type[ type ][1]))
 				expand = widgets_type[ type ][2]
+				fill = widgets_type[ type ][3]
 				hlp = fields[name].get('help', attrs.get('help', False))
 				if attrs.get('height', False):
 					widget_act.widget.set_size_request(-1, int(attrs['height']))
-				container.wid_add(widget_act.widget, label, expand, translate=fields[name].get('translate',False), colspan=size, fname=name, help=hlp)
+				container.wid_add(widget_act.widget, label, expand, translate=fields[name].get('translate',False), colspan=size, fname=name, help=hlp, fill=fill)
 
 			elif node.localName=='group':
 				frame = gtk.Frame(attrs.get('string', None))
 				frame.set_border_width(0)
 
-				container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)))
+				container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
 				container.new(int(attrs.get('col',4)))
 
 				widget, widgets, buttons, on_write = self.parse(model, node, fields)
@@ -332,7 +334,7 @@ class parser_form(widget.view.interface.parser_interface):
 				container.pop()
 			elif node.localName=='hpaned':
 				hp = gtk.HPaned()
-				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True)
+				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True, fill=True)
 				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp)
 				button_list += buttons
 				dict_widget.update(widgets)
@@ -340,7 +342,7 @@ class parser_form(widget.view.interface.parser_interface):
 				#	hp.set_position(int(attrs['position']))
 			elif node.localName=='vpaned':
 				hp = gtk.VPaned()
-				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True)
+				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True, fill=True)
 				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp)
 				button_list += buttons
 				dict_widget.update(widgets)
@@ -361,7 +363,7 @@ class parser_form(widget.view.interface.parser_interface):
 				name = str(attrs['name'])
 				widget_act = action(self.window, self.parent, model, attrs)
 				dict_widget[name] = widget_act
-				container.wid_add(widget_act.widget, colspan=int(attrs.get('colspan', 3)), expand=True)
+				container.wid_add(widget_act.widget, colspan=int(attrs.get('colspan', 3)), expand=True, fill=True)
 		for (ebox,src,name,widget) in container.trans_box:
 			ebox.connect('button_press_event',self.translate, model, name, src, widget)
 		for (ebox,src,name) in container.trans_box_label:
@@ -618,29 +620,29 @@ import image
 
 
 widgets_type = {
-	'date': (calendar.calendar, 1, False),
-	'time': (calendar.stime, 1, False),
-	'datetime': (calendar.datetime, 1, False),
-	'float': (spinbutton.spinbutton, 1, False),
-	'integer': (spinint.spinint, 1, False),
-	'selection': (selection.selection, 1, False),
-	'char': (char.char, 1, False),
-	'float_time': (float_time.float_time, 1, False),
-	'boolean': (checkbox.checkbox, 1, False),
-	'button': (button.button, 1, False),
-	'reference': (reference.reference, 1, False),
-	'binary': (binary.wid_binary, 1, False),
-	'picture': (picture.wid_picture, 1, False),
-	'text': (textbox.textbox, 1, True),
-	'text_tag': (textbox_tag.textbox_tag, 1, True),
-	'one2many': (one2many_list.one2many_list, 1, True),
-	'one2many_form': (one2many_list.one2many_list, 1, True),
-	'one2many_list': (one2many_list.one2many_list, 1, True),
-	'many2many': (many2many.many2many, 1, True),
-	'many2one': (many2one.many2one, 1, False),
-	'email' : (url.email, 1, False),
-	'url' : (url.url, 1, False),
-	'image' : (image.image_wid, 1, False),
+	'date': (calendar.calendar, 1, False, False),
+	'time': (calendar.stime, 1, False, False),
+	'datetime': (calendar.datetime, 1, False, False),
+	'float': (spinbutton.spinbutton, 1, False, False),
+	'integer': (spinint.spinint, 1, False, False),
+	'selection': (selection.selection, 1, False, False),
+	'char': (char.char, 1, False, False),
+	'float_time': (float_time.float_time, 1, False, False),
+	'boolean': (checkbox.checkbox, 1, False, False),
+	'button': (button.button, 1, False, False),
+	'reference': (reference.reference, 1, False, False),
+	'binary': (binary.wid_binary, 1, False, False),
+	'picture': (picture.wid_picture, 1, False, False),
+	'text': (textbox.textbox, 1, True, True),
+	'text_tag': (textbox_tag.textbox_tag, 1, True, True),
+	'one2many': (one2many_list.one2many_list, 1, True, True),
+	'one2many_form': (one2many_list.one2many_list, 1, True, True),
+	'one2many_list': (one2many_list.one2many_list, 1, True, True),
+	'many2many': (many2many.many2many, 1, True, True),
+	'many2one': (many2one.many2one, 1, False, False),
+	'email' : (url.email, 1, False, False),
+	'url' : (url.url, 1, False, False),
+	'image' : (image.image_wid, 1, False, False),
 }
 
 # vim:noexpandtab:
