@@ -61,16 +61,16 @@ class calendar(interface.widget_interface):
 		self.widget.pack_start(self.entry, expand=False, fill=False)
 
 		tooltips = gtk.Tooltips()
-		eb = gtk.EventBox()
-		tooltips.set_tip(eb, _('Open the calendar widget'))
+		self.eb = gtk.EventBox()
+		tooltips.set_tip(self.eb, _('Open the calendar widget'))
 		tooltips.enable()
-		eb.set_events(gtk.gdk.BUTTON_PRESS)
-		eb.connect('button_press_event', self.cal_open, model, parent)
+		self.eb.set_events(gtk.gdk.BUTTON_PRESS)
+		self.eb.connect('button_press_event', self.cal_open, model, parent)
 		img = gtk.Image()
 		img.set_from_stock('gtk-zoom-in', gtk.ICON_SIZE_MENU)
 		img.set_alignment(0.5, 0.5)
-		eb.add(img)
-		self.widget.pack_start(eb, expand=False, fill=False)
+		self.eb.add(img)
+		self.widget.pack_start(self.eb, expand=False, fill=False)
 
 		self.state_set('valid')
 		self.readonly=False
@@ -82,6 +82,7 @@ class calendar(interface.widget_interface):
 		interface.widget_interface._readonly_set(self, value)
 		self.entry.set_editable(not value)
 		self.entry.set_sensitive(not value)
+		self.eb.set_sensitive(not value)
 
 	def get_value(self, model):
 		str = self.entry.get_text()
