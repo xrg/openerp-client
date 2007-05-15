@@ -55,7 +55,7 @@ class win_search(object):
 			self.win.set_transient_for(parent)
 		#self.glade.signal_connect('on_sea_but_find_clicked', self.find)
 
-		self.screen = Screen(model, view_type=['tree'], context=context)
+		self.screen = Screen(model, view_type=['tree'], context=context, parent=self.win)
 		self.view = self.screen.current_view
 		self.view.unset_editable()
 		sel = self.view.widget.get_selection()
@@ -64,8 +64,12 @@ class win_search(object):
 			sel.set_mode('single')
 		else:
 			sel.set_mode(gtk.SELECTION_MULTIPLE)
+		vp = gtk.Viewport()
+		vp.set_shadow_type(gtk.SHADOW_NONE)
+		vp.add(self.screen.widget)
 		sw = self.glade.get_widget('search_sw')
-		sw.add_with_viewport(self.screen.widget)
+		sw.add(vp)
+		sw.show_all()
 		self.view.widget.connect('row_activated', self.sig_activate)
 		self.view.widget.connect('button_press_event', self.sig_button)
 
