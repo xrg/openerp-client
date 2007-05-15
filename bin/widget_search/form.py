@@ -30,7 +30,6 @@ import pygtk
 pygtk.require('2.0')
 
 import gtk
-from gtk import glade
 from xml.parsers import expat
 
 import sys
@@ -42,6 +41,7 @@ class _container(object):
 		self.cont = []
 		self.max_width = max_width	
 		self.width = {}
+		self.count = 0
 	def new(self, col=2):
 		self.col = col
 		table = gtk.Table(1, col)
@@ -61,6 +61,7 @@ class _container(object):
 			self.cont[-1] = (table, 0, y+1)
 		table.resize(y+1,self.col)
 	def wid_add(self, widget, l=1, name=None, expand=False, ypadding=0):
+		self.count += 1
 		(table, x, y) = self.cont[-1]
 		if l>self.col:
 			l=self.col
@@ -98,8 +99,10 @@ class parse(object):
 		if name in ('form','tree'):
 			self.title = attrs.get('string','Form')
 			self.container.new(self.col)
+			self.container2.new(self.col)
 		elif name=='field':
-			if attrs.get('select', False) or self.fields[str(attrs['name'])].get('select', False):
+			val  = attrs.get('select', False) or self.fields[str(attrs['name'])].get('select', False)
+			if val:
 				type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
 				self.fields[str(attrs['name'])].update(attrs)
 				self.fields[str(attrs['name'])]['model']=self.model
@@ -112,7 +115,11 @@ class parse(object):
 				size = widgets_type[ type ][1]
 				if not self.focusable:
 					self.focusable = widget_act.widget
-				self.container.wid_add(widget_act.widget, size, label, int(self.fields[str(attrs['name'])].get('expand',0)))
+				if val==1 or val=='1':
+					cont = self.container
+				else:
+					cont = self.container2
+				cont.wid_add(widget_act.widget, size, label, int(self.fields[str(attrs['name'])].get('expand',0)))
 
 	def _psr_end(self, name):
 		pass
@@ -125,9 +132,19 @@ class parse(object):
 		psr.CharacterDataHandler = self._psr_char
 		self.notebooks=[]
 		self.container=_container(max_width)
+		self.container2=_container(max_width)
 		self.dict_widget={}
 		psr.Parse(xml_data)
-		self.widget = self.container.pop()
+
+		if self.container2.count:
+			self.widget = gtk.VBox()
+			self.widget.pack_start(self.container.pop())
+			expander = gtk.Expander(_('Advanced search'))
+			expander.add( self.container2.pop() )
+			self.widget.pack_start(expander)
+		else:
+			del self.container2
+			self.widget = self.container.pop()
 		self.widget.show_all()
 		return self.dict_widget
 

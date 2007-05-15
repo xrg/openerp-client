@@ -27,7 +27,6 @@
 ##############################################################################
 
 import gtk
-from gtk import glade
 import wid_int
 import rpc
 
