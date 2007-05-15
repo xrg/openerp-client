@@ -173,6 +173,7 @@ class Screen(signal_event.signal_event):
 			self.__current_view = len(self.views) - 1
 		else:
 			self.__current_view = (self.__current_view + 1) % len(self.views)
+			self.search_active(self.current_view.view_type in ('tree',) and not self.parent)
 		widget = self.current_view.widget
 		self.screen_container.set(self.current_view.widget)
 		if self.current_model:
