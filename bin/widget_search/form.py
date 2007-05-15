@@ -175,8 +175,8 @@ import reference
 import many2one
 
 widgets_type = {
-	'date': (calendar.calendar, 3),
-	'datetime': (calendar.calendar, 3),
+	'date': (calendar.calendar, 2),
+	'datetime': (calendar.calendar, 2),
 	'float': (spinbutton.spinbutton, 2),
 	'integer': (spinint.spinint, 2),
 	'selection': (selection.selection, 2),
