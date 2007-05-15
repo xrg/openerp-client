@@ -81,9 +81,10 @@ class _container(object):
 			yopt = yopt | gtk.EXPAND
 		table.attach(wid, x, x+l, y, y+1) #DISABLED DUE TO GTK UPGADE: , yoptions=yopt, ypadding=ypadding)
 		self.cont[-1] = (table, x+l, y)
+		width, height=750, 550
 		if widget:
 			(width, height) = widget.size_request()
-			self.width[('%d.%d') % (x,y)] = width
+		self.width[('%d.%d') % (x,y)] = width
 
 class parse(object):
 	def __init__(self, parent, fields, model=''):
