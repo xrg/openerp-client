@@ -38,9 +38,21 @@ class screen_container(object):
 		self.sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
 		self.vp = gtk.Viewport()
 		self.vp.set_shadow_type(gtk.SHADOW_NONE)
+		self.vbox = gtk.VBox()
+		self.vbox.pack_end(self.sw)
 
 	def widget_get(self):
-		return self.sw
+		return self.vbox
+
+	def add_filter(self, widget, fnct):
+		newwidget = gtk.HBox()
+		newwidget.pack_start(widget)
+		button = gtk.Button(stock=gtk.STOCK_FIND)
+		button.connect('button_press_event', fnct)
+		newwidget.pack_start(button, expand=False, fill=False)
+		self.vbox.pack_start(newwidget, expand=False)
+		newwidget.show_all()
+		return newwidget
 
 	def set(self, widget):
 		if self.vp.get_child():

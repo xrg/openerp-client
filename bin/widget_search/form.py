@@ -81,8 +81,9 @@ class _container(object):
 			yopt = yopt | gtk.EXPAND
 		table.attach(wid, x, x+l, y, y+1) #DISABLED DUE TO GTK UPGADE: , yoptions=yopt, ypadding=ypadding)
 		self.cont[-1] = (table, x+l, y)
-		(width, height) = widget.size_request()
-		self.width[('%d.%d') % (x,y)] = width
+		if widget:
+			(width, height) = widget.size_request()
+			self.width[('%d.%d') % (x,y)] = width
 
 class parse(object):
 	def __init__(self, parent, fields, model=''):
@@ -135,7 +136,9 @@ class form(wid_int.wid_int):
 		parser = parse(self, fields, model=model)
 		self.model = model
 		#get the size of the window and the limite / decalage Hbox element
-		ww, hw = self.parent.size_request()
+		ww, hw = 640,800
+		if self.parent:
+			ww, hw = self.parent.size_request()
 		self.widgets = parser.parse(xml, ww)
 		self.widget = parser.widget
 		self.focusable = parser.focusable

@@ -31,9 +31,12 @@ import xml.dom.minidom
 from rpc import RPCProxy
 import rpc
 
+import gtk
+
 from widget.model.group import ModelRecordGroup
 
 from widget.view.screen_container import screen_container
+import widget_search
 
 import signal_event
 import tools
@@ -41,6 +44,7 @@ import tools
 class Screen(signal_event.signal_event):
 	def __init__(self, model_name, view_ids=[], view_type=['form','tree'], parent=None, context={}, views_preload={}, tree_saves=True, domain=[], create_new=False, row_activate=None, hastoolbar=False, default_get={}):
 		super(Screen, self).__init__()
+		self.filter_form = None
 		self.hastoolbar = hastoolbar
 		self.default_get=default_get
 		if not row_activate:
@@ -60,9 +64,11 @@ class Screen(signal_event.signal_event):
 		self.view_ids = view_ids
 		self.models = None
 		models = ModelRecordGroup(model_name, self.fields, parent=parent, context=self.context)
+		self.parent = parent
 		self.models_set(models)
 		self.current_model = None
 		self.screen_container = screen_container()
+		self.filter_widget = None
 		self.widget = self.screen_container.widget_get()
 		self.__current_view = 0
 		self.tree_saves = tree_saves
@@ -73,6 +79,30 @@ class Screen(signal_event.signal_event):
 				view_id = view_ids.pop(0)
 			view = self.add_view_id(view_id, view_type[0])
 			self.screen_container.set(view.widget)
+
+	def search_active(self, active=True):
+		if active:
+			if not self.filter_widget:
+				view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'fields_view_get', False, 'form', self.context)
+				self.filter_widget = widget_search.form(view_form['arch'], view_form['fields'], self.name, None)
+				newwidget = self.screen_container.add_filter(self.filter_widget.widget, self.search_filter)
+				self.filter_widget.widget = newwidget
+				self.filter_widget.widget.show_all()
+			else:
+				self.filter_widget.widget.show()
+		else:
+			if self.filter_widget:
+				self.filter_widget.widget.hide()
+
+	def search_filter(self, *args):
+		print args
+		v = self.filter_widget.value
+		# Improve Offset, limit
+		# Check for context
+		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, 0, 200, 0, self.context)
+		self.clear()
+		self.load(ids)
+
 
 	def models_set(self, models):
 		import time
@@ -143,21 +173,24 @@ class Screen(signal_event.signal_event):
 			self.__current_view = len(self.views) - 1
 		else:
 			self.__current_view = (self.__current_view + 1) % len(self.views)
+		widget = self.current_view.widget
 		self.screen_container.set(self.current_view.widget)
 		if self.current_model:
 			self.current_model.validate_set()
 		self.display()
+		# TODO: set True or False accoring to the type
 
 	def add_view_custom(self, arch, fields, display=False, toolbar={}):
 		return self.add_view(arch, fields, display, True, toolbar=toolbar)
 
 	def add_view_id(self, view_id, view_type, display=False):
+		self.search_active(view_type in ('tree',) and not self.parent)
 		if view_type in self.views_preload:
 			return self.add_view(self.views_preload[view_type]['arch'], self.views_preload[view_type]['fields'], display, toolbar=self.views_preload[view_type].get('toolbar', False))
 		else:
 			view = self.rpc.fields_view_get(view_id, view_type, self.context, self.hastoolbar)
 			return self.add_view(view['arch'], view['fields'], display, toolbar=view.get('toolbar', False))
-		
+
 	def add_view(self, arch, fields, display=False, custom=False, toolbar={}):
 		def _parse_fields(node, fields):
 			if node.nodeType == node.ELEMENT_NODE:
@@ -185,7 +218,6 @@ class Screen(signal_event.signal_event):
 		else:
 			self.models.add_fields(fields, self.models)
 		self.fields = self.models.fields
-
 
 		parser = widget_parse(parent=self.parent)
 		dom = xml.dom.minidom.parseString(arch)
