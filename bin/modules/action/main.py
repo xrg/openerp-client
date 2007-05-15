@@ -99,7 +99,7 @@ class main(service.Service):
 				domain.append(datas['domain'])
 
 			obj = service.LocalService('gui.window')
-			obj.create(action['view_id'] and action['view_id'][0], datas['res_model'], datas['res_id'], domain, action['view_type'], datas.get('window',None), context,datas['view_mode'])
+			obj.create(action['view_id'] and action['view_id'][0], datas['res_model'], datas['res_id'], domain, action['view_type'], datas.get('window',None), context,datas['view_mode'], name=action.get('name', False))
 
 			#for key in tools.expr_eval(action.get('context', '{}')).keys():
 			#	del rpc.session.context[key]

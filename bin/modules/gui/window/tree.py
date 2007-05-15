@@ -38,7 +38,7 @@ import rpc
 import options
 
 class tree(object):
-	def __init__(self, view, model, res_id=False, domain=[], context={}, window=None):
+	def __init__(self, view, model, res_id=False, domain=[], context={}, window=None, name=False):
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_tree_container',gettext.textdomain())
 		self.widget = self.glade.get_widget('win_tree_container')
 		self.widget.show_all()
@@ -60,7 +60,10 @@ class tree(object):
 		sel = self.tree_res.view.get_selection()
 		sel.connect('changed', self.expand_one)
 
-		self.name = self.tree_res.name
+		if not name:
+			self.name = self.tree_res.name
+		else:
+			self.name = name
 		self.vp = self.glade.get_widget('main_tree_sw')
 		
 		wid = self.glade.get_widget('widget_vbox')

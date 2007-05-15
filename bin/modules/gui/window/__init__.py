@@ -40,11 +40,11 @@ class window_int(object):
 class window(service.Service):
 	def __init__(self, name='gui.window'):
 		service.Service.__init__(self, name)
-	def create(self, view_id, model, res_id=False, domain=None, view_type='form', window=None, context={}, mode=None):
+	def create(self, view_id, model, res_id=False, domain=None, view_type='form', window=None, context={}, mode=None, name=False):
 		context.update(rpc.session.context)
 		if view_type=='form':
 			mode = (mode or 'form,tree').split(',')
-			win = form.form(model, res_id, domain, view_type=mode, view_ids = (view_id and [view_id]) or [], window=window, context=context)
+			win = form.form(model, res_id, domain, view_type=mode, view_ids = (view_id and [view_id]) or [], window=window, context=context, name=name)
 			spool = service.LocalService('spool')
 			spool.publish('gui.window', win, {})
 		elif view_type=='tree':
@@ -55,7 +55,7 @@ class window(service.Service):
 			else:
 				view = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_view_get', False, view_type, context)
 
-			win = tree.tree(view, model, res_id, domain, context, window=window)
+			win = tree.tree(view, model, res_id, domain, context, window=window, name=name)
 			spool = service.LocalService('spool')
 			spool.publish('gui.window', win, {})
 		else:

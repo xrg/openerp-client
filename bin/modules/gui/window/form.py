@@ -53,7 +53,7 @@ from observator import oregistry
 from widget.screen import Screen
 
 class form(object):
-	def __init__(self, model, res_id=False, domain=[], view_type=None, view_ids=[], window=None, context={}):
+	def __init__(self, model, res_id=False, domain=[], view_type=None, view_ids=[], window=None, context={}, name=False):
 		if not view_type:
 			view_type = ['form','tree']
 		else:
@@ -75,7 +75,10 @@ class form(object):
 		self.screen.signal_connect(self, 'record-message', self._record_message)
 		oregistry.add_receiver('misc-message', self._misc_message)
 
-		self.name = self.screen.current_view.title
+		if not name:
+			self.name = self.screen.current_view.title
+		else:
+			self.name = name
 		vp = gtk.Viewport()
 		vp.set_shadow_type(gtk.SHADOW_NONE)
 		vp.add(self.screen.widget)
