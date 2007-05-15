@@ -159,7 +159,7 @@ class Screen(signal_event.signal_event):
 		if len(self.view_to_load):
 			if self.view_ids:
 				view_id = self.view_ids.pop(0)
-				view_type = False
+				view_type = self.view_to_load.pop(0)
 			else:
 				view_id = False
 				view_type = self.view_to_load.pop(0)

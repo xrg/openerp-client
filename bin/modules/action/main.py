@@ -85,6 +85,12 @@ class main(service.Service):
 			for key in ('res_id', 'res_model', 'view_type','view_mode'):
 				datas[key] = action.get(key, datas.get(key, None))
 
+			if action.get('views', []):
+				view_ids=[x[0] for x in action['views']]
+				datas['view_mode']=",".join([x[1] for x in action['views']])
+			else:
+				view_ids=[action.get('view_id', False) and action['view_id'][0]]
+
 			if not action.get('domain', False):
 				action['domain']='[]'
 			context = {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])}
@@ -99,7 +105,7 @@ class main(service.Service):
 				domain.append(datas['domain'])
 
 			obj = service.LocalService('gui.window')
-			obj.create(action['view_id'] and action['view_id'][0], datas['res_model'], datas['res_id'], domain, action['view_type'], datas.get('window',None), context,datas['view_mode'], name=action.get('name', False))
+			obj.create(view_ids, datas['res_model'], datas['res_id'], domain, action['view_type'], datas.get('window',None), context,datas['view_mode'], name=action.get('name', False))
 
 			#for key in tools.expr_eval(action.get('context', '{}')).keys():
 			#	del rpc.session.context[key]
