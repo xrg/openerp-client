@@ -370,17 +370,18 @@ class form(object):
 		else:
 			self.message_state(_('No resource selected !'))
 
-	def modified_save(self):
+	def modified_save(self, reload=True):
 		if self.screen.is_modified():
 			value = common.sur_3b(_('This record has been modified\ndo you want to save it ?'))
 			if value == 'ok':
 				return self.sig_save()
 			elif value == 'ko':
-				self.sig_reload()
+				if reload:
+					self.sig_reload()
 				return True
 			else:
 				return False
 		return True
 
 	def sig_close(self, urgent=False):
-		return self.modified_save()
+		return self.modified_save(reload=False)
