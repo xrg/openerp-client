@@ -27,29 +27,31 @@
 ##############################################################################
 
 import gtk
-from gtk import glade
 import gettext
 
 import common
 import wid_int
+import gobject
 
 class checkbox(wid_int.wid_int):
 	def __init__(self, name, parent, attrs={}):
 		wid_int.wid_int.__init__(self, name, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"wid_sea_check2", gettext.textdomain())
-		self.widget = self.win_gl.get_widget('wid_sea_check2')
 
-		self.entry = self.win_gl.get_widget('combobox_checkbox').child
+		self.widget = gtk.combo_box_entry_new_text()
+		self.widget.append_text('')
+		self.widget.append_text(_('Yes'))
+		self.widget.append_text(_('No'))
+
+		self.entry = self.widget.child
 		self.entry.set_editable(False)
 
 	def _value_get(self):
 		val = self.entry.get_text()
 		if val:
-			return [(self.name,'=',int(val=='Yes'))]
+			return [(self.name,'=',int(val==_('Yes')))]
 		return []
 
 	def _value_set(self, value):
 		pass
 
-	value = property(_value_get, _value_set, None,
-	  'The content of the widget or ValueError if not valid')
+	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))

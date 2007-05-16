@@ -29,15 +29,15 @@
 import gtk
 
 import wid_int
-import rpc
 
 
 class char(wid_int.wid_int):
 	def __init__(self, name, parent, attrs={}):
 		wid_int.wid_int.__init__(self, name, parent, attrs)
-		self.widget = gtk.Entry(int(attrs.get('length',0)))
+
+		self.widget = gtk.Entry()
+		self.widget.set_max_length(int(attrs.get('size',16)))
 		self.widget.set_width_chars(5)
-		self.widget.set_activates_default(True)
 
 	def _value_get(self):
 		s = self.widget.get_text()
@@ -50,8 +50,7 @@ class char(wid_int.wid_int):
 		if value:
 			self.widget.set_text(value)
 
-	value = property(_value_get, _value_set, None,
-	  'The content of the widget or ValueError if not valid')
+	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 
 	def clear(self):
 		self.value = ''

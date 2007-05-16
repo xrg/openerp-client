@@ -27,8 +27,6 @@
 ##############################################################################
 
 import gtk
-from gtk import glade
-
 import common
 import wid_int
 
@@ -36,19 +34,19 @@ class spinbutton(wid_int.wid_int):
 	def __init__(self, name, parent, attrs={}):
 		wid_int.wid_int.__init__(self, name, parent, attrs)
 
-		adj1 = gtk.Adjustment(0.0, -1000000000.0, 1000000000, 1.0, 5.0, 5.0)
-		adj2 = gtk.Adjustment(0.0, -1000000000.0, 1000000000, 1.0, 5.0, 5.0)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"wid_sea_int")
-		self.widget = self.win_gl.get_widget('wid_sea_int')
+		self.widget = gtk.HBox(spacing=3)
 
-		self.spin1 = self.win_gl.get_widget('sea_spin1')
-		self.spin2 = self.win_gl.get_widget('sea_spin2')
-		self.spin1.configure(adj1, 0.01, int( attrs.get('digits',(14,2))[1] ))
-		self.spin2.configure(adj2, 0.01, int( attrs.get('digits',(14,2))[1] ))
-		self.spin1.set_text('')
-		self.spin2.set_text('')
-		self.spin1.set_activates_default(True)
-		self.spin2.set_activates_default(True)
+		adj1 = gtk.Adjustment(0.0, -1000000000.0, 1000000000, 1.0, 5.0, 5.0)
+		self.spin1 = gtk.SpinButton(adj1, 1.0, digits=int(attrs.get('digits', (14, 2))[1]))
+		self.spin1.set_numeric(True)
+		self.widget.pack_start(self.spin1, expand=False, fill=True)
+
+		self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
+
+		adj2 = gtk.Adjustment(0.0, -1000000000.0, 1000000000, 1.0, 5.0, 5.0)
+		self.spin2 = gtk.SpinButton(adj2, 1.0, digits=int(attrs.get('digits', (14, 2))[1]))
+		self.spin2.set_numeric(True)
+		self.widget.pack_start(self.spin2, expand=False, fill=True)
 
 	def _value_get(self):
 		res = []
@@ -64,8 +62,7 @@ class spinbutton(wid_int.wid_int):
 		self.spin1.set_text(str(value))
 		self.spin2.set_text(str(value))
 
-	value = property(_value_get, _value_set, None,
-	  'The content of the widget or ValueError if not valid')
+	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 
 	def clear(self):
 		self.value = False

@@ -47,6 +47,5 @@ class wid_int(object):
 	def _value_set(self, value):
 		self._value = value
 		
-	value = property(_value_get, _value_set, None,
-	  'The content of the widget or excpetion if not valid')
+	value = property(_value_get, _value_set, None, _('The content of the widget or excpetion if not valid'))
 

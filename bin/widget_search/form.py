@@ -151,7 +151,7 @@ class parse(object):
 class form(wid_int.wid_int):
 	def __init__(self, xml, fields, model=None, parent=None):
 		wid_int.wid_int.__init__(self, 'Form', parent)
-		parser = parse(self, fields, model=model)
+		parser = parse(parent, fields, model=model)
 		self.model = model
 		#get the size of the window and the limite / decalage Hbox element
 		ww, hw = 640,800
@@ -189,7 +189,6 @@ import selection
 import char
 import checkbox
 import reference
-import many2one
 
 widgets_type = {
 	'date': (calendar.calendar, 2),

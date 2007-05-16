@@ -61,7 +61,8 @@ class Screen(signal_event.signal_event):
 		self.fields = {}
 		self.view_ids = view_ids
 		self.models = None
-		models = ModelRecordGroup(model_name, self.fields, parent=parent, context=self.context)
+		self.parent=parent
+		models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context)
 		self.models_set(models)
 		self.current_model = None
 		self.screen_container = screen_container()
@@ -81,7 +82,7 @@ class Screen(signal_event.signal_event):
 		if active and self.show_search:
 			if not self.filter_widget:
 				view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'fields_view_get', False, 'form', self.context)
-				self.filter_widget = widget_search.form(view_form['arch'], view_form['fields'], self.name, None)
+				self.filter_widget = widget_search.form(view_form['arch'], view_form['fields'], self.name, self.parent)
 				newwidget = self.screen_container.add_filter(self.filter_widget.widget, self.search_filter)
 				self.filter_widget.widget = newwidget
 				self.filter_widget.widget.show_all()
