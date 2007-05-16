@@ -43,6 +43,7 @@ class checkbox(wid_int.wid_int):
 		self.widget.append_text(_('No'))
 
 		self.entry = self.widget.child
+		self.entry.set_property('activates_default', True)
 		self.entry.set_editable(False)
 
 	def _value_get(self):

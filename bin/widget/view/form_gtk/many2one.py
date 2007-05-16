@@ -68,7 +68,7 @@ class dialog(object):
 		vp.set_shadow_type(gtk.SHADOW_NONE)
 		scroll.add(vp)
 
-		self.screen = Screen(model, domain=domain, context=context)
+		self.screen = Screen(model, domain=domain, context=context, parent=self.dia)
 		if id:
 			self.screen.load([id])
 		else:
@@ -187,7 +187,7 @@ class many2one(interface.widget_interface):
 			self.display(self._view.model, self._view.modelfield)
 			self.ok = True
 		else:
-			win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain)
+			win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self.parent)
 			ids = win.go()
 			if ids:
 				name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
@@ -219,7 +219,7 @@ class many2one(interface.widget_interface):
 		self.wid_text.disconnect(self.wid_text_focus_out_id)
 		if value:
 			if not leave:
-				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs)
+				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs, parent=self.parent)
 				ok, value = dia.run()
 				if ok:
 					self._view.modelfield.set_client(self._view.model, value)
@@ -238,7 +238,7 @@ class many2one(interface.widget_interface):
 					self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 					return True
 
-				win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain)
+				win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self.parent)
 				ids = win.go()
 				if ids:
 					name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
@@ -249,7 +249,7 @@ class many2one(interface.widget_interface):
 
 	def sig_new(self, *args):
 		self.wid_text.disconnect(self.wid_text_focus_out_id)
-		dia = dialog(self.attrs['relation'], attrs=self.attrs)
+		dia = dialog(self.attrs['relation'], attrs=self.attrs, parent=self.parent)
 		ok, value = dia.run()
 		if ok:
 			self._view.modelfield.set_client(self._view.model, value)

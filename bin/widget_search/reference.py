@@ -37,17 +37,6 @@ import rpc
 class reference(wid_int.wid_int):
 	def __init__(self, name, parent, attrs={}):
 		wid_int.wid_int.__init__(self, name, parent, attrs)
-#		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_reference", gettext.textdomain())
-#		self.win_gl.signal_connect('on_but_clear_clicked', self.clear)
-#		self.widget = self.win_gl.get_widget('widget_reference')
-#
-##		self.model = attrs['args']
-#
-#		self.wid_id = self.win_gl.get_widget('ent_id')
-#		self.wid_text = self.win_gl.get_widget('ent_reference')
-#		self.wid_text.connect('activate', self.sig_activate)
-#		self.wid_text.connect('changed', self.sig_changed)
-#		self._value=None
 
 		self.widget = gtk.combo_box_entry_new_text()
 		self.widget.child.set_editable(False)

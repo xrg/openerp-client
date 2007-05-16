@@ -50,6 +50,7 @@ class calendar(wid_int.wid_int):
 
 		self.entry1 = gtk.Entry()
 		self.entry1.set_property('width-chars', 10)
+		self.entry1.set_property('activates_default', True)
 		tooltips.set_tip(self.entry1, _('Start date'))
 		self.widget.pack_start(self.entry1, expand=False, fill=True)
 
@@ -67,6 +68,7 @@ class calendar(wid_int.wid_int):
 
 		self.entry2 = gtk.Entry()
 		self.entry2.set_property('width-chars', 10)
+		self.entry2.set_property('activates_default', True)
 		tooltips.set_tip(self.entry2, _('End date'))
 		self.widget.pack_start(self.entry2, expand=False, fill=True)
 

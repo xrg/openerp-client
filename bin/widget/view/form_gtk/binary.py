@@ -41,6 +41,7 @@ class wid_binary(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
+		self.parent=parent
 		self.widget = gtk.HBox(spacing=5)
 		self.wid_text = gtk.Entry()
 		self.widget.pack_start(self.wid_text, expand=True, fill=True)
@@ -69,7 +70,7 @@ class wid_binary(interface.widget_interface):
 
 	def sig_new(self, widget=None):
 		try:
-			filename = common.file_selection(_('Select the file to attach'))
+			filename = common.file_selection(_('Select the file to attach'), parent=self.parent)
 			self.model_field.set_client(self._view.model, base64.encodestring(file(filename).read()))
 			fname = self.attrs.get('fname_widget', False)
 			if fname:
@@ -80,7 +81,7 @@ class wid_binary(interface.widget_interface):
 
 	def sig_save_as(self, widget=None):
 		try:
-			filename = common.file_selection(_('Save attachment as...'))
+			filename = common.file_selection(_('Save attachment as...'), parent=self.parent)
 			if filename:
 				fp = file(filename,'wb+')
 				fp.write(base64.decodestring(self.model_field.get(self._view.model)))

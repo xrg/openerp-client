@@ -39,16 +39,16 @@ import gettext
 class _container(object):
 	def __init__(self, max_width):
 		self.cont = []
-		self.max_width = max_width	
+		self.max_width = max_width
 		self.width = {}
 		self.count = 0
-	def new(self, col=2):
+	def new(self, col=8):
 		self.col = col
 		table = gtk.Table(1, col)
-		#table.set_homogeneous(True)
-		table.set_row_spacings(3)
-		table.set_col_spacings(5)
-		table.set_border_width(5)
+		table.set_homogeneous(False)
+		table.set_col_spacings(3)
+		table.set_row_spacings(0)
+		table.set_border_width(1)
 		self.cont.append( (table, 0, 0) )
 	def get(self):
 		return self.cont[-1][0]
@@ -73,14 +73,14 @@ class _container(object):
 			label = gtk.Label(name)
 			label.set_alignment(0.0, 0.5)
 			vbox.pack_start(label, expand=False)
-			vbox.pack_start(widget, expand=expand, fill=expand)
+			vbox.pack_start(widget, expand=expand, fill=True)
 			wid = vbox
 		else:
 			wid = widget
-		yopt = 0
+		yopt = False
 		if expand:
-			yopt = yopt | gtk.EXPAND
-		table.attach(wid, x, x+l, y, y+1) #DISABLED DUE TO GTK UPGADE: , yoptions=yopt, ypadding=ypadding)
+			yopt = yopt | gtk.EXPAND |gtk.FILL
+		table.attach(wid, x, x+l, y, y+1, yoptions=yopt, xoptions=gtk.FILL|gtk.EXPAND, ypadding=ypadding, xpadding=5)
 		self.cont[-1] = (table, x+l, y)
 		width, height=750, 550
 		if widget:

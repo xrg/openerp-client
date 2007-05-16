@@ -60,7 +60,7 @@ class dialog(object):
 		vp.set_shadow_type(gtk.SHADOW_NONE)
 		scroll.add(vp)
 
-		self.screen = Screen(model_name, view_type=[], parent=parent)
+		self.screen = Screen(model_name, view_type=[], parent=self.dia)
 		self.screen.models._context.update(model_ctx)
 		if not model:
 			model = self.screen.new(context=default_get_ctx)
@@ -108,6 +108,7 @@ class one2many_list(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
+		self.parent=parent
 		self.widget = gtk.VBox(homogeneous=False, spacing=5)
 
 		hb = gtk.HBox(homogeneous=False, spacing=5)
@@ -201,7 +202,7 @@ class one2many_list(interface.widget_interface):
 		tooltips.enable()
 		self.widget.pack_start(hb, expand=False, fill=True)
 
-		self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate, default_get=attrs.get('default_get', {}))
+		self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=self.parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate, default_get=attrs.get('default_get', {}))
 		self.screen.signal_connect(self, 'record-message', self._sig_label)
 		menuitem_title.get_child().set_text(self.screen.current_view.title)
 
@@ -247,7 +248,7 @@ class one2many_list(interface.widget_interface):
 				self.screen.current_view.widget.set_sensitive(True)
 			else:
 				ok = 1
-				dia = dialog(self.attrs['relation'], parent=self._view.model, attrs=self.attrs, model_ctx=self.screen.models._context, default_get_ctx=ctx)
+				dia = dialog(self.attrs['relation'], parent=self._view.model, attrs=self.attrs, model_ctx=self.screen.models._context, default_get_ctx=ctx, parent_win=self.parent)
 				while ok:
 					ok, value = dia.run()
 					if ok:
@@ -258,7 +259,7 @@ class one2many_list(interface.widget_interface):
 				dia.destroy()
 
 	def _sig_edit(self, *args):
-		dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs) 
+		dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, parent_win=self.parent)
 		ok, value = dia.run()
 		dia.destroy()
 

@@ -38,6 +38,7 @@ class char(wid_int.wid_int):
 		self.widget = gtk.Entry()
 		self.widget.set_max_length(int(attrs.get('size',16)))
 		self.widget.set_width_chars(5)
+		self.widget.set_property('activates_default', True)
 
 	def _value_get(self):
 		s = self.widget.get_text()

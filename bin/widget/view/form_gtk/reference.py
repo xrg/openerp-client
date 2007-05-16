@@ -49,6 +49,7 @@ class reference(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
+		self.parent=parent
 		self.widget = gtk.HBox(spacing=3)
 
 		self.widget_combo = gtk.ComboBoxEntry()
@@ -144,7 +145,7 @@ class reference(interface.widget_interface):
 		if self._value:
 			if not leave:
 				model, (id, name) = self._value
-				dia = dialog(model, id)
+				dia = dialog(model, id, parent=self.parent)
 				ok, val = dia.run()
 				dia.destroy()
 		else:
@@ -160,7 +161,7 @@ class reference(interface.widget_interface):
 					self.ok = True
 					return True
 
-				win = win_search(resource, sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain)
+				win = win_search(resource, sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self.parent)
 				ids = win.go()
 				if ids:
 					id, name = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_get', [ids[0]], rpc.session.context)[0]
@@ -170,7 +171,7 @@ class reference(interface.widget_interface):
 		self.ok=True
 
 	def sig_new(self, *args):
-		dia = dialog(self.get_model())
+		dia = dialog(self.get_model(), parent=self.parent)
 		ok, value = dia.run()
 		if ok:
 			self._view.modelfield.set_client((self.get_model(), value))

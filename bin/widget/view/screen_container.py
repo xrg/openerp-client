@@ -49,6 +49,8 @@ class screen_container(object):
 		newwidget.pack_start(widget)
 		button = gtk.Button(stock=gtk.STOCK_FIND)
 		button.connect('button_press_event', fnct)
+		button.set_property('can_default', True)
+		button.set_property('has_default', True)
 		vbox = gtk.VBox()
 		vbox.pack_end(button, expand=True, fill=False)
 		newwidget.pack_start(vbox, expand=False, fill=False)

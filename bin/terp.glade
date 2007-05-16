@@ -6239,7 +6239,7 @@ Save as CSV</property>
   <property name="title" translatable="yes">Tiny ERP - Search</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
-  <property name="modal">False</property>
+  <property name="modal">True</property>
   <property name="default_width">777</property>
   <property name="default_height">500</property>
   <property name="resizable">True</property>

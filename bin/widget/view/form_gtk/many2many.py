@@ -83,6 +83,7 @@ class many2many(interface.widget_interface):
 		scroll.add_with_viewport(self.screen.widget)
 		self.widget.pack_start(scroll, expand=True, fill=True)
 
+		self.parent = parent
 		self.old = None
 
 	def destroy(self):
@@ -105,7 +106,7 @@ class many2many(interface.widget_interface):
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
 		ids = map(lambda x: x[0], ids)
 		if len(ids)<>1:
-			win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain)
+			win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain, parent=self.parent)
 			ids = win.go()
 
 		self.screen.load(ids)

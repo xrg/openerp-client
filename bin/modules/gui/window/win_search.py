@@ -51,6 +51,7 @@ class win_search(object):
 		self.sel_multi = sel_multi
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_search',gettext.textdomain())
 		self.win = self.glade.get_widget('win_search')
+		print parent
 		if parent:
 			self.win.set_transient_for(parent)
 		#self.glade.signal_connect('on_sea_but_find_clicked', self.find)
