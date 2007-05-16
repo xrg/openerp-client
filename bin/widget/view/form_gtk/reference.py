@@ -59,6 +59,10 @@ class reference(interface.widget_interface):
 
 		self.wid_text = gtk.Entry()
 		self.wid_text.set_property('width-chars', 13)
+		self.wid_text.connect('key_press_event', self.sig_key_press)
+		self.wid_text.connect_after('changed', self.sig_changed)
+		self.wid_text.connect_after('activate', self.sig_activate)
+		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 		self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
 		self.but_new = gtk.Button()
@@ -88,6 +92,7 @@ class reference(interface.widget_interface):
 		tooltips.set_tip(self.but_open, _('Search / Open a resource'))
 		tooltips.enable()
 
+		self._readonly = False
 		self._value=None
 		self.set_popdown(attrs.get('selection',[]))
 
@@ -114,6 +119,7 @@ class reference(interface.widget_interface):
 		return lst
 
 	def _readonly_set(self, value):
+		self._readonly = value
 		interface.widget_interface._readonly_set(self, value)
 		self.wid_text.set_editable(not value)
 		self.wid_text.set_sensitive(not value)
@@ -131,25 +137,37 @@ class reference(interface.widget_interface):
 		res = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['model'], 'default_get', [self.attrs['name']])
 		self.value = res.get(self.attrs['name'], False)
 
-	def sig_activate(self, *args):
-		domain = self._view.modelfield.domain_get(self._view.model)
-		context = self._view.modelfield.context_get(self._view.model)
+	def sig_activate(self, widget, event=None, leave=False):
+		self.ok = False
+		self.wid_text.disconnect(self.wid_text_focus_out_id)
 		resource = self.get_model()
+		if self._value:
+			if not leave:
+				model, (id, name) = self._value
+				dia = dialog(model, id)
+				ok, val = dia.run()
+				dia.destroy()
+		else:
+			if not self._readonly and ( self.wid_text.get_text() or not leave):
+				domain = self._view.modelfield.domain_get(self._view.model)
+				context = self._view.modelfield.context_get(self._view.model)
+		
+				ids = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
+				if len(ids)==1:
+					id, name = ids[0]
+					self._view.modelfield.set_client(self._view.model, (resource, (id, name)))
+					self.display(self._view.model, self._view.modelfield)
+					self.ok = True
+					return True
 
-		ids = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
-		if len(ids)==1:
-			id, name = ids[0]
-			self._view.modelfield.set_client(self._view.model, (resource, (id, name)))
-			self.display(self._view.model, self._view.modelfield)
-			self.ok = True
-			return True
-
-		win = win_search(resource, sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain)
-		ids = win.go()
-		if ids:
-			id, name = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_get', [ids[0]], rpc.session.context)[0]
-			self._view.modelfield.set_client(self._view.model, (resource, (id, name)))
+				win = win_search(resource, sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain)
+				ids = win.go()
+				if ids:
+					id, name = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_get', [ids[0]], rpc.session.context)[0]
+					self._view.modelfield.set_client(self._view.model, (resource, (id, name)))
+		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 		self.display(self._view.model, self._view.modelfield)
+		self.ok=True
 
 	def sig_new(self, *args):
 		dia = dialog(self.get_model())
@@ -159,14 +177,14 @@ class reference(interface.widget_interface):
 			self.display(self._view.model, self._view.modelfield)
 		dia.destroy()
 
-	def sig_edit(self, *args):
-		if self._value:
-			model, (id, name) = self._value
-			dia = dialog(model, id)
-			ok, val = dia.run()
-			dia.destroy()
-		else:
-			self.sig_activate()
+	sig_edit = sig_activate
+
+	def sig_key_press(self, widget, event, *args):
+		if event.keyval==gtk.keysyms.F1:
+			self.sig_new(widget, event)
+		elif event.keyval==gtk.keysyms.F2:
+			self.sig_activate(widget, event)
+		return False
 
 	def sig_changed_combo(self, *args):
 		self.wid_text.set_text('')
