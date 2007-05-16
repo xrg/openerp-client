@@ -85,11 +85,12 @@ class main(service.Service):
 			for key in ('res_id', 'res_model', 'view_type','view_mode'):
 				datas[key] = action.get(key, datas.get(key, None))
 
+			view_ids=False
 			if action.get('views', []):
 				view_ids=[x[0] for x in action['views']]
 				datas['view_mode']=",".join([x[1] for x in action['views']])
-			else:
-				view_ids=[action.get('view_id', False) and action['view_id'][0]]
+			elif action.get('view_id', False):
+				view_ids=[action['view_id'][0]]
 
 			if not action.get('domain', False):
 				action['domain']='[]'
