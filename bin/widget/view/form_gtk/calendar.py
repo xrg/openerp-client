@@ -65,7 +65,7 @@ class calendar(interface.widget_interface):
 		tooltips.set_tip(self.eb, _('Open the calendar widget'))
 		tooltips.enable()
 		self.eb.set_events(gtk.gdk.BUTTON_PRESS)
-		self.eb.connect('button_press_event', self.cal_open, model, parent)
+		self.eb.connect('button_press_event', self.cal_open, model, self._window)
 		img = gtk.Image()
 		img.set_from_stock('gtk-zoom-in', gtk.ICON_SIZE_MENU)
 		img.set_alignment(0.5, 0.5)
@@ -116,12 +116,12 @@ class calendar(interface.widget_interface):
 			self.entry.set_text(t)
 		return True
 
-	def cal_open(self, widget, event, model=None, parent=None):
+	def cal_open(self, widget, event, model=None, window=None):
 		if self.readonly:
 			common.message(_('This widget is readonly !'))
 			return True
 
-		win = gtk.Dialog(_('Tiny ERP - Date selection'), parent,
+		win = gtk.Dialog(_('Tiny ERP - Date selection'), window,
 				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
 				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
 				gtk.STOCK_OK, gtk.RESPONSE_OK))
@@ -165,7 +165,7 @@ class datetime(interface.widget_interface):
 		tooltips.set_tip(eb, _('Open the calendar widget'))
 		tooltips.enable()
 		eb.set_events(gtk.gdk.BUTTON_PRESS)
-		eb.connect('button_press_event', self.cal_open, model, parent)
+		eb.connect('button_press_event', self.cal_open, model, self._window)
 		img = gtk.Image()
 		img.set_from_stock('gtk-zoom-in', gtk.ICON_SIZE_MENU)
 		img.set_alignment(0.5, 0.5)
@@ -236,12 +236,12 @@ class datetime(interface.widget_interface):
 			self.entry.set_text(t)
 		return True
 
-	def cal_open(self, widget, event, model=None, parent=None):
+	def cal_open(self, widget, event, model=None, window=None):
 		if self.readonly:
 			common.message(_('This widget is readonly !'))
 			return True
 
-		win = gtk.Dialog(_('Tiny ERP - Date selection'), parent,
+		win = gtk.Dialog(_('Tiny ERP - Date selection'), window,
 				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
 				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
 				gtk.STOCK_OK, gtk.RESPONSE_OK))

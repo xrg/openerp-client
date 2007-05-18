@@ -66,6 +66,8 @@ class FileChooser(gtk.FileSelection):
 class image_wid(interface.widget_interface):
 
 	def __init__(self, window, parent, model, attrs={}):
+		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
+
 		self._value = ''
 		self.widget = gtk.Button()
 
@@ -81,7 +83,6 @@ class image_wid(interface.widget_interface):
 
 		box1.show()
 		self.widget.show()
-		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
 
 	def save_file(self, widget, event):
 		if event.button != 3 or not self._value:

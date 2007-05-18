@@ -47,9 +47,9 @@ import service
 
 
 class dialog(object):
-	def __init__(self, model, id=None, attrs={} ,domain=[], context={}, parent=None):
+	def __init__(self, model, id=None, attrs={} ,domain=[], context={}, window=None):
 
-		self.dia = gtk.Dialog(_('Tiny ERP - Link'), parent,
+		self.dia = gtk.Dialog(_('Tiny ERP - Link'), window,
 				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
 				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
 					gtk.STOCK_OK, gtk.RESPONSE_OK))
@@ -68,7 +68,7 @@ class dialog(object):
 		vp.set_shadow_type(gtk.SHADOW_NONE)
 		scroll.add(vp)
 
-		self.screen = Screen(model, domain=domain, context=context, parent=self.dia)
+		self.screen = Screen(model, domain=domain, context=context, window=self.dia)
 		if id:
 			self.screen.load([id])
 		else:
@@ -140,7 +140,6 @@ class many2one(interface.widget_interface):
 
 		self.ok = True
 		self._readonly = False
-		self.parent = parent
 		self.model_type = attrs['relation']
 		self._menu_loaded = False
 		self._menu_entries.append((None, None, None))
@@ -187,7 +186,7 @@ class many2one(interface.widget_interface):
 			self.display(self._view.model, self._view.modelfield)
 			self.ok = True
 		else:
-			win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self.parent)
+			win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, window=self._window)
 			ids = win.go()
 			if ids:
 				name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
@@ -219,7 +218,7 @@ class many2one(interface.widget_interface):
 		self.wid_text.disconnect(self.wid_text_focus_out_id)
 		if value:
 			if not leave:
-				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs, parent=self.parent)
+				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs, window=self._window)
 				ok, value = dia.run()
 				if ok:
 					self._view.modelfield.set_client(self._view.model, value)
@@ -238,7 +237,7 @@ class many2one(interface.widget_interface):
 					self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 					return True
 
-				win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self.parent)
+				win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self._window)
 				ids = win.go()
 				if ids:
 					name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
@@ -249,7 +248,7 @@ class many2one(interface.widget_interface):
 
 	def sig_new(self, *args):
 		self.wid_text.disconnect(self.wid_text_focus_out_id)
-		dia = dialog(self.attrs['relation'], attrs=self.attrs, parent=self.parent)
+		dia = dialog(self.attrs['relation'], attrs=self.attrs, window=self._window)
 		ok, value = dia.run()
 		if ok:
 			self._view.modelfield.set_client(self._view.model, value)

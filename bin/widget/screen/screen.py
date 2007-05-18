@@ -40,7 +40,7 @@ import signal_event
 import tools
 
 class Screen(signal_event.signal_event):
-	def __init__(self, model_name, view_ids=[], view_type=['form','tree'], parent=None, context={}, views_preload={}, tree_saves=True, domain=[], create_new=False, row_activate=None, hastoolbar=False, default_get={}, show_search=False):
+	def __init__(self, model_name, view_ids=[], view_type=['form','tree'], parent=None, context={}, views_preload={}, tree_saves=True, domain=[], create_new=False, row_activate=None, hastoolbar=False, default_get={}, show_search=False, window=None):
 		super(Screen, self).__init__()
 		self.show_search = show_search
 		self.hastoolbar = hastoolbar
@@ -62,6 +62,7 @@ class Screen(signal_event.signal_event):
 		self.view_ids = view_ids
 		self.models = None
 		self.parent=parent
+		self.window=window
 		models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context)
 		self.models_set(models)
 		self.current_model = None
@@ -82,7 +83,7 @@ class Screen(signal_event.signal_event):
 		if active and self.show_search:
 			if not self.filter_widget:
 				view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'fields_view_get', False, 'form', self.context)
-				self.filter_widget = widget_search.form(view_form['arch'], view_form['fields'], self.name, self.parent)
+				self.filter_widget = widget_search.form(view_form['arch'], view_form['fields'], self.name, self.window)
 				self.screen_container.add_filter(self.filter_widget.widget, self.search_filter, self.filter_widget.toggle, self.filter_widget.clear)
 			self.screen_container.show_filter()
 		else:
@@ -217,7 +218,7 @@ class Screen(signal_event.signal_event):
 			self.models.add_fields(fields, self.models)
 		self.fields = self.models.fields
 
-		parser = widget_parse(parent=self.parent)
+		parser = widget_parse(parent=self.parent, window=self.window)
 		dom = xml.dom.minidom.parseString(arch)
 		view = parser.parse(self, dom, self.fields, toolbar=toolbar)
 

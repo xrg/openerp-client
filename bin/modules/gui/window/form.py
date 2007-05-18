@@ -71,7 +71,7 @@ class form(object):
 		self.domain = domain
 		self.context = context
 
-		self.screen = Screen(self.model, view_type=view_type, context=self.context, view_ids=view_ids, domain=domain, hastoolbar=options.options['form.toolbar'], show_search=True, parent=self.window)
+		self.screen = Screen(self.model, view_type=view_type, context=self.context, view_ids=view_ids, domain=domain, hastoolbar=options.options['form.toolbar'], show_search=True, window=self.window)
 		self.screen.signal_connect(self, 'record-message', self._record_message)
 		oregistry.add_receiver('misc-message', self._misc_message)
 
