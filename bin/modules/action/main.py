@@ -41,7 +41,7 @@ class main(service.Service):
 	def __init__(self, name='action.main'):
 		service.Service.__init__(self, name)
 
-	def exec_report(self, name, data):
+	def exec_report(self, name, data, context={}):
 		datas = data.copy()
 		ids = datas['ids']
 		del datas['ids']
@@ -52,7 +52,9 @@ class main(service.Service):
 				return False
 			datas['id'] = ids[0]
 		try:
-			report_id = rpc.session.rpc_exec_auth('/report', 'report', name, ids, datas, rpc.session.context)
+			ctx = rpc.session.context.copy()
+			ctx.update(context)
+			report_id = rpc.session.rpc_exec_auth('/report', 'report', name, ids, datas, ctx)
 			state = False
 			attempt = 0
 			while not state:
@@ -69,16 +71,18 @@ class main(service.Service):
 			common.error(_('Error: ')+str(e.type), e.message, e.data)
 		return True
 
-	def execute(self, act_id, datas, type=None):
+	def execute(self, act_id, datas, type=None, context={}):
+		ctx = rpc.session.context.copy()
+		ctx.update(context)
 		if type==None:
-			res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [act_id], ['type'], rpc.session.context)
+			res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [act_id], ['type'], ctx)
 			if not len(res):
 				raise 'ActionNotFound'
 			type=res[0]['type']
-		res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [act_id], False, rpc.session.context)[0]
+		res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [act_id], False, ctx)[0]
 		self._exec_action(res,datas)
 
-	def _exec_action(self, action, datas):
+	def _exec_action(self, action, datas, context={}):
 		if 'type' not in action:
 			return
 		if action['type']=='ir.actions.act_window':
@@ -94,10 +98,11 @@ class main(service.Service):
 
 			if not action.get('domain', False):
 				action['domain']='[]'
-			context = {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])}
-			context.update(eval(action.get('context','{}'), context.copy()))
+			ctx = {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])}
+			ctx.update(eval(action.get('context','{}'), ctx.copy()))
+			ctx.update(context)
 
-			a = context.copy()
+			a = ctx.copy()
 			a['time'] = time
 			a['datetime'] = datetime
 			domain = tools.expr_eval(action['domain'], a)
@@ -106,7 +111,7 @@ class main(service.Service):
 				domain.append(datas['domain'])
 
 			obj = service.LocalService('gui.window')
-			obj.create(view_ids, datas['res_model'], datas['res_id'], domain, action['view_type'], datas.get('window',None), context,datas['view_mode'], name=action.get('name', False))
+			obj.create(view_ids, datas['res_model'], datas['res_id'], domain, action['view_type'], datas.get('window',None), ctx,datas['view_mode'], name=action.get('name', False))
 
 			#for key in tools.expr_eval(action.get('context', '{}')).keys():
 			#	del rpc.session.context[key]
@@ -116,7 +121,7 @@ class main(service.Service):
 			if 'window' in datas:
 				win=datas['window']
 				del datas['window']
-			wizard.execute(action['wiz_name'], datas, parent=win)
+			wizard.execute(action['wiz_name'], datas, parent=win, context=context)
 
 		elif action['type']=='ir.actions.report.custom':
 			if 'window' in datas:
@@ -131,7 +136,7 @@ class main(service.Service):
 				del datas['window']
 			self.exec_report(action['report_name'], datas)
 
-	def exec_keyword(self, keyword, data={}, adds={}):
+	def exec_keyword(self, keyword, data={}, adds={}, context={}):
 		actions = None
 		if 'id' in data:
 			try:
@@ -150,7 +155,7 @@ class main(service.Service):
 		res = common.selection(_('Select your action'), keyact)
 		if res:
 			(name,action) = res
-			self._exec_action(action, data)
+			self._exec_action(action, data, context=context)
 			return (name, action)
 		elif not len(keyact):
 			common.message(_('No action defined!'))

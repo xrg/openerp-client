@@ -89,7 +89,7 @@ class dialog(object):
 			return False
 	
 
-def execute(action, datas, state='init', parent=None):
+def execute(action, datas, state='init', parent=None, context={}):
 	if not 'form' in datas:
 		datas['form'] = {}
 	wiz_id = rpc.session.rpc_exec_auth('/wizard', 'create', action)
@@ -97,7 +97,9 @@ def execute(action, datas, state='init', parent=None):
 		thread_progress=common.progress(parent)
 		thread_progress.start()
 		try:
-			res = rpc.session.rpc_exec_auth('/wizard', 'execute', wiz_id, datas, state, rpc.session.context)
+			ctx = rpc.session.context.copy()
+			ctx.update(context)
+			res = rpc.session.rpc_exec_auth('/wizard', 'execute', wiz_id, datas, state, ctx)
 		finally:
 			thread_progress.stop()
 

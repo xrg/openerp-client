@@ -180,9 +180,14 @@ class tree(object):
 		if not id and ids and len(ids):
 			id = ids[0]
 		if id:
+			ctx = self.context.copy()
+			if 'active_ids' in ctx:
+				del ctx['active_ids']
+			if 'active_id' in ctx:
+				del ctx['active_id']
 			obj = service.LocalService('action.main')
 			obj.exec_keyword(keyword, {'model':self.model, 'id':id,
-				'ids':ids, 'report_type':report_type, 'window': self.window})
+				'ids':ids, 'report_type':report_type, 'window': self.window}, context=ctx)
 		else:
 			common.message(_('No resource selected!'))
 
