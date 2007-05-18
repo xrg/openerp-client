@@ -29,13 +29,17 @@
 
 import locale
 import gtk
-from gtk import glade
-
 import tools
-import graph
 
 from rpc import RPCProxy
 from widget.view import interface
+
+class EmptyGraph(object):
+	def __init__(self, model, axis, fields, axis_data={}, attrs={}):
+		self.widget = gtk.Image()
+
+	def display(self, models):
+		pass
 
 class parser_graph(interface.parser_interface):
 	def parse(self, model, root_node, fields):
@@ -56,7 +60,13 @@ class parser_graph(interface.parser_interface):
 		# TODO: parse root_node to fill in axis
 		#
 
-		view = graph.ViewGraph(model, axis, fields, axis_data, attrs)
+		try:
+			import graph
+			view = graph.ViewGraph(model, axis, fields, axis_data, attrs)
+		except Exception, e:
+			import common
+			common.error('Graph', _('Can not generate graph !'), details=str(e), parent=self.window)
+			view = EmptyGraph(model, axis, fields, axis_data, attrs)
 		return view, {}, [], on_write
 
 
