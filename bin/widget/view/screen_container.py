@@ -40,23 +40,44 @@ class screen_container(object):
 		self.vp.set_shadow_type(gtk.SHADOW_NONE)
 		self.vbox = gtk.VBox()
 		self.vbox.pack_end(self.sw)
+		self.filter_vbox = None
+		self.button = None
 
 	def widget_get(self):
 		return self.vbox
 
-	def add_filter(self, widget, fnct):
-		newwidget = gtk.HBox()
-		newwidget.pack_start(widget)
-		button = gtk.Button(stock=gtk.STOCK_FIND)
-		button.connect('clicked', fnct)
-		button.set_property('can_default', True)
-		button.set_property('has_default', True)
-		vbox = gtk.VBox()
-		vbox.pack_end(button, expand=True, fill=False)
-		newwidget.pack_start(vbox, expand=False, fill=False)
-		self.vbox.pack_start(newwidget, expand=False)
-		newwidget.show_all()
-		return newwidget
+	def add_filter(self, widget, fnct, toggle_fnct, clear_fnct):
+		self.filter_vbox = gtk.VBox(spacing=5)
+		self.filter_vbox.set_border_width(5)
+		self.filter_vbox.pack_start(widget, expand=True, fill=True)
+		hb = gtk.HButtonBox()
+		hb.set_spacing(5)
+		hb.set_layout(gtk.BUTTONBOX_END)
+		button_adv = gtk.Button()
+		img = gtk.Image()
+		img.set_from_stock('gtk-zoom-in', gtk.ICON_SIZE_BUTTON)
+		button_adv.set_image(img)
+		button_adv.connect('clicked', toggle_fnct)
+		hb.pack_start(button_adv, expand=False, fill=False)
+		button_clear = gtk.Button(stock=gtk.STOCK_CLEAR)
+		button_clear.connect('clicked', clear_fnct)
+		hb.pack_start(button_clear, expand=False, fill=False)
+		self.button = gtk.Button(stock=gtk.STOCK_FIND)
+		self.button.connect('clicked', fnct)
+		self.button.set_property('can_default', True)
+		hb.pack_start(self.button, expand=False, fill=False)
+		hb.show_all()
+		self.filter_vbox.pack_start(hb, expand=False, fill=False)
+		self.vbox.pack_start(self.filter_vbox, expand=False, fill=True)
+
+	def show_filter(self):
+		if self.filter_vbox:
+			self.filter_vbox.show()
+			self.button.set_property('has_default', True)
+
+	def hide_filter(self):
+		if self.filter_vbox:
+			self.filter_vbox.hide()
 
 	def set(self, widget):
 		if self.vp.get_child():

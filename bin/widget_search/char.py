@@ -48,8 +48,7 @@ class char(wid_int.wid_int):
 			return []
 
 	def _value_set(self, value):
-		if value:
-			self.widget.set_text(value)
+		self.widget.set_text(value)
 
 	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 

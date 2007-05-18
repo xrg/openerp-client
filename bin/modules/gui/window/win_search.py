@@ -51,7 +51,6 @@ class win_search(object):
 		self.sel_multi = sel_multi
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_search',gettext.textdomain())
 		self.win = self.glade.get_widget('win_search')
-		print parent
 		if parent:
 			self.win.set_transient_for(parent)
 		#self.glade.signal_connect('on_sea_but_find_clicked', self.find)
@@ -78,6 +77,7 @@ class win_search(object):
 
 		view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'form', self.context)
 		self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win)
+		self.form.show()
 
 		self.title = _('Tiny ERP Search: %s') % self.form.name
 		self.title_results = _('Tiny ERP Search: %s (%%d result(s))') % self.form.name

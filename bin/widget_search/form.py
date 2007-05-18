@@ -86,6 +86,7 @@ class _container(object):
 		if widget:
 			(width, height) = widget.size_request()
 		self.width[('%d.%d') % (x,y)] = width
+		return wid
 
 class parse(object):
 	def __init__(self, parent, fields, model=''):
@@ -94,32 +95,34 @@ class parse(object):
 		self.model = model
 		self.col = 8
 		self.focusable = None
+		self.add_widget_end = []
 		
 	def _psr_start(self, name, attrs):
 		if name in ('form','tree'):
 			self.title = attrs.get('string','Form')
 			self.container.new(self.col)
-			self.container2.new(self.col)
 		elif name=='field':
 			val  = attrs.get('select', False) or self.fields[str(attrs['name'])].get('select', False)
 			if val:
-				type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
-				self.fields[str(attrs['name'])].update(attrs)
-				self.fields[str(attrs['name'])]['model']=self.model
-				widget_act = widgets_type[ type ][0](str(attrs['name']), self.parent, self.fields[attrs['name']])
-				if 'string' in self.fields[str(attrs['name'])]:
-					label = self.fields[str(attrs['name'])]['string']+' :'
+				if int(val) <= 1:
+					self.add_widget(name, attrs, val)
 				else:
-					label = None
-				self.dict_widget[str(attrs['name'])] = widget_act
-				size = widgets_type[ type ][1]
-				if not self.focusable:
-					self.focusable = widget_act.widget
-				if val==1 or val=='1':
-					cont = self.container
-				else:
-					cont = self.container2
-				cont.wid_add(widget_act.widget, size, label, int(self.fields[str(attrs['name'])].get('expand',0)))
+					self.add_widget_end.append((name, attrs, val))
+
+	def add_widget(self, name, attrs, val):
+		type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
+		self.fields[str(attrs['name'])].update(attrs)
+		self.fields[str(attrs['name'])]['model']=self.model
+		widget_act = widgets_type[ type ][0](str(attrs['name']), self.parent, self.fields[attrs['name']])
+		if 'string' in self.fields[str(attrs['name'])]:
+			label = self.fields[str(attrs['name'])]['string']+' :'
+		else:
+			label = None
+		size = widgets_type[ type ][1]
+		if not self.focusable:
+			self.focusable = widget_act.widget
+		wid = self.container.wid_add(widget_act.widget, size, label, int(self.fields[str(attrs['name'])].get('expand',0)))
+		self.dict_widget[str(attrs['name'])] = (widget_act, wid, int(val))
 
 	def _psr_end(self, name):
 		pass
@@ -132,19 +135,13 @@ class parse(object):
 		psr.CharacterDataHandler = self._psr_char
 		self.notebooks=[]
 		self.container=_container(max_width)
-		self.container2=_container(max_width)
 		self.dict_widget={}
 		psr.Parse(xml_data)
+		for i in self.add_widget_end:
+			self.add_widget(*i)
+		self.add_widget_end=[]
 
-		if self.container2.count:
-			self.widget = gtk.VBox()
-			self.widget.pack_start(self.container.pop())
-			expander = gtk.Expander(_('Advanced search'))
-			expander.add( self.container2.pop() )
-			self.widget.pack_start(expander)
-		else:
-			del self.container2
-			self.widget = self.container.pop()
+		self.widget = self.container.pop()
 		self.widget.show_all()
 		return self.dict_widget
 
@@ -162,16 +159,40 @@ class form(wid_int.wid_int):
 		self.focusable = parser.focusable
 		self.id=None
 		self.name=parser.title
+		self.hide()
 
-	def clear(self):
+	def clear(self, *args):
 		self.id=None
 		for x in self.widgets.values():
-			x.clear()
+			x[0].clear()
+	
+	def show(self):
+		for w, widget, value in  self.widgets.values():
+			if value >= 2:
+				widget.show()
+		self._hide=False
+
+	def hide(self):
+		for w, widget, value in  self.widgets.values():
+			if value >= 2:
+				widget.hide()
+		self._hide=True
+	
+	def toggle(self, widget, event=None):
+		img = gtk.Image()
+		if self._hide:
+			self.show()
+			img.set_from_stock('gtk-zoom-out', gtk.ICON_SIZE_BUTTON)
+			widget.set_image(img)
+		else:
+			self.hide()
+			img.set_from_stock('gtk-zoom-in', gtk.ICON_SIZE_BUTTON)
+			widget.set_image(img)
 
 	def _value_get(self):
 		res = []
 		for x in self.widgets:
-			res+=self.widgets[x].value
+			res+=self.widgets[x][0].value
 		return res
 
 	def _value_set(self, value):

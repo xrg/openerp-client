@@ -65,4 +65,4 @@ class spinbutton(wid_int.wid_int):
 	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 
 	def clear(self):
-		self.value = False
+		self.value = '0.00'
