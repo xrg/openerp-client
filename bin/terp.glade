@@ -16832,7 +16832,7 @@ this operation may take a while...</property>
 	      <property name="label" translatable="yes">&lt;b&gt;
 Write concurrency warning :
 &lt;/b&gt;
-This document was modified while you were editing it.
+This document has been modified while you were editing it.
   Choose :
    - &quot;Cancel&quot; to cancel saving.
    - &quot;Compare&quot; to see the modified version.
