@@ -43,13 +43,13 @@ class _container(object):
 		self.width = {}
 		self.count = 0
 	def new(self, col=8):
-		self.col = col
+		self.col = col+1
 		table = gtk.Table(1, col)
 		table.set_homogeneous(False)
 		table.set_col_spacings(3)
 		table.set_row_spacings(0)
 		table.set_border_width(1)
-		self.cont.append( (table, 0, 0) )
+		self.cont.append( (table, 1, 0) )
 	def get(self):
 		return self.cont[-1][0]
 	def pop(self):
@@ -58,7 +58,7 @@ class _container(object):
 	def newline(self):
 		(table, x, y) = self.cont[-1]
 		if x>0:
-			self.cont[-1] = (table, 0, y+1)
+			self.cont[-1] = (table, 1, y+1)
 		table.resize(y+1,self.col)
 	def wid_add(self, widget, l=1, name=None, expand=False, ypadding=0):
 		self.count += 1
@@ -96,8 +96,9 @@ class parse(object):
 		self.col = 8
 		self.focusable = None
 		self.add_widget_end = []
-		
+
 	def _psr_start(self, name, attrs):
+
 		if name in ('form','tree'):
 			self.title = attrs.get('string','Form')
 			self.container.new(self.col)
@@ -122,7 +123,31 @@ class parse(object):
 		if not self.focusable:
 			self.focusable = widget_act.widget
 		wid = self.container.wid_add(widget_act.widget, size, label, int(self.fields[str(attrs['name'])].get('expand',0)))
+		if int(val) <= 1:
+			wid.show()
 		self.dict_widget[str(attrs['name'])] = (widget_act, wid, int(val))
+
+	def add_parameters(self):
+
+		hb_param=gtk.HBox(spacing=3)
+		hb_param.pack_start(gtk.Label(_('Limit :')), expand=False, fill=False)
+
+		self.spin_limit = gtk.SpinButton(climb_rate=1,digits=0)
+		self.spin_limit.set_numeric(False)
+		self.spin_limit.set_adjustment(gtk.Adjustment(value=80, lower=1, upper=10000, step_incr=10, page_incr=100, page_size=100))
+		self.spin_limit.set_property('visible', True)
+
+		hb_param.pack_start(self.spin_limit, expand=False, fill=False)
+
+		hb_param.pack_start(gtk.Label(_('Offset :')), expand=False, fill=False)
+
+		self.spin_offset = gtk.SpinButton(climb_rate=1,digits=0)
+		self.spin_offset.set_numeric(False)
+		self.spin_offset.set_adjustment(gtk.Adjustment(value=0, lower=0, upper=999999, step_incr=80, page_incr=100, page_size=100))
+
+		hb_param.pack_start(self.spin_offset, expand=False, fill=False)
+
+		return hb_param
 
 	def _psr_end(self, name):
 		pass
@@ -135,59 +160,101 @@ class parse(object):
 		psr.CharacterDataHandler = self._psr_char
 		self.notebooks=[]
 		self.container=_container(max_width)
+
 		self.dict_widget={}
 		psr.Parse(xml_data)
 		for i in self.add_widget_end:
 			self.add_widget(*i)
 		self.add_widget_end=[]
 
-		self.widget = self.container.pop()
-		self.widget.show_all()
+		self.button_param = gtk.Button()
+		img = gtk.Image()
+		img.set_from_stock('gtk-add', gtk.ICON_SIZE_BUTTON)
+		self.button_param.set_image(img)
+		self.button_param.set_relief(gtk.RELIEF_NONE)
+		self.button_param.set_alignment(0.5, 0.5)
+		table = self.container.get()
+		table.attach(self.button_param, 0, 1, 0, 1, yoptions=gtk.FILL, xoptions=gtk.FILL, ypadding=2, xpadding=0)
+
+		self.hb_param = self.container.wid_add(self.add_parameters(), l=8, name=_('Parameters :'))
+
+
+		self.widget =self.container.pop()
 		return self.dict_widget
 
 class form(wid_int.wid_int):
-	def __init__(self, xml, fields, model=None, parent=None):
+	def __init__(self, xml, fields, model=None, parent=None, domain=[]):
 		wid_int.wid_int.__init__(self, 'Form', parent)
 		parser = parse(parent, fields, model=model)
+		self.parent=parent
+		self.fields=fields
 		self.model = model
+
+		self.parser=parser
+
 		#get the size of the window and the limite / decalage Hbox element
 		ww, hw = 640,800
 		if self.parent:
 			ww, hw = self.parent.size_request()
 		self.widgets = parser.parse(xml, ww)
 		self.widget = parser.widget
+		#self.widget = parser.widget
+		self.widget.show_all()
+		self.hb_param = parser.hb_param
+		self.button_param = parser.button_param
+		self.button_param.connect('clicked', self.toggle)
+		self.spin_limit = parser.spin_limit
+		self.spin_limit.connect('value-changed', self.limit_changed)
+		self.spin_offset = parser.spin_offset
 		self.focusable = parser.focusable
 		self.id=None
 		self.name=parser.title
 		self.hide()
-
+		value={}
+		for x in domain:
+			if x[0] in self.widgets:
+				self.widgets[x[0]][0]._readonly_set(True)
+				if x[1] == '=':
+					pass
 	def clear(self, *args):
 		self.id=None
 		for x in self.widgets.values():
 			x[0].clear()
-	
+
 	def show(self):
 		for w, widget, value in  self.widgets.values():
 			if value >= 2:
 				widget.show()
+		self.hb_param.show()
 		self._hide=False
 
 	def hide(self):
 		for w, widget, value in  self.widgets.values():
 			if value >= 2:
 				widget.hide()
+		self.hb_param.hide()
 		self._hide=True
-	
+
 	def toggle(self, widget, event=None):
 		img = gtk.Image()
 		if self._hide:
 			self.show()
-			img.set_from_stock('gtk-zoom-out', gtk.ICON_SIZE_BUTTON)
+			img.set_from_stock('gtk-remove', gtk.ICON_SIZE_BUTTON)
 			widget.set_image(img)
 		else:
 			self.hide()
-			img.set_from_stock('gtk-zoom-in', gtk.ICON_SIZE_BUTTON)
+			img.set_from_stock('gtk-add', gtk.ICON_SIZE_BUTTON)
 			widget.set_image(img)
+
+	def limit_changed(self, widget):
+		self.spin_offset.set_increments(step=self.spin_limit.get_value(), page=100)
+
+	def get_limit(self):
+		return self.spin_limit.get_value()
+
+	def get_offset(self):
+		return self.spin_offset.get_value()
+
 
 	def _value_get(self):
 		res = []
@@ -198,7 +265,8 @@ class form(wid_int.wid_int):
 	def _value_set(self, value):
 		for x in value:
 			if x in self.widgets:
-				self.widgets[x].value = value[x]
+				print self.widgets[x][0]
+				self.widgets[x][0].value = value[x]
 
 	value = property(_value_get, _value_set, None,
 	  'The content of the form or excpetion if not valid')

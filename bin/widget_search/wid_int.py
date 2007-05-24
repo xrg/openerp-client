@@ -49,3 +49,5 @@ class wid_int(object):
 		
 	value = property(_value_get, _value_set, None, _('The content of the widget or excpetion if not valid'))
 
+	def _readonly_set(self, value):
+		pass

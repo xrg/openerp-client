@@ -56,9 +56,6 @@ class form(object):
 	def __init__(self, model, res_id=False, domain=[], view_type=None, view_ids=[], window=None, context={}, name=False):
 		if not view_type:
 			view_type = ['form','tree']
-		else:
-			if view_type[0] in ('tree','graph') and not res_id:
-				res_id = rpc.session.rpc_exec_auth('/object', 'execute', model, 'search', domain)
 
 		fields = {}
 		self.model = model
@@ -73,6 +70,7 @@ class form(object):
 
 		self.screen = Screen(self.model, view_type=view_type, context=self.context, view_ids=view_ids, domain=domain, hastoolbar=options.options['form.toolbar'], show_search=True, window=self.window)
 		self.screen.signal_connect(self, 'record-message', self._record_message)
+		self.screen.widget.show()
 		oregistry.add_receiver('misc-message', self._misc_message)
 
 		if not name:
@@ -82,11 +80,12 @@ class form(object):
 		vp = gtk.Viewport()
 		vp.set_shadow_type(gtk.SHADOW_NONE)
 		vp.add(self.screen.widget)
+		vp.show()
 		self.sw = gtk.ScrolledWindow()
 		self.sw.set_shadow_type(gtk.SHADOW_NONE)
 		self.sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
 		self.sw.add(vp)
-		self.sw.show_all()
+		self.sw.show()
 		
 		self.has_backup = False
 		self.backup = {}
@@ -119,8 +118,10 @@ class form(object):
 				res_id = [res_id]
 			self.screen.load(res_id)
 		else:
-			if len(view_type) and view_type[0]=='form':
+			if view_type[0]=='form':
 				self.sig_new(autosave=False)
+			if view_type[0] in ('tree', 'graph'):
+				self.screen.search_filter()
 
 	def sig_goto(self, *args):
 		if not self.modified_save():

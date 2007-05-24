@@ -46,19 +46,13 @@ class screen_container(object):
 	def widget_get(self):
 		return self.vbox
 
-	def add_filter(self, widget, fnct, toggle_fnct, clear_fnct):
+	def add_filter(self, widget, fnct, clear_fnct):
 		self.filter_vbox = gtk.VBox(spacing=5)
 		self.filter_vbox.set_border_width(5)
 		self.filter_vbox.pack_start(widget, expand=True, fill=True)
 		hb = gtk.HButtonBox()
 		hb.set_spacing(5)
 		hb.set_layout(gtk.BUTTONBOX_END)
-		button_adv = gtk.Button()
-		img = gtk.Image()
-		img.set_from_stock('gtk-zoom-in', gtk.ICON_SIZE_BUTTON)
-		button_adv.set_image(img)
-		button_adv.connect('clicked', toggle_fnct)
-		hb.pack_start(button_adv, expand=False, fill=False)
 		button_clear = gtk.Button(stock=gtk.STOCK_CLEAR)
 		button_clear.connect('clicked', clear_fnct)
 		hb.pack_start(button_clear, expand=False, fill=False)
@@ -73,7 +67,8 @@ class screen_container(object):
 	def show_filter(self):
 		if self.filter_vbox:
 			self.filter_vbox.show()
-			self.button.set_property('has_default', True)
+			# TODO find a way to put button has default action
+			#self.button.set_property('has_default', True)
 
 	def hide_filter(self):
 		if self.filter_vbox:

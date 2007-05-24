@@ -71,6 +71,7 @@ class Screen(signal_event.signal_event):
 		self.widget = self.screen_container.widget_get()
 		self.__current_view = 0
 		self.tree_saves = tree_saves
+
 		if view_type:
 			self.view_to_load = view_type[1:]
 			view_id = False
@@ -83,21 +84,26 @@ class Screen(signal_event.signal_event):
 		if active and self.show_search:
 			if not self.filter_widget:
 				view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'fields_view_get', False, 'form', self.context)
-				self.filter_widget = widget_search.form(view_form['arch'], view_form['fields'], self.name, self.window)
-				self.screen_container.add_filter(self.filter_widget.widget, self.search_filter, self.filter_widget.toggle, self.filter_widget.clear)
+				self.filter_widget = widget_search.form(view_form['arch'], view_form['fields'], self.name, self.window, self.domain)
+				self.screen_container.add_filter(self.filter_widget.widget, self.search_filter, self.search_clear)
 			self.screen_container.show_filter()
 		else:
 			self.screen_container.hide_filter()
 
+	def search_clear(self, *args):
+		self.filter_widget.clear()
+		self.clear()
+
 	def search_filter(self, *args):
+		limit=self.filter_widget.get_limit()
+		offset=self.filter_widget.get_offset()
 		v = self.filter_widget.value
-		v_keys = map(lambda x: x[0], v)
 		v += self.domain
 		try:
-			ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, 0, 400, 0, self.context)
+			ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0, self.context)
 		except:
 			# Try if it is not an older server
-			ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, 0, 400, 0)
+			ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0)
 		self.clear()
 		self.load(ids)
 		return True
@@ -167,6 +173,7 @@ class Screen(signal_event.signal_event):
 			else:
 				view_id = False
 				view_type = self.view_to_load.pop(0)
+
 			self.add_view_id(view_id, view_type)
 			self.__current_view = len(self.views) - 1
 		else:

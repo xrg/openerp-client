@@ -77,7 +77,6 @@ class win_search(object):
 
 		view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'form', self.context)
 		self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win)
-		self.form.show()
 
 		self.title = _('Tiny ERP Search: %s') % self.form.name
 		self.title_results = _('Tiny ERP Search: %s (%%d result(s))') % self.form.name
