@@ -296,17 +296,13 @@ class many2one(interface.widget_interface):
 		if event.button == 3:
 			value = self._view.modelfield.get(self._view.model)
 			if not self._menu_loaded:
-				fields_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search',[('relation','=',self.model_type),('ttype','=','many2one'),('relate','=',True)])
-				fields = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'read', fields_id, ['name','model_id'], rpc.session.context)
-				models_id = [x['model_id'][0] for x in fields if x['model_id']]
-				fields = dict(map(lambda x: (x['model_id'][0], x['name']), fields))
-				models = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model', 'read', models_id, ['name','model'], rpc.session.context)
+				resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.model_type, False)], False, rpc.session.context)
+				resrelate = map(lambda x:x[2], resrelate)
 				self._menu_entries.append((None, None, None))
-				for model in models:
-					field = fields[model['id']]
-					model_name = model['model']
-					f = lambda model_name,field: lambda x: self.click_and_relate(model_name,field)
-					self._menu_entries.append(('... '+model['name'], f(model_name,field), 0))
+				for x in resrelate:
+					x['string'] = x['name']
+					f = lambda action: lambda x: self.click_and_relate(action)
+					self._menu_entries.append(('... '+x['name'], f(x), 0))
 			self._menu_loaded = True
 
 			menu = gtk.Menu()
@@ -324,12 +320,20 @@ class many2one(interface.widget_interface):
 			return True
 		return False
 
-	def click_and_relate(self, model, field):
-		value = self._view.modelfield.get(self._view.model)
-		ids = rpc.session.rpc_exec_auth('/object', 'execute', model, 'search',[(field,'=',value)])
-		obj = service.LocalService('gui.window')
-		obj.create(False, model, ids, [(field,'=',value)], 'form', None, mode='tree,form')
-		return True
+	def click_and_relate(self, action):
+		data={}
+		context={}
+		act=action.copy()
+		id = self._view.modelfield.get(self._view.model)
+		if not(id):
+			common.message(_('You must select a record to use the relation !'))
+			return False
+		screen = Screen(self.attrs['relation'])
+		screen.load([id])
+		act['domain'] = screen.current_model.expr_eval(act['domain'], check_load=False)
+		obj = service.LocalService('action.main')
+		value = obj._exec_action(act, data, context)
+		return value
 
 	def click_and_action(self, type):
 		id = self._view.modelfield.get(self._view.model)

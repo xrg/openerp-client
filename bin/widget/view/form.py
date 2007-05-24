@@ -93,30 +93,33 @@ class ViewForm(object):
 					#tbutton.set_stock_id(iconstock)
 					#tb.insert(tbutton,-1)
 
-					def _relate(button, data):
-						id = self.screen.current_model and self.screen.current_model.id
-						if not (id):
-							common.message(_('You must select a record to use the relate button !'))
-						model,field = data
-						ids = rpc.session.rpc_exec_auth('/object', 'execute', model, 'search',[(field,'=',id)])
-						obj = service.LocalService('gui.window')
-						return obj.create(False, model, ids, [(field,'=',id)], 'form', None, mode='tree,form')
-					def _action(button, action):
-						self.screen.save_current()
-						id = self.screen.current_model and self.screen.current_model.id
-						if not (id):
-							common.message(_('You must save this record to use the relate button !'))
-							return False
-						data = {
-							'model': self.screen.name,
-							'id': id,
-							'ids': [id],
-							'report_type': 'pdf',
-						}
-						self.screen.display()
+					def _action(button, action, type):
+						data={}
+						context={}
+						act=action.copy()
+						if type in ('print', 'action'):
+							self.screen.save_current()
+							id = self.screen.current_model and self.screen.current_model.id
+							if not (id):
+								common.message(_('You must save this record to use the relate button !'))
+								return False
+							self.screen.display()
+							data = {
+								'model': self.screen.name,
+								'id': id,
+								'ids': [id],
+								'report_type': 'pdf',
+							}
+						if type == 'relate':
+							id = self.screen.current_model and self.screen.current_model.id
+							if not (id):
+								common.message(_('You must select a record to use the relate button !'))
+								return False
+							act['domain'] = self.screen.current_model.expr_eval(act['domain'], check_load=False)
 						obj = service.LocalService('action.main')
-						value = obj._exec_action(action, data)
-						self.screen.reload()
+						value = obj._exec_action(act, data, context)
+						if type in ('print', 'action'):
+							self.screen.reload()
 						return value
 
 					def _translate_label(self, event, tool):
@@ -179,10 +182,7 @@ class ViewForm(object):
 						menu.popup(None,None,None,event.button,event.time)
 						return True
 
-					if icontype in ('relate',):
-						tbutton.connect('clicked', _relate, (tool['model_id'][1], tool['name']))
-					elif icontype in ('action','print'):
-						tbutton.connect('clicked', _action, tool)
+					tbutton.connect('clicked', _action, tool, icontype)
 
 					tbutton.connect('button_press_event', _translate_label, tool)
 
