@@ -118,9 +118,9 @@ class form(object):
 				res_id = [res_id]
 			self.screen.load(res_id)
 		else:
-			if view_type[0]=='form':
+			if self.screen.current_view.view_type == 'form':
 				self.sig_new(autosave=False)
-			if view_type[0] in ('tree', 'graph'):
+			if self.screen.current_view.view_type in ('tree', 'graph'):
 				self.screen.search_filter()
 
 	def sig_goto(self, *args):

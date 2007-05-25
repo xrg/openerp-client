@@ -40,7 +40,7 @@ import signal_event
 import tools
 
 class Screen(signal_event.signal_event):
-	def __init__(self, model_name, view_ids=[], view_type=['form','tree'], parent=None, context={}, views_preload={}, tree_saves=True, domain=[], create_new=False, row_activate=None, hastoolbar=False, default_get={}, show_search=False, window=None):
+	def __init__(self, model_name, view_ids=[], view_type=['tree','form'], parent=None, context={}, views_preload={}, tree_saves=True, domain=[], create_new=False, row_activate=None, hastoolbar=False, default_get={}, show_search=False, window=None):
 		super(Screen, self).__init__()
 		self.show_search = show_search
 		self.hastoolbar = hastoolbar
@@ -78,8 +78,8 @@ class Screen(signal_event.signal_event):
 			if view_ids:
 				view_id = view_ids.pop(0)
 			view = self.add_view_id(view_id, view_type[0])
-			self.display()
 			self.screen_container.set(view.widget)
+		self.display()
 
 	def search_active(self, active=True):
 		if active and self.show_search:
@@ -375,8 +375,8 @@ class Screen(signal_event.signal_event):
 			self.current_model = self.models[res_id]
 		if self.views:
 			self.current_view.display()
-			self.search_active(self.current_view.view_type in ('tree', 'graph'))
 			self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
+		self.search_active(self.current_view.view_type in ('tree', 'graph'))
 
 	def display_next(self):
 		self.current_view.set_value()
