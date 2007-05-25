@@ -78,6 +78,7 @@ class Screen(signal_event.signal_event):
 			if view_ids:
 				view_id = view_ids.pop(0)
 			view = self.add_view_id(view_id, view_type[0])
+			self.display()
 			self.screen_container.set(view.widget)
 
 	def search_active(self, active=True):
@@ -167,18 +168,10 @@ class Screen(signal_event.signal_event):
 		if self.current_model and self.current_model not in self.models.models:
 			self.current_model = None
 		if len(self.view_to_load):
-			if self.view_ids:
-				view_id = self.view_ids.pop(0)
-				view_type = self.view_to_load.pop(0)
-			else:
-				view_id = False
-				view_type = self.view_to_load.pop(0)
-
-			self.add_view_id(view_id, view_type)
+			self.load_view_to_load()
 			self.__current_view = len(self.views) - 1
 		else:
 			self.__current_view = (self.__current_view + 1) % len(self.views)
-			self.search_active(self.current_view.view_type in ('tree','graph'))
 		widget = self.current_view.widget
 		self.screen_container.set(self.current_view.widget)
 		if self.current_model:
@@ -186,11 +179,20 @@ class Screen(signal_event.signal_event):
 		self.display()
 		# TODO: set True or False accoring to the type
 
+	def load_view_to_load(self):
+		if len(self.view_to_load):
+			if self.view_ids:
+				view_id = self.view_ids.pop(0)
+				view_type = self.view_to_load.pop(0)
+			else:
+				view_id = False
+				view_type = self.view_to_load.pop(0)
+			self.add_view_id(view_id, view_type)
+
 	def add_view_custom(self, arch, fields, display=False, toolbar={}):
 		return self.add_view(arch, fields, display, True, toolbar=toolbar)
 
 	def add_view_id(self, view_id, view_type, display=False):
-		self.search_active(view_type in ('tree','graph'))
 		if view_type in self.views_preload:
 			return self.add_view(self.views_preload[view_type]['arch'], self.views_preload[view_type]['fields'], display, toolbar=self.views_preload[view_type].get('toolbar', False))
 		else:
@@ -373,6 +375,7 @@ class Screen(signal_event.signal_event):
 			self.current_model = self.models[res_id]
 		if self.views:
 			self.current_view.display()
+			self.search_active(self.current_view.view_type in ('tree', 'graph'))
 			self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
 
 	def display_next(self):
