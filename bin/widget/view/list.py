@@ -164,7 +164,10 @@ class ViewList(object):
 		if event.button==3:
 			path = treeview.get_path_at_pos(int(event.x),int(event.y))
 			selection = treeview.get_selection()
-			model, iter = selection.get_selected()
+			if selection.get_mode() == gtk.SELECTION_SINGLE:
+				model, iter = selection.get_selected()
+			elif selection.get_mode() == gtk.SELECTION_MULTIPLE:
+				model, paths = selection.get_selected_rows()
 			if (not path) or not path[0]:
 				return False
 			m = model.models[path[0][0]]
