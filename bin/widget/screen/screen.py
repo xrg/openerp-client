@@ -332,8 +332,11 @@ class Screen(signal_event.signal_event):
 
 	def remove(self, unlink = False):
 		id = False
-		if self.current_model:
+		if self.current_view.view_type == 'form' and self.current_model:
 			id = self.current_model.id
+			if unlink and id:
+				if not self.rpc.unlink([id]):
+					return False
 			idx = self.models.models.index(self.current_model)
 			self.models.remove(self.current_model)
 			if self.models.models:
@@ -341,10 +344,19 @@ class Screen(signal_event.signal_event):
 				self.current_model = self.models.models[idx]
 			else:
 				self.current_model = None
-			if unlink and id:
-				self.rpc.unlink([id])
 			self.display()
 			self.current_view.set_cursor()
+		if self.current_view.view_type == 'tree':
+			ids = self.current_view.sel_ids_get()
+			if unlink and ids:
+				if not self.rpc.unlink(ids):
+					return False
+			for model in self.current_view_sel_models_get():
+				self.models.remove(model)
+			self.current_model = None
+			self.display()
+			self.current_view.set_cursor()
+			id = ids
 		return id
 
 	def load(self, ids):

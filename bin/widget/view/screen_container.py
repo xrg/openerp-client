@@ -47,8 +47,8 @@ class screen_container(object):
 		return self.vbox
 
 	def add_filter(self, widget, fnct, clear_fnct):
-		self.filter_vbox = gtk.VBox(spacing=5)
-		self.filter_vbox.set_border_width(5)
+		self.filter_vbox = gtk.VBox(spacing=1)
+		self.filter_vbox.set_border_width(1)
 		self.filter_vbox.pack_start(widget, expand=True, fill=True)
 		hb = gtk.HButtonBox()
 		hb.set_spacing(5)

@@ -217,6 +217,11 @@ class ViewForm(object):
 			return [self.screen.current_model.id]
 		return []
 
+	def sel_models_get(self):
+		if self.screen.current_model:
+			return [self.screen.current_model]
+		return []
+
 	def reset(self):
 		for wid_name, widget in self.widgets.items():
 			widget.reset()

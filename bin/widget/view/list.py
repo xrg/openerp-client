@@ -157,6 +157,7 @@ class ViewList(object):
 		self.widget.connect('button-press-event', self.__hello)
 		self.widget.connect_after('row-activated', self.__sig_switch)
 		selection = self.widget.get_selection()
+		selection.set_mode(gtk.SELECTION_MULTIPLE)
 		selection.connect('changed', self.__select_changed)
 
 	def __hello(self, treeview, event, *args):
@@ -228,6 +229,11 @@ class ViewList(object):
 			if iter:
 				path = model.get_path(iter)[0]
 				self.screen.current_model = model.models[path]
+		elif tree_sel.get_mode() == gtk.SELECTION_MULTIPLE:
+			model, paths = tree_sel.get_selected_rows()
+			if paths:
+				self.screen.current_model = model.models[paths[0][0]]
+
 
 	def set_value(self):
 		if self.widget.editable:
@@ -266,6 +272,14 @@ class ViewList(object):
 		sel = self.widget.get_selection()
 		sel.selected_foreach(_func_sel_get, ids)
 		return ids
+
+	def sel_models_get(self):
+		def _func_sel_get(store, path, iter, models):
+			models.append(store.on_get_iter(path))
+		models = []
+		sel = self.widget.get_selection()
+		sel.selected_foreach(_func_sel_get, models)
+		return models
 
 	def on_change(self, callback):
 		self.set_value()

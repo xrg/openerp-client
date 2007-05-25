@@ -223,12 +223,16 @@ class form(object):
 		return True
 
 	def sig_remove(self, widget=None):
-		if common.sur(_('Are you sure to remove this record ?')):
+		if self.screen.current_view.view_type == 'form':
+			msg = _('Are you sure to remove this record ?')
+		else:
+			msg = _('Are you sure to remove those records ?')
+		if common.sur(msg):
 			id = self.screen.remove(unlink=True)
 			if not id:
-				self.message_state(_('Resource not removed !'))
+				self.message_state(_('Resources not removed !'))
 			else:
-				self.message_state(_('Resource removed.'))
+				self.message_state(_('Resources removed.'))
 
 	def sig_import(self, widget=None):
 		fields = []
@@ -306,6 +310,10 @@ class form(object):
 			if not id:
 				return False
 			ids = [id]
+		if self.screen.current_view.view_type == 'tree':
+			sel_ids = self.screen.current_view.sel_ids_get()
+			if sel_ids:
+				ids = sel_ids
 		if len(ids):
 			obj = service.LocalService('action.main')
 			if previous and self.previous_action:
