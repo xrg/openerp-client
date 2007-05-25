@@ -53,7 +53,6 @@ class win_search(object):
 		self.win = self.glade.get_widget('win_search')
 		if parent:
 			self.win.set_transient_for(parent)
-		#self.glade.signal_connect('on_sea_but_find_clicked', self.find)
 
 		self.screen = Screen(model, view_type=['tree'], context=context, parent=self.win)
 		self.view = self.screen.current_view
@@ -82,7 +81,6 @@ class win_search(object):
 		self.title_results = _('Tiny ERP Search: %s (%%d result(s))') % self.form.name
 		self.win.set_title(self.title)
 		x, y = self.form.widget.size_request()
-		#self.form.value = start_values
 
 		hbox = self.glade.get_widget('search_hbox')
 		hbox.pack_start(self.form.widget)
@@ -93,8 +91,8 @@ class win_search(object):
 		self.old_offset = self.old_limit = None
 		if self.ids:
 			self.old_search = []
-			self.old_limit = self.glade.get_widget('search_spin_limit').get_value_as_int()
-			self.old_offset = self.glade.get_widget('search_spin_offset').get_value_as_int()
+			self.old_limit = self.form.get_limit()
+			self.old_offset = self.form.get_offset()
 
 		self.view.widget.show_all()
 		if self.form.focusable:
@@ -112,8 +110,8 @@ class win_search(object):
 		return False
 
 	def find(self, widget=None, *args):
-		limit = self.glade.get_widget('search_spin_limit').get_value_as_int()
-		offset = self.glade.get_widget('search_spin_offset').get_value_as_int()
+		limit = self.form.get_limit()
+		offset = self.form.get_offset()
 		if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset):
 			self.win.response(gtk.RESPONSE_OK)
 			return False
