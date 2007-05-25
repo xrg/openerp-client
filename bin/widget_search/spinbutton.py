@@ -50,12 +50,21 @@ class spinbutton(wid_int.wid_int):
 
 	def _value_get(self):
 		res = []
-		if float(self.spin1.get_text())>0 and float(self.spin2.get_text())==0.0:
-			res.append((self.name, '=', float(self.spin1.get_text())))
-		elif float(self.spin1.get_text())>0:
-			res.append((self.name, '>=', float(self.spin1.get_text())))
-		if float(self.spin2.get_text())>0:
+		if float(self.spin1.get_text()) > float(self.spin2.get_text()):
+			res.append((self.name, '>=', float(self.spin2.get_text())))
+			res.append((self.name, '<=', float(self.spin1.get_text())))
+		elif float(self.spin2.get_text()) > float(self.spin1.get_text()):
 			res.append((self.name, '<=', float(self.spin2.get_text())))
+			res.append((self.name, '>=', float(self.spin1.get_text())))
+		elif float(self.spin2.get_text()) == float(self.spin1.get_text()) and float(self.spin1.get_text()) != 0.0:
+			res.append((self.name, '=', float(self.spin1.get_text())))
+		#end if
+#		if float(self.spin1.get_text())>0.0 and float(self.spin2.get_text())==0.0:
+#			res.append((self.name, '<=', float(self.spin1.get_text())))
+#		elif float(self.spin1.get_text())>0.0:
+#			res.append((self.name, '>=', float(self.spin1.get_text())))
+#		if float(self.spin2.get_text())>0.0:
+#			res.append((self.name, '<=', float(self.spin2.get_text())))
 		return res
 
 	def _value_set(self, value):
@@ -66,3 +75,4 @@ class spinbutton(wid_int.wid_int):
 
 	def clear(self):
 		self.value = '0.00'
+
