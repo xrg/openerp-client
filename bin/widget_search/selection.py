@@ -77,3 +77,6 @@ class selection(wid_int.wid_int):
 
 	value = property(_value_get, _value_set, None,
 	  'The content of the widget or ValueError if not valid')
+
+	def _readonly_set(self, value):
+		self.widget.set_sensitive(not value)
