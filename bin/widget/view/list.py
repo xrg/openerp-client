@@ -33,6 +33,7 @@ import gtk
 import rpc
 import service
 
+
 class AdaptModelGroup(gtk.GenericTreeModel):
 
 	def __init__(self, model_group):
@@ -171,32 +172,38 @@ class ViewList(object):
 			if (not path) or not path[0]:
 				return False
 			m = model.models[path[0][0]]
+
+			# TODO: add menu cache
 			if path[1]._type=='many2one':
 				value = m[path[1].name].get(m)
+				resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.screen.fields[path[1].name]['relation'], False)], False, rpc.session.context)
+				resrelate = map(lambda x:x[2], resrelate)
 				menu = gtk.Menu()
-				finfo = self.screen.fields[path[1].name]
-				fields_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search',[('relation','=',finfo['relation']),('ttype','=','many2one'),('relate','=',True)])
-				fields = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'read', fields_id, ['name','model_id'], rpc.session.context)
-				models_id = [x['model_id'][0] for x in fields if x['model_id']]
-				fields = dict(map(lambda x: (x['model_id'][0], x['name']), fields))
-				models = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model', 'read', models_id, ['name','model'], rpc.session.context)
-				for model in models:
-					field = fields[model['id']]
-					model_name = model['model']
-					item = gtk.ImageMenuItem('... '+model['name'])
-					f = lambda model_name,field,value: lambda x: self._click_and_relate(model_name,field,value)
-					item.connect('activate', f(model_name,field,value) )
+				for x in resrelate:
+					x['string'] = x['name']
+					item = gtk.ImageMenuItem('... '+x['name'])
+					f = lambda action, value, model: lambda x: self._click_and_relate(action, value, model)
+					item.connect('activate', f(x, value, self.screen.fields[path[1].name]['relation']))
 					item.set_sensitive(bool(value))
 					item.show()
 					menu.append(item)
 				menu.popup(None,None,None,event.button,event.time)
 
-	def _click_and_relate(self, model, field, value):
-		ids = rpc.session.rpc_exec_auth('/object', 'execute', model, 'search',[(field,'=',value)])
-		obj = service.LocalService('gui.window')
-		#view_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'search', [('model','=',model),('type','=','form')])
-		obj.create(False, model, ids, [(field,'=',value)], 'form', None, mode='tree,form')
-		return True
+	def _click_and_relate(self, action, value, model):
+		data={}
+		context={}
+		act=action.copy()
+		if not(value):
+			common.message(_('You must select a record to use the relation !'))
+			return False
+		from widget.screen import Screen
+		screen = Screen(model)
+		screen.load([value])
+		act['domain'] = screen.current_model.expr_eval(act['domain'], check_load=False)
+		act['context'] = str(screen.current_model.expr_eval(act['context'], check_load=False))
+		obj = service.LocalService('action.main')
+		value = obj._exec_action(act, data, context)
+		return value
 
 
 	def signal_record_changed(self, signal, *args):

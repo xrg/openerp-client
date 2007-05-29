@@ -27,8 +27,6 @@
 #
 ##############################################################################
 
-from widget import ViewWidget
-
 import gtk
 from gtk import glade
 
@@ -36,6 +34,42 @@ import common
 import rpc
 import service
 import options
+
+class ViewWidget(object):
+	def __init__(self, parent, widget, widget_name):
+		self.view_form = parent
+		self.widget = widget
+		self.widget._view = self
+		self.widget_name = widget_name
+
+	def display(self, model, state='draft'):
+		if not model:
+			self.widget.state_set('readonly')
+			self.widget.display(model, False)
+			return False
+		self.widget.state_set(state)
+		self.widget.refresh()
+		self.widget.display(model, model.mgroup.mfields.get(self.widget_name, False))
+	
+	def reset(self):
+		if 'valid' in self.widget.attrs:
+			self.widget.attrs['valid'] = True
+		self.widget.refresh()
+
+	def set_value(self, model):
+		if self.widget_name in model.mgroup.mfields:
+			self.widget.set_value(model, model.mgroup.mfields[self.widget_name])
+
+	def _get_model(self):
+		return self.view_form.screen.current_model
+
+	model = property(_get_model)
+
+	def _get_modelfield(self):
+		if self.model:
+			return self.model.mgroup.mfields[self.widget_name]
+
+	modelfield = property(_get_modelfield)
 
 class ViewForm(object):
 	def __init__(self, screen, widget, children, buttons=[], toolbar=None):
