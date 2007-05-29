@@ -331,7 +331,7 @@ class many2one(interface.widget_interface):
 		screen = Screen(self.attrs['relation'])
 		screen.load([id])
 		act['domain'] = screen.current_model.expr_eval(act['domain'], check_load=False)
-		act['context'] = str(self.screen.current_model.expr_eval(act['context'], check_load=False))
+		act['context'] = str(screen.current_model.expr_eval(act['context'], check_load=False))
 		obj = service.LocalService('action.main')
 		value = obj._exec_action(act, data, context)
 		return value
