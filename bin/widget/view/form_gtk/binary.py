@@ -101,7 +101,7 @@ class wid_binary(interface.widget_interface):
 
 	def display(self, model, model_field):
 		if not model_field:
-			self.widget.set_text('')
+			self.wid_text.set_text('')
 			return False
 		super(wid_binary, self).display(model, model_field)
 		self.model_field = model_field
