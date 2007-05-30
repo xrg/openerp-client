@@ -35,7 +35,7 @@
 # Print or open a previewer
 #
 
-import os, base64, options
+import os, base64, options, sys
 import gc
 import common
 
@@ -74,11 +74,23 @@ class Printer(object):
 				if options.options['printer.softpath_html'] == 'none':
 					prog = self._findInPath(['ooffice2', 'openoffice', 'firefox', 'mozilla', 'galeon'])
 					def opener(fn):
-						os.spawnv(os.P_NOWAIT, prog, (os.path.basename(prog),fn))
+						pid = os.fork()
+						if not pid:
+							pid = os.fork()
+							if not pid:
+								os.execv(prog, (os.path.basename(prog),fn))
+							sys.exit(0)
+						os.waitpid(pid, 0)
 					return opener
 				else:
 					def opener(fn):
-						os.system(options.options['printer.softpath_html'] + ' ' + fn)
+						pid = os.fork()
+						if not pid:
+							pid = os.fork()
+							if not pid:
+								os.system(options.options['printer.softpath_html'] + ' ' + fn)
+							sys.exit(0)
+						os.waitpid(pid, 0)
 					return opener
 
 	def _findPDFOpener(self):
@@ -95,11 +107,23 @@ class Printer(object):
 				if options.options['printer.softpath'] == 'none':
 					prog = self._findInPath(['evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview'])
 					def opener(fn):
-						os.spawnv(os.P_NOWAIT, prog, (os.path.basename(prog),fn))
+						pid = os.fork()
+						if not pid:
+							pid = os.fork()
+							if not pid:
+								os.execv(prog, (os.path.basename(prog), fn))
+							sys.exit(0)
+						os.waitpid(pid, 0)
 					return opener
 				else:
 					def opener(fn):
-						os.spawnv(os.P_NOWAIT, options.options['printer.softpath'], (os.path.basename(options.options['printer.softpath']),fn))
+						pid = os.fork()
+						if not pid:
+							pid = os.fork()
+							if not pid:
+								os.execv(options.options['printer.softpath'], (os.path.basename(options.options['printer.softpath']),fn))
+							sys.exit(0)
+						os.waitpid(pid, 0)
 					return opener
 			else:
 				return lambda fn: print_linux_filename(fn)
