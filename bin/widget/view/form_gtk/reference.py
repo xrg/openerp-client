@@ -37,7 +37,6 @@ import gettext
 
 import interface
 import wid_common
-import form
 import common
 from many2one import dialog
 from modules.gui.window.win_search import win_search
