@@ -417,6 +417,7 @@ class terp_main(service.Service):
 			'on_plugin_execute_activate': self.sig_plugin_execute,
 			'on_quit_activate': self.sig_close,
 			'on_win_new_activate': self.sig_win_new,
+			'on_win_home_activate': self.sig_home_new,
 			'on_win_close_activate': self.sig_win_close,
 			'on_support_activate': common.support,
 			'on_preference_activate': self.sig_user_preferences,
@@ -617,7 +618,7 @@ class terp_main(service.Service):
 			log_response = rpc.session.login(*res)
 			if log_response==1:
 				options.options.save()
-				self.sig_win_new()
+				self.sig_home_new()
 				if res[4] == 'https://':
 					self.secure_img.show()
 				else:
@@ -684,9 +685,9 @@ class terp_main(service.Service):
 		shortcuts_win.get_widget('shortcuts_dia').set_transient_for(self.window)
 		shortcuts_win.signal_connect("on_but_ok_pressed", lambda obj: shortcuts_win.get_widget('shortcuts_dia').destroy())
 
-	def sig_win_new(self, widget=None):
+	def sig_win_new(self, widget=None, type='menu_id'):
 		try:
-			act_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'read', [rpc.session.uid], ['action_id','name'], rpc.session.context)
+			act_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'read', [rpc.session.uid], [type,'name'], rpc.session.context)
 		except:
 			return False
 		id = self.sb_username.get_context_id('message')
@@ -694,13 +695,16 @@ class terp_main(service.Service):
 		id = self.sb_servername.get_context_id('message')
 		data = urlparse.urlsplit(rpc.session._url)
 		self.sb_servername.push(id, data[0]+':'+(data[1] and '//'+data[1] or data[2])+' ['+options.options['login.db']+']')
-		if not act_id[0]['action_id']:
+		if not act_id[0][type]:
 			common.warning('You can not log into the system !\nAsk the administrator to verify\nyou have an action defined for your user.','Access Denied !')
 			rpc.session.logout()
 			return False
-		act_id = act_id[0]['action_id'][0]
+		act_id = act_id[0][type][0]
 		obj = service.LocalService('action.main')
 		win = obj.execute(act_id, {'window':self.window})
+	
+	def sig_home_new(self, widget=None):
+		return self.sig_win_new(widget, type='action_id')
 
 	def sig_plugin_execute(self, widget):
 		import plugins
