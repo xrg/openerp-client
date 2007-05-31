@@ -78,7 +78,10 @@ import pango
 APP = 'terp'
 DIR = 'po'
 
-locale.setlocale(locale.LC_ALL, '')
+try:
+	locale.setlocale(locale.LC_ALL, '')
+except:
+	pass
 gettext.bindtextdomain(APP, DIR)
 gettext.textdomain(APP)
 gettext.install(APP, DIR, unicode=1)
