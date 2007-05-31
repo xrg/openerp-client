@@ -47,11 +47,8 @@ class spinbutton(interface.widget_interface):
 		self.widget.connect('activate', self.sig_activate)
 
 	def set_value(self, model, model_field):
-		try:
-			res = float(self.widget.get_text())
-		except:
-			res = 0.0
-		model_field.set_client(model, res)
+		self.widget.update()
+		model_field.set_client(model, self.widget.get_value())
 
 	def display(self, model, model_field):
 		if not model_field:

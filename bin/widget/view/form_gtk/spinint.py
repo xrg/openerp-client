@@ -47,13 +47,8 @@ class spinint(interface.widget_interface):
 		self.widget.connect('activate', self.sig_activate)
 
 	def set_value(self, model, model_field):
-		try:
-			# we must use get_text and not get_value because get_value
-			# is only updated when the widget loose focus. This is a problem
-			# if we save a form just after we modified the value of a field
-			model_field.set_client(model, int(self.widget.get_text()))
-		except:
-			model_field.set_client(model, 0)
+		self.widget.update()
+		model_field.set_client(model, self.widget.get_value_as_int())
 
 	def display(self, model, model_field):
 		if not model_field:

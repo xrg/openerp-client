@@ -53,19 +53,21 @@ class spinint(wid_int.wid_int):
 
 	def _value_get(self):
 		res = []
-		if int(self.spin1.get_text())>0 and int(self.spin2.get_text())==0:
-			res.append((self.name, '=', int(self.spin1.get_text())))
-		elif int(self.spin1.get_text())>0:
-			res.append((self.name, '>=', int(self.spin1.get_text())))
-		if int(self.spin2.get_text())>0:
-			res.append((self.name, '<=', int(self.spin2.get_text())))
+		self.spin1.update()
+		self.spin2.update()
+		if (self.spin1.get_value_as_int() > 0) and (self.spin2.get_value_as_int() == 0):
+			res.append((self.name, '=', self.spin1.get_value_as_int()))
+		elif self.spin1.get_value_as_int() > 0:
+			res.append((self.name, '>=', self.spin1.get_value_as_int()))
+		if self.spin2.get_value_as_int() > 0:
+			res.append((self.name, '<=', self.spin2.get_value_as_int()))
 		return res
 
 	def _value_set(self, value):
-		self.spin1.set_text(str(value))
-		self.spin2.set_text(str(value))
+		self.spin1.set_value(value)
+		self.spin2.set_value(value)
 
 	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 
 	def clear(self):
-		self.value = False
+		self.value = 0.0
