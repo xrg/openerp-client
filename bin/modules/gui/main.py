@@ -197,7 +197,7 @@ class db_login(object):
 		else:
 			win.destroy()
 			raise 'QueryCanceled'
-		if res == gtk.RESPONSE_CANCEL:
+		if res <> gtk.RESPONSE_OK:
 			win.destroy()
 			raise 'QueryCanceled'
 		win.destroy()
