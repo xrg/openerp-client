@@ -100,7 +100,7 @@ class ModelRecord(signal_event.signal_event):
 	def get(self, get_readonly=True, includeid=False, check_load=True):
 		if check_load:
 			self._check_load()
-		value = dict([(name, field.get(self))
+		value = dict([(name, field.get(self, readonly=get_readonly))
 					  for name, field in self.mgroup.mfields.items()
 					  if get_readonly or not field.attrs.get('readonly', False)])
 		if includeid:

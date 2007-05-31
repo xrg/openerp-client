@@ -96,7 +96,7 @@ class CharField(object):
 		model.value[self.name] = value
 		return True
 
-	def get(self, model, check_load=True):
+	def get(self, model, check_load=True, readonly=True):
 		return model.value.get(self.name, False) or False
 
 	def set_client(self, model, value, test_state=True):
@@ -147,7 +147,7 @@ class M2OField(CharField):
 	def create(self, model):
 		return False
 
-	def get(self, model, check_load=True):
+	def get(self, model, check_load=True, readonly=True):
 		if model.value[self.name]:
 			return model.value[self.name][0] or False
 		return False
@@ -182,7 +182,7 @@ class M2MField(CharField):
 	def create(self, model):
 		return []
 
-	def get(self, model, check_load=True):
+	def get(self, model, check_load=True, readonly=True):
 		return [(6, 0, model.value[self.name] or [])]
 
 	def get_client(self, model):
@@ -252,15 +252,15 @@ class O2MField(CharField):
 	def get_client(self, model):
 		return model.value[self.name]
 
-	def get(self, model, check_load=True):
+	def get(self, model, check_load=True, readonly=True):
 		if not model.value[self.name]:
 			return []
 		result = []
 		for model2 in model.value[self.name].models:
 			if model2.id:
-				result.append((1,model2.id, model2.get(check_load=check_load)))
+				result.append((1,model2.id, model2.get(check_load=check_load, get_readonly=readonly)))
 			else:
-				result.append((0,0, model2.get(check_load=check_load)))
+				result.append((0,0, model2.get(check_load=check_load, get_readonly=readonly)))
 		for id in model.value[self.name].model_removed:
 			result.append((2,id, False))
 		return result
