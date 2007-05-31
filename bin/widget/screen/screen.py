@@ -353,7 +353,7 @@ class Screen(signal_event.signal_event):
 			if unlink and ids:
 				if not self.rpc.unlink(ids):
 					return False
-			for model in self.current_view_sel_models_get():
+			for model in self.current_view.sel_models_get():
 				self.models.remove(model)
 			self.current_model = None
 			self.display()
