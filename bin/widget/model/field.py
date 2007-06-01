@@ -319,7 +319,7 @@ class ReferenceField(CharField):
 			return model.value[self.name]
 		return False
 
-	def get(self, model, check_load=True):
+	def get(self, model, check_load=True, readonly=True):
 		if model.value[self.name]:
 			return '%s,%d' % (model.value[self.name][0], model.value[self.name][1][0])
 		return False
