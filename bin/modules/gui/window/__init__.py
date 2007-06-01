@@ -48,7 +48,7 @@ class window(service.Service):
 			spool = service.LocalService('spool')
 			spool.publish('gui.window', win, {})
 		elif view_type=='tree':
-			if view_ids:
+			if view_ids and view_ids[0]:
 				view_base =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'read', [view_ids[0]], ['model', 'type'], context)[0]
 				model = view_base['model']
 				view = rpc.session.rpc_exec_auth('/object', 'execute', view_base['model'], 'fields_view_get', view_ids[0], view_base['type'],context)
