@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('GTKCairo')
 
 from pylab import arange
 

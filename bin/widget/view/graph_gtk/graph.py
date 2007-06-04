@@ -39,6 +39,7 @@ from widget.view import interface
 import tinygraph
 
 import matplotlib
+matplotlib.use('GTKCairo')
 
 matplotlib.rcParams['xtick.labelsize'] = 10
 matplotlib.rcParams['ytick.labelsize'] = 10

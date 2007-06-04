@@ -49,17 +49,16 @@ logging.basicConfig()
 #log = logging.getLogger('rpc')
 #log.setLevel(logging.DEBUG)
 
-if os.name == 'nt':
-	sys.path.insert(0,'.\\GTK-2.0\\lib')
-	sys.path.insert(0,'.\\GTK-2.0\\bin')
-	sys.path.insert(0,'.\\gs8.54\\lib')
-	sys.path.insert(0,'.\\gs8.54\\bin')
-	sys.path.insert(0,'.')
-	os.environ['PATH']=".;gs8.54\\lib;gs8.54\\bin;GTK-2.0\\lib;GTK-2.0\\bin;" + os.environ['PATH']
 
 from distutils.sysconfig import get_python_lib
 terp_path = "/".join([get_python_lib(), 'tinyerp-client'])
 sys.path.append(terp_path)
+
+if os.name == 'nt':
+	sys.path.insert(0, os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'GTK\\bin'))
+	sys.path.insert(0, os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'GTK\\lib'))
+	os.environ['PATH'] = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'GTK\\lib') + ";" + os.environ['PATH']
+	os.environ['PATH'] = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'GTK\\bin') + ";" + os.environ['PATH']
 
 import pygtk
 pygtk.require('2.0')
@@ -73,6 +72,10 @@ import locale, gettext
 import atk
 import gtk._gtk
 import pango
+
+if os.name == 'nt':
+	sys.path.insert(0, os.path.join(os.getcwd(), os.path.dirname(sys.argv[0])))
+	os.environ['PATH'] = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0])) + ";" + os.environ['PATH']
 
 # end testing
 APP = 'terp'
@@ -120,7 +123,7 @@ factory.add_default ()
 #	icon_set = gtk.IconSet (pixbuf)
 #	factory.add ('terp-translate', icon_set)
 
-pix_file = os.path.join(os.getcwd(),'icons')
+pix_file = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'icons')
 if not os.path.isdir(pix_file):
 	pix_file = os.path.join(options.options['path.pixmaps'],'icons')
 if not os.path.isdir(pix_file):

@@ -33,6 +33,7 @@ import gobject
 import gettext
 
 import os
+import sys
 import common
 import logging
 from options import options
@@ -48,15 +49,15 @@ import time
 #
 SURVEY_VERSION = '3'
 
-def _search_file(x, dir='path.share'):
+def _search_file(file, dir='path.share'):
 	tests = [
 		lambda x: os.path.join(options.options[dir],x),
-		lambda x: os.path.join(os.getcwd(),x),
+		lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), x),
 	]
 	for func in tests:
+		x = func(file)
 		if os.path.exists(x):
 			break
-		x = func(x)
 	return x
 
 terp_path = _search_file
