@@ -69,7 +69,7 @@ def field_pref_set(field, name, model, value, dependance=[]):
 
 	win.destroy()
 	if res==gtk.RESPONSE_OK:
-		rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'set', 'default', deps, field, [(model,False)], value, True, False, False, radio.get_active())
+		rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'set', 'default', deps, field, [(model,False)], value, True, False, False, radio.get_active(), True)
 		return True
 	return False
 

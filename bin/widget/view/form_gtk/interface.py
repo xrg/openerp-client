@@ -49,7 +49,7 @@ class widget_interface(object):
 		self.default_readonly = self.attrs.get('readonly', False)
 		self._menu_entries = [
 			(_('Set to default value'), lambda x: self._menu_sig_default_get(), 1),
-			(_('Set default'), lambda x: self._menu_sig_default_set(), 1),
+			(_('Set as default'), lambda x: self._menu_sig_default_set(), 1),
 		]
 
 	def destroy(self):
