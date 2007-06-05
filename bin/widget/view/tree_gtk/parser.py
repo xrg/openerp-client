@@ -335,7 +335,7 @@ class M2O(Char):
 	def search_remote(self, relation, ids=[], domain=[], context={}):
 		rpc = RPCProxy(relation)
 
-		win = win_search(relation, sel_multi=False, ids=ids)
+		win = win_search(relation, sel_multi=False, ids=ids, context=context, domain=domain)
 		found = win.go()
 		if found:
 			return rpc.name_get([found[0]], context)[0]
