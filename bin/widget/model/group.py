@@ -254,11 +254,6 @@ class ModelRecordGroup(signal_event.signal_event):
 		except:
 			pass
 
-	#
-	# 2 cas:
-	#     models a plus de fields que fields -> On s'en fou
-	#     plus de fields dans models
-	#
 	def add_fields_custom(self, fields, models):
 		to_add = []
 		for f in fields.keys():
@@ -266,6 +261,8 @@ class ModelRecordGroup(signal_event.signal_event):
 				models.fields[f] = fields[f]
 				models.fields[f]['name'] = f
 				to_add.append(f)
+			else:
+				models.fields[f].update(fields[f])
 		self.mfields_load(to_add, models)
 		for fname in to_add:
 			for m in models.models:
