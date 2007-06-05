@@ -148,8 +148,9 @@ class db_login(object):
 	def run(self, dbname=None, parent=None):
 		uid = 0
 		win = self.win_gl.get_widget('win_login')
-		if parent:
-			win.set_transient_for(parent)
+		if not parent:
+			parent = service.LocalService('gui.main').window
+		win.set_transient_for(parent)
 		login = self.win_gl.get_widget('ent_login')
 		passwd = self.win_gl.get_widget('ent_passwd')
 		server_widget = self.win_gl.get_widget('ent_server')
@@ -232,8 +233,9 @@ class db_create(object):
 
 	def run(self, parent=None):
 		win = self.dialog.get_widget('win_createdb')
-		if parent:
-			win.set_transient_for(parent)
+		if not parent:
+			parent = service.LocalService('gui.main').window
+		win.set_transient_for(parent)
 		lang_dict = {}
 		pass_widget = self.dialog.get_widget('ent_password_new')
 		self.server_widget = self.dialog.get_widget('ent_server_new')
@@ -281,8 +283,9 @@ class db_create(object):
 				id = rpc.session.db_exec(url, 'create', passwd, db_name, demo_data, langreal)
 				dialog = glade.XML(common.terp_path("terp.glade"), "win_progress", gettext.textdomain())
 				win = dialog.get_widget('win_progress')
-				if parent:
-					win.set_transient_for(parent)
+				if not parent:
+					parent = service.LocalService('gui.main').window
+				win.set_transient_for(parent)
 				pb_widget = dialog.get_widget('progressbar')
 				self.timer = gobject.timeout_add(1000, self.progress_timeout, pb_widget, url, passwd, id, win, db_name, parent)
 				win.show()
@@ -308,8 +311,9 @@ class db_create(object):
 			pwdlst = '\n'.join(map(lambda x: '    - %s: %s / %s' % (x['name'],x['login'],x['password']), users))
 			dialog = glade.XML(common.terp_path("terp.glade"), "dia_dbcreate_ok", gettext.textdomain())
 			win = dialog.get_widget('dia_dbcreate_ok')
-			if parent:
-				win.set_transient_for(parent)
+			if not parent:
+				parent = service.LocalService('gui.main').window
+			win.set_transient_for(parent)
 			buffer = dialog.get_widget('dia_tv').get_buffer()
 
 			buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())

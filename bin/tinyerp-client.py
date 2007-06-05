@@ -51,7 +51,7 @@ logging.basicConfig()
 
 
 from distutils.sysconfig import get_python_lib
-terp_path = "/".join([get_python_lib(), 'tinyerp-client'])
+terp_path = os.path.join(get_python_lib(), 'tinyerp-client')
 sys.path.append(terp_path)
 
 if os.name == 'nt':

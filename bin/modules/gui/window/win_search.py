@@ -33,6 +33,7 @@ import gettext
 import xmlrpclib
 import win_list
 import common
+import service
 
 import rpc
 
@@ -51,8 +52,9 @@ class win_search(object):
 		self.sel_multi = sel_multi
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_search',gettext.textdomain())
 		self.win = self.glade.get_widget('win_search')
-		if parent:
-			self.win.set_transient_for(parent)
+		if not parent:
+			parent = service.LocalService('gui.main').window
+		self.win.set_transient_for(parent)
 
 		self.screen = Screen(model, view_type=['tree'], context=context, parent=self.win)
 		self.view = self.screen.current_view
