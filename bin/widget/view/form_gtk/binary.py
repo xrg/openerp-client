@@ -45,7 +45,7 @@ class wid_binary(interface.widget_interface):
 		self.wid_text = gtk.Entry()
 		self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
-		self.but_new = gtk.Button(stock='gtk-new')
+		self.but_new = gtk.Button(stock='gtk-open')
 		self.but_new.connect('clicked', self.sig_new)
 		self.widget.pack_start(self.but_new, expand=False, fill=False)
 

@@ -67,7 +67,7 @@ class dialog(object):
 		self.screen.current_model.set(val)
 
 		x,y = self.screen.screen_container.size_get()
-		self.screen.widget.set_size_request(x + 20, min(400, y+25))
+		self.screen.widget.set_size_request(max(500,x + 20), max(200,min(400, y+25)))
 
 		self.dia.vbox.pack_start(self.screen.widget)
 		self.dia.set_title(self.screen.current_view.title)
