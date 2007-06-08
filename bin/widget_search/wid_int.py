@@ -51,3 +51,6 @@ class wid_int(object):
 
 	def _readonly_set(self, value):
 		pass
+
+	def sig_activate(self, fct):
+		pass

@@ -183,7 +183,7 @@ class parse(object):
 		return self.dict_widget
 
 class form(wid_int.wid_int):
-	def __init__(self, xml, fields, model=None, parent=None, domain=[]):
+	def __init__(self, xml, fields, model=None, parent=None, domain=[], call=None):
 		wid_int.wid_int.__init__(self, 'Form', parent)
 		parser = parse(parent, fields, model=model)
 		self.parent=parent
@@ -191,6 +191,7 @@ class form(wid_int.wid_int):
 		self.model = model
 
 		self.parser=parser
+		self.call=call
 
 		#get the size of the window and the limite / decalage Hbox element
 		ww, hw = 640,800
@@ -216,6 +217,9 @@ class form(wid_int.wid_int):
 				self.widgets[x[0]][0]._readonly_set(True)
 				if x[1] == '=':
 					pass
+		for x in self.widgets.values():
+			x[0].sig_activate(self.sig_activate)
+
 	def clear(self, *args):
 		self.id=None
 		for x in self.widgets.values():
@@ -255,6 +259,10 @@ class form(wid_int.wid_int):
 	def get_offset(self):
 		return self.spin_offset.get_value()
 
+	def sig_activate(self, *args):
+		if self.call:
+			obj,fct = self.call
+			fct(obj)
 
 	def _value_get(self):
 		res = []

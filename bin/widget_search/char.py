@@ -58,3 +58,6 @@ class char(wid_int.wid_int):
 	def _readonly_set(self, value):
 		self.widget.set_editable(not value)
 		self.widget.set_sensitive(not value)
+
+	def sig_activate(self, fct):
+		self.widget.connect_after('activate', fct)
