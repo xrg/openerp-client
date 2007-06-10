@@ -4,7 +4,7 @@ matplotlib.use('GTKCairo')
 from pylab import arange
 from matplotlib.font_manager import FontProperties
 
-colorline = ['#%02x%02x%02x' % (25+((r+9)%11)*23,5+(g%11)*20,25+((b+3)%11)*23) for r in range(11) for g in range(11) for b in range(11) ]
+colorline = ['#%02x%02x%02x' % (25+((r+10)%11)*23,5+((g+1)%11)*20,25+((b+4)%11)*23) for r in range(11) for g in range(11) for b in range(11) ]
 def choice_colors(n):
 	if n:
 		return colorline[0:-1:len(colorline)/n]
@@ -50,9 +50,9 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 		labels = tuple(data_all.keys())
 		value = tuple(map(lambda x: reduce(lambda x,y=0: x+y, data_all[x].values(), 0), labels))
 		explode = map(lambda x: (x%4==2) and 0.06 or 0.0,range(len(value)))
-		subplot.pie(value,autopct='%1.1f%%',shadow=True, explode=explode)
+		aa = subplot.pie(value,autopct='%1.1f%%',shadow=True, explode=explode)
 		labels = map(lambda x: x.split('/')[-1], labels)
-		subplot.legend(labels,shadow=True)
+		subplot.legend(aa, labels,shadow=True)
 
 	elif type == 'bar':
 		n = len(axis)-1
@@ -82,9 +82,9 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 				else:
 					color = colors[i]
 				if orientation=='horizontal':
-					aa = subplot.barh(ind, tuple(value), width, left=yoff, color=color, edgecolor="#999999")[0]
+					aa = subplot.barh(ind, tuple(value), width, left=yoff, color=color, edgecolor="#333333")[0]
 				else:
-					aa = subplot.bar(ind, tuple(value), width, bottom=yoff, color=color, edgecolor="#999999")[0]
+					aa = subplot.bar(ind, tuple(value), width, bottom=yoff, color=color, edgecolor="#333333")[0]
 				gvalue2.append(aa)
 				for j in range(len(yoff)):
 					yoff[j]+=value[j]
