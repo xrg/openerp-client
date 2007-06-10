@@ -78,6 +78,8 @@ class ViewGraph(object):
 				self._figure.subplots_adjust(left=0.08,right=0.98,bottom=0.25,top=0.98)
 			else:
 				self._figure.subplots_adjust(left=0.20,right=0.97,bottom=0.07,top=0.98)
+		else:
+			self._figure.subplots_adjust(left=0.03,right=0.97,bottom=0.03,top=0.97)
 
 		self.fields = fields
 		self.model = model
