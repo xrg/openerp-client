@@ -68,11 +68,16 @@ if not hasattr(locale, 'D_FMT'):
 class ViewGraph(object):
 	def __init__(self, model, axis, fields, axis_data={}, attrs={}):
 		self.widget = gtk.HBox()
-
 		self._figure = Figure(figsize=(800,600), dpi=100, facecolor='w')
-		self._subplot = self._figure.add_subplot(111)
+		self._subplot = self._figure.add_subplot(111,axisbg='#eeeeee')
 		self._canvas = FigureCanvas(self._figure)
 		self.widget.pack_start(self._canvas, expand=True, fill=True)
+
+		if attrs.get('type', 'pie')=='bar':
+			if attrs.get('orientation', 'vertical')=='vertical':
+				self._figure.subplots_adjust(left=0.08,right=0.98,bottom=0.25,top=0.98)
+			else:
+				self._figure.subplots_adjust(left=0.20,right=0.97,bottom=0.07,top=0.98)
 
 		self.fields = fields
 		self.model = model
@@ -80,14 +85,19 @@ class ViewGraph(object):
 		self.editable = False
 		self.widget.editable = False
 		self.axis_data = axis_data
+		self.axis_group = {}
+		for i in self.axis_data:
+			self.axis_data[i]['string'] = self.fields[i]['string']
+			if self.axis_data[i].get('group', False):
+				self.axis_group[i]=1
+				self.axis.remove(i)
 		self.attrs = attrs
 
 	def display(self, models):
-		import os
 		datas = []
 		for m in models:
 			res = {}
-			for x in self.axis:
+			for x in self.axis_data.keys():
 				if self.fields[x]['type'] in ('many2one', 'char','time','text','selection'):
 					res[x] = str(m[x].get_client(m))
 				elif self.fields[x]['type'] == 'date':
@@ -110,5 +120,4 @@ class ViewGraph(object):
 				else:
 					res[x] = float(m[x].get_client(m))
 			datas.append(res)
-
-		tinygraph.tinygraph(self._subplot, self.attrs.get('type', 'pie'), self.axis, self.axis_data, datas)
+		tinygraph.tinygraph(self._subplot, self.attrs.get('type', 'pie'), self.axis, self.axis_data, datas, axis_group_field=self.axis_group, orientation=self.attrs.get('orientation', 'vertical'))
