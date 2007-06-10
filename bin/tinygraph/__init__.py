@@ -4,13 +4,9 @@ matplotlib.use('GTKCairo')
 from pylab import arange
 from matplotlib.font_manager import FontProperties
 
-colorline = [ '#%02x%02x%02x' % (25+((r+9)%11)*23,5+(g%11)*20,25+((b+3)%11)*23) for r in range(11) for g in range(11) for b in range(11) ]
+colorline = ['#%02x%02x%02x' % (25+((r+9)%11)*23,5+(g%11)*20,25+((b+3)%11)*23) for r in range(11) for g in range(11) for b in range(11) ]
 def choice_colors(n):
-	#base=['#FF0000','#009000','#9400D3','#7CFC00','#FF4500','#00BFFF','#FF1493','#8B0000','#9932CC','#E9967A','#8FBC8F','#483D8B','#2F4F4F','#00CED1','#9400D3','#FF1493','#00BFFF']
-	#return base[0:n]
 	if n:
-		print  colorline[0:-1:len(colorline)/n]
-
 		return colorline[0:-1:len(colorline)/n]
 	return []
 
@@ -29,7 +25,6 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 	data_axis = []
 	for field in axis[1:]:
 		data_all = {}
-		#group = axis_data[field].get('group', 'True')
 		for d in datas:
 			group_eval = ','.join(map(lambda x: d[x], axis_group_field))
 			axis_group[group_eval] = 1
@@ -54,10 +49,6 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 	if type == 'pie':
 		labels = tuple(data_all.keys())
 		value = tuple(map(lambda x: reduce(lambda x,y=0: x+y, data_all[x].values(), 0), labels))
-
-		#value = tuple([x[1] for x in datas_axis])   # Try if works without adding [0]
-		#labels = tuple([x[0] for x in datas])
-		import random
 		explode = map(lambda x: (x%4==2) and 0.06 or 0.0,range(len(value)))
 		subplot.pie(value,autopct='%1.1f%%',shadow=True, explode=explode)
 		labels = map(lambda x: x.split('/')[-1], labels)
@@ -108,17 +99,5 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 				subplot.legend(gvalue,t1,shadow=True,loc='best',prop = font_property)
 		else:
 			pass
-			#subplot.set_xticks(ind)
-			#subplot.set_xticklabels(labels, visible=True, ha='left', rotation='vertical')
-			#subplot.bar(ind, value, 1/n)
-#-               ind = arange(len(data))
-#-               n = float(len(data[0])-1)
-#-               for i in range(n):
-#-                       value = tuple([x[1+i] for x in data])
-#-                       labels = tuple([x[0] for x in data])
-#-                       subplot.set_xticks(ind)
-#-                       subplot.set_xticklabels(labels, visible=True, ha='left', rotation='vertical', va='bottom')
-#-                       subplot.bar(ind+i/n, value, 1/n)
-
 	else:
 		raise 'Graph type '+type+' does not exist !'
