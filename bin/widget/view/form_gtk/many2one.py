@@ -73,10 +73,9 @@ class dialog(object):
 			self.screen.load([id])
 		else:
 			self.screen.new()
-		self.screen.display()
 		vp.add(self.screen.widget)
-
 		self.dia.show_all()
+		self.screen.display()
 
 	def run(self, datas={}):
 		while True:
