@@ -11,7 +11,7 @@ def choice_colors(n):
 	return []
 
 
-def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_field=[], orientation='horizontal'):
+def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_field={}, orientation='horizontal'):
 	subplot.clear()
 	operators = {
 		'+': lambda x,y: x+y,
@@ -23,10 +23,11 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 	axis_group = {}
 	keys = {}
 	data_axis = []
+	data_all = {}
 	for field in axis[1:]:
 		data_all = {}
 		for d in datas:
-			group_eval = ','.join(map(lambda x: d[x], axis_group_field))
+			group_eval = ','.join(map(lambda x: d[x], axis_group_field.keys()))
 			axis_group[group_eval] = 1
 
 			data_all.setdefault(d[axis[0]], {})
