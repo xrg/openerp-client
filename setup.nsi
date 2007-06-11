@@ -44,7 +44,7 @@
   
   ;Start Menu Folder Page Configuration
   !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKCU" 
-  !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\TinyERP Client" 
+  !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\TinyERP Client"
   !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "TinyERP Client"
   
   !insertmacro MUI_PAGE_STARTMENU Application $STARTMENU_FOLDER
