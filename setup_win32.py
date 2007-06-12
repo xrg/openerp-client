@@ -40,7 +40,7 @@ data_files.append(("icons",glob.glob("bin\\icons\\*.png")))
 
 setup(
 	name="tinyerp-client",
-	windows=[{"script":"bin\\tinyerp-client.py", "icon_resources":[(1,"tinyerp-icon.ico")]}],
+	windows=[{"script":"bin\\tinyerp-client.py", "icon_resources":[(1,"pixmaps\\tinyerp.ico")]}],
 	data_files = data_files,
 	options = options,
 	)
