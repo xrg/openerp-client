@@ -39,6 +39,7 @@ import gtk
 import gettext
 import service
 from gtk import glade
+import tools
 
 class EvalEnvironment(object):
 	def __init__(self, parent):
@@ -240,7 +241,7 @@ class ModelRecord(signal_event.signal_event):
 		d['active_id'] = self.id
 		if self.parent:
 			d['parent'] = EvalEnvironment(self.parent)
-		val = eval(dom, d)
+		val = tools.expr_eval(dom, d)
 		return val
 
 	#
