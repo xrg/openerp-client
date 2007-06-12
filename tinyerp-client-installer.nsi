@@ -38,6 +38,7 @@
 ;Pages
 
   !define MUI_ICON ".\pixmaps\tinyerp.ico"
+  !define MUI_UNICON ".\pixmaps\tinyerp.ico"
   !define MUI_WELCOMEFINISHPAGE_BITMAP ".\pixmaps\tinyerp-intro.bmp"
   !define MUI_HEADERIMAGE
   !define MUI_HEADERIMAGE_BITMAP ".\pixmaps\tinyerp-header.bmp"
@@ -92,6 +93,8 @@ Section "TinyERP Client" SecTinyERPClient
   WriteRegStr HKCU "Software\TinyERP Client" "" $INSTDIR
   
   ;Create uninstaller
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\TinyERP Client" "DisplayName" "TinyERP Client (remove only)"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\TinyERP Client" "UninstallString" "$INSTDIR\Uninstall.exe"
   WriteUninstaller "$INSTDIR\Uninstall.exe"
   
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
@@ -99,7 +102,6 @@ Section "TinyERP Client" SecTinyERPClient
     ;Create shortcuts
     CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\TinyERP Client.lnk" "$INSTDIR\tinyerp-client.exe"
-    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
   
   !insertmacro MUI_STARTMENU_WRITE_END
 
@@ -313,7 +315,6 @@ Section "Uninstall"
   !insertmacro MUI_STARTMENU_GETFOLDER Application $MUI_TEMP
     
   Delete "$SMPROGRAMS\$MUI_TEMP\TinyERP Client.lnk"
-  Delete "$SMPROGRAMS\$MUI_TEMP\Uninstall.lnk"
   
   ;Delete empty start menu parent diretories
   StrCpy $MUI_TEMP "$SMPROGRAMS\$MUI_TEMP"
@@ -328,6 +329,7 @@ Section "Uninstall"
     StrCmp $MUI_TEMP $SMPROGRAMS startMenuDeleteLoopDone startMenuDeleteLoop
   startMenuDeleteLoopDone:
 
+  DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\TinyERP Client"
   DeleteRegKey /ifempty HKCU "Software\TinyERP Client"
 
 SectionEnd
