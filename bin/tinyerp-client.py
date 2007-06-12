@@ -46,10 +46,6 @@ import sys, os
 import logging
 logging.basicConfig()
 
-#log = logging.getLogger('rpc')
-#log.setLevel(logging.DEBUG)
-
-
 from distutils.sysconfig import get_python_lib
 terp_path = os.path.join(get_python_lib(), 'tinyerp-client')
 sys.path.append(terp_path)
