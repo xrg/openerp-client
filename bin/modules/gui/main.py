@@ -197,10 +197,10 @@ class db_login(object):
 			result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), db_widget.get_active_text())
 		else:
 			win.destroy()
-			raise 'QueryCanceled'
+			raise Exception('QueryCanceled')
 		if res <> gtk.RESPONSE_OK:
 			win.destroy()
-			raise 'QueryCanceled'
+			raise Exception('QueryCanceled')
 		win.destroy()
 		return result
 
@@ -616,8 +616,10 @@ class terp_main(service.Service):
 				try:
 					l = db_login()
 					res = l.run(dbname=dbname, parent=self.window)
-				except 'QueryCanceled':
-					return False
+				except Exception, e:
+					if e.args == ('QueryCanceled',):
+						return False
+					raise
 			self.sig_logout(widget)
 			log_response = rpc.session.login(*res)
 			if log_response==1:
