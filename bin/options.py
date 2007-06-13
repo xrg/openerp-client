@@ -27,7 +27,7 @@
 ##############################################################################
 
 import ConfigParser,optparse
-import os
+import os, sys
 import gtk
 
 def get_home_dir():
@@ -66,8 +66,8 @@ class configmanager(object):
 			'client.modepda': False,
 			'client.toolbar': 'both',
 			'client.theme': 'none',
-			'path.share': os.path.dirname(__file__),
-			'path.pixmaps': os.path.dirname(__file__),
+			'path.share': os.path.join(sys.prefix, '/share/tinyerp-client/'),
+			'path.pixmaps': os.path.join(sys.prefix, '/share/pixmaps/tinyerp-client/'),
 			'tip.autostart': False,
 			'tip.position': 0,
 			'survey.position': 0,

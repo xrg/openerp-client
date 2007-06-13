@@ -75,11 +75,10 @@
 	  <property name="spacing">0</property>
 
 	  <child>
-	    <widget class="GtkImage" id="image629">
+	    <widget class="GtkImage" id="image_tinyerp">
 	      <property name="width_request">500</property>
 	      <property name="height_request">71</property>
 	      <property name="visible">True</property>
-	      <property name="pixbuf">tinyerp.png</property>
 	      <property name="xalign">0.5</property>
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
@@ -6266,7 +6265,6 @@ Save as CSV</property>
   <property name="default_height">500</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">True</property>
-  <property name="icon">tinyerp_icon.png</property>
   <property name="decorated">True</property>
   <property name="skip_taskbar_hint">False</property>
   <property name="skip_pager_hint">False</property>

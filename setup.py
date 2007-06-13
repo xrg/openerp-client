@@ -15,10 +15,15 @@ from stat import ST_MODE
 from distutils.file_util import copy_file
 from mydistutils import setup
 
+if os.name == 'nt':
+    import py2exe
+
+sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "bin"))
+
 opj = os.path.join
 
-name = 'tinyerp-client'
-version = '4.1.1'
+execfile(opj('bin', 'release.py'))
+
 
 # get python short version
 py_short_version = '%s.%s' % sys.version_info[:2]
@@ -44,11 +49,11 @@ def data_files():
              (opj('share','doc', 'tinyerp-client-%s' % version), 
               [f for f in glob.glob('doc/*') if os.path.isfile(f)]),
              (opj('share', 'pixmaps', 'tinyerp-client'),
-              glob.glob('pixmaps/*.png') + glob.glob('bin/*.png')),
+              glob.glob('bin/pixmaps/*.png')),
              (opj('share', 'pixmaps', 'tinyerp-client', 'icons'),
                      glob.glob('bin/icons/*.png')),
              (opj('share', 'tinyerp-client'),
-              ['bin/terp.glade', 'bin/tipoftheday.txt'] + glob.glob('bin/*.png'))]
+              ['bin/terp.glade', 'bin/tipoftheday.txt'])]
     return files
 
 included_plugins = ['workflow_print']
@@ -69,20 +74,6 @@ def translations():
         trans.append((dest % (lang, name), po))
     return trans
 
-long_desc = '''\
-Tiny ERP is a complete ERP and CRM. The main features are accounting (analytic
-and financial), stock management, sales and purchases management, tasks
-automation, marketing campaigns, help desk, POS, etc. Technical features include
-a distributed server, flexible workflows, an object database, a dynamic GUI,
-customizable reports, and SOAP and XML-RPC interfaces.
-'''
-
-classifiers = """\
-Development Status :: 5 - Production/Stable
-License :: OSI Approved :: GNU General Public License (GPL)
-Programming Language :: Python
-"""
-
 check_modules()
 
 # create startup script
@@ -95,40 +86,84 @@ f = open('tinyerp-client', 'w')
 f.write(start_script)
 f.close()
 
-# todo: use 
-command = sys.argv[1]
+if os.name <> 'nt' and sys.argv[1] == 'build_po':
+    os.system('(cd bin ; find . -name \*.py | xargs xgettext -o po/%s.pot)' % name)
+    for file in ([ os.path.join('bin', 'po', fname) for fname in os.listdir('bin/po') ]):
+        print file
+        if os.path.isfile(file):
+            os.system('msgmerge --update --backup=off %s bin/po/%s.pot' % (file, name))
+    sys.exit()
 
-setup(name             = name,
-      version          = version,
-      description      = "Tiny's ERP Client",
-      long_description = long_desc,
-      url              = 'http://tinyerp.com',
-      author           = 'Tiny.be',
-      author_email     = 'info@tiny.be',
-      classifiers      = filter(None, classifiers.splitlines()),
-      license          = 'GPL',
-      data_files       = data_files(),
-      translations     = translations(),
-      pot_file         = 'bin/po/terp-msg.pot',
-      scripts          = ['tinyerp-client'],
-      packages         = ['tinyerp-client', 'tinyerp-client.common', 
-                          'tinyerp-client.modules', 'tinyerp-client.modules.action',
-                          'tinyerp-client.modules.gui',
-                          'tinyerp-client.modules.gui.window',
-                          'tinyerp-client.modules.gui.window.view_sel',
-                          'tinyerp-client.modules.gui.window.view_tree',
-                          'tinyerp-client.modules.spool',
-                          'tinyerp-client.printer', 'tinyerp-client.tools',
-                          'tinyerp-client.widget',
-                          'tinyerp-client.widget.model',
-                          'tinyerp-client.widget.screen',
-                          'tinyerp-client.widget.view',
-                          'tinyerp-client.widget.view.form_gtk',
-                          'tinyerp-client.widget.view.tree_gtk',
-                          'tinyerp-client.widget_search',
-                          'tinyerp-client.plugins'] + list(find_plugins()),
-      package_dir      = {'tinyerp-client': 'bin'},
-      )
+
+if os.name == 'nt':
+    options = {"py2exe": {"compressed": 1,
+                          "optimize": 2,
+                          "packages": ["encodings","gtk", "matplotlib", "pytz"],
+                          "includes": "pango,atk,gobject,cairo,atk,pangocairo",
+                          "excludes": ["Tkinter", "tcl", "TKconstants"],
+                          "dll_excludes": [
+                              "iconv.dll","intl.dll","libatk-1.0-0.dll",
+                              "libgdk_pixbuf-2.0-0.dll","libgdk-win32-2.0-0.dll",
+                              "libglib-2.0-0.dll","libgmodule-2.0-0.dll",
+                              "libgobject-2.0-0.dll","libgthread-2.0-0.dll",
+                              "libgtk-win32-2.0-0.dll","libpango-1.0-0.dll",
+                              "libpangowin32-1.0-0.dll",
+                              "wxmsw26uh_vc.dll",],
+                          }
+               }
+    data_files = []
+    import matplotlib
+    data_files.append(matplotlib.get_py2exe_datafiles())
+
+    os.chdir('bin')
+    for (dp,dn,names) in os.walk('themes'):
+        if '.svn' in dn:
+            dn.remove('.svn')
+        data_files.append((dp, map(lambda x: os.path.join('bin', dp,x), names)))
+    os.chdir('..')
+
+    data_files.append((".",["bin\\terp.glade","bin\\tinyerp_icon.png","bin\\tinyerp.png","bin\\flag.png", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
+    data_files.append(("pict",glob.glob("bin\\pict\\*.png")))
+    data_files.append(("po",glob.glob("bin\\po\\*.*")))
+    data_files.append(("icons",glob.glob("bin\\icons\\*.png")))
+
+    setup(
+        name="tinyerp-client",
+        windows=[{"script":"bin\\tinyerp-client.py", "icon_resources":[(1,"pixmaps\\tinyerp.ico")]}],
+        data_files = data_files,
+        options = options,
+        )
+else:
+    setup(name             = name,
+          version          = version,
+          description      = description,
+          long_description = long_desc,
+          url              = url,
+          author           = author,
+          author_email     = author_email,
+          classifiers      = filter(None, classifiers.splitlines()),
+          license          = license,
+          data_files       = data_files(),
+          translations     = translations(),
+          scripts          = ['tinyerp-client'],
+          packages         = ['tinyerp-client', 'tinyerp-client.common', 
+                              'tinyerp-client.modules', 'tinyerp-client.modules.action',
+                              'tinyerp-client.modules.gui',
+                              'tinyerp-client.modules.gui.window',
+                              'tinyerp-client.modules.gui.window.view_sel',
+                              'tinyerp-client.modules.gui.window.view_tree',
+                              'tinyerp-client.modules.spool',
+                              'tinyerp-client.printer', 'tinyerp-client.tools',
+                              'tinyerp-client.widget',
+                              'tinyerp-client.widget.model',
+                              'tinyerp-client.widget.screen',
+                              'tinyerp-client.widget.view',
+                              'tinyerp-client.widget.view.form_gtk',
+                              'tinyerp-client.widget.view.tree_gtk',
+                              'tinyerp-client.widget_search',
+                              'tinyerp-client.plugins'] + list(find_plugins()),
+          package_dir      = {'tinyerp-client': 'bin'},
+          )
 
 
 # vim:expandtab:tw=80

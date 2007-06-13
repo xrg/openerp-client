@@ -76,7 +76,7 @@ class image_wid(interface.widget_interface):
 		self.widget.connect("button-press-event", self.save_file)
 
 		# This calls our box creating function
-		box1 = self.create_image("tinyerp_icon.png")
+		box1 = self.create_image(common.terp_path_pixmaps("tinyerp_icon.png"))
 
 		# Pack and show all our widgets
 		self.widget.add(box1)
@@ -117,9 +117,9 @@ class image_wid(interface.widget_interface):
 				fname.flush()
 				self.update_img(fname.name)
 			except:
-				self.update_img('noimage.png')
+				self.update_img(common.terp_path_pixmaps('noimage.png'))
 		else:
-			self.update_img('noimage.png')
+			self.update_img(common.terp_path_pixmaps('noimage.png'))
 
 	def set_value(self, model, model_field):
 		return model_field.set_client(model, self._value or False)

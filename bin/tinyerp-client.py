@@ -36,13 +36,14 @@ GNU Public Licence.
 
 (c) 2003-TODAY, Fabien Pinckaers - Tiny sprl
 """
-__author__ = 'Fabien Pinckaers, <fp@tiny.be>'
-__version__ = "4.1.1"
+import sys, os
+execfile(os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'release.py'))
+__author__ = author
+__version__ = version
 
 import __builtin__
 __builtin__.__dict__['tinyerp_version'] = __version__
 
-import sys, os
 import logging
 logging.basicConfig()
 
@@ -74,8 +75,12 @@ if os.name == 'nt':
 	os.environ['PATH'] = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0])) + ";" + os.environ['PATH']
 
 # end testing
-APP = 'terp'
-DIR = 'po'
+APP = name
+#DIR = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'share/locale')
+DIR = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'po')
+if not os.path.isdir(DIR):
+	DIR = None
+print DIR
 
 try:
 	locale.setlocale(locale.LC_ALL, '')
@@ -108,22 +113,9 @@ gtk.stock_add (items)
 factory = gtk.IconFactory ()
 factory.add_default ()
 
-#pix_file = os.path.join(os.getcwd(),'flag.png')
-#if not os.path.isfile(pix_file):
-#	pix_file = os.path.join(options.options['path.pixmaps'],'flag.png')
-#if not os.path.isfile(pix_file):
-#	pix_file = '/usr/share/pixmaps/tinyerp-client/flag.png'
-#pixbuf = gtk.gdk.pixbuf_new_from_file(pix_file)
-#
-#if pixbuf:
-#	icon_set = gtk.IconSet (pixbuf)
-#	factory.add ('terp-translate', icon_set)
-
 pix_file = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'icons')
 if not os.path.isdir(pix_file):
 	pix_file = os.path.join(options.options['path.pixmaps'],'icons')
-if not os.path.isdir(pix_file):
-	pix_file = '/usr/share/pixmaps/tinyerp-client/icons'
 
 for fname in os.listdir(pix_file):
 	ffname = os.path.join(pix_file,fname)

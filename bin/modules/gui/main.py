@@ -151,6 +151,8 @@ class db_login(object):
 		if not parent:
 			parent = service.LocalService('gui.main').window
 		win.set_transient_for(parent)
+		img = self.win_gl.get_widget('image_tinyerp')
+		img.set_from_file(common.terp_path_pixmaps('tinyerp.png'))
 		login = self.win_gl.get_widget('ent_login')
 		passwd = self.win_gl.get_widget('ent_passwd')
 		server_widget = self.win_gl.get_widget('ent_server')

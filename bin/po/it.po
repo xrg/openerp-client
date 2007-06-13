@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tiny ERP V2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-28 13:16+0200\n"
+"POT-Creation-Date: 2007-06-13 16:28+0200\n"
 "PO-Revision-Date: 2005-04-05 09:43+0200\n"
 "Last-Translator: Fabien Pinckaers <fp@tiny.be>\n"
 "Language-Team: FR <i18n-info@tinyerp.org>\n"
@@ -16,400 +16,136 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: bin/plugins/__init__.py:20
+#: options.py:90
+#, fuzzy, python-format
+msgid "Tiny ERP Client %s"
+msgstr "Tiny ERP Client v2.0"
+
+#: options.py:91
+msgid "specify alternate config file"
+msgstr "specifica config file alternativo"
+
+#: options.py:92
+msgid "enable basic debugging"
+msgstr "abilita debigging di base"
+
+#: options.py:93
+msgid "specify channels to log"
+msgstr "specifica canali da registrare"
+
+#: options.py:94
+msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+msgstr ""
+"specifica il livello di registrazione: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+
+#: options.py:95
 #, fuzzy
-msgid "No available plugin for this resource !"
-msgstr "nessun plugin disponibile per questa risorsa!"
+msgid "specify the user login"
+msgstr "specifica canali da registrare"
 
-#: bin/plugins/__init__.py:22
-msgid "Choose a Plugin"
-msgstr "Scegli un Plugin"
-
-#: bin/printer/printer.py:136
-msgid "Write Report to File"
-msgstr "Scrivi Report sul File"
-
-#: bin/printer/printer.py:142 bin/widget/view/form_gtk/binary.py:70
-msgid "Error writing the file!"
-msgstr "Errore di scrittura nel file!"
-
-#: bin/widget/view/tree_gtk/editabletree.py:105
-msgid "Relation Field: F1 New   F2 Open/Search"
+#: options.py:96
+msgid "specify the server port"
 msgstr ""
 
-#: bin/widget/view/tree_gtk/editabletree.py:152
-#, python-format
-msgid "Warning; field \"%s\" is required !"
+#: options.py:97
+msgid "specify the server ip/name"
 msgstr ""
 
-#: bin/widget/view/form_gtk/many2one.py:93 bin/terp.glade:1704
-msgid "Action"
-msgstr "Azione"
-
-#: bin/widget/view/form_gtk/many2one.py:94
-msgid "Report"
-msgstr ""
-
-#: bin/widget/view/form_gtk/wid_common.py:54
-#, fuzzy
-msgid "Always applicable !"
-msgstr "Sempre applicabile!"
-
-#: bin/widget/view/form_gtk/interface.py:52 bin/terp.glade:2889
-msgid "Set to default value"
-msgstr "Imposta al valore di default"
-
-#: bin/widget/view/form_gtk/interface.py:53
-#, fuzzy
-msgid "Set default"
-msgstr "Imposta a _Default"
-
-#: bin/widget/view/form_gtk/form.py:86
-#, fuzzy
-msgid "Invalid Form, correct red fields !"
-msgstr "Modulo Invalido, correggere i campi in rosso"
-
-#: bin/widget/view/form_gtk/calendar.py:95
-#: bin/widget/view/form_gtk/calendar.py:173
-msgid "This widget is readonly !"
-msgstr ""
-
-#: bin/widget/view/form_gtk/image.py:43
-#, fuzzy
-msgid "Select a file"
-msgstr "Seleziona una data"
-
-#: bin/widget/view/form_gtk/image.py:89
-#, fuzzy
-msgid "Save as ..."
-msgstr "Salva allegato come..."
-
-#: bin/widget/view/form_gtk/image.py:95
-msgid "Open file ..."
-msgstr ""
-
-#: bin/widget/view/form_gtk/one2many_list.py:139
-#, fuzzy
-msgid "You have to select a resource !"
-msgstr "Seleziona una risorsa!"
-
-#: bin/widget/view/form_gtk/binary.py:54
-msgid "Select the file to attach"
-msgstr "Selezionare il file da allegare"
-
-#: bin/widget/view/form_gtk/binary.py:61
-msgid "Error reading the file"
-msgstr "Errore di lettura nel file"
-
-#: bin/widget/view/form_gtk/binary.py:65
-msgid "Save attachment as..."
-msgstr "Salva allegato come..."
-
-#: bin/widget/view/form_gtk/binary.py:93
-#, python-format
-msgid "%d bytes"
-msgstr ""
-
-#: bin/widget/view/form.py:98 bin/widget/view/form.py:106
-msgid "You must select a record to use the relate button !"
-msgstr ""
-
-#: bin/common/common.py:69
+#: common/common.py:75
 #, fuzzy
 msgid "Unable to launch this file !"
 msgstr "Impossibile lanciare questo file!"
 
-#: bin/common/common.py:84
+#: common/common.py:90
 msgid "Unable to launch the application associated to this content !"
 msgstr "Impossibile lanciare l'applicazione associata a quasto contesto"
 
-#: bin/common/common.py:302 bin/common/common.py:356
+#: common/common.py:334 common/common.py:391
 #, fuzzy
 msgid "Support request sent !"
 msgstr "Manda la richiesta di supporto"
 
-#: bin/modules/gui/window/view_tree/view_tree_sc.py:41
-#: bin/modules/gui/window/form.py:203
-msgid "ID"
-msgstr "ID"
+#: modules/gui/main.py:126 modules/gui/main.py:916
+#, fuzzy
+msgid "Could not connect to server !"
+msgstr ""
+"Errore di cconnessione!\n"
+"Nome utente o password non validi"
 
-#: bin/modules/gui/window/view_tree/view_tree_sc.py:46
-msgid "Description"
-msgstr "Descrizione"
+#: modules/gui/main.py:132 modules/gui/main.py:920
+msgid "No database found, you must create one !"
+msgstr ""
 
-#: bin/modules/gui/window/view_tree/parse.py:42
-msgid "Tree"
-msgstr "Albero"
+#: modules/gui/main.py:213
+msgid "Do not use special characters !"
+msgstr ""
 
-#: bin/modules/gui/window/win_export.py:58
-msgid " record(s) saved !"
-msgstr " record salvato!"
+#: modules/gui/main.py:217
+msgid "Can not connect to server, please change it !"
+msgstr ""
 
-#: bin/modules/gui/window/win_export.py:61
+#: modules/gui/main.py:266
 msgid ""
-"Operation failed !\n"
-"I/O error"
+"The database name must contain only normal characters or \"_\".\n"
+"You must avoid all accents, space or special characters."
 msgstr ""
-"Operazione fallita!\n"
-"Errore I/O"
 
-#: bin/modules/gui/window/win_export.py:85
-msgid "Error Opening Excel !"
-msgstr "Errore aprendo excel!"
+#: modules/gui/main.py:266
+msgid "Bad database name !"
+msgstr ""
 
-#: bin/modules/gui/window/win_export.py:87
-#, fuzzy
+#: modules/gui/main.py:296 modules/gui/main.py:816 modules/gui/main.py:846
+msgid "Bad database administrator password !"
+msgstr ""
+
+#: modules/gui/main.py:296 modules/gui/main.py:298
+msgid "Could not create database."
+msgstr ""
+
+#: modules/gui/main.py:298 modules/gui/main.py:305
+msgid "Error during database creation !"
+msgstr ""
+
+#: modules/gui/main.py:305
 msgid ""
-"Function only available for MS Office !\n"
-"Sorry, OOo users :("
-msgstr ""
-"Funzione disponibile solo per MS Office!\n"
-"Spiacenti per gli utenti OOo :("
-
-#: bin/modules/gui/window/win_export.py:273
-#, fuzzy
-msgid "Export Data"
-msgstr "Esporta Dati"
-
-#: bin/modules/gui/window/win_preference.py:49
-msgid "Preferences"
-msgstr "Preferenze"
-
-#: bin/modules/gui/window/win_preference.py:73
-msgid "Preference"
-msgstr "Preferenza"
-
-#: bin/modules/gui/window/__init__.py:38
-msgid "Unknown Window"
-msgstr "Finestra sconosciuta"
-
-#: bin/modules/gui/window/tree.py:78 bin/modules/gui/window/form.py:105
-msgid "Reload"
-msgstr "Ricarica"
-
-#: bin/modules/gui/window/tree.py:79
-msgid "Switch View"
+"The server crashed during installation.\n"
+"We suggest you to drop this database."
 msgstr ""
 
-#: bin/modules/gui/window/tree.py:80
-msgid "Changt root"
-msgstr "Cambia radice"
+#: modules/gui/main.py:323
+msgid "You can now connect to the database as an administrator."
+msgstr ""
 
-#: bin/modules/gui/window/tree.py:81 bin/modules/gui/window/tree.py:82
-msgid "Open"
-msgstr "Apri"
-
-#: bin/modules/gui/window/tree.py:83 bin/modules/gui/window/tree.py:84
-msgid "Print"
-msgstr "Stampa"
-
-#: bin/modules/gui/window/tree.py:85
-msgid "Close"
-msgstr "Chiudi"
-
-#: bin/modules/gui/window/tree.py:179 bin/modules/gui/window/tree.py:224
-msgid "No resource selected!"
-msgstr "Nessuna risorsa selezionata!"
-
-#: bin/modules/gui/window/tree.py:190
+#: modules/gui/main.py:323
 msgid ""
-"Are you sure you want\n"
-"to remove this record?"
-msgstr ""
-"Sei sicuro di voler\n"
-"rimuovere questo record?"
-
-#: bin/modules/gui/window/tree.py:195
-msgid "Error removing resource!"
-msgstr "Errore eliminando la risorsa"
-
-#: bin/modules/gui/window/tree.py:206
-msgid "Unable to chroot: no tree resource selected"
-msgstr "Impossibile fare chroot: nessun albero di risorse selezionato"
-
-#: bin/modules/gui/window/win_attach.py:108
-#, fuzzy
-msgid "Are you sure you want to remove this attachment ?"
-msgstr ""
-"Sei sicuro di voler\n"
-"rimuovere questo record?"
-
-#: bin/modules/gui/window/win_attach.py:113
-#: bin/modules/gui/window/win_attach.py:135
-msgid "Select the destination file"
-msgstr "Seleziona il file di destinazione"
-
-#: bin/modules/gui/window/win_attach.py:124
-msgid "Can not open file !"
-msgstr "Impossibile aprire il file!"
-
-#: bin/modules/gui/window/win_attach.py:144
-#: bin/modules/gui/window/win_attach.py:255
-msgid "Can not write file !"
-msgstr "Impossibile scrivere il file!"
-
-#: bin/modules/gui/window/win_attach.py:242
-msgid ""
-"Unable to preview image file !\n"
-"Verify the format."
+"The following users have been installed on your database:\n"
+"\n"
 msgstr ""
 
-#: bin/modules/gui/window/win_search.py:74
-#, fuzzy, python-format
-msgid "Tiny ERP Search: %s"
-msgstr "Tiny ERP - Cerca"
-
-#: bin/modules/gui/window/win_search.py:75
-#, fuzzy, python-format
-msgid "Tiny ERP Search: %s (%%d result(s))"
-msgstr "Tiny ERP - Cerca Widgets"
-
-#: bin/modules/gui/window/win_selection.py:55
-msgid "Name"
-msgstr "Nome"
-
-#: bin/modules/gui/window/win_selection.py:59
-msgid "Ressource Name"
-msgstr "Nome Risorsa"
-
-#: bin/modules/gui/window/win_selection.py:59
-msgid "Names"
-msgstr "Nomi"
-
-#: bin/modules/gui/window/form.py:177 bin/modules/gui/window/form.py:367
-#, fuzzy
-msgid "No resource selected !"
-msgstr "Nessuna risorsa selezionata!"
-
-#: bin/modules/gui/window/form.py:197
-#, fuzzy
-msgid "You have to select one resource!"
-msgstr "Seleziona una risorsa!"
-
-#: bin/modules/gui/window/form.py:204
-msgid "Creation User"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:205
-msgid "Creation Date"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:206
-msgid "Latest Modification by"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:207
-msgid "Latest Modification Date"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:208
-msgid "Owner"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:209
-msgid "Group Owner"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:210
-msgid "Access Level"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:220
-#, fuzzy
-msgid "Are you sure to remove this record ?"
-msgstr ""
-"Sei sicuro di voler\n"
-"rimuovere questo record?"
-
-#: bin/modules/gui/window/form.py:223
-#, fuzzy
-msgid "Resource not removed !"
-msgstr "Risorsa rimossa"
-
-#: bin/modules/gui/window/form.py:225
-msgid "Resource removed."
-msgstr "Risorsa rimossa"
-
-#: bin/modules/gui/window/form.py:249
-msgid "Working now on the duplicated document !"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:258
-#, fuzzy
-msgid "Document saved !"
-msgstr "Opzioni salvate!"
-
-#: bin/modules/gui/window/form.py:262
-msgid "Invalid form !"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:314
-msgid "No record selected!"
-msgstr "Nessun record selezionato!"
-
-#: bin/modules/gui/window/form.py:342
-#, fuzzy
-msgid "No record selected"
-msgstr "Nessun record selezionato!"
-
-#: bin/modules/gui/window/form.py:347
-msgid "New document"
-msgstr "Nuovo Documento"
-
-#: bin/modules/gui/window/form.py:349
-#, fuzzy
-msgid "Editing document (id: "
-msgstr "Modifica documento: "
-
-#: bin/modules/gui/window/form.py:350
-msgid "Record: "
-msgstr "Record: "
-
-#: bin/modules/gui/window/form.py:365
-#, fuzzy
-msgid "No preference available for this resource !"
-msgstr "Nessuna preferenza disponibile per questa risorsa"
-
-#: bin/modules/gui/window/form.py:371
-msgid ""
-"This record has been modified\n"
-"do you want to save it ?"
-msgstr ""
-
-#: bin/modules/gui/window/win_import.py:53
-#, python-format
-msgid "Imported %d objects !"
-msgstr ""
-
-#: bin/modules/gui/window/win_import.py:79
-#: bin/modules/gui/window/win_import.py:83
-msgid "Field name"
-msgstr "Nome campo"
-
-#: bin/modules/gui/main.py:173 bin/modules/gui/main.py:435
+#: modules/gui/main.py:358 modules/gui/main.py:662
 msgid "Press Ctrl+O to login"
 msgstr ""
 
-#: bin/modules/gui/main.py:214 bin/terp.glade:1234
+#: modules/gui/main.py:401
 #, fuzzy
 msgid "Default Theme"
 msgstr "Valore di default"
 
-#: bin/modules/gui/main.py:383
+#: modules/gui/main.py:604
 #, fuzzy, python-format
 msgid "%s request(s)"
 msgstr " richiesta/e"
 
-#: bin/modules/gui/main.py:385
+#: modules/gui/main.py:606
 msgid "No request"
 msgstr "Nessuna richiesta"
 
-#: bin/modules/gui/main.py:387
+#: modules/gui/main.py:608
 #, fuzzy, python-format
 msgid " - %s pending request(s)"
 msgstr "richiesta/e pendente"
 
-#: bin/modules/gui/main.py:418
+#: modules/gui/main.py:636
 #, fuzzy
 msgid ""
 "Connection error !\n"
@@ -418,7 +154,7 @@ msgstr ""
 "Errore di cconnessione!\n"
 "Nome utente o password non validi"
 
-#: bin/modules/gui/main.py:420
+#: modules/gui/main.py:638
 msgid ""
 "Connection error !\n"
 "Bad username or password !"
@@ -426,1591 +162,1404 @@ msgstr ""
 "Errore di cconnessione!\n"
 "Nome utente o password non validi"
 
-#: bin/modules/gui/main.py:424
+#: modules/gui/main.py:642
 msgid "Connection Error !"
 msgstr "Errore di Connessione!"
 
-#: bin/modules/gui/main.py:433
+#: modules/gui/main.py:660
 msgid "Not logged !"
 msgstr ""
 
-#: bin/modules/gui/main.py:494 bin/modules/gui/main.py:498
+#: modules/gui/main.py:728 modules/gui/main.py:735
 msgid "Do you really want to quit ?"
 msgstr ""
 
-#: bin/modules/gui/main.py:592
-msgid "The database name must contain only normal characters or \"_\""
-msgstr ""
-
-#: bin/modules/gui/main.py:592
-msgid "Bad database name !"
-msgstr ""
-
-#: bin/modules/gui/main.py:605 bin/modules/gui/main.py:620
-#: bin/modules/gui/main.py:650
-msgid "Bad database administrator password !"
-msgstr ""
-
-#: bin/modules/gui/main.py:605 bin/modules/gui/main.py:607
-msgid "Could not create database."
-msgstr ""
-
-#: bin/modules/gui/main.py:607 bin/modules/gui/main.py:780
-msgid "Error during database creation !"
-msgstr ""
-
-#: bin/modules/gui/main.py:611
+#: modules/gui/main.py:807
 #, fuzzy
 msgid "Delete a database"
 msgstr "Seleziona una data"
 
-#: bin/modules/gui/main.py:617
+#: modules/gui/main.py:813
 msgid "Database dropped successfully !"
 msgstr ""
 
-#: bin/modules/gui/main.py:620
+#: modules/gui/main.py:816
 msgid "Could not drop database."
 msgstr ""
 
-#: bin/modules/gui/main.py:622
+#: modules/gui/main.py:818
 msgid "Couldn't drop database"
 msgstr ""
 
-#: bin/modules/gui/main.py:647
+#: modules/gui/main.py:843
 msgid "Database restored successfully !"
 msgstr ""
 
-#: bin/modules/gui/main.py:650
+#: modules/gui/main.py:846
 msgid "Could not restore database."
 msgstr ""
 
-#: bin/modules/gui/main.py:652
+#: modules/gui/main.py:848
 msgid "Couldn't restore database"
 msgstr ""
 
-#: bin/modules/gui/main.py:670
+#: modules/gui/main.py:874
 msgid "Confirmation password do not match new password, operation cancelled!"
 msgstr ""
 
-#: bin/modules/gui/main.py:670
+#: modules/gui/main.py:874
 #, fuzzy
 msgid "Validation Error."
 msgstr "Errore Applicazione"
 
-#: bin/modules/gui/main.py:676
+#: modules/gui/main.py:880
 msgid "Could not change password database."
 msgstr ""
 
-#: bin/modules/gui/main.py:676
+#: modules/gui/main.py:880
 msgid "Bas password provided !"
 msgstr ""
 
-#: bin/modules/gui/main.py:678
+#: modules/gui/main.py:882
 msgid "Error, password not changed."
 msgstr ""
 
-#: bin/modules/gui/main.py:683 bin/modules/gui/main.py:708
+#: modules/gui/main.py:887 modules/gui/main.py:912
 msgid "Backup a database"
 msgstr ""
 
-#: bin/modules/gui/main.py:704
+#: modules/gui/main.py:908
 msgid "Database backuped successfully !"
 msgstr ""
 
-#: bin/modules/gui/main.py:706
+#: modules/gui/main.py:910
 msgid "Couldn't backup database."
 msgstr ""
 
-#: bin/modules/gui/main.py:773
-msgid "Database created successfully !"
-msgstr ""
+#: modules/gui/window/win_export.py:58
+msgid " record(s) saved !"
+msgstr " record salvato!"
 
-#: bin/modules/gui/main.py:780
+#: modules/gui/window/win_export.py:61
 msgid ""
-"The server crashed during installation.\n"
-"We suggest you to drop this database."
-msgstr ""
-
-#: bin/modules/action/main.py:51
-msgid "Nothing to print!"
-msgstr ""
-
-#: bin/modules/action/main.py:65
-msgid "Printing aborted, too long delay !"
-msgstr "Stampa rimossa, troppo ritardo!"
-
-#: bin/modules/action/main.py:69 bin/modules/action/main.py:122
-msgid "Error: "
-msgstr "Errore: "
-
-#: bin/modules/action/main.py:129
-msgid "Select your action"
-msgstr "Seleziona la tua azione"
-
-#: bin/modules/action/main.py:135
-msgid "No action defined!"
-msgstr "Nessuna azione definita"
-
-#: bin/options.py:88
-#, fuzzy, python-format
-msgid "Tiny ERP Client %s"
-msgstr "Tiny ERP Client v2.0"
-
-#: bin/options.py:89
-msgid "specify alternate config file"
-msgstr "specifica config file alternativo"
-
-#: bin/options.py:90
-msgid "enable basic debugging"
-msgstr "abilita debigging di base"
-
-#: bin/options.py:91
-msgid "specify channels to log"
-msgstr "specifica canali da registrare"
-
-#: bin/options.py:92
-msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-msgstr ""
-"specifica il livello di registrazione: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-
-#: bin/options.py:93
-#, fuzzy
-msgid "specify the user login"
-msgstr "specifica canali da registrare"
-
-#: bin/options.py:94
-msgid "specify the server port"
-msgstr ""
-
-#: bin/options.py:95
-msgid "specify the server ip/name"
-msgstr ""
-
-#: bin/tinyerp-client.py:143
-msgid "Closing Tiny ERP, KeyboardInterrupt"
-msgstr "Chiusura di Tiny ERP, Interruzione Tastiera"
-
-#: bin/rpc.py:113 bin/rpc.py:138
-msgid "Connection refused !"
-msgstr "Connessione rifiutata"
-
-#: bin/rpc.py:114
-msgid "Connection refused!"
-msgstr "Connessione rifiutata!"
-
-#: bin/rpc.py:149
-msgid "Application Error"
-msgstr "Errore Applicazione"
-
-#: bin/rpc.py:149
-msgid "View details"
-msgstr "Dettagli vista"
-
-#: bin/terp.glade:10
-msgid "Tiny ERP - Login"
-msgstr "Tiny ERP - Login"
-
-#: bin/terp.glade:106
-msgid "User:"
-msgstr "Utente:"
-
-#: bin/terp.glade:130 bin/terp.glade:13101 bin/terp.glade:13286
-#: bin/terp.glade:13914
-msgid "Password:"
-msgstr "Password:"
-
-#: bin/terp.glade:155 bin/terp.glade:13041 bin/terp.glade:13424
-#: bin/terp.glade:13832 bin/terp.glade:14341
-msgid "Change"
-msgstr ""
-
-#: bin/terp.glade:178 bin/terp.glade:12718
-msgid "localhost"
-msgstr "localhost"
-
-#: bin/terp.glade:196
-msgid "Database:"
-msgstr ""
-
-#: bin/terp.glade:221 bin/terp.glade:12807 bin/terp.glade:13077
-#: bin/terp.glade:13335 bin/terp.glade:13743 bin/terp.glade:14252
-msgid "Server:"
-msgstr "Server:"
-
-#: bin/terp.glade:249
-msgid "demo"
-msgstr "demo"
-
-#: bin/terp.glade:321
-msgid "Tiny ERP"
-msgstr "Tiny ERP"
-
-#: bin/terp.glade:359
-msgid "_File"
-msgstr "_File"
-
-#: bin/terp.glade:368
-#, fuzzy
-msgid "_Connect..."
-msgstr "Connetti..."
-
-#: bin/terp.glade:390
-#, fuzzy
-msgid "_Disconnect"
-msgstr "Disconnetti"
-
-#: bin/terp.glade:417
-msgid "_New database"
-msgstr ""
-
-#: bin/terp.glade:438
-msgid "_Restore database"
-msgstr ""
-
-#: bin/terp.glade:459
-msgid "_Backup database"
-msgstr ""
-
-#: bin/terp.glade:480
-msgid "Dro_p database"
-msgstr ""
-
-#: bin/terp.glade:507
-msgid "Administrator Password"
-msgstr ""
-
-#: bin/terp.glade:547
-msgid "_User"
-msgstr "_Utente"
-
-#: bin/terp.glade:557
-#, fuzzy
-msgid "_Preferences"
-msgstr "Preferenze"
-
-#: bin/terp.glade:584
-#, fuzzy
-msgid "_Send a request"
-msgstr "Manda una richiesta"
-
-#: bin/terp.glade:605
-#, fuzzy
-msgid "_Read my requests"
-msgstr "Leggi le mie richieste"
-
-#: bin/terp.glade:632
-#, fuzzy
-msgid "_Waiting Requests"
-msgstr "Richiesta"
-
-#: bin/terp.glade:645
-#, fuzzy
-msgid "For_m"
-msgstr "_Form"
-
-#: bin/terp.glade:655
-#, fuzzy
-msgid "_New"
-msgstr "Nuovo"
-
-#: bin/terp.glade:677
-#, fuzzy
-msgid "_Save"
-msgstr "Salva"
-
-#: bin/terp.glade:699
-#, fuzzy
-msgid "Copy this resource"
-msgstr "Rimuovi questa risorsa"
-
-#: bin/terp.glade:700
-msgid "Duplicate"
-msgstr ""
-
-#: bin/terp.glade:721
-#, fuzzy
-msgid "_Delete"
-msgstr "Cancella"
-
-#: bin/terp.glade:749
-#, fuzzy
-msgid "Find"
-msgstr "Campi"
-
-#: bin/terp.glade:771
-#, fuzzy
-msgid "Ne_xt"
-msgstr "Prossimo"
-
-#: bin/terp.glade:793
-#, fuzzy
-msgid "Pre_vious"
-msgstr "Precedente"
-
-#: bin/terp.glade:815
-msgid "Switch to list/form"
-msgstr ""
-
-#: bin/terp.glade:843
-msgid "_New Menu Tab"
-msgstr ""
-
-#: bin/terp.glade:865 bin/terp.glade:11161
-#, fuzzy
-msgid "Close Tab"
-msgstr "Chiudi"
-
-#: bin/terp.glade:887
-#, fuzzy
-msgid "Previous Tab"
-msgstr "Suggerimento precedente"
-
-#: bin/terp.glade:897 bin/terp.glade:11065
-#, fuzzy
-msgid "Next Tab"
-msgstr "Prossimo suggerimento"
-
-#: bin/terp.glade:913
-#, fuzzy
-msgid "View _logs"
-msgstr "Dettagli vista"
-
-#: bin/terp.glade:922
-msgid "_Go to resource ID..."
-msgstr ""
-
-#: bin/terp.glade:938
-#, fuzzy
-msgid "_Open"
-msgstr "Apri"
-
-#: bin/terp.glade:959
-#, fuzzy
-msgid "Reloa_d / Undo"
-msgstr "Ricarica"
-
-#: bin/terp.glade:987
-#, fuzzy
-msgid "Repeat latest _action"
-msgstr "Ripeti l'ultima azione"
-
-#: bin/terp.glade:1003
-msgid "_Preview in PDF"
-msgstr ""
-
-#: bin/terp.glade:1025
-msgid "Previe_w in editor"
-msgstr ""
-
-#: bin/terp.glade:1052
-#, fuzzy
-msgid "Expor_t data..."
-msgstr "Esporta dati..."
-
-#: bin/terp.glade:1073
-#, fuzzy
-msgid "I_mport data..."
-msgstr "Importa dati..."
-
-#: bin/terp.glade:1086
-msgid "_Options"
-msgstr "_Opzioni"
-
-#: bin/terp.glade:1095
-#, fuzzy
-msgid "_Menubar"
-msgstr "Menubar"
-
-#: bin/terp.glade:1105
-#, fuzzy
-msgid "Text _and Icons"
-msgstr "Testo e Icone"
-
-#: bin/terp.glade:1115
-#, fuzzy
-msgid "_Icons only"
-msgstr "Solo icone"
-
-#: bin/terp.glade:1126
-#, fuzzy
-msgid "_Text only"
-msgstr "Solo testo"
-
-#: bin/terp.glade:1141
-msgid "Client Mode"
-msgstr ""
-
-#: bin/terp.glade:1163
-msgid "Normal"
-msgstr ""
-
-#: bin/terp.glade:1173
-msgid "Mode PDA"
-msgstr ""
-
-#: bin/terp.glade:1188
-#, fuzzy
-msgid "_Theme"
-msgstr "Albero"
-
-#: bin/terp.glade:1210
-#, fuzzy
-msgid "Tiny ERP Theme"
-msgstr "Tiny ERP - Licenza"
-
-#: bin/terp.glade:1219
-msgid "Aqua OS X"
-msgstr ""
-
-#: bin/terp.glade:1247
-#, fuzzy
-msgid "_Forms"
-msgstr "_Form"
-
-#: bin/terp.glade:1257
-msgid "Right Toolbar"
-msgstr ""
-
-#: bin/terp.glade:1271
-#, fuzzy
-msgid "_Print"
-msgstr "Stampa"
-
-#: bin/terp.glade:1292
-#, fuzzy
-msgid "Previe_w before print"
-msgstr "Anteprima di stampa"
-
-#: bin/terp.glade:1312
-#, fuzzy
-msgid "_Save options"
-msgstr "Salva le opzioni"
-
-#: bin/terp.glade:1337
-#, fuzzy
-msgid "_Plugins"
-msgstr "Plugins"
-
-#: bin/terp.glade:1347
-#, fuzzy
-msgid "_Execute a plugin"
-msgstr "Esegui un Plugin"
-
-#: bin/terp.glade:1372
-#, fuzzy
-msgid "_Help"
-msgstr "Aiuto"
-
-#: bin/terp.glade:1381 bin/terp.glade:10060
-#, fuzzy
-msgid "Support Request"
-msgstr "Manda la richiesta di supporto"
-
-#: bin/terp.glade:1408
-msgid "User _Manual"
-msgstr ""
-
-#: bin/terp.glade:1429
-msgid "_Contextual Help"
-msgstr ""
-
-#: bin/terp.glade:1451
-#, fuzzy
-msgid "_Tips"
-msgstr "Suggerimenti"
-
-#: bin/terp.glade:1472
-#, fuzzy
-msgid "Keyboard Shortcuts"
-msgstr "Scorciatoie"
-
-#: bin/terp.glade:1487
-#, fuzzy
-msgid "_Licence"
-msgstr "Licenza"
-
-#: bin/terp.glade:1508
-#, fuzzy
-msgid "_About..."
-msgstr "Circa..."
-
-#: bin/terp.glade:1550 bin/terp.glade:2733
-msgid "Create a new resource"
-msgstr "Crea una nuova risorsa"
-
-#: bin/terp.glade:1566
-msgid "Edit / Save this resource"
-msgstr "Modifica / Salva questa risorsa"
-
-#: bin/terp.glade:1595
-msgid "Delete this resource"
-msgstr "Cancella questa risorsa"
-
-#: bin/terp.glade:1624
-#, fuzzy
-msgid "Find a resource"
-msgstr "Cerca risorsa"
-
-#: bin/terp.glade:1640
-msgid "Go to previous matched search"
-msgstr "vai alla precedente ricerca abbinata"
-
-#: bin/terp.glade:1656
-msgid "Go to next matched resource"
-msgstr "vai alla precedente risorsa abbinata"
-
-#: bin/terp.glade:1672
-msgid "Switch current view: form / list"
-msgstr ""
-
-#: bin/terp.glade:1673
-msgid "Other View"
-msgstr ""
-
-#: bin/terp.glade:1703
-msgid "Launch actions about this resource"
-msgstr "Lancia azioni su questa risorsa"
-
-#: bin/terp.glade:1721
-msgid "Print documents"
-msgstr "Stampa documenti"
-
-#: bin/terp.glade:1750
-#, fuzzy
-msgid "Add an attachment to this resource"
-msgstr "Lancia azioni su questa risorsa"
-
-#: bin/terp.glade:1751
-msgid "Attachement"
-msgstr "Allegato"
-
-#: bin/terp.glade:1781
-msgid "Close this window"
-msgstr "Chiudi questa finestra"
-
-#: bin/terp.glade:1842
-msgid "Requests:"
-msgstr "Richiesta"
-
-#: bin/terp.glade:1877
-msgid "Read my Requests"
-msgstr "Leggi la mia Richiesta"
-
-#: bin/terp.glade:1905
-msgid "Send a new request"
-msgstr "Manda una nuova Richiesta"
-
-#: bin/terp.glade:1960
-msgid "Tiny ERP - Tree Resources"
-msgstr "Tiny ERP - Albero Risorse"
-
-#: bin/terp.glade:2093
-msgid "Shortcuts"
-msgstr "Scorciatoie"
-
-#: bin/terp.glade:2190
-msgid "Tiny ERP - Forms"
-msgstr "Tiny ERP - Forms"
-
-#: bin/terp.glade:2236
-msgid "State:"
-msgstr "Stato:"
-
-#: bin/terp.glade:2282
-msgid "Tiny ERP - About"
-msgstr "Tiny ERP - About"
-
-#: bin/terp.glade:2337
-msgid ""
-"<b>About Tiny ERP</b>\n"
-"<i>The most advanced Open Source ERP &amp; CRM !</i>"
-msgstr ""
-
-#: bin/terp.glade:2402
-#, fuzzy
-msgid ""
-"\n"
-"Tiny ERP - GTK Client - v%s\n"
-"\n"
-"Tiny ERP is an Open Source ERP+CRM\n"
-"for small to medium businesses.\n"
-"\n"
-"The whole source code is distributed under\n"
-"the terms of the GNU Public Licence.\n"
-"\n"
-"(c) 2003-TODAY, Tiny sprl\n"
-"\n"
-"More Info on www.TinyERP.com !"
-msgstr ""
-"\n"
-"Tiny ERP - GTK Client - v2.0\n"
-"\n"
-"Tiny ERP e un ERP+CRM Open Source per\n"
-"la piccola e media impresa.\n"
-"\n"
-"L'intero codice sorgente e distribuito secondo\n"
-"i termini della GNU Public Licence.\n"
-"\n"
-"(c) 2003-TODAY, Tiny sprl\n"
-"\n"
-"Maggiori informazioni su: www.TinyERP.com !"
-
-#: bin/terp.glade:2449
-#, fuzzy
-msgid "_Tiny ERP"
-msgstr "Tiny ERP"
-
-#: bin/terp.glade:2497
-msgid ""
-"\n"
-"(c) 2003-TODAY - Tiny sprl\n"
-"Tiny ERP is a product of Tiny sprl:\n"
-"\n"
-"Tiny sprl\n"
-"21 Rue du Vieux Chateau\n"
-"BE-1457 Walhain\n"
-"Belgium\n"
-"\n"
-"Tel/Fax: +32.10.68.94.39\n"
-"Mail: sales@tiny.be\n"
-"Web: http://tiny.be"
-msgstr ""
-
-#: bin/terp.glade:2544
-#, fuzzy
-msgid "_Contact"
-msgstr "Contatto"
-
-#: bin/terp.glade:2586
-msgid "Tiny ERP - forms widget"
-msgstr "Tiny ERP - forms widget"
-
-#: bin/terp.glade:2637
-msgid "Open the calendar widget"
-msgstr "Apri il calendario"
-
-#: bin/terp.glade:2760
-#, fuzzy
-msgid "Search / Open a resource"
-msgstr "Cerca risorsa"
-
-#: bin/terp.glade:2868
-msgid "Titre"
-msgstr "Titolo"
-
-#: bin/terp.glade:2898
-#, fuzzy
-msgid "Set Default"
-msgstr "Imposta a _Default"
-
-#: bin/terp.glade:2918 bin/terp.glade:3200
-msgid "Create a new entry"
-msgstr "Crea una nuova entrata"
-
-#: bin/terp.glade:2945
-#, fuzzy
-msgid "Edit this entry"
-msgstr "Rimuovi questa entrata"
-
-#: bin/terp.glade:2972
-msgid "Remove this entry"
-msgstr "Rimuovi questa entrata"
-
-#: bin/terp.glade:3010
-msgid "Previous"
-msgstr "Precedente"
-
-#: bin/terp.glade:3037
-#, fuzzy
-msgid "(0/0)"
-msgstr "(1/1)"
-
-#: bin/terp.glade:3058
-msgid "Next"
-msgstr "Prossimo"
-
-#: bin/terp.glade:3218
-msgid "Remove selected entry"
-msgstr "Rimuovi elementi selezionati"
-
-#: bin/terp.glade:3283
-msgid "label74"
-msgstr "label74"
-
-#: bin/terp.glade:3470 bin/terp.glade:6027 bin/terp.glade:6128
-#: bin/terp.glade:6328
-msgid "-"
-msgstr "-"
-
-#: bin/terp.glade:3867
-msgid "Tiny ERP - Date selection"
-msgstr "Tiny ERP - selezione data"
-
-#: bin/terp.glade:3948 bin/terp.glade:10603
-msgid "Tiny ERP - Confirmation"
-msgstr "Tiny ERP - Conferma"
-
-#: bin/terp.glade:4034 bin/terp.glade:10702
-msgid "Hello World!"
-msgstr "Salve Mondo!"
-
-#: bin/terp.glade:4064
-msgid "Tiny ERP - selection"
-msgstr "Tiny ERP - selezione"
-
-#: bin/terp.glade:4135
-msgid "Your selection:"
-msgstr "LA tua selezione"
-
-#: bin/terp.glade:4203
-msgid "Tiny ERP - Filter"
-msgstr "Tiny ERP - Filtro"
-
-#: bin/terp.glade:4273
-#, fuzzy
-msgid "S_earch:"
-msgstr "Ricerca:"
-
-#: bin/terp.glade:4315
-#, fuzzy
-msgid "on _field:"
-msgstr "sul campo:"
-
-#: bin/terp.glade:4336
-msgid "test"
-msgstr ""
-
-#: bin/terp.glade:4349
-#, fuzzy
-msgid "_Select"
-msgstr "Seleziona"
-
-#: bin/terp.glade:4366
-#, fuzzy
-msgid "_Unselect"
-msgstr "deseleziona"
-
-#: bin/terp.glade:4393
-#, fuzzy
-msgid "Filter: "
-msgstr "Filtra: "
-
-#: bin/terp.glade:4415
-#, fuzzy
-msgid "AL_L"
-msgstr "Tutto"
-
-#: bin/terp.glade:4432
-#, fuzzy
-msgid "N_ONE"
-msgstr "Niente"
-
-#: bin/terp.glade:4504
-msgid "<b><u>Actions</u></b>"
-msgstr "<b><u>Azioni</u></b>"
-
-#: bin/terp.glade:4540
-msgid "Tiny ERP - Dialog"
-msgstr "Tiny ERP - Dialogo"
-
-#: bin/terp.glade:4584
-msgid "Set to _Default"
-msgstr "Imposta a _Default"
-
-#: bin/terp.glade:4611
-msgid "Value _Preference"
-msgstr "Valore _Preferenza"
-
-#: bin/terp.glade:4634
-msgid "Tiny ERP, Field Preference target"
-msgstr "Tiny ERP, Campo preferenza obiettivo"
-
-#: bin/terp.glade:4705
-#, fuzzy
-msgid "Default _value:"
-msgstr "Valore di default"
-
-#: bin/terp.glade:4796
-#, fuzzy
-msgid "_Domain:"
-msgstr "Dominio:"
-
-#: bin/terp.glade:4821
-#, fuzzy
-msgid "Field _Name:"
-msgstr "Nome Campo"
-
-#: bin/terp.glade:4879
-msgid "<b>Value applicable if:</b>"
-msgstr "<b>Valore applicabile se:</b>"
-
-#: bin/terp.glade:4934
-#, fuzzy
-msgid "_only for you"
-msgstr "solo per te"
-
-#: bin/terp.glade:4953
-#, fuzzy
-msgid "for _all users"
-msgstr "per tutti gli utenti"
-
-#: bin/terp.glade:4976
-msgid "<b>Value applicable for:</b>"
-msgstr "<b>Valore applicabile per:</b>"
-
-#: bin/terp.glade:5016
-msgid "Tiny ERP - Export to CSV"
-msgstr "Tiny ERP - Esporta su CSV"
-
-#: bin/terp.glade:5129
-#, fuzzy
-msgid "<b>Predefined exports</b>"
-msgstr "<b>Campi da esportare</b>"
-
-#: bin/terp.glade:5204 bin/terp.glade:12005
-msgid "<b>All fields</b>"
-msgstr "<b>Tutti i campi</b>"
-
-#: bin/terp.glade:5280 bin/terp.glade:12081
-#, fuzzy
-msgid "_Add"
-msgstr "Aggiungi"
-
-#: bin/terp.glade:5355 bin/terp.glade:12156
-#, fuzzy
-msgid "_Remove"
-msgstr "Rimuovi"
-
-#: bin/terp.glade:5430
-#, fuzzy
-msgid "_Nothing"
-msgstr "Niente"
-
-#: bin/terp.glade:5516
-#, fuzzy
-msgid "Save List"
-msgstr "Salva le opzioni"
-
-#: bin/terp.glade:5598
-msgid "<b>Fields to export</b>"
-msgstr "<b>Campi da esportare</b>"
-
-#: bin/terp.glade:5646
-#, fuzzy
-msgid ""
-"Open in Excel\n"
-"Save as CSV"
-msgstr "Apri in Excel"
-
-#: bin/terp.glade:5671
-#, fuzzy
-msgid "Add _field names"
-msgstr "Aggiungi nomi campo"
-
-#: bin/terp.glade:5691
-#, fuzzy
-msgid "<b>Opti_ons</b>"
-msgstr "<b>Opzioni</b>"
-
-#: bin/terp.glade:5728
-msgid "Tiny ERP - Search"
-msgstr "Tiny ERP - Cerca"
-
-#: bin/terp.glade:5868
-#, fuzzy
-msgid "_Limit:"
-msgstr "Limite:"
-
-#: bin/terp.glade:5909
-#, fuzzy
-msgid "Off_set:"
-msgstr "scostamento"
-
-#: bin/terp.glade:5952
-msgid "Advanced search parameters"
-msgstr ""
-
-#: bin/terp.glade:5980
-msgid "Tiny ERP - Search Widgets"
-msgstr "Tiny ERP - Cerca Widgets"
-
-#: bin/terp.glade:6081
-msgid "Date de début"
-msgstr "Data inizio"
-
-#: bin/terp.glade:6250
-msgid "Search with this name"
-msgstr "Cerca con questo nome"
-
-#: bin/terp.glade:6277
-msgid "Clear the field"
-msgstr "Pulisci il campo"
-
-#: bin/terp.glade:6342
-msgid "Yes"
-msgstr "Si"
-
-#: bin/terp.glade:6362
-msgid "No"
-msgstr "No"
-
-#: bin/terp.glade:6405
-msgid ""
-"\n"
-"Yes\n"
-"No"
-msgstr ""
-"\n"
-"Si\n"
-"No"
-
-#: bin/terp.glade:6428
-msgid "Tiny ERP - Attachment"
-msgstr "Tiny ERP - Allegato"
-
-#: bin/terp.glade:6496
-msgid "Filename:"
-msgstr "Nome File: "
-
-#: bin/terp.glade:6564
-msgid "Description:"
-msgstr "Descrizione:"
-
-#: bin/terp.glade:6664
-#, fuzzy
-msgid "Save text"
-msgstr "Salva"
-
-#: bin/terp.glade:6911
-msgid "Tiny ERP - Error"
-msgstr "Tiny ERP - Errore"
-
-#: bin/terp.glade:6968
-msgid "Application Error !"
-msgstr "Errore Applicazione!"
-
-#: bin/terp.glade:7039
-msgid "Error 404"
-msgstr "Errore 404"
-
-#: bin/terp.glade:7060
-msgid "<b>Error code:</b>"
-msgstr "<b>codice errore:</b>"
-
-#: bin/terp.glade:7081
-msgid ""
-"This Page does not exist !\n"
-"Please retry"
-msgstr ""
-"Questa pagina non esiste!\n"
-"Riprova"
-
-#: bin/terp.glade:7103
-msgid "<i>Click on the Support Request tab if you need more help !</i>"
-msgstr "<i>Click on the Support Request tab if you need more help !"
-
-#: bin/terp.glade:7137
-#, fuzzy
-msgid "De_scription"
-msgstr "Descrizione"
-
-#: bin/terp.glade:7183
-msgid ""
-"Error details\n"
-"dqsdsqdqsdsd"
-msgstr ""
-"Dettagli errore\n"
-"dqsdsqdqsdsd"
-
-#: bin/terp.glade:7200
-#, fuzzy
-msgid "_Details"
-msgstr "Dettagli"
-
-#: bin/terp.glade:7239
-msgid ""
-"<b>Complete this form to submit your bug and/or request a support.</b>\n"
-"<i>\n"
-"Your request will be send to Tiny ERP and we will reply you shortly.\n"
-"Note that we may not reply you if your Service Company is not a Tiny ERP "
-"partner.\n"
-"</i>"
-msgstr ""
-"<b>Completa questo form per sottopporre il tuo bug e/o la richiesta do "
-"supporto.</b>\n"
-"<i>\n"
-"La tua rchiesta sara spedita a Tiny ERP e Vi risponderemo a breve.\n"
-"Note that we may not reply you if your Service Company is not a Tiny ERP "
-"partner.\n"
-"</i>"
-
-#: bin/terp.glade:7285
-msgid "<b>Your name: </b>"
-msgstr "<b>Il Vostro nome: </b>"
-
-#: bin/terp.glade:7309
-msgid "<b>Your Company: </b>"
-msgstr "<b>La Vostra societa: </b>"
-
-#: bin/terp.glade:7333
-msgid "<b>Your Email: </b>"
-msgstr "<b>il vostr indirizzo Email: </b>"
-
-#: bin/terp.glade:7399
-msgid "Explain what you did: "
-msgstr "Spiegate la vostra attivita"
-
-#: bin/terp.glade:7423
-#, fuzzy
-msgid "Others Comments: "
-msgstr "Altre Note:"
-
-#: bin/terp.glade:7574
-msgid "Send Support Request"
-msgstr "Manda la richiesta di supporto"
-
-#: bin/terp.glade:7617
-#, fuzzy
-msgid "<b>support contract id  </b>"
-msgstr "<b>Support Request</b>"
-
-#: bin/terp.glade:7662 bin/terp.glade:10473
-msgid ""
-"Not Urgent\n"
-"Medium\n"
-"Urgent\n"
-"Very Urgent"
-msgstr ""
-"Non Urgente\n"
-"Meda\n"
-"Urgente\n"
-"Molto Urgente"
-
-#: bin/terp.glade:7680 bin/terp.glade:10491
-#, fuzzy
-msgid "Emergency: "
-msgstr "Urgenza:"
-
-#: bin/terp.glade:7704
-msgid "Phone Number: "
-msgstr "Numero di telefono:"
-
-#: bin/terp.glade:7788
-#, fuzzy
-msgid "<b>_Support Request</b>"
-msgstr "<b>Support Request</b>"
-
-#: bin/terp.glade:7823
-msgid "Tiny ERP - Ressource Edit"
-msgstr "Tiny ERP - Modifica Risaorsa"
-
-#: bin/terp.glade:7892
-msgid "Tiny ERP - Link"
-msgstr "Tiny ERP - Link"
-
-#: bin/terp.glade:7988
-msgid "Tiny ERP - List"
-msgstr "Tiny ERP - Lista"
-
-#: bin/terp.glade:8056
-msgid "Tiny ERP - Preferences"
-msgstr "Tiny ERP - Preferenze"
-
-#: bin/terp.glade:8123
-#, fuzzy
-msgid "<b>Edit resource preferences</b>"
-msgstr "<b>Modifica le preferenze di risorsa</b>"
-
-#: bin/terp.glade:8170
-msgid "Tip of the Day"
-msgstr "Suggerimento del giorno"
-
-#: bin/terp.glade:8244
-#, fuzzy
-msgid "Pre_vious Tip"
-msgstr "Suggerimento precedente"
-
-#: bin/terp.glade:8316
-#, fuzzy
-msgid "Ne_xt Tip"
-msgstr "Prossimo suggerimento"
-
-#: bin/terp.glade:8412
-#, fuzzy
-msgid "_Display a new tip next time ?"
-msgstr "Mostro un nuovo suggerimento la prossima volta?"
-
-#: bin/terp.glade:8453
-msgid "Tiny ERP - Licence"
-msgstr "Tiny ERP - Licenza"
-
-#: bin/terp.glade:8510
-msgid "Tiny ERP license"
-msgstr "Tiny ERP - Licenza"
-
-#: bin/terp.glade:8680
-#, fuzzy
-msgid "Tiny ERP - Date & Time selection"
-msgstr "Tiny ERP - selezione data"
-
-#: bin/terp.glade:8756
-msgid "Hour :"
-msgstr ""
-
-#: bin/terp.glade:8796
-msgid "Minute :"
-msgstr ""
-
-#: bin/terp.glade:8867 bin/terp.glade:11876
-msgid "dialog1"
-msgstr "dialog1"
-
-#: bin/terp.glade:8939
-#, fuzzy
-msgid "Search ID:"
-msgstr "Ricerca:"
-
-#: bin/terp.glade:9018
-#, fuzzy
-msgid "Tiny ERP Survey"
-msgstr "Tiny ERP"
-
-#: bin/terp.glade:9075
-msgid "<b>Tiny ERP Survey</b>"
-msgstr ""
-
-#: bin/terp.glade:9096
-msgid ""
-"<i>Please fill in the following form in order to help us to improve Tiny ERP "
-"and better target new developments.</i>"
-msgstr ""
-
-#: bin/terp.glade:9145
-msgid "Industry:"
-msgstr ""
-
-#: bin/terp.glade:9170
-msgid "# Employees:"
-msgstr ""
-
-#: bin/terp.glade:9261
-msgid "Country:"
-msgstr ""
-
-#: bin/terp.glade:9285
-#, fuzzy
-msgid "Your Role:"
-msgstr "LA tua selezione"
-
-#: bin/terp.glade:9342
-#, fuzzy
-msgid "System:"
-msgstr "Stato:"
-
-#: bin/terp.glade:9402
-msgid "How did you hear about us:"
-msgstr ""
-
-#: bin/terp.glade:9448
-msgid "Open Source: "
-msgstr ""
-
-#: bin/terp.glade:9767
-#, fuzzy
-msgid "<b>Your company</b>"
-msgstr "<b>La Vostra societa: </b>"
-
-#: bin/terp.glade:9819
-msgid "We plan to use Tiny ERP"
-msgstr ""
-
-#: bin/terp.glade:9838
-msgid "We plan to offer services on Tiny ERP"
-msgstr ""
-
-#: bin/terp.glade:9878
-msgid ""
-"Write here any comment, note or suggestion you have concerning Tiny ERP. \n"
-"Tell us which ERP systems you used before, and what you plan to do with Tiny "
-"ERP..."
-msgstr ""
-
-#: bin/terp.glade:9897
-#, fuzzy
-msgid "<b>Your interrest</b>"
-msgstr "<b>Il Vostro nome: </b>"
-
-#: bin/terp.glade:9952
-msgid "E-Mail:"
-msgstr ""
-
-#: bin/terp.glade:9997
-msgid ""
-"(Get Tiny ERP announces, documentation and new releases by email, maximum 6 "
-"mails a year.)"
-msgstr ""
-
-#: bin/terp.glade:10025
-msgid "<b>Keep Informed</b>"
-msgstr ""
-
-#: bin/terp.glade:10143
-#, fuzzy
-msgid ""
-"<b>Complete this form to submit your bug and/or make a request for support.</"
-"b>\n"
-"<i>\n"
-"Your request will be sent to the Tiny ERP team and we will reply shortly.\n"
-"Note that we may not reply if you do not have a support contract with Tiny "
-"or an official partner.</i>"
-msgstr ""
-"<b>Completa questo form per sottopporre il tuo bug e/o la richiesta do "
-"supporto.</b>\n"
-"<i>\n"
-"La tua rchiesta sara spedita a Tiny ERP e Vi risponderemo a breve.\n"
-"Note that we may not reply you if your Service Company is not a Tiny ERP "
-"partner.\n"
-"</i>"
-
-#: bin/terp.glade:10188
-#, fuzzy
-msgid "<b>Your name:</b>"
-msgstr "<b>Il Vostro nome: </b>"
-
-#: bin/terp.glade:10212
-#, fuzzy
-msgid "<b>Your Company:</b>"
-msgstr "<b>La Vostra societa: </b>"
-
-#: bin/terp.glade:10236
-#, fuzzy
-msgid "<b>Your email:</b>"
-msgstr "<b>il vostr indirizzo Email: </b>"
-
-#: bin/terp.glade:10302
-#, fuzzy
-msgid "Explain your problem:"
-msgstr "Spiegate la vostra attivita"
-
-#: bin/terp.glade:10326
-msgid "Other comments:"
-msgstr ""
-
-#: bin/terp.glade:10428
-#, fuzzy
-msgid "<b>Support contract id:</b>"
-msgstr "<b>Support Request</b>"
-
-#: bin/terp.glade:10515
-#, fuzzy
-msgid "Phone number:"
-msgstr "Numero di telefono:"
-
-#: bin/terp.glade:10732
-msgid "Keyboard shortcuts"
-msgstr ""
-
-#: bin/terp.glade:10801
-msgid "<Ctrl> + O"
-msgstr ""
-
-#: bin/terp.glade:10825
-#, fuzzy
-msgid "Connect"
-msgstr "Connetti..."
-
-#: bin/terp.glade:10849
-msgid "<Ctrl> + F"
-msgstr ""
-
-#: bin/terp.glade:10873
-#, fuzzy
-msgid "Find / Search"
-msgstr "Fine ricerca"
-
-#: bin/terp.glade:10897
-msgid "<Ctrl> + D"
-msgstr ""
-
-#: bin/terp.glade:10921
-msgid "Delete"
-msgstr "Cancella"
-
-#: bin/terp.glade:10945
-msgid "<Ctrl> + N"
-msgstr ""
-
-#: bin/terp.glade:10969
-msgid "New"
-msgstr "Nuovo"
-
-#: bin/terp.glade:10993
-msgid "<Ctrl> + <PgUp>"
-msgstr ""
-
-#: bin/terp.glade:11017
-#, fuzzy
-msgid "Previous tab"
-msgstr "Precedente"
-
-#: bin/terp.glade:11041
-msgid "<Ctrl> + <PgDn>"
-msgstr ""
-
-#: bin/terp.glade:11089
-msgid "<Ctrl> + S"
-msgstr ""
-
-#: bin/terp.glade:11113
-msgid "<Ctrl> + W"
-msgstr ""
-
-#: bin/terp.glade:11137
-msgid "Save"
-msgstr "Salva"
-
-#: bin/terp.glade:11185
-msgid "<PgUp>"
-msgstr ""
-
-#: bin/terp.glade:11209
-msgid "<PgDn>"
-msgstr ""
-
-#: bin/terp.glade:11233
-#, fuzzy
-msgid "Previous record"
-msgstr "Precedente"
-
-#: bin/terp.glade:11257
-#, fuzzy
-msgid "Next record"
-msgstr "Prossimo: Nessun record selezionato"
-
-#: bin/terp.glade:11281
-msgid "<Ctrl> + L"
-msgstr ""
-
-#: bin/terp.glade:11305
-msgid "Switch view mode"
-msgstr ""
-
-#: bin/terp.glade:11329
-msgid "<b>Shortcuts for TinyERP</b>"
-msgstr ""
-
-#: bin/terp.glade:11376
-msgid "<Ctrl> + <Enter>"
-msgstr ""
-
-#: bin/terp.glade:11400
-#, fuzzy
-msgid "Save and Close window"
-msgstr "Chiudi finestra"
-
-#: bin/terp.glade:11424
-msgid "<i>When editing a resource in a popup window</i>"
-msgstr ""
-
-#: bin/terp.glade:11448
-msgid "<Esc>"
-msgstr ""
-
-#: bin/terp.glade:11472
-msgid "Close window without saving"
-msgstr ""
-
-#: bin/terp.glade:11502
-#, fuzzy
-msgid "Main Shortcuts"
-msgstr "Scorciatoie"
-
-#: bin/terp.glade:11530
-msgid "<b>Shortcuts in text entries</b>"
-msgstr ""
-
-#: bin/terp.glade:11554
-msgid "<CTRL> + X"
-msgstr ""
-
-#: bin/terp.glade:11578
-msgid "<CTRL> + C"
-msgstr ""
-
-#: bin/terp.glade:11602
-msgid "<CTRL> + V"
-msgstr ""
-
-#: bin/terp.glade:11626
-#, fuzzy
-msgid "Cut selected text"
-msgstr "Rimuovi elementi selezionati"
-
-#: bin/terp.glade:11650
-#, fuzzy
-msgid "Copy selected text"
-msgstr "Rimuovi elementi selezionati"
-
-#: bin/terp.glade:11674
-#, fuzzy
-msgid "Paste selected text"
-msgstr "Rimuovi elementi selezionati"
-
-#: bin/terp.glade:11698
-msgid "<TAB>"
-msgstr ""
-
-#: bin/terp.glade:11722
-msgid "Next editable widget"
-msgstr ""
-
-#: bin/terp.glade:11746
-msgid "<SHIFT> + <TAB>"
-msgstr ""
-
-#: bin/terp.glade:11770
-msgid "Previous editable widget"
-msgstr ""
-
-#: bin/terp.glade:11794
-msgid "<ENTER>"
-msgstr ""
-
-#: bin/terp.glade:11818
-#, fuzzy
-msgid "Auto-Complete text field"
-msgstr "Pulisci il campo"
-
-#: bin/terp.glade:11848
-#, fuzzy
-msgid "Edition Widgets"
-msgstr "Modifica documento: "
-
-#: bin/terp.glade:12231
-#, fuzzy
-msgid "N_othing"
-msgstr "Niente"
-
-#: bin/terp.glade:12317
-msgid "Auto-Detect"
-msgstr ""
-
-#: bin/terp.glade:12399
-msgid "<b>Fields to import</b>"
-msgstr "<b>Campi da importare</b>"
-
-#: bin/terp.glade:12463
-#, fuzzy
-msgid "File to Import: "
-msgstr "<b>Campi da importare</b>"
-
-#: bin/terp.glade:12587
-#, fuzzy
-msgid "Server"
-msgstr "Server:"
-
-#: bin/terp.glade:12648
-msgid "<b>Connect to a Tiny ERP server</b>"
-msgstr ""
-
-#: bin/terp.glade:12690
-msgid "Port:"
-msgstr "Port:"
-
-#: bin/terp.glade:12740
-msgid "8069"
-msgstr "8069"
-
-#: bin/terp.glade:12758
-#, fuzzy
-msgid "Secure connection:"
-msgstr "Seleziona la tua azione"
-
-#: bin/terp.glade:12842
-msgid "Choose a database..."
-msgstr ""
-
-#: bin/terp.glade:12910
-msgid "<b>Backup a database</b>"
-msgstr ""
-
-#: bin/terp.glade:12952
-msgid "Database: "
-msgstr ""
-
-#: bin/terp.glade:12980 bin/terp.glade:13363 bin/terp.glade:13771
-#: bin/terp.glade:14280
-#, fuzzy
-msgid "http://localhost:8069"
-msgstr "localhost"
-
-#: bin/terp.glade:13177
-msgid "Restore a database"
-msgstr ""
-
-#: bin/terp.glade:13244
-msgid "<b>Restore a database</b>"
-msgstr ""
-
-#: bin/terp.glade:13310 bin/terp.glade:13718
-msgid "New database name: "
-msgstr ""
-
-#: bin/terp.glade:13481 bin/terp.glade:13890
-msgid "(must not contain any special char)"
-msgstr ""
-
-#: bin/terp.glade:13544
-#, fuzzy
-msgid "Operation in progress"
+"Operation failed !\n"
+"I/O error"
 msgstr ""
 "Operazione fallita!\n"
 "Errore I/O"
 
-#: bin/terp.glade:13571
-msgid "Please wait, this operation may take a while..."
+#: modules/gui/window/win_export.py:85
+msgid "Error Opening Excel !"
+msgstr "Errore aprendo excel!"
+
+#: modules/gui/window/win_export.py:87
+#, fuzzy
+msgid ""
+"Function only available for MS Office !\n"
+"Sorry, OOo users :("
+msgstr ""
+"Funzione disponibile solo per MS Office!\n"
+"Spiacenti per gli utenti OOo :("
+
+#: modules/gui/window/win_export.py:275
+#, fuzzy
+msgid "Export Data"
+msgstr "Esporta Dati"
+
+#: modules/gui/window/win_preference.py:51
+msgid "Preferences"
+msgstr "Preferenze"
+
+#: modules/gui/window/win_preference.py:75
+msgid "Preference"
+msgstr "Preferenza"
+
+#: modules/gui/window/view_tree/view_tree_sc.py:41
+#: modules/gui/window/form.py:209
+msgid "ID"
+msgstr "ID"
+
+#: modules/gui/window/view_tree/view_tree_sc.py:46
+msgid "Description"
+msgstr "Descrizione"
+
+#: modules/gui/window/view_tree/parse.py:42
+msgid "Tree"
+msgstr "Albero"
+
+#: modules/gui/window/form.py:109 modules/gui/window/tree.py:81
+msgid "Reload"
+msgstr "Ricarica"
+
+#: modules/gui/window/form.py:183 modules/gui/window/form.py:384
+#, fuzzy
+msgid "No resource selected !"
+msgstr "Nessuna risorsa selezionata!"
+
+#: modules/gui/window/form.py:203
+#, fuzzy
+msgid "You have to select one resource!"
+msgstr "Seleziona una risorsa!"
+
+#: modules/gui/window/form.py:210
+msgid "Creation User"
 msgstr ""
 
-#: bin/terp.glade:13615
-#, fuzzy
-msgid "Create a new database"
-msgstr "Crea una nuova entrata"
+#: modules/gui/window/form.py:211
+msgid "Creation Date"
+msgstr ""
 
-#: bin/terp.glade:13676
+#: modules/gui/window/form.py:212
+msgid "Latest Modification by"
+msgstr ""
+
+#: modules/gui/window/form.py:213
+msgid "Latest Modification Date"
+msgstr ""
+
+#: modules/gui/window/form.py:214
+msgid "Owner"
+msgstr ""
+
+#: modules/gui/window/form.py:215
+msgid "Group Owner"
+msgstr ""
+
+#: modules/gui/window/form.py:216
+msgid "Access Level"
+msgstr ""
+
+#: modules/gui/window/form.py:227
 #, fuzzy
-msgid "<b>Create a new database</b>"
+msgid "Are you sure to remove this record ?"
+msgstr ""
+"Sei sicuro di voler\n"
+"rimuovere questo record?"
+
+#: modules/gui/window/form.py:229
+#, fuzzy
+msgid "Are you sure to remove those records ?"
+msgstr ""
+"Sei sicuro di voler\n"
+"rimuovere questo record?"
+
+#: modules/gui/window/form.py:233
+#, fuzzy
+msgid "Resources not removed !"
+msgstr "Risorsa rimossa"
+
+#: modules/gui/window/form.py:235
+#, fuzzy
+msgid "Resources removed."
+msgstr "Risorsa rimossa"
+
+#: modules/gui/window/form.py:265
+msgid "Working now on the duplicated document !"
+msgstr ""
+
+#: modules/gui/window/form.py:273
+#, fuzzy
+msgid "Document saved !"
+msgstr "Opzioni salvate!"
+
+#: modules/gui/window/form.py:275
+msgid "Invalid form !"
+msgstr ""
+
+#: modules/gui/window/form.py:331
+msgid "No record selected!"
+msgstr "Nessun record selezionato!"
+
+#: modules/gui/window/form.py:359
+#, fuzzy
+msgid "No record selected"
+msgstr "Nessun record selezionato!"
+
+#: modules/gui/window/form.py:364
+msgid "New document"
+msgstr "Nuovo Documento"
+
+#: modules/gui/window/form.py:366
+#, fuzzy
+msgid "Editing document (id: "
+msgstr "Modifica documento: "
+
+#: modules/gui/window/form.py:367
+msgid "Record: "
+msgstr "Record: "
+
+#: modules/gui/window/form.py:382
+#, fuzzy
+msgid "No preference available for this resource !"
+msgstr "Nessuna preferenza disponibile per questa risorsa"
+
+#: modules/gui/window/form.py:388
+msgid ""
+"This record has been modified\n"
+"do you want to save it ?"
+msgstr ""
+
+#: modules/gui/window/win_search.py:83
+#, fuzzy, python-format
+msgid "Tiny ERP Search: %s"
+msgstr "Tiny ERP - Cerca"
+
+#: modules/gui/window/win_search.py:84
+#, fuzzy, python-format
+msgid "Tiny ERP Search: %s (%%d result(s))"
+msgstr "Tiny ERP - Cerca Widgets"
+
+#: modules/gui/window/win_selection.py:55
+msgid "Name"
+msgstr "Nome"
+
+#: modules/gui/window/win_selection.py:59
+msgid "Ressource Name"
+msgstr "Nome Risorsa"
+
+#: modules/gui/window/win_selection.py:59
+msgid "Names"
+msgstr "Nomi"
+
+#: modules/gui/window/tree.py:82
+msgid "Switch View"
+msgstr ""
+
+#: modules/gui/window/tree.py:83
+msgid "Changt root"
+msgstr "Cambia radice"
+
+#: modules/gui/window/tree.py:84 modules/gui/window/tree.py:85
+msgid "Open"
+msgstr "Apri"
+
+#: modules/gui/window/tree.py:86 modules/gui/window/tree.py:87
+msgid "Print"
+msgstr "Stampa"
+
+#: modules/gui/window/tree.py:88
+msgid "Close"
+msgstr "Chiudi"
+
+#: modules/gui/window/tree.py:192 modules/gui/window/tree.py:237
+msgid "No resource selected!"
+msgstr "Nessuna risorsa selezionata!"
+
+#: modules/gui/window/tree.py:203
+msgid ""
+"Are you sure you want\n"
+"to remove this record?"
+msgstr ""
+"Sei sicuro di voler\n"
+"rimuovere questo record?"
+
+#: modules/gui/window/tree.py:208
+msgid "Error removing resource!"
+msgstr "Errore eliminando la risorsa"
+
+#: modules/gui/window/tree.py:219
+msgid "Unable to chroot: no tree resource selected"
+msgstr "Impossibile fare chroot: nessun albero di risorse selezionato"
+
+#: modules/gui/window/win_import.py:54
+msgid "XML-RPC error !"
+msgstr ""
+
+#: modules/gui/window/win_import.py:57
+#, python-format
+msgid "Imported %d objects !"
+msgstr ""
+
+#: modules/gui/window/win_import.py:86 modules/gui/window/win_import.py:90
+msgid "Field name"
+msgstr "Nome campo"
+
+#: modules/gui/window/win_attach.py:110
+#, fuzzy
+msgid "Are you sure you want to remove this attachment ?"
+msgstr ""
+"Sei sicuro di voler\n"
+"rimuovere questo record?"
+
+#: modules/gui/window/win_attach.py:115 modules/gui/window/win_attach.py:137
+msgid "Select the destination file"
+msgstr "Seleziona il file di destinazione"
+
+#: modules/gui/window/win_attach.py:126
+msgid "Can not open file !"
+msgstr "Impossibile aprire il file!"
+
+#: modules/gui/window/win_attach.py:146 modules/gui/window/win_attach.py:248
+msgid "Can not write file !"
+msgstr "Impossibile scrivere il file!"
+
+#: modules/gui/window/win_attach.py:235
+msgid ""
+"Unable to preview image file !\n"
+"Verify the format."
+msgstr ""
+
+#: modules/gui/window/__init__.py:38
+msgid "Unknown Window"
+msgstr "Finestra sconosciuta"
+
+#: modules/action/main.py:51
+msgid "Nothing to print!"
+msgstr ""
+
+#: modules/action/main.py:67
+msgid "Printing aborted, too long delay !"
+msgstr "Stampa rimossa, troppo ritardo!"
+
+#: modules/action/main.py:71
+msgid "Error: "
+msgstr "Errore: "
+
+#: modules/action/main.py:155
+msgid "Select your action"
+msgstr "Seleziona la tua azione"
+
+#: modules/action/main.py:161
+msgid "No action defined!"
+msgstr "Nessuna azione definita"
+
+#: rpc.py:138 rpc.py:169
+msgid "Connection refused !"
+msgstr "Connessione rifiutata"
+
+#: rpc.py:139
+msgid "Connection refused!"
+msgstr "Connessione rifiutata!"
+
+#: rpc.py:180 rpc.py:188 rpc.py:190 widget/model/record.py:144
+msgid "Application Error"
+msgstr "Errore Applicazione"
+
+#: rpc.py:190
+msgid "View details"
+msgstr "Dettagli vista"
+
+#: widget/view/tree_gtk/editabletree.py:115
+msgid "Relation Field: F1 New   F2 Open/Search"
+msgstr ""
+
+#: widget/view/tree_gtk/editabletree.py:177
+#, python-format
+msgid "Warning; field \"%s\" is required !"
+msgstr ""
+
+#: widget/view/list.py:197 widget/view/form_gtk/many2one.py:328
+msgid "You must select a record to use the relation !"
+msgstr ""
+
+#: widget/view/form_gtk/binary.py:72
+msgid "Select the file to attach"
+msgstr "Selezionare il file da allegare"
+
+#: widget/view/form_gtk/binary.py:79
+msgid "Error reading the file"
+msgstr "Errore di lettura nel file"
+
+#: widget/view/form_gtk/binary.py:83
+msgid "Save attachment as..."
+msgstr "Salva allegato come..."
+
+#: widget/view/form_gtk/binary.py:89 printer/printer.py:171
+msgid "Error writing the file!"
+msgstr "Errore di scrittura nel file!"
+
+#: widget/view/form_gtk/binary.py:112
+#, python-format
+msgid "%d bytes"
+msgstr ""
+
+#: widget/view/form_gtk/many2one.py:52
+#: widget/view/form_gtk/one2many_list.py:44
+msgid "Tiny ERP - Link"
+msgstr "Tiny ERP - Link"
+
+#: widget/view/form_gtk/many2one.py:136 widget/view/form_gtk/reference.py:90
+msgid "Create a new resource"
 msgstr "Crea una nuova risorsa"
 
-#: bin/terp.glade:13974
+#: widget/view/form_gtk/many2one.py:137 widget/view/form_gtk/reference.py:91
 #, fuzzy
-msgid "Default language:"
-msgstr "Valore di default"
+msgid "Search / Open a resource"
+msgstr "Cerca risorsa"
 
-#: bin/terp.glade:13998
-msgid "Load demonstration data: "
+#: widget/view/form_gtk/many2one.py:145
+msgid "Action"
+msgstr "Azione"
+
+#: widget/view/form_gtk/many2one.py:146
+msgid "Report"
 msgstr ""
 
-#: bin/terp.glade:14067
-msgid "Change password"
+#: widget/view/form_gtk/parser.py:65
+msgid "Wrong icon for the button !"
 msgstr ""
 
-#: bin/terp.glade:14137
-msgid "<b>Change your DB administration password</b>"
-msgstr ""
-
-#: bin/terp.glade:14179
-msgid "New password confirmation:"
-msgstr ""
-
-#: bin/terp.glade:14203
+#: widget/view/form_gtk/parser.py:100
 #, fuzzy
-msgid "New password:"
-msgstr "Password:"
+msgid "Invalid Form, correct red fields !"
+msgstr "Modulo Invalido, correggere i campi in rosso"
 
-#: bin/terp.glade:14227
+#: widget/view/form_gtk/parser.py:592 widget/view/form.py:212
+msgid "Translate label"
+msgstr ""
+
+#: widget/view/form_gtk/parser.py:597
+msgid "Translate view"
+msgstr ""
+
+#: widget/view/form_gtk/calendar.py:65 widget/view/form_gtk/calendar.py:165
+#: widget_search/calendar.py:58 widget_search/calendar.py:76
+msgid "Open the calendar widget"
+msgstr "Apri il calendario"
+
+#: widget/view/form_gtk/calendar.py:121 widget/view/form_gtk/calendar.py:241
+msgid "This widget is readonly !"
+msgstr ""
+
+#: widget/view/form_gtk/calendar.py:124 widget/view/form_gtk/calendar.py:244
+#: widget_search/calendar.py:112
+msgid "Tiny ERP - Date selection"
+msgstr "Tiny ERP - selezione data"
+
+#: widget/view/form_gtk/calendar.py:250
 #, fuzzy
-msgid "Old password:"
-msgstr "Password:"
+msgid "Hour:"
+msgstr "Port:"
+
+#: widget/view/form_gtk/calendar.py:253
+msgid "Minute:"
+msgstr ""
+
+#: widget/view/form_gtk/interface.py:51
+#: widget/view/form_gtk/one2many_list.py:121
+msgid "Set to default value"
+msgstr "Imposta al valore di default"
+
+#: widget/view/form_gtk/interface.py:52
+#, fuzzy
+msgid "Set as default"
+msgstr "Imposta a _Default"
+
+#: widget/view/form_gtk/one2many_list.py:124
+#, fuzzy
+msgid "Set Default"
+msgstr "Imposta a _Default"
+
+#: widget/view/form_gtk/one2many_list.py:135
+msgid "Create a new entry"
+msgstr "Crea una nuova entrata"
+
+#: widget/view/form_gtk/one2many_list.py:145
+#, fuzzy
+msgid "Edit this entry"
+msgstr "Rimuovi questa entrata"
+
+#: widget/view/form_gtk/one2many_list.py:155
+msgid "Remove this entry"
+msgstr "Rimuovi questa entrata"
+
+#: widget/view/form_gtk/one2many_list.py:167
+msgid "Previous"
+msgstr "Precedente"
+
+#: widget/view/form_gtk/one2many_list.py:180
+msgid "Next"
+msgstr "Prossimo"
+
+#: widget/view/form_gtk/one2many_list.py:192
+msgid "Switch"
+msgstr ""
+
+#: widget/view/form_gtk/one2many_list.py:230
+#, fuzzy
+msgid "You have to select a resource !"
+msgstr "Seleziona una risorsa!"
+
+#: widget/view/form_gtk/image.py:43
+#, fuzzy
+msgid "Select a file"
+msgstr "Seleziona una data"
+
+#: widget/view/form_gtk/image.py:90
+#, fuzzy
+msgid "Save as ..."
+msgstr "Salva allegato come..."
+
+#: widget/view/form_gtk/image.py:96
+msgid "Open file ..."
+msgstr ""
+
+#: widget/view/form_gtk/wid_common.py:59
+#, fuzzy
+msgid "Always applicable !"
+msgstr "Sempre applicabile!"
+
+#: widget/view/form.py:138
+msgid "You must save this record to use the relate button !"
+msgstr ""
+
+#: widget/view/form.py:150
+msgid "You must select a record to use the relate button !"
+msgstr ""
+
+#: widget/view/graph_gtk/parser.py:68
+#, fuzzy
+msgid "Can not generate graph !"
+msgstr "Impossibile scrivere il file!"
+
+#: tinyerp-client.py:145
+msgid "Closing Tiny ERP, KeyboardInterrupt"
+msgstr "Chiusura di Tiny ERP, Interruzione Tastiera"
+
+#: plugins/__init__.py:20
+#, fuzzy
+msgid "No available plugin for this resource !"
+msgstr "nessun plugin disponibile per questa risorsa!"
+
+#: plugins/__init__.py:22
+msgid "Choose a Plugin"
+msgstr "Scegli un Plugin"
+
+#: widget_search/wid_int.py:50
+msgid "The content of the widget or excpetion if not valid"
+msgstr ""
+
+#: widget_search/calendar.py:54
+#, fuzzy
+msgid "Start date"
+msgstr "Stato:"
+
+#: widget_search/calendar.py:72
+msgid "End date"
+msgstr ""
+
+#: widget_search/calendar.py:108 widget_search/checkbox.py:58
+#: widget_search/spinint.py:70 widget_search/spinbutton.py:69
+#: widget_search/reference.py:80 widget_search/char.py:53
+msgid "The content of the widget or ValueError if not valid"
+msgstr ""
+
+#: widget_search/checkbox.py:42 widget_search/checkbox.py:52
+msgid "Yes"
+msgstr "Si"
+
+#: widget_search/checkbox.py:43
+msgid "No"
+msgstr "No"
+
+#: widget_search/form.py:133
+#, fuzzy
+msgid "Limit :"
+msgstr "Limite:"
+
+#: widget_search/form.py:142
+#, fuzzy
+msgid "Offset :"
+msgstr "scostamento"
+
+#: widget_search/form.py:179
+msgid "Parameters :"
+msgstr ""
+
+#: printer/printer.py:140
+msgid ""
+"Linux Automatic Printing not implemented.\n"
+"Use preview option !"
+msgstr ""
+
+#: printer/printer.py:148
+#, fuzzy
+msgid "Error no report"
+msgstr "Errore eliminando la risorsa"
+
+#: printer/printer.py:165
+msgid "Write Report to File"
+msgstr "Scrivi Report sul File"
+
+#~ msgid "Tiny ERP - Login"
+#~ msgstr "Tiny ERP - Login"
+
+#~ msgid "User:"
+#~ msgstr "Utente:"
+
+#~ msgid "Password:"
+#~ msgstr "Password:"
+
+#~ msgid "localhost"
+#~ msgstr "localhost"
+
+#~ msgid "Server:"
+#~ msgstr "Server:"
+
+#~ msgid "demo"
+#~ msgstr "demo"
+
+#~ msgid "Tiny ERP"
+#~ msgstr "Tiny ERP"
+
+#~ msgid "_File"
+#~ msgstr "_File"
+
+#, fuzzy
+#~ msgid "_Connect..."
+#~ msgstr "Connetti..."
+
+#, fuzzy
+#~ msgid "_Disconnect"
+#~ msgstr "Disconnetti"
+
+#~ msgid "_User"
+#~ msgstr "_Utente"
+
+#, fuzzy
+#~ msgid "_Preferences"
+#~ msgstr "Preferenze"
+
+#, fuzzy
+#~ msgid "_Send a request"
+#~ msgstr "Manda una richiesta"
+
+#, fuzzy
+#~ msgid "_Read my requests"
+#~ msgstr "Leggi le mie richieste"
+
+#, fuzzy
+#~ msgid "_Waiting Requests"
+#~ msgstr "Richiesta"
+
+#, fuzzy
+#~ msgid "For_m"
+#~ msgstr "_Form"
+
+#, fuzzy
+#~ msgid "_New"
+#~ msgstr "Nuovo"
+
+#, fuzzy
+#~ msgid "_Save"
+#~ msgstr "Salva"
+
+#, fuzzy
+#~ msgid "Copy this resource"
+#~ msgstr "Rimuovi questa risorsa"
+
+#, fuzzy
+#~ msgid "_Delete"
+#~ msgstr "Cancella"
+
+#, fuzzy
+#~ msgid "Find"
+#~ msgstr "Campi"
+
+#, fuzzy
+#~ msgid "Ne_xt"
+#~ msgstr "Prossimo"
+
+#, fuzzy
+#~ msgid "Pre_vious"
+#~ msgstr "Precedente"
+
+#, fuzzy
+#~ msgid "Close Tab"
+#~ msgstr "Chiudi"
+
+#, fuzzy
+#~ msgid "Previous Tab"
+#~ msgstr "Suggerimento precedente"
+
+#, fuzzy
+#~ msgid "Next Tab"
+#~ msgstr "Prossimo suggerimento"
+
+#, fuzzy
+#~ msgid "View _logs"
+#~ msgstr "Dettagli vista"
+
+#, fuzzy
+#~ msgid "_Open"
+#~ msgstr "Apri"
+
+#, fuzzy
+#~ msgid "Reloa_d / Undo"
+#~ msgstr "Ricarica"
+
+#, fuzzy
+#~ msgid "Repeat latest _action"
+#~ msgstr "Ripeti l'ultima azione"
+
+#, fuzzy
+#~ msgid "Expor_t data..."
+#~ msgstr "Esporta dati..."
+
+#, fuzzy
+#~ msgid "I_mport data..."
+#~ msgstr "Importa dati..."
+
+#~ msgid "_Options"
+#~ msgstr "_Opzioni"
+
+#, fuzzy
+#~ msgid "_Menubar"
+#~ msgstr "Menubar"
+
+#, fuzzy
+#~ msgid "Text _and Icons"
+#~ msgstr "Testo e Icone"
+
+#, fuzzy
+#~ msgid "_Icons only"
+#~ msgstr "Solo icone"
+
+#, fuzzy
+#~ msgid "_Text only"
+#~ msgstr "Solo testo"
+
+#, fuzzy
+#~ msgid "_Theme"
+#~ msgstr "Albero"
+
+#, fuzzy
+#~ msgid "Tiny ERP Theme"
+#~ msgstr "Tiny ERP - Licenza"
+
+#, fuzzy
+#~ msgid "_Forms"
+#~ msgstr "_Form"
+
+#, fuzzy
+#~ msgid "_Print"
+#~ msgstr "Stampa"
+
+#, fuzzy
+#~ msgid "Previe_w before print"
+#~ msgstr "Anteprima di stampa"
+
+#, fuzzy
+#~ msgid "_Save options"
+#~ msgstr "Salva le opzioni"
+
+#, fuzzy
+#~ msgid "_Plugins"
+#~ msgstr "Plugins"
+
+#, fuzzy
+#~ msgid "_Execute a plugin"
+#~ msgstr "Esegui un Plugin"
+
+#, fuzzy
+#~ msgid "_Help"
+#~ msgstr "Aiuto"
+
+#, fuzzy
+#~ msgid "Support Request"
+#~ msgstr "Manda la richiesta di supporto"
+
+#, fuzzy
+#~ msgid "_Tips"
+#~ msgstr "Suggerimenti"
+
+#, fuzzy
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "Scorciatoie"
+
+#, fuzzy
+#~ msgid "_Licence"
+#~ msgstr "Licenza"
+
+#, fuzzy
+#~ msgid "_About..."
+#~ msgstr "Circa..."
+
+#~ msgid "Edit / Save this resource"
+#~ msgstr "Modifica / Salva questa risorsa"
+
+#~ msgid "Delete this resource"
+#~ msgstr "Cancella questa risorsa"
+
+#, fuzzy
+#~ msgid "Find a resource"
+#~ msgstr "Cerca risorsa"
+
+#~ msgid "Go to previous matched search"
+#~ msgstr "vai alla precedente ricerca abbinata"
+
+#~ msgid "Go to next matched resource"
+#~ msgstr "vai alla precedente risorsa abbinata"
+
+#~ msgid "Launch actions about this resource"
+#~ msgstr "Lancia azioni su questa risorsa"
+
+#~ msgid "Print documents"
+#~ msgstr "Stampa documenti"
+
+#, fuzzy
+#~ msgid "Add an attachment to this resource"
+#~ msgstr "Lancia azioni su questa risorsa"
+
+#~ msgid "Attachement"
+#~ msgstr "Allegato"
+
+#~ msgid "Close this window"
+#~ msgstr "Chiudi questa finestra"
+
+#~ msgid "Requests:"
+#~ msgstr "Richiesta"
+
+#~ msgid "Read my Requests"
+#~ msgstr "Leggi la mia Richiesta"
+
+#~ msgid "Send a new request"
+#~ msgstr "Manda una nuova Richiesta"
+
+#~ msgid "Tiny ERP - Tree Resources"
+#~ msgstr "Tiny ERP - Albero Risorse"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Scorciatoie"
+
+#~ msgid "Tiny ERP - Forms"
+#~ msgstr "Tiny ERP - Forms"
+
+#~ msgid "Tiny ERP - About"
+#~ msgstr "Tiny ERP - About"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Tiny ERP - GTK Client - v%s\n"
+#~ "\n"
+#~ "Tiny ERP is an Open Source ERP+CRM\n"
+#~ "for small to medium businesses.\n"
+#~ "\n"
+#~ "The whole source code is distributed under\n"
+#~ "the terms of the GNU Public Licence.\n"
+#~ "\n"
+#~ "(c) 2003-TODAY, Tiny sprl\n"
+#~ "\n"
+#~ "More Info on www.TinyERP.com !"
+#~ msgstr ""
+#~ "\n"
+#~ "Tiny ERP - GTK Client - v2.0\n"
+#~ "\n"
+#~ "Tiny ERP e un ERP+CRM Open Source per\n"
+#~ "la piccola e media impresa.\n"
+#~ "\n"
+#~ "L'intero codice sorgente e distribuito secondo\n"
+#~ "i termini della GNU Public Licence.\n"
+#~ "\n"
+#~ "(c) 2003-TODAY, Tiny sprl\n"
+#~ "\n"
+#~ "Maggiori informazioni su: www.TinyERP.com !"
+
+#, fuzzy
+#~ msgid "_Tiny ERP"
+#~ msgstr "Tiny ERP"
+
+#, fuzzy
+#~ msgid "_Contact"
+#~ msgstr "Contatto"
+
+#~ msgid "Tiny ERP - forms widget"
+#~ msgstr "Tiny ERP - forms widget"
+
+#~ msgid "Titre"
+#~ msgstr "Titolo"
+
+#, fuzzy
+#~ msgid "(0/0)"
+#~ msgstr "(1/1)"
+
+#~ msgid "Remove selected entry"
+#~ msgstr "Rimuovi elementi selezionati"
+
+#~ msgid "label74"
+#~ msgstr "label74"
+
+#~ msgid "-"
+#~ msgstr "-"
+
+#~ msgid "Tiny ERP - Confirmation"
+#~ msgstr "Tiny ERP - Conferma"
+
+#~ msgid "Hello World!"
+#~ msgstr "Salve Mondo!"
+
+#~ msgid "Tiny ERP - selection"
+#~ msgstr "Tiny ERP - selezione"
+
+#~ msgid "Your selection:"
+#~ msgstr "LA tua selezione"
+
+#~ msgid "Tiny ERP - Filter"
+#~ msgstr "Tiny ERP - Filtro"
+
+#, fuzzy
+#~ msgid "S_earch:"
+#~ msgstr "Ricerca:"
+
+#, fuzzy
+#~ msgid "on _field:"
+#~ msgstr "sul campo:"
+
+#, fuzzy
+#~ msgid "_Select"
+#~ msgstr "Seleziona"
+
+#, fuzzy
+#~ msgid "_Unselect"
+#~ msgstr "deseleziona"
+
+#, fuzzy
+#~ msgid "Filter: "
+#~ msgstr "Filtra: "
+
+#, fuzzy
+#~ msgid "AL_L"
+#~ msgstr "Tutto"
+
+#, fuzzy
+#~ msgid "N_ONE"
+#~ msgstr "Niente"
+
+#~ msgid "<b><u>Actions</u></b>"
+#~ msgstr "<b><u>Azioni</u></b>"
+
+#~ msgid "Tiny ERP - Dialog"
+#~ msgstr "Tiny ERP - Dialogo"
+
+#~ msgid "Set to _Default"
+#~ msgstr "Imposta a _Default"
+
+#~ msgid "Value _Preference"
+#~ msgstr "Valore _Preferenza"
+
+#~ msgid "Tiny ERP, Field Preference target"
+#~ msgstr "Tiny ERP, Campo preferenza obiettivo"
+
+#, fuzzy
+#~ msgid "Default _value:"
+#~ msgstr "Valore di default"
+
+#, fuzzy
+#~ msgid "_Domain:"
+#~ msgstr "Dominio:"
+
+#, fuzzy
+#~ msgid "Field _Name:"
+#~ msgstr "Nome Campo"
+
+#~ msgid "<b>Value applicable if:</b>"
+#~ msgstr "<b>Valore applicabile se:</b>"
+
+#, fuzzy
+#~ msgid "_only for you"
+#~ msgstr "solo per te"
+
+#, fuzzy
+#~ msgid "for _all users"
+#~ msgstr "per tutti gli utenti"
+
+#~ msgid "<b>Value applicable for:</b>"
+#~ msgstr "<b>Valore applicabile per:</b>"
+
+#~ msgid "Tiny ERP - Export to CSV"
+#~ msgstr "Tiny ERP - Esporta su CSV"
+
+#, fuzzy
+#~ msgid "<b>Predefined exports</b>"
+#~ msgstr "<b>Campi da esportare</b>"
+
+#~ msgid "<b>All fields</b>"
+#~ msgstr "<b>Tutti i campi</b>"
+
+#, fuzzy
+#~ msgid "_Add"
+#~ msgstr "Aggiungi"
+
+#, fuzzy
+#~ msgid "_Remove"
+#~ msgstr "Rimuovi"
+
+#, fuzzy
+#~ msgid "_Nothing"
+#~ msgstr "Niente"
+
+#, fuzzy
+#~ msgid "Save List"
+#~ msgstr "Salva le opzioni"
+
+#~ msgid "<b>Fields to export</b>"
+#~ msgstr "<b>Campi da esportare</b>"
+
+#, fuzzy
+#~ msgid ""
+#~ "Open in Excel\n"
+#~ "Save as CSV"
+#~ msgstr "Apri in Excel"
+
+#, fuzzy
+#~ msgid "Add _field names"
+#~ msgstr "Aggiungi nomi campo"
+
+#, fuzzy
+#~ msgid "<b>Opti_ons</b>"
+#~ msgstr "<b>Opzioni</b>"
+
+#~ msgid "Tiny ERP - Search"
+#~ msgstr "Tiny ERP - Cerca"
+
+#~ msgid "Tiny ERP - Search Widgets"
+#~ msgstr "Tiny ERP - Cerca Widgets"
+
+#~ msgid "Date de début"
+#~ msgstr "Data inizio"
+
+#~ msgid "Search with this name"
+#~ msgstr "Cerca con questo nome"
+
+#~ msgid "Clear the field"
+#~ msgstr "Pulisci il campo"
+
+#~ msgid ""
+#~ "\n"
+#~ "Yes\n"
+#~ "No"
+#~ msgstr ""
+#~ "\n"
+#~ "Si\n"
+#~ "No"
+
+#~ msgid "Tiny ERP - Attachment"
+#~ msgstr "Tiny ERP - Allegato"
+
+#~ msgid "Filename:"
+#~ msgstr "Nome File: "
+
+#~ msgid "Description:"
+#~ msgstr "Descrizione:"
+
+#, fuzzy
+#~ msgid "Save text"
+#~ msgstr "Salva"
+
+#~ msgid "Tiny ERP - Error"
+#~ msgstr "Tiny ERP - Errore"
+
+#~ msgid "Application Error !"
+#~ msgstr "Errore Applicazione!"
+
+#~ msgid "Error 404"
+#~ msgstr "Errore 404"
+
+#~ msgid "<b>Error code:</b>"
+#~ msgstr "<b>codice errore:</b>"
+
+#~ msgid ""
+#~ "This Page does not exist !\n"
+#~ "Please retry"
+#~ msgstr ""
+#~ "Questa pagina non esiste!\n"
+#~ "Riprova"
+
+#~ msgid "<i>Click on the Support Request tab if you need more help !</i>"
+#~ msgstr "<i>Click on the Support Request tab if you need more help !"
+
+#, fuzzy
+#~ msgid "De_scription"
+#~ msgstr "Descrizione"
+
+#~ msgid ""
+#~ "Error details\n"
+#~ "dqsdsqdqsdsd"
+#~ msgstr ""
+#~ "Dettagli errore\n"
+#~ "dqsdsqdqsdsd"
+
+#, fuzzy
+#~ msgid "_Details"
+#~ msgstr "Dettagli"
+
+#~ msgid ""
+#~ "<b>Complete this form to submit your bug and/or request a support.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to Tiny ERP and we will reply you shortly.\n"
+#~ "Note that we may not reply you if your Service Company is not a Tiny ERP "
+#~ "partner.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Completa questo form per sottopporre il tuo bug e/o la richiesta do "
+#~ "supporto.</b>\n"
+#~ "<i>\n"
+#~ "La tua rchiesta sara spedita a Tiny ERP e Vi risponderemo a breve.\n"
+#~ "Note that we may not reply you if your Service Company is not a Tiny ERP "
+#~ "partner.\n"
+#~ "</i>"
+
+#~ msgid "<b>Your name: </b>"
+#~ msgstr "<b>Il Vostro nome: </b>"
+
+#~ msgid "<b>Your Company: </b>"
+#~ msgstr "<b>La Vostra societa: </b>"
+
+#~ msgid "<b>Your Email: </b>"
+#~ msgstr "<b>il vostr indirizzo Email: </b>"
+
+#~ msgid "Explain what you did: "
+#~ msgstr "Spiegate la vostra attivita"
+
+#, fuzzy
+#~ msgid "Others Comments: "
+#~ msgstr "Altre Note:"
+
+#~ msgid "Send Support Request"
+#~ msgstr "Manda la richiesta di supporto"
+
+#, fuzzy
+#~ msgid "<b>support contract id  </b>"
+#~ msgstr "<b>Support Request</b>"
+
+#~ msgid ""
+#~ "Not Urgent\n"
+#~ "Medium\n"
+#~ "Urgent\n"
+#~ "Very Urgent"
+#~ msgstr ""
+#~ "Non Urgente\n"
+#~ "Meda\n"
+#~ "Urgente\n"
+#~ "Molto Urgente"
+
+#, fuzzy
+#~ msgid "Emergency: "
+#~ msgstr "Urgenza:"
+
+#~ msgid "Phone Number: "
+#~ msgstr "Numero di telefono:"
+
+#, fuzzy
+#~ msgid "<b>_Support Request</b>"
+#~ msgstr "<b>Support Request</b>"
+
+#~ msgid "Tiny ERP - Ressource Edit"
+#~ msgstr "Tiny ERP - Modifica Risaorsa"
+
+#~ msgid "Tiny ERP - List"
+#~ msgstr "Tiny ERP - Lista"
+
+#~ msgid "Tiny ERP - Preferences"
+#~ msgstr "Tiny ERP - Preferenze"
+
+#, fuzzy
+#~ msgid "<b>Edit resource preferences</b>"
+#~ msgstr "<b>Modifica le preferenze di risorsa</b>"
+
+#~ msgid "Tip of the Day"
+#~ msgstr "Suggerimento del giorno"
+
+#, fuzzy
+#~ msgid "Pre_vious Tip"
+#~ msgstr "Suggerimento precedente"
+
+#, fuzzy
+#~ msgid "Ne_xt Tip"
+#~ msgstr "Prossimo suggerimento"
+
+#, fuzzy
+#~ msgid "_Display a new tip next time ?"
+#~ msgstr "Mostro un nuovo suggerimento la prossima volta?"
+
+#~ msgid "Tiny ERP - Licence"
+#~ msgstr "Tiny ERP - Licenza"
+
+#~ msgid "Tiny ERP license"
+#~ msgstr "Tiny ERP - Licenza"
+
+#, fuzzy
+#~ msgid "Tiny ERP - Date & Time selection"
+#~ msgstr "Tiny ERP - selezione data"
+
+#~ msgid "dialog1"
+#~ msgstr "dialog1"
+
+#, fuzzy
+#~ msgid "Search ID:"
+#~ msgstr "Ricerca:"
+
+#, fuzzy
+#~ msgid "Tiny ERP Survey"
+#~ msgstr "Tiny ERP"
+
+#, fuzzy
+#~ msgid "Your Role:"
+#~ msgstr "LA tua selezione"
+
+#, fuzzy
+#~ msgid "System:"
+#~ msgstr "Stato:"
+
+#, fuzzy
+#~ msgid "<b>Your company</b>"
+#~ msgstr "<b>La Vostra societa: </b>"
+
+#, fuzzy
+#~ msgid "<b>Your interrest</b>"
+#~ msgstr "<b>Il Vostro nome: </b>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<b>Complete this form to submit your bug and/or make a request for "
+#~ "support.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be sent to the Tiny ERP team and we will reply "
+#~ "shortly.\n"
+#~ "Note that we may not reply if you do not have a support contract with "
+#~ "Tiny or an official partner.</i>"
+#~ msgstr ""
+#~ "<b>Completa questo form per sottopporre il tuo bug e/o la richiesta do "
+#~ "supporto.</b>\n"
+#~ "<i>\n"
+#~ "La tua rchiesta sara spedita a Tiny ERP e Vi risponderemo a breve.\n"
+#~ "Note that we may not reply you if your Service Company is not a Tiny ERP "
+#~ "partner.\n"
+#~ "</i>"
+
+#, fuzzy
+#~ msgid "<b>Your name:</b>"
+#~ msgstr "<b>Il Vostro nome: </b>"
+
+#, fuzzy
+#~ msgid "<b>Your Company:</b>"
+#~ msgstr "<b>La Vostra societa: </b>"
+
+#, fuzzy
+#~ msgid "<b>Your email:</b>"
+#~ msgstr "<b>il vostr indirizzo Email: </b>"
+
+#, fuzzy
+#~ msgid "Explain your problem:"
+#~ msgstr "Spiegate la vostra attivita"
+
+#, fuzzy
+#~ msgid "<b>Support contract id:</b>"
+#~ msgstr "<b>Support Request</b>"
+
+#, fuzzy
+#~ msgid "Phone number:"
+#~ msgstr "Numero di telefono:"
+
+#, fuzzy
+#~ msgid "Connect"
+#~ msgstr "Connetti..."
+
+#, fuzzy
+#~ msgid "Find / Search"
+#~ msgstr "Fine ricerca"
+
+#~ msgid "Delete"
+#~ msgstr "Cancella"
+
+#~ msgid "New"
+#~ msgstr "Nuovo"
+
+#, fuzzy
+#~ msgid "Previous tab"
+#~ msgstr "Precedente"
+
+#~ msgid "Save"
+#~ msgstr "Salva"
+
+#, fuzzy
+#~ msgid "Previous record"
+#~ msgstr "Precedente"
+
+#, fuzzy
+#~ msgid "Next record"
+#~ msgstr "Prossimo: Nessun record selezionato"
+
+#, fuzzy
+#~ msgid "Save and Close window"
+#~ msgstr "Chiudi finestra"
+
+#, fuzzy
+#~ msgid "Main Shortcuts"
+#~ msgstr "Scorciatoie"
+
+#, fuzzy
+#~ msgid "Cut selected text"
+#~ msgstr "Rimuovi elementi selezionati"
+
+#, fuzzy
+#~ msgid "Copy selected text"
+#~ msgstr "Rimuovi elementi selezionati"
+
+#, fuzzy
+#~ msgid "Paste selected text"
+#~ msgstr "Rimuovi elementi selezionati"
+
+#, fuzzy
+#~ msgid "Auto-Complete text field"
+#~ msgstr "Pulisci il campo"
+
+#, fuzzy
+#~ msgid "Edition Widgets"
+#~ msgstr "Modifica documento: "
+
+#, fuzzy
+#~ msgid "N_othing"
+#~ msgstr "Niente"
+
+#~ msgid "<b>Fields to import</b>"
+#~ msgstr "<b>Campi da importare</b>"
+
+#, fuzzy
+#~ msgid "File to Import: "
+#~ msgstr "<b>Campi da importare</b>"
+
+#, fuzzy
+#~ msgid "Server"
+#~ msgstr "Server:"
+
+#~ msgid "8069"
+#~ msgstr "8069"
+
+#, fuzzy
+#~ msgid "Secure connection:"
+#~ msgstr "Seleziona la tua azione"
+
+#, fuzzy
+#~ msgid "http://localhost:8069"
+#~ msgstr "localhost"
+
+#, fuzzy
+#~ msgid "Operation in progress"
+#~ msgstr ""
+#~ "Operazione fallita!\n"
+#~ "Errore I/O"
+
+#, fuzzy
+#~ msgid "Create a new database"
+#~ msgstr "Crea una nuova entrata"
+
+#, fuzzy
+#~ msgid "<b>Create a new database</b>"
+#~ msgstr "Crea una nuova risorsa"
+
+#, fuzzy
+#~ msgid "Default language:"
+#~ msgstr "Valore di default"
+
+#, fuzzy
+#~ msgid "New password:"
+#~ msgstr "Password:"
+
+#, fuzzy
+#~ msgid "Old password:"
+#~ msgstr "Password:"
 
 #~ msgid "Welcome to Tiny Entreprise Resource Planing !"
 #~ msgstr "Benvenuti in Tiny Enterprise Resource Planning"

@@ -53,12 +53,13 @@ def _search_file(file, dir='path.share'):
 	tests = [
 		lambda x: os.path.join(options.options[dir],x),
 		lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), x),
+		lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'pixmaps', x),
 	]
 	for func in tests:
 		x = func(file)
 		if os.path.exists(x):
-			break
-	return x
+			return x
+	return False
 
 terp_path = _search_file
 terp_path_pixmaps = lambda x: _search_file(x, 'path.pixmaps')

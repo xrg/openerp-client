@@ -52,6 +52,7 @@ class win_search(object):
 		self.sel_multi = sel_multi
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_search',gettext.textdomain())
 		self.win = self.glade.get_widget('win_search')
+		self.win.set_icon_from_file(common.terp_path_pixmaps('tinyerp_icon.png'))
 		if not parent:
 			parent = service.LocalService('gui.main').window
 		self.win.set_transient_for(parent)
