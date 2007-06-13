@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tiny ERP V2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-13 16:28+0200\n"
+"POT-Creation-Date: 2007-06-13 17:21+0200\n"
 "PO-Revision-Date: 2005-04-05 09:43+0200\n"
 "Last-Translator: Fabien Pinckaers <fp@tiny.be>\n"
 "Language-Team: FR <i18n-info@tinyerp.org>\n"
@@ -16,1436 +16,1913 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: options.py:90
-#, fuzzy, python-format
-msgid "Tiny ERP Client %s"
-msgstr "Tiny ERP Client v2.1"
+#: terp.glade:10
+msgid "Tiny ERP - Login"
+msgstr "Tiny ERP - Вхід у систему"
 
-#: options.py:91
-msgid "specify alternate config file"
-msgstr "Вкажіть альтернативний файл конфігурації"
+#: terp.glade:107
+msgid "User:"
+msgstr "Ім'я користувача:"
 
-#: options.py:92
-msgid "enable basic debugging"
-msgstr "стандартну відладку ввімкнено"
+#: terp.glade:135 terp.glade:14459 terp.glade:14774
+msgid "Password:"
+msgstr "Пароль:"
 
-#: options.py:93
-msgid "specify channels to log"
-msgstr "вкажіть канал для журналу"
-
-#: options.py:94
-msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-msgstr "вкажіть рівень журналу: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-
-#: options.py:95
+#: terp.glade:164 terp.glade:14286 terp.glade:14712 terp.glade:15278
+#: terp.glade:15922
 #, fuzzy
-msgid "specify the user login"
-msgstr "вкажіть канал для журналу"
+msgid "Change"
+msgstr "Змінити корінь"
 
-#: options.py:96
-msgid "specify the server port"
+#: terp.glade:187 terp.glade:13982
+msgid "localhost"
 msgstr ""
 
-#: options.py:97
-msgid "specify the server ip/name"
+#: terp.glade:205
+#, fuzzy
+msgid "Database:"
+msgstr "Виберіть дату"
+
+#: terp.glade:234 terp.glade:14051 terp.glade:14326 terp.glade:14619
+#: terp.glade:15829
+msgid "Server:"
+msgstr "Сервер:"
+
+#: terp.glade:266
+msgid "admin"
 msgstr ""
 
-#: common/common.py:75
-msgid "Unable to launch this file !"
-msgstr "Не можу запустити файл!"
-
-#: common/common.py:90
-msgid "Unable to launch the application associated to this content !"
-msgstr "Не можу запустити програму асоційовану з цим контентом!"
-
-#: common/common.py:334 common/common.py:391
+#: terp.glade:378 terp.glade:13689
 #, fuzzy
-msgid "Support request sent !"
+msgid "Tiny ERP"
+msgstr "Про Tiny ERP"
+
+#: terp.glade:422
+msgid "_File"
+msgstr "_Файл"
+
+#: terp.glade:431
+#, fuzzy
+msgid "_Connect..."
+msgstr "З'єднатись..."
+
+#: terp.glade:453
+#, fuzzy
+msgid "_Disconnect"
+msgstr "Роз'єднатись"
+
+#: terp.glade:480
+#, fuzzy
+msgid "Databases"
+msgstr "Виберіть дату"
+
+#: terp.glade:501
+#, fuzzy
+msgid "_New database"
+msgstr "Виберіть дату"
+
+#: terp.glade:523
+#, fuzzy
+msgid "_Restore database"
+msgstr "Виберіть дату"
+
+#: terp.glade:544
+#, fuzzy
+msgid "_Backup database"
+msgstr "Виберіть дату"
+
+#: terp.glade:565
+#, fuzzy
+msgid "Dro_p database"
+msgstr "Виберіть дату"
+
+#: terp.glade:592
+msgid "Administrator Password"
+msgstr ""
+
+#: terp.glade:636
+msgid "_User"
+msgstr "Користувач"
+
+#: terp.glade:646
+#, fuzzy
+msgid "_Preferences"
+msgstr "Налаштування"
+
+#: terp.glade:673
+#, fuzzy
+msgid "_Send a request"
 msgstr "Відіслати запит"
 
-#: modules/gui/main.py:126 modules/gui/main.py:916
+#: terp.glade:694
 #, fuzzy
-msgid "Could not connect to server !"
-msgstr ""
-"Помилка при з'єднанні!\n"
-"Не можу з'єднатись з сервером!"
+msgid "_Read my requests"
+msgstr "Показати мої запити"
 
-#: modules/gui/main.py:132 modules/gui/main.py:920
-msgid "No database found, you must create one !"
-msgstr ""
+#: terp.glade:721
+#, fuzzy
+msgid "_Waiting Requests"
+msgstr "Запити:"
 
-#: modules/gui/main.py:213
-msgid "Do not use special characters !"
-msgstr ""
+#: terp.glade:734
+#, fuzzy
+msgid "For_m"
+msgstr "_Форма"
 
-#: modules/gui/main.py:217
-msgid "Can not connect to server, please change it !"
-msgstr ""
+#: terp.glade:744
+#, fuzzy
+msgid "_New"
+msgstr "Новий"
 
-#: modules/gui/main.py:266
-msgid ""
-"The database name must contain only normal characters or \"_\".\n"
-"You must avoid all accents, space or special characters."
-msgstr ""
+#: terp.glade:766
+#, fuzzy
+msgid "_Save"
+msgstr "Зберегти"
 
-#: modules/gui/main.py:266
-msgid "Bad database name !"
-msgstr ""
+#: terp.glade:788
+#, fuzzy
+msgid "Copy this resource"
+msgstr "Видалити цей ресурс"
 
-#: modules/gui/main.py:296 modules/gui/main.py:816 modules/gui/main.py:846
-msgid "Bad database administrator password !"
-msgstr ""
-
-#: modules/gui/main.py:296 modules/gui/main.py:298
-msgid "Could not create database."
+#: terp.glade:789
+msgid "_Duplicate"
 msgstr ""
 
-#: modules/gui/main.py:298 modules/gui/main.py:305
-msgid "Error during database creation !"
+#: terp.glade:811
+#, fuzzy
+msgid "_Delete"
+msgstr "Видалити"
+
+#: terp.glade:839
+msgid "Find"
 msgstr ""
 
-#: modules/gui/main.py:305
-msgid ""
-"The server crashed during installation.\n"
-"We suggest you to drop this database."
+#: terp.glade:861
+#, fuzzy
+msgid "Ne_xt"
+msgstr "Наступний"
+
+#: terp.glade:883
+#, fuzzy
+msgid "Pre_vious"
+msgstr "Попередній"
+
+#: terp.glade:905
+msgid "Switch to list/form"
 msgstr ""
 
-#: modules/gui/main.py:323
-msgid "You can now connect to the database as an administrator."
+#: terp.glade:933
+msgid "_New Menu Tab"
 msgstr ""
 
-#: modules/gui/main.py:323
-msgid ""
-"The following users have been installed on your database:\n"
-"\n"
+#: terp.glade:955
+msgid "_New Home Tab"
 msgstr ""
 
-#: modules/gui/main.py:358 modules/gui/main.py:662
-msgid "Press Ctrl+O to login"
+#: terp.glade:977 terp.glade:11926
+#, fuzzy
+msgid "Close Tab"
+msgstr "Закрити"
+
+#: terp.glade:999
+#, fuzzy
+msgid "Previous Tab"
+msgstr "Попередня порада"
+
+#: terp.glade:1009 terp.glade:11814
+#, fuzzy
+msgid "Next Tab"
+msgstr "Наступна порада"
+
+#: terp.glade:1025
+#, fuzzy
+msgid "View _logs"
+msgstr "Показати журнал"
+
+#: terp.glade:1034
+#, fuzzy
+msgid "_Go to resource ID..."
+msgstr "Перейти до ресурсу з ID..."
+
+#: terp.glade:1050
+#, fuzzy
+msgid "_Open"
+msgstr "Відкрити"
+
+#: terp.glade:1071
+#, fuzzy
+msgid "Reloa_d / Undo"
+msgstr "Поновити"
+
+#: terp.glade:1099
+#, fuzzy
+msgid "Repeat latest _action"
+msgstr "Повторити останню дію"
+
+#: terp.glade:1115
+msgid "_Preview in PDF"
+msgstr "_Перегляд у PDF"
+
+#: terp.glade:1137
+#, fuzzy
+msgid "Previe_w in editor"
+msgstr "Перегляд у _word"
+
+#: terp.glade:1164
+#, fuzzy
+msgid "Expor_t data..."
+msgstr "Експорт даних..."
+
+#: terp.glade:1185
+#, fuzzy
+msgid "I_mport data..."
+msgstr "Імпорт даних..."
+
+#: terp.glade:1198
+msgid "_Options"
+msgstr "_Опції"
+
+#: terp.glade:1207
+#, fuzzy
+msgid "_Menubar"
+msgstr "Меню"
+
+#: terp.glade:1217
+#, fuzzy
+msgid "Text _and Icons"
+msgstr "Текст та іконки"
+
+#: terp.glade:1227
+#, fuzzy
+msgid "_Icons only"
+msgstr "Тільки іконки"
+
+#: terp.glade:1238
+#, fuzzy
+msgid "_Text only"
+msgstr "Тільки текст"
+
+#: terp.glade:1253
+msgid "Client Mode"
 msgstr ""
 
-#: modules/gui/main.py:401
+#: terp.glade:1275
+msgid "Normal"
+msgstr ""
+
+#: terp.glade:1285
+msgid "Mode PDA"
+msgstr ""
+
+#: terp.glade:1300
+#, fuzzy
+msgid "_Theme"
+msgstr "Дерево"
+
+#: terp.glade:1322
+#, fuzzy
+msgid "Tiny ERP Theme"
+msgstr "Tiny ERP - Лицензія"
+
+#: terp.glade:1331
+msgid "Aqua OS X"
+msgstr ""
+
+#: terp.glade:1346
 #, fuzzy
 msgid "Default Theme"
 msgstr "Значення за змовчуванням:"
 
-#: modules/gui/main.py:604
-#, fuzzy, python-format
-msgid "%s request(s)"
-msgstr " запит(и)"
-
-#: modules/gui/main.py:606
-msgid "No request"
-msgstr "Нема запитів"
-
-#: modules/gui/main.py:608
-#, fuzzy, python-format
-msgid " - %s pending request(s)"
-msgstr " запити що очікують"
-
-#: modules/gui/main.py:636
-msgid ""
-"Connection error !\n"
-"Unable to connect to the server !"
-msgstr ""
-"Помилка при з'єднанні!\n"
-"Не можу з'єднатись з сервером!"
-
-#: modules/gui/main.py:638
-msgid ""
-"Connection error !\n"
-"Bad username or password !"
-msgstr ""
-"Помилка при з'єднанні!\n"
-"Не правільне ім'я користувача або пароль!"
-
-#: modules/gui/main.py:642
-msgid "Connection Error !"
-msgstr "Помилка при з'єднанні!"
-
-#: modules/gui/main.py:660
-msgid "Not logged !"
-msgstr "Не в системі!"
-
-#: modules/gui/main.py:728 modules/gui/main.py:735
-msgid "Do you really want to quit ?"
-msgstr ""
-
-#: modules/gui/main.py:807
+#: terp.glade:1359
 #, fuzzy
-msgid "Delete a database"
-msgstr "Виберіть дату"
+msgid "_Forms"
+msgstr "_Форма"
 
-#: modules/gui/main.py:813
-msgid "Database dropped successfully !"
+#: terp.glade:1369
+msgid "Right Toolbar"
 msgstr ""
 
-#: modules/gui/main.py:816
-msgid "Could not drop database."
+#: terp.glade:1379
+msgid "Tabs default position"
 msgstr ""
 
-#: modules/gui/main.py:818
-msgid "Couldn't drop database"
+#: terp.glade:1389
+msgid "Top"
 msgstr ""
 
-#: modules/gui/main.py:843
-msgid "Database restored successfully !"
+#: terp.glade:1399
+msgid "Left"
 msgstr ""
 
-#: modules/gui/main.py:846
-msgid "Could not restore database."
+#: terp.glade:1410
+msgid "Right"
 msgstr ""
 
-#: modules/gui/main.py:848
-msgid "Couldn't restore database"
+#: terp.glade:1421
+msgid "Bottom"
 msgstr ""
 
-#: modules/gui/main.py:874
-msgid "Confirmation password do not match new password, operation cancelled!"
+#: terp.glade:1436
+msgid "Tabs default orientation"
 msgstr ""
 
-#: modules/gui/main.py:874
+#: terp.glade:1446
+msgid "Horizontal"
+msgstr ""
+
+#: terp.glade:1456
+msgid "Vertical"
+msgstr ""
+
+#: terp.glade:1475
 #, fuzzy
-msgid "Validation Error."
-msgstr "Помилка программи"
-
-#: modules/gui/main.py:880
-msgid "Could not change password database."
-msgstr ""
-
-#: modules/gui/main.py:880
-msgid "Bas password provided !"
-msgstr ""
-
-#: modules/gui/main.py:882
-msgid "Error, password not changed."
-msgstr ""
-
-#: modules/gui/main.py:887 modules/gui/main.py:912
-msgid "Backup a database"
-msgstr ""
-
-#: modules/gui/main.py:908
-msgid "Database backuped successfully !"
-msgstr ""
-
-#: modules/gui/main.py:910
-msgid "Couldn't backup database."
-msgstr ""
-
-#: modules/gui/window/win_export.py:58
-msgid " record(s) saved !"
-msgstr " запис(и) збережено!"
-
-#: modules/gui/window/win_export.py:61
-msgid ""
-"Operation failed !\n"
-"I/O error"
-msgstr ""
-"Operation failed !\n"
-"I/O error"
-
-#: modules/gui/window/win_export.py:85
-msgid "Error Opening Excel !"
-msgstr "Помилка при відкритті Excel !"
-
-#: modules/gui/window/win_export.py:87
-msgid ""
-"Function only available for MS Office !\n"
-"Sorry, OOo users :("
-msgstr ""
-"Function only available for MS Office !\n"
-"Sorry, OOo users :("
-
-#: modules/gui/window/win_export.py:275
-msgid "Export Data"
-msgstr "Експорт данних"
-
-#: modules/gui/window/win_preference.py:51
-msgid "Preferences"
-msgstr "Налаштування"
-
-#: modules/gui/window/win_preference.py:75
-msgid "Preference"
-msgstr "Налаштування"
-
-#: modules/gui/window/view_tree/view_tree_sc.py:41
-#: modules/gui/window/form.py:209
-msgid "ID"
-msgstr "ID"
-
-#: modules/gui/window/view_tree/view_tree_sc.py:46
-msgid "Description"
-msgstr "Опис"
-
-#: modules/gui/window/view_tree/parse.py:42
-msgid "Tree"
-msgstr "Дерево"
-
-#: modules/gui/window/form.py:109 modules/gui/window/tree.py:81
-msgid "Reload"
-msgstr "Поновити"
-
-#: modules/gui/window/form.py:183 modules/gui/window/form.py:384
-msgid "No resource selected !"
-msgstr "Не вирбрано ресурс !"
-
-#: modules/gui/window/form.py:203
-#, fuzzy
-msgid "You have to select one resource!"
-msgstr "Виберіть ресурс !"
-
-#: modules/gui/window/form.py:210
-msgid "Creation User"
-msgstr ""
-
-#: modules/gui/window/form.py:211
-msgid "Creation Date"
-msgstr ""
-
-#: modules/gui/window/form.py:212
-msgid "Latest Modification by"
-msgstr ""
-
-#: modules/gui/window/form.py:213
-msgid "Latest Modification Date"
-msgstr ""
-
-#: modules/gui/window/form.py:214
-msgid "Owner"
-msgstr ""
-
-#: modules/gui/window/form.py:215
-msgid "Group Owner"
-msgstr ""
-
-#: modules/gui/window/form.py:216
-msgid "Access Level"
-msgstr ""
-
-#: modules/gui/window/form.py:227
-#, fuzzy
-msgid "Are you sure to remove this record ?"
-msgstr ""
-"Ви впевнені що хочете\n"
-"видалити цей запис?"
-
-#: modules/gui/window/form.py:229
-#, fuzzy
-msgid "Are you sure to remove those records ?"
-msgstr ""
-"Ви впевнені що хочете\n"
-"видалити цей запис?"
-
-#: modules/gui/window/form.py:233
-#, fuzzy
-msgid "Resources not removed !"
-msgstr "Ресурс видалено."
-
-#: modules/gui/window/form.py:235
-#, fuzzy
-msgid "Resources removed."
-msgstr "Ресурс видалено."
-
-#: modules/gui/window/form.py:265
-msgid "Working now on the duplicated document !"
-msgstr ""
-
-#: modules/gui/window/form.py:273
-#, fuzzy
-msgid "Document saved !"
-msgstr "Налаштування збережено!"
-
-#: modules/gui/window/form.py:275
-msgid "Invalid form !"
-msgstr ""
-
-#: modules/gui/window/form.py:331
-msgid "No record selected!"
-msgstr "Не вибрано записів!"
-
-#: modules/gui/window/form.py:359
-#, fuzzy
-msgid "No record selected"
-msgstr "Не вибрано записів!"
-
-#: modules/gui/window/form.py:364
-msgid "New document"
-msgstr "Новий документ"
-
-#: modules/gui/window/form.py:366
-#, fuzzy
-msgid "Editing document (id: "
-msgstr "Редагується документ:"
-
-#: modules/gui/window/form.py:367
-msgid "Record: "
-msgstr "Запис:"
-
-#: modules/gui/window/form.py:382
-msgid "No preference available for this resource !"
-msgstr "Немає налаштувань для цього ресурсу !"
-
-#: modules/gui/window/form.py:388
-msgid ""
-"This record has been modified\n"
-"do you want to save it ?"
-msgstr ""
-
-#: modules/gui/window/win_search.py:83
-#, fuzzy, python-format
-msgid "Tiny ERP Search: %s"
-msgstr "Tiny ERP - Пошук"
-
-#: modules/gui/window/win_search.py:84
-#, fuzzy, python-format
-msgid "Tiny ERP Search: %s (%%d result(s))"
-msgstr "Tiny ERP - Вікно пошуку"
-
-#: modules/gui/window/win_selection.py:55
-msgid "Name"
-msgstr "Ім'я"
-
-#: modules/gui/window/win_selection.py:59
-msgid "Ressource Name"
-msgstr "Назва ресурсу"
-
-#: modules/gui/window/win_selection.py:59
-msgid "Names"
-msgstr "Імена"
-
-#: modules/gui/window/tree.py:82
-msgid "Switch View"
-msgstr ""
-
-#: modules/gui/window/tree.py:83
-#, fuzzy
-msgid "Changt root"
-msgstr "Змінити корінь"
-
-#: modules/gui/window/tree.py:84 modules/gui/window/tree.py:85
-msgid "Open"
-msgstr "Відкрити"
-
-#: modules/gui/window/tree.py:86 modules/gui/window/tree.py:87
-msgid "Print"
+msgid "_Print"
 msgstr "Друк"
 
-#: modules/gui/window/tree.py:88
-msgid "Close"
-msgstr "Закрити"
+#: terp.glade:1496
+#, fuzzy
+msgid "Previe_w before print"
+msgstr "Перегляд перед друком"
 
-#: modules/gui/window/tree.py:192 modules/gui/window/tree.py:237
-msgid "No resource selected!"
-msgstr "Не вибрано жодного ресурсу!"
+#: terp.glade:1516
+#, fuzzy
+msgid "_Save options"
+msgstr "Зберегти опції"
 
-#: modules/gui/window/tree.py:203
-msgid ""
-"Are you sure you want\n"
-"to remove this record?"
-msgstr ""
-"Ви впевнені що хочете\n"
-"видалити цей запис?"
+#: terp.glade:1541
+#, fuzzy
+msgid "_Plugins"
+msgstr "Плагіни"
 
-#: modules/gui/window/tree.py:208
-msgid "Error removing resource!"
-msgstr "Помилка при видаленні ресурсу!"
+#: terp.glade:1551
+#, fuzzy
+msgid "_Execute a plugin"
+msgstr "Виконати плагін"
 
-#: modules/gui/window/tree.py:219
-msgid "Unable to chroot: no tree resource selected"
-msgstr "Не можу змінити корінь: не вибрано ресурсів в дереві"
+#: terp.glade:1576
+#, fuzzy
+msgid "_Help"
+msgstr "Допомога"
 
-#: modules/gui/window/win_import.py:54
-msgid "XML-RPC error !"
-msgstr ""
+#: terp.glade:1585 terp.glade:10716
+#, fuzzy
+msgid "Support Request"
+msgstr "Відіслати запит"
 
-#: modules/gui/window/win_import.py:57
-#, python-format
-msgid "Imported %d objects !"
-msgstr ""
-
-#: modules/gui/window/win_import.py:86 modules/gui/window/win_import.py:90
-msgid "Field name"
-msgstr "Назва поля"
-
-#: modules/gui/window/win_attach.py:110
-msgid "Are you sure you want to remove this attachment ?"
-msgstr "Ви впевнені що хочете видалити цей додаток ?"
-
-#: modules/gui/window/win_attach.py:115 modules/gui/window/win_attach.py:137
-msgid "Select the destination file"
-msgstr "Виберіть цільовий файл"
-
-#: modules/gui/window/win_attach.py:126
-msgid "Can not open file !"
-msgstr "Не можу відкрити файл !"
-
-#: modules/gui/window/win_attach.py:146 modules/gui/window/win_attach.py:248
-msgid "Can not write file !"
-msgstr "Не можу записати у файл !"
-
-#: modules/gui/window/win_attach.py:235
-msgid ""
-"Unable to preview image file !\n"
-"Verify the format."
-msgstr ""
-"Не можу відкрити малюнок !\n"
-"Перевірте формат."
-
-#: modules/gui/window/__init__.py:38
-msgid "Unknown Window"
-msgstr "Невідоме вікно"
-
-#: modules/action/main.py:51
-msgid "Nothing to print!"
+#: terp.glade:1612
+msgid "User _Manual"
 msgstr ""
 
-#: modules/action/main.py:67
-msgid "Printing aborted, too long delay !"
-msgstr "Друк скасовано, дуже велика затримка !"
-
-#: modules/action/main.py:71
-msgid "Error: "
-msgstr "Помилка:"
-
-#: modules/action/main.py:155
-msgid "Select your action"
-msgstr "Оберіть Вашу дію"
-
-#: modules/action/main.py:161
-msgid "No action defined!"
-msgstr "Не предписано жодних дій!"
-
-#: rpc.py:138 rpc.py:169
-msgid "Connection refused !"
-msgstr "У підключенні відмовлено !"
-
-#: rpc.py:139
-msgid "Connection refused!"
-msgstr "У підключенні відмовлено !"
-
-#: rpc.py:180 rpc.py:188 rpc.py:190 widget/model/record.py:144
-msgid "Application Error"
-msgstr "Помилка программи"
-
-#: rpc.py:190
-msgid "View details"
-msgstr "Показати деталі"
-
-#: widget/view/tree_gtk/editabletree.py:115
-msgid "Relation Field: F1 New   F2 Open/Search"
+#: terp.glade:1633
+msgid "_Contextual Help"
 msgstr ""
 
-#: widget/view/tree_gtk/editabletree.py:177
-#, python-format
-msgid "Warning; field \"%s\" is required !"
-msgstr ""
+#: terp.glade:1655
+#, fuzzy
+msgid "_Tips"
+msgstr "Поради"
 
-#: widget/view/list.py:197 widget/view/form_gtk/many2one.py:328
-msgid "You must select a record to use the relation !"
-msgstr ""
+#: terp.glade:1676
+#, fuzzy
+msgid "Keyboard Shortcuts"
+msgstr "Закладки"
 
-#: widget/view/form_gtk/binary.py:72
-msgid "Select the file to attach"
-msgstr "Виберіть файл додатку"
+#: terp.glade:1691
+#, fuzzy
+msgid "_Licence"
+msgstr "Ліцензія"
 
-#: widget/view/form_gtk/binary.py:79
-msgid "Error reading the file"
-msgstr "Помилка при читанні з файлу"
+#: terp.glade:1712
+#, fuzzy
+msgid "_About..."
+msgstr "Про..."
 
-#: widget/view/form_gtk/binary.py:83
-msgid "Save attachment as..."
-msgstr "Зберегти додаток як..."
-
-#: widget/view/form_gtk/binary.py:89 printer/printer.py:171
-msgid "Error writing the file!"
-msgstr "Помилка запису у файл!"
-
-#: widget/view/form_gtk/binary.py:112
-#, python-format
-msgid "%d bytes"
-msgstr ""
-
-#: widget/view/form_gtk/many2one.py:52
-#: widget/view/form_gtk/one2many_list.py:44
-msgid "Tiny ERP - Link"
-msgstr "Tiny ERP - зв'язок"
-
-#: widget/view/form_gtk/many2one.py:136 widget/view/form_gtk/reference.py:90
+#: terp.glade:1754 terp.glade:2986
 msgid "Create a new resource"
 msgstr "Створити новий ресурс"
 
-#: widget/view/form_gtk/many2one.py:137 widget/view/form_gtk/reference.py:91
+#: terp.glade:1770
+msgid "Edit / Save this resource"
+msgstr "Редагування / зберегти ресурс"
+
+#: terp.glade:1799
+msgid "Delete this resource"
+msgstr "Видалити ресурс"
+
+#: terp.glade:1828
+#, fuzzy
+msgid "Find a resource"
+msgstr "Виберіть ресурс !"
+
+#: terp.glade:1844
+msgid "Go to previous matched search"
+msgstr "Перейти до попереднього"
+
+#: terp.glade:1860
+msgid "Go to next matched resource"
+msgstr "Перейти до наступного"
+
+#: terp.glade:1876
+msgid "Switch current view: form / list"
+msgstr ""
+
+#: terp.glade:1877
+msgid "Other View"
+msgstr ""
+
+#: terp.glade:1907
+msgid "Launch actions about this resource"
+msgstr "Виконати дію для цього ресурсу"
+
+#: terp.glade:1908
+msgid "Action"
+msgstr "Дія"
+
+#: terp.glade:1925
+msgid "Print documents"
+msgstr "Друкувати документ"
+
+#: terp.glade:1954
+#, fuzzy
+msgid "Add an attachment to this resource"
+msgstr "Виконати дію для цього ресурсу"
+
+#: terp.glade:1955
+#, fuzzy
+msgid "Attachment"
+msgstr "Додатки"
+
+#: terp.glade:1985
+msgid "Close this window"
+msgstr "Закрити це вікно"
+
+#: terp.glade:2046
+msgid "Requests:"
+msgstr "Запити:"
+
+#: terp.glade:2085
+msgid "Read my Requests"
+msgstr "Показати мої запити"
+
+#: terp.glade:2113
+msgid "Send a new request"
+msgstr "Відіслати новий запит"
+
+#: terp.glade:2168
+msgid "Tiny ERP - Tree Resources"
+msgstr "Tiny ERP - дерево ресурсів"
+
+#: terp.glade:2303
+msgid "Shortcuts"
+msgstr "Закладки"
+
+#: terp.glade:2407
+msgid "Tiny ERP - Forms"
+msgstr "Tiny ERP - форми"
+
+#: terp.glade:2455
+#, fuzzy
+msgid "State:"
+msgstr "Статус:"
+
+#: terp.glade:2505
+msgid "Tiny ERP - About"
+msgstr "Tiny ERP - Про"
+
+#: terp.glade:2562
+msgid ""
+"<b>About Tiny ERP</b>\n"
+"<i>The most advanced Open Source ERP &amp; CRM !</i>"
+msgstr ""
+
+#: terp.glade:2631
+msgid ""
+"\n"
+"Tiny ERP - GTK Client - v%s\n"
+"\n"
+"Tiny ERP is an Open Source ERP+CRM\n"
+"for small to medium businesses.\n"
+"\n"
+"The whole source code is distributed under\n"
+"the terms of the GNU Public Licence.\n"
+"\n"
+"(c) 2003-TODAY, Tiny sprl\n"
+"\n"
+"More Info on www.TinyERP.com !"
+msgstr ""
+
+#: terp.glade:2678
+#, fuzzy
+msgid "_Tiny ERP"
+msgstr "Про Tiny ERP"
+
+#: terp.glade:2730
+msgid ""
+"\n"
+"(c) 2003-TODAY - Tiny sprl\n"
+"Tiny ERP is a product of Tiny sprl:\n"
+"\n"
+"Tiny sprl\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
+"Belgium\n"
+"\n"
+"Tel : (+32)81.81.37.00\n"
+"Mail: sales@tiny.be\n"
+"Web: http://tiny.be"
+msgstr ""
+
+#: terp.glade:2777
+#, fuzzy
+msgid "_Contact"
+msgstr "Контакти"
+
+#: terp.glade:2823
+msgid "Tiny ERP - forms widget"
+msgstr "Tiny ERP - елементи форми"
+
+#: terp.glade:2890
+msgid "Open the calendar widget"
+msgstr "Відкрити календар"
+
+#: terp.glade:3013
 #, fuzzy
 msgid "Search / Open a resource"
 msgstr "Пошук ресурсу"
 
-#: widget/view/form_gtk/many2one.py:145
-msgid "Action"
-msgstr "Дія"
-
-#: widget/view/form_gtk/many2one.py:146
-msgid "Report"
-msgstr ""
-
-#: widget/view/form_gtk/parser.py:65
-msgid "Wrong icon for the button !"
-msgstr ""
-
-#: widget/view/form_gtk/parser.py:100
+#: terp.glade:3123
 #, fuzzy
-msgid "Invalid Form, correct red fields !"
-msgstr "Не правільно заповнена форма, виправте червоні поля!"
+msgid "Titre"
+msgstr "Дерево"
 
-#: widget/view/form_gtk/parser.py:592 widget/view/form.py:212
-msgid "Translate label"
-msgstr ""
-
-#: widget/view/form_gtk/parser.py:597
-msgid "Translate view"
-msgstr ""
-
-#: widget/view/form_gtk/calendar.py:65 widget/view/form_gtk/calendar.py:165
-#: widget_search/calendar.py:58 widget_search/calendar.py:76
-msgid "Open the calendar widget"
-msgstr "Відкрити календар"
-
-#: widget/view/form_gtk/calendar.py:121 widget/view/form_gtk/calendar.py:241
-msgid "This widget is readonly !"
-msgstr "Цей елемент тільки для читання !"
-
-#: widget/view/form_gtk/calendar.py:124 widget/view/form_gtk/calendar.py:244
-#: widget_search/calendar.py:112
-msgid "Tiny ERP - Date selection"
-msgstr "Tiny ERP - Вибір дати"
-
-#: widget/view/form_gtk/calendar.py:250
-#, fuzzy
-msgid "Hour:"
-msgstr "Година :"
-
-#: widget/view/form_gtk/calendar.py:253
-#, fuzzy
-msgid "Minute:"
-msgstr "Хвилина :"
-
-#: widget/view/form_gtk/interface.py:51
-#: widget/view/form_gtk/one2many_list.py:121
+#: terp.glade:3144
 msgid "Set to default value"
 msgstr "Встановити значення за змовчуванням"
 
-#: widget/view/form_gtk/interface.py:52
-#, fuzzy
-msgid "Set as default"
-msgstr "Встановити за _змовчуванням"
-
-#: widget/view/form_gtk/one2many_list.py:124
+#: terp.glade:3153
 #, fuzzy
 msgid "Set Default"
 msgstr "Встановити за _змовчуванням"
 
-#: widget/view/form_gtk/one2many_list.py:135
+#: terp.glade:3173 terp.glade:3459
 msgid "Create a new entry"
 msgstr "Створити новий запис"
 
-#: widget/view/form_gtk/one2many_list.py:145
+#: terp.glade:3200
 #, fuzzy
 msgid "Edit this entry"
 msgstr "Видалити запис"
 
-#: widget/view/form_gtk/one2many_list.py:155
+#: terp.glade:3227
 msgid "Remove this entry"
 msgstr "Видалити запис"
 
-#: widget/view/form_gtk/one2many_list.py:167
+#: terp.glade:3265
 msgid "Previous"
 msgstr "Попередній"
 
-#: widget/view/form_gtk/one2many_list.py:180
+#: terp.glade:3292
+msgid "(0/0)"
+msgstr ""
+
+#: terp.glade:3317
 msgid "Next"
 msgstr "Наступний"
 
-#: widget/view/form_gtk/one2many_list.py:192
-msgid "Switch"
+#: terp.glade:3477
+msgid "Remove selected entry"
+msgstr "Видалити вибраний запис"
+
+#: terp.glade:3542
+msgid "label74"
 msgstr ""
 
-#: widget/view/form_gtk/one2many_list.py:230
+#: terp.glade:3722 terp.glade:6440 terp.glade:6545 terp.glade:6749
+msgid "-"
+msgstr "-"
+
+#: terp.glade:4177
+msgid "label46559"
+msgstr ""
+
+#: terp.glade:4302
+msgid "Tiny ERP - Date selection"
+msgstr "Tiny ERP - Вибір дати"
+
+#: terp.glade:4385 terp.glade:11300
+msgid "Tiny ERP - Confirmation"
+msgstr "Tiny ERP - Підтвердження"
+
+#: terp.glade:4473 terp.glade:11401 terp.glade:13781
+msgid "Hello World!"
+msgstr "Привіт Світ!"
+
+#: terp.glade:4507
+msgid "Tiny ERP - selection"
+msgstr "Tiny ERP - вибір"
+
+#: terp.glade:4580
+msgid "Your selection:"
+msgstr "Ваш вибір:"
+
+#: terp.glade:4655
+msgid "Tiny ERP - Filter"
+msgstr "Tiny ERP - Фільтр"
+
+#: terp.glade:4727
 #, fuzzy
-msgid "You have to select a resource !"
-msgstr "Виберіть ресурс !"
+msgid "S_earch:"
+msgstr "Пошук:"
 
-#: widget/view/form_gtk/image.py:43
+#: terp.glade:4773
 #, fuzzy
-msgid "Select a file"
-msgstr "Виберіть дату"
+msgid "on _field:"
+msgstr "за полем:"
 
-#: widget/view/form_gtk/image.py:90
+#: terp.glade:4798
+msgid "test"
+msgstr ""
+
+#: terp.glade:4813
 #, fuzzy
-msgid "Save as ..."
-msgstr "Зберегти додаток як..."
+msgid "_Select"
+msgstr "Вибрати"
 
-#: widget/view/form_gtk/image.py:96
-msgid "Open file ..."
-msgstr ""
-
-#: widget/view/form_gtk/wid_common.py:59
-msgid "Always applicable !"
-msgstr ""
-
-#: widget/view/form.py:138
-msgid "You must save this record to use the relate button !"
-msgstr ""
-
-#: widget/view/form.py:150
-msgid "You must select a record to use the relate button !"
-msgstr ""
-
-#: widget/view/graph_gtk/parser.py:68
+#: terp.glade:4830
 #, fuzzy
-msgid "Can not generate graph !"
-msgstr "Не можу записати у файл !"
+msgid "_Unselect"
+msgstr "Скасувати вибір"
 
-#: tinyerp-client.py:145
-msgid "Closing Tiny ERP, KeyboardInterrupt"
-msgstr ""
-
-#: plugins/__init__.py:20
-msgid "No available plugin for this resource !"
-msgstr "Немає доступного плагіну для ціого ресурсу !"
-
-#: plugins/__init__.py:22
-msgid "Choose a Plugin"
-msgstr "Виберіть плагін"
-
-#: widget_search/wid_int.py:50
-msgid "The content of the widget or excpetion if not valid"
-msgstr ""
-
-#: widget_search/calendar.py:54
+#: terp.glade:4857
 #, fuzzy
-msgid "Start date"
-msgstr "Статус:"
+msgid "Filter: "
+msgstr "Фільтр:"
 
-#: widget_search/calendar.py:72
-msgid "End date"
+#: terp.glade:4883
+#, fuzzy
+msgid "AL_L"
+msgstr "Усі"
+
+#: terp.glade:4900
+#, fuzzy
+msgid "N_ONE"
+msgstr "Жодного"
+
+#: terp.glade:4972
+msgid "<b><u>Actions</u></b>"
+msgstr "<b><u>Дії</u></b>"
+
+#: terp.glade:5012
+msgid "Tiny ERP - Dialog"
+msgstr "Tiny ERP - Діалог"
+
+#: terp.glade:5058
+msgid "Set to _Default"
+msgstr "Встановити за _змовчуванням"
+
+#: terp.glade:5085
+#, fuzzy
+msgid "Value _Preference"
+msgstr "Налаштування"
+
+#: terp.glade:5108
+#, fuzzy
+msgid "Tiny ERP, Field Preference target"
+msgstr "Tiny ERP - Налаштування"
+
+#: terp.glade:5181
+#, fuzzy
+msgid "Default _value:"
+msgstr "Значення за змовчуванням:"
+
+#: terp.glade:5276
+#, fuzzy
+msgid "_Domain:"
+msgstr "Домен:"
+
+#: terp.glade:5305
+#, fuzzy
+msgid "Field _Name:"
+msgstr "Назва поля:"
+
+#: terp.glade:5367
+msgid "<b>Value applicable if:</b>"
 msgstr ""
 
-#: widget_search/calendar.py:108 widget_search/checkbox.py:58
-#: widget_search/spinint.py:70 widget_search/spinbutton.py:69
-#: widget_search/reference.py:80 widget_search/char.py:53
-msgid "The content of the widget or ValueError if not valid"
+#: terp.glade:5426
+#, fuzzy
+msgid "_only for you"
+msgstr "тільки для Вас"
+
+#: terp.glade:5445
+#, fuzzy
+msgid "for _all users"
+msgstr "для усіх"
+
+#: terp.glade:5468
+msgid "<b>Value applicable for:</b>"
 msgstr ""
 
-#: widget_search/checkbox.py:42 widget_search/checkbox.py:52
+#: terp.glade:5512
+msgid "Tiny ERP - Export to CSV"
+msgstr "Tiny ERP - експорт у CSV"
+
+#: terp.glade:5627
+#, fuzzy
+msgid "<b>Predefined exports</b>"
+msgstr "<b>Поля для експорту</b>"
+
+#: terp.glade:5706 terp.glade:12888
+msgid "<b>All fields</b>"
+msgstr "<b>Усі поля</b>"
+
+#: terp.glade:5786 terp.glade:12968
+#, fuzzy
+msgid "_Add"
+msgstr "Додати"
+
+#: terp.glade:5865 terp.glade:13047
+#, fuzzy
+msgid "_Remove"
+msgstr "Видалити"
+
+#: terp.glade:5944
+#, fuzzy
+msgid "_Nothing"
+msgstr "Нічого"
+
+#: terp.glade:6034
+#, fuzzy
+msgid "Save List"
+msgstr "Зберегти опції"
+
+#: terp.glade:6120
+msgid "<b>Fields to export</b>"
+msgstr "<b>Поля для експорту</b>"
+
+#: terp.glade:6172
+msgid ""
+"Open in Excel\n"
+"Save as CSV"
+msgstr ""
+"Відкрити у Excel\n"
+"Зберегти як CSV"
+
+#: terp.glade:6199
+#, fuzzy
+msgid "Add _field names"
+msgstr "Добавити поля:"
+
+#: terp.glade:6219
+#, fuzzy
+msgid "<b>Opti_ons</b>"
+msgstr "<b>Опції</b>"
+
+#: terp.glade:6260
+msgid "Tiny ERP - Search"
+msgstr "Tiny ERP - Пошук"
+
+#: terp.glade:6391
+msgid "Tiny ERP - Search Widgets"
+msgstr "Tiny ERP - Вікно пошуку"
+
+#: terp.glade:6498
+msgid "Date de début"
+msgstr ""
+
+#: terp.glade:6671
+msgid "Search with this name"
+msgstr "Шукати за вказаним ім'ям"
+
+#: terp.glade:6698
+msgid "Clear the field"
+msgstr "Очистити поле"
+
+#: terp.glade:6763
 msgid "Yes"
 msgstr "Так!"
 
-#: widget_search/checkbox.py:43
+#: terp.glade:6783
 msgid "No"
 msgstr "Ні"
 
-#: widget_search/form.py:133
-#, fuzzy
-msgid "Limit :"
-msgstr "Обмеження:"
-
-#: widget_search/form.py:142
-#, fuzzy
-msgid "Offset :"
-msgstr "Зссув:"
-
-#: widget_search/form.py:179
-msgid "Parameters :"
-msgstr ""
-
-#: printer/printer.py:140
+#: terp.glade:6826
 msgid ""
-"Linux Automatic Printing not implemented.\n"
-"Use preview option !"
+"\n"
+"Yes\n"
+"No"
+msgstr ""
+"\n"
+"Так!\n"
+"Ні"
+
+#: terp.glade:6852
+msgid "Tiny ERP - Attachment"
+msgstr "Tiny ERP - Додатки"
+
+#: terp.glade:6922
+msgid "Filename:"
+msgstr "Назва файлу:"
+
+#: terp.glade:6994
+msgid "Description:"
+msgstr "Опис:"
+
+#: terp.glade:7098
+#, fuzzy
+msgid "Save text"
+msgstr "Зберегти"
+
+#: terp.glade:7354
+msgid "Tiny ERP - Error"
+msgstr "Tiny ERP - Помилка"
+
+#: terp.glade:7413
+msgid "Application Error !"
+msgstr "Помилка у программі !"
+
+#: terp.glade:7488
+msgid "Error 404"
+msgstr "Помилка 404"
+
+#: terp.glade:7513
+msgid "<b>Error code:</b>"
+msgstr "<b>Код помилки:</b>"
+
+#: terp.glade:7538
+msgid ""
+"This Page does not exist !\n"
+"Please retry"
+msgstr ""
+"Сторінка неіснує!\n"
+"Спробуйте ще раз"
+
+#: terp.glade:7564
+msgid "<i>Click on the Support Request tab if you need more help !</i>"
 msgstr ""
 
-#: printer/printer.py:148
+#: terp.glade:7602
 #, fuzzy
-msgid "Error no report"
-msgstr "Помилка при видаленні ресурсу!"
+msgid "De_scription"
+msgstr "Опис"
 
-#: printer/printer.py:165
-msgid "Write Report to File"
-msgstr "Писати звіт у файл"
+#: terp.glade:7652
+msgid ""
+"Error details\n"
+"dqsdsqdqsdsd"
+msgstr ""
 
-#~ msgid "Tiny ERP - Login"
-#~ msgstr "Tiny ERP - Вхід у систему"
+#: terp.glade:7669
+#, fuzzy
+msgid "_Details"
+msgstr "Деталі"
 
-#~ msgid "User:"
-#~ msgstr "Ім'я користувача:"
+#: terp.glade:7712
+msgid ""
+"<b>Complete this form to submit your bug and/or request a support.</b>\n"
+"<i>\n"
+"Your request will be send to Tiny ERP and we will reply you shortly.\n"
+"Note that we may not reply you if your Service Company is not a Tiny ERP "
+"partner.\n"
+"</i>"
+msgstr ""
 
-#~ msgid "Password:"
-#~ msgstr "Пароль:"
+#: terp.glade:7762
+msgid "<b>Your name: </b>"
+msgstr "<b>Ваше ім'я: </b>"
+
+#: terp.glade:7790
+msgid "<b>Your Company: </b>"
+msgstr "<b>Підприємство: </b>"
+
+#: terp.glade:7818
+msgid "<b>Your Email: </b>"
+msgstr "<b>Електронна пошта: </b>"
+
+#: terp.glade:7888
+msgid "Explain what you did: "
+msgstr "Поясніть що ви робили: "
+
+#: terp.glade:7916
+#, fuzzy
+msgid "Others Comments: "
+msgstr "Примітки: "
+
+#: terp.glade:8071
+msgid "Send Support Request"
+msgstr "Відіслати запит"
+
+#: terp.glade:8118
+#, fuzzy
+msgid "<b>support contract id  </b>"
+msgstr "<b>Запит</b>"
+
+#: terp.glade:8167 terp.glade:11159
+msgid ""
+"Not Urgent\n"
+"Medium\n"
+"Urgent\n"
+"Very Urgent"
+msgstr ""
+"Не терміново\n"
+"Помірно\n"
+"Терміново\n"
+"Дуже терміново"
+
+#: terp.glade:8188 terp.glade:11180
+#, fuzzy
+msgid "Emergency: "
+msgstr "Терміновість: "
+
+#: terp.glade:8216
+msgid "Phone Number: "
+msgstr "Телефон: "
+
+#: terp.glade:8304
+#, fuzzy
+msgid "<b>_Support Request</b>"
+msgstr "<b>Запит</b>"
+
+#: terp.glade:8343
+msgid "Tiny ERP - Ressource Edit"
+msgstr "Tiny ERP - редагування ресурсу"
+
+#: terp.glade:8414
+msgid "Tiny ERP - Link"
+msgstr "Tiny ERP - зв'язок"
+
+#: terp.glade:8512
+msgid "Tiny ERP - List"
+msgstr "Tiny ERP - Список"
+
+#: terp.glade:8582
+msgid "Tiny ERP - Preferences"
+msgstr "Tiny ERP - Налаштування"
+
+#: terp.glade:8651
+msgid "<b>Edit resource preferences</b>"
+msgstr ""
+
+#: terp.glade:8700
+msgid "Tip of the Day"
+msgstr "Порада дня"
+
+#: terp.glade:8774
+#, fuzzy
+msgid "Pre_vious Tip"
+msgstr "Попередня порада"
+
+#: terp.glade:8850
+#, fuzzy
+msgid "Ne_xt Tip"
+msgstr "Наступна порада"
+
+#: terp.glade:8954
+#, fuzzy
+msgid "_Display a new tip next time ?"
+msgstr "Показувати наступного разу?"
+
+#: terp.glade:8995
+msgid "Tiny ERP - Licence"
+msgstr "Tiny ERP - Лицензія"
+
+#: terp.glade:9054
+#, fuzzy
+msgid "Tiny ERP license"
+msgstr "Tiny ERP Client v2.1"
+
+#: terp.glade:9228
+msgid "Tiny ERP - Date & Time selection"
+msgstr "Tiny ERP - Вибір дати та часу"
+
+#: terp.glade:9306
+#, fuzzy
+msgid "Hour :"
+msgstr "Година :"
+
+#: terp.glade:9350
+#, fuzzy
+msgid "Minute :"
+msgstr "Хвилина :"
+
+#: terp.glade:9425
+#, fuzzy
+msgid "GO to ressource ID"
+msgstr "Перейти до ресурсу з ID..."
+
+#: terp.glade:9499
+msgid "Search ID:"
+msgstr "Шукати ID:"
+
+#: terp.glade:9582
+#, fuzzy
+msgid "Tiny ERP Survey"
+msgstr "Tiny ERP - Пошук"
+
+#: terp.glade:9654
+#, fuzzy
+msgid "<b>Tiny ERP Survey</b>"
+msgstr "Tiny ERP - Пошук"
+
+#: terp.glade:9679
+msgid ""
+"<i>Please fill in the following form in order to help us to improve Tiny ERP "
+"and better target new developments.</i>"
+msgstr ""
+
+#: terp.glade:9732
+msgid "Industry:"
+msgstr ""
+
+#: terp.glade:9761
+msgid "# Employees:"
+msgstr ""
+
+#: terp.glade:9862
+#, fuzzy
+msgid "Country:"
+msgstr "Година :"
+
+#: terp.glade:9890
+#, fuzzy
+msgid "Your Role:"
+msgstr "Ваш вибір:"
+
+#: terp.glade:9954
+#, fuzzy
+msgid "System:"
+msgstr "Статус:"
+
+#: terp.glade:10024
+msgid "How did you hear about us:"
+msgstr ""
+
+#: terp.glade:10077
+msgid "Open Source: "
+msgstr ""
+
+#: terp.glade:10403
+#, fuzzy
+msgid "<b>Your company</b>"
+msgstr "<b>Підприємство: </b>"
+
+#: terp.glade:10459
+msgid "We plan to use Tiny ERP"
+msgstr ""
+
+#: terp.glade:10478
+msgid "We plan to offer services on Tiny ERP"
+msgstr ""
+
+#: terp.glade:10518
+msgid ""
+"Write here any comment, note or suggestion you have concerning Tiny ERP. \n"
+"Tell us which ERP systems you used before, and what you plan to do with Tiny "
+"ERP..."
+msgstr ""
+
+#: terp.glade:10537
+#, fuzzy
+msgid "<b>Your interrest</b>"
+msgstr "<b>Ваше ім'я: </b>"
+
+#: terp.glade:10596
+msgid "E-Mail:"
+msgstr ""
+
+#: terp.glade:10645
+msgid ""
+"(Get Tiny ERP announces, documentation and new releases by email, maximum 6 "
+"mails a year.)"
+msgstr ""
+
+#: terp.glade:10677
+msgid "<b>Keep Informed</b>"
+msgstr ""
+
+#: terp.glade:10801
+msgid ""
+"<b>Complete this form to submit your bug and/or make a request for support.</"
+"b>\n"
+"<i>\n"
+"Your request will be sent to the Tiny ERP team and we will reply shortly.\n"
+"Note that we may not reply if you do not have a support contract with Tiny "
+"or an official partner.</i>"
+msgstr ""
+
+#: terp.glade:10850
+#, fuzzy
+msgid "<b>Your name:</b>"
+msgstr "<b>Ваше ім'я: </b>"
+
+#: terp.glade:10878
+#, fuzzy
+msgid "<b>Your Company:</b>"
+msgstr "<b>Підприємство: </b>"
+
+#: terp.glade:10906
+#, fuzzy
+msgid "<b>Your email:</b>"
+msgstr "<b>Електронна пошта: </b>"
+
+#: terp.glade:10976
+#, fuzzy
+msgid "Explain your problem:"
+msgstr "Поясніть що ви робили: "
+
+#: terp.glade:11004
+#, fuzzy
+msgid "Other comments:"
+msgstr "Примітки: "
+
+#: terp.glade:11110
+#, fuzzy
+msgid "<b>Support contract id:</b>"
+msgstr "<b>Запит</b>"
+
+#: terp.glade:11208
+#, fuzzy
+msgid "Phone number:"
+msgstr "Телефон: "
+
+#: terp.glade:11435
+#, fuzzy
+msgid "Keyboard shortcuts"
+msgstr "Закладки"
+
+#: terp.glade:11506
+msgid "<Ctrl> + O"
+msgstr ""
+
+#: terp.glade:11534
+#, fuzzy
+msgid "Connect"
+msgstr "З'єднатись..."
+
+#: terp.glade:11562
+msgid "<Ctrl> + F"
+msgstr ""
+
+#: terp.glade:11590
+#, fuzzy
+msgid "Find / Search"
+msgstr "Кінець пошуку"
+
+#: terp.glade:11618
+msgid "<Ctrl> + D"
+msgstr ""
+
+#: terp.glade:11646
+msgid "Delete"
+msgstr "Видалити"
+
+#: terp.glade:11674
+msgid "<Ctrl> + N"
+msgstr ""
+
+#: terp.glade:11702
+msgid "New"
+msgstr "Новий"
+
+#: terp.glade:11730
+msgid "<Ctrl> + <PgUp>"
+msgstr ""
+
+#: terp.glade:11758
+#, fuzzy
+msgid "Previous tab"
+msgstr "Попередній"
+
+#: terp.glade:11786
+msgid "<Ctrl> + <PgDn>"
+msgstr ""
+
+#: terp.glade:11842
+msgid "<Ctrl> + S"
+msgstr ""
+
+#: terp.glade:11870
+msgid "<Ctrl> + W"
+msgstr ""
+
+#: terp.glade:11898
+msgid "Save"
+msgstr "Зберегти"
+
+#: terp.glade:11954
+msgid "<PgUp>"
+msgstr ""
+
+#: terp.glade:11982
+msgid "<PgDn>"
+msgstr ""
+
+#: terp.glade:12010
+#, fuzzy
+msgid "Previous record"
+msgstr "Попередній"
+
+#: terp.glade:12038
+#, fuzzy
+msgid "Next record"
+msgstr "Наступний: Не вибрано жодного запису!"
+
+#: terp.glade:12066
+msgid "<Ctrl> + L"
+msgstr ""
+
+#: terp.glade:12094
+msgid "Switch view mode"
+msgstr ""
+
+#: terp.glade:12122
+msgid "<b>Shortcuts for TinyERP</b>"
+msgstr ""
+
+#: terp.glade:12177
+msgid "<Ctrl> + <Enter>"
+msgstr ""
+
+#: terp.glade:12205
+#, fuzzy
+msgid "Save and Close window"
+msgstr "Закрити вікно"
+
+#: terp.glade:12233
+msgid "<i>When editing a resource in a popup window</i>"
+msgstr ""
+
+#: terp.glade:12261
+msgid "<Ctrl> + <Esc>"
+msgstr ""
+
+#: terp.glade:12289
+msgid "Close window without saving"
+msgstr ""
+
+#: terp.glade:12323
+#, fuzzy
+msgid "Main Shortcuts"
+msgstr "Закладки"
+
+#: terp.glade:12355
+#, fuzzy
+msgid "<b>Shortcuts in text entries</b>"
+msgstr "<b>Ваше ім'я: </b>"
+
+#: terp.glade:12383
+msgid "<CTRL> + X"
+msgstr ""
+
+#: terp.glade:12411
+msgid "<CTRL> + C"
+msgstr ""
+
+#: terp.glade:12439
+msgid "<CTRL> + V"
+msgstr ""
+
+#: terp.glade:12467
+#, fuzzy
+msgid "Cut selected text"
+msgstr "Видалити вибраний запис"
+
+#: terp.glade:12495
+#, fuzzy
+msgid "Copy selected text"
+msgstr "Видалити вибраний запис"
+
+#: terp.glade:12523
+#, fuzzy
+msgid "Paste selected text"
+msgstr "Видалити вибраний запис"
+
+#: terp.glade:12551
+msgid "<TAB>"
+msgstr ""
+
+#: terp.glade:12579
+msgid "Next editable widget"
+msgstr ""
+
+#: terp.glade:12607
+msgid "<SHIFT> + <TAB>"
+msgstr ""
+
+#: terp.glade:12635
+#, fuzzy
+msgid "Previous editable widget"
+msgstr "Попередній"
+
+#: terp.glade:12663
+msgid "<ENTER>"
+msgstr ""
+
+#: terp.glade:12691
+#, fuzzy
+msgid "Auto-Complete text field"
+msgstr "Очистити поле"
+
+#: terp.glade:12725
+#, fuzzy
+msgid "Edition Widgets"
+msgstr "Редагується документ:"
+
+#: terp.glade:12757
+#, fuzzy
+msgid "Import from CSV"
+msgstr "Імпорт CSV файлу"
+
+#: terp.glade:13126
+#, fuzzy
+msgid "N_othing"
+msgstr "Нічого"
+
+#: terp.glade:13216
+msgid "Auto-Detect"
+msgstr ""
+
+#: terp.glade:13302
+msgid "<b>Fields to import</b>"
+msgstr "<b>Поля для імпорту</b>"
+
+#: terp.glade:13370
+#, fuzzy
+msgid "File to Import: "
+msgstr "<b>Поля для імпорту</b>"
+
+#: terp.glade:13395
+msgid "Sélectionner un fichier"
+msgstr ""
+
+#: terp.glade:13436
+#, fuzzy
+msgid "Field Separater:"
+msgstr "Назва поля:"
+
+#: terp.glade:13464
+msgid "Encoding:"
+msgstr ""
+
+#: terp.glade:13496
+msgid ","
+msgstr ""
+
+#: terp.glade:13515
+msgid "Text Delimiter:"
+msgstr ""
+
+#: terp.glade:13547
+msgid "\""
+msgstr ""
+
+#: terp.glade:13566
+msgid "Lines to Skip:"
+msgstr ""
+
+#: terp.glade:13616
+msgid ""
+"UTF-8\n"
+"Latin1"
+msgstr ""
+
+#: terp.glade:13637
+msgid "CSV Parameters"
+msgstr ""
+
+#: terp.glade:13841
+#, fuzzy
+msgid "Server"
+msgstr "Сервер:"
+
+#: terp.glade:13904
+msgid "<b>Connect to a Tiny ERP server</b>"
+msgstr ""
+
+#: terp.glade:13950
+msgid "Port:"
+msgstr "Порт:"
+
+#: terp.glade:14004
+msgid "8069"
+msgstr ""
+
+#: terp.glade:14022
+#, fuzzy
+msgid "Protocol connection:"
+msgstr "Оберіть Вашу дію"
+
+#: terp.glade:14105
+#, fuzzy
+msgid "Choose a database..."
+msgstr "Виберіть дату"
+
+#: terp.glade:14175
+#, fuzzy
+msgid "<b>Backup a database</b>"
+msgstr "Створити новий ресурс"
+
+#: terp.glade:14225 terp.glade:14651 terp.glade:15217 terp.glade:15861
+msgid "http://localhost:8069"
+msgstr ""
+
+#: terp.glade:14431
+msgid "Database: "
+msgstr ""
+
+#: terp.glade:14503
+#, fuzzy
+msgid "Restore a database"
+msgstr "Виберіть дату"
+
+#: terp.glade:14572
+#, fuzzy
+msgid "<b>Restore a database</b>"
+msgstr "Створити новий ресурс"
+
+#: terp.glade:14802 terp.glade:15424
+msgid "New database name: "
+msgstr ""
+
+#: terp.glade:14852
+msgid "(must not contain any special char)"
+msgstr ""
+
+#: terp.glade:14909
+#, fuzzy
+msgid "Operation in progress"
+msgstr ""
+"Operation failed !\n"
+"I/O error"
+
+#: terp.glade:14968
+#, fuzzy
+msgid "<b>Operation in progress</b>"
+msgstr ""
+"Operation failed !\n"
+"I/O error"
+
+#: terp.glade:15004
+msgid ""
+"Please wait,\n"
+"this operation may take a while..."
+msgstr ""
+
+#: terp.glade:15068
+#, fuzzy
+msgid "Create a new database"
+msgstr "Створити новий запис"
+
+#: terp.glade:15131
+#, fuzzy
+msgid "<b>Create a new database</b>"
+msgstr "Створити новий ресурс"
+
+#: terp.glade:15184
+#, fuzzy
+msgid "Tiny ERP server:"
+msgstr "Tiny ERP - Пошук"
+
+#: terp.glade:15213
+msgid ""
+"This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
+"installed on this computer. Click on change to change the address."
+msgstr ""
+
+#: terp.glade:15317
+#, fuzzy
+msgid "Super admin password:"
+msgstr "Пароль:"
+
+#: terp.glade:15345
+#, fuzzy
+msgid "Default language:"
+msgstr "Значення за змовчуванням:"
+
+#: terp.glade:15373
+msgid "Load demonstration data: "
+msgstr ""
+
+#: terp.glade:15401
+msgid ""
+"Check this box if you want demo data to be installed on your new database."
+msgstr ""
+
+#: terp.glade:15452
+msgid ""
+"Choose the name of the database that will be created. The name must not "
+"contain any special character. Exemple: 'terp'."
+msgstr ""
+
+#: terp.glade:15489
+msgid "(use 'admin', if you did not changed it)"
+msgstr ""
+
+#: terp.glade:15517
+msgid ""
+"This is the password of the user that have the rights to administer "
+"databases. This is not a Tiny ERP user, just a super administrator. If you "
+"did not changed it, the password is 'admin' after installation."
+msgstr ""
+
+#: terp.glade:15541
+#, fuzzy
+msgid "Hello World"
+msgstr "Привіт Світ!"
+
+#: terp.glade:15562
+msgid ""
+"Choose the default language that will be installed for this database. You "
+"will be able to install new languages after installation through the "
+"administration menu."
+msgstr ""
+
+#: terp.glade:15587
+msgid "(must not contain any special character)"
+msgstr ""
+
+#: terp.glade:15626
+#, fuzzy
+msgid "Change password"
+msgstr "Змінити корінь"
+
+#: terp.glade:15698
+msgid "<b>Change your DB administration password</b>"
+msgstr ""
+
+#: terp.glade:15744
+#, fuzzy
+msgid "New password confirmation:"
+msgstr "Пароль:"
+
+#: terp.glade:15772
+#, fuzzy
+msgid "New password:"
+msgstr "Пароль:"
+
+#: terp.glade:15800
+#, fuzzy
+msgid "Old password:"
+msgstr "Пароль:"
+
+#: terp.glade:16042
+#, fuzzy
+msgid "Tiny ERP Message"
+msgstr "Tiny ERP - Лицензія"
+
+#: terp.glade:16098
+msgid "msg_title"
+msgstr ""
+
+#: terp.glade:16181
+msgid "Database creation"
+msgstr ""
+
+#: terp.glade:16401
+msgid "<b>Database created successfully !</b>"
+msgstr ""
+
+#: terp.glade:16459
+msgid ""
+"You can connect to the new database using one of the following account:\n"
+"\n"
+"    Administrator: admin / admin "
+msgstr ""
+
+#: terp.glade:16491
+msgid "Concurrency exception"
+msgstr ""
+
+#: terp.glade:16578
+msgid "Compare"
+msgstr ""
+
+#: terp.glade:16653
+msgid "Write anyway"
+msgstr ""
+
+#: terp.glade:16718
+msgid ""
+"<b>\n"
+"Write concurrency warning :\n"
+"</b>\n"
+"This document has been modified while you were editing it.\n"
+"  Choose :\n"
+"   - \"Cancel\" to cancel saving.\n"
+"   - \"Compare\" to see the modified version.\n"
+"   - \"write anyway\" save your current version.\n"
+msgstr ""
+
+#~ msgid "specify alternate config file"
+#~ msgstr "Вкажіть альтернативний файл конфігурації"
+
+#~ msgid "enable basic debugging"
+#~ msgstr "стандартну відладку ввімкнено"
+
+#~ msgid "specify channels to log"
+#~ msgstr "вкажіть канал для журналу"
+
+#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+#~ msgstr "вкажіть рівень журналу: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 
 #, fuzzy
-#~ msgid "Change"
-#~ msgstr "Змінити корінь"
+#~ msgid "specify the user login"
+#~ msgstr "вкажіть канал для журналу"
 
-#~ msgid "Server:"
-#~ msgstr "Сервер:"
+#~ msgid "Unable to launch this file !"
+#~ msgstr "Не можу запустити файл!"
 
-#~ msgid "_File"
-#~ msgstr "_Файл"
-
-#, fuzzy
-#~ msgid "_Connect..."
-#~ msgstr "З'єднатись..."
+#~ msgid "Unable to launch the application associated to this content !"
+#~ msgstr "Не можу запустити програму асоційовану з цим контентом!"
 
 #, fuzzy
-#~ msgid "_Disconnect"
-#~ msgstr "Роз'єднатись"
-
-#~ msgid "_User"
-#~ msgstr "Користувач"
-
-#, fuzzy
-#~ msgid "_Preferences"
-#~ msgstr "Налаштування"
-
-#, fuzzy
-#~ msgid "_Send a request"
+#~ msgid "Support request sent !"
 #~ msgstr "Відіслати запит"
 
 #, fuzzy
-#~ msgid "_Read my requests"
-#~ msgstr "Показати мої запити"
+#~ msgid "Could not connect to server !"
+#~ msgstr ""
+#~ "Помилка при з'єднанні!\n"
+#~ "Не можу з'єднатись з сервером!"
 
 #, fuzzy
-#~ msgid "_Waiting Requests"
-#~ msgstr "Запити:"
+#~ msgid "%s request(s)"
+#~ msgstr " запит(и)"
+
+#~ msgid "No request"
+#~ msgstr "Нема запитів"
 
 #, fuzzy
-#~ msgid "For_m"
-#~ msgstr "_Форма"
-
-#, fuzzy
-#~ msgid "_New"
-#~ msgstr "Новий"
-
-#, fuzzy
-#~ msgid "_Save"
-#~ msgstr "Зберегти"
-
-#, fuzzy
-#~ msgid "Copy this resource"
-#~ msgstr "Видалити цей ресурс"
-
-#, fuzzy
-#~ msgid "_Delete"
-#~ msgstr "Видалити"
-
-#, fuzzy
-#~ msgid "Ne_xt"
-#~ msgstr "Наступний"
-
-#, fuzzy
-#~ msgid "Pre_vious"
-#~ msgstr "Попередній"
-
-#, fuzzy
-#~ msgid "Close Tab"
-#~ msgstr "Закрити"
-
-#, fuzzy
-#~ msgid "Previous Tab"
-#~ msgstr "Попередня порада"
-
-#, fuzzy
-#~ msgid "Next Tab"
-#~ msgstr "Наступна порада"
-
-#, fuzzy
-#~ msgid "View _logs"
-#~ msgstr "Показати журнал"
-
-#, fuzzy
-#~ msgid "_Go to resource ID..."
-#~ msgstr "Перейти до ресурсу з ID..."
-
-#, fuzzy
-#~ msgid "_Open"
-#~ msgstr "Відкрити"
-
-#, fuzzy
-#~ msgid "Reloa_d / Undo"
-#~ msgstr "Поновити"
-
-#, fuzzy
-#~ msgid "Repeat latest _action"
-#~ msgstr "Повторити останню дію"
-
-#~ msgid "_Preview in PDF"
-#~ msgstr "_Перегляд у PDF"
-
-#, fuzzy
-#~ msgid "Previe_w in editor"
-#~ msgstr "Перегляд у _word"
-
-#, fuzzy
-#~ msgid "Expor_t data..."
-#~ msgstr "Експорт даних..."
-
-#, fuzzy
-#~ msgid "I_mport data..."
-#~ msgstr "Імпорт даних..."
-
-#~ msgid "_Options"
-#~ msgstr "_Опції"
-
-#, fuzzy
-#~ msgid "_Menubar"
-#~ msgstr "Меню"
-
-#, fuzzy
-#~ msgid "Text _and Icons"
-#~ msgstr "Текст та іконки"
-
-#, fuzzy
-#~ msgid "_Icons only"
-#~ msgstr "Тільки іконки"
-
-#, fuzzy
-#~ msgid "_Text only"
-#~ msgstr "Тільки текст"
-
-#, fuzzy
-#~ msgid "_Theme"
-#~ msgstr "Дерево"
-
-#, fuzzy
-#~ msgid "Tiny ERP Theme"
-#~ msgstr "Tiny ERP - Лицензія"
-
-#, fuzzy
-#~ msgid "_Forms"
-#~ msgstr "_Форма"
-
-#, fuzzy
-#~ msgid "_Print"
-#~ msgstr "Друк"
-
-#, fuzzy
-#~ msgid "Previe_w before print"
-#~ msgstr "Перегляд перед друком"
-
-#, fuzzy
-#~ msgid "_Save options"
-#~ msgstr "Зберегти опції"
-
-#, fuzzy
-#~ msgid "_Plugins"
-#~ msgstr "Плагіни"
-
-#, fuzzy
-#~ msgid "_Execute a plugin"
-#~ msgstr "Виконати плагін"
-
-#, fuzzy
-#~ msgid "_Help"
-#~ msgstr "Допомога"
-
-#, fuzzy
-#~ msgid "Support Request"
-#~ msgstr "Відіслати запит"
-
-#, fuzzy
-#~ msgid "_Tips"
-#~ msgstr "Поради"
-
-#, fuzzy
-#~ msgid "Keyboard Shortcuts"
-#~ msgstr "Закладки"
-
-#, fuzzy
-#~ msgid "_Licence"
-#~ msgstr "Ліцензія"
-
-#, fuzzy
-#~ msgid "_About..."
-#~ msgstr "Про..."
-
-#~ msgid "Edit / Save this resource"
-#~ msgstr "Редагування / зберегти ресурс"
-
-#~ msgid "Delete this resource"
-#~ msgstr "Видалити ресурс"
-
-#, fuzzy
-#~ msgid "Find a resource"
-#~ msgstr "Виберіть ресурс !"
-
-#~ msgid "Go to previous matched search"
-#~ msgstr "Перейти до попереднього"
-
-#~ msgid "Go to next matched resource"
-#~ msgstr "Перейти до наступного"
-
-#~ msgid "Launch actions about this resource"
-#~ msgstr "Виконати дію для цього ресурсу"
-
-#~ msgid "Print documents"
-#~ msgstr "Друкувати документ"
-
-#, fuzzy
-#~ msgid "Add an attachment to this resource"
-#~ msgstr "Виконати дію для цього ресурсу"
-
-#~ msgid "Attachement"
-#~ msgstr "Додатки"
-
-#~ msgid "Close this window"
-#~ msgstr "Закрити це вікно"
-
-#~ msgid "Requests:"
-#~ msgstr "Запити:"
-
-#~ msgid "Read my Requests"
-#~ msgstr "Показати мої запити"
-
-#~ msgid "Send a new request"
-#~ msgstr "Відіслати новий запит"
-
-#~ msgid "Tiny ERP - Tree Resources"
-#~ msgstr "Tiny ERP - дерево ресурсів"
-
-#~ msgid "Shortcuts"
-#~ msgstr "Закладки"
-
-#~ msgid "Tiny ERP - Forms"
-#~ msgstr "Tiny ERP - форми"
-
-#~ msgid "Tiny ERP - About"
-#~ msgstr "Tiny ERP - Про"
-
-#, fuzzy
-#~ msgid "_Tiny ERP"
-#~ msgstr "Про Tiny ERP"
-
-#, fuzzy
-#~ msgid "_Contact"
-#~ msgstr "Контакти"
-
-#~ msgid "Tiny ERP - forms widget"
-#~ msgstr "Tiny ERP - елементи форми"
-
-#~ msgid "Remove selected entry"
-#~ msgstr "Видалити вибраний запис"
-
-#~ msgid "-"
-#~ msgstr "-"
-
-#~ msgid "Tiny ERP - Confirmation"
-#~ msgstr "Tiny ERP - Підтвердження"
-
-#~ msgid "Hello World!"
-#~ msgstr "Привіт Світ!"
-
-#~ msgid "Tiny ERP - selection"
-#~ msgstr "Tiny ERP - вибір"
-
-#~ msgid "Your selection:"
-#~ msgstr "Ваш вибір:"
-
-#~ msgid "Tiny ERP - Filter"
-#~ msgstr "Tiny ERP - Фільтр"
-
-#, fuzzy
-#~ msgid "S_earch:"
-#~ msgstr "Пошук:"
-
-#, fuzzy
-#~ msgid "on _field:"
-#~ msgstr "за полем:"
-
-#, fuzzy
-#~ msgid "_Select"
-#~ msgstr "Вибрати"
-
-#, fuzzy
-#~ msgid "_Unselect"
-#~ msgstr "Скасувати вибір"
-
-#, fuzzy
-#~ msgid "Filter: "
-#~ msgstr "Фільтр:"
-
-#, fuzzy
-#~ msgid "AL_L"
-#~ msgstr "Усі"
-
-#, fuzzy
-#~ msgid "N_ONE"
-#~ msgstr "Жодного"
-
-#~ msgid "<b><u>Actions</u></b>"
-#~ msgstr "<b><u>Дії</u></b>"
-
-#~ msgid "Tiny ERP - Dialog"
-#~ msgstr "Tiny ERP - Діалог"
-
-#~ msgid "Set to _Default"
-#~ msgstr "Встановити за _змовчуванням"
-
-#, fuzzy
-#~ msgid "Default _value:"
-#~ msgstr "Значення за змовчуванням:"
-
-#, fuzzy
-#~ msgid "_Domain:"
-#~ msgstr "Домен:"
-
-#, fuzzy
-#~ msgid "Field _Name:"
-#~ msgstr "Назва поля:"
-
-#, fuzzy
-#~ msgid "_only for you"
-#~ msgstr "тільки для Вас"
-
-#, fuzzy
-#~ msgid "for _all users"
-#~ msgstr "для усіх"
-
-#~ msgid "Tiny ERP - Export to CSV"
-#~ msgstr "Tiny ERP - експорт у CSV"
-
-#, fuzzy
-#~ msgid "<b>Predefined exports</b>"
-#~ msgstr "<b>Поля для експорту</b>"
-
-#~ msgid "<b>All fields</b>"
-#~ msgstr "<b>Усі поля</b>"
-
-#, fuzzy
-#~ msgid "_Add"
-#~ msgstr "Додати"
-
-#, fuzzy
-#~ msgid "_Remove"
-#~ msgstr "Видалити"
-
-#, fuzzy
-#~ msgid "_Nothing"
-#~ msgstr "Нічого"
-
-#, fuzzy
-#~ msgid "Save List"
-#~ msgstr "Зберегти опції"
-
-#~ msgid "<b>Fields to export</b>"
-#~ msgstr "<b>Поля для експорту</b>"
+#~ msgid " - %s pending request(s)"
+#~ msgstr " запити що очікують"
 
 #~ msgid ""
-#~ "Open in Excel\n"
-#~ "Save as CSV"
+#~ "Connection error !\n"
+#~ "Unable to connect to the server !"
 #~ msgstr ""
-#~ "Відкрити у Excel\n"
-#~ "Зберегти як CSV"
-
-#, fuzzy
-#~ msgid "Add _field names"
-#~ msgstr "Добавити поля:"
-
-#, fuzzy
-#~ msgid "<b>Opti_ons</b>"
-#~ msgstr "<b>Опції</b>"
-
-#~ msgid "Tiny ERP - Search"
-#~ msgstr "Tiny ERP - Пошук"
-
-#~ msgid "Tiny ERP - Search Widgets"
-#~ msgstr "Tiny ERP - Вікно пошуку"
-
-#~ msgid "Search with this name"
-#~ msgstr "Шукати за вказаним ім'ям"
-
-#~ msgid "Clear the field"
-#~ msgstr "Очистити поле"
+#~ "Помилка при з'єднанні!\n"
+#~ "Не можу з'єднатись з сервером!"
 
 #~ msgid ""
-#~ "\n"
-#~ "Yes\n"
-#~ "No"
+#~ "Connection error !\n"
+#~ "Bad username or password !"
 #~ msgstr ""
-#~ "\n"
-#~ "Так!\n"
-#~ "Ні"
+#~ "Помилка при з'єднанні!\n"
+#~ "Не правільне ім'я користувача або пароль!"
 
-#~ msgid "Tiny ERP - Attachment"
-#~ msgstr "Tiny ERP - Додатки"
+#~ msgid "Connection Error !"
+#~ msgstr "Помилка при з'єднанні!"
 
-#~ msgid "Filename:"
-#~ msgstr "Назва файлу:"
-
-#~ msgid "Description:"
-#~ msgstr "Опис:"
+#~ msgid "Not logged !"
+#~ msgstr "Не в системі!"
 
 #, fuzzy
-#~ msgid "Save text"
-#~ msgstr "Зберегти"
+#~ msgid "Validation Error."
+#~ msgstr "Помилка программи"
 
-#~ msgid "Tiny ERP - Error"
-#~ msgstr "Tiny ERP - Помилка"
-
-#~ msgid "Application Error !"
-#~ msgstr "Помилка у программі !"
-
-#~ msgid "Error 404"
-#~ msgstr "Помилка 404"
-
-#~ msgid "<b>Error code:</b>"
-#~ msgstr "<b>Код помилки:</b>"
+#~ msgid " record(s) saved !"
+#~ msgstr " запис(и) збережено!"
 
 #~ msgid ""
-#~ "This Page does not exist !\n"
-#~ "Please retry"
-#~ msgstr ""
-#~ "Сторінка неіснує!\n"
-#~ "Спробуйте ще раз"
-
-#, fuzzy
-#~ msgid "De_scription"
-#~ msgstr "Опис"
-
-#, fuzzy
-#~ msgid "_Details"
-#~ msgstr "Деталі"
-
-#~ msgid "<b>Your name: </b>"
-#~ msgstr "<b>Ваше ім'я: </b>"
-
-#~ msgid "<b>Your Company: </b>"
-#~ msgstr "<b>Підприємство: </b>"
-
-#~ msgid "<b>Your Email: </b>"
-#~ msgstr "<b>Електронна пошта: </b>"
-
-#~ msgid "Explain what you did: "
-#~ msgstr "Поясніть що ви робили: "
-
-#, fuzzy
-#~ msgid "Others Comments: "
-#~ msgstr "Примітки: "
-
-#~ msgid "Send Support Request"
-#~ msgstr "Відіслати запит"
-
-#, fuzzy
-#~ msgid "<b>support contract id  </b>"
-#~ msgstr "<b>Запит</b>"
-
-#~ msgid ""
-#~ "Not Urgent\n"
-#~ "Medium\n"
-#~ "Urgent\n"
-#~ "Very Urgent"
-#~ msgstr ""
-#~ "Не терміново\n"
-#~ "Помірно\n"
-#~ "Терміново\n"
-#~ "Дуже терміново"
-
-#, fuzzy
-#~ msgid "Emergency: "
-#~ msgstr "Терміновість: "
-
-#~ msgid "Phone Number: "
-#~ msgstr "Телефон: "
-
-#, fuzzy
-#~ msgid "<b>_Support Request</b>"
-#~ msgstr "<b>Запит</b>"
-
-#~ msgid "Tiny ERP - Ressource Edit"
-#~ msgstr "Tiny ERP - редагування ресурсу"
-
-#~ msgid "Tiny ERP - List"
-#~ msgstr "Tiny ERP - Список"
-
-#~ msgid "Tiny ERP - Preferences"
-#~ msgstr "Tiny ERP - Налаштування"
-
-#~ msgid "Tip of the Day"
-#~ msgstr "Порада дня"
-
-#, fuzzy
-#~ msgid "Pre_vious Tip"
-#~ msgstr "Попередня порада"
-
-#, fuzzy
-#~ msgid "Ne_xt Tip"
-#~ msgstr "Наступна порада"
-
-#, fuzzy
-#~ msgid "_Display a new tip next time ?"
-#~ msgstr "Показувати наступного разу?"
-
-#~ msgid "Tiny ERP - Licence"
-#~ msgstr "Tiny ERP - Лицензія"
-
-#~ msgid "Tiny ERP - Date & Time selection"
-#~ msgstr "Tiny ERP - Вибір дати та часу"
-
-#~ msgid "Search ID:"
-#~ msgstr "Шукати ID:"
-
-#, fuzzy
-#~ msgid "Tiny ERP Survey"
-#~ msgstr "Tiny ERP - Пошук"
-
-#, fuzzy
-#~ msgid "Your Role:"
-#~ msgstr "Ваш вибір:"
-
-#, fuzzy
-#~ msgid "System:"
-#~ msgstr "Статус:"
-
-#, fuzzy
-#~ msgid "<b>Your company</b>"
-#~ msgstr "<b>Підприємство: </b>"
-
-#, fuzzy
-#~ msgid "<b>Your interrest</b>"
-#~ msgstr "<b>Ваше ім'я: </b>"
-
-#, fuzzy
-#~ msgid "<b>Your name:</b>"
-#~ msgstr "<b>Ваше ім'я: </b>"
-
-#, fuzzy
-#~ msgid "<b>Your Company:</b>"
-#~ msgstr "<b>Підприємство: </b>"
-
-#, fuzzy
-#~ msgid "<b>Your email:</b>"
-#~ msgstr "<b>Електронна пошта: </b>"
-
-#, fuzzy
-#~ msgid "Explain your problem:"
-#~ msgstr "Поясніть що ви робили: "
-
-#, fuzzy
-#~ msgid "<b>Support contract id:</b>"
-#~ msgstr "<b>Запит</b>"
-
-#, fuzzy
-#~ msgid "Phone number:"
-#~ msgstr "Телефон: "
-
-#, fuzzy
-#~ msgid "Connect"
-#~ msgstr "З'єднатись..."
-
-#, fuzzy
-#~ msgid "Find / Search"
-#~ msgstr "Кінець пошуку"
-
-#~ msgid "Delete"
-#~ msgstr "Видалити"
-
-#~ msgid "New"
-#~ msgstr "Новий"
-
-#, fuzzy
-#~ msgid "Previous tab"
-#~ msgstr "Попередній"
-
-#~ msgid "Save"
-#~ msgstr "Зберегти"
-
-#, fuzzy
-#~ msgid "Previous record"
-#~ msgstr "Попередній"
-
-#, fuzzy
-#~ msgid "Next record"
-#~ msgstr "Наступний: Не вибрано жодного запису!"
-
-#, fuzzy
-#~ msgid "Save and Close window"
-#~ msgstr "Закрити вікно"
-
-#, fuzzy
-#~ msgid "Main Shortcuts"
-#~ msgstr "Закладки"
-
-#, fuzzy
-#~ msgid "Cut selected text"
-#~ msgstr "Видалити вибраний запис"
-
-#, fuzzy
-#~ msgid "Copy selected text"
-#~ msgstr "Видалити вибраний запис"
-
-#, fuzzy
-#~ msgid "Paste selected text"
-#~ msgstr "Видалити вибраний запис"
-
-#, fuzzy
-#~ msgid "Auto-Complete text field"
-#~ msgstr "Очистити поле"
-
-#, fuzzy
-#~ msgid "Edition Widgets"
-#~ msgstr "Редагується документ:"
-
-#, fuzzy
-#~ msgid "N_othing"
-#~ msgstr "Нічого"
-
-#~ msgid "<b>Fields to import</b>"
-#~ msgstr "<b>Поля для імпорту</b>"
-
-#, fuzzy
-#~ msgid "File to Import: "
-#~ msgstr "<b>Поля для імпорту</b>"
-
-#, fuzzy
-#~ msgid "Server"
-#~ msgstr "Сервер:"
-
-#~ msgid "Port:"
-#~ msgstr "Порт:"
-
-#, fuzzy
-#~ msgid "Secure connection:"
-#~ msgstr "Оберіть Вашу дію"
-
-#, fuzzy
-#~ msgid "Operation in progress"
+#~ "Operation failed !\n"
+#~ "I/O error"
 #~ msgstr ""
 #~ "Operation failed !\n"
 #~ "I/O error"
 
-#, fuzzy
-#~ msgid "Create a new database"
-#~ msgstr "Створити новий запис"
+#~ msgid "Error Opening Excel !"
+#~ msgstr "Помилка при відкритті Excel !"
+
+#~ msgid ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+#~ msgstr ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+
+#~ msgid "Export Data"
+#~ msgstr "Експорт данних"
+
+#~ msgid "Preferences"
+#~ msgstr "Налаштування"
+
+#~ msgid "Preference"
+#~ msgstr "Налаштування"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Description"
+#~ msgstr "Опис"
+
+#~ msgid "Reload"
+#~ msgstr "Поновити"
+
+#~ msgid "No resource selected !"
+#~ msgstr "Не вирбрано ресурс !"
 
 #, fuzzy
-#~ msgid "<b>Create a new database</b>"
-#~ msgstr "Створити новий ресурс"
+#~ msgid "You have to select one resource!"
+#~ msgstr "Виберіть ресурс !"
 
 #, fuzzy
-#~ msgid "Default language:"
-#~ msgstr "Значення за змовчуванням:"
+#~ msgid "Are you sure to remove this record ?"
+#~ msgstr ""
+#~ "Ви впевнені що хочете\n"
+#~ "видалити цей запис?"
 
 #, fuzzy
-#~ msgid "Change password"
+#~ msgid "Are you sure to remove those records ?"
+#~ msgstr ""
+#~ "Ви впевнені що хочете\n"
+#~ "видалити цей запис?"
+
+#, fuzzy
+#~ msgid "Resources not removed !"
+#~ msgstr "Ресурс видалено."
+
+#, fuzzy
+#~ msgid "Resources removed."
+#~ msgstr "Ресурс видалено."
+
+#, fuzzy
+#~ msgid "Document saved !"
+#~ msgstr "Налаштування збережено!"
+
+#~ msgid "No record selected!"
+#~ msgstr "Не вибрано записів!"
+
+#, fuzzy
+#~ msgid "No record selected"
+#~ msgstr "Не вибрано записів!"
+
+#~ msgid "New document"
+#~ msgstr "Новий документ"
+
+#, fuzzy
+#~ msgid "Editing document (id: "
+#~ msgstr "Редагується документ:"
+
+#~ msgid "Record: "
+#~ msgstr "Запис:"
+
+#~ msgid "No preference available for this resource !"
+#~ msgstr "Немає налаштувань для цього ресурсу !"
+
+#, fuzzy
+#~ msgid "Tiny ERP Search: %s"
+#~ msgstr "Tiny ERP - Пошук"
+
+#, fuzzy
+#~ msgid "Tiny ERP Search: %s (%%d result(s))"
+#~ msgstr "Tiny ERP - Вікно пошуку"
+
+#~ msgid "Name"
+#~ msgstr "Ім'я"
+
+#~ msgid "Ressource Name"
+#~ msgstr "Назва ресурсу"
+
+#~ msgid "Names"
+#~ msgstr "Імена"
+
+#, fuzzy
+#~ msgid "Changt root"
 #~ msgstr "Змінити корінь"
 
-#, fuzzy
-#~ msgid "New password:"
-#~ msgstr "Пароль:"
+#~ msgid "Open"
+#~ msgstr "Відкрити"
+
+#~ msgid "Print"
+#~ msgstr "Друк"
+
+#~ msgid "Close"
+#~ msgstr "Закрити"
+
+#~ msgid "No resource selected!"
+#~ msgstr "Не вибрано жодного ресурсу!"
+
+#~ msgid ""
+#~ "Are you sure you want\n"
+#~ "to remove this record?"
+#~ msgstr ""
+#~ "Ви впевнені що хочете\n"
+#~ "видалити цей запис?"
+
+#~ msgid "Error removing resource!"
+#~ msgstr "Помилка при видаленні ресурсу!"
+
+#~ msgid "Unable to chroot: no tree resource selected"
+#~ msgstr "Не можу змінити корінь: не вибрано ресурсів в дереві"
+
+#~ msgid "Field name"
+#~ msgstr "Назва поля"
+
+#~ msgid "Are you sure you want to remove this attachment ?"
+#~ msgstr "Ви впевнені що хочете видалити цей додаток ?"
+
+#~ msgid "Select the destination file"
+#~ msgstr "Виберіть цільовий файл"
+
+#~ msgid "Can not open file !"
+#~ msgstr "Не можу відкрити файл !"
+
+#~ msgid "Can not write file !"
+#~ msgstr "Не можу записати у файл !"
+
+#~ msgid ""
+#~ "Unable to preview image file !\n"
+#~ "Verify the format."
+#~ msgstr ""
+#~ "Не можу відкрити малюнок !\n"
+#~ "Перевірте формат."
+
+#~ msgid "Unknown Window"
+#~ msgstr "Невідоме вікно"
+
+#~ msgid "Printing aborted, too long delay !"
+#~ msgstr "Друк скасовано, дуже велика затримка !"
+
+#~ msgid "Error: "
+#~ msgstr "Помилка:"
+
+#~ msgid "Select your action"
+#~ msgstr "Оберіть Вашу дію"
+
+#~ msgid "No action defined!"
+#~ msgstr "Не предписано жодних дій!"
+
+#~ msgid "Connection refused !"
+#~ msgstr "У підключенні відмовлено !"
+
+#~ msgid "Connection refused!"
+#~ msgstr "У підключенні відмовлено !"
+
+#~ msgid "Application Error"
+#~ msgstr "Помилка программи"
+
+#~ msgid "View details"
+#~ msgstr "Показати деталі"
+
+#~ msgid "Select the file to attach"
+#~ msgstr "Виберіть файл додатку"
+
+#~ msgid "Error reading the file"
+#~ msgstr "Помилка при читанні з файлу"
+
+#~ msgid "Save attachment as..."
+#~ msgstr "Зберегти додаток як..."
+
+#~ msgid "Error writing the file!"
+#~ msgstr "Помилка запису у файл!"
 
 #, fuzzy
-#~ msgid "Old password:"
-#~ msgstr "Пароль:"
+#~ msgid "Invalid Form, correct red fields !"
+#~ msgstr "Не правільно заповнена форма, виправте червоні поля!"
+
+#~ msgid "This widget is readonly !"
+#~ msgstr "Цей елемент тільки для читання !"
+
+#, fuzzy
+#~ msgid "Set as default"
+#~ msgstr "Встановити за _змовчуванням"
+
+#, fuzzy
+#~ msgid "You have to select a resource !"
+#~ msgstr "Виберіть ресурс !"
+
+#, fuzzy
+#~ msgid "Select a file"
+#~ msgstr "Виберіть дату"
+
+#, fuzzy
+#~ msgid "Save as ..."
+#~ msgstr "Зберегти додаток як..."
+
+#, fuzzy
+#~ msgid "Can not generate graph !"
+#~ msgstr "Не можу записати у файл !"
+
+#~ msgid "No available plugin for this resource !"
+#~ msgstr "Немає доступного плагіну для ціого ресурсу !"
+
+#~ msgid "Choose a Plugin"
+#~ msgstr "Виберіть плагін"
+
+#, fuzzy
+#~ msgid "Limit :"
+#~ msgstr "Обмеження:"
+
+#, fuzzy
+#~ msgid "Offset :"
+#~ msgstr "Зссув:"
+
+#, fuzzy
+#~ msgid "Error no report"
+#~ msgstr "Помилка при видаленні ресурсу!"
+
+#~ msgid "Write Report to File"
+#~ msgstr "Писати звіт у файл"
 
 #~ msgid "Welcome to Tiny Enterprise Resource Planing !"
 #~ msgstr "Вітаемо у Tiny Enterprise Resource Planing !"
@@ -1484,9 +1961,6 @@ msgstr "Писати звіт у файл"
 
 #~ msgid "Import Done"
 #~ msgstr "Імпорт виконано"
-
-#~ msgid "Import CSV File"
-#~ msgstr "Імпорт CSV файлу"
 
 #~ msgid "View Create Error:"
 #~ msgstr "Помилка при створенні View"

@@ -102,9 +102,8 @@ f.write(start_script)
 f.close()
 
 if os.name <> 'nt' and sys.argv[1] == 'build_po':
-    os.system('(cd bin ; find . -name \*.py | xargs xgettext -o po/%s.pot)' % name)
+    os.system('(cd bin ; find . -name \*.py && find . -name \*.glade | xargs xgettext -o po/%s.pot)' % name)
     for file in ([ os.path.join('bin', 'po', fname) for fname in os.listdir('bin/po') ]):
-        print file
         if os.path.isfile(file):
             os.system('msgmerge --update --backup=off %s bin/po/%s.pot' % (file, name))
     sys.exit()
