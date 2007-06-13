@@ -46,15 +46,29 @@ def check_modules():
 
 def data_files():
     '''Build list of data files to be installed'''
-    files = [(opj('share','man','man1',''),['man/tinyerp-client.1']),
-             (opj('share','doc', 'tinyerp-client-%s' % version), 
-              [f for f in glob.glob('doc/*') if os.path.isfile(f)]),
-             (opj('share', 'pixmaps', 'tinyerp-client'),
-              glob.glob('bin/pixmaps/*.png')),
-             (opj('share', 'pixmaps', 'tinyerp-client', 'icons'),
-                     glob.glob('bin/icons/*.png')),
-             (opj('share', 'tinyerp-client'),
-              ['bin/terp.glade', 'bin/tipoftheday.txt'])]
+    files = []
+    if os.name == 'nt':
+        import matplotlib
+        files.append(matplotlib.get_py2exe_datafiles())
+        os.chdir('bin')
+        for (dp,dn,names) in os.walk('themes'):
+            if '.svn' in dn:
+                dn.remove('.svn')
+            files.append((dp, map(lambda x: os.path.join('bin', dp,x), names)))
+        os.chdir('..')
+        files.append((".",["bin\\terp.glade","bin\\pixmaps\\tinyerp_icon.png","bin\\pixmaps\\tinyerp.png","bin\\pixmaps\\flag.png", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
+        files.append(("po",glob.glob("bin\\po\\*.*")))
+        files.append(("icons",glob.glob("bin\\icons\\*.png")))
+    else:
+        files.append((opj('share','man','man1',''),['man/tinyerp-client.1']))
+        files.append((opj('share','doc', 'tinyerp-client-%s' % version), [f for
+            f in glob.glob('doc/*') if os.path.isfile(f)]))
+        files.append((opj('share', 'pixmaps', 'tinyerp-client'),
+            glob.glob('bin/pixmaps/*.png')))
+        files.append((opj('share', 'pixmaps', 'tinyerp-client', 'icons'),
+            glob.glob('bin/icons/*.png')))
+        files.append((opj('share', 'tinyerp-client'), ['bin/terp.glade',
+            'bin/tipoftheday.txt']))
     return files
 
 included_plugins = ['workflow_print']
@@ -95,76 +109,55 @@ if os.name <> 'nt' and sys.argv[1] == 'build_po':
             os.system('msgmerge --update --backup=off %s bin/po/%s.pot' % (file, name))
     sys.exit()
 
+options = {"py2exe": {"compressed": 1,
+                      "optimize": 2,
+                      "packages": ["encodings","gtk", "matplotlib", "pytz"],
+                      "includes": "pango,atk,gobject,cairo,atk,pangocairo",
+                      "excludes": ["Tkinter", "tcl", "TKconstants"],
+                      "dll_excludes": [
+                          "iconv.dll","intl.dll","libatk-1.0-0.dll",
+                          "libgdk_pixbuf-2.0-0.dll","libgdk-win32-2.0-0.dll",
+                          "libglib-2.0-0.dll","libgmodule-2.0-0.dll",
+                          "libgobject-2.0-0.dll","libgthread-2.0-0.dll",
+                          "libgtk-win32-2.0-0.dll","libpango-1.0-0.dll",
+                          "libpangowin32-1.0-0.dll",
+                          "wxmsw26uh_vc.dll",],
+                      }
+           }
 
-if os.name == 'nt' and sys.argv[1] == 'py2exe':
-    options = {"py2exe": {"compressed": 1,
-                          "optimize": 2,
-                          "packages": ["encodings","gtk", "matplotlib", "pytz"],
-                          "includes": "pango,atk,gobject,cairo,atk,pangocairo",
-                          "excludes": ["Tkinter", "tcl", "TKconstants"],
-                          "dll_excludes": [
-                              "iconv.dll","intl.dll","libatk-1.0-0.dll",
-                              "libgdk_pixbuf-2.0-0.dll","libgdk-win32-2.0-0.dll",
-                              "libglib-2.0-0.dll","libgmodule-2.0-0.dll",
-                              "libgobject-2.0-0.dll","libgthread-2.0-0.dll",
-                              "libgtk-win32-2.0-0.dll","libpango-1.0-0.dll",
-                              "libpangowin32-1.0-0.dll",
-                              "wxmsw26uh_vc.dll",],
-                          }
-               }
-    data_files = []
-    import matplotlib
-    data_files.append(matplotlib.get_py2exe_datafiles())
-
-    os.chdir('bin')
-    for (dp,dn,names) in os.walk('themes'):
-        if '.svn' in dn:
-            dn.remove('.svn')
-        data_files.append((dp, map(lambda x: os.path.join('bin', dp,x), names)))
-    os.chdir('..')
-
-    data_files.append((".",["bin\\terp.glade","bin\\pixmaps\\tinyerp_icon.png","bin\\pixmaps\\tinyerp.png","bin\\pixmaps\\flag.png", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
-    data_files.append(("po",glob.glob("bin\\po\\*.*")))
-    data_files.append(("icons",glob.glob("bin\\icons\\*.png")))
-
-    setup(
-        name="tinyerp-client",
-        windows=[{"script":"bin\\tinyerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\tinyerp.ico")]}],
-        data_files = data_files,
-        options = options,
-        )
-else:
-    setup(name             = name,
-          version          = version,
-          description      = description,
-          long_description = long_desc,
-          url              = url,
-          author           = author,
-          author_email     = author_email,
-          classifiers      = filter(None, classifiers.splitlines()),
-          license          = license,
-          data_files       = data_files(),
-          translations     = translations(),
-          scripts          = ['tinyerp-client'],
-          packages         = ['tinyerp-client', 'tinyerp-client.common', 
-                              'tinyerp-client.modules', 'tinyerp-client.modules.action',
-                              'tinyerp-client.modules.gui',
-                              'tinyerp-client.modules.gui.window',
-                              'tinyerp-client.modules.gui.window.view_sel',
-                              'tinyerp-client.modules.gui.window.view_tree',
-                              'tinyerp-client.modules.spool',
-                              'tinyerp-client.printer', 'tinyerp-client.tools',
-                              'tinyerp-client.widget',
-                              'tinyerp-client.widget.model',
-                              'tinyerp-client.widget.screen',
-                              'tinyerp-client.widget.view',
-                              'tinyerp-client.widget.view.form_gtk',
-                              'tinyerp-client.widget.view.tree_gtk',
-                              'tinyerp-client.widget_search',
-                              'tinyerp-client.plugins'] + list(find_plugins()),
-          package_dir      = {'tinyerp-client': 'bin'},
-          distclass = L10nAppDistribution,
-          )
+setup(name             = name,
+      version          = version,
+      description      = description,
+      long_description = long_desc,
+      url              = url,
+      author           = author,
+      author_email     = author_email,
+      classifiers      = filter(None, classifiers.splitlines()),
+      license          = license,
+      data_files       = data_files(),
+      translations     = translations(),
+      scripts          = ['tinyerp-client'],
+      packages         = ['tinyerp-client', 'tinyerp-client.common', 
+                          'tinyerp-client.modules', 'tinyerp-client.modules.action',
+                          'tinyerp-client.modules.gui',
+                          'tinyerp-client.modules.gui.window',
+                          'tinyerp-client.modules.gui.window.view_sel',
+                          'tinyerp-client.modules.gui.window.view_tree',
+                          'tinyerp-client.modules.spool',
+                          'tinyerp-client.printer', 'tinyerp-client.tools',
+                          'tinyerp-client.widget',
+                          'tinyerp-client.widget.model',
+                          'tinyerp-client.widget.screen',
+                          'tinyerp-client.widget.view',
+                          'tinyerp-client.widget.view.form_gtk',
+                          'tinyerp-client.widget.view.tree_gtk',
+                          'tinyerp-client.widget_search',
+                          'tinyerp-client.plugins'] + list(find_plugins()),
+      package_dir      = {'tinyerp-client': 'bin'},
+      distclass = os.name <> 'nt' and L10nAppDistribution or None,
+      windows=[{"script":"bin\\tinyerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\tinyerp.ico")]}],
+      options = options,
+      )
 
 
 # vim:expandtab:tw=80

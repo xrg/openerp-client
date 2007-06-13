@@ -37,9 +37,9 @@ GNU Public Licence.
 (c) 2003-TODAY, Fabien Pinckaers - Tiny sprl
 """
 import sys, os
-execfile(os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'release.py'))
-__author__ = author
-__version__ = version
+import release
+__author__ = release.author
+__version__ = release.version
 
 import __builtin__
 __builtin__.__dict__['tinyerp_version'] = __version__
@@ -75,12 +75,11 @@ if os.name == 'nt':
 	os.environ['PATH'] = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0])) + ";" + os.environ['PATH']
 
 # end testing
-APP = name
+APP = release.name
 #DIR = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'share/locale')
 DIR = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'po')
 if not os.path.isdir(DIR):
 	DIR = None
-print DIR
 
 try:
 	locale.setlocale(locale.LC_ALL, '')
