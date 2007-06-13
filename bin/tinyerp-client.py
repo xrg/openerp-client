@@ -76,8 +76,7 @@ if os.name == 'nt':
 
 # end testing
 APP = release.name
-#DIR = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'share/locale')
-DIR = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'po')
+DIR = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'share/locale')
 if not os.path.isdir(DIR):
 	DIR = None
 
