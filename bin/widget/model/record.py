@@ -112,37 +112,17 @@ class ModelRecord(signal_event.signal_event):
 		self._loaded = False
 		self.reload()
 
-	def save(self, reload=True,check_delta=True):
+	def save(self, reload=True):
 		self._check_load()
 		value = self.get(get_readonly=False)
 		if not self.id:
 			self.id = self.rpc.create(value, self.context_get())
 		else:
 			context= self.context_get()
-			if check_delta:
-				context= context.copy()
-				context['read_delta']= time.time()-self.read_time
-			try:
-				if not rpc.session.rpc_exec_auth_wo('/object', 'execute', self.resource, 'write', [self.id], value, context):
-					return False
-				self.read_time = time.time()
-			except rpc.rpc_exception, e:
-				if e.message=='ConcurrencyException':
-					glade_win = glade.XML(common.terp_path("terp.glade"),'dialog_concurrency_exception',gettext.textdomain())
-					dialog = glade_win.get_widget('dialog_concurrency_exception')
-
-					resp= dialog.run()
-					dialog.destroy()
-
-					if resp == gtk.RESPONSE_OK:
-						self.save(check_delta= False)
-					if resp == gtk.RESPONSE_APPLY:
-						reload = False
-						obj = service.LocalService('gui.window')
-						obj.create(False, self.resource, self.id, [], 'form', None, context,'form,tree')
-				else:
-					common.error(_('Application Error'), e.code, e.type)
-
+			context= context.copy()
+			context['read_delta']= time.time()-self.read_time
+			if not rpc.session.rpc_exec_auth('/object', 'execute', self.resource, 'write', [self.id], value, context):
+				return False
 		self._loaded = False
 		if reload:
 			self.reload()

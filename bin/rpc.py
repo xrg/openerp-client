@@ -36,6 +36,7 @@ import tiny_socket
 import service
 import common
 import options
+import os
 
 import re
 
@@ -44,19 +45,22 @@ class rpc_int_exception(Exception):
 
 
 class rpc_exception(Exception):
-	def __init__(self, code, msg):
-		log = logging.getLogger('rpc.exception')
-		log.warning('CODE %s: %s' % (str(code),msg))
+	def __init__(self, code, backtrace):
 
 		self.code = code
-#		lines = msg.split('\n')
 		lines = code.split('\n')
-		self.data = '\n'.join(lines[2:])
+
 		self.type = lines[0].split(' -- ')[0]
 		self.message = ''
 		if len(lines[0].split(' -- ')) > 1:
 			self.message = lines[0].split(' -- ')[1]
-		
+
+		self.data = '\n'.join(lines[2:])
+
+		self.backtrace = backtrace
+
+		log = logging.getLogger('rpc.exception')
+		log.warning('CODE %s: %s' % (str(code), self.message))
 
 class gw_inter(object):
 	__slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
@@ -171,20 +175,22 @@ class rpc_session(object):
 			except xmlrpclib.Fault, err:
 				a = rpc_exception(err.faultCode, err.faultString)
 				if a.type in ('warning','UserError'):
-					common.warning(a.data, a.message)
 #TODO: faudrait propager l'exception
 #					raise a
-					pass
+					if a.message in ('ConcurrencyException') and len(args) > 4:
+						if common.concurrency(args[0], args[2][0], args[4]):
+							if 'read_delta' in args[4]:
+								del args[4]['read_delta']
+							self.rpc_exec_auth(obj, method, *args)
+					else:
+						common.warning(a.data, a.message)
 				else:
-					pass
 					common.error(_('Application Error'), err.faultCode, err.faultString)
 			except tiny_socket.Myexception, err:
 				a = rpc_exception(err.faultCode, err.faultString)
 				if a.type in ('warning', 'UserError'):
 					common.warning(a.data, a.message)
-					pass
 				else:
-					pass
 					common.error(_('Application Error'), err.faultCode, err.faultString)
 			except Exception, e:
 				common.error(_('Application Error'), _('View details'), str(e))
@@ -284,6 +290,8 @@ class rpc_session(object):
 			if c[2]:
 				self.context[c[1]] = c[2]
 			if c[1] == 'lang':
+				import translate
+				translate.setlang(c[2])
 				ids = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('code', '=', c[2])])
 				if ids:
 					l = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', ids, ['direction'])

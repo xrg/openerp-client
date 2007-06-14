@@ -74,20 +74,8 @@ if os.name == 'nt':
 	sys.path.insert(0, os.path.join(os.getcwd(), os.path.dirname(sys.argv[0])))
 	os.environ['PATH'] = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0])) + ";" + os.environ['PATH']
 
-# end testing
-APP = release.name
-DIR = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'share/locale')
-if not os.path.isdir(DIR):
-	DIR = None
-
-try:
-	locale.setlocale(locale.LC_ALL, '')
-except:
-	pass
-gettext.bindtextdomain(APP, DIR)
-gettext.textdomain(APP)
-gettext.install(APP, DIR, unicode=1)
-gtk.glade.bindtextdomain(APP, DIR)
+import translate
+translate.setlang()
 
 import options
 

@@ -337,7 +337,6 @@ def support(*args):
 	return True
 
 def error(title, message, details='', parent=None):
-
 	log = logging.getLogger('common.message')
 	log.error('MSG %s: %s' % (str(message),details))
 
@@ -503,6 +502,24 @@ def ask(question, parent=None):
 		return None
 	else:
 		return entry.get_text()
+
+def concurrency(resource, id, context, parent=None):
+	dia = glade.XML(common.terp_path("terp.glade"),'dialog_concurrency_exception',gettext.textdomain())
+	win = dia.get_widget('dialog_concurrency_exception')
+	
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
+
+	res= win.run()
+	win.destroy()
+
+	if res == gtk.RESPONSE_OK:
+		return True
+	if res == gtk.RESPONSE_APPLY:
+		obj = service.LocalService('gui.window')
+		obj.create(False, resource, id, [], 'form', None, context,'form,tree')
+	return False
 
 def dec_trunc(nbr, prec=2):
 	return round(nbr * (10 ** prec)) / 10**prec
