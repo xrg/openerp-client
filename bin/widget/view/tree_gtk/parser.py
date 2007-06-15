@@ -155,7 +155,7 @@ class Char(object):
 	def get_color(self, model):
 		to_display = ''
 		for color, expr in self.treeview.colors.items():
-			if model.expr_eval(expr):
+			if model.expr_eval(expr, check_load=False):
 				to_display = color
 				break
 		return to_display or 'black'
