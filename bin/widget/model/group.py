@@ -202,6 +202,8 @@ class ModelRecordGroup(signal_event.signal_event):
 			self.models.insert(position, model)
 		self.current_idx = position
 		model.parent = self.parent
+		if model.parent:
+			model.parent.modified=True
 		model.signal_connect(self, 'record-changed', self._record_changed)
 		return model
 
@@ -219,6 +221,8 @@ class ModelRecordGroup(signal_event.signal_event):
 	def model_remove(self, model):
 		idx = self.models.index(model)
 		self.models.remove(model)
+		if model.parent:
+			model.parent.modified = True
 		if self.models:
 			self.current_idx = min(idx, len(self.models)-1)
 		else:
@@ -250,6 +254,8 @@ class ModelRecordGroup(signal_event.signal_event):
 			idx = self.models.index(model)
 			if self.models[idx].id:
 				self.model_removed.append(self.models[idx].id)
+			if model.parent:
+				model.parent.modified = True
 			self.models.remove(self.models[idx])
 		except:
 			pass

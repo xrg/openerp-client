@@ -181,7 +181,7 @@ class rpc_session(object):
 						if common.concurrency(args[0], args[2][0], args[4]):
 							if 'read_delta' in args[4]:
 								del args[4]['read_delta']
-							self.rpc_exec_auth(obj, method, *args)
+							return self.rpc_exec_auth(obj, method, *args)
 					else:
 						common.warning(a.data, a.message)
 				else:

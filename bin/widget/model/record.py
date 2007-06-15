@@ -40,6 +40,7 @@ import gettext
 import service
 from gtk import glade
 import tools
+from field import O2MField
 
 class EvalEnvironment(object):
 	def __init__(self, parent):
@@ -66,6 +67,7 @@ class ModelRecord(signal_event.signal_event):
 		self.mgroup = group
 		self.value = {}
 		self.modified = False
+		self.modified_fields = {}
 		self.read_time = time.time()
 		for key,val in self.mgroup.mfields.items():
 			self.value[key] = val.create(self)
@@ -98,12 +100,12 @@ class ModelRecord(signal_event.signal_event):
 			return True
 		return False
 
-	def get(self, get_readonly=True, includeid=False, check_load=True):
+	def get(self, get_readonly=True, includeid=False, check_load=True, get_modifiedonly=False):
 		if check_load:
 			self._check_load()
-		value = dict([(name, field.get(self, readonly=get_readonly))
+		value = dict([(name, field.get(self, readonly=get_readonly, modified=get_modifiedonly))
 					  for name, field in self.mgroup.mfields.items()
-					  if get_readonly or not field.attrs.get('readonly', False)])
+					  if (get_readonly or not field.attrs.get('readonly', False)) and (not get_modifiedonly or (field.name in self.modified_fields or isinstance(field, O2MField)))])
 		if includeid:
 			value['id'] = self.id
 		return value
@@ -114,7 +116,9 @@ class ModelRecord(signal_event.signal_event):
 
 	def save(self, reload=True):
 		self._check_load()
-		value = self.get(get_readonly=False)
+		if not self.is_modified():
+			return self.id
+		value = self.get(get_readonly=False, get_modifiedonly=True)
 		if not self.id:
 			self.id = self.rpc.create(value, self.context_get())
 		else:
@@ -183,17 +187,19 @@ class ModelRecord(signal_event.signal_event):
 
 	def set(self, val, modified=False, signal=True):
 		later={}
-		self.modified = modified
 		for fieldname, value in val.items():
 			if fieldname not in self.mgroup.mfields:
 				continue
 			if isinstance(self.mgroup.mfields[fieldname], field.O2MField):
 				later[fieldname]=value
 				continue
-			self.mgroup.mfields[fieldname].set(self, value)
+			self.mgroup.mfields[fieldname].set(self, value, modified=modified)
 		for fieldname, value in later.items():
-			self.mgroup.mfields[fieldname].set(self, value)
+			self.mgroup.mfields[fieldname].set(self, value, modified=modified)
 		self._loaded = True
+		self.modified = modified
+		if not self.modified:
+			self.modified_fields = {}
 		if signal:
 			self.signal('record-changed')
 		
@@ -202,9 +208,11 @@ class ModelRecord(signal_event.signal_event):
 			return
 		c= rpc.session.context.copy()
 		c.update(self.context_get())
-		value = self.rpc.read([self.id], self.mgroup.mfields.keys(), c)[0]
-		self.read_time= time.time()
-		self.set(value)
+		res = self.rpc.read([self.id], self.mgroup.mfields.keys(), c)
+		if res:
+			value = res[0]
+			self.read_time= time.time()
+			self.set(value)
 
 	def expr_eval(self, dom, check_load=True):
 		if not isinstance(dom, basestring):

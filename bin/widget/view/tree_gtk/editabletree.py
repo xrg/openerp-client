@@ -82,6 +82,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 			if valid:
 				modelfield.set_client(current_model, value)
 				current_model.modified = False
+				current_model.modified_fields.setdefault(fieldname)
 		except NotImplementedError:
 			pass
 
@@ -214,6 +215,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 			# store in the model the entry widget to get the value in set_value
 			modelfield.editabletree_entry = entry
 			model.modified = True
+			model.modified_fields.setdefault(column.name)
 			return False
 
 		return True

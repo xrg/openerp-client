@@ -89,14 +89,18 @@ class CharField(object):
 					if key=='value':
 						self.set(model, value, test_state=False)
 						model.modified = True
+						model.modified_fields.setdefault(self.name)
 					else:
 						self.attrs[key] = val
 
 	def set(self, model, value, test_state=True, modified=False):
 		model.value[self.name] = value
+		if modified:
+			model.modified = True
+			model.modified_fields.setdefault(self.name)
 		return True
 
-	def get(self, model, check_load=True, readonly=True):
+	def get(self, model, check_load=True, readonly=True, modified=False):
 		return model.value.get(self.name, False) or False
 
 	def set_client(self, model, value, test_state=True):
@@ -104,6 +108,7 @@ class CharField(object):
 		self.set(model, value, test_state)
 		if (internal or False) != (model.value.get(self.name,False) or False):
 			model.modified = True
+			model.modified_fields.setdefault(self.name)
 			self.sig_changed(model)
 			model.signal('record-changed', model)
 
@@ -134,6 +139,7 @@ class FloatField(CharField):
 		if abs(float(internal or 0.0) - float(model.value[self.name] or 0.0)) >= (10.0**(-int(self.attrs.get('digits', (12,4))[1]))):
 			if not self.attrs.get('readonly', False):
 				model.modified = True
+				model.modified_fields.setdefault(self.name)
 				self.sig_changed(model)
 				model.signal('record-changed', model)
 
@@ -147,7 +153,7 @@ class M2OField(CharField):
 	def create(self, model):
 		return False
 
-	def get(self, model, check_load=True, readonly=True):
+	def get(self, model, check_load=True, readonly=True, modified=False):
 		if model.value[self.name]:
 			return model.value[self.name][0] or False
 		return False
@@ -165,12 +171,16 @@ class M2OField(CharField):
 			model.value[self.name] = result[0]
 		else:
 			model.value[self.name] = value
+		if modified:
+			model.modified = True
+			model.modified_fields.setdefault(self.name)
 
 	def set_client(self, model, value, test_state=False):
 		internal = model.value[self.name]
 		self.set(model, value, test_state)
 		if internal != model.value[self.name]:
 			model.modified = True
+			model.modified_fields.setdefault(self.name)
 			self.sig_changed(model)
 			model.signal('record-changed', model)
 
@@ -182,7 +192,7 @@ class M2MField(CharField):
 	def create(self, model):
 		return []
 
-	def get(self, model, check_load=True, readonly=True):
+	def get(self, model, check_load=True, readonly=True, modified=False):
 		return [(6, 0, model.value[self.name] or [])]
 
 	def get_client(self, model):
@@ -190,12 +200,16 @@ class M2MField(CharField):
 
 	def set(self, model, value, test_state=False, modified=False):
 		model.value[self.name] = value or []
+		if modified:
+			model.modified = True
+			model.modified_fields.setdefault(self.name)
 
 	def set_client(self, model, value, test_state=False):
 		internal = model.value[self.name]
 		self.set(model, value, test_state, modified=False)
 		if set(internal) != set(value):
 			model.modified = True
+			model.modified_fields.setdefault(self.name)
 			self.sig_changed(model)
 			model.signal('record-changed', model)
 
@@ -232,19 +246,6 @@ class O2MField(CharField):
 		mod.signal_connect(mod, 'model-changed', self._model_changed)
 		return mod
 
-	def _get_modified(self, model):
-		for model in model.value[self.name].models:
-			if model.is_modified():
-				return True
-		if model.value[self.name].model_removed:
-			return True
-		return False
-
-	def _set_modified(self, model, value):
-		pass
-		
-	modified = property(_get_modified, _set_modified)
-
 	def _model_changed(self, group, model):
 		self.sig_changed(model.parent)
 		self.parent.signal('record-changed', model)
@@ -252,11 +253,13 @@ class O2MField(CharField):
 	def get_client(self, model):
 		return model.value[self.name]
 
-	def get(self, model, check_load=True, readonly=True):
+	def get(self, model, check_load=True, readonly=True, modified=False):
 		if not model.value[self.name]:
 			return []
 		result = []
 		for model2 in model.value[self.name].models:
+			if modified and not model2.modified:
+				continue
 			if model2.id:
 				result.append((1,model2.id, model2.get(check_load=check_load, get_readonly=readonly)))
 			else:
@@ -319,7 +322,7 @@ class ReferenceField(CharField):
 			return model.value[self.name]
 		return False
 
-	def get(self, model, check_load=True, readonly=True):
+	def get(self, model, check_load=True, readonly=True, modified=False):
 		if model.value[self.name]:
 			return '%s,%d' % (model.value[self.name][0], model.value[self.name][1][0])
 		return False
@@ -342,6 +345,9 @@ class ReferenceField(CharField):
 			model.value[self.name] = ref_model, result[0]
 		else:
 			model.value[self.name] = False
+		if modified:
+			model.modified = True
+			model.modified_fields.setdefault(self.name)
 
 TYPES = {
 	'char' : CharField,
