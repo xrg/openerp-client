@@ -91,8 +91,8 @@ class Button(Observable):
 				elif button_type == 'action':
 					obj = service.LocalService('action.main')
 					action_id = int(self.attrs['name'])
-					obj.execute(action_id, {'model':self.form.screen.name, 'id': id,
-						'ids': [id], 'report_type': 'pdf'})
+					obj.execute(action_id, {'model':self.form.screen.name, 'id': id or False,
+						'ids': id and [id] or [], 'report_type': 'pdf'})
 				else:
 					raise 'Unallowed button type'
 				self.form.screen.reload()
