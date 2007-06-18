@@ -310,4 +310,7 @@ class one2many_list(interface.widget_interface):
 
 	def set_value(self, model, model_field):
 		self.screen.current_view.set_value()
+		if self.screen.is_modified():
+			model.modified = True
+			model.modified_fields.setdefault(model_field.name)
 		return True
