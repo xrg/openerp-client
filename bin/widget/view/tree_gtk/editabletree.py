@@ -158,7 +158,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 				txt = entry.get_active_text()
 			entry.disconnect(entry.editing_done_id)
 			self.on_quit_cell(model, column.name, txt)
-			entry.connect('editing_done', self.on_editing_done)
+			entry.editing_done_id = entry.connect('editing_done', self.on_editing_done)
 		if event.keyval in self.leaving_model_events:
 			if model.validate() and self.screen.tree_saves:
 				id = model.save()

@@ -116,12 +116,13 @@ class ModelRecord(signal_event.signal_event):
 
 	def save(self, reload=True):
 		self._check_load()
-		if not self.is_modified():
-			return self.id
-		value = self.get(get_readonly=False, get_modifiedonly=True)
 		if not self.id:
+			value = self.get(get_readonly=False)
 			self.id = self.rpc.create(value, self.context_get())
 		else:
+			if not self.is_modified():
+				return self.id
+			value = self.get(get_readonly=False, get_modifiedonly=True)
 			context= self.context_get()
 			context= context.copy()
 			context['read_delta']= time.time()-self.read_time
