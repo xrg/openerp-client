@@ -35,7 +35,7 @@ class ViewGraph(object):
 	def __init__(self, screen, view, children={}, buttons={}, toolbar=None):
 		self.screen = screen
 		self.view_type = 'graph'
-		#self.model_add_new = True
+		self.model_add_new = False
 		self.view = view
 		self.widget = view.widget
 		self.widget.screen = screen

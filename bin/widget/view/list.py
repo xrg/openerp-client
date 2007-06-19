@@ -32,6 +32,7 @@ import gtk
 
 import rpc
 import service
+import locale
 
 
 class AdaptModelGroup(gtk.GenericTreeModel):
@@ -149,15 +150,27 @@ class ViewList(object):
 		self.screen = screen
 		self.view_type = 'tree'
 		self.model_add_new = True
-		self.widget = widget
-		self.widget.screen = screen
+		self.widget = gtk.VBox()
+		self.widget_tree = widget
+		self.widget.pack_start(self.widget_tree, expand=True, fill=True)
+		self.widget_tree.screen = screen
 		self.reload = False
+		self.children = children
+
+		hbox = gtk.HBox()
+		self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
+		for c in children:
+			hbox2 = gtk.HBox()
+			hbox2.pack_start(children[c][1], expand=True, fill=False)
+			hbox2.pack_start(children[c][2], expand=True, fill=False)
+			hbox.pack_start(hbox2, expand=False, fill=False, padding=12)
+		hbox.show_all()
 
 		self.display()
 
-		self.widget.connect('button-press-event', self.__hello)
-		self.widget.connect_after('row-activated', self.__sig_switch)
-		selection = self.widget.get_selection()
+		self.widget_tree.connect('button-press-event', self.__hello)
+		self.widget_tree.connect_after('row-activated', self.__sig_switch)
+		selection = self.widget_tree.get_selection()
 		selection.set_mode(gtk.SELECTION_MULTIPLE)
 		selection.connect('changed', self.__select_changed)
 
@@ -215,6 +228,7 @@ class ViewList(object):
 			self.store.removed(*args)
 		else:
 			pass
+		self.update_children()
 
 	def cancel(self):
 		pass
@@ -226,8 +240,9 @@ class ViewList(object):
 		return None
 
 	def destroy(self):
-		self.widget.destroy()
+		self.widget_tree.destroy()
 		del self.screen
+		del self.widget_tree
 		del self.widget
 
 	def __sig_switch(self, treeview, *args):
@@ -243,11 +258,12 @@ class ViewList(object):
 			model, paths = tree_sel.get_selected_rows()
 			if paths:
 				self.screen.current_model = model.models[paths[0][0]]
+		self.update_children()
 
 
 	def set_value(self):
-		if self.widget.editable:
-			self.widget.set_value()
+		if self.widget_tree.editable:
+			self.widget_tree.set_value()
 
 	def reset(self):
 		pass
@@ -256,9 +272,9 @@ class ViewList(object):
 	# has not changed -> better ergonomy. To test
 	#
 	def display(self):
-		if self.reload or (not self.widget.get_model()) or self.screen.models<>self.widget.get_model().model_group:
+		if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
 			self.store = AdaptModelGroup(self.screen.models)
-			self.widget.set_model(self.store)
+			self.widget_tree.set_model(self.store)
 		self.reload = False
 		if not self.screen.current_model:
 			#
@@ -266,12 +282,22 @@ class ViewList(object):
 			#self.widget.set_cursor(None,None,False)
 			#
 			if self.store:
-				self.widget.set_model(self.store)
+				self.widget_tree.set_model(self.store)
+		self.update_children()
+
+	def update_children(self):
+		ids = self.sel_ids_get()
+		for c in self.children:
+			value = 0.0
+			for model in self.screen.models.models:
+				if model.id in ids or not ids:
+					value += model.get(check_load=False)[self.children[c][0]]
+			self.children[c][2].set_label(locale.format('%.'+str(self.children[c][3])+'f', value))
 
 	def set_cursor(self):
 		if self.screen.current_model:
 			path = self.store.on_get_path(self.screen.current_model)
-			self.widget.set_cursor(path, self.widget.get_columns()[0], bool(self.widget.editable))
+			self.widget_tree.set_cursor(path, self.widget_tree.get_columns()[0], bool(self.widget_tree.editable))
 
 	def sel_ids_get(self):
 		def _func_sel_get(store, path, iter, ids):
@@ -279,7 +305,7 @@ class ViewList(object):
 			if model.id:
 				ids.append(model.id)
 		ids = []
-		sel = self.widget.get_selection()
+		sel = self.widget_tree.get_selection()
 		sel.selected_foreach(_func_sel_get, ids)
 		return ids
 
@@ -287,7 +313,7 @@ class ViewList(object):
 		def _func_sel_get(store, path, iter, models):
 			models.append(store.on_get_iter(path))
 		models = []
-		sel = self.widget.get_selection()
+		sel = self.widget_tree.get_selection()
 		sel.selected_foreach(_func_sel_get, models)
 		return models
 
@@ -296,8 +322,8 @@ class ViewList(object):
 		self.screen.on_change(callback)
 
 	def unset_editable(self):
-		self.widget.editable = False
-		for col in self.widget.get_columns():
+		self.widget_tree.editable = False
+		for col in self.widget_tree.get_columns():
 			for renderer in col.get_cell_renderers():
 				renderer.set_property('editable', False)
 

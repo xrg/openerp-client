@@ -60,7 +60,7 @@ class win_search(object):
 		self.screen = Screen(model, view_type=['tree'], context=context, parent=self.win)
 		self.view = self.screen.current_view
 		self.view.unset_editable()
-		sel = self.view.widget.get_selection()
+		sel = self.view.widget_tree.get_selection()
 
 		if not sel_multi:
 			sel.set_mode('single')
@@ -72,8 +72,8 @@ class win_search(object):
 		sw = self.glade.get_widget('search_sw')
 		sw.add(vp)
 		sw.show_all()
-		self.view.widget.connect('row_activated', self.sig_activate)
-		self.view.widget.connect('button_press_event', self.sig_button)
+		self.view.widget_tree.connect('row_activated', self.sig_activate)
+		self.view.widget_tree.connect('button_press_event', self.sig_button)
 
 		self.model_name = model
 
@@ -102,7 +102,7 @@ class win_search(object):
 			self.form.focusable.grab_focus()
 
 	def sig_activate(self, treeview, path, column, *args):
-		self.view.widget.emit_stop_by_name('row_activated')
+		self.view.widget_tree.emit_stop_by_name('row_activated')
 		if not self.sel_multi:
 			self.win.response(gtk.RESPONSE_OK)
 		return False
@@ -136,7 +136,7 @@ class win_search(object):
 	def reload(self):
 		self.screen.clear()
 		self.screen.load(self.ids)
-		sel = self.view.widget.get_selection()
+		sel = self.view.widget_tree.get_selection()
 		if sel.get_mode() == gtk.SELECTION_MULTIPLE:
 			sel.select_all()
 

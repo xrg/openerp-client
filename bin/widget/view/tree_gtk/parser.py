@@ -57,6 +57,7 @@ def sort_model(column, treeview):
 
 class parser_tree(interface.parser_interface):
 	def parse(self, model, root_node, fields):
+		dict_widget = {}
 		attrs = tools.node_attributes(root_node)
 		on_write = attrs.get('on_write', '')
 		editable = attrs.get('editable', False)
@@ -116,8 +117,10 @@ class parser_tree(interface.parser_interface):
 				col.set_resizable(True)
 				#col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
 				col.set_visible(not fields[fname].get('invisible', False))
-				treeview.append_column(col)
-		return treeview, {}, [], on_write
+				n = treeview.append_column(col)
+				if 'sum' in fields[fname] and fields[fname]['type'] in ('integer', 'float', 'float_time'):
+					dict_widget[n] = (fname, gtk.Label(fields[fname]['sum']+': '), gtk.Label(0), fields.get('digits', (16,2))[1])
+		return treeview, dict_widget, [], on_write
 
 class UnsettableColumn(Exception):
 	pass
