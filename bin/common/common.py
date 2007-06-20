@@ -198,7 +198,7 @@ def upload_email(email):
 	try:
 		import urllib
 		args = urllib.urlencode([('mail_subscribe',email),('subscribe','Subscribe')])
-		fp = urllib.urlopen('http://tinyerp.com/index.html', args)
+		fp = urllib.urlopen('http://www.tinyerp.com/index.html', args)
 		fp.read()
 		fp.close()
 	except:
@@ -213,7 +213,7 @@ class upload_data_thread(threading.Thread):
 		try:
 			import urllib
 			args = urllib.urlencode(self.args)
-			fp = urllib.urlopen('http://tinyerp.com/scripts/survey.php', args)
+			fp = urllib.urlopen('http://www.tinyerp.com/scripts/survey.php', args)
 			fp.read()
 			fp.close()
 		except:
