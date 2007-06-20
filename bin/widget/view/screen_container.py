@@ -49,6 +49,13 @@ class screen_container(object):
 	def add_filter(self, widget, fnct, clear_fnct):
 		self.filter_vbox = gtk.VBox(spacing=1)
 		self.filter_vbox.set_border_width(1)
+		label = gtk.Label(_('Search'))
+		label.set_alignment(0.0, 0.5)
+		label.show()
+		self.filter_vbox.pack_start(label, expand=True, fill=False)
+		hs = gtk.HSeparator()
+		hs.show()
+		self.filter_vbox.pack_start(hs, expand=True, fill=False)
 		self.filter_vbox.pack_start(widget, expand=True, fill=True)
 		hb = gtk.HButtonBox()
 		hb.set_spacing(5)
@@ -62,6 +69,9 @@ class screen_container(object):
 		hb.pack_start(self.button, expand=False, fill=False)
 		hb.show_all()
 		self.filter_vbox.pack_start(hb, expand=False, fill=False)
+		hs = gtk.HSeparator()
+		hs.show()
+		self.filter_vbox.pack_start(hs, expand=True, fill=False)
 		self.vbox.pack_start(self.filter_vbox, expand=False, fill=True)
 
 	def show_filter(self):
