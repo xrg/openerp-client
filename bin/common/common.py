@@ -223,15 +223,7 @@ class upload_data_thread(threading.Thread):
 def upload_data(email, data, type='survey2', supportid=''):
 	a = upload_data_thread(email, data, type, supportid)
 	a.start()
-	#try:
-	#	import urllib
-	#	args = urllib.urlencode([('email',email),('type',type),('supportid',supportid),('data',data)])
-	#	fp = urllib.urlopen('http://tinyerp.com/scripts/survey.php', args)
-	#	fp.read()
-	#	fp.close()
-	#	return True
-	#except:
-	#	return False
+	return True
 
 def terp_survey():
 	if options.options['survey.position']==SURVEY_VERSION:
@@ -325,12 +317,9 @@ def support(*args):
 		buffer = sur.get_widget('remark_textview').get_buffer()
 		remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
-		content = name +'(%s, %s, %s)'%(id_contract, company, phone) +' has reported the following bug : \n'+ explanation + '\nremarks : ' + remarks
+		content = name +"(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug : \n"+ explanation + "\nremarks : " + remarks
 
-		msg = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s\r\n" % (fromaddr, recipient, 'customer support', content))
-		msg_pick = pickle.dumps(msg)
-
-		if upload_data(fromaddr, msg_pick, 'support', id_contract):
+		if upload_data(fromaddr, content, 'support', id_contract):
 			common.message(_('Support request sent !'))
 
 	win.destroy()
@@ -380,13 +369,9 @@ def error(title, message, details='', parent=None):
 		buffer = sur.get_widget('remarks_textview').get_buffer()
 		remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
-		content = name +'(%s, %s, %s)'%(id_contract, company, phone) +' has reported the following bug : \n'+ explanation + '\nremarks : ' + remarks
-		content += '\nThe traceback is : \n' + traceback
+		content = "(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug: \n"+ explanation + "\nremarks: " + remarks + "\nThe traceback is: \n" + traceback
 
-		msg = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s\r\n" % (fromaddr, recipient, 'customer support', content))
-		msg_pick = pickle.dumps(msg)
-
-		if upload_data(fromaddr, msg_pick, 'error', id_contract):
+		if upload_data(fromaddr, content, 'error', id_contract):
 			common.message(_('Support request sent !'))
 		return
 
