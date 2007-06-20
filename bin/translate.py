@@ -46,7 +46,7 @@ def setlang(lang=None):
 			locale.setlocale(locale.LC_ALL, lang+'.'+encoding)
 		except:
 			pass
-		lang = gettext.translation(APP, DIR, languages=lang, fallback = True)
+		lang = gettext.translation(APP, DIR, languages=lang, fallback=True)
 		lang.install(unicode=1)
 	else:
 		try:
@@ -55,5 +55,5 @@ def setlang(lang=None):
 			pass
 		gettext.bindtextdomain(APP, DIR)
 		gettext.textdomain(APP)
-		gtk.glade.bindtextdomain(APP, DIR)
 		gettext.install(APP, unicode=1)
+	gtk.glade.bindtextdomain(APP, DIR)

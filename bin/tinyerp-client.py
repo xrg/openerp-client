@@ -79,6 +79,8 @@ translate.setlang()
 
 import options
 
+translate.setlang(options.options['client.lang'])
+
 for logger in options.options['logging.logger'].split(','):
 	if len(logger):
 		loglevel = {'DEBUG':logging.DEBUG, 'INFO':logging.INFO, 'WARNING':logging.WARNING, 'ERROR':logging.ERROR, 'CRITICAL':logging.CRITICAL}

@@ -385,12 +385,12 @@ class parser_form(widget.view.interface.parser_interface):
 		langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
 
 		#Add english ; default value not in res.lang
-		langs.append({'code':'en_EN', 'name': 'English'})
-		code = rpc.session.context.get('lang', 'en_EN')
+		langs.append({'code':'en_US', 'name': 'English'})
+		code = rpc.session.context.get('lang', 'en_US')
 
 		#change 'en' to false for context
 		def adapt_context(val):
-			if val == 'en_EN':
+			if val == 'en_US':
 				return False
 			else:
 				return val

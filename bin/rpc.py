@@ -292,6 +292,7 @@ class rpc_session(object):
 			if c[1] == 'lang':
 				import translate
 				translate.setlang(c[2])
+				options.options['client.lang']=c[2]
 				ids = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('code', '=', c[2])])
 				if ids:
 					l = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', ids, ['direction'])
