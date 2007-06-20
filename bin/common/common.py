@@ -194,17 +194,6 @@ def tipoftheday(parent=None):
 	tip2 = tip(parent)
 	return True
 
-def upload_email(email):
-	try:
-		import urllib
-		args = urllib.urlencode([('mail_subscribe',email),('subscribe','Subscribe')])
-		fp = urllib.urlopen('http://www.tinyerp.com/index.html', args)
-		fp.read()
-		fp.close()
-	except:
-		pass
-	return True
-
 class upload_data_thread(threading.Thread):
 	def __init__(self, email, data, type, supportid):
 		self.args = [('email',email),('type',type),('supportid',supportid),('data',data)]
@@ -219,8 +208,7 @@ class upload_data_thread(threading.Thread):
 		except:
 			pass
 
-
-def upload_data(email, data, type='survey2', supportid=''):
+def upload_data(email, data, type='SURVEY', supportid=''):
 	a = upload_data_thread(email, data, type, supportid)
 	a.start()
 	return True
@@ -241,22 +229,19 @@ def terp_survey():
 	res = win.run()
 	if res==gtk.RESPONSE_OK:
 		email =  winglade.get_widget('entry_email').get_text()
-		if '@' in email:
-			upload_email(email)
-		result = {}
+		result = ''
 		for widname in widnames:
 			wid = winglade.get_widget('combo_'+widname)
-			result[widname] = wid.child.get_text()
-		result['plan_use']=winglade.get_widget('check_use').get_active()
-		result['plan_sell']=winglade.get_widget('check_sell').get_active()
+			result += "\n"+widname+": "+wid.child.get_text()
+		result += "\nplan_use: "+str(winglade.get_widget('check_use').get_active())
+		result += "\nplan_sell: "+str(winglade.get_widget('check_sell').get_active())
 
 		buffer = winglade.get_widget('textview_comment').get_buffer()
 		iter_start = buffer.get_start_iter()
 		iter_end = buffer.get_end_iter()
-		result['note'] = buffer.get_text(iter_start,iter_end,False)
-		result_pick = pickle.dumps(result)
+		result += "\nnote: "+buffer.get_text(iter_start,iter_end,False)
 		win.destroy()
-		upload_data(email, result_pick, type='SURVEY '+str(SURVEY_VERSION))
+		upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
 	else:
 		win.destroy()
 	return True
@@ -317,7 +302,7 @@ def support(*args):
 		buffer = sur.get_widget('remark_textview').get_buffer()
 		remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
-		content = name +"(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug : \n"+ explanation + "\nremarks : " + remarks
+		content = name +"(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug:\n"+ explanation + "\nremarks:\n" + remarks
 
 		if upload_data(fromaddr, content, 'support', id_contract):
 			common.message(_('Support request sent !'))
@@ -369,7 +354,7 @@ def error(title, message, details='', parent=None):
 		buffer = sur.get_widget('remarks_textview').get_buffer()
 		remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
-		content = "(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug: \n"+ explanation + "\nremarks: " + remarks + "\nThe traceback is: \n" + traceback
+		content = "(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug:\n"+ explanation + "\nremarks: " + remarks + "\nThe traceback is:\n" + traceback
 
 		if upload_data(fromaddr, content, 'error', id_contract):
 			common.message(_('Support request sent !'))
