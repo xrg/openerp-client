@@ -494,51 +494,6 @@ def concurrency(resource, id, context, parent=None):
 def dec_trunc(nbr, prec=2):
 	return round(nbr * (10 ** prec)) / 10**prec
 
-class progress(object):
-	class _progress_thread(threading.Thread):
-		def __init__(self, win, pb_widget):
-			self.running=True
-			self.waiting = True
-			self.win=win
-			self.pb_widget=pb_widget
-			super(progress._progress_thread, self).__init__()
-		
-		def run(self):
-			time.sleep(2)
-			if not self.running:
-				self.waiting = False
-				return
-			self.win.show()
-			self.pb_widget.set_pulse_step(0.005)
-			while self.running:
-				self.pb_widget.pulse()
-				gtk.main_iteration()
-				time.sleep(0.01)
-			self.waiting = False
-
-		def stop(self):
-			self.running=False
-			while not self.waiting:
-				time.sleep(0.01)
-
-	def __init__(self, parent=None):
-		self.dialog = glade.XML(common.terp_path("terp.glade"), "win_progress", gettext.textdomain())
-		self.win = self.dialog.get_widget('win_progress')
-		if not parent:
-			parent=service.LocalService('gui.main').window
-		self.win.set_transient_for(parent)
-		self.pb_widget = self.dialog.get_widget('progressbar')
-		self.thread=self._progress_thread(self.win, self.pb_widget)
-		
-	def start(self):
-		self.thread.start()
-
-	def stop(self):
-		self.thread.stop()
-		self.win.destroy()
-		gtk.main_iteration()
-
-
 # Color set
 
 colors = {

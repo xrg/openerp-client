@@ -34,6 +34,7 @@ import copy
 import service
 import rpc
 import common
+import thread, time
 
 from widget.screen import Screen
 
@@ -94,14 +95,62 @@ def execute(action, datas, state='init', parent=None, context={}):
 		datas['form'] = {}
 	wiz_id = rpc.session.rpc_exec_auth('/wizard', 'create', action)
 	while state!='end':
-		thread_progress=common.progress(parent)
-		thread_progress.start()
-		try:
-			ctx = rpc.session.context.copy()
-			ctx.update(context)
-			res = rpc.session.rpc_exec_auth('/wizard', 'execute', wiz_id, datas, state, ctx)
-		finally:
-			thread_progress.stop()
+		class wizard_progress(object):
+			def __init__(self, parent=None):
+				self.res = None
+				self.parent = parent
+	
+			def run(self):
+				def go(wiz_id, datas, state):
+					ctx = rpc.session.context.copy()
+					ctx.update(context)
+					self.res = rpc.session.rpc_exec_auth('/wizard', 'execute', wiz_id, datas, state, ctx)
+					return True
+		
+				thread.start_new_thread(go, (wiz_id, datas, state))
+
+				i = 0
+				win = None
+				pb = None
+				while not self.res:
+					time.sleep(0.1)
+					i += 1
+					if i > 10:
+						if not win or not pb:
+							win = gtk.Window(type=gtk.WINDOW_POPUP)
+							win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+							vbox = gtk.VBox(False, 0)
+							hbox = gtk.HBox(False, 13)
+							hbox.set_border_width(10)
+							img = gtk.Image()
+							img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
+							hbox.pack_start(img, expand=True, fill=False)
+							vbox2 = gtk.VBox(False, 0)
+							label = gtk.Label()
+							label.set_markup(_('<b>Operation in progress</b>'))
+							label.set_alignment(0.0, 0.5)
+							vbox2.pack_start(label, expand=True, fill=False)
+							vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
+							vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
+							hbox.pack_start(vbox2, expand=True, fill=True)
+							vbox.pack_start(hbox)
+							pb = gtk.ProgressBar()
+							pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
+							vbox.pack_start(pb, expand=True, fill=False)
+							win.add(vbox)
+							if not self.parent:
+								self.parent = service.LocalService('gui.main').window
+							win.set_transient_for(self.parent)
+							win.show_all()
+						pb.pulse()
+						gtk.main_iteration()
+				if win:
+					win.destroy()
+					gtk.main_iteration()
+				return self.res
+
+		wp = wizard_progress(parent)
+		res = wp.run()
 
 		if 'datas' in res:
 			datas['form'].update( res['datas'] )
