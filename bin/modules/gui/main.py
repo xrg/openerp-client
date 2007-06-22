@@ -93,7 +93,6 @@ def _server_ask(server_widget):
 
 	m = re.match('^(http[s]?://|socket://)([\w.-]+):(\d{1,5})$', server_widget.get_text())
 	if m:
-#		secure_widget.set_active(m.group(1) == 'https://')
 		host_widget.set_text(m.group(2))
 		port_widget.set_text(m.group(3))
 
@@ -108,7 +107,6 @@ def _server_ask(server_widget):
 
 	res = win.run()
 	if res == gtk.RESPONSE_OK:
-#		protocol = secure_widget.get_active() and 'https://' or 'http://'
 		protocol = protocol[protocol_widget.get_active_text()]
 		url = '%s%s:%s' % (protocol, host_widget.get_text(), port_widget.get_text())
 		server_widget.set_text(url)
@@ -283,14 +281,32 @@ class db_create(object):
 		if res == gtk.RESPONSE_OK:
 			try:
 				id = rpc.session.db_exec(url, 'create', passwd, db_name, demo_data, langreal)
-				dialog = glade.XML(common.terp_path("terp.glade"), "win_progress", gettext.textdomain())
-				win = dialog.get_widget('win_progress')
+				win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
+				win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+				vbox = gtk.VBox(False, 0)
+				hbox = gtk.HBox(False, 13)
+				hbox.set_border_width(10)
+				img = gtk.Image()
+				img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
+				hbox.pack_start(img, expand=True, fill=False)
+				vbox2 = gtk.VBox(False, 0)
+				label = gtk.Label()
+				label.set_markup(_('<b>Operation in progress</b>'))
+				label.set_alignment(0.0, 0.5)
+				vbox2.pack_start(label, expand=True, fill=False)
+				vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
+				vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
+				hbox.pack_start(vbox2, expand=True, fill=True)
+				vbox.pack_start(hbox)
+				pb = gtk.ProgressBar()
+				pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
+				vbox.pack_start(pb, expand=True, fill=False)
+				win.add(vbox)
 				if not parent:
 					parent = service.LocalService('gui.main').window
 				win.set_transient_for(parent)
-				pb_widget = dialog.get_widget('progressbar')
-				self.timer = gobject.timeout_add(1000, self.progress_timeout, pb_widget, url, passwd, id, win, db_name, parent)
-				win.show()
+				win.show_all()
+				self.timer = gobject.timeout_add(1000, self.progress_timeout, pb, url, passwd, id, win, db_name, parent)
 			except Exception, e:
 				if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
 					common.warning(_('Bad database administrator password !'), _("Could not create database."))
@@ -305,9 +321,8 @@ class db_create(object):
 			common.warning(_("The server crashed during installation.\nWe suggest you to drop this database."),_("Error during database creation !"))
 			return False
 
-		if 0.0 <= progress < 1.0:
-			pbar.set_fraction(progress)
-		elif progress == 1.0:
+		pbar.pulse()
+		if progress == 1.0:
 			win.destroy()
 
 			pwdlst = '\n'.join(map(lambda x: '    - %s: %s / %s' % (x['name'],x['login'],x['password']), users))
@@ -335,8 +350,6 @@ class db_create(object):
 
 				self.sig_login(dbname=dbname)
 			return False
-		else:
-			pbar.pulse()
 		return True
 
 	def process(self):
@@ -368,16 +381,9 @@ class terp_main(service.Service):
 		self.notebook = gtk.Notebook()
 		self.notebook.popup_enable()
 		self.notebook.set_scrollable(True)
-		#self.notebook.set_show_border(False)
 		self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changt)
 		vbox = self.glade.get_widget('vbox_main')
 		vbox.pack_start(self.notebook, expand=True, fill=True)
-
-		#pict = gtk.Image()
-		#pict.set_from_file('goals.png')
-		#pict.show()
-		#vbox.pack_start(pict, expand=True, fill=True)
-		#vbox.remove(pict)
 
 		#
 		# Code to add themes to the options->theme menu
@@ -525,9 +531,6 @@ class terp_main(service.Service):
 
 	def sig_mode(self):
 		pda_mode = options.options['client.modepda']
-		#
-		# Put here specific code for PDA (or not)
-		#
 		if pda_mode:
 			self.status_bar_main.hide()
 		else:
@@ -605,7 +608,7 @@ class terp_main(service.Service):
 			else:
 				message = _('No request')
 			if len(ids2):
-				message += _(' - %s pending request(s)') % len(ids2)
+				message += _(' - %s request(s) sended') % len(ids2)
 			id = self.sb_requests.get_context_id('message')
 			self.sb_requests.push(id, message)
 			return (ids,ids2)
@@ -665,12 +668,12 @@ class terp_main(service.Service):
 		return True
 		
 	def sig_help_index(self, widget):
-		tools.launch_browser('http://tinyerp.com/documentation/user-manual/')
+		tools.launch_browser('http://www.tinyerp.org/documentation/user-manual/')
 
 	def sig_help_context(self, widget):
 		model = self._wid_get().model
-		l = rpc.session.context.get('lang','en')
-		tools.launch_browser('http://tinyerp.org/scripts/context_index.php?model=%s&lang=%s' % (model,l))
+		l = rpc.session.context.get('lang','en_US')
+		tools.launch_browser('http://www.tinyerp.org/scripts/context_index.php?model=%s&lang=%s' % (model,l))
 
 	def sig_tips(self, *args):
 		common.tipoftheday(self.window)
@@ -704,7 +707,7 @@ class terp_main(service.Service):
 		data = urlparse.urlsplit(rpc.session._url)
 		self.sb_servername.push(id, data[0]+':'+(data[1] and '//'+data[1] or data[2])+' ['+options.options['login.db']+']')
 		if not act_id[0][type]:
-			common.warning('You can not log into the system !\nAsk the administrator to verify\nyou have an action defined for your user.','Access Denied !')
+			common.warning(_("You can not log into the system !\nAsk the administrator to verify\nyou have an action defined for your user."),'Access Denied !')
 			rpc.session.logout()
 			return False
 		act_id = act_id[0][type][0]
@@ -760,10 +763,6 @@ class terp_main(service.Service):
 			self.notebook.disconnect(self.sig_id)
 			page = self.pages.pop(pn)
 			self.notebook.remove_page(pn)
-#			if self.last_page > self.current_page :
-#				self.notebook.set_current_page(self.last_page-1)
-#			else:
-#				self.notebook.set_current_page(self.last_page)
 			self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changt)
 			self.sb_set()
 
@@ -803,7 +802,6 @@ class terp_main(service.Service):
 	def sig_db_drop(self, widget):
 		if not self.sig_logout(widget):
 			return False
-		# 1) choose db (selection)
 		url, db_name, passwd = self._choose_db_select(_('Delete a database'))
 		if not db_name:
 			return
@@ -818,8 +816,6 @@ class terp_main(service.Service):
 				common.warning(_("Couldn't drop database"), parent=self.window)
 
 	def sig_db_restore(self, widget):
-		# 1) choose file
-			
 		chooser = gtk.FileChooserDialog(title='Open...', action=gtk.FILE_CHOOSER_ACTION_OPEN,
 										buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK), parent=self.window)
 		filename = False
@@ -830,9 +826,6 @@ class terp_main(service.Service):
 		if not filename:
 			return
 
-		# 2) choose db (text entry) ou selection?
-		#	-> if db doesn't exist: createdb
-		#	-> if it exist: refuse
 		url, db_name, passwd = self._choose_db_ent()
 		if db_name:
 			try:
@@ -883,13 +876,11 @@ class terp_main(service.Service):
 		win.destroy()
 
 	def sig_db_dump(self, widget):
-		# 1) choose db (selection)
 		url, db_name, passwd = self._choose_db_select(_('Backup a database'))
 		if not db_name:
 			return
 
-		# 2) choose file
-		chooser = gtk.FileChooserDialog(title='Save As...', action=gtk.FILE_CHOOSER_ACTION_SAVE,
+		chooser = gtk.FileChooserDialog(title=_('Save As...'), action=gtk.FILE_CHOOSER_ACTION_SAVE,
 			buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK), parent=self.window)
 		res = chooser.run()
 
