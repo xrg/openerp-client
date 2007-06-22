@@ -98,6 +98,7 @@ def execute(action, datas, state='init', parent=None, context={}):
 		class wizard_progress(object):
 			def __init__(self, parent=None):
 				self.res = None
+				self.error = False
 				self.parent = parent
 	
 			def run(self):
@@ -105,6 +106,8 @@ def execute(action, datas, state='init', parent=None, context={}):
 					ctx = rpc.session.context.copy()
 					ctx.update(context)
 					self.res = rpc.session.rpc_exec_auth('/wizard', 'execute', wiz_id, datas, state, ctx)
+					if not self.res:
+						self.error = True
 					return True
 		
 				thread.start_new_thread(go, (wiz_id, datas, state))
@@ -112,7 +115,7 @@ def execute(action, datas, state='init', parent=None, context={}):
 				i = 0
 				win = None
 				pb = None
-				while not self.res:
+				while (not self.res) and (not self.error):
 					time.sleep(0.1)
 					i += 1
 					if i > 10:
@@ -151,6 +154,8 @@ def execute(action, datas, state='init', parent=None, context={}):
 
 		wp = wizard_progress(parent)
 		res = wp.run()
+		if not res:
+			return False
 
 		if 'datas' in res:
 			datas['form'].update( res['datas'] )
