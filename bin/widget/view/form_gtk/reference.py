@@ -214,13 +214,11 @@ class reference(interface.widget_interface):
 				id, name = RPCProxy(model).name_get([id], rpc.session.context)[0]
 			self._value = model, (id, name)
 			self.wid_text.set_text(name)
-			self.state_set('valid')
 			img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
 			self.but_open.set_image(img)
 		else:
 			self._value = False
 			self.wid_text.set_text('')
-			self.state_set('valid')
 			img.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
 			self.but_open.set_image(img)
 		self.ok = True

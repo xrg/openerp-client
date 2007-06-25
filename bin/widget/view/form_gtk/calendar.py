@@ -72,7 +72,6 @@ class calendar(interface.widget_interface):
 		self.eb.add(img)
 		self.widget.pack_start(self.eb, expand=False, fill=False)
 
-		self.state_set('valid')
 		self.readonly=False
 
 	def _color_widget(self):
@@ -172,7 +171,6 @@ class datetime(interface.widget_interface):
 		eb.add(img)
 		self.widget.pack_start(eb, expand=False, fill=False)
 
-		self.state_set('valid')
 		self.readonly=False
 
 	def _color_widget(self):

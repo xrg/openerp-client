@@ -44,17 +44,19 @@ class ViewWidget(object):
 
 	def display(self, model, state='draft'):
 		if not model:
-			self.widget.state_set('readonly')
 			self.widget.display(model, False)
 			return False
-		self.widget.state_set(state)
-		self.widget.refresh()
-		self.widget.display(model, model.mgroup.mfields.get(self.widget_name, False))
+		modelfield = model.mgroup.mfields.get(self.widget_name, False)
+		modelfield.state_set(model, state)
+		self.widget.display(model, modelfield)
 	
-	def reset(self):
-		if 'valid' in self.widget.attrs:
-			self.widget.attrs['valid'] = True
-		self.widget.refresh()
+	def reset(self, model):
+		modelfield = False
+		if model:
+			modelfield = model.mgroup.mfields.get(self.widget_name, False)
+			if modelfield and 'valid' in modelfield.state_attrs:
+				modelfield.state_attrs['valid'] = True
+		self.display(model, modelfield)
 
 	def set_value(self, model):
 		if self.widget_name in model.mgroup.mfields:
@@ -257,8 +259,9 @@ class ViewForm(object):
 		return []
 
 	def reset(self):
+		model = self.screen.current_model
 		for wid_name, widget in self.widgets.items():
-			widget.reset()
+			widget.reset(model)
 
 	def signal_record_changed(self, *args):
 		pass

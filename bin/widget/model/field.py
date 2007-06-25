@@ -50,9 +50,10 @@ class CharField(object):
 	def __init__(self, parent, attrs):
 		self.parent = parent
 		self.attrs = attrs
-		self.real_attrs = attrs.copy()
+		self.state_attrs = attrs.copy()
 		self.name = attrs['name']
 		self.internal = False
+		self.default_attrs = {}
 
 	def sig_changed(self, model):
 		if self.attrs.get('on_change',False):
@@ -75,23 +76,11 @@ class CharField(object):
 
 	def validate(self, model):
 		ok = True
-		if self.attrs.get('required', False):
+		if self.state_attrs.get('required', False):
 			if not model.value[self.name]:
 				ok=False
+		self.state_attrs['valid'] = ok
 		return ok
-
-	def state_set(self, model, state):
-		if 'states' in self.attrs:
-			for key,val in self.real_attrs.items():
-				self.attrs[key] = self.real_attrs[key]
-			if state in self.attrs['states']:
-				for key,val in self.attrs['states'][state]:
-					if key=='value':
-						self.set(model, value, test_state=False)
-						model.modified = True
-						model.modified_fields.setdefault(self.name)
-					else:
-						self.attrs[key] = val
 
 	def set(self, model, value, test_state=True, modified=False):
 		model.value[self.name] = value
@@ -124,6 +113,16 @@ class CharField(object):
 	def create(self, model):
 		return False
 
+	def state_set(self, model, state):
+		state_changes = dict(self.attrs.get('states',{}).get(state,[]))
+		for key in ('readonly', 'required'):
+			if key in state_changes:
+				self.state_attrs[key] = state_changes[key]
+			else:
+				self.state_attrs[key] = self.attrs[key]
+		if 'value' in state_changes:
+			self.set(model, value, test_state=False, modified=True)
+
 class SelectionField(CharField):
 	def set(self, model, value, test_state=True, modified=False):
 		if value in [sel[0] for sel in self.attrs['selection']]:
@@ -131,13 +130,14 @@ class SelectionField(CharField):
 
 class FloatField(CharField):
 	def validate(self, model):
+		self.state_attrs['valid'] = True
 		return True
 
 	def set_client(self, model, value, test_state=True):
 		internal = model.value[self.name]
 		self.set(model, value, test_state)
 		if abs(float(internal or 0.0) - float(model.value[self.name] or 0.0)) >= (10.0**(-int(self.attrs.get('digits', (12,4))[1]))):
-			if not self.attrs.get('readonly', False):
+			if not self.state_attrs.get('readonly', False):
 				model.modified = True
 				model.modified_fields.setdefault(self.name)
 				self.sig_changed(model)
@@ -145,6 +145,7 @@ class FloatField(CharField):
 
 class IntegerField(CharField):
 	def validate(self, model):
+		self.state_attrs['valid'] = True
 		return True
 
 
@@ -314,6 +315,7 @@ class O2MField(CharField):
 					ok = False
 		if not super(O2MField, self).validate(model):
 			ok = False
+		self.state_attrs['valid'] = ok
 		return ok
 
 class ReferenceField(CharField):

@@ -41,7 +41,6 @@ class spinbutton(interface.widget_interface):
 		self.widget.connect('button_press_event', self._menu_open)
 		if self.attrs['readonly']:
 			self._readonly_set(True)
-		self.state_set('valid')
 		self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
 		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
 		self.widget.connect('activate', self.sig_activate)

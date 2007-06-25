@@ -105,7 +105,7 @@ class ModelRecord(signal_event.signal_event):
 			self._check_load()
 		value = dict([(name, field.get(self, readonly=get_readonly, modified=get_modifiedonly))
 					  for name, field in self.mgroup.mfields.items()
-					  if (get_readonly or not field.attrs.get('readonly', False)) and (not get_modifiedonly or (field.name in self.modified_fields or isinstance(field, O2MField)))])
+					  if (get_readonly or not field.state_attrs.get('readonly', False)) and (not get_modifiedonly or (field.name in self.modified_fields or isinstance(field, O2MField)))])
 		if includeid:
 			value['id'] = self.id
 		return value
@@ -148,8 +148,8 @@ class ModelRecord(signal_event.signal_event):
 	def validate_set(self):
 		change = self._check_load()
 		for fname in self.mgroup.mfields:
-			change = change or not self.mgroup.mfields[fname].attrs.get('valid', True)
-			self.mgroup.mfields[fname].attrs['valid'] = True
+			change = change or not self.mgroup.mfields[fname].state_attrs.get('valid', True)
+			self.mgroup.mfields[fname].state_attrs['valid'] = True
 		if change:
 			self.signal('record-changed')
 		return change
@@ -159,14 +159,11 @@ class ModelRecord(signal_event.signal_event):
 		ok = True
 		for fname in self.mgroup.mfields:
 			if not self.mgroup.mfields[fname].validate(self):
-				self.mgroup.mfields[fname].attrs['valid'] = False
 				ok = False
-			else:
-				self.mgroup.mfields[fname].attrs['valid'] = True
 		return ok
 
 	def _get_invalid_fields(self):
-		return dict([(fname, field.attrs['string']) for fname, field in self.mgroup.mfields.items() if not field.attrs['valid']])
+		return dict([(fname, field.attrs['string']) for fname, field in self.mgroup.mfields.items() if not field.state_attrs['valid']])
 	invalid_fields = property(_get_invalid_fields)
 
 	def context_get(self):

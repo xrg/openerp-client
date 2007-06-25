@@ -69,15 +69,6 @@ class widget_interface(object):
 		# emulate a focus_out so that the onchange is called if needed
 		self._focus_out()
 
-	def refresh(self):
-		self._readonly_set(self.attrs.get('readonly', False))
-		if not self.attrs.get('valid', True):
-			self.color_set('invalid')
-		elif self.attrs.get('required', False):
-			self.color_set('required')
-		else:
-			self.color_set('normal')
-
 	def _readonly_set(self, ro):
 		pass
 
@@ -93,14 +84,6 @@ class widget_interface(object):
 		widget.modify_base(gtk.STATE_NORMAL, colour)
 		widget.modify_text(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
 		widget.modify_text(gtk.STATE_INSENSITIVE, gtk.gdk.color_parse("black"))
-
-	def state_set(self, state):
-		state_changes = dict(self.attrs.get('states',{}).get(state,[]))
-		for key, value in state_changes.items():
-			self.attrs[key] = value
-		else:
-			if 'readonly' not in state_changes:
-				self.attrs['readonly'] = self.default_readonly
 
 	def _menu_sig_default_set(self):
 		deps = []
@@ -138,7 +121,16 @@ class widget_interface(object):
 		self.set_value(self._view.model, self._view.modelfield)
 
 	def display(self, model, modelfield):
-		self.refresh()
+		if not modelfield:
+			self._readonly_set(self.attrs.get('readonly', False))
+			return
+		self._readonly_set(modelfield.state_attrs.get('readonly', False))
+		if not modelfield.state_attrs.get('valid', True):
+			self.color_set('invalid')
+		elif modelfield.state_attrs.get('required', False):
+			self.color_set('required')
+		else:
+			self.color_set('normal')
 
 	def sig_changed(self):
 		if self.attrs.get('on_change',False):
