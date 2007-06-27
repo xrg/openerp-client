@@ -47,8 +47,9 @@ class ViewWidget(object):
 			self.widget.display(model, False)
 			return False
 		modelfield = model.mgroup.mfields.get(self.widget_name, False)
-		modelfield.state_set(model, state)
-		self.widget.display(model, modelfield)
+		if modelfield:
+			modelfield.state_set(model, state)
+			self.widget.display(model, modelfield)
 	
 	def reset(self, model):
 		modelfield = False

@@ -59,7 +59,10 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 		n = len(axis)-1
 		gvalue = []
 		gvalue2 = []
-		width =  0.9 / float(n)
+		if float(n):
+			width =  0.9 / float(n)
+		else:
+			width = 0.9
 		ind = map(lambda x: x+width*n/2, arange(len(keys)))
 		if orientation=='horizontal':
 			subplot.set_yticks(ind)
