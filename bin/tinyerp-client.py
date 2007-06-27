@@ -64,8 +64,6 @@ import gtk.glade
 
 import locale, gettext
 
-# for testing cx_Freeze
-
 import atk
 import gtk._gtk
 import pango
