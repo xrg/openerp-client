@@ -149,9 +149,9 @@ class Char(object):
 		else:
 			align = 0
 		if self.treeview.editable:
-			if not model[self.field_name].attrs.get('valid', True):
+			if not model[self.field_name].state_attrs.get('valid', True):
 				cell.set_property('background', common.colors.get('invalid', 'white'))
-			elif model[self.field_name].attrs.get('required', False):
+			elif bool(int(model[self.field_name].state_attrs.get('required', 0))):
 				cell.set_property('background', common.colors.get('required', 'white'))
 		cell.set_property('xalign', align)
 

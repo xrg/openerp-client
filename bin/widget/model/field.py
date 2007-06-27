@@ -76,7 +76,7 @@ class CharField(object):
 
 	def validate(self, model):
 		ok = True
-		if self.state_attrs.get('required', False):
+		if bool(int(self.state_attrs.get('required', 0))):
 			if not model.value[self.name]:
 				ok=False
 		self.state_attrs['valid'] = ok
@@ -113,7 +113,7 @@ class CharField(object):
 	def create(self, model):
 		return False
 
-	def state_set(self, model, state):
+	def state_set(self, model, state='draft'):
 		state_changes = dict(self.attrs.get('states',{}).get(state,[]))
 		for key in ('readonly', 'required'):
 			if key in state_changes:
