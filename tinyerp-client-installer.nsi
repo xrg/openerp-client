@@ -138,6 +138,9 @@ Section "Uninstall"
   Push "$INSTDIR\themes"
   Push ""
   Call un.RmFilesButOne
+  Push "$INSTDIR\share"
+  Push ""
+  Call un.RmFilesButOne
   Delete "$INSTDIR\doc\*"
 
   Delete "$INSTDIR\*"
@@ -157,6 +160,10 @@ Section "Uninstall"
   Push ""
   Call un.RmDirsButOne
   RMDir "$INSTDIR\themes"
+  Push "$INSTDIR\share"
+  Push ""
+  Call un.RmDirsButOne
+  RMDir "$INSTDIR\share"
   RMDir "$INSTDIR\doc"
   RMDir "$INSTDIR"
 

@@ -54,11 +54,16 @@ def data_files():
         for (dp,dn,names) in os.walk('themes'):
             if '.svn' in dn:
                 dn.remove('.svn')
-            files.append((dp, map(lambda x: os.path.join('bin', dp,x), names)))
+            files.append((dp, map(lambda x: opj('bin', dp,x), names)))
+        for (dp, dn, names) in os.walk('share\\locale'):
+            if '.svn' in dn:
+                dn.remove('.svn')
+            files.append((dp, map(lambda x: opj('bin', dp, x), names)))
         os.chdir('..')
         files.append((".",["bin\\terp.glade","bin\\pixmaps\\tinyerp_icon.png","bin\\pixmaps\\tinyerp.png","bin\\pixmaps\\flag.png", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
         files.append(("po",glob.glob("bin\\po\\*.*")))
         files.append(("icons",glob.glob("bin\\icons\\*.png")))
+        files.append(("share\\locale", glob.glob("bin\\share\\locale\\*.*")))
     else:
         files.append((opj('share','man','man1',''),['man/tinyerp-client.1']))
         files.append((opj('share','doc', 'tinyerp-client-%s' % version), [f for

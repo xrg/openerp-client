@@ -37,7 +37,7 @@ def setlang(lang=None):
 	APP = release.name
 	DIR = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'share/locale')
 	if not os.path.isdir(DIR):
-		DIR = None
+		return False
 	if lang:
 		lc, encoding = locale.getdefaultlocale()
 		if encoding == 'utf':
