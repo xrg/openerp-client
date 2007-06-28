@@ -79,6 +79,9 @@ class url(interface.widget_interface):
 		if value:
 			tools.launch_browser(value)
 
+	def _color_widget(self):
+		return self.entry
+
 class email(url):
 	def button_clicked(self, widget):
 		value = self.entry.get_text()
