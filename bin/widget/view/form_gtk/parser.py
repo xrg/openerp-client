@@ -59,7 +59,6 @@ class Button(Observable):
 				icon.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
 				self.widget.set_image(icon)
 			except Exception,e:
-				print attrs['icon']
 				import logging
 				log = logging.getLogger('common')
 				log.warning(_('Wrong icon for the button !'))

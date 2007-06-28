@@ -273,7 +273,6 @@ class form(wid_int.wid_int):
 	def _value_set(self, value):
 		for x in value:
 			if x in self.widgets:
-				print self.widgets[x][0]
 				self.widgets[x][0].value = value[x]
 
 	value = property(_value_get, _value_set, None,
