@@ -51,12 +51,13 @@ class view_tree_sc(object):
 	def update(self):
 		store = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
 		uid =  rpc.session.uid
-		sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'search', [('user_id','=',rpc.session.uid), ('resource','=',self.model)])
-		if len(sc):
-			sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'read', sc, ['res_id', 'name'])
-			for s in sc:
-				num = store.append()
-				store.set(num, 0, s['res_id'], 1, s['name'], 2, s['id'])
+		try:
+			sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'get_sc', rpc.session.uid, self.model, rpc.session.context)
+		except:
+			sc = []
+		for s in sc:
+			num = store.append()
+			store.set(num, 0, s['res_id'], 1, s['name'], 2, s['id'])
 		self.tree.set_model(store)
 
 	def remove(self, id):

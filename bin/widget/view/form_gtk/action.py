@@ -81,7 +81,7 @@ class action(interface.widget_interface):
 				vbox=self.win_gl.get_widget('widget_paned_vbox')
 				vbox.add(self.screen.widget)
 				self.widget=self.win_gl.get_widget('widget_paned')
-				self.widget.set_size_request(int(attrs.get('width', -1)), int(attrs.get('haight', -1)))
+				self.widget.set_size_request(int(attrs.get('width', -1)), int(attrs.get('height', -1)))
 			elif self.action['view_type']=='tree':
 				pass #TODO
 

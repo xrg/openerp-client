@@ -428,6 +428,7 @@ class terp_main(service.Service):
 			'on_win_prev_activate': self.sig_win_prev,
 			'on_plugin_execute_activate': self.sig_plugin_execute,
 			'on_quit_activate': self.sig_close,
+			'on_button_menu_activate': self.sig_win_menu,
 			'on_win_new_activate': self.sig_win_new,
 			'on_win_home_activate': self.sig_home_new,
 			'on_win_close_activate': self.sig_win_close,
@@ -518,6 +519,29 @@ class terp_main(service.Service):
 
 		# Adding a timer the check to requests
 		gobject.timeout_add(5 * 60 * 1000, self.request_set)
+		self.sc_widget = self.glade.get_widget('toolbar_shortcuts')
+		self.sc_widget_items = []
+
+	def _action_sc(self, widget, action):
+		ctx = rpc.session.context.copy()
+		obj = service.LocalService('action.main')
+		obj.exec_keyword('tree_but_open', {'model':'ir.ui.menu', 'id':action,
+			'ids':[action], 'report_type':'pdf', 'window': self.window}, context=ctx)
+
+	def shortcut_set(self):
+		while len(self.sc_widget_items):
+			self.sc_widget.remove(self.sc_widget_items.pop())
+		uid =  rpc.session.uid
+		try:
+			sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'get_sc', rpc.session.uid, 'ir.ui.menu', rpc.session.context)
+		except:
+			sc = []
+		for s in sc:
+			item = gtk.ToolButton(None, label=s['name'])
+			item.connect('clicked', self._action_sc, s['res_id'])
+			item.show()
+			self.sc_widget.add(item)
+			self.sc_widget_items.append(item)
 
 	def theme_select(self, widget, theme):
 		options.options['client.theme'] = theme
@@ -639,6 +663,7 @@ class terp_main(service.Service):
 				common.message(_('Connection error !\nUnable to connect to the server !'))
 			elif log_response==-2:
 				common.message(_('Connection error !\nBad username or password !'))
+			self.shortcut_set()
 		except rpc.rpc_exception, e:
 			(e1,e2) = e
 			rpc.session.logout()
@@ -695,6 +720,13 @@ class terp_main(service.Service):
 		shortcuts_win = glade.XML(common.terp_path('terp.glade'), 'shortcuts_dia', gettext.textdomain())
 		shortcuts_win.get_widget('shortcuts_dia').set_transient_for(self.window)
 		shortcuts_win.signal_connect("on_but_ok_pressed", lambda obj: shortcuts_win.get_widget('shortcuts_dia').destroy())
+
+	def sig_win_menu(self, widget=None, type='menu_id'):
+		for p in range(len(self.pages)):
+			if self.pages[p].model=='ir.ui.menu':
+				self.notebook.set_current_page(p)
+				return True
+		self.sig_win_new(widget, type)
 
 	def sig_win_new(self, widget=None, type='menu_id'):
 		try:
