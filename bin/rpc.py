@@ -48,14 +48,19 @@ class rpc_exception(Exception):
 	def __init__(self, code, backtrace):
 
 		self.code = code
-		lines = code.split('\n')
-
-		self.type = lines[0].split(' -- ')[0]
-		self.message = ''
-		if len(lines[0].split(' -- ')) > 1:
-			self.message = lines[0].split(' -- ')[1]
-
-		self.data = '\n'.join(lines[2:])
+		if hasattr(code, 'split'):
+			lines = code.split('\n')
+	
+			self.type = lines[0].split(' -- ')[0]
+			self.message = ''
+			if len(lines[0].split(' -- ')) > 1:
+				self.message = lines[0].split(' -- ')[1]
+	
+			self.data = '\n'.join(lines[2:])
+		else:
+			self.type = 'error'
+			self.message = backtrace
+			self.data = backtrace
 
 		self.backtrace = backtrace
 
@@ -173,6 +178,7 @@ class rpc_session(object):
 				common.error(_('Connection refused !'), e1, e2)
 				raise rpc_exception(69, 'Connection refused!')
 			except xmlrpclib.Fault, err:
+				print err
 				a = rpc_exception(err.faultCode, err.faultString)
 				if a.type in ('warning','UserError'):
 #TODO: faudrait propager l'exception
