@@ -178,7 +178,6 @@ class rpc_session(object):
 				common.error(_('Connection refused !'), e1, e2)
 				raise rpc_exception(69, 'Connection refused!')
 			except xmlrpclib.Fault, err:
-				print err
 				a = rpc_exception(err.faultCode, err.faultString)
 				if a.type in ('warning','UserError'):
 #TODO: faudrait propager l'exception
@@ -201,6 +200,7 @@ class rpc_session(object):
 			except Exception, e:
 				common.error(_('Application Error'), _('View details'), str(e))
 		else:
+			common.error(_('Not logged !'), _('Not logged !'))
 			raise rpc_exception(1, 'not logged')
 
 	def login(self, uname, passwd, url, port, protocol, db):
