@@ -200,7 +200,6 @@ class rpc_session(object):
 			except Exception, e:
 				common.error(_('Application Error'), _('View details'), str(e))
 		else:
-			common.error(_('Not logged !'), _('Not logged !'))
 			raise rpc_exception(1, 'not logged')
 
 	def login(self, uname, passwd, url, port, protocol, db):
