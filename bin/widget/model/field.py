@@ -333,6 +333,8 @@ class ReferenceField(CharField):
 		internal = model.value[self.name]
 		model.value[self.name] = value
 		if (internal or False) != (model.value[self.name] or False):
+			model.modified = True
+			model.modified_fields.setdefault(self.name)
 			self.sig_changed(model)
 			model.signal('record-changed', model)
 
