@@ -31,6 +31,7 @@ import gobject
 import gtk
 
 import gettext
+import service
 
 class view_tree_sc(object):
 	def __init__(self, tree, model):
@@ -57,6 +58,8 @@ class view_tree_sc(object):
 			num = store.append()
 			store.set(num, 0, s['res_id'], 1, s['name'], 2, s['id'])
 		self.tree.set_model(store)
+		if self.model == 'ir.ui.menu':
+			service.LocalService('gui.main').shortcut_set()
 
 	def remove(self, id):
 		self.update()
