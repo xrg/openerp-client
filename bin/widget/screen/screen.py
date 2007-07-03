@@ -101,7 +101,7 @@ class Screen(signal_event.signal_event):
 		v = self.filter_widget.value
 		v += self.domain
 		try:
-			ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0, self.context)
+			ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search', v, offset,limit, 0, self.context)
 		except:
 			# Try if it is not an older server
 			ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0)

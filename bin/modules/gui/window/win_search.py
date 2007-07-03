@@ -124,7 +124,7 @@ class win_search(object):
 		v_keys = map(lambda x: x[0], v)
 		v += self.domain
 		try:
-			self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, rpc.session.context)
+			self.ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, rpc.session.context)
 		except:
 			# Try if it is not an old server
 			self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
