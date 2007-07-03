@@ -149,6 +149,7 @@ class db_login(object):
 		if not parent:
 			parent = service.LocalService('gui.main').window
 		win.set_transient_for(parent)
+		win.show_all()
 		img = self.win_gl.get_widget('image_tinyerp')
 		img.set_from_file(common.terp_path_pixmaps('tinyerp.png'))
 		login = self.win_gl.get_widget('ent_login')
@@ -236,6 +237,7 @@ class db_create(object):
 		if not parent:
 			parent = service.LocalService('gui.main').window
 		win.set_transient_for(parent)
+		win.show_all()
 		lang_dict = {}
 		pass_widget = self.dialog.get_widget('ent_password_new')
 		self.server_widget = self.dialog.get_widget('ent_server_new')
@@ -376,7 +378,7 @@ class terp_main(service.Service):
 		window.connect("destroy", self.sig_quit)
 		window.connect("delete_event", self.sig_delete)
 		self.window = window
-		self.window.set_icon(gtk.gdk.pixbuf_new_from_file(common.terp_path_pixmaps('tinyerp_icon.png')))
+		self.window.set_icon(gtk.gdk.pixbuf_new_from_file(common.terp_path_pixmaps('tinyerp-icon-32x32.png')))
 
 		self.notebook = gtk.Notebook()
 		self.notebook.popup_enable()
@@ -703,21 +705,30 @@ class terp_main(service.Service):
 		
 	def sig_licence(self, widget):
 		dialog = glade.XML(common.terp_path("terp.glade"), "win_licence", gettext.textdomain())
-		dialog.get_widget('win_licence').set_transient_for(self.window)
 		dialog.signal_connect("on_but_ok_pressed", lambda obj: dialog.get_widget('win_licence').destroy())
+
+		win = dialog.get_widget('win_licence')
+		win.set_transient_for(self.window)
+		win.show_all()
 
 	def sig_about(self, widget):
 		about = glade.XML(common.terp_path("terp.glade"), "win_about", gettext.textdomain())
-		about.get_widget('win_about').set_transient_for(self.window)
 		buffer = about.get_widget('textview2').get_buffer()
 		about_txt = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 		buffer.set_text(about_txt % tinyerp_version)
 		about.signal_connect("on_but_ok_pressed", lambda obj: about.get_widget('win_about').destroy())
 
+		win = about.get_widget('win_about')
+		win.set_transient_for(self.window)
+		win.show_all()
+
 	def sig_shortcuts(self, widget):
 		shortcuts_win = glade.XML(common.terp_path('terp.glade'), 'shortcuts_dia', gettext.textdomain())
-		shortcuts_win.get_widget('shortcuts_dia').set_transient_for(self.window)
 		shortcuts_win.signal_connect("on_but_ok_pressed", lambda obj: shortcuts_win.get_widget('shortcuts_dia').destroy())
+
+		win = shortcuts_win.get_widget('shortcuts_dia')
+		win.set_transient_for(self.window)
+		win.show_all()
 
 	def sig_win_menu(self, widget=None, quite=True):
 		for p in range(len(self.pages)):
@@ -878,6 +889,7 @@ class terp_main(service.Service):
 		dialog = glade.XML(common.terp_path("terp.glade"), "dia_passwd_change", gettext.textdomain())
 		win = dialog.get_widget('dia_passwd_change')
 		win.set_transient_for(self.window)
+		win.show_all()
 		server_widget = dialog.get_widget('ent_server')
 		old_pass_widget = dialog.get_widget('old_passwd')
 		new_pass_widget = dialog.get_widget('new_passwd')
@@ -960,6 +972,7 @@ class terp_main(service.Service):
 		dialog = glade.XML(common.terp_path("terp.glade"), "win_db_select", gettext.textdomain())
 		win = dialog.get_widget('win_db_select')
 		win.set_transient_for(self.window)
+		win.show_all()
 
 		pass_widget = dialog.get_widget('ent_passwd_select')
 		server_widget = dialog.get_widget('ent_server_select')
@@ -1000,13 +1013,14 @@ class terp_main(service.Service):
 		dialog = glade.XML(common.terp_path("terp.glade"), "win_db_ent", gettext.textdomain())
 		win = dialog.get_widget('win_db_ent')
 		win.set_transient_for(self.window)
+		win.show_all()
 
 		db_widget = dialog.get_widget('ent_db')
 		widget_pass = dialog.get_widget('ent_password')
 		widget_url = dialog.get_widget('ent_server')
 
 		protocol = options.options['login.protocol']
-		url = '%s://%s:%s' % (protocol, options.options['login.server'], options.options['login.port'])
+		url = '%s%s:%s' % (protocol, options.options['login.server'], options.options['login.port'])
 		widget_url.set_text(url)
 
 		change_button = dialog.get_widget('but_server_change')

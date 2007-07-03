@@ -6,7 +6,7 @@
 <widget class="GtkDialog" id="win_login">
   <property name="width_request">499</property>
   <property name="height_request">280</property>
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Login</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -1217,7 +1217,7 @@
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Text _and Icons</property>
 				  <property name="use_underline">True</property>
-				  <property name="active">True</property>
+				  <property name="active">False</property>
 				  <signal name="activate" handler="on_menubar_both_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
 				</widget>
 			      </child>
@@ -1227,7 +1227,7 @@
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">_Icons only</property>
 				  <property name="use_underline">True</property>
-				  <property name="active">True</property>
+				  <property name="active">False</property>
 				  <property name="group">menubar_both</property>
 				  <signal name="activate" handler="on_menubar_icons_activate" last_modification_time="Mon, 12 Apr 2004 08:01:31 GMT"/>
 				</widget>
@@ -1238,7 +1238,7 @@
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">_Text only</property>
 				  <property name="use_underline">True</property>
-				  <property name="active">True</property>
+				  <property name="active">False</property>
 				  <property name="group">menubar_both</property>
 				  <signal name="activate" handler="on_menubar_text_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
 				</widget>
@@ -1275,7 +1275,7 @@
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Normal</property>
 				  <property name="use_underline">True</property>
-				  <property name="active">True</property>
+				  <property name="active">False</property>
 				  <signal name="activate" handler="on_mode_normal_activate" last_modification_time="Mon, 20 Mar 2006 17:20:58 GMT"/>
 				</widget>
 			      </child>
@@ -1285,7 +1285,7 @@
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Mode PDA</property>
 				  <property name="use_underline">True</property>
-				  <property name="active">True</property>
+				  <property name="active">False</property>
 				  <property name="group">mode_normal</property>
 				  <signal name="activate" handler="on_mode_pda_activate" last_modification_time="Mon, 20 Mar 2006 17:20:58 GMT"/>
 				</widget>
@@ -1369,7 +1369,7 @@
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Right Toolbar</property>
 				  <property name="use_underline">True</property>
-				  <property name="active">True</property>
+				  <property name="active">False</property>
 				  <signal name="activate" handler="on_opt_form_toolbar_activate" last_modification_time="Tue, 17 Oct 2006 19:11:08 GMT"/>
 				</widget>
 			      </child>
@@ -1389,7 +1389,7 @@
 					  <property name="visible">True</property>
 					  <property name="label" translatable="yes">Top</property>
 					  <property name="use_underline">True</property>
-					  <property name="active">True</property>
+					  <property name="active">False</property>
 					  <signal name="activate" handler="on_opt_form_tab_top_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
 					</widget>
 				      </child>
@@ -1399,7 +1399,7 @@
 					  <property name="visible">True</property>
 					  <property name="label" translatable="yes">Left</property>
 					  <property name="use_underline">True</property>
-					  <property name="active">True</property>
+					  <property name="active">False</property>
 					  <property name="group">opt_form_tab_top</property>
 					  <signal name="activate" handler="on_opt_form_tab_left_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
 					</widget>
@@ -1410,7 +1410,7 @@
 					  <property name="visible">True</property>
 					  <property name="label" translatable="yes">Right</property>
 					  <property name="use_underline">True</property>
-					  <property name="active">True</property>
+					  <property name="active">False</property>
 					  <property name="group">opt_form_tab_top</property>
 					  <signal name="activate" handler="on_opt_form_tab_right_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
 					</widget>
@@ -1421,7 +1421,7 @@
 					  <property name="visible">True</property>
 					  <property name="label" translatable="yes">Bottom</property>
 					  <property name="use_underline">True</property>
-					  <property name="active">True</property>
+					  <property name="active">False</property>
 					  <property name="group">opt_form_tab_top</property>
 					  <signal name="activate" handler="on_opt_form_tab_bottom_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
 					</widget>
@@ -1446,7 +1446,7 @@
 					  <property name="visible">True</property>
 					  <property name="label" translatable="yes">Horizontal</property>
 					  <property name="use_underline">True</property>
-					  <property name="active">True</property>
+					  <property name="active">False</property>
 					  <signal name="activate" handler="on_opt_form_tab_orientation_horizontal_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
 					</widget>
 				      </child>
@@ -1456,7 +1456,7 @@
 					  <property name="visible">True</property>
 					  <property name="label" translatable="yes">Vertical</property>
 					  <property name="use_underline">True</property>
-					  <property name="active">True</property>
+					  <property name="active">False</property>
 					  <property name="group">opt_form_tab_orientation_0</property>
 					  <signal name="activate" handler="on_opt_form_tab_orientation_vertical_activate" last_modification_time="Sat, 06 Mar 2004 22:27:12 GMT"/>
 					</widget>
@@ -1496,7 +1496,7 @@
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Previe_w before print</property>
 				  <property name="use_underline">True</property>
-				  <property name="active">True</property>
+				  <property name="active">False</property>
 				  <signal name="activate" handler="on_opt_print_preview_activate" last_modification_time="Sun, 28 Sep 2003 18:02:48 GMT"/>
 				</widget>
 			      </child>
@@ -2530,10 +2530,10 @@
 <widget class="GtkDialog" id="win_about">
   <property name="width_request">430</property>
   <property name="height_request">360</property>
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - About</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
@@ -4410,10 +4410,10 @@ Web: http://tiny.be</property>
 <widget class="GtkDialog" id="win_sur">
   <property name="width_request">350</property>
   <property name="height_request">143</property>
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Confirmation</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">True</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
@@ -8606,10 +8606,10 @@ Very Urgent</property>
 
 <widget class="GtkDialog" id="win_preference">
   <property name="width_request">600</property>
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Preferences</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
@@ -8724,10 +8724,10 @@ Very Urgent</property>
 </widget>
 
 <widget class="GtkDialog" id="win_tips">
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tip of the Day</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
@@ -9019,10 +9019,10 @@ Very Urgent</property>
 <widget class="GtkDialog" id="win_licence">
   <property name="width_request">484</property>
   <property name="height_request">358</property>
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Licence</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="default_width">500</property>
   <property name="default_height">500</property>
@@ -10740,10 +10740,10 @@ Tell us which ERP systems you used before, and what you plan to do with Tiny ERP
 </widget>
 
 <widget class="GtkDialog" id="dia_support">
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Support Request</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
@@ -11459,10 +11459,10 @@ Very Urgent</property>
 </widget>
 
 <widget class="GtkDialog" id="shortcuts_dia">
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Keyboard shortcuts</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
@@ -14129,10 +14129,10 @@ Latin1</property>
 </widget>
 
 <widget class="GtkDialog" id="win_db_select">
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Choose a database...</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
@@ -14527,10 +14527,10 @@ Latin1</property>
 </widget>
 
 <widget class="GtkDialog" id="win_db_ent">
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Restore a database</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
@@ -15092,7 +15092,7 @@ this operation may take a while...</property>
 </widget>
 
 <widget class="GtkDialog" id="win_createdb">
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Create a new database</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -15650,10 +15650,10 @@ this operation may take a while...</property>
 </widget>
 
 <widget class="GtkDialog" id="dia_passwd_change">
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Change password</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="default_width">400</property>
   <property name="default_height">180</property>

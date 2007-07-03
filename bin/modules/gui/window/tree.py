@@ -274,7 +274,10 @@ class tree(object):
 
 	def id_get(self):
 		try:
-			return self.search[self.search_pos]
+			if hasattr(self, 'search'):
+				return self.search[self.search_pos]
+			else:
+				return None
 		except IndexError:
 			return None
 

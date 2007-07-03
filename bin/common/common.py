@@ -157,6 +157,7 @@ def tipoftheday(parent=None):
 			self.win = winglade.get_widget('win_tips')
 			if parent:
 				self.win.set_transient_for(parent)
+			self.win.show_all()
 			self.label = winglade.get_widget('tip_label')
 			self.check = winglade.get_widget('tip_checkbutton')
 			dict = {
@@ -284,6 +285,8 @@ def support(*args):
 
 	sur = glade.XML(terp_path("terp.glade"), "dia_support",gettext.textdomain())
 	win = sur.get_widget('dia_support')
+	win.set_transient_for(service.LocalService('gui.main').window)
+	win.show_all()
 	sur.get_widget('id_entry').set_text(support_id)
 
 	response = win.run()
@@ -411,8 +414,12 @@ def warning(msg, title='', parent=None):
 	return True
 
 def sur(msg, parent=None):
+	if not parent:
+		parent=service.LocalService('gui.main').window
 	sur = glade.XML(terp_path("terp.glade"), "win_sur",gettext.textdomain())
 	win = sur.get_widget('win_sur')
+	win.set_transient_for(parent)
+	win.show_all()
 	l = sur.get_widget('lab_question')
 	l.set_text(msg)
 

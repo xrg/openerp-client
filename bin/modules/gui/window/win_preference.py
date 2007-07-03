@@ -44,6 +44,7 @@ class win_preference(object):
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_preference', gettext.textdomain())
 		self.win = self.glade.get_widget('win_preference')
 		self.win.set_transient_for(parent)
+		self.win.show_all()
 		self.id = id
 		self.model = model
 

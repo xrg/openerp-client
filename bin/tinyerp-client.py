@@ -124,7 +124,7 @@ try:
 	if not common.terp_survey():
 		if options.options.rcexist:
 			if options.options['tip.autostart']:
-				common.tipoftheday()
+				common.tipoftheday(win.window)
 			else:
 				win.sig_login()
 	gtk.main()
