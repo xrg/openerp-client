@@ -385,6 +385,8 @@ class terp_main(service.Service):
 		vbox = self.glade.get_widget('vbox_main')
 		vbox.pack_start(self.notebook, expand=True, fill=True)
 
+		self.shortcut_menu = self.glade.get_widget('shortcut')
+
 		#
 		# Code to add themes to the options->theme menu
 		#
@@ -428,7 +430,7 @@ class terp_main(service.Service):
 			'on_win_prev_activate': self.sig_win_prev,
 			'on_plugin_execute_activate': self.sig_plugin_execute,
 			'on_quit_activate': self.sig_close,
-			'on_button_menu_activate': self.sig_win_menu,
+			'on_but_menu_clicked': self.sig_win_menu,
 			'on_win_new_activate': self.sig_win_menu,
 			'on_win_home_activate': self.sig_home_new,
 			'on_win_close_activate': self.sig_win_close,
@@ -519,29 +521,25 @@ class terp_main(service.Service):
 
 		# Adding a timer the check to requests
 		gobject.timeout_add(5 * 60 * 1000, self.request_set)
-		self.sc_widget = self.glade.get_widget('toolbar_shortcuts')
-		self.sc_widget_items = []
-
-	def _action_sc(self, widget, action):
-		ctx = rpc.session.context.copy()
-		obj = service.LocalService('action.main')
-		obj.exec_keyword('tree_but_open', {'model':'ir.ui.menu', 'id':action,
-			'ids':[action], 'report_type':'pdf', 'window': self.window}, context=ctx)
 
 	def shortcut_set(self):
-		while len(self.sc_widget_items):
-			self.sc_widget.remove(self.sc_widget_items.pop())
-		uid =  rpc.session.uid
+		def _action_shortcut(widget, action):
+			ctx = rpc.session.context.copy()
+			obj = service.LocalService('action.main')
+			obj.exec_keyword('tree_but_open', {'model': 'ir.ui.menu', 'id': action,
+				'ids': [action], 'report_type': 'pdf', 'window': self.window}, context=ctx)
+		uid = rpc.session.uid
 		try:
-			sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'get_sc', rpc.session.uid, 'ir.ui.menu', rpc.session.context)
+			sc = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, 'ir.ui.menu', rpc.session.context)
 		except:
-			sc = []
+			return
+		menu = gtk.Menu()
 		for s in sc:
-			item = gtk.ToolButton(None, label=s['name'])
-			item.connect('clicked', self._action_sc, s['res_id'])
-			item.show()
-			self.sc_widget.add(item)
-			self.sc_widget_items.append(item)
+			menuitem = gtk.MenuItem(s['name'])
+			menuitem.connect('activate', _action_shortcut, s['res_id'])
+			menu.add(menuitem)
+		menu.show_all()
+		self.shortcut_menu.set_submenu(menu)
 
 	def theme_select(self, widget, theme):
 		options.options['client.theme'] = theme
@@ -748,6 +746,7 @@ class terp_main(service.Service):
 		act_id = act_id[0][type][0]
 		obj = service.LocalService('action.main')
 		win = obj.execute(act_id, {'window':self.window})
+		return True
 	
 	def sig_home_new(self, widget=None, quiet=True):
 		return self.sig_win_new(widget, type='action_id', quiet=quiet)

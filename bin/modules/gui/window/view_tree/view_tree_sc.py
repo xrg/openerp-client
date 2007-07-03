@@ -37,7 +37,6 @@ class view_tree_sc(object):
 		self.model = model
 		self.tree = tree
 		self.tree.get_selection().set_mode('single')
-		#self.tree.get_selection().connect('changed', self.go)
 		column = gtk.TreeViewColumn (_('ID'), gtk.CellRendererText(), text=0)
 		self.tree.append_column(column)
 		column.set_visible(False)
@@ -45,14 +44,13 @@ class view_tree_sc(object):
 
 		column = gtk.TreeViewColumn (_('Description'), cell, text=1)
 		self.tree.append_column(column)
-		#column = gtk.TreeViewColumn ('ID Pref', gtk.CellRendererText(), text=2)
-		#self.tree.append_column(column)
 		self.update()
+
 	def update(self):
 		store = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
 		uid =  rpc.session.uid
 		try:
-			sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'get_sc', rpc.session.uid, self.model, rpc.session.context)
+			sc = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, self.model, rpc.session.context)
 		except:
 			sc = []
 		for s in sc:
