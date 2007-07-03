@@ -60,7 +60,8 @@ def data_files():
                 dn.remove('.svn')
             files.append((dp, map(lambda x: opj('bin', dp, x), names)))
         os.chdir('..')
-        files.append((".",["bin\\terp.glade","bin\\pixmaps\\tinyerp_icon.png","bin\\pixmaps\\tinyerp.png","bin\\pixmaps\\flag.png", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
+        files.append((".",["bin\\terp.glade", "bin\\pixmaps\\tinyerp_icon.png", "bin\\pixmaps\\tinyerp.png", "bin\\pixmaps\\flag.png"
+            "bin\\pixmaps\\tinyerp-icon-32x32.png", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
         files.append(("po",glob.glob("bin\\po\\*.*")))
         files.append(("icons",glob.glob("bin\\icons\\*.png")))
         files.append(("share\\locale", glob.glob("bin\\share\\locale\\*.*")))
