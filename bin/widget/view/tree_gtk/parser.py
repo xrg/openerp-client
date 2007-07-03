@@ -315,7 +315,7 @@ class M2O(Char):
 		context=modelfield.context_get(model)
 		if create:
 			id = None
-		elif not model.modified and not changed:
+		elif not changed:
 			id = modelfield.get(model)
 		else:
 			rpc = RPCProxy(relation)

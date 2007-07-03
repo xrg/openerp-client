@@ -208,8 +208,10 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 				value=entry.get_text()
 			else:
 				value=get_active_text()
+			entry.disconnect(entry.editing_done_id)
 			self.on_open_remote(model, column.name,
 								create=(event.keyval==gtk.keysyms.F1), value=value)
+			entry.editing_done_id = entry.connect('editing_done', self.on_editing_done)
 			self.set_cursor(path, column, True)
 		else:
 			modelfield = model[column.name]
