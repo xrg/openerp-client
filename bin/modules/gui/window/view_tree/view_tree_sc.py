@@ -53,7 +53,11 @@ class view_tree_sc(object):
 		try:
 			sc = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, self.model, rpc.session.context)
 		except:
-			sc = []
+			sc_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'search', [('user_id', '=', uid), ('resource', '=', self.model)])
+			if sc_ids:
+				sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'read', sc_ids, ['res_id', 'name'])
+			else:
+				sc = []
 		for s in sc:
 			num = store.append()
 			store.set(num, 0, s['res_id'], 1, s['name'], 2, s['id'])

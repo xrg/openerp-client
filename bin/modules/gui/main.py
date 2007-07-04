@@ -534,7 +534,11 @@ class terp_main(service.Service):
 		try:
 			sc = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, 'ir.ui.menu', rpc.session.context)
 		except:
-			return
+			sc_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'search', [('user_id', '=', uid), ('resource', '=', 'ir.ui.menu')])
+			if sc_ids:
+				sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'read', sc_ids, ['res_id', 'name'])
+			else:
+				sc = []
 		menu = gtk.Menu()
 		for s in sc:
 			menuitem = gtk.MenuItem(s['name'])
