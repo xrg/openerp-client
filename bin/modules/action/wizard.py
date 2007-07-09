@@ -43,6 +43,8 @@ class dialog(object):
 	def __init__(self, arch, fields, state, name, parent=None):
 		buttons = []
 		self.states=[]
+		if not parent:
+			parent = service.LocalService('gui.main').window
 		self.dia = gtk.Dialog('Tiny ERP', parent,
 			gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
 		for x in state:
