@@ -214,9 +214,8 @@ class form(wid_int.wid_int):
 		value={}
 		for x in domain:
 			if x[0] in self.widgets:
-				self.widgets[x[0]][0]._readonly_set(True)
 				if x[1] == '=':
-					pass
+					self.widgets[x[0]][0]._readonly_set(True)
 		for x in self.widgets.values():
 			x[0].sig_activate(self.sig_activate)
 
