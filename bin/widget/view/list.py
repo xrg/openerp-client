@@ -152,19 +152,24 @@ class ViewList(object):
 		self.model_add_new = True
 		self.widget = gtk.VBox()
 		self.widget_tree = widget
-		self.widget.pack_start(self.widget_tree, expand=True, fill=True)
+		scroll = gtk.ScrolledWindow()
+		scroll.add(self.widget_tree)
+		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+		self.widget.pack_start(scroll, expand=True, fill=True)
 		self.widget_tree.screen = screen
 		self.reload = False
 		self.children = children
 
-		hbox = gtk.HBox()
-		self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
-		for c in children:
-			hbox2 = gtk.HBox()
-			hbox2.pack_start(children[c][1], expand=True, fill=False)
-			hbox2.pack_start(children[c][2], expand=True, fill=False)
-			hbox.pack_start(hbox2, expand=False, fill=False, padding=12)
-		hbox.show_all()
+		if children:
+			self.widget.pack_start(self.widget_tree, expand=True, fill=True)
+			hbox = gtk.HBox()
+			self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
+			for c in children:
+				hbox2 = gtk.HBox()
+				hbox2.pack_start(children[c][1], expand=True, fill=False)
+				hbox2.pack_start(children[c][2], expand=True, fill=False)
+				hbox.pack_start(hbox2, expand=False, fill=False, padding=12)
+			hbox.show_all()
 
 		self.display()
 

@@ -205,12 +205,7 @@ class one2many_list(interface.widget_interface):
 		self.screen.signal_connect(self, 'record-message', self._sig_label)
 		menuitem_title.get_child().set_text(self.screen.current_view.title)
 
-		scroll = gtk.ScrolledWindow()
-		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-		scroll.set_placement(gtk.CORNER_TOP_LEFT)
-		scroll.set_shadow_type(gtk.SHADOW_NONE)
-		scroll.add_with_viewport(self.screen.widget)
-		self.widget.pack_start(scroll, expand=True, fill=True)
+		self.widget.pack_start(self.screen.widget, expand=True, fill=True)
 
 	def destroy(self):
 		self.screen.destroy()
@@ -236,7 +231,6 @@ class one2many_list(interface.widget_interface):
 	def _readonly_set(self, value):
 		self.eb_new.set_sensitive(not value)
 		self.eb_del.set_sensitive(not value)
-		self.eb_open.set_sensitive(not value)
 
 	def _sig_new(self, *args):
 		_, event = args
