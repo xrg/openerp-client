@@ -328,10 +328,10 @@ class M2O(Char):
 				return True, searched
 			return False, False
 		dia = M2ODialog(relation, id, domain=domain,context=context)
-		new_value = dia.run()
+		ok, value = dia.run()
 		dia.destroy()
-		if new_value[0]:
-			return True, new_value[1]
+		if ok:
+			return True, value
 		else:
 			return False, False
 	

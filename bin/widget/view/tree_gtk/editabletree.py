@@ -81,8 +81,6 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 			valid, value = cell.open_remote(current_model, create, changed, value)
 			if valid:
 				modelfield.set_client(current_model, value)
-				current_model.modified = False
-				current_model.modified_fields.setdefault(fieldname)
 		except NotImplementedError:
 			pass
 
