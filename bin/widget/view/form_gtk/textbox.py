@@ -36,7 +36,7 @@ class textbox(interface.widget_interface):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
 		self.widget = gtk.ScrolledWindow()
-		self.widget.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_ALWAYS)
+		self.widget.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
 		self.widget.set_shadow_type(gtk.SHADOW_NONE)
 		self.widget.set_size_request(-1, 80)
 
