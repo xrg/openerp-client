@@ -53,8 +53,11 @@ class spinbutton(wid_int.wid_int):
 		self.spin1.update()
 		self.spin2.update()
 		if self.spin1.get_value() > self.spin2.get_value():
-			res.append((self.name, '>=', self.spin2.get_value()))
-			res.append((self.name, '<=', self.spin1.get_value()))
+			if self.spin2.get_value() != 0.0:
+				res.append((self.name, '>=', self.spin2.get_value()))
+				res.append((self.name, '<=', self.spin1.get_value()))
+			else:
+				res.append((self.name, '>=', self.spin1.get_value()))
 		elif self.spin2.get_value() > self.spin1.get_value():
 			res.append((self.name, '<=', self.spin2.get_value()))
 			res.append((self.name, '>=', self.spin1.get_value()))

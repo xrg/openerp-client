@@ -55,12 +55,17 @@ class spinint(wid_int.wid_int):
 		res = []
 		self.spin1.update()
 		self.spin2.update()
-		if (self.spin1.get_value_as_int() > 0) and (self.spin2.get_value_as_int() == 0):
-			res.append((self.name, '=', self.spin1.get_value_as_int()))
-		elif self.spin1.get_value_as_int() > 0:
-			res.append((self.name, '>=', self.spin1.get_value_as_int()))
-		if self.spin2.get_value_as_int() > 0:
+		if self.spin1.get_value_as_int() > self.spin2.get_value_as_int():
+			if self.spin2.get_value_as_int() != 0:
+				res.append((self.name, '>=', self.spin2.get_value_as_int()))
+				res.append((self.name, '<=', self.spin1.get_value_as_int()))
+			else:
+				res.append((self.name, '>=', self.spin1.get_value_as_int()))
+		elif self.spin2.get_value_as_int() > self.spin1.get_value_as_int():
 			res.append((self.name, '<=', self.spin2.get_value_as_int()))
+			res.append((self.name, '>=', self.spin1.get_value_as_int()))
+		elif (self.spin2.get_value_as_int() == self.spin1.get_value_as_int()) and (self.spin1.get_value_as_int() != 0):
+			res.append((self.name, '=', self.spin1.get_value_as_int()))
 		return res
 
 	def _value_set(self, value):
