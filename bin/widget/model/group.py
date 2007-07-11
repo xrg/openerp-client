@@ -294,11 +294,12 @@ class ModelRecordGroup(signal_event.signal_event):
 			c = rpc.session.context.copy()
 			c.update(self.context)
 			values = self.rpc.read(old, to_add, c)
-			for v in values:
-				id = v['id']
-				if 'id' not in to_add:
-					del v['id']
-				self[id].set(v, signal=False)
+			if values:
+				for v in values:
+					id = v['id']
+					if 'id' not in to_add:
+						del v['id']
+					self[id].set(v, signal=False)
 		if len(new) and len(to_add):
 			values = self.rpc.default_get(to_add, self.context)
 			for t in to_add:
