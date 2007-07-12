@@ -85,9 +85,8 @@ class calendar(wid_int.wid_int):
 		tooltips.enable()
 
 	def _date_get(self, str):
-		"""converts from locale specific format to our internal format"""
 		try:
-			date = time.strptime(str, '%x')
+			date = time.strptime(str, locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'))
 		except:
 			return False
 		return time.strftime(DT_FORMAT, date)
@@ -108,7 +107,6 @@ class calendar(wid_int.wid_int):
 	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 
 	def cal_open(self, widget, event, dest, parent=None):
-		"""dest = the first or the second entry (dates are inputed in range of dates)"""
 		win = gtk.Dialog(_('Tiny ERP - Date selection'), parent,
 				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
 				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
