@@ -184,12 +184,6 @@ class form(object):
 		return True
 
 	def sig_switch(self, widget=None, mode=None):
-		#
-		# Verifier pourquoi:
-		#	1. Modif
-		#	2. Switch & Cancel
-		#	3. Re-Switch -> Question car modified
-		#
 		if not self.modified_save():
 			return
 		self.screen.switch_view()
@@ -293,9 +287,7 @@ class form(object):
 			self.screen.display()
 		else:
 			id = self.screen.id_get()
-			ids = self.screen.ids_get()
-			self.screen.clear()
-			self.screen.load(ids)
+			self.screen.search_filter()
 			for model in self.screen.models:
 				if model.id == id:
 					self.screen.current_model = model

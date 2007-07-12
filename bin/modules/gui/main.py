@@ -333,11 +333,12 @@ class db_create(object):
 			if not parent:
 				parent = service.LocalService('gui.main').window
 			win.set_transient_for(parent)
+			win.show_all()
 			buffer = dialog.get_widget('dia_tv').get_buffer()
 
 			buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
 			iter_start = buffer.get_start_iter()
-			buffer.insert(iter_start, _('The following users have been installed on your database:\n\n'+ pwdlst + '\n\n'+_('You can now connect to the database as an administrator.')))
+			buffer.insert(iter_start, _('The following users have been installed on your database:')+'\n\n'+ pwdlst + '\n\n'+_('You can now connect to the database as an administrator.'))
 			res = win.run()
 			win.destroy()
 

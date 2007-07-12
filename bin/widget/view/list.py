@@ -288,6 +288,7 @@ class ViewList(object):
 			#
 			if self.store:
 				self.widget_tree.set_model(self.store)
+		self.set_cursor()
 		self.update_children()
 
 	def update_children(self):

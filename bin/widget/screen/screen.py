@@ -410,6 +410,8 @@ class Screen(signal_event.signal_event):
 		return self.current_view.sel_ids_get()
 
 	def id_get(self):
+		if not self.current_model:
+			return False
 		return self.current_model.id
 
 	def ids_get(self):
