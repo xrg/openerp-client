@@ -88,5 +88,17 @@ class email(url):
 		if value:
 			tools.launch_browser('mailto:%s' % value)
 
+class callto(url):
+	def button_clicked(self, widget):
+		value = self.entry.get_text()
+		if value:
+			tools.launch_browser('callto:%s' % value)
+
+class sip(url):
+	def button_clicked(self, widget):
+		value = self.entry.get_text()
+		if value:
+			tools.launch_browser('sip:%s' % value)
+
 # vim:noexpandtab:
 

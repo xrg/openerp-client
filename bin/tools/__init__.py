@@ -44,8 +44,11 @@ def launch_browser(url):
 	else:
 		pid = os.fork()
 		if not pid:
-			webbrowser.open(url)
-			sys.exit()
+			pid = os.fork()
+			if not pid:
+				webbrowser.open(url)
+			sys.exit(0)
+		os.waitpid(pid, 0)
 
 def node_attributes(node):
 	result = {}

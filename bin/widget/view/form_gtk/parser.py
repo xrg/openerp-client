@@ -645,6 +645,8 @@ widgets_type = {
 	'many2one': (many2one.many2one, 1, False, False),
 	'email' : (url.email, 1, False, False),
 	'url' : (url.url, 1, False, False),
+	'callto' : (url.callto, 1, False, False),
+	'sip' : (url.sip, 1, False, False),
 	'image' : (image.image_wid, 1, False, False),
 }
 
