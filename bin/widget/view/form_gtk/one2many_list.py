@@ -42,13 +42,20 @@ class dialog(object):
 	def __init__(self, model_name, parent, model=None, attrs={}, model_ctx={}, window=None, default_get_ctx={}):
 
 		self.dia = gtk.Dialog(_('Tiny ERP - Link'), window,
-				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
-				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-					gtk.STOCK_OK, gtk.RESPONSE_OK))
+				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
 		if ('string' in attrs) and attrs['string']:
 			self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
 		self.dia.set_property('default-width', 760)
 		self.dia.set_property('default-height', 500)
+
+		self.accel_group = gtk.AccelGroup()
+		self.dia.add_accel_group(self.accel_group)
+
+		self.but_cancel = self.dia.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+		self.but_cancel.add_accelerator('clicked', self.accel_group, gtk.keysyms.Escape, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+
+		self.but_ok = self.dia.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
+		self.but_ok.add_accelerator('clicked', self.accel_group, gtk.keysyms.Return, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
 		scroll = gtk.ScrolledWindow()
 		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
@@ -210,7 +217,6 @@ class one2many_list(interface.widget_interface):
 		self.screen.widget.connect('key_press_event', self.on_keypress)
 
 	def on_keypress(self, widget, event):
-		print "keyval:", event.keyval, dir(event)
 		if event.keyval == gtk.keysyms.N and event.state & gtk.gdk.CONTROL_MASK and event.state & gtk.gdk.SHIFT_MASK:
 			self._sig_new(widget, event)
 			return False
