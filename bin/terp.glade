@@ -1573,6 +1573,7 @@
 		  <property name="visible">True</property>
 		  <property name="label" translatable="yes">_Shortcuts</property>
 		  <property name="use_underline">True</property>
+		  <property name="sensitive">False</property>
 		  <signal name="activate" handler="on_shortcut_activate" last_modification_time="Mon, 10 Jan 2005 20:23:54 GMT"/>
 		</widget>
 	      </child>
@@ -1905,6 +1906,7 @@
 	      <property name="visible_horizontal">True</property>
 	      <property name="visible_vertical">True</property>
 	      <property name="is_important">False</property>
+	      <property name="sensitive">False</property>
 	      <signal name="clicked" handler="on_but_menu_clicked" last_modification_time="Mon, 23 Aug 2004 14:03:54 GMT"/>
 	    </widget>
 	    <packing>

@@ -547,6 +547,13 @@ class terp_main(service.Service):
 			menu.add(menuitem)
 		menu.show_all()
 		self.shortcut_menu.set_submenu(menu)
+		self.shortcut_menu.set_sensitive(True)
+
+	def shortcut_unset(self):
+		menu = gtk.Menu()
+		menu.show_all()
+		self.shortcut_menu.set_submenu(menu)
+		self.shortcut_menu.set_sensitive(False)
 
 	def theme_select(self, widget, theme):
 		options.options['client.theme'] = theme
@@ -673,6 +680,7 @@ class terp_main(service.Service):
 			(e1,e2) = e
 			rpc.session.logout()
 			common.error(_('Connection Error !'),e1,e2)
+		self.glade.get_widget('but_menu').set_sensitive(True)
 		return True
 
 	def sig_logout(self, widget):
@@ -694,6 +702,8 @@ class terp_main(service.Service):
 		id = self.sb_servername.get_context_id('message')
 		self.sb_servername.push(id, _('Press Ctrl+O to login'))
 		self.secure_img.hide()
+		self.shortcut_unset()
+		self.glade.get_widget('but_menu').set_sensitive(False)
 		rpc.session.logout()
 		return True
 		
