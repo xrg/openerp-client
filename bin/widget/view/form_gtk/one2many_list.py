@@ -207,6 +207,14 @@ class one2many_list(interface.widget_interface):
 
 		self.widget.pack_start(self.screen.widget, expand=True, fill=True)
 
+		self.screen.widget.connect('key_press_event', self.on_keypress)
+
+	def on_keypress(self, widget, event):
+		print "keyval:", event.keyval, dir(event)
+		if event.keyval == gtk.keysyms.N and event.state & gtk.gdk.CONTROL_MASK and event.state & gtk.gdk.SHIFT_MASK:
+			self._sig_new(widget, event)
+			return False
+
 	def destroy(self):
 		self.screen.destroy()
 
@@ -235,7 +243,7 @@ class one2many_list(interface.widget_interface):
 	def _sig_new(self, *args):
 		_, event = args
 		ctx = self._view.model.expr_eval(self.screen.default_get)
-		if event.type == gtk.gdk.BUTTON_PRESS :
+		if event.type in (gtk.gdk.BUTTON_PRESS, gtk.gdk.KEY_PRESS):
 			if (self.screen.current_view.view_type=='form') or self.screen.editable_get():
 				self.screen.new(context=ctx)
 				self.screen.current_view.widget.set_sensitive(True)

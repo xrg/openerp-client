@@ -6,7 +6,6 @@
 <widget class="GtkDialog" id="win_login">
   <property name="width_request">499</property>
   <property name="height_request">280</property>
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Login</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -501,7 +500,6 @@
 				  <property name="label" translatable="yes">_New database</property>
 				  <property name="use_underline">True</property>
 				  <signal name="activate" handler="on_db_new_activate" last_modification_time="Mon, 16 Oct 2006 12:36:04 GMT"/>
-				  <accelerator key="N" modifiers="GDK_CONTROL_MASK | GDK_SHIFT_MASK" signal="activate"/>
 
 				  <child internal-child="image">
 				    <widget class="GtkImage" id="image4212">
@@ -948,7 +946,6 @@
 			  <property name="visible">True</property>
 			</widget>
 		      </child>
-
 
 		      <child>
 			<widget class="GtkImageMenuItem" id="win_home">
@@ -1577,7 +1574,6 @@
 		  <property name="label" translatable="yes">_Shortcuts</property>
 		  <property name="use_underline">True</property>
 		  <signal name="activate" handler="on_shortcut_activate" last_modification_time="Mon, 10 Jan 2005 20:23:54 GMT"/>
-
 		</widget>
 	      </child>
 
@@ -2530,7 +2526,6 @@
 <widget class="GtkDialog" id="win_about">
   <property name="width_request">430</property>
   <property name="height_request">360</property>
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - About</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -4410,7 +4405,6 @@ Web: http://tiny.be</property>
 <widget class="GtkDialog" id="win_sur">
   <property name="width_request">350</property>
   <property name="height_request">143</property>
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Confirmation</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -8606,7 +8600,6 @@ Very Urgent</property>
 
 <widget class="GtkDialog" id="win_preference">
   <property name="width_request">600</property>
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Preferences</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -8724,7 +8717,6 @@ Very Urgent</property>
 </widget>
 
 <widget class="GtkDialog" id="win_tips">
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Tip of the Day</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -9019,7 +9011,6 @@ Very Urgent</property>
 <widget class="GtkDialog" id="win_licence">
   <property name="width_request">484</property>
   <property name="height_request">358</property>
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Licence</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -10740,7 +10731,6 @@ Tell us which ERP systems you used before, and what you plan to do with Tiny ERP
 </widget>
 
 <widget class="GtkDialog" id="dia_support">
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Support Request</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -11459,7 +11449,6 @@ Very Urgent</property>
 </widget>
 
 <widget class="GtkDialog" id="shortcuts_dia">
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Keyboard shortcuts</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -12371,7 +12360,7 @@ Very Urgent</property>
 	  <child>
 	    <widget class="GtkTable" id="table15">
 	      <property name="visible">True</property>
-	      <property name="n_rows">7</property>
+	      <property name="n_rows">9</property>
 	      <property name="n_columns">2</property>
 	      <property name="homogeneous">False</property>
 	      <property name="row_spacing">0</property>
@@ -12736,6 +12725,91 @@ Very Urgent</property>
 		  <property name="right_attach">2</property>
 		  <property name="top_attach">6</property>
 		  <property name="bottom_attach">7</property>
+		  <property name="x_options">fill</property>
+		  <property name="y_options"></property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkLabel" id="label46565">
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes">&lt;CTRL&gt; + &lt;SHIFT&gt; +N</property>
+		  <property name="use_underline">False</property>
+		  <property name="use_markup">False</property>
+		  <property name="justify">GTK_JUSTIFY_LEFT</property>
+		  <property name="wrap">False</property>
+		  <property name="selectable">False</property>
+		  <property name="xalign">0</property>
+		  <property name="yalign">0.5</property>
+		  <property name="xpad">0</property>
+		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
+		</widget>
+		<packing>
+		  <property name="left_attach">0</property>
+		  <property name="right_attach">1</property>
+		  <property name="top_attach">8</property>
+		  <property name="bottom_attach">9</property>
+		  <property name="x_options">fill</property>
+		  <property name="y_options"></property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkLabel" id="label46566">
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes">Add a new line</property>
+		  <property name="use_underline">False</property>
+		  <property name="use_markup">False</property>
+		  <property name="justify">GTK_JUSTIFY_LEFT</property>
+		  <property name="wrap">False</property>
+		  <property name="selectable">False</property>
+		  <property name="xalign">0</property>
+		  <property name="yalign">0.5</property>
+		  <property name="xpad">0</property>
+		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
+		</widget>
+		<packing>
+		  <property name="left_attach">1</property>
+		  <property name="right_attach">2</property>
+		  <property name="top_attach">8</property>
+		  <property name="bottom_attach">9</property>
+		  <property name="x_options">fill</property>
+		  <property name="y_options"></property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkLabel" id="label46567">
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes">&lt;b&gt;Shortcuts in list entries&lt;/b&gt;</property>
+		  <property name="use_underline">False</property>
+		  <property name="use_markup">True</property>
+		  <property name="justify">GTK_JUSTIFY_LEFT</property>
+		  <property name="wrap">False</property>
+		  <property name="selectable">False</property>
+		  <property name="xalign">0.5</property>
+		  <property name="yalign">0.5</property>
+		  <property name="xpad">0</property>
+		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
+		</widget>
+		<packing>
+		  <property name="left_attach">0</property>
+		  <property name="right_attach">2</property>
+		  <property name="top_attach">7</property>
+		  <property name="bottom_attach">8</property>
+		  <property name="y_padding">10</property>
 		  <property name="x_options">fill</property>
 		  <property name="y_options"></property>
 		</packing>
@@ -14129,7 +14203,6 @@ Latin1</property>
 </widget>
 
 <widget class="GtkDialog" id="win_db_select">
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Choose a database...</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -14527,7 +14600,6 @@ Latin1</property>
 </widget>
 
 <widget class="GtkDialog" id="win_db_ent">
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Restore a database</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -15092,7 +15164,6 @@ this operation may take a while...</property>
 </widget>
 
 <widget class="GtkDialog" id="win_createdb">
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Create a new database</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -15650,7 +15721,6 @@ this operation may take a while...</property>
 </widget>
 
 <widget class="GtkDialog" id="dia_passwd_change">
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Change password</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -16205,7 +16275,6 @@ this operation may take a while...</property>
 <widget class="GtkDialog" id="dia_dbcreate_ok">
   <property name="width_request">550</property>
   <property name="height_request">300</property>
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Database creation</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
