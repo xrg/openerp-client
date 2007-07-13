@@ -676,10 +676,8 @@ class terp_main(service.Service):
 			elif log_response==-2:
 				common.message(_('Connection error !\nBad username or password !'))
 			self.shortcut_set()
-		except rpc.rpc_exception, e:
-			(e1,e2) = e
+		except rpc.rpc_exception:
 			rpc.session.logout()
-			common.error(_('Connection Error !'),e1,e2)
 		self.glade.get_widget('but_menu').set_sensitive(True)
 		return True
 

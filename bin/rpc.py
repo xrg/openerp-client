@@ -48,6 +48,7 @@ class rpc_exception(Exception):
 	def __init__(self, code, backtrace):
 
 		self.code = code
+		self.args = backtrace
 		if hasattr(code, 'split'):
 			lines = code.split('\n')
 	
