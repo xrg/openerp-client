@@ -46,6 +46,7 @@ class Printer(object):
 			'pdf': self._findPDFOpener,
 			'html': self._findHTMLOpener,
 			'doc': self._findHTMLOpener,
+			'xls': self._findHTMLOpener,
 		}
 
 	def _findInPath(self, progs):
