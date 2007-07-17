@@ -162,10 +162,11 @@ def print_data(data):
 		printer.print_file(fp_name, data['format'])
 	else:
 		fname = common.file_selection(_('Write Report to File'), data['format'])
-		try:
-			fp = file(filename,'wb+')
-			fp.write(content)
-			fp.close()
-		except:
-			common.message(_('Error writing the file!'))
+		if fname:
+			try:
+				fp = file(fname,'wb+')
+				fp.write(content)
+				fp.close()
+			except:
+				common.message(_('Error writing the file!'))
 
