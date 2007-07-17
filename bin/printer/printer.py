@@ -70,28 +70,27 @@ class Printer(object):
 		if os.name == 'nt':
 			return lambda fn: os.startfile(fn)
 		else:
-			if options.options['printer.preview']:
-				if options.options['printer.softpath_html'] == 'none':
-					prog = self._findInPath(['ooffice2', 'openoffice', 'firefox', 'mozilla', 'galeon'])
-					def opener(fn):
+			if options.options['printer.softpath_html'] == 'none':
+				prog = self._findInPath(['ooffice2', 'openoffice', 'firefox', 'mozilla', 'galeon'])
+				def opener(fn):
+					pid = os.fork()
+					if not pid:
 						pid = os.fork()
 						if not pid:
-							pid = os.fork()
-							if not pid:
-								os.execv(prog, (os.path.basename(prog),fn))
-							sys.exit(0)
-						os.waitpid(pid, 0)
-					return opener
-				else:
-					def opener(fn):
+							os.execv(prog, (os.path.basename(prog),fn))
+						sys.exit(0)
+					os.waitpid(pid, 0)
+				return opener
+			else:
+				def opener(fn):
+					pid = os.fork()
+					if not pid:
 						pid = os.fork()
 						if not pid:
-							pid = os.fork()
-							if not pid:
-								os.system(options.options['printer.softpath_html'] + ' ' + fn)
-							sys.exit(0)
-						os.waitpid(pid, 0)
-					return opener
+							os.system(options.options['printer.softpath_html'] + ' ' + fn)
+						sys.exit(0)
+					os.waitpid(pid, 0)
+				return opener
 
 	def _findPDFOpener(self):
 		if os.name == 'nt':
