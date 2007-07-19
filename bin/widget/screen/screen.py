@@ -240,7 +240,10 @@ class Screen(signal_event.signal_event):
 		return view
 
 	def editable_get(self):
-		return self.current_view.widget_tree.editable
+		if hasattr(self.current_view, 'widget_tree'):
+			return self.current_view.widget_tree.editable
+		else:
+			return False
 
 	def new(self, default=True, context={}):
 		if self.current_view and self.current_view.view_type == 'tree' \
