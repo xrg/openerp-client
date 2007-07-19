@@ -299,6 +299,8 @@ class parser_form(widget.view.interface.parser_interface):
 				fields[name]['model']=model
 				if not type in widgets_type:
 					continue
+				if attrs.get('invisible', False):
+					continue
 
 				fields[name]['name'] = name
 				if 'saves' in attrs:
