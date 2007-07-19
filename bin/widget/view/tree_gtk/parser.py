@@ -65,7 +65,8 @@ class parser_tree(interface.parser_interface):
 			treeview = EditableTreeView(editable)
 		else:
 			treeview = gtk.TreeView()
-		treeview.editable = editable
+			treeview.editable = editable
+			treeview.cells = {}
 		treeview.colors = dict()
 		self.treeview = treeview
 		for color_spec in attrs.get('colors', '').split(';'):
@@ -86,6 +87,7 @@ class parser_tree(interface.parser_interface):
 				fields[fname].update(node_attrs)
 				node_attrs.update(fields[fname])
 				cell = Cell(fields[fname]['type'])(fname, treeview, node_attrs)
+				treeview.cells[fname] = cell
 				renderer = cell.renderer
 				if editable and not node_attrs.get('readonly', False):
 					renderer.set_property('editable', True)
@@ -259,7 +261,7 @@ class Datetime(GenericDate):
 
 class Float(Char):
 	def get_textual_value(self, model):
-		_, digit = self.attrs.get('digits', (16,2) )
+		interger, digit = self.attrs.get('digits', (16,2) )
 		return locale.format('%.'+str(digit)+'f', model[self.field_name].get_client(model) or 0.0)
 
 	def value_from_text(self, model, text):
@@ -276,7 +278,6 @@ class FloatTime(Char):
 		t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,2) * 60)
 		if val<0:
 			t = '-'+t
-		_, digit = self.attrs.get('digits', (16,2) )
 		return t
 
 	def value_from_text(self, model, text):

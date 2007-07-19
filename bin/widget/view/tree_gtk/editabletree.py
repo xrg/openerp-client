@@ -42,13 +42,13 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 	def __init__(self, position):
 		super(EditableTreeView, self).__init__()
 		self.editable = position
+		self.cells = {}
 
 	def on_quit_cell(self, current_model, fieldname, value):
 		modelfield = current_model[fieldname]
 		if hasattr(modelfield, 'editabletree_entry'):
 			del modelfield.editabletree_entry
-		col_type = modelfield.attrs['type']
-		cell = parser.Cell(col_type)(fieldname)
+		cell = self.cells[fieldname]
 
 		# The value has not changed ... do nothing.
 		if value == cell.get_textual_value(current_model):
@@ -71,8 +71,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 
 	def on_open_remote(self, current_model, fieldname, create, value):
 		modelfield = current_model[fieldname]
-		col_type = modelfield.attrs['type']
-		cell = parser.Cell(col_type)(fieldname)
+		cell = self.cells[fieldname]
 		if value != cell.get_textual_value(current_model) or not value:
 			changed = True
 		else:
