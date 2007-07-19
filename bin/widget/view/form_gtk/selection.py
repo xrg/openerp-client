@@ -39,12 +39,13 @@ class selection(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-		self.widget = gtk.ComboBoxEntry()
-
-		self.widget.child.connect('changed', self.sig_changed)
-		self.widget.child.set_editable(False)
-		self.widget.child.connect('button_press_event', self._menu_open)
-		self.widget.child.connect('key_press_event', self.sig_key_pressed)
+		self.widget = gtk.HBox(spacing=3)
+		self.entry = gtk.ComboBoxEntry()
+		self.entry.child.connect('changed', self.sig_changed)
+		self.entry.child.set_editable(False)
+		self.entry.child.connect('button_press_event', self._menu_open)
+		self.entry.child.connect('key_press_event', self.sig_key_pressed)
+		self.widget.pack_start(self.entry, expand=True, fill=True)
 
 		self.ok = True
 		self._selection={}
@@ -66,16 +67,16 @@ class selection(interface.widget_interface):
 			if l:
 				key = l[0].lower()
 				self.key_catalog.setdefault(key,[]).append(i)
-		self.widget.set_model(model)
-		self.widget.set_text_column(0)
+		self.entry.set_model(model)
+		self.entry.set_text_column(0)
 		return lst
 
 	def _readonly_set(self, value):
 		interface.widget_interface._readonly_set(self, value)
-		self.widget.set_sensitive(not value)
+		self.entry.set_sensitive(not value)
 
 	def value_get(self):
-		res = self.widget.child.get_text()
+		res = self.entry.child.get_text()
 		return self._selection.get(res, False)
 
 	def set_value(self, model, model_field):
@@ -88,18 +89,18 @@ class selection(interface.widget_interface):
 	def display(self, model, model_field):
 		self.ok = False
 		if not model_field:
-			self.widget.child.set_text('')
+			self.entry.child.set_text('')
 			self.ok = True
 			return False
 		super(selection, self).display(model, model_field)
 		value = model_field.get(model)
 		if not value:
-			self.widget.child.set_text('')
+			self.entry.child.set_text('')
 		else:
 			found = False
 			for long_text, sel_value in self._selection.items():
 				if sel_value == value:
-					self.widget.child.set_text(long_text)
+					self.entry.child.set_text(long_text)
 					found = True
 					break
 		self.ok = True
@@ -119,7 +120,7 @@ class selection(interface.widget_interface):
 			self.last_key = [ key, 1 ]
 		if not self.key_catalog.has_key(key):
 			return
-		self.widget.set_active_iter(self.key_catalog[key][self.last_key[1] % len(self.key_catalog[key])])
+		self.entry.set_active_iter(self.key_catalog[key][self.last_key[1] % len(self.key_catalog[key])])
 
 	def _color_widget(self):
-		return self.widget.child
+		return self.entry.child

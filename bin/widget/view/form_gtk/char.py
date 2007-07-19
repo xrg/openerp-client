@@ -35,28 +35,32 @@ import interface
 
 class char(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
-		self.widget = gtk.Entry()
-		self.widget.set_max_length(int(attrs.get('size',16)))
-		self.widget.set_visibility(not attrs.get('invisible', False))
-		self.widget.set_width_chars(5)
+		interface.widget_interface.__init__(self, window, parent, attrs=attrs)
 
-		self.widget.connect('button_press_event', self._menu_open)
-		self.widget.connect('activate', self.sig_activate)
-		self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
-		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
-		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
+		self.widget = gtk.HBox(spacing=3)
+		self.entry = gtk.Entry()
+		self.entry.set_max_length(int(attrs.get('size',16)))
+		self.entry.set_visibility(not attrs.get('invisible', False))
+		self.entry.set_width_chars(5)
+
+		self.entry.connect('button_press_event', self._menu_open)
+		self.entry.connect('activate', self.sig_activate)
+		self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
+		self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
+
+		self.widget.pack_start(self.entry, expand=True, fill=True)
 
 	def set_value(self, model, model_field):
-		return model_field.set_client(model, self.widget.get_text() or False)
+		return model_field.set_client(model, self.entry.get_text() or False)
 
 	def display(self, model, model_field):
 		if not model_field:
-			self.widget.set_text('')
+			self.entry.set_text('')
 			return False
 		super(char, self).display(model, model_field)
-		self.widget.set_text(model_field.get(model) or '')
+		self.entry.set_text(model_field.get(model) or '')
 
 	def _readonly_set(self, value):
-		self.widget.set_editable(not value)
-		self.widget.set_sensitive(not value)
+		self.entry.set_editable(not value)
+		self.entry.set_sensitive(not value)
 
