@@ -52,6 +52,8 @@ class reference(interface.widget_interface):
 
 		self.widget_combo = gtk.ComboBoxEntry()
 		self.widget_combo.child.set_editable(False)
+		self.widget_combo.child.connect('changed', self.sig_changed_combo)
+		self.widget_combo.child.connect('key_press_event', self.sig_key_pressed)
 		self.widget.pack_start(self.widget_combo, expand=False, fill=True)
 
 		self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
@@ -59,6 +61,7 @@ class reference(interface.widget_interface):
 		self.wid_text = gtk.Entry()
 		self.wid_text.set_property('width-chars', 13)
 		self.wid_text.connect('key_press_event', self.sig_key_press)
+		self.wid_text.connect('button_press_event', self._menu_open)
 		self.wid_text.connect_after('changed', self.sig_changed)
 		self.wid_text.connect_after('activate', self.sig_activate)
 		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
@@ -91,9 +94,13 @@ class reference(interface.widget_interface):
 		tooltips.set_tip(self.but_open, _('Search / Open a resource'))
 		tooltips.enable()
 
+		self.ok = True
 		self._readonly = False
-		self._value=None
+		self._value = False
 		self.set_popdown(attrs.get('selection',[]))
+
+		self.last_key = (None, 0)
+		self.key_catalog = {}
 
 	def get_model(self):
 		res = self.widget_combo.child.get_text()
@@ -109,10 +116,13 @@ class reference(interface.widget_interface):
 			lst.append(name)
 			self._selection[name]=i
 			self._selection2[i]=name
+		self.key_catalog = {}
 		for l in lst:
 			i = model.append()
 			model.set(i, 0, l)
-			self.widget_combo.child.set_text(l)
+			if l:
+				key = l[0].lower()
+				self.key_catalog.setdefault(key,[]).append(i)
 		self.widget_combo.set_model(model)
 		self.widget_combo.set_text_column(0)
 		return lst
@@ -154,7 +164,7 @@ class reference(interface.widget_interface):
 				ids = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
 				if len(ids)==1:
 					id, name = ids[0]
-					self._view.modelfield.set_client(self._view.model, (resource, (id, name)))
+					self._view.modelfield.set_client(self._view.model, (resource, [id, name]))
 					self.display(self._view.model, self._view.modelfield)
 					self.ok = True
 					return True
@@ -163,7 +173,7 @@ class reference(interface.widget_interface):
 				ids = win.go()
 				if ids:
 					id, name = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_get', [ids[0]], rpc.session.context)[0]
-					self._view.modelfield.set_client(self._view.model, (resource, (id, name)))
+					self._view.modelfield.set_client(self._view.model, (resource, [id, name]))
 		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 		self.display(self._view.model, self._view.modelfield)
 		self.ok=True
@@ -212,7 +222,7 @@ class reference(interface.widget_interface):
 			self.sig_changed()
 			if not name:
 				id, name = RPCProxy(model).name_get([id], rpc.session.context)[0]
-			self._value = model, (id, name)
+			self._value = model, [id, name]
 			self.wid_text.set_text(name)
 			img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
 			self.but_open.set_image(img)
@@ -222,4 +232,14 @@ class reference(interface.widget_interface):
 			img.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
 			self.but_open.set_image(img)
 		self.ok = True
+
+	def sig_key_pressed(self, *args):
+		key = args[1].string.lower()
+		if self.last_key[0] == key:
+			self.last_key[1] += 1
+		else:
+			self.last_key = [ key, 1 ]
+		if not self.key_catalog.has_key(key):
+			return
+		self.entry.set_active_iter(self.key_catalog[key][self.last_key[1] % len(self.key_catalog[key])])
 

@@ -51,6 +51,7 @@ class selection(interface.widget_interface):
 		self._selection={}
 		self.set_popdown(attrs.get('selection',[]))
 		self.last_key = (None, 0)
+		self.key_catalog = {}
 
 	def set_popdown(self, selection):
 		model = gtk.ListStore(gobject.TYPE_STRING)
