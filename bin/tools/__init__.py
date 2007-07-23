@@ -48,7 +48,7 @@ def launch_browser(url):
 			if not pid:
 				webbrowser.open(url)
 			sys.exit(0)
-		os.waitpid(pid, 0)
+		os.wait()
 
 def node_attributes(node):
 	result = {}

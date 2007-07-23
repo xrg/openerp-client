@@ -80,7 +80,7 @@ class Printer(object):
 						if not pid:
 							os.execv(prog, (os.path.basename(prog),fn))
 						sys.exit(0)
-					os.waitpid(pid, 0)
+					os.wait()
 				return opener
 			else:
 				def opener(fn):
@@ -90,7 +90,7 @@ class Printer(object):
 						if not pid:
 							os.system(options.options['printer.softpath_html'] + ' ' + fn)
 						sys.exit(0)
-					os.waitpid(pid, 0)
+					os.wait()
 				return opener
 
 	def _findPDFOpener(self):
@@ -113,7 +113,7 @@ class Printer(object):
 							if not pid:
 								os.execv(prog, (os.path.basename(prog), fn))
 							sys.exit(0)
-						os.waitpid(pid, 0)
+						os.wait()
 					return opener
 				else:
 					def opener(fn):
@@ -123,7 +123,7 @@ class Printer(object):
 							if not pid:
 								os.execv(options.options['printer.softpath'], (os.path.basename(options.options['printer.softpath']),fn))
 							sys.exit(0)
-						os.waitpid(pid, 0)
+						os.wait()
 					return opener
 			else:
 				return lambda fn: print_linux_filename(fn)
