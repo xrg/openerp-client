@@ -7643,6 +7643,12 @@ Please retry</property>
 		</packing>
 	      </child>
 
+		  <child>
+		    <widget class="GtkViewport" id="viewport3">
+		      <property name="visible">True</property>
+		      <property name="shadow_type">GTK_SHADOW_NONE</property>
+
+
 	      <child>
 		<widget class="GtkScrolledWindow" id="scrolledwindow17">
 		  <property name="visible">True</property>
@@ -7651,11 +7657,6 @@ Please retry</property>
 		  <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
 		  <property name="shadow_type">GTK_SHADOW_NONE</property>
 		  <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
-
-		  <child>
-		    <widget class="GtkViewport" id="viewport3">
-		      <property name="visible">True</property>
-		      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 		      <child>
 			<widget class="GtkTextView" id="error_details">
@@ -7673,8 +7674,7 @@ Please retry</property>
 			  <property name="left_margin">4</property>
 			  <property name="right_margin">4</property>
 			  <property name="indent">0</property>
-			  <property name="text" translatable="yes">Error details
-dqsdsqdqsdsd</property>
+			  <property name="text" translatable="yes">Error details</property>
 			</widget>
 		      </child>
 		    </widget>
@@ -7710,6 +7710,12 @@ dqsdsqdqsdsd</property>
 		</packing>
 	      </child>
 
+		  <child>
+		    <widget class="GtkViewport" id="viewport2">
+		      <property name="visible">True</property>
+		      <property name="shadow_type">GTK_SHADOW_IN</property>
+
+
 	      <child>
 		<widget class="GtkScrolledWindow" id="scrolledwindow18">
 		  <property name="visible">True</property>
@@ -7718,11 +7724,6 @@ dqsdsqdqsdsd</property>
 		  <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
 		  <property name="shadow_type">GTK_SHADOW_NONE</property>
 		  <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
-
-		  <child>
-		    <widget class="GtkViewport" id="viewport2">
-		      <property name="visible">True</property>
-		      <property name="shadow_type">GTK_SHADOW_IN</property>
 
 		      <child>
 			<widget class="GtkVBox" id="vbox27">
