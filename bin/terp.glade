@@ -15590,7 +15590,7 @@ this operation may take a while...</property>
 		  <property name="visible">True</property>
 		  <property name="label" translatable="yes">(use 'admin', if you did not changed it)</property>
 		  <property name="use_underline">False</property>
-		  <property name="use_markup">False</property>
+		  <property name="use_markup">True</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
 		  <property name="wrap">False</property>
 		  <property name="selectable">False</property>
@@ -15688,7 +15688,7 @@ this operation may take a while...</property>
 		  <property name="visible">True</property>
 		  <property name="label" translatable="yes">(must not contain any special character)</property>
 		  <property name="use_underline">False</property>
-		  <property name="use_markup">False</property>
+		  <property name="use_markup">True</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
 		  <property name="wrap">False</property>
 		  <property name="selectable">False</property>
