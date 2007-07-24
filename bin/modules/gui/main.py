@@ -213,7 +213,7 @@ class db_create(object):
 			self.dialog.get_widget('button_db_ok').set_sensitive(True)
 		else:
 			label = self.dialog.get_widget('db_label_info')
-			label.set_text(_('Can not connect to server, please change it !'))
+			label.set_markup('<b>'+_('Can not connect to server, please change it !')+'</b>')
 			self.dialog.get_widget('button_db_ok').set_sensitive(False)
 		return sensitive
 
