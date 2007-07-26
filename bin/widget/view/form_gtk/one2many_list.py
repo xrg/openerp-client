@@ -38,6 +38,7 @@ import wid_common
 import interface
 from widget.screen import Screen
 
+
 class dialog(object):
 	def __init__(self, model_name, parent, model=None, attrs={}, model_ctx={}, window=None, default_get_ctx={}):
 
