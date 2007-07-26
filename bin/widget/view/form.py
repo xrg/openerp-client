@@ -167,7 +167,7 @@ class ViewForm(object):
 							lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable', '=', '1')])
 							langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
 
-							win = gtk.Dialog('Add Translation')
+							win = gtk.Dialog(_('Add Translation'))
 							win.vbox.set_spacing(5)
 							vbox = gtk.VBox(spacing=5)
 
