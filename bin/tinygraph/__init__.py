@@ -11,7 +11,7 @@ def choice_colors(n):
 	return []
 
 
-def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_field={}, orientation='horizontal'):
+def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_field={}, orientation='horizontal', overlap=1.0):
 	subplot.clear()
 	operators = {
 		'+': lambda x,y: x+y,
@@ -60,7 +60,7 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 		gvalue = []
 		gvalue2 = []
 		if float(n):
-			width =  0.9 / float(n)
+			width =  0.9 / (float(n))
 		else:
 			width = 0.9
 		ind = map(lambda x: x+width*n/2, arange(len(keys)))
@@ -76,7 +76,8 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 		colors = choice_colors(max(n,len(axis_group)))
 		for i in range(n):
 			datas = data_axis[i]
-			ind = map(lambda x: x+width*i, arange(len(keys)))
+			ind = map(lambda x: x+width*i*overlap+((1.0-overlap)*n*width)/4, arange(len(keys)))
+			#ind = map(lambda x: x, arange(len(keys)))
 			yoff = map(lambda x:0.0, keys)
 
 			for y in range(len(axis_group)):
