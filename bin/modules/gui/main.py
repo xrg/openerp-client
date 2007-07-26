@@ -114,6 +114,7 @@ def _server_ask(server_widget):
 	win.destroy()
 	return result
 
+
 class db_login(object):
 	def __init__(self):
 		self.win_gl = glade.XML(common.terp_path("terp.glade"),"win_login",gettext.textdomain())
