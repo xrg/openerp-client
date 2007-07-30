@@ -37,31 +37,6 @@ import gtk
 import common
 import interface
 
-# FileChooser is (c) 2004 Dave Kuhlman.
-# under the MIT License Copyright 
-class FileChooser(gtk.FileSelection):
-	def __init__(self, title=_('Select a file'), modal=True, multiple=True):
-		gtk.FileSelection.__init__(self, title=title)
-		self.multiple = multiple
-		self.connect("destroy", self.quit)
-		self.connect("delete_event", self.quit)
-		if modal:
-			self.set_modal(True)
-		self.cancel_button.connect('clicked', self.quit)
-		self.ok_button.connect('clicked', self.ok_cb)
-		if multiple:
-			self.set_select_multiple(True)
-##		 self.hide_fileop_buttons()
-		self.ret = None
-	def quit(self, *args):
-		self.hide()
-		self.destroy()
-	def ok_cb(self, b):
-		if self.multiple:
-			self.ret = self.get_selections()
-		else:
-			self.ret = self.get_filename()
-		self.quit()
 
 class image_wid(interface.widget_interface):
 
@@ -69,36 +44,41 @@ class image_wid(interface.widget_interface):
 		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
 
 		self._value = ''
-		self.widget = gtk.Button()
+		self.widget = gtk.EventBox()
+		self.widget.connect("button_press_event", self.load_file)
+		self.widget.connect("button_press_event", self.save_file)
 
-		# Connect the "clicked" signal of the button to our callback
-		self.widget.connect("clicked", self.load_file)
-		self.widget.connect("button-press-event", self.save_file)
-
-		# This calls our box creating function
-		box1 = self.create_image(common.terp_path_pixmaps("tinyerp_icon.png"))
-
-		# Pack and show all our widgets
+		box1 = self.create_image(common.terp_path_pixmaps("noimage.png"))
 		self.widget.add(box1)
-
-		box1.show()
-		self.widget.show()
+		self.widget.show_all()
 
 	def save_file(self, widget, event):
 		if event.button != 3 or not self._value:
 			return False
-		filechooser = FileChooser(multiple=False, title=_('Save as ...'))
-		filechooser.run()
-		if filechooser.ret:
-			file(filechooser.ret, 'wb').write(decodestring(self._value))
+		chooser = gtk.FileChooserDialog(title=_('Save As...'), 
+				action=gtk.FILE_CHOOSER_ACTION_SAVE, buttons=(
+					gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+					gtk.STOCK_SAVE, gtk.RESPONSE_OK), parent=self._window)
+		res = chooser.run()
+		if res == gtk.RESPONSE_OK:
+			filename = chooser.get_filename()
+			file(filename, 'wb').write(decodestring(self._value))
+		chooser.destroy()
 
-	def load_file(self, widget):
-		filechooser = FileChooser(multiple=False, title=_('Open file ...'))
-		filechooser.run()
-		if filechooser.ret:
-			self.update_img(filechooser.ret)
-			self._value = encodestring(file(filechooser.ret,'rb').read())
-	
+	def load_file(self, widget, event):
+		if event.button != 1:
+			return False
+		chooser = gtk.FileChooserDialog(title=_('Open...'), 
+				action=gtk.FILE_CHOOSER_ACTION_OPEN, buttons=(
+					gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+					gtk.STOCK_OPEN, gtk.RESPONSE_OK), parent=self._window)
+		res = chooser.run()
+		if res == gtk.RESPONSE_OK:
+			filename = chooser.get_filename()
+			self.update_img(filename)
+			self._value = encodestring(file(filename, 'rb').read())
+		chooser.destroy()
+
 	def update_img(self, path):
 		new_box = self.create_image(path)
 		self.widget.remove(self.widget.get_child())
