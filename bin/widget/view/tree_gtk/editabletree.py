@@ -82,6 +82,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 				modelfield.set_client(current_model, value)
 		except NotImplementedError:
 			pass
+		return cell.get_textual_value(current_model)
 
 	def on_create_line(self):
 		model = self.get_model()
@@ -204,10 +205,14 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 			if isinstance(entry, gtk.Entry):
 				value=entry.get_text()
 			else:
-				value=get_active_text()
+				value=entry.get_active_text()
 			entry.disconnect(entry.editing_done_id)
-			self.on_open_remote(model, column.name,
+			newval = self.on_open_remote(model, column.name,
 								create=(event.keyval==gtk.keysyms.F1), value=value)
+			if isinstance(entry, gtk.Entry):
+				entry.set_text(newval)
+			else:
+				entry.set_active_text(value)
 			entry.editing_done_id = entry.connect('editing_done', self.on_editing_done)
 			self.set_cursor(path, column, True)
 		else:
