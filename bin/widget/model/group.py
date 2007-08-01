@@ -202,8 +202,6 @@ class ModelRecordGroup(signal_event.signal_event):
 			self.models.insert(position, model)
 		self.current_idx = position
 		model.parent = self.parent
-		if model.parent:
-			model.parent.modified=True
 		model.signal_connect(self, 'record-changed', self._record_changed)
 		return model
 
