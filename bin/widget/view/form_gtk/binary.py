@@ -88,10 +88,6 @@ class wid_binary(interface.widget_interface):
 		except:
 			common.message(_('Error writing the file!'))
 
-#	def sig_open(self, widget=None):
-#		fname = self.attrs.get('fname_widget', False)
-#		common.start_content(base64.decodestring(self.model_field.get()), fname)
-
 	def sig_remove(self, widget=None):
 		self.model_field.set_client(self._view.model, False)
 		fname = self.attrs.get('fname_widget', False)

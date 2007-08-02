@@ -4528,7 +4528,7 @@ Web: http://tiny.be</property>
 </widget>
 
 <widget class="GtkDialog" id="win_selection">
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - selection</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -7374,10 +7374,10 @@ No</property>
 </widget>
 
 <widget class="GtkDialog" id="win_error">
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Error</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="default_width">700</property>
   <property name="default_height">580</property>
@@ -9598,10 +9598,10 @@ Each version is given a distinguishing version number.  If the Program specifies
 
 <widget class="GtkDialog" id="dia_survey">
   <property name="width_request">620</property>
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP Survey</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
@@ -11339,7 +11339,7 @@ Very Urgent</property>
 <widget class="GtkDialog" id="win_quest_3b">
   <property name="width_request">350</property>
   <property name="height_request">143</property>
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Confirmation</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -13812,7 +13812,7 @@ Latin1</property>
 <widget class="GtkDialog" id="win_quest">
   <property name="width_request">350</property>
   <property name="height_request">143</property>
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -16161,10 +16161,10 @@ this operation may take a while...</property>
 <widget class="GtkDialog" id="dia_message_box">
   <property name="width_request">450</property>
   <property name="height_request">250</property>
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP Message</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
@@ -16609,7 +16609,7 @@ this operation may take a while...</property>
 </widget>
 
 <widget class="GtkDialog" id="dialog_concurrency_exception">
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Concurrency exception</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>

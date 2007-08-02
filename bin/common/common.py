@@ -64,50 +64,23 @@ def _search_file(file, dir='path.share'):
 terp_path = _search_file
 terp_path_pixmaps = lambda x: _search_file(x, 'path.pixmaps')
 
-
-def start_file(fname):
-	try:
-		if os.name == 'nt':
-			os.startfile(fname)
-		else:
-			os.spawnv(os.P_NOWAIT, '/usr/bin/launcher',  ('launcher',fname))
-	except Exception, e:
-		common.error('Execution Error', _('Unable to launch this file !'), str(e))
-
-def start_content(content, fname=None):
-	try:
-		if not fname:
-			fname='terp.tmp'
-		ext = fname.split('.')[-1]
-
-		import tempfile
-		fp_name = tempfile.mktemp ("."+ext)
-
-		fp = file(fp_name, 'wb')
-		fp.write(content)
-		fp.close()
-	except:
-		common.message(_('Unable to launch the application associated to this content !'))
-		
-	start_file(fp_name)
-
-#
-# TODO: this code sucks
-#
 def selection(title, values, alwaysask=False, parent=None):
-	if len(values)==0:
+	if not values or len(values)==0:
 		return None
 	elif len(values)==1 and (not alwaysask):
 		key = values.keys()[0]
 		return (key, values[key])
+
 	xml = glade.XML(terp_path("terp.glade"), "win_selection", gettext.textdomain())
 	win = xml.get_widget('win_selection')
 	if not parent:
 		parent = service.LocalService('gui.main').window
 	win.set_transient_for(parent)
+
 	label = xml.get_widget('win_sel_title')
 	if title:
 		label.set_text(title)
+
 	list = xml.get_widget('win_sel_tree')
 	list.get_selection().set_mode('single')
 	cell = gtk.CellRendererText()
@@ -171,7 +144,13 @@ def tipoftheday(parent=None):
 			self.win.show_all()
 
 		def tip_set(self):
-			tips = file(terp_path('tipoftheday.txt')).read().split('---')
+			lang = options['client.lang']
+			f = False
+			if lang:
+				f = terp_path('tipoftheday.'+lang+'.txt')
+			if not f:
+				f = terp_path('tipoftheday.txt')
+			tips = file(f).read().split('---')
 			tip = tips[self.number % len(tips)]
 			del tips
 			self.label.set_text(tip)
@@ -223,6 +202,7 @@ def terp_survey():
 	options.options['survey.position']=SURVEY_VERSION
 	options.save()
 	win = winglade.get_widget('dia_survey')
+	win.set_transient_for(service.LocalService('gui.main').window)
 	for widname in widnames:
 		wid = winglade.get_widget('combo_'+widname)
 		wid.child.set_text('(choose one)')
@@ -245,13 +225,6 @@ def terp_survey():
 		upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
 	else:
 		win.destroy()
-	return True
-
-def test():
-	gl = glade.XML(terp_path("terp.glade"), "dialog_test",gettext.textdomain())
-	widget = gl.get_widget('dialog_test')
-	widget.run()
-	widget.destroy()
 	return True
 
 def file_selection(title, filename='', parent=None):
@@ -406,7 +379,8 @@ def message_box(title, msg, parent=None):
 def warning(msg, title='', parent=None):
 	if not parent:
 		parent=service.LocalService('gui.main').window
-	dialog = gtk.MessageDialog(parent, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK)
+	dialog = gtk.MessageDialog(parent, gtk.DIALOG_DESTROY_WITH_PARENT,
+			gtk.MESSAGE_WARNING, gtk.BUTTONS_OK)
 	dialog.set_markup('<b>%s</b>\n\n%s' % (to_xml(title),to_xml(msg)))
 	dialog.show_all()
 	dialog.run()
@@ -497,9 +471,6 @@ def concurrency(resource, id, context, parent=None):
 		obj = service.LocalService('gui.window')
 		obj.create(False, resource, id, [], 'form', None, context,'form,tree')
 	return False
-
-def dec_trunc(nbr, prec=2):
-	return round(nbr * (10 ** prec)) / 10**prec
 
 # Color set
 
