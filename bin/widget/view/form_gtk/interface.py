@@ -124,10 +124,10 @@ class widget_interface(object):
 		if not modelfield:
 			self._readonly_set(self.attrs.get('readonly', False))
 			return
-		self._readonly_set(modelfield.state_attrs.get('readonly', False))
-		if not modelfield.state_attrs.get('valid', True):
+		self._readonly_set(modelfield.get_state_attrs(model).get('readonly', False))
+		if not modelfield.get_state_attrs(model).get('valid', True):
 			self.color_set('invalid')
-		elif modelfield.state_attrs.get('required', False):
+		elif modelfield.get_state_attrs(model).get('required', False):
 			self.color_set('required')
 		else:
 			self.color_set('normal')

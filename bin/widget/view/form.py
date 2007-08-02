@@ -55,8 +55,8 @@ class ViewWidget(object):
 		modelfield = False
 		if model:
 			modelfield = model.mgroup.mfields.get(self.widget_name, False)
-			if modelfield and 'valid' in modelfield.state_attrs:
-				modelfield.state_attrs['valid'] = True
+			if modelfield and 'valid' in modelfield.get_state_attrs(model):
+				modelfield.get_state_attrs(model)['valid'] = True
 		self.display(model, modelfield)
 
 	def set_value(self, model):

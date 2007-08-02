@@ -66,6 +66,7 @@ class ModelRecord(signal_event.signal_event):
 		self.parent = parent
 		self.mgroup = group
 		self.value = {}
+		self.state_attrs = {}
 		self.modified = False
 		self.modified_fields = {}
 		self.read_time = time.time()
@@ -80,13 +81,6 @@ class ModelRecord(signal_event.signal_event):
 	
 	def __repr__(self):
 		return '<ModelRecord %s@%s>' % (self.id, self.resource)
-
-# 	def __str__(self):
-# 		res = self.__repr__()
-# 		for name, value in self.fields_get().items():
-# 			res += '\n   - %s : %s' % (name, value.get())
-# 		res += '\n</ModelRecord>'
-# 		return res
 
 	def is_modified(self):
 		return self.modified
@@ -103,9 +97,13 @@ class ModelRecord(signal_event.signal_event):
 	def get(self, get_readonly=True, includeid=False, check_load=True, get_modifiedonly=False):
 		if check_load:
 			self._check_load()
-		value = dict([(name, field.get(self, readonly=get_readonly, modified=get_modifiedonly))
-					  for name, field in self.mgroup.mfields.items()
-					  if (get_readonly or not field.state_attrs.get('readonly', False)) and (not get_modifiedonly or (field.name in self.modified_fields or isinstance(field, O2MField)))])
+		value = []
+		for name, field in self.mgroup.mfields.items():
+			if (get_readonly or not field.get_state_attrs(self).get('readonly', False)) \
+				and (not get_modifiedonly or (field.name in self.modified_fields or isinstance(field, O2MField))):
+					value.append((name, field.get(self, readonly=get_readonly,
+						modified=get_modifiedonly)))
+		value = dict(value)
 		if includeid:
 			value['id'] = self.id
 		return value
@@ -148,8 +146,9 @@ class ModelRecord(signal_event.signal_event):
 	def validate_set(self):
 		change = self._check_load()
 		for fname in self.mgroup.mfields:
-			change = change or not self.mgroup.mfields[fname].state_attrs.get('valid', True)
-			self.mgroup.mfields[fname].state_attrs['valid'] = True
+			field = self.mgroup.mfields[fname]
+			change = change or not field.get_state_attrs(self).get('valid', True)
+			field.get_state_attrs(self)['valid'] = True
 		if change:
 			self.signal('record-changed')
 		return change
@@ -163,7 +162,11 @@ class ModelRecord(signal_event.signal_event):
 		return ok
 
 	def _get_invalid_fields(self):
-		return dict([(fname, field.attrs['string']) for fname, field in self.mgroup.mfields.items() if not field.state_attrs['valid']])
+		res = []
+		for fname, field in self.mgroup.mfields.items():
+			if not field.get_state_attrs(self).get('valid', True):
+				res.append((fname, field.attrs['string']))
+		return dict(res)
 	invalid_fields = property(_get_invalid_fields)
 
 	def context_get(self):
@@ -230,9 +233,7 @@ class ModelRecord(signal_event.signal_event):
 		val = tools.expr_eval(dom, d)
 		return val
 
-	#
-	# Shoud use changes of attributes (ro, ...)
-	#
+	#XXX Shoud use changes of attributes (ro, ...)
 	def on_change(self, callback):
 		match = re.match('^(.*?)\((.*)\)$', callback)
 		if not match:
