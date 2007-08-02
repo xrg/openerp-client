@@ -17,4 +17,5 @@ Vous pouvez dès lors vous connecter au serveur via le menu 'Fichier > Connecter
 ---
 <b>Plus d'infos...</b>
 
-Pour obtenir plus d'informations quand à Tiny ERP, rendez-vous sur le site http://tinyerp.com
+Pour obtenir plus d'informations quand à Tiny ERP, rendez-vous sur le site
+http://wwww.tinyerp.com/
