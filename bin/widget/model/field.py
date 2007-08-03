@@ -27,12 +27,6 @@
 #
 ##############################################################################
 
-#
-# get: return the values to write to the server
-# get_client: return the value for the client widget (form_gtk)
-# set: save the value from the server
-# set_client: save the value from the widget
-#
 from rpc import RPCProxy
 import rpc
 try:
@@ -41,6 +35,13 @@ except ImportError:
 	pass
 
 class ModelField(object):
+	'''
+	get: return the values to write to the server
+	get_client: return the value for the client widget (form_gtk)
+	set: save the value from the server
+	set_client: save the value from the widget
+	'''
+
 	def __new__(cls, type):
 		klass = TYPES.get(type, CharField)
 		return klass
@@ -148,13 +149,23 @@ class FloatField(CharField):
 				model.signal('record-changed', model)
 
 class IntegerField(CharField):
+
+	def get(self, model, check_load=True, readonly=True, modified=False):
+		return model.value.get(self.name, 0) or 0
+
+	def get_client(self, model):
+		return model.value[self.name] or 0
+
 	def validate(self, model):
 		self.get_state_attrs(model)['valid'] = True
 		return True
 
 
-# internal = (id, name)
 class M2OField(CharField):
+	'''
+	internal = (id, name)
+	'''
+
 	def create(self, model):
 		return False
 
@@ -189,8 +200,11 @@ class M2OField(CharField):
 			self.sig_changed(model)
 			model.signal('record-changed', model)
 
-# internal = [id]
 class M2MField(CharField):
+	'''
+	internal = [id]
+	'''
+
 	def __init__(self, parent, attrs):
 		super(M2MField, self).__init__(parent, attrs)
 
@@ -230,6 +244,7 @@ def debugger(f):
 		return retv
 	return debugf
 
+
 class debug_function(object):
 	def __init__(self, f):
 		self.__f = f
@@ -239,8 +254,12 @@ class debug_function(object):
 		self.__numCalls += 1
 		return self.__f(*args, **kwargs)
 
-# internal = ModelRecordGroup of the related objects
+
 class O2MField(CharField):
+	'''
+	internal = ModelRecordGroup of the related objects
+	'''
+
 	def __init__(self, parent, attrs):
 		super(O2MField, self).__init__(parent, attrs)
 		self.context={}
@@ -369,6 +388,7 @@ TYPES = {
 	'one2many' : O2MField,
 	'reference' : ReferenceField,
 	'selection': SelectionField,
+	'boolean': IntegerField,
 }
 
 # vim:noexpandtab:

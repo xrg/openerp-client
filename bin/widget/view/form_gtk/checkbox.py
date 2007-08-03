@@ -42,11 +42,11 @@ class checkbox(interface.widget_interface):
 		self.widget.set_sensitive(not value)
 
 	def set_value(self, model, model_field):
-		model_field.set_client(model, self.widget.get_active())
+		model_field.set_client(model, int(self.widget.get_active()))
 
 	def display(self, model, model_field):
 		if not model_field:
 			self.widget.set_active(False)
 			return False
 		super(checkbox, self).display(model, model_field)
-		self.widget.set_active(model_field.get(model))
+		self.widget.set_active(bool(model_field.get(model)))

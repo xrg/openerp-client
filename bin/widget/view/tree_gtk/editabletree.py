@@ -109,12 +109,15 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 		idx = (current - 1) % len(cols)
 		return cols[idx]
 
-	def set_cursor(self, path, col, *args, **argv):
-		if col._type in ('many2one','many2many'):
+	def set_cursor(self, path, focus_column=None, start_editing=False):
+		if focus_column and (focus_column._type in ('many2one','many2many')):
 			self.warn('misc-message', _('Relation Field: F1 New   F2 Open/Search'))
+		elif focus_column and (focus_column._type in ('boolean')):
+			start_editing=False
 		else:
 			self.warn('misc-message', '')
-		return super(EditableTreeView, self).set_cursor(path, col, *args, **argv)
+		return super(EditableTreeView, self).set_cursor(path, focus_column,
+				start_editing)
 
 	def set_value(self):
 		path, column = self.get_cursor()
@@ -136,7 +139,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 		path, column = self.get_cursor()
 		store = self.get_model()
 		model = store.get_value(store.get_iter(path), 0)
-		
+
 		if event.keyval in self.leaving_events:
 			shift_pressed = bool(gtk.gdk.SHIFT_MASK & event.state)
 			if isinstance(entry, gtk.Entry):

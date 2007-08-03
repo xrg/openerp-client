@@ -90,7 +90,10 @@ class parser_tree(interface.parser_interface):
 				treeview.cells[fname] = cell
 				renderer = cell.renderer
 				if editable and not node_attrs.get('readonly', False):
-					renderer.set_property('editable', True)
+					if isinstance(renderer, gtk.CellRendererToggle):
+						renderer.set_property('activatable', True)
+					else:
+						renderer.set_property('editable', True)
 					renderer.connect_after('editing-started', send_keys, treeview)
 #					renderer.connect_after('editing-canceled', self.editing_canceled)
 
@@ -109,6 +112,7 @@ class parser_tree(interface.parser_interface):
 					'char': 100,
 					'one2many': 50,
 					'many2many': 50,
+					'boolean': 20,
 				}
 				if 'width' in fields[fname]:
 					width = int(fields[fname]['width'])
@@ -134,9 +138,9 @@ class Cell(object):
 
 
 class Char(object):
-	def __init__(self, field_name, treeview=None, attrs={}):
+	def __init__(self, field_name, treeview=None, attrs=None):
 		self.field_name = field_name
-		self.attrs = attrs
+		self.attrs = attrs or {}
 		self.renderer = gtk.CellRendererText()
 		self.treeview = treeview
 
@@ -146,7 +150,7 @@ class Char(object):
 		cell.set_property('text', text)
 		color = self.get_color(model)
 		cell.set_property('foreground', str(color))
-		if self.attrs['type'] in ('float', 'int'):
+		if self.attrs['type'] in ('float', 'integer', 'boolean'):
 			align = 1
 		else:
 			align = 0
@@ -179,6 +183,32 @@ class Int(Char):
 
 	def value_from_text(self, model, text):
 		return int(text)
+
+	def get_textual_value(self, model):
+		return model[self.field_name].get_client(model) or 0
+
+class Boolean(Int):
+
+	def __init__(self, *args):
+		super(Boolean, self).__init__(*args)
+		self.renderer = gtk.CellRendererToggle()
+		self.renderer.connect('toggled', self._sig_toggled)
+
+	def setter(self, column, cell, store, iter):
+		model = store.get_value(iter, 0)
+		value = self.get_textual_value(model)
+		cell.set_active(bool(value))
+
+	def _sig_toggled(self, renderer, path):
+		store = self.treeview.get_model()
+		model = store.get_value(store.get_iter(path), 0)
+		field = model[self.field_name]
+		if not field.get_state_attrs(model).get('readonly', False):
+			value = model[self.field_name].get_client(model)
+			model[self.field_name].set_client(model, int(not value))
+			self.treeview.set_cursor(path)
+		return True
+
 
 class GenericDate(Char):
 
@@ -423,15 +453,18 @@ class Selection(Char):
 				return val
 		return False
 
-CELLTYPES = dict(char=Char,
-				 many2one=M2O,
-				 date=Date,
-				 one2many=O2M,
-				 many2many=M2M,
-				 selection=Selection,
-				 float=Float,
-				 float_time=FloatTime,
-				 int=Int,
-				 datetime=Datetime)
+CELLTYPES = {
+	'char': Char,
+	'many2one': M2O,
+	'date': Date,
+	'one2many': O2M,
+	'many2many': M2M,
+	'selection': Selection,
+	'float': Float,
+	'float_time': FloatTime,
+	'integer': Int,
+	'datetime': Datetime,
+	'boolean': Boolean,
+}
 
 # vim:noexpandtab:

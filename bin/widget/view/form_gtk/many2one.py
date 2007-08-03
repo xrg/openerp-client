@@ -281,7 +281,7 @@ class many2one(interface.widget_interface):
 		super(many2one, self).display(model, model_field)
 		self.ok=False
 		res = model_field.get_client(model)
-		self.wid_text.set_text(res or '')
+		self.wid_text.set_text(str(res) or '')
 		img = gtk.Image()
 		if res:
 			img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
