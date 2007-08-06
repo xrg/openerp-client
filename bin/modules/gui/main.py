@@ -75,10 +75,14 @@ def _refresh_langlist(lang_widget, url):
 	lang_widget.set_active(0)
 	return lang_list
 
-def _server_ask(server_widget):
+def _server_ask(server_widget, parent=None):
 	result = False
 	win_gl = glade.XML(common.terp_path("terp.glade"),"win_server",gettext.textdomain())
 	win = win_gl.get_widget('win_server')
+	if not parent:
+		parent = service.LocalService('gui.main').window
+	win.set_transient_for(parent)
+	win.show_all()
 	win.set_default_response(gtk.RESPONSE_OK)
 	host_widget = win_gl.get_widget('ent_host')
 	port_widget = win_gl.get_widget('ent_port')
@@ -140,8 +144,8 @@ class db_login(object):
 				butconnect.set_sensitive(True)
 		return res
 
-	def refreshlist_ask(self,widget, server_widget, db_widget, label, butconnect = False, url=False):
-		url = _server_ask(server_widget) or url
+	def refreshlist_ask(self,widget, server_widget, db_widget, label, butconnect = False, url=False, parent=None):
+		url = _server_ask(server_widget, parent) or url
 		return self.refreshlist(widget, db_widget, label, url, butconnect)
 
 	def run(self, dbname=None, parent=None):
@@ -178,7 +182,7 @@ class db_login(object):
 		db_widget.add_attribute(cell, 'text', 0)
 
 		res = self.refreshlist(None, db_widget, label, url, but_connect)
-		change_button.connect_after('clicked', self.refreshlist_ask, server_widget, db_widget, label, but_connect, url)
+		change_button.connect_after('clicked', self.refreshlist_ask, server_widget, db_widget, label, but_connect, url, win)
 
 		if dbname:
 			iter = liststore.get_iter_root()
@@ -218,10 +222,10 @@ class db_create(object):
 			self.dialog.get_widget('button_db_ok').set_sensitive(False)
 		return sensitive
 
-	def server_change(self, widget=None):
+	def server_change(self, widget=None, parent=None):
 		url = _server_ask(self.server_widget)
 		try:
-			if self.lang_widget:
+			if self.lang_widget and url:
 				_refresh_langlist(self.lang_widget, url)
 			self.set_sensitive(True)
 		except:
@@ -235,6 +239,7 @@ class db_create(object):
 
 	def run(self, parent=None):
 		win = self.dialog.get_widget('win_createdb')
+		win.set_default_response(gtk.RESPONSE_OK)
 		if not parent:
 			parent = service.LocalService('gui.main').window
 		win.set_transient_for(parent)
@@ -248,7 +253,7 @@ class db_create(object):
 		demo_widget = self.dialog.get_widget('check_demo')
 		demo_widget.set_active(True)
 
-		change_button.connect_after('clicked', self.server_change)
+		change_button.connect_after('clicked', self.server_change, win)
 		protocol = options.options['login.protocol']
 		url = '%s%s:%s' % (protocol, options.options['login.server'], options.options['login.port'])
 
@@ -909,7 +914,7 @@ class terp_main(service.Service):
 		new_pass_widget = dialog.get_widget('new_passwd')
 		new_pass2_widget = dialog.get_widget('new_passwd2')
 		change_button = dialog.get_widget('but_server_change')
-		change_button.connect_after('clicked', lambda a,b: _server_ask(b), server_widget)
+		change_button.connect_after('clicked', lambda a,b: _server_ask(b, win), server_widget)
 
 		host = options.options['login.server']
 		port = options.options['login.port']
@@ -976,8 +981,8 @@ class terp_main(service.Service):
 				db_widget.show()
 			return res
 
-		def refreshlist_ask(widget, server_widget, db_widget, label):
-			url = _server_ask(server_widget)
+		def refreshlist_ask(widget, server_widget, db_widget, label, parent=None):
+			url = _server_ask(server_widget, parent)
 			if not url:
 				return None
 			refreshlist(widget, db_widget, label, url)
@@ -985,6 +990,7 @@ class terp_main(service.Service):
 
 		dialog = glade.XML(common.terp_path("terp.glade"), "win_db_select", gettext.textdomain())
 		win = dialog.get_widget('win_db_select')
+		win.set_default_response(gtk.RESPONSE_OK)
 		win.set_transient_for(self.window)
 		win.show_all()
 
@@ -1005,7 +1011,7 @@ class terp_main(service.Service):
 
 		refreshlist(None, db_widget, label, url)
 		change_button = dialog.get_widget('but_server_select')
-		change_button.connect_after('clicked', refreshlist_ask, server_widget, db_widget, label)
+		change_button.connect_after('clicked', refreshlist_ask, server_widget, db_widget, label, win)
 
 		cell = gtk.CellRendererText()
 		db_widget.pack_start(cell, True)
@@ -1038,7 +1044,7 @@ class terp_main(service.Service):
 		widget_url.set_text(url)
 
 		change_button = dialog.get_widget('but_server_change')
-		change_button.connect_after('clicked', lambda a,b: _server_ask(b), widget_url)
+		change_button.connect_after('clicked', lambda a,b: _server_ask(b, win), widget_url)
 
 		res = win.run()
 
