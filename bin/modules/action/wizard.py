@@ -43,21 +43,24 @@ class dialog(object):
 	def __init__(self, arch, fields, state, name, parent=None):
 		buttons = []
 		self.states=[]
+		default=-1
 		if not parent:
 			parent = service.LocalService('gui.main').window
 		self.dia = gtk.Dialog('Tiny ERP', parent,
 			gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
 		for x in state:
-			#buttons.append(x[1])
-			#buttons.append(gtk.RESPONSE_CANCEL)#len(self.states))
-
 			but = gtk.Button(x[1])
 			if len(x)==3:
 				icon = gtk.Image()
 				icon.set_from_stock(x[2], gtk.ICON_SIZE_BUTTON)
 				but.set_image(icon)
-			self.dia.add_action_widget(but,len(self.states))
+			self.dia.add_action_widget(but, len(self.states))
+			if len(x) == 4 and x[3]:
+				but.set_flags(gtk.CAN_DEFAULT)
+				default = len(self.states)
 			self.states.append(x[0])
+		if default >= 0:
+			self.dia.set_default_response(default)
 
 		val = {}
 		for f in fields:
@@ -132,7 +135,7 @@ def execute(action, datas, state='init', parent=None, context={}):
 							hbox.pack_start(img, expand=True, fill=False)
 							vbox2 = gtk.VBox(False, 0)
 							label = gtk.Label()
-							label.set_markup(_('<b>Operation in progress</b>'))
+							label.set_markup('<b>'+_('Operation in progress')+'</b>')
 							label.set_alignment(0.0, 0.5)
 							vbox2.pack_start(label, expand=True, fill=False)
 							vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
