@@ -144,8 +144,8 @@ class rpc_session(object):
 		try:
 			sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
 			return sock.execute(method, *args)
-		except socket.error, (e1,e2):
-			common.error(_('Connection refused !'), e1, e2)
+		except socket.error, e:
+			common.error(_('Connection refused !'), str(e), str(e))
 			raise rpc_exception(69, _('Connection refused!'))
 		except xmlrpclib.Fault, err:
 			raise rpc_exception(err.faultCode, err.faultString)
@@ -175,8 +175,8 @@ class rpc_session(object):
 			try:
 				sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
 				return sock.exec_auth(method, *args)
-			except socket.error, (e1,e2):
-				common.error(_('Connection refused !'), e1, e2)
+			except socket.error, e:
+				common.error(_('Connection refused !'), str(e), str(e))
 				raise rpc_exception(69, 'Connection refused!')
 			except xmlrpclib.Fault, err:
 				a = rpc_exception(err.faultCode, err.faultString)

@@ -112,7 +112,12 @@ def execute(action, datas, state='init', parent=None, context={}):
 				def go(wiz_id, datas, state):
 					ctx = rpc.session.context.copy()
 					ctx.update(context)
-					self.res = rpc.session.rpc_exec_auth('/wizard', 'execute', wiz_id, datas, state, ctx)
+					try:
+						self.res = rpc.session.rpc_exec_auth('/wizard', 'execute', wiz_id, datas, state, ctx)
+					except:
+						self.error = True
+						self.res = False
+						return True
 					if not self.res:
 						self.error = True
 					return True
