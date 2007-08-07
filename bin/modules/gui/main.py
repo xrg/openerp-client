@@ -784,6 +784,13 @@ class terp_main(service.Service):
 			return act_id
 		obj = service.LocalService('action.main')
 		win = obj.execute(act_id, {'window':self.window})
+		try:
+			user = rpc.session.rpc_exec_auth_wo('/object', 'execute', 'res.users',
+					'read', [rpc.session.uid], [type,'name'], rpc.session.context)
+			if user[0][type]:
+				act_id = user[0][type][0]
+		except:
+			pass
 		return act_id
 
 	def sig_home_new(self, widget=None, quiet=True, except_id=False):
