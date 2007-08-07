@@ -51,12 +51,12 @@ class dialog(object):
 		for x in state:
 			but = gtk.Button(x[1])
 			but.show()
-			if len(x)==3:
+			if len(x) >= 3:
 				icon = gtk.Image()
 				icon.set_from_stock(x[2], gtk.ICON_SIZE_BUTTON)
 				but.set_image(icon)
 			self.dia.add_action_widget(but, len(self.states))
-			if len(x) == 4 and x[3]:
+			if len(x) >= 4 and x[3]:
 				but.set_flags(gtk.CAN_DEFAULT)
 				default = len(self.states)
 			self.states.append(x[0])
