@@ -38,6 +38,7 @@ class spinbutton(interface.widget_interface):
 		adj = gtk.Adjustment(0.0, -1000000000.0, 1000000000, 1.0, 5.0, 5.0)
 		self.widget = gtk.SpinButton(adj, 1.0, digits=int( attrs.get('digits',(14,2))[1] ) )
 		self.widget.set_numeric(True)
+		self.widget.set_activates_default(True)
 		self.widget.connect('button_press_event', self._menu_open)
 		if self.attrs['readonly']:
 			self._readonly_set(True)

@@ -54,7 +54,9 @@ class calendar(interface.widget_interface):
 
 		self.widget = gtk.HBox(spacing=3)
 		self.entry = gtk.Entry()
+		self.entry.set_property('activates_default', True)
 		self.entry.connect('button_press_event', self._menu_open)
+		self.entry.connect('activate', self.sig_activate)
 		self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
 		self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
 		self.widget.pack_start(self.entry, expand=True, fill=True)

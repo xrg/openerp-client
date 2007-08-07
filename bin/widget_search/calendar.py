@@ -136,3 +136,6 @@ class calendar(wid_int.wid_int):
 	def clear(self):
 		self.value = ''
 
+	def sig_activate(self, fct):
+		self.entry1.connect_after('activate', fct)
+		self.entry2.connect_after('activate', fct)

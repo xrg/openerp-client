@@ -39,6 +39,7 @@ class spinbutton(wid_int.wid_int):
 		adj1 = gtk.Adjustment(0.0, -1000000000.0, 1000000000, 1.0, 5.0, 5.0)
 		self.spin1 = gtk.SpinButton(adj1, 1.0, digits=int(attrs.get('digits', (14, 2))[1]))
 		self.spin1.set_numeric(True)
+		self.spin1.set_activates_default(True)
 		self.widget.pack_start(self.spin1, expand=False, fill=True)
 
 		self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
@@ -46,6 +47,7 @@ class spinbutton(wid_int.wid_int):
 		adj2 = gtk.Adjustment(0.0, -1000000000.0, 1000000000, 1.0, 5.0, 5.0)
 		self.spin2 = gtk.SpinButton(adj2, 1.0, digits=int(attrs.get('digits', (14, 2))[1]))
 		self.spin2.set_numeric(True)
+		self.spin2.set_activates_default(True)
 		self.widget.pack_start(self.spin2, expand=False, fill=True)
 
 	def _value_get(self):
@@ -74,3 +76,6 @@ class spinbutton(wid_int.wid_int):
 	def clear(self):
 		self.value = 0.00
 
+	def sig_activate(self, fct):
+		self.spin1.connect_after('activate', fct)
+		self.spin2.connect_after('activate', fct)

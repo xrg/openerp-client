@@ -38,6 +38,7 @@ class spinint(interface.widget_interface):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 		self.widget.set_numeric(True)
 		self.widget.set_width_chars(5)
+		self.widget.set_activates_default(True)
 		self.widget.connect('button_press_event', self._menu_open)
 		if self.attrs['readonly']:
 			self._readonly_set(True)

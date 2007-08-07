@@ -50,6 +50,7 @@ class dialog(object):
 			gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
 		for x in state:
 			but = gtk.Button(x[1])
+			but.show()
 			if len(x)==3:
 				icon = gtk.Image()
 				icon.set_from_stock(x[2], gtk.ICON_SIZE_BUTTON)
@@ -67,17 +68,18 @@ class dialog(object):
 			if 'value' in fields[f]:
 				val[f] = fields[f]['value']
 
-		self.screen = Screen('wizard.'+name, view_type=[], parent=self.dia)
+		self.screen = Screen('wizard.'+name, view_type=[], window=self.dia)
 		self.screen.new(default=False)
 		self.screen.add_view_custom(arch, fields, display=True)
 		self.screen.current_model.set(val)
 
 		x,y = self.screen.screen_container.size_get()
 		self.screen.widget.set_size_request(max(500,x + 20), max(200,min(400, y+25)))
+		self.screen.widget.show()
 
 		self.dia.vbox.pack_start(self.screen.widget)
 		self.dia.set_title(self.screen.current_view.title)
-		self.dia.show_all()
+		self.dia.show()
 
 	def run(self, datas={}):
 		while True:

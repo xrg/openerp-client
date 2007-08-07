@@ -118,7 +118,7 @@ class many2many(interface.widget_interface):
 
 	def _sig_activate(self, *args):
 		self._sig_add()
-	
+
 	def _readonly_set(self, ro):
 		self.wid_text.set_editable(not ro)
 		self.wid_text.set_sensitive(not ro)

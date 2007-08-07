@@ -43,6 +43,7 @@ class wid_binary(interface.widget_interface):
 
 		self.widget = gtk.HBox(spacing=5)
 		self.wid_text = gtk.Entry()
+		self.wid_text.set_property('activates_default', True)
 		self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
 		self.but_new = gtk.Button(stock='gtk-open')
@@ -70,11 +71,12 @@ class wid_binary(interface.widget_interface):
 	def sig_new(self, widget=None):
 		try:
 			filename = common.file_selection(_('Select the file to attach'), parent=self._window)
-			self.model_field.set_client(self._view.model, base64.encodestring(file(filename).read()))
-			fname = self.attrs.get('fname_widget', False)
-			if fname:
-				self.parent.value = {fname:os.path.basename(filename)}
-			self.display(self._view.model, self.model_field)
+			if filename:
+				self.model_field.set_client(self._view.model, base64.encodestring(file(filename).read()))
+				fname = self.attrs.get('fname_widget', False)
+				if fname:
+					self.parent.value = {fname:os.path.basename(filename)}
+				self.display(self._view.model, self.model_field)
 		except:
 			common.message(_('Error reading the file'))
 

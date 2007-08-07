@@ -206,7 +206,9 @@ class form(wid_int.wid_int):
 		self.button_param.connect('clicked', self.toggle)
 		self.spin_limit = parser.spin_limit
 		self.spin_limit.connect('value-changed', self.limit_changed)
+		self.spin_limit.set_activates_default(True)
 		self.spin_offset = parser.spin_offset
+		self.spin_offset.set_activates_default(True)
 		self.focusable = parser.focusable
 		self.id=None
 		self.name=parser.title
@@ -218,6 +220,8 @@ class form(wid_int.wid_int):
 					self.widgets[x[0]][0]._readonly_set(True)
 		for x in self.widgets.values():
 			x[0].sig_activate(self.sig_activate)
+		self.spin_limit.connect_after('activate', self.sig_activate)
+		self.spin_offset.connect_after('activate', self.sig_activate)
 
 	def clear(self, *args):
 		self.id=None
