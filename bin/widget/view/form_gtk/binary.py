@@ -111,3 +111,6 @@ class wid_binary(interface.widget_interface):
 
 	def set_value(self, model, model_field):
 		return
+
+	def _color_widget(self):
+		return self.wid_text
