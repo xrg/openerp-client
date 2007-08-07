@@ -671,7 +671,9 @@ class terp_main(service.Service):
 			log_response = rpc.session.login(*res)
 			if log_response==1:
 				options.options.save()
-				self.sig_home_new(quiet=False)
+				id = self.sig_win_menu(quiet=False)
+				if id:
+					self.sig_home_new(quiet=True, except_id=id)
 				if res[4] == 'https://':
 					self.secure_img.show()
 				else:
@@ -749,24 +751,28 @@ class terp_main(service.Service):
 		win.set_transient_for(self.window)
 		win.show_all()
 
-	def sig_win_menu(self, widget=None, quite=True):
+	def sig_win_menu(self, widget=None, quiet=True):
 		for p in range(len(self.pages)):
 			if self.pages[p].model=='ir.ui.menu':
 				self.notebook.set_current_page(p)
 				return True
-		if not self.sig_win_new(widget, type='menu_id'):
-			self.sig_win_new(widget, type='action_id')
+		res = self.sig_win_new(widget, type='menu_id', quiet=quiet)
+		if not res:
+			return self.sig_win_new(widget, type='action_id', quiet=quiet)
+		return res
 
-	def sig_win_new(self, widget=None, type='menu_id', quiet=True):
+	def sig_win_new(self, widget=None, type='menu_id', quiet=True, except_id=False):
 		try:
-			act_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'read', [rpc.session.uid], [type,'name'], rpc.session.context)
+			act_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users',
+					'read', [rpc.session.uid], [type,'name'], rpc.session.context)
 		except:
 			return False
 		id = self.sb_username.get_context_id('message')
 		self.sb_username.push(id, act_id[0]['name'] or '')
 		id = self.sb_servername.get_context_id('message')
 		data = urlparse.urlsplit(rpc.session._url)
-		self.sb_servername.push(id, data[0]+':'+(data[1] and '//'+data[1] or data[2])+' ['+options.options['login.db']+']')
+		self.sb_servername.push(id, data[0]+':'+(data[1] and '//'+data[1] \
+				or data[2])+' ['+options.options['login.db']+']')
 		if not act_id[0][type]:
 			if quiet:
 				return False
@@ -774,12 +780,15 @@ class terp_main(service.Service):
 			rpc.session.logout()
 			return False
 		act_id = act_id[0][type][0]
+		if except_id and act_id == except_id:
+			return act_id
 		obj = service.LocalService('action.main')
 		win = obj.execute(act_id, {'window':self.window})
-		return True
-	
-	def sig_home_new(self, widget=None, quiet=True):
-		return self.sig_win_new(widget, type='action_id', quiet=quiet)
+		return act_id
+
+	def sig_home_new(self, widget=None, quiet=True, except_id=False):
+		return self.sig_win_new(widget, type='action_id', quiet=quiet,
+				except_id=except_id)
 
 	def sig_plugin_execute(self, widget):
 		import plugins
