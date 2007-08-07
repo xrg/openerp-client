@@ -14,7 +14,7 @@ class mysocket:
 			socket.AF_INET, socket.SOCK_STREAM)
 		else:
 			self.sock = sock
-		self.sock.settimeout(60)
+		self.sock.settimeout(120)
 	def connect(self, host, port=False):
 		if not port:
 			protocol, buf = host.split('//')
