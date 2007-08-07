@@ -7642,11 +7642,6 @@ Please retry</property>
 	      </child>
 
 	      <child>
-		<widget class="GtkViewport" id="viewport3">
-		  <property name="visible">True</property>
-		  <property name="shadow_type">GTK_SHADOW_NONE</property>
-
-		  <child>
 		    <widget class="GtkScrolledWindow" id="scrolledwindow17">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
@@ -7656,6 +7651,12 @@ Please retry</property>
 		      <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
 
 		      <child>
+		<widget class="GtkViewport" id="viewport3">
+		  <property name="visible">True</property>
+		  <property name="shadow_type">GTK_SHADOW_NONE</property>
+
+		  <child>
+
 			<widget class="GtkTextView" id="error_details">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
@@ -7708,11 +7709,6 @@ Please retry</property>
 	      </child>
 
 	      <child>
-		<widget class="GtkViewport" id="viewport2">
-		  <property name="visible">True</property>
-		  <property name="shadow_type">GTK_SHADOW_IN</property>
-
-		  <child>
 		    <widget class="GtkScrolledWindow" id="scrolledwindow18">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
@@ -7722,6 +7718,12 @@ Please retry</property>
 		      <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
 
 		      <child>
+		<widget class="GtkViewport" id="viewport2">
+		  <property name="visible">True</property>
+		  <property name="shadow_type">GTK_SHADOW_IN</property>
+
+		  <child>
+
 			<widget class="GtkVBox" id="vbox27">
 			  <property name="visible">True</property>
 			  <property name="homogeneous">False</property>
