@@ -46,6 +46,7 @@ class Screen(signal_event.signal_event):
 		self.hastoolbar = hastoolbar
 		self.default_get=default_get
 		if not row_activate:
+			# TODO change for a function that switch to form view
 			self.row_activate = self.switch_view
 		else:
 			self.row_activate = row_activate
