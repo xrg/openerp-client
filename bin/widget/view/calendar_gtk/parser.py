@@ -34,7 +34,8 @@ import gtk
 class EmptyCalendar(object):
 
 	def __init__(self, model):
-		self.widget = gtk.Label(_('Calendar view')+'\n'+_('Not yet implemented'))
+		self.widget = gtk.Label(_('Calendar view')+'\n'+_('Not yet implemented')
+				+'\n'+_('You can use this feature in the web client'))
 	
 	def display(self, models):
 		pass
