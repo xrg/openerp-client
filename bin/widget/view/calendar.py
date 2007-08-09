@@ -1,8 +1,6 @@
 ##############################################################################
 #
-# Copyright (c) 2004-2006 TINY SPRL. (http://tiny.be) All Rights Reserved.
-#
-# $Id$
+# Copyright (c) 2004-2007 TINY SPRL. (http://tiny.be) All Rights Reserved.
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -28,49 +26,54 @@
 ##############################################################################
 
 
-import interface
-import xml.dom.minidom
+class ViewCalendar(object):
 
-import form_gtk
-import tree_gtk
-import graph_gtk
-import calendar_gtk
+	def __init__(self, screen, view, children=None, buttons=None, toolbar=None):
+		self.screen = screen
+		self.view_type = 'calendar'
+		self.model_add_new = False
+		self.view = view
+		self.widget = view.widget
+		self.widget.screen = screen
 
-from form import ViewForm
-from list import ViewList
-from graph import ViewGraph
-from calendar import ViewCalendar
+	def cancel(self):
+		pass
 
-parsers = {
-	'form': form_gtk.parser_form,
-	'tree': tree_gtk.parser_tree,
-	'graph': graph_gtk.parser_graph,
-	'calendar': calendar_gtk.parser_calendar,
-}
+	def __str__(self):
+		return 'ViewCalendar (%s)' % self.screen.resource
 
+	def __getitem__(self, name):
+		return None
 
-parsers2 = {
-	'form': ViewForm,
-	'tree': ViewList,
-	'graph': ViewGraph,
-	'calendar': ViewCalendar,
-}
+	def destroy(self):
+		self.widget.destroy()
+		del self.screen
+		del self.widget
 
-class widget_parse(interface.parser_interface):
-	def parse(self, screen, root_node, fields, toolbar={}):
-		widget = None
-		for node in root_node.childNodes:
-			if not node.nodeType == node.ELEMENT_NODE:
-				continue
-			if node.localName in parsers:
-				widget = parsers[node.localName](self.window, self.parent, self.attrs, screen)
-				wid, child, buttons, on_write = widget.parse(screen.resource, node, fields)
-				screen.set_on_write(on_write)
-				res = parsers2[node.localName](screen, wid, child, buttons, toolbar)
-				res.title = widget.title
-				widget = res
-				break
-			else:
-				pass
-		return widget
+	def set_value(self):
+		pass
 
+	def reset(self):
+		pass
+
+	def reset(self):
+		pass
+	
+	def display(self):
+		self.view.display(self.screen.models)
+		return None
+
+	def signal_record_changed(self, *args):
+		pass
+
+	def sel_ids_get(self):
+		return []
+
+	def on_change(self, callback):
+		pass
+
+	def unset_editable(self):
+		pass
+
+	def set_cursor(self):
+		pass

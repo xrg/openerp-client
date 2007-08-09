@@ -379,7 +379,7 @@ class Screen(signal_event.signal_event):
 		if self.views:
 			self.current_view.display()
 			self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
-			self.search_active(self.current_view.view_type in ('tree', 'graph'))
+			self.search_active(self.current_view.view_type in ('tree', 'graph', 'calendar'))
 
 	def display_next(self):
 		self.current_view.set_value()

@@ -120,7 +120,7 @@ class form(object):
 		else:
 			if self.screen.current_view.view_type == 'form':
 				self.sig_new(autosave=False)
-			if self.screen.current_view.view_type in ('tree', 'graph'):
+			if self.screen.current_view.view_type in ('tree', 'graph', 'calendar'):
 				self.screen.search_filter()
 
 	def sig_goto(self, *args):

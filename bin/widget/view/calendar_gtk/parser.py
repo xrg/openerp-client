@@ -1,8 +1,7 @@
 ##############################################################################
 #
-# Copyright (c) 2004-2006 TINY SPRL. (http://tiny.be) All Rights Reserved.
+# Copyright (c) 2004-2007 TINY SPRL. (http://tiny.be) All Rights Reserved.
 #
-# $Id$
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -27,50 +26,28 @@
 #
 ##############################################################################
 
-
-import interface
-import xml.dom.minidom
-
-import form_gtk
-import tree_gtk
-import graph_gtk
-import calendar_gtk
-
-from form import ViewForm
-from list import ViewList
-from graph import ViewGraph
-from calendar import ViewCalendar
-
-parsers = {
-	'form': form_gtk.parser_form,
-	'tree': tree_gtk.parser_tree,
-	'graph': graph_gtk.parser_graph,
-	'calendar': calendar_gtk.parser_calendar,
-}
+from widget.view import interface
+import tools
+import gtk
 
 
-parsers2 = {
-	'form': ViewForm,
-	'tree': ViewList,
-	'graph': ViewGraph,
-	'calendar': ViewCalendar,
-}
+class EmptyCalendar(object):
 
-class widget_parse(interface.parser_interface):
-	def parse(self, screen, root_node, fields, toolbar={}):
-		widget = None
-		for node in root_node.childNodes:
-			if not node.nodeType == node.ELEMENT_NODE:
-				continue
-			if node.localName in parsers:
-				widget = parsers[node.localName](self.window, self.parent, self.attrs, screen)
-				wid, child, buttons, on_write = widget.parse(screen.resource, node, fields)
-				screen.set_on_write(on_write)
-				res = parsers2[node.localName](screen, wid, child, buttons, toolbar)
-				res.title = widget.title
-				widget = res
-				break
-			else:
-				pass
-		return widget
+	def __init__(self, model):
+		self.widget = gtk.Label(_('Calendar view')+'\n'+_('Not yet implemented'))
+	
+	def display(self, models):
+		pass
 
+
+class parser_calendar(interface.parser_interface):
+
+	def parse(self, model, root_node, fields):
+		attrs = tools.node_attributes(root_node)
+		self.title = attrs.get('string', 'Unknown')
+
+		on_write = ''
+
+		view = EmptyCalendar(model)
+
+		return view, {}, [], on_write
