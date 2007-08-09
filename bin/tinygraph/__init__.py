@@ -51,7 +51,8 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 		labels = tuple(data_all.keys())
 		value = tuple(map(lambda x: reduce(lambda x,y=0: x+y, data_all[x].values(), 0), labels))
 		explode = map(lambda x: (x%4==2) and 0.06 or 0.0,range(len(value)))
-		aa = subplot.pie(value,autopct='%1.1f%%',shadow=True, explode=explode)
+		colors = choice_colors(len(value))
+		aa = subplot.pie(value, autopct='%1.1f%%', shadow=True, explode=explode, colors=colors)
 		labels = map(lambda x: x.split('/')[-1], labels)
 		subplot.legend(aa, labels, shadow = True, loc = 'best', prop = font_property)
 
