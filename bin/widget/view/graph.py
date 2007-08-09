@@ -32,7 +32,7 @@ import gtk
 
 class ViewGraph(object):
 
-	def __init__(self, screen, view, children={}, buttons={}, toolbar=None):
+	def __init__(self, screen, view, children=None, buttons=None, toolbar=None):
 		self.screen = screen
 		self.view_type = 'graph'
 		self.model_add_new = False
@@ -60,10 +60,6 @@ class ViewGraph(object):
 	def reset(self):
 		pass
 
-	#
-	# self.widget.set_model(self.store) could be removed if the store
-	# has not changed -> better ergonomy. To test
-	#
 	def display(self):
 		self.view.display(self.screen.models)
 		return None
