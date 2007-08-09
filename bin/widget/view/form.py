@@ -34,7 +34,7 @@ import common
 import rpc
 import service
 import options
-from widget.view.form_gtk.action import action
+from form_gtk.action import action
 
 class ViewWidget(object):
 	def __init__(self, parent, widget, widget_name):
