@@ -96,6 +96,9 @@ class parser_tree(interface.parser_interface):
 						renderer.set_property('editable', True)
 					renderer.connect_after('editing-started', send_keys, treeview)
 #					renderer.connect_after('editing-canceled', self.editing_canceled)
+				else:
+					if isinstance(renderer, gtk.CellRendererToggle):
+						renderer.set_property('activatable', False)
 
 				col = gtk.TreeViewColumn(fields[fname]['string'], renderer)
 				col.name = fname
