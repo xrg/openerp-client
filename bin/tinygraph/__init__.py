@@ -105,4 +105,4 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 		else:
 			pass
 	else:
-		raise 'Graph type '+type+' does not exist !'
+		raise Exception, 'Graph type '+type+' does not exist !'

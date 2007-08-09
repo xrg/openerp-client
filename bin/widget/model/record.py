@@ -237,7 +237,7 @@ class ModelRecord(signal_event.signal_event):
 	def on_change(self, callback):
 		match = re.match('^(.*?)\((.*)\)$', callback)
 		if not match:
-			raise 'ERROR: Wrong on_change trigger: %s' % callback
+			raise Exception, 'ERROR: Wrong on_change trigger: %s' % callback
 		func_name = match.group(1)
 		arg_names = [n.strip() for n in match.group(2).split(',')]
 		args = [self.expr_eval(arg) for arg in arg_names]

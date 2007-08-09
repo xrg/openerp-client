@@ -332,7 +332,7 @@ class view_tree(object):
 		return
 		ids = com_rpc.xrpc.exec_auth('res_path_get', id, self.root)
 		if not len(ids):
-			raise 'IdNotFound'
+			raise Exception, 'IdNotFound'
 		self.view.collapse_all()
 		model = self.view.get_model()
 		iter = model.get_iter_root()
@@ -349,7 +349,7 @@ class view_tree(object):
 						self.view.expand_row( model.get_path(iter), False)
 						break
 					if not model.iter_next(iter):
-						raise 'IdNotFound'
+						raise Exception, 'IdNotFound'
 				if ids!=[]:
 					iter = model.iter_children(iter)
 			self.view.get_selection().select_iter(iter)

@@ -93,7 +93,7 @@ class Button(Observable):
 					obj.execute(action_id, {'model':self.form.screen.name, 'id': id or False,
 						'ids': id and [id] or [], 'report_type': 'pdf'})
 				else:
-					raise 'Unallowed button type'
+					raise Exception, 'Unallowed button type'
 				self.form.screen.reload()
 		else:
 			self.warn('misc-message', _('Invalid Form, correct red fields !'))

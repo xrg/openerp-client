@@ -50,7 +50,7 @@ class action(interface.widget_interface):
 		self.act_id=attrs['name']
 		res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [self.act_id], ['type'], rpc.session.context)
 		if not res:
-			raise 'ActionNotFound'
+			raise Exception, 'ActionNotFound'
 		type=res[0]['type']
 		self.action = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [self.act_id], False, rpc.session.context)[0]
 		if 'view_mode' in attrs:

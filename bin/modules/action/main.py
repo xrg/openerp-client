@@ -77,7 +77,7 @@ class main(service.Service):
 		if type==None:
 			res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [act_id], ['type'], ctx)
 			if not len(res):
-				raise 'ActionNotFound'
+				raise Exception, 'ActionNotFound'
 			type=res[0]['type']
 		res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [act_id], False, ctx)[0]
 		self._exec_action(res,datas)
