@@ -34,6 +34,7 @@ import common
 import rpc
 import service
 import options
+from widget.view.form_gtk.action import action
 
 class ViewWidget(object):
 	def __init__(self, parent, widget, widget_name):
@@ -50,7 +51,9 @@ class ViewWidget(object):
 		if modelfield:
 			modelfield.state_set(model, state)
 			self.widget.display(model, modelfield)
-	
+		elif isinstance(self.widget, action):
+			self.widget.display(model, False)
+
 	def reset(self, model):
 		modelfield = False
 		if model:
