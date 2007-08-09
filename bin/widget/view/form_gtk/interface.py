@@ -66,7 +66,6 @@ class widget_interface(object):
 			return False
 
 	def sig_activate(self, widget=None):
-		print "focus_out"
 		# emulate a focus_out so that the onchange is called if needed
 		self._focus_out()
 
