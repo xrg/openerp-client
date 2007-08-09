@@ -145,7 +145,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 	
 class ViewList(object):
 
-	def __init__(self, screen, widget, children={}, buttons={}, toolbar=None):
+	def __init__(self, screen, widget, children=None, buttons=None, toolbar=None):
 		self.store = None
 		self.screen = screen
 		self.view_type = 'tree'
@@ -161,7 +161,6 @@ class ViewList(object):
 		self.children = children
 
 		if children:
-			self.widget.pack_start(self.widget_tree, expand=True, fill=True)
 			hbox = gtk.HBox()
 			self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
 			for c in children:
