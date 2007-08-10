@@ -10933,7 +10933,7 @@ ZIMBABWE</property>
 		  <child>
 		    <widget class="GtkLabel" id="label185">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">&lt;b&gt;Complete this form to submit your bug and/or make a request for support.&lt;/b&gt;
+		      <property name="label" translatable="yes">&lt;b&gt;Complete this form to submit your bug and/or send a support request.&lt;/b&gt;
 &lt;i&gt;
 Your request will be sent to the Tiny ERP team and we will reply shortly.
 Note that we may not reply if you do not have a support contract with Tiny or an official partner.&lt;/i&gt;</property>
