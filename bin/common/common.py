@@ -199,8 +199,6 @@ def terp_survey():
 	import pickle
 	widnames = ('country','role','industry','employee','hear','system','opensource')
 	winglade = glade.XML(common.terp_path("terp.glade"), "dia_survey", gettext.textdomain())
-	options.options['survey.position']=SURVEY_VERSION
-	options.save()
 	win = winglade.get_widget('dia_survey')
 	win.set_transient_for(service.LocalService('gui.main').window)
 	for widname in widnames:
@@ -224,6 +222,8 @@ def terp_survey():
 		result += "\nnote: "+buffer.get_text(iter_start,iter_end,False)
 		win.destroy()
 		upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
+		options.options['survey.position']=SURVEY_VERSION
+		options.save()
 		common.message(_('Thank you for the feedback !\nYour comments have been sent to Tiny ERP.\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
 	else:
 		win.destroy()
