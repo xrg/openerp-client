@@ -224,8 +224,10 @@ def terp_survey():
 		result += "\nnote: "+buffer.get_text(iter_start,iter_end,False)
 		win.destroy()
 		upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
+		common.message(_('Thank you for the feedback !\nYour comments have been sent to Tiny ERP.\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
 	else:
 		win.destroy()
+		common.message(_('Thank you for testing Tiny ERP !\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
 	return True
 
 def file_selection(title, filename='', parent=None):
