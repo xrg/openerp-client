@@ -4,11 +4,72 @@ matplotlib.use('GTKCairo')
 from pylab import arange
 from matplotlib.font_manager import FontProperties
 
-colorline = ['#%02x%02x%02x' % (25+((r+10)%11)*23,5+((g+1)%11)*20,25+((b+4)%11)*23) for r in range(11) for g in range(11) for b in range(11) ]
-def choice_colors(n):
-	if n:
-		return colorline[0:-1:len(colorline)/n]
-	return []
+# 24 RGB values, one for each 15-degree hue incr around the HSV color wheel
+wheel = [
+	(255,0,0),
+	(255,51,0),
+	(255,102,0),
+	(255,128,0),
+	(255,153,0),
+	(255,178,0),
+	(255,204,0),
+	(255,229,0),
+	(255,255,0),
+	(204,255,0),
+	(153,255,0),
+	(51,255,0),
+	(0,204,0),
+	(0,178,102),
+	(0,153,153),
+	(0,102,178),
+	(0,51,204),
+	(25,25,178),
+	(51,0,153),
+	(64,0,153),
+	(102,0,153),
+	(153,0,153),
+	(204,0,153),
+	(229,0,102),
+]
+
+# Offsets used to yield different color cycling methods
+analogicOffsets = [ 0, 12, 18, 6, 1, 13, 19, 7 ]
+tetradOffsets = [ 0, 22, 2, 1, 23, 3 ]
+triadOffsets = [ 7, 1, 0, 4, 6, 2, 5, 3, ]
+
+# Generate index values (into 'wheel') for each cycling method
+
+analogicSteps = []
+for offset in analogicOffsets:
+	analogicSteps.append(offset)
+	analogicSteps.append((offset + 2) % 24)
+	analogicSteps.append((offset + 4) % 24)
+
+tetradSteps = []
+for offset in tetradOffsets:
+	tetradSteps.append(offset)
+	tetradSteps.append((offset + 4) % 24)
+	tetradSteps.append((offset + 12) % 24)
+	tetradSteps.append((offset + 16) % 24)
+
+triadSteps = []
+for offset in triadOffsets:
+	triadSteps.append(offset)
+	triadSteps.append((offset + 8) % 24)
+	triadSteps.append((offset + 16) % 24)
+
+# Generate color cycle values from a given stepping pattern
+def cycle(steps):
+	for n in xrange(len(wheel)):
+		yield wheel[steps[n]]
+
+# Bake color cycles into lists for random access
+analogicColors = list(rgb for rgb in cycle(analogicSteps))
+tetradColors = list(rgb for rgb in cycle(tetradSteps))
+triadColors = list(rgb for rgb in cycle(triadSteps))
+
+def get_color(index, colors=triadColors):
+	return '#%02x%02x%02x' % colors[index % len(colors)]
 
 
 def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_field={}, orientation='horizontal', overlap=1.0):
@@ -51,7 +112,7 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 		labels = tuple(data_all.keys())
 		value = tuple(map(lambda x: reduce(lambda x,y=0: x+y, data_all[x].values(), 0), labels))
 		explode = map(lambda x: (x%4==2) and 0.06 or 0.0,range(len(value)))
-		colors = choice_colors(len(value))
+		colors = map(lambda x: get_color(x), range(len(value)))
 		aa = subplot.pie(value, autopct='%1.1f%%', shadow=True, explode=explode, colors=colors)
 		labels = map(lambda x: x.split('/')[-1], labels)
 		subplot.legend(aa, labels, shadow = True, loc = 'best', prop = font_property)
@@ -74,7 +135,6 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 			subplot.set_xticklabels(tuple(keys), visible=True, ha='right', size=8, rotation='vertical')
 			subplot.yaxis.grid(True,'major',linestyle='-',color='gray')
 
-		colors = choice_colors(max(n,len(axis_group)))
 		for i in range(n):
 			datas = data_axis[i]
 			ind = map(lambda x: x+width*i*overlap+((1.0-overlap)*n*width)/4, arange(len(keys)))
@@ -84,9 +144,9 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
 			for y in range(len(axis_group)):
 				value = [ datas[x].get(axis_group[y],0.0) for x in keys]
 				if len(axis_group)>1:
-					color = colors[y]
+					color = get_color(y)
 				else:
-					color = colors[i]
+					color = get_color(i)
 				if orientation=='horizontal':
 					aa = subplot.barh(ind, tuple(value), width, left=yoff, color=color, edgecolor="#333333")[0]
 				else:
