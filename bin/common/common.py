@@ -210,7 +210,8 @@ def terp_survey():
 	res = win.run()
 	if res==gtk.RESPONSE_OK:
 		email =  winglade.get_widget('entry_email').get_text()
-		result = ''
+		company =  winglade.get_widget('entry_company').get_text()
+		result = "\ncompany: "+str(company)
 		for widname in widnames:
 			wid = winglade.get_widget('combo_'+widname)
 			result += "\n"+widname+": "+wid.child.get_text()
