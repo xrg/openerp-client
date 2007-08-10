@@ -7,7 +7,7 @@ from matplotlib.font_manager import FontProperties
 colorline = ['#%02x%02x%02x' % (25+((r+10)%11)*23,5+((g+1)%11)*20,25+((b+4)%11)*23) for r in range(11) for g in range(11) for b in range(11) ]
 def choice_colors(n):
 	if n:
-		return colorline[0:-1:len(colorline)/n]
+		return colorline[0:-1:len(colorline)/(n+1)]
 	return []
 
 
