@@ -329,5 +329,8 @@ class ViewList(object):
 		self.widget_tree.editable = False
 		for col in self.widget_tree.get_columns():
 			for renderer in col.get_cell_renderers():
-				renderer.set_property('editable', False)
+				if isinstance(renderer, gtk.CellRendererToggle):
+					renderer.set_property('activatable', False)
+				else:
+					renderer.set_property('editable', False)
 
