@@ -6280,10 +6280,10 @@ Save as CSV</property>
 <widget class="GtkDialog" id="win_search">
   <property name="width_request">777</property>
   <property name="height_request">500</property>
-  <property name="visible">True</property>
+  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Search</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">True</property>
   <property name="default_width">777</property>
   <property name="default_height">500</property>
