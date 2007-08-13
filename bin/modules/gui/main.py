@@ -406,7 +406,7 @@ class terp_main(service.Service):
 			if dname.startswith('.'):
 				continue
 			fname = common.terp_path(os.path.join('themes', dname, 'gtkrc'))
-			if os.path.isfile(fname):
+			if fname and os.path.isfile(fname):
 				open_item = gtk.RadioMenuItem(old, dname)
 				old = open_item
 				submenu.append(open_item)
