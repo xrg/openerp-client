@@ -51,9 +51,9 @@ SURVEY_VERSION = '3'
 
 def _search_file(file, dir='path.share'):
 	tests = [
-		lambda x: os.path.join(options.options[dir],x),
 		lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), x),
 		lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'pixmaps', x),
+		lambda x: os.path.join(options.options[dir],x),
 	]
 	for func in tests:
 		x = func(file)
