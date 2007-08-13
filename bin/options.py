@@ -29,6 +29,7 @@
 import ConfigParser,optparse
 import os, sys
 import gtk
+import gettext
 
 def get_home_dir():
 	"""Return the closest possible equivalent to a 'home' directory.
