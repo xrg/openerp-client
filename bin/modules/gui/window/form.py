@@ -253,7 +253,9 @@ class form(object):
 		if not self.modified_save():
 			return
 		res_id = self._id_get()
-		new_id = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'copy', res_id, {}, rpc.session.context)
+		ctx = self.context.copy()
+		ctx.update(rpc.session.context)
+		new_id = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'copy', res_id, {}, ctx)
 		if new_id:
 			self.screen.load([new_id])
 			self.message_state(_('Working now on the duplicated document !'))
