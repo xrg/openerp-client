@@ -9473,7 +9473,7 @@ Each version is given a distinguishing version number.  If the Program specifies
   <property name="width_request">230</property>
   <property name="height_request">122</property>
   <property name="visible">True</property>
-  <property name="title" translatable="yes">GO to ressource ID</property>
+  <property name="title" translatable="yes">GO to resource ID</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>

@@ -378,7 +378,7 @@ class parser_form(widget.view.interface.parser_interface):
 	def translate(self, widget, event, model, name, src, widget_entry):
 		id = self.screen.current_model.id
 		if not id:
-			common.message('You need to save ressource before adding translations')
+			common.message(_('You need to save resource before adding translations'))
 			return False
 		uid = rpc.session.uid
 
