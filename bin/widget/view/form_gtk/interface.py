@@ -57,9 +57,11 @@ class widget_interface(object):
 
 	def _menu_sig_default_get(self):
 		try:
+			if self._view.modelfield.get_state_attrs(self._view.model).get('readonly', False):
+				return False
 			model = self._view.modelfield.parent.resource
 			res = rpc.session.rpc_exec_auth_try('/object', 'execute', model, 'default_get', [self.attrs['name']])
-			model = self._view.modelfield.set(self._view.model, res.get(self.attrs['name'], False))
+			self._view.modelfield.set(self._view.model, res.get(self.attrs['name'], False))
 			self.display(self._view.model, self._view.modelfield)
 		except:
 			common.warning('You can not set to the default value here !', 'Operation not permited')
@@ -125,7 +127,9 @@ class widget_interface(object):
 			self._readonly_set(self.attrs.get('readonly', False))
 			return
 		self._readonly_set(modelfield.get_state_attrs(model).get('readonly', False))
-		if not modelfield.get_state_attrs(model).get('valid', True):
+		if modelfield.get_state_attrs(model).get('readonly', False):
+			self.color_set('readonly')
+		elif not modelfield.get_state_attrs(model).get('valid', True):
 			self.color_set('invalid')
 		elif modelfield.get_state_attrs(model).get('required', False):
 			self.color_set('required')

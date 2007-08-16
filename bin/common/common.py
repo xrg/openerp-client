@@ -479,7 +479,7 @@ def concurrency(resource, id, context, parent=None):
 
 colors = {
 	'invalid':'#ff6969',
-	'readonly':'grey',
+	'readonly':'#eeebe7',
 	'required':'#d2d2ff',
 	'normal':'white'
 }
