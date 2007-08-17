@@ -222,7 +222,7 @@ class reference(interface.widget_interface):
 			self.sig_changed()
 			if not name:
 				id, name = RPCProxy(model).name_get([id], rpc.session.context)[0]
-			self._value = model, [id, name]
+			self._value = model, (id, name)
 			self.wid_text.set_text(name)
 			img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
 			self.but_open.set_image(img)
