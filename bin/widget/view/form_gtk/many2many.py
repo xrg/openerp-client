@@ -90,10 +90,6 @@ class many2many(interface.widget_interface):
 		self.widget.destroy()
 		del self.widget
 
-	def _menu_sig_default_set(self):
-		self.set_value(self._view.modelfield)
-		return super(many2many, self)._menu_sig_default_set()
-
 	def _menu_sig_default(self, obj):
 		res = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['model'], 'default_get', [self.attrs['name']])
 		self.value = res.get(self.attrs['name'], False)
