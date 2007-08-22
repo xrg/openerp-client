@@ -81,10 +81,10 @@ class dialog(object):
 		else:
 			self.screen.add_view_id(False, 'form', display=True)
 		vp.add(self.screen.widget)
-		self.screen.display()
 		x,y = self.screen.screen_container.size_get()
 		vp.set_size_request(x,y+30)
 		self.dia.show_all()
+		self.screen.display()
 
 	def new(self):
 		model = self.screen.new()
