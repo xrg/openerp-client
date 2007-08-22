@@ -97,6 +97,7 @@ class textbox_tag(interface.widget_interface):
 		self.widget = self.win_gl.get_widget('widget_textbox_tag')
 		self.tv = self.win_gl.get_widget('widget_textbox_tag_tv')
 		self.tv.set_wrap_mode(gtk.WRAP_WORD)
+		self.tv.connect('focus-out-event', lambda x,y: self._focus_out())
 		self.widget.show_all()
 		self.tags = {}
 		self.tags_dic = {}
@@ -105,8 +106,8 @@ class textbox_tag(interface.widget_interface):
 		self.buf.connect_after('insert-text', self.sig_insert_text)
 		self.buf.connect('mark-set', self.sig_mark_set)
 
-		self.sizeButton = self.win_gl.get_widget('font_size')
-		self.colorButton =self.win_gl.get_widget('font_color')
+#		self.sizeButton = self.win_gl.get_widget('font_size')
+#		self.colorButton =self.win_gl.get_widget('font_color')
 		self.boldButton = self.win_gl.get_widget('toggle_bold')
 		self.italicButton = self.win_gl.get_widget('toggle_italic')
 		self.underlineButton = self.win_gl.get_widget('toggle_underline')
@@ -117,8 +118,8 @@ class textbox_tag(interface.widget_interface):
 		self.win_gl.signal_connect('on_toggle_bold_toggled', self._toggle, [self.bold])
 		self.win_gl.signal_connect('on_toggle_italic_toggled', self._toggle, [self.italic])
 		self.win_gl.signal_connect('on_toggle_underline_toggled', self._toggle, [self.underline])
-		self.win_gl.signal_connect('on_font_size_changed',self._font_changed)
-		self.win_gl.signal_connect('on_color_changed',self._color_changed)
+#		self.win_gl.signal_connect('on_font_size_changed',self._font_changed)
+#		self.win_gl.signal_connect('on_color_changed',self._color_changed)
 		
 		self.justify = gtk.JUSTIFY_LEFT
 		
@@ -140,12 +141,14 @@ class textbox_tag(interface.widget_interface):
 		for tag in tags:
 			for key, value in self.tagdict[tag].items():
 				if key == 'font_desc' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
-					self.sizeButton.set_value(int(value[-2:]))
-					is_set[key] = tag.get_priority()  
+#					self.sizeButton.set_value(int(value[-2:]))
+#					is_set[key] = tag.get_priority()  
+					pass
 				elif key == 'foreground' and  tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
-					self.colorButton.set_color(gtk.gdk.color_parse(value))
-					is_set[key] = tag.get_priority()  
-					color_priority = tag.get_priority()
+#					self.colorButton.set_color(gtk.gdk.color_parse(value))
+#					is_set[key] = tag.get_priority()  
+#					color_priority = tag.get_priority()
+					pass
 				elif key == 'weight' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
 					self.boldButton.set_active(True)
 					is_set[key] = tag.get_priority()  
@@ -157,9 +160,11 @@ class textbox_tag(interface.widget_interface):
 					is_set[key] = tag.get_priority()  
 		#if no color defined, set to defalt (black)
 		if not is_set.has_key('foreground'):
-			self.colorButton.set_color(gtk.gdk.color_parse('#000000'))
+#			self.colorButton.set_color(gtk.gdk.color_parse('#000000'))
+			pass
 		if not is_set.has_key('font_desc'):
-			self.sizeButton.set_value(14)
+#			self.sizeButton.set_value(10)
+			pass
 
 	def _font_changed(self, widget, event=None):
 		font_desc = pango.FontDescription('Normal '+str(widget.get_value()))
@@ -261,15 +266,19 @@ class textbox_tag(interface.widget_interface):
 
 	def get_text (self):
 		tagdict=self.get_tags()
-		txt = self.buf.get_text(self.buf.get_start_iter(),self.buf.get_end_iter())
+		txt = self.buf.get_text(self.buf.get_start_iter(), self.buf.get_end_iter())
 		cuts = {}
 		for k,v in tagdict.items():
 			stag,etag = self.tag_to_markup(k)
 			for st,end in v:
-				if cuts.has_key(st): cuts[st].append(stag) #add start tags second
-				else: cuts[st]=[stag]
-				if cuts.has_key(end+1): cuts[end+1]=[etag]+cuts[end+1] #add end tags first
-				else: cuts[end+1]=[etag]
+				if cuts.has_key(st):
+					cuts[st].append(stag) #add start tags second
+				else:
+					cuts[st]=[stag]
+				if cuts.has_key(end+1):
+					cuts[end+1]=[etag]+cuts[end+1] #add end tags first
+				else:
+					cuts[end+1]=[etag]
 		last_pos = 0
 		outbuff = ""
 		cut_indices = cuts.keys()
@@ -281,7 +290,8 @@ class textbox_tag(interface.widget_interface):
 			for tag in cuts[c]:
 				outbuff += tag
 		outbuff += txt[last_pos:]
-		outbuff = '<span alignment="' + self.alignment_markup[self.justify] + '" leading="' + str(self.leading) + '">' + outbuff + '</span>'
+		outbuff = '<span alignment="' + self.alignment_markup[self.justify] \
+				+ '" leading="' + str(self.leading) + '">' + outbuff + '</span>'
 		return outbuff
 
 	def tag_to_markup (self, tag):
@@ -339,7 +349,7 @@ class textbox_tag(interface.widget_interface):
 				word_start = iter.get_offset()
 				iter.set_offset(start_pos)
 				bounds = (self.buf.get_iter_at_offset(word_start),
-						  self.buf.get_iter_at_offset(word_end))
+						self.buf.get_iter_at_offset(word_end))
 		return bounds
 
 	def apply_tag (self, tag):
@@ -348,10 +358,8 @@ class textbox_tag(interface.widget_interface):
 
 		self.tags_dic[tag] = True
 		if selection:
-			pass
-			self.buf.apply_tag(tag,*selection)
+			self.buf.apply_tag(tag, *selection)
 		else:
-			pass
 			self.buf.apply_tag(tag, insert_iter, insert_iter)
 
 	def remove_tag (self, tag):
@@ -372,19 +380,20 @@ class textbox_tag(interface.widget_interface):
 		buf = self.tv.get_buffer()
 		txt = re.sub('<span alignment[^>]*>', '<span>', txt)
 		try:
-			parsed,txt,separator = pango.parse_markup(txt,u'0')
+			parsed, txt, separator = pango.parse_markup(txt, u'0')
 		except:
 			pass
 		attrIter = parsed.get_iterator()
+		buf.delete(buf.get_start_iter(), buf.get_end_iter())
 		while True:
 			range=attrIter.range()
 			font,lang,attrs = attrIter.get_font()
-			tags = self.get_tags_from_attrs(font,lang,attrs)
+			tags = self.get_tags_from_attrs(font, lang, attrs)
 			text = txt[range[0]:range[1]]
 			if tags:
-				buf.insert_with_tags(buf.get_end_iter(),text,*tags)
+				buf.insert_with_tags(buf.get_end_iter(), text, *tags)
 			else:
-				buf.insert_with_tags(buf.get_end_iter(),text)
+				buf.insert_with_tags(buf.get_end_iter(), text)
 			if not attrIter.next():
 				break
 
@@ -417,7 +426,7 @@ class textbox_tag(interface.widget_interface):
 			self.justify = justify
 		else:
 			self.tv.set_justification(gtk.JUSTIFY_LEFT)
-			self.justify = gtk.JUSTIFY_LEFT 
+			self.justify = gtk.JUSTIFY_LEFT
 
 	def _mark_set_cb (self, buffer, iter, mark, *params):
 		if mark==self.insert:
@@ -431,17 +440,11 @@ class textbox_tag(interface.widget_interface):
 				self.internal_toggle=False
 
 	def display(self, model, model_field):
-		if not model_field:
-			return False
 		super(textbox_tag, self).display(model, model_field)
-		model_field.set(model, self.get_text())
-		return True
+		value = model_field and model_field.get(model)
+		if not value:
+			value=''
+		self.set_text(value)
 
 	def set_value(self, model, model_field):
-		value = model_field.get(model)
-		if value==False:
-			value=''
-		buffer = self.tv.get_buffer()
-		buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-		self.set_text(model, value)
-		return True
+		model_field.set_client(model, self.get_text() or False)

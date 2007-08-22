@@ -3983,54 +3983,7 @@ Web: http://tiny.be</property>
 		  </child>
 
 		  <child>
-		    <widget class="GtkHBox" id="widget_textbox_font">
-		      <property name="visible">True</property>
-		      <property name="homogeneous">False</property>
-		      <property name="spacing">0</property>
-
-		      <child>
-			<widget class="GtkSpinButton" id="font_size">
-			  <property name="width_request">65</property>
-			  <property name="visible">True</property>
-			  <property name="can_focus">True</property>
-			  <property name="climb_rate">1</property>
-			  <property name="digits">0</property>
-			  <property name="numeric">False</property>
-			  <property name="update_policy">GTK_UPDATE_IF_VALID</property>
-			  <property name="snap_to_ticks">True</property>
-			  <property name="wrap">True</property>
-			  <property name="adjustment">14 0 100 1 10 10</property>
-			  <signal name="focus-out-event" handler="on_font_size_changed" last_modification_time="Thu, 18 Aug 2005 15:57:54 GMT"/>
-			</widget>
-			<packing>
-			  <property name="padding">0</property>
-			  <property name="expand">False</property>
-			  <property name="fill">False</property>
-			</packing>
-		      </child>
-
-		      <child>
-			<widget class="GtkColorButton" id="font_color">
-			  <property name="width_request">27</property>
-			  <property name="height_request">10</property>
-			  <property name="visible">True</property>
-			  <property name="can_focus">True</property>
-			  <property name="use_alpha">False</property>
-			  <property name="focus_on_click">True</property>
-			  <signal name="color-set" handler="on_color_changed" last_modification_time="Thu, 18 Aug 2005 15:57:54 GMT"/>
-			</widget>
-			<packing>
-			  <property name="padding">0</property>
-			  <property name="expand">False</property>
-			  <property name="fill">False</property>
-			</packing>
-		      </child>
-		    </widget>
-		    <packing>
-		      <property name="padding">0</property>
-		      <property name="expand">False</property>
-		      <property name="fill">False</property>
-		    </packing>
+		    <placeholder/>
 		  </child>
 
 		  <child>
@@ -6280,7 +6233,6 @@ Save as CSV</property>
 <widget class="GtkDialog" id="win_search">
   <property name="width_request">777</property>
   <property name="height_request">500</property>
-  <property name="visible">False</property>
   <property name="title" translatable="yes">Tiny ERP - Search</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
