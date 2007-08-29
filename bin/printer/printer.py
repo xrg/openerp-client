@@ -156,10 +156,11 @@ def print_data(data):
 		import tempfile
 		if data['format']=='html' and os.name=='nt':
 			data['format']='doc'
-		fp_name = tempfile.mktemp('.'+data['format'])
+		(fileno, fp_name) = tempfile.mkstemp('.'+data['format'], 'tinyerp_')
 		fp = file(fp_name, 'wb+')
 		fp.write(content)
 		fp.close()
+		os.close(fileno)
 		printer.print_file(fp_name, data['format'])
 	else:
 		fname = common.file_selection(_('Write Report to File'), data['format'])

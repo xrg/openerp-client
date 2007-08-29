@@ -36,6 +36,7 @@ import gtk
 
 import common
 import interface
+import tempfile
 
 
 class image_wid(interface.widget_interface):
@@ -92,10 +93,13 @@ class image_wid(interface.widget_interface):
 		super(image_wid, self).display(model, model_field)
 		if self._value:
 			try:
-				fname = file(os.tempnam(), 'wb')
-				fname.write(decodestring(self._value))
-				fname.flush()
-				self.update_img(fname.name)
+				(fileno, filename) = tempfile.mkstemp('', 'tinyerp_')
+				fp = file(filename, 'wb')
+				fp.write(decodestring(self._value))
+				fp.close()
+				os.close(fileno)
+				self.update_img(filename)
+				os.remove(filename)
 			except:
 				self.update_img(common.terp_path_pixmaps('noimage.png'))
 		else:
