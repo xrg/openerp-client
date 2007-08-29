@@ -43,9 +43,10 @@ def import_csv(csv_data, f, model, fields):
 	fname = csv_data['fname']
 	content = file(fname,'rb').read()
 	input=StringIO.StringIO(content)
-	data = list(csv.reader(input, quotechar=csv_data['del'], delimiter=csv_data['sep']))[int(csv_data['skip']):]
+	data = list(csv.reader(input, quotechar=csv_data['del'],
+		delimiter=csv_data['sep']))[int(csv_data['skip']):]
 	datas = []
-	#if csv_data['combo']:
+
 	for line in data:
 		datas.append(map(lambda x:x.decode(csv_data['combo']).encode('utf-8'), line))
 	try:
@@ -99,17 +100,17 @@ class win_import(object):
 		self.fields = {}
 		self.fields_invert = {}
 		def model_populate(fields, prefix_node='', prefix=None, prefix_value='', level=2):
-			def str_comp(x,y):
-				if x<y: return 1
-				elif x>y: return -1
-				else: return 0
 			fields_order = fields.keys()
-			fields_order.sort(lambda x,y: str_comp(fields[x].get('string', ''), fields[y].get('string', '')))
+			fields_order.sort(lambda x,y: -cmp(fields[x].get('string', ''), fields[y].get('string', '')))
 			for field in fields_order:
-				if (fields[field]['type'] not in ('reference',)) and (not fields[field].get('readonly', False)):
+				if (fields[field]['type'] not in ('reference',)) \
+						and (not fields[field].get('readonly', False) \
+						or not dict(fields[field].get('states', {}).get(
+							'draft', [('readonly', True)])).get('readonly', True)):
 					self.fields_data[prefix_node+field] = fields[field]
-					st_name = prefix_value+fields[field]['string'] or field 
-					node = self.model1.insert(prefix, 0, [st_name, prefix_node+field, (fields[field].get('required', False) and '#ddddff') or 'white'])
+					st_name = prefix_value+fields[field]['string'] or field
+					node = self.model1.insert(prefix, 0, [st_name, prefix_node+field,
+						(fields[field].get('required', False) and '#ddddff') or 'white'])
 					self.fields[prefix_node+field] = st_name
 					self.fields_invert[st_name] = prefix_node+field
 					if fields[field]['type']=='one2many' and level>0:
