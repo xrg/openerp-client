@@ -49,6 +49,9 @@ class image_wid(interface.widget_interface):
 		self.widget.connect("button_press_event", self.load_file)
 		self.widget.connect("button_press_event", self.save_file)
 
+		self.height = int(attrs.get('img_height', 100))
+		self.width = int(attrs.get('img_width', 300))
+
 		box1 = self.create_image(common.terp_path_pixmaps("noimage.png"))
 		self.widget.add(box1)
 		self.widget.show_all()
@@ -115,13 +118,25 @@ class image_wid(interface.widget_interface):
 		# Now on to the image stuff
 		self.image = gtk.Image()
 		pixbuf = gtk.gdk.pixbuf_new_from_file(img_filename)
-		width_widget = max(self.widget.allocation.width, 70) - 16
-		pix_width, pix_height = pixbuf.get_width(), pixbuf.get_height()
-		height = int(pix_height / (pix_width / float(width_widget)))
-		if height > 100:
-			height = 100
-			width_widget = int(pix_width / (pix_height / 100.0))
-		scaled = pixbuf.scale_simple(width_widget, height, gtk.gdk.INTERP_BILINEAR)
+
+		img_height = pixbuf.get_height()
+		if img_height > self.height:
+			height = self.height
+		else:
+			height = img_height
+
+		img_width = pixbuf.get_width()
+		if img_width > self.width:
+			width = self.width
+		else:
+			width = img_width
+
+		if (img_width / width) < (img_height / height):
+			width = float(img_width) / float(img_height) * float(height)
+		else:
+			height = float(img_height) / float(img_width) * float(width)
+
+		scaled = pixbuf.scale_simple(int(width), int(height), gtk.gdk.INTERP_BILINEAR)
 		self.image.set_from_pixbuf(scaled)
 
 		box1.pack_start(self.image, True, True, 3)
