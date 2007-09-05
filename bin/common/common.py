@@ -230,27 +230,65 @@ def terp_survey():
 		common.message(_('Thank you for testing Tiny ERP !\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
 	return True
 
-def file_selection(title, filename='', parent=None):
-	win = gtk.FileSelection(title)
+
+def file_selection(title, filename='', parent=None,
+		action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True, multi=False, filters=None):
+	if action == gtk.FILE_CHOOSER_ACTION_OPEN:
+		buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+			gtk.STOCK_OPEN,gtk.RESPONSE_OK)
+	else:
+		buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+			gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+	win = gtk.FileChooserDialog(title, None, action, buttons)
 	if parent:
 		win.set_transient_for(parent)
+	win.set_current_folder(options.options['client.default_path'])
 	if filename:
 		win.set_filename(os.path.join(options.options['client.default_path'], filename))
-	win.set_select_multiple(False)
-	
+	win.set_select_multiple(multi)
+	win.set_default_response(gtk.RESPONSE_OK)
+	if filters is not None:
+		for filter in filters:
+			win.add_filter(filter)
+
+	def update_preview_cb(win, img):
+		filename = win.get_preview_filename()
+		try:
+			pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 128, 128)
+			img.set_from_pixbuf(pixbuf)
+			have_preview = True
+		except:
+			have_preview = False
+		win.set_preview_widget_active(have_preview)
+		return
+
+	if preview:
+		img_preview = gtk.Image()
+		win.set_preview_widget(img_preview)
+		win.connect('update-preview', update_preview_cb, img_preview)
+
 	button = win.run()
 	if button!=gtk.RESPONSE_OK:
 		win.destroy()
 		return False
-	filepath = win.get_filename()
-	if filepath:
-		filepath = filepath.decode('utf8')
+	if not multi:
+		filepath = win.get_filename()
+		if filepath:
+			filepath = filepath.decode('utf8')
+			try:
+				options.options['client.default_path'] = os.path.dirname(filepath)
+			except:
+				pass
+		win.destroy()
+		return filepath
+	else:
+		filenames = win.get_filenames()
 		try:
-			options.options['client.default_path'] = os.path.dirname(filepath)
+			options.options['client.default_path'] = os.path.dirname(filenames[0])
 		except:
 			pass
-	win.destroy()
-	return filepath
+		win.destroy()
+		return filenames
 
 def support(*args):
 	import pickle

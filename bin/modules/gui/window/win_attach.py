@@ -1,7 +1,7 @@
 ##############################################################################
 #
 # Copyright (c) 2004 TINY SPRL. (http://tiny.be) All Rights Reserved.
-#						Fabien Pinckaers <fp@tiny.Be>
+#                        Fabien Pinckaers <fp@tiny.Be>
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -54,8 +54,9 @@ class win_attach(object):
 		hb = self.glade.get_widget('vp_attach')
 		hb.add(self.view)
 
-		self.view.get_selection().set_mode(gtk.SELECTION_SINGLE)
-		self.view.connect('row_activated', self._sig_row_activated)
+		selection = self.view.get_selection()
+		selection.set_mode(gtk.SELECTION_SINGLE)
+		selection.connect('changed', self._sig_changed)
 
 		view = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'fields_view_get', False, 'tree')
 
@@ -74,7 +75,7 @@ class win_attach(object):
 
 		self.view.set_model(self.model)
 		self.view.show_all()
-		self.reload()
+		self.reload(preview=False)
 
 		dict = {
 			'on_attach_but_del_activate': self._sig_del,
@@ -146,42 +147,34 @@ class win_attach(object):
 				common.message(_('Can not write file !'))
 
 	def _sig_add(self, *args):
-		dialog = gtk.FileChooserDialog("Open..",
-			self.win,
-			gtk.FILE_CHOOSER_ACTION_OPEN,
-			(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-			gtk.STOCK_OPEN, gtk.RESPONSE_OK))
-		dialog.set_default_response(gtk.RESPONSE_OK)
-		dialog.set_select_multiple(True)
-		filter = gtk.FileFilter()
-		filter.set_name("All files")
-		filter.add_pattern("*")
-		dialog.add_filter(filter)
-		
-		filter = gtk.FileFilter()
-		filter.set_name("Images")
-		for mime in ("image/png","image/jpeg","image/gif"):
-			filter.add_mime_type(mime)
-		for pat in ("*.png","*.jpg","*.gif","*.tif","*.xpm"):
-			filter.add_pattern(pat)
-		dialog.add_filter(filter)
-		
-		response = dialog.run()
-		sfilenames = dialog.get_filenames()
-		dialog.destroy()
+		filter_all = gtk.FileFilter()
+		filter_all.set_name(_('All files'))
+		filter_all.add_pattern("*")
 
-		if response == gtk.RESPONSE_OK:
-			try:
-				for s in sfilenames:
-					value = file(s,'rb').read()
-					fname = os.path.basename(s)
-					id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'create', {'name':fname, 'datas':base64.encodestring(value), 'datas_fname':fname, 'res_model': self.ressource[0], 'res_id': self.ressource[1]})
-				self.reload(preview=False)
-				self.preview(id)
-			except:
-				pass
+		filter_image = gtk.FileFilter()
+		filter_image.set_name(_('Images'))
+		for mime in ("image/png", "image/jpeg", "image/gif"):
+			filter_image.add_mime_type(mime)
+		for pat in ("*.png", "*.jpg", "*.gif", "*.tif", "*.xpm"):
+			filter_image.add_pattern(pat)
 
-	def _sig_row_activated(self, *args):
+		filenames = common.file_selection(_('Open...'), preview=True, multi=True,
+				parent=self.win, filters=[filter_all, filter_image])
+		for filename in filenames:
+			value = file(filename, 'rb').read()
+			name = os.path.basename(filename)
+			id = rpc.session.rpc_exec_auth('/object', 'execute',
+					'ir.attachment', 'create', {
+						'name': name,
+						'datas': base64.encodestring(value),
+						'datas_fname': name,
+						'res_model': self.ressource[0],
+						'res_id': self.ressource[1]})
+			self.reload(preview=False)
+			self.preview(id)
+
+
+	def _sig_changed(self, *args):
 		model,iters = self.view.get_selection().get_selected_rows()
 		if not iters:
 			return None
@@ -206,9 +199,13 @@ class win_attach(object):
 		label = self.glade.get_widget('attach_title')
 		label.set_text(str(datas['name']))
 
-		decoder = {'jpg':'jpeg','jpeg':'jpeg','gif':'gif','png':'png'}
+		decoder = {'jpg': 'jpeg',
+				'jpeg': 'jpeg',
+				'gif': 'gif',
+				'png': 'png',
+				'bmp': 'bmp'}
 		ext = fname.split('.')[-1].lower()
-		if ext in ('jpg', 'jpeg', 'png', 'gif'):
+		if ext in ('jpg', 'jpeg', 'png', 'gif', 'bmp'):
 			try:
 				if not datas['link']:
 					dt = base64.decodestring(datas['datas'])
@@ -217,17 +214,18 @@ class win_attach(object):
 
 				def set_size(object, w, h):
 					allocation = self.win.get_allocation()
-					scale1 = 0.3*allocation.width / w
-					scale2 = 0.3*allocation.height / h
+					scale1 = 0.3 * float(allocation.width) / float(w)
+					scale2 = 0.3 * float(allocation.height) / float(h)
 					scale = min(scale1, scale2)
-					object.set_size(int(scale*w), int(scale*h))
+					if int(scale*w) > 0 and int(scale*h) > 0:
+						object.set_size(int(scale*w), int(scale*h))
 
-				loader = gtk.gdk.PixbufLoader (decoder[ext])
+				loader = gtk.gdk.PixbufLoader(decoder[ext])
 				loader.connect_after('size-prepared', set_size)
-				
-				loader.write (dt, len (dt))
-				pixbuf = loader.get_pixbuf ()
-				loader.close ()
+
+				loader.write(dt, len(dt))
+				pixbuf = loader.get_pixbuf()
+				loader.close()
 
 				img = self.glade.get_widget('attach_image')
 				img.set_from_pixbuf(pixbuf)

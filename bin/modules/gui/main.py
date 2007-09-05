@@ -899,13 +899,7 @@ class terp_main(service.Service):
 				common.warning(_("Couldn't drop database"), parent=self.window)
 
 	def sig_db_restore(self, widget):
-		chooser = gtk.FileChooserDialog(title='Open...', action=gtk.FILE_CHOOSER_ACTION_OPEN,
-										buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK), parent=self.window)
-		filename = False
-		res = chooser.run()
-		if res == gtk.RESPONSE_OK:
-			filename = chooser.get_filename()
-		chooser.destroy()
+		filename = common.file_selection(_('Open...'), parent=self.window, preview=False)
 		if not filename:
 			return
 
@@ -922,7 +916,7 @@ class terp_main(service.Service):
 					common.warning(_('Bad database administrator password !'),_("Could not restore database."), parent=self.window)
 				else:
 					common.warning(_("Couldn't restore database"), parent=self.window)
-		
+
 	def sig_db_password(self, widget):
 		dialog = glade.XML(common.terp_path("terp.glade"), "dia_passwd_change", gettext.textdomain())
 		win = dialog.get_widget('dia_passwd_change')
@@ -963,15 +957,8 @@ class terp_main(service.Service):
 		url, db_name, passwd = self._choose_db_select(_('Backup a database'))
 		if not db_name:
 			return
-
-		chooser = gtk.FileChooserDialog(title=_('Save As...'), action=gtk.FILE_CHOOSER_ACTION_SAVE,
-			buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK), parent=self.window)
-		res = chooser.run()
-
-		filename = False
-		if res == gtk.RESPONSE_OK:
-			filename = chooser.get_filename()
-		chooser.destroy()
+		filename = common.file_selection(_('Save As...'),
+				action=gtk.FILE_CHOOSER_ACTION_SAVE, parent=self.window, preview=False)
 
 		if filename:
 			try:
