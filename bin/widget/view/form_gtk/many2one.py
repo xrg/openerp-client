@@ -57,6 +57,7 @@ class dialog(object):
 			self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
 		self.dia.set_property('default-width', 760)
 		self.dia.set_property('default-height', 500)
+		self.dia.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
 
 		scroll = gtk.ScrolledWindow()
 		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
