@@ -220,7 +220,8 @@ class many2one(interface.widget_interface):
 				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs, window=self._window)
 				ok, value = dia.run()
 				if ok:
-					self._view.modelfield.set_client(self._view.model, value)
+					self._view.modelfield.set_client(self._view.model, value,
+							force_change=True)
 					self.value = value
 				dia.destroy()
 		else:
@@ -230,7 +231,8 @@ class many2one(interface.widget_interface):
 
 				ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
 				if len(ids)==1:
-					self._view.modelfield.set_client(self._view.model, ids[0])
+					self._view.modelfield.set_client(self._view.model, ids[0],
+							force_change=True)
 					self.display(self._view.model, self._view.modelfield)
 					self.ok = True
 					self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
@@ -240,7 +242,8 @@ class many2one(interface.widget_interface):
 				ids = win.go()
 				if ids:
 					name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
-					self._view.modelfield.set_client(self._view.model, name)
+					self._view.modelfield.set_client(self._view.model, name,
+							force_change=True)
 		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 		self.display(self._view.model, self._view.modelfield)
 		self.ok=True

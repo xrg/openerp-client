@@ -92,7 +92,7 @@ class CharField(object):
 	def get(self, model, check_load=True, readonly=True, modified=False):
 		return model.value.get(self.name, False) or False
 
-	def set_client(self, model, value, test_state=True):
+	def set_client(self, model, value, test_state=True, force_change=False):
 		internal = model.value.get(self.name, False)
 		self.set(model, value, test_state)
 		if (internal or False) != (model.value.get(self.name,False) or False):
@@ -138,7 +138,7 @@ class FloatField(CharField):
 		self.get_state_attrs(model)['valid'] = True
 		return True
 
-	def set_client(self, model, value, test_state=True):
+	def set_client(self, model, value, test_state=True, force_change=False):
 		internal = model.value[self.name]
 		self.set(model, value, test_state)
 		if abs(float(internal or 0.0) - float(model.value[self.name] or 0.0)) >= (10.0**(-int(self.attrs.get('digits', (12,4))[1]))):
@@ -191,7 +191,7 @@ class M2OField(CharField):
 			model.modified = True
 			model.modified_fields.setdefault(self.name)
 
-	def set_client(self, model, value, test_state=False):
+	def set_client(self, model, value, test_state=False, force_change=False):
 		internal = model.value[self.name]
 		self.set(model, value, test_state)
 		if internal != model.value[self.name]:
@@ -199,6 +199,8 @@ class M2OField(CharField):
 			model.modified_fields.setdefault(self.name)
 			self.sig_changed(model)
 			model.signal('record-changed', model)
+		elif force_change:
+			self.sig_changed(model)
 
 class M2MField(CharField):
 	'''
@@ -223,7 +225,7 @@ class M2MField(CharField):
 			model.modified = True
 			model.modified_fields.setdefault(self.name)
 
-	def set_client(self, model, value, test_state=False):
+	def set_client(self, model, value, test_state=False, force_change=False):
 		internal = model.value[self.name]
 		self.set(model, value, test_state, modified=False)
 		if set(internal) != set(value):
@@ -303,7 +305,7 @@ class O2MField(CharField):
 		model.value[self.name].pre_load(value, display=False)
 		#self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 
-	def set_client(self, model, value, test_state=False):
+	def set_client(self, model, value, test_state=False, force_change=False):
 		self.set(model, value, test_state=test_state)
 		model.signal('record-changed', model)
 
@@ -354,7 +356,7 @@ class ReferenceField(CharField):
 			return '%s,%d' % (model.value[self.name][0], model.value[self.name][1][0])
 		return False
 
-	def set_client(self, model, value):
+	def set_client(self, model, value, test_state=False, force_change=False):
 		internal = model.value[self.name]
 		model.value[self.name] = value
 		if (internal or False) != (model.value[self.name] or False):
