@@ -72,7 +72,8 @@ class wid_binary(interface.widget_interface):
 		try:
 			filename = common.file_selection(_('Select the file to attach'), parent=self._window)
 			if filename:
-				self.model_field.set_client(self._view.model, base64.encodestring(file(filename).read()))
+				self.model_field.set_client(self._view.model,
+						base64.encodestring(file(filename, 'rb').read()))
 				fname = self.attrs.get('fname_widget', False)
 				if fname:
 					self.parent.value = {fname:os.path.basename(filename)}
