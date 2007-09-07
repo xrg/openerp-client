@@ -48,6 +48,7 @@ class dialog(object):
 			self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
 		self.dia.set_property('default-width', 760)
 		self.dia.set_property('default-height', 500)
+		self.dia.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
 
 		self.accel_group = gtk.AccelGroup()
 		self.dia.add_accel_group(self.accel_group)
