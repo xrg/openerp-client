@@ -89,42 +89,6 @@ def open_excel(fields, result):
 def datas_read(ids, model, fields, fields_view, prefix=''):
 	datas = rpc.session.rpc_exec_auth('/object', 'execute', model, 'export_data', ids, fields)
 	return datas
-	rfield = []
-	todo = {}
-	for f in fields:
-		res = f.split('.')
-		if len(res)>1:
-			todo.setdefault(res[0], []).append('.'.join(res[1:]))
-			if not res[0] in rfield:
-				rfield.append(res[0])
-		else:
-			if not f in rfield:
-				rfield.append(f)
-
-	datas = rpc.session.rpc_exec_auth('/object', 'execute', model, 'read', ids, rfield)
-	for t in todo:
-		ids2 = []
-		for d in datas:
-			if fields_view[prefix+t]['type'] in ('one2many', 'many2many'):
-				ids2.extend(d[t])
-			elif fields_view[prefix+t]['type'] in ('many2one', 'one2one'):
-				if d[t]:
-					ids2.append(d[t][0])
-			else:
-				ids2.append(d[t])
-		datas2 = datas_read(ids2, fields_view[prefix+t]['relation'], todo[t], fields_view, prefix+t+'.')
-		res = {}
-		for d in datas2:
-			res[d['id']] = {}
-			for k in d:
-				if k!='id':
-					res[d['id']][t+'.'+k]=d[k]
-		for d in datas:
-			if fields_view[prefix+t]['type'] in ('one2many', 'many2many','many2one','one2one'):
-				d.update(res.get(d[t] and d[t][0],{}))
-			else:
-				d.update(res.get(d[t],{}))
-	return datas
 
 class win_export(object):
 	def __init__(self, model, ids, fields, preload = [], parent=None):
@@ -173,7 +137,7 @@ class win_export(object):
 					self.fields_data[prefix_node + field]['string'] = '%s%s' % (prefix_value, self.fields_data[prefix_node + field]['string'])
 				st_name = fields[field]['string'] or field 
 				node = self.model1.insert(prefix, 0, [st_name, prefix_node+field])
-				self.fields[prefix_node+field] = st_name
+				self.fields[prefix_node+field] = (st_name, fields[field].get('relation', False))
 				if fields[field].get('relation', False) and level>0:
 					fields2 = rpc.session.rpc_exec_auth('/object', 'execute', fields[field]['relation'], 'fields_get', False, rpc.session.context)
 					model_populate(fields2, prefix_node+field+'/', node, st_name+'/', level-1)
@@ -208,14 +172,18 @@ class win_export(object):
 
 	def sig_sel_all(self, widget=None):
 		self.model2.clear()
-		for field in self.fields.keys():
-			self.model2.set(self.model2.append(), 0, self.fields[field], 1, field)
+		for field, relation in self.fields.keys():
+			if not relation:
+				self.model2.set(self.model2.append(), 0, self.fields[field], 1, field)
 
 	def sig_sel(self, widget=None):
 		sel = self.view1.get_selection()
 		sel.selected_foreach(self._sig_sel_add)
 
 	def _sig_sel_add(self, store, path, iter):
+		name, relation = self.fields[store.get_value(iter,1)]
+		if relation:
+			return
 		num = self.model2.append()
 		self.model2.set(num, 0, store.get_value(iter,0), 1, store.get_value(iter,1))
 
