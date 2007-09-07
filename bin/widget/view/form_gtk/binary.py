@@ -70,7 +70,8 @@ class wid_binary(interface.widget_interface):
 
 	def sig_new(self, widget=None):
 		try:
-			filename = common.file_selection(_('Select the file to attach'), parent=self._window)
+			filename = common.file_selection(_('Open...'),
+					parent=self._window)
 			if filename:
 				self.model_field.set_client(self._view.model,
 						base64.encodestring(file(filename, 'rb').read()))
@@ -83,7 +84,8 @@ class wid_binary(interface.widget_interface):
 
 	def sig_save_as(self, widget=None):
 		try:
-			filename = common.file_selection(_('Save attachment as...'), parent=self._window)
+			filename = common.file_selection(_('Save As...'),
+					parent=self._window, action=gtk.FILE_CHOOSER_ACTION_SAVE)
 			if filename:
 				fp = file(filename,'wb+')
 				fp.write(base64.decodestring(self.model_field.get(self._view.model)))
