@@ -128,13 +128,17 @@ def datas_read(ids, model, fields, fields_view, prefix=''):
 
 class win_export(object):
 	def __init__(self, model, ids, fields, preload = [], parent=None):
-		self.glade = glade.XML(common.terp_path("terp.glade"), 'win_save_as', gettext.textdomain())
+		self.glade = glade.XML(common.terp_path("terp.glade"), 'win_save_as',
+				gettext.textdomain())
 		self.win = self.glade.get_widget('win_save_as')
-		if parent:
-			self.win.set_transient_for(parent)
 		self.ids = ids
 		self.model = model
 		self.fields_data = {}
+
+		if parent is None:
+			parent = service.LocalService('gui.main').window
+		self.win.set_transient_for(parent)
+		self.parent = parent
 
 		self.view1 = gtk.TreeView()
 		self.view1.get_selection().set_mode(gtk.SELECTION_MULTIPLE)
@@ -272,7 +276,8 @@ class win_export(object):
 			if not action:
 				open_excel(fields2, result)
 			else:
-				fname = common.file_selection(_('Export Data'))
+				fname = common.file_selection(_('Save As...'),
+						parent=self.parent, action=gtk.FILE_CHOOSER_ACTION_SAVE)
 		 		if fname:
 					export_csv(fname, fields2, result, self.wid_write_field_names.get_active())
 			return True

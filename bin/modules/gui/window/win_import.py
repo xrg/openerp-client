@@ -36,6 +36,8 @@ import rpc
 
 import csv, StringIO
 
+import options
+
 #
 # TODO: make it works with references
 #
@@ -66,14 +68,20 @@ def import_csv(csv_data, f, model, fields):
 
 class win_import(object):
 	def __init__(self, model, fields, preload = [], parent=None):
-		self.glade = glade.XML(common.terp_path("terp.glade"),'win_import',gettext.textdomain())
+		self.glade = glade.XML(common.terp_path("terp.glade"), 'win_import',
+				gettext.textdomain())
 		self.glade.get_widget('import_csv_combo').set_active(0)
 		self.win = self.glade.get_widget('win_import')
-		if parent:
-			self.win.set_transient_for(parent)
 		self.model = model
 		self.fields_data = {}
 
+		if parent is None:
+			parent = service.LocalService('gui.main').window
+		self.win.set_transient_for(parent)
+		self.parent = parent
+
+		self.glade.get_widget('import_csv_file').set_current_folder(
+				options.options['client.default_path'])
 		self.view1 = gtk.TreeView()
 		self.view1.get_selection().set_mode(gtk.SELECTION_MULTIPLE)
 		self.glade.get_widget('import_vp_left').add(self.view1)
