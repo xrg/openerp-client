@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tiny ERP V2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-13 17:21+0200\n"
+"POT-Creation-Date: 2007-09-10 16:36+0200\n"
 "PO-Revision-Date: 2005-04-05 09:43+0200\n"
 "Last-Translator: Fabien Pinckaers <fp@tiny.be>\n"
 "Language-Team: FR <i18n-info@tinyerp.org>\n"
@@ -16,485 +16,480 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: terp.glade:10
+#: terp.glade:9
 msgid "Tiny ERP - Login"
 msgstr "Tiny ERP - Qasja"
 
-#: terp.glade:107
+#: terp.glade:106
 msgid "User:"
 msgstr "Perdoruesi:"
 
-#: terp.glade:135 terp.glade:14459 terp.glade:14774
+#: terp.glade:134 terp.glade:14653 terp.glade:14968
 msgid "Password:"
 msgstr "Shifra:"
 
-#: terp.glade:164 terp.glade:14286 terp.glade:14712 terp.glade:15278
-#: terp.glade:15922
+#: terp.glade:163 terp.glade:14480 terp.glade:14906 terp.glade:15471
+#: terp.glade:16115
 #, fuzzy
 msgid "Change"
 msgstr "Ndrro Rrenjen"
 
-#: terp.glade:187 terp.glade:13982
-msgid "localhost"
-msgstr "localhost"
-
-#: terp.glade:205
+#: terp.glade:204 terp.glade:14625
 #, fuzzy
 msgid "Database:"
 msgstr "Zgjedhe daten"
 
-#: terp.glade:234 terp.glade:14051 terp.glade:14326 terp.glade:14619
-#: terp.glade:15829
+#: terp.glade:233 terp.glade:14246 terp.glade:14520 terp.glade:14813
+#: terp.glade:16022
 msgid "Server:"
 msgstr "Serveri:"
 
-#: terp.glade:266
-msgid "admin"
-msgstr ""
-
-#: terp.glade:378 terp.glade:13689
-msgid "Tiny ERP"
-msgstr "Tiny ERP"
-
-#: terp.glade:422
+#: terp.glade:421
 msgid "_File"
 msgstr "_Fajlli"
 
-#: terp.glade:431
+#: terp.glade:430
 #, fuzzy
 msgid "_Connect..."
 msgstr "Nderlidhja..."
 
-#: terp.glade:453
+#: terp.glade:452
 #, fuzzy
 msgid "_Disconnect"
 msgstr "Shkeputja"
 
-#: terp.glade:480
+#: terp.glade:479
 #, fuzzy
 msgid "Databases"
 msgstr "Zgjedhe daten"
 
-#: terp.glade:501
+#: terp.glade:500
 #, fuzzy
 msgid "_New database"
 msgstr "Zgjedhe daten"
 
-#: terp.glade:523
+#: terp.glade:521
 #, fuzzy
 msgid "_Restore database"
 msgstr "Zgjedhe daten"
 
-#: terp.glade:544
+#: terp.glade:542
 #, fuzzy
 msgid "_Backup database"
 msgstr "Zgjedhe daten"
 
-#: terp.glade:565
+#: terp.glade:563
 #, fuzzy
 msgid "Dro_p database"
 msgstr "Zgjedhe daten"
 
-#: terp.glade:592
+#: terp.glade:590
 msgid "Administrator Password"
 msgstr ""
 
-#: terp.glade:636
+#: terp.glade:634
 msgid "_User"
 msgstr "Perdoruesi"
 
-#: terp.glade:646
+#: terp.glade:644
 #, fuzzy
 msgid "_Preferences"
 msgstr "Preferencat"
 
-#: terp.glade:673
+#: terp.glade:671
 #, fuzzy
 msgid "_Send a request"
 msgstr "Dergo Kerkesen"
 
-#: terp.glade:694
+#: terp.glade:692
 #, fuzzy
 msgid "_Read my requests"
 msgstr "Lexo kerkesen time"
 
-#: terp.glade:721
+#: terp.glade:719
 #, fuzzy
 msgid "_Waiting Requests"
 msgstr "Kerkesat:"
 
-#: terp.glade:734
+#: terp.glade:732
 #, fuzzy
 msgid "For_m"
 msgstr "_Formulari"
 
-#: terp.glade:744
+#: terp.glade:742
 #, fuzzy
 msgid "_New"
 msgstr "E Re"
 
-#: terp.glade:766
+#: terp.glade:764
 #, fuzzy
 msgid "_Save"
 msgstr "Ruaje"
 
-#: terp.glade:788
+#: terp.glade:786
 #, fuzzy
 msgid "Copy this resource"
 msgstr "Largo kete resurs"
 
-#: terp.glade:789
+#: terp.glade:787
 msgid "_Duplicate"
 msgstr ""
 
-#: terp.glade:811
+#: terp.glade:809
 #, fuzzy
 msgid "_Delete"
 msgstr "Fshije"
 
-#: terp.glade:839
+#: terp.glade:837
 msgid "Find"
 msgstr ""
 
-#: terp.glade:861
+#: terp.glade:859
 #, fuzzy
 msgid "Ne_xt"
 msgstr "Tjetri"
 
-#: terp.glade:883
+#: terp.glade:881
 #, fuzzy
 msgid "Pre_vious"
 msgstr "Paraprak"
 
-#: terp.glade:905
+#: terp.glade:903
 msgid "Switch to list/form"
 msgstr ""
 
-#: terp.glade:933
-msgid "_New Menu Tab"
-msgstr ""
+#: terp.glade:925
+#, fuzzy
+msgid "_Menu"
+msgstr "Menuja"
 
-#: terp.glade:955
+#: terp.glade:953
 msgid "_New Home Tab"
 msgstr ""
 
-#: terp.glade:977 terp.glade:11926
+#: terp.glade:975 terp.glade:12009
 #, fuzzy
 msgid "Close Tab"
 msgstr "Mbylle"
 
-#: terp.glade:999
+#: terp.glade:997
 #, fuzzy
 msgid "Previous Tab"
 msgstr "Tipi paraprak"
 
-#: terp.glade:1009 terp.glade:11814
+#: terp.glade:1007 terp.glade:11897
 #, fuzzy
 msgid "Next Tab"
 msgstr "Tipi ardheshem"
 
-#: terp.glade:1025
+#: terp.glade:1023
 #, fuzzy
 msgid "View _logs"
 msgstr "Trego Historiatin"
 
-#: terp.glade:1034
+#: terp.glade:1032
 #, fuzzy
 msgid "_Go to resource ID..."
 msgstr "Shko deri te ID e resursit..."
 
-#: terp.glade:1050
+#: terp.glade:1048
 #, fuzzy
 msgid "_Open"
 msgstr "Hape"
 
-#: terp.glade:1071
+#: terp.glade:1069
 #, fuzzy
 msgid "Reloa_d / Undo"
 msgstr "Ri_Lexo"
 
-#: terp.glade:1099
+#: terp.glade:1097
 #, fuzzy
 msgid "Repeat latest _action"
 msgstr "Perserite Akcionin E Fundit"
 
-#: terp.glade:1115
+#: terp.glade:1113
 msgid "_Preview in PDF"
 msgstr "_Parashiko ne PDF"
 
-#: terp.glade:1137
+#: terp.glade:1135
 #, fuzzy
 msgid "Previe_w in editor"
 msgstr "Parashiko ne _word"
 
-#: terp.glade:1164
+#: terp.glade:1162
 #, fuzzy
 msgid "Expor_t data..."
 msgstr "Eksportoj shenimet..."
 
-#: terp.glade:1185
+#: terp.glade:1183
 #, fuzzy
 msgid "I_mport data..."
 msgstr "Inmportoj shenimet..."
 
-#: terp.glade:1198
+#: terp.glade:1196
 msgid "_Options"
 msgstr "_Opcionet"
 
-#: terp.glade:1207
+#: terp.glade:1205
 #, fuzzy
 msgid "_Menubar"
 msgstr "Menuja"
 
-#: terp.glade:1217
+#: terp.glade:1215
 #, fuzzy
 msgid "Text _and Icons"
 msgstr "Teksti me figura"
 
-#: terp.glade:1227
+#: terp.glade:1225
 #, fuzzy
 msgid "_Icons only"
 msgstr "Vetem figurat"
 
-#: terp.glade:1238
+#: terp.glade:1236
 #, fuzzy
 msgid "_Text only"
 msgstr "Vetem Teksti"
 
-#: terp.glade:1253
+#: terp.glade:1251
 msgid "Client Mode"
 msgstr ""
 
-#: terp.glade:1275
+#: terp.glade:1273
 msgid "Normal"
 msgstr ""
 
-#: terp.glade:1285
+#: terp.glade:1283
 msgid "Mode PDA"
 msgstr ""
 
-#: terp.glade:1300
+#: terp.glade:1298
 #, fuzzy
 msgid "_Theme"
 msgstr "Pema"
 
-#: terp.glade:1322
+#: terp.glade:1320
 #, fuzzy
 msgid "Tiny ERP Theme"
 msgstr "Tiny ERP licensa"
 
-#: terp.glade:1331
-msgid "Aqua OS X"
-msgstr ""
-
-#: terp.glade:1346
+#: terp.glade:1344
 #, fuzzy
 msgid "Default Theme"
 msgstr "Vlera Definuar:"
 
-#: terp.glade:1359
+#: terp.glade:1357
 #, fuzzy
 msgid "_Forms"
 msgstr "_Formulari"
 
-#: terp.glade:1369
+#: terp.glade:1367
 msgid "Right Toolbar"
 msgstr ""
 
-#: terp.glade:1379
+#: terp.glade:1377
 msgid "Tabs default position"
 msgstr ""
 
-#: terp.glade:1389
+#: terp.glade:1387
 msgid "Top"
 msgstr ""
 
-#: terp.glade:1399
+#: terp.glade:1397
 msgid "Left"
 msgstr ""
 
-#: terp.glade:1410
+#: terp.glade:1408
 msgid "Right"
 msgstr ""
 
-#: terp.glade:1421
+#: terp.glade:1419
 msgid "Bottom"
 msgstr ""
 
-#: terp.glade:1436
+#: terp.glade:1434
 msgid "Tabs default orientation"
 msgstr ""
 
-#: terp.glade:1446
+#: terp.glade:1444
 msgid "Horizontal"
 msgstr ""
 
-#: terp.glade:1456
+#: terp.glade:1454
 msgid "Vertical"
 msgstr ""
 
-#: terp.glade:1475
+#: terp.glade:1473
 #, fuzzy
 msgid "_Print"
 msgstr "Shtyp"
 
-#: terp.glade:1496
+#: terp.glade:1494
 #, fuzzy
 msgid "Previe_w before print"
 msgstr "Parashiko para shtypjes"
 
-#: terp.glade:1516
+#: terp.glade:1514
 #, fuzzy
 msgid "_Save options"
 msgstr "Ruaj opcionet"
 
-#: terp.glade:1541
+#: terp.glade:1539
 #, fuzzy
 msgid "_Plugins"
 msgstr "Shtojcat"
 
-#: terp.glade:1551
+#: terp.glade:1549
 #, fuzzy
 msgid "_Execute a plugin"
 msgstr "Ekzekuto shtojcen"
 
-#: terp.glade:1576
+#: terp.glade:1575
+#, fuzzy
+msgid "_Shortcuts"
+msgstr "RrugeShkurtesa"
+
+#: terp.glade:1584
 #, fuzzy
 msgid "_Help"
 msgstr "Ndihme"
 
-#: terp.glade:1585 terp.glade:10716
+#: terp.glade:1593 terp.glade:10801
 #, fuzzy
 msgid "Support Request"
 msgstr "Dergo Kerkesen Perkrahjes"
 
-#: terp.glade:1612
+#: terp.glade:1620
 msgid "User _Manual"
 msgstr ""
 
-#: terp.glade:1633
+#: terp.glade:1641
 msgid "_Contextual Help"
 msgstr ""
 
-#: terp.glade:1655
+#: terp.glade:1663
 #, fuzzy
 msgid "_Tips"
 msgstr "Tipet"
 
-#: terp.glade:1676
+#: terp.glade:1684
 #, fuzzy
 msgid "Keyboard Shortcuts"
 msgstr "RrugeShkurtesa"
 
-#: terp.glade:1691
+#: terp.glade:1699
 #, fuzzy
-msgid "_Licence"
+msgid "_License"
 msgstr "Licenca"
 
-#: terp.glade:1712
+#: terp.glade:1720
 #, fuzzy
 msgid "_About..."
 msgstr "Rreth..."
 
-#: terp.glade:1754 terp.glade:2986
+#: terp.glade:1762 terp.glade:3012
 msgid "Create a new resource"
 msgstr "Krijo resursin e ri"
 
-#: terp.glade:1770
+#: terp.glade:1778
 msgid "Edit / Save this resource"
 msgstr "Azhuro / Ruaje kete resurs"
 
-#: terp.glade:1799
+#: terp.glade:1807
 msgid "Delete this resource"
 msgstr "Fshije kete resurs"
 
-#: terp.glade:1828
+#: terp.glade:1836
 #, fuzzy
 msgid "Find a resource"
 msgstr "Zgjedhe resursin !"
 
-#: terp.glade:1844
+#: terp.glade:1852
 msgid "Go to previous matched search"
 msgstr "Shko te kerkesat e gjetura paraprakisht"
 
-#: terp.glade:1860
+#: terp.glade:1868
 msgid "Go to next matched resource"
 msgstr "Shko te resursi i ardheshem qe pershtatet"
 
-#: terp.glade:1876
+#: terp.glade:1884
 msgid "Switch current view: form / list"
 msgstr ""
 
-#: terp.glade:1877
+#: terp.glade:1885
 msgid "Other View"
 msgstr ""
 
-#: terp.glade:1907
+#: terp.glade:1903 terp.glade:1904
+#, fuzzy
+msgid "Menu"
+msgstr "Menuja"
+
+#: terp.glade:1934
 msgid "Launch actions about this resource"
 msgstr "Lanso akcionet e ketyre resurseve"
 
-#: terp.glade:1908
+#: terp.glade:1935
 msgid "Action"
 msgstr "Akcioni"
 
-#: terp.glade:1925
+#: terp.glade:1952
 msgid "Print documents"
 msgstr "Shtypi dokumentet"
 
-#: terp.glade:1954
+#: terp.glade:1981
 #, fuzzy
 msgid "Add an attachment to this resource"
 msgstr "Lanso akcionet e ketyre resurseve"
 
-#: terp.glade:1955
+#: terp.glade:1982
 #, fuzzy
 msgid "Attachment"
 msgstr "Bashkangjitja"
 
-#: terp.glade:1985
+#: terp.glade:2012
 msgid "Close this window"
 msgstr "Mbylle kete dritare"
 
-#: terp.glade:2046
+#: terp.glade:2069
 msgid "Requests:"
 msgstr "Kerkesat:"
 
-#: terp.glade:2085
+#: terp.glade:2108
 msgid "Read my Requests"
 msgstr "Lexoj kerkesat e mia"
 
-#: terp.glade:2113
+#: terp.glade:2136
 msgid "Send a new request"
 msgstr "Dergo kerkesen e re"
 
-#: terp.glade:2168
+#: terp.glade:2195
 msgid "Tiny ERP - Tree Resources"
 msgstr "Tiny ERP - Pema e Resurseve"
 
-#: terp.glade:2303
+#: terp.glade:2330
 msgid "Shortcuts"
 msgstr "RrugeShkurtesa"
 
-#: terp.glade:2407
+#: terp.glade:2434
 msgid "Tiny ERP - Forms"
 msgstr "Tiny ERP - Formularet"
 
-#: terp.glade:2455
+#: terp.glade:2482
 #, fuzzy
 msgid "State:"
 msgstr "Gjendja:"
 
-#: terp.glade:2505
+#: terp.glade:2531
 msgid "Tiny ERP - About"
 msgstr "Tiny ERP - Rreth"
 
-#: terp.glade:2562
+#: terp.glade:2588
 msgid ""
 "<b>About Tiny ERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
 
-#: terp.glade:2631
+#: terp.glade:2657
 msgid ""
 "\n"
 "Tiny ERP - GTK Client - v%s\n"
@@ -510,12 +505,12 @@ msgid ""
 "More Info on www.TinyERP.com !"
 msgstr ""
 
-#: terp.glade:2678
+#: terp.glade:2704
 #, fuzzy
 msgid "_Tiny ERP"
 msgstr "Tiny ERP"
 
-#: terp.glade:2730
+#: terp.glade:2756
 msgid ""
 "\n"
 "(c) 2003-TODAY - Tiny sprl\n"
@@ -531,233 +526,217 @@ msgid ""
 "Web: http://tiny.be"
 msgstr ""
 
-#: terp.glade:2777
+#: terp.glade:2803
 #, fuzzy
 msgid "_Contact"
 msgstr "Kontakti"
 
-#: terp.glade:2823
+#: terp.glade:2849
 msgid "Tiny ERP - forms widget"
 msgstr "Tiny ERP - elementet e formularit"
 
-#: terp.glade:2890
+#: terp.glade:2916
 msgid "Open the calendar widget"
 msgstr "Hape kalendarin"
 
-#: terp.glade:3013
+#: terp.glade:3039
 #, fuzzy
 msgid "Search / Open a resource"
 msgstr "Kerko resurset"
 
-#: terp.glade:3123
+#: terp.glade:3149
 msgid "Titre"
 msgstr "Titujt"
 
-#: terp.glade:3144
+#: terp.glade:3170
 msgid "Set to default value"
 msgstr "Vendose vleren standarde"
 
-#: terp.glade:3153
+#: terp.glade:3179
 #, fuzzy
 msgid "Set Default"
 msgstr "Vendosi _Definuarat"
 
-#: terp.glade:3173 terp.glade:3459
+#: terp.glade:3199 terp.glade:3485
 msgid "Create a new entry"
 msgstr "Krijo te dhenat e reja"
 
-#: terp.glade:3200
+#: terp.glade:3226
 #, fuzzy
 msgid "Edit this entry"
 msgstr "Largo kete shenim"
 
-#: terp.glade:3227
+#: terp.glade:3253
 msgid "Remove this entry"
 msgstr "Largo kete shenim"
 
-#: terp.glade:3265
+#: terp.glade:3291
 msgid "Previous"
 msgstr "Paraprak"
 
-#: terp.glade:3292
-msgid "(0/0)"
-msgstr ""
-
-#: terp.glade:3317
+#: terp.glade:3343
 msgid "Next"
 msgstr "Tjetri"
 
-#: terp.glade:3477
+#: terp.glade:3503
 msgid "Remove selected entry"
 msgstr "Largo shenimin e zgjedhur"
 
-#: terp.glade:3542
-msgid "label74"
-msgstr "label74"
-
-#: terp.glade:3722 terp.glade:6440 terp.glade:6545 terp.glade:6749
-msgid "-"
-msgstr "-"
-
-#: terp.glade:4177
-#, fuzzy
-msgid "label46559"
-msgstr "label74"
-
-#: terp.glade:4302
+#: terp.glade:4281
 msgid "Tiny ERP - Date selection"
 msgstr "Tiny ERP - Zgjedhja e dates"
 
-#: terp.glade:4385 terp.glade:11300
+#: terp.glade:4363 terp.glade:11384
 msgid "Tiny ERP - Confirmation"
 msgstr "Tiny ERP - Konfirmimi"
 
-#: terp.glade:4473 terp.glade:11401 terp.glade:13781
+#: terp.glade:4451 terp.glade:11485 terp.glade:13977
 msgid "Hello World!"
 msgstr "Tungit o njerzi!"
 
-#: terp.glade:4507
-msgid "Tiny ERP - selection"
+#: terp.glade:4484
+#, fuzzy
+msgid "Tiny ERP - Selection"
 msgstr "Tiny ERP - zgjedhja"
 
-#: terp.glade:4580
+#: terp.glade:4557
 msgid "Your selection:"
 msgstr "Zgjedhjet e juaja:"
 
-#: terp.glade:4655
+#: terp.glade:4632
 msgid "Tiny ERP - Filter"
 msgstr "Tiny ERP - Filtrat"
 
-#: terp.glade:4727
+#: terp.glade:4704
 #, fuzzy
 msgid "S_earch:"
 msgstr "Kerko:"
 
-#: terp.glade:4773
+#: terp.glade:4750
 #, fuzzy
 msgid "on _field:"
 msgstr "ne fushen:"
 
-#: terp.glade:4798
+#: terp.glade:4775
 msgid "test"
 msgstr ""
 
-#: terp.glade:4813
+#: terp.glade:4790
 #, fuzzy
 msgid "_Select"
 msgstr "Zgjidhe"
 
-#: terp.glade:4830
+#: terp.glade:4807
 #, fuzzy
 msgid "_Unselect"
 msgstr "Mos e Zgjidh"
 
-#: terp.glade:4857
+#: terp.glade:4834
 #, fuzzy
-msgid "Filter: "
+msgid "Filter:"
 msgstr "Filtri:"
 
-#: terp.glade:4883
+#: terp.glade:4860
 #, fuzzy
 msgid "AL_L"
 msgstr "KREJTE"
 
-#: terp.glade:4900
+#: terp.glade:4877
 #, fuzzy
 msgid "N_ONE"
 msgstr "ASNJE"
 
-#: terp.glade:4972
+#: terp.glade:4949
 msgid "<b><u>Actions</u></b>"
 msgstr "<b><u>Akcionet</u></b>"
 
-#: terp.glade:5012
+#: terp.glade:4989
 msgid "Tiny ERP - Dialog"
 msgstr "Tiny ERP - Dialogu"
 
-#: terp.glade:5058
+#: terp.glade:5035
 msgid "Set to _Default"
 msgstr "Vendosi _Definuarat"
 
-#: terp.glade:5085
+#: terp.glade:5062
 msgid "Value _Preference"
 msgstr "_Preference Vlera"
 
-#: terp.glade:5108
+#: terp.glade:5085
 msgid "Tiny ERP, Field Preference target"
 msgstr "Tiny ERP, Shenjestra e fushes se preferuar"
 
-#: terp.glade:5181
+#: terp.glade:5158
 #, fuzzy
 msgid "Default _value:"
 msgstr "Vlera Definuar:"
 
-#: terp.glade:5276
+#: terp.glade:5253
 #, fuzzy
 msgid "_Domain:"
 msgstr "Domeni:"
 
-#: terp.glade:5305
+#: terp.glade:5282
 #, fuzzy
 msgid "Field _Name:"
 msgstr "Emri Fushes:"
 
-#: terp.glade:5367
+#: terp.glade:5344
 msgid "<b>Value applicable if:</b>"
 msgstr "<b>Vlera Aplikueshme nese:</b>"
 
-#: terp.glade:5426
+#: terp.glade:5403
 #, fuzzy
 msgid "_only for you"
 msgstr "Vetem per ju"
 
-#: terp.glade:5445
+#: terp.glade:5422
 #, fuzzy
 msgid "for _all users"
 msgstr "per te gjithe perdoruesit"
 
-#: terp.glade:5468
+#: terp.glade:5445
 msgid "<b>Value applicable for:</b>"
 msgstr "<b>Vlera aplikueshme per:</b>"
 
-#: terp.glade:5512
+#: terp.glade:5488
 msgid "Tiny ERP - Export to CSV"
 msgstr "Tiny ERP - Eksporto ne CSV"
 
-#: terp.glade:5627
+#: terp.glade:5603
 #, fuzzy
 msgid "<b>Predefined exports</b>"
 msgstr "<b>Fushat per eksportim</b>"
 
-#: terp.glade:5706 terp.glade:12888
+#: terp.glade:5682 terp.glade:13085
 msgid "<b>All fields</b>"
 msgstr "<b>Krejt fushat</b>"
 
-#: terp.glade:5786 terp.glade:12968
+#: terp.glade:5762 terp.glade:13165
 #, fuzzy
 msgid "_Add"
 msgstr "Shto"
 
-#: terp.glade:5865 terp.glade:13047
+#: terp.glade:5841 terp.glade:13244
 #, fuzzy
 msgid "_Remove"
 msgstr "Largo"
 
-#: terp.glade:5944
+#: terp.glade:5920
 #, fuzzy
 msgid "_Nothing"
 msgstr "Asgje"
 
-#: terp.glade:6034
+#: terp.glade:6010
 #, fuzzy
 msgid "Save List"
 msgstr "Ruaj opcionet"
 
-#: terp.glade:6120
+#: terp.glade:6096
 msgid "<b>Fields to export</b>"
 msgstr "<b>Fushat per eksportim</b>"
 
-#: terp.glade:6172
+#: terp.glade:6148
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
@@ -765,45 +744,49 @@ msgstr ""
 "Hape ne Excel\n"
 "Ruaje si CSV"
 
-#: terp.glade:6199
+#: terp.glade:6175
 #, fuzzy
 msgid "Add _field names"
 msgstr "Shto emrat e fushave:"
 
-#: terp.glade:6219
+#: terp.glade:6195
 #, fuzzy
 msgid "<b>Opti_ons</b>"
 msgstr "<b>Opcionet</b>"
 
-#: terp.glade:6260
+#: terp.glade:6235
 msgid "Tiny ERP - Search"
 msgstr "Tiny ERP - Kerko"
 
-#: terp.glade:6391
+#: terp.glade:6365
 msgid "Tiny ERP - Search Widgets"
 msgstr "Tiny ERP - Kerko elementi"
 
-#: terp.glade:6498
+#: terp.glade:6414 terp.glade:6519 terp.glade:6723
+msgid "-"
+msgstr "-"
+
+#: terp.glade:6472
 msgid "Date de début"
 msgstr "Date de début"
 
-#: terp.glade:6671
+#: terp.glade:6645
 msgid "Search with this name"
 msgstr "Kerko me kete emer"
 
-#: terp.glade:6698
+#: terp.glade:6672
 msgid "Clear the field"
 msgstr "Pastro fushen"
 
-#: terp.glade:6763
+#: terp.glade:6737
 msgid "Yes"
 msgstr "Po!"
 
-#: terp.glade:6783
+#: terp.glade:6757
 msgid "No"
 msgstr "Jo"
 
-#: terp.glade:6826
+#: terp.glade:6800
 msgid ""
 "\n"
 "Yes\n"
@@ -813,40 +796,42 @@ msgstr ""
 "Po!\n"
 "Jo"
 
-#: terp.glade:6852
+#: terp.glade:6825
 msgid "Tiny ERP - Attachment"
 msgstr "Tiny ERP - Bashkangjitja"
 
-#: terp.glade:6922
+#: terp.glade:6895
 msgid "Filename:"
 msgstr "Emri fajllit:"
 
-#: terp.glade:6994
+#: terp.glade:6967
 msgid "Description:"
 msgstr "Pershkrimi:"
 
-#: terp.glade:7098
+#: terp.glade:7071
 #, fuzzy
 msgid "Save text"
 msgstr "Ruaje"
 
-#: terp.glade:7354
+#: terp.glade:7326
 msgid "Tiny ERP - Error"
 msgstr "Tiny ERP - Gabimi"
 
-#: terp.glade:7413
-msgid "Application Error !"
+#: terp.glade:7385
+#, fuzzy
+msgid "Application Error!"
 msgstr "Gabim aplikacioni !"
 
-#: terp.glade:7488
-msgid "Error 404"
-msgstr "Gabim 404"
+#: terp.glade:7480
+#, fuzzy
+msgid "<b>Error 404</b>"
+msgstr "<b>Kodi gabimit:</b>"
 
-#: terp.glade:7513
+#: terp.glade:7505
 msgid "<b>Error code:</b>"
 msgstr "<b>Kodi gabimit:</b>"
 
-#: terp.glade:7538
+#: terp.glade:7532
 msgid ""
 "This Page does not exist !\n"
 "Please retry"
@@ -854,29 +839,28 @@ msgstr ""
 "Kjo faqe nuk ekziston!\n"
 "Ju lutem tentoni prape"
 
-#: terp.glade:7564
+#: terp.glade:7569
 msgid "<i>Click on the Support Request tab if you need more help !</i>"
 msgstr "<i>Kliko ne Tabin e kerkesave per ndihme nese ju nevojitet !</i>"
 
-#: terp.glade:7602
+#: terp.glade:7607
 #, fuzzy
 msgid "De_scription"
 msgstr "Pershkrimi"
 
-#: terp.glade:7652
-msgid ""
-"Error details\n"
-"dqsdsqdqsdsd"
+#: terp.glade:7657
+#, fuzzy
+msgid "Error details"
 msgstr ""
 "Detalet e gabuara\n"
 "dqsdsqdqsdsd"
 
-#: terp.glade:7669
+#: terp.glade:7673
 #, fuzzy
 msgid "_Details"
 msgstr "Detalet"
 
-#: terp.glade:7712
+#: terp.glade:7716
 msgid ""
 "<b>Complete this form to submit your bug and/or request a support.</b>\n"
 "<i>\n"
@@ -892,37 +876,41 @@ msgstr ""
 "Tiny ERP partner.\n"
 "</i>"
 
-#: terp.glade:7762
-msgid "<b>Your name: </b>"
+#: terp.glade:7766 terp.glade:10935
+#, fuzzy
+msgid "<b>Your name:</b>"
 msgstr "<b>Emri juaj: </b>"
 
-#: terp.glade:7790
-msgid "<b>Your Company: </b>"
+#: terp.glade:7794 terp.glade:10963
+#, fuzzy
+msgid "<b>Your Company:</b>"
 msgstr "<b>Kompania juaj: </b>"
 
-#: terp.glade:7818
-msgid "<b>Your Email: </b>"
+#: terp.glade:7822
+#, fuzzy
+msgid "<b>Your Email:</b>"
 msgstr "<b>Emaili juaj: </b>"
 
-#: terp.glade:7888
-msgid "Explain what you did: "
+#: terp.glade:7892
+#, fuzzy
+msgid "Explain what you did:"
 msgstr "Pershkruja se cfare ka ndodhe: "
 
-#: terp.glade:7916
+#: terp.glade:7920
 #, fuzzy
-msgid "Others Comments: "
+msgid "Others Comments:"
 msgstr "Verejtje Tjera: "
 
-#: terp.glade:8071
+#: terp.glade:8075
 msgid "Send Support Request"
 msgstr "Dergo Kerkesen Perkrahjes"
 
-#: terp.glade:8118
+#: terp.glade:8122
 #, fuzzy
-msgid "<b>support contract id  </b>"
+msgid "<b>support contract id</b>"
 msgstr "<b>Kerkesa Perkrahese</b>"
 
-#: terp.glade:8167 terp.glade:11159
+#: terp.glade:8171 terp.glade:11244
 msgid ""
 "Not Urgent\n"
 "Medium\n"
@@ -934,87 +922,89 @@ msgstr ""
 "Urgjent\n"
 "Shume urgjent"
 
-#: terp.glade:8188 terp.glade:11180
+#: terp.glade:8192 terp.glade:11265
 #, fuzzy
-msgid "Emergency: "
+msgid "Emergency:"
 msgstr "Urgjenca: "
 
-#: terp.glade:8216
-msgid "Phone Number: "
+#: terp.glade:8220
+#, fuzzy
+msgid "Phone Number:"
 msgstr "Numri Telefonit: "
 
-#: terp.glade:8304
+#: terp.glade:8308
 #, fuzzy
 msgid "<b>_Support Request</b>"
 msgstr "<b>Kerkesa Perkrahese</b>"
 
-#: terp.glade:8343
+#: terp.glade:8347
 msgid "Tiny ERP - Ressource Edit"
 msgstr "Tiny ERP - Resurs Azhuruesi"
 
-#: terp.glade:8414
+#: terp.glade:8418
 msgid "Tiny ERP - Link"
 msgstr "Tiny ERP - Linqet"
 
-#: terp.glade:8512
+#: terp.glade:8516
 msgid "Tiny ERP - List"
 msgstr "Tiny ERP - Lista"
 
-#: terp.glade:8582
+#: terp.glade:8585
 msgid "Tiny ERP - Preferences"
 msgstr "Tiny ERP - Preferenca"
 
-#: terp.glade:8651
+#: terp.glade:8654
 msgid "<b>Edit resource preferences</b>"
 msgstr "<b>Azhuro resurs preferencat</b>"
 
-#: terp.glade:8700
+#: terp.glade:8702
 msgid "Tip of the Day"
 msgstr "Tipet e dites"
 
-#: terp.glade:8774
+#: terp.glade:8776
 #, fuzzy
 msgid "Pre_vious Tip"
 msgstr "Tipi paraprak"
 
-#: terp.glade:8850
+#: terp.glade:8852
 #, fuzzy
 msgid "Ne_xt Tip"
 msgstr "Tipi ardheshem"
 
-#: terp.glade:8954
+#: terp.glade:8956
 #, fuzzy
-msgid "_Display a new tip next time ?"
+msgid "_Display a new tip next time?"
 msgstr "Trego tipin e ri tjeter here?"
 
-#: terp.glade:8995
-msgid "Tiny ERP - Licence"
+#: terp.glade:8996
+#, fuzzy
+msgid "Tiny ERP - License"
 msgstr "Tiny ERP - Licenca"
 
-#: terp.glade:9054
+#: terp.glade:9055
 msgid "Tiny ERP license"
 msgstr "Tiny ERP licensa"
 
-#: terp.glade:9228
+#: terp.glade:9229
 msgid "Tiny ERP - Date & Time selection"
 msgstr "Tiny ERP - Zgjedhja e Dates dhe Kohes"
 
-#: terp.glade:9306
+#: terp.glade:9307
 #, fuzzy
-msgid "Hour :"
+msgid "Hour:"
 msgstr "Ora :"
 
-#: terp.glade:9350
+#: terp.glade:9351
 #, fuzzy
-msgid "Minute :"
+msgid "Minute:"
 msgstr "Minuta :"
 
-#: terp.glade:9425
+#: terp.glade:9426
 #, fuzzy
-msgid "GO to ressource ID"
+msgid "Go to resource ID"
 msgstr "Shko deri te ID e resursit..."
 
-#: terp.glade:9499
+#: terp.glade:9500
 msgid "Search ID:"
 msgstr "Kerko ID:"
 
@@ -1062,53 +1052,52 @@ msgid "How did you hear about us:"
 msgstr ""
 
 #: terp.glade:10077
-msgid "Open Source: "
+msgid "Open Source:"
 msgstr ""
 
 #: terp.glade:10403
 #, fuzzy
-msgid "<b>Your company</b>"
+msgid "<b>Your company:</b>"
 msgstr "<b>Kompania juaj: </b>"
 
-#: terp.glade:10459
+#: terp.glade:10465
 msgid "We plan to use Tiny ERP"
 msgstr ""
 
-#: terp.glade:10478
+#: terp.glade:10484
 msgid "We plan to offer services on Tiny ERP"
 msgstr ""
 
-#: terp.glade:10518
-msgid ""
-"Write here any comment, note or suggestion you have concerning Tiny ERP. \n"
-"Tell us which ERP systems you used before, and what you plan to do with Tiny "
-"ERP..."
+#: terp.glade:10509
+msgid "Tell us why you try Tiny ERP and what are your current softwares:"
 msgstr ""
 
-#: terp.glade:10537
+#: terp.glade:10574
 #, fuzzy
-msgid "<b>Your interrest</b>"
+msgid "<b>Your interrest:</b>"
 msgstr "<b>Emri juaj: </b>"
 
-#: terp.glade:10596
+#: terp.glade:10632
+msgid "(Get Tiny ERP announces, docs and new releases by email)"
+msgstr ""
+
+#: terp.glade:10660
+#, fuzzy
+msgid "Company:"
+msgstr "Domeni:"
+
+#: terp.glade:10689
 msgid "E-Mail:"
 msgstr ""
 
-#: terp.glade:10645
-msgid ""
-"(Get Tiny ERP announces, documentation and new releases by email, maximum 6 "
-"mails a year.)"
-msgstr ""
-
-#: terp.glade:10677
+#: terp.glade:10763
 msgid "<b>Keep Informed</b>"
 msgstr ""
 
-#: terp.glade:10801
+#: terp.glade:10886
 #, fuzzy
 msgid ""
-"<b>Complete this form to submit your bug and/or make a request for support.</"
-"b>\n"
+"<b>Complete this form to submit your bug and/or send a support request.</b>\n"
 "<i>\n"
 "Your request will be sent to the Tiny ERP team and we will reply shortly.\n"
 "Note that we may not reply if you do not have a support contract with Tiny "
@@ -1121,990 +1110,499 @@ msgstr ""
 "Tiny ERP partner.\n"
 "</i>"
 
-#: terp.glade:10850
-#, fuzzy
-msgid "<b>Your name:</b>"
-msgstr "<b>Emri juaj: </b>"
-
-#: terp.glade:10878
-#, fuzzy
-msgid "<b>Your Company:</b>"
-msgstr "<b>Kompania juaj: </b>"
-
-#: terp.glade:10906
+#: terp.glade:10991
 #, fuzzy
 msgid "<b>Your email:</b>"
 msgstr "<b>Emaili juaj: </b>"
 
-#: terp.glade:10976
+#: terp.glade:11061
 #, fuzzy
 msgid "Explain your problem:"
 msgstr "Pershkruja se cfare ka ndodhe: "
 
-#: terp.glade:11004
+#: terp.glade:11089
 #, fuzzy
 msgid "Other comments:"
 msgstr "Verejtje Tjera: "
 
-#: terp.glade:11110
+#: terp.glade:11195
 #, fuzzy
 msgid "<b>Support contract id:</b>"
 msgstr "<b>Kerkesa Perkrahese</b>"
 
-#: terp.glade:11208
+#: terp.glade:11293
 #, fuzzy
 msgid "Phone number:"
 msgstr "Numri Telefonit: "
 
-#: terp.glade:11435
+#: terp.glade:11518
 #, fuzzy
 msgid "Keyboard shortcuts"
 msgstr "RrugeShkurtesa"
 
-#: terp.glade:11506
+#: terp.glade:11589
 msgid "<Ctrl> + O"
 msgstr ""
 
-#: terp.glade:11534
+#: terp.glade:11617
 #, fuzzy
 msgid "Connect"
 msgstr "Nderlidhja..."
 
-#: terp.glade:11562
+#: terp.glade:11645
 msgid "<Ctrl> + F"
 msgstr ""
 
-#: terp.glade:11590
+#: terp.glade:11673
 #, fuzzy
 msgid "Find / Search"
 msgstr "Fundi i kerkimit"
 
-#: terp.glade:11618
+#: terp.glade:11701
 msgid "<Ctrl> + D"
 msgstr ""
 
-#: terp.glade:11646
+#: terp.glade:11729
 msgid "Delete"
 msgstr "Fshije"
 
-#: terp.glade:11674
+#: terp.glade:11757
 msgid "<Ctrl> + N"
 msgstr ""
 
-#: terp.glade:11702
+#: terp.glade:11785
 msgid "New"
 msgstr "E Re"
 
-#: terp.glade:11730
+#: terp.glade:11813
 msgid "<Ctrl> + <PgUp>"
 msgstr ""
 
-#: terp.glade:11758
+#: terp.glade:11841
 #, fuzzy
 msgid "Previous tab"
 msgstr "Paraprak"
 
-#: terp.glade:11786
+#: terp.glade:11869
 msgid "<Ctrl> + <PgDn>"
 msgstr ""
 
-#: terp.glade:11842
+#: terp.glade:11925
 msgid "<Ctrl> + S"
 msgstr ""
 
-#: terp.glade:11870
+#: terp.glade:11953
 msgid "<Ctrl> + W"
 msgstr ""
 
-#: terp.glade:11898
+#: terp.glade:11981
 msgid "Save"
 msgstr "Ruaje"
 
-#: terp.glade:11954
+#: terp.glade:12037
 msgid "<PgUp>"
 msgstr ""
 
-#: terp.glade:11982
+#: terp.glade:12065
 msgid "<PgDn>"
 msgstr ""
 
-#: terp.glade:12010
+#: terp.glade:12093
 #, fuzzy
 msgid "Previous record"
 msgstr "Paraprak"
 
-#: terp.glade:12038
+#: terp.glade:12121
 #, fuzzy
 msgid "Next record"
 msgstr "Tjetri: Asnje shenim i zgjedhur!"
 
-#: terp.glade:12066
+#: terp.glade:12149
 msgid "<Ctrl> + L"
 msgstr ""
 
-#: terp.glade:12094
+#: terp.glade:12177
 msgid "Switch view mode"
 msgstr ""
 
-#: terp.glade:12122
-msgid "<b>Shortcuts for TinyERP</b>"
-msgstr ""
-
-#: terp.glade:12177
+#: terp.glade:12205
 msgid "<Ctrl> + <Enter>"
 msgstr ""
 
-#: terp.glade:12205
+#: terp.glade:12233
 #, fuzzy
 msgid "Save and Close window"
 msgstr "Mbylle Dritaren"
 
-#: terp.glade:12233
+#: terp.glade:12261
 msgid "<i>When editing a resource in a popup window</i>"
 msgstr ""
 
-#: terp.glade:12261
+#: terp.glade:12289
 msgid "<Ctrl> + <Esc>"
 msgstr ""
 
-#: terp.glade:12289
+#: terp.glade:12317
 msgid "Close window without saving"
 msgstr ""
 
-#: terp.glade:12323
+#: terp.glade:12345
+msgid "<b>Shortcuts for TinyERP</b>"
+msgstr ""
+
+#: terp.glade:12379
 #, fuzzy
 msgid "Main Shortcuts"
 msgstr "RrugeShkurtesa"
 
-#: terp.glade:12355
-#, fuzzy
-msgid "<b>Shortcuts in text entries</b>"
-msgstr "<b>Emri juaj: </b>"
-
-#: terp.glade:12383
-msgid "<CTRL> + X"
+#: terp.glade:12412
+msgid "<Ctrl> + X"
 msgstr ""
 
-#: terp.glade:12411
-msgid "<CTRL> + C"
+#: terp.glade:12440
+msgid "<Ctrl> + C"
 msgstr ""
 
-#: terp.glade:12439
-msgid "<CTRL> + V"
+#: terp.glade:12468
+msgid "<Ctrl> + V"
 msgstr ""
 
-#: terp.glade:12467
+#: terp.glade:12496
 #, fuzzy
 msgid "Cut selected text"
 msgstr "Largo shenimin e zgjedhur"
 
-#: terp.glade:12495
+#: terp.glade:12524
 #, fuzzy
 msgid "Copy selected text"
 msgstr "Largo shenimin e zgjedhur"
 
-#: terp.glade:12523
+#: terp.glade:12552
 #, fuzzy
 msgid "Paste selected text"
 msgstr "Largo shenimin e zgjedhur"
 
-#: terp.glade:12551
-msgid "<TAB>"
+#: terp.glade:12580
+msgid "<Tab>"
 msgstr ""
 
-#: terp.glade:12579
+#: terp.glade:12608
 msgid "Next editable widget"
 msgstr ""
 
-#: terp.glade:12607
-msgid "<SHIFT> + <TAB>"
+#: terp.glade:12636
+msgid "<Shist> + <Tab>"
 msgstr ""
 
-#: terp.glade:12635
+#: terp.glade:12664
 #, fuzzy
 msgid "Previous editable widget"
 msgstr "Paraprak"
 
-#: terp.glade:12663
-msgid "<ENTER>"
+#: terp.glade:12692
+msgid "<Enter>"
 msgstr ""
 
-#: terp.glade:12691
+#: terp.glade:12720
 #, fuzzy
 msgid "Auto-Complete text field"
 msgstr "Pastro fushen"
 
-#: terp.glade:12725
+#: terp.glade:12748
+msgid "F1"
+msgstr ""
+
+#: terp.glade:12776
+msgid "Add a new line/field"
+msgstr ""
+
+#: terp.glade:12804
+msgid "Open current field"
+msgstr ""
+
+#: terp.glade:12832
+#, fuzzy
+msgid "<b>Shortcuts in text entries</b>"
+msgstr "<b>Emri juaj: </b>"
+
+#: terp.glade:12860
+#, fuzzy
+msgid "<b>Shortcuts in relation fields</b>"
+msgstr "<b>Emri juaj: </b>"
+
+#: terp.glade:12889
+msgid "F2"
+msgstr ""
+
+#: terp.glade:12923
 #, fuzzy
 msgid "Edition Widgets"
 msgstr "Azhuro dokumentin:"
 
-#: terp.glade:12757
+#: terp.glade:12954
 #, fuzzy
 msgid "Import from CSV"
 msgstr "Importo CSV Fajllin"
 
-#: terp.glade:13126
+#: terp.glade:13323
 #, fuzzy
 msgid "N_othing"
 msgstr "Asgje"
 
-#: terp.glade:13216
+#: terp.glade:13413
 msgid "Auto-Detect"
 msgstr ""
 
-#: terp.glade:13302
+#: terp.glade:13499
 msgid "<b>Fields to import</b>"
 msgstr "<b>Fushat per import</b>"
 
-#: terp.glade:13370
+#: terp.glade:13567
 #, fuzzy
-msgid "File to Import: "
+msgid "File to Import:"
 msgstr "<b>Fushat per import</b>"
 
-#: terp.glade:13395
-msgid "Sélectionner un fichier"
-msgstr ""
+#: terp.glade:13592
+#, fuzzy
+msgid "Open..."
+msgstr "Hape"
 
-#: terp.glade:13436
+#: terp.glade:13633
 #, fuzzy
 msgid "Field Separater:"
 msgstr "Emri Fushes:"
 
-#: terp.glade:13464
+#: terp.glade:13661
 msgid "Encoding:"
 msgstr ""
 
-#: terp.glade:13496
-msgid ","
-msgstr ""
-
-#: terp.glade:13515
+#: terp.glade:13712
 msgid "Text Delimiter:"
 msgstr ""
 
-#: terp.glade:13547
-msgid "\""
-msgstr ""
-
-#: terp.glade:13566
+#: terp.glade:13763
 msgid "Lines to Skip:"
 msgstr ""
 
-#: terp.glade:13616
-msgid ""
-"UTF-8\n"
-"Latin1"
-msgstr ""
-
-#: terp.glade:13637
+#: terp.glade:13834
 msgid "CSV Parameters"
 msgstr ""
 
-#: terp.glade:13841
+#: terp.glade:13885
+msgid "Tiny ERP"
+msgstr "Tiny ERP"
+
+#: terp.glade:14036
 #, fuzzy
 msgid "Server"
 msgstr "Serveri:"
 
-#: terp.glade:13904
+#: terp.glade:14099
 msgid "<b>Connect to a Tiny ERP server</b>"
 msgstr ""
 
-#: terp.glade:13950
+#: terp.glade:14145
 msgid "Port:"
 msgstr "Porti:"
 
-#: terp.glade:14004
-msgid "8069"
-msgstr "8069"
-
-#: terp.glade:14022
+#: terp.glade:14217
 #, fuzzy
 msgid "Protocol connection:"
 msgstr "Zgjedheni akcionin tuaj"
 
-#: terp.glade:14105
+#: terp.glade:14299
 #, fuzzy
 msgid "Choose a database..."
 msgstr "Zgjedhe daten"
 
-#: terp.glade:14175
+#: terp.glade:14369
 #, fuzzy
 msgid "<b>Backup a database</b>"
 msgstr "Krijo resursin e ri"
 
-#: terp.glade:14225 terp.glade:14651 terp.glade:15217 terp.glade:15861
-#, fuzzy
-msgid "http://localhost:8069"
-msgstr "localhost"
-
-#: terp.glade:14431
-msgid "Database: "
-msgstr ""
-
-#: terp.glade:14503
+#: terp.glade:14696
 #, fuzzy
 msgid "Restore a database"
 msgstr "Zgjedhe daten"
 
-#: terp.glade:14572
+#: terp.glade:14766
 #, fuzzy
 msgid "<b>Restore a database</b>"
 msgstr "Krijo resursin e ri"
 
-#: terp.glade:14802 terp.glade:15424
-msgid "New database name: "
-msgstr ""
+#: terp.glade:14845 terp.glade:15410 terp.glade:16054
+#, fuzzy
+msgid "http://localhost:8069"
+msgstr "localhost"
 
-#: terp.glade:14852
+#: terp.glade:14996 terp.glade:15617
+#, fuzzy
+msgid "New database name:"
+msgstr "Zgjedhe daten"
+
+#: terp.glade:15046
 msgid "(must not contain any special char)"
 msgstr ""
 
-#: terp.glade:14909
+#: terp.glade:15103
 #, fuzzy
 msgid "Operation in progress"
 msgstr ""
 "Operacioni deshtoj !\n"
 "I/O Gabimi"
 
-#: terp.glade:14968
+#: terp.glade:15162
 #, fuzzy
 msgid "<b>Operation in progress</b>"
 msgstr ""
 "Operacioni deshtoj !\n"
 "I/O Gabimi"
 
-#: terp.glade:15004
+#: terp.glade:15198
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
 
-#: terp.glade:15068
+#: terp.glade:15261
 #, fuzzy
 msgid "Create a new database"
 msgstr "Krijo te dhenat e reja"
 
-#: terp.glade:15131
+#: terp.glade:15324
 #, fuzzy
 msgid "<b>Create a new database</b>"
 msgstr "Krijo resursin e ri"
 
-#: terp.glade:15184
+#: terp.glade:15377
 #, fuzzy
 msgid "Tiny ERP server:"
 msgstr "Tiny ERP"
 
-#: terp.glade:15213
+#: terp.glade:15406
 msgid ""
 "This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
-"installed on this computer. Click on change to change the address."
+"installed on this computer. Click on 'Change' to change the address."
 msgstr ""
 
-#: terp.glade:15317
+#: terp.glade:15510
 #, fuzzy
 msgid "Super admin password:"
 msgstr "Shifra:"
 
-#: terp.glade:15345
+#: terp.glade:15538
 #, fuzzy
 msgid "Default language:"
 msgstr "Vlera Definuar:"
 
-#: terp.glade:15373
-msgid "Load demonstration data: "
+#: terp.glade:15566
+msgid "Load demonstration data:"
 msgstr ""
 
-#: terp.glade:15401
+#: terp.glade:15594
 msgid ""
 "Check this box if you want demo data to be installed on your new database."
 msgstr ""
 
-#: terp.glade:15452
+#: terp.glade:15645
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
 
-#: terp.glade:15489
+#: terp.glade:15682
 msgid "(use 'admin', if you did not changed it)"
 msgstr ""
 
-#: terp.glade:15517
+#: terp.glade:15710
 msgid ""
 "This is the password of the user that have the rights to administer "
 "databases. This is not a Tiny ERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 
-#: terp.glade:15541
+#: terp.glade:15734
 #, fuzzy
 msgid "Hello World"
 msgstr "Tungit o njerzi!"
 
-#: terp.glade:15562
+#: terp.glade:15755
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
 
-#: terp.glade:15587
+#: terp.glade:15780
 msgid "(must not contain any special character)"
 msgstr ""
 
-#: terp.glade:15626
+#: terp.glade:15818
 #, fuzzy
 msgid "Change password"
 msgstr "Ndrro Rrenjen"
 
-#: terp.glade:15698
-msgid "<b>Change your DB administration password</b>"
-msgstr ""
+#: terp.glade:15891
+#, fuzzy
+msgid "<b>Change your super admin password</b>"
+msgstr "Shifra:"
 
-#: terp.glade:15744
+#: terp.glade:15937
 #, fuzzy
 msgid "New password confirmation:"
 msgstr "Shifra:"
 
-#: terp.glade:15772
+#: terp.glade:15965
 #, fuzzy
 msgid "New password:"
 msgstr "Shifra:"
 
-#: terp.glade:15800
+#: terp.glade:15993
 #, fuzzy
 msgid "Old password:"
 msgstr "Shifra:"
 
-#: terp.glade:16042
+#: terp.glade:16234
 #, fuzzy
 msgid "Tiny ERP Message"
 msgstr "Tiny ERP licensa"
 
-#: terp.glade:16098
-msgid "msg_title"
-msgstr ""
-
-#: terp.glade:16181
+#: terp.glade:16372
 msgid "Database creation"
 msgstr ""
 
-#: terp.glade:16401
-msgid "<b>Database created successfully !</b>"
+#: terp.glade:16592
+msgid "<b>Database created successfully!</b>"
 msgstr ""
 
-#: terp.glade:16459
+#: terp.glade:16650
 msgid ""
 "You can connect to the new database using one of the following account:\n"
 "\n"
 "    Administrator: admin / admin "
 msgstr ""
 
-#: terp.glade:16491
+#: terp.glade:16681
 msgid "Concurrency exception"
 msgstr ""
 
-#: terp.glade:16578
+#: terp.glade:16768
 msgid "Compare"
 msgstr ""
 
-#: terp.glade:16653
+#: terp.glade:16843
 msgid "Write anyway"
 msgstr ""
 
-#: terp.glade:16718
+#: terp.glade:16908
 msgid ""
 "<b>\n"
-"Write concurrency warning :\n"
+"Write concurrency warning:\n"
 "</b>\n"
 "This document has been modified while you were editing it.\n"
-"  Choose :\n"
+"  Choose:\n"
 "   - \"Cancel\" to cancel saving.\n"
 "   - \"Compare\" to see the modified version.\n"
-"   - \"write anyway\" save your current version.\n"
+"   - \"Write anyway\" to save your current version.\n"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Tiny ERP Client %s"
-#~ msgstr "Tiny ERP Client v2.1"
-
-#~ msgid "specify alternate config file"
-#~ msgstr "specifikoni fajllin alternative te konfigurimit"
-
-#~ msgid "enable basic debugging"
-#~ msgstr "lejoni kontrollen themelore"
-
-#~ msgid "specify channels to log"
-#~ msgstr "tregoni kanalet per qasje"
-
-#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-#~ msgstr ""
-#~ "tregoni nivelet e qasjeve per : INFO, DEBUG, WARNING, ERROR, CRITICAL"
-
-#, fuzzy
-#~ msgid "specify the user login"
-#~ msgstr "tregoni kanalet per qasje"
-
-#~ msgid "Unable to launch this file !"
-#~ msgstr "Nuk mund te lansohet fajlli!"
-
-#~ msgid "Unable to launch the application associated to this content !"
-#~ msgstr "S'mund te lansohet aplikacioni!"
-
-#, fuzzy
-#~ msgid "Support request sent !"
-#~ msgstr "Dergo Kerkesen Perkrahjes"
-
-#, fuzzy
-#~ msgid "Could not connect to server !"
-#~ msgstr ""
-#~ "Gabim Nderlidhje!\n"
-#~ "S'mundemi te nderlidhemi ne server!"
-
-#, fuzzy
-#~ msgid "%s request(s)"
-#~ msgstr " kerkesa(t)"
-
-#~ msgid "No request"
-#~ msgstr "S'ka resurse"
-
-#, fuzzy
-#~ msgid " - %s pending request(s)"
-#~ msgstr " kerkesa(t) e mvarur"
-
-#~ msgid ""
-#~ "Connection error !\n"
-#~ "Unable to connect to the server !"
-#~ msgstr ""
-#~ "Gabim Nderlidhje!\n"
-#~ "S'mundemi te nderlidhemi ne server!"
-
-#~ msgid ""
-#~ "Connection error !\n"
-#~ "Bad username or password !"
-#~ msgstr ""
-#~ "Gabim nderlidheje!\n"
-#~ "Emri i perdoruesit ose shifra gabim!"
-
-#~ msgid "Connection Error !"
-#~ msgstr "Gabim nderlidheje!"
-
-#~ msgid "Not logged !"
-#~ msgstr "S'jeni te qasur!"
-
-#, fuzzy
-#~ msgid "Validation Error."
-#~ msgstr "Gabim aplikacioni"
-
-#~ msgid " record(s) saved !"
-#~ msgstr " shenime(t) ruhen!"
-
-#~ msgid ""
-#~ "Operation failed !\n"
-#~ "I/O error"
-#~ msgstr ""
-#~ "Operacioni deshtoj !\n"
-#~ "I/O Gabimi"
-
-#~ msgid "Error Opening Excel !"
-#~ msgstr "Gabim Gjate Hapjes Se Excelit !"
-
-#~ msgid ""
-#~ "Function only available for MS Office !\n"
-#~ "Sorry, OOo users :("
-#~ msgstr ""
-#~ "Funksioni eshte ne perdorim vetem per Ms Office !\n"
-#~ "Kerkojm falje, OOo perdorueseve :("
-
-#~ msgid "Export Data"
-#~ msgstr "Еksportoj Shenimet"
-
-#~ msgid "Preferences"
-#~ msgstr "Preferencat"
-
-#~ msgid "Preference"
-#~ msgstr "Preferenca"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Description"
-#~ msgstr "Pershkrimi"
-
-#~ msgid "Tree"
-#~ msgstr "Pema"
-
-#~ msgid "Reload"
-#~ msgstr "Ri_Lexo"
-
-#~ msgid "No resource selected !"
-#~ msgstr "s'ka resurse te zgjedhura !"
-
-#, fuzzy
-#~ msgid "You have to select one resource!"
-#~ msgstr "Zgjedhe resursin !"
-
-#, fuzzy
-#~ msgid "Are you sure to remove this record ?"
-#~ msgstr ""
-#~ "A jeni te sigurt qe deshironi\n"
-#~ "T'a largoni kete shenim?"
-
-#, fuzzy
-#~ msgid "Are you sure to remove those records ?"
-#~ msgstr ""
-#~ "A jeni te sigurt qe deshironi\n"
-#~ "T'a largoni kete shenim?"
-
-#, fuzzy
-#~ msgid "Resources not removed !"
-#~ msgstr "Resursi i larguar."
-
-#, fuzzy
-#~ msgid "Resources removed."
-#~ msgstr "Resursi i larguar."
-
-#, fuzzy
-#~ msgid "Document saved !"
-#~ msgstr "Opcionet u ruajten!"
-
-#~ msgid "No record selected!"
-#~ msgstr "S'ka shenim te zgjedhur!"
-
-#, fuzzy
-#~ msgid "No record selected"
-#~ msgstr "S'ka shenim te zgjedhur!"
-
-#~ msgid "New document"
-#~ msgstr "Dokument i ri"
-
-#, fuzzy
-#~ msgid "Editing document (id: "
-#~ msgstr "Azhuro dokumentin:"
-
-#~ msgid "Record: "
-#~ msgstr "Shenimi:"
-
-#~ msgid "No preference available for this resource !"
-#~ msgstr "S'ka preference te zgjedhur per kete resurs !"
-
-#, fuzzy
-#~ msgid "Tiny ERP Search: %s"
-#~ msgstr "Tiny ERP - Kerko"
-
-#, fuzzy
-#~ msgid "Tiny ERP Search: %s (%%d result(s))"
-#~ msgstr "Tiny ERP - Kerko elementi"
-
-#~ msgid "Name"
-#~ msgstr "Emri"
-
-#~ msgid "Ressource Name"
-#~ msgstr "Emri i resursit"
-
-#~ msgid "Names"
-#~ msgstr "Emrat"
-
-#, fuzzy
-#~ msgid "Changt root"
-#~ msgstr "Ndrro Rrenjen"
-
-#~ msgid "Open"
-#~ msgstr "Hape"
-
-#~ msgid "Print"
-#~ msgstr "Shtyp"
-
-#~ msgid "Close"
-#~ msgstr "Mbylle"
-
-#~ msgid "No resource selected!"
-#~ msgstr "Nuk jane zgjedhur resurset!"
-
-#~ msgid ""
-#~ "Are you sure you want\n"
-#~ "to remove this record?"
-#~ msgstr ""
-#~ "A jeni te sigurt qe deshironi\n"
-#~ "T'a largoni kete shenim?"
-
-#~ msgid "Error removing resource!"
-#~ msgstr "Gabim largimit te resurseve!"
-
-#~ msgid "Unable to chroot: no tree resource selected"
-#~ msgstr "S'mundet te rrenjzohet: s'ka peme te resurseve te selektuara"
-
-#~ msgid "Field name"
-#~ msgstr "Emri Fushes"
-
-#~ msgid "Are you sure you want to remove this attachment ?"
-#~ msgstr "A deshironi t'a largoni kete bashkangjitje ?"
-
-#~ msgid "Select the destination file"
-#~ msgstr "Zgjedhe destinimin e fajllit"
-
-#~ msgid "Can not open file !"
-#~ msgstr "S'mund te hapet fajlli!"
-
-#~ msgid "Can not write file !"
-#~ msgstr "S'mund te shkruhet fajllit !"
-
-#~ msgid ""
-#~ "Unable to preview image file !\n"
-#~ "Verify the format."
-#~ msgstr ""
-#~ "S'mund te parashikohet imixhi i permbajtjes se fajllit !\n"
-#~ "Kontrolloni formatin e fajllit."
-
-#~ msgid "Unknown Window"
-#~ msgstr "Dritare e panjohur"
-
-#~ msgid "Printing aborted, too long delay !"
-#~ msgstr "Shtypja e nderprer, vonese e tepruar !"
-
-#~ msgid "Error: "
-#~ msgstr "Gabim:"
-
-#~ msgid "Select your action"
-#~ msgstr "Zgjedheni akcionin tuaj"
-
-#~ msgid "No action defined!"
-#~ msgstr "S'ka akcion te definuar!"
-
-#~ msgid "Connection refused !"
-#~ msgstr "Nderlidhja refuzuar !"
-
-#~ msgid "Connection refused!"
-#~ msgstr "Nderlidhja rrefuzuar !"
-
-#~ msgid "Application Error"
-#~ msgstr "Gabim aplikacioni"
-
-#~ msgid "View details"
-#~ msgstr "Veshtro detalet"
-
-#~ msgid "Select the file to attach"
-#~ msgstr "Selekto fajllin per te bashkangjitur"
-
-#~ msgid "Error reading the file"
-#~ msgstr "Gabim gjate leximit te fajllit"
-
-#~ msgid "Save attachment as..."
-#~ msgstr "Rauje attachmentin sikurse..."
-
-#~ msgid "Error writing the file!"
-#~ msgstr "Gabim gjate shkrimit ne fajlle!"
-
-#, fuzzy
-#~ msgid "Invalid Form, correct red fields !"
-#~ msgstr "Forma jo e rregullte, permisoni fushat ne te kuqe!"
-
-#~ msgid "This widget is readonly !"
-#~ msgstr "Ky widget eshte vetem per lexim !"
-
-#, fuzzy
-#~ msgid "Set as default"
-#~ msgstr "Vendosi _Definuarat"
-
-#, fuzzy
-#~ msgid "You have to select a resource !"
-#~ msgstr "Zgjedhe resursin !"
-
-#, fuzzy
-#~ msgid "Select a file"
-#~ msgstr "Zgjedhe daten"
-
-#, fuzzy
-#~ msgid "Save as ..."
-#~ msgstr "Rauje attachmentin sikurse..."
-
-#~ msgid "Always applicable !"
-#~ msgstr "Gjithmon e aplikueshme"
-
-#, fuzzy
-#~ msgid "Can not generate graph !"
-#~ msgstr "S'mund te shkruhet fajllit !"
-
-#~ msgid "No available plugin for this resource !"
-#~ msgstr "S'ka shtojce te mundeshme per kete resurse !"
-
-#~ msgid "Choose a Plugin"
-#~ msgstr "Zgjedhe Shtojcen"
-
-#, fuzzy
-#~ msgid "Limit :"
-#~ msgstr "Kufiri:"
-
-#, fuzzy
-#~ msgid "Offset :"
-#~ msgstr "Ofseti:"
-
-#, fuzzy
-#~ msgid "Error no report"
-#~ msgstr "Gabim largimit te resurseve!"
-
-#~ msgid "Write Report to File"
-#~ msgstr "Shkruaje Raportin ne Fajlle"
-
-#~ msgid "demo"
-#~ msgstr "demo"
-
-#~ msgid "dialog1"
-#~ msgstr "dialog1"
-
-#~ msgid "Welcome to Tiny Enterprise Resource Planing !"
-#~ msgstr "Mire se vini ne Resurset e Planifikimit te Managjementi Financiar !"
-
-#~ msgid "You are already logged!"
-#~ msgstr "Tashme jeni te qasur ne sistem!"
-
-#~ msgid "you are logged out. ^l to login"
-#~ msgstr "jeni jashte sistemit ^l qe te qaseni prap"
-
-#~ msgid ""
-#~ "^N New   ^S Save   ^D Delete   ^F Search   ^X Next   ^W Previous   ^R "
-#~ "Repeat"
-#~ msgstr ""
-#~ "^N ERe   ^S Ruaje   ^D Fshije   ^F Kerko   ^X Tjetri   ^W Paraprak.   ^R "
-#~ "Perserit"
-
-#~ msgid "^L to login"
-#~ msgstr "^L te qaseni ne sistem"
-
-#~ msgid "select field value:"
-#~ msgstr "Selektoj vleren e fushes:"
-
-#~ msgid "Search error!"
-#~ msgstr "Gabim kerkimi!"
-
-#~ msgid "Edit"
-#~ msgstr "Azhuro"
-
-#~ msgid "New root"
-#~ msgstr "Rrenja Re"
-
-#~ msgid ""
-#~ "Import Error !\n"
-#~ "Fields: \"%s\" does not exists !"
-#~ msgstr ""
-#~ "Gabim Importi !\n"
-#~ "Fushat: \"%s\" nuk ekzistojne !"
-
-#~ msgid "Import Done"
-#~ msgstr "Іmporti Kryer"
-
-#~ msgid "View Create Error:"
-#~ msgstr "Veshtro Gabimin e Krijuar"
-
-#~ msgid "Attachement: "
-#~ msgstr "Bashkangjite:"
-
-#~ msgid "Value preference"
-#~ msgstr "Preferenca vleres"
-
-#~ msgid "Unable to read resource"
-#~ msgstr "S'mund te lexoj resurset"
-
-#~ msgid "This record did not exist !"
-#~ msgstr "Ky shenim nuk ekziston !"
-
-#~ msgid "unknown tag: "
-#~ msgstr "tag i panjohur:"
-
-#~ msgid "New Window"
-#~ msgstr "Dritare E Re"
-
-#~ msgid "Search"
-#~ msgstr "Kerko"
-
-#~ msgid "Filter"
-#~ msgstr "Filtri"
-
-#~ msgid "Plugin Manager"
-#~ msgstr "Managjeri i shtojcave"
-
-#~ msgid "Nouveau"
-#~ msgstr "E Re"
-
-#~ msgid "Supprimer"
-#~ msgstr "Anulimet"
-
-#~ msgid "Recherche"
-#~ msgstr "Kerko"
-
-#~ msgid "Précédent"
-#~ msgstr "Попередній"
-
-#~ msgid "Suivant"
-#~ msgstr "Paraqitet"
-
-#~ msgid "Autre Vue"
-#~ msgstr "Forma/Raporti"
-
-#~ msgid "Imprimer"
-#~ msgstr "Shtypja"
-
-#~ msgid "Fermer"
-#~ msgstr "Fshihe"
-
-#~ msgid "About Tiny ERP"
-#~ msgstr "Rreth Tiny ERP"
-
-#~ msgid "Credits"
-#~ msgstr "Kreditet"
-
-#~ msgid "Modify/Open this resource"
-#~ msgstr "Rregullo/Hape kete resurs"
-
-#~ msgid ""
-#~ "test\n"
-#~ "test2\n"
-#~ "test3"
-#~ msgstr ""
-#~ "test\n"
-#~ "test2\n"
-#~ "test3"
-
-#~ msgid "All"
-#~ msgstr "Krejte"
-
-#~ msgid "Preferred Langage: "
-#~ msgstr "Gjuha Preferuar: "
-
-#~ msgid ""
-#~ "English\n"
-#~ "French"
-#~ msgstr ""
-#~ "Angleze\n"
-#~ "Frengjishte"
-
-#~ msgid "All Tiny ERP users"
-#~ msgstr "Te gjithe Tiny ERP perdoruesit"
-
-#~ msgid "Only for you"
-#~ msgstr "Vetem per ju"
-
-#~ msgid "<b>Preference active for:</b>"
-#~ msgstr "<b>Preferencat aktive per:</b>"
-
-#~ msgid "Tiny ERP - Import a CSV"
-#~ msgstr "Tiny ERP - Importo CSV"
-
-#~ msgid "The CSV file must be encoded in UTF-8 !"
-#~ msgstr "Fajlli CSV duhet te jete i enkoduar ne UTF-8 formatin !"
-
-#~ msgid "Be carefull with the fields order."
-#~ msgstr "Kujdes me rrendin e fushave"
-
-#~ msgid "<b>Notes</b>"
-#~ msgstr "<b>Shenime</b>"
-
-#~ msgid "Number: "
-#~ msgstr "Numer:"
-
-#~ msgid "Description : "
-#~ msgstr "Pershkrimi:"
-
-#~ msgid "Next: left click - Previous : right click on the image"
-#~ msgstr "Tjetri: kliku majte - Paraprakisht : kliki djathet ne foto"

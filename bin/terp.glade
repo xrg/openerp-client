@@ -183,7 +183,7 @@
 		  <property name="editable">False</property>
 		  <property name="visibility">True</property>
 		  <property name="max_length">0</property>
-		  <property name="text" translatable="yes">localhost</property>
+		  <property name="text" translatable="no">localhost</property>
 		  <property name="has_frame">True</property>
 		  <property name="invisible_char">*</property>
 		  <property name="activates_default">True</property>
@@ -262,7 +262,7 @@
 		  <property name="editable">True</property>
 		  <property name="visibility">True</property>
 		  <property name="max_length">0</property>
-		  <property name="text" translatable="yes">admin</property>
+		  <property name="text" translatable="no">admin</property>
 		  <property name="has_frame">True</property>
 		  <property name="invisible_char">*</property>
 		  <property name="activates_default">True</property>
@@ -374,7 +374,7 @@
   <property name="width_request">600</property>
   <property name="height_request">400</property>
   <property name="visible">True</property>
-  <property name="title" translatable="yes">Tiny ERP</property>
+  <property name="title" translatable="no">Tiny ERP</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
@@ -1326,7 +1326,7 @@
 			      <child>
 				<widget class="GtkMenuItem" id="aqua_os_x">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">Aqua OS X</property>
+				  <property name="label" translatable="no">Aqua OS X</property>
 				  <property name="use_underline">True</property>
 				  <signal name="activate" handler="on_aqua_os_x_activate" last_modification_time="Fri, 14 Jul 2006 15:15:40 GMT"/>
 				</widget>
@@ -1696,7 +1696,7 @@
 		      <child>
 			<widget class="GtkImageMenuItem" id="help_licence">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">_Licence</property>
+			  <property name="label" translatable="yes">_License</property>
 			  <property name="use_underline">True</property>
 			  <signal name="activate" handler="on_help_licence_activate" last_modification_time="Tue, 15 Mar 2005 10:23:02 GMT"/>
 
@@ -3315,7 +3315,7 @@ Web: http://tiny.be</property>
 		      <child>
 			<widget class="GtkLabel" id="one2many_label">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">(0/0)</property>
+			  <property name="label" translatable="no">(0/0)</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -3565,7 +3565,7 @@ Web: http://tiny.be</property>
 		  <child>
 		    <widget class="GtkLabel" id="widget_sep_lab">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">label74</property>
+		      <property name="label" translatable="no">label74</property>
 		      <property name="use_underline">False</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -3745,7 +3745,7 @@ Web: http://tiny.be</property>
 		  <child>
 		    <widget class="GtkLabel" id="label155">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">-</property>
+		      <property name="label" translatable="no">-</property>
 		      <property name="use_underline">False</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -4153,7 +4153,7 @@ Web: http://tiny.be</property>
 			      <child>
 				<widget class="GtkLabel" id="widget_paned_lab">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">label46559</property>
+				  <property name="label" translatable="no">label46559</property>
 				  <property name="use_underline">False</property>
 				  <property name="use_markup">False</property>
 				  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -4481,7 +4481,7 @@ Web: http://tiny.be</property>
 </widget>
 
 <widget class="GtkDialog" id="win_selection">
-  <property name="title" translatable="yes">Tiny ERP - selection</property>
+  <property name="title" translatable="yes">Tiny ERP - Selection</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
@@ -4831,7 +4831,7 @@ Web: http://tiny.be</property>
 	  <child>
 	    <widget class="GtkLabel" id="label61">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Filter: </property>
+	      <property name="label" translatable="yes">Filter:</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -7382,7 +7382,7 @@ No</property>
 	  <child>
 	    <widget class="GtkLabel" id="label101">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Application Error !</property>
+	      <property name="label" translatable="yes">Application Error!</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -7763,7 +7763,7 @@ Note that we may not reply you if your Service Company is not a Tiny ERP partner
 			      <child>
 				<widget class="GtkLabel" id="label120">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">&lt;b&gt;Your name: &lt;/b&gt;</property>
+				  <property name="label" translatable="yes">&lt;b&gt;Your name:&lt;/b&gt;</property>
 				  <property name="use_underline">False</property>
 				  <property name="use_markup">True</property>
 				  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -7791,7 +7791,7 @@ Note that we may not reply you if your Service Company is not a Tiny ERP partner
 			      <child>
 				<widget class="GtkLabel" id="label121">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">&lt;b&gt;Your Company: &lt;/b&gt;</property>
+				  <property name="label" translatable="yes">&lt;b&gt;Your Company:&lt;/b&gt;</property>
 				  <property name="use_underline">False</property>
 				  <property name="use_markup">True</property>
 				  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -7819,7 +7819,7 @@ Note that we may not reply you if your Service Company is not a Tiny ERP partner
 			      <child>
 				<widget class="GtkLabel" id="label128">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">&lt;b&gt;Your Email: &lt;/b&gt;</property>
+				  <property name="label" translatable="yes">&lt;b&gt;Your Email:&lt;/b&gt;</property>
 				  <property name="use_underline">False</property>
 				  <property name="use_markup">True</property>
 				  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -7889,7 +7889,7 @@ Note that we may not reply you if your Service Company is not a Tiny ERP partner
 			      <child>
 				<widget class="GtkLabel" id="label125">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">Explain what you did: </property>
+				  <property name="label" translatable="yes">Explain what you did:</property>
 				  <property name="use_underline">False</property>
 				  <property name="use_markup">False</property>
 				  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -7917,7 +7917,7 @@ Note that we may not reply you if your Service Company is not a Tiny ERP partner
 			      <child>
 				<widget class="GtkLabel" id="label130">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">Others Comments: </property>
+				  <property name="label" translatable="yes">Others Comments:</property>
 				  <property name="use_underline">False</property>
 				  <property name="use_markup">False</property>
 				  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -8119,7 +8119,7 @@ Note that we may not reply you if your Service Company is not a Tiny ERP partner
 			      <child>
 				<widget class="GtkLabel" id="label161">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">&lt;b&gt;support contract id  &lt;/b&gt;</property>
+				  <property name="label" translatable="yes">&lt;b&gt;support contract id&lt;/b&gt;</property>
 				  <property name="use_underline">False</property>
 				  <property name="use_markup">True</property>
 				  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -8189,7 +8189,7 @@ Very Urgent</property>
 			      <child>
 				<widget class="GtkLabel" id="label131">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">Emergency: </property>
+				  <property name="label" translatable="yes">Emergency:</property>
 				  <property name="use_underline">False</property>
 				  <property name="use_markup">False</property>
 				  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -8217,7 +8217,7 @@ Very Urgent</property>
 			      <child>
 				<widget class="GtkLabel" id="label129">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="yes">Phone Number: </property>
+				  <property name="label" translatable="yes">Phone Number:</property>
 				  <property name="use_underline">False</property>
 				  <property name="use_markup">False</property>
 				  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -8953,7 +8953,7 @@ Very Urgent</property>
 	      <property name="border_width">5</property>
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">_Display a new tip next time ?</property>
+	      <property name="label" translatable="yes">_Display a new tip next time?</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">False</property>
@@ -8993,7 +8993,7 @@ Very Urgent</property>
 <widget class="GtkDialog" id="win_licence">
   <property name="width_request">484</property>
   <property name="height_request">358</property>
-  <property name="title" translatable="yes">Tiny ERP - Licence</property>
+  <property name="title" translatable="yes">Tiny ERP - License</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">False</property>
@@ -9304,7 +9304,7 @@ Each version is given a distinguishing version number.  If the Program specifies
 	      <child>
 		<widget class="GtkLabel" id="label153">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Hour :</property>
+		  <property name="label" translatable="yes">Hour:</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">False</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -9348,7 +9348,7 @@ Each version is given a distinguishing version number.  If the Program specifies
 	      <child>
 		<widget class="GtkLabel" id="label154">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Minute :</property>
+		  <property name="label" translatable="yes">Minute:</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">False</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -9423,7 +9423,7 @@ Each version is given a distinguishing version number.  If the Program specifies
   <property name="width_request">230</property>
   <property name="height_request">122</property>
   <property name="visible">True</property>
-  <property name="title" translatable="yes">GO to resource ID</property>
+  <property name="title" translatable="yes">Go to resource ID</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
@@ -10074,7 +10074,7 @@ Other</property>
 		      <child>
 			<widget class="GtkLabel" id="label178">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">Open Source: </property>
+			  <property name="label" translatable="yes">Open Source:</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -10400,7 +10400,7 @@ ZIMBABWE</property>
 	      <child>
 		<widget class="GtkLabel" id="label165">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">&lt;b&gt;Your company&lt;/b&gt;</property>
+		  <property name="label" translatable="yes">&lt;b&gt;Your company:&lt;/b&gt;</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">True</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -10571,7 +10571,7 @@ ZIMBABWE</property>
 	      <child>
 		<widget class="GtkLabel" id="label172">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">&lt;b&gt;Your interrest&lt;/b&gt;</property>
+		  <property name="label" translatable="yes">&lt;b&gt;Your interrest:&lt;/b&gt;</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">True</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -11262,7 +11262,7 @@ Very Urgent</property>
 		      <child>
 			<widget class="GtkLabel" id="label193">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">Emergency: </property>
+			  <property name="label" translatable="yes">Emergency:</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -13564,7 +13564,7 @@ Very Urgent</property>
 			  <child>
 			    <widget class="GtkLabel" id="label46547">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">File to Import: </property>
+			      <property name="label" translatable="yes">File to Import:</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -13690,7 +13690,7 @@ Very Urgent</property>
 				  <property name="editable">True</property>
 				  <property name="visibility">True</property>
 				  <property name="max_length">1</property>
-				  <property name="text" translatable="yes">,</property>
+				  <property name="text" translatable="no">,</property>
 				  <property name="has_frame">True</property>
 				  <property name="invisible_char">*</property>
 				  <property name="activates_default">False</property>
@@ -13741,7 +13741,7 @@ Very Urgent</property>
 				  <property name="editable">True</property>
 				  <property name="visibility">True</property>
 				  <property name="max_length">0</property>
-				  <property name="text" translatable="yes">&quot;</property>
+				  <property name="text" translatable="no">&quot;</property>
 				  <property name="has_frame">True</property>
 				  <property name="invisible_char">*</property>
 				  <property name="activates_default">False</property>
@@ -13810,7 +13810,7 @@ Very Urgent</property>
 			      <child>
 				<widget class="GtkComboBoxEntry" id="import_csv_combo">
 				  <property name="visible">True</property>
-				  <property name="items" translatable="yes">UTF-8
+				  <property name="items" translatable="no">UTF-8
 Latin1</property>
 				  <property name="add_tearoffs">False</property>
 				  <property name="has_frame">True</property>
@@ -14174,7 +14174,7 @@ Latin1</property>
 	      <property name="editable">True</property>
 	      <property name="visibility">True</property>
 	      <property name="max_length">0</property>
-	      <property name="text" translatable="yes">localhost</property>
+	      <property name="text" translatable="no">localhost</property>
 	      <property name="has_frame">True</property>
 	      <property name="invisible_char">*</property>
 	      <property name="activates_default">True</property>
@@ -14196,7 +14196,7 @@ Latin1</property>
 	      <property name="editable">True</property>
 	      <property name="visibility">True</property>
 	      <property name="max_length">5</property>
-	      <property name="text" translatable="yes">8069</property>
+	      <property name="text" translatable="no">8069</property>
 	      <property name="has_frame">True</property>
 	      <property name="invisible_char">*</property>
 	      <property name="activates_default">True</property>
@@ -14416,7 +14416,7 @@ Latin1</property>
 		  <property name="editable">False</property>
 		  <property name="visibility">True</property>
 		  <property name="max_length">0</property>
-		  <property name="text" translatable="yes">http://localhost:8069</property>
+		  <property name="text" translatable="no">http://localhost:8069</property>
 		  <property name="has_frame">True</property>
 		  <property name="invisible_char">*</property>
 		  <property name="activates_default">True</property>
@@ -14622,7 +14622,7 @@ Latin1</property>
 	      <child>
 		<widget class="GtkLabel" id="label282">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Database: </property>
+		  <property name="label" translatable="yes">Database:</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">False</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -14993,7 +14993,7 @@ Latin1</property>
 	      <child>
 		<widget class="GtkLabel" id="label278">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">New database name: </property>
+		  <property name="label" translatable="yes">New database name:</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">False</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -15403,7 +15403,7 @@ this operation may take a while...</property>
 		<widget class="GtkEntry" id="ent_server_new">
 		  <property name="visible">True</property>
 		  <property name="sensitive">False</property>
-		  <property name="tooltip" translatable="yes">This is the URL of the Tiny ERP server. Use 'localhost' if the server is installed on this computer. Click on change to change the address.</property>
+		  <property name="tooltip" translatable="yes">This is the URL of the Tiny ERP server. Use 'localhost' if the server is installed on this computer. Click on 'Change' to change the address.</property>
 		  <property name="editable">False</property>
 		  <property name="visibility">True</property>
 		  <property name="max_length">0</property>
@@ -15563,7 +15563,7 @@ this operation may take a while...</property>
 	      <child>
 		<widget class="GtkLabel" id="label275">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Load demonstration data: </property>
+		  <property name="label" translatable="yes">Load demonstration data:</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">False</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -15614,7 +15614,7 @@ this operation may take a while...</property>
 	      <child>
 		<widget class="GtkLabel" id="label274">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">New database name: </property>
+		  <property name="label" translatable="yes">New database name:</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">False</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -15888,7 +15888,7 @@ this operation may take a while...</property>
 	  <child>
 	    <widget class="GtkLabel" id="label294">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">&lt;b&gt;Change your DB administration password&lt;/b&gt;</property>
+	      <property name="label" translatable="yes">&lt;b&gt;Change your super admin password&lt;/b&gt;</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">True</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -16287,7 +16287,7 @@ this operation may take a while...</property>
 	  <child>
 	    <widget class="GtkLabel" id="msg_title">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">msg_title</property>
+	      <property name="label" translatable="no">msg_title</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -16589,7 +16589,7 @@ this operation may take a while...</property>
 	      <child>
 		<widget class="GtkLabel" id="label46553">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">&lt;b&gt;Database created successfully !&lt;/b&gt;</property>
+		  <property name="label" translatable="yes">&lt;b&gt;Database created successfully!&lt;/b&gt;</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">True</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -16906,13 +16906,13 @@ this operation may take a while...</property>
 	      <property name="height_request">164</property>
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">&lt;b&gt;
-Write concurrency warning :
+Write concurrency warning:
 &lt;/b&gt;
 This document has been modified while you were editing it.
-  Choose :
+  Choose:
    - &quot;Cancel&quot; to cancel saving.
    - &quot;Compare&quot; to see the modified version.
-   - &quot;write anyway&quot; save your current version.
+   - &quot;Write anyway&quot; to save your current version.
 </property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">True</property>

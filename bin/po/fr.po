@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tiny ERP V4.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-13 17:21+0200\n"
+"POT-Creation-Date: 2007-09-10 09:31+0200\n"
 "PO-Revision-Date: 2006-11-06 00:15+0100\n"
 "Last-Translator: Cédric Krier <ced@tinyerp.com>\n"
 "Language-Team: FR <i18n-info@tinyerp.org>\n"
@@ -15,426 +15,433 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: terp.glade:10
+#: terp.glade:9
 msgid "Tiny ERP - Login"
 msgstr "Tiny ERP - Login"
 
-#: terp.glade:107
+#: terp.glade:106
 msgid "User:"
-msgstr "Utilisateur:"
+msgstr "Utilisateur :"
 
-#: terp.glade:135 terp.glade:14459 terp.glade:14774
+#: terp.glade:134 terp.glade:14653 terp.glade:14968
 msgid "Password:"
-msgstr "Mot de passe:"
+msgstr "Mot de passe :"
 
-#: terp.glade:164 terp.glade:14286 terp.glade:14712 terp.glade:15278
-#: terp.glade:15922
+#: terp.glade:163 terp.glade:14480 terp.glade:14906 terp.glade:15471
+#: terp.glade:16115
 msgid "Change"
 msgstr "Changer"
 
-#: terp.glade:187 terp.glade:13982
+#: terp.glade:186 terp.glade:14177
 msgid "localhost"
 msgstr "localhost"
 
-#: terp.glade:205
+#: terp.glade:204
 msgid "Database:"
-msgstr "Base de données:"
+msgstr "Base de données :"
 
-#: terp.glade:234 terp.glade:14051 terp.glade:14326 terp.glade:14619
-#: terp.glade:15829
+#: terp.glade:233 terp.glade:14246 terp.glade:14520 terp.glade:14813
+#: terp.glade:16022
 msgid "Server:"
-msgstr "Serveur:"
+msgstr "Serveur :"
 
-#: terp.glade:266
+#: terp.glade:265
 msgid "admin"
 msgstr "admin"
 
-#: terp.glade:378 terp.glade:13689
+#: terp.glade:377 terp.glade:13885
 msgid "Tiny ERP"
 msgstr "Tiny ERP"
 
-#: terp.glade:422
+#: terp.glade:421
 msgid "_File"
 msgstr "_Fichier"
 
-#: terp.glade:431
+#: terp.glade:430
 msgid "_Connect..."
 msgstr "_Connecter..."
 
-#: terp.glade:453
+#: terp.glade:452
 msgid "_Disconnect"
 msgstr "_Déconnecter"
 
-#: terp.glade:480
+#: terp.glade:479
 msgid "Databases"
-msgstr "Bases de données:"
+msgstr "Bases de données"
 
-#: terp.glade:501
+#: terp.glade:500
 msgid "_New database"
 msgstr "_Nouvelle base de données"
 
-#: terp.glade:523
+#: terp.glade:521
 msgid "_Restore database"
 msgstr "_Restaurer la base de données"
 
-#: terp.glade:544
+#: terp.glade:542
 msgid "_Backup database"
 msgstr "_Sauvegarder la base de données"
 
-#: terp.glade:565
+#: terp.glade:563
 msgid "Dro_p database"
 msgstr "Su_pprimer la base de données"
 
-#: terp.glade:592
+#: terp.glade:590
 msgid "Administrator Password"
 msgstr "Mot de passe administrateur"
 
-#: terp.glade:636
+#: terp.glade:634
 msgid "_User"
 msgstr "_Utilisateur"
 
-#: terp.glade:646
+#: terp.glade:644
 msgid "_Preferences"
 msgstr "_Préférences"
 
-#: terp.glade:673
+#: terp.glade:671
 msgid "_Send a request"
 msgstr "_Envoyer une requête"
 
-#: terp.glade:694
+#: terp.glade:692
 msgid "_Read my requests"
 msgstr "_Lire mes requêtes"
 
-#: terp.glade:721
+#: terp.glade:719
 msgid "_Waiting Requests"
 msgstr "_Requêtes en attente"
 
-#: terp.glade:734
+#: terp.glade:732
 msgid "For_m"
 msgstr "For_mulaire"
 
-#: terp.glade:744
+#: terp.glade:742
 msgid "_New"
 msgstr "_Nouveau"
 
-#: terp.glade:766
+#: terp.glade:764
 msgid "_Save"
 msgstr "_Sauver"
 
-#: terp.glade:788
+#: terp.glade:786
 msgid "Copy this resource"
 msgstr "Copier cette ressource"
 
-#: terp.glade:789
-#, fuzzy
+#: terp.glade:787
 msgid "_Duplicate"
-msgstr "Dupliquer"
+msgstr "_Dupliquer"
 
-#: terp.glade:811
+#: terp.glade:809
 msgid "_Delete"
-msgstr "_Effacer"
+msgstr "_Supprimer"
 
-#: terp.glade:839
+#: terp.glade:837
 msgid "Find"
 msgstr "Chercher"
 
-#: terp.glade:861
+#: terp.glade:859
 msgid "Ne_xt"
 msgstr "S_uivant"
 
-#: terp.glade:883
+#: terp.glade:881
 msgid "Pre_vious"
 msgstr "_Précédente"
 
-#: terp.glade:905
+#: terp.glade:903
 msgid "Switch to list/form"
-msgstr "Changer la vue (liste/formulaire)"
+msgstr "Basculer vers liste/formulaire"
 
-#: terp.glade:933
-msgid "_New Menu Tab"
-msgstr "_Nouvel onglet Menu"
+#: terp.glade:925
+msgid "_Menu"
+msgstr "_Menu"
 
-#: terp.glade:955
+#: terp.glade:953
 msgid "_New Home Tab"
 msgstr "_Nouvel onglet Racine"
 
-#: terp.glade:977 terp.glade:11926
+#: terp.glade:975 terp.glade:12009
 msgid "Close Tab"
 msgstr "Fermer onglet"
 
-#: terp.glade:999
+#: terp.glade:997
 msgid "Previous Tab"
 msgstr "Onglet précédent"
 
-#: terp.glade:1009 terp.glade:11814
+#: terp.glade:1007 terp.glade:11897
 msgid "Next Tab"
 msgstr "Onglet suivant"
 
-#: terp.glade:1025
+#: terp.glade:1023
 msgid "View _logs"
-msgstr "Voir lo_gs"
+msgstr "Voir historique"
 
-#: terp.glade:1034
+#: terp.glade:1032
 msgid "_Go to resource ID..."
 msgstr "_Aller à la ressource ID..."
 
-#: terp.glade:1050
+#: terp.glade:1048
 msgid "_Open"
 msgstr "_Ouvrir"
 
-#: terp.glade:1071
+#: terp.glade:1069
 msgid "Reloa_d / Undo"
 msgstr "Rec_harger / Annuler"
 
-#: terp.glade:1099
+#: terp.glade:1097
 msgid "Repeat latest _action"
 msgstr "Refaire _dernière action"
 
-#: terp.glade:1115
+#: terp.glade:1113
 msgid "_Preview in PDF"
 msgstr "_Prévisualiser en PDF"
 
-#: terp.glade:1137
+#: terp.glade:1135
 msgid "Previe_w in editor"
 msgstr "Pré_visualiser dans l'éditeur"
 
-#: terp.glade:1164
+#: terp.glade:1162
 msgid "Expor_t data..."
 msgstr "E_xporter données..."
 
-#: terp.glade:1185
+#: terp.glade:1183
 msgid "I_mport data..."
 msgstr "I_mporter données..."
 
-#: terp.glade:1198
+#: terp.glade:1196
 msgid "_Options"
 msgstr "_Options"
 
-#: terp.glade:1207
+#: terp.glade:1205
 msgid "_Menubar"
 msgstr "Barre de _menu"
 
-#: terp.glade:1217
+#: terp.glade:1215
 msgid "Text _and Icons"
 msgstr "Texte _et icônes"
 
-#: terp.glade:1227
+#: terp.glade:1225
 msgid "_Icons only"
 msgstr "_Icônes seulement"
 
-#: terp.glade:1238
+#: terp.glade:1236
 msgid "_Text only"
 msgstr "_Texte seulement"
 
-#: terp.glade:1253
+#: terp.glade:1251
 msgid "Client Mode"
 msgstr "Mode Client"
 
-#: terp.glade:1275
+#: terp.glade:1273
 msgid "Normal"
 msgstr "Normal"
 
-#: terp.glade:1285
+#: terp.glade:1283
 msgid "Mode PDA"
 msgstr "Mode PDA"
 
-#: terp.glade:1300
+#: terp.glade:1298
 msgid "_Theme"
 msgstr "_Thème"
 
-#: terp.glade:1322
+#: terp.glade:1320
 msgid "Tiny ERP Theme"
 msgstr "Thème Tiny ERP"
 
-#: terp.glade:1331
+#: terp.glade:1329
 msgid "Aqua OS X"
 msgstr "Aqua OS X"
 
-#: terp.glade:1346
+#: terp.glade:1344
 msgid "Default Theme"
 msgstr "_Thème par défaut"
 
-#: terp.glade:1359
+#: terp.glade:1357
 msgid "_Forms"
 msgstr "For_mulaires"
 
-#: terp.glade:1369
+#: terp.glade:1367
 msgid "Right Toolbar"
 msgstr "Barre d'outils de droite"
 
-#: terp.glade:1379
+#: terp.glade:1377
 msgid "Tabs default position"
-msgstr ""
+msgstr "Position des onglets par défaut"
 
-#: terp.glade:1389
+#: terp.glade:1387
 msgid "Top"
-msgstr ""
+msgstr "Au dessus"
 
-#: terp.glade:1399
+#: terp.glade:1397
 msgid "Left"
-msgstr ""
+msgstr "À gauche"
 
-#: terp.glade:1410
+#: terp.glade:1408
 msgid "Right"
-msgstr ""
+msgstr "À droite"
 
-#: terp.glade:1421
+#: terp.glade:1419
 msgid "Bottom"
-msgstr ""
+msgstr "En dessous"
 
-#: terp.glade:1436
+#: terp.glade:1434
 msgid "Tabs default orientation"
-msgstr ""
+msgstr "Orientation des onglets par défaut"
 
-#: terp.glade:1446
+#: terp.glade:1444
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontale"
 
-#: terp.glade:1456
+#: terp.glade:1454
 msgid "Vertical"
-msgstr ""
+msgstr "Verticale"
 
-#: terp.glade:1475
+#: terp.glade:1473
 msgid "_Print"
 msgstr "Im_primer"
 
-#: terp.glade:1496
+#: terp.glade:1494
 msgid "Previe_w before print"
 msgstr "_Aperçu avant impression"
 
-#: terp.glade:1516
+#: terp.glade:1514
 msgid "_Save options"
 msgstr "_Enregistrer les options"
 
-#: terp.glade:1541
+#: terp.glade:1539
 msgid "_Plugins"
 msgstr "_Plugins"
 
-#: terp.glade:1551
+#: terp.glade:1549
 msgid "_Execute a plugin"
 msgstr "_Exécuter un plugin"
 
-#: terp.glade:1576
+#: terp.glade:1575
+msgid "_Shortcuts"
+msgstr "_Raccourcis"
+
+#: terp.glade:1584
 msgid "_Help"
 msgstr "_Aide"
 
-#: terp.glade:1585 terp.glade:10716
+#: terp.glade:1593 terp.glade:10801
 msgid "Support Request"
 msgstr "Demande de support"
 
-#: terp.glade:1612
+#: terp.glade:1620
 msgid "User _Manual"
 msgstr "_Manuel utilisateur"
 
-#: terp.glade:1633
+#: terp.glade:1641
 msgid "_Contextual Help"
 msgstr "Aide _contextuelle"
 
-#: terp.glade:1655
+#: terp.glade:1663
 msgid "_Tips"
 msgstr "_Astuces"
 
-#: terp.glade:1676
+#: terp.glade:1684
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
-#: terp.glade:1691
-msgid "_Licence"
+#: terp.glade:1699
+msgid "_License"
 msgstr "_Licence"
 
-#: terp.glade:1712
+#: terp.glade:1720
 msgid "_About..."
 msgstr "A _propos..."
 
-#: terp.glade:1754 terp.glade:2986
+#: terp.glade:1762 terp.glade:3012
 msgid "Create a new resource"
 msgstr "Créer une nouvelle ressource"
 
-#: terp.glade:1770
+#: terp.glade:1778
 msgid "Edit / Save this resource"
-msgstr "Editer / Enregistrer cette ressource"
+msgstr "Éditer / Enregistrer cette ressource"
 
-#: terp.glade:1799
+#: terp.glade:1807
 msgid "Delete this resource"
 msgstr "Supprimer cette ressource"
 
-#: terp.glade:1828
+#: terp.glade:1836
 msgid "Find a resource"
 msgstr "Trouver une ressource"
 
-#: terp.glade:1844
+#: terp.glade:1852
 msgid "Go to previous matched search"
 msgstr "Aller à la ressource précédente"
 
-#: terp.glade:1860
+#: terp.glade:1868
 msgid "Go to next matched resource"
 msgstr "Aller à la ressource suivante"
 
-#: terp.glade:1876
+#: terp.glade:1884
 msgid "Switch current view: form / list"
 msgstr "Changer la vue courante: formulaire / liste"
 
-#: terp.glade:1877
+#: terp.glade:1885
 msgid "Other View"
 msgstr "Autre vue"
 
-#: terp.glade:1907
+#: terp.glade:1903 terp.glade:1904
+msgid "Menu"
+msgstr "Menu"
+
+#: terp.glade:1934
 msgid "Launch actions about this resource"
 msgstr "Exécuter les actions à propos de cette ressource"
 
-#: terp.glade:1908
+#: terp.glade:1935
 msgid "Action"
 msgstr "Action"
 
-#: terp.glade:1925
+#: terp.glade:1952
 msgid "Print documents"
 msgstr "Imprimer les documents"
 
-#: terp.glade:1954
+#: terp.glade:1981
 msgid "Add an attachment to this resource"
 msgstr "Ajouter un attachement à cette ressource"
 
-#: terp.glade:1955
+#: terp.glade:1982
 msgid "Attachment"
 msgstr "Attachement"
 
-#: terp.glade:1985
+#: terp.glade:2012
 msgid "Close this window"
 msgstr "Fermer cette fenêtre"
 
-#: terp.glade:2046
+#: terp.glade:2069
 msgid "Requests:"
 msgstr "Requêtes:"
 
-#: terp.glade:2085
+#: terp.glade:2108
 msgid "Read my Requests"
 msgstr "Lire mes requêtes"
 
-#: terp.glade:2113
+#: terp.glade:2136
 msgid "Send a new request"
 msgstr "Envoyer une nouvelle requête"
 
-#: terp.glade:2168
+#: terp.glade:2195
 msgid "Tiny ERP - Tree Resources"
 msgstr "Tiny ERP - Arbre des ressources"
 
-#: terp.glade:2303
+#: terp.glade:2330
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
-#: terp.glade:2407
+#: terp.glade:2434
 msgid "Tiny ERP - Forms"
 msgstr "Tiny ERP - Formulaires"
 
-#: terp.glade:2455
+#: terp.glade:2482
 msgid "State:"
-msgstr "État:"
+msgstr "État :"
 
-#: terp.glade:2505
+#: terp.glade:2531
 msgid "Tiny ERP - About"
 msgstr "Tiny ERP - À propos"
 
-#: terp.glade:2562
+#: terp.glade:2588
 msgid ""
 "<b>About Tiny ERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
@@ -442,7 +449,7 @@ msgstr ""
 "<b>A propos de Tiny ERP</b>\n"
 "<i>Le plus avancé des ERP &amp; CRM Open Source !</i>"
 
-#: terp.glade:2631
+#: terp.glade:2657
 msgid ""
 "\n"
 "Tiny ERP - GTK Client - v%s\n"
@@ -470,11 +477,11 @@ msgstr ""
 "\n"
 "Plus d'infos sur www.TinyERP.com !"
 
-#: terp.glade:2678
+#: terp.glade:2704
 msgid "_Tiny ERP"
 msgstr "_Tiny ERP"
 
-#: terp.glade:2730
+#: terp.glade:2756
 msgid ""
 "\n"
 "(c) 2003-TODAY - Tiny sprl\n"
@@ -491,7 +498,7 @@ msgid ""
 msgstr ""
 "\n"
 "(c) 2003-aujourd'hui - Tiny sprl\n"
-"Tiny ERP est un produit de Tiny sprl:\n"
+"Tiny ERP est un produit de Tiny sprl :\n"
 "\n"
 "Tiny sprl\n"
 "40 Chaussée de Namur\n"
@@ -502,256 +509,255 @@ msgstr ""
 "Mail: sales@tiny.be\n"
 "Web: http://tiny.be"
 
-#: terp.glade:2777
+#: terp.glade:2803
 msgid "_Contact"
 msgstr "_Contact"
 
-#: terp.glade:2823
+#: terp.glade:2849
 msgid "Tiny ERP - forms widget"
 msgstr "Tiny ERP - widgets formulaires"
 
-#: terp.glade:2890
+#: terp.glade:2916
 msgid "Open the calendar widget"
 msgstr "Ouvrir le calendrier"
 
-#: terp.glade:3013
+#: terp.glade:3039
 msgid "Search / Open a resource"
 msgstr "Chercher/Ouvrir des ressources"
 
-#: terp.glade:3123
+#: terp.glade:3149
 msgid "Titre"
 msgstr "Titre"
 
-#: terp.glade:3144
+#: terp.glade:3170
 msgid "Set to default value"
 msgstr "Mettre à la valeur par défaut"
 
-#: terp.glade:3153
+#: terp.glade:3179
 msgid "Set Default"
-msgstr "Définir le défaut"
+msgstr "Définir comme défaut"
 
-#: terp.glade:3173 terp.glade:3459
+#: terp.glade:3199 terp.glade:3485
 msgid "Create a new entry"
 msgstr "Créer une nouvelle entrée"
 
-#: terp.glade:3200
+#: terp.glade:3226
 msgid "Edit this entry"
 msgstr "Modifier cette entrée"
 
-#: terp.glade:3227
+#: terp.glade:3253
 msgid "Remove this entry"
 msgstr "Supprimer cette entrée"
 
-#: terp.glade:3265
+#: terp.glade:3291
 msgid "Previous"
 msgstr "Précédent"
 
-#: terp.glade:3292
+#: terp.glade:3318
 msgid "(0/0)"
 msgstr "(0/0)"
 
-#: terp.glade:3317
+#: terp.glade:3343
 msgid "Next"
 msgstr "Suivant"
 
-#: terp.glade:3477
+#: terp.glade:3503
 msgid "Remove selected entry"
 msgstr "Supprimer l'entrée sélectionnée"
 
-#: terp.glade:3542
+#: terp.glade:3568
 msgid "label74"
 msgstr "label74"
 
-#: terp.glade:3722 terp.glade:6440 terp.glade:6545 terp.glade:6749
+#: terp.glade:3748 terp.glade:6414 terp.glade:6519 terp.glade:6723
 msgid "-"
 msgstr "-"
 
-#: terp.glade:4177
-#, fuzzy
+#: terp.glade:4156
 msgid "label46559"
-msgstr "label74"
+msgstr "label46559"
 
-#: terp.glade:4302
+#: terp.glade:4281
 msgid "Tiny ERP - Date selection"
 msgstr "Tiny ERP - Sélection de date"
 
-#: terp.glade:4385 terp.glade:11300
+#: terp.glade:4363 terp.glade:11384
 msgid "Tiny ERP - Confirmation"
 msgstr "Tiny ERP - Confirmation"
 
-#: terp.glade:4473 terp.glade:11401 terp.glade:13781
+#: terp.glade:4451 terp.glade:11485 terp.glade:13977
 msgid "Hello World!"
 msgstr "Bonjour tout le monde!"
 
-#: terp.glade:4507
-msgid "Tiny ERP - selection"
+#: terp.glade:4484
+msgid "Tiny ERP - Selection"
 msgstr "Tiny ERP - Sélection"
 
-#: terp.glade:4580
+#: terp.glade:4557
 msgid "Your selection:"
-msgstr "Votre sélection:"
+msgstr "Votre sélection :"
 
-#: terp.glade:4655
+#: terp.glade:4632
 msgid "Tiny ERP - Filter"
 msgstr "Tiny ERP - Filtre"
 
-#: terp.glade:4727
+#: terp.glade:4704
 msgid "S_earch:"
-msgstr "Ch_ercher"
+msgstr "Ch_ercher :"
 
-#: terp.glade:4773
+#: terp.glade:4750
 msgid "on _field:"
-msgstr "sur le _champ:"
+msgstr "sur le _champ :"
 
-#: terp.glade:4798
+#: terp.glade:4775
 msgid "test"
 msgstr "test"
 
-#: terp.glade:4813
+#: terp.glade:4790
 msgid "_Select"
 msgstr "_Sélectionner"
 
-#: terp.glade:4830
+#: terp.glade:4807
 msgid "_Unselect"
 msgstr "_Désélectionner"
 
-#: terp.glade:4857
-msgid "Filter: "
-msgstr "Filtre:"
+#: terp.glade:4834
+msgid "Filter:"
+msgstr "Filtre :"
 
-#: terp.glade:4883
+#: terp.glade:4860
 msgid "AL_L"
 msgstr "_TOUT"
 
-#: terp.glade:4900
+#: terp.glade:4877
 msgid "N_ONE"
 msgstr "_AUCUN"
 
-#: terp.glade:4972
+#: terp.glade:4949
 msgid "<b><u>Actions</u></b>"
 msgstr "<b><u>Actions</u></b>"
 
-#: terp.glade:5012
+#: terp.glade:4989
 msgid "Tiny ERP - Dialog"
 msgstr "Tiny ERP - Dialogue"
 
-#: terp.glade:5058
+#: terp.glade:5035
 msgid "Set to _Default"
 msgstr "Mettre à la valeur par _défaut"
 
-#: terp.glade:5085
+#: terp.glade:5062
 msgid "Value _Preference"
 msgstr "_Préférence de valeur"
 
-#: terp.glade:5108
+#: terp.glade:5085
 msgid "Tiny ERP, Field Preference target"
 msgstr "Tiny ERP, cible de la préférence du champ"
 
-#: terp.glade:5181
+#: terp.glade:5158
 msgid "Default _value:"
-msgstr "_Valeur par défaut:"
+msgstr "_Valeur par défaut :"
 
-#: terp.glade:5276
+#: terp.glade:5253
 msgid "_Domain:"
-msgstr "_Domaine:"
+msgstr "_Domaine :"
 
-#: terp.glade:5305
+#: terp.glade:5282
 msgid "Field _Name:"
-msgstr "_Nom du champ:"
+msgstr "_Nom du champ :"
 
-#: terp.glade:5367
+#: terp.glade:5344
 msgid "<b>Value applicable if:</b>"
-msgstr "<b>Valeur applicable si:</b>"
+msgstr "<b>Valeur applicable si :</b>"
 
-#: terp.glade:5426
+#: terp.glade:5403
 msgid "_only for you"
 msgstr "_seulement pour vous"
 
-#: terp.glade:5445
+#: terp.glade:5422
 msgid "for _all users"
 msgstr "pour _tous les utilisateurs"
 
-#: terp.glade:5468
+#: terp.glade:5445
 msgid "<b>Value applicable for:</b>"
-msgstr "<b>Valeur applicable pour:</b>"
+msgstr "<b>Valeur applicable pour :</b>"
 
-#: terp.glade:5512
+#: terp.glade:5488
 msgid "Tiny ERP - Export to CSV"
 msgstr "Tiny ERP - Exporter en CSV"
 
-#: terp.glade:5627
+#: terp.glade:5603
 msgid "<b>Predefined exports</b>"
-msgstr "<b>Champs à exporter</b>"
+msgstr "<b>Exportations prédéfinies</b>"
 
-#: terp.glade:5706 terp.glade:12888
+#: terp.glade:5682 terp.glade:13085
 msgid "<b>All fields</b>"
 msgstr "<b>Tous les champs</b>"
 
-#: terp.glade:5786 terp.glade:12968
+#: terp.glade:5762 terp.glade:13165
 msgid "_Add"
 msgstr "_Ajouter"
 
-#: terp.glade:5865 terp.glade:13047
+#: terp.glade:5841 terp.glade:13244
 msgid "_Remove"
 msgstr "_Supprimer"
 
-#: terp.glade:5944
+#: terp.glade:5920
 msgid "_Nothing"
 msgstr "_Rien"
 
-#: terp.glade:6034
+#: terp.glade:6010
 msgid "Save List"
-msgstr "_Enregistrer les options"
+msgstr "_Enregistrer la liste"
 
-#: terp.glade:6120
+#: terp.glade:6096
 msgid "<b>Fields to export</b>"
 msgstr "<b>Champs à exporter</b>"
 
-#: terp.glade:6172
+#: terp.glade:6148
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
 msgstr ""
 "Ouvrir dans Excel\n"
-"Enregistrer sous .CSV"
+"Enregistrer en CSV"
 
-#: terp.glade:6199
+#: terp.glade:6175
 msgid "Add _field names"
 msgstr "Ajouter les noms de _champ"
 
-#: terp.glade:6219
+#: terp.glade:6195
 msgid "<b>Opti_ons</b>"
 msgstr "<b>Opti_ons</b>"
 
-#: terp.glade:6260
+#: terp.glade:6235
 msgid "Tiny ERP - Search"
 msgstr "Tiny ERP - Chercher"
 
-#: terp.glade:6391
+#: terp.glade:6365
 msgid "Tiny ERP - Search Widgets"
 msgstr "Tiny ERP - Widgets de recherche"
 
-#: terp.glade:6498
+#: terp.glade:6472
 msgid "Date de début"
 msgstr "Date de début"
 
-#: terp.glade:6671
+#: terp.glade:6645
 msgid "Search with this name"
 msgstr "Chercher avec ce nom"
 
-#: terp.glade:6698
+#: terp.glade:6672
 msgid "Clear the field"
-msgstr "Vider le champ"
+msgstr "Effacer le champ"
 
-#: terp.glade:6763
+#: terp.glade:6737
 msgid "Yes"
 msgstr "Oui"
 
-#: terp.glade:6783
+#: terp.glade:6757
 msgid "No"
 msgstr "Non"
 
-#: terp.glade:6826
+#: terp.glade:6800
 msgid ""
 "\n"
 "Yes\n"
@@ -761,39 +767,39 @@ msgstr ""
 "Oui\n"
 "Non"
 
-#: terp.glade:6852
+#: terp.glade:6825
 msgid "Tiny ERP - Attachment"
 msgstr "Tiny ERP - Attachement"
 
-#: terp.glade:6922
+#: terp.glade:6895
 msgid "Filename:"
-msgstr "Nom du fichier:"
+msgstr "Nom du fichier :"
 
-#: terp.glade:6994
+#: terp.glade:6967
 msgid "Description:"
-msgstr "Description:"
+msgstr "Description :"
 
-#: terp.glade:7098
+#: terp.glade:7071
 msgid "Save text"
 msgstr "Sauver le texte"
 
-#: terp.glade:7354
+#: terp.glade:7326
 msgid "Tiny ERP - Error"
 msgstr "Tiny ERP - Erreur"
 
-#: terp.glade:7413
-msgid "Application Error !"
-msgstr "Erreur de l'application"
+#: terp.glade:7385
+msgid "Application Error!"
+msgstr "Erreur de l'application !"
 
-#: terp.glade:7488
-msgid "Error 404"
-msgstr "Erreur 404"
+#: terp.glade:7480
+msgid "<b>Error 404</b>"
+msgstr "<b>Erreur 404</b>"
 
-#: terp.glade:7513
+#: terp.glade:7505
 msgid "<b>Error code:</b>"
-msgstr "<b>Code de l'erreur:</b>"
+msgstr "<b>Code de l'erreur :</b>"
 
-#: terp.glade:7538
+#: terp.glade:7532
 msgid ""
 "This Page does not exist !\n"
 "Please retry"
@@ -801,28 +807,24 @@ msgstr ""
 "Cette page n'existe pas !\n"
 "Veuillez réessayer"
 
-#: terp.glade:7564
+#: terp.glade:7569
 msgid "<i>Click on the Support Request tab if you need more help !</i>"
 msgstr ""
 "<i>Cliquer sur l'onglet Demande de support si vous avez besoin d'aide ! !</i>"
 
-#: terp.glade:7602
+#: terp.glade:7607
 msgid "De_scription"
 msgstr "De_scription"
 
-#: terp.glade:7652
-msgid ""
-"Error details\n"
-"dqsdsqdqsdsd"
-msgstr ""
-"Détails de l'erreur\n"
-"   "
+#: terp.glade:7657
+msgid "Error details"
+msgstr "Détails de l'erreur"
 
-#: terp.glade:7669
+#: terp.glade:7673
 msgid "_Details"
 msgstr "_Détails"
 
-#: terp.glade:7712
+#: terp.glade:7716
 msgid ""
 "<b>Complete this form to submit your bug and/or request a support.</b>\n"
 "<i>\n"
@@ -835,39 +837,39 @@ msgstr ""
 "support.</b>\n"
 "<i>\n"
 "Votre demande sera envoyée à l'équipe de support de Tiny ERP.\n"
-"Veuillez noter qu'une réponse ne sera donnée que si vous êtes passé par un "
-"partenaire TinyERP pour l'installation et la paramétrisation de l'outil.\n"
+"Veuillez noter que nous pourrions ne pas répondre si votre Société n'est pas"
+"partenaire TinyERP.\n"
 "</i>"
 
-#: terp.glade:7762
-msgid "<b>Your name: </b>"
-msgstr "<b>Votre nom: </b>"
+#: terp.glade:7766
+msgid "<b>Your name:</b>"
+msgstr "<b>Votre nom :</b>"
 
-#: terp.glade:7790
-msgid "<b>Your Company: </b>"
-msgstr "<b>Votre société: </b>"
+#: terp.glade:7794
+msgid "<b>Your Company:</b>"
+msgstr "<b>Votre société :</b>"
 
-#: terp.glade:7818
-msgid "<b>Your Email: </b>"
-msgstr "<b>Votre email: </b>"
+#: terp.glade:7822
+msgid "<b>Your Email:</b>"
+msgstr "<b>Votre email :</b>"
 
-#: terp.glade:7888
-msgid "Explain what you did: "
-msgstr "Expliquez ce que vous avez fait: "
+#: terp.glade:7892
+msgid "Explain what you did:"
+msgstr "Expliquez ce que vous avez fait :"
 
-#: terp.glade:7916
-msgid "Others Comments: "
-msgstr "Autres remarques: "
+#: terp.glade:7920
+msgid "Others Comments:"
+msgstr "Autres remarques :"
 
-#: terp.glade:8071
+#: terp.glade:8075
 msgid "Send Support Request"
 msgstr "Envoyer la demande de support"
 
-#: terp.glade:8118
-msgid "<b>support contract id  </b>"
-msgstr "<b>Numéro de contrat de support  </b>"
+#: terp.glade:8122
+msgid "<b>support contract id</b>"
+msgstr "<b>Numéro de contrat de support</b>"
 
-#: terp.glade:8167 terp.glade:11159
+#: terp.glade:8171 terp.glade:11244
 msgid ""
 "Not Urgent\n"
 "Medium\n"
@@ -879,82 +881,81 @@ msgstr ""
 "Urgent\n"
 "Très Urgent"
 
-#: terp.glade:8188 terp.glade:11180
-msgid "Emergency: "
-msgstr "Urgence: "
+#: terp.glade:8192 terp.glade:11265
+msgid "Emergency:"
+msgstr "Urgence :"
 
-#: terp.glade:8216
-msgid "Phone Number: "
-msgstr "Numéro de téléphone: "
+#: terp.glade:8220
+msgid "Phone Number:"
+msgstr "Numéro de téléphone :"
 
-#: terp.glade:8304
+#: terp.glade:8308
 msgid "<b>_Support Request</b>"
 msgstr "<b>Demande de _support</b>"
 
-#: terp.glade:8343
+#: terp.glade:8347
 msgid "Tiny ERP - Ressource Edit"
 msgstr "Tiny ERP - Edition de ressource"
 
-#: terp.glade:8414
+#: terp.glade:8418
 msgid "Tiny ERP - Link"
 msgstr "Tiny ERP - Lien"
 
-#: terp.glade:8512
+#: terp.glade:8516
 msgid "Tiny ERP - List"
 msgstr "Tiny ERP - Liste"
 
-#: terp.glade:8582
+#: terp.glade:8585
 msgid "Tiny ERP - Preferences"
 msgstr "Tiny ERP - Préférences"
 
-#: terp.glade:8651
+#: terp.glade:8654
 msgid "<b>Edit resource preferences</b>"
 msgstr "<b>Editer les préférences de la ressource</b>"
 
-#: terp.glade:8700
+#: terp.glade:8702
 msgid "Tip of the Day"
 msgstr "Astuce du jour"
 
-#: terp.glade:8774
+#: terp.glade:8776
 msgid "Pre_vious Tip"
 msgstr "Astuce _précédente"
 
-#: terp.glade:8850
+#: terp.glade:8852
 msgid "Ne_xt Tip"
 msgstr "Astuce _suivante"
 
-#: terp.glade:8954
-msgid "_Display a new tip next time ?"
+#: terp.glade:8956
+msgid "_Display a new tip next time?"
 msgstr "_Afficher une nouvelle astuce la prochaine fois ?"
 
-#: terp.glade:8995
-msgid "Tiny ERP - Licence"
+#: terp.glade:8996
+msgid "Tiny ERP - License"
 msgstr "Tiny ERP - Licence"
 
-#: terp.glade:9054
+#: terp.glade:9055
 msgid "Tiny ERP license"
 msgstr "Licence de Tiny ERP"
 
-#: terp.glade:9228
+#: terp.glade:9229
 msgid "Tiny ERP - Date & Time selection"
 msgstr "Tiny ERP - Sélection date/heure"
 
-#: terp.glade:9306
-#, fuzzy
-msgid "Hour :"
+#: terp.glade:9307
+msgid "Hour:"
 msgstr "Heure :"
 
-#: terp.glade:9350
-msgid "Minute :"
+#: terp.glade:9351
+msgid "Minute:"
 msgstr "Minute :"
 
-#: terp.glade:9425
-msgid "GO to ressource ID"
-msgstr "_Aller à la ressource ID"
+#: terp.glade:9426
+msgid "Go to resource ID"
+msgstr "Aller à la ressource ID"
 
-#: terp.glade:9499
+#: terp.glade:9500
 msgid "Search ID:"
-msgstr "Chercher ID:"
+msgstr "Chercher ID :"
 
 #: terp.glade:9582
 msgid "Tiny ERP Survey"
@@ -974,77 +975,73 @@ msgstr ""
 
 #: terp.glade:9732
 msgid "Industry:"
-msgstr "Secteur:"
+msgstr "Secteur :"
 
 #: terp.glade:9761
 msgid "# Employees:"
-msgstr "# d'employés:"
+msgstr "# d'employés :"
 
 #: terp.glade:9862
 msgid "Country:"
-msgstr "Pays:"
+msgstr "Pays :"
 
 #: terp.glade:9890
 msgid "Your Role:"
-msgstr "Votre rôle:"
+msgstr "Votre rôle :"
 
 #: terp.glade:9954
 msgid "System:"
-msgstr "Système:"
+msgstr "Système :"
 
 #: terp.glade:10024
 msgid "How did you hear about us:"
-msgstr "Comment nous connaissez-vous:"
+msgstr "Comment nous connaissez-vous :"
 
 #: terp.glade:10077
-msgid "Open Source: "
-msgstr "Logiciel Libre: "
+msgid "Open Source:"
+msgstr "Logiciel Libre :"
 
 #: terp.glade:10403
-msgid "<b>Your company</b>"
-msgstr "<b>Votre société: </b>"
+msgid "<b>Your company:</b>"
+msgstr "<b>Votre société :</b>"
 
-#: terp.glade:10459
+#: terp.glade:10465
 msgid "We plan to use Tiny ERP"
 msgstr "Nous pensons utiliser Tiny ERP"
 
-#: terp.glade:10478
+#: terp.glade:10484
 msgid "We plan to offer services on Tiny ERP"
 msgstr "Nous pensons offrir du service sur Tiny ERP"
 
-#: terp.glade:10518
-msgid ""
-"Write here any comment, note or suggestion you have concerning Tiny ERP. \n"
-"Tell us which ERP systems you used before, and what you plan to do with Tiny "
-"ERP..."
-msgstr ""
-"Ecrivez ici vos commentaires, notes ou suggestions à propos de Tiny ERP.\n"
-"Quels systèmes ERP utilisiez-vous avant."
+#: terp.glade:10509
+msgid "Tell us why you try Tiny ERP and what are your current softwares:"
+msgstr "Dites nous pourquoi vous essayez Tiny ERP et quels sont vos logiciels courant :"
 
-#: terp.glade:10537
-msgid "<b>Your interrest</b>"
-msgstr "<b>Votre intérêt: </b>"
+#: terp.glade:10574
+msgid "<b>Your interrest:</b>"
+msgstr "<b>Votre intérêt :</b>"
 
-#: terp.glade:10596
-msgid "E-Mail:"
-msgstr "E-Mail:"
-
-#: terp.glade:10645
-msgid ""
-"(Get Tiny ERP announces, documentation and new releases by email, maximum 6 "
-"mails a year.)"
+#: terp.glade:10632
+msgid "(Get Tiny ERP announces, docs and new releases by email)"
 msgstr ""
 "(Recevez les annonces Tiny ERP, les documentations et nouvelles versions par "
-"email maximum 6 mails par an.)"
+"email)"
 
-#: terp.glade:10677
+#: terp.glade:10660
+msgid "Company:"
+msgstr "Société :"
+
+#: terp.glade:10689
+msgid "E-Mail:"
+msgstr "E-Mail :"
+
+#: terp.glade:10763
 msgid "<b>Keep Informed</b>"
 msgstr "<b>Restez Informé</b>"
 
-#: terp.glade:10801
+#: terp.glade:10886
 msgid ""
-"<b>Complete this form to submit your bug and/or make a request for support.</"
-"b>\n"
+"<b>Complete this form to submit your bug and/or send a support request.</b>\n"
 "<i>\n"
 "Your request will be sent to the Tiny ERP team and we will reply shortly.\n"
 "Note that we may not reply if you do not have a support contract with Tiny "
@@ -1054,255 +1051,274 @@ msgstr ""
 "support.</b>\n"
 "<i>\n"
 "Votre demande sera envoyée à l'équipe de support de Tiny ERP.\n"
-"Veuillez noter qu'une réponse ne sera donnée que si vous êtes passé par un "
-"partenaire TinyERP pour l'installation et la paramétrisation de l'outil.\n"
-"</i>"
+"Veuillez noter que nous pouvrions ne pas répondre si vous n' avez pas de contrat "
+"de support avec Tiny ou partenaire officiel.</i>"
 
-#: terp.glade:10850
+#: terp.glade:10935
 msgid "<b>Your name:</b>"
-msgstr "<b>Votre nom: </b>"
+msgstr "<b>Votre nom :</b>"
 
-#: terp.glade:10878
+#: terp.glade:10963
 msgid "<b>Your Company:</b>"
-msgstr "<b>Votre société: </b>"
+msgstr "<b>Votre société :</b>"
 
-#: terp.glade:10906
+#: terp.glade:10991
 msgid "<b>Your email:</b>"
-msgstr "<b>Votre email: </b>"
+msgstr "<b>Votre email :</b>"
 
-#: terp.glade:10976
+#: terp.glade:11061
 msgid "Explain your problem:"
-msgstr "Expliquez ce que vous avez fait: "
+msgstr "Expliquez votre problème :"
 
-#: terp.glade:11004
+#: terp.glade:11089
 msgid "Other comments:"
 msgstr "Autres commentaires :"
 
-#: terp.glade:11110
+#: terp.glade:11195
 msgid "<b>Support contract id:</b>"
-msgstr "<b>Numéro de contrat de support:</b>"
+msgstr "<b>Numéro de contrat de support :</b>"
 
-#: terp.glade:11208
+#: terp.glade:11293
 msgid "Phone number:"
-msgstr "Numéro de téléphone: "
+msgstr "Numéro de téléphone :"
 
-#: terp.glade:11435
+#: terp.glade:11518
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 
-#: terp.glade:11506
+#: terp.glade:11589
 msgid "<Ctrl> + O"
 msgstr "<Ctrl> + O"
 
-#: terp.glade:11534
+#: terp.glade:11617
 msgid "Connect"
 msgstr "_Connecter"
 
-#: terp.glade:11562
+#: terp.glade:11645
 msgid "<Ctrl> + F"
 msgstr "<Ctrl> + F"
 
-#: terp.glade:11590
+#: terp.glade:11673
 msgid "Find / Search"
 msgstr "Rechercher"
 
-#: terp.glade:11618
+#: terp.glade:11701
 msgid "<Ctrl> + D"
 msgstr "<Ctrl> + D"
 
-#: terp.glade:11646
+#: terp.glade:11729
 msgid "Delete"
-msgstr "_Effacer"
+msgstr "Supprimer"
 
-#: terp.glade:11674
+#: terp.glade:11757
 msgid "<Ctrl> + N"
 msgstr "<Ctrl> + N"
 
-#: terp.glade:11702
+#: terp.glade:11785
 msgid "New"
 msgstr "Nouveau"
 
-#: terp.glade:11730
+#: terp.glade:11813
 msgid "<Ctrl> + <PgUp>"
 msgstr "<Ctrl> + <PgUp>"
 
-#: terp.glade:11758
+#: terp.glade:11841
 msgid "Previous tab"
 msgstr "Onglet précédent"
 
-#: terp.glade:11786
+#: terp.glade:11869
 msgid "<Ctrl> + <PgDn>"
 msgstr "<Ctrl> + <PgDn>"
 
-#: terp.glade:11842
+#: terp.glade:11925
 msgid "<Ctrl> + S"
 msgstr "<Ctrl> + S"
 
-#: terp.glade:11870
+#: terp.glade:11953
 msgid "<Ctrl> + W"
 msgstr "<Ctrl> + W"
 
-#: terp.glade:11898
+#: terp.glade:11981
 msgid "Save"
-msgstr "_Sauver"
+msgstr "Sauver"
 
-#: terp.glade:11954
+#: terp.glade:12037
 msgid "<PgUp>"
 msgstr "<PgUp>"
 
-#: terp.glade:11982
+#: terp.glade:12065
 msgid "<PgDn>"
 msgstr "<PgDn>"
 
-#: terp.glade:12010
+#: terp.glade:12093
 msgid "Previous record"
-msgstr "Précédent"
+msgstr "Enregistrement précédent"
 
-#: terp.glade:12038
+#: terp.glade:12121
 msgid "Next record"
-msgstr "Suivant"
+msgstr "Enregistrement suivant"
 
-#: terp.glade:12066
+#: terp.glade:12149
 msgid "<Ctrl> + L"
 msgstr "<Ctrl> + L"
 
-#: terp.glade:12094
+#: terp.glade:12177
 msgid "Switch view mode"
 msgstr "Changer de mode de vue"
 
-#: terp.glade:12122
-msgid "<b>Shortcuts for TinyERP</b>"
-msgstr "<b>Raccourcis TinyERP</b>"
-
-#: terp.glade:12177
+#: terp.glade:12205
 msgid "<Ctrl> + <Enter>"
 msgstr "<Ctrl> + <Enter>"
 
-#: terp.glade:12205
-msgid "Save and Close window"
-msgstr "Sauver et fer_mer la fenêtre"
-
 #: terp.glade:12233
-msgid "<i>When editing a resource in a popup window</i>"
-msgstr "<i>Lors de la modification d'une ressource</i>"
+msgid "Save and Close window"
+msgstr "Sauver et fermer la fenêtre"
 
 #: terp.glade:12261
+msgid "<i>When editing a resource in a popup window</i>"
+msgstr "<i>Lors de la modification d'une ressource dans un fenêtre popup</i>"
+
+#: terp.glade:12289
 msgid "<Ctrl> + <Esc>"
 msgstr "<Ctrl> + <Esc>"
 
-#: terp.glade:12289
+#: terp.glade:12317
 msgid "Close window without saving"
 msgstr "Fermer la fenêtre sans sauver"
 
-#: terp.glade:12323
+#: terp.glade:12345
+msgid "<b>Shortcuts for TinyERP</b>"
+msgstr "<b>Raccourcis TinyERP</b>"
+
+#: terp.glade:12379
 msgid "Main Shortcuts"
-msgstr "Raccourcis"
+msgstr "Raccourcis principaux"
 
-#: terp.glade:12355
-msgid "<b>Shortcuts in text entries</b>"
-msgstr "<b>Raccourcis: </b>"
+#: terp.glade:12412
+msgid "<Ctrl> + X"
+msgstr "<Ctrl> + X"
 
-#: terp.glade:12383
-msgid "<CTRL> + X"
-msgstr "<CTRL> + X"
+#: terp.glade:12440
+msgid "<Ctrl> + C"
+msgstr "<Ctrl> + C"
 
-#: terp.glade:12411
-msgid "<CTRL> + C"
-msgstr "<CTRL> + C"
+#: terp.glade:12468
+msgid "<Ctrl> + V"
+msgstr "<Ctrl> + V"
 
-#: terp.glade:12439
-msgid "<CTRL> + V"
-msgstr "<CTRL> + V"
-
-#: terp.glade:12467
+#: terp.glade:12496
 msgid "Cut selected text"
 msgstr "Couper l'entrée sélectionnée"
 
-#: terp.glade:12495
+#: terp.glade:12524
 msgid "Copy selected text"
 msgstr "Copier l'entrée sélectionnée"
 
-#: terp.glade:12523
+#: terp.glade:12552
 msgid "Paste selected text"
 msgstr "Coller l'entrée sélectionnée"
 
-#: terp.glade:12551
-msgid "<TAB>"
-msgstr "<TAB>"
+#: terp.glade:12580
+msgid "<Tab>"
+msgstr "<Tab>"
 
-#: terp.glade:12579
+#: terp.glade:12608
 msgid "Next editable widget"
 msgstr "Prochain widget editable"
 
-#: terp.glade:12607
-msgid "<SHIFT> + <TAB>"
-msgstr "<SHIFT> + <TAB>"
+#: terp.glade:12636
+msgid "<Shist> + <Tab>"
+msgstr "<Shift> + <Tab>"
 
-#: terp.glade:12635
+#: terp.glade:12664
 msgid "Previous editable widget"
 msgstr "Précédent widget editable"
 
-#: terp.glade:12663
-msgid "<ENTER>"
-msgstr "<ENTER>"
+#: terp.glade:12692
+msgid "<Enter>"
+msgstr "<Enter>"
 
-#: terp.glade:12691
+#: terp.glade:12720
 msgid "Auto-Complete text field"
-msgstr "Vider le champ"
+msgstr "Auto-completion du champ text"
 
-#: terp.glade:12725
+#: terp.glade:12748
+msgid "F1"
+msgstr "F1"
+
+#: terp.glade:12776
+msgid "Add a new line/field"
+msgstr "Ajouter une nouvelle ligne/champ"
+
+#: terp.glade:12804
+msgid "Open current field"
+msgstr "Ouvrir le champ courant"
+
+#: terp.glade:12832
+msgid "<b>Shortcuts in text entries</b>"
+msgstr "<b>Raccourcis dans les champs textes</b>"
+
+#: terp.glade:12860
+msgid "<b>Shortcuts in relation fields</b>"
+msgstr "<b>Raccourcis dans les champs relations</b>"
+
+#: terp.glade:12889
+msgid "F2"
+msgstr "F2"
+
+#: terp.glade:12923
 msgid "Edition Widgets"
-msgstr "Document en cours d'édition: %s"
+msgstr "Édition des widgets"
 
-#: terp.glade:12757
+#: terp.glade:12954
 msgid "Import from CSV"
 msgstr "Importer d'un fichier CSV"
 
-#: terp.glade:13126
+#: terp.glade:13323
 msgid "N_othing"
 msgstr "_Rien"
 
-#: terp.glade:13216
+#: terp.glade:13413
 msgid "Auto-Detect"
 msgstr "Auto-Détection"
 
-#: terp.glade:13302
+#: terp.glade:13499
 msgid "<b>Fields to import</b>"
 msgstr "<b>Champs à importer</b>"
 
-#: terp.glade:13370
+#: terp.glade:13567
 msgid "File to Import: "
-msgstr "<b>Fichier à importer</b>"
+msgstr "Fichier à importer :"
 
-#: terp.glade:13395
-msgid "Sélectionner un fichier"
-msgstr "Sélectionner un fichier"
+#: terp.glade:13592
+msgid "Open..."
+msgstr "Ouvrir..."
 
-#: terp.glade:13436
+#: terp.glade:13633
 msgid "Field Separater:"
-msgstr "_Séparateur de champ"
+msgstr "Séparateur de champ :"
 
-#: terp.glade:13464
+#: terp.glade:13661
 msgid "Encoding:"
-msgstr "Encoding:"
+msgstr "Encodage:"
 
-#: terp.glade:13496
+#: terp.glade:13693
 msgid ","
 msgstr ","
 
-#: terp.glade:13515
+#: terp.glade:13712
 msgid "Text Delimiter:"
-msgstr "Délimiteur de texte"
+msgstr "Délimiteur de texte :"
 
-#: terp.glade:13547
+#: terp.glade:13744
 msgid "\""
 msgstr "\""
 
-#: terp.glade:13566
+#: terp.glade:13763
 msgid "Lines to Skip:"
 msgstr "Lignes à ignorer :"
 
-#: terp.glade:13616
+#: terp.glade:13813
 msgid ""
 "UTF-8\n"
 "Latin1"
@@ -1310,195 +1326,195 @@ msgstr ""
 "UTF-8\n"
 "Latin1"
 
-#: terp.glade:13637
+#: terp.glade:13834
 msgid "CSV Parameters"
-msgstr "Paramètres CSV :"
+msgstr "Paramètres CSV"
 
-#: terp.glade:13841
+#: terp.glade:14036
 msgid "Server"
-msgstr "Serveur:"
+msgstr "Serveur"
 
-#: terp.glade:13904
+#: terp.glade:14099
 msgid "<b>Connect to a Tiny ERP server</b>"
 msgstr "<b>Se connecter a un serveur Tiny ERP</b>"
 
-#: terp.glade:13950
+#: terp.glade:14145
 msgid "Port:"
-msgstr "Port:"
+msgstr "Port :"
 
-#: terp.glade:14004
+#: terp.glade:14199
 msgid "8069"
 msgstr "8069"
 
-#: terp.glade:14022
+#: terp.glade:14217
 msgid "Protocol connection:"
-msgstr "Protocol de connection:"
+msgstr "Protocol de connection :"
 
-#: terp.glade:14105
+#: terp.glade:14299
 msgid "Choose a database..."
-msgstr "Veuillez choisir une base de données"
+msgstr "Veuillez choisir une base de données..."
 
-#: terp.glade:14175
+#: terp.glade:14369
 msgid "<b>Backup a database</b>"
 msgstr "<b>Sauvegarder une base de données</b>"
 
-#: terp.glade:14225 terp.glade:14651 terp.glade:15217 terp.glade:15861
+#: terp.glade:14419 terp.glade:14845 terp.glade:15410 terp.glade:16054
 msgid "http://localhost:8069"
 msgstr "http://localhost:8069"
 
-#: terp.glade:14431
-msgid "Database: "
-msgstr "Base de données : "
+#: terp.glade:14625
+msgid "Database:"
+msgstr "Base de données :"
 
-#: terp.glade:14503
+#: terp.glade:14696
 msgid "Restore a database"
 msgstr "Restaurer une base de données"
 
-#: terp.glade:14572
+#: terp.glade:14766
 msgid "<b>Restore a database</b>"
 msgstr "<b>Restaurer une base de données</b>"
 
-#: terp.glade:14802 terp.glade:15424
-msgid "New database name: "
-msgstr "Nouvelle base de données : "
+#: terp.glade:14996 terp.glade:15617
+msgid "New database name:"
+msgstr "Nouvelle base de données :"
 
-#: terp.glade:14852
+#: terp.glade:15046
 msgid "(must not contain any special char)"
 msgstr "(ne doit pas contenir de caractères spéciaux)"
 
-#: terp.glade:14909
+#: terp.glade:15103
 msgid "Operation in progress"
-msgstr "Operation en cours !"
+msgstr "Operation en cours"
 
-#: terp.glade:14968
+#: terp.glade:15162
 msgid "<b>Operation in progress</b>"
 msgstr "<b>Operation en cours</b>"
 
-#: terp.glade:15004
+#: terp.glade:15198
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
 "Patientez,\n"
-"cette opération peut durer quelques minutes..."
+"cette opération peut durer quelques instants..."
 
-#: terp.glade:15068
+#: terp.glade:15261
 msgid "Create a new database"
 msgstr "Créer une nouvelle base de données"
 
-#: terp.glade:15131
+#: terp.glade:15324
 msgid "<b>Create a new database</b>"
 msgstr "<b>Créer une nouvelle base de données</b>"
 
-#: terp.glade:15184
+#: terp.glade:15377
 msgid "Tiny ERP server:"
-msgstr "Tiny ERP serveur:"
+msgstr "Tiny ERP serveur :"
 
-#: terp.glade:15213
+#: terp.glade:15406
 msgid ""
 "This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on change to change the address."
 msgstr ""
-"Ceci est l'adresse du serveur Tiny ERP. Utilisez 'localhost'si le serveur "
-"estinstallé sur cet ordinateur. Cliquez sur 'Change' pour changer l'adresse."
+"Ceci est l'adresse du serveur Tiny ERP. Utilisez 'localhost' si le serveur "
+"est installé sur cet ordinateur. Cliquez sur 'Changer' pour changer l'adresse."
 
-#: terp.glade:15317
+#: terp.glade:15510
 msgid "Super admin password:"
-msgstr "Mot de passe admin:"
+msgstr "Mot de passe super admin :"
 
-#: terp.glade:15345
+#: terp.glade:15538
 msgid "Default language:"
-msgstr "Langue par défaut:"
+msgstr "Langue par défaut :"
 
-#: terp.glade:15373
-msgid "Load demonstration data: "
-msgstr "Charger les données démos : "
+#: terp.glade:15566
+msgid "Load demonstration data:"
+msgstr "Charger les données démos :"
 
-#: terp.glade:15401
+#: terp.glade:15594
 msgid ""
 "Check this box if you want demo data to be installed on your new database."
 msgstr ""
-"Cochez cette case si vous désirez installer les données démo dans la "
-"nouvellebase de données"
+"Cochez cette case si vous désirez installer des données de démomonstration dans la "
+"nouvelle base de données"
 
-#: terp.glade:15452
+#: terp.glade:15645
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
 "Choisissez le nom de la base de données qui sera créée. Le nom ne "
-"doitContenir aucun caractère spécial. Exemple: 'terp'."
+"doit contenir aucun caractère spécial. Exemple : 'terp'."
 
-#: terp.glade:15489
+#: terp.glade:15682
 msgid "(use 'admin', if you did not changed it)"
 msgstr "(Utilisez 'admin', si vous ne l'avez pas changé)"
 
-#: terp.glade:15517
+#: terp.glade:15710
 msgid ""
 "This is the password of the user that have the rights to administer "
 "databases. This is not a Tiny ERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 "Ceci est le mot de passe de l'utilisateur qui a les droits de gestion "
-"desbases de données. Il n'est pas un utilisateur Tiny mais un super "
-"administrateur.Si vous ne le changez pas, le mot de passe après "
+"des bases de données. Il n'est pas un utilisateur Tiny mais un super "
+"administrateur. Si vous ne le changez pas, le mot de passe après "
 "l'installation est 'admin'."
 
-#: terp.glade:15541
+#: terp.glade:15734
 msgid "Hello World"
 msgstr "Bonjour tout le monde!"
 
-#: terp.glade:15562
+#: terp.glade:15755
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
 "Choisissez la langue par défaut qui sera installée pour cette base de "
-"données.Vous pourrez installer d'autres langues par la suite via le menu "
-"Administration"
+"données. Vous pourrez installer d'autres langues par la suite via le menu "
+"d'administration"
 
-#: terp.glade:15587
+#: terp.glade:15780
 msgid "(must not contain any special character)"
 msgstr "(ne doit pas contenir de caractères spéciaux)"
 
-#: terp.glade:15626
+#: terp.glade:15818
 msgid "Change password"
 msgstr "Modifier le mot de passe"
 
-#: terp.glade:15698
-msgid "<b>Change your DB administration password</b>"
-msgstr "<b>Modifier le mot de passe administrateur</b>"
+#: terp.glade:15891
+msgid "<b>Change your super admin password</b>"
+msgstr "<b>Modifier le mot de passe super administrateur</b>"
 
-#: terp.glade:15744
+#: terp.glade:15937
 msgid "New password confirmation:"
-msgstr "Confirmation du nouveau mot de passe : "
+msgstr "Confirmation du nouveau mot de passe :"
 
-#: terp.glade:15772
+#: terp.glade:15965
 msgid "New password:"
-msgstr "Nouveau mot de passe:"
+msgstr "Nouveau mot de passe :"
 
-#: terp.glade:15800
+#: terp.glade:15993
 msgid "Old password:"
-msgstr "Ancien mot de passe:"
+msgstr "Ancien mot de passe :"
 
-#: terp.glade:16042
+#: terp.glade:16234
 msgid "Tiny ERP Message"
 msgstr "Message de Tiny ERP"
 
-#: terp.glade:16098
+#: terp.glade:16290
 msgid "msg_title"
-msgstr "Titre du message"
+msgstr "_Titre du message"
 
-#: terp.glade:16181
+#: terp.glade:16372
 msgid "Database creation"
 msgstr "Creation de la base de données"
 
-#: terp.glade:16401
-msgid "<b>Database created successfully !</b>"
+#: terp.glade:16592
+msgid "<b>Database created successfully!</b>"
 msgstr "<b>La base de données a été créée avec succès !</b>"
 
-#: terp.glade:16459
+#: terp.glade:16650
 msgid ""
 "You can connect to the new database using one of the following account:\n"
 "\n"
@@ -1509,828 +1525,35 @@ msgstr ""
 "\n"
 "    Administrateur: admin / admin "
 
-#: terp.glade:16491
+#: terp.glade:16681
 msgid "Concurrency exception"
-msgstr ""
+msgstr "Exception de concurence"
 
-#: terp.glade:16578
+#: terp.glade:16768
 msgid "Compare"
-msgstr ""
+msgstr "Comparer"
 
-#: terp.glade:16653
+#: terp.glade:16843
 msgid "Write anyway"
-msgstr ""
+msgstr "Écrire de toute façon"
 
-#: terp.glade:16718
+#: terp.glade:16908
 msgid ""
 "<b>\n"
-"Write concurrency warning :\n"
+"Write concurrency warning:\n"
 "</b>\n"
 "This document has been modified while you were editing it.\n"
-"  Choose :\n"
+"  Choose:\n"
 "   - \"Cancel\" to cancel saving.\n"
 "   - \"Compare\" to see the modified version.\n"
-"   - \"write anyway\" save your current version.\n"
+"   - \"Write anyway\" to save your current version.\n"
 msgstr ""
+"<b>\n"
+"Avertissement d'écriture concurrencielle :\n"
+"</b>\n"
+"Ce document a été modifié pendant qu'vous l'éditiez.\n"
+"  Choisissez :\n"
+"   - \"Annuler\" pour annuler la sauvegarde.\n"
+"   - \"Comparer\" pour voir la version modifiée.\n"
+"   - \"Écrire de toute façon\" pour sauver votre version courante.\n"
 
-#~ msgid "Tiny ERP Client %s"
-#~ msgstr "Client Tiny ERP %s"
-
-#~ msgid "specify alternate config file"
-#~ msgstr "spécifier un fichier de configuration"
-
-#~ msgid "enable basic debugging"
-#~ msgstr "activer le debogage de base"
-
-#~ msgid "specify channels to log"
-#~ msgstr "spécifier un canal à logger"
-
-#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-#~ msgstr "spécifier le niveau de log: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-
-#~ msgid "specify the user login"
-#~ msgstr "spécifier le login utilisateur"
-
-#~ msgid "specify the server port"
-#~ msgstr "spécifier le port du serveur"
-
-#~ msgid "specify the server ip/name"
-#~ msgstr "spécifier l'adresse serveur (nom/IP)"
-
-#~ msgid "Unable to launch this file !"
-#~ msgstr "Impossible d'exécuter ce fichier !"
-
-#~ msgid "Unable to launch the application associated to this content !"
-#~ msgstr "Impossible d'exécuter l'application associée à ce contenu"
-
-#~ msgid "Support request sent !"
-#~ msgstr "Demande de support envoyée"
-
-#~ msgid "Could not connect to server !"
-#~ msgstr "Impossible de se connecter au serveur."
-
-#~ msgid "No database found, you must create one !"
-#~ msgstr "Aucune base de données, veuillez en créer une !"
-
-#~ msgid "Do not use special characters !"
-#~ msgstr "Ne pas utiliser de caractères spéciaux !"
-
-#~ msgid "Can not connect to server, please change it !"
-#~ msgstr ""
-#~ "Impossible de se connecter au serveur, veuillez modifier votre choix !"
-
-#~ msgid ""
-#~ "The database name must contain only normal characters or \"_\".\n"
-#~ "You must avoid all accents, space or special characters."
-#~ msgstr ""
-#~ "Le nom de la base de donnée ne peut pas contenir de caractères spéciaux, "
-#~ "accents, espaces ou \"_\""
-
-#~ msgid "Bad database name !"
-#~ msgstr "Mauvais nom de base de données !"
-
-#~ msgid "Bad database administrator password !"
-#~ msgstr "Le mot de passe administrateur est incorrect !"
-
-#~ msgid "Could not create database."
-#~ msgstr "Impossible de créer cette base de données."
-
-#~ msgid "Error during database creation !"
-#~ msgstr "Une erreur est apparue pendant la création de la base de données !"
-
-#~ msgid ""
-#~ "The server crashed during installation.\n"
-#~ "We suggest you to drop this database."
-#~ msgstr ""
-#~ "Une erreur est apparue pendant la création.\n"
-#~ "Veuillez supprimer la base de données et recommencer."
-
-#, fuzzy
-#~ msgid "You can now connect to the database as an administrator."
-#~ msgstr ""
-#~ "Vous pouvez vous connecter à la nouvelle base de données en utilisant les "
-#~ "accès suivants :\n"
-#~ "\n"
-
-#~ msgid "Press Ctrl+O to login"
-#~ msgstr "Faire Ctrl+O pour se logger"
-
-#~ msgid "%s request(s)"
-#~ msgstr "%s requête(s)"
-
-#~ msgid "No request"
-#~ msgstr "Pas de requête"
-
-#~ msgid " - %s pending request(s)"
-#~ msgstr " - %s requête(s) en attente"
-
-#~ msgid ""
-#~ "Connection error !\n"
-#~ "Unable to connect to the server !"
-#~ msgstr ""
-#~ "Erreur de connection !\n"
-#~ "Impossible de se connecter au serveur !"
-
-#~ msgid ""
-#~ "Connection error !\n"
-#~ "Bad username or password !"
-#~ msgstr ""
-#~ "Erreur de connexion !\n"
-#~ "Mauvais nom d'utilisateur ou mot de passe !"
-
-#~ msgid "Connection Error !"
-#~ msgstr "Erreur de connexion !"
-
-#~ msgid "Not logged !"
-#~ msgstr "Non connecté !"
-
-#~ msgid "Do you really want to quit ?"
-#~ msgstr "Voulez-vous vraiment quitter ?"
-
-#~ msgid "Delete a database"
-#~ msgstr "Supprimer une base de données"
-
-#~ msgid "Database dropped successfully !"
-#~ msgstr "La base de données a été supprimée avec succès !"
-
-#~ msgid "Could not drop database."
-#~ msgstr "Impossible de supprimer la base de données."
-
-#~ msgid "Couldn't drop database"
-#~ msgstr "Impossible de supprimer la base de données."
-
-#~ msgid "Database restored successfully !"
-#~ msgstr "La base de données a été restaurée avec succès !"
-
-#~ msgid "Could not restore database."
-#~ msgstr "Impossible de restaurer la base de données."
-
-#~ msgid "Couldn't restore database"
-#~ msgstr "Impossible de restaurer la base de données."
-
-#~ msgid ""
-#~ "Confirmation password do not match new password, operation cancelled!"
-#~ msgstr ""
-#~ "Différence entre le mot de passe inséré et la confirmation, veuillez "
-#~ "recommencer !"
-
-#~ msgid "Validation Error."
-#~ msgstr "Erreur de validation"
-
-#~ msgid "Could not change password database."
-#~ msgstr "Impossible de modifier le mot de passe de la base de données."
-
-#~ msgid "Bas password provided !"
-#~ msgstr "Le mot de passe est incorrect !"
-
-#~ msgid "Error, password not changed."
-#~ msgstr "Erreur, le mot de passe n'a pas été modifié."
-
-#~ msgid "Backup a database"
-#~ msgstr "Sauvegarder une base de données"
-
-#~ msgid "Database backuped successfully !"
-#~ msgstr "La base de données a été sauvegardée avec succès !"
-
-#~ msgid "Couldn't backup database."
-#~ msgstr "Impossible de sauvegarder la base de données."
-
-#~ msgid " record(s) saved !"
-#~ msgstr " enregistrement(s) sauvé(s) !"
-
-#~ msgid ""
-#~ "Operation failed !\n"
-#~ "I/O error"
-#~ msgstr ""
-#~ "Operation échouée !\n"
-#~ "Erreur E/S"
-
-#~ msgid "Error Opening Excel !"
-#~ msgstr "Erreur dans l'ouverture de Excel !"
-
-#~ msgid ""
-#~ "Function only available for MS Office !\n"
-#~ "Sorry, OOo users :("
-#~ msgstr ""
-#~ "Fonction disponible pour MS Office seulement !\n"
-#~ "Désolé, utilisateurs d'OOo :("
-
-#~ msgid "Export Data"
-#~ msgstr "Exporter données"
-
-#~ msgid "Preferences"
-#~ msgstr "Préférences"
-
-#~ msgid "Preference"
-#~ msgstr "Préférence"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Description"
-#~ msgstr "Description"
-
-#~ msgid "Tree"
-#~ msgstr "Arbre"
-
-#~ msgid "Reload"
-#~ msgstr "Recharger"
-
-#~ msgid "No resource selected !"
-#~ msgstr "Pas de ressource sélectionnée"
-
-#~ msgid "You have to select one resource!"
-#~ msgstr "Vous devez sélectionner une ressource"
-
-#~ msgid "Creation User"
-#~ msgstr "Créateur"
-
-#~ msgid "Creation Date"
-#~ msgstr "Date de création"
-
-#~ msgid "Latest Modification by"
-#~ msgstr "Modifié en dernier par"
-
-#~ msgid "Latest Modification Date"
-#~ msgstr "Date de la dernière modification"
-
-#~ msgid "Owner"
-#~ msgstr "Propriétaire"
-
-#~ msgid "Group Owner"
-#~ msgstr "Groupe propriétaire"
-
-#~ msgid "Access Level"
-#~ msgstr "Niveau d'accès"
-
-#~ msgid "Are you sure to remove this record ?"
-#~ msgstr ""
-#~ "Etes-vous certain de vouloir\n"
-#~ "supprimer cet enregistrement ?"
-
-#, fuzzy
-#~ msgid "Are you sure to remove those records ?"
-#~ msgstr ""
-#~ "Etes-vous certain de vouloir\n"
-#~ "supprimer cet enregistrement ?"
-
-#, fuzzy
-#~ msgid "Resources not removed !"
-#~ msgstr "Ressource non supprimée"
-
-#, fuzzy
-#~ msgid "Resources removed."
-#~ msgstr "Ressource supprimée"
-
-#~ msgid "Working now on the duplicated document !"
-#~ msgstr "Vous travaillez maintenant sur le document dupliqué"
-
-#~ msgid "Document saved !"
-#~ msgstr "Document sauvé"
-
-#~ msgid "Invalid form !"
-#~ msgstr "Formulaire invalide"
-
-#~ msgid "No record selected!"
-#~ msgstr "Pas d'enregistrement sélectionné!"
-
-#~ msgid "No record selected"
-#~ msgstr "Pas d'enregistrement sélectionné!"
-
-#~ msgid "New document"
-#~ msgstr "Nouveau document"
-
-#~ msgid "Editing document (id: "
-#~ msgstr "Document en cours d'édition: "
-
-#~ msgid "Record: "
-#~ msgstr "Enregistrements: "
-
-#~ msgid "No preference available for this resource !"
-#~ msgstr "Pas de préférence disponible pour cette ressource"
-
-#~ msgid ""
-#~ "This record has been modified\n"
-#~ "do you want to save it ?"
-#~ msgstr ""
-#~ "Cet enregistrement a été modifié\n"
-#~ "voulez-vous le sauver ?"
-
-#~ msgid "Tiny ERP Search: %s"
-#~ msgstr "Tiny ERP Chercher : %s"
-
-#~ msgid "Tiny ERP Search: %s (%%d result(s))"
-#~ msgstr "Tiny ERP recherche : %s (%%d resultat(s))"
-
-#~ msgid "Name"
-#~ msgstr "Nom"
-
-#~ msgid "Ressource Name"
-#~ msgstr "Nom de la ressource"
-
-#~ msgid "Names"
-#~ msgstr "Noms"
-
-#~ msgid "Switch View"
-#~ msgstr "Autre vue"
-
-#~ msgid "Changt root"
-#~ msgstr "Changer de racine"
-
-#~ msgid "Open"
-#~ msgstr "Ouvrir"
-
-#~ msgid "Print"
-#~ msgstr "Imprimer"
-
-#~ msgid "Close"
-#~ msgstr "Fermer"
-
-#~ msgid "No resource selected!"
-#~ msgstr "Pas de ressource sélectionnée!"
-
-#~ msgid ""
-#~ "Are you sure you want\n"
-#~ "to remove this record?"
-#~ msgstr ""
-#~ "Etes-vous certain de vouloir\n"
-#~ "supprimer cet enregistrement ?"
-
-#~ msgid "Error removing resource!"
-#~ msgstr "Erreur pendant la suppression des ressources"
-
-#~ msgid "Unable to chroot: no tree resource selected"
-#~ msgstr ""
-#~ "Impossible de changer de racine: pas de ressource en arbre sélectionnée"
-
-#~ msgid "Imported %d objects !"
-#~ msgstr "Importé %d objets!"
-
-#~ msgid "Field name"
-#~ msgstr "Nom du champ"
-
-#~ msgid "Are you sure you want to remove this attachment ?"
-#~ msgstr "Etes-vous certain de vouloir supprimer cet attachement ?"
-
-#~ msgid "Select the destination file"
-#~ msgstr "Sélectionner le fichier destination"
-
-#~ msgid "Can not open file !"
-#~ msgstr "Impossible d'ouvrir le fichier !"
-
-#~ msgid "Can not write file !"
-#~ msgstr "Impossible d'écrire le fichier"
-
-#~ msgid ""
-#~ "Unable to preview image file !\n"
-#~ "Verify the format."
-#~ msgstr ""
-#~ "Impossible de prévisualiser le fichier image !\n"
-#~ "Verifiez le format."
-
-#~ msgid "Unknown Window"
-#~ msgstr "Fenêtre inconnue"
-
-#~ msgid "Nothing to print!"
-#~ msgstr "Rien à imprimer !"
-
-#~ msgid "Printing aborted, too long delay !"
-#~ msgstr "Impression interrompue, durée trop longue !"
-
-#~ msgid "Error: "
-#~ msgstr "Erreur:"
-
-#~ msgid "Select your action"
-#~ msgstr "Sélectionnez votre action"
-
-#~ msgid "No action defined!"
-#~ msgstr "Pas d'action définie!"
-
-#~ msgid "Connection refused !"
-#~ msgstr "Connexion refusée !"
-
-#~ msgid "Connection refused!"
-#~ msgstr "Connexion refusée !"
-
-#~ msgid "Application Error"
-#~ msgstr "Erreur de l'application"
-
-#~ msgid "View details"
-#~ msgstr "Voir les détails"
-
-#~ msgid "Relation Field: F1 New   F2 Open/Search"
-#~ msgstr "F1 Nouveau      F2 Ouvrir/rechercher"
-
-#~ msgid "Warning; field \"%s\" is required !"
-#~ msgstr "Attention; le champs \"%s\" est obligatoire !"
-
-#~ msgid "You must select a record to use the relation !"
-#~ msgstr "Vous devez sélectionner un enregistrement pour utiliser ce lien"
-
-#~ msgid "Select the file to attach"
-#~ msgstr "Sélectionner le fichier à attacher"
-
-#~ msgid "Error reading the file"
-#~ msgstr "Erreur de lecture du fichier"
-
-#~ msgid "Save attachment as..."
-#~ msgstr "Sauver l'attachement sous ..."
-
-#~ msgid "Error writing the file!"
-#~ msgstr "Erreur d'écriture du fichier"
-
-#~ msgid "%d bytes"
-#~ msgstr "%d bytes"
-
-#~ msgid "Report"
-#~ msgstr "Rapport"
-
-#~ msgid "Invalid Form, correct red fields !"
-#~ msgstr "Formulaire invalide, corrigez les champs en rouge!"
-
-#~ msgid "This widget is readonly !"
-#~ msgstr "Ce widget est en lecture seule !"
-
-#~ msgid "Set as default"
-#~ msgstr "Définir le défaut"
-
-#~ msgid "Switch"
-#~ msgstr "Autre vue"
-
-#~ msgid "You have to select a resource !"
-#~ msgstr "Vous devez sélectionner une ressource"
-
-#~ msgid "Select a file"
-#~ msgstr "Sélectionner le fichier destination"
-
-#~ msgid "Save as ..."
-#~ msgstr "Sauver sous ..."
-
-#~ msgid "Open file ..."
-#~ msgstr "Ouvrir ..."
-
-#~ msgid "Always applicable !"
-#~ msgstr "Toujours applicable !"
-
-#~ msgid "You must save this record to use the relate button !"
-#~ msgstr "Vous devez sélectionner un enregistrement pour utiliser ce bouton"
-
-#~ msgid "You must select a record to use the relate button !"
-#~ msgstr "Vous devez sélectionner un enregistrement pour utiliser ce bouton"
-
-#~ msgid "Can not generate graph !"
-#~ msgstr "Impossible de générer le graphique !"
-
-#~ msgid "Closing Tiny ERP, KeyboardInterrupt"
-#~ msgstr "Fermeture de Tiny ERP, Interruption Clavier"
-
-#~ msgid "No available plugin for this resource !"
-#~ msgstr "Pas de plugin disponible pour cette ressource !"
-
-#~ msgid "Choose a Plugin"
-#~ msgstr "Choisissez un plugin"
-
-#~ msgid "End date"
-#~ msgstr "Date de fin"
-
-#~ msgid "Limit :"
-#~ msgstr "Limite :"
-
-#~ msgid "Offset :"
-#~ msgstr "Décalage :"
-
-#~ msgid "Error no report"
-#~ msgstr "Erreur pas de rapport"
-
-#~ msgid "Write Report to File"
-#~ msgstr "Enregistrer le rapport dans un fichier"
-
-#~ msgid "Advanced search parameters"
-#~ msgstr "Paramètres de recherche avancés"
-
-#~ msgid "dialog1"
-#~ msgstr "dialogue1"
-
-#~ msgid "<Esc>"
-#~ msgstr "<Esc>"
-
-#~ msgid "demo"
-#~ msgstr "demo"
-
-#~ msgid "Attachement: "
-#~ msgstr "Attachement: "
-
-#~ msgid "Unable to read resource"
-#~ msgstr "Impossible de lire la ressource"
-
-#~ msgid "This record did not exist !"
-#~ msgstr "Cet enregistrement n'existe pas !"
-
-#~ msgid "version"
-#~ msgstr "version"
-
-#~ msgid "Welcome to Tiny Enterprise Resource Planing !"
-#~ msgstr "Bienvenue à Tiny Enterprise Resource Planing !"
-
-#~ msgid "You are already logged!"
-#~ msgstr "Vous êtes déjà connecté!"
-
-#~ msgid "You are logged out. Press Ctrl+O to login"
-#~ msgstr "Vous êtes déconnecté. Ctrl+O pour se loger"
-
-#~ msgid ""
-#~ "^N New   ^S Save   ^D Delete   ^F Search   ^X Next   ^Z Previous   ^R "
-#~ "Repeat"
-#~ msgstr ""
-#~ "^N Nouveau  ^S Sauver  ^D Effacer  ^F Chercher  ^X Suivant  ^W Précédent  "
-#~ "^R Répéter"
-
-#~ msgid "select field value:"
-#~ msgstr "sélectionner la valeur du champ:"
-
-#~ msgid "You have to select one, and only one, ressource !"
-#~ msgstr "Vous ne devez sélectionner qu'une seule ressource !"
-
-#~ msgid "Search error!"
-#~ msgstr "Erreur de recherche!"
-
-#~ msgid "Remove"
-#~ msgstr "Supprimer"
-
-#~ msgid "Edit"
-#~ msgstr "Editer"
-
-#~ msgid "New root"
-#~ msgstr "Nouvelle racine"
-
-#~ msgid ""
-#~ "Import Error !\n"
-#~ "Fields: \"%s\" does not exists !"
-#~ msgstr ""
-#~ "Error d'import !\n"
-#~ "Champs: \"%s\" n'existent pas !"
-
-#~ msgid "Import Done"
-#~ msgstr "Import fini."
-
-#~ msgid "View Create Error:"
-#~ msgstr "Erreur création de vue:"
-
-#~ msgid "unknown tag: -%s-%s-"
-#~ msgstr "balise inconnue: -%s-%s-"
-
-#~ msgid "Editing new document"
-#~ msgstr "Document en cours d'édition: "
-
-#~ msgid "The column '%s' is required"
-#~ msgstr "La colonne '%s' est requise"
-
-#~ msgid "_New Window"
-#~ msgstr "_Nouvelle fenêtre"
-
-#~ msgid "Reloa_d"
-#~ msgstr "R_echarger"
-
-#~ msgid "S_earch"
-#~ msgstr "_Chercher"
-
-#~ msgid "Previous Window"
-#~ msgstr "Fenêtre précédente"
-
-#~ msgid "Next Window"
-#~ msgstr "Fenêtre suivante"
-
-#~ msgid "_Filter"
-#~ msgstr "_Filtrer"
-
-#~ msgid "_Plugin Manager"
-#~ msgstr "_Gestionnaire de plugin"
-
-#~ msgid "_Processus Map"
-#~ msgstr "Carte des _processus"
-
-#~ msgid "About Tiny ERP"
-#~ msgstr "À propos de Tiny ERP"
-
-#~ msgid ""
-#~ "\n"
-#~ "Main Tiny ERP developers\n"
-#~ "\n"
-#~ "Server Development:\n"
-#~ "\n"
-#~ "Fabien Pinckaers\n"
-#~ "Nicolas Évrard\n"
-#~ "Gaëtan de Menten\n"
-#~ "Antony Lesuisse\n"
-#~ "Guillaume Saupin\n"
-#~ "\n"
-#~ "Client Development:\n"
-#~ "\n"
-#~ "Fabien Pinckaers\n"
-#~ "Nicolas Évrard\n"
-#~ "Gaëtan de Menten\n"
-#~ "Guillaume Saupin\n"
-#~ "\n"
-#~ "Web Client Development:\n"
-#~ "\n"
-#~ "Nicolas Di Pietro\n"
-#~ "\n"
-#~ "...we still have to write the list of all others contributors..."
-#~ msgstr ""
-#~ "\n"
-#~ "Dévelopeurs principaux Tiny ERP\n"
-#~ "\n"
-#~ "Developement du serveur:\n"
-#~ "\n"
-#~ "Fabien Pinckaers\n"
-#~ "Nicolas Évrard\n"
-#~ "Gaëtan de Menten\n"
-#~ "Antony Lesuisse\n"
-#~ "Guillaume Saupin\n"
-#~ "\n"
-#~ "Dévelopement du client:\n"
-#~ "\n"
-#~ "Fabien Pinckaers\n"
-#~ "Nicolas Évrard\n"
-#~ "Gaëtan de Menten\n"
-#~ "Guillaume Saupin\n"
-#~ "\n"
-#~ "Dévelopement du client Web:\n"
-#~ "\n"
-#~ "Nicolas Di Pietro\n"
-#~ "\n"
-#~ "...nous devons encore écrire une liste de tous les ceux qui y ont "
-#~ "contribués..."
-
-#~ msgid "Credit_s"
-#~ msgstr "Crédit_s"
-
-#~ msgid "Remove this resource"
-#~ msgstr "Supprimer cette ressource"
-
-#~ msgid "Modify/Open this resource"
-#~ msgstr "Modifier/Ouvrir cette ressource"
-
-#~ msgid "_Set sequence"
-#~ msgstr "_Définir séquence"
-
-#~ msgid "Al_l"
-#~ msgstr "_Tous"
-
-#~ msgid "_All Tiny ERP users"
-#~ msgstr "_Tous les utilisateurs de Tiny ERP"
-
-#~ msgid "_Only for you"
-#~ msgstr "_Seulement pour vous"
-
-#~ msgid "<b>Preference active for:</b>"
-#~ msgstr "<b>Préférence active pour:</b>"
-
-#~ msgid "Tiny ERP - Import a CSV"
-#~ msgstr "Tiny ERP - Importer un CSV"
-
-#~ msgid "The CSV file must be encoded in UTF-8 !"
-#~ msgstr "Le fichier CSV doit être encodé en UTF-8 !"
-
-#~ msgid "Be carefull with the fields order."
-#~ msgstr "Faites attention à l'ordre des champs."
-
-#~ msgid "<b>Notes</b>"
-#~ msgstr "<b>Notes</b>"
-
-#~ msgid "Number: "
-#~ msgstr "Nombre: "
-
-#~ msgid "Description : "
-#~ msgstr "Description : "
-
-#~ msgid "Next: left click - Previous : right click on the image"
-#~ msgstr "Suivant: bouton de gauche - Précédent : bouton droit sur l'image"
-
-#~ msgid ""
-#~ "(choose one)\n"
-#~ "Apparel\n"
-#~ "Banking\n"
-#~ "Biotechnology\n"
-#~ "Chemicals\n"
-#~ "Communications\n"
-#~ "Construction\n"
-#~ "Consulting\n"
-#~ "Education\n"
-#~ "Electronics\n"
-#~ "Energy\n"
-#~ "Engineering\n"
-#~ "Entertainment\n"
-#~ "Environmental\n"
-#~ "Finance\n"
-#~ "Government\n"
-#~ "Healthcare\n"
-#~ "Hospitality\n"
-#~ "Insurance\n"
-#~ "Machinery\n"
-#~ "Manufacturing\n"
-#~ "Media\n"
-#~ "Not For Profit\n"
-#~ "Recreation\n"
-#~ "Retail\n"
-#~ "Shipping\n"
-#~ "Technology\n"
-#~ "Telecommunications\n"
-#~ "Transportation\n"
-#~ "Utilities\n"
-#~ "Other"
-#~ msgstr ""
-#~ "--\n"
-#~ "Textile\n"
-#~ "Banque\n"
-#~ "Biotechnologies\n"
-#~ "Médical\n"
-#~ "Communications\n"
-#~ "Construction\n"
-#~ "Consultance\n"
-#~ "Education\n"
-#~ "Electronique\n"
-#~ "Energie\n"
-#~ "Recherche\n"
-#~ "Entertainment\n"
-#~ "Environnement\n"
-#~ "Finance\n"
-#~ "Gouvernement\n"
-#~ "Santé\n"
-#~ "Hopitaux\n"
-#~ "Assurance\n"
-#~ "Mécanique\n"
-#~ "Production\n"
-#~ "Media\n"
-#~ "Non-profit\n"
-#~ "Ludiques\n"
-#~ "Négoce\n"
-#~ "Logistique\n"
-#~ "Technologie\n"
-#~ "Telecommunication\n"
-#~ "Transport\n"
-#~ "Utilitaire\n"
-#~ "Autre"
-
-#~ msgid ""
-#~ "0-5\n"
-#~ "6-20\n"
-#~ "21-50\n"
-#~ "51-100\n"
-#~ "101-250\n"
-#~ "250+"
-#~ msgstr ""
-#~ "0-5\n"
-#~ "6-20\n"
-#~ "21-50\n"
-#~ "51-100\n"
-#~ "101-250\n"
-#~ "250+"
-
-#~ msgid ""
-#~ "Student\n"
-#~ "Manager\n"
-#~ "IT Employee\n"
-#~ "Accountant\n"
-#~ "Other"
-#~ msgstr ""
-#~ "Etudiant\n"
-#~ "Directeur\n"
-#~ "Employé IT\n"
-#~ "Comptable\n"
-#~ "Autre"
-
-#~ msgid ""
-#~ "Windows\n"
-#~ "Linux\n"
-#~ "Other"
-#~ msgstr ""
-#~ "Windows\n"
-#~ "Linux\n"
-#~ "Autre"
-
-#~ msgid ""
-#~ "I use only open source software\n"
-#~ "I use some Open Source soft.\n"
-#~ "I never used free software"
-#~ msgstr ""
-#~ "Je n'utilise que du logiciel libre\n"
-#~ "J'utilise certains logiciels libres\n"
-#~ "Je n'ai jamais utilisé de logiciels libres"
-
-#~ msgid ""
-#~ "(choose one)\n"
-#~ "Search Engine\n"
-#~ "Conference or Trade show\n"
-#~ "Link in another website\n"
-#~ "Word of mouth\n"
-#~ "In the press\n"
-#~ "Other"
-#~ msgstr ""
-#~ "--\n"
-#~ "Moteur de recherche\n"
-#~ "Conference ou salon\n"
-#~ "Lien sur un site web\n"
-#~ "Bouche à oreille\n"
-#~ "Dans la presse\n"
-#~ "Autre"
