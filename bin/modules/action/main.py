@@ -87,7 +87,7 @@ class main(service.Service):
 			return
 		if action['type']=='ir.actions.act_window':
 			for key in ('res_id', 'res_model', 'view_type', 'view_mode',
-					'limit'):
+					'limit', 'auto_refresh'):
 				datas[key] = action.get(key, datas.get(key, None))
 
 			if datas['limit'] is None:
@@ -118,7 +118,7 @@ class main(service.Service):
 			obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
 					action['view_type'], datas.get('window',None), ctx,
 					datas['view_mode'], name=action.get('name', False),
-					limit=datas['limit'])
+					limit=datas['limit'], auto_refresh=datas['auto_refresh'])
 
 			#for key in tools.expr_eval(action.get('context', '{}')).keys():
 			#	del rpc.session.context[key]

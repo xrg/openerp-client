@@ -45,7 +45,8 @@ class Screen(signal_event.signal_event):
 	def __init__(self, model_name, view_ids=None, view_type=None,
 			parent=None, context=None, views_preload=None, tree_saves=True,
 			domain=None, create_new=False, row_activate=None, hastoolbar=False,
-			default_get=None, show_search=False, window=None, limit=80):
+			default_get=None, show_search=False, window=None, limit=80,
+			readonly=False):
 		if view_ids is None:
 			view_ids = []
 		if view_type is None:
@@ -92,6 +93,7 @@ class Screen(signal_event.signal_event):
 		self.__current_view = 0
 		self.tree_saves = tree_saves
 		self.limit = limit
+		self.readonly= readonly
 
 		if view_type:
 			self.view_to_load = view_type[1:]
@@ -235,6 +237,8 @@ class Screen(signal_event.signal_event):
 						if attrs['widget']=='one2many_list':
 							attrs['widget']='one2many'
 						attrs['type'] = attrs['widget']
+					if self.readonly:
+						attrs['readonly'] = 1
 					try:
 						fields[str(attrs['name'])].update(attrs)
 					except:

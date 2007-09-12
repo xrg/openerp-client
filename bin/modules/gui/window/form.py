@@ -56,7 +56,8 @@ from widget.screen import Screen
 class form(object):
 
 	def __init__(self, model, res_id=False, domain=None, view_type=None,
-			view_ids=None, window=None, context=None, name=False, limit=80):
+			view_ids=None, window=None, context=None, name=False, limit=80,
+			auto_refresh=False):
 		if not view_type:
 			view_type = ['form','tree']
 		if domain is None:
@@ -80,7 +81,7 @@ class form(object):
 		self.screen = Screen(self.model, view_type=view_type,
 				context=self.context, view_ids=view_ids, domain=domain,
 				hastoolbar=options.options['form.toolbar'], show_search=True,
-				window=self.window, limit=limit)
+				window=self.window, limit=limit, readonly=bool(auto_refresh))
 		self.screen.signal_connect(self, 'record-message', self._record_message)
 		self.screen.widget.show()
 		oregistry.add_receiver('misc-message', self._misc_message)
@@ -134,6 +135,9 @@ class form(object):
 				self.sig_new(autosave=False)
 			if self.screen.current_view.view_type in ('tree', 'graph', 'calendar'):
 				self.screen.search_filter()
+
+		if auto_refresh and int(auto_refresh):
+			gobject.timeout_add(int(auto_refresh) * 1000, self.sig_reload)
 
 	def sig_goto(self, *args):
 		if not self.modified_save():
@@ -296,6 +300,8 @@ class form(object):
 		self.message_state('')
 
 	def sig_reload(self):
+		if not hasattr(self, 'screen'):
+			return False
 		if self.screen.current_view.view_type == 'form':
 			self.screen.cancel_current()
 			self.screen.display()
@@ -308,6 +314,7 @@ class form(object):
 					self.screen.display()
 					break
 		self.message_state('')
+		return True
 
 	def sig_action(self, keyword='client_action_multi', previous=False, report_type='pdf', adds={}):
 		ids = self.screen.ids_get()
