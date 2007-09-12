@@ -132,7 +132,7 @@ class parse(object):
 		hb_param=gtk.HBox(spacing=3)
 		hb_param.pack_start(gtk.Label(_('Limit :')), expand=False, fill=False)
 
-		self.spin_limit = gtk.SpinButton(climb_rate=1,digits=0)
+		self.spin_limit = gtk.SpinButton(climb_rate=1, digits=0)
 		self.spin_limit.set_numeric(False)
 		self.spin_limit.set_adjustment(gtk.Adjustment(value=80, lower=1, upper=10000, step_incr=10, page_incr=100, page_size=100))
 		self.spin_limit.set_property('visible', True)
@@ -255,6 +255,9 @@ class form(wid_int.wid_int):
 
 	def limit_changed(self, widget):
 		self.spin_offset.set_increments(step=self.spin_limit.get_value(), page=100)
+
+	def set_limit(self, value):
+		return self.spin_limit.set_value(value)
 
 	def get_limit(self):
 		return self.spin_limit.get_value()

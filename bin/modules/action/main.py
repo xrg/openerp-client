@@ -86,8 +86,12 @@ class main(service.Service):
 		if 'type' not in action:
 			return
 		if action['type']=='ir.actions.act_window':
-			for key in ('res_id', 'res_model', 'view_type','view_mode'):
+			for key in ('res_id', 'res_model', 'view_type', 'view_mode',
+					'limit'):
 				datas[key] = action.get(key, datas.get(key, None))
+
+			if datas['limit'] is None:
+				datas['limit'] = 80
 
 			view_ids=False
 			if action.get('views', []):
@@ -111,7 +115,10 @@ class main(service.Service):
 				domain.append(datas['domain'])
 
 			obj = service.LocalService('gui.window')
-			obj.create(view_ids, datas['res_model'], datas['res_id'], domain, action['view_type'], datas.get('window',None), ctx,datas['view_mode'], name=action.get('name', False))
+			obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
+					action['view_type'], datas.get('window',None), ctx,
+					datas['view_mode'], name=action.get('name', False),
+					limit=datas['limit'])
 
 			#for key in tools.expr_eval(action.get('context', '{}')).keys():
 			#	del rpc.session.context[key]
@@ -141,7 +148,9 @@ class main(service.Service):
 		if 'id' in data:
 			try:
 				id = data.get('id', False) 
-				actions = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', keyword, [(data['model'], id)], False, rpc.session.context)
+				actions = rpc.session.rpc_exec_auth('/object', 'execute',
+						'ir.values', 'get', 'action', keyword,
+						[(data['model'], id)], False, rpc.session.context)
 				actions = map(lambda x: x[2], actions)
 			except rpc.rpc_exception, e:
 #				common.error(_('Error: ')+str(e.type), e.message, e.data)

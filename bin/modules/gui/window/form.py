@@ -52,10 +52,19 @@ import gc
 from observator import oregistry
 from widget.screen import Screen
 
+
 class form(object):
-	def __init__(self, model, res_id=False, domain=[], view_type=None, view_ids=[], window=None, context={}, name=False):
+
+	def __init__(self, model, res_id=False, domain=None, view_type=None,
+			view_ids=None, window=None, context=None, name=False, limit=80):
 		if not view_type:
 			view_type = ['form','tree']
+		if domain is None:
+			domain = []
+		if view_ids is None:
+			view_ids = []
+		if context is None:
+			context = {}
 
 		fields = {}
 		self.model = model
@@ -68,7 +77,10 @@ class form(object):
 		self.domain = domain
 		self.context = context
 
-		self.screen = Screen(self.model, view_type=view_type, context=self.context, view_ids=view_ids, domain=domain, hastoolbar=options.options['form.toolbar'], show_search=True, window=self.window)
+		self.screen = Screen(self.model, view_type=view_type,
+				context=self.context, view_ids=view_ids, domain=domain,
+				hastoolbar=options.options['form.toolbar'], show_search=True,
+				window=self.window, limit=limit)
 		self.screen.signal_connect(self, 'record-message', self._record_message)
 		self.screen.widget.show()
 		oregistry.add_receiver('misc-message', self._misc_message)

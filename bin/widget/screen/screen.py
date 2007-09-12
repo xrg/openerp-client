@@ -39,9 +39,28 @@ import widget_search
 import signal_event
 import tools
 
+
 class Screen(signal_event.signal_event):
-	def __init__(self, model_name, view_ids=[], view_type=['tree','form'], parent=None, context={}, views_preload={}, tree_saves=True, domain=[], create_new=False, row_activate=None, hastoolbar=False, default_get={}, show_search=False, window=None):
+
+	def __init__(self, model_name, view_ids=None, view_type=None,
+			parent=None, context=None, views_preload=None, tree_saves=True,
+			domain=None, create_new=False, row_activate=None, hastoolbar=False,
+			default_get=None, show_search=False, window=None, limit=80):
+		if view_ids is None:
+			view_ids = []
+		if view_type is None:
+			view_type = ['tree', 'form']
+		if context is None:
+			context = {}
+		if views_preload is None:
+			views_preload = {}
+		if domain is None:
+			domain = []
+		if default_get is None:
+			default_get = {}
+
 		super(Screen, self).__init__()
+
 		self.show_search = show_search
 		self.hastoolbar = hastoolbar
 		self.default_get=default_get
@@ -72,6 +91,7 @@ class Screen(signal_event.signal_event):
 		self.widget = self.screen_container.widget_get()
 		self.__current_view = 0
 		self.tree_saves = tree_saves
+		self.limit = limit
 
 		if view_type:
 			self.view_to_load = view_type[1:]
@@ -85,9 +105,15 @@ class Screen(signal_event.signal_event):
 	def search_active(self, active=True):
 		if active and self.show_search:
 			if not self.filter_widget:
-				view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'fields_view_get', False, 'form', self.context)
-				self.filter_widget = widget_search.form(view_form['arch'], view_form['fields'], self.name, self.window, self.domain, (self, self.search_filter))
-				self.screen_container.add_filter(self.filter_widget.widget, self.search_filter, self.search_clear)
+				view_form = rpc.session.rpc_exec_auth('/object', 'execute',
+						self.name, 'fields_view_get', False, 'form',
+						self.context)
+				self.filter_widget = widget_search.form(view_form['arch'],
+						view_form['fields'], self.name, self.window,
+						self.domain, (self, self.search_filter))
+				self.screen_container.add_filter(self.filter_widget.widget,
+						self.search_filter, self.search_clear)
+				self.filter_widget.set_limit(self.limit)
 			self.screen_container.show_filter()
 		else:
 			self.screen_container.hide_filter()
