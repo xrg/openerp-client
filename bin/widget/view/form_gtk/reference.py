@@ -44,7 +44,9 @@ from modules.gui.window.win_search import win_search
 import rpc
 from rpc import RPCProxy
 
+
 class reference(interface.widget_interface):
+
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
@@ -64,7 +66,8 @@ class reference(interface.widget_interface):
 		self.wid_text.connect('button_press_event', self._menu_open)
 		self.wid_text.connect_after('changed', self.sig_changed)
 		self.wid_text.connect_after('activate', self.sig_activate)
-		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+		self.wid_text_focus_out_id = self.wid_text.connect_after(
+				'focus-out-event', self.sig_activate, True)
 		self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
 		self.but_new = gtk.Button()
@@ -96,7 +99,6 @@ class reference(interface.widget_interface):
 
 		self.ok = True
 		self._readonly = False
-		self._value = False
 		self.set_popdown(attrs.get('selection',[]))
 
 		self.last_key = (None, 0)
@@ -137,44 +139,56 @@ class reference(interface.widget_interface):
 		return self.wid_text
 
 	def set_value(self, model, model_field):
-		return model_field.set_client(model, self._value)
+		return
 
 	def _menu_sig_pref(self, obj):
 		self._menu_sig_default_set()
 
 	def _menu_sig_default(self, obj):
-		res = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['model'], 'default_get', [self.attrs['name']])
+		res = rpc.session.rpc_exec_auth('/object', 'execute',
+				self.attrs['model'], 'default_get', [self.attrs['name']])
 		self.value = res.get(self.attrs['name'], False)
 
 	def sig_activate(self, widget, event=None, leave=False):
 		self.ok = False
+		value = self._view.modelfield.get_client(self._view.model)
+
 		self.wid_text.disconnect(self.wid_text_focus_out_id)
-		resource = self.get_model()
-		if self._value:
+		if value:
 			if not leave:
-				model, (id, name) = self._value
+				model, (id, name) = value
 				dia = dialog(model, id, window=self._window)
 				ok, val = dia.run()
 				dia.destroy()
 		else:
+			resource = self.get_model()
 			if not self._readonly and ( self.wid_text.get_text() or not leave):
 				domain = self._view.modelfield.domain_get(self._view.model)
 				context = self._view.modelfield.context_get(self._view.model)
-		
-				ids = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
+
+				ids = rpc.session.rpc_exec_auth('/object', 'execute', resource,
+						'name_search', self.wid_text.get_text(), domain,
+						'ilike', context)
 				if len(ids)==1:
 					id, name = ids[0]
-					self._view.modelfield.set_client(self._view.model, (resource, [id, name]))
+					self._view.modelfield.set_client(self._view.model,
+							(resource, [id, name]))
 					self.display(self._view.model, self._view.modelfield)
 					self.ok = True
 					return True
 
-				win = win_search(resource, sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self._window)
+				win = win_search(resource, sel_multi=False,
+						ids=[x[0] for x in ids], context=context,
+						domain=domain, parent=self._window)
 				ids = win.go()
 				if ids:
-					id, name = rpc.session.rpc_exec_auth('/object', 'execute', resource, 'name_get', [ids[0]], rpc.session.context)[0]
-					self._view.modelfield.set_client(self._view.model, (resource, [id, name]))
-		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+					id, name = rpc.session.rpc_exec_auth('/object', 'execute',
+							resource, 'name_get', [ids[0]],
+							rpc.session.context)[0]
+					self._view.modelfield.set_client(self._view.model,
+							(resource, [id, name]))
+		self.wid_text_focus_out_id = self.wid_text.connect_after(
+				'focus-out-event', self.sig_activate, True)
 		self.display(self._view.model, self._view.modelfield)
 		self.ok=True
 
@@ -182,7 +196,8 @@ class reference(interface.widget_interface):
 		dia = dialog(self.get_model(), window=self._window)
 		ok, value = dia.run()
 		if ok:
-			self._view.modelfield.set_client((self.get_model(), value))
+			self._view.modelfield.set_client(self._view.model,
+					(self.get_model(), value))
 			self.display(self._view.model, self._view.modelfield)
 		dia.destroy()
 
@@ -196,20 +211,22 @@ class reference(interface.widget_interface):
 		return False
 
 	def sig_changed_combo(self, *args):
-		self.wid_text.set_text('')
-		self._value = False
+		if self.ok:
+			self.wid_text.set_text('')
+			self._view.modelfield.set_client(self._view.model,
+					(self.get_model(), [0, '']))
 
 	def sig_changed(self, *args):
-		if self.attrs.get('on_change',False) and self._value and self.ok:
-			self.on_change(self.attrs['on_change'])
-			interface.widget_interface.sig_changed(self)
-		elif self.ok:
+		if self.ok:
 			if self._view.modelfield.get(self._view.model):
-				self._view.modelfield.set_client(self._view.model, False)
+				self._view.modelfield.set_client(self._view.model,
+						(self.get_model(), [0, '']))
 				self.display(self._view.model, self._view.modelfield)
+		return False
 
 	def display(self, model, model_field):
 		if not model_field:
+			self.ok = False
 			self.widget_combo.child.set_text('')
 			return False
 		super(reference, self).display(model, model_field)
@@ -219,8 +236,7 @@ class reference(interface.widget_interface):
 		if value:
 			model, (id, name) = value
 			self.widget_combo.child.set_text(self._selection2[model])
-			self.sig_changed()
-			if not name:
+			if not name and id:
 				id, name = RPCProxy(model).name_get([id], rpc.session.context)[0]
 			self._value = model, (id, name)
 			self.wid_text.set_text(name)
@@ -241,5 +257,6 @@ class reference(interface.widget_interface):
 			self.last_key = [ key, 1 ]
 		if not self.key_catalog.has_key(key):
 			return
-		self.entry.set_active_iter(self.key_catalog[key][self.last_key[1] % len(self.key_catalog[key])])
+		self.entry.set_active_iter(self.key_catalog[key][self.last_key[1] \
+				% len(self.key_catalog[key])])
 
