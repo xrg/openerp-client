@@ -402,17 +402,19 @@ class terp_main(service.Service):
 		submenu = gtk.Menu()
 		menu = self.glade.get_widget('menu_theme')
 		old = None
-		for dname in os.listdir(common.terp_path('themes')):
-			if dname.startswith('.'):
-				continue
-			fname = common.terp_path(os.path.join('themes', dname, 'gtkrc'))
-			if fname and os.path.isfile(fname):
-				open_item = gtk.RadioMenuItem(old, dname)
-				old = open_item
-				submenu.append(open_item)
-				if dname == options.options['client.theme']:
-					open_item.set_active(True)
-				open_item.connect('toggled', self.theme_select, dname)
+		themes_path = common.terp_path('themes')
+		if themes_path:
+			for dname in os.listdir(themes_path):
+				if dname.startswith('.'):
+					continue
+				fname = common.terp_path(os.path.join('themes', dname, 'gtkrc'))
+				if fname and os.path.isfile(fname):
+					open_item = gtk.RadioMenuItem(old, dname)
+					old = open_item
+					submenu.append(open_item)
+					if dname == options.options['client.theme']:
+						open_item.set_active(True)
+					open_item.connect('toggled', self.theme_select, dname)
 
 		submenu.append(gtk.SeparatorMenuItem())
 		open_item = gtk.RadioMenuItem(old, _('Default Theme'))
