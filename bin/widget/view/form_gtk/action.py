@@ -42,6 +42,7 @@ import tools
 import time
 from modules.gui.window.win_search import win_search
 import service
+import datetime
 
 class action(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
@@ -63,6 +64,7 @@ class action(interface.widget_interface):
 			self.context.update(eval(self.action.get('context', '{}'), self.context.copy()))
 			a = self.context.copy()
 			a['time'] = time
+			a['datetime'] = datetime
 			self.domain = tools.expr_eval(self.action['domain'], a)
 
 			view_id = []
