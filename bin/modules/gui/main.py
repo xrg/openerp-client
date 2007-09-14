@@ -626,7 +626,9 @@ class terp_main(service.Service):
 	def sig_request_new(self, args=None):
 		obj = service.LocalService('gui.window')
 		try:
-			return obj.create(None, 'res.request', False, [('act_from','=',rpc.session.uid)], 'form', mode='form,tree')
+			return obj.create(None, 'res.request', False,
+					[('act_from', '=', rpc.session.uid)], 'form',
+					mode='form,tree', window=self.window)
 		except:
 			return False
 
@@ -634,7 +636,9 @@ class terp_main(service.Service):
 		ids,ids2 = self.request_set()
 		obj = service.LocalService('gui.window')
 		try:
-			return obj.create(False, 'res.request', ids, [('act_to','=',rpc.session.uid)], 'form', mode='tree,form')
+			return obj.create(False, 'res.request', ids,
+					[('act_to', '=', rpc.session.uid)], 'form',
+					mode='tree,form', window=self.window)
 		except:
 			return False
 
@@ -642,7 +646,10 @@ class terp_main(service.Service):
 		ids,ids2 = self.request_set()
 		obj = service.LocalService('gui.window')
 		try:
-			return obj.create(False, 'res.request', ids, [('act_from','=',rpc.session.uid), ('state','=','waiting')], 'form', mode='tree,form')
+			return obj.create(False, 'res.request', ids,
+					[('act_from', '=', rpc.session.uid),
+						('state', '=', 'waiting')], 'form',
+					mode='tree,form', window=self.window)
 		except:
 			return False
 

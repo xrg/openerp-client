@@ -50,14 +50,21 @@ class dialog(object):
 	def __init__(self, model, id=None, attrs={} ,domain=[], context={}, window=None):
 
 		self.dia = gtk.Dialog(_('Tiny ERP - Link'), window,
-				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
-				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-					gtk.STOCK_OK, gtk.RESPONSE_OK))
+				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
 		if ('string' in attrs) and attrs['string']:
 			self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
 		self.dia.set_property('default-width', 760)
 		self.dia.set_property('default-height', 500)
 		self.dia.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+
+		self.accel_group = gtk.AccelGroup()
+		self.dia.add_accel_group(self.accel_group)
+
+		self.but_cancel = self.dia.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+		self.but_cancel.add_accelerator('clicked', self.accel_group, gtk.keysyms.Escape, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+
+		self.but_ok = self.dia.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
+		self.but_ok.add_accelerator('clicked', self.accel_group, gtk.keysyms.Return, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
 		scroll = gtk.ScrolledWindow()
 		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
@@ -75,6 +82,8 @@ class dialog(object):
 		else:
 			self.screen.new()
 		vp.add(self.screen.widget)
+		x,y = self.screen.screen_container.size_get()
+		vp.set_size_request(x,y+30)
 		self.dia.show_all()
 		self.screen.display()
 
@@ -208,7 +217,6 @@ class many2one(interface.widget_interface):
 
 	def _menu_sig_default(self, obj):
 		res = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['model'], 'default_get', [self.attrs['name']])
-		self.value = res.get(self.attrs['name'], False)
 
 	def sig_activate(self, widget, event=None, leave=False):
 		self.ok = False
@@ -222,7 +230,6 @@ class many2one(interface.widget_interface):
 				if ok:
 					self._view.modelfield.set_client(self._view.model, value,
 							force_change=True)
-					self.value = value
 				dia.destroy()
 		else:
 			if not self._readonly and ( self.wid_text.get_text() or not leave):

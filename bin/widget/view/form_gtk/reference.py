@@ -47,7 +47,10 @@ from rpc import RPCProxy
 
 class reference(interface.widget_interface):
 
-	def __init__(self, window, parent, model, attrs={}):
+	def __init__(self, window, parent, model, attrs=None):
+		if attrs is None:
+			attrs = {}
+		print "window:", window
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
 		self.widget = gtk.HBox(spacing=3)
@@ -154,39 +157,47 @@ class reference(interface.widget_interface):
 		value = self._view.modelfield.get_client(self._view.model)
 
 		self.wid_text.disconnect(self.wid_text_focus_out_id)
-		if value:
+		if not value:
+			model, (id, name) = '', (0, '')
+		else:
+			model, (id, name) = value
+		if id:
 			if not leave:
-				model, (id, name) = value
-				dia = dialog(model, id, window=self._window)
-				ok, val = dia.run()
+				print self._window
+				dia = dialog(model, id, attrs=self.attrs, window=self._window)
+				ok, id = dia.run()
+				if ok:
+					self._view.modelfield.set_client(self._view.model,
+							(model, id), force_change=True)
 				dia.destroy()
 		else:
-			resource = self.get_model()
 			if not self._readonly and ( self.wid_text.get_text() or not leave):
 				domain = self._view.modelfield.domain_get(self._view.model)
 				context = self._view.modelfield.context_get(self._view.model)
 
-				ids = rpc.session.rpc_exec_auth('/object', 'execute', resource,
+				ids = rpc.session.rpc_exec_auth('/object', 'execute', model,
 						'name_search', self.wid_text.get_text(), domain,
 						'ilike', context)
 				if len(ids)==1:
 					id, name = ids[0]
 					self._view.modelfield.set_client(self._view.model,
-							(resource, [id, name]))
+							(model, [id, name]))
 					self.display(self._view.model, self._view.modelfield)
 					self.ok = True
+					self.wid_text_focus_out_id = self.wid_text.connect_after(
+						'focus-out-event', self.sig_activate, True)
 					return True
 
-				win = win_search(resource, sel_multi=False,
+				win = win_search(model, sel_multi=False,
 						ids=[x[0] for x in ids], context=context,
 						domain=domain, parent=self._window)
 				ids = win.go()
 				if ids:
 					id, name = rpc.session.rpc_exec_auth('/object', 'execute',
-							resource, 'name_get', [ids[0]],
+							model, 'name_get', [ids[0]],
 							rpc.session.context)[0]
 					self._view.modelfield.set_client(self._view.model,
-							(resource, [id, name]))
+							(model, [id, name]))
 		self.wid_text_focus_out_id = self.wid_text.connect_after(
 				'focus-out-event', self.sig_activate, True)
 		self.display(self._view.model, self._view.modelfield)
@@ -233,17 +244,18 @@ class reference(interface.widget_interface):
 		value = model_field.get_client(model)
 		self.ok = False
 		img = gtk.Image()
-		if value:
+		if not value:
+			model, (id, name) = '', (0, '')
+		else:
 			model, (id, name) = value
+		if id:
 			self.widget_combo.child.set_text(self._selection2[model])
-			if not name and id:
+			if not name:
 				id, name = RPCProxy(model).name_get([id], rpc.session.context)[0]
-			self._value = model, (id, name)
 			self.wid_text.set_text(name)
 			img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
 			self.but_open.set_image(img)
 		else:
-			self._value = False
 			self.wid_text.set_text('')
 			img.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
 			self.but_open.set_image(img)
