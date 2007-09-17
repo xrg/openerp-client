@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tinyerp-client\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-10 16:36+0200\n"
-"PO-Revision-Date: 2006-12-21 23:19+0100\n"
+"POT-Creation-Date: 2007-09-17 09:52+0200\n"
+"PO-Revision-Date: 2007-09-11 18:35+0100\n"
 "Last-Translator: Dan Horák <dan@danny.cz>\n"
 "Language-Team: Czech <dan@danny.cz>\n"
 "MIME-Version: 1.0\n"
@@ -117,9 +117,8 @@ msgid "Copy this resource"
 msgstr "Kopírovat tento zdroj"
 
 #: terp.glade:787
-#, fuzzy
 msgid "_Duplicate"
-msgstr "Duplikovat"
+msgstr "_Duplikovat"
 
 #: terp.glade:809
 msgid "_Delete"
@@ -142,14 +141,12 @@ msgid "Switch to list/form"
 msgstr "Přepnout na seznam/formulář"
 
 #: terp.glade:925
-#, fuzzy
 msgid "_Menu"
-msgstr "Hlavní nabídka"
+msgstr "_Menu"
 
 #: terp.glade:953
-#, fuzzy
 msgid "_New Home Tab"
-msgstr "Menu v nové kartě"
+msgstr "_Nová domácí karta"
 
 #: terp.glade:975 terp.glade:12009
 msgid "Close Tab"
@@ -253,35 +250,35 @@ msgstr "Pravá nástrojová lišta"
 
 #: terp.glade:1377
 msgid "Tabs default position"
-msgstr ""
+msgstr "Výchozí pozice karet"
 
 #: terp.glade:1387
 msgid "Top"
-msgstr ""
+msgstr "Nahoře"
 
 #: terp.glade:1397
 msgid "Left"
-msgstr ""
+msgstr "Vlevo"
 
 #: terp.glade:1408
 msgid "Right"
-msgstr ""
+msgstr "Vpravo"
 
 #: terp.glade:1419
 msgid "Bottom"
-msgstr ""
+msgstr "Dole"
 
 #: terp.glade:1434
 msgid "Tabs default orientation"
-msgstr ""
+msgstr "Výchozí orientace karet"
 
 #: terp.glade:1444
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontální"
 
 #: terp.glade:1454
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikální"
 
 #: terp.glade:1473
 msgid "_Print"
@@ -304,9 +301,8 @@ msgid "_Execute a plugin"
 msgstr "Spustit zásuvný modul"
 
 #: terp.glade:1575
-#, fuzzy
 msgid "_Shortcuts"
-msgstr "Zkratky"
+msgstr "_Zkratky"
 
 #: terp.glade:1584
 msgid "_Help"
@@ -333,7 +329,6 @@ msgid "Keyboard Shortcuts"
 msgstr "Klávesové zkratky"
 
 #: terp.glade:1699
-#, fuzzy
 msgid "_License"
 msgstr "_Licence"
 
@@ -374,9 +369,8 @@ msgid "Other View"
 msgstr "Jiný pohled"
 
 #: terp.glade:1903 terp.glade:1904
-#, fuzzy
 msgid "Menu"
-msgstr "Hlavní nabídka"
+msgstr "Menu"
 
 #: terp.glade:1934
 msgid "Launch actions about this resource"
@@ -427,7 +421,6 @@ msgid "Tiny ERP - Forms"
 msgstr "Tiny ERP - Formuláře"
 
 #: terp.glade:2482
-#, fuzzy
 msgid "State:"
 msgstr "Stav:"
 
@@ -568,7 +561,6 @@ msgid "Hello World!"
 msgstr "Ahoj světe!"
 
 #: terp.glade:4484
-#, fuzzy
 msgid "Tiny ERP - Selection"
 msgstr "Tiny ERP - Výběr"
 
@@ -601,7 +593,6 @@ msgid "_Unselect"
 msgstr "Zrušit výběr"
 
 #: terp.glade:4834
-#, fuzzy
 msgid "Filter:"
 msgstr "Filtr:"
 
@@ -772,14 +763,12 @@ msgid "Tiny ERP - Error"
 msgstr "Tiny ERP - Chyba"
 
 #: terp.glade:7385
-#, fuzzy
 msgid "Application Error!"
 msgstr "Chyba aplikace!"
 
 #: terp.glade:7480
-#, fuzzy
 msgid "<b>Error 404</b>"
-msgstr "<b>Chybový kód</b>"
+msgstr "<b>Chyba 404</b>"
 
 #: terp.glade:7505
 msgid "<b>Error code:</b>"
@@ -803,11 +792,8 @@ msgid "De_scription"
 msgstr "Popis"
 
 #: terp.glade:7657
-#, fuzzy
 msgid "Error details"
-msgstr ""
-"Podrobnosti o chybě\n"
-"dqsdsqdqsdsd"
+msgstr "Podrobnosti o chybě"
 
 #: terp.glade:7673
 msgid "_Details"
@@ -839,17 +825,14 @@ msgid "<b>Your Company:</b>"
 msgstr "<b>Vaše společnost:</b>"
 
 #: terp.glade:7822
-#, fuzzy
 msgid "<b>Your Email:</b>"
-msgstr "<b>Vaše emailová adresa: </b>"
+msgstr "<b>Vaše emailová adresa:</b>"
 
 #: terp.glade:7892
-#, fuzzy
 msgid "Explain what you did:"
 msgstr "Vysvětlete, co jste dělali:"
 
 #: terp.glade:7920
-#, fuzzy
 msgid "Others Comments:"
 msgstr "Další komentáře:"
 
@@ -858,7 +841,6 @@ msgid "Send Support Request"
 msgstr "Odeslat požadavek na podporu"
 
 #: terp.glade:8122
-#, fuzzy
 msgid "<b>support contract id</b>"
 msgstr "<b>id smlouvy o podpoře </b>"
 
@@ -875,12 +857,10 @@ msgstr ""
 "Velmi naléhavé"
 
 #: terp.glade:8192 terp.glade:11265
-#, fuzzy
 msgid "Emergency:"
 msgstr "Nebezpečí:"
 
 #: terp.glade:8220
-#, fuzzy
 msgid "Phone Number:"
 msgstr "Telefonní číslo:"
 
@@ -921,12 +901,10 @@ msgid "Ne_xt Tip"
 msgstr "Následující tip"
 
 #: terp.glade:8956
-#, fuzzy
 msgid "_Display a new tip next time?"
 msgstr "Zobrazit tip při příštím spuštění?"
 
 #: terp.glade:8996
-#, fuzzy
 msgid "Tiny ERP - License"
 msgstr "Tiny ERP - Licence"
 
@@ -939,17 +917,14 @@ msgid "Tiny ERP - Date & Time selection"
 msgstr "Tiny ERP - Výběr data a času"
 
 #: terp.glade:9307
-#, fuzzy
 msgid "Hour:"
-msgstr "Hodina :"
+msgstr "Hodina:"
 
 #: terp.glade:9351
-#, fuzzy
 msgid "Minute:"
-msgstr "Minuta :"
+msgstr "Minuta:"
 
 #: terp.glade:9426
-#, fuzzy
 msgid "Go to resource ID"
 msgstr "Přejít na zdroj s ID"
 
@@ -998,14 +973,12 @@ msgid "How did you hear about us:"
 msgstr "Jak jste se o nás dověděli:"
 
 #: terp.glade:10077
-#, fuzzy
 msgid "Open Source:"
-msgstr "Open Source: "
+msgstr "Open Source:"
 
 #: terp.glade:10403
-#, fuzzy
 msgid "<b>Your company:</b>"
-msgstr "<b>Vaše společnost</b>"
+msgstr "<b>Vaše společnost:</b>"
 
 #: terp.glade:10465
 msgid "We plan to use Tiny ERP"
@@ -1017,24 +990,19 @@ msgstr "Plánujeme poskytovat služby s Tiny ERP"
 
 #: terp.glade:10509
 msgid "Tell us why you try Tiny ERP and what are your current softwares:"
-msgstr ""
+msgstr "Řekněte nám proč zkoušíte Tiny ERP a jaký je váš současný systém:"
 
 #: terp.glade:10574
-#, fuzzy
 msgid "<b>Your interrest:</b>"
-msgstr "<b>Váš zájem</b>"
+msgstr "<b>Váš zájem:</b>"
 
 #: terp.glade:10632
-#, fuzzy
 msgid "(Get Tiny ERP announces, docs and new releases by email)"
-msgstr ""
-"(Dostávat oznámení, dokumentaci a nové verze Tiny ERP e-mailem, maximálně 6 "
-"zpráv za rok.)"
+msgstr "(Dostávat oznámení, dokumentaci a nové verze Tiny ERP e-mailem)"
 
 #: terp.glade:10660
-#, fuzzy
 msgid "Company:"
-msgstr "_Doména:"
+msgstr "Společnost:"
 
 #: terp.glade:10689
 msgid "E-Mail:"
@@ -1045,7 +1013,6 @@ msgid "<b>Keep Informed</b>"
 msgstr "<b>Být informován</b>"
 
 #: terp.glade:10886
-#, fuzzy
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
 "<i>\n"
@@ -1057,8 +1024,8 @@ msgstr ""
 "b>\n"
 "<i>\n"
 "Váš požadavek bude odeslán firmě Tiny ERP, která zanedlouho odpoví.\n"
-"Pokud váše servisní organizace není partnerem firmy Tiny ERP, odpověd nelze "
-"vymáhat.</i>"
+"Odpověď nemusíte dostat, pokud nemáte smlouvu s firmou TinyERP nebo jejím "
+"partnerem</i>"
 
 #: terp.glade:10991
 msgid "<b>Your email:</b>"
@@ -1193,19 +1160,16 @@ msgid "Main Shortcuts"
 msgstr "Hlavní zkratky"
 
 #: terp.glade:12412
-#, fuzzy
 msgid "<Ctrl> + X"
-msgstr "<Ctrl> + O"
+msgstr "<Ctrl> + X"
 
 #: terp.glade:12440
-#, fuzzy
 msgid "<Ctrl> + C"
-msgstr "<Ctrl> + O"
+msgstr "<Ctrl> + C"
 
 #: terp.glade:12468
-#, fuzzy
 msgid "<Ctrl> + V"
-msgstr "<Ctrl> + O"
+msgstr "<Ctrl> + V"
 
 #: terp.glade:12496
 msgid "Cut selected text"
@@ -1220,27 +1184,24 @@ msgid "Paste selected text"
 msgstr "Vložit vybraný text"
 
 #: terp.glade:12580
-#, fuzzy
 msgid "<Tab>"
-msgstr "<TAB>"
+msgstr "<Tab>"
 
 #: terp.glade:12608
 msgid "Next editable widget"
 msgstr "Další editovatelný prvek"
 
 #: terp.glade:12636
-#, fuzzy
 msgid "<Shist> + <Tab>"
-msgstr "<SHIFT> + <TAB>"
+msgstr "<Shift> + <Tab>"
 
 #: terp.glade:12664
 msgid "Previous editable widget"
 msgstr "Předchozí editovatelný prvek"
 
 #: terp.glade:12692
-#, fuzzy
 msgid "<Enter>"
-msgstr "<Ctrl> + <Enter>"
+msgstr "<Enter>"
 
 #: terp.glade:12720
 msgid "Auto-Complete text field"
@@ -1248,28 +1209,27 @@ msgstr "Samodokončovací textové pole"
 
 #: terp.glade:12748
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: terp.glade:12776
 msgid "Add a new line/field"
-msgstr ""
+msgstr "Přidat nový řádek/pole"
 
 #: terp.glade:12804
 msgid "Open current field"
-msgstr ""
+msgstr "Otevřít aktuální pole"
 
 #: terp.glade:12832
 msgid "<b>Shortcuts in text entries</b>"
 msgstr "<b>Klávesové zkratky pro textová pole</b>"
 
 #: terp.glade:12860
-#, fuzzy
 msgid "<b>Shortcuts in relation fields</b>"
-msgstr "<b>Klávesové zkratky pro textová pole</b>"
+msgstr "<b>Klávesové zkratky pro pole</b>"
 
 #: terp.glade:12889
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
 #: terp.glade:12923
 msgid "Edition Widgets"
@@ -1292,14 +1252,12 @@ msgid "<b>Fields to import</b>"
 msgstr "<b>Pole pro import</b>"
 
 #: terp.glade:13567
-#, fuzzy
 msgid "File to Import:"
 msgstr "Soubor k importu:"
 
 #: terp.glade:13592
-#, fuzzy
 msgid "Open..."
-msgstr "Otevřít"
+msgstr "Otevřít..."
 
 #: terp.glade:13633
 msgid "Field Separater:"
@@ -1318,7 +1276,6 @@ msgid "Lines to Skip:"
 msgstr "Vynechané řádky:"
 
 #: terp.glade:13834
-#, fuzzy
 msgid "CSV Parameters"
 msgstr "Parametry CSV"
 
@@ -1339,9 +1296,8 @@ msgid "Port:"
 msgstr "Port:"
 
 #: terp.glade:14217
-#, fuzzy
 msgid "Protocol connection:"
-msgstr "Zabezpečené připojení:"
+msgstr "Protokol pro spojení"
 
 #: terp.glade:14299
 msgid "Choose a database..."
@@ -1364,7 +1320,6 @@ msgid "http://localhost:8069"
 msgstr "http://localhost:8069"
 
 #: terp.glade:14996 terp.glade:15617
-#, fuzzy
 msgid "New database name:"
 msgstr "Název nové databáze:"
 
@@ -1401,7 +1356,6 @@ msgid "Tiny ERP server:"
 msgstr "Tiny ERP server:"
 
 #: terp.glade:15406
-#, fuzzy
 msgid ""
 "This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
@@ -1418,7 +1372,6 @@ msgid "Default language:"
 msgstr "Výchozí jazyk:"
 
 #: terp.glade:15566
-#, fuzzy
 msgid "Load demonstration data:"
 msgstr "Nahrát ukázková data:"
 
@@ -1473,7 +1426,6 @@ msgid "Change password"
 msgstr "Změnit heslo"
 
 #: terp.glade:15891
-#, fuzzy
 msgid "<b>Change your super admin password</b>"
 msgstr "<b>Změňte své heslo pro administraci databáze</b>"
 
@@ -1498,7 +1450,6 @@ msgid "Database creation"
 msgstr "Vytvoření databáze"
 
 #: terp.glade:16592
-#, fuzzy
 msgid "<b>Database created successfully!</b>"
 msgstr "<b>Databáze úspěšně vytvořena!</b>"
 
@@ -1514,15 +1465,15 @@ msgstr ""
 
 #: terp.glade:16681
 msgid "Concurrency exception"
-msgstr ""
+msgstr "Výjimka souběhu"
 
 #: terp.glade:16768
 msgid "Compare"
-msgstr ""
+msgstr "Porovnat"
 
 #: terp.glade:16843
 msgid "Write anyway"
-msgstr ""
+msgstr "Přesto zapsat"
 
 #: terp.glade:16908
 msgid ""
@@ -1535,5 +1486,11 @@ msgid ""
 "   - \"Compare\" to see the modified version.\n"
 "   - \"Write anyway\" to save your current version.\n"
 msgstr ""
-
-
+"<b>\n"
+"Varování při souběhu zápisů:\n"
+"</b>\n"
+"Tento dokument byl změněn během provádění vašich úprav:\n"
+"  Vyberte:\n"
+"   - \"Zrušit\" pro zrušení ukládání.\n"
+"   - \"Porovnat\" pro zobrazení změněné verze.\n"
+"   - \"Přesto zapsat\" pro zapsání vaší verze.\n"
