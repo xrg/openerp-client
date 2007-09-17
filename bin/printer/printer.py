@@ -72,7 +72,7 @@ class Printer(object):
 			return lambda fn: os.startfile(fn)
 		else:
 			if options.options['printer.softpath_html'] == 'none':
-				prog = self._findInPath(['ooffice2', 'openoffice', 'firefox', 'mozilla', 'galeon'])
+				prog = self._findInPath(['ooffice', 'ooffice2', 'openoffice', 'firefox', 'mozilla', 'galeon'])
 				def opener(fn):
 					pid = os.fork()
 					if not pid:
@@ -105,7 +105,7 @@ class Printer(object):
 		else:
 			if options.options['printer.preview']:
 				if options.options['printer.softpath'] == 'none':
-					prog = self._findInPath(['evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview'])
+					prog = self._findInPath(['evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview', 'acroread'])
 					def opener(fn):
 						pid = os.fork()
 						if not pid:
