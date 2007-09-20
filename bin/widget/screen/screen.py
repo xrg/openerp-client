@@ -206,6 +206,7 @@ class Screen(signal_event.signal_event):
 		if self.current_model:
 			self.current_model.validate_set()
 		self.display()
+		self.current_view.set_cursor()
 		# TODO: set True or False accoring to the type
 
 	def load_view_to_load(self):

@@ -301,7 +301,7 @@ class ViewList(object):
 	def set_cursor(self):
 		if self.screen.current_model:
 			path = self.store.on_get_path(self.screen.current_model)
-			self.widget_tree.set_cursor(path, self.widget_tree.get_columns()[0], bool(self.widget_tree.editable))
+			self.widget_tree.set_cursor(path, self.widget_tree.get_columns()[0])
 
 	def sel_ids_get(self):
 		def _func_sel_get(store, path, iter, ids):
