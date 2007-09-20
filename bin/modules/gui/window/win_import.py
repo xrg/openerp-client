@@ -37,6 +37,7 @@ import rpc
 import csv, StringIO
 
 import options
+import service
 
 #
 # TODO: make it works with references
