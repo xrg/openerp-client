@@ -133,7 +133,7 @@ class Screen(signal_event.signal_event):
 			filter_keys.append(key)
 		for key, op, value in self.domain:
 			if key not in filter_keys and \
-					(key <> 'active' and self.context.get('active_test', False)):
+					not (key == 'active' and self.context.get('active_test', False)):
 				v.append((key, op, value))
 		try:
 			ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search', v, offset,limit, 0, self.context)
