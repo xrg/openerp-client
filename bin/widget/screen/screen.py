@@ -128,7 +128,13 @@ class Screen(signal_event.signal_event):
 		limit=self.filter_widget.get_limit()
 		offset=self.filter_widget.get_offset()
 		v = self.filter_widget.value
-		v += self.domain
+		filter_keys = []
+		for key, op, value in v:
+			filter_keys.append(key)
+		for key, op, value in self.domain:
+			if key not in filter_keys and \
+					(key <> 'active' and self.context.get('active_test', False)):
+				v.append((key, op, value))
 		try:
 			ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search', v, offset,limit, 0, self.context)
 		except:

@@ -628,7 +628,8 @@ class terp_main(service.Service):
 		try:
 			return obj.create(None, 'res.request', False,
 					[('act_from', '=', rpc.session.uid)], 'form',
-					mode='form,tree', window=self.window)
+					mode='form,tree', window=self.window,
+					context={'active_test': False})
 		except:
 			return False
 
@@ -637,8 +638,9 @@ class terp_main(service.Service):
 		obj = service.LocalService('gui.window')
 		try:
 			return obj.create(False, 'res.request', ids,
-					[('act_to', '=', rpc.session.uid)], 'form',
-					mode='tree,form', window=self.window)
+					[('act_to', '=', rpc.session.uid), ('active', '=', True)],
+					'form', mode='tree,form', window=self.window,
+					context={'active_test': False})
 		except:
 			return False
 
@@ -648,15 +650,17 @@ class terp_main(service.Service):
 		try:
 			return obj.create(False, 'res.request', ids,
 					[('act_from', '=', rpc.session.uid),
-						('state', '=', 'waiting')], 'form',
-					mode='tree,form', window=self.window)
+						('state', '=', 'waiting'), ('active', '=', True)],
+					'form', mode='tree,form', window=self.window,
+					context={'active_test': False})
 		except:
 			return False
 
 	def request_set(self):
 		try:
 			uid = rpc.session.uid
-			ids,ids2 = rpc.session.rpc_exec_auth_try('/object', 'execute', 'res.request', 'request_get')
+			ids,ids2 = rpc.session.rpc_exec_auth_try('/object', 'execute',
+					'res.request', 'request_get')
 			if len(ids):
 				message = _('%s request(s)') % len(ids)
 			else:
