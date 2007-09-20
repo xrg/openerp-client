@@ -76,5 +76,5 @@ class ViewGraph(object):
 	def unset_editable(self):
 		pass
 
-	def set_cursor(self):
+	def set_cursor(self, new=False):
 		pass

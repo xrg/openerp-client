@@ -290,7 +290,7 @@ class Screen(signal_event.signal_event):
 		self.current_model.validate_set()
 		self.display()
 		if self.current_view:
-			self.current_view.set_cursor()
+			self.current_view.set_cursor(new=True)
 		return self.current_model
 
 	def new_model_position(self):

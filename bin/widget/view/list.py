@@ -298,10 +298,11 @@ class ViewList(object):
 					value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
 			self.children[c][2].set_label(locale.format('%.'+str(self.children[c][3])+'f', value))
 
-	def set_cursor(self):
+	def set_cursor(self, new=False):
 		if self.screen.current_model:
 			path = self.store.on_get_path(self.screen.current_model)
-			self.widget_tree.set_cursor(path, self.widget_tree.get_columns()[0])
+			self.widget_tree.set_cursor(path, self.widget_tree.get_columns()[0],
+					new)
 
 	def sel_ids_get(self):
 		def _func_sel_get(store, path, iter, ids):

@@ -282,5 +282,5 @@ class ViewForm(object):
 			button.state_set(state)
 		return True
 
-	def set_cursor(self):
+	def set_cursor(self, new=False):
 		pass
