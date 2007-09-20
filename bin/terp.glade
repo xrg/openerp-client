@@ -1881,14 +1881,32 @@
 	  <child>
 	    <widget class="GtkToolButton" id="but_switch">
 	      <property name="visible">True</property>
-	      <property name="tooltip" translatable="yes">Switch current view: form / list</property>
-	      <property name="label" translatable="yes">Other View</property>
+	      <property name="tooltip" translatable="yes">Switch current view: form / list / graph</property>
+	      <property name="label" translatable="yes">View</property>
 	      <property name="use_underline">True</property>
 	      <property name="stock_id">gtk-justify-left</property>
 	      <property name="visible_horizontal">True</property>
 	      <property name="visible_vertical">True</property>
 	      <property name="is_important">False</property>
 	      <signal name="clicked" handler="on_but_switch_clicked" last_modification_time="Mon, 23 Aug 2004 14:03:54 GMT"/>
+	    </widget>
+	    <packing>
+	      <property name="expand">False</property>
+	      <property name="homogeneous">True</property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkToolButton" id="but_reload">
+	        <property name="visible">True</property>
+	        <property name="tooltip" translatable="yes">Reload / Undo Form</property>
+	        <property name="label" translatable="yes">Reload</property>
+	        <property name="use_underline">True</property>
+	        <property name="stock_id">gtk-redo</property>
+	        <property name="visible_horizontal">True</property>
+	        <property name="visible_vertical">True</property>
+	        <property name="is_important">False</property>
+	        <signal name="clicked" handler="on_form_reload_activate" last_modification_time="Sat, 18 Sep 2007 10:30:55 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="expand">False</property>
