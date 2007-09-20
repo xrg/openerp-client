@@ -109,16 +109,18 @@ def execute(action, datas, state='init', parent=None, context={}):
 				self.res = None
 				self.error = False
 				self.parent = parent
+				self.exception = None
 	
 			def run(self):
 				def go(wiz_id, datas, state):
 					ctx = rpc.session.context.copy()
 					ctx.update(context)
 					try:
-						self.res = rpc.session.rpc_exec_auth('/wizard', 'execute', wiz_id, datas, state, ctx)
-					except:
+						self.res = rpc.session.rpc_exec_auth_try('/wizard', 'execute', wiz_id, datas, state, ctx)
+					except Exception, e:
 						self.error = True
 						self.res = False
+						self.exception = e
 						return True
 					if not self.res:
 						self.error = True
@@ -164,6 +166,34 @@ def execute(action, datas, state='init', parent=None, context={}):
 				if win:
 					win.destroy()
 					gtk.main_iteration()
+				if self.exception:
+					import xmlrpclib
+					import socket
+					from rpc import rpc_exception
+					try:
+						raise self.exception
+					except socket.error, e:
+						common.error(_('Connection refused !'), str(e), str(e))
+					except xmlrpclib.Fault, err:
+						a = rpc_exception(err.faultCode, err.faultString)
+						if a.type in ('warning', 'UserError'):
+							if a.message in ('ConcurrencyException') and len(args) > 4:
+								if common.concurrency(args[0], args[2][0], args[4]):
+									if 'read_delta' in args[4]:
+										del args[4]['read_delta']
+									return self.rpc_exec_auth(obj, method, *args)
+							else:
+								common.warning(a.data, a.message)
+						else:
+							common.error(_('Application Error'), err.faultCode, err.faultString)
+					except tiny_socket.Myexception, err:
+						a = rpc_exception(err.faultCode, err.faultString)
+						if a.type in ('warning', 'UserError'):
+							common.warning(a.data, a.message)
+						else:
+							common.error(_('Application Error'), err.faultCode, err.faultString)
+					except Exception, e:
+						common.error(_('Application Error'), _('View details'), str(e))
 				return self.res
 
 		wp = wizard_progress(parent)
