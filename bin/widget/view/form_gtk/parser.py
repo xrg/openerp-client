@@ -420,7 +420,11 @@ class parser_form(widget.view.interface.parser_interface):
 
 		def widget_duplicate(widget):
 			if type(widget) == type(gtk.Entry()):
-				return gtk.Entry()
+				entry = gtk.Entry()
+				entry.set_property('activates_default', True)
+				entry.set_max_length(widget.get_max_length())
+				entry.set_width_chars(widget.get_width_chars())
+				return entry, gtk.FILL
 			elif type(widget.child) == type(gtk.TextView()):
 				tv = gtk.TextView()
 				tv.set_wrap_mode(gtk.WRAP_WORD)
@@ -430,36 +434,65 @@ class parser_form(widget.view.interface.parser_interface):
 				sw.set_size_request(-1, 80)
 				sw.add(tv)
 				tv.set_accepts_tab(False)
-				return sw
+				return sw, gtk.FILL | gtk.EXPAND
 			else:
-				return None
+				return None, False
 
 
-		win = gtk.Dialog('Add Translation')
+		win = gtk.Dialog('Add Translation', self.window,
+				gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
 		win.vbox.set_spacing(5)
+		win.set_property('default-width', 600)
+		win.set_property('default-height', 400)
+		win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+
+		accel_group = gtk.AccelGroup()
+		win.add_accel_group(accel_group)
+
+		but_cancel = win.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+		but_cancel.add_accelerator('clicked', accel_group, gtk.keysyms.Escape,
+				gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+		but_ok = win.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
+		but_ok.add_accelerator('clicked', accel_group, gtk.keysyms.Return,
+				gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+
 		vbox = gtk.VBox(spacing=5)
 		
 		entries_list = []
+		table = gtk.Table(len(langs), 2)
+		table.set_homogeneous(False)
+		table.set_col_spacings(3)
+		table.set_row_spacings(0)
+		table.set_border_width(1)
+		i = 0
 		for lang in langs:
 			context = copy.copy(rpc.session.context)
 			context['lang'] = adapt_context(lang['code'])
-			val = rpc.session.rpc_exec_auth('/object', 'execute', model, 'read', [id], [name], context)
+			val = rpc.session.rpc_exec_auth('/object', 'execute', model,
+					'read', [id], [name], context)
 			val = val[0]
-			
-			label = gtk.Label(lang['name'])
-			entry = widget_duplicate(widget_entry)
+			#TODO space before ':' depends of lang (ex: english no space)
+			if gtk.widget_get_default_direction() == gtk.TEXT_DIR_RTL:
+				label = gtk.Label(': ' + lang['name'])
+			else:
+				label = gtk.Label(lang['name'] + ' :')
+			label.set_alignment(1.0, 0.5)
+			(entry, yoptions) = widget_duplicate(widget_entry)
 
-			hbox = gtk.HBox(homogeneous=True)
+			hbox = gtk.HBox(homogeneous=False)
 			if code == lang['code']:
 				value_set(entry,value_get(widget_entry))
 			else:
 				value_set(entry,val[name])
 			
 			entries_list.append((val['id'], lang['code'], entry))
-			hbox.pack_start(label, expand=False, fill=False)
-			hbox.pack_start(entry, expand=True, fill=True)
-			vbox.pack_start(hbox, expand=False,fill=True)
-		
+			table.attach(label, 0, 1, i, i+1, yoptions=False, xoptions=gtk.FILL,
+					ypadding=2, xpadding=5)
+			table.attach(entry, 1, 2, i, i+1, yoptions=yoptions,
+					ypadding=2, xpadding=5)
+			i += 1
+
+		vbox.pack_start(table)
 		vp = gtk.Viewport()
 		vp.set_shadow_type(gtk.SHADOW_NONE)
 		vp.add(vbox)
@@ -468,9 +501,6 @@ class parser_form(widget.view.interface.parser_interface):
 		sv.set_shadow_type(gtk.SHADOW_NONE)
 		sv.add(vp)
 		win.vbox.add(sv)
-		win.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
-		win.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
-		win.resize(400,200)
 		win.show_all()
 		
 		ok = False
