@@ -703,6 +703,9 @@ class terp_main(service.Service):
 		except rpc.rpc_exception:
 			rpc.session.logout()
 		self.glade.get_widget('but_menu').set_sensitive(True)
+		self.glade.get_widget('user').set_sensitive(True)
+		self.glade.get_widget('form').set_sensitive(True)
+		self.glade.get_widget('plugins').set_sensitive(True)
 		return True
 
 	def sig_logout(self, widget):
@@ -726,6 +729,9 @@ class terp_main(service.Service):
 		self.secure_img.hide()
 		self.shortcut_unset()
 		self.glade.get_widget('but_menu').set_sensitive(False)
+		self.glade.get_widget('user').set_sensitive(False)
+		self.glade.get_widget('form').set_sensitive(False)
+		self.glade.get_widget('plugins').set_sensitive(False)
 		rpc.session.logout()
 		return True
 		

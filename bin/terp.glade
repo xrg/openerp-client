@@ -633,6 +633,7 @@
 		  <property name="visible">True</property>
 		  <property name="label" translatable="yes">_User</property>
 		  <property name="use_underline">True</property>
+		  <property name="sensitive">False</property>
 		  <signal name="activate" handler="on_requests_activate" last_modification_time="Sat, 17 Aug 2002 10:44:45 GMT"/>
 
 		  <child>
@@ -731,6 +732,7 @@
 		  <property name="visible">True</property>
 		  <property name="label" translatable="yes">For_m</property>
 		  <property name="use_underline">True</property>
+		  <property name="sensitive">False</property>
 		  <signal name="activate" handler="on_form_activate" last_modification_time="Mon, 14 Oct 2002 00:52:44 GMT"/>
 
 		  <child>
@@ -1538,6 +1540,7 @@
 		  <property name="visible">True</property>
 		  <property name="label" translatable="yes">_Plugins</property>
 		  <property name="use_underline">True</property>
+		  <property name="sensitive">False</property>
 		  <signal name="activate" handler="on_plugins_activate" last_modification_time="Mon, 10 Jan 2005 20:23:54 GMT"/>
 
 		  <child>
