@@ -47,7 +47,14 @@ import service
 
 
 class dialog(object):
-	def __init__(self, model, id=None, attrs={} ,domain=[], context={}, window=None):
+	def __init__(self, model, id=None, attrs=None ,domain=None, context=None, window=None):
+
+		if attrs is None:
+			attrs = {}
+		if domain is None:
+			domain = []
+		if context is None:
+			context = {}
 
 		self.dia = gtk.Dialog(_('Tiny ERP - Link'), window,
 				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
@@ -225,7 +232,8 @@ class many2one(interface.widget_interface):
 		self.wid_text.disconnect(self.wid_text_focus_out_id)
 		if value:
 			if not leave:
-				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs, window=self._window)
+				domain = self._view.modelfield.domain_get(self._view.model)
+				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs, window=self._window, domain=domain)
 				ok, value = dia.run()
 				if ok:
 					self._view.modelfield.set_client(self._view.model, value,
@@ -257,7 +265,8 @@ class many2one(interface.widget_interface):
 
 	def sig_new(self, *args):
 		self.wid_text.disconnect(self.wid_text_focus_out_id)
-		dia = dialog(self.attrs['relation'], attrs=self.attrs, window=self._window)
+		domain = self._view.modelfield.domain_get(self._view.model)
+		dia = dialog(self.attrs['relation'], attrs=self.attrs, window=self._window, domain=domain)
 		ok, value = dia.run()
 		if ok:
 			self._view.modelfield.set_client(self._view.model, value)
