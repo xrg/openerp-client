@@ -154,11 +154,11 @@ class datetime(interface.widget_interface):
 
 		self.widget = gtk.HBox(spacing=3)
 		self.entry = gtk.Entry()
-		self.entry.set_property('width-chars', 19)
+		self.entry.set_property('activates_default', True)
 		self.entry.connect('button_press_event', self._menu_open)
 		self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
 		self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
-		self.widget.pack_start(self.entry, expand=False, fill=False)
+		self.widget.pack_start(self.entry, expand=True, fill=True)
 
 		tooltips = gtk.Tooltips()
 		eb = gtk.EventBox()

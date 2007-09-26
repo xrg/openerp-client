@@ -129,16 +129,20 @@ class _container(object):
 
 	def get(self):
 		return self.cont[-1][0]
+
 	def pop(self):
 		(table, x, y) = self.cont.pop()
 		self.col.pop()
 		return table
+
 	def newline(self):
 		(table, x, y) = self.cont[-1]
 		if x>0:
 			self.cont[-1] = (table, 0, y+1)
 		table.resize(y+1,self.col[-1])
-	def wid_add(self, widget, name=None, expand=False, ypadding=2, rowspan=1, colspan=1, translate=False, fname=None, help=False, fill=False):
+
+	def wid_add(self, widget, name=None, expand=False, ypadding=2, rowspan=1,
+			colspan=1, translate=False, fname=None, help=False, fill=False):
 		(table, x, y) = self.cont[-1]
 		if colspan>self.col[-1]:
 			colspan=self.col[-1]
@@ -167,7 +171,8 @@ class _container(object):
 				label.set_text_with_mnemonic(name)
 				label.set_mnemonic_widget(widget)
 			label.set_alignment(1.0, 0.5)
-			table.attach(eb, x, x+1, y, y+rowspan, yoptions=yopt, xoptions=gtk.FILL, ypadding=ypadding, xpadding=5)
+			table.attach(eb, x, x+1, y, y+rowspan, yoptions=yopt,
+					xoptions=gtk.FILL, ypadding=ypadding, xpadding=2)
 		hbox = widget
 		hbox.show_all()
 		if translate:
@@ -182,7 +187,8 @@ class _container(object):
 			ebox.add(img)
 			hbox.pack_start(ebox, fill=False, expand=False)
 			hbox.show_all()
-		table.attach(hbox, x+a, x+colspan, y, y+rowspan, yoptions=yopt, ypadding=ypadding, xpadding=5)
+		table.attach(hbox, x+a, x+colspan, y, y+rowspan, yoptions=yopt,
+				ypadding=ypadding, xpadding=2)
 		self.cont[-1] = (table, x+colspan, y)
 		wid_list = table.get_children()
 		wid_list.reverse()
