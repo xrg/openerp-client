@@ -50,7 +50,6 @@ class reference(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs=None):
 		if attrs is None:
 			attrs = {}
-		print "window:", window
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 
 		self.widget = gtk.HBox(spacing=3)
