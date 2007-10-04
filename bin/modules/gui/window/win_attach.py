@@ -261,9 +261,9 @@ class win_attach(object):
 			for x in range(len(self.fields_order)):
 				args.append(x+1)
 				if res['link']:
-					args.append('link : '+res[self.fields_order[x]])
+					args.append('link : '+str(res[self.fields_order[x]]))
 				else:
-					args.append(res[self.fields_order[x]])
+					args.append(str(res[self.fields_order[x]]))
 			self.model.set(num, 0, res['id'], *args)
 		if preview and len(res_ids):
 			self.preview(res_ids[0]['id'])
