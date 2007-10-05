@@ -206,8 +206,8 @@ class ModelRecordGroup(signal_event.signal_event):
 		return model
 
 	def model_new(self, default=True, domain=[], context={}):
-		newmod = ModelRecord(self.resource, None, group=self, 
-					   parent=self.parent, new=True)
+		newmod = ModelRecord(self.resource, None, group=self,
+				parent=self.parent, new=True)
 		newmod.signal_connect(self, 'record-changed', self._record_changed)
 		if default:
 			ctx=context.copy()
@@ -273,9 +273,11 @@ class ModelRecordGroup(signal_event.signal_event):
 				m.value[fname] = self.mfields[fname].create(m)
 		return to_add
 
-	def add_fields(self, fields, models):
+	def add_fields(self, fields, models, context=None):
 		import time
 		ct = time.time()
+		if context is None:
+			context = {}
 		to_add = self.add_fields_custom(fields, models)
 		models = models.models
 		if not len(models):
@@ -288,10 +290,11 @@ class ModelRecordGroup(signal_event.signal_event):
 				old.append(model.id)
 			else:
 				new.append(model)
+		ctx = context.copy()
 		if len(old) and len(to_add):
-			c = rpc.session.context.copy()
-			c.update(self.context)
-			values = self.rpc.read(old, to_add, c)
+			ctx.update(rpc.session.context)
+			ctx.update(self.context)
+			values = self.rpc.read(old, to_add, ctx)
 			if values:
 				for v in values:
 					id = v['id']
@@ -299,7 +302,8 @@ class ModelRecordGroup(signal_event.signal_event):
 						del v['id']
 					self[id].set(v, signal=False)
 		if len(new) and len(to_add):
-			values = self.rpc.default_get(to_add, self.context)
+			ctx.update(self.context)
+			values = self.rpc.default_get(to_add, ctx)
 			for t in to_add:
 				if t not in values:
 					values[t] = False

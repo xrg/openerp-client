@@ -78,9 +78,11 @@ class dialog(object):
 		if ('views' in attrs) and ('form' in attrs['views']):
 			arch = attrs['views']['form']['arch']
 			fields = attrs['views']['form']['fields']
-			self.screen.add_view(arch, fields, display=True)
+			self.screen.add_view(arch, fields, display=True,
+					context=default_get_ctx)
 		else:
-			self.screen.add_view_id(False, 'form', display=True)
+			self.screen.add_view_id(False, 'form', display=True,
+					context=default_get_ctx)
 		vp.add(self.screen.widget)
 		x,y = self.screen.screen_container.size_get()
 		vp.set_size_request(x,y+30)
@@ -255,6 +257,7 @@ class one2many_list(interface.widget_interface):
 	def _sig_new(self, *args):
 		_, event = args
 		ctx = self._view.model.expr_eval(self.screen.default_get)
+		ctx.update(self._view.model.expr_eval('dict(%s)' % self.attrs.get('context', '')))
 		if event.type in (gtk.gdk.BUTTON_PRESS, gtk.gdk.KEY_PRESS):
 			if (self.screen.current_view.view_type=='form') or self.screen.editable_get():
 				self.screen.new(context=ctx)

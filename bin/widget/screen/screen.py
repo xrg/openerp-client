@@ -228,14 +228,22 @@ class Screen(signal_event.signal_event):
 	def add_view_custom(self, arch, fields, display=False, toolbar={}):
 		return self.add_view(arch, fields, display, True, toolbar=toolbar)
 
-	def add_view_id(self, view_id, view_type, display=False):
+	def add_view_id(self, view_id, view_type, display=False, context=None):
 		if view_type in self.views_preload:
-			return self.add_view(self.views_preload[view_type]['arch'], self.views_preload[view_type]['fields'], display, toolbar=self.views_preload[view_type].get('toolbar', False))
+			return self.add_view(self.views_preload[view_type]['arch'],
+					self.views_preload[view_type]['fields'], display,
+					toolbar=self.views_preload[view_type].get('toolbar', False),
+					context=context)
 		else:
-			view = self.rpc.fields_view_get(view_id, view_type, self.context, self.hastoolbar)
-			return self.add_view(view['arch'], view['fields'], display, toolbar=view.get('toolbar', False))
+			view = self.rpc.fields_view_get(view_id, view_type, self.context,
+					self.hastoolbar)
+			return self.add_view(view['arch'], view['fields'], display,
+					toolbar=view.get('toolbar', False), context=context)
 
-	def add_view(self, arch, fields, display=False, custom=False, toolbar={}):
+	def add_view(self, arch, fields, display=False, custom=False, toolbar=None,
+			context=None):
+		if toolbar is None:
+			toolbar = {}
 		def _parse_fields(node, fields):
 			if node.nodeType == node.ELEMENT_NODE:
 				if node.localName=='field':
@@ -262,7 +270,7 @@ class Screen(signal_event.signal_event):
 		if custom:
 			self.models.add_fields_custom(fields, self.models)
 		else:
-			self.models.add_fields(fields, self.models)
+			self.models.add_fields(fields, self.models, context=context)
 		self.fields = self.models.fields
 
 		parser = widget_parse(parent=self.parent, window=self.window)
