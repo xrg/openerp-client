@@ -36,6 +36,7 @@ import service
 import view_tree
 import rpc
 import options
+import win_export
 
 class tree(object):
 	def __init__(self, view, model, res_id=False, domain=[], context={}, window=None, name=False):
@@ -77,19 +78,20 @@ class tree(object):
 		widget_sc.connect('row-activated', self.sc_go)
 		self.tree_sc = view_tree.view_tree_sc(widget_sc, self.model)
 		self.handlers = {
-			'but_reload': (_('Reload'),self.sig_reload),
-			'but_switch': (_('Switch View'),self.sig_edit),
-			'but_chroot': (_('Changt root'),self.sig_chroot),
-			'but_open': (_('Open'),self.sig_open),
-			'but_action': (_('Open'),self.sig_action),
-			'but_print': (_('Print'),self.sig_print),
-			'but_print_html': (_('Print'),self.sig_print_html),
-			'but_close': (_('Close'),self.sig_close)
+			'but_reload': self.sig_reload,
+			'but_switch': self.sig_edit,
+			'but_chroot': self.sig_chroot,
+			'but_open': self.sig_open,
+			'but_action': self.sig_action,
+			'but_print': self.sig_print,
+			'but_print_html': self.sig_print_html,
+			'but_close': self.sig_close,
+			'but_save_as': self.sig_save_as,
 		}
 		dict = {
 			'on_but_sc_go_clicked': self.sc_go,
 			'on_but_sc_add_clicked': self.sc_add,
-			'on_but_sc_del_clicked': self.sc_del
+			'on_but_sc_del_clicked': self.sc_del,
 		}
 
 		self.vp.add(self.tree_res.widget_get())
@@ -294,3 +296,10 @@ class tree(object):
 
 	def sig_close(self, urgent=False):
 		return True
+
+	def sig_save_as(self, widget=None):
+		fields = []
+		win = win_export.win_export(self.model, self.tree_res.sel_ids_get(),
+				self.tree_res.fields, [], parent=self.window)
+		res = win.go()
+

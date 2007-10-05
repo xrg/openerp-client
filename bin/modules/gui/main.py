@@ -714,7 +714,7 @@ class terp_main(service.Service):
 			wid = self._wid_get()
 			if wid:
 				if 'but_close' in wid.handlers:
-					res = wid.handlers['but_close'][1]()
+					res = wid.handlers['but_close']()
 				if not res:
 					return False
 				res = self._win_del()
@@ -883,7 +883,7 @@ class terp_main(service.Service):
 		if wid:
 			res = True
 			if button_name in wid.handlers:
-				res = wid.handlers[button_name][1]()
+				res = wid.handlers[button_name]()
 			if button_name=='but_close' and res:
 				self._win_del()
 
