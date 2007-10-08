@@ -170,6 +170,7 @@ def execute(action, datas, state='init', parent=None, context={}):
 					import xmlrpclib
 					import socket
 					from rpc import rpc_exception
+					import tiny_socket
 					try:
 						raise self.exception
 					except socket.error, e:
