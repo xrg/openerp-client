@@ -49,7 +49,7 @@ class image_wid(interface.widget_interface):
 		self.height = int(attrs.get('img_height', 100))
 		self.width = int(attrs.get('img_width', 300))
 
-		self.widget = gtk.HBox(spacing=5)
+		self.widget = gtk.VBox(spacing=3)
 		self.event = gtk.EventBox()
 		self.event.drag_dest_set(gtk.DEST_DEFAULT_ALL, [
 			('text/plain', 0, 0),
@@ -58,26 +58,45 @@ class image_wid(interface.widget_interface):
 		self.event.connect('drag_motion', self.drag_motion)
 		self.event.connect('drag_data_received', self.drag_data_received)
 
+		self.tooltips = gtk.Tooltips()
+
 		self.image = gtk.Image()
 		self.event.add(self.image)
 		self.widget.pack_start(self.event, expand=True, fill=True)
 
-		self.vbox = gtk.VBox()
-		self.hbox = gtk.HBox(spacing=5)
-		self.but_add = gtk.Button(stock='gtk-open')
+		self.alignment = gtk.Alignment(xalign=0.5, yalign=0.5)
+		self.hbox = gtk.HBox(spacing=3)
+		self.but_add = gtk.Button()
+		img_add = gtk.Image()
+		img_add.set_from_stock('gtk-open', gtk.ICON_SIZE_BUTTON)
+		self.but_add.set_image(img_add)
+		self.but_add.set_relief(gtk.RELIEF_NONE)
 		self.but_add.connect('clicked', self.sig_add)
+		self.tooltips.set_tip(self.but_add, _('Set Image'))
 		self.hbox.pack_start(self.but_add, expand=False, fill=False)
 
-		self.but_save_as = gtk.Button(stock='gtk-save-as')
+		self.but_save_as = gtk.Button()
+		img_save_as = gtk.Image()
+		img_save_as.set_from_stock('gtk-save', gtk.ICON_SIZE_BUTTON)
+		self.but_save_as.set_image(img_save_as)
+		self.but_save_as.set_relief(gtk.RELIEF_NONE)
 		self.but_save_as.connect('clicked', self.sig_save_as)
+		self.tooltips.set_tip(self.but_save_as, _('Save As'))
 		self.hbox.pack_start(self.but_save_as, expand=False, fill=False)
 
-		self.but_remove = gtk.Button(stock='gtk-clear')
+		self.but_remove = gtk.Button()
+		img_remove = gtk.Image()
+		img_remove.set_from_stock('gtk-clear', gtk.ICON_SIZE_BUTTON)
+		self.but_remove.set_image(img_remove)
+		self.but_remove.set_relief(gtk.RELIEF_NONE)
 		self.but_remove.connect('clicked', self.sig_remove)
+		self.tooltips.set_tip(self.but_remove, _('Clear'))
 		self.hbox.pack_start(self.but_remove, expand=False, fill=False)
 
-		self.vbox.pack_start(self.hbox, expand=True, fill=False)
-		self.widget.pack_start(self.vbox, expand=False, fill=False)
+		self.alignment.add(self.hbox)
+		self.widget.pack_start(self.alignment, expand=False, fill=False)
+
+		self.tooltips.enable()
 
 		self.update_img()
 
