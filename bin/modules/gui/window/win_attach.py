@@ -102,7 +102,7 @@ class win_attach(object):
 		else:
 			common.warning('You must put a text comment to an attachement.','Text not saved !')
 
-	def _sig_del(self, *args):		
+	def _sig_del(self, *args):
 		model,iter = self.view.get_selection().get_selected()
 		if not iter:
 			return None
@@ -132,10 +132,13 @@ class win_attach(object):
 			return None
 		id = model.get_value(iter, 0)
 		if id:
-			data = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id])
+			data = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment',
+					'read', [id])
 			if not len(data):
 				return None
-			filename = common.file_selection(_('Select the destination file'), filename=data[0]['datas_fname'], parent=self.win)
+			filename = common.file_selection(_('Save As...'),
+					filename=data[0]['datas_fname'], parent=self.win,
+					action=gtk.FILE_CHOOSER_ACTION_SAVE)
 			if not filename:
 				return None
 			try:
@@ -205,6 +208,8 @@ class win_attach(object):
 				'png': 'png',
 				'bmp': 'bmp'}
 		ext = fname.split('.')[-1].lower()
+		img = self.glade.get_widget('attach_image')
+		img.clear()
 		if ext in ('jpg', 'jpeg', 'png', 'gif', 'bmp'):
 			try:
 				if not datas['link']:
@@ -227,7 +232,6 @@ class win_attach(object):
 				pixbuf = loader.get_pixbuf()
 				loader.close()
 
-				img = self.glade.get_widget('attach_image')
 				img.set_from_pixbuf(pixbuf)
 			except Exception, e:
 				common.message(_('Unable to preview image file !\nVerify the format.'))
@@ -248,8 +252,6 @@ class win_attach(object):
 					os.startfile(fname)
 				else:
 					os.startfile(datas[0]['link'])
-			else:
-				self._sig_save(None)
 
 	def reload(self, preview=True):
 		self.model.clear()
