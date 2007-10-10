@@ -149,10 +149,10 @@ class many2one(interface.widget_interface):
 		self.but_open.set_property('can-focus', False)
 		self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
 
-		tooltips = gtk.Tooltips()
-		tooltips.set_tip(self.but_new, _('Create a new resource'))
-		tooltips.set_tip(self.but_open, _('Search / Open a resource'))
-		tooltips.enable()
+		self.tooltips = gtk.Tooltips()
+		self.tooltips.set_tip(self.but_new, _('Create a new resource'))
+		self.tooltips.set_tip(self.but_open, _('Open a resource'))
+		self.tooltips.enable()
 
 		self.ok = True
 		self._readonly = False
@@ -305,9 +305,11 @@ class many2one(interface.widget_interface):
 		if res:
 			img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
 			self.but_open.set_image(img)
+			self.tooltips.set_tip(self.but_open, _('Open a resource'))
 		else:
 			img.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
 			self.but_open.set_image(img)
+			self.tooltips.set_tip(self.but_open, _('Search a resource'))
 		self.ok=True
 
 	def _menu_open(self, obj, event):
