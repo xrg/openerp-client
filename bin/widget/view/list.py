@@ -302,8 +302,17 @@ class ViewList(object):
 	def set_cursor(self, new=False):
 		if self.screen.current_model:
 			path = self.store.on_get_path(self.screen.current_model)
-			self.widget_tree.set_cursor(path, self.widget_tree.get_columns()[0],
-					new)
+			focus_column = None
+			for column in self.widget_tree.get_columns():
+				renderer = column.get_cell_renderers()[0]
+				if isinstance(renderer, gtk.CellRendererToggle):
+					editable = renderer.get_property('activatable')
+				else:
+					editable = renderer.get_property('editable')
+				if column.get_visible() and editable:
+					focus_column = column
+					break
+			self.widget_tree.set_cursor(path, focus_column, new)
 
 	def sel_ids_get(self):
 		def _func_sel_get(store, path, iter, ids):
