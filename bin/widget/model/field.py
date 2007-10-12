@@ -56,7 +56,7 @@ class CharField(object):
 		self.default_attrs = {}
 
 	def sig_changed(self, model):
-		if self.get_state_attrs(model)['readonly']:
+		if self.get_state_attrs(model).get('readonly', False):
 			return
 		if self.attrs.get('on_change',False):
 			model.on_change(self.attrs['on_change'])
