@@ -38,6 +38,7 @@
 import os, base64, options, sys
 import gc
 import common
+import time
 
 class Printer(object):
 
@@ -79,8 +80,9 @@ class Printer(object):
 						pid = os.fork()
 						if not pid:
 							os.execv(prog, (os.path.basename(prog),fn))
+						time.sleep(0.1)
 						sys.exit(0)
-					os.wait()
+					os.waitpid(pid, 0)
 				return opener
 			else:
 				def opener(fn):
@@ -89,8 +91,9 @@ class Printer(object):
 						pid = os.fork()
 						if not pid:
 							os.system(options.options['printer.softpath_html'] + ' ' + fn)
+						time.sleep(0.1)
 						sys.exit(0)
-					os.wait()
+					os.waitpid(pid, 0)
 				return opener
 
 	def _findPDFOpener(self):
@@ -112,8 +115,9 @@ class Printer(object):
 							pid = os.fork()
 							if not pid:
 								os.execv(prog, (os.path.basename(prog), fn))
+							time.sleep(0.1)
 							sys.exit(0)
-						os.wait()
+						os.waitpid(pid, 0)
 					return opener
 				else:
 					def opener(fn):
@@ -122,8 +126,9 @@ class Printer(object):
 							pid = os.fork()
 							if not pid:
 								os.execv(options.options['printer.softpath'], (os.path.basename(options.options['printer.softpath']),fn))
+							time.sleep(0.1)
 							sys.exit(0)
-						os.wait()
+						os.waitpid(pid, 0)
 					return opener
 			else:
 				return lambda fn: print_linux_filename(fn)
