@@ -123,8 +123,10 @@ class one2many_list(interface.widget_interface):
 
 		hb = gtk.HBox(homogeneous=False, spacing=5)
 		menubar = gtk.MenuBar()
-		menubar.set_pack_direction(gtk.PACK_DIRECTION_LTR)
-		menubar.set_child_pack_direction(gtk.PACK_DIRECTION_LTR)
+		if hasattr(menubar, 'set_pack_direction') and \
+				hasattr(menubar, 'set_child_pack_direction'):
+			menubar.set_pack_direction(gtk.PACK_DIRECTION_LTR)
+			menubar.set_child_pack_direction(gtk.PACK_DIRECTION_LTR)
 
 		menuitem_title = gtk.ImageMenuItem(stock_id='gtk-preferences')
 
