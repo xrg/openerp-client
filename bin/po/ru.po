@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-10 16:36+0200\n"
+"POT-Creation-Date: 2007-10-15 09:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,22 +24,22 @@ msgstr "Tiny ERP - логин"
 msgid "User:"
 msgstr "Пользователь:"
 
-#: terp.glade:134 terp.glade:14653 terp.glade:14968
+#: terp.glade:134 terp.glade:14674 terp.glade:14989
 msgid "Password:"
 msgstr "Пароль:"
 
-#: terp.glade:163 terp.glade:14480 terp.glade:14906 terp.glade:15471
-#: terp.glade:16115
+#: terp.glade:163 terp.glade:14501 terp.glade:14927 terp.glade:15492
+#: terp.glade:16136
 msgid "Change"
 msgstr ""
 
-#: terp.glade:204 terp.glade:14625
+#: terp.glade:204 terp.glade:14646
 #, fuzzy
 msgid "Database:"
 msgstr "Выберете дату"
 
-#: terp.glade:233 terp.glade:14246 terp.glade:14520 terp.glade:14813
-#: terp.glade:16022
+#: terp.glade:233 terp.glade:14267 terp.glade:14541 terp.glade:14834
+#: terp.glade:16043
 msgid "Server:"
 msgstr "Сервер:"
 
@@ -88,380 +88,390 @@ msgstr ""
 msgid "_User"
 msgstr "Пользователь"
 
-#: terp.glade:644
+#: terp.glade:645
 msgid "_Preferences"
 msgstr "Установки"
 
-#: terp.glade:671
+#: terp.glade:672
 msgid "_Send a request"
 msgstr "Отправить запрос"
 
-#: terp.glade:692
+#: terp.glade:693
 msgid "_Read my requests"
 msgstr "Прочитать запросы"
 
-#: terp.glade:719
+#: terp.glade:720
 msgid "_Waiting Requests"
 msgstr "Ожидающие запросы"
 
-#: terp.glade:732
+#: terp.glade:733
 msgid "For_m"
 msgstr "Форма"
 
-#: terp.glade:742
+#: terp.glade:744
 msgid "_New"
 msgstr "Создать"
 
-#: terp.glade:764
+#: terp.glade:766
 msgid "_Save"
 msgstr "Сохранить"
 
-#: terp.glade:786
+#: terp.glade:788
 #, fuzzy
 msgid "Copy this resource"
 msgstr "Копировать объект"
 
-#: terp.glade:787
+#: terp.glade:789
 msgid "_Duplicate"
 msgstr ""
 
-#: terp.glade:809
+#: terp.glade:811
 msgid "_Delete"
 msgstr "_Удалить"
 
-#: terp.glade:837
+#: terp.glade:839
 msgid "Find"
 msgstr ""
 
-#: terp.glade:859
+#: terp.glade:861
 msgid "Ne_xt"
 msgstr "Следующий"
 
-#: terp.glade:881
+#: terp.glade:883
 msgid "Pre_vious"
 msgstr "Предыдущий"
 
-#: terp.glade:903
+#: terp.glade:905
 msgid "Switch to list/form"
 msgstr ""
 
-#: terp.glade:925
+#: terp.glade:927
 #, fuzzy
 msgid "_Menu"
 msgstr "Меню"
 
-#: terp.glade:953
+#: terp.glade:955
 msgid "_New Home Tab"
 msgstr ""
 
-#: terp.glade:975 terp.glade:12009
+#: terp.glade:977 terp.glade:12030
 #, fuzzy
 msgid "Close Tab"
 msgstr "Закрыть"
 
-#: terp.glade:997
+#: terp.glade:999
 #, fuzzy
 msgid "Previous Tab"
 msgstr "Предыдущий"
 
-#: terp.glade:1007 terp.glade:11897
+#: terp.glade:1009 terp.glade:11918
 #, fuzzy
 msgid "Next Tab"
 msgstr "Следующая"
 
-#: terp.glade:1023
+#: terp.glade:1025
 msgid "View _logs"
 msgstr "Посмотреть лог"
 
-#: terp.glade:1032
+#: terp.glade:1034
 #, fuzzy
 msgid "_Go to resource ID..."
 msgstr "Найти ресурс ID ..."
 
-#: terp.glade:1048
+#: terp.glade:1050
 msgid "_Open"
 msgstr "Открыть"
 
-#: terp.glade:1069
+#: terp.glade:1071
 #, fuzzy
 msgid "Reloa_d / Undo"
 msgstr "Обновить"
 
-#: terp.glade:1097
+#: terp.glade:1099
 msgid "Repeat latest _action"
 msgstr "Повторить посл. действие"
 
-#: terp.glade:1113
+#: terp.glade:1115
 msgid "_Preview in PDF"
 msgstr "Просмотр в pdf"
 
-#: terp.glade:1135
+#: terp.glade:1137
 msgid "Previe_w in editor"
 msgstr "Просмотр в редакторе"
 
-#: terp.glade:1162
+#: terp.glade:1164
 #, fuzzy
 msgid "Expor_t data..."
 msgstr "Экспорт данных ..."
 
-#: terp.glade:1183
+#: terp.glade:1185
 #, fuzzy
 msgid "I_mport data..."
 msgstr "Импорт данных ..."
 
-#: terp.glade:1196
+#: terp.glade:1198
 msgid "_Options"
 msgstr "Опции"
 
-#: terp.glade:1205
+#: terp.glade:1207
 msgid "_Menubar"
 msgstr "Меню"
 
-#: terp.glade:1215
+#: terp.glade:1217
 msgid "Text _and Icons"
 msgstr "Текст и иконки"
 
-#: terp.glade:1225
+#: terp.glade:1227
 msgid "_Icons only"
 msgstr "Только иконки"
 
-#: terp.glade:1236
+#: terp.glade:1238
 #, fuzzy
 msgid "_Text only"
 msgstr "Только текст"
 
-#: terp.glade:1251
+#: terp.glade:1253
 msgid "Client Mode"
 msgstr ""
 
-#: terp.glade:1273
+#: terp.glade:1275
 msgid "Normal"
 msgstr ""
 
-#: terp.glade:1283
+#: terp.glade:1285
 msgid "Mode PDA"
 msgstr ""
 
-#: terp.glade:1298
+#: terp.glade:1300
 #, fuzzy
 msgid "_Theme"
 msgstr "Удалить"
 
-#: terp.glade:1320
+#: terp.glade:1322
 #, fuzzy
 msgid "Tiny ERP Theme"
 msgstr "Tiny ERP лицензия"
 
-#: terp.glade:1344
+#: terp.glade:1346
 #, fuzzy
 msgid "Default Theme"
 msgstr "Значение по умолчанию"
 
-#: terp.glade:1357
+#: terp.glade:1359
 #, fuzzy
 msgid "_Forms"
 msgstr "Форма"
 
-#: terp.glade:1367
+#: terp.glade:1369
 msgid "Right Toolbar"
 msgstr ""
 
-#: terp.glade:1377
+#: terp.glade:1379
 msgid "Tabs default position"
 msgstr ""
 
-#: terp.glade:1387
+#: terp.glade:1389
 msgid "Top"
 msgstr ""
 
-#: terp.glade:1397
+#: terp.glade:1399
 msgid "Left"
 msgstr ""
 
-#: terp.glade:1408
+#: terp.glade:1410
 msgid "Right"
 msgstr ""
 
-#: terp.glade:1419
+#: terp.glade:1421
 msgid "Bottom"
 msgstr ""
 
-#: terp.glade:1434
+#: terp.glade:1436
 msgid "Tabs default orientation"
 msgstr ""
 
-#: terp.glade:1444
+#: terp.glade:1446
 msgid "Horizontal"
 msgstr ""
 
-#: terp.glade:1454
+#: terp.glade:1456
 msgid "Vertical"
 msgstr ""
 
-#: terp.glade:1473
+#: terp.glade:1475
 msgid "_Print"
 msgstr "Печать"
 
-#: terp.glade:1494
+#: terp.glade:1496
 msgid "Previe_w before print"
 msgstr "Предв. просмотр перед печатью"
 
-#: terp.glade:1514
+#: terp.glade:1516
 msgid "_Save options"
 msgstr "Сохранить установки"
 
-#: terp.glade:1539
+#: terp.glade:1541
 msgid "_Plugins"
 msgstr "Плагины"
 
-#: terp.glade:1549
+#: terp.glade:1552
 msgid "_Execute a plugin"
 msgstr "Выполнить плагин"
 
-#: terp.glade:1575
+#: terp.glade:1578
 #, fuzzy
 msgid "_Shortcuts"
 msgstr "Ярлыки"
 
-#: terp.glade:1584
+#: terp.glade:1587
 msgid "_Help"
 msgstr "Помощь"
 
-#: terp.glade:1593 terp.glade:10801
+#: terp.glade:1596 terp.glade:10822
 #, fuzzy
 msgid "Support Request"
 msgstr "Отправить запрос"
 
-#: terp.glade:1620
+#: terp.glade:1623
 msgid "User _Manual"
 msgstr "Руководство пользователя"
 
-#: terp.glade:1641
+#: terp.glade:1644
 msgid "_Contextual Help"
 msgstr "Контекстная помощь"
 
-#: terp.glade:1663
+#: terp.glade:1666
 msgid "_Tips"
 msgstr "Tips"
 
-#: terp.glade:1684
+#: terp.glade:1687
 #, fuzzy
 msgid "Keyboard Shortcuts"
 msgstr "Ярлыки"
 
-#: terp.glade:1699
+#: terp.glade:1702
 #, fuzzy
 msgid "_License"
 msgstr "Лицензия"
 
-#: terp.glade:1720
+#: terp.glade:1723
 msgid "_About..."
 msgstr "О программе"
 
-#: terp.glade:1762 terp.glade:3012
+#: terp.glade:1765 terp.glade:3033
 msgid "Create a new resource"
 msgstr "Создать новый объект"
 
-#: terp.glade:1778
+#: terp.glade:1781
 msgid "Edit / Save this resource"
 msgstr "Редактировать/Сохранить"
 
-#: terp.glade:1807
+#: terp.glade:1810
 msgid "Delete this resource"
 msgstr "Удалить"
 
-#: terp.glade:1836
+#: terp.glade:1839
 #, fuzzy
 msgid "Find a resource"
 msgstr "Выберете объект !"
 
-#: terp.glade:1852
+#: terp.glade:1855
 msgid "Go to previous matched search"
 msgstr "К предыдущему объекту"
 
-#: terp.glade:1868
+#: terp.glade:1871
 msgid "Go to next matched resource"
 msgstr "К следующему объекту"
 
-#: terp.glade:1884
-msgid "Switch current view: form / list"
+#: terp.glade:1887
+msgid "Switch current view: form / list / graph"
 msgstr ""
 
-#: terp.glade:1885
-msgid "Other View"
-msgstr "Другой вид"
+#: terp.glade:1888
+msgid "View"
+msgstr ""
 
-#: terp.glade:1903 terp.glade:1904
+#: terp.glade:1905
+#, fuzzy
+msgid "Reload / Undo Form"
+msgstr "Обновить"
+
+#: terp.glade:1906
+#, fuzzy
+msgid "Reload"
+msgstr "Обновить"
+
+#: terp.glade:1924 terp.glade:1925
 #, fuzzy
 msgid "Menu"
 msgstr "Меню"
 
-#: terp.glade:1934
+#: terp.glade:1955
 msgid "Launch actions about this resource"
 msgstr "Запустить действия для этого ресурса"
 
-#: terp.glade:1935
+#: terp.glade:1956
 msgid "Action"
 msgstr "Действие"
 
-#: terp.glade:1952
+#: terp.glade:1973
 msgid "Print documents"
 msgstr "Напечатать документы"
 
-#: terp.glade:1981
+#: terp.glade:2002
 #, fuzzy
 msgid "Add an attachment to this resource"
 msgstr "Запустить действия для этого ресурса"
 
-#: terp.glade:1982
+#: terp.glade:2003
 #, fuzzy
 msgid "Attachment"
 msgstr "Прикрепленный файл"
 
-#: terp.glade:2012
+#: terp.glade:2033
 msgid "Close this window"
 msgstr "Закрыть окно"
 
-#: terp.glade:2069
+#: terp.glade:2090
 msgid "Requests:"
 msgstr "Запросы:"
 
-#: terp.glade:2108
+#: terp.glade:2129
 msgid "Read my Requests"
 msgstr "Прочитать мои запросы"
 
-#: terp.glade:2136
+#: terp.glade:2157
 msgid "Send a new request"
 msgstr "Отправить новый запрос"
 
-#: terp.glade:2195
+#: terp.glade:2216
 msgid "Tiny ERP - Tree Resources"
 msgstr "Tiny ERP - древовидные ресурсы"
 
-#: terp.glade:2330
+#: terp.glade:2351
 msgid "Shortcuts"
 msgstr "Ярлыки"
 
-#: terp.glade:2434
+#: terp.glade:2455
 msgid "Tiny ERP - Forms"
 msgstr "Tiny ERP - Формы"
 
-#: terp.glade:2482
+#: terp.glade:2503
 #, fuzzy
 msgid "State:"
 msgstr "Статус:"
 
-#: terp.glade:2531
+#: terp.glade:2552
 msgid "Tiny ERP - About"
 msgstr "Tiny ERP - О программе"
 
-#: terp.glade:2588
+#: terp.glade:2609
 msgid ""
 "<b>About Tiny ERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
 
-#: terp.glade:2657
+#: terp.glade:2678
 msgid ""
 "\n"
 "Tiny ERP - GTK Client - v%s\n"
@@ -477,12 +487,12 @@ msgid ""
 "More Info on www.TinyERP.com !"
 msgstr ""
 
-#: terp.glade:2704
+#: terp.glade:2725
 #, fuzzy
 msgid "_Tiny ERP"
 msgstr "Tiny ERP"
 
-#: terp.glade:2756
+#: terp.glade:2777
 msgid ""
 "\n"
 "(c) 2003-TODAY - Tiny sprl\n"
@@ -498,202 +508,202 @@ msgid ""
 "Web: http://tiny.be"
 msgstr ""
 
-#: terp.glade:2803
+#: terp.glade:2824
 msgid "_Contact"
 msgstr "_Контакты"
 
-#: terp.glade:2849
+#: terp.glade:2870
 msgid "Tiny ERP - forms widget"
 msgstr "Tiny ERP - редактор форм"
 
-#: terp.glade:2916
+#: terp.glade:2937
 msgid "Open the calendar widget"
 msgstr "Открыть календарь"
 
-#: terp.glade:3039
+#: terp.glade:3060
 #, fuzzy
 msgid "Search / Open a resource"
 msgstr "Поиск"
 
-#: terp.glade:3149
+#: terp.glade:3170
 msgid "Titre"
 msgstr "Титр"
 
-#: terp.glade:3170
+#: terp.glade:3191
 msgid "Set to default value"
 msgstr "Установить значение по умолчанию"
 
-#: terp.glade:3179
+#: terp.glade:3200
 #, fuzzy
 msgid "Set Default"
 msgstr "Установить по умолчанию"
 
-#: terp.glade:3199 terp.glade:3485
+#: terp.glade:3220 terp.glade:3506
 msgid "Create a new entry"
 msgstr "Создать новую запись"
 
-#: terp.glade:3226
+#: terp.glade:3247
 #, fuzzy
 msgid "Edit this entry"
 msgstr "Удалить текущую запись"
 
-#: terp.glade:3253
+#: terp.glade:3274
 msgid "Remove this entry"
 msgstr "Удалить текущую запись"
 
-#: terp.glade:3291
+#: terp.glade:3312
 msgid "Previous"
 msgstr "Предыдущий"
 
-#: terp.glade:3343
+#: terp.glade:3364
 msgid "Next"
 msgstr "Следующий"
 
-#: terp.glade:3503
+#: terp.glade:3524
 msgid "Remove selected entry"
 msgstr "Удалить выделенную запись"
 
-#: terp.glade:4281
+#: terp.glade:4302
 msgid "Tiny ERP - Date selection"
 msgstr "Tiny ERP - выбор даты"
 
-#: terp.glade:4363 terp.glade:11384
+#: terp.glade:4384 terp.glade:11405
 msgid "Tiny ERP - Confirmation"
 msgstr "Tiny ERP - Подтверждение"
 
-#: terp.glade:4451 terp.glade:11485 terp.glade:13977
+#: terp.glade:4472 terp.glade:11506 terp.glade:13998
 msgid "Hello World!"
 msgstr "Привет Мир!"
 
-#: terp.glade:4484
+#: terp.glade:4505
 #, fuzzy
 msgid "Tiny ERP - Selection"
 msgstr "Tiny ERP - выбор"
 
-#: terp.glade:4557
+#: terp.glade:4578
 msgid "Your selection:"
 msgstr "Ваш выбор:"
 
-#: terp.glade:4632
+#: terp.glade:4653
 msgid "Tiny ERP - Filter"
 msgstr "Tiny ERP - Фильтр"
 
-#: terp.glade:4704
+#: terp.glade:4725
 msgid "S_earch:"
 msgstr "Пои_ск"
 
-#: terp.glade:4750
+#: terp.glade:4771
 msgid "on _field:"
 msgstr "по полю"
 
-#: terp.glade:4775
+#: terp.glade:4796
 msgid "test"
 msgstr "тест"
 
-#: terp.glade:4790
+#: terp.glade:4811
 msgid "_Select"
 msgstr "_Выделить"
 
-#: terp.glade:4807
+#: terp.glade:4828
 msgid "_Unselect"
 msgstr "_Отменить выделение"
 
-#: terp.glade:4834
+#: terp.glade:4855
 #, fuzzy
 msgid "Filter:"
 msgstr "Фильтр: "
 
-#: terp.glade:4860
+#: terp.glade:4881
 msgid "AL_L"
 msgstr "Все"
 
-#: terp.glade:4877
+#: terp.glade:4898
 msgid "N_ONE"
 msgstr "Ничего"
 
-#: terp.glade:4949
+#: terp.glade:4970
 msgid "<b><u>Actions</u></b>"
 msgstr "<b><u>Действия</u></b>"
 
-#: terp.glade:4989
+#: terp.glade:5010
 msgid "Tiny ERP - Dialog"
 msgstr "Tiny ERP - Диалог"
 
-#: terp.glade:5035
+#: terp.glade:5056
 msgid "Set to _Default"
 msgstr "Установить по умолчанию"
 
-#: terp.glade:5062
+#: terp.glade:5083
 msgid "Value _Preference"
 msgstr "Предустановка значения"
 
-#: terp.glade:5085
+#: terp.glade:5106
 msgid "Tiny ERP, Field Preference target"
 msgstr "Tiny ERP, Установка полей"
 
-#: terp.glade:5158
+#: terp.glade:5179
 msgid "Default _value:"
 msgstr "Значение по умолчанию"
 
-#: terp.glade:5253
+#: terp.glade:5274
 msgid "_Domain:"
 msgstr "Домен"
 
-#: terp.glade:5282
+#: terp.glade:5303
 msgid "Field _Name:"
 msgstr "Название поля"
 
-#: terp.glade:5344
+#: terp.glade:5365
 msgid "<b>Value applicable if:</b>"
 msgstr "<b>Значение применимо если:</b>"
 
-#: terp.glade:5403
+#: terp.glade:5424
 msgid "_only for you"
 msgstr "только для вас"
 
-#: terp.glade:5422
+#: terp.glade:5443
 msgid "for _all users"
 msgstr "для всех пользователей"
 
-#: terp.glade:5445
+#: terp.glade:5466
 msgid "<b>Value applicable for:</b>"
 msgstr "<b>Значение применимо для:</b>"
 
-#: terp.glade:5488
+#: terp.glade:5509
 msgid "Tiny ERP - Export to CSV"
 msgstr "Tiny ERP - Экспорт в CSV"
 
-#: terp.glade:5603
+#: terp.glade:5624
 #, fuzzy
 msgid "<b>Predefined exports</b>"
 msgstr "<b>Поля для экспорта</b>"
 
-#: terp.glade:5682 terp.glade:13085
+#: terp.glade:5703 terp.glade:13106
 msgid "<b>All fields</b>"
 msgstr "<b>Все поля</b>"
 
-#: terp.glade:5762 terp.glade:13165
+#: terp.glade:5783 terp.glade:13186
 msgid "_Add"
 msgstr "Добавить"
 
-#: terp.glade:5841 terp.glade:13244
+#: terp.glade:5862 terp.glade:13265
 msgid "_Remove"
 msgstr "Удалить"
 
-#: terp.glade:5920
+#: terp.glade:5941
 msgid "_Nothing"
 msgstr "Ничего"
 
-#: terp.glade:6010
+#: terp.glade:6031
 #, fuzzy
 msgid "Save List"
 msgstr "Сохранить установки"
 
-#: terp.glade:6096
+#: terp.glade:6117
 msgid "<b>Fields to export</b>"
 msgstr "<b>Поля для экспорта</b>"
 
-#: terp.glade:6148
+#: terp.glade:6169
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
@@ -701,47 +711,47 @@ msgstr ""
 "Открыть в Excel\n"
 "Сохранить в csv файле"
 
-#: terp.glade:6175
+#: terp.glade:6196
 msgid "Add _field names"
 msgstr "Добавить поля"
 
-#: terp.glade:6195
+#: terp.glade:6216
 msgid "<b>Opti_ons</b>"
 msgstr "<b>Опции</b>"
 
-#: terp.glade:6235
+#: terp.glade:6256
 msgid "Tiny ERP - Search"
 msgstr "Tiny ERP - Поиск"
 
-#: terp.glade:6365
+#: terp.glade:6386
 msgid "Tiny ERP - Search Widgets"
 msgstr "Tiny ERP - Search Widgets"
 
-#: terp.glade:6414 terp.glade:6519 terp.glade:6723
+#: terp.glade:6435 terp.glade:6540 terp.glade:6744
 msgid "-"
 msgstr "-"
 
-#: terp.glade:6472
+#: terp.glade:6493
 msgid "Date de début"
 msgstr ""
 
-#: terp.glade:6645
+#: terp.glade:6666
 msgid "Search with this name"
 msgstr "Искать с таким именем"
 
-#: terp.glade:6672
+#: terp.glade:6693
 msgid "Clear the field"
 msgstr "Очистить поле"
 
-#: terp.glade:6737
+#: terp.glade:6758
 msgid "Yes"
 msgstr "Да"
 
-#: terp.glade:6757
+#: terp.glade:6778
 msgid "No"
 msgstr "Нет"
 
-#: terp.glade:6800
+#: terp.glade:6821
 msgid ""
 "\n"
 "Yes\n"
@@ -751,42 +761,42 @@ msgstr ""
 "Да\n"
 "Нет"
 
-#: terp.glade:6825
+#: terp.glade:6846
 msgid "Tiny ERP - Attachment"
 msgstr "Tiny ERP - Прикрепленные файлы"
 
-#: terp.glade:6895
+#: terp.glade:6916
 msgid "Filename:"
 msgstr "Файл:"
 
-#: terp.glade:6967
+#: terp.glade:6988
 msgid "Description:"
 msgstr "Описание:"
 
-#: terp.glade:7071
+#: terp.glade:7092
 #, fuzzy
 msgid "Save text"
 msgstr "Сохранить установки"
 
-#: terp.glade:7326
+#: terp.glade:7347
 msgid "Tiny ERP - Error"
 msgstr "Tiny ERP - Ошибка"
 
-#: terp.glade:7385
+#: terp.glade:7406
 #, fuzzy
 msgid "Application Error!"
 msgstr "Ошибка приложения!"
 
-#: terp.glade:7480
+#: terp.glade:7501
 #, fuzzy
 msgid "<b>Error 404</b>"
 msgstr "<b>Код ошибки:</b>"
 
-#: terp.glade:7505
+#: terp.glade:7526
 msgid "<b>Error code:</b>"
 msgstr "<b>Код ошибки:</b>"
 
-#: terp.glade:7532
+#: terp.glade:7553
 msgid ""
 "This Page does not exist !\n"
 "Please retry"
@@ -794,28 +804,28 @@ msgstr ""
 "Запрошенная страница не существует !\n"
 "Попробуйте еще раз"
 
-#: terp.glade:7569
+#: terp.glade:7590
 msgid "<i>Click on the Support Request tab if you need more help !</i>"
 msgstr ""
 "<i>Щелкните по вкладке поддержка, если вам дребуется дополнительная справка !"
 "</i>"
 
-#: terp.glade:7607
+#: terp.glade:7628
 msgid "De_scription"
 msgstr "Описание"
 
-#: terp.glade:7657
+#: terp.glade:7678
 #, fuzzy
 msgid "Error details"
 msgstr ""
 "Описание ошибки\n"
 "dqsdsqdqsdsd"
 
-#: terp.glade:7673
+#: terp.glade:7694
 msgid "_Details"
 msgstr "Подробно"
 
-#: terp.glade:7716
+#: terp.glade:7737
 msgid ""
 "<b>Complete this form to submit your bug and/or request a support.</b>\n"
 "<i>\n"
@@ -832,41 +842,41 @@ msgstr ""
 "Но мы не сможем ответить Вам если ваша компания не является партнером Tiny "
 "ERP. </i>"
 
-#: terp.glade:7766 terp.glade:10935
+#: terp.glade:7787 terp.glade:10956
 #, fuzzy
 msgid "<b>Your name:</b>"
 msgstr "<b>Ваше имя:</b>"
 
-#: terp.glade:7794 terp.glade:10963
+#: terp.glade:7815 terp.glade:10984
 #, fuzzy
 msgid "<b>Your Company:</b>"
 msgstr "<b>Ваша компания:</b>"
 
-#: terp.glade:7822
+#: terp.glade:7843
 #, fuzzy
 msgid "<b>Your Email:</b>"
 msgstr "<b>E-mail:</b>"
 
-#: terp.glade:7892
+#: terp.glade:7913
 #, fuzzy
 msgid "Explain what you did:"
 msgstr "Опишите что Вы делали: "
 
-#: terp.glade:7920
+#: terp.glade:7941
 #, fuzzy
 msgid "Others Comments:"
 msgstr "Прочие замечания: "
 
-#: terp.glade:8075
+#: terp.glade:8096
 msgid "Send Support Request"
 msgstr "Отправить запрос"
 
-#: terp.glade:8122
+#: terp.glade:8143
 #, fuzzy
 msgid "<b>support contract id</b>"
 msgstr "<b>Поддержка</b>"
 
-#: terp.glade:8171 terp.glade:11244
+#: terp.glade:8192 terp.glade:11265
 msgid ""
 "Not Urgent\n"
 "Medium\n"
@@ -878,177 +888,177 @@ msgstr ""
 "Важно\n"
 "Очень важно"
 
-#: terp.glade:8192 terp.glade:11265
+#: terp.glade:8213 terp.glade:11286
 #, fuzzy
 msgid "Emergency:"
 msgstr "Важность: "
 
-#: terp.glade:8220
+#: terp.glade:8241
 #, fuzzy
 msgid "Phone Number:"
 msgstr "Телефон: "
 
-#: terp.glade:8308
+#: terp.glade:8329
 msgid "<b>_Support Request</b>"
 msgstr "<b>Поддержка</b>"
 
-#: terp.glade:8347
+#: terp.glade:8368
 msgid "Tiny ERP - Ressource Edit"
 msgstr "Tiny ERP - Редактирование объектов"
 
-#: terp.glade:8418
+#: terp.glade:8439
 msgid "Tiny ERP - Link"
 msgstr "Tiny ERP - Ссылка"
 
-#: terp.glade:8516
+#: terp.glade:8537
 msgid "Tiny ERP - List"
 msgstr "Tiny ERP - Лист"
 
-#: terp.glade:8585
+#: terp.glade:8606
 msgid "Tiny ERP - Preferences"
 msgstr "Tiny ERP - Установки"
 
-#: terp.glade:8654
+#: terp.glade:8675
 msgid "<b>Edit resource preferences</b>"
 msgstr "<b>Редактировать установки объектов</b>"
 
-#: terp.glade:8702
+#: terp.glade:8723
 msgid "Tip of the Day"
 msgstr ""
 
-#: terp.glade:8776
+#: terp.glade:8797
 #, fuzzy
 msgid "Pre_vious Tip"
 msgstr "Предыдущий"
 
-#: terp.glade:8852
+#: terp.glade:8873
 msgid "Ne_xt Tip"
 msgstr "Следующая"
 
-#: terp.glade:8956
+#: terp.glade:8977
 #, fuzzy
 msgid "_Display a new tip next time?"
 msgstr "Отобразить новую подсказку в следующий раз ?"
 
-#: terp.glade:8996
+#: terp.glade:9017
 #, fuzzy
 msgid "Tiny ERP - License"
 msgstr "Tiny ERP - Лицензия"
 
-#: terp.glade:9055
+#: terp.glade:9076
 msgid "Tiny ERP license"
 msgstr "Tiny ERP лицензия"
 
-#: terp.glade:9229
+#: terp.glade:9250
 msgid "Tiny ERP - Date & Time selection"
 msgstr "Tiny ERP - выбор даты и времени"
 
-#: terp.glade:9307
+#: terp.glade:9328
 #, fuzzy
 msgid "Hour:"
 msgstr "Час: "
 
-#: terp.glade:9351
+#: terp.glade:9372
 #, fuzzy
 msgid "Minute:"
 msgstr "Минута: "
 
-#: terp.glade:9426
+#: terp.glade:9447
 #, fuzzy
 msgid "Go to resource ID"
 msgstr "Найти ресурс ID ..."
 
-#: terp.glade:9500
+#: terp.glade:9521
 msgid "Search ID:"
 msgstr "Искать ID: "
 
-#: terp.glade:9582
+#: terp.glade:9603
 #, fuzzy
 msgid "Tiny ERP Survey"
 msgstr "Tiny ERP"
 
-#: terp.glade:9654
+#: terp.glade:9675
 #, fuzzy
 msgid "<b>Tiny ERP Survey</b>"
 msgstr "Tiny ERP"
 
-#: terp.glade:9679
+#: terp.glade:9700
 msgid ""
 "<i>Please fill in the following form in order to help us to improve Tiny ERP "
 "and better target new developments.</i>"
 msgstr ""
 
-#: terp.glade:9732
+#: terp.glade:9753
 msgid "Industry:"
 msgstr ""
 
-#: terp.glade:9761
+#: terp.glade:9782
 msgid "# Employees:"
 msgstr ""
 
-#: terp.glade:9862
+#: terp.glade:9883
 #, fuzzy
 msgid "Country:"
 msgstr "Час: "
 
-#: terp.glade:9890
+#: terp.glade:9911
 #, fuzzy
 msgid "Your Role:"
 msgstr "Ваш выбор:"
 
-#: terp.glade:9954
+#: terp.glade:9975
 #, fuzzy
 msgid "System:"
 msgstr "Статус:"
 
-#: terp.glade:10024
+#: terp.glade:10045
 msgid "How did you hear about us:"
 msgstr ""
 
-#: terp.glade:10077
+#: terp.glade:10098
 msgid "Open Source:"
 msgstr ""
 
-#: terp.glade:10403
+#: terp.glade:10424
 #, fuzzy
 msgid "<b>Your company:</b>"
 msgstr "<b>Ваша компания:</b>"
 
-#: terp.glade:10465
+#: terp.glade:10486
 msgid "We plan to use Tiny ERP"
 msgstr ""
 
-#: terp.glade:10484
+#: terp.glade:10505
 msgid "We plan to offer services on Tiny ERP"
 msgstr ""
 
-#: terp.glade:10509
+#: terp.glade:10530
 msgid "Tell us why you try Tiny ERP and what are your current softwares:"
 msgstr ""
 
-#: terp.glade:10574
+#: terp.glade:10595
 #, fuzzy
 msgid "<b>Your interrest:</b>"
 msgstr "<b>Ваше имя:</b>"
 
-#: terp.glade:10632
+#: terp.glade:10653
 msgid "(Get Tiny ERP announces, docs and new releases by email)"
 msgstr ""
 
-#: terp.glade:10660
+#: terp.glade:10681
 #, fuzzy
 msgid "Company:"
 msgstr "Копировать"
 
-#: terp.glade:10689
+#: terp.glade:10710
 msgid "E-Mail:"
 msgstr ""
 
-#: terp.glade:10763
+#: terp.glade:10784
 msgid "<b>Keep Informed</b>"
 msgstr ""
 
-#: terp.glade:10886
+#: terp.glade:10907
 #, fuzzy
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
@@ -1065,493 +1075,493 @@ msgstr ""
 "Но мы не сможем ответить Вам если ваша компания не является партнером Tiny "
 "ERP. </i>"
 
-#: terp.glade:10991
+#: terp.glade:11012
 #, fuzzy
 msgid "<b>Your email:</b>"
 msgstr "<b>E-mail:</b>"
 
-#: terp.glade:11061
+#: terp.glade:11082
 #, fuzzy
 msgid "Explain your problem:"
 msgstr "Опишите что Вы делали: "
 
-#: terp.glade:11089
+#: terp.glade:11110
 #, fuzzy
 msgid "Other comments:"
 msgstr "Прочие замечания: "
 
-#: terp.glade:11195
+#: terp.glade:11216
 #, fuzzy
 msgid "<b>Support contract id:</b>"
 msgstr "<b>Поддержка</b>"
 
-#: terp.glade:11293
+#: terp.glade:11314
 #, fuzzy
 msgid "Phone number:"
 msgstr "Телефон: "
 
-#: terp.glade:11518
+#: terp.glade:11539
 #, fuzzy
 msgid "Keyboard shortcuts"
 msgstr "Ярлыки"
 
-#: terp.glade:11589
+#: terp.glade:11610
 msgid "<Ctrl> + O"
 msgstr ""
 
-#: terp.glade:11617
+#: terp.glade:11638
 #, fuzzy
 msgid "Connect"
 msgstr "_Подключение..."
 
-#: terp.glade:11645
+#: terp.glade:11666
 msgid "<Ctrl> + F"
 msgstr ""
 
-#: terp.glade:11673
+#: terp.glade:11694
 #, fuzzy
 msgid "Find / Search"
 msgstr "Завершение поиска"
 
-#: terp.glade:11701
+#: terp.glade:11722
 msgid "<Ctrl> + D"
 msgstr ""
 
-#: terp.glade:11729
+#: terp.glade:11750
 #, fuzzy
 msgid "Delete"
 msgstr "_Удалить"
 
-#: terp.glade:11757
+#: terp.glade:11778
 msgid "<Ctrl> + N"
 msgstr ""
 
-#: terp.glade:11785
+#: terp.glade:11806
 msgid "New"
 msgstr "Создать"
 
-#: terp.glade:11813
+#: terp.glade:11834
 msgid "<Ctrl> + <PgUp>"
 msgstr ""
 
-#: terp.glade:11841
+#: terp.glade:11862
 #, fuzzy
 msgid "Previous tab"
 msgstr "Предыдущий"
 
-#: terp.glade:11869
+#: terp.glade:11890
 msgid "<Ctrl> + <PgDn>"
 msgstr ""
 
-#: terp.glade:11925
+#: terp.glade:11946
 msgid "<Ctrl> + S"
 msgstr ""
 
-#: terp.glade:11953
+#: terp.glade:11974
 msgid "<Ctrl> + W"
 msgstr ""
 
-#: terp.glade:11981
+#: terp.glade:12002
 #, fuzzy
 msgid "Save"
 msgstr "Сохранить"
 
-#: terp.glade:12037
+#: terp.glade:12058
 msgid "<PgUp>"
 msgstr ""
 
-#: terp.glade:12065
+#: terp.glade:12086
 msgid "<PgDn>"
 msgstr ""
 
-#: terp.glade:12093
+#: terp.glade:12114
 #, fuzzy
 msgid "Previous record"
 msgstr "Предыдущий"
 
-#: terp.glade:12121
+#: terp.glade:12142
 #, fuzzy
 msgid "Next record"
 msgstr "Далее: не выбрана запись!"
 
-#: terp.glade:12149
+#: terp.glade:12170
 msgid "<Ctrl> + L"
 msgstr ""
 
-#: terp.glade:12177
+#: terp.glade:12198
 #, fuzzy
 msgid "Switch view mode"
 msgstr "Другой вид"
 
-#: terp.glade:12205
+#: terp.glade:12226
 msgid "<Ctrl> + <Enter>"
 msgstr ""
 
-#: terp.glade:12233
+#: terp.glade:12254
 #, fuzzy
 msgid "Save and Close window"
 msgstr "Закрыть окно"
 
-#: terp.glade:12261
+#: terp.glade:12282
 msgid "<i>When editing a resource in a popup window</i>"
 msgstr ""
 
-#: terp.glade:12289
+#: terp.glade:12310
 msgid "<Ctrl> + <Esc>"
 msgstr ""
 
-#: terp.glade:12317
+#: terp.glade:12338
 msgid "Close window without saving"
 msgstr ""
 
-#: terp.glade:12345
+#: terp.glade:12366
 msgid "<b>Shortcuts for TinyERP</b>"
 msgstr ""
 
-#: terp.glade:12379
+#: terp.glade:12400
 #, fuzzy
 msgid "Main Shortcuts"
 msgstr "Ярлыки"
 
-#: terp.glade:12412
+#: terp.glade:12433
 msgid "<Ctrl> + X"
 msgstr ""
 
-#: terp.glade:12440
+#: terp.glade:12461
 msgid "<Ctrl> + C"
 msgstr ""
 
-#: terp.glade:12468
+#: terp.glade:12489
 msgid "<Ctrl> + V"
 msgstr ""
 
-#: terp.glade:12496
+#: terp.glade:12517
 #, fuzzy
 msgid "Cut selected text"
 msgstr "Удалить выделенную запись"
 
-#: terp.glade:12524
+#: terp.glade:12545
 #, fuzzy
 msgid "Copy selected text"
 msgstr "Удалить выделенную запись"
 
-#: terp.glade:12552
+#: terp.glade:12573
 #, fuzzy
 msgid "Paste selected text"
 msgstr "Удалить выделенную запись"
 
-#: terp.glade:12580
+#: terp.glade:12601
 msgid "<Tab>"
 msgstr ""
 
-#: terp.glade:12608
+#: terp.glade:12629
 msgid "Next editable widget"
 msgstr ""
 
-#: terp.glade:12636
+#: terp.glade:12657
 msgid "<Shist> + <Tab>"
 msgstr ""
 
-#: terp.glade:12664
+#: terp.glade:12685
 #, fuzzy
 msgid "Previous editable widget"
 msgstr "Предыдущий"
 
-#: terp.glade:12692
+#: terp.glade:12713
 msgid "<Enter>"
 msgstr ""
 
-#: terp.glade:12720
+#: terp.glade:12741
 #, fuzzy
 msgid "Auto-Complete text field"
 msgstr "Очистить поле"
 
-#: terp.glade:12748
+#: terp.glade:12769
 msgid "F1"
 msgstr ""
 
-#: terp.glade:12776
+#: terp.glade:12797
 msgid "Add a new line/field"
 msgstr ""
 
-#: terp.glade:12804
+#: terp.glade:12825
 msgid "Open current field"
 msgstr ""
 
-#: terp.glade:12832
+#: terp.glade:12853
 #, fuzzy
 msgid "<b>Shortcuts in text entries</b>"
 msgstr "<b>Ваше имя:</b>"
 
-#: terp.glade:12860
+#: terp.glade:12881
 #, fuzzy
 msgid "<b>Shortcuts in relation fields</b>"
 msgstr "<b>Ваше имя:</b>"
 
-#: terp.glade:12889
+#: terp.glade:12910
 msgid "F2"
 msgstr ""
 
-#: terp.glade:12923
+#: terp.glade:12944
 #, fuzzy
 msgid "Edition Widgets"
 msgstr "Редактирование документа: "
 
-#: terp.glade:12954
+#: terp.glade:12975
 #, fuzzy
 msgid "Import from CSV"
 msgstr "Импортировать из csv файла"
 
-#: terp.glade:13323
+#: terp.glade:13344
 msgid "N_othing"
 msgstr "Ничего"
 
-#: terp.glade:13413
+#: terp.glade:13434
 msgid "Auto-Detect"
 msgstr ""
 
-#: terp.glade:13499
+#: terp.glade:13520
 msgid "<b>Fields to import</b>"
 msgstr "<b>Импортировать поля</b>"
 
-#: terp.glade:13567
+#: terp.glade:13588
 #, fuzzy
 msgid "File to Import:"
 msgstr "<b>Импортировать поля</b>"
 
-#: terp.glade:13592
+#: terp.glade:13613
 #, fuzzy
 msgid "Open..."
 msgstr "Открыть"
 
-#: terp.glade:13633
+#: terp.glade:13654
 #, fuzzy
 msgid "Field Separater:"
 msgstr "Название поля"
 
-#: terp.glade:13661
+#: terp.glade:13682
 msgid "Encoding:"
 msgstr ""
 
-#: terp.glade:13712
+#: terp.glade:13733
 msgid "Text Delimiter:"
 msgstr ""
 
-#: terp.glade:13763
+#: terp.glade:13784
 msgid "Lines to Skip:"
 msgstr ""
 
-#: terp.glade:13834
+#: terp.glade:13855
 msgid "CSV Parameters"
 msgstr ""
 
-#: terp.glade:13885
+#: terp.glade:13906
 msgid "Tiny ERP"
 msgstr "Tiny ERP"
 
-#: terp.glade:14036
+#: terp.glade:14057
 #, fuzzy
 msgid "Server"
 msgstr "Сервер:"
 
-#: terp.glade:14099
+#: terp.glade:14120
 msgid "<b>Connect to a Tiny ERP server</b>"
 msgstr ""
 
-#: terp.glade:14145
+#: terp.glade:14166
 msgid "Port:"
 msgstr "Порт:"
 
-#: terp.glade:14217
+#: terp.glade:14238
 #, fuzzy
 msgid "Protocol connection:"
 msgstr "Выберете действие"
 
-#: terp.glade:14299
+#: terp.glade:14320
 #, fuzzy
 msgid "Choose a database..."
 msgstr "Выберете дату"
 
-#: terp.glade:14369
+#: terp.glade:14390
 #, fuzzy
 msgid "<b>Backup a database</b>"
 msgstr "Создать новый объект"
 
-#: terp.glade:14696
+#: terp.glade:14717
 #, fuzzy
 msgid "Restore a database"
 msgstr "Выберете дату"
 
-#: terp.glade:14766
+#: terp.glade:14787
 #, fuzzy
 msgid "<b>Restore a database</b>"
 msgstr "Создать новый объект"
 
-#: terp.glade:14845 terp.glade:15410 terp.glade:16054
+#: terp.glade:14866 terp.glade:15431 terp.glade:16075
 #, fuzzy
 msgid "http://localhost:8069"
 msgstr "localhost"
 
-#: terp.glade:14996 terp.glade:15617
+#: terp.glade:15017 terp.glade:15638
 #, fuzzy
 msgid "New database name:"
 msgstr "Выберете дату"
 
-#: terp.glade:15046
+#: terp.glade:15067
 msgid "(must not contain any special char)"
 msgstr ""
 
-#: terp.glade:15103
+#: terp.glade:15124
 #, fuzzy
 msgid "Operation in progress"
 msgstr ""
 "Операция не выполнена !\n"
 "Ошибка ввода вывода"
 
-#: terp.glade:15162
+#: terp.glade:15183
 #, fuzzy
 msgid "<b>Operation in progress</b>"
 msgstr ""
 "Операция не выполнена !\n"
 "Ошибка ввода вывода"
 
-#: terp.glade:15198
+#: terp.glade:15219
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
 
-#: terp.glade:15261
+#: terp.glade:15282
 #, fuzzy
 msgid "Create a new database"
 msgstr "Создать новую запись"
 
-#: terp.glade:15324
+#: terp.glade:15345
 #, fuzzy
 msgid "<b>Create a new database</b>"
 msgstr "Создать новый объект"
 
-#: terp.glade:15377
+#: terp.glade:15398
 #, fuzzy
 msgid "Tiny ERP server:"
 msgstr "Tiny ERP"
 
-#: terp.glade:15406
+#: terp.glade:15427
 msgid ""
 "This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
 
-#: terp.glade:15510
+#: terp.glade:15531
 #, fuzzy
 msgid "Super admin password:"
 msgstr "Пароль:"
 
-#: terp.glade:15538
+#: terp.glade:15559
 #, fuzzy
 msgid "Default language:"
 msgstr "Значение по умолчанию"
 
-#: terp.glade:15566
+#: terp.glade:15587
 msgid "Load demonstration data:"
 msgstr ""
 
-#: terp.glade:15594
+#: terp.glade:15615
 msgid ""
 "Check this box if you want demo data to be installed on your new database."
 msgstr ""
 
-#: terp.glade:15645
+#: terp.glade:15666
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
 
-#: terp.glade:15682
+#: terp.glade:15703
 msgid "(use 'admin', if you did not changed it)"
 msgstr ""
 
-#: terp.glade:15710
+#: terp.glade:15731
 msgid ""
 "This is the password of the user that have the rights to administer "
 "databases. This is not a Tiny ERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 
-#: terp.glade:15734
+#: terp.glade:15755
 #, fuzzy
 msgid "Hello World"
 msgstr "Привет Мир!"
 
-#: terp.glade:15755
+#: terp.glade:15776
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
 
-#: terp.glade:15780
+#: terp.glade:15801
 msgid "(must not contain any special character)"
 msgstr ""
 
-#: terp.glade:15818
+#: terp.glade:15839
 #, fuzzy
 msgid "Change password"
 msgstr "Пароль:"
 
-#: terp.glade:15891
+#: terp.glade:15912
 #, fuzzy
 msgid "<b>Change your super admin password</b>"
 msgstr "Пароль:"
 
-#: terp.glade:15937
+#: terp.glade:15958
 #, fuzzy
 msgid "New password confirmation:"
 msgstr "Пароль:"
 
-#: terp.glade:15965
+#: terp.glade:15986
 #, fuzzy
 msgid "New password:"
 msgstr "Пароль:"
 
-#: terp.glade:15993
+#: terp.glade:16014
 #, fuzzy
 msgid "Old password:"
 msgstr "Пароль:"
 
-#: terp.glade:16234
+#: terp.glade:16255
 #, fuzzy
 msgid "Tiny ERP Message"
 msgstr "Tiny ERP лицензия"
 
-#: terp.glade:16372
+#: terp.glade:16393
 msgid "Database creation"
 msgstr ""
 
-#: terp.glade:16592
+#: terp.glade:16613
 msgid "<b>Database created successfully!</b>"
 msgstr ""
 
-#: terp.glade:16650
+#: terp.glade:16671
 msgid ""
 "You can connect to the new database using one of the following account:\n"
 "\n"
 "    Administrator: admin / admin "
 msgstr ""
 
-#: terp.glade:16681
+#: terp.glade:16702
 msgid "Concurrency exception"
 msgstr ""
 
-#: terp.glade:16768
+#: terp.glade:16789
 msgid "Compare"
 msgstr ""
 
-#: terp.glade:16843
+#: terp.glade:16864
 msgid "Write anyway"
 msgstr ""
 
-#: terp.glade:16908
+#: terp.glade:16929
 msgid ""
 "<b>\n"
 "Write concurrency warning:\n"
