@@ -28,12 +28,14 @@
 ##############################################################################
 
 import gtk
-
+import sys
 import interface
 
+
 class spinint(interface.widget_interface):
+
 	def __init__(self, window, parent, model, attrs={}):
-		adj = gtk.Adjustment(0.0, -1000000000, 1000000000, 1.0, 5.0, 5.0)
+		adj = gtk.Adjustment(0.0, -sys.maxint, sys.maxint, 1.0, 5.0, 5.0)
 		self.widget = gtk.SpinButton(adj, 1, digits=0)
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 		self.widget.set_numeric(True)

@@ -134,7 +134,7 @@ class parse(object):
 
 		self.spin_limit = gtk.SpinButton(climb_rate=1, digits=0)
 		self.spin_limit.set_numeric(False)
-		self.spin_limit.set_adjustment(gtk.Adjustment(value=80, lower=1, upper=10000, step_incr=10, page_incr=100, page_size=100))
+		self.spin_limit.set_adjustment(gtk.Adjustment(value=80, lower=1, upper=sys.maxint, step_incr=10, page_incr=100, page_size=100))
 		self.spin_limit.set_property('visible', True)
 
 		hb_param.pack_start(self.spin_limit, expand=False, fill=False)
@@ -143,7 +143,7 @@ class parse(object):
 
 		self.spin_offset = gtk.SpinButton(climb_rate=1,digits=0)
 		self.spin_offset.set_numeric(False)
-		self.spin_offset.set_adjustment(gtk.Adjustment(value=0, lower=0, upper=999999, step_incr=80, page_incr=100, page_size=100))
+		self.spin_offset.set_adjustment(gtk.Adjustment(value=0, lower=0, upper=sys.maxint, step_incr=80, page_incr=100, page_size=100))
 
 		hb_param.pack_start(self.spin_offset, expand=False, fill=False)
 
