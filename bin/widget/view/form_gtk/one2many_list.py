@@ -40,7 +40,15 @@ from widget.screen import Screen
 
 
 class dialog(object):
-	def __init__(self, model_name, parent, model=None, attrs={}, model_ctx={}, window=None, default_get_ctx={}):
+	def __init__(self, model_name, parent, model=None, attrs=None, model_ctx=None,
+			window=None, default_get_ctx=None):
+
+		if attrs is None:
+			attrs = {}
+		if model_ctx is None:
+			model_ctx = {}
+		if default_get_ctx is None:
+			default_get_ctx = {}
 
 		self.dia = gtk.Dialog(_('Tiny ERP - Link'), window,
 				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
@@ -58,6 +66,8 @@ class dialog(object):
 
 		self.but_ok = self.dia.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
 		self.but_ok.add_accelerator('clicked', self.accel_group, gtk.keysyms.Return, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+
+		self.default_get_ctx = default_get_ctx
 
 		scroll = gtk.ScrolledWindow()
 		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
@@ -90,7 +100,7 @@ class dialog(object):
 		self.screen.display()
 
 	def new(self):
-		model = self.screen.new()
+		model = self.screen.new(context=self.default_get_ctx)
 		self.screen.models.model_add(model)
 		self.screen.current_model = model
 		return True
