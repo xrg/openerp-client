@@ -51,7 +51,7 @@ def import_csv(csv_data, f, model, fields):
 	datas = []
 
 	for line in data:
-		if not line.strip():
+		if not line:
 			continue
 		datas.append(map(lambda x:x.decode(csv_data['combo']).encode('utf-8'), line))
 	try:
