@@ -243,14 +243,15 @@ class many2one(interface.widget_interface):
 			if not self._readonly and ( self.wid_text.get_text() or not leave):
 				domain = self._view.modelfield.domain_get(self._view.model)
 				context = self._view.modelfield.context_get(self._view.model)
+				self.wid_text.grab_focus()
 
 				ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
 				if len(ids)==1:
 					self._view.modelfield.set_client(self._view.model, ids[0],
 							force_change=True)
+					self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 					self.display(self._view.model, self._view.modelfield)
 					self.ok = True
-					self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 					return True
 
 				win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self._window)
