@@ -45,6 +45,7 @@ class selection(interface.widget_interface):
 		self.entry.child.set_editable(False)
 		self.entry.child.connect('button_press_event', self._menu_open)
 		self.entry.child.connect('key_press_event', self.sig_key_pressed)
+		self.entry.set_size_request(0, -1)
 		self.widget.pack_start(self.entry, expand=True, fill=True)
 
 		self.ok = True
