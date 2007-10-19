@@ -58,6 +58,7 @@ class reference(interface.widget_interface):
 		self.widget_combo.child.set_editable(False)
 		self.widget_combo.child.connect('changed', self.sig_changed_combo)
 		self.widget_combo.child.connect('key_press_event', self.sig_key_pressed)
+		self.widget_combo.set_size_request(int(attrs.get('size', -1)), -1)
 		self.widget.pack_start(self.widget_combo, expand=False, fill=True)
 
 		self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
@@ -157,7 +158,7 @@ class reference(interface.widget_interface):
 
 		self.wid_text.disconnect(self.wid_text_focus_out_id)
 		if not value:
-			model, (id, name) = '', (0, '')
+			model, (id, name) = self.get_model() or '', (0, '')
 		else:
 			model, (id, name) = value
 		if id:
