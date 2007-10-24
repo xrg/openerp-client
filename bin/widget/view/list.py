@@ -296,8 +296,11 @@ class ViewList(object):
 			for model in self.screen.models.models:
 				if model.id in ids or not ids:
 					value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
-			self.children[c][2].set_label(locale.format('%.' +
-				str(self.children[c][3]) + 'f', value, True))
+			label_str = locale.format('%.' + str(self.children[c][3]) + 'f', value, True)
+			if self.children[c][4]:
+				self.children[c][2].set_markup('<b>%s</b>' % label_str)
+			else:
+				self.children[c][2].set_markup(label_str)
 
 	def set_cursor(self, new=False):
 		if self.screen.current_model:

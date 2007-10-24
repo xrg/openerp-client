@@ -127,8 +127,20 @@ class parser_tree(interface.parser_interface):
 				#col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
 				col.set_visible(not fields[fname].get('invisible', False))
 				n = treeview.append_column(col)
-				if 'sum' in fields[fname] and fields[fname]['type'] in ('integer', 'float', 'float_time'):
-					dict_widget[n] = (fname, gtk.Label(fields[fname]['sum']+': '), gtk.Label(0), fields.get('digits', (16,2))[1])
+				if 'sum' in fields[fname] and fields[fname]['type'] \
+						in ('integer', 'float', 'float_time'):
+					label = gtk.Label()
+					label.set_use_markup(True)
+					label_str = fields[fname]['sum'] + ': '
+					label_bold = bool(int(fields[fname].get('sum_bold', 0)))
+					if label_bold:
+						label.set_markup('<b>%s</b>' % label_str)
+					else:
+						label.set_markup(label_str)
+					label_sum = gtk.Label()
+					label_sum.set_use_markup(True)
+					dict_widget[n] = (fname, label, label_sum,
+							fields.get('digits', (16,2))[1], label_bold)
 		return treeview, dict_widget, [], on_write
 
 class UnsettableColumn(Exception):
