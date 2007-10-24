@@ -143,8 +143,11 @@ class form(object):
 		if not self.modified_save():
 			return
 		glade2 = glade.XML(common.terp_path("terp.glade"),'dia_goto_id',gettext.textdomain())
-		win = glade2.get_widget('dia_goto_id')
 		widget = glade2.get_widget('goto_spinbutton')
+		win = glade2.get_widget('dia_goto_id')
+		win.set_transient_for(self.window)
+		win.show_all()
+
 		response = win.run()
 		win.destroy()
 		if response == gtk.RESPONSE_OK:

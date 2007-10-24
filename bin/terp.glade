@@ -8606,7 +8606,7 @@ Very Urgent</property>
   <property name="title" translatable="yes">Tiny ERP - Preferences</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
-  <property name="modal">False</property>
+  <property name="modal">True</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
   <property name="decorated">True</property>
@@ -8646,6 +8646,7 @@ Very Urgent</property>
 	    <widget class="GtkButton" id="okbutton14">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
+	      <property name="has_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-ok</property>
 	      <property name="use_stock">True</property>
@@ -9443,11 +9444,10 @@ Each version is given a distinguishing version number.  If the Program specifies
 <widget class="GtkDialog" id="dia_goto_id">
   <property name="width_request">230</property>
   <property name="height_request">122</property>
-  <property name="visible">True</property>
   <property name="title" translatable="yes">Go to resource ID</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
-  <property name="modal">False</property>
+  <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
+  <property name="modal">True</property>
   <property name="resizable">False</property>
   <property name="destroy_with_parent">False</property>
   <property name="decorated">True</property>
@@ -9547,7 +9547,7 @@ Each version is given a distinguishing version number.  If the Program specifies
 	    <widget class="GtkImage" id="image1176">
 	      <property name="visible">True</property>
 	      <property name="stock">gtk-index</property>
-	      <property name="icon_size">6</property>
+	      <property name="icon_size">5</property>
 	      <property name="xalign">0.5</property>
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
