@@ -281,6 +281,11 @@ class many2one(interface.widget_interface):
 			self.sig_new(widget, event)
 		elif event.keyval==gtk.keysyms.F2:
 			self.sig_activate(widget, event)
+		elif event.keyval  == gtk.keysyms.Tab:
+			if self._view.modelfield.get(self._view.model):
+				return False
+			self.sig_activate(widget, event)
+			return True
 		return False
 
 	def sig_changed(self, *args):
