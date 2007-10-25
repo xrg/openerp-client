@@ -282,9 +282,10 @@ class many2one(interface.widget_interface):
 		elif event.keyval==gtk.keysyms.F2:
 			self.sig_activate(widget, event)
 		elif event.keyval  == gtk.keysyms.Tab:
-			if self._view.modelfield.get(self._view.model):
+			if self._view.modelfield.get(self._view.model) or \
+					not self.wid_text.get_text():
 				return False
-			self.sig_activate(widget, event)
+			self.sig_activate(widget, event, leave=True)
 			return True
 		return False
 
