@@ -107,7 +107,10 @@ class CharField(object):
 		return model.value[self.name] or False
 
 	def set_default(self, model, value):
-		return self.set(model, value)
+		res = self.set(model, value)
+		if self.attrs.get('on_change',False):
+			model.on_change(self.attrs['on_change'])
+		return res
 
 	def get_default(self, model):
 		return self.get(model)
