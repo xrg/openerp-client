@@ -36,14 +36,19 @@ import rpc
 import common
 import win_search
 import copy
-
+import service
 from widget.screen import Screen
+
 
 class win_preference(object):
 	def __init__(self, model, id, preferences, parent=None):
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_preference', gettext.textdomain())
 		self.win = self.glade.get_widget('win_preference')
+		self.win.set_icon(common.TINYERP_ICON)
+		if not parent:
+			parent = service.LocalService('gui.main').window
 		self.win.set_transient_for(parent)
+		self.parent = parent
 		self.win.show_all()
 		self.id = id
 		self.model = model
@@ -92,7 +97,7 @@ class win_preference(object):
 					rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'set', 'meta', key, key, [(self.model,self.id)], val[key])
 				elif self.default.get(key, False):
 					rpc.session.rpc_exec_auth('/common', 'ir_del', self.default[key])
-
+		self.parent.present()
 		self.win.destroy()
 		return final
 

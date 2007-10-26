@@ -44,10 +44,13 @@ import tempfile
 
 class win_attach(object):
 	def __init__(self, model, id, parent=None):
-		self.glade = glade.XML(common.terp_path("terp.glade"),'win_attach',gettext.textdomain())
+		self.glade = glade.XML(common.terp_path("terp.glade"), 'win_attach',
+				gettext.textdomain())
 		self.win = self.glade.get_widget('win_attach')
+		self.win.set_icon(common.TINYERP_ICON)
 		if parent:
 			self.win.set_transient_for(parent)
+		self.parent = parent
 		self.ressource = (model, id)
 
 		self.view = gtk.TreeView()
@@ -297,5 +300,6 @@ class win_attach(object):
 			else:
 				res = None
 				end = True
+		self.parent.present()
 		self.win.destroy()
 

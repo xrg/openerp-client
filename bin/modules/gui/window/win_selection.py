@@ -47,6 +47,9 @@ class win_selection_class(object):
 	def __init__(self, ids, model, view=None):
 		self.glade = glade.XML(common.terp_path("terp.glade"), "win_selection",gettext.textdomain())
 		self.win = self.glade.get_widget('win_selection')
+		self.win.set_icon(common.TINYERP_ICON)
+		self.parent = service.LocalService('gui.main').window
+		self.win.set_transient_for(parent)
 
 		self.ids = ids
 		self.view = self.glade.get_widget('win_sel_tree')
@@ -101,6 +104,7 @@ class win_selection_class(object):
 			res = self.id_name_get()
 		else:
 			res=None
+		self.parent.present()
 		self.win.destroy()
 		return res
 

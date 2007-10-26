@@ -81,6 +81,7 @@ class win_import(object):
 		if parent is None:
 			parent = service.LocalService('gui.main').window
 		self.win.set_transient_for(parent)
+		self.win.set_icon(common.TINYERP_ICON)
 		self.parent = parent
 
 		self.glade.get_widget('import_csv_file').set_current_folder(
@@ -212,11 +213,13 @@ class win_import(object):
 				'skip': self.glade.get_widget('import_csv_skip').get_value(),
 				'combo': self.glade.get_widget('import_csv_combo').get_active_text() or 'UTF-8'
 			}
+			self.parent.present()
 			self.win.destroy()
 			if csv['fname']:
 				return import_csv(csv, fields, self.model, self.fields)
 			return False
 		else:
+			self.parent.present()
 			self.win.destroy()
 			return False
 

@@ -82,6 +82,7 @@ def _server_ask(server_widget, parent=None):
 	if not parent:
 		parent = service.LocalService('gui.main').window
 	win.set_transient_for(parent)
+	win.set_icon(common.TINYERP_ICON)
 	win.show_all()
 	win.set_default_response(gtk.RESPONSE_OK)
 	host_widget = win_gl.get_widget('ent_host')
@@ -115,6 +116,7 @@ def _server_ask(server_widget, parent=None):
 		url = '%s%s:%s' % (protocol, host_widget.get_text(), port_widget.get_text())
 		server_widget.set_text(url)
 		result = url
+	parent.present()
 	win.destroy()
 	return result
 
@@ -154,6 +156,7 @@ class db_login(object):
 		if not parent:
 			parent = service.LocalService('gui.main').window
 		win.set_transient_for(parent)
+		win.set_icon(common.TINYERP_ICON)
 		win.show_all()
 		img = self.win_gl.get_widget('image_tinyerp')
 		img.set_from_file(common.terp_path_pixmaps('tinyerp.png'))
@@ -202,11 +205,14 @@ class db_login(object):
 			options.options['login.db'] = db_widget.get_active_text()
 			result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), db_widget.get_active_text())
 		else:
+			parent.present()
 			win.destroy()
 			raise Exception('QueryCanceled')
 		if res <> gtk.RESPONSE_OK:
+			parent.present()
 			win.destroy()
 			raise Exception('QueryCanceled')
+		parent.present()
 		win.destroy()
 		return result
 
@@ -284,6 +290,7 @@ class db_create(object):
 			options.options['login.server'] = m.group(2)
 			options.options['login.port'] = m.group(3)
 			options.options['login.protocol'] = m.group(1)
+		parent.present()
 		win.destroy()
 
 		if res == gtk.RESPONSE_OK:
@@ -346,6 +353,7 @@ class db_create(object):
 			iter_start = buffer.get_start_iter()
 			buffer.insert(iter_start, _('The following users have been installed on your database:')+'\n\n'+ pwdlst + '\n\n'+_('You can now connect to the database as an administrator.'))
 			res = win.run()
+			parent.present()
 			win.destroy()
 
 			if res == gtk.RESPONSE_OK:
@@ -385,7 +393,7 @@ class terp_main(service.Service):
 		window.connect("destroy", self.sig_quit)
 		window.connect("delete_event", self.sig_delete)
 		self.window = window
-		self.window.set_icon(gtk.gdk.pixbuf_new_from_file(common.terp_path_pixmaps('tinyerp-icon-32x32.png')))
+		self.window.set_icon(common.TINYERP_ICON)
 
 		self.notebook = gtk.Notebook()
 		self.notebook.popup_enable()
@@ -611,11 +619,16 @@ class terp_main(service.Service):
 
 	def sig_user_preferences(self, *args):
 		try:
-			actions = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'meta', False, [('res.users',False)], True, rpc.session.context, True)
+			actions = rpc.session.rpc_exec_auth('/object', 'execute',
+					'ir.values', 'get', 'meta', False, [('res.users',False)],
+					True, rpc.session.context, True)
 
-			win = win_preference.win_preference('res.users', rpc.session.uid, actions, parent=self.window)
+			win = win_preference.win_preference('res.users', rpc.session.uid,
+					actions, parent=self.window)
 			if win.run():
 				rpc.session.context_reload()
+			self.window.present()
+			win.destroy()
 			return True
 		except:
 			return False
@@ -683,6 +696,7 @@ class terp_main(service.Service):
 					if e.args == ('QueryCanceled',):
 						return False
 					raise
+			service.LocalService('gui.main').window.present()
 			self.sig_logout(widget)
 			log_response = rpc.session.login(*res)
 			if log_response==1:
@@ -937,8 +951,10 @@ class terp_main(service.Service):
 					common.warning(_("Couldn't restore database"), parent=self.window)
 
 	def sig_db_password(self, widget):
-		dialog = glade.XML(common.terp_path("terp.glade"), "dia_passwd_change", gettext.textdomain())
+		dialog = glade.XML(common.terp_path("terp.glade"), "dia_passwd_change",
+				gettext.textdomain())
 		win = dialog.get_widget('dia_passwd_change')
+		win.set_icon(common.TINYERP_ICON)
 		win.set_transient_for(self.window)
 		win.show_all()
 		server_widget = dialog.get_widget('ent_server')
@@ -961,15 +977,22 @@ class terp_main(service.Service):
 			new_passwd = new_pass_widget.get_text()
 			new_passwd2 = new_pass2_widget.get_text()
 			if new_passwd != new_passwd2:
-				common.warning(_("Confirmation password do not match new password, operation cancelled!"), _("Validation Error."), parent=self.window)
+				common.warning(_("Confirmation password do not match " \
+						"new password, operation cancelled!"),
+						_("Validation Error."), parent=win)
 			else:
 				try:
-					rpc.session.db_exec(url, 'change_admin_password', old_passwd, new_passwd)
+					rpc.session.db_exec(url, 'change_admin_password',
+							old_passwd, new_passwd)
 				except Exception,e:
-					if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
-						common.warning(_("Could not change password database."),_('Bas password provided !'), parent=self.window)
+					if ('faultString' in e and e.faultString=='AccessDenied:None') \
+							or str(e)=='AccessDenied':
+						common.warning(_("Could not change password database."),
+								_('Bas password provided !'), parent=win)
 					else:
-						common.warning(_("Error, password not changed."), parent=self.window)
+						common.warning(_("Error, password not changed."),
+								parent=win)
+		self.window.present()
 		win.destroy()
 
 	def sig_db_dump(self, widget):
@@ -1013,8 +1036,10 @@ class terp_main(service.Service):
 			refreshlist(widget, db_widget, label, url)
 			return  url
 
-		dialog = glade.XML(common.terp_path("terp.glade"), "win_db_select", gettext.textdomain())
+		dialog = glade.XML(common.terp_path("terp.glade"), "win_db_select",
+				gettext.textdomain())
 		win = dialog.get_widget('win_db_select')
+		win.set_icon(common.TINYERP_ICON)
 		win.set_default_response(gtk.RESPONSE_OK)
 		win.set_transient_for(self.window)
 		win.show_all()
@@ -1051,12 +1076,15 @@ class terp_main(service.Service):
 			db = db_widget.get_active_text()
 			url = server_widget.get_text()
 			passwd = pass_widget.get_text()
+		self.window.present()
 		win.destroy()
 		return (url,db,passwd)
 	
 	def _choose_db_ent(self):
-		dialog = glade.XML(common.terp_path("terp.glade"), "win_db_ent", gettext.textdomain())
+		dialog = glade.XML(common.terp_path("terp.glade"), "win_db_ent",
+				gettext.textdomain())
 		win = dialog.get_widget('win_db_ent')
+		win.set_icon(common.TINYERP_ICON)
 		win.set_transient_for(self.window)
 		win.show_all()
 
@@ -1065,11 +1093,13 @@ class terp_main(service.Service):
 		widget_url = dialog.get_widget('ent_server')
 
 		protocol = options.options['login.protocol']
-		url = '%s%s:%s' % (protocol, options.options['login.server'], options.options['login.port'])
+		url = '%s%s:%s' % (protocol, options.options['login.server'],
+				options.options['login.port'])
 		widget_url.set_text(url)
 
 		change_button = dialog.get_widget('but_server_change')
-		change_button.connect_after('clicked', lambda a,b: _server_ask(b, win), widget_url)
+		change_button.connect_after('clicked', lambda a,b: _server_ask(b, win),
+				widget_url)
 
 		res = win.run()
 
@@ -1080,6 +1110,7 @@ class terp_main(service.Service):
 			db = db_widget.get_text()
 			url = widget_url.get_text()
 			passwd = widget_pass.get_text()
+		self.window.present()
 		win.destroy()
 		return url, db, passwd
 

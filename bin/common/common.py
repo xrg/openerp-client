@@ -64,6 +64,9 @@ def _search_file(file, dir='path.share'):
 terp_path = _search_file
 terp_path_pixmaps = lambda x: _search_file(x, 'path.pixmaps')
 
+TINYERP_ICON = gtk.gdk.pixbuf_new_from_file(
+			terp_path_pixmaps('tinyerp-icon-32x32.png'))
+
 def selection(title, values, alwaysask=False, parent=None):
 	if not values or len(values)==0:
 		return None
@@ -75,6 +78,7 @@ def selection(title, values, alwaysask=False, parent=None):
 	win = xml.get_widget('win_selection')
 	if not parent:
 		parent = service.LocalService('gui.main').window
+	win.set_icon(TINYERP_ICON)
 	win.set_transient_for(parent)
 
 	label = xml.get_widget('win_sel_title')
@@ -114,6 +118,7 @@ def selection(title, values, alwaysask=False, parent=None):
 				ok = False
 		else:
 			res = None
+	parent.present()
 	win.destroy()
 	return res
 
@@ -130,9 +135,12 @@ def tipoftheday(parent=None):
 			self.win = winglade.get_widget('win_tips')
 			if parent:
 				self.win.set_transient_for(parent)
+			self.parent = parent
 			self.win.show_all()
 			self.label = winglade.get_widget('tip_label')
 			self.check = winglade.get_widget('tip_checkbutton')
+			img = winglade.get_widget('tip_image_tinyerp')
+			img.set_from_file(common.terp_path_pixmaps('tinyerp.png'))
 			dict = {
 				'on_but_next_activate': self.tip_next,
 				'on_but_previous_activate': self.tip_previous,
@@ -170,6 +178,7 @@ def tipoftheday(parent=None):
 			options.options['tip.autostart'] = check
 			options.options['tip.position'] = self.number+1
 			options.save()
+			parent.present()
 			self.win.destroy()
 	tip2 = tip(parent)
 	return True
@@ -200,7 +209,9 @@ def terp_survey():
 	widnames = ('country','role','industry','employee','hear','system','opensource')
 	winglade = glade.XML(common.terp_path("terp.glade"), "dia_survey", gettext.textdomain())
 	win = winglade.get_widget('dia_survey')
-	win.set_transient_for(service.LocalService('gui.main').window)
+	parent = service.LocalService('gui.main').window
+	win.set_transient_for(parent)
+	win.set_icon(TINYERP_ICON)
 	for widname in widnames:
 		wid = winglade.get_widget('combo_'+widname)
 		wid.child.set_text('(choose one)')
@@ -220,12 +231,14 @@ def terp_survey():
 		iter_start = buffer.get_start_iter()
 		iter_end = buffer.get_end_iter()
 		result += "\nnote: "+buffer.get_text(iter_start,iter_end,False)
+		parent.present()
 		win.destroy()
 		upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
 		options.options['survey.position']=SURVEY_VERSION
 		options.save()
 		common.message(_('Thank you for the feedback !\nYour comments have been sent to Tiny ERP.\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
 	else:
+		parent.present()
 		win.destroy()
 		common.message(_('Thank you for testing Tiny ERP !\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
 	return True
@@ -242,6 +255,7 @@ def file_selection(title, filename='', parent=None,
 	win = gtk.FileChooserDialog(title, None, action, buttons)
 	if parent:
 		win.set_transient_for(parent)
+	win.set_icon(TINYERP_ICON)
 	win.set_current_folder(options.options['client.default_path'])
 	if filename:
 		win.set_filename(os.path.join(options.options['client.default_path'], filename))
@@ -279,6 +293,7 @@ def file_selection(title, filename='', parent=None,
 				options.options['client.default_path'] = os.path.dirname(filepath)
 			except:
 				pass
+		parent.present()
 		win.destroy()
 		return filepath
 	else:
@@ -287,6 +302,7 @@ def file_selection(title, filename='', parent=None,
 			options.options['client.default_path'] = os.path.dirname(filenames[0])
 		except:
 			pass
+		parent.present()
 		win.destroy()
 		return filenames
 
@@ -299,7 +315,9 @@ def support(*args):
 
 	sur = glade.XML(terp_path("terp.glade"), "dia_support",gettext.textdomain())
 	win = sur.get_widget('dia_support')
-	win.set_transient_for(service.LocalService('gui.main').window)
+	parent = service.LocalService('gui.main').window
+	win.set_transient_for(parent)
+	win.set_icon(TINYERP_ICON)
 	win.show_all()
 	sur.get_widget('id_entry').set_text(support_id)
 
@@ -324,6 +342,7 @@ def support(*args):
 		if upload_data(fromaddr, content, 'support', id_contract):
 			common.message(_('Support request sent !'))
 
+	parent.present()
 	win.destroy()
 	return True
 
@@ -343,6 +362,7 @@ def error(title, message, details='', parent=None):
 	if not parent:
 		parent=service.LocalService('gui.main').window
 	win.set_transient_for(parent)
+	win.set_icon(TINYERP_ICON)
 	sur.get_widget('error_title').set_text(str(title))
 	sur.get_widget('error_info').set_text(str(message))
 	buf = gtk.TextBuffer()
@@ -381,6 +401,7 @@ def error(title, message, details='', parent=None):
 	sur.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
 
 	response = win.run()
+	parent.present()
 	win.destroy()
 	return True
 
@@ -391,7 +412,9 @@ def message(msg, type=gtk.MESSAGE_INFO, parent=None):
 	  gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
 	  type, gtk.BUTTONS_OK,
 	  msg)
+	dialog.set_icon(TINYERP_ICON)
 	dialog.run()
+	parent.present()
 	dialog.destroy()
 	return True
 
@@ -411,8 +434,10 @@ def message_box(title, msg, parent=None):
 	if not parent:
 		parent=service.LocalService('gui.main').window
 	win.set_transient_for(parent)
+	win.set_icon(TINYERP_ICON)
 
 	response = win.run()
+	parent.present()
 	win.destroy()
 	return True
 
@@ -422,9 +447,11 @@ def warning(msg, title='', parent=None):
 		parent=service.LocalService('gui.main').window
 	dialog = gtk.MessageDialog(parent, gtk.DIALOG_DESTROY_WITH_PARENT,
 			gtk.MESSAGE_WARNING, gtk.BUTTONS_OK)
+	dialog.set_icon(TINYERP_ICON)
 	dialog.set_markup('<b>%s</b>\n\n%s' % (to_xml(title),to_xml(msg)))
 	dialog.show_all()
 	dialog.run()
+	parent.present()
 	dialog.destroy()
 	return True
 
@@ -441,8 +468,10 @@ def sur(msg, parent=None):
 	if not parent:
 		parent=service.LocalService('gui.main').window
 	win.set_transient_for(parent)
+	win.set_icon(TINYERP_ICON)
 
 	response = win.run()
+	parent.present()
 	win.destroy()
 	return response == gtk.RESPONSE_OK
 
@@ -455,8 +484,10 @@ def sur_3b(msg, parent=None):
 	if not parent:
 		parent=service.LocalService('gui.main').window
 	win.set_transient_for(parent)
+	win.set_icon(TINYERP_ICON)
 
 	response = win.run()
+	parent.present()
 	win.destroy()
 	if response == gtk.RESPONSE_YES:
 		return 'ok'
@@ -487,8 +518,10 @@ def ask(question, parent=None):
 	if not parent:
 		parent=service.LocalService('gui.main').window
 	win.set_transient_for(parent)
+	win.set_icon(TINYERP_ICON)
 
 	response = win.run()
+	parent.present()
 	win.destroy()
 	if response == gtk.RESPONSE_CANCEL:
 		return None
@@ -502,8 +535,10 @@ def concurrency(resource, id, context, parent=None):
 	if not parent:
 		parent=service.LocalService('gui.main').window
 	win.set_transient_for(parent)
+	win.set_icon(TINYERP_ICON)
 
 	res= win.run()
+	parent.present()
 	win.destroy()
 
 	if res == gtk.RESPONSE_OK:
@@ -521,4 +556,5 @@ colors = {
 	'required':'#d2d2ff',
 	'normal':'white'
 }
+
 

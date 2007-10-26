@@ -46,6 +46,7 @@ from modules.gui.window.win_search import win_search
 import common
 import rpc
 import datetime as DT
+import service
 
 def send_keys(renderer, editable, position, treeview):
 	editable.connect('key_press_event', treeview.on_keypressed)
@@ -86,7 +87,8 @@ class parser_tree(interface.parser_interface):
 						node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
 				fields[fname].update(node_attrs)
 				node_attrs.update(fields[fname])
-				cell = Cell(fields[fname]['type'])(fname, treeview, node_attrs)
+				cell = Cell(fields[fname]['type'])(fname, treeview, node_attrs,
+						self.window)
 				treeview.cells[fname] = cell
 				renderer = cell.renderer
 				if editable and not node_attrs.get('readonly', False):
@@ -153,11 +155,14 @@ class Cell(object):
 
 
 class Char(object):
-	def __init__(self, field_name, treeview=None, attrs=None):
+	def __init__(self, field_name, treeview=None, attrs=None, window=None):
 		self.field_name = field_name
 		self.attrs = attrs or {}
 		self.renderer = gtk.CellRendererText()
 		self.treeview = treeview
+		if not window:
+			window = service.LocalService('gui.main').window
+		self.window = window
 
 	def setter(self, column, cell, store, iter):
 		model = store.get_value(iter, 0)
@@ -376,7 +381,8 @@ class M2O(Char):
 			if searched[0]:
 				return True, searched
 			return False, False
-		dia = M2ODialog(relation, id, domain=domain,context=context)
+		dia = M2ODialog(relation, id, domain=domain, context=context,
+				window=self.window)
 		ok, value = dia.run()
 		dia.destroy()
 		if ok:

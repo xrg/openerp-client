@@ -37,6 +37,7 @@ import common
 import interface
 import locale
 import rpc
+import service
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
@@ -121,10 +122,14 @@ class calendar(interface.widget_interface):
 			common.message(_('This widget is readonly !'))
 			return True
 
+		if not window:
+			window = service.LocalService('gui.main').window
+
 		win = gtk.Dialog(_('Tiny ERP - Date selection'), window,
 				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
 				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
 				gtk.STOCK_OK, gtk.RESPONSE_OK))
+		win.set_icon(common.TINYERP_ICON)
 
 		cal = gtk.Calendar()
 		cal.display_options(gtk.CALENDAR_SHOW_HEADING|gtk.CALENDAR_SHOW_DAY_NAMES|gtk.CALENDAR_SHOW_WEEK_NUMBERS)
@@ -146,6 +151,7 @@ class calendar(interface.widget_interface):
 			dt = DT.date(year, month+1, day)
 			self.entry.set_text(dt.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')))
 		self._focus_out()
+		window.present()
 		win.destroy()
 
 class datetime(interface.widget_interface):

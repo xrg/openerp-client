@@ -52,9 +52,10 @@ class win_search(object):
 		self.sel_multi = sel_multi
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_search',gettext.textdomain())
 		self.win = self.glade.get_widget('win_search')
-		self.win.set_icon_from_file(common.terp_path_pixmaps('tinyerp_icon.png'))
+		self.win.set_icon(common.TINYERP_ICON)
 		if not parent:
 			parent = service.LocalService('gui.main').window
+		self.parent = parent
 		self.win.set_transient_for(parent)
 
 		self.screen = Screen(model, view_type=['tree'], context=context, parent=self.win)
@@ -144,6 +145,7 @@ class win_search(object):
 		return self.screen.sel_ids_get()
 
 	def destroy(self):
+		self.parent.present()
 		self.win.destroy()
 
 	def go(self):

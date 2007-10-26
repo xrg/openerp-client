@@ -452,6 +452,7 @@ class parser_form(widget.view.interface.parser_interface):
 		win.set_property('default-width', 600)
 		win.set_property('default-height', 400)
 		win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+		win.set_icon(common.TINYERP_ICON)
 
 		accel_group = gtk.AccelGroup()
 		win.add_accel_group(accel_group)
@@ -529,8 +530,10 @@ class parser_form(widget.view.interface.parser_interface):
 					context['lang'] = adapt_context(new_val['code'])
 					rpc.session.rpc_exec_auth('/object', 'execute', model, 'write', [id], {str(name):  new_val['value']}, context)
 			if response == gtk.RESPONSE_CANCEL:
+				self.window.present()
 				win.destroy()
 				return
+		self.window.present()
 		win.destroy()
 		return True
 
@@ -539,8 +542,11 @@ class parser_form(widget.view.interface.parser_interface):
 			lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable', '=', '1')])
 			langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
 
-			win = gtk.Dialog('Add Translation')
+			win = gtk.Dialog('Add Translation', self.window,
+					gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
 			win.vbox.set_spacing(5)
+			win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+			win.set_icon(common.TINYERP_ICON)
 			vbox = gtk.VBox(spacing=5)
 
 			entries_list = []
@@ -577,16 +583,21 @@ class parser_form(widget.view.interface.parser_interface):
 				while to_save:
 					code, val = to_save.pop()
 					rpc.session.rpc_exec_auth('/object', 'execute', model, 'write_string', False, [code], {name: val})
+			self.window.present()
 			win.destroy()
 			return res
+
 		def callback_view(self, widget, event, model, src):
 			lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable', '=', '1')])
 			langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
 
-			win = gtk.Dialog('Add Translation')
+			win = gtk.Dialog('Add Translation', self.window,
+					gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
+			win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+			win.set_icon(common.TINYERP_ICON)
 			win.vbox.set_spacing(5)
 			vbox = gtk.VBox(spacing=5)
-	
+
 			entries_list = []
 			for lang in langs:
 				code=lang['code']
@@ -621,6 +632,7 @@ class parser_form(widget.view.interface.parser_interface):
 				while to_save:
 					id, val = to_save.pop()
 					rpc.session.rpc_exec_auth('/object', 'execute', 'ir.translation', 'write', [id], {'value': val})
+			self.window.present()
 			win.destroy()
 			return res
 		if event.button != 3:

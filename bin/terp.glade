@@ -376,7 +376,7 @@
   <property name="visible">True</property>
   <property name="title" translatable="no">Tiny ERP</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">False</property>
   <property name="default_width">920</property>
   <property name="default_height">780</property>
@@ -8930,9 +8930,10 @@ Very Urgent</property>
 	  <property name="spacing">0</property>
 
 	  <child>
-	    <widget class="GtkImage" id="image632">
+	    <widget class="GtkImage" id="tip_image_tinyerp">
+	      <property name="width_request">500</property>
+	      <property name="height_request">71</property>
 	      <property name="visible">True</property>
-	      <property name="pixbuf">tinyerp.png</property>
 	      <property name="xalign">0.5</property>
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>

@@ -37,6 +37,7 @@ import wid_common
 
 import interface
 from widget.screen import Screen
+import service
 
 
 class dialog(object):
@@ -50,13 +51,18 @@ class dialog(object):
 		if default_get_ctx is None:
 			default_get_ctx = {}
 
+		if not window:
+			window = service.LocalService('gui.main').window
+
 		self.dia = gtk.Dialog(_('Tiny ERP - Link'), window,
 				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
+		self.window = window
 		if ('string' in attrs) and attrs['string']:
 			self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
 		self.dia.set_property('default-width', 760)
 		self.dia.set_property('default-height', 500)
 		self.dia.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+		self.dia.set_icon(common.TINYERP_ICON)
 
 		self.accel_group = gtk.AccelGroup()
 		self.dia.add_accel_group(self.accel_group)
@@ -79,7 +85,7 @@ class dialog(object):
 		vp.set_shadow_type(gtk.SHADOW_NONE)
 		scroll.add(vp)
 
-		self.screen = Screen(model_name, view_type=[], parent=parent, window=window)
+		self.screen = Screen(model_name, view_type=[], parent=parent, window=self.dia)
 		self.screen.models._context.update(model_ctx)
 		if not model:
 			model = self.screen.new(context=default_get_ctx)
@@ -121,6 +127,7 @@ class dialog(object):
 
 	def destroy(self):
 		self.screen.signal_unconnect(self)
+		self.window.present()
 		self.dia.destroy()
 		self.screen.destroy()
 
