@@ -361,18 +361,16 @@ msgid "Go to next matched resource"
 msgstr "Přejít na následující výsledek hledání"
 
 #: terp.glade:1887
-#, fuzzy
 msgid "Switch current view: form / list / graph"
-msgstr "Přepnout aktuální pohled: formulář / seznam"
+msgstr "Přepnout aktuální pohled: formulář / seznam / graf"
 
 #: terp.glade:1888
 msgid "View"
-msgstr ""
+msgstr "Pohled"
 
 #: terp.glade:1905
-#, fuzzy
 msgid "Reload / Undo Form"
-msgstr "Znovu načíst / Přejít _zpět"
+msgstr "Znovu načíst formulář a zrušit změny"
 
 #: terp.glade:1906
 msgid "Reload"
@@ -794,8 +792,7 @@ msgstr ""
 
 #: terp.glade:7590
 msgid "<i>Click on the Support Request tab if you need more help !</i>"
-msgstr ""
-"<i>Klikněte na záložku Požadavek na podporu, pokud potřebuje další pomoc!</i>"
+msgstr "<i>Klikněte na záložku Požadavek na podporu, pokud potřebuje další pomoc!</i>"
 
 #: terp.glade:7628
 msgid "De_scription"
@@ -818,12 +815,10 @@ msgid ""
 "partner.\n"
 "</i>"
 msgstr ""
-"<b>Vyplňte tento formulář pro odeslání chyby a/nebo požadavku na podporu.</"
-"b>\n"
+"<b>Vyplňte tento formulář pro odeslání chyby a/nebo požadavku na podporu.</b>\n"
 "<i>\n"
 "Váš požadavek bude odeslán firmě Tiny ERP, která zanedlouho odpoví.\n"
-"Pokud váše servisní organizace není partnerem firmy Tiny ERP, odpověd nelze "
-"vymáhat.\n"
+"Pokud váše servisní organizace není partnerem firmy Tiny ERP, odpověd nelze vymáhat.\n"
 "</i>"
 
 #: terp.glade:7787 terp.glade:10956
