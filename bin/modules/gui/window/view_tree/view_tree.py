@@ -130,7 +130,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
 				interger, digit = self.fields_type[field].get('digits', (16,2))
 				for x in res_ids:
 					x[field] = locale.format('%.' + str(digit) + 'f',
-							x[field] or 0.0)
+							x[field] or 0.0, True)
 			if self.fields_type[field]['type'] in ('float_time',):
 				for x in res_ids:
 					val = '%02d:%02d' % (math.floor(abs(x[field])),
