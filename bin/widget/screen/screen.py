@@ -423,6 +423,10 @@ class Screen(signal_event.signal_event):
 		if res_id:
 			self.current_model = self.models[res_id]
 		if self.views:
+			#XXX To remove when calendar will be implemented
+			if self.current_view.view_type == 'calendar' and \
+					len(self.views) > 1:
+				self.switch_view()
 			self.current_view.display()
 			self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
 			self.search_active(self.current_view.view_type in ('tree', 'graph', 'calendar'))
