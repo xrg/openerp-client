@@ -32,12 +32,19 @@ from xml.parsers import expat
 
 import options
 import time
-
+import math
 import rpc
 import gettext
 import parse
-
+import datetime as DT
 import copy
+import locale
+
+if not hasattr(locale, 'nl_langinfo'):
+	locale.nl_langinfo = lambda *a: '%x'
+
+if not hasattr(locale, 'D_FMT'):
+	locale.D_FMT = None
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
@@ -71,28 +78,45 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
 		c.update(rpc.session.context)
 		c.update(self.context)
 		try:
-			res_ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.view['model'], 'read', ids, fields, c)
+			res_ids = rpc.session.rpc_exec_auth_try('/object', 'execute',
+					self.view['model'], 'read', ids, fields, c)
 		except:
 			res_ids = []
 			for id in ids:
-				val = {'id':id}
+				val = {'id': id}
 				for f in fields:
 					if self.fields_type[f]['type'] in ('one2many','many2many'):
-						val[f]=[]
+						val[f] = []
 					else:
-						val[f]=''
+						val[f] = ''
 				res_ids.append(val)
 		for field in self.fields:
 			if self.fields_type[field]['type'] in ('date',):
+				display_format = locale.nl_langinfo(locale.D_FMT).replace('%y',
+						'%Y')
 				for x in res_ids:
 					if x[field]:
 						date = time.strptime(x[field], DT_FORMAT)
-						x[field] = time.strftime('%x', date)
+						x[field] = time.strftime(display_format, date)
 			if self.fields_type[field]['type'] in ('datetime',):
+				display_format = locale.nl_langinfo(locale.D_FMT).replace('%y',
+						'%Y') + ' %H:%M:%S'
 				for x in res_ids:
 					if x[field]:
 						date = time.strptime(x[field], DHM_FORMAT)
-						x[field] = time.strftime('%x %H:%M:%S', date)
+						if 'tz' in rpc.session.context:
+							try:
+								import pytz
+								lzone = pytz.timezone(rpc.session.context['tz'])
+								szone = pytz.timezone(rpc.session.timezone)
+								dt = DT.datetime(date[0], date[1], date[2],
+										date[3], date[4], date[5], date[6])
+								sdt = szone.localize(dt, is_dst=True)
+								ldt = sdt.astimezone(lzone)
+								date = ldt.timetuple()
+							except:
+								pass
+						x[field] = time.strftime(display_format, date)
 			if self.fields_type[field]['type'] in ('one2one','many2one'):
 				for x in res_ids:
 					if x[field]:
@@ -100,7 +124,20 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
 			if self.fields_type[field]['type'] in ('selection'):
 				for x in res_ids:
 					if x[field]:
-						x[field] = dict(self.fields_type[field]['selection']).get(x[field],'')
+						x[field] = dict(self.fields_type[field]['selection']
+								).get(x[field],'')
+			if self.fields_type[field]['type'] in ('float',):
+				interger, digit = self.fields_type[field].get('digits', (16,2))
+				for x in res_ids:
+					x[field] = locale.format('%.' + str(digit) + 'f',
+							x[field] or 0.0)
+			if self.fields_type[field]['type'] in ('float_time',):
+				for x in res_ids:
+					val = '%02d:%02d' % (math.floor(abs(x[field])),
+							round(abs(x[field]) % 1 + 0.01, 2) * 60)
+					if x[field] < 0:
+						val = '-' + val
+					x[field] = val
 		return res_ids
 
 	def _node_process(self, ids):
@@ -131,12 +168,8 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
 	def on_get_column_type(self, index):
 		if index in self.pixbufs:
 			return gtk.gdk.Pixbuf
-		fields_list_type = {
-			'checkbox': gobject.TYPE_BOOLEAN,
-			'integer': gobject.TYPE_INT,
-			#'float': gobject.TYPE_FLOAT
-		}
-		return fields_list_type.get(self.fields_type[self.fields[index-1]]['type'],gobject.TYPE_STRING)
+		return fields_list_type.get(self.fields_type[self.fields[index-1]]['type'],
+				gobject.TYPE_STRING)
 
 	def on_get_tree_path(self, node):
 		'''returns the tree path (a tuple of indices)'''
@@ -357,6 +390,5 @@ class view_tree(object):
 fields_list_type = {
 	'checkbox': gobject.TYPE_BOOLEAN,
 	'integer': gobject.TYPE_INT,
-	'float': gobject.TYPE_FLOAT
 }
 
