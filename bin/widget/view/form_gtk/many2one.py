@@ -197,21 +197,25 @@ class many2one(interface.widget_interface):
 		return modelstr.startswith(key_string)
 		 
 	def on_completion_match(self, completion, model, iter):
-		current_text = self.wid_text.get_text()
-		current_text = model[iter][1]
 		name = model[iter][1]
-		domain = self._view.modelfield.domain_get()
-		context = self._view.modelfield.context_get()
-		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', name, domain, 'ilike', context)
+		domain = self._view.modelfield.domain_get(self._view.model)
+		context = self._view.modelfield.context_get(self._view.model)
+		ids = rpc.session.rpc_exec_auth('/object', 'execute',
+				self.attrs['relation'], 'name_search', name, domain, 'ilike',
+				context)
 		if len(ids)==1:
 			self._view.modelfield.set_client(self._view.model, ids[0])
 			self.display(self._view.model, self._view.modelfield)
 			self.ok = True
 		else:
-			win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, window=self._window)
+			win = win_search(self.attrs['relation'], sel_multi=False,
+					ids=map(lambda x: x[0], ids), context=context,
+					domain=domain, window=self._window)
 			ids = win.go()
 			if ids:
-				name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
+				name = rpc.session.rpc_exec_auth('/object', 'execute',
+						self.attrs['relation'], 'name_get', [ids[0]],
+						rpc.session.context)[0]
 				self._view.modelfield.set_client(self._view.model, name)
 		return True
 
