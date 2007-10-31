@@ -291,7 +291,8 @@ class O2MField(CharField):
 			return []
 		result = []
 		for model2 in model.value[self.name].models:
-			if modified and not model2.modified:
+			if (modified and not model2.is_modified()) or \
+					(not model2.id and not model2.is_modified()):
 				continue
 			if model2.id:
 				result.append((1,model2.id, model2.get(check_load=check_load, get_readonly=readonly)))
