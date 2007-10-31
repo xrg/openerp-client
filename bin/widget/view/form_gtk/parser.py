@@ -446,7 +446,7 @@ class parser_form(widget.view.interface.parser_interface):
 				return None, False
 
 
-		win = gtk.Dialog('Add Translation', self.window,
+		win = gtk.Dialog(_('Add Translation'), self.window,
 				gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
 		win.vbox.set_spacing(5)
 		win.set_property('default-width', 600)
@@ -538,11 +538,11 @@ class parser_form(widget.view.interface.parser_interface):
 		return True
 
 	def translate_label(self, widget, event, model, name, src):
-		def callback_label(self, widget, event, model, name, src):
+		def callback_label(self, widget, event, model, name, src, window=None):
 			lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable', '=', '1')])
 			langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
 
-			win = gtk.Dialog('Add Translation', self.window,
+			win = gtk.Dialog(_('Add Translation'), window,
 					gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
 			win.vbox.set_spacing(5)
 			win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
@@ -583,15 +583,15 @@ class parser_form(widget.view.interface.parser_interface):
 				while to_save:
 					code, val = to_save.pop()
 					rpc.session.rpc_exec_auth('/object', 'execute', model, 'write_string', False, [code], {name: val})
-			self.window.present()
+			window.present()
 			win.destroy()
 			return res
 
-		def callback_view(self, widget, event, model, src):
+		def callback_view(self, widget, event, model, src, window=None):
 			lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable', '=', '1')])
 			langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
 
-			win = gtk.Dialog('Add Translation', self.window,
+			win = gtk.Dialog(_('Add Translation'), window,
 					gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
 			win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
 			win.set_icon(common.TINYERP_ICON)
@@ -632,7 +632,7 @@ class parser_form(widget.view.interface.parser_interface):
 				while to_save:
 					id, val = to_save.pop()
 					rpc.session.rpc_exec_auth('/object', 'execute', 'ir.translation', 'write', [id], {'value': val})
-			self.window.present()
+			window.present()
 			win.destroy()
 			return res
 		if event.button != 3:
@@ -640,12 +640,14 @@ class parser_form(widget.view.interface.parser_interface):
 		menu = gtk.Menu()
 		if name:
 			item = gtk.ImageMenuItem(_('Translate label'))
-			item.connect("activate", callback_label, widget, event, model, name, src)
+			item.connect("activate", callback_label, widget, event, model,
+					name, src, self.window)
 			item.set_sensitive(1)
 			item.show()
 			menu.append(item)
 		item = gtk.ImageMenuItem(_('Translate view'))
-		item.connect("activate", callback_view, widget, event, model, src)
+		item.connect("activate", callback_view, widget, event, model, src,
+				self.window)
 		item.set_sensitive(1)
 		item.show()
 		menu.append(item)
