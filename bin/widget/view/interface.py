@@ -26,8 +26,12 @@
 #
 ##############################################################################
 
+import service
+
 class parser_interface(object):
 	def __init__(self, window=None, parent=None, attrs={}, screen=None):
+		if window is None:
+			window = service.LocalService('gui.main').window
 		self.window = window
 		self.parent = parent
 		self.attrs = attrs

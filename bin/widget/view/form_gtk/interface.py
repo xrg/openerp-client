@@ -98,7 +98,9 @@ class widget_interface(object):
 				deps.append((wname, wname, value, value))
 		value = self._view.modelfield.get_default(self._view.model)
 		model = self._view.modelfield.parent.resource
-		wid_common.field_pref_set(self._view.widget_name, self.attrs.get('string', self._view.widget_name), model, value, deps)
+		wid_common.field_pref_set(self._view.widget_name,
+				self.attrs.get('string', self._view.widget_name), model,
+				value, deps, window=self._window)
 
 	def _menu_open(self, obj, event):
 		if event.button == 3:

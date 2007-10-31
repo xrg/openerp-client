@@ -34,9 +34,13 @@ import common
 import service
 import rpc
 
-def field_pref_set(field, name, model, value, dependance=[]):
-	win_gl = glade.XML(common.terp_path('terp.glade'),'win_field_pref', gettext.textdomain())
-	window = service.LocalService('gui.main').window
+def field_pref_set(field, name, model, value, dependance=None, window=None):
+	win_gl = glade.XML(common.terp_path('terp.glade'), 'win_field_pref',
+			gettext.textdomain())
+	if dependance is None:
+		dependance = []
+	if window is None:
+		window = service.LocalService('gui.main').window
 	win = win_gl.get_widget('win_field_pref')
 	win.set_transient_for(window)
 	win.set_icon(common.TINYERP_ICON)
