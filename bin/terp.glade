@@ -283,12 +283,11 @@
 		  <property name="has_focus">True</property>
 		  <property name="editable">True</property>
 		  <property name="visibility">False</property>
-		  <property name="max_length">16</property>
-		  <property name="text" translatable="yes"></property>
+		  <property name="max_length">0</property>
+		  <property name="text" translatable="no"></property>
 		  <property name="has_frame">True</property>
 		  <property name="invisible_char">*</property>
 		  <property name="activates_default">True</property>
-		  <property name="width_chars">16</property>
 		</widget>
 		<packing>
 		  <property name="left_attach">1</property>
