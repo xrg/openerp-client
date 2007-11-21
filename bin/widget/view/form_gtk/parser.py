@@ -290,8 +290,12 @@ class parser_form(widget.view.interface.parser_interface):
 				dict_widget.update(widgets)
 
 			elif node.localName=='page':
+				if attrs and 'angle' in attrs:
+					angle = int(attrs['angle'])
+				else:
+					angle = int(options.options['client.form_tab_orientation'])
 				l = gtk.Label(attrs.get('string','No String Attr.'))
-				l.set_angle(int(options.options['client.form_tab_orientation']))
+				l.set_angle(angle)
 				widget, widgets, buttons, on_write = self.parse(model, node, fields, notebook, tooltips=self.tooltips)
 				button_list += buttons
 				dict_widget.update(widgets)
