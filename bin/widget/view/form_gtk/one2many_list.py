@@ -294,9 +294,10 @@ class one2many_list(interface.widget_interface):
 				dia.destroy()
 
 	def _sig_edit(self, *args):
-		dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window)
-		ok, value = dia.run()
-		dia.destroy()
+		if self.screen.current_model:
+			dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window)
+			ok, value = dia.run()
+			dia.destroy()
 
 	def _sig_next(self, *args):
 		_, event = args
