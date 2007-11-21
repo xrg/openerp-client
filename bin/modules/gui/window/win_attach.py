@@ -48,8 +48,9 @@ class win_attach(object):
 				gettext.textdomain())
 		self.win = self.glade.get_widget('win_attach')
 		self.win.set_icon(common.TINYERP_ICON)
-		if parent:
-			self.win.set_transient_for(parent)
+		if not parent:
+			parent = service.LocalService('gui.main').window
+		self.win.set_transient_for(parent)
 		self.parent = parent
 		self.ressource = (model, id)
 
