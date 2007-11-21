@@ -288,7 +288,7 @@ def file_selection(title, filename='', parent=None,
 	if not multi:
 		filepath = win.get_filename()
 		if filepath:
-			filepath = filepath.decode('utf8')
+			filepath = filepath.decode('utf-8')
 			try:
 				options.options['client.default_path'] = os.path.dirname(filepath)
 			except:
@@ -298,10 +298,12 @@ def file_selection(title, filename='', parent=None,
 		return filepath
 	else:
 		filenames = win.get_filenames()
-		try:
-			options.options['client.default_path'] = os.path.dirname(filenames[0])
-		except:
-			pass
+		if filenames:
+			filenames = [x.decode('utf-8') for x in filenames]
+			try:
+				options.options['client.default_path'] = os.path.dirname(filenames[0])
+			except:
+				pass
 		parent.present()
 		win.destroy()
 		return filenames
