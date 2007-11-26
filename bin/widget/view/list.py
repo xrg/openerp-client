@@ -33,6 +33,7 @@ import gtk
 import rpc
 import service
 import locale
+from interface import parser_view
 
 
 class AdaptModelGroup(gtk.GenericTreeModel):
@@ -143,11 +144,13 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 	def on_iter_parent(self, node):
 		return None
 	
-class ViewList(object):
+class ViewList(parser_view):
 
-	def __init__(self, screen, widget, children=None, buttons=None, toolbar=None):
+	def __init__(self, window, screen, widget, children=None, buttons=None,
+			toolbar=None):
+		super(ViewList, self).__init__(window, screen, widget, children,
+				buttons, toolbar)
 		self.store = None
-		self.screen = screen
 		self.view_type = 'tree'
 		self.model_add_new = True
 		self.widget = gtk.VBox()

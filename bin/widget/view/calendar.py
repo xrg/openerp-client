@@ -25,15 +25,17 @@
 #
 ##############################################################################
 
+from interface import parser_view
 
-class ViewCalendar(object):
+class ViewCalendar(parser_view):
 
-	def __init__(self, screen, view, children=None, buttons=None, toolbar=None):
-		self.screen = screen
+	def __init__(self, window, screen, widget, children=None, buttons=None,
+			toolbar=None):
+		super(ViewCalendar, self).__init__(window, screen, widget, children,
+				buttons, toolbar)
 		self.view_type = 'calendar'
 		self.model_add_new = False
-		self.view = view
-		self.widget = view.widget
+		self.widget = widget.widget
 		self.widget.screen = screen
 
 	def cancel(self):

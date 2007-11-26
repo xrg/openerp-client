@@ -389,15 +389,22 @@ class parser_form(widget.view.interface.parser_interface):
 	def translate(self, widget, event, model, name, src, widget_entry):
 		id = self.screen.current_model.id
 		if not id:
-			common.message(_('You need to save resource before adding translations'))
+			common.message(
+					_('You need to save resource before adding translations!'),
+					parent=self.window)
 			return False
 		uid = rpc.session.uid
 
-		lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable','=','1')])
-		langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
+		lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
+				'search', [('translatable','=','1')])
 
-		#Add english ; default value not in res.lang
-		langs.append({'code':'en_US', 'name': 'English'})
+		if not lang_ids:
+			common.message(_('No other language available!'),
+					parent=self.window)
+			return False
+		langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
+				'read', lang_ids, ['code', 'name'])
+
 		code = rpc.session.context.get('lang', 'en_US')
 
 		#change 'en' to false for context
@@ -407,7 +414,7 @@ class parser_form(widget.view.interface.parser_interface):
 			else:
 				return val
 
-		#widget accessor fucntions
+		#widget accessor functions
 		def value_get(widget):
 			if type(widget) == type(gtk.Entry()):
 				return widget.get_text()
@@ -418,6 +425,7 @@ class parser_form(widget.view.interface.parser_interface):
 				return buffer.get_text(iter_start,iter_end,False)
 			else:
 				return None
+
 		def value_set(widget, value):
 			if type(widget) == type(gtk.Entry()):
 				widget.set_text(value)
@@ -514,25 +522,26 @@ class parser_form(widget.view.interface.parser_interface):
 		sv.add(vp)
 		win.vbox.add(sv)
 		win.show_all()
-		
+
 		ok = False
 		data = []
 		while not ok:
 			response = win.run()
 			ok = True
-			#res = None
 			if response == gtk.RESPONSE_OK:
-				to_save = map(lambda x : (x[0], x[1], value_get(x[2])), entries_list)
+				to_save = map(lambda x : (x[0], x[1], value_get(x[2])),
+						entries_list)
 				while to_save != []:
 					new_val = {}
 					new_val['id'],new_val['code'], new_val['value'] = to_save.pop()
 					#update form field
 					if new_val['code'] == code:
 						value_set(widget_entry, new_val['value'])
-				
 					context = copy.copy(rpc.session.context)
 					context['lang'] = adapt_context(new_val['code'])
-					rpc.session.rpc_exec_auth('/object', 'execute', model, 'write', [id], {str(name):  new_val['value']}, context)
+					rpc.session.rpc_exec_auth('/object', 'execute', model,
+							'write', [id], {str(name):  new_val['value']},
+							context)
 			if response == gtk.RESPONSE_CANCEL:
 				self.window.present()
 				win.destroy()
@@ -543,8 +552,14 @@ class parser_form(widget.view.interface.parser_interface):
 
 	def translate_label(self, widget, event, model, name, src):
 		def callback_label(self, widget, event, model, name, src, window=None):
-			lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable', '=', '1')])
-			langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
+			lang_ids = rpc.session.rpc_exec_auth('/object', 'execute',
+					'res.lang', 'search', [('translatable', '=', '1')])
+			if not lang_ids:
+				common.message(_('No other language available!'),
+						parent=window)
+				return False
+			langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
+					'read', lang_ids, ['code', 'name'])
 
 			win = gtk.Dialog(_('Add Translation'), window,
 					gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
@@ -556,7 +571,8 @@ class parser_form(widget.view.interface.parser_interface):
 			entries_list = []
 			for lang in langs:
 				code=lang['code']
-				val = rpc.session.rpc_exec_auth('/object', 'execute', model, 'read_string', False, [code], [name])
+				val = rpc.session.rpc_exec_auth('/object', 'execute', model,
+						'read_string', False, [code], [name])
 				if val and code in val:
 					val = val[code]
 				else:
@@ -586,14 +602,21 @@ class parser_form(widget.view.interface.parser_interface):
 				to_save = map(lambda x: (x[0], x[1].get_text()), entries_list)
 				while to_save:
 					code, val = to_save.pop()
-					rpc.session.rpc_exec_auth('/object', 'execute', model, 'write_string', False, [code], {name: val})
+					rpc.session.rpc_exec_auth('/object', 'execute', model,
+							'write_string', False, [code], {name: val})
 			window.present()
 			win.destroy()
 			return res
 
 		def callback_view(self, widget, event, model, src, window=None):
-			lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('translatable', '=', '1')])
-			langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['code', 'name'])
+			lang_ids = rpc.session.rpc_exec_auth('/object', 'execute',
+					'res.lang', 'search', [('translatable', '=', '1')])
+			if not lang_ids:
+				common.message(_('No other language available!'),
+						parent=window)
+				return False
+			langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
+					'read', lang_ids, ['code', 'name'])
 
 			win = gtk.Dialog(_('Add Translation'), window,
 					gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
@@ -605,8 +628,15 @@ class parser_form(widget.view.interface.parser_interface):
 			entries_list = []
 			for lang in langs:
 				code=lang['code']
-				view_item_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.translation', 'search', [('name', '=', model), ('type', '=', 'view'), ('lang', '=', code)])
-				view_items = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.translation', 'read', view_item_ids, ['src', 'value'])
+				view_item_ids = rpc.session.rpc_exec_auth('/object', 'execute',
+						'ir.translation', 'search', [
+							('name', '=', model),
+							('type', '=', 'view'),
+							('lang', '=', code),
+							])
+				view_items = rpc.session.rpc_exec_auth('/object', 'execute',
+						'ir.translation', 'read', view_item_ids,
+						['src', 'value'])
 				label = gtk.Label(lang['name'])
 				vbox.pack_start(label, expand=False, fill=True)
 				for val in view_items:
@@ -635,7 +665,8 @@ class parser_form(widget.view.interface.parser_interface):
 				to_save = map(lambda x: (x[0], x[1].get_text()), entries_list)
 				while to_save:
 					id, val = to_save.pop()
-					rpc.session.rpc_exec_auth('/object', 'execute', 'ir.translation', 'write', [id], {'value': val})
+					rpc.session.rpc_exec_auth('/object', 'execute',
+							'ir.translation', 'write', [id], {'value': val})
 			window.present()
 			win.destroy()
 			return res

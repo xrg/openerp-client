@@ -38,3 +38,14 @@ class parser_interface(object):
 		self.title = None
 		self.buttons = {}
 		self.screen = screen
+
+class parser_view(object):
+	def __init__(self, window, screen, widget, children=None, buttons=None, toolbar=None):
+		if window is None:
+			window = service.LocalService('gui.main').window
+		self.window = window
+		self.screen = screen
+		self.widget = widget
+		if buttons is None:
+			buttons = []
+		self.buttons = buttons
