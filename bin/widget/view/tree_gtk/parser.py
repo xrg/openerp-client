@@ -215,6 +215,9 @@ class Boolean(Int):
 		self.renderer = gtk.CellRendererToggle()
 		self.renderer.connect('toggled', self._sig_toggled)
 
+	def get_textual_value(self, model):
+		return model[self.field_name].get_client(model) or 0
+
 	def setter(self, column, cell, store, iter):
 		model = store.get_value(iter, 0)
 		value = self.get_textual_value(model)
