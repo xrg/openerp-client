@@ -178,28 +178,24 @@ class rpc_session(object):
 			except socket.error, e:
 				common.error(_('Connection refused !'), str(e), str(e))
 				raise rpc_exception(69, 'Connection refused!')
-			except xmlrpclib.Fault, err:
-				a = rpc_exception(err.faultCode, err.faultString)
-				if a.type in ('warning','UserError'):
-#TODO: faudrait propager l'exception
-#					raise a
-					if a.message in ('ConcurrencyException') and len(args) > 4:
-						if common.concurrency(args[0], args[2][0], args[4]):
-							if 'read_delta' in args[4]:
-								del args[4]['read_delta']
-							return self.rpc_exec_auth(obj, method, *args)
-					else:
-						common.warning(a.data, a.message)
-				else:
-					common.error(_('Application Error'), err.faultCode, err.faultString)
-			except tiny_socket.Myexception, err:
-				a = rpc_exception(err.faultCode, err.faultString)
-				if a.type in ('warning', 'UserError'):
-					common.warning(a.data, a.message)
-				else:
-					common.error(_('Application Error'), err.faultCode, err.faultString)
 			except Exception, e:
-				common.error(_('Application Error'), _('View details'), str(e))
+				if isinstance(e, xmlrpclib.Fault) \
+						or isinstance(e, tiny_socket.Myexception):
+					a = rpc_exception(e.faultCode, e.faultString)
+					if a.type in ('warning','UserError'):
+						if a.message in ('ConcurrencyException') and len(args) > 4:
+							if common.concurrency(args[0], args[2][0], args[4]):
+								if 'read_delta' in args[4]:
+									del args[4]['read_delta']
+								return self.rpc_exec_auth(obj, method, *args)
+						else:
+							common.warning(a.data, a.message)
+					else:
+						common.error(_('Application Error'), e.faultCode, e.faultString)
+				else:
+					common.error(_('Application Error'), _('View details'), str(e))
+				#TODO Must propagate the exception?
+				#raise
 		else:
 			raise rpc_exception(1, 'not logged')
 
