@@ -79,7 +79,8 @@ class many2many(interface.widget_interface):
 		scroll.set_placement(gtk.CORNER_TOP_LEFT)
 		scroll.set_shadow_type(gtk.SHADOW_NONE)
 
-		self.screen = Screen(attrs['relation'], view_type=['tree'])
+		self.screen = Screen(attrs['relation'], view_type=['tree'],
+				views_preload=attrs.get('views', {}))
 		scroll.add_with_viewport(self.screen.widget)
 		self.widget.pack_start(scroll, expand=True, fill=True)
 
