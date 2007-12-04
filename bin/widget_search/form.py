@@ -114,12 +114,14 @@ class parse(object):
 		type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
 		self.fields[str(attrs['name'])].update(attrs)
 		self.fields[str(attrs['name'])]['model']=self.model
-		widget_act = widgets_type[ type ][0](str(attrs['name']), self.parent, self.fields[attrs['name']])
+		if type not in widgets_type:
+			return False
+		widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']])
 		if 'string' in self.fields[str(attrs['name'])]:
 			label = self.fields[str(attrs['name'])]['string']+' :'
 		else:
 			label = None
-		size = widgets_type[ type ][1]
+		size = widgets_type[type][1]
 		if not self.focusable:
 			self.focusable = widget_act.widget
 		wid = self.container.wid_add(widget_act.widget, size, label, int(self.fields[str(attrs['name'])].get('expand',0)))
@@ -310,4 +312,6 @@ widgets_type = {
 	'one2many_list': (char.char, 2),
 	'many2many_edit': (char.char, 2),
 	'many2many': (char.char, 2),
+	'callto': (char.char, 2),
+	'sip': (char.char, 2),
 }
