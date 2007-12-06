@@ -302,9 +302,18 @@ class form(object):
 		self.screen.display_next()
 		self.message_state('')
 
-	def sig_reload(self):
+	def sig_reload(self, test_modified=True):
 		if not hasattr(self, 'screen'):
 			return False
+		if test_modified and self.screen.is_modified():
+			res = common.sur_3b(_('This record has been modified\n' \
+					'do you want to save it ?'))
+			if res == 'ok':
+				self.sig_save()
+			elif res == 'ko':
+				pass
+			else:
+				return False
 		if self.screen.current_view.view_type == 'form':
 			self.screen.cancel_current()
 			self.screen.display()
@@ -342,7 +351,7 @@ class form(object):
 				res = obj.exec_keyword(keyword, {'model':self.screen.resource, 'id': id or False, 'ids':ids, 'report_type': report_type}, adds=adds)
 				if res:
 					self.previous_action = res
-			self.sig_reload()
+			self.sig_reload(test_modified=False)
 		else:
 			self.message_state(_('No record selected!'))
 
@@ -406,7 +415,7 @@ class form(object):
 				return self.sig_save()
 			elif value == 'ko':
 				if reload:
-					self.sig_reload()
+					self.sig_reload(test_modified=False)
 				return True
 			else:
 				return False
