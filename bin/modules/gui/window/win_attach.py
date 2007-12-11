@@ -41,6 +41,7 @@ import gc
 import urllib
 import sys
 import tempfile
+import service
 
 class win_attach(object):
 	def __init__(self, model, id, parent=None):
