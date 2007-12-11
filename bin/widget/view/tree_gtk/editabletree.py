@@ -220,6 +220,8 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 			self.set_cursor(path, column, True)
 		else:
 			modelfield = model[column.name]
+			if isinstance(entry, gtk.Entry):
+				entry.set_max_length(int(modelfield.attrs.get('size', 0)))
 			# store in the model the entry widget to get the value in set_value
 			modelfield.editabletree_entry = entry
 			model.modified = True
