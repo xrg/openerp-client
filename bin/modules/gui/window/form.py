@@ -380,16 +380,17 @@ class form(object):
 		sb.push(cid, message)
 
 	def _record_message(self, screen, signal_data):
-		if not signal_data[1]:
+		if not signal_data[3]:
 			msg = _('No record selected')
 		else:
 			name = '_'
 			if signal_data[0]>=0:
 				name = str(signal_data[0]+1)
 			name2 = _('New document')
-			if signal_data[2]:
-				name2 = _('Editing document (id: ')+str(signal_data[2])+')'
-			msg = _('Record: ')+name+' / '+str(signal_data[1])+' - '+name2
+			if signal_data[3]:
+				name2 = _('Editing document (id: ')+str(signal_data[3])+')'
+			msg = _('Record: ') + name + ' / ' + str(signal_data[1]) + \
+					_(' of ') + str(signal_data[2]) + ' - ' + name2
 		sb = self.glade.get_widget('stat_form')
 		cid = sb.get_context_id('message')
 		sb.push(cid, msg)

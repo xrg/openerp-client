@@ -63,6 +63,7 @@ class Screen(signal_event.signal_event):
 		super(Screen, self).__init__()
 
 		self.show_search = show_search
+		self.search_count = 0
 		self.hastoolbar = hastoolbar
 		self.default_get=default_get
 		if not row_activate:
@@ -140,6 +141,11 @@ class Screen(signal_event.signal_event):
 		except:
 			# Try if it is not an older server
 			ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0)
+		try:
+			self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute',
+					self.name, 'search_count', v, self.context)
+		except:
+			pass
 		self.clear()
 		self.load(ids)
 		return True
@@ -182,10 +188,17 @@ class Screen(signal_event.signal_event):
 	def _set_current_model(self, value):
 		self.__current_model = value
 		try:
+			offset = int(self.filter_widget.get_offset())
+		except:
+			offset = 0
+		try:
 			pos = self.models.models.index(value)
 		except:
 			pos = -1
-		self.signal('record-message', (pos, len(self.models.models or []), value and value.id))
+		self.signal('record-message', (pos + offset,
+			len(self.models.models or []) + offset,
+			self.search_count,
+			value and value.id))
 		return True
 	current_model = property(_get_current_model, _set_current_model)
 
