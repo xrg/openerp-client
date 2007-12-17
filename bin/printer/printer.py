@@ -39,6 +39,7 @@ import os, base64, options, sys
 import gc
 import common
 import time
+import gtk
 
 class Printer(object):
 
@@ -48,6 +49,7 @@ class Printer(object):
 			'html': self._findHTMLOpener,
 			'doc': self._findHTMLOpener,
 			'xls': self._findHTMLOpener,
+			'sxw': self._findSXWOpener,
 		}
 
 	def _findInPath(self, progs):
@@ -90,7 +92,7 @@ class Printer(object):
 					if not pid:
 						pid = os.fork()
 						if not pid:
-							os.system(options.options['printer.softpath_html'] + ' ' + fn)
+							os.execv(options.options['printer.softpath_html'], (os.path.basename(options.options['printer.softpath_html']),fn))
 						time.sleep(0.1)
 						sys.exit(0)
 					os.waitpid(pid, 0)
@@ -132,6 +134,34 @@ class Printer(object):
 					return opener
 			else:
 				return lambda fn: print_linux_filename(fn)
+	
+	def _findSXWOpener(self):
+		if os.name == 'nt':
+			return lambda fn: os.startfile(fn)
+		else:
+			if options.options['printer.softpath_html'] == 'none':
+				prog = self._findInPath(['ooffice', 'ooffice2', 'openoffice', 'soffice'])
+				def opener(fn):
+					pid = os.fork()
+					if not pid:
+						pid = os.fork()
+						if not pid:
+							os.execv(prog, (os.path.basename(prog),fn))
+						time.sleep(0.1)
+						sys.exit(0)
+					os.waitpid(pid, 0)
+				return opener
+			else:
+				def opener(fn):
+					pid = os.fork()
+					if not pid:
+						pid = os.fork()
+						if not pid:
+							os.execv(options.options['printer.softpath_html'], (os.path.basename(options.options['printer.softpath_html']),fn))
+						time.sleep(0.1)
+						sys.exit(0)
+					os.waitpid(pid, 0)
+				return opener
 
 	def print_file(self, fname, ftype):
 		finderfunc = self.openers[ftype]
@@ -168,7 +198,8 @@ def print_data(data):
 		os.close(fileno)
 		printer.print_file(fp_name, data['format'])
 	else:
-		fname = common.file_selection(_('Write Report to File'), data['format'])
+		fname = common.file_selection(_('Save As...'), filename='report.' + data['format'],
+				action=gtk.FILE_CHOOSER_ACTION_SAVE)
 		if fname:
 			try:
 				fp = file(fname,'wb+')

@@ -253,8 +253,9 @@ def file_selection(title, filename='', parent=None,
 		buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
 			gtk.STOCK_SAVE, gtk.RESPONSE_OK)
 	win = gtk.FileChooserDialog(title, None, action, buttons)
-	if parent:
-		win.set_transient_for(parent)
+	if not parent:
+		parent = service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 	win.set_icon(TINYERP_ICON)
 	win.set_current_folder(options.options['client.default_path'])
 	if filename:
