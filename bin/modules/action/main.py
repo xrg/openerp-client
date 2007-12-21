@@ -63,7 +63,7 @@ class main(service.Service):
 				if not state:
 					time.sleep(1)
 					attempt += 1
-				if attempt>200:
+				if attempt>500:
 					common.message(_('Printing aborted, too long delay !'))
 					return False
 			printer.print_data(val)
