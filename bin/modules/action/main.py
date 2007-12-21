@@ -51,24 +51,23 @@ class main(service.Service):
 				common.message(_('Nothing to print!'))
 				return False
 			datas['id'] = ids[0]
-		try:
-			ctx = rpc.session.context.copy()
-			ctx.update(context)
-			report_id = rpc.session.rpc_exec_auth('/report', 'report', name, ids, datas, ctx)
-			state = False
-			attempt = 0
-			while not state:
-				val = rpc.session.rpc_exec_auth('/report', 'report_get', report_id)
-				state = val['state']
-				if not state:
-					time.sleep(1)
-					attempt += 1
-				if attempt>500:
-					common.message(_('Printing aborted, too long delay !'))
-					return False
-			printer.print_data(val)
-		except rpc.rpc_exception, e:
-			common.error(_('Error: ')+str(e.type), e.message, e.data)
+		ctx = rpc.session.context.copy()
+		ctx.update(context)
+		report_id = rpc.session.rpc_exec_auth('/report', 'report', name, ids, datas, ctx)
+		state = False
+		attempt = 0
+		while not state:
+			val = rpc.session.rpc_exec_auth('/report', 'report_get', report_id)
+			if not val:
+				return False
+			state = val['state']
+			if not state:
+				time.sleep(1)
+				attempt += 1
+			if attempt>200:
+				common.message(_('Printing aborted, too long delay !'))
+				return False
+		printer.print_data(val)
 		return True
 
 	def execute(self, act_id, datas, type=None, context={}):
