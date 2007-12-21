@@ -57,9 +57,6 @@ class tree(object):
 		self.tree_res = view_tree.view_tree(view, [], res_id, True, context=context)
 		self.tree_res.view.connect('row-activated', self.sig_open)
 
-		sel = self.tree_res.view.get_selection()
-		sel.connect('changed', self.expand_one)
-
 		if not name:
 			self.name = self.tree_res.name
 		else:
@@ -92,6 +89,7 @@ class tree(object):
 			'on_but_sc_go_clicked': self.sc_go,
 			'on_but_sc_add_clicked': self.sc_add,
 			'on_but_sc_del_clicked': self.sc_del,
+			'on_but_expand_collapse_clicked': self.expand_collapse_all,
 		}
 
 		self.vp.add(self.tree_res.widget_get())
@@ -99,6 +97,7 @@ class tree(object):
 
 		for signal in dict:
 			self.glade.signal_connect(signal, dict[signal])
+		self.expand = True
 
 	def sig_reload(self, widget=None):
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', self.domain2)
@@ -151,27 +150,18 @@ class tree(object):
 
 			self.tree_res.ids = ids
 			self.tree_res.reload()
-
-			#self.tree_res = view_tree.view_tree(self.view, ids, id, True, context=self.context)
-			#self.tree_res.view.connect('row-activated', self.sig_open)
-			#sel = self.tree_res.view.get_selection()
-			#sel.connect('changed', self.expand_one)
 		return False
 
-	def menu_main_change(self):
-		self.tree_res = view_tree.view_tree(view, ids, res_id, True, context=context)
-		self.tree_res.view.connect('row-activated', self.sig_open)
-		sel = self.tree_res.view.get_selection()
-		sel.connect('changed', self.expand_one)
-		self.name = self.tree_res.name
-		self.vp.remove(self.vp.get_child())
-
-
-
-	def expand_one(self, selection):
-		model,iter = selection.get_selected_rows()
-		if iter:
-			self.tree_res.view.expand_row(iter[0],False)
+	def expand_collapse_all(self, widget):
+		if self.expand:
+			self.tree_res.view.expand_all()
+		else:
+			self.tree_res.view.collapse_all()
+		self.expand = not self.expand
+		if self.expand:
+			widget.set_stock_id('gtk-goto-bottom')
+		else:
+			widget.set_stock_id('gtk-goto-top')
 
 	def sig_print_html(self, widget=None, keyword='client_print_multi', id=None):
 		self.sig_action(keyword='client_print_multi', report_type='html')

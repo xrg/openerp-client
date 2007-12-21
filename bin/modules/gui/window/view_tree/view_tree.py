@@ -171,7 +171,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
 		return fields_list_type.get(self.fields_type[self.fields[index-1]]['type'],
 				gobject.TYPE_STRING)
 
-	def on_get_tree_path(self, node):
+	def on_get_path(self, node):
 		'''returns the tree path (a tuple of indices)'''
 		return tuple([ x[0] for x in node ])
 
@@ -205,6 +205,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
 
 	def on_iter_next(self, node):
 		'''returns the next node at this level of the tree'''
+		node = node[:]
 		(n, list) = node[-1]
 		if n<len(list)-1:
 			node[-1] = (n+1, list)
@@ -215,6 +216,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
 		'''returns the first child of this node'''
 		if node==None:                    # added
 			return [ (0, self.tree) ]     # added
+		node = node[:]
 		(n, list) = node[-1]                 
 		if list[n][2]==None:
 			self._node_expand(list[n])
@@ -248,6 +250,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
 			if list[n][2]==None:
 				self._node_expand(list[n])
 			if child<len(list[n][2]):
+				node = node[:]
 				node.append( (child, list[n][2]) )
 				return node
 			return None
@@ -292,7 +295,6 @@ class view_tree(object):
 	def __init__(self, view_info, ids, res_id=None, sel_multi=False, context={}):
 		self.view = gtk.TreeView()
 		self.view.set_headers_visible(not options.options['client.modepda'])
-		self.view.get_selection().set_mode('single')
 		self.context = {}
 		self.context.update(rpc.session.context)
 		self.context.update(context)
