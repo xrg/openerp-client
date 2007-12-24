@@ -1,3 +1,14 @@
+4.2.1
+	Fix parent for attachment window
+	Fix Accentued folder can't be imported on win32
+	Fix opening one2many if there is no line selected
+	Fix Concurency exception for netrpx protocol
+	Fix search on new field type
+	Improve widget_search for unknown widget type
+	Fix missing import service in module
+	New chinese translation
+	Don't allow to create new ressource on readonly reference field
+
 4.2.0
 	Summary:
 		Add new view graph
