@@ -134,9 +134,13 @@ class ModelRecord(signal_event.signal_event):
 	def default_get(self, domain=[], context={}):
 		if len(self.mgroup.fields):
 			val = self.rpc.default_get(self.mgroup.fields.keys(), context)
+			print val
 			for d in domain:
-				if d[0] in self.mgroup.fields and d[1]=='=':
-					val[d[0]]=d[2]
+				if d[0] in self.mgroup.fields:
+					if d[1] == '=':
+						val[d[0]] = d[2]
+					if d[1] == 'in' and len(d[2]) == 1:
+						val[d[0]] = d[2][0]
 			self.set_default(val)
 
 	def name_get(self):
