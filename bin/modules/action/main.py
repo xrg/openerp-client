@@ -142,7 +142,7 @@ class main(service.Service):
 				del datas['window']
 			self.exec_report(action['report_name'], datas)
 
-	def exec_keyword(self, keyword, data={}, adds={}, context={}):
+	def exec_keyword(self, keyword, data={}, adds={}, context={}, warning=True):
 		actions = None
 		if 'id' in data:
 			try:
@@ -166,7 +166,8 @@ class main(service.Service):
 			self._exec_action(action, data, context=context)
 			return (name, action)
 		elif not len(keyact):
-			common.message(_('No action defined!'))
+			if warning:
+				common.message(_('No action defined!'))
 		return False
 
 main()

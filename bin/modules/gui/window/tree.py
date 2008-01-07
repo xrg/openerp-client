@@ -78,7 +78,7 @@ class tree(object):
 			'but_reload': self.sig_reload,
 			'but_switch': self.sig_edit,
 			'but_chroot': self.sig_chroot,
-			'but_open': self.sig_open,
+			'but_open': self.sig_action,
 			'but_action': self.sig_action,
 			'but_print': self.sig_print,
 			'but_print_html': self.sig_print_html,
@@ -169,7 +169,7 @@ class tree(object):
 	def sig_print(self, widget=None, keyword='client_print_multi', id=None):
 		self.sig_action(keyword='client_print_multi')
 
-	def sig_action(self, widget=None, keyword='tree_but_action', id=None, report_type='pdf'):
+	def sig_action(self, widget=None, keyword='tree_but_action', id=None, report_type='pdf', warning=True):
 		ids = self.ids_get()
 		
 		if not id and ids and len(ids):
@@ -181,13 +181,20 @@ class tree(object):
 			if 'active_id' in ctx:
 				del ctx['active_id']
 			obj = service.LocalService('action.main')
-			obj.exec_keyword(keyword, {'model':self.model, 'id':id,
-				'ids':ids, 'report_type':report_type, 'window': self.window}, context=ctx)
+			return obj.exec_keyword(keyword, {'model':self.model, 'id':id,
+				'ids':ids, 'report_type':report_type, 'window': self.window}, context=ctx,
+				warning=warning)
 		else:
 			common.message(_('No resource selected!'))
+		return False
 
-	def sig_open(self, widget=None, *args):
-		self.sig_action(widget, 'tree_but_open' )
+	def sig_open(self, widget, iter, path):
+		if not self.sig_action(widget, 'tree_but_open', warning=False):
+			if self.tree_res.view.row_expanded(iter):
+				self.tree_res.view.collapse_row(iter)
+			else:
+				self.tree_res.view.expand_row(iter, False)
+
 
 	def sig_remove(self, widget=None):
 		ids = self.ids_get()
