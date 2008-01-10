@@ -101,5 +101,34 @@ class sip(url):
 		if value:
 			tools.launch_browser('sip:%s' % value)
 
+class uri(url):
+
+	def __init__(self, window, parent, model, attrs=None):
+		super(uri, self).__init__(window, parent, model, attrs=attrs)
+
+		self.but_new = gtk.Button()
+		img_new = gtk.Image()
+		img_new.set_from_stock('gtk-find', gtk.ICON_SIZE_BUTTON)
+		self.but_new.set_image(img_new)
+		self.but_new.set_relief(gtk.RELIEF_NONE)
+		self.but_new.connect('clicked', self.sig_new)
+		self.widget.pack_start(self.but_new, expand=False, fill=False)
+		self.model_field = None
+
+	def sig_new(self, widget=None):
+		filename = common.file_selection(_('Open...'),
+				parent=self._window)
+		if filename:
+			self.model_field.set_client(self._view.model, filename)
+
+	def display(self, model, model_field):
+		self.model_field = model_field
+		return super(uri, self).display(model, model_field)
+
+	def button_clicked(self, widget):
+		value = self.entry.get_text()
+		common.open_file(value, self._window)
+
+
 # vim:noexpandtab:
 

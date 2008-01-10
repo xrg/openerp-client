@@ -736,6 +736,7 @@ widgets_type = {
 	'callto' : (url.callto, 1, False, False),
 	'sip' : (url.sip, 1, False, False),
 	'image' : (image.image_wid, 1, False, False),
+	'uri' : (url.uri, 1, False, False),
 }
 
 # vim:noexpandtab:

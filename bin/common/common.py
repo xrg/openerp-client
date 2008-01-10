@@ -551,6 +551,42 @@ def concurrency(resource, id, context, parent=None):
 		obj.create(False, resource, id, [], 'form', None, context,'form,tree')
 	return False
 
+def open_file(value, parent):
+	filetype = {}
+	if options['client.filetype']:
+		if isinstance(options['client.filetype'], str):
+			filetype = eval(options['client.filetype'])
+		else:
+			filetype = options['client.filetype']
+	root, ext = os.path.splitext(value)
+	cmd = False
+	if ext[1:] in filetype:
+		cmd = filetype[ext[1:]] % (value)
+	if not cmd:
+		cmd = file_selection(_('Open with...'),
+				parent=parent)
+		if cmd:
+			cmd = cmd + ' %s'
+			filetype[ext[1:]] = cmd
+			options['client.filetype'] = filetype
+			options.save()
+			cmd = cmd % (value)
+	if cmd:
+		pid = os.fork()
+		if not pid:
+			pid = os.fork()
+			if not pid:
+				prog, args = cmd.split(' ', 1)
+				args = [os.path.basename(prog)] + args.split(' ')
+				try:
+					os.execvp(prog, args)
+				except:
+					pass
+			time.sleep(0.1)
+			sys.exit(0)
+		os.waitpid(pid, 0)
+
+
 # Color set
 
 colors = {
