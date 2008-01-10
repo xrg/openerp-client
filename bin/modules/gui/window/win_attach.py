@@ -79,6 +79,7 @@ class win_attach(object):
 
 
 		self.view.set_model(self.model)
+		self.view.connect('row-activated', self.sig_activate)
 		self.view.show_all()
 		self.reload(preview=False)
 
@@ -188,6 +189,25 @@ class win_attach(object):
 			return None
 		id = model.get_value(model.get_iter(iters[0]), 0)
 		self.preview(id)
+
+	def sig_activate(self, widget, path, view_column):
+		iter = self.model.get_iter(path)
+		id = self.model.get_value(iter, 0)
+		if id:
+			data = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment',
+					'read', [id])
+			if not len(data):
+				return None
+			fp_name = False
+			if not data[0]['link']:
+				(fileno, fp_name) = tempfile.mkstemp(data[0]['datas_fname'], 'tinyerp_')
+				fp = file(fp_name, 'wb+')
+				fp.write(base64.decodestring(data[0]['datas']))
+				fp.close()
+				os.close(fileno)
+			else:
+				fp_name = data[0]['link']
+			common.open_file(fp_name, self.parent)
 
 	def preview(self, id):
 		datas = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id])
