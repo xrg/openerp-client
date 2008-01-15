@@ -65,7 +65,12 @@ class parser_graph(interface.parser_interface):
 			view = graph.ViewGraph(model, axis, fields, axis_data, attrs)
 		except Exception, e:
 			import common
-			common.error('Graph', _('Can not generate graph !'), details=str(e), parent=self.window)
+			import traceback
+			import sys
+			tb_s = reduce(lambda x, y: x + y, traceback.format_exception(
+				sys.exc_type, sys.exc_value, sys.exc_traceback))
+			common.error('Graph', _('Can not generate graph !'), details=tb_s,
+					parent=self.window)
 			view = EmptyGraph(model, axis, fields, axis_data, attrs)
 		return view, {}, [], on_write
 
