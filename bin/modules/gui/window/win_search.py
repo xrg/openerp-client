@@ -31,7 +31,6 @@ from gtk import glade
 import gobject
 import gettext
 import xmlrpclib
-import win_list
 import common
 import service
 

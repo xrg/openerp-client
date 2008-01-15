@@ -30,7 +30,6 @@
 import re
 import time
 import common
-import exceptions
 import rpc
 from rpc import RPCProxy
 import field
