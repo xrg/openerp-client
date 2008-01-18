@@ -39,14 +39,12 @@ from widget.view import interface
 import tinygraph
 
 import matplotlib
-matplotlib.use('GTKCairo')
 
 matplotlib.rcParams['xtick.labelsize'] = 10
 matplotlib.rcParams['ytick.labelsize'] = 10
 
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
-from matplotlib.backends.backend_gtk import NavigationToolbar2GTK as NavigationToolbar
 
 
 import StringIO
