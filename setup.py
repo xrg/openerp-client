@@ -49,7 +49,11 @@ def data_files():
     files = []
     if os.name == 'nt':
         import matplotlib
-        files.append(matplotlib.get_py2exe_datafiles())
+        datafiles = matplotlib.get_py2exe_datafiles()
+        if isinstance(datafiles, list):
+            files.extend(datafiles)
+        else:
+            files.append(datafiles)
         os.chdir('bin')
         for (dp,dn,names) in os.walk('themes'):
             if '.svn' in dn:
