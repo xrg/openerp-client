@@ -41,16 +41,16 @@ class selection(interface.widget_interface):
 
 		self.widget = gtk.HBox(spacing=3)
 		self.entry = gtk.ComboBoxEntry()
+		self.entry.child.set_property('activates_default', True)
 		self.entry.child.connect('changed', self.sig_changed)
-		self.entry.child.set_editable(False)
 		self.entry.child.connect('button_press_event', self._menu_open)
-		self.entry.child.connect('key_press_event', self.sig_key_pressed)
+		self.entry.child.connect('activate', self.sig_activate)
+		self.entry.child.connect_after('focus-out-event', self.sig_activate)
 		self.entry.set_size_request(int(attrs.get('size', -1)), -1)
 		self.widget.pack_start(self.entry, expand=True, fill=True)
 
 		self.ok = True
 		self._selection={}
-		self.key_catalog = {}
 		self.set_popdown(attrs.get('selection',[]))
 		self.last_key = (None, 0)
 
@@ -58,17 +58,12 @@ class selection(interface.widget_interface):
 		model = gtk.ListStore(gobject.TYPE_STRING)
 		self._selection={}
 		lst = []
-		for (i,j) in selection:
-			name = str(j)
+		for (value, name) in selection:
+			name = str(name)
 			lst.append(name)
-			self._selection[name]=i
-		self.key_catalog = {}
-		for l in lst:
+			self._selection[name] = value
 			i = model.append()
-			model.set(i, 0, l)
-			if l:
-				key = l[0].lower()
-				self.key_catalog.setdefault(key,[]).append(i)
+			model.set(i, 0, name)
 		self.entry.set_model(model)
 		self.entry.set_text_column(0)
 		return lst
@@ -80,6 +75,21 @@ class selection(interface.widget_interface):
 	def value_get(self):
 		res = self.entry.child.get_text()
 		return self._selection.get(res, False)
+
+	def sig_activate(self, *args):
+		text = self.entry.child.get_text()
+		value = False
+		if text:
+			for txt, val in self._selection.items():
+				if not val:
+					continue
+				if txt[:len(text)].lower() == text.lower():
+					value = val
+					if len(txt) == len(text):
+						break
+		self._view.modelfield.set_client(self._view.model, value, force_change=True)
+		self.display(self._view.model, self._view.modelfield)
+
 
 	def set_value(self, model, model_field):
 		model_field.set_client(model, self.value_get())
@@ -110,19 +120,6 @@ class selection(interface.widget_interface):
 	def sig_changed(self, *args):
 		if self.ok:
 			self._focus_out()
-		#if self.attrs.get('on_change',False) and self.value_get():
-		#	if self.ok:
-		#		self.attrson_change(self.attrs['on_change'])
-
-	def sig_key_pressed(self, *args):
-		key = args[1].string.lower()
-		if self.last_key[0] == key:
-			self.last_key[1] += 1
-		else:
-			self.last_key = [ key, 1 ]
-		if not self.key_catalog.has_key(key):
-			return
-		self.entry.set_active_iter(self.key_catalog[key][self.last_key[1] % len(self.key_catalog[key])])
 
 	def _color_widget(self):
 		return self.entry.child
