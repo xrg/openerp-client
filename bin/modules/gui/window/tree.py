@@ -297,6 +297,6 @@ class tree(object):
 	def sig_save_as(self, widget=None):
 		fields = []
 		win = win_export.win_export(self.model, self.tree_res.sel_ids_get(),
-				self.tree_res.fields, [], parent=self.window)
+				self.tree_res.fields, [], parent=self.window, context=self.context)
 		res = win.go()
 

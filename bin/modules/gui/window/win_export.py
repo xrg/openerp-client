@@ -86,18 +86,23 @@ def open_excel(fields, result):
 	else:
 		common.message(_("Function only available for MS Office !\nSorry, OOo users :("))
 
-def datas_read(ids, model, fields, fields_view, prefix=''):
-	datas = rpc.session.rpc_exec_auth('/object', 'execute', model, 'export_data', ids, fields)
+def datas_read(ids, model, fields, fields_view, prefix='', context=None):
+	ctx = context.copy()
+	ctx.update(rpc.session.context)
+	datas = rpc.session.rpc_exec_auth('/object', 'execute', model, 'export_data', ids, fields, ctx)
 	return datas
 
 class win_export(object):
-	def __init__(self, model, ids, fields, preload = [], parent=None):
+	def __init__(self, model, ids, fields, preload = [], parent=None, context=None):
 		self.glade = glade.XML(common.terp_path("terp.glade"), 'win_save_as',
 				gettext.textdomain())
 		self.win = self.glade.get_widget('win_save_as')
 		self.ids = ids
 		self.model = model
 		self.fields_data = {}
+		if context is None:
+			context = {}
+		self.context = context
 
 		if parent is None:
 			parent = service.LocalService('gui.main').window
@@ -238,7 +243,7 @@ class win_export(object):
 			action = self.wid_action.get_active()
 			self.parent.present()
 			self.win.destroy()
-			result = datas_read(self.ids, self.model, fields, self.fields_data)
+			result = datas_read(self.ids, self.model, fields, self.fields_data, context=self.context)
 			#result = []
 			#for data in datas:
 			#	result.append([data.get(f, '') for f in fields])

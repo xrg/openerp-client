@@ -258,7 +258,7 @@ class form(object):
 		fields = []
 		while(self.screen.view_to_load):
 			self.screen.load_view_to_load()
-		win = win_export.win_export(self.model, self.screen.ids_get(), self.screen.fields, fields, parent=self.window)
+		win = win_export.win_export(self.model, self.screen.ids_get(), self.screen.fields, fields, parent=self.window, context=self.context)
 		res = win.go()
 
 	def sig_new(self, widget=None, autosave=True):
