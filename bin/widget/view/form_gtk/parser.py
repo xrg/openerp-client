@@ -393,6 +393,7 @@ class parser_form(widget.view.interface.parser_interface):
 					_('You need to save resource before adding translations!'),
 					parent=self.window)
 			return False
+		id = self.screen.current_model.save(reload=False)
 		uid = rpc.session.uid
 
 		lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
@@ -546,6 +547,7 @@ class parser_form(widget.view.interface.parser_interface):
 				self.window.present()
 				win.destroy()
 				return
+		self.screen.current_model.reload()
 		self.window.present()
 		win.destroy()
 		return True
