@@ -258,13 +258,13 @@ def file_selection(title, filename='', parent=None,
 	win.set_transient_for(parent)
 	win.set_icon(TINYERP_ICON)
 	win.set_current_folder(options.options['client.default_path'])
-	if filename:
-		win.set_filename(os.path.join(options.options['client.default_path'], filename))
 	win.set_select_multiple(multi)
 	win.set_default_response(gtk.RESPONSE_OK)
 	if filters is not None:
 		for filter in filters:
 			win.add_filter(filter)
+	if filename:
+		win.set_current_name(filename)
 
 	def update_preview_cb(win, img):
 		filename = win.get_preview_filename()
