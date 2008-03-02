@@ -243,7 +243,8 @@ class many2one(interface.widget_interface):
 		if value:
 			if not leave:
 				domain = self._view.modelfield.domain_get(self._view.model)
-				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs, window=self._window, domain=domain)
+				context = self._view.modelfield.context_get(self._view.model)
+				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs, window=self._window, domain=domain, context=context)
 				ok, value = dia.run()
 				if ok:
 					self._view.modelfield.set_client(self._view.model, value,
@@ -277,7 +278,8 @@ class many2one(interface.widget_interface):
 	def sig_new(self, *args):
 		self.wid_text.disconnect(self.wid_text_focus_out_id)
 		domain = self._view.modelfield.domain_get(self._view.model)
-		dia = dialog(self.attrs['relation'], attrs=self.attrs, window=self._window, domain=domain)
+		context = self._view.modelfield.context_get(self._view.model)
+		dia = dialog(self.attrs['relation'], attrs=self.attrs, window=self._window, domain=domain ,context=context)
 		ok, value = dia.run()
 		if ok:
 			self._view.modelfield.set_client(self._view.model, value)
