@@ -183,7 +183,7 @@
 		  <property name="editable">False</property>
 		  <property name="visibility">True</property>
 		  <property name="max_length">0</property>
-		  <property name="text" translatable="no">localhost</property>
+		  <property name="text">localhost</property>
 		  <property name="has_frame">True</property>
 		  <property name="invisible_char">*</property>
 		  <property name="activates_default">True</property>
@@ -262,7 +262,7 @@
 		  <property name="editable">True</property>
 		  <property name="visibility">True</property>
 		  <property name="max_length">0</property>
-		  <property name="text" translatable="no">admin</property>
+		  <property name="text">admin</property>
 		  <property name="has_frame">True</property>
 		  <property name="invisible_char">*</property>
 		  <property name="activates_default">True</property>
@@ -284,7 +284,7 @@
 		  <property name="editable">True</property>
 		  <property name="visibility">False</property>
 		  <property name="max_length">0</property>
-		  <property name="text" translatable="no"></property>
+		  <property name="text"></property>
 		  <property name="has_frame">True</property>
 		  <property name="invisible_char">*</property>
 		  <property name="activates_default">True</property>
@@ -373,7 +373,7 @@
   <property name="width_request">600</property>
   <property name="height_request">400</property>
   <property name="visible">True</property>
-  <property name="title" translatable="no">Tiny ERP</property>
+  <property name="title">Tiny ERP</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
   <property name="modal">False</property>
@@ -630,9 +630,9 @@
 	      <child>
 		<widget class="GtkMenuItem" id="user">
 		  <property name="visible">True</property>
+		  <property name="sensitive">False</property>
 		  <property name="label" translatable="yes">_User</property>
 		  <property name="use_underline">True</property>
-		  <property name="sensitive">False</property>
 		  <signal name="activate" handler="on_requests_activate" last_modification_time="Sat, 17 Aug 2002 10:44:45 GMT"/>
 
 		  <child>
@@ -729,9 +729,9 @@
 	      <child>
 		<widget class="GtkMenuItem" id="form">
 		  <property name="visible">True</property>
+		  <property name="sensitive">False</property>
 		  <property name="label" translatable="yes">For_m</property>
 		  <property name="use_underline">True</property>
-		  <property name="sensitive">False</property>
 		  <signal name="activate" handler="on_form_activate" last_modification_time="Mon, 14 Oct 2002 00:52:44 GMT"/>
 
 		  <child>
@@ -1327,7 +1327,7 @@
 			      <child>
 				<widget class="GtkMenuItem" id="aqua_os_x">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="no">Aqua OS X</property>
+				  <property name="label">Aqua OS X</property>
 				  <property name="use_underline">True</property>
 				  <signal name="activate" handler="on_aqua_os_x_activate" last_modification_time="Fri, 14 Jul 2006 15:15:40 GMT"/>
 				</widget>
@@ -1537,9 +1537,9 @@
 	      <child>
 		<widget class="GtkMenuItem" id="plugins">
 		  <property name="visible">True</property>
+		  <property name="sensitive">False</property>
 		  <property name="label" translatable="yes">_Plugins</property>
 		  <property name="use_underline">True</property>
-		  <property name="sensitive">False</property>
 		  <signal name="activate" handler="on_plugins_activate" last_modification_time="Mon, 10 Jan 2005 20:23:54 GMT"/>
 
 		  <child>
@@ -1900,15 +1900,15 @@
 
 	  <child>
 	    <widget class="GtkToolButton" id="but_reload">
-	        <property name="visible">True</property>
-	        <property name="tooltip" translatable="yes">Reload / Undo Form</property>
-	        <property name="label" translatable="yes">Reload</property>
-	        <property name="use_underline">True</property>
-	        <property name="stock_id">gtk-redo</property>
-	        <property name="visible_horizontal">True</property>
-	        <property name="visible_vertical">True</property>
-	        <property name="is_important">False</property>
-	        <signal name="clicked" handler="on_form_reload_activate" last_modification_time="Sat, 18 Sep 2007 10:30:55 GMT"/>
+	      <property name="visible">True</property>
+	      <property name="tooltip" translatable="yes">Reload / Undo Form</property>
+	      <property name="label" translatable="yes">Reload</property>
+	      <property name="use_underline">True</property>
+	      <property name="stock_id">gtk-redo</property>
+	      <property name="visible_horizontal">True</property>
+	      <property name="visible_vertical">True</property>
+	      <property name="is_important">False</property>
+	      <signal name="clicked" handler="on_form_reload_activate" last_modification_time="Tue, 18 Sep 2007 10:30:55 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="expand">False</property>
@@ -2384,8 +2384,6 @@
 				      <property name="homogeneous">True</property>
 				    </packing>
 				  </child>
-
-
 				</widget>
 				<packing>
 				  <property name="padding">0</property>
@@ -3352,7 +3350,7 @@ Web: http://tiny.be</property>
 		      <child>
 			<widget class="GtkLabel" id="one2many_label">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="no">(0/0)</property>
+			  <property name="label">(0/0)</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -3602,7 +3600,7 @@ Web: http://tiny.be</property>
 		  <child>
 		    <widget class="GtkLabel" id="widget_sep_lab">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="no">label74</property>
+		      <property name="label">label74</property>
 		      <property name="use_underline">False</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -3782,7 +3780,7 @@ Web: http://tiny.be</property>
 		  <child>
 		    <widget class="GtkLabel" id="label155">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="no">-</property>
+		      <property name="label">-</property>
 		      <property name="use_underline">False</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -4190,7 +4188,7 @@ Web: http://tiny.be</property>
 			      <child>
 				<widget class="GtkLabel" id="widget_paned_lab">
 				  <property name="visible">True</property>
-				  <property name="label" translatable="no">label46559</property>
+				  <property name="label">label46559</property>
 				  <property name="use_underline">False</property>
 				  <property name="use_markup">False</property>
 				  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -13727,7 +13725,7 @@ Very Urgent</property>
 				  <property name="editable">True</property>
 				  <property name="visibility">True</property>
 				  <property name="max_length">1</property>
-				  <property name="text" translatable="no">,</property>
+				  <property name="text">,</property>
 				  <property name="has_frame">True</property>
 				  <property name="invisible_char">*</property>
 				  <property name="activates_default">False</property>
@@ -13778,7 +13776,7 @@ Very Urgent</property>
 				  <property name="editable">True</property>
 				  <property name="visibility">True</property>
 				  <property name="max_length">0</property>
-				  <property name="text" translatable="no">&quot;</property>
+				  <property name="text">&quot;</property>
 				  <property name="has_frame">True</property>
 				  <property name="invisible_char">*</property>
 				  <property name="activates_default">False</property>
@@ -13847,7 +13845,7 @@ Very Urgent</property>
 			      <child>
 				<widget class="GtkComboBoxEntry" id="import_csv_combo">
 				  <property name="visible">True</property>
-				  <property name="items" translatable="no">UTF-8
+				  <property name="items">UTF-8
 Latin1</property>
 				  <property name="add_tearoffs">False</property>
 				  <property name="has_frame">True</property>
@@ -14211,7 +14209,7 @@ Latin1</property>
 	      <property name="editable">True</property>
 	      <property name="visibility">True</property>
 	      <property name="max_length">0</property>
-	      <property name="text" translatable="no">localhost</property>
+	      <property name="text">localhost</property>
 	      <property name="has_frame">True</property>
 	      <property name="invisible_char">*</property>
 	      <property name="activates_default">True</property>
@@ -14233,7 +14231,7 @@ Latin1</property>
 	      <property name="editable">True</property>
 	      <property name="visibility">True</property>
 	      <property name="max_length">5</property>
-	      <property name="text" translatable="no">8069</property>
+	      <property name="text">8069</property>
 	      <property name="has_frame">True</property>
 	      <property name="invisible_char">*</property>
 	      <property name="activates_default">True</property>
@@ -14453,7 +14451,7 @@ Latin1</property>
 		  <property name="editable">False</property>
 		  <property name="visibility">True</property>
 		  <property name="max_length">0</property>
-		  <property name="text" translatable="no">http://localhost:8069</property>
+		  <property name="text">http://localhost:8069</property>
 		  <property name="has_frame">True</property>
 		  <property name="invisible_char">*</property>
 		  <property name="activates_default">True</property>
@@ -15683,7 +15681,7 @@ this operation may take a while...</property>
 		  <property name="can_focus">True</property>
 		  <property name="editable">True</property>
 		  <property name="visibility">True</property>
-		  <property name="max_length">16</property>
+		  <property name="max_length">32</property>
 		  <property name="text" translatable="yes"></property>
 		  <property name="has_frame">True</property>
 		  <property name="invisible_char">●</property>
@@ -16324,7 +16322,7 @@ this operation may take a while...</property>
 	  <child>
 	    <widget class="GtkLabel" id="msg_title">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="no">msg_title</property>
+	      <property name="label">msg_title</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
