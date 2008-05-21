@@ -57,12 +57,15 @@ class tree(object):
 		self.tree_res = view_tree.view_tree(view, [], res_id, True, context=context)
 		self.tree_res.view.connect('row-activated', self.sig_open)
 
+		sel = self.tree_res.view.get_selection()
+		sel.connect('changed', self.expand_one)
+
 		if not name:
 			self.name = self.tree_res.name
 		else:
 			self.name = name
 		self.vp = self.glade.get_widget('main_tree_sw')
-		
+
 		wid = self.glade.get_widget('widget_vbox')
 		if options.options['client.modepda'] and not self.tree_res.toolbar:
 			wid.hide()
@@ -71,7 +74,7 @@ class tree(object):
 
 		widget_sc = self.glade.get_widget('win_tree_sc')
 		imagename = 'tinyerp.png'
-		
+
 		widget_sc.connect('row-activated', self.sc_go)
 		self.tree_sc = view_tree.view_tree_sc(widget_sc, self.model)
 		self.handlers = {
@@ -102,7 +105,7 @@ class tree(object):
 	def sig_reload(self, widget=None):
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', self.domain2)
 		if self.tree_res.toolbar:
-			
+
 			icon_name = 'icon'
 			wid = self.glade.get_widget('tree_toolbar')
 			for w in wid.get_children():
@@ -116,7 +119,7 @@ class tree(object):
 				l = gtk.Label(r['name'])
 				rb.set_label_widget(l)
 
-				icon = gtk.Image() 
+				icon = gtk.Image()
 				if hasattr(r[icon_name], 'startswith') and r[icon_name].startswith('STOCK_'):
 					icon.set_from_stock(getattr(gtk, r[icon_name]), gtk.ICON_SIZE_BUTTON)
 				else:
@@ -145,7 +148,7 @@ class tree(object):
 	def menu_main_clicked(self, widget):
 		if widget.get_active():
 			id = widget.get_data('id')
-			
+
 			ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'read', [id], [self.view['field_parent']])[0][self.view['field_parent']]
 
 			self.tree_res.ids = ids
@@ -163,6 +166,11 @@ class tree(object):
 		else:
 			widget.set_stock_id('gtk-goto-top')
 
+	def expand_one(self, selection):
+		model,iter = selection.get_selected_rows()
+		if iter:
+			self.tree_res.view.expand_row(iter[0],False)
+
 	def sig_print_html(self, widget=None, keyword='client_print_multi', id=None):
 		self.sig_action(keyword='client_print_multi', report_type='html')
 
@@ -171,7 +179,7 @@ class tree(object):
 
 	def sig_action(self, widget=None, keyword='tree_but_action', id=None, report_type='pdf', warning=True):
 		ids = self.ids_get()
-		
+
 		if not id and ids and len(ids):
 			id = ids[0]
 		if id:
