@@ -102,7 +102,8 @@ class calendar(wid_int.wid_int):
 		return res
 
 	def _value_set(self, value):
-		pass
+		self.entry1.set_text(value)
+		self.entry2.set_text(value)
 
 	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 
