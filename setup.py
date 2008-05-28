@@ -30,7 +30,8 @@ execfile(opj('bin', 'release.py'))
 py_short_version = '%s.%s' % sys.version_info[:2]
 
 required_modules = [('gtk', 'gtk python bindings'),
-                    ('gtk.glade', 'glade python bindings')]
+                    ('gtk.glade', 'glade python bindings'),
+                    ('mx.DateTime', 'date and time handling routines for Python')]
 
 def check_modules():
     ok = True
