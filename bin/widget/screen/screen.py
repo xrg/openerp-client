@@ -404,6 +404,11 @@ class Screen(signal_event.signal_event):
 		id = False
 		if self.current_view.view_type == 'form' and self.current_model:
 			id = self.current_model.id
+			if not id:
+				lst=[]
+				lst.append(len(self.models.models))
+				self.load(lst)
+				return
 			if unlink and id:
 				if not self.rpc.unlink([id]):
 					return False
