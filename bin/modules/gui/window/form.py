@@ -99,7 +99,7 @@ class form(object):
 		self.sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
 		self.sw.add(vp)
 		self.sw.show()
-		
+
 		self.has_backup = False
 		self.backup = {}
 
@@ -236,14 +236,17 @@ class form(object):
 		return True
 
 	def sig_remove(self, widget=None):
-		if self.screen.current_view.view_type == 'form':
-			msg = _('Are you sure to remove this record ?')
+		if not self._id_get():
+			msg = _('Record is not saved ! \n Do You want to Clear Current Record ?')
 		else:
-			msg = _('Are you sure to remove those records ?')
+			if self.screen.current_view.view_type == 'form':
+				msg = _('Are you sure to remove this record ?')
+			else:
+				msg = _('Are you sure to remove those records ?')
 		if common.sur(msg):
 			id = self.screen.remove(unlink=True)
 			if not id:
-				self.message_state(_('Resources not removed !'))
+				self.message_state(_('Resources Cleared !'))
 			else:
 				self.message_state(_('Resources removed.'))
 
@@ -267,7 +270,7 @@ class form(object):
 				return
 		self.screen.new()
 		self.message_state('')
-	
+
 	def sig_copy(self, *args):
 		if not self.modified_save():
 			return
