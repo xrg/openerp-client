@@ -100,18 +100,28 @@ class configmanager(object):
 		parser.add_option("-s", "--server", dest="server", help=_("specify the server ip/name"))
 		(opt, args) = parser.parse_args()
 
-
-		self.rcfile = fname or opt.config or os.environ.get('TERPRC') or os.path.join(get_home_dir(), '.terprc')
+		self.rcfile = self._get_rcfile(fname, opt.config)
 		self.load()
 
 		if opt.verbose:
 			self.options['logging.verbose']=True
 		self.options['logging.logger'] = opt.log_logger
 		self.options['logging.level'] = opt.log_level
-	
+
 		for arg in ('login', 'port', 'server'):
 			if getattr(opt, arg):
 				self.options['login.'+arg] = getattr(opt, arg)
+
+	def _get_rcfile(self, fname, optconfigfile):
+		rcfile = fname or optconfigfile or os.environ.get('TERPRC') or os.path.join(get_home_dir(), '.terprc')
+		if not os.path.exists(rcfile):
+			import logging
+			log = logging.getLogger('common.options')
+			additional_info = ""
+			if optconfigfile:
+				additional_info = " Be sure to specify an absolute path name if you are using the '-c' command line switch"
+			log.warn('Config file %s does not exist !%s'% (rcfile, additional_info ))
+		return os.path.abspath(rcfile)
 
 	def save(self, fname = None):
 		try:
@@ -130,6 +140,7 @@ class configmanager(object):
 			log = logging.getLogger('common.options')
 			log.warn('Unable to write config file %s !'% (self.rcfile,))
 		return True
+
 
 	def load(self, fname=None):
 		try:
