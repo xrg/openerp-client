@@ -98,8 +98,12 @@ class ViewGraph(object):
 		for m in models:
 			res = {}
 			for x in self.axis_data.keys():
-				if self.fields[x]['type'] in ('many2one', 'char','time','text','selection'):
+				if self.fields[x]['type'] in ('many2one', 'char','time','text'):
 					res[x] = str(m[x].get_client(m))
+				elif self.fields[x]['type'] == 'selection':
+					selection = dict(m[x].attrs['selection'])
+					val = str(m[x].get_client(m))
+					res[x] = selection.get(val, val)
 				elif self.fields[x]['type'] == 'date':
 					date = time.strptime(m[x].get_client(m), DT_FORMAT)
 					res[x] = time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'), date)
