@@ -142,11 +142,14 @@ class main(service.Service):
 				del datas['window']
 			self.exec_report(action['report_name'], datas)
 
+		elif action['type']=='ir.actions.url':
+			tools.launch_browser(action.get('url',''))
+
 	def exec_keyword(self, keyword, data={}, adds={}, context={}, warning=True):
 		actions = None
 		if 'id' in data:
 			try:
-				id = data.get('id', False) 
+				id = data.get('id', False)
 				actions = rpc.session.rpc_exec_auth('/object', 'execute',
 						'ir.values', 'get', 'action', keyword,
 						[(data['model'], id)], False, rpc.session.context)
