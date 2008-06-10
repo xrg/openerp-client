@@ -142,7 +142,7 @@ class main(service.Service):
 				del datas['window']
 			self.exec_report(action['report_name'], datas)
 
-		elif action['type']=='ir.actions.url':
+		elif action['type']=='ir.actions.act_url':
 			tools.launch_browser(action.get('url',''))
 
 	def exec_keyword(self, keyword, data={}, adds={}, context={}, warning=True):
