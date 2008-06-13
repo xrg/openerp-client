@@ -86,6 +86,15 @@ class many2many(interface.widget_interface):
 
 		self.old = None
 		self.temp=[]
+
+	def check_exist(self):
+		if not len(self.screen.models.models):
+			self.temp=[]
+		else:
+			for i in self.screen.models.models:
+				self.temp.append(i.id)
+			self.temp=dict.fromkeys(self.temp).keys()
+
 	def destroy(self):
 		self.screen.destroy()
 		self.widget.destroy()
@@ -103,13 +112,7 @@ class many2many(interface.widget_interface):
 
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
 		ids = map(lambda x: x[0], ids)
-
-		if not len(self.screen.models.models):
-			self.temp=[]
-		else:
-			for i in self.screen.models.models:
-				self.temp.append(i.id)
-			self.temp=dict.fromkeys(self.temp).keys()
+		self.check_exist()
 		if len(ids)<>1:
 			win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain, parent=self._window)
 			ids = win.go()
@@ -133,6 +136,7 @@ class many2many(interface.widget_interface):
 
 	def _sig_remove(self, *args):
 		rem_id=[]
+		self.check_exist()
 		rem_id=self.screen.current_view.sel_ids_get()
 		for i in rem_id:
 			self.temp.remove(i)
