@@ -85,7 +85,7 @@ class many2many(interface.widget_interface):
 		self.widget.pack_start(scroll, expand=True, fill=True)
 
 		self.old = None
-
+		self.temp=[]
 	def destroy(self):
 		self.screen.destroy()
 		self.widget.destroy()
@@ -96,20 +96,46 @@ class many2many(interface.widget_interface):
 		self.value = res.get(self.attrs['name'], False)
 
 	def _sig_add(self, *args):
+		flag=False
+		newids=[]
 		domain = self._view.modelfield.domain_get(self._view.model)
 		context = self._view.modelfield.context_get(self._view.model)
 
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
 		ids = map(lambda x: x[0], ids)
+
+		if not len(self.screen.models.models):
+			self.temp=[]
+		else:
+			for i in self.screen.models.models:
+				self.temp.append(i.id)
+			self.temp=dict.fromkeys(self.temp).keys()
 		if len(ids)<>1:
 			win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain, parent=self._window)
 			ids = win.go()
 
+		if ids == None:
+			ids=[]
+		if len(self.temp) and len(ids):
+		  	for i in ids:
+				if i not in self.temp:
+					newids.append(i)
+					flag=True
+			if flag==True:
+				ids=newids
+			else:
+				ids=[]
 		self.screen.load(ids)
+		for i in ids:
+			self.temp.append(i)
 		self.screen.display()
 		self.wid_text.set_text('')
 
 	def _sig_remove(self, *args):
+		rem_id=[]
+		rem_id=self.screen.current_view.sel_ids_get()
+		for i in rem_id:
+			self.temp.remove(i)
 		self.screen.remove()
 		self.screen.display()
 
