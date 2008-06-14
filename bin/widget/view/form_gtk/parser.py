@@ -310,7 +310,9 @@ class parser_form(widget.view.interface.parser_interface):
 				if not type in widgets_type:
 					continue
 				if attrs.get('invisible', False):
-					continue
+					visval = eval(attrs['invisible'], {'context':self.screen.context})
+					if visval:
+						continue
 
 				fields[name]['name'] = name
 				if 'saves' in attrs:

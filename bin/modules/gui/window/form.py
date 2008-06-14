@@ -223,10 +223,7 @@ class form(object):
 				('create_uid', _('Creation User')),
 				('create_date', _('Creation Date')),
 				('write_uid', _('Latest Modification by')),
-				('write_date', _('Latest Modification Date')),
-				('uid', _('Owner')),
-				('gid', _('Group Owner')),
-				('level', _('Access Level'))
+				('write_date', _('Latest Modification Date'))
 			]
 			for (key,val) in todo:
 				if line[key] and key in ('create_uid','write_uid','uid'):

@@ -326,6 +326,10 @@ class db_create(object):
 				if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
 					common.warning(_('Bad database administrator password !'), _("Could not create database."))
 				else:
+					print e
+					print str(e)
+					print e.faultString
+					print e.faultCode
 					common.warning(_("Could not create database."),_('Error during database creation !'))
 	
 	def progress_timeout(self, pbar, url, passwd, id, win, dbname, parent=None):

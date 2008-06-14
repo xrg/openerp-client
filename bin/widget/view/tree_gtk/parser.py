@@ -129,7 +129,8 @@ class parser_tree(interface.parser_interface):
 				col.connect('clicked', sort_model, treeview)
 				col.set_resizable(True)
 				#col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
-				col.set_visible(not fields[fname].get('invisible', False))
+				visval = eval(fields[fname].get('invisible', 'False'), {'context':self.screen.context})
+				col.set_visible(not visval)
 				n = treeview.append_column(col)
 				if 'sum' in fields[fname] and fields[fname]['type'] \
 						in ('integer', 'float', 'float_time'):
