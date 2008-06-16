@@ -171,7 +171,7 @@ class db_login(object):
 		host = options.options['login.server']
 		port = options.options['login.port']
 		protocol = options.options['login.protocol']
-		
+
 		url = '%s%s:%s' % (protocol, host, port)
 		server_widget.set_text(url)
 		login.set_text(options.options['login.login'])
@@ -294,6 +294,9 @@ class db_create(object):
 
 		if res == gtk.RESPONSE_OK:
 			try:
+				id=rpc.session.db_exec(url, 'list')
+				if db_name in id:
+					raise Exception('DbExist')
 				id = rpc.session.db_exec(url, 'create', passwd, db_name, demo_data, langreal)
 				win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
 				win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
@@ -322,7 +325,9 @@ class db_create(object):
 				win.show_all()
 				self.timer = gobject.timeout_add(1000, self.progress_timeout, pb, url, passwd, id, win, db_name, parent)
 			except Exception, e:
-				if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
+				if e.args == ('DbExist',):
+					common.warning(_("Could not create database."),_('Database alreayd exists !'))
+				elif ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
 					common.warning(_('Bad database administrator password !'), _("Could not create database."))
 				else:
 					print e
@@ -330,7 +335,7 @@ class db_create(object):
 					print e.faultString
 					print e.faultCode
 					common.warning(_("Could not create database."),_('Error during database creation !'))
-	
+
 	def progress_timeout(self, pbar, url, passwd, id, win, dbname, parent=None):
 		try:
 			progress,users = rpc.session.db_exec_no_except(url, 'get_progress', passwd, id)
@@ -603,10 +608,10 @@ class terp_main(service.Service):
 			self.toolbar.set_style(gtk.TOOLBAR_TEXT)
 		elif option=='icons':
 			self.toolbar.set_style(gtk.TOOLBAR_ICONS)
-	
+
 	def sig_form_tab(self, option):
 		options.options['client.form_tab'] = option
-	
+
 	def sig_form_tab_orientation(self, option):
 		options.options['client.form_tab_orientation'] = option
 
@@ -751,7 +756,7 @@ class terp_main(service.Service):
 		self.glade.get_widget('plugins').set_sensitive(False)
 		rpc.session.logout()
 		return True
-		
+
 	def sig_help_index(self, widget):
 		tools.launch_browser('http://www.tinyerp.org/documentation/user-manual/')
 
@@ -762,7 +767,7 @@ class terp_main(service.Service):
 
 	def sig_tips(self, *args):
 		common.tipoftheday(self.window)
-		
+
 	def sig_licence(self, widget):
 		dialog = glade.XML(common.terp_path("terp.glade"), "win_licence", gettext.textdomain())
 		dialog.signal_connect("on_but_ok_pressed", lambda obj: dialog.get_widget('win_licence').destroy())
@@ -904,7 +909,7 @@ class terp_main(service.Service):
 			if button_name=='but_close' and res:
 				self._win_del()
 
-	def _sig_page_changt(self, widget=None, *args): 
+	def _sig_page_changt(self, widget=None, *args):
 		self.last_page = self.current_page
 		self.current_page = self.notebook.get_current_page()
 		self.sb_set()
@@ -1082,7 +1087,7 @@ class terp_main(service.Service):
 		self.window.present()
 		win.destroy()
 		return (url,db,passwd)
-	
+
 	def _choose_db_ent(self):
 		dialog = glade.XML(common.terp_path("terp.glade"), "win_db_ent",
 				gettext.textdomain())
