@@ -98,7 +98,6 @@ class dialog(object):
 		else:
 			self.dia.destroy()
 			return False
-	
 
 def execute(action, datas, state='init', parent=None, context={}):
 	if not 'form' in datas:

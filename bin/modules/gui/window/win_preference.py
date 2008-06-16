@@ -40,9 +40,11 @@ import copy
 import service
 from widget.screen import Screen
 
+import form
+
 
 class win_preference(object):
-	def __init__(self, model, id, preferences, parent=None):
+	def __init__(self, parent=None):
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_preference', gettext.textdomain())
 		self.win = self.glade.get_widget('win_preference')
 		self.win.set_icon(common.TINYERP_ICON)
@@ -50,55 +52,35 @@ class win_preference(object):
 			parent = service.LocalService('gui.main').window
 		self.win.set_transient_for(parent)
 		self.parent = parent
-		self.win.show_all()
-		self.id = id
-		self.model = model
 
-		fields = {}
-		arch = '<?xml version="1.0"?><form string="%s">\n' % (_('Preferences'),)
-		for p in preferences:
-			arch+='<field name="%s" colspan="4"/>' % (p[1],)
-			fields[p[1]] = p[3]
-		arch+= '</form>'
+		action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'action_get', {})
+		print '**', action_id
+		action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', [action_id], False, {})[0]
+		print action
 
-		self.screen = Screen(model, view_type=[])
-		self.screen.new(default=False)
-		self.screen.add_view_custom(arch, fields, display=True)
+		view_ids=[]
+		if action.get('views', []):
+			view_ids=[x[0] for x in action['views']]
+		elif action.get('view_id', False):
+			view_ids=[action['view_id'][0]]
 
-		default = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'meta', False, [(self.model,self.id)], False, rpc.session.context, True, True, False)
-		default2 = {}
-		self.default = {}
-		for d in default:
-			default2[d[1]] = d[2]
-			self.default[d[1]] = d[0]
-		self.screen.current_model.set(default2)
-
-		x,y = self.screen.screen_container.size_get()
-		self.screen.widget.set_size_request(x,y)
+		self.screen = Screen('res.users', view_type=[], window=parent)
+		self.screen.add_view_id(view_ids[1], 'form', display=True)
+		self.screen.load([rpc.session.uid])
+		self.screen.display(rpc.session.uid)
 
 		vbox = self.glade.get_widget('preference_vbox')
 		vbox.pack_start(self.screen.widget)
 
-		self.win.set_title(_('Preference')+' '+model)
+		self.win.set_title(_('Preference'))
 		self.win.show_all()
 
 	def run(self, datas={}):
-		final = False
-		while True:
-			res = self.win.run()
-			if self.screen.current_model.validate() or (self.states[res]=='end'):
-				break
+		res = self.win.run()
 		if res==gtk.RESPONSE_OK:
-			final = True
-
-			val = copy.copy(self.screen.get())
-
-			for key in val:
-				if val[key]:
-					rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'set', 'meta', key, key, [(self.model,self.id)], val[key])
-				elif self.default.get(key, False):
-					rpc.session.rpc_exec_auth('/common', 'ir_del', self.default[key])
+			rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write', [rpc.session.uid], self.screen.get())
+			rpc.session.context_reload()
 		self.parent.present()
 		self.win.destroy()
-		return final
+		return True
 

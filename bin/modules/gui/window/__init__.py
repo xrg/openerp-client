@@ -51,6 +51,7 @@ class window(service.Service):
 		context.update(rpc.session.context)
 
 		if view_type=='form':
+			print 'view_ids', view_ids
 			mode = (mode or 'form,tree').split(',')
 			win = form.form(model, res_id, domain, view_type=mode,
 					view_ids = (view_ids or []), window=window,

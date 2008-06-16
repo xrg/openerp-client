@@ -77,21 +77,34 @@ class Button(Observable):
 					common.sur(self.attrs['confirm']):
 				button_type = self.attrs.get('type', 'workflow')
 				if button_type == 'workflow':
-					rpc.session.rpc_exec_auth('/object', 'exec_workflow',
+					print 'Exec Workflow'
+					result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
 											self.form.screen.name,
 											self.attrs['name'], id)
+					print 'Result', result
+					if type(result)==type({}):
+						datas = {}
+						obj = service.LocalService('action.main')
+						obj._exec_action(result,datas)
 				elif button_type == 'object':
 					if not id:
 						return
-					rpc.session.rpc_exec_auth('/object', 'execute',
-											self.form.screen.name,
-											self.attrs['name'],
-											[id], model.context_get())
+					result = rpc.session.rpc_exec_auth(
+						'/object', 'execute',
+						self.form.screen.name,
+						self.attrs['name'],
+						[id], model.context_get()
+					)
+					if type(result)==type({}):
+						datas = {}
+						obj = service.LocalService('action.main')
+						obj._exec_action(result,datas,context=self.form.screen.context)
+
 				elif button_type == 'action':
 					obj = service.LocalService('action.main')
 					action_id = int(self.attrs['name'])
 					obj.execute(action_id, {'model':self.form.screen.name, 'id': id or False,
-						'ids': id and [id] or [], 'report_type': 'pdf'})
+						'ids': id and [id] or [], 'report_type': 'pdf'}, context=self.form.screen.context)
 				else:
 					raise Exception, 'Unallowed button type'
 				self.form.screen.reload()

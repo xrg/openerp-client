@@ -626,20 +626,9 @@ class terp_main(service.Service):
 		self.notebook.set_current_page(pn-1)
 
 	def sig_user_preferences(self, *args):
-		try:
-			actions = rpc.session.rpc_exec_auth('/object', 'execute',
-					'ir.values', 'get', 'meta', False, [('res.users',False)],
-					True, rpc.session.context, True)
-
-			win = win_preference.win_preference('res.users', rpc.session.uid,
-					actions, parent=self.window)
-			if win.run():
-				rpc.session.context_reload()
-			self.window.present()
-			win.destroy()
-			return True
-		except:
-			return False
+		win =win_preference.win_preference(parent=self.window)
+		win.run()
+		return True
 
 	def sig_win_close(self, *args):
 		self._sig_child_call(args[0], 'but_close')

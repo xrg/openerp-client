@@ -287,30 +287,27 @@ class rpc_session(object):
 		self.context = {}
 		self.timezone = 'utc'
 		# self.uid
-		context = self.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'meta', False, [('res.users', self.uid or False)], False, {}, True, True, False)
-		for c in context:
-			if c[2]:
-				self.context[c[1]] = c[2]
-			if c[1] == 'lang':
-				import translate
-				translate.setlang(c[2])
-				options.options['client.lang']=c[2]
-				ids = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('code', '=', c[2])])
-				if ids:
-					l = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', ids, ['direction'])
-					if l and 'direction' in l[0]:
-						common.DIRECTION = l[0]['direction']
-						import gtk
-						if common.DIRECTION == 'rtl':
-							gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
-						else:
-							gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
-			elif c[1] == 'tz':
-				self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
-				try:
-					import pytz
-				except:
-					common.warning('You select a timezone but tinyERP could not find pytz library !\nThe timezone functionality will be disable.')
+		self.context = self.rpc_exec_auth('/object', 'execute', 'res.users', 'context_get')
+		if 'lang' in self.context:
+			import translate
+			translate.setlang(self.context['lang'])
+			options.options['client.lang']=self.context['lang']
+			ids = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('code', '=', self.context['lang'])])
+			if ids:
+				l = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', ids, ['direction'])
+				if l and 'direction' in l[0]:
+					common.DIRECTION = l[0]['direction']
+					import gtk
+					if common.DIRECTION == 'rtl':
+						gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
+					else:
+						gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
+		if 'tz' in self.context:
+			self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
+			try:
+				import pytz
+			except:
+				common.warning('You select a timezone but tinyERP could not find pytz library !\nThe timezone functionality will be disable.')
 
 	def logged(self):
 		return self._open

@@ -36,7 +36,6 @@ from gtk import glade
 
 import rpc
 import win_selection
-import win_preference
 import win_search
 import win_export
 import win_import
@@ -66,6 +65,9 @@ class form(object):
 			view_ids = []
 		if context is None:
 			context = {}
+
+
+		print '-----', context
 
 		fields = {}
 		self.model = model
@@ -115,7 +117,6 @@ class form(object):
 			'but_search': self.sig_search,
 			'but_previous': self.sig_previous,
 			'but_next': self.sig_next,
-			#'but_preference': self.sig_preference,
 			'but_goto_id': self.sig_goto,
 			'but_log': self.sig_logs,
 			'but_print': self.sig_print,
@@ -169,28 +170,6 @@ class form(object):
 
 	def id_get(self):
 		return self.screen.id_get()
-
-	def _form_action_action(self, name, value):
-		id = self.sig_save(sig_new=False)
-		if id:
-			id2 = value[2] or id
-			obj = service.LocalService('action.main')
-			action_id = int(value[0])
-			obj.execute(action_id, {'model':value[1], 'id': id2, 'ids': [id2]})
-			self.sig_reload()
-
-	def _form_action_object(self, name, value):
-		id = self.sig_save(sig_new=False, auto_continue=False)
-		if id:
-			id2 = value[2] or id
-			rpc.session.rpc_exec_auth('/object', 'execute', value[1], value[0], [id2], rpc.session.context)
-			self.sig_reload()
-
-	def _form_action_workflow(self, name, value):
-		id = self.sig_save(sig_new=False, auto_continue=False)
-		if id:
-			rpc.session.rpc_exec_auth('/object', 'exec_workflow', value[1], value[0], id)
-			self.sig_reload()
 
 	def sig_attach(self, widget=None):
 		id = self.screen.id_get()
@@ -344,11 +323,12 @@ class form(object):
 			if sel_ids:
 				ids = sel_ids
 		if len(ids):
+			print 'ICI', self.screen.context
 			obj = service.LocalService('action.main')
 			if previous and self.previous_action:
-				obj._exec_action(self.previous_action[1], {'model':self.screen.resource, 'id': id or False, 'ids':ids, 'report_type': report_type})
+				obj._exec_action(self.previous_action[1], {'model':self.screen.resource, 'id': id or False, 'ids':ids, 'report_type': report_type}, self.screen.context)
 			else:
-				res = obj.exec_keyword(keyword, {'model':self.screen.resource, 'id': id or False, 'ids':ids, 'report_type': report_type}, adds=adds)
+				res = obj.exec_keyword(keyword, {'model':self.screen.resource, 'id': id or False, 'ids':ids, 'report_type': report_type}, adds, self.screen.context)
 				if res:
 					self.previous_action = res
 			self.sig_reload(test_modified=False)
@@ -397,17 +377,6 @@ class form(object):
 
 	def _misc_message(self, obj, message):
 		self.message_state(message)
-
-	def sig_preference(self, widget=None):
-		actions = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'meta', False, [(self.model,False)], True, rpc.session.context, True)
-		id = self.screen.id_get()
-		if id and len(actions):
-			win = win_preference.win_preference(self.model, id, actions)
-			win.run()
-		elif id:
-			self.message_state(_('No preference available for this resource !'))
-		else:
-			self.message_state(_('No resource selected !'))
 
 	def modified_save(self, reload=True):
 		if self.screen.is_modified():

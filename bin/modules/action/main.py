@@ -80,7 +80,7 @@ class main(service.Service):
 				raise Exception, 'ActionNotFound'
 			type=res[0]['type']
 		res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [act_id], False, ctx)[0]
-		self._exec_action(res,datas)
+		self._exec_action(res,datas,context)
 
 	def _exec_action(self, action, datas, context={}):
 		if 'type' not in action:
@@ -120,8 +120,12 @@ class main(service.Service):
 					datas['view_mode'], name=action.get('name', False),
 					limit=datas['limit'], auto_refresh=datas['auto_refresh'])
 
-			#for key in tools.expr_eval(action.get('context', '{}')).keys():
-			#	del rpc.session.context[key]
+		elif action['type']=='ir.actions.server':
+			ctx = context.copy()
+			ctx.update({'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])})
+			res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.server', 'run', [action['id']], ctx)
+			if res:
+				self._exec_action(res, datas, context)
 
 		elif action['type']=='ir.actions.wizard':
 			win=None

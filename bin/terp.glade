@@ -8620,6 +8620,7 @@ Very Urgent</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
   <property name="modal">True</property>
+  <property name="default_height">500</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
   <property name="decorated">True</property>
@@ -8686,7 +8687,7 @@ Very Urgent</property>
 	  <child>
 	    <widget class="GtkLabel" id="label117">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">&lt;b&gt;Edit resource preferences&lt;/b&gt;</property>
+	      <property name="label" translatable="yes">&lt;b&gt;User preferences&lt;/b&gt;</property>
 	      <property name="use_underline">True</property>
 	      <property name="use_markup">True</property>
 	      <property name="justify">GTK_JUSTIFY_CENTER</property>

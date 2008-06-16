@@ -137,7 +137,8 @@ class ViewForm(parser_view):
 
 					def _action(button, action, type):
 						data={}
-						context={}
+						print '-=-=-=', self.screen.context
+						context=self.screen.context
 						act=action.copy()
 						if type in ('print', 'action'):
 							self.screen.save_current()
