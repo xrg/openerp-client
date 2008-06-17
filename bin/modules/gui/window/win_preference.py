@@ -65,7 +65,7 @@ class win_preference(object):
 			view_ids=[action['view_id'][0]]
 
 		self.screen = Screen('res.users', view_type=[], window=parent)
-		self.screen.add_view_id(view_ids[1], 'form', display=True)
+		self.screen.add_view_id(view_ids[0], 'form', display=True)
 		self.screen.load([rpc.session.uid])
 		self.screen.display(rpc.session.uid)
 
