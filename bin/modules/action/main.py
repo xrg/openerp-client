@@ -37,7 +37,7 @@ import printer
 
 import common
 import tools
-
+from widget.view.form_gtk.many2one import dialog
 class main(service.Service):
 	def __init__(self, name='action.main'):
 		service.Service.__init__(self, name)
@@ -113,6 +113,13 @@ class main(service.Service):
 
 			if datas.get('domain', False):
 				domain.append(datas['domain'])
+			if 'target' in action:
+				if action['target']=='new':
+					dia = dialog(datas['res_model'],window=datas.get('window',None), domain=domain, context=ctx)
+					dia.but_cancel.destroy()
+					dia.but_ok.destroy()
+					print dia.run()
+#					dia.destroy()
 
 			obj = service.LocalService('gui.window')
 			obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
