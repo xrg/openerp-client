@@ -84,11 +84,13 @@ class Button(Observable):
 					result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
 											self.form.screen.name,
 											self.attrs['name'], id)
-					print 'Result', result
 					if type(result)==type({}):
-						datas = {}
-						obj = service.LocalService('action.main')
-						obj._exec_action(result,datas)
+						if result['type']== 'ir.actions.act_window_close':
+							self.form.screen.window.destroy()
+						else:
+							datas = {}
+							obj = service.LocalService('action.main')
+							obj._exec_action(result,datas)
 				elif button_type == 'object':
 					if not id:
 						return
@@ -112,6 +114,7 @@ class Button(Observable):
 					raise Exception, 'Unallowed button type'
 				self.form.screen.reload()
 		else:
+			print "Invalid Form, correct red fields !"
 			self.warn('misc-message', _('Invalid Form, correct red fields !'))
 			self.form.screen.display()
 
