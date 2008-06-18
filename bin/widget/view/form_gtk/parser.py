@@ -71,7 +71,10 @@ class Button(Observable):
 	def button_clicked(self, widget):
 		model = self.form.screen.current_model
 		self.form.set_value()
-		if model.validate():
+		button_type = self.attrs.get('special', '')
+		if button_type=='cancel':
+			self.form.screen.window.destroy()
+		elif model.validate():
 			id = self.form.screen.save_current()
 			if not self.attrs.get('confirm',False) or \
 					common.sur(self.attrs['confirm']):
@@ -196,7 +199,7 @@ class _container(object):
 			ebox = gtk.EventBox()
 			ebox.set_events(gtk.gdk.BUTTON_PRESS_MASK)
 			self.trans_box.append((ebox, name, fname, widget))
-			
+
 			ebox.add(img)
 			hbox.pack_start(ebox, fill=False, expand=False)
 			hbox.show_all()
@@ -493,7 +496,7 @@ class parser_form(widget.view.interface.parser_interface):
 				gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
 		vbox = gtk.VBox(spacing=5)
-		
+
 		entries_list = []
 		table = gtk.Table(len(langs), 2)
 		table.set_homogeneous(False)
@@ -520,7 +523,7 @@ class parser_form(widget.view.interface.parser_interface):
 				value_set(entry,value_get(widget_entry))
 			else:
 				value_set(entry,val[name])
-			
+
 			entries_list.append((val['id'], lang['code'], entry))
 			table.attach(label, 0, 1, i, i+1, yoptions=False, xoptions=gtk.FILL,
 					ypadding=2, xpadding=5)
