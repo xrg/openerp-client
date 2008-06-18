@@ -38,6 +38,7 @@ import widget_search
 
 import signal_event
 import tools
+import service
 
 
 class Screen(signal_event.signal_event):
@@ -226,6 +227,11 @@ class Screen(signal_event.signal_event):
 			self.current_model.validate_set()
 		self.display()
 		self.current_view.set_cursor()
+
+		main = service.LocalService('gui.main')
+		if main:
+			main._update_attachment_button()
+
 		# TODO: set True or False accoring to the type
 
 	def load_view_to_load(self):

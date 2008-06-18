@@ -523,6 +523,29 @@ class terp_main(service.Service):
 		spool = service.LocalService('spool')
 		spool.subscribe('gui.window', self.win_add)
 
+
+		# we now create the icon for the attachment button when there are attachments
+		self.__img_no_attachments = gtk.Image()
+		pxbf = self.window.render_icon(self.buttons['but_attach'].get_stock_id(), self.toolbar.get_icon_size())
+		self.__img_no_attachments.set_from_pixbuf(pxbf)
+		self.__img_no_attachments.show()
+		
+		pxbf = pxbf.copy()
+		w, h = pxbf.get_width(), pxbf.get_height()
+		overlay = self.window.render_icon(gtk.STOCK_APPLY, gtk.ICON_SIZE_MENU)
+		ow, oh = overlay.get_width(), overlay.get_height()
+		overlay.composite(pxbf, 
+						0, h - oh, 
+						ow, oh, 
+						0, h - oh,
+						1.0, 1.0, 
+						gtk.gdk.INTERP_NEAREST, 
+						255)
+
+		self.__img_attachments = gtk.Image()
+		self.__img_attachments.set_from_pixbuf(pxbf)
+		self.__img_attachments.show()
+
 		self.sb_set()
 
 		settings = gtk.settings_get_default()
@@ -863,9 +886,35 @@ class terp_main(service.Service):
 		id = self.status_bar.get_context_id('message')
 		self.status_bar.push(id, message)
 
-	def sb_set(self, view=None):
-		if view==None:
+
+	def _update_attachment_button(self, view = None):
+		"""
+		Update the attachment icon for display the number of attachments
+		"""
+		
+		if not view:
 			view = self._wid_get()
+
+		id = view and view.id_get()
+		cpt = None
+		
+		if id and view.screen.current_view.view_type == 'form':
+			cpt = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'search_count', [('res_model','=',view.model), ('res_id', '=',id)])
+		
+		if cpt:
+			lbl = _('Attachments (%d)') % cpt
+			self.buttons['but_attach'].set_icon_widget(self.__img_attachments)
+		else:
+			lbl = _('Attachments')
+			self.buttons['but_attach'].set_icon_widget(self.__img_no_attachments)
+
+		self.buttons['but_attach'].set_label(lbl)
+	
+
+	def sb_set(self, view=None):
+		if not view:
+			view = self._wid_get()
+		self._update_attachment_button(view)
 		for x in self.buttons:
 			if self.buttons[x]:
 				self.buttons[x].set_sensitive(view and (x in view.handlers))
@@ -895,6 +944,13 @@ class terp_main(service.Service):
 			res = True
 			if button_name in wid.handlers:
 				res = wid.handlers[button_name]()
+				# for those buttons, we refresh the attachment button. 
+				# for the "switch view" button, the action has already
+				# been called by the Screen object of the view (wid)
+				if button_name in ('but_new', 'but_remove', 'but_search', \
+									'but_previous', 'but_next', 'but_open', \
+									'but_close', 'but_reload', 'but_attach', 'but_goto_id'):
+					self._update_attachment_button(wid)
 			if button_name=='but_close' and res:
 				self._win_del()
 
