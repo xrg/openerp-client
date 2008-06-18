@@ -113,19 +113,17 @@ class main(service.Service):
 
 			if datas.get('domain', False):
 				domain.append(datas['domain'])
-			if 'target' in action:
-				if action['target']=='new':
-					dia = dialog(datas['res_model'],window=datas.get('window',None), domain=domain, context=ctx)
-					dia.but_cancel.destroy()
-					dia.but_ok.destroy()
-					print dia.run()
-#					dia.destroy()
-
-			obj = service.LocalService('gui.window')
-			obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
-					action['view_type'], datas.get('window',None), ctx,
-					datas['view_mode'], name=action.get('name', False),
-					limit=datas['limit'], auto_refresh=datas['auto_refresh'])
+			if 'target' in action and action['target']=='new':
+				dia = dialog(datas['res_model'],window=datas.get('window',None), domain=domain, context=ctx)
+				dia.but_cancel.destroy()
+				dia.but_ok.destroy()
+				dia.run()
+			else:
+				obj = service.LocalService('gui.window')
+				obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
+						action['view_type'], datas.get('window',None), ctx,
+						datas['view_mode'], name=action.get('name', False),
+						limit=datas['limit'], auto_refresh=datas['auto_refresh'])
 
 		elif action['type']=='ir.actions.server':
 			ctx = context.copy()
