@@ -14,7 +14,7 @@ by other Spiff components.
       license          = 'GPLv2',
       package_dir      = {'': srcdir},
       packages         = [p for p in find_packages(srcdir)],
-      install_requires = ['pygtk'],
+      install_requires = [],
       keywords         = 'spiff gtk widgets textview annotations',
       url              = 'http://code.google.com/p/spiff/',
       classifiers      = [

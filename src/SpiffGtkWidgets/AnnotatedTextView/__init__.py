@@ -1,3 +1,4 @@
+from Annotation        import Annotation
 from AnnotatedTextView import AnnotatedTextView
 
 import inspect 
