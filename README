@@ -1,0 +1,16 @@
+Spiff Gtk Widgets
+------------------
+This library is part of the Spiff platform.
+
+Spiff Gtk Widgets contains a number of Gtk widgets that are used 
+by other Spiff components.
+
+
+Contact
+--------
+Mailing List: http://groups.google.com/group/spiff-devel/
+
+
+Dependencies
+-------------
+pygtk 2.4 or greater
