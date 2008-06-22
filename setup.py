@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from os.path    import dirname, join
 srcdir = join(dirname(__file__), 'src')
 setup(name             = 'Spiff Gtk Widgets',
-      version          = '1.9.0',
+      version          = '0.1.0',
       description      = 'A collection of useful Gtk widgets',
       long_description = \
 """
