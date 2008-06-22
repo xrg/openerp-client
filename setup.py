@@ -6,8 +6,10 @@ setup(name             = 'Spiff Gtk Widgets',
       description      = 'A collection of useful Gtk widgets',
       long_description = \
 """
-Spiff Gtk Widgets contains a number of Gtk widgets that are used 
-by other Spiff components.
+Spiff Gtk Widgets provides a collection of Gtk widgets:
+
+  - An annotated text view
+  - A calendar similar to Google's online calendar
 """,
       author           = 'Samuel Abels',
       author_email     = 'cheeseshop.python.org@debain.org',
@@ -15,7 +17,7 @@ by other Spiff components.
       package_dir      = {'': srcdir},
       packages         = [p for p in find_packages(srcdir)],
       install_requires = [],
-      keywords         = 'spiff gtk widgets textview annotations',
+      keywords         = 'spiff gtk widgets textview annotations calendar',
       url              = 'http://code.google.com/p/spiff/',
       classifiers      = [
         'Development Status :: 5 - Production/Stable',

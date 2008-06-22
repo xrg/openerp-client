@@ -1,7 +1,7 @@
 import sys, os.path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 import gtk
-from SpiffGtkWidgets import Annotation
+from SpiffGtkWidgets.AnnotatedTextView import Annotation
 
 def on_button_press_event(annot, event):
     annot.set_text('Wow, that felt good.')

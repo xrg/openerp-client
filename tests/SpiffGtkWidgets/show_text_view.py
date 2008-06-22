@@ -1,7 +1,7 @@
 import sys, os.path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 import gtk
-from SpiffGtkWidgets import AnnotatedTextView, Annotation
+from SpiffGtkWidgets.AnnotatedTextView import AnnotatedTextView, Annotation
 
 class Window(gtk.Window):
     def __init__(self):
@@ -26,8 +26,8 @@ class Window(gtk.Window):
         iter       = self.buffer.get_start_iter()
         mark       = self.buffer.create_mark('start', iter)
         annotation = Annotation(mark)
-        annotation.modify_bg(gtk.gdk.color_parse('lightblue'))
-        annotation.modify_border(gtk.gdk.color_parse('blue'))
+        annotation.modify_bg(gtk.gdk.color_parse('orange'))
+        annotation.modify_border(gtk.gdk.color_parse('red'))
         annotation.set_title('Comment')
         annotation.set_text('The very first character is here.')
         annotation.show_all()
@@ -37,8 +37,8 @@ class Window(gtk.Window):
         iter       = self.buffer.get_iter_at_line_offset(2, 0)
         mark       = self.buffer.create_mark('second_line', iter)
         annotation = Annotation(mark)
-        annotation.modify_bg(gtk.gdk.color_parse('lightblue'))
-        annotation.modify_border(gtk.gdk.color_parse('blue'))
+        annotation.modify_bg(gtk.gdk.color_parse('lightgreen'))
+        annotation.modify_border(gtk.gdk.color_parse('green'))
         annotation.set_title('Comment')
         annotation.set_text('Second line is here.')
         annotation.show_all()

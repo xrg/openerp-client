@@ -65,7 +65,7 @@ class AnnotatedTextView(gtk.TextView):
             mark_x, mark_y = self._get_annotation_mark_position(annotation)
             anno_x, anno_y = self.anno_layout.get_annotation_position(annotation)
             anno_x, anno_y, anno_w, anno_h = annotation.get_allocation()
-            path = [(mark_x,           mark_y - 4),
+            path = [(mark_x,           mark_y - 5),
                     (mark_x,           mark_y),
                     (w - right_margin, mark_y),
                     (w,                anno_y + anno_h / 2)]

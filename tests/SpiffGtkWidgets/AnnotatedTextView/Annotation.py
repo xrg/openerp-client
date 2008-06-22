@@ -6,7 +6,7 @@ def suite():
     return unittest.TestSuite(map(AnnotationTest, tests))
 
 import gtk
-from SpiffGtkWidgets import Annotation
+from SpiffGtkWidgets.AnnotatedTextView import Annotation
 
 class AnnotationTest(unittest.TestCase):
     def testAnnotation(self):
