@@ -47,7 +47,7 @@ import service
 
 
 class dialog(object):
-	def __init__(self, model, view_ids=None, id=None, attrs=None ,domain=None, context=None, window=None):
+	def __init__(self, model, id=None, attrs=None ,domain=None, context=None, window=None, view_ids=None):
 		if attrs is None:
 			attrs = {}
 		if domain is None:
@@ -307,21 +307,6 @@ class many2one(interface.widget_interface):
 		return False
 
 	def set_value(self, model, model_field):
-##		print "in first set value))))))))",model, model_field
-##		print "dir(model::::",dir(model),model.value
-##		print "model.mgroup.mfields:::::",model.mgroup.mfields
-#		for widget in model.mgroup.mfields.keys():
-##			print "model.mgroup.mfields[self.widget_name]---->",model.mgroup.mfields[self.widget_name]
-##			print "dir(self.widget)ddddddd",widget
-#			print "dir(self.widget)ddddddd****",model.mgroup.mfields[widget]
-#			if type(model.mgroup.mfields[widget].get(model))==type([]):
-#				print "got list:::::viewwwww"
-#				model.mgroup.mfields[widget].set_client(model,[])
-#			else:
-##			print "model.mgroup.mfields[widget].get():::",model.mgroup.mfields[widget].get(model)
-#				model.mgroup.mfields[widget].set_client(model,False)
-#			print "model.mgroup.mfields[widget].get(AFTER):::",model.mgroup.mfields[widget].get(model)
-##			self.widget.set_value(model, model.mgroup.mfields[self.widget_name])
 		pass # No update of the model, the model is updated in real time !
 
 	def display(self, model, model_field):
