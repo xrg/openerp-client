@@ -529,17 +529,17 @@ class terp_main(service.Service):
 		pxbf = self.window.render_icon(self.buttons['but_attach'].get_stock_id(), self.toolbar.get_icon_size())
 		self.__img_no_attachments.set_from_pixbuf(pxbf)
 		self.__img_no_attachments.show()
-		
+
 		pxbf = pxbf.copy()
 		w, h = pxbf.get_width(), pxbf.get_height()
 		overlay = self.window.render_icon(gtk.STOCK_APPLY, gtk.ICON_SIZE_MENU)
 		ow, oh = overlay.get_width(), overlay.get_height()
-		overlay.composite(pxbf, 
-						0, h - oh, 
-						ow, oh, 
+		overlay.composite(pxbf,
 						0, h - oh,
-						1.0, 1.0, 
-						gtk.gdk.INTERP_NEAREST, 
+						ow, oh,
+						0, h - oh,
+						1.0, 1.0,
+						gtk.gdk.INTERP_NEAREST,
 						255)
 
 		self.__img_attachments = gtk.Image()
@@ -770,12 +770,12 @@ class terp_main(service.Service):
 		return True
 
 	def sig_help_index(self, widget):
-		tools.launch_browser('http://www.tinyerp.org/documentation/user-manual/')
+		tools.launch_browser('http://www.openerp.com/documentation/user-manual/')
 
 	def sig_help_context(self, widget):
 		model = self._wid_get().model
 		l = rpc.session.context.get('lang','en_US')
-		tools.launch_browser('http://www.tinyerp.org/scripts/context_index.php?model=%s&lang=%s' % (model,l))
+		tools.launch_browser('http://www.topenerp.com/scripts/context_index.php?model=%s&lang=%s' % (model,l))
 
 	def sig_tips(self, *args):
 		common.tipoftheday(self.window)
@@ -891,16 +891,16 @@ class terp_main(service.Service):
 		"""
 		Update the attachment icon for display the number of attachments
 		"""
-		
+
 		if not view:
 			view = self._wid_get()
 
 		id = view and view.id_get()
 		cpt = None
-		
+
 		if id and view.screen.current_view.view_type == 'form':
 			cpt = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'search_count', [('res_model','=',view.model), ('res_id', '=',id)])
-		
+
 		if cpt:
 			lbl = _('Attachments (%d)') % cpt
 			self.buttons['but_attach'].set_icon_widget(self.__img_attachments)
@@ -909,7 +909,7 @@ class terp_main(service.Service):
 			self.buttons['but_attach'].set_icon_widget(self.__img_no_attachments)
 
 		self.buttons['but_attach'].set_label(lbl)
-	
+
 
 	def sb_set(self, view=None):
 		if not view:
@@ -944,7 +944,7 @@ class terp_main(service.Service):
 			res = True
 			if button_name in wid.handlers:
 				res = wid.handlers[button_name]()
-				# for those buttons, we refresh the attachment button. 
+				# for those buttons, we refresh the attachment button.
 				# for the "switch view" button, the action has already
 				# been called by the Screen object of the view (wid)
 				if button_name in ('but_new', 'but_remove', 'but_search', \
