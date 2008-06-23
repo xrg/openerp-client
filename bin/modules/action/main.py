@@ -114,7 +114,7 @@ class main(service.Service):
 			if datas.get('domain', False):
 				domain.append(datas['domain'])
 			if 'target' in action and action['target']=='new':
-				dia = dialog(datas['res_model'],view_ids=view_ids,window=datas.get('window',None), domain=domain, context=ctx)
+				dia = dialog(datas['res_model'], window=datas.get('window',None), domain=domain, context=ctx, view_ids=view_ids)
 				dia.but_cancel.destroy()
 				dia.but_ok.destroy()
 				dia.run()
