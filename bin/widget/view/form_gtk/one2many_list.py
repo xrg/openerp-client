@@ -33,6 +33,7 @@ import gtk
 import gettext
 
 import common
+from common import sur
 import wid_common
 
 import interface
@@ -312,9 +313,14 @@ class one2many_list(interface.widget_interface):
 	def _sig_remove(self, *args):
 		_, event = args
 		if event.type == gtk.gdk.BUTTON_PRESS:
-			self.screen.remove()
-			if not self.screen.models.models:
-				self.screen.current_view.widget.set_sensitive(False)
+			if self.screen.current_view.view_type == 'form':
+				msg = 'Are you sure to remove this record ?'
+			else:
+				msg = 'Are you sure to remove these records ?'
+			if common.sur(msg):
+					self.screen.remove()
+					if not self.screen.models.models:
+						self.screen.current_view.widget.set_sensitive(False)
 
 	def _sig_label(self, screen, signal_data):
 		name = '_'
