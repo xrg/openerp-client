@@ -886,24 +886,19 @@ class terp_main(service.Service):
 		id = self.status_bar.get_context_id('message')
 		self.status_bar.push(id, message)
 
-	def __attachment_callback(self, view):
+	def __attachment_callback(self, view, objid):
 		current_view = self._wid_get()
-		if current_view == view:
+		current_id = current_view and current_view.id_get()
+		if current_view == view and objid == current_id:
 			id = view and view.id_get()
 			cpt = None
-
 			if id and view.screen.current_view.view_type == 'form':
 				cpt = rpc.session.rpc_exec_auth('/object', 'execute', 
 												'ir.attachment', 'search_count', 
 												[('res_model','=',view.model), ('res_id', '=',id)])
 			if cpt:
-				lbl = _('Attachments (%d)') % cpt
 				self.buttons['but_attach'].set_icon_widget(self.__img_attachments)
-			else:
-				lbl = _('Attachments')
-				self.buttons['but_attach'].set_icon_widget(self.__img_no_attachments)
-
-			self.buttons['but_attach'].set_label(lbl)
+				self.buttons['but_attach'].set_label(_('Attachments (%d)') % cpt)
 
 
 	def _update_attachment_button(self, view = None):
@@ -912,10 +907,10 @@ class terp_main(service.Service):
 		"""
 		if not view:
 			view = self._wid_get()
-
-		gobject.timeout_add(1500, self.__attachment_callback, view)
-		self.buttons['but_attach'].set_icon_widget(None)
-		self.buttons['but_attach'].set_stock_id(None)
+		
+		id = view and view.id_get()
+		gobject.timeout_add(1500, self.__attachment_callback, view, id)
+		self.buttons['but_attach'].set_icon_widget(self.__img_no_attachments)
 		self.buttons['but_attach'].set_label(_('Attachments'))
 
 
