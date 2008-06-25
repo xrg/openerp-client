@@ -101,6 +101,7 @@ class Button(Observable):
 						[id], model.context_get()
 					)
 					if type(result)==type({}):
+						self.form.screen.window.destroy()
 						datas = {}
 						obj = service.LocalService('action.main')
 						obj._exec_action(result,datas,context=self.form.screen.context)
