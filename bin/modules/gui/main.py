@@ -890,12 +890,11 @@ class terp_main(service.Service):
 		current_view = self._wid_get()
 		current_id = current_view and current_view.id_get()
 		if current_view == view and objid == current_id:
-			id = view and view.id_get()
 			cpt = None
-			if id and view.screen.current_view.view_type == 'form':
+			if objid and view.screen.current_view.view_type == 'form':
 				cpt = rpc.session.rpc_exec_auth('/object', 'execute', 
 												'ir.attachment', 'search_count', 
-												[('res_model','=',view.model), ('res_id', '=',id)])
+												[('res_model', '=', view.model), ('res_id', '=', objid)])
 			if cpt:
 				self.buttons['but_attach'].set_icon_widget(self.__img_attachments)
 				self.buttons['but_attach'].set_label(_('Attachments (%d)') % cpt)
