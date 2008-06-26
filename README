@@ -44,10 +44,10 @@ def on_event_clicked(calendar, event):
 def on_day_selected(calendar, day, event):
     print "Day %s was clicked" % day
 
-event = Calendar.Event('Event number 1',
-                       datetime.datetime(2007, 10, 8, 02),
-                       datetime.datetime(2007, 10, 8, 17),
-                       bg_color = 'lightgreen')
+event = Event('Event number 1',
+              datetime.datetime(2007, 10, 8, 02),
+              datetime.datetime(2007, 10, 8, 17),
+              bg_color = 'lightgreen')
 model.add_event(event)
 
 calendar.connect('event-clicked', on_event_clicked)
