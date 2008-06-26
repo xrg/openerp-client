@@ -575,21 +575,17 @@ class terp_main(service.Service):
 		# Adding a timer the check to requests
 		gobject.timeout_add(5 * 60 * 1000, self.request_set)
 
-	def shortcut_set(self):
+	def shortcut_set(self, sc=None):
 		def _action_shortcut(widget, action):
 			ctx = rpc.session.context.copy()
 			obj = service.LocalService('action.main')
 			obj.exec_keyword('tree_but_open', {'model': 'ir.ui.menu', 'id': action,
 				'ids': [action], 'report_type': 'pdf', 'window': self.window}, context=ctx)
-		uid = rpc.session.uid
-		try:
-			sc = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, 'ir.ui.menu', rpc.session.context)
-		except:
-			sc_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'search', [('user_id', '=', uid), ('resource', '=', 'ir.ui.menu')])
-			if sc_ids:
-				sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'read', sc_ids, ['res_id', 'name'])
-			else:
-				sc = []
+
+		if sc is None:
+			uid = rpc.session.uid
+			sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, 'ir.ui.menu', rpc.session.context) or []
+
 		menu = gtk.Menu()
 		for s in sc:
 			menuitem = gtk.MenuItem(s['name'])
@@ -733,7 +729,6 @@ class terp_main(service.Service):
 				common.message(_('Connection error !\nUnable to connect to the server !'))
 			elif log_response==-2:
 				common.message(_('Connection error !\nBad username or password !'))
-			self.shortcut_set()
 		except rpc.rpc_exception:
 			rpc.session.logout()
 		self.glade.get_widget('but_menu').set_sensitive(True)
