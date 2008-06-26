@@ -78,7 +78,13 @@ translate.setlang()
 
 import options
 
-translate.setlang(options.options['client.lang'])
+# On first run, client won't have a language option,
+# so try with the LANG environ, or fallback to english
+client_lang = options.options['client.lang']
+if client_lang is False:
+	client_lang = os.environ.get('LANG', '')
+
+translate.setlang(client_lang)
 
 for logger in options.options['logging.logger'].split(','):
 	if len(logger):
