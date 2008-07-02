@@ -105,6 +105,7 @@ class tree(object):
 		self.expand = True
 
 	def sig_reload(self, widget=None):
+		self.tree_sc.update()
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', self.domain2)
 		if self.tree_res.toolbar:
 

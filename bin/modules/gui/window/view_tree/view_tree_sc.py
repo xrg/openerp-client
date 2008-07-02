@@ -66,7 +66,7 @@ class view_tree_sc(object):
 
 	def value_get(self, col):
 		sel = self.tree.get_selection().get_selected()
-		if sel==None:
+		if not sel:
 			return None
 		(model, iter) = sel
 		if not iter:
@@ -75,7 +75,8 @@ class view_tree_sc(object):
 
 	def sel_id_get(self):
 		res = self.value_get(0)
-		if res!=None:
+		print 'sel_id_get: %s' % repr(res)
+		if res and not res in ('False', 'None'):
 			return int(res)
 		return None
 
