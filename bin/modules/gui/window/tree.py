@@ -74,7 +74,7 @@ class tree(object):
 			wid.show()
 
 		widget_sc = self.glade.get_widget('win_tree_sc')
-		imagename = 'tinyerp.png'
+		#imagename = 'tinyerp.png'
 
 		widget_sc.connect('row-activated', self.sc_go)
 		self.tree_sc = view_tree.view_tree_sc(widget_sc, self.model)
@@ -94,6 +94,7 @@ class tree(object):
 			'on_but_sc_add_clicked': self.sc_add,
 			'on_but_sc_del_clicked': self.sc_del,
 			'on_but_expand_collapse_clicked': self.expand_collapse_all,
+			'on_tbsc_clicked': self.sc_btn,
 		}
 
 		self.vp.add(self.tree_res.widget_get())
@@ -262,6 +263,10 @@ class tree(object):
 	def sig_printscreen(self, widget=None):
 		ids = self.tree_res.ids
 		pass
+
+	def sc_btn(self, widget):
+		main = service.LocalService('gui.main')
+		main.shortcut_edit(widget, self.domain)
 
 	def sc_del(self, widget):
 		id = self.tree_sc.sel_id_get()

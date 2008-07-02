@@ -575,6 +575,12 @@ class terp_main(service.Service):
 		# Adding a timer the check to requests
 		gobject.timeout_add(5 * 60 * 1000, self.request_set)
 
+
+	def shortcut_edit(self, widget, model='ir.ui.menu'):
+		obj = service.LocalService('gui.window')
+		domain = [('user_id', '=', rpc.session.uid), ('resource', '=', model)]
+		obj.create(False, 'ir.ui.view_sc', res_id=None, domain=domain, view_type='form', mode='tree,form')
+
 	def shortcut_set(self, sc=None):
 		def _action_shortcut(widget, action):
 			ctx = rpc.session.context.copy()
@@ -591,6 +597,12 @@ class terp_main(service.Service):
 			menuitem = gtk.MenuItem(s['name'])
 			menuitem.connect('activate', _action_shortcut, s['res_id'])
 			menu.add(menuitem)
+
+		menu.add(gtk.SeparatorMenuItem())
+		menuitem = gtk.MenuItem(_('Edit'))
+		menuitem.connect('activate', self.shortcut_edit)
+		menu.add(menuitem)
+
 		menu.show_all()
 		self.shortcut_menu.set_submenu(menu)
 		self.shortcut_menu.set_sensitive(True)
