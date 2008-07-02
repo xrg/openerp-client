@@ -266,7 +266,7 @@ class tree(object):
 
 	def sc_btn(self, widget):
 		main = service.LocalService('gui.main')
-		main.shortcut_edit(widget, self.domain)
+		main.shortcut_edit(widget, self.model)
 
 	def sc_del(self, widget):
 		id = self.tree_sc.sel_id_get()
