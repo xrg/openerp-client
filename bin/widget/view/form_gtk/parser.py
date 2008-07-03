@@ -74,6 +74,14 @@ class Button(Observable):
 		button_type = self.attrs.get('special', '')
 		if button_type=='cancel':
 			self.form.screen.window.destroy()
+			if 'name' in self.attrs.keys():
+				result = rpc.session.rpc_exec_auth(
+							'/object', 'execute',
+							self.form.screen.name,
+							self.attrs['name'],[], model.context_get())
+				datas = {}
+				obj = service.LocalService('action.main')
+				obj._exec_action(result,datas,context=self.form.screen.context)
 		elif model.validate():
 			id = self.form.screen.save_current()
 			if not self.attrs.get('confirm',False) or \
