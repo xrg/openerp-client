@@ -44,10 +44,14 @@ class selection(interface.widget_interface):
 		self.entry.child.set_property('activates_default', True)
 		self.entry.child.connect('changed', self.sig_changed)
 		self.entry.child.connect('button_press_event', self._menu_open)
+		self.entry.child.connect('key_press_event', self.sig_key_press)
 		self.entry.child.connect('activate', self.sig_activate)
 		self.entry.child.connect_after('focus-out-event', self.sig_activate)
 		self.entry.set_size_request(int(attrs.get('size', -1)), -1)
 		self.widget.pack_start(self.entry, expand=True, fill=True)
+
+		# the dropdown button is not focusable by a tab
+		self.widget.set_focus_chain([self.entry.child])
 
 		self.ok = True
 		self._selection={}
@@ -75,6 +79,13 @@ class selection(interface.widget_interface):
 	def value_get(self):
 		res = self.entry.child.get_text()
 		return self._selection.get(res, False)
+
+	def sig_key_press(self, widget, event):
+		# allow showing available entries by hitting "ctrl+space"
+		if event.type == gtk.gdk.KEY_PRESS \
+			and event.state == (gtk.gdk.CONTROL_MASK | gtk.gdk.MOD2_MASK) \
+			and event.keyval == ord(' '):
+			self.entry.popup()
 
 	def sig_activate(self, *args):
 		text = self.entry.child.get_text()
