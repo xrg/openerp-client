@@ -715,9 +715,15 @@ class terp_main(service.Service):
 		except:
 			return ([],[])
 
-	def sig_login(self, widget=None, dbname=False, res=None):
+	def sig_login(self, widget=None, dbname=False):
+		RES_OK = 1
+		RES_BAD_PASSWORD = -2
+		RES_CNX_ERROR = -1
+
 		try:
-			if not res:
+			log_response = RES_BAD_PASSWORD
+			res = None
+			while log_response == RES_BAD_PASSWORD:
 				try:
 					l = db_login()
 					res = l.run(dbname=dbname, parent=self.window)
@@ -725,25 +731,26 @@ class terp_main(service.Service):
 					if e.args == ('QueryCanceled',):
 						return False
 					raise
-			service.LocalService('gui.main').window.present()
-			self.sig_logout(widget)
-			log_response = rpc.session.login(*res)
-			if log_response==1:
-				options.options.save()
-				id = self.sig_win_menu(quiet=False)
-				if id:
-					self.sig_home_new(quiet=True, except_id=id)
-				if res[4] == 'https://':
-					self.secure_img.show()
-				else:
-					self.secure_img.hide()
-				self.request_set()
-			elif log_response==-1:
-				common.message(_('Connection error !\nUnable to connect to the server !'))
-			elif log_response==-2:
-				common.message(_('Connection error !\nBad username or password !'))
+				service.LocalService('gui.main').window.present()
+				self.sig_logout(widget)
+				log_response = rpc.session.login(*res)
+				if log_response == RES_OK:
+					options.options.save()
+					id = self.sig_win_menu(quiet=False)
+					if id:
+						self.sig_home_new(quiet=True, except_id=id)
+					if res[4] == 'https://':
+						self.secure_img.show()
+					else:
+						self.secure_img.hide()
+					self.request_set()
+				elif log_response == RES_CNX_ERROR:
+					common.message(_('Connection error !\nUnable to connect to the server !'))
+				elif log_response == RES_BAD_PASSWORD:
+					common.message(_('Connection error !\nBad username or password !'))
 		except rpc.rpc_exception:
 			rpc.session.logout()
+			raise
 		self.glade.get_widget('but_menu').set_sensitive(True)
 		self.glade.get_widget('user').set_sensitive(True)
 		self.glade.get_widget('form').set_sensitive(True)
