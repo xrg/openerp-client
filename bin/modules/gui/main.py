@@ -254,7 +254,7 @@ class db_create(object):
 		self.server_widget = self.dialog.get_widget('ent_server_new')
 		change_button = self.dialog.get_widget('but_server_new')
 		self.lang_widget = self.dialog.get_widget('db_create_combo')
-		self.db_widget = self.dialog.get_widget('ent_db')
+		self.db_widget = self.dialog.get_widget('ent_db_new')
 		demo_widget = self.dialog.get_widget('check_demo')
 		demo_widget.set_active(True)
 
