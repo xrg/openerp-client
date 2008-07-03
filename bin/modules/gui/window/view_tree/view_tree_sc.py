@@ -75,9 +75,9 @@ class view_tree_sc(object):
 
 	def sel_id_get(self):
 		res = self.value_get(0)
-		print 'sel_id_get: %s' % repr(res)
-		if res and not res in ('False', 'None'):
-			return int(res)
+		res = eval(str(res))
+		if res:
+			return int(res[0])
 		return None
 
 	def serv_update(self, ids, action):
