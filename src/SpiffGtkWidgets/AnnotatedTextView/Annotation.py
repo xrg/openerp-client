@@ -97,6 +97,10 @@ class Annotation(gtk.EventBox):
         self.buffer.apply_tag_by_name('title', start, end)
 
 
+    def get_title(self):
+        return self.title
+
+
     def set_text(self, text):
         # Clear the old editable text.
         start = self.buffer.get_start_iter()
@@ -106,3 +110,9 @@ class Annotation(gtk.EventBox):
         # Append the new text.
         self.buffer.insert(end, text)
         self.set_title(self.title)
+
+
+    def get_text(self):
+        start = self.buffer.get_iter_at_offset(self.title_len)
+        end   = self.buffer.get_end_iter()
+        return self.buffer.get_text(start, end)

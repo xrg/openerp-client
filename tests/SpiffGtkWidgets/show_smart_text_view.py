@@ -5,8 +5,6 @@ import gtk
 from SpiffGtkWidgets.SmartTextView import SmartTextView, Annotation
 
 class Window(gtk.Window):
-    n_annotations = 0
-
     def __init__(self):
         gtk.Window.__init__(self)
         self.vbox   = gtk.VBox()
@@ -21,15 +19,9 @@ class Window(gtk.Window):
         self.vbox.set_spacing(6)
         self.hbox.set_spacing(6)
 
-        button = gtk.Button(label = "Add annotation")
-        button.connect('clicked', self._on_button_add_annotation_clicked)
-        self.hbox.pack_start(button)
         button = gtk.Button(label = "Bold")
+        button.set_properties(can_focus = False)
         button.connect('clicked', self._on_button_bold_clicked)
-        self.hbox.pack_start(button)
-        button = gtk.ToggleButton(label = "Show annotations")
-        button.set_active(True)
-        button.connect('toggled', self._on_button_show_annotations_toggled)
         self.hbox.pack_start(button)
 
         # Pack widgets.
@@ -37,27 +29,9 @@ class Window(gtk.Window):
         self.add(self.vbox)
         self.vbox.pack_start(self.hbox, False)
         self.vbox.pack_start(self.scroll)
-
         self.show_all()
 
         self.bold = self.buffer.create_tag('bold', weight = pango.WEIGHT_BOLD)
-
-
-    def _mk_annotation_name(self):
-        self.n_annotations += 1
-        return 'annotation%d' % self.n_annotations
-
-
-    def _on_button_add_annotation_clicked(self, button):
-        cursor_pos = self.buffer.get_property('cursor-position')
-        start      = self.buffer.get_iter_at_offset(cursor_pos)
-        mark       = self.buffer.create_mark(self._mk_annotation_name(), start)
-        annotation = Annotation(mark)
-        annotation.modify_bg(gtk.gdk.color_parse('lightblue'))
-        annotation.modify_border(gtk.gdk.color_parse('blue'))
-        annotation.set_title('Comment')
-        annotation.show_all()
-        self.view.add_annotation(annotation)
 
 
     def _on_button_bold_clicked(self, button):
@@ -65,11 +39,6 @@ class Window(gtk.Window):
         if not bounds:
             return
         self.buffer.apply_tag(self.bold, *bounds)
-
-
-    def _on_button_show_annotations_toggled(self, button):
-        active = button.get_active()
-        self.view.set_show_annotations(active)
 
 
 # Create widgets.

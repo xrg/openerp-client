@@ -25,7 +25,6 @@ class AnnotatedTextView(gtk.TextView):
         self.anno_layout      = Layout(self)
         self.annotations      = {}
         self.show_annotations = True
-        self.set_left_margin(10)
         self.set_right_margin(50 + self.anno_padding)
         self.connect('expose_event', self._on_expose_event)
         self.get_buffer().connect('mark-set', self._on_buffer_mark_set)

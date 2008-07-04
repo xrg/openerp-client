@@ -30,7 +30,7 @@ class SmartTextView(AnnotatedTextView):
         return False
 
 
-    def _on_buffer_insert_text(self, buffer, iter, text, length):
+    def _auto_indent_bullet_points(self, buffer, iter, text, length):
         iter = iter.copy()
         iter.backward_chars(length)
         iter.set_line(iter.get_line())
@@ -58,3 +58,7 @@ class SmartTextView(AnnotatedTextView):
             else:
                 buffer.apply_tag(self.li_tag, iter, end)
             iter.forward_line()
+
+
+    def _on_buffer_insert_text(self, buffer, iter, text, length):
+        self._auto_indent_bullet_points(buffer, iter, text, length)
