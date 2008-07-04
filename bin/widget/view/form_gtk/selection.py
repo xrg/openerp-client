@@ -82,9 +82,9 @@ class selection(interface.widget_interface):
 
 	def sig_key_press(self, widget, event):
 		# allow showing available entries by hitting "ctrl+space"
-		if event.type == gtk.gdk.KEY_PRESS \
-			and event.state == (gtk.gdk.CONTROL_MASK | gtk.gdk.MOD2_MASK) \
-			and event.keyval == ord(' '):
+		if (event.type == gtk.gdk.KEY_PRESS) \
+			and ((event.state & gtk.gdk.CONTROL_MASK) != 0) \
+			and (event.keyval == gtk.keysyms.space):
 			self.entry.popup()
 
 	def sig_activate(self, *args):
