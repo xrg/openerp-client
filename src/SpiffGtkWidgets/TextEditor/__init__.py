@@ -1,5 +1,5 @@
 from SpiffGtkWidgets.AnnotatedTextView import Annotation
-from SmartTextView                     import SmartTextView
+from TextEditor                        import TextEditor
 
 import inspect 
 __all__ = [name for name, obj in locals().items()

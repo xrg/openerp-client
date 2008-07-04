@@ -1,6 +1,6 @@
 import AnnotatedTextView
 import Calendar
-import SmartTextView
+import TextEditor
 import color
 
 import inspect 
