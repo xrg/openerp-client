@@ -97,14 +97,32 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 		res = method(new_model)
 		return res
 
+
+	# if changed, please update the corresponded method in the DecoratedTreeView class
+	def get_columns(self, include_non_visible=True, include_non_editable=True):
+		def column_is_editable(column):
+			renderer = column.get_cell_renderers()[0]
+			if isinstance(renderer, gtk.CellRendererToggle):
+				return renderer.get_property('activatable')
+			else:
+				return renderer.get_property('editable')
+		
+		columns = super(EditableTreeView, self).get_columns()
+		if not include_non_visible:
+			columns = filter(lambda c: c.get_visible(), columns)
+		if not include_non_editable:
+			columns = filter(lambda c: column_is_editable(c), columns)
+		return columns
+
+
 	def __next_column(self, col):
-		cols = self.get_columns()
+		cols = self.get_columns(False, False)
 		current = cols.index(col)
 		idx = (current + 1) % len(cols)
 		return cols[idx]
 
 	def __prev_column(self, col):
-		cols = self.get_columns()
+		cols = self.get_columns(False, False)
 		current = cols.index(col)
 		idx = (current - 1) % len(cols)
 		return cols[idx]
@@ -194,7 +212,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 				new_path = self._key_up(path, store, column)
 			else:
 				new_path = self._key_down(path,store,column)
-			col = self.get_columns()[0]
+			col = self.get_columns(False, False)[0]
 			self.set_cursor(new_path, col, True)
 		elif event.keyval == gtk.keysyms.Escape:
 			if model.id is None:

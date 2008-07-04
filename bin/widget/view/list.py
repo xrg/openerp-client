@@ -308,16 +308,8 @@ class ViewList(parser_view):
 	def set_cursor(self, new=False):
 		if self.screen.current_model:
 			path = self.store.on_get_path(self.screen.current_model)
-			focus_column = None
-			for column in self.widget_tree.get_columns():
-				renderer = column.get_cell_renderers()[0]
-				if isinstance(renderer, gtk.CellRendererToggle):
-					editable = renderer.get_property('activatable')
-				else:
-					editable = renderer.get_property('editable')
-				if column.get_visible() and editable:
-					focus_column = column
-					break
+			columns = self.widget_tree.get_columns(include_non_visible=False, include_non_editable=False)
+			focus_column = len(columns) and columns[0] or None
 			self.widget_tree.set_cursor(path, focus_column, new)
 
 	def sel_ids_get(self):
