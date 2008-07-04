@@ -20,10 +20,11 @@ from Layout          import Layout
 class AnnotatedTextView(gtk.TextView):
     def __init__(self, *args, **kwargs):
         gtk.TextView.__init__(self, *args, **kwargs)
-        self.anno_width   = 200
-        self.anno_padding = 10
-        self.anno_layout  = Layout(self)
-        self.annotations  = {}
+        self.anno_width       = 200
+        self.anno_padding     = 10
+        self.anno_layout      = Layout(self)
+        self.annotations      = {}
+        self.show_annotations = True
         self.set_left_margin(10)
         self.set_right_margin(50 + self.anno_padding)
         self.connect('expose_event', self._on_expose_event)
@@ -45,9 +46,9 @@ class AnnotatedTextView(gtk.TextView):
 
         # Restrict Cairo to the exposed area; avoid extra work
         ctx.rectangle(event.area.x,
-                     event.area.y,
-                     event.area.width,
-                     event.area.height)
+                      event.area.y,
+                      event.area.width,
+                      event.area.height)
         ctx.clip()
 
         self.draw(ctx, *event.window.get_size())
@@ -55,6 +56,8 @@ class AnnotatedTextView(gtk.TextView):
 
     def draw(self, ctx, w, h):
         if ctx is None:
+            return
+        if not self.show_annotations:
             return
 
         # Draw the dashes that connect annotations to their marker.
@@ -91,7 +94,7 @@ class AnnotatedTextView(gtk.TextView):
     def _get_annotation_mark_position(self, annotation):
         iter           = self.get_buffer().get_iter_at_mark(annotation.mark)
         rect           = self.get_iter_location(iter)
-        mark_x, mark_y = rect.x + rect.width, rect.y + rect.height
+        mark_x, mark_y = rect.x, rect.y + rect.height
         return self.window_to_buffer_coords(gtk.TEXT_WINDOW_TEXT,
                                             mark_x,
                                             mark_y)
@@ -107,14 +110,6 @@ class AnnotatedTextView(gtk.TextView):
         self.anno_layout.pull(annotation, mark_y)
 
 
-    def _connect_annotation(self, annotation):
-        mark_x, mark_y = self._get_annotation_mark_position(annotation)
-        anno_x, anno_y = self.anno_layout.get_annotation_position(annotation)
-
-        path = [(mark_x, mark_y), (anno_x, anno_y)]
-        #FIXME
-
-
     def _update_annotation_area(self):
         # Update the width and color of the annotation area.
         self.set_border_window_size(gtk.TEXT_WINDOW_RIGHT, self.anno_width)
@@ -124,6 +119,9 @@ class AnnotatedTextView(gtk.TextView):
 
 
     def _update_annotations(self):
+        if not self.show_annotations:
+            return
+
         # Sort the annotations by line/char number and update them.
         iter   = self.get_buffer().get_end_iter()
         rect   = self.get_iter_location(iter)
@@ -144,11 +142,38 @@ class AnnotatedTextView(gtk.TextView):
 
 
     def add_annotation(self, annotation):
+        self.annotations[annotation.mark] = annotation
+        if self.show_annotations == False:
+            return
+
         self._update_annotation_area()
         self.anno_layout.add(annotation)
-        self.annotations[annotation.mark] = annotation
         self.add_child_in_window(annotation,
                                  gtk.TEXT_WINDOW_RIGHT,
                                  self.anno_padding,
                                  0)
         self._update_annotations()
+
+
+    def remove_annotation(self, annotation):
+        self.anno_layout.remove(annotation)
+        del self.annotations[annotation.mark]
+        self.remove(annotation)
+
+
+    def set_show_annotations(self, active = True):
+        if self.show_annotations == active:
+            return
+
+        # Unfortunately gtk.TextView deletes all children from the 
+        # border window if its size is 0. So we must re-add them when the 
+        # window reappears.
+        self.show_annotations = active
+        if active:
+            for annotation in self.annotations.itervalues():
+                self.add_annotation(annotation)
+        else:
+            for annotation in self.annotations.itervalues():
+                self.anno_layout.remove(annotation)
+                self.remove(annotation)
+            self.set_border_window_size(gtk.TEXT_WINDOW_RIGHT, 0)

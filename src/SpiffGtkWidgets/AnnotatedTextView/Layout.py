@@ -28,6 +28,11 @@ class Layout(object):
         self.boxes[annotation] = LayoutBox(self, annotation)
 
 
+    def remove(self, annotation):
+        self.annotations.remove(annotation)
+        del self.boxes[annotation]
+
+
     def pull(self, annotation, position):
         self.boxes[annotation].pull = position
 
