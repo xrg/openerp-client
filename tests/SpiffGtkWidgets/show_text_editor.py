@@ -26,27 +26,54 @@ class Window(gtk.Window):
         self.scroll = gtk.ScrolledWindow()
         self.view   = TextEditor()
         buffer      = self.view.get_buffer()
+        self.bold   = buffer.create_tag('bold',   weight = pango.WEIGHT_BOLD)
+        self.italic = buffer.create_tag('italic', style  = pango.STYLE_ITALIC)
+        self.uline  = buffer.create_tag('underline',
+                                        underline = pango.UNDERLINE_SINGLE)
         self.view.modify_font(pango.FontDescription("Arial 12"))
         self.scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         self.set_size_request(600, 600)
         self.vbox.set_border_width(6)
         self.vbox.set_spacing(6)
         self.hbox.set_spacing(6)
+        buffer.connect('undo-stack-changed',
+                       self._on_buffer_undo_stack_changed)
 
         button = gtk.Button(stock = gtk.STOCK_BOLD)
         button.set_properties(can_focus = False)
-        button.connect('clicked', self._on_button_bold_clicked, buffer)
+        button.connect('clicked',
+                       self._on_button_format_clicked,
+                       buffer,
+                       self.bold)
         self.hbox.pack_start(button, False)
 
-        button = gtk.Button(stock = gtk.STOCK_UNDO)
+        button = gtk.Button(stock = gtk.STOCK_ITALIC)
         button.set_properties(can_focus = False)
-        button.connect('clicked', self._on_button_undo_clicked, buffer)
+        button.connect('clicked',
+                       self._on_button_format_clicked,
+                       buffer,
+                       self.italic)
         self.hbox.pack_start(button, False)
 
-        button = gtk.Button(stock = gtk.STOCK_REDO)
+        button = gtk.Button(stock = gtk.STOCK_UNDERLINE)
         button.set_properties(can_focus = False)
-        button.connect('clicked', self._on_button_redo_clicked, buffer)
+        button.connect('clicked',
+                       self._on_button_format_clicked,
+                       buffer,
+                       self.uline)
         self.hbox.pack_start(button, False)
+
+        self.undo_button = gtk.Button(stock = gtk.STOCK_UNDO)
+        self.undo_button.set_properties(can_focus = False)
+        self.undo_button.set_sensitive(buffer.can_undo())
+        self.undo_button.connect('clicked', self._on_button_undo_clicked, buffer)
+        self.hbox.pack_start(self.undo_button, False)
+
+        self.redo_button = gtk.Button(stock = gtk.STOCK_REDO)
+        self.redo_button.set_properties(can_focus = False)
+        self.redo_button.set_sensitive(buffer.can_redo())
+        self.redo_button.connect('clicked', self._on_button_redo_clicked, buffer)
+        self.hbox.pack_start(self.redo_button, False)
 
         # Pack widgets.
         self.scroll.add_with_viewport(self.view)
@@ -55,14 +82,17 @@ class Window(gtk.Window):
         self.vbox.pack_start(self.scroll)
         self.show_all()
 
-        self.bold = buffer.create_tag('bold', weight = pango.WEIGHT_BOLD)
+
+    def _on_buffer_undo_stack_changed(self, buffer):
+        self.undo_button.set_sensitive(buffer.can_undo())
+        self.redo_button.set_sensitive(buffer.can_redo())
 
 
-    def _on_button_bold_clicked(self, button, buffer):
+    def _on_button_format_clicked(self, button, buffer, format):
         bounds = buffer.get_selection_bounds()
         if not bounds:
             return
-        buffer.apply_tag(self.bold, *bounds)
+        buffer.apply_tag(format, *bounds)
 
 
     def _on_button_undo_clicked(self, button, buffer):

@@ -14,8 +14,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 import gtk, re, pango, time, gobject
-from UndoTag        import UndoTag
-from UndoText       import UndoText
+from UndoInsertText import UndoInsertText
+from UndoDeleteText import UndoDeleteText
+from UndoApplyTag   import UndoApplyTag
+from UndoRemoveTag  import UndoRemoveTag
 from UndoCollection import UndoCollection
 
 bullet_point_re = re.compile(r'^(?:\d+\.|[\*\-])$')
@@ -25,7 +27,7 @@ class TextBuffer(gtk.TextBuffer):
         gtk.TextBuffer.__init__(self, *args)
         self.undo_stack      = []
         self.redo_stack      = []
-        self.current_undo    = UndoCollection()
+        self.current_undo    = UndoCollection(self)
         self.lock_undo       = False
         self.max_undo        = 250
         self.max_redo        = 250
@@ -113,24 +115,20 @@ class TextBuffer(gtk.TextBuffer):
                                                    self._cancel_undo_timeout)
 
 
-    def _on_insert_text(self, buffer, iter, text, length):
+    def _on_insert_text(self, buffer, start, text, length):
         if self.lock_undo:
             return
         self._update_timestamp()
-        start = iter.get_offset()
-        end   = start + len(unicode(text))
-        item  = UndoText('inserted', start, end, text)
+        item = UndoInsertText(self, start, text)
         self.current_undo.add(item)
+        self.emit('undo-stack-changed')
 
 
     def _on_delete_range(self, buffer, start, end):
         if self.lock_undo:
             return
         self._update_timestamp()
-        text  = buffer.get_text(start, end)
-        start = start.get_offset()
-        end   = end.get_offset()
-        item  = UndoText('deleted', start, end, text)
+        item = UndoDeleteText(self, start, end)
         self.current_undo.add(item)
 
 
@@ -138,7 +136,7 @@ class TextBuffer(gtk.TextBuffer):
         if self.lock_undo:
             return
         self._update_timestamp()
-        item = UndoTag('applied', start, end, tag, buffer)
+        item = UndoApplyTag(self, start, end, tag)
         self.current_undo.add(item)
 
 
@@ -146,7 +144,7 @@ class TextBuffer(gtk.TextBuffer):
         if self.lock_undo:
             return
         self._update_timestamp()
-        item = UndoTag('removed', start, end, tag, buffer)
+        item = UndoRemoveTag(self, start, end, tag)
         self.current_undo.add(item)
 
 
@@ -164,19 +162,21 @@ class TextBuffer(gtk.TextBuffer):
             return
         self._undo_add(self.current_undo)
         self.redo_stack = []
-        self.current_undo = UndoCollection()
+        self.current_undo = UndoCollection(self)
 
 
     def _undo_add(self, item):
         self.undo_stack.append(item)
         while len(self.undo_stack) >= self.max_undo:
             self.undo_stack.pop(0)
+        self.emit('undo-stack-changed')
 
 
     def _redo_add(self, item):
         self.redo_stack.append(item)
         while len(self.redo_stack) >= self.max_redo:
             self.redo_stack.pop(0)
+        self.emit('undo-stack-changed')
 
 
     def insert_at_offset(self, offset, text):
@@ -202,15 +202,47 @@ class TextBuffer(gtk.TextBuffer):
         self.remove_tag(tag, start, end)
 
 
+    def get_tags_at_offset(self, start, end):
+        taglist = []
+        iter    = self.get_iter_at_offset(start)
+        while True:
+            taglist.append(iter.get_tags())
+            iter.forward_char()
+            if iter.get_offset() >= end:
+                break
+        return taglist
+
+
+    def apply_tags_at_offset(self, taglist, start, end):
+        end   = self.get_iter_at_offset(start + 1)
+        start = self.get_iter_at_offset(start)
+        for tags in taglist:
+            for tag in tags:
+                self.apply_tag(tag, start, end)
+            start.forward_char()
+            end.forward_char()
+
+
+    def can_undo(self):
+        if self.current_undo is not None \
+          and len(self.current_undo.children) > 0:
+            return True
+        return len(self.undo_stack) > 0
+
+
     def undo(self):
         self._cancel_undo_timeout()
         if len(self.undo_stack) == 0:
             return
         self.lock_undo = True
         item = self.undo_stack.pop()
-        item.undo(self)
+        item.undo()
         self._redo_add(item)
         self.lock_undo = False
+
+
+    def can_redo(self):
+        return len(self.redo_stack) > 0
 
 
     def redo(self):
@@ -219,6 +251,15 @@ class TextBuffer(gtk.TextBuffer):
             return
         self.lock_undo = True
         item = self.redo_stack.pop()
-        item.redo(self)
+        item.redo()
         self._undo_add(item)
         self.lock_undo = False
+
+
+gobject.signal_new('undo-stack-changed',
+                   TextBuffer,
+                   gobject.SIGNAL_RUN_FIRST,
+                   gobject.TYPE_NONE,
+                   ())
+
+gobject.type_register(TextBuffer)

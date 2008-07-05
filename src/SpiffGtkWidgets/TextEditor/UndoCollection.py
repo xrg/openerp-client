@@ -16,8 +16,8 @@
 from Undoable import Undoable
 
 class UndoCollection(Undoable):
-    def __init__(self):
-        Undoable.__init__(self)
+    def __init__(self, buffer):
+        Undoable.__init__(self, buffer, None)
         self.children = []
 
 
@@ -25,11 +25,11 @@ class UndoCollection(Undoable):
         self.children.append(child)
 
 
-    def undo(self, buffer):
+    def undo(self):
         for child in reversed(self.children):
-            child.undo(buffer)
+            child.undo()
 
 
-    def redo(self, buffer):
+    def redo(self):
         for child in self.children:
-            child.redo(buffer)
+            child.redo()
