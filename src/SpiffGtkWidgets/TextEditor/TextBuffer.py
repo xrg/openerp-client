@@ -138,9 +138,7 @@ class TextBuffer(gtk.TextBuffer):
         if self.lock_undo:
             return
         self._update_timestamp()
-        start = start.get_offset()
-        end   = end.get_offset()
-        item  = UndoTag('applied', start, end, tag)
+        item = UndoTag('applied', start, end, tag, buffer)
         self.current_undo.add(item)
 
 
@@ -148,9 +146,7 @@ class TextBuffer(gtk.TextBuffer):
         if self.lock_undo:
             return
         self._update_timestamp()
-        start = start.get_offset()
-        end   = end.get_offset()
-        item  = UndoTag('removed', start, end, tag)
+        item = UndoTag('removed', start, end, tag, buffer)
         self.current_undo.add(item)
 
 

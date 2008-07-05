@@ -16,18 +16,42 @@
 from Undoable import Undoable
 
 class UndoTag(Undoable):
-    def __init__(self, action, start, end, tag):
+    def __init__(self, action, startiter, enditer, tag, buffer):
         Undoable.__init__(self)
-        self.action = action
-        self.start  = start
-        self.end    = end
-        self.tag    = tag
+        self.action   = action
+        self.start    = startiter.get_offset()
+        self.end      = enditer.get_offset()
+        self.old_tags = self._get_tags(buffer)
+        self.tag      = tag
+
+
+    def _get_tags(self, buffer):
+        taglist = []
+        iter    = buffer.get_iter_at_offset(self.start)
+        while True:
+            taglist.append(iter.get_tags())
+            iter.forward_char()
+            if iter.get_offset() >= self.end:
+                break
+        return taglist
+
+
+    def _apply_tags(self, buffer, taglist):
+        start = buffer.get_iter_at_offset(self.start)
+        end   = buffer.get_iter_at_offset(self.start + 1)
+        for tags in taglist:
+            for tag in tags:
+                buffer.apply_tag(tag, start, end)
+            start.forward_char()
+            end.forward_char()
+
 
     def undo(self, buffer):
         if self.action == 'applied':
             buffer.remove_tag_at_offset(self.tag, self.start, self.end)
+            self._apply_tags(buffer, self.old_tags)
         else:
-            buffer.apply_tag_at_offset(self.tag, self.start, self.end)
+            self._apply_tags(buffer, self.old_tags)
 
 
     def redo(self, buffer):
