@@ -69,7 +69,7 @@ event = Calendar.Event('Eight-day Event',
                        text_color = 'white')
 model.add_event(event)
 
-#calendar.select_from_tuple((2007, 10, 8))
+#calendar.select_from_tuple((2008, 10, 8))
 #calendar.select_next_page()
 #calendar.select_previous_page()
 window.add(calendar)
