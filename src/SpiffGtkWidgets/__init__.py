@@ -1,4 +1,3 @@
-import AnnotatedTextView
 import Calendar
 import TextEditor
 import color

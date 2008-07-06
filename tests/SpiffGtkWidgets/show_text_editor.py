@@ -16,9 +16,11 @@
 import sys, os.path, pango
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 import gtk
-from SpiffGtkWidgets.TextEditor import TextEditor
+from SpiffGtkWidgets.TextEditor import TextEditor, Annotation
 
 class Window(gtk.Window):
+    n_annotations = 0
+
     def __init__(self):
         gtk.Window.__init__(self)
         self.vbox   = gtk.VBox()
@@ -39,6 +41,7 @@ class Window(gtk.Window):
         buffer.connect('undo-stack-changed',
                        self._on_buffer_undo_stack_changed)
 
+        # Format changing buttons.
         button = gtk.Button(stock = gtk.STOCK_BOLD)
         button.set_properties(can_focus = False)
         button.connect('clicked',
@@ -63,6 +66,7 @@ class Window(gtk.Window):
                        self.uline)
         self.hbox.pack_start(button, False)
 
+        # Undo/redo buttons.
         self.undo_button = gtk.Button(stock = gtk.STOCK_UNDO)
         self.undo_button.set_properties(can_focus = False)
         self.undo_button.set_sensitive(buffer.can_undo())
@@ -74,6 +78,18 @@ class Window(gtk.Window):
         self.redo_button.set_sensitive(buffer.can_redo())
         self.redo_button.connect('clicked', self._on_button_redo_clicked, buffer)
         self.hbox.pack_start(self.redo_button, False)
+
+        # Annotation buttons.
+        button = gtk.Button(label = "Add annotation")
+        button.set_properties(can_focus = False)
+        button.connect('clicked', self._on_button_add_annotation_clicked)
+        self.hbox.pack_start(button)
+
+        button = gtk.ToggleButton(label = "Show annotations")
+        button.set_active(True)
+        button.set_properties(can_focus = False)
+        button.connect('toggled', self._on_button_show_annotations_toggled)
+        self.hbox.pack_start(button)
 
         # Pack widgets.
         self.scroll.add_with_viewport(self.view)
@@ -101,6 +117,43 @@ class Window(gtk.Window):
 
     def _on_button_redo_clicked(self, button, buffer):
         buffer.redo()
+
+
+    def _mk_annotation_name(self):
+        self.n_annotations += 1
+        return 'annotation%d' % self.n_annotations
+
+
+    def _on_annotation_buffer_changed(self, buffer, annotation):
+        if buffer.get_text(*buffer.get_bounds()) == '':
+            self.view.remove_annotation(annotation)
+
+
+    def _add_annotation(self, mark):
+        annotation = Annotation(mark)
+        annotation.modify_bg(gtk.gdk.color_parse('lightblue'))
+        annotation.modify_border(gtk.gdk.color_parse('blue'))
+        annotation.set_title('Annotation')
+        annotation.set_text('Annotation number %d.' % self.n_annotations)
+        annotation.show_all()
+        self.view.add_annotation(annotation)
+        annotation.buffer.connect('changed',
+                                  self._on_annotation_buffer_changed,
+                                  annotation)
+        return annotation
+
+
+    def _on_button_add_annotation_clicked(self, button):
+        buffer     = self.view.get_buffer()
+        cursor_pos = buffer.get_property('cursor-position')
+        start      = buffer.get_iter_at_offset(cursor_pos)
+        mark       = buffer.create_mark(self._mk_annotation_name(), start)
+        self._add_annotation(mark)
+
+
+    def _on_button_show_annotations_toggled(self, button):
+        active = button.get_active()
+        self.view.set_show_annotations(active)
 
 
 # Create widgets.
