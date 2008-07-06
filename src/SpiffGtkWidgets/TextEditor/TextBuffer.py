@@ -42,17 +42,17 @@ class TextBuffer(gtk.TextBuffer):
         self.connect('end-user-action',   self._on_end_user_action)
 
         features = (
-            ('list-indent', Features.ListIndent, True),
+            ('list-indent', True, Features.ListIndent, ()),
         )
-        for name, feature, default in features:
+        for name, default, feature, feature_args in features:
             active = kwargs.get(name, default)
             if active:
-                self.activate_feature(feature)
+                self.activate_feature(feature, *feature_args)
         self._update_timestamp()
 
 
-    def activate_feature(self, feature):
-        self.active_features.append(feature(self))
+    def activate_feature(self, feature, *args):
+        self.active_features.append(feature(self, *args))
 
 
     def _cancel_undo_timeout(self):

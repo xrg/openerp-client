@@ -15,7 +15,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 import sys, os.path, pango
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
-import gtk
+import gtk, gtkspell, locale
 from SpiffGtkWidgets.TextEditor import TextEditor, Annotation
 
 class Window(gtk.Window):
@@ -34,7 +34,7 @@ class Window(gtk.Window):
                                         underline = pango.UNDERLINE_SINGLE)
         self.view.modify_font(pango.FontDescription("Arial 12"))
         self.scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        self.set_size_request(600, 600)
+        self.set_size_request(800, 600)
         self.vbox.set_border_width(6)
         self.vbox.set_spacing(6)
         self.hbox.set_spacing(6)
@@ -97,6 +97,13 @@ class Window(gtk.Window):
         self.vbox.pack_start(self.hbox, False)
         self.vbox.pack_start(self.scroll)
         self.show_all()
+
+        # Enable spell checking.
+        lang = locale.getlocale()[0]
+        if lang is None:
+            print "WARNING: Spell checking diabled because language is not set."
+        else:
+            gtkspell.Spell(self.view).set_language(lang)
 
 
     def _on_buffer_undo_stack_changed(self, buffer):

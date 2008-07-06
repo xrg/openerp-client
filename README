@@ -6,9 +6,8 @@ Spiff Gtk Widgets contains a number of Gtk widgets
 by other Spiff components:
 
   - A calendar similar to Google's online calendar
-  - An annotated text view
-  - A text view that supports advanced features like undo, auto-indenting 
-    bullet point lists, etc. 
+  - A text view that supports advanced features like undo/redo, annotations,
+    auto-indenting bullet point lists, etc. 
 
 
 Dependencies
