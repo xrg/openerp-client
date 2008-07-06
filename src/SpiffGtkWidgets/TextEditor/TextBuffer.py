@@ -13,17 +13,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-import gtk, re, pango, time, gobject
+import gtk, pango, time, gobject
 from UndoInsertText import UndoInsertText
 from UndoDeleteText import UndoDeleteText
 from UndoApplyTag   import UndoApplyTag
 from UndoRemoveTag  import UndoRemoveTag
 from UndoCollection import UndoCollection
-
-bullet_point_re = re.compile(r'^(?:\d+\.|[\*\-])$')
+import Features
 
 class TextBuffer(gtk.TextBuffer):
-    def __init__(self, *args):
+    def __init__(self, *args, **kwargs):
         gtk.TextBuffer.__init__(self, *args)
         self.undo_stack      = []
         self.redo_stack      = []
@@ -34,15 +33,7 @@ class TextBuffer(gtk.TextBuffer):
         self.undo_freq       = 300 # minimum milliseconds between actions
         self.undo_timeout_id = None
         self.user_action     = 0
-        self.bullet_point    = u'•'
-        self.first_li_tag    = self.create_tag('first-list-item',
-                                               left_margin = 30)
-        self.li_tag          = self.create_tag('list-item',
-                                               left_margin        = 30,
-                                               pixels_above_lines = 12)
-        self.bullet_tag      = self.create_tag('list-item-bullet',
-                                               weight = pango.WEIGHT_ULTRABOLD)
-        self.connect_after('insert-text', self._on_insert_text_after)
+        self.active_features = []
         self.connect('insert-text',       self._on_insert_text)
         self.connect('delete-range',      self._on_delete_range)
         self.connect('apply-tag',         self._on_apply_tag)
@@ -50,52 +41,18 @@ class TextBuffer(gtk.TextBuffer):
         self.connect('begin-user-action', self._on_begin_user_action)
         self.connect('end-user-action',   self._on_end_user_action)
 
+        features = (
+            ('list-indent', Features.ListIndent, True),
+        )
+        for name, feature, default in features:
+            active = kwargs.get(name, default)
+            if active:
+                self.activate_feature(feature)
         self._update_timestamp()
 
 
-    def _at_bullet_point(self, iter):
-        end = iter.copy()
-        end.forward_find_char(lambda x, d: x == ' ')
-        if end.is_end() or end.get_line() != iter.get_line():
-            return False
-        text = self.get_text(iter, end)
-        if bullet_point_re.match(text):
-            return True
-        return False
-
-
-    def _auto_indent_bullet_points(self, buffer, iter, text, length):
-        iter = iter.copy()
-        iter.backward_chars(length)
-        iter.set_line(iter.get_line())
-        while not iter.is_end():
-            if not self._at_bullet_point(iter):
-                iter.forward_line()
-                continue
-
-            # Replace the item by a bullet point.
-            end = iter.copy()
-            end.forward_find_char(lambda x, d: x == ' ')
-            self.delete(iter, end)
-            self.insert(iter, self.bullet_point)
-            iter.set_line(iter.get_line())
-
-            # Markup the bullet point.
-            end = iter.copy()
-            end.forward_find_char(lambda x, d: x == ' ')
-            self.apply_tag(self.bullet_tag, iter, end)
-
-            # Markup the list item.
-            end.forward_to_line_end()
-            if iter.get_line() == 0:
-                self.apply_tag(self.first_li_tag, iter, end)
-            else:
-                self.apply_tag(self.li_tag, iter, end)
-            iter.forward_line()
-
-
-    def _on_insert_text_after(self, buffer, iter, text, length):
-        self._auto_indent_bullet_points(buffer, iter, text, length)
+    def activate_feature(self, feature):
+        self.active_features.append(feature(self))
 
 
     def _cancel_undo_timeout(self):
