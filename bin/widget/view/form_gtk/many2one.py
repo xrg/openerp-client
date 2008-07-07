@@ -47,7 +47,7 @@ import service
 
 
 class dialog(object):
-	def __init__(self, model, id=None, attrs=None ,domain=None, context=None, window=None, view_ids=None):
+	def __init__(self, model, id=None, attrs=None ,domain=None, context=None, window=None, view_ids=None,target=False):
 		if attrs is None:
 			attrs = {}
 		if domain is None:
@@ -63,19 +63,20 @@ class dialog(object):
 		self.window = window
 		if ('string' in attrs) and attrs['string']:
 			self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
-		self.dia.set_property('default-width', 760)
-		self.dia.set_property('default-height', 500)
-		self.dia.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-		self.dia.set_icon(common.TINYERP_ICON)
+		if not target:
+			self.dia.set_property('default-width', 760)
+			self.dia.set_property('default-height', 500)
+			self.dia.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+			self.dia.set_icon(common.TINYERP_ICON)
 
-		self.accel_group = gtk.AccelGroup()
-		self.dia.add_accel_group(self.accel_group)
+			self.accel_group = gtk.AccelGroup()
+			self.dia.add_accel_group(self.accel_group)
 
-		self.but_cancel = self.dia.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
-		self.but_cancel.add_accelerator('clicked', self.accel_group, gtk.keysyms.Escape, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+			self.but_cancel = self.dia.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+			self.but_cancel.add_accelerator('clicked', self.accel_group, gtk.keysyms.Escape, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
-		self.but_ok = self.dia.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
-		self.but_ok.add_accelerator('clicked', self.accel_group, gtk.keysyms.Return, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+			self.but_ok = self.dia.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
+			self.but_ok.add_accelerator('clicked', self.accel_group, gtk.keysyms.Return, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
 		scroll = gtk.ScrolledWindow()
 		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
@@ -92,8 +93,10 @@ class dialog(object):
 		else:
 			self.screen.new()
 		vp.add(self.screen.widget)
+
 		x,y = self.screen.screen_container.size_get()
-		vp.set_size_request(x,y+30)
+		width, height = window.get_size()
+		vp.set_size_request(min(width - 20, x + 20),min(height - 60, y + 25))
 		self.dia.show_all()
 		self.screen.display()
 
