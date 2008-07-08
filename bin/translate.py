@@ -109,11 +109,15 @@ def setlang(lang=None):
 		gettext.install(APP, unicode=1)
 		return False
 	if lang:
-		lc, encoding = locale.getdefaultlocale()
-		if encoding == 'utf':
+		try:
+			lc, encoding = locale.getdefaultlocale()
+			if encoding == 'utf':
+				encoding = 'UTF-8'
+			if encoding == 'cp1252':
+				encoding = '1252'
+		except ValueError:
 			encoding = 'UTF-8'
-		if encoding == 'cp1252':
-			encoding = '1252'
+
 		if os.name == 'nt' and lang != os.environ.get('LANG', ''):
 			os.environ['LANG'] = lang
 			if sys.executable == sys.argv[0]:
