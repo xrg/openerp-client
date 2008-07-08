@@ -27,3 +27,13 @@ class Feature(object):
         """
         assert buffer is not None
         self.buffer = buffer
+
+
+    def _print_range(self, start, end):
+        print "RANGE:", repr(self.buffer.get_text(start, end))
+
+
+    def _print_char(self, iter):
+        end = iter.copy()
+        end.forward_char()
+        print "CHAR:", repr(self.buffer.get_text(iter, end))

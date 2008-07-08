@@ -20,8 +20,8 @@ import datetime
 import time
 import util
 import hippo
-from color          import to_int as c2i
-from CanvasDayRange import CanvasDayRange
+from SpiffGtkWidgets.color import to_int as c2i
+from CanvasDayRange        import CanvasDayRange
 
 class Calendar(hippo.Canvas):
     RANGE_WEEK   = 1

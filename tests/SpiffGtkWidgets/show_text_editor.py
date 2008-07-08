@@ -99,6 +99,7 @@ class Window(gtk.Window):
         self.show_all()
 
         # Enable spell checking.
+        return #FIXME
         lang = locale.getlocale()[0]
         if lang is None:
             print "WARNING: Spell checking diabled because language is not set."
@@ -153,8 +154,10 @@ class Window(gtk.Window):
     def _on_button_add_annotation_clicked(self, button):
         buffer     = self.view.get_buffer()
         cursor_pos = buffer.get_property('cursor-position')
-        start      = buffer.get_iter_at_offset(cursor_pos)
-        mark       = buffer.create_mark(self._mk_annotation_name(), start)
+        iter       = buffer.get_iter_at_offset(cursor_pos)
+        mark       = buffer.create_mark(self._mk_annotation_name(),
+                                        iter,
+                                        iter.is_end())
         self._add_annotation(mark)
 
 
