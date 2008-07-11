@@ -66,9 +66,6 @@ class form(object):
 		if context is None:
 			context = {}
 
-
-		print '-----', context
-
 		fields = {}
 		self.model = model
 		self.window = window
