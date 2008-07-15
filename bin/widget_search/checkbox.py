@@ -47,6 +47,9 @@ class checkbox(wid_int.wid_int):
 		self.entry.set_property('activates_default', True)
 		self.entry.set_editable(False)
 
+	def clear(self):
+		self.widget.child.set_text('')
+
 	def _value_get(self):
 		val = self.entry.get_text()
 		if val:

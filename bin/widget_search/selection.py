@@ -74,7 +74,7 @@ class selection(wid_int.wid_int):
 				self.widget.child.set_text(s)
 
 	def clear(self):
-		self.value = ''
+		self.widget.child.set_text('')
 
 	value = property(_value_get, _value_set, None,
 	  'The content of the widget or ValueError if not valid')
