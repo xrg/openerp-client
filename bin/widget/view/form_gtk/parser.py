@@ -67,6 +67,12 @@ class Button(Observable):
 
 		self.widget.show()
 		self.widget.connect('clicked', self.button_clicked)
+	
+	def hide(self):
+		return self.widget.hide()
+	
+	def show(self):
+		return self.widget.show()
 
 	def button_clicked(self, widget):
 		model = self.form.screen.current_model
@@ -88,7 +94,7 @@ class Button(Observable):
 					common.sur(self.attrs['confirm']):
 				button_type = self.attrs.get('type', 'workflow')
 				if button_type == 'workflow':
-					print 'Exec Workflow'
+					#print 'Exec Workflow'
 					result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
 											self.form.screen.name,
 											self.attrs['name'], id)
@@ -127,15 +133,22 @@ class Button(Observable):
 			self.warn('misc-message', _('Invalid Form, correct red fields !'))
 			self.form.screen.display()
 
+
+
+class StateAwareWidget(object):
+	def __init__(self, widget, states=None):
+		self.widget = widget
+		self.states = states or []
+
+	def __getattr__(self, a):
+		return self.widget.__getattribute__(a)
+
 	def state_set(self, state):
-		if self.attrs.get('states', False):
-			my_states = self.attrs.get('states', '').split(',')
-			if state not in my_states:
-				self.widget.hide()
-			else:
-				self.widget.show()
-		else:
+		if (not len(self.states)) or (state in self.states):
 			self.widget.show()
+		else:
+			self.widget.hide()
+
 
 class _container(object):
 	def __init__(self, tooltips):
@@ -225,7 +238,7 @@ class _container(object):
 class parser_form(widget.view.interface.parser_interface):
 	def parse(self, model, root_node, fields, notebook=None, paned=None, tooltips=None):
 		dict_widget = {}
-		button_list = []
+		saw_list = []	# state aware widget list
 		attrs = tools.node_attributes(root_node)
 		on_write = attrs.get('on_write', '')
 		if not tooltips:
@@ -290,7 +303,8 @@ class parser_form(widget.view.interface.parser_interface):
 
 			elif node.localName=='button':
 				button = Button(attrs)
-				button_list.append(button)
+				states = [e for e in attrs.get('states','').split(',') if e]
+				saw_list.append(StateAwareWidget(button, states))
 				container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)), help=attrs.get('help', False))
 
 			elif node.localName=='notebook':
@@ -313,8 +327,8 @@ class parser_form(widget.view.interface.parser_interface):
 				nb.set_tab_pos(pos)
 				nb.set_border_width(3)
 				container.wid_add(nb, colspan=attrs.get('colspan', 3), expand=True, fill=True )
-				_, widgets, buttons, on_write = self.parse(model, node, fields, nb, tooltips=self.tooltips)
-				button_list += buttons
+				_, widgets, saws, on_write = self.parse(model, node, fields, nb, tooltips=self.tooltips)
+				saw_list += saws
 				dict_widget.update(widgets)
 
 			elif node.localName=='page':
@@ -324,8 +338,8 @@ class parser_form(widget.view.interface.parser_interface):
 					angle = int(options.options['client.form_tab_orientation'])
 				l = gtk.Label(attrs.get('string','No String Attr.'))
 				l.set_angle(angle)
-				widget, widgets, buttons, on_write = self.parse(model, node, fields, notebook, tooltips=self.tooltips)
-				button_list += buttons
+				widget, widgets, saws, on_write = self.parse(model, node, fields, notebook, tooltips=self.tooltips)
+				saw_list += saws
 				dict_widget.update(widgets)
 				notebook.append_page(widget, l)
 
@@ -366,13 +380,15 @@ class parser_form(widget.view.interface.parser_interface):
 			elif node.localName=='group':
 				frame = gtk.Frame(attrs.get('string', None))
 				frame.set_border_width(0)
+				states = [e for e in attrs.get('states','').split(',') if e]
+				saw_list.append(StateAwareWidget(frame, states))
 
 				container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
 				container.new(int(attrs.get('col',4)))
 
-				widget, widgets, buttons, on_write = self.parse(model, node, fields, tooltips=self.tooltips)
+				widget, widgets, saws, on_write = self.parse(model, node, fields, tooltips=self.tooltips)
 				dict_widget.update(widgets)
-				button_list += buttons
+				saw_list += saws
 				frame.add(widget)
 				if not attrs.get('string', None):
 					frame.set_shadow_type(gtk.SHADOW_NONE)
@@ -381,27 +397,27 @@ class parser_form(widget.view.interface.parser_interface):
 			elif node.localName=='hpaned':
 				hp = gtk.HPaned()
 				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True, fill=True)
-				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp, tooltips=self.tooltips)
-				button_list += buttons
+				_, widgets, saws, on_write = self.parse(model, node, fields, paned=hp, tooltips=self.tooltips)
+				saw_list += saws
 				dict_widget.update(widgets)
 				#if 'position' in attrs:
 				#	hp.set_position(int(attrs['position']))
 			elif node.localName=='vpaned':
 				hp = gtk.VPaned()
 				container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True, fill=True)
-				_, widgets, buttons, on_write = self.parse(model, node, fields, paned=hp, tooltips=self.tooltips)
-				button_list += buttons
+				_, widgets, saws, on_write = self.parse(model, node, fields, paned=hp, tooltips=self.tooltips)
+				saw_list += saws
 				dict_widget.update(widgets)
 				if 'position' in attrs:
 					hp.set_position(int(attrs['position']))
 			elif node.localName=='child1':
-				widget, widgets, buttons, on_write = self.parse(model, node, fields, paned=paned, tooltips=self.tooltips)
-				button_list += buttons
+				widget, widgets, saws, on_write = self.parse(model, node, fields, paned=paned, tooltips=self.tooltips)
+				saw_list += saws
 				dict_widget.update(widgets)
 				paned.pack1(widget, resize=True, shrink=True)
 			elif node.localName=='child2':
-				widget, widgets, buttons, on_write = self.parse(model, node, fields, paned=paned, tooltips=self.tooltips)
-				button_list += buttons
+				widget, widgets, saws, on_write = self.parse(model, node, fields, paned=paned, tooltips=self.tooltips)
+				saw_list += saws
 				dict_widget.update(widgets)
 				paned.pack2(widget, resize=True, shrink=True)
 			elif node.localName=='action':
@@ -414,7 +430,7 @@ class parser_form(widget.view.interface.parser_interface):
 			ebox.connect('button_press_event',self.translate, model, name, src, widget)
 		for (ebox,src,name) in container.trans_box_label:
 			ebox.connect('button_press_event', self.translate_label, model, name, src)
-		return container.pop(), dict_widget, button_list, on_write
+		return container.pop(), dict_widget, saw_list, on_write
 
 	def translate(self, widget, event, model, name, src, widget_entry):
 		id = self.screen.current_model.id

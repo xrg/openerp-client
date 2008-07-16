@@ -35,6 +35,7 @@ import rpc
 import service
 import options
 from form_gtk.action import action
+from form_gtk.parser import Button
 from interface import parser_view
 
 class ViewWidget(object):
@@ -80,14 +81,15 @@ class ViewWidget(object):
 
 class ViewForm(parser_view):
 	def __init__(self, window, screen, widget, children=None,
-			buttons=None, toolbar=None):
+			state_aware_widgets=None, toolbar=None):
 		super(ViewForm, self).__init__(window, screen, widget, children,
-				buttons, toolbar)
+				state_aware_widgets, toolbar)
 		self.view_type = 'form'
 		self.model_add_new = False
 
-		for button in self.buttons:
-			button.form = self
+		for w in self.state_aware_widgets:
+			if isinstance(w.widget, Button):
+				w.widget.form = self
 
 		self.widgets = dict([(name, ViewWidget(self, widget, name))
 							 for name, widget in children.items()])
@@ -258,7 +260,7 @@ class ViewForm(parser_view):
 		del self.widget
 		del self.widgets
 		del self.screen
-		del self.buttons
+		del self.state_aware_widgets
 	
 	def cancel(self):
 		pass
@@ -295,8 +297,8 @@ class ViewForm(parser_view):
 			state = 'draft'
 		for widget in self.widgets.values():
 			widget.display(model, state)
-		for button in self.buttons:
-			button.state_set(state)
+		for widget in self.state_aware_widgets:
+			widget.state_set(state)
 		return True
 
 	def set_cursor(self, new=False):
