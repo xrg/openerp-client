@@ -28,7 +28,7 @@
 ##############################################################################
 
 import gtk
-
+import gobject
 import wid_int
 
 class selection(wid_int.wid_int):
@@ -36,14 +36,15 @@ class selection(wid_int.wid_int):
 		wid_int.wid_int.__init__(self, name, parent, attrs)
 
 		self.widget = gtk.combo_box_entry_new_text()
-		self.widget.child.set_editable(False)
+		self.widget.child.set_editable(True)
+		self.widget.child.connect('key_press_event', self.sig_key_press)
 		self._selection={}
 		if 'selection' in attrs:
 			self.set_popdown(attrs.get('selection',[]))
 
 	def set_popdown(self, selection):
-		model = self.widget.get_model()
-		model.clear()
+		self.model = self.widget.get_model()
+		self.model.clear()
 		self._selection={}
 		lst = []
 		for (i,j) in selection:
@@ -56,6 +57,18 @@ class selection(wid_int.wid_int):
 		for l in lst:
 			self.widget.append_text(l)
 		return lst
+
+	def sig_key_press(self, widget, event):
+		completion=gtk.EntryCompletion()
+		completion.set_inline_selection(True)
+		if (event.type == gtk.gdk.KEY_PRESS) \
+			and ((event.state & gtk.gdk.CONTROL_MASK) != 0) \
+			and (event.keyval == gtk.keysyms.space):
+			self.entry.popup()
+		elif not (event.keyval==65362 or event.keyval==65364):
+			completion.set_model(self.model)
+			widget.set_completion(completion)
+			completion.set_text_column(0)
 
 	def _value_get(self):
 		model = self.widget.get_model()
