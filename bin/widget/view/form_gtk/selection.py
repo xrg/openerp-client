@@ -59,16 +59,16 @@ class selection(interface.widget_interface):
 		self.last_key = (None, 0)
 
 	def set_popdown(self, selection):
-		model = gtk.ListStore(gobject.TYPE_STRING)
+		self.model = gtk.ListStore(gobject.TYPE_STRING)
 		self._selection={}
 		lst = []
 		for (value, name) in selection:
 			name = str(name)
 			lst.append(name)
 			self._selection[name] = value
-			i = model.append()
-			model.set(i, 0, name)
-		self.entry.set_model(model)
+			i = self.model.append()
+			self.model.set(i, 0, name)
+		self.entry.set_model(self.model)
 		self.entry.set_text_column(0)
 		return lst
 
@@ -82,10 +82,16 @@ class selection(interface.widget_interface):
 
 	def sig_key_press(self, widget, event):
 		# allow showing available entries by hitting "ctrl+space"
+		completion=gtk.EntryCompletion()
+		completion.set_inline_selection(True)
 		if (event.type == gtk.gdk.KEY_PRESS) \
 			and ((event.state & gtk.gdk.CONTROL_MASK) != 0) \
 			and (event.keyval == gtk.keysyms.space):
 			self.entry.popup()
+		elif not (event.keyval==65362 or event.keyval==65364):
+			completion.set_model(self.model)
+			widget.set_completion(completion)
+			completion.set_text_column(0)
 
 	def sig_activate(self, *args):
 		text = self.entry.child.get_text()
