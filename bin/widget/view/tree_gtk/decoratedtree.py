@@ -31,19 +31,19 @@ import gtk
 
 
 class DecoratedTreeView(gtk.TreeView):
-	"""This class extend a TreeView to be api compatible with EditableTreeView
-	"""
+    """This class extend a TreeView to be api compatible with EditableTreeView
+    """
 
-	def __init__(self, position):
-		super(DecoratedTreeView, self).__init__()
-		self.editable = position
-		self.cells = {}
+    def __init__(self, position):
+        super(DecoratedTreeView, self).__init__()
+        self.editable = position
+        self.cells = {}
 
-	def get_columns(self, include_non_visible=True, include_non_editable=True):
-		if not include_non_editable:
-			return []	# all columns are non editables
-		columns = super(DecoratedTreeView, self).get_columns()
-		if not include_non_visible:
-			columns = filter(lambda c: c.get_visible(), columns)
-		return columns
+    def get_columns(self, include_non_visible=True, include_non_editable=True):
+        if not include_non_editable:
+            return []   # all columns are non editables
+        columns = super(DecoratedTreeView, self).get_columns()
+        if not include_non_visible:
+            columns = filter(lambda c: c.get_visible(), columns)
+        return columns
 

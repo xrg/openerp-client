@@ -35,44 +35,44 @@ from rpc import RPCProxy
 from widget.view import interface
 
 class EmptyGraph(object):
-	def __init__(self, model, axis, fields, axis_data={}, attrs={}):
-		self.widget = gtk.Image()
+    def __init__(self, model, axis, fields, axis_data={}, attrs={}):
+        self.widget = gtk.Image()
 
-	def display(self, models):
-		pass
+    def display(self, models):
+        pass
 
 class parser_graph(interface.parser_interface):
-	def parse(self, model, root_node, fields):
-		attrs = tools.node_attributes(root_node)
-		self.title = attrs.get('string', 'Unknown')
+    def parse(self, model, root_node, fields):
+        attrs = tools.node_attributes(root_node)
+        self.title = attrs.get('string', 'Unknown')
 
-		on_write = '' #attrs.get('on_write', '')
+        on_write = '' #attrs.get('on_write', '')
 
-		axis = []
-		axis_data = {}
-		for node in root_node.childNodes:
-			node_attrs = tools.node_attributes(node)
-			if node.localName == 'field':
-				axis.append(str(node_attrs['name']))
-				axis_data[str(node_attrs['name'])] = node_attrs
+        axis = []
+        axis_data = {}
+        for node in root_node.childNodes:
+            node_attrs = tools.node_attributes(node)
+            if node.localName == 'field':
+                axis.append(str(node_attrs['name']))
+                axis_data[str(node_attrs['name'])] = node_attrs
 
-		#
-		# TODO: parse root_node to fill in axis
-		#
+        #
+        # TODO: parse root_node to fill in axis
+        #
 
-		try:
-			import graph
-			view = graph.ViewGraph(model, axis, fields, axis_data, attrs)
-		except Exception, e:
-			import common
-			import traceback
-			import sys
-			tb_s = reduce(lambda x, y: x + y, traceback.format_exception(
-				sys.exc_type, sys.exc_value, sys.exc_traceback))
-			common.error('Graph', _('Can not generate graph !'), details=tb_s,
-					parent=self.window)
-			view = EmptyGraph(model, axis, fields, axis_data, attrs)
-		return view, {}, [], on_write
+        try:
+            import graph
+            view = graph.ViewGraph(model, axis, fields, axis_data, attrs)
+        except Exception, e:
+            import common
+            import traceback
+            import sys
+            tb_s = reduce(lambda x, y: x + y, traceback.format_exception(
+                sys.exc_type, sys.exc_value, sys.exc_traceback))
+            common.error('Graph', _('Can not generate graph !'), details=tb_s,
+                    parent=self.window)
+            view = EmptyGraph(model, axis, fields, axis_data, attrs)
+        return view, {}, [], on_write
 
 
 # vim:noexpandtab:

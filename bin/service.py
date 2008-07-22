@@ -30,10 +30,10 @@
 service_dict = {}
 
 class Service(object):
-	def __init__(self, name, audience="*"):
-		service_dict[name] = (name, audience, self)
-	def exportMethod(self, method):
-		pass
+    def __init__(self, name, audience="*"):
+        service_dict[name] = (name, audience, self)
+    def exportMethod(self, method):
+        pass
 
 def LocalService(name):
-	return service_dict[name][2]
+    return service_dict[name][2]

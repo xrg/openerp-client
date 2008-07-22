@@ -35,22 +35,22 @@ import gtk
 
 class EmptyCalendar(object):
 
-	def __init__(self, model):
-		self.widget = gtk.Label(_('Calendar view')+'\n'+_('Not yet implemented')
-				+'\n'+_('You can use this feature in the web client'))
-	
-	def display(self, models):
-		pass
+    def __init__(self, model):
+        self.widget = gtk.Label(_('Calendar view')+'\n'+_('Not yet implemented')
+                +'\n'+_('You can use this feature in the web client'))
+    
+    def display(self, models):
+        pass
 
 
 class parser_calendar(interface.parser_interface):
 
-	def parse(self, model, root_node, fields):
-		attrs = tools.node_attributes(root_node)
-		self.title = attrs.get('string', 'Unknown')
+    def parse(self, model, root_node, fields):
+        attrs = tools.node_attributes(root_node)
+        self.title = attrs.get('string', 'Unknown')
 
-		on_write = ''
+        on_write = ''
 
-		view = EmptyCalendar(model)
+        view = EmptyCalendar(model)
 
-		return view, {}, [], on_write
+        return view, {}, [], on_write

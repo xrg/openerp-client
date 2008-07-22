@@ -32,26 +32,26 @@ import gtk
 import rpc
 
 class wid_int(object):
-	def __init__(self, name, parent, attrs={}):
-		self._value = None
-		self.parent = parent
-		self.name = name
-		self.model = attrs.get('model', None)
-		self.attrs = attrs
+    def __init__(self, name, parent, attrs={}):
+        self._value = None
+        self.parent = parent
+        self.name = name
+        self.model = attrs.get('model', None)
+        self.attrs = attrs
 
-	def clear(self):
-		self.value = ''
-		
-	def _value_get(self):
-		return self._value
-		
-	def _value_set(self, value):
-		self._value = value
-		
-	value = property(_value_get, _value_set, None, _('The content of the widget or excpetion if not valid'))
+    def clear(self):
+        self.value = ''
+        
+    def _value_get(self):
+        return self._value
+        
+    def _value_set(self, value):
+        self._value = value
+        
+    value = property(_value_get, _value_set, None, _('The content of the widget or excpetion if not valid'))
 
-	def _readonly_set(self, value):
-		pass
+    def _readonly_set(self, value):
+        pass
 
-	def sig_activate(self, fct):
-		pass
+    def sig_activate(self, fct):
+        pass

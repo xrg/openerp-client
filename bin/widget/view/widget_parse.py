@@ -42,38 +42,38 @@ from graph import ViewGraph
 from calendar import ViewCalendar
 
 parsers = {
-	'form': form_gtk.parser_form,
-	'tree': tree_gtk.parser_tree,
-	'graph': graph_gtk.parser_graph,
-	'calendar': calendar_gtk.parser_calendar,
+    'form': form_gtk.parser_form,
+    'tree': tree_gtk.parser_tree,
+    'graph': graph_gtk.parser_graph,
+    'calendar': calendar_gtk.parser_calendar,
 }
 
 
 parsers2 = {
-	'form': ViewForm,
-	'tree': ViewList,
-	'graph': ViewGraph,
-	'calendar': ViewCalendar,
+    'form': ViewForm,
+    'tree': ViewList,
+    'graph': ViewGraph,
+    'calendar': ViewCalendar,
 }
 
 class widget_parse(interface.parser_interface):
-	def parse(self, screen, root_node, fields, toolbar={}):
-		widget = None
-		for node in root_node.childNodes:
-			if not node.nodeType == node.ELEMENT_NODE:
-				continue
-			if node.localName in parsers:
-				widget = parsers[node.localName](self.window, self.parent,
-						self.attrs, screen)
-				wid, child, buttons, on_write = widget.parse(screen.resource,
-						node, fields)
-				screen.set_on_write(on_write)
-				res = parsers2[node.localName](self.window, screen, wid, child,
-						buttons, toolbar)
-				res.title = widget.title
-				widget = res
-				break
-			else:
-				pass
-		return widget
+    def parse(self, screen, root_node, fields, toolbar={}):
+        widget = None
+        for node in root_node.childNodes:
+            if not node.nodeType == node.ELEMENT_NODE:
+                continue
+            if node.localName in parsers:
+                widget = parsers[node.localName](self.window, self.parent,
+                        self.attrs, screen)
+                wid, child, buttons, on_write = widget.parse(screen.resource,
+                        node, fields)
+                screen.set_on_write(on_write)
+                res = parsers2[node.localName](self.window, screen, wid, child,
+                        buttons, toolbar)
+                res.title = widget.title
+                widget = res
+                break
+            else:
+                pass
+        return widget
 

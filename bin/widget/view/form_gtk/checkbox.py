@@ -32,21 +32,21 @@ import gtk
 import interface
 
 class checkbox(interface.widget_interface):
-	def __init__(self, window, parent, model, attrs={}):
-		interface.widget_interface.__init__(self, window, parent, model, attrs)
-		self.widget = gtk.CheckButton()
-		self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
-		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
+    def __init__(self, window, parent, model, attrs={}):
+        interface.widget_interface.__init__(self, window, parent, model, attrs)
+        self.widget = gtk.CheckButton()
+        self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
+        self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
 
-	def _readonly_set(self, value):
-		self.widget.set_sensitive(not value)
+    def _readonly_set(self, value):
+        self.widget.set_sensitive(not value)
 
-	def set_value(self, model, model_field):
-		model_field.set_client(model, int(self.widget.get_active()))
+    def set_value(self, model, model_field):
+        model_field.set_client(model, int(self.widget.get_active()))
 
-	def display(self, model, model_field):
-		if not model_field:
-			self.widget.set_active(False)
-			return False
-		super(checkbox, self).display(model, model_field)
-		self.widget.set_active(bool(model_field.get(model)))
+    def display(self, model, model_field):
+        if not model_field:
+            self.widget.set_active(False)
+            return False
+        super(checkbox, self).display(model, model_field)
+        self.widget.set_active(bool(model_field.get(model)))

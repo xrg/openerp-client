@@ -30,21 +30,21 @@
 import service
 
 class parser_interface(object):
-	def __init__(self, window=None, parent=None, attrs={}, screen=None):
-		if window is None:
-			window = service.LocalService('gui.main').window
-		self.window = window
-		self.parent = parent
-		self.attrs = attrs
-		self.title = None
-		self.buttons = {}
-		self.screen = screen
+    def __init__(self, window=None, parent=None, attrs={}, screen=None):
+        if window is None:
+            window = service.LocalService('gui.main').window
+        self.window = window
+        self.parent = parent
+        self.attrs = attrs
+        self.title = None
+        self.buttons = {}
+        self.screen = screen
 
 class parser_view(object):
-	def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None):
-		if window is None:
-			window = service.LocalService('gui.main').window
-		self.window = window
-		self.screen = screen
-		self.widget = widget
-		self.state_aware_widgets = state_aware_widgets or []
+    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None):
+        if window is None:
+            window = service.LocalService('gui.main').window
+        self.window = window
+        self.screen = screen
+        self.widget = widget
+        self.state_aware_widgets = state_aware_widgets or []
