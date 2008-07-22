@@ -51,6 +51,9 @@ class ViewWidget(object):
 		modelfield = model.mgroup.mfields.get(self.widget_name, False)
 		if modelfield:
 			modelfield.state_set(model, state)
+			if modelfield.attrs.get('attrs',False):
+				print modelfield.attrs.get('attrs')
+				modelfield.attrs_set(model)
 			self.widget.display(model, modelfield)
 		elif isinstance(self.widget, action):
 			self.widget.display(model, False)
@@ -249,7 +252,7 @@ class ViewForm(parser_view):
 
 	def __getitem__(self, name):
 		return self.widgets[name]
-	
+
 	def destroy(self):
 		self.widget.destroy()
 		for widget in self.widgets.keys():
@@ -259,7 +262,7 @@ class ViewForm(parser_view):
 		del self.widgets
 		del self.screen
 		del self.buttons
-	
+
 	def cancel(self):
 		pass
 

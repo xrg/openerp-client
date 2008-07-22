@@ -118,6 +118,37 @@ class CharField(object):
 	def create(self, model):
 		return False
 
+	def calc_condition(self,model,con):
+		if model and (con[0] in model.mgroup.fields):
+			val = model[con[0]].get(model)
+			if con[1]=="=":
+				if val==con[2]:
+					return True
+			elif con[1]=="!=":
+				if val!=con[2]:
+					return True
+			elif con[1]=="<":
+				if val<con[2]:
+					return True
+			elif con[1]==">":
+				if val>con[2]:
+					return True
+			elif con[1]=="<=":
+				if val<=con[2]:
+					return True
+			elif con[1]==">=":
+				if val>=con[2]:
+					return True
+
+			return False
+
+	def attrs_set(self, model):
+		attrs_changes = eval(self.attrs.get('attrs',"{}"))
+		for k,v in attrs_changes.items():
+			for condition in v:
+				result = self.calc_condition(model,condition)
+				if result:
+					self.get_state_attrs(model)[k]=True
 	def state_set(self, model, state='draft'):
 		state_changes = dict(self.attrs.get('states',{}).get(state,[]))
 		for key in ('readonly', 'required'):
@@ -127,7 +158,7 @@ class CharField(object):
 				self.get_state_attrs(model)[key] = self.attrs[key]
 		if 'value' in state_changes:
 			self.set(model, value, test_state=False, modified=True)
-	
+
 	def get_state_attrs(self, model):
 		if self.name not in model.state_attrs:
 			model.state_attrs[self.name] = self.attrs.copy()

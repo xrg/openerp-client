@@ -77,7 +77,7 @@ class ModelRecord(signal_event.signal_event):
 
 	def __getitem__(self, name):
 		return self.mgroup.mfields.get(name, False)
-	
+
 	def __repr__(self):
 		return '<ModelRecord %s@%s>' % (self.id, self.resource)
 
@@ -205,7 +205,7 @@ class ModelRecord(signal_event.signal_event):
 			self.modified_fields = {}
 		if signal:
 			self.signal('record-changed')
-		
+
 	def reload(self):
 		if not self.id:
 			return
@@ -253,7 +253,10 @@ class ModelRecord(signal_event.signal_event):
 						continue
 					self.mgroup.mfields[fieldname].attrs['domain'] = value
 		self.signal('record-changed')
-	
+
+	def on_change_attrs(self, callback):
+		self.signal('attrs-changed')
+
 	def cond_default(self, field, value):
 		ir = RPCProxy('ir.values')
 		values = ir.get('default', '%s=%s' % (field, value),
