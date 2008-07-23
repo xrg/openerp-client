@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -275,4 +276,6 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         elif isinstance(entry, gtk.ComboBoxEntry):
             self.on_quit_cell(model, column.name, entry.get_active_text())
 
-# vim:noexpandtab:
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

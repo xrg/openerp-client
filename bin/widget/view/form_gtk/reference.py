@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -271,4 +272,7 @@ class reference(interface.widget_interface):
             return
         self.entry.set_active_iter(self.key_catalog[key][self.last_key[1] \
                 % len(self.key_catalog[key])])
+
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

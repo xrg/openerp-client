@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -144,3 +145,6 @@ class widget_interface(object):
     def sig_changed(self):
         if self.attrs.get('on_change',False):
             self._view.view_form.screen.on_change(self.attrs['on_change'])
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

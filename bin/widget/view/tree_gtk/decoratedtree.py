@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -46,4 +47,7 @@ class DecoratedTreeView(gtk.TreeView):
         if not include_non_visible:
             columns = filter(lambda c: c.get_visible(), columns)
         return columns
+
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -331,4 +332,7 @@ class stime(interface.widget_interface):
         super(stime, self).display(model, model_field)
         self.entry.set_text(model_field.get(model) or '00:00:00')
         return True
+
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

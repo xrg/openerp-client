@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -81,3 +82,6 @@ class spinbutton(wid_int.wid_int):
     def sig_activate(self, fct):
         self.spin1.connect_after('activate', fct)
         self.spin2.connect_after('activate', fct)
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -314,4 +315,7 @@ class tree(object):
         win = win_export.win_export(self.model, self.tree_res.sel_ids_get(),
                 self.tree_res.fields, [], parent=self.window, context=self.context)
         res = win.go()
+
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

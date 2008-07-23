@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -204,3 +205,6 @@ class image_wid(interface.widget_interface):
 
     def set_value(self, model, model_field):
         return model_field.set_client(model, self._value or False)
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -143,3 +144,6 @@ def setlang(lang=None):
         gettext.textdomain(APP)
         gettext.install(APP, unicode=1)
     gtk.glade.bindtextdomain(APP, DIR)
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

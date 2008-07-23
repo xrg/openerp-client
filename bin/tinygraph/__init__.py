@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 Tiny SPRL (http://tiny.be) All Rights Reserved.
@@ -134,3 +135,6 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
             pass
     else:
         raise Exception, 'Graph type '+type+' does not exist !'
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

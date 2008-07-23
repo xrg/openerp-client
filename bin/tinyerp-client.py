@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- encoding: utf-8 -*-
 
 ##############################################################################
 #
@@ -138,4 +139,7 @@ try:
 except KeyboardInterrupt, e:
     log = logging.getLogger('common')
     log.info(_('Closing Tiny ERP, KeyboardInterrupt'))
+
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

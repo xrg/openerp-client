@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -62,4 +63,7 @@ class spinbutton(interface.widget_interface):
     def _readonly_set(self, value):
         self.widget.set_editable(not value)
         self.widget.set_sensitive(not value)
+
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

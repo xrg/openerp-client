@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -48,3 +49,6 @@ class parser_view(object):
         self.screen = screen
         self.widget = widget
         self.state_aware_widgets = state_aware_widgets or []
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

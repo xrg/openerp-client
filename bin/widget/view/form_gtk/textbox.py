@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -73,3 +74,6 @@ class textbox(interface.widget_interface):
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
         iter_start = buffer.get_start_iter()
         buffer.insert(iter_start, value)
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

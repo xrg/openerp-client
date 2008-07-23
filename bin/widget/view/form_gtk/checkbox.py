@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -50,3 +51,6 @@ class checkbox(interface.widget_interface):
             return False
         super(checkbox, self).display(model, model_field)
         self.widget.set_active(bool(model_field.get(model)))
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

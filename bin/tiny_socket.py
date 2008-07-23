@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 Tiny SPRL (http://tiny.be) All Rights Reserved.
@@ -93,3 +94,6 @@ class mysocket:
             raise res[0]
         else:
             return res[0]
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
