@@ -53,6 +53,8 @@ class ViewWidget(object):
         modelfield = model.mgroup.mfields.get(self.widget_name, False)
         if modelfield:
             modelfield.state_set(model, state)
+            if modelfield.attrs.get('attrs',False):
+                modelfield.attrs_set(model)
             self.widget.display(model, modelfield)
         elif isinstance(self.widget, action):
             self.widget.display(model, False)

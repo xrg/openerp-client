@@ -255,6 +255,9 @@ class ModelRecord(signal_event.signal_event):
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
         self.signal('record-changed')
     
+    def on_change_attrs(self, callback):
+        self.signal('attrs-changed')
+
     def cond_default(self, field, value):
         ir = RPCProxy('ir.values')
         values = ir.get('default', '%s=%s' % (field, value),
