@@ -179,9 +179,6 @@ class main(service.Service):
             (name,action) = res
             self._exec_action(action, data, context=context)
             return (name, action)
-        elif not len(keyact):
-            if warning:
-                common.message(_('No action defined!'))
         return False
 
 main()
