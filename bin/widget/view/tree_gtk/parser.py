@@ -104,7 +104,15 @@ class parser_tree(interface.parser_interface):
                     if isinstance(renderer, gtk.CellRendererToggle):
                         renderer.set_property('activatable', False)
 
-                col = gtk.TreeViewColumn(fields[fname]['string'], renderer)
+                col = gtk.TreeViewColumn(None, renderer)
+                col_label = gtk.Label('')
+                if fields[fname].get('required', False):
+                    col_label.set_markup('<b>%s</b>' % fields[fname]['string'])
+                else:
+                    col_label.set_text(fields[fname]['string'])
+                col_label.show()
+                col.set_widget(col_label)
+
                 col.name = fname
                 col._type = fields[fname]['type']
                 col.set_cell_data_func(renderer, cell.setter)
