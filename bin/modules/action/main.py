@@ -119,6 +119,7 @@ class main(service.Service):
                 if dia.dia.get_has_separator():
                     dia.dia.set_has_separator(False)
                 dia.run()
+                dia.destroy()
             else:
                 obj = service.LocalService('gui.window')
                 obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
