@@ -36,6 +36,7 @@ import gettext
 import service
 
 class view_tree_sc(object):
+    ( COLUMN_RES_ID, COLUMN_NAME, COLUMN_ID ) = range(3)
     def __init__(self, tree, model):
         self.model = model
         self.tree = tree
@@ -54,16 +55,17 @@ class view_tree_sc(object):
     def on_cell_edited(self, cell, path_string, new_text):
         model = self.tree.get_model()
         iter = model.get_iter_from_string(path_string)
-        old_text = model.get_value( iter, 1 )
+        old_text = model.get_value( iter, self.COLUMN_NAME )
         if old_text <> new_text:
-            res_id = int( model.get_value( iter, 2 ) )
+            res_id = int( model.get_value( iter, self.COLUMN_ID ) )
             rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'write', res_id, { 'name' : new_text }, rpc.session.context )
-            model.set(iter, 1, new_text)
+            model.set(iter, self.COLUMN_NAME, new_text)
+
         cell.set_property( 'editable', False )
 
     def on_key_press_event( self, widget, event ):
         if event.keyval == gtk.keysyms.F2:
-            column = self.tree.get_column( 1 )
+            column = self.tree.get_column( self.COLUMN_NAME )
             cell = column.get_cell_renderers()[0]
             cell.set_property( 'editable', True )
 
@@ -80,7 +82,11 @@ class view_tree_sc(object):
         sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, self.model, rpc.session.context) or []
         for s in sc:
             num = store.append()
-            store.set(num, 0, s['res_id'], 1, s['name'], 2, s['id'])
+            store.set(num, 
+              self.COLUMN_RES_ID, s['res_id'], 
+              self.COLUMN_NAME, s['name'], 
+              self.COLUMN_ID, s['id']
+            )
         self.tree.set_model(store)
         if self.model == 'ir.ui.menu':
             service.LocalService('gui.main').shortcut_set(sc)
