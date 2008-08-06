@@ -46,7 +46,7 @@ class view_tree_sc(object):
 
         self.tree.enable_model_drag_source(gtk.gdk.BUTTON1_MASK, [("shortcuts", 0, 0)], gtk.gdk.ACTION_COPY)
         self.tree.enable_model_drag_dest([("shortcuts", 0, 0)], gtk.gdk.ACTION_COPY)
-        self.tree.connect("drag_data_received", self.onDragDataReceived)
+        self.tree.connect("drag_data_received", self.on_drag_data_received)
 
         column = gtk.TreeViewColumn (_('ID'), gtk.CellRendererText(), text=0)
         self.tree.append_column(column)
@@ -124,12 +124,12 @@ class view_tree_sc(object):
                 path = model.get_path( iter )
                 self.tree.set_cursor_on_cell( path, column, cell, True )
 
-    def checkSanity(self, model, iter_to_copy, target_iter):
+    def check_sanity(self, model, iter_to_copy, target_iter):
         path_of_iter_to_copy = model.get_path(iter_to_copy)
         path_of_target_iter = model.get_path(target_iter)
         return not ( path_of_target_iter[0:len(path_of_iter_to_copy)] == path_of_iter_to_copy )
     
-    def iterCopy(self, treeview, model, iter_to_copy, target_iter, pos):
+    def iter_copy(self, treeview, model, iter_to_copy, target_iter, pos):
         data_column_0 = model.get_value(iter_to_copy, self.COLUMN_RES_ID)
         data_column_1 = model.get_value(iter_to_copy, self.COLUMN_NAME)
         data_column_2 = model.get_value(iter_to_copy, self.COLUMN_ID)
@@ -139,11 +139,13 @@ class view_tree_sc(object):
             new_iter = model.insert_before(target_iter, None)
         elif pos == gtk.TREE_VIEW_DROP_AFTER:
             new_iter = model.insert_after(target_iter, None)
+        else:
+            new_iter = model.append()
         model.set_value(new_iter, self.COLUMN_RES_ID, data_column_0)
         model.set_value(new_iter, self.COLUMN_NAME, data_column_1)
         model.set_value(new_iter, self.COLUMN_ID, data_column_2)
     
-    def onDragDataReceived(self, treeview, drag_context, x, y, selection, info, eventtime):
+    def on_drag_data_received(self, treeview, drag_context, x, y, selection, info, eventtime):
         drop_info = treeview.get_dest_row_at_pos(x,y)
         modified = False
         if drop_info:
@@ -151,8 +153,8 @@ class view_tree_sc(object):
             model, iter_to_copy = treeview.get_selection().get_selected()
             target_iter = model.get_iter(path)
             if target_iter <> iter_to_copy:
-                if self.checkSanity(model, iter_to_copy, target_iter):
-                    self.iterCopy(treeview, model, iter_to_copy, target_iter, pos)
+                if self.check_sanity(model, iter_to_copy, target_iter):
+                    self.iter_copy(treeview, model, iter_to_copy, target_iter, pos)
                     drag_context.finish(True, True, eventtime)
                     treeview.expand_all()
                     modified = True
@@ -163,13 +165,7 @@ class view_tree_sc(object):
         else:
             model, iter_to_copy = treeview.get_selection().get_selected()
             if iter_to_copy <> self.last_iter:
-                data_column_0 = model.get_value(iter_to_copy, self.COLUMN_RES_ID)
-                data_column_1 = model.get_value(iter_to_copy, self.COLUMN_NAME)
-                data_column_2 = model.get_value(iter_to_copy, self.COLUMN_ID)
-                new_iter = model.append( None )
-                model.set_value(new_iter, self.COLUMN_RES_ID, data_column_0)
-                model.set_value(new_iter, self.COLUMN_NAME, data_column_1)
-                model.set_value(new_iter, self.COLUMN_ID, data_column_2)
+                self.iter_copy( treeview, model, iter_to_copy, None, None ) 
                 drag_context.finish(True, True, eventtime)
                 modified = True
             else:
