@@ -39,15 +39,40 @@ class view_tree_sc(object):
     def __init__(self, tree, model):
         self.model = model
         self.tree = tree
+        self.tree.connect( 'key-press-event', self.on_key_press_event )
         self.tree.get_selection().set_mode('single')
         column = gtk.TreeViewColumn (_('ID'), gtk.CellRendererText(), text=0)
         self.tree.append_column(column)
         column.set_visible(False)
         cell = gtk.CellRendererText()
+        cell.connect( 'edited', self.on_cell_edited )
 
         column = gtk.TreeViewColumn (_('Description'), cell, text=1)
         self.tree.append_column(column)
         self.update()
+
+    def on_cell_edited(self, cell, path_string, new_text):
+        model = self.tree.get_model()
+        iter = model.get_iter_from_string(path_string)
+        old_text = model.get_value( iter, 1 )
+        if old_text <> new_text:
+            res_id = int( model.get_value( iter, 2 ) )
+            rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'write', res_id, { 'name' : new_text }, rpc.session.context )
+            model.set(iter, 1, new_text)
+        cell.set_property( 'editable', False )
+
+    def on_key_press_event( self, widget, event ):
+        if event.keyval == gtk.keysyms.F2:
+            column = self.tree.get_column( 1 )
+            cell = column.get_cell_renderers()[0]
+            cell.set_property( 'editable', True )
+
+            selected_row = widget.get_selection().get_selected()
+            if selected_row and selected_row[1]:
+                (model, iter) = selected_row
+                path = model.get_path( iter )
+                self.tree.set_cursor_on_cell( path, column, cell, True )
+
 
     def update(self):
         store = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
