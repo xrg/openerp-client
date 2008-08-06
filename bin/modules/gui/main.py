@@ -326,7 +326,7 @@ class db_create(object):
 				self.timer = gobject.timeout_add(1000, self.progress_timeout, pb, url, passwd, id, win, db_name, parent)
 			except Exception, e:
 				if e.args == ('DbExist',):
-					common.warning(_("Could not create database."),_('Database alreayd exists !'))
+					common.warning(_("Could not create database."),_('Database already exists !'))
 				elif ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
 					common.warning(_('Bad database administrator password !'), _("Could not create database."))
 				else:
@@ -907,8 +907,8 @@ class terp_main(service.Service):
 		if current_view == view and objid == current_id:
 			cpt = None
 			if objid and view.screen.current_view.view_type == 'form':
-				cpt = rpc.session.rpc_exec_auth('/object', 'execute', 
-												'ir.attachment', 'search_count', 
+				cpt = rpc.session.rpc_exec_auth('/object', 'execute',
+												'ir.attachment', 'search_count',
 												[('res_model', '=', view.model), ('res_id', '=', objid)])
 			if cpt:
 				self.buttons['but_attach'].set_icon_widget(self.__img_attachments)
@@ -921,7 +921,7 @@ class terp_main(service.Service):
 		"""
 		if not view:
 			view = self._wid_get()
-		
+
 		id = view and view.id_get()
 		gobject.timeout_add(1500, self.__attachment_callback, view, id)
 		self.buttons['but_attach'].set_icon_widget(self.__img_no_attachments)

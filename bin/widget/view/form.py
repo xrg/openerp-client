@@ -36,6 +36,7 @@ import service
 import options
 from form_gtk.action import action
 from interface import parser_view
+import tools
 
 class ViewWidget(object):
 	def __init__(self, parent, widget, widget_name):
@@ -289,8 +290,35 @@ class ViewForm(parser_view):
 	def signal_record_changed(self, *args):
 		pass
 
+	def attrs_set(self, model, obj, att_obj):
+		attrs_changes = eval(att_obj.attrs.get('attrs',"{}"))
+		for k,v in attrs_changes.items():
+			for condition in v:
+				result = tools.calc_condition(self,model,condition)
+				if result:
+					if k=='invisible':
+						obj.hide()
+					elif k=='readonly':
+						obj.set_sensitive(False)
+				else:
+					if k=='invisible':
+						obj.show()
+					if k=='readonly':
+						obj.set_sensitive(True)
+
+	def set_notebook(self,model,nb):
+		for i in range(0,nb.get_n_pages()):
+			if nb.get_tab_label(nb.get_nth_page(i)).attrs.get('attrs',False):
+				self.attrs_set(model,nb.get_nth_page(i),nb.get_tab_label(nb.get_nth_page(i)))
 	def display(self):
 		model = self.screen.current_model
+		for x in self.widget.children():
+			if (type(x)==gtk.Table):
+				for y in x.children():
+					if type(y)==gtk.Notebook:
+						self.set_notebook(model,y)
+			elif type(x)==gtk.Notebook:
+				self.set_notebook(model,x)
 		if model and ('state' in model.mgroup.fields):
 			state = model['state'].get(model)
 		else:
@@ -299,6 +327,7 @@ class ViewForm(parser_view):
 			widget.display(model, state)
 		for button in self.buttons:
 			button.state_set(state)
+			button.attrs_set(model)
 		return True
 
 	def set_cursor(self, new=False):

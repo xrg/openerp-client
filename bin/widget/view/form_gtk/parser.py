@@ -137,6 +137,20 @@ class Button(Observable):
 		else:
 			self.widget.show()
 
+	def attrs_set(self, model):
+		attrs_changes = eval(self.attrs.get('attrs',"{}"))
+		for k,v in attrs_changes.items():
+			for condition in v:
+				result = tools.calc_condition(self,model,condition)
+				if result:
+					if k=='invisible':
+						self.widget.hide()
+					elif k=='readonly':
+						self.widget.set_sensitive(False)
+					else:
+						self.widget.set_sensitive(False and self.attrs.get('readonly',False))
+
+
 class _container(object):
 	def __init__(self, tooltips):
 		self.cont = []
@@ -323,6 +337,7 @@ class parser_form(widget.view.interface.parser_interface):
 				else:
 					angle = int(options.options['client.form_tab_orientation'])
 				l = gtk.Label(attrs.get('string','No String Attr.'))
+				l.attrs=attrs.copy()
 				l.set_angle(angle)
 				widget, widgets, buttons, on_write = self.parse(model, node, fields, notebook, tooltips=self.tooltips)
 				button_list += buttons
