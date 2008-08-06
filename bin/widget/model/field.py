@@ -34,7 +34,7 @@ try:
     from sets import Set as set
 except ImportError:
     pass
-
+import tools
 class ModelField(object):
     '''
     get: return the values to write to the server
@@ -119,35 +119,11 @@ class CharField(object):
     def create(self, model):
         return False
 
-    def calc_condition(self,model,con):
-        if model and (con[0] in model.mgroup.fields):
-            val = model[con[0]].get(model)
-            if con[1]=="=":
-                if val==con[2]:
-                    return True
-            elif con[1]=="!=":
-                if val!=con[2]:
-                    return True
-            elif con[1]=="<":
-                if val<con[2]:
-                    return True
-            elif con[1]==">":
-                if val>con[2]:
-                    return True
-            elif con[1]=="<=":
-                if val<=con[2]:
-                    return True
-            elif con[1]==">=":
-                if val>=con[2]:
-                    return True
-
-            return False
-
     def attrs_set(self, model):
         attrs_changes = eval(self.attrs.get('attrs',"{}"))
         for k,v in attrs_changes.items():
             for condition in v:
-                result = self.calc_condition(model,condition)
+                result = tools.calc_condition(self,model,condition)
                 if result:
                     self.get_state_attrs(model)[k]=True
     def state_set(self, model, state='draft'):

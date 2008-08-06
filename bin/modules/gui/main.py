@@ -327,7 +327,7 @@ class db_create(object):
                 self.timer = gobject.timeout_add(1000, self.progress_timeout, pb, url, passwd, id, win, db_name, parent)
             except Exception, e:
                 if e.args == ('DbExist',):
-                    common.warning(_("Could not create database."),_('Database alreayd exists !'))
+                    common.warning(_("Could not create database."),_('Database already exists !'))
                 elif ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
                     common.warning(_('Bad database administrator password !'), _("Could not create database."))
                 else:

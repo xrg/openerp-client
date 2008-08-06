@@ -63,7 +63,28 @@ def node_attributes(node):
             result[attrs.item(i).localName] = eval(attrs.item(i).nodeValue)
     return result
 
-
+#FIXME use spaces
+def calc_condition(self,model,con):
+	if model and (con[0] in model.mgroup.fields):
+		val = model[con[0]].get(model)
+		if con[1]=="=":
+			if val==con[2]:
+				return True
+		elif con[1]=="!=":
+			if val!=con[2]:
+				return True
+		elif con[1]=="<":
+			if val<con[2]:
+				return True
+		elif con[1]==">":
+			if val>con[2]:
+				return True
+		elif con[1]=="<=":
+			if val<=con[2]:
+				return True
+		elif con[1]==">=":
+			if val>=con[2]:
+				return True
+		return False
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
