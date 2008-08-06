@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -33,32 +34,35 @@ import wid_int
 
 
 class char(wid_int.wid_int):
-	def __init__(self, name, parent, attrs={}):
-		wid_int.wid_int.__init__(self, name, parent, attrs)
+    def __init__(self, name, parent, attrs={}):
+        wid_int.wid_int.__init__(self, name, parent, attrs)
 
-		self.widget = gtk.Entry()
-		self.widget.set_max_length(int(attrs.get('size',16)))
-		self.widget.set_width_chars(5)
-		self.widget.set_property('activates_default', True)
+        self.widget = gtk.Entry()
+        self.widget.set_max_length(int(attrs.get('size',16)))
+        self.widget.set_width_chars(5)
+        self.widget.set_property('activates_default', True)
 
-	def _value_get(self):
-		s = self.widget.get_text()
-		if s:
-			return [(self.name,self.attrs.get('comparator','ilike'),s)]
-		else:
-			return []
+    def _value_get(self):
+        s = self.widget.get_text()
+        if s:
+            return [(self.name,self.attrs.get('comparator','ilike'),s)]
+        else:
+            return []
 
-	def _value_set(self, value):
-		self.widget.set_text(value)
+    def _value_set(self, value):
+        self.widget.set_text(value)
 
-	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
+    value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 
-	def clear(self):
-		self.value = ''
+    def clear(self):
+        self.value = ''
 
-	def _readonly_set(self, value):
-		self.widget.set_editable(not value)
-		self.widget.set_sensitive(not value)
+    def _readonly_set(self, value):
+        self.widget.set_editable(not value)
+        self.widget.set_sensitive(not value)
 
-	def sig_activate(self, fct):
-		self.widget.connect_after('activate', fct)
+    def sig_activate(self, fct):
+        self.widget.connect_after('activate', fct)
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -30,33 +31,36 @@
 import service
 
 class spool(service.Service):
-	def __init__(self, name='spool'):
-		service.Service.__init__(self, name, '*')
-		self.obj_sub = {}
-		self.report = {}
+    def __init__(self, name='spool'):
+        service.Service.__init__(self, name, '*')
+        self.obj_sub = {}
+        self.report = {}
 
-	def publish(self, name, obj, datas, trigger=True):
-		if name not in self.report:
-			self.report[name]=[]
-		self.report[name].append((obj, datas))
-		if trigger:
-			return self.trigger(name)
-		return 0
+    def publish(self, name, obj, datas, trigger=True):
+        if name not in self.report:
+            self.report[name]=[]
+        self.report[name].append((obj, datas))
+        if trigger:
+            return self.trigger(name)
+        return 0
 
-	def subscribe(self, name, method, datas={}):
-		if name not in self.obj_sub:
-			self.obj_sub[name]=[]
-		self.obj_sub[name].append( (method, datas) )
+    def subscribe(self, name, method, datas={}):
+        if name not in self.obj_sub:
+            self.obj_sub[name]=[]
+        self.obj_sub[name].append( (method, datas) )
 
-	def trigger(self, name):
-		nbr = 0
-		while len(self.report[name]):
-			(obj, datas) = self.report[name].pop()
-			if name in self.obj_sub:
-				for i in self.obj_sub[name]:
-					new_datas = datas.copy()
-					new_datas.update(i[1])
-					i[0](obj, new_datas)
-					nbr +=1
-		return nbr
+    def trigger(self, name):
+        nbr = 0
+        while len(self.report[name]):
+            (obj, datas) = self.report[name].pop()
+            if name in self.obj_sub:
+                for i in self.obj_sub[name]:
+                    new_datas = datas.copy()
+                    new_datas.update(i[1])
+                    i[0](obj, new_datas)
+                    nbr +=1
+        return nbr
 spool()
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

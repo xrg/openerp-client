@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 Tiny SPRL (http://tiny.be) All Rights Reserved.
@@ -29,13 +30,16 @@ import service
 import common
 
 def wkf_print(datas):
-	datas['nested']=True
-	obj = service.LocalService('action.main')
-	obj.exec_report('workflow.instance.graph', datas)
-	return True
+    datas['nested']=True
+    obj = service.LocalService('action.main')
+    obj.exec_report('workflow.instance.graph', datas)
+    return True
 
 def wkf_print_simple(datas):
-	datas['nested']=False
-	obj = service.LocalService('action.main')
-	obj.exec_report('workflow.instance.graph', datas)
-	return True
+    datas['nested']=False
+    obj = service.LocalService('action.main')
+    obj.exec_report('workflow.instance.graph', datas)
+    return True
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

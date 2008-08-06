@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -44,43 +45,46 @@ import form
 
 
 class win_preference(object):
-	def __init__(self, parent=None):
-		self.glade = glade.XML(common.terp_path("terp.glade"),'win_preference', gettext.textdomain())
-		self.win = self.glade.get_widget('win_preference')
-		self.win.set_icon(common.TINYERP_ICON)
-		if not parent:
-			parent = service.LocalService('gui.main').window
-		self.win.set_transient_for(parent)
-		self.parent = parent
+    def __init__(self, parent=None):
+        self.glade = glade.XML(common.terp_path("terp.glade"),'win_preference', gettext.textdomain())
+        self.win = self.glade.get_widget('win_preference')
+        self.win.set_icon(common.TINYERP_ICON)
+        if not parent:
+            parent = service.LocalService('gui.main').window
+        self.win.set_transient_for(parent)
+        self.parent = parent
 
-		action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'action_get', {})
-		print '**', action_id
-		action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', [action_id], False, {})[0]
-		print action
+        action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'action_get', {})
+        print '**', action_id
+        action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', [action_id], False, {})[0]
+        print action
 
-		view_ids=[]
-		if action.get('views', []):
-			view_ids=[x[0] for x in action['views']]
-		elif action.get('view_id', False):
-			view_ids=[action['view_id'][0]]
+        view_ids=[]
+        if action.get('views', []):
+            view_ids=[x[0] for x in action['views']]
+        elif action.get('view_id', False):
+            view_ids=[action['view_id'][0]]
 
-		self.screen = Screen('res.users', view_type=[], window=parent)
-		self.screen.add_view_id(view_ids[0], 'form', display=True)
-		self.screen.load([rpc.session.uid])
-		self.screen.display(rpc.session.uid)
+        self.screen = Screen('res.users', view_type=[], window=parent)
+        self.screen.add_view_id(view_ids[0], 'form', display=True)
+        self.screen.load([rpc.session.uid])
+        self.screen.display(rpc.session.uid)
 
-		vbox = self.glade.get_widget('preference_vbox')
-		vbox.pack_start(self.screen.widget)
+        vbox = self.glade.get_widget('preference_vbox')
+        vbox.pack_start(self.screen.widget)
 
-		self.win.set_title(_('Preference'))
-		self.win.show_all()
+        self.win.set_title(_('Preference'))
+        self.win.show_all()
 
-	def run(self, datas={}):
-		res = self.win.run()
-		if res==gtk.RESPONSE_OK:
-			rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write', [rpc.session.uid], self.screen.get())
-			rpc.session.context_reload()
-		self.parent.present()
-		self.win.destroy()
-		return True
+    def run(self, datas={}):
+        res = self.win.run()
+        if res==gtk.RESPONSE_OK:
+            rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write', [rpc.session.uid], self.screen.get())
+            rpc.session.context_reload()
+        self.parent.present()
+        self.win.destroy()
+        return True
+
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

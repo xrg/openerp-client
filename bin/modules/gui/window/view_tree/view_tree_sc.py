@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -35,52 +36,55 @@ import gettext
 import service
 
 class view_tree_sc(object):
-	def __init__(self, tree, model):
-		self.model = model
-		self.tree = tree
-		self.tree.get_selection().set_mode('single')
-		column = gtk.TreeViewColumn (_('ID'), gtk.CellRendererText(), text=0)
-		self.tree.append_column(column)
-		column.set_visible(False)
-		cell = gtk.CellRendererText()
+    def __init__(self, tree, model):
+        self.model = model
+        self.tree = tree
+        self.tree.get_selection().set_mode('single')
+        column = gtk.TreeViewColumn (_('ID'), gtk.CellRendererText(), text=0)
+        self.tree.append_column(column)
+        column.set_visible(False)
+        cell = gtk.CellRendererText()
 
-		column = gtk.TreeViewColumn (_('Description'), cell, text=1)
-		self.tree.append_column(column)
-		self.update()
+        column = gtk.TreeViewColumn (_('Description'), cell, text=1)
+        self.tree.append_column(column)
+        self.update()
 
-	def update(self):
-		store = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
-		uid =  rpc.session.uid
-		sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, self.model, rpc.session.context) or []
-		for s in sc:
-			num = store.append()
-			store.set(num, 0, s['res_id'], 1, s['name'], 2, s['id'])
-		self.tree.set_model(store)
-		if self.model == 'ir.ui.menu':
-			service.LocalService('gui.main').shortcut_set(sc)
+    def update(self):
+        store = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
+        uid =  rpc.session.uid
+        sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, self.model, rpc.session.context) or []
+        for s in sc:
+            num = store.append()
+            store.set(num, 0, s['res_id'], 1, s['name'], 2, s['id'])
+        self.tree.set_model(store)
+        if self.model == 'ir.ui.menu':
+            service.LocalService('gui.main').shortcut_set(sc)
 
-	def remove(self, id):
-		self.update()
-	def add(self, id):
-		self.update()
+    def remove(self, id):
+        self.update()
+    def add(self, id):
+        self.update()
 
-	def value_get(self, col):
-		sel = self.tree.get_selection().get_selected()
-		if not sel:
-			return None
-		(model, iter) = sel
-		if not iter:
-			return None
-		return model.get_value(iter, col)
+    def value_get(self, col):
+        sel = self.tree.get_selection().get_selected()
+        if not sel:
+            return None
+        (model, iter) = sel
+        if not iter:
+            return None
+        return model.get_value(iter, col)
 
-	def sel_id_get(self):
-		res = self.value_get(0)
-		res = eval(str(res))
-		if res:
-			return int(res[0])
-		return None
+    def sel_id_get(self):
+        res = self.value_get(0)
+        res = eval(str(res))
+        if res:
+            return int(res[0])
+        return None
 
-	def serv_update(self, ids, action):
-		if (action==2):
-			self.update()
+    def serv_update(self, ids, action):
+        if (action==2):
+            self.update()
+
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

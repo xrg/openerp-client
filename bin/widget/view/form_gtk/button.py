@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -32,25 +33,28 @@ import gtk
 import interface
 
 class button(interface.widget_interface):
-	def __init__(self, window, parent, model, attrs={}):
-		interface.widget_interface.__init__(self, window, parent, model, attrs)
-		self.widget = gtk.Button()
-		if attrs.get('icon', False):
-			icon = gtk.Image()
-			icon.set_from_stock(attrs['icon'], gtk.ICON_SIZE_BUTTON)
-			self.widget.set_image(icon)
+    def __init__(self, window, parent, model, attrs={}):
+        interface.widget_interface.__init__(self, window, parent, model, attrs)
+        self.widget = gtk.Button()
+        if attrs.get('icon', False):
+            icon = gtk.Image()
+            icon.set_from_stock(attrs['icon'], gtk.ICON_SIZE_BUTTON)
+            self.widget.set_image(icon)
 
-		self.widget.set_label(attrs['string'])
-		self.widget.connect('clicked', self.sig_exec)
+        self.widget.set_label(attrs['string'])
+        self.widget.connect('clicked', self.sig_exec)
 
-	def _value_get(self):
-		return self.widget.get_label()
+    def _value_get(self):
+        return self.widget.get_label()
 
-	def sig_exec(self, widget):
-		self.trigger('button_clicked', attrs['name'])
+    def sig_exec(self, widget):
+        self.trigger('button_clicked', attrs['name'])
 
-	def _value_set(self, value):
-		pass
+    def _value_set(self, value):
+        pass
 
-	value = property(_value_get, _value_set, None,
-	  'The content of the widget or ValueError if not valid')
+    value = property(_value_get, _value_set, None,
+      'The content of the widget or ValueError if not valid')
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

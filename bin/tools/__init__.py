@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -33,35 +34,36 @@ import os
 import sys
 
 def expr_eval(string, context={}):
-	context['uid'] = rpc.session.uid
-	if isinstance(string, basestring):
-		return eval(string, context)
-	else:
-		return string
+    context['uid'] = rpc.session.uid
+    if isinstance(string, basestring):
+        return eval(string, context)
+    else:
+        return string
 
 def launch_browser(url):
-	if sys.platform == 'win32':
-		webbrowser.open(url)
-	else:
-		pid = os.fork()
-		if not pid:
-			pid = os.fork()
-			if not pid:
-				webbrowser.open(url)
-			sys.exit(0)
-		os.wait()
+    if sys.platform == 'win32':
+        webbrowser.open(url)
+    else:
+        pid = os.fork()
+        if not pid:
+            pid = os.fork()
+            if not pid:
+                webbrowser.open(url)
+            sys.exit(0)
+        os.wait()
 
 def node_attributes(node):
-	result = {}
-	attrs = node.attributes
-	if attrs is None:
-		return {}
-	for i in range(attrs.length):
-		result[attrs.item(i).localName] = str(attrs.item(i).nodeValue)
-		if attrs.item(i).localName == "digits" and isinstance(attrs.item(i).nodeValue, (str, unicode)):
-			result[attrs.item(i).localName] = eval(attrs.item(i).nodeValue)
-	return result
+    result = {}
+    attrs = node.attributes
+    if attrs is None:
+        return {}
+    for i in range(attrs.length):
+        result[attrs.item(i).localName] = str(attrs.item(i).nodeValue)
+        if attrs.item(i).localName == "digits" and isinstance(attrs.item(i).nodeValue, (str, unicode)):
+            result[attrs.item(i).localName] = eval(attrs.item(i).nodeValue)
+    return result
 
+#FIXME use spaces
 def calc_condition(self,model,con):
 	if model and (con[0] in model.mgroup.fields):
 		val = model[con[0]].get(model)
@@ -84,3 +86,5 @@ def calc_condition(self,model,con):
 			if val>=con[2]:
 				return True
 		return False
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

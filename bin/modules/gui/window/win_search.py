@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
@@ -41,128 +42,130 @@ from widget.screen import Screen
 import widget_search
 
 fields_list_type = {
-	'checkbox': gobject.TYPE_BOOLEAN
+    'checkbox': gobject.TYPE_BOOLEAN
 }
 
 class win_search(object):
-	def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None):
-		self.domain =domain
-		self.context = context
-		self.context.update(rpc.session.context)
-		self.sel_multi = sel_multi
-		self.glade = glade.XML(common.terp_path("terp.glade"),'win_search',gettext.textdomain())
-		self.win = self.glade.get_widget('win_search')
-		self.win.set_icon(common.TINYERP_ICON)
-		if not parent:
-			parent = service.LocalService('gui.main').window
-		self.parent = parent
-		self.win.set_transient_for(parent)
+    def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None):
+        self.domain =domain
+        self.context = context
+        self.context.update(rpc.session.context)
+        self.sel_multi = sel_multi
+        self.glade = glade.XML(common.terp_path("terp.glade"),'win_search',gettext.textdomain())
+        self.win = self.glade.get_widget('win_search')
+        self.win.set_icon(common.TINYERP_ICON)
+        if not parent:
+            parent = service.LocalService('gui.main').window
+        self.parent = parent
+        self.win.set_transient_for(parent)
 
-		self.screen = Screen(model, view_type=['tree'], context=context, parent=self.win)
-		self.view = self.screen.current_view
-		self.view.unset_editable()
-		sel = self.view.widget_tree.get_selection()
+        self.screen = Screen(model, view_type=['tree'], context=context, parent=self.win)
+        self.view = self.screen.current_view
+        self.view.unset_editable()
+        sel = self.view.widget_tree.get_selection()
 
-		if not sel_multi:
-			sel.set_mode('single')
-		else:
-			sel.set_mode(gtk.SELECTION_MULTIPLE)
-		vp = gtk.Viewport()
-		vp.set_shadow_type(gtk.SHADOW_NONE)
-		vp.add(self.screen.widget)
-		sw = self.glade.get_widget('search_sw')
-		sw.add(vp)
-		sw.show_all()
-		self.view.widget_tree.connect('row_activated', self.sig_activate)
-		self.view.widget_tree.connect('button_press_event', self.sig_button)
+        if not sel_multi:
+            sel.set_mode('single')
+        else:
+            sel.set_mode(gtk.SELECTION_MULTIPLE)
+        vp = gtk.Viewport()
+        vp.set_shadow_type(gtk.SHADOW_NONE)
+        vp.add(self.screen.widget)
+        sw = self.glade.get_widget('search_sw')
+        sw.add(vp)
+        sw.show_all()
+        self.view.widget_tree.connect('row_activated', self.sig_activate)
+        self.view.widget_tree.connect('button_press_event', self.sig_button)
 
-		self.model_name = model
+        self.model_name = model
 
-		view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'form', self.context)
-		self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win)
+        view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'form', self.context)
+        self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win)
 
-		self.title = _('Tiny ERP Search: %s') % self.form.name
-		self.title_results = _('Tiny ERP Search: %s (%%d result(s))') % self.form.name
-		self.win.set_title(self.title)
-		x, y = self.form.widget.size_request()
+        self.title = _('Tiny ERP Search: %s') % self.form.name
+        self.title_results = _('Tiny ERP Search: %s (%%d result(s))') % self.form.name
+        self.win.set_title(self.title)
+        x, y = self.form.widget.size_request()
 
-		hbox = self.glade.get_widget('search_hbox')
-		hbox.pack_start(self.form.widget)
-		self.ids = ids
-		if self.ids:
-			self.reload()
-		self.old_search = None
-		self.old_offset = self.old_limit = None
-		if self.ids:
-			self.old_search = []
-			self.old_limit = self.form.get_limit()
-			self.old_offset = self.form.get_offset()
+        hbox = self.glade.get_widget('search_hbox')
+        hbox.pack_start(self.form.widget)
+        self.ids = ids
+        if self.ids:
+            self.reload()
+        self.old_search = None
+        self.old_offset = self.old_limit = None
+        if self.ids:
+            self.old_search = []
+            self.old_limit = self.form.get_limit()
+            self.old_offset = self.form.get_offset()
 
-		self.view.widget.show_all()
-		if self.form.focusable:
-			self.form.focusable.grab_focus()
+        self.view.widget.show_all()
+        if self.form.focusable:
+            self.form.focusable.grab_focus()
 
-	def sig_activate(self, treeview, path, column, *args):
-		self.view.widget_tree.emit_stop_by_name('row_activated')
-		if not self.sel_multi:
-			self.win.response(gtk.RESPONSE_OK)
-		return False
+    def sig_activate(self, treeview, path, column, *args):
+        self.view.widget_tree.emit_stop_by_name('row_activated')
+        if not self.sel_multi:
+            self.win.response(gtk.RESPONSE_OK)
+        return False
 
-	def sig_button(self, view, event):
-		if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-			self.win.response(gtk.RESPONSE_OK)
-		return False
+    def sig_button(self, view, event):
+        if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+            self.win.response(gtk.RESPONSE_OK)
+        return False
 
-	def find(self, widget=None, *args):
-		limit = self.form.get_limit()
-		offset = self.form.get_offset()
-		if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset):
-			self.win.response(gtk.RESPONSE_OK)
-			return False
-		self.old_offset = offset
-		self.old_limit = limit
-		v = self.form.value
-		v_keys = map(lambda x: x[0], v)
-		v += self.domain
-		try:
-			self.ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, rpc.session.context)
-		except:
-			# Try if it is not an old server
-			self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
-		self.reload()
-		self.old_search = self.form.value
-		self.win.set_title(self.title_results % len(self.ids))
-		return True
+    def find(self, widget=None, *args):
+        limit = self.form.get_limit()
+        offset = self.form.get_offset()
+        if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset):
+            self.win.response(gtk.RESPONSE_OK)
+            return False
+        self.old_offset = offset
+        self.old_limit = limit
+        v = self.form.value
+        v_keys = map(lambda x: x[0], v)
+        v += self.domain
+        try:
+            self.ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, rpc.session.context)
+        except:
+            # Try if it is not an old server
+            self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
+        self.reload()
+        self.old_search = self.form.value
+        self.win.set_title(self.title_results % len(self.ids))
+        return True
 
-	def reload(self):
-		self.screen.clear()
-		self.screen.load(self.ids)
-		sel = self.view.widget_tree.get_selection()
-		if sel.get_mode() == gtk.SELECTION_MULTIPLE:
-			sel.select_all()
+    def reload(self):
+        self.screen.clear()
+        self.screen.load(self.ids)
+        sel = self.view.widget_tree.get_selection()
+        if sel.get_mode() == gtk.SELECTION_MULTIPLE:
+            sel.select_all()
 
-	def sel_ids_get(self):
-		return self.screen.sel_ids_get()
+    def sel_ids_get(self):
+        return self.screen.sel_ids_get()
 
-	def destroy(self):
-		self.parent.present()
-		self.win.destroy()
+    def destroy(self):
+        self.parent.present()
+        self.win.destroy()
 
-	def go(self):
-		end = False
-		while not end:
-			button = self.win.run()
-			if button == gtk.RESPONSE_OK:
-				res = self.sel_ids_get() or self.ids
-				end = True
-			elif button== gtk.RESPONSE_APPLY:
-				end = not self.find()
-				if end:
-					res = self.sel_ids_get() or self.ids
-			else:
-				res = None
-				end = True
-		self.destroy()
-		return res
+    def go(self):
+        end = False
+        while not end:
+            button = self.win.run()
+            if button == gtk.RESPONSE_OK:
+                res = self.sel_ids_get() or self.ids
+                end = True
+            elif button== gtk.RESPONSE_APPLY:
+                end = not self.find()
+                if end:
+                    res = self.sel_ids_get() or self.ids
+            else:
+                res = None
+                end = True
+        self.destroy()
+        return res
 
-# vim:noexpandtab:
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
