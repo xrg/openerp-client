@@ -147,7 +147,6 @@ class view_tree_sc(object):
         drop_info = treeview.get_dest_row_at_pos(x,y)
         modified = False
         if drop_info:
-            print repr( selection )
             path, pos = drop_info
             model, iter_to_copy = treeview.get_selection().get_selected()
             target_iter = model.get_iter(path)
