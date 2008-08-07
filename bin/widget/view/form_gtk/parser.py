@@ -68,10 +68,10 @@ class Button(Observable):
 
         self.widget.show()
         self.widget.connect('clicked', self.button_clicked)
-    
+
     def hide(self):
         return self.widget.hide()
-    
+
     def show(self):
         return self.widget.show()
 
@@ -395,6 +395,7 @@ class parser_form(widget.view.interface.parser_interface):
 
             elif node.localName=='group':
                 frame = gtk.Frame(attrs.get('string', None))
+                frame.attrs=attrs
                 frame.set_border_width(0)
                 states = [e for e in attrs.get('states','').split(',') if e]
                 saw_list.append(StateAwareWidget(frame, states))

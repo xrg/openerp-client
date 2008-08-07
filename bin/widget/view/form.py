@@ -255,7 +255,7 @@ class ViewForm(parser_view):
 
     def __getitem__(self, name):
         return self.widgets[name]
-    
+
     def destroy(self):
         self.widget.destroy()
         for widget in self.widgets.keys():
@@ -265,7 +265,7 @@ class ViewForm(parser_view):
         del self.widgets
         del self.screen
         del self.state_aware_widgets
-    
+
     def cancel(self):
         pass
 
@@ -293,9 +293,9 @@ class ViewForm(parser_view):
     def signal_record_changed(self, *args):
         pass
 
-	def attrs_set(self, model, obj, att_obj):
-		attrs_changes = eval(att_obj.attrs.get('attrs',"{}"))
-		for k,v in attrs_changes.items():
+    def attrs_set(self, model, obj, att_obj):
+        attrs_changes = eval(att_obj.attrs.get('attrs',"{}"))
+        for k,v in attrs_changes.items():
 			for condition in v:
 				result = tools.calc_condition(self,model,condition)
 				if result:
@@ -313,6 +313,7 @@ class ViewForm(parser_view):
         for i in range(0,nb.get_n_pages()):
             if nb.get_tab_label(nb.get_nth_page(i)).attrs.get('attrs',False):
                 self.attrs_set(model,nb.get_nth_page(i),nb.get_tab_label(nb.get_nth_page(i)))
+
     def display(self):
         model = self.screen.current_model
         for x in self.widget.children():
