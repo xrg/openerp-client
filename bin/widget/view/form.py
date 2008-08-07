@@ -321,8 +321,8 @@ class ViewForm(parser_view):
                 for y in x.children():
                     if type(y)==gtk.Notebook:
                         self.set_notebook(model,y)
-                    elif type(x)==gtk.Notebook:
-                        self.set_notebook(model,x)
+            elif type(x)==gtk.Notebook:
+                self.set_notebook(model,x)
         if model and ('state' in model.mgroup.fields):
             state = model['state'].get(model)
         else:
