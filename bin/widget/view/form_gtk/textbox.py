@@ -31,7 +31,7 @@
 import gtk
 
 import interface
-
+import gtkspell,locale
 class textbox(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
@@ -46,9 +46,23 @@ class textbox(interface.widget_interface):
         self.tv.connect('button_press_event', self._menu_open)
         self.tv.set_accepts_tab(False)
         self.tv.connect('focus-out-event', lambda x,y: self._focus_out())
+        self.inserted = None
+        buffer = self.tv.get_buffer()
+        buffer.connect('insert-text', self._on_buffer_insert_text)
+        buffer.connect('changed', self._on_buffer_changed)
+        gtkspell.Spell(self.tv).set_language(locale.getlocale()[0])
         self.widget.add(self.tv)
-
         self.widget.show_all()
+
+
+    def _on_buffer_insert_text(self, buffer, iter, text, length):
+        self.inserted = text, iter.get_offset()
+
+    def _on_buffer_changed(self, buffer):
+        if self.inserted is None:
+            return
+        inserted, pos = self.inserted
+        self.inserted = None
 
     def _readonly_set(self, value):
         interface.widget_interface._readonly_set(self, value)
@@ -59,7 +73,10 @@ class textbox(interface.widget_interface):
         return self.tv
 
     def set_value(self, model, model_field):
-        buffer = self.tv.get_buffer()
+        if self.inserted is None:
+            return
+        inserted, pos = self.inserted
+        self.inserted = None
         iter_start = buffer.get_start_iter()
         iter_end = buffer.get_end_iter()
         current_text = buffer.get_text(iter_start,iter_end,False)
