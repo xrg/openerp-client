@@ -73,7 +73,7 @@ class Printer(object):
         return ''
 
     def _findHTMLOpener(self):
-		import webbrowser
+        import webbrowser
         def opener(fn):
             webbrowser.open('file://'+fn)
         return opener
