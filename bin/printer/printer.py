@@ -73,34 +73,23 @@ class Printer(object):
         return ''
 
     def _findHTMLOpener(self):
-        if os.name == 'nt':
-            return lambda fn: os.startfile(fn)
-        else:
-            if options.options['printer.softpath_html'] == 'none':
-                prog = self._findInPath(['ooffice', 'ooffice2', 'openoffice', 'firefox', 'mozilla', 'galeon'])
-                def opener(fn):
-                    pid = os.fork()
-                    if not pid:
-                        pid = os.fork()
-                        if not pid:
-                            os.execv(prog, (os.path.basename(prog),fn))
-                        time.sleep(0.1)
-                        sys.exit(0)
-                    os.waitpid(pid, 0)
-                return opener
-            else:
-                def opener(fn):
-                    pid = os.fork()
-                    if not pid:
-                        pid = os.fork()
-                        if not pid:
-                            os.execv(options.options['printer.softpath_html'], (os.path.basename(options.options['printer.softpath_html']),fn))
-                        time.sleep(0.1)
-                        sys.exit(0)
-                    os.waitpid(pid, 0)
-                return opener
+		import webbrowser
+        def opener(fn):
+            webbrowser.open('file://'+fn)
+        return opener
 
     def _findPDFOpener(self):
+        if os.uname()[0] == 'Darwin' :                             	
+            def opener(fn):                                        	
+                pid = os.fork()                                    	
+                if not pid:                                        	
+                    pid = os.fork()                                	
+                    if not pid:                                    	
+                        os.system('/usr/bin/open -a Preview ' + fn)	
+                    time.sleep(0.1)                                	
+                    sys.exit(0)                                    	
+                os.waitpid(pid, 0)                                 	
+            return opener                                          	
         if os.name == 'nt':
             if options.options['printer.preview']:
                 if options.options['printer.softpath'] == 'none':
