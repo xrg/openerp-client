@@ -786,12 +786,12 @@ class terp_main(service.Service):
         return True
 
     def sig_help_index(self, widget):
-        tools.launch_browser('http://www.openerp.com/documentation/user-manual/')
+        tools.launch_browser(options.options['help.index'])
 
     def sig_help_context(self, widget):
         model = self._wid_get().model
         l = rpc.session.context.get('lang','en_US')
-        tools.launch_browser('http://www.topenerp.com/scripts/context_index.php?model=%s&lang=%s' % (model,l))
+        tools.launch_browser(options.options['help.context']+'?model=%s&lang=%s' % (model,l))
 
     def sig_tips(self, *args):
         common.tipoftheday(self.window)

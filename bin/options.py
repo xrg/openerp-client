@@ -91,6 +91,8 @@ class configmanager(object):
             'client.form_tab_orientation': 0,
             'client.lang': False,
             'client.filetype': {},
+            'help.index': 'http://www.openerp.com/documentation/user-manual/',
+            'help.context': 'http://www.openerp.com/scripts/context_index.php'
         }
         parser = optparse.OptionParser(version=_("Tiny ERP Client %s" % tinyerp_version))
         parser.add_option("-c", "--config", dest="config",help=_("specify alternate config file"))
