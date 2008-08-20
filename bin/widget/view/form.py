@@ -316,9 +316,9 @@ class ViewForm(parser_view):
 
     def display(self):
         model = self.screen.current_model
-        for x in self.widget.children():
+        for x in self.widget.get_children():
             if (type(x)==gtk.Table):
-                for y in x.children():
+                for y in x.get_children():
                     if type(y)==gtk.Notebook:
                         self.set_notebook(model,y)
             elif type(x)==gtk.Notebook:
