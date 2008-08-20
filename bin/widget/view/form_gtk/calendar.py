@@ -40,6 +40,8 @@ import locale
 import rpc
 import service
 
+import date_widget
+
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 HM_FORMAT = '%H:%M:%S'
@@ -53,15 +55,14 @@ if not hasattr(locale, 'D_FMT'):
 class calendar(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, attrs=attrs)
-
-        self.widget = gtk.HBox(spacing=3)
-        self.entry = gtk.Entry()
+        self.format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')
+        self.widget = date_widget.ComplexEntry(self.format, spacing=3)
+        self.entry = self.widget.widget
         self.entry.set_property('activates_default', True)
         self.entry.connect('button_press_event', self._menu_open)
         self.entry.connect('activate', self.sig_activate)
         self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
         self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
-        self.widget.pack_start(self.entry, expand=True, fill=True)
 
         tooltips = gtk.Tooltips()
         self.eb = gtk.EventBox()
@@ -91,7 +92,7 @@ class calendar(interface.widget_interface):
         if str=='':
             return False
         try:
-            date = time.strptime(str, locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'))
+            date = time.strptime(str, self.format)
         except:
             return False
         return time.strftime(DT_FORMAT, date)
@@ -102,17 +103,17 @@ class calendar(interface.widget_interface):
 
     def display(self, model, model_field):
         if not model_field:
-            self.entry.set_text('')
+            self.entry.clear()
             return False
         super(calendar, self).display(model, model_field)
         value = model_field.get(model)
         if not value:
-            self.entry.set_text('')
+            self.entry.clear()
         else:
             if len(value)>10:
                 value=value[:10]
             date = time.strptime(value, DT_FORMAT)
-            t=time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'), date)
+            t=time.strftime(self.format, date)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
             self.entry.set_text(t)
@@ -158,14 +159,13 @@ class calendar(interface.widget_interface):
 class datetime(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs=attrs)
-
-        self.widget = gtk.HBox(spacing=3)
-        self.entry = gtk.Entry()
+        self.format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S'
+        self.widget = date_widget.ComplexEntry(self.format, spacing=3)
+        self.entry = self.widget.widget
         self.entry.set_property('activates_default', True)
         self.entry.connect('button_press_event', self._menu_open)
         self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
         self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
-        self.widget.pack_start(self.entry, expand=True, fill=True)
 
         tooltips = gtk.Tooltips()
         eb = gtk.EventBox()
@@ -194,7 +194,7 @@ class datetime(interface.widget_interface):
         if str=='':
             return False
         try:
-            date = time.strptime(str, locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S')
+            date = time.strptime(str, self.format)
         except:
             return False
         if 'tz' in rpc.session.context and timezone:
@@ -222,7 +222,7 @@ class datetime(interface.widget_interface):
     
     def show(self, dt_val, timezone=True):
         if not dt_val:
-            self.entry.set_text('')
+            self.entry.clear()
         else:
             date = time.strptime(dt_val, DHM_FORMAT)
             if 'tz' in rpc.session.context and timezone:
@@ -236,7 +236,7 @@ class datetime(interface.widget_interface):
                     date = ldt.timetuple()
                 except:
                     pass
-            t=time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S', date)
+            t=time.strftime(self.format, date)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
             self.entry.set_text(t)
@@ -297,10 +297,9 @@ class stime(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, parent, attrs=attrs)
 
-        self.widget = gtk.Entry()
-        self.entry = self.widget
-        self.entry.set_property('width-chars', 8)
-        self.entry.set_property('max-length', 8)
+        self.format = '%H:%M:%S'
+        self.widget = date_widget.ComplexEntry(self.format, spacing=3)
+        self.entry = self.widget.widget
         self.value=False
 
     def _readonly_set(self, value):
@@ -316,7 +315,7 @@ class stime(interface.widget_interface):
         if str=='':
             res = False 
         try: 
-            t = time.strptime(str, '%H:%M:%S')
+            t = time.strptime(str, self.format)
         except:
             return False
         return time.strftime(HM_FORMAT, t)
