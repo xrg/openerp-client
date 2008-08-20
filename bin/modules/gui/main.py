@@ -126,6 +126,18 @@ class db_login(object):
         self.win_gl = glade.XML(common.terp_path("terp.glade"),"win_login",gettext.textdomain())
 
     def refreshlist(self, widget, db_widget, label, url, butconnect=False):
+
+        def check_server_version(url):
+            try:
+                import release
+                full_server_version = rpc.session.db_exec_no_except(url, 'server_version')
+                server_version = full_server_version.split('.')
+                client_version = release.version.split('.')
+                return (server_version[:2] == client_version[:2], full_server_version, release.version)
+            except:
+                # the server doesn't understand the request. It's mean that it's an old version of the server
+                return (False, _('Unknow'), release.version)
+
         res = _refresh_dblist(db_widget, url)
         if res == -1:
             label.set_label('<b>'+_('Could not connect to server !')+'</b>')
@@ -133,17 +145,22 @@ class db_login(object):
             label.show()
             if butconnect:
                 butconnect.set_sensitive(False)
-        elif res==0:
-            label.set_label('<b>'+_('No database found, you must create one !')+'</b>')
-            db_widget.hide()
-            label.show()
-            if butconnect:
-                butconnect.set_sensitive(False)
         else:
-            label.hide()
-            db_widget.show()
-            if butconnect:
-                butconnect.set_sensitive(True)
+            if res==0:
+                label.set_label('<b>'+_('No database found, you must create one !')+'</b>')
+                db_widget.hide()
+                label.show()
+                if butconnect:
+                    butconnect.set_sensitive(False)
+            else:
+                label.hide()
+                db_widget.show()
+                if butconnect:
+                    butconnect.set_sensitive(True)
+            
+            is_same_version, server_version, client_version = check_server_version(url)
+            if not is_same_version:
+                common.warning(_('The versions of the server (%s) and the client (%s) missmatch. The client may not work properly. Use it at your own risks.') % (server_version, client_version,))
         return res
 
     def refreshlist_ask(self,widget, server_widget, db_widget, label, butconnect = False, url=False, parent=None):
