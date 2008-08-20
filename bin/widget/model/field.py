@@ -141,6 +141,19 @@ class CharField(object):
             model.state_attrs[self.name] = self.attrs.copy()
         return model.state_attrs[self.name]
 
+class BinaryField(CharField):
+    def get(self, model, check_load=True, readonly=True, modified=False):
+        if self.name in model.value:
+            if (model.value[self.name] is None) and (model.id):
+                model.value[self.name] = model.rpc.read([model.id], [self.name], rpc.session.context)[0][self.name]
+        return model.value.get(self.name, False)
+
+    def get_client(self, model):
+        if self.name in model.value:
+            if (model.value[self.name] is None) and (model.id):
+                model.value[self.name] = model.rpc.read([model.id], [self.name], rpc.session.context)[0][self.name]
+        return model.value.get(self.name, False)
+
 class SelectionField(CharField):
     def set(self, model, value, test_state=True, modified=False):
         if value in [sel[0] for sel in self.attrs['selection']]:
@@ -405,6 +418,8 @@ TYPES = {
     'reference' : ReferenceField,
     'selection': SelectionField,
     'boolean': IntegerField,
+    'image': BinaryField,
+    'binary': BinaryField,
 }
 
 

@@ -295,13 +295,36 @@ class ModelRecordGroup(signal_event.signal_event):
         if len(old) and len(to_add):
             ctx.update(rpc.session.context)
             ctx.update(self.context)
-            values = self.rpc.read(old, to_add, ctx)
-            if values:
-                for v in values:
-                    id = v['id']
-                    if 'id' not in to_add:
-                        del v['id']
-                    self[id].set(v, signal=False)
+
+            to_add_normal = []
+            to_add_binary = []
+            for f in to_add:
+                if fields[f]['type'] in ('image','binary'):
+                    to_add_binary.append(f)
+                else:
+                    to_add_normal.append(f)
+            if to_add_normal:
+                values = self.rpc.read(old, to_add_normal, ctx)
+                if values:
+                    for v in values:
+                        id = v['id']
+                        if 'id' not in to_add:
+                            del v['id']
+                        self[id].set(v, signal=False)
+            if to_add_binary:
+                data = {}
+                for b in to_add_binary:
+                    data[b] = None
+                for m in self.models:
+                    m.set(data)
+
+#            values = self.rpc.read(old, to_add, ctx)
+#            if values:
+#                for v in values:
+#                    id = v['id']
+#                    if 'id' not in to_add:
+#                        del v['id']
+#                    self[id].set(v, signal=False)
         if len(new) and len(to_add):
             ctx.update(self.context)
             values = self.rpc.default_get(to_add, ctx)
