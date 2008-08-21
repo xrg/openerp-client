@@ -43,6 +43,9 @@ from widget.screen import Screen
 
 import form
 
+import options
+import translate
+
 
 class win_preference(object):
     def __init__(self, parent=None):

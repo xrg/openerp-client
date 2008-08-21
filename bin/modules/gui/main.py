@@ -36,6 +36,7 @@ import urlparse
 import gobject
 import gtk
 from gtk import glade
+import translate
 
 import rpc
 
