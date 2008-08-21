@@ -70,6 +70,13 @@ class DateEntry(gtk.Entry):
         self._interactive_input = True
         self.mode_cmd = False
         gobject.idle_add(self.set_position, 0)
+        tooltips = gtk.Tooltips()
+        tooltips.set_tip(self, _('''You can use special operation by pressing +, - or =.  Plus/minus adds/decrease the variable to the current selected date. Equals set part of selected date. Available variables: 12h = 12 hours, 8d = 8 days, 4w = 4 weeks, 1m = 1 month, 2y = 2 years. Some examples:
+* +21d : adds 21 days to selected year
+* =23w : set date to the 23th week of the year
+* -4m : decrease 4 months to the current date
+You can also use "=" to set the date to the current date/time and '-' to clear the field.'''))
+        tooltips.enable()
 
     def _on_insert_text(self, editable, value, length, position):
         if not self._interactive_input:
@@ -119,6 +126,9 @@ class DateEntry(gtk.Entry):
 
     def _focus_out(self, args, args2):
         self.date_get()
+        if self.mode_cmd:
+            self.mode_cmd = False
+            if self.callback_process: self.callback_process(False, self, False)
 
     def set_text(self, text):
         self._interactive_input = False
@@ -220,7 +230,7 @@ class ComplexEntry(gtk.HBox):
             self._date_cb(event)
         else:
             data = self.widget.get_text()
-            if not event.keyval == gtk.keysyms.Escape:
+            if (not event.keyval == gtk.keysyms.Escape) or not event:
                 lst = {
                     '^=(\d+)w$': lambda dt,r: dt+RelativeDateTime(day=0, month=0, weeks = int(r.group(1))),
                     '^=(\d+)d$': lambda dt,r: dt+RelativeDateTime(day=int(r.group(1))),
