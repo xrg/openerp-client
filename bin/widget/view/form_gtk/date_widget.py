@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2006 Async Open Source
+# Copyright (C) Tiny 2008
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,7 +16,9 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
 # USA
 #
-# Author(s): Johan Dahlin <[EMAIL PROTECTED]>
+# Author(s): Johan Dahlin (Async Open Source)
+# Tiny sprl
+#
 #
 
 

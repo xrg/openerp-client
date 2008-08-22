@@ -31,16 +31,16 @@ translate_set:
 	msgfmt bin/po/de.po -o bin/po/de/LC_MESSAGES/terp.mo
 
 merge:
-	msgmerge bin/po/es.po bin/po/terp-msg.pot -o bin/po/es.po
-	msgmerge bin/po/fr.po bin/po/terp-msg.pot -o bin/po/fr.po
-	msgmerge bin/po/hu.po bin/po/terp-msg.pot -o bin/po/hu.po
-	msgmerge bin/po/it.po bin/po/terp-msg.pot -o bin/po/it.po
-	msgmerge bin/po/pt.po bin/po/terp-msg.pot -o bin/po/pt.po
-	msgmerge bin/po/ro.po bin/po/terp-msg.pot -o bin/po/ro.po
-	msgmerge bin/po/ru.po bin/po/terp-msg.pot -o bin/po/ru.po
-	msgmerge bin/po/sv.po bin/po/terp-msg.pot -o bin/po/sv.po
-	msgmerge bin/po/uk.po bin/po/terp-msg.pot -o bin/po/uk.po
-	msgmerge bin/po/zh.po bin/po/terp-msg.pot -o bin/po/zh.po
-	msgmerge bin/po/al.po bin/po/terp-msg.pot -o bin/po/al.po
-	msgmerge bin/po/cs.po bin/po/terp-msg.pot -o bin/po/cs.po
-	msgmerge bin/po/de.po bin/po/terp-msg.pot -o bin/po/de.po
+	msgmerge bin/po/es.po bin/po/terp-msg.pot -o bin/po/es.po --strict
+	msgmerge bin/po/fr.po bin/po/terp-msg.pot -o bin/po/fr.po --strict
+	msgmerge bin/po/hu.po bin/po/terp-msg.pot -o bin/po/hu.po --strict
+	msgmerge bin/po/it.po bin/po/terp-msg.pot -o bin/po/it.po --strict
+	msgmerge bin/po/pt.po bin/po/terp-msg.pot -o bin/po/pt.po --strict
+	msgmerge bin/po/ro.po bin/po/terp-msg.pot -o bin/po/ro.po --strict
+	msgmerge bin/po/ru.po bin/po/terp-msg.pot -o bin/po/ru.po --strict
+	msgmerge bin/po/sv.po bin/po/terp-msg.pot -o bin/po/sv.po --strict
+	msgmerge bin/po/uk.po bin/po/terp-msg.pot -o bin/po/uk.po --strict
+	msgmerge bin/po/zh.po bin/po/terp-msg.pot -o bin/po/zh.po --strict
+	msgmerge bin/po/al.po bin/po/terp-msg.pot -o bin/po/al.po --strict
+	msgmerge bin/po/cs.po bin/po/terp-msg.pot -o bin/po/cs.po --strict
+	msgmerge bin/po/de.po bin/po/terp-msg.pot -o bin/po/de.po --strict
