@@ -43,7 +43,7 @@ import service
 import options
 import common
 
-from window import win_preference
+from window import win_preference, win_extension
 import tools
 import re
 import xmlrpclib
@@ -507,6 +507,7 @@ class terp_main(service.Service):
             'on_db_backup_activate': self.sig_db_dump,
             'on_db_drop_activate': self.sig_db_drop,
             'on_admin_password_activate': self.sig_db_password,
+            'on_extension_manager_activate': self.sig_extension_manager, 
         }
         for signal in dict:
             self.glade.signal_connect(signal, dict[signal])
@@ -1037,6 +1038,10 @@ class terp_main(service.Service):
                     common.warning(_('Bad database administrator password !'),_("Could not restore database."), parent=self.window)
                 else:
                     common.warning(_("Couldn't restore database"), parent=self.window)
+
+    def sig_extension_manager(self,widget):
+        win = win_extension.win_extension(self.window)
+        win.run()
 
     def sig_db_password(self, widget):
         dialog = glade.XML(common.terp_path("terp.glade"), "dia_passwd_change",

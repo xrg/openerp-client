@@ -78,18 +78,21 @@ class Printer(object):
             webbrowser.open('file://'+fn)
         return opener
 
+    def __opener(self, fnct):
+        pid = os.fork()
+        if not pid:
+            pid = os.fork()
+            if not pid:
+                fnct()
+            time.sleep(0.1)
+            sys.exit(0)
+        os.waitpid(pid, 0)
+
     def _findPDFOpener(self):
-        if os.uname()[0] == 'Darwin' :                             	
-            def opener(fn):                                        	
-                pid = os.fork()                                    	
-                if not pid:                                        	
-                    pid = os.fork()                                	
-                    if not pid:                                    	
-                        os.system('/usr/bin/open -a Preview ' + fn)	
-                    time.sleep(0.1)                                	
-                    sys.exit(0)                                    	
-                os.waitpid(pid, 0)                                 	
-            return opener                                          	
+        if os.uname()[0] == 'Darwin' :
+            def opener(fn):
+                self.__opener( lambda: os.system('/usr/bin/open -a Preview ' + fn) )
+            return opener
         if os.name == 'nt':
             if options.options['printer.preview']:
                 if options.options['printer.softpath'] == 'none':
@@ -103,25 +106,11 @@ class Printer(object):
                 if options.options['printer.softpath'] == 'none':
                     prog = self._findInPath(['evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview', 'acroread', 'open'])
                     def opener(fn):
-                        pid = os.fork()
-                        if not pid:
-                            pid = os.fork()
-                            if not pid:
-                                os.execv(prog, (os.path.basename(prog), fn))
-                            time.sleep(0.1)
-                            sys.exit(0)
-                        os.waitpid(pid, 0)
+                        self.__opener( lambda: os.execv(prog, (os.path.basename(prog), fn) ))
                     return opener
                 else:
                     def opener(fn):
-                        pid = os.fork()
-                        if not pid:
-                            pid = os.fork()
-                            if not pid:
-                                os.execv(options.options['printer.softpath'], (os.path.basename(options.options['printer.softpath']),fn))
-                            time.sleep(0.1)
-                            sys.exit(0)
-                        os.waitpid(pid, 0)
+                        self.__opener( lambda: os.execv(options.options['printer.softpath'], (os.path.basename(options.options['printer.softpath']), fn)) )
                     return opener
             else:
                 return lambda fn: print_linux_filename(fn)
@@ -154,11 +143,49 @@ class Printer(object):
                     os.waitpid(pid, 0)
                 return opener
 
-    def print_file(self, fname, ftype):
-        finderfunc = self.openers[ftype]
-        opener = finderfunc()
-        opener(fname)
-        gc.collect()
+    def print_file(self, fname, ftype, preview=False):
+        app_to_run = None
+        try:
+            filetypes = eval( options.options['extensions.filetype'] )
+            (app, app_print) = filetypes[ftype]
+            if options.options['printer.preview'] or preview:
+                app_to_run = app
+            else:
+                app_to_run = app_print
+        except:
+            pass
+
+        if app_to_run:
+            def open_file( cmd, filename ):
+                cmd = cmd % filename
+                pid = os.fork()
+                if not pid:
+                    pid = os.fork()
+                    if not pid:
+                        prog, args = cmd.split(' ', 1)
+                        args = [os.path.basename(prog)] + args.split(' ')
+                        try:
+                            os.execvp(prog, args)
+                        except:
+                            pass
+                    time.sleep(0.1)
+                    sys.exit(0)
+                os.waitpid(pid, 0)
+
+            if sys.platform in ['win32','nt']:
+                if app_to_run:
+                    open_file( app_to_run, fname )
+                else:
+                    os.startfile( fname )
+            else:
+                open_file( app_to_run, fname )
+            pass
+        else:
+            finderfunc = self.openers[ftype]
+            opener = finderfunc()
+            opener(fname)
+            gc.collect()
+
 
 printer = Printer()
 

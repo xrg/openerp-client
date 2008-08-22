@@ -28,15 +28,22 @@
 #
 ##############################################################################
 
-import base64
-import gtk
+import os
+import sys
+import tempfile
+import time
 
+import base64
+
+import gtk
 import gettext
 
+import rpc
 import interface
-import os
-
 import common
+import options
+import printer
+
 
 class wid_binary(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
@@ -47,8 +54,32 @@ class wid_binary(interface.widget_interface):
         self.wid_text.set_property('activates_default', True)
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
-        self.but_new = gtk.Button(stock='gtk-open')
-        self.but_new.connect('clicked', self.sig_new)
+        self.but_new = gtk.Button() 
+        img = gtk.Image()
+        img.set_from_stock( 'gtk-execute', gtk.ICON_SIZE_BUTTON )
+        label = gtk.Label( ('_Open' ))
+        label.set_use_underline( True )
+        hbox = gtk.HBox()
+        hbox.set_spacing( 2 )
+        hbox.pack_start( img, expand=False, fill=False )
+        hbox.pack_end( label, expand=False, fill=False )
+
+        self.but_new.add( hbox )
+        self.but_new.connect('clicked', self.sig_execute)
+        self.widget.pack_start(self.but_new, expand=False, fill=False)
+
+        self.but_new = gtk.Button() 
+        img = gtk.Image()
+        img.set_from_stock( 'gtk-open', gtk.ICON_SIZE_BUTTON )
+        label = gtk.Label( _('_Select') )
+        label.set_use_underline( True )
+        hbox = gtk.HBox()
+        hbox.set_spacing( 2 )
+        hbox.pack_start( img, expand=False, fill=False )
+        hbox.pack_end( label, expand=False, fill=False )
+
+        self.but_new.add( hbox )
+        self.but_new.connect('clicked', self.sig_select)
         self.widget.pack_start(self.but_new, expand=False, fill=False)
 
         self.but_save_as = gtk.Button(stock='gtk-save-as')
@@ -60,6 +91,7 @@ class wid_binary(interface.widget_interface):
         self.widget.pack_start(self.but_remove, expand=False, fill=False)
 
         self.model_field = False
+        self.has_filename = attrs.get( 'filename' )
 
     def _readonly_set(self, value):
         if value:
@@ -69,27 +101,57 @@ class wid_binary(interface.widget_interface):
             self.but_new.show()
             self.but_remove.show()
 
-    def sig_new(self, widget=None):
+    def sig_execute(self,widget=None):
         try:
-            filename = common.file_selection(_('Open...'),
-                    parent=self._window)
+            filename = self._view.model.value.get( self.has_filename ) or self._view.model.value['name'] 
             if filename:
-                self.model_field.set_client(self._view.model,
-                        base64.encodestring(file(filename, 'rb').read()))
+                id = int(self._view.model.get(includeid=True)['id'])
+                data = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id])
+                if not len(data):
+                    return None
+                ext = os.path.splitext( filename )[1][1:]
+                (fileno, fp_name) = tempfile.mkstemp('.'+ext, 'tinyerp_')
+
+                fp = file( fp_name, 'wb+')
+                fp.write( base64.decodestring( data[0]['datas'] ) )
+                fp.close()
+                os.close(fileno)
+
+                printer.printer.print_file( fp_name, ext, preview=True )
+        except Exception, ex:
+            common.message(_('Error reading the file'))
+
+    def sig_select(self, widget=None):
+        try:
+            # Add the filename from the field with the filename attribute in the view
+            filename = common.file_selection(_('Select a file...'), parent=self._window)
+            if filename:
+                self.model_field.set_client(self._view.model, base64.encodestring(file(filename, 'rb').read()))
                 fname = self.attrs.get('fname_widget', False)
+                filename = os.path.basename( filename )
                 if fname:
-                    self.parent.value = {fname:os.path.basename(filename)}
-                self.display(self._view.model, self.model_field)
-        except:
+                    self.parent.value = {fname:filename}
+                self._view.model.set( { 'name': filename, 'title' : filename } )
+                self._view.display(self._view.model) 
+        except Exception, ex:
             common.message(_('Error reading the file'))
 
     def sig_save_as(self, widget=None):
         try:
-            filename = common.file_selection(_('Save As...'),
-                    parent=self._window, action=gtk.FILE_CHOOSER_ACTION_SAVE)
+            id = int(self._view.model.get(includeid=True)['id'])
+            data = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id])
+            if not len(data):
+                return None
+            # Add the filename from the field with the filename attribute in the view
+            filename = common.file_selection(
+                _('Save As...'),
+                parent=self._window, 
+                action=gtk.FILE_CHOOSER_ACTION_SAVE,
+                filename=data[0]['name']
+            )
             if filename:
                 fp = file(filename,'wb+')
-                fp.write(base64.decodestring(self.model_field.get(self._view.model)))
+                fp.write(base64.decodestring(data[0]['datas']))
                 fp.close()
         except:
             common.message(_('Error writing the file!'))

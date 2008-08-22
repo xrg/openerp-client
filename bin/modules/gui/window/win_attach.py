@@ -273,10 +273,10 @@ class win_attach(object):
                         return None
                     try:
                         f.write(base64.decodestring(datas[0]['datas']))
+                        os.startfile(fname)
                     except IOError, e:
                         common.message(_('Can not write file !'))
                     f.close()
-                    os.startfile(fname)
                 else:
                     os.startfile(datas[0]['link'])
 
