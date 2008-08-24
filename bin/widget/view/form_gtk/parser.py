@@ -130,8 +130,7 @@ class Button(Observable):
                     raise Exception, 'Unallowed button type'
                 self.form.screen.reload()
         else:
-            print "Invalid Form, correct red fields !"
-            self.warn('misc-message', _('Invalid Form, correct red fields !'))
+            self.warn('misc-message', _('<span foreground="red">Invalid form, correct red fields !</span>'))
             self.form.screen.display()
 
 
@@ -222,6 +221,7 @@ class _container(object):
             if help:
                 self.tooltips.set_tip(eb, help)
                 self.tooltips.enable()
+                label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+name)
                 eb.show()
             if '_' in name:
                 label.set_text_with_mnemonic(name)
@@ -778,6 +778,7 @@ import picture
 import url
 import image
 
+import progressbar
 
 widgets_type = {
     'date': (calendar.calendar, 1, False, False),
@@ -806,6 +807,7 @@ widgets_type = {
     'sip' : (url.sip, 1, False, False),
     'image' : (image.image_wid, 1, False, False),
     'uri' : (url.uri, 1, False, False),
+    'progressbar' : (progressbar.progressbar, 1, False, False),
 }
 
 

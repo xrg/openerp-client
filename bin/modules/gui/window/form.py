@@ -42,6 +42,8 @@ import win_export
 import win_import
 import win_list
 
+from gtk.gdk import Color
+
 import common
 import service
 import options
@@ -176,7 +178,7 @@ class form(object):
             win = win_attach.win_attach(self.model, id, parent=self.window)
             win.go()
         else:
-            self.message_state(_('No resource selected !'))
+            self.message_state(_('<span foreground="red">No record selected ! You can only attach to existing record.</span>'))
         return True
 
     def sig_switch(self, widget=None, mode=None):
@@ -190,7 +192,7 @@ class form(object):
     def sig_logs(self, widget=None):
         id = self._id_get()
         if not id:
-            self.message_state(_('You have to select one resource!'))
+            self.message_state(_('<span foreground="red">You have to select a record !</span>'))
             return False
         res = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'perm_read', [id])
         message = ''
@@ -220,9 +222,9 @@ class form(object):
         if common.sur(msg):
             id = self.screen.remove(unlink=True)
             if not id:
-                self.message_state(_('Resources Cleared !'))
+                self.message_state(_('<span foreground="darkgreen">Resources cleared.</span>'))
             else:
-                self.message_state(_('Resources removed.'))
+                self.message_state(_('<span foreground="darkgreen">Resources successfully removed.</span>'))
 
     def sig_import(self, widget=None):
         fields = []
@@ -262,9 +264,9 @@ class form(object):
     def sig_save(self, widget=None, sig_new=True, auto_continue=True):
         id = self.screen.save_current()
         if id:
-            self.message_state(_('Document saved !'))
+            self.message_state(_('<span foreground="darkgreen">Document Saved.</span>'))
         else:
-            self.message_state(_('Invalid form !'))
+            self.message_state(_('<span foreground="red">Invalid form, correct red fields !</span>'))
         return bool(id)
 
     def sig_previous(self, widget=None):
@@ -331,7 +333,7 @@ class form(object):
                     self.previous_action = res
             self.sig_reload(test_modified=False)
         else:
-            self.message_state(_('No record selected!'))
+            self.message_state(_('<span foreground="red">You must select one or several records !</span>'))
 
     def sig_print_repeat(self):
         self.sig_action('client_print_multi', True)
@@ -352,10 +354,9 @@ class form(object):
             self.screen.clear()
             self.screen.load(res)
 
-    def message_state(self, message, context='message'):
+    def message_state(self, message, context='message', color="black"):
         sb = self.glade.get_widget('stat_state')
-        cid = sb.get_context_id(context)
-        sb.push(cid, message)
+        sb.set_label(message)
 
     def _record_message(self, screen, signal_data):
         if not signal_data[3]:

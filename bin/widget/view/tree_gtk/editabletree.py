@@ -130,7 +130,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 
     def set_cursor(self, path, focus_column=None, start_editing=False):
         if focus_column and (focus_column._type in ('many2one','many2many')):
-            self.warn('misc-message', _('Relation Field: F1 New   F2 Open/Search'))
+            self.warn('misc-message', _('Shortcuts: <i>F1 New   F2 Open/Search</i>'))
         elif focus_column and (focus_column._type in ('boolean')):
             start_editing=False
         else:
@@ -195,7 +195,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
                     if col.name in invalid_fields:
                         break
                 self.set_cursor(path, col, True)
-                self.warn('misc-message', _('Warning; field "%s" is required !') % invalid_fields[col.name])
+                self.warn('misc-message', _('<span foreground="red">Warning; field <b>"%s"</b> is required !</span>') % invalid_fields[col.name])
                 return True
 
         if event.keyval == gtk.keysyms.Tab:

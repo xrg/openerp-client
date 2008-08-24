@@ -49,6 +49,7 @@ import common
 import rpc
 import datetime as DT
 import service
+import gobject
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed)
@@ -493,6 +494,95 @@ class Selection(Char):
                 res = val
         return res
 
+
+#class ProgressCellRenderer(gtk.GenericCellRenderer):
+#    __gproperties__ = {
+#        "percent": (gobject.TYPE_INT, "Percent",
+#                    "Progress percentage", 0, 100, 0,
+#                    gobject.PARAM_READWRITE),
+#    }
+#
+#    def __init__(self):
+#        self.__gobject_init__()
+#        self.percent = 0
+#
+#    def do_set_property(self, pspec, value):
+#        setattr(self, pspec.name, value)
+#
+#    def do_get_property(self, pspec):
+#        return getattr(self, pspec.name)
+#
+#    def on_render(self, window, widget, background_area,
+#                  cell_area, expose_area, flags):
+#        (x_offset, y_offset,
+#         width, height) = self.on_get_size(widget, cell_area)
+#        print 'Render'
+#        widget.style.paint_box(window,
+#                               gtk.STATE_NORMAL,
+#                               gtk.SHADOW_IN,
+#                               None, widget, "trough",
+#                               cell_area.x+x_offset,
+#                               cell_area.y+y_offset,
+#                               width, height)
+#        xt = widget.style.xthickness
+#        xpad = self.get_property("xpad")
+#        space = (width-2*xt-2*xpad)*(self.percent/100.)
+#        widget.style.paint_box(window,
+#                               gtk.STATE_PRELIGHT,
+#                               gtk.SHADOW_OUT,
+#                               None, widget, "bar",
+#                               cell_area.x+x_offset+xt,
+#                               cell_area.y+y_offset+xt,
+#                               int(space), height-2*xt)
+#
+#    def on_get_size(self, widget, cell_area):
+#        xpad = self.get_property("xpad")
+#        ypad = self.get_property("ypad")
+#        if cell_area:
+#            width = cell_area.width
+#            height = cell_area.height
+#            x_offset = xpad
+#            y_offset = ypad
+#        else:
+#            width = self.get_property("width")
+#            height = self.get_property("height")
+#            if width == -1: width = 100
+#            if height == -1: height = 30
+#            width += xpad*2
+#            height += ypad*2
+#            x_offset = 0
+#            y_offset = 0
+#        return x_offset, y_offset, width, height
+
+class ProgressBar(object):
+    def __init__(self, field_name, treeview=None, attrs=None, window=None):
+        self.field_name = field_name
+        self.attrs = attrs or {}
+        self.renderer = gtk.CellRendererProgress()
+        self.treeview = treeview
+        if not window:
+            window = service.LocalService('gui.main').window
+        self.window = window
+
+    def setter(self, column, cell, store, iter):
+        model = store.get_value(iter, 0)
+        text = self.get_textual_value(model)
+        cell.set_property('text', '%.2f %%' % (text,))
+        if text<0: text = 0
+        if text>100.0: text = 100.0
+        cell.set_property('value', text)
+
+    def open_remote(self, model, create, changed=False, text=None):
+        raise NotImplementedError
+
+    def get_textual_value(self, model):
+        return model[self.field_name].get_client(model) or ''
+
+    def value_from_text(self, model, text):
+        return text
+
+
+
 CELLTYPES = {
     'char': Char,
     'many2one': M2O,
@@ -505,6 +595,7 @@ CELLTYPES = {
     'integer': Int,
     'datetime': Datetime,
     'boolean': Boolean,
+    'progressbar': ProgressBar,
 }
 
 
