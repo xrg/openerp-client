@@ -566,10 +566,11 @@ class ProgressBar(object):
 
     def setter(self, column, cell, store, iter):
         model = store.get_value(iter, 0)
-        text = self.get_textual_value(model)
+        text = self.get_textual_value(model) or 0.0
         cell.set_property('text', '%.2f %%' % (text,))
-        if text<0: text = 0
+        if text<0: text = 0.0
         if text>100.0: text = 100.0
+        print 'SETTING', text or 0.0
         cell.set_property('value', text)
 
     def open_remote(self, model, create, changed=False, text=None):

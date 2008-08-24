@@ -221,7 +221,7 @@ class _container(object):
             if help:
                 self.tooltips.set_tip(eb, help)
                 self.tooltips.enable()
-                label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+name)
+                label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+name.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;'))
                 eb.show()
             if '_' in name:
                 label.set_text_with_mnemonic(name)
@@ -280,7 +280,8 @@ class parser_form(widget.view.interface.parser_interface):
                 vbox = gtk.VBox()
                 if 'string' in attrs:
                     text = attrs.get('string', 'No String Attr.')
-                    l = gtk.Label(text)
+                    l = gtk.Label('<b>'+(text.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;'))+'</b>')
+                    l.set_use_markup(True)
                     l.set_alignment(0.0, 0.5)
                     eb = gtk.EventBox()
                     eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)

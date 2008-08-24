@@ -107,8 +107,17 @@ class ViewForm(parser_view):
             #tb.set_style(gtk.TOOLBAR_BOTH_HORIZ)
             #tb.set_icon_size(gtk.ICON_SIZE_MENU)
             tb = gtk.VBox()
-            hb.pack_start(tb, False, False)
+
+            eb = gtk.EventBox()
+            eb.add(tb)
+            eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
+            #tb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("blue"))
+
+
+            hb.pack_start(eb, False, False)
             self.widget = hb
+
+
 
             sep = False
             for icontype in ('print', 'action', 'relate'):
