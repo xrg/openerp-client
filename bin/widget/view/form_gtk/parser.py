@@ -130,7 +130,7 @@ class Button(Observable):
                     raise Exception, 'Unallowed button type'
                 self.form.screen.reload()
         else:
-            self.warn('misc-message', _('<span foreground="red">Invalid form, correct red fields !</span>'))
+            self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
             self.form.screen.display()
 
 
