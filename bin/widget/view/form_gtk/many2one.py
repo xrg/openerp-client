@@ -135,32 +135,45 @@ class many2one(interface.widget_interface):
         self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
-        self.but_new = gtk.Button()
-        img_new = gtk.Image()
-        img_new.set_from_stock('gtk-new',gtk.ICON_SIZE_BUTTON)
-        self.but_new.set_image(img_new)
-        self.but_new.set_relief(gtk.RELIEF_NONE)
-        self.but_new.connect('clicked', self.sig_new)
-        self.but_new.set_alignment(0.5, 0.5)
-        self.but_new.set_property('can-focus', False)
-        self.widget.pack_start(self.but_new, expand=False, fill=False)
+        #self.but_new = gtk.Button()
+        #img_new = gtk.Image()
+        #img_new.set_from_stock('gtk-new',gtk.ICON_SIZE_BUTTON)
+        #self.but_new.set_image(img_new)
+        #self.but_new.set_relief(gtk.RELIEF_NONE)
+        #self.but_new.connect('clicked', self.sig_new)
+        #self.but_new.set_alignment(0.5, 0.5)
+        #self.but_new.set_property('can-focus', False)
+        #self.widget.pack_start(self.but_new, expand=False, fill=False)
 
-        self.but_open = gtk.Button()
+        self.but_find = gtk.Button()
         img_find = gtk.Image()
         img_find.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
+        self.but_find.set_image(img_find)
+        self.but_find.set_relief(gtk.RELIEF_NONE)
+        self.but_find.connect('clicked', self.sig_find)
+        self.but_find.set_alignment(0.5, 0.5)
+        self.but_find.set_property('can-focus', False)
+
+        self.tooltips = gtk.Tooltips()
+        self.tooltips.set_tip(self.but_find, _('Select a record'))
+        self.tooltips.enable()
+
+
+        self.but_open = gtk.Button()
         img_open = gtk.Image()
         img_open.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
-        self.but_open.set_image(img_find)
+        self.but_open.set_image(img_open)
         self.but_open.set_relief(gtk.RELIEF_NONE)
         self.but_open.connect('clicked', self.sig_edit)
         self.but_open.set_alignment(0.5, 0.5)
         self.but_open.set_property('can-focus', False)
-        self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
 
         self.tooltips = gtk.Tooltips()
-        self.tooltips.set_tip(self.but_new, _('Create a new resource'))
-        self.tooltips.set_tip(self.but_open, _('Open a resource'))
+        self.tooltips.set_tip(self.but_find, _('Open this record'))
         self.tooltips.enable()
+
+        self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
+        self.widget.pack_start(self.but_find, padding=2, expand=False, fill=False)
 
         self.ok = True
         self._readonly = False
@@ -169,7 +182,6 @@ class many2one(interface.widget_interface):
         self._menu_entries.append((None, None, None))
         self._menu_entries.append((_('Action'), lambda x: self.click_and_action('client_action_multi'),0))
         self._menu_entries.append((_('Report'), lambda x: self.click_and_action('client_print_multi'),0))
-
 
         if attrs.get('completion',False):
             ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', '', [], 'ilike', {})
@@ -221,12 +233,10 @@ class many2one(interface.widget_interface):
                 self._view.modelfield.set_client(self._view.model, name)
         return True
 
-
-
     def _readonly_set(self, value):
         self._readonly = value
         self.wid_text.set_editable(not value)
-        self.but_new.set_sensitive(not value)
+        #self.but_new.set_sensitive(not value)
 
     def _color_widget(self):
         return self.wid_text
@@ -237,45 +247,53 @@ class many2one(interface.widget_interface):
     def _menu_sig_default(self, obj):
         res = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['model'], 'default_get', [self.attrs['name']])
 
-    def sig_activate(self, widget, event=None, leave=False):
+    def sig_find(self, widget, event=None, leave=False):
         self.ok = False
-        value = self._view.modelfield.get(self._view.model)
-
         self.wid_text.disconnect(self.wid_text_focus_out_id)
-        if value:
-            if not leave:
-                domain = self._view.modelfield.domain_get(self._view.model)
-                context = self._view.modelfield.context_get(self._view.model)
-                dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs, window=self._window, domain=domain, context=context)
-                ok, value = dia.run()
-                if ok:
-                    self._view.modelfield.set_client(self._view.model, value,
-                            force_change=True)
-                dia.destroy()
-        else:
-            if not self._readonly and ( self.wid_text.get_text() or not leave):
-                domain = self._view.modelfield.domain_get(self._view.model)
-                context = self._view.modelfield.context_get(self._view.model)
-                self.wid_text.grab_focus()
+        if not self._readonly:
+            domain = self._view.modelfield.domain_get(self._view.model)
+            context = self._view.modelfield.context_get(self._view.model)
+            self.wid_text.grab_focus()
 
-                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
-                if len(ids)==1:
-                    self._view.modelfield.set_client(self._view.model, ids[0],
-                            force_change=True)
-                    self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
-                    self.display(self._view.model, self._view.modelfield)
-                    self.ok = True
-                    return True
+            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', leave and self.wid_text.get_text() or '', domain, 'ilike', context)
+            if len(ids)==1:
+                self._view.modelfield.set_client(self._view.model, ids[0],
+                        force_change=True)
+                self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+                self.display(self._view.model, self._view.modelfield)
+                self.ok = True
+                return True
 
-                win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self._window)
-                ids = win.go()
-                if ids:
-                    name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
-                    self._view.modelfield.set_client(self._view.model, name,
-                            force_change=True)
+            win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self._window)
+            ids = win.go()
+            if ids:
+                name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
+                self._view.modelfield.set_client(self._view.model, name,
+                        force_change=True)
         self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
         self.display(self._view.model, self._view.modelfield)
         self.ok=True
+
+    def sig_edit(self, widget, event=None, leave=False):
+        self.ok = False
+        self.wid_text.disconnect(self.wid_text_focus_out_id)
+        if not leave:
+            domain = self._view.modelfield.domain_get(self._view.model)
+            context = self._view.modelfield.context_get(self._view.model)
+            dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs, window=self._window, domain=domain, context=context)
+            ok, value = dia.run()
+            if ok:
+                self._view.modelfield.set_client(self._view.model, value,
+                        force_change=True)
+            dia.destroy()
+        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+        self.display(self._view.model, self._view.modelfield)
+        self.ok=True
+
+    def sig_activate(self, widget, event=None, leave=False):
+        res = self._view.modelfield.get_client(self._view.model)
+        if (not res) and self.wid_text.get_text():
+            self.sig_find(widget, event, leave=True)
 
     def sig_new(self, *args):
         self.wid_text.disconnect(self.wid_text_focus_out_id)
@@ -288,7 +306,6 @@ class many2one(interface.widget_interface):
             self.display(self._view.model, self._view.modelfield)
         dia.destroy()
         self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
-    sig_edit = sig_activate
 
     def sig_key_press(self, widget, event, *args):
         if event.keyval==gtk.keysyms.F1:
@@ -322,15 +339,7 @@ class many2one(interface.widget_interface):
         self.ok=False
         res = model_field.get_client(model)
         self.wid_text.set_text((res and str(res)) or '')
-        img = gtk.Image()
-        if res:
-            img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
-            self.but_open.set_image(img)
-            self.tooltips.set_tip(self.but_open, _('Open a resource'))
-        else:
-            img.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
-            self.but_open.set_image(img)
-            self.tooltips.set_tip(self.but_open, _('Search a resource'))
+        self.but_open.set_sensitive(bool(res))
         self.ok=True
 
     def _menu_open(self, obj, event):

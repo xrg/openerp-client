@@ -4342,6 +4342,19 @@ Save as CSV</property>
             <property name="visible">True</property>
             <property name="layout_style">GTK_BUTTONBOX_END</property>
             <child>
+              <widget class="GtkButton" id="newbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="label">gtk-new</property>
+                <property name="use_stock">True</property>
+                <property name="response_id">-3</property>
+              </widget>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkButton" id="button81">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -4351,6 +4364,9 @@ Save as CSV</property>
                 <property name="use_stock">True</property>
                 <property name="response_id">-10</property>
               </widget>
+              <packing>
+                <property name="position">1</property>
+              </packing>
             </child>
             <child>
               <widget class="GtkButton" id="cancelbutton9">
@@ -4363,7 +4379,7 @@ Save as CSV</property>
                 <accelerator key="Escape" modifiers="" signal="clicked"/>
               </widget>
               <packing>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <child>
@@ -4376,7 +4392,7 @@ Save as CSV</property>
                 <property name="response_id">-5</property>
               </widget>
               <packing>
-                <property name="position">2</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </widget>
