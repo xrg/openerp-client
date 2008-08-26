@@ -165,6 +165,7 @@ class win_export(object):
         self.glade.signal_connect('on_but_select_clicked', self.sig_sel)
         self.glade.signal_connect('on_but_unselect_clicked', self.sig_unsel)
         self.glade.signal_connect('on_but_predefined_clicked', self.add_predef)
+        self.glade.signal_connect('on_but_delpredefined_clicked', self.del_export_list_btn)
 
         # Creating the predefined export view
         self.pref_export = gtk.TreeView()
@@ -173,37 +174,43 @@ class win_export(object):
         self.glade.get_widget('predefined_exports').add(self.pref_export)
 
         self.pref_export.connect("row-activated", self.sel_predef)
-        self.pref_export.connect('key_press_event', self.del_export_list)
+        self.pref_export.connect('key_press_event', self.del_export_list_key)
 
         # Fill the predefined export tree view and show everything
         self.fill_predefwin()
         self.pref_export.show_all()
 
-    def del_export_list(self,widget, event, *args):
+    def del_export_list_key(self,widget, event, *args):
         if event.keyval==gtk.keysyms.Delete:
-            store, paths = self.pref_export.get_selection().get_selected_rows()
-            for p in paths:
-                export_fields= store.get_value(store.__getitem__(p[0]).iter,0)
-                export_name= store.get_value(store.__getitem__(p[0]).iter,1)
+            self.del_selected_export_list()
+    
+    def del_export_list_btn(self, widget=None):
+        self.del_selected_export_list()
 
-                ir_export = rpc.RPCProxy('ir.exports')
-                ir_export_line = rpc.RPCProxy('ir.exports.line')
+    def del_selected_export_list(self):
+        store, paths = self.pref_export.get_selection().get_selected_rows()
+        for p in paths:
+            export_fields= store.get_value(store.__getitem__(p[0]).iter,0)
+            export_name= store.get_value(store.__getitem__(p[0]).iter,1)
 
-                export_ids=ir_export.search([('name','=',export_name)])
+            ir_export = rpc.RPCProxy('ir.exports')
+            ir_export_line = rpc.RPCProxy('ir.exports.line')
 
-                for id in export_ids:
-                    fields=[]
-                    line_ids=ir_export_line.search([('export_id','=',id)])
+            export_ids=ir_export.search([('name','=',export_name)])
 
-                    obj_line=ir_export_line.read(line_ids)
-                    for i in range(0,len(obj_line)):
-                        fields.append(obj_line[i]['name'])
+            for id in export_ids:
+                fields=[]
+                line_ids=ir_export_line.search([('export_id','=',id)])
 
-                    if fields==export_fields:
-                        ir_export.unlink(id)
-                        ir_export_line.unlink(line_ids)
-                        store.remove(store.get_iter(p))
-                        break
+                obj_line=ir_export_line.read(line_ids)
+                for i in range(0,len(obj_line)):
+                    fields.append(obj_line[i]['name'])
+
+                if fields==export_fields:
+                    ir_export.unlink(id)
+                    ir_export_line.unlink(line_ids)
+                    store.remove(store.get_iter(p))
+                    break
 
     def sig_sel_all(self, widget=None):
         self.model2.clear()
