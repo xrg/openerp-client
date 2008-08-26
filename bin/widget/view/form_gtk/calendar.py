@@ -49,13 +49,15 @@ HM_FORMAT = '%H:%M:%S'
 if not hasattr(locale, 'nl_langinfo'):
     locale.nl_langinfo = lambda *a: '%x'
 
-if not hasattr(locale, 'D_FMT'):
-    locale.D_FMT = None
+LDFMT = locale.nl_langinfo(locale.D_FMT)
+for x,y in [('%y','%Y'),('%B',''),('%A','')]:
+    LDFMT = LDFMT.replace(x, y)
+
 
 class calendar(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, attrs=attrs)
-        self.format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')
+        self.format = LDFMT
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
         self.entry.set_property('activates_default', True)
@@ -151,7 +153,7 @@ class calendar(interface.widget_interface):
         if response == gtk.RESPONSE_OK:
             year, month, day = cal.get_date()
             dt = DT.date(year, month+1, day)
-            self.entry.set_text(dt.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')))
+            self.entry.set_text(dt.strftime(LDFMT))
         self._focus_out()
         window.present()
         win.destroy()
@@ -159,7 +161,7 @@ class calendar(interface.widget_interface):
 class datetime(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs=attrs)
-        self.format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S'
+        self.format = LDFMT+' %H:%M:%S'
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
         self.entry.set_property('activates_default', True)
