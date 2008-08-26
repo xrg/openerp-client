@@ -156,6 +156,9 @@ class BinaryField(CharField):
 
 class SelectionField(CharField):
     def set(self, model, value, test_state=True, modified=False):
+        if not self.get_state_attrs(model).get('required', False) and value is None:
+            super(SelectionField, self).set(model, value, test_state, modified)
+
         if value in [sel[0] for sel in self.attrs['selection']]:
             super(SelectionField, self).set(model, value, test_state, modified)
 
