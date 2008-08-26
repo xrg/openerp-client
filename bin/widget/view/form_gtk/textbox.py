@@ -31,7 +31,7 @@
 import gtk
 
 import interface
-import gtkspell,locale
+import locale
 class textbox(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
@@ -46,7 +46,12 @@ class textbox(interface.widget_interface):
         self.tv.connect('button_press_event', self._menu_open)
         self.tv.set_accepts_tab(False)
         self.tv.connect('focus-out-event', lambda x,y: self._focus_out())
-        gtkspell.Spell(self.tv).set_language(locale.getlocale()[0])
+        try:
+            import gtkspell
+            gtkspell.Spell(self.tv).set_language(locale.getlocale()[0])
+        except:
+            # No word list may not be found for the language
+            pass
         self.widget.add(self.tv)
         self.widget.show_all()
 
