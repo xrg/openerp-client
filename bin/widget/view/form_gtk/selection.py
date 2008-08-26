@@ -89,7 +89,7 @@ class selection(interface.widget_interface):
             and ((event.state & gtk.gdk.CONTROL_MASK) != 0) \
             and (event.keyval == gtk.keysyms.space):
             self.entry.popup()
-        elif not (event.keyval==65362 or event.keyval==65364):
+        elif not (event.keyval == gtk.keysyms.Up or event.keyval == gtk.keysyms.Down):
             completion.set_model(self.model)
             widget.set_completion(completion)
             completion.set_text_column(0)
