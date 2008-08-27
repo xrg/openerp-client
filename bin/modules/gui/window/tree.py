@@ -109,7 +109,6 @@ class tree(object):
         self.tree_sc.update()
         ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', self.domain2)
         if self.tree_res.toolbar:
-
             icon_name = 'icon'
             wid = self.glade.get_widget('tree_toolbar')
             for w in wid.get_children():
@@ -124,13 +123,14 @@ class tree(object):
                 rb.set_label_widget(l)
 
                 icon = gtk.Image()
-                if hasattr(r[icon_name], 'startswith') and r[icon_name].startswith('STOCK_'):
-                    icon.set_from_stock(getattr(gtk, r[icon_name]), gtk.ICON_SIZE_BUTTON)
-                else:
-                    try:
-                        icon.set_from_stock(r[icon_name], gtk.ICON_SIZE_BUTTON)
-                    except:
-                        pass
+                if icon_name in r:
+                    if hasattr(r[icon_name], 'startswith') and r[icon_name].startswith('STOCK_'):
+                        icon.set_from_stock(getattr(gtk, r[icon_name]), gtk.ICON_SIZE_BUTTON)
+                    else:
+                        try:
+                            icon.set_from_stock(r[icon_name], gtk.ICON_SIZE_BUTTON)
+                        except:
+                            pass
 
                 hb = gtk.HBox(spacing=6)
                 hb.pack_start(icon)

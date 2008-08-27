@@ -51,7 +51,7 @@ class wid_picture(interface.widget_interface):
         super(wid_picture, self).display(model, model_field)
         value = model_field.get(model)
         self._value = value
-        if isinstance(value, tuple):
+        if (isinstance(value, tuple) or isinstance(value,list)) and len(value)==2:
             type, data = value
         else:
             type, data = 'jpeg', value
