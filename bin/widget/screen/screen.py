@@ -411,15 +411,22 @@ class Screen(signal_event.signal_event):
         id = False
         if self.current_view.view_type == 'form' and self.current_model:
             id = self.current_model.id
+
+            idx = self.models.models.index(self.current_model)
             if not id:
                 lst=[]
-                lst.append(len(self.models.models))
-                self.load(lst)
-                return
+                self.models.models.remove(self.models.models[idx])
+                self.current_model=None
+                if self.models.models:
+                    idx = min(idx, len(self.models.models)-1)
+                    self.current_model = self.models.models[idx]
+                self.display()
+                self.current_view.set_cursor()
+                return False
             if unlink and id:
                 if not self.rpc.unlink([id]):
                     return False
-            idx = self.models.models.index(self.current_model)
+
             self.models.remove(self.current_model)
             if self.models.models:
                 idx = min(idx, len(self.models.models)-1)
