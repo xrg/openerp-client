@@ -739,7 +739,6 @@ class terp_main(service.Service):
         RES_OK = 1
         RES_BAD_PASSWORD = -2
         RES_CNX_ERROR = -1
-
         try:
             log_response = RES_BAD_PASSWORD
             res = None
