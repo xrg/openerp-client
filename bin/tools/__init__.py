@@ -28,12 +28,9 @@
 #
 ##############################################################################
 
-import rpc
-import webbrowser
-import os
-import sys
 
 def expr_eval(string, context={}):
+    import rpc
     context['uid'] = rpc.session.uid
     if isinstance(string, basestring):
         return eval(string, context)
@@ -41,9 +38,12 @@ def expr_eval(string, context={}):
         return string
 
 def launch_browser(url):
+    import webbrowser
+    import sys
     if sys.platform == 'win32':
         webbrowser.open(url)
     else:
+        import os
         pid = os.fork()
         if not pid:
             pid = os.fork()
@@ -86,5 +86,20 @@ def calc_condition(self,model,con):
 			if val>=con[2]:
 				return True
 		return False
+
+def call_log(fun):
+    """Debug decorator
+       TODO: Add optionnal execution time
+    """
+    def f(*args, **kwargs):
+        print "call %s with %r, %r:" % (getattr(fun, '__name__', str(fun)), args, kwargs),
+        try:
+            r = fun(*args, **kwargs)
+            print repr(r)
+            return r
+        except Exception, ex:
+            print "Exception: %r" % (ex,)
+            raise
+    return f
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
