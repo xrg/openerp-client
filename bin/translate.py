@@ -34,6 +34,10 @@ import release
 import gettext
 import gtk
 
+#from tools import call_log
+#locale.setlocale = call_log(locale.setlocale)
+#locale.getdefaultlocale = call_log(locale.getdefaultlocale)
+
 _LOCALE2WIN32 = {
     'af_ZA': 'Afrikaans_South Africa',
     'sq_AL': 'Albanian_Albania',
@@ -119,18 +123,19 @@ def setlang(lang=None):
         except ValueError:
             encoding = 'UTF-8'
 
+        lang_enc = "%s.%s" % (os.name == 'nt' and _LOCALE2WIN32.get(lang, lang) or lang, encoding)
+
         if os.name == 'nt' and lang != os.environ.get('LANG', ''):
             os.environ['LANG'] = lang
+            # FIXME !! Since the lang is changed when logging, relauching the app may not be a good idea...
+            # TODO test this behavor
             if sys.executable == sys.argv[0]:
                 os.execv(sys.executable, ['"'+sys.executable+'"'] + sys.argv[1:])
             else:
                 os.execv(sys.executable, ['"'+sys.executable+'"'] + sys.argv)
-        os.environ['LANG'] = lang
+        os.environ['LANG'] = lang_enc
         try:
-            if os.name == 'nt':
-                locale.setlocale(locale.LC_ALL, _LOCALE2WIN32.get(lang, lang) + '.' + encoding)
-            else:
-                locale.setlocale(locale.LC_ALL, lang+'.'+encoding)
+            locale.setlocale(locale.LC_ALL, lang_enc)
         except:
             pass
         lang = gettext.translation(APP, DIR, languages=[lang], fallback=True)
