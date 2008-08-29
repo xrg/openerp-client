@@ -179,9 +179,10 @@ class Printer(object):
                     os.startfile( fname )
             else:
                 open_file( app_to_run, fname )
-            pass
         else:
-            finderfunc = self.openers[ftype]
+            finderfunc = self.openers.get(ftype)
+            if not finderfunc:
+                raise Exception(_('Unable to handle %s filetype') % ftype)
             opener = finderfunc()
             opener(fname)
             gc.collect()

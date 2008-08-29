@@ -142,17 +142,30 @@ class CharField(object):
         return model.state_attrs[self.name]
 
 class BinaryField(CharField):
+    def get_size_name(self):
+        return "%s.size" % self.name
+
+    def set(self, model, value, test_state=True, modified=False, get_binary_size=True):
+        model.value[self.name] = None
+        name = get_binary_size and self.get_size_name() or self.name
+        model.value[name] = value
+        if modified:
+            model.modified = True
+            model.modified_fields.setdefault(self.name)
+        return True
+
     def get(self, model, check_load=True, readonly=True, modified=False):
         if self.name in model.value:
             if (model.value[self.name] is None) and (model.id):
-                model.value[self.name] = model.rpc.read([model.id], [self.name], rpc.session.context)[0][self.name]
+                c = rpc.session.context.copy()
+                c.update(model.context_get())
+                c['get_binary_size'] = False
+                value = model.rpc.read([model.id], [self.name], c)[0][self.name]
+                self.set(model, value, modified=modified, get_binary_size=False)
         return model.value.get(self.name, False)
 
     def get_client(self, model):
-        if self.name in model.value:
-            if (model.value[self.name] is None) and (model.id):
-                model.value[self.name] = model.rpc.read([model.id], [self.name], rpc.session.context)[0][self.name]
-        return model.value.get(self.name, False)
+        return model.value.get(self.get_size_name(), False)
 
 class SelectionField(CharField):
     def set(self, model, value, test_state=True, modified=False):
