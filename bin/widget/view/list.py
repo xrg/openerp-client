@@ -59,7 +59,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     def changed_all(self, *args):
         self.emit('row_deleted', position)
         self.invalidate_iters()
-    
+
     def removed(self, lst, position):
         self.emit('row_deleted', position)
         self.invalidate_iters()
@@ -69,7 +69,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def prepend(self, model):
         self.model_group.model_add(model, 0)
-    
+
     def remove(self, iter):
         idx = self.get_path(iter)[0]
         self.model_group.model_remove(self.models[idx])
@@ -89,12 +89,12 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def saved(self, id):
         return self.model_group.writen(id)
-        
+
     def __len__(self):
         return len(self.models)
 
     ## Mandatory GenericTreeModel methods
-    
+
     def on_get_flags(self):
         return gtk.TREE_MODEL_LIST_ONLY
 
@@ -103,7 +103,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_get_column_type(self, index):
         return gobject.TYPE_PYOBJECT
-    
+
     def on_get_path(self, iter):
         return self.models.index(iter)
 
@@ -127,7 +127,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
             return self.on_get_iter(self.on_get_path(node) + 1)
         except IndexError:
             return None
-    
+
     def on_iter_has_child(self, node):
         return False
 
@@ -144,7 +144,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_iter_parent(self, node):
         return None
-    
+
 class ViewList(parser_view):
 
     def __init__(self, window, screen, widget, children=None, buttons=None,
@@ -320,7 +320,8 @@ class ViewList(parser_view):
                 ids.append(model.id)
         ids = []
         sel = self.widget_tree.get_selection()
-        sel.selected_foreach(_func_sel_get, ids)
+        if sel:
+            sel.selected_foreach(_func_sel_get, ids)
         return ids
 
     def sel_models_get(self):
