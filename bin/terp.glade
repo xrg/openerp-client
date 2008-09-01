@@ -5,7 +5,7 @@
   <widget class="GtkDialog" id="win_login">
     <property name="width_request">499</property>
     <property name="height_request">280</property>
-    <property name="title" translatable="yes">Tiny ERP - Login</property>
+    <property name="title" translatable="yes">OpenERP - Login</property>
     <property name="modal">True</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="destroy_with_parent">True</property>
@@ -243,7 +243,7 @@
     <property name="width_request">600</property>
     <property name="height_request">400</property>
     <property name="visible">True</property>
-    <property name="title">Tiny ERP</property>
+    <property name="title">OpenERP</property>
     <property name="window_position">GTK_WIN_POS_CENTER</property>
     <property name="default_width">920</property>
     <property name="default_height">780</property>
@@ -946,7 +946,7 @@
                                 <child>
                                   <widget class="GtkMenuItem" id="tiny_erp_theme1">
                                     <property name="visible">True</property>
-                                    <property name="label" translatable="yes">Tiny ERP Theme</property>
+                                    <property name="label" translatable="yes">OpenERP Theme</property>
                                     <property name="use_underline">True</property>
                                     <signal name="activate" handler="on_tiny_erp_theme1_activate"/>
                                   </widget>
@@ -1617,7 +1617,7 @@
   </widget>
   <widget class="GtkWindow" id="win_tree">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Tiny ERP - Tree Resources</property>
+    <property name="title" translatable="yes">OpenERP - Tree Resources</property>
     <child>
       <widget class="GtkVBox" id="win_tree_container">
         <property name="visible">True</property>
@@ -1804,7 +1804,7 @@
   <widget class="GtkWindow" id="win_form">
     <property name="visible">True</property>
     <property name="extension_events">GDK_EXTENSION_EVENTS_ALL</property>
-    <property name="title" translatable="yes">Tiny ERP - Forms</property>
+    <property name="title" translatable="yes">OpenERP - Forms</property>
     <child>
       <widget class="GtkVBox" id="win_form_container">
         <property name="visible">True</property>
@@ -1860,7 +1860,7 @@
   <widget class="GtkDialog" id="win_about">
     <property name="width_request">430</property>
     <property name="height_request">360</property>
-    <property name="title" translatable="yes">Tiny ERP - About</property>
+    <property name="title" translatable="yes">OpenERP - About</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">
@@ -1874,7 +1874,7 @@
                 <property name="visible">True</property>
                 <property name="xpad">5</property>
                 <property name="ypad">8</property>
-                <property name="label" translatable="yes">&lt;b&gt;About Tiny ERP&lt;/b&gt;
+                <property name="label" translatable="yes">&lt;b&gt;About OpenERP&lt;/b&gt;
 &lt;i&gt;The most advanced Open Source ERP &amp;amp; CRM !&lt;/i&gt;</property>
                 <property name="use_markup">True</property>
                 <property name="justify">GTK_JUSTIFY_CENTER</property>
@@ -1914,9 +1914,9 @@
                         <property name="editable">False</property>
                         <property name="justification">GTK_JUSTIFY_CENTER</property>
                         <property name="text" translatable="yes">
-Tiny ERP - GTK Client - v%s
+OpenERP - GTK Client - v%s
 
-Tiny ERP is an Open Source ERP+CRM
+OpenERP is an Open Source ERP+CRM
 for small to medium businesses.
 
 The whole source code is distributed under
@@ -1941,7 +1941,7 @@ More Info on www.TinyERP.com !</property>
                     <child>
                       <widget class="GtkLabel" id="label98">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">_Tiny ERP</property>
+                        <property name="label" translatable="yes">_OpenERP</property>
                         <property name="use_underline">True</property>
                       </widget>
                       <packing>
@@ -1971,7 +1971,7 @@ More Info on www.TinyERP.com !</property>
                         <property name="accepts_tab">False</property>
                         <property name="text" translatable="yes">
 (c) 2003-TODAY - Tiny sprl
-Tiny ERP is a product of Tiny sprl:
+OpenERP is a product of Tiny sprl:
 
 Tiny sprl
 40 Chaussée de Namur
@@ -2052,7 +2052,7 @@ Web: http://tiny.be</property>
   </widget>
   <widget class="GtkWindow" id="win_form_widget">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Tiny ERP - forms widget</property>
+    <property name="title" translatable="yes">OpenERP - forms widget</property>
     <child>
       <widget class="GtkScrolledWindow" id="scrolledwindow44">
         <property name="visible">True</property>
@@ -2992,7 +2992,7 @@ Web: http://tiny.be</property>
   </widget>
   <widget class="GtkDialog" id="dia_form_wid_calendar">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Tiny ERP - Date selection</property>
+    <property name="title" translatable="yes">OpenERP - Date selection</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox3">
@@ -3048,7 +3048,7 @@ Web: http://tiny.be</property>
   <widget class="GtkDialog" id="win_sur">
     <property name="width_request">350</property>
     <property name="height_request">143</property>
-    <property name="title" translatable="yes">Tiny ERP - Confirmation</property>
+    <property name="title" translatable="yes">OpenERP - Confirmation</property>
     <property name="modal">True</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
@@ -3125,7 +3125,7 @@ Web: http://tiny.be</property>
     </child>
   </widget>
   <widget class="GtkDialog" id="win_selection">
-    <property name="title" translatable="yes">Tiny ERP - Selection</property>
+    <property name="title" translatable="yes">OpenERP - Selection</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="default_width">400</property>
     <property name="default_height">400</property>
@@ -3219,7 +3219,7 @@ Web: http://tiny.be</property>
   </widget>
   <widget class="GtkDialog" id="win_filter">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Tiny ERP - Filter</property>
+    <property name="title" translatable="yes">OpenERP - Filter</property>
     <property name="default_width">780</property>
     <property name="default_height">550</property>
     <property name="destroy_with_parent">True</property>
@@ -3470,7 +3470,7 @@ Web: http://tiny.be</property>
   </widget>
   <widget class="GtkDialog" id="win_dialog">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Tiny ERP - Dialog</property>
+    <property name="title" translatable="yes">OpenERP - Dialog</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dia_vbox_main">
@@ -3531,7 +3531,7 @@ Web: http://tiny.be</property>
   <widget class="GtkDialog" id="win_field_pref">
     <property name="width_request">440</property>
     <property name="height_request">268</property>
-    <property name="title" translatable="yes">Tiny ERP, Field Preference target</property>
+    <property name="title" translatable="yes">OpenERP, Field Preference target</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">
@@ -3783,7 +3783,7 @@ Web: http://tiny.be</property>
   <widget class="GtkDialog" id="win_save_as">
     <property name="width_request">515</property>
     <property name="height_request">600</property>
-    <property name="title" translatable="yes">Tiny ERP - Export to CSV</property>
+    <property name="title" translatable="yes">OpenERP - Export to CSV</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">
@@ -4291,7 +4291,7 @@ Save as CSV</property>
   <widget class="GtkDialog" id="win_search">
     <property name="width_request">777</property>
     <property name="height_request">500</property>
-    <property name="title" translatable="yes">Tiny ERP - Search</property>
+    <property name="title" translatable="yes">OpenERP - Search</property>
     <property name="modal">True</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="default_width">777</property>
@@ -4406,7 +4406,7 @@ Save as CSV</property>
   </widget>
   <widget class="GtkWindow" id="win_search_widget">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Tiny ERP - Search Widgets</property>
+    <property name="title" translatable="yes">OpenERP - Search Widgets</property>
     <child>
       <widget class="GtkVBox" id="vbox19">
         <property name="visible">True</property>
@@ -4664,7 +4664,7 @@ No</property>
     </child>
   </widget>
   <widget class="GtkDialog" id="win_attach">
-    <property name="title" translatable="yes">Tiny ERP - Attachment</property>
+    <property name="title" translatable="yes">OpenERP - Attachment</property>
     <property name="modal">True</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="default_width">740</property>
@@ -4985,7 +4985,7 @@ No</property>
     </child>
   </widget>
   <widget class="GtkDialog" id="win_error">
-    <property name="title" translatable="yes">Tiny ERP - Error</property>
+    <property name="title" translatable="yes">OpenERP - Error</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="default_width">700</property>
     <property name="default_height">580</property>
@@ -5604,7 +5604,7 @@ Very Urgent</property>
   </widget>
   <widget class="GtkDialog" id="win_many2one">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Tiny ERP - Ressource Edit</property>
+    <property name="title" translatable="yes">OpenERP - Ressource Edit</property>
     <property name="default_width">500</property>
     <property name="default_height">420</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
@@ -5652,7 +5652,7 @@ Very Urgent</property>
   </widget>
   <widget class="GtkDialog" id="dia_form_win_many2one">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Tiny ERP - Link</property>
+    <property name="title" translatable="yes">OpenERP - Link</property>
     <property name="window_position">GTK_WIN_POS_CENTER</property>
     <property name="default_width">760</property>
     <property name="default_height">500</property>
@@ -5722,7 +5722,7 @@ Very Urgent</property>
   </widget>
   <widget class="GtkDialog" id="dia_form_win_one2many_list">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Tiny ERP - List</property>
+    <property name="title" translatable="yes">OpenERP - List</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
@@ -5770,7 +5770,7 @@ Very Urgent</property>
   </widget>
   <widget class="GtkDialog" id="win_preference">
     <property name="width_request">600</property>
-    <property name="title" translatable="yes">Tiny ERP - Preferences</property>
+    <property name="title" translatable="yes">OpenERP - Preferences</property>
     <property name="modal">True</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="default_height">500</property>
@@ -6042,7 +6042,7 @@ Very Urgent</property>
   <widget class="GtkDialog" id="win_licence">
     <property name="width_request">484</property>
     <property name="height_request">358</property>
-    <property name="title" translatable="yes">Tiny ERP - License</property>
+    <property name="title" translatable="yes">OpenERP - License</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="default_width">500</property>
     <property name="default_height">500</property>
@@ -6057,7 +6057,7 @@ Very Urgent</property>
               <widget class="GtkLabel" id="label137">
                 <property name="visible">True</property>
                 <property name="xpad">5</property>
-                <property name="label" translatable="yes">Tiny ERP license</property>
+                <property name="label" translatable="yes">OpenERP license</property>
                 <property name="justify">GTK_JUSTIFY_CENTER</property>
                 <property name="wrap">True</property>
               </widget>
@@ -6226,7 +6226,7 @@ Each version is given a distinguishing version number.  If the Program specifies
   </widget>
   <widget class="GtkDialog" id="dia_form_wid_datetime">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Tiny ERP - Date &amp; Time selection</property>
+    <property name="title" translatable="yes">OpenERP - Date &amp; Time selection</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox17">
@@ -6449,7 +6449,7 @@ Each version is given a distinguishing version number.  If the Program specifies
   </widget>
   <widget class="GtkDialog" id="dia_survey">
     <property name="width_request">620</property>
-    <property name="title" translatable="yes">Tiny ERP Survey</property>
+    <property name="title" translatable="yes">OpenERP Survey</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">
@@ -6465,7 +6465,7 @@ Each version is given a distinguishing version number.  If the Program specifies
             <child>
               <widget class="GtkLabel" id="label162">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">&lt;b&gt;Tiny ERP Survey&lt;/b&gt;</property>
+                <property name="label" translatable="yes">&lt;b&gt;OpenERP Survey&lt;/b&gt;</property>
                 <property name="use_markup">True</property>
               </widget>
               <packing>
@@ -6478,7 +6478,7 @@ Each version is given a distinguishing version number.  If the Program specifies
                 <property name="visible">True</property>
                 <property name="xalign">0</property>
                 <property name="xpad">6</property>
-                <property name="label" translatable="yes">&lt;i&gt;Please fill in the following form in order to help us to improve Tiny ERP and better target new developments.&lt;/i&gt;</property>
+                <property name="label" translatable="yes">&lt;i&gt;Please fill in the following form in order to help us to improve OpenERP and better target new developments.&lt;/i&gt;</property>
                 <property name="use_markup">True</property>
                 <property name="wrap">True</property>
               </widget>
@@ -7106,7 +7106,7 @@ Other</property>
                               <widget class="GtkCheckButton" id="check_use">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="label" translatable="yes">We plan to use Tiny ERP</property>
+                                <property name="label" translatable="yes">We plan to use OpenERP</property>
                                 <property name="use_underline">True</property>
                                 <property name="response_id">0</property>
                                 <property name="draw_indicator">True</property>
@@ -7120,7 +7120,7 @@ Other</property>
                               <widget class="GtkCheckButton" id="check_sell">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="label" translatable="yes">We plan to offer services on Tiny ERP</property>
+                                <property name="label" translatable="yes">We plan to offer services on OpenERP</property>
                                 <property name="use_underline">True</property>
                                 <property name="response_id">0</property>
                                 <property name="draw_indicator">True</property>
@@ -7141,7 +7141,7 @@ Other</property>
                           <widget class="GtkLabel" id="label46568">
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Tell us why you try Tiny ERP and what are your current softwares:</property>
+                            <property name="label" translatable="yes">Tell us why you try OpenERP and what are your current softwares:</property>
                             <property name="use_markup">True</property>
                           </widget>
                           <packing>
@@ -7260,7 +7260,7 @@ Other</property>
                           <widget class="GtkLabel" id="label167">
                             <property name="visible">True</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">(Get Tiny ERP announces, docs and new releases by email)</property>
+                            <property name="label" translatable="yes">(Get OpenERP announces, docs and new releases by email)</property>
                             <property name="wrap">True</property>
                           </widget>
                           <packing>
@@ -7361,7 +7361,7 @@ Other</property>
                         <property name="ypad">10</property>
                         <property name="label" translatable="yes">&lt;b&gt;Complete this form to submit your bug and/or send a support request.&lt;/b&gt;
 &lt;i&gt;
-Your request will be sent to the Tiny ERP team and we will reply shortly.
+Your request will be sent to the OpenERP team and we will reply shortly.
 Note that we may not reply if you do not have a support contract with Tiny or an official partner.&lt;/i&gt;</property>
                         <property name="use_markup">True</property>
                       </widget>
@@ -7686,7 +7686,7 @@ Very Urgent</property>
   <widget class="GtkDialog" id="win_quest_3b">
     <property name="width_request">350</property>
     <property name="height_request">143</property>
-    <property name="title" translatable="yes">Tiny ERP - Confirmation</property>
+    <property name="title" translatable="yes">OpenERP - Confirmation</property>
     <property name="modal">True</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
@@ -7798,7 +7798,7 @@ Very Urgent</property>
                   <widget class="GtkLabel" id="label196">
                     <property name="visible">True</property>
                     <property name="xpad">2</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Shortcuts for TinyERP&lt;/b&gt;</property>
+                    <property name="label" translatable="yes">&lt;b&gt;Shortcuts for OpenERP&lt;/b&gt;</property>
                     <property name="use_markup">True</property>
                     <property name="justify">GTK_JUSTIFY_CENTER</property>
                   </widget>
@@ -9073,7 +9073,7 @@ Latin1</property>
   <widget class="GtkDialog" id="win_quest">
     <property name="width_request">350</property>
     <property name="height_request">143</property>
-    <property name="title" translatable="yes">Tiny ERP</property>
+    <property name="title" translatable="yes">OpenERP</property>
     <property name="modal">True</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">
@@ -9180,7 +9180,7 @@ Latin1</property>
           <widget class="GtkLabel" id="label283">
             <property name="visible">True</property>
             <property name="xalign">0</property>
-            <property name="label" translatable="yes">&lt;b&gt;Connect to a Tiny ERP server&lt;/b&gt;</property>
+            <property name="label" translatable="yes">&lt;b&gt;Connect to a OpenERP server&lt;/b&gt;</property>
             <property name="use_markup">True</property>
           </widget>
           <packing>
@@ -10042,7 +10042,7 @@ this operation may take a while...</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="has_focus">True</property>
-                    <property name="tooltip" translatable="yes">This is the password of the user that have the rights to administer databases. This is not a Tiny ERP user, just a super administrator. If you did not changed it, the password is 'admin' after installation.</property>
+                    <property name="tooltip" translatable="yes">This is the password of the user that have the rights to administer databases. This is not a OpenERP user, just a super administrator. If you did not changed it, the password is 'admin' after installation.</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
                     <property name="invisible_char">*</property>
@@ -10229,7 +10229,7 @@ this operation may take a while...</property>
                   <widget class="GtkEntry" id="ent_server_new">
                     <property name="visible">True</property>
                     <property name="sensitive">False</property>
-                    <property name="tooltip" translatable="yes">This is the URL of the Tiny ERP server. Use 'localhost' if the server is installed on this computer. Click on 'Change' to change the address.</property>
+                    <property name="tooltip" translatable="yes">This is the URL of the OpenERP server. Use 'localhost' if the server is installed on this computer. Click on 'Change' to change the address.</property>
                     <property name="editable">False</property>
                     <property name="invisible_char">*</property>
                     <property name="activates_default">True</property>
@@ -10249,7 +10249,7 @@ this operation may take a while...</property>
                     <property name="xalign">1</property>
                     <property name="xpad">3</property>
                     <property name="ypad">3</property>
-                    <property name="label" translatable="yes">Tiny ERP server:</property>
+                    <property name="label" translatable="yes">OpenERP server:</property>
                   </widget>
                   <packing>
                     <property name="x_options">GTK_FILL</property>
@@ -10560,7 +10560,7 @@ this operation may take a while...</property>
   <widget class="GtkDialog" id="dia_message_box">
     <property name="width_request">450</property>
     <property name="height_request">250</property>
-    <property name="title" translatable="yes">Tiny ERP Message</property>
+    <property name="title" translatable="yes">OpenERP Message</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">

@@ -110,7 +110,7 @@ def selection(title, values, alwaysask=False, parent=None):
         if response == gtk.RESPONSE_OK:
             sel = list.get_selection().get_selected()
             if sel:
-                (model, iter) = sel 
+                (model, iter) = sel
                 if iter:
                     res = model.get_value(iter, 0)
                     res = (res, values[res])
@@ -238,11 +238,11 @@ def terp_survey():
         upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
         options.options['survey.position']=SURVEY_VERSION
         options.save()
-        common.message(_('Thank you for the feedback !\nYour comments have been sent to Tiny ERP.\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
+        common.message(_('Thank you for the feedback !\nYour comments have been sent to OpenERP.\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
     else:
         parent.present()
         win.destroy()
-        common.message(_('Thank you for testing Tiny ERP !\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
+        common.message(_('Thank you for testing OpenERP !\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
     return True
 
 
@@ -338,7 +338,7 @@ def support(*args):
 
         buffer = sur.get_widget('explanation_textview').get_buffer()
         explanation = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-        
+
         buffer = sur.get_widget('remark_textview').get_buffer()
         remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
@@ -375,7 +375,7 @@ def error(title, message, details='', parent=None):
     sur.get_widget('error_details').set_buffer(buf)
 
     sur.get_widget('id_entry').set_text(support_id)
-    
+
     def send(widget):
         import pickle
 
@@ -392,7 +392,7 @@ def error(title, message, details='', parent=None):
 
         buffer = sur.get_widget('explanation_textview').get_buffer()
         explanation = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-        
+
         buffer = sur.get_widget('remarks_textview').get_buffer()
         remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
@@ -536,7 +536,7 @@ def ask(question, parent=None):
 def concurrency(resource, id, context, parent=None):
     dia = glade.XML(common.terp_path("terp.glade"),'dialog_concurrency_exception',gettext.textdomain())
     win = dia.get_widget('dialog_concurrency_exception')
-    
+
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
