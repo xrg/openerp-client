@@ -37,58 +37,58 @@ import gobject
 import pango
 import re
 
+import tools
+from tools import date_mapping
+
 import time
-from mx.DateTime import RelativeDateTime
 from mx.DateTime import DateTime
-from mx.DateTime import now
 from mx.DateTime import strptime
 
-
-mapping = {
-    '%y': ('__', '[_0-9][_0-9]'),
-    '%Y': ('____', '[_1-9][_0-9][_0-9][_0-9]'),
-    '%m': ('__', '[_0-1][_0-9]'),
-    '%d': ('__', '[_0-3][_0-9]'),
-    '%H': ('__', '[_0-2][_0-9]'),
-    '%M': ('__', '[_0-6][_0-9]'),
-    '%S': ('__', '[_0-6][_0-9]'),
-}
 
 class DecoratorRenderer(gtk.GenericCellRenderer):
     def __init__(self, renderer1, callback, format):
         self.__gobject_init__()
-        self._renderer1 = renderer1
+        self.renderer1 = renderer1
         self.set_property("mode", renderer1.get_property("mode"))
         self.callback = callback
         self.format = format
         self.regex = self.initial_value = self.format
-        for key,val in mapping.items():
+        for key,val in date_mapping.items():
             self.regex = self.regex.replace(key, val[1])
             self.initial_value = self.initial_value.replace(key, val[0])
+        self.regex = '^'+self.regex+'$'
 
-    def get_property(self, *args, **argv):
-        return self._renderer1.get_property(*args, **argv)
+    def set_property(self, name, value):
+        if name not in ('editable', ):
+            return super(DecoratorRenderer, self).set_property(name, value)
+        else:
+            return self.renderer1.set_property(name, value)
 
-    def set_property(self, *args, **argv):
-        return self._renderer1.set_property(*args, **argv)
+    def get_property(self, name):
+        if name in ('editable', ):
+            return self.renderer1.get_property(name)
+        else:
+            return super(DecoratorRenderer, self).get_property(name)
 
     def on_get_size(self, widget, cell_area=None):
-        return self._renderer1.get_size(widget, cell_area)
+        return self.renderer1.get_size(widget, cell_area)
 
     def on_render(self, window, widget, background_area, cell_area, expose_area, flags):
-        return self._renderer1.render(window, widget, background_area, cell_area, expose_area, flags)
-    
+        return self.renderer1.render(window, widget, background_area, cell_area, expose_area, flags)
+
     def on_activate(self, event, widget, path, background_area, cell_area, flags):
-        return self._renderer1.activate(event, widget, path, background_area, cell_area, flags)
+        return self.renderer1.activate(event, widget, path, background_area, cell_area, flags)
 
     def on_start_editing(self, event, widget, path, background_area, cell_area, flags):
-        print 'Start Editing'
-        editable = self._renderer1.start_editing(event, widget, path, background_area, cell_area, flags)
+        if not event:
+            event = gtk.gdk.Event(gtk.keysyms.Tab)
 
+        editable = self.renderer1.start_editing(event, widget, path, background_area, cell_area, flags)
         self.editable = editable
-        editable.modify_font(pango.FontDescription("monospace"))
+        self.callback.display(editable)
 
-        editable.set_text(self.initial_value)
+        if not editable.get_text():
+            editable.set_text(self.initial_value)
         self.regex = re.compile(self.regex)
 
         assert self.regex.match(self.initial_value), 'Error, the initial value should be validated by regex'
@@ -135,11 +135,12 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
                 if self.callback: self.callback.process(self, event)
                 #self.stop_emission("key-press-event")
                 return True
+            else:
+                return False
         elif event.keyval in (ord('+'),ord('-'),ord('=')):
                 self.mode_cmd = True
                 self.date_get(editable)
                 if self.callback: self.callback.event(self, event)
-                #self.stop_emission("key-press-event")
                 return True
         elif self.mode_cmd:
             if self.callback: self.callback.event(self, event)
@@ -179,8 +180,9 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
 
 
 class date_callback(object):
-    def __init__(self):
+    def __init__(self, treeview=None):
         self.value = ''
+        self.treeview = treeview
 
     def event(self, widget, event):
         if event.keyval in (gtk.keysyms.BackSpace,):
@@ -191,26 +193,16 @@ class date_callback(object):
         return True
 
     def display(self, widget):
-        print self.value
+        if self.treeview:
+            if self.value:
+                self.treeview.warn('misc-message', '<b>' + str(tools.to_xml(self.value))+"</b>")
+            else:
+                self.treeview.warn('misc-message', _("Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."))
 
     def process(self, widget, event):
         if (not event.keyval == gtk.keysyms.Escape) or not event:
-            lst = {
-                '^=(\d+)w$': lambda dt,r: dt+RelativeDateTime(day=0, month=0, weeks = int(r.group(1))),
-                '^=(\d+)d$': lambda dt,r: dt+RelativeDateTime(day=int(r.group(1))),
-                '^=(\d+)m$': lambda dt,r: dt+RelativeDateTime(day=0, month = int(r.group(1))),
-                '^=(2\d\d\d)y$': lambda dt,r: dt+RelativeDateTime(year = int(r.group(1))),
-                '^=(\d+)h$': lambda dt,r: dt+RelativeDateTime(hour = int(r.group(1))),
-                '^([\\+-]\d+)h$': lambda dt,r: dt+RelativeDateTime(hours = int(r.group(1))),
-                '^([\\+-]\d+)w$': lambda dt,r: dt+RelativeDateTime(days = 7*int(r.group(1))),
-                '^([\\+-]\d+)d$': lambda dt,r: dt+RelativeDateTime(days = int(r.group(1))),
-                '^([\\+-]\d+)m$': lambda dt,r: dt+RelativeDateTime(months = int(r.group(1))),
-                '^([\\+-]\d+)y$': lambda dt,r: dt+RelativeDateTime(years = int(r.group(1))),
-                '^=$': lambda dt,r: now(),
-                '^-$': lambda dt,r: False
-            }
             cmd = self.value
-            for r,f in lst.items():
+            for r,f in tools.date_operation.items():
                 groups = re.match(r, cmd)
                 if groups:
                     dt = widget.date_get(widget.editable)

@@ -41,6 +41,7 @@ from decoratedtree import DecoratedTreeView
 from widget.view import interface
 
 import time
+import date_renderer
 
 from widget.view.form_gtk.many2one import dialog as M2ODialog
 from modules.gui.window.win_search import win_search
@@ -97,8 +98,7 @@ class parser_tree(interface.parser_interface):
                 if editable and not node_attrs.get('readonly', False):
                     if isinstance(renderer, gtk.CellRendererToggle):
                         renderer.set_property('activatable', True)
-                    else:
-                        print 'Editable'
+                    elif isinstance(renderer, gtk.CellRendererText) or isinstance(renderer, gtk.CellRendererCombo):
                         renderer.set_property('editable', True)
                     renderer.connect_after('editing-started', send_keys, treeview)
 #                   renderer.connect_after('editing-canceled', self.editing_canceled)
@@ -248,33 +248,59 @@ class Boolean(Int):
 
 
 class GenericDate(Char):
+    def __init__(self, field_name, treeview=None, attrs=None, window=None):
+        self.field_name = field_name
+        self.attrs = attrs or {}
+        self.renderer1 = gtk.CellRendererText()
+        self.renderer1.set_property('editable', True)
+        self.renderer = date_renderer.DecoratorRenderer(self.renderer1, date_renderer.date_callback(treeview), self.display_format)
+        self.treeview = treeview
+        if not window:
+            window = service.LocalService('gui.main').window
+        self.window = window
 
-    def __init__(self, *args, **argv):
-        super(GenericDate, self).__init__(*args)
-        self.renderer.set_property('editable', True)
-        import date_renderer
-        self.renderer = date_renderer.DecoratorRenderer(self.renderer, date_renderer.date_callback, self.display_format)
+    def setter(self, column, cell, store, iter):
+        model = store.get_value(iter, 0)
+        text = self.get_textual_value(model)
+        cell.renderer1.set_property('text', text)
+        color = self.get_color(model)
+        cell.renderer1.set_property('foreground', str(color))
+        align = 0
+        if self.treeview.editable:
+            field = model[self.field_name]
+            if not field.get_state_attrs(model).get('valid', True):
+                cell.renderer1.set_property('background', common.colors.get('invalid', 'white'))
+            elif bool(int(field.get_state_attrs(model).get('required', 0))):
+                cell.renderer1.set_property('background', common.colors.get('required', 'white'))
+        cell.renderer1.set_property('xalign', align)
+
+    def get_color(self, model):
+        to_display = ''
+        for color, expr in self.treeview.colors.items():
+            if model.expr_eval(expr, check_load=False):
+                to_display = color
+                break
+        return to_display or 'black'
+
+    def open_remote(self, model, create, changed=False, text=None):
+        raise NotImplementedError
 
     def get_textual_value(self, model):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        date = time.strptime(value, self.server_format)
-        return time.strftime(self.display_format, date)
+        try:
+            date = time.strptime(value, self.server_format)
+            return time.strftime(self.display_format, date)
+        except:
+            return ''
 
     def value_from_text(self, model, text):
-        if not text:
-            return False
-        try:
-            dt = time.strptime(text, self.display_format)
-        except:
-            try:
-                dt = list(time.localtime())
-                dt[2] = int(text)
-                dt = tuple(dt)
-            except:
-                return False
-        return time.strftime(self.server_format, dt)
+        dt = self.renderer.date_get(self.renderer.editable)
+        res = dt and dt.strftime(self.server_format)
+        if res:
+            time.strptime(res, self.server_format)
+        return res
 
 if not hasattr(locale, 'nl_langinfo'):
     locale.nl_langinfo = lambda *a: '%x'
