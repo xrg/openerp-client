@@ -1053,11 +1053,11 @@ class terp_main(service.Service):
         win.set_icon(common.TINYERP_ICON)
         win.set_transient_for(self.window)
         win.show_all()
-        server_widget = dialog.get_widget('ent_server')
+        server_widget = dialog.get_widget('ent_server2')
         old_pass_widget = dialog.get_widget('old_passwd')
         new_pass_widget = dialog.get_widget('new_passwd')
         new_pass2_widget = dialog.get_widget('new_passwd2')
-        change_button = dialog.get_widget('but_server_change')
+        change_button = dialog.get_widget('but_server_change1')
         change_button.connect_after('clicked', lambda a,b: _server_ask(b, win), server_widget)
 
         host = options.options['login.server']
@@ -1186,7 +1186,7 @@ class terp_main(service.Service):
 
         db_widget = dialog.get_widget('ent_db')
         widget_pass = dialog.get_widget('ent_password')
-        widget_url = dialog.get_widget('ent_server')
+        widget_url = dialog.get_widget('ent_server1')
 
         protocol = options.options['login.protocol']
         url = '%s%s:%s' % (protocol, options.options['login.server'],
