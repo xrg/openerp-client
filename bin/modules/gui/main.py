@@ -158,7 +158,7 @@ class db_login(object):
                 db_widget.show()
                 if butconnect:
                     butconnect.set_sensitive(True)
-            
+
             is_same_version, server_version, client_version = check_server_version(url)
             if not is_same_version:
                 common.warning(_('The versions of the server (%s) and the client (%s) missmatch. The client may not work properly. Use it at your own risks.') % (server_version, client_version,))
@@ -292,6 +292,9 @@ class db_create(object):
         while True:
             res = win.run()
             db_name = self.db_widget.get_text()
+            if (res==gtk.RESPONSE_OK) and (db_name in ('table','new','create','as','select','from','where','in','inner','outer','join','group')):
+                common.warning(_("Sorry,'" +db_name + "' cannot be the name of the database,it's a Reserved Keyword."), _('Bad database name !'), parent=parent)
+                continue
             if (res==gtk.RESPONSE_OK) and ((not db_name) or (not re.match('^[a-zA-Z][a-zA-Z0-9_]+$', db_name))):
                 common.warning(_('The database name must contain only normal characters or "_".\nYou must avoid all accents, space or special characters.'), _('Bad database name !'), parent=parent)
 
@@ -508,7 +511,7 @@ class terp_main(service.Service):
             'on_db_backup_activate': self.sig_db_dump,
             'on_db_drop_activate': self.sig_db_drop,
             'on_admin_password_activate': self.sig_db_password,
-            'on_extension_manager_activate': self.sig_extension_manager, 
+            'on_extension_manager_activate': self.sig_extension_manager,
         }
         for signal in dict:
             self.glade.signal_connect(signal, dict[signal])
@@ -926,8 +929,8 @@ class terp_main(service.Service):
         if current_view == view and objid == current_id:
             cpt = None
             if objid and view.screen.current_view.view_type == 'form':
-                cpt = rpc.session.rpc_exec_auth('/object', 'execute', 
-                                                'ir.attachment', 'search_count', 
+                cpt = rpc.session.rpc_exec_auth('/object', 'execute',
+                                                'ir.attachment', 'search_count',
                                                 [('res_model', '=', view.model), ('res_id', '=', objid)])
             if cpt:
                 self.buttons['but_attach'].set_icon_widget(self.__img_attachments)
@@ -940,7 +943,7 @@ class terp_main(service.Service):
         """
         if not view:
             view = self._wid_get()
-        
+
         id = view and view.id_get()
         gobject.timeout_add(1500, self.__attachment_callback, view, id)
         self.buttons['but_attach'].set_icon_widget(self.__img_no_attachments)
