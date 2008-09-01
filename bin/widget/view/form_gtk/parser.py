@@ -219,9 +219,8 @@ class _container(object):
             self.trans_box_label.append((eb, name, fname))
             eb.add(label)
             if help:
-                self.tooltips.set_tip(eb, help)
-                self.tooltips.enable()
-                label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+name.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;'))
+                eb.set_tooltip_markup('<span foreground=\"darkred\"><b>'+name+'</b></span>\n'+tools.to_xml(help))
+                label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
                 eb.show()
             if '_' in name:
                 label.set_text_with_mnemonic(name)
