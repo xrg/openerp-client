@@ -31,7 +31,6 @@
 import re
 import locale
 import gtk
-from gtk import glade
 import math
 
 import tools
@@ -104,7 +103,7 @@ class parser_tree(interface.parser_interface):
 #                   renderer.connect_after('editing-canceled', self.editing_canceled)
                 else:
                     if isinstance(renderer, gtk.CellRendererToggle):
-                        renderer.set_property('activatable', False)
+                        renderer.set_property('activable', False)
 
                 col = gtk.TreeViewColumn(None, renderer)
                 col_label = gtk.Label('')

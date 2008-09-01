@@ -108,17 +108,17 @@ class Screen(signal_event.signal_event):
         self.display()
 
     def search_active(self, active=True):
+        if not self.filter_widget:
+            view_form = rpc.session.rpc_exec_auth('/object', 'execute',
+                    self.name, 'fields_view_get', False, 'form',
+                    self.context)
+            self.filter_widget = widget_search.form(view_form['arch'],
+                    view_form['fields'], self.name, self.window,
+                    self.domain, (self, self.search_filter))
+            self.screen_container.add_filter(self.filter_widget.widget,
+                    self.search_filter, self.search_clear)
+            self.filter_widget.set_limit(self.limit)
         if active and self.show_search:
-            if not self.filter_widget:
-                view_form = rpc.session.rpc_exec_auth('/object', 'execute',
-                        self.name, 'fields_view_get', False, 'form',
-                        self.context)
-                self.filter_widget = widget_search.form(view_form['arch'],
-                        view_form['fields'], self.name, self.window,
-                        self.domain, (self, self.search_filter))
-                self.screen_container.add_filter(self.filter_widget.widget,
-                        self.search_filter, self.search_clear)
-                self.filter_widget.set_limit(self.limit)
             self.screen_container.show_filter()
         else:
             self.screen_container.hide_filter()
@@ -462,12 +462,12 @@ class Screen(signal_event.signal_event):
             self.current_model = self.models[res_id]
         if self.views:
             #XXX To remove when calendar will be implemented
-            if self.current_view.view_type == 'calendar' and \
-                    len(self.views) > 1:
-                self.switch_view()
+            #if self.current_view.view_type == 'calendar' and \
+            #        len(self.views) > 1:
+            #    self.switch_view()
             self.current_view.display()
             self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
-            self.search_active(self.current_view.view_type in ('tree', 'graph', 'calendar'))
+            self.search_active(self.current_view.view_type in ('tree', 'graph'))
 
     def display_next(self):
         self.current_view.set_value()
