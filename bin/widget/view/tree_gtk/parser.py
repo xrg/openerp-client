@@ -98,6 +98,7 @@ class parser_tree(interface.parser_interface):
                     if isinstance(renderer, gtk.CellRendererToggle):
                         renderer.set_property('activatable', True)
                     else:
+                        print 'Editable'
                         renderer.set_property('editable', True)
                     renderer.connect_after('editing-started', send_keys, treeview)
 #                   renderer.connect_after('editing-canceled', self.editing_canceled)
@@ -247,6 +248,12 @@ class Boolean(Int):
 
 
 class GenericDate(Char):
+
+    def __init__(self, *args, **argv):
+        super(GenericDate, self).__init__(*args)
+        self.renderer.set_property('editable', True)
+        import date_renderer
+        self.renderer = date_renderer.DecoratorRenderer(self.renderer, date_renderer.date_callback, self.display_format)
 
     def get_textual_value(self, model):
         value = model[self.field_name].get_client(model)
@@ -494,65 +501,6 @@ class Selection(Char):
                 res = val
         return res
 
-
-#class ProgressCellRenderer(gtk.GenericCellRenderer):
-#    __gproperties__ = {
-#        "percent": (gobject.TYPE_INT, "Percent",
-#                    "Progress percentage", 0, 100, 0,
-#                    gobject.PARAM_READWRITE),
-#    }
-#
-#    def __init__(self):
-#        self.__gobject_init__()
-#        self.percent = 0
-#
-#    def do_set_property(self, pspec, value):
-#        setattr(self, pspec.name, value)
-#
-#    def do_get_property(self, pspec):
-#        return getattr(self, pspec.name)
-#
-#    def on_render(self, window, widget, background_area,
-#                  cell_area, expose_area, flags):
-#        (x_offset, y_offset,
-#         width, height) = self.on_get_size(widget, cell_area)
-#        print 'Render'
-#        widget.style.paint_box(window,
-#                               gtk.STATE_NORMAL,
-#                               gtk.SHADOW_IN,
-#                               None, widget, "trough",
-#                               cell_area.x+x_offset,
-#                               cell_area.y+y_offset,
-#                               width, height)
-#        xt = widget.style.xthickness
-#        xpad = self.get_property("xpad")
-#        space = (width-2*xt-2*xpad)*(self.percent/100.)
-#        widget.style.paint_box(window,
-#                               gtk.STATE_PRELIGHT,
-#                               gtk.SHADOW_OUT,
-#                               None, widget, "bar",
-#                               cell_area.x+x_offset+xt,
-#                               cell_area.y+y_offset+xt,
-#                               int(space), height-2*xt)
-#
-#    def on_get_size(self, widget, cell_area):
-#        xpad = self.get_property("xpad")
-#        ypad = self.get_property("ypad")
-#        if cell_area:
-#            width = cell_area.width
-#            height = cell_area.height
-#            x_offset = xpad
-#            y_offset = ypad
-#        else:
-#            width = self.get_property("width")
-#            height = self.get_property("height")
-#            if width == -1: width = 100
-#            if height == -1: height = 30
-#            width += xpad*2
-#            height += ypad*2
-#            x_offset = 0
-#            y_offset = 0
-#        return x_offset, y_offset, width, height
 
 class ProgressBar(object):
     def __init__(self, field_name, treeview=None, attrs=None, window=None):
