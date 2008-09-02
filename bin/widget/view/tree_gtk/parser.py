@@ -103,7 +103,7 @@ class parser_tree(interface.parser_interface):
 #                   renderer.connect_after('editing-canceled', self.editing_canceled)
                 else:
                     if isinstance(renderer, gtk.CellRendererToggle):
-                        renderer.set_property('activable', False)
+                        renderer.set_property('activatable', False)
 
                 col = gtk.TreeViewColumn(None, renderer)
                 col_label = gtk.Label('')
@@ -411,7 +411,7 @@ class M2O(Char):
     def open_remote(self, model, create=True, changed=False, text=None):
         modelfield = model.mgroup.mfields[self.field_name]
         relation = modelfield.attrs['relation']
-        
+
         domain=modelfield.domain_get(model)
         context=modelfield.context_get(model)
         if create:
@@ -436,7 +436,7 @@ class M2O(Char):
             return True, value
         else:
             return False, False
-    
+
     def search_remote(self, relation, ids=[], domain=[], context={}):
         rpc = RPCProxy(relation)
 
