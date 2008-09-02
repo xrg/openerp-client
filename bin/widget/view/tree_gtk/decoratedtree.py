@@ -29,9 +29,10 @@
 ##############################################################################
 
 import gtk
+import observator
 
 
-class DecoratedTreeView(gtk.TreeView):
+class DecoratedTreeView(gtk.TreeView, observator.Observable):
     """This class extend a TreeView to be api compatible with EditableTreeView
     """
 

@@ -81,10 +81,14 @@ class parser_tree(interface.parser_interface):
         if not self.title:
             self.title = attrs.get('string', 'Unknown')
 
+
+        treeview.sequence = False
         for node in root_node.childNodes:
             node_attrs = tools.node_attributes(node)
             if node.localName == 'field':
                 fname = str(node_attrs['name'])
+                if fname == 'sequence':
+                    treeview.sequence = True
                 for boolean_fields in ('readonly', 'required'):
                     if boolean_fields in node_attrs:
                         node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
@@ -135,7 +139,8 @@ class parser_tree(interface.parser_interface):
                 else:
                     width = twidth.get(fields[fname]['type'], 100)
                 col.set_min_width(width)
-                col.connect('clicked', sort_model, treeview)
+                if not treeview.sequence:
+                    col.connect('clicked', sort_model, treeview)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 visval = eval(fields[fname].get('invisible', 'False'), {'context':self.screen.context})
@@ -251,6 +256,7 @@ class GenericDate(Char):
         self.field_name = field_name
         self.attrs = attrs or {}
         self.renderer1 = gtk.CellRendererText()
+# TODO: Review this, not always editable
         self.renderer1.set_property('editable', True)
         self.renderer = date_renderer.DecoratorRenderer(self.renderer1, date_renderer.date_callback(treeview), self.display_format)
         self.treeview = treeview
@@ -543,7 +549,6 @@ class ProgressBar(object):
         cell.set_property('text', '%.2f %%' % (text,))
         if text<0: text = 0.0
         if text>100.0: text = 100.0
-        print 'SETTING', text or 0.0
         cell.set_property('value', text)
 
     def open_remote(self, model, create, changed=False, text=None):

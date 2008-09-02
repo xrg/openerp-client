@@ -56,6 +56,19 @@ class ModelList(list):
         if not self.lock_signal:
             self.__screen.signal('record-changed', ('record-added', -1))
 
+    def move(self, obj, pos):
+        self.lock_signal = True
+        if self.__len__() > pos:
+            idx = self.index(obj)
+            self.remove(obj)
+            if pos > idx:
+                pos -= 1
+            self.insert(pos, obj)
+        else:
+            self.remove(obj)
+            self.append(obj)
+        self.lock_signal = False
+
     def remove(self, obj):
         idx = self.index(obj)
         super(ModelList, self).remove(obj)
@@ -98,6 +111,21 @@ class ModelRecordGroup(signal_event.signal_event):
             modelfield = field.ModelField(fvalue['type'])
             fvalue['name'] = fname
             models.mfields[fname] = modelfield(models, fvalue)
+
+    def model_move(self, model, position=0):
+        self.models.move(model, position)
+
+    def set_sequence(self, field='sequence'):
+        index = 0
+        for model in self.models:
+            if model[field]:
+                if index >= model[field].get(model):
+                    index += 1
+                    model[field].set(model, index, modified=True)
+                else:
+                    index = model[field].get(model)
+                if model.id:
+                    model.save()
 
     def save(self):
         for model in self.models:

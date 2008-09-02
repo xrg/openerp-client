@@ -292,8 +292,7 @@ class many2one(interface.widget_interface):
 
     def sig_activate(self, widget, event=None, leave=False):
         res = self._view.modelfield.get_client(self._view.model)
-        if (not res) and self.wid_text.get_text():
-            self.sig_find(widget, event, leave=True)
+        self.sig_find(widget, event, leave=True)
 
     def sig_new(self, *args):
         self.wid_text.disconnect(self.wid_text_focus_out_id)
