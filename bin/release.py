@@ -30,9 +30,9 @@
 
 name = 'tinyerp-client'
 version = '4.3.0'
-description = 'Tiny\'s ERP Client'
+description = 'Open\'s ERP Client'
 long_desc = '''\
-Tiny ERP is a complete ERP and CRM. The main features are accounting (analytic
+OpenERP is a complete ERP and CRM. The main features are accounting (analytic
 and financial), stock management, sales and purchases management, tasks
 automation, marketing campaigns, help desk, POS, etc. Technical features include
 a distributed server, flexible workflows, an object database, a dynamic GUI,

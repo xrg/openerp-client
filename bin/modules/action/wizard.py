@@ -48,7 +48,7 @@ class dialog(object):
         default=-1
         if not parent:
             parent = service.LocalService('gui.main').window
-        self.dia = gtk.Dialog('Tiny ERP', parent,
+        self.dia = gtk.Dialog('OpenERP', parent,
             gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
         for x in state:
             but = gtk.Button(x[1])
@@ -111,7 +111,7 @@ def execute(action, datas, state='init', parent=None, context={}):
                 self.error = False
                 self.parent = parent
                 self.exception = None
-    
+
             def run(self):
                 def go(wiz_id, datas, state):
                     ctx = rpc.session.context.copy()
@@ -126,7 +126,7 @@ def execute(action, datas, state='init', parent=None, context={}):
                     if not self.res:
                         self.error = True
                     return True
-        
+
                 thread.start_new_thread(go, (wiz_id, datas, state))
 
                 i = 0

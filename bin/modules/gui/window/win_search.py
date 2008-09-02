@@ -55,7 +55,7 @@ class dialog(object):
         if not window:
             window = service.LocalService('gui.main').window
 
-        self.dia = gtk.Dialog(_('Tiny ERP - Link'), window,
+        self.dia = gtk.Dialog(_('OpenERP - Link'), window,
                 gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
         self.window = window
         if not target:
@@ -147,8 +147,8 @@ class win_search(object):
         view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'form', self.context)
         self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win)
 
-        self.title = _('Tiny ERP Search: %s') % self.form.name
-        self.title_results = _('Tiny ERP Search: %s (%%d result(s))') % self.form.name
+        self.title = _('OpenERP Search: %s') % self.form.name
+        self.title_results = _('OpenERP Search: %s (%%d result(s))') % self.form.name
         self.win.set_title(self.title)
         x, y = self.form.widget.size_request()
 

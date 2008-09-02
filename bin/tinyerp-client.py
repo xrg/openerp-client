@@ -30,8 +30,8 @@
 #
 ##############################################################################
 """
-Tiny ERP - Client
-Tiny ERP is an ERP+CRM program for small and medium businesses.
+OpenERP - Client
+OpenERP is an ERP+CRM program for small and medium businesses.
 
 The whole source code is distributed under the terms of the
 GNU Public Licence.
@@ -138,7 +138,7 @@ try:
     gtk.main()
 except KeyboardInterrupt, e:
     log = logging.getLogger('common')
-    log.info(_('Closing Tiny ERP, KeyboardInterrupt'))
+    log.info(_('Closing OpenERP, KeyboardInterrupt'))
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -129,7 +129,7 @@ class calendar(interface.widget_interface):
         if not window:
             window = service.LocalService('gui.main').window
 
-        win = gtk.Dialog(_('Tiny ERP - Date selection'), window,
+        win = gtk.Dialog(_('OpenERP - Date selection'), window,
                 gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
                 (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                 gtk.STOCK_OK, gtk.RESPONSE_OK))
@@ -221,7 +221,7 @@ class datetime(interface.widget_interface):
             return self.show(False)
         super(datetime, self).display(model, model_field)
         self.show(model_field.get(model))
-    
+
     def show(self, dt_val, timezone=True):
         if not dt_val:
             self.entry.clear()
@@ -249,7 +249,7 @@ class datetime(interface.widget_interface):
             common.message(_('This widget is readonly !'))
             return True
 
-        win = gtk.Dialog(_('Tiny ERP - Date selection'), window,
+        win = gtk.Dialog(_('OpenERP - Date selection'), window,
                 gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
                 (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                 gtk.STOCK_OK, gtk.RESPONSE_OK))
@@ -315,13 +315,13 @@ class stime(interface.widget_interface):
     def get_value(self, model):
         str = self.entry.get_text()
         if str=='':
-            res = False 
-        try: 
+            res = False
+        try:
             t = time.strptime(str, self.format)
         except:
             return False
         return time.strftime(HM_FORMAT, t)
-        
+
     def set_value(self, model, model_field):
         res = self.get_value(model)
         model_field.set_client(model, res)

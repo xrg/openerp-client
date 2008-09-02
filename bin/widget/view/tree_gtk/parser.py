@@ -31,7 +31,6 @@
 import re
 import locale
 import gtk
-from gtk import glade
 import math
 
 import tools
@@ -41,6 +40,7 @@ from decoratedtree import DecoratedTreeView
 from widget.view import interface
 
 import time
+import date_renderer
 
 from widget.view.form_gtk.many2one import dialog as M2ODialog
 from modules.gui.window.win_search import win_search
@@ -97,7 +97,7 @@ class parser_tree(interface.parser_interface):
                 if editable and not node_attrs.get('readonly', False):
                     if isinstance(renderer, gtk.CellRendererToggle):
                         renderer.set_property('activatable', True)
-                    else:
+                    elif isinstance(renderer, gtk.CellRendererText) or isinstance(renderer, gtk.CellRendererCombo):
                         renderer.set_property('editable', True)
                     renderer.connect_after('editing-started', send_keys, treeview)
 #                   renderer.connect_after('editing-canceled', self.editing_canceled)
@@ -247,27 +247,59 @@ class Boolean(Int):
 
 
 class GenericDate(Char):
+    def __init__(self, field_name, treeview=None, attrs=None, window=None):
+        self.field_name = field_name
+        self.attrs = attrs or {}
+        self.renderer1 = gtk.CellRendererText()
+        self.renderer1.set_property('editable', True)
+        self.renderer = date_renderer.DecoratorRenderer(self.renderer1, date_renderer.date_callback(treeview), self.display_format)
+        self.treeview = treeview
+        if not window:
+            window = service.LocalService('gui.main').window
+        self.window = window
+
+    def setter(self, column, cell, store, iter):
+        model = store.get_value(iter, 0)
+        text = self.get_textual_value(model)
+        cell.renderer1.set_property('text', text)
+        color = self.get_color(model)
+        cell.renderer1.set_property('foreground', str(color))
+        align = 0
+        if self.treeview.editable:
+            field = model[self.field_name]
+            if not field.get_state_attrs(model).get('valid', True):
+                cell.renderer1.set_property('background', common.colors.get('invalid', 'white'))
+            elif bool(int(field.get_state_attrs(model).get('required', 0))):
+                cell.renderer1.set_property('background', common.colors.get('required', 'white'))
+        cell.renderer1.set_property('xalign', align)
+
+    def get_color(self, model):
+        to_display = ''
+        for color, expr in self.treeview.colors.items():
+            if model.expr_eval(expr, check_load=False):
+                to_display = color
+                break
+        return to_display or 'black'
+
+    def open_remote(self, model, create, changed=False, text=None):
+        raise NotImplementedError
 
     def get_textual_value(self, model):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        date = time.strptime(value, self.server_format)
-        return time.strftime(self.display_format, date)
+        try:
+            date = time.strptime(value, self.server_format)
+            return time.strftime(self.display_format, date)
+        except:
+            return ''
 
     def value_from_text(self, model, text):
-        if not text:
-            return False
-        try:
-            dt = time.strptime(text, self.display_format)
-        except:
-            try:
-                dt = list(time.localtime())
-                dt[2] = int(text)
-                dt = tuple(dt)
-            except:
-                return False
-        return time.strftime(self.server_format, dt)
+        dt = self.renderer.date_get(self.renderer.editable)
+        res = dt and dt.strftime(self.server_format)
+        if res:
+            time.strptime(res, self.server_format)
+        return res
 
 if not hasattr(locale, 'nl_langinfo'):
     locale.nl_langinfo = lambda *a: '%x'
@@ -379,7 +411,7 @@ class M2O(Char):
     def open_remote(self, model, create=True, changed=False, text=None):
         modelfield = model.mgroup.mfields[self.field_name]
         relation = modelfield.attrs['relation']
-        
+
         domain=modelfield.domain_get(model)
         context=modelfield.context_get(model)
         if create:
@@ -404,7 +436,7 @@ class M2O(Char):
             return True, value
         else:
             return False, False
-    
+
     def search_remote(self, relation, ids=[], domain=[], context={}):
         rpc = RPCProxy(relation)
 
@@ -494,65 +526,6 @@ class Selection(Char):
                 res = val
         return res
 
-
-#class ProgressCellRenderer(gtk.GenericCellRenderer):
-#    __gproperties__ = {
-#        "percent": (gobject.TYPE_INT, "Percent",
-#                    "Progress percentage", 0, 100, 0,
-#                    gobject.PARAM_READWRITE),
-#    }
-#
-#    def __init__(self):
-#        self.__gobject_init__()
-#        self.percent = 0
-#
-#    def do_set_property(self, pspec, value):
-#        setattr(self, pspec.name, value)
-#
-#    def do_get_property(self, pspec):
-#        return getattr(self, pspec.name)
-#
-#    def on_render(self, window, widget, background_area,
-#                  cell_area, expose_area, flags):
-#        (x_offset, y_offset,
-#         width, height) = self.on_get_size(widget, cell_area)
-#        print 'Render'
-#        widget.style.paint_box(window,
-#                               gtk.STATE_NORMAL,
-#                               gtk.SHADOW_IN,
-#                               None, widget, "trough",
-#                               cell_area.x+x_offset,
-#                               cell_area.y+y_offset,
-#                               width, height)
-#        xt = widget.style.xthickness
-#        xpad = self.get_property("xpad")
-#        space = (width-2*xt-2*xpad)*(self.percent/100.)
-#        widget.style.paint_box(window,
-#                               gtk.STATE_PRELIGHT,
-#                               gtk.SHADOW_OUT,
-#                               None, widget, "bar",
-#                               cell_area.x+x_offset+xt,
-#                               cell_area.y+y_offset+xt,
-#                               int(space), height-2*xt)
-#
-#    def on_get_size(self, widget, cell_area):
-#        xpad = self.get_property("xpad")
-#        ypad = self.get_property("ypad")
-#        if cell_area:
-#            width = cell_area.width
-#            height = cell_area.height
-#            x_offset = xpad
-#            y_offset = ypad
-#        else:
-#            width = self.get_property("width")
-#            height = self.get_property("height")
-#            if width == -1: width = 100
-#            if height == -1: height = 30
-#            width += xpad*2
-#            height += ypad*2
-#            x_offset = 0
-#            y_offset = 0
-#        return x_offset, y_offset, width, height
 
 class ProgressBar(object):
     def __init__(self, field_name, treeview=None, attrs=None, window=None):

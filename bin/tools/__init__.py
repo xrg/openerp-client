@@ -28,12 +28,9 @@
 #
 ##############################################################################
 
-import rpc
-import webbrowser
-import os
-import sys
 
 def expr_eval(string, context={}):
+    import rpc
     context['uid'] = rpc.session.uid
     if isinstance(string, basestring):
         return eval(string, context)
@@ -41,9 +38,12 @@ def expr_eval(string, context={}):
         return string
 
 def launch_browser(url):
+    import webbrowser
+    import sys
     if sys.platform == 'win32':
         webbrowser.open(url)
     else:
+        import os
         pid = os.fork()
         if not pid:
             pid = os.fork()
@@ -86,5 +86,60 @@ def calc_condition(self,model,con):
 			if val>=con[2]:
 				return True
 		return False
+
+def call_log(fun):
+    """Debug decorator
+       TODO: Add optionnal execution time
+    """
+    def f(*args, **kwargs):
+        print "call %s with %r, %r:" % (getattr(fun, '__name__', str(fun)), args, kwargs),
+        try:
+            r = fun(*args, **kwargs)
+            print repr(r)
+            return r
+        except Exception, ex:
+            print "Exception: %r" % (ex,)
+            raise
+    return f
+
+def to_xml(s):
+    return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
+
+
+date_mapping = {
+    '%y': ('__', '[_0-9][_0-9]'),
+    '%Y': ('____', '[_1-9][_0-9][_0-9][_0-9]'),
+    '%m': ('__', '[_0-1][_0-9]'),
+    '%d': ('__', '[_0-3][_0-9]'),
+    '%H': ('__', '[_0-2][_0-9]'),
+    '%M': ('__', '[_0-6][_0-9]'),
+    '%S': ('__', '[_0-6][_0-9]'),
+}
+
+from mx.DateTime import RelativeDateTime
+from mx.DateTime import DateTime
+from mx.DateTime import now
+
+date_operation = {
+    '^=w(\d+)$': lambda dt,r: dt+RelativeDateTime(day=0, month=0, weeks = int(r.group(1))),
+    '^=d(\d+)$': lambda dt,r: dt+RelativeDateTime(day=int(r.group(1))),
+    '^=m(\d+)$': lambda dt,r: dt+RelativeDateTime(month = int(r.group(1))),
+    '^=y(2\d\d\d)$': lambda dt,r: dt+RelativeDateTime(year = int(r.group(1))),
+    '^=h(\d+)$': lambda dt,r: dt+RelativeDateTime(hour = int(r.group(1))),
+    '^=(\d+)w$': lambda dt,r: dt+RelativeDateTime(day=0, month=0, weeks = int(r.group(1))),
+    '^=(\d+)d$': lambda dt,r: dt+RelativeDateTime(day=int(r.group(1))),
+    '^=(\d+)m$': lambda dt,r: dt+RelativeDateTime(month = int(r.group(1))),
+    '^=(2\d\d\d)y$': lambda dt,r: dt+RelativeDateTime(year = int(r.group(1))),
+    '^=(\d+)h$': lambda dt,r: dt+RelativeDateTime(hour = int(r.group(1))),
+    '^([\\+-]\d+)h$': lambda dt,r: dt+RelativeDateTime(hours = int(r.group(1))),
+    '^([\\+-]\d+)w$': lambda dt,r: dt+RelativeDateTime(days = 7*int(r.group(1))),
+    '^([\\+-]\d+)d$': lambda dt,r: dt+RelativeDateTime(days = int(r.group(1))),
+    '^([\\+-]\d+)m$': lambda dt,r: dt+RelativeDateTime(months = int(r.group(1))),
+    '^([\\+-]\d+)y$': lambda dt,r: dt+RelativeDateTime(years = int(r.group(1))),
+    '^=$': lambda dt,r: now(),
+    '^-$': lambda dt,r: False
+}
+
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

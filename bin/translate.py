@@ -33,6 +33,11 @@ import locale
 import release
 import gettext
 import gtk
+import logging
+
+#from tools import call_log
+#locale.setlocale = call_log(locale.setlocale)
+#locale.getdefaultlocale = call_log(locale.getdefaultlocale)
 
 _LOCALE2WIN32 = {
     'af_ZA': 'Afrikaans_South Africa',
@@ -110,36 +115,37 @@ def setlang(lang=None):
         gettext.install(APP, unicode=1)
         return False
     if lang:
-        try:
-            lc, encoding = locale.getdefaultlocale()
-            if encoding == 'utf':
-                encoding = 'UTF-8'
-            if encoding == 'cp1252':
-                encoding = '1252'
-        except ValueError:
+        lc, encoding = locale.getdefaultlocale()
+        if encoding == 'utf':
+            encoding = 'UTF-8'
+        if encoding == 'cp1252':
+            encoding = '1252'
+        if not encoding:
             encoding = 'UTF-8'
 
-        if os.name == 'nt' and lang != os.environ.get('LANG', ''):
+        lang2 = lang
+        if os.name == 'nt':
+            lang2 = _LOCALE2WIN32.get(lang, lang)
             os.environ['LANG'] = lang
-            if sys.executable == sys.argv[0]:
-                os.execv(sys.executable, ['"'+sys.executable+'"'] + sys.argv[1:])
-            else:
-                os.execv(sys.executable, ['"'+sys.executable+'"'] + sys.argv)
-        os.environ['LANG'] = lang
+        elif os.name == 'mac':
+            encoding = 'UTF-8'
+
+        lang_enc = lang2 + '.' + encoding
         try:
-            if os.name == 'nt':
-                locale.setlocale(locale.LC_ALL, _LOCALE2WIN32.get(lang, lang) + '.' + encoding)
-            else:
-                locale.setlocale(locale.LC_ALL, lang+'.'+encoding)
+            locale.setlocale(locale.LC_ALL, lang_enc)
         except:
-            pass
+            logging.getLogger('translate').warning(
+                    _('Unable to set locale %s') % lang_enc)
+
         lang = gettext.translation(APP, DIR, languages=[lang], fallback=True)
         lang.install(unicode=1)
     else:
         try:
+            if os.name == 'nt':
+                os.environ['LANG'] = ''
             locale.setlocale(locale.LC_ALL, '')
         except:
-            pass
+            logging.getLogger('translate').warning( _('Unable to set locale !'))
         gettext.bindtextdomain(APP, DIR)
         gettext.textdomain(APP)
         gettext.install(APP, unicode=1)

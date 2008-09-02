@@ -59,7 +59,7 @@ class dialog(object):
         if not window:
             window = service.LocalService('gui.main').window
 
-        self.dia = gtk.Dialog(_('Tiny ERP - Link'), window,
+        self.dia = gtk.Dialog(_('OpenERP - Link'), window,
                 gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
         self.window = window
         if ('string' in attrs) and attrs['string']:
@@ -256,7 +256,7 @@ class many2one(interface.widget_interface):
             self.wid_text.grab_focus()
 
             ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', leave and self.wid_text.get_text() or '', domain, 'ilike', context)
-            if len(ids)==1:
+            if (len(ids)==1) and leave:
                 self._view.modelfield.set_client(self._view.model, ids[0],
                         force_change=True)
                 self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)

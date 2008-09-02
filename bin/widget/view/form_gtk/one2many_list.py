@@ -56,7 +56,7 @@ class dialog(object):
         if not window:
             window = service.LocalService('gui.main').window
 
-        self.dia = gtk.Dialog(_('Tiny ERP - Link'), window,
+        self.dia = gtk.Dialog(_('OpenERP - Link'), window,
                 gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
         self.window = window
         if ('string' in attrs) and attrs['string']:

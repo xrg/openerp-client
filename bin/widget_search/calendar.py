@@ -111,7 +111,7 @@ class calendar(wid_int.wid_int):
     value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 
     def cal_open(self, widget, event, dest, parent=None):
-        win = gtk.Dialog(_('Tiny ERP - Date selection'), parent,
+        win = gtk.Dialog(_('OpenERP - Date selection'), parent,
                 gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
                 (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                 gtk.STOCK_OK, gtk.RESPONSE_OK))

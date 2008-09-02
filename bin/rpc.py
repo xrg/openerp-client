@@ -52,12 +52,12 @@ class rpc_exception(Exception):
         self.args = backtrace
         if hasattr(code, 'split'):
             lines = code.split('\n')
-    
+
             self.type = lines[0].split(' -- ')[0]
             self.message = ''
             if len(lines[0].split(' -- ')) > 1:
                 self.message = lines[0].split(' -- ')[1]
-    
+
             self.data = '\n'.join(lines[2:])
         else:
             self.type = 'error'
@@ -236,12 +236,12 @@ class rpc_session(object):
         self._passwd = passwd
         self.db = db
 
-        #CHECKME: is this useful? maybe it's used to see if there is no 
+        #CHECKME: is this useful? maybe it's used to see if there is no
         # exception raised?
         sock = self._gw(self._url, self.db, self.uid, self._passwd)
         self.context_reload()
         return 1
-        
+
     def list_db(self, url):
         m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
         if not m:
@@ -262,7 +262,7 @@ class rpc_session(object):
                 return res
             except Exception, e:
                 return -1
-    
+
     def db_exec_no_except(self, url, method, *args):
         m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
         if m.group(1) == 'http://' or m.group(1) == 'https://':
@@ -308,7 +308,7 @@ class rpc_session(object):
             try:
                 import pytz
             except:
-                common.warning('You select a timezone but tinyERP could not find pytz library !\nThe timezone functionality will be disable.')
+                common.warning('You select a timezone but OpenERP could not find pytz library !\nThe timezone functionality will be disable.')
 
     def logged(self):
         return self._open
@@ -335,7 +335,7 @@ class RPCProxy(object):
         if not name in self.__attrs:
             self.__attrs[name] = RPCFunction(self.resource, name)
         return self.__attrs[name]
-    
+
 
 class RPCFunction(object):
 
