@@ -522,7 +522,7 @@ class terp_main(service.Service):
             self.glade.signal_connect(signal, dict[signal])
 
         self.buttons = {}
-        for button in ('but_new', 'but_save', 'but_remove', 'but_search', 'but_previous', 'but_next', 'but_action', 'but_open', 'but_print', 'but_close', 'but_reload', 'but_switch','but_attach'):
+        for button in ('but_new', 'but_save', 'but_remove', 'but_search', 'but_previous', 'but_next', 'but_action', 'but_open', 'but_print', 'but_close', 'but_reload', 'but_switch','but_attach', 'radio_find','radio_form','radio_graph','radio_calendar'):
             self.glade.signal_connect('on_'+button+'_clicked', self._sig_child_call, button)
             self.buttons[button]=self.glade.get_widget(button)
 

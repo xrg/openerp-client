@@ -127,6 +127,14 @@ class form(object):
             'but_attach': self.sig_attach,
             'but_close': self.sig_close,
         }
+        if 'tree' in view_type:
+            self.handlers['radio_find'] = self.sig_switch
+        if 'form' in view_type:
+            self.handlers['radio_form'] = self.sig_switch
+        if 'graph' in view_type:
+            self.handlers['radio_graph'] = self.sig_switch
+        if 'calendar' in view_type:
+            self.handlers['radio_calendar'] = self.sig_switch
         if res_id:
             if isinstance(res_id, int):
                 res_id = [res_id]
@@ -185,6 +193,7 @@ class form(object):
         if not self.modified_save():
             return
         self.screen.switch_view()
+        print 'VIEW', self.screen.current_view.view_type
 
     def _id_get(self):
         return self.screen.id_get()
