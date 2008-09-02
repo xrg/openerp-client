@@ -108,17 +108,18 @@ class Screen(signal_event.signal_event):
         self.display()
 
     def search_active(self, active=True):
-        if not self.filter_widget:
-            view_form = rpc.session.rpc_exec_auth('/object', 'execute',
-                    self.name, 'fields_view_get', False, 'form',
-                    self.context)
-            self.filter_widget = widget_search.form(view_form['arch'],
-                    view_form['fields'], self.name, self.window,
-                    self.domain, (self, self.search_filter))
-            self.screen_container.add_filter(self.filter_widget.widget,
-                    self.search_filter, self.search_clear)
-            self.filter_widget.set_limit(self.limit)
+
         if active and self.show_search:
+            if not self.filter_widget:
+                view_form = rpc.session.rpc_exec_auth('/object', 'execute',
+                        self.name, 'fields_view_get', False, 'form',
+                        self.context)
+                self.filter_widget = widget_search.form(view_form['arch'],
+                        view_form['fields'], self.name, self.window,
+                        self.domain, (self, self.search_filter))
+                self.screen_container.add_filter(self.filter_widget.widget,
+                        self.search_filter, self.search_clear)
+                self.filter_widget.set_limit(self.limit)
             self.screen_container.show_filter()
         else:
             self.screen_container.hide_filter()
