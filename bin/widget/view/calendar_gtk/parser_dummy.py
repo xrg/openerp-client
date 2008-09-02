@@ -5,6 +5,7 @@
 #
 # $Id$
 #
+#
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
 # consequences resulting from its eventual inadequacies and bugs
@@ -28,61 +29,30 @@
 #
 ##############################################################################
 
-from interface import parser_view
+from widget.view import interface
+import tools
+import gtk
 
-class ViewCalendar(parser_view):
 
-    def __init__(self, window, screen, widget, children=None, buttons=None,
-            toolbar=None):
-        super(ViewCalendar, self).__init__(window, screen, widget, children,
-                buttons, toolbar)
-        self.view_type = 'calendar'
-        self.view = widget
-        self.model_add_new = False
-        self.widget = widget.widget
-        self.widget.screen = screen
+class EmptyCalendar(object):
+    def __init__(self, model):
+        self.widget = gtk.Label(_('Calendar view')+'\n'+_('Not yet implemented')
+                +'\n'+_('You can use this feature in the web client'))
 
-    def cancel(self):
+    def display(self, models):
         pass
 
-    def __str__(self):
-        return 'ViewCalendar (%s)' % self.screen.resource
 
-    def __getitem__(self, name):
-        return None
+class parser_calendar(interface.parser_interface):
+    def parse(self, model, root_node, fields):
+        attrs = tools.node_attributes(root_node)
+        self.title = attrs.get('string', 'Unknown')
 
-    def destroy(self):
-        self.widget.destroy()
-        del self.screen
-        del self.widget
+        on_write = ''
 
-    def set_value(self):
-        pass
+        view = EmptyCalendar(model)
 
-    def reset(self):
-        pass
-
-    def reset(self):
-        pass
-    
-    def display(self):
-        self.view.display(self.screen.models)
-        return None
-
-    def signal_record_changed(self, *args):
-        pass
-
-    def sel_ids_get(self):
-        return []
-
-    def on_change(self, callback):
-        pass
-
-    def unset_editable(self):
-        pass
-
-    def set_cursor(self, new=False):
-        pass
+        return view, {}, [], on_write
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

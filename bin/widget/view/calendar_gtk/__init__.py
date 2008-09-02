@@ -26,7 +26,18 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ###############################################################################
-from parser import *
+
+ok = False
+try:
+    import hippo
+    ok = True
+except:
+    pass
+
+if ok:
+    from parser import *
+else:
+    from parser_dummy import *
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

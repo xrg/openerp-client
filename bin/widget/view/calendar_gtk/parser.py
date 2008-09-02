@@ -32,29 +32,134 @@
 from widget.view import interface
 import tools
 import gtk
+import gtk.glade
+import gettext
+import common
+from datetime import datetime
+
+from SpiffGtkWidgets import Calendar
+from mx import DateTime
 
 
-class EmptyCalendar(object):
+class ViewCalendar(object):
+    def __init__(self, model, axis, fields, attrs):
+        self.glade = gtk.glade.XML(common.terp_path("terp.glade"),'widget_view_calendar',gettext.textdomain())
+        self.widget = self.glade.get_widget('widget_view_calendar')
+        self.widget.show_all()
+        self.fields = fields
+        self.attrs = attrs
+        self.axis = axis
 
-    def __init__(self, model):
-        self.widget = gtk.Label(_('Calendar view')+'\n'+_('Not yet implemented')
-                +'\n'+_('You can use this feature in the web client'))
-    
+        self.cal_model = Calendar.Model()
+        self.cal_view = Calendar.Calendar(self.cal_model)
+        vbox = self.glade.get_widget('cal_vbox')
+        vbox.pack_start(self.cal_view)
+        vbox.show_all()
+
+        self.glade.signal_connect('on_but_forward_clicked', self._back_forward, 1)
+        self.glade.signal_connect('on_but_back_clicked', self._back_forward, -1)
+        self.glade.signal_connect('on_but_today_clicked', self._today, -1)
+        self.glade.signal_connect('on_calendar_small_day_selected_double_click', self._change_small)
+        self.glade.signal_connect('on_view_day_clicked', self._change_view, 'day')
+        self.glade.signal_connect('on_view_week_clicked', self._change_view, 'week')
+        self.glade.signal_connect('on_view_month_clicked', self._change_view, 'month')
+        self.date = DateTime.now()
+        self.mode = 'month'
+
+    def _change_small(self, widget, *args, **argv):
+        t = list(widget.get_date() )
+        t[1] += 1
+        self.date = DateTime.DateTime(*t)
+        self.display(None)
+
+    def _today(self, widget, type, *args, **argv):
+        self.date = DateTime.now()
+        self.display(None)
+
+    def _back_forward(self, widget, type, *args, **argv):
+        if self.mode=='day':
+            self.date = self.date + DateTime.RelativeDateTime(days=type)
+        if self.mode=='week':
+            self.date = self.date + DateTime.RelativeDateTime(weeks=type)
+        if self.mode=='month':
+            self.date = self.date + DateTime.RelativeDateTime(months=type)
+        self.display(None)
+
+    def _change_view(self, widget, type, *args, **argv):
+        self.mode = type
+        self.display(None)
+        return True
+
     def display(self, models):
-        pass
+        print 'DISPLAY'
+        self.glade.get_widget('view_day').set_active(self.mode=='day')
+        self.glade.get_widget('view_week').set_active(self.mode=='week')
+        self.glade.get_widget('view_month').set_active(self.mode=='month')
+        label = self.glade.get_widget('label_current')
+        t = self.date.tuple()
+        print 'END GLADE'
+        if self.mode=='month':
+            d1 = datetime(*list(t)[:6])
+            print 'Set Range'
+            self.cal_view.set_range(self.cal_view.RANGE_MONTH)
+            print 'Set Range ENd'
+            self.cal_view.select(d1)
+            print 'Set Range Selected'
+            label.set_text(self.date.strftime('%B %Y'))
+        if self.mode=='week':
+            print 'Set Range'
+            self.cal_view.set_range(self.cal_view.RANGE_WEEK)
+            print 'Set Range ENd'
+            d1 = datetime(*list(t)[:6])
+            self.cal_view.select(d1)
+            print 'Set Range Selected'
+            label.set_text(_('Week') + ' ' + self.date.strftime('%W, %Y'))
+        if self.mode=='day':
+            self.cal_view.set_range(self.cal_view.RANGE_CUSTOM)
+            d1 = datetime(*(list(t)[:3] + [00]))
+            d2 = datetime(*(list(t)[:3] + [23, 59, 59]))
+            self.cal_view.set_custom_range(d1,d2)
+            label.set_text(self.date.strftime('%A %x'))
+        sc = self.glade.get_widget('calendar_small')
+        sc.select_month(t[1]-1,t[0])
+        sc.select_day(t[2])
+
+        print 'END DISPLAY VIEW'
+        if models:
+            print models
+            # If doesn't work, remove events
+            self.cal_model = Calendar.Model()
+            self.cal_view.model = self.cal_model
+
+            for model in models.models:
+                print model.value
+                event = Calendar.Event(
+                    'Event number 1',
+                    datetime(2008, 9, 8, 02),
+                    datetime(2008, 9, 8, 17),
+                    bg_color = 'lightgreen')
+                self.cal_model.add_event(event)
+        print 'END DISPLAY'
+
+
 
 
 class parser_calendar(interface.parser_interface):
-
     def parse(self, model, root_node, fields):
         attrs = tools.node_attributes(root_node)
-        self.title = attrs.get('string', 'Unknown')
+        self.title = attrs.get('string', 'Calendar')
 
-        on_write = ''
+        axis = []
+        axis_data = {}
+        for node in root_node.childNodes:
+            node_attrs = tools.node_attributes(node)
+            if node.localName == 'field':
+                axis.append(str(node_attrs['name']))
+                axis_data[str(node_attrs['name'])] = node_attrs
 
-        view = EmptyCalendar(model)
+        view = ViewCalendar(model, axis, fields, attrs)
 
-        return view, {}, [], on_write
+        return view, {}, [], ''
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
