@@ -261,8 +261,15 @@ class db_create(object):
         self.dialog = glade.XML(common.terp_path("terp.glade"), "win_createdb", gettext.textdomain())
         self.sig_login = sig_login
 
+    def entry_changed(self, *args):
+        up1 = self.dialog.get_widget('ent_user_pass1').get_text()
+        up2 = self.dialog.get_widget('ent_user_pass2').get_text()
+        self.dialog.get_widget('button_db_ok').set_sensitive(bool(up1 and (up1==up2)))
+
     def run(self, parent=None):
         win = self.dialog.get_widget('win_createdb')
+        self.dialog.signal_connect('on_ent_user_pass1_changed', self.entry_changed)
+        self.dialog.signal_connect('on_ent_user_pass2_changed', self.entry_changed)
         win.set_default_response(gtk.RESPONSE_OK)
         if not parent:
             parent = service.LocalService('gui.main').window
@@ -305,6 +312,7 @@ class db_create(object):
         langidx = self.lang_widget.get_active_iter()
         langreal = langidx and self.lang_widget.get_model().get_value(langidx,1)
         passwd = pass_widget.get_text()
+        user_pass = self.dialog.get_widget('ent_user_pass1').get_text()
         url = self.server_widget.get_text()
         m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
         if m:
@@ -319,9 +327,10 @@ class db_create(object):
                 id=rpc.session.db_exec(url, 'list')
                 if db_name in id:
                     raise Exception('DbExist')
-                id = rpc.session.db_exec(url, 'create', passwd, db_name, demo_data, langreal)
+                id = rpc.session.db_exec(url, 'create', passwd, db_name, demo_data, langreal, user_pass)
                 win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
                 win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+                win.set_title(_('OpenERP Database Installation'))
                 vbox = gtk.VBox(False, 0)
                 hbox = gtk.HBox(False, 13)
                 hbox.set_border_width(10)
@@ -352,10 +361,6 @@ class db_create(object):
                 elif ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
                     common.warning(_('Bad database administrator password !'), _("Could not create database."))
                 else:
-                    print e
-                    print str(e)
-                    print e.faultString
-                    print e.faultCode
                     common.warning(_("Could not create database."),_('Error during database creation !'))
 
     def progress_timeout(self, pbar, url, passwd, id, win, dbname, parent=None):
