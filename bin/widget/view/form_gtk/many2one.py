@@ -260,7 +260,7 @@ class many2one(interface.widget_interface):
                 name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
                 self._view.modelfield.set_client(self._view.model, name,
                         force_change=True)
-        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
         self.display(self._view.model, self._view.modelfield)
         self.ok=True
 
@@ -276,7 +276,7 @@ class many2one(interface.widget_interface):
                 self._view.modelfield.set_client(self._view.model, value,
                         force_change=True)
             dia.destroy()
-        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
         self.display(self._view.model, self._view.modelfield)
         self.ok=True
 
@@ -298,7 +298,7 @@ class many2one(interface.widget_interface):
             self._view.modelfield.set_client(self._view.model, value)
             self.display(self._view.model, self._view.modelfield)
         dia.destroy()
-        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
 
     def sig_key_press(self, widget, event, *args):
         if event.keyval==gtk.keysyms.F1:

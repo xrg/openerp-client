@@ -91,7 +91,8 @@ class dialog(object):
         self.screen.models._context.update(model_ctx)
         if not model:
             model = self.screen.new(context=default_get_ctx)
-        self.screen.models.model_add(model)
+        else:
+            self.screen.models.model_add(model)
         self.screen.current_model = model
         if ('views' in attrs) and ('form' in attrs['views']):
             arch = attrs['views']['form']['arch']
