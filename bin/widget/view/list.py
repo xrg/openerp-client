@@ -405,7 +405,7 @@ class ViewList(parser_view):
             for renderer in col.get_cell_renderers():
                 if isinstance(renderer, gtk.CellRendererToggle):
                     renderer.set_property('activatable', False)
-                else:
+                elif not isinstance(renderer, gtk.CellRendererProgress):
                     renderer.set_property('editable', False)
 
 
