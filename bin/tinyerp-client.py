@@ -131,10 +131,7 @@ try:
     win = modules.gui.main.terp_main()
     if not common.terp_survey():
         if options.options.rcexist:
-            if options.options['tip.autostart']:
-                common.tipoftheday(win.window)
-            else:
-                win.sig_login()
+            win.sig_login()
     gtk.main()
 except KeyboardInterrupt, e:
     log = logging.getLogger('common')

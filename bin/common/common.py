@@ -124,67 +124,6 @@ def selection(title, values, alwaysask=False, parent=None):
     win.destroy()
     return res
 
-def tipoftheday(parent=None):
-    class tip(object):
-        def __init__(self, parent=None):
-            try:
-                self.number = int(options.options['tip.position'])
-            except:
-                self.number = 0
-                log = logging.getLogger('common.message')
-                log.error('Invalid value for option tip.position ! See ~/.terprc !')
-            winglade=glade.XML(common.terp_path("terp.glade"), "win_tips", gettext.textdomain())
-            self.win = winglade.get_widget('win_tips')
-            if parent:
-                self.win.set_transient_for(parent)
-            self.parent = parent
-            self.win.show_all()
-            self.label = winglade.get_widget('tip_label')
-            self.check = winglade.get_widget('tip_checkbutton')
-            img = winglade.get_widget('tip_image_tinyerp')
-            img.set_from_file(common.terp_path_pixmaps('tinyerp.png'))
-            dict = {
-                'on_but_next_activate': self.tip_next,
-                'on_but_previous_activate': self.tip_previous,
-                'on_but_close_activate': self.tip_close,
-            }
-            for signal in dict:
-                winglade.signal_connect(signal, dict[signal])
-            self.tip_set()
-            self.win.show_all()
-
-        def tip_set(self):
-            lang = options['client.lang']
-            f = False
-            if lang:
-                f = terp_path('tipoftheday.'+lang+'.txt')
-            if not f:
-                f = terp_path('tipoftheday.txt')
-            tips = file(f).read().split('---')
-            tip = tips[self.number % len(tips)]
-            del tips
-            self.label.set_text(tip)
-            self.label.set_use_markup( True )
-
-        def tip_next(self, *args):
-            self.number+=1
-            self.tip_set()
-
-        def tip_previous(self, *args):
-            if self.number>0:
-                self.number -= 1
-            self.tip_set()
-
-        def tip_close(self, *args):
-            check = self.check.get_active()
-            options.options['tip.autostart'] = check
-            options.options['tip.position'] = self.number+1
-            options.save()
-            parent.present()
-            self.win.destroy()
-    tip2 = tip(parent)
-    return True
-
 class upload_data_thread(threading.Thread):
     def __init__(self, email, data, type, supportid):
         self.args = [('email',email),('type',type),('supportid',supportid),('data',data)]

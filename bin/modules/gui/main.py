@@ -514,7 +514,6 @@ class terp_main(service.Service):
             'on_opt_form_tab_orientation_vertical_activate': lambda x: self.sig_form_tab_orientation(90),
             'on_help_index_activate': self.sig_help_index,
             'on_help_contextual_activate': self.sig_help_context,
-            'on_help_tips_activate': self.sig_tips,
             'on_help_licence_activate': self.sig_licence,
             'on_about_activate': self.sig_about,
             'on_shortcuts_activate' : self.sig_shortcuts,
@@ -825,9 +824,6 @@ class terp_main(service.Service):
         model = self._wid_get().model
         l = rpc.session.context.get('lang','en_US')
         tools.launch_browser(options.options['help.context']+'?model=%s&lang=%s' % (model,l))
-
-    def sig_tips(self, *args):
-        common.tipoftheday(self.window)
 
     def sig_licence(self, widget):
         dialog = glade.XML(common.terp_path("terp.glade"), "win_licence", gettext.textdomain())
