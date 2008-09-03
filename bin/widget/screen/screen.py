@@ -69,8 +69,7 @@ class Screen(signal_event.signal_event):
         self.hastoolbar = hastoolbar
         self.default_get=default_get
         if not row_activate:
-            # TODO change for a function that switch to form view
-            self.row_activate = self.switch_view
+            self.row_activate = lambda self,screen=None: self.switch_view(screen, 'form')
         else:
             self.row_activate = row_activate
         self.create_new = create_new
@@ -214,15 +213,28 @@ class Screen(signal_event.signal_event):
         del self.models
         del self.views
 
-    def switch_view(self, screen=None):
+    # mode: False = next view, value = open this view
+    def switch_view(self, screen=None, mode=False):
         self.current_view.set_value()
         if self.current_model and self.current_model not in self.models.models:
             self.current_model = None
-        if len(self.view_to_load):
-            self.load_view_to_load()
-            self.__current_view = len(self.views) - 1
+        if mode:
+            ok = False
+            for vid in range(len(self.views)):
+                if self.views[vid].view_type==mode:
+                    self.__current_view = vid
+                    ok = True
+            while not ok and len(self.view_to_load):
+                self.load_view_to_load()
+                self.__current_view = len(self.views) - 1
+                if self.current_view.view_type==mode:
+                    ok = True
         else:
-            self.__current_view = (self.__current_view + 1) % len(self.views)
+            if len(self.view_to_load):
+                self.load_view_to_load()
+                self.__current_view = len(self.views) - 1
+            else:
+                self.__current_view = (self.__current_view + 1) % len(self.views)
         widget = self.current_view.widget
         self.screen_container.set(self.current_view.widget)
         if self.current_model:
@@ -236,7 +248,7 @@ class Screen(signal_event.signal_event):
 
         # TODO: set True or False accoring to the type
 
-    def load_view_to_load(self):
+    def load_view_to_load(self, mode=False):
         if len(self.view_to_load):
             if self.view_ids:
                 view_id = self.view_ids.pop(0)

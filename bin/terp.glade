@@ -2043,14 +2043,14 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkRadioToolButton" id="radio_find">
+	    <widget class="GtkRadioToolButton" id="radio_tree">
 	      <property name="visible">True</property>
 	      <property name="stock_id">gtk-find</property>
 	      <property name="visible_horizontal">True</property>
 	      <property name="visible_vertical">True</property>
 	      <property name="is_important">False</property>
 	      <property name="active">False</property>
-	      <signal name="toggled" handler="on_radio_find_toggled" last_modification_time="Tue, 02 Sep 2008 22:46:32 GMT"/>
+	      <signal name="toggled" handler="on_radio_tree_clicked" last_modification_time="Wed, 03 Sep 2008 09:27:11 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="expand">False</property>
@@ -2068,8 +2068,8 @@
 	      <property name="visible_vertical">True</property>
 	      <property name="is_important">False</property>
 	      <property name="active">False</property>
-	      <property name="group">radio_find</property>
-	      <signal name="toggled" handler="on_radio_form_toggled" last_modification_time="Tue, 02 Sep 2008 22:46:37 GMT"/>
+	      <property name="group">radio_tree</property>
+	      <signal name="clicked" handler="on_radio_form_clicked" last_modification_time="Wed, 03 Sep 2008 08:53:12 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="expand">False</property>
@@ -2087,8 +2087,8 @@
 	      <property name="visible_vertical">True</property>
 	      <property name="is_important">False</property>
 	      <property name="active">False</property>
-	      <property name="group">radio_find</property>
-	      <signal name="toggled" handler="on_radio_graph_toggled" last_modification_time="Tue, 02 Sep 2008 22:46:42 GMT"/>
+	      <property name="group">radio_tree</property>
+	      <signal name="clicked" handler="on_radio_graph_clicked" last_modification_time="Wed, 03 Sep 2008 08:53:24 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="expand">False</property>
@@ -2106,8 +2106,8 @@
 	      <property name="visible_vertical">True</property>
 	      <property name="is_important">False</property>
 	      <property name="active">False</property>
-	      <property name="group">radio_find</property>
-	      <signal name="toggled" handler="on_radio_calendar_toggled" last_modification_time="Tue, 02 Sep 2008 22:46:47 GMT"/>
+	      <property name="group">radio_tree</property>
+	      <signal name="clicked" handler="on_radio_calendar_clicked" last_modification_time="Wed, 03 Sep 2008 08:53:32 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="expand">False</property>

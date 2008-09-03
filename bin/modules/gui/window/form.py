@@ -128,13 +128,13 @@ class form(object):
             'but_close': self.sig_close,
         }
         if 'tree' in view_type:
-            self.handlers['radio_find'] = self.sig_switch
+            self.handlers['radio_tree'] = self.sig_switch_tree
         if 'form' in view_type:
-            self.handlers['radio_form'] = self.sig_switch
+            self.handlers['radio_form'] =  self.sig_switch_form
         if 'graph' in view_type:
-            self.handlers['radio_graph'] = self.sig_switch
+            self.handlers['radio_graph'] =  self.sig_switch_graph
         if 'calendar' in view_type:
-            self.handlers['radio_calendar'] = self.sig_switch
+            self.handlers['radio_calendar'] =  self.sig_switch_calendar
         if res_id:
             if isinstance(res_id, int):
                 res_id = [res_id]
@@ -147,6 +147,15 @@ class form(object):
 
         if auto_refresh and int(auto_refresh):
             gobject.timeout_add(int(auto_refresh) * 1000, self.sig_reload)
+
+    def sig_switch_form(self, widget=None):
+        return self.sig_switch(widget, 'form')
+    def sig_switch_tree(self, widget=None):
+        return self.sig_switch(widget, 'tree')
+    def sig_switch_calendar(self, widget=None):
+        return self.sig_switch(widget, 'calendar')
+    def sig_switch_graph(self, widget=None):
+        return self.sig_switch(widget, 'graph')
 
     def sig_goto(self, *args):
         if not self.modified_save():
@@ -192,8 +201,8 @@ class form(object):
     def sig_switch(self, widget=None, mode=None):
         if not self.modified_save():
             return
-        self.screen.switch_view()
-        print 'VIEW', self.screen.current_view.view_type
+        if mode<>self.screen.current_view.view_type:
+            self.screen.switch_view(mode)
 
     def _id_get(self):
         return self.screen.id_get()

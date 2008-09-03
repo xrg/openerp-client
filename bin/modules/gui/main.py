@@ -529,7 +529,7 @@ class terp_main(service.Service):
             self.glade.signal_connect(signal, dict[signal])
 
         self.buttons = {}
-        for button in ('but_new', 'but_save', 'but_remove', 'but_search', 'but_previous', 'but_next', 'but_action', 'but_open', 'but_print', 'but_close', 'but_reload', 'but_switch','but_attach', 'radio_find','radio_form','radio_graph','radio_calendar'):
+        for button in ('but_new', 'but_save', 'but_remove', 'but_search', 'but_previous', 'but_next', 'but_action', 'but_open', 'but_print', 'but_close', 'but_reload', 'but_switch','but_attach', 'radio_tree','radio_form','radio_graph','radio_calendar'):
             self.glade.signal_connect('on_'+button+'_clicked', self._sig_child_call, button)
             self.buttons[button]=self.glade.get_widget(button)
 
@@ -965,6 +965,8 @@ class terp_main(service.Service):
     def sb_set(self, view=None):
         if not view:
             view = self._wid_get()
+        if view and hasattr(view, 'screen'):
+            self.glade.get_widget('radio_'+view.screen.current_view.view_type).set_active(True)
         self._update_attachment_button(view)
         for x in self.buttons:
             if self.buttons[x]:
@@ -1002,6 +1004,13 @@ class terp_main(service.Service):
                                     'but_previous', 'but_next', 'but_open', \
                                     'but_close', 'but_reload', 'but_attach', 'but_goto_id'):
                     self._update_attachment_button(wid)
+            if button_name.startswith('radio_'):
+                pass
+                #mode = wid.screen.current_view.view_type
+                #print 'RADIO CALLED', button_name, args, self.glade.get_widget(button_name).get_active(), button_name[6:]
+                #if self.glade.get_widget(button_name).get_active() and (mode<>button_name[6:]):
+                #    print 'SWITCH', button_name
+                #    wid.sig_switch()
             if button_name=='but_close' and res:
                 self._win_del()
 
