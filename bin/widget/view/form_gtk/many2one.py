@@ -132,18 +132,8 @@ class many2one(interface.widget_interface):
         self.wid_text.connect('button_press_event', self._menu_open)
         self.wid_text.connect_after('changed', self.sig_changed)
         self.wid_text.connect_after('activate', self.sig_activate)
-        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
-
-        #self.but_new = gtk.Button()
-        #img_new = gtk.Image()
-        #img_new.set_from_stock('gtk-new',gtk.ICON_SIZE_BUTTON)
-        #self.but_new.set_image(img_new)
-        #self.but_new.set_relief(gtk.RELIEF_NONE)
-        #self.but_new.connect('clicked', self.sig_new)
-        #self.but_new.set_alignment(0.5, 0.5)
-        #self.but_new.set_property('can-focus', False)
-        #self.widget.pack_start(self.but_new, expand=False, fill=False)
 
         self.but_find = gtk.Button()
         img_find = gtk.Image()
@@ -259,7 +249,7 @@ class many2one(interface.widget_interface):
             if (len(ids)==1) and leave:
                 self._view.modelfield.set_client(self._view.model, ids[0],
                         force_change=True)
-                self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+                self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
                 self.display(self._view.model, self._view.modelfield)
                 self.ok = True
                 return True
@@ -290,8 +280,12 @@ class many2one(interface.widget_interface):
         self.display(self._view.model, self._view.modelfield)
         self.ok=True
 
-    def sig_activate(self, widget, event=None, leave=False):
+    def sig_focus_out(self, widget, event=None, leave=False):
         res = self._view.modelfield.get_client(self._view.model)
+        if self.wid_text.get_text() and not res:
+            self.sig_find(widget, event, leave=True)
+
+    def sig_activate(self, widget, event=None, leave=False):
         self.sig_find(widget, event, leave=True)
 
     def sig_new(self, *args):
