@@ -257,9 +257,10 @@ class db_create(object):
             return False
         return url
 
-    def __init__(self, sig_login):
+    def __init__(self, sig_login, terp_main):
         self.dialog = glade.XML(common.terp_path("terp.glade"), "win_createdb", gettext.textdomain())
         self.sig_login = sig_login
+        self.terp_main = terp_main
 
     def entry_changed(self, *args):
         up1 = self.dialog.get_widget('ent_user_pass1').get_text()
@@ -393,14 +394,20 @@ class db_create(object):
 
             if res == gtk.RESPONSE_OK:
                 m = re.match('^(http[s]?://|socket://)([\w.]+):(\d{1,5})$', url)
-                res = ['admin', 'admin']
-                if m:
-                    res.append( m.group(2) )
-                    res.append( m.group(3) )
-                    res.append( m.group(1) )
-                    res.append( dbname )
-
-                self.sig_login(dbname=dbname)
+                ok = False
+                for x in users:
+                    if x['login']=='admin' and m:
+                        res = [x['login'], x['password']]
+                        res.append( m.group(2) )
+                        res.append( m.group(3) )
+                        res.append( m.group(1) )
+                        res.append( dbname )
+                        log_response = rpc.session.login(*res)
+                        if log_response == 1:
+                            id = self.terp_main.sig_win_menu(quiet=False)
+                            ok = True
+                if not ok:
+                    self.sig_login(dbname=dbname)
             return False
         return True
 
@@ -1006,7 +1013,7 @@ class terp_main(service.Service):
     def sig_db_new(self, widget):
         if not self.sig_logout(widget):
             return False
-        dia = db_create(self.sig_login)
+        dia = db_create(self.sig_login, self)
         res = dia.run(self.window)
         if res:
             options.options.save()
