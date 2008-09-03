@@ -341,7 +341,6 @@ class form(object):
             if sel_ids:
                 ids = sel_ids
         if len(ids):
-            print 'ICI', self.screen.context
             obj = service.LocalService('action.main')
             if previous and self.previous_action:
                 obj._exec_action(self.previous_action[1], {'model':self.screen.resource, 'id': id or False, 'ids':ids, 'report_type': report_type}, self.screen.context)
