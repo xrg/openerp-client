@@ -137,7 +137,7 @@ class db_login(object):
                 return (server_version[:2] == client_version[:2], full_server_version, release.version)
             except:
                 # the server doesn't understand the request. It's mean that it's an old version of the server
-                return (False, _('Unknow'), release.version)
+                return (False, _('Unknown'), release.version)
 
         res = _refresh_dblist(db_widget, url)
         if res == -1:
