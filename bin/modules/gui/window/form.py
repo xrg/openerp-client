@@ -202,7 +202,7 @@ class form(object):
         if not self.modified_save():
             return
         if mode<>self.screen.current_view.view_type:
-            self.screen.switch_view(mode)
+            self.screen.switch_view(mode=mode)
 
     def _id_get(self):
         return self.screen.id_get()

@@ -45,7 +45,6 @@ class ViewCalendar(object):
     def __init__(self, model, axis, fields, attrs):
         self.glade = gtk.glade.XML(common.terp_path("terp.glade"),'widget_view_calendar',gettext.textdomain())
         self.widget = self.glade.get_widget('widget_view_calendar')
-        self.widget.show_all()
         self.fields = fields
         self.attrs = attrs
         self.axis = axis
@@ -56,13 +55,14 @@ class ViewCalendar(object):
         vbox.pack_start(self.cal_view)
         vbox.show_all()
 
+        self.process = False
         self.glade.signal_connect('on_but_forward_clicked', self._back_forward, 1)
         self.glade.signal_connect('on_but_back_clicked', self._back_forward, -1)
         self.glade.signal_connect('on_but_today_clicked', self._today, -1)
         self.glade.signal_connect('on_calendar_small_day_selected_double_click', self._change_small)
-        self.glade.signal_connect('on_view_day_clicked', self._change_view, 'day')
-        self.glade.signal_connect('on_view_week_clicked', self._change_view, 'week')
-        self.glade.signal_connect('on_view_month_clicked', self._change_view, 'month')
+        self.glade.signal_connect('on_button_day_clicked', self._change_view, 'day')
+        self.glade.signal_connect('on_button_week_clicked', self._change_view, 'week')
+        self.glade.signal_connect('on_button_month_clicked', self._change_view, 'month')
         self.date = DateTime.now()
         self.mode = 'month'
 
@@ -86,35 +86,34 @@ class ViewCalendar(object):
         self.display(None)
 
     def _change_view(self, widget, type, *args, **argv):
+        if self.process:
+            return True
+        self.process = True
+        if self.mode == type:
+            return True
         self.mode = type
         self.display(None)
+
+        self.process = False
         return True
 
     def display(self, models):
-        print 'DISPLAY'
-        self.glade.get_widget('view_day').set_active(self.mode=='day')
-        self.glade.get_widget('view_week').set_active(self.mode=='week')
-        self.glade.get_widget('view_month').set_active(self.mode=='month')
         label = self.glade.get_widget('label_current')
         t = self.date.tuple()
-        print 'END GLADE'
         if self.mode=='month':
+            self.glade.get_widget('radio_month').set_active(True)
             d1 = datetime(*list(t)[:6])
-            print 'Set Range'
             self.cal_view.set_range(self.cal_view.RANGE_MONTH)
-            print 'Set Range ENd'
             self.cal_view.select(d1)
-            print 'Set Range Selected'
             label.set_text(self.date.strftime('%B %Y'))
-        if self.mode=='week':
-            print 'Set Range'
+        elif self.mode=='week':
+            self.glade.get_widget('radio_week').set_active(True)
             self.cal_view.set_range(self.cal_view.RANGE_WEEK)
-            print 'Set Range ENd'
             d1 = datetime(*list(t)[:6])
             self.cal_view.select(d1)
-            print 'Set Range Selected'
             label.set_text(_('Week') + ' ' + self.date.strftime('%W, %Y'))
-        if self.mode=='day':
+        elif self.mode=='day':
+            self.glade.get_widget('radio_day').set_active(True)
             self.cal_view.set_range(self.cal_view.RANGE_CUSTOM)
             d1 = datetime(*(list(t)[:3] + [00]))
             d2 = datetime(*(list(t)[:3] + [23, 59, 59]))
@@ -124,15 +123,12 @@ class ViewCalendar(object):
         sc.select_month(t[1]-1,t[0])
         sc.select_day(t[2])
 
-        print 'END DISPLAY VIEW'
         if models:
-            print models
             # If doesn't work, remove events
             self.cal_model = Calendar.Model()
             self.cal_view.model = self.cal_model
 
             for model in models.models:
-                print model.value
                 event = Calendar.Event(
                     'Event number 1',
                     datetime(2008, 9, 8, 02),

@@ -224,6 +224,7 @@ class Screen(signal_event.signal_event):
                 if self.views[vid].view_type==mode:
                     self.__current_view = vid
                     ok = True
+                    break
             while not ok and len(self.view_to_load):
                 self.load_view_to_load()
                 self.__current_view = len(self.views) - 1
@@ -239,6 +240,8 @@ class Screen(signal_event.signal_event):
         self.screen_container.set(self.current_view.widget)
         if self.current_model:
             self.current_model.validate_set()
+        elif self.current_view.view_type=='form':
+            self.new()
         self.display()
         self.current_view.set_cursor()
 

@@ -609,7 +609,6 @@ class terp_main(service.Service):
         # Adding a timer the check to requests
         gobject.timeout_add(5 * 60 * 1000, self.request_set)
 
-
     def shortcut_edit(self, widget, model='ir.ui.menu'):
         obj = service.LocalService('gui.window')
         domain = [('user_id', '=', rpc.session.uid), ('resource', '=', model)]

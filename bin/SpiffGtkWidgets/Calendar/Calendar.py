@@ -123,7 +123,6 @@ class Calendar(hippo.Canvas):
                            inactive      = c2i(style.bg[gtk.STATE_PRELIGHT]))
         self.refresh()
 
-
     def refresh(self):
         if not self.realized:
             return
