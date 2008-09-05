@@ -54,7 +54,7 @@ class wid_binary(interface.widget_interface):
         self.wid_text.set_property('activates_default', True)
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
-        self.but_new = gtk.Button() 
+        self.but_new = gtk.Button()
         img = gtk.Image()
         img.set_from_stock( 'gtk-execute', gtk.ICON_SIZE_BUTTON )
         label = gtk.Label( ('_Open' ))
@@ -68,7 +68,7 @@ class wid_binary(interface.widget_interface):
         self.but_new.connect('clicked', self.sig_execute)
         self.widget.pack_start(self.but_new, expand=False, fill=False)
 
-        self.but_new = gtk.Button() 
+        self.but_new = gtk.Button()
         img = gtk.Image()
         img.set_from_stock( 'gtk-open', gtk.ICON_SIZE_BUTTON )
         label = gtk.Label( _('_Select') )
@@ -133,7 +133,7 @@ class wid_binary(interface.widget_interface):
                 self.model_field.set_client(self._view.model, base64.encodestring(file(filename, 'rb').read()))
                 if self.has_filename:
                     self._view.model.set({self.has_filename: os.path.basename(filename)})
-                self._view.display(self._view.model) 
+                self._view.display(self._view.model)
         except Exception, ex:
             common.message(_('Error reading the file'))
 
@@ -148,7 +148,7 @@ class wid_binary(interface.widget_interface):
             # Add the filename from the field with the filename attribute in the view
             filename = common.file_selection(
                 _('Save As...'),
-                parent=self._window, 
+                parent=self._window,
                 action=gtk.FILE_CHOOSER_ACTION_SAVE,
                 filename=self._get_filename()
             )
@@ -156,7 +156,7 @@ class wid_binary(interface.widget_interface):
                 fp = file(filename,'wb+')
                 fp.write(base64.decodestring(data))
                 fp.close()
-        except:
+        except Exception, ex:
             common.message(_('Error writing the file: %s') % str(ex))
 
     def sig_remove(self, widget=None):
