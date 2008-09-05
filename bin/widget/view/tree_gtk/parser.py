@@ -113,14 +113,14 @@ class parser_tree(interface.parser_interface):
                 if editable and not node_attrs.get('readonly', False):
                     if isinstance(renderer, gtk.CellRendererToggle):
                         renderer.set_property('activatable', True)
-                    else:
+                    elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo)):
                         renderer.set_property('editable', True)
                     renderer.connect_after('editing-started', send_keys, treeview)
 #                   renderer.connect_after('editing-canceled', self.editing_canceled)
                 else:
                     if isinstance(renderer, gtk.CellRendererToggle):
                         renderer.set_property('activatable', False)
-                    else:
+                    elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo)):
                         renderer.set_property('editable', False)
 
                 col = gtk.TreeViewColumn(None, renderer)
