@@ -50,6 +50,7 @@ import rpc
 import datetime as DT
 import service
 import gobject
+import pango
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed)
@@ -64,6 +65,7 @@ def sort_model(column, treeview):
 class parser_tree(interface.parser_interface):
     def parse(self, model, root_node, fields):
         dict_widget = {}
+        btn_list=[]
         attrs = tools.node_attributes(root_node)
         on_write = attrs.get('on_write', '')
         editable = attrs.get('editable', False)
@@ -85,6 +87,16 @@ class parser_tree(interface.parser_interface):
         treeview.sequence = False
         for node in root_node.childNodes:
             node_attrs = tools.node_attributes(node)
+            if node.localName == 'button':
+                cell = Cell('button')(node_attrs['string'])
+                cell.name=node_attrs['name']
+                cell.type=node_attrs.get('type','object')
+                cell.context=node_attrs.get('context',{})
+                cell.model=model
+                treeview.cells[node_attrs['name']] = cell
+                col = gtk.TreeViewColumn(None, cell)
+                btn_list.append(col)
+#                n = treeview.append_column(col)
             if node.localName == 'field':
                 fname = str(node_attrs['name'])
                 if fname == 'sequence':
@@ -162,6 +174,8 @@ class parser_tree(interface.parser_interface):
                     label_sum.set_use_markup(True)
                     dict_widget[n] = (fname, label, label_sum,
                             fields.get('digits', (16,2))[1], label_bold)
+        for btn in btn_list:
+            treeview.append_column(btn)
         return treeview, dict_widget, [], on_write
 
 class UnsettableColumn(Exception):
@@ -562,7 +576,78 @@ class ProgressBar(object):
     def value_from_text(self, model, text):
         return text
 
+class CellRendererButton(gtk.GenericCellRenderer):
+    #TODO Add keyboard editing
+    __gproperties__ = {
+            "text": (gobject.TYPE_STRING, None, "Text",
+                "Displayed text", gobject.PARAM_READWRITE),
+    }
 
+    __gsignals__ = {
+            'clicked': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
+                (gobject.TYPE_STRING, )),
+    }
+
+    def __init__(self, text=""):
+        self.__gobject_init__()
+        self.text = text
+        self.set_property('mode', gtk.CELL_RENDERER_MODE_EDITABLE)
+        self.clicking = False
+
+    def do_set_property(self, pspec, value):
+        setattr(self, pspec.name, value)
+
+    def do_get_property(self, pspec):
+        return getattr(self, pspec.name)
+
+    def on_render(self, window, widget, background_area, cell_area,
+            expose_area, flags):
+        state = gtk.STATE_NORMAL
+        shadow = gtk.SHADOW_OUT
+        if self.clicking and flags & gtk.CELL_RENDERER_SELECTED:
+            state = gtk.STATE_ACTIVE
+            shadow = gtk.SHADOW_IN
+        widget.style.paint_box(window, state, shadow,
+                None, widget, "button",
+                cell_area.x, cell_area.y,
+                cell_area.width, cell_area.height)
+        layout = widget.create_pango_layout('')
+        layout.set_font_description(widget.style.font_desc)
+        w, h = layout.get_size()
+        x = cell_area.x
+        y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
+        window.draw_layout(widget.style.text_gc[0], x, y, layout)
+
+        layout = widget.create_pango_layout(self.text)
+        layout.set_font_description(widget.style.font_desc)
+        w, h = layout.get_size()
+        x = int(cell_area.x + (cell_area.width - w / pango.SCALE) / 2)
+        y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
+        window.draw_layout(widget.style.text_gc[0], x, y, layout)
+
+    def on_get_size(self, widget, cell_area=None):
+        if cell_area is None:
+            return (0, 0, 90, 18)
+        else:
+            return (cell_area.x, cell_area.y, cell_area.width, cell_area.height)
+
+    def on_start_editing(self, event, widget, path, background_area,
+            cell_area, flags):
+        if (event is None) or ((event.type == gtk.gdk.BUTTON_PRESS) \
+                or (event.type == gtk.gdk.KEY_PRESS \
+                    and event.keyval == gtk.keysyms.space)):
+            self.clicking = True
+            widget.queue_draw()
+            gtk.main_iteration()
+# Call function with id and context using rpc need to put appropriate arguments
+#            rpc.session.rpc_exec_auth('/object', 'execute', self.model, self.name, self.context)
+            self.emit("clicked", path)
+            def timeout(self, widget):
+                self.clicking = False
+                widget.queue_draw()
+            gobject.timeout_add(60, timeout, self, widget)
+
+gobject.type_register(CellRendererButton)
 
 CELLTYPES = {
     'char': Char,
@@ -577,6 +662,7 @@ CELLTYPES = {
     'datetime': Datetime,
     'boolean': Boolean,
     'progressbar': ProgressBar,
+    'button': CellRendererButton,
 }
 
 
