@@ -86,14 +86,11 @@ class ViewCalendar(object):
         self.display(None)
 
     def _change_view(self, widget, type, *args, **argv):
-        if self.process:
+        if self.process or self.mode == type:
             return True
         self.process = True
-        if self.mode == type:
-            return True
         self.mode = type
         self.display(None)
-
         self.process = False
         return True
 
