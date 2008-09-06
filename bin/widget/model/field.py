@@ -162,10 +162,20 @@ class BinaryField(CharField):
                 c['get_binary_size'] = False
                 value = model.rpc.read([model.id], [self.name], c)[0][self.name]
                 self.set(model, value, modified=modified, get_binary_size=False)
-        return model.value.get(self.name, False)
+        return model.value.get(self.name, False) or False
 
     def get_client(self, model):
         return model.value.get(self.get_size_name(), False)
+
+    def set_client(self, model, value, test_state=True, force_change=False):
+        before = self.get(model)
+        self.set(model, value, test_state, get_binary_size=False)
+        if before != self.get(model):
+            model.modified = True
+            model.modified_fields.setdefault(self.name)
+            self.sig_changed(model)
+            model.signal('record-changed', model)
+
 
 class SelectionField(CharField):
     def set(self, model, value, test_state=True, modified=False):
