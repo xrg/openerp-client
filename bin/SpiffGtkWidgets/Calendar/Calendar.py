@@ -103,7 +103,7 @@ class Calendar(hippo.Canvas):
 
     def on_size_allocate(self, *args):
         alloc = self.get_allocation()
-        if not self.realized or alloc.width < 10 or alloc.height < 10:
+        if not self.realized: # or alloc.width < 10 or alloc.height < 10:
             return
         #self.set_bounds(0, 0, alloc.width, alloc.height)
 
