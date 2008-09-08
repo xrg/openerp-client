@@ -45,6 +45,7 @@ class ViewCalendar(object):
     def __init__(self, model, axis, fields, attrs):
         self.glade = gtk.glade.XML(common.terp_path("terp.glade"),'widget_view_calendar',gettext.textdomain())
         self.widget = self.glade.get_widget('widget_view_calendar')
+
         self.fields = fields
         self.attrs = attrs
         self.axis = axis
@@ -132,10 +133,6 @@ class ViewCalendar(object):
                     datetime(2008, 9, 8, 17),
                     bg_color = 'lightgreen')
                 self.cal_model.add_event(event)
-        print 'END DISPLAY'
-
-
-
 
 class parser_calendar(interface.parser_interface):
     def parse(self, model, root_node, fields):

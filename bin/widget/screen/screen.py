@@ -229,6 +229,11 @@ class Screen(signal_event.signal_event):
                 self.load_view_to_load()
                 if self.current_view.view_type==mode:
                     ok = True
+            for vid in range(len(self.views)):
+                if self.views[vid].view_type==mode:
+                    self.__current_view = vid
+                    ok = True
+                    break
             if not ok:
                 self.__current_view = len(self.views) - 1
         else:
@@ -337,7 +342,7 @@ class Screen(signal_event.signal_event):
     def new(self, default=True, context={}):
         if self.current_view and self.current_view.view_type == 'tree' \
                 and not self.current_view.widget_tree.editable:
-            self.switch_view()
+            self.switch_view(mode='form')
         ctx = self.context.copy()
         ctx.update(context)
         model = self.models.model_new(default, self.domain, ctx)
@@ -480,7 +485,7 @@ class Screen(signal_event.signal_event):
         if self.views:
             self.current_view.display()
             self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
-            self.search_active(self.current_view.view_type in ('tree', 'graph', 'calendar'))
+            self.search_active(self.current_view.view_type in ('tree', 'graph'))
 
     def display_next(self):
         self.current_view.set_value()

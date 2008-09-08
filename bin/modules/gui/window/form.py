@@ -56,7 +56,6 @@ from widget.screen import Screen
 
 
 class form(object):
-
     def __init__(self, model, res_id=False, domain=None, view_type=None,
             view_ids=None, window=None, context=None, name=False, limit=80,
             auto_refresh=False):
