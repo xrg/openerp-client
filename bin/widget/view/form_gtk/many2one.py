@@ -48,7 +48,7 @@ import service
 
 
 class dialog(object):
-    def __init__(self, model, id=None, attrs=None ,domain=None, context=None, window=None, view_ids=None,target=False):
+    def __init__(self, model, id=None, attrs=None ,domain=None, context=None, window=None, view_ids=None,target=False,view_type=['form']):
         if attrs is None:
             attrs = {}
         if domain is None:
@@ -88,7 +88,7 @@ class dialog(object):
         vp = gtk.Viewport()
         vp.set_shadow_type(gtk.SHADOW_NONE)
         scroll.add(vp)
-        self.screen = Screen(model, view_ids=view_ids, domain=domain, context=context, window=self.dia, view_type=['form'])
+        self.screen = Screen(model, view_ids=view_ids, domain=domain, context=context, window=self.dia, view_type=view_type)
         if id:
             self.screen.load([id])
         else:

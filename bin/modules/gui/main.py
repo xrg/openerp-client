@@ -420,6 +420,7 @@ class terp_main(service.Service):
         service.Service.__init__(self, name, audience)
         self.exportMethod(self.win_add)
 
+        self._handler_ok = True
         self.glade = glade.XML(common.terp_path("terp.glade"),"win_main",gettext.textdomain())
         self.status_bar_main = self.glade.get_widget('hbox_status_main')
         self.toolbar = self.glade.get_widget('main_toolbar')
@@ -961,7 +962,9 @@ class terp_main(service.Service):
         if not view:
             view = self._wid_get()
         if view and hasattr(view, 'screen'):
+            self._handler_ok = False
             self.glade.get_widget('radio_'+view.screen.current_view.view_type).set_active(True)
+            self._handler_ok = True
         self._update_attachment_button(view)
         for x in self.buttons:
             if self.buttons[x]:
@@ -987,9 +990,15 @@ class terp_main(service.Service):
         return self.pages[pn]
 
     def _sig_child_call(self, widget, button_name, *args):
+        if not self._handler_ok:
+            return
         wid = self._wid_get()
         if wid:
             res = True
+            if button_name.startswith('radio_'):
+                act = self.glade.get_widget(button_name).get_active()
+                if not act: return False
+
             if button_name in wid.handlers:
                 res = wid.handlers[button_name]()
                 # for those buttons, we refresh the attachment button.

@@ -227,9 +227,10 @@ class Screen(signal_event.signal_event):
                     break
             while not ok and len(self.view_to_load):
                 self.load_view_to_load()
-                self.__current_view = len(self.views) - 1
                 if self.current_view.view_type==mode:
                     ok = True
+            if not ok:
+                self.__current_view = len(self.views) - 1
         else:
             if len(self.view_to_load):
                 self.load_view_to_load()

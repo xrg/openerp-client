@@ -39,6 +39,7 @@ import printer
 import common
 import tools
 from widget.view.form_gtk.many2one import dialog
+
 class main(service.Service):
     def __init__(self, name='action.main'):
         service.Service.__init__(self, name)
@@ -114,8 +115,9 @@ class main(service.Service):
 
             if datas.get('domain', False):
                 domain.append(datas['domain'])
-            if 'target' in action and action['target']=='new':
-                dia = dialog(datas['res_model'], window=datas.get('window',None), domain=domain, context=ctx, view_ids=view_ids,target=True)
+            if action.get('target', False)=='new':
+                print view_ids
+                dia = dialog(datas['res_model'], window=datas.get('window',None), domain=domain, context=ctx, view_ids=view_ids,target=True, view_type=datas['view_mode'].split(','))
                 if dia.dia.get_has_separator():
                     dia.dia.set_has_separator(False)
                 dia.run()

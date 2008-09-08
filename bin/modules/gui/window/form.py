@@ -150,10 +150,13 @@ class form(object):
 
     def sig_switch_form(self, widget=None):
         return self.sig_switch(widget, 'form')
+
     def sig_switch_tree(self, widget=None):
         return self.sig_switch(widget, 'tree')
+
     def sig_switch_calendar(self, widget=None):
         return self.sig_switch(widget, 'calendar')
+
     def sig_switch_graph(self, widget=None):
         return self.sig_switch(widget, 'graph')
 

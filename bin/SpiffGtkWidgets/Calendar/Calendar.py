@@ -129,10 +129,8 @@ class Calendar(hippo.Canvas):
         self.draw_background()
         self.draw_days()
 
-
     def draw_background(self):
         self.root.color = self.colors['bg']
-
 
     def draw_days(self):
         """

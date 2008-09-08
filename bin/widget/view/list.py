@@ -2,6 +2,7 @@
 ##############################################################################
 #
 # Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+# Copyright (c) 2004-2008 B2CK (the code for D&D in lists)
 #
 # $Id$
 #
