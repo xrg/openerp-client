@@ -455,7 +455,7 @@ def theme_set():
 def ask(question, parent=None):
     dia = glade.XML(terp_path('terp.glade'), 'win_quest', gettext.textdomain())
     win = dia.get_widget('win_quest')
-    label = dia.get_widget('label')
+    label = dia.get_widget('label1')
     label.set_text(question)
     entry = dia.get_widget('entry')
 
