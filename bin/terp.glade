@@ -8097,6 +8097,9 @@ Latin1</property>
                   <placeholder/>
                 </child>
                 <child>
+                  <placeholder/>
+                </child>
+                <child>
                   <widget class="GtkEventBox" id="eventbox19">
                     <property name="visible">True</property>
                     <child>
@@ -8111,7 +8114,7 @@ Latin1</property>
                   <packing>
                     <property name="top_attach">5</property>
                     <property name="bottom_attach">6</property>
-                    <property name="x_options"></property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options"></property>
                   </packing>
                 </child>
@@ -8167,10 +8170,10 @@ Latin1</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="right_attach">3</property>
+                    <property name="right_attach">2</property>
                     <property name="top_attach">6</property>
                     <property name="bottom_attach">7</property>
-                    <property name="x_options"></property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options"></property>
                   </packing>
                 </child>
@@ -8190,7 +8193,7 @@ Latin1</property>
                     <property name="right_attach">3</property>
                     <property name="top_attach">5</property>
                     <property name="bottom_attach">6</property>
-                    <property name="x_options"></property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options"></property>
                   </packing>
                 </child>
@@ -8203,7 +8206,7 @@ Latin1</property>
                   <packing>
                     <property name="top_attach">8</property>
                     <property name="bottom_attach">9</property>
-                    <property name="x_options"></property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options"></property>
                   </packing>
                 </child>
@@ -8216,7 +8219,7 @@ Latin1</property>
                   <packing>
                     <property name="top_attach">7</property>
                     <property name="bottom_attach">8</property>
-                    <property name="x_options"></property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options"></property>
                   </packing>
                 </child>
@@ -8229,7 +8232,7 @@ Latin1</property>
                   <packing>
                     <property name="top_attach">6</property>
                     <property name="bottom_attach">7</property>
-                    <property name="x_options"></property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options"></property>
                   </packing>
                 </child>
@@ -8254,7 +8257,7 @@ Latin1</property>
                   <packing>
                     <property name="top_attach">2</property>
                     <property name="bottom_attach">3</property>
-                    <property name="x_options"></property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options"></property>
                   </packing>
                 </child>
@@ -8356,7 +8359,7 @@ Latin1</property>
                   <packing>
                     <property name="top_attach">1</property>
                     <property name="bottom_attach">2</property>
-                    <property name="x_options"></property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options"></property>
                   </packing>
                 </child>
@@ -8393,7 +8396,7 @@ Latin1</property>
                     <property name="label" translatable="yes">OpenERP Server:</property>
                   </widget>
                   <packing>
-                    <property name="x_options"></property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options"></property>
                   </packing>
                 </child>
