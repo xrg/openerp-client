@@ -105,6 +105,19 @@ def call_log(fun):
 def to_xml(s):
     return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
 
+def human_size(sz):
+    """
+    Return the size in a human readable format
+    """
+    if not sz:
+        return False
+    units = ('bytes', 'Kb', 'Mb', 'Gb')
+    s, i = float(sz), 0
+    while s >= 1024 and i < len(units)-1:
+        s = s / 1024
+        i = i + 1
+    return "%0.2f %s" % (s, units[i])
+
 
 date_mapping = {
     '%y': ('__', '[_0-9][_0-9]'),

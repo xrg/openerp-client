@@ -146,9 +146,13 @@ class BinaryField(CharField):
         return "%s.size" % self.name
 
     def set(self, model, value, test_state=True, modified=False, get_binary_size=True):
+        if model.is_wizard():
+            get_binary_size = False
         model.value[self.name] = None
         name = get_binary_size and self.get_size_name() or self.name
         model.value[name] = value
+        if model.is_wizard():
+            model.value[self.get_size_name()] = tools.human_size(len(value))
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
