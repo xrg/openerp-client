@@ -44,7 +44,7 @@ import date_renderer
 
 from widget.view.form_gtk.many2one import dialog as M2ODialog
 from modules.gui.window.win_search import win_search
-
+from widget.view.form_gtk.parser import Button
 import common
 import rpc
 import datetime as DT
@@ -89,6 +89,7 @@ class parser_tree(interface.parser_interface):
             node_attrs = tools.node_attributes(node)
             if node.localName == 'button':
                 cell = Cell('button')(node_attrs['string'])
+                cell.attrs=node_attrs
                 cell.name=node_attrs['name']
                 cell.type=node_attrs.get('type','object')
                 cell.context=node_attrs.get('context',{})
@@ -576,6 +577,7 @@ class ProgressBar(object):
     def value_from_text(self, model, text):
         return text
 
+
 class CellRendererButton(gtk.GenericCellRenderer):
     #TODO Add keyboard editing
     __gproperties__ = {
@@ -591,8 +593,13 @@ class CellRendererButton(gtk.GenericCellRenderer):
     def __init__(self, text=""):
         self.__gobject_init__()
         self.text = text
+        self.border = gtk.Button().border_width
         self.set_property('mode', gtk.CELL_RENDERER_MODE_EDITABLE)
         self.clicking = False
+        self.xalign = 0.0
+        self.yalign = 0.5
+        self.textborder = 4
+
 
     def do_set_property(self, pspec, value):
         setattr(self, pspec.name, value)
@@ -626,10 +633,18 @@ class CellRendererButton(gtk.GenericCellRenderer):
         window.draw_layout(widget.style.text_gc[0], x, y, layout)
 
     def on_get_size(self, widget, cell_area=None):
-        if cell_area is None:
-            return (0, 0, 90, 18)
+        width,height=90,18
+        if cell_area:
+            width = max(width + self.textborder * 2, cell_area.width)
         else:
-            return (cell_area.x, cell_area.y, cell_area.width, cell_area.height)
+            width += self.textborder * 2
+            height += self.textborder * 2
+        if cell_area:
+            x = max(int(self.xalign * (cell_area.width - width)), 0)
+            y = max(int(self.yalign * (cell_area.height - height)), 0)
+        else:
+            x, y = 0, 0
+        return (x, y, width, height)
 
     def on_start_editing(self, event, widget, path, background_area,
             cell_area, flags):
@@ -639,8 +654,47 @@ class CellRendererButton(gtk.GenericCellRenderer):
             self.clicking = True
             widget.queue_draw()
             gtk.main_iteration()
-# Call function with id and context using rpc need to put appropriate arguments
-#            rpc.session.rpc_exec_auth('/object', 'execute', self.model, self.name, self.context)
+            model=widget.screen.current_model
+            if widget.screen.current_model.validate():
+                id = widget.screen.save_current()
+                if not self.attrs.get('confirm',False) or \
+                        common.sur(self.attrs['confirm']):
+                    button_type = self.attrs.get('type', 'workflow')
+                    if button_type == 'workflow':
+                        result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
+                                                widget.screen.name,
+                                                self.attrs['name'], id)
+                        if type(result)==type({}):
+                            if result['type']== 'ir.actions.act_window_close':
+                                widget.screen.window.destroy()
+                            else:
+                                datas = {}
+                                obj = service.LocalService('action.main')
+                                obj._exec_action(result,datas)
+                    elif button_type == 'object':
+                        if not id:
+                            return
+                        result = rpc.session.rpc_exec_auth(
+                            '/object', 'execute',
+                            widget.screen.name,
+                            self.attrs['name'],
+                            [id], model.context_get()
+                        )
+                        datas = {}
+                        obj = service.LocalService('action.main')
+                        obj._exec_action(result,datas,context=widget.screen.context)
+
+                    elif button_type == 'action':
+                        obj = service.LocalService('action.main')
+                        action_id = int(self.attrs['name'])
+                        obj.execute(action_id, {'model':widget.screen.name, 'id': id or False,
+                            'ids': id and [id] or [], 'report_type': 'pdf'}, context=widget.screen.context)
+                    else:
+                        raise Exception, 'Unallowed button type'
+                    widget.screen.reload()
+            else:
+                self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
+                widget.screen.display()
             self.emit("clicked", path)
             def timeout(self, widget):
                 self.clicking = False
@@ -648,6 +702,7 @@ class CellRendererButton(gtk.GenericCellRenderer):
             gobject.timeout_add(60, timeout, self, widget)
 
 gobject.type_register(CellRendererButton)
+
 
 CELLTYPES = {
     'char': Char,
