@@ -56,7 +56,7 @@ class view_tree_sc(object):
 
         column = gtk.TreeViewColumn (_('Description'), cell, text=1)
         self.tree.append_column(column)
-        self.update()
+#        self.update()
 
     def update(self):
         store = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
@@ -64,9 +64,9 @@ class view_tree_sc(object):
         sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, self.model, rpc.session.context) or []
         for s in sc:
             num = store.append()
-            store.set(num, 
-              self.COLUMN_RES_ID, s['res_id'], 
-              self.COLUMN_NAME, s['name'], 
+            store.set(num,
+              self.COLUMN_RES_ID, s['res_id'],
+              self.COLUMN_NAME, s['name'],
               self.COLUMN_ID, s['id']
             )
             self.last_iter = num
@@ -128,7 +128,7 @@ class view_tree_sc(object):
         path_of_iter_to_copy = model.get_path(iter_to_copy)
         path_of_target_iter = model.get_path(target_iter)
         return not ( path_of_target_iter[0:len(path_of_iter_to_copy)] == path_of_iter_to_copy )
-    
+
     def iter_copy(self, treeview, model, iter_to_copy, target_iter, pos):
         data_column_0 = model.get_value(iter_to_copy, self.COLUMN_RES_ID)
         data_column_1 = model.get_value(iter_to_copy, self.COLUMN_NAME)
@@ -144,7 +144,7 @@ class view_tree_sc(object):
         model.set_value(new_iter, self.COLUMN_RES_ID, data_column_0)
         model.set_value(new_iter, self.COLUMN_NAME, data_column_1)
         model.set_value(new_iter, self.COLUMN_ID, data_column_2)
-    
+
     def on_drag_data_received(self, treeview, drag_context, x, y, selection, info, eventtime):
         drop_info = treeview.get_dest_row_at_pos(x,y)
         modified = False
@@ -165,7 +165,7 @@ class view_tree_sc(object):
         else:
             model, iter_to_copy = treeview.get_selection().get_selected()
             if iter_to_copy <> self.last_iter:
-                self.iter_copy( treeview, model, iter_to_copy, None, None ) 
+                self.iter_copy( treeview, model, iter_to_copy, None, None )
                 drag_context.finish(True, True, eventtime)
                 modified = True
             else:
