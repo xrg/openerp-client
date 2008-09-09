@@ -236,14 +236,7 @@ class db_login(object):
 
 class db_create(object):
     def set_sensitive(self, sensitive):
-        if sensitive:
-            label = self.dialog.get_widget('db_label_info')
-            label.set_text(_('Do not use special characters !'))
-            self.dialog.get_widget('button_db_ok').set_sensitive(True)
-        else:
-            label = self.dialog.get_widget('db_label_info')
-            label.set_markup('<b>'+_('Can not connect to server, please change it !')+'</b>')
-            self.dialog.get_widget('button_db_ok').set_sensitive(False)
+        self.dialog.get_widget('button_db_ok').set_sensitive(False)
         return sensitive
 
     def server_change(self, widget=None, parent=None):
