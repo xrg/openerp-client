@@ -256,6 +256,9 @@ class ModelRecord(signal_event.signal_event):
                     if fieldname not in self.mgroup.mfields:
                         continue
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
+            warning=response.get('warning',{})			
+            if warning:
+                common.warning(warning['message'], warning['title'])
         self.signal('record-changed')
     
     def on_change_attrs(self, callback):
