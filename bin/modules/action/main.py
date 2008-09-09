@@ -167,9 +167,11 @@ class main(service.Service):
         if 'id' in data:
             try:
                 id = data.get('id', False)
+                ctx = rpc.session.context.copy()
+                ctx['get_binary_size'] = False
                 actions = rpc.session.rpc_exec_auth('/object', 'execute',
                         'ir.values', 'get', 'action', keyword,
-                        [(data['model'], id)], False, rpc.session.context)
+                        [(data['model'], id)], False, ctx)
                 actions = map(lambda x: x[2], actions)
             except rpc.rpc_exception, e:
 #               common.error(_('Error: ')+str(e.type), e.message, e.data)
