@@ -58,9 +58,7 @@ class win_preference(object):
         self.parent = parent
 
         action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'action_get', {})
-        print '**', action_id
-        action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', [action_id], False, {})[0]
-        print action
+        action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', [action_id], False, {'get_binary_size':False})[0]
 
         view_ids=[]
         if action.get('views', []):
