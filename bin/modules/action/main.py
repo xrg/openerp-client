@@ -81,6 +81,10 @@ class main(service.Service):
             if not len(res):
                 raise Exception, 'ActionNotFound'
             type=res[0]['type']
+
+        if type == 'ir.actions.act_window':
+            # the field 'views' is transfered as a binary field
+            ctx['get_binary_size'] = False
         res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [act_id], False, ctx)[0]
         self._exec_action(res,datas,context)
 
