@@ -212,8 +212,6 @@ class db_login(object):
                     db_widget.set_active_iter(iter)
                     break
                 iter = liststore.iter_next(iter)
-        else:
-            dbname = db_widget.get_active_text()
 
         res = win.run()
         m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', server_widget.get_text() or '')
@@ -222,8 +220,8 @@ class db_login(object):
             options.options['login.login'] = login.get_text()
             options.options['login.port'] = m.group(3)
             options.options['login.protocol'] = m.group(1)
-            options.options['login.db'] = dbname
-            result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), dbname)
+            options.options['login.db'] = db_widget.get_active_text()
+            result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), db_widget.get_active_text())
         else:
             parent.present()
             win.destroy()
