@@ -72,7 +72,7 @@ class form(object):
         self.model = model
         self.window = window
         self.previous_action = None
-        self.glade = glade.XML(common.terp_path("terp.glade"),'win_form_container',gettext.textdomain())
+        self.glade = glade.XML(common.terp_path("openerp.glade"),'win_form_container',gettext.textdomain())
         self.widget = self.glade.get_widget('win_form_container')
         self.widget.show_all()
         self.fields = fields
@@ -162,7 +162,7 @@ class form(object):
     def sig_goto(self, *args):
         if not self.modified_save():
             return
-        glade2 = glade.XML(common.terp_path("terp.glade"),'dia_goto_id',gettext.textdomain())
+        glade2 = glade.XML(common.terp_path("openerp.glade"),'dia_goto_id',gettext.textdomain())
         widget = glade2.get_widget('goto_spinbutton')
         win = glade2.get_widget('dia_goto_id')
         win.set_transient_for(self.window)

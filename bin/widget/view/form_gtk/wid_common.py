@@ -37,7 +37,7 @@ import service
 import rpc
 
 def field_pref_set(field, name, model, value, dependance=None, window=None):
-    win_gl = glade.XML(common.terp_path('terp.glade'), 'win_field_pref',
+    win_gl = glade.XML(common.terp_path('openerp.glade'), 'win_field_pref',
             gettext.textdomain())
     if dependance is None:
         dependance = []

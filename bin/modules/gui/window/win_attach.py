@@ -47,7 +47,7 @@ import service
 
 class win_attach(object):
     def __init__(self, model, id, parent=None):
-        self.glade = glade.XML(common.terp_path("terp.glade"), 'win_attach',
+        self.glade = glade.XML(common.terp_path("openerp.glade"), 'win_attach',
                 gettext.textdomain())
         self.win = self.glade.get_widget('win_attach')
         self.win.set_icon(common.OPENERP_ICON)

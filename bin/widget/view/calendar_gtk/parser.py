@@ -43,7 +43,7 @@ from mx import DateTime
 
 class ViewCalendar(object):
     def __init__(self, model, axis, fields, attrs):
-        self.glade = gtk.glade.XML(common.terp_path("terp.glade"),'widget_view_calendar',gettext.textdomain())
+        self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_calendar',gettext.textdomain())
         self.widget = self.glade.get_widget('widget_view_calendar')
 
         self.fields = fields

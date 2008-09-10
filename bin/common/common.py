@@ -76,7 +76,7 @@ def selection(title, values, alwaysask=False, parent=None):
         key = values.keys()[0]
         return (key, values[key])
 
-    xml = glade.XML(terp_path("terp.glade"), "win_selection", gettext.textdomain())
+    xml = glade.XML(terp_path("openerp.glade"), "win_selection", gettext.textdomain())
     win = xml.get_widget('win_selection')
     if not parent:
         parent = service.LocalService('gui.main').window
@@ -148,7 +148,7 @@ def terp_survey():
         return False
     import pickle
     widnames = ('country','role','industry','employee','hear','system','opensource')
-    winglade = glade.XML(common.terp_path("terp.glade"), "dia_survey", gettext.textdomain())
+    winglade = glade.XML(common.terp_path("openerp.glade"), "dia_survey", gettext.textdomain())
     win = winglade.get_widget('dia_survey')
     parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
@@ -257,7 +257,7 @@ def support(*args):
     support_id = options['support.support_id']
     recipient = options['support.recipient']
 
-    sur = glade.XML(terp_path("terp.glade"), "dia_support",gettext.textdomain())
+    sur = glade.XML(terp_path("openerp.glade"), "dia_support",gettext.textdomain())
     win = sur.get_widget('dia_support')
     parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
@@ -301,7 +301,7 @@ def error(title, message, details='', parent=None):
     support_id = options['support.support_id']
     recipient = options['support.recipient']
 
-    sur = glade.XML(terp_path("terp.glade"), "win_error",gettext.textdomain())
+    sur = glade.XML(terp_path("openerp.glade"), "win_error",gettext.textdomain())
     win = sur.get_widget('win_error')
     if not parent:
         parent=service.LocalService('gui.main').window
@@ -366,7 +366,7 @@ def to_xml(s):
     return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
 
 def message_box(title, msg, parent=None):
-    dia = glade.XML(terp_path("terp.glade"), "dia_message_box",gettext.textdomain())
+    dia = glade.XML(terp_path("openerp.glade"), "dia_message_box",gettext.textdomain())
     win = dia.get_widget('dia_message_box')
     l = dia.get_widget('msg_title')
     l.set_text(title)
@@ -402,7 +402,7 @@ def warning(msg, title='', parent=None):
 def sur(msg, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
-    sur = glade.XML(terp_path("terp.glade"), "win_sur",gettext.textdomain())
+    sur = glade.XML(terp_path("openerp.glade"), "win_sur",gettext.textdomain())
     win = sur.get_widget('win_sur')
     win.set_transient_for(parent)
     win.show_all()
@@ -420,7 +420,7 @@ def sur(msg, parent=None):
     return response == gtk.RESPONSE_OK
 
 def sur_3b(msg, parent=None):
-    sur = glade.XML(terp_path("terp.glade"), "win_quest_3b",gettext.textdomain())
+    sur = glade.XML(terp_path("openerp.glade"), "win_quest_3b",gettext.textdomain())
     win = sur.get_widget('win_quest_3b')
     l = sur.get_widget('label')
     l.set_text(msg)
@@ -453,7 +453,7 @@ def theme_set():
     return True
 
 def ask(question, parent=None):
-    dia = glade.XML(terp_path('terp.glade'), 'win_quest', gettext.textdomain())
+    dia = glade.XML(terp_path('openerp.glade'), 'win_quest', gettext.textdomain())
     win = dia.get_widget('win_quest')
     label = dia.get_widget('label1')
     label.set_text(question)
@@ -473,7 +473,7 @@ def ask(question, parent=None):
         return entry.get_text()
 
 def concurrency(resource, id, context, parent=None):
-    dia = glade.XML(common.terp_path("terp.glade"),'dialog_concurrency_exception',gettext.textdomain())
+    dia = glade.XML(common.terp_path("openerp.glade"),'dialog_concurrency_exception',gettext.textdomain())
     win = dia.get_widget('dialog_concurrency_exception')
 
     if not parent:

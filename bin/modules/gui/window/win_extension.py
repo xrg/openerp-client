@@ -37,7 +37,7 @@ import options
 
 class win_extension(object):
 	def __init__(self, parent=None):
-		glade = gtk.glade.XML(common.terp_path('terp.glade'), 'win_extension', gettext.textdomain())
+		glade = gtk.glade.XML(common.terp_path('openerp.glade'), 'win_extension', gettext.textdomain())
 		self.win = glade.get_widget('win_extension')
 		self.win.set_icon(common.OPENERP_ICON)
 		model = gtk.ListStore( str, str, str )

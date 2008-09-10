@@ -96,7 +96,7 @@ def datas_read(ids, model, fields, fields_view, prefix='', context=None):
 
 class win_export(object):
     def __init__(self, model, ids, fields, preload = [], parent=None, context=None):
-        self.glade = glade.XML(common.terp_path("terp.glade"), 'win_save_as',
+        self.glade = glade.XML(common.terp_path("openerp.glade"), 'win_save_as',
                 gettext.textdomain())
         self.win = self.glade.get_widget('win_save_as')
         self.ids = ids

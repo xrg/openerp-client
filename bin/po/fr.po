@@ -147,7 +147,7 @@ msgstr ""
 # File: bin/widget/view/form_gtk/calendar.py, line: 172
 # File: bin/widget_search/calendar.py, line: 61
 # File: bin/widget_search/calendar.py, line: 79
-# File: bin/terp.glade, line: 2080
+# File: bin/openerp.glade, line: 2080
 msgid "Open the calendar widget"
 msgstr "Ouvrir le calendrier"
 #
@@ -159,17 +159,17 @@ msgstr ""
 # File: bin/widget/view/form_gtk/calendar.py, line: 130
 # File: bin/widget/view/form_gtk/calendar.py, line: 250
 # File: bin/widget_search/calendar.py, line: 114
-# File: bin/terp.glade, line: 2987
+# File: bin/openerp.glade, line: 2987
 msgid "OpenERP - Date selection"
 msgstr "OpenERP - Sélection de date"
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 256
-# File: bin/terp.glade, line: 6172
+# File: bin/openerp.glade, line: 6172
 msgid "Hour:"
 msgstr "Heure :"
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 259
-# File: bin/terp.glade, line: 6194
+# File: bin/openerp.glade, line: 6194
 msgid "Minute:"
 msgstr "Minute :"
 #
@@ -182,7 +182,7 @@ msgstr ""
 # File: bin/widget/view/form_gtk/image.py, line: 118
 # File: bin/modules/gui/window/win_attach.py, line: 172
 # File: bin/modules/gui/main.py, line: 1023
-# File: bin/terp.glade, line: 8775
+# File: bin/openerp.glade, line: 8775
 msgid "Open..."
 msgstr "Ouvrir..."
 #
@@ -224,44 +224,44 @@ msgstr ""
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 59
 # File: bin/widget/view/form_gtk/many2one.py, line: 62
-# File: bin/terp.glade, line: 5581
+# File: bin/openerp.glade, line: 5581
 msgid "OpenERP - Link"
 msgstr "OpenERP - Lien"
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 153
 # File: bin/widget/view/form_gtk/interface.py, line: 55
-# File: bin/terp.glade, line: 2236
+# File: bin/openerp.glade, line: 2236
 msgid "Set to default value"
 msgstr "Mettre à la valeur par défaut"
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 156
-# File: bin/terp.glade, line: 2244
+# File: bin/openerp.glade, line: 2244
 msgid "Set Default"
 msgstr "Définir comme défaut"
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 167
-# File: bin/terp.glade, line: 2265
-# File: bin/terp.glade, line: 2452
+# File: bin/openerp.glade, line: 2265
+# File: bin/openerp.glade, line: 2452
 msgid "Create a new entry"
 msgstr "Créer une nouvelle entrée"
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 177
-# File: bin/terp.glade, line: 2283
+# File: bin/openerp.glade, line: 2283
 msgid "Edit this entry"
 msgstr "Modifier cette entrée"
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 187
-# File: bin/terp.glade, line: 2300
+# File: bin/openerp.glade, line: 2300
 msgid "Remove this entry"
 msgstr "Supprimer cette entrée"
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 199
-# File: bin/terp.glade, line: 2327
+# File: bin/openerp.glade, line: 2327
 msgid "Previous"
 msgstr "Précédent"
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 212
-# File: bin/terp.glade, line: 2356
+# File: bin/openerp.glade, line: 2356
 msgid "Next"
 msgstr "Suivant"
 #
@@ -279,8 +279,8 @@ msgstr "Définir comme défaut"
 #
 # File: bin/widget/view/form_gtk/many2one.py, line: 161
 # File: bin/widget/view/form_gtk/reference.py, line: 100
-# File: bin/terp.glade, line: 1296
-# File: bin/terp.glade, line: 2135
+# File: bin/openerp.glade, line: 1296
+# File: bin/openerp.glade, line: 2135
 msgid "Create a new resource"
 msgstr "Créer une nouvelle ressource"
 #
@@ -291,7 +291,7 @@ msgid "Open a resource"
 msgstr "Trouver une ressource"
 #
 # File: bin/widget/view/form_gtk/many2one.py, line: 170
-# File: bin/terp.glade, line: 1430
+# File: bin/openerp.glade, line: 1430
 msgid "Action"
 msgstr "Action"
 #
@@ -321,7 +321,7 @@ msgid "Translate view"
 msgstr ""
 #
 # File: bin/widget/view/form_gtk/reference.py, line: 101
-# File: bin/terp.glade, line: 2156
+# File: bin/openerp.glade, line: 2156
 msgid "Search / Open a resource"
 msgstr "Chercher/Ouvrir des ressources"
 #
@@ -674,13 +674,13 @@ msgid "Bad database name !"
 msgstr "Nouvelle base de données :"
 #
 # File: bin/modules/gui/main.py, line: 329
-# File: bin/terp.glade, line: 9811
+# File: bin/openerp.glade, line: 9811
 msgid "<b>Operation in progress</b>"
 msgstr "<b>Operation en cours</b>"
 #
 # File: bin/modules/gui/main.py, line: 333
 # File: bin/modules/action/wizard.py, line: 154
-# File: bin/terp.glade, line: 9833
+# File: bin/openerp.glade, line: 9833
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
@@ -741,7 +741,7 @@ msgid "Press Ctrl+O to login"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 454
-# File: bin/terp.glade, line: 962
+# File: bin/openerp.glade, line: 962
 msgid "Default Theme"
 msgstr "_Thème par défaut"
 #
@@ -876,7 +876,7 @@ msgid "Couldn't backup database."
 msgstr "_Sauvegarder la base de données"
 #
 # File: bin/modules/action/wizard.py, line: 150
-# File: bin/terp.glade, line: 9779
+# File: bin/openerp.glade, line: 9779
 msgid "Operation in progress"
 msgstr "Operation en cours"
 #
@@ -918,429 +918,429 @@ msgstr "Demande de support"
 msgid "Open with..."
 msgstr "Ouvrir..."
 #
-# File: bin/terp.glade, line: 8
+# File: bin/openerp.glade, line: 8
 msgid "OpenERP - Login"
 msgstr "OpenERP - Login"
 #
-# File: bin/terp.glade, line: 45
+# File: bin/openerp.glade, line: 45
 msgid "User:"
 msgstr "Utilisateur :"
 #
-# File: bin/terp.glade, line: 60
-# File: bin/terp.glade, line: 9457
-# File: bin/terp.glade, line: 9663
+# File: bin/openerp.glade, line: 60
+# File: bin/openerp.glade, line: 9457
+# File: bin/openerp.glade, line: 9663
 msgid "Password:"
 msgstr "Mot de passe :"
 #
-# File: bin/terp.glade, line: 74
-# File: bin/terp.glade, line: 9354
-# File: bin/terp.glade, line: 9617
-# File: bin/terp.glade, line: 9976
-# File: bin/terp.glade, line: 10370
+# File: bin/openerp.glade, line: 74
+# File: bin/openerp.glade, line: 9354
+# File: bin/openerp.glade, line: 9617
+# File: bin/openerp.glade, line: 9976
+# File: bin/openerp.glade, line: 10370
 msgid "Change"
 msgstr "Changer"
 #
-# File: bin/terp.glade, line: 108
-# File: bin/terp.glade, line: 9442
+# File: bin/openerp.glade, line: 108
+# File: bin/openerp.glade, line: 9442
 msgid "Database:"
 msgstr "Base de données :"
 #
-# File: bin/terp.glade, line: 124
-# File: bin/terp.glade, line: 9204
-# File: bin/terp.glade, line: 9382
-# File: bin/terp.glade, line: 9565
-# File: bin/terp.glade, line: 10318
+# File: bin/openerp.glade, line: 124
+# File: bin/openerp.glade, line: 9204
+# File: bin/openerp.glade, line: 9382
+# File: bin/openerp.glade, line: 9565
+# File: bin/openerp.glade, line: 10318
 msgid "Server:"
 msgstr "Serveur :"
 #
-# File: bin/terp.glade, line: 263
+# File: bin/openerp.glade, line: 263
 msgid "_File"
 msgstr "_Fichier"
 #
-# File: bin/terp.glade, line: 270
+# File: bin/openerp.glade, line: 270
 msgid "_Connect..."
 msgstr "_Connecter..."
 #
-# File: bin/terp.glade, line: 286
+# File: bin/openerp.glade, line: 286
 msgid "_Disconnect"
 msgstr "_Déconnecter"
 #
-# File: bin/terp.glade, line: 306
+# File: bin/openerp.glade, line: 306
 msgid "Databases"
 msgstr "Bases de données"
 #
-# File: bin/terp.glade, line: 313
+# File: bin/openerp.glade, line: 313
 msgid "_New database"
 msgstr "_Nouvelle base de données"
 #
-# File: bin/terp.glade, line: 328
+# File: bin/openerp.glade, line: 328
 msgid "_Restore database"
 msgstr "_Restaurer la base de données"
 #
-# File: bin/terp.glade, line: 343
+# File: bin/openerp.glade, line: 343
 msgid "_Backup database"
 msgstr "_Sauvegarder la base de données"
 #
-# File: bin/terp.glade, line: 358
+# File: bin/openerp.glade, line: 358
 msgid "Dro_p database"
 msgstr "Su_pprimer la base de données"
 #
-# File: bin/terp.glade, line: 378
+# File: bin/openerp.glade, line: 378
 msgid "Administrator Password"
 msgstr "Mot de passe administrateur"
 #
-# File: bin/terp.glade, line: 423
+# File: bin/openerp.glade, line: 423
 msgid "_User"
 msgstr "_Utilisateur"
 #
-# File: bin/terp.glade, line: 431
+# File: bin/openerp.glade, line: 431
 msgid "_Preferences"
 msgstr "_Préférences"
 #
-# File: bin/terp.glade, line: 451
+# File: bin/openerp.glade, line: 451
 msgid "_Send a request"
 msgstr "_Envoyer une requête"
 #
-# File: bin/terp.glade, line: 466
+# File: bin/openerp.glade, line: 466
 msgid "_Read my requests"
 msgstr "_Lire mes requêtes"
 #
-# File: bin/terp.glade, line: 486
+# File: bin/openerp.glade, line: 486
 msgid "_Waiting Requests"
 msgstr "_Requêtes en attente"
 #
-# File: bin/terp.glade, line: 499
+# File: bin/openerp.glade, line: 499
 msgid "For_m"
 msgstr "For_mulaire"
 #
-# File: bin/terp.glade, line: 507
+# File: bin/openerp.glade, line: 507
 msgid "_New"
 msgstr "_Nouveau"
 #
-# File: bin/terp.glade, line: 523
+# File: bin/openerp.glade, line: 523
 msgid "_Save"
 msgstr "_Sauver"
 #
-# File: bin/terp.glade, line: 539
+# File: bin/openerp.glade, line: 539
 msgid "Copy this resource"
 msgstr "Copier cette ressource"
 #
-# File: bin/terp.glade, line: 540
+# File: bin/openerp.glade, line: 540
 msgid "_Duplicate"
 msgstr "_Dupliquer"
 #
-# File: bin/terp.glade, line: 556
+# File: bin/openerp.glade, line: 556
 msgid "_Delete"
 msgstr "_Supprimer"
 #
-# File: bin/terp.glade, line: 577
+# File: bin/openerp.glade, line: 577
 msgid "Find"
 msgstr "Chercher"
 #
-# File: bin/terp.glade, line: 593
+# File: bin/openerp.glade, line: 593
 msgid "Ne_xt"
 msgstr "S_uivant"
 #
-# File: bin/terp.glade, line: 609
+# File: bin/openerp.glade, line: 609
 msgid "Pre_vious"
 msgstr "_Précédente"
 #
-# File: bin/terp.glade, line: 625
+# File: bin/openerp.glade, line: 625
 msgid "Switch to list/form"
 msgstr "Basculer vers liste/formulaire"
 #
-# File: bin/terp.glade, line: 641
+# File: bin/openerp.glade, line: 641
 msgid "_Menu"
 msgstr "_Menu"
 #
-# File: bin/terp.glade, line: 662
+# File: bin/openerp.glade, line: 662
 msgid "_New Home Tab"
 msgstr "_Nouvel onglet Racine"
 #
-# File: bin/terp.glade, line: 678
-# File: bin/terp.glade, line: 7936
+# File: bin/openerp.glade, line: 678
+# File: bin/openerp.glade, line: 7936
 msgid "Close Tab"
 msgstr "Fermer onglet"
 #
-# File: bin/terp.glade, line: 694
+# File: bin/openerp.glade, line: 694
 msgid "Previous Tab"
 msgstr "Onglet précédent"
 #
-# File: bin/terp.glade, line: 703
-# File: bin/terp.glade, line: 7880
+# File: bin/openerp.glade, line: 703
+# File: bin/openerp.glade, line: 7880
 msgid "Next Tab"
 msgstr "Onglet suivant"
 #
-# File: bin/terp.glade, line: 717
+# File: bin/openerp.glade, line: 717
 msgid "View _logs"
 msgstr "Voir historique"
 #
-# File: bin/terp.glade, line: 725
+# File: bin/openerp.glade, line: 725
 msgid "_Go to resource ID..."
 msgstr "_Aller à la ressource ID..."
 #
-# File: bin/terp.glade, line: 739
+# File: bin/openerp.glade, line: 739
 msgid "_Open"
 msgstr "_Ouvrir"
 #
-# File: bin/terp.glade, line: 754
+# File: bin/openerp.glade, line: 754
 msgid "Reloa_d / Undo"
 msgstr "Rec_harger / Annuler"
 #
-# File: bin/terp.glade, line: 775
+# File: bin/openerp.glade, line: 775
 msgid "Repeat latest _action"
 msgstr "Refaire _dernière action"
 #
-# File: bin/terp.glade, line: 789
+# File: bin/openerp.glade, line: 789
 msgid "_Preview in PDF"
 msgstr "_Prévisualiser en PDF"
 #
-# File: bin/terp.glade, line: 805
+# File: bin/openerp.glade, line: 805
 msgid "Previe_w in editor"
 msgstr "Pré_visualiser dans l'éditeur"
 #
-# File: bin/terp.glade, line: 825
+# File: bin/openerp.glade, line: 825
 msgid "Expor_t data..."
 msgstr "E_xporter données..."
 #
-# File: bin/terp.glade, line: 840
+# File: bin/openerp.glade, line: 840
 msgid "I_mport data..."
 msgstr "I_mporter données..."
 #
-# File: bin/terp.glade, line: 852
+# File: bin/openerp.glade, line: 852
 msgid "_Options"
 msgstr "_Options"
 #
-# File: bin/terp.glade, line: 859
+# File: bin/openerp.glade, line: 859
 msgid "_Menubar"
 msgstr "Barre de _menu"
 #
-# File: bin/terp.glade, line: 867
+# File: bin/openerp.glade, line: 867
 msgid "Text _and Icons"
 msgstr "Texte _et icônes"
 #
-# File: bin/terp.glade, line: 875
+# File: bin/openerp.glade, line: 875
 msgid "_Icons only"
 msgstr "_Icônes seulement"
 #
-# File: bin/terp.glade, line: 884
+# File: bin/openerp.glade, line: 884
 msgid "_Text only"
 msgstr "_Texte seulement"
 #
-# File: bin/terp.glade, line: 897
+# File: bin/openerp.glade, line: 897
 msgid "Client Mode"
 msgstr "Mode Client"
 #
-# File: bin/terp.glade, line: 905
+# File: bin/openerp.glade, line: 905
 msgid "Normal"
 msgstr "Normal"
 #
-# File: bin/terp.glade, line: 913
+# File: bin/openerp.glade, line: 913
 msgid "Mode PDA"
 msgstr "Mode PDA"
 #
-# File: bin/terp.glade, line: 933
+# File: bin/openerp.glade, line: 933
 msgid "_Theme"
 msgstr "_Thème"
 #
-# File: bin/terp.glade, line: 941
+# File: bin/openerp.glade, line: 941
 msgid "OpenERP Theme"
 msgstr "Thème OpenERP"
 #
-# File: bin/terp.glade, line: 981
+# File: bin/openerp.glade, line: 981
 msgid "_Forms"
 msgstr "For_mulaires"
 #
-# File: bin/terp.glade, line: 989
+# File: bin/openerp.glade, line: 989
 msgid "Right Toolbar"
 msgstr "Barre d'outils de droite"
 #
-# File: bin/terp.glade, line: 997
+# File: bin/openerp.glade, line: 997
 msgid "Tabs default position"
 msgstr "Position des onglets par défaut"
 #
-# File: bin/terp.glade, line: 1005
+# File: bin/openerp.glade, line: 1005
 msgid "Top"
 msgstr "Au dessus"
 #
-# File: bin/terp.glade, line: 1013
+# File: bin/openerp.glade, line: 1013
 msgid "Left"
 msgstr "À gauche"
 #
-# File: bin/terp.glade, line: 1022
+# File: bin/openerp.glade, line: 1022
 msgid "Right"
 msgstr "À droite"
 #
-# File: bin/terp.glade, line: 1031
+# File: bin/openerp.glade, line: 1031
 msgid "Bottom"
 msgstr "En dessous"
 #
-# File: bin/terp.glade, line: 1044
+# File: bin/openerp.glade, line: 1044
 msgid "Tabs default orientation"
 msgstr "Orientation des onglets par défaut"
 #
-# File: bin/terp.glade, line: 1052
+# File: bin/openerp.glade, line: 1052
 msgid "Horizontal"
 msgstr "Horizontale"
 #
-# File: bin/terp.glade, line: 1060
+# File: bin/openerp.glade, line: 1060
 msgid "Vertical"
 msgstr "Verticale"
 #
-# File: bin/terp.glade, line: 1077
+# File: bin/openerp.glade, line: 1077
 msgid "_Print"
 msgstr "Im_primer"
 #
-# File: bin/terp.glade, line: 1084
+# File: bin/openerp.glade, line: 1084
 msgid "Previe_w before print"
 msgstr "_Aperçu avant impression"
 #
-# File: bin/terp.glade, line: 1108
+# File: bin/openerp.glade, line: 1108
 msgid "_Save options"
 msgstr "_Enregistrer les options"
 #
-# File: bin/terp.glade, line: 1128
+# File: bin/openerp.glade, line: 1128
 msgid "_Plugins"
 msgstr "_Plugins"
 #
-# File: bin/terp.glade, line: 1136
+# File: bin/openerp.glade, line: 1136
 msgid "_Execute a plugin"
 msgstr "_Exécuter un plugin"
 #
-# File: bin/terp.glade, line: 1156
+# File: bin/openerp.glade, line: 1156
 msgid "_Shortcuts"
 msgstr "_Raccourcis"
 #
-# File: bin/terp.glade, line: 1164
+# File: bin/openerp.glade, line: 1164
 msgid "_Help"
 msgstr "_Aide"
 #
-# File: bin/terp.glade, line: 1171
-# File: bin/terp.glade, line: 7262
+# File: bin/openerp.glade, line: 1171
+# File: bin/openerp.glade, line: 7262
 msgid "Support Request"
 msgstr "Demande de support"
 #
-# File: bin/terp.glade, line: 1191
+# File: bin/openerp.glade, line: 1191
 msgid "User _Manual"
 msgstr "_Manuel utilisateur"
 #
-# File: bin/terp.glade, line: 1206
+# File: bin/openerp.glade, line: 1206
 msgid "_Contextual Help"
 msgstr "Aide _contextuelle"
 #
-# File: bin/terp.glade, line: 1222
+# File: bin/openerp.glade, line: 1222
 msgid "_Tips"
 msgstr "_Astuces"
 #
-# File: bin/terp.glade, line: 1237
+# File: bin/openerp.glade, line: 1237
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 #
-# File: bin/terp.glade, line: 1250
+# File: bin/openerp.glade, line: 1250
 msgid "_License"
 msgstr "_Licence"
 #
-# File: bin/terp.glade, line: 1265
+# File: bin/openerp.glade, line: 1265
 msgid "_About..."
 msgstr "A _propos..."
 #
-# File: bin/terp.glade, line: 1307
+# File: bin/openerp.glade, line: 1307
 msgid "Edit / Save this resource"
 msgstr "Éditer / Enregistrer cette ressource"
 #
-# File: bin/terp.glade, line: 1327
+# File: bin/openerp.glade, line: 1327
 msgid "Delete this resource"
 msgstr "Supprimer cette ressource"
 #
-# File: bin/terp.glade, line: 1347
+# File: bin/openerp.glade, line: 1347
 msgid "Find a resource"
 msgstr "Trouver une ressource"
 #
-# File: bin/terp.glade, line: 1358
+# File: bin/openerp.glade, line: 1358
 msgid "Go to previous matched search"
 msgstr "Aller à la ressource précédente"
 #
-# File: bin/terp.glade, line: 1369
+# File: bin/openerp.glade, line: 1369
 msgid "Go to next matched resource"
 msgstr "Aller à la ressource suivante"
 #
-# File: bin/terp.glade, line: 1380
+# File: bin/openerp.glade, line: 1380
 #, fuzzy
 msgid "Switch current view: form / list / graph"
 msgstr "Changer la vue courante: formulaire / liste"
 #
-# File: bin/terp.glade, line: 1381
+# File: bin/openerp.glade, line: 1381
 msgid "View"
 msgstr ""
 #
-# File: bin/terp.glade, line: 1393
+# File: bin/openerp.glade, line: 1393
 #, fuzzy
 msgid "Reload / Undo Form"
 msgstr "Rec_harger / Annuler"
 #
-# File: bin/terp.glade, line: 1394
+# File: bin/openerp.glade, line: 1394
 #, fuzzy
 msgid "Reload"
 msgstr "Rec_harger / Annuler"
 #
-# File: bin/terp.glade, line: 1407
-# File: bin/terp.glade, line: 1408
+# File: bin/openerp.glade, line: 1407
+# File: bin/openerp.glade, line: 1408
 msgid "Menu"
 msgstr "Menu"
 #
-# File: bin/terp.glade, line: 1429
+# File: bin/openerp.glade, line: 1429
 msgid "Launch actions about this resource"
 msgstr "Exécuter les actions à propos de cette ressource"
 #
-# File: bin/terp.glade, line: 1442
+# File: bin/openerp.glade, line: 1442
 msgid "Print documents"
 msgstr "Imprimer les documents"
 #
-# File: bin/terp.glade, line: 1462
+# File: bin/openerp.glade, line: 1462
 msgid "Add an attachment to this resource"
 msgstr "Ajouter un attachement à cette ressource"
 #
-# File: bin/terp.glade, line: 1463
+# File: bin/openerp.glade, line: 1463
 msgid "Attachment"
 msgstr "Attachement"
 #
-# File: bin/terp.glade, line: 1484
+# File: bin/openerp.glade, line: 1484
 msgid "Close this window"
 msgstr "Fermer cette fenêtre"
 #
-# File: bin/terp.glade, line: 1528
+# File: bin/openerp.glade, line: 1528
 msgid "Requests:"
 msgstr "Requêtes:"
 #
-# File: bin/terp.glade, line: 1551
+# File: bin/openerp.glade, line: 1551
 msgid "Read my Requests"
 msgstr "Lire mes requêtes"
 #
-# File: bin/terp.glade, line: 1572
+# File: bin/openerp.glade, line: 1572
 msgid "Send a new request"
 msgstr "Envoyer une nouvelle requête"
 #
-# File: bin/terp.glade, line: 1612
+# File: bin/openerp.glade, line: 1612
 msgid "OpenERP - Tree Resources"
 msgstr "OpenERP - Arbre des ressources"
 #
-# File: bin/terp.glade, line: 1666
+# File: bin/openerp.glade, line: 1666
 msgid "Shortcuts"
 msgstr "Raccourcis"
 #
-# File: bin/terp.glade, line: 1799
+# File: bin/openerp.glade, line: 1799
 msgid "OpenERP - Forms"
 msgstr "OpenERP - Formulaires"
 #
-# File: bin/terp.glade, line: 1823
+# File: bin/openerp.glade, line: 1823
 msgid "State:"
 msgstr "État :"
 #
-# File: bin/terp.glade, line: 1855
+# File: bin/openerp.glade, line: 1855
 msgid "OpenERP - About"
 msgstr "OpenERP - À propos"
 #
-# File: bin/terp.glade, line: 1869
+# File: bin/openerp.glade, line: 1869
 msgid ""
 "<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
@@ -1348,7 +1348,7 @@ msgstr ""
 "<b>A propos de OpenERP</b>\n"
 "<i>Le plus avancé des ERP &amp; CRM Open Source !</i>"
 #
-# File: bin/terp.glade, line: 1908
+# File: bin/openerp.glade, line: 1908
 msgid ""
 "\n"
 "OpenERP - GTK Client - v%s\n"
@@ -1376,11 +1376,11 @@ msgstr ""
 "\n"
 "Plus d'infos sur www.openerp.com !"
 #
-# File: bin/terp.glade, line: 1936
+# File: bin/openerp.glade, line: 1936
 msgid "_OpenERP"
 msgstr "_OpenERP"
 #
-# File: bin/terp.glade, line: 1964
+# File: bin/openerp.glade, line: 1964
 msgid ""
 "\n"
 "(c) 2003-TODAY - Tiny sprl\n"
@@ -1408,161 +1408,161 @@ msgstr ""
 "Mail: sales@tiny.be\n"
 "Web: http://tiny.be"
 #
-# File: bin/terp.glade, line: 1995
+# File: bin/openerp.glade, line: 1995
 msgid "_Contact"
 msgstr "_Contact"
 #
-# File: bin/terp.glade, line: 2047
+# File: bin/openerp.glade, line: 2047
 msgid "OpenERP - forms widget"
 msgstr "OpenERP - widgets formulaires"
 #
-# File: bin/terp.glade, line: 2229
+# File: bin/openerp.glade, line: 2229
 msgid "Titre"
 msgstr "Titre"
 #
-# File: bin/terp.glade, line: 2470
+# File: bin/openerp.glade, line: 2470
 msgid "Remove selected entry"
 msgstr "Supprimer l'entrée sélectionnée"
 #
-# File: bin/terp.glade, line: 3043
-# File: bin/terp.glade, line: 7615
+# File: bin/openerp.glade, line: 3043
+# File: bin/openerp.glade, line: 7615
 msgid "OpenERP - Confirmation"
 msgstr "OpenERP - Confirmation"
 #
-# File: bin/terp.glade, line: 3071
-# File: bin/terp.glade, line: 7643
-# File: bin/terp.glade, line: 9031
+# File: bin/openerp.glade, line: 3071
+# File: bin/openerp.glade, line: 7643
+# File: bin/openerp.glade, line: 9031
 msgid "Hello World!"
 msgstr "Bonjour tout le monde!"
 #
-# File: bin/terp.glade, line: 3120
+# File: bin/openerp.glade, line: 3120
 msgid "OpenERP - Selection"
 msgstr "OpenERP - Sélection"
 #
-# File: bin/terp.glade, line: 3134
+# File: bin/openerp.glade, line: 3134
 msgid "Your selection:"
 msgstr "Votre sélection :"
 #
-# File: bin/terp.glade, line: 3214
+# File: bin/openerp.glade, line: 3214
 msgid "OpenERP - Filter"
 msgstr "OpenERP - Filtre"
 #
-# File: bin/terp.glade, line: 3230
+# File: bin/openerp.glade, line: 3230
 msgid "S_earch:"
 msgstr "Ch_ercher :"
 #
-# File: bin/terp.glade, line: 3254
+# File: bin/openerp.glade, line: 3254
 msgid "on _field:"
 msgstr "sur le _champ :"
 #
-# File: bin/terp.glade, line: 3266
+# File: bin/openerp.glade, line: 3266
 msgid "test"
 msgstr "test"
 #
-# File: bin/terp.glade, line: 3276
+# File: bin/openerp.glade, line: 3276
 msgid "_Select"
 msgstr "_Sélectionner"
 #
-# File: bin/terp.glade, line: 3293
+# File: bin/openerp.glade, line: 3293
 msgid "_Unselect"
 msgstr "_Désélectionner"
 #
-# File: bin/terp.glade, line: 3318
+# File: bin/openerp.glade, line: 3318
 msgid "Filter:"
 msgstr "Filtre :"
 #
-# File: bin/terp.glade, line: 3331
+# File: bin/openerp.glade, line: 3331
 msgid "AL_L"
 msgstr "_TOUT"
 #
-# File: bin/terp.glade, line: 3347
+# File: bin/openerp.glade, line: 3347
 msgid "N_ONE"
 msgstr "_AUCUN"
 #
-# File: bin/terp.glade, line: 3407
+# File: bin/openerp.glade, line: 3407
 msgid "<b><u>Actions</u></b>"
 msgstr "<b><u>Actions</u></b>"
 #
-# File: bin/terp.glade, line: 3465
+# File: bin/openerp.glade, line: 3465
 msgid "OpenERP - Dialog"
 msgstr "OpenERP - Dialogue"
 #
-# File: bin/terp.glade, line: 3490
+# File: bin/openerp.glade, line: 3490
 msgid "Set to _Default"
 msgstr "Mettre à la valeur par _défaut"
 #
-# File: bin/terp.glade, line: 3510
+# File: bin/openerp.glade, line: 3510
 msgid "Value _Preference"
 msgstr "_Préférence de valeur"
 #
-# File: bin/terp.glade, line: 3526
+# File: bin/openerp.glade, line: 3526
 msgid "OpenERP, Field Preference target"
 msgstr "OpenERP, cible de la préférence du champ"
 #
-# File: bin/terp.glade, line: 3544
+# File: bin/openerp.glade, line: 3544
 msgid "Default _value:"
 msgstr "_Valeur par défaut :"
 #
-# File: bin/terp.glade, line: 3605
+# File: bin/openerp.glade, line: 3605
 msgid "_Domain:"
 msgstr "_Domaine :"
 #
-# File: bin/terp.glade, line: 3621
+# File: bin/openerp.glade, line: 3621
 msgid "Field _Name:"
 msgstr "_Nom du champ :"
 #
-# File: bin/terp.glade, line: 3652
+# File: bin/openerp.glade, line: 3652
 msgid "<b>Value applicable if:</b>"
 msgstr "<b>Valeur applicable si :</b>"
 #
-# File: bin/terp.glade, line: 3684
+# File: bin/openerp.glade, line: 3684
 msgid "_only for you"
 msgstr "_seulement pour vous"
 #
-# File: bin/terp.glade, line: 3698
+# File: bin/openerp.glade, line: 3698
 msgid "for _all users"
 msgstr "pour _tous les utilisateurs"
 #
-# File: bin/terp.glade, line: 3718
+# File: bin/openerp.glade, line: 3718
 msgid "<b>Value applicable for:</b>"
 msgstr "<b>Valeur applicable pour :</b>"
 #
-# File: bin/terp.glade, line: 3778
+# File: bin/openerp.glade, line: 3778
 msgid "OpenERP - Export to CSV"
 msgstr "OpenERP - Exporter en CSV"
 #
-# File: bin/terp.glade, line: 3819
+# File: bin/openerp.glade, line: 3819
 msgid "<b>Predefined exports</b>"
 msgstr "<b>Exportations prédéfinies</b>"
 #
-# File: bin/terp.glade, line: 3860
-# File: bin/terp.glade, line: 8479
+# File: bin/openerp.glade, line: 3860
+# File: bin/openerp.glade, line: 8479
 msgid "<b>All fields</b>"
 msgstr "<b>Tous les champs</b>"
 #
-# File: bin/terp.glade, line: 3903
-# File: bin/terp.glade, line: 8521
+# File: bin/openerp.glade, line: 3903
+# File: bin/openerp.glade, line: 8521
 msgid "_Add"
 msgstr "_Ajouter"
 #
-# File: bin/terp.glade, line: 3950
-# File: bin/terp.glade, line: 8568
+# File: bin/openerp.glade, line: 3950
+# File: bin/openerp.glade, line: 8568
 msgid "_Remove"
 msgstr "_Supprimer"
 #
-# File: bin/terp.glade, line: 3998
+# File: bin/openerp.glade, line: 3998
 msgid "_Nothing"
 msgstr "_Rien"
 #
-# File: bin/terp.glade, line: 4055
+# File: bin/openerp.glade, line: 4055
 msgid "Save List"
 msgstr "_Enregistrer la liste"
 #
-# File: bin/terp.glade, line: 4111
+# File: bin/openerp.glade, line: 4111
 msgid "<b>Fields to export</b>"
 msgstr "<b>Champs à exporter</b>"
 #
-# File: bin/terp.glade, line: 4141
+# File: bin/openerp.glade, line: 4141
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
@@ -1570,40 +1570,40 @@ msgstr ""
 "Ouvrir dans Excel\n"
 "Enregistrer en CSV"
 #
-# File: bin/terp.glade, line: 4160
+# File: bin/openerp.glade, line: 4160
 msgid "Add _field names"
 msgstr "Ajouter les noms de _champ"
 #
-# File: bin/terp.glade, line: 4177
+# File: bin/openerp.glade, line: 4177
 msgid "<b>Opti_ons</b>"
 msgstr "<b>Opti_ons</b>"
 #
-# File: bin/terp.glade, line: 4236
+# File: bin/openerp.glade, line: 4236
 msgid "OpenERP - Search"
 msgstr "OpenERP - Chercher"
 #
-# File: bin/terp.glade, line: 4335
+# File: bin/openerp.glade, line: 4335
 msgid "OpenERP - Search Widgets"
 msgstr "OpenERP - Widgets de recherche"
 #
-# File: bin/terp.glade, line: 4361
-# File: bin/terp.glade, line: 4427
+# File: bin/openerp.glade, line: 4361
+# File: bin/openerp.glade, line: 4427
 msgid "-"
 msgstr "-"
 #
-# File: bin/terp.glade, line: 4398
+# File: bin/openerp.glade, line: 4398
 msgid "Date de début"
 msgstr "Date de début"
 #
-# File: bin/terp.glade, line: 4501
+# File: bin/openerp.glade, line: 4501
 msgid "Search with this name"
 msgstr "Chercher avec ce nom"
 #
-# File: bin/terp.glade, line: 4519
+# File: bin/openerp.glade, line: 4519
 msgid "Clear the field"
 msgstr "Effacer le champ"
 #
-# File: bin/terp.glade, line: 4570
+# File: bin/openerp.glade, line: 4570
 msgid ""
 "\n"
 "Yes\n"
@@ -1613,39 +1613,39 @@ msgstr ""
 "Oui\n"
 "Non"
 #
-# File: bin/terp.glade, line: 4593
+# File: bin/openerp.glade, line: 4593
 msgid "OpenERP - Attachment"
 msgstr "OpenERP - Attachement"
 #
-# File: bin/terp.glade, line: 4618
+# File: bin/openerp.glade, line: 4618
 msgid "Filename:"
 msgstr "Nom du fichier :"
 #
-# File: bin/terp.glade, line: 4661
+# File: bin/openerp.glade, line: 4661
 msgid "Description:"
 msgstr "Description :"
 #
-# File: bin/terp.glade, line: 4714
+# File: bin/openerp.glade, line: 4714
 msgid "Save text"
 msgstr "Sauver le texte"
 #
-# File: bin/terp.glade, line: 4914
+# File: bin/openerp.glade, line: 4914
 msgid "OpenERP - Error"
 msgstr "OpenERP - Erreur"
 #
-# File: bin/terp.glade, line: 4929
+# File: bin/openerp.glade, line: 4929
 msgid "Application Error!"
 msgstr "Erreur de l'application !"
 #
-# File: bin/terp.glade, line: 4988
+# File: bin/openerp.glade, line: 4988
 msgid "<b>Error 404</b>"
 msgstr "<b>Erreur 404</b>"
 #
-# File: bin/terp.glade, line: 5002
+# File: bin/openerp.glade, line: 5002
 msgid "<b>Error code:</b>"
 msgstr "<b>Code de l'erreur :</b>"
 #
-# File: bin/terp.glade, line: 5019
+# File: bin/openerp.glade, line: 5019
 msgid ""
 "This Page does not exist !\n"
 "Please retry"
@@ -1653,24 +1653,24 @@ msgstr ""
 "Cette page n'existe pas !\n"
 "Veuillez réessayer"
 #
-# File: bin/terp.glade, line: 5042
+# File: bin/openerp.glade, line: 5042
 msgid "<i>Click on the Support Request tab if you need more help !</i>"
 msgstr ""
 "<i>Cliquer sur l'onglet Demande de support si vous avez besoin d'aide ! !</i>"
 #
-# File: bin/terp.glade, line: 5061
+# File: bin/openerp.glade, line: 5061
 msgid "De_scription"
 msgstr "De_scription"
 #
-# File: bin/terp.glade, line: 5087
+# File: bin/openerp.glade, line: 5087
 msgid "Error details"
 msgstr "Détails de l'erreur"
 #
-# File: bin/terp.glade, line: 5101
+# File: bin/openerp.glade, line: 5101
 msgid "_Details"
 msgstr "_Détails"
 #
-# File: bin/terp.glade, line: 5129
+# File: bin/openerp.glade, line: 5129
 msgid ""
 "<b>Complete this form to submit your bug and/or request a support.</b>\n"
 "<i>\n"
@@ -1687,38 +1687,38 @@ msgstr ""
 "paspartenaire OpenERP.\n"
 "</i>"
 #
-# File: bin/terp.glade, line: 5163
-# File: bin/terp.glade, line: 7321
+# File: bin/openerp.glade, line: 5163
+# File: bin/openerp.glade, line: 7321
 msgid "<b>Your name:</b>"
 msgstr "<b>Votre nom :</b>"
 #
-# File: bin/terp.glade, line: 5177
-# File: bin/terp.glade, line: 7335
+# File: bin/openerp.glade, line: 5177
+# File: bin/openerp.glade, line: 7335
 msgid "<b>Your Company:</b>"
 msgstr "<b>Votre société :</b>"
 #
-# File: bin/terp.glade, line: 5191
+# File: bin/openerp.glade, line: 5191
 msgid "<b>Your Email:</b>"
 msgstr "<b>Votre email :</b>"
 #
-# File: bin/terp.glade, line: 5234
+# File: bin/openerp.glade, line: 5234
 msgid "Explain what you did:"
 msgstr "Expliquez ce que vous avez fait :"
 #
-# File: bin/terp.glade, line: 5248
+# File: bin/openerp.glade, line: 5248
 msgid "Others Comments:"
 msgstr "Autres remarques :"
 #
-# File: bin/terp.glade, line: 5334
+# File: bin/openerp.glade, line: 5334
 msgid "Send Support Request"
 msgstr "Envoyer la demande de support"
 #
-# File: bin/terp.glade, line: 5367
+# File: bin/openerp.glade, line: 5367
 msgid "<b>support contract id</b>"
 msgstr "<b>Numéro de contrat de support</b>"
 #
-# File: bin/terp.glade, line: 5390
-# File: bin/terp.glade, line: 7488
+# File: bin/openerp.glade, line: 5390
+# File: bin/openerp.glade, line: 7488
 msgid ""
 "Not Urgent\n"
 "Medium\n"
@@ -1730,81 +1730,81 @@ msgstr ""
 "Urgent\n"
 "Très Urgent"
 #
-# File: bin/terp.glade, line: 5412
-# File: bin/terp.glade, line: 7510
+# File: bin/openerp.glade, line: 5412
+# File: bin/openerp.glade, line: 7510
 msgid "Emergency:"
 msgstr "Urgence :"
 #
-# File: bin/terp.glade, line: 5427
+# File: bin/openerp.glade, line: 5427
 msgid "Phone Number:"
 msgstr "Numéro de téléphone :"
 #
-# File: bin/terp.glade, line: 5486
+# File: bin/openerp.glade, line: 5486
 msgid "<b>_Support Request</b>"
 msgstr "<b>Demande de _support</b>"
 #
-# File: bin/terp.glade, line: 5533
+# File: bin/openerp.glade, line: 5533
 msgid "OpenERP - Ressource Edit"
 msgstr "OpenERP - Edition de ressource"
 #
-# File: bin/terp.glade, line: 5651
+# File: bin/openerp.glade, line: 5651
 msgid "OpenERP - List"
 msgstr "OpenERP - Liste"
 #
-# File: bin/terp.glade, line: 5699
+# File: bin/openerp.glade, line: 5699
 msgid "OpenERP - Preferences"
 msgstr "OpenERP - Préférences"
 #
-# File: bin/terp.glade, line: 5713
+# File: bin/openerp.glade, line: 5713
 #, fuzzy
 msgid "<b>User preferences</b>"
 msgstr "<b>Editer les préférences de la ressource</b>"
 #
-# File: bin/terp.glade, line: 5779
+# File: bin/openerp.glade, line: 5779
 msgid "Tip of the Day"
 msgstr "Astuce du jour"
 #
-# File: bin/terp.glade, line: 5826
+# File: bin/openerp.glade, line: 5826
 msgid "_Display a new tip next time?"
 msgstr "_Afficher une nouvelle astuce la prochaine fois ?"
 #
-# File: bin/terp.glade, line: 5879
+# File: bin/openerp.glade, line: 5879
 msgid "Pre_vious Tip"
 msgstr "Astuce _précédente"
 #
-# File: bin/terp.glade, line: 5925
+# File: bin/openerp.glade, line: 5925
 msgid "Ne_xt Tip"
 msgstr "Astuce _suivante"
 #
-# File: bin/terp.glade, line: 5971
+# File: bin/openerp.glade, line: 5971
 msgid "OpenERP - License"
 msgstr "OpenERP - Licence"
 #
-# File: bin/terp.glade, line: 5986
+# File: bin/openerp.glade, line: 5986
 msgid "OpenERP license"
 msgstr "Licence de OpenERP"
 #
-# File: bin/terp.glade, line: 6155
+# File: bin/openerp.glade, line: 6155
 msgid "OpenERP - Date & Time selection"
 msgstr "OpenERP - Sélection date/heure"
 #
-# File: bin/terp.glade, line: 6274
+# File: bin/openerp.glade, line: 6274
 msgid "Go to resource ID"
 msgstr "Aller à la ressource ID"
 #
-# File: bin/terp.glade, line: 6292
+# File: bin/openerp.glade, line: 6292
 msgid "Search ID:"
 msgstr "Chercher ID :"
 #
-# File: bin/terp.glade, line: 6378
+# File: bin/openerp.glade, line: 6378
 msgid "OpenERP Survey"
 msgstr "Sondage OpenERP"
 #
-# File: bin/terp.glade, line: 6394
+# File: bin/openerp.glade, line: 6394
 msgid "<b>OpenERP Survey</b>"
 msgstr "<b>Sondage OpenERP</b>"
 #
-# File: bin/terp.glade, line: 6407
+# File: bin/openerp.glade, line: 6407
 msgid ""
 "<i>Please fill in the following form in order to help us to improve OpenERP "
 "and better target new developments.</i>"
@@ -1812,75 +1812,75 @@ msgstr ""
 "<i>Merci de compléter le formulaire suivant afin de nous aider à améliorer "
 "OpenERP et à cibler les développements futurs.</i>"
 #
-# File: bin/terp.glade, line: 6437
+# File: bin/openerp.glade, line: 6437
 msgid "Industry:"
 msgstr "Secteur :"
 #
-# File: bin/terp.glade, line: 6449
+# File: bin/openerp.glade, line: 6449
 msgid "# Employees:"
 msgstr "# d'employés :"
 #
-# File: bin/terp.glade, line: 6534
+# File: bin/openerp.glade, line: 6534
 msgid "Country:"
 msgstr "Pays :"
 #
-# File: bin/terp.glade, line: 6548
+# File: bin/openerp.glade, line: 6548
 msgid "Your Role:"
 msgstr "Votre rôle :"
 #
-# File: bin/terp.glade, line: 6599
+# File: bin/openerp.glade, line: 6599
 msgid "System:"
 msgstr "Système :"
 #
-# File: bin/terp.glade, line: 6654
+# File: bin/openerp.glade, line: 6654
 msgid "How did you hear about us:"
 msgstr "Comment nous connaissez-vous :"
 #
-# File: bin/terp.glade, line: 6693
+# File: bin/openerp.glade, line: 6693
 msgid "Open Source:"
 msgstr "Logiciel Libre :"
 #
-# File: bin/terp.glade, line: 7003
+# File: bin/openerp.glade, line: 7003
 msgid "<b>Your company:</b>"
 msgstr "<b>Votre société :</b>"
 #
-# File: bin/terp.glade, line: 7035
+# File: bin/openerp.glade, line: 7035
 msgid "We plan to use OpenERP"
 msgstr "Nous pensons utiliser OpenERP"
 #
-# File: bin/terp.glade, line: 7049
+# File: bin/openerp.glade, line: 7049
 msgid "We plan to offer services on OpenERP"
 msgstr "Nous pensons offrir du service sur OpenERP"
 #
-# File: bin/terp.glade, line: 7070
+# File: bin/openerp.glade, line: 7070
 msgid "Tell us why you try OpenERP and what are your current softwares:"
 msgstr ""
 "Dites nous pourquoi vous essayez OpenERP et quels sont vos logiciels "
 "courant :"
 #
-# File: bin/terp.glade, line: 7104
+# File: bin/openerp.glade, line: 7104
 msgid "<b>Your interrest:</b>"
 msgstr "<b>Votre intérêt :</b>"
 #
-# File: bin/terp.glade, line: 7139
+# File: bin/openerp.glade, line: 7139
 msgid "(Get OpenERP announces, docs and new releases by email)"
 msgstr ""
 "(Recevez les annonces OpenERP, les documentations et nouvelles versions par "
 "email)"
 #
-# File: bin/terp.glade, line: 7155
+# File: bin/openerp.glade, line: 7155
 msgid "Company:"
 msgstr "Société :"
 #
-# File: bin/terp.glade, line: 7167
+# File: bin/openerp.glade, line: 7167
 msgid "E-Mail:"
 msgstr "E-Mail :"
 #
-# File: bin/terp.glade, line: 7208
+# File: bin/openerp.glade, line: 7208
 msgid "<b>Keep Informed</b>"
 msgstr "<b>Restez Informé</b>"
 #
-# File: bin/terp.glade, line: 7288
+# File: bin/openerp.glade, line: 7288
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
 "<i>\n"
@@ -1895,319 +1895,319 @@ msgstr ""
 "Veuillez noter que nous pouvrions ne pas répondre si vous n' avez pas de "
 "contrat de support avec Tiny ou partenaire officiel.</i>"
 #
-# File: bin/terp.glade, line: 7349
+# File: bin/openerp.glade, line: 7349
 msgid "<b>Your email:</b>"
 msgstr "<b>Votre email :</b>"
 #
-# File: bin/terp.glade, line: 7392
+# File: bin/openerp.glade, line: 7392
 msgid "Explain your problem:"
 msgstr "Expliquez votre problème :"
 #
-# File: bin/terp.glade, line: 7406
+# File: bin/openerp.glade, line: 7406
 msgid "Other comments:"
 msgstr "Autres commentaires :"
 #
-# File: bin/terp.glade, line: 7465
+# File: bin/openerp.glade, line: 7465
 msgid "<b>Support contract id:</b>"
 msgstr "<b>Numéro de contrat de support :</b>"
 #
-# File: bin/terp.glade, line: 7525
+# File: bin/openerp.glade, line: 7525
 msgid "Phone number:"
 msgstr "Numéro de téléphone :"
 #
-# File: bin/terp.glade, line: 7705
+# File: bin/openerp.glade, line: 7705
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 #
-# File: bin/terp.glade, line: 7727
+# File: bin/openerp.glade, line: 7727
 msgid "<Ctrl> + O"
 msgstr "<Ctrl> + O"
 #
-# File: bin/terp.glade, line: 7740
+# File: bin/openerp.glade, line: 7740
 msgid "Connect"
 msgstr "_Connecter"
 #
-# File: bin/terp.glade, line: 7755
+# File: bin/openerp.glade, line: 7755
 msgid "<Ctrl> + F"
 msgstr "<Ctrl> + F"
 #
-# File: bin/terp.glade, line: 7768
+# File: bin/openerp.glade, line: 7768
 msgid "Find / Search"
 msgstr "Rechercher"
 #
-# File: bin/terp.glade, line: 7783
+# File: bin/openerp.glade, line: 7783
 msgid "<Ctrl> + D"
 msgstr "<Ctrl> + D"
 #
-# File: bin/terp.glade, line: 7796
+# File: bin/openerp.glade, line: 7796
 msgid "Delete"
 msgstr "Supprimer"
 #
-# File: bin/terp.glade, line: 7811
+# File: bin/openerp.glade, line: 7811
 msgid "<Ctrl> + N"
 msgstr "<Ctrl> + N"
 #
-# File: bin/terp.glade, line: 7824
+# File: bin/openerp.glade, line: 7824
 msgid "New"
 msgstr "Nouveau"
 #
-# File: bin/terp.glade, line: 7839
+# File: bin/openerp.glade, line: 7839
 msgid "<Ctrl> + <PgUp>"
 msgstr "<Ctrl> + <PgUp>"
 #
-# File: bin/terp.glade, line: 7852
+# File: bin/openerp.glade, line: 7852
 msgid "Previous tab"
 msgstr "Onglet précédent"
 #
-# File: bin/terp.glade, line: 7867
+# File: bin/openerp.glade, line: 7867
 msgid "<Ctrl> + <PgDn>"
 msgstr "<Ctrl> + <PgDn>"
 #
-# File: bin/terp.glade, line: 7895
+# File: bin/openerp.glade, line: 7895
 msgid "<Ctrl> + S"
 msgstr "<Ctrl> + S"
 #
-# File: bin/terp.glade, line: 7908
+# File: bin/openerp.glade, line: 7908
 msgid "<Ctrl> + W"
 msgstr "<Ctrl> + W"
 #
-# File: bin/terp.glade, line: 7921
+# File: bin/openerp.glade, line: 7921
 msgid "Save"
 msgstr "Sauver"
 #
-# File: bin/terp.glade, line: 7951
+# File: bin/openerp.glade, line: 7951
 msgid "<PgUp>"
 msgstr "<PgUp>"
 #
-# File: bin/terp.glade, line: 7964
+# File: bin/openerp.glade, line: 7964
 msgid "<PgDn>"
 msgstr "<PgDn>"
 #
-# File: bin/terp.glade, line: 7977
+# File: bin/openerp.glade, line: 7977
 msgid "Previous record"
 msgstr "Enregistrement précédent"
 #
-# File: bin/terp.glade, line: 7992
+# File: bin/openerp.glade, line: 7992
 msgid "Next record"
 msgstr "Enregistrement suivant"
 #
-# File: bin/terp.glade, line: 8007
+# File: bin/openerp.glade, line: 8007
 msgid "<Ctrl> + L"
 msgstr "<Ctrl> + L"
 #
-# File: bin/terp.glade, line: 8020
+# File: bin/openerp.glade, line: 8020
 msgid "Switch view mode"
 msgstr "Changer de mode de vue"
 #
-# File: bin/terp.glade, line: 8035
+# File: bin/openerp.glade, line: 8035
 msgid "<Ctrl> + <Enter>"
 msgstr "<Ctrl> + <Enter>"
 #
-# File: bin/terp.glade, line: 8048
+# File: bin/openerp.glade, line: 8048
 msgid "Save and Close window"
 msgstr "Sauver et fermer la fenêtre"
 #
-# File: bin/terp.glade, line: 8064
+# File: bin/openerp.glade, line: 8064
 msgid "<i>When editing a resource in a popup window</i>"
 msgstr "<i>Lors de la modification d'une ressource dans un fenêtre popup</i>"
 #
-# File: bin/terp.glade, line: 8080
+# File: bin/openerp.glade, line: 8080
 msgid "<Ctrl> + <Esc>"
 msgstr "<Ctrl> + <Esc>"
 #
-# File: bin/terp.glade, line: 8093
+# File: bin/openerp.glade, line: 8093
 msgid "Close window without saving"
 msgstr "Fermer la fenêtre sans sauver"
 #
-# File: bin/terp.glade, line: 8108
+# File: bin/openerp.glade, line: 8108
 msgid "<b>Shortcuts for OpenERP</b>"
 msgstr "<b>Raccourcis OpenERP</b>"
 #
-# File: bin/terp.glade, line: 8123
+# File: bin/openerp.glade, line: 8123
 msgid "Main Shortcuts"
 msgstr "Raccourcis principaux"
 #
-# File: bin/terp.glade, line: 8140
+# File: bin/openerp.glade, line: 8140
 msgid "<Ctrl> + X"
 msgstr "<Ctrl> + X"
 #
-# File: bin/terp.glade, line: 8153
+# File: bin/openerp.glade, line: 8153
 msgid "<Ctrl> + C"
 msgstr "<Ctrl> + C"
 #
-# File: bin/terp.glade, line: 8166
+# File: bin/openerp.glade, line: 8166
 msgid "<Ctrl> + V"
 msgstr "<Ctrl> + V"
 #
-# File: bin/terp.glade, line: 8179
+# File: bin/openerp.glade, line: 8179
 msgid "Cut selected text"
 msgstr "Couper l'entrée sélectionnée"
 #
-# File: bin/terp.glade, line: 8194
+# File: bin/openerp.glade, line: 8194
 msgid "Copy selected text"
 msgstr "Copier l'entrée sélectionnée"
 #
-# File: bin/terp.glade, line: 8209
+# File: bin/openerp.glade, line: 8209
 msgid "Paste selected text"
 msgstr "Coller l'entrée sélectionnée"
 #
-# File: bin/terp.glade, line: 8224
+# File: bin/openerp.glade, line: 8224
 msgid "<Tab>"
 msgstr "<Tab>"
 #
-# File: bin/terp.glade, line: 8237
+# File: bin/openerp.glade, line: 8237
 msgid "Next editable widget"
 msgstr "Prochain widget editable"
 #
-# File: bin/terp.glade, line: 8252
+# File: bin/openerp.glade, line: 8252
 msgid "<Shist> + <Tab>"
 msgstr "<Shift> + <Tab>"
 #
-# File: bin/terp.glade, line: 8265
+# File: bin/openerp.glade, line: 8265
 msgid "Previous editable widget"
 msgstr "Précédent widget editable"
 #
-# File: bin/terp.glade, line: 8280
+# File: bin/openerp.glade, line: 8280
 msgid "<Enter>"
 msgstr "<Enter>"
 #
-# File: bin/terp.glade, line: 8293
+# File: bin/openerp.glade, line: 8293
 msgid "Auto-Complete text field"
 msgstr "Auto-completion du champ text"
 #
-# File: bin/terp.glade, line: 8308
+# File: bin/openerp.glade, line: 8308
 msgid "F1"
 msgstr "F1"
 #
-# File: bin/terp.glade, line: 8321
+# File: bin/openerp.glade, line: 8321
 msgid "Add a new line/field"
 msgstr "Ajouter une nouvelle ligne/champ"
 #
-# File: bin/terp.glade, line: 8336
+# File: bin/openerp.glade, line: 8336
 msgid "Open current field"
 msgstr "Ouvrir le champ courant"
 #
-# File: bin/terp.glade, line: 8350
+# File: bin/openerp.glade, line: 8350
 msgid "<b>Shortcuts in text entries</b>"
 msgstr "<b>Raccourcis dans les champs textes</b>"
 #
-# File: bin/terp.glade, line: 8362
+# File: bin/openerp.glade, line: 8362
 msgid "<b>Shortcuts in relation fields</b>"
 msgstr "<b>Raccourcis dans les champs relations</b>"
 #
-# File: bin/terp.glade, line: 8378
+# File: bin/openerp.glade, line: 8378
 msgid "F2"
 msgstr "F2"
 #
-# File: bin/terp.glade, line: 8396
+# File: bin/openerp.glade, line: 8396
 msgid "Edition Widgets"
 msgstr "Édition des widgets"
 #
-# File: bin/terp.glade, line: 8434
+# File: bin/openerp.glade, line: 8434
 msgid "Import from CSV"
 msgstr "Importer d'un fichier CSV"
 #
-# File: bin/terp.glade, line: 8616
+# File: bin/openerp.glade, line: 8616
 msgid "N_othing"
 msgstr "_Rien"
 #
-# File: bin/terp.glade, line: 8675
+# File: bin/openerp.glade, line: 8675
 msgid "Auto-Detect"
 msgstr "Auto-Détection"
 #
-# File: bin/terp.glade, line: 8730
+# File: bin/openerp.glade, line: 8730
 msgid "<b>Fields to import</b>"
 msgstr "<b>Champs à importer</b>"
 #
-# File: bin/terp.glade, line: 8765
+# File: bin/openerp.glade, line: 8765
 #, fuzzy
 msgid "File to Import:"
 msgstr "Fichier à importer :"
 #
-# File: bin/terp.glade, line: 8804
+# File: bin/openerp.glade, line: 8804
 msgid "Field Separater:"
 msgstr "Séparateur de champ :"
 #
-# File: bin/terp.glade, line: 8815
+# File: bin/openerp.glade, line: 8815
 msgid "Encoding:"
 msgstr "Encodage:"
 #
-# File: bin/terp.glade, line: 8844
+# File: bin/openerp.glade, line: 8844
 msgid "Text Delimiter:"
 msgstr "Délimiteur de texte :"
 #
-# File: bin/terp.glade, line: 8872
+# File: bin/openerp.glade, line: 8872
 msgid "Lines to Skip:"
 msgstr "Lignes à ignorer :"
 #
-# File: bin/terp.glade, line: 8923
+# File: bin/openerp.glade, line: 8923
 msgid "CSV Parameters"
 msgstr "Paramètres CSV"
 #
-# File: bin/terp.glade, line: 9002
+# File: bin/openerp.glade, line: 9002
 msgid "OpenERP"
 msgstr "OpenERP"
 #
-# File: bin/terp.glade, line: 9099
+# File: bin/openerp.glade, line: 9099
 msgid "Server"
 msgstr "Serveur"
 #
-# File: bin/terp.glade, line: 9109
+# File: bin/openerp.glade, line: 9109
 msgid "<b>Connect to a OpenERP server</b>"
 msgstr "<b>Se connecter a un serveur OpenERP</b>"
 #
-# File: bin/terp.glade, line: 9140
+# File: bin/openerp.glade, line: 9140
 msgid "Port:"
 msgstr "Port :"
 #
-# File: bin/terp.glade, line: 9188
+# File: bin/openerp.glade, line: 9188
 msgid "Protocol connection:"
 msgstr "Protocol de connection :"
 #
-# File: bin/terp.glade, line: 9268
+# File: bin/openerp.glade, line: 9268
 msgid "Choose a database..."
 msgstr "Veuillez choisir une base de données..."
 #
-# File: bin/terp.glade, line: 9283
+# File: bin/openerp.glade, line: 9283
 msgid "<b>Backup a database</b>"
 msgstr "<b>Sauvegarder une base de données</b>"
 #
-# File: bin/terp.glade, line: 9516
+# File: bin/openerp.glade, line: 9516
 msgid "Restore a database"
 msgstr "Restaurer une base de données"
 #
-# File: bin/terp.glade, line: 9529
+# File: bin/openerp.glade, line: 9529
 msgid "<b>Restore a database</b>"
 msgstr "<b>Restaurer une base de données</b>"
 #
-# File: bin/terp.glade, line: 9580
-# File: bin/terp.glade, line: 9939
-# File: bin/terp.glade, line: 10333
+# File: bin/openerp.glade, line: 9580
+# File: bin/openerp.glade, line: 9939
+# File: bin/openerp.glade, line: 10333
 msgid "http://localhost:8069"
 msgstr "http://localhost:8069"
 #
-# File: bin/terp.glade, line: 9677
-# File: bin/terp.glade, line: 10061
+# File: bin/openerp.glade, line: 9677
+# File: bin/openerp.glade, line: 10061
 msgid "New database name:"
 msgstr "Nouvelle base de données :"
 #
-# File: bin/terp.glade, line: 9704
+# File: bin/openerp.glade, line: 9704
 msgid "(must not contain any special char)"
 msgstr "(ne doit pas contenir de caractères spéciaux)"
 #
-# File: bin/terp.glade, line: 9868
+# File: bin/openerp.glade, line: 9868
 msgid "Create a new database"
 msgstr "Créer une nouvelle base de données"
 #
-# File: bin/terp.glade, line: 9881
+# File: bin/openerp.glade, line: 9881
 msgid "<b>Create a new database</b>"
 msgstr "<b>Créer une nouvelle base de données</b>"
 #
-# File: bin/terp.glade, line: 9923
+# File: bin/openerp.glade, line: 9923
 msgid "OpenERP server:"
 msgstr "OpenERP serveur :"
 #
-# File: bin/terp.glade, line: 9934
+# File: bin/openerp.glade, line: 9934
 msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
@@ -2216,26 +2216,26 @@ msgstr ""
 "est installé sur cet ordinateur. Cliquez sur 'Changer' pour changer "
 "l'adresse."
 #
-# File: bin/terp.glade, line: 10003
+# File: bin/openerp.glade, line: 10003
 msgid "Super admin password:"
 msgstr "Mot de passe super admin :"
 #
-# File: bin/terp.glade, line: 10017
+# File: bin/openerp.glade, line: 10017
 msgid "Default language:"
 msgstr "Langue par défaut :"
 #
-# File: bin/terp.glade, line: 10030
+# File: bin/openerp.glade, line: 10030
 msgid "Load demonstration data:"
 msgstr "Charger les données démos :"
 #
-# File: bin/terp.glade, line: 10043
+# File: bin/openerp.glade, line: 10043
 msgid ""
 "Check this box if you want demo data to be installed on your new database."
 msgstr ""
 "Cochez cette case si vous désirez installer des données de démomonstration "
 "dans la nouvelle base de données"
 #
-# File: bin/terp.glade, line: 10074
+# File: bin/openerp.glade, line: 10074
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
@@ -2243,11 +2243,11 @@ msgstr ""
 "Choisissez le nom de la base de données qui sera créée. Le nom ne doit "
 "contenir aucun caractère spécial. Exemple : 'terp'."
 #
-# File: bin/terp.glade, line: 10103
+# File: bin/openerp.glade, line: 10103
 msgid "(use 'admin', if you did not changed it)"
 msgstr "(Utilisez 'admin', si vous ne l'avez pas changé)"
 #
-# File: bin/terp.glade, line: 10120
+# File: bin/openerp.glade, line: 10120
 msgid ""
 "This is the password of the user that have the rights to administer "
 "databases. This is not a OpenERP user, just a super administrator. If you "
@@ -2258,11 +2258,11 @@ msgstr ""
 "administrateur. Si vous ne le changez pas, le mot de passe après "
 "l'installation est 'admin'."
 #
-# File: bin/terp.glade, line: 10138
+# File: bin/openerp.glade, line: 10138
 msgid "Hello World"
 msgstr "Bonjour tout le monde!"
 #
-# File: bin/terp.glade, line: 10153
+# File: bin/openerp.glade, line: 10153
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
@@ -2272,43 +2272,43 @@ msgstr ""
 "données. Vous pourrez installer d'autres langues par la suite via le menu "
 "d'administration"
 #
-# File: bin/terp.glade, line: 10173
+# File: bin/openerp.glade, line: 10173
 msgid "(must not contain any special character)"
 msgstr "(ne doit pas contenir de caractères spéciaux)"
 #
-# File: bin/terp.glade, line: 10230
+# File: bin/openerp.glade, line: 10230
 msgid "Change password"
 msgstr "Modifier le mot de passe"
 #
-# File: bin/terp.glade, line: 10247
+# File: bin/openerp.glade, line: 10247
 msgid "<b>Change your super admin password</b>"
 msgstr "<b>Modifier le mot de passe super administrateur</b>"
 #
-# File: bin/terp.glade, line: 10276
+# File: bin/openerp.glade, line: 10276
 msgid "New password confirmation:"
 msgstr "Confirmation du nouveau mot de passe :"
 #
-# File: bin/terp.glade, line: 10289
+# File: bin/openerp.glade, line: 10289
 msgid "New password:"
 msgstr "Nouveau mot de passe :"
 #
-# File: bin/terp.glade, line: 10302
+# File: bin/openerp.glade, line: 10302
 msgid "Old password:"
 msgstr "Ancien mot de passe :"
 #
-# File: bin/terp.glade, line: 10489
+# File: bin/openerp.glade, line: 10489
 msgid "OpenERP Message"
 msgstr "Message de OpenERP"
 #
-# File: bin/terp.glade, line: 10568
+# File: bin/openerp.glade, line: 10568
 msgid "Database creation"
 msgstr "Creation de la base de données"
 #
-# File: bin/terp.glade, line: 10601
+# File: bin/openerp.glade, line: 10601
 msgid "<b>Database created successfully!</b>"
 msgstr "<b>La base de données a été créée avec succès !</b>"
 #
-# File: bin/terp.glade, line: 10633
+# File: bin/openerp.glade, line: 10633
 msgid ""
 "You can connect to the new database using one of the following account:\n"
 "\n"
@@ -2319,11 +2319,11 @@ msgstr ""
 "\n"
 "    Administrateur: admin / admin "
 #
-# File: bin/terp.glade, line: 10758
+# File: bin/openerp.glade, line: 10758
 msgid "Concurrency exception"
 msgstr "Exception de concurence"
 #
-# File: bin/terp.glade, line: 10783
+# File: bin/openerp.glade, line: 10783
 msgid ""
 "<b>\n"
 "Write concurrency warning:\n"
@@ -2343,11 +2343,11 @@ msgstr ""
 "   - \"Comparer\" pour voir la version modifiée.\n"
 "   - \"Écrire de toute façon\" pour sauver votre version courante.\n"
 #
-# File: bin/terp.glade, line: 10846
+# File: bin/openerp.glade, line: 10846
 msgid "Compare"
 msgstr "Comparer"
 #
-# File: bin/terp.glade, line: 10892
+# File: bin/openerp.glade, line: 10892
 msgid "Write anyway"
 msgstr "Écrire de toute façon"
 #

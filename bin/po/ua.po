@@ -16,490 +16,490 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: terp.glade:9
+#: openerp.glade:9
 msgid "OpenERP - Login"
 msgstr "OpenERP - Вхід у систему"
 
-#: terp.glade:106
+#: openerp.glade:106
 msgid "User:"
 msgstr "Ім'я користувача:"
 
-#: terp.glade:134 terp.glade:14673 terp.glade:14988
+#: openerp.glade:134 openerp.glade:14673 openerp.glade:14988
 msgid "Password:"
 msgstr "Пароль:"
 
-#: terp.glade:163 terp.glade:14500 terp.glade:14926 terp.glade:15491
-#: terp.glade:16135
+#: openerp.glade:163 openerp.glade:14500 openerp.glade:14926 openerp.glade:15491
+#: openerp.glade:16135
 #, fuzzy
 msgid "Change"
 msgstr "Змінити корінь"
 
-#: terp.glade:204 terp.glade:14645
+#: openerp.glade:204 openerp.glade:14645
 #, fuzzy
 msgid "Database:"
 msgstr "Виберіть дату"
 
-#: terp.glade:233 terp.glade:14266 terp.glade:14540 terp.glade:14833
-#: terp.glade:16042
+#: openerp.glade:233 openerp.glade:14266 openerp.glade:14540 openerp.glade:14833
+#: openerp.glade:16042
 msgid "Server:"
 msgstr "Сервер:"
 
-#: terp.glade:420
+#: openerp.glade:420
 msgid "_File"
 msgstr "_Файл"
 
-#: terp.glade:429
+#: openerp.glade:429
 #, fuzzy
 msgid "_Connect..."
 msgstr "З'єднатись..."
 
-#: terp.glade:451
+#: openerp.glade:451
 #, fuzzy
 msgid "_Disconnect"
 msgstr "Роз'єднатись"
 
-#: terp.glade:478
+#: openerp.glade:478
 #, fuzzy
 msgid "Databases"
 msgstr "Виберіть дату"
 
-#: terp.glade:499
+#: openerp.glade:499
 #, fuzzy
 msgid "_New database"
 msgstr "Виберіть дату"
 
-#: terp.glade:520
+#: openerp.glade:520
 #, fuzzy
 msgid "_Restore database"
 msgstr "Виберіть дату"
 
-#: terp.glade:541
+#: openerp.glade:541
 #, fuzzy
 msgid "_Backup database"
 msgstr "Виберіть дату"
 
-#: terp.glade:562
+#: openerp.glade:562
 #, fuzzy
 msgid "Dro_p database"
 msgstr "Виберіть дату"
 
-#: terp.glade:589
+#: openerp.glade:589
 msgid "Administrator Password"
 msgstr ""
 
-#: terp.glade:633
+#: openerp.glade:633
 msgid "_User"
 msgstr "Користувач"
 
-#: terp.glade:644
+#: openerp.glade:644
 #, fuzzy
 msgid "_Preferences"
 msgstr "Налаштування"
 
-#: terp.glade:671
+#: openerp.glade:671
 #, fuzzy
 msgid "_Send a request"
 msgstr "Відіслати запит"
 
-#: terp.glade:692
+#: openerp.glade:692
 #, fuzzy
 msgid "_Read my requests"
 msgstr "Показати мої запити"
 
-#: terp.glade:719
+#: openerp.glade:719
 #, fuzzy
 msgid "_Waiting Requests"
 msgstr "Запити:"
 
-#: terp.glade:732
+#: openerp.glade:732
 #, fuzzy
 msgid "For_m"
 msgstr "_Форма"
 
-#: terp.glade:743
+#: openerp.glade:743
 #, fuzzy
 msgid "_New"
 msgstr "Новий"
 
-#: terp.glade:765
+#: openerp.glade:765
 #, fuzzy
 msgid "_Save"
 msgstr "Зберегти"
 
-#: terp.glade:787
+#: openerp.glade:787
 #, fuzzy
 msgid "Copy this resource"
 msgstr "Видалити цей ресурс"
 
-#: terp.glade:788
+#: openerp.glade:788
 msgid "_Duplicate"
 msgstr ""
 
-#: terp.glade:810
+#: openerp.glade:810
 #, fuzzy
 msgid "_Delete"
 msgstr "Видалити"
 
-#: terp.glade:838
+#: openerp.glade:838
 msgid "Find"
 msgstr ""
 
-#: terp.glade:860
+#: openerp.glade:860
 #, fuzzy
 msgid "Ne_xt"
 msgstr "Наступний"
 
-#: terp.glade:882
+#: openerp.glade:882
 #, fuzzy
 msgid "Pre_vious"
 msgstr "Попередній"
 
-#: terp.glade:904
+#: openerp.glade:904
 msgid "Switch to list/form"
 msgstr ""
 
-#: terp.glade:926
+#: openerp.glade:926
 #, fuzzy
 msgid "_Menu"
 msgstr "Меню"
 
-#: terp.glade:954
+#: openerp.glade:954
 msgid "_New Home Tab"
 msgstr ""
 
-#: terp.glade:976 terp.glade:12029
+#: openerp.glade:976 openerp.glade:12029
 #, fuzzy
 msgid "Close Tab"
 msgstr "Закрити"
 
-#: terp.glade:998
+#: openerp.glade:998
 #, fuzzy
 msgid "Previous Tab"
 msgstr "Попередня порада"
 
-#: terp.glade:1008 terp.glade:11917
+#: openerp.glade:1008 openerp.glade:11917
 #, fuzzy
 msgid "Next Tab"
 msgstr "Наступна порада"
 
-#: terp.glade:1024
+#: openerp.glade:1024
 #, fuzzy
 msgid "View _logs"
 msgstr "Показати журнал"
 
-#: terp.glade:1033
+#: openerp.glade:1033
 #, fuzzy
 msgid "_Go to resource ID..."
 msgstr "Перейти до ресурсу з ID..."
 
-#: terp.glade:1049
+#: openerp.glade:1049
 #, fuzzy
 msgid "_Open"
 msgstr "Відкрити"
 
-#: terp.glade:1070
+#: openerp.glade:1070
 #, fuzzy
 msgid "Reloa_d / Undo"
 msgstr "Поновити"
 
-#: terp.glade:1098
+#: openerp.glade:1098
 #, fuzzy
 msgid "Repeat latest _action"
 msgstr "Повторити останню дію"
 
-#: terp.glade:1114
+#: openerp.glade:1114
 msgid "_Preview in PDF"
 msgstr "_Перегляд у PDF"
 
-#: terp.glade:1136
+#: openerp.glade:1136
 #, fuzzy
 msgid "Previe_w in editor"
 msgstr "Перегляд у _word"
 
-#: terp.glade:1163
+#: openerp.glade:1163
 #, fuzzy
 msgid "Expor_t data..."
 msgstr "Експорт даних..."
 
-#: terp.glade:1184
+#: openerp.glade:1184
 #, fuzzy
 msgid "I_mport data..."
 msgstr "Імпорт даних..."
 
-#: terp.glade:1197
+#: openerp.glade:1197
 msgid "_Options"
 msgstr "_Опції"
 
-#: terp.glade:1206
+#: openerp.glade:1206
 #, fuzzy
 msgid "_Menubar"
 msgstr "Меню"
 
-#: terp.glade:1216
+#: openerp.glade:1216
 #, fuzzy
 msgid "Text _and Icons"
 msgstr "Текст та іконки"
 
-#: terp.glade:1226
+#: openerp.glade:1226
 #, fuzzy
 msgid "_Icons only"
 msgstr "Тільки іконки"
 
-#: terp.glade:1237
+#: openerp.glade:1237
 #, fuzzy
 msgid "_Text only"
 msgstr "Тільки текст"
 
-#: terp.glade:1252
+#: openerp.glade:1252
 msgid "Client Mode"
 msgstr ""
 
-#: terp.glade:1274
+#: openerp.glade:1274
 msgid "Normal"
 msgstr ""
 
-#: terp.glade:1284
+#: openerp.glade:1284
 msgid "Mode PDA"
 msgstr ""
 
-#: terp.glade:1299
+#: openerp.glade:1299
 #, fuzzy
 msgid "_Theme"
 msgstr "Дерево"
 
-#: terp.glade:1321
+#: openerp.glade:1321
 #, fuzzy
 msgid "OpenERP Theme"
 msgstr "OpenERP - Лицензія"
 
-#: terp.glade:1345
+#: openerp.glade:1345
 #, fuzzy
 msgid "Default Theme"
 msgstr "Значення за змовчуванням:"
 
-#: terp.glade:1358
+#: openerp.glade:1358
 #, fuzzy
 msgid "_Forms"
 msgstr "_Форма"
 
-#: terp.glade:1368
+#: openerp.glade:1368
 msgid "Right Toolbar"
 msgstr ""
 
-#: terp.glade:1378
+#: openerp.glade:1378
 msgid "Tabs default position"
 msgstr ""
 
-#: terp.glade:1388
+#: openerp.glade:1388
 msgid "Top"
 msgstr ""
 
-#: terp.glade:1398
+#: openerp.glade:1398
 msgid "Left"
 msgstr ""
 
-#: terp.glade:1409
+#: openerp.glade:1409
 msgid "Right"
 msgstr ""
 
-#: terp.glade:1420
+#: openerp.glade:1420
 msgid "Bottom"
 msgstr ""
 
-#: terp.glade:1435
+#: openerp.glade:1435
 msgid "Tabs default orientation"
 msgstr ""
 
-#: terp.glade:1445
+#: openerp.glade:1445
 msgid "Horizontal"
 msgstr ""
 
-#: terp.glade:1455
+#: openerp.glade:1455
 msgid "Vertical"
 msgstr ""
 
-#: terp.glade:1474
+#: openerp.glade:1474
 #, fuzzy
 msgid "_Print"
 msgstr "Друк"
 
-#: terp.glade:1495
+#: openerp.glade:1495
 #, fuzzy
 msgid "Previe_w before print"
 msgstr "Перегляд перед друком"
 
-#: terp.glade:1515
+#: openerp.glade:1515
 #, fuzzy
 msgid "_Save options"
 msgstr "Зберегти опції"
 
-#: terp.glade:1540
+#: openerp.glade:1540
 #, fuzzy
 msgid "_Plugins"
 msgstr "Плагіни"
 
-#: terp.glade:1551
+#: openerp.glade:1551
 #, fuzzy
 msgid "_Execute a plugin"
 msgstr "Виконати плагін"
 
-#: terp.glade:1577
+#: openerp.glade:1577
 #, fuzzy
 msgid "_Shortcuts"
 msgstr "Закладки"
 
-#: terp.glade:1586
+#: openerp.glade:1586
 #, fuzzy
 msgid "_Help"
 msgstr "Допомога"
 
-#: terp.glade:1595 terp.glade:10821
+#: openerp.glade:1595 openerp.glade:10821
 #, fuzzy
 msgid "Support Request"
 msgstr "Відіслати запит"
 
-#: terp.glade:1622
+#: openerp.glade:1622
 msgid "User _Manual"
 msgstr ""
 
-#: terp.glade:1643
+#: openerp.glade:1643
 msgid "_Contextual Help"
 msgstr ""
 
-#: terp.glade:1665
+#: openerp.glade:1665
 #, fuzzy
 msgid "_Tips"
 msgstr "Поради"
 
-#: terp.glade:1686
+#: openerp.glade:1686
 #, fuzzy
 msgid "Keyboard Shortcuts"
 msgstr "Закладки"
 
-#: terp.glade:1701
+#: openerp.glade:1701
 #, fuzzy
 msgid "_License"
 msgstr "Ліцензія"
 
-#: terp.glade:1722
+#: openerp.glade:1722
 #, fuzzy
 msgid "_About..."
 msgstr "Про..."
 
-#: terp.glade:1764 terp.glade:3032
+#: openerp.glade:1764 openerp.glade:3032
 msgid "Create a new resource"
 msgstr "Створити новий ресурс"
 
-#: terp.glade:1780
+#: openerp.glade:1780
 msgid "Edit / Save this resource"
 msgstr "Редагування / зберегти ресурс"
 
-#: terp.glade:1809
+#: openerp.glade:1809
 msgid "Delete this resource"
 msgstr "Видалити ресурс"
 
-#: terp.glade:1838
+#: openerp.glade:1838
 #, fuzzy
 msgid "Find a resource"
 msgstr "Виберіть ресурс !"
 
-#: terp.glade:1854
+#: openerp.glade:1854
 msgid "Go to previous matched search"
 msgstr "Перейти до попереднього"
 
-#: terp.glade:1870
+#: openerp.glade:1870
 msgid "Go to next matched resource"
 msgstr "Перейти до наступного"
 
-#: terp.glade:1886
+#: openerp.glade:1886
 msgid "Switch current view: form / list / graph"
 msgstr ""
 
-#: terp.glade:1887
+#: openerp.glade:1887
 msgid "View"
 msgstr ""
 
-#: terp.glade:1904
+#: openerp.glade:1904
 #, fuzzy
 msgid "Reload / Undo Form"
 msgstr "Поновити"
 
-#: terp.glade:1905
+#: openerp.glade:1905
 #, fuzzy
 msgid "Reload"
 msgstr "Поновити"
 
-#: terp.glade:1923 terp.glade:1924
+#: openerp.glade:1923 openerp.glade:1924
 #, fuzzy
 msgid "Menu"
 msgstr "Меню"
 
-#: terp.glade:1954
+#: openerp.glade:1954
 msgid "Launch actions about this resource"
 msgstr "Виконати дію для цього ресурсу"
 
-#: terp.glade:1955
+#: openerp.glade:1955
 msgid "Action"
 msgstr "Дія"
 
-#: terp.glade:1972
+#: openerp.glade:1972
 msgid "Print documents"
 msgstr "Друкувати документ"
 
-#: terp.glade:2001
+#: openerp.glade:2001
 #, fuzzy
 msgid "Add an attachment to this resource"
 msgstr "Виконати дію для цього ресурсу"
 
-#: terp.glade:2002
+#: openerp.glade:2002
 #, fuzzy
 msgid "Attachment"
 msgstr "Додатки"
 
-#: terp.glade:2032
+#: openerp.glade:2032
 msgid "Close this window"
 msgstr "Закрити це вікно"
 
-#: terp.glade:2089
+#: openerp.glade:2089
 msgid "Requests:"
 msgstr "Запити:"
 
-#: terp.glade:2128
+#: openerp.glade:2128
 msgid "Read my Requests"
 msgstr "Показати мої запити"
 
-#: terp.glade:2156
+#: openerp.glade:2156
 msgid "Send a new request"
 msgstr "Відіслати новий запит"
 
-#: terp.glade:2215
+#: openerp.glade:2215
 msgid "OpenERP - Tree Resources"
 msgstr "OpenERP - дерево ресурсів"
 
-#: terp.glade:2350
+#: openerp.glade:2350
 msgid "Shortcuts"
 msgstr "Закладки"
 
-#: terp.glade:2454
+#: openerp.glade:2454
 msgid "OpenERP - Forms"
 msgstr "OpenERP - форми"
 
-#: terp.glade:2502
+#: openerp.glade:2502
 #, fuzzy
 msgid "State:"
 msgstr "Статус:"
 
-#: terp.glade:2551
+#: openerp.glade:2551
 msgid "OpenERP - About"
 msgstr "OpenERP - Про"
 
-#: terp.glade:2608
+#: openerp.glade:2608
 msgid ""
 "<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
 
-#: terp.glade:2677
+#: openerp.glade:2677
 msgid ""
 "\n"
 "OpenERP - GTK Client - v%s\n"
@@ -515,12 +515,12 @@ msgid ""
 "More Info on www.OpenERP.com !"
 msgstr ""
 
-#: terp.glade:2724
+#: openerp.glade:2724
 #, fuzzy
 msgid "_OpenERP"
 msgstr "Про OpenERP"
 
-#: terp.glade:2776
+#: openerp.glade:2776
 msgid ""
 "\n"
 "(c) 2003-TODAY - Tiny sprl\n"
@@ -536,220 +536,220 @@ msgid ""
 "Web: http://tiny.be"
 msgstr ""
 
-#: terp.glade:2823
+#: openerp.glade:2823
 #, fuzzy
 msgid "_Contact"
 msgstr "Контакти"
 
-#: terp.glade:2869
+#: openerp.glade:2869
 msgid "OpenERP - forms widget"
 msgstr "OpenERP - елементи форми"
 
-#: terp.glade:2936
+#: openerp.glade:2936
 msgid "Open the calendar widget"
 msgstr "Відкрити календар"
 
-#: terp.glade:3059
+#: openerp.glade:3059
 #, fuzzy
 msgid "Search / Open a resource"
 msgstr "Пошук ресурсу"
 
-#: terp.glade:3169
+#: openerp.glade:3169
 #, fuzzy
 msgid "Titre"
 msgstr "Дерево"
 
-#: terp.glade:3190
+#: openerp.glade:3190
 msgid "Set to default value"
 msgstr "Встановити значення за змовчуванням"
 
-#: terp.glade:3199
+#: openerp.glade:3199
 #, fuzzy
 msgid "Set Default"
 msgstr "Встановити за _змовчуванням"
 
-#: terp.glade:3219 terp.glade:3505
+#: openerp.glade:3219 openerp.glade:3505
 msgid "Create a new entry"
 msgstr "Створити новий запис"
 
-#: terp.glade:3246
+#: openerp.glade:3246
 #, fuzzy
 msgid "Edit this entry"
 msgstr "Видалити запис"
 
-#: terp.glade:3273
+#: openerp.glade:3273
 msgid "Remove this entry"
 msgstr "Видалити запис"
 
-#: terp.glade:3311
+#: openerp.glade:3311
 msgid "Previous"
 msgstr "Попередній"
 
-#: terp.glade:3363
+#: openerp.glade:3363
 msgid "Next"
 msgstr "Наступний"
 
-#: terp.glade:3523
+#: openerp.glade:3523
 msgid "Remove selected entry"
 msgstr "Видалити вибраний запис"
 
-#: terp.glade:4301
+#: openerp.glade:4301
 msgid "OpenERP - Date selection"
 msgstr "OpenERP - Вибір дати"
 
-#: terp.glade:4383 terp.glade:11404
+#: openerp.glade:4383 openerp.glade:11404
 msgid "OpenERP - Confirmation"
 msgstr "OpenERP - Підтвердження"
 
-#: terp.glade:4471 terp.glade:11505 terp.glade:13997
+#: openerp.glade:4471 openerp.glade:11505 openerp.glade:13997
 msgid "Hello World!"
 msgstr "Привіт Світ!"
 
-#: terp.glade:4504
+#: openerp.glade:4504
 #, fuzzy
 msgid "OpenERP - Selection"
 msgstr "OpenERP - вибір"
 
-#: terp.glade:4577
+#: openerp.glade:4577
 msgid "Your selection:"
 msgstr "Ваш вибір:"
 
-#: terp.glade:4652
+#: openerp.glade:4652
 msgid "OpenERP - Filter"
 msgstr "OpenERP - Фільтр"
 
-#: terp.glade:4724
+#: openerp.glade:4724
 #, fuzzy
 msgid "S_earch:"
 msgstr "Пошук:"
 
-#: terp.glade:4770
+#: openerp.glade:4770
 #, fuzzy
 msgid "on _field:"
 msgstr "за полем:"
 
-#: terp.glade:4795
+#: openerp.glade:4795
 msgid "test"
 msgstr ""
 
-#: terp.glade:4810
+#: openerp.glade:4810
 #, fuzzy
 msgid "_Select"
 msgstr "Вибрати"
 
-#: terp.glade:4827
+#: openerp.glade:4827
 #, fuzzy
 msgid "_Unselect"
 msgstr "Скасувати вибір"
 
-#: terp.glade:4854
+#: openerp.glade:4854
 #, fuzzy
 msgid "Filter:"
 msgstr "Фільтр:"
 
-#: terp.glade:4880
+#: openerp.glade:4880
 #, fuzzy
 msgid "AL_L"
 msgstr "Усі"
 
-#: terp.glade:4897
+#: openerp.glade:4897
 #, fuzzy
 msgid "N_ONE"
 msgstr "Жодного"
 
-#: terp.glade:4969
+#: openerp.glade:4969
 msgid "<b><u>Actions</u></b>"
 msgstr "<b><u>Дії</u></b>"
 
-#: terp.glade:5009
+#: openerp.glade:5009
 msgid "OpenERP - Dialog"
 msgstr "OpenERP - Діалог"
 
-#: terp.glade:5055
+#: openerp.glade:5055
 msgid "Set to _Default"
 msgstr "Встановити за _змовчуванням"
 
-#: terp.glade:5082
+#: openerp.glade:5082
 #, fuzzy
 msgid "Value _Preference"
 msgstr "Налаштування"
 
-#: terp.glade:5104
+#: openerp.glade:5104
 #, fuzzy
 msgid "OpenERP, Field Preference target"
 msgstr "OpenERP - Налаштування"
 
-#: terp.glade:5177
+#: openerp.glade:5177
 #, fuzzy
 msgid "Default _value:"
 msgstr "Значення за змовчуванням:"
 
-#: terp.glade:5272
+#: openerp.glade:5272
 #, fuzzy
 msgid "_Domain:"
 msgstr "Домен:"
 
-#: terp.glade:5301
+#: openerp.glade:5301
 #, fuzzy
 msgid "Field _Name:"
 msgstr "Назва поля:"
 
-#: terp.glade:5363
+#: openerp.glade:5363
 msgid "<b>Value applicable if:</b>"
 msgstr ""
 
-#: terp.glade:5422
+#: openerp.glade:5422
 #, fuzzy
 msgid "_only for you"
 msgstr "тільки для Вас"
 
-#: terp.glade:5441
+#: openerp.glade:5441
 #, fuzzy
 msgid "for _all users"
 msgstr "для усіх"
 
-#: terp.glade:5464
+#: openerp.glade:5464
 msgid "<b>Value applicable for:</b>"
 msgstr ""
 
-#: terp.glade:5507
+#: openerp.glade:5507
 msgid "OpenERP - Export to CSV"
 msgstr "OpenERP - експорт у CSV"
 
-#: terp.glade:5622
+#: openerp.glade:5622
 #, fuzzy
 msgid "<b>Predefined exports</b>"
 msgstr "<b>Поля для експорту</b>"
 
-#: terp.glade:5701 terp.glade:13105
+#: openerp.glade:5701 openerp.glade:13105
 msgid "<b>All fields</b>"
 msgstr "<b>Усі поля</b>"
 
-#: terp.glade:5781 terp.glade:13185
+#: openerp.glade:5781 openerp.glade:13185
 #, fuzzy
 msgid "_Add"
 msgstr "Додати"
 
-#: terp.glade:5860 terp.glade:13264
+#: openerp.glade:5860 openerp.glade:13264
 #, fuzzy
 msgid "_Remove"
 msgstr "Видалити"
 
-#: terp.glade:5939
+#: openerp.glade:5939
 #, fuzzy
 msgid "_Nothing"
 msgstr "Нічого"
 
-#: terp.glade:6029
+#: openerp.glade:6029
 #, fuzzy
 msgid "Save List"
 msgstr "Зберегти опції"
 
-#: terp.glade:6115
+#: openerp.glade:6115
 msgid "<b>Fields to export</b>"
 msgstr "<b>Поля для експорту</b>"
 
-#: terp.glade:6167
+#: openerp.glade:6167
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
@@ -757,49 +757,49 @@ msgstr ""
 "Відкрити у Excel\n"
 "Зберегти як CSV"
 
-#: terp.glade:6194
+#: openerp.glade:6194
 #, fuzzy
 msgid "Add _field names"
 msgstr "Добавити поля:"
 
-#: terp.glade:6214
+#: openerp.glade:6214
 #, fuzzy
 msgid "<b>Opti_ons</b>"
 msgstr "<b>Опції</b>"
 
-#: terp.glade:6254
+#: openerp.glade:6254
 msgid "OpenERP - Search"
 msgstr "OpenERP - Пошук"
 
-#: terp.glade:6384
+#: openerp.glade:6384
 msgid "OpenERP - Search Widgets"
 msgstr "OpenERP - Вікно пошуку"
 
-#: terp.glade:6433 terp.glade:6538 terp.glade:6742
+#: openerp.glade:6433 openerp.glade:6538 openerp.glade:6742
 msgid "-"
 msgstr "-"
 
-#: terp.glade:6491
+#: openerp.glade:6491
 msgid "Date de début"
 msgstr ""
 
-#: terp.glade:6664
+#: openerp.glade:6664
 msgid "Search with this name"
 msgstr "Шукати за вказаним ім'ям"
 
-#: terp.glade:6691
+#: openerp.glade:6691
 msgid "Clear the field"
 msgstr "Очистити поле"
 
-#: terp.glade:6756
+#: openerp.glade:6756
 msgid "Yes"
 msgstr "Так!"
 
-#: terp.glade:6776
+#: openerp.glade:6776
 msgid "No"
 msgstr "Ні"
 
-#: terp.glade:6819
+#: openerp.glade:6819
 msgid ""
 "\n"
 "Yes\n"
@@ -809,42 +809,42 @@ msgstr ""
 "Так!\n"
 "Ні"
 
-#: terp.glade:6844
+#: openerp.glade:6844
 msgid "OpenERP - Attachment"
 msgstr "OpenERP - Додатки"
 
-#: terp.glade:6914
+#: openerp.glade:6914
 msgid "Filename:"
 msgstr "Назва файлу:"
 
-#: terp.glade:6986
+#: openerp.glade:6986
 msgid "Description:"
 msgstr "Опис:"
 
-#: terp.glade:7090
+#: openerp.glade:7090
 #, fuzzy
 msgid "Save text"
 msgstr "Зберегти"
 
-#: terp.glade:7345
+#: openerp.glade:7345
 msgid "OpenERP - Error"
 msgstr "OpenERP - Помилка"
 
-#: terp.glade:7404
+#: openerp.glade:7404
 #, fuzzy
 msgid "Application Error!"
 msgstr "Помилка у программі !"
 
-#: terp.glade:7499
+#: openerp.glade:7499
 #, fuzzy
 msgid "<b>Error 404</b>"
 msgstr "<b>Код помилки:</b>"
 
-#: terp.glade:7524
+#: openerp.glade:7524
 msgid "<b>Error code:</b>"
 msgstr "<b>Код помилки:</b>"
 
-#: terp.glade:7551
+#: openerp.glade:7551
 msgid ""
 "This Page does not exist !\n"
 "Please retry"
@@ -852,26 +852,26 @@ msgstr ""
 "Сторінка неіснує!\n"
 "Спробуйте ще раз"
 
-#: terp.glade:7588
+#: openerp.glade:7588
 msgid "<i>Click on the Support Request tab if you need more help !</i>"
 msgstr ""
 
-#: terp.glade:7626
+#: openerp.glade:7626
 #, fuzzy
 msgid "De_scription"
 msgstr "Опис"
 
-#: terp.glade:7676
+#: openerp.glade:7676
 #, fuzzy
 msgid "Error details"
 msgstr "Показати деталі"
 
-#: terp.glade:7692
+#: openerp.glade:7692
 #, fuzzy
 msgid "_Details"
 msgstr "Деталі"
 
-#: terp.glade:7735
+#: openerp.glade:7735
 msgid ""
 "<b>Complete this form to submit your bug and/or request a support.</b>\n"
 "<i>\n"
@@ -881,41 +881,41 @@ msgid ""
 "</i>"
 msgstr ""
 
-#: terp.glade:7785 terp.glade:10955
+#: openerp.glade:7785 openerp.glade:10955
 #, fuzzy
 msgid "<b>Your name:</b>"
 msgstr "<b>Ваше ім'я: </b>"
 
-#: terp.glade:7813 terp.glade:10983
+#: openerp.glade:7813 openerp.glade:10983
 #, fuzzy
 msgid "<b>Your Company:</b>"
 msgstr "<b>Підприємство: </b>"
 
-#: terp.glade:7841
+#: openerp.glade:7841
 #, fuzzy
 msgid "<b>Your Email:</b>"
 msgstr "<b>Електронна пошта: </b>"
 
-#: terp.glade:7911
+#: openerp.glade:7911
 #, fuzzy
 msgid "Explain what you did:"
 msgstr "Поясніть що ви робили: "
 
-#: terp.glade:7939
+#: openerp.glade:7939
 #, fuzzy
 msgid "Others Comments:"
 msgstr "Примітки: "
 
-#: terp.glade:8094
+#: openerp.glade:8094
 msgid "Send Support Request"
 msgstr "Відіслати запит"
 
-#: terp.glade:8141
+#: openerp.glade:8141
 #, fuzzy
 msgid "<b>support contract id</b>"
 msgstr "<b>Запит</b>"
 
-#: terp.glade:8190 terp.glade:11264
+#: openerp.glade:8190 openerp.glade:11264
 msgid ""
 "Not Urgent\n"
 "Medium\n"
@@ -927,180 +927,180 @@ msgstr ""
 "Терміново\n"
 "Дуже терміново"
 
-#: terp.glade:8211 terp.glade:11285
+#: openerp.glade:8211 openerp.glade:11285
 #, fuzzy
 msgid "Emergency:"
 msgstr "Терміновість: "
 
-#: terp.glade:8239
+#: openerp.glade:8239
 #, fuzzy
 msgid "Phone Number:"
 msgstr "Телефон: "
 
-#: terp.glade:8327
+#: openerp.glade:8327
 #, fuzzy
 msgid "<b>_Support Request</b>"
 msgstr "<b>Запит</b>"
 
-#: terp.glade:8366
+#: openerp.glade:8366
 msgid "OpenERP - Ressource Edit"
 msgstr "OpenERP - редагування ресурсу"
 
-#: terp.glade:8437
+#: openerp.glade:8437
 msgid "OpenERP - Link"
 msgstr "OpenERP - зв'язок"
 
-#: terp.glade:8535
+#: openerp.glade:8535
 msgid "OpenERP - List"
 msgstr "OpenERP - Список"
 
-#: terp.glade:8604
+#: openerp.glade:8604
 msgid "OpenERP - Preferences"
 msgstr "OpenERP - Налаштування"
 
-#: terp.glade:8674
+#: openerp.glade:8674
 msgid "<b>Edit resource preferences</b>"
 msgstr ""
 
-#: terp.glade:8722
+#: openerp.glade:8722
 msgid "Tip of the Day"
 msgstr "Порада дня"
 
-#: terp.glade:8796
+#: openerp.glade:8796
 #, fuzzy
 msgid "Pre_vious Tip"
 msgstr "Попередня порада"
 
-#: terp.glade:8872
+#: openerp.glade:8872
 #, fuzzy
 msgid "Ne_xt Tip"
 msgstr "Наступна порада"
 
-#: terp.glade:8977
+#: openerp.glade:8977
 #, fuzzy
 msgid "_Display a new tip next time?"
 msgstr "Показувати наступного разу?"
 
-#: terp.glade:9017
+#: openerp.glade:9017
 #, fuzzy
 msgid "OpenERP - License"
 msgstr "OpenERP - Лицензія"
 
-#: terp.glade:9076
+#: openerp.glade:9076
 #, fuzzy
 msgid "OpenERP license"
 msgstr "OpenERP Client v2.1"
 
-#: terp.glade:9250
+#: openerp.glade:9250
 msgid "OpenERP - Date & Time selection"
 msgstr "OpenERP - Вибір дати та часу"
 
-#: terp.glade:9328
+#: openerp.glade:9328
 #, fuzzy
 msgid "Hour:"
 msgstr "Година :"
 
-#: terp.glade:9372
+#: openerp.glade:9372
 #, fuzzy
 msgid "Minute:"
 msgstr "Хвилина :"
 
-#: terp.glade:9446
+#: openerp.glade:9446
 #, fuzzy
 msgid "Go to resource ID"
 msgstr "Перейти до ресурсу з ID..."
 
-#: terp.glade:9520
+#: openerp.glade:9520
 msgid "Search ID:"
 msgstr "Шукати ID:"
 
-#: terp.glade:9602
+#: openerp.glade:9602
 #, fuzzy
 msgid "OpenERP Survey"
 msgstr "OpenERP - Пошук"
 
-#: terp.glade:9674
+#: openerp.glade:9674
 #, fuzzy
 msgid "<b>OpenERP Survey</b>"
 msgstr "OpenERP - Пошук"
 
-#: terp.glade:9699
+#: openerp.glade:9699
 msgid ""
 "<i>Please fill in the following form in order to help us to improve OpenERP "
 "and better target new developments.</i>"
 msgstr ""
 
-#: terp.glade:9752
+#: openerp.glade:9752
 msgid "Industry:"
 msgstr ""
 
-#: terp.glade:9781
+#: openerp.glade:9781
 msgid "# Employees:"
 msgstr ""
 
-#: terp.glade:9882
+#: openerp.glade:9882
 #, fuzzy
 msgid "Country:"
 msgstr "Година :"
 
-#: terp.glade:9910
+#: openerp.glade:9910
 #, fuzzy
 msgid "Your Role:"
 msgstr "Ваш вибір:"
 
-#: terp.glade:9974
+#: openerp.glade:9974
 #, fuzzy
 msgid "System:"
 msgstr "Статус:"
 
-#: terp.glade:10044
+#: openerp.glade:10044
 msgid "How did you hear about us:"
 msgstr ""
 
-#: terp.glade:10097
+#: openerp.glade:10097
 msgid "Open Source:"
 msgstr ""
 
-#: terp.glade:10423
+#: openerp.glade:10423
 #, fuzzy
 msgid "<b>Your company:</b>"
 msgstr "<b>Підприємство: </b>"
 
-#: terp.glade:10485
+#: openerp.glade:10485
 msgid "We plan to use OpenERP"
 msgstr ""
 
-#: terp.glade:10504
+#: openerp.glade:10504
 msgid "We plan to offer services on OpenERP"
 msgstr ""
 
-#: terp.glade:10529
+#: openerp.glade:10529
 msgid "Tell us why you try OpenERP and what are your current softwares:"
 msgstr ""
 
-#: terp.glade:10594
+#: openerp.glade:10594
 #, fuzzy
 msgid "<b>Your interrest:</b>"
 msgstr "<b>Ваше ім'я: </b>"
 
-#: terp.glade:10652
+#: openerp.glade:10652
 msgid "(Get OpenERP announces, docs and new releases by email)"
 msgstr ""
 
-#: terp.glade:10680
+#: openerp.glade:10680
 #, fuzzy
 msgid "Company:"
 msgstr "Домен:"
 
-#: terp.glade:10709
+#: openerp.glade:10709
 msgid "E-Mail:"
 msgstr ""
 
-#: terp.glade:10783
+#: openerp.glade:10783
 msgid "<b>Keep Informed</b>"
 msgstr ""
 
-#: terp.glade:10906
+#: openerp.glade:10906
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
 "<i>\n"
@@ -1109,491 +1109,491 @@ msgid ""
 "or an official partner.</i>"
 msgstr ""
 
-#: terp.glade:11011
+#: openerp.glade:11011
 #, fuzzy
 msgid "<b>Your email:</b>"
 msgstr "<b>Електронна пошта: </b>"
 
-#: terp.glade:11081
+#: openerp.glade:11081
 #, fuzzy
 msgid "Explain your problem:"
 msgstr "Поясніть що ви робили: "
 
-#: terp.glade:11109
+#: openerp.glade:11109
 #, fuzzy
 msgid "Other comments:"
 msgstr "Примітки: "
 
-#: terp.glade:11215
+#: openerp.glade:11215
 #, fuzzy
 msgid "<b>Support contract id:</b>"
 msgstr "<b>Запит</b>"
 
-#: terp.glade:11313
+#: openerp.glade:11313
 #, fuzzy
 msgid "Phone number:"
 msgstr "Телефон: "
 
-#: terp.glade:11538
+#: openerp.glade:11538
 #, fuzzy
 msgid "Keyboard shortcuts"
 msgstr "Закладки"
 
-#: terp.glade:11609
+#: openerp.glade:11609
 msgid "<Ctrl> + O"
 msgstr ""
 
-#: terp.glade:11637
+#: openerp.glade:11637
 #, fuzzy
 msgid "Connect"
 msgstr "З'єднатись..."
 
-#: terp.glade:11665
+#: openerp.glade:11665
 msgid "<Ctrl> + F"
 msgstr ""
 
-#: terp.glade:11693
+#: openerp.glade:11693
 #, fuzzy
 msgid "Find / Search"
 msgstr "Кінець пошуку"
 
-#: terp.glade:11721
+#: openerp.glade:11721
 msgid "<Ctrl> + D"
 msgstr ""
 
-#: terp.glade:11749
+#: openerp.glade:11749
 msgid "Delete"
 msgstr "Видалити"
 
-#: terp.glade:11777
+#: openerp.glade:11777
 msgid "<Ctrl> + N"
 msgstr ""
 
-#: terp.glade:11805
+#: openerp.glade:11805
 msgid "New"
 msgstr "Новий"
 
-#: terp.glade:11833
+#: openerp.glade:11833
 msgid "<Ctrl> + <PgUp>"
 msgstr ""
 
-#: terp.glade:11861
+#: openerp.glade:11861
 #, fuzzy
 msgid "Previous tab"
 msgstr "Попередній"
 
-#: terp.glade:11889
+#: openerp.glade:11889
 msgid "<Ctrl> + <PgDn>"
 msgstr ""
 
-#: terp.glade:11945
+#: openerp.glade:11945
 msgid "<Ctrl> + S"
 msgstr ""
 
-#: terp.glade:11973
+#: openerp.glade:11973
 msgid "<Ctrl> + W"
 msgstr ""
 
-#: terp.glade:12001
+#: openerp.glade:12001
 msgid "Save"
 msgstr "Зберегти"
 
-#: terp.glade:12057
+#: openerp.glade:12057
 msgid "<PgUp>"
 msgstr ""
 
-#: terp.glade:12085
+#: openerp.glade:12085
 msgid "<PgDn>"
 msgstr ""
 
-#: terp.glade:12113
+#: openerp.glade:12113
 #, fuzzy
 msgid "Previous record"
 msgstr "Попередній"
 
-#: terp.glade:12141
+#: openerp.glade:12141
 #, fuzzy
 msgid "Next record"
 msgstr "Наступний: Не вибрано жодного запису!"
 
-#: terp.glade:12169
+#: openerp.glade:12169
 msgid "<Ctrl> + L"
 msgstr ""
 
-#: terp.glade:12197
+#: openerp.glade:12197
 msgid "Switch view mode"
 msgstr ""
 
-#: terp.glade:12225
+#: openerp.glade:12225
 msgid "<Ctrl> + <Enter>"
 msgstr ""
 
-#: terp.glade:12253
+#: openerp.glade:12253
 #, fuzzy
 msgid "Save and Close window"
 msgstr "Закрити вікно"
 
-#: terp.glade:12281
+#: openerp.glade:12281
 msgid "<i>When editing a resource in a popup window</i>"
 msgstr ""
 
-#: terp.glade:12309
+#: openerp.glade:12309
 msgid "<Ctrl> + <Esc>"
 msgstr ""
 
-#: terp.glade:12337
+#: openerp.glade:12337
 msgid "Close window without saving"
 msgstr ""
 
-#: terp.glade:12365
+#: openerp.glade:12365
 msgid "<b>Shortcuts for OpenERP</b>"
 msgstr ""
 
-#: terp.glade:12399
+#: openerp.glade:12399
 #, fuzzy
 msgid "Main Shortcuts"
 msgstr "Закладки"
 
-#: terp.glade:12432
+#: openerp.glade:12432
 msgid "<Ctrl> + X"
 msgstr ""
 
-#: terp.glade:12460
+#: openerp.glade:12460
 msgid "<Ctrl> + C"
 msgstr ""
 
-#: terp.glade:12488
+#: openerp.glade:12488
 msgid "<Ctrl> + V"
 msgstr ""
 
-#: terp.glade:12516
+#: openerp.glade:12516
 #, fuzzy
 msgid "Cut selected text"
 msgstr "Видалити вибраний запис"
 
-#: terp.glade:12544
+#: openerp.glade:12544
 #, fuzzy
 msgid "Copy selected text"
 msgstr "Видалити вибраний запис"
 
-#: terp.glade:12572
+#: openerp.glade:12572
 #, fuzzy
 msgid "Paste selected text"
 msgstr "Видалити вибраний запис"
 
-#: terp.glade:12600
+#: openerp.glade:12600
 msgid "<Tab>"
 msgstr ""
 
-#: terp.glade:12628
+#: openerp.glade:12628
 msgid "Next editable widget"
 msgstr ""
 
-#: terp.glade:12656
+#: openerp.glade:12656
 msgid "<Shist> + <Tab>"
 msgstr ""
 
-#: terp.glade:12684
+#: openerp.glade:12684
 #, fuzzy
 msgid "Previous editable widget"
 msgstr "Попередній"
 
-#: terp.glade:12712
+#: openerp.glade:12712
 msgid "<Enter>"
 msgstr ""
 
-#: terp.glade:12740
+#: openerp.glade:12740
 #, fuzzy
 msgid "Auto-Complete text field"
 msgstr "Очистити поле"
 
-#: terp.glade:12768
+#: openerp.glade:12768
 msgid "F1"
 msgstr ""
 
-#: terp.glade:12796
+#: openerp.glade:12796
 msgid "Add a new line/field"
 msgstr ""
 
-#: terp.glade:12824
+#: openerp.glade:12824
 msgid "Open current field"
 msgstr ""
 
-#: terp.glade:12852
+#: openerp.glade:12852
 #, fuzzy
 msgid "<b>Shortcuts in text entries</b>"
 msgstr "<b>Ваше ім'я: </b>"
 
-#: terp.glade:12880
+#: openerp.glade:12880
 #, fuzzy
 msgid "<b>Shortcuts in relation fields</b>"
 msgstr "<b>Ваше ім'я: </b>"
 
-#: terp.glade:12909
+#: openerp.glade:12909
 msgid "F2"
 msgstr ""
 
-#: terp.glade:12943
+#: openerp.glade:12943
 #, fuzzy
 msgid "Edition Widgets"
 msgstr "Редагується документ:"
 
-#: terp.glade:12974
+#: openerp.glade:12974
 #, fuzzy
 msgid "Import from CSV"
 msgstr "Імпорт CSV файлу"
 
-#: terp.glade:13343
+#: openerp.glade:13343
 #, fuzzy
 msgid "N_othing"
 msgstr "Нічого"
 
-#: terp.glade:13433
+#: openerp.glade:13433
 msgid "Auto-Detect"
 msgstr ""
 
-#: terp.glade:13519
+#: openerp.glade:13519
 msgid "<b>Fields to import</b>"
 msgstr "<b>Поля для імпорту</b>"
 
-#: terp.glade:13587
+#: openerp.glade:13587
 #, fuzzy
 msgid "File to Import:"
 msgstr "<b>Поля для імпорту</b>"
 
-#: terp.glade:13612
+#: openerp.glade:13612
 #, fuzzy
 msgid "Open..."
 msgstr "Відкрити"
 
-#: terp.glade:13653
+#: openerp.glade:13653
 #, fuzzy
 msgid "Field Separater:"
 msgstr "Назва поля:"
 
-#: terp.glade:13681
+#: openerp.glade:13681
 msgid "Encoding:"
 msgstr ""
 
-#: terp.glade:13732
+#: openerp.glade:13732
 msgid "Text Delimiter:"
 msgstr ""
 
-#: terp.glade:13783
+#: openerp.glade:13783
 msgid "Lines to Skip:"
 msgstr ""
 
-#: terp.glade:13854
+#: openerp.glade:13854
 msgid "CSV Parameters"
 msgstr ""
 
-#: terp.glade:13905
+#: openerp.glade:13905
 #, fuzzy
 msgid "OpenERP"
 msgstr "Про OpenERP"
 
-#: terp.glade:14056
+#: openerp.glade:14056
 #, fuzzy
 msgid "Server"
 msgstr "Сервер:"
 
-#: terp.glade:14119
+#: openerp.glade:14119
 msgid "<b>Connect to a OpenERP server</b>"
 msgstr ""
 
-#: terp.glade:14165
+#: openerp.glade:14165
 msgid "Port:"
 msgstr "Порт:"
 
-#: terp.glade:14237
+#: openerp.glade:14237
 #, fuzzy
 msgid "Protocol connection:"
 msgstr "Оберіть Вашу дію"
 
-#: terp.glade:14319
+#: openerp.glade:14319
 #, fuzzy
 msgid "Choose a database..."
 msgstr "Виберіть дату"
 
-#: terp.glade:14389
+#: openerp.glade:14389
 #, fuzzy
 msgid "<b>Backup a database</b>"
 msgstr "Створити новий ресурс"
 
-#: terp.glade:14716
+#: openerp.glade:14716
 #, fuzzy
 msgid "Restore a database"
 msgstr "Виберіть дату"
 
-#: terp.glade:14786
+#: openerp.glade:14786
 #, fuzzy
 msgid "<b>Restore a database</b>"
 msgstr "Створити новий ресурс"
 
-#: terp.glade:14865 terp.glade:15430 terp.glade:16074
+#: openerp.glade:14865 openerp.glade:15430 openerp.glade:16074
 msgid "http://localhost:8069"
 msgstr ""
 
-#: terp.glade:15016 terp.glade:15637
+#: openerp.glade:15016 openerp.glade:15637
 #, fuzzy
 msgid "New database name:"
 msgstr "Виберіть дату"
 
-#: terp.glade:15066
+#: openerp.glade:15066
 msgid "(must not contain any special char)"
 msgstr ""
 
-#: terp.glade:15123
+#: openerp.glade:15123
 #, fuzzy
 msgid "Operation in progress"
 msgstr ""
 "Operation failed !\n"
 "I/O error"
 
-#: terp.glade:15182
+#: openerp.glade:15182
 #, fuzzy
 msgid "<b>Operation in progress</b>"
 msgstr ""
 "Operation failed !\n"
 "I/O error"
 
-#: terp.glade:15218
+#: openerp.glade:15218
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
 
-#: terp.glade:15281
+#: openerp.glade:15281
 #, fuzzy
 msgid "Create a new database"
 msgstr "Створити новий запис"
 
-#: terp.glade:15344
+#: openerp.glade:15344
 #, fuzzy
 msgid "<b>Create a new database</b>"
 msgstr "Створити новий ресурс"
 
-#: terp.glade:15397
+#: openerp.glade:15397
 #, fuzzy
 msgid "OpenERP server:"
 msgstr "OpenERP - Пошук"
 
-#: terp.glade:15426
+#: openerp.glade:15426
 msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
 
-#: terp.glade:15530
+#: openerp.glade:15530
 #, fuzzy
 msgid "Super admin password:"
 msgstr "Пароль:"
 
-#: terp.glade:15558
+#: openerp.glade:15558
 #, fuzzy
 msgid "Default language:"
 msgstr "Значення за змовчуванням:"
 
-#: terp.glade:15586
+#: openerp.glade:15586
 msgid "Load demonstration data:"
 msgstr ""
 
-#: terp.glade:15614
+#: openerp.glade:15614
 msgid ""
 "Check this box if you want demo data to be installed on your new database."
 msgstr ""
 
-#: terp.glade:15665
+#: openerp.glade:15665
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
 
-#: terp.glade:15702
+#: openerp.glade:15702
 msgid "(use 'admin', if you did not changed it)"
 msgstr ""
 
-#: terp.glade:15730
+#: openerp.glade:15730
 msgid ""
 "This is the password of the user that have the rights to administer "
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 
-#: terp.glade:15754
+#: openerp.glade:15754
 #, fuzzy
 msgid "Hello World"
 msgstr "Привіт Світ!"
 
-#: terp.glade:15775
+#: openerp.glade:15775
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
 
-#: terp.glade:15800
+#: openerp.glade:15800
 msgid "(must not contain any special character)"
 msgstr ""
 
-#: terp.glade:15838
+#: openerp.glade:15838
 #, fuzzy
 msgid "Change password"
 msgstr "Змінити корінь"
 
-#: terp.glade:15911
+#: openerp.glade:15911
 #, fuzzy
 msgid "<b>Change your super admin password</b>"
 msgstr "Пароль:"
 
-#: terp.glade:15957
+#: openerp.glade:15957
 #, fuzzy
 msgid "New password confirmation:"
 msgstr "Пароль:"
 
-#: terp.glade:15985
+#: openerp.glade:15985
 #, fuzzy
 msgid "New password:"
 msgstr "Пароль:"
 
-#: terp.glade:16013
+#: openerp.glade:16013
 #, fuzzy
 msgid "Old password:"
 msgstr "Пароль:"
 
-#: terp.glade:16254
+#: openerp.glade:16254
 #, fuzzy
 msgid "OpenERP Message"
 msgstr "OpenERP - Лицензія"
 
-#: terp.glade:16392
+#: openerp.glade:16392
 msgid "Database creation"
 msgstr ""
 
-#: terp.glade:16612
+#: openerp.glade:16612
 msgid "<b>Database created successfully!</b>"
 msgstr ""
 
-#: terp.glade:16670
+#: openerp.glade:16670
 msgid ""
 "You can connect to the new database using one of the following account:\n"
 "\n"
 "    Administrator: admin / admin "
 msgstr ""
 
-#: terp.glade:16701
+#: openerp.glade:16701
 msgid "Concurrency exception"
 msgstr ""
 
-#: terp.glade:16788
+#: openerp.glade:16788
 msgid "Compare"
 msgstr ""
 
-#: terp.glade:16863
+#: openerp.glade:16863
 msgid "Write anyway"
 msgstr ""
 
-#: terp.glade:16928
+#: openerp.glade:16928
 msgid ""
 "<b>\n"
 "Write concurrency warning:\n"

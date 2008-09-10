@@ -78,7 +78,7 @@ def _refresh_langlist(lang_widget, url):
 
 def _server_ask(server_widget, parent=None):
     result = False
-    win_gl = glade.XML(common.terp_path("terp.glade"),"win_server",gettext.textdomain())
+    win_gl = glade.XML(common.terp_path("openerp.glade"),"win_server",gettext.textdomain())
     win = win_gl.get_widget('win_server')
     if not parent:
         parent = service.LocalService('gui.main').window
@@ -124,7 +124,7 @@ def _server_ask(server_widget, parent=None):
 
 class db_login(object):
     def __init__(self):
-        self.win_gl = glade.XML(common.terp_path("terp.glade"),"win_login",gettext.textdomain())
+        self.win_gl = glade.XML(common.terp_path("openerp.glade"),"win_login",gettext.textdomain())
 
     def refreshlist(self, widget, db_widget, label, url, butconnect=False):
 
@@ -253,7 +253,7 @@ class db_create(object):
         return url
 
     def __init__(self, sig_login, terp_main):
-        self.dialog = glade.XML(common.terp_path("terp.glade"), "win_createdb", gettext.textdomain())
+        self.dialog = glade.XML(common.terp_path("openerp.glade"), "win_createdb", gettext.textdomain())
         self.sig_login = sig_login
         self.terp_main = terp_main
 
@@ -373,7 +373,7 @@ class db_create(object):
             win.destroy()
 
             pwdlst = '\n'.join(map(lambda x: '    - %s: %s / %s' % (x['name'],x['login'],x['password']), users))
-            dialog = glade.XML(common.terp_path("terp.glade"), "dia_dbcreate_ok", gettext.textdomain())
+            dialog = glade.XML(common.terp_path("openerp.glade"), "dia_dbcreate_ok", gettext.textdomain())
             win = dialog.get_widget('dia_dbcreate_ok')
             if not parent:
                 parent = service.LocalService('gui.main').window
@@ -419,7 +419,7 @@ class terp_main(service.Service):
         self.exportMethod(self.win_add)
 
         self._handler_ok = True
-        self.glade = glade.XML(common.terp_path("terp.glade"),"win_main",gettext.textdomain())
+        self.glade = glade.XML(common.terp_path("openerp.glade"),"win_main",gettext.textdomain())
         self.status_bar_main = self.glade.get_widget('hbox_status_main')
         self.toolbar = self.glade.get_widget('main_toolbar')
         self.sb_requests = self.glade.get_widget('sb_requests')
@@ -824,7 +824,7 @@ class terp_main(service.Service):
         tools.launch_browser(options.options['help.context']+'?model=%s&lang=%s' % (model,l))
 
     def sig_licence(self, widget):
-        dialog = glade.XML(common.terp_path("terp.glade"), "win_licence", gettext.textdomain())
+        dialog = glade.XML(common.terp_path("openerp.glade"), "win_licence", gettext.textdomain())
         dialog.signal_connect("on_but_ok_pressed", lambda obj: dialog.get_widget('win_licence').destroy())
 
         win = dialog.get_widget('win_licence')
@@ -832,7 +832,7 @@ class terp_main(service.Service):
         win.show_all()
 
     def sig_about(self, widget):
-        about = glade.XML(common.terp_path("terp.glade"), "win_about", gettext.textdomain())
+        about = glade.XML(common.terp_path("openerp.glade"), "win_about", gettext.textdomain())
         buffer = about.get_widget('textview2').get_buffer()
         about_txt = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
         buffer.set_text(about_txt % openerp_version)
@@ -843,7 +843,7 @@ class terp_main(service.Service):
         win.show_all()
 
     def sig_shortcuts(self, widget):
-        shortcuts_win = glade.XML(common.terp_path('terp.glade'), 'shortcuts_dia', gettext.textdomain())
+        shortcuts_win = glade.XML(common.terp_path('openerp.glade'), 'shortcuts_dia', gettext.textdomain())
         shortcuts_win.signal_connect("on_but_ok_pressed", lambda obj: shortcuts_win.get_widget('shortcuts_dia').destroy())
 
         win = shortcuts_win.get_widget('shortcuts_dia')
@@ -1070,7 +1070,7 @@ class terp_main(service.Service):
         win.run()
 
     def sig_db_password(self, widget):
-        dialog = glade.XML(common.terp_path("terp.glade"), "dia_passwd_change",
+        dialog = glade.XML(common.terp_path("openerp.glade"), "dia_passwd_change",
                 gettext.textdomain())
         win = dialog.get_widget('dia_passwd_change')
         win.set_icon(common.OPENERP_ICON)
@@ -1155,7 +1155,7 @@ class terp_main(service.Service):
             refreshlist(widget, db_widget, label, url)
             return  url
 
-        dialog = glade.XML(common.terp_path("terp.glade"), "win_db_select",
+        dialog = glade.XML(common.terp_path("openerp.glade"), "win_db_select",
                 gettext.textdomain())
         win = dialog.get_widget('win_db_select')
         win.set_icon(common.OPENERP_ICON)
@@ -1200,7 +1200,7 @@ class terp_main(service.Service):
         return (url,db,passwd)
 
     def _choose_db_ent(self):
-        dialog = glade.XML(common.terp_path("terp.glade"), "win_db_ent",
+        dialog = glade.XML(common.terp_path("openerp.glade"), "win_db_ent",
                 gettext.textdomain())
         win = dialog.get_widget('win_db_ent')
         win.set_icon(common.OPENERP_ICON)

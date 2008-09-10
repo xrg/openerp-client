@@ -49,7 +49,7 @@ import translate
 
 class win_preference(object):
     def __init__(self, parent=None):
-        self.glade = glade.XML(common.terp_path("terp.glade"),'win_preference', gettext.textdomain())
+        self.glade = glade.XML(common.terp_path("openerp.glade"),'win_preference', gettext.textdomain())
         self.win = self.glade.get_widget('win_preference')
         self.win.set_icon(common.OPENERP_ICON)
         if not parent:

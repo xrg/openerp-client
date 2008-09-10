@@ -116,7 +116,7 @@ class win_search(object):
         self.context = context
         self.context.update(rpc.session.context)
         self.sel_multi = sel_multi
-        self.glade = glade.XML(common.terp_path("terp.glade"),'win_search',gettext.textdomain())
+        self.glade = glade.XML(common.terp_path("openerp.glade"),'win_search',gettext.textdomain())
         self.win = self.glade.get_widget('win_search')
         self.win.set_icon(common.OPENERP_ICON)
         if not parent:
