@@ -263,19 +263,19 @@ def support(*args):
     win.set_transient_for(parent)
     win.set_icon(OPENERP_ICON)
     win.show_all()
-    sur.get_widget('id_entry').set_text(support_id)
+    sur.get_widget('id_entry1').set_text(support_id)
 
     response = win.run()
     if response == gtk.RESPONSE_OK:
-        fromaddr = sur.get_widget('email_entry').get_text()
-        id_contract = sur.get_widget('id_entry').get_text()
-        name =  sur.get_widget('name_entry').get_text()
-        phone =  sur.get_widget('phone_entry').get_text()
-        company =  sur.get_widget('company_entry').get_text()
+        fromaddr = sur.get_widget('email_entry1').get_text()
+        id_contract = sur.get_widget('id_entry1').get_text()
+        name =  sur.get_widget('name_entry1').get_text()
+        phone =  sur.get_widget('phone_entry1').get_text()
+        company =  sur.get_widget('company_entry1').get_text()
 
-        urgency = sur.get_widget('urgency_combo').get_active_text()
+        urgency = sur.get_widget('urgency_combo1').get_active_text()
 
-        buffer = sur.get_widget('explanation_textview').get_buffer()
+        buffer = sur.get_widget('explanation_textview1').get_buffer()
         explanation = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
         buffer = sur.get_widget('remark_textview').get_buffer()
