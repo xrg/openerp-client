@@ -101,8 +101,11 @@ class main(service.Service):
 
             view_ids=False
             if action.get('views', []):
-                view_ids=[x[0] for x in action['views']]
-                datas['view_mode']=",".join([x[1] for x in action['views']])
+                if isinstance(action['views'],list):
+                    view_ids=[x[0] for x in action['views']]
+                    datas['view_mode']=",".join([x[1] for x in action['views']])
+                else:
+                    view_ids=[(action['view_type']=='tree') and 1 or False,(action['view_type']=='form') and 1 or False]
             elif action.get('view_id', False):
                 view_ids=[action['view_id'][0]]
 
