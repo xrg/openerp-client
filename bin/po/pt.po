@@ -7,7 +7,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: pt_BR\n"
+"Project-Id-Version: OpenERP V4.3.99\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-08-21 13:38+0200\n"
 "PO-Revision-Date: 2005-07-08 13:08-0300\n"
@@ -21,7 +21,7 @@ msgstr ""
 # File: bin/options.py, line: 97
 #, fuzzy, python-format
 msgid "OpenERP Client %s"
-msgstr "Tiny ERP licence"
+msgstr "OpenERP licence"
 #
 # File: bin/options.py, line: 98
 msgid "specify alternate config file"
@@ -169,8 +169,8 @@ msgstr ""
 # File: bin/widget/view/form_gtk/calendar.py, line: 250
 # File: bin/widget_search/calendar.py, line: 114
 # File: bin/terp.glade, line: 2987
-msgid "Tiny ERP - Date selection"
-msgstr "Tiny ERP - Seleção de data"
+msgid "OpenERP - Date selection"
+msgstr "OpenERP - Seleção de data"
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 256
 # File: bin/terp.glade, line: 6172
@@ -238,8 +238,8 @@ msgstr ""
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 59
 # File: bin/widget/view/form_gtk/many2one.py, line: 62
 # File: bin/terp.glade, line: 5581
-msgid "Tiny ERP - Link"
-msgstr "Tiny ERP - Link"
+msgid "OpenERP - Link"
+msgstr "OpenERP - Link"
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 153
 # File: bin/widget/view/form_gtk/interface.py, line: 55
@@ -414,8 +414,8 @@ msgstr ""
 msgid "The content of the widget or excpetion if not valid"
 msgstr ""
 #
-# File: bin/tinyerp-client.py, line: 141
-msgid "Closing Tiny ERP, KeyboardInterrupt"
+# File: bin/openerp-client.py, line: 141
+msgid "Closing OpenERP, KeyboardInterrupt"
 msgstr ""
 #
 # File: bin/printer/printer.py, line: 166
@@ -430,13 +430,13 @@ msgstr ""
 #
 # File: bin/modules/gui/window/win_search.py, line: 85
 #, fuzzy, python-format
-msgid "Tiny ERP Search: %s"
-msgstr "Tiny ERP - Procurar"
+msgid "OpenERP Search: %s"
+msgstr "OpenERP - Procurar"
 #
 # File: bin/modules/gui/window/win_search.py, line: 86
 #, fuzzy, python-format
-msgid "Tiny ERP Search: %s (%%d result(s))"
-msgstr "Tiny ERP- Mecanismos de Procura"
+msgid "OpenERP Search: %s (%%d result(s))"
+msgstr "OpenERP- Mecanismos de Procura"
 #
 # File: bin/modules/gui/window/view_tree/parse.py, line: 44
 #, fuzzy
@@ -904,14 +904,14 @@ msgstr ""
 # File: bin/common/common.py, line: 241
 msgid ""
 "Thank you for the feedback !\n"
-"Your comments have been sent to Tiny ERP.\n"
+"Your comments have been sent to OpenERP.\n"
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
 #
 # File: bin/common/common.py, line: 245
 msgid ""
-"Thank you for testing Tiny ERP !\n"
+"Thank you for testing OpenERP !\n"
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
@@ -928,8 +928,8 @@ msgid "Open with..."
 msgstr "Abrir"
 #
 # File: bin/terp.glade, line: 8
-msgid "Tiny ERP - Login"
-msgstr "Tiny ERP - Entrar"
+msgid "OpenERP - Login"
+msgstr "OpenERP - Entrar"
 #
 # File: bin/terp.glade, line: 45
 msgid "User:"
@@ -1190,8 +1190,8 @@ msgstr "Árvore"
 #
 # File: bin/terp.glade, line: 941
 #, fuzzy
-msgid "Tiny ERP Theme"
-msgstr "Tiny ERP licence"
+msgid "OpenERP Theme"
+msgstr "OpenERP licence"
 #
 # File: bin/terp.glade, line: 981
 #, fuzzy
@@ -1383,16 +1383,16 @@ msgid "Send a new request"
 msgstr "Enviar novo pedido"
 #
 # File: bin/terp.glade, line: 1612
-msgid "Tiny ERP - Tree Resources"
-msgstr "Tiny ERP - Recursos de Estrutura"
+msgid "OpenERP - Tree Resources"
+msgstr "OpenERP - Recursos de Estrutura"
 #
 # File: bin/terp.glade, line: 1666
 msgid "Shortcuts"
 msgstr "Atalhos"
 #
 # File: bin/terp.glade, line: 1799
-msgid "Tiny ERP - Forms"
-msgstr "Tiny ERP - Formulários"
+msgid "OpenERP - Forms"
+msgstr "OpenERP - Formulários"
 #
 # File: bin/terp.glade, line: 1823
 #, fuzzy
@@ -1400,21 +1400,21 @@ msgid "State:"
 msgstr "Estado:"
 #
 # File: bin/terp.glade, line: 1855
-msgid "Tiny ERP - About"
-msgstr "Tiny ERP - Sobre"
+msgid "OpenERP - About"
+msgstr "OpenERP - Sobre"
 #
 # File: bin/terp.glade, line: 1869
 msgid ""
-"<b>About Tiny ERP</b>\n"
+"<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
 #
 # File: bin/terp.glade, line: 1908
 msgid ""
 "\n"
-"Tiny ERP - GTK Client - v%s\n"
+"OpenERP - GTK Client - v%s\n"
 "\n"
-"Tiny ERP is an Open Source ERP+CRM\n"
+"OpenERP is an Open Source ERP+CRM\n"
 "for small to medium businesses.\n"
 "\n"
 "The whole source code is distributed under\n"
@@ -1422,19 +1422,19 @@ msgid ""
 "\n"
 "(c) 2003-TODAY, Tiny sprl\n"
 "\n"
-"More Info on www.TinyERP.com !"
+"More Info on www.openerp.com !"
 msgstr ""
 #
 # File: bin/terp.glade, line: 1936
 #, fuzzy
-msgid "_Tiny ERP"
-msgstr "Sobre Tiny ERP"
+msgid "_OpenERP"
+msgstr "Sobre OpenERP"
 #
 # File: bin/terp.glade, line: 1964
 msgid ""
 "\n"
 "(c) 2003-TODAY - Tiny sprl\n"
-"Tiny ERP is a product of Tiny sprl:\n"
+"OpenERP is a product of Tiny sprl:\n"
 "\n"
 "Tiny sprl\n"
 "40 Chaussée de Namur\n"
@@ -1452,8 +1452,8 @@ msgid "_Contact"
 msgstr "Contato"
 #
 # File: bin/terp.glade, line: 2047
-msgid "Tiny ERP - forms widget"
-msgstr "Tiny ERP - Formulários"
+msgid "OpenERP - forms widget"
+msgstr "OpenERP - Formulários"
 #
 # File: bin/terp.glade, line: 2229
 msgid "Titre"
@@ -1465,8 +1465,8 @@ msgstr "Remover entrada selecionada"
 #
 # File: bin/terp.glade, line: 3043
 # File: bin/terp.glade, line: 7615
-msgid "Tiny ERP - Confirmation"
-msgstr "Tiny ERP - Confirmação"
+msgid "OpenERP - Confirmation"
+msgstr "OpenERP - Confirmação"
 #
 # File: bin/terp.glade, line: 3071
 # File: bin/terp.glade, line: 7643
@@ -1476,16 +1476,16 @@ msgstr "Oi Mundo!"
 #
 # File: bin/terp.glade, line: 3120
 #, fuzzy
-msgid "Tiny ERP - Selection"
-msgstr "Tiny ERP - seleção"
+msgid "OpenERP - Selection"
+msgstr "OpenERP - seleção"
 #
 # File: bin/terp.glade, line: 3134
 msgid "Your selection:"
 msgstr "Sua seleção"
 #
 # File: bin/terp.glade, line: 3214
-msgid "Tiny ERP - Filter"
-msgstr "Tiny ERP - Filtro"
+msgid "OpenERP - Filter"
+msgstr "OpenERP - Filtro"
 #
 # File: bin/terp.glade, line: 3230
 #, fuzzy
@@ -1531,8 +1531,8 @@ msgid "<b><u>Actions</u></b>"
 msgstr "<b><u>Ações</u></b>"
 #
 # File: bin/terp.glade, line: 3465
-msgid "Tiny ERP - Dialog"
-msgstr "Tiny ERP - Diálogo"
+msgid "OpenERP - Dialog"
+msgstr "OpenERP - Diálogo"
 #
 # File: bin/terp.glade, line: 3490
 msgid "Set to _Default"
@@ -1543,8 +1543,8 @@ msgid "Value _Preference"
 msgstr "Valor_Preferência"
 #
 # File: bin/terp.glade, line: 3526
-msgid "Tiny ERP, Field Preference target"
-msgstr "Tiny ERP , Campo Preferência Tiny ERP - alvo"
+msgid "OpenERP, Field Preference target"
+msgstr "OpenERP , Campo Preferência OpenERP - alvo"
 #
 # File: bin/terp.glade, line: 3544
 #, fuzzy
@@ -1580,8 +1580,8 @@ msgid "<b>Value applicable for:</b>"
 msgstr "<b>Valor aplicável para:</b>"
 #
 # File: bin/terp.glade, line: 3778
-msgid "Tiny ERP - Export to CSV"
-msgstr "Tiny ERP - Exportar para CSV"
+msgid "OpenERP - Export to CSV"
+msgstr "OpenERP - Exportar para CSV"
 #
 # File: bin/terp.glade, line: 3819
 #, fuzzy
@@ -1638,12 +1638,12 @@ msgid "<b>Opti_ons</b>"
 msgstr "<b>Opções</b>"
 #
 # File: bin/terp.glade, line: 4236
-msgid "Tiny ERP - Search"
-msgstr "Tiny ERP - Procurar"
+msgid "OpenERP - Search"
+msgstr "OpenERP - Procurar"
 #
 # File: bin/terp.glade, line: 4335
-msgid "Tiny ERP - Search Widgets"
-msgstr "Tiny ERP- Mecanismos de Procura"
+msgid "OpenERP - Search Widgets"
+msgstr "OpenERP- Mecanismos de Procura"
 #
 # File: bin/terp.glade, line: 4361
 # File: bin/terp.glade, line: 4427
@@ -1673,8 +1673,8 @@ msgstr ""
 "Não"
 #
 # File: bin/terp.glade, line: 4593
-msgid "Tiny ERP - Attachment"
-msgstr "Tiny ERP - Anexo"
+msgid "OpenERP - Attachment"
+msgstr "OpenERP - Anexo"
 #
 # File: bin/terp.glade, line: 4618
 msgid "Filename:"
@@ -1690,8 +1690,8 @@ msgid "Save text"
 msgstr "Salvar"
 #
 # File: bin/terp.glade, line: 4914
-msgid "Tiny ERP - Error"
-msgstr "Tiny ERP - Erro"
+msgid "OpenERP - Error"
+msgstr "OpenERP - Erro"
 #
 # File: bin/terp.glade, line: 4929
 #, fuzzy
@@ -1739,15 +1739,15 @@ msgstr "Detalhes"
 msgid ""
 "<b>Complete this form to submit your bug and/or request a support.</b>\n"
 "<i>\n"
-"Your request will be send to Tiny ERP and we will reply you shortly.\n"
-"Note that we may not reply you if your Service Company is not a Tiny ERP "
+"Your request will be send to OpenERP and we will reply you shortly.\n"
+"Note that we may not reply you if your Service Company is not a OpenERP "
 "partner.\n"
 "</i>"
 msgstr ""
 "<b>Complete este formulário para enviar seu bug e/ou solicitar nosso "
 "suporte</b> <i>Sua solicitação será enviada para tiny ERP e nós iremos lhe "
 "responder rapidamente Note que nós não responderemos se soa companhia não é "
-"Parceiro da Tiny ERP</i>"
+"Parceiro da OpenERP</i>"
 #
 # File: bin/terp.glade, line: 5163
 # File: bin/terp.glade, line: 7321
@@ -1811,16 +1811,16 @@ msgid "<b>_Support Request</b>"
 msgstr "<br> Solicitação de Suporte"
 #
 # File: bin/terp.glade, line: 5533
-msgid "Tiny ERP - Ressource Edit"
-msgstr "Tiny ERP - Editar Recurso Tiny ERP "
+msgid "OpenERP - Ressource Edit"
+msgstr "OpenERP - Editar Recurso OpenERP "
 #
 # File: bin/terp.glade, line: 5651
-msgid "Tiny ERP - List"
-msgstr "Tiny ERP - Lista"
+msgid "OpenERP - List"
+msgstr "OpenERP - Lista"
 #
 # File: bin/terp.glade, line: 5699
-msgid "Tiny ERP - Preferences"
-msgstr "Tiny ERP - Preferências"
+msgid "OpenERP - Preferences"
+msgstr "OpenERP - Preferências"
 #
 # File: bin/terp.glade, line: 5713
 #, fuzzy
@@ -1848,16 +1848,16 @@ msgstr "Próxima Dica"
 #
 # File: bin/terp.glade, line: 5971
 #, fuzzy
-msgid "Tiny ERP - License"
-msgstr "Tiny ERP - Licença"
+msgid "OpenERP - License"
+msgstr "OpenERP - Licença"
 #
 # File: bin/terp.glade, line: 5986
-msgid "Tiny ERP license"
-msgstr "Tiny ERP licence"
+msgid "OpenERP license"
+msgstr "OpenERP licence"
 #
 # File: bin/terp.glade, line: 6155
-msgid "Tiny ERP - Date & Time selection"
-msgstr "Tiny ERP - Seleção de Dia e Hora "
+msgid "OpenERP - Date & Time selection"
+msgstr "OpenERP - Seleção de Dia e Hora "
 #
 # File: bin/terp.glade, line: 6274
 #, fuzzy
@@ -1870,17 +1870,17 @@ msgstr "Procurar ID"
 #
 # File: bin/terp.glade, line: 6378
 #, fuzzy
-msgid "Tiny ERP Survey"
-msgstr "Tiny ERP - Procurar"
+msgid "OpenERP Survey"
+msgstr "OpenERP - Procurar"
 #
 # File: bin/terp.glade, line: 6394
 #, fuzzy
-msgid "<b>Tiny ERP Survey</b>"
-msgstr "Tiny ERP - Procurar"
+msgid "<b>OpenERP Survey</b>"
+msgstr "OpenERP - Procurar"
 #
 # File: bin/terp.glade, line: 6407
 msgid ""
-"<i>Please fill in the following form in order to help us to improve Tiny ERP "
+"<i>Please fill in the following form in order to help us to improve OpenERP "
 "and better target new developments.</i>"
 msgstr ""
 #
@@ -1921,15 +1921,15 @@ msgid "<b>Your company:</b>"
 msgstr "Sua companhia"
 #
 # File: bin/terp.glade, line: 7035
-msgid "We plan to use Tiny ERP"
+msgid "We plan to use OpenERP"
 msgstr ""
 #
 # File: bin/terp.glade, line: 7049
-msgid "We plan to offer services on Tiny ERP"
+msgid "We plan to offer services on OpenERP"
 msgstr ""
 #
 # File: bin/terp.glade, line: 7070
-msgid "Tell us why you try Tiny ERP and what are your current softwares:"
+msgid "Tell us why you try OpenERP and what are your current softwares:"
 msgstr ""
 #
 # File: bin/terp.glade, line: 7104
@@ -1938,7 +1938,7 @@ msgid "<b>Your interrest:</b>"
 msgstr "Seu nome"
 #
 # File: bin/terp.glade, line: 7139
-msgid "(Get Tiny ERP announces, docs and new releases by email)"
+msgid "(Get OpenERP announces, docs and new releases by email)"
 msgstr ""
 #
 # File: bin/terp.glade, line: 7155
@@ -1959,14 +1959,14 @@ msgstr ""
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
 "<i>\n"
-"Your request will be sent to the Tiny ERP team and we will reply shortly.\n"
+"Your request will be sent to the OpenERP team and we will reply shortly.\n"
 "Note that we may not reply if you do not have a support contract with Tiny "
 "or an official partner.</i>"
 msgstr ""
 "<b>Complete este formulário para enviar seu bug e/ou solicitar nosso "
 "suporte</b> <i>Sua solicitação será enviada para tiny ERP e nós iremos lhe "
 "responder rapidamente Note que nós não responderemos se soa companhia não é "
-"Parceiro da Tiny ERP</i>"
+"Parceiro da OpenERP</i>"
 #
 # File: bin/terp.glade, line: 7349
 #, fuzzy
@@ -2105,7 +2105,7 @@ msgid "Close window without saving"
 msgstr ""
 #
 # File: bin/terp.glade, line: 8108
-msgid "<b>Shortcuts for TinyERP</b>"
+msgid "<b>Shortcuts for OpenERP</b>"
 msgstr ""
 #
 # File: bin/terp.glade, line: 8123
@@ -2243,8 +2243,8 @@ msgstr ""
 #
 # File: bin/terp.glade, line: 9002
 #, fuzzy
-msgid "Tiny ERP"
-msgstr "Sobre Tiny ERP"
+msgid "OpenERP"
+msgstr "Sobre OpenERP"
 #
 # File: bin/terp.glade, line: 9099
 #, fuzzy
@@ -2252,7 +2252,7 @@ msgid "Server"
 msgstr "Servidor:"
 #
 # File: bin/terp.glade, line: 9109
-msgid "<b>Connect to a Tiny ERP server</b>"
+msgid "<b>Connect to a OpenERP server</b>"
 msgstr ""
 #
 # File: bin/terp.glade, line: 9140
@@ -2313,12 +2313,12 @@ msgstr "Criar novo recurso"
 #
 # File: bin/terp.glade, line: 9923
 #, fuzzy
-msgid "Tiny ERP server:"
-msgstr "Tiny ERP - Procurar"
+msgid "OpenERP server:"
+msgstr "OpenERP - Procurar"
 #
 # File: bin/terp.glade, line: 9934
 msgid ""
-"This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
+"This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
 #
@@ -2354,7 +2354,7 @@ msgstr ""
 # File: bin/terp.glade, line: 10120
 msgid ""
 "This is the password of the user that have the rights to administer "
-"databases. This is not a Tiny ERP user, just a super administrator. If you "
+"databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 #
@@ -2401,8 +2401,8 @@ msgstr "Senha:"
 #
 # File: bin/terp.glade, line: 10489
 #, fuzzy
-msgid "Tiny ERP Message"
-msgstr "Tiny ERP licence"
+msgid "OpenERP Message"
+msgstr "OpenERP licence"
 #
 # File: bin/terp.glade, line: 10568
 msgid "Database creation"

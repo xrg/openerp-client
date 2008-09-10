@@ -109,7 +109,7 @@ class win_export(object):
         if parent is None:
             parent = service.LocalService('gui.main').window
         self.win.set_transient_for(parent)
-        self.win.set_icon(common.TINYERP_ICON)
+        self.win.set_icon(common.OPENERP_ICON)
         self.parent = parent
 
         self.view1 = gtk.TreeView()

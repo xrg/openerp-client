@@ -50,7 +50,7 @@ class win_attach(object):
         self.glade = glade.XML(common.terp_path("terp.glade"), 'win_attach',
                 gettext.textdomain())
         self.win = self.glade.get_widget('win_attach')
-        self.win.set_icon(common.TINYERP_ICON)
+        self.win.set_icon(common.OPENERP_ICON)
         if not parent:
             parent = service.LocalService('gui.main').window
         self.win.set_transient_for(parent)
@@ -213,7 +213,7 @@ class win_attach(object):
                 return None
             fp_name = False
             if not data['link']:
-                (fileno, fp_name) = tempfile.mkstemp(data['datas_fname'], 'tinyerp_')
+                (fileno, fp_name) = tempfile.mkstemp(data['datas_fname'], 'openerp_')
                 fp = file(fp_name, 'wb+')
                 fp.write(base64.decodestring(data['datas']))
                 fp.close()

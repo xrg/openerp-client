@@ -83,7 +83,7 @@ def _server_ask(server_widget, parent=None):
     if not parent:
         parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(common.TINYERP_ICON)
+    win.set_icon(common.OPENERP_ICON)
     win.show_all()
     win.set_default_response(gtk.RESPONSE_OK)
     host_widget = win_gl.get_widget('ent_host')
@@ -174,10 +174,10 @@ class db_login(object):
         if not parent:
             parent = service.LocalService('gui.main').window
         win.set_transient_for(parent)
-        win.set_icon(common.TINYERP_ICON)
+        win.set_icon(common.OPENERP_ICON)
         win.show_all()
         img = self.win_gl.get_widget('image_tinyerp')
-        img.set_from_file(common.terp_path_pixmaps('tinyerp.png'))
+        img.set_from_file(common.terp_path_pixmaps('openerp.png'))
         login = self.win_gl.get_widget('ent_login')
         passwd = self.win_gl.get_widget('ent_passwd')
         server_widget = self.win_gl.get_widget('ent_server')
@@ -429,7 +429,7 @@ class terp_main(service.Service):
         window.connect("destroy", self.sig_quit)
         window.connect("delete_event", self.sig_delete)
         self.window = window
-        self.window.set_icon(common.TINYERP_ICON)
+        self.window.set_icon(common.OPENERP_ICON)
 
         self.notebook = gtk.Notebook()
         self.notebook.popup_enable()
@@ -830,7 +830,7 @@ class terp_main(service.Service):
         about = glade.XML(common.terp_path("terp.glade"), "win_about", gettext.textdomain())
         buffer = about.get_widget('textview2').get_buffer()
         about_txt = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-        buffer.set_text(about_txt % tinyerp_version)
+        buffer.set_text(about_txt % openerp_version)
         about.signal_connect("on_but_ok_pressed", lambda obj: about.get_widget('win_about').destroy())
 
         win = about.get_widget('win_about')
@@ -1068,7 +1068,7 @@ class terp_main(service.Service):
         dialog = glade.XML(common.terp_path("terp.glade"), "dia_passwd_change",
                 gettext.textdomain())
         win = dialog.get_widget('dia_passwd_change')
-        win.set_icon(common.TINYERP_ICON)
+        win.set_icon(common.OPENERP_ICON)
         win.set_transient_for(self.window)
         win.show_all()
         server_widget = dialog.get_widget('ent_server2')
@@ -1153,7 +1153,7 @@ class terp_main(service.Service):
         dialog = glade.XML(common.terp_path("terp.glade"), "win_db_select",
                 gettext.textdomain())
         win = dialog.get_widget('win_db_select')
-        win.set_icon(common.TINYERP_ICON)
+        win.set_icon(common.OPENERP_ICON)
         win.set_default_response(gtk.RESPONSE_OK)
         win.set_transient_for(self.window)
         win.show_all()
@@ -1198,7 +1198,7 @@ class terp_main(service.Service):
         dialog = glade.XML(common.terp_path("terp.glade"), "win_db_ent",
                 gettext.textdomain())
         win = dialog.get_widget('win_db_ent')
-        win.set_icon(common.TINYERP_ICON)
+        win.set_icon(common.OPENERP_ICON)
         win.set_transient_for(self.window)
         win.show_all()
 

@@ -199,7 +199,7 @@ class ViewForm(parser_view):
                                     gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
                             win.vbox.set_spacing(5)
                             win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                            win.set_icon(common.TINYERP_ICON)
+                            win.set_icon(common.OPENERP_ICON)
                             vbox = gtk.VBox(spacing=5)
 
                             entries_list = []

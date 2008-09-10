@@ -51,7 +51,7 @@ class win_preference(object):
     def __init__(self, parent=None):
         self.glade = glade.XML(common.terp_path("terp.glade"),'win_preference', gettext.textdomain())
         self.win = self.glade.get_widget('win_preference')
-        self.win.set_icon(common.TINYERP_ICON)
+        self.win.set_icon(common.OPENERP_ICON)
         if not parent:
             parent = service.LocalService('gui.main').window
         self.win.set_transient_for(parent)

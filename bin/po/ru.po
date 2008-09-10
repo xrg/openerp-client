@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: OpenERP V4.3.99\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-12 15:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: terp.glade:9
-msgid "Tiny ERP - Login"
-msgstr "Tiny ERP - логин"
+msgid "OpenERP - Login"
+msgstr "OpenERP - логин"
 
 #: terp.glade:106
 msgid "User:"
@@ -249,8 +249,8 @@ msgstr "Удалить"
 
 #: terp.glade:1321
 #, fuzzy
-msgid "Tiny ERP Theme"
-msgstr "Tiny ERP лицензия"
+msgid "OpenERP Theme"
+msgstr "OpenERP лицензия"
 
 #: terp.glade:1345
 #, fuzzy
@@ -445,16 +445,16 @@ msgid "Send a new request"
 msgstr "Отправить новый запрос"
 
 #: terp.glade:2215
-msgid "Tiny ERP - Tree Resources"
-msgstr "Tiny ERP - древовидные ресурсы"
+msgid "OpenERP - Tree Resources"
+msgstr "OpenERP - древовидные ресурсы"
 
 #: terp.glade:2350
 msgid "Shortcuts"
 msgstr "Ярлыки"
 
 #: terp.glade:2454
-msgid "Tiny ERP - Forms"
-msgstr "Tiny ERP - Формы"
+msgid "OpenERP - Forms"
+msgstr "OpenERP - Формы"
 
 #: terp.glade:2502
 #, fuzzy
@@ -462,21 +462,21 @@ msgid "State:"
 msgstr "Статус:"
 
 #: terp.glade:2551
-msgid "Tiny ERP - About"
-msgstr "Tiny ERP - О программе"
+msgid "OpenERP - About"
+msgstr "OpenERP - О программе"
 
 #: terp.glade:2608
 msgid ""
-"<b>About Tiny ERP</b>\n"
+"<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
 
 #: terp.glade:2677
 msgid ""
 "\n"
-"Tiny ERP - GTK Client - v%s\n"
+"OpenERP - GTK Client - v%s\n"
 "\n"
-"Tiny ERP is an Open Source ERP+CRM\n"
+"OpenERP is an Open Source ERP+CRM\n"
 "for small to medium businesses.\n"
 "\n"
 "The whole source code is distributed under\n"
@@ -484,19 +484,19 @@ msgid ""
 "\n"
 "(c) 2003-TODAY, Tiny sprl\n"
 "\n"
-"More Info on www.TinyERP.com !"
+"More Info on www.openerp.com !"
 msgstr ""
 
 #: terp.glade:2724
 #, fuzzy
-msgid "_Tiny ERP"
-msgstr "Tiny ERP"
+msgid "_OpenERP"
+msgstr "OpenERP"
 
 #: terp.glade:2776
 msgid ""
 "\n"
 "(c) 2003-TODAY - Tiny sprl\n"
-"Tiny ERP is a product of Tiny sprl:\n"
+"OpenERP is a product of Tiny sprl:\n"
 "\n"
 "Tiny sprl\n"
 "40 Chaussée de Namur\n"
@@ -513,8 +513,8 @@ msgid "_Contact"
 msgstr "_Контакты"
 
 #: terp.glade:2869
-msgid "Tiny ERP - forms widget"
-msgstr "Tiny ERP - редактор форм"
+msgid "OpenERP - forms widget"
+msgstr "OpenERP - редактор форм"
 
 #: terp.glade:2936
 msgid "Open the calendar widget"
@@ -564,12 +564,12 @@ msgid "Remove selected entry"
 msgstr "Удалить выделенную запись"
 
 #: terp.glade:4301
-msgid "Tiny ERP - Date selection"
-msgstr "Tiny ERP - выбор даты"
+msgid "OpenERP - Date selection"
+msgstr "OpenERP - выбор даты"
 
 #: terp.glade:4383 terp.glade:11404
-msgid "Tiny ERP - Confirmation"
-msgstr "Tiny ERP - Подтверждение"
+msgid "OpenERP - Confirmation"
+msgstr "OpenERP - Подтверждение"
 
 #: terp.glade:4471 terp.glade:11505 terp.glade:13997
 msgid "Hello World!"
@@ -577,16 +577,16 @@ msgstr "Привет Мир!"
 
 #: terp.glade:4504
 #, fuzzy
-msgid "Tiny ERP - Selection"
-msgstr "Tiny ERP - выбор"
+msgid "OpenERP - Selection"
+msgstr "OpenERP - выбор"
 
 #: terp.glade:4577
 msgid "Your selection:"
 msgstr "Ваш выбор:"
 
 #: terp.glade:4652
-msgid "Tiny ERP - Filter"
-msgstr "Tiny ERP - Фильтр"
+msgid "OpenERP - Filter"
+msgstr "OpenERP - Фильтр"
 
 #: terp.glade:4724
 msgid "S_earch:"
@@ -626,8 +626,8 @@ msgid "<b><u>Actions</u></b>"
 msgstr "<b><u>Действия</u></b>"
 
 #: terp.glade:5009
-msgid "Tiny ERP - Dialog"
-msgstr "Tiny ERP - Диалог"
+msgid "OpenERP - Dialog"
+msgstr "OpenERP - Диалог"
 
 #: terp.glade:5055
 msgid "Set to _Default"
@@ -638,8 +638,8 @@ msgid "Value _Preference"
 msgstr "Предустановка значения"
 
 #: terp.glade:5104
-msgid "Tiny ERP, Field Preference target"
-msgstr "Tiny ERP, Установка полей"
+msgid "OpenERP, Field Preference target"
+msgstr "OpenERP, Установка полей"
 
 #: terp.glade:5177
 msgid "Default _value:"
@@ -670,8 +670,8 @@ msgid "<b>Value applicable for:</b>"
 msgstr "<b>Значение применимо для:</b>"
 
 #: terp.glade:5507
-msgid "Tiny ERP - Export to CSV"
-msgstr "Tiny ERP - Экспорт в CSV"
+msgid "OpenERP - Export to CSV"
+msgstr "OpenERP - Экспорт в CSV"
 
 #: terp.glade:5622
 #, fuzzy
@@ -720,12 +720,12 @@ msgid "<b>Opti_ons</b>"
 msgstr "<b>Опции</b>"
 
 #: terp.glade:6254
-msgid "Tiny ERP - Search"
-msgstr "Tiny ERP - Поиск"
+msgid "OpenERP - Search"
+msgstr "OpenERP - Поиск"
 
 #: terp.glade:6384
-msgid "Tiny ERP - Search Widgets"
-msgstr "Tiny ERP - Search Widgets"
+msgid "OpenERP - Search Widgets"
+msgstr "OpenERP - Search Widgets"
 
 #: terp.glade:6433 terp.glade:6538 terp.glade:6742
 msgid "-"
@@ -762,8 +762,8 @@ msgstr ""
 "Нет"
 
 #: terp.glade:6844
-msgid "Tiny ERP - Attachment"
-msgstr "Tiny ERP - Прикрепленные файлы"
+msgid "OpenERP - Attachment"
+msgstr "OpenERP - Прикрепленные файлы"
 
 #: terp.glade:6914
 msgid "Filename:"
@@ -779,8 +779,8 @@ msgid "Save text"
 msgstr "Сохранить установки"
 
 #: terp.glade:7345
-msgid "Tiny ERP - Error"
-msgstr "Tiny ERP - Ошибка"
+msgid "OpenERP - Error"
+msgstr "OpenERP - Ошибка"
 
 #: terp.glade:7404
 #, fuzzy
@@ -829,15 +829,15 @@ msgstr "Подробно"
 msgid ""
 "<b>Complete this form to submit your bug and/or request a support.</b>\n"
 "<i>\n"
-"Your request will be send to Tiny ERP and we will reply you shortly.\n"
-"Note that we may not reply you if your Service Company is not a Tiny ERP "
+"Your request will be send to OpenERP and we will reply you shortly.\n"
+"Note that we may not reply you if your Service Company is not a OpenERP "
 "partner.\n"
 "</i>"
 msgstr ""
 "<b>Запоните эту форму чтобы отправить ошибку и/или запрос на поддержку..</"
 "b>\n"
 "<i>\n"
-"Ваш запрос будет отправлен в Tiny ERP мы постараемся ответить как можно "
+"Ваш запрос будет отправлен в OpenERP мы постараемся ответить как можно "
 "скорее.\n"
 "Но мы не сможем ответить Вам если ваша компания не является партнером Tiny "
 "ERP. </i>"
@@ -903,20 +903,20 @@ msgid "<b>_Support Request</b>"
 msgstr "<b>Поддержка</b>"
 
 #: terp.glade:8366
-msgid "Tiny ERP - Ressource Edit"
-msgstr "Tiny ERP - Редактирование объектов"
+msgid "OpenERP - Ressource Edit"
+msgstr "OpenERP - Редактирование объектов"
 
 #: terp.glade:8437
-msgid "Tiny ERP - Link"
-msgstr "Tiny ERP - Ссылка"
+msgid "OpenERP - Link"
+msgstr "OpenERP - Ссылка"
 
 #: terp.glade:8535
-msgid "Tiny ERP - List"
-msgstr "Tiny ERP - Лист"
+msgid "OpenERP - List"
+msgstr "OpenERP - Лист"
 
 #: terp.glade:8604
-msgid "Tiny ERP - Preferences"
-msgstr "Tiny ERP - Установки"
+msgid "OpenERP - Preferences"
+msgstr "OpenERP - Установки"
 
 #: terp.glade:8674
 msgid "<b>Edit resource preferences</b>"
@@ -942,16 +942,16 @@ msgstr "Отобразить новую подсказку в следующий
 
 #: terp.glade:9017
 #, fuzzy
-msgid "Tiny ERP - License"
-msgstr "Tiny ERP - Лицензия"
+msgid "OpenERP - License"
+msgstr "OpenERP - Лицензия"
 
 #: terp.glade:9076
-msgid "Tiny ERP license"
-msgstr "Tiny ERP лицензия"
+msgid "OpenERP license"
+msgstr "OpenERP лицензия"
 
 #: terp.glade:9250
-msgid "Tiny ERP - Date & Time selection"
-msgstr "Tiny ERP - выбор даты и времени"
+msgid "OpenERP - Date & Time selection"
+msgstr "OpenERP - выбор даты и времени"
 
 #: terp.glade:9328
 #, fuzzy
@@ -974,17 +974,17 @@ msgstr "Искать ID: "
 
 #: terp.glade:9602
 #, fuzzy
-msgid "Tiny ERP Survey"
-msgstr "Tiny ERP"
+msgid "OpenERP Survey"
+msgstr "OpenERP"
 
 #: terp.glade:9674
 #, fuzzy
-msgid "<b>Tiny ERP Survey</b>"
-msgstr "Tiny ERP"
+msgid "<b>OpenERP Survey</b>"
+msgstr "OpenERP"
 
 #: terp.glade:9699
 msgid ""
-"<i>Please fill in the following form in order to help us to improve Tiny ERP "
+"<i>Please fill in the following form in order to help us to improve OpenERP "
 "and better target new developments.</i>"
 msgstr ""
 
@@ -1025,15 +1025,15 @@ msgid "<b>Your company:</b>"
 msgstr "<b>Ваша компания:</b>"
 
 #: terp.glade:10485
-msgid "We plan to use Tiny ERP"
+msgid "We plan to use OpenERP"
 msgstr ""
 
 #: terp.glade:10504
-msgid "We plan to offer services on Tiny ERP"
+msgid "We plan to offer services on OpenERP"
 msgstr ""
 
 #: terp.glade:10529
-msgid "Tell us why you try Tiny ERP and what are your current softwares:"
+msgid "Tell us why you try OpenERP and what are your current softwares:"
 msgstr ""
 
 #: terp.glade:10594
@@ -1042,7 +1042,7 @@ msgid "<b>Your interrest:</b>"
 msgstr "<b>Ваше имя:</b>"
 
 #: terp.glade:10652
-msgid "(Get Tiny ERP announces, docs and new releases by email)"
+msgid "(Get OpenERP announces, docs and new releases by email)"
 msgstr ""
 
 #: terp.glade:10680
@@ -1063,14 +1063,14 @@ msgstr ""
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
 "<i>\n"
-"Your request will be sent to the Tiny ERP team and we will reply shortly.\n"
+"Your request will be sent to the OpenERP team and we will reply shortly.\n"
 "Note that we may not reply if you do not have a support contract with Tiny "
 "or an official partner.</i>"
 msgstr ""
 "<b>Запоните эту форму чтобы отправить ошибку и/или запрос на поддержку..</"
 "b>\n"
 "<i>\n"
-"Ваш запрос будет отправлен в Tiny ERP мы постараемся ответить как можно "
+"Ваш запрос будет отправлен в OpenERP мы постараемся ответить как можно "
 "скорее.\n"
 "Но мы не сможем ответить Вам если ваша компания не является партнером Tiny "
 "ERP. </i>"
@@ -1215,7 +1215,7 @@ msgid "Close window without saving"
 msgstr ""
 
 #: terp.glade:12365
-msgid "<b>Shortcuts for TinyERP</b>"
+msgid "<b>Shortcuts for OpenERP</b>"
 msgstr ""
 
 #: terp.glade:12399
@@ -1356,8 +1356,8 @@ msgid "CSV Parameters"
 msgstr ""
 
 #: terp.glade:13905
-msgid "Tiny ERP"
-msgstr "Tiny ERP"
+msgid "OpenERP"
+msgstr "OpenERP"
 
 #: terp.glade:14056
 #, fuzzy
@@ -1365,7 +1365,7 @@ msgid "Server"
 msgstr "Сервер:"
 
 #: terp.glade:14119
-msgid "<b>Connect to a Tiny ERP server</b>"
+msgid "<b>Connect to a OpenERP server</b>"
 msgstr ""
 
 #: terp.glade:14165
@@ -1443,12 +1443,12 @@ msgstr "Создать новый объект"
 
 #: terp.glade:15397
 #, fuzzy
-msgid "Tiny ERP server:"
-msgstr "Tiny ERP"
+msgid "OpenERP server:"
+msgstr "OpenERP"
 
 #: terp.glade:15426
 msgid ""
-"This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
+"This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
 
@@ -1484,7 +1484,7 @@ msgstr ""
 #: terp.glade:15730
 msgid ""
 "This is the password of the user that have the rights to administer "
-"databases. This is not a Tiny ERP user, just a super administrator. If you "
+"databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 
@@ -1531,8 +1531,8 @@ msgstr "Пароль:"
 
 #: terp.glade:16254
 #, fuzzy
-msgid "Tiny ERP Message"
-msgstr "Tiny ERP лицензия"
+msgid "OpenERP Message"
+msgstr "OpenERP лицензия"
 
 #: terp.glade:16392
 msgid "Database creation"

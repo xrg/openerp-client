@@ -1,12 +1,12 @@
-# Hungarian translation of Tiny ERP.
+# Hungarian translation of OpenERP.
 # Copyright (C) 2005 
-# This file is distributed under the same license as the TinyERP package.
+# This file is distributed under the same license as the OpenERP package.
 # Fabien Pinckaers <fp@tiny.be>, 2005.
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Tiny ERP V2.0\n"
+"Project-Id-Version: OpenERP V4.3.99\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-12 15:46+0100\n"
 "PO-Revision-Date: 2005-04-17 20:27+0200\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: terp.glade:9
-msgid "Tiny ERP - Login"
-msgstr "Tiny ERP - Belépés"
+msgid "OpenERP - Login"
+msgstr "OpenERP - Belépés"
 
 #: terp.glade:106
 msgid "User:"
@@ -269,8 +269,8 @@ msgstr "Fa"
 
 #: terp.glade:1321
 #, fuzzy
-msgid "Tiny ERP Theme"
-msgstr "Tiny ERP licensz"
+msgid "OpenERP Theme"
+msgstr "OpenERP licensz"
 
 #: terp.glade:1345
 #, fuzzy
@@ -475,16 +475,16 @@ msgid "Send a new request"
 msgstr "Új kérés küldése"
 
 #: terp.glade:2215
-msgid "Tiny ERP - Tree Resources"
-msgstr "Tiny ERP - Fa elemek"
+msgid "OpenERP - Tree Resources"
+msgstr "OpenERP - Fa elemek"
 
 #: terp.glade:2350
 msgid "Shortcuts"
 msgstr "Billentyűparancsok"
 
 #: terp.glade:2454
-msgid "Tiny ERP - Forms"
-msgstr "Tiny ERP - Űrlapok"
+msgid "OpenERP - Forms"
+msgstr "OpenERP - Űrlapok"
 
 #: terp.glade:2502
 #, fuzzy
@@ -492,12 +492,12 @@ msgid "State:"
 msgstr "Állapot:"
 
 #: terp.glade:2551
-msgid "Tiny ERP - About"
-msgstr "Tiny ERP - Névjegy"
+msgid "OpenERP - About"
+msgstr "OpenERP - Névjegy"
 
 #: terp.glade:2608
 msgid ""
-"<b>About Tiny ERP</b>\n"
+"<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
 
@@ -505,9 +505,9 @@ msgstr ""
 #, fuzzy
 msgid ""
 "\n"
-"Tiny ERP - GTK Client - v%s\n"
+"OpenERP - GTK Client - v%s\n"
 "\n"
-"Tiny ERP is an Open Source ERP+CRM\n"
+"OpenERP is an Open Source ERP+CRM\n"
 "for small to medium businesses.\n"
 "\n"
 "The whole source code is distributed under\n"
@@ -515,12 +515,12 @@ msgid ""
 "\n"
 "(c) 2003-TODAY, Tiny sprl\n"
 "\n"
-"More Info on www.TinyERP.com !"
+"More Info on www.OpenERP.com !"
 msgstr ""
 "\n"
-"Tiny ERP - GTK Kliens - v2.0\n"
+"OpenERP - GTK Kliens - v2.0\n"
 "\n"
-"Tiny ERP is an Open Source ERP+CRM for\n"
+"OpenERP is an Open Source ERP+CRM for\n"
 "small and medium businesses.\n"
 "\n"
 "The whole source code is distributed under\n"
@@ -528,19 +528,19 @@ msgstr ""
 "\n"
 "(c) 2003-TODAY, Tiny sprl\n"
 "\n"
-"More Info on www.TinyERP.com !"
+"More Info on www.OpenERP.com !"
 
 #: terp.glade:2724
 #, fuzzy
-msgid "_Tiny ERP"
-msgstr "Tiny ERP"
+msgid "_OpenERP"
+msgstr "OpenERP"
 
 #: terp.glade:2776
 #, fuzzy
 msgid ""
 "\n"
 "(c) 2003-TODAY - Tiny sprl\n"
-"Tiny ERP is a product of Tiny sprl:\n"
+"OpenERP is a product of Tiny sprl:\n"
 "\n"
 "Tiny sprl\n"
 "40 Chaussée de Namur\n"
@@ -553,7 +553,7 @@ msgid ""
 msgstr ""
 "\n"
 "(c) 2003-TODAY - Tiny sprl\n"
-"Tiny ERP is a product of Tiny sprl:\n"
+"OpenERP is a product of Tiny sprl:\n"
 "\n"
 "Tiny sprl\n"
 "21 Rue du Vieux Chateau\n"
@@ -570,8 +570,8 @@ msgid "_Contact"
 msgstr "Névjegy"
 
 #: terp.glade:2869
-msgid "Tiny ERP - forms widget"
-msgstr "Tiny ERP - űrlap kezelőfelület"
+msgid "OpenERP - forms widget"
+msgstr "OpenERP - űrlap kezelőfelület"
 
 #: terp.glade:2936
 msgid "Open the calendar widget"
@@ -622,12 +622,12 @@ msgid "Remove selected entry"
 msgstr "Kiválasztott bejegyzés törlése"
 
 #: terp.glade:4301
-msgid "Tiny ERP - Date selection"
-msgstr "Tiny ERP - Dátum kiválasztás"
+msgid "OpenERP - Date selection"
+msgstr "OpenERP - Dátum kiválasztás"
 
 #: terp.glade:4383 terp.glade:11404
-msgid "Tiny ERP - Confirmation"
-msgstr "Tiny ERP - Jóváhagyás"
+msgid "OpenERP - Confirmation"
+msgstr "OpenERP - Jóváhagyás"
 
 #: terp.glade:4471 terp.glade:11505 terp.glade:13997
 msgid "Hello World!"
@@ -635,16 +635,16 @@ msgstr "Helló világ!"
 
 #: terp.glade:4504
 #, fuzzy
-msgid "Tiny ERP - Selection"
-msgstr "Tiny ERP - kiválasztás"
+msgid "OpenERP - Selection"
+msgstr "OpenERP - kiválasztás"
 
 #: terp.glade:4577
 msgid "Your selection:"
 msgstr "Az ön választásai:"
 
 #: terp.glade:4652
-msgid "Tiny ERP - Filter"
-msgstr "Tiny ERP - Szűrés"
+msgid "OpenERP - Filter"
+msgstr "OpenERP - Szűrés"
 
 #: terp.glade:4724
 #, fuzzy
@@ -690,8 +690,8 @@ msgid "<b><u>Actions</u></b>"
 msgstr "<b><u>Műveletek</u></b>"
 
 #: terp.glade:5009
-msgid "Tiny ERP - Dialog"
-msgstr "Tiny ERP - Dialógusablak"
+msgid "OpenERP - Dialog"
+msgstr "OpenERP - Dialógusablak"
 
 #: terp.glade:5055
 msgid "Set to _Default"
@@ -704,8 +704,8 @@ msgstr "Érték preferencia"
 
 #: terp.glade:5104
 #, fuzzy
-msgid "Tiny ERP, Field Preference target"
-msgstr "Tiny ERP - Beállítások"
+msgid "OpenERP, Field Preference target"
+msgstr "OpenERP - Beállítások"
 
 #: terp.glade:5177
 #, fuzzy
@@ -742,8 +742,8 @@ msgid "<b>Value applicable for:</b>"
 msgstr "<b>Alkalmazandó:</b>"
 
 #: terp.glade:5507
-msgid "Tiny ERP - Export to CSV"
-msgstr "Tiny REP - Exportálás CSV-be"
+msgid "OpenERP - Export to CSV"
+msgstr "OpenERP - Exportálás CSV-be"
 
 #: terp.glade:5622
 #, fuzzy
@@ -796,12 +796,12 @@ msgid "<b>Opti_ons</b>"
 msgstr "<b>Opciók</b>"
 
 #: terp.glade:6254
-msgid "Tiny ERP - Search"
-msgstr "Tiny ERP - Keresés"
+msgid "OpenERP - Search"
+msgstr "OpenERP - Keresés"
 
 #: terp.glade:6384
-msgid "Tiny ERP - Search Widgets"
-msgstr "Tiny ERP - Felületelemek keresése"
+msgid "OpenERP - Search Widgets"
+msgstr "OpenERP - Felületelemek keresése"
 
 #: terp.glade:6433 terp.glade:6538 terp.glade:6742
 msgid "-"
@@ -838,8 +838,8 @@ msgstr ""
 "Nem"
 
 #: terp.glade:6844
-msgid "Tiny ERP - Attachment"
-msgstr "Tiny ERP - Melléklet"
+msgid "OpenERP - Attachment"
+msgstr "OpenERP - Melléklet"
 
 #: terp.glade:6914
 msgid "Filename:"
@@ -855,8 +855,8 @@ msgid "Save text"
 msgstr "Mentés"
 
 #: terp.glade:7345
-msgid "Tiny ERP - Error"
-msgstr "Tiny ERP - Hiba"
+msgid "OpenERP - Error"
+msgstr "OpenERP - Hiba"
 
 #: terp.glade:7404
 #, fuzzy
@@ -904,8 +904,8 @@ msgstr "Jellemzők"
 msgid ""
 "<b>Complete this form to submit your bug and/or request a support.</b>\n"
 "<i>\n"
-"Your request will be send to Tiny ERP and we will reply you shortly.\n"
-"Note that we may not reply you if your Service Company is not a Tiny ERP "
+"Your request will be send to OpenERP and we will reply you shortly.\n"
+"Note that we may not reply you if your Service Company is not a OpenERP "
 "partner.\n"
 "</i>"
 msgstr ""
@@ -967,20 +967,20 @@ msgid "<b>_Support Request</b>"
 msgstr "<b>Támogatási kérelem</b>"
 
 #: terp.glade:8366
-msgid "Tiny ERP - Ressource Edit"
-msgstr "Tiny ERP - Elem szerkesztő"
+msgid "OpenERP - Ressource Edit"
+msgstr "OpenERP - Elem szerkesztő"
 
 #: terp.glade:8437
-msgid "Tiny ERP - Link"
-msgstr "Tiny ERP - Hivatkozás"
+msgid "OpenERP - Link"
+msgstr "OpenERP - Hivatkozás"
 
 #: terp.glade:8535
-msgid "Tiny ERP - List"
-msgstr "Tiny ERP - Lista"
+msgid "OpenERP - List"
+msgstr "OpenERP - Lista"
 
 #: terp.glade:8604
-msgid "Tiny ERP - Preferences"
-msgstr "Tiny ERP - Beállítások"
+msgid "OpenERP - Preferences"
+msgstr "OpenERP - Beállítások"
 
 #: terp.glade:8674
 #, fuzzy
@@ -1008,17 +1008,17 @@ msgstr "Szeretné hogy megjelenjenek a tippek a következő indításkor?"
 
 #: terp.glade:9017
 #, fuzzy
-msgid "Tiny ERP - License"
-msgstr "Tiny ERP - Licensz"
+msgid "OpenERP - License"
+msgstr "OpenERP - Licensz"
 
 #: terp.glade:9076
-msgid "Tiny ERP license"
-msgstr "Tiny ERP licensz"
+msgid "OpenERP license"
+msgstr "OpenERP licensz"
 
 #: terp.glade:9250
 #, fuzzy
-msgid "Tiny ERP - Date & Time selection"
-msgstr "Tiny ERP - Dátum kiválasztás"
+msgid "OpenERP - Date & Time selection"
+msgstr "OpenERP - Dátum kiválasztás"
 
 #: terp.glade:9328
 #, fuzzy
@@ -1041,17 +1041,17 @@ msgstr "Keresés:"
 
 #: terp.glade:9602
 #, fuzzy
-msgid "Tiny ERP Survey"
-msgstr "Tiny ERP"
+msgid "OpenERP Survey"
+msgstr "OpenERP"
 
 #: terp.glade:9674
 #, fuzzy
-msgid "<b>Tiny ERP Survey</b>"
-msgstr "Tiny ERP"
+msgid "<b>OpenERP Survey</b>"
+msgstr "OpenERP"
 
 #: terp.glade:9699
 msgid ""
-"<i>Please fill in the following form in order to help us to improve Tiny ERP "
+"<i>Please fill in the following form in order to help us to improve OpenERP "
 "and better target new developments.</i>"
 msgstr ""
 
@@ -1092,15 +1092,15 @@ msgid "<b>Your company:</b>"
 msgstr "<b>Cég: </b>"
 
 #: terp.glade:10485
-msgid "We plan to use Tiny ERP"
+msgid "We plan to use OpenERP"
 msgstr ""
 
 #: terp.glade:10504
-msgid "We plan to offer services on Tiny ERP"
+msgid "We plan to offer services on OpenERP"
 msgstr ""
 
 #: terp.glade:10529
-msgid "Tell us why you try Tiny ERP and what are your current softwares:"
+msgid "Tell us why you try OpenERP and what are your current softwares:"
 msgstr ""
 
 #: terp.glade:10594
@@ -1109,7 +1109,7 @@ msgid "<b>Your interrest:</b>"
 msgstr "<b>Neve: </b>"
 
 #: terp.glade:10652
-msgid "(Get Tiny ERP announces, docs and new releases by email)"
+msgid "(Get OpenERP announces, docs and new releases by email)"
 msgstr ""
 
 #: terp.glade:10680
@@ -1129,7 +1129,7 @@ msgstr ""
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
 "<i>\n"
-"Your request will be sent to the Tiny ERP team and we will reply shortly.\n"
+"Your request will be sent to the OpenERP team and we will reply shortly.\n"
 "Note that we may not reply if you do not have a support contract with Tiny "
 "or an official partner.</i>"
 msgstr ""
@@ -1270,7 +1270,7 @@ msgid "Close window without saving"
 msgstr ""
 
 #: terp.glade:12365
-msgid "<b>Shortcuts for TinyERP</b>"
+msgid "<b>Shortcuts for OpenERP</b>"
 msgstr ""
 
 #: terp.glade:12399
@@ -1412,8 +1412,8 @@ msgid "CSV Parameters"
 msgstr ""
 
 #: terp.glade:13905
-msgid "Tiny ERP"
-msgstr "Tiny ERP"
+msgid "OpenERP"
+msgstr "OpenERP"
 
 #: terp.glade:14056
 #, fuzzy
@@ -1421,7 +1421,7 @@ msgid "Server"
 msgstr "Szerver:"
 
 #: terp.glade:14119
-msgid "<b>Connect to a Tiny ERP server</b>"
+msgid "<b>Connect to a OpenERP server</b>"
 msgstr ""
 
 #: terp.glade:14165
@@ -1500,12 +1500,12 @@ msgstr "Új elem létrehozása"
 
 #: terp.glade:15397
 #, fuzzy
-msgid "Tiny ERP server:"
-msgstr "Tiny ERP"
+msgid "OpenERP server:"
+msgstr "OpenERP"
 
 #: terp.glade:15426
 msgid ""
-"This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
+"This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
 
@@ -1541,7 +1541,7 @@ msgstr ""
 #: terp.glade:15730
 msgid ""
 "This is the password of the user that have the rights to administer "
-"databases. This is not a Tiny ERP user, just a super administrator. If you "
+"databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 
@@ -1588,8 +1588,8 @@ msgstr "Jelszó:"
 
 #: terp.glade:16254
 #, fuzzy
-msgid "Tiny ERP Message"
-msgstr "Tiny ERP licensz"
+msgid "OpenERP Message"
+msgstr "OpenERP licensz"
 
 #: terp.glade:16392
 msgid "Database creation"

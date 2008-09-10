@@ -1,11 +1,11 @@
-.TH tinyerp 1
+.TH openerp 1
 
 .SH NAME
 openerp \- Client for OpenERP
 
 .SH SYNOPSIS
 
-.B tinyerp.py [options]
+.B openerp-client.py [options]
 
 .SH DESCRIPTION
 OpenERP is an Enterprise Resource Planning and Customer Relationship
@@ -15,7 +15,7 @@ accounting, double-entry stock management, sales and purchases management,
 tasks automation, a help desk, marketing campaigns, and vertical modules
 for very specific businesses. Technical features include a distributed
 server, flexible workflows, an object database, a dynamic GUI, customizable
-reports, and a SOAP and XML-RPC interface.
+reports, and a NET-RPC and XML-RPC interface.
 
 .SH OPTIONS
 .TP
@@ -27,7 +27,7 @@ Print this help message and exit.
 Print the program's version number and exit.
 .TP
 .B \-c \fIfile\fR, \-\-config=\fIfile\fR
-Specify alternate config file. By default, openerp uses ~/.terprc
+Specify alternate config file. By default, openerp uses ~/.openerprc
 
 .TP
 .B \-v, \-\-verbose
@@ -44,16 +44,14 @@ Specify which channels to log. Available channels are: view, view.form,
 common.options, common.message, rpc.exception, rpc.request, rpc.result
 
 .SH FILES
-~/.terprc
+~/.openerprc
 
 .SH AUTHORS
 
 OpenERP is a product of \fBTiny.be\fR (\fIhttp://www.tiny.be\fR)
 
 .SH SEE ALSO
-tinyerp_server(1)
+openerp_server(1)
 .br
-\fIhttp://www.tinyerp.com\fR : OpenERP functional description
-.br
-\fIhttp://www.tinyerp.org\fR : OpenERP developer zone
+\fIhttp://www.openerp.com\fR : OpenERP functional description
 

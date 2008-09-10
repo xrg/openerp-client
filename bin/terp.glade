@@ -1926,7 +1926,7 @@ the terms of the GNU Public Licence.
 
 (c) 2003-TODAY, Tiny sprl
 
-More Info on www.TinyERP.com !</property>
+More Info on www.openerp.com !</property>
                       </widget>
                     </child>
                   </widget>
@@ -3680,8 +3680,8 @@ Please retry</property>
                                 <property name="ypad">10</property>
                                 <property name="label" translatable="yes">&lt;b&gt;Complete this form to submit your bug and/or request a support.&lt;/b&gt;
 &lt;i&gt;
-Your request will be send to Tiny ERP and we will reply you shortly.
-Note that we may not reply you if your Service Company is not a Tiny ERP partner.
+Your request will be send to OpenERP and we will reply you shortly.
+Note that we may not reply you if your Service Company is not a OpenERP partner.
 &lt;/i&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
@@ -5010,7 +5010,7 @@ ZIMBABWE</property>
                             <property name="visible">True</property>
                             <property name="items">(choose one)
 Search Engine
-From a Tiny ERP Partner
+From a OpenERP Partner
 Conference or Trade show
 Link in another website
 Word of mouth

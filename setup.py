@@ -99,14 +99,14 @@ def data_files():
         files.append(("icons", glob.glob("bin\\icons\\*.png")))
         files.append(("share\\locale", glob.glob("bin\\share\\locale\\*.*")))
     else:
-        files.append((opj('share','man','man1',''),['man/tinyerp-client.1']))
-        files.append((opj('share','doc', 'tinyerp-client-%s' % version), [f for
+        files.append((opj('share','man','man1',''),['man/openerp-client.1']))
+        files.append((opj('share','doc', 'openerp-client-%s' % version), [f for
             f in glob.glob('doc/*') if os.path.isfile(f)]))
-        files.append((opj('share', 'pixmaps', 'tinyerp-client'),
+        files.append((opj('share', 'pixmaps', 'openerp-client'),
             glob.glob('bin/pixmaps/*.png')))
-        files.append((opj('share', 'pixmaps', 'tinyerp-client', 'icons'),
+        files.append((opj('share', 'pixmaps', 'openerp-client', 'icons'),
             glob.glob('bin/icons/*.png')))
-        files.append((opj('share', 'tinyerp-client'), ['bin/terp.glade',
+        files.append((opj('share', 'openerp-client'), ['bin/terp.glade',
             'bin/tipoftheday.txt']))
     return files
 
@@ -118,7 +118,7 @@ def find_plugins():
         for dirpath, dirnames, filenames in os.walk(path):
             if '__init__.py' in filenames:
                 modname = dirpath.replace(os.path.sep, '.')
-                yield modname.replace('bin', 'tinyerp-client', 1)
+                yield modname.replace('bin', 'openerp-client', 1)
 
 def translations():
     trans = []
@@ -133,10 +133,10 @@ check_modules()
 # create startup script
 start_script = \
 "#!/bin/sh\n\
-cd %s/lib/python%s/site-packages/tinyerp-client\n\
-exec %s ./tinyerp-client.py $@" % (sys.prefix, py_short_version, sys.executable)
+cd %s/lib/python%s/site-packages/openerp-client\n\
+exec %s ./openerp-client.py $@" % (sys.prefix, py_short_version, sys.executable)
 # write script
-f = open('tinyerp-client', 'w')
+f = open('openerp-client', 'w')
 f.write(start_script)
 f.close()
 
@@ -174,29 +174,29 @@ setup(name             = name,
       license          = license,
       data_files       = data_files(),
       translations     = translations(),
-      scripts          = ['tinyerp-client'],
-      packages         = ['tinyerp-client', 'tinyerp-client.common', 
-                          'tinyerp-client.modules', 'tinyerp-client.modules.action',
-                          'tinyerp-client.modules.gui',
-                          'tinyerp-client.modules.gui.window',
-                          'tinyerp-client.modules.gui.window.view_sel',
-                          'tinyerp-client.modules.gui.window.view_tree',
-                          'tinyerp-client.modules.spool',
-                          'tinyerp-client.printer', 'tinyerp-client.tools',
-                          'tinyerp-client.tinygraph',
-                          'tinyerp-client.widget',
-                          'tinyerp-client.widget.model',
-                          'tinyerp-client.widget.screen',
-                          'tinyerp-client.widget.view',
-                          'tinyerp-client.widget.view.form_gtk',
-                          'tinyerp-client.widget.view.tree_gtk',
-                          'tinyerp-client.widget.view.graph_gtk',
-                          'tinyerp-client.widget.view.calendar_gtk',
-                          'tinyerp-client.widget_search',
-                          'tinyerp-client.plugins'] + list(find_plugins()),
-      package_dir      = {'tinyerp-client': 'bin'},
+      scripts          = ['openerp-client'],
+      packages         = ['openerp-client', 'openerp-client.common', 
+                          'openerp-client.modules', 'openerp-client.modules.action',
+                          'openerp-client.modules.gui',
+                          'openerp-client.modules.gui.window',
+                          'openerp-client.modules.gui.window.view_sel',
+                          'openerp-client.modules.gui.window.view_tree',
+                          'openerp-client.modules.spool',
+                          'openerp-client.printer', 'openerp-client.tools',
+                          'openerp-client.tinygraph',
+                          'openerp-client.widget',
+                          'openerp-client.widget.model',
+                          'openerp-client.widget.screen',
+                          'openerp-client.widget.view',
+                          'openerp-client.widget.view.form_gtk',
+                          'openerp-client.widget.view.tree_gtk',
+                          'openerp-client.widget.view.graph_gtk',
+                          'openerp-client.widget.view.calendar_gtk',
+                          'openerp-client.widget_search',
+                          'openerp-client.plugins'] + list(find_plugins()),
+      package_dir      = {'openerp-client': 'bin'},
       distclass = os.name <> 'nt' and L10nAppDistribution or None,
-      windows=[{"script":"bin\\tinyerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\tinyerp.ico")]}],
+      windows=[{"script":"bin\\openerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\openerp.ico")]}],
       options = options,
       )
 

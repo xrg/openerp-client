@@ -66,7 +66,7 @@ def _search_file(file, dir='path.share'):
 terp_path = _search_file
 terp_path_pixmaps = lambda x: _search_file(x, 'path.pixmaps')
 
-TINYERP_ICON = gtk.gdk.pixbuf_new_from_file(
+OPENERP_ICON = gtk.gdk.pixbuf_new_from_file(
             terp_path_pixmaps('tinyerp-icon-32x32.png'))
 
 def selection(title, values, alwaysask=False, parent=None):
@@ -80,7 +80,7 @@ def selection(title, values, alwaysask=False, parent=None):
     win = xml.get_widget('win_selection')
     if not parent:
         parent = service.LocalService('gui.main').window
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
     win.set_transient_for(parent)
 
     label = xml.get_widget('win_sel_title')
@@ -132,7 +132,7 @@ class upload_data_thread(threading.Thread):
         try:
             import urllib
             args = urllib.urlencode(self.args)
-            fp = urllib.urlopen('http://www.tinyerp.com/scripts/survey.php', args)
+            fp = urllib.urlopen('http://www.openerp.com/scripts/survey.php', args)
             fp.read()
             fp.close()
         except:
@@ -152,7 +152,7 @@ def terp_survey():
     win = winglade.get_widget('dia_survey')
     parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
     for widname in widnames:
         wid = winglade.get_widget('combo_'+widname)
         wid.child.set_text('(choose one)')
@@ -197,7 +197,7 @@ def file_selection(title, filename='', parent=None,
     if not parent:
         parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
     win.set_current_folder(options.options['client.default_path'])
     win.set_select_multiple(multi)
     win.set_default_response(gtk.RESPONSE_OK)
@@ -261,7 +261,7 @@ def support(*args):
     win = sur.get_widget('dia_support')
     parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
     win.show_all()
     sur.get_widget('id_entry').set_text(support_id)
 
@@ -306,7 +306,7 @@ def error(title, message, details='', parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
     sur.get_widget('error_title').set_text(str(title))
     sur.get_widget('error_info').set_text(str(message))
     buf = gtk.TextBuffer()
@@ -356,7 +356,7 @@ def message(msg, type=gtk.MESSAGE_INFO, parent=None):
       gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
       type, gtk.BUTTONS_OK,
       msg)
-    dialog.set_icon(TINYERP_ICON)
+    dialog.set_icon(OPENERP_ICON)
     dialog.run()
     parent.present()
     dialog.destroy()
@@ -378,7 +378,7 @@ def message_box(title, msg, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
 
     response = win.run()
     parent.present()
@@ -391,7 +391,7 @@ def warning(msg, title='', parent=None):
         parent=service.LocalService('gui.main').window
     dialog = gtk.MessageDialog(parent, gtk.DIALOG_DESTROY_WITH_PARENT,
             gtk.MESSAGE_WARNING, gtk.BUTTONS_OK)
-    dialog.set_icon(TINYERP_ICON)
+    dialog.set_icon(OPENERP_ICON)
     dialog.set_markup('<b>%s</b>\n\n%s' % (to_xml(title),to_xml(msg)))
     dialog.show_all()
     dialog.run()
@@ -412,7 +412,7 @@ def sur(msg, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
 
     response = win.run()
     parent.present()
@@ -428,7 +428,7 @@ def sur_3b(msg, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
 
     response = win.run()
     parent.present()
@@ -447,7 +447,7 @@ def theme_set():
     if theme and (theme <> 'none'):
         fname = os.path.join("themes", theme, "gtkrc")
         if not os.path.isfile(fname):
-            common.warning('File not found: '+fname+'\nSet theme to none in ~/.terprc', 'Error setting theme')
+            common.warning('File not found: '+fname+'\nSet theme to none in ~/.openerprc', 'Error setting theme')
             return False
         gtk.rc_parse("themes/"+theme+"/gtkrc")
     return True
@@ -462,7 +462,7 @@ def ask(question, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
 
     response = win.run()
     parent.present()
@@ -479,7 +479,7 @@ def concurrency(resource, id, context, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
 
     res= win.run()
     parent.present()

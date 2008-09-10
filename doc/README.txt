@@ -13,7 +13,7 @@ Technical features include a distributed server, flexible workflows, an object
 database, dynamic GUIs, customizable reports, SOAP and XML-RPC interfaces, ...
 
 For more information, please visit:
-http://www.tinyerp.org
+http://www.openerp.com
 
 About Tiny.be
 ----------------

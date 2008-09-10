@@ -210,7 +210,7 @@ def print_data(data):
         import tempfile
         if data['format']=='html' and os.name=='nt':
             data['format']='doc'
-        (fileno, fp_name) = tempfile.mkstemp('.'+data['format'], 'tinyerp_')
+        (fileno, fp_name) = tempfile.mkstemp('.'+data['format'], 'openerp_')
         fp = file(fp_name, 'wb+')
         fp.write(content)
         fp.close()

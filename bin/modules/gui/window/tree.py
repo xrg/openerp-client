@@ -75,7 +75,6 @@ class tree(object):
             wid.show()
 
         widget_sc = self.glade.get_widget('win_tree_sc')
-        #imagename = 'tinyerp.png'
 
         widget_sc.connect('row-activated', self.sc_go)
         self.tree_sc = view_tree.view_tree_sc(widget_sc, self.model)

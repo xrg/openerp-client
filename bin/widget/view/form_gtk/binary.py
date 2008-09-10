@@ -116,7 +116,7 @@ class wid_binary(interface.widget_interface):
                         raise Exception(_("Unable to read the file data"))
 
                 ext = os.path.splitext(filename)[1][1:]
-                (fileno, fp_name) = tempfile.mkstemp('.'+ext, 'tinyerp_')
+                (fileno, fp_name) = tempfile.mkstemp('.'+ext, 'openerp_')
 
                 os.write(fileno, base64.decodestring(data))
                 os.close(fileno)
