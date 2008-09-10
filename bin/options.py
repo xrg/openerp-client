@@ -87,7 +87,7 @@ class configmanager(object):
             'support.recipient': 'support@openerp.com',
             'support.support_id' : '',
             'form.toolbar': True,
-            'client.form_tab': 'left',
+            'client.form_tab': 'top',
             'client.form_tab_orientation': 0,
             'client.lang': False,
             'client.filetype': {},

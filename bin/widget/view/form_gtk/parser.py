@@ -95,7 +95,6 @@ class Button(Observable):
                     common.sur(self.attrs['confirm']):
                 button_type = self.attrs.get('type', 'workflow')
                 if button_type == 'workflow':
-                    #print 'Exec Workflow'
                     result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
                                             self.form.screen.name,
                                             self.attrs['name'], id)

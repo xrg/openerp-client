@@ -110,7 +110,7 @@ class ViewForm(parser_view):
 
             eb = gtk.EventBox()
             eb.add(tb)
-            #eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
+            eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
             #tb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("blue"))
 
 
