@@ -204,7 +204,7 @@ class db_login(object):
 
         res = self.refreshlist(None, db_widget, label, url, but_connect)
         change_button.connect_after('clicked', self.refreshlist_ask, server_widget, db_widget, label, but_connect, url, win)
-
+        
         if dbname:
             iter = liststore.get_iter_root()
             while iter:
@@ -212,6 +212,8 @@ class db_login(object):
                     db_widget.set_active_iter(iter)
                     break
                 iter = liststore.iter_next(iter)
+        else:
+            dbname = db_widget.get_active_text()
 
         res = win.run()
         m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', server_widget.get_text() or '')
@@ -220,8 +222,8 @@ class db_login(object):
             options.options['login.login'] = login.get_text()
             options.options['login.port'] = m.group(3)
             options.options['login.protocol'] = m.group(1)
-            options.options['login.db'] = db_widget.get_active_text()
-            result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), db_widget.get_active_text())
+            options.options['login.db'] = dbname
+            result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), dbname)
         else:
             parent.present()
             win.destroy()
@@ -313,6 +315,7 @@ class db_create(object):
             options.options['login.server'] = m.group(2)
             options.options['login.port'] = m.group(3)
             options.options['login.protocol'] = m.group(1)
+            options.options['login.db'] = db_name
         parent.present()
         win.destroy()
 
@@ -397,8 +400,10 @@ class db_create(object):
                         res.append( dbname )
                         log_response = rpc.session.login(*res)
                         if log_response == 1:
+                            options.options['login.login'] = x['login']
                             id = self.terp_main.sig_win_menu(quiet=False)
                             ok = True
+                            break
                 if not ok:
                     self.sig_login(dbname=dbname)
             return False
