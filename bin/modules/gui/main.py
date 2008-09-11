@@ -50,6 +50,15 @@ import re
 import xmlrpclib
 import base64
 
+RESERVED_KEYWORDS=['absolute', 'action', 'all', 'alter', 'analyse', 'analyze', 'and', 'any', 'as', 'asc', 'authorization', 'between', 'binary', 'both',
+            'case', 'cast', 'check', 'collate', 'column','constraint', 'create', 'cross', 'current_date', 'current_time', 'current_timestamp',
+            'current_user','default', 'deferrable', 'desc', 'distinct', 'do', 'else', 'end', 'except', 'false', 'for', 'foreign', 'freeze',
+            'from', 'full', 'grant', 'group', 'having', 'ilike', 'in', 'initially','inner', 'intersect', 'into', 'is', 'isnull', 'join', 'leading',
+            'left', 'like', 'limit', 'localtime', 'localtimestamp', 'natural', 'new', 'not', 'notnull', 'null', 'off', 'offset', 'old',
+             'on', 'only', 'or', 'order', 'outer', 'overlaps', 'placing', 'primary', 'references', 'right','select', 'session_user', 'similar',
+             'some', 'sysid', 'table', 'then', 'to', 'trailing', 'true', 'union', 'unique', 'user', 'using', 'verbose', 'when', 'where']
+
+
 def _refresh_dblist(db_widget, url, dbtoload=None):
     if not dbtoload:
         dbtoload = options.options['login.db']
@@ -293,7 +302,7 @@ class db_create(object):
         while True:
             res = win.run()
             db_name = self.db_widget.get_text().lower()
-            if (res==gtk.RESPONSE_OK) and (db_name in ('table','new','create','as','select','from','where','in','inner','outer','join','group')):
+            if (res==gtk.RESPONSE_OK) and (db_name in RESERVED_KEYWORDS):
                 common.warning(_("Sorry,'" +db_name + "' cannot be the name of the database,it's a Reserved Keyword."), _('Bad database name !'), parent=parent)
                 continue
             if (res==gtk.RESPONSE_OK) and ((not db_name) or (not re.match('^[a-zA-Z][a-zA-Z0-9_]+$', db_name))):
