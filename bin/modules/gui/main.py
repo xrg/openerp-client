@@ -204,7 +204,7 @@ class db_login(object):
 
         res = self.refreshlist(None, db_widget, label, url, but_connect)
         change_button.connect_after('clicked', self.refreshlist_ask, server_widget, db_widget, label, but_connect, url, win)
-        
+
         if dbname:
             iter = liststore.get_iter_root()
             while iter:
@@ -292,7 +292,7 @@ class db_create(object):
 
         while True:
             res = win.run()
-            db_name = self.db_widget.get_text()
+            db_name = self.db_widget.get_text().lower()
             if (res==gtk.RESPONSE_OK) and (db_name in ('table','new','create','as','select','from','where','in','inner','outer','join','group')):
                 common.warning(_("Sorry,'" +db_name + "' cannot be the name of the database,it's a Reserved Keyword."), _('Bad database name !'), parent=parent)
                 continue
