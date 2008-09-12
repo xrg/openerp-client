@@ -296,7 +296,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
 class view_tree(object):
     def __init__(self, view_info, ids, res_id=None, sel_multi=False, context={}):
         self.view = gtk.TreeView()
-        self.view.set_headers_visible(not options.options['client.modepda'])
+        self.view.set_headers_visible(True)
         self.context = {}
         self.context.update(rpc.session.context)
         self.context.update(context)

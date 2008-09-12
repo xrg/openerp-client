@@ -428,6 +428,7 @@ class terp_main(service.Service):
         self._handler_ok = True
         self.glade = glade.XML(common.terp_path("openerp.glade"),"win_main",gettext.textdomain())
         self.status_bar_main = self.glade.get_widget('hbox_status_main')
+        self.status_bar_main.show()
         self.toolbar = self.glade.get_widget('main_toolbar')
         self.sb_requests = self.glade.get_widget('sb_requests')
         self.sb_username = self.glade.get_widget('sb_user_name')
@@ -510,8 +511,6 @@ class terp_main(service.Service):
             'on_menubar_icons_activate': lambda x: self.sig_menubar('icons'),
             'on_menubar_text_activate': lambda x: self.sig_menubar('text'),
             'on_menubar_both_activate': lambda x: self.sig_menubar('both'),
-            'on_mode_normal_activate': lambda x: self.sig_mode_change(False),
-            'on_mode_pda_activate': lambda x: self.sig_mode_change(True),
             'on_opt_form_tab_top_activate': lambda x: self.sig_form_tab('top'),
             'on_opt_form_tab_left_activate': lambda x: self.sig_form_tab('left'),
             'on_opt_form_tab_right_activate': lambda x: self.sig_form_tab('right'),
@@ -603,11 +602,6 @@ class terp_main(service.Service):
         self.sig_form_tab(options.options['client.form_tab'] or 'left')
         self.glade.get_widget('opt_form_tab_orientation_'+(str(options.options['client.form_tab_orientation']) or '0')).set_active(True)
         self.sig_form_tab_orientation(options.options['client.form_tab_orientation'] or 0)
-        if options.options['client.modepda']:
-            self.glade.get_widget('mode_pda').set_active(True)
-        else:
-            self.glade.get_widget('mode_normal').set_active(True)
-        self.sig_mode()
         for signal in dict:
             self.glade.signal_connect(signal, dict[signal][0], dict[signal][1])
             self.glade.get_widget(dict[signal][2]).set_active(int(bool(options.options[dict[signal][1]])))
@@ -658,18 +652,6 @@ class terp_main(service.Service):
         common.theme_set()
         self.window.show_all()
         return True
-
-    def sig_mode_change(self, pda_mode=False):
-        options.options['client.modepda'] = pda_mode
-        return self.sig_mode()
-
-    def sig_mode(self):
-        pda_mode = options.options['client.modepda']
-        if pda_mode:
-            self.status_bar_main.hide()
-        else:
-            self.status_bar_main.show()
-        return pda_mode
 
     def sig_menubar(self, option):
         options.options['client.toolbar'] = option

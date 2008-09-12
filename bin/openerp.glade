@@ -897,42 +897,6 @@
                           </widget>
                         </child>
                         <child>
-                          <widget class="GtkImageMenuItem" id="client_mode1">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Client Mode</property>
-                            <property name="use_underline">True</property>
-                            <signal name="activate" handler="on_client_mode1_activate"/>
-                            <child>
-                              <widget class="GtkMenu" id="client_mode1_menu">
-                                <child>
-                                  <widget class="GtkRadioMenuItem" id="mode_normal">
-                                    <property name="visible">True</property>
-                                    <property name="label" translatable="yes">Normal</property>
-                                    <property name="use_underline">True</property>
-                                    <signal name="activate" handler="on_mode_normal_activate"/>
-                                  </widget>
-                                </child>
-                                <child>
-                                  <widget class="GtkRadioMenuItem" id="mode_pda">
-                                    <property name="visible">True</property>
-                                    <property name="label" translatable="yes">Mode PDA</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="group">mode_normal</property>
-                                    <signal name="activate" handler="on_mode_pda_activate"/>
-                                  </widget>
-                                </child>
-                              </widget>
-                            </child>
-                            <child internal-child="image">
-                              <widget class="GtkImage" id="image4236">
-                                <property name="visible">True</property>
-                                <property name="stock">gtk-print-preview</property>
-                                <property name="icon_size">1</property>
-                              </widget>
-                            </child>
-                          </widget>
-                        </child>
-                        <child>
                           <widget class="GtkImageMenuItem" id="menu_theme">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">_Theme</property>

@@ -98,7 +98,7 @@ class ViewForm(parser_view):
         self.widgets = dict([(name, ViewWidget(self, widget, name))
                              for name, widget in children.items()])
 
-        if toolbar and not options.options['client.modepda']:
+        if toolbar:
             hb = gtk.HBox()
             hb.pack_start(self.widget)
 

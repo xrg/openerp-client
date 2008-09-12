@@ -66,7 +66,6 @@ class configmanager(object):
             'login.port': '8070',
             'login.protocol': 'socket://',
             'login.db': 'terp',
-            'client.modepda': False,
             'client.toolbar': 'both',
             'client.theme': 'none',
             'path.share': os.path.join(sys.prefix, 'share/openerp-client/'),
