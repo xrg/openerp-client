@@ -151,7 +151,7 @@ class BinaryField(CharField):
         model.value[self.name] = None
         name = get_binary_size and self.get_size_name() or self.name
         model.value[name] = value
-        if not get_binary_size:
+        if not get_binary_size and value:
             model.value[self.get_size_name()] = tools.human_size(len(value))
         if modified:
             model.modified = True
