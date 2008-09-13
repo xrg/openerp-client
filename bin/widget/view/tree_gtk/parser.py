@@ -69,7 +69,7 @@ class parser_tree(interface.parser_interface):
         attrs = tools.node_attributes(root_node)
         on_write = attrs.get('on_write', '')
         editable = attrs.get('editable', False)
-        if editable:
+        if editable and not self.screen.readonly:
             treeview = EditableTreeView(editable)
         else:
             treeview = DecoratedTreeView(editable)

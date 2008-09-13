@@ -44,7 +44,7 @@ import service
 
 class dialog(object):
     def __init__(self, model_name, parent, model=None, attrs=None, model_ctx=None,
-            window=None, default_get_ctx=None):
+            window=None, default_get_ctx=None, readonly=False):
 
         if attrs is None:
             attrs = {}
@@ -87,7 +87,7 @@ class dialog(object):
         vp.set_shadow_type(gtk.SHADOW_NONE)
         scroll.add(vp)
 
-        self.screen = Screen(model_name, view_type=[], parent=parent, window=self.dia)
+        self.screen = Screen(model_name, view_type=[], parent=parent, window=self.dia, readonly=readonly)
         self.screen.models._context.update(model_ctx)
         if not model:
             model = self.screen.new(context=default_get_ctx)
@@ -139,6 +139,7 @@ class one2many_list(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
 
+        self._readonly = self.default_readonly
         self.widget = gtk.VBox(homogeneous=False, spacing=5)
 
         hb = gtk.HBox(homogeneous=False, spacing=5)
@@ -234,7 +235,7 @@ class one2many_list(interface.widget_interface):
         tooltips.enable()
         self.widget.pack_start(hb, expand=False, fill=True)
 
-        self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=self.parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate, default_get=attrs.get('default_get', {}), window=self._window)
+        self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=self.parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate, default_get=attrs.get('default_get', {}), window=self._window, readonly=self._readonly)
         self.screen.signal_connect(self, 'record-message', self._sig_label)
 
         menuitem_title.get_child().set_markup('<b>'+self.screen.current_view.title.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')+'</b>')
@@ -244,8 +245,8 @@ class one2many_list(interface.widget_interface):
         self.screen.widget.connect('key_press_event', self.on_keypress)
 
     def on_keypress(self, widget, event):
-        if (event.keyval == gtk.keysyms.N and event.state & gtk.gdk.CONTROL_MASK\
-            and event.state & gtk.gdk.SHIFT_MASK) or event.keyval == gtk.keysyms.F1:
+        if (not self._readonly) and ((event.keyval == gtk.keysyms.N and event.state & gtk.gdk.CONTROL_MASK\
+            and event.state & gtk.gdk.SHIFT_MASK) or (event.keyval == gtk.keysyms.F1)):
             self._sig_new(widget, event)
             return False
         if event.keyval == gtk.keysyms.F2:
@@ -274,6 +275,7 @@ class one2many_list(interface.widget_interface):
         self.screen.switch_view()
 
     def _readonly_set(self, value):
+        self._readonly = value
         self.eb_new.set_sensitive(not value)
         self.eb_del.set_sensitive(not value)
 
@@ -284,10 +286,11 @@ class one2many_list(interface.widget_interface):
         if event.type in (gtk.gdk.BUTTON_PRESS, gtk.gdk.KEY_PRESS):
             if (self.screen.current_view.view_type=='form') or self.screen.editable_get():
                 self.screen.new(context=ctx)
+                self._readonly = False
                 self.screen.current_view.widget.set_sensitive(True)
             else:
                 ok = 1
-                dia = dialog(self.attrs['relation'], parent=self._view.model, attrs=self.attrs, model_ctx=self.screen.models._context, default_get_ctx=ctx, window=self._window)
+                dia = dialog(self.attrs['relation'], parent=self._view.model, attrs=self.attrs, model_ctx=self.screen.models._context, default_get_ctx=ctx, window=self._window, readonly=self._readonly)
                 while ok:
                     ok, value = dia.run()
                     if ok:
@@ -299,7 +302,7 @@ class one2many_list(interface.widget_interface):
 
     def _sig_edit(self, *args):
         if self.screen.current_model:
-            dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window)
+            dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly)
             ok, value = dia.run()
             dia.destroy()
 
