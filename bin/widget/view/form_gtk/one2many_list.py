@@ -278,6 +278,8 @@ class one2many_list(interface.widget_interface):
         self._readonly = value
         self.eb_new.set_sensitive(not value)
         self.eb_del.set_sensitive(not value)
+        self.screen.readonly = value
+        self.screen.display()
 
     def _sig_new(self, *args):
         _, event = args
