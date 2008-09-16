@@ -130,12 +130,21 @@ class wid_binary(interface.widget_interface):
         try:
             # Add the filename from the field with the filename attribute in the view
             filters=None
+            filter_file = gtk.FileFilter()
             if self.filters:
-                filter_file = gtk.FileFilter()
                 filter_file.set_name(_(str(','.join(self.filters))))
                 for pat in self.filters:
                     filter_file.add_pattern(pat)
                 filters=[filter_file]
+            else:
+                 key=self.wid_text.get_text()
+                 if not key:
+                     filter_file.set_name('All Files')
+                     filter_file.add_pattern('*')
+                 else:
+                     filter_file.set_name(key)
+                     filter_file.add_pattern('*'+str(key)+'*')
+                 filters=[filter_file]
 
             filename = common.file_selection(_('Select a file...'), parent=self._window,filters=filters)
             if filename:
@@ -172,7 +181,7 @@ class wid_binary(interface.widget_interface):
         self.model_field.set_client(self._view.model, False)
         if self.has_filename:
             self._view.model.set({self.has_filename: False})
-        self.display(self._view.model, self.model_field)
+        self.display(self._view.model,False)
 
     def display(self, model, model_field):
         if not model_field:
