@@ -54,6 +54,7 @@ class wid_binary(interface.widget_interface):
         self.wid_text.set_property('activates_default', True)
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
+        self.filters=attrs.get('filters',None)
         self.but_new = gtk.Button()
         img = gtk.Image()
         img.set_from_stock( 'gtk-execute', gtk.ICON_SIZE_BUTTON )
@@ -128,7 +129,15 @@ class wid_binary(interface.widget_interface):
     def sig_select(self, widget=None):
         try:
             # Add the filename from the field with the filename attribute in the view
-            filename = common.file_selection(_('Select a file...'), parent=self._window)
+            filters=None
+            if self.filters:
+                filter_file = gtk.FileFilter()
+                filter_file.set_name(_(str(','.join(self.filters))))
+                for pat in self.filters:
+                    filter_file.add_pattern(pat)
+                filters=[filter_file]
+
+            filename = common.file_selection(_('Select a file...'), parent=self._window,filters=filters)
             if filename:
                 self.model_field.set_client(self._view.model, base64.encodestring(file(filename, 'rb').read()))
                 if self.has_filename:
