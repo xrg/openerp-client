@@ -153,7 +153,7 @@ class wid_binary(interface.widget_interface):
                     self._view.model.set({self.has_filename: os.path.basename(filename)})
                 self._view.display(self._view.model)
         except Exception, ex:
-            common.message(_('Error reading the file'))
+            common.message(_('Error reading the file: %s') % str(ex))
 
     def sig_save_as(self, widget=None):
         try:
@@ -190,21 +190,9 @@ class wid_binary(interface.widget_interface):
         super(wid_binary, self).display(model, model_field)
         self.model_field = model_field
         disp_text=model_field.get_client(model)
-
-        if disp_text:
-            units = ('bytes', 'Kb', 'Mb', 'Gb')
-            if disp_text.find(" ")<=0:
-                s, i = float(len(disp_text)), 0
-                while s >= 1024 and i < len(units)-1:
-                    s = s / 1024
-                    i = i + 1
-                disp_text="%0.2f %s" % (s, units[i])
-
-        self.wid_text.set_text(disp_text or '')
+        
+        self.wid_text.set_text(disp_text and str(disp_text) or '')
         return True
-
-    #def _size_get(self, l):
-    #    return l and _('%d bytes') % len(l) or ''
 
     def set_value(self, model, model_field):
         return

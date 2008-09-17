@@ -70,7 +70,7 @@ class dialog(object):
             if 'value' in fields[f]:
                 val[f] = fields[f]['value']
 
-        self.screen = Screen('wizard.'+name, view_type=[], window=self.dia)
+        self.screen = Screen('wizard.'+name, view_type=[], window=self.dia, is_wizard=True)
         self.screen.new(default=False)
         self.screen.add_view_custom(arch, fields, display=True)
         self.screen.current_model.set(val)
