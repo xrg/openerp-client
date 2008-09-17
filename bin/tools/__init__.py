@@ -105,6 +105,39 @@ def call_log(fun):
 def to_xml(s):
     return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
 
+def human_size(sz):
+    """
+    Return the size in a human readable format
+    """
+    if not sz:
+        return False
+    units = ('bytes', 'Kb', 'Mb', 'Gb')
+    s, i = float(sz), 0
+    while s >= 1024 and i < len(units)-1:
+        s = s / 1024
+        i = i + 1
+    return "%0.2f %s" % (s, units[i])
+
+def ustr(value):
+    """This method is similar to the builtin `str` method, except
+    it will return Unicode string.
+
+    @param value: the value to convert
+
+    @rtype: unicode
+    @return: unicode string
+    """
+
+    if isinstance(value, unicode):
+        return value
+
+    if hasattr(value, '__unicode__'):
+        return unicode(value)
+
+    if not isinstance(value, str):
+        value = str(value)
+
+    return unicode(value, 'utf-8')
 
 date_mapping = {
     '%y': ('__', '[_0-9][_0-9]'),

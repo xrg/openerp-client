@@ -62,7 +62,7 @@ class dialog(object):
             self.dia.set_property('default-width', 760)
             self.dia.set_property('default-height', 500)
             self.dia.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-            self.dia.set_icon(common.TINYERP_ICON)
+            self.dia.set_icon(common.OPENERP_ICON)
 
             self.accel_group = gtk.AccelGroup()
             self.dia.add_accel_group(self.accel_group)
@@ -116,9 +116,9 @@ class win_search(object):
         self.context = context
         self.context.update(rpc.session.context)
         self.sel_multi = sel_multi
-        self.glade = glade.XML(common.terp_path("terp.glade"),'win_search',gettext.textdomain())
+        self.glade = glade.XML(common.terp_path("openerp.glade"),'win_search',gettext.textdomain())
         self.win = self.glade.get_widget('win_search')
-        self.win.set_icon(common.TINYERP_ICON)
+        self.win.set_icon(common.OPENERP_ICON)
         if not parent:
             parent = service.LocalService('gui.main').window
         self.parent = parent

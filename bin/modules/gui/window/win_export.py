@@ -96,7 +96,7 @@ def datas_read(ids, model, fields, fields_view, prefix='', context=None):
 
 class win_export(object):
     def __init__(self, model, ids, fields, preload = [], parent=None, context=None):
-        self.glade = glade.XML(common.terp_path("terp.glade"), 'win_save_as',
+        self.glade = glade.XML(common.terp_path("openerp.glade"), 'win_save_as',
                 gettext.textdomain())
         self.win = self.glade.get_widget('win_save_as')
         self.ids = ids
@@ -109,7 +109,7 @@ class win_export(object):
         if parent is None:
             parent = service.LocalService('gui.main').window
         self.win.set_transient_for(parent)
-        self.win.set_icon(common.TINYERP_ICON)
+        self.win.set_icon(common.OPENERP_ICON)
         self.parent = parent
 
         self.view1 = gtk.TreeView()

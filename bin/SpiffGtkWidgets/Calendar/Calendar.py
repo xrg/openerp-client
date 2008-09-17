@@ -103,7 +103,7 @@ class Calendar(hippo.Canvas):
 
     def on_size_allocate(self, *args):
         alloc = self.get_allocation()
-        if not self.realized or alloc.width < 10 or alloc.height < 10:
+        if not self.realized: # or alloc.width < 10 or alloc.height < 10:
             return
         #self.set_bounds(0, 0, alloc.width, alloc.height)
 
@@ -123,17 +123,14 @@ class Calendar(hippo.Canvas):
                            inactive      = c2i(style.bg[gtk.STATE_PRELIGHT]))
         self.refresh()
 
-
     def refresh(self):
         if not self.realized:
             return
         self.draw_background()
         self.draw_days()
 
-
     def draw_background(self):
         self.root.color = self.colors['bg']
-
 
     def draw_days(self):
         """

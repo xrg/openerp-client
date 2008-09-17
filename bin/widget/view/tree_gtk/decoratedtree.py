@@ -29,9 +29,10 @@
 ##############################################################################
 
 import gtk
+import observator
 
 
-class DecoratedTreeView(gtk.TreeView):
+class DecoratedTreeView(gtk.TreeView, observator.Observable):
     """This class extend a TreeView to be api compatible with EditableTreeView
     """
 
@@ -48,6 +49,8 @@ class DecoratedTreeView(gtk.TreeView):
             columns = filter(lambda c: c.get_visible(), columns)
         return columns
 
+    def set_value(self):
+        return True
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

@@ -42,7 +42,7 @@ import win_export
 
 class tree(object):
     def __init__(self, view, model, res_id=False, domain=[], context={}, window=None, name=False):
-        self.glade = glade.XML(common.terp_path("terp.glade"),'win_tree_container',gettext.textdomain())
+        self.glade = glade.XML(common.terp_path("openerp.glade"),'win_tree_container',gettext.textdomain())
         self.widget = self.glade.get_widget('win_tree_container')
         self.widget.show_all()
         self.model = view['model']
@@ -69,13 +69,9 @@ class tree(object):
         self.vp = self.glade.get_widget('main_tree_sw')
 
         wid = self.glade.get_widget('widget_vbox')
-        if options.options['client.modepda'] and not self.tree_res.toolbar:
-            wid.hide()
-        else:
-            wid.show()
+        wid.show()
 
         widget_sc = self.glade.get_widget('win_tree_sc')
-        #imagename = 'tinyerp.png'
 
         widget_sc.connect('row-activated', self.sc_go)
         self.tree_sc = view_tree.view_tree_sc(widget_sc, self.model)

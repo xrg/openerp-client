@@ -35,24 +35,24 @@ import gobject
 
 import gettext
 
-
 class selection(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
 
         self.widget = gtk.HBox(spacing=3)
         self.entry = gtk.ComboBoxEntry()
-        self.entry.child.set_property('activates_default', True)
-        self.entry.child.connect('changed', self.sig_changed)
-        self.entry.child.connect('button_press_event', self._menu_open)
-        self.entry.child.connect('key_press_event', self.sig_key_press)
-        self.entry.child.connect('activate', self.sig_activate)
-        self.entry.child.connect_after('focus-out-event', self.sig_activate)
+        self.child = self.entry.get_child()
+        self.child.set_property('activates_default', True)
+        self.child.connect('changed', self.sig_changed)
+        self.child.connect('button_press_event', self._menu_open)
+        self.child.connect('key_press_event', self.sig_key_press)
+        self.child.connect('activate', self.sig_activate)
+        self.child.connect_after('focus-out-event', self.sig_activate)
         self.entry.set_size_request(int(attrs.get('size', -1)), -1)
         self.widget.pack_start(self.entry, expand=True, fill=True)
 
         # the dropdown button is not focusable by a tab
-        self.widget.set_focus_chain([self.entry.child])
+        self.widget.set_focus_chain([self.child])
 
         self.ok = True
         self._selection={}
@@ -80,7 +80,7 @@ class selection(interface.widget_interface):
         self.entry.set_sensitive(not value)
 
     def value_get(self):
-        res = self.entry.child.get_text()
+        res = self.child.get_text()
         return self._selection.get(res, False)
 
     def sig_key_press(self, widget, event):
@@ -97,7 +97,7 @@ class selection(interface.widget_interface):
             completion.set_text_column(0)
 
     def sig_activate(self, *args):
-        text = self.entry.child.get_text()
+        text = self.child.get_text()
         value = False
         if text:
             for txt, val in self._selection.items():
@@ -121,18 +121,18 @@ class selection(interface.widget_interface):
     def display(self, model, model_field):
         self.ok = False
         if not model_field:
-            self.entry.child.set_text('')
+            self.child.set_text('')
             self.ok = True
             return False
         super(selection, self).display(model, model_field)
         value = model_field.get(model)
         if not value:
-            self.entry.child.set_text('')
+            self.child.set_text('')
         else:
             found = False
             for long_text, sel_value in self._selection.items():
                 if sel_value == value:
-                    self.entry.child.set_text(long_text)
+                    self.child.set_text(long_text)
                     found = True
                     break
         self.ok = True
@@ -142,7 +142,7 @@ class selection(interface.widget_interface):
             self._focus_out()
 
     def _color_widget(self):
-        return self.entry.child
+        return self.child
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

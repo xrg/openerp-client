@@ -133,7 +133,7 @@ class calendar(interface.widget_interface):
                 gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
                 (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                 gtk.STOCK_OK, gtk.RESPONSE_OK))
-        win.set_icon(common.TINYERP_ICON)
+        win.set_icon(common.OPENERP_ICON)
 
         cal = gtk.Calendar()
         cal.display_options(gtk.CALENDAR_SHOW_HEADING|gtk.CALENDAR_SHOW_DAY_NAMES|gtk.CALENDAR_SHOW_WEEK_NUMBERS)

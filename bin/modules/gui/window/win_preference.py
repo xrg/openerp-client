@@ -49,18 +49,16 @@ import translate
 
 class win_preference(object):
     def __init__(self, parent=None):
-        self.glade = glade.XML(common.terp_path("terp.glade"),'win_preference', gettext.textdomain())
+        self.glade = glade.XML(common.terp_path("openerp.glade"),'win_preference', gettext.textdomain())
         self.win = self.glade.get_widget('win_preference')
-        self.win.set_icon(common.TINYERP_ICON)
+        self.win.set_icon(common.OPENERP_ICON)
         if not parent:
             parent = service.LocalService('gui.main').window
         self.win.set_transient_for(parent)
         self.parent = parent
 
         action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'action_get', {})
-        print '**', action_id
-        action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', [action_id], False, {})[0]
-        print action
+        action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', [action_id], False, {'get_binary_size':False})[0]
 
         view_ids=[]
         if action.get('views', []):

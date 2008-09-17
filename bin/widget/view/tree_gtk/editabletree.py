@@ -226,6 +226,8 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             self.screen.display()
             self.set_cursor(path, column, False)
         elif event.keyval in (gtk.keysyms.F1, gtk.keysyms.F2):
+            if (column._type not in ('many2one','many2many')):
+                return True
             if isinstance(entry, gtk.Entry):
                 value=entry.get_text()
             else:
@@ -236,9 +238,10 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             if isinstance(entry, gtk.Entry):
                 entry.set_text(newval)
             else:
-                entry.set_active_text(value)
+                entry.set_active_text(newval)
             entry.editing_done_id = entry.connect('editing_done', self.on_editing_done)
             self.set_cursor(path, column, True)
+            return False
         else:
             modelfield = model[column.name]
             if isinstance(entry, gtk.Entry):

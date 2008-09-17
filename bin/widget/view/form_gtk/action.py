@@ -74,7 +74,7 @@ class action(interface.widget_interface):
             if self.action['view_type']=='form':
                 mode = (self.action['view_mode'] or 'form,tree').split(',')
                 self.screen = Screen(self.action['res_model'], view_type=mode, context=self.context, view_ids = view_id, domain=self.domain)
-                self.win_gl = glade.XML(common.terp_path("terp.glade"), 'widget_paned', gettext.textdomain())
+                self.win_gl = glade.XML(common.terp_path("openerp.glade"), 'widget_paned', gettext.textdomain())
 
                 self.win_gl.signal_connect('on_switch_button_press_event', self._sig_switch)
                 self.win_gl.signal_connect('on_search_button_press_event', self._sig_search)

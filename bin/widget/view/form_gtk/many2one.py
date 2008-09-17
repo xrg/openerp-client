@@ -48,7 +48,7 @@ import service
 
 
 class dialog(object):
-    def __init__(self, model, id=None, attrs=None ,domain=None, context=None, window=None, view_ids=None,target=False):
+    def __init__(self, model, id=None, attrs=None ,domain=None, context=None, window=None, view_ids=None,target=False,view_type=['form']):
         if attrs is None:
             attrs = {}
         if domain is None:
@@ -68,7 +68,7 @@ class dialog(object):
             self.dia.set_property('default-width', 760)
             self.dia.set_property('default-height', 500)
             self.dia.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-            self.dia.set_icon(common.TINYERP_ICON)
+            self.dia.set_icon(common.OPENERP_ICON)
 
             self.accel_group = gtk.AccelGroup()
             self.dia.add_accel_group(self.accel_group)
@@ -88,7 +88,7 @@ class dialog(object):
         vp = gtk.Viewport()
         vp.set_shadow_type(gtk.SHADOW_NONE)
         scroll.add(vp)
-        self.screen = Screen(model, view_ids=view_ids, domain=domain, context=context, window=self.dia, view_type=['form'])
+        self.screen = Screen(model, view_ids=view_ids, domain=domain, context=context, window=self.dia, view_type=view_type)
         if id:
             self.screen.load([id])
         else:
@@ -132,18 +132,8 @@ class many2one(interface.widget_interface):
         self.wid_text.connect('button_press_event', self._menu_open)
         self.wid_text.connect_after('changed', self.sig_changed)
         self.wid_text.connect_after('activate', self.sig_activate)
-        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
-
-        #self.but_new = gtk.Button()
-        #img_new = gtk.Image()
-        #img_new.set_from_stock('gtk-new',gtk.ICON_SIZE_BUTTON)
-        #self.but_new.set_image(img_new)
-        #self.but_new.set_relief(gtk.RELIEF_NONE)
-        #self.but_new.connect('clicked', self.sig_new)
-        #self.but_new.set_alignment(0.5, 0.5)
-        #self.but_new.set_property('can-focus', False)
-        #self.widget.pack_start(self.but_new, expand=False, fill=False)
 
         self.but_find = gtk.Button()
         img_find = gtk.Image()
@@ -259,7 +249,7 @@ class many2one(interface.widget_interface):
             if (len(ids)==1) and leave:
                 self._view.modelfield.set_client(self._view.model, ids[0],
                         force_change=True)
-                self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+                self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
                 self.display(self._view.model, self._view.modelfield)
                 self.ok = True
                 return True
@@ -270,7 +260,7 @@ class many2one(interface.widget_interface):
                 name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
                 self._view.modelfield.set_client(self._view.model, name,
                         force_change=True)
-        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
         self.display(self._view.model, self._view.modelfield)
         self.ok=True
 
@@ -286,14 +276,17 @@ class many2one(interface.widget_interface):
                 self._view.modelfield.set_client(self._view.model, value,
                         force_change=True)
             dia.destroy()
-        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
         self.display(self._view.model, self._view.modelfield)
         self.ok=True
 
-    def sig_activate(self, widget, event=None, leave=False):
+    def sig_focus_out(self, widget, event=None, leave=False):
         res = self._view.modelfield.get_client(self._view.model)
-        if (not res) and self.wid_text.get_text():
+        if self.wid_text.get_text() and not res:
             self.sig_find(widget, event, leave=True)
+
+    def sig_activate(self, widget, event=None, leave=False):
+        self.sig_find(widget, event, leave=True)
 
     def sig_new(self, *args):
         self.wid_text.disconnect(self.wid_text_focus_out_id)
@@ -305,7 +298,7 @@ class many2one(interface.widget_interface):
             self._view.modelfield.set_client(self._view.model, value)
             self.display(self._view.model, self._view.modelfield)
         dia.destroy()
-        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+        self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
 
     def sig_key_press(self, widget, event, *args):
         if event.keyval==gtk.keysyms.F1:

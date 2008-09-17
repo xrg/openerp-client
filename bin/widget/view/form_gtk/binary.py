@@ -54,7 +54,8 @@ class wid_binary(interface.widget_interface):
         self.wid_text.set_property('activates_default', True)
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
-        self.but_new = gtk.Button() 
+        self.filters=attrs.get('filters',None)
+        self.but_new = gtk.Button()
         img = gtk.Image()
         img.set_from_stock( 'gtk-execute', gtk.ICON_SIZE_BUTTON )
         label = gtk.Label( ('_Open' ))
@@ -68,7 +69,7 @@ class wid_binary(interface.widget_interface):
         self.but_new.connect('clicked', self.sig_execute)
         self.widget.pack_start(self.but_new, expand=False, fill=False)
 
-        self.but_new = gtk.Button() 
+        self.but_new = gtk.Button()
         img = gtk.Image()
         img.set_from_stock( 'gtk-open', gtk.ICON_SIZE_BUTTON )
         label = gtk.Label( _('_Select') )
@@ -91,7 +92,8 @@ class wid_binary(interface.widget_interface):
         self.widget.pack_start(self.but_remove, expand=False, fill=False)
 
         self.model_field = False
-        self.has_filename = attrs.get( 'filename' )
+        self.has_filename = attrs.get('filename')
+        self.data_field_name = attrs.get('name')
 
     def _readonly_set(self, value):
         if value:
@@ -101,67 +103,85 @@ class wid_binary(interface.widget_interface):
             self.but_new.show()
             self.but_remove.show()
 
+    def _get_filename(self):
+        return self._view.model.value.get(self.has_filename) or self._view.model.value.get('name', self.data_field_name)
+
     def sig_execute(self,widget=None):
         try:
-            filename = self._view.model.value.get( self.has_filename ) or self._view.model.value['name'] 
+            filename = self._get_filename()
             if filename:
-                id = int(self._view.model.get(includeid=True)['id'])
-                data = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id])
-                if not len(data):
-                    return None
-                ext = os.path.splitext( filename )[1][1:]
-                (fileno, fp_name) = tempfile.mkstemp('.'+ext, 'tinyerp_')
+                data = self._view.model.value.get(self.data_field_name)
+                if not data:
+                    data = self._view.model.get(self.data_field_name)[self.data_field_name]
+                    if not data:
+                        raise Exception(_("Unable to read the file data"))
 
-                fp = file( fp_name, 'wb+')
-                fp.write( base64.decodestring( data[0]['datas'] ) )
-                fp.close()
+                ext = os.path.splitext(filename)[1][1:]
+                (fileno, fp_name) = tempfile.mkstemp('.'+ext, 'openerp_')
+
+                os.write(fileno, base64.decodestring(data))
                 os.close(fileno)
 
-                printer.printer.print_file( fp_name, ext, preview=True )
+                printer.printer.print_file(fp_name, ext, preview=True)
         except Exception, ex:
-            common.message(_('Error reading the file'))
+            common.message(_('Error reading the file: %s') % str(ex))
 
     def sig_select(self, widget=None):
         try:
             # Add the filename from the field with the filename attribute in the view
-            filename = common.file_selection(_('Select a file...'), parent=self._window)
+            filters=None
+            filter_file = gtk.FileFilter()
+            if self.filters:
+                filter_file.set_name(_(str(','.join(self.filters))))
+                for pat in self.filters:
+                    filter_file.add_pattern(pat)
+                filters=[filter_file]
+            else:
+                 key=self.wid_text.get_text()
+                 if not key:
+                     filter_file.set_name('All Files')
+                     filter_file.add_pattern('*')
+                 else:
+                     filter_file.set_name(key)
+                     filter_file.add_pattern('*'+str(key)+'*')
+                 filters=[filter_file]
+
+            filename = common.file_selection(_('Select a file...'), parent=self._window,filters=filters)
             if filename:
                 self.model_field.set_client(self._view.model, base64.encodestring(file(filename, 'rb').read()))
-                fname = self.attrs.get('fname_widget', False)
-                filename = os.path.basename( filename )
-                if fname:
-                    self.parent.value = {fname:filename}
-                self._view.model.set( { 'name': filename, 'title' : filename } )
-                self._view.display(self._view.model) 
+                if self.has_filename:
+                    self._view.model.set({self.has_filename: os.path.basename(filename)})
+                self._view.display(self._view.model)
         except Exception, ex:
             common.message(_('Error reading the file'))
 
     def sig_save_as(self, widget=None):
         try:
-            id = int(self._view.model.get(includeid=True)['id'])
-            data = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id])
-            if not len(data):
-                return None
+            data = self._view.model.value.get(self.data_field_name)
+            if not data:
+                data = self._view.model.get(self.data_field_name)[self.data_field_name]
+                if not data:
+                    raise Exception(_("Unable to read the file data"))
+
             # Add the filename from the field with the filename attribute in the view
             filename = common.file_selection(
                 _('Save As...'),
-                parent=self._window, 
+                parent=self._window,
                 action=gtk.FILE_CHOOSER_ACTION_SAVE,
-                filename=data[0]['name']
+                filename=self._get_filename()
             )
             if filename:
                 fp = file(filename,'wb+')
-                fp.write(base64.decodestring(data[0]['datas']))
+                fp.write(base64.decodestring(data))
                 fp.close()
-        except:
-            common.message(_('Error writing the file!'))
+        except Exception, ex:
+            common.message(_('Error writing the file: %s') % str(ex))
 
     def sig_remove(self, widget=None):
         self.model_field.set_client(self._view.model, False)
-        fname = self.attrs.get('fname_widget', False)
-        if fname:
-            self.parent.value = {fname:False}
-        self.display(self._view.model, self.model_field)
+        if self.has_filename:
+            self._view.model.set({self.has_filename: False})
+        self.display(self._view.model,False)
 
     def display(self, model, model_field):
         if not model_field:
@@ -169,11 +189,22 @@ class wid_binary(interface.widget_interface):
             return False
         super(wid_binary, self).display(model, model_field)
         self.model_field = model_field
-        self.wid_text.set_text(self._size_get(model_field.get(model)))
+        disp_text=model_field.get_client(model)
+
+        if disp_text:
+            units = ('bytes', 'Kb', 'Mb', 'Gb')
+            if disp_text.find(" ")<=0:
+                s, i = float(len(disp_text)), 0
+                while s >= 1024 and i < len(units)-1:
+                    s = s / 1024
+                    i = i + 1
+                disp_text="%0.2f %s" % (s, units[i])
+
+        self.wid_text.set_text(disp_text or '')
         return True
 
-    def _size_get(self, l):
-        return l and _('%d bytes') % len(l) or ''
+    #def _size_get(self, l):
+    #    return l and _('%d bytes') % len(l) or ''
 
     def set_value(self, model, model_field):
         return

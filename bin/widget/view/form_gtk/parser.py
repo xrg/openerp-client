@@ -95,7 +95,6 @@ class Button(Observable):
                     common.sur(self.attrs['confirm']):
                 button_type = self.attrs.get('type', 'workflow')
                 if button_type == 'workflow':
-                    #print 'Exec Workflow'
                     result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
                                             self.form.screen.name,
                                             self.attrs['name'], id)
@@ -219,7 +218,7 @@ class _container(object):
             self.trans_box_label.append((eb, name, fname))
             eb.add(label)
             if help:
-                eb.set_tooltip_markup('<span foreground=\"darkred\"><b>'+name+'</b></span>\n'+tools.to_xml(help))
+                eb.set_tooltip_markup('<span foreground=\"darkred\"><b>'+tools.to_xml(name)+'</b></span>\n'+tools.to_xml(help))
                 label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
                 eb.show()
             if '_' in name:
@@ -532,7 +531,7 @@ class parser_form(widget.view.interface.parser_interface):
         win.set_property('default-width', 600)
         win.set_property('default-height', 400)
         win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-        win.set_icon(common.TINYERP_ICON)
+        win.set_icon(common.OPENERP_ICON)
 
         accel_group = gtk.AccelGroup()
         win.add_accel_group(accel_group)
@@ -634,7 +633,7 @@ class parser_form(widget.view.interface.parser_interface):
                     gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
             win.vbox.set_spacing(5)
             win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-            win.set_icon(common.TINYERP_ICON)
+            win.set_icon(common.OPENERP_ICON)
             vbox = gtk.VBox(spacing=5)
 
             entries_list = []
@@ -690,7 +689,7 @@ class parser_form(widget.view.interface.parser_interface):
             win = gtk.Dialog(_('Add Translation'), window,
                     gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
             win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-            win.set_icon(common.TINYERP_ICON)
+            win.set_icon(common.OPENERP_ICON)
             win.vbox.set_spacing(5)
             vbox = gtk.VBox(spacing=5)
 

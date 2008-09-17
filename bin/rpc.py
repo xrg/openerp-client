@@ -177,7 +177,7 @@ class rpc_session(object):
                 sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
                 return sock.exec_auth(method, *args)
             except socket.error, e:
-                common.error(_('Connection refused !'), str(e), str(e))
+                common.warning(_('Unable to reach to OpenERP server !\nYou should check your connection to the network and the OpenERP server.'), _('Connection Error'))
                 raise rpc_exception(69, 'Connection refused!')
             except Exception, e:
                 if isinstance(e, xmlrpclib.Fault) \

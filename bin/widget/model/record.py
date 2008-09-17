@@ -59,7 +59,7 @@ class EvalEnvironment(object):
 class ModelRecord(signal_event.signal_event):
     def __init__(self, resource, id, group=None, parent=None, new=False ):
         super(ModelRecord, self).__init__()
-        self.resource = resource
+        self.resource = str(resource)
         self.rpc = RPCProxy(self.resource)
         self.id = id
         self._loaded = False
@@ -84,6 +84,9 @@ class ModelRecord(signal_event.signal_event):
 
     def is_modified(self):
         return self.modified
+    
+    def is_wizard(self):
+        return self.resource.startswith('wizard.')
 
     def fields_get(self):
         return self.mgroup.mfields
@@ -253,6 +256,9 @@ class ModelRecord(signal_event.signal_event):
                     if fieldname not in self.mgroup.mfields:
                         continue
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
+            warning=response.get('warning',{})			
+            if warning:
+                common.warning(warning['message'], warning['title'])
         self.signal('record-changed')
     
     def on_change_attrs(self, callback):

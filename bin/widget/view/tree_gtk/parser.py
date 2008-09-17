@@ -44,12 +44,13 @@ import date_renderer
 
 from widget.view.form_gtk.many2one import dialog as M2ODialog
 from modules.gui.window.win_search import win_search
-
+from widget.view.form_gtk.parser import Button
 import common
 import rpc
 import datetime as DT
 import service
 import gobject
+import pango
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed)
@@ -64,10 +65,11 @@ def sort_model(column, treeview):
 class parser_tree(interface.parser_interface):
     def parse(self, model, root_node, fields):
         dict_widget = {}
+        btn_list=[]
         attrs = tools.node_attributes(root_node)
         on_write = attrs.get('on_write', '')
         editable = attrs.get('editable', False)
-        if editable:
+        if editable and not self.screen.readonly:
             treeview = EditableTreeView(editable)
         else:
             treeview = DecoratedTreeView(editable)
@@ -81,10 +83,25 @@ class parser_tree(interface.parser_interface):
         if not self.title:
             self.title = attrs.get('string', 'Unknown')
 
+
+        treeview.sequence = False
         for node in root_node.childNodes:
             node_attrs = tools.node_attributes(node)
+            if node.localName == 'button':
+                cell = Cell('button')(node_attrs['string'])
+                cell.attrs=node_attrs
+                cell.name=node_attrs['name']
+                cell.type=node_attrs.get('type','object')
+                cell.context=node_attrs.get('context',{})
+                cell.model=model
+                treeview.cells[node_attrs['name']] = cell
+                col = gtk.TreeViewColumn(None, cell)
+                btn_list.append(col)
+#                n = treeview.append_column(col)
             if node.localName == 'field':
                 fname = str(node_attrs['name'])
+                if fname == 'sequence':
+                    treeview.sequence = True
                 for boolean_fields in ('readonly', 'required'):
                     if boolean_fields in node_attrs:
                         node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
@@ -97,13 +114,15 @@ class parser_tree(interface.parser_interface):
                 if editable and not node_attrs.get('readonly', False):
                     if isinstance(renderer, gtk.CellRendererToggle):
                         renderer.set_property('activatable', True)
-                    elif isinstance(renderer, gtk.CellRendererText) or isinstance(renderer, gtk.CellRendererCombo):
+                    elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo)):
                         renderer.set_property('editable', True)
                     renderer.connect_after('editing-started', send_keys, treeview)
 #                   renderer.connect_after('editing-canceled', self.editing_canceled)
                 else:
                     if isinstance(renderer, gtk.CellRendererToggle):
                         renderer.set_property('activatable', False)
+                    elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo)):
+                        renderer.set_property('editable', False)
 
                 col = gtk.TreeViewColumn(None, renderer)
                 col_label = gtk.Label('')
@@ -135,7 +154,8 @@ class parser_tree(interface.parser_interface):
                 else:
                     width = twidth.get(fields[fname]['type'], 100)
                 col.set_min_width(width)
-                col.connect('clicked', sort_model, treeview)
+                if not treeview.sequence:
+                    col.connect('clicked', sort_model, treeview)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 visval = eval(fields[fname].get('invisible', 'False'), {'context':self.screen.context})
@@ -155,6 +175,8 @@ class parser_tree(interface.parser_interface):
                     label_sum.set_use_markup(True)
                     dict_widget[n] = (fname, label, label_sum,
                             fields.get('digits', (16,2))[1], label_bold)
+        for btn in btn_list:
+            treeview.append_column(btn)
         return treeview, dict_widget, [], on_write
 
 class UnsettableColumn(Exception):
@@ -251,6 +273,7 @@ class GenericDate(Char):
         self.field_name = field_name
         self.attrs = attrs or {}
         self.renderer1 = gtk.CellRendererText()
+# TODO: Review this, not always editable
         self.renderer1.set_property('editable', True)
         self.renderer = date_renderer.DecoratorRenderer(self.renderer1, date_renderer.date_callback(treeview), self.display_format)
         self.treeview = treeview
@@ -543,7 +566,6 @@ class ProgressBar(object):
         cell.set_property('text', '%.2f %%' % (text,))
         if text<0: text = 0.0
         if text>100.0: text = 100.0
-        print 'SETTING', text or 0.0
         cell.set_property('value', text)
 
     def open_remote(self, model, create, changed=False, text=None):
@@ -555,6 +577,131 @@ class ProgressBar(object):
     def value_from_text(self, model, text):
         return text
 
+
+class CellRendererButton(gtk.GenericCellRenderer):
+    #TODO Add keyboard editing
+    __gproperties__ = {
+            "text": (gobject.TYPE_STRING, None, "Text",
+                "Displayed text", gobject.PARAM_READWRITE),
+    }
+
+    __gsignals__ = {
+            'clicked': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
+                (gobject.TYPE_STRING, )),
+    }
+
+    def __init__(self, text=""):
+        self.__gobject_init__()
+        self.text = text
+        self.border = gtk.Button().border_width
+        self.set_property('mode', gtk.CELL_RENDERER_MODE_EDITABLE)
+        self.clicking = False
+        self.xalign = 0.0
+        self.yalign = 0.5
+        self.textborder = 4
+
+
+    def do_set_property(self, pspec, value):
+        setattr(self, pspec.name, value)
+
+    def do_get_property(self, pspec):
+        return getattr(self, pspec.name)
+
+    def on_render(self, window, widget, background_area, cell_area,
+            expose_area, flags):
+        state = gtk.STATE_NORMAL
+        shadow = gtk.SHADOW_OUT
+        if self.clicking and flags & gtk.CELL_RENDERER_SELECTED:
+            state = gtk.STATE_ACTIVE
+            shadow = gtk.SHADOW_IN
+        widget.style.paint_box(window, state, shadow,
+                None, widget, "button",
+                cell_area.x, cell_area.y,
+                cell_area.width, cell_area.height)
+        layout = widget.create_pango_layout('')
+        layout.set_font_description(widget.style.font_desc)
+        w, h = layout.get_size()
+        x = cell_area.x
+        y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
+        window.draw_layout(widget.style.text_gc[0], x, y, layout)
+
+        layout = widget.create_pango_layout(self.text)
+        layout.set_font_description(widget.style.font_desc)
+        w, h = layout.get_size()
+        x = int(cell_area.x + (cell_area.width - w / pango.SCALE) / 2)
+        y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
+        window.draw_layout(widget.style.text_gc[0], x, y, layout)
+
+    def on_get_size(self, widget, cell_area=None):
+        width,height=90,18
+        if cell_area:
+            width = max(width + self.textborder * 2, cell_area.width)
+        else:
+            width += self.textborder * 2
+            height += self.textborder * 2
+        if cell_area:
+            x = max(int(self.xalign * (cell_area.width - width)), 0)
+            y = max(int(self.yalign * (cell_area.height - height)), 0)
+        else:
+            x, y = 0, 0
+        return (x, y, width, height)
+
+    def on_start_editing(self, event, widget, path, background_area,
+            cell_area, flags):
+        if (event is None) or ((event.type == gtk.gdk.BUTTON_PRESS) \
+                or (event.type == gtk.gdk.KEY_PRESS \
+                    and event.keyval == gtk.keysyms.space)):
+            self.clicking = True
+            widget.queue_draw()
+            gtk.main_iteration()
+            model=widget.screen.current_model
+            if widget.screen.current_model.validate():
+                id = widget.screen.save_current()
+                if not self.attrs.get('confirm',False) or \
+                        common.sur(self.attrs['confirm']):
+                    button_type = self.attrs.get('type', 'workflow')
+                    if button_type == 'workflow':
+                        result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
+                                                widget.screen.name,
+                                                self.attrs['name'], id)
+                        if type(result)==type({}):
+                            if result['type']== 'ir.actions.act_window_close':
+                                widget.screen.window.destroy()
+                            else:
+                                datas = {}
+                                obj = service.LocalService('action.main')
+                                obj._exec_action(result,datas)
+                    elif button_type == 'object':
+                        if not id:
+                            return
+                        result = rpc.session.rpc_exec_auth(
+                            '/object', 'execute',
+                            widget.screen.name,
+                            self.attrs['name'],
+                            [id], model.context_get()
+                        )
+                        datas = {}
+                        obj = service.LocalService('action.main')
+                        obj._exec_action(result,datas,context=widget.screen.context)
+
+                    elif button_type == 'action':
+                        obj = service.LocalService('action.main')
+                        action_id = int(self.attrs['name'])
+                        obj.execute(action_id, {'model':widget.screen.name, 'id': id or False,
+                            'ids': id and [id] or [], 'report_type': 'pdf'}, context=widget.screen.context)
+                    else:
+                        raise Exception, 'Unallowed button type'
+                    widget.screen.reload()
+            else:
+                self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
+                widget.screen.display()
+            self.emit("clicked", path)
+            def timeout(self, widget):
+                self.clicking = False
+                widget.queue_draw()
+            gobject.timeout_add(60, timeout, self, widget)
+
+gobject.type_register(CellRendererButton)
 
 
 CELLTYPES = {
@@ -570,6 +717,7 @@ CELLTYPES = {
     'datetime': Datetime,
     'boolean': Boolean,
     'progressbar': ProgressBar,
+    'button': CellRendererButton,
 }
 
 

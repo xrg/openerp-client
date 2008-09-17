@@ -138,6 +138,7 @@ def execute(action, datas, state='init', parent=None, context={}):
                     if i > 10:
                         if not win or not pb:
                             win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
+                            win.set_title(_('OpenERP Computing'))
                             win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
                             vbox = gtk.VBox(False, 0)
                             hbox = gtk.HBox(False, 13)

@@ -11,14 +11,14 @@
 ;General
 
   ;Name and file
-  Name "TinyERP Client"
-  OutFile "tinyerp-client-setup.exe"
+  Name "OpenERP Client"
+  OutFile "openerp-client-setup.exe"
 
   ;Default installation folder
-  InstallDir "$PROGRAMFILES\TinyERP Client"
+  InstallDir "$PROGRAMFILES\OpenERP Client"
   
   ;Get installation folder from registry if available
-  InstallDirRegKey HKCU "Software\TinyERP Client" ""
+  InstallDirRegKey HKCU "Software\OpenERP Client" ""
 
   ;Vista redirects $SMPROGRAMS to all users without this
   RequestExecutionLevel admin
@@ -37,11 +37,11 @@
 ;--------------------------------
 ;Pages
 
-  !define MUI_ICON ".\bin\pixmaps\tinyerp.ico"
-  !define MUI_UNICON ".\bin\pixmaps\tinyerp.ico"
-  !define MUI_WELCOMEFINISHPAGE_BITMAP ".\bin\pixmaps\tinyerp-intro.bmp"
+  !define MUI_ICON ".\bin\pixmaps\openerp.ico"
+  !define MUI_UNICON ".\bin\pixmaps\openerp.ico"
+  !define MUI_WELCOMEFINISHPAGE_BITMAP ".\bin\pixmaps\openerp-intro.bmp"
   !define MUI_HEADERIMAGE
-  !define MUI_HEADERIMAGE_BITMAP ".\bin\pixmaps\tinyerp-header.bmp"
+  !define MUI_HEADERIMAGE_BITMAP ".\bin\pixmaps\openerp-header.bmp"
 
   !insertmacro MUI_PAGE_WELCOME
   !insertmacro MUI_PAGE_LICENSE "doc\\License.rtf"
@@ -50,8 +50,8 @@
   
   ;Start Menu Folder Page Configuration
   !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKCU" 
-  !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\TinyERP Client"
-  !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "TinyERP Client"
+  !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\OpenERP Client"
+  !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "OpenERP Client"
   
   !insertmacro MUI_PAGE_STARTMENU Application $STARTMENU_FOLDER
   
@@ -60,7 +60,7 @@
   !define MUI_FINISHPAGE_NOAUTOCLOSE
   !define MUI_FINISHPAGE_RUN
   !define MUI_FINISHPAGE_RUN_CHECKED
-  !define MUI_FINISHPAGE_RUN_TEXT "Start TinyERP Client"
+  !define MUI_FINISHPAGE_RUN_TEXT "Start OpenERP Client"
   !define MUI_FINISHPAGE_RUN_FUNCTION "LaunchLink"
   !define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
   !define MUI_FINISHPAGE_SHOWREADME $INSTDIR\README.txt
@@ -79,7 +79,7 @@
 ;--------------------------------
 ;Installer Sections
 
-Section "TinyERP Client" SecTinyERPClient
+Section "OpenERP Client" SecOpenERPClient
 
   SetOutPath "$INSTDIR"
   
@@ -93,18 +93,18 @@ Section "TinyERP Client" SecTinyERPClient
   File "doc\\*"
 
   ;Store installation folder
-  WriteRegStr HKCU "Software\TinyERP Client" "" $INSTDIR
+  WriteRegStr HKCU "Software\OpenERP Client" "" $INSTDIR
   
   ;Create uninstaller
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\TinyERP Client" "DisplayName" "TinyERP Client (remove only)"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\TinyERP Client" "UninstallString" "$INSTDIR\Uninstall.exe"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client" "DisplayName" "OpenERP Client (remove only)"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client" "UninstallString" "$INSTDIR\Uninstall.exe"
   WriteUninstaller "$INSTDIR\Uninstall.exe"
   
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     
     ;Create shortcuts
     CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
-    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\TinyERP Client.lnk" "$INSTDIR\tinyerp-client.exe"
+    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\OpenERP Client.lnk" "$INSTDIR\openerp-client.exe"
   
   !insertmacro MUI_STARTMENU_WRITE_END
 
@@ -113,11 +113,11 @@ SectionEnd
 ;Descriptions
 
   ;Language strings
-  LangString DESC_SecTinyERPClient ${LANG_ENGLISH} "TinyERP Client."
+  LangString DESC_SecOpenERPClient ${LANG_ENGLISH} "OpenERP Client."
 
   ;Assign language strings to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-    !insertmacro MUI_DESCRIPTION_TEXT ${SecTinyERPClient} $(DESC_SecTinyERPClient)
+    !insertmacro MUI_DESCRIPTION_TEXT ${SecOpenERPClient} $(DESC_SecOpenERPClient)
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
  
 ;--------------------------------
@@ -171,7 +171,7 @@ Section "Uninstall"
 
   !insertmacro MUI_STARTMENU_GETFOLDER Application $MUI_TEMP
 
-  Delete "$SMPROGRAMS\$MUI_TEMP\TinyERP Client.lnk"
+  Delete "$SMPROGRAMS\$MUI_TEMP\OpenERP Client.lnk"
 
   ;Delete empty start menu parent diretories
   StrCpy $MUI_TEMP "$SMPROGRAMS\$MUI_TEMP"
@@ -186,13 +186,13 @@ Section "Uninstall"
     StrCmp $MUI_TEMP $SMPROGRAMS startMenuDeleteLoopDone startMenuDeleteLoop
   startMenuDeleteLoopDone:
 
-  DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\TinyERP Client"
-  DeleteRegKey /ifempty HKCU "Software\TinyERP Client"
+  DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client"
+  DeleteRegKey /ifempty HKCU "Software\OpenERP Client"
 
 SectionEnd
 
 Function LaunchLink
-  ExecShell "" "$INSTDIR\tinyerp-client.exe"
+  ExecShell "" "$INSTDIR\openerp-client.exe"
 FunctionEnd
 
 Function un.RmDirsButOne

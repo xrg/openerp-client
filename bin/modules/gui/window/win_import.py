@@ -73,7 +73,7 @@ def import_csv(csv_data, f, model, fields):
 
 class win_import(object):
     def __init__(self, model, fields, preload = [], parent=None):
-        self.glade = glade.XML(common.terp_path("terp.glade"), 'win_import',
+        self.glade = glade.XML(common.terp_path("openerp.glade"), 'win_import',
                 gettext.textdomain())
         self.glade.get_widget('import_csv_combo').set_active(0)
         self.win = self.glade.get_widget('win_import')
@@ -83,7 +83,7 @@ class win_import(object):
         if parent is None:
             parent = service.LocalService('gui.main').window
         self.win.set_transient_for(parent)
-        self.win.set_icon(common.TINYERP_ICON)
+        self.win.set_icon(common.OPENERP_ICON)
         self.parent = parent
 
         self.glade.get_widget('import_csv_file').set_current_folder(

@@ -47,10 +47,10 @@ import service
 
 class win_attach(object):
     def __init__(self, model, id, parent=None):
-        self.glade = glade.XML(common.terp_path("terp.glade"), 'win_attach',
+        self.glade = glade.XML(common.terp_path("openerp.glade"), 'win_attach',
                 gettext.textdomain())
         self.win = self.glade.get_widget('win_attach')
-        self.win.set_icon(common.TINYERP_ICON)
+        self.win.set_icon(common.OPENERP_ICON)
         if not parent:
             parent = service.LocalService('gui.main').window
         self.win.set_transient_for(parent)
@@ -95,6 +95,16 @@ class win_attach(object):
         for signal in dict:
             self.glade.signal_connect(signal, dict[signal])
 
+        self._cache = {}
+
+    def _get(self, id):
+        if id not in self._cache:
+            context = copy.copy(rpc.session.context)
+            context['get_binary_size'] = False
+            r = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id], [], context)
+            self._cache[id] = r and r[0] or None
+        return self._cache[id]
+
     def _sig_comment(self, *args):
         start = self.glade.get_widget('attach_tv').get_buffer().get_start_iter()
         end = self.glade.get_widget('attach_tv').get_buffer().get_end_iter()
@@ -107,6 +117,8 @@ class win_attach(object):
         id = model.get_value(iter, 0)
         if id:
             rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'write', [int(id)], {'description':comment}, context)
+            # we update the cache
+            self._cache[id]['description'] = comment
         else:
             common.warning('You must put a text comment to an attachement.','Text not saved !')
 
@@ -118,6 +130,7 @@ class win_attach(object):
         if id:
             if common.sur(_('Are you sure you want to remove this attachment ?'), parent=self.win):
                 rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'unlink', [int(id)])
+                del self._cache[id]
         self.reload()
 
     def _sig_link(self, widget):
@@ -140,20 +153,19 @@ class win_attach(object):
             return None
         id = model.get_value(iter, 0)
         if id:
-            data = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment',
-                    'read', [id])
-            if not len(data):
+            data = self._get(id)
+            if not data:
                 return None
             filename = common.file_selection(_('Save As...'),
-                    filename=data[0]['datas_fname'], parent=self.win,
+                    filename=data['datas_fname'], parent=self.win,
                     action=gtk.FILE_CHOOSER_ACTION_SAVE)
             if not filename:
                 return None
             try:
-                if not data[0]['link']:
-                    file(filename, 'wb+').write(base64.decodestring(data[0]['datas']))
+                if not data['link']:
+                    file(filename, 'wb+').write(base64.decodestring(data['datas']))
                 else:
-                    file(filename, 'wb+').write(urllib.urlopen(data[0]['link']).read())
+                    file(filename, 'wb+').write(urllib.urlopen(data['link']).read())
             except IOError, e:
                 common.message(_('Can not write file !'))
 
@@ -196,27 +208,24 @@ class win_attach(object):
         iter = self.model.get_iter(path)
         id = self.model.get_value(iter, 0)
         if id:
-            data = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment',
-                    'read', [id])
-            if not len(data):
+            data = self._get(id)
+            if not data:
                 return None
             fp_name = False
-            if not data[0]['link']:
-                (fileno, fp_name) = tempfile.mkstemp(data[0]['datas_fname'], 'tinyerp_')
+            if not data['link']:
+                (fileno, fp_name) = tempfile.mkstemp(data['datas_fname'], 'openerp_')
                 fp = file(fp_name, 'wb+')
-                fp.write(base64.decodestring(data[0]['datas']))
+                fp.write(base64.decodestring(data['datas']))
                 fp.close()
                 os.close(fileno)
             else:
-                fp_name = data[0]['link']
+                fp_name = data['link']
             common.open_file(fp_name, self.parent)
 
     def preview(self, id):
-        datas = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id])
-        if not len(datas):
+        datas = self._get(id)
+        if not datas:
             return None
-        datas = datas[0]
-
         buffer = self.glade.get_widget('attach_tv').get_buffer()
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
         iter_start = buffer.get_start_iter()
@@ -229,7 +238,7 @@ class win_attach(object):
         label = self.glade.get_widget('attach_title')
         label.set_text(str(datas['name']))
 
-        decoder = {'jpg': 'jpeg',
+        image_decoder = {'jpg': 'jpeg',
                 'jpeg': 'jpeg',
                 'gif': 'gif',
                 'png': 'png',
@@ -237,7 +246,7 @@ class win_attach(object):
         ext = fname.split('.')[-1].lower()
         img = self.glade.get_widget('attach_image')
         img.clear()
-        if ext in ('jpg', 'jpeg', 'png', 'gif', 'bmp'):
+        if ext in image_decoder:
             try:
                 if not datas['link']:
                     dt = base64.decodestring(datas['datas'])
@@ -252,7 +261,7 @@ class win_attach(object):
                     if int(scale*w) > 0 and int(scale*h) > 0:
                         object.set_size(int(scale*w), int(scale*h))
 
-                loader = gtk.gdk.PixbufLoader(decoder[ext])
+                loader = gtk.gdk.PixbufLoader(image_decoder[ext])
                 loader.connect_after('size-prepared', set_size)
 
                 loader.write(dt, len(dt))
@@ -267,18 +276,15 @@ class win_attach(object):
             if sys.platform in ['win32','nt']:
                 fid, fname = tempfile.mkstemp(suffix='.'+ext)
                 f = os.fdopen(fid, 'wb+')
-                datas = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id])
-                if not datas[0]['link']:
-                    if not len(datas):
-                        return None
+                if not datas['link']:
                     try:
-                        f.write(base64.decodestring(datas[0]['datas']))
+                        f.write(base64.decodestring(datas['datas']))
                         os.startfile(fname)
                     except IOError, e:
                         common.message(_('Can not write file !'))
                     f.close()
                 else:
-                    os.startfile(datas[0]['link'])
+                    os.startfile(datas['link'])
 
     def reload(self, preview=True):
         self.model.clear()

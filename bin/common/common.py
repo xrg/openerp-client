@@ -66,7 +66,7 @@ def _search_file(file, dir='path.share'):
 terp_path = _search_file
 terp_path_pixmaps = lambda x: _search_file(x, 'path.pixmaps')
 
-TINYERP_ICON = gtk.gdk.pixbuf_new_from_file(
+OPENERP_ICON = gtk.gdk.pixbuf_new_from_file(
             terp_path_pixmaps('tinyerp-icon-32x32.png'))
 
 def selection(title, values, alwaysask=False, parent=None):
@@ -76,11 +76,11 @@ def selection(title, values, alwaysask=False, parent=None):
         key = values.keys()[0]
         return (key, values[key])
 
-    xml = glade.XML(terp_path("terp.glade"), "win_selection", gettext.textdomain())
+    xml = glade.XML(terp_path("openerp.glade"), "win_selection", gettext.textdomain())
     win = xml.get_widget('win_selection')
     if not parent:
         parent = service.LocalService('gui.main').window
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
     win.set_transient_for(parent)
 
     label = xml.get_widget('win_sel_title')
@@ -124,67 +124,6 @@ def selection(title, values, alwaysask=False, parent=None):
     win.destroy()
     return res
 
-def tipoftheday(parent=None):
-    class tip(object):
-        def __init__(self, parent=None):
-            try:
-                self.number = int(options.options['tip.position'])
-            except:
-                self.number = 0
-                log = logging.getLogger('common.message')
-                log.error('Invalid value for option tip.position ! See ~/.terprc !')
-            winglade=glade.XML(common.terp_path("terp.glade"), "win_tips", gettext.textdomain())
-            self.win = winglade.get_widget('win_tips')
-            if parent:
-                self.win.set_transient_for(parent)
-            self.parent = parent
-            self.win.show_all()
-            self.label = winglade.get_widget('tip_label')
-            self.check = winglade.get_widget('tip_checkbutton')
-            img = winglade.get_widget('tip_image_tinyerp')
-            img.set_from_file(common.terp_path_pixmaps('tinyerp.png'))
-            dict = {
-                'on_but_next_activate': self.tip_next,
-                'on_but_previous_activate': self.tip_previous,
-                'on_but_close_activate': self.tip_close,
-            }
-            for signal in dict:
-                winglade.signal_connect(signal, dict[signal])
-            self.tip_set()
-            self.win.show_all()
-
-        def tip_set(self):
-            lang = options['client.lang']
-            f = False
-            if lang:
-                f = terp_path('tipoftheday.'+lang+'.txt')
-            if not f:
-                f = terp_path('tipoftheday.txt')
-            tips = file(f).read().split('---')
-            tip = tips[self.number % len(tips)]
-            del tips
-            self.label.set_text(tip)
-            self.label.set_use_markup( True )
-
-        def tip_next(self, *args):
-            self.number+=1
-            self.tip_set()
-
-        def tip_previous(self, *args):
-            if self.number>0:
-                self.number -= 1
-            self.tip_set()
-
-        def tip_close(self, *args):
-            check = self.check.get_active()
-            options.options['tip.autostart'] = check
-            options.options['tip.position'] = self.number+1
-            options.save()
-            parent.present()
-            self.win.destroy()
-    tip2 = tip(parent)
-    return True
-
 class upload_data_thread(threading.Thread):
     def __init__(self, email, data, type, supportid):
         self.args = [('email',email),('type',type),('supportid',supportid),('data',data)]
@@ -193,7 +132,7 @@ class upload_data_thread(threading.Thread):
         try:
             import urllib
             args = urllib.urlencode(self.args)
-            fp = urllib.urlopen('http://www.tinyerp.com/scripts/survey.php', args)
+            fp = urllib.urlopen('http://www.openerp.com/scripts/survey.php', args)
             fp.read()
             fp.close()
         except:
@@ -209,11 +148,11 @@ def terp_survey():
         return False
     import pickle
     widnames = ('country','role','industry','employee','hear','system','opensource')
-    winglade = glade.XML(common.terp_path("terp.glade"), "dia_survey", gettext.textdomain())
+    winglade = glade.XML(common.terp_path("openerp.glade"), "dia_survey", gettext.textdomain())
     win = winglade.get_widget('dia_survey')
     parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
     for widname in widnames:
         wid = winglade.get_widget('combo_'+widname)
         wid.child.set_text('(choose one)')
@@ -258,7 +197,7 @@ def file_selection(title, filename='', parent=None,
     if not parent:
         parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
     win.set_current_folder(options.options['client.default_path'])
     win.set_select_multiple(multi)
     win.set_default_response(gtk.RESPONSE_OK)
@@ -318,25 +257,25 @@ def support(*args):
     support_id = options['support.support_id']
     recipient = options['support.recipient']
 
-    sur = glade.XML(terp_path("terp.glade"), "dia_support",gettext.textdomain())
+    sur = glade.XML(terp_path("openerp.glade"), "dia_support",gettext.textdomain())
     win = sur.get_widget('dia_support')
     parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
     win.show_all()
-    sur.get_widget('id_entry').set_text(support_id)
+    sur.get_widget('id_entry1').set_text(support_id)
 
     response = win.run()
     if response == gtk.RESPONSE_OK:
-        fromaddr = sur.get_widget('email_entry').get_text()
-        id_contract = sur.get_widget('id_entry').get_text()
-        name =  sur.get_widget('name_entry').get_text()
-        phone =  sur.get_widget('phone_entry').get_text()
-        company =  sur.get_widget('company_entry').get_text()
+        fromaddr = sur.get_widget('email_entry1').get_text()
+        id_contract = sur.get_widget('id_entry1').get_text()
+        name =  sur.get_widget('name_entry1').get_text()
+        phone =  sur.get_widget('phone_entry1').get_text()
+        company =  sur.get_widget('company_entry1').get_text()
 
-        urgency = sur.get_widget('urgency_combo').get_active_text()
+        urgency = sur.get_widget('urgency_combo1').get_active_text()
 
-        buffer = sur.get_widget('explanation_textview').get_buffer()
+        buffer = sur.get_widget('explanation_textview1').get_buffer()
         explanation = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
         buffer = sur.get_widget('remark_textview').get_buffer()
@@ -362,12 +301,12 @@ def error(title, message, details='', parent=None):
     support_id = options['support.support_id']
     recipient = options['support.recipient']
 
-    sur = glade.XML(terp_path("terp.glade"), "win_error",gettext.textdomain())
+    sur = glade.XML(terp_path("openerp.glade"), "win_error",gettext.textdomain())
     win = sur.get_widget('win_error')
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
     sur.get_widget('error_title').set_text(str(title))
     sur.get_widget('error_info').set_text(str(message))
     buf = gtk.TextBuffer()
@@ -417,7 +356,7 @@ def message(msg, type=gtk.MESSAGE_INFO, parent=None):
       gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
       type, gtk.BUTTONS_OK,
       msg)
-    dialog.set_icon(TINYERP_ICON)
+    dialog.set_icon(OPENERP_ICON)
     dialog.run()
     parent.present()
     dialog.destroy()
@@ -427,7 +366,7 @@ def to_xml(s):
     return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
 
 def message_box(title, msg, parent=None):
-    dia = glade.XML(terp_path("terp.glade"), "dia_message_box",gettext.textdomain())
+    dia = glade.XML(terp_path("openerp.glade"), "dia_message_box",gettext.textdomain())
     win = dia.get_widget('dia_message_box')
     l = dia.get_widget('msg_title')
     l.set_text(title)
@@ -439,7 +378,7 @@ def message_box(title, msg, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
 
     response = win.run()
     parent.present()
@@ -452,7 +391,7 @@ def warning(msg, title='', parent=None):
         parent=service.LocalService('gui.main').window
     dialog = gtk.MessageDialog(parent, gtk.DIALOG_DESTROY_WITH_PARENT,
             gtk.MESSAGE_WARNING, gtk.BUTTONS_OK)
-    dialog.set_icon(TINYERP_ICON)
+    dialog.set_icon(OPENERP_ICON)
     dialog.set_markup('<b>%s</b>\n\n%s' % (to_xml(title),to_xml(msg)))
     dialog.show_all()
     dialog.run()
@@ -463,7 +402,7 @@ def warning(msg, title='', parent=None):
 def sur(msg, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
-    sur = glade.XML(terp_path("terp.glade"), "win_sur",gettext.textdomain())
+    sur = glade.XML(terp_path("openerp.glade"), "win_sur",gettext.textdomain())
     win = sur.get_widget('win_sur')
     win.set_transient_for(parent)
     win.show_all()
@@ -473,7 +412,7 @@ def sur(msg, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
 
     response = win.run()
     parent.present()
@@ -481,7 +420,7 @@ def sur(msg, parent=None):
     return response == gtk.RESPONSE_OK
 
 def sur_3b(msg, parent=None):
-    sur = glade.XML(terp_path("terp.glade"), "win_quest_3b",gettext.textdomain())
+    sur = glade.XML(terp_path("openerp.glade"), "win_quest_3b",gettext.textdomain())
     win = sur.get_widget('win_quest_3b')
     l = sur.get_widget('label')
     l.set_text(msg)
@@ -489,7 +428,7 @@ def sur_3b(msg, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
 
     response = win.run()
     parent.present()
@@ -508,22 +447,22 @@ def theme_set():
     if theme and (theme <> 'none'):
         fname = os.path.join("themes", theme, "gtkrc")
         if not os.path.isfile(fname):
-            common.warning('File not found: '+fname+'\nSet theme to none in ~/.terprc', 'Error setting theme')
+            common.warning('File not found: '+fname+'\nSet theme to none in ~/.openerprc', 'Error setting theme')
             return False
         gtk.rc_parse("themes/"+theme+"/gtkrc")
     return True
 
 def ask(question, parent=None):
-    dia = glade.XML(terp_path('terp.glade'), 'win_quest', gettext.textdomain())
+    dia = glade.XML(terp_path('openerp.glade'), 'win_quest', gettext.textdomain())
     win = dia.get_widget('win_quest')
-    label = dia.get_widget('label')
+    label = dia.get_widget('label1')
     label.set_text(question)
     entry = dia.get_widget('entry')
 
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
 
     response = win.run()
     parent.present()
@@ -534,13 +473,13 @@ def ask(question, parent=None):
         return entry.get_text()
 
 def concurrency(resource, id, context, parent=None):
-    dia = glade.XML(common.terp_path("terp.glade"),'dialog_concurrency_exception',gettext.textdomain())
+    dia = glade.XML(common.terp_path("openerp.glade"),'dialog_concurrency_exception',gettext.textdomain())
     win = dia.get_widget('dialog_concurrency_exception')
 
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
-    win.set_icon(TINYERP_ICON)
+    win.set_icon(OPENERP_ICON)
 
     res= win.run()
     parent.present()

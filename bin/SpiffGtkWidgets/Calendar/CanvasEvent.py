@@ -36,10 +36,8 @@ class CanvasEvent(CanvasRectangle):
                                      xalign    = hippo.ALIGNMENT_CENTER,
                                      yalign    = hippo.ALIGNMENT_CENTER,
                                      size_mode = hippo.CANVAS_SIZE_ELLIPSIZE_END)
-
         self.append(self.text, hippo.PACK_EXPAND)
         self.set_text(text)
-
 
     def set_text(self, text):
         self.text.set_property('text', text)

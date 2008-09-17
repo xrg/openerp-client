@@ -179,9 +179,10 @@ class Printer(object):
                     os.startfile( fname )
             else:
                 open_file( app_to_run, fname )
-            pass
         else:
-            finderfunc = self.openers[ftype]
+            finderfunc = self.openers.get(ftype)
+            if not finderfunc:
+                raise Exception(_('Unable to handle %s filetype') % ftype)
             opener = finderfunc()
             opener(fname)
             gc.collect()
@@ -209,7 +210,7 @@ def print_data(data):
         import tempfile
         if data['format']=='html' and os.name=='nt':
             data['format']='doc'
-        (fileno, fp_name) = tempfile.mkstemp('.'+data['format'], 'tinyerp_')
+        (fileno, fp_name) = tempfile.mkstemp('.'+data['format'], 'openerp_')
         fp = file(fp_name, 'wb+')
         fp.write(content)
         fp.close()

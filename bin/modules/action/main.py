@@ -39,6 +39,7 @@ import printer
 import common
 import tools
 from widget.view.form_gtk.many2one import dialog
+
 class main(service.Service):
     def __init__(self, name='action.main'):
         service.Service.__init__(self, name)
@@ -80,6 +81,10 @@ class main(service.Service):
             if not len(res):
                 raise Exception, 'ActionNotFound'
             type=res[0]['type']
+
+        if type == 'ir.actions.act_window':
+            # the field 'views' is transfered as a binary field
+            ctx['get_binary_size'] = False
         res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [act_id], False, ctx)[0]
         self._exec_action(res,datas,context)
 
@@ -96,8 +101,11 @@ class main(service.Service):
 
             view_ids=False
             if action.get('views', []):
-                view_ids=[x[0] for x in action['views']]
-                datas['view_mode']=",".join([x[1] for x in action['views']])
+                if isinstance(action['views'],list):
+                    view_ids=[x[0] for x in action['views']]
+                    datas['view_mode']=",".join([x[1] for x in action['views']])
+                else:
+                    view_ids=[(action['view_type']=='tree') and 1 or False,(action['view_type']=='form') and 1 or False]
             elif action.get('view_id', False):
                 view_ids=[action['view_id'][0]]
 
@@ -114,8 +122,8 @@ class main(service.Service):
 
             if datas.get('domain', False):
                 domain.append(datas['domain'])
-            if 'target' in action and action['target']=='new':
-                dia = dialog(datas['res_model'], window=datas.get('window',None), domain=domain, context=ctx, view_ids=view_ids,target=True)
+            if action.get('target', False)=='new':
+                dia = dialog(datas['res_model'], window=datas.get('window',None), domain=domain, context=ctx, view_ids=view_ids,target=True, view_type=datas.get('view_mode', 'tree').split(','))
                 if dia.dia.get_has_separator():
                     dia.dia.set_has_separator(False)
                 dia.run()
@@ -162,9 +170,11 @@ class main(service.Service):
         if 'id' in data:
             try:
                 id = data.get('id', False)
+                ctx = rpc.session.context.copy()
+                ctx['get_binary_size'] = False
                 actions = rpc.session.rpc_exec_auth('/object', 'execute',
                         'ir.values', 'get', 'action', keyword,
-                        [(data['model'], id)], False, rpc.session.context)
+                        [(data['model'], id)], False, ctx)
                 actions = map(lambda x: x[2], actions)
             except rpc.rpc_exception, e:
 #               common.error(_('Error: ')+str(e.type), e.message, e.data)

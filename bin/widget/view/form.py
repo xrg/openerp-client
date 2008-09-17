@@ -98,7 +98,7 @@ class ViewForm(parser_view):
         self.widgets = dict([(name, ViewWidget(self, widget, name))
                              for name, widget in children.items()])
 
-        if toolbar and not options.options['client.modepda']:
+        if toolbar:
             hb = gtk.HBox()
             hb.pack_start(self.widget)
 
@@ -110,7 +110,7 @@ class ViewForm(parser_view):
 
             eb = gtk.EventBox()
             eb.add(tb)
-            #eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
+            eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
             #tb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("blue"))
 
 
@@ -199,7 +199,7 @@ class ViewForm(parser_view):
                                     gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
                             win.vbox.set_spacing(5)
                             win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                            win.set_icon(common.TINYERP_ICON)
+                            win.set_icon(common.OPENERP_ICON)
                             vbox = gtk.VBox(spacing=5)
 
                             entries_list = []

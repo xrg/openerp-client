@@ -44,13 +44,13 @@ __author__ = release.author
 __version__ = release.version
 
 import __builtin__
-__builtin__.__dict__['tinyerp_version'] = __version__
+__builtin__.__dict__['openerp_version'] = __version__
 
 import logging
 logging.basicConfig()
 
 from distutils.sysconfig import get_python_lib
-terp_path = os.path.join(get_python_lib(), 'tinyerp-client')
+terp_path = os.path.join(get_python_lib(), 'openerp-client')
 sys.path.append(terp_path)
 
 if os.name == 'nt':
@@ -131,10 +131,7 @@ try:
     win = modules.gui.main.terp_main()
     if not common.terp_survey():
         if options.options.rcexist:
-            if options.options['tip.autostart']:
-                common.tipoftheday(win.window)
-            else:
-                win.sig_login()
+            win.sig_login()
     gtk.main()
 except KeyboardInterrupt, e:
     log = logging.getLogger('common')

@@ -37,7 +37,7 @@ import service
 import rpc
 
 def field_pref_set(field, name, model, value, dependance=None, window=None):
-    win_gl = glade.XML(common.terp_path('terp.glade'), 'win_field_pref',
+    win_gl = glade.XML(common.terp_path('openerp.glade'), 'win_field_pref',
             gettext.textdomain())
     if dependance is None:
         dependance = []
@@ -45,7 +45,7 @@ def field_pref_set(field, name, model, value, dependance=None, window=None):
         window = service.LocalService('gui.main').window
     win = win_gl.get_widget('win_field_pref')
     win.set_transient_for(window)
-    win.set_icon(common.TINYERP_ICON)
+    win.set_icon(common.OPENERP_ICON)
     ent = win_gl.get_widget('ent_field')
     ent.set_text(name)
     ent = win_gl.get_widget('ent_domain')

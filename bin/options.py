@@ -66,11 +66,10 @@ class configmanager(object):
             'login.port': '8070',
             'login.protocol': 'socket://',
             'login.db': 'terp',
-            'client.modepda': False,
             'client.toolbar': 'both',
             'client.theme': 'none',
-            'path.share': os.path.join(sys.prefix, 'share/tinyerp-client/'),
-            'path.pixmaps': os.path.join(sys.prefix, 'share/pixmaps/tinyerp-client/'),
+            'path.share': os.path.join(sys.prefix, 'share/openerp-client/'),
+            'path.pixmaps': os.path.join(sys.prefix, 'share/pixmaps/openerp-client/'),
             'tip.autostart': False,
             'tip.position': 0,
             'survey.position': 0,
@@ -84,17 +83,17 @@ class configmanager(object):
             'logging.output': 'stdout',
             'logging.verbose': False,
             'client.default_path': os.path.expanduser('~'),
-            'support.recipient': 'support@tiny.be',
+            'support.recipient': 'support@openerp.com',
             'support.support_id' : '',
             'form.toolbar': True,
-            'client.form_tab': 'left',
+            'client.form_tab': 'top',
             'client.form_tab_orientation': 0,
             'client.lang': False,
             'client.filetype': {},
             'help.index': 'http://www.openerp.com/documentation/user-manual/',
             'help.context': 'http://www.openerp.com/scripts/context_index.php'
         }
-        parser = optparse.OptionParser(version=_("OpenERP Client %s" % tinyerp_version))
+        parser = optparse.OptionParser(version=_("OpenERP Client %s" % openerp_version))
         parser.add_option("-c", "--config", dest="config",help=_("specify alternate config file"))
         parser.add_option("-v", "--verbose", action="store_true", default=False, dest="verbose", help=_("enable basic debugging"))
         parser.add_option("-d", "--log", dest="log_logger", default='', help=_("specify channels to log"))
@@ -117,7 +116,7 @@ class configmanager(object):
                 self.options['login.'+arg] = getattr(opt, arg)
 
     def _get_rcfile(self, fname, optconfigfile):
-        rcfile = fname or optconfigfile or os.environ.get('TERPRC') or os.path.join(get_home_dir(), '.terprc')
+        rcfile = fname or optconfigfile or os.environ.get('OPENERPRC') or os.path.join(get_home_dir(), '.openerprc')
         if not os.path.exists(rcfile):
             import logging
             log = logging.getLogger('common.options')

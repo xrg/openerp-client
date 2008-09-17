@@ -36,8 +36,9 @@ import gtk
 
 class EmptyCalendar(object):
     def __init__(self, model):
-        self.widget = gtk.Label(_('Calendar view')+'\n'+_('Not yet implemented')
-                +'\n'+_('You can use this feature in the web client'))
+        self.widget = gtk.Label(
+            _('Calendar View Error !')+'\n\n'+
+            _('You must intall the library python-hippocanvas to use calendars.'))
 
     def display(self, models):
         pass
