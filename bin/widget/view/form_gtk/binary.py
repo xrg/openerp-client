@@ -189,7 +189,18 @@ class wid_binary(interface.widget_interface):
             return False
         super(wid_binary, self).display(model, model_field)
         self.model_field = model_field
-        self.wid_text.set_text(model_field.get_client(model) or '')
+        disp_text=model_field.get_client(model)
+
+        if disp_text:
+            units = ('bytes', 'Kb', 'Mb', 'Gb')
+            if disp_text.find(" ")<=0:
+                s, i = float(len(disp_text)), 0
+                while s >= 1024 and i < len(units)-1:
+                    s = s / 1024
+                    i = i + 1
+                disp_text="%0.2f %s" % (s, units[i])
+
+        self.wid_text.set_text(disp_text or '')
         return True
 
     #def _size_get(self, l):
