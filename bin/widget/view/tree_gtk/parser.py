@@ -579,17 +579,14 @@ class ProgressBar(object):
 
 
 class CellRendererButton(gtk.GenericCellRenderer):
-    #TODO Add keyboard editing
     __gproperties__ = {
             "text": (gobject.TYPE_STRING, None, "Text",
                 "Displayed text", gobject.PARAM_READWRITE),
     }
-
     __gsignals__ = {
             'clicked': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
                 (gobject.TYPE_STRING, )),
     }
-
     def __init__(self, text=""):
         self.__gobject_init__()
         self.text = text
@@ -599,7 +596,6 @@ class CellRendererButton(gtk.GenericCellRenderer):
         self.xalign = 0.0
         self.yalign = 0.5
         self.textborder = 4
-
 
     def do_set_property(self, pspec, value):
         setattr(self, pspec.name, value)
@@ -624,7 +620,6 @@ class CellRendererButton(gtk.GenericCellRenderer):
         x = cell_area.x
         y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
         window.draw_layout(widget.style.text_gc[0], x, y, layout)
-
         layout = widget.create_pango_layout(self.text)
         layout.set_font_description(widget.style.font_desc)
         w, h = layout.get_size()
@@ -700,7 +695,6 @@ class CellRendererButton(gtk.GenericCellRenderer):
                 self.clicking = False
                 widget.queue_draw()
             gobject.timeout_add(60, timeout, self, widget)
-
 gobject.type_register(CellRendererButton)
 
 
@@ -720,6 +714,4 @@ CELLTYPES = {
     'button': CellRendererButton,
 }
 
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

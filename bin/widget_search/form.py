@@ -285,7 +285,7 @@ class form(wid_int.wid_int):
             if x in self.widgets:
                 self.widgets[x][0].value = value[x]
 
-    value = property(_value_get, _value_set, None, _('The content of the form or excpetion if not valid'))
+    value = property(_value_get, _value_set, None, _('The content of the form or exception if not valid'))
 
 import calendar
 import spinbutton

@@ -218,7 +218,10 @@ class _container(object):
             self.trans_box_label.append((eb, name, fname))
             eb.add(label)
             if help:
-                eb.set_tooltip_markup('<span foreground=\"darkred\"><b>'+tools.to_xml(name)+'</b></span>\n'+tools.to_xml(help))
+                try:
+                    eb.set_tooltip_markup('<span foreground=\"darkred\"><b>'+tools.to_xml(name)+'</b></span>\n'+tools.to_xml(help))
+                except:
+                    pass
                 label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
                 eb.show()
             if '_' in name:
