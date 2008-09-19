@@ -41,9 +41,6 @@ from SpiffGtkWidgets import Calendar
 from mx import DateTime
 import time
 
-from tools.debug import logged
-
-
 COLOR_PALETTE = ['#f57900', '#cc0000', '#d400a8', '#75507b', '#3465a4', '#73d216', '#c17d11', '#edd400',
                  '#fcaf3e', '#ef2929', '#ff00c9', '#ad7fa8', '#729fcf', '#8ae234', '#e9b96e', '#fce94f',
                  '#ff8e00', '#ff0000', '#b0008c', '#9000ff', '#0078ff', '#00ff00', '#e6ff00', '#ffff00',
@@ -68,12 +65,26 @@ class TinyEvent(object):
             r.append("%s: %r" % (x, self.__dict__[x]))
         return "\n".join(r)
 
+class TinyCalModel(Calendar.Model):
+    def add_events(self, events):
+        for event in events:
+            assert event    is not None
+            assert event.id is None
+            self.events[self.next_event_id] = event
+            event.id = self.next_event_id
+            self.next_event_id += 1
+
 
 class ViewCalendar(object):
-    #@logged(False)
     def __init__(self, model, axis, fields, attrs):
         self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_calendar',gettext.textdomain())
         self.widget = self.glade.get_widget('widget_view_calendar')
+
+        self._label_current = self.glade.get_widget('label_current')
+        self._radio_month = self.glade.get_widget('radio_month')
+        self._radio_week = self.glade.get_widget('radio_week')
+        self._radio_day = self.glade.get_widget('radio_day')
+        self._small_calendar = self.glade.get_widget('calendar_small')
 
         self.fields = fields
         self.attrs = attrs
@@ -81,6 +92,7 @@ class ViewCalendar(object):
 
         self.cal_model = Calendar.Model()
         self.cal_view = Calendar.Calendar(self.cal_model)
+
         vbox = self.glade.get_widget('cal_vbox')
         vbox.pack_start(self.cal_view)
         vbox.show_all()
@@ -134,79 +146,94 @@ class ViewCalendar(object):
         self.process = False
         return True
 
-    #@logged(False)
+    
+    def __update_colors(self):
+        self.colors = {}
+        if self.color_field:
+            for model in self.models:
+                evt = model.get()
+                key = evt[self.color_field]
+                name = key
+                value = key
+            
+                if isinstance(key, (tuple, list)):
+                    value, name = key
+
+                self.colors[key] = (name, value, None)
+
+            colors = choice_colors(len(self.colors))
+            for i, (key, value) in enumerate(self.colors.items()):
+                self.colors[key] = (value[0], value[1], colors[i])
+
+
     def display(self, models):
-        label = self.glade.get_widget('label_current')
-        t = self.date.tuple()
-        if self.mode=='month':
-            self.glade.get_widget('radio_month').set_active(True)
-            d1 = datetime(*list(t)[:6])
-            self.cal_view.set_range(self.cal_view.RANGE_MONTH)
-            self.cal_view.select(d1)
-            label.set_text(self.date.strftime('%B %Y'))
-        elif self.mode=='week':
-            self.glade.get_widget('radio_week').set_active(True)
-            self.cal_view.set_range(self.cal_view.RANGE_WEEK)
-            d1 = datetime(*list(t)[:6])
-            self.cal_view.select(d1)
-            label.set_text(_('Week') + ' ' + self.date.strftime('%W, %Y'))
-        elif self.mode=='day':
-            self.glade.get_widget('radio_day').set_active(True)
-            self.cal_view.set_range(self.cal_view.RANGE_CUSTOM)
-            d1 = datetime(*(list(t)[:3] + [00]))
-            d2 = datetime(*(list(t)[:3] + [23, 59, 59]))
-            self.cal_view.set_custom_range(d1,d2)
-            label.set_text(self.date.strftime('%A %x'))
-        sc = self.glade.get_widget('calendar_small')
-        sc.select_month(t[1]-1,t[0])
-        day = t[2]
-        sc.select_day(day)
+        
          
         if models:
             self.models = models.models
 
         if self.models:
-            if self.color_field:
-                self.colors = {}
-                for model in self.models:
-                    evt = model.get()
-                    key = evt[self.color_field]
-                    name = key
-                    value = key
-                
-                    if isinstance(key, (tuple, list)):
-                        value, name = key
+            self.__update_colors()
 
-                    self.colors[key] = (name, value, None)
-
-                colors = choice_colors(len(self.colors))
-                for i, (key, value) in enumerate(self.colors.items()):
-                    self.colors[key] = (value[0], value[1], colors[i])
-   
-           
+            #print "models:", len(self.models)
             # If doesn't work, remove events
-            self.cal_model = Calendar.Model()
+            #self.cal_model = Calendar.Model()
+            self.cal_model = TinyCalModel()
             self.cal_view.model = self.cal_model
-
-
-            for model in self.models:
-                evt = model.get()
-                self.__convert(evt)
-                e = self.__get_event(evt)
             
-                #print "event:", repr(e)
-                #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
-                #    continue
-                #print " -> shown"
+            self.cal_model.add_events(self.__get_events())
 
-                #print e.starts
-                event = Calendar.Event(
+        self.refresh()
+
+    def refresh(self):
+        t = self.date.tuple()
+        if self.mode=='month':
+            self._radio_month.set_active(True)
+            d1 = datetime(*list(t)[:6])
+            self.cal_view.range = self.cal_view.RANGE_MONTH
+            self.cal_view.selected = d1
+            self._label_current.set_text(self.date.strftime('%B %Y'))
+        elif self.mode=='week':
+            self._radio_week.set_active(True)
+            self.cal_view.range = self.cal_view.RANGE_WEEK
+            d1 = datetime(*list(t)[:6])
+            self.cal_view.selected = d1
+            self._label_current.set_text(_('Week') + ' ' + self.date.strftime('%W, %Y'))
+        elif self.mode=='day':
+            self._radio_day.set_active(True)
+            self.cal_view.range = self.cal_view.RANGE_CUSTOM
+            d1 = datetime(*(list(t)[:3] + [00]))
+            d2 = datetime(*(list(t)[:3] + [23, 59, 59]))
+            self.cal_view.visible_range = d1, d2
+            self.cal_view.active_range = d1, d2
+            self._label_current.set_text(self.date.strftime('%A %x'))
+        
+        self._small_calendar.select_month(t[1]-1,t[0])
+        self._small_calendar.select_day(t[2])
+        
+        self.cal_view.refresh()
+
+
+    def __get_events(self):
+        events = []
+        #day = self.date.tuple()[2]
+        for model in self.models:
+            evt = model.get()
+            self.__convert(evt)
+            e = self.__get_event(evt)
+        
+            #print "event:", repr(e)
+            #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
+            #    continue
+            #print " -> shown"
+
+            event = Calendar.Event(
                     e.title,
                     datetime(*e.starts[:7]),
                     datetime(*e.ends[:7]),
                     bg_color = e.color)
-                self.cal_model.add_event(event)
-
+            events.append(event)
+        return events
 
     def __convert(self, event):
         # method from eTiny
