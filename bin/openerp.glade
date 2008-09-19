@@ -2016,6 +2016,141 @@ Web: http://tiny.be</property>
       </widget>
     </child>
   </widget>
+  <widget class="GtkWindow" id="win_form_widget">
+    <property name="visible">True</property>
+    <property name="title" translatable="yes">Tiny ERP - forms widget</property>
+    <child>
+      <widget class="GtkScrolledWindow" id="scrolledwindow44">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="shadow_type">GTK_SHADOW_IN</property>
+        <child>
+          <widget class="GtkViewport" id="viewport5">
+            <property name="visible">True</property>
+            <child>
+              <widget class="GtkVBox" id="vbox10">
+                <property name="visible">True</property>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <widget class="GtkVBox" id="widget_textbox_tag">
+                    <property name="visible">True</property>
+                    <child>
+                      <widget class="GtkToolbar" id="toolbar11">
+                        <property name="visible">True</property>
+                        <property name="toolbar_style">GTK_TOOLBAR_ICONS</property>     
+	  		<child>
+                          <widget class="GtkToggleToolButton" id="toggle_underline">
+                            <property name="visible">True</property>
+                            <property name="stock_id">gtk-underline</property>
+                            <signal name="toggled" handler="on_toggle_underline_toggled"/>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkToggleToolButton" id="toggle_bold">
+                            <property name="visible">True</property>
+                            <property name="stock_id">gtk-bold</property>
+                            <signal name="toggled" handler="on_toggle_bold_toggled"/>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkToggleToolButton" id="toggle_italic">
+                            <property name="visible">True</property>
+                            <property name="stock_id">gtk-italic</property>
+                            <signal name="toggled" handler="on_toggle_italic_toggled"/>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkRadioToolButton" id="radioleft">
+                            <property name="visible">True</property>
+                            <property name="stock_id">gtk-justify-left</property>
+                            <signal name="toggled" handler="on_radioleft_toggled"/>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkRadioToolButton" id="radiocenter">
+                            <property name="visible">True</property>
+                            <property name="stock_id">gtk-justify-center</property>
+                            <property name="group">radioleft</property>
+                            <signal name="toggled" handler="on_radiocenter_toggled"/>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkRadioToolButton" id="radioright">
+                            <property name="visible">True</property>
+                            <property name="stock_id">gtk-justify-right</property>
+                            <property name="group">radioleft</property>
+                            <signal name="toggled" handler="on_radioright_toggled"/>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkRadioToolButton" id="radiofill">
+                            <property name="visible">True</property>
+                            <property name="stock_id">gtk-justify-fill</property>
+                            <property name="group">radioleft</property>
+                            <signal name="toggled" handler="on_radiofill_toggled"/>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                          </packing>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <widget class="GtkScrolledWindow" id="scrolledwindow31">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                        <property name="window_placement">GTK_CORNER_BOTTOM_LEFT</property>
+                        <child>
+                          <widget class="GtkTextView" id="widget_textbox_tag_tv">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                          </widget>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="position">12</property>
+                  </packing>
+                </child>
+              </widget>
+            </child>
+          </widget>
+        </child>
+      </widget>
+    </child>
+  </widget>
   <widget class="GtkDialog" id="win_sur">
     <property name="width_request">350</property>
     <property name="height_request">143</property>
