@@ -294,25 +294,6 @@ class M2MField(CharField):
     def get_default(self, model):
         return self.get_client(model)
 
-# Decorator printing debugging output.
-def debugger(f):
-    def debugf(*args,**kwargs):
-        print "DEBUG:", f.__name__, args, kwargs
-        retv = f(*args,**kwargs)
-        print "Function returned:", repr(retv)
-        return retv
-    return debugf
-
-
-class debug_function(object):
-    def __init__(self, f):
-        self.__f = f
-
-    def __call__(self, *args, **kwargs):
-        print 'CALL', args, kwargs
-        self.__numCalls += 1
-        return self.__f(*args, **kwargs)
-
 
 class O2MField(CharField):
     '''
