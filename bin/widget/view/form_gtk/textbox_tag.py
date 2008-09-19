@@ -30,7 +30,7 @@
 
 #
 # TODO: recode the whole pango code
-# 
+#
 
 import gtk
 from gtk import glade
@@ -40,6 +40,7 @@ import pango
 import interface
 import common
 import re
+import service
 
 class textbox_tag(interface.widget_interface):
     desc_to_attr_table = {
@@ -121,14 +122,67 @@ class textbox_tag(interface.widget_interface):
         self.win_gl.signal_connect('on_toggle_underline_toggled', self._toggle, [self.underline])
 #       self.win_gl.signal_connect('on_font_size_changed',self._font_changed)
 #       self.win_gl.signal_connect('on_color_changed',self._color_changed)
-        
+        self.win_gl.signal_connect('on_font_button_clicked',self._font_selection)
+        self.win_gl.signal_connect('on_color_button_clicked',self._color_selection)
+
+
         self.justify = gtk.JUSTIFY_LEFT
-        
+
         self.leading = 14+7
         self.win_gl.signal_connect('on_radiofill_toggled',self._toggle_justify, gtk.JUSTIFY_FILL)
         self.win_gl.signal_connect('on_radiocenter_toggled',self._toggle_justify, gtk.JUSTIFY_CENTER)
         self.win_gl.signal_connect('on_radioright_toggled',self._toggle_justify, gtk.JUSTIFY_RIGHT)
         self.win_gl.signal_connect('on_radioleft_toggled',self._toggle_justify, gtk.JUSTIFY_LEFT)
+
+    def _font_selection(self,widget):
+        window = service.LocalService('gui.main').window
+        win = gtk.Dialog(_('OpenERP - Font Selection'), window,
+                gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
+                (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+                gtk.STOCK_OK, gtk.RESPONSE_OK,gtk.STOCK_APPLY,gtk.RESPONSE_APPLY))
+        win.set_icon(common.OPENERP_ICON)
+        font_sel=gtk.FontSelection()
+        font_sel.set_preview_text("opnerp OPENERP")
+
+        win.vbox.pack_start(font_sel, expand=True, fill=True)
+        win.show_all()
+
+        response = win.run()
+        if response in (gtk.RESPONSE_OK,gtk.RESPONSE_APPLY):
+            font_name=font_sel.get_font_name()
+            font_desc = pango.FontDescription(font_name)
+#            self.leading = int(font_sel.get_value()*1.6)
+            self.apply_font_and_attrs(font_desc, [])
+
+        self._focus_out()
+        window.present()
+        win.destroy()
+
+    def _color_selection(self,widget):
+        window = service.LocalService('gui.main').window
+        win = gtk.Dialog(_('OpenERP - Color Selection'), window,
+                gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
+                (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+                gtk.STOCK_OK, gtk.RESPONSE_OK))
+        win.set_icon(common.OPENERP_ICON)
+        color_sel=gtk.ColorSelection()
+
+        win.vbox.pack_start(color_sel, expand=True, fill=True)
+        win.show_all()
+
+        response = win.run()
+        if response == gtk.RESPONSE_OK:
+            color=color_sel.get_current_color()
+            color_attr=pango.AttrForeground(color.red, color.green, color.blue)
+            self.apply_font_and_attrs(None, [color_attr])
+
+        self._focus_out()
+        window.present()
+        win.destroy()
+
+
+
+        pass
 
     def sig_insert_text(self, textbuffer, iter, text, length):
         start = iter.get_offset()
@@ -143,22 +197,22 @@ class textbox_tag(interface.widget_interface):
             for key, value in self.tagdict[tag].items():
                 if key == 'font_desc' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
 #                   self.sizeButton.set_value(int(value[-2:]))
-#                   is_set[key] = tag.get_priority()  
+#                   is_set[key] = tag.get_priority()
                     pass
                 elif key == 'foreground' and  tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
 #                   self.colorButton.set_color(gtk.gdk.color_parse(value))
-#                   is_set[key] = tag.get_priority()  
+#                   is_set[key] = tag.get_priority()
 #                   color_priority = tag.get_priority()
                     pass
                 elif key == 'weight' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
                     self.boldButton.set_active(True)
-                    is_set[key] = tag.get_priority()  
+                    is_set[key] = tag.get_priority()
                 elif key == 'style' and value == 'italic' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
                     self.italicButton.set_active(True)
-                    is_set[key] = tag.get_priority()  
+                    is_set[key] = tag.get_priority()
                 elif key == 'underline' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
                     self.underlineButton.set_active(True)
-                    is_set[key] = tag.get_priority()  
+                    is_set[key] = tag.get_priority()
         #if no color defined, set to defalt (black)
         if not is_set.has_key('foreground'):
 #           self.colorButton.set_color(gtk.gdk.color_parse('#000000'))
@@ -241,7 +295,7 @@ class textbox_tag(interface.widget_interface):
 
     def get_tags (self, at_pos=None):
         tagdict = {}
-        
+
         for pos in range(self.buf.get_char_count()):
             iter=self.buf.get_iter_at_offset(pos)
             for tag in iter.get_tags():
