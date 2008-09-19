@@ -2039,7 +2039,39 @@ Web: http://tiny.be</property>
                     <child>
                       <widget class="GtkToolbar" id="toolbar11">
                         <property name="visible">True</property>
-                        <property name="toolbar_style">GTK_TOOLBAR_ICONS</property>     
+                        <property name="toolbar_style">GTK_TOOLBAR_ICONS</property>
+          		<child>
+			  <widget class="GtkToggleToolButton" id="font_button">
+			    <property name="visible">True</property>
+			    <property name="can_focus">True</property>
+			    <property name="stock_id">gtk-select-font</property>
+			    <property name="use_stock">True</property>
+			    <property name="relief">GTK_RELIEF_NORMAL</property>
+			    <property name="focus_on_click">True</property>
+			    <signal name="clicked" handler="on_font_button_clicked"/>
+			  </widget>
+			  <packing>
+			    <property name="padding">0</property>
+			    <property name="expand">False</property>
+			    <property name="fill">False</property>
+			 </packing>
+		    	</child>
+			<child>
+			    <widget class="GtkToggleToolButton" id="color_button">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="stock_id">gtk-select-color</property>
+			      <property name="use_stock">True</property>
+			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
+			      <signal name="clicked" handler="on_color_button_clicked" last_modification_time="Fri, 10 Mar 2006 06:00:43 GMT"/>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">False</property>
+			      <property name="fill">False</property>
+			    </packing>
+			</child>     
 	  		<child>
                           <widget class="GtkToggleToolButton" id="toggle_underline">
                             <property name="visible">True</property>
