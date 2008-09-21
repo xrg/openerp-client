@@ -255,7 +255,7 @@ class Screen(signal_event.signal_event):
 
         main = service.LocalService('gui.main')
         if main:
-            main._update_attachment_button()
+            main.sb_set()
 
         # TODO: set True or False accoring to the type
 
