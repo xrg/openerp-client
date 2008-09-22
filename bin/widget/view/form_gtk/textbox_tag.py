@@ -181,9 +181,6 @@ class textbox_tag(interface.widget_interface):
         win.destroy()
 
 
-
-        pass
-
     def sig_insert_text(self, textbuffer, iter, text, length):
         start = iter.get_offset()
         end_iter = self.buf.get_iter_at_offset(start-length)
