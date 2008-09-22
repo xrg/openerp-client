@@ -31,7 +31,6 @@ import tools
 from tools import date_mapping
 import time
 from mx.DateTime import DateTime
-from mx.DateTime import strptime
 
 class DateEntry(gtk.Entry):
     def __init__(self, format, callback=None, callback_process=None):
@@ -145,11 +144,11 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
                 tc = tc[:a] + tt[a] + tc[a+1:]
         try:
             self.set_text(tc)
-            return strptime(tc, self.format)
+            return time.strptime(tc, self.format)
         except:
             tc = tt
         self.set_text(tc)
-        return strptime(tc, self.format)
+        return time.strptime(tc, self.format)
 
     def delete_text(self, start, end):
         print 'DELETE TEXT'
@@ -230,7 +229,7 @@ class ComplexEntry(gtk.HBox):
                         dt = self.widget.date_get()
                         if not dt:
                             dt = time.strftime(self.widget.format, time.localtime())
-                            dt = strptime(dt, self.widget.format)
+                            dt = time.strptime(dt, self.widget.format)
                         self.widget.date_set(f(dt,groups))
                         break
 
