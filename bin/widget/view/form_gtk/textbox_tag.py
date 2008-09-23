@@ -122,8 +122,8 @@ class textbox_tag(interface.widget_interface):
         self.win_gl.signal_connect('on_toggle_underline_toggled', self._toggle, [self.underline])
 #       self.win_gl.signal_connect('on_font_size_changed',self._font_changed)
 #       self.win_gl.signal_connect('on_color_changed',self._color_changed)
-        self.win_gl.signal_connect('on_font_button_clicked',self._font_selection)
-        self.win_gl.signal_connect('on_color_button_clicked',self._color_selection)
+#        self.win_gl.signal_connect('on_font_button_clicked',self._font_selection)
+#        self.win_gl.signal_connect('on_color_button_clicked',self._color_selection)
 
 
         self.justify = gtk.JUSTIFY_LEFT
@@ -141,11 +141,12 @@ class textbox_tag(interface.widget_interface):
                 (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                 gtk.STOCK_OK, gtk.RESPONSE_OK,gtk.STOCK_APPLY,gtk.RESPONSE_APPLY))
         win.set_icon(common.OPENERP_ICON)
-        font_sel=gtk.FontSelection()
-        font_sel.set_preview_text("opnerp OPENERP")
-
-        win.vbox.pack_start(font_sel, expand=True, fill=True)
-        win.show_all()
+#        print "dir(win)",dir(win)
+        font_sel=gtk.FontSelectionDialog('Select Fonts')
+#        font_sel.set_preview_text("opnerp OPENERP")
+        font_sel.show()
+#        win.vbox.pack_start(font_sel, expand=True, fill=True)
+#        win.show_all()
 
         response = win.run()
         if response in (gtk.RESPONSE_OK,gtk.RESPONSE_APPLY):

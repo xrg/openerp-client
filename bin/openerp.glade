@@ -2037,35 +2037,8 @@ Web: http://tiny.be</property>
                   <widget class="GtkVBox" id="widget_textbox_tag">
                     <property name="visible">True</property>
                     <child>
-                      <widget class="GtkToolbar" id="toolbar11">
-                        <property name="visible">True</property>
-                        <property name="toolbar_style">GTK_TOOLBAR_ICONS</property>
-          		<child>
-			  <widget class="GtkToggleToolButton" id="font_button">
-			    <property name="visible">True</property>
-			    <property name="can_focus">True</property>
-			    <property name="stock_id">gtk-select-font</property>
-			    <signal name="clicked" handler="on_font_button_clicked"/>
-			  </widget>
-			  <packing>
-			    <property name="padding">0</property>
-			    <property name="expand">False</property>
-			    <property name="fill">False</property>
-			 </packing>
-		    	</child>
-			<child>
-			    <widget class="GtkToggleToolButton" id="color_button">
-			      <property name="visible">True</property>
-			      <property name="can_focus">True</property>
-			      <property name="stock_id">gtk-select-color</property>
-			      <signal name="clicked" handler="on_color_button_clicked"/>
-			    </widget>
-			    <packing>
-			      <property name="padding">0</property>
-			      <property name="expand">False</property>
-			      <property name="fill">False</property>
-			    </packing>
-			</child>     
+                      <widget class="GtkHBox" id="toolbar11">
+                        <property name="visible">True</property>  
 	  		<child>
                           <widget class="GtkToggleToolButton" id="toggle_underline">
                             <property name="visible">True</property>
@@ -2139,6 +2112,40 @@ Web: http://tiny.be</property>
                             <property name="expand">False</property>
                           </packing>
                         </child>
+			<child>
+                      <widget class="GtkToolbar" id="toolbar111">
+                        <property name="visible">True</property>
+                        <property name="toolbar_style">GTK_TOOLBAR_ICONS</property>  	
+			<child>
+			  <widget class="GtkFontButton" id="font_button">
+			    <property name="visible">True</property>
+			    <property name="can_focus">True</property>
+			    <signal name="clicked" handler="on_font_button_clicked"/>
+			  </widget>
+			  <packing>
+			    <property name="padding">0</property>
+			    <property name="expand">False</property>
+			    <property name="fill">False</property>
+			 </packing>
+		       </child>
+		       <child>
+			    <widget class="GtkColorButton" id="color_button">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <signal name="clicked" handler="on_color_button_clicked"/>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">False</property>
+			      <property name="fill">False</property>
+			    </packing>
+		       </child>
+		      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                      </packing>
+                    </child>  
                       </widget>
                       <packing>
                         <property name="expand">False</property>
