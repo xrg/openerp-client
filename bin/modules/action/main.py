@@ -82,10 +82,7 @@ class main(service.Service):
                 raise Exception, 'ActionNotFound'
             type=res['type']
 
-        if type == 'ir.actions.act_window':
-            # the field 'views' is transfered as a binary field
-            ctx['get_binary_size'] = False
-        res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [act_id], False, ctx)[0]
+        res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', act_id, False, ctx)
         self._exec_action(res,datas,context)
 
     def _exec_action(self, action, datas, context={}):
@@ -172,11 +169,9 @@ class main(service.Service):
         if 'id' in data:
             try:
                 id = data.get('id', False)
-                ctx = rpc.session.context.copy()
-                ctx['get_binary_size'] = False
                 actions = rpc.session.rpc_exec_auth('/object', 'execute',
                         'ir.values', 'get', 'action', keyword,
-                        [(data['model'], id)], False, ctx)
+                        [(data['model'], id)], False, rpc.session.context)
                 actions = map(lambda x: x[2], actions)
             except rpc.rpc_exception, e:
 #               common.error(_('Error: ')+str(e.type), e.message, e.data)
