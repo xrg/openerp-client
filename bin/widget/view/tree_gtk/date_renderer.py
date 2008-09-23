@@ -42,7 +42,6 @@ from tools import date_mapping
 
 import time
 from mx.DateTime import DateTime
-from mx.DateTime import strptime
 
 
 class DecoratorRenderer(gtk.GenericCellRenderer):
@@ -122,11 +121,11 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
                 tc = tc[:a] + tt[a] + tc[a+1:]
         try:
             editable.set_text(tc)
-            return strptime(tc, self.format)
+            return time.strptime(tc, self.format)
         except:
             tc = tt
         editable.set_text(tc)
-        return strptime(tc, self.format)
+        return time.strptime(tc, self.format)
 
     def _on_key_press(self, editable, event):
         if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return):
@@ -208,7 +207,7 @@ class date_callback(object):
                     dt = widget.date_get(widget.editable)
                     if not dt:
                         dt = time.strftime(widget.format, time.localtime())
-                        dt = strptime(dt, widget.format)
+                        dt = time.strptime(dt, widget.format)
                     widget.date_set(f(dt,groups))
                     break
         self.value = ''

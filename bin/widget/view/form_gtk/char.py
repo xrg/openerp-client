@@ -41,7 +41,7 @@ class char(interface.widget_interface):
         self.widget = gtk.Entry()
         self.widget.set_property('activates_default', True)
         self.widget.set_max_length(int(attrs.get('size',16)))
-        self.widget.set_visibility(not attrs.get('invisible', False))
+        self.widget.set_visibility(not attrs.get('password', False))
         self.widget.set_width_chars(5)
 
         self.widget.connect('button_press_event', self._menu_open)

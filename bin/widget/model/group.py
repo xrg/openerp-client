@@ -87,7 +87,7 @@ class ModelList(list):
             self.__screen.signal('record-changed', ('record-changed', key))
 
 class ModelRecordGroup(signal_event.signal_event):
-    def __init__(self, resource, fields, ids=[], parent=None, context={}):
+    def __init__(self, resource, fields, ids=[], parent=None, context={}, is_wizard=False):
         super(ModelRecordGroup, self).__init__()
         self.parent = parent
         self._context = context
@@ -104,6 +104,7 @@ class ModelRecordGroup(signal_event.signal_event):
         self.load(ids)
         self.model_removed = []
         self.on_write = ''
+        self.is_wizard = is_wizard
 
     def mfields_load(self, fkeys, models):
         for fname in fkeys:

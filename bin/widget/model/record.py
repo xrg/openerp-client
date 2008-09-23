@@ -86,7 +86,7 @@ class ModelRecord(signal_event.signal_event):
         return self.modified
     
     def is_wizard(self):
-        return self.resource.startswith('wizard.')
+        return self.mgroup.is_wizard
 
     def fields_get(self):
         return self.mgroup.mfields

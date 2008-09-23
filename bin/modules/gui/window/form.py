@@ -141,7 +141,7 @@ class form(object):
         else:
             if self.screen.current_view.view_type == 'form':
                 self.sig_new(autosave=False)
-            if self.screen.current_view.view_type in ('tree', 'graph', 'calendar'):
+            if self.screen.current_view.view_type in ('tree', 'graph'):
                 self.screen.search_filter()
 
         if auto_refresh and int(auto_refresh):

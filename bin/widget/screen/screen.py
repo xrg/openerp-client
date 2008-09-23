@@ -48,7 +48,7 @@ class Screen(signal_event.signal_event):
             parent=None, context=None, views_preload=None, tree_saves=True,
             domain=None, create_new=False, row_activate=None, hastoolbar=False,
             default_get=None, show_search=False, window=None, limit=80,
-            readonly=False):
+            readonly=False, is_wizard=False):
         if view_ids is None:
             view_ids = []
         if view_type is None:
@@ -86,7 +86,8 @@ class Screen(signal_event.signal_event):
         self.models = None
         self.parent=parent
         self.window=window
-        models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context)
+        self.is_wizard = is_wizard
+        models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context, is_wizard=is_wizard)
         self.models_set(models)
         self.current_model = None
         self.screen_container = screen_container()
@@ -168,6 +169,7 @@ class Screen(signal_event.signal_event):
         self.models.signal_connect(self, 'model-changed', self._model_changed)
         models.add_fields(self.fields, models)
         self.fields.update(models.fields)
+        models.is_wizard = self.is_wizard
 
     def _record_cleared(self, model_group, signal, *args):
         for view in self.views:
@@ -253,7 +255,7 @@ class Screen(signal_event.signal_event):
 
         main = service.LocalService('gui.main')
         if main:
-            main._update_attachment_button()
+            main.sb_set()
 
         # TODO: set True or False accoring to the type
 
