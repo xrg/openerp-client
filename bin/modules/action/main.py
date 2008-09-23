@@ -76,11 +76,11 @@ class main(service.Service):
     def execute(self, act_id, datas, type=None, context={}):
         ctx = rpc.session.context.copy()
         ctx.update(context)
-        if type==None:
-            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [act_id], ['type'], ctx)
-            if not len(res):
+        if type is None:
+            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', act_id, ['type'], ctx)
+            if not (res and len(res)):
                 raise Exception, 'ActionNotFound'
-            type=res[0]['type']
+            type=res['type']
 
         if type == 'ir.actions.act_window':
             # the field 'views' is transfered as a binary field
