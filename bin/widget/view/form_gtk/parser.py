@@ -319,12 +319,20 @@ class parser_form(widget.view.interface.parser_interface):
                 container.newline()
 
             elif node.localName=='button':
+                if attrs.get('invisible', False):
+                    visval = eval(attrs['invisible'], {'context':self.screen.context})
+                    if visval:
+                        continue
                 button = Button(attrs)
                 states = [e for e in attrs.get('states','').split(',') if e]
                 saw_list.append(StateAwareWidget(button, states))
                 container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)), help=attrs.get('help', False))
 
             elif node.localName=='notebook':
+                if attrs.get('invisible', False):
+                    visval = eval(attrs['invisible'], {'context':self.screen.context})
+                    if visval:
+                        continue
                 nb = gtk.Notebook()
                 if attrs and 'tabpos' in attrs:
                     pos = {'up':gtk.POS_TOP,
@@ -349,6 +357,10 @@ class parser_form(widget.view.interface.parser_interface):
                 dict_widget.update(widgets)
 
             elif node.localName=='page':
+                if attrs.get('invisible', False):
+                    visval = eval(attrs['invisible'], {'context':self.screen.context})
+                    if visval:
+                        continue
                 if attrs and 'angle' in attrs:
                     angle = int(attrs['angle'])
                 else:
@@ -404,6 +416,10 @@ class parser_form(widget.view.interface.parser_interface):
                 frame.attrs=attrs
                 frame.set_border_width(0)
                 states = [e for e in attrs.get('states','').split(',') if e]
+                if attrs.get('invisible', False):
+                    visval = eval(attrs['invisible'], {'context':self.screen.context})
+                    if visval:
+                        continue
                 saw_list.append(StateAwareWidget(frame, states))
 
                 container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
