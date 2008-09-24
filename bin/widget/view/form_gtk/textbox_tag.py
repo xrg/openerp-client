@@ -122,8 +122,8 @@ class textbox_tag(interface.widget_interface):
         self.win_gl.signal_connect('on_toggle_underline_toggled', self._toggle, [self.underline])
 #       self.win_gl.signal_connect('on_font_size_changed',self._font_changed)
 #       self.win_gl.signal_connect('on_color_changed',self._color_changed)
-#        self.win_gl.signal_connect('on_font_button_clicked',self._font_selection)
-#        self.win_gl.signal_connect('on_color_button_clicked',self._color_selection)
+        self.win_gl.signal_connect('on_font_button_clicked',self._font_changed)
+        self.win_gl.signal_connect('on_color_button_clicked',self._color_changed)
 
 
         self.justify = gtk.JUSTIFY_LEFT
@@ -133,54 +133,6 @@ class textbox_tag(interface.widget_interface):
         self.win_gl.signal_connect('on_radiocenter_toggled',self._toggle_justify, gtk.JUSTIFY_CENTER)
         self.win_gl.signal_connect('on_radioright_toggled',self._toggle_justify, gtk.JUSTIFY_RIGHT)
         self.win_gl.signal_connect('on_radioleft_toggled',self._toggle_justify, gtk.JUSTIFY_LEFT)
-
-    def _font_selection(self,widget):
-        window = service.LocalService('gui.main').window
-        win = gtk.Dialog(_('OpenERP - Font Selection'), window,
-                gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
-                (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-                gtk.STOCK_OK, gtk.RESPONSE_OK,gtk.STOCK_APPLY,gtk.RESPONSE_APPLY))
-        win.set_icon(common.OPENERP_ICON)
-#        print "dir(win)",dir(win)
-        font_sel=gtk.FontSelectionDialog('Select Fonts')
-#        font_sel.set_preview_text("opnerp OPENERP")
-        font_sel.show()
-#        win.vbox.pack_start(font_sel, expand=True, fill=True)
-#        win.show_all()
-
-        response = win.run()
-        if response in (gtk.RESPONSE_OK,gtk.RESPONSE_APPLY):
-            font_name=font_sel.get_font_name()
-            font_desc = pango.FontDescription(font_name)
-#            self.leading = int(font_sel.get_value()*1.6)
-            self.apply_font_and_attrs(font_desc, [])
-
-        self._focus_out()
-        window.present()
-        win.destroy()
-
-    def _color_selection(self,widget):
-        window = service.LocalService('gui.main').window
-        win = gtk.Dialog(_('OpenERP - Color Selection'), window,
-                gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
-                (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-                gtk.STOCK_OK, gtk.RESPONSE_OK))
-        win.set_icon(common.OPENERP_ICON)
-        color_sel=gtk.ColorSelection()
-
-        win.vbox.pack_start(color_sel, expand=True, fill=True)
-        win.show_all()
-
-        response = win.run()
-        if response == gtk.RESPONSE_OK:
-            color=color_sel.get_current_color()
-            color_attr=pango.AttrForeground(color.red, color.green, color.blue)
-            self.apply_font_and_attrs(None, [color_attr])
-
-        self._focus_out()
-        window.present()
-        win.destroy()
-
 
     def sig_insert_text(self, textbuffer, iter, text, length):
         start = iter.get_offset()
@@ -220,8 +172,8 @@ class textbox_tag(interface.widget_interface):
             pass
 
     def _font_changed(self, widget, event=None):
-        font_desc = pango.FontDescription('Normal '+str(widget.get_value()))
-        self.leading = int(widget.get_value()*1.6)
+        font_desc = pango.FontDescription('Normal '+str(widget.get_font_name()))
+#        self.leading = int(widget.get_value()*1.6)
         self.apply_font_and_attrs(font_desc, [])
 
 
@@ -408,7 +360,6 @@ class textbox_tag(interface.widget_interface):
     def apply_tag (self, tag):
         insert_iter = self.buf.get_iter_at_mark(self.buf.get_insert())
         selection = self.get_selection()
-
         self.tags_dic[tag] = True
         if selection:
             self.buf.apply_tag(tag, *selection)
@@ -436,7 +387,11 @@ class textbox_tag(interface.widget_interface):
             parsed, txt, separator = pango.parse_markup(txt, u'0')
         except:
             pass
-        attrIter = parsed.get_iterator()
+        try:
+            attrIter = parsed.get_iterator()
+        except:
+            common.warning("Either the Message contains HTML tags or '<' or '>' or '&' or the selected Fonts are not supported!",'User Error')
+            return True
         buf.delete(buf.get_start_iter(), buf.get_end_iter())
         while True:
             range=attrIter.range()
@@ -472,6 +427,7 @@ class textbox_tag(interface.widget_interface):
             for t in tags: self.apply_tag(t)
         else:
             for t in tags: self.remove_tag(t)
+
 
     def _toggle_justify (self, widget, justify):
         if widget.get_active():

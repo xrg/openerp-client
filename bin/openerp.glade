@@ -2120,7 +2120,7 @@ Web: http://tiny.be</property>
 			  <widget class="GtkFontButton" id="font_button">
 			    <property name="visible">True</property>
 			    <property name="can_focus">True</property>
-			    <signal name="clicked" handler="on_font_button_clicked"/>
+			    <signal name="font-set" handler="on_font_button_clicked"/>
 			  </widget>
 			  <packing>
 			    <property name="padding">0</property>
@@ -2132,7 +2132,7 @@ Web: http://tiny.be</property>
 			    <widget class="GtkColorButton" id="color_button">
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
-			      <signal name="clicked" handler="on_color_button_clicked"/>
+			      <signal name="color-set" handler="on_color_button_clicked"/>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
