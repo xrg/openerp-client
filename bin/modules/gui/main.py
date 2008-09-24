@@ -359,6 +359,11 @@ class db_create(object):
                 win.set_transient_for(parent)
                 win.show_all()
                 self.timer = gobject.timeout_add(1000, self.progress_timeout, pb, url, passwd, id, win, db_name, parent)
+                self.terp_main.glade.get_widget('but_menu').set_sensitive(True)
+                self.terp_main.glade.get_widget('user').set_sensitive(True)
+                self.terp_main.glade.get_widget('form').set_sensitive(True)
+                self.terp_main.glade.get_widget('plugins').set_sensitive(True)
+
             except Exception, e:
                 if e.args == ('DbExist',):
                     common.warning(_("Could not create database."),_('Database already exists !'))
