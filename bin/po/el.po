@@ -286,8 +286,8 @@ msgstr "Το περιεχόμενο του widget ή εξαίρεση αν μη 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
 msgid ""
-"You can use special operation by pressing +, - or =.  Plus/minus "
-"adds/decrease the variable to the current selected date. Equals set part of "
+"You can use special operation by pressing +, - or =.  Plus/minus adds/"
+"decrease the variable to the current selected date. Equals set part of "
 "selected date. Available variables: 12h = 12 hours, 8d = 8 days, 4w = 4 "
 "weeks, 1m = 1 month, 2y = 2 years. Some examples:\n"
 "* +21d : adds 21 days to selected year\n"
@@ -864,8 +864,7 @@ msgid "Couldn't restore database"
 msgstr "Αδυναμία αποκατάστασης της βάσης δεδομένων."
 
 #: bin/modules/gui/main.py:1402
-msgid ""
-"Confirmation password does not match new password, operation cancelled!"
+msgid "Confirmation password does not match new password, operation cancelled!"
 msgstr ""
 "Ο κωδικός επαλήθευσης δεν ταιριάζει με τον νέο κωδικό, η λειτουργία "
 "ακυρώθηκε!"
@@ -927,8 +926,7 @@ msgstr ""
 "χρησιμοποιήσετε το περιβάλλον web ή την όψη ημερολογίου."
 
 #: bin/widget/view/tree_gtk/date_renderer.py:200
-msgid ""
-"Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."
+msgid "Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."
 msgstr ""
 "Πληκτρολογήστε <i>'+'</i>, <i>'-'</i> ή <i>'='</i> για ειδικές λειτουργίες "
 "ημερομηνίας."
@@ -1063,8 +1061,7 @@ msgstr "Σφάλμα εγγραφής του αρχείου: %s"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
-"Λανθασμένη ημερομηνία! Το έτος πρέπει να είναι μαγλύτερο από το 1899!"
+msgstr "Λανθασμένη ημερομηνία! Το έτος πρέπει να είναι μαγλύτερο από το 1899!"
 
 #: bin/widget/view/form_gtk/calendar.py:130
 #: bin/widget/view/form_gtk/calendar.py:263
@@ -1090,8 +1087,7 @@ msgstr "Λάθος εικονίδιο για το κουμπί!"
 
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
-"Εισάγετε κάποιο κείμενο στο σχετικό πεδίο πριν προσθέσετε μεταφράσεις!"
+msgstr "Εισάγετε κάποιο κείμενο στο σχετικό πεδίο πριν προσθέσετε μεταφράσεις!"
 
 #: bin/widget/view/form_gtk/parser.py:548
 msgid "You need to save resource before adding translations!"
@@ -2492,8 +2488,903 @@ msgstr "Άκυρο"
 msgid "gtk-ok"
 msgstr "ΟΚ"
 
+#: bin/options.py:88
+#, python-format
+msgid "Tiny ERP Client %s"
+msgstr "Tiny ERP Πελάτης %s"
+
+#: bin/common/common.py:73
+msgid "Unable to launch this file !"
+msgstr "Αδυναμία εκτέλεσης αυτού του αρχείου !"
+
+#: bin/common/common.py:88
+msgid "Unable to launch the application associated to this content !"
+msgstr "Αδυναμία εκτέλεσης της εφαρμογής που συνδέεται με το περιεχόμενο !"
+
+#: bin/modules/gui/main.py:187
+msgid "Do not use special characters !"
+msgstr "Μη χρησιμοποιείτε ειδικούς χαρακτήρες !"
+
+#: bin/modules/gui/main.py:191
+msgid "Can not connect to server, please change it !"
+msgstr "Αδυναμία σύνδεσης στο διακομιστή, ελέγξτε τις σχετικές ρυθμίσεις !"
+
+#: bin/modules/gui/main.py:290
+msgid ""
+"The following users have been installed on your database:\n"
+"\n"
+msgstr ""
+"Οι παρακάτω χρήστες έχουν εγκατασταθεί στη βάση:\n"
+"\n"
+
+#: bin/modules/gui/main.py:290
+msgid ""
+"\n"
+"\n"
+msgstr ""
+
+#: bin/modules/gui/main.py:368 bin/terp.glade:1324
+msgid "Default Theme"
+msgstr "Προκαθορισμένο Θέμα"
+
+#: bin/modules/gui/main.py:546
+#, python-format
+msgid " - %s pending request(s)"
+msgstr "- %s αιτήματα σε αναμονή"
+
+#: bin/modules/gui/main.py:583
+msgid "Connection Error !"
+msgstr "Σφάλμα σύνδεσης !"
+
+#: bin/modules/gui/main.py:792
+msgid "Confirmation password do not match new password, operation cancelled!"
+msgstr "O κωδικός δεν επιβεβαιώθηκε επιτυχώς, η ενέργεια ακυρώθηκε!"
+
+#: bin/modules/gui/main.py:798
+msgid "Could not change password database."
+msgstr "Ήταν αδύνατη η αλλαγή του κωδικού της βάσης δεδομένων"
+
+#: bin/modules/gui/main.py:798
+msgid "Bas password provided !"
+msgstr "Δόθηκε εσφαλμένος κωδικός !"
+
+#: bin/modules/gui/main.py:826
+msgid "Database backuped successfully !"
+msgstr "Η βάση δεδομένων αντιγράφηκε επιτυχώς !"
+
+#: bin/modules/gui/window/win_export.py:275
+msgid "Export Data"
+msgstr "Εξαγωγή Δεδομένων"
+
+#: bin/modules/gui/window/win_preference.py:51
+msgid "Preferences"
+msgstr "Προτιμήσεις"
+
+#: bin/modules/gui/window/form.py:178 bin/modules/gui/window/form.py:368
+msgid "No resource selected !"
+msgstr "Καμία εγγραφή δεν επιλέχθηκε !"
+
+#: bin/modules/gui/window/form.py:198
+msgid "You have to select one resource!"
+msgstr "Πρέπει να διαλέξετε μια εγγραφή !"
+
+#: bin/modules/gui/window/form.py:209
+msgid "Owner"
+msgstr "Ιδιοκτήτης"
+
+#: bin/modules/gui/window/form.py:210
+msgid "Group Owner"
+msgstr "Ομάδα Ιδιοκτήτη"
+
+#: bin/modules/gui/window/form.py:211
+msgid "Access Level"
+msgstr "Επίπεδο Πρόσβασης"
+
+#: bin/modules/gui/window/form.py:224
+msgid "Resource not removed !"
+msgstr "Εγγραφή δεν διαγράφτηκε !"
+
+#: bin/modules/gui/window/form.py:226
+msgid "Resource removed."
+msgstr "Εγγραφή διαγράφηκε."
+
+#: bin/modules/gui/window/form.py:259
+msgid "Document saved !"
+msgstr "Εγγραφή Αποθηκεύθηκε"
+
+#: bin/modules/gui/window/form.py:263
+msgid "Invalid form !"
+msgstr "Μη έγκυρη φόρμα !"
+
+#: bin/modules/gui/window/form.py:315
+msgid "No record selected!"
+msgstr "Καμία επιλεγμένη εγγραφή!"
+
+#: bin/modules/gui/window/form.py:366
+msgid "No preference available for this resource !"
+msgstr "Καμία διαθέσιμη προτίμηση για αυτή την εγγραφή !"
+
+#: bin/modules/gui/window/win_search.py:76
+#, fuzzy, python-format
+msgid "Tiny ERP Search: %s"
+msgstr "Tiny ERP Αναζήτηση: %s"
+
+#: bin/modules/gui/window/win_search.py:77
+#, fuzzy, python-format
+msgid "Tiny ERP Search: %s (%%d result(s))"
+msgstr "Tiny ERP Αναζήτηση: %s (%%d αποτελέσματα)"
+
+#: bin/modules/gui/window/tree.py:80
+msgid "Switch View"
+msgstr "Αλλαγή Εμφάνισης"
+
+#: bin/modules/gui/window/tree.py:81
+msgid "Changt root"
+msgstr "Αλλαγή βάσης"
+
+#: bin/modules/gui/window/tree.py:84 bin/modules/gui/window/tree.py:85
+msgid "Print"
+msgstr "Εκτύπωση"
+
+#: bin/modules/gui/window/tree.py:86
+msgid "Close"
+msgstr "Κλείσιμο"
+
+#: bin/modules/gui/window/win_attach.py:110
+msgid "Are you sure you want to remove this attachment ?"
+msgstr "Είστε σίγουρος ότι επιθυμείτε την απομάκρυνση αυτού του συνημμένου ;"
+
+#: bin/modules/gui/window/win_attach.py:115
+#: bin/modules/gui/window/win_attach.py:137
+msgid "Select the destination file"
+msgstr "Επιλέξτε το αρχείο προορισμού"
+
+#: bin/modules/gui/window/win_attach.py:126
+msgid "Can not open file !"
+msgstr "Αδυναμία ανάγνωσης αρχείου !"
+
+#: bin/modules/gui/window/win_attach.py:146
+#: bin/modules/gui/window/win_attach.py:248
+msgid "Can not write file !"
+msgstr "Αδυναμία εγγραφής αρχείου !"
+
+#: bin/modules/gui/window/win_attach.py:235
+msgid ""
+"Unable to preview image file !\n"
+"Verify the format."
+msgstr ""
+"Αδυναμία προεπισκόπησης αρχείου εικόνας !\n"
+"Επαληθεύστε τον τύπο."
+
+#: bin/modules/action/main.py:69
+msgid "Error: "
+msgstr "Σφάλμα: "
+
+#: bin/modules/action/main.py:148
+msgid "No action defined!"
+msgstr "Καμία ενέργεια δεν καθορίστηκε!"
+
+#: bin/widget/view/tree_gtk/editabletree.py:111
+msgid "Relation Field: F1 New   F2 Open/Search"
+msgstr "Συσχετιζόμενο πεδίο: F1 Νέα Εγγραφή   F2 Άνοιγμα/Εύρεση"
+
+#: bin/widget/view/tree_gtk/editabletree.py:158
+#, python-format
+msgid "Warning; field \"%s\" is required !"
+msgstr "Προειδοποίηση: το πεδίο \"%s\" είναι υποχρεωτικό !"
+
+#: bin/widget/view/form_gtk/binary.py:66
+msgid "Select the file to attach"
+msgstr "Επιλέξτε το αρχείο προς επισύναψη"
+
+#: bin/widget/view/form_gtk/binary.py:73
+msgid "Error reading the file"
+msgstr "Σφάλμα κατά την ανάγνωση του αρχείου"
+
+#: bin/widget/view/form_gtk/binary.py:77
+msgid "Save attachment as..."
+msgstr "Αποθήκευση συνημμένου ως..."
+
+#: bin/widget/view/form_gtk/binary.py:106
+#, python-format
+msgid "%d bytes"
+msgstr "%d bytes"
+
+#: bin/widget/view/form_gtk/interface.py:53
+msgid "Set default"
+msgstr "Ορισμός προεπιλεγμένης τιμής"
+
+#: bin/widget/view/form_gtk/form.py:91
+msgid "Invalid Form, correct red fields !"
+msgstr "Μη έγκυρη φόρμα, διορθώστε τα κόκκινα πεδία!"
+
+#: bin/widget/view/form_gtk/image.py:43
+msgid "Select a file"
+msgstr "Επιλέξτε ένα αρχείο"
+
+#: bin/widget/view/form_gtk/image.py:89
+msgid "Save as ..."
+msgstr "Αποθήκευση ως ..."
+
+#: bin/widget/view/form_gtk/image.py:95
+msgid "Open file ..."
+msgstr "Άνοιγμα αρχείου..."
+
+#: bin/tinyerp-client.py:151
+msgid "Closing Tiny ERP, KeyboardInterrupt"
+msgstr "Κλείσιμο Tiny ERP, KeyboardInterrupt"
+
+#: bin/printer/printer.py:141
+msgid "Write Report to File"
+msgstr "Εγγραφή Αναφοράς σε Αρχείο"
+
+#: bin/terp.glade:10
+msgid "Tiny ERP - Login"
+msgstr "Tiny ERP - Σύνδεση"
+
+#: bin/terp.glade:188 bin/terp.glade:13809
+msgid "localhost"
+msgstr "localhost"
+
+#: bin/terp.glade:267
+msgid "admin"
+msgstr ""
+
+#: bin/terp.glade:379 bin/terp.glade:13516
+msgid "Tiny ERP"
+msgstr "Tiny ERP"
+
+#: bin/terp.glade:790
+msgid "Duplicate"
+msgstr "Ακριβές Αντίγραφο"
+
+#: bin/terp.glade:933
+msgid "_New Menu Tab"
+msgstr "_Νέα Καρτέλλα Μενού"
+
+#: bin/terp.glade:1231
+msgid "Client Mode"
+msgstr "Κατάσταση λειτουργίας"
+
+#: bin/terp.glade:1253
+msgid "Normal"
+msgstr "Κανονική"
+
+#: bin/terp.glade:1263
+msgid "Mode PDA"
+msgstr "Υπολογιστής παλάμης (PDA)"
+
+#: bin/terp.glade:1278
+msgid "_Theme"
+msgstr "_Θέμα"
+
+#: bin/terp.glade:1300
+msgid "Tiny ERP Theme"
+msgstr "Tiny ERP Θέμα"
+
+#: bin/terp.glade:1309
+msgid "Aqua OS X"
+msgstr "Aqua OS X"
+
+#: bin/terp.glade:1577
+msgid "_Licence"
+msgstr "_Άδεια"
+
+#: bin/terp.glade:1714
+msgid "Find a resource"
+msgstr "Εύρεση εγγραφής"
+
+#: bin/terp.glade:1762
+msgid "Switch current view: form / list"
+msgstr "Αλλαγή εμφάνισης: φόρμα/λίστα"
+
+#: bin/terp.glade:1763
+msgid "Other View"
+msgstr "Άλλη Εμφάνιση"
+
+#: bin/terp.glade:2054
+msgid "Tiny ERP - Tree Resources"
+msgstr "Tiny ERP - Δενδρικές Εγγραφές"
+
+#: bin/terp.glade:2293
+msgid "Tiny ERP - Forms"
+msgstr "Tiny ERP - Φόρμες"
+
+#: bin/terp.glade:2391
+msgid "Tiny ERP - About"
+msgstr "Tiny ERP - Σχετικά"
+
+#: bin/terp.glade:2448
+msgid ""
+"<b>About Tiny ERP</b>\n"
+"<i>The most advanced Open Source ERP &amp; CRM !</i>"
+msgstr ""
+"<b>Σχετικά με το Tiny ERP</b>\n"
+"<i>Το πιο προχωρημένο ERP &amp; CRM Ανοιχτού Κώδικα !</i>"
+
+#: bin/terp.glade:2517
+msgid ""
+"\n"
+"Tiny ERP - GTK Client - v%s\n"
+"\n"
+"Tiny ERP is an Open Source ERP+CRM\n"
+"for small to medium businesses.\n"
+"\n"
+"The whole source code is distributed under\n"
+"the terms of the GNU Public Licence.\n"
+"\n"
+"(c) 2003-TODAY, Tiny sprl\n"
+"\n"
+"More Info on www.TinyERP.com !"
+msgstr ""
+"\n"
+"Tiny ERP - GTK Client - v%s\n"
+"\n"
+"Το Tiny ERP είναι ένα ERP+CRM Ανοιχτού Κώδικα\n"
+"για μικρές και μεσαίες επιχειρήσεις.\n"
+"\n"
+"Ο πλήρης πηγαίος κώδικας διανέμεται σύμφωνα\n"
+"με τους όρους της Άδειας Κοινής Χρήσης GNU.\n"
+"\n"
+"(c) 2003-TODAY, Tiny sprl\n"
+"\n"
+"Περισσότερες Πληροφορίες στο www.TinyERP.com !"
+
+#: bin/terp.glade:2564
+msgid "_Tiny ERP"
+msgstr "_Tiny ERP"
+
+#: bin/terp.glade:2616
+msgid ""
+"\n"
+"(c) 2003-TODAY - Tiny sprl\n"
+"Tiny ERP is a product of Tiny sprl:\n"
+"\n"
+"Tiny sprl\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
+"Belgium\n"
+"\n"
+"Tel : (+32)81.81.37.00\n"
+"Mail: sales@tiny.be\n"
+"Web: http://tiny.be"
+msgstr ""
+"\n"
+"(c) 2003-TODAY - Tiny sprl\n"
+"Το Tiny ERP είναι ένα προϊόν της Tiny sprl:\n"
+"\n"
+"Tiny sprl\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
+"Βelgium\n"
+"\n"
+"Τηλ: (+32)81.81.37.00\n"
+"E-Mail: sales@tiny.be\n"
+"Web: http://tiny.be"
+
+#: bin/terp.glade:2709
+msgid "Tiny ERP - forms widget"
+msgstr "Tiny ERP - πεδία φόρμας"
+
+#: bin/terp.glade:2995
+msgid "Titre"
+msgstr "Τίτλος"
+
+#: bin/terp.glade:3164
+msgid "(0/0)"
+msgstr "(0/0)"
+
+#: bin/terp.glade:3349
+msgid "Remove selected entry"
+msgstr "Απομάκρυνση επιλεγμένης εγγραφής"
+
+#: bin/terp.glade:3414
+msgid "label74"
+msgstr "label74"
+
+#: bin/terp.glade:3594 bin/terp.glade:6268 bin/terp.glade:6373
+#: bin/terp.glade:6577
+msgid "-"
+msgstr "-"
+
+#: bin/terp.glade:3995
+msgid "Tiny ERP - Date selection"
+msgstr "Tiny ERP - Επιλογή ημερομηνίας"
+
+#: bin/terp.glade:4078 bin/terp.glade:11127
+msgid "Tiny ERP - Confirmation"
+msgstr "Tiny ERP - Επιβεβαίωση"
+
+#: bin/terp.glade:4200
+msgid "Tiny ERP - selection"
+msgstr "Tiny ERP - Επιλογή"
+
+#: bin/terp.glade:4348
+msgid "Tiny ERP - Filter"
+msgstr "Tiny ERP - Φίλτρο"
+
+#: bin/terp.glade:4420
+msgid "S_earch:"
+msgstr "Εύρ_εση:"
+
+#: bin/terp.glade:4466
+msgid "on _field:"
+msgstr "βάση _πεδίου:"
+
+#: bin/terp.glade:4491
+msgid "test"
+msgstr "έλεγχος"
+
+#: bin/terp.glade:4506
+msgid "_Select"
+msgstr "_Επιλογή"
+
+#: bin/terp.glade:4523
+msgid "_Unselect"
+msgstr "_Αποεπιλογή"
+
+#: bin/terp.glade:4550
+msgid "Filter: "
+msgstr "Φίλτρο: "
+
+#: bin/terp.glade:4576
+msgid "AL_L"
+msgstr "Ο_ΛΑ"
+
+#: bin/terp.glade:4593
+msgid "N_ONE"
+msgstr "ΚΑΝ_ΕΝΑ"
+
+#: bin/terp.glade:4665
+msgid "<b><u>Actions</u></b>"
+msgstr "<b><u>Ενέργειες</u></b>"
+
+#: bin/terp.glade:4705
+msgid "Tiny ERP - Dialog"
+msgstr "Tiny ERP - Διάλογος"
+
+#: bin/terp.glade:4751
+msgid "Set to _Default"
+msgstr "Εισαγωγή προεπιλoγής"
+
+#: bin/terp.glade:4778
+msgid "Value _Preference"
+msgstr "_Προτίμηση Τιμής"
+
+#: bin/terp.glade:4801
+msgid "Tiny ERP, Field Preference target"
+msgstr "Tiny ERP, στόχος Προτίμησης Πεδίου"
+
+#: bin/terp.glade:5205
+msgid "Tiny ERP - Export to CSV"
+msgstr "Tiny ERP - Εξαγωγή σε CSV"
+
+#: bin/terp.glade:5320
+msgid "<b>Predefined exports</b>"
+msgstr "<b>Προκαθορισμένες λίστες πεδίων εξαγωγής</b>"
+
+#: bin/terp.glade:5813
+msgid "<b>Fields to export</b>"
+msgstr "<b>Πεδία προς εξαγωγή</b>"
+
+#: bin/terp.glade:5953
+msgid "Tiny ERP - Search"
+msgstr "Tiny ERP - Εύρεση"
+
+#: bin/terp.glade:6095
+msgid "_Limit:"
+msgstr "_Όριο:"
+
+#: bin/terp.glade:6140
+msgid "Off_set:"
+msgstr "Μετα_τόπιση:"
+
+#: bin/terp.glade:6187
+msgid "Advanced search parameters"
+msgstr "Προχωρημένες παράμετροι εύρεσης"
+
+#: bin/terp.glade:6219
+msgid "Tiny ERP - Search Widgets"
+msgstr "Tiny ERP - Πεδία Εύρεσης"
+
+#: bin/terp.glade:6326
+msgid "Date de début"
+msgstr "Ημερομηνία Έναρξης"
+
+#: bin/terp.glade:6499
+msgid "Search with this name"
+msgstr "Εύρεση με αυτό το όνομα"
+
+#: bin/terp.glade:6526
+msgid "Clear the field"
+msgstr "Καθαρισμός πεδίου"
+
+#: bin/terp.glade:6654
+msgid ""
+"\n"
+"Yes\n"
+"No"
+msgstr ""
+"\n"
+"Ναι\n"
+"Όχι"
+
+#: bin/terp.glade:6680
+msgid "Tiny ERP - Attachment"
+msgstr "Tiny ERP - Συνημμένο"
+
+#: bin/terp.glade:6750
+msgid "Filename:"
+msgstr "Όνομα αρχείου:"
+
+#: bin/terp.glade:6822
+msgid "Description:"
+msgstr "Περιγραφή:"
+
+#: bin/terp.glade:6926
+msgid "Save text"
+msgstr "Αποθήκευση κειμένου"
+
+#: bin/terp.glade:7181
+msgid "Tiny ERP - Error"
+msgstr "Tiny ERP - Σφάλμα"
+
+#: bin/terp.glade:7240
+msgid "Application Error !"
+msgstr "Σφάλμα Εφαρμογής !"
+
+#: bin/terp.glade:7315
+msgid "Error 404"
+msgstr "Σφάλμα 404"
+
+#: bin/terp.glade:7340
+msgid "<b>Error code:</b>"
+msgstr "<b>Λανθασμένος κωδικός:</b>"
+
+#: bin/terp.glade:7365
+msgid ""
+"This Page does not exist !\n"
+"Please retry"
+msgstr ""
+"Αυτή η Σελίδα δεν υπάρχει !\n"
+"Παρακαλώ ξαναπροσπαθήστε"
+
+#: bin/terp.glade:7391
+msgid "<i>Click on the Support Request tab if you need more help !</i>"
+msgstr ""
+"<i>Πιέστε στο Αίτηση Υποστήριξης αν επιθυμείτε περισσότερη βοήθεια !</i>"
+
+#: bin/terp.glade:7429
+msgid "De_scription"
+msgstr "Πε_ριγραφή"
+
+#: bin/terp.glade:7479
+msgid ""
+"Error details\n"
+"dqsdsqdqsdsd"
+msgstr ""
+"Λεπτομέρειες σφάλματος\n"
+"dqsdsqdqsdsd"
+
+#: bin/terp.glade:7496
+msgid "_Details"
+msgstr "_Λεπτομέρειες"
+
+#: bin/terp.glade:7539
+msgid ""
+"<b>Complete this form to submit your bug and/or request a support.</b>\n"
+"<i>\n"
+"Your request will be send to Tiny ERP and we will reply you shortly.\n"
+"Note that we may not reply you if your Service Company is not a Tiny ERP "
+"partner.\n"
+"</i>"
+msgstr ""
+"<b>Συμπληρώστε αυτή τη φόρμα για να αποστείλετε το σφάλμα και/ή να κάνετε "
+"αίτηση για βοήθεια.</b>\n"
+"<i>\n"
+"Η αίτηση σας θα αποσταλεί στην Tiny ERP και θα επικοινωνήσουμε σύντομα μαζί "
+"σας.\n"
+"Επισημαίνουμε ότι ίσως δεν σας απαντήσουμε αν η Εταιρεία Υποστήριξης σας δεν "
+"είναι συνεργάτης μας.\n"
+"</i>"
+
+#: bin/terp.glade:7589
+msgid "<b>Your name: </b>"
+msgstr "<b>Το ονοματεπώνυμο σας: </b>"
+
+#: bin/terp.glade:7617
+msgid "<b>Your Company: </b>"
+msgstr "<b>Η επωνυμία της επιχείρησης σας: </b>"
+
+#: bin/terp.glade:7645
+msgid "<b>Your Email: </b>"
+msgstr "<b>Το email σας: </b>"
+
+#: bin/terp.glade:7715
+msgid "Explain what you did: "
+msgstr "Επεξηγείστε τι κάνατε:"
+
+#: bin/terp.glade:7743
+msgid "Others Comments: "
+msgstr "Άλλες Παρατηρήσεις:"
+
+#: bin/terp.glade:7898
+msgid "Send Support Request"
+msgstr "Αποστολή Αίτησης Υποστήριξης"
+
+#: bin/terp.glade:7945
+msgid "<b>support contract id  </b>"
+msgstr "<b>κωδικός συμβολαίου υποστήριξης  </b>"
+
+#: bin/terp.glade:8015 bin/terp.glade:11007
+msgid "Emergency: "
+msgstr "Κατάσταση ανάγκης: "
+
+#: bin/terp.glade:8043
+msgid "Phone Number: "
+msgstr "Αριθμός Τηλεφώνου: "
+
+#: bin/terp.glade:8131
+msgid "<b>_Support Request</b>"
+msgstr "<b>_Αίτηση Υποστήριξης</b>"
+
+#: bin/terp.glade:8170
+msgid "Tiny ERP - Ressource Edit"
+msgstr "Tiny ERP - Επεξεργασία Εγγραφής"
+
+#: bin/terp.glade:8241
+msgid "Tiny ERP - Link"
+msgstr "Tiny ERP - Σύνδεσμος"
+
+#: bin/terp.glade:8339
+msgid "Tiny ERP - List"
+msgstr "Tiny ERP - Λίστα"
+
+#: bin/terp.glade:8409
+msgid "Tiny ERP - Preferences"
+msgstr "Tiny ERP - Προτιμήσεις"
+
+#: bin/terp.glade:8478
+msgid "<b>Edit resource preferences</b>"
+msgstr "<b>Επεξεργασία προτιμήσεων εγγραφής</b>"
+
+#: bin/terp.glade:8781
+msgid "_Display a new tip next time ?"
+msgstr "_Προβολή νέας συμβουλής της επόμενη φορά ;"
+
+#: bin/terp.glade:8822
+msgid "Tiny ERP - Licence"
+msgstr "Tiny ERP - Άδεια"
+
+#: bin/terp.glade:8881
+msgid "Tiny ERP license"
+msgstr "Tiny ERP άδεια"
+
+#: bin/terp.glade:9055
+msgid "Tiny ERP - Date & Time selection"
+msgstr "Tiny ERP - Επιλογή Ημερομηνίας & Ώρας"
+
+#: bin/terp.glade:9133
+msgid "Hour :"
+msgstr "Ώρα :"
+
+#: bin/terp.glade:9177
+msgid "Minute :"
+msgstr "Λεπτό :"
+
+#: bin/terp.glade:9252
+msgid "GO to ressource ID"
+msgstr "Πή_γαινε στην εγγραφή με ID..."
+
+#: bin/terp.glade:9409
+msgid "Tiny ERP Survey"
+msgstr "Tiny ERP Δημοσκόπηση"
+
+#: bin/terp.glade:9481
+msgid "<b>Tiny ERP Survey</b>"
+msgstr "<b>Tiny ERP Survey Δημοσκόπηση</b>"
+
+#: bin/terp.glade:9506
+msgid ""
+"<i>Please fill in the following form in order to help us to improve Tiny ERP "
+"and better target new developments.</i>"
+msgstr ""
+"<i>Παρακαλούμε συμπληρώστε την επόμενη φόρμα για να μας βοηθήσετε να "
+"βελτιώσουμε το Tiny ERP στις επόμενες εκδόσεις του.</i>"
+
+#: bin/terp.glade:9904
+msgid "Open Source: "
+msgstr "Ανοιχτού Κώδικα: "
+
+#: bin/terp.glade:10286
+msgid "We plan to use Tiny ERP"
+msgstr "Σκοπεύουμε να χρησιμοποιήσουμε το Tiny ERP"
+
+#: bin/terp.glade:10305
+msgid "We plan to offer services on Tiny ERP"
+msgstr "Σκοπεύουμε να προσφέρουμε υπηρεσίες για το Tiny ERP"
+
+#: bin/terp.glade:10345
+msgid ""
+"Write here any comment, note or suggestion you have concerning Tiny ERP. \n"
+"Tell us which ERP systems you used before, and what you plan to do with Tiny "
+"ERP..."
+msgstr ""
+"Εδώ γράψτε σχόλια, παρατηρήσεις ή προτάσεις σχετικά με το Tiny ERP.\n"
+"Ποια άλλα συστήματα ERP έχετε χρησιμοποιήσει στο παρελθόν και ποια είναι τα "
+"μελλοντικά σας σχέδια για το Tiny ERP..."
+
+#: bin/terp.glade:10472
+msgid ""
+"(Get Tiny ERP announces, documentation and new releases by email, maximum 6 "
+"mails a year.)"
+msgstr ""
+"(Λάβετε μέσω email τις ανακοινώσεις, την τεκμηρίωση και τις νέες εκδόσεις "
+"του Tiny ERP - \"μέχρι 6 email το χρόνο\")"
+
+#: bin/terp.glade:10628
+msgid ""
+"<b>Complete this form to submit your bug and/or make a request for support.</"
+"b>\n"
+"<i>\n"
+"Your request will be sent to the Tiny ERP team and we will reply shortly.\n"
+"Note that we may not reply if you do not have a support contract with Tiny "
+"or an official partner.</i>"
+msgstr ""
+"<b>Συμπληρώστε αυτή τη φόρμα για να αποστείλετε το σφάλμα και/ή να κάνετε "
+"αίτηση για βοήθεια.</b>\n"
+"<i>\n"
+"Η αίτηση σας θα αποσταλεί στην ομάδα υποστήριξης του Tiny ERP και θα "
+"επικοινωνήσουμε σύντομα μαζί σας.\n"
+"Επισημαίνουμε ότι ίσως δεν σας απαντήσουμε αν η Εταιρεία Υποστήριξης σας δεν "
+"είναι συνεργάτης μας.</i>"
+
+#: bin/terp.glade:11949
+msgid "<b>Shortcuts for TinyERP</b>"
+msgstr "<b>Συντομεύσεις πληκτρολογίου στο TinyERP</b>"
+
+#: bin/terp.glade:12210
+msgid "<CTRL> + X"
+msgstr "<CTRL> + X"
+
+#: bin/terp.glade:12238
+msgid "<CTRL> + C"
+msgstr "<CTRL> + C"
+
+#: bin/terp.glade:12266
+msgid "<CTRL> + V"
+msgstr "<CTRL> + V"
+
+#: bin/terp.glade:12378
+msgid "<TAB>"
+msgstr "<TAB>"
+
+#: bin/terp.glade:12434
+msgid "<SHIFT> + <TAB>"
+msgstr "<SHIFT> + <TAB>"
+
+#: bin/terp.glade:12490
+msgid "<ENTER>"
+msgstr "<ENTER>"
+
+#: bin/terp.glade:13197
+msgid "File to Import: "
+msgstr "Αρχείο για Εισαγωγή:"
+
+#: bin/terp.glade:13222
+msgid "Sélectionner un fichier"
+msgstr "Επιλέξτε έναν φάκελο"
+
+#: bin/terp.glade:13323
+msgid ","
+msgstr ","
+
+#: bin/terp.glade:13374
+msgid "\""
+msgstr "\""
+
+#: bin/terp.glade:13443
+msgid ""
+"UTF-8\n"
+"Latin1"
+msgstr ""
+"UTF-8\n"
+"Latin1"
+
+#: bin/terp.glade:13731
+msgid "<b>Connect to a Tiny ERP server</b>"
+msgstr "<b>Σύνδεση σε διακομιστή Tiny ERP</b>"
+
+#: bin/terp.glade:13831
+msgid "8069"
+msgstr "8069"
+
+#: bin/terp.glade:13849
+msgid "Secure connection:"
+msgstr "Ασφαλής σύνδεση:"
+
+#: bin/terp.glade:14265
+msgid "Database: "
+msgstr "Βάση: "
+
+#: bin/terp.glade:14636 bin/terp.glade:15258
+msgid "New database name: "
+msgstr "Νέο όνομα βάσης: "
+
+#: bin/terp.glade:15018
+msgid "Tiny ERP server:"
+msgstr "Tiny ERP διακομιστής:"
+
+#: bin/terp.glade:15047
+msgid ""
+"This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
+"installed on this computer. Click on change to change the address."
+msgstr ""
+"Αυτό είναι το URL του διακομιστή υπηρεσιών Tiny ERP. Χρησιμοποιείστε "
+"'localhost' αν ο διακομιστήςβρίσκεται εγκατεστημένος στον παρόν υπολογιστή. "
+"Eπιλέξτε Αλλαγή, για να αλλάξετε τη διεύθυνση."
+
+#: bin/terp.glade:15151
+msgid "Super admin password:"
+msgstr "Κωδικός Υπερ-Διαχειριστή:"
+
+#: bin/terp.glade:15179
+msgid "Default language:"
+msgstr "Προεπιλεγμένη γλώσσα:"
+
+#: bin/terp.glade:15207
+msgid "Load demonstration data: "
+msgstr "Φόρτωμα δεδομένων επίδειξης: "
+
+#: bin/terp.glade:15235
+msgid ""
+"Check this box if you want demo data to be installed on your new database."
+msgstr ""
+"Μαρκάρετε αυτό το κουτί αν επιθυμείτε να εγκαταστήσετε δεδομένα επίδειξης "
+"στη νέα σας βάση."
+
+#: bin/terp.glade:15323
+msgid "(use 'admin', if you did not changed it)"
+msgstr "(χρησιμοποιείστε 'admin', αν δε το αλλάξατε)"
+
+#: bin/terp.glade:15351
+msgid ""
+"This is the password of the user that have the rights to administer "
+"databases. This is not a Tiny ERP user, just a super administrator. If you "
+"did not changed it, the password is 'admin' after installation."
+msgstr ""
+"Αυτός είναι ο κωδικός του χρήστη που έχει δικαιώματα διαχείρισης βάσεων "
+"δεδομένων. Αυτός δεν είναι χρήστης του Tiny ERP, απλά ένας Υπερ-"
+"Διαχειριστής. Αν δεν το αλλάξατε, ο κωδικός είναι 'admin' μετά την "
+"εγκατάσταση."
+
+#: bin/terp.glade:15375
+msgid "Hello World"
+msgstr "Γεια σου Κόσμε!"
+
+#: bin/terp.glade:15421
+msgid "(must not contain any special character)"
+msgstr "(δεν πρέπει να περιέχει ειδικούς χαρακτήρες)"
+
+#: bin/terp.glade:15532
+msgid "<b>Change your DB administration password</b>"
+msgstr "<b>Αλλαγή Κωδικού Διαχειριστή Βάσης Δεδομένων</b>"
+
+#: bin/terp.glade:15876
+msgid "Tiny ERP Message"
+msgstr "Tiny ERP Μήνυμα"
+
+#: bin/terp.glade:15932
+msgid "msg_title"
+msgstr ""
+
+#: bin/terp.glade:16235
+msgid "<b>Database created successfully !</b>"
+msgstr "<b>H βάση δημιουργήθηκε επιτυχώς !</b>"
+
 #~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-#~ msgstr "δηλώστε το επίπεδο καταγραφής: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+#~ msgstr ""
+#~ "δηλώστε το επίπεδο καταγραφής: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 
 #~ msgid "specify channels to log"
 #~ msgstr "δηλώστε κανάλια για καταγραφή"
@@ -2506,8 +3397,8 @@ msgstr "ΟΚ"
 #~ "Λανθασμένο όνομα χρήστη ή κωδικός πρόσβασης!"
 
 #~ msgid ""
-#~ "<i>Please fill in the following form in order to help us to improve OpenERP "
-#~ "and better target new developments.</i>"
+#~ "<i>Please fill in the following form in order to help us to improve "
+#~ "OpenERP and better target new developments.</i>"
 #~ msgstr ""
 #~ "<i>Παρακαλούμε συμπληρώστε την παρακάτω φόρμα για να μας βοηθήσετε να "
 #~ "βελτιώσουμε το OpenERP και να στοχεύσουμε σε νέες αναπτύξεις του.</i>"
@@ -2520,8 +3411,8 @@ msgstr "ΟΚ"
 
 #~ msgid "Tell us why you try OpenERP and what are your current softwares:"
 #~ msgstr ""
-#~ "Πείτε μας γιατί δοκιμάζετε το OpenERP και ποιά είναι τα τρέχοντα λογισμικά "
-#~ "σας:"
+#~ "Πείτε μας γιατί δοκιμάζετε το OpenERP και ποιά είναι τα τρέχοντα "
+#~ "λογισμικά σας:"
 
 #~ msgid "We plan to offer services on OpenERP"
 #~ msgstr "Σκοπεύουμε να παρέχουμε υπηρεσίες πάνω στο OpenERP"
@@ -2544,27 +3435,30 @@ msgstr "ΟΚ"
 #~ msgid "enable basic debugging"
 #~ msgstr "ενεργοποίηση βασικής αποσφαλμάτωσης"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "<b>An unknown error has been reported.</b>\n"
 #~ "\n"
 #~ "Your maintenance contract does not cover all modules installed in your "
 #~ "system !\n"
-#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
-#~ "your\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "upgrade your\n"
 #~ "contract.\n"
 #~ "\n"
-#~ "If you have developped your own modules or installed third party module, we\n"
-#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "If you have developped your own modules or installed third party module, "
+#~ "we\n"
+#~ "can provide you an additional maintenance contract for these modules. "
+#~ "After\n"
 #~ "having reviewed your modules, our quality team will ensure they will "
 #~ "migrate\n"
-#~ "automatically for all futur stable versions of Open ERP at no extra cost.\n"
+#~ "automatically for all futur stable versions of Open ERP at no extra "
+#~ "cost.\n"
 #~ "\n"
 #~ "Here is the list of modules not covered by your maintenance contract:\n"
 #~ "%s\n"
 #~ "\n"
-#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "You can use the link bellow for more information. The detail of the "
+#~ "error\n"
 #~ "is displayed on the second tab."
 #~ msgstr ""
 #~ "\n"
@@ -2575,20 +3469,21 @@ msgstr "ΟΚ"
 #~ "Εάν χρησιμοποιείτε το Open ERP παραγωγικά, προτείνεται να αναβαθμίσετε το "
 #~ "συμβόλαιο σας.\n"
 #~ "\n"
-#~ "Εάν έχετε αναπτύξει δικές σας ενότητες ή έχετε εγκαταστήσει ενότητες τρίτων "
-#~ "κατασκευαστών, μπορούμε να σας παρέχουμε ένα επιπλέον συμβόλαιο συντήρησης "
-#~ "για αυτές τις ενότητες. Εφόσον έχουμε ελέγξει τις ενότητες σας , η ομάδα "
-#~ "ποιότητας θα διασφαλίσει την αυτόματη μετάβαση για όλες τις μελλοντικές "
-#~ "σταθερές αναβαθμίσεις του Open ERP χωρίς καμία επιπλέον επιβάρυνση.\n"
+#~ "Εάν έχετε αναπτύξει δικές σας ενότητες ή έχετε εγκαταστήσει ενότητες "
+#~ "τρίτων κατασκευαστών, μπορούμε να σας παρέχουμε ένα επιπλέον συμβόλαιο "
+#~ "συντήρησης για αυτές τις ενότητες. Εφόσον έχουμε ελέγξει τις ενότητες "
+#~ "σας , η ομάδα ποιότητας θα διασφαλίσει την αυτόματη μετάβαση για όλες τις "
+#~ "μελλοντικές σταθερές αναβαθμίσεις του Open ERP χωρίς καμία επιπλέον "
+#~ "επιβάρυνση.\n"
 #~ "\n"
 #~ "Εδω είναι μια λίστα ενοτήτων που δεν καλύπτονται απο το τρέχων συμβόλαιο "
 #~ "συντήρησης που έχετε:\n"
 #~ "%s\n"
 #~ "\n"
-#~ "Μπορείτε να χρησιμοποιήσετε την παρακάτω σύνδεση για να δείτε περισσότερες "
-#~ "πληροφορίες. Η λεπτομέρειες του σφάλματος εμφανίζεται στο δεύτερο tab."
+#~ "Μπορείτε να χρησιμοποιήσετε την παρακάτω σύνδεση για να δείτε "
+#~ "περισσότερες πληροφορίες. Η λεπτομέρειες του σφάλματος εμφανίζεται στο "
+#~ "δεύτερο tab."
 
-#, python-format
 #~ msgid ""
 #~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
 #~ "Please report this error manually at %s"
@@ -2604,3 +3499,28 @@ msgstr "ΟΚ"
 
 #~ msgid "The content of the widget or excpetion if not valid"
 #~ msgstr "Το περιεχόμενο της εξαίρεσης ή του Widget δεν είναι έγκυρα"
+
+#~ msgid "dialog1"
+#~ msgstr "dialog1"
+
+#~ msgid ""
+#~ "Imported %d objects !\n"
+#~ "You will get a request for the complete result."
+#~ msgstr ""
+#~ "Εισηχθήσαν %d εγγραφές !\n"
+#~ "Θα λάβετε αίτημα αναφοράς του τελικού αποτελέσματος."
+
+#~ msgid "Server Parameters"
+#~ msgstr "Παράμετροι διακομιστή"
+
+#~ msgid "demo"
+#~ msgstr "demo"
+
+#~ msgid "<Esc>"
+#~ msgstr "<Esc>"
+
+#~ msgid "<b>File Selection</b>"
+#~ msgstr "<b>Επιλογή Αρχείου</b>"
+
+#~ msgid "Message"
+#~ msgstr "Μήνυμα"
