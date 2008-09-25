@@ -38,8 +38,7 @@ import pango
 import re
 
 import tools
-from tools import date_mapping
-
+import tools.datetime
 import time
 from mx.DateTime import DateTime
 
@@ -52,7 +51,7 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
         self.callback = callback
         self.format = format
         self.regex = self.initial_value = self.format
-        for key,val in date_mapping.items():
+        for key,val in tools.datetime.date_mapping.items():
             self.regex = self.regex.replace(key, val[1])
             self.initial_value = self.initial_value.replace(key, val[0])
         self.regex = '^'+self.regex+'$'
@@ -121,11 +120,11 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
                 tc = tc[:a] + tt[a] + tc[a+1:]
         try:
             editable.set_text(tc)
-            return time.strptime(tc, self.format)
+            return tools.datetime.strptime(tc, self.format)
         except:
             tc = tt
         editable.set_text(tc)
-        return time.strptime(tc, self.format)
+        return tools.datetime.strptime(tc, self.format)
 
     def _on_key_press(self, editable, event):
         if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return):
@@ -199,17 +198,19 @@ class date_callback(object):
                 self.treeview.warn('misc-message', _("Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."))
 
     def process(self, widget, event):
-        if (not event.keyval == gtk.keysyms.Escape) or not event:
+        if (not event) or event.keyval != gtk.keysyms.Escape:
             cmd = self.value
-            for r,f in tools.date_operation.items():
+            for r,f in tools.datetime.date_operation.items():
                 groups = re.match(r, cmd)
                 if groups:
                     dt = widget.date_get(widget.editable)
                     if not dt:
                         dt = time.strftime(widget.format, time.localtime())
-                        dt = time.strptime(dt, widget.format)
+                        dt = tools.datetime.strptime(dt, widget.format)
                     widget.date_set(f(dt,groups))
                     break
         self.value = ''
         self.display(widget)
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
