@@ -303,20 +303,30 @@ class ViewForm(parser_view):
         pass
 
     def attrs_set(self, model, obj, att_obj):
-        attrs_changes = eval(att_obj.attrs.get('attrs',"{}"))
+        try:
+            attrs_changes = eval(att_obj.attrs.get('attrs',"{}"))
+        except:
+             attrs_changes = eval(att_obj.attrs.get('attrs',"{}"),model.value)
+             for k,v in attrs_changes.items():
+                for i in range(0,len(v)):
+                   if v[i][2]:
+                        if type(v[i][2])==type([]):
+                            cond=()
+                            cond=v[i][0],v[i][1],v[i][2][0]
+                            attrs_changes[k][i]=cond
         for k,v in attrs_changes.items():
-			for condition in v:
-				result = tools.calc_condition(self,model,condition)
-				if result:
-					if k=='invisible':
-						obj.hide()
-					elif k=='readonly':
-						obj.set_sensitive(False)
-				else:
-					if k=='invisible':
-						obj.show()
-					if k=='readonly':
-						obj.set_sensitive(True)
+            for condition in v:
+                result = tools.calc_condition(self,model,condition)
+                if result:
+                    if k=='invisible':
+                        obj.hide()
+                    elif k=='readonly':
+                        obj.set_sensitive(False)
+                else:
+                    if k=='invisible':
+                        obj.show()
+                    if k=='readonly':
+                        obj.set_sensitive(True)
 
     def set_notebook(self,model,nb):
         for i in range(0,nb.get_n_pages()):

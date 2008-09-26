@@ -121,12 +121,23 @@ class CharField(object):
         return False
 
     def attrs_set(self, model):
-        attrs_changes = eval(self.attrs.get('attrs',"{}"))
+        try:
+            attrs_changes = eval(self.attrs.get('attrs',"{}"))
+        except:
+            attrs_changes = eval(self.attrs.get('attrs',"{}"),model.value)
+            for k,v in attrs_changes.items():
+                for i in range(0,len(v)):
+                   if v[i][2]:
+                        if type(v[i][2])==type([]):
+                            cond=()
+                            cond=v[i][0],v[i][1],v[i][2][0]
+                            attrs_changes[k][i]=cond
         for k,v in attrs_changes.items():
             for condition in v:
                 result = tools.calc_condition(self,model,condition)
                 if result:
-                    self.get_state_attrs(model)[k]=True
+                   self.get_state_attrs(model)[k]=True
+              
     def state_set(self, model, state='draft'):
         state_changes = dict(self.attrs.get('states',{}).get(state,[]))
         for key in ('readonly', 'required'):
