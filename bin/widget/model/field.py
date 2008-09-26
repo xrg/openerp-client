@@ -80,7 +80,7 @@ class CharField(object):
 
     def validate(self, model):
         ok = True
-        if bool(int(self.get_state_attrs(model).get('required', 0))):
+        if bool(self.get_state_attrs(model).get('required', 0)):
             if not model.value[self.name]:
                 ok=False
         self.get_state_attrs(model)['valid'] = ok
@@ -136,7 +136,7 @@ class CharField(object):
                 self.get_state_attrs(model)[key] = self.attrs[key]
         if 'value' in state_changes:
             self.set(model, value, test_state=False, modified=True)
-    
+
     def get_state_attrs(self, model):
         if self.name not in model.state_attrs:
             model.state_attrs[self.name] = self.attrs.copy()
