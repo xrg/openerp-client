@@ -35,6 +35,11 @@ import common
 import gettext
 import locale
 import wid_int
+import date_widget
+
+LDFMT = locale.nl_langinfo(locale.D_FMT)
+for x,y in [('%y','%Y'),('%B',''),('%A','')]:
+    LDFMT = LDFMT.replace(x, y)
 
 DT_FORMAT = '%Y-%m-%d'
 
@@ -46,16 +51,18 @@ if not hasattr(locale, 'D_FMT'):
 
 class calendar(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}):
-        wid_int.wid_int.__init__(self, name, parent, attrs)
+        super(calendar, self).__init__(name, parent, attrs)
 
         tooltips = gtk.Tooltips()
         self.widget = gtk.HBox(spacing=3)
-
-        self.entry1 = gtk.Entry()
+        self.format = LDFMT
+        
+        self.widget1 = date_widget.ComplexEntry(self.format, spacing=3)
+        self.entry1 = self.widget1.widget
         self.entry1.set_property('width-chars', 10)
         self.entry1.set_property('activates_default', True)
         tooltips.set_tip(self.entry1, _('Start date'))
-        self.widget.pack_start(self.entry1, expand=False, fill=True)
+        self.widget.pack_start(self.widget1, expand=False, fill=True)
 
         self.eb1 = gtk.EventBox()
         tooltips.set_tip(self.eb1, _('Open the calendar widget'))
@@ -68,12 +75,13 @@ class calendar(wid_int.wid_int):
         self.widget.pack_start(self.eb1, expand=False, fill=False)
 
         self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
-
-        self.entry2 = gtk.Entry()
+        
+        self.widget2 = date_widget.ComplexEntry(self.format, spacing=3)
+        self.entry2 = self.widget2.widget
         self.entry2.set_property('width-chars', 10)
         self.entry2.set_property('activates_default', True)
         tooltips.set_tip(self.entry2, _('End date'))
-        self.widget.pack_start(self.entry2, expand=False, fill=True)
+        self.widget.pack_start(self.widget2, expand=False, fill=True)
 
         self.eb2 = gtk.EventBox()
         tooltips.set_tip(self.eb2, _('Open the calendar widget'))
@@ -96,12 +104,12 @@ class calendar(wid_int.wid_int):
 
     def _value_get(self):
         res = []
-        val = self.entry1.get_text()
+        val = self._date_get(self.entry1.get_text())
         if val:
-            res.append((self.name, '>=', self._date_get(val)))
-        val = self.entry2.get_text()
+            res.append((self.name, '>=', val))
+        val = self._date_get(self.entry2.get_text())
         if val:
-            res.append((self.name, '<=', self._date_get(val)))
+            res.append((self.name, '<=', val))
         return res
 
     def _value_set(self, value):
@@ -145,4 +153,3 @@ class calendar(wid_int.wid_int):
         self.entry2.connect_after('activate', fct)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
