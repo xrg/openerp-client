@@ -76,16 +76,13 @@ class main(service.Service):
     def execute(self, act_id, datas, type=None, context={}):
         ctx = rpc.session.context.copy()
         ctx.update(context)
-        if type==None:
-            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [act_id], ['type'], ctx)
-            if not len(res):
+        if type is None:
+            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', act_id, ['type'], ctx)
+            if not (res and len(res)):
                 raise Exception, 'ActionNotFound'
-            type=res[0]['type']
+            type=res['type']
 
-        if type == 'ir.actions.act_window':
-            # the field 'views' is transfered as a binary field
-            ctx['get_binary_size'] = False
-        res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [act_id], False, ctx)[0]
+        res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', act_id, False, ctx)
         self._exec_action(res,datas,context)
 
     def _exec_action(self, action, datas, context={}):
@@ -105,7 +102,9 @@ class main(service.Service):
                     view_ids=[x[0] for x in action['views']]
                     datas['view_mode']=",".join([x[1] for x in action['views']])
                 else:
-                    view_ids=[(action['view_type']=='tree') and 1 or False,(action['view_type']=='form') and 1 or False]
+#                    view_ids=[(action['view_type']=='tree') and 1 or False,(action['view_type']=='form') and 1 or False]
+                    if action.get('view_id', False):
+                        view_ids=[action['view_id'][0]]
             elif action.get('view_id', False):
                 view_ids=[action['view_id'][0]]
 
@@ -170,11 +169,9 @@ class main(service.Service):
         if 'id' in data:
             try:
                 id = data.get('id', False)
-                ctx = rpc.session.context.copy()
-                ctx['get_binary_size'] = False
                 actions = rpc.session.rpc_exec_auth('/object', 'execute',
                         'ir.values', 'get', 'action', keyword,
-                        [(data['model'], id)], False, ctx)
+                        [(data['model'], id)], False, rpc.session.context)
                 actions = map(lambda x: x[2], actions)
             except rpc.rpc_exception, e:
 #               common.error(_('Error: ')+str(e.type), e.message, e.data)

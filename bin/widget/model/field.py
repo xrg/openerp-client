@@ -175,7 +175,7 @@ class BinaryField(CharField):
             if (model.value[self.name] is None) and (model.id):
                 c = rpc.session.context.copy()
                 c.update(model.context_get())
-                c['get_binary_size'] = False
+                c['bin_size'] = False
                 value = model.rpc.read([model.id], [self.name], c)[0][self.name]
                 self.set(model, value, modified=modified, get_binary_size=False)
         return model.value.get(self.name, False) or False

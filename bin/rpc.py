@@ -287,8 +287,7 @@ class rpc_session(object):
     def context_reload(self):
         self.context = {}
         self.timezone = 'utc'
-        # self.uid
-        self.context = self.rpc_exec_auth('/object', 'execute', 'res.users', 'context_get')
+        self.context = self.rpc_exec_auth('/object', 'execute', 'res.users', 'context_get') or {}
         if 'lang' in self.context:
             import translate
             translate.setlang(self.context['lang'])

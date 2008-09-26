@@ -99,9 +99,7 @@ class win_attach(object):
 
     def _get(self, id):
         if id not in self._cache:
-            context = copy.copy(rpc.session.context)
-            context['get_binary_size'] = False
-            r = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id], [], context)
+            r = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id], [], rpc.session.context)
             self._cache[id] = r and r[0] or None
         return self._cache[id]
 

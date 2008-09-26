@@ -97,7 +97,10 @@ class dialog(object):
 
         x,y = self.screen.screen_container.size_get()
         width, height = window.get_size()
-        vp.set_size_request(min(width - 20, x + 20),min(height - 60, y + 25))
+        if not target:
+            vp.set_size_request(min(width - 20, x + 20),min(height - 60, y + 25))
+        else:
+            vp.set_size_request(x,y)
         self.dia.show_all()
         self.screen.display()
 
