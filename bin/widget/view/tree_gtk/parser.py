@@ -111,18 +111,15 @@ class parser_tree(interface.parser_interface):
                         self.window)
                 treeview.cells[fname] = cell
                 renderer = cell.renderer
-                if editable and not node_attrs.get('readonly', False):
-                    if isinstance(renderer, gtk.CellRendererToggle):
-                        renderer.set_property('activatable', True)
-                    elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo)):
-                        renderer.set_property('editable', True)
+                
+                ro = editable and not node_attrs.get('readonly', False)
+                if isinstance(renderer, gtk.CellRendererToggle):
+                    renderer.set_property('activatable', ro)
+                elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo, date_renderer.DecoratorRenderer)):
+                    renderer.set_property('editable', ro)
+                if ro:
                     renderer.connect_after('editing-started', send_keys, treeview)
 #                   renderer.connect_after('editing-canceled', self.editing_canceled)
-                else:
-                    if isinstance(renderer, gtk.CellRendererToggle):
-                        renderer.set_property('activatable', False)
-                    elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo)):
-                        renderer.set_property('editable', False)
 
                 col = gtk.TreeViewColumn(None, renderer)
                 col_label = gtk.Label('')
@@ -280,32 +277,6 @@ class GenericDate(Char):
         if not window:
             window = service.LocalService('gui.main').window
         self.window = window
-
-    def setter(self, column, cell, store, iter):
-        model = store.get_value(iter, 0)
-        text = self.get_textual_value(model)
-        cell.renderer1.set_property('text', text)
-        color = self.get_color(model)
-        cell.renderer1.set_property('foreground', str(color))
-        align = 0
-        if self.treeview.editable:
-            field = model[self.field_name]
-            if not field.get_state_attrs(model).get('valid', True):
-                cell.renderer1.set_property('background', common.colors.get('invalid', 'white'))
-            elif bool(int(field.get_state_attrs(model).get('required', 0))):
-                cell.renderer1.set_property('background', common.colors.get('required', 'white'))
-        cell.renderer1.set_property('xalign', align)
-
-    def get_color(self, model):
-        to_display = ''
-        for color, expr in self.treeview.colors.items():
-            if model.expr_eval(expr, check_load=False):
-                to_display = color
-                break
-        return to_display or 'black'
-
-    def open_remote(self, model, create, changed=False, text=None):
-        raise NotImplementedError
 
     def get_textual_value(self, model):
         value = model[self.field_name].get_client(model)
@@ -714,4 +685,5 @@ CELLTYPES = {
     'button': CellRendererButton,
 }
 
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

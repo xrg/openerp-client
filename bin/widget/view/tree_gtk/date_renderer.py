@@ -56,14 +56,17 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
             self.initial_value = self.initial_value.replace(key, val[0])
         self.regex = '^'+self.regex+'$'
 
+    def _is_not_generic_property(self, name):
+        return name in ('editable', 'text', 'foreground', 'background')
+    
     def set_property(self, name, value):
-        if name not in ('editable', ):
+        if not self._is_not_generic_property(name):
             return super(DecoratorRenderer, self).set_property(name, value)
         else:
             return self.renderer1.set_property(name, value)
 
     def get_property(self, name):
-        if name in ('editable', ):
+        if self._is_not_generic_property(name):
             return self.renderer1.get_property(name)
         else:
             return super(DecoratorRenderer, self).get_property(name)
@@ -78,6 +81,8 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
         return self.renderer1.activate(event, widget, path, background_area, cell_area, flags)
 
     def on_start_editing(self, event, widget, path, background_area, cell_area, flags):
+        if not self.get_property('editable'):
+            return None
         if not event:
             event = gtk.gdk.Event(gtk.keysyms.Tab)
 
