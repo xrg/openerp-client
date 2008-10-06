@@ -334,6 +334,28 @@ class stime(interface.widget_interface):
         self.entry.set_text(model_field.get(model) or '00:00:00')
         return True
 
+    def show(self, dt_val, timezone=True):
+        if not dt_val:
+            self.entry.clear()
+        else:
+            date = time.strptime(dt_val, HM_FORMAT)
+            if 'tz' in rpc.session.context and timezone:
+                try:
+                    import pytz
+                    lzone = pytz.timezone(rpc.session.context['tz'])
+                    szone = pytz.timezone(rpc.session.timezone)
+                    dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+                    sdt = szone.localize(dt, is_dst=True)
+                    ldt = sdt.astimezone(lzone)
+                    date = ldt.timetuple()
+                except:
+                    pass
+            t=time.strftime(self.format, date)
+            if len(t) > self.entry.get_width_chars():
+                self.entry.set_width_chars(len(t))
+            self.entry.set_text(t)
+        return True
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
