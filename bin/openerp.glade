@@ -2069,6 +2069,16 @@ Web: http://tiny.be</property>
                             <property name="expand">False</property>
                           </packing>
                         </child>
+			<child>
+                          <widget class="GtkToggleToolButton" id="toggle_strikethrough">
+                            <property name="visible">True</property>
+                            <property name="stock_id">gtk-strikethrough</property>
+                            <signal name="toggled" handler="on_toggle_strike_toggled"/>
+                          </widget>
+                          <packing>
+                            <property name="expand">False</property>
+                          </packing>
+                        </child>
                         <child>
                           <widget class="GtkRadioToolButton" id="radioleft">
                             <property name="visible">True</property>

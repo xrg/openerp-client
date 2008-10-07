@@ -41,6 +41,8 @@ import interface
 import common
 import re
 import service
+import xml.sax,xml.sax.handler
+from cStringIO import StringIO
 
 class textbox_tag(interface.widget_interface):
     desc_to_attr_table = {
@@ -81,7 +83,7 @@ class textbox_tag(interface.widget_interface):
                      pango.STYLE_OBLIQUE:'oblique',
                      pango.STYLE_ITALIC:'italic',
                      },
-            'stikethrough':{1:'true',
+            'strikethrough':{1:'true',
                             True:'true',
                             0:'false',
                             False:'false'},
@@ -107,7 +109,7 @@ class textbox_tag(interface.widget_interface):
         self.tagdict = {}
         self.buf.connect_after('insert-text', self.sig_insert_text)
         self.buf.connect('mark-set', self.sig_mark_set)
-
+        self.value=''
 #       self.sizeButton = self.win_gl.get_widget('font_size')
 #       self.colorButton =self.win_gl.get_widget('font_color')
         self.boldButton = self.win_gl.get_widget('toggle_bold')
@@ -120,6 +122,7 @@ class textbox_tag(interface.widget_interface):
         self.win_gl.signal_connect('on_toggle_bold_toggled', self._toggle, [self.bold])
         self.win_gl.signal_connect('on_toggle_italic_toggled', self._toggle, [self.italic])
         self.win_gl.signal_connect('on_toggle_underline_toggled', self._toggle, [self.underline])
+        self.win_gl.signal_connect('on_toggle_strike_toggled', self._toggle, [self.strikethrough])
 #       self.win_gl.signal_connect('on_font_size_changed',self._font_changed)
 #       self.win_gl.signal_connect('on_color_changed',self._color_changed)
         self.win_gl.signal_connect('on_font_button_clicked',self._font_changed)
@@ -297,6 +300,7 @@ class textbox_tag(interface.widget_interface):
         outbuff += txt[last_pos:]
         outbuff = '<span alignment="' + self.alignment_markup[self.justify] \
                 + '" leading="' + str(self.leading) + '">' + outbuff + '</span>'
+        self.value=outbuff
         return outbuff
 
     def tag_to_markup (self, tag):
@@ -341,6 +345,7 @@ class textbox_tag(interface.widget_interface):
         self.italic = self.get_tags_from_attrs(None,None,[pango.AttrStyle('italic')])[0]
         self.bold = self.get_tags_from_attrs(None,None,[pango.AttrWeight('bold')])[0]
         self.underline = self.get_tags_from_attrs(None,None,[pango.AttrUnderline('single')])[0]
+        self.strikethrough = self.get_tags_from_attrs(None,None,[pango.AttrStrikethrough(1)])[0]
 
     def get_selection (self):
         bounds = self.buf.get_selection_bounds()
@@ -383,13 +388,14 @@ class textbox_tag(interface.widget_interface):
     def set_text (self, txt):
         buf = self.tv.get_buffer()
         txt = re.sub('<span alignment[^>]*>', '<span>', txt)
+#        txt=common.to_xml(txt)
         try:
             parsed, txt, separator = pango.parse_markup(txt, u'0')
         except:
             pass
         try:
             attrIter = parsed.get_iterator()
-        except:
+        except Exception ,e:
             common.warning("Either the Message contains HTML tags or '<' or '>' or '&' or the selected Fonts are not supported!",'User Error')
             return True
         buf.delete(buf.get_start_iter(), buf.get_end_iter())
@@ -451,12 +457,36 @@ class textbox_tag(interface.widget_interface):
     def display(self, model, model_field):
         super(textbox_tag, self).display(model, model_field)
         value = model_field and model_field.get(model)
-        if not value:
-            value=''
-        self.set_text(value)
+        if not self.value:
+            self.value=value or ''
+        self.set_text(self.value)
 
     def set_value(self, model, model_field):
+#        aparser = xml.sax.make_parser()
+#        eob = self.buf.get_end_iter()
+#        print "aparser",aparser,self
+#        aparser.setContentHandler(HtmlHandler(self.tv, eob))
+#        #parser.setEntityResolver(HtmlEntityResolver())
+#        txt=self.get_text()
+#        print "rrrr",txt
+#        aparser.parse(StringIO(txt))
+#        if not eob.starts_line():
+#            self.buf.insert(eob, "\n")
+#        print "buffer",self.buf
+#        txt = self.buf.get_text(self.buf.get_start_iter(), self.buf.get_end_iter())
         model_field.set_client(model, self.get_text() or False)
+
+#class HtmlHandler(xml.sax.handler.ContentHandler):
+#
+#    def __init__(self, textview, startiter):
+#        xml.sax.handler.ContentHandler.__init__(self)
+#        self.textbuf = textview.get_buffer()
+#        self.textview = textview
+#        self.iter = startiter
+#        self.text = ''
+#        self.styles = [] # a gtk.TextTag or None, for each span level
+#        self.list_counters = [] # stack (top at head) of list
+#                                # counters, or None for unordered list
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
