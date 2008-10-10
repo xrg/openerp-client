@@ -158,6 +158,8 @@ class parse(object):
     def _psr_char(self, char):
         pass
     def parse(self, xml_data, max_width):
+        print xml_data
+        print self.fields
         psr = expat.ParserCreate()
         psr.StartElementHandler = self._psr_start
         psr.EndElementHandler = self._psr_end
