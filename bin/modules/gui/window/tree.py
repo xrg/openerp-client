@@ -140,10 +140,8 @@ class tree(object):
         else:
             self.tree_res.ids = ids
             self.tree_res.reload()
-            wid = self.glade.get_widget('tree_toolbar')
+            wid = self.glade.get_widget('widget_vbox')
             wid.hide()
-            wid = self.glade.get_widget('tree_vpaned')
-            wid.set_position(-1)
 
     def menu_main_clicked(self, widget):
         if widget.get_active():
