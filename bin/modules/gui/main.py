@@ -253,9 +253,7 @@ class db_create(object):
         try:
             if self.lang_widget and url:
                 _refresh_langlist(self.lang_widget, url)
-            self.set_sensitive(True)
         except:
-            self.set_sensitive(False)
             return False
         return url
 

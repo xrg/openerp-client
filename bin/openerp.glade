@@ -131,7 +131,6 @@
                     <property name="visible">True</property>
                     <property name="sensitive">False</property>
                     <property name="editable">False</property>
-                    <property name="invisible_char">*</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
                     <property name="text">localhost</property>
@@ -160,7 +159,6 @@
                   <widget class="GtkEntry" id="ent_login">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="invisible_char">*</property>
                     <property name="activates_default">True</property>
                     <property name="text">admin</property>
                   </widget>
@@ -178,7 +176,6 @@
                     <property name="can_focus">True</property>
                     <property name="has_focus">True</property>
                     <property name="visibility">False</property>
-                    <property name="invisible_char">*</property>
                     <property name="activates_default">True</property>
                   </widget>
                   <packing>
@@ -2249,7 +2246,6 @@ Web: http://tiny.be</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="editable">False</property>
-                <property name="invisible_char">*</property>
               </widget>
               <packing>
                 <property name="left_attach">1</property>
@@ -2265,7 +2261,6 @@ Web: http://tiny.be</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="editable">False</property>
-                <property name="invisible_char">*</property>
               </widget>
               <packing>
                 <property name="left_attach">1</property>
@@ -2281,7 +2276,6 @@ Web: http://tiny.be</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="editable">False</property>
-                <property name="invisible_char">*</property>
               </widget>
               <packing>
                 <property name="left_attach">1</property>
@@ -3718,7 +3712,6 @@ Note that we may not reply you if your Service Company is not a OpenERP partner.
                                   <widget class="GtkEntry" id="name_entry">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">*</property>
                                   </widget>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -3732,7 +3725,6 @@ Note that we may not reply you if your Service Company is not a OpenERP partner.
                                   <widget class="GtkEntry" id="company_entry">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">*</property>
                                   </widget>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -3890,7 +3882,6 @@ Note that we may not reply you if your Service Company is not a OpenERP partner.
                                   <widget class="GtkEntry" id="id_entry">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">*</property>
                                   </widget>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -3951,7 +3942,6 @@ Very Urgent</property>
                                   <widget class="GtkEntry" id="phone_entry">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">*</property>
                                   </widget>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -3965,7 +3955,6 @@ Very Urgent</property>
                                   <widget class="GtkEntry" id="email_entry">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">*</property>
                                   </widget>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -5407,7 +5396,6 @@ ZIMBABWE</property>
                           <widget class="GtkEntry" id="entry_email">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="invisible_char">*</property>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>
@@ -5590,7 +5578,6 @@ Note that we may not reply if you do not have a support contract with Tiny or an
                           <widget class="GtkEntry" id="name_entry1">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="invisible_char">*</property>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>
@@ -5604,7 +5591,6 @@ Note that we may not reply if you do not have a support contract with Tiny or an
                           <widget class="GtkEntry" id="company_entry1">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="invisible_char">*</property>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>
@@ -5702,7 +5688,6 @@ Note that we may not reply if you do not have a support contract with Tiny or an
                           <widget class="GtkEntry" id="id_entry1">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="invisible_char">*</property>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>
@@ -5763,7 +5748,6 @@ Very Urgent</property>
                           <widget class="GtkEntry" id="phone_entry1">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="invisible_char">*</property>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>
@@ -5777,7 +5761,6 @@ Very Urgent</property>
                           <widget class="GtkEntry" id="email_entry1">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="invisible_char">*</property>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>
@@ -7054,7 +7037,6 @@ Very Urgent</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="max_length">1</property>
-                                    <property name="invisible_char">*</property>
                                     <property name="width_chars">1</property>
                                     <property name="text">,</property>
                                   </widget>
@@ -7082,7 +7064,6 @@ Very Urgent</property>
                                   <widget class="GtkEntry" id="import_csv_del">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">*</property>
                                     <property name="width_chars">1</property>
                                     <property name="text">"</property>
                                   </widget>
@@ -7267,7 +7248,6 @@ Latin1</property>
                   <widget class="GtkEntry" id="entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="invisible_char">*</property>
                   </widget>
                   <packing>
                     <property name="expand">False</property>
@@ -7378,7 +7358,6 @@ Latin1</property>
               <widget class="GtkEntry" id="ent_host">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="invisible_char">*</property>
                 <property name="activates_default">True</property>
                 <property name="width_chars">16</property>
                 <property name="text">localhost</property>
@@ -7394,7 +7373,6 @@ Latin1</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">5</property>
-                <property name="invisible_char">*</property>
                 <property name="activates_default">True</property>
                 <property name="width_chars">16</property>
                 <property name="text">8069</property>
@@ -7539,7 +7517,6 @@ Latin1</property>
                     <property name="visible">True</property>
                     <property name="sensitive">False</property>
                     <property name="editable">False</property>
-                    <property name="invisible_char">*</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
                     <property name="text">http://localhost:8069</property>
@@ -7621,7 +7598,6 @@ Latin1</property>
                     <property name="has_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
-                    <property name="invisible_char">*</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
                   </widget>
@@ -7802,7 +7778,6 @@ Latin1</property>
                     <property name="visible">True</property>
                     <property name="sensitive">False</property>
                     <property name="editable">False</property>
-                    <property name="invisible_char">*</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
                     <property name="text" translatable="yes">http://localhost:8069</property>
@@ -7870,7 +7845,6 @@ Latin1</property>
                     <property name="has_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
-                    <property name="invisible_char">*</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
                   </widget>
@@ -8110,7 +8084,7 @@ Latin1</property>
                     <property name="can_focus">True</property>
                     <property name="tooltip" translatable="yes">This is the password of the '&lt;i&gt;admin&lt;/i&gt;' user that will be created in your new database. It has to be the same than the above field.</property>
                     <property name="visibility">False</property>
-                    <property name="invisible_char">*</property>
+                    <property name="activates_default">True</property>
                     <signal name="changed" handler="on_ent_user_pass1_changed"/>
                   </widget>
                   <packing>
@@ -8293,7 +8267,6 @@ Latin1</property>
                     <property name="tooltip" translatable="yes">This is the password of the user that have the rights to administer databases. This is not a OpenERP user, just a super administrator. If you did not changed it, the password is 'admin' after installation.</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
-                    <property name="invisible_char">*</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
                   </widget>
@@ -8331,7 +8304,7 @@ Latin1</property>
                         <property name="can_focus">True</property>
                         <property name="tooltip" translatable="yes">This is the password of the '&lt;i&gt;admin&lt;/i&gt;' user that will be created in your new database.</property>
                         <property name="visibility">False</property>
-                        <property name="invisible_char">*</property>
+                        <property name="activates_default">True</property>
                         <signal name="changed" handler="on_ent_user_pass2_changed"/>
                       </widget>
                     </child>
@@ -8341,7 +8314,6 @@ Latin1</property>
                     <property name="right_attach">2</property>
                     <property name="top_attach">7</property>
                     <property name="bottom_attach">8</property>
-                    <property name="x_options"></property>
                   </packing>
                 </child>
                 <child>
@@ -8364,7 +8336,6 @@ Latin1</property>
                     <property name="sensitive">False</property>
                     <property name="tooltip" translatable="yes">This is the URL of the OpenERP server. Use 'localhost' if the server is installed on this computer. Click on 'Change' to change the address.</property>
                     <property name="editable">False</property>
-                    <property name="invisible_char">*</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
                     <property name="text" translatable="yes">http://localhost:8069</property>
@@ -8532,7 +8503,6 @@ Latin1</property>
                     <property name="visible">True</property>
                     <property name="sensitive">False</property>
                     <property name="editable">False</property>
-                    <property name="invisible_char">*</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
                     <property name="text" translatable="yes">http://localhost:8069</property>
@@ -8599,7 +8569,6 @@ Latin1</property>
                     <property name="can_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
-                    <property name="invisible_char">*</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -8615,7 +8584,6 @@ Latin1</property>
                     <property name="can_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
-                    <property name="invisible_char">*</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -8631,7 +8599,6 @@ Latin1</property>
                     <property name="can_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
-                    <property name="invisible_char">*</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
