@@ -110,9 +110,9 @@ class main(service.Service):
 
             if not action.get('domain', False):
                 action['domain']='[]'
-            ctx = {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])}
+            ctx = context.copy()
+            ctx.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])} )
             ctx.update(tools.expr_eval(action.get('context','{}'), ctx.copy()))
-            ctx.update(context)
 
             a = ctx.copy()
             a['time'] = time
