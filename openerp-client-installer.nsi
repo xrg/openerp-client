@@ -39,9 +39,9 @@
 
   !define MUI_ICON ".\bin\pixmaps\openerp.ico"
   !define MUI_UNICON ".\bin\pixmaps\openerp.ico"
-  !define MUI_WELCOMEFINISHPAGE_BITMAP ".\bin\pixmaps\openerp-intro.bmp"
+  !define MUI_WELCOMEFINISHPAGE_BITMAP ".\bin\pixmaps\tinyerp-intro.bmp"
   !define MUI_HEADERIMAGE
-  !define MUI_HEADERIMAGE_BITMAP ".\bin\pixmaps\openerp-header.bmp"
+  !define MUI_HEADERIMAGE_BITMAP ".\bin\pixmaps\tinyerp-header.bmp"
 
   !insertmacro MUI_PAGE_WELCOME
   !insertmacro MUI_PAGE_LICENSE "doc\\License.rtf"
