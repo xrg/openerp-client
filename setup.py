@@ -93,7 +93,7 @@ def data_files():
                 dn.remove('.svn')
             files.append((dp, map(lambda x: opj('bin', dp, x), names)))
         os.chdir('..')
-        files.append((".",["bin\\terp.glade", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
+        files.append((".",["bin\\openerp.glade", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
         files.append(("pixmaps", glob.glob("bin\\pixmaps\\*.*")))
         files.append(("po", glob.glob("bin\\po\\*.*")))
         files.append(("icons", glob.glob("bin\\icons\\*.png")))
@@ -106,7 +106,7 @@ def data_files():
             glob.glob('bin/pixmaps/*.png')))
         files.append((opj('share', 'pixmaps', 'openerp-client', 'icons'),
             glob.glob('bin/icons/*.png')))
-        files.append((opj('share', 'openerp-client'), ['bin/terp.glade',
+        files.append((opj('share', 'openerp-client'), ['bin/openerp.glade',
             'bin/tipoftheday.txt']))
     return files
 
