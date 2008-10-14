@@ -687,9 +687,9 @@ class terp_main(service.Service):
         return True
 
     def sig_win_close(self, *args):
-        page_num=-2
-        if len(args)>=2:
-            page_num=self.notebook.page_num(args[1])
+        page_num = None
+        if len(args) >= 2:
+            page_num = self.notebook.page_num(args[1])
         self._sig_child_call(args[0], 'but_close', page_num)
 
     def sig_request_new(self, args=None):
@@ -983,8 +983,8 @@ class terp_main(service.Service):
             if self.buttons[x]:
                 self.buttons[x].set_sensitive(view and (x in view.handlers))
 
-    def _win_del(self,page_num=-2):
-        if page_num != -2:
+    def _win_del(self,page_num=None):
+        if page_num is not None:
             pn = page_num
         else:
             pn = self.notebook.get_current_page()
@@ -1032,9 +1032,9 @@ class terp_main(service.Service):
                 #    print 'SWITCH', button_name
                 #    wid.sig_switch()
             if button_name=='but_close' and res:
-                page_num=-2
+                page_num = None
                 if len(args):
-                    page_num=args[0]
+                    page_num = args[0]
                 self._win_del(page_num)
 
     def _sig_page_changt(self, widget=None, *args):
