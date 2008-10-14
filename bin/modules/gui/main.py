@@ -917,15 +917,17 @@ class terp_main(service.Service):
 
     def win_add(self, win, datas):
         self.pages.append(win)
-        box = gtk.HBox()
-        icon = gtk.Image()
-        icon.set_from_stock(win.name, gtk.ICON_SIZE_MENU)
+        box = gtk.HBox(False, 0)
         closebtn = gtk.Button()
         image = gtk.Image()
         image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+        w, h = image.size_request()
 
         closebtn.set_image(image)
         closebtn.set_relief(gtk.RELIEF_NONE)
+        closebtn.set_size_request(w + 8, h + 4)
+        closebtn.unset_flags(gtk.CAN_FOCUS)
+
         box.pack_start(gtk.Label(win.name), True, True)
         box.pack_end(closebtn, False, False)
         self.notebook.append_page(win.widget, box)
