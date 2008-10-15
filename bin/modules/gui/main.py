@@ -687,7 +687,10 @@ class terp_main(service.Service):
         return True
 
     def sig_win_close(self, *args):
-        self._sig_child_call(args[0], 'but_close')
+        page_num = None
+        if len(args) >= 2:
+            page_num = self.notebook.page_num(args[1])
+        self._sig_child_call(args[0], 'but_close', page_num)
 
     def sig_request_new(self, args=None):
         obj = service.LocalService('gui.window')
@@ -914,7 +917,29 @@ class terp_main(service.Service):
 
     def win_add(self, win, datas):
         self.pages.append(win)
-        self.notebook.append_page(win.widget, gtk.Label(win.name))
+        box = gtk.HBox(False, 0)
+        closebtn = gtk.Button()
+        image = gtk.Image()
+        image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+        w, h = image.size_request()
+
+        closebtn.set_image(image)
+        closebtn.set_relief(gtk.RELIEF_NONE)
+        closebtn.set_size_request(w + 8, h + 4)
+        closebtn.unset_flags(gtk.CAN_FOCUS)
+
+        box.pack_start(gtk.Label(win.name), True, True)
+        box.pack_end(closebtn, False, False)
+        self.notebook.append_page(win.widget, box)
+        closebtn.connect("clicked", self.sig_win_close,win.widget)
+        pagenum = self.notebook.page_num(win.widget)
+        pagenum = self.notebook.page_num(image)
+
+        box.show_all()
+
+        self.notebook.set_tab_label_packing(image, True, True, gtk.PACK_START)
+        self.notebook.set_tab_label(image, box)
+        image.show_all()
         self.notebook.set_current_page(-1)
 
     def message(self, message):
@@ -960,8 +985,11 @@ class terp_main(service.Service):
             if self.buttons[x]:
                 self.buttons[x].set_sensitive(view and (x in view.handlers))
 
-    def _win_del(self):
-        pn = self.notebook.get_current_page()
+    def _win_del(self,page_num=None):
+        if page_num is not None:
+            pn = page_num
+        else:
+            pn = self.notebook.get_current_page()
         if pn != -1:
             self.notebook.disconnect(self.sig_id)
             page = self.pages.pop(pn)
@@ -1006,7 +1034,10 @@ class terp_main(service.Service):
                 #    print 'SWITCH', button_name
                 #    wid.sig_switch()
             if button_name=='but_close' and res:
-                self._win_del()
+                page_num = None
+                if len(args):
+                    page_num = args[0]
+                self._win_del(page_num)
 
     def _sig_page_changt(self, widget=None, *args):
         self.last_page = self.current_page
