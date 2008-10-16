@@ -1001,16 +1001,22 @@ class terp_main(service.Service):
             del page
         return self.notebook.get_current_page() != -1
 
-    def _wid_get(self):
-        pn = self.notebook.get_current_page()
+    def _wid_get(self,page_num=None):
+        if page_num is not None:
+            pn = page_num
+        else:
+            pn = self.notebook.get_current_page()
         if pn == -1:
             return False
         return self.pages[pn]
 
     def _sig_child_call(self, widget, button_name, *args):
+        page_num = None
+        if len(args):
+            page_num = args[0]
         if not self._handler_ok:
             return
-        wid = self._wid_get()
+        wid = self._wid_get(page_num)
         if wid:
             res = True
             if button_name.startswith('radio_'):
@@ -1034,9 +1040,6 @@ class terp_main(service.Service):
                 #    print 'SWITCH', button_name
                 #    wid.sig_switch()
             if button_name=='but_close' and res:
-                page_num = None
-                if len(args):
-                    page_num = args[0]
                 self._win_del(page_num)
 
     def _sig_page_changt(self, widget=None, *args):
