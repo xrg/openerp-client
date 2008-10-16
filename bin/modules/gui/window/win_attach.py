@@ -98,6 +98,8 @@ class win_attach(object):
         self._cache = {}
 
     def _get(self, id):
+        if not id:
+            return None
         if id not in self._cache:
             r = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id], [], rpc.session.context)
             self._cache[id] = r and r[0] or None
