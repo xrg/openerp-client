@@ -98,6 +98,22 @@ class parse(object):
         self.col = 8
         self.focusable = None
         self.add_widget_end = []
+        self.name_lst=[]
+
+    def dummy_start(self,name,attrs):
+            flag=False
+            if name =='field' and attrs.has_key('name'):
+                    for i in range (0,len(self.name_lst)):
+                       if 'name' in self.name_lst[i][1]:
+                           if self.name_lst[i][1]['name']==attrs['name']:
+                               flag=True
+                               if attrs.has_key('select'):
+                                   self.name_lst[i]=(name,attrs)
+                    if not flag:
+                        self.name_lst.append((name,attrs))
+            else:
+                self.name_lst.append((name,attrs))
+
 
     def _psr_start(self, name, attrs):
 
@@ -158,10 +174,8 @@ class parse(object):
     def _psr_char(self, char):
         pass
     def parse(self, xml_data, max_width):
-        print xml_data
-        print self.fields
         psr = expat.ParserCreate()
-        psr.StartElementHandler = self._psr_start
+        psr.StartElementHandler = self.dummy_start
         psr.EndElementHandler = self._psr_end
         psr.CharacterDataHandler = self._psr_char
         self.notebooks=[]
@@ -169,6 +183,8 @@ class parse(object):
 
         self.dict_widget={}
         psr.Parse(xml_data)
+        for i in self.name_lst:
+            self._psr_start(i[0],i[1])
         for i in self.add_widget_end:
             self.add_widget(*i)
         self.add_widget_end=[]

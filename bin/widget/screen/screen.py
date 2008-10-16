@@ -114,6 +114,17 @@ class Screen(signal_event.signal_event):
                 view_form = rpc.session.rpc_exec_auth('/object', 'execute',
                         self.name, 'fields_view_get', False, 'form',
                         self.context)
+                view_tree = rpc.session.rpc_exec_auth('/object', 'execute',
+                        self.name, 'fields_view_get', False, 'tree',
+                        self.context)
+                dom = xml.dom.minidom.parseString(view_tree['arch'])
+                child_node=dom.childNodes[0].childNodes
+                arch=child_node[1].toxml()
+                for i in range(2,len(child_node)):
+                    arch+=child_node[i].toxml()
+                view_form['arch']=view_form['arch'][0:len(view_form['arch'])-7]+arch
+                view_form['arch']=view_form['arch']+'\n</form>'
+                view_form['fields'].update(view_tree['fields'])
                 self.filter_widget = widget_search.form(view_form['arch'],
                         view_form['fields'], self.name, self.window,
                         self.domain, (self, self.search_filter))
