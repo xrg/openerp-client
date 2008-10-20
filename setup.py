@@ -47,6 +47,13 @@ from mydistutils import L10nAppDistribution
 if os.name == 'nt':
     import py2exe
 
+    origIsSystemDLL = py2exe.build_exe.isSystemDLL
+    def isSystemDLL(pathname):
+        if os.path.basename(pathname).lower() in ("msvcp71.dll"):
+                return 0
+        return origIsSystemDLL(pathname)
+    py2exe.build_exe.isSystemDLL = isSystemDLL
+
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "bin"))
 
 opj = os.path.join
