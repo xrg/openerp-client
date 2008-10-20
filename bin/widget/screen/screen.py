@@ -119,8 +119,8 @@ class Screen(signal_event.signal_event):
                         self.context)
                 dom = xml.dom.minidom.parseString(view_tree['arch'])
                 child_node=dom.childNodes[0].childNodes
-                arch=child_node[1].toxml()
-                for i in range(2,len(child_node)):
+                arch=''
+                for i in range(1,len(child_node)):
                     arch+=child_node[i].toxml()
                 view_form['arch']=view_form['arch'][0:len(view_form['arch'])-7]+arch
                 view_form['arch']=view_form['arch']+'\n</form>'
