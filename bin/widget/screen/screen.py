@@ -124,8 +124,6 @@ class Screen(signal_event.signal_event):
                     arch+=child_node[i].toxml()
                 view_form['arch']=view_form['arch'][0:len(view_form['arch'])-7]+arch
                 view_form['arch']=view_form['arch']+'\n</form>'
-                print view_form['fields']
-                print view_tree['fields']
                 view_form['fields'].update(view_tree['fields'])
                 self.filter_widget = widget_search.form(view_form['arch'],
                         view_form['fields'], self.name, self.window,
