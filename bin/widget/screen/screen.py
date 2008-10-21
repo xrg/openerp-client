@@ -337,8 +337,8 @@ class Screen(signal_event.signal_event):
         parser = widget_parse(parent=self.parent, window=self.window)
         dom = xml.dom.minidom.parseString(arch)
         view = parser.parse(self, dom, self.fields, toolbar=toolbar)
-
-        self.views.append(view)
+        if view:
+            self.views.append(view)
 
         if display:
             self.__current_view = len(self.views) - 1
