@@ -8039,6 +8039,7 @@ Latin1</property>
                         <property name="visible">True</property>
                         <property name="xalign">1</property>
                         <property name="yalign">0.46000000834465027</property>
+	                    <property name="tooltip" translatable="yes">Check this box if you want demonstration data to be installed on your new database. These data will help you to understand OpenERP, with predefined products, partners, etc.</property>
                         <property name="label" translatable="yes">Load Demonstration Data:</property>
                       </widget>
                     </child>
@@ -8054,7 +8055,6 @@ Latin1</property>
                   <widget class="GtkEntry" id="ent_db_new">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="tooltip" translatable="yes">Choose the name of the database that will be created. The name must not contain any special character. Exemple: 'terp'.</property>
                     <property name="max_length">32</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
@@ -8082,7 +8082,6 @@ Latin1</property>
                   <widget class="GtkEntry" id="ent_user_pass2">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="tooltip" translatable="yes">This is the password of the '&lt;i&gt;admin&lt;/i&gt;' user that will be created in your new database. It has to be the same than the above field.</property>
                     <property name="visibility">False</property>
                     <property name="activates_default">True</property>
                     <signal name="changed" handler="on_ent_user_pass1_changed"/>
@@ -8113,7 +8112,6 @@ Latin1</property>
                   <widget class="GtkCheckButton" id="check_demo">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="tooltip" translatable="yes">Check this box if you want demonstration data to be installed on your new database. These data will help you to understand OpenERP, with predefined products, partners, etc.</property>
                     <property name="response_id">0</property>
                     <property name="draw_indicator">True</property>
                     <child>
@@ -8133,6 +8131,7 @@ Latin1</property>
                   <widget class="GtkLabel" id="label46573">
                     <property name="visible">True</property>
                     <property name="xalign">1</property>
+                    <property name="tooltip" translatable="yes">This is the password of the '&lt;i&gt;admin&lt;/i&gt;' user that will be created in your new database. It has to be the same than the above field.</property>
                     <property name="label" translatable="yes">Confirm Password:</property>
                   </widget>
                   <packing>
@@ -8146,6 +8145,7 @@ Latin1</property>
                   <widget class="GtkLabel" id="label46572">
                     <property name="visible">True</property>
                     <property name="xalign">1</property>
+                    <property name="tooltip" translatable="yes">This is the password of the '&lt;i&gt;admin&lt;/i&gt;' user that will be created in your new database.</property>
                     <property name="label" translatable="yes">Administrator Password:</property>
                   </widget>
                   <packing>
@@ -8159,6 +8159,8 @@ Latin1</property>
                   <widget class="GtkLabel" id="label276">
                     <property name="visible">True</property>
                     <property name="xalign">1</property>
+                    <property name="use_markup">True</property>
+                    <property name="tooltip" translatable="yes">Choose the default language that will be installed for this database. You will be able to install new languages after installation through the administration menu.</property>
                     <property name="label" translatable="yes">Default Language:</property>
                   </widget>
                   <packing>
@@ -8184,6 +8186,7 @@ Latin1</property>
                   <widget class="GtkLabel" id="label274">
                     <property name="visible">True</property>
                     <property name="xalign">1</property>
+                    <property name="tooltip" translatable="yes">Choose the name of the database that will be created. The name must not contain any special character. Exemple: 'terp'.</property>
                     <property name="label" translatable="yes">New Database Name:</property>
                   </widget>
                   <packing>
@@ -8264,7 +8267,6 @@ Latin1</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="has_focus">True</property>
-                    <property name="tooltip" translatable="yes">This is the password of the user that have the rights to administer databases. This is not a OpenERP user, just a super administrator. If you did not changed it, the password is 'admin' after installation.</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
                     <property name="activates_default">True</property>
@@ -8284,6 +8286,7 @@ Latin1</property>
                     <property name="xalign">1</property>
                     <property name="xpad">3</property>
                     <property name="ypad">3</property>
+                    <property name="tooltip" translatable="yes">This is the password of the user that have the rights to administer databases. This is not a OpenERP user, just a super administrator. If you did not changed it, the password is 'admin' after installation.</property>
                     <property name="label" translatable="yes">Super Administrator Password:</property>
                     <property name="justify">GTK_JUSTIFY_RIGHT</property>
                   </widget>
@@ -8297,12 +8300,10 @@ Latin1</property>
                 <child>
                   <widget class="GtkEventBox" id="eventbox20">
                     <property name="visible">True</property>
-                    <property name="tooltip" translatable="yes">Choose the default language that will be installed for this database. You will be able to install new languages after installation through the administration menu.</property>
                     <child>
                       <widget class="GtkEntry" id="ent_user_pass1">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="tooltip" translatable="yes">This is the password of the '&lt;i&gt;admin&lt;/i&gt;' user that will be created in your new database.</property>
                         <property name="visibility">False</property>
                         <property name="activates_default">True</property>
                         <signal name="changed" handler="on_ent_user_pass2_changed"/>
@@ -8323,6 +8324,7 @@ Latin1</property>
                     <property name="xalign">1</property>
                     <property name="xpad">3</property>
                     <property name="ypad">3</property>
+                    <property name="tooltip" translatable="yes">This is the URL of the OpenERP server. Use 'localhost' if the server is installed on this computer. Click on 'Change' to change the address.</property>
                     <property name="label" translatable="yes">OpenERP Server:</property>
                   </widget>
                   <packing>
@@ -8334,7 +8336,6 @@ Latin1</property>
                   <widget class="GtkEntry" id="ent_server_new">
                     <property name="visible">True</property>
                     <property name="sensitive">False</property>
-                    <property name="tooltip" translatable="yes">This is the URL of the OpenERP server. Use 'localhost' if the server is installed on this computer. Click on 'Change' to change the address.</property>
                     <property name="editable">False</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
