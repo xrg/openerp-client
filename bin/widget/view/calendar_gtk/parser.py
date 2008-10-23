@@ -30,7 +30,7 @@
 ##############################################################################
 
 from widget.view import interface
-from tools import ustr, node_attributes 
+from tools import ustr, node_attributes
 import gtk
 import gtk.glade
 import gettext
@@ -40,6 +40,7 @@ from datetime import datetime
 from SpiffGtkWidgets import Calendar
 from mx import DateTime
 import time
+import math
 
 COLOR_PALETTE = ['#f57900', '#cc0000', '#d400a8', '#75507b', '#3465a4', '#73d216', '#c17d11', '#edd400',
                  '#fcaf3e', '#ef2929', '#ff00c9', '#ad7fa8', '#729fcf', '#8ae234', '#e9b96e', '#fce94f',
@@ -109,14 +110,14 @@ class ViewCalendar(object):
         self.mode = 'month'
 
         self.string = attrs.get('string', '')
-        self.date_start = attrs.get('date_start') 
+        self.date_start = attrs.get('date_start')
         self.date_delay = attrs.get('date_delay')
         self.date_stop = attrs.get('date_stop')
         self.color_field = attrs.get('color')
         self.day_length = int(attrs.get('day_length', 8))
         self.colors = {}
         self.models = None
-    
+
 
     def _change_small(self, widget, *args, **argv):
         t = list(widget.get_date() )
@@ -146,7 +147,7 @@ class ViewCalendar(object):
         self.process = False
         return True
 
-    
+
     def __update_colors(self):
         self.colors = {}
         if self.color_field:
@@ -155,7 +156,7 @@ class ViewCalendar(object):
                 key = evt[self.color_field]
                 name = key
                 value = key
-            
+
                 if isinstance(key, (tuple, list)):
                     value, name = key
 
@@ -167,8 +168,8 @@ class ViewCalendar(object):
 
 
     def display(self, models):
-        
-         
+
+
         if models:
             self.models = models.models
 
@@ -180,7 +181,7 @@ class ViewCalendar(object):
             #self.cal_model = Calendar.Model()
             self.cal_model = TinyCalModel()
             self.cal_view.model = self.cal_model
-            
+
             self.cal_model.add_events(self.__get_events())
 
         self.refresh()
@@ -207,10 +208,10 @@ class ViewCalendar(object):
             self.cal_view.visible_range = d1, d2
             self.cal_view.active_range = d1, d2
             self._label_current.set_text(self.date.strftime('%A %x'))
-        
+
         self._small_calendar.select_month(t[1]-1,t[0])
         self._small_calendar.select_day(t[2])
-        
+
         self.cal_view.refresh()
 
 
@@ -221,7 +222,7 @@ class ViewCalendar(object):
             evt = model.get()
             self.__convert(evt)
             e = self.__get_event(evt)
-        
+
             #print "event:", repr(e)
             #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
             #    continue
@@ -250,7 +251,7 @@ class ViewCalendar(object):
 
             if event[fld] and fmt:
                 event[fld] = time.strptime(event[fld], fmt)
-            
+
             # default start time is 9:00 AM
             if typ == 'date' and fld == self.date_start:
                 ds = list(event[fld])
@@ -263,70 +264,70 @@ class ViewCalendar(object):
         description = [] # the description
         starts = None    # the starting time (datetime)
         ends = None      # the end time (datetime)
-        
+
         if self.axis:
-            
+
             f = self.axis[0]
             s = event[f]
-            
+
             if isinstance(s, (tuple, list)): s = s[-1]
-            
+
             title = ustr(s)
-        
+
             for f in self.axis[1:]:
                 s = event[f]
                 if isinstance(s, (tuple, list)): s = s[-1]
-            
+
                 description += [ustr(s)]
 
         starts = event.get(self.date_start)
         ends = event.get(self.date_delay) or 1.0
         span = 0
-        
+
         if starts and ends:
-            
+
             n = 0
             h = ends
-            
+
             if ends == self.day_length: span = 1
-            
+
             if ends > self.day_length:
                 n = ends / self.day_length
                 h = ends % self.day_length
-            
+
                 n = int(math.floor(n))
-            
+
                 if n > 0: span = n + 1
-            
+
             ends = time.localtime(time.mktime(starts) + (h * 60 * 60) + (n * 24 * 60 * 60))
-        
+
         if starts and self.date_stop:
-            
+
             ends = event.get(self.date_stop)
             if not ends:
                 ends = time.localtime(time.mktime(starts) + 60 * 60)
-                
+
             tds = time.mktime(starts)
             tde = time.mktime(ends)
-            
+
             if tds >= tde:
                 tde = tds + 60 * 60
                 ends = time.localtime(tde)
-            
+
             n = (tde - tds) / (60 * 60)
-            
+
             if n > self.day_length:
                 span = math.floor(n / 24)
 
         #starts = format.format_datetime(starts, "datetime", True)
         #ends = format.format_datetime(ends, "datetime", True)
-        
-        color_key = event.get(self.color_field) 
+
+        color_key = event.get(self.color_field)
         color = self.colors.get(color_key)
 
         title = title.strip()
         description = ', '.join(description).strip()
-        
+
         return TinyEvent(event=event, starts=starts, ends=ends, title=title, description=description, dayspan=span, color=(color or None) and color[-1])
 
 
