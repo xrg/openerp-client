@@ -158,35 +158,18 @@ class Printer(object):
         if app_to_run:
             def open_file( cmd, filename ):
                 cmd = cmd % filename
-                pid = os.fork()
-                if not pid:
-                    pid = os.fork()
-                    if not pid:
-                        prog, args = cmd.split(' ', 1)
-                        args = [os.path.basename(prog)] + args.split(' ')
-                        try:
-                            os.execvp(prog, args)
-                        except:
-                            pass
-                    time.sleep(0.1)
-                    sys.exit(0)
-                os.waitpid(pid, 0)
+                import subprocess
+                subprocess.Popen(cmd)
+            open_file( app_to_run, fname )
 
-            if sys.platform in ['win32','nt']:
-                if app_to_run:
-                    open_file( app_to_run, fname )
-                else:
-                    os.startfile( fname )
-            else:
-                open_file( app_to_run, fname )
         else:
             finderfunc = self.openers.get(ftype)
-            if not finderfunc:
-                raise Exception(_('Unable to handle %s filetype') % ftype)
-            opener = finderfunc()
-            opener(fname)
-            gc.collect()
-
+            if not finderfunc and sys.platform in ['win32', 'nt']:
+                os.startfile( fname )
+            else:
+                opener = finderfunc()
+                opener(fname)
+                gc.collect()
 
 printer = Printer()
 
