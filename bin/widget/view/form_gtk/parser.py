@@ -53,6 +53,10 @@ class Button(Observable):
             'label': attrs.get('string', 'unknown')
         }
         self.widget = gtk.Button(**args)
+
+        readonly = bool(int(attrs.get('readonly', '0')))
+        self.widget.set_sensitive( not readonly )
+
         if attrs.get('icon', False):
             try:
                 stock = attrs['icon']
