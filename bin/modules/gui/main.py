@@ -931,6 +931,9 @@ class terp_main(service.Service):
         box.pack_start(gtk.Label(win.name), True, True)
         box.pack_end(closebtn, False, False)
         self.notebook.append_page(win.widget, box)
+        if hasattr(self.notebook, 'set_tab_reorderable' ):
+            self.notebook.set_tab_reorderable(win.widget, True)
+
         closebtn.connect("clicked", self.sig_win_close,win.widget)
         pagenum = self.notebook.page_num(win.widget)
         pagenum = self.notebook.page_num(image)
