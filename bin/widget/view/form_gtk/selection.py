@@ -57,8 +57,6 @@ class selection(interface.widget_interface):
         self.ok = True
         self._selection={}
         
-        if not attrs.get('required', False):
-            attrs.setdefault('selection', []).insert(0, (None, ''))
         self.set_popdown(attrs.get('selection', []))
 
     def set_popdown(self, selection):
