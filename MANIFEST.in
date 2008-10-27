@@ -2,7 +2,7 @@ include mydistutils.py
 include msgfmt.py
 recursive-include bin *.py *.png *.txt *.mo *.po
 recursive-include bin *.png *.txt *.mo *.po
-include bin/terp.glade
+include bin/openerp.glade
 include bin/themes/*/gtkrc
 graft man
 graft doc

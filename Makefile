@@ -7,10 +7,10 @@ all:
 
 clean:
 	rm -f bin/*bak $(PYTHONC_FILES)
-	rm -f bin/terp.gladep
+	rm -f bin/openerp.gladep
 
 translate_get:
-	xgettext -k_ -kN_ -o bin/po/terp-msg.pot $(PYTHON_FILES) bin/terp.glade
+	xgettext -k_ -kN_ -o bin/po/terp-msg.pot $(PYTHON_FILES) bin/openerp.glade
 
 translate_set2:
 	msgfmt bin/po/fr.po -o bin/po/fr/LC_MESSAGES/terp.mo
