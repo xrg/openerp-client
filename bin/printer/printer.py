@@ -104,7 +104,7 @@ class Printer(object):
         else:
             if options.options['printer.preview']:
                 if options.options['printer.softpath'] == 'none':
-                    prog = self._findInPath(['evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview', 'acroread', 'open'])
+                    prog = self._findInPath(['xdg-open', 'evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview', 'acroread', 'open'])
                     def opener(fn):
                         self.__opener( lambda: os.execv(prog, (os.path.basename(prog), fn) ))
                     return opener
