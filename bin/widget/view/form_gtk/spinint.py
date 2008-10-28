@@ -38,7 +38,7 @@ class spinint(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-        adj = gtk.Adjustment(0.0, -sys.maxint, sys.maxint, 1.0, 5.0, 5.0)
+        adj = gtk.Adjustment(0.0, -sys.maxint, sys.maxint, 1.0, 5.0)
         self.widget = gtk.SpinButton(adj, 1, digits=0)
         self.widget.set_numeric(True)
         self.widget.set_width_chars(5)

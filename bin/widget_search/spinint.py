@@ -43,7 +43,7 @@ class spinint(wid_int.wid_int):
 
         self.widget = gtk.HBox(spacing=3)
 
-        adj1 = gtk.Adjustment(0.0, 0.0, sys.maxint, 1.0, 5.0, 5.0)
+        adj1 = gtk.Adjustment(0.0, 0.0, sys.maxint, 1.0, 5.0)
         self.spin1 = gtk.SpinButton(adj1, 1, digits=0)
         self.spin1.set_numeric(True)
         self.spin1.set_activates_default(True)
@@ -51,7 +51,7 @@ class spinint(wid_int.wid_int):
 
         self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
 
-        adj2 = gtk.Adjustment(0.0, 0.0, sys.maxint, 1.0, 5.0, 5.0)
+        adj2 = gtk.Adjustment(0.0, 0.0, sys.maxint, 1.0, 5.0)
         self.spin2 = gtk.SpinButton(adj2, 1, digits=0)
         self.spin2.set_numeric(True)
         self.spin2.set_activates_default(True)
