@@ -20,8 +20,6 @@ InstallDir "$PROGRAMFILES\OpenERP Client"
 ;Get installation folder from registry if available
 InstallDirRegKey HKCU "Software\OpenERP Client" ""
 
-RequestExecutionLevel user
-
 ;BrandingText "OpenERP Client v5.0 Alpha"
 
 ;Vista redirects $SMPROGRAMS to all users without this
@@ -141,7 +139,6 @@ LangString DESC_SecOpenERPClient ${LANG_ENGLISH} "OpenERP Client."
 
 Section "Uninstall"
 	;ADD YOUR OWN FILES HERE...
-	RMDIR /r "$INSTDIR\*.*"
 	RMDIR /r "$INSTDIR" 
 
 	!insertmacro MUI_STARTMENU_GETFOLDER Application $MUI_TEMP
