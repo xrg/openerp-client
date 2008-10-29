@@ -20,6 +20,10 @@ InstallDir "$PROGRAMFILES\OpenERP Client"
 ;Get installation folder from registry if available
 InstallDirRegKey HKCU "Software\OpenERP Client" ""
 
+RequestExecutionLevel user
+
+;BrandingText "OpenERP Client v5.0 Alpha"
+
 ;Vista redirects $SMPROGRAMS to all users without this
 RequestExecutionLevel admin
 
@@ -38,10 +42,15 @@ Var STARTMENU_FOLDER
 ;Pages
 
 !define MUI_ICON ".\bin\pixmaps\openerp.ico"
-!define MUI_UNICON ".\bin\pixmaps\openerp.ico"
-!define MUI_WELCOMEFINISHPAGE_BITMAP ".\bin\pixmaps\tinyerp-intro.bmp"
+;--!define MUI_UNICON ".\bin\pixmaps\openerp.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP ".\bin\pixmaps\openerp-intro.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP ".\bin\pixmaps\openerp-intro.bmp"
 !define MUI_HEADERIMAGE
-!define MUI_HEADERIMAGE_BITMAP ".\bin\pixmaps\tinyerp-header.bmp"
+!define MUI_HEADERIMAGE_BITMAP_NOSTRETCH
+!define MUI_HEADER_TRANSPARENT_TEXT ""
+!define MUI_HEADERIMAGE_BITMAP ".\bin\pixmaps\openerp-slogan.bmp"
+;-- !define MUI_WELCOMEPAGE_TITLE "OpenERP grrrr"
+;-- !define MUI_WELCOMEPAGE_TEXT "Superman"
 
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "doc\\License.rtf"
@@ -100,7 +109,7 @@ Section "OpenERP Client" SecOpenERPClient
 	WriteRegStr HKCU "Software\OpenERP Client" "" $INSTDIR
 
 	;Create uninstaller
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client" "DisplayName" "OpenERP Client (remove only)"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client" "DisplayName" "OpenERP Client 5.0"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client" "UninstallString" "$INSTDIR\Uninstall.exe"
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 
@@ -108,9 +117,10 @@ Section "OpenERP Client" SecOpenERPClient
 
 	;Create shortcuts
 	CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
-	CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\OpenERP Client.lnk" "$INSTDIR\openerp-client.exe"
-
 	!insertmacro CreateInternetShortcut "$SMPROGRAMS\$STARTMENU_FOLDER\Documentation" "http://www.openerp.com"
+        CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\uninstall.exe"
+	CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\OpenERP Client.lnk" "$INSTDIR\openerp-client.exe"
+        CreateShortCut "$DESKTOP\OpenERP Client.lnk" "$INSTDIR\openerp-client.exe"
 
 	!insertmacro MUI_STARTMENU_WRITE_END
 
@@ -138,6 +148,8 @@ Section "Uninstall"
 
 	Delete "$SMPROGRAMS\$MUI_TEMP\Documentation.url"
 	Delete "$SMPROGRAMS\$MUI_TEMP\OpenERP Client.lnk"
+	Delete "$SMPROGRAMS\$MUI_TEMP\Uninstall.lnk"
+        Delete "$DESKTOP\OpenERP Client.lnk"
 
 	;Delete empty start menu parent diretories
 	StrCpy $MUI_TEMP "$SMPROGRAMS\$MUI_TEMP"
