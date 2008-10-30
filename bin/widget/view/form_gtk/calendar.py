@@ -39,6 +39,7 @@ import interface
 import locale
 import rpc
 import service
+import tools
 
 import date_widget
 
@@ -46,13 +47,9 @@ DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 HM_FORMAT = '%H:%M:%S'
 
-if not hasattr(locale, 'nl_langinfo'):
-    locale.nl_langinfo = lambda *a: '%x'
-
 LDFMT = locale.nl_langinfo(locale.D_FMT)
 for x,y in [('%y','%Y'),('%B',''),('%A','')]:
     LDFMT = LDFMT.replace(x, y)
-
 
 class calendar(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):

@@ -28,6 +28,9 @@
 #
 ##############################################################################
 
+import os
+if os.name == 'nt':
+    import win32
 
 def expr_eval(string, context={}):
     import rpc

@@ -295,12 +295,6 @@ class GenericDate(Char):
             time.strptime(res, self.server_format)
         return res
 
-if not hasattr(locale, 'nl_langinfo'):
-    locale.nl_langinfo = lambda *a: '%x'
-
-if not hasattr(locale, 'D_FMT'):
-    locale.D_FMT = None
-
 class Date(GenericDate):
     server_format = '%Y-%m-%d'
     display_format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')

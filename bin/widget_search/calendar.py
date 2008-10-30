@@ -28,6 +28,7 @@
 #
 ##############################################################################
 
+import tools
 import time
 import datetime as DT
 import gtk
@@ -36,12 +37,6 @@ import gettext
 import locale
 import wid_int
 import date_widget
-
-if not hasattr(locale, 'nl_langinfo'):
-    locale.nl_langinfo = lambda *a: '%x'
-
-if not hasattr(locale, 'D_FMT'):
-    locale.D_FMT = None
 
 LDFMT = locale.nl_langinfo(locale.D_FMT)
 for x,y in [('%y','%Y'),('%B',''),('%A','')]:

@@ -28,7 +28,7 @@ import gtk
 import re
 
 import tools
-import tools.datetime
+import tools.datetime_util
 import time
 from mx.DateTime import DateTime
 
@@ -40,7 +40,7 @@ class DateEntry(gtk.Entry):
 
         self.format = format
         self.regex = self.initial_value = format
-        for key,val in tools.datetime.date_mapping.items():
+        for key,val in tools.datetime_util.date_mapping.items():
             self.regex = self.regex.replace(key, val[1])
             self.initial_value = self.initial_value.replace(key, val[0])
 
@@ -145,11 +145,11 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
                 tc = tc[:a] + tt[a] + tc[a+1:]
         try:
             self.set_text(tc)
-            return tools.datetime.strptime(tc, self.format)
+            return tools.datetime_util.strptime(tc, self.format)
         except:
             tc = tt
         self.set_text(tc)
-        return tools.datetime.strptime(tc, self.format)
+        return tools.datetime_util.strptime(tc, self.format)
 
     def delete_text(self, start, end):
         print 'DELETE TEXT'
@@ -224,13 +224,13 @@ class ComplexEntry(gtk.HBox):
             data = self.widget.get_text()
             if (not event) or event.keyval != gtk.keysyms.Escape:
                 cmd = self.widget_cmd.get_text()
-                for r,f in tools.datetime.date_operation.items():
+                for r,f in tools.datetime_util.date_operation.items():
                     groups = re.match(r, cmd)
                     if groups:
                         dt = self.widget.date_get()
                         if not dt:
                             dt = time.strftime(self.widget.format, time.localtime())
-                            dt = tools.datetime.strptime(dt, self.widget.format)
+                            dt = tools.datetime_util.strptime(dt, self.widget.format)
                         self.widget.date_set(f(dt,groups))
                         break
 
