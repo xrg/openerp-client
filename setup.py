@@ -157,7 +157,7 @@ if os.name <> 'nt' and sys.argv[1] == 'build_po':
 options = {"py2exe": {"compressed": 1,
                       "optimize": 2,
                       "packages": ["encodings","gtk", "matplotlib", "pytz"],
-                      "includes": "pango,atk,gobject,cairo,atk,pangocairo",
+                      "includes": "pango,atk,gobject,cairo,atk,pangocairo,matplotlib._path",
                       "excludes": ["Tkinter", "tcl", "TKconstants"],
                       "dll_excludes": [
                           "iconv.dll","intl.dll","libatk-1.0-0.dll",
