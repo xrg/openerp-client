@@ -28,7 +28,6 @@
 #
 ##############################################################################
 
-
 import locale
 import gtk
 from gtk import glade
@@ -36,17 +35,6 @@ from gtk import glade
 import tools
 import rpc
 from widget.view import interface
-
-import tinygraph
-
-import matplotlib
-
-matplotlib.rcParams['xtick.labelsize'] = 10
-matplotlib.rcParams['ytick.labelsize'] = 10
-
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
-
 
 import StringIO
 
@@ -63,6 +51,13 @@ if not hasattr(locale, 'nl_langinfo'):
 if not hasattr(locale, 'D_FMT'):
     locale.D_FMT = None
 
+import tinygraph
+import matplotlib
+
+matplotlib.rcParams['xtick.labelsize'] = 10
+matplotlib.rcParams['ytick.labelsize'] = 10
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
 
 class ViewGraph(object):
     def __init__(self, model, axis, fields, axis_data={}, attrs={}):

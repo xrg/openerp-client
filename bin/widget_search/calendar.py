@@ -37,17 +37,17 @@ import locale
 import wid_int
 import date_widget
 
-LDFMT = locale.nl_langinfo(locale.D_FMT)
-for x,y in [('%y','%Y'),('%B',''),('%A','')]:
-    LDFMT = LDFMT.replace(x, y)
-
-DT_FORMAT = '%Y-%m-%d'
-
 if not hasattr(locale, 'nl_langinfo'):
     locale.nl_langinfo = lambda *a: '%x'
 
 if not hasattr(locale, 'D_FMT'):
     locale.D_FMT = None
+
+LDFMT = locale.nl_langinfo(locale.D_FMT)
+for x,y in [('%y','%Y'),('%B',''),('%A','')]:
+    LDFMT = LDFMT.replace(x, y)
+
+DT_FORMAT = '%Y-%m-%d'
 
 class calendar(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}):
