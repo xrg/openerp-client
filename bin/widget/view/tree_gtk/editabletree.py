@@ -159,7 +159,6 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         path, column = self.get_cursor()
         store = self.get_model()
         model = store.get_value(store.get_iter(path), 0)
-
         if event.keyval in self.leaving_events:
             shift_pressed = bool(gtk.gdk.SHIFT_MASK & event.state)
             if isinstance(entry, gtk.Entry):
@@ -171,9 +170,9 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
                     if line[1] == txt:
                         break
                 if event.keyval == gtk.keysyms.Up:
-                    entry.set_active((idx - 1) % 3)
+                    entry.set_active((idx - 1) % len(model))
                 elif event.keyval == gtk.keysyms.Down:
-                    entry.set_active((idx + 1) % 3)
+                    entry.set_active((idx + 1) % len(model))
                 return True
             else:
                 txt = entry.get_active_text()
