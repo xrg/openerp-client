@@ -94,7 +94,8 @@ Section "OpenERP Client" SecOpenERPClient
         ClearErrors
         ReadRegStr $0 HKCU "Software\OpenERP Client" ""
         IfErrors +2 0
-            Abort "Can't install this version of OpenERP Client, because there is a previous installation on this system !"
+            MessageBox MB_OK "Can't install this version of OpenERP Client because there is a previous installation on this system !"
+            Quit
 
 	SetOutPath "$INSTDIR"
   
