@@ -457,35 +457,6 @@ class terp_main(service.Service):
         self.shortcut_menu = self.glade.get_widget('shortcut')
 
         #
-        # Code to add themes to the options->theme menu
-        #
-        submenu = gtk.Menu()
-        menu = self.glade.get_widget('menu_theme')
-        old = None
-        themes_path = common.terp_path('themes')
-        if themes_path:
-            for dname in os.listdir(themes_path):
-                if dname.startswith('.'):
-                    continue
-                fname = common.terp_path(os.path.join('themes', dname, 'gtkrc'))
-                if fname and os.path.isfile(fname):
-                    open_item = gtk.RadioMenuItem(old, dname)
-                    old = open_item
-                    submenu.append(open_item)
-                    if dname == options.options['client.theme']:
-                        open_item.set_active(True)
-                    open_item.connect('toggled', self.theme_select, dname)
-
-        submenu.append(gtk.SeparatorMenuItem())
-        open_item = gtk.RadioMenuItem(old, _('Default Theme'))
-        submenu.append(open_item)
-        if 'none'==options.options['client.theme']:
-            open_item.set_active(True)
-        open_item.connect('toggled', self.theme_select, 'none')
-        submenu.show_all()
-        menu.set_submenu(submenu)
-
-        #
         # Default Notebook
         #
 

@@ -894,54 +894,6 @@
                           </widget>
                         </child>
                         <child>
-                          <widget class="GtkImageMenuItem" id="menu_theme">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">_Theme</property>
-                            <property name="use_underline">True</property>
-                            <signal name="activate" handler="on_theme1_activate"/>
-                            <child>
-                              <widget class="GtkMenu" id="menu_theme_menu">
-                                <child>
-                                  <widget class="GtkMenuItem" id="tiny_erp_theme1">
-                                    <property name="visible">True</property>
-                                    <property name="label" translatable="yes">OpenERP Theme</property>
-                                    <property name="use_underline">True</property>
-                                    <signal name="activate" handler="on_tiny_erp_theme1_activate"/>
-                                  </widget>
-                                </child>
-                                <child>
-                                  <widget class="GtkMenuItem" id="aqua_os_x">
-                                    <property name="visible">True</property>
-                                    <property name="label">Aqua OS X</property>
-                                    <property name="use_underline">True</property>
-                                    <signal name="activate" handler="on_aqua_os_x_activate"/>
-                                  </widget>
-                                </child>
-                                <child>
-                                  <widget class="GtkSeparatorMenuItem" id="séparateur14">
-                                    <property name="visible">True</property>
-                                  </widget>
-                                </child>
-                                <child>
-                                  <widget class="GtkMenuItem" id="default_theme">
-                                    <property name="visible">True</property>
-                                    <property name="label" translatable="yes">Default Theme</property>
-                                    <property name="use_underline">True</property>
-                                    <signal name="activate" handler="on_default_theme_activate"/>
-                                  </widget>
-                                </child>
-                              </widget>
-                            </child>
-                            <child internal-child="image">
-                              <widget class="GtkImage" id="image4237">
-                                <property name="visible">True</property>
-                                <property name="stock">gtk-select-color</property>
-                                <property name="icon_size">1</property>
-                              </widget>
-                            </child>
-                          </widget>
-                        </child>
-                        <child>
                           <widget class="GtkMenuItem" id="forms1">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">_Forms</property>
