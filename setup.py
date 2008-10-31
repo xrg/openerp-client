@@ -91,10 +91,6 @@ def data_files():
         else:
             files.append(datafiles)
         os.chdir('bin')
-        for (dp,dn,names) in os.walk('themes'):
-            if '.svn' in dn:
-                dn.remove('.svn')
-            files.append((dp, map(lambda x: opj('bin', dp,x), names)))
         for (dp, dn, names) in os.walk('share\\locale'):
             if '.svn' in dn:
                 dn.remove('.svn')
