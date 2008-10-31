@@ -107,6 +107,16 @@ class Screen(signal_event.signal_event):
             self.screen_container.set(view.widget)
         self.display()
 
+
+    def readonly_get(self):
+        return self._readonly
+
+    def readonly_set(self, value):
+        self._readonly = value
+        self.models._readonly = value
+
+    readonly = property(readonly_get, readonly_set)
+
     def search_active(self, active=True):
 
         if active and self.show_search:
@@ -307,8 +317,6 @@ class Screen(signal_event.signal_event):
                         if attrs['widget']=='one2many_list':
                             attrs['widget']='one2many'
                         attrs['type'] = attrs['widget']
-                    if self.readonly:
-                        attrs['readonly'] = 1
                     try:
                         fields[str(attrs['name'])].update(attrs)
                     except:

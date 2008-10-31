@@ -56,5 +56,4 @@ class button(interface.widget_interface):
     value = property(_value_get, _value_set, None,
       'The content of the widget or ValueError if not valid')
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

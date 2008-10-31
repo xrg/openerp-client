@@ -74,10 +74,11 @@ class main(service.Service):
         return True
 
     def execute(self, act_id, datas, type=None, context={}):
+        act_id = int(act_id)
         ctx = rpc.session.context.copy()
         ctx.update(context)
         if type is None:
-            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', act_id, ['type'], ctx)
+            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', int(act_id), ['type'], ctx)
             if not (res and len(res)):
                 raise Exception, 'ActionNotFound'
             type=res['type']

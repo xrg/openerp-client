@@ -89,6 +89,7 @@ class ModelList(list):
 class ModelRecordGroup(signal_event.signal_event):
     def __init__(self, resource, fields, ids=[], parent=None, context={}, is_wizard=False):
         super(ModelRecordGroup, self).__init__()
+        self._readonly = False
         self.parent = parent
         self._context = context
         self._context.update(rpc.session.context)
