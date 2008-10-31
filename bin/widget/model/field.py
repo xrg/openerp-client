@@ -138,13 +138,18 @@ class CharField(object):
                 if result:
                    self.get_state_attrs(model)[k]=True
               
+
     def state_set(self, model, state='draft'):
+        ro = model.mgroup._readonly
         state_changes = dict(self.attrs.get('states',{}).get(state,[]))
-        for key in ('readonly', 'required'):
-            if key in state_changes:
-                self.get_state_attrs(model)[key] = state_changes[key]
-            else:
-                self.get_state_attrs(model)[key] = self.attrs[key]
+        if 'readonly' in state_changes:
+            self.get_state_attrs(model)['readonly'] = state_changes['readonly'] or ro
+        else:
+            self.get_state_attrs(model)['readonly'] = self.attrs['readonly'] or ro
+        if 'required' in state_changes:
+            self.get_state_attrs(model)['required'] = state_changes['required']
+        else:
+            self.get_state_attrs(model)['required'] = self.attrs['required']
         if 'value' in state_changes:
             self.set(model, value, test_state=False, modified=True)
 
