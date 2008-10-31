@@ -93,10 +93,11 @@ Var STARTMENU_FOLDER
 Section "OpenERP Client" SecOpenERPClient
         ClearErrors
         ReadRegStr $0 HKCU "Software\OpenERP Client" ""
-        IfErrors +2 0
+        IfErrors DoInstall 0
             MessageBox MB_OK "Can't install this version of OpenERP Client because there is a previous installation on this system !"
             Quit
 
+        DoInstall:
 	SetOutPath "$INSTDIR"
   
 	;ADD YOUR OWN FILES HERE...
