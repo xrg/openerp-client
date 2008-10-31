@@ -92,8 +92,6 @@ def data_files():
             files.append(datafiles)
         os.chdir('bin')
         for (dp, dn, names) in os.walk('share\\locale'):
-            if '.svn' in dn:
-                dn.remove('.svn')
             files.append((dp, map(lambda x: opj('bin', dp, x), names)))
         os.chdir('..')
         files.append((".",["bin\\openerp.glade", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
