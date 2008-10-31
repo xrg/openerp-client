@@ -20,7 +20,7 @@ InstallDir "$PROGRAMFILES\OpenERP Client"
 ;Get installation folder from registry if available
 InstallDirRegKey HKCU "Software\OpenERP Client" ""
 
-;BrandingText "OpenERP Client v5.0 Alpha"
+BrandingText "OpenERP Client v5.0-Alpha"
 
 ;Vista redirects $SMPROGRAMS to all users without this
 RequestExecutionLevel admin
@@ -51,7 +51,7 @@ Var STARTMENU_FOLDER
 ;-- !define MUI_WELCOMEPAGE_TEXT "Superman"
 
 !insertmacro MUI_PAGE_WELCOME
-!insertmacro MUI_PAGE_LICENSE "doc\\License.rtf"
+!insertmacro MUI_PAGE_LICENSE "doc\License.rtf"
 # !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_DIRECTORY
 
@@ -95,13 +95,13 @@ Section "OpenERP Client" SecOpenERPClient
 	SetOutPath "$INSTDIR"
   
 	;ADD YOUR OWN FILES HERE...
-	File /r "dist\\*"
+	File /r "dist\*"
 
-	SetOutPath "$INSTDIR\\GTK"
+	SetOutPath "$INSTDIR\GTK"
 	File /r "C:\GTK\*"
 
-	SetOutPath "$INSTDIR\\doc"
-	File "doc\\*"
+	SetOutPath "$INSTDIR\doc"
+	File "doc\*"
 
 	;Store installation folder
 	WriteRegStr HKCU "Software\OpenERP Client" "" $INSTDIR
