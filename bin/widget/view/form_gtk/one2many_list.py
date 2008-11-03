@@ -106,6 +106,7 @@ class dialog(object):
         x,y = self.screen.screen_container.size_get()
         vp.set_size_request(x,y+30)
         self.dia.show_all()
+        self.screen.readonly = readonly
         self.screen.display()
 
     def new(self):

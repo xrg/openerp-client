@@ -89,7 +89,7 @@ class Printer(object):
         os.waitpid(pid, 0)
 
     def _findPDFOpener(self):
-        if os.uname()[0] == 'Darwin' :
+        if os.name != 'nt' and os.uname()[0] == 'Darwin' :
             def opener(fn):
                 self.__opener( lambda: os.system('/usr/bin/open -a Preview ' + fn) )
             return opener

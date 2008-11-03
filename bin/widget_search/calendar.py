@@ -141,7 +141,9 @@ class calendar(wid_int.wid_int):
         win.destroy()
 
     def clear(self):
-        self.value = ''
+        self.widget1.clear()
+        self.widget2.clear()
+        #self.value = ''
 
     def sig_activate(self, fct):
         self.entry1.connect_after('activate', fct)

@@ -152,7 +152,6 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         return tools.datetime_util.strptime(tc, self.format)
 
     def delete_text(self, start, end):
-        print 'DELETE TEXT'
         self._interactive_input = False
         try:
             gtk.Entry.delete_text(self, start, end)
@@ -204,6 +203,9 @@ class ComplexEntry(gtk.HBox):
         self.widget_cmd.hide()
         self.pack_start(self.widget, expand=True, fill=True)
         self.pack_start(self.widget_cmd, expand=False, fill=True)
+
+    def clear(self):
+        self.widget.clear()
 
     def _date_cb(self, event):
         if event.keyval in (gtk.keysyms.BackSpace,):

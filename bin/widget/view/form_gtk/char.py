@@ -61,7 +61,7 @@ class char(interface.widget_interface):
 
     def _readonly_set(self, value):
         self.widget.set_editable(not value)
-        self.widget.set_sensitive(not value)
+        #self.widget.set_sensitive(not value)
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
