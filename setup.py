@@ -197,7 +197,7 @@ setup(name             = name,
                           'openerp-client.plugins'] + list(find_plugins()),
       package_dir      = {'openerp-client': 'bin'},
       distclass = os.name <> 'nt' and L10nAppDistribution or None,
-      windows=[{"script":"bin\\openerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\openerp.ico")]}],
+      windows=[{"script":"bin\\openerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\openerp-icon.ico")]}],
       options = options,
       )
 
