@@ -67,7 +67,7 @@ terp_path = _search_file
 terp_path_pixmaps = lambda x: _search_file(x, 'path.pixmaps')
 
 OPENERP_ICON = gtk.gdk.pixbuf_new_from_file(
-            terp_path_pixmaps('tinyerp-icon-32x32.png'))
+            terp_path_pixmaps('openerp-icon.png'))
 
 def selection(title, values, alwaysask=False, parent=None):
     if not values or len(values)==0:
