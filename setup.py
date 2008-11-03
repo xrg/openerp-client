@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 ##############################################################################
@@ -28,6 +27,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ###############################################################################
+
 # setup from TinERP
 #   taken from straw http://www.nongnu.org/straw/index.html
 #   taken from gnomolicious http://www.nongnu.org/gnomolicious/
