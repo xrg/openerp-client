@@ -47,12 +47,10 @@ Var STARTMENU_FOLDER
 !define MUI_HEADERIMAGE_BITMAP_NOSTRETCH
 !define MUI_HEADER_TRANSPARENT_TEXT ""
 !define MUI_HEADERIMAGE_BITMAP ".\bin\pixmaps\openerp-slogan.bmp"
-;-- !define MUI_WELCOMEPAGE_TITLE "OpenERP grrrr"
-;-- !define MUI_WELCOMEPAGE_TEXT "Superman"
+!define MUI_LICENSEPAGE_TEXT_BOTTOM "Usually, a proprietary license provides with the software: limited number of users, limited in time usage, etc. This Open Source license is the opposite: it garantees you the right to use, copy, study, distribute and modify Open ERP for free."
 
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "doc\License.rtf"
-# !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_DIRECTORY
 
 ;Start Menu Folder Page Configuration
@@ -89,15 +87,17 @@ Var STARTMENU_FOLDER
 
 ;--------------------------------
 ;Installer Sections
+;
+Function .onInit 
+    ClearErrors
+    ReadRegStr $0 HKCU "Software\OpenERP Client" ""
+    IfErrors DoInstall 0
+        MessageBox MB_OK "Can not install the Open ERP Client because a previous installation already exists on this system. Please uninstall your current installation and relaunch this setup wizard."
+        Quit
+    DoInstall:
+FunctionEnd
 
 Section "OpenERP Client" SecOpenERPClient
-        ClearErrors
-        ReadRegStr $0 HKCU "Software\OpenERP Client" ""
-        IfErrors DoInstall 0
-            MessageBox MB_OK "Can't install this version of OpenERP Client because there is a previous installation on this system !"
-            Quit
-
-        DoInstall:
 	SetOutPath "$INSTDIR"
   
 	;ADD YOUR OWN FILES HERE...
