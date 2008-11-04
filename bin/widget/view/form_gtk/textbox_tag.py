@@ -94,11 +94,6 @@ class textbox_tag(interface.widget_interface):
                 gtk.JUSTIFY_RIGHT : 'RIGHT',
                 gtk.JUSTIFY_LEFT : 'LEFT'
                 }
-    html_tags ={'style':{'italic':'i'},
-                'weight':{ 700:'b',},
-                'underline':{'single':'u'},
-                'strikethrough':{'true':'s'},
-                }
 
     def __init__(self,window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
@@ -184,7 +179,7 @@ class textbox_tag(interface.widget_interface):
             pass
 
     def _font_changed(self, widget, event=None):
-        font_desc = pango.FontDescription('Normal '+str(widget.get_font_name()))
+        font_desc = pango.FontDescription(str(widget.get_font_name()))
 #        self.leading = int(widget.get_value()*1.6)
         self.apply_font_and_attrs(font_desc, [])
 
@@ -197,18 +192,18 @@ class textbox_tag(interface.widget_interface):
     def get_tags_from_attrs (self, font,lang,attrs):
         tags = []
         if font:
-            font,fontattrs = self.fontdesc_to_attrs(font)
-            fontdesc = font.to_string()
+            font1,fontattrs = self.fontdesc_to_attrs(font)
+            fontdesc = font1.to_string()
             if fontattrs:
                 attrs.extend(fontattrs)
             if fontdesc and fontdesc!='Normal':
-                if not self.tags.has_key(font.to_string()):
+                if not self.tags.has_key(font1.to_string()):
                     tag=self.buf.create_tag()
-                    tag.set_property('font-desc',font)
+                    tag.set_property('font_desc',font)
                     if not self.tagdict.has_key(tag): self.tagdict[tag]={}
-                    self.tagdict[tag]['font_desc']=font.to_string()
-                    self.tags[font.to_string()]=tag
-                tags.append(self.tags[font.to_string()])
+                    self.tagdict[tag]['style']="font-family:Ani"
+                    self.tags[font1.to_string()]=tag
+                tags.append(self.tags[font1.to_string()])
         if lang:
             if not self.tags.has_key(lang):
                 tag = self.buf.create_tag()
@@ -286,7 +281,6 @@ class textbox_tag(interface.widget_interface):
         txt = self.buf.get_text(self.buf.get_start_iter(), self.buf.get_end_iter())
         cuts = {}
         for k,v in tagdict.items():
-            print "calll ",k
             stag,etag = self.tag_to_markup(k)
             for st,end in v:
                 if cuts.has_key(st):
@@ -311,23 +305,14 @@ class textbox_tag(interface.widget_interface):
         outbuff = '<span alignment="' + self.alignment_markup[self.justify] \
                 + '" leading="' + str(self.leading) + '">' + outbuff + '</span>'
         self.value=outbuff
-        print "outbuff",outbuff
         return outbuff
 
     def tag_to_markup (self, tag):
         stag="<span"
-#        etag=False
         for k,v in self.tagdict[tag].items():
-#            print"SSSSSSSSSSSSSSSSSSSSSSSSsss", k ,v
-#            if k in ['style','weight','underline','strikethrough']:
-#                stag ="<"+self.html_tags[k][v]+">"
-#                etag="</"+self.html_tags[k][v]+">"
-#            else:
             stag += ' %s="%s"'%(k,v)
-#        if not etag:
         stag += ">"
-        etag="</span>"
-        return stag,etag
+        return stag,"</span>"
 
     def fontdesc_to_attrs (self,font):
         nicks = font.get_set_fields().value_nicks
@@ -407,7 +392,6 @@ class textbox_tag(interface.widget_interface):
     def set_text (self, txt):
         buf = self.tv.get_buffer()
         txt = re.sub('<span alignment[^>]*>', '<span>', txt)
-        print "text",txt
 #        txt=common.to_xml(txt)
         try:
             parsed, txt, separator = pango.parse_markup(txt, u'0')
@@ -416,18 +400,15 @@ class textbox_tag(interface.widget_interface):
         try:
             attrIter = parsed.get_iterator()
         except Exception ,e:
-            common.warning("Either the Message contains HTML tags or '<' or '>' or '&' or the selected Fonts are not supported!",'User Error')
-            return True
+#            common.warning("Either the Message contains HTML tags or the selected Fonts are not supported!",'User Error')
+#            self._focus_out()
+            return False
         buf.delete(buf.get_start_iter(), buf.get_end_iter())
         while True:
             range=attrIter.range()
-            print "Ranged",range
             font,lang,attrs = attrIter.get_font()
             tags = self.get_tags_from_attrs(font, lang, attrs)
             text = txt[range[0]:range[1]]
-            print "texxxxxxxxX",text
-            print "tabeeee",tags
-            print "buf.get_end_iter()",buf.get_end_iter()
             if tags:
                 buf.insert_with_tags(buf.get_end_iter(), text, *tags)
             else:
@@ -479,9 +460,7 @@ class textbox_tag(interface.widget_interface):
                 self.internal_toggle=False
 
     def display(self, model, model_field):
-        print "selfff",self.buf
         self.remove_all_tags()
-        print "wwwwwwwwwwwwwwwwwselfff",self.buf
         super(textbox_tag, self).display(model, model_field)
         value = model_field and model_field.get(model)
         if not self.value:
@@ -489,31 +468,28 @@ class textbox_tag(interface.widget_interface):
         self.set_text(self.value)
 
     def set_value(self, model, model_field):
-#        aparser = xml.sax.make_parser()
-#        eob = self.buf.get_end_iter()
-#        print "aparser",aparser,self
-#        aparser.setContentHandler(HtmlHandler(self.tv, eob))
-#        #parser.setEntityResolver(HtmlEntityResolver())
-#        txt=self.get_text()
-#        print "rrrr",txt
-#        aparser.parse(StringIO(txt))
-#        if not eob.starts_line():
-#            self.buf.insert(eob, "\n")
-#        print "buffer",self.buf
-#        txt = self.buf.get_text(self.buf.get_start_iter(), self.buf.get_end_iter())
-         model_field.set_client(model, self.get_text() or False)
+        aparser = xml.sax.make_parser()
+        eob = self.buf.get_end_iter()
+        aparser.setContentHandler(HtmlHandler(self.tv, eob))
+        #parser.setEntityResolver(HtmlEntityResolver())
+        txt=self.get_text()
+        aparser.parse(StringIO(txt))
+        if not eob.starts_line():
+            self.buf.insert(eob, "\n")
+        txt = self.buf.get_text(self.buf.get_start_iter(), self.buf.get_end_iter())
+        model_field.set_client(model, self.get_text() or False)
 
-#class HtmlHandler(xml.sax.handler.ContentHandler):
-#
-#    def __init__(self, textview, startiter):
-#        xml.sax.handler.ContentHandler.__init__(self)
-#        self.textbuf = textview.get_buffer()
-#        self.textview = textview
-#        self.iter = startiter
-#        self.text = ''
-#        self.styles = [] # a gtk.TextTag or None, for each span level
-#        self.list_counters = [] # stack (top at head) of list
-#                                # counters, or None for unordered list
+class HtmlHandler(xml.sax.handler.ContentHandler):
+
+    def __init__(self, textview, startiter):
+        xml.sax.handler.ContentHandler.__init__(self)
+        self.textbuf = textview.get_buffer()
+        self.textview = textview
+        self.iter = startiter
+        self.text = ''
+        self.styles = [] # a gtk.TextTag or None, for each span level
+        self.list_counters = [] # stack (top at head) of list
+                                # counters, or None for unordered list
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
