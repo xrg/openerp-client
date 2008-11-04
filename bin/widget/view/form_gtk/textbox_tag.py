@@ -46,7 +46,7 @@ from cStringIO import StringIO
 
 class textbox_tag(interface.widget_interface):
     desc_to_attr_table = {
-        'family':[pango.AttrFamily,""],
+#        'family':[pango.AttrFamily,""],
         'style':[pango.AttrStyle,pango.STYLE_NORMAL],
         'variant':[pango.AttrVariant,pango.VARIANT_NORMAL],
         'weight':[pango.AttrWeight,pango.WEIGHT_NORMAL],
@@ -199,9 +199,9 @@ class textbox_tag(interface.widget_interface):
             if fontdesc and fontdesc!='Normal':
                 if not self.tags.has_key(font1.to_string()):
                     tag=self.buf.create_tag()
-                    tag.set_property('font_desc',font)
+                    tag.set_property('font-desc',font1)
                     if not self.tagdict.has_key(tag): self.tagdict[tag]={}
-                    self.tagdict[tag]['style']="font-family:Ani"
+                    self.tagdict[tag]['style']="font-family:"+str(font.get_family())
                     self.tags[font1.to_string()]=tag
                 tags.append(self.tags[font1.to_string()])
         if lang:
@@ -392,7 +392,6 @@ class textbox_tag(interface.widget_interface):
     def set_text (self, txt):
         buf = self.tv.get_buffer()
         txt = re.sub('<span alignment[^>]*>', '<span>', txt)
-#        txt=common.to_xml(txt)
         try:
             parsed, txt, separator = pango.parse_markup(txt, u'0')
         except Exception ,e:
@@ -468,15 +467,16 @@ class textbox_tag(interface.widget_interface):
         self.set_text(self.value)
 
     def set_value(self, model, model_field):
-        aparser = xml.sax.make_parser()
-        eob = self.buf.get_end_iter()
-        aparser.setContentHandler(HtmlHandler(self.tv, eob))
-        #parser.setEntityResolver(HtmlEntityResolver())
-        txt=self.get_text()
-        aparser.parse(StringIO(txt))
-        if not eob.starts_line():
-            self.buf.insert(eob, "\n")
-        txt = self.buf.get_text(self.buf.get_start_iter(), self.buf.get_end_iter())
+#        aparser = xml.sax.make_parser()
+#        eob = self.buf.get_end_iter()
+#        aparser.setContentHandler(HtmlHandler(self.tv, eob))
+#        #parser.setEntityResolver(HtmlEntityResolver())
+#        txt=self.get_text()
+#        aparser.parse(StringIO(txt))
+#        if not eob.starts_line():
+#            self.buf.insert(eob, "\n")
+#        txt = self.buf.get_text(self.buf.get_start_iter(), self.buf.get_end_iter())
+#        print"text",aparser
         model_field.set_client(model, self.get_text() or False)
 
 class HtmlHandler(xml.sax.handler.ContentHandler):
@@ -487,9 +487,9 @@ class HtmlHandler(xml.sax.handler.ContentHandler):
         self.textview = textview
         self.iter = startiter
         self.text = ''
-        self.styles = [] # a gtk.TextTag or None, for each span level
-        self.list_counters = [] # stack (top at head) of list
-                                # counters, or None for unordered list
+        self.styles = []
+        self.list_counters = []
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
