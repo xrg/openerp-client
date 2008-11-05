@@ -212,6 +212,7 @@ class textbox_tag(interface.widget_interface):
             tags.append(self.tags[lang])
         if attrs:
             for a in attrs:
+
                 if a.type == pango.ATTR_FOREGROUND:
                     gdkcolor = self.pango_color_to_gdk(a.color)
                     key = 'foreground%s'%self.color_to_hex(gdkcolor)
@@ -219,7 +220,7 @@ class textbox_tag(interface.widget_interface):
                         self.tags[key]=self.buf.create_tag()
                         self.tags[key].set_property('foreground-gdk',gdkcolor)
                         self.tagdict[self.tags[key]]={}
-                        self.tagdict[self.tags[key]]['foreground']="#%s"%self.color_to_hex(gdkcolor)
+                        self.tagdict[self.tags[key]]['style']="color:"+"#%s"%self.color_to_hex(gdkcolor)
                     tags.append(self.tags[key])
                 if a.type == pango.ATTR_BACKGROUND:
                     gdkcolor = self.pango_color_to_gdk(a.color)
@@ -302,8 +303,8 @@ class textbox_tag(interface.widget_interface):
             for tag in cuts[c]:
                 outbuff += tag
         outbuff += txt[last_pos:]
-        outbuff = '<span alignment="' + self.alignment_markup[self.justify] \
-                + '" leading="' + str(self.leading) + '">' + outbuff + '</span>'
+        outbuff = '<pre><span alignment="' + self.alignment_markup[self.justify] \
+                + '" leading="' + str(self.leading) + '">' + outbuff + '</span></pre>'
         self.value=outbuff
         return outbuff
 
@@ -467,29 +468,7 @@ class textbox_tag(interface.widget_interface):
         self.set_text(self.value)
 
     def set_value(self, model, model_field):
-#        aparser = xml.sax.make_parser()
-#        eob = self.buf.get_end_iter()
-#        aparser.setContentHandler(HtmlHandler(self.tv, eob))
-#        #parser.setEntityResolver(HtmlEntityResolver())
-#        txt=self.get_text()
-#        aparser.parse(StringIO(txt))
-#        if not eob.starts_line():
-#            self.buf.insert(eob, "\n")
-#        txt = self.buf.get_text(self.buf.get_start_iter(), self.buf.get_end_iter())
-#        print"text",aparser
         model_field.set_client(model, self.get_text() or False)
-
-class HtmlHandler(xml.sax.handler.ContentHandler):
-
-    def __init__(self, textview, startiter):
-        xml.sax.handler.ContentHandler.__init__(self)
-        self.textbuf = textview.get_buffer()
-        self.textview = textview
-        self.iter = startiter
-        self.text = ''
-        self.styles = []
-        self.list_counters = []
-
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
