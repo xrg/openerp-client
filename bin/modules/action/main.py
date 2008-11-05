@@ -79,7 +79,7 @@ class main(service.Service):
         self._exec_action(res,datas,context)
 
     def _exec_action(self, action, datas, context={}):
-        if 'type' not in action:
+        if isinstance(action, bool) or 'type' not in action:
             return
         if action['type']=='ir.actions.act_window':
             for key in ('res_id', 'res_model', 'view_type', 'view_mode',
