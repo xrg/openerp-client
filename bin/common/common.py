@@ -434,16 +434,6 @@ def sur_3b(msg, parent=None):
     else:
         return 'cancel'
 
-def theme_set():
-    theme = options['client.theme']
-    if theme and (theme <> 'none'):
-        fname = os.path.join("themes", theme, "gtkrc")
-        if not os.path.isfile(fname):
-            common.warning('File not found: '+fname+'\nSet theme to none in ~/.openerprc', 'Error setting theme')
-            return False
-        gtk.rc_parse("themes/"+theme+"/gtkrc")
-    return True
-
 def ask(question, parent=None):
     dia = glade.XML(terp_path('openerp.glade'), 'win_quest', gettext.textdomain())
     win = dia.get_widget('win_quest')

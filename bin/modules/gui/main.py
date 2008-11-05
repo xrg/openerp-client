@@ -613,12 +613,6 @@ class terp_main(service.Service):
         self.shortcut_menu.set_submenu(menu)
         self.shortcut_menu.set_sensitive(False)
 
-    def theme_select(self, widget, theme):
-        options.options['client.theme'] = theme
-        common.theme_set()
-        self.window.show_all()
-        return True
-
     def sig_menubar(self, option):
         options.options['client.toolbar'] = option
         if option=='both':

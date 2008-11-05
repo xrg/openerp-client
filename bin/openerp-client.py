@@ -145,8 +145,6 @@ for fname in os.listdir(pix_file):
         icon_set = gtk.IconSet (pixbuf)
         factory.add('terp-'+iname, icon_set)
 
-common.theme_set()
-
 try:
     win = modules.gui.main.terp_main()
     if not common.terp_survey():
