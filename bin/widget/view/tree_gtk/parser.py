@@ -554,6 +554,25 @@ class CellRendererButton(gtk.GenericCellRenderer):
         self.yalign = 0.5
         self.textborder = 4
 
+    def __get_states(self):
+        return [e for e in self.attrs.get('states','').split(',') if e]
+
+    def __get_model_state(self, widget, cell_area):
+        path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
+        modelgrp = widget.get_model()
+        model = modelgrp.models[path[0][0]]
+
+        if model and ('state' in model.mgroup.fields):
+            state = model['state'].get(model)
+        else:
+            state = 'draft'
+        return state
+    
+    def __is_visible(self, widget, cell_area):
+        states = self.__get_states()
+        model_state = self.__get_model_state(widget, cell_area)
+        return (not states) or (model_state in states)
+
     def do_set_property(self, pspec, value):
         setattr(self, pspec.name, value)
 
@@ -562,6 +581,10 @@ class CellRendererButton(gtk.GenericCellRenderer):
 
     def on_render(self, window, widget, background_area, cell_area,
             expose_area, flags):
+
+        if not self.__is_visible(widget, cell_area):
+            return True
+
         state = gtk.STATE_NORMAL
         shadow = gtk.SHADOW_OUT
         if self.clicking and flags & gtk.CELL_RENDERER_SELECTED:
@@ -571,12 +594,14 @@ class CellRendererButton(gtk.GenericCellRenderer):
                 None, widget, "button",
                 cell_area.x, cell_area.y,
                 cell_area.width, cell_area.height)
-        layout = widget.create_pango_layout('')
-        layout.set_font_description(widget.style.font_desc)
-        w, h = layout.get_size()
-        x = cell_area.x
-        y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
-        window.draw_layout(widget.style.text_gc[0], x, y, layout)
+        
+        #layout = widget.create_pango_layout('')
+        #layout.set_font_description(widget.style.font_desc)
+        #w, h = layout.get_size()
+        #x = cell_area.x
+        #y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
+        #window.draw_layout(widget.style.text_gc[0], x, y, layout)
+
         layout = widget.create_pango_layout(self.text)
         layout.set_font_description(widget.style.font_desc)
         w, h = layout.get_size()
@@ -600,6 +625,10 @@ class CellRendererButton(gtk.GenericCellRenderer):
 
     def on_start_editing(self, event, widget, path, background_area,
             cell_area, flags):
+        
+        if not self.__is_visible(widget, cell_area):
+            return
+        
         if (event is None) or ((event.type == gtk.gdk.BUTTON_PRESS) \
                 or (event.type == gtk.gdk.KEY_PRESS \
                     and event.keyval == gtk.keysyms.space)):
