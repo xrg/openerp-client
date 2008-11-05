@@ -109,9 +109,9 @@ class Screen(signal_event.signal_event):
 
     readonly = property(readonly_get, readonly_set)
 
-    def search_active(self, active=True):
+    def search_active(self, active=True, show_search=True):
 
-        if active and self.show_search:
+        if active:
             if not self.filter_widget:
                 view_form = rpc.session.rpc_exec_auth('/object', 'execute',
                         self.name, 'fields_view_get', False, 'form',
@@ -133,6 +133,8 @@ class Screen(signal_event.signal_event):
                 self.screen_container.add_filter(self.filter_widget.widget,
                         self.search_filter, self.search_clear)
                 self.filter_widget.set_limit(self.limit)
+
+        if active and show_search:
             self.screen_container.show_filter()
         else:
             self.screen_container.hide_filter()
@@ -498,7 +500,11 @@ class Screen(signal_event.signal_event):
         if self.views:
             self.current_view.display()
             self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
-            self.search_active(self.current_view.view_type in ('tree', 'graph'))
+            vt = self.current_view.view_type
+            self.search_active(
+                    active=vt in ('tree', 'graph', 'calendar'), 
+                    show_search=self.show_search and vt in ('tree', 'graph'),
+            )
 
     def display_next(self):
         self.current_view.set_value()

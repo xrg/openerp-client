@@ -69,7 +69,7 @@ class TinyCalModel(Calendar.Model):
 
 class ViewCalendar(object):
     def __init__(self, model, axis, fields, attrs):
-        self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_calendar',gettext.textdomain())
+        self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_calendar', gettext.textdomain())
         self.widget = self.glade.get_widget('widget_view_calendar')
 
         self._label_current = self.glade.get_widget('label_current')
@@ -92,7 +92,7 @@ class ViewCalendar(object):
         self.process = False
         self.glade.signal_connect('on_but_forward_clicked', self._back_forward, 1)
         self.glade.signal_connect('on_but_back_clicked', self._back_forward, -1)
-        self.glade.signal_connect('on_but_today_clicked', self._today, -1)
+        self.glade.signal_connect('on_but_today_clicked', self._today)
         self.glade.signal_connect('on_calendar_small_day_selected_double_click', self._change_small)
         self.glade.signal_connect('on_button_day_clicked', self._change_view, 'day')
         self.glade.signal_connect('on_button_week_clicked', self._change_view, 'week')
@@ -116,7 +116,7 @@ class ViewCalendar(object):
         self.date = DateTime.DateTime(*t)
         self.display(None)
 
-    def _today(self, widget, type, *args, **argv):
+    def _today(self, widget, *args, **argv):
         self.date = DateTime.now()
         self.display(None)
 
@@ -144,6 +144,8 @@ class ViewCalendar(object):
         if self.color_field:
             for model in self.models:
                 evt = model.get()
+                #print "model = %r" % (model,)
+                #print 'evt = %r' % (evt,)
                 key = evt[self.color_field]
                 name = key
                 value = key
@@ -174,7 +176,8 @@ class ViewCalendar(object):
             self.cal_view.model = self.cal_model
 
             self.cal_model.add_events(self.__get_events())
-
+        #else:
+        #    print "no models :("
         self.refresh()
 
     def refresh(self):
@@ -213,17 +216,23 @@ class ViewCalendar(object):
             evt = model.get()
             self.__convert(evt)
             e = self.__get_event(evt)
+            
+            if not e.starts:
+                continue
 
             #print "event:", repr(e)
             #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
             #    continue
             #print " -> shown"
-
+            all_day = e.dayspan > 0
             event = Calendar.Event(
                     e.title,
                     datetime(*e.starts[:7]),
                     datetime(*e.ends[:7]),
-                    bg_color = e.color)
+                    bg_color = (all_day or self.mode != 'month') and e.color or 'white',
+                    text_color = (all_day or self.mode != 'month') and 'black' or e.color,
+                    all_day = all_day,
+            )
             events.append(event)
         return events
 
