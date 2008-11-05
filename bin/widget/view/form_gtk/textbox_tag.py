@@ -94,6 +94,14 @@ class textbox_tag(interface.widget_interface):
                 gtk.JUSTIFY_RIGHT : 'RIGHT',
                 gtk.JUSTIFY_LEFT : 'LEFT'
                 }
+    html_tags = {
+                 'underline':{'single':'u'},
+                 'weight':{700:'b'},
+                 'strikethrough':{'true':'strike'},
+                 'style':{'italic':'i'},
+                 'color':{'color':True},
+                 'face':{'face':True},
+                 }
 
     def __init__(self,window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
@@ -201,7 +209,7 @@ class textbox_tag(interface.widget_interface):
                     tag=self.buf.create_tag()
                     tag.set_property('font-desc',font1)
                     if not self.tagdict.has_key(tag): self.tagdict[tag]={}
-                    self.tagdict[tag]['style']="font-family:"+str(font.get_family())
+                    self.tagdict[tag]['face']=str(font.get_family())
                     self.tags[font1.to_string()]=tag
                 tags.append(self.tags[font1.to_string()])
         if lang:
@@ -220,7 +228,7 @@ class textbox_tag(interface.widget_interface):
                         self.tags[key]=self.buf.create_tag()
                         self.tags[key].set_property('foreground-gdk',gdkcolor)
                         self.tagdict[self.tags[key]]={}
-                        self.tagdict[self.tags[key]]['style']="color:"+"#%s"%self.color_to_hex(gdkcolor)
+                        self.tagdict[self.tags[key]]['color']="#%s"%self.color_to_hex(gdkcolor)
                     tags.append(self.tags[key])
                 if a.type == pango.ATTR_BACKGROUND:
                     gdkcolor = self.pango_color_to_gdk(a.color)
@@ -303,17 +311,28 @@ class textbox_tag(interface.widget_interface):
             for tag in cuts[c]:
                 outbuff += tag
         outbuff += txt[last_pos:]
-        outbuff = '<pre><span alignment="' + self.alignment_markup[self.justify] \
-                + '" leading="' + str(self.leading) + '">' + outbuff + '</span></pre>'
+        outbuff = '<pre><p align="' + self.alignment_markup[self.justify] \
+                + '" leading="' + str(self.leading) + '">' + outbuff + '</p></pre>'
         self.value=outbuff
         return outbuff
 
     def tag_to_markup (self, tag):
         stag="<span"
         for k,v in self.tagdict[tag].items():
-            stag += ' %s="%s"'%(k,v)
-        stag += ">"
-        return stag,"</span>"
+            if self.html_tags.has_key(k) and (self.html_tags[k].has_key(k) or self.html_tags[k].has_key(v)):
+                if k in ['color','face']:
+                    stag='<font %s="%s">'%(k,v)
+                    etag="</font>"
+                else:
+                    stag="<"+self.html_tags[k][v]+">"
+                    etag="</"+self.html_tags[k][v]+">"
+            else:
+                stag += ' %s="%s"'%(k,v)
+        if stag.startswith('<span'):
+            stag += ">"
+            etag="</span>"
+
+        return stag,etag
 
     def fontdesc_to_attrs (self,font):
         nicks = font.get_set_fields().value_nicks
@@ -392,7 +411,7 @@ class textbox_tag(interface.widget_interface):
 
     def set_text (self, txt):
         buf = self.tv.get_buffer()
-        txt = re.sub('<span alignment[^>]*>', '<span>', txt)
+#        txt = re.sub('<p align[^>]*>', '<p>', txt)
         try:
             parsed, txt, separator = pango.parse_markup(txt, u'0')
         except Exception ,e:
