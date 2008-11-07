@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -68,6 +68,10 @@ class TinyCalModel(Calendar.Model):
 
 
 class ViewCalendar(object):
+    TV_COL_ID = 0
+    TV_COL_COLOR = 1
+    TV_COL_LABEL = 2
+
     def __init__(self, model, axis, fields, attrs):
         self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_calendar', gettext.textdomain())
         self.widget = self.glade.get_widget('widget_view_calendar')
@@ -77,6 +81,7 @@ class ViewCalendar(object):
         self._radio_week = self.glade.get_widget('radio_week')
         self._radio_day = self.glade.get_widget('radio_day')
         self._small_calendar = self.glade.get_widget('calendar_small')
+        self._calendar_treeview = self.glade.get_widget('calendar_treeview')
 
         self.fields = fields
         self.attrs = attrs
@@ -109,9 +114,41 @@ class ViewCalendar(object):
         self.colors = {}
         self.models = None
 
+        if self.color_field:
+            model = gtk.ListStore(str, str, str)
+            self._calendar_treeview.set_model(model)
+            self._calendar_treeview.get_selection().set_mode(gtk.SELECTION_NONE)
+
+            for c in (self.TV_COL_ID, self.TV_COL_COLOR):
+                column = gtk.TreeViewColumn(None, gtk.CellRendererText(), text=c)
+                self._calendar_treeview.append_column(column)
+                column.set_visible(False) 
+
+            renderer = gtk.CellRendererText()
+            column = gtk.TreeViewColumn(None, renderer, text=self.TV_COL_LABEL)
+            col_label = gtk.Label('')
+            col_label.set_markup('<b>%s</b>' % self.fields[self.color_field]['string'])
+            col_label.show()
+            column.set_widget(col_label)
+            column.set_cell_data_func(renderer, self._treeview_setter)
+            self._calendar_treeview.append_column(column)
+            
+
+    def _treeview_setter(self, column, cell, store, iter):
+        color = store.get_value(iter, self.TV_COL_COLOR)
+        cell.set_property('background', str(color))
+
+    def add_to_treeview(self, name, value, color):
+        value = str(value)
+        model = self._calendar_treeview.get_model()
+        for row in model:
+            if row[self.TV_COL_ID] == value:
+                return  # id already in the treeview
+        iter = model.append()
+        model.set(iter, self.TV_COL_ID, value, self.TV_COL_COLOR, color, self.TV_COL_LABEL, name)
 
     def _change_small(self, widget, *args, **argv):
-        t = list(widget.get_date() )
+        t = list(widget.get_date())
         t[1] += 1
         self.date = DateTime.DateTime(*t)
         self.display(None)
@@ -143,10 +180,8 @@ class ViewCalendar(object):
         self.colors = {}
         if self.color_field:
             for model in self.models:
-                evt = model.get()
-                #print "model = %r" % (model,)
-                #print 'evt = %r' % (evt,)
-                key = evt[self.color_field]
+                
+                key = model.value[self.color_field]
                 name = key
                 value = key
 
@@ -158,7 +193,6 @@ class ViewCalendar(object):
             colors = choice_colors(len(self.colors))
             for i, (key, value) in enumerate(self.colors.items()):
                 self.colors[key] = (value[0], value[1], colors[i])
-
 
     def display(self, models):
 
@@ -213,7 +247,7 @@ class ViewCalendar(object):
         events = []
         #day = self.date.tuple()[2]
         for model in self.models:
-            evt = model.get()
+            evt = model.value.copy()
             self.__convert(evt)
             e = self.__get_event(evt)
             
@@ -224,13 +258,19 @@ class ViewCalendar(object):
             #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
             #    continue
             #print " -> shown"
+            
+            color = None
+            if e.color:
+                color = e.color[2]
+                self.add_to_treeview(*e.color)
+
             all_day = e.dayspan > 0
             event = Calendar.Event(
                     e.title,
                     datetime(*e.starts[:7]),
                     datetime(*e.ends[:7]),
-                    bg_color = (all_day or self.mode != 'month') and e.color or 'white',
-                    text_color = (all_day or self.mode != 'month') and 'black' or e.color,
+                    bg_color = (all_day or self.mode != 'month') and color or 'white',
+                    text_color = (all_day or self.mode != 'month') and 'black' or color,
                     all_day = all_day,
             )
             events.append(event)
@@ -321,14 +361,21 @@ class ViewCalendar(object):
 
         #starts = format.format_datetime(starts, "datetime", True)
         #ends = format.format_datetime(ends, "datetime", True)
-
+        
         color_key = event.get(self.color_field)
         color = self.colors.get(color_key)
 
         title = title.strip()
         description = ', '.join(description).strip()
 
-        return TinyEvent(event=event, starts=starts, ends=ends, title=title, description=description, dayspan=span, color=(color or None) and color[-1])
+        return TinyEvent(event=event, 
+                         starts=starts, 
+                         ends=ends, 
+                         title=title, 
+                         description=description, 
+                         dayspan=span, 
+                         color=color,
+        )
 
 
 
