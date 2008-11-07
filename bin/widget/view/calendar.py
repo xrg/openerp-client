@@ -32,7 +32,7 @@ class ViewCalendar(parser_view):
         self.view = widget
         self.model_add_new = False
         self.widget = widget.widget
-        self.widget.screen = screen
+        self.view.screen = screen
 
     def cancel(self):
         pass

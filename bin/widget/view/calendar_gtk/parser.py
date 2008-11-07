@@ -46,10 +46,12 @@ def choice_colors(n):
         return COLOR_PALETTE[:n]
     return []
 
-class TinyEvent(object):
+class TinyEvent(Calendar.Event):
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
+        
+        super(TinyEvent, self).__init__(**kwargs)        
 
     def __repr__(self):
         r = []
@@ -86,9 +88,11 @@ class ViewCalendar(object):
         self.fields = fields
         self.attrs = attrs
         self.axis = axis
+        self.screen = None
 
         self.cal_model = Calendar.Model()
         self.cal_view = Calendar.Calendar(self.cal_model)
+        self.cal_view.connect('event-clicked', self._on_event_clicked)
 
         vbox = self.glade.get_widget('cal_vbox')
         vbox.pack_start(self.cal_view)
@@ -175,7 +179,11 @@ class ViewCalendar(object):
         self.process = False
         return True
 
-
+    def _on_event_clicked(self, calendar, calendar_event, hippo_event):
+        if hippo_event.button == 1 and hippo_event.count == 2:   # double-left-click
+            self.screen.current_model = calendar_event.model
+            self.screen.switch_view(mode='form')
+            
     def __update_colors(self):
         self.colors = {}
         if self.color_field:
@@ -245,35 +253,13 @@ class ViewCalendar(object):
 
     def __get_events(self):
         events = []
-        #day = self.date.tuple()[2]
         for model in self.models:
-            evt = model.value.copy()
-            self.__convert(evt)
-            e = self.__get_event(evt)
-            
-            if not e.starts:
-                continue
+            e = self.__get_event(model)
+            if e:
+                if e.color_info:
+                    self.add_to_treeview(*e.color_info)
+                events.append(e)
 
-            #print "event:", repr(e)
-            #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
-            #    continue
-            #print " -> shown"
-            
-            color = None
-            if e.color:
-                color = e.color[2]
-                self.add_to_treeview(*e.color)
-
-            all_day = e.dayspan > 0
-            event = Calendar.Event(
-                    e.title,
-                    datetime(*e.starts[:7]),
-                    datetime(*e.ends[:7]),
-                    bg_color = (all_day or self.mode != 'month') and color or 'white',
-                    text_color = (all_day or self.mode != 'month') and 'black' or color,
-                    all_day = all_day,
-            )
-            events.append(event)
         return events
 
     def __convert(self, event):
@@ -298,12 +284,15 @@ class ViewCalendar(object):
                 ds[3] = 9
                 event[fld] = tuple(ds)
 
-    def __get_event(self, event):
+    def __get_event(self, model):
+        
+        event = model.value.copy()
+        self.__convert(event)
 
-        title = ''       # the title
-        description = [] # the description
-        starts = None    # the starting time (datetime)
-        ends = None      # the end time (datetime)
+        caption = ''     
+        description = [] 
+        starts = None   
+        ends = None      
 
         if self.axis:
 
@@ -312,7 +301,7 @@ class ViewCalendar(object):
 
             if isinstance(s, (tuple, list)): s = s[-1]
 
-            title = ustr(s)
+            caption = ustr(s)
 
             for f in self.axis[1:]:
                 s = event[f]
@@ -362,21 +351,34 @@ class ViewCalendar(object):
         #starts = format.format_datetime(starts, "datetime", True)
         #ends = format.format_datetime(ends, "datetime", True)
         
+        if not starts:
+            return None
+
+        #day = self.date.tuple()[2]
+        #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
+        #    return None
+
         color_key = event.get(self.color_field)
-        color = self.colors.get(color_key)
+        color_info = self.colors.get(color_key)
 
-        title = title.strip()
+        color = None
+        if color_info:
+            color = color_info[2]
+
         description = ', '.join(description).strip()
-
-        return TinyEvent(event=event, 
-                         starts=starts, 
-                         ends=ends, 
-                         title=title, 
+        all_day = span > 0
+        
+        return TinyEvent(model=model,
+                         caption=caption.strip(),
+                         start=datetime(*starts[:7]), 
+                         end=datetime(*ends[:7]), 
                          description=description, 
-                         dayspan=span, 
-                         color=color,
+                         dayspan=span,
+                         all_day=all_day,
+                         color_info=color_info,
+                         bg_color = (all_day or self.mode != 'month') and color or 'white',
+                         text_color = (all_day or self.mode != 'month') and 'black' or color,
         )
-
 
 
 class parser_calendar(interface.parser_interface):
