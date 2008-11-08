@@ -3,14 +3,14 @@ Section: x11
 Priority: optional
 Maintainer: Daniel Baumann <daniel@debian.org>
 Uploaders: Jean-Marc Chaton <chaton@debian.org>
-Build-Depends: debhelper (>= 4.0), dpatch, python-support (>= 0.3)
+Build-Depends: debhelper (>= 5), dpatch, python-support
 Build-Depends-Indep: python-dev, python-gtk2, python-glade2
 Standards-Version: 3.7.2
 
 Package: tinyerp-client
 Architecture: all
-Depends: ${python:Depends}, python-gtk2, python-glade2
-Recommends: xpdf | pdf-viewer
+Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, python-glade2
+Recommends: openoffice.org-writer, xpdf | pdf-viewer
 Suggests: tinyerp-server
 Description: Enterprise Resource Management software (client)
  Tiny ERP is a complete ERP and CRM. The main features are accounting (analytic
