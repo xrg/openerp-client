@@ -5,7 +5,7 @@ Maintainer: Daniel Baumann <daniel@debian.org>
 Build-Depends: debhelper (>= 7), dpatch, python-support, python-dev
 Build-Depends-Indep: python-gtk2, python-glade2
 Standards-Version: 3.8.0
-Homepage: http://www.tinyerp.org/
+Homepage: http://www.openerp.com/
 
 Package: tinyerp-client
 Architecture: all
