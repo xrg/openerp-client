@@ -51,6 +51,7 @@ install: build
 	# Symlinking essential files
 	ln -s ../../../../share/tinyerp-client/flag.png debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client
 	ln -s ../../../../share/tinyerp-client/tinyerp.png debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client
+	ln -s ../../../../share/tinyerp-client/tinyerp-client.png debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client
 	ln -s ../../../../share/tinyerp-client/terp.glade debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client
 	ln -s ../../../../share/tinyerp-client/tipoftheday.txt debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client
 

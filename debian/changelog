@@ -1,3 +1,9 @@
+tinyerp-client (3.3.0-2) unstable; urgency=low
+
+  * Fixed essential symlinks (Closes: #374856).
+
+ -- Daniel Baumann <daniel.baumann@panthera-systems.net>  Thu, 22 Jun 2006 19:07:00 +0200
+
 tinyerp-client (3.3.0-1) unstable; urgency=low
 
   * New upstream release.
