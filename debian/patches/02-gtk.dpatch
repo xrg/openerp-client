@@ -1,0 +1,17 @@
+#!/bin/sh /usr/share/dpatch/dpatch-run
+## 02-autobuild.dpatch by Chris Lamb <chris@chris-lamb.co.uk>
+
+@DPATCH@
+
+diff -Naurp tinyerp-client-4.2.2.orig/bin/tinyerp-client.py tinyerp-client-4.2.2/bin/tinyerp-client.py
+--- tinyerp-client-4.2.2.orig/bin/tinyerp-client.py	2008-02-06 09:19:40.000000000 +0000
++++ tinyerp-client-4.2.2/bin/tinyerp-client.py	2008-06-07 15:43:52.000000000 +0000
+@@ -62,6 +62,8 @@ pygtk.require('2.0')
+ import gtk
+ import gtk.glade
+ 
++gtk.gdk.threads_init()
++
+ import locale, gettext
+ 
+ import atk
