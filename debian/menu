@@ -1,3 +1,3 @@
 ?package(tinyerp-client):needs="X11" section="Applications/Office"\
   title="Tiny ERP Client" description="Enterprise Resource Management software (client)"\
-  command="/usr/bin/tinyerp-client" icon="/usr/share/pixmaps/tinyerp-client/tinyerp-client.xpm"
+  command="/usr/bin/tinyerp-client" icon="/usr/share/pixmaps/tinyerp-client.xpm"
