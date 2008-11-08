@@ -1,3 +1,10 @@
+tinyerp-client (3.4.2-3) testing; urgency=low
+
+  * Added 04-l18n-de.dpatch from Michael Bank <mbank@debian.org> to update
+    the German localization.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 16 Dec 2006 16:45:00 +0100
+
 tinyerp-client (3.4.2-2) testing; urgency=medium
 
   * Added 02-locale.dpatch from unstable as 03-locale.dpatch (Closes: #402675).
