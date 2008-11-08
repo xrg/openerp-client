@@ -1,3 +1,10 @@
+tinyerp-client (4.2.2-2) unstable; urgency=medium
+
+  * Adding patch from Chris Lamb <chris@chris-lamb.co.uk> to fix startup
+    problem (Closes: #481895).
+
+ -- Daniel Baumann <daniel@debian.org>  Sat,  7 Jun 2008 17:47:00 +0200
+
 tinyerp-client (4.2.2-1) unstable; urgency=low
 
   * New upstream release.
