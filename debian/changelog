@@ -1,3 +1,10 @@
+tinyerp-client (4.0.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * Taking package back, Jean-Marc seems to be MIA.
+
+ -- Daniel Baumann <daniel@debian.org>  Fri,  1 Jun 2007 11:50:00 +0200
+
 tinyerp-client (4.0.2-2) unstable; urgency=low
 
   * Setting maintainer to Jean-Marc.

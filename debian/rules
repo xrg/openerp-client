@@ -5,7 +5,7 @@
 
 include /usr/share/dpatch/dpatch.make
 
-build: patch-stamp
+build: patch
 
 clean: unpatch
 	dh_testdir
