@@ -1,3 +1,10 @@
+tinyerp-client (3.3.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Set to architecture to all (Closes: #356961).
+
+ -- Daniel Baumann <daniel.baumann@panthera-systems.net>  Sat,  3 Jun 2006 20:16:00 +0200
+
 tinyerp-client (3.2.1-1) unstable; urgency=low
 
   * New upstream release.

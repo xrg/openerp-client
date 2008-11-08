@@ -1,0 +1,358 @@
+Fri May 19 10:16:18 CEST 2006
+Server 3.3.0
+    New features:
+        NEW MODULE: hr_timesheet_project
+            Automatically maps projects and tasks to analytic account
+            So that hours spent closing tasks are automatically encoded
+        KERNEL: Added a logfile and a pidfile option (patch from Dan Horak)
+        STOCK: Added support for revisions of tracking numbers
+        STOCK: Added support for revision of production lots
+        STOCK: Added a "splitting and tracking lines" wizard
+        PRODUCT_EXTENDED: Added a method to compute the cost of a product
+                          automatically from the cost of its parts
+
+    Improvements:
+        ALL: Small improvements in wizards (order of buttons)
+        PRODUCT: Remove packaging info from supplierinfo
+        PROJECT: Better task view (moved unused fields to other tab)
+        SALE: Keep formating for sale order lines' notes in the sale order report
+
+    Bugfixes:
+        KERNEL: Fixed bug which caused field names with non ascii chars didn't work
+                in list mode on Windows
+        KERNEL: Fix concurrency issue with UpdatableStr with the use of 
+                threading.local
+        KERNEL: Removed browse_record __unicode__ method... It made the sale order
+                report crash when using product names with non ASCII characters
+        KERNEL: Fixed bug which caused the translation export to fail when the server 
+                was not launched from the directory its source is.
+        BASE: Updating a menuitem now takes care its parent menus
+        BASE: Fixed a cursor locking issue with updates
+        BASE: Fixed viewing sequence types as a tree/list
+        HR: Month field needs to be required in the "hours spent" report
+        PURCHASE: fixed group purchase order wizard:
+         - if there were orders from several different suppliers, it created a purchase
+           order for only the first supplier but canceled other orders, even those which
+           weren't merged in the created order (closes bugzilla #236)
+         - doesn't trash "manual" lines (ie lines with no product)
+         - pay attentions to unit factors when adding several lines together
+        MRP: fixed workcenter load report (prints only the selected workcenters) and 
+             does't crash if the user didn't select all workcenters
+        
+    Miscellaneous:
+        Removed pydot from required dependencies
+
+Client 3.3.0
+    Improvements:
+        Implemented 3-button choice when quitting an unsaved record, additionally,
+            it automatically cancel the close if "yes" was selected but the form 
+            is invalid
+        Use better icon
+        Moved icon in the pixmaps directory
+        Use the helper function to find the pixmaps file
+        Added support for OpenOffice2 for the "preview in editor" functionality
+        Issue warning message when an invalid value was used in a selection field
+        Set the frame around the form viewport to SHADOW_NONE
+
+        Changed shortcuts:
+            Ctrl Z : Repeat last action
+            Ctrl R : Reload
+            PgUp   : Previous
+            PgDown : Next
+            Ctrl X : Not used anymore, so that it can be used in textareas for cut
+                     and paste
+
+    Bugfixes:
+        Fixed a crash bug which occured in some complex circumstances
+        Modification of an existing resource sometimes created a new one instead
+        Fixed date widgets (it gets a value even if it doesn't get the focus)
+        Fixed the lines coloring functionality in list mode
+        The "invalid form" message must appear even if the form is saved through 
+            a button on the form (and not with the save button)
+        Unset status message when doing a reload
+        When clicking twice in a row on a calendar widget arrow, the widget
+            doesn't close anymore
+        Raise the number of characters in datetime fields to 19, so that datetime
+            fields work with other locales
+        Other miscellaneous bugfixes
+
+------------------------------------------------------------------------
+
+Server 3.3.0-rc1
+================
+
+Changelog for Users
+-------------------
+
+New module: OS Commerce
+    Integration with Tiny ERP and OS Commerce
+    Synchronisation 100% automated with eSale;
+        Import of categories of products
+        Export of products (with photos support)
+        Import of Orders (with the eslae module)
+        Export of stock level
+        Import of OSCommerce Taxes
+    Multiple shop allowed with different rules/products
+    Simple Installation
+
+New Module: HR_TIMESHEET
+    Management by affair, timesheets creates analytic entries in the
+    accounting to get costs and revenue of each affairs. Affairs are
+    structured in trees.
+
+New Module: Account Follow Up
+    Multi-Level and configurable Follows ups for the accounting module
+
+New module; Productivity Analysis of users
+    A module to compare productivity of users of Tiny ERP
+    Generic module, you can compare everything (sales, products, partners,
+    ...)
+
+New Modules for localisations:
+    Accounting localisations for be, ca, fr, de, ch, sw
+    Fix: corrected encoding (latin1 to utf8) of Swedish account tree XML file
+
+New Module - Sandwich
+    Allows employees to order the lunch
+    Keeps employees preferences
+
+New Module TOOLS:
+    Email automatic importation/integration in the ERP
+
+New Module EDI:
+    Import of EDI sale orders
+    Export of shippings
+
+Multi-Company:
+    Tiny ERP is now fully multi-company !
+    New Company and configuration can be made in the client side.
+
+ACCOUNTING:
+    Better Entries > Standard Entries (Editable Tree, like in Excel)
+        Automatic creation of lines
+    Journal centralised or not
+        Counterpart of lines in one line or one counterpart per entry
+    Analytic accounting recoded from scratch
+        5 new reports
+        Completly integrated with:
+            production,
+            hr_timesheet > Management by affairs
+            sales & purchases,
+            Tasks.
+    Added unreconciliation functionnalities
+    Added account tree fast rendering
+    Better tax computation system supporting worldwide specific countries
+    Better subscription system
+    Wizard to close a period
+    Wizard to clase a fiscal year
+    Very powerfull, simple and complete multi-currency system
+        in pricelists, sale order, purchases, ...
+    Added required fields in currencies (currency code)
+    Added decimal support
+    Better search on accounts (on code, shortcut or name)
+    Added constraint;
+        on users
+        on group
+        on accounts in a journal
+    added menuitem for automatic reconciliation; Multi-Levels
+    added factor to analytic units
+    added form view for budget items dotations
+    made number of digits in quantity field of the budget spread wizard coherent with the object field
+    fixed journal on purchase invoices/refunds (SugarCRM #6)
+    Better bank statement reconciliation
+    Fixed some reports
+
+STOCK:
+    Better view for location (using localisation of locations; posx, posy, posz)
+
+MARKETING:
+    fixed small bug when a partner has no adress
+    state field of marketing partner set as readonly
+    fixed marketing steps form view
+    better history view
+    disabled completely send sms wizard
+    fixed send email wizard
+    good priority -> high priority
+    fixed 'call again later' button
+
+NETWORK:
+    added tree view for login/password
+
+HR:
+    added holiday_status (=type of ...) to expense claim form view
+
+BASE (partner):
+    fixed email_send and _email_send methods
+    removed partner without addresses from demo data
+    Added a date field in the partner form
+
+MRP:
+    New report: workcenter futur loads
+    Analytic entries when production done.
+    SCHEDULER: better error msg in the generated request
+    Allows services in BoMs (for eg, subcontracting)
+
+Project/Service Management:
+    create orders from tasks; bugfixes
+    Completly integrated with the rest of the ERP
+        Services can now be MTO/MTS, Buy (subcontracting), produce (task), ...
+        Services can be used anywhere (sale.order, bom, ...)
+    See this graph;
+        http://tiny.be/download/flux/flux_procurement.png
+    tasks sorted by ... AND id, so that the order is not random
+    within a priority
+
+Automatic translations of all wizards
+
+Scrum Project Management
+    Better Ergonomy; click on a sprint to view tasks
+    Planned, Effetive hours and progress in backlog, project and sprint
+    Better Burndown Chart computation
+    Better (simpler) view of tasks
+
+Better demo Data
+    In All modules, eth converted to english
+
+PRODUCT:
+    computing the weight of the packaging
+    Added last order date
+    Alternative suppliers (with delay, prefs, ...) for one product
+
+PRICELISTS:
+    much more powerfull system
+    views simplified
+    one pricelist per usage: sale, order, pvc
+    price_type on product_view
+    Multi-Currency pricelist (EUR pricelist can depend on a $ one)
+
+HR-TIMESHEET: fixed bugs in hours report:
+    sum all lines for the same day instead of displaying only the first one
+    it now uses the analytic unit factor, so that mixing hours and days has some sense
+    close cursor
+
+SALE:
+    invoices generated from a sale order are pre-computed (taxes are computed)
+
+    new invoicing functionnality;
+        invoice on order quantities or,
+        invoice on shipped quantities
+
+    Invoice on a sale.order or a sale.order.line
+
+    added default value for uos_qty in sale order lines (default to 1)
+
+
+Changelog for Developers
+------------------------
+
+New option --debug, that opens a python interpreter when an exception
+occurs on the server side.
+
+Better wizard system. Arguements self, cr, uid, context are passed in all
+functions of the wizard like normal objects. All wizards converted.
+
+Speed improvements in many views; partners, sale.order, ...
+    less requests from client to server when opening a form
+
+Better translation system, wizard terms are exported.
+
+Script to render module dependency graph
+
+KERNEL+ALL: pass context to methods computing a selection.
+
+Modification for actions and view definitions:
+    Actions Window:
+        New field: view_mode = 'tree,form' or 'form,tree' -> default='form,tree'
+        New role of view_type: tree (with shortcuts), form (others with switch button)
+    If you need a form that opens in list mode:
+        view_mode = 'tree,form' or 'tree'
+        view_type = form
+    You can define a view in a view (for example sale.order.line in
+    sale.order)
+        less requests on the client side, no need to define 2 views
+
+Better command-line option message
+
+Fixed bug which prevented to search for names using non ASCII
+chars in many2one or many2many fields
+
+Report Engine: bugfix for concurrency
+
+Support of SQL constraints
+    Uniq, check, ...
+    Good error message in the client side (check an account entry with
+    credit and debit >0)
+
+Fixed: when an exception was raised, the cursor wasn't closed and this
+could cause a freeze in some cases
+
+Sequence can contains code: %(year)s, ... for prefix, suffix
+    EX: ORDER %(year)/0005
+
+Bugfixes for automatic migration system
+
+bugfix on default value with creation of inherits
+
+Improvement in report_sxw; you can redefine preprocess to do some
+preprocessing before printing
+
+Barcode support enabled by default
+
+Fixed OpenOffice reports when the server is not launched from the
+directory the code reside
+
+Print workflow use a pipe instead of using a temporary file (now workflows
+works on Windows Servers)
+
+Inheritancy improved (multiple arguments: replace, inside, after, before)
+
+Lots of small bugfixes
+
+
+Client 3.3.0-rc1
+================
+
+Client completly recoded from scratch !!! (using a MVC pattern)
+
+Lots of bugs removed
+
+Better Ergonomy
+    Everything at the keyboard:
+        Search, zoom, new entry, ...
+        Cursor always at the right place (first field of a search, ...)
+
+    Switch list/form in one2many fields
+
+    Set Default Values on One2many fields
+
+Better Exception message for integrity and constraint errors.
+
+Better search form
+
+List are editable !
+    Like in Excel, for lists on one2many fields
+    Just put <tree editable="top/bottom"> in the tree view
+
+New fields
+    E-Mail
+    Website
+    Fields one2many and one2many_list merged
+
+Wizard are now translated
+
+Speed Improvement
+    Client side cache
+
+    Less requests when opening forms; about 30% times quicker
+
+New PDA mode for smaller screen on a PDA
+
+Preparation of a non-connected client (allows you to work on a cache and
+prefetch a cache for mobile usage) -> not 100% finnished !
+
+Support of XML-RPC over HTTPS
+
+Code reduced by 30% with more functionnalities !
+
+
+------------------------------------------------------------------------
