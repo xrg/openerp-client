@@ -1,3 +1,11 @@
+tinyerp-client (3.4.2-2) testing; urgency=medium
+
+  * Added 02-locale.dpatch from unstable as 03-locale.dpatch (Closes: #402675).
+    This patch fixes the wrong path to the l10n files as reported by Michael
+    Bunk <azeem@debian.org> in #401674.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 12 Dec 2006 10:36:00 +0100
+
 tinyerp-client (3.4.2-1) unstable; urgency=medium
 
   * New upstream release.
