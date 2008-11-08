@@ -123,6 +123,21 @@ tinyerp-client (3.5.0-1) experimental; urgency=low
 
  -- Daniel Baumann <daniel@debian.org>  Mon, 23 Oct 2006 12:16:00 +0200
 
+tinyerp-client (3.4.2-3) testing; urgency=low
+
+  * Added 04-l18n-de.dpatch from Michael Bank <mbank@debian.org> to update
+    the German localization.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 16 Dec 2006 16:45:00 +0100
+
+tinyerp-client (3.4.2-2) testing; urgency=medium
+
+  * Added 02-locale.dpatch from unstable as 03-locale.dpatch (Closes: #402675).
+    This patch fixes the wrong path to the l10n files as reported by Michael
+    Bunk <azeem@debian.org> in #401674.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 12 Dec 2006 10:36:00 +0100
+
 tinyerp-client (3.4.2-1) unstable; urgency=medium
 
   * New upstream release.
