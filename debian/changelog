@@ -1,3 +1,10 @@
+tinyerp-client (4.0.0-2) unstable; urgency=low
+
+  * Added 04-l18n-de.dpatch from Michael Bunk <azeem@debian.org> to update
+    the German localization.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 16 Dec 2006 16:45:00 +0100
+
 tinyerp-client (4.0.0-1) unstable; urgency=low
 
   * New upstream release.
