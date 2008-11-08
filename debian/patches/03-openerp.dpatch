@@ -1,0 +1,70 @@
+#!/bin/sh /usr/share/dpatch/dpatch-run
+## 03-openerp.dpatch by Daniel Baumann <daniel@debian.org>
+##
+## DP: Update homepage location.
+
+@DPATCH@
+
+diff -Naurp tinyerp-client.orig/bin/common/common.py tinyerp-client/bin/common/common.py
+--- tinyerp-client.orig/bin/common/common.py	2008-11-06 10:44:54.000000000 +0000
++++ tinyerp-client/bin/common/common.py	2008-11-08 14:59:59.000000000 +0000
+@@ -191,7 +191,7 @@ class upload_data_thread(threading.Threa
+ 		try:
+ 			import urllib
+ 			args = urllib.urlencode(self.args)
+-			fp = urllib.urlopen('http://www.tinyerp.com/scripts/survey.php', args)
++			fp = urllib.urlopen('http://www.openerp.com/scripts/survey.php', args)
+ 			fp.read()
+ 			fp.close()
+ 		except:
+diff -Naurp tinyerp-client.orig/bin/modules/gui/main.py tinyerp-client/bin/modules/gui/main.py
+--- tinyerp-client.orig/bin/modules/gui/main.py	2008-11-06 10:44:54.000000000 +0000
++++ tinyerp-client/bin/modules/gui/main.py	2008-11-08 15:00:51.000000000 +0000
+@@ -751,12 +751,12 @@ class terp_main(service.Service):
+ 		return True
+ 		
+ 	def sig_help_index(self, widget):
+-		tools.launch_browser('http://www.tinyerp.org/documentation/user-manual/')
++		tools.launch_browser('http://www.openerp.com/documentation/user-manual/')
+ 
+ 	def sig_help_context(self, widget):
+ 		model = self._wid_get().model
+ 		l = rpc.session.context.get('lang','en_US')
+-		tools.launch_browser('http://www.tinyerp.org/scripts/context_index.php?model=%s&lang=%s' % (model,l))
++		tools.launch_browser('http://www.openerp.com/scripts/context_index.php?model=%s&lang=%s' % (model,l))
+ 
+ 	def sig_tips(self, *args):
+ 		common.tipoftheday(self.window)
+diff -Naurp tinyerp-client.orig/bin/tipoftheday.fr.txt tinyerp-client/bin/tipoftheday.fr.txt
+--- tinyerp-client.orig/bin/tipoftheday.fr.txt	2008-11-06 10:44:54.000000000 +0000
++++ tinyerp-client/bin/tipoftheday.fr.txt	2008-11-08 15:00:11.000000000 +0000
+@@ -18,4 +18,4 @@ Vous pouvez dès lors vous connecter au 
+ <b>Plus d'infos...</b>
+ 
+ Pour obtenir plus d'informations quand à Tiny ERP, rendez-vous sur le site
+-http://wwww.tinyerp.com/
++http://wwww.openerp.com/
+diff -Naurp tinyerp-client.orig/bin/tipoftheday.txt tinyerp-client/bin/tipoftheday.txt
+--- tinyerp-client.orig/bin/tipoftheday.txt	2008-11-06 10:44:54.000000000 +0000
++++ tinyerp-client/bin/tipoftheday.txt	2008-11-08 15:00:06.000000000 +0000
+@@ -7,7 +7,7 @@ Click on the 'Next Tip' button to contin
+ 
+ To simplify the learning of Tiny ERP, have a look at the tutorial.
+ It describes the first steps of a complete flow.
+-The tutorial is available on http://www.tinyerp.com/, section 'Online Shop'.
++The tutorial is available on http://www.openerp.com/, section 'Online Shop'.
+ ---
+ <b>Connect to the server:</b>
+ At the first installation, 2 users are created: demo/demo a simplified demo account and admin/admin, a complete administrator account.
+diff -Naurp tinyerp-client.orig/man/tinyerp-client.1 tinyerp-client/man/tinyerp-client.1
+--- tinyerp-client.orig/man/tinyerp-client.1	2008-11-06 10:44:54.000000000 +0000
++++ tinyerp-client/man/tinyerp-client.1	2008-11-08 15:01:24.000000000 +0000
+@@ -53,7 +53,5 @@ Tiny ERP is a product of \fBTiny.be\fR (
+ .SH SEE ALSO
+ tinyerp_server(1)
+ .br
+-\fIhttp://www.tinyerp.com\fR : Tiny ERP functional description
+-.br
+-\fIhttp://www.tinyerp.org\fR : Tiny ERP developer zone
++\fIhttp://www.openerp.com\fR : Tiny ERP homepage
+ 
