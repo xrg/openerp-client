@@ -1,0 +1,2 @@
+bin/pixmaps/*.xpm	/usr/share/pixmaps/tinyerp-client/
+debian/desktop/*	/usr/share/applications/

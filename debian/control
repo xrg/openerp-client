@@ -2,7 +2,7 @@ Source: tinyerp-client
 Section: x11
 Priority: optional
 Maintainer: Daniel Baumann <daniel@debian.org>
-Build-Depends: debhelper (>= 7), dpatch, python-support, python-dev
+Build-Depends: debhelper (>= 7), dpatch, python-dev
 Build-Depends-Indep: python-gtk2, python-glade2
 Standards-Version: 3.8.0
 Homepage: http://www.openerp.com/
@@ -11,7 +11,7 @@ Vcs-Git: git://git.debian.net/git/debian/openerp-client.git
 
 Package: tinyerp-client
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, python-glade2, python-egenix-mxdatetime
+Depends: ${misc:Depends}, python, python-gtk2, python-glade2, python-egenix-mxdatetime
 Recommends: openoffice.org-writer, xpdf | pdf-viewer
 Suggests: tinyerp-server
 Description: Enterprise Resource Management software (client)
