@@ -1,3 +1,14 @@
+tinyerp-client (4.2.1-1) unstable; urgency=low
+
+  * Maintainer upload from the Zuerich BSP.
+  * New upstream release.
+  * Bumping to new policy.
+  * Using new homepage field in control.
+  * Updated menu file to new policy.
+  * Fixing icon location (Closes: #448993).
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 12 Jan 2008 16:14:00 +0100
+
 tinyerp-client (4.2.0-1) unstable; urgency=low
 
   * New upstream release.

@@ -15,7 +15,7 @@ clean: unpatch
 	# Cleaning package
 	-python setup.py clean
 	rm -rf build
-	find $(CURDIR) -type f -name "*.pyc" -exec rm -f {} \;
+	-find $(CURDIR) -type f -name "*.pyc" | xargs rm -f
 
 	dh_clean
 
@@ -35,10 +35,10 @@ install: build
 	rm -rf debian/tinyerp-client/usr/lib/python*
 
 	# Moving graphics
-	mv debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/flag.png debian/tinyerp-client/usr/share/tinyerp-client
-	mv debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/tinyerp.png debian/tinyerp-client/usr/share/tinyerp-client
-	mv debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/tinyerp_icon.png debian/tinyerp-client/usr/share/tinyerp-client
-	rm -rf debian/tinyerp-client/usr/share/pixmaps
+	#mv debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/flag.png debian/tinyerp-client/usr/share/tinyerp-client
+	#mv debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/tinyerp.png debian/tinyerp-client/usr/share/tinyerp-client
+	#mv debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/tinyerp_icon.png debian/tinyerp-client/usr/share/tinyerp-client
+	#rm -rf debian/tinyerp-client/usr/share/pixmaps
 
 	# Symlinking essential files
 	ln -s ../../share/tinyerp-client/flag.png debian/tinyerp-client/usr/lib/tinyerp-client/flag.png
@@ -48,26 +48,26 @@ install: build
 	ln -s ../../share/tinyerp-client/tipoftheday.txt debian/tinyerp-client/usr/lib/tinyerp-client/tipoftheday.txt
 
 	# Installing icons
-	install -d -m 0755 debian/tinyerp-client/usr/share/icons
-	cp bin/pixmaps/tinyerp-icon-16x16.png debian/tinyerp-client/usr/share/icons/tinyerp-client-16.png
-	cp bin/pixmaps/tinyerp-icon-32x32.png debian/tinyerp-client/usr/share/icons/tinyerp-client-32.png
-	cp bin/pixmaps/tinyerp-icon-64x64.png debian/tinyerp-client/usr/share/icons/tinyerp-client-64.png
-	ln -s tinyerp-client-32.png debian/tinyerp-client/usr/share/icons/tinyerp-client.png
+	#install -d -m 0755 debian/tinyerp-client/usr/share/icons
+	#cp bin/pixmaps/tinyerp-icon-16x16.png debian/tinyerp-client/usr/share/icons/tinyerp-client-16.png
+	#cp bin/pixmaps/tinyerp-icon-32x32.png debian/tinyerp-client/usr/share/icons/tinyerp-client-32.png
+	#cp bin/pixmaps/tinyerp-icon-64x64.png debian/tinyerp-client/usr/share/icons/tinyerp-client-64.png
+	#ln -s tinyerp-client-32.png debian/tinyerp-client/usr/share/icons/tinyerp-client.png
 
 	# Installing desktop file
 	install -D -m 0644 debian/desktop/tinyerp-client debian/tinyerp-client/usr/share/applications/tinyerp-client.desktop
 
 	# Installing pixmaps
-	install -d -m 0755 debian/tinyerp-client/usr/share/pixmaps
-	cp debian/pixmaps/tinyerp-icon-16x16.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client-16.xpm
-	cp debian/pixmaps/tinyerp-icon-32x32.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client-32.xpm
-	cp debian/pixmaps/tinyerp-icon-64x64.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client-64.xpm
-	ln -s tinyerp-client-32.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client.xpm
+	cp debian/pixmaps/tinyerp-icon-16x16.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/tinyerp-client-16.xpm
+	cp debian/pixmaps/tinyerp-icon-32x32.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/tinyerp-client-32.xpm
+	cp debian/pixmaps/tinyerp-icon-64x64.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/tinyerp-client-64.xpm
+	ln -s tinyerp-client-32.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/tinyerp-client.xpm
 
 	# Fixing permissions
 	chmod 0755 debian/tinyerp-client/usr/lib/tinyerp-client/tinyerp-client.py
 	chmod 0755 debian/tinyerp-client/usr/lib/tinyerp-client/release.py
-	find debian/tinyerp-client/usr/share/tinyerp-client/themes -type f -exec chmod 0644 {} \;
+	find debian/tinyerp-client/usr/share/tinyerp-client/themes -type f | xargs chmod 0644
+	find debian/tinyerp-client/usr/share/tinyerp-client/themes -type d | xargs chmod 0755
 
 	# Removing double files
 	rm -rf debian/tinyerp-client/usr/share/doc/tinyerp-client-*
@@ -82,7 +82,6 @@ binary-indep: build install
 	dh_install
 	dh_installmenu
 	dh_installman
-	dh_link
 	dh_strip
 	dh_compress
 	dh_fixperms

@@ -1,9 +1,13 @@
 This package was debianized by Daniel Baumann <daniel@debian.org> on
 Sun, 16 Oct 2005 13:01:00 +0200.
 
-It was downloaded from <http://www.tinyerp.org/download.php>.
+It was downloaded from
 
-Upstream Author: Tiny SPRL <http://www.tiny.be/>,
+	<http://www.tinyerp.org/download.php>
+
+Upstream Author:
+
+	Tiny SPRL <http://www.tiny.be/>
 
 License (except msgfmt.py and mydistutils.py):
 
@@ -65,5 +69,5 @@ License (mydistutils.py):
 On Debian systems, the complete text of the GNU General Public License
 can be found in /usr/share/common-licenses/GPL file.
 
-The Debian packaging is (C) 2005-2007, Daniel Baumann <daniel@debian.org> and
+The Debian packaging is (C) 2005-2008, Daniel Baumann <daniel@debian.org> and
 is licensed under the GPL, see `/usr/share/common-licenses/GPL-2'.
