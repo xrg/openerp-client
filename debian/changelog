@@ -1,3 +1,9 @@
+tinyerp-client (3.2.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Daniel Baumann <daniel.baumann@panthera-systems.net>  Thu,  2 Feb 2006 09:44:00 +0100
+
 tinyerp-client (3.2.0-1) unstable; urgency=low
 
   * New upstream release.
