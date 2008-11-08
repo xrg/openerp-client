@@ -5,22 +5,12 @@
 
 include /usr/share/dpatch/dpatch.make
 
-upstream:
-	if [ ! -d debian/upstream ]; \
-	then \
-		mkdir debian/upstream || exit 1; \
-	fi
-
-	rm -f debian/upstream/changelog
-	cd debian/upstream && \
-	wget http://tinyerp.org/download/changelog
-
-build: build-stamp patch
-build-stamp:
+build: build-stamp
+build-stamp: patch-stamp
 	dh_testdir
 
 	# Building package
-	#python setup.py build
+	python setup.py build
 
 	touch build-stamp
 
@@ -30,9 +20,9 @@ clean: unpatch
 	rm -f build-stamp
 
 	# Cleaning package
-	#python setup.py clean
+	-python setup.py clean
 	rm -rf build
-	find $(CURDIR) -type f -name \*.pyc -exec rm -f {} \;
+	find $(CURDIR) -type f -name "*.pyc" -exec rm -f {} \;
 
 	dh_clean
 
@@ -44,47 +34,57 @@ install: build
 
 	# Installing package
 	python setup.py install --prefix=$(CURDIR)/debian/tinyerp-client/usr
+	cp -a bin/themes debian/tinyerp-client/usr/share/tinyerp-client
 
-	mv debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/* \
-		debian/tinyerp-client/usr/share/tinyerp-client
+	# Moving main program
+	sed -i -e 's#python.*/site-packages/##' debian/tinyerp-client/usr/bin/tinyerp-client
+	mv debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client debian/tinyerp-client/usr/lib
+	rm -rf debian/tinyerp-client/usr/lib/python*
+
+	# Moving graphics
+	mv debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/flag.png debian/tinyerp-client/usr/share/tinyerp-client
+	mv debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/tinyerp.png debian/tinyerp-client/usr/share/tinyerp-client
+	mv debian/tinyerp-client/usr/share/pixmaps/tinyerp-client/tinyerp_icon.png debian/tinyerp-client/usr/share/tinyerp-client
+	rm -rf debian/tinyerp-client/usr/share/pixmaps
 
 	# Symlinking essential files
-	ln -s ../../../../share/tinyerp-client/flag.png debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client
-	ln -s ../../../../share/tinyerp-client/tinyerp.png debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client
-	ln -s ../../../../share/tinyerp-client/tinyerp-client.png debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client
-	ln -s ../../../../share/tinyerp-client/terp.glade debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client
-	ln -s ../../../../share/tinyerp-client/tipoftheday.txt debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client
+	ln -s ../../share/tinyerp-client/flag.png debian/tinyerp-client/usr/lib/tinyerp-client/flag.png
+	ln -s ../../share/tinyerp-client/terp.glade debian/tinyerp-client/usr/lib/tinyerp-client/terp.glade
+	ln -s ../../share/tinyerp-client/tinyerp_icon.png debian/tinyerp-client/usr/lib/tinyerp-client/tinyerp_icon.png
+	ln -s ../../share/tinyerp-client/themes debian/tinyerp-client/usr/lib/tinyerp-client/themes
+	ln -s ../../share/tinyerp-client/tipoftheday.txt debian/tinyerp-client/usr/lib/tinyerp-client/tipoftheday.txt
 
 	# Installing desktop file
-	install -D -m 644 debian/desktop/tinyerp-client debian/tinyerp-client/usr/share/applications/tinyerp-client.desktop
+	install -D -m 0644 debian/desktop/tinyerp-client debian/tinyerp-client/usr/share/applications/tinyerp-client.desktop
 
 	# Installing icons
-	install -d -m 755 debian/tinyerp-client/usr/share/icons
+	install -d -m 0755 debian/tinyerp-client/usr/share/icons
 	cp pixmaps/tinyerp-icon-16x16.png debian/tinyerp-client/usr/share/icons/tinyerp-client-16.png
 	cp pixmaps/tinyerp-icon-32x32.png debian/tinyerp-client/usr/share/icons/tinyerp-client-32.png
 	cp pixmaps/tinyerp-icon-64x64.png debian/tinyerp-client/usr/share/icons/tinyerp-client-64.png
 	ln -s tinyerp-client-32.png debian/tinyerp-client/usr/share/icons/tinyerp-client.png
 
 	# Installing pixmaps
+	install -d -m 0755 debian/tinyerp-client/usr/share/pixmaps
 	cp pixmaps/tinyerp-icon-16x16.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client-16.xpm
 	cp pixmaps/tinyerp-icon-32x32.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client-32.xpm
 	cp pixmaps/tinyerp-icon-64x64.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client-64.xpm
 	ln -s tinyerp-client-32.xpm debian/tinyerp-client/usr/share/pixmaps/tinyerp-client.xpm
 
 	# Fixing permissions
-	chmod 0755 debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client/tinyerp-client.py
+	chmod 0755 debian/tinyerp-client/usr/lib/tinyerp-client/tinyerp-client.py
+	find debian/tinyerp-client/usr/share/tinyerp-client/themes -type f -exec chmod 0644 {} \;
 
 	# Removing double files
 	find debian/tinyerp-client -type f -name "*.pyc" -exec rm -f {} \;
 	rm -rf debian/tinyerp-client/usr/share/doc/tinyerp-client-*
-	rm -rf debian/tinyerp-client/usr/share/pixmaps/tinyerp-client
 
 binary-arch: build install
 
 binary-indep: build install
 	dh_testdir
 	dh_testroot
-	dh_installchangelogs debian/upstream/changelog
+	dh_installchangelogs doc/changelog
 	dh_installdocs
 	dh_install
 	dh_installmenu
@@ -93,8 +93,8 @@ binary-indep: build install
 	dh_strip
 	dh_compress
 	dh_fixperms
+	dh_pysupport
 	dh_installdeb
-	dh_shlibdeps
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb

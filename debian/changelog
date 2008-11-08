@@ -1,3 +1,12 @@
+tinyerp-client (3.4.2-1) unstable; urgency=medium
+
+  * New upstream release.
+  * New email address.
+  * Complying with new python policy (Closes: #380972).
+  * Added patch to match URLs with the new vendor website.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 16 Oct 2006 13:34:00 +0200
+
 tinyerp-client (3.3.0-2) unstable; urgency=low
 
   * Fixed essential symlinks (Closes: #374856).
