@@ -66,6 +66,7 @@ install: build
 
 	# Fixing permissions
 	chmod 0755 debian/tinyerp-client/usr/lib/tinyerp-client/tinyerp-client.py
+	chmod 0755 debian/tinyerp-client/usr/lib/tinyerp-client/release.py
 	find debian/tinyerp-client/usr/share/tinyerp-client/themes -type f -exec chmod 0644 {} \;
 
 	# Removing double files
