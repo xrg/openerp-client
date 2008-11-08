@@ -1,3 +1,9 @@
+tinyerp-client (4.2.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 31 Oct 2007 21:40:00 +0100
+
 tinyerp-client (4.2.0~rc3-1) experimental; urgency=low
 
   * New upstream release.
