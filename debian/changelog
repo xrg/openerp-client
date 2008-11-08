@@ -1,3 +1,18 @@
+tinyerp-client (4.2.3.4-1) unstable; urgency=low
+
+  * Merging upstream version 4.2.3.4.
+  * Adding changelog entries for debian version 3.4.2-2 and 3.4.2-3.
+  * Upgrading package to debhelper 7.
+  * Upgrading package to standards 3.8.0.
+  * Updating homepage field in control file.
+  * Adding vcs fields in control file.
+  * Rewriting copyright file in machine-interpretable format.
+  * Reordering and splitting out rules file into individual debhelper files.
+  * Completing gtk.dpatch header description.
+  * Adding patch to update homepage location of tinyerp.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat,  8 Nov 2008 16:04:00 +0100
+
 tinyerp-client (4.2.2-2) unstable; urgency=medium
 
   * Adding patch from Chris Lamb <chris@chris-lamb.co.uk> to fix startup
