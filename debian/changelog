@@ -1,3 +1,10 @@
+tinyerp-client (4.2.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * Adding depends to python-egenix-mxdatetime (Closes: #468275).
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 26 Apr 2008 16:07:00 +0200
+
 tinyerp-client (4.2.1-1) unstable; urgency=low
 
   * Maintainer upload from the Zuerich BSP.
