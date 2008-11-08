@@ -1,0 +1,69 @@
+This package was debianized by Daniel Baumann <daniel.baumann@panthera-systems.net> on
+Sun, 16 Oct 2005 13:01:00 +0200.
+
+It was downloaded from <http://www.tinyerp.org/download.php>.
+
+Copyright Holder: Tiny SPRL <http://www.tiny.be/>,
+		  Martin von Loewis <loewis@informatik.hu-berlin.de>,
+		  Terje Rosten <terjeros@phys.ntnu.no>,
+		  Nicolas Evrard
+
+License (except msgfmt.py and mydistutils.py):
+
+	Copyright (C) 2000-2006 Tiny SPRL <http://www.tiny.be/>
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+
+On Debian systems, the complete text of the GNU General Public License
+can be found in /usr/share/common-licenses/GPL file.
+
+License (msgfmt.py):
+
+	Copyright (C) Martin von Loewis <loewis@informatik.hu-berlin.de>
+
+	This file is part of Gnomolicious and is distributed under the Python
+	Software License (http://www.python.org/2.3/license.html).
+
+	Permission to use, copy, modify, and distribute this software and its
+	documentation for any purpose and without fee is hereby granted,
+	provided that the above copyright notice appear in all copies and that
+	both that copyright notice and this permission notice appear in
+	supporting documentation, and that the name of Stichting Mathematisch
+	Centrum or CWI not be used in advertising or publicity pertaining to
+	distribution of the software without specific, written prior permission.
+
+License (mydistutils.py):
+
+	Copyright (C) 2003-2005 Terje Rosten <terjeros@phys.ntnu.no>
+	Copyright (C) Nicolas Evrard
+
+	This file is part of Gnomolicious.
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+
+On Debian systems, the complete text of the GNU General Public License
+can be found in /usr/share/common-licenses/GPL file.
