@@ -1,0 +1,23 @@
+Source: tinyerp-client
+Section: x11
+Priority: optional
+Maintainer: Daniel Baumann <daniel.baumann@panthera-systems.net>
+Uploaders: Jean-Marc Chaton <chaton@debian.org>
+Build-Depends: debhelper (>= 4.0), dpatch
+Build-Depends-Indep: python-dev, python-gtk2, python-glade2
+Standards-Version: 3.7.2
+
+Package: tinyerp-client
+Architecture: all
+Depends: python, python-gtk2, python-glade2
+Recommends: xpdf | pdf-viewer
+Suggests: tinyerp-server
+Description: Enterprise Resource Management software (client)
+ Tiny ERP is a complete ERP and CRM. The main features are accounting (analytic
+ and financial), stock management, sales and purchases management, tasks
+ automation, marketing campaigns, help desk, POS, etc. Technical features
+ include a distributed server, flexible workflows, an object database, a dynamic
+ GUI, customizable reports, and XML-RPC interfaces.
+ .
+ This package contains the Tiny ERP client, install tinyerp-server for the
+ server.
