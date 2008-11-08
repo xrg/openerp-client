@@ -1,5 +1,7 @@
 #!/bin/sh /usr/share/dpatch/dpatch-run
-## 02-autobuild.dpatch by Chris Lamb <chris@chris-lamb.co.uk>
+## 02-gtk.dpatch by Chris Lamb <lamby@debian.org>
+##
+## DP: Fixes startup problem (Closes: #481895).
 
 @DPATCH@
 
