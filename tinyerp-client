@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /usr/lib/python2.4/site-packages/tinyerp-client
+exec /usr/bin/python ./tinyerp-client.py $@
