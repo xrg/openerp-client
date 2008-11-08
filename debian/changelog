@@ -1,3 +1,9 @@
+tinyerp-client (4.0.2-2) unstable; urgency=low
+
+  * Setting maintainer to Jean-Marc.
+
+ -- Daniel Baumann <daniel@debian.org>  Thu, 18 Jan 2007 14:11:00 +0100
+
 tinyerp-client (4.0.2-1) unstable; urgency=low
 
   * New upstream release.

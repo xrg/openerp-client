@@ -1,8 +1,7 @@
 Source: tinyerp-client
 Section: x11
 Priority: optional
-Maintainer: Daniel Baumann <daniel@debian.org>
-Uploaders: Jean-Marc Chaton <chaton@debian.org>
+Maintainer: Jean-Marc Chaton <chaton@debian.org>
 Build-Depends: debhelper (>= 5), dpatch, python-support
 Build-Depends-Indep: python-dev, python-gtk2, python-glade2
 Standards-Version: 3.7.2
