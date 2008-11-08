@@ -9,7 +9,7 @@ Homepage: http://www.tinyerp.org/
 
 Package: tinyerp-client
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, python-glade2
+Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, python-glade2, python-egenix-mxdatetime
 Recommends: openoffice.org-writer, xpdf | pdf-viewer
 Suggests: tinyerp-server
 Description: Enterprise Resource Management software (client)
