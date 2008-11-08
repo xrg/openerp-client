@@ -1,6 +1,3 @@
-VERSION 3.2.0-RC1
-=================
-
 Mon Dec 26 10:45:36 CET 2005
 	NEW MODULES:
 		Accounting: completly rewritten from scratch (based on SAGE L100)
