@@ -1,0 +1,24 @@
+#!/bin/sh /usr/share/dpatch/dpatch-run
+## 02-urls.dpatch by Daniel Baumann <daniel@debian.org>
+##
+## DP: Adjusts old URLs to new vendor page.
+
+@DPATCH@
+
+diff -Naur tinyerp-client-3.4.2.orig/bin/modules/gui/main.py tinyerp-client-3.4.2/bin/modules/gui/main.py
+--- tinyerp-client-3.4.2.orig/bin/modules/gui/main.py	2006-09-11 13:56:53.000000000 +0000
++++ tinyerp-client-3.4.2/bin/modules/gui/main.py	2006-10-16 12:35:39.000000000 +0000
+@@ -337,11 +337,11 @@
+ 		rpc.session.logout()
+ 		
+ 	def sig_help_index(self, widget):
+-		tools.launch_browser('http://tinyerp.org/docs/index.php/UserManual/HomePage.html')
++		tools.launch_browser('http://tinyerp.com/documentation/user-manual/')
+ 
+ 	def sig_help_context(self, widget):
+ 		model = self._wid_get().model
+-		tools.launch_browser('http://tinyerp.org/docs/context_index.php?model=%s' % model)
++		tools.launch_browser('http://tinyerp.com/documentation/features/')
+ 
+ 	def sig_tips(self, *args):
+ 		common.tipoftheday()
