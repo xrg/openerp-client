@@ -5,14 +5,7 @@
 
 include /usr/share/dpatch/dpatch.make
 
-build: build-stamp
-build-stamp: patch-stamp
-	dh_testdir
-
-	# Building package
-	python setup.py build
-
-	touch build-stamp
+build: patch-stamp
 
 clean: unpatch
 	dh_testdir
@@ -33,7 +26,7 @@ install: build
 	dh_installdirs
 
 	# Installing package
-	python setup.py install --prefix=$(CURDIR)/debian/tinyerp-client/usr
+	python setup.py install --no-compile --prefix=$(CURDIR)/debian/tinyerp-client/usr
 	cp -a bin/themes debian/tinyerp-client/usr/share/tinyerp-client
 
 	# Moving main program
@@ -76,7 +69,6 @@ install: build
 	find debian/tinyerp-client/usr/share/tinyerp-client/themes -type f -exec chmod 0644 {} \;
 
 	# Removing double files
-	find debian/tinyerp-client -type f -name "*.pyc" -exec rm -f {} \;
 	rm -rf debian/tinyerp-client/usr/share/doc/tinyerp-client-*
 
 binary-arch: build install
@@ -84,7 +76,7 @@ binary-arch: build install
 binary-indep: build install
 	dh_testdir
 	dh_testroot
-	dh_installchangelogs doc/changelog
+	dh_installchangelogs doc/Changelog
 	dh_installdocs
 	dh_install
 	dh_installmenu
