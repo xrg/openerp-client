@@ -1,3 +1,10 @@
+tinyerp-client (4.0.0~rc1-2) unstable; urgency=low
+
+  * Cleaned up build-depends.
+  * Fixed icon location.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue,  5 Dec 2006 13:04:00 +0100
+
 tinyerp-client (4.0.0~rc1-1) unstable; urgency=low
 
   * New upstream release.
