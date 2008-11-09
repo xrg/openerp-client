@@ -1,3 +1,9 @@
+openerp-client (5.0.0~alpha-2) experimental; urgency=low
+
+  * Renaming tinyerp-client to new upstream openerp-client name.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun,  9 Nov 2008 19:15:00 +0100
+
 tinyerp-client (5.0.0~alpha-1) experimental; urgency=low
 
   * Merging upstream version 5.0.0~alpha.
