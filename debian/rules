@@ -23,15 +23,15 @@ install: build
 	dh_prep
 	dh_installdirs
 
-	python setup.py install --no-compile --prefix=$(CURDIR)/debian/tinyerp-client/usr
+	python setup.py install --no-compile --prefix=$(CURDIR)/debian/openerp-client/usr
 
 	# Adjusting program location
-	sed -i -e 's|python.*/site-packages/||' debian/tinyerp-client/usr/bin/openerp-client
-	mv debian/tinyerp-client/usr/lib/python*/site-packages/openerp-client debian/tinyerp-client/usr/lib
-	rm -rf debian/tinyerp-client/usr/lib/python*
+	sed -i -e 's|python.*/site-packages/||' debian/openerp-client/usr/bin/openerp-client
+	mv debian/openerp-client/usr/lib/python*/site-packages/openerp-client debian/openerp-client/usr/lib
+	rm -rf debian/openerp-client/usr/lib/python*
 
 	# Removing double files
-	rm -rf debian/tinyerp-client/usr/share/doc/openerp-client-*
+	rm -rf debian/openerp-client/usr/share/doc/openerp-client-*
 
 binary: binary-indep
 
