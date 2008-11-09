@@ -1,4 +1,4 @@
-Source: tinyerp-client
+Source: openerp-client
 Section: x11
 Priority: optional
 Maintainer: Daniel Baumann <daniel@debian.org>
@@ -9,12 +9,13 @@ Homepage: http://www.openerp.com/
 Vcs-Browser: http://git.debian.net/?p=debian/openerp-client.git
 Vcs-Git: git://git.debian.net/git/debian/openerp-client.git
 
-Package: tinyerp-client
+Package: openerp-client
 Architecture: all
 Depends: ${misc:Depends}, python, python-egenix-mxdatetime, python-glade2, python-gtk2
+Conflicts: tinyerp-client (<< 5.0.0~alpha-2)
+Replaces: tinyerp-client
 Recommends: openoffice.org-writer, evince | pdf-viewer
-Provides: openerp-client
-Suggests: tinyerp-server
+Suggests: openerp-server
 Description: Enterprise Resource Management (client)
  OpenERP is a complete ERP and CRM. The main features are accounting (analytic
  and financial), stock management, sales and purchases management, tasks
@@ -22,5 +23,15 @@ Description: Enterprise Resource Management (client)
  include a distributed server, flexible workflows, an object database, a dynamic
  GUI, customizable reports, and NET-RPC and XML-RPC interfaces.
  .
- This package contains the OpenERP client, install tinyerp-server package for
+ This package contains the OpenERP client, install openerp-server package for
  the server.
+
+Package: tinyerp-client
+Architecture: all
+Depends: openerp-client
+Description: Enterprise Resource Management (client; transitional package)
+ Package to ease upgrading from older tinyerp-client packages to the new
+ openerp-client package.
+ .
+ This package can be purged at anytime once the openerp-client package has been
+ installed.
