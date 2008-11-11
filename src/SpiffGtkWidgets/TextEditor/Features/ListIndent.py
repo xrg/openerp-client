@@ -33,14 +33,14 @@ class ListIndent(Feature):
         self.bullet_point = u'•'
         self.lock_signals = None
         self.start_tag = buffer.create_tag('list-start',
-                                           foreground  = 'lightblue',
+                                           #foreground  = 'lightblue',
                                            left_margin = 30,
                                            pixels_above_lines = 12)
         self.bullet_tag = buffer.create_tag('list-bullet',
-                                            background  = 'orange',
+                                            #background  = 'orange',
                                             left_margin = 30)
         self.list_tag   = buffer.create_tag('list',
-                                            underline = pango.UNDERLINE_SINGLE,
+                                            #underline = pango.UNDERLINE_SINGLE,
                                             left_margin        = 30,
                                             pixels_above_lines = 3)
         buffer.connect_after('insert-text',  self._on_buffer_insert_text_after)
@@ -160,7 +160,7 @@ class ListIndent(Feature):
 
             # Mark the bullet point.
             start   = buffer.get_iter_at_offset(start_off)
-            end_off = start_off + len(self.bullet_point)
+            end_off = start_off + len(self.bullet_point) + 1
             end     = buffer.get_iter_at_offset(end_off)
             buffer.apply_tag(self.bullet_tag, start, end)
 
@@ -169,8 +169,8 @@ class ListIndent(Feature):
 
         # Mark the list start.
         start = buffer.get_iter_at_offset(insert_start_off)
-        end   = start.copy()
         self._to_list_start(start)
+        end   = start.copy()
         end.forward_to_tag_toggle(self.bullet_tag)
         buffer.apply_tag(self.start_tag,  start, end)
         buffer.apply_tag(self.bullet_tag, start, end)
@@ -196,6 +196,21 @@ class ListIndent(Feature):
 
     def _delete_inside_list(self, start, end):
         #print "DELETE INSIDE"
+        if not start.has_tag(self.list_tag) and not self._at_bullet_point(end):
+            #print "start has no list tag"
+            next_item_start = end.copy()
+            self._to_list_item_end(next_item_start)
+            next_item_start.forward_line()
+            self.buffer.remove_tag(self.list_tag, end, next_item_start)
+
+            if self._at_bullet_point(next_item_start):
+                bullet_end = next_item_start.copy()
+                bullet_end.forward_to_tag_toggle(self.bullet_tag)
+                self.buffer.apply_tag(self.start_tag,
+                                      next_item_start,
+                                      bullet_end)
+            return
+
         if start.has_tag(self.start_tag):
             #print "instart"
             # Delete the old start tag.
@@ -266,7 +281,7 @@ class ListIndent(Feature):
         if self.lock_signals:
             return
         self.lock_signals = True
-        if start.has_tag(self.list_tag):
+        if start.has_tag(self.list_tag) or end.has_tag(self.list_tag):
             self._delete_inside_list(start, end)
         else:
             self._delete_outside_list(start, end)
