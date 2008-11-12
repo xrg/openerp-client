@@ -185,9 +185,14 @@ class form(object):
     def sig_attach(self, widget=None):
         id = self.screen.id_get()
         if id:
-            import win_attach
-            win = win_attach.win_attach(self.model, id, parent=self.window)
-            win.go()
+            ctx = self.context.copy()
+            ctx.update(rpc.session.context)
+            action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'action_get', ctx)
+            action['domain'] = [('res_model', '=', self.model), ('res_id', '=', id)]
+            ctx['default_res_model'] = self.model
+            ctx['default_res_id'] = id
+            obj = service.LocalService('action.main')
+            obj._exec_action(action, {}, ctx)
         else:
             self.message_state(_('No record selected ! You can only attach to existing record.'), color='red')
         return True

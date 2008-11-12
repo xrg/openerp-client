@@ -119,7 +119,7 @@ class ModelRecord(signal_event.signal_event):
             context= self.context_get()
             context= context.copy()
             context['read_delta']= time.time()-self.read_time
-            if not rpc.session.rpc_exec_auth('/object', 'execute', self.resource, 'write', [self.id], value, context):
+            if not self.rpc.write([self.id], value, context):
                 return False
         self._loaded = False
         if reload:
