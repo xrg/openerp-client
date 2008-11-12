@@ -502,7 +502,7 @@ class Screen(signal_event.signal_event):
             self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
             vt = self.current_view.view_type
             self.search_active(
-                    active=vt in ('tree', 'graph', 'calendar'), 
+                    active=self.show_search and vt in ('tree', 'graph', 'calendar'), 
                     show_search=self.show_search and vt in ('tree', 'graph'),
             )
 
