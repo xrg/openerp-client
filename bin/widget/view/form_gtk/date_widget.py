@@ -169,13 +169,15 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         self.set_text(self.initial_value)
 
     def _on_key_press(self, editable, event):
-        if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return):
+        if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return, gtk.keysyms.KP_Enter):
             if self.mode_cmd:
                 self.mode_cmd = False
                 if self.callback_process: self.callback_process(False, self, event)
                 self.stop_emission("key-press-event")
                 return True
-        elif event.keyval in (ord('+'),ord('-'),ord('=')):
+        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus, 
+                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus, 
+                              gtk.keysyms.KP_Equal, gtk.keysyms.equal):
                 self.mode_cmd = True
                 self.date_get()
                 if self.callback_process: self.callback_process(True, self, event)
@@ -209,10 +211,8 @@ class ComplexEntry(gtk.HBox):
             text = self.widget_cmd.get_text()[:-1]
             self.widget_cmd.set_text(text)
             return True
-        if event.keyval<250:
-            value = chr(event.keyval)
-            text = self.widget_cmd.get_text()
-            self.widget_cmd.set_text(text+value)
+        text = self.widget_cmd.get_text()
+        self.widget_cmd.set_text(text + event.string)
         return True
 
     def _process_cb(self, ok, widget, event=None):

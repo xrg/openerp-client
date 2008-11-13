@@ -124,7 +124,7 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
         return tools.datetime_util.strptime(tc, self.format)
 
     def _on_key_press(self, editable, event):
-        if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return):
+        if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return, gtk.keysyms.KP_Enter):
             if self.mode_cmd:
                 self.mode_cmd = False
                 if self.callback: self.callback.process(self, event)
@@ -132,7 +132,9 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
                 return True
             else:
                 return False
-        elif event.keyval in (ord('+'),ord('-'),ord('=')):
+        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus, 
+                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus, 
+                              gtk.keysyms.KP_Equal, gtk.keysyms.equal):
                 self.mode_cmd = True
                 self.date_get(editable)
                 if self.callback: self.callback.event(self, event)
@@ -151,7 +153,7 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
             self._on_delete_text(editable, pos, len(text))
             return True
 
-        if event.keyval>=ord('0') and event.keyval<=ord('9'):
+        if event.keyval in [getattr(gtk.keysyms, '_%d' % x) for x in range(0,10)]:  # key between 0 and 9
             pos = editable.get_position()
             text = editable.get_text()
             text = text[:pos] + chr(event.keyval) + text[pos + 1:]
@@ -182,8 +184,8 @@ class date_callback(object):
     def event(self, widget, event):
         if event.keyval in (gtk.keysyms.BackSpace,):
             self.value = self.value[:-1]
-        if event.keyval<250:
-            self.value = self.value+chr(event.keyval)
+        
+        self.value += event.string
         self.display(widget)
         return True
 
