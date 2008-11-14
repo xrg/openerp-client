@@ -153,12 +153,17 @@ def terp_survey():
     if res==gtk.RESPONSE_OK:
         email =  winglade.get_widget('entry_email').get_text()
         company =  winglade.get_widget('entry_company').get_text()
+        phone = winglade.get_widget('entry_phone').get_text()
+        name = winglade.get_widget('entry_name').get_text()
         result = "\ncompany: "+str(company)
+        result += "\nname: " + str(name)
+        result += "\nphone: " + str(phone)
         for widname in widnames:
             wid = winglade.get_widget('combo_'+widname)
             result += "\n"+widname+": "+wid.child.get_text()
         result += "\nplan_use: "+str(winglade.get_widget('check_use').get_active())
         result += "\nplan_sell: "+str(winglade.get_widget('check_sell').get_active())
+        result += "\nwant_demo: " + str(winglade.get_widget('check_button_demo').get_active())
 
         buffer = winglade.get_widget('textview_comment').get_buffer()
         iter_start = buffer.get_start_iter()
@@ -169,11 +174,16 @@ def terp_survey():
         upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
         options.options['survey.position']=SURVEY_VERSION
         options.save()
-        common.message(_('Thank you for the feedback !\nYour comments have been sent to OpenERP.\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
+        common.message(_('Thank you for the feedback !\n\
+                         Your comments have been sent to OpenERP.\n\
+                         You should now start by creating a new database or\n\
+                         connecting to an existing server through the "File" menu.'))
     else:
         parent.present()
         win.destroy()
-        common.message(_('Thank you for testing OpenERP !\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
+        common.message(_('Thank you for testing OpenERP !\n\
+                         You should now start by creating a new database or\n\
+                         connecting to an existing server through the "File" menu.'))
     return True
 
 
