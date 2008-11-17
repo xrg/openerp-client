@@ -88,8 +88,7 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
                        event_off_days + event_width_days,
                        len(self.event_items))
         item.set_text(event.caption)
-        if event.all_day:
-            item.set_property('color', color.to_int(event.bg_color))
+        item.set_property('color', color.to_int(event.bg_color))
         if self.show_normal and not util.same_day(event.start, event.end):
             item.set_property('color', color.to_int(event.bg_color))
         elif not event.all_day:
