@@ -93,6 +93,7 @@ class ViewCalendar(object):
         self.cal_model = Calendar.Model()
         self.cal_view = Calendar.Calendar(self.cal_model)
         self.cal_view.connect('event-clicked', self._on_event_clicked)
+        self.cal_view.connect('do_month_back_forward', self._back_forward)
 
         vbox = self.glade.get_widget('cal_vbox')
         vbox.pack_start(self.cal_view)
