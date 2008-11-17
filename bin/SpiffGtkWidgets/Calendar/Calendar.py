@@ -117,7 +117,7 @@ class Calendar(hippo.Canvas):
                            text          = c2i(style.fg[gtk.STATE_NORMAL]),
                            text_inactive = c2i(style.fg[gtk.STATE_INSENSITIVE]),
                            body          = c2i(style.light[gtk.STATE_ACTIVE]),
-                           body_today    = c2i('ivory'),
+                           body_today    = c2i('peach puff'),
                            border        = c2i(style.mid[gtk.STATE_NORMAL]),
                            selected      = c2i(style.mid[gtk.STATE_SELECTED]),
                            inactive      = c2i(style.bg[gtk.STATE_PRELIGHT]))
