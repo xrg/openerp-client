@@ -1268,24 +1268,6 @@
               </widget>
             </child>
             <child>
-              <widget class="GtkSeparatorToolItem" id="separatortoolitem8">
-                <property name="visible">True</property>
-              </widget>
-            </child>
-            <child>
-              <widget class="GtkToolButton" id="but_reload">
-                  <property name="visible">True</property>
-                  <property name="tooltip" translatable="yes">Reload</property>
-                  <property name="label" translatable="yes">Reload</property>
-                  <property name="use_underline">True</property>
-                  <property name="stock_id">gtk-redo</property>
-                  <signal name="clicked" handler="on_form_reload_activate"/>
-              </widget>
-              <packing>
-                  <property name="expand">False</property>
-              </packing>
-            </child>
-            <child>
               <widget class="GtkSeparatorToolItem" id="separatortoolitem888">
                 <property name="visible">True</property>
               </widget>
@@ -1394,6 +1376,24 @@
               </widget>
               <packing>
                 <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkSeparatorToolItem" id="separatortoolitem8">
+                <property name="visible">True</property>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="but_reload">
+                  <property name="visible">True</property>
+                  <property name="tooltip" translatable="yes">Reload</property>
+                  <property name="label" translatable="yes">Reload</property>
+                  <property name="use_underline">True</property>
+                  <property name="stock_id">gtk-redo</property>
+                  <signal name="clicked" handler="on_form_reload_activate"/>
+              </widget>
+              <packing>
+                  <property name="expand">False</property>
               </packing>
             </child>
           </widget>
