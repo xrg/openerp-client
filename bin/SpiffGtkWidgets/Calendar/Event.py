@@ -13,6 +13,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 import util
+import datetime
 
 class Event(object):
     """
@@ -38,5 +39,15 @@ class Event(object):
         if end is None:
             self.all_day = True
             self.end     = start
+
+        if end is not None:
+            # Check if end date (deadline) have a time set to 00:00:00,
+            # this means the event should really end on the day before,
+            # so remove 'one' second.
+            end_day = datetime.datetime(*end.timetuple()[:3])
+            end_day_seconds = datetime.datetime(*end.timetuple()[:6])
+            if end_day == end_day_seconds:
+                self.end = end - datetime.timedelta(seconds=1)
+
         if self.all_day:
             self.end = util.end_of_day(self.end)
