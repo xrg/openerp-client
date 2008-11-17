@@ -176,7 +176,7 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
                     hidden += 1
 
             # No need to hide anything if the box is large enough.
-            if hidden == 0 and len(col) <= max_rows:
+            if len(col) <= max_rows:
                 for child in col:
                     child.set_visible(True)
                 continue
