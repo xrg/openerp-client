@@ -196,10 +196,14 @@ class Calendar(hippo.Canvas):
     def on_day_clicked(self, sender, date, event):
         if self.emit('date-clicked', date, event):
             return True
-        self.select(date)
         if self.range == self.RANGE_MONTH \
           and not self.range_item.is_active(date):
             self.set_range(self.RANGE_MONTH)
+            if date < self.active_range[0]:
+                self.emit('do_month_back_forward', -1)
+            else:
+                self.emit('do_month_back_forward', 1)
+        self.select(date)
         if self.emit('day-selected', date, event):
             return True
 
@@ -233,5 +237,11 @@ gobject.signal_new('day-activate',
                    gobject.SIGNAL_RUN_FIRST,
                    gobject.TYPE_NONE,
                    (gobject.TYPE_PYOBJECT, gobject.TYPE_PYOBJECT))
+
+gobject.signal_new('do_month_back_forward',
+                   Calendar,
+                   gobject.SIGNAL_RUN_FIRST,
+                   gobject.TYPE_NONE,
+                   (gobject.TYPE_PYOBJECT,))
 
 gobject.type_register(Calendar)
