@@ -135,6 +135,10 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
                                                       False):
                 self._add_event(event)
 
+        # Force all children to be visible, to fix 'overflow' positioning.
+        for child in self.get_children():
+            child.set_visible(True)
+
         # Change to fixed sizing.
         rows, cols = self.table.get_size()
         self.table.set_size(rows, cols)
