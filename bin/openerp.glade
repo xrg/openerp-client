@@ -8850,6 +8850,7 @@ This document has been modified while you were editing it.
               <widget class="GtkCalendar" id="calendar_small">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="show_week_numbers">True</property>
                 <signal name="day_selected_double_click" handler="on_calendar_small_day_selected_double_click"/>
               </widget>
               <packing>
