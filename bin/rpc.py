@@ -75,7 +75,7 @@ class xmlrpc_gw(gw_inter):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
     def __init__(self, url, db, uid, passwd, obj='/object'):
         gw_inter.__init__(self, url, db, uid, passwd, obj)
-        self._sock = xmlrpclib.ServerProxy(url+obj,verbose=1)
+        self._sock = xmlrpclib.ServerProxy(url+obj,verbose=0)
     def exec_auth(self, method, *args):
         logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
         res = self.execute(method, self._uid, self._passwd, *args)
@@ -257,7 +257,7 @@ class rpc_session(object):
 	except socket.error, err:
 		import locale
 		language, in_encoding = locale.getdefaultlocale()
-		common.error(_('Socket error'),err[1].decode(in_encoding),str(err[0]))
+		common.warning(err[1].decode(in_encoding),_('Socket error'))
 		return -1
         except:
             import sys
