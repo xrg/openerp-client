@@ -88,8 +88,7 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
                        event_off_days + event_width_days,
                        len(self.event_items))
         item.set_text(event.caption)
-        if event.all_day:
-            item.set_property('color', color.to_int(event.bg_color))
+        item.set_property('color', color.to_int(event.bg_color))
         if self.show_normal and not util.same_day(event.start, event.end):
             item.set_property('color', color.to_int(event.bg_color))
         elif not event.all_day:
@@ -136,6 +135,10 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
                                                       False):
                 self._add_event(event)
 
+        # Force all children to be visible, to fix 'overflow' positioning.
+        for child in self.get_children():
+            child.set_visible(True)
+
         # Change to fixed sizing.
         rows, cols = self.table.get_size()
         self.table.set_size(rows, cols)
@@ -173,7 +176,7 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
                     hidden += 1
 
             # No need to hide anything if the box is large enough.
-            if hidden == 0 and len(col) <= max_rows:
+            if len(col) <= max_rows:
                 for child in col:
                     child.set_visible(True)
                 continue

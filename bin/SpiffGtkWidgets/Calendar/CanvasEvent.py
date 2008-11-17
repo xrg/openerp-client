@@ -32,8 +32,7 @@ class CanvasEvent(CanvasRectangle):
         CanvasRectangle.__init__(self, **kwargs)
 
         # Create canvas items.
-        self.text = hippo.CanvasText(color_cascade = hippo.CASCADE_MODE_NONE,
-                                     xalign    = hippo.ALIGNMENT_CENTER,
+        self.text = hippo.CanvasText(xalign    = hippo.ALIGNMENT_CENTER,
                                      yalign    = hippo.ALIGNMENT_CENTER,
                                      size_mode = hippo.CANVAS_SIZE_ELLIPSIZE_END)
         self.append(self.text, hippo.PACK_EXPAND)

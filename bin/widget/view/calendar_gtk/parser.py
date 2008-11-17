@@ -26,7 +26,7 @@ import gtk
 import gtk.glade
 import gettext
 import common
-from datetime import datetime
+from datetime import datetime, date
 
 from SpiffGtkWidgets import Calendar
 from mx import DateTime
@@ -93,6 +93,8 @@ class ViewCalendar(object):
         self.cal_model = Calendar.Model()
         self.cal_view = Calendar.Calendar(self.cal_model)
         self.cal_view.connect('event-clicked', self._on_event_clicked)
+        self.cal_view.connect('do_month_back_forward', self._back_forward)
+        self.cal_view.connect('day-selected', self._change_small)
 
         vbox = self.glade.get_widget('cal_vbox')
         vbox.pack_start(self.cal_view)
@@ -152,8 +154,11 @@ class ViewCalendar(object):
         model.set(iter, self.TV_COL_ID, value, self.TV_COL_COLOR, color, self.TV_COL_LABEL, name)
 
     def _change_small(self, widget, *args, **argv):
-        t = list(widget.get_date())
-        t[1] += 1
+        if isinstance(widget, gtk.Calendar):
+            t = list(widget.get_date())
+            t[1] += 1
+        else:
+            t = list(args[0].timetuple()[:3])
         self.date = DateTime.DateTime(*t)
         self.display(None)
 
@@ -195,6 +200,7 @@ class ViewCalendar(object):
 
                 if isinstance(key, (tuple, list)):
                     value, name = key
+                    key = value
 
                 self.colors[key] = (name, value, None)
 
@@ -228,13 +234,13 @@ class ViewCalendar(object):
             self._radio_month.set_active(True)
             d1 = datetime(*list(t)[:6])
             self.cal_view.range = self.cal_view.RANGE_MONTH
-            self.cal_view.selected = d1
+            self.cal_view.selected = date(*list(t)[:3])
             self._label_current.set_text(self.date.strftime('%B %Y'))
         elif self.mode=='week':
             self._radio_week.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_WEEK
             d1 = datetime(*list(t)[:6])
-            self.cal_view.selected = d1
+            self.cal_view.selected = date(*list(t)[:3])
             self._label_current.set_text(_('Week') + ' ' + self.date.strftime('%W, %Y'))
         elif self.mode=='day':
             self._radio_day.set_active(True)
@@ -358,7 +364,7 @@ class ViewCalendar(object):
         #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
         #    return None
 
-        color_key = event.get(self.color_field)
+        color_key = event.get(self.color_field)[0]
         color_info = self.colors.get(color_key)
 
         color = None
