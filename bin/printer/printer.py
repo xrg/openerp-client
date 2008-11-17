@@ -156,8 +156,11 @@ class Printer(object):
 
         else:
             finderfunc = self.openers.get(ftype)
-            if not finderfunc and sys.platform in ['win32', 'nt']:
-                os.startfile( fname )
+            if not finderfunc:
+                if sys.platform in ['win32', 'nt']:
+                    os.startfile(fname)
+                else:
+                    raise Exception(_('Unable to handle %s filetype') % ftype)
             else:
                 opener = finderfunc()
                 opener(fname)
