@@ -1273,6 +1273,24 @@
               </widget>
             </child>
             <child>
+              <widget class="GtkToolButton" id="but_reload">
+                  <property name="visible">True</property>
+                  <property name="tooltip" translatable="yes">Reload</property>
+                  <property name="label" translatable="yes">Reload</property>
+                  <property name="use_underline">True</property>
+                  <property name="stock_id">gtk-redo</property>
+                  <signal name="clicked" handler="on_form_reload_activate"/>
+              </widget>
+              <packing>
+                  <property name="expand">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkSeparatorToolItem" id="separatortoolitem888">
+                <property name="visible">True</property>
+              </widget>
+            </child>
+            <child>
               <widget class="GtkRadioToolButton" id="radio_tree">
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">List</property>
@@ -1373,17 +1391,6 @@
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-index</property>
                 <signal name="clicked" handler="on_but_menu_clicked"/>
-              </widget>
-              <packing>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkToolButton" id="but_close">
-                <property name="visible">True</property>
-                <property name="tooltip" translatable="yes">Close this window</property>
-                <property name="stock_id">gtk-close</property>
-                <signal name="clicked" handler="on_but_close_clicked"/>
               </widget>
               <packing>
                 <property name="homogeneous">True</property>
