@@ -78,6 +78,12 @@ class CanvasEventView(hippo.CanvasBox):
             return
         range = datetime.datetime(*start.timetuple()[:3]), \
                 datetime.datetime(*end.timetuple()[:7])
+
+        # Update end if it's a `datetime.date' and not a `datetime.datetime',
+        # because day ranges are inclusive (so day must _end_ at 23:59:59)
+        if isinstance(end, datetime.date):
+            range = range[0], util.end_of_day(range[1])
+
         if self.range is not None \
           and self.range[0] == range[0] \
           and self.range[1] == range[1]:
