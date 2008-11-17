@@ -195,6 +195,7 @@ class ViewCalendar(object):
 
                 if isinstance(key, (tuple, list)):
                     value, name = key
+                    key = value
 
                 self.colors[key] = (name, value, None)
 
@@ -358,7 +359,7 @@ class ViewCalendar(object):
         #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
         #    return None
 
-        color_key = event.get(self.color_field)
+        color_key = event.get(self.color_field)[0]
         color_info = self.colors.get(color_key)
 
         color = None
