@@ -148,11 +148,20 @@ class Printer(object):
             pass
 
         if app_to_run:
-            def open_file( cmd, filename ):
-                cmd = cmd % filename
+            def open_file(cmd, filename):
+                cmd = cmd.split()
+                found = False
+                for i, v in enumerate(cmd):
+                    if v == '%s':
+                        cmd[i] = filename
+                        found = True
+                        break
+                if not found:
+                    cmd.append(filename)
+
                 import subprocess
                 subprocess.Popen(cmd)
-            open_file( app_to_run, fname )
+            open_file(app_to_run, fname)
 
         else:
             finderfunc = self.openers.get(ftype)
