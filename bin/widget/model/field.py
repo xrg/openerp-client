@@ -151,10 +151,22 @@ class CharField(object):
         return model.state_attrs[self.name]
 
 class BinaryField(CharField):
+    def __check_model(self, model):
+        assert self.name in model.mgroup.mfields
+    
+    def __check_load(self, model, modified, bin_size):
+        if model.id and (self.name not in model.value or (model.value[self.name] is None)):
+            c = rpc.session.context.copy()
+            c.update(model.context_get())
+            c['bin_size'] = bin_size
+            value = model.rpc.read([model.id], [self.name], c)[0][self.name]
+            self.set(model, value, modified=modified, get_binary_size=bin_size)
+
     def get_size_name(self):
         return "%s.size" % self.name
 
     def set(self, model, value, test_state=True, modified=False, get_binary_size=True):
+        self.__check_model(model)
         if model.is_wizard():
             get_binary_size = False
         model.value[self.name] = None
@@ -168,19 +180,17 @@ class BinaryField(CharField):
         return True
 
     def get(self, model, check_load=True, readonly=True, modified=False):
-        if self.name in model.value:
-            if (model.value[self.name] is None) and (model.id):
-                c = rpc.session.context.copy()
-                c.update(model.context_get())
-                c['bin_size'] = False
-                value = model.rpc.read([model.id], [self.name], c)[0][self.name]
-                self.set(model, value, modified=modified, get_binary_size=False)
+        self.__check_model(model)
+        self.__check_load(model, modified, False)
         return model.value.get(self.name, False) or False
 
     def get_client(self, model):
-        return model.value.get(self.get_size_name(), False)
+        self.__check_model(model)
+        self.__check_load(model, False, True)
+        return model.value.get(self.get_size_name(), False) or False
 
     def set_client(self, model, value, test_state=True, force_change=False):
+        self.__check_model(model)
         before = self.get(model)
         self.set(model, value, test_state, get_binary_size=False)
         if before != self.get(model):

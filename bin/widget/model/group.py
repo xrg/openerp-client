@@ -182,6 +182,7 @@ class ModelRecordGroup(signal_event.signal_event):
             return self.pre_load(ids, display)
         c = rpc.session.context.copy()
         c.update(self.context)
+        c['bin_size'] = True
         values = self.rpc.read(ids, self.fields.keys(), c)
         if not values:
             return False
@@ -321,7 +322,7 @@ class ModelRecordGroup(signal_event.signal_event):
             to_add_normal = []
             to_add_binary = []
             for f in to_add:
-                if fields[f]['type'] in ('image','binary'):
+                if fields[f]['type'] in ('image', 'binary'):
                     to_add_binary.append(f)
                 else:
                     to_add_normal.append(f)
@@ -336,17 +337,10 @@ class ModelRecordGroup(signal_event.signal_event):
             if to_add_binary:
                 data = {}
                 for b in to_add_binary:
-                    data[b] = None
+                    data[b] = None      # mean 'not loaded' for the model field
                 for m in self.models:
                     m.set(data)
 
-#            values = self.rpc.read(old, to_add, ctx)
-#            if values:
-#                for v in values:
-#                    id = v['id']
-#                    if 'id' not in to_add:
-#                        del v['id']
-#                    self[id].set(v, signal=False)
         if len(new) and len(to_add):
             ctx.update(self.context)
             values = self.rpc.default_get(to_add, ctx)

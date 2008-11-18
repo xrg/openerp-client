@@ -89,9 +89,11 @@ class parser_tree(interface.parser_interface):
                 treeview.cells[node_attrs['name']] = cell
                 col = gtk.TreeViewColumn(None, cell)
                 btn_list.append(col)
-#                n = treeview.append_column(col)
+
             if node.localName == 'field':
                 fname = str(node_attrs['name'])
+                if fields[fname]['type'] in ('image', 'binary'):
+                    continue    # not showed types
                 if fname == 'sequence':
                     treeview.sequence = True
                 for boolean_fields in ('readonly', 'required'):
@@ -104,12 +106,12 @@ class parser_tree(interface.parser_interface):
                 treeview.cells[fname] = cell
                 renderer = cell.renderer
                 
-                ro = editable and not node_attrs.get('readonly', False)
+                write_enable = editable and not node_attrs.get('readonly', False)
                 if isinstance(renderer, gtk.CellRendererToggle):
-                    renderer.set_property('activatable', ro)
+                    renderer.set_property('activatable', write_enable)
                 elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo, date_renderer.DecoratorRenderer)):
-                    renderer.set_property('editable', ro)
-                if ro:
+                    renderer.set_property('editable', write_enable)
+                if write_enable:
                     renderer.connect_after('editing-started', send_keys, treeview)
 #                   renderer.connect_after('editing-canceled', self.editing_canceled)
 

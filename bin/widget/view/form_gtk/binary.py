@@ -41,60 +41,65 @@ class wid_binary(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-        self.widget = gtk.HBox(spacing=5)
+        self.widget = gtk.HBox(spacing=3)
         self.wid_text = gtk.Entry()
-        self.wid_text.set_property('activates_default', True)
+        #self.wid_text.set_property('activates_default', True)
+        self.wid_text.set_property('editable', False)
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
-        self.filters=attrs.get('filters',None)
-        self.but_new = gtk.Button()
-        img = gtk.Image()
-        img.set_from_stock( 'gtk-execute', gtk.ICON_SIZE_BUTTON )
-        label = gtk.Label( ('_Open' ))
-        label.set_use_underline( True )
-        hbox = gtk.HBox()
-        hbox.set_spacing( 2 )
-        hbox.pack_start( img, expand=False, fill=False )
-        hbox.pack_end( label, expand=False, fill=False )
+        self.filters = attrs.get('filters', None)
+        if self.filters:
+            self.filters = self.filters.split(',')
+        
+        class binButton(gtk.Button):
+            def __init__(self, stock, title, long=True):
+                assert stock is not None
+                assert stock is not None
+                super(binButton, self).__init__()
+                
+                box = gtk.HBox()
+                box.set_spacing(2)
+                
+                img = gtk.Image()
+                img.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
+                box.pack_start(img, expand=False, fill=False)
 
-        self.but_new.add( hbox )
-        self.but_new.connect('clicked', self.sig_execute)
-        self.widget.pack_start(self.but_new, expand=False, fill=False)
+                if long:
+                    label = gtk.Label(title)
+                    label.set_use_underline(False)
+                    box.pack_end(label, expand=False, fill=False)
+                else:
+                    self.set_relief(gtk.RELIEF_NONE)
+                    self.set_property('tooltip-text', title)
 
-        self.but_new = gtk.Button()
-        img = gtk.Image()
-        img.set_from_stock( 'gtk-open', gtk.ICON_SIZE_BUTTON )
-        label = gtk.Label( _('_Select') )
-        label.set_use_underline( True )
-        hbox = gtk.HBox()
-        hbox.set_spacing( 2 )
-        hbox.pack_start( img, expand=False, fill=False )
-        hbox.pack_end( label, expand=False, fill=False )
+                self.add(box)
 
-        self.but_new.add( hbox )
-        self.but_new.connect('clicked', self.sig_select)
-        self.widget.pack_start(self.but_new, expand=False, fill=False)
+        self.but_select = binButton('gtk-open', _('Select'), True)
+        self.but_select.connect('clicked', self.sig_select)
+        self.widget.pack_start(self.but_select, expand=False, fill=False)
 
-        self.but_save_as = gtk.Button(stock='gtk-save-as')
+        self.but_exec = binButton('gtk-execute', _('Open'), True)
+        self.but_exec.connect('clicked', self.sig_execute)
+        self.widget.pack_start(self.but_exec, expand=False, fill=False)
+
+        self.but_save_as = binButton('gtk-save-as', _('Save As'), False)
         self.but_save_as.connect('clicked', self.sig_save_as)
         self.widget.pack_start(self.but_save_as, expand=False, fill=False)
 
-        self.but_remove = gtk.Button(stock='gtk-clear')
+        self.but_remove = binButton('gtk-clear', _('Clear'), False)
         self.but_remove.connect('clicked', self.sig_remove)
         self.widget.pack_start(self.but_remove, expand=False, fill=False)
 
         self.model_field = False
         self.has_filename = attrs.get('filename')
         self.data_field_name = attrs.get('name')
+        self.__ro = False
 
     def _readonly_set(self, value):
-        if value:
-            self.but_new.hide()
-            self.but_remove.hide()
-        else:
-            self.but_new.show()
-            self.but_remove.show()
-
+        self.__ro = value
+        self.but_select.set_sensitive(not value)
+        self.but_remove.set_sensitive(not value)
+    
     def _get_filename(self):
         return self._view.model.value.get(self.has_filename) or self._view.model.value.get('name', self.data_field_name)
 
@@ -117,32 +122,29 @@ class wid_binary(interface.widget_interface):
                 printer.printer.print_file(fp_name, ext, preview=True)
         except Exception, ex:
             common.message(_('Error reading the file: %s') % str(ex))
+            raise
 
     def sig_select(self, widget=None):
         try:
             # Add the filename from the field with the filename attribute in the view
-            filters=None
-            filter_file = gtk.FileFilter()
-            if self.filters:
-                filter_file.set_name(_(str(','.join(self.filters))))
-                for pat in self.filters:
-                    filter_file.add_pattern(pat)
-                filters=[filter_file]
+            filters = []
+            if not self.filters:
+                filter_file = gtk.FileFilter()
+                filter_file.set_name(_('All Files'))
+                filter_file.add_pattern('*')
+                filters.append(filter_file)
             else:
-                 key=self.wid_text.get_text()
-                 if not key:
-                     filter_file.set_name('All Files')
-                     filter_file.add_pattern('*')
-                 else:
-                     filter_file.set_name(key)
-                     filter_file.add_pattern('*'+str(key)+'*')
-                 filters=[filter_file]
+                for pat in self.filters:
+                    filter_file = gtk.FileFilter()
+                    filter_file.set_name(str(pat))
+                    filter_file.add_pattern(pat)
+                    filters.append(filter_file)
 
             filename = common.file_selection(_('Select a file...'), parent=self._window,filters=filters)
             if filename:
                 self.model_field.set_client(self._view.model, base64.encodestring(file(filename, 'rb').read()))
                 if self.has_filename:
-                    self._view.model.set({self.has_filename: os.path.basename(filename)})
+                    self._view.model.set({self.has_filename: os.path.basename(filename)}, modified=True)
                 self._view.display(self._view.model)
         except Exception, ex:
             common.message(_('Error reading the file: %s') % str(ex))
@@ -172,18 +174,25 @@ class wid_binary(interface.widget_interface):
     def sig_remove(self, widget=None):
         self.model_field.set_client(self._view.model, False)
         if self.has_filename:
-            self._view.model.set({self.has_filename: False})
-        self.display(self._view.model,False)
+            self._view.model.set({self.has_filename: False}, modified=True)
+        self.display(self._view.model, False)
 
     def display(self, model, model_field):
+        def btn_activate(state):
+            self.but_exec.set_sensitive(state)
+            self.but_save_as.set_sensitive(state)
+            self.but_remove.set_sensitive((not self.__ro) and state)
+
         if not model_field:
             self.wid_text.set_text('')
+            btn_activate(False)
             return False
         super(wid_binary, self).display(model, model_field)
         self.model_field = model_field
-        disp_text=model_field.get_client(model)
+        disp_text = model_field.get_client(model)
         
         self.wid_text.set_text(disp_text and str(disp_text) or '')
+        btn_activate(bool(disp_text))
         return True
 
     def set_value(self, model, model_field):
