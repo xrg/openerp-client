@@ -185,7 +185,7 @@ class ViewCalendar(object):
         return True
 
     def _on_event_clicked(self, calendar, calendar_event, hippo_event):
-        if hippo_event.button == 1 and hippo_event.count == 2:   # double-left-click
+        if hippo_event.button == 1 and hippo_event.count == 1:   # simple-left-click
             self.screen.current_model = calendar_event.model
             self.screen.switch_view(mode='form')
             
