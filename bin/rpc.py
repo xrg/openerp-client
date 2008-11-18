@@ -200,8 +200,10 @@ class rpc_session(object):
             except socket.error,e:
 		common.error(_('Login error:'), str(e))
                 return -1
-            except Exception, e:
-                return 0
+	    except:
+		import sys
+		common.error(_('Login error:'),str(sys.exc_info()))
+		return 0
             if not res:
                 self._open=False
                 self.uid=False
