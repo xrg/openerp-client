@@ -183,7 +183,7 @@ class form(object):
         return self.screen.id_get()
 
     def sig_attach(self, widget=None):
-        id = self.screen.id_get()
+        id = self.id_get()
         if id:
             ctx = self.context.copy()
             ctx.update(rpc.session.context)
@@ -203,11 +203,8 @@ class form(object):
         if mode<>self.screen.current_view.view_type:
             self.screen.switch_view(mode=mode)
 
-    def _id_get(self):
-        return self.screen.id_get()
-
     def sig_logs(self, widget=None):
-        id = self._id_get()
+        id = self.id_get()
         if not id:
             self.message_state(_('You have to select a record !'), color='red')
             return False
@@ -229,7 +226,7 @@ class form(object):
         return True
 
     def sig_remove(self, widget=None):
-        if not self._id_get():
+        if not self.id_get():
             msg = _('Record is not saved ! \n Do You want to Clear Current Record ?')
         else:
             if self.screen.current_view.view_type == 'form':
@@ -267,7 +264,7 @@ class form(object):
     def sig_copy(self, *args):
         if not self.modified_save():
             return
-        res_id = self._id_get()
+        res_id = self.id_get()
         ctx = self.context.copy()
         ctx.update(rpc.session.context)
         new_id = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'copy', res_id, {}, ctx)
