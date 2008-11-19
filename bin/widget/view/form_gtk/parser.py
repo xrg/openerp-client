@@ -298,18 +298,23 @@ class parser_form(widget.view.interface.parser_interface):
                 label = gtk.Label(text)
                 label.set_use_markup(True)
                 if 'align' in attrs:
-                    try:
-                        label.set_alignment(float(attrs['align'] or 0.0), 0.5)
-                    except:
-                        pass
-                if 'angle' not in attrs:
-                    label.set_line_wrap(True)
-                label.set_angle(int(attrs.get('angle', 0)))
+                    label.set_alignment(float(attrs['align'] or 0.0), 0.5)
                 eb = gtk.EventBox()
                 eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
                 eb.add(label)
                 container.trans_box_label.append((eb, text, None))
-                container.wid_add(eb, colspan=int(attrs.get('colspan', 1)), expand=False, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
+
+                if 'angle' not in attrs:
+                    label.set_line_wrap(True)
+                    label.set_angle(int(attrs.get('angle', 0)))
+
+                container.wid_add(
+                    eb,
+                    colspan=int(attrs.get('colspan', 1)),
+                    expand=False,
+                    help=attrs.get('help', False),
+                    fill=int(attrs.get('fill', 0))
+                )
 
             elif node.localName=='newline':
                 container.newline()
