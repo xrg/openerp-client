@@ -676,7 +676,6 @@ class CellRendererButton(gtk.GenericCellRenderer):
                         raise Exception, 'Unallowed button type'
                     widget.screen.reload()
             else:
-                self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
                 widget.screen.display()
             self.emit("clicked", path)
             def timeout(self, widget):
