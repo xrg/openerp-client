@@ -22,20 +22,23 @@
 
 #
 # TODO: recode the whole pango code
-# 
+#
 
 import gtk
 from gtk import glade
 import gettext
 import pango
-
+import gtkhtml2
 import interface
 import common
 import re
+import service
+import xml.sax,xml.sax.handler
+from cStringIO import StringIO
 
 class textbox_tag(interface.widget_interface):
     desc_to_attr_table = {
-        'family':[pango.AttrFamily,""],
+#        'family':[pango.AttrFamily,""],
         'style':[pango.AttrStyle,pango.STYLE_NORMAL],
         'variant':[pango.AttrVariant,pango.VARIANT_NORMAL],
         'weight':[pango.AttrWeight,pango.WEIGHT_NORMAL],
@@ -72,7 +75,7 @@ class textbox_tag(interface.widget_interface):
                      pango.STYLE_OBLIQUE:'oblique',
                      pango.STYLE_ITALIC:'italic',
                      },
-            'stikethrough':{1:'true',
+            'strikethrough':{1:'true',
                             True:'true',
                             0:'false',
                             False:'false'},
@@ -83,6 +86,14 @@ class textbox_tag(interface.widget_interface):
                 gtk.JUSTIFY_RIGHT : 'RIGHT',
                 gtk.JUSTIFY_LEFT : 'LEFT'
                 }
+    html_tags = {
+                 'underline':{'single':'u'},
+                 'weight':{700:'b'},
+                 'strikethrough':{'true':'strike'},
+                 'style':{'italic':'i'},
+                 'color':{'color':True},
+                 'face':{'face':True},
+                 }
 
     def __init__(self,window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
@@ -98,12 +109,13 @@ class textbox_tag(interface.widget_interface):
         self.tagdict = {}
         self.buf.connect_after('insert-text', self.sig_insert_text)
         self.buf.connect('mark-set', self.sig_mark_set)
-
+        self.value=''
 #       self.sizeButton = self.win_gl.get_widget('font_size')
 #       self.colorButton =self.win_gl.get_widget('font_color')
         self.boldButton = self.win_gl.get_widget('toggle_bold')
         self.italicButton = self.win_gl.get_widget('toggle_italic')
         self.underlineButton = self.win_gl.get_widget('toggle_underline')
+        self.strikethroughButton=self.win_gl.get_widget('toggle_strikethrough')
 
 
         self.internal_toggle = False
@@ -111,11 +123,15 @@ class textbox_tag(interface.widget_interface):
         self.win_gl.signal_connect('on_toggle_bold_toggled', self._toggle, [self.bold])
         self.win_gl.signal_connect('on_toggle_italic_toggled', self._toggle, [self.italic])
         self.win_gl.signal_connect('on_toggle_underline_toggled', self._toggle, [self.underline])
+        self.win_gl.signal_connect('on_toggle_strike_toggled', self._toggle, [self.strikethrough])
 #       self.win_gl.signal_connect('on_font_size_changed',self._font_changed)
 #       self.win_gl.signal_connect('on_color_changed',self._color_changed)
-        
+        self.win_gl.signal_connect('on_font_button_clicked',self._font_changed)
+        self.win_gl.signal_connect('on_color_button_clicked',self._color_changed)
+
+
         self.justify = gtk.JUSTIFY_LEFT
-        
+
         self.leading = 14+7
         self.win_gl.signal_connect('on_radiofill_toggled',self._toggle_justify, gtk.JUSTIFY_FILL)
         self.win_gl.signal_connect('on_radiocenter_toggled',self._toggle_justify, gtk.JUSTIFY_CENTER)
@@ -135,22 +151,25 @@ class textbox_tag(interface.widget_interface):
             for key, value in self.tagdict[tag].items():
                 if key == 'font_desc' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
 #                   self.sizeButton.set_value(int(value[-2:]))
-#                   is_set[key] = tag.get_priority()  
+#                   is_set[key] = tag.get_priority()
                     pass
                 elif key == 'foreground' and  tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
 #                   self.colorButton.set_color(gtk.gdk.color_parse(value))
-#                   is_set[key] = tag.get_priority()  
+#                   is_set[key] = tag.get_priority()
 #                   color_priority = tag.get_priority()
                     pass
                 elif key == 'weight' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
                     self.boldButton.set_active(True)
-                    is_set[key] = tag.get_priority()  
+                    is_set[key] = tag.get_priority()
                 elif key == 'style' and value == 'italic' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
                     self.italicButton.set_active(True)
-                    is_set[key] = tag.get_priority()  
+                    is_set[key] = tag.get_priority()
                 elif key == 'underline' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
                     self.underlineButton.set_active(True)
-                    is_set[key] = tag.get_priority()  
+                    is_set[key] = tag.get_priority()
+                elif key == 'strikethrough' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
+                    self.strikethroughButton.set_active(True)
+                    is_set[key] = tag.get_priority()
         #if no color defined, set to defalt (black)
         if not is_set.has_key('foreground'):
 #           self.colorButton.set_color(gtk.gdk.color_parse('#000000'))
@@ -160,8 +179,8 @@ class textbox_tag(interface.widget_interface):
             pass
 
     def _font_changed(self, widget, event=None):
-        font_desc = pango.FontDescription('Normal '+str(widget.get_value()))
-        self.leading = int(widget.get_value()*1.6)
+        font_desc = pango.FontDescription(str(widget.get_font_name()))
+#        self.leading = int(widget.get_value()*1.6)
         self.apply_font_and_attrs(font_desc, [])
 
 
@@ -173,18 +192,18 @@ class textbox_tag(interface.widget_interface):
     def get_tags_from_attrs (self, font,lang,attrs):
         tags = []
         if font:
-            font,fontattrs = self.fontdesc_to_attrs(font)
-            fontdesc = font.to_string()
+            font1,fontattrs = self.fontdesc_to_attrs(font)
+            fontdesc = font1.to_string()
             if fontattrs:
                 attrs.extend(fontattrs)
             if fontdesc and fontdesc!='Normal':
-                if not self.tags.has_key(font.to_string()):
+                if not self.tags.has_key(font1.to_string()):
                     tag=self.buf.create_tag()
-                    tag.set_property('font-desc',font)
+                    tag.set_property('font-desc',font1)
                     if not self.tagdict.has_key(tag): self.tagdict[tag]={}
-                    self.tagdict[tag]['font_desc']=font.to_string()
-                    self.tags[font.to_string()]=tag
-                tags.append(self.tags[font.to_string()])
+                    self.tagdict[tag]['face']=str(font.get_family())
+                    self.tags[font1.to_string()]=tag
+                tags.append(self.tags[font1.to_string()])
         if lang:
             if not self.tags.has_key(lang):
                 tag = self.buf.create_tag()
@@ -193,6 +212,7 @@ class textbox_tag(interface.widget_interface):
             tags.append(self.tags[lang])
         if attrs:
             for a in attrs:
+
                 if a.type == pango.ATTR_FOREGROUND:
                     gdkcolor = self.pango_color_to_gdk(a.color)
                     key = 'foreground%s'%self.color_to_hex(gdkcolor)
@@ -200,7 +220,7 @@ class textbox_tag(interface.widget_interface):
                         self.tags[key]=self.buf.create_tag()
                         self.tags[key].set_property('foreground-gdk',gdkcolor)
                         self.tagdict[self.tags[key]]={}
-                        self.tagdict[self.tags[key]]['foreground']="#%s"%self.color_to_hex(gdkcolor)
+                        self.tagdict[self.tags[key]]['color']="#%s"%self.color_to_hex(gdkcolor)
                     tags.append(self.tags[key])
                 if a.type == pango.ATTR_BACKGROUND:
                     gdkcolor = self.pango_color_to_gdk(a.color)
@@ -233,7 +253,7 @@ class textbox_tag(interface.widget_interface):
 
     def get_tags (self, at_pos=None):
         tagdict = {}
-        
+
         for pos in range(self.buf.get_char_count()):
             iter=self.buf.get_iter_at_offset(pos)
             for tag in iter.get_tags():
@@ -283,16 +303,28 @@ class textbox_tag(interface.widget_interface):
             for tag in cuts[c]:
                 outbuff += tag
         outbuff += txt[last_pos:]
-        outbuff = '<span alignment="' + self.alignment_markup[self.justify] \
-                + '" leading="' + str(self.leading) + '">' + outbuff + '</span>'
+        outbuff = '<pre><p align="' + self.alignment_markup[self.justify] \
+                + '" leading="' + str(self.leading) + '">' + outbuff + '</p></pre>'
+        self.value=outbuff
         return outbuff
 
     def tag_to_markup (self, tag):
-        stag = "<span"
+        stag="<span"
         for k,v in self.tagdict[tag].items():
-            stag += ' %s="%s"'%(k,v)
-        stag += ">"
-        return stag,"</span>"
+            if self.html_tags.has_key(k) and (self.html_tags[k].has_key(k) or self.html_tags[k].has_key(v)):
+                if k in ['color','face']:
+                    stag='<font %s="%s">'%(k,v)
+                    etag="</font>"
+                else:
+                    stag="<"+self.html_tags[k][v]+">"
+                    etag="</"+self.html_tags[k][v]+">"
+            else:
+                stag += ' %s="%s"'%(k,v)
+        if stag.startswith('<span'):
+            stag += ">"
+            etag="</span>"
+
+        return stag,etag
 
     def fontdesc_to_attrs (self,font):
         nicks = font.get_set_fields().value_nicks
@@ -329,6 +361,7 @@ class textbox_tag(interface.widget_interface):
         self.italic = self.get_tags_from_attrs(None,None,[pango.AttrStyle('italic')])[0]
         self.bold = self.get_tags_from_attrs(None,None,[pango.AttrWeight('bold')])[0]
         self.underline = self.get_tags_from_attrs(None,None,[pango.AttrUnderline('single')])[0]
+        self.strikethrough = self.get_tags_from_attrs(None,None,[pango.AttrStrikethrough(1)])[0]
 
     def get_selection (self):
         bounds = self.buf.get_selection_bounds()
@@ -348,7 +381,6 @@ class textbox_tag(interface.widget_interface):
     def apply_tag (self, tag):
         insert_iter = self.buf.get_iter_at_mark(self.buf.get_insert())
         selection = self.get_selection()
-
         self.tags_dic[tag] = True
         if selection:
             self.buf.apply_tag(tag, *selection)
@@ -371,12 +403,17 @@ class textbox_tag(interface.widget_interface):
 
     def set_text (self, txt):
         buf = self.tv.get_buffer()
-        txt = re.sub('<span alignment[^>]*>', '<span>', txt)
+#        txt = re.sub('<p align[^>]*>', '<p>', txt)
         try:
             parsed, txt, separator = pango.parse_markup(txt, u'0')
-        except:
+        except Exception ,e:
             pass
-        attrIter = parsed.get_iterator()
+        try:
+            attrIter = parsed.get_iterator()
+        except Exception ,e:
+#            common.warning("Either the Message contains HTML tags or the selected Fonts are not supported!",'User Error')
+#            self._focus_out()
+            return False
         buf.delete(buf.get_start_iter(), buf.get_end_iter())
         while True:
             range=attrIter.range()
@@ -413,6 +450,7 @@ class textbox_tag(interface.widget_interface):
         else:
             for t in tags: self.remove_tag(t)
 
+
     def _toggle_justify (self, widget, justify):
         if widget.get_active():
             self.tv.set_justification(justify)
@@ -433,11 +471,12 @@ class textbox_tag(interface.widget_interface):
                 self.internal_toggle=False
 
     def display(self, model, model_field):
+        self.remove_all_tags()
         super(textbox_tag, self).display(model, model_field)
         value = model_field and model_field.get(model)
-        if not value:
-            value=''
-        self.set_text(value)
+        if not self.value:
+            self.value=value or ''
+        self.set_text(self.value)
 
     def set_value(self, model, model_field):
         model_field.set_client(model, self.get_text() or False)
