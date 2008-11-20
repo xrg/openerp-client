@@ -426,14 +426,13 @@ class Screen(signal_event.signal_event):
         if not self.current_model:
             return False
         self.current_view.set_value()
-        res = False
         if self.current_view.view_type != 'tree':
-            res = self.current_model.is_modified()
+            return self.current_model.is_modified()
         else:
             for model in self.models.models:
                 if model.is_modified():
-                    res = True
-        return res
+                    return True
+        return False
 
     def reload(self):
         self.current_model.reload()

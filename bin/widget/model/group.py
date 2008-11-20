@@ -335,11 +335,9 @@ class ModelRecordGroup(signal_event.signal_event):
                             del v['id']
                         self[id].set(v, signal=False)
             if to_add_binary:
-                data = {}
-                for b in to_add_binary:
-                    data[b] = None      # mean 'not loaded' for the model field
+                data = {}.fromkeys(to_add_binary, None)
                 for m in self.models:
-                    m.set(data)
+                    m.set(data, signal=False)
 
         if len(new) and len(to_add):
             ctx.update(self.context)
