@@ -75,7 +75,7 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
         colors = choice_colors(len(value))
         aa = subplot.pie(value, autopct='%1.1f%%', shadow=True, explode=explode, colors=colors)
         labels = map(lambda x: x.split('/')[-1], labels)
-        subplot.legend(aa, labels, shadow = True, loc = 'best', prop = font_property)
+        subplot.legend(aa[0], labels, shadow = True, loc = 'best', prop = font_property)
 
     elif type == 'bar':
         n = len(axis)-1
