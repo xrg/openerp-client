@@ -1084,6 +1084,7 @@ class terp_main(service.Service):
                         self.sig_home_new(quiet=True, except_id=id)
                     if res[4] == 'https://':
                         self.secure_img.show()
+			# TODO: put handler for SSL-info page. (or tooltip?)
                     else:
                         self.secure_img.hide()
                     self.request_set()
