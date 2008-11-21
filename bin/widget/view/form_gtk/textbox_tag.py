@@ -28,7 +28,6 @@ import gtk
 from gtk import glade
 import gettext
 import pango
-import gtkhtml2
 import interface
 import common
 import re
