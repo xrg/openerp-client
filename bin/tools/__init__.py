@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -28,7 +28,10 @@ def expr_eval(string, context={}):
     import rpc
     context['uid'] = rpc.session.uid
     if isinstance(string, basestring):
-        return eval(string, context)
+#        return eval(string, context)
+        string=string.replace("'active_id'","active_id")
+        temp=eval(string, context)
+        return temp
     else:
         return string
 
