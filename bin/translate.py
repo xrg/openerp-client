@@ -161,12 +161,12 @@ def setlang(lang=None):
         return False
     if lang:
         lc, encoding = locale.getdefaultlocale()
-        if encoding.lower() in ('utf','utf8',):
-            encoding = 'UTF-8'
-        if encoding == 'cp1252':
-            encoding = '1252'
         if not encoding:
             encoding = 'UTF-8'
+        elif encoding.lower() in ('utf','utf8',):
+            encoding = 'UTF-8'
+        elif encoding == 'cp1252':
+            encoding = '1252'
 
         lang2 = lang
         if os.name == 'nt':
