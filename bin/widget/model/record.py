@@ -249,6 +249,14 @@ class ModelRecord(signal_event.signal_event):
             return dom
         if check_load:
             self._check_load()
+	def ir_ref(module,expr):
+	    """ This function allows the syntax ir_ref('module','ref_name') inside
+	        domain expressions. Thus, we can use values from ir_model_data in 
+		expressions. """
+	    ir = RPCProxy('ir.model.data')
+	    result = ir._get_id(module,expr)
+	    res_id = ir.read([result], ['res_id'])[0]['res_id']
+	    return res_id
         d = {}
         for name, mfield in self.mgroup.mfields.items():
             d[name] = mfield.get(self, check_load=check_load)
@@ -257,6 +265,7 @@ class ModelRecord(signal_event.signal_event):
         d['time'] = time
         d['context'] = self.context_get()
         d['active_id'] = self.id
+	d['ir_ref'] = ir_ref
         if self.parent:
             d['parent'] = EvalEnvironment(self.parent)
         val = tools.expr_eval(dom, d)

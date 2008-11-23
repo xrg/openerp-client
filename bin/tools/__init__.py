@@ -32,12 +32,13 @@ def expr_eval(string, context={}):
     context['time'] = time
     context['datetime'] = datetime
     if isinstance(string, basestring):
-#        return eval(string, context)
-        string = string.replace("'active_id'","active_id")
-        try:
+	try:
+            string = string.replace("'active_id'","active_id")
             temp = eval(string, context)
-        except:
-            return {}
+	except:
+	    import sys
+	    sys.stderr.write('Error %s\n%s\n' %(sys.exc_info(),str(context)))
+	    return {}
         return temp
     else:
         return string
