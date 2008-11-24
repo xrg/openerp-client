@@ -107,6 +107,12 @@ class ModelRecord(signal_event.signal_event):
         self._loaded = False
         self.reload()
 
+    def failed_validation(self):
+        invalid_fields=list(set(eval(self.rpc.get_invalid_fields())))
+        for item in invalid_fields:
+           if item in self.mgroup.mfields:
+               self.mgroup.mfields[item].get_state_attrs(self)['valid']=False
+
     def save(self, reload=True):
         self._check_load()
 
@@ -114,9 +120,8 @@ class ModelRecord(signal_event.signal_event):
             value = self.get(get_readonly=False)
             self.id = self.rpc.create(value, self.context_get())
             if not self.id:
-                invalid_fields=list(set(eval(self.rpc.get_invalid_fields())))
-                for item in invalid_fields:
-                    self.mgroup.mfields[item].get_state_attrs(self)['valid']=False
+                self.failed_validation()
+
         else:
             if not self.is_modified():
                 return self.id
@@ -125,6 +130,7 @@ class ModelRecord(signal_event.signal_event):
             context= context.copy()
             context['read_delta']= time.time()-self.read_time
             if not self.rpc.write([self.id], value, context):
+                self.failed_validation()
                 return False
         self._loaded = False
         if reload:
