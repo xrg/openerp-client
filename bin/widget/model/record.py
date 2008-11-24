@@ -108,10 +108,10 @@ class ModelRecord(signal_event.signal_event):
         self.reload()
 
     def failed_validation(self):
-        invalid_fields=list(set(eval(self.rpc.get_invalid_fields())))
+        invalid_fields = self.rpc.get_invalid_fields()
         for item in invalid_fields:
            if item in self.mgroup.mfields:
-               self.mgroup.mfields[item].get_state_attrs(self)['valid']=False
+               self.mgroup.mfields[item].get_state_attrs(self)['valid'] = False
 
     def save(self, reload=True):
         self._check_load()
