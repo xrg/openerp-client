@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -390,6 +390,8 @@ class Screen(signal_event.signal_event):
         id = False
         if self.current_model.validate():
             id = self.current_model.save(reload=True)
+            if not id:
+                self.current_view.display()
         else:
             self.current_view.display()
             self.current_view.set_cursor()
@@ -498,7 +500,7 @@ class Screen(signal_event.signal_event):
             self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
             vt = self.current_view.view_type
             self.search_active(
-                    active=self.show_search and vt in ('tree', 'graph', 'calendar'), 
+                    active=self.show_search and vt in ('tree', 'graph', 'calendar'),
                     show_search=self.show_search and vt in ('tree', 'graph'),
             )
 

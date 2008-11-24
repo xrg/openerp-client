@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -70,13 +70,13 @@ class ModelRecord(signal_event.signal_event):
 
     def __getitem__(self, name):
         return self.mgroup.mfields.get(name, False)
-    
+
     def __repr__(self):
         return '<ModelRecord %s@%s>' % (self.id, self.resource)
 
     def is_modified(self):
         return self.modified
-    
+
     def is_wizard(self):
         return self.mgroup.is_wizard
 
@@ -109,9 +109,14 @@ class ModelRecord(signal_event.signal_event):
 
     def save(self, reload=True):
         self._check_load()
+
         if not self.id:
             value = self.get(get_readonly=False)
             self.id = self.rpc.create(value, self.context_get())
+            if not self.id:
+                invalid_fields=list(set(eval(self.rpc.get_invalid_fields())))
+                for item in invalid_fields:
+                    self.mgroup.mfields[item].get_state_attrs(self)['valid']=False
         else:
             if not self.is_modified():
                 return self.id
@@ -201,7 +206,7 @@ class ModelRecord(signal_event.signal_event):
             self.modified_fields = {}
         if signal:
             self.signal('record-changed')
-        
+
     def reload(self):
         if not self.id:
             return
@@ -249,11 +254,11 @@ class ModelRecord(signal_event.signal_event):
                     if fieldname not in self.mgroup.mfields:
                         continue
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
-            warning=response.get('warning',{})			
+            warning=response.get('warning',{})
             if warning:
                 common.warning(warning['message'], warning['title'])
         self.signal('record-changed')
-    
+
     def on_change_attrs(self, callback):
         self.signal('attrs-changed')
 
