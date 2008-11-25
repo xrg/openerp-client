@@ -124,16 +124,6 @@ def translations():
 
 check_modules()
 
-# create startup script
-start_script = \
-"#!/bin/sh\n\
-cd %s/lib/python%s/site-packages/openerp-client\n\
-exec %s ./openerp-client.py $@" % (sys.prefix, py_short_version, sys.executable)
-# write script
-f = open('openerp-client', 'w')
-f.write(start_script)
-f.close()
-
 if os.name <> 'nt' and sys.argv[1] == 'build_po':
     os.system('(cd bin ; find . -name \*.py && find . -name \*.glade | xargs xgettext -o po/%s.pot)' % name)
     for file in ([ os.path.join('bin', 'po', fname) for fname in os.listdir('bin/po') ]):
@@ -141,21 +131,24 @@ if os.name <> 'nt' and sys.argv[1] == 'build_po':
             os.system('msgmerge --update --backup=off %s bin/po/%s.pot' % (file, name))
     sys.exit()
 
-options = {"py2exe": {"compressed": 1,
-                      "optimize": 2,
-                      "packages": ["encodings","gtk", "matplotlib", "pytz"],
-                      "includes": "pango,atk,gobject,cairo,atk,pangocairo,matplotlib._path",
-                      "excludes": ["Tkinter", "tcl", "TKconstants"],
-                      "dll_excludes": [
-                          "iconv.dll","intl.dll","libatk-1.0-0.dll",
-                          "libgdk_pixbuf-2.0-0.dll","libgdk-win32-2.0-0.dll",
-                          "libglib-2.0-0.dll","libgmodule-2.0-0.dll",
-                          "libgobject-2.0-0.dll","libgthread-2.0-0.dll",
-                          "libgtk-win32-2.0-0.dll","libpango-1.0-0.dll",
-                          "libpangowin32-1.0-0.dll",
-                          "wxmsw26uh_vc.dll",],
-                      }
-           }
+options = {
+    "py2exe": {
+        "compressed": 1,
+        "optimize": 2,
+        "packages": ["encodings","gtk", "matplotlib", "pytz"],
+        "includes": "pango,atk,gobject,cairo,atk,pangocairo,matplotlib._path",
+        "excludes": ["Tkinter", "tcl", "TKconstants"],
+        "dll_excludes": [
+            "iconv.dll","intl.dll","libatk-1.0-0.dll",
+            "libgdk_pixbuf-2.0-0.dll","libgdk-win32-2.0-0.dll",
+            "libglib-2.0-0.dll","libgmodule-2.0-0.dll",
+            "libgobject-2.0-0.dll","libgthread-2.0-0.dll",
+            "libgtk-win32-2.0-0.dll","libpango-1.0-0.dll",
+            "libpangowin32-1.0-0.dll",
+            "wxmsw26uh_vc.dll",
+        ],
+    }
+}
 
 setup(name             = name,
       version          = version,

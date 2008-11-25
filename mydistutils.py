@@ -59,6 +59,16 @@ class l10napp_install(install):
     def has_po_files(self):
         return self.distribution.has_po_files()
 
+    def run(self):
+        # create startup script
+        start_script = "#!/bin/sh\ncd %s\nexec %s ./openerp-client.py $@\n" % (os.path.join(self.install_libbase, "openerp-client"), sys.executable)
+        # write script
+        f = open('openerp-client', 'w')
+        f.write(start_script)
+        f.close()
+
+        install.run(self)
+
     sub_commands = []
     sub_commands.extend(install.sub_commands)
     sub_commands.append(('install_mo', has_po_files))
