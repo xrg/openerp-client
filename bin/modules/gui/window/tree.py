@@ -143,6 +143,10 @@ class tree(object):
 
             self.tree_res.ids = ids
             self.tree_res.reload()
+
+            self.expand = False
+            self.expand_collapse_all( self.glade.get_widget('button7') )
+
         return False
 
     def expand_collapse_all(self, widget):
