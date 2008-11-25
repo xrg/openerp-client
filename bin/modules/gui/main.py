@@ -442,7 +442,8 @@ class terp_main(service.Service):
         self.notebook = gtk.Notebook()
         self.notebook.popup_enable()
         self.notebook.set_scrollable(True)
-        self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changt)
+        self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
+        self.notebook.connect('page-reordered', self._sig_page_reordered)
         vbox = self.glade.get_widget('vbox_main')
         vbox.pack_start(self.notebook, expand=True, fill=True)
 
@@ -574,6 +575,7 @@ class terp_main(service.Service):
 
         # Adding a timer the check to requests
         gobject.timeout_add(5 * 60 * 1000, self.request_set)
+
 
     def shortcut_edit(self, widget, model='ir.ui.menu'):
         obj = service.LocalService('gui.window')
@@ -875,6 +877,8 @@ class terp_main(service.Service):
     def win_add(self, win, datas):
         self.pages.append(win)
         box = gtk.HBox(False, 0)
+
+        # Draw the close button on the right 
         closebtn = gtk.Button()
         image = gtk.Image()
         image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
@@ -887,6 +891,7 @@ class terp_main(service.Service):
 
         box.pack_start(gtk.Label(win.name), True, True)
         box.pack_end(closebtn, False, False)
+
         self.notebook.append_page(win.widget, box)
         if hasattr(self.notebook, 'set_tab_reorderable' ):
             # since pygtk 2.10
@@ -955,7 +960,7 @@ class terp_main(service.Service):
             self.notebook.disconnect(self.sig_id)
             page = self.pages.pop(pn)
             self.notebook.remove_page(pn)
-            self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changt)
+            self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
 
             page.destroy()
@@ -1003,10 +1008,16 @@ class terp_main(service.Service):
             if button_name=='but_close' and res:
                 self._win_del(page_num)
 
-    def _sig_page_changt(self, widget=None, *args):
+    def _sig_page_changed(self, widget=None, *args):
         self.last_page = self.current_page
         self.current_page = self.notebook.get_current_page()
         self.sb_set()
+
+    def _sig_page_reordered(self, notebook, child, page_num, user_param=None):
+        widget = self.pages[self.current_page]
+        self.pages.remove(widget)
+        self.pages.insert(page_num, widget)
+        self.current_page = page_num
 
     def sig_db_new(self, widget):
         if not self.sig_logout(widget):
