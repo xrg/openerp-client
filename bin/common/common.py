@@ -175,15 +175,15 @@ def terp_survey():
         options.options['survey.position']=SURVEY_VERSION
         options.save()
         common.message(_('Thank you for the feedback !\n\
-                         Your comments have been sent to OpenERP.\n\
-                         You should now start by creating a new database or\n\
-                         connecting to an existing server through the "File" menu.'))
+Your comments have been sent to OpenERP.\n\
+You should now start by creating a new database or\n\
+connecting to an existing server through the "File" menu.'))
     else:
         parent.present()
         win.destroy()
         common.message(_('Thank you for testing OpenERP !\n\
-                         You should now start by creating a new database or\n\
-                         connecting to an existing server through the "File" menu.'))
+You should now start by creating a new database or\n\
+connecting to an existing server through the "File" menu.'))
     return True
 
 
