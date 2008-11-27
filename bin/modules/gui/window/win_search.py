@@ -104,6 +104,7 @@ class dialog(object):
 class win_search(object):
     def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None):
         self.model = model
+        self.first = True
         self.domain =domain
         self.context = context
         self.context.update(rpc.session.context)
@@ -174,9 +175,10 @@ class win_search(object):
     def find(self, widget=None, *args):
         limit = self.form.get_limit()
         offset = self.form.get_offset()
-        if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset):
+        if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset) and not self.first:
             self.win.response(gtk.RESPONSE_OK)
             return False
+        self.first = False
         self.old_offset = offset
         self.old_limit = limit
         v = self.form.value
