@@ -151,7 +151,6 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         return tools.datetime_util.strptime(tc, self.format)
 
     def delete_text(self, start, end):
-        print 'DELETE TEXT'
         self._interactive_input = False
         try:
             gtk.Entry.delete_text(self, start, end)
@@ -174,6 +173,7 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
                 self.mode_cmd = False
                 if self.callback_process: self.callback_process(False, self, event)
                 self.stop_emission("key-press-event")
+                self.set_sensitive(False)
                 return True
         elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus, 
                               gtk.keysyms.KP_Subtract, gtk.keysyms.minus, 
