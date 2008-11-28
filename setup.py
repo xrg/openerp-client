@@ -106,6 +106,8 @@ def data_files():
 
 included_plugins = ['workflow_print']
 
+file('openerp-client','w').close()
+
 def find_plugins():
     for plugin in included_plugins:
         path=opj('bin', 'plugins', plugin)

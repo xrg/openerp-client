@@ -49,10 +49,6 @@ class l10napp_build(build):
     def has_po_files(self):
         return self.distribution.has_po_files()
 
-    def run(self):
-        open('openerp-client', 'w').close()
-        build.run(self)
-
     sub_commands = []
     sub_commands.append(('build_conf', None))
     sub_commands.extend(build.sub_commands)
