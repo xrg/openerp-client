@@ -36,21 +36,12 @@ from graph import ViewGraph
 from calendar import ViewCalendar
 from gantt import ViewGantt
 
-# TODO: REPLACE THIS CODE
 parsers = {
-    'form': form_gtk.parser_form,
-    'tree': tree_gtk.parser_tree,
-    'graph': graph_gtk.parser_graph,
-    'calendar': calendar_gtk.parser_calendar,
-    'gantt' : gantt_gtk.parser_gantt,
-}
-
-parsers2 = {
-    'form': ViewForm,
-    'tree': ViewList,
-    'graph': ViewGraph,
-    'calendar': ViewCalendar,
-    'gantt' : ViewGantt,
+    'form' : (form_gtk.parser_form, ViewForm),
+    'tree' : (tree_gtk.parser_tree, ViewList),
+    'graph': (graph_gtk.parser_graph, ViewGraph),
+    'calendar' : (calendar_gtk.parser_calendar, ViewCalendar),
+    'gantt' : (gantt_gtk.parser_gantt, ViewGantt),
 }
 
 class widget_parse(interface.parser_interface):
@@ -60,10 +51,13 @@ class widget_parse(interface.parser_interface):
             if not node.nodeType == node.ELEMENT_NODE:
                 continue
             if node.localName in parsers:
-                widget = parsers[node.localName](self.window, self.parent, self.attrs, screen)
+                widget_parser, view_parser = parsers[node.localName]
+                # Select the parser for the view (form, tree, graph, calendar or gantt)
+                widget = widget_parser(self.window, self.parent, self.attrs, screen)
                 wid, child, buttons, on_write = widget.parse(screen.resource, node, fields)
                 screen.set_on_write(on_write)
-                res = parsers2[node.localName](self.window, screen, wid, child, buttons, toolbar)
+
+                res = view_parser(self.window, screen, wid, child, buttons, toolbar)
                 res.title = widget.title
                 widget = res
                 break
