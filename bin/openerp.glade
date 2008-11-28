@@ -1322,7 +1322,7 @@
             </child>
             <child>
               <widget class="GtkRadioToolButton" id="radio_gantt">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="label" translatable="yes">Gantt</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-justify-right</property>
