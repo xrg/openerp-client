@@ -338,7 +338,8 @@ class ViewList(parser_view):
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
             self.store = AdaptModelGroup(self.screen.models)
-            self.widget_tree.set_model(self.store)
+            if self.store:
+                self.widget_tree.set_model(self.store)
         self.reload = False
         if not self.screen.current_model:
             #
