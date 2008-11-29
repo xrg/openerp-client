@@ -106,7 +106,10 @@ def data_files():
 
 included_plugins = ['workflow_print']
 
-file('openerp-client','w').close()
+f = file('openerp-client','w')
+start_script = """#!/bin/sh\necho "OpenERP Setup - The content of this file is generated at the install stage" """
+f.write(start_script)
+f.close()
 
 def find_plugins():
     for plugin in included_plugins:
