@@ -304,10 +304,10 @@ def error(title, message, details='', parent=None):
     support_id = options['support.support_id']
     recipient = options['support.recipient']
     ids = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', 'search',[])
-    result = { 'status' : 'ko' }
+    result = { 'status' : 'full' }
     if ids:
         result = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', '_test_maintenance', ids, {})
-    if result['status']=='ko':
+    if result['status']=='none':
         maintenance_contract_message=_('''Maintenance Contract
 -----------------------------------------------------------
 You have no valid maintenance contract! If you are using
@@ -355,7 +355,7 @@ your installed modules.
     details_buffer.set_text(unicode(details,'latin1').encode('utf-8'))
     xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
 
-    is_ok = result['status'] == 'ok'
+    is_ok = result['status'] == 'full'
 
     #xmlGlade.get_widget('button_send').set_sensitive(is_ok)
     if not is_ok:
