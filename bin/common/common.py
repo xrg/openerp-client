@@ -323,7 +323,8 @@ The maintenance program offers you:
         maintenance_contract_message=_('''Maintenance Contract
 -----------------------------------------------------------
 You have a maintenance contract, But you installed modules those
-are not covered by your maintenance contract: %s
+are not covered by your maintenance contract: 
+%s
 It means we can not offer you the garantee of maintenance on
 your whole installation.
 The maintenance program includes:
@@ -375,7 +376,7 @@ your installed modules.
         id_contract = 0
         traceback = details_buffer
         explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
-        remarks = get_text_from_text_view(xmlGlade.get_widget('remakrs_textview'))
+        remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
 
         content = "(%s) has reported the following bug:\n%s\nremarks: %s\nThe traceback is:\n%s" % (
             id_contract, explanation, remarks, traceback
