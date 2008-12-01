@@ -166,7 +166,7 @@ msgstr "Création de la base de données"
 # File: bin/modules/gui/main.py, line: 336
 # File: bin/modules/gui/main.py, line: 336
 msgid "<b>Operation in progress</b>"
-msgstr "<b>Opération en cours</p>"
+msgstr "<b>Opération en cours</b>"
 #
 # File: bin/modules/gui/main.py, line: 359
 # File: bin/modules/gui/main.py, line: 361
