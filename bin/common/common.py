@@ -38,6 +38,8 @@ import ConfigParser
 import threading
 import time
 
+import rpc
+
 #
 # Upgrade this number to force the client to ask the survey
 #
@@ -293,58 +295,99 @@ def support(*args):
     return True
 
 def error(title, message, details='', parent=None):
+    """
+    Show an error dialog with the support request or the maintenance
+    """
     log = logging.getLogger('common.message')
-    log.error('MSG %s: %s' % (str(message),details))
-
-    wid_list = ['email_entry','id_entry','name_entry','phone_entry','company_entry','error_details','explanation_textview','remarks_textview']
-    required_wid = ['email_entry', 'name_entry', 'company_name', 'id_entry']
-    colors = {'invalid':'#ffdddd', 'readonly':'grey', 'required':'#ddddff', 'normal':'white'}
+    log.error('Message %s: %s' % (str(message),details))
 
     support_id = options['support.support_id']
     recipient = options['support.recipient']
+    ids = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', 'search',[])
+    result = { 'status' : 'ko' }
+    if ids:
+        result = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', '_test_maintenance', ids, {})
+    if result['status']=='ko':
+        maintenance_contract_message=_('''Maintenance Contract
+-----------------------------------------------------------
+You have no valid maintenance contract! If you are using
+Open ERP, it is highly suggested to take maintenance contract.
+The maintenance program offers you:
+* Migrations on new versions,
+* Bugfix guarantee,
+* Monthly announces of bugs,
+* Security alerts,
+* Access to the customer portal.
+* Check the maintenance contract (www.openerp.com)''')
+    elif result['status']=='partial':
+        maintenance_contract_message=_('''Maintenance Contract
+-----------------------------------------------------------
+You have a maintenance contract, But you installed modules those
+are not covered by your maintenance contract: %s
+It means we can not offer you the garantee of maintenance on
+your whole installation.
+The maintenance program includes:
+* Migrations on new versions,
+* Bugfix guarantee,
+* Monthly announces of bugs,
+* Security alerts,
+* Access to the customer portal.
 
-    sur = glade.XML(terp_path("openerp.glade"), "win_error",gettext.textdomain())
-    win = sur.get_widget('win_error')
+To include these modules in your maintenance contract, you should
+extend your contract with the editor. We will review and validate
+your installed modules.
+
+* Extend your maintenance to the modules you used.
+* Check your maintenance contract''') % ( ",".join(result['modules']) )
+
+    xmlGlade = glade.XML(terp_path('win_error.glade'), 'dialog_error', gettext.textdomain())
+    win = xmlGlade.get_widget('dialog_error')
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
     win.set_icon(OPENERP_ICON)
-    sur.get_widget('error_title').set_text(str(title))
-    sur.get_widget('error_info').set_text(str(message))
-    buf = gtk.TextBuffer()
-    buf.set_text(unicode(details,'latin1').encode('utf-8'))
-    sur.get_widget('error_details').set_buffer(buf)
+    win.set_title("OpenERP - %s" % title)
 
-    sur.get_widget('id_entry').set_text(support_id)
+    xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % message)
+
+    details_buffer = gtk.TextBuffer()
+    details_buffer.set_text(unicode(details,'latin1').encode('utf-8'))
+    xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
+
+    is_ok = result['status'] == 'ok'
+
+    #xmlGlade.get_widget('button_send').set_sensitive(is_ok)
+    if not is_ok:
+        maintenance_buffer = gtk.TextBuffer()
+        maintenance_buffer.set_text(maintenance_contract_message) 
+        xmlGlade.get_widget('maintenance_explanation').set_buffer(maintenance_buffer)
+
+    xmlGlade.get_widget('notebook').remove_page(int(not is_ok))
 
     def send(widget):
-        import pickle
+        def get_text_from_text_view(textView):
+            """Retrieve the buffer from a text view and return the content of this buffer"""
+            buffer = textView.get_buffer()
+            return buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
+            
 
-        fromaddr = sur.get_widget('email_entry').get_text()
-        id_contract = sur.get_widget('id_entry').get_text()
-        name =  sur.get_widget('name_entry').get_text()
-        phone =  sur.get_widget('phone_entry').get_text()
-        company =  sur.get_widget('company_entry').get_text()
+        # Use details_buffer
+        id_contract = 0
+        traceback = details_buffer
+        explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
+        remarks = get_text_from_text_view(xmlGlade.get_widget('remakrs_textview'))
 
-        urgency = sur.get_widget('urgency_combo').get_active_text()
+        content = "(%s) has reported the following bug:\n%s\nremarks: %s\nThe traceback is:\n%s" % (
+            id_contract, explanation, remarks, traceback
+        )
 
-        buffer = sur.get_widget('error_details').get_buffer()
-        traceback = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-
-        buffer = sur.get_widget('explanation_textview').get_buffer()
-        explanation = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-
-        buffer = sur.get_widget('remarks_textview').get_buffer()
-        remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-
-        content = "(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug:\n"+ explanation + "\nremarks: " + remarks + "\nThe traceback is:\n" + traceback
-
-        if upload_data(fromaddr, content, 'error', id_contract):
+        if upload_data('', content, 'error', id_contract):
             common.message(_('Support request sent !'))
         return
 
-    sur.signal_connect('on_button_send_clicked', send)
-    sur.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
+    if is_ok:
+        #xmlGlade.signal_connect('on_button_send_clicked', send)
+        xmlGlade.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
 
     response = win.run()
     parent.present()

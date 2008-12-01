@@ -87,7 +87,7 @@ def data_files():
         for (dp, dn, names) in os.walk('share\\locale'):
             files.append((dp, map(lambda x: opj('bin', dp, x), names)))
         os.chdir('..')
-        files.append((".",["bin\\openerp.glade", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
+        files.append((".",["bin\\openerp.glade", "bin\\win_error.glade", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
         files.append(("pixmaps", glob.glob("bin\\pixmaps\\*.*")))
         files.append(("po", glob.glob("bin\\po\\*.*")))
         files.append(("icons", glob.glob("bin\\icons\\*.png")))
@@ -100,8 +100,7 @@ def data_files():
             glob.glob('bin/pixmaps/*.png')))
         files.append((opj('share', 'pixmaps', 'openerp-client', 'icons'),
             glob.glob('bin/icons/*.png')))
-        files.append((opj('share', 'openerp-client'), ['bin/openerp.glade',
-            'bin/tipoftheday.txt']))
+        files.append((opj('share', 'openerp-client'), ['bin/openerp.glade', 'bin/tipoftheday.txt', 'bin/win_error.glade']))
     return files
 
 included_plugins = ['workflow_print']
