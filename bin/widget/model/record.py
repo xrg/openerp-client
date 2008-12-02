@@ -94,8 +94,7 @@ class ModelRecord(signal_event.signal_event):
             self._check_load()
         value = []
         for name, field in self.mgroup.mfields.items():
-            if (get_readonly or not field.get_state_attrs(self).get('readonly', False)) \
-                and (not get_modifiedonly or (field.name in self.modified_fields or isinstance(field, O2MField))):
+            if (not get_modifiedonly or (field.name in self.modified_fields or isinstance(field, O2MField))):
                     value.append((name, field.get(self, readonly=get_readonly,
                         modified=get_modifiedonly)))
         value = dict(value)
