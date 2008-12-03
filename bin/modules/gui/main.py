@@ -357,7 +357,7 @@ class db_create(object):
             except Exception, e:
                 if e.args == ('DbExist',):
                     common.warning(_("Could not create database."),_('Database already exists !'))
-                elif ('faultCode' in dir(e) and e.faultCode=="AccessDenied") or str(e)=='AccessDenied':
+                elif (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
                     common.warning(_('Bad database administrator password !'), _("Could not create database."))
                 else:
                     common.warning(_("Could not create database."),_('Error during database creation !'))
@@ -1040,7 +1040,7 @@ class terp_main(service.Service):
             rpc.session.db_exec(url, 'drop', passwd, db_name)
             common.message(_("Database dropped successfully !"), parent=self.window)
         except Exception, e:
-            if ('faultCode' in dir(e) and e.faultCode=="AccessDenied") or str(e)=='AccessDenied':
+            if (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
                 common.warning(_('Bad database administrator password !'),_("Could not drop database."), parent=self.window)
             else:
                 common.warning(_("Couldn't drop database"), parent=self.window)
@@ -1059,7 +1059,7 @@ class terp_main(service.Service):
                 rpc.session.db_exec(url, 'restore', passwd, db_name, data_b64)
                 common.message(_("Database restored successfully !"), parent=self.window)
             except Exception,e:
-                if ('faultCode' in dir(e) and e.faultCode=="AccessDenied") or str(e)=='AccessDenied':
+                if (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
                     common.warning(_('Bad database administrator password !'),_("Could not restore database."), parent=self.window)
                 else:
                     common.warning(_("Couldn't restore database"), parent=self.window)
@@ -1129,7 +1129,7 @@ class terp_main(service.Service):
                 f.close()
                 common.message(_("Database backed up successfully !"), parent=self.window)
             except Exception,e:
-                if 'faultCode' in dir(e) and e.faultCode=="AccessDenied":
+                if getattr(e,'faultCode',False)=='AccessDenied':
                     common.warning(_('Bad database administrator password !'), _("Could not backup the database."),parent=self.window)
                 else:
                     common.warning(_("Couldn't backup database."), parent=self.window)
