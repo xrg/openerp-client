@@ -37,6 +37,7 @@ class main(service.Service):
         service.Service.__init__(self, name)
 
     def exec_report(self, name, data, context={}):
+        print data
         datas = data.copy()
         ids = datas['ids']
         del datas['ids']
