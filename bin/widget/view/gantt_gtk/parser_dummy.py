@@ -28,8 +28,8 @@ import gtk
 class EmptyGantt(object):
     def __init__(self, model):
         self.widget = gtk.Label(
-            _('Gantt View Error !')+'\n\n'+
-            _('Gantt not implemented in GTK Client, please use the Web Client.'))
+            _('Gantt view not yet implemented !')+'\n\n'+
+            _('The gantt view is not available in this GTK Client, you should use the web interface or switch to the calendar view.'))
 
     def display(self, models):
         pass
