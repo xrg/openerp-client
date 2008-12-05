@@ -39,7 +39,6 @@ import threading
 import time
 
 import rpc
-
 #
 # Upgrade this number to force the client to ask the survey
 #
@@ -371,7 +370,7 @@ def error(title, message, details='', parent=None):
             
         # Use details_buffer
         id_contract = contract['name']
-        traceback = details_buffer
+        traceback = get_text_from_text_view(xmlGlade.get_widget('details_explanation'))
         explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
         remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
 
