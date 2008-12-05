@@ -152,6 +152,10 @@ class main(service.Service):
             if 'window' in datas:
                 win=datas['window']
                 del datas['window']
+            if action['ids']:
+                datas['ids'] = action['ids']
+            else:
+                datas['ids'] = []
             self.exec_report(action['report_name'], datas)
 
         elif action['type']=='ir.actions.act_url':
