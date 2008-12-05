@@ -301,46 +301,47 @@ def error(title, message, details='', parent=None):
     log = logging.getLogger('common.message')
     log.error('Message %s: %s' % (str(message),details))
 
-    support_id = options['support.support_id']
-    recipient = options['support.recipient']
-    ids = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', 'search',[])
-    result = { 'status' : 'full' }
-    if ids:
-        result = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', '_test_maintenance', ids, {})
-    if result['status']=='none':
-        maintenance_contract_message=_('''Maintenance Contract
------------------------------------------------------------
-You have no valid maintenance contract! If you are using
-Open ERP, it is highly suggested to take maintenance contract.
-The maintenance program offers you:
-* Migrations on new versions,
-* Bugfix guarantee,
-* Monthly announces of bugs,
-* Security alerts,
-* Access to the customer portal.
-* Check the maintenance contract (www.openerp.com)''')
-    elif result['status']=='partial':
-        maintenance_contract_message=_('''Maintenance Contract
------------------------------------------------------------
-You have a maintenance contract, But you installed modules those
-are not covered by your maintenance contract: 
-%s
-It means we can not offer you the garantee of maintenance on
-your whole installation.
-The maintenance program includes:
-* Migrations on new versions,
-* Bugfix guarantee,
-* Monthly announces of bugs,
-* Security alerts,
-* Access to the customer portal.
+    show_message = True
 
-To include these modules in your maintenance contract, you should
-extend your contract with the editor. We will review and validate
-your installed modules.
+    contract_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', 'search', [])
+    if not contract_ids:
+        maintenance_contract_message=_("Maintenance Contract\n"
+        "-----------------------------------------------------------\n"
+        "You have no valid maintenance contract! If you are using\n"
+        "Open ERP, it is highly suggested to take maintenance contract.\n"
+        "The maintenance program offers you:\n"
+        "* Migrations on new versions,\n"
+        "* Bugfix guarantee,\n"
+        "* Monthly announces of bugs,\n"
+        "* Security alerts,\n"
+        "* Access to the customer portal.\n"
+        "* Check the maintenance contract (www.openerp.com)")
+    else:
+        contract = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', 'read', contract_ids, [])[0]
+        show_message = (contract['kind'] <> 'full')
+        if show_message:
+            maintenance_contract_message=_("Maintenance Contract\n"
+            "-----------------------------------------------------------\n"
+            "You have a maintenance contract, But you installed modules those\n"
+            "are not covered by your maintenance contract:\n"
+           #"%s\n"
+            "It means we can not offer you the garantee of maintenance on\n"
+            "your whole installation.\n"
+            "The maintenance program includes:\n"
+            "* Migrations on new versions,\n"
+            "* Bugfix guarantee,\n"
+            "* Monthly announces of bugs,\n"
+            "* Security alerts,\n"
+            "* Access to the customer portal.\n"
+            "\n"
+            "To include these modules in your maintenance contract, you should\n"
+            "extend your contract with the editor. We will review and validate\n"
+            "your installed modules.\n"
+            "\n"
+            "* Extend your maintenance to the modules you used.\n"
+            "* Check your maintenance contract") #% ( ",".join(result['modules']) ))
 
-* Extend your maintenance to the modules you used.
-* Check your maintenance contract''') % ( ",".join(result['modules']) )
-
+    # Données de test
     xmlGlade = glade.XML(terp_path('win_error.glade'), 'dialog_error', gettext.textdomain())
     win = xmlGlade.get_widget('dialog_error')
     if not parent:
@@ -355,15 +356,12 @@ your installed modules.
     details_buffer.set_text(unicode(details,'latin1').encode('utf-8'))
     xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
 
-    is_ok = result['status'] == 'full'
-
-    #xmlGlade.get_widget('button_send').set_sensitive(is_ok)
-    if not is_ok:
+    if show_message:
         maintenance_buffer = gtk.TextBuffer()
         maintenance_buffer.set_text(maintenance_contract_message) 
         xmlGlade.get_widget('maintenance_explanation').set_buffer(maintenance_buffer)
 
-    xmlGlade.get_widget('notebook').remove_page(int(not is_ok))
+    xmlGlade.get_widget('notebook').remove_page(int(show_message))
 
     def send(widget):
         def get_text_from_text_view(textView):
@@ -371,9 +369,8 @@ your installed modules.
             buffer = textView.get_buffer()
             return buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
             
-
         # Use details_buffer
-        id_contract = 0
+        id_contract = contract['name']
         traceback = details_buffer
         explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
         remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
@@ -386,8 +383,8 @@ your installed modules.
             common.message(_('Support request sent !'))
         return
 
-    if is_ok:
-        #xmlGlade.signal_connect('on_button_send_clicked', send)
+    if not show_message:
+        xmlGlade.signal_connect('on_button_send_clicked', send)
         xmlGlade.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
 
     response = win.run()
