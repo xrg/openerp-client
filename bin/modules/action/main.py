@@ -153,7 +153,7 @@ class main(service.Service):
             if 'window' in datas:
                 win=datas['window']
                 del datas['window']
-            if action['ids']:
+            if action.has_key('ids'):
                 datas['ids'] = action['ids']
             else:
                 datas['ids'] = []
