@@ -307,18 +307,19 @@ class ViewForm(parser_view):
                             cond=v[i][0],v[i][1],v[i][2][0]
                             attrs_changes[k][i]=cond
         for k,v in attrs_changes.items():
+            result = True
             for condition in v:
-                result = tools.calc_condition(self,model,condition)
-                if result:
-                    if k=='invisible':
-                        obj.hide()
-                    elif k=='readonly':
-                        obj.set_sensitive(False)
-                else:
-                    if k=='invisible':
-                        obj.show()
-                    if k=='readonly':
-                        obj.set_sensitive(True)
+                result = result and tools.calc_condition(self,model,condition)
+            if result:
+                if k=='invisible':
+                    obj.hide()
+                elif k=='readonly':
+                    obj.set_sensitive(False)
+            else:
+                if k=='invisible':
+                    obj.show()
+                if k=='readonly':
+                    obj.set_sensitive(True)
 
     def set_notebook(self,model,nb):
         for i in range(0,nb.get_n_pages()):

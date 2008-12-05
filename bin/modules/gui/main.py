@@ -357,7 +357,7 @@ class db_create(object):
             except Exception, e:
                 if e.args == ('DbExist',):
                     common.warning(_("Could not create database."),_('Database already exists !'))
-                elif ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
+                elif (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
                     common.warning(_('Bad database administrator password !'), _("Could not create database."))
                 else:
                     common.warning(_("Could not create database."),_('Error during database creation !'))
@@ -1040,7 +1040,7 @@ class terp_main(service.Service):
             rpc.session.db_exec(url, 'drop', passwd, db_name)
             common.message(_("Database dropped successfully !"), parent=self.window)
         except Exception, e:
-            if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
+            if (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
                 common.warning(_('Bad database administrator password !'),_("Could not drop database."), parent=self.window)
             else:
                 common.warning(_("Couldn't drop database"), parent=self.window)
@@ -1059,7 +1059,7 @@ class terp_main(service.Service):
                 rpc.session.db_exec(url, 'restore', passwd, db_name, data_b64)
                 common.message(_("Database restored successfully !"), parent=self.window)
             except Exception,e:
-                if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
+                if (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
                     common.warning(_('Bad database administrator password !'),_("Could not restore database."), parent=self.window)
                 else:
                     common.warning(_("Couldn't restore database"), parent=self.window)
@@ -1095,7 +1095,7 @@ class terp_main(service.Service):
             new_passwd = new_pass_widget.get_text()
             new_passwd2 = new_pass2_widget.get_text()
             if new_passwd != new_passwd2:
-                common.warning(_("Confirmation password do not match " \
+                common.warning(_("Confirmation password does not match " \
                         "new password, operation cancelled!"),
                         _("Validation Error."), parent=win)
             else:
@@ -1103,10 +1103,10 @@ class terp_main(service.Service):
                     rpc.session.db_exec(url, 'change_admin_password',
                             old_passwd, new_passwd)
                 except Exception,e:
-                    if ('faultString' in e and e.faultString=='AccessDenied:None') \
+                    if ('faultCode' in dir(e) and e.faultCode=="AccessDenied") \
                             or str(e)=='AccessDenied':
-                        common.warning(_("Could not change password database."),
-                                _('Bas password provided !'), parent=win)
+                        common.warning(_("Could not change the Super Admin password."),
+                                _('Bad password provided !'), parent=win)
                     else:
                         common.warning(_("Error, password not changed."),
                                 parent=win)
@@ -1127,9 +1127,12 @@ class terp_main(service.Service):
                 f = file(filename, 'wb')
                 f.write(dump)
                 f.close()
-                common.message(_("Database backuped successfully !"), parent=self.window)
-            except:
-                common.warning(_("Couldn't backup database."), parent=self.window)
+                common.message(_("Database backed up successfully !"), parent=self.window)
+            except Exception,e:
+                if getattr(e,'faultCode',False)=='AccessDenied':
+                    common.warning(_('Bad database administrator password !'), _("Could not backup the database."),parent=self.window)
+                else:
+                    common.warning(_("Couldn't backup database."), parent=self.window)
 
     def _choose_db_select(self, title=_("Backup a database")):
         def refreshlist(widget, db_widget, label, url):
