@@ -153,11 +153,6 @@ class main(service.Service):
                 win=datas['window']
                 del datas['window']
 
-            if action.has_key('ids'):
-                datas['ids'] = action['ids']
-            else:
-                datas['ids'] = []
-
             self.exec_report(action['report_name'], datas)
 
         elif action['type']=='ir.actions.act_url':
