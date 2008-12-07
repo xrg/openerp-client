@@ -1,3 +1,11 @@
+openerp-client (5.0.0~alpha-3) unstable; urgency=low
+
+  * Adding python-matplotlib to recommends (Closes: #506619).
+  * Dropping tinyerp-client transitional package, this allows to have both
+    packages available in unstable.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun,  7 Dec 2008 20:17:00 +0100
+
 openerp-client (5.0.0~alpha-2) experimental; urgency=low
 
   * Renaming tinyerp-client to new upstream openerp-client name.
