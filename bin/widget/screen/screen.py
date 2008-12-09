@@ -154,16 +154,12 @@ class Screen(signal_event.signal_event):
             if key not in filter_keys and \
                     not (key == 'active' and self.context.get('active_test', False)):
                 v.append((key, op, value))
-        try:
-            ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search', v, offset,limit, 0, self.context)
-        except:
-            # Try if it is not an older server
-            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0)
-        try:
+        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0,self.context)
+        if len(ids) < limit:
+            self.search_count = len(ids)
+        else:
             self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute',
                     self.name, 'search_count', v, self.context)
-        except:
-            pass
         self.clear()
         self.load(ids)
         return True
