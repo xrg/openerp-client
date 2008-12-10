@@ -1939,7 +1939,7 @@ Web: http://tiny.be</property>
   </widget>
   <widget class="GtkWindow" id="win_form_widget">
     <property name="visible">True</property>
-    <property name="title" translatable="yes">Tiny ERP - forms widget</property>
+    <property name="title" translatable="yes">Open ERP - Forms widget</property>
     <child>
       <widget class="GtkScrolledWindow" id="scrolledwindow44">
         <property name="visible">True</property>
