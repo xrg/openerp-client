@@ -556,7 +556,7 @@ class terp_main(service.Service):
         self.sb_set()
 
         settings = gtk.settings_get_default()
-        settings.set_long_property('gtk-button-images', 1, 'TinyERP:gui.main')
+        settings.set_long_property('gtk-button-images', 1, 'OpenERP:gui.main')
 
         def fnc_menuitem(menuitem, opt_name):
             options.options[opt_name] = menuitem.get_active()
