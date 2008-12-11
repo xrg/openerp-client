@@ -125,11 +125,11 @@ class CharField(object):
                             cond=v[i][0],v[i][1],v[i][2][0]
                             attrs_changes[k][i]=cond
         for k,v in attrs_changes.items():
+            result = True
             for condition in v:
-                result = tools.calc_condition(self,model,condition)
-                if result:
-                   self.get_state_attrs(model)[k]=True
-              
+                result = result and tools.calc_condition(self,model,condition)
+            if result:
+               self.get_state_attrs(model)[k]=True
 
     def state_set(self, model, state='draft'):
         ro = model.mgroup._readonly

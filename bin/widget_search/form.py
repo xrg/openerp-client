@@ -276,6 +276,9 @@ class form(wid_int.wid_int):
     def get_limit(self):
         return self.spin_limit.get_value()
 
+    def set_offset(self, val):
+        self.spin_offset.set_value(val)
+
     def get_offset(self):
         return self.spin_offset.get_value()
 
