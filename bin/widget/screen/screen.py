@@ -181,7 +181,10 @@ class Screen(signal_event.signal_event):
             if key not in filter_keys and \
                     not (key == 'active' and self.context.get('active_test', False)):
                 v.append((key, op, value))
-        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0,self.context)
+        if v:
+            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, 0,limit, 0,self.context)
+        else:
+            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0,self.context)
         if len(ids) < limit:
             self.search_count = len(ids)
         else:
