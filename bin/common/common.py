@@ -327,85 +327,63 @@ def support(*args):
     win.destroy()
     return True
 
-def error(title, message, details='', parent=None, disconnected_mode=False):
+def error(title, message, details='', parent=None, disconnected_mode=False, error_in_error = None):
     """
     Show an error dialog with the support request or the maintenance
     """
     log = logging.getLogger('common.message')
-    details = get_client_environment() + details
     log.error('Message %s: %s' % (str(message),details))
 
     show_message = True
 
-    if not disconnected_mode:
-        maintenance = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'status')
+    if error_in_error :
+	import traceback
+	traceback.print_stack(limit=20)
+	log.error("Error in error!");
+	return True
 
-        if maintenance['status'] == 'none':
-            maintenance_contract_message=_("""
-<b>An unknown error has been reported.</b>
+    error_in_error = True
 
-<b>You do not have a valid Open ERP maintenance contract !</b>
-If you are using Open ERP in production, it is highly suggested to subscribe
-a maintenance program.
-
-The Open ERP maintenance contract provides you a bugfix guarantee and an
-automatic migration system so that we can fix your problems within a few
-hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the Open ERP editor.
-
-The maintenance program offers you:
-* Automatic migrations on new versions,
-* A bugfix guarantee,
-* Monthly announces of potential bugs and their fixes,
-* Security alerts by email and automatic migration,
-* Access to the customer portal.
-
-You can use the link bellow for more information. The detail of the error
-is displayed on the second tab.
-""")
-        elif maintenance['status'] == 'partial':
-            maintenance_contract_message=_("""
-<b>An unknown error has been reported.</b>
-
-Your maintenance contract does not cover all modules installed in your system !
-If you are using Open ERP in production, it is highly suggested to upgrade your
-contract.
-
-If you have developed your own modules or installed third party module, we
-can provide you an additional maintenance contract for these modules. After
-having reviewed your modules, our quality team will ensure they will migrate
-automatically for all future stable versions of Open ERP at no extra cost.
-
-Here is the list of modules not covered by your maintenance contract:
-%s
-
-You can use the link bellow for more information. The detail of the error
-is displayed on the second tab.""") % (", ".join(maintenance['uncovered_modules']), )
-        else:
-            show_message = False
+    try:
+    	contract_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', 'search', [])
+    except:
+	contract_ids = False
+    if not contract_ids:
+        maintenance_contract_message=_("Maintenance Contract\n"
+        "-----------------------------------------------------------\n"
+        "You have no valid maintenance contract! If you are using\n"
+        "Open ERP, it is highly suggested to take maintenance contract.\n"
+        "The maintenance progbin/common/common.pyram offers you:\n"
+        "* Migrations on new versions,\n"
+        "* Bugfix guarantee,\n"
+        "* Monthly announces of bugs,\n"
+        "* Security alerts,\n"
+        "* Access to the customer portal.\n"
+        "* Check the maintenance contract (www.openerp.com)")
     else:
-        maintenance_contract_message=_("""
-<b>An unknown error has been reported.</b>
-
-<b>You do not have a valid Open ERP maintenance contract !</b>
-If you are using Open ERP in production, it is highly suggested to subscribe
-a maintenance program.
-
-The Open ERP maintenance contract provides you a bugfix guarantee and an
-automatic migration system so that we can fix your problems within a few
-hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the Open ERP editor.
-
-The maintenance program offers you:
-* Automatic migrations on new versions,
-* A bugfix guarantee,
-* Monthly announces of potential bugs and their fixes,
-* Security alerts by email and automatic migration,
-* Access to the customer portal.
-
-You can use the link bellow for more information. The detail of the error
-is displayed on the second tab.
-""")
+        contract = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', 'read', contract_ids, [])[0]
+        show_message = (contract['kind'] <> 'full')
+        if show_message:
+            maintenance_contract_message=_("Maintenance Contract\n"
+            "-----------------------------------------------------------\n"
+            "You have a maintenance contract, But you installed modules those\n"
+            "are not covered by your maintenance contract:\n"
+           #"%s\n"
+            "It means we can not offer you the garantee of maintenance on\n"
+            "your whole installation.\n"
+            "The maintenance program includes:\n"
+            "* Migrations on new versions,\n"
+            "* Bugfix guarantee,\n"
+            "* Monthly announces of bugs,\n"
+            "* Security alerts,\n"
+            "* Access to the customer portal.\n"
+            "\n"
+            "To include these modules in your maintenance contract, you should\n"
+            "extend your contract with the editor. We will review and validate\n"
+            "your installed modules.\n"
+            "\n"
+            "* Extend your maintenance to the modules you used.\n"
+            "* Check your maintenance contract") #% ( ",".join(result['modules']) ))
 
     xmlGlade = glade.XML(terp_path('win_error.glade'), 'dialog_error', gettext.textdomain())
     win = xmlGlade.get_widget('dialog_error')
@@ -450,6 +428,7 @@ is displayed on the second tab.
     response = win.run()
     parent.present()
     win.destroy()
+    error_in_error = None
     return True
 
 def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
