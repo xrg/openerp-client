@@ -188,7 +188,7 @@ class rpc_session(object):
                 else:
                     common.error(_('Application Error'), _('View details'), str(e))
                 #TODO Must propagate the exception?
-                #raise
+                raise
         else:
             raise rpc_exception(1, 'not logged')
 
