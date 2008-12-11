@@ -29,6 +29,8 @@ import gettext
 import locale
 import wid_int
 import date_widget
+import mx.DateTime
+from mx.DateTime import *
 
 LDFMT = locale.nl_langinfo(locale.D_FMT)
 for x,y in [('%y','%Y'),('%B',''),('%A','')]:
@@ -84,10 +86,10 @@ class calendar(wid_int.wid_int):
 
     def _date_get(self, str):
         try:
-            date = time.strptime(str, locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'))
+            date = mx.DateTime.strptime(str, locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'))
         except:
             return False
-        return time.strftime(DT_FORMAT, date)
+        return date.strftime(DT_FORMAT)
 
     def _value_get(self):
         res = []

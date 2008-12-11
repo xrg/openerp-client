@@ -43,6 +43,8 @@ import datetime as DT
 import service
 import gobject
 import pango
+import mx.DateTime
+from mx.DateTime import *
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed)
@@ -113,7 +115,6 @@ class parser_tree(interface.parser_interface):
                     renderer.set_property('editable', write_enable)
                 if write_enable:
                     renderer.connect_after('editing-started', send_keys, treeview)
-#                   renderer.connect_after('editing-canceled', self.editing_canceled)
 
                 col = gtk.TreeViewColumn(None, renderer)
                 col_label = gtk.Label('')
@@ -277,8 +278,8 @@ class GenericDate(Char):
         if not value:
             return ''
         try:
-            date = time.strptime(value, self.server_format)
-            return time.strftime(self.display_format, date)
+            date = mx.DateTime.strptime(value, self.server_format)
+            return date.strftime(self.display_format)
         except:
             return ''
 
@@ -286,7 +287,7 @@ class GenericDate(Char):
         dt = self.renderer.date_get(self.renderer.editable)
         res = dt and dt.strftime(self.server_format)
         if res:
-            time.strptime(res, self.server_format)
+            mx.DateTime.strptime(res, self.server_format)
         return res
 
 class Date(GenericDate):
@@ -301,7 +302,7 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        date = time.strptime(value, self.server_format)
+        date = mx.DateTime.strptime(value, self.server_format)
         if 'tz' in rpc.session.context:
             try:
                 import pytz
@@ -313,13 +314,13 @@ class Datetime(GenericDate):
                 date = ldt.timetuple()
             except:
                 pass
-        return time.strftime(self.display_format, date)
+        return mx.DateTime.Date(date[0]).strftime(self.display_format)
 
     def value_from_text(self, model, text):
         if not text:
             return False
         try:
-            date = time.strptime(text, self.display_format)
+            date = mx.DateTime.strptime(text, self.display_format)
         except:
             try:
                 dt = list(time.localtime())
@@ -338,7 +339,7 @@ class Datetime(GenericDate):
                 date = sdt.timetuple()
             except:
                 pass
-        return time.strftime(self.server_format, date)
+        return date.strftime(self.display_format)
 
 class Float(Char):
     def get_textual_value(self, model):
