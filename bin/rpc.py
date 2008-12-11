@@ -305,13 +305,19 @@ class rpc_session(object):
         return self._open
 
     def logout(self):
-        if self._open:
-            self._open = False
-            self.uname = None
-            self.uid = None
-            self._passwd = None
-        else:
-            pass
+      if self._open :
+          try:
+              res = self.rpc_exec_auth('/common', 'logout')
+          except socket.error,e:
+            return -1
+          self._open = False
+          self._open = False
+          self.uname = None
+          self.uid = None
+          self._passwd = None
+      else :
+          pass
+
 
 session = rpc_session()
 
