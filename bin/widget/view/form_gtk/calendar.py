@@ -144,7 +144,7 @@ class calendar(interface.widget_interface):
         response = win.run()
         if response == gtk.RESPONSE_OK:
             year, month, day = cal.get_date()
-            dt = DT.date(year, month+1, day)
+            dt = DT.Date(year, month+1, day)
             self.entry.set_text(dt.strftime(LDFMT))
         self._focus_out()
         window.present()
