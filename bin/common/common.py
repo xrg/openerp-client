@@ -353,7 +353,7 @@ def error(title, message, details='', parent=None, disconnected_mode=False, erro
         "-----------------------------------------------------------\n"
         "You have no valid maintenance contract! If you are using\n"
         "Open ERP, it is highly suggested to take maintenance contract.\n"
-        "The maintenance progbin/common/common.pyram offers you:\n"
+        "The maintenance program offers you:\n"
         "* Migrations on new versions,\n"
         "* Bugfix guarantee,\n"
         "* Monthly announces of bugs,\n"
