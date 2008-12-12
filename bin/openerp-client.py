@@ -56,7 +56,7 @@ pygtk.require('2.0')
 import gtk
 import gtk.glade
 
-gtk.gdk.threads_init()
+#gtk.gdk.threads_init() # causes the GTK client to block everything.
 
 import locale, gettext
 
