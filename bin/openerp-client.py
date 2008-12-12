@@ -56,6 +56,8 @@ pygtk.require('2.0')
 import gtk
 import gtk.glade
 
+gtk.gdk.threads_init()
+
 import locale, gettext
 
 import atk
