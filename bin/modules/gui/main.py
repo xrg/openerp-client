@@ -575,7 +575,7 @@ class terp_main(service.Service):
             self.glade.get_widget(dict[signal][2]).set_active(int(bool(options.options[dict[signal][1]])))
 
         # Adding a timer the check to requests
-        gobject.timeout_add(1 * 60 * 1000, self.request_set)
+        gobject.timeout_add(15 * 60 * 1000, self.request_set)
 
 
     def shortcut_edit(self, widget, model='ir.ui.menu'):

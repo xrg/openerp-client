@@ -302,7 +302,7 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        date = mx.DateTime.strptime(value, self.server_format)
+        date = mx.DateTime.strptime(value, self.server_format).timetuple()
         if 'tz' in rpc.session.context:
             try:
                 import pytz
