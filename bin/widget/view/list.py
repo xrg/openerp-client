@@ -86,6 +86,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
             self.row_changed(self.get_path(iter), iter)
 
     def saved(self, id):
+        print '*** ICI'
         return self.model_group.writen(id)
 
     def __len__(self):

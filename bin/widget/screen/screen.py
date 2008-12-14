@@ -419,6 +419,7 @@ class Screen(signal_event.signal_event):
         id = False
         if self.current_model.validate():
             id = self.current_model.save(reload=True)
+            self.models.writen(id)
             if not id:
                 self.current_view.display()
         else:
@@ -430,6 +431,7 @@ class Screen(signal_event.signal_event):
                 if model.is_modified():
                     if model.validate():
                         id = model.save(reload=True)
+                        self.models.writen(id)
                     else:
                         self.current_model = model
                         self.display()
