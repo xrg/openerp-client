@@ -36,6 +36,9 @@ LDFMT = locale.nl_langinfo(locale.D_FMT)
 for x,y in [('%y','%Y'),('%B',''),('%A','')]:
     LDFMT = LDFMT.replace(x, y)
 
+if not (LDFMT.count('%Y') == 1 and LDFMT.count('%m') == 1 and LDFMT.count('%d') == 1):
+    LDFMT = '%Y/%m/%d'
+
 DT_FORMAT = '%Y-%m-%d'
 
 class calendar(wid_int.wid_int):
@@ -86,7 +89,7 @@ class calendar(wid_int.wid_int):
 
     def _date_get(self, str):
         try:
-            date = mx.DateTime.strptime(str, locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'))
+            date = mx.DateTime.strptime(str, LDFMT)
         except:
             return False
         return date.strftime(DT_FORMAT)
@@ -131,7 +134,7 @@ class calendar(wid_int.wid_int):
         if response == gtk.RESPONSE_OK:
             year, month, day = cal.get_date()
             dt = DT.date(year, month+1, day)
-            dest.set_text(dt.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')))
+            dest.set_text(dt.strftime(LDFMT))
         win.destroy()
 
     def clear(self):

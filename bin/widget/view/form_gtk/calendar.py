@@ -46,6 +46,9 @@ LDFMT = locale.nl_langinfo(locale.D_FMT)
 for x,y in [('%y','%Y'),('%B',''),('%A','')]:
     LDFMT = LDFMT.replace(x, y)
 
+if not (LDFMT.count('%Y') == 1 and LDFMT.count('%m') == 1 and LDFMT.count('%d') == 1):
+    LDFMT = '%Y/%m/%d'
+
 class calendar(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, attrs=attrs)
