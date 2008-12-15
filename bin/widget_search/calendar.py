@@ -20,25 +20,23 @@
 #
 ##############################################################################
 
-import tools
+import gtk
 import time
 import datetime as DT
-import gtk
-import common
 import gettext
 import locale
-import wid_int
-import date_widget
+
 import mx.DateTime
 from mx.DateTime import *
 
-LDFMT = locale.nl_langinfo(locale.D_FMT)
-for x,y in [('%y','%Y'),('%B',''),('%A','')]:
-    LDFMT = LDFMT.replace(x, y)
+import tools
+import tools.datetime_util
+import common
 
-if not (LDFMT.count('%Y') == 1 and LDFMT.count('%m') == 1 and LDFMT.count('%d') == 1):
-    LDFMT = '%Y/%m/%d'
+import wid_int
+import date_widget
 
+LDFMT = tools.datetime_util.get_date_format()
 DT_FORMAT = '%Y-%m-%d'
 
 class calendar(wid_int.wid_int):

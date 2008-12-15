@@ -22,21 +22,26 @@
 
 import gtk
 import gobject
+
+import time
+import datetime as DT
+import copy
+import math
+import locale
+import gettext
+
 from xml.parsers import expat
 
 import options
-import time
-import math
 import rpc
-import gettext
 import parse
-import datetime as DT
-import copy
-import locale
+
 import tools
+import tools.datetime_util
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
+LDFMT = tools.datetime_util.get_date_format()
 
 # BUG: ids = []
 #
@@ -81,15 +86,13 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                 res_ids.append(val)
         for field in self.fields:
             if self.fields_type[field]['type'] in ('date',):
-                display_format = locale.nl_langinfo(locale.D_FMT).replace('%y',
-                        '%Y')
+                display_format = LDFMT
                 for x in res_ids:
                     if x[field]:
                         date = time.strptime(x[field], DT_FORMAT)
                         x[field] = time.strftime(display_format, date)
             if self.fields_type[field]['type'] in ('datetime',):
-                display_format = locale.nl_langinfo(locale.D_FMT).replace('%y',
-                        '%Y') + ' %H:%M:%S'
+                display_format = LDFMT + ' %H:%M:%S'
                 for x in res_ids:
                     if x[field]:
                         date = time.strptime(x[field], DHM_FORMAT)

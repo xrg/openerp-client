@@ -35,6 +35,7 @@ import locale
 import rpc
 import service
 import tools
+import tools.datetime_util
 
 import date_widget
 
@@ -42,12 +43,7 @@ DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 HM_FORMAT = '%H:%M:%S'
 
-LDFMT = locale.nl_langinfo(locale.D_FMT)
-for x,y in [('%y','%Y'),('%B',''),('%A','')]:
-    LDFMT = LDFMT.replace(x, y)
-
-if not (LDFMT.count('%Y') == 1 and LDFMT.count('%m') == 1 and LDFMT.count('%d') == 1):
-    LDFMT = '%Y/%m/%d'
+LDFMT = tools.datetime_util.get_date_format();
 
 class calendar(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
