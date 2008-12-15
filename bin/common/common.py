@@ -302,52 +302,62 @@ def error(title, message, details='', parent=None):
 
     show_message = True
 
-    contract_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', 'search', [])
+    try:
+        contract_ids = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'search', [])
+    except:
+        contract_ids = []
     if not contract_ids:
-        maintenance_contract_message=_("Maintenance Contract\n"
-        "-----------------------------------------------------------\n"
-        "You have no valid maintenance contract! If you are using\n"
-        "Open ERP, it is highly suggested to take maintenance contract.\n"
-        "The maintenance program offers you:\n"
-        "* Migrations on new versions,\n"
-        "* Bugfix guarantee,\n"
-        "* Monthly announces of bugs,\n"
-        "* Security alerts,\n"
-        "* Access to the customer portal.\n"
-        "* Check the maintenance contract (www.openerp.com)")
+        maintenance_contract_message=_("""
+<i>Open ERP crashed for an unknown reason.</i>
+
+<b>You do not have a valid Open ERP maintenance contract !</b>
+If you are using Open ERP in production, it is highly suggested to subscribe
+a maintenance program.
+
+The Open ERP maintenance contract provides you a bugfix guarantee and an
+automatic migration system so that we can fix your problems within a few
+hours. If you had a maintenance contract, this error would have been sent
+to the quality team of the Open ERP editor.
+
+The maintenance program offers you:
+* Automatic migrations on new versions,
+* A bugfix guarantee,
+* Monthly announces of potential bugs and their fixes,
+* Security alerts by email and automatic migration,
+* Access to the customer portal.
+
+You can use the link bellow for more information. The detail of the error
+is displayed on the second tab.
+""")
     else:
-        contract = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', 'read', contract_ids, [])[0]
+        contract = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'read', contract_ids, [])[0]
         show_message = (contract['kind'] <> 'full')
         if show_message:
-            maintenance_contract_message=_("Maintenance Contract\n"
-            "-----------------------------------------------------------\n"
-            "You have a maintenance contract, But you installed modules those\n"
-            "are not covered by your maintenance contract:\n"
-           #"%s\n"
-            "It means we can not offer you the garantee of maintenance on\n"
-            "your whole installation.\n"
-            "The maintenance program includes:\n"
-            "* Migrations on new versions,\n"
-            "* Bugfix guarantee,\n"
-            "* Monthly announces of bugs,\n"
-            "* Security alerts,\n"
-            "* Access to the customer portal.\n"
-            "\n"
-            "To include these modules in your maintenance contract, you should\n"
-            "extend your contract with the editor. We will review and validate\n"
-            "your installed modules.\n"
-            "\n"
-            "* Extend your maintenance to the modules you used.\n"
-            "* Check your maintenance contract") #% ( ",".join(result['modules']) ))
+            maintenance_contract_message=_("""
+<b>Open ERP crashed for an unknown reason.</b>
 
-    # Données de test
+Your maintenance contract does not cover all modules installed in your system !
+If you are using Open ERP in production, it is highly suggested to upgrade your
+contract.
+
+If you have developped your own modules or installed third party module, we
+can provide you an additional maintenance contract for these modules. After
+having reviewed your modules, our quality team will ensure they will migrate
+automatically for all futur stable versions of Open ERP at no extra cost.
+
+Here is the list of modules not covered by your maintenance contract:
+%s
+
+You can use the link bellow for more information. The detail of the error
+is displayed on the second tab.""") % (",".join(result['modules']), )
+
     xmlGlade = glade.XML(terp_path('win_error.glade'), 'dialog_error', gettext.textdomain())
     win = xmlGlade.get_widget('dialog_error')
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
     win.set_icon(OPENERP_ICON)
-    win.set_title("OpenERP - %s" % title)
+    win.set_title("Open ERP - %s" % title)
 
     xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % message)
 
@@ -356,9 +366,7 @@ def error(title, message, details='', parent=None):
     xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
 
     if show_message:
-        maintenance_buffer = gtk.TextBuffer()
-        maintenance_buffer.set_text(maintenance_contract_message) 
-        xmlGlade.get_widget('maintenance_explanation').set_buffer(maintenance_buffer)
+        xmlGlade.get_widget('maintenance_explanation').set_markup(maintenance_contract_message)
 
     xmlGlade.get_widget('notebook').remove_page(int(show_message))
 
@@ -379,7 +387,7 @@ def error(title, message, details='', parent=None):
         )
 
         if upload_data('', content, 'error', id_contract):
-            common.message(_('Support request sent !'))
+            common.message(_('You problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'))
         return
 
     if not show_message:
