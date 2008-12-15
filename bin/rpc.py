@@ -269,11 +269,14 @@ class rpc_session(object):
     def list_db(self, url):
         try:
             return self.db_exec_no_except(url, 'list')
-        except (xmlrpclib.Fault, tiny_socket.Myexception), e:
+	except socket.error, err:
+	    import locale
+	    language, in_encoding = locale.getdefaultlocale()
+	    common.warning(err[1].decode(in_encoding),_('Socket error'))
+	    return -1
+        except Exception, e:
 	    common.error(_('Cannot list db:'), str(e))
-            if e.faultCode == 'AccessDenied':
-                return None
-            raise
+            return -1
 
     def db_exec_no_except(self, url, method, *args):
         return self.exec_no_except(url, 'db', method, *args)
