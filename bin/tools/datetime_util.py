@@ -21,6 +21,8 @@
 ##############################################################################
 
 import time
+import locale
+
 from mx.DateTime import RelativeDateTime
 from mx.DateTime import now
 
@@ -61,6 +63,20 @@ date_mapping = {
     '%M': ('__', '[_0-6][_0-9]'),
     '%S': ('__', '[_0-6][_0-9]'),
 }
+
+def get_date_format():
+    """Return locale date format string. If format string doesn't contain 
+    any of the `%Y, %m or %d` then returns default datetime format `%Y/%m/%d`
+    """
+
+    fmt = locale.nl_langinfo(locale.D_FMT)
+    for x,y in [('%y','%Y'),('%B',''),('%A','')]:
+        fmt = fmt.replace(x, y)
+
+    if not (fmt.count('%Y') == 1 and fmt.count('%m') == 1 and fmt.count('%d') == 1):
+        return '%Y/%m/%d'
+
+    return fmt
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
