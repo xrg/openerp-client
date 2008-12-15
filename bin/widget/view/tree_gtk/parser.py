@@ -318,7 +318,6 @@ class Datetime(GenericDate):
             except:
                 pass
         return mx.DateTime.Date(date[0]).strftime(self.display_format)
-#        return date.strftime(self.display_format)
 
     def value_from_text(self, model, text):
         if not text:
