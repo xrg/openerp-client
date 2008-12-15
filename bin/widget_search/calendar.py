@@ -51,7 +51,7 @@ class calendar(wid_int.wid_int):
         self.entry1 = self.widget1.widget
         self.entry1.set_property('width-chars', 10)
         self.entry1.set_property('activates_default', True)
-        self.entry1.connect('key_press_event', self.sig_key_press1, self.entry1, parent)
+        self.entry1.connect('key_press_event', self.sig_key_press, self.entry1, parent)
         tooltips.set_tip(self.entry1, _('Start date'))
         self.widget.pack_start(self.widget1, expand=False, fill=True)
 
@@ -71,7 +71,7 @@ class calendar(wid_int.wid_int):
         self.entry2 = self.widget2.widget
         self.entry2.set_property('width-chars', 10)
         self.entry2.set_property('activates_default', True)
-        self.entry2.connect('key_press_event', self.sig_key_press2, self.entry2, parent)
+        self.entry2.connect('key_press_event', self.sig_key_press, self.entry2, parent)
         tooltips.set_tip(self.entry2, _('End date'))
         self.widget.pack_start(self.widget2, expand=False, fill=True)
 
@@ -94,16 +94,11 @@ class calendar(wid_int.wid_int):
             return False
         return date.strftime(DT_FORMAT)
     
-    def sig_key_press1(self, widget, event, dest, parent):
+    def sig_key_press(self, widget, event, dest, parent):
         if event.keyval == gtk.keysyms.F2:
             self.cal_open(widget, event, dest, parent)
             return True
         
-    def sig_key_press2(self, widget, event, dest, parent):
-        if event.keyval == gtk.keysyms.F2:
-            self.cal_open(widget, event, dest, parent)
-            return True
-
     def _value_get(self):
         res = []
         val = self._date_get(self.entry1.get_text())
