@@ -143,7 +143,7 @@ class many2one(interface.widget_interface):
         self.but_find.set_property('can-focus', False)
 
         self.tooltips = gtk.Tooltips()
-        self.tooltips.set_tip(self.but_find, _('Select a record'))
+        self.tooltips.set_tip(self.but_find, _('Open this resource'))
         self.tooltips.enable()
 
 
@@ -157,7 +157,7 @@ class many2one(interface.widget_interface):
         self.but_open.set_property('can-focus', False)
 
         self.tooltips = gtk.Tooltips()
-        self.tooltips.set_tip(self.but_find, _('Open this record'))
+        self.tooltips.set_tip(self.but_find, _('Search a resource'))
         self.tooltips.enable()
 
         self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
