@@ -26,6 +26,8 @@ import gtk
 import math
 
 import tools
+import tools.datetime_util
+
 from rpc import RPCProxy
 from editabletree import EditableTreeView
 from decoratedtree import DecoratedTreeView
@@ -37,6 +39,7 @@ import date_renderer
 from widget.view.form_gtk.many2one import dialog as M2ODialog
 from modules.gui.window.win_search import win_search
 from widget.view.form_gtk.parser import Button
+
 import common
 import rpc
 import datetime as DT
@@ -292,11 +295,11 @@ class GenericDate(Char):
 
 class Date(GenericDate):
     server_format = '%Y-%m-%d'
-    display_format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')
+    display_format = tools.datetime_util.get_date_format()
 
 class Datetime(GenericDate):
     server_format = '%Y-%m-%d %H:%M:%S'
-    display_format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S'
+    display_format = tools.datetime_util.get_date_format() + ' %H:%M:%S'
 
     def get_textual_value(self, model):
         value = model[self.field_name].get_client(model)
@@ -315,7 +318,6 @@ class Datetime(GenericDate):
             except:
                 pass
         return mx.DateTime.Date(date[0]).strftime(self.display_format)
-#        return date.strftime(self.display_format)
 
     def value_from_text(self, model, text):
         if not text:

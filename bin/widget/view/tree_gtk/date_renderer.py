@@ -153,10 +153,13 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
             self._on_delete_text(editable, pos, len(text))
             return True
 
-        if event.keyval in [getattr(gtk.keysyms, '_%d' % x) for x in range(0,10)]:  # key between 0 and 9
+        numkeys = [getattr(gtk.keysyms, '_%d' % x) for x in range(0,10)]
+        numkeys += [getattr(gtk.keysyms, 'KP_%d' % x) for x in range(0,10)]
+
+        if event.keyval in numkeys:
             pos = editable.get_position()
             text = editable.get_text()
-            text = text[:pos] + chr(event.keyval) + text[pos + 1:]
+            text = text[:pos] + event.string + text[pos + 1:]
             if self.regex.match(text):
                 pos += 1
                 while (pos<len(self.initial_value)) and (self.initial_value[pos] not in ['_','0','X']):

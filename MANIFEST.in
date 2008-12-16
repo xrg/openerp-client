@@ -3,6 +3,7 @@ include msgfmt.py
 recursive-include bin *.py *.png *.txt *.mo *.po
 recursive-include bin *.png *.txt *.mo *.po
 include bin/openerp.glade
+include bin/win_error.glade
 graft man
 graft doc
 graft pixmaps
