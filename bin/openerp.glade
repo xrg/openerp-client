@@ -1409,6 +1409,22 @@
                   <property name="expand">False</property>
               </packing>
             </child>
+            <child>
+                <widget class="GtkSeparatorToolItem" id="separatortoolitem19">
+                <property name="visible">True</property>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="but_close">
+                <property name="visible">True</property>
+                <property name="tooltip" translatable="yes">Close this window</property>
+                <property name="stock_id">gtk-close</property>
+                <signal name="clicked" handler="on_but_close_clicked"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+              </packing>
+            </child>
           </widget>
           <packing>
             <property name="expand">False</property>
