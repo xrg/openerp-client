@@ -81,7 +81,6 @@ class mysocket:
                 raise RuntimeError, "socket connection broken"
             msg = msg + chunk
         res = cPickle.loads(msg)
-        print res
         if isinstance(res[0],Exception):
             print 'Exception'
             if exception:

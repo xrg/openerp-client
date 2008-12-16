@@ -100,7 +100,13 @@ class Button(Observable):
                         else:
                             datas = {'ids':[id]}
                             obj = service.LocalService('action.main')
-                            obj._exec_action(result,datas)
+                            obj._exec_action(result, datas)
+                    elif type([]) == type(result):
+                        datas = {'ids':[id]}
+                        obj = service.LocalService('action.main')
+                        for rs in result:
+                            obj._exec_action(rs, datas)
+                            
                 elif button_type == 'object':
                     if not id:
                         return
