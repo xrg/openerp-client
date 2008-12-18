@@ -440,7 +440,6 @@ class terp_main(service.Service):
         self.window.set_icon(common.OPENERP_ICON)
 
         self.notebook = gtk.Notebook()
-        self.notebook.popup_enable()
         self.notebook.set_scrollable(True)
         self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
         self.notebook.connect('page-reordered', self._sig_page_reordered)
