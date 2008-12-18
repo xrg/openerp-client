@@ -776,7 +776,7 @@ class terp_main(service.Service):
     def sig_help_context(self, widget):
         model = self._wid_get().model
         l = rpc.session.context.get('lang','en_US')
-        tools.launch_browser(options.options['help.context']+'?model=%s&lang=%s' % (model,l))
+        tools.launch_browser(options.options['help.context'].replace('{MODEL}',model).replace('{LANG}',l))
 
     def sig_licence(self, widget):
         dialog = glade.XML(common.terp_path("openerp.glade"), "win_licence", gettext.textdomain())
