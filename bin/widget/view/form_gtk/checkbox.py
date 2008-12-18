@@ -31,14 +31,19 @@ class checkbox(interface.widget_interface):
         self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
         self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
         self.widget.connect('button_press_event', self._menu_open)
+        self.widget.connect('clicked',self._toggled)
         self.widget.connect('key_press_event', lambda x,y: self._focus_out())
 
     def _readonly_set(self, value):
         self.widget.set_sensitive(not value)
-
+        
+    def _toggled(self, button):
+        self._focus_out()
+        self._focus_in()
+        
     def set_value(self, model, model_field):
         model_field.set_client(model, int(self.widget.get_active()))
-
+     
     def display(self, model, model_field):
         if not model_field:
             self.widget.set_active(False)
