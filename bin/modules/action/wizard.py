@@ -168,7 +168,7 @@ def execute(action, datas, state='init', parent=None, context={}):
                     try:
                         raise self.exception
                     except socket.error, e:
-                        common.error(_('Connection refused !'), str(e), str(e))
+                        common.message(str(e), title=_('Connection refused !'), type=gtk.MESSAGE_ERROR)
                     except xmlrpclib.Fault, err:
                         a = rpc_exception(err.faultCode, err.faultString)
                         if a.type in ('warning', 'UserError'):
