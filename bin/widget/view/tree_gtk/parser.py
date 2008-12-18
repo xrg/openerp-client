@@ -306,18 +306,21 @@ class Datetime(GenericDate):
         if not value:
             return ''
         date = mx.DateTime.strptime(value, self.server_format).timetuple()
-        if 'tz' in rpc.session.context:
+        dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+        
+        if 'tz' in rpc.session.context and  rpc.session.context['tz']:
             try:
                 import pytz
                 lzone = pytz.timezone(rpc.session.context['tz'])
                 szone = pytz.timezone(rpc.session.timezone)
-                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                sdt = szone.localize(dt, is_dst=True)
+                sdt = lzone.localize(dt, is_dst=True)
                 ldt = sdt.astimezone(lzone)
                 date = ldt.timetuple()
-            except:
+                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+            except Exception, e:
                 pass
-        return mx.DateTime.Date(date[0]).strftime(self.display_format)
+          
+        return dt.strftime(self.display_format)
 
     def value_from_text(self, model, text):
         if not text:

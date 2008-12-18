@@ -80,6 +80,9 @@ class ViewForm(parser_view):
         super(ViewForm, self).__init__(window, screen, widget, children, state_aware_widgets, toolbar)
         self.view_type = 'form'
         self.model_add_new = False
+        self.prev = 0
+        self.flag=False
+        self.current = 0
 
         for w in self.state_aware_widgets:
             if isinstance(w.widget, Button):
@@ -90,6 +93,8 @@ class ViewForm(parser_view):
         if toolbar:
             hb = gtk.HBox()
             hb.pack_start(self.widget)
+#            self.hpaned = gtk.HPaned()
+#            self.hpaned.pack1(self.widget,True,False)
 
             #tb = gtk.Toolbar()
             #tb.set_orientation(gtk.ORIENTATION_VERTICAL)
@@ -102,8 +107,15 @@ class ViewForm(parser_view):
 #            eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
             #tb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("blue"))
 
+
             hb.pack_start(eb, False, False)
             self.widget = hb
+#            self.hpaned.pack2(eb,False,True)
+#            self.hpaned.connect("button-press-event",self.move_paned_press)
+#            self.hpaned.connect("button-release-event",self.move_paned_release,window)
+#            window.connect("window-state-event",self.move_paned_window,window)
+#            self.widget = self.hpaned
+
 
             sep = False
             for icontype in ('print', 'action', 'relate'):
@@ -244,6 +256,45 @@ class ViewForm(parser_view):
                             tool, self.window)
 
                     sep = True
+                    
+#    def move_paned_press(self, widget, event):
+#        if not self.prev:
+#            self.prev = self.hpaned.get_position()
+#            return False
+#        if self.prev and not self.flag:
+#            self.prev = self.hpaned.get_position()
+#            return False
+#
+#    def move_paned_release(self, widget, event, w):
+#        if self.hpaned.get_position()<self.current and self.hpaned.get_position()!=self.prev:
+#            self.prev = self.hpaned.get_position()
+#        else:
+#            self.current= self.hpaned.get_position()
+#        if not self.flag and self.current == self.prev:
+#            self.flag=True
+#            self.hpaned.set_position(w.get_size()[0])
+#        elif not self.flag and self.current>self.prev:
+#            if self.hpaned.get_position()<self.current:
+#                self.hpaned.set_position(self.prev)
+#            else:
+#                self.hpaned.set_position(self.current)
+#        elif self.flag:
+#            if self.current<self.prev:
+#                self.hpaned.set_position(self.current)
+#            elif self.current>self.prev:
+#                self.hpaned.set_position(self.prev)
+#            self.flag=False
+#        self.current = self.hpaned.get_position() - 7
+#        return False
+#
+#    def move_paned_window(self, widget, event, w):
+#        if not self.prev:
+#            self.prev=self.hpaned.get_position()
+#        self.hpaned.set_position(self.prev)
+#        self.prev = 0
+#        self.current = 0
+#        self.flag = False
+#        return False                    
 
 
     def __getitem__(self, name):

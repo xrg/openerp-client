@@ -294,12 +294,12 @@ class rpc_session(object):
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
                     else:
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
-        if 'tz' in self.context:
+        if 'tz' in self.context and self.context['tz']:
             self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
             try:
                 import pytz
             except:
-                common.warning('You select a timezone but OpenERP could not find pytz library !\nThe timezone functionality will be disable.')
+                common.warning('You select a timezone but OpenERP could not find pytz library !\nThe timezone functionality will be disabled.')
 
     def logged(self):
         return self._open
