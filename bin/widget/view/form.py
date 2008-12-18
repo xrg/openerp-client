@@ -76,10 +76,8 @@ class ViewWidget(object):
     modelfield = property(_get_modelfield)
 
 class ViewForm(parser_view):
-    def __init__(self, window, screen, widget, children=None,
-            state_aware_widgets=None, toolbar=None):
-        super(ViewForm, self).__init__(window, screen, widget, children,
-                state_aware_widgets, toolbar)
+    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None):
+        super(ViewForm, self).__init__(window, screen, widget, children, state_aware_widgets, toolbar)
         self.view_type = 'form'
         self.model_add_new = False
 
@@ -87,8 +85,7 @@ class ViewForm(parser_view):
             if isinstance(w.widget, Button):
                 w.widget.form = self
 
-        self.widgets = dict([(name, ViewWidget(self, widget, name))
-                             for name, widget in children.items()])
+        self.widgets = dict([(name, ViewWidget(self, widget, name)) for name, widget in children.items()])
 
         if toolbar:
             hb = gtk.HBox()
@@ -105,11 +102,8 @@ class ViewForm(parser_view):
 #            eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
             #tb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("blue"))
 
-
             hb.pack_start(eb, False, False)
             self.widget = hb
-
-
 
             sep = False
             for icontype in ('print', 'action', 'relate'):
@@ -123,8 +117,6 @@ class ViewForm(parser_view):
                         'action': gtk.STOCK_EXECUTE,
                         'relate': gtk.STOCK_JUMP_TO,
                     }.get(icontype, gtk.STOCK_ABOUT)
-
-
 
                     icon = gtk.Image()
                     icon.set_from_stock(iconstock, gtk.ICON_SIZE_BUTTON)
@@ -323,8 +315,9 @@ class ViewForm(parser_view):
 
     def set_notebook(self,model,nb):
         for i in range(0,nb.get_n_pages()):
-            if nb.get_tab_label(nb.get_nth_page(i)).attrs.get('attrs',False):
-                self.attrs_set(model,nb.get_nth_page(i),nb.get_tab_label(nb.get_nth_page(i)))
+            page = nb.get_nth_page(i)
+            if nb.get_tab_label(page).attrs.get('attrs',False):
+                self.attrs_set(model, page, nb.get_tab_label(page))
 
     def display(self):
         model = self.screen.current_model
