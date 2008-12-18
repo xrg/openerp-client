@@ -239,8 +239,8 @@ class rpc_session(object):
         if not m:
             return -1
         if m.group(1) == 'http://' or m.group(1) == 'https://':
-            sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
             try:
+                sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
                 return sock.list()
             except:
                 return -1
@@ -306,10 +306,10 @@ class rpc_session(object):
 
     def logout(self):
         if self._open :
-            try:
-                res = self.rpc_exec_auth_wo('/common', 'logout')
-            except:
-                pass
+            #try:
+            #    res = self.rpc_exec_auth_wo('/common', 'logout')
+            #except:
+            #    pass
             self._open = False
             self._open = False
             self.uname = None
