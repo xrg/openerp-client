@@ -83,7 +83,7 @@ class configmanager(object):
             'client.lang': False,
             'client.filetype': {},
             'help.index': 'http://www.openerp.com/documentation/user-manual/',
-            'help.context': 'http://www.openerp.com/scripts/context_index.php?model={MODEL}&lang={LANG}',
+            'help.context': 'http://www.openerp.com/scripts/context_index.php?model=%(model)s&lang=%(lang)s',
         }
         parser = optparse.OptionParser(version=_("OpenERP Client %s" % openerp_version))
         parser.add_option("-c", "--config", dest="config",help=_("specify alternate config file"))
@@ -145,7 +145,7 @@ class configmanager(object):
                 return False
             self.rcexist = True
 
-            p = ConfigParser.ConfigParser()
+            p = ConfigParser.RawConfigParser()
             p.read([self.rcfile])
             for section in p.sections():
                 for (name,value) in p.items(section):
