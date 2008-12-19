@@ -48,19 +48,24 @@ def _search_file(file, dir='path.share'):
     tests = [
         lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), x),
         lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'pixmaps', x),
-        lambda x: os.path.join(options.options[dir],x),
+        lambda x: os.path.join(options[dir], x),
     ]
     for func in tests:
         x = func(file)
         if os.path.exists(x):
             return x
-    return False
+    return file 
 
 terp_path = _search_file
 terp_path_pixmaps = lambda x: _search_file(x, 'path.pixmaps')
 
-OPENERP_ICON = gtk.gdk.pixbuf_new_from_file(
-            terp_path_pixmaps('openerp-icon.png'))
+try:
+    OPENERP_ICON = gtk.gdk.pixbuf_new_from_file(terp_path_pixmaps('openerp-icon.png'))
+except gobject.GError, e:
+    log = logging.getLogger('init')
+    log.fatal(str(e))
+    log.fatal('Ensure that the file %s is correct' % options.rcfile)
+    exit(1)
 
 def selection(title, values, alwaysask=False, parent=None):
     if not values or len(values)==0:
@@ -137,7 +142,7 @@ def upload_data(email, data, type='SURVEY', supportid=''):
     return True
 
 def terp_survey():
-    if options.options['survey.position']==SURVEY_VERSION:
+    if options['survey.position']==SURVEY_VERSION:
         return False
     import pickle
     widnames = ('country','role','industry','employee','hear','system','opensource')
@@ -173,7 +178,7 @@ def terp_survey():
         parent.present()
         win.destroy()
         upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
-        options.options['survey.position']=SURVEY_VERSION
+        options['survey.position']=SURVEY_VERSION
         options.save()
         common.message(_('Thank you for the feedback !\n\
 Your comments have been sent to OpenERP.\n\
@@ -201,7 +206,7 @@ def file_selection(title, filename='', parent=None,
         parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
     win.set_icon(OPENERP_ICON)
-    win.set_current_folder(options.options['client.default_path'])
+    win.set_current_folder(options['client.default_path'])
     win.set_select_multiple(multi)
     win.set_default_response(gtk.RESPONSE_OK)
     if filters is not None:
@@ -235,7 +240,7 @@ def file_selection(title, filename='', parent=None,
         if filepath:
             filepath = filepath.decode('utf-8')
             try:
-                options.options['client.default_path'] = os.path.dirname(filepath)
+                options['client.default_path'] = os.path.dirname(filepath)
             except:
                 pass
         parent.present()
@@ -246,7 +251,7 @@ def file_selection(title, filename='', parent=None,
         if filenames:
             filenames = [x.decode('utf-8') for x in filenames]
             try:
-                options.options['client.default_path'] = os.path.dirname(filenames[0])
+                options['client.default_path'] = os.path.dirname(filenames[0])
             except:
                 pass
         parent.present()

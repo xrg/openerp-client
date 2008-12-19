@@ -21,9 +21,11 @@
 ##############################################################################
 
 import ConfigParser,optparse
-import os, sys
+import os
+import sys
 import gtk
 import gettext
+import release
 
 def get_home_dir():
     """Return the closest possible equivalent to a 'home' directory.
@@ -51,7 +53,24 @@ def get_home_dir():
         return '.'
 
 class configmanager(object):
+    
+    def __get_prefix(self):
+        if self.__prefix is None:
+            f = os.path.normpath(__file__)
+            sitepackages_prefix = os.path.join('local', 'lib', 'python%s' % sys.version[:3], 'site-packages', release.name, os.path.basename(f))
+            home_prefix = os.path.join('lib', 'python', release.name, os.path.basename(f))
+            
+            for p in [sitepackages_prefix, home_prefix]:
+                if f.endswith(p):
+                    self.__prefix = f[:-len(p)]
+                    break
+            if self.__prefix is None:
+                self.__prefix = sys.prefix 
+
+        return self.__prefix            
+
     def __init__(self,fname=None):
+        self.__prefix = None
         self.options = {
             'login.login': 'demo',
             'login.server': 'localhost',
@@ -60,8 +79,8 @@ class configmanager(object):
             'login.db': 'terp',
             'client.toolbar': 'both',
             'client.theme': 'none',
-            'path.share': os.path.join(sys.prefix, 'share/openerp-client/'),
-            'path.pixmaps': os.path.join(sys.prefix, 'share/pixmaps/openerp-client/'),
+            'path.share': os.path.join(self.__get_prefix(), 'share', release.name),
+            'path.pixmaps': os.path.join(self.__get_prefix(), 'share', 'pixmaps', release.name),
             'tip.autostart': False,
             'tip.position': 0,
             'survey.position': 0,
