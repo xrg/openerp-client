@@ -295,7 +295,7 @@ class db_create(object):
             if (res==gtk.RESPONSE_OK) and (db_name in RESERVED_KEYWORDS):
                 common.warning(_("Sorry,'" +db_name + "' cannot be the name of the database,it's a Reserved Keyword."), _('Bad database name !'), parent=parent)
                 continue
-            if (res==gtk.RESPONSE_OK) and ((not db_name) or (not re.match('^[a-zA-Z][a-zA-Z0-9_]+$', db_name))):
+            if (res==gtk.RESPONSE_OK) and ((not db_name) or (not re.match('^[a-zA-Z0-9][a-zA-Z0-9_]+$', db_name))):
                 common.warning(_('The database name must contain only normal characters or "_".\nYou must avoid all accents, space or special characters.'), _('Bad database name !'), parent=parent)
 
             else:
