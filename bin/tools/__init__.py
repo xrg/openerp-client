@@ -65,10 +65,10 @@ def node_attributes(node):
 def calc_condition(self,model,con):
 	if model and (con[0] in model.mgroup.fields):
 		val = model[con[0]].get(model)
-		if con[1]=="=":
+		if con[1]=="=" or con[1]=="==":
 			if val==con[2]:
 				return True
-		elif con[1]=="!=":
+		elif con[1]=="!=" or con[1]=="<>":
 			if val!=con[2]:
 				return True
 		elif con[1]=="<":
@@ -83,6 +83,15 @@ def calc_condition(self,model,con):
 		elif con[1]==">=":
 			if val>=con[2]:
 				return True
+		elif con[1].lower()=="in":
+			for cond in con[2]:
+				if val == cond:
+					return True
+		elif con[1].lower()=="not in":
+			for cond in con[2]:
+				if val == cond:
+					return False
+			return True
 		return False
 
 def call_log(fun):
