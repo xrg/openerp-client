@@ -20,6 +20,7 @@
 #
 ##############################################################################
 
+import gtk
 import xmlrpclib
 import logging
 import socket
