@@ -50,6 +50,14 @@ RESERVED_KEYWORDS=['absolute', 'action', 'all', 'alter', 'analyse', 'analyze', '
              'on', 'only', 'or', 'order', 'outer', 'overlaps', 'placing', 'primary', 'references', 'right','select', 'session_user', 'similar',
              'some', 'sysid', 'table', 'then', 'to', 'trailing', 'true', 'union', 'unique', 'user', 'using', 'verbose', 'when', 'where']
 
+def check_ssl():
+    try:
+        from OpenSSL import SSL
+        import socket
+
+        return hasattr(socket, 'ssl')
+    except:
+        return False
 
 def _refresh_dblist(db_widget, url, dbtoload=None):
     if not dbtoload:
@@ -91,9 +99,14 @@ def _server_ask(server_widget, parent=None):
     port_widget = win_gl.get_widget('ent_port')
     protocol_widget = win_gl.get_widget('protocol')
 
-    protocol={'XML-RPC': 'http://',
-            'XML-RPC secure': 'https://',
-            'NET-RPC (faster)': 'socket://',}
+    protocol = {
+        'XML-RPC': 'http://',
+        'NET-RPC (faster)': 'socket://',
+    }
+
+    if check_ssl():
+        protocol['XML-RPC secure'] ='https://'
+
     listprotocol = gtk.ListStore(str)
     protocol_widget.set_model(listprotocol)
 
