@@ -89,7 +89,8 @@ class calendar(wid_int.wid_int):
 
     def _date_get(self, str):
         try:
-            date = mx.DateTime.strptime(str, LDFMT)
+            #date = mx.DateTime.strptime(str, LDFMT)
+            date = tools.datetime_util.strptime(str, LDFMT)
         except:
             return False
         return date.strftime(DT_FORMAT)

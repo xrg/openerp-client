@@ -93,7 +93,8 @@ class calendar(interface.widget_interface):
         if str=='':
             return False
         try:
-            date1=mx.DateTime.strptime(str, self.format)
+            #date1=mx.DateTime.strptime(str, self.format)
+            date1=tools.datetime_util.strptime(str, self.format)
         except:
             return False
         return date1.strftime(DT_FORMAT)
@@ -113,7 +114,8 @@ class calendar(interface.widget_interface):
         else:
             if len(value)>10:
                 value=value[:10]
-            date=mx.DateTime.strptime(value, DT_FORMAT)
+            #date=mx.DateTime.strptime(value, DT_FORMAT)
+            date=tools.datetime_util.strptime(value, DT_FORMAT)
             t=date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
@@ -203,7 +205,8 @@ class datetime(interface.widget_interface):
         if str=='':
             return False
         try:
-            date = mx.DateTime.strptime(str, self.format)
+            #date = mx.DateTime.strptime(str, self.format)
+            date = tools.datetime_util.strptime(str, self.format)
         except:
             return False
         if 'tz' in rpc.session.context and timezone:
@@ -233,7 +236,8 @@ class datetime(interface.widget_interface):
         if not dt_val:
             self.entry.clear()
         else:
-            date = mx.DateTime.strptime(dt_val, DHM_FORMAT)
+            #date = mx.DateTime.strptime(dt_val, DHM_FORMAT)
+            date = tools.datetime_util.strptime(dt_val, DHM_FORMAT)
             if 'tz' in rpc.session.context and timezone:
                 try:
                     import pytz
