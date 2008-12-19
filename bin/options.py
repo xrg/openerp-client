@@ -57,7 +57,7 @@ class configmanager(object):
     def __get_prefix(self):
         if self.__prefix is None:
             f = os.path.normpath(__file__)
-            sitepackages_prefix = os.path.join('local', 'lib', 'python%s' % sys.version[:3], 'site-packages', release.name, os.path.basename(f))
+            sitepackages_prefix = os.path.join('lib', 'python%s' % sys.version[:3], 'site-packages', release.name, os.path.basename(f))
             home_prefix = os.path.join('lib', 'python', release.name, os.path.basename(f))
             
             for p in [sitepackages_prefix, home_prefix]:
