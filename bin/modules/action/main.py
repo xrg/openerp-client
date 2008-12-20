@@ -176,6 +176,7 @@ class main(service.Service):
             keyact[action['name']] = action
         keyact.update(adds)
 
+        print keyact
         res = common.selection(_('Select your action'), keyact)
         if res:
             (name,action) = res

@@ -67,6 +67,7 @@ class Screen(signal_event.signal_event):
         self.create_new = create_new
         self.name = model_name
         self.domain = domain
+        self.latest_search = []
         self.views_preload = views_preload
         self.resource = model_name
         self.rpc = RPCProxy(model_name)
@@ -171,9 +172,12 @@ class Screen(signal_event.signal_event):
         self.clear()
 
     def search_filter(self, *args):
+        v = self.filter_widget.value
+        if self.latest_search and self.latest_search<>v:
+            self.filter_widget.set_offset(0)
         limit=self.filter_widget.get_limit()
         offset=self.filter_widget.get_offset()
-        v = self.filter_widget.value
+        self.latest_search = v
         filter_keys = []
         for key, op, value in v:
             filter_keys.append(key)
@@ -181,10 +185,7 @@ class Screen(signal_event.signal_event):
             if key not in filter_keys and \
                     not (key == 'active' and self.context.get('active_test', False)):
                 v.append((key, op, value))
-        if v:
-            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, 0,limit, 0,self.context)
-        else:
-            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0,self.context)
+        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0,self.context)
         if len(ids) < limit:
             self.search_count = len(ids)
         else:

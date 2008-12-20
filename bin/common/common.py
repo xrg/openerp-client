@@ -95,7 +95,7 @@ def selection(title, values, alwaysask=False, parent=None):
     keys = values.keys()
     keys.sort()
     for val in keys:
-        model.append([val])
+        model.append([val and val.encode('utf8') or ''])
 
     list.set_model(model)
     list.connect('row-activated', lambda x,y,z: win.response(gtk.RESPONSE_OK) or True)
@@ -111,7 +111,10 @@ def selection(title, values, alwaysask=False, parent=None):
                 (model, iter) = sel
                 if iter:
                     res = model.get_value(iter, 0)
-                    res = (res, values[res])
+                    if res:
+                        res = (res, values[res.decode('utf8')])
+                    else:
+                        res = (res, values[res])
                 else:
                     ok = False
             else:
