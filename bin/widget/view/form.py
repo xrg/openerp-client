@@ -118,24 +118,24 @@ class ViewForm(parser_view):
 
 
             sep = False
-            setLabel={'print':'Reports','action':'Wizards','relate':'Direct Links'}
+            #setLabel={'print':'Reports','action':'Wizards','relate':'Direct Links'}
             
             for icontype in ('print', 'action', 'relate'):
                     
                 if icontype in ('action','relate') and sep:
                     #tb.insert(gtk.SeparatorToolItem(), -1)
-#                     tb.pack_start(gtk.HSeparator(), False, False, 2)
+                    tb.pack_start(gtk.HSeparator(), False, False, 2)
                     sep = False
                      
-                list_done = []     
+                #list_done = []     
                 for tool in toolbar[icontype]:
-                    if icontype not in list_done:
-                        l = gtk.Label('<b>' + setLabel[icontype] + '</b>')
-                        l.set_use_markup(True)
-#                        l.set_alignment(0.0, 0.5) # If Labels want to be Left-aligned
-                        tb.pack_start(l, False, False, 3)
-                        tb.pack_start(gtk.HSeparator(), False, False, 2)
-                        list_done.append(icontype)
+                    #if icontype not in list_done:
+                    #    l = gtk.Label('<b>' + setLabel[icontype] + '</b>')
+                    #    l.set_use_markup(True)
+#                   #     l.set_alignment(0.0, 0.5) # If Labels want to be Left-aligned
+                    #    tb.pack_start(l, False, False, 3)
+                    #    tb.pack_start(gtk.HSeparator(), False, False, 2)
+                    #    list_done.append(icontype)
                     iconstock = {
                         'print': gtk.STOCK_PRINT,
                         'action': gtk.STOCK_EXECUTE,
