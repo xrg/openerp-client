@@ -259,7 +259,11 @@ class rpc_session(object):
 	except socket.error, err:
 		import locale
 		language, in_encoding = locale.getdefaultlocale()
-		common.warning(err[1].decode(in_encoding),_('Socket error'))
+		try:
+			err_string = err[1].decode(in_encoding)
+		except:
+			err_string = str(err)
+		common.warning(err_string,_('Socket error'))
 		return -1
         except:
             import sys
