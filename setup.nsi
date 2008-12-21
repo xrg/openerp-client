@@ -45,7 +45,7 @@ SetCompress auto
 InstallDir "$PROGRAMFILES\OpenERP Client"
 
 ;Get installation folder from registry if available
-InstallDirRegKey HKCU "Software\OpenERP Client" ""
+InstallDirRegKey HKLM "Software\OpenERP Client" ""
 
 BrandingText "OpenERP Client ${VERSION}"
 
@@ -80,7 +80,7 @@ Var STARTMENU_FOLDER
 !insertmacro MUI_PAGE_DIRECTORY
 
 ;Start Menu Folder Page Configuration
-!define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKCU" 
+!define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKLM" 
 !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\OpenERP Client"
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "OpenERP Client"
 
@@ -116,7 +116,7 @@ Var STARTMENU_FOLDER
 ;
 Function .onInit 
     ClearErrors
-    ReadRegStr $0 HKCU "Software\OpenERP Client" ""
+    ReadRegStr $0 HKLM "Software\OpenERP Client" ""
     IfErrors DoInstall 0
         MessageBox MB_OK "Can not install the Open ERP Client because a previous installation already exists on this system. Please uninstall your current installation and relaunch this setup wizard."
         Quit
@@ -136,11 +136,15 @@ Section "OpenERP Client" SecOpenERPClient
 	File "doc\*"
 
 	;Store installation folder
-	WriteRegStr HKCU "Software\OpenERP Client" "" $INSTDIR
+	WriteRegStr HKLM "Software\OpenERP Client" "" $INSTDIR
 
+!ifndef ALLINONE
 	;Create uninstaller
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client" "DisplayName" "OpenERP Client ${VERSION}"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client" "UninstallString" "$INSTDIR\Uninstall.exe"
+!else
+        WriteRegStr HKLM  "Software\OpenERP AllInOne" "UninstallClient" "$INSTDIR\Uninstall.exe"
+!endif 
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 
 	!insertmacro MUI_STARTMENU_WRITE_BEGIN Application
@@ -148,7 +152,9 @@ Section "OpenERP Client" SecOpenERPClient
 	;Create shortcuts
 	CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
 	!insertmacro CreateInternetShortcut "$SMPROGRAMS\$STARTMENU_FOLDER\Documentation" "http://www.openerp.com"
+!ifndef ALLINONE
         CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\uninstall.exe"
+!endif
 	CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\OpenERP Client.lnk" "$INSTDIR\openerp-client.exe"
         CreateShortCut "$DESKTOP\OpenERP Client.lnk" "$INSTDIR\openerp-client.exe"
 
@@ -177,7 +183,9 @@ Section "Uninstall"
 
 	Delete "$SMPROGRAMS\$MUI_TEMP\Documentation.url"
 	Delete "$SMPROGRAMS\$MUI_TEMP\OpenERP Client.lnk"
+!ifndef ALLINONE
 	Delete "$SMPROGRAMS\$MUI_TEMP\Uninstall.lnk"
+!endif 
         Delete "$DESKTOP\OpenERP Client.lnk"
 
 	;Delete empty start menu parent diretories
@@ -193,8 +201,12 @@ startMenuDeleteLoop:
 	StrCmp $MUI_TEMP $SMPROGRAMS startMenuDeleteLoopDone startMenuDeleteLoop
 startMenuDeleteLoopDone:
 
+!ifndef ALLINONE
 	DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client"
-	DeleteRegKey /ifempty HKCU "Software\OpenERP Client"
+!else 
+        DeleteRegKey HKLM "Software\OpenERP AllInOne\UninstallClient"
+!endif
+	DeleteRegKey /ifempty HKLM "Software\OpenERP Client"
 
 SectionEnd
 
