@@ -110,6 +110,7 @@ Var STARTMENU_FOLDER
 
 
 Function .onInit
+!ifndef ALLINONE
     ;Language selection dialog
     Push ""
     Push ${LANG_ENGLISH}
@@ -123,7 +124,7 @@ Function .onInit
     Pop $LANGUAGE
     StrCmp $LANGUAGE "cancel" 0 +2
         Abort
-
+!endif
     ClearErrors
     ReadRegStr $0 HKLM "Software\OpenERP Client" ""
     IfErrors DoInstall 0
