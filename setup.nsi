@@ -52,9 +52,6 @@ BrandingText "OpenERP Client ${VERSION}"
 ;Vista redirects $SMPROGRAMS to all users without this
 RequestExecutionLevel admin
 
-;--------------------------------
-;Variables
-
 Var MUI_TEMP
 Var STARTMENU_FOLDER
 
@@ -62,9 +59,16 @@ Var STARTMENU_FOLDER
 ;Interface Settings
 
 !define MUI_ABORTWARNING
+!define REGKEY "SOFTWARE\$(^Name)"
+!define MUI_LANGDLL_REGISTRY_ROOT HKLM
+!define MUI_LANGDLL_REGISTRY_KEY ${REGKEY}
+!define MUI_LANGDLL_REGISTRY_VALUENAME InstallerLanguage
+
+!insertmacro MUI_RESERVEFILE_LANGDLL
 
 ;--------------------------------
 ;Pages
+
 
 !define MUI_ICON ".\bin\pixmaps\openerp-icon.ico"
 !define MUI_WELCOMEFINISHPAGE_BITMAP ".\bin\pixmaps\openerp-intro.bmp"
@@ -73,25 +77,20 @@ Var STARTMENU_FOLDER
 !define MUI_HEADERIMAGE_BITMAP_NOSTRETCH
 !define MUI_HEADER_TRANSPARENT_TEXT ""
 !define MUI_HEADERIMAGE_BITMAP ".\bin\pixmaps\openerp-slogan.bmp"
-!define MUI_LICENSEPAGE_TEXT_BOTTOM "Usually, a proprietary license provides with the software: limited number of users, limited in time usage, etc. This Open Source license is the opposite: it garantees you the right to use, copy, study, distribute and modify Open ERP for free."
-
+!define MUI_LICENSEPAGE_TEXT_BOTTOM "$(LicenseText)"
+!define MUI_LICENSEPAGE_BUTTON "$(LicenseNext)"
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "doc\License.rtf"
 !insertmacro MUI_PAGE_DIRECTORY
-
-;Start Menu Folder Page Configuration
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKLM" 
 !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\OpenERP Client"
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "OpenERP Client"
-
 !insertmacro MUI_PAGE_STARTMENU Application $STARTMENU_FOLDER
-
 !insertmacro MUI_PAGE_INSTFILES
-
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_FINISHPAGE_RUN
 !define MUI_FINISHPAGE_RUN_CHECKED
-!define MUI_FINISHPAGE_RUN_TEXT "Start OpenERP Client"
+!define MUI_FINISHPAGE_RUN_TEXT "$(FinishPageText)" 
 !define MUI_FINISHPAGE_RUN_FUNCTION "LaunchLink"
 !define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
 !define MUI_FINISHPAGE_SHOWREADME $INSTDIR\README.txt
@@ -102,23 +101,33 @@ Var STARTMENU_FOLDER
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
 
-;--------------------------------
-;Languages
-
 !insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_LANGUAGE "French"
 
 !macro CreateInternetShortcut FILENAME URL
 	WriteINIStr "${FILENAME}.url" "InternetShortcut" "URL" "${URL}"
 !macroend
 
-;--------------------------------
-;Installer Sections
-;
-Function .onInit 
+
+Function .onInit
+    ;Language selection dialog
+    Push ""
+    Push ${LANG_ENGLISH}
+    Push English
+    Push ${LANG_FRENCH}
+    Push French
+    Push A ; A means auto count languages
+    ; for the auto count to work the first empty push (Push "") must remain
+    LangDLL::LangDialog "Installer Language" "Please select the language of the installer"
+
+    Pop $LANGUAGE
+    StrCmp $LANGUAGE "cancel" 0 +2
+        Abort
+
     ClearErrors
     ReadRegStr $0 HKLM "Software\OpenERP Client" ""
     IfErrors DoInstall 0
-        MessageBox MB_OK "Can not install the Open ERP Client because a previous installation already exists on this system. Please uninstall your current installation and relaunch this setup wizard."
+        MessageBox MB_OK "$(CannotInstallClientText)"
         Quit
     DoInstall:
 FunctionEnd
@@ -162,20 +171,11 @@ Section "OpenERP Client" SecOpenERPClient
 
 SectionEnd
 
-;Descriptions
-
-;Language strings
-LangString DESC_SecOpenERPClient ${LANG_ENGLISH} "OpenERP Client."
-
-;Assign language strings to sections
-!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-	!insertmacro MUI_DESCRIPTION_TEXT ${SecOpenERPClient} $(DESC_SecOpenERPClient)
-!insertmacro MUI_FUNCTION_DESCRIPTION_END
  
 ;--------------------------------
 ;Uninstaller Section
 
-Section "Uninstall"
+Section "Uninstall" 
 	;ADD YOUR OWN FILES HERE...
 	RMDIR /r "$INSTDIR" 
 
@@ -213,3 +213,27 @@ SectionEnd
 Function LaunchLink
 	ExecShell "" "$INSTDIR\openerp-client.exe"
 FunctionEnd
+
+
+LangString LicenseText ${LANG_ENGLISH} "Usually, a proprietary license is provided with the software: limited number of users, limited in time usage, etc. This Open Source license is the opposite: it garantees you the right to use, copy, study, distribute and modify Open ERP for free."
+LangString LicenseText ${LANG_FRENCH} "Normalement, une licence propriétaire est fournie avec le logiciel: limitation du nombre d'utilisateurs, limitation dans le temps, etc. Cette licence Open Source est l'opposé: Elle vous garantie le droit d'utiliser, de copier, d'étudier, de distribuer et de modifier Open ERP librement."
+
+LangString LicenseNext ${LANG_ENGLISH} "Next >"
+LangString LicenseNext ${LANG_FRENCH} "Suivant >"
+
+LangString FinishPageText ${LANG_ENGLISH} "Start OpenERP Client"
+LangString FinishPageText ${LANG_FRENCH} "Lancer le client OpenERP"
+
+;Language strings
+LangString DESC_SecOpenERPClient ${LANG_ENGLISH} "OpenERP Client."
+LangString DESC_SecOpenERPClient ${LANG_FRENCH} "Client OpenERP."
+
+LangString CannotInstallClientText ${LANG_ENGLISH} "Can not install the Open ERP Client because a previous installation already exists on this system. Please uninstall your current installation and relaunch this setup wizard."
+LangString CannotInstallClientText ${LANG_FRENCH} "Ne peut pas installer le client Open ERP parce qu'une installation existe déjà sur ce système. S'il vous plait, désinstallez votre installation actuelle et relancer l'installeur."
+
+
+;Assign language strings to sections
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT ${SecOpenERPClient} $(DESC_SecOpenERPClient)
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
