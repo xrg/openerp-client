@@ -1,2 +1,2 @@
-bin/pixmaps/*.xpm	/usr/share/pixmaps/openerp-client/
 debian/desktop/*	/usr/share/applications/
+debian/pixmaps/*	/usr/share/pixmaps/
