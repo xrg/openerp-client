@@ -1,3 +1,11 @@
+openerp-client (5.0.0~rc2-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.0~rc2.
+  * Creating pixmaps as upstream removed them.
+  * Prefixing debhelper files with package name.
+
+ -- Daniel Baumann <daniel@debian.org>  Thu, 25 Dec 2008 14:53:00 +0100
+
 openerp-client (5.0.0~rc1.1-2) unstable; urgency=low
 
   * Adjusting sed call to correct path in /usr/bin/openerp-server.
