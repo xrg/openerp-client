@@ -1,3 +1,4 @@
+include rpminstall_sh.txt
 include mydistutils.py
 include msgfmt.py
 recursive-include bin *.py *.png *.txt *.mo *.po
