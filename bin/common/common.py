@@ -310,13 +310,11 @@ def error(title, message, details='', parent=None):
 
     show_message = True
 
-    try:
-        contract_ids = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'search', [])
-    except:
-        contract_ids = []
+    contract_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', 'search', [])
+
     if not contract_ids:
         maintenance_contract_message=_("""
-<i>Open ERP crashed for an unknown reason.</i>
+<b>An unknown error has been reported.</b>
 
 <b>You do not have a valid Open ERP maintenance contract !</b>
 If you are using Open ERP in production, it is highly suggested to subscribe
@@ -342,7 +340,7 @@ is displayed on the second tab.
         show_message = (contract['kind'] <> 'full')
         if show_message:
             maintenance_contract_message=_("""
-<b>Open ERP crashed for an unknown reason.</b>
+<b>An unknown error has been reported.</b>
 
 Your maintenance contract does not cover all modules installed in your system !
 If you are using Open ERP in production, it is highly suggested to upgrade your
@@ -357,7 +355,7 @@ Here is the list of modules not covered by your maintenance contract:
 %s
 
 You can use the link bellow for more information. The detail of the error
-is displayed on the second tab.""") % (",".join(result['modules']), )
+is displayed on the second tab.""") % (",".join(contract['module_ids']), )
 
     xmlGlade = glade.XML(terp_path('win_error.glade'), 'dialog_error', gettext.textdomain())
     win = xmlGlade.get_widget('dialog_error')
