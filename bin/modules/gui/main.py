@@ -455,7 +455,8 @@ class terp_main(service.Service):
         self.notebook = gtk.Notebook()
         self.notebook.set_scrollable(True)
         self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
-        self.notebook.connect('page-reordered', self._sig_page_reordered)
+        if gtk.pygtk_version >= (2, 10, 0):
+            self.notebook.connect('page-reordered', self._sig_page_reordered)
         vbox = self.glade.get_widget('vbox_main')
         vbox.pack_start(self.notebook, expand=True, fill=True)
 
