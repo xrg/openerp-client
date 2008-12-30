@@ -471,7 +471,7 @@ class terp_main(service.Service):
         self.current_page = 0
         self.last_page = 0
 
-        dict = {
+        callbacks_dict = {
             'on_login_activate': self.sig_login,
             'on_logout_activate': self.sig_logout,
             'on_win_next_activate': self.sig_win_next,
@@ -509,8 +509,7 @@ class terp_main(service.Service):
             'on_admin_password_activate': self.sig_db_password,
             'on_extension_manager_activate': self.sig_extension_manager,
         }
-        for signal in dict:
-            self.glade.signal_connect(signal, dict[signal])
+        self.glade.signal_autoconnect(callbacks_dict)
 
         self.buttons = {}
         for button in ('but_new', 'but_save', 'but_remove', 'but_search', 'but_previous', 'but_next', 'but_action', 'but_open', 'but_print', 'but_close', 'but_reload', 'but_switch','but_attach',
