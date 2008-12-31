@@ -8,6 +8,6 @@ recursive-include bin *.py *.png *.txt *.mo *.po
 recursive-include bin *.png *.txt *.mo *.po
 include bin/openerp.glade
 include bin/win_error.glade
-graft man
+include man/openerp-client.1
 graft doc
 graft pixmaps
