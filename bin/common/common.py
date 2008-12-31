@@ -310,9 +310,9 @@ def error(title, message, details='', parent=None):
 
     show_message = True
 
-    contract_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'maintenance.contract', 'search', [])
-
-    if not contract_ids:
+    maintenance = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'status')
+    
+    if maintenance['status'] == 'none':
         maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
@@ -335,11 +335,8 @@ The maintenance program offers you:
 You can use the link bellow for more information. The detail of the error
 is displayed on the second tab.
 """)
-    else:
-        contract = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'read', contract_ids, [])[0]
-        show_message = (contract['kind'] <> 'full')
-        if show_message:
-            maintenance_contract_message=_("""
+    elif maintenance['status'] == 'partial':
+        maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
 Your maintenance contract does not cover all modules installed in your system !
@@ -355,7 +352,9 @@ Here is the list of modules not covered by your maintenance contract:
 %s
 
 You can use the link bellow for more information. The detail of the error
-is displayed on the second tab.""") % (",".join(contract['module_ids']), )
+is displayed on the second tab.""") % (", ".join(maintenance['uncovered_modules']), )
+    else:
+        show_message = False
 
     xmlGlade = glade.XML(terp_path('win_error.glade'), 'dialog_error', gettext.textdomain())
     win = xmlGlade.get_widget('dialog_error')
@@ -383,18 +382,14 @@ is displayed on the second tab.""") % (",".join(contract['module_ids']), )
             return buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
             
         # Use details_buffer
-        id_contract = contract['name']
-        traceback = get_text_from_text_view(xmlGlade.get_widget('details_explanation'))
+        tb = get_text_from_text_view(xmlGlade.get_widget('details_explanation'))
         explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
         remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
 
-        content = "(%s) has reported the following bug:\n%s\nremarks: %s\nThe traceback is:\n%s" % (
-            id_contract, explanation, remarks, traceback
-        )
-
-        if upload_data('', content, 'error', id_contract):
-            common.message(_('You problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'))
-        return
+        if rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'send', tb, explanation, remarks):
+            common.message(_('Your problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'))
+        else:
+            message(_('Your problem could <u>NOT</u> be sent to the quality team !\nPlease report this error manually at %s') % ('http://openerp.com/report_bug.html'))
 
     if not show_message:
         xmlGlade.signal_connect('on_button_send_clicked', send)
