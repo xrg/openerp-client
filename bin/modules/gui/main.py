@@ -508,7 +508,10 @@ class terp_main(service.Service):
             'on_db_drop_activate': self.sig_db_drop,
             'on_admin_password_activate': self.sig_db_password,
             'on_extension_manager_activate': self.sig_extension_manager,
+            'on_db_migrate_retrieve_script_activate': self.sig_db_migrate_retrieve_script,
+            'on_db_migrate_activate' : self.sig_db_migrate,
         }
+
         self.glade.signal_autoconnect(callbacks_dict)
 
         self.buttons = {}
@@ -1079,6 +1082,12 @@ class terp_main(service.Service):
                     common.warning(_('Bad database administrator password !'),_("Could not restore database."), parent=self.window)
                 else:
                     common.warning(_("Couldn't restore database"), parent=self.window)
+
+    def sig_db_migrate_retrieve_script(self, widget):
+        common.message("Not Implemented !", "Not Implemented !", parent=self.window)
+
+    def sig_db_migrate(self, widget):
+        common.message("Not Implemented !", "Not Implemented !", parent=self.window)
 
     def sig_extension_manager(self,widget):
         win = win_extension.win_extension(self.window)
