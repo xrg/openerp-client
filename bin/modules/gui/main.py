@@ -1084,7 +1084,47 @@ class terp_main(service.Service):
                     common.warning(_("Couldn't restore database"), parent=self.window)
 
     def sig_db_migrate_retrieve_script(self, widget):
-        common.message("Not Implemented !", "Not Implemented !", parent=self.window)
+        parent = self.window
+        #common.message("Not Implemented !", "Not Implemented !", parent=parent)
+
+        dialog = gtk.Dialog("Retrieve Script",
+                     parent,
+                     gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                     (gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
+                      gtk.STOCK_OK, gtk.RESPONSE_ACCEPT))
+        dialog.set_icon(common.OPENERP_ICON)
+
+        table = gtk.Table(3, 2, True)
+        table.set_row_spacings(5)
+        table.set_col_spacings(5)
+
+        lbl = gtk.Label("Administrator Password:")
+        lbl.set_alignment(1.0, 0.5)
+        table.attach(lbl, 0, 1, 0, 1)
+        adminPwdEntry = gtk.Entry()
+        table.attach(adminPwdEntry, 1, 2, 0, 1)
+
+        lbl = gtk.Label("Contract ID:")
+        lbl.set_alignment(1.0, 0.5)
+        table.attach(lbl, 0, 1, 1, 2)
+        contractIdEntry = gtk.Entry()
+        table.attach(contractIdEntry, 1, 2, 1, 2)
+
+        lbl = gtk.Label("Contract Password:")
+        lbl.set_alignment(1.0, 0.5)
+        table.attach(lbl, 0, 1, 2, 3)
+        contractPwdEntry = gtk.Entry()
+        table.attach(contractPwdEntry, 1, 2, 2, 3)
+
+        dialog.vbox.add(table)
+
+        dialog.show_all()
+        res = dialog.run()
+        parent.present()
+        dialog.destroy()
+
+        if res == gtk.RESPONSE_ACCEPT:
+            common.message("The retrieving functionality is not yet implemented !", "Not Implemented !", parent=self.window)
 
     def sig_db_migrate(self, widget):
         common.message("Not Implemented !", "Not Implemented !", parent=self.window)
