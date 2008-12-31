@@ -4,10 +4,7 @@ include Makefile
 include rpminstall_sh.txt
 include mydistutils.py
 include msgfmt.py
-recursive-include bin *.py *.png *.txt *.mo *.po
-recursive-include bin *.png *.txt *.mo *.po
-include bin/openerp.glade
-include bin/win_error.glade
-include man/openerp-client.1
+graft bin
+graft man
 graft doc
 graft pixmaps
