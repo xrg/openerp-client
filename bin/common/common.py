@@ -343,10 +343,10 @@ Your maintenance contract does not cover all modules installed in your system !
 If you are using Open ERP in production, it is highly suggested to upgrade your
 contract.
 
-If you have developped your own modules or installed third party module, we
+If you have developed your own modules or installed third party module, we
 can provide you an additional maintenance contract for these modules. After
 having reviewed your modules, our quality team will ensure they will migrate
-automatically for all futur stable versions of Open ERP at no extra cost.
+automatically for all future stable versions of Open ERP at no extra cost.
 
 Here is the list of modules not covered by your maintenance contract:
 %s
