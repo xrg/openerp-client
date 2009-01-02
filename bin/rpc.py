@@ -244,19 +244,20 @@ class rpc_session(object):
             return sock.migrate_databases(password, databases)
         else:
             sock = tiny_socket.mysocket()
+            sock.sock.settimeout(None)
             sock.connect(m.group(2), int(m.group(3)))
             sock.mysend(('db', 'migrate_databases', password, databases))
             res = sock.myreceive()
             sock.disconnect()
             return res
 
-    def fetch_migration_scripts(self, url, password, contract_id, contract_password):
+    def get_migration_scripts(self, url, password, contract_id, contract_password):
         m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
         if not m:
             raise Exception("This URL is not Error in the URL")
         if m.group(1) == 'http://' or m.group(1) == 'https://':
             sock = xmlrpclib.ServerProxy(url + '/xmlrpc/common')
-            return sock.get_migration_scripts(password, contract_id, contract_password)
+            sock.get_migration_scripts(password, contract_id, contract_password)
         else:
             sock = tiny_socket.mysocket()
             sock.connect(m.group(2), int(m.group(3)))

@@ -74,6 +74,7 @@ class DatabaseDialog(gtk.Dialog):
             (gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
              gtk.STOCK_OK, gtk.RESPONSE_ACCEPT)
         )
+
         self.set_icon(common.OPENERP_ICON)
         self.set_default_response(gtk.RESPONSE_ACCEPT)
         self.set_response_sensitive(gtk.RESPONSE_ACCEPT, False)
@@ -82,16 +83,16 @@ class DatabaseDialog(gtk.Dialog):
         self.table.set_row_spacings(5)
         self.table.set_col_spacings(5)
 
-        self.message = gtk.Label('<b>'+_('Could not connect to server !')+'</b>')
-        self.message.set_use_markup(True)
-        self.message.hide()
+        self.messageLabel = gtk.Label('<b>'+_('Could not connect to server !')+'</b>')
+        self.messageLabel.set_use_markup(True)
+        self.messageLabel.hide()
 
         lbl = gtk.Label(_("Server:"))
         lbl.set_alignment(1.0, 0.5)
         self.table.attach(lbl, 0, 1, 0, 1)
         hbox = gtk.HBox(spacing=5)
         self.serverEntry = gtk.Entry()
-        self.serverEntry.connect('changed', self.on_server_entry_changed, self.message)
+        self.serverEntry.connect('changed', self.on_server_entry_changed, self.messageLabel)
         self.serverEntry.set_text(self.default_server_url())
         self.serverEntry.set_sensitive(False)
 
@@ -102,7 +103,7 @@ class DatabaseDialog(gtk.Dialog):
         hbox.pack_start(but_server, False, False)
         self.table.attach(hbox, 1, 2, 0, 1)
 
-        self.table.attach(self.message, 0, 2, 1, 2)
+        self.table.attach(self.messageLabel, 0, 2, 1, 2)
 
         lbl = gtk.Label(_("Super Administrator Password:"))
         lbl.set_alignment(1.0, 0.5)
@@ -113,17 +114,24 @@ class DatabaseDialog(gtk.Dialog):
         self.vbox.add(self.table)
 
     def run(self):
-        self.message.hide()
-        return gtk.Dialog.run(self)
+        self.show_all()
+        self.messageLabel.hide()
+        res = super(DatabaseDialog, self).run()
+
+        if res == gtk.RESPONSE_ACCEPT:
+            self.run_thread()
+
+        self.destroy()
 
     def on_server_entry_changed(self, entry, message):
-        res = rpc.session.about(entry.get_text())
-        if res == -1:
-            message.show()
-        else:
-            # Si je sais me connecter, alors je fais mon code ici
+        try:
+            rpc.session.about(entry.get_text())
+            self.clear_screen()
             self.on_server_entry_changed_after(entry)
             self.set_response_sensitive(gtk.RESPONSE_ACCEPT, True)
+        except Exception, ex:
+            self.clear_screen()
+            message.show()
 
     def default_server_url(self):
         return "%(protocol)s%(host)s:%(port)d" % {
@@ -131,13 +139,130 @@ class DatabaseDialog(gtk.Dialog):
             'host' : options.options['login.server'],
             'port' : int(options.options['login.port']),
         }
+
+    def run_thread(self):
+        import thread
+        self.result = None
+        self.error = False
+        self.exception = None
+
+        def go():
+            try:
+                self.on_response_accept()
+                self.result = True
+            except Exception, e:
+                self.result = True
+                self.exception = e
+            return True
+
+        thread.start_new_thread(go, ())
+
+        i = 0
+        win = None
+        pb = None
+        while not self.result:
+            time.sleep(0.1)
+            i += 1
+
+            if i > 10:
+                if not win or not pb:
+                    win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
+                    win.set_title(_('OpenERP Computing'))
+                    win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+                    win.set_modal(True) 
+                    vbox = gtk.VBox(False, 0)
+                    hbox = gtk.HBox(False, 13)
+                    hbox.set_border_width(10)
+                    img = gtk.Image()
+                    img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
+                    hbox.pack_start(img, expand=True, fill=False)
+                    vbox2 = gtk.VBox(False, 0)
+                    label = gtk.Label()
+                    label.set_markup('<b>'+_('Operation in progress')+'</b>')
+                    label.set_alignment(0.0, 0.5)
+                    vbox2.pack_start(label, expand=True, fill=False)
+                    vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
+                    vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
+                    hbox.pack_start(vbox2, expand=True, fill=True)
+                    vbox.pack_start(hbox)
+                    pb = gtk.ProgressBar()
+                    pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
+                    vbox.pack_start(pb, expand=True, fill=False)
+                    win.add(vbox)
+                    win.set_transient_for(self)
+                    win.show_all()
+                pb.pulse()
+                gtk.main_iteration()
+        if win:
+            win.destroy()
+            gtk.main_iteration()
+
+        if self.exception:
+            import xmlrpclib
+            import socket
+            import tiny_socket
+            from rpc import rpc_exception
+            try:
+                raise self.exception
+            except socket.error, e:
+                common.message(str(e), title=_('Connection refused !'), type=gtk.MESSAGE_ERROR)
+            except (tiny_socket.Myexception, xmlrpclib.Fault), err:
+                a = rpc_exception(err.faultCode, err.faultString)
+                if a.type in ('warning', 'UserError'):
+                    common.warning(a.data, a.message)
+                elif a.type == 'AccessDenied':
+                    common.warning('Bad Super Administrator Password', self.get_title())
+                else:
+                    common.error(_('Application Error'), err.faultCode, err.faultString, disconnected_mode=True)
+            except Exception, e:
+                import sys
+                import traceback
+                tb = sys.exc_info()
+                tb_s = "".join(traceback.format_exception(*tb))
+                common.error(_('Application Error'), str(e), tb_s, disconnected_mode=True)
+        else:
+            common.message(self.message, self.get_title())
+
+    def on_response_accept(self):
+        pass
+
     def on_server_entry_changed_after(self, entry):
         pass
 
+    def clear_screen(self):
+        self.messageLabel.hide()
+
+class RetrieveMigrationScriptDialog(DatabaseDialog):
+    def __init__(self, parent):
+        DatabaseDialog.__init__(self, _("Migration Scripts"), parent)
+        self.table.resize(5, 2)
+
+        lbl = gtk.Label(_("Contract ID:"))
+        lbl.set_alignment(1.0, 0.5)
+        self.table.attach(lbl, 0, 1, 3, 4)
+        self.contractIdEntry = gtk.Entry()
+        self.table.attach(self.contractIdEntry, 1, 2, 3, 4)
+
+        lbl = gtk.Label(_("Contract Password:"))
+        lbl.set_alignment(1.0, 0.5)
+        self.table.attach(lbl, 0, 1, 4, 5)
+        self.contractPwdEntry = gtk.Entry()
+        self.table.attach(self.contractPwdEntry, 1, 2, 4, 5)
+
+    def on_response_accept(self):
+        # The OpenERP server fetchs the migration scripts
+        rpc.session.get_migration_scripts(
+            self.serverEntry.get_text(),
+            self.adminPwdEntry.get_text(),
+            self.contractIdEntry.get_text(),
+            self.contractPwdEntry.get_text(),
+        )
+        self.message = "Migration scripts fetched !"
+
 class MigrationDatabaseDialog(DatabaseDialog):
-    def __init__(self, label, parent):
+    def __init__(self, parent):
         self.model = gtk.ListStore(bool, str)
-        DatabaseDialog.__init__(self, label, parent)
+        DatabaseDialog.__init__(self, _("Migrate Database"), parent)
 
         sw = gtk.ScrolledWindow()
         sw.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
@@ -159,13 +284,31 @@ class MigrationDatabaseDialog(DatabaseDialog):
         sw.add(treeview)
         self.table.attach(sw, 0, 2, 3, 4)
 
+    def on_response_accept(self):
+        databases = [ item[1] for item in self.model if bool(item[0]) ]
+        if databases:
+            rpc.session.migrate_databases(self.serverEntry.get_text(), 
+                                          self.adminPwdEntry.get_text(), 
+                                          databases)
+            if len(databases) == 1:
+                self.message = _("Your database has been upgraded.")
+            else:
+                self.message = _("Your databases have been upgraded.")
+            self.message += "\n" + _("Could you restart your server")
+        else:
+            self.message = "You have not selected a database"
+
     def _on_toggle_renderer__toggled(self, renderer, path, col_index):
-        row = self.model[path[0]]
+        row = self.model[path]
         row[col_index] = not row[col_index]
 
-    def on_server_entry_changed_after(self, entry):
-        result = rpc.session.list_db(entry.get_text())
+    def clear_screen(self):
+        super(MigrationDatabaseDialog, self).clear_screen()
         self.model.clear()
+
+    def on_server_entry_changed_after(self, entry):
+        self.clear_screen()
+        result = rpc.session.list_db(entry.get_text())
         if result != -1:
             for db_num, db_name in enumerate(result):
                 self.model.set( self.model.append(), 0, False, 1, db_name)
@@ -1194,89 +1337,10 @@ class terp_main(service.Service):
                     common.warning(_("Couldn't restore database"), parent=self.window)
 
     def sig_db_migrate_retrieve_script(self, widget):
-        dialog = DatabaseDialog(_("Retrieve Script"), parent=self.window)
-        dialog.table.resize(5, 2)
-
-        lbl = gtk.Label(_("Contract ID:"))
-        lbl.set_alignment(1.0, 0.5)
-        dialog.table.attach(lbl, 0, 1, 3, 4)
-        contractIdEntry = gtk.Entry()
-        dialog.table.attach(contractIdEntry, 1, 2, 3, 4)
-
-        lbl = gtk.Label(_("Contract Password:"))
-        lbl.set_alignment(1.0, 0.5)
-        dialog.table.attach(lbl, 0, 1, 4, 5)
-        contractPwdEntry = gtk.Entry()
-        dialog.table.attach(contractPwdEntry, 1, 2, 4, 5)
-
-        dialog.show_all()
-        res = dialog.run()
-
-        if res == gtk.RESPONSE_ACCEPT:
-            try:
-                # The OpenERP server fetchs the migration scripts
-                res = rpc.session.fetch_migration_scripts(
-                    dialog.serverEntry.get_text(),
-                    dialog.adminPwdEntry.get_text(),
-                    contractIdEntry.get_text(),
-                    contractPwdEntry.get_text(),
-                )
-                if res == -1:
-                    common.warning(_('Could not connect to the OpenERP server.'),
-                                   _("Retrieve Migration Scripts"))
-                else:
-                    common.message(_('You can use the "Migrate Database" option to migrate your database(s)'), _("Retrieve Migration Scripts")) 
-            except Exception, e:
-                if hasattr(e, 'faultCode'):
-                    if e.faultCode == 'AccessDenied':
-                        common.warning(_('Bad database administrator password !'), 
-                                       _("Retrieve Migration Scripts."))
-                    else:
-                        common.warning(_("Could not fetch migration scripts:\n%s") % e.faultCode,
-                                       _('Retrieve Migration Scripts.'))
-                else:
-                    common.warning(_("Could not fetch migration scripts"),
-                                   _('Retrieve Migration Scripts.'))
-        self.window.present()
-        dialog.destroy()
+        RetrieveMigrationScriptDialog(self.window).run()
 
     def sig_db_migrate(self, widget):
-        dialog = MigrationDatabaseDialog(_("Migrate Database"), self.window)
-        dialog.show_all()
-        res = dialog.run()
-
-        if res == gtk.RESPONSE_ACCEPT:
-            databases = [ item[1] for item in dialog.model if bool(item[0]) ]
-            if databases:
-                try:
-                    rpc.session.migrate_databases(dialog.serverEntry.get_text(), 
-                                                  dialog.adminPwdEntry.get_text(), 
-                                                  databases)
-                    if len(databases) == 1:
-                        msg = _("Your database has been upgraded.")
-                    else:
-                        msg = _("Your databases have been upgraded.")
-                    msg += "\n" + _("Could you restart your server")
-                    common.message(msg, _('Migrate Database'))
-                except Exception, e:
-                    from pprint import pprint as pp
-                    pp(e)
-                    if hasattr(e, 'faultCode'):
-                        print "faultCode: %s" % e.faultCode
-                        if e.faultCode == 'AccessDenied':
-                            common.warning(_('Bad database administrator password !'), 
-                                           _("Migrate Database."))
-                        else:
-                            common.warning(_("Could not migrate the database(s):\n%s") % e.faultCode,
-                                           _("Migrate Database."))
-                    else:
-                        common.warning(_("Could not migrate the database(s)"),
-                                       _("Migrate Database."))
-            else:
-                common.message("You did not select a database", _("Migrate Database"))
-
-        self.window.present()
-        dialog.destroy()
+        MigrationDatabaseDialog(self.window).run()
 
     def sig_extension_manager(self,widget):
         win = win_extension.win_extension(self.window)

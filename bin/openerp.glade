@@ -369,7 +369,7 @@
                                 <child>
                                   <widget class="GtkImageMenuItem" id="db_migrate_retrieve_script">
                                     <property name="visible">True</property>
-                                    <property name="label" translatable="yes">Retrieve _Script</property>
+                                    <property name="label" translatable="yes">_Download Migrations Code</property>
                                     <property name="use_underline">True</property>
                                     <signal name="activate" handler="on_db_migrate_retrieve_script_activate"/>
                                     <child internal-child="image">
@@ -384,7 +384,7 @@
                                 <child>
                                   <widget class="GtkImageMenuItem" id="db_migrate">
                                     <property name="visible">True</property>
-                                    <property name="label" translatable="yes">_Migrate Database</property>
+                                    <property name="label" translatable="yes">_Migrate Database(s)</property>
                                     <property name="use_underline">True</property>
                                     <signal name="activate" handler="on_db_migrate_activate"/>
                                     <child internal-child="image">
