@@ -427,6 +427,8 @@ class ReferenceField(CharField):
             model.value[self.name] = False
             return
         ref_model, id = value.split(',')
+        if id:
+            id = int(id)
         rpc2 = RPCProxy(ref_model)
         result = rpc2.name_get([id], rpc.session.context)
         if result:
