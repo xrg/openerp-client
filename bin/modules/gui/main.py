@@ -1213,19 +1213,30 @@ class terp_main(service.Service):
         res = dialog.run()
 
         if res == gtk.RESPONSE_ACCEPT:
-            # The OpenERP server fetchs the migration scripts
-            res = rpc.session.fetch_migration_scripts(
-                dialog.serverEntry.get_text(),
-                dialog.adminPwdEntry.get_text(),
-                contractIdEntry.get_text(),
-                contractPwdEntry.get_text(),
-            )
-            if res == -1:
-                common.warning(_('Could not connect to the OpenERP server.'),
-                               _("Retrieve Migration Scripts"))
-            else:
-                common.message(_('You can use the "Migrate Database" option to migrate your database(s)'), _("Retrieve Migration Scripts")) 
-
+            try:
+                # The OpenERP server fetchs the migration scripts
+                res = rpc.session.fetch_migration_scripts(
+                    dialog.serverEntry.get_text(),
+                    dialog.adminPwdEntry.get_text(),
+                    contractIdEntry.get_text(),
+                    contractPwdEntry.get_text(),
+                )
+                if res == -1:
+                    common.warning(_('Could not connect to the OpenERP server.'),
+                                   _("Retrieve Migration Scripts"))
+                else:
+                    common.message(_('You can use the "Migrate Database" option to migrate your database(s)'), _("Retrieve Migration Scripts")) 
+            except Exception, e:
+                if hasattr(e, 'faultCode'):
+                    if e.faultCode == 'AccessDenied':
+                        common.warning(_('Bad database administrator password !'), 
+                                       _("Retrieve Migration Scripts."))
+                    else:
+                        common.warning(_("Could not fetch migration scripts:\n%s") % e.faultCode,
+                                       _('Retrieve Migration Scripts.'))
+                else:
+                    common.warning(_("Could not fetch migration scripts"),
+                                   _('Retrieve Migration Scripts.'))
         self.window.present()
         dialog.destroy()
 
@@ -1235,11 +1246,34 @@ class terp_main(service.Service):
         res = dialog.run()
 
         if res == gtk.RESPONSE_ACCEPT:
-            for item in dialog.model:
-                from pprint import pprint as pp
-                print "active: %s" % item[0]
-                print "text: %s" % item[1]
-            common.message("Not Implemented !", "Not Implemented !", parent=self.window)
+            databases = [ item[1] for item in dialog.model if bool(item[0]) ]
+            if databases:
+                try:
+                    rpc.session.migrate_databases(dialog.serverEntry.get_text(), 
+                                                  dialog.adminPwdEntry.get_text(), 
+                                                  databases)
+                    if len(databases) == 1:
+                        msg = _("Your database has been upgraded.")
+                    else:
+                        msg = _("Your databases have been upgraded.")
+                    msg += "\n" + _("Could you restart your server")
+                    common.message(msg, _('Migrate Database'))
+                except Exception, e:
+                    from pprint import pprint as pp
+                    pp(e)
+                    if hasattr(e, 'faultCode'):
+                        print "faultCode: %s" % e.faultCode
+                        if e.faultCode == 'AccessDenied':
+                            common.warning(_('Bad database administrator password !'), 
+                                           _("Migrate Database."))
+                        else:
+                            common.warning(_("Could not migrate the database(s):\n%s") % e.faultCode,
+                                           _("Migrate Database."))
+                    else:
+                        common.warning(_("Could not migrate the database(s)"),
+                                       _("Migrate Database."))
+            else:
+                common.message("You did not select a database", _("Migrate Database"))
 
         self.window.present()
         dialog.destroy()
