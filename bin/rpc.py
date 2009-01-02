@@ -254,7 +254,6 @@ class rpc_session(object):
                 sock.disconnect()
                 return res
             except Exception, e:
-                print "exception: %r" % (e,)
                 return -1
 
     def about(self, url):
