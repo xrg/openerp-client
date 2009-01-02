@@ -235,6 +235,49 @@ class rpc_session(object):
         self.context_reload()
         return 1
 
+    def fetch_migration_scripts(self, url, password, contract_id, contract_password):
+        m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
+        if not m:
+            return -1
+        if m.group(1) == 'http://' or m.group(1) == 'https://':
+            try:
+                sock = xmlrpclib.ServerProxy(url + '/xmlrpc/common')
+                return sock.get_migration_scripts(password, contract_id, contract_password)
+            except:
+                return -1
+        else:
+            sock = tiny_socket.mysocket()
+            try:
+                sock.connect(m.group(2), int(m.group(3)))
+                sock.mysend(('common', 'get_migration_scripts', password, contract_id, contract_password))
+                res = sock.myreceive()
+                sock.disconnect()
+                return res
+            except Exception, e:
+                print "exception: %r" % (e,)
+                return -1
+
+    def about(self, url):
+        m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
+        if not m:
+            return -1
+        if m.group(1) == 'http://' or m.group(1) == 'https://':
+            try:
+                sock = xmlrpclib.ServerProxy(url + '/xmlrpc/common')
+                return sock.about()
+            except Exception, ex:
+                return -1
+        else:
+            sock = tiny_socket.mysocket()
+            try:
+                sock.connect(m.group(2), int(m.group(3)))
+                sock.mysend(('common', 'about'))
+                res = sock.myreceive()
+                sock.disconnect()
+                return res
+            except Exception, e:
+                return -1
+
     def list_db(self, url):
         m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
         if not m:
@@ -243,7 +286,7 @@ class rpc_session(object):
             try:
                 sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
                 return sock.list()
-            except:
+            except Exception, ex:
                 return -1
         else:
             sock = tiny_socket.mysocket()
