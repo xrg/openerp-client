@@ -125,3 +125,4 @@ class win_extension(object):
             self.save_to_file()
         self.win.destroy()
 
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
