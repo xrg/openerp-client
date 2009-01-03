@@ -139,7 +139,7 @@ options = {
     "py2exe": {
         "compressed": 1,
         "optimize": 2,
-        "packages": ["encodings","gtk", "matplotlib", "pytz"],
+        "packages": ["encodings","gtk", "matplotlib", "pytz", "OpenSSL"],
         "includes": "pango,atk,gobject,cairo,atk,pangocairo,matplotlib._path",
         "excludes": ["Tkinter", "tcl", "TKconstants"],
         "dll_excludes": [
