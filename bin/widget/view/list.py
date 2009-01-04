@@ -2,8 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    Copyright (c) 2004-2008 B2CK, Bertrand Chenal, Cedric Krier (D&D in lists)
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (c) 2004-2009 B2CK, Bertrand Chenal, Cedric Krier (D&D in lists)
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
