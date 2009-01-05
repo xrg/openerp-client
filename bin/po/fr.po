@@ -4082,7 +4082,7 @@ msgstr "window1"
 
 #: bin/openerp.glade:9036
 msgid "Today"
-msgstr "Ajourdhui"
+msgstr "Aujourdhui"
 
 #: bin/openerp.glade:9082
 msgid "September 2008"
@@ -4143,7 +4143,7 @@ msgstr "Expliquer nous ce que vous faisiez:"
 # File: bin/openerp.glade, line: 4191
 #: bin/win_error.glade:196
 msgid "Others Comments:"
-msgstr "Autre commentaires"
+msgstr "Autres commentaires"
 
 #: bin/win_error.glade:278
 msgid "Send to Maintenance Team"
