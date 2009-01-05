@@ -294,7 +294,6 @@ class MigrationDatabaseDialog(DatabaseDialog):
                 self.message = _("Your database has been upgraded.")
             else:
                 self.message = _("Your databases have been upgraded.")
-            self.message += "\n" + _("Could you restart your server")
         else:
             self.message = "You have not selected a database"
 
