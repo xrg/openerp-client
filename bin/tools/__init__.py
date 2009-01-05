@@ -125,7 +125,7 @@ def human_size(sz):
         i = i + 1
     return "%0.2f %s" % (s, units[i])
 
-def ustr(value):
+def ustr(value, from_encoding='utf-8'):
     """This method is similar to the builtin `str` method, except
     it will return Unicode string.
 
@@ -144,6 +144,6 @@ def ustr(value):
     if not isinstance(value, str):
         value = str(value)
 
-    return unicode(value, 'utf-8')
+    return unicode(value, from_encoding)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

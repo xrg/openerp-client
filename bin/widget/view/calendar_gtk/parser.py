@@ -225,12 +225,15 @@ class ViewCalendar(object):
 
     def refresh(self):
         t = self.date.tuple()
+        from tools import ustr
+        from locale import getlocale
+        sysencoding = getlocale()[1]
         if self.mode=='month':
             self._radio_month.set_active(True)
             d1 = datetime(*list(t)[:6])
             self.cal_view.range = self.cal_view.RANGE_MONTH
             self.cal_view.selected = date(*list(t)[:3])
-            self._label_current.set_text(self.date.strftime('%B %Y'))
+            self._label_current.set_text(ustr(self.date.strftime('%B %Y'), sysencoding))
         elif self.mode=='week':
             self._radio_week.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_WEEK
@@ -244,7 +247,7 @@ class ViewCalendar(object):
             d2 = datetime(*(list(t)[:3] + [23, 59, 59]))
             self.cal_view.visible_range = d1, d2
             self.cal_view.active_range = d1, d2
-            self._label_current.set_text(self.date.strftime('%A %x'))
+            self._label_current.set_text(ustr(self.date.strftime('%A %x'), sysencoding))
 
         self._small_calendar.select_month(t[1]-1,t[0])
         self._small_calendar.select_day(t[2])
