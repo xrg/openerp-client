@@ -43,20 +43,19 @@ class rpc_exception(Exception):
             lines = code.split('\n')
 
             self.type = lines[0].split(' -- ')[0]
-            self.message = ''
+            message = ''
             if len(lines[0].split(' -- ')) > 1:
-                self.message = lines[0].split(' -- ')[1]
+                message = lines[0].split(' -- ')[1]
 
-            self.data = '\n'.join(lines[2:])
+            self.args = (message, '\n'.join(lines[2:]))
         else:
             self.type = 'error'
-            self.message = backtrace
-            self.data = backtrace
+            self.args = (backtrace,)
 
         self.backtrace = backtrace
 
         log = logging.getLogger('rpc.exception')
-        log.warning('CODE %s: %s' % (str(code), self.message))
+        log.warning('CODE %s: %s' % (str(code), self.args[0]))
 
 class gw_inter(object):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
@@ -179,7 +178,7 @@ class rpc_session(object):
                                     del args[4][CONCURRENCY_CHECK_FIELD]
                                 return self.rpc_exec_auth(obj, method, *args)
                         else:
-                            common.warning(a.data, a.message)
+                            common.warning(a.args[1], a.args[0])
                     else:
                         common.error(_('Application Error'), e.faultCode, e.faultString)
                 else:

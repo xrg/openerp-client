@@ -187,7 +187,7 @@ def execute(action, datas, state='init', parent=None, context=None):
                     except tiny_socket.Myexception, err:
                         a = rpc_exception(err.faultCode, err.faultString)
                         if a.type in ('warning', 'UserError'):
-                            common.warning(a.data, a.message)
+                            common.warning(a.args[1], a.args[0])
                         else:
                             common.error(_('Application Error'), err.faultCode, err.faultString)
                     except Exception, e:
