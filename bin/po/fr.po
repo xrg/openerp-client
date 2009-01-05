@@ -1940,7 +1940,7 @@ msgstr "_Déconnecter"
 # File: bin/openerp.glade, line: 300
 #: bin/openerp.glade:300
 msgid "Databases"
-msgstr "Base de données"
+msgstr "Bases de données"
 
 #
 # File: bin/openerp.glade, line: 307
