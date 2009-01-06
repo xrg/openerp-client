@@ -20,14 +20,14 @@
 #
 ##############################################################################
 
-import os, time, base64, datetime
-
+import os
+import time
+import base64
+import datetime
 import service
 import rpc
-
 import wizard
 import printer
-
 import common
 import tools
 from widget.view.form_gtk.many2one import dialog

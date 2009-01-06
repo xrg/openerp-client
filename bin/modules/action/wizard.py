@@ -28,7 +28,8 @@ import copy
 import service
 import rpc
 import common
-import thread, time
+import thread
+import time
 
 from widget.screen import Screen
 

@@ -20,7 +20,8 @@
 #
 ##############################################################################
 
-import ConfigParser,optparse
+import ConfigParser
+import optparse
 import os
 import sys
 import gtk

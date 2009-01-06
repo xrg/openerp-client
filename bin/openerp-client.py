@@ -30,7 +30,8 @@ GNU Public Licence.
 
 (c) 2003-TODAY, Fabien Pinckaers - Tiny sprl
 """
-import sys, os
+import sys
+import os
 import release
 __author__ = release.author
 __version__ = release.version
@@ -58,7 +59,8 @@ import gtk.glade
 
 #gtk.gdk.threads_init() # causes the GTK client to block everything.
 
-import locale, gettext
+import locale
+import gettext
 
 import atk
 import gtk._gtk

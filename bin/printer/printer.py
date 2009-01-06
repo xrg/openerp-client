@@ -29,7 +29,10 @@
 # Print or open a previewer
 #
 
-import os, base64, options, sys
+import os
+import base64
+import options 
+import sys
 import gc
 import common
 import time

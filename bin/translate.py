@@ -20,7 +20,8 @@
 #
 ##############################################################################
 
-import sys,os
+import sys
+import os
 import locale
 import release
 import gettext

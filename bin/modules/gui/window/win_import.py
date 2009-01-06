@@ -28,7 +28,8 @@ import common
 
 import rpc
 
-import csv, StringIO
+import csv
+import StringIO
 
 import options
 import service
