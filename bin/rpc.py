@@ -34,10 +34,6 @@ import os
 
 import re
 
-class rpc_int_exception(Exception):
-    pass
-
-
 class rpc_exception(Exception):
     def __init__(self, code, backtrace):
 
