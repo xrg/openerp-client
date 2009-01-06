@@ -336,7 +336,12 @@ def _refresh_langlist(lang_widget, url):
     lang_list.append( ('en_US','English') )
     for key,val in lang_list:
         liststore.insert(0, (val,key))
+    lang = rpc.session.context.get('lang', options.options.get('client.lang', 'en_US'))
     lang_widget.set_active(0)
+    for idx, item in enumerate(lang_widget.get_model()):
+        if item[1] == lang:
+            lang_widget.set_active(idx)
+            break
     return lang_list
 
 def _server_ask(server_widget, parent=None):
@@ -508,11 +513,8 @@ class db_create(object):
 
     def server_change(self, widget=None, parent=None):
         url = _server_ask(self.server_widget)
-        try:
-            if self.lang_widget and url:
-                _refresh_langlist(self.lang_widget, url)
-        except:
-            return False
+        if self.lang_widget and url:
+            _refresh_langlist(self.lang_widget, url)
         return url
 
     def __init__(self, sig_login, terp_main):
