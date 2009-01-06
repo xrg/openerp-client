@@ -78,15 +78,14 @@ class many2many(interface.widget_interface):
         self.widget.pack_start(scroll, expand=True, fill=True)
 
         self.old = None
-        self.avail_ids = []
+        self.avail_ids = set()
 
     def check_exist(self):
         if not len(self.screen.models.models):
-            self.avail_ids=[]
+            self.avail_ids.clear()
         else:
             for i in self.screen.models.models:
-                self.avail_ids.append(i.id)
-            self.avail_ids=dict.fromkeys(self.avail_ids).keys()
+                self.avail_ids.add(i.id)
 
     def destroy(self):
         self.screen.destroy()
@@ -123,7 +122,7 @@ class many2many(interface.widget_interface):
                 ids=[]
         self.screen.load(ids)
         for i in ids:
-            self.avail_ids.append(i)
+            self.avail_ids.add(i)
         self.screen.display()
         self.wid_text.set_text('')
 
@@ -154,7 +153,7 @@ class many2many(interface.widget_interface):
             self.screen.clear()
             self.screen.load(ids)
             self.old = ids
-            self.avail_ids = []
+            self.avail_ids.clear()
         self.screen.display()
         return True
 
