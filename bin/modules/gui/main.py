@@ -109,6 +109,7 @@ class DatabaseDialog(gtk.Dialog):
         lbl.set_alignment(1.0, 0.5)
         self.table.attach(lbl, 0, 1, 2, 3)
         self.adminPwdEntry = gtk.Entry()
+        self.adminPwdEntry.set_visibility(False)
         self.table.attach(self.adminPwdEntry, 1, 2, 2, 3)
 
         self.vbox.add(self.table)
