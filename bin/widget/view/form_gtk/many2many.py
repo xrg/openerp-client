@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -78,15 +78,15 @@ class many2many(interface.widget_interface):
         self.widget.pack_start(scroll, expand=True, fill=True)
 
         self.old = None
-        self.temp=[]
+        self.avail_ids = []
 
     def check_exist(self):
         if not len(self.screen.models.models):
-            self.temp=[]
+            self.avail_ids=[]
         else:
             for i in self.screen.models.models:
-                self.temp.append(i.id)
-            self.temp=dict.fromkeys(self.temp).keys()
+                self.avail_ids.append(i.id)
+            self.avail_ids=dict.fromkeys(self.avail_ids).keys()
 
     def destroy(self):
         self.screen.destroy()
@@ -112,9 +112,9 @@ class many2many(interface.widget_interface):
 
         if ids == None:
             ids=[]
-        if len(self.temp) and len(ids):
+        if len(self.avail_ids) and len(ids):
             for i in ids:
-                if i not in self.temp:
+                if i not in self.avail_ids:
                     newids.append(i)
                     flag=True
             if flag==True:
@@ -123,7 +123,7 @@ class many2many(interface.widget_interface):
                 ids=[]
         self.screen.load(ids)
         for i in ids:
-            self.temp.append(i)
+            self.avail_ids.append(i)
         self.screen.display()
         self.wid_text.set_text('')
 
@@ -132,7 +132,7 @@ class many2many(interface.widget_interface):
         self.check_exist()
         rem_id=self.screen.current_view.sel_ids_get()
         for i in rem_id:
-            self.temp.remove(i)
+            self.avail_ids.remove(i)
         self.screen.remove()
         self.screen.display()
 
@@ -154,6 +154,7 @@ class many2many(interface.widget_interface):
             self.screen.clear()
             self.screen.load(ids)
             self.old = ids
+            self.avail_ids = []
         self.screen.display()
         return True
 
