@@ -185,6 +185,9 @@ class configmanager(object):
     def __getitem__(self, key):
         return self.options[key]
 
+    def get(self, key, default_value = None):
+        return self.options.get(key, default_value)
+
 options = configmanager()
 
 
