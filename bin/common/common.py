@@ -23,6 +23,7 @@
 import gtk
 from gtk import glade
 import gobject
+from cgi import escape
 
 import gettext
 
@@ -388,7 +389,7 @@ is displayed on the second tab.
     win.set_icon(OPENERP_ICON)
     win.set_title("Open ERP - %s" % title)
 
-    xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % message)
+    xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % escape(message))
 
     details_buffer = gtk.TextBuffer()
     details_buffer.set_text(unicode(details,'latin1').encode('utf-8'))
