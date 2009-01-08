@@ -1076,6 +1076,7 @@ class terp_main(service.Service):
                     raise
                 service.LocalService('gui.main').window.present()
                 self.sig_logout(widget)
+		# if user enters unicode data, it will crash here..
                 log_response = rpc.session.login(*res)
                 if log_response == RES_OK:
                     options.options.save()
