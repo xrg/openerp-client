@@ -1,9 +1,5 @@
-#!/bin/sh /usr/share/dpatch/dpatch-run
-## 02-gtk.dpatch by Chris Lamb <lamby@debian.org>
-##
-## DP: Fixes startup problem (Closes: #481895).
-
-@DPATCH@
+Author: Chris Lamb <lamby@debian.org>
+Description: Fixes startup problem (Closes: #481895).
 
 diff -Naurp openerp-client.orig/bin/openerp-client.py openerp-client/bin/openerp-client.py
 --- openerp-client.orig/bin/openerp-client.py	2008-11-03 20:53:38.000000000 +0000
