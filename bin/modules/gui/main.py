@@ -248,6 +248,7 @@ class RetrieveMigrationScriptDialog(DatabaseDialog):
         lbl.set_alignment(1.0, 0.5)
         self.table.attach(lbl, 0, 1, 4, 5)
         self.contractPwdEntry = gtk.Entry()
+        self.contractPwdEntry.set_visibility(False)
         self.table.attach(self.contractPwdEntry, 1, 2, 4, 5)
 
     def on_response_accept(self):
