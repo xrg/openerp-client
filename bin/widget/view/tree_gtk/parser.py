@@ -307,7 +307,7 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        #date = mx.DateTime.strptime(value, self.server_format).timetuple()
+#        date = mx.DateTime.strptime(value, self.server_format).timetuple()
         date = tools.datetime_util.strptime(value, self.server_format).timetuple()
         dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
         
@@ -349,7 +349,7 @@ class Datetime(GenericDate):
                 date = sdt.timetuple()
             except:
                 pass
-        return date.strftime(self.display_format)
+        return date.strftime(self.server_format)
 
 class Float(Char):
     def get_textual_value(self, model):

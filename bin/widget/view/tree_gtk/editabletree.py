@@ -42,7 +42,6 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         if hasattr(modelfield, 'editabletree_entry'):
             del modelfield.editabletree_entry
         cell = self.cells[fieldname]
-
         # The value has not changed ... do nothing.
         if value == cell.get_textual_value(current_model):
             return
