@@ -1052,7 +1052,7 @@ msgstr "Installation de la base de données OpenERP"
 # File: bin/modules/gui/main.py, line: 336
 #: bin/modules/gui/main.py:349
 msgid "<b>Operation in progress</b>"
-msgstr "<b>Opération en cours</p>"
+msgstr "<b>Opération en cours</b>"
 
 #
 # File: bin/modules/action/wizard.py, line: 147
