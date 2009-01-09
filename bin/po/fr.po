@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-31 14:42+0100\n"
-"PO-Revision-Date: 2009-01-05 11:55+0000\n"
-"Last-Translator: Olivier Laurent <Unknown>\n"
+"PO-Revision-Date: 2009-01-09 12:20+0000\n"
+"Last-Translator: Stephane (Open ERP) <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-05 11:56+0000\n"
+"X-Launchpad-Export-Date: 2009-01-09 12:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -1046,10 +1046,6 @@ msgstr ""
 msgid "OpenERP Database Installation"
 msgstr "Installation de la base de données OpenERP"
 
-#
-# File: bin/modules/gui/main.py, line: 336
-# File: bin/modules/gui/main.py, line: 336
-# File: bin/modules/gui/main.py, line: 336
 #: bin/modules/gui/main.py:349
 msgid "<b>Operation in progress</b>"
 msgstr "<b>Opération en cours</b>"
@@ -1139,14 +1135,10 @@ msgid "The following users have been installed on your database:"
 msgstr ""
 "Les utilisateurs suivant ont été installés dans votre base de données:"
 
-#
-# File: bin/modules/gui/main.py, line: 388
-# File: bin/modules/gui/main.py, line: 388
-# File: bin/modules/gui/main.py, line: 388
 #: bin/modules/gui/main.py:401
 msgid "You can now connect to the database as an administrator."
 msgstr ""
-"Vous ne pouvez pas vous connecter à la base de données en tant "
+"Vous pouvez maintenant vous connecter à la base de données en tant "
 "qu'administrateur."
 
 #
@@ -1833,7 +1825,7 @@ msgstr "Erreur lors de l'écriture du fichier!"
 
 #: bin/openerp.glade:8
 msgid "OpenERP - Login"
-msgstr "OpenERP - Connexion"
+msgstr "OpenERP - Identification"
 
 #
 # File: bin/openerp.glade, line: 74
@@ -1934,10 +1926,6 @@ msgstr "_Connecter..."
 msgid "_Disconnect"
 msgstr "_Déconnecter"
 
-#
-# File: bin/openerp.glade, line: 300
-# File: bin/openerp.glade, line: 300
-# File: bin/openerp.glade, line: 300
 #: bin/openerp.glade:300
 msgid "Databases"
 msgstr "Bases de données"
@@ -2497,7 +2485,7 @@ msgstr "Aller à la recherche suivante"
 # File: bin/openerp.glade, line: 2611
 #: bin/openerp.glade:1278
 msgid "List"
-msgstr "Sauvegarder la liste"
+msgstr "Liste"
 
 #
 # File: bin/openerp.glade, line: 493
@@ -4082,7 +4070,7 @@ msgstr "window1"
 
 #: bin/openerp.glade:9036
 msgid "Today"
-msgstr "Aujourdhui"
+msgstr "Aujourd'hui"
 
 #: bin/openerp.glade:9082
 msgid "September 2008"
@@ -4134,13 +4122,6 @@ msgstr ""
 msgid "Explain what you did:"
 msgstr "Expliquer nous ce que vous faisiez:"
 
-#
-# File: bin/openerp.glade, line: 3376
-# File: bin/openerp.glade, line: 4191
-# File: bin/openerp.glade, line: 3376
-# File: bin/openerp.glade, line: 4191
-# File: bin/openerp.glade, line: 3376
-# File: bin/openerp.glade, line: 4191
 #: bin/win_error.glade:196
 msgid "Others Comments:"
 msgstr "Autres commentaires"
