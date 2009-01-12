@@ -173,24 +173,18 @@ class Screen(signal_event.signal_event):
 
     def search_filter(self, *args):
         v = self.filter_widget.value
-        if self.latest_search and self.latest_search<>v:
+        filter_keys = [ key for key, _, _ in v]
+        v.extend((key, op, value) for key, op, value in self.domain if key not in filter_keys and not (key=='active') and self.context.get('active_test', False))
+        if self.latest_search and self.latest_search != v:
             self.filter_widget.set_offset(0)
         limit=self.filter_widget.get_limit()
         offset=self.filter_widget.get_offset()
         self.latest_search = v
-        filter_keys = []
-        for key, op, value in v:
-            filter_keys.append(key)
-        for key, op, value in self.domain:
-            if key not in filter_keys and \
-                    not (key == 'active' and self.context.get('active_test', False)):
-                v.append((key, op, value))
-        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0,self.context)
+        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, 0, self.context)
         if len(ids) < limit:
             self.search_count = len(ids)
         else:
-            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute',
-                    self.name, 'search_count', v, self.context)
+            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', v, self.context)
 
         self.update_scroll()
 
