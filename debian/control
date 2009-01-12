@@ -14,7 +14,7 @@ Architecture: all
 Depends: ${misc:Depends}, python, python-egenix-mxdatetime, python-glade2, python-gtk2
 Conflicts: tinyerp-client
 Replaces: tinyerp-client
-Recommends: python-matplotlib, openoffice.org-writer, evince | pdf-viewer
+Recommends: python-hippocanvas, python-matplotlib, openoffice.org-writer, evince | pdf-viewer
 Suggests: openerp-server
 Description: Enterprise Resource Management (client)
  OpenERP, previously known as TinyERP, is a complete ERP and CRM. The main
