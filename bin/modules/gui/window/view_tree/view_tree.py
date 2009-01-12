@@ -318,6 +318,7 @@ class view_tree(object):
 
     def reload(self):
         del self.model
+        self.context.update(rpc.session.context)
         self.model = view_tree_model(self.ids, self.view_info, self.fields_order, self.fields, context=self.context, pixbufs=self.pixbufs, treeview=self.view)
         self.view.set_model(self.model)
 
