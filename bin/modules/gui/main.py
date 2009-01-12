@@ -1274,13 +1274,6 @@ class terp_main(service.Service):
                                     'but_previous', 'but_next', 'but_open', \
                                     'but_close', 'but_reload', 'but_attach', 'but_goto_id'):
                     self._update_attachment_button(wid)
-            if button_name.startswith('radio_'):
-                pass
-                #mode = wid.screen.current_view.view_type
-                #print 'RADIO CALLED', button_name, args, self.glade.get_widget(button_name).get_active(), button_name[6:]
-                #if self.glade.get_widget(button_name).get_active() and (mode<>button_name[6:]):
-                #    print 'SWITCH', button_name
-                #    wid.sig_switch()
             if button_name=='but_close' and res:
                 self._win_del(page_num)
 
