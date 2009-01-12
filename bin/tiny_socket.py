@@ -55,10 +55,7 @@ class mysocket:
 
     def mysend(self, msg, exception=False, traceback=None):
         msg = cPickle.dumps([msg,traceback])
-        size = len(msg)
-        self.sock.send('%8d' % size)
-        self.sock.send(exception and "1" or "0")
-        self.sock.sendall(msg)
+        self.sock.sendall('%8d%s%s' % (len(msg), exception and "1" or "0", msg))
 
     def myreceive(self):
         def read(socket, size):
