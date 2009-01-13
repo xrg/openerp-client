@@ -282,7 +282,7 @@ class win_export(object):
                 fname = common.file_selection(_('Save As...'),
                         parent=self.parent, action=gtk.FILE_CHOOSER_ACTION_SAVE)
                 if fname:
-                    export_csv(fname, fields2, result, self.wid_write_field_names.get_active())
+                    export_csv(fname, fields, result, self.wid_write_field_names.get_active())
             return True
         else:
             self.parent.present()
