@@ -245,8 +245,15 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
     def do_allocate_one_row(self, width, height, origin_changed):
         grid_x, grid_y = self.gridbox.get_position(self.grid)
+        grid_w, grid_h = self.grid.get_allocation()
+
         for cell in self.grid.get_children():
             cell_x_off,  cell_y_off  = self.grid.get_position(cell)
+
+            # the 18 number is for the size of the scrollbar on the right
+            # (don't know how to get it)
+            cell_x_off = math.ceil((float(cell_x_off)) * (width - grid_x - 18) / grid_w)
+
             cell_w,      cell_h      = cell.get_allocation()
             x                        = grid_x + cell_x_off
             y                        = grid_y + cell_y_off
@@ -279,6 +286,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
             # Find the position of the writable area of the row.
             grid_w,      grid_h      = self.grid.get_allocation()
+            grid_w,      grid_h      = (width, height)
             row_x_off,   row_y_off   = self.grid.get_position(row[0])
             cell_w,      cell_h      = row[0].get_allocation()
             title_x_off, title_y_off = row[0].get_body_position()
