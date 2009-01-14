@@ -190,6 +190,7 @@ def print_w32_filename(filename):
 def print_data(data):
     if 'result' not in data:
         common.message(_('Error no report'))
+        return 
     if data.get('code','normal')=='zlib':
         import zlib
         content = zlib.decompress(base64.decodestring(data['result']))
