@@ -255,8 +255,8 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
             cell_x_off = math.ceil((float(cell_x_off)) * (width - grid_x - 18) / grid_w)
 
             cell_w,      cell_h      = cell.get_allocation()
-            x                        = grid_x + cell_x_off
-            y                        = grid_y + cell_y_off
+            x                        = int(grid_x + cell_x_off)
+            y                        = int(grid_y + cell_y_off)
             w                        = cell_w
             h                        = cell_h
             view                     = self.vevent_views[cell]
