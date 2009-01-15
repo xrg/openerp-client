@@ -90,10 +90,8 @@ class configmanager(object):
             'printer.softpath': 'none',
             'printer.softpath_html': 'none',
             'printer.path': 'none',
-            'logging.logger': '',
-            'logging.level': 'DEBUG',
+            'logging.level': 'INFO',
             'logging.output': 'stdout',
-            'logging.verbose': False,
             'client.default_path': os.path.expanduser('~'),
             'support.recipient': 'support@openerp.com',
             'support.support_id' : '',
@@ -105,11 +103,11 @@ class configmanager(object):
             'help.index': 'http://www.openerp.com/documentation/user-manual/',
             'help.context': 'http://www.openerp.com/scripts/context_index.php?model=%(model)s&lang=%(lang)s',
         }
+        loglevels = ('critical', 'error', 'warning', 'info', 'debug', 'notset')
         parser = optparse.OptionParser(version=_("OpenERP Client %s" % openerp_version))
         parser.add_option("-c", "--config", dest="config",help=_("specify alternate config file"))
-        parser.add_option("-v", "--verbose", action="store_true", default=False, dest="verbose", help=_("enable basic debugging"))
-        parser.add_option("-d", "--log", dest="log_logger", default='', help=_("specify channels to log"))
-        parser.add_option("-l", "--log-level", dest="log_level",default='ERROR', help=_("specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"))
+        parser.add_option("-v", "--verbose", dest="log_level", action='store_const', const="debug", help=_("Enable basic debugging. Alias for '--log-level=debug'"))
+        parser.add_option("-l", "--log-level", dest="log_level", type='choice', choices=loglevels, default='error', help=_("specify the log level: %s") % ", ".join(loglevels))
         parser.add_option("-u", "--user", dest="login", help=_("specify the user login"))
         parser.add_option("-p", "--port", dest="port", help=_("specify the server port"))
         parser.add_option("-s", "--server", dest="server", help=_("specify the server ip/name"))
@@ -118,9 +116,6 @@ class configmanager(object):
         self.rcfile = self._get_rcfile(fname, opt.config)
         self.load()
 
-        if opt.verbose:
-            self.options['logging.verbose']=True
-        self.options['logging.logger'] = opt.log_logger
         self.options['logging.level'] = opt.log_level
 
         for arg in ('login', 'port', 'server'):

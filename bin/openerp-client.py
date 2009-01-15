@@ -83,16 +83,7 @@ if not client_lang:
 
 translate.setlang(client_lang)
 
-for logger in options.options['logging.logger'].split(','):
-    if len(logger):
-        loglevel = {'DEBUG':logging.DEBUG, 'INFO':logging.INFO, 'WARNING':logging.WARNING, 'ERROR':logging.ERROR, 'CRITICAL':logging.CRITICAL}
-        log = logging.getLogger(logger)
-        log.setLevel(loglevel[options.options['logging.level'].upper()])
-if options.options['logging.verbose']:
-    logging.getLogger().setLevel(logging.INFO)
-else:
-    logging.getLogger().setLevel(logging.ERROR)
-
+logging.getLogger().setLevel(getattr(logging, options.options['logging.level'].upper()))
 
 import modules
 import common
