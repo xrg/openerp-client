@@ -25,6 +25,7 @@ import time
 import common
 import rpc
 from rpc import RPCProxy
+from rpc import CONCURRENCY_CHECK_FIELD
 import field
 import signal_event
 import gtk
@@ -61,7 +62,7 @@ class ModelRecord(signal_event.signal_event):
         self.state_attrs = {}
         self.modified = False
         self.modified_fields = {}
-        self.read_time = time.time()
+        self._concurrency_check_data = False
         for key,val in self.mgroup.mfields.items():
             self.value[key] = val.create(self)
             if (new and val.attrs['type']=='one2many') and (val.attrs.get('mode','tree,form').startswith('form')):
@@ -128,7 +129,7 @@ class ModelRecord(signal_event.signal_event):
             value = self.get(get_readonly=False, get_modifiedonly=True)
             context= self.context_get()
             context= context.copy()
-            context['read_delta']= time.time()-self.read_time
+            context.setdefault(CONCURRENCY_CHECK_FIELD, {})[str(self.id)] = self._concurrency_check_data 
             if not self.rpc.write([self.id], value, context):
                 self.failed_validation()
                 return False
@@ -198,6 +199,8 @@ class ModelRecord(signal_event.signal_event):
     def set(self, val, modified=False, signal=True):
         later={}
         for fieldname, value in val.items():
+            if fieldname == CONCURRENCY_CHECK_FIELD:
+                self._concurrency_check_data = value
             if fieldname not in self.mgroup.mfields:
                 continue
             if isinstance(self.mgroup.mfields[fieldname], field.O2MField):
@@ -219,10 +222,9 @@ class ModelRecord(signal_event.signal_event):
         c = rpc.session.context.copy()
         c.update(self.context_get())
         c['bin_size'] = True
-        res = self.rpc.read([self.id], self.mgroup.mfields.keys(), c)
+        res = self.rpc.read([self.id], self.mgroup.mfields.keys() + [CONCURRENCY_CHECK_FIELD], c)
         if res:
             value = res[0]
-            self.read_time= time.time()
             self.set(value)
 
     def expr_eval(self, dom, check_load=True):

@@ -34,6 +34,8 @@ import os
 
 import re
 
+CONCURRENCY_CHECK_FIELD = '__last_update'
+
 class rpc_exception(Exception):
     def __init__(self, code, backtrace):
 
@@ -175,8 +177,8 @@ class rpc_session(object):
                     if a.type in ('warning','UserError'):
                         if a.message in ('ConcurrencyException') and len(args) > 4:
                             if common.concurrency(args[0], args[2][0], args[4]):
-                                if 'read_delta' in args[4]:
-                                    del args[4]['read_delta']
+                                if CONCURRENCY_CHECK_FIELD in args[4]:
+                                    del args[4][CONCURRENCY_CHECK_FIELD]
                                 return self.rpc_exec_auth(obj, method, *args)
                         else:
                             common.warning(a.data, a.message)

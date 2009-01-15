@@ -472,7 +472,7 @@ class Screen(signal_event.signal_event):
         id = False
         if self.current_view.view_type == 'form' and self.current_model:
             id = self.current_model.id
-
+            
             idx = self.models.models.index(self.current_model)
             if not id:
                 lst=[]
@@ -484,8 +484,11 @@ class Screen(signal_event.signal_event):
                 self.display()
                 self.current_view.set_cursor()
                 return False
+
+            ctx = self.current_model.context_get().copy()
+            ctx.setdefault(rpc.CONCURRENCY_CHECK_FIELD, {})[str(id)] = self.current_model._concurrency_check_data 
             if unlink and id:
-                if not self.rpc.unlink([id]):
+                if not self.rpc.unlink([id], ctx):
                     return False
 
             self.models.remove(self.current_model)
@@ -498,8 +501,14 @@ class Screen(signal_event.signal_event):
             self.current_view.set_cursor()
         if self.current_view.view_type == 'tree':
             ids = self.current_view.sel_ids_get()
+            
+            ctx = self.models.context.copy()
+            for m in self.models:
+                if m.id in ids:
+                    ctx.setdefault(rpc.CONCURRENCY_CHECK_FIELD, {})[str(m.id)] = m._concurrency_check_data
+
             if unlink and ids:
-                if not self.rpc.unlink(ids):
+                if not self.rpc.unlink(ids, ctx):
                     return False
             for model in self.current_view.sel_models_get():
                 self.models.remove(model)
