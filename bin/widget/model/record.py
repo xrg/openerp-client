@@ -136,6 +136,9 @@ class ModelRecord(signal_event.signal_event):
         self._loaded = False
         if reload:
             self.reload()
+        else:
+            # just reload the CONCURRENCY_CHECK_FIELD
+            self._reload([CONCURRENCY_CHECK_FIELD])
         return self.id
 
     def default_get(self, domain=[], context={}):
@@ -215,14 +218,17 @@ class ModelRecord(signal_event.signal_event):
             self.modified_fields = {}
         if signal:
             self.signal('record-changed')
-
+    
     def reload(self):
+        return self._reload(self.mgroup.mfields.keys() + [CONCURRENCY_CHECK_FIELD])
+
+    def _reload(self, fields):
         if not self.id:
             return
         c = rpc.session.context.copy()
         c.update(self.context_get())
         c['bin_size'] = True
-        res = self.rpc.read([self.id], self.mgroup.mfields.keys() + [CONCURRENCY_CHECK_FIELD], c)
+        res = self.rpc.read([self.id], fields, c)
         if res:
             value = res[0]
             self.set(value)

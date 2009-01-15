@@ -164,7 +164,7 @@ def execute(action, datas, state='init', parent=None, context={}):
                 if self.exception:
                     import xmlrpclib
                     import socket
-                    from rpc import rpc_exception, CONCURRENCY_CHECK_COLUMN 
+                    from rpc import rpc_exception, CONCURRENCY_CHECK_FIELD
                     import tiny_socket
                     try:
                         raise self.exception
@@ -175,8 +175,8 @@ def execute(action, datas, state='init', parent=None, context={}):
                         if a.type in ('warning', 'UserError'):
                             if a.message in ('ConcurrencyException') and len(args) > 4:
                                 if common.concurrency(args[0], args[2][0], args[4]):
-                                    if CONCURRENCY_CHECK_COLUMN in args[4]:
-                                        del args[4][CONCURRENCY_CHECK_COLUMN]
+                                    if CONCURRENCY_CHECK_FIELD in args[4]:
+                                        del args[4][CONCURRENCY_CHECK_FIELD]
                                     return self.rpc_exec_auth(obj, method, *args)
                             else:
                                 common.warning(a.data, a.message)
