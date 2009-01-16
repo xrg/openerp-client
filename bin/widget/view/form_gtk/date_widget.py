@@ -78,13 +78,13 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             self.stop_emission('insert-text')
             return
 
-        pos = self.get_position()
+        text = self.get_text()
+        pos = text != self.initial_value and self.get_position() or 0
+
         if length != 1:
             # TODO: Implement paste
             self.stop_emission('insert-text')
             return
-
-        text = self.get_text()
 
         text = text[:pos] + value + text[pos + 1:]
         if self.regex.match(text):
