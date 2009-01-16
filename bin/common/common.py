@@ -392,7 +392,7 @@ is displayed on the second tab.
     xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % escape(message))
 
     details_buffer = gtk.TextBuffer()
-    details_buffer.set_text(unicode(details,'latin1').encode('utf-8'))
+    details_buffer.set_text(details)
     xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
 
     if show_message:
