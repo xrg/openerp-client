@@ -1216,7 +1216,7 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 761
 #: bin/modules/gui/main.py:773
 msgid "Not logged !"
-msgstr "Non connecter !"
+msgstr "Non connecté !"
 
 #
 # File: bin/modules/gui/main.py, line: 833
