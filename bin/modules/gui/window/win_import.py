@@ -161,8 +161,7 @@ class win_import(object):
                 for word in line:
                     word=word.decode(csvcode).encode('utf-8')
                     num = self.model2.append()
-                    self.model2.set(num, 0, self.fields[word], 1,
-                                    self.fields_invert[self.fields[word]])
+                    self.model2.set(num, 0, word, 1, self.fields_invert[word])
                 break
         except:
             common.warning('Error processing your first line of the file.\nField %s is unknown !' % (word,), 'Import Error.')
