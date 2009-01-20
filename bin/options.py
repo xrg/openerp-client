@@ -101,7 +101,7 @@ class configmanager(object):
             'client.lang': False,
             'client.filetype': {},
             'help.index': 'http://www.openerp.com/documentation/user-manual/',
-            'help.context': 'http://www.openerp.com/scripts/context_index.php?model=%(model)s&lang=%(lang)s',
+            'help.context': 'http://doc.openerp.com/index.php?model=%(model)s&lang=%(lang)s',
         }
         loglevels = ('critical', 'error', 'warning', 'info', 'debug', 'debug_rpc', 'notset')
         parser = optparse.OptionParser(version=_("OpenERP Client %s" % openerp_version))
