@@ -308,7 +308,11 @@ class Datetime(GenericDate):
         if not value:
             return ''
 #        date = mx.DateTime.strptime(value, self.server_format).timetuple()
-        date = tools.datetime_util.strptime(value, self.server_format).timetuple()
+        t = tools.datetime_util.strptime(value, self.server_format)
+        if isinstance(t, type(mx.DateTime.now())) and not hasattr(t, 'timetuple'):
+            date = tuple(map(lambda x: int(x), t.tuple()))
+        else:
+            date = tools.datetime_util.strptime(value, self.server_format).timetuple()
         dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
         
         if 'tz' in rpc.session.context and  rpc.session.context['tz']:
