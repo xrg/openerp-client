@@ -200,7 +200,7 @@ class ViewCalendar(object):
 
                 if isinstance(key, (tuple, list)):
                     value, name = key
-                    key = value
+                    key = tuple(key)
 
                 self.colors[key] = (name, value, None)
 
@@ -357,13 +357,13 @@ class ViewCalendar(object):
         
         if not starts:
             return None
-
-        color_key = event.get(self.color_field)[0]
+        
+        color_key = event.get(self.color_field)
+        if isinstance(color_key, list):
+            color_key = tuple(color_key)
         color_info = self.colors.get(color_key)
 
-        color = None
-        if color_info:
-            color = color_info[2]
+        color = color_info and color_info[2] or 'black'
 
         description = ', '.join(description).strip()
         all_day = span > 0
