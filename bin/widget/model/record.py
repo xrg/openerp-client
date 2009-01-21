@@ -89,6 +89,16 @@ class ModelRecord(signal_event.signal_event):
             self.reload()
             return True
         return False
+    
+    def update_context_with_concurrency_check_data(self, context):
+        if self.id and self.is_modified():
+            context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%d" % (self.resource, self.id)] = self._concurrency_check_data
+        for name, field in self.mgroup.mfields.items():
+            if isinstance(field, O2MField):
+                v = self.value[field.name]
+                from itertools import chain
+                for m in chain(v.models, v.models_removed):
+                    m.update_context_with_concurrency_check_data(context)
 
     def get(self, get_readonly=True, includeid=False, check_load=True, get_modifiedonly=False):
         if check_load:
@@ -127,9 +137,8 @@ class ModelRecord(signal_event.signal_event):
             if not self.is_modified():
                 return self.id
             value = self.get(get_readonly=False, get_modifiedonly=True)
-            context= self.context_get()
-            context= context.copy()
-            context.setdefault(CONCURRENCY_CHECK_FIELD, {})[str(self.id)] = self._concurrency_check_data 
+            context = self.context_get().copy()
+            self.update_context_with_concurrency_check_data(context)
             if not self.rpc.write([self.id], value, context):
                 self.failed_validation()
                 return False

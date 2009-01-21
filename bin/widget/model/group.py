@@ -95,7 +95,7 @@ class ModelRecordGroup(signal_event.signal_event):
         self.current_idx = None
 
         self.load(ids)
-        self.model_removed = []
+        self.models_removed = []
         self.on_write = ''
         self.is_wizard = is_wizard
 
@@ -195,7 +195,7 @@ class ModelRecordGroup(signal_event.signal_event):
     
     def clear(self):
         self.models.clear()
-        self.model_removed = []
+        self.models_removed = []
     
     def getContext(self):
         ctx = {}
@@ -275,7 +275,8 @@ class ModelRecordGroup(signal_event.signal_event):
         try:
             idx = self.models.index(model)
             if self.models[idx].id:
-                self.model_removed.append(self.models[idx].id)
+                self.models_removed.append(self.models[idx])
+                self.models[idx].modified = True
             if model.parent:
                 model.parent.modified = True
             self.models.remove(self.models[idx])
@@ -319,7 +320,7 @@ class ModelRecordGroup(signal_event.signal_event):
             ctx.update(rpc.session.context)
             ctx.update(self.context)
 
-            to_add_normal = []
+            to_add_normal = [rpc.CONCURRENCY_CHECK_FIELD]
             to_add_binary = []
             for f in to_add:
                 if fields[f]['type'] in ('image', 'binary'):

@@ -486,7 +486,7 @@ class Screen(signal_event.signal_event):
                 return False
 
             ctx = self.current_model.context_get().copy()
-            ctx.setdefault(rpc.CONCURRENCY_CHECK_FIELD, {})[str(id)] = self.current_model._concurrency_check_data 
+            self.current_model.update_context_with_concurrency_check_data(ctx)
             if unlink and id:
                 if not self.rpc.unlink([id], ctx):
                     return False
@@ -505,7 +505,7 @@ class Screen(signal_event.signal_event):
             ctx = self.models.context.copy()
             for m in self.models:
                 if m.id in ids:
-                    ctx.setdefault(rpc.CONCURRENCY_CHECK_FIELD, {})[str(m.id)] = m._concurrency_check_data
+                    m.update_context_with_concurrency_check_data(ctx)
 
             if unlink and ids:
                 if not self.rpc.unlink(ids, ctx):
