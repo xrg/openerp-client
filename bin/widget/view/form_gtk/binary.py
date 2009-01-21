@@ -70,7 +70,8 @@ class wid_binary(interface.widget_interface):
                     box.pack_end(label, expand=False, fill=False)
                 else:
                     self.set_relief(gtk.RELIEF_NONE)
-                    self.set_property('tooltip-text', title)
+                    if gtk.pygtk_version >= (2, 12, 0):
+                        self.set_property('tooltip-text', title)
 
                 self.add(box)
 
