@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-31 14:42+0100\n"
-"PO-Revision-Date: 2009-01-06 13:16+0000\n"
-"Last-Translator: Harjan Talen <harjantalen@gmail.com>\n"
+"PO-Revision-Date: 2009-01-15 13:18+0000\n"
+"Last-Translator: Elias (Neobis) <elias@neobis.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-09 12:32+0000\n"
+"X-Launchpad-Export-Date: 2009-01-26 16:24+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -144,21 +144,23 @@ msgstr "Kan grafiek niet genereren!"
 #: bin/widget/view/widget_parse.py:53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
-msgstr ""
+msgstr "Het type (%s) wordt niet ondersteund in de GTK client"
 
 #: bin/widget/view/widget_parse.py:63
 msgid "No valid view found for this object!"
-msgstr ""
+msgstr "Geen geldige weergave gevonden voor dit object"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid "Gantt view not yet implemented !"
-msgstr ""
+msgstr "Gannt weergave nog niet geïmplementeerd !"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:32
 msgid ""
 "The gantt view is not available in this GTK Client, you should use the web "
 "interface or switch to the calendar view."
 msgstr ""
+"De Gannt weergave is nog niet beschikbaar voor de GTK client. Gebruik de web-"
+"client of schakel over naar de agenda weergave."
 
 #
 # File: bin/widget/view/tree_gtk/date_renderer.py, line: 200
@@ -453,7 +455,7 @@ msgstr "Minuut:"
 
 #: bin/widget/view/form_gtk/many2one.py:146
 msgid "Open this resource"
-msgstr ""
+msgstr "Openen"
 
 #
 # File: bin/widget/view/form_gtk/many2one.py, line: 160
@@ -626,6 +628,30 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>Er is een onbekende fout is opgetreden. </ b>\n"
+"\n"
+"<b> U beschikt niet over een geldig OpenERP onderhoudscontract! </ b>\n"
+"Als u gebruik maakt van OpenERP in de productie, is het sterk aanbevolen om "
+"u te abonneren\n"
+"op het onderhoudsprogramma.\n"
+"\n"
+"Het Open ERP onderhoudscontract biedt u een bugfix garantie en een\n"
+"automatische migratie-systeem zodat we binnen een paar uur het probleem "
+"kunnen oplossen. \n"
+"Als er een onderhoudscontract zou zijn geweest, dan zou deze fout zijn "
+"verzonden aan \n"
+"het kwaliteitsteam van de OpenERP.\n"
+"\n"
+"Het onderhoud programma biedt u:\n"
+"* Automatische migraties naar nieuwe versies,\n"
+"* Een bugfix garantie,\n"
+"* Maandelijkse meldingen van mogelijke fouten en correcties,\n"
+"* Security alerts per e-mail en automatische migratie,\n"
+"* Toegang tot het klant portaal.\n"
+"\n"
+"Voor meer informatie kunt u gebruik maken van de onderstaande link. \n"
+"Het detail van de fout wordt weergegeven op het tweede tabblad.\n"
 
 #: bin/common/common.py:339
 #, python-format
@@ -651,12 +677,32 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Er is een onbekende fout is opgetreden. </ b>\n"
+"\n"
+"Het afgesloten onderhoudscontract beslaat niet alle geïnstaleerde modules !\n"
+"Als deze OpenERP installatie in een productie omgeving wordt grbruikt, is "
+"het \n"
+"sterk aan te raden het onderhoudscontract uit te breiden.\n"
+"\n"
+"Als zich eigengemaakte modules in het systeem bevinden is het mogelijk \n"
+"om een uitgebreid onderhoudsconract af te sluiten. Nadat de modules zijn "
+"beordeeld\n"
+"door het qualiteitsteam wordt er een garantie af gegeven dat de modules "
+"automatisch \n"
+"worden gemigreerd naar nieuwe OpenERP versies. (Zonder extra kosten!) \n"
+"\n"
+"Hier volgt de lijst met modules die niet onder het contract vallen:\n"
+"%s\n"
+"\n"
+"Voor meer informatie kunt u gebruik maken van de onderstaande link. \n"
+"Het detail van de fout wordt weergegeven op het tweede tabblad."
 
 #: bin/common/common.py:390
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
-msgstr ""
+msgstr "Het probleem is verzonden aan het kwaliteitsteam !"
 
 #: bin/common/common.py:392
 #, python-format
@@ -664,6 +710,8 @@ msgid ""
 "Your problem could <u>NOT</u> be sent to the quality team !\n"
 "Please report this error manually at %s"
 msgstr ""
+"Het probleem kon <u>NIET</u> worden verzonden aan het kwaliteitsteam !\n"
+"Graag handmatig rapporteren aan %s"
 
 #
 # File: bin/common/common.py, line: 499
@@ -1122,6 +1170,8 @@ msgstr "Database kan niet worden teruggezet."
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
 msgstr ""
+"Het bevestigde wachtwoord komt niet overeen met het nieuwe wachtwoord.\n"
+"Operatie beëindigd!"
 
 #
 # File: bin/modules/gui/main.py, line: 1116
@@ -1131,11 +1181,11 @@ msgstr "Toegangsfout"
 
 #: bin/modules/gui/main.py:1124
 msgid "Could not change the Super Admin password."
-msgstr ""
+msgstr "Super Admin wachtwoord wijzigen niet mogelijk."
 
 #: bin/modules/gui/main.py:1125
 msgid "Bad password provided !"
-msgstr ""
+msgstr "Incorrect wachtwoord in gegeven."
 
 #
 # File: bin/modules/gui/main.py, line: 1127
@@ -1154,11 +1204,11 @@ msgstr "Backup een database"
 
 #: bin/modules/gui/main.py:1146
 msgid "Database backed up successfully !"
-msgstr ""
+msgstr "Backup database succesvol !"
 
 #: bin/modules/gui/main.py:1149
 msgid "Could not backup the database."
-msgstr ""
+msgstr "Backup maken onmogelijk"
 
 #
 # File: bin/modules/gui/main.py, line: 1132
@@ -2203,12 +2253,9 @@ msgstr "Snelkoppelingen"
 msgid "OpenERP - Forms"
 msgstr "OpenERP formulieren"
 
-#
-# File: bin/openerp.glade, line: 1718
-# File: bin/openerp.glade, line: 1718
 #: bin/openerp.glade:1734
 msgid "State:"
-msgstr "Status:"
+msgstr "Staat:"
 
 #
 # File: bin/openerp.glade, line: 1766
@@ -2301,7 +2348,7 @@ msgstr "_Contact"
 
 #: bin/openerp.glade:1958
 msgid "Open ERP - Forms widget"
-msgstr ""
+msgstr "OpenERP - Formulier widget"
 
 #
 # File: bin/openerp.glade, line: 2137
@@ -3462,15 +3509,15 @@ msgstr "Maand"
 
 #: bin/win_error.glade:40
 msgid "label"
-msgstr ""
+msgstr "label"
 
 #: bin/win_error.glade:102
 msgid "Click here for details about the maintenance proposition"
-msgstr ""
+msgstr "Hier klikken voor de details over het onderhoudsvoorstel"
 
 #: bin/win_error.glade:119
 msgid "<i>_Maintenance</i>"
-msgstr ""
+msgstr "<i>_Onderhoud</i>"
 
 #
 # File: bin/win_error.glade, line: 150
@@ -3514,19 +3561,19 @@ msgstr "Verzend naar het ondersteuningsteam"
 
 #: bin/win_error.glade:326
 msgid "<i>_Support Request</i>"
-msgstr ""
+msgstr "<i>_Ondersteuningsverzoek</i>"
 
 #: bin/win_error.glade:353
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: bin/win_error.glade:369
 msgid "<i>_Details</i>"
-msgstr ""
+msgstr "<i>_Details</i>"
 
 #: bin/win_error.glade:398
 msgid "gtk-close"
-msgstr ""
+msgstr "gtk-afsluiten"
 
 #
 #~ msgid "Gantt View Error !"

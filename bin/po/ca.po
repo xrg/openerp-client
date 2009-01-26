@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-31 14:42+0100\n"
-"PO-Revision-Date: 2009-01-06 00:53+0000\n"
+"PO-Revision-Date: 2009-01-23 18:28+0000\n"
 "Last-Translator: Jordi Esteve <jesteve@zikzakmedia.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-09 12:32+0000\n"
+"X-Launchpad-Export-Date: 2009-01-26 16:24+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -1037,16 +1037,13 @@ msgstr "Contrasenya de l'administrador de la base de dades incorrecta!"
 msgid "Error during database creation !"
 msgstr "Error durant la creació de la base de dades!"
 
-#
-# File: bin/modules/gui/main.py, line: 370
-# File: bin/modules/gui/main.py, line: 370
 #: bin/modules/gui/main.py:383
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
 "El servidor ha fallat durant l'instal·lació.\n"
-"Li recomanem eliminar la base de dades."
+"Us recomanem que elimineu la base de dades."
 
 #
 # File: bin/modules/gui/main.py, line: 388
@@ -1677,21 +1674,10 @@ msgstr "OpenERP - Entrada"
 msgid "Server:"
 msgstr "Servidor:"
 
-#
-# File: bin/openerp.glade, line: 100
-# File: bin/openerp.glade, line: 8527
-# File: bin/openerp.glade, line: 8770
-# File: bin/openerp.glade, line: 9067
-# File: bin/openerp.glade, line: 9415
-# File: bin/openerp.glade, line: 100
-# File: bin/openerp.glade, line: 8527
-# File: bin/openerp.glade, line: 8770
-# File: bin/openerp.glade, line: 9067
-# File: bin/openerp.glade, line: 9415
 #: bin/openerp.glade:100 bin/openerp.glade:7398 bin/openerp.glade:7641
 #: bin/openerp.glade:7938 bin/openerp.glade:8286
 msgid "Change"
-msgstr "Canvi"
+msgstr "Canvia"
 
 #
 # File: bin/openerp.glade, line: 118
@@ -2374,9 +2360,6 @@ msgstr ""
 "<b>Sobre OpenERP</b>\n"
 "<i>L'ERP i CRM de codi obert més avançat!</i>"
 
-#
-# File: bin/openerp.glade, line: 1803
-# File: bin/openerp.glade, line: 1803
 #: bin/openerp.glade:1819
 msgid ""
 "\n"
@@ -2403,7 +2386,9 @@ msgstr ""
 "\n"
 "(c) 2003-AVUI, Tiny sprl\n"
 "\n"
-"Més informació a www.openerp.com!"
+"Més informació a www.openerp.com\n"
+"i\n"
+"www.openerp.cat"
 
 #
 # File: bin/openerp.glade, line: 1831

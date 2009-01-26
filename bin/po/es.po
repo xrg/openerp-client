@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-31 14:42+0100\n"
-"PO-Revision-Date: 2009-01-06 13:16+0000\n"
-"Last-Translator: Jordi Esteve <jesteve@zikzakmedia.com>\n"
+"PO-Revision-Date: 2009-01-25 19:08+0000\n"
+"Last-Translator: Paco Molinero <paco@byasl.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-09 12:32+0000\n"
+"X-Launchpad-Export-Date: 2009-01-26 16:24+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -177,13 +177,9 @@ msgstr "Sí"
 msgid "No"
 msgstr "No"
 
-#
-# File: bin/widget/view/graph_gtk/parser.py, line: 65
-# File: bin/widget/view/graph_gtk/parser.py, line: 65
-# File: bin/widget/view/graph_gtk/parser.py, line: 65
 #: bin/widget/view/graph_gtk/parser.py:65
 msgid "Can not generate graph !"
-msgstr "¡No se puede generar gráfico!"
+msgstr "¡No se puede generar el gráfico!"
 
 #: bin/widget/view/widget_parse.py:53
 #, python-format
@@ -276,24 +272,11 @@ msgstr "¡Debe seleccionar un registro para usar este botón!"
 msgid "No other language available!"
 msgstr "¡No hay otro idioma disponible!"
 
-#
-# File: bin/widget/view/form.py, line: 190
-# File: bin/widget/view/form_gtk/parser.py, line: 549
-# File: bin/widget/view/form_gtk/parser.py, line: 653
-# File: bin/widget/view/form_gtk/parser.py, line: 710
-# File: bin/widget/view/form.py, line: 190
-# File: bin/widget/view/form_gtk/parser.py, line: 549
-# File: bin/widget/view/form_gtk/parser.py, line: 653
-# File: bin/widget/view/form_gtk/parser.py, line: 710
-# File: bin/widget/view/form.py, line: 190
-# File: bin/widget/view/form_gtk/parser.py, line: 549
-# File: bin/widget/view/form_gtk/parser.py, line: 653
-# File: bin/widget/view/form_gtk/parser.py, line: 710
 #: bin/widget/view/form.py:207 bin/widget/view/form_gtk/parser.py:555
 #: bin/widget/view/form_gtk/parser.py:659
 #: bin/widget/view/form_gtk/parser.py:716
 msgid "Add Translation"
-msgstr "Agregar Traduccion"
+msgstr "Añadir traducción"
 
 #
 # File: bin/widget/view/form.py, line: 241
@@ -325,25 +308,14 @@ msgstr "Crear un nuevo registro"
 msgid "Search / Open a resource"
 msgstr "Buscar / Abrir un registro"
 
-#
-# File: bin/widget/view/form_gtk/interface.py, line: 47
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 148
-# File: bin/widget/view/form_gtk/interface.py, line: 47
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 148
-# File: bin/widget/view/form_gtk/interface.py, line: 47
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 148
 #: bin/widget/view/form_gtk/interface.py:47
 #: bin/widget/view/form_gtk/one2many_list.py:148
 msgid "Set to default value"
-msgstr "Fijar valor Predeterminado"
+msgstr "Ajustar el valor predeterminado"
 
-#
-# File: bin/widget/view/form_gtk/interface.py, line: 48
-# File: bin/widget/view/form_gtk/interface.py, line: 48
-# File: bin/widget/view/form_gtk/interface.py, line: 48
 #: bin/widget/view/form_gtk/interface.py:48
 msgid "Set as default"
-msgstr "Fijar como Predeterminado"
+msgstr "Definir como predeterminado"
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 61
@@ -380,35 +352,17 @@ msgstr "¡Debe guardar el registro antes de añadir las traducciones!"
 msgid "Translate view"
 msgstr "Traducir vista"
 
-#
-# File: bin/widget/view/form_gtk/image.py, line: 70
-# File: bin/widget/view/form_gtk/image.py, line: 70
-# File: bin/widget/view/form_gtk/image.py, line: 70
 #: bin/widget/view/form_gtk/image.py:70
 msgid "Set Image"
-msgstr "Establecer Imagen"
+msgstr "Establecer imagen"
 
-#
-# File: bin/widget/view/form_gtk/binary.py, line: 85
-# File: bin/widget/view/form_gtk/image.py, line: 79
-# File: bin/widget/view/form_gtk/binary.py, line: 85
-# File: bin/widget/view/form_gtk/image.py, line: 79
-# File: bin/widget/view/form_gtk/binary.py, line: 85
-# File: bin/widget/view/form_gtk/image.py, line: 79
 #: bin/widget/view/form_gtk/image.py:79 bin/widget/view/form_gtk/binary.py:85
 msgid "Save As"
-msgstr "Guardar Como"
+msgstr "Guardar como"
 
-#
-# File: bin/widget/view/form_gtk/binary.py, line: 89
-# File: bin/widget/view/form_gtk/image.py, line: 88
-# File: bin/widget/view/form_gtk/binary.py, line: 89
-# File: bin/widget/view/form_gtk/image.py, line: 88
-# File: bin/widget/view/form_gtk/binary.py, line: 89
-# File: bin/widget/view/form_gtk/image.py, line: 88
 #: bin/widget/view/form_gtk/image.py:88 bin/widget/view/form_gtk/binary.py:89
 msgid "Clear"
-msgstr "Vaciar"
+msgstr "Limpiar"
 
 #
 # File: bin/widget/view/form_gtk/image.py, line: 100
@@ -572,13 +526,9 @@ msgstr "Minuto:"
 msgid "Open this resource"
 msgstr "Abrir este recurso"
 
-#
-#
-#
-# File: bin/widget/view/form_gtk/many2one.py, line: 160
 #: bin/widget/view/form_gtk/many2one.py:160
 msgid "Search a resource"
-msgstr "Busca un registro"
+msgstr "Buscar un registro"
 
 #
 # File: bin/widget/view/form_gtk/many2one.py, line: 168
@@ -1065,9 +1015,16 @@ msgstr "especifica IP/nombre del servidor"
 msgid "Unknown"
 msgstr "Desconocido"
 
+#
+# File: bin/modules/gui/main.py, line: 145
+# File: bin/modules/gui/main.py, line: 1138
+# File: bin/modules/gui/main.py, line: 145
+# File: bin/modules/gui/main.py, line: 1138
+# File: bin/modules/gui/main.py, line: 145
+# File: bin/modules/gui/main.py, line: 1138
 #: bin/modules/gui/main.py:158 bin/modules/gui/main.py:1157
 msgid "Could not connect to server !"
-msgstr "¡No se ha podido conectar con el servidor!"
+msgstr "¡No se puede conectar al servidor!"
 
 #
 # File: bin/modules/gui/main.py, line: 152
@@ -1154,10 +1111,20 @@ msgstr ""
 "Por favor espere,\n"
 "esta operación puede tardar un rato..."
 
+#
+# File: bin/modules/gui/main.py, line: 359
+# File: bin/modules/gui/main.py, line: 361
+# File: bin/modules/gui/main.py, line: 363
+# File: bin/modules/gui/main.py, line: 359
+# File: bin/modules/gui/main.py, line: 361
+# File: bin/modules/gui/main.py, line: 363
+# File: bin/modules/gui/main.py, line: 359
+# File: bin/modules/gui/main.py, line: 361
+# File: bin/modules/gui/main.py, line: 363
 #: bin/modules/gui/main.py:372 bin/modules/gui/main.py:374
 #: bin/modules/gui/main.py:376
 msgid "Could not create database."
-msgstr "No se ha podido crear la base de datos."
+msgstr "No se pudo crear la base de datos."
 
 #
 # File: bin/modules/gui/main.py, line: 359
@@ -1358,11 +1325,11 @@ msgstr "¡Base de datos eliminada!"
 
 #: bin/modules/gui/main.py:1060
 msgid "Could not drop database."
-msgstr "No se ha podido eliminar la base de datos."
+msgstr "No se pudo eliminar la base de datos."
 
 #: bin/modules/gui/main.py:1062
 msgid "Couldn't drop database"
-msgstr "No se ha podido eliminar la base de datos"
+msgstr "No se pudo eliminar la base de datos."
 
 #
 # File: bin/modules/gui/main.py, line: 1060
@@ -1374,11 +1341,11 @@ msgstr "¡Base de datos restaurada satisfactoriamente!"
 
 #: bin/modules/gui/main.py:1079
 msgid "Could not restore database."
-msgstr "No se ha podido restaurar la base de datos."
+msgstr "No se pudo restaurar la base de datos."
 
 #: bin/modules/gui/main.py:1081
 msgid "Couldn't restore database"
-msgstr "No se ha podido restaurar la base de datos"
+msgstr "No se pudo restaurar la base de datos."
 
 #: bin/modules/gui/main.py:1114
 msgid ""
@@ -3301,6 +3268,10 @@ msgstr "Su Empresa:"
 msgid "<b>Keep Informed</b>"
 msgstr "<b>Mantenerse informado</b>"
 
+#
+# File: bin/openerp.glade, line: 6398
+# File: bin/openerp.glade, line: 6398
+# File: bin/openerp.glade, line: 6398
 #: bin/openerp.glade:5269
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
@@ -3312,7 +3283,7 @@ msgstr ""
 "<b>Complete este formulario para enviar el informe de error y/o una "
 "solicitud de soporte.</b>\n"
 "<i>\n"
-"Su solicitud será enviada a OpenERP y será respondida lo más pronto "
+"Su solicitud será enviada a OpenERP y será contestada lo más pronto "
 "posible.\n"
 "Tenga en cuenta que es posible que no obtenga respuesta si su empresa no "
 "tiene un contrato de soporte con Tiny o con un socio oficial.</i>"
@@ -4327,8 +4298,6 @@ msgstr "Clicar aquí para detalles sobre la propuesta de mantenimiento"
 msgid "<i>_Maintenance</i>"
 msgstr "<i>_Mantenimiento</i>"
 
-#
-# File: bin/win_error.glade, line: 150
 #: bin/win_error.glade:150
 msgid ""
 "<b>Maintenance Contract.</b>\n"
@@ -4339,8 +4308,8 @@ msgid ""
 msgstr ""
 "<b>Contrato de mantenimiento.</b>\n"
 "<i>\n"
-"Su solicitud será enviada a OpenERP y un equipo de mantenimiento le "
-"contestará en poco tiempo.\n"
+"Su solicitud será enviada a OpenERP y el equipo de mantenimiento le "
+"responderá en poco tiempo.\n"
 "</i>"
 
 #

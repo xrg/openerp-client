@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: openerp-client-de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-31 14:42+0100\n"
-"PO-Revision-Date: 2008-12-17 00:11+0000\n"
+"PO-Revision-Date: 2009-01-25 20:41+0000\n"
 "Last-Translator: Ferdinand Gassauer <Unknown>\n"
 "Language-Team: Deutsch\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-09 12:32+0000\n"
+"X-Launchpad-Export-Date: 2009-01-26 16:24+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -175,21 +175,23 @@ msgstr "Kann keinen Graph erzeugen"
 #: bin/widget/view/widget_parse.py:53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
-msgstr ""
+msgstr "Dieser Typ (%s) wird von der GTK Anwendung nicht unterstützt."
 
 #: bin/widget/view/widget_parse.py:63
 msgid "No valid view found for this object!"
-msgstr ""
+msgstr "Keine gültige Sicht für dieses Objekt vorhanden."
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid "Gantt view not yet implemented !"
-msgstr ""
+msgstr "Gantt Ansicht ist noch nicht programmiert."
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:32
 msgid ""
 "The gantt view is not available in this GTK Client, you should use the web "
 "interface or switch to the calendar view."
 msgstr ""
+"Die Gantt Ansicht ist noch nicht programmiert. Sie können die Web-Anwendunge "
+"oder die Kalenderansicht verwenden."
 
 #: bin/widget/view/tree_gtk/date_renderer.py:200
 msgid ""
@@ -509,11 +511,11 @@ msgstr "Minute:"
 
 #: bin/widget/view/form_gtk/many2one.py:146
 msgid "Open this resource"
-msgstr ""
+msgstr "Öffnen dieses Datensatzes"
 
 #: bin/widget/view/form_gtk/many2one.py:160
 msgid "Search a resource"
-msgstr ""
+msgstr "Suchen eines Datensatzes"
 
 #
 # File: bin/widget/view/form_gtk/many2one.py, line: 168
@@ -686,6 +688,30 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>Ein unbekannter Fehler wurde gefunden</b>\n"
+"\n"
+"<b>Sie haben keinen gültigen OpenERP Wartungsvertrag</b>\n"
+"\n"
+"Wenn Sie OpenERP in einem Produktionssystem verwenden sollten Sie einen "
+"Wartungsvertrag abschliessen.\n"
+"\n"
+"Der OpenERP Wartungsvertrag beinhaltet eine Garantie zur Fehlerbehebung und "
+"ein \n"
+"automatisches Migrationssystem, so dass wir Ihre Probleme innerhalb weniger "
+"Stunden beheben können.\n"
+"Wenn Sie einen Wartungsvertrag hätten, wäre dieser Fehler an das "
+"Qualitätsicherungsteam gesandt worden.\n"
+"\n"
+"Der Wartungsvertrag beietet:\n"
+"* automatische Migration auf neue Versionen\n"
+"* Garantie der Fehlerbehebung\n"
+"* monatliche Mitteilung möglicher Fehler und deren Behebung\n"
+"* Sicherheitsrelevante Warnungen per EMail und automatische Migration.\n"
+"* Zugang zum Kundenportal\n"
+"\n"
+"Sie können den unten stehenden Link für weitere Information verwenden.\n"
+"Die Einzelheiten des Fehlers werden auf dem 2. Reiter angezeigt.\n"
 
 #: bin/common/common.py:339
 #, python-format
@@ -711,12 +737,34 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Ein ungekannter Fehler wurde gemeldet</b>\n"
+"\n"
+"Ihr Wartungsvertrag beinhaltet nicht alle auf Ihrem System installierten "
+"Module.\n"
+" Wenn Sie OpenERP in einem Produktionssystem verwenden sollten Sie Ihren "
+"Wartungsvertrag erweitern.\n"
+" \n"
+" Wenn Sie Ihre eigenen oder andere fremde Module installiert haben, \n"
+" können wir Ihnen einen erweiterten Wartungsvertrag anbieten.\n"
+" Nach Überprüfung Ihrer Module wird unser Wartungsteam sicher stellen, dass "
+"Sie \n"
+" ohne weitere Kosten auf alle zukünftigen stabilen Versionen von OpenERP "
+"migrieren können.\n"
+" \n"
+" Hier ist eine Liste der Module, die NICHT duch den Wartungsvertrag gedeckt "
+"sind.\n"
+"%s\n"
+"Sie können den unten stehenden Link für weitere Information verwenden.\n"
+"Die Einzelheiten des Fehlers werden auf dem 2. Reiter angezeigt."
 
 #: bin/common/common.py:390
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
+"Ihr Problem wurde an das Qualitätssciherungs Team geschickt!\n"
+"Wir werden Sie nach der Analyse kontaktieren."
 
 #: bin/common/common.py:392
 #, python-format
@@ -724,6 +772,9 @@ msgid ""
 "Your problem could <u>NOT</u> be sent to the quality team !\n"
 "Please report this error manually at %s"
 msgstr ""
+"Ihr Problem konnte <u>NICHT</u> an das Qualitätssicherungs Team geschickt "
+"werden !\n"
+"Bitte berichten sie manuell hier %s"
 
 #
 # File: bin/common/common.py, line: 499
@@ -1250,6 +1301,7 @@ msgstr "Kann Datebank nicht wiederherstellen."
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
 msgstr ""
+"Die Kennwort Bestätigung entspricht nicht dem neuen Kennwort, Abbruch!."
 
 #
 # File: bin/modules/gui/main.py, line: 1100
@@ -1261,11 +1313,11 @@ msgstr "Fehler beim Überprüfen"
 
 #: bin/modules/gui/main.py:1124
 msgid "Could not change the Super Admin password."
-msgstr ""
+msgstr "Konnte das Super Administrator Kennwort nicht ändern"
 
 #: bin/modules/gui/main.py:1125
 msgid "Bad password provided !"
-msgstr ""
+msgstr "Falsches Kennwort eingegeben!"
 
 #
 # File: bin/modules/gui/main.py, line: 1111
@@ -1288,11 +1340,11 @@ msgstr "Datenbank sichern"
 
 #: bin/modules/gui/main.py:1146
 msgid "Database backed up successfully !"
-msgstr ""
+msgstr "Datanbank erfolgreich gesichert"
 
 #: bin/modules/gui/main.py:1149
 msgid "Could not backup the database."
-msgstr ""
+msgstr "Konnte Datenbank nicht sichern."
 
 #
 # File: bin/modules/gui/main.py, line: 1132
@@ -2467,7 +2519,7 @@ msgstr "Neu laden"
 
 #: bin/openerp.glade:1420
 msgid "Close this window"
-msgstr ""
+msgstr "Dieses Fenster schließen"
 
 #
 # File: bin/openerp.glade, line: 1448
@@ -2509,13 +2561,9 @@ msgstr "Kurzbefehle"
 msgid "OpenERP - Forms"
 msgstr "OpenERP - Form"
 
-#
-# File: bin/openerp.glade, line: 1718
-# File: bin/openerp.glade, line: 1718
-# File: bin/openerp.glade, line: 1718
 #: bin/openerp.glade:1734
 msgid "State:"
-msgstr "Bundesland/-staat:"
+msgstr "Status"
 
 #: bin/openerp.glade:1766
 msgid "OpenERP - About"
@@ -2625,7 +2673,7 @@ msgstr "Hallo Welt!"
 
 #: bin/openerp.glade:2214
 msgid "OpenERP - Selection"
-msgstr "Kleiner ERP - Datumsauswahl"
+msgstr "OpenERP - Auswahl"
 
 #
 # File: bin/openerp.glade, line: 2212
@@ -3947,15 +3995,15 @@ msgstr "Monat"
 
 #: bin/win_error.glade:40
 msgid "label"
-msgstr ""
+msgstr "Label"
 
 #: bin/win_error.glade:102
 msgid "Click here for details about the maintenance proposition"
-msgstr ""
+msgstr "Klicken Sie hier für weitere Vorschläge für Wartungsverträge"
 
 #: bin/win_error.glade:119
 msgid "<i>_Maintenance</i>"
-msgstr ""
+msgstr "<i>_Wartung</i>"
 
 #: bin/win_error.glade:150
 msgid ""
@@ -3999,16 +4047,16 @@ msgstr "Senden and das Service Team"
 
 #: bin/win_error.glade:326
 msgid "<i>_Support Request</i>"
-msgstr ""
+msgstr "<i>_Anfrage</i>"
 
 #: bin/win_error.glade:353
 msgid "Details"
-msgstr ""
+msgstr "Einzelheiten"
 
 #: bin/win_error.glade:369
 msgid "<i>_Details</i>"
-msgstr ""
+msgstr "<i>_Einzelheiten</i>"
 
 #: bin/win_error.glade:398
 msgid "gtk-close"
-msgstr ""
+msgstr "Schließen"

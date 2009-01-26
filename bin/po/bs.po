@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-31 14:42+0100\n"
-"PO-Revision-Date: 2009-01-06 13:21+0000\n"
-"Last-Translator: Fabien (Open ERP) <Unknown>\n"
+"PO-Revision-Date: 2009-01-20 07:49+0000\n"
+"Last-Translator: josip_c <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-09 12:32+0000\n"
+"X-Launchpad-Export-Date: 2009-01-26 16:24+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -160,21 +160,23 @@ msgstr "Ne možete kreirati grafikon !"
 #: bin/widget/view/widget_parse.py:53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
-msgstr ""
+msgstr "Ovaj tip (%s) nije podržan od strane GTK klijenta!"
 
 #: bin/widget/view/widget_parse.py:63
 msgid "No valid view found for this object!"
-msgstr ""
+msgstr "Nije nađen ispravan prikaz za ovaj objekt!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid "Gantt view not yet implemented !"
-msgstr ""
+msgstr "Gantt prikaz još nije implementiran!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:32
 msgid ""
 "The gantt view is not available in this GTK Client, you should use the web "
 "interface or switch to the calendar view."
 msgstr ""
+"Gantt prikaz nije dostupan u ovom GTK klijentu, koristite web pristup ili "
+"prebacite na kalendarski prikaz."
 
 #
 # File: bin/widget/view/tree_gtk/date_renderer.py, line: 200
@@ -470,7 +472,7 @@ msgstr "Minuta:"
 
 #: bin/widget/view/form_gtk/many2one.py:146
 msgid "Open this resource"
-msgstr ""
+msgstr "Otvori ovaj resurs"
 
 #
 #
@@ -647,6 +649,28 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>Nepoznata greška je prijavljena.</b>\n"
+"\n"
+"<b>Nemate validan Open ERP ugovor o održavanju !</b>\n"
+"Ako koristite Open ERP u proizvodnji, preporučljivo je da se prijavite\n"
+"za program održavanja.\n"
+"\n"
+"Open ERP ugovor o održavanju vam pruža garanciju o ispravljanju greški i\n"
+"automatski sistem prelaska tako da možemo popraviti vaš problem u roku od "
+"nekoliko\n"
+"sati. Da ste imali ugovor o održavanju, ova greška bi bila poslana\n"
+"timu za kvalitet Open ERP uređivača.\n"
+"\n"
+"Program održavanja vam nudi:\n"
+"* Automatski prijelaz na nove verzije,\n"
+"* Garanciju ispravljanja greški,\n"
+"* Mjesečnu objavu mogućih greški i njihovih ispravki,\n"
+"* Sigurnosna upozorenja putem emaila i automatski prelazak,\n"
+"* Pristup korisničkom portalu.\n"
+"\n"
+"Više informacija možete naći na linku datom ispod. Detalji greške\n"
+"su prikazani na drugoj kartici.\n"
 
 #: bin/common/common.py:339
 #, python-format
@@ -672,12 +696,32 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Nepoznata greška je prijavljena.</b>\n"
+"\n"
+"Vaš ugovor o održavanju ne pokriva sve module instalirane na vaš sistem !\n"
+"Ako koristite Open ERP u proizvodnji, preporučljivo je da nadogradite vaš\n"
+"ugovor.\n"
+"\n"
+"Ako ste razvili vaš sopstveni modul ili instalirali module treće strane, mi\n"
+"možemo pružiti dodatni ugovor o održavanju za te module. Poslije\n"
+"pregleda vaših modula, naš tim za kvalitet će osigurati da njihov prelazak "
+"bude\n"
+"automatski za sve buduće stabilne verzije Open ERP-a bez dodatnih plaćanja.\n"
+"\n"
+"Ovo je lista modula koji nisu pokriveni vašim ugovorom o održavanju:\n"
+"%s\n"
+"\n"
+"Više informacija možete naći na linku datom ispod. Detalji o grešci\n"
+"su prikazani na drugoj kartici."
 
 #: bin/common/common.py:390
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
+"Vaš problem je poslat timu za kvalitet !\n"
+"Kontaktiračemo vas poslije analize problema."
 
 #: bin/common/common.py:392
 #, python-format
@@ -685,6 +729,8 @@ msgid ""
 "Your problem could <u>NOT</u> be sent to the quality team !\n"
 "Please report this error manually at %s"
 msgstr ""
+"Vaš problem <u>NEMOŽE</u> biti poslat timu za kvalitet !\n"
+"Molmo prijavite ovu grešku ručno na %s"
 
 #
 # File: bin/common/common.py, line: 499
@@ -1151,7 +1197,7 @@ msgstr "Nemogu obnoviti bazu podataka"
 #: bin/modules/gui/main.py:1114
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr ""
+msgstr "Potvrdna šifra ne odgovara novoj šifri, operacija je otkazana!"
 
 #
 # File: bin/modules/gui/main.py, line: 1100
@@ -1162,11 +1208,11 @@ msgstr "Greška kod provjere."
 
 #: bin/modules/gui/main.py:1124
 msgid "Could not change the Super Admin password."
-msgstr ""
+msgstr "Nemogu promjeniti šifru Super Admin-a"
 
 #: bin/modules/gui/main.py:1125
 msgid "Bad password provided !"
-msgstr ""
+msgstr "Unijeta neispravna šifra !"
 
 #
 # File: bin/modules/gui/main.py, line: 1111
@@ -1186,11 +1232,11 @@ msgstr "Sigurnosna kopija baze podataka"
 
 #: bin/modules/gui/main.py:1146
 msgid "Database backed up successfully !"
-msgstr ""
+msgstr "Sigurnosna kopija baze podataka je napravljena uspješno !"
 
 #: bin/modules/gui/main.py:1149
 msgid "Could not backup the database."
-msgstr ""
+msgstr "Nemogu napraviti sigurnosnu kopiju baze podataka."
 
 #
 # File: bin/modules/gui/main.py, line: 1132
@@ -1413,13 +1459,16 @@ msgstr "Zadnju izmjenu izvršio"
 msgid "Latest Modification Date"
 msgstr "Datum zadnje izmjene"
 
+#
+# File: bin/modules/gui/window/form.py, line: 230
+# File: bin/modules/gui/window/form.py, line: 230
 #: bin/modules/gui/window/form.py:230
 msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
 msgstr ""
 "Zapis nije snimljen ! \n"
-" Želiš li da očistiš trenutni zapis ?"
+" Želiš li da obrišeš trenutni zapis ?"
 
 #
 # File: bin/modules/gui/window/form.py, line: 233
@@ -2381,7 +2430,7 @@ msgstr "_Kontakt"
 
 #: bin/openerp.glade:1958
 msgid "Open ERP - Forms widget"
-msgstr ""
+msgstr "Open ERP - widgeti obrazaca"
 
 #
 # File: bin/openerp.glade, line: 2137
@@ -3661,15 +3710,15 @@ msgstr "Mjesec"
 
 #: bin/win_error.glade:40
 msgid "label"
-msgstr ""
+msgstr "oznaka"
 
 #: bin/win_error.glade:102
 msgid "Click here for details about the maintenance proposition"
-msgstr ""
+msgstr "Kliknite ovdje za detalje o prijedlogu održavanja"
 
 #: bin/win_error.glade:119
 msgid "<i>_Maintenance</i>"
-msgstr ""
+msgstr "<i>_Održavanje</i>"
 
 #
 # File: bin/win_error.glade, line: 150
@@ -3713,19 +3762,19 @@ msgstr "Pošalji timu za održavanje"
 
 #: bin/win_error.glade:326
 msgid "<i>_Support Request</i>"
-msgstr ""
+msgstr "<i>_Zahtjev za podršku</i>"
 
 #: bin/win_error.glade:353
 msgid "Details"
-msgstr ""
+msgstr "Detalji"
 
 #: bin/win_error.glade:369
 msgid "<i>_Details</i>"
-msgstr ""
+msgstr "<i>_Detalji</i>"
 
 #: bin/win_error.glade:398
 msgid "gtk-close"
-msgstr ""
+msgstr "gtk-zatvori"
 
 #
 #~ msgid "Gantt View Error !"
