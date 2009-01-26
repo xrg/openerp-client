@@ -13,11 +13,8 @@ clean:
 translate_get:
 	xgettext -k_ -kN_ -o bin/po/$(APP).pot $(PYTHON_FILES) bin/openerp.glade bin/win_error.glade bin/dia_survey.glade
 
-translate_set2:
-	for i in $(LANG); do msgfmt bin/po/$$i.po -o bin/share/locale/$$i/LC_MESSAGES/$(APP).mo; done;
-
 translate_set:
-	for i in $(LANGS); do msgfmt bin/po/$$i.po -o bin/po/$$i/LC_MESSAGES/$(APP).mo; done;
+	for i in $(LANG); do msgfmt bin/po/$$i.po -o bin/share/locale/$$i/LC_MESSAGES/$(APP).mo; done;
 
 merge:
 	for i in $(LANGS); do msgmerge bin/po/$$i.po bin/po/$(APP).pot -o bin/po/$$i.po --strict; done;
