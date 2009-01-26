@@ -93,10 +93,13 @@ class dialog(object):
             self.dia.destroy()
             return False
 
-def execute(action, datas, state='init', parent=None, context={}):
+def execute(action, datas, state='init', parent=None, context=None):
+    if context is None:
+        context = {}
     if not 'form' in datas:
         datas['form'] = {}
     wiz_id = rpc.session.rpc_exec_auth('/wizard', 'create', action)
+
     while state!='end':
         class wizard_progress(object):
             def __init__(self, parent=None):
@@ -107,8 +110,8 @@ def execute(action, datas, state='init', parent=None, context={}):
 
             def run(self):
                 def go(wiz_id, datas, state):
-                    ctx = rpc.session.context.copy()
-                    ctx.update(context)
+                    ctx = context.copy()
+                    ctx.update(rpc.session.context)
                     try:
                         self.res = rpc.session.rpc_exec_auth_try('/wizard', 'execute', wiz_id, datas, state, ctx)
                     except Exception, e:
