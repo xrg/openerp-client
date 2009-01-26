@@ -231,7 +231,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
                 entry.set_active_text(newval)
             entry.editing_done_id = entry.connect('editing_done', self.on_editing_done)
             self.set_cursor(path, column, True)
-            return False
+            return True
         else:
             modelfield = model[column.name]
             if isinstance(entry, gtk.Entry):
