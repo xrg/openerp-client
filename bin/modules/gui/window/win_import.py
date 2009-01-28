@@ -163,6 +163,8 @@ class win_import(object):
                     if word in self.fields_invert:
                         num = self.model2.append()
                         self.model2.set(num, 0, word, 1, self.fields_invert[word])
+                    else:
+                        raise Exception(_("You cannot import this field %s, because we cannot auto-detect it"))
                 break
         except:
             common.warning('Error processing your first line of the file.\nField %s is unknown !' % (word,), 'Import Error.')
