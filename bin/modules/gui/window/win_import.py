@@ -159,7 +159,9 @@ class win_import(object):
         try:
             for line in data:
                 for word in line:
-                    word=word.decode(csvcode).encode('utf-8')
+                    word = word.decode(csvcode)
+                    if not csvcode.lower() == 'utf-8':
+                        word = word.encode('utf-8')
                     if word in self.fields_invert:
                         num = self.model2.append()
                         self.model2.set(num, 0, word, 1, self.fields_invert[word])
