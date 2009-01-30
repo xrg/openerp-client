@@ -146,4 +146,11 @@ def ustr(value, from_encoding='utf-8'):
 
     return unicode(value, from_encoding)
 
+def locale_format(format, value):
+    import locale
+    label_str = locale.format(format, value, True)
+    if not locale.getpreferredencoding().lower().startswith('utf'):
+        label_str = label_str.replace('\xa0', '\xc2\xa0')
+    return label_str
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

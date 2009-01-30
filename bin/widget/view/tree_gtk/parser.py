@@ -234,8 +234,7 @@ class Int(Char):
         return int(text)
 
     def get_textual_value(self, model):
-        return locale.format('%d',
-                model[self.field_name].get_client(model) or 0, True)
+        return tools.locale_format('%d', model[self.field_name].get_client(model) or 0)
 
 class Boolean(Int):
 
@@ -358,8 +357,7 @@ class Datetime(GenericDate):
 class Float(Char):
     def get_textual_value(self, model):
         interger, digit = self.attrs.get('digits', (16,2) )
-        return locale.format('%.'+str(digit)+'f',
-                model[self.field_name].get_client(model) or 0.0, True)
+        return tools.locale_format('%.' + str(digit) + 'f', model[self.field_name].get_client(model) or 0.0)
 
     def value_from_text(self, model, text):
         try:
