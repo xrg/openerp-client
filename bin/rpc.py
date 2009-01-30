@@ -81,7 +81,7 @@ class xmlrpc_gw(gw_inter):
     def exec_auth(self, method, *args):
         logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
         res = self.execute(method, self._uid, self._passwd, *args)
-        logging.getLogger('rpc.result').debug_rpc(str(res))
+        logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
 
     def __convert(self, result):
@@ -110,7 +110,7 @@ class tinySocket_gw(gw_inter):
     def exec_auth(self, method, *args):
         logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
         res = self.execute(method, self._uid, self._passwd, *args)
-        logging.getLogger('rpc.result').debug_rpc(str(res))
+        logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
     def execute(self, method, *args):
         self._sock.connect(self._url)

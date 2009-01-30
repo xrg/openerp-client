@@ -84,11 +84,14 @@ if not client_lang:
 translate.setlang(client_lang)
 
 
-# add new log level below DEBUG
+# add new log levels below DEBUG
 logging.DEBUG_RPC = logging.DEBUG - 1
 logging.addLevelName(logging.DEBUG_RPC, 'DEBUG_RPC')
-#setattr(logging, 'debug_rpc', lambda msg, *args, **kwargs: logging.log(logging.DEBUG_RPC, msg, *args, **kwargs))
 logging.Logger.debug_rpc = lambda self, msg, *args, **kwargs: self.log(logging.DEBUG_RPC, msg, *args, **kwargs)
+
+logging.DEBUG_RPC_ANSWER = logging.DEBUG - 2
+logging.addLevelName(logging.DEBUG_RPC_ANSWER, 'DEBUG_RPC_ANSWER')
+logging.Logger.debug_rpc_answer = lambda self, msg, *args, **kwargs: self.log(logging.DEBUG_RPC_ANSWER, msg, *args, **kwargs)
 
 logging.getLogger().setLevel(getattr(logging, options.options['logging.level'].upper()))
 

@@ -103,7 +103,7 @@ class configmanager(object):
             'help.index': 'http://www.openerp.com/documentation/user-manual/',
             'help.context': 'http://doc.openerp.com/index.php?model=%(model)s&lang=%(lang)s',
         }
-        loglevels = ('critical', 'error', 'warning', 'info', 'debug', 'debug_rpc', 'notset')
+        loglevels = ('critical', 'error', 'warning', 'info', 'debug', 'debug_rpc', 'debug_rpc_answer', 'notset')
         parser = optparse.OptionParser(version=_("OpenERP Client %s" % openerp_version))
         parser.add_option("-c", "--config", dest="config",help=_("specify alternate config file"))
         parser.add_option("-v", "--verbose", dest="log_level", action='store_const', const="debug", help=_("Enable basic debugging. Alias for '--log-level=debug'"))
