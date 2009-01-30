@@ -277,6 +277,15 @@ class rpc_session(object):
 	    language, in_encoding = locale.getdefaultlocale()
 	    common.warning(err[1].decode(in_encoding),_('Socket error'))
 	    return -1
+	    except RuntimeError, err:
+		import locale
+		language, in_encoding = locale.getdefaultlocale()
+		try:
+			err_string = err[1].decode(in_encoding)
+		except:
+			err_string = str(err)
+		common.warning(err_string,_('Cannot list db:'))
+		return -1
         except Exception, e:
 	    common.error(_('Cannot list db:'), str(e))
             return -1
