@@ -95,7 +95,7 @@ class dialog(object):
         if not target:
             vp.set_size_request(min(width - 20, x + 20),min(height - 60, y + 25))
         else:
-            vp.set_size_request(x + 20,y + 25)
+            vp.set_size_request(x,y)
         self.dia.show_all()
         self.screen.display()
 
