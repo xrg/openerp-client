@@ -40,7 +40,11 @@ import __builtin__
 __builtin__.__dict__['openerp_version'] = __version__
 
 import logging
-logging.basicConfig()
+arguments = {}
+if sys.platform == 'win32':
+    arguments['filename'] = os.path.join(os.environ['USERPROFILE'], 'openerp-client.log')
+
+logging.basicConfig(**arguments)
 
 from distutils.sysconfig import get_python_lib
 terp_path = os.path.join(get_python_lib(), 'openerp-client')
