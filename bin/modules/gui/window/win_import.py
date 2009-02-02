@@ -205,32 +205,37 @@ class win_import(object):
         self.model2.clear()
 
     def go(self):
-        button = self.win.run()
-        if button==gtk.RESPONSE_OK:
-            fields = []
-            fields2 = []
-            iter = self.model2.get_iter_root()
-            while iter:
-                fields.append(self.model2.get_value(iter, 1))
-                fields2.append(self.model2.get_value(iter, 0))
-                iter = self.model2.iter_next(iter)
+        while True:
+            button = self.win.run()
+            if button == gtk.RESPONSE_OK:
+                if not len(self.model2):
+                    common.warning(_("You have not selected any fields to import"))
+                    continue
 
-            csv = {
-                'fname': self.glade.get_widget('import_csv_file').get_filename(),
-                'sep': self.glade.get_widget('import_csv_sep').get_text(),
-                'del': self.glade.get_widget('import_csv_del').get_text(),
-                'skip': self.glade.get_widget('import_csv_skip').get_value(),
-                'combo': self.glade.get_widget('import_csv_combo').get_active_text() or 'UTF-8'
-            }
-            self.parent.present()
-            self.win.destroy()
-            if csv['fname']:
-                return import_csv(csv, fields, self.model, self.fields)
-            return False
-        else:
-            self.parent.present()
-            self.win.destroy()
-            return False
+                fields = []
+                fields2 = []
+                iter = self.model2.get_iter_root()
+                while iter:
+                    fields.append(self.model2.get_value(iter, 1))
+                    fields2.append(self.model2.get_value(iter, 0))
+                    iter = self.model2.iter_next(iter)
+
+                csv = {
+                    'fname': self.glade.get_widget('import_csv_file').get_filename(),
+                    'sep': self.glade.get_widget('import_csv_sep').get_text(),
+                    'del': self.glade.get_widget('import_csv_del').get_text(),
+                    'skip': self.glade.get_widget('import_csv_skip').get_value(),
+                    'combo': self.glade.get_widget('import_csv_combo').get_active_text() or 'UTF-8'
+                }
+                self.parent.present()
+                self.win.destroy()
+                if csv['fname']:
+                    return import_csv(csv, fields, self.model, self.fields)
+                return False
+            else:
+                self.parent.present()
+                self.win.destroy()
+                return False
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
