@@ -54,7 +54,6 @@ class wid_binary(interface.widget_interface):
         class binButton(gtk.Button):
             def __init__(self, stock, title, long=True):
                 assert stock is not None
-                assert stock is not None
                 super(binButton, self).__init__()
                 
                 box = gtk.HBox()
