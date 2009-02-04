@@ -321,7 +321,7 @@ class ViewCalendar(object):
         if starts and ends:
 
             n = 0
-            h = ends
+            h = ends or 1
 
             if ends == self.day_length: span = 1
 
@@ -367,7 +367,6 @@ class ViewCalendar(object):
 
         description = ', '.join(description).strip()
         all_day = span > 0
-        
         return TinyEvent(model=model,
                          caption=caption.strip(),
                          start=datetime(*starts[:7]), 
