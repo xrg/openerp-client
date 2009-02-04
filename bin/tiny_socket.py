@@ -21,7 +21,7 @@
 ##############################################################################
 import socket
 import cPickle
-import marshal
+import sys
 
 DNS_CACHE = {}
 
@@ -50,7 +50,10 @@ class mysocket:
         DNS_CACHE[host], port = self.sock.getpeername()
 
     def disconnect(self):
-        self.sock.shutdown(socket.SHUT_RDWR)
+        # on Mac, the connection is automatically shutdown when the server disconnect.
+        # see http://bugs.python.org/issue4397
+        if sys.platform != 'darwin':
+            self.sock.shutdown(socket.SHUT_RDWR)
         self.sock.close()
 
     def mysend(self, msg, exception=False, traceback=None):
