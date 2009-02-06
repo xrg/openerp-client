@@ -100,7 +100,7 @@ class configmanager(object):
             'client.form_tab_orientation': 0,
             'client.lang': False,
             'client.filetype': {},
-            'help.index': 'http://www.openerp.com/documentation/user-manual/',
+            'help.index': 'http://doc.openerp.com/',
             'help.context': 'http://doc.openerp.com/index.php?model=%(model)s&lang=%(lang)s',
         }
         loglevels = ('critical', 'error', 'warning', 'info', 'debug', 'debug_rpc', 'debug_rpc_answer', 'notset')
