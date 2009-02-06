@@ -1,16 +1,16 @@
-# Czech translation for openobject-client
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# Norwegian Bokmal translation for openobject-client
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the openobject-client package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: openobject-client\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2008-12-31 14:42+0100\n"
-"PO-Revision-Date: 2009-01-06 13:14+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Czech <cs@li.org>\n"
+"PO-Revision-Date: 2009-01-28 15:44+0000\n"
+"Last-Translator: JPedro <Unknown>\n"
+"Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -78,11 +78,11 @@ msgstr ""
 
 #: bin/widget_search/checkbox.py:36 bin/widget_search/checkbox.py:49
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: bin/widget_search/checkbox.py:37
 msgid "No"
-msgstr ""
+msgstr "Nei"
 
 #: bin/widget/view/graph_gtk/parser.py:65
 msgid "Can not generate graph !"
@@ -91,7 +91,7 @@ msgstr ""
 #: bin/widget/view/widget_parse.py:53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
-msgstr ""
+msgstr "Denne data typen (%s) er ikke støttet av GTK klienten !"
 
 #: bin/widget/view/widget_parse.py:63
 msgid "No valid view found for this object!"
@@ -106,6 +106,8 @@ msgid ""
 "The gantt view is not available in this GTK Client, you should use the web "
 "interface or switch to the calendar view."
 msgstr ""
+"Gantt view er ikke tilgjenngelig i GTK klienten, bruk enten web "
+"grensesnittet eller bytt til kalender."
 
 #: bin/widget/view/tree_gtk/date_renderer.py:200
 msgid ""
@@ -165,7 +167,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/interface.py:48
 msgid "Set as default"
-msgstr ""
+msgstr "Sett som standard"
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
@@ -185,28 +187,28 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:70
 msgid "Set Image"
-msgstr ""
+msgstr "Bruk bilde"
 
 #: bin/widget/view/form_gtk/image.py:79 bin/widget/view/form_gtk/binary.py:85
 msgid "Save As"
-msgstr ""
+msgstr "Lagre som"
 
 #: bin/widget/view/form_gtk/image.py:88 bin/widget/view/form_gtk/binary.py:89
 msgid "Clear"
-msgstr ""
+msgstr "Fjern"
 
 #: bin/widget/view/form_gtk/image.py:100
 msgid "All files"
-msgstr ""
+msgstr "Alle filtyper"
 
 #: bin/widget/view/form_gtk/image.py:104
 msgid "Images"
-msgstr ""
+msgstr "Bilder"
 
 #: bin/widget/view/form_gtk/image.py:110 bin/widget/view/form_gtk/url.py:112
 #: bin/modules/gui/main.py:1065 bin/openerp.glade:6749
 msgid "Open..."
-msgstr ""
+msgstr "Åpne …"
 
 #: bin/widget/view/form_gtk/image.py:117
 #: bin/widget/view/form_gtk/binary.py:162 bin/modules/gui/main.py:1136
@@ -239,7 +241,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:133
 msgid "All Files"
-msgstr ""
+msgstr "Alle filer"
 
 #: bin/widget/view/form_gtk/binary.py:143
 msgid "Select a file..."
@@ -257,19 +259,19 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/calendar.py:269
 msgid "Hour:"
-msgstr ""
+msgstr "Time:"
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Minute:"
-msgstr ""
+msgstr "Minutt:"
 
 #: bin/widget/view/form_gtk/many2one.py:146
 msgid "Open this resource"
-msgstr ""
+msgstr "Åpne denne resurssen"
 
 #: bin/widget/view/form_gtk/many2one.py:160
 msgid "Search a resource"
-msgstr ""
+msgstr "Søk i en ressurs"
 
 #: bin/widget/view/form_gtk/many2one.py:171 bin/openerp.glade:1356
 msgid "Action"
@@ -290,7 +292,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:151
 msgid "Set Default"
-msgstr ""
+msgstr "Sett som Standard"
 
 #: bin/widget/view/form_gtk/one2many_list.py:162
 msgid "Create a new entry"

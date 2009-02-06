@@ -8,24 +8,24 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2008-12-31 14:42+0100\n"
-"PO-Revision-Date: 2009-01-08 22:25+0000\n"
-"Last-Translator: Ali Akbar <Unknown>\n"
+"PO-Revision-Date: 2009-02-02 12:22+0000\n"
+"Last-Translator: Priyo <cla10xboy@yahoo.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-26 16:24+0000\n"
+"X-Launchpad-Export-Date: 2009-02-06 09:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/widget_search/reference.py:74 bin/widget_search/spinint.py:73
 #: bin/widget_search/spinbutton.py:69 bin/widget_search/calendar.py:117
 #: bin/widget_search/char.py:47 bin/widget_search/checkbox.py:55
 msgid "The content of the widget or ValueError if not valid"
-msgstr "Isi widget atau ValueError jika isi tidak valid"
+msgstr "Isi dari widget atau ValueError jika tidak valid"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or excpetion if not valid"
-msgstr "Isi widget atau exception jika tidak valid"
+msgstr "Isi dari widget atau exception jika tidak valid"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -40,10 +40,19 @@ msgid ""
 "You can also use \"=\" to set the date to the current date/time and '-' to "
 "clear the field."
 msgstr ""
+"Kamu dapat memakai tanda khusus dengan menekan +, - atau =. Plus/minus "
+"Tambah/kurang variable dari tanggal yang dipilih sekarang. Bagian sama "
+"dengan tanggal yang dipilih. Variable yang tersedia: 12j= 12 jam, 8h= 8 "
+"hari, 4m = 4 minggu, 1 b = 1 bulan, 2t= 2 tahun. Beberapa contoh\n"
+"*+21h: tambahkan 21 hari pada tahun yang dipilih\n"
+"*=23m: set tanggal ke minggu ke 23 dari tahun tersebut\n"
+"*-4 : kurangi 4 bulan dari tanggal sekarang\n"
+"Kamu bisa juga memakai \"=\" untuk menset tanggal pada tanggal/waktu "
+"sekarang dan '-' untuk menghapus filed"
 
 #: bin/widget_search/calendar.py:55
 msgid "Start date"
-msgstr "Tanggal awal"
+msgstr "Tanggal mulai"
 
 #: bin/widget_search/calendar.py:59 bin/widget_search/calendar.py:79
 #: bin/widget/view/form_gtk/calendar.py:63
@@ -66,7 +75,7 @@ msgstr "Batas :"
 
 #: bin/widget_search/form.py:154
 msgid "Offset :"
-msgstr ""
+msgstr "ofset"
 
 #: bin/widget_search/form.py:193
 msgid "Parameters :"
@@ -86,12 +95,12 @@ msgstr "Tidak"
 
 #: bin/widget/view/graph_gtk/parser.py:65
 msgid "Can not generate graph !"
-msgstr ""
+msgstr "Tidak dapat membuat grafik"
 
 #: bin/widget/view/widget_parse.py:53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
-msgstr ""
+msgstr "Tipe (%s) ini tidak didukung oleh GTK client !"
 
 #: bin/widget/view/widget_parse.py:63
 msgid "No valid view found for this object!"
@@ -99,18 +108,21 @@ msgstr ""
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid "Gantt view not yet implemented !"
-msgstr "View dalam bentuk Gantt belum diimplementasikan !"
+msgstr "Tampilan Gantt belum diterapkan"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:32
 msgid ""
 "The gantt view is not available in this GTK Client, you should use the web "
 "interface or switch to the calendar view."
 msgstr ""
+"Tampilan Gantt tidak tersedia pada Klien GTK, kamu sebaiknya memakai "
+"tampilan web atau mengganti tampilan kalender"
 
 #: bin/widget/view/tree_gtk/date_renderer.py:200
 msgid ""
 "Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."
 msgstr ""
+"Tekan <i>'+'</i>, <i>'-'</i> or <i>'='</i> untuk operasi tanggal kusus"
 
 #: bin/widget/view/tree_gtk/editabletree.py:125
 #, python-format
@@ -119,7 +131,7 @@ msgstr ""
 
 #: bin/widget/view/tree_gtk/editabletree.py:125
 msgid "F1 New - F2 Open/Search"
-msgstr ""
+msgstr "F1 Baru - F2 Buka/Cari"
 
 #: bin/widget/view/tree_gtk/editabletree.py:190
 #, python-format
@@ -128,108 +140,108 @@ msgstr ""
 
 #: bin/widget/view/form.py:170
 msgid "You must save this record to use the relate button !"
-msgstr ""
+msgstr "Kamu harus menyimpan catatan untuk memakai tombol terkait"
 
 #: bin/widget/view/form.py:182
 msgid "You must select a record to use the relate button !"
-msgstr ""
+msgstr "Kamu harus memilih catatan untuk memakai tombol terkait"
 
 #: bin/widget/view/form.py:200 bin/widget/view/form_gtk/parser.py:496
 #: bin/widget/view/form_gtk/parser.py:653
 #: bin/widget/view/form_gtk/parser.py:710
 msgid "No other language available!"
-msgstr ""
+msgstr "Tidak tersedia bahasa lain"
 
 #: bin/widget/view/form.py:207 bin/widget/view/form_gtk/parser.py:555
 #: bin/widget/view/form_gtk/parser.py:659
 #: bin/widget/view/form_gtk/parser.py:716
 msgid "Add Translation"
-msgstr ""
+msgstr "Tambah terjemahan"
 
 #: bin/widget/view/form.py:258 bin/widget/view/form_gtk/parser.py:772
 msgid "Translate label"
-msgstr ""
+msgstr "Terjemahkan label"
 
 #: bin/widget/view/form_gtk/reference.py:92 bin/openerp.glade:1214
 msgid "Create a new resource"
-msgstr ""
+msgstr "Buat sumber baru"
 
 #: bin/widget/view/form_gtk/reference.py:93
 msgid "Search / Open a resource"
-msgstr ""
+msgstr "Cari/Buka sumber"
 
 #: bin/widget/view/form_gtk/interface.py:47
 #: bin/widget/view/form_gtk/one2many_list.py:148
 msgid "Set to default value"
-msgstr ""
+msgstr "Set nilai dasar"
 
 #: bin/widget/view/form_gtk/interface.py:48
 msgid "Set as default"
-msgstr ""
+msgstr "Set sebagai nilai dasar"
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
-msgstr ""
+msgstr "Icon salah untuk tombol ini!"
 
 #: bin/widget/view/form_gtk/parser.py:134 bin/modules/gui/window/form.py:283
 msgid "Invalid form, correct red fields !"
-msgstr ""
+msgstr "Form salah, perbaiki filed dengan label merah!"
 
 #: bin/widget/view/form_gtk/parser.py:486
 msgid "You need to save resource before adding translations!"
-msgstr ""
+msgstr "Kamu harus menyimpan sumber sebelum menambah terjemahan"
 
 #: bin/widget/view/form_gtk/parser.py:778
 msgid "Translate view"
-msgstr ""
+msgstr "Tampilan terjemah"
 
 #: bin/widget/view/form_gtk/image.py:70
 msgid "Set Image"
-msgstr ""
+msgstr "Set Citra"
 
 #: bin/widget/view/form_gtk/image.py:79 bin/widget/view/form_gtk/binary.py:85
 msgid "Save As"
-msgstr ""
+msgstr "Simpan Sebagai"
 
 #: bin/widget/view/form_gtk/image.py:88 bin/widget/view/form_gtk/binary.py:89
 msgid "Clear"
-msgstr ""
+msgstr "Hapus"
 
 #: bin/widget/view/form_gtk/image.py:100
 msgid "All files"
-msgstr ""
+msgstr "Semua berkas"
 
 #: bin/widget/view/form_gtk/image.py:104
 msgid "Images"
-msgstr ""
+msgstr "Citra"
 
 #: bin/widget/view/form_gtk/image.py:110 bin/widget/view/form_gtk/url.py:112
 #: bin/modules/gui/main.py:1065 bin/openerp.glade:6749
 msgid "Open..."
-msgstr ""
+msgstr "Buka..."
 
 #: bin/widget/view/form_gtk/image.py:117
 #: bin/widget/view/form_gtk/binary.py:162 bin/modules/gui/main.py:1136
 #: bin/modules/gui/window/win_export.py:282 bin/printer/printer.py:207
 msgid "Save As..."
-msgstr ""
+msgstr "Simpan Sebagai..."
 
 #: bin/widget/view/form_gtk/wid_common.py:60
 msgid "Always applicable !"
-msgstr ""
+msgstr "Selalu cocok!"
 
 #: bin/widget/view/form_gtk/binary.py:77
 msgid "Select"
-msgstr ""
+msgstr "Pilih"
 
 #: bin/widget/view/form_gtk/binary.py:81
 msgid "Open"
-msgstr ""
+msgstr "Buka"
 
 #: bin/widget/view/form_gtk/binary.py:114
 #: bin/widget/view/form_gtk/binary.py:158
 msgid "Unable to read the file data"
-msgstr ""
+msgstr "Tidak bisa membaca berkas data"
 
 #: bin/widget/view/form_gtk/binary.py:124
 #: bin/widget/view/form_gtk/binary.py:150
@@ -239,11 +251,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:133
 msgid "All Files"
-msgstr ""
+msgstr "Seluruh Berkas"
 
 #: bin/widget/view/form_gtk/binary.py:143
 msgid "Select a file..."
-msgstr ""
+msgstr "Pilih berkas..."
 
 #: bin/widget/view/form_gtk/binary.py:172
 #, python-format
@@ -253,84 +265,85 @@ msgstr ""
 #: bin/widget/view/form_gtk/calendar.py:127
 #: bin/widget/view/form_gtk/calendar.py:260
 msgid "This widget is readonly !"
-msgstr ""
+msgstr "Widget ini redonly"
 
 #: bin/widget/view/form_gtk/calendar.py:269
 msgid "Hour:"
-msgstr ""
+msgstr "Jam:"
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Minute:"
-msgstr ""
+msgstr "Menit"
 
 #: bin/widget/view/form_gtk/many2one.py:146
 msgid "Open this resource"
-msgstr ""
+msgstr "Buka sumber ini"
 
 #: bin/widget/view/form_gtk/many2one.py:160
 msgid "Search a resource"
-msgstr ""
+msgstr "Cari sumber ini"
 
 #: bin/widget/view/form_gtk/many2one.py:171 bin/openerp.glade:1356
 msgid "Action"
-msgstr ""
+msgstr "Tindakan"
 
 #: bin/widget/view/form_gtk/many2one.py:172
 msgid "Report"
-msgstr ""
+msgstr "Laporan"
 
 #: bin/widget/view/form_gtk/many2one.py:372 bin/widget/view/list.py:274
 msgid "You must select a record to use the relation !"
-msgstr ""
+msgstr "Kamu harus memilih sumber untuk menggunakan relasi!"
 
 #: bin/widget/view/form_gtk/one2many_list.py:51
 #: bin/modules/gui/window/win_search.py:50
 msgid "OpenERP - Link"
-msgstr ""
+msgstr "openERP - Tautan"
 
 #: bin/widget/view/form_gtk/one2many_list.py:151
 msgid "Set Default"
-msgstr ""
+msgstr "Atur Nilai Dasar"
 
 #: bin/widget/view/form_gtk/one2many_list.py:162
 msgid "Create a new entry"
-msgstr ""
+msgstr "Buat entri baru"
 
 #: bin/widget/view/form_gtk/one2many_list.py:172
 msgid "Edit this entry"
-msgstr ""
+msgstr "Ubah entri ini"
 
 #: bin/widget/view/form_gtk/one2many_list.py:182
 msgid "Remove this entry"
-msgstr ""
+msgstr "Hapus entri ini"
 
 #: bin/widget/view/form_gtk/one2many_list.py:194
 msgid "Previous"
-msgstr ""
+msgstr "Sebelumnya"
 
 #: bin/widget/view/form_gtk/one2many_list.py:207
 msgid "Next"
-msgstr ""
+msgstr "Berikutnya"
 
 #: bin/widget/view/form_gtk/one2many_list.py:219
 msgid "Switch"
-msgstr ""
+msgstr "Ganti"
 
 #: bin/widget/view/form_gtk/one2many_list.py:269
 msgid "You have to select a resource !"
-msgstr ""
+msgstr "Kamu harus memilih sumber"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "Calendar View Error !"
-msgstr ""
+msgstr "Tampilan Kalender Salah"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:32
 msgid "You must intall the library python-hippocanvas to use calendars."
 msgstr ""
+"Kamu harus memasang library python-hippocanvas untuk memakai kalender"
 
 #: bin/widget/view/calendar_gtk/parser.py:239 bin/openerp.glade:9108
 msgid "Week"
-msgstr ""
+msgstr "Minggu"
 
 #: bin/common/common.py:186
 msgid ""
@@ -339,17 +352,21 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
+"Terimakasih atas umpan baliknya\n"
+"Komentarmu telah di kirim ke OpenERP\n"
+"Kamu seharusnya mulai membuat database baru sekarang atau\n"
+"terhubung ke server yang ada melalui menu \"File\""
 
 #: bin/common/common.py:193
 msgid ""
 "Thank you for testing OpenERP !\n"
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
-msgstr ""
+msgstr "Terimakasih telah mencoba OpenERP"
 
 #: bin/common/common.py:298
 msgid "Support request sent !"
-msgstr ""
+msgstr "Permintaan dukungan telah dikirim!"
 
 #: bin/common/common.py:316
 msgid ""
@@ -376,6 +393,27 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>Kesalahan yang belum diketahui telah dilaporkan.</b>\n"
+"<b>Kamu tidak punya kontrak pemeliharaan OpenERP yang sah!<b/b>\n"
+"Jika kamu memakai OpenERP dalam produksi, sangat disarankan untuk mengikuti "
+"\n"
+"program perawatan\n"
+"\n"
+"Kontrak perwatan OpenERP memyediakan jaminan perbaikan bug\n"
+"dan migrasi otomatis sehingga kami dapat memperbaiki program\n"
+"dalam beberapa jam. Jika kamu memiliki kontrak maintenance, \n"
+"kesalahan ini sudah dikirim tim mutu dari editor OpenERP\n"
+"\n"
+"Program perawatan menawarkan:\n"
+"*Migrasi otomatis ke versi terbaru\n"
+"*Jaminan perbaikan bug\n"
+"*Peringatan keamanan melalui email dan migrasi otomatis\n"
+"*akses ke portal pelanggan\n"
+"\n"
+"Kamu dapat memakai tautan dibawah untuk informasi lebih lanjut. Detil "
+"kesalahn\n"
+"ditampilan di tab kedua.\n"
 
 #: bin/common/common.py:339
 #, python-format
@@ -407,6 +445,8 @@ msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
+"Masalahmu  sudah dikirm ke tim mutu!\n"
+"Kami akan menghubungi lagi setelah menganalisis masalah."
 
 #: bin/common/common.py:392
 #, python-format
@@ -417,15 +457,15 @@ msgstr ""
 
 #: bin/common/common.py:545
 msgid "Open with..."
-msgstr ""
+msgstr "Buka dengan..."
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr ""
+msgstr "Cetak alur kerja"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
-msgstr ""
+msgstr "Cetak alur kerja (Kompleks)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"

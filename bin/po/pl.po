@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-31 14:42+0100\n"
-"PO-Revision-Date: 2009-01-26 16:19+0000\n"
+"PO-Revision-Date: 2009-01-28 10:56+0000\n"
 "Last-Translator: Manveru <manveru@manveru.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-01-26 16:24+0000\n"
+"X-Launchpad-Export-Date: 2009-02-06 09:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/widget_search/reference.py:74 bin/widget_search/spinint.py:73
@@ -76,7 +76,7 @@ msgstr ""
 
 #: bin/widget_search/form.py:193
 msgid "Parameters :"
-msgstr ""
+msgstr "Parametry:"
 
 #: bin/widget_search/form.py:301
 msgid "The content of the form or exception if not valid"
@@ -1866,7 +1866,7 @@ msgstr ""
 
 #: bin/openerp.glade:5162
 msgid "E-Mail:"
-msgstr ""
+msgstr "E-mail:"
 
 #: bin/openerp.glade:5175
 msgid "Your Company:"
@@ -1887,7 +1887,7 @@ msgstr ""
 
 #: bin/openerp.glade:5328
 msgid "Phone number:"
-msgstr ""
+msgstr "Numer telefonu:"
 
 #: bin/openerp.glade:5341
 msgid "Emergency:"
@@ -1927,7 +1927,7 @@ msgstr ""
 
 #: bin/openerp.glade:5679
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Skróty klawiszowe"
 
 #: bin/openerp.glade:5701
 msgid "<b>Shortcuts for OpenERP</b>"
@@ -1995,7 +1995,7 @@ msgstr ""
 
 #: bin/openerp.glade:5956
 msgid "Previous tab"
-msgstr ""
+msgstr "Poprzednia zakładka"
 
 #: bin/openerp.glade:5971
 msgid "<Ctrl> + <PgUp>"
@@ -2027,7 +2027,7 @@ msgstr ""
 
 #: bin/openerp.glade:6068
 msgid "Connect"
-msgstr ""
+msgstr "Połącz"
 
 #: bin/openerp.glade:6083
 msgid "<Ctrl> + O"
@@ -2039,7 +2039,7 @@ msgstr ""
 
 #: bin/openerp.glade:6114
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
 #: bin/openerp.glade:6127
 msgid "<b>Shortcuts in relation fields</b>"
@@ -2155,19 +2155,19 @@ msgstr ""
 
 #: bin/openerp.glade:6895
 msgid "CSV Parameters"
-msgstr ""
+msgstr "Parametry CSV"
 
 #: bin/openerp.glade:6974
 msgid "OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #: bin/openerp.glade:7070
 msgid "Server"
-msgstr ""
+msgstr "Serwer"
 
 #: bin/openerp.glade:7080
 msgid "<b>Connect to a OpenERP server</b>"
-msgstr ""
+msgstr "<b>Połącz się z serwerem OpenERP</b>"
 
 #: bin/openerp.glade:7139
 msgid "Protocol connection:"
@@ -2179,11 +2179,11 @@ msgstr ""
 
 #: bin/openerp.glade:7237
 msgid "Choose a database..."
-msgstr ""
+msgstr "Wybierz bazę danych..."
 
 #: bin/openerp.glade:7252
 msgid "<b>Backup a database</b>"
-msgstr ""
+msgstr "<b>Kopia zapasowa bazy danych</b>"
 
 #: bin/openerp.glade:7483
 msgid "Restore a database"
@@ -2191,7 +2191,7 @@ msgstr ""
 
 #: bin/openerp.glade:7496
 msgid "<b>Restore a database</b>"
-msgstr ""
+msgstr "<b>Przywróć bazę danych</b>"
 
 #: bin/openerp.glade:7540
 msgid "(must not contain any special char)"
@@ -2221,7 +2221,7 @@ msgstr ""
 
 #: bin/openerp.glade:7831
 msgid "OpenERP Server:"
-msgstr ""
+msgstr "Serwer OpenERP:"
 
 #: bin/openerp.glade:7861
 msgid ""
@@ -2232,17 +2232,19 @@ msgstr ""
 
 #: bin/openerp.glade:7865
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "Hasło Super Administratora:"
 
 #: bin/openerp.glade:7897
 msgid "(<i>admin</i>, by default)"
-msgstr ""
+msgstr "(domyślnie <i>admin</i>)"
 
 #: bin/openerp.glade:7962
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
+"Wybierz nazwę dla bazy danych do utworzenia. Nazwa nie może zawierać żadnych "
+"znaków specjalnych. Na przykład: \"terp\"."
 
 #: bin/openerp.glade:7964
 msgid "New Database Name:"
@@ -2254,6 +2256,9 @@ msgid ""
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
+"Wybierz domyślny język, który ma zostać zainstalowany dla tej bazy danych. "
+"Po instalacji istnieje możliwość doinstalowania nowego języka z menu "
+"administracji."
 
 #: bin/openerp.glade:7990
 msgid "Default Language:"
@@ -2264,6 +2269,8 @@ msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
 "new database."
 msgstr ""
+"To jest hasło użytkownika \"<i>admin</i>\" utworzonego w Twojej nowej bazie "
+"danych."
 
 #: bin/openerp.glade:8005
 msgid "Administrator Password:"
@@ -2285,6 +2292,9 @@ msgid ""
 "database. These data will help you to understand OpenERP, with predefined "
 "products, partners, etc."
 msgstr ""
+"Zaznacz to pole jeżeli chcesz, aby demonstracyjne dane zostały zainstalowane "
+"w Twojej nowej bazie danych. Te dane pozwolą Ci zrozumieć OpenERP, dzięki "
+"zdefiniowanym przykładowym produktom, partnerom, itp."
 
 #: bin/openerp.glade:8113
 msgid "Load Demonstration Data:"
@@ -2316,11 +2326,11 @@ msgstr ""
 
 #: bin/openerp.glade:8504
 msgid "Database creation"
-msgstr ""
+msgstr "Tworzenie bazy danych"
 
 #: bin/openerp.glade:8537
 msgid "<b>Database created successfully!</b>"
-msgstr ""
+msgstr "<b>Baza danych utworzona z sukcesem</b>"
 
 #: bin/openerp.glade:8569
 msgid ""
@@ -2351,7 +2361,7 @@ msgstr ""
 
 #: bin/openerp.glade:8889
 msgid "Compare"
-msgstr ""
+msgstr "Porównaj"
 
 #: bin/openerp.glade:8935
 msgid "Write anyway"
@@ -2371,11 +2381,11 @@ msgstr ""
 
 #: bin/openerp.glade:9096
 msgid "Day"
-msgstr ""
+msgstr "Dzień"
 
 #: bin/openerp.glade:9120
 msgid "Month"
-msgstr ""
+msgstr "Miesiąc"
 
 #: bin/win_error.glade:40
 msgid "label"

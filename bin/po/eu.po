@@ -1,16 +1,16 @@
-# Czech translation for openobject-client
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# Basque translation for openobject-client
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the openobject-client package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: openobject-client\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2008-12-31 14:42+0100\n"
-"PO-Revision-Date: 2009-01-06 13:14+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Czech <cs@li.org>\n"
+"PO-Revision-Date: 2009-01-26 23:25+0000\n"
+"Last-Translator: ninaiz <inigo.rekalde@gmail.com>\n"
+"Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,26 +43,26 @@ msgstr ""
 
 #: bin/widget_search/calendar.py:55
 msgid "Start date"
-msgstr ""
+msgstr "Hasiera-data"
 
 #: bin/widget_search/calendar.py:59 bin/widget_search/calendar.py:79
 #: bin/widget/view/form_gtk/calendar.py:63
 #: bin/widget/view/form_gtk/calendar.py:176
 msgid "Open the calendar widget"
-msgstr ""
+msgstr "Egutegia ireki"
 
 #: bin/widget_search/calendar.py:75
 msgid "End date"
-msgstr ""
+msgstr "Amaiera-data"
 
 #: bin/widget_search/calendar.py:120 bin/widget/view/form_gtk/calendar.py:133
 #: bin/widget/view/form_gtk/calendar.py:263
 msgid "OpenERP - Date selection"
-msgstr ""
+msgstr "OpenERP - Dataren aukeraketa"
 
 #: bin/widget_search/form.py:145
 msgid "Limit :"
-msgstr ""
+msgstr "Muga:"
 
 #: bin/widget_search/form.py:154
 msgid "Offset :"
@@ -70,7 +70,7 @@ msgstr ""
 
 #: bin/widget_search/form.py:193
 msgid "Parameters :"
-msgstr ""
+msgstr "Parametro:"
 
 #: bin/widget_search/form.py:301
 msgid "The content of the form or exception if not valid"
@@ -78,15 +78,15 @@ msgstr ""
 
 #: bin/widget_search/checkbox.py:36 bin/widget_search/checkbox.py:49
 msgid "Yes"
-msgstr ""
+msgstr "Bai"
 
 #: bin/widget_search/checkbox.py:37
 msgid "No"
-msgstr ""
+msgstr "Ez"
 
 #: bin/widget/view/graph_gtk/parser.py:65
 msgid "Can not generate graph !"
-msgstr ""
+msgstr "Ezin da grafikorik sortu!"
 
 #: bin/widget/view/widget_parse.py:53
 #, python-format
@@ -119,7 +119,7 @@ msgstr ""
 
 #: bin/widget/view/tree_gtk/editabletree.py:125
 msgid "F1 New - F2 Open/Search"
-msgstr ""
+msgstr "F1 Berria - F2 Ireki/Bilatu"
 
 #: bin/widget/view/tree_gtk/editabletree.py:190
 #, python-format
@@ -156,7 +156,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/reference.py:93
 msgid "Search / Open a resource"
-msgstr ""
+msgstr "Bilatu / Ireki erregistroa"
 
 #: bin/widget/view/form_gtk/interface.py:47
 #: bin/widget/view/form_gtk/one2many_list.py:148
@@ -181,38 +181,38 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/parser.py:778
 msgid "Translate view"
-msgstr ""
+msgstr "Itzulpen bista"
 
 #: bin/widget/view/form_gtk/image.py:70
 msgid "Set Image"
-msgstr ""
+msgstr "Irudia ezarri"
 
 #: bin/widget/view/form_gtk/image.py:79 bin/widget/view/form_gtk/binary.py:85
 msgid "Save As"
-msgstr ""
+msgstr "Gorde honela"
 
 #: bin/widget/view/form_gtk/image.py:88 bin/widget/view/form_gtk/binary.py:89
 msgid "Clear"
-msgstr ""
+msgstr "Ezabatu"
 
 #: bin/widget/view/form_gtk/image.py:100
 msgid "All files"
-msgstr ""
+msgstr "Fitxategi guztiak"
 
 #: bin/widget/view/form_gtk/image.py:104
 msgid "Images"
-msgstr ""
+msgstr "Irudiak"
 
 #: bin/widget/view/form_gtk/image.py:110 bin/widget/view/form_gtk/url.py:112
 #: bin/modules/gui/main.py:1065 bin/openerp.glade:6749
 msgid "Open..."
-msgstr ""
+msgstr "Ireki..."
 
 #: bin/widget/view/form_gtk/image.py:117
 #: bin/widget/view/form_gtk/binary.py:162 bin/modules/gui/main.py:1136
 #: bin/modules/gui/window/win_export.py:282 bin/printer/printer.py:207
 msgid "Save As..."
-msgstr ""
+msgstr "Honela Gorde..."
 
 #: bin/widget/view/form_gtk/wid_common.py:60
 msgid "Always applicable !"
@@ -220,11 +220,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:77
 msgid "Select"
-msgstr ""
+msgstr "Aukeratu"
 
 #: bin/widget/view/form_gtk/binary.py:81
 msgid "Open"
-msgstr ""
+msgstr "Ireki"
 
 #: bin/widget/view/form_gtk/binary.py:114
 #: bin/widget/view/form_gtk/binary.py:158
@@ -239,11 +239,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:133
 msgid "All Files"
-msgstr ""
+msgstr "Fitxategi Guztiak"
 
 #: bin/widget/view/form_gtk/binary.py:143
 msgid "Select a file..."
-msgstr ""
+msgstr "Fitxategi bat aukeratu..."
 
 #: bin/widget/view/form_gtk/binary.py:172
 #, python-format
@@ -257,27 +257,27 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/calendar.py:269
 msgid "Hour:"
-msgstr ""
+msgstr "Ordua:"
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Minute:"
-msgstr ""
+msgstr "Minutua:"
 
 #: bin/widget/view/form_gtk/many2one.py:146
 msgid "Open this resource"
-msgstr ""
+msgstr "Erregistro hau ireki"
 
 #: bin/widget/view/form_gtk/many2one.py:160
 msgid "Search a resource"
-msgstr ""
+msgstr "Erregistroa bilatu"
 
 #: bin/widget/view/form_gtk/many2one.py:171 bin/openerp.glade:1356
 msgid "Action"
-msgstr ""
+msgstr "Ekintza"
 
 #: bin/widget/view/form_gtk/many2one.py:172
 msgid "Report"
-msgstr ""
+msgstr "Txostena"
 
 #: bin/widget/view/form_gtk/many2one.py:372 bin/widget/view/list.py:274
 msgid "You must select a record to use the relation !"
@@ -306,15 +306,15 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:194
 msgid "Previous"
-msgstr ""
+msgstr "Aurrekoa"
 
 #: bin/widget/view/form_gtk/one2many_list.py:207
 msgid "Next"
-msgstr ""
+msgstr "Hurrengoa"
 
 #: bin/widget/view/form_gtk/one2many_list.py:219
 msgid "Switch"
-msgstr ""
+msgstr "Aldatu"
 
 #: bin/widget/view/form_gtk/one2many_list.py:269
 msgid "You have to select a resource !"
@@ -330,7 +330,7 @@ msgstr ""
 
 #: bin/widget/view/calendar_gtk/parser.py:239 bin/openerp.glade:9108
 msgid "Week"
-msgstr ""
+msgstr "Aste"
 
 #: bin/common/common.py:186
 msgid ""
@@ -417,7 +417,7 @@ msgstr ""
 
 #: bin/common/common.py:545
 msgid "Open with..."
-msgstr ""
+msgstr "Ireki honekin..."
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
@@ -456,7 +456,7 @@ msgstr ""
 
 #: bin/rpc.py:173
 msgid "Connection Error"
-msgstr ""
+msgstr "Konexio-errorea"
 
 #: bin/rpc.py:188 bin/rpc.py:190 bin/modules/action/wizard.py:183
 #: bin/modules/action/wizard.py:189 bin/modules/action/wizard.py:191
@@ -506,7 +506,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:154
 msgid "Unknown"
-msgstr ""
+msgstr "Ezezaguna"
 
 #: bin/modules/gui/main.py:158 bin/modules/gui/main.py:1157
 msgid "Could not connect to server !"
@@ -589,7 +589,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:617
 msgid "Edit"
-msgstr ""
+msgstr "Editatu"
 
 #: bin/modules/gui/main.py:706
 #, python-format
@@ -639,7 +639,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:956
 msgid "Attachments"
-msgstr ""
+msgstr "Eranskinak"
 
 #: bin/modules/gui/main.py:1051
 msgid "Delete a database"
@@ -712,20 +712,20 @@ msgstr ""
 
 #: bin/modules/gui/window/view_tree/parse.py:36
 msgid "Tree"
-msgstr ""
+msgstr "Zuhaitza"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:43
 #: bin/modules/gui/window/form.py:215
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:49
 msgid "Description"
-msgstr ""
+msgstr "Deskribapena"
 
 #: bin/modules/gui/window/win_selection.py:52
 msgid "Name"
-msgstr ""
+msgstr "Izena"
 
 #: bin/modules/gui/window/win_selection.py:56
 msgid "Ressource Name"
@@ -733,7 +733,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_selection.py:56
 msgid "Names"
-msgstr ""
+msgstr "Izenak"
 
 #: bin/modules/gui/window/win_preference.py:69
 msgid "Preference"
@@ -773,7 +773,7 @@ msgstr ""
 
 #: bin/modules/gui/window/__init__.py:33
 msgid "Unknown Window"
-msgstr ""
+msgstr "Leiho ezezaguna"
 
 #: bin/modules/gui/window/win_search.py:143
 #, python-format
@@ -819,7 +819,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:217
 msgid "Creation Date"
-msgstr ""
+msgstr "Sortze data"
 
 #: bin/modules/gui/window/form.py:218
 msgid "Latest Modification by"
@@ -871,7 +871,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:358
 msgid "Print Screen"
-msgstr ""
+msgstr "Pantaila Inprimatu"
 
 #: bin/modules/gui/window/form.py:378
 msgid "No record selected"
@@ -879,7 +879,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:383
 msgid "New document"
-msgstr ""
+msgstr "Dokumentu berria"
 
 #: bin/modules/gui/window/form.py:385
 msgid "Editing document (id: "
@@ -911,7 +911,7 @@ msgstr ""
 
 #: bin/modules/action/wizard.py:143
 msgid "Operation in progress"
-msgstr ""
+msgstr "Eragiketa egiten ari da"
 
 #: bin/printer/printer.py:172
 #, python-format
@@ -944,7 +944,7 @@ msgstr ""
 #: bin/openerp.glade:100 bin/openerp.glade:7398 bin/openerp.glade:7641
 #: bin/openerp.glade:7938 bin/openerp.glade:8286
 msgid "Change"
-msgstr ""
+msgstr "Aldatu"
 
 #: bin/openerp.glade:118 bin/openerp.glade:7298
 msgid "Database:"
@@ -952,23 +952,23 @@ msgstr ""
 
 #: bin/openerp.glade:133
 msgid "User:"
-msgstr ""
+msgstr "Erabiltzailea:"
 
 #: bin/openerp.glade:148 bin/openerp.glade:7284 bin/openerp.glade:7584
 msgid "Password:"
-msgstr ""
+msgstr "Pasahitza:"
 
 #: bin/openerp.glade:257
 msgid "_File"
-msgstr ""
+msgstr "_Fitxategia"
 
 #: bin/openerp.glade:264
 msgid "_Connect..."
-msgstr ""
+msgstr "_Konektatu..."
 
 #: bin/openerp.glade:280
 msgid "_Disconnect"
-msgstr ""
+msgstr "_Deskonektatu"
 
 #: bin/openerp.glade:300
 msgid "Databases"
@@ -996,7 +996,7 @@ msgstr ""
 
 #: bin/openerp.glade:417
 msgid "_User"
-msgstr ""
+msgstr "_Erabiltzailea"
 
 #: bin/openerp.glade:425
 msgid "_Preferences"
@@ -1020,11 +1020,11 @@ msgstr ""
 
 #: bin/openerp.glade:501
 msgid "_New"
-msgstr ""
+msgstr "_Berria"
 
 #: bin/openerp.glade:517
 msgid "_Save"
-msgstr ""
+msgstr "_Gorde"
 
 #: bin/openerp.glade:533
 msgid "Copy this resource"
@@ -1032,15 +1032,15 @@ msgstr ""
 
 #: bin/openerp.glade:534
 msgid "_Duplicate"
-msgstr ""
+msgstr "_Bikoiztu"
 
 #: bin/openerp.glade:550
 msgid "_Delete"
-msgstr ""
+msgstr "_Ezabatu"
 
 #: bin/openerp.glade:571
 msgid "Find"
-msgstr ""
+msgstr "Bilatu"
 
 #: bin/openerp.glade:587
 msgid "Ne_xt"
