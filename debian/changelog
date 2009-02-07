@@ -1,3 +1,12 @@
+openerp-client (5.0.0-1) unstable; urgency=low
+
+  * Adding python-hippocanvas to recommends, thanks to David Goodenough
+    <david.goodenough@linkchoose.co.uk> (Closes: #511610).
+  * Merging upstream version 5.0.0.
+  * Rediffing gtk.patch.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat,  7 Feb 2009 12:15:00 +0100
+
 openerp-client (5.0.0~rc3-1) unstable; urgency=low
 
   * Merging upstream version 5.0.0~rc3.
