@@ -236,6 +236,9 @@ class rpc_session(object):
     def migrate_databases(self, url, password, databases):
         return self.exec_no_except(url, 'db', 'migrate_databases', password, databases)
 
+    def get_available_updates(self, url, password, contract_id, contract_password):
+        return self.exec_no_except(url, 'common', 'get_available_updates', password, contract_id, contract_password)
+
     def get_migration_scripts(self, url, password, contract_id, contract_password):
         return self.exec_no_except(url, 'common', 'get_migration_scripts', password, contract_id, contract_password)
 

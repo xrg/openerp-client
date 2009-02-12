@@ -222,7 +222,8 @@ class DatabaseDialog(gtk.Dialog):
                 tb_s = "".join(traceback.format_exception(*tb))
                 common.error(_('Application Error'), str(e), tb_s, disconnected_mode=True)
         else:
-            common.message(self.message, self.get_title())
+            if hasattr(self, 'message') and self.message:
+                common.message(self.message, self.get_title())
 
     def on_response_accept(self):
         pass
@@ -252,6 +253,23 @@ class RetrieveMigrationScriptDialog(DatabaseDialog):
         self.table.attach(self.contractPwdEntry, 1, 2, 4, 5)
 
     def on_response_accept(self):
+        au = rpc.session.get_available_updates(
+            self.serverEntry.get_text(),
+            self.adminPwdEntry.get_text(),
+            self.contractIdEntry.get_text(),
+            self.contractPwdEntry.get_text(),
+        )
+        if not au:
+            self.message = _("You already have the latest version")
+            return
+
+        au = ["%s: %s" % (k, v) for k, v in au.items()]
+        au.sort()
+        au.insert(0, _("The following updates are available:"))
+        msg = "\n * ".join(au)
+        if not common.sur(msg):
+            return
+
         # The OpenERP server fetchs the migration scripts
         rpc.session.get_migration_scripts(
             self.serverEntry.get_text(),
@@ -259,7 +277,7 @@ class RetrieveMigrationScriptDialog(DatabaseDialog):
             self.contractIdEntry.get_text(),
             self.contractPwdEntry.get_text(),
         )
-        self.message = "Migration scripts fetched !"
+        self.message = _("You can now migrate your databases.")
 
 class MigrationDatabaseDialog(DatabaseDialog):
     def __init__(self, parent):
