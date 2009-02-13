@@ -1,3 +1,9 @@
+openerp-client (5.0.0-2-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.0-2.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 14 Feb 2009 00:01:00 +0100
+
 openerp-client (5.0.0-1) unstable; urgency=low
 
   * Adding python-hippocanvas to recommends, thanks to David Goodenough
