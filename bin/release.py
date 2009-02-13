@@ -34,7 +34,7 @@ customizable reports, and SOAP and XML-RPC interfaces.
 '''
 classifiers = """\
 Development Status :: 5 - Production/Stable
-License :: OSI Approved :: GNU General Public License Version 3 (GPL-3)
+License :: OSI Approved :: GNU General Public License (GPL)
 Programming Language :: Python
 """
 url = 'http://www.openerp.com'
