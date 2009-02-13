@@ -1,3 +1,9 @@
+openerp-client (5.0.0-3-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.0-3.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 14 Feb 2009 00:35:00 +0100
+
 openerp-client (5.0.0-2-1) unstable; urgency=low
 
   * Merging upstream version 5.0.0-2.
