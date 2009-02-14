@@ -277,7 +277,7 @@ class rpc_session(object):
 	    language, in_encoding = locale.getdefaultlocale()
 	    common.warning(err[1].decode(in_encoding),_('Socket error'))
 	    return -1
-	    except RuntimeError, err:
+	except RuntimeError, err:
 		import locale
 		language, in_encoding = locale.getdefaultlocale()
 		try:
@@ -287,7 +287,7 @@ class rpc_session(object):
 		common.warning(err_string,_('Cannot list db:'))
 		return -1
         except Exception, e:
-	    common.error(_('Cannot list db:'), str(e))
+	    common.warning(str(e), _('Cannot list db:'))
             return -1
 
     def db_exec_no_except(self, url, method, *args):
