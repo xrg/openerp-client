@@ -92,6 +92,8 @@ class TextBuffer(gtk.TextBuffer):
     def _on_apply_tag(self, buffer, tag, start, end):
         if self.lock_undo:
             return
+        if tag.get_property('name') == 'gtkspell-misspelled':
+            return
         self._update_timestamp()
         item = UndoApplyTag(self, start, end, tag)
         self.current_undo.add(item)
@@ -99,6 +101,8 @@ class TextBuffer(gtk.TextBuffer):
 
     def _on_remove_tag(self, buffer, tag, start, end):
         if self.lock_undo:
+            return
+        if tag.get_property('name') == 'gtkspell-misspelled':
             return
         self._update_timestamp()
         item = UndoRemoveTag(self, start, end, tag)
@@ -198,6 +202,14 @@ class TextBuffer(gtk.TextBuffer):
         self.lock_undo = False
 
 
+    def flush_undo_stack(self):
+        self._cancel_undo_timeout()
+        if len(self.undo_stack) == 0:
+            return
+        self.undo_stack = []
+        self.emit('undo-stack-changed')
+
+
     def can_redo(self):
         return len(self.redo_stack) > 0
 
@@ -211,6 +223,14 @@ class TextBuffer(gtk.TextBuffer):
         item.redo()
         self._undo_add(item)
         self.lock_undo = False
+
+
+    def flush_redo_stack(self):
+        self._cancel_undo_timeout()
+        if len(self.redo_stack) == 0:
+            return
+        self.redo_stack = []
+        self.emit('undo-stack-changed')
 
 
 gobject.signal_new('undo-stack-changed',
