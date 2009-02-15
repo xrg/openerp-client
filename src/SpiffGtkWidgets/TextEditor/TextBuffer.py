@@ -42,7 +42,7 @@ class TextBuffer(gtk.TextBuffer):
         self.connect('end-user-action',   self._on_end_user_action)
 
         features = (
-            ('list-indent', True, Features.ListIndent, ()),
+            #('list-indent', True, Features.ListIndent, ()),
         )
         for name, default, feature, feature_args in features:
             active = kwargs.get(name, default)
