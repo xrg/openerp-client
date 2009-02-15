@@ -132,8 +132,8 @@ class Window(gtk.Window):
         return 'annotation%d' % self.n_annotations
 
 
-    def _on_annotation_buffer_changed(self, buffer, annotation):
-        if buffer.get_text(*buffer.get_bounds()) == '':
+    def _on_annotation_focus_out_event(self, annotation, event):
+        if annotation.get_text() == '':
             self.view.remove_annotation(annotation)
 
 
@@ -142,12 +142,11 @@ class Window(gtk.Window):
         annotation.modify_bg(gtk.gdk.color_parse('lightblue'))
         annotation.modify_border(gtk.gdk.color_parse('blue'))
         annotation.set_title('Annotation')
-        annotation.set_text('Annotation number %d.' % self.n_annotations)
+        #annotation.set_text('Annotation number %d.' % self.n_annotations)
         annotation.show_all()
         self.view.add_annotation(annotation)
-        annotation.buffer.connect('changed',
-                                  self._on_annotation_buffer_changed,
-                                  annotation)
+        annotation.connect('focus-out-event',
+                           self._on_annotation_focus_out_event)
         return annotation
 
 

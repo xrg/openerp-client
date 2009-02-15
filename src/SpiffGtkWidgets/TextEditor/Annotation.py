@@ -53,10 +53,12 @@ class Annotation(gtk.EventBox):
 
     def _on_focus_in_event(self, text_view, event):
         self.set_title(self.title, True)
+        self.emit('focus-in-event', event)
 
 
     def _on_focus_out_event(self, text_view, event):
         self.set_title(self.title)
+        self.emit('focus-out-event', event)
 
 
     def _on_move_cursor_after(self, text_view, step_size, count, extend):
@@ -92,6 +94,7 @@ class Annotation(gtk.EventBox):
         if have_text or force_colon:
             title = '%s: ' % title
         self.title_len = len(title)
+        start = self.buffer.get_start_iter()
         self.buffer.insert(start, title)
         start = self.buffer.get_start_iter()
         end   = self.buffer.get_iter_at_offset(len(title))
