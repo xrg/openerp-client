@@ -162,6 +162,14 @@ class TextEditor(gtk.TextView):
         self.remove(annotation)
 
 
+    def get_annotation_from_mark(self, mark):
+        return self.annotations[mark]
+
+
+    def get_annotations(self):
+        return self.annotations.values()
+
+
     def set_show_annotations(self, active = True):
         if self.show_annotations == active:
             return
