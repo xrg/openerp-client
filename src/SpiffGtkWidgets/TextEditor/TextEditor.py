@@ -86,11 +86,11 @@ class TextEditor(gtk.TextView):
     def _get_annotation_mark_offset(self, annotation1, annotation2):
         iter1 = self.get_buffer().get_iter_at_mark(annotation1.mark)
         iter2 = self.get_buffer().get_iter_at_mark(annotation2.mark)
-        off1  = iter1.get_line()
-        off2  = iter2.get_line()
-        if off1 == off2:
-            return iter2.get_offset() - iter1.get_offset()
-        return off1 - off2
+        rect1 = self.get_iter_location(iter1)
+        rect2 = self.get_iter_location(iter2)
+        if rect1.y != rect2.y:
+            return rect1.y - rect2.y
+        return rect2.x - rect1.x
 
 
     def _get_annotation_mark_position(self, annotation):
