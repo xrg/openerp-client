@@ -70,8 +70,6 @@ class TextEditor(gtk.TextView):
         for annotation in self.anno_layout.get_children():
             mark_x, mark_y = self._get_annotation_mark_position(annotation)
             anno_x, anno_y, anno_w, anno_h, d = annotation.window.get_geometry()
-            if int(mark_y) <= 0:
-                continue
             path = [(mark_x,           mark_y - 5),
                     (mark_x,           mark_y),
                     (w - right_margin, mark_y),
