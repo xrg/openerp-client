@@ -69,8 +69,9 @@ class TextEditor(gtk.TextView):
         right_margin = self.get_right_margin()
         for annotation in self.anno_layout.get_children():
             mark_x, mark_y = self._get_annotation_mark_position(annotation)
-            anno_x, anno_y = self.anno_layout.get_annotation_position(annotation)
-            anno_x, anno_y, anno_w, anno_h = annotation.get_allocation()
+            anno_x, anno_y, anno_w, anno_h, d = annotation.window.get_geometry()
+            if int(mark_y) <= 0:
+                continue
             path = [(mark_x,           mark_y - 5),
                     (mark_x,           mark_y),
                     (w - right_margin, mark_y),
@@ -98,9 +99,8 @@ class TextEditor(gtk.TextView):
         iter           = self.get_buffer().get_iter_at_mark(annotation.mark)
         rect           = self.get_iter_location(iter)
         mark_x, mark_y = rect.x, rect.y + rect.height
-        return self.window_to_buffer_coords(gtk.TEXT_WINDOW_TEXT,
-                                            mark_x,
-                                            mark_y)
+        return self.buffer_to_window_coords(gtk.TEXT_WINDOW_TEXT,
+                                            mark_x, mark_y)
 
 
     def _update_annotation(self, annotation):

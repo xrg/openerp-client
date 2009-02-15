@@ -92,7 +92,7 @@ class Window(gtk.Window):
         self.hbox.pack_start(button)
 
         # Pack widgets.
-        self.scroll.add_with_viewport(self.view)
+        self.scroll.add(self.view)
         self.add(self.vbox)
         self.vbox.pack_start(self.hbox, False)
         self.vbox.pack_start(self.scroll)
