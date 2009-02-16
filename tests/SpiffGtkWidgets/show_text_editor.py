@@ -153,6 +153,8 @@ class Window(gtk.Window):
 
 
     def _on_button_show_annotations_toggled(self, button):
+        for annotation in self.view.get_annotations():
+            print annotation.toxml()
         active = button.get_active()
         self.view.set_show_annotations(active)
 

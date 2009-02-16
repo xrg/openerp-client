@@ -18,6 +18,7 @@ import cairo
 from SpiffGtkWidgets import color
 from TextBuffer      import TextBuffer
 from Layout          import Layout
+from Annotation      import Annotation
 
 class TextEditor(gtk.TextView):
     def __init__(self, textbuffer = None, *args, **kwargs):
@@ -29,6 +30,7 @@ class TextEditor(gtk.TextView):
         self.anno_layout      = Layout(self)
         self.annotations      = {}
         self.show_annotations = True
+        self.exposed          = False
         self.set_right_margin(50 + self.anno_padding)
         self.connect('expose_event', self._on_expose_event)
         self.get_buffer().connect('mark-set', self._on_buffer_mark_set)
@@ -40,6 +42,11 @@ class TextEditor(gtk.TextView):
 
 
     def _on_expose_event(self, widget, event):
+        if not self.exposed:
+            self.exposed = True
+            self._update_annotation_area()
+            self._update_annotations()
+
         text_window = widget.get_window(gtk.TEXT_WINDOW_TEXT)
         if event.window != text_window:
             return
@@ -84,8 +91,8 @@ class TextEditor(gtk.TextView):
 
 
     def _get_annotation_mark_offset(self, annotation1, annotation2):
-        iter1 = self.get_buffer().get_iter_at_mark(annotation1.mark)
-        iter2 = self.get_buffer().get_iter_at_mark(annotation2.mark)
+        iter1 = self.get_buffer().get_iter_at_mark(annotation1.start_mark)
+        iter2 = self.get_buffer().get_iter_at_mark(annotation2.start_mark)
         rect1 = self.get_iter_location(iter1)
         rect2 = self.get_iter_location(iter2)
         if rect1.y != rect2.y:
@@ -94,7 +101,7 @@ class TextEditor(gtk.TextView):
 
 
     def _get_annotation_mark_position(self, annotation):
-        iter           = self.get_buffer().get_iter_at_mark(annotation.mark)
+        iter           = self.get_buffer().get_iter_at_mark(annotation.start_mark)
         rect           = self.get_iter_location(iter)
         mark_x, mark_y = rect.x, rect.y + rect.height
         return self.buffer_to_window_coords(gtk.TEXT_WINDOW_TEXT,
@@ -116,7 +123,8 @@ class TextEditor(gtk.TextView):
         self.set_border_window_size(gtk.TEXT_WINDOW_RIGHT, self.anno_width)
         bg_color = self.get_style().base[gtk.STATE_NORMAL]
         window   = self.get_window(gtk.TEXT_WINDOW_RIGHT)
-        window.set_background(bg_color)
+        if window:
+            window.set_background(bg_color)
 
 
     def _update_annotations(self):
@@ -143,7 +151,8 @@ class TextEditor(gtk.TextView):
 
 
     def add_annotation(self, annotation):
-        self.annotations[annotation.mark] = annotation
+        annotation.show_all()
+        self.annotations[annotation.start_mark] = annotation
         if self.show_annotations == False:
             return
 
@@ -157,9 +166,15 @@ class TextEditor(gtk.TextView):
 
 
     def remove_annotation(self, annotation):
+        self.get_buffer().delete_mark(annotation.start_mark)
         self.anno_layout.remove(annotation)
-        del self.annotations[annotation.mark]
+        del self.annotations[annotation.start_mark]
         self.remove(annotation)
+
+
+    def remove_annotations(self):
+        for annotation in self.annotations.values():
+            self.remove_annotation(annotation)
 
 
     def get_annotation_from_mark(self, mark):
@@ -168,6 +183,20 @@ class TextEditor(gtk.TextView):
 
     def get_annotations(self):
         return self.annotations.values()
+
+
+    def get_annotations_xml(self):
+        xml = '<xml>'
+        for annotation in self.annotations.itervalues():
+            xml += annotation.toxml()
+        return xml + '</xml>'
+
+
+    def add_annotations_from_xml(self, xml):
+        from xml.dom.minidom import parseString
+        root = parseString(xml)
+        for node in root.getElementsByTagName('annotation'):
+            self.add_annotation(Annotation.fromxml(self.get_buffer(), node))
 
 
     def set_show_annotations(self, active = True):

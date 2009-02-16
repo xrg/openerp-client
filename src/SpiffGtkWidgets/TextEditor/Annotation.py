@@ -17,18 +17,19 @@ import gtk
 import pango
 
 class Annotation(gtk.EventBox):
-    def __init__(self, mark, *args, **kwargs):
-        gtk.EventBox.__init__(self, *args, **kwargs)
+    def __init__(self, start_mark, end_mark = None):
+        gtk.EventBox.__init__(self)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK   |
                         gtk.gdk.BUTTON_RELEASE_MASK |
                         gtk.gdk.POINTER_MOTION_MASK |
                         gtk.gdk.POINTER_MOTION_HINT_MASK)
-        self.mark      = mark
-        self.buffer    = gtk.TextBuffer()
-        self.view      = gtk.TextView(self.buffer)
-        align          = gtk.Alignment(.5, .5, 1, 1)
-        self.title     = ''
-        self.title_len = 0
+        self.start_mark = start_mark
+        self.end_mark   = end_mark
+        self.buffer     = gtk.TextBuffer()
+        self.view       = gtk.TextView(self.buffer)
+        align           = gtk.Alignment(.5, .5, 1, 1)
+        self.title      = ''
+        self.title_len  = 0
         align.set_padding(1, 1, 1, 1)
         align.add(self.view)
         self.add(align)
@@ -120,3 +121,58 @@ class Annotation(gtk.EventBox):
         start = self.buffer.get_iter_at_offset(self.title_len)
         end   = self.buffer.get_end_iter()
         return self.buffer.get_text(start, end)
+
+
+    @classmethod
+    def _get_xml_text(self, nodes):
+        return ''.join([n.data for n in nodes if n.nodeType == n.TEXT_NODE])
+
+
+    @classmethod
+    def _handle_xml_title(self, annotation, node):
+        annotation.set_title(self._get_xml_text(node.childNodes))
+
+
+    @classmethod
+    def _handle_xml_text(self, annotation, node):
+        annotation.set_text(self._get_xml_text(node.childNodes))
+
+
+    @classmethod
+    def fromxml(self, buffer, node):
+        """
+        Returns a new instance of an annotation that is assigned to the
+        given buffer. node is a XML dom element.
+        """
+        name       = node.getAttribute('name')
+        start      = int(node.getAttribute('start'))
+        end        = int(node.getAttribute('end'))
+        title_node = node.getElementsByTagName('title')[0]
+        text_node  = node.getElementsByTagName('text')[0]
+        start_iter = buffer.get_iter_at_offset(max(0, start))
+        end_iter   = buffer.get_iter_at_offset(max(0, end))
+        start_mark = buffer.create_mark(name,          start_iter)
+        end_mark   = buffer.create_mark(name + '_end', end_iter)
+        annotation = Annotation(start_mark, end_mark)
+        annotation._handle_xml_title(annotation, title_node)
+        annotation._handle_xml_text (annotation, text_node)
+        return annotation
+
+
+    def toxml(self):
+        """
+        Returns an XML representation of the annotation. The XML also
+        contains the "mark" at which the node is added to the buffer.
+        """
+        parent = self.get_parent()
+        buffer = parent.get_buffer()
+        if parent:
+            start = buffer.get_iter_at_mark(self.start_mark).get_offset()
+        else:
+            start = -1
+        attrs = (self.start_mark.get_name(), start, start)
+        xml   = '<annotation name="%s" start="%d" end="%d">' % attrs
+        xml  += '<title>%s</title>'                          % self.title
+        xml  += '<text>%s</text>'                            % self.get_text()
+        xml  += '</annotation>'
+        return xml
