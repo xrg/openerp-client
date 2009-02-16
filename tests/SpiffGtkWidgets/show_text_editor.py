@@ -28,10 +28,6 @@ class Window(gtk.Window):
         self.scroll = gtk.ScrolledWindow()
         self.view   = TextEditor()
         buffer      = self.view.get_buffer()
-        self.bold   = buffer.create_tag('bold',   weight = pango.WEIGHT_BOLD)
-        self.italic = buffer.create_tag('italic', style  = pango.STYLE_ITALIC)
-        self.uline  = buffer.create_tag('underline',
-                                        underline = pango.UNDERLINE_SINGLE)
         self.view.modify_font(pango.FontDescription("Arial 12"))
         self.scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         self.set_size_request(800, 600)
@@ -47,7 +43,7 @@ class Window(gtk.Window):
         button.connect('clicked',
                        self._on_button_format_clicked,
                        buffer,
-                       self.bold)
+                       'bold')
         self.hbox.pack_start(button, False)
 
         button = gtk.Button(stock = gtk.STOCK_ITALIC)
@@ -55,7 +51,7 @@ class Window(gtk.Window):
         button.connect('clicked',
                        self._on_button_format_clicked,
                        buffer,
-                       self.italic)
+                       'italic')
         self.hbox.pack_start(button, False)
 
         button = gtk.Button(stock = gtk.STOCK_UNDERLINE)
@@ -63,7 +59,7 @@ class Window(gtk.Window):
         button.connect('clicked',
                        self._on_button_format_clicked,
                        buffer,
-                       self.uline)
+                       'underline')
         self.hbox.pack_start(button, False)
 
         # Undo/redo buttons.
@@ -99,10 +95,9 @@ class Window(gtk.Window):
         self.show_all()
 
         # Enable spell checking.
-        return #FIXME
         lang = locale.getlocale()[0]
         if lang is None:
-            print "WARNING: Spell checking diabled because language is not set."
+            print "WARNING: Spell check disabled because language is not set."
         else:
             gtkspell.Spell(self.view).set_language(lang)
 
@@ -113,10 +108,7 @@ class Window(gtk.Window):
 
 
     def _on_button_format_clicked(self, button, buffer, format):
-        bounds = buffer.get_selection_bounds()
-        if not bounds:
-            return
-        buffer.apply_tag(format, *bounds)
+        buffer.toggle_selection_tag(format)
 
 
     def _on_button_undo_clicked(self, button, buffer):

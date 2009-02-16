@@ -34,6 +34,8 @@ class TextBuffer(gtk.TextBuffer):
         self.undo_timeout_id = None
         self.user_action     = 0
         self.active_features = []
+
+        # Connect signals.
         self.connect('insert-text',       self._on_insert_text)
         self.connect('delete-range',      self._on_delete_range)
         self.connect('apply-tag',         self._on_apply_tag)
@@ -41,6 +43,15 @@ class TextBuffer(gtk.TextBuffer):
         self.connect('begin-user-action', self._on_begin_user_action)
         self.connect('end-user-action',   self._on_end_user_action)
 
+        # Create text styles.
+        tags = {'bold':      dict(weight    = pango.WEIGHT_BOLD),
+                'italic':    dict(style     = pango.STYLE_ITALIC),
+                'underline': dict(underline = pango.UNDERLINE_SINGLE)}
+        self.tags = dict()
+        for name, style in tags.iteritems():
+            self.tags[name] = self.create_tag(name, **style)
+
+        # Enable other features.
         features = (
             #('list-indent', True, Features.ListIndent, ()),
         )
@@ -53,6 +64,58 @@ class TextBuffer(gtk.TextBuffer):
 
     def activate_feature(self, feature, *args):
         self.active_features.append(feature(self, *args))
+
+
+    def offset_range_has_tag(self, start, end, tag_name):
+        tag       = self.tags[tag_name]
+        tags_list = self.get_tags_at_offset(start, end)
+        for tags in tags_list:
+            if tag not in tags:
+                return False
+        return True
+
+
+    def selection_has_tag(self, tag_name):
+        # Check whether there is a selection.
+        bounds = self.get_selection_bounds()
+        if bounds:
+            start = bounds[0].get_offset()
+            end   = bounds[1].get_offset()
+            return self.offset_range_has_tag(start, end, tag_name)
+
+        # So nothing is selected. Get the position of the cursor.
+        mark = self.get_mark('insert')
+        iter = self.get_iter_at_mark(mark)
+
+        # Get a range of one char around that mark.
+        iter.backward_char()
+        start = iter.get_offset()
+        iter.forward_chars(2)
+        end = iter.get_offset()
+
+        # Return True if both chars have the given tag, False otherwise.
+        return self.offset_range_has_tag(start, end, tag_name)
+
+
+    def tag_selection(self, tag_name):
+        bounds = self.get_selection_bounds()
+        if not bounds:
+            return
+        self.apply_tag(self.tags[tag_name], *bounds)
+
+
+    def untag_selection(self, tag_name):
+        bounds = self.get_selection_bounds()
+        if not bounds:
+            return
+        self.remove_tag(self.tags[tag_name], *bounds)
+
+
+    def toggle_selection_tag(self, tag_name):
+        if self.selection_has_tag(tag_name):
+            self.untag_selection(tag_name)
+        else:
+            self.tag_selection(tag_name)
 
 
     def _cancel_undo_timeout(self):
