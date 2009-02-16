@@ -14,6 +14,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 import gtk, pango, time, gobject
+from Annotation     import Annotation
 from UndoInsertText import UndoInsertText
 from UndoDeleteText import UndoDeleteText
 from UndoApplyTag   import UndoApplyTag
@@ -332,7 +333,7 @@ class TextBuffer(gtk.TextBuffer):
         from xml.dom.minidom import parseString
         root = parseString(xml)
         for node in root.getElementsByTagName('annotation'):
-            self.add_annotation(Annotation.fromxml(self.get_buffer(), node))
+            self.add_annotation(Annotation.fromxml(self, node))
 
 
 gobject.signal_new('annotation-added',
