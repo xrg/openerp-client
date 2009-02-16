@@ -13,27 +13,29 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-import gtk
-import cairo
+import gobject, gtk, cairo
 from SpiffGtkWidgets import color
 from TextBuffer      import TextBuffer
 from Layout          import Layout
-from Annotation      import Annotation
+from AnnotationView  import AnnotationView
 
 class TextEditor(gtk.TextView):
     def __init__(self, textbuffer = None, *args, **kwargs):
         if textbuffer is None:
             textbuffer = TextBuffer()
         gtk.TextView.__init__(self, textbuffer, *args, **kwargs)
+        self.buffer           = textbuffer
         self.anno_width       = 200
         self.anno_padding     = 10
         self.anno_layout      = Layout(self)
-        self.annotations      = {}
+        self.anno_views       = {}
         self.show_annotations = True
         self.exposed          = False
         self.set_right_margin(50 + self.anno_padding)
         self.connect('expose_event', self._on_expose_event)
-        self.get_buffer().connect('mark-set', self._on_buffer_mark_set)
+        self.buffer.connect('mark-set',           self._on_buffer_mark_set)
+        self.buffer.connect('annotation-added',   self._on_annotation_added)
+        self.buffer.connect('annotation-removed', self._on_annotation_removed)
         self.set_wrap_mode(gtk.WRAP_WORD)
 
 
@@ -90,9 +92,11 @@ class TextEditor(gtk.TextView):
             ctx.stroke()
 
 
-    def _get_annotation_mark_offset(self, annotation1, annotation2):
-        iter1 = self.get_buffer().get_iter_at_mark(annotation1.start_mark)
-        iter2 = self.get_buffer().get_iter_at_mark(annotation2.start_mark)
+    def _get_annotation_mark_offset(self, view1, view2):
+        mark1 = view1.annotation.start_mark
+        mark2 = view2.annotation.start_mark
+        iter1 = self.get_buffer().get_iter_at_mark(mark1)
+        iter2 = self.get_buffer().get_iter_at_mark(mark2)
         rect1 = self.get_iter_location(iter1)
         rect2 = self.get_iter_location(iter2)
         if rect1.y != rect2.y:
@@ -100,8 +104,9 @@ class TextEditor(gtk.TextView):
         return rect2.x - rect1.x
 
 
-    def _get_annotation_mark_position(self, annotation):
-        iter           = self.get_buffer().get_iter_at_mark(annotation.start_mark)
+    def _get_annotation_mark_position(self, view):
+        start_mark     = view.annotation.start_mark
+        iter           = self.get_buffer().get_iter_at_mark(start_mark)
         rect           = self.get_iter_location(iter)
         mark_x, mark_y = rect.x, rect.y + rect.height
         return self.buffer_to_window_coords(gtk.TEXT_WINDOW_TEXT,
@@ -150,53 +155,40 @@ class TextEditor(gtk.TextView):
         self._update_annotations()
 
 
-    def add_annotation(self, annotation):
-        annotation.show_all()
-        self.annotations[annotation.start_mark] = annotation
+    def _on_annotation_added(self, buffer, annotation):
         if self.show_annotations == False:
             return
-
+        annotation.set_display_buffer(self.buffer)
+        view = AnnotationView(annotation)
+        self.anno_views[annotation] = view
+        for event in ('focus-in-event', 'focus-out-event'):
+            view.connect(event, self._on_annotation_event, annotation, event)
+        if annotation.get_bg_color():
+            view.modify_bg(annotation.get_bg_color())
+        if annotation.get_border_color():
+            view.modify_border(annotation.get_border_color())
+        if annotation.get_text_color():
+            view.modify_fg(annotation.get_text_color())
+        view.show_all()
         self._update_annotation_area()
-        self.anno_layout.add(annotation)
-        self.add_child_in_window(annotation,
+        self.anno_layout.add(view)
+        self.add_child_in_window(view,
                                  gtk.TEXT_WINDOW_RIGHT,
                                  self.anno_padding,
                                  0)
         self._update_annotations()
 
 
-    def remove_annotation(self, annotation):
-        self.get_buffer().delete_mark(annotation.start_mark)
-        self.anno_layout.remove(annotation)
-        del self.annotations[annotation.start_mark]
-        self.remove(annotation)
+    def _on_annotation_removed(self, buffer, annotation):
+        view = self.anno_views[annotation]
+        self.anno_layout.remove(view)
+        self.remove(view)
 
 
-    def remove_annotations(self):
-        for annotation in self.annotations.values():
-            self.remove_annotation(annotation)
-
-
-    def get_annotation_from_mark(self, mark):
-        return self.annotations[mark]
-
-
-    def get_annotations(self):
-        return self.annotations.values()
-
-
-    def get_annotations_xml(self):
-        xml = '<xml>'
-        for annotation in self.annotations.itervalues():
-            xml += annotation.toxml()
-        return xml + '</xml>'
-
-
-    def add_annotations_from_xml(self, xml):
-        from xml.dom.minidom import parseString
-        root = parseString(xml)
-        for node in root.getElementsByTagName('annotation'):
-            self.add_annotation(Annotation.fromxml(self.get_buffer(), node))
+    def _on_annotation_event(self, buffer, *args):
+        annotation = args[-2]
+        event_name = args[-1]
+        self.emit('annotation-' + event_name, annotation)
 
 
     def set_show_annotations(self, active = True):
@@ -208,10 +200,21 @@ class TextEditor(gtk.TextView):
         # window reappears.
         self.show_annotations = active
         if active:
-            for annotation in self.annotations.itervalues():
-                self.add_annotation(annotation)
+            for annotation in self.buffer.get_annotations():
+                self._on_annotation_added(self.buffer, annotation)
         else:
-            for annotation in self.annotations.itervalues():
-                self.anno_layout.remove(annotation)
-                self.remove(annotation)
+            for annotation in self.buffer.get_annotations():
+                self._on_annotation_removed(self.buffer, annotation)
             self.set_border_window_size(gtk.TEXT_WINDOW_RIGHT, 0)
+
+gobject.signal_new('annotation-focus-in-event',
+                   TextEditor,
+                   gobject.SIGNAL_RUN_FIRST,
+                   gobject.TYPE_NONE,
+                   (gobject.TYPE_PYOBJECT, ))
+
+gobject.signal_new('annotation-focus-out-event',
+                   TextEditor,
+                   gobject.SIGNAL_RUN_FIRST,
+                   gobject.TYPE_NONE,
+                   (gobject.TYPE_PYOBJECT, ))

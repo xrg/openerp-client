@@ -36,6 +36,8 @@ class Window(gtk.Window):
         self.hbox.set_spacing(6)
         buffer.connect('undo-stack-changed',
                        self._on_buffer_undo_stack_changed)
+        self.view.connect('annotation-focus-out-event',
+                          self._on_annotation_focus_out_event)
 
         # Format changing buttons.
         button = gtk.Button(stock = gtk.STOCK_BOLD)
@@ -124,21 +126,18 @@ class Window(gtk.Window):
         return 'annotation%d' % self.n_annotations
 
 
-    def _on_annotation_focus_out_event(self, annotation, event):
+    def _on_annotation_focus_out_event(self, editor, annotation):
         if annotation.get_text() == '':
-            self.view.remove_annotation(annotation)
+            editor.get_buffer().remove_annotation(annotation)
 
 
     def _add_annotation(self, mark):
         annotation = Annotation(mark)
-        annotation.modify_bg(gtk.gdk.color_parse('lightblue'))
-        annotation.modify_border(gtk.gdk.color_parse('blue'))
+        annotation.set_bg_color(gtk.gdk.color_parse('lightblue'))
+        annotation.set_border_color(gtk.gdk.color_parse('blue'))
         annotation.set_title('Annotation')
-        #annotation.set_text('Annotation number %d.' % self.n_annotations)
-        annotation.show_all()
-        self.view.add_annotation(annotation)
-        annotation.connect('focus-out-event',
-                           self._on_annotation_focus_out_event)
+        annotation.set_text('Annotation number %d.' % self.n_annotations)
+        self.view.get_buffer().add_annotation(annotation)
         return annotation
 
 
@@ -153,8 +152,6 @@ class Window(gtk.Window):
 
 
     def _on_button_show_annotations_toggled(self, button):
-        for annotation in self.view.get_annotations():
-            print annotation.toxml()
         active = button.get_active()
         self.view.set_show_annotations(active)
 

@@ -16,30 +16,20 @@
 import gtk
 import pango
 
-class Annotation(gtk.EventBox):
+class Annotation(object):
     def __init__(self, start_mark, end_mark = None):
-        gtk.EventBox.__init__(self)
-        self.add_events(gtk.gdk.BUTTON_PRESS_MASK   |
-                        gtk.gdk.BUTTON_RELEASE_MASK |
-                        gtk.gdk.POINTER_MOTION_MASK |
-                        gtk.gdk.POINTER_MOTION_HINT_MASK)
-        self.start_mark = start_mark
-        self.end_mark   = end_mark
-        self.buffer     = gtk.TextBuffer()
-        self.view       = gtk.TextView(self.buffer)
-        align           = gtk.Alignment(.5, .5, 1, 1)
-        self.title      = ''
-        self.title_len  = 0
-        align.set_padding(1, 1, 1, 1)
-        align.add(self.view)
-        self.add(align)
-        self.view.set_wrap_mode(gtk.WRAP_WORD)
+        self.start_mark     = start_mark
+        self.end_mark       = end_mark
+        self.buffer         = gtk.TextBuffer()
+        self.title          = ''
+        self.title_len      = 0
+        self.bg_color       = None
+        self.border_color   = None
+        self.text_color     = None
+        self.display_buffer = None
         self.buffer.create_tag('title',
                                editable = False,
                                weight   = pango.WEIGHT_BOLD)
-        self.view.connect_after('move-cursor', self._on_move_cursor_after)
-        self.view.connect('focus-in-event',  self._on_focus_in_event)
-        self.view.connect('focus-out-event', self._on_focus_out_event)
         self.buffer.connect('mark-set', self._on_buffer_mark_set)
 
 
@@ -52,35 +42,36 @@ class Annotation(gtk.EventBox):
             buffer.move_mark(mark, iter)
 
 
-    def _on_focus_in_event(self, text_view, event):
-        self.set_title(self.title, True)
-        self.emit('focus-in-event', event)
+    def set_display_buffer(self, buffer):
+        self.display_buffer = buffer
 
 
-    def _on_focus_out_event(self, text_view, event):
-        self.set_title(self.title)
-        self.emit('focus-out-event', event)
+    def get_display_buffer(self):
+        return self.display_buffer
 
 
-    def _on_move_cursor_after(self, text_view, step_size, count, extend):
-        insert = self.buffer.get_insert()
-        iter   = self.buffer.get_iter_at_mark(insert)
-        if iter.get_offset() <= self.title_len:
-            iter = self.buffer.get_iter_at_offset(self.title_len)
-            self.buffer.place_cursor(iter)
-            return True
+    def set_bg_color(self, color):
+        self.bg_color = color
 
 
-    def modify_bg(self, color):
-        self.view.modify_base(gtk.STATE_NORMAL, color)
+    def get_bg_color(self):
+        return self.bg_color
 
 
-    def modify_border(self, color):
-        gtk.EventBox.modify_bg(self, gtk.STATE_NORMAL, color)
+    def set_border_color(self, color):
+        self.border_color = color
 
 
     def get_border_color(self):
-        return self.get_style().bg[gtk.STATE_NORMAL]
+        return self.border_color
+
+
+    def set_text_color(self, color):
+        self.text_color = color
+
+
+    def get_text_color(self):
+        return self.text_color
 
 
     def set_title(self, title, force_colon = False):
@@ -164,9 +155,8 @@ class Annotation(gtk.EventBox):
         Returns an XML representation of the annotation. The XML also
         contains the "mark" at which the node is added to the buffer.
         """
-        parent = self.get_parent()
-        buffer = parent.get_buffer()
-        if parent:
+        buffer = self.display_buffer
+        if buffer:
             start = buffer.get_iter_at_mark(self.start_mark).get_offset()
         else:
             start = -1

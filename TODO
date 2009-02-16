@@ -1,5 +1,5 @@
 * Add support for annotating ranges of text.
 * Automatically color annotations depending on the title.
-* Split annotations into model and view and integrate them in the TextBuffer.
+* Do not allow for editing annotations if the TextEditor is not editable.
 * Create documentation.
 * Cleanup Calendar/CanvasTable.py and Calendar/TableLayout.py.

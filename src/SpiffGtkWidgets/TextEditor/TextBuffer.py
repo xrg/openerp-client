@@ -34,6 +34,7 @@ class TextBuffer(gtk.TextBuffer):
         self.undo_timeout_id = None
         self.user_action     = 0
         self.active_features = []
+        self.annotations     = {}
 
         # Connect signals.
         self.connect('insert-text',       self._on_insert_text)
@@ -295,6 +296,56 @@ class TextBuffer(gtk.TextBuffer):
         self.redo_stack = []
         self.emit('undo-stack-changed')
 
+
+    def add_annotation(self, annotation):
+        self.annotations[annotation.start_mark] = annotation
+        self.emit('annotation-added', annotation)
+
+
+    def remove_annotation(self, annotation):
+        self.delete_mark(annotation.start_mark) #FIXME: don't do this here
+        del self.annotations[annotation.start_mark]
+        self.emit('annotation-removed', annotation)
+
+
+    def remove_annotations(self):
+        for annotation in self.annotations.values():
+            self.remove_annotation(annotation)
+
+
+    def get_annotation_from_mark(self, mark):
+        return self.annotations[mark]
+
+
+    def get_annotations(self):
+        return self.annotations.values()
+
+
+    def get_annotations_xml(self):
+        xml = '<xml>'
+        for annotation in self.annotations.itervalues():
+            xml += annotation.toxml()
+        return xml + '</xml>'
+
+
+    def add_annotations_from_xml(self, xml):
+        from xml.dom.minidom import parseString
+        root = parseString(xml)
+        for node in root.getElementsByTagName('annotation'):
+            self.add_annotation(Annotation.fromxml(self.get_buffer(), node))
+
+
+gobject.signal_new('annotation-added',
+                   TextBuffer,
+                   gobject.SIGNAL_RUN_FIRST,
+                   gobject.TYPE_NONE,
+                   (gobject.TYPE_PYOBJECT, ))
+
+gobject.signal_new('annotation-removed',
+                   TextBuffer,
+                   gobject.SIGNAL_RUN_FIRST,
+                   gobject.TYPE_NONE,
+                   (gobject.TYPE_PYOBJECT, ))
 
 gobject.signal_new('undo-stack-changed',
                    TextBuffer,
