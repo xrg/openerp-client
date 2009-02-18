@@ -46,12 +46,9 @@ class TextBuffer(gtk.TextBuffer):
         self.connect('end-user-action',   self._on_end_user_action)
 
         # Create text styles.
-        tags = {'bold':      dict(weight    = pango.WEIGHT_BOLD),
-                'italic':    dict(style     = pango.STYLE_ITALIC),
-                'underline': dict(underline = pango.UNDERLINE_SINGLE)}
-        self.tags = dict()
-        for name, style in tags.iteritems():
-            self.tags[name] = self.create_tag(name, **style)
+        self.create_tag('bold',      weight    = pango.WEIGHT_BOLD)
+        self.create_tag('italic',    style     = pango.STYLE_ITALIC)
+        self.create_tag('underline', underline = pango.UNDERLINE_SINGLE)
 
         # Enable other features.
         features = (
@@ -69,7 +66,7 @@ class TextBuffer(gtk.TextBuffer):
 
 
     def offset_range_has_tag(self, start, end, tag_name):
-        tag       = self.tags[tag_name]
+        tag       = self.get_tag_table().lookup(tag_name)
         tags_list = self.get_tags_at_offset(start, end)
         for tags in tags_list:
             if tag not in tags:
@@ -103,14 +100,14 @@ class TextBuffer(gtk.TextBuffer):
         bounds = self.get_selection_bounds()
         if not bounds:
             return
-        self.apply_tag(self.tags[tag_name], *bounds)
+        self.apply_tag_by_name(tag_name, *bounds)
 
 
     def untag_selection(self, tag_name):
         bounds = self.get_selection_bounds()
         if not bounds:
             return
-        self.remove_tag(self.tags[tag_name], *bounds)
+        self.remove_tag_by_name(tag_name, *bounds)
 
 
     def toggle_selection_tag(self, tag_name):
