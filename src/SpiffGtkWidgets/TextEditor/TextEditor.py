@@ -30,6 +30,7 @@ class TextEditor(gtk.TextView):
         self.anno_layout      = Layout(self)
         self.anno_views       = {}
         self.show_annotations = True
+        self.handle_links     = True
         self.exposed          = False
         self.set_right_margin(50 + self.anno_padding)
         self.connect('expose_event',        self._on_expose_event)
@@ -42,6 +43,8 @@ class TextEditor(gtk.TextView):
 
 
     def _on_motion_notify_event(self, editor, event):
+        if not self.handle_links:
+            return
         x, y = self.window_to_buffer_coords(gtk.TEXT_WINDOW_WIDGET,
                                             int(event.x),
                                             int(event.y))
@@ -68,6 +71,8 @@ class TextEditor(gtk.TextView):
             return False
         if event.button != 1:
             return False
+        if not self.handle_links:
+            return
 
         # Don't follow a link if the user has selected something.
         bounds = self.buffer.get_selection_bounds()
@@ -252,6 +257,16 @@ class TextEditor(gtk.TextView):
             for annotation in self.buffer.get_annotations():
                 self._on_annotation_removed(self.buffer, annotation)
             self.set_border_window_size(gtk.TEXT_WINDOW_RIGHT, 0)
+
+
+    def set_handle_links(self, handle):
+        """
+        Defines whether the cursor is changed and whether clicks are accepted
+        when hovering over text with tags that have data named "link"
+        attached.
+        """
+        self.handle_links = handle
+
 
 gobject.signal_new('link-clicked',
                    TextEditor,
