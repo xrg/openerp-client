@@ -839,6 +839,7 @@ import one2many_list
 import picture
 import url
 import image
+import float_sci
 
 import progressbar
 
@@ -851,6 +852,7 @@ widgets_type = {
     'selection': (selection.selection, 1, False, False),
     'char': (char.char, 1, False, False),
     'float_time': (float_time.float_time, 1, False, False),
+    'float_sci': (float_sci.float_sci, 1, False, False),
     'boolean': (checkbox.checkbox, 1, False, False),
     'button': (button.button, 1, False, False),
     'reference': (reference.reference, 1, False, False),

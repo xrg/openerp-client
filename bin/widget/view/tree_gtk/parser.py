@@ -166,6 +166,7 @@ class parser_tree(interface.parser_interface):
                     'integer': 60,
                     'float': 80,
                     'float_time': 80,
+		    'float_sci': 80,
                     'date': 70,
                     'datetime': 120,
                     'selection': 90,
@@ -196,7 +197,7 @@ class parser_tree(interface.parser_interface):
                     calculate = 'avg'
 
                 if calculate and fields[fname]['type'] \
-                        in ('integer', 'float', 'float_time'):
+                        in ('integer', 'float', 'float_time', 'float_sci'):
                     label = gtk.Label()
                     label.set_use_markup(True)
                     label_str = fields[fname][calculate] + ': '
@@ -413,6 +414,19 @@ class Float(Char):
         return tools.locale_format('%.' + str(digit) + 'f', model[self.field_name].get_client(model) or 0.0)
 
     def value_from_text(self, model, text):
+        try:
+            return locale.atof(text)
+        except:
+            return 0.0
+
+class Float_Sci(Char):
+    def get_textual_value(self, model):
+        interger, digit = self.attrs.get('digits', (0,4) )
+        return tools.locale_format('%.' + str(digit) + 'e', model[self.field_name].get_client(model) or 0.0)
+
+    def value_from_text(self, model, text):
+	if not text:
+	    return False
         try:
             return locale.atof(text)
         except:
@@ -679,6 +693,7 @@ CELLTYPES = {
     'selection': Selection,
     'float': Float,
     'float_time': FloatTime,
+    'float_sci': Float_Sci,
     'integer': Int,
     'datetime': Datetime,
     'boolean': Boolean,
