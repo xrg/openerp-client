@@ -95,7 +95,7 @@ palette = [(0.12,       0.29,       0.49),
            (1.0 - 0.29, 1.0 - 0.67, 1.0 - 0.78),
            (1.0 - 0.96, 1.0 - 0.62, 1.0 - 0.34)]
 def from_string(string, n_colors = 1):
-    first = string.__hash__() % len(palette)
+    first = string.__hash__() % (len(palette) - n_colors)
     if n_colors == 1:
         return palette[first]
     return [palette[i] for i in range(first, first + n_colors)]
