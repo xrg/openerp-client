@@ -49,6 +49,8 @@ class TextBuffer(gtk.TextBuffer):
         self.create_tag('bold',      weight    = pango.WEIGHT_BOLD)
         self.create_tag('italic',    style     = pango.STYLE_ITALIC)
         self.create_tag('underline', underline = pango.UNDERLINE_SINGLE)
+        self.link_style = dict(foreground = 'blue',
+                               underline  = pango.UNDERLINE_SINGLE)
 
         # Enable other features.
         features = (
@@ -301,6 +303,12 @@ class TextBuffer(gtk.TextBuffer):
         self.emit('undo-stack-changed')
 
 
+    def create_link_tag(self, name, target):
+        tag = self.create_tag(name, **self.link_style)
+        tag.set_data('link', target)
+        return tag
+
+
     def add_annotation(self, annotation):
         self.annotations[annotation.start_mark] = annotation
         self.emit('annotation-added', annotation)
@@ -421,17 +429,19 @@ class TextBuffer(gtk.TextBuffer):
             link = node.childNodes[0].data
             links[name] = link
 
-        # Restore the content first.
-        format = 'application/x-gtk-text-buffer-rich-text'
-        self.register_deserialize_tagset()
-        self.deserialize_set_can_create_tags(format, False)
-        self.deserialize(self, format, self.get_start_iter(), data['content'])
-
         # Restore links.
         for name, link in links.iteritems():
             tag = tag_table.lookup(name)
             if tag:
                 tag.set_data('link', link)
+            else:
+                self.create_link_tag(name, link)
+
+        # Restore the content first.
+        format = 'application/x-gtk-text-buffer-rich-text'
+        self.register_deserialize_tagset()
+        self.deserialize_set_can_create_tags(format, False)
+        self.deserialize(self, format, self.get_start_iter(), data['content'])
 
         # Restore annotations.
         self.remove_annotations()

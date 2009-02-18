@@ -107,10 +107,7 @@ class Window(gtk.Window):
         # Insert some text.
         buffer.insert_at_cursor('Test me please.')
         range = buffer.get_bounds()
-        tag   = buffer.create_tag('link_to_debain_org',
-                                  foreground = 'blue',
-                                  underline  = pango.UNDERLINE_SINGLE)
-        tag.set_data('link', 'http://debain.org')
+        tag   = buffer.create_link_tag('link_to_debain_org', 'http://debain.org')
         buffer.apply_tag(tag, *range)
 
         dump = buffer.dump()
