@@ -32,11 +32,63 @@ class TextEditor(gtk.TextView):
         self.show_annotations = True
         self.exposed          = False
         self.set_right_margin(50 + self.anno_padding)
-        self.connect('expose_event', self._on_expose_event)
+        self.connect('expose_event',        self._on_expose_event)
+        self.connect('motion-notify-event', self._on_motion_notify_event)
+        self.connect('event-after',         self._on_event_after)
         self.buffer.connect('mark-set',           self._on_buffer_mark_set)
         self.buffer.connect('annotation-added',   self._on_annotation_added)
         self.buffer.connect('annotation-removed', self._on_annotation_removed)
         self.set_wrap_mode(gtk.WRAP_WORD)
+
+
+    def _on_motion_notify_event(self, editor, event):
+        x, y = self.window_to_buffer_coords(gtk.TEXT_WINDOW_WIDGET,
+                                            int(event.x),
+                                            int(event.y))
+        tags = self.get_iter_at_location(x, y).get_tags()
+
+        # Without this call, further motion notify events don't get
+        # triggered.
+        self.window.get_pointer()
+
+        # If any of the tags are links, show a hand.
+        cursor = gtk.gdk.Cursor(gtk.gdk.XTERM)
+        for tag in tags:
+            if tag.get_data('link'):
+                cursor = gtk.gdk.Cursor(gtk.gdk.HAND2)
+                break
+
+        self.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(cursor)
+        return False
+
+
+    def _on_event_after(self, textview, event):
+        # Handle links here. Only when a button was released.
+        if event.type != gtk.gdk.BUTTON_RELEASE:
+            return False
+        if event.button != 1:
+            return False
+
+        # Don't follow a link if the user has selected something.
+        bounds = self.buffer.get_selection_bounds()
+        if bounds:
+            start, end = bounds
+            if start.get_offset() != end.get_offset():
+                return False
+
+        # Check whether the cursor is pointing at a link.
+        x, y = self.window_to_buffer_coords(gtk.TEXT_WINDOW_WIDGET,
+                                            int(event.x),
+                                            int(event.y))
+        iter = textview.get_iter_at_location(x, y)
+
+        for tag in iter.get_tags():
+            link = tag.get_data('link')
+            if not link:
+                continue
+            self.emit('link-clicked', link)
+            break
+        return False
 
 
     def _on_buffer_mark_set(self, buffer, iter, mark):
@@ -163,12 +215,6 @@ class TextEditor(gtk.TextView):
         self.anno_views[annotation] = view
         for event in ('focus-in-event', 'focus-out-event'):
             view.connect(event, self._on_annotation_event, annotation, event)
-        if annotation.get_bg_color():
-            view.modify_bg(annotation.get_bg_color())
-        if annotation.get_border_color():
-            view.modify_border(annotation.get_border_color())
-        if annotation.get_text_color():
-            view.modify_fg(annotation.get_text_color())
         view.show_all()
         self._update_annotation_area()
         self.anno_layout.add(view)
@@ -195,8 +241,8 @@ class TextEditor(gtk.TextView):
         if self.show_annotations == active:
             return
 
-        # Unfortunately gtk.TextView deletes all children from the 
-        # border window if its size is 0. So we must re-add them when the 
+        # Unfortunately gtk.TextView deletes all children from the
+        # border window if its size is 0. So we must re-add them when the
         # window reappears.
         self.show_annotations = active
         if active:
@@ -206,6 +252,12 @@ class TextEditor(gtk.TextView):
             for annotation in self.buffer.get_annotations():
                 self._on_annotation_removed(self.buffer, annotation)
             self.set_border_window_size(gtk.TEXT_WINDOW_RIGHT, 0)
+
+gobject.signal_new('link-clicked',
+                   TextEditor,
+                   gobject.SIGNAL_RUN_FIRST,
+                   gobject.TYPE_NONE,
+                   (gobject.TYPE_PYOBJECT, ))
 
 gobject.signal_new('annotation-focus-in-event',
                    TextEditor,

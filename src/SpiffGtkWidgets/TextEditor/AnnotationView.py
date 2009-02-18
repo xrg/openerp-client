@@ -13,8 +13,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-import gtk
-import pango
+import gtk, pango
+from SpiffGtkWidgets import color
 
 class AnnotationView(gtk.EventBox):
     def __init__(self, annotation):
@@ -35,6 +35,12 @@ class AnnotationView(gtk.EventBox):
         self.view.connect('focus-in-event',  self._on_focus_in_event)
         self.view.connect('focus-out-event', self._on_focus_out_event)
         self.buffer.connect('mark-set', self._on_buffer_mark_set)
+
+        bg, br = color.from_string(annotation.get_title(), 2)
+        self.modify_bg    (annotation.get_bg_color()     or color.to_gdk(bg))
+        self.modify_border(annotation.get_border_color() or color.to_gdk(br))
+        if annotation.get_text_color():
+            self.modify_fg(annotation.get_text_color())
 
 
     def _on_buffer_mark_set(self, buffer, iter, mark):

@@ -27,16 +27,16 @@ def int2gdk(i):
     return gtk.gdk.Color(red * 256, green * 256, blue * 256)
 
 def rgb2gdk(color):
-    red   = color[0] * 65535.0
-    green = color[1] * 65535.0
-    blue  = color[2] * 65535.0
+    red   = int(color[0] * 65535)
+    green = int(color[1] * 65535)
+    blue  = int(color[2] * 65535)
     return gtk.gdk.Color(red, green, blue)
 
 def rgba2gdk(color):
-    red   = color[0] * 65535.0
-    green = color[1] * 65535.0
-    blue  = color[2] * 65535.0
-    value = color[3] * 65535.0 # not supported by gdk.Color
+    red   = int(color[0] * 65535)
+    green = int(color[1] * 65535)
+    blue  = int(color[2] * 65535)
+    value = int(color[3] * 65535) # not supported by gdk.Color
     return gtk.gdk.Color(red, green, blue)
 
 def gdk2int(color):
@@ -76,3 +76,26 @@ def to_rgb(color):
 
 def to_rgba(color):
     return gdk2rgba(to_gdk(color))
+
+########################
+# Other functions.
+########################
+palette = [(0.12,       0.29,       0.49),
+           (0.36,       0.51,       0.71),
+           (0.75,       0.31,       0.30),
+           (0.62,       0.73,       0.38),
+           (0.50,       0.40,       0.63),
+           (0.29,       0.67,       0.78),
+           (0.96,       0.62,       0.34),
+           (1.0 - 0.12, 1.0 - 0.29, 1.0 - 0.49),
+           (1.0 - 0.36, 1.0 - 0.51, 1.0 - 0.71),
+           (1.0 - 0.75, 1.0 - 0.31, 1.0 - 0.30),
+           (1.0 - 0.62, 1.0 - 0.73, 1.0 - 0.38),
+           (1.0 - 0.50, 1.0 - 0.40, 1.0 - 0.63),
+           (1.0 - 0.29, 1.0 - 0.67, 1.0 - 0.78),
+           (1.0 - 0.96, 1.0 - 0.62, 1.0 - 0.34)]
+def from_string(string, n_colors = 1):
+    first = string.__hash__() % len(palette)
+    if n_colors == 1:
+        return palette[first]
+    return [palette[i] for i in range(first, first + n_colors)]

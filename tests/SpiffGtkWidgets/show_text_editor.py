@@ -36,6 +36,7 @@ class Window(gtk.Window):
         self.hbox.set_spacing(6)
         buffer.connect('undo-stack-changed',
                        self._on_buffer_undo_stack_changed)
+        self.view.connect('link-clicked', self._on_link_clicked)
         self.view.connect('annotation-focus-out-event',
                           self._on_annotation_focus_out_event)
 
@@ -102,6 +103,19 @@ class Window(gtk.Window):
             print "WARNING: Spell check disabled because language is not set."
         else:
             gtkspell.Spell(self.view).set_language(lang)
+
+        # Insert some text.
+        buffer.insert_at_cursor('Test me please.')
+        range = buffer.get_bounds()
+        tag   = buffer.create_tag('link_to_debain_org',
+                                  foreground = 'blue',
+                                  underline  = pango.UNDERLINE_SINGLE)
+        tag.set_data('link', 'http://debain.org')
+        buffer.apply_tag(tag, *range)
+
+
+    def _on_link_clicked(self, buffer, link):
+        print 'Link clicked:', link
 
 
     def _on_buffer_undo_stack_changed(self, buffer):
