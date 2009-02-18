@@ -323,10 +323,10 @@ class TextBuffer(gtk.TextBuffer):
 
 
     def get_annotations_xml(self):
-        xml = '<xml>'
+        xml = '<xml>\n'
         for annotation in self.annotations.itervalues():
             xml += annotation.toxml()
-        return xml + '</xml>'
+        return xml + '</xml>\n'
 
 
     def add_annotations_from_xml(self, xml):
@@ -334,6 +334,106 @@ class TextBuffer(gtk.TextBuffer):
         root = parseString(xml)
         for node in root.getElementsByTagName('annotation'):
             self.add_annotation(Annotation.fromxml(self, node))
+
+
+    def _collect_links(self, tag, data):
+        link = tag.get_data('link')
+        if not link:
+            return
+        name           = tag.get_property('name')
+        self.link_xml += '<link name="%s">%s</link>\n' % (name, link)
+
+
+    def _merge_data(self, **kwargs):
+        """
+        Takes n different strings (or binary data) and merges them into one
+        string such that they can be split later.
+        """
+        index = ''
+        data  = ''
+        pos   = 0
+        for key, value in kwargs.iteritems():
+            value  = str(value)
+            end    = pos + len(value)
+            tuple  = [str(pos), str(end), key]
+            index += '|'.join(tuple) + "\n"
+            data  += value
+            pos    = end
+        return index + "\n" + data
+
+
+    def _unmerge_data(self, string):
+        """
+        Takes a string that was created using _merge_data and splits it
+        into the original data.
+        """
+        result = dict()
+        string = str(string)
+        if string == '':
+            return result
+        index_end = string.index("\n\n")
+        index     = string[:index_end]
+        data      = string[index_end + 2:]
+        for line in index.split("\n"):
+            start, end, name = line.split('|')
+            result[name]     = data[int(start):int(end)]
+        return result
+
+
+    def dump(self):
+        """
+        Serializes the content of the buffer, including annotations and
+        links.
+        """
+        # Serialize the content of the buffer. This does not include the
+        # annotations or data that is attached to tags.
+        self.register_serialize_tagset()
+        format  = 'application/x-gtk-text-buffer-rich-text'
+        bounds  = self.get_bounds()
+        content = self.serialize(self, format, *bounds)
+
+        # Secure the 'link' data that may be attached to a tag.
+        self.link_xml = '<xml>\n'
+        tag_table     = self.get_tag_table()
+        tag_table.foreach(self._collect_links)
+        self.link_xml += '</xml>\n'
+
+        # Also attach the annotation xml.
+        return self._merge_data(content     = content,
+                                links       = self.link_xml,
+                                annotations = self.get_annotations_xml())
+
+
+    def restore(self, dump):
+        from xml.dom.minidom import parseString
+        data = self._unmerge_data(dump)
+        self.delete(*self.get_bounds())
+
+        # Parse links and remove collisions from the tag table.
+        tag_table = self.get_tag_table()
+        links     = {}
+        root      = parseString(data['links'])
+        for node in root.getElementsByTagName('link'):
+            name = node.getAttribute('name')
+            link = node.childNodes[0].data
+            tag  = tag_table.lookup(name)
+            links[name] = link
+            tag_table.remove(tag)
+
+        # Restore the content first.
+        format = 'application/x-gtk-text-buffer-rich-text'
+        self.register_deserialize_tagset()
+        self.deserialize_set_can_create_tags(format, True)
+        self.deserialize(self, format, self.get_start_iter(), data['content'])
+
+        # Restore links.
+        for name, link in links.iteritems():
+            tag  = tag_table.lookup(name)
+            tag.set_data('link', link)
+
+        # Restore annotations.
+        self.remove_annotations()
+        self.add_annotations_from_xml(data['annotations'])
 
 
 gobject.signal_new('annotation-added',

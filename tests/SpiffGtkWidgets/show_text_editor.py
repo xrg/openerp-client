@@ -113,6 +113,11 @@ class Window(gtk.Window):
         tag.set_data('link', 'http://debain.org')
         buffer.apply_tag(tag, *range)
 
+        dump = buffer.dump()
+
+        buffer.delete(*range)
+        buffer.restore(dump)
+
 
     def _on_link_clicked(self, buffer, link):
         print 'Link clicked:', link
