@@ -418,7 +418,8 @@ class TextBuffer(gtk.TextBuffer):
             link = node.childNodes[0].data
             tag  = tag_table.lookup(name)
             links[name] = link
-            tag_table.remove(tag)
+            if tag:
+                tag_table.remove(tag)
 
         # Restore the content first.
         format = 'application/x-gtk-text-buffer-rich-text'
@@ -428,8 +429,9 @@ class TextBuffer(gtk.TextBuffer):
 
         # Restore links.
         for name, link in links.iteritems():
-            tag  = tag_table.lookup(name)
-            tag.set_data('link', link)
+            tag = tag_table.lookup(name)
+            if tag:
+                tag.set_data('link', link)
 
         # Restore annotations.
         self.remove_annotations()
