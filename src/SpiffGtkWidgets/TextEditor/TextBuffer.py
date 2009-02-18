@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-import gtk, pango, time, gobject
+import gtk, pango, time, gobject, string
 from Annotation     import Annotation
 from UndoInsertText import UndoInsertText
 from UndoDeleteText import UndoDeleteText
@@ -66,10 +66,10 @@ class TextBuffer(gtk.TextBuffer):
 
 
     def offset_range_has_tag(self, start, end, tag_name):
-        tag       = self.get_tag_table().lookup(tag_name)
         tags_list = self.get_tags_at_offset(start, end)
         for tags in tags_list:
-            if tag not in tags:
+            names = [t.get_property('name') for t in tags]
+            if tag_name not in names:
                 return False
         return True
 
@@ -107,7 +107,13 @@ class TextBuffer(gtk.TextBuffer):
         bounds = self.get_selection_bounds()
         if not bounds:
             return
-        self.remove_tag_by_name(tag_name, *bounds)
+        tag_list = self.get_tags_at_offset(bounds[0].get_offset(),
+                                           bounds[1].get_offset())
+        for tags in tag_list:
+            for tag in tags:
+                name = tag.get_property('name')
+                if name == tag_name:
+                    self.remove_tag(tag, *bounds)
 
 
     def toggle_selection_tag(self, tag_name):
@@ -413,15 +419,12 @@ class TextBuffer(gtk.TextBuffer):
         for node in root.getElementsByTagName('link'):
             name = node.getAttribute('name')
             link = node.childNodes[0].data
-            tag  = tag_table.lookup(name)
             links[name] = link
-            if tag:
-                tag_table.remove(tag)
 
         # Restore the content first.
         format = 'application/x-gtk-text-buffer-rich-text'
         self.register_deserialize_tagset()
-        self.deserialize_set_can_create_tags(format, True)
+        self.deserialize_set_can_create_tags(format, False)
         self.deserialize(self, format, self.get_start_iter(), data['content'])
 
         # Restore links.
