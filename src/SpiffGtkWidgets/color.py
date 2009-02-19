@@ -80,22 +80,26 @@ def to_rgba(color):
 ########################
 # Other functions.
 ########################
-palette = [(0.12,       0.29,       0.49),
-           (0.36,       0.51,       0.71),
-           (0.75,       0.31,       0.30),
-           (0.62,       0.73,       0.38),
-           (0.50,       0.40,       0.63),
-           (0.29,       0.67,       0.78),
-           (0.96,       0.62,       0.34),
-           (1.0 - 0.12, 1.0 - 0.29, 1.0 - 0.49),
-           (1.0 - 0.36, 1.0 - 0.51, 1.0 - 0.71),
-           (1.0 - 0.75, 1.0 - 0.31, 1.0 - 0.30),
-           (1.0 - 0.62, 1.0 - 0.73, 1.0 - 0.38),
-           (1.0 - 0.50, 1.0 - 0.40, 1.0 - 0.63),
-           (1.0 - 0.29, 1.0 - 0.67, 1.0 - 0.78),
-           (1.0 - 0.96, 1.0 - 0.62, 1.0 - 0.34)]
+# Tango colors:
+# http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines
+#           light       mid       dark
+palette = (('#fce94f', '#edd400', '#c4a000'),  # Butter
+           ('#fcaf3e', '#f57900', '#ce5c00'),  # Orange
+           ('#e9b96e', '#c17d11', '#8f5902'),  # Chocolate
+           ('#8ae234', '#73d216', '#4e9a06'),  # Chameleon
+           ('#729fcf', '#3465a4', '#204a87'),  # Sky Blue
+           ('#ad7fa8', '#75507b', '#5c35cc'),  # Plum
+           ('#ef2929', '#cc0000', '#a40000'),  # Scarlet Red
+           ('#eeeeec', '#d3d7cf', '#babdb6'),  # Aluminium (bright)
+           ('#888a85', '#555753', '#2e3436'))  # Aluminium (dark)
 def from_string(string, n_colors = 1):
-    first = string.__hash__() % (len(palette) - n_colors)
+    string += 'b'
+    tuple = palette[string.__hash__() % len(palette)]
     if n_colors == 1:
-        return palette[first]
-    return [palette[i] for i in range(first, first + n_colors)]
+        return to_rgb(tuple[0])
+    return [to_rgb(color) for color in tuple[:n_colors]]
+
+def bg_color2text_color(color):
+    if sum(to_rgb(color)) > 1.9:
+        return 0, 0, 0
+    return 1, 1, 1

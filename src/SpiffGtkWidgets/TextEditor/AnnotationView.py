@@ -36,8 +36,10 @@ class AnnotationView(gtk.EventBox):
         self.view.connect('focus-out-event', self._on_focus_out_event)
         self.buffer.connect('mark-set', self._on_buffer_mark_set)
 
-        bg, br = color.from_string(annotation.get_title(), 2)
+        bg, _, br = color.from_string(annotation.get_title(), 3)
+        fg        = color.bg_color2text_color(bg)
         self.modify_bg    (annotation.get_bg_color()     or color.to_gdk(bg))
+        self.modify_fg    (annotation.get_text_color()   or color.to_gdk(fg))
         self.modify_border(annotation.get_border_color() or color.to_gdk(br))
         if annotation.get_text_color():
             self.modify_fg(annotation.get_text_color())
@@ -80,7 +82,7 @@ class AnnotationView(gtk.EventBox):
 
 
     def modify_fg(self, color):
-        self.view.modify_fg(gtk.STATE_NORMAL, color)
+        self.view.modify_text(gtk.STATE_NORMAL, color)
 
 
     def get_border_color(self):

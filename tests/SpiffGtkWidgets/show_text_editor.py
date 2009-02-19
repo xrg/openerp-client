@@ -149,8 +149,6 @@ class Window(gtk.Window):
 
     def _add_annotation(self, mark):
         annotation = Annotation(mark)
-        annotation.set_bg_color(gtk.gdk.color_parse('lightblue'))
-        annotation.set_border_color(gtk.gdk.color_parse('blue'))
         annotation.set_title('Annotation')
         annotation.set_text('Annotation number %d.' % self.n_annotations)
         self.view.get_buffer().add_annotation(annotation)

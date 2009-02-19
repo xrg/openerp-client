@@ -1,5 +1,4 @@
 * Add support for annotating ranges of text.
-* Automatically color annotations depending on the title.
 * Do not allow for editing annotations if the TextEditor is not editable.
 * Create documentation.
 * Cleanup Calendar/CanvasTable.py and Calendar/TableLayout.py.
