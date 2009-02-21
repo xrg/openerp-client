@@ -31,9 +31,9 @@ class TextEditor(gtk.TextView):
         self.anno_views       = {}
         self.show_annotations = True
         self.handle_links     = True
-        self.exposed          = False
         self.set_right_margin(50 + self.anno_padding)
-        self.connect('expose_event',        self._on_expose_event)
+        self.connect('map-event',           self._on_map_event)
+        self.connect('expose-event',        self._on_expose_event)
         self.connect('motion-notify-event', self._on_motion_notify_event)
         self.connect('event-after',         self._on_event_after)
         self.buffer.connect('mark-set',           self._on_buffer_mark_set)
@@ -100,12 +100,12 @@ class TextEditor(gtk.TextView):
         self._update_annotations()
 
 
-    def _on_expose_event(self, widget, event):
-        if not self.exposed:
-            self.exposed = True
-            self._update_annotation_area()
-            self._update_annotations()
+    def _on_map_event(self, widget, event):
+        self._update_annotation_area()
+        self._update_annotations()
 
+
+    def _on_expose_event(self, widget, event):
         text_window = widget.get_window(gtk.TEXT_WINDOW_TEXT)
         if event.window != text_window:
             return
