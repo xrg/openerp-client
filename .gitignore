@@ -1,7 +1,6 @@
 *.py[co]
 *.egg-info
 *.swp
-*.png
 unit_test.cfg
 dist
 build

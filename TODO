@@ -1,4 +1,4 @@
+* Complete the FormEditor
 * Add support for annotating ranges of text.
 * Do not allow for editing annotations if the TextEditor is not editable.
 * Create documentation.
-* Cleanup Calendar/CanvasTable.py and Calendar/TableLayout.py.
