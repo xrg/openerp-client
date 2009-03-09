@@ -101,6 +101,19 @@ class FloatBox(gtk.Container):
             self._bin_window.resize(max(width, self.allocation.width),
                                     max(height, self.allocation.height))
 
+
+    def start_drag(self, child, x, y, time):
+        self._begin_drag_child(child, x, y, time, CHILD_MOVE)
+
+
+    def start_resize(self, child, x, y, time):
+        self._begin_drag_child(child, x, y, time, CHILD_RESIZE)
+
+
+    def drop(self, time):
+        self._end_move_child(time)
+
+
     def set_child_position(self, child, x, y):
         """
         @param child:
@@ -141,9 +154,11 @@ class FloatBox(gtk.Container):
                 return child
         return None
 
-    def _begin_move_child(self, child, x, y, time):
+    def _begin_drag_child(self, child, x, y, time, action):
         if self._moving_child != None:
             raise AssertionError('attempt to move two children at the same time')
+
+        self._action_type = action
 
         mask = (gdk.BUTTON_PRESS_MASK
               | gdk.BUTTON_RELEASE_MASK
@@ -371,11 +386,9 @@ class FloatBox(gtk.Container):
             return
 
         if child.in_resize_area(x, y):
-            self._action_type = CHILD_RESIZE
+            self._begin_drag_child(child, x, y, event.time, CHILD_RESIZE)
         else:
-            self._action_type = CHILD_MOVE
-
-        self._begin_move_child(child, x, y, event.time)
+            self._begin_drag_child(child, x, y, event.time, CHILD_MOVE)
 
     def do_button_release_event(self, event):
         x, y = self._translate_event_coordinates(event)

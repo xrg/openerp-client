@@ -20,6 +20,7 @@ class Target(Element):
     def __init__(self):
         self.box = gtk.EventBox()
         Element.__init__(self, self.box)
+        self.box.set_border_width(3)
         self.clear()
 
 
@@ -30,11 +31,14 @@ class Target(Element):
         self.box.remove(self.box.child)
 
 
-    def _update_border_width(self):
-        if self.selected or self.element is None:
-            self.box.set_border_width(2)
+    def _update_border(self):
+        if self.selected:
+            color = self.get_style().mid[gtk.STATE_SELECTED]
+        elif self.element is None:
+            color = to_gdk('red')
         else:
-            self.box.set_border_width(0)
+            color = self.get_parent().get_style().bg[gtk.STATE_NORMAL]
+        self.modify_bg(gtk.STATE_NORMAL, color)
 
 
     def clear(self):
@@ -45,8 +49,7 @@ class Target(Element):
         self.box.add(label)
         self.element  = None
         self.selected = False
-        self.modify_bg(gtk.STATE_NORMAL, to_gdk('red'))
-        self._update_border_width()
+        self._update_border()
 
 
     def attach(self, element):
@@ -54,21 +57,18 @@ class Target(Element):
         self._drop_child()
         self.box.add(element)
         self.element = element
-        self._update_border_width()
+        self._update_border()
         self.emit('child-attached', element)
 
 
     def select(self):
         self.selected = True
-        color = self.get_style().mid[gtk.STATE_SELECTED]
-        self.modify_bg(gtk.STATE_NORMAL, color)
-        self._update_border_width()
+        self._update_border()
 
 
     def unselect(self):
         self.selected = False
-        self.modify_bg(gtk.STATE_NORMAL, to_gdk('red'))
-        self._update_border_width()
+        self._update_border()
 
 
     def is_selected(self):
@@ -88,14 +88,8 @@ class Target(Element):
         return self
 
 
-    def element_at(self, x, y):
-        alloc = self.get_allocation()
-        if x < 0 or y < 0 or x > alloc.width or y > alloc.height:
-            return None
-        if self.element is None:
-            return None
-        x, y = self.translate_coordinates(self.element, x, y)
-        return self.element.element_at(x, y)
+    def get_element(self):
+        return self.element
 
 
 gobject.signal_new('child-attached',

@@ -1,5 +1,4 @@
 from EntryBox import EntryBox
-from Form     import Form
 from Button   import Button
 from Label    import Label
 from Table    import Table

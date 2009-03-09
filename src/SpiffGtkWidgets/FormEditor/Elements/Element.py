@@ -28,7 +28,7 @@ class Element(gtk.EventBox):
         gtk.EventBox.__init__(self)
         self.add(widget)
 
-        # All coordinates are in the space of the FormEditor.
+        # Coordinates are in the space of the FormEditor.
         self.x = 0
         self.y = 0
         self.compute_size()
@@ -46,13 +46,6 @@ class Element(gtk.EventBox):
         return None
 
 
-    def element_at(self, x, y):
-        alloc = self.get_allocation()
-        if x < 0 or y < 0 or x > alloc.width or y > alloc.height:
-            return None
-        return self
-
-
     def in_drag_area(self, x, y):
         alloc = self.get_allocation()
         if x < 0 or y < 0 or x > alloc.width or y > alloc.height:
@@ -67,3 +60,9 @@ class Element(gtk.EventBox):
            y > alloc.height - 10 and y < alloc.width:
             return True
         return False
+
+
+    def get_pref_widget(self):
+        label = gtk.Label('%s has no preferences' % self.caption)
+        label.set_line_wrap(True)
+        return label

@@ -1,4 +1,9 @@
-* Complete the FormEditor
+FormEditor
+-----------
+* use the proper mouse cursor to indicate when hovering above a resize handle.
+
+
+
 * Add support for annotating ranges of text.
 * Do not allow for editing annotations if the TextEditor is not editable.
 * Create documentation.
