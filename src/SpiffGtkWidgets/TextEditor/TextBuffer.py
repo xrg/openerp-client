@@ -61,6 +61,8 @@ class TextBuffer(gtk.TextBuffer):
             if active:
                 self.activate_feature(feature, *feature_args)
         self._update_timestamp()
+        self.register_serialize_tagset()
+        self.register_deserialize_tagset()
 
 
     def activate_feature(self, feature, *args):
@@ -398,7 +400,6 @@ class TextBuffer(gtk.TextBuffer):
         """
         # Serialize the content of the buffer. This does not include the
         # annotations or data that is attached to tags.
-        self.register_serialize_tagset()
         format  = 'application/x-gtk-text-buffer-rich-text'
         bounds  = self.get_bounds()
         content = self.serialize(self, format, *bounds)
@@ -439,7 +440,6 @@ class TextBuffer(gtk.TextBuffer):
 
         # Restore the content first.
         format = 'application/x-gtk-text-buffer-rich-text'
-        self.register_deserialize_tagset()
         self.deserialize_set_can_create_tags(format, False)
         self.deserialize(self, format, self.get_start_iter(), data['content'])
 
