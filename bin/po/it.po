@@ -1662,7 +1662,7 @@ msgstr "OpenERP ricerca: %s"
 #: bin/modules/gui/window/win_search.py:144
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr "OpenERP ricerca: %s"
+msgstr "OpenERP ricerca: %s (%%d results)"
 
 #
 # File: bin/modules/gui/window/win_export.py, line: 52
