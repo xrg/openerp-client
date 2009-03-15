@@ -19,6 +19,7 @@
 
 import datetime
 import calendar
+import locale
 
 
 class MyCalendar(object):
@@ -33,6 +34,7 @@ class MyCalendar(object):
         week_start -- the first day of the week, e.g. calendar.SUNDAY
         """
         assert week_start is not None
+	language, self.locale_encoding = locale.getdefaultlocale()
         self.calendar = calendar.Calendar(week_start)
         
 
@@ -85,8 +87,8 @@ class MyCalendar(object):
 
     def get_day_name(self, date):
         day = calendar.weekday(*date.timetuple()[:3])
-        return calendar.day_name[day]
+        return calendar.day_name[day].decode(self.locale_encoding)
 
 
     def get_month_name(self, date):
-        return calendar.month_name[date.timetuple()[1]]
+        return calendar.month_name[date.timetuple()[1]].decode(self.locale_encoding)
