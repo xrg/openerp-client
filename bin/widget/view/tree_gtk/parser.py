@@ -46,8 +46,6 @@ import datetime as DT
 import service
 import gobject
 import pango
-import mx.DateTime
-from mx.DateTime import *
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed)
@@ -280,8 +278,7 @@ class GenericDate(Char):
         if not value:
             return ''
         try:
-            #date = mx.DateTime.strptime(value, self.server_format)
-            date = tools.datetime_util.strptime(value, self.server_format)
+            date = DT.datetime.strptime(value, self.server_format)
             return date.strftime(self.display_format)
         except:
             return ''
@@ -290,8 +287,7 @@ class GenericDate(Char):
         dt = self.renderer.date_get(self.renderer.editable)
         res = dt and dt.strftime(self.server_format)
         if res:
-            #mx.DateTime.strptime(res, self.server_format)
-            tools.datetime_util.strptime(res, self.server_format)
+            DT.datetime.strptime(res, self.server_format)
         return res
 
 class Date(GenericDate):
@@ -306,52 +302,27 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-#        date = mx.DateTime.strptime(value, self.server_format).timetuple()
-        t = tools.datetime_util.strptime(value, self.server_format)
-        if isinstance(t, type(mx.DateTime.now())) and not hasattr(t, 'timetuple'):
-            date = tuple(map(lambda x: int(x), t.tuple()))
-        else:
-            date = tools.datetime_util.strptime(value, self.server_format).timetuple()
-        dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+        date = DT.datetime.strptime(value, self.server_format)
         
         if 'tz' in rpc.session.context and  rpc.session.context['tz']:
-            try:
-                import pytz
-                lzone = pytz.timezone(rpc.session.context['tz'])
-                szone = pytz.timezone(rpc.session.timezone)
-                sdt = lzone.localize(dt, is_dst=True)
-                ldt = sdt.astimezone(lzone)
-                date = ldt.timetuple()
-                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-            except Exception, e:
-                pass
-          
-        return dt.strftime(self.display_format)
+            import pytz
+            lzone = pytz.timezone(rpc.session.context['tz'])
+            szone = pytz.timezone(rpc.session.timezone)
+            sdt = szone.localize(date, is_dst=True)
+            date = sdt.astimezone(lzone)
+        return date.strftime(self.display_format)
 
     def value_from_text(self, model, text):
         if not text:
             return False
-        try:
-            #date = mx.DateTime.strptime(text, self.display_format)
-            date = tools.datetime_util.strptime(text, self.display_format)
-        except:
-            try:
-                dt = list(time.localtime())
-                dt[2] = int(text)
-                date = tuple(dt)
-            except:
-                return False
+        date = DT.datetime.strptime(text, self.display_format)
         if 'tz' in rpc.session.context:
-            try:
-                import pytz
-                lzone = pytz.timezone(rpc.session.context['tz'])
-                szone = pytz.timezone(rpc.session.timezone)
-                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                ldt = lzone.localize(dt, is_dst=True)
-                sdt = ldt.astimezone(szone)
-                date = sdt.timetuple()
-            except:
-                pass
+            import pytz
+            lzone = pytz.timezone(rpc.session.context['tz'])
+            szone = pytz.timezone(rpc.session.timezone)
+            ldt = lzone.localize(date, is_dst=True)
+            sdt = ldt.astimezone(szone)
+            date = sdt.timetuple()
         return date.strftime(self.server_format)
 
 class Float(Char):
@@ -364,8 +335,6 @@ class Float(Char):
             return locale.atof(text)
         except:
             return 0.0
-
-from mx.DateTime import DateTimeDelta
 
 class FloatTime(Char):
     def get_textual_value(self, model):
