@@ -174,6 +174,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
             end   = util.end_of_day(child.date)
             view  = self._get_event_view(child, start, end, False)
             self.allocs[view] = (0, 0, 0, 0)
+            view.update()
 
 
     def update_multi_row(self):
@@ -198,6 +199,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
             end   = row[-1].date
             view  = self._get_event_view(row[0], start, end, True)
             self.allocs[view] = (0, 0, 0, 0)
+            view.update()
 
 
     def update(self):
