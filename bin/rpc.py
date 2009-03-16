@@ -293,7 +293,7 @@ class rpc_session(object):
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
                     else:
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
-        if 'tz' in self.context and self.context['tz']:
+        if self.context.get('tz'):
             self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
             try:
                 import pytz

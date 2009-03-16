@@ -304,7 +304,7 @@ class Datetime(GenericDate):
             return ''
         date = DT.datetime.strptime(value, self.server_format)
         
-        if 'tz' in rpc.session.context and  rpc.session.context['tz']:
+        if rpc.session.context.get('tz'):
             import pytz
             lzone = pytz.timezone(rpc.session.context['tz'])
             szone = pytz.timezone(rpc.session.timezone)
@@ -316,7 +316,7 @@ class Datetime(GenericDate):
         if not text:
             return False
         date = DT.datetime.strptime(text, self.display_format)
-        if 'tz' in rpc.session.context:
+        if rpc.session.context.get('tz'):
             import pytz
             lzone = pytz.timezone(rpc.session.context['tz'])
             szone = pytz.timezone(rpc.session.timezone)

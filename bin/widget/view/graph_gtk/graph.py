@@ -95,7 +95,7 @@ class ViewGraph(object):
                     res[x] = time.strftime(LDFMT, date)
                 elif self.fields[x]['type'] == 'datetime':
                     date = time.strptime(m[x].get_client(m), DHM_FORMAT)
-                    if 'tz' in rpc.session.context:
+                    if rpc.session.context.get('tz'):
                         try:
                             import pytz
                             lzone = pytz.timezone(rpc.session.context['tz'])
