@@ -22,6 +22,7 @@
 import socket
 import cPickle
 import sys
+import options
 
 DNS_CACHE = {}
 
@@ -38,7 +39,7 @@ class mysocket:
             socket.AF_INET, socket.SOCK_STREAM)
         else:
             self.sock = sock
-        self.sock.settimeout(200)
+        self.sock.settimeout(int(options.options['client.timeout']))
 
     def connect(self, host, port=False):
         if not port:
