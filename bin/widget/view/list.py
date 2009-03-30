@@ -53,7 +53,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     def changed_all(self, *args):
         self.emit('row_deleted', position)
         self.invalidate_iters()
-        print 'SETTING', text or 0.0
 
     def move(self, path, position):
         idx = path[0]
