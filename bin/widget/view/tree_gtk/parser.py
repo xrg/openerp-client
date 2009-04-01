@@ -306,7 +306,7 @@ class Datetime(GenericDate):
         
         if rpc.session.context.get('tz'):
             import pytz
-            lzone = pytz.timezone(rpc.session.context['tz'])
+            lzone = pytz.timezone(str(rpc.session.context['tz']))
             szone = pytz.timezone(rpc.session.timezone)
             sdt = szone.localize(date, is_dst=True)
             date = sdt.astimezone(lzone)
@@ -318,7 +318,7 @@ class Datetime(GenericDate):
         date = DT.datetime.strptime(text, self.display_format)
         if rpc.session.context.get('tz'):
             import pytz
-            lzone = pytz.timezone(rpc.session.context['tz'])
+            lzone = pytz.timezone(str(rpc.session.context['tz']))
             szone = pytz.timezone(rpc.session.timezone)
             ldt = lzone.localize(date, is_dst=True)
             sdt = ldt.astimezone(szone)
