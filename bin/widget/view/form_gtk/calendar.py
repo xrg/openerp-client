@@ -207,7 +207,7 @@ class datetime(interface.widget_interface):
             date = DT.strptime(str, self.format)
         except:
             return False
-        if 'tz' in rpc.session.context and timezone:
+        if rpc.session.context.get('tz',False) and timezone:
             import pytz
             lzone = pytz.timezone(rpc.session.context['tz'])
             szone = pytz.timezone(rpc.session.timezone)
@@ -231,7 +231,7 @@ class datetime(interface.widget_interface):
             self.entry.clear()
         else:
             date = DT.strptime(dt_val, DHM_FORMAT)
-            if 'tz' in rpc.session.context and timezone:
+            if rpc.session.context.get('tz',False) and timezone:
                 import pytz
                 lzone = pytz.timezone(rpc.session.context['tz'])
                 szone = pytz.timezone(rpc.session.timezone)
@@ -340,7 +340,7 @@ class stime(interface.widget_interface):
             self.entry.clear()
         else:
             date = time.strptime(dt_val, HM_FORMAT)
-            if 'tz' in rpc.session.context and timezone:
+            if rpc.session.context.get('tz',False) and timezone:
                 import pytz
                 lzone = pytz.timezone(rpc.session.context['tz'])
                 szone = pytz.timezone(rpc.session.timezone)
