@@ -96,7 +96,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                 for x in res_ids:
                     if x[field]:
                         date = time.strptime(x[field], DHM_FORMAT)
-                        if 'tz' in rpc.session.context:
+                        if rpc.session.context.get('tz'):
                             try:
                                 import pytz
                                 lzone = pytz.timezone(rpc.session.context['tz'])

@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution	
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    Copyright (c) 2004-2009 B2CK, Bertrand Chenal, Cedric Krier (D&D in lists)
+#    Copyright (c) 2008-2009 B2CK, Bertrand Chenal, Cedric Krier (D&D in lists)
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -53,7 +53,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     def changed_all(self, *args):
         self.emit('row_deleted', position)
         self.invalidate_iters()
-        print 'SETTING', text or 0.0
 
     def move(self, path, position):
         idx = path[0]
