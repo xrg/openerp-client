@@ -231,11 +231,7 @@ class datetime(interface.widget_interface):
             self.entry.clear()
         else:
             date = DT.strptime(dt_val, DHM_FORMAT)
-<<<<<<< TREE
             if rpc.session.context.get('tz',False) and timezone:
-=======
-            if rpc.session.context.get('tz') and timezone:
->>>>>>> MERGE-SOURCE
                 import pytz
                 lzone = pytz.timezone(rpc.session.context['tz'])
                 szone = pytz.timezone(rpc.session.timezone)
@@ -344,11 +340,7 @@ class stime(interface.widget_interface):
             self.entry.clear()
         else:
             date = time.strptime(dt_val, HM_FORMAT)
-<<<<<<< TREE
             if rpc.session.context.get('tz',False) and timezone:
-=======
-            if rpc.session.context.get('tz') and timezone:
->>>>>>> MERGE-SOURCE
                 import pytz
                 lzone = pytz.timezone(rpc.session.context['tz'])
                 szone = pytz.timezone(rpc.session.timezone)
