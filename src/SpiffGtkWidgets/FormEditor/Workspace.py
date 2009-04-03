@@ -123,6 +123,21 @@ class Workspace(gtk.EventBox):
 
     def _on_box_motion_notify(self, box, event):
         if self.mouse_button != 1:
+            x, y   = self._translate_event_coordinates(event)
+            target = self.target_at(x, y)
+            if target is None:
+                return
+            element = target.get_element()
+            if element is None:
+                element = target.get_parent_layout()
+                if element is None:
+                    return
+            x, y = self.translate_coordinates(element, x, y)
+            if element.in_resize_area(x, y):
+                cursor = gtk.gdk.Cursor(gtk.gdk.BOTTOM_RIGHT_CORNER)
+                element.window.set_cursor(cursor)
+            else:
+                element.window.set_cursor(None)
             return
 
         # Check whether we are already in a drag operation.
@@ -154,14 +169,19 @@ class Workspace(gtk.EventBox):
             return
         element = self.selected.get_element()
         if element is None:
-            return
+            target = self.selected.get_parent_target()
+            if target is None:
+                return
+            element = target.get_element()
+            if element is None:
+                return
 
         # Resize the widget?
         x, y               = self._translate_event_coordinates(event)
         widget_x, widget_y = self.translate_coordinates(element, x, y)
         if element.in_resize_area(widget_x, widget_y):
-            widget   = element.copy()
-            alloc    = element.get_allocation()
+            widget = element.copy()
+            alloc  = element.get_allocation()
 
             # The widget may span over multiple cells. However, we need to
             # highlight the borders of each individual cell, which does not
@@ -198,7 +218,8 @@ class Workspace(gtk.EventBox):
         # Start dragging? Remove the widget from the layout and re-add it as
         # a floating child.
         if element.in_drag_area(widget_x, widget_y):
-            self.selected.clear()
+            target = element.get_parent_target()
+            target.clear()
             self.box.add(element)
             self.box.set_child_position(element, x - 2, y - 4)
             self.box.start_drag(element, x, y, event.time)
@@ -213,25 +234,21 @@ class Workspace(gtk.EventBox):
         target = self.target_at(x, y)
         widget = self.box.get_moving_child()
 
-        # Was an existing widget moved?
+        # Was an existing widget resized?
         if target and widget and widget.get_data('copy_of'):
             self.box.remove(widget)
 
-            # Find the bounding widgets.
+            # Find the upper left and lower right targets.
             original = widget.get_data('copy_of')
             layout   = original.get_parent_layout()
-            alloc    = original.get_allocation()
-            x1, y1   = original.translate_coordinates(self.box,
-                                                      alloc.x,
-                                                      alloc.y)
-            target1  = self.target_at(x1, y1)
-            target2  = self.selected or target1
+            top_lft  = original.get_parent_target()
+            bot_rgt  = self.selected or target1
 
             # Assign the widget to parent layout targets.
-            layout.reassign(original, target1, target2)
+            layout.reassign(original, top_lft, bot_rgt)
             self.unselect_target(target)
 
-        # Was a new widget added?
+        # Was a new widget added, or an existing widget moved?
         elif target and widget:
             self.box.remove(widget)
             target.attach(widget)

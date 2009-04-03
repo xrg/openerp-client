@@ -24,6 +24,10 @@ class Target(Element):
         self.clear()
 
 
+    def is_target(self):
+        return True
+
+
     def _drop_child(self):
         if self.box.child is None:
             return
@@ -40,6 +44,13 @@ class Target(Element):
             parent = self.get_parent()
             color  = parent.get_style().bg[gtk.STATE_NORMAL]
         self.modify_bg(gtk.STATE_NORMAL, color)
+
+
+    def copy(self):
+        target = Target()
+        if self.element is not None:
+            target.attach(self.element.copy())
+        return target
 
 
     def clear(self):

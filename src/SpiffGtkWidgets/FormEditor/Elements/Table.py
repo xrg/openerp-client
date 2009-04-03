@@ -196,8 +196,16 @@ class Table(Element):
 
 
     def copy(self):
-        widget        = Table(self.layout.n_rows, self.layout.n_cols)
-        widget.layout = self.layout.copy()
+        widget = Table(self.layout.n_rows, self.layout.n_cols)
+        for child in self.child.get_children():
+            top   = self.child.child_get_property(child, 'top-attach')
+            bot   = self.child.child_get_property(child, 'bottom-attach')
+            lft   = self.child.child_get_property(child, 'left-attach')
+            rgt   = self.child.child_get_property(child, 'right-attach')
+            child = child.copy()
+            widget.child.attach(child, lft, rgt, top, bot)
+            widget.layout.add(child, lft, rgt, top, bot)
+        return widget
 
 
     def reassign(self, widget, upper_left, lower_right):
@@ -210,13 +218,12 @@ class Table(Element):
             return
 
         # Remove the old target.
-        target = widget.parent.parent
+        target = widget.get_parent_target()
         widget.unparent()
         self._remove_target(target)
-        self._remove_targets_at(top, bot, lft, rgt)
 
         # Re-add it into the new cells.
-        target = self._add_target(top, lft, bot, rgt)
+        target = self._add_target(top, bot, lft, rgt)
         target.attach(widget)
 
 
@@ -234,12 +241,7 @@ class Table(Element):
                     self.child.remove(target)
 
 
-    def _add_target(self, top, lft, bot = None, rgt = None):
-        if bot is None:
-            bot = top + 1
-        if rgt is None:
-            rgt = lft + 1
-
+    def _add_target(self, top, bot, lft, rgt):
         # Remove the old target, if any.
         self._remove_targets_at(top, bot, lft, rgt)
 
@@ -277,10 +279,10 @@ class Table(Element):
         self.child.resize(rows, cols)
         for row in range(old_rows, rows):
             for col in range(0, old_cols):
-                self._add_target(row, col)
+                self._add_target(row, row + 1, col, col + 1)
         for col in range(old_cols, cols):
             for row in range(0, rows):
-                self._add_target(row, col)
+                self._add_target(row, row + 1, col, col + 1)
 
 
     def _child_at(self, x, y):
@@ -320,17 +322,11 @@ class Table(Element):
         # Add new targets into each cell.
         for row in range(top, bot):
             for col in range(lft, rgt):
-                self._add_target(row, col)
-        #self.child.child_set_property(target, 'x-options', gtk.EXPAND|gtk.FILL)
-        #self.child.child_set_property(target, 'y-options', gtk.EXPAND|gtk.FILL)
+                self._add_target(row, row + 1, col, col + 1)
 
 
     def _on_target_child_replaced(self, target, child):
-        self.child.child_set_property(target, 'x-options', child.xoptions)
-        self.child.child_set_property(target, 'y-options', child.yoptions)
-        #self.child.child_set_property(target, 'x-options', gtk.EXPAND|gtk.FILL)
-        #self.child.child_set_property(target, 'y-options', gtk.EXPAND|gtk.FILL)
-        pass
+        self._on_target_child_attached(target, child)
 
 
     def get_pref_widget(self):

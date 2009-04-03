@@ -32,7 +32,8 @@ class Element(gtk.EventBox):
         self.x = 0
         self.y = 0
         self.compute_size()
-        self.connect('motion-notify-event', self._on_motion_notify)
+        widget.add_events(gtk.gdk.POINTER_MOTION_MASK)
+        widget.connect('motion-notify-event', self._on_motion_notify)
 
 
     def has_layout(self):
@@ -43,6 +44,19 @@ class Element(gtk.EventBox):
         widget = self.parent
         while widget:
             if isinstance(widget, Element) and widget.has_layout():
+                return widget
+            widget = widget.parent
+        return None
+
+
+    def is_target(self):
+        return False
+
+
+    def get_parent_target(self):
+        widget = self.parent
+        while widget:
+            if isinstance(widget, Element) and widget.is_target():
                 return widget
             widget = widget.parent
         return None
@@ -73,8 +87,8 @@ class Element(gtk.EventBox):
 
     def in_resize_area(self, x, y):
         alloc = self.get_allocation()
-        if x > alloc.width  - 10 and x < alloc.width and \
-           y > alloc.height - 10 and y < alloc.width:
+        if x >= alloc.width  - 15 and x <= alloc.width + 3 and \
+           y >= alloc.height - 15 and y <= alloc.height + 3:
             return True
         return False
 

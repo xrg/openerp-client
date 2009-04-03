@@ -1,8 +1,10 @@
 FormEditor
 -----------
-* Resizing widgets should work regardless of whether they fill their parent target.
-* Make resizing work for all widget types.
-* Undo/redo.
+* Add a TextView widget.
+* Add a spinbutton widget.
+* Add a dropdown widget.
+* Add a checkbutton widget.
+* Implement undo/redo.
 
 TextEditor
 -----------
