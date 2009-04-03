@@ -30,6 +30,10 @@ class Label(EntryBox):
             self.child.set_text('Label:')
 
 
+    def copy(self):
+        return Label(self.child.get_text())
+
+
     def do_realize(self):
         color = self.get_style().bg[gtk.STATE_NORMAL]
         self.child.modify_base(gtk.STATE_NORMAL, color)

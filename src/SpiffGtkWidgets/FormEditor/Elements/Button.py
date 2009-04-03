@@ -26,3 +26,7 @@ class Button(Element):
         self.set_above_child(True)
         if len(args) == 0:
             self.child.set_label('Button')
+
+
+    def copy(self):
+        return Button(self.child.get_label())

@@ -22,9 +22,14 @@ class EntryBox(Element):
     xoptions = gtk.EXPAND|gtk.FILL
     yoptions = gtk.FILL
 
-    def __init__(self, *args):
-        Element.__init__(self, gtk.Entry(*args))
+    def __init__(self, text = ''):
+        Element.__init__(self, gtk.Entry())
+        self.child.set_text(text)
         #self.connect('button-press-event', self._on_button_press_event)
+
+
+    def copy(self):
+        return EntryBox(self.child.get_text())
 
 
     def _on_button_press_event(self, evbox, event):

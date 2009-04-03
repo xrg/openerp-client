@@ -23,12 +23,12 @@ class Workspace(gtk.EventBox):
     def __init__(self):
         gtk.EventBox.__init__(self)
         self.box             = FloatBox()
-        self.pref_vbox       = gtk.VBox()
         self.pref_box        = gtk.EventBox()
         self.form            = Target()
         self.element_factory = ElementFactory()
         self.element_view    = ElementView(self.element_factory)
         self.add(self.box)
+        self.box.connect('key-press-event',      self._on_box_key_press)
         self.box.connect('motion-notify-event',  self._on_box_motion_notify)
         self.box.connect('button-press-event',   self._on_box_button_press)
         self.box.connect('button-release-event', self._on_box_button_release)
@@ -40,8 +40,7 @@ class Workspace(gtk.EventBox):
         vbox.pack_start(self.element_view, False)
         hbox.pack_start(vbox, False)
         hbox.pack_start(self.form)
-        hbox.pack_start(self.pref_vbox, False)
-        self.pref_vbox.pack_start(self.pref_box, False)
+        hbox.pack_start(self.pref_box, False)
         hbox.set_spacing(6)
         self.box.add_bg_widget(hbox)
         self.pref_box.set_size_request(200, -1)
@@ -72,12 +71,12 @@ class Workspace(gtk.EventBox):
         target.unselect()
 
 
-    def _load_pref_widget(self, target):
-        if self.pref_box.child is not None:
+    def _update_widget_prefs(self):
+        if self.pref_box.child:
             self.pref_box.remove(self.pref_box.child)
-        if target.get_element() is None:
+        element = self.selected.get_element()
+        if element is None:
             return
-        element     = target.get_element()
         pref_widget = element.get_pref_widget()
         if pref_widget is None:
             return
@@ -93,7 +92,13 @@ class Workspace(gtk.EventBox):
         self.selected = target
         if target is not None:
             target.select()
-            self._load_pref_widget(target)
+            self._update_widget_prefs()
+
+
+    def _on_box_key_press(self, box, event):
+        if event.keyval == 65535:  # Backspace
+            self.selected.clear()
+            self._update_widget_prefs()
 
 
     def _translate_event_coordinates(self, event):
@@ -121,7 +126,22 @@ class Workspace(gtk.EventBox):
             return
 
         # Check whether we are already in a drag operation.
-        if self.box.get_moving_child():
+        moving = self.box.get_moving_child()
+        if moving and moving.get_data('copy_of'):
+            # Strip the coordinates to the parent layout.
+            original = moving.get_data('copy_of')
+            layout   = original.get_parent_layout()
+            alloc    = layout.get_allocation()
+            x1, y1   = self._translate_event_coordinates(event)
+            x2, y2   = alloc.x + alloc.width, alloc.y + alloc.height
+            x2, y2   = layout.translate_coordinates(self.box, x2, y2)
+
+            # Select the bounding target.
+            bounding = self.target_at(min(x1, x2), min(y1, y2))
+            if bounding and bounding.get_parent_layout() == layout:
+                self.select_target(bounding)
+            return
+        elif moving:
             x, y   = self._translate_event_coordinates(event)
             target = self.target_at(x, y)
             if target is None:
@@ -140,7 +160,39 @@ class Workspace(gtk.EventBox):
         x, y               = self._translate_event_coordinates(event)
         widget_x, widget_y = self.translate_coordinates(element, x, y)
         if element.in_resize_area(widget_x, widget_y):
-            print "Resize start"
+            widget   = element.copy()
+            alloc    = element.get_allocation()
+
+            # The widget may span over multiple cells. However, we need to
+            # highlight the borders of each individual cell, which does not
+            # work when a colspan exists. To work around this, we chop the
+            # widget into pieces and assemble it by assigning the pieces into
+            # individual cells.
+            # Get a "screenshot" of the widget.
+            #drawable = gtk.gdk.Pixmap(element.window, alloc.width, alloc.height)
+            #pixbuf   = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB,
+            #                          False,
+            #                          8,
+            #                          alloc.width,
+            #                          alloc.height)
+            #pixbuf.get_from_drawable(drawable, drawable.get_colormap(),
+            #                         0, 0, 0, 0,
+            #                         alloc.width, alloc.height)
+
+            # Chop the screenshot into pieces and replace the original
+            # widget by the pieces, allowing for highlighting the borders
+            # of individual cells.
+            #lft, rgt, top, bot = layout.position_of(target)
+            #pixbuf.save('screenshot', "jpeg", {"quality":"100"})
+
+            box_x, box_y = element.translate_coordinates(self.box,
+                                                         alloc.x,
+                                                         alloc.y)
+            widget.set_size_request(alloc.width, alloc.height)
+            widget.set_data('copy_of', element)
+            self.box.add(widget)
+            self.box.set_child_position(widget, box_x, box_y)
+            self.box.start_resize(widget, x, y, event.time)
             return
 
         # Start dragging? Remove the widget from the layout and re-add it as
@@ -160,12 +212,36 @@ class Workspace(gtk.EventBox):
         x, y   = self._translate_event_coordinates(event)
         target = self.target_at(x, y)
         widget = self.box.get_moving_child()
-        if target and widget:
+
+        # Was an existing widget moved?
+        if target and widget and widget.get_data('copy_of'):
+            self.box.remove(widget)
+
+            # Find the bounding widgets.
+            original = widget.get_data('copy_of')
+            layout   = original.get_parent_layout()
+            alloc    = original.get_allocation()
+            x1, y1   = original.translate_coordinates(self.box,
+                                                      alloc.x,
+                                                      alloc.y)
+            target1  = self.target_at(x1, y1)
+            target2  = self.selected or target1
+
+            # Assign the widget to parent layout targets.
+            layout.reassign(original, target1, target2)
+            self.unselect_target(target)
+
+        # Was a new widget added?
+        elif target and widget:
             self.box.remove(widget)
             target.attach(widget)
             self.unselect_target(target)
+
+        # Was a new widget dragged into a non-dropable area?
         elif widget:
             self.box.remove(widget)
+
+        # Was a target clicked?
         elif target:
             self.select_target(target)
 

@@ -34,10 +34,11 @@ class Target(Element):
     def _update_border(self):
         if self.selected:
             color = self.get_style().mid[gtk.STATE_SELECTED]
-        elif self.element is None:
+        elif self.element is None or self.get_parent() is None:
             color = to_gdk('red')
         else:
-            color = self.get_parent().get_style().bg[gtk.STATE_NORMAL]
+            parent = self.get_parent()
+            color  = parent.get_style().bg[gtk.STATE_NORMAL]
         self.modify_bg(gtk.STATE_NORMAL, color)
 
 
@@ -54,11 +55,16 @@ class Target(Element):
 
     def attach(self, element):
         element.set_size_request(-1, -1)
-        self._drop_child()
+        replace = self.box.child is not None
+        if replace:
+            self.box.remove(self.box.child)
         self.box.add(element)
         self.element = element
         self._update_border()
-        self.emit('child-attached', element)
+        if replace:
+            self.emit('child-replaced', element)
+        else:
+            self.emit('child-attached', element)
 
 
     def select(self):
@@ -92,6 +98,10 @@ class Target(Element):
         return self.element
 
 
+    def get_pref_widget(self):
+        return gtk.Label()
+
+
 gobject.signal_new('child-attached',
                    Target,
                    gobject.SIGNAL_RUN_FIRST,
@@ -99,6 +109,12 @@ gobject.signal_new('child-attached',
                    (gobject.TYPE_PYOBJECT, ))
 
 gobject.signal_new('child-removed',
+                   Target,
+                   gobject.SIGNAL_RUN_FIRST,
+                   gobject.TYPE_NONE,
+                   (gobject.TYPE_PYOBJECT, ))
+
+gobject.signal_new('child-replaced',
                    Target,
                    gobject.SIGNAL_RUN_FIRST,
                    gobject.TYPE_NONE,

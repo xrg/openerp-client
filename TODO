@@ -1,9 +1,14 @@
 FormEditor
 -----------
-* use the proper mouse cursor to indicate when hovering above a resize handle.
+* Resizing widgets should work regardless of whether they fill their parent target.
+* Make resizing work for all widget types.
+* Undo/redo.
 
-
-
+TextEditor
+-----------
 * Add support for annotating ranges of text.
 * Do not allow for editing annotations if the TextEditor is not editable.
+
+All over
+---------
 * Create documentation.

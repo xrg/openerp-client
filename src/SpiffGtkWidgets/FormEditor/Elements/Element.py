@@ -32,6 +32,24 @@ class Element(gtk.EventBox):
         self.x = 0
         self.y = 0
         self.compute_size()
+        self.connect('motion-notify-event', self._on_motion_notify)
+
+
+    def has_layout(self):
+        return False
+
+
+    def get_parent_layout(self):
+        widget = self.parent
+        while widget:
+            if isinstance(widget, Element) and widget.has_layout():
+                return widget
+            widget = widget.parent
+        return None
+
+
+    def copy(self):
+        raise AssertionError('no such operation')
 
 
     def compute_size(self):
@@ -54,12 +72,19 @@ class Element(gtk.EventBox):
 
 
     def in_resize_area(self, x, y):
-        # x and y are passed in FloatBox space
         alloc = self.get_allocation()
         if x > alloc.width  - 10 and x < alloc.width and \
            y > alloc.height - 10 and y < alloc.width:
             return True
         return False
+
+
+    def _on_motion_notify(self, widget, event):
+        if self.in_resize_area(event.x, event.y):
+            cursor = gtk.gdk.Cursor(gtk.gdk.BOTTOM_RIGHT_CORNER)
+            self.window.set_cursor(cursor)
+        else:
+            self.window.set_cursor(None)
 
 
     def get_pref_widget(self):
