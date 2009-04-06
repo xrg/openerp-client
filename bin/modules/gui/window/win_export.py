@@ -27,7 +27,6 @@ import gettext
 import common
 
 import rpc
-import sets
 
 import service
 import types

@@ -22,10 +22,12 @@
 
 from rpc import RPCProxy
 import rpc
+
 try:
+    set
+except NameError:
     from sets import Set as set
-except ImportError:
-    pass
+
 import tools
 
 class ModelField(object):

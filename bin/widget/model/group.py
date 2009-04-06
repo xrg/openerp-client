@@ -28,7 +28,7 @@ import field
 import signal_event
 
 try:
-    a = set()
+    set
 except NameError:
     from sets import Set as set
 
