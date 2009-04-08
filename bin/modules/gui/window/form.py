@@ -154,6 +154,7 @@ class form(object):
     def sig_goto(self, *args):
         if not self.modified_save():
             return
+        
         glade2 = glade.XML(common.terp_path("openerp.glade"),'dia_goto_id',gettext.textdomain())
         widget = glade2.get_widget('goto_spinbutton')
         win = glade2.get_widget('dia_goto_id')
@@ -162,8 +163,19 @@ class form(object):
 
         response = win.run()
         win.destroy()
+        
         if response == gtk.RESPONSE_OK:
-            self.screen.load( [int(widget.get_value())] )
+            all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])
+            get_id = int(widget.get_value())
+            if get_id in all_ids:
+                current_ids = self.screen.ids_get()
+                if get_id in current_ids:
+                    self.screen.display(get_id)
+                else:
+                    self.screen.load([get_id])    
+                self.screen.current_view.set_cursor()
+            else:
+                common.message(_('Resource ID does not exist for this object!'))
 
     def destroy(self):
         oregistry.remove_receiver('misc-message', self._misc_message)
