@@ -161,6 +161,7 @@ class StateAwareWidget(object):
             result = True
             for condition in v:
                 result = result and tools.calc_condition(self,model,condition)
+                    
             if result:
                 if k=='invisible':
                     self.widget.hide()
@@ -168,6 +169,11 @@ class StateAwareWidget(object):
                     self.widget.set_sensitive(False)
                 else:
                     self.widget.set_sensitive(False and sa.get('readonly',False))
+            else:
+                if k=='readonly':
+                    self.widget.set_sensitive(True)
+                if k=='invisible':
+                    self.widget.show()        
 
 
 class _container(object):
