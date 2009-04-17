@@ -220,7 +220,7 @@ class FloatField(CharField):
     def set_client(self, model, value, test_state=True, force_change=False):
         internal = model.value[self.name]
         self.set(model, value, test_state)
-        if abs(float(internal or 0.0) - float(model.value[self.name] or 0.0)) >= (10.0**(-int(self.attrs.get('digits', (12,4))[1]))):
+        if abs(float(internal or 0.0) - float(model.value[self.name] or 0.0)) >= (10.0**(-1-int(self.attrs.get('digits', (12,4))[1]))):
             if not self.get_state_attrs(model).get('readonly', False):
                 model.modified = True
                 model.modified_fields.setdefault(self.name)
