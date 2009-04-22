@@ -288,6 +288,7 @@ class ViewList(parser_view):
             return
         if signal=='record-added':
             self.store.added(*args)
+            self.widget_tree.screen.current_model = args[0][-1]
         elif signal=='record-removed':
             self.store.removed(*args)
         else:
@@ -349,6 +350,7 @@ class ViewList(parser_view):
             if self.store:
                 self.widget_tree.set_model(self.store)
         self.update_children()
+        self.set_cursor()
 
     def update_children(self):
         ids = self.sel_ids_get()
