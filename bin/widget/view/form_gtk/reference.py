@@ -249,7 +249,7 @@ class reference(interface.widget_interface):
             img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
             self.but_open.set_image(img)
         else:
-            self.wid_text.set_text('')
+#            self.wid_text.set_text('') # this is commented as this caused many2one set to be unenterable
             img.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
             self.but_open.set_image(img)
         self.ok = True
