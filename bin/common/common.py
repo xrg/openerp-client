@@ -113,7 +113,7 @@ def selection(title, values, alwaysask=False, parent=None):
                 if iter:
                     res = model.get_value(iter, 0)
                     if res:
-                        res = (res, values[res.decode('utf8')])
+                        res = (res, values[res.encode('utf8')])
                     else:
                         res = (res, values[res])
                 else:
