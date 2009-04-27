@@ -294,6 +294,7 @@ class form(object):
         new_id = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'copy', res_id, {}, ctx)
         if new_id:
             self.screen.load([new_id])
+            self.screen.current_view.set_cursor()
             self.message_state(_('Working now on the duplicated document !'))
 
     def _form_save(self, auto_continue=True):
