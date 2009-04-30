@@ -1,9 +1,10 @@
+from Element   import Element
 from EntryBox  import EntryBox
 from Button    import Button
 from Label     import Label
 from OptionBox import OptionBox
-from Table     import Table
 from Target    import Target
+from Table     import Table
 from TextBox   import TextBox
 
 import inspect 

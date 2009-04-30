@@ -13,37 +13,20 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 import gobject, gtk, pango
-from EntryBox import EntryBox
+from SpiffGtkWidgets.FormEditor.Elements import Element
 
-class Label(EntryBox):
-    name     = 'label'
-    caption  = 'Label'
+class Button(Element):
+    name     = 'button'
+    caption  = 'Button'
     xoptions = gtk.FILL
     yoptions = gtk.FILL
 
     def __init__(self, *args):
-        EntryBox.__init__(self, *args)
-        self.child.set_has_frame(False)
-        self._on_entry_changed(self.child)
-        self.child.connect('changed', self._on_entry_changed)
+        Element.__init__(self, gtk.Button(*args))
+        self.set_above_child(True)
         if len(args) == 0:
-            self.child.set_text('Label:')
+            self.child.set_label('Button')
 
 
     def copy(self):
-        return Label(self.child.get_text())
-
-
-    def do_realize(self):
-        color = self.get_style().bg[gtk.STATE_NORMAL]
-        self.child.modify_base(gtk.STATE_NORMAL, color)
-        return EntryBox.do_realize(self)
-
-
-    def _on_entry_changed(self, entry):
-        layout       = entry.get_layout()
-        x_off, y_off = entry.get_layout_offsets()
-        w, h         = layout.get_pixel_size()
-        entry.set_size_request(2 * x_off + w, -1)
-
-gobject.type_register(Label)
+        return Button(self.child.get_label())

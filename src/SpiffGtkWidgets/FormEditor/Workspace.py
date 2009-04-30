@@ -49,7 +49,7 @@ class Workspace(gtk.EventBox):
 
         # Load built-in widgets.
         for name in sorted(Elements.__all__):
-            if name in ('Target'):
+            if name in ('Element', 'Target'):
                 continue
             element_class = Elements.__dict__[name]
             if type(element_class) != gobject.GObjectMeta:

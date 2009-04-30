@@ -14,34 +14,31 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 import gobject, gtk
 from gtk import gdk
-from Element import Element
+from SpiffGtkWidgets.FormEditor.Elements import Element
 
-class EntryBox(Element):
-    name     = 'entry'
-    caption  = 'Entry Box'
+class OptionBox(Element):
+    name     = 'optionmenu'
+    caption  = 'Option Box'
     xoptions = gtk.EXPAND|gtk.FILL
     yoptions = gtk.FILL
 
-    def __init__(self, text = ''):
-        Element.__init__(self, gtk.Entry())
-        self.child.set_text(text)
-        #self.connect('button-press-event', self._on_button_press_event)
+    def __init__(self, options = None):
+        Element.__init__(self, gtk.ComboBox())
+        self.options = []
+        for option in options or []:
+            self.add_option(option)
 
 
     def copy(self):
-        return EntryBox(self.child.get_text())
+        return OptionBox(self.options)
 
 
-    def _on_button_press_event(self, evbox, event):
-        print "Pressed", event.x, event.y
-        entry = self.child
-        alloc = entry.get_allocation()
-        pad   = 10
-        if event.x < pad or event.x > alloc.width - pad:
-            return False
-        if event.y < pad or event.y > alloc.height - pad:
-            return False
-        entry.grab_focus()
-        return True
+    def add_option(self, option):
+        self.options.append(option)
+        self.child.append_text(gtk.MenuItem(option))
 
-gobject.type_register(EntryBox)
+
+    def get_options(self):
+        return self.options
+
+gobject.type_register(OptionBox)

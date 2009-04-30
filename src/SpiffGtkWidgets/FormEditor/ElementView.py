@@ -14,7 +14,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 import gobject, gtk, os.path
 from SpiffGtkWidgets.Toolbox import Toolbox, ToolGroup
-icon_dir = os.path.join(os.path.dirname(__file__), 'icons')
+basedir = os.path.join(os.path.dirname(__file__))
 
 class ElementView(Toolbox):
     def __init__(self, element_factory):
@@ -29,8 +29,9 @@ class ElementView(Toolbox):
 
     def add_element(self, element):
         name    = element.name
+        clsname = element.__module__.split('.')[-1]
         caption = element.caption
-        icon    = os.path.join(icon_dir, name + '.png')
+        icon    = os.path.join(basedir, 'Elements', clsname, 'icon.png')
         button  = self.group.add_icon_button(name, icon, caption)
         button.connect('button-press-event', self._on_button_press_event)
 
