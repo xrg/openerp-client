@@ -1,8 +1,9 @@
 FormEditor
 -----------
-* Add a spinbutton widget.
-* Add a dropdown widget.
-* Add a checkbutton widget.
+* Add a spinbutton element.
+* Add a checkbutton element.
+* Add preferences for all element types.
+* Implement XML export/import.
 * Implement undo/redo.
 
 TextEditor
