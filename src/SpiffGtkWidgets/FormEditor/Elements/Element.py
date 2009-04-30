@@ -102,6 +102,14 @@ class Element(gtk.EventBox):
 
 
     def get_pref_widget(self):
-        label = gtk.Label('%s has no preferences' % self.caption)
-        label.set_line_wrap(True)
-        return label
+        module = __import__('.'.join(self.__module__.split('.')[:-1]),
+                            globals(),
+                            locals(),
+                            self.__module__)
+        try:
+            prefs = module.Preferences
+        except:
+            label = gtk.Label('%s has no preferences' % self.caption)
+            label.set_line_wrap(True)
+            return label
+        return prefs(self)
