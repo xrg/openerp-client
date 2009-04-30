@@ -1,7 +1,5 @@
 FormEditor
 -----------
-* Make sure that selected elements have focus even when a focusable element
-  is added into a form.
 * Add a spinbutton widget.
 * Add a dropdown widget.
 * Add a checkbutton widget.

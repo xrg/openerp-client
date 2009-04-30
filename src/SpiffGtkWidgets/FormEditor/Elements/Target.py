@@ -20,6 +20,7 @@ class Target(Element):
     def __init__(self):
         self.box = gtk.EventBox()
         Element.__init__(self, self.box)
+        self.set_property('can-focus', True)
         self.box.set_border_width(3)
         self.clear()
 
@@ -80,6 +81,7 @@ class Target(Element):
 
     def select(self):
         self.selected = True
+        self.grab_focus()
         self._update_border()
 
 
