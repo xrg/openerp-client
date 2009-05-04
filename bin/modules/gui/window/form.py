@@ -390,7 +390,8 @@ class form(object):
         self.sig_action('client_print_multi', report_type='html')
 
     def sig_print(self):
-        self.sig_action('client_print_multi', adds={_('Print Screen').encode('utf8'): {'report_name':'printscreen.list', 'name':_('Print Screen'), 'type':'ir.actions.report.xml'}})
+        self.sig_action('client_print_multi', adds={_('Print Screen').encode('utf8'): {'report_name':'printscreen.list', 'name':_('Print Screen'), 'type':'ir.actions.report.xml'},
+		_('Print Workflow'): {'report_name':'workflow.instance.graph', 'name':_('Print Workflow'), 'type':'ir.actions.report.int'}})
 
     def sig_search(self, widget=None):
         if not self.modified_save():

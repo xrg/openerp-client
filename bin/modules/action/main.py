@@ -188,6 +188,12 @@ class main(service.Service):
             datas['report_id'] = action['report_id']
             self.exec_report('custom', datas, context)
 
+        elif action['type']=='ir.actions.report.int':
+            if 'window' in datas:
+                win=datas['window']
+                del datas['window']
+            self.exec_report(action['report_name'], datas)
+
         elif action['type']=='ir.actions.report.xml':
             if 'window' in datas:
                 win=datas['window']
