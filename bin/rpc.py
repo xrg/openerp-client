@@ -113,8 +113,6 @@ class tinySocket_gw(gw_inter):
         logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
     def execute(self, method, *args):
-        print self._url, self._obj, method, self._uid, self._passwd, args
-
         self._sock.connect(self._url)
         self._sock.mysend((self._obj, method, self._db)+args)
         res = self._sock.myreceive()
