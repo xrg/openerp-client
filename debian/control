@@ -3,7 +3,7 @@ Section: x11
 Priority: optional
 Maintainer: Daniel Baumann <daniel@debian.org>
 Build-Depends: debhelper (>= 7), dpatch, python-dev
-Build-Depends-Indep: python-gtk2, python-glade2
+Build-Depends-Indep: python-glade2, python-gtk2
 Standards-Version: 3.8.0
 Homepage: http://www.openerp.com/
 Vcs-Browser: http://git.debian.net/?p=debian/openerp-client.git
@@ -11,15 +11,16 @@ Vcs-Git: git://git.debian.net/git/debian/openerp-client.git
 
 Package: tinyerp-client
 Architecture: all
-Depends: ${misc:Depends}, python, python-gtk2, python-glade2, python-egenix-mxdatetime
-Recommends: openoffice.org-writer, xpdf | pdf-viewer
+Depends: ${misc:Depends}, python, python-egenix-mxdatetime, python-glade2, python-gtk2
+Recommends: openoffice.org-writer, evince | pdf-viewer
+Provides: openerp-client
 Suggests: tinyerp-server
-Description: Enterprise Resource Management software (client)
- Tiny ERP is a complete ERP and CRM. The main features are accounting (analytic
+Description: Enterprise Resource Management (client)
+ OpenERP is a complete ERP and CRM. The main features are accounting (analytic
  and financial), stock management, sales and purchases management, tasks
  automation, marketing campaigns, help desk, POS, etc. Technical features
  include a distributed server, flexible workflows, an object database, a dynamic
- GUI, customizable reports, and XML-RPC interfaces.
+ GUI, customizable reports, and NET-RPC and XML-RPC interfaces.
  .
- This package contains the Tiny ERP client, install tinyerp-server for the
- server.
+ This package contains the OpenERP client, install tinyerp-server package for
+ the server.

@@ -5,12 +5,12 @@
 
 @DPATCH@
 
-diff -Naur tinyerp-client-3.4.2.orig/setup.py tinyerp-client-3.4.2/setup.py
---- tinyerp-client-3.4.2.orig/setup.py	2006-10-06 09:47:27.000000000 +0000
-+++ tinyerp-client-3.4.2/setup.py	2006-10-16 11:46:17.000000000 +0000
-@@ -81,7 +81,7 @@
- Programming Language :: Python
- """
+diff -Naurp openerp-client.orig/setup.py openerp-client/setup.py
+--- openerp-client.orig/setup.py	2008-11-03 20:53:39.000000000 +0000
++++ openerp-client/setup.py	2008-11-09 16:37:16.000000000 +0000
+@@ -122,7 +122,7 @@ def translations():
+         trans.append((dest % (lang, name), po))
+     return trans
  
 -check_modules()
 +#check_modules()

@@ -1,3 +1,17 @@
+tinyerp-client (5.0.0~alpha-1) experimental; urgency=low
+
+  * Merging upstream version 5.0.0~alpha.
+  * Rediffing autobuild.dpatch.
+  * Rediffing gtk.dpatch.
+  * Removing openerp.dpatch, not needed anymore.
+  * Removing unneeded chmod call for tinyerp-client.py.
+  * Sorting build-depends, depends and recommends.
+  * Renaming everything except the package name itself from tinyerp-client to
+    openerp-client.
+  * Updating copyright file to current upstream.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun,  9 Nov 2008 18:47:00 +0100
+
 tinyerp-client (4.2.3.4-1) unstable; urgency=low
 
   * Merging upstream version 4.2.3.4.
