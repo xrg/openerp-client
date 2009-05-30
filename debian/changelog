@@ -1,3 +1,12 @@
+openerp-client (5.0.1-0-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.1-0.
+  * Updating to standards 3.8.1.
+  * Dropping old conflicts/replaces on tinyerp.
+  * Using correct rfc-2822 date formats in changelog.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 30 May 2009 11:19:51 +0200
+
 openerp-client (5.0.0-3-1) unstable; urgency=low
 
   * Merging upstream version 5.0.0-3.
