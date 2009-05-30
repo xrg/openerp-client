@@ -10,7 +10,7 @@ clean-patched: patch-stamp
 
 	python setup.py clean
 
-	rm -rf build tinyerp-client
+	rm -rf build openerp-client
 	-find $(CURDIR) -type f -name "*.pyc" | xargs rm -f
 
 	dh_clean
@@ -26,15 +26,12 @@ install: build
 	python setup.py install --no-compile --prefix=$(CURDIR)/debian/tinyerp-client/usr
 
 	# Adjusting program location
-	sed -i -e 's|python.*/site-packages/||' debian/tinyerp-client/usr/bin/tinyerp-client
-	mv debian/tinyerp-client/usr/lib/python*/site-packages/tinyerp-client debian/tinyerp-client/usr/lib
+	sed -i -e 's|python.*/site-packages/||' debian/tinyerp-client/usr/bin/openerp-client
+	mv debian/tinyerp-client/usr/lib/python*/site-packages/openerp-client debian/tinyerp-client/usr/lib
 	rm -rf debian/tinyerp-client/usr/lib/python*
 
-	# Fixing permissions
-	chmod 0755 debian/tinyerp-client/usr/lib/tinyerp-client/tinyerp-client.py
-
 	# Removing double files
-	rm -rf debian/tinyerp-client/usr/share/doc/tinyerp-client-*
+	rm -rf debian/tinyerp-client/usr/share/doc/openerp-client-*
 
 binary: binary-indep
 
