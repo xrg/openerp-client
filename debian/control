@@ -12,8 +12,6 @@ Vcs-Git: git://git.debian.net/git/debian/openerp-client.git
 Package: openerp-client
 Architecture: all
 Depends: ${misc:Depends}, python, python-egenix-mxdatetime, python-glade2, python-gtk2
-Conflicts: tinyerp-client
-Replaces: tinyerp-client
 Recommends: python-hippocanvas, python-matplotlib, openoffice.org-writer, evince | pdf-viewer
 Suggests: openerp-server
 Description: Enterprise Resource Management (client)
