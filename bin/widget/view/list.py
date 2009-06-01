@@ -30,6 +30,7 @@ from rpc import RPCProxy
 import service
 import locale
 from interface import parser_view
+from tree_gtk import parser
 
 class field_record(object):
     def __init__(self, name):
@@ -648,6 +649,8 @@ class ViewList(parser_view):
                     renderer.set_property('activatable', value)
                 elif not isinstance(renderer, gtk.CellRendererProgress) and not isinstance(renderer, gtk.CellRendererPixbuf):
                     renderer.set_property('editable', value)
+                elif isinstance(renderer, parser.CellRendererButton):
+                    renderer.set_property('visible',False)
                 if value in ('top','bottom'):
                     if isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo, date_renderer.DecoratorRenderer)):
                         renderer.set_property('editable', value)
