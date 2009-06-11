@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -183,7 +183,11 @@ class rpc_session(object):
                         else:
                             common.warning(a.data, a.message)
                     else:
-                        common.error(_('Application Error'), e.faultCode, e.faultString)
+                        if obj == '/report':
+                            lang = self.context.get('lang',False)
+                            common.error(_('Application Error'), e.faultCode, common.get_environment(lang) + e.faultString)
+                        else:
+                            common.error(_('Application Error'), e.faultCode, e.faultString)
                 else:
                     common.error(_('Application Error'), _('View details'), str(e))
                 #TODO Must propagate the exception?

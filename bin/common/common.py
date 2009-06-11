@@ -636,14 +636,14 @@ def get_environment(lang=False):
         rev_no = 'Bazaar Not Installed !'
     if not lang:
         lang = os.environ.get('LANG', '').split('.')[0]
-    environment = 'Environment_Information : \n' \
+    environment = '\nEnvironment_Information : \n' \
                   'Operating System : %s\n' \
                   'PlatForm : %s\n' \
                   'Operating System Version : %s\n' \
                   'Python Version : %s\n'\
                   'OpenERP-Client Version : %s\n'\
                   'OpenERP-Client Last Revision ID : %s'\
-                  'Locale : %s'%(os.name,sys.platform,str(sys.version.split('\n')[1]),str(sys.version[0:5]),release.version,rev_no,lang)
+                  'Locale : %s\n'%(os.name,sys.platform,str(sys.version.split('\n')[1]),str(sys.version[0:5]),release.version,rev_no,lang)
     return environment
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
