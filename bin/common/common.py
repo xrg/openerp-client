@@ -625,7 +625,7 @@ colors = {
     'normal':'white'
 }
 
-def get_environment(lang=False):
+def get_client_environment(lang=False):
     try:
         if '.bzr' in os.listdir((os.getcwd()[0:-3])):
             fp = open(os.path.join(os.getcwd()[0:-3],'.bzr/branch/last-revision'))
