@@ -22,10 +22,12 @@
 
 from rpc import RPCProxy
 import rpc
+
 try:
+    set
+except NameError:
     from sets import Set as set
-except ImportError:
-    pass
+
 import tools
 
 class ModelField(object):
@@ -202,6 +204,8 @@ class BinaryField(CharField):
 
 class SelectionField(CharField):
     def set(self, model, value, test_state=True, modified=False):
+        value = isinstance(value,(list,tuple)) and len(value) and value[0] or value
+        
         if not self.get_state_attrs(model).get('required', False) and value is None:
             super(SelectionField, self).set(model, value, test_state, modified)
 
@@ -216,7 +220,7 @@ class FloatField(CharField):
     def set_client(self, model, value, test_state=True, force_change=False):
         internal = model.value[self.name]
         self.set(model, value, test_state)
-        if abs(float(internal or 0.0) - float(model.value[self.name] or 0.0)) >= (10.0**(-int(self.attrs.get('digits', (12,4))[1]))):
+        if abs(float(internal or 0.0) - float(model.value[self.name] or 0.0)) >= (10.0**(-1-int(self.attrs.get('digits', (12,4))[1]))):
             if not self.get_state_attrs(model).get('readonly', False):
                 model.modified = True
                 model.modified_fields.setdefault(self.name)

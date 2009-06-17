@@ -19,8 +19,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 try:
-    set()
+    set
 except NameError:
     from sets import Set as set
 

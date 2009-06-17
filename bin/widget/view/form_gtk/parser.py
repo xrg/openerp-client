@@ -47,7 +47,7 @@ class Button(Observable):
         self.widget = gtk.Button(**args)
 
         readonly = bool(int(attrs.get('readonly', '0')))
-        self.widget.set_sensitive( not readonly )
+        self.set_sensitive(not readonly)
 
         if attrs.get('icon', False):
             try:
@@ -70,6 +70,9 @@ class Button(Observable):
 
     def show(self):
         return self.widget.show()
+
+    def set_sensitive(self, value):
+        return self.widget.set_sensitive(value)
 
     def button_clicked(self, widget):
         model = self.form.screen.current_model
@@ -158,6 +161,7 @@ class StateAwareWidget(object):
             result = True
             for condition in v:
                 result = result and tools.calc_condition(self,model,condition)
+                    
             if result:
                 if k=='invisible':
                     self.widget.hide()
@@ -165,6 +169,11 @@ class StateAwareWidget(object):
                     self.widget.set_sensitive(False)
                 else:
                     self.widget.set_sensitive(False and sa.get('readonly',False))
+            else:
+                if k=='readonly':
+                    self.widget.set_sensitive(True)
+                if k=='invisible':
+                    self.widget.show()        
 
 
 class _container(object):
