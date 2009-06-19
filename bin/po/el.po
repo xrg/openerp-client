@@ -3383,9 +3383,8 @@ msgid "<b>Database created successfully !</b>"
 msgstr "<b>H βάση δημιουργήθηκε επιτυχώς !</b>"
 
 #: bin/connector_layer.py:18
-#, fuzzy
 msgid "Can not match the URL"
-msgstr "όχι Ταιριάζω URL"
+msgstr "Δεν ταιριάζει το URL "
 
 #~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 #~ msgstr ""
