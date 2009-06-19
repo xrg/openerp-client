@@ -1,7 +1,7 @@
 Source: openerp-client
 Section: x11
 Priority: optional
-Maintainer: Daniel Baumann <daniel@debian.org>
+Maintainer: Jimmy Angelakos <vyruss@hellug.gr>
 Build-Depends: debhelper (>= 7), quilt, python-dev
 Build-Depends-Indep: python-glade2, python-gtk2
 Standards-Version: 3.8.1
