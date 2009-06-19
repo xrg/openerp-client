@@ -1,3 +1,15 @@
+openerp-client (5.0.1-0-1ubuntu2) jaunty; urgency=low
+
+  *  Updated Greek Translations.
+
+ -- Jimmy Angelakos <vyruss@blob>  Fri, 19 Jun 2009 16:35:59 +0300
+
+openerp-client (5.0.1-0-1ubuntu1) jaunty; urgency=low
+
+  * Initial HELLUG version
+
+ -- Jimmy Angelakos <vyruss@blob>  Fri, 19 Jun 2009 16:35:43 +0300
+
 openerp-client (5.0.1-0-1) unstable; urgency=low
 
   * Merging upstream version 5.0.1-0.
