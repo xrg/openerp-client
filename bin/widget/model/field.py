@@ -204,7 +204,7 @@ class BinaryField(CharField):
 
 class SelectionField(CharField):
     def set(self, model, value, test_state=True, modified=False):
-        value = isinstance(value,(list,tuple)) and value[0] or value
+        value = isinstance(value,(list,tuple)) and len(value) and value[0] or value
         
         if not self.get_state_attrs(model).get('required', False) and value is None:
             super(SelectionField, self).set(model, value, test_state, modified)
