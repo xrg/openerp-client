@@ -476,10 +476,12 @@ def message_box(title, msg, parent=None):
     l = dia.get_widget('msg_title')
     l.set_text(title)
 
-    buffer = dia.get_widget('msg_tv').get_buffer()
+    msg_area = dia.get_widget('msg_tv')
+    buffer = msg_area.get_buffer()
     iter_start = buffer.get_start_iter()
     buffer.insert(iter_start, msg)
-
+    msg_area.set_sensitive(False)
+    
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
