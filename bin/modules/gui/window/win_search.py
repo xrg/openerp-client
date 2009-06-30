@@ -86,14 +86,18 @@ class dialog(object):
 
     def run(self, datas={}):
         while True:
-            res = self.dia.run()
-            if res==gtk.RESPONSE_OK:
-                if self.screen.current_model.validate() and self.screen.save_current():
-                    return self.screen.current_model.id
+            try:
+                res = self.dia.run()
+                if res==gtk.RESPONSE_OK:
+                    if self.screen.current_model.validate() and self.screen.save_current():
+                        return self.screen.current_model.id
+                    else:
+                        self.screen.display()
                 else:
-                    self.screen.display()
-            else:
-                break
+                    break
+            except Exception,e:
+                # Passing all exceptions, most preferably the one of sql_constraint
+                pass    
         return False
 
     def destroy(self):
