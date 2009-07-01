@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -29,6 +29,7 @@ import gettext
 
 import os
 import sys
+import release
 import common
 import logging
 from options import options
@@ -55,7 +56,7 @@ def _search_file(file, dir='path.share'):
         x = func(file)
         if os.path.exists(x):
             return x
-    return file 
+    return file
 
 terp_path = _search_file
 terp_path_pixmaps = lambda x: _search_file(x, 'path.pixmaps')
@@ -169,7 +170,7 @@ def terp_survey():
 
     email_widget = winglade.get_widget('entry_email')
     want_ebook_widget = winglade.get_widget('check_button_ebook')
-    
+
     def toggled_cb(togglebutton, *args):
         value = togglebutton.get_active()
         color_set(email_widget, ('normal', 'required')[value])
@@ -336,7 +337,7 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
 
     if not disconnected_mode:
         maintenance = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'status')
-    
+
         if maintenance['status'] == 'none':
             maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
@@ -429,7 +430,7 @@ is displayed on the second tab.
                 """Retrieve the buffer from a text view and return the content of this buffer"""
                 buffer = textView.get_buffer()
                 return buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-                
+
             # Use details_buffer
             tb = get_text_from_text_view(xmlGlade.get_widget('details_explanation'))
             explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
@@ -455,11 +456,11 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     dialog = gtk.MessageDialog(parent,
       gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
       type, gtk.BUTTONS_OK)
-    
+
     msg = to_xml(msg)
     if title is not None:
         msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
-    
+
     dialog.set_icon(OPENERP_ICON)
     dialog.set_markup(msg)
     dialog.show_all()
@@ -478,10 +479,12 @@ def message_box(title, msg, parent=None):
     l = dia.get_widget('msg_title')
     l.set_text(title)
 
-    buffer = dia.get_widget('msg_tv').get_buffer()
+    msg_area = dia.get_widget('msg_tv')
+    buffer = msg_area.get_buffer()
     iter_start = buffer.get_start_iter()
     buffer.insert(iter_start, msg)
-
+    msg_area.set_sensitive(False)
+    
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
@@ -624,7 +627,27 @@ colors = {
     'normal':'white'
 }
 
-
+def get_client_environment(lang=False):
+    try:
+        if '.bzr' in os.listdir((os.getcwd()[0:-3])):
+            fp = open(os.path.join(os.getcwd()[0:-3],'.bzr/branch/last-revision'))
+            rev_no = fp.read()
+            fp.close()
+        else:
+            rev_no = 'Bazaar Not Installed !'
+    except:
+        rev_no = 'Bazaar Not Installed !'
+    if not lang:
+        lang = os.environ.get('LANG', '').split('.')[0]
+    environment = '\nEnvironment_Information : \n' \
+                  'Operating System : %s\n' \
+                  'PlatForm : %s\n' \
+                  'Operating System Version : %s\n' \
+                  'Python Version : %s\n'\
+                  'OpenERP-Client Version : %s\n'\
+                  'OpenERP-Client Last Revision ID : %s'\
+                  'Locale : %s\n'%(os.name,sys.platform,str(sys.version.split('\n')[1]),str(sys.version[0:5]),release.version,rev_no,lang)
+    return environment
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

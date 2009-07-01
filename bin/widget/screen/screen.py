@@ -185,7 +185,7 @@ class Screen(signal_event.signal_event):
 
 #        v.extend((key, op, value) for key, op, value in domain if key not in filter_keys and not (key=='active' and self.context.get('active_test', False)))
 
-        if self.latest_search and self.latest_search != v:
+        if self.latest_search != v:
             self.filter_widget.set_offset(0)
         limit=self.filter_widget.get_limit()
         offset=self.filter_widget.get_offset()

@@ -1022,7 +1022,7 @@ class terp_main(service.Service):
                 elif log_response == RES_CNX_ERROR:
                     common.message(_('Connection error !\nUnable to connect to the server !'))
                 elif log_response == RES_BAD_PASSWORD:
-                    common.message(_('Connection error !\nBad username or password !'))
+                    common.message(_('Authentication error !\nBad Username or Password !'))
         except rpc.rpc_exception:
             rpc.session.logout()
             raise
