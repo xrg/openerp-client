@@ -286,6 +286,9 @@ class rpc_session(object):
 			err_string = str(err)
 		common.warning(err_string,_('Cannot list db:'))
 		return -1
+	except tiny_socket.Myexception,e:
+		common.warning(e.faultString,_('Cannot list db:'))
+		return -1
         except Exception, e:
 	    common.warning(str(e), _('Cannot list db:'))
             return -1
