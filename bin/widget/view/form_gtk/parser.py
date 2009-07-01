@@ -490,34 +490,7 @@ class parser_form(widget.view.interface.parser_interface):
         return container.pop(), dict_widget, saw_list, on_write
 
     def translate(self, widget, event, model, name, src, widget_entry):
-        id = self.screen.current_model.id
-        if not id:
-            common.message(
-                    _('You need to save resource before adding translations!'),
-                    parent=self.window)
-            return False
-        id = self.screen.current_model.save(reload=False)
-        uid = rpc.session.uid
-
-        lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
-                'search', [('translatable','=','1')])
-
-        if not lang_ids:
-            common.message(_('No other language available!'),
-                    parent=self.window)
-            return False
-        langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
-                'read', lang_ids, ['code', 'name'])
-
-        code = rpc.session.context.get('lang', 'en_US')
-
-        #change 'en' to false for context
-        def adapt_context(val):
-            if val == 'en_US':
-                return False
-            else:
-                return val
-
+        
         #widget accessor functions
         def value_get(widget):
             if type(widget) == type(gtk.Entry()):
@@ -560,6 +533,40 @@ class parser_form(widget.view.interface.parser_interface):
                 return sw, gtk.FILL | gtk.EXPAND
             else:
                 return None, False
+            
+        if not value_get(widget_entry):
+            common.message(
+                    _('Enter some text to the related field before adding translations!'),
+                    parent=self.window)
+            return False
+        
+        id = self.screen.current_model.id
+        if not id:
+            common.message(
+                    _('You need to save resource before adding translations!'),
+                    parent=self.window)
+            return False
+        id = self.screen.current_model.save(reload=False)
+        uid = rpc.session.uid
+
+        lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
+                'search', [('translatable','=','1')])
+
+        if not lang_ids:
+            common.message(_('No other language available!'),
+                    parent=self.window)
+            return False
+        langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
+                'read', lang_ids, ['code', 'name'])
+
+        code = rpc.session.context.get('lang', 'en_US')
+
+        #change 'en' to false for context
+        def adapt_context(val):
+            if val == 'en_US':
+                return False
+            else:
+                return val
 
 
         win = gtk.Dialog(_('Add Translation'), self.window,
