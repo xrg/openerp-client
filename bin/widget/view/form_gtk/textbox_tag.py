@@ -298,6 +298,7 @@ class textbox_tag(interface.widget_interface):
         cut_indices.sort()
         for c in cut_indices:
             if not last_pos==c:
+                txt = unicode(txt)
                 outbuff += txt[last_pos:c]
                 last_pos = c
             for tag in cuts[c]:
