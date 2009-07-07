@@ -263,7 +263,7 @@ class M2OField(CharField):
         if value and isinstance(value, (int, str, unicode, long)):
             rpc2 = RPCProxy(self.attrs['relation'])
             result = rpc2.name_get([value], rpc.session.context)
-            model.value[self.name] = result[0]
+            model.value[self.name] = result and result[0] or ''
         else:
             model.value[self.name] = value
         if modified:
