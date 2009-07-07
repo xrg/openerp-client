@@ -5,61 +5,72 @@ import xmlrpclib
 import release
 
 class environment(object):
-    def __init__(self, login, password, dbname, host='localhost', port=8069, lang= False):
+    def __init__(self, login, password, dbname, host='localhost', port=8069):
         self.login = login
         self.passwd = password
         self.db = dbname
         self.host = host
         self.port = port
-        self.lang = lang
 
-    def get_server_info(self):
-        login_socket = xmlrpclib.ServerProxy('http://%s:%s/xmlrpc/common' % (self.host, self.port))
-        self.uid = login_socket.login(self.db, self.login, self.passwd)
-        print login_socket.get_server_environment(self.lang) + self.get_client_info()
-        login_socket.logout(self.db, self.login, self.passwd)
+    def get_with_server_info(self):
+        try:
+            login_socket = xmlrpclib.ServerProxy('http://%s:%s/xmlrpc/common' % (self.host, self.port))
+            self.uid = login_socket.login(self.db, self.login, self.passwd)
+            print login_socket.get_server_environment() + self.get_client_info()
+            login_socket.logout(self.db, self.login, self.passwd)
+        except Exception,e:
+            try:
+                print "Exception:",e.faultCode
+            except:
+                print e
         return True
 
     def get_client_info(self):
         try:
-            if '.bzr' in os.listdir((os.getcwd()[0:-3])):
-                fp = open(os.path.join(os.getcwd()[0:-3],'.bzr/branch/last-revision'))
-                rev_no = fp.read()
-                fp.close()
-            else:
-                rev_no = 'Bazaar Not Installed !'
-        except:
-            rev_no = 'Bazaar Not Installed !'
-        environment ='OpenERP-Client Version : %s\n'\
-                     'OpenERP-Client Last Revision ID : %s'\
-                      %(release.version, rev_no)
+            rev_no = os.popen('bzr revno').read()
+        except Exception,e:
+             rev_no = 'Exception: %s\n' % (str(e))
+        environment = 'OpenERP-Client Version : %s\n'\
+                      'Last revision no: %s'\
+                      %(release.version,rev_no)
         return environment
 
 if __name__=="__main__":
 
     parser = optparse.OptionParser()
 
-    group = optparse.OptionGroup(parser, "Note",
-        "This script will provide you the full environment Information" \
-        " about OpenERP-Server and OpenERP-Client")
+    note_group = optparse.OptionGroup(parser, "Note",
+        " This script will provide you the full environment information of OpenERP-Client" \
+         " If login,password and database are given then it will also give OpenERP-Server Information")
 
-    parser.add_option_group(group)
+    help_group = optparse.OptionGroup(parser, "Examples",
+         "[1] home@home:~/openERP/client/bin$ python environment_info.py"
+         "       [2] home@home:~/openERP/client/bin$ python environment_info.py -l admin -p admin -d test")
 
-    parser.add_option("-L", "--login", dest="login", help="Login of the user in Open ERP")
-    parser.add_option("-P", "--password", dest="password", help="Password of the user in Open ERP")
-    parser.add_option("-d", "--dbname", dest="dbname", help="Database name",default='terp')
-    parser.add_option("-p", "--port", dest="port", help="Port",default=8069)
-    parser.add_option("-s", "--host", dest="host", help="Host",default='localhost')
-    parser.add_option("-l", "--lang", dest="lang", help="Lang(if not specified will take OS environment Language)",default=False)
+    parser.add_option_group(note_group)
+    parser.add_option_group(help_group)
+
+    parser.add_option("-l", "--login", dest="login", help="Login of the user in Open ERP")
+    parser.add_option("-p", "--password", dest="password", help="Password of the user in Open ERP")
+    parser.add_option("-d", "--database", dest="dbname", help="Database name")
+    parser.add_option("-P", "--port", dest="port", help="Port",default=8069)
+    parser.add_option("-H", "--host", dest="host", help="Host",default='localhost')
 
     (options, args) = parser.parse_args()
 
-    def check_options(cond, msg):
-        if cond:
-            print msg +'\nfor list of options try --help option'
-            sys.exit(1)
-    check_options(not (options.login),'ERROR: No Login specified !')
-    check_options(not (options.password),'ERROR: No Password specified !')
-
-    parser = environment(options.login, options.password, dbname = options.dbname, host = options.host, port = options.port,lang = options.lang)
-    parser.get_server_info()
+    parser = environment(options.login, options.password, dbname = options.dbname, host = options.host, port = options.port)
+    if not(options.login and options.password and options.dbname):
+        client_info = parser.get_client_info()
+        os_lang = os.environ.get('LANG', '').split('.')[0]
+        environment = '\nEnvironment_Information : \n' \
+                  'PlatForm : %s\n' \
+                  'Operating System : %s\n' \
+                  'Operating System Version : %s\n' \
+                  'Operating System Locale : %s\n'\
+                  'Python Version : %s\n'\
+                  %(sys.platform,os.name,str(sys.version.split('\n')[1]),os_lang,str(sys.version[0:5]))
+        print environment + client_info
+        print '\nFor server Information you need to pass database(-d), login(-l),password(-p)'
+        sys.exit(1)
+    else:
+        parser.get_with_server_info()
