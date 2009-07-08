@@ -19,9 +19,8 @@ class environment(object):
             print login_socket.get_server_environment() + self.get_client_info()
             login_socket.logout(self.db, self.login, self.passwd)
         except Exception,e:
-            try:
-                print "Exception:",e.faultCode
-            except:
+                if e[0] == 111:
+                    print "server not running..."
                 print e
         return True
 
@@ -33,7 +32,7 @@ class environment(object):
             for line in os.popen('bzr log -r %s'%(int(revno))).readlines():
                 if line.find(':')!=-1:
                     if not cnt == 4:
-                        rev_log += line
+                        rev_log += '\t' + line  
                         cnt += 1
         except Exception,e:
              rev_log = 'Exception: %s\n' % (str(e))
@@ -43,19 +42,18 @@ class environment(object):
         return environment
 
 if __name__=="__main__":
+    uses ="""%prog [options]
 
-    parser = optparse.OptionParser()
+Note:
+    This script will provide you the full environment information of OpenERP-Client 
+    If login,password and database are given then it will also give OpenERP-Server Information
 
-    note_group = optparse.OptionGroup(parser, "Note",
-        " This script will provide you the full environment information of OpenERP-Client" \
-         " If login,password and database are given then it will also give OpenERP-Server Information")
+Examples:
+[1] python environment_info.py
+[2] python environment_info.py -l admin -p admin -d test
+"""
 
-    help_group = optparse.OptionGroup(parser, "Examples",
-         "[1] home@home:~/openERP/client/bin$ python environment_info.py"
-         "       [2] home@home:~/openERP/client/bin$ python environment_info.py -l admin -p admin -d test")
-
-    parser.add_option_group(note_group)
-    parser.add_option_group(help_group)
+    parser = optparse.OptionParser(uses)
 
     parser.add_option("-l", "--login", dest="login", help="Login of the user in Open ERP")
     parser.add_option("-p", "--password", dest="password", help="Password of the user in Open ERP")

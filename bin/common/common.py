@@ -635,7 +635,7 @@ def get_client_environment():
         for line in os.popen('bzr log -r %s'%(int(revno))).readlines():
             if line.find(':')!=-1:
                 if not cnt == 4:
-                    rev_log += line
+                    rev_log += '\t' + line
                     cnt += 1
     except Exception,e:
          bzr_info = 'Exception: %s\n' % (str(e))
