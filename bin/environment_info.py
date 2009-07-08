@@ -27,12 +27,19 @@ class environment(object):
 
     def get_client_info(self):
         try:
-            rev_no = os.popen('bzr revno').read()
+            revno = os.popen('bzr revno').read()
+            rev_log = ''
+            cnt = 0
+            for line in os.popen('bzr log -r %s'%(int(revno))).readlines():
+                if line.find(':')!=-1:
+                    if not cnt == 4:
+                        rev_log += line
+                        cnt += 1
         except Exception,e:
-             rev_no = 'Exception: %s\n' % (str(e))
+             rev_log = 'Exception: %s\n' % (str(e))
         environment = 'OpenERP-Client Version : %s\n'\
-                      'Last revision no: %s'\
-                      %(release.version,rev_no)
+                      'Last revision Details: \n%s'\
+                      %(release.version,rev_log)
         return environment
 
 if __name__=="__main__":

@@ -629,7 +629,14 @@ colors = {
 
 def get_client_environment():
     try:
-         rev_no = os.popen('bzr revno').read()
+        revno = os.popen('bzr revno').read()
+        rev_log = ''
+        cnt = 0
+        for line in os.popen('bzr log -r %s'%(int(revno))).readlines():
+            if line.find(':')!=-1:
+                if not cnt == 4:
+                    rev_log += line
+                    cnt += 1
     except Exception,e:
          bzr_info = 'Exception: %s\n' % (str(e))
 
@@ -642,7 +649,7 @@ def get_client_environment():
                       'Python Version : %s\n'\
                       'OpenERP-Client Version : %s\n'\
                       'Last revision no : %s' \
-                      %(sys.platform,os.name,str(sys.version.split('\n')[1]),os_lang,str(sys.version[0:5]),release.version,rev_no)
+                      %(sys.platform,os.name,str(sys.version.split('\n')[1]),os_lang,str(sys.version[0:5]),release.version,rev_log)
     return environment
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
