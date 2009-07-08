@@ -331,6 +331,7 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
     Show an error dialog with the support request or the maintenance
     """
     log = logging.getLogger('common.message')
+    details = get_client_environment() + details
     log.error('Message %s: %s' % (str(message),details))
 
     show_message = True
@@ -456,7 +457,6 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     dialog = gtk.MessageDialog(parent,
       gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
       type, gtk.BUTTONS_OK)
-
     msg = to_xml(msg)
     if title is not None:
         msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
@@ -484,7 +484,7 @@ def message_box(title, msg, parent=None):
     iter_start = buffer.get_start_iter()
     buffer.insert(iter_start, msg)
     msg_area.set_sensitive(False)
-    
+
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
@@ -627,26 +627,31 @@ colors = {
     'normal':'white'
 }
 
-def get_client_environment(lang=False):
+def get_client_environment():
     try:
-        if '.bzr' in os.listdir((os.getcwd()[0:-3])):
-            fp = open(os.path.join(os.getcwd()[0:-3],'.bzr/branch/last-revision'))
-            rev_no = fp.read()
-            fp.close()
-        else:
-            rev_no = 'Bazaar Not Installed !'
-    except:
-        rev_no = 'Bazaar Not Installed !'
-    if not lang:
-        lang = os.environ.get('LANG', '').split('.')[0]
+        revno = os.popen('bzr revno').read()
+        rev_log = ''
+        cnt = 0
+        for line in os.popen('bzr log -r %s'%(int(revno))).readlines():
+            if line.find(':')!=-1:
+                if not cnt == 4:
+                    rev_log += '\t' + line
+                    cnt += 1
+                else:
+                    break
+    except Exception,e:
+         bzr_info = 'Exception: %s\n' % (str(e))
+
+    os_lang = os.environ.get('LANG', '').split('.')[0]
     environment = '\nEnvironment_Information : \n' \
-                  'Operating System : %s\n' \
-                  'PlatForm : %s\n' \
-                  'Operating System Version : %s\n' \
-                  'Python Version : %s\n'\
-                  'OpenERP-Client Version : %s\n'\
-                  'OpenERP-Client Last Revision ID : %s'\
-                  'Locale : %s\n'%(os.name,sys.platform,str(sys.version.split('\n')[1]),str(sys.version[0:5]),release.version,rev_no,lang)
+                      'PlatForm : %s\n' \
+                      'Operating System : %s\n' \
+                      'Operating System Version : %s\n' \
+                      'Operating System Locale : %s\n'\
+                      'Python Version : %s\n'\
+                      'OpenERP-Client Version : %s\n'\
+                      'Last revision Details : \n%s\n' \
+                      %(sys.platform,os.name,str(sys.version.split('\n')[1]),os_lang,str(sys.version[0:5]),release.version,rev_log)
     return environment
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
