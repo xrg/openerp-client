@@ -1,5 +1,5 @@
 import os
-import sys
+import platform
 import optparse
 import xmlrpclib
 import release
@@ -16,8 +16,11 @@ class environment(object):
         try:
             login_socket = xmlrpclib.ServerProxy('http://%s:%s/xmlrpc/common' % (self.host, self.port))
             self.uid = login_socket.login(self.db, self.login, self.passwd)
-            print login_socket.get_server_environment() + self.get_client_info()
-            login_socket.logout(self.db, self.login, self.passwd)
+            if self.uid:
+                print login_socket.get_server_environment() + self.get_client_info()
+                login_socket.logout(self.db, self.login, self.passwd)
+            else:
+                print "bad login or password from "+self.login+" using database "+self.db
         except Exception,e:
                 if e[0] == 111:
                     print "server not running..."
@@ -32,8 +35,10 @@ class environment(object):
             for line in os.popen('bzr log -r %s'%(int(revno))).readlines():
                 if line.find(':')!=-1:
                     if not cnt == 4:
-                        rev_log += '\t' + line  
+                        rev_log += '\t' + line
                         cnt += 1
+                    else:
+                        break
         except Exception,e:
              rev_log = 'Exception: %s\n' % (str(e))
         environment = 'OpenERP-Client Version : %s\n'\
@@ -45,7 +50,7 @@ if __name__=="__main__":
     uses ="""%prog [options]
 
 Note:
-    This script will provide you the full environment information of OpenERP-Client 
+    This script will provide you the full environment information of OpenERP-Client
     If login,password and database are given then it will also give OpenERP-Server Information
 
 Examples:

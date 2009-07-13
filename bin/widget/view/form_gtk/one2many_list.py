@@ -322,7 +322,7 @@ class one2many_list(interface.widget_interface):
             if self.screen.current_view.view_type == 'form':
                 msg = 'Are you sure to remove this record ?'
             else:
-                msg = 'Are you sure to remove these records ?'
+                msg = 'Are you sure to remove those records ?'
             if common.sur(msg):
                     self.screen.remove()
                     if not self.screen.models.models:

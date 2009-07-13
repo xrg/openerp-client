@@ -637,6 +637,8 @@ def get_client_environment():
                 if not cnt == 4:
                     rev_log += '\t' + line
                     cnt += 1
+                else:
+                    break
     except Exception,e:
          bzr_info = 'Exception: %s\n' % (str(e))
 
@@ -648,7 +650,7 @@ def get_client_environment():
                       'Operating System Locale : %s\n'\
                       'Python Version : %s\n'\
                       'OpenERP-Client Version : %s\n'\
-                      'Last revision no : %s' \
+                      'Last revision Details : \n%s\n' \
                       %(sys.platform,os.name,str(sys.version.split('\n')[1]),os_lang,str(sys.version[0:5]),release.version,rev_log)
     return environment
 
