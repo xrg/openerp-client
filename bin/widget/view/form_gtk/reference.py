@@ -239,6 +239,8 @@ class reference(interface.widget_interface):
         img = gtk.Image()
         if not value:
             model, (id, name) = '', (0, '')
+            self.wid_text.set_text('')
+            self.widget_combo.child.set_text('')
         else:
             model, (id, name) = value
         if id:
