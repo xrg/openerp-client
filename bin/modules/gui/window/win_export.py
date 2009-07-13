@@ -79,10 +79,10 @@ def open_excel(fields, result):
     else:
         common.message(_("Function only available for MS Office !\nSorry, OOo users :("))
 
-def datas_read(ids, model, fields, fields_view, prefix='', context=None):
+def datas_read(ids, model, fields, fields_view, prefix='', context=None, comp=False):
     ctx = context.copy()
     ctx.update(rpc.session.context)
-    datas = rpc.session.rpc_exec_auth('/object', 'execute', model, 'export_data', ids, fields, ctx)
+    datas = rpc.session.rpc_exec_auth('/object', 'execute', model, 'export_data', ids, fields, ctx, comp)
     return datas
 
 class win_export(object):
@@ -139,7 +139,9 @@ class win_export(object):
                 self.fields[prefix_node+field] = (st_name, fields[field].get('relation', False))
                 if fields[field].get('relation', False) and level>0:
                     fields2 = rpc.session.rpc_exec_auth('/object', 'execute', fields[field]['relation'], 'fields_get', False, rpc.session.context)
+                    fields2.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}})
                     model_populate(fields2, prefix_node+field+'/', node, st_name+'/', level-1)
+        fields.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}}) 
         model_populate(fields)
 
         self.view1.set_model(self.model1)
@@ -149,8 +151,9 @@ class win_export(object):
 
         self.wid_action = self.glade.get_widget('win_saveas_combo')
         self.wid_write_field_names = self.glade.get_widget('add_field_names_cb')
+        self.wid_import_compatible = self.glade.get_widget('import_compatible')
         action = self.wid_action.set_active(os.name!='nt')
-
+        
         self.glade.signal_connect('on_but_unselect_all_clicked', self.sig_unsel_all)
         self.glade.signal_connect('on_but_select_all_clicked', self.sig_sel_all)
         self.glade.signal_connect('on_but_select_clicked', self.sig_sel)
@@ -215,8 +218,8 @@ class win_export(object):
 
     def _sig_sel_add(self, store, path, iter):
         name, relation = self.fields[store.get_value(iter,1)]
-        if relation:
-            return
+        #if relation:
+        #    return
         num = self.model2.append()
         self.model2.set(num, 0, store.get_value(iter,0), 1, store.get_value(iter,1))
 
@@ -270,17 +273,20 @@ class win_export(object):
             action = self.wid_action.get_active()
             self.parent.present()
             self.win.destroy()
-            result = datas_read(self.ids, self.model, fields, self.fields_data, context=self.context)
-            #result = []
-            #for data in datas:
-            #   result.append([data.get(f, '') for f in fields])
-
+            import_comp = self.wid_import_compatible.get_active()            
+            result = datas_read(self.ids, self.model, fields, self.fields_data, context=self.context, comp=import_comp)            
+            if result.get('warning',False):
+                common.message_box(_('Exportation Error !'), unicode(result.get('warning',False)))
+                return False
+            result = result.get('datas',[])
+            if import_comp:
+                fields2 = fields                        
             if not action:
                 open_excel(fields2, result)
             else:
                 fname = common.file_selection(_('Save As...'),
                         parent=self.parent, action=gtk.FILE_CHOOSER_ACTION_SAVE)
-                if fname:
+                if fname:                    
                     export_csv(fname, fields2, result, self.wid_write_field_names.get_active())
             return True
         else:

@@ -59,7 +59,7 @@ def import_csv(csv_data, f, model, fields):
     except Exception, e:
         common.warning(str(e), _('XML-RPC error !'))
         return False
-    result = res[0]
+    result = res[0]    
     if result>=0:
         if result == 1:
             common.message(_('Imported one object !'))
@@ -119,7 +119,7 @@ class win_import(object):
             fields_order = fields.keys()
             fields_order.sort(lambda x,y: -cmp(fields[x].get('string', ''), fields[y].get('string', '')))
             for field in fields_order:
-                if (fields[field]['type'] not in ('reference',)) \
+                if (fields[field].get('type','') not in ('reference',)) \
                         and (not fields[field].get('readonly', False) \
                         or not dict(fields[field].get('states', {}).get(
                             'draft', [('readonly', True)])).get('readonly', True)):
@@ -129,9 +129,11 @@ class win_import(object):
                         (fields[field].get('required', False) and '#ddddff') or 'white'])
                     self.fields[prefix_node+field] = st_name
                     self.fields_invert[st_name] = prefix_node+field
-                    if fields[field]['type']=='one2many' and level>0:
+                    if fields[field].get('type','') == 'one2many' and level>0:
                         fields2 = rpc.session.rpc_exec_auth('/object', 'execute', fields[field]['relation'], 'fields_get', False, rpc.session.context)
+                        fields2.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}})
                         model_populate(fields2, prefix_node+field+'/', node, st_name+'/', level-1)
+        fields.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}})
         model_populate(fields)
 
         #for f in fields:
