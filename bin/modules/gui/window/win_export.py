@@ -79,10 +79,10 @@ def open_excel(fields, result):
     else:
         common.message(_("Function only available for MS Office !\nSorry, OOo users :("))
 
-def datas_read(ids, model, fields, fields_view, prefix='', context=None, comp=False):
-    ctx = context.copy()
+def datas_read(ids, model, fields, fields_view, prefix='', context=None):
+    ctx = context.copy()    
     ctx.update(rpc.session.context)
-    datas = rpc.session.rpc_exec_auth('/object', 'execute', model, 'export_data', ids, fields, ctx, comp)
+    datas = rpc.session.rpc_exec_auth('/object', 'execute', model, 'export_data', ids, fields, ctx)
     return datas
 
 class win_export(object):
@@ -273,8 +273,10 @@ class win_export(object):
             action = self.wid_action.get_active()
             self.parent.present()
             self.win.destroy()
-            import_comp = self.wid_import_compatible.get_active()            
-            result = datas_read(self.ids, self.model, fields, self.fields_data, context=self.context, comp=import_comp)            
+            import_comp = self.wid_import_compatible.get_active()
+            ctx = self.context.copy()
+            ctx['import_comp'] = import_comp            
+            result = datas_read(self.ids, self.model, fields, self.fields_data, context=ctx)            
             if result.get('warning',False):
                 common.message_box(_('Exportation Error !'), unicode(result.get('warning',False)))
                 return False
