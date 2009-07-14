@@ -35,7 +35,7 @@ import common
 import logging
 from options import options
 import service
-
+import locale
 import ConfigParser
 
 import threading
@@ -634,7 +634,7 @@ def get_client_environment():
     except Exception,e:
         rev_id = 'Exception: %s\n' % (str(e))
 
-    os_lang = os.environ.get('LANG', '').split('.')[0]
+    os_lang = '.'.join(locale.getdefaultlocale())
     environment = '\nEnvironment Information : \n' \
                   'PlatForm : %s\n' \
                   'Operating System : %s\n' \
