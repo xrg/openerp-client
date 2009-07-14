@@ -170,13 +170,6 @@ class main(service.Service):
             except rpc.rpc_exception, e:
 #               common.error(_('Error: ')+str(e.type), e.message, e.data)
                 return False
-
-        if adds:
-            # encode keys to avoid KeyError in common.selection
-            adds_encoded = {}
-            for key, val in adds.items():
-                adds_encoded[key.encode('utf8')] = val
-            adds = adds_encoded
         keyact = {}
         for action in actions:
             keyact[action['name']] = action
