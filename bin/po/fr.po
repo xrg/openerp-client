@@ -981,7 +981,7 @@ msgid ""
 "may not work properly. Use it at your own risks."
 msgstr ""
 "Les versions du serveur (%s) et du client (%s) divergent. Le client ne "
-"devrez pas fonctionner correctement. Cette utilisation est à votre propre "
+"devrait pas fonctionner correctement. Cette utilisation est à votre propre "
 "risque."
 
 #: bin/modules/gui/main.py:309
@@ -1743,8 +1743,8 @@ msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
-"L'impression automatique sous Linux n'est pas implémenté.\n"
-"Utiliser l'aperçu avant impression !"
+"L'impression automatique sous Linux n'est pas implémentée.\n"
+"Utilisez l'aperçu avant impression !"
 
 #
 # File: bin/printer/printer.py, line: 189
@@ -2923,7 +2923,7 @@ msgid ""
 "and better target new developments.</i>"
 msgstr ""
 "<i>Merci de remplir tous les champs pour nous aider à améliorer OpenERP et "
-"d'avoir un meilleur retour sur les développements futures.</i>"
+"d'avoir un meilleur retour sur les développements futurs.</i>"
 
 #
 # File: bin/openerp.glade, line: 5791
@@ -3090,7 +3090,7 @@ msgstr "Numéro de téléphone :"
 # File: bin/openerp.glade, line: 6470
 #: bin/openerp.glade:5341
 msgid "Emergency:"
-msgstr "Degrée d'urgence :"
+msgstr "Degré d'urgence :"
 
 #
 # File: bin/openerp.glade, line: 4041
@@ -3750,7 +3750,7 @@ msgid ""
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 "Ceci est le mot de passe de l'utilisateur qui a les droits pour administrer "
-"les base de données. Ce n'est pas un utilisateur OpenERP, juste un super "
+"les bases de données. Ce n'est pas un utilisateur OpenERP, juste un super "
 "utilisateur. Si vous ne l'avez pas changé, le mot de passe est 'admin' àprès "
 "l'installation."
 
