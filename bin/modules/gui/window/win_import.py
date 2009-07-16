@@ -44,18 +44,16 @@ def import_csv(csv_data, f, model, fields):
     input.seek(0)
     data = list(csv.reader(input, quotechar=csv_data['del'], delimiter=csv_data['sep']))[int(csv_data['skip']):]
     datas = []
-
     for line in data:
         if not line:
             continue
         datas.append(map(lambda x:x.decode(csv_data['combo']).encode('utf-8'), line))
-
     if not datas:
         common.warning(_('The file is empty !'), _('Importation !'))
         return False
 
     try:
-        res = rpc.session.rpc_exec_auth('/object', 'execute', model, 'import_data', f, datas)
+        res = rpc.session.rpc_exec_auth('/object', 'execute', model, 'import_data', f, datas, 'init', '', False, rpc.session.context)
     except Exception, e:
         common.warning(str(e), _('XML-RPC error !'))
         return False
