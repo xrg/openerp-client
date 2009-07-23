@@ -1,5 +1,7 @@
 import os
 import sys
+import platform
+import locale
 import optparse
 import xmlrpclib
 import release
@@ -29,28 +31,19 @@ class environment(object):
 
     def get_client_info(self):
         try:
-            revno = os.popen('bzr revno').read()
-            rev_log = ''
-            cnt = 0
-            for line in os.popen('bzr log -r %s'%(int(revno))).readlines():
-                if line.find(':')!=-1:
-                    if not cnt == 4:
-                        rev_log += '\t' + line  
-                        cnt += 1
-                    else:
-                        break
+            rev_id = os.popen('bzr revision-info').read()
         except Exception,e:
-             rev_log = 'Exception: %s\n' % (str(e))
+            rev_id = 'Exception: %s\n' % (str(e))
         environment = 'OpenERP-Client Version : %s\n'\
-                      'Last revision Details: \n%s'\
-                      %(release.version,rev_log)
+                      'Last revision No. & ID :%s'\
+                      %(release.version,rev_id)
         return environment
 
 if __name__=="__main__":
     uses ="""%prog [options]
 
 Note:
-    This script will provide you the full environment information of OpenERP-Client 
+    This script will provide you the full environment information of OpenERP-Client
     If login,password and database are given then it will also give OpenERP-Server Information
 
 Examples:
@@ -71,14 +64,16 @@ Examples:
     parser = environment(options.login, options.password, dbname = options.dbname, host = options.host, port = options.port)
     if not(options.login and options.password and options.dbname):
         client_info = parser.get_client_info()
-        os_lang = os.environ.get('LANG', '').split('.')[0]
-        environment = '\nEnvironment_Information : \n' \
+        os_lang = '.'.join(locale.getdefaultlocale())
+        environment = '\nEnvironment Information : \n' \
                   'PlatForm : %s\n' \
                   'Operating System : %s\n' \
+                  'Operating System Release : %s\n' \
                   'Operating System Version : %s\n' \
+                  'Operating System Architecture : %s\n' \
                   'Operating System Locale : %s\n'\
                   'Python Version : %s\n'\
-                  %(sys.platform,os.name,str(sys.version.split('\n')[1]),os_lang,str(sys.version[0:5]))
+                  %(platform.platform(),platform.os.name, platform.release(),platform.version(),platform.architecture()[0],os_lang,platform.python_version())
         print environment + client_info
         print '\nFor server Information you need to pass database(-d), login(-l),password(-p)'
         sys.exit(1)
