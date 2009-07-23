@@ -77,7 +77,7 @@ class many2many(interface.widget_interface):
         scroll.add_with_viewport(self.screen.widget)
         self.widget.pack_start(scroll, expand=True, fill=True)
 
-        self.old = None
+#        self.old = None
         self.avail_ids = set()
 
     def check_exist(self):
@@ -105,10 +105,10 @@ class many2many(interface.widget_interface):
         ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
         ids = map(lambda x: x[0], ids)
         self.check_exist()
-        if len(ids)<>1:
-            win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain, parent=self._window)
-            ids = win.go()
-
+#        if len(ids)<>1:
+        win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain, parent=self._window)
+        ids = win.go()
+            
         if ids == None:
             ids=[]
         if len(self.avail_ids) and len(ids):
@@ -151,11 +151,11 @@ class many2many(interface.widget_interface):
         ids = []
         if model_field:
             ids = model_field.get_client(model)
-        if ids<>self.old:
-            self.screen.clear()
-            self.screen.load(ids)
-            self.old = ids
-            self.avail_ids.clear()
+#        if ids<>self.old:
+        self.screen.clear()
+        self.screen.load(ids)
+#        self.old = ids
+        self.avail_ids.clear()
         self.screen.display()
         return True
 
