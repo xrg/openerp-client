@@ -64,7 +64,7 @@ Examples:
     parser = environment(options.login, options.password, dbname = options.dbname, host = options.host, port = options.port)
     if not(options.login and options.password and options.dbname):
         client_info = parser.get_client_info()
-        os_lang = '.'.join(locale.getdefaultlocale())
+        os_lang = '.'.join( [x for x in locale.getdefaultlocale() if x] )
         environment = '\nEnvironment Information : \n' \
                   'PlatForm : %s\n' \
                   'Operating System : %s\n' \
