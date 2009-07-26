@@ -242,6 +242,13 @@ openerp-client (5.0.1-0-1) unstable; urgency=low
 
  -- Daniel Baumann <daniel@debian.org>  Sat, 30 May 2009 11:19:51 +0200
 
+openerp-client (5.0.1-0-2) unstable; urgency=low
+
+  * Updating package to standards version 3.8.2.
+  * Rediffing autobuild.patch (Closes: #538626).
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 26 Jul 2009 12:23:37 +0200
+
 openerp-client (5.0.0-3-1) unstable; urgency=low
 
   * Merging upstream version 5.0.0-3.
