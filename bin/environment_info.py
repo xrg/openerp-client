@@ -5,7 +5,7 @@ import locale
 import optparse
 import xmlrpclib
 import release
-
+import tools
 class environment(object):
     def __init__(self, login, password, dbname, host='localhost', port=8069):
         self.login = login
@@ -24,16 +24,16 @@ class environment(object):
             else:
                 print "bad login or password from "+self.login+" using database "+self.db
         except Exception,e:
-                if e[0] == 111:
-                    print "server not running..."
                 print e
         return True
 
     def get_client_info(self):
         try:
             rev_id = os.popen('bzr revision-info').read()
+            if not rev_id:
+                rev_id = 'Bazaar Package not Found !'
         except Exception,e:
-            rev_id = 'Exception: %s\n' % (str(e))
+            rev_id = 'Exception: %s\n' % (tools.ustr(e))
         environment = 'OpenERP-Client Version : %s\n'\
                       'Last revision No. & ID :%s'\
                       %(release.version,rev_id)
@@ -60,22 +60,34 @@ Examples:
     parser.add_option("-H", "--host", dest="host", help="Host",default='localhost')
 
     (options, args) = parser.parse_args()
-
     parser = environment(options.login, options.password, dbname = options.dbname, host = options.host, port = options.port)
     if not(options.login and options.password and options.dbname):
         client_info = parser.get_client_info()
         os_lang = '.'.join( [x for x in locale.getdefaultlocale() if x] )
+        if not os_lang:
+            os_lang = 'NOT SET'
         environment = '\nEnvironment Information : \n' \
-                  'PlatForm : %s\n' \
-                  'Operating System : %s\n' \
-                  'Operating System Release : %s\n' \
-                  'Operating System Version : %s\n' \
-                  'Operating System Architecture : %s\n' \
-                  'Operating System Locale : %s\n'\
-                  'Python Version : %s\n'\
-                  %(platform.platform(),platform.os.name, platform.release(),platform.version(),platform.architecture()[0],os_lang,platform.python_version())
+                     'System : %s\n' \
+                     'OS Name : %s\n' \
+                     %(platform.platform(), platform.os.name)
+        if os.name == 'posix':
+          if platform.system() == 'Linux':
+             lsbinfo = os.popen('lsb_release -a').read()
+             environment += '%s'%(lsbinfo)
+          else:
+             environment += 'Your System is not lsb compliant\n'
+        environment += 'Operating System Release : %s\n' \
+                    'Operating System Version : %s\n' \
+                    'Operating System Architecture : %s\n' \
+                    'Operating System Locale : %s\n'\
+                    'Python Version : %s\n'\
+                    %(platform.release(), platform.version(), platform.architecture()[0],
+                      os_lang, platform.python_version())
+
         print environment + client_info
         print '\nFor server Information you need to pass database(-d), login(-l),password(-p)'
         sys.exit(1)
+
     else:
+        print "else"
         parser.get_with_server_info()
