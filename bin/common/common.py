@@ -639,6 +639,7 @@ def get_client_environment():
     os_lang = '.'.join( [x for x in locale.getdefaultlocale() if x] )
     if not os_lang:
         os_lang = 'NOT SET'
+
     environment = '\nEnvironment Information : \n' \
                      'System : %s\n' \
                      'OS Name : %s\n' \

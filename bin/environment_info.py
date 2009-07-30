@@ -63,9 +63,11 @@ Examples:
     parser = environment(options.login, options.password, dbname = options.dbname, host = options.host, port = options.port)
     if not(options.login and options.password and options.dbname):
         client_info = parser.get_client_info()
+
         os_lang = '.'.join( [x for x in locale.getdefaultlocale() if x] )
         if not os_lang:
             os_lang = 'NOT SET'
+
         environment = '\nEnvironment Information : \n' \
                      'System : %s\n' \
                      'OS Name : %s\n' \
@@ -89,5 +91,4 @@ Examples:
         sys.exit(1)
 
     else:
-        print "else"
         parser.get_with_server_info()
