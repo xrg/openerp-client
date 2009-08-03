@@ -79,7 +79,8 @@ class win_import(object):
         self.win = self.glade.get_widget('win_import')
         self.model = model
         self.fields_data = {}
-
+        self.invert = False
+        
         if parent is None:
             parent = service.LocalService('gui.main').window
         self.win.set_transient_for(parent)
@@ -131,6 +132,12 @@ class win_import(object):
                         fields2 = rpc.session.rpc_exec_auth('/object', 'execute', fields[field]['relation'], 'fields_get', False, rpc.session.context)
                         fields2.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}})
                         model_populate(fields2, prefix_node+field+'/', node, st_name+'/', level-1)
+                    if fields[field].get('type','') in ('many2one' , 'many2many' ) and level>0:
+                        self.fields[field+':id'] = fields[field]['string']
+                        fields2 = rpc.session.rpc_exec_auth('/object', 'execute', fields[field]['relation'], 'fields_get', False, rpc.session.context)
+                        fields2.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}})
+                        self.fields_invert[fields[field]['string']] = field+':id'
+                        model_populate(fields2, prefix_node+field+'/', node, st_name+'/', level-1)
         fields.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}})
         model_populate(fields)
 
@@ -169,9 +176,15 @@ class win_import(object):
             for line in data:
                 for word in line:
                     word = word.decode(csvcode)
-                    if word in self.fields_invert:
+                    if not csvcode.lower() == 'utf-8':
+                        word = word.encode('utf-8')
+                    if (word in self.fields):
                         num = self.model2.append()
-                        self.model2.set(num, 0, word.encode('utf8'), 1, self.fields_invert[word])
+                        self.model2.set(num, 0, self.fields[word], 1, word)
+                    elif word in self.fields_invert:
+                        self.invert = True
+                        num = self.model2.append()
+                        self.model2.set(num, 0, word, 1, word)
                     else:
                         raise Exception(_("You cannot import this field %s, because we cannot auto-detect it"))
                 break
@@ -228,7 +241,13 @@ class win_import(object):
                 self.parent.present()
                 self.win.destroy()
                 if csv['fname']:
-                    return import_csv(csv, fields, self.model, self.fields)
+                    if self.invert:
+                        inverted = []
+                        for f in fields:
+                            inverted.append(self.fields_invert[f])
+                        return import_csv(csv, inverted, self.model, self.fields_invert)
+                    else:
+                        return import_csv(csv, fields, self.model, self.fields)
                 return False
             else:
                 self.parent.present()
