@@ -28,6 +28,7 @@ import urlparse
 import gobject
 import gtk
 from gtk import glade
+from pango import parse_markup
 import translate
 
 import rpc
@@ -447,8 +448,13 @@ class db_login(object):
             else:
                 lm = rpc.session.login_message(url)
                 if lm:
-                    label.set_label(lm)
-                    label.show()
+                    try:
+                        parse_markup(lm)
+                    except:
+                        label.hide()
+                    else:
+                        label.set_label(lm)
+                        label.show()
                 else:
                     label.hide()
 
@@ -1446,8 +1452,13 @@ class terp_main(service.Service):
             else:
                 lm = rpc.session.login_message(url)
                 if lm:
-                    label.set_label(lm)
-                    label.show()
+                    try:
+                        parse_markup(lm)
+                    except:
+                        label.hide()
+                    else:
+                        label.set_label(lm)
+                        label.show()
                 else:
                     label.hide()
                 db_widget.show()
