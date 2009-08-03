@@ -445,7 +445,13 @@ class db_login(object):
                 if butconnect:
                     butconnect.set_sensitive(False)
             else:
-                label.hide()
+                lm = rpc.session.login_message(url)
+                if lm:
+                    label.set_label(lm)
+                    label.show()
+                else:
+                    label.hide()
+
                 db_widget.show()
                 if butconnect:
                     butconnect.set_sensitive(True)
@@ -1438,7 +1444,12 @@ class terp_main(service.Service):
                 db_widget.hide()
                 label.show()
             else:
-                label.hide()
+                lm = rpc.session.login_message(url)
+                if lm:
+                    label.set_label(lm)
+                    label.show()
+                else:
+                    label.hide()
                 db_widget.show()
             return res
 
