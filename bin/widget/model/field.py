@@ -66,11 +66,17 @@ class CharField(object):
     def context_get(self, model, check_load=True, eval=True):
         context = {}
         context.update(self.parent.context)
+        # removing default keys of the parent context
+        context_own = context.copy()
+        for c in context.items():
+            if c[0].startswith('default_'):
+                del context_own[c[0]]
+        
         field_context_str = self.attrs.get('context', '{}') or '{}'
         if eval:
             field_context = model.expr_eval('dict(%s)' % field_context_str, check_load=check_load)
-            context.update(field_context)
-        return context
+            context_own.update(field_context)
+        return context_own
 
     def validate(self, model):
         ok = True
