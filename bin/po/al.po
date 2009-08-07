@@ -19,9 +19,11 @@ msgstr ""
 # File: bin/modules/action/main.py, line: 46
 # File: bin/modules/action/main.py, line: 46
 # File: bin/modules/action/main.py, line: 46
+# File: bin/modules/action/main.py, line: 46
 msgid "Nothing to print!"
 msgstr ""
 #
+# File: bin/modules/action/main.py, line: 63
 # File: bin/modules/action/main.py, line: 63
 # File: bin/modules/action/main.py, line: 63
 # File: bin/modules/action/main.py, line: 63
@@ -31,11 +33,14 @@ msgstr ""
 # File: bin/modules/action/main.py, line: 178
 # File: bin/modules/action/main.py, line: 178
 # File: bin/modules/action/main.py, line: 177
+# File: bin/modules/action/main.py, line: 177
 msgid "Select your action"
 msgstr ""
 #
 # File: bin/modules/action/wizard.py, line: 133
 # File: bin/modules/action/wizard.py, line: 133
+# File: bin/modules/action/wizard.py, line: 137
+# File: bin/modules/gui/main.py, line: 172
 # File: bin/modules/action/wizard.py, line: 137
 # File: bin/modules/gui/main.py, line: 172
 #, fuzzy
@@ -44,6 +49,8 @@ msgstr "OpenERP - Konfirmimi"
 #
 # File: bin/modules/action/wizard.py, line: 143
 # File: bin/modules/action/wizard.py, line: 143
+# File: bin/modules/action/wizard.py, line: 147
+# File: bin/modules/gui/main.py, line: 183
 # File: bin/modules/action/wizard.py, line: 147
 # File: bin/modules/gui/main.py, line: 183
 #, fuzzy
@@ -59,6 +66,9 @@ msgstr ""
 # File: bin/modules/action/wizard.py, line: 151
 # File: bin/modules/gui/main.py, line: 187
 # File: bin/modules/gui/main.py, line: 639
+# File: bin/modules/action/wizard.py, line: 151
+# File: bin/modules/gui/main.py, line: 187
+# File: bin/modules/gui/main.py, line: 639
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
@@ -68,6 +78,9 @@ msgstr ""
 # File: bin/rpc.py, line: 141
 # File: bin/modules/action/wizard.py, line: 171
 # File: bin/rpc.py, line: 141
+# File: bin/modules/action/wizard.py, line: 175
+# File: bin/modules/gui/main.py, line: 210
+# File: bin/rpc.py, line: 140
 # File: bin/modules/action/wizard.py, line: 175
 # File: bin/modules/gui/main.py, line: 210
 # File: bin/rpc.py, line: 140
@@ -91,6 +104,13 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 224
 # File: bin/rpc.py, line: 186
 # File: bin/rpc.py, line: 188
+# File: bin/modules/action/wizard.py, line: 187
+# File: bin/modules/action/wizard.py, line: 193
+# File: bin/modules/action/wizard.py, line: 195
+# File: bin/modules/gui/main.py, line: 218
+# File: bin/modules/gui/main.py, line: 224
+# File: bin/rpc.py, line: 186
+# File: bin/rpc.py, line: 188
 #, fuzzy
 msgid "Application Error"
 msgstr "Gabim aplikacioni !"
@@ -99,6 +119,8 @@ msgstr "Gabim aplikacioni !"
 # File: bin/rpc.py, line: 189
 # File: bin/modules/action/wizard.py, line: 191
 # File: bin/rpc.py, line: 189
+# File: bin/modules/action/wizard.py, line: 195
+# File: bin/rpc.py, line: 188
 # File: bin/modules/action/wizard.py, line: 195
 # File: bin/rpc.py, line: 188
 #, fuzzy
@@ -111,6 +133,9 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 1138
 # File: bin/modules/gui/main.py, line: 145
 # File: bin/modules/gui/main.py, line: 1138
+# File: bin/modules/gui/main.py, line: 87
+# File: bin/modules/gui/main.py, line: 436
+# File: bin/modules/gui/main.py, line: 1445
 # File: bin/modules/gui/main.py, line: 87
 # File: bin/modules/gui/main.py, line: 436
 # File: bin/modules/gui/main.py, line: 1445
@@ -127,6 +152,12 @@ msgstr ""
 # File: bin/openerp.glade, line: 8491
 # File: bin/openerp.glade, line: 8813
 # File: bin/openerp.glade, line: 9458
+# File: bin/modules/gui/main.py, line: 91
+# File: bin/openerp.glade, line: 72
+# File: bin/openerp.glade, line: 6270
+# File: bin/openerp.glade, line: 6506
+# File: bin/openerp.glade, line: 6828
+# File: bin/openerp.glade, line: 7473
 # File: bin/modules/gui/main.py, line: 91
 # File: bin/openerp.glade, line: 72
 # File: bin/openerp.glade, line: 6270
@@ -152,6 +183,12 @@ msgstr "Serveri:"
 # File: bin/openerp.glade, line: 6785
 # File: bin/openerp.glade, line: 7082
 # File: bin/openerp.glade, line: 7430
+# File: bin/modules/gui/main.py, line: 102
+# File: bin/openerp.glade, line: 98
+# File: bin/openerp.glade, line: 6542
+# File: bin/openerp.glade, line: 6785
+# File: bin/openerp.glade, line: 7082
+# File: bin/openerp.glade, line: 7430
 #, fuzzy
 msgid "Change"
 msgstr "Ndrro Rrenjen"
@@ -160,16 +197,20 @@ msgstr "Ndrro Rrenjen"
 # File: bin/openerp.glade, line: 8994
 # File: bin/modules/gui/main.py, line: 109
 # File: bin/openerp.glade, line: 7009
+# File: bin/modules/gui/main.py, line: 109
+# File: bin/openerp.glade, line: 7009
 #, fuzzy
 msgid "Super Administrator Password:"
 msgstr "Shifra:"
 #
+# File: bin/modules/gui/main.py, line: 240
 # File: bin/modules/gui/main.py, line: 240
 msgid "Migration Scripts"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 1890
 # File: bin/openerp.glade, line: 1890
+# File: bin/modules/gui/main.py, line: 243
 # File: bin/modules/gui/main.py, line: 243
 #, fuzzy
 msgid "Contract ID:"
@@ -178,14 +219,17 @@ msgstr "Kontakti"
 # File: bin/openerp.glade, line: 9148
 # File: bin/openerp.glade, line: 9148
 # File: bin/modules/gui/main.py, line: 249
+# File: bin/modules/gui/main.py, line: 249
 #, fuzzy
 msgid "Contract Password:"
 msgstr "Shifra:"
 #
 # File: bin/modules/gui/main.py, line: 264
+# File: bin/modules/gui/main.py, line: 264
 msgid "You already have the latest version"
 msgstr ""
 #
+# File: bin/modules/gui/main.py, line: 269
 # File: bin/modules/gui/main.py, line: 269
 msgid "The following updates are available:"
 msgstr ""
@@ -197,6 +241,7 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 361
 # File: bin/modules/gui/main.py, line: 363
 # File: bin/modules/gui/main.py, line: 281
+# File: bin/modules/gui/main.py, line: 281
 #, fuzzy
 msgid "You can now migrate your databases."
 msgstr "Zgjedhe daten"
@@ -204,20 +249,24 @@ msgstr "Zgjedhe daten"
 # File: bin/openerp.glade, line: 8872
 # File: bin/openerp.glade, line: 8872
 # File: bin/modules/gui/main.py, line: 286
+# File: bin/modules/gui/main.py, line: 286
 #, fuzzy
 msgid "Migrate Database"
 msgstr "Krijo te dhenat e reja"
 #
 # File: bin/modules/gui/main.py, line: 315
+# File: bin/modules/gui/main.py, line: 315
 msgid "Your database has been upgraded."
 msgstr ""
 #
+# File: bin/modules/gui/main.py, line: 317
 # File: bin/modules/gui/main.py, line: 317
 msgid "Your databases have been upgraded."
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 141
 # File: bin/modules/gui/main.py, line: 141
+# File: bin/modules/gui/main.py, line: 432
 # File: bin/modules/gui/main.py, line: 432
 msgid "Unknown"
 msgstr ""
@@ -228,11 +277,14 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 1142
 # File: bin/modules/gui/main.py, line: 443
 # File: bin/modules/gui/main.py, line: 1449
+# File: bin/modules/gui/main.py, line: 443
+# File: bin/modules/gui/main.py, line: 1449
 msgid "No database found, you must create one !"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 165
 # File: bin/modules/gui/main.py, line: 165
+# File: bin/modules/gui/main.py, line: 467
 # File: bin/modules/gui/main.py, line: 467
 #, python-format
 msgid ""
@@ -243,6 +295,7 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 296
 # File: bin/modules/gui/main.py, line: 296
 # File: bin/modules/gui/main.py, line: 595
+# File: bin/modules/gui/main.py, line: 595
 msgid "Sorry,'"
 msgstr ""
 #
@@ -252,12 +305,15 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 299
 # File: bin/modules/gui/main.py, line: 595
 # File: bin/modules/gui/main.py, line: 598
+# File: bin/modules/gui/main.py, line: 595
+# File: bin/modules/gui/main.py, line: 598
 #, fuzzy
 msgid "Bad database name !"
 msgstr "Zgjedhe daten"
 #
 # File: bin/modules/gui/main.py, line: 299
 # File: bin/modules/gui/main.py, line: 299
+# File: bin/modules/gui/main.py, line: 598
 # File: bin/modules/gui/main.py, line: 598
 msgid ""
 "The database name must contain only normal characters or \"_\".\n"
@@ -267,12 +323,14 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 327
 # File: bin/modules/gui/main.py, line: 327
 # File: bin/modules/gui/main.py, line: 626
+# File: bin/modules/gui/main.py, line: 626
 #, fuzzy
 msgid "OpenERP Database Installation"
 msgstr "OpenERP - Zgjedhja e dates"
 #
 # File: bin/modules/gui/main.py, line: 336
 # File: bin/modules/gui/main.py, line: 336
+# File: bin/modules/gui/main.py, line: 635
 # File: bin/modules/gui/main.py, line: 635
 #, fuzzy
 msgid "<b>Operation in progress</b>"
@@ -289,12 +347,16 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 658
 # File: bin/modules/gui/main.py, line: 660
 # File: bin/modules/gui/main.py, line: 662
+# File: bin/modules/gui/main.py, line: 658
+# File: bin/modules/gui/main.py, line: 660
+# File: bin/modules/gui/main.py, line: 662
 #, fuzzy
 msgid "Could not create database."
 msgstr "Zgjedhe daten"
 #
 # File: bin/modules/gui/main.py, line: 359
 # File: bin/modules/gui/main.py, line: 359
+# File: bin/modules/gui/main.py, line: 658
 # File: bin/modules/gui/main.py, line: 658
 msgid "Database already exists !"
 msgstr ""
@@ -309,6 +371,10 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 1342
 # File: bin/modules/gui/main.py, line: 1361
 # File: bin/modules/gui/main.py, line: 1437
+# File: bin/modules/gui/main.py, line: 660
+# File: bin/modules/gui/main.py, line: 1342
+# File: bin/modules/gui/main.py, line: 1361
+# File: bin/modules/gui/main.py, line: 1437
 msgid "Bad database administrator password !"
 msgstr ""
 #
@@ -318,11 +384,14 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 370
 # File: bin/modules/gui/main.py, line: 662
 # File: bin/modules/gui/main.py, line: 669
+# File: bin/modules/gui/main.py, line: 662
+# File: bin/modules/gui/main.py, line: 669
 msgid "Error during database creation !"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 370
 # File: bin/modules/gui/main.py, line: 370
+# File: bin/modules/gui/main.py, line: 669
 # File: bin/modules/gui/main.py, line: 669
 msgid ""
 "The server crashed during installation.\n"
@@ -332,11 +401,13 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 388
 # File: bin/modules/gui/main.py, line: 388
 # File: bin/modules/gui/main.py, line: 687
+# File: bin/modules/gui/main.py, line: 687
 msgid "The following users have been installed on your database:"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 388
 # File: bin/modules/gui/main.py, line: 388
+# File: bin/modules/gui/main.py, line: 687
 # File: bin/modules/gui/main.py, line: 687
 msgid "You can now connect to the database as an administrator."
 msgstr ""
@@ -347,17 +418,21 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 763
 # File: bin/modules/gui/main.py, line: 731
 # File: bin/modules/gui/main.py, line: 1064
+# File: bin/modules/gui/main.py, line: 731
+# File: bin/modules/gui/main.py, line: 1064
 msgid "Press Ctrl+O to login"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 605
 # File: bin/modules/gui/main.py, line: 605
 # File: bin/modules/gui/main.py, line: 906
+# File: bin/modules/gui/main.py, line: 906
 msgid "Edit"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 694
 # File: bin/modules/gui/main.py, line: 694
+# File: bin/modules/gui/main.py, line: 995
 # File: bin/modules/gui/main.py, line: 995
 #, fuzzy, python-format
 msgid "%s request(s)"
@@ -366,12 +441,14 @@ msgstr "Kerkesat:"
 # File: bin/modules/gui/main.py, line: 696
 # File: bin/modules/gui/main.py, line: 696
 # File: bin/modules/gui/main.py, line: 997
+# File: bin/modules/gui/main.py, line: 997
 #, fuzzy
 msgid "No request"
 msgstr "Dergo Kerkesen"
 #
 # File: bin/modules/gui/main.py, line: 698
 # File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 999
 # File: bin/modules/gui/main.py, line: 999
 #, python-format
 msgid " - %s request(s) sended"
@@ -380,11 +457,13 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 734
 # File: bin/modules/gui/main.py, line: 734
 # File: bin/modules/gui/main.py, line: 1035
+# File: bin/modules/gui/main.py, line: 1035
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
 #
+# File: bin/modules/gui/main.py, line: 1037
 # File: bin/modules/gui/main.py, line: 1037
 msgid ""
 "Authentication error !\n"
@@ -394,11 +473,13 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 761
 # File: bin/modules/gui/main.py, line: 761
 # File: bin/modules/gui/main.py, line: 1062
+# File: bin/modules/gui/main.py, line: 1062
 msgid "Not logged !"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 833
 # File: bin/modules/gui/main.py, line: 833
+# File: bin/modules/gui/main.py, line: 1138
 # File: bin/modules/gui/main.py, line: 1138
 msgid ""
 "You can not log into the system !\n"
@@ -412,11 +493,14 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 872
 # File: bin/modules/gui/main.py, line: 1170
 # File: bin/modules/gui/main.py, line: 1177
+# File: bin/modules/gui/main.py, line: 1170
+# File: bin/modules/gui/main.py, line: 1177
 msgid "Do you really want to quit ?"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 927
 # File: bin/modules/gui/main.py, line: 927
+# File: bin/modules/gui/main.py, line: 1232
 # File: bin/modules/gui/main.py, line: 1232
 #, fuzzy, python-format
 msgid "Attachments (%d)"
@@ -425,12 +509,14 @@ msgstr "Bashkangjitja"
 # File: bin/modules/gui/main.py, line: 940
 # File: bin/modules/gui/main.py, line: 940
 # File: bin/modules/gui/main.py, line: 1245
+# File: bin/modules/gui/main.py, line: 1245
 #, fuzzy
 msgid "Attachments"
 msgstr "Bashkangjitja"
 #
 # File: bin/modules/gui/main.py, line: 1035
 # File: bin/modules/gui/main.py, line: 1035
+# File: bin/modules/gui/main.py, line: 1333
 # File: bin/modules/gui/main.py, line: 1333
 #, fuzzy
 msgid "Delete a database"
@@ -439,11 +525,13 @@ msgstr "Zgjedhe daten"
 # File: bin/modules/gui/main.py, line: 1041
 # File: bin/modules/gui/main.py, line: 1041
 # File: bin/modules/gui/main.py, line: 1339
+# File: bin/modules/gui/main.py, line: 1339
 msgid "Database dropped successfully !"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 1044
 # File: bin/modules/gui/main.py, line: 1044
+# File: bin/modules/gui/main.py, line: 1342
 # File: bin/modules/gui/main.py, line: 1342
 #, fuzzy
 msgid "Could not drop database."
@@ -451,6 +539,7 @@ msgstr "Zgjedhe daten"
 #
 # File: bin/modules/gui/main.py, line: 1046
 # File: bin/modules/gui/main.py, line: 1046
+# File: bin/modules/gui/main.py, line: 1344
 # File: bin/modules/gui/main.py, line: 1344
 #, fuzzy
 msgid "Couldn't drop database"
@@ -468,6 +557,10 @@ msgstr "Zgjedhe daten"
 # File: bin/widget/view/form_gtk/image.py, line: 112
 # File: bin/widget/view/form_gtk/url.py, line: 112
 # File: bin/openerp.glade, line: 5893
+# File: bin/modules/gui/main.py, line: 1347
+# File: bin/widget/view/form_gtk/image.py, line: 112
+# File: bin/widget/view/form_gtk/url.py, line: 112
+# File: bin/openerp.glade, line: 5893
 #, fuzzy
 msgid "Open..."
 msgstr "Hape"
@@ -475,11 +568,13 @@ msgstr "Hape"
 # File: bin/modules/gui/main.py, line: 1060
 # File: bin/modules/gui/main.py, line: 1060
 # File: bin/modules/gui/main.py, line: 1358
+# File: bin/modules/gui/main.py, line: 1358
 msgid "Database restored successfully !"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 1063
 # File: bin/modules/gui/main.py, line: 1063
+# File: bin/modules/gui/main.py, line: 1361
 # File: bin/modules/gui/main.py, line: 1361
 #, fuzzy
 msgid "Could not restore database."
@@ -488,16 +583,19 @@ msgstr "Zgjedhe daten"
 # File: bin/modules/gui/main.py, line: 1065
 # File: bin/modules/gui/main.py, line: 1065
 # File: bin/modules/gui/main.py, line: 1363
+# File: bin/modules/gui/main.py, line: 1363
 #, fuzzy
 msgid "Couldn't restore database"
 msgstr "Zgjedhe daten"
 #
+# File: bin/modules/gui/main.py, line: 1402
 # File: bin/modules/gui/main.py, line: 1402
 msgid "Confirmation password does not match new password, operation cancelled!"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 1100
 # File: bin/modules/gui/main.py, line: 1100
+# File: bin/modules/gui/main.py, line: 1404
 # File: bin/modules/gui/main.py, line: 1404
 #, fuzzy
 msgid "Validation Error."
@@ -506,16 +604,19 @@ msgstr "Gabim aplikacioni !"
 # File: bin/modules/gui/main.py, line: 1108
 # File: bin/modules/gui/main.py, line: 1108
 # File: bin/modules/gui/main.py, line: 1412
+# File: bin/modules/gui/main.py, line: 1412
 #, fuzzy
 msgid "Could not change the Super Admin password."
 msgstr "Ndrro Rrenjen"
 #
+# File: bin/modules/gui/main.py, line: 1413
 # File: bin/modules/gui/main.py, line: 1413
 msgid "Bad password provided !"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 1111
 # File: bin/modules/gui/main.py, line: 1111
+# File: bin/modules/gui/main.py, line: 1415
 # File: bin/modules/gui/main.py, line: 1415
 msgid "Error, password not changed."
 msgstr ""
@@ -524,6 +625,8 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 1134
 # File: bin/modules/gui/main.py, line: 1117
 # File: bin/modules/gui/main.py, line: 1134
+# File: bin/modules/gui/main.py, line: 1421
+# File: bin/modules/gui/main.py, line: 1441
 # File: bin/modules/gui/main.py, line: 1421
 # File: bin/modules/gui/main.py, line: 1441
 #, fuzzy
@@ -545,16 +648,23 @@ msgstr "Zgjedhe daten"
 # File: bin/printer/printer.py, line: 212
 # File: bin/widget/view/form_gtk/binary.py, line: 162
 # File: bin/widget/view/form_gtk/image.py, line: 119
+# File: bin/modules/gui/main.py, line: 1424
+# File: bin/modules/gui/window/win_export.py, line: 289
+# File: bin/printer/printer.py, line: 212
+# File: bin/widget/view/form_gtk/binary.py, line: 162
+# File: bin/widget/view/form_gtk/image.py, line: 119
 #, fuzzy
 msgid "Save As..."
 msgstr "Ruaj opcionet"
 #
+# File: bin/modules/gui/main.py, line: 1434
 # File: bin/modules/gui/main.py, line: 1434
 msgid "Database backed up successfully !"
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 1132
 # File: bin/modules/gui/main.py, line: 1132
+# File: bin/modules/gui/main.py, line: 1437
 # File: bin/modules/gui/main.py, line: 1437
 #, fuzzy
 msgid "Could not backup the database."
@@ -563,10 +673,12 @@ msgstr "Zgjedhe daten"
 # File: bin/modules/gui/main.py, line: 1132
 # File: bin/modules/gui/main.py, line: 1132
 # File: bin/modules/gui/main.py, line: 1439
+# File: bin/modules/gui/main.py, line: 1439
 #, fuzzy
 msgid "Couldn't backup database."
 msgstr "Zgjedhe daten"
 #
+# File: bin/modules/gui/window/win_extension.py, line: 115
 # File: bin/modules/gui/window/win_extension.py, line: 115
 # File: bin/modules/gui/window/win_extension.py, line: 115
 # File: bin/modules/gui/window/win_extension.py, line: 115
@@ -576,10 +688,12 @@ msgstr ""
 # File: bin/modules/gui/window/win_preference.py, line: 69
 # File: bin/modules/gui/window/win_preference.py, line: 69
 # File: bin/modules/gui/window/win_preference.py, line: 69
+# File: bin/modules/gui/window/win_preference.py, line: 69
 #, fuzzy
 msgid "Preference"
 msgstr "Preferencat"
 #
+# File: bin/modules/gui/window/win_preference.py, line: 80
 # File: bin/modules/gui/window/win_preference.py, line: 80
 msgid ""
 "The default language of the interface has been modified, do not forget to "
@@ -589,6 +703,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 9119
 # File: bin/openerp.glade, line: 9119
 # File: bin/modules/gui/window/win_preference.py, line: 82
+# File: bin/modules/gui/window/win_preference.py, line: 82
 #, fuzzy
 msgid "Default language modified !"
 msgstr "Vlera Definuar:"
@@ -596,9 +711,11 @@ msgstr "Vlera Definuar:"
 # File: bin/modules/gui/window/__init__.py, line: 33
 # File: bin/modules/gui/window/__init__.py, line: 33
 # File: bin/modules/gui/window/__init__.py, line: 33
+# File: bin/modules/gui/window/__init__.py, line: 33
 msgid "Unknown Window"
 msgstr ""
 #
+# File: bin/modules/gui/window/form.py, line: 165
 # File: bin/modules/gui/window/form.py, line: 165
 msgid "Resource ID does not exist for this object!"
 msgstr ""
@@ -606,11 +723,13 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 197
 # File: bin/modules/gui/window/form.py, line: 197
 # File: bin/modules/gui/window/form.py, line: 221
+# File: bin/modules/gui/window/form.py, line: 221
 msgid "No record selected ! You can only attach to existing record."
 msgstr ""
 #
 # File: bin/modules/gui/window/form.py, line: 209
 # File: bin/modules/gui/window/form.py, line: 209
+# File: bin/modules/gui/window/form.py, line: 233
 # File: bin/modules/gui/window/form.py, line: 233
 msgid "You have to select a record !"
 msgstr ""
@@ -621,11 +740,14 @@ msgstr ""
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 43
 # File: bin/modules/gui/window/form.py, line: 239
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 43
+# File: bin/modules/gui/window/form.py, line: 239
+# File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 43
 msgid "ID"
 msgstr ""
 #
 # File: bin/modules/gui/window/form.py, line: 216
 # File: bin/modules/gui/window/form.py, line: 216
+# File: bin/modules/gui/window/form.py, line: 240
 # File: bin/modules/gui/window/form.py, line: 240
 msgid "Creation User"
 msgstr ""
@@ -633,11 +755,13 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 217
 # File: bin/modules/gui/window/form.py, line: 217
 # File: bin/modules/gui/window/form.py, line: 241
+# File: bin/modules/gui/window/form.py, line: 241
 msgid "Creation Date"
 msgstr ""
 #
 # File: bin/modules/gui/window/form.py, line: 218
 # File: bin/modules/gui/window/form.py, line: 218
+# File: bin/modules/gui/window/form.py, line: 242
 # File: bin/modules/gui/window/form.py, line: 242
 msgid "Latest Modification by"
 msgstr ""
@@ -645,11 +769,13 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 219
 # File: bin/modules/gui/window/form.py, line: 219
 # File: bin/modules/gui/window/form.py, line: 243
+# File: bin/modules/gui/window/form.py, line: 243
 msgid "Latest Modification Date"
 msgstr ""
 #
 # File: bin/modules/gui/window/form.py, line: 230
 # File: bin/modules/gui/window/form.py, line: 230
+# File: bin/modules/gui/window/form.py, line: 254
 # File: bin/modules/gui/window/form.py, line: 254
 msgid ""
 "Record is not saved ! \n"
@@ -659,11 +785,13 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 233
 # File: bin/modules/gui/window/form.py, line: 233
 # File: bin/modules/gui/window/form.py, line: 257
+# File: bin/modules/gui/window/form.py, line: 257
 msgid "Are you sure to remove this record ?"
 msgstr ""
 #
 # File: bin/modules/gui/window/form.py, line: 235
 # File: bin/modules/gui/window/form.py, line: 235
+# File: bin/modules/gui/window/form.py, line: 259
 # File: bin/modules/gui/window/form.py, line: 259
 msgid "Are you sure to remove those records ?"
 msgstr ""
@@ -671,11 +799,13 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 239
 # File: bin/modules/gui/window/form.py, line: 239
 # File: bin/modules/gui/window/form.py, line: 263
+# File: bin/modules/gui/window/form.py, line: 263
 msgid "Resources cleared."
 msgstr ""
 #
 # File: bin/modules/gui/window/form.py, line: 241
 # File: bin/modules/gui/window/form.py, line: 241
+# File: bin/modules/gui/window/form.py, line: 265
 # File: bin/modules/gui/window/form.py, line: 265
 msgid "Resources successfully removed."
 msgstr ""
@@ -683,11 +813,13 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 273
 # File: bin/modules/gui/window/form.py, line: 273
 # File: bin/modules/gui/window/form.py, line: 298
+# File: bin/modules/gui/window/form.py, line: 298
 msgid "Working now on the duplicated document !"
 msgstr ""
 #
 # File: bin/modules/gui/window/form.py, line: 281
 # File: bin/modules/gui/window/form.py, line: 281
+# File: bin/modules/gui/window/form.py, line: 306
 # File: bin/modules/gui/window/form.py, line: 306
 msgid "Document Saved."
 msgstr ""
@@ -696,6 +828,10 @@ msgstr ""
 # File: bin/widget/view/form_gtk/parser.py, line: 129
 # File: bin/modules/gui/window/form.py, line: 283
 # File: bin/widget/view/form_gtk/parser.py, line: 129
+# File: bin/modules/gui/window/form.py, line: 308
+# File: bin/modules/gui/window/form.py, line: 309
+# File: bin/widget/view/form_gtk/parser.py, line: 137
+# File: bin/widget/view/form_gtk/parser.py, line: 138
 # File: bin/modules/gui/window/form.py, line: 308
 # File: bin/modules/gui/window/form.py, line: 309
 # File: bin/widget/view/form_gtk/parser.py, line: 137
@@ -713,6 +849,8 @@ msgstr ""
 # File: bin/openerp.glade, line: 3912
 # File: bin/modules/gui/window/form.py, line: 308
 # File: bin/widget/view/form_gtk/parser.py, line: 137
+# File: bin/modules/gui/window/form.py, line: 308
+# File: bin/widget/view/form_gtk/parser.py, line: 137
 #, fuzzy
 msgid "Error !"
 msgstr ""
@@ -725,6 +863,8 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 397
 # File: bin/modules/gui/window/form.py, line: 328
 # File: bin/modules/gui/window/form.py, line: 423
+# File: bin/modules/gui/window/form.py, line: 328
+# File: bin/modules/gui/window/form.py, line: 423
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
@@ -733,11 +873,13 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 349
 # File: bin/modules/gui/window/form.py, line: 349
 # File: bin/modules/gui/window/form.py, line: 375
+# File: bin/modules/gui/window/form.py, line: 375
 msgid "You must select one or several records !"
 msgstr ""
 #
 # File: bin/modules/gui/window/form.py, line: 358
 # File: bin/modules/gui/window/form.py, line: 358
+# File: bin/modules/gui/window/form.py, line: 384
 # File: bin/modules/gui/window/form.py, line: 384
 #, fuzzy
 msgid "Print Screen"
@@ -746,11 +888,13 @@ msgstr "Shtypi dokumentet"
 # File: bin/modules/gui/window/form.py, line: 378
 # File: bin/modules/gui/window/form.py, line: 378
 # File: bin/modules/gui/window/form.py, line: 404
+# File: bin/modules/gui/window/form.py, line: 404
 msgid "No record selected"
 msgstr ""
 #
 # File: bin/modules/gui/window/form.py, line: 383
 # File: bin/modules/gui/window/form.py, line: 383
+# File: bin/modules/gui/window/form.py, line: 409
 # File: bin/modules/gui/window/form.py, line: 409
 #, fuzzy
 msgid "New document"
@@ -759,11 +903,13 @@ msgstr "Shtypi dokumentet"
 # File: bin/modules/gui/window/form.py, line: 385
 # File: bin/modules/gui/window/form.py, line: 385
 # File: bin/modules/gui/window/form.py, line: 411
+# File: bin/modules/gui/window/form.py, line: 411
 msgid "Editing document (id: "
 msgstr ""
 #
 # File: bin/modules/gui/window/form.py, line: 386
 # File: bin/modules/gui/window/form.py, line: 386
+# File: bin/modules/gui/window/form.py, line: 412
 # File: bin/modules/gui/window/form.py, line: 412
 msgid "Record: "
 msgstr ""
@@ -771,17 +917,20 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 387
 # File: bin/modules/gui/window/form.py, line: 387
 # File: bin/modules/gui/window/form.py, line: 413
+# File: bin/modules/gui/window/form.py, line: 413
 msgid " of "
 msgstr ""
 #
 # File: bin/modules/gui/window/win_export.py, line: 52
 # File: bin/modules/gui/window/win_export.py, line: 52
 # File: bin/modules/gui/window/win_export.py, line: 51
+# File: bin/modules/gui/window/win_export.py, line: 51
 msgid " record(s) saved !"
 msgstr ""
 #
 # File: bin/modules/gui/window/win_export.py, line: 55
 # File: bin/modules/gui/window/win_export.py, line: 55
+# File: bin/modules/gui/window/win_export.py, line: 54
 # File: bin/modules/gui/window/win_export.py, line: 54
 #, fuzzy
 msgid ""
@@ -794,11 +943,13 @@ msgstr ""
 # File: bin/modules/gui/window/win_export.py, line: 79
 # File: bin/modules/gui/window/win_export.py, line: 79
 # File: bin/modules/gui/window/win_export.py, line: 78
+# File: bin/modules/gui/window/win_export.py, line: 78
 msgid "Error Opening Excel !"
 msgstr ""
 #
 # File: bin/modules/gui/window/win_export.py, line: 81
 # File: bin/modules/gui/window/win_export.py, line: 81
+# File: bin/modules/gui/window/win_export.py, line: 80
 # File: bin/modules/gui/window/win_export.py, line: 80
 msgid ""
 "Function only available for MS Office !\n"
@@ -812,10 +963,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 3595
 # File: bin/openerp.glade, line: 3754
 # File: bin/modules/gui/window/win_export.py, line: 281
+# File: bin/modules/gui/window/win_export.py, line: 281
 #, fuzzy
 msgid "Exportation Error !"
 msgstr "Gabim aplikacioni !"
 #
+# File: bin/modules/gui/window/tree.py, line: 190
+# File: bin/modules/gui/window/tree.py, line: 246
 # File: bin/modules/gui/window/tree.py, line: 190
 # File: bin/modules/gui/window/tree.py, line: 246
 # File: bin/modules/gui/window/tree.py, line: 190
@@ -828,6 +982,7 @@ msgstr ""
 # File: bin/modules/gui/window/tree.py, line: 204
 # File: bin/modules/gui/window/tree.py, line: 204
 # File: bin/modules/gui/window/tree.py, line: 204
+# File: bin/modules/gui/window/tree.py, line: 204
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
@@ -836,9 +991,11 @@ msgstr ""
 # File: bin/modules/gui/window/tree.py, line: 209
 # File: bin/modules/gui/window/tree.py, line: 209
 # File: bin/modules/gui/window/tree.py, line: 209
+# File: bin/modules/gui/window/tree.py, line: 209
 msgid "Error removing resource!"
 msgstr ""
 #
+# File: bin/modules/gui/window/tree.py, line: 220
 # File: bin/modules/gui/window/tree.py, line: 220
 # File: bin/modules/gui/window/tree.py, line: 220
 # File: bin/modules/gui/window/tree.py, line: 220
@@ -853,11 +1010,14 @@ msgstr ""
 # File: bin/widget/view/form_gtk/many2one.py, line: 54
 # File: bin/modules/gui/window/win_search.py, line: 50
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 51
+# File: bin/modules/gui/window/win_search.py, line: 50
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 51
 msgid "OpenERP - Link"
 msgstr "OpenERP - Linqet"
 #
 # File: bin/modules/gui/window/win_search.py, line: 143
 # File: bin/modules/gui/window/win_search.py, line: 143
+# File: bin/modules/gui/window/win_search.py, line: 147
 # File: bin/modules/gui/window/win_search.py, line: 147
 #, fuzzy, python-format
 msgid "OpenERP Search: %s"
@@ -866,10 +1026,12 @@ msgstr "OpenERP - Kerko"
 # File: bin/modules/gui/window/win_search.py, line: 144
 # File: bin/modules/gui/window/win_search.py, line: 144
 # File: bin/modules/gui/window/win_search.py, line: 148
+# File: bin/modules/gui/window/win_search.py, line: 148
 #, fuzzy, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
 msgstr "OpenERP - Kerko elementi"
 #
+# File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
@@ -880,14 +1042,17 @@ msgstr "Pershkrimi:"
 # File: bin/modules/gui/window/view_tree/parse.py, line: 36
 # File: bin/modules/gui/window/view_tree/parse.py, line: 36
 # File: bin/modules/gui/window/view_tree/parse.py, line: 36
+# File: bin/modules/gui/window/view_tree/parse.py, line: 36
 #, fuzzy
 msgid "Tree"
 msgstr "Titujt"
 #
 # File: bin/modules/gui/window/win_import.py, line: 52
+# File: bin/modules/gui/window/win_import.py, line: 52
 msgid "The file is empty !"
 msgstr ""
 #
+# File: bin/modules/gui/window/win_import.py, line: 52
 # File: bin/modules/gui/window/win_import.py, line: 52
 msgid "Importation !"
 msgstr ""
@@ -895,15 +1060,18 @@ msgstr ""
 # File: bin/modules/gui/window/win_import.py, line: 54
 # File: bin/modules/gui/window/win_import.py, line: 54
 # File: bin/modules/gui/window/win_import.py, line: 58
+# File: bin/modules/gui/window/win_import.py, line: 58
 msgid "XML-RPC error !"
 msgstr ""
 #
+# File: bin/modules/gui/window/win_import.py, line: 63
 # File: bin/modules/gui/window/win_import.py, line: 63
 msgid "Imported one object !"
 msgstr ""
 #
 # File: bin/modules/gui/window/win_import.py, line: 57
 # File: bin/modules/gui/window/win_import.py, line: 57
+# File: bin/modules/gui/window/win_import.py, line: 65
 # File: bin/modules/gui/window/win_import.py, line: 65
 #, python-format
 msgid "Imported %d objects !"
@@ -916,6 +1084,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 3595
 # File: bin/openerp.glade, line: 3754
 # File: bin/modules/gui/window/win_import.py, line: 71
+# File: bin/modules/gui/window/win_import.py, line: 71
 #, fuzzy
 msgid "Importation Error !"
 msgstr "Gabim aplikacioni !"
@@ -926,10 +1095,13 @@ msgstr "Gabim aplikacioni !"
 # File: bin/modules/gui/window/win_import.py, line: 97
 # File: bin/modules/gui/window/win_import.py, line: 102
 # File: bin/modules/gui/window/win_import.py, line: 106
+# File: bin/modules/gui/window/win_import.py, line: 102
+# File: bin/modules/gui/window/win_import.py, line: 106
 #, fuzzy
 msgid "Field name"
 msgstr "Emri Fushes:"
 #
+# File: bin/modules/gui/window/win_import.py, line: 189
 # File: bin/modules/gui/window/win_import.py, line: 189
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
@@ -938,10 +1110,12 @@ msgstr ""
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 # File: bin/modules/gui/window/win_import.py, line: 223
+# File: bin/modules/gui/window/win_import.py, line: 223
 #, fuzzy
 msgid "You have not selected any fields to import"
 msgstr "Shko te resursi i ardheshem qe pershtatet"
 #
+# File: bin/modules/gui/window/win_selection.py, line: 52
 # File: bin/modules/gui/window/win_selection.py, line: 52
 # File: bin/modules/gui/window/win_selection.py, line: 52
 # File: bin/modules/gui/window/win_selection.py, line: 52
@@ -951,9 +1125,11 @@ msgstr ""
 # File: bin/modules/gui/window/win_selection.py, line: 56
 # File: bin/modules/gui/window/win_selection.py, line: 56
 # File: bin/modules/gui/window/win_selection.py, line: 56
+# File: bin/modules/gui/window/win_selection.py, line: 56
 msgid "Ressource Name"
 msgstr ""
 #
+# File: bin/modules/gui/window/win_selection.py, line: 56
 # File: bin/modules/gui/window/win_selection.py, line: 56
 # File: bin/modules/gui/window/win_selection.py, line: 56
 # File: bin/modules/gui/window/win_selection.py, line: 56
@@ -963,11 +1139,13 @@ msgstr ""
 # File: bin/rpc.py, line: 142
 # File: bin/rpc.py, line: 142
 # File: bin/rpc.py, line: 141
+# File: bin/rpc.py, line: 141
 msgid "Connection refused!"
 msgstr ""
 #
 # File: bin/rpc.py, line: 172
 # File: bin/rpc.py, line: 172
+# File: bin/rpc.py, line: 171
 # File: bin/rpc.py, line: 171
 msgid ""
 "Unable to reach to OpenERP server !\n"
@@ -977,6 +1155,7 @@ msgstr ""
 # File: bin/rpc.py, line: 172
 # File: bin/rpc.py, line: 172
 # File: bin/rpc.py, line: 171
+# File: bin/rpc.py, line: 171
 #, fuzzy
 msgid "Connection Error"
 msgstr "Gabim aplikacioni !"
@@ -984,9 +1163,11 @@ msgstr "Gabim aplikacioni !"
 # File: bin/openerp-client.py, line: 128
 # File: bin/openerp-client.py, line: 128
 # File: bin/openerp-client.py, line: 139
+# File: bin/openerp-client.py, line: 139
 msgid "Closing OpenERP, KeyboardInterrupt"
 msgstr ""
 #
+# File: bin/plugins/__init__.py, line: 28
 # File: bin/plugins/__init__.py, line: 28
 # File: bin/plugins/__init__.py, line: 28
 # File: bin/plugins/__init__.py, line: 28
@@ -996,9 +1177,11 @@ msgstr ""
 # File: bin/plugins/__init__.py, line: 29
 # File: bin/plugins/__init__.py, line: 29
 # File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
 msgid "Print Workflow (Complex)"
 msgstr ""
 #
+# File: bin/plugins/__init__.py, line: 41
 # File: bin/plugins/__init__.py, line: 41
 # File: bin/plugins/__init__.py, line: 41
 # File: bin/plugins/__init__.py, line: 41
@@ -1009,11 +1192,13 @@ msgstr "Lanso akcionet e ketyre resurseve"
 # File: bin/plugins/__init__.py, line: 43
 # File: bin/plugins/__init__.py, line: 43
 # File: bin/plugins/__init__.py, line: 43
+# File: bin/plugins/__init__.py, line: 43
 msgid "Choose a Plugin"
 msgstr ""
 #
 # File: bin/common/common.py, line: 177
 # File: bin/common/common.py, line: 177
+# File: bin/common/common.py, line: 211
 # File: bin/common/common.py, line: 211
 msgid ""
 "Thank you for the feedback !\n"
@@ -1024,6 +1209,7 @@ msgstr ""
 #
 # File: bin/common/common.py, line: 184
 # File: bin/common/common.py, line: 184
+# File: bin/common/common.py, line: 221
 # File: bin/common/common.py, line: 221
 msgid ""
 "Thank you for testing OpenERP !\n"
@@ -1036,10 +1222,13 @@ msgstr ""
 # File: bin/common/common.py, line: 289
 # File: bin/common/common.py, line: 343
 # File: bin/common/common.py, line: 324
+# File: bin/common/common.py, line: 324
 #, fuzzy
 msgid "Support request sent !"
 msgstr "Dergo Kerkesen Perkrahjes"
 #
+# File: bin/common/common.py, line: 344
+# File: bin/common/common.py, line: 387
 # File: bin/common/common.py, line: 344
 # File: bin/common/common.py, line: 387
 msgid ""
@@ -1068,6 +1257,7 @@ msgid ""
 msgstr ""
 #
 # File: bin/common/common.py, line: 367
+# File: bin/common/common.py, line: 367
 #, python-format
 msgid ""
 "\n"
@@ -1093,11 +1283,13 @@ msgid ""
 msgstr ""
 #
 # File: bin/common/common.py, line: 442
+# File: bin/common/common.py, line: 442
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
 #
+# File: bin/common/common.py, line: 445
 # File: bin/common/common.py, line: 445
 #, python-format
 msgid ""
@@ -1107,11 +1299,13 @@ msgid ""
 msgstr ""
 #
 # File: bin/common/common.py, line: 445
+# File: bin/common/common.py, line: 445
 msgid "Error"
 msgstr ""
 #
 # File: bin/common/common.py, line: 499
 # File: bin/common/common.py, line: 499
+# File: bin/common/common.py, line: 598
 # File: bin/common/common.py, line: 598
 #, fuzzy
 msgid "Open with..."
@@ -1120,6 +1314,7 @@ msgstr "Hape"
 # File: bin/options.py, line: 88
 # File: bin/options.py, line: 88
 # File: bin/options.py, line: 108
+# File: bin/options.py, line: 108
 #, fuzzy, python-format
 msgid "OpenERP Client %s"
 msgstr "OpenERP licensa"
@@ -1127,13 +1322,16 @@ msgstr "OpenERP licensa"
 # File: bin/options.py, line: 89
 # File: bin/options.py, line: 89
 # File: bin/options.py, line: 109
+# File: bin/options.py, line: 109
 msgid "specify alternate config file"
 msgstr ""
 #
 # File: bin/options.py, line: 110
+# File: bin/options.py, line: 110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
 msgstr ""
 #
+# File: bin/options.py, line: 111
 # File: bin/options.py, line: 111
 #, python-format
 msgid "specify the log level: %s"
@@ -1142,11 +1340,13 @@ msgstr ""
 # File: bin/options.py, line: 93
 # File: bin/options.py, line: 93
 # File: bin/options.py, line: 112
+# File: bin/options.py, line: 112
 msgid "specify the user login"
 msgstr ""
 #
 # File: bin/options.py, line: 94
 # File: bin/options.py, line: 94
+# File: bin/options.py, line: 113
 # File: bin/options.py, line: 113
 msgid "specify the server port"
 msgstr ""
@@ -1154,11 +1354,13 @@ msgstr ""
 # File: bin/options.py, line: 95
 # File: bin/options.py, line: 95
 # File: bin/options.py, line: 114
+# File: bin/options.py, line: 114
 msgid "specify the server ip/name"
 msgstr ""
 #
 # File: bin/printer/printer.py, line: 172
 # File: bin/printer/printer.py, line: 172
+# File: bin/printer/printer.py, line: 176
 # File: bin/printer/printer.py, line: 176
 #, python-format
 msgid "Unable to handle %s filetype"
@@ -1166,6 +1368,7 @@ msgstr ""
 #
 # File: bin/printer/printer.py, line: 181
 # File: bin/printer/printer.py, line: 181
+# File: bin/printer/printer.py, line: 185
 # File: bin/printer/printer.py, line: 185
 msgid ""
 "Linux Automatic Printing not implemented.\n"
@@ -1175,11 +1378,13 @@ msgstr ""
 # File: bin/printer/printer.py, line: 189
 # File: bin/printer/printer.py, line: 189
 # File: bin/printer/printer.py, line: 193
+# File: bin/printer/printer.py, line: 193
 msgid "Error no report"
 msgstr ""
 #
 # File: bin/printer/printer.py, line: 215
 # File: bin/printer/printer.py, line: 215
+# File: bin/printer/printer.py, line: 220
 # File: bin/printer/printer.py, line: 220
 msgid "Error writing the file!"
 msgstr ""
@@ -1190,9 +1395,12 @@ msgstr ""
 # File: bin/widget_search/checkbox.py, line: 49
 # File: bin/widget_search/checkbox.py, line: 36
 # File: bin/widget_search/checkbox.py, line: 49
+# File: bin/widget_search/checkbox.py, line: 36
+# File: bin/widget_search/checkbox.py, line: 49
 msgid "Yes"
 msgstr "Po!"
 #
+# File: bin/widget_search/checkbox.py, line: 37
 # File: bin/widget_search/checkbox.py, line: 37
 # File: bin/widget_search/checkbox.py, line: 37
 # File: bin/widget_search/checkbox.py, line: 37
@@ -1217,9 +1425,17 @@ msgstr "Jo"
 # File: bin/widget_search/calendar.py, line: 117
 # File: bin/widget_search/char.py, line: 47
 # File: bin/widget_search/reference.py, line: 74
+# File: bin/widget_search/checkbox.py, line: 55
+# File: bin/widget_search/spinbutton.py, line: 69
+# File: bin/widget_search/spinint.py, line: 73
+# File: bin/widget_search/calendar.py, line: 117
+# File: bin/widget_search/char.py, line: 47
+# File: bin/widget_search/reference.py, line: 74
 msgid "The content of the widget or ValueError if not valid"
 msgstr ""
 #
+# File: bin/widget_search/date_widget.py, line: 65
+# File: bin/widget/view/form_gtk/date_widget.py, line: 65
 # File: bin/widget_search/date_widget.py, line: 65
 # File: bin/widget/view/form_gtk/date_widget.py, line: 65
 # File: bin/widget_search/date_widget.py, line: 65
@@ -1241,9 +1457,11 @@ msgstr ""
 # File: bin/widget_search/form.py, line: 145
 # File: bin/widget_search/form.py, line: 145
 # File: bin/widget_search/form.py, line: 145
+# File: bin/widget_search/form.py, line: 145
 msgid "Limit :"
 msgstr ""
 #
+# File: bin/widget_search/form.py, line: 154
 # File: bin/widget_search/form.py, line: 154
 # File: bin/widget_search/form.py, line: 154
 # File: bin/widget_search/form.py, line: 154
@@ -1253,17 +1471,20 @@ msgstr ""
 # File: bin/widget_search/form.py, line: 193
 # File: bin/widget_search/form.py, line: 193
 # File: bin/widget_search/form.py, line: 193
+# File: bin/widget_search/form.py, line: 193
 msgid "Parameters :"
 msgstr ""
 #
 # File: bin/widget_search/form.py, line: 298
 # File: bin/widget_search/form.py, line: 298
 # File: bin/widget_search/form.py, line: 301
+# File: bin/widget_search/form.py, line: 301
 msgid "The content of the form or exception if not valid"
 msgstr ""
 #
 # File: bin/widget_search/calendar.py, line: 51
 # File: bin/widget_search/calendar.py, line: 51
+# File: bin/widget_search/calendar.py, line: 55
 # File: bin/widget_search/calendar.py, line: 55
 #, fuzzy
 msgid "Start date"
@@ -1281,11 +1502,16 @@ msgstr "Gjendja:"
 # File: bin/widget_search/calendar.py, line: 79
 # File: bin/widget/view/form_gtk/calendar.py, line: 62
 # File: bin/widget/view/form_gtk/calendar.py, line: 175
+# File: bin/widget_search/calendar.py, line: 59
+# File: bin/widget_search/calendar.py, line: 79
+# File: bin/widget/view/form_gtk/calendar.py, line: 62
+# File: bin/widget/view/form_gtk/calendar.py, line: 175
 msgid "Open the calendar widget"
 msgstr "Hape kalendarin"
 #
 # File: bin/widget_search/calendar.py, line: 70
 # File: bin/widget_search/calendar.py, line: 70
+# File: bin/widget_search/calendar.py, line: 75
 # File: bin/widget_search/calendar.py, line: 75
 msgid "End date"
 msgstr ""
@@ -1299,9 +1525,13 @@ msgstr ""
 # File: bin/widget_search/calendar.py, line: 120
 # File: bin/widget/view/form_gtk/calendar.py, line: 132
 # File: bin/widget/view/form_gtk/calendar.py, line: 252
+# File: bin/widget_search/calendar.py, line: 120
+# File: bin/widget/view/form_gtk/calendar.py, line: 132
+# File: bin/widget/view/form_gtk/calendar.py, line: 252
 msgid "OpenERP - Date selection"
 msgstr "OpenERP - Zgjedhja e dates"
 #
+# File: bin/widget_search/wid_int.py, line: 44
 # File: bin/widget_search/wid_int.py, line: 44
 msgid "The content of the widget or exception if not valid"
 msgstr ""
@@ -1309,20 +1539,24 @@ msgstr ""
 # File: bin/translate.py, line: 183
 # File: bin/translate.py, line: 183
 # File: bin/translate.py, line: 184
+# File: bin/translate.py, line: 184
 #, python-format
 msgid "Unable to set locale %s"
 msgstr ""
 #
 # File: bin/widget/view/gantt_gtk/parser_dummy.py, line: 31
+# File: bin/widget/view/gantt_gtk/parser_dummy.py, line: 31
 msgid "Gantt view not yet implemented !"
 msgstr ""
 #
+# File: bin/widget/view/gantt_gtk/parser_dummy.py, line: 32
 # File: bin/widget/view/gantt_gtk/parser_dummy.py, line: 32
 msgid ""
 "The gantt view is not available in this GTK Client, you should use the web "
 "interface or switch to the calendar view."
 msgstr ""
 #
+# File: bin/widget/view/widget_parse.py, line: 53
 # File: bin/widget/view/widget_parse.py, line: 53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
@@ -1331,6 +1565,7 @@ msgstr ""
 # File: bin/plugins/__init__.py, line: 41
 # File: bin/plugins/__init__.py, line: 41
 # File: bin/widget/view/widget_parse.py, line: 63
+# File: bin/widget/view/widget_parse.py, line: 63
 #, fuzzy
 msgid "No valid view found for this object!"
 msgstr "Lanso akcionet e ketyre resurseve"
@@ -1338,11 +1573,13 @@ msgstr "Lanso akcionet e ketyre resurseve"
 # File: bin/widget/view/form.py, line: 153
 # File: bin/widget/view/form.py, line: 153
 # File: bin/widget/view/form.py, line: 170
+# File: bin/widget/view/form.py, line: 170
 msgid "You must save this record to use the relate button !"
 msgstr ""
 #
 # File: bin/widget/view/form.py, line: 165
 # File: bin/widget/view/form.py, line: 165
+# File: bin/widget/view/form.py, line: 182
 # File: bin/widget/view/form.py, line: 182
 msgid "You must select a record to use the relate button !"
 msgstr ""
@@ -1355,6 +1592,10 @@ msgstr ""
 # File: bin/widget/view/form_gtk/parser.py, line: 490
 # File: bin/widget/view/form_gtk/parser.py, line: 647
 # File: bin/widget/view/form_gtk/parser.py, line: 704
+# File: bin/widget/view/form.py, line: 200
+# File: bin/widget/view/form_gtk/parser.py, line: 556
+# File: bin/widget/view/form_gtk/parser.py, line: 670
+# File: bin/widget/view/form_gtk/parser.py, line: 727
 # File: bin/widget/view/form.py, line: 200
 # File: bin/widget/view/form_gtk/parser.py, line: 556
 # File: bin/widget/view/form_gtk/parser.py, line: 670
@@ -1374,6 +1615,10 @@ msgstr ""
 # File: bin/widget/view/form_gtk/parser.py, line: 572
 # File: bin/widget/view/form_gtk/parser.py, line: 676
 # File: bin/widget/view/form_gtk/parser.py, line: 733
+# File: bin/widget/view/form.py, line: 207
+# File: bin/widget/view/form_gtk/parser.py, line: 572
+# File: bin/widget/view/form_gtk/parser.py, line: 676
+# File: bin/widget/view/form_gtk/parser.py, line: 733
 msgid "Add Translation"
 msgstr ""
 #
@@ -1383,9 +1628,13 @@ msgstr ""
 # File: bin/widget/view/form_gtk/parser.py, line: 766
 # File: bin/widget/view/form.py, line: 258
 # File: bin/widget/view/form_gtk/parser.py, line: 789
+# File: bin/widget/view/form.py, line: 258
+# File: bin/widget/view/form_gtk/parser.py, line: 789
 msgid "Translate label"
 msgstr ""
 #
+# File: bin/widget/view/form_gtk/interface.py, line: 47
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 148
 # File: bin/widget/view/form_gtk/interface.py, line: 47
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 148
 # File: bin/widget/view/form_gtk/interface.py, line: 47
@@ -1398,6 +1647,7 @@ msgstr "Vendose vleren standarde"
 # File: bin/widget/view/form_gtk/interface.py, line: 48
 # File: bin/widget/view/form_gtk/interface.py, line: 48
 # File: bin/widget/view/form_gtk/interface.py, line: 48
+# File: bin/widget/view/form_gtk/interface.py, line: 48
 #, fuzzy
 msgid "Set as default"
 msgstr "Vendosi _Definuarat"
@@ -1405,10 +1655,12 @@ msgstr "Vendosi _Definuarat"
 # File: bin/widget/view/form_gtk/binary.py, line: 77
 # File: bin/widget/view/form_gtk/binary.py, line: 77
 # File: bin/widget/view/form_gtk/binary.py, line: 77
+# File: bin/widget/view/form_gtk/binary.py, line: 77
 #, fuzzy
 msgid "Select"
 msgstr "Zgjidhe"
 #
+# File: bin/widget/view/form_gtk/binary.py, line: 81
 # File: bin/widget/view/form_gtk/binary.py, line: 81
 # File: bin/widget/view/form_gtk/binary.py, line: 81
 # File: bin/widget/view/form_gtk/binary.py, line: 81
@@ -1422,6 +1674,8 @@ msgstr "Hape"
 # File: bin/widget/view/form_gtk/image.py, line: 79
 # File: bin/widget/view/form_gtk/binary.py, line: 85
 # File: bin/widget/view/form_gtk/image.py, line: 80
+# File: bin/widget/view/form_gtk/binary.py, line: 85
+# File: bin/widget/view/form_gtk/image.py, line: 80
 #, fuzzy
 msgid "Save As"
 msgstr "Ruaj opcionet"
@@ -1432,9 +1686,13 @@ msgstr "Ruaj opcionet"
 # File: bin/widget/view/form_gtk/image.py, line: 88
 # File: bin/widget/view/form_gtk/binary.py, line: 89
 # File: bin/widget/view/form_gtk/image.py, line: 89
+# File: bin/widget/view/form_gtk/binary.py, line: 89
+# File: bin/widget/view/form_gtk/image.py, line: 89
 msgid "Clear"
 msgstr ""
 #
+# File: bin/widget/view/form_gtk/binary.py, line: 114
+# File: bin/widget/view/form_gtk/binary.py, line: 158
 # File: bin/widget/view/form_gtk/binary.py, line: 114
 # File: bin/widget/view/form_gtk/binary.py, line: 158
 # File: bin/widget/view/form_gtk/binary.py, line: 114
@@ -1450,10 +1708,13 @@ msgstr ""
 # File: bin/widget/view/form_gtk/binary.py, line: 150
 # File: bin/widget/view/form_gtk/binary.py, line: 124
 # File: bin/widget/view/form_gtk/binary.py, line: 150
+# File: bin/widget/view/form_gtk/binary.py, line: 124
+# File: bin/widget/view/form_gtk/binary.py, line: 150
 #, python-format
 msgid "Error reading the file: %s"
 msgstr ""
 #
+# File: bin/widget/view/form_gtk/binary.py, line: 133
 # File: bin/widget/view/form_gtk/binary.py, line: 133
 # File: bin/widget/view/form_gtk/binary.py, line: 133
 # File: bin/widget/view/form_gtk/binary.py, line: 133
@@ -1463,9 +1724,11 @@ msgstr ""
 # File: bin/widget/view/form_gtk/binary.py, line: 143
 # File: bin/widget/view/form_gtk/binary.py, line: 143
 # File: bin/widget/view/form_gtk/binary.py, line: 143
+# File: bin/widget/view/form_gtk/binary.py, line: 143
 msgid "Select a file..."
 msgstr ""
 #
+# File: bin/widget/view/form_gtk/binary.py, line: 172
 # File: bin/widget/view/form_gtk/binary.py, line: 172
 # File: bin/widget/view/form_gtk/binary.py, line: 172
 # File: bin/widget/view/form_gtk/binary.py, line: 172
@@ -1476,11 +1739,13 @@ msgstr ""
 # File: bin/widget/view/form_gtk/image.py, line: 70
 # File: bin/widget/view/form_gtk/image.py, line: 70
 # File: bin/widget/view/form_gtk/image.py, line: 71
+# File: bin/widget/view/form_gtk/image.py, line: 71
 msgid "Set Image"
 msgstr ""
 #
 # File: bin/widget/view/form_gtk/image.py, line: 100
 # File: bin/widget/view/form_gtk/image.py, line: 100
+# File: bin/widget/view/form_gtk/image.py, line: 102
 # File: bin/widget/view/form_gtk/image.py, line: 102
 #, fuzzy
 msgid "All files"
@@ -1488,6 +1753,7 @@ msgstr "<b>Krejt fushat</b>"
 #
 # File: bin/widget/view/form_gtk/image.py, line: 104
 # File: bin/widget/view/form_gtk/image.py, line: 104
+# File: bin/widget/view/form_gtk/image.py, line: 106
 # File: bin/widget/view/form_gtk/image.py, line: 106
 msgid "Images"
 msgstr ""
@@ -1498,11 +1764,14 @@ msgstr ""
 # File: bin/widget/view/form_gtk/calendar.py, line: 238
 # File: bin/widget/view/form_gtk/calendar.py, line: 126
 # File: bin/widget/view/form_gtk/calendar.py, line: 249
+# File: bin/widget/view/form_gtk/calendar.py, line: 126
+# File: bin/widget/view/form_gtk/calendar.py, line: 249
 msgid "This widget is readonly !"
 msgstr ""
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
+# File: bin/widget/view/form_gtk/calendar.py, line: 258
 # File: bin/widget/view/form_gtk/calendar.py, line: 258
 #, fuzzy
 msgid "Hour:"
@@ -1511,6 +1780,7 @@ msgstr "Ora :"
 # File: bin/widget/view/form_gtk/calendar.py, line: 250
 # File: bin/widget/view/form_gtk/calendar.py, line: 250
 # File: bin/widget/view/form_gtk/calendar.py, line: 261
+# File: bin/widget/view/form_gtk/calendar.py, line: 261
 #, fuzzy
 msgid "Minute:"
 msgstr "Minuta :"
@@ -1518,9 +1788,11 @@ msgstr "Minuta :"
 # File: bin/widget/view/form_gtk/parser.py, line: 61
 # File: bin/widget/view/form_gtk/parser.py, line: 61
 # File: bin/widget/view/form_gtk/parser.py, line: 61
+# File: bin/widget/view/form_gtk/parser.py, line: 61
 msgid "Wrong icon for the button !"
 msgstr ""
 #
+# File: bin/widget/view/form_gtk/parser.py, line: 539
 # File: bin/widget/view/form_gtk/parser.py, line: 539
 msgid "Enter some text to the related field before adding translations!"
 msgstr ""
@@ -1528,15 +1800,18 @@ msgstr ""
 # File: bin/widget/view/form_gtk/parser.py, line: 480
 # File: bin/widget/view/form_gtk/parser.py, line: 480
 # File: bin/widget/view/form_gtk/parser.py, line: 546
+# File: bin/widget/view/form_gtk/parser.py, line: 546
 msgid "You need to save resource before adding translations!"
 msgstr ""
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 772
 # File: bin/widget/view/form_gtk/parser.py, line: 772
 # File: bin/widget/view/form_gtk/parser.py, line: 795
+# File: bin/widget/view/form_gtk/parser.py, line: 795
 msgid "Translate view"
 msgstr ""
 #
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 151
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 151
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 151
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 151
@@ -1547,9 +1822,11 @@ msgstr "Vendosi _Definuarat"
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 162
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 162
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 162
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 162
 msgid "Create a new entry"
 msgstr "Krijo te dhenat e reja"
 #
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 172
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 172
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 172
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 172
@@ -1560,9 +1837,11 @@ msgstr "Largo kete shenim"
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 182
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 182
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 182
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 182
 msgid "Remove this entry"
 msgstr "Largo kete shenim"
 #
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 194
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 194
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 194
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 194
@@ -1572,15 +1851,18 @@ msgstr "Paraprak"
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 207
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 207
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 207
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 207
 msgid "Next"
 msgstr "Tjetri"
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 219
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 219
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 219
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 219
 msgid "Switch"
 msgstr ""
 #
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
@@ -1591,12 +1873,14 @@ msgstr "Shko te resursi i ardheshem qe pershtatet"
 # File: bin/openerp.glade, line: 533
 # File: bin/openerp.glade, line: 533
 # File: bin/widget/view/form_gtk/many2one.py, line: 156
+# File: bin/widget/view/form_gtk/many2one.py, line: 156
 #, fuzzy
 msgid "Open this resource"
 msgstr "Largo kete resurs"
 #
 # File: bin/widget/view/form_gtk/reference.py, line: 93
 # File: bin/widget/view/form_gtk/reference.py, line: 93
+# File: bin/widget/view/form_gtk/many2one.py, line: 159
 # File: bin/widget/view/form_gtk/many2one.py, line: 159
 #, fuzzy
 msgid "Search a resource"
@@ -1608,11 +1892,14 @@ msgstr "Kerko resurset"
 # File: bin/openerp.glade, line: 1356
 # File: bin/widget/view/form_gtk/many2one.py, line: 167
 # File: bin/openerp.glade, line: 1389
+# File: bin/widget/view/form_gtk/many2one.py, line: 167
+# File: bin/openerp.glade, line: 1389
 msgid "Action"
 msgstr "Akcioni"
 #
 # File: bin/widget/view/form_gtk/many2one.py, line: 169
 # File: bin/widget/view/form_gtk/many2one.py, line: 169
+# File: bin/widget/view/form_gtk/many2one.py, line: 168
 # File: bin/widget/view/form_gtk/many2one.py, line: 168
 msgid "Report"
 msgstr ""
@@ -1623,9 +1910,12 @@ msgstr ""
 # File: bin/widget/view/list.py, line: 274
 # File: bin/widget/view/form_gtk/many2one.py, line: 368
 # File: bin/widget/view/list.py, line: 274
+# File: bin/widget/view/form_gtk/many2one.py, line: 368
+# File: bin/widget/view/list.py, line: 274
 msgid "You must select a record to use the relation !"
 msgstr ""
 #
+# File: bin/widget/view/form_gtk/wid_common.py, line: 60
 # File: bin/widget/view/form_gtk/wid_common.py, line: 60
 # File: bin/widget/view/form_gtk/wid_common.py, line: 60
 # File: bin/widget/view/form_gtk/wid_common.py, line: 60
@@ -1638,9 +1928,12 @@ msgstr ""
 # File: bin/openerp.glade, line: 1214
 # File: bin/widget/view/form_gtk/reference.py, line: 92
 # File: bin/openerp.glade, line: 1247
+# File: bin/widget/view/form_gtk/reference.py, line: 92
+# File: bin/openerp.glade, line: 1247
 msgid "Create a new resource"
 msgstr "Krijo resursin e ri"
 #
+# File: bin/widget/view/form_gtk/reference.py, line: 93
 # File: bin/widget/view/form_gtk/reference.py, line: 93
 # File: bin/widget/view/form_gtk/reference.py, line: 93
 # File: bin/widget/view/form_gtk/reference.py, line: 93
@@ -1651,17 +1944,20 @@ msgstr "Kerko resurset"
 # File: bin/widget/view/graph_gtk/parser.py, line: 65
 # File: bin/widget/view/graph_gtk/parser.py, line: 65
 # File: bin/widget/view/graph_gtk/parser.py, line: 65
+# File: bin/widget/view/graph_gtk/parser.py, line: 65
 msgid "Can not generate graph !"
 msgstr ""
 #
 # File: bin/widget/view/tree_gtk/date_renderer.py, line: 197
 # File: bin/widget/view/tree_gtk/date_renderer.py, line: 197
 # File: bin/widget/view/tree_gtk/date_renderer.py, line: 200
+# File: bin/widget/view/tree_gtk/date_renderer.py, line: 200
 msgid "Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."
 msgstr ""
 #
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 125
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 125
+# File: bin/widget/view/tree_gtk/editabletree.py, line: 124
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 124
 #, fuzzy, python-format
 msgid "Shortcut: %s"
@@ -1670,11 +1966,13 @@ msgstr "RrugeShkurtesa"
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 125
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 125
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 124
+# File: bin/widget/view/tree_gtk/editabletree.py, line: 124
 msgid "F1 New - F2 Open/Search"
 msgstr ""
 #
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 190
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 190
+# File: bin/widget/view/tree_gtk/editabletree.py, line: 189
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 189
 #, python-format
 msgid "Warning; field %s is required!"
@@ -1683,9 +1981,11 @@ msgstr ""
 # File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 31
 # File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 31
 # File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 31
+# File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 31
 msgid "Calendar View Error !"
 msgstr ""
 #
+# File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 32
 # File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 32
 # File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 32
 # File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 32
@@ -1698,11 +1998,14 @@ msgstr ""
 # File: bin/openerp.glade, line: 10237
 # File: bin/widget/view/calendar_gtk/parser.py, line: 242
 # File: bin/openerp.glade, line: 8252
+# File: bin/widget/view/calendar_gtk/parser.py, line: 242
+# File: bin/openerp.glade, line: 8252
 msgid "Week"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 8
 # File: bin/openerp.glade, line: 8
+# File: bin/openerp.glade, line: 6
 # File: bin/openerp.glade, line: 6
 msgid "OpenERP - Login"
 msgstr "OpenERP - Qasja"
@@ -1713,12 +2016,15 @@ msgstr "OpenERP - Qasja"
 # File: bin/openerp.glade, line: 8427
 # File: bin/openerp.glade, line: 116
 # File: bin/openerp.glade, line: 6442
+# File: bin/openerp.glade, line: 116
+# File: bin/openerp.glade, line: 6442
 #, fuzzy
 msgid "Database:"
 msgstr "Zgjedhe daten"
 #
 # File: bin/openerp.glade, line: 133
 # File: bin/openerp.glade, line: 133
+# File: bin/openerp.glade, line: 131
 # File: bin/openerp.glade, line: 131
 msgid "User:"
 msgstr "Perdoruesi:"
@@ -1732,17 +2038,22 @@ msgstr "Perdoruesi:"
 # File: bin/openerp.glade, line: 146
 # File: bin/openerp.glade, line: 6428
 # File: bin/openerp.glade, line: 6728
+# File: bin/openerp.glade, line: 146
+# File: bin/openerp.glade, line: 6428
+# File: bin/openerp.glade, line: 6728
 msgid "Password:"
 msgstr "Shifra:"
 #
 # File: bin/openerp.glade, line: 257
 # File: bin/openerp.glade, line: 257
 # File: bin/openerp.glade, line: 255
+# File: bin/openerp.glade, line: 255
 msgid "_File"
 msgstr "_Fajlli"
 #
 # File: bin/openerp.glade, line: 264
 # File: bin/openerp.glade, line: 264
+# File: bin/openerp.glade, line: 262
 # File: bin/openerp.glade, line: 262
 #, fuzzy
 msgid "_Connect..."
@@ -1751,12 +2062,14 @@ msgstr "Nderlidhja..."
 # File: bin/openerp.glade, line: 280
 # File: bin/openerp.glade, line: 280
 # File: bin/openerp.glade, line: 278
+# File: bin/openerp.glade, line: 278
 #, fuzzy
 msgid "_Disconnect"
 msgstr "Shkeputja"
 #
 # File: bin/openerp.glade, line: 300
 # File: bin/openerp.glade, line: 300
+# File: bin/openerp.glade, line: 298
 # File: bin/openerp.glade, line: 298
 #, fuzzy
 msgid "Databases"
@@ -1765,12 +2078,14 @@ msgstr "Zgjedhe daten"
 # File: bin/openerp.glade, line: 307
 # File: bin/openerp.glade, line: 307
 # File: bin/openerp.glade, line: 305
+# File: bin/openerp.glade, line: 305
 #, fuzzy
 msgid "_New database"
 msgstr "Zgjedhe daten"
 #
 # File: bin/openerp.glade, line: 322
 # File: bin/openerp.glade, line: 322
+# File: bin/openerp.glade, line: 320
 # File: bin/openerp.glade, line: 320
 #, fuzzy
 msgid "_Restore database"
@@ -1779,6 +2094,7 @@ msgstr "Zgjedhe daten"
 # File: bin/openerp.glade, line: 337
 # File: bin/openerp.glade, line: 337
 # File: bin/openerp.glade, line: 335
+# File: bin/openerp.glade, line: 335
 #, fuzzy
 msgid "_Backup database"
 msgstr "Zgjedhe daten"
@@ -1786,16 +2102,19 @@ msgstr "Zgjedhe daten"
 # File: bin/openerp.glade, line: 352
 # File: bin/openerp.glade, line: 352
 # File: bin/openerp.glade, line: 350
+# File: bin/openerp.glade, line: 350
 #, fuzzy
 msgid "Dro_p database"
 msgstr "Zgjedhe daten"
 #
+# File: bin/openerp.glade, line: 370
 # File: bin/openerp.glade, line: 370
 msgid "_Download Migrations Code"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 300
 # File: bin/openerp.glade, line: 300
+# File: bin/openerp.glade, line: 385
 # File: bin/openerp.glade, line: 385
 #, fuzzy
 msgid "_Migrate Database(s)"
@@ -1804,17 +2123,20 @@ msgstr "Zgjedhe daten"
 # File: bin/openerp.glade, line: 372
 # File: bin/openerp.glade, line: 372
 # File: bin/openerp.glade, line: 405
+# File: bin/openerp.glade, line: 405
 msgid "Administrator Password"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 417
 # File: bin/openerp.glade, line: 417
 # File: bin/openerp.glade, line: 450
+# File: bin/openerp.glade, line: 450
 msgid "_User"
 msgstr "Perdoruesi"
 #
 # File: bin/openerp.glade, line: 425
 # File: bin/openerp.glade, line: 425
+# File: bin/openerp.glade, line: 458
 # File: bin/openerp.glade, line: 458
 #, fuzzy
 msgid "_Preferences"
@@ -1823,12 +2145,14 @@ msgstr "Preferencat"
 # File: bin/openerp.glade, line: 445
 # File: bin/openerp.glade, line: 445
 # File: bin/openerp.glade, line: 478
+# File: bin/openerp.glade, line: 478
 #, fuzzy
 msgid "_Send a request"
 msgstr "Dergo Kerkesen"
 #
 # File: bin/openerp.glade, line: 460
 # File: bin/openerp.glade, line: 460
+# File: bin/openerp.glade, line: 493
 # File: bin/openerp.glade, line: 493
 #, fuzzy
 msgid "_Read my requests"
@@ -1837,12 +2161,14 @@ msgstr "Lexo kerkesen time"
 # File: bin/openerp.glade, line: 480
 # File: bin/openerp.glade, line: 480
 # File: bin/openerp.glade, line: 513
+# File: bin/openerp.glade, line: 513
 #, fuzzy
 msgid "_Waiting Requests"
 msgstr "Kerkesat:"
 #
 # File: bin/openerp.glade, line: 493
 # File: bin/openerp.glade, line: 493
+# File: bin/openerp.glade, line: 526
 # File: bin/openerp.glade, line: 526
 #, fuzzy
 msgid "For_m"
@@ -1851,12 +2177,14 @@ msgstr "_Formulari"
 # File: bin/openerp.glade, line: 501
 # File: bin/openerp.glade, line: 501
 # File: bin/openerp.glade, line: 534
+# File: bin/openerp.glade, line: 534
 #, fuzzy
 msgid "_New"
 msgstr "E Re"
 #
 # File: bin/openerp.glade, line: 517
 # File: bin/openerp.glade, line: 517
+# File: bin/openerp.glade, line: 550
 # File: bin/openerp.glade, line: 550
 #, fuzzy
 msgid "_Save"
@@ -1865,6 +2193,7 @@ msgstr "Ruaje"
 # File: bin/openerp.glade, line: 533
 # File: bin/openerp.glade, line: 533
 # File: bin/openerp.glade, line: 566
+# File: bin/openerp.glade, line: 566
 #, fuzzy
 msgid "Copy this resource"
 msgstr "Largo kete resurs"
@@ -1872,11 +2201,13 @@ msgstr "Largo kete resurs"
 # File: bin/openerp.glade, line: 534
 # File: bin/openerp.glade, line: 534
 # File: bin/openerp.glade, line: 567
+# File: bin/openerp.glade, line: 567
 msgid "_Duplicate"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 550
 # File: bin/openerp.glade, line: 550
+# File: bin/openerp.glade, line: 583
 # File: bin/openerp.glade, line: 583
 #, fuzzy
 msgid "_Delete"
@@ -1885,11 +2216,13 @@ msgstr "Fshije"
 # File: bin/openerp.glade, line: 571
 # File: bin/openerp.glade, line: 571
 # File: bin/openerp.glade, line: 604
+# File: bin/openerp.glade, line: 604
 msgid "Find"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 587
 # File: bin/openerp.glade, line: 587
+# File: bin/openerp.glade, line: 620
 # File: bin/openerp.glade, line: 620
 #, fuzzy
 msgid "Ne_xt"
@@ -1898,6 +2231,7 @@ msgstr "Tjetri"
 # File: bin/openerp.glade, line: 603
 # File: bin/openerp.glade, line: 603
 # File: bin/openerp.glade, line: 636
+# File: bin/openerp.glade, line: 636
 #, fuzzy
 msgid "Pre_vious"
 msgstr "Paraprak"
@@ -1905,11 +2239,13 @@ msgstr "Paraprak"
 # File: bin/openerp.glade, line: 619
 # File: bin/openerp.glade, line: 619
 # File: bin/openerp.glade, line: 652
+# File: bin/openerp.glade, line: 652
 msgid "Switch to list/form"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 635
 # File: bin/openerp.glade, line: 635
+# File: bin/openerp.glade, line: 668
 # File: bin/openerp.glade, line: 668
 #, fuzzy
 msgid "_Menu"
@@ -1917,6 +2253,7 @@ msgstr "Menuja"
 #
 # File: bin/openerp.glade, line: 656
 # File: bin/openerp.glade, line: 656
+# File: bin/openerp.glade, line: 689
 # File: bin/openerp.glade, line: 689
 msgid "_New Home Tab"
 msgstr ""
@@ -1927,12 +2264,15 @@ msgstr ""
 # File: bin/openerp.glade, line: 7001
 # File: bin/openerp.glade, line: 705
 # File: bin/openerp.glade, line: 5016
+# File: bin/openerp.glade, line: 705
+# File: bin/openerp.glade, line: 5016
 #, fuzzy
 msgid "Close Tab"
 msgstr "Mbylle"
 #
 # File: bin/openerp.glade, line: 688
 # File: bin/openerp.glade, line: 688
+# File: bin/openerp.glade, line: 721
 # File: bin/openerp.glade, line: 721
 #, fuzzy
 msgid "Previous Tab"
@@ -1944,12 +2284,15 @@ msgstr "Tipi paraprak"
 # File: bin/openerp.glade, line: 7057
 # File: bin/openerp.glade, line: 730
 # File: bin/openerp.glade, line: 5072
+# File: bin/openerp.glade, line: 730
+# File: bin/openerp.glade, line: 5072
 #, fuzzy
 msgid "Next Tab"
 msgstr "Tipi ardheshem"
 #
 # File: bin/openerp.glade, line: 711
 # File: bin/openerp.glade, line: 711
+# File: bin/openerp.glade, line: 744
 # File: bin/openerp.glade, line: 744
 #, fuzzy
 msgid "View _logs"
@@ -1958,12 +2301,14 @@ msgstr "Trego Historiatin"
 # File: bin/openerp.glade, line: 719
 # File: bin/openerp.glade, line: 719
 # File: bin/openerp.glade, line: 752
+# File: bin/openerp.glade, line: 752
 #, fuzzy
 msgid "_Go to resource ID..."
 msgstr "Shko deri te ID e resursit..."
 #
 # File: bin/openerp.glade, line: 733
 # File: bin/openerp.glade, line: 733
+# File: bin/openerp.glade, line: 766
 # File: bin/openerp.glade, line: 766
 #, fuzzy
 msgid "_Open"
@@ -1972,12 +2317,14 @@ msgstr "Hape"
 # File: bin/openerp.glade, line: 748
 # File: bin/openerp.glade, line: 748
 # File: bin/openerp.glade, line: 781
+# File: bin/openerp.glade, line: 781
 #, fuzzy
 msgid "Reloa_d / Undo"
 msgstr "Ri_Lexo"
 #
 # File: bin/openerp.glade, line: 769
 # File: bin/openerp.glade, line: 769
+# File: bin/openerp.glade, line: 802
 # File: bin/openerp.glade, line: 802
 #, fuzzy
 msgid "Repeat latest _action"
@@ -1986,11 +2333,13 @@ msgstr "Perserite Akcionin E Fundit"
 # File: bin/openerp.glade, line: 783
 # File: bin/openerp.glade, line: 783
 # File: bin/openerp.glade, line: 816
+# File: bin/openerp.glade, line: 816
 msgid "_Preview in PDF"
 msgstr "_Parashiko ne PDF"
 #
 # File: bin/openerp.glade, line: 799
 # File: bin/openerp.glade, line: 799
+# File: bin/openerp.glade, line: 832
 # File: bin/openerp.glade, line: 832
 #, fuzzy
 msgid "Previe_w in editor"
@@ -1999,12 +2348,14 @@ msgstr "Parashiko ne _word"
 # File: bin/openerp.glade, line: 819
 # File: bin/openerp.glade, line: 819
 # File: bin/openerp.glade, line: 852
+# File: bin/openerp.glade, line: 852
 #, fuzzy
 msgid "Expor_t data..."
 msgstr "Eksportoj shenimet..."
 #
 # File: bin/openerp.glade, line: 834
 # File: bin/openerp.glade, line: 834
+# File: bin/openerp.glade, line: 867
 # File: bin/openerp.glade, line: 867
 #, fuzzy
 msgid "I_mport data..."
@@ -2013,17 +2364,20 @@ msgstr "Inmportoj shenimet..."
 # File: bin/openerp.glade, line: 846
 # File: bin/openerp.glade, line: 846
 # File: bin/openerp.glade, line: 879
+# File: bin/openerp.glade, line: 879
 msgid "_Options"
 msgstr "_Opcionet"
 #
 # File: bin/openerp.glade, line: 853
 # File: bin/openerp.glade, line: 853
 # File: bin/openerp.glade, line: 886
+# File: bin/openerp.glade, line: 886
 msgid "_Extension Manager"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 861
 # File: bin/openerp.glade, line: 861
+# File: bin/openerp.glade, line: 894
 # File: bin/openerp.glade, line: 894
 #, fuzzy
 msgid "_Menubar"
@@ -2032,12 +2386,14 @@ msgstr "Menuja"
 # File: bin/openerp.glade, line: 869
 # File: bin/openerp.glade, line: 869
 # File: bin/openerp.glade, line: 902
+# File: bin/openerp.glade, line: 902
 #, fuzzy
 msgid "Text _and Icons"
 msgstr "Teksti me figura"
 #
 # File: bin/openerp.glade, line: 877
 # File: bin/openerp.glade, line: 877
+# File: bin/openerp.glade, line: 910
 # File: bin/openerp.glade, line: 910
 #, fuzzy
 msgid "_Icons only"
@@ -2046,12 +2402,14 @@ msgstr "Vetem figurat"
 # File: bin/openerp.glade, line: 886
 # File: bin/openerp.glade, line: 886
 # File: bin/openerp.glade, line: 919
+# File: bin/openerp.glade, line: 919
 #, fuzzy
 msgid "_Text only"
 msgstr "Vetem Teksti"
 #
 # File: bin/openerp.glade, line: 899
 # File: bin/openerp.glade, line: 899
+# File: bin/openerp.glade, line: 932
 # File: bin/openerp.glade, line: 932
 #, fuzzy
 msgid "_Forms"
@@ -2060,11 +2418,13 @@ msgstr "_Formulari"
 # File: bin/openerp.glade, line: 907
 # File: bin/openerp.glade, line: 907
 # File: bin/openerp.glade, line: 940
+# File: bin/openerp.glade, line: 940
 msgid "Right Toolbar"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 915
 # File: bin/openerp.glade, line: 915
+# File: bin/openerp.glade, line: 948
 # File: bin/openerp.glade, line: 948
 msgid "Tabs default position"
 msgstr ""
@@ -2072,11 +2432,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 923
 # File: bin/openerp.glade, line: 923
 # File: bin/openerp.glade, line: 956
+# File: bin/openerp.glade, line: 956
 msgid "Top"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 931
 # File: bin/openerp.glade, line: 931
+# File: bin/openerp.glade, line: 964
 # File: bin/openerp.glade, line: 964
 msgid "Left"
 msgstr ""
@@ -2084,11 +2446,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 940
 # File: bin/openerp.glade, line: 940
 # File: bin/openerp.glade, line: 973
+# File: bin/openerp.glade, line: 973
 msgid "Right"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 949
 # File: bin/openerp.glade, line: 949
+# File: bin/openerp.glade, line: 982
 # File: bin/openerp.glade, line: 982
 msgid "Bottom"
 msgstr ""
@@ -2096,11 +2460,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 962
 # File: bin/openerp.glade, line: 962
 # File: bin/openerp.glade, line: 995
+# File: bin/openerp.glade, line: 995
 msgid "Tabs default orientation"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 970
 # File: bin/openerp.glade, line: 970
+# File: bin/openerp.glade, line: 1003
 # File: bin/openerp.glade, line: 1003
 msgid "Horizontal"
 msgstr ""
@@ -2108,11 +2474,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 978
 # File: bin/openerp.glade, line: 978
 # File: bin/openerp.glade, line: 1011
+# File: bin/openerp.glade, line: 1011
 msgid "Vertical"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 995
 # File: bin/openerp.glade, line: 995
+# File: bin/openerp.glade, line: 1028
 # File: bin/openerp.glade, line: 1028
 #, fuzzy
 msgid "_Print"
@@ -2121,12 +2489,14 @@ msgstr "Shtyp"
 # File: bin/openerp.glade, line: 1002
 # File: bin/openerp.glade, line: 1002
 # File: bin/openerp.glade, line: 1035
+# File: bin/openerp.glade, line: 1035
 #, fuzzy
 msgid "Previe_w before print"
 msgstr "Parashiko para shtypjes"
 #
 # File: bin/openerp.glade, line: 1026
 # File: bin/openerp.glade, line: 1026
+# File: bin/openerp.glade, line: 1059
 # File: bin/openerp.glade, line: 1059
 #, fuzzy
 msgid "_Save options"
@@ -2135,12 +2505,14 @@ msgstr "Ruaj opcionet"
 # File: bin/openerp.glade, line: 1046
 # File: bin/openerp.glade, line: 1046
 # File: bin/openerp.glade, line: 1079
+# File: bin/openerp.glade, line: 1079
 #, fuzzy
 msgid "_Plugins"
 msgstr "Shtojcat"
 #
 # File: bin/openerp.glade, line: 1054
 # File: bin/openerp.glade, line: 1054
+# File: bin/openerp.glade, line: 1087
 # File: bin/openerp.glade, line: 1087
 #, fuzzy
 msgid "_Execute a plugin"
@@ -2149,12 +2521,14 @@ msgstr "Ekzekuto shtojcen"
 # File: bin/openerp.glade, line: 1074
 # File: bin/openerp.glade, line: 1074
 # File: bin/openerp.glade, line: 1107
+# File: bin/openerp.glade, line: 1107
 #, fuzzy
 msgid "_Shortcuts"
 msgstr "RrugeShkurtesa"
 #
 # File: bin/openerp.glade, line: 1082
 # File: bin/openerp.glade, line: 1082
+# File: bin/openerp.glade, line: 1115
 # File: bin/openerp.glade, line: 1115
 #, fuzzy
 msgid "_Help"
@@ -2166,6 +2540,8 @@ msgstr "Ndihme"
 # File: bin/openerp.glade, line: 6372
 # File: bin/openerp.glade, line: 1122
 # File: bin/openerp.glade, line: 4387
+# File: bin/openerp.glade, line: 1122
+# File: bin/openerp.glade, line: 4387
 #, fuzzy
 msgid "Support Request"
 msgstr "Dergo Kerkesen Perkrahjes"
@@ -2173,17 +2549,20 @@ msgstr "Dergo Kerkesen Perkrahjes"
 # File: bin/openerp.glade, line: 1109
 # File: bin/openerp.glade, line: 1109
 # File: bin/openerp.glade, line: 1142
+# File: bin/openerp.glade, line: 1142
 msgid "User _Manual"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 1124
 # File: bin/openerp.glade, line: 1124
 # File: bin/openerp.glade, line: 1157
+# File: bin/openerp.glade, line: 1157
 msgid "_Contextual Help"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 1140
 # File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1173
 # File: bin/openerp.glade, line: 1173
 #, fuzzy
 msgid "_Tips"
@@ -2192,12 +2571,14 @@ msgstr "Tipet"
 # File: bin/openerp.glade, line: 1155
 # File: bin/openerp.glade, line: 1155
 # File: bin/openerp.glade, line: 1188
+# File: bin/openerp.glade, line: 1188
 #, fuzzy
 msgid "Keyboard Shortcuts"
 msgstr "RrugeShkurtesa"
 #
 # File: bin/openerp.glade, line: 1168
 # File: bin/openerp.glade, line: 1168
+# File: bin/openerp.glade, line: 1201
 # File: bin/openerp.glade, line: 1201
 #, fuzzy
 msgid "_License"
@@ -2206,6 +2587,7 @@ msgstr "Licenca"
 # File: bin/openerp.glade, line: 1183
 # File: bin/openerp.glade, line: 1183
 # File: bin/openerp.glade, line: 1216
+# File: bin/openerp.glade, line: 1216
 #, fuzzy
 msgid "_About..."
 msgstr "Rreth..."
@@ -2213,11 +2595,13 @@ msgstr "Rreth..."
 # File: bin/openerp.glade, line: 1225
 # File: bin/openerp.glade, line: 1225
 # File: bin/openerp.glade, line: 1258
+# File: bin/openerp.glade, line: 1258
 msgid "Edit / Save this resource"
 msgstr "Azhuro / Ruaje kete resurs"
 #
 # File: bin/openerp.glade, line: 1241
 # File: bin/openerp.glade, line: 1241
+# File: bin/openerp.glade, line: 1274
 # File: bin/openerp.glade, line: 1274
 msgid "Delete this resource"
 msgstr "Fshije kete resurs"
@@ -2225,17 +2609,20 @@ msgstr "Fshije kete resurs"
 # File: bin/openerp.glade, line: 1254
 # File: bin/openerp.glade, line: 1254
 # File: bin/openerp.glade, line: 1287
+# File: bin/openerp.glade, line: 1287
 msgid "Go to previous matched search"
 msgstr "Shko te kerkesat e gjetura paraprakisht"
 #
 # File: bin/openerp.glade, line: 1265
 # File: bin/openerp.glade, line: 1265
 # File: bin/openerp.glade, line: 1298
+# File: bin/openerp.glade, line: 1298
 msgid "Go to next matched resource"
 msgstr "Shko te resursi i ardheshem qe pershtatet"
 #
 # File: bin/openerp.glade, line: 1278
 # File: bin/openerp.glade, line: 1278
+# File: bin/openerp.glade, line: 1311
 # File: bin/openerp.glade, line: 1311
 #, fuzzy
 msgid "List"
@@ -2244,6 +2631,7 @@ msgstr "Ruaj opcionet"
 # File: bin/openerp.glade, line: 1290
 # File: bin/openerp.glade, line: 1290
 # File: bin/openerp.glade, line: 1323
+# File: bin/openerp.glade, line: 1323
 #, fuzzy
 msgid "Form"
 msgstr "_Formulari"
@@ -2251,11 +2639,13 @@ msgstr "_Formulari"
 # File: bin/openerp.glade, line: 1303
 # File: bin/openerp.glade, line: 1303
 # File: bin/openerp.glade, line: 1336
+# File: bin/openerp.glade, line: 1336
 msgid "Calendar"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 1313
 # File: bin/openerp.glade, line: 1313
+# File: bin/openerp.glade, line: 1346
 # File: bin/openerp.glade, line: 1346
 msgid "Graph"
 msgstr ""
@@ -2263,11 +2653,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 1326
 # File: bin/openerp.glade, line: 1326
 # File: bin/openerp.glade, line: 1359
+# File: bin/openerp.glade, line: 1359
 msgid "Gantt"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 1344
 # File: bin/openerp.glade, line: 1344
+# File: bin/openerp.glade, line: 1377
 # File: bin/openerp.glade, line: 1377
 msgid "Print documents"
 msgstr "Shtypi dokumentet"
@@ -2275,11 +2667,13 @@ msgstr "Shtypi dokumentet"
 # File: bin/openerp.glade, line: 1355
 # File: bin/openerp.glade, line: 1355
 # File: bin/openerp.glade, line: 1388
+# File: bin/openerp.glade, line: 1388
 msgid "Launch actions about this resource"
 msgstr "Lanso akcionet e ketyre resurseve"
 #
 # File: bin/openerp.glade, line: 1368
 # File: bin/openerp.glade, line: 1368
+# File: bin/openerp.glade, line: 1401
 # File: bin/openerp.glade, line: 1401
 #, fuzzy
 msgid "Add an attachment to this resource"
@@ -2287,6 +2681,7 @@ msgstr "Lanso akcionet e ketyre resurseve"
 #
 # File: bin/openerp.glade, line: 1369
 # File: bin/openerp.glade, line: 1369
+# File: bin/openerp.glade, line: 1402
 # File: bin/openerp.glade, line: 1402
 #, fuzzy
 msgid "Attachment"
@@ -2296,6 +2691,8 @@ msgstr "Bashkangjitja"
 # File: bin/openerp.glade, line: 1385
 # File: bin/openerp.glade, line: 1384
 # File: bin/openerp.glade, line: 1385
+# File: bin/openerp.glade, line: 1417
+# File: bin/openerp.glade, line: 1418
 # File: bin/openerp.glade, line: 1417
 # File: bin/openerp.glade, line: 1418
 #, fuzzy
@@ -2308,11 +2705,14 @@ msgstr "Menuja"
 # File: bin/openerp.glade, line: 1403
 # File: bin/openerp.glade, line: 1435
 # File: bin/openerp.glade, line: 1436
+# File: bin/openerp.glade, line: 1435
+# File: bin/openerp.glade, line: 1436
 #, fuzzy
 msgid "Reload"
 msgstr "Ri_Lexo"
 #
 #
+# File: bin/openerp.glade, line: 1453
 # File: bin/openerp.glade, line: 1453
 msgid "Close this window"
 msgstr "Mbylle kete dritare"
@@ -2320,11 +2720,13 @@ msgstr "Mbylle kete dritare"
 # File: bin/openerp.glade, line: 1448
 # File: bin/openerp.glade, line: 1448
 # File: bin/openerp.glade, line: 1497
+# File: bin/openerp.glade, line: 1497
 msgid "Requests:"
 msgstr "Kerkesat:"
 #
 # File: bin/openerp.glade, line: 1471
 # File: bin/openerp.glade, line: 1471
+# File: bin/openerp.glade, line: 1520
 # File: bin/openerp.glade, line: 1520
 msgid "Read my Requests"
 msgstr "Lexoj kerkesat e mia"
@@ -2332,11 +2734,13 @@ msgstr "Lexoj kerkesat e mia"
 # File: bin/openerp.glade, line: 1492
 # File: bin/openerp.glade, line: 1492
 # File: bin/openerp.glade, line: 1541
+# File: bin/openerp.glade, line: 1541
 msgid "Send a new request"
 msgstr "Dergo kerkesen e re"
 #
 # File: bin/openerp.glade, line: 1532
 # File: bin/openerp.glade, line: 1532
+# File: bin/openerp.glade, line: 1581
 # File: bin/openerp.glade, line: 1581
 msgid "OpenERP - Tree Resources"
 msgstr "OpenERP - Pema e Resurseve"
@@ -2344,17 +2748,20 @@ msgstr "OpenERP - Pema e Resurseve"
 # File: bin/openerp.glade, line: 1585
 # File: bin/openerp.glade, line: 1585
 # File: bin/openerp.glade, line: 1634
+# File: bin/openerp.glade, line: 1634
 msgid "Shortcuts"
 msgstr "RrugeShkurtesa"
 #
 # File: bin/openerp.glade, line: 1694
 # File: bin/openerp.glade, line: 1694
 # File: bin/openerp.glade, line: 1743
+# File: bin/openerp.glade, line: 1743
 msgid "OpenERP - Forms"
 msgstr "OpenERP - Formularet"
 #
 # File: bin/openerp.glade, line: 1718
 # File: bin/openerp.glade, line: 1718
+# File: bin/openerp.glade, line: 1767
 # File: bin/openerp.glade, line: 1767
 #, fuzzy
 msgid "State:"
@@ -2363,11 +2770,13 @@ msgstr "Gjendja:"
 # File: bin/openerp.glade, line: 1750
 # File: bin/openerp.glade, line: 1750
 # File: bin/openerp.glade, line: 1799
+# File: bin/openerp.glade, line: 1799
 msgid "OpenERP - About"
 msgstr "OpenERP - Rreth"
 #
 # File: bin/openerp.glade, line: 1764
 # File: bin/openerp.glade, line: 1764
+# File: bin/openerp.glade, line: 1813
 # File: bin/openerp.glade, line: 1813
 msgid ""
 "<b>About OpenERP</b>\n"
@@ -2376,6 +2785,7 @@ msgstr ""
 #
 # File: bin/openerp.glade, line: 1803
 # File: bin/openerp.glade, line: 1803
+# File: bin/openerp.glade, line: 1852
 # File: bin/openerp.glade, line: 1852
 msgid ""
 "\n"
@@ -2395,12 +2805,14 @@ msgstr ""
 # File: bin/openerp.glade, line: 1831
 # File: bin/openerp.glade, line: 1831
 # File: bin/openerp.glade, line: 1880
+# File: bin/openerp.glade, line: 1880
 #, fuzzy
 msgid "_OpenERP"
 msgstr "OpenERP"
 #
 # File: bin/openerp.glade, line: 1859
 # File: bin/openerp.glade, line: 1859
+# File: bin/openerp.glade, line: 1908
 # File: bin/openerp.glade, line: 1908
 msgid ""
 "\n"
@@ -2420,12 +2832,14 @@ msgstr ""
 # File: bin/openerp.glade, line: 1890
 # File: bin/openerp.glade, line: 1890
 # File: bin/openerp.glade, line: 1939
+# File: bin/openerp.glade, line: 1939
 #, fuzzy
 msgid "_Contact"
 msgstr "Kontakti"
 #
 # File: bin/openerp.glade, line: 1942
 # File: bin/openerp.glade, line: 1942
+# File: bin/openerp.glade, line: 1991
 # File: bin/openerp.glade, line: 1991
 #, fuzzy
 msgid "Open ERP - Forms widget"
@@ -2435,6 +2849,8 @@ msgstr "OpenERP - elementet e formularit"
 # File: bin/openerp.glade, line: 6718
 # File: bin/openerp.glade, line: 2121
 # File: bin/openerp.glade, line: 6718
+# File: bin/openerp.glade, line: 2170
+# File: bin/openerp.glade, line: 4733
 # File: bin/openerp.glade, line: 2170
 # File: bin/openerp.glade, line: 4733
 msgid "OpenERP - Confirmation"
@@ -2449,11 +2865,15 @@ msgstr "OpenERP - Konfirmimi"
 # File: bin/openerp.glade, line: 2198
 # File: bin/openerp.glade, line: 4761
 # File: bin/openerp.glade, line: 6147
+# File: bin/openerp.glade, line: 2198
+# File: bin/openerp.glade, line: 4761
+# File: bin/openerp.glade, line: 6147
 msgid "Hello World!"
 msgstr "Tungit o njerzi!"
 #
 # File: bin/openerp.glade, line: 2198
 # File: bin/openerp.glade, line: 2198
+# File: bin/openerp.glade, line: 2247
 # File: bin/openerp.glade, line: 2247
 #, fuzzy
 msgid "OpenERP - Selection"
@@ -2462,11 +2882,13 @@ msgstr "OpenERP - zgjedhja"
 # File: bin/openerp.glade, line: 2212
 # File: bin/openerp.glade, line: 2212
 # File: bin/openerp.glade, line: 2261
+# File: bin/openerp.glade, line: 2261
 msgid "Your selection:"
 msgstr "Zgjedhjet e juaja:"
 #
 # File: bin/openerp.glade, line: 2292
 # File: bin/openerp.glade, line: 2292
+# File: bin/openerp.glade, line: 2341
 # File: bin/openerp.glade, line: 2341
 msgid "OpenERP - Dialog"
 msgstr "OpenERP - Dialogu"
@@ -2474,11 +2896,13 @@ msgstr "OpenERP - Dialogu"
 # File: bin/openerp.glade, line: 2316
 # File: bin/openerp.glade, line: 2316
 # File: bin/openerp.glade, line: 2365
+# File: bin/openerp.glade, line: 2365
 msgid "OpenERP, Field Preference target"
 msgstr "OpenERP, Shenjestra e fushes se preferuar"
 #
 # File: bin/openerp.glade, line: 2347
 # File: bin/openerp.glade, line: 2347
+# File: bin/openerp.glade, line: 2396
 # File: bin/openerp.glade, line: 2396
 #, fuzzy
 msgid "_only for you"
@@ -2487,6 +2911,7 @@ msgstr "Vetem per ju"
 # File: bin/openerp.glade, line: 2361
 # File: bin/openerp.glade, line: 2361
 # File: bin/openerp.glade, line: 2410
+# File: bin/openerp.glade, line: 2410
 #, fuzzy
 msgid "for _all users"
 msgstr "per te gjithe perdoruesit"
@@ -2494,17 +2919,20 @@ msgstr "per te gjithe perdoruesit"
 # File: bin/openerp.glade, line: 2381
 # File: bin/openerp.glade, line: 2381
 # File: bin/openerp.glade, line: 2430
+# File: bin/openerp.glade, line: 2430
 msgid "<b>Value applicable for:</b>"
 msgstr "<b>Vlera aplikueshme per:</b>"
 #
 # File: bin/openerp.glade, line: 2417
 # File: bin/openerp.glade, line: 2417
 # File: bin/openerp.glade, line: 2466
+# File: bin/openerp.glade, line: 2466
 msgid "<b>Value applicable if:</b>"
 msgstr "<b>Vlera Aplikueshme nese:</b>"
 #
 # File: bin/openerp.glade, line: 2435
 # File: bin/openerp.glade, line: 2435
+# File: bin/openerp.glade, line: 2484
 # File: bin/openerp.glade, line: 2484
 #, fuzzy
 msgid "Field _Name:"
@@ -2513,12 +2941,14 @@ msgstr "Emri Fushes:"
 # File: bin/openerp.glade, line: 2449
 # File: bin/openerp.glade, line: 2449
 # File: bin/openerp.glade, line: 2498
+# File: bin/openerp.glade, line: 2498
 #, fuzzy
 msgid "_Domain:"
 msgstr "Domeni:"
 #
 # File: bin/openerp.glade, line: 2508
 # File: bin/openerp.glade, line: 2508
+# File: bin/openerp.glade, line: 2557
 # File: bin/openerp.glade, line: 2557
 #, fuzzy
 msgid "Default _value:"
@@ -2527,11 +2957,13 @@ msgstr "Vlera Definuar:"
 # File: bin/openerp.glade, line: 2563
 # File: bin/openerp.glade, line: 2563
 # File: bin/openerp.glade, line: 2612
+# File: bin/openerp.glade, line: 2612
 msgid "OpenERP - Export to CSV"
 msgstr "OpenERP - Eksporto ne CSV"
 #
 # File: bin/openerp.glade, line: 2611
 # File: bin/openerp.glade, line: 2611
+# File: bin/openerp.glade, line: 2660
 # File: bin/openerp.glade, line: 2660
 #, fuzzy
 msgid "Save List"
@@ -2540,12 +2972,14 @@ msgstr "Ruaj opcionet"
 # File: bin/openerp.glade, line: 2659
 # File: bin/openerp.glade, line: 2659
 # File: bin/openerp.glade, line: 2708
+# File: bin/openerp.glade, line: 2708
 #, fuzzy
 msgid "Remove List"
 msgstr "Largo kete shenim"
 #
 # File: bin/openerp.glade, line: 2714
 # File: bin/openerp.glade, line: 2714
+# File: bin/openerp.glade, line: 2763
 # File: bin/openerp.glade, line: 2763
 #, fuzzy
 msgid "<b>Exports List</b>"
@@ -2554,16 +2988,19 @@ msgstr "<b>Kerkesa Perkrahese</b>"
 # File: bin/openerp.glade, line: 2731
 # File: bin/openerp.glade, line: 2731
 # File: bin/openerp.glade, line: 2780
+# File: bin/openerp.glade, line: 2780
 #, fuzzy
 msgid "<b>Predefined Exports</b>"
 msgstr "<b>Fushat per eksportim</b>"
 #
+# File: bin/openerp.glade, line: 2805
 # File: bin/openerp.glade, line: 2805
 msgid "Import Compatible"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 2731
 # File: bin/openerp.glade, line: 2731
+# File: bin/openerp.glade, line: 2822
 # File: bin/openerp.glade, line: 2822
 #, fuzzy
 msgid "<b>Select an Option to Export</b>"
@@ -2572,6 +3009,7 @@ msgstr "<b>Fushat per eksportim</b>"
 # File: bin/openerp.glade, line: 2776
 # File: bin/openerp.glade, line: 2776
 # File: bin/openerp.glade, line: 2869
+# File: bin/openerp.glade, line: 2869
 msgid "Available Fields"
 msgstr ""
 #
@@ -2579,6 +3017,8 @@ msgstr ""
 # File: bin/openerp.glade, line: 7624
 # File: bin/openerp.glade, line: 2819
 # File: bin/openerp.glade, line: 7624
+# File: bin/openerp.glade, line: 2912
+# File: bin/openerp.glade, line: 5639
 # File: bin/openerp.glade, line: 2912
 # File: bin/openerp.glade, line: 5639
 #, fuzzy
@@ -2591,12 +3031,15 @@ msgstr "Shto"
 # File: bin/openerp.glade, line: 7671
 # File: bin/openerp.glade, line: 2959
 # File: bin/openerp.glade, line: 5686
+# File: bin/openerp.glade, line: 2959
+# File: bin/openerp.glade, line: 5686
 #, fuzzy
 msgid "_Remove"
 msgstr "Largo"
 #
 # File: bin/openerp.glade, line: 2914
 # File: bin/openerp.glade, line: 2914
+# File: bin/openerp.glade, line: 3007
 # File: bin/openerp.glade, line: 3007
 #, fuzzy
 msgid "_Nothing"
@@ -2605,12 +3048,14 @@ msgstr "Asgje"
 # File: bin/openerp.glade, line: 2969
 # File: bin/openerp.glade, line: 2969
 # File: bin/openerp.glade, line: 3062
+# File: bin/openerp.glade, line: 3062
 #, fuzzy
 msgid "Fields to Export"
 msgstr "<b>Fushat per eksportim</b>"
 #
 # File: bin/openerp.glade, line: 2999
 # File: bin/openerp.glade, line: 2999
+# File: bin/openerp.glade, line: 3092
 # File: bin/openerp.glade, line: 3092
 msgid ""
 "Open in Excel\n"
@@ -2622,12 +3067,14 @@ msgstr ""
 # File: bin/openerp.glade, line: 3018
 # File: bin/openerp.glade, line: 3018
 # File: bin/openerp.glade, line: 3111
+# File: bin/openerp.glade, line: 3111
 #, fuzzy
 msgid "Add _field names"
 msgstr "Shto emrat e fushave:"
 #
 # File: bin/openerp.glade, line: 3035
 # File: bin/openerp.glade, line: 3035
+# File: bin/openerp.glade, line: 3128
 # File: bin/openerp.glade, line: 3128
 #, fuzzy
 msgid "<b>Opti_ons</b>"
@@ -2636,17 +3083,20 @@ msgstr "<b>Opcionet</b>"
 # File: bin/openerp.glade, line: 3094
 # File: bin/openerp.glade, line: 3094
 # File: bin/openerp.glade, line: 3187
+# File: bin/openerp.glade, line: 3187
 msgid "OpenERP - Search"
 msgstr "OpenERP - Kerko"
 #
 # File: bin/openerp.glade, line: 4351
 # File: bin/openerp.glade, line: 4351
 # File: bin/openerp.glade, line: 3299
+# File: bin/openerp.glade, line: 3299
 msgid "OpenERP - Preferences"
 msgstr "OpenERP - Preferenca"
 #
 # File: bin/openerp.glade, line: 4365
 # File: bin/openerp.glade, line: 4365
+# File: bin/openerp.glade, line: 3313
 # File: bin/openerp.glade, line: 3313
 #, fuzzy
 msgid "<b>User preferences</b>"
@@ -2655,11 +3105,13 @@ msgstr "<b>Azhuro resurs preferencat</b>"
 # File: bin/openerp.glade, line: 4431
 # File: bin/openerp.glade, line: 4431
 # File: bin/openerp.glade, line: 3379
+# File: bin/openerp.glade, line: 3379
 msgid "Tip of the Day"
 msgstr "Tipet e dites"
 #
 # File: bin/openerp.glade, line: 4478
 # File: bin/openerp.glade, line: 4478
+# File: bin/openerp.glade, line: 3426
 # File: bin/openerp.glade, line: 3426
 #, fuzzy
 msgid "_Display a new tip next time?"
@@ -2668,12 +3120,14 @@ msgstr "Trego tipin e ri tjeter here?"
 # File: bin/openerp.glade, line: 4531
 # File: bin/openerp.glade, line: 4531
 # File: bin/openerp.glade, line: 3479
+# File: bin/openerp.glade, line: 3479
 #, fuzzy
 msgid "Pre_vious Tip"
 msgstr "Tipi paraprak"
 #
 # File: bin/openerp.glade, line: 4577
 # File: bin/openerp.glade, line: 4577
+# File: bin/openerp.glade, line: 3525
 # File: bin/openerp.glade, line: 3525
 #, fuzzy
 msgid "Ne_xt Tip"
@@ -2682,6 +3136,7 @@ msgstr "Tipi ardheshem"
 # File: bin/openerp.glade, line: 4623
 # File: bin/openerp.glade, line: 4623
 # File: bin/openerp.glade, line: 3571
+# File: bin/openerp.glade, line: 3571
 #, fuzzy
 msgid "OpenERP - License"
 msgstr "OpenERP - Licenca"
@@ -2689,11 +3144,13 @@ msgstr "OpenERP - Licenca"
 # File: bin/openerp.glade, line: 4638
 # File: bin/openerp.glade, line: 4638
 # File: bin/openerp.glade, line: 3586
+# File: bin/openerp.glade, line: 3586
 msgid "OpenERP license"
 msgstr "OpenERP licensa"
 #
 # File: bin/openerp.glade, line: 5336
 # File: bin/openerp.glade, line: 5336
+# File: bin/openerp.glade, line: 4284
 # File: bin/openerp.glade, line: 4284
 #, fuzzy
 msgid "Go to resource ID"
@@ -2702,11 +3159,13 @@ msgstr "Shko deri te ID e resursit..."
 # File: bin/openerp.glade, line: 5386
 # File: bin/openerp.glade, line: 5386
 # File: bin/openerp.glade, line: 4334
+# File: bin/openerp.glade, line: 4334
 msgid "Search ID:"
 msgstr "Kerko ID:"
 #
 # File: bin/openerp.glade, line: 6398
 # File: bin/openerp.glade, line: 6398
+# File: bin/openerp.glade, line: 4413
 # File: bin/openerp.glade, line: 4413
 #, fuzzy
 msgid ""
@@ -2726,6 +3185,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 6457
 # File: bin/openerp.glade, line: 6457
 # File: bin/openerp.glade, line: 4472
+# File: bin/openerp.glade, line: 4472
 #, fuzzy
 msgid "Phone number:"
 msgstr "Numri Telefonit: "
@@ -2735,6 +3195,7 @@ msgstr "Numri Telefonit: "
 # File: bin/openerp.glade, line: 4027
 # File: bin/openerp.glade, line: 6470
 # File: bin/openerp.glade, line: 4485
+# File: bin/openerp.glade, line: 4485
 #, fuzzy
 msgid "Emergency:"
 msgstr "Urgjenca: "
@@ -2743,6 +3204,7 @@ msgstr "Urgjenca: "
 # File: bin/openerp.glade, line: 6484
 # File: bin/openerp.glade, line: 4041
 # File: bin/openerp.glade, line: 6484
+# File: bin/openerp.glade, line: 4499
 # File: bin/openerp.glade, line: 4499
 msgid ""
 "Not Urgent\n"
@@ -2758,12 +3220,14 @@ msgstr ""
 # File: bin/openerp.glade, line: 6517
 # File: bin/openerp.glade, line: 6517
 # File: bin/openerp.glade, line: 4532
+# File: bin/openerp.glade, line: 4532
 #, fuzzy
 msgid "<b>Support contract id:</b>"
 msgstr "<b>Kerkesa Perkrahese</b>"
 #
 # File: bin/openerp.glade, line: 6574
 # File: bin/openerp.glade, line: 6574
+# File: bin/openerp.glade, line: 4589
 # File: bin/openerp.glade, line: 4589
 #, fuzzy
 msgid "Other comments:"
@@ -2772,12 +3236,14 @@ msgstr "Verejtje Tjera: "
 # File: bin/openerp.glade, line: 6588
 # File: bin/openerp.glade, line: 6588
 # File: bin/openerp.glade, line: 4603
+# File: bin/openerp.glade, line: 4603
 #, fuzzy
 msgid "Explain your problem:"
 msgstr "Pershkruja se cfare ka ndodhe: "
 #
 # File: bin/openerp.glade, line: 6627
 # File: bin/openerp.glade, line: 6627
+# File: bin/openerp.glade, line: 4642
 # File: bin/openerp.glade, line: 4642
 #, fuzzy
 msgid "<b>Your email:</b>"
@@ -2788,6 +3254,7 @@ msgstr "<b>Emaili juaj: </b>"
 # File: bin/openerp.glade, line: 4258
 # File: bin/openerp.glade, line: 6641
 # File: bin/openerp.glade, line: 4656
+# File: bin/openerp.glade, line: 4656
 #, fuzzy
 msgid "<b>Your Company:</b>"
 msgstr "<b>Kompania juaj: </b>"
@@ -2797,12 +3264,14 @@ msgstr "<b>Kompania juaj: </b>"
 # File: bin/openerp.glade, line: 4272
 # File: bin/openerp.glade, line: 6655
 # File: bin/openerp.glade, line: 4670
+# File: bin/openerp.glade, line: 4670
 #, fuzzy
 msgid "<b>Your name:</b>"
 msgstr "<b>Emri juaj: </b>"
 #
 # File: bin/openerp.glade, line: 6808
 # File: bin/openerp.glade, line: 6808
+# File: bin/openerp.glade, line: 4823
 # File: bin/openerp.glade, line: 4823
 #, fuzzy
 msgid "Keyboard shortcuts"
@@ -2811,11 +3280,13 @@ msgstr "RrugeShkurtesa"
 # File: bin/openerp.glade, line: 6830
 # File: bin/openerp.glade, line: 6830
 # File: bin/openerp.glade, line: 4845
+# File: bin/openerp.glade, line: 4845
 msgid "<b>Shortcuts for OpenERP</b>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 6844
 # File: bin/openerp.glade, line: 6844
+# File: bin/openerp.glade, line: 4859
 # File: bin/openerp.glade, line: 4859
 msgid "Close window without saving"
 msgstr ""
@@ -2823,17 +3294,20 @@ msgstr ""
 # File: bin/openerp.glade, line: 6859
 # File: bin/openerp.glade, line: 6859
 # File: bin/openerp.glade, line: 4874
+# File: bin/openerp.glade, line: 4874
 msgid "<Ctrl> + <Esc>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 6873
 # File: bin/openerp.glade, line: 6873
 # File: bin/openerp.glade, line: 4888
+# File: bin/openerp.glade, line: 4888
 msgid "<i>When editing a resource in a popup window</i>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 6889
 # File: bin/openerp.glade, line: 6889
+# File: bin/openerp.glade, line: 4904
 # File: bin/openerp.glade, line: 4904
 #, fuzzy
 msgid "Save and Close window"
@@ -2842,11 +3316,13 @@ msgstr "Mbylle Dritaren"
 # File: bin/openerp.glade, line: 6904
 # File: bin/openerp.glade, line: 6904
 # File: bin/openerp.glade, line: 4919
+# File: bin/openerp.glade, line: 4919
 msgid "<Ctrl> + <Enter>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 6917
 # File: bin/openerp.glade, line: 6917
+# File: bin/openerp.glade, line: 4932
 # File: bin/openerp.glade, line: 4932
 msgid "Switch view mode"
 msgstr ""
@@ -2854,11 +3330,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 6932
 # File: bin/openerp.glade, line: 6932
 # File: bin/openerp.glade, line: 4947
+# File: bin/openerp.glade, line: 4947
 msgid "<Ctrl> + L"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 6945
 # File: bin/openerp.glade, line: 6945
+# File: bin/openerp.glade, line: 4960
 # File: bin/openerp.glade, line: 4960
 #, fuzzy
 msgid "Next record"
@@ -2867,6 +3345,7 @@ msgstr "Tjetri: Asnje shenim i zgjedhur!"
 # File: bin/openerp.glade, line: 6960
 # File: bin/openerp.glade, line: 6960
 # File: bin/openerp.glade, line: 4975
+# File: bin/openerp.glade, line: 4975
 #, fuzzy
 msgid "Previous record"
 msgstr "Paraprak"
@@ -2874,11 +3353,13 @@ msgstr "Paraprak"
 # File: bin/openerp.glade, line: 6975
 # File: bin/openerp.glade, line: 6975
 # File: bin/openerp.glade, line: 4990
+# File: bin/openerp.glade, line: 4990
 msgid "<PgDn>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 6988
 # File: bin/openerp.glade, line: 6988
+# File: bin/openerp.glade, line: 5003
 # File: bin/openerp.glade, line: 5003
 msgid "<PgUp>"
 msgstr ""
@@ -2886,11 +3367,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 7016
 # File: bin/openerp.glade, line: 7016
 # File: bin/openerp.glade, line: 5031
+# File: bin/openerp.glade, line: 5031
 msgid "Save"
 msgstr "Ruaje"
 #
 # File: bin/openerp.glade, line: 7031
 # File: bin/openerp.glade, line: 7031
+# File: bin/openerp.glade, line: 5046
 # File: bin/openerp.glade, line: 5046
 msgid "<Ctrl> + W"
 msgstr ""
@@ -2898,17 +3381,20 @@ msgstr ""
 # File: bin/openerp.glade, line: 7044
 # File: bin/openerp.glade, line: 7044
 # File: bin/openerp.glade, line: 5059
+# File: bin/openerp.glade, line: 5059
 msgid "<Ctrl> + S"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7072
 # File: bin/openerp.glade, line: 7072
 # File: bin/openerp.glade, line: 5087
+# File: bin/openerp.glade, line: 5087
 msgid "<Ctrl> + <PgDn>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7085
 # File: bin/openerp.glade, line: 7085
+# File: bin/openerp.glade, line: 5100
 # File: bin/openerp.glade, line: 5100
 #, fuzzy
 msgid "Previous tab"
@@ -2917,11 +3403,13 @@ msgstr "Paraprak"
 # File: bin/openerp.glade, line: 7100
 # File: bin/openerp.glade, line: 7100
 # File: bin/openerp.glade, line: 5115
+# File: bin/openerp.glade, line: 5115
 msgid "<Ctrl> + <PgUp>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7113
 # File: bin/openerp.glade, line: 7113
+# File: bin/openerp.glade, line: 5128
 # File: bin/openerp.glade, line: 5128
 msgid "New"
 msgstr "E Re"
@@ -2929,11 +3417,13 @@ msgstr "E Re"
 # File: bin/openerp.glade, line: 7128
 # File: bin/openerp.glade, line: 7128
 # File: bin/openerp.glade, line: 5143
+# File: bin/openerp.glade, line: 5143
 msgid "<Ctrl> + N"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7141
 # File: bin/openerp.glade, line: 7141
+# File: bin/openerp.glade, line: 5156
 # File: bin/openerp.glade, line: 5156
 msgid "Delete"
 msgstr "Fshije"
@@ -2941,11 +3431,13 @@ msgstr "Fshije"
 # File: bin/openerp.glade, line: 7156
 # File: bin/openerp.glade, line: 7156
 # File: bin/openerp.glade, line: 5171
+# File: bin/openerp.glade, line: 5171
 msgid "<Ctrl> + D"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7169
 # File: bin/openerp.glade, line: 7169
+# File: bin/openerp.glade, line: 5184
 # File: bin/openerp.glade, line: 5184
 #, fuzzy
 msgid "Find / Search"
@@ -2954,11 +3446,13 @@ msgstr "Fundi i kerkimit"
 # File: bin/openerp.glade, line: 7184
 # File: bin/openerp.glade, line: 7184
 # File: bin/openerp.glade, line: 5199
+# File: bin/openerp.glade, line: 5199
 msgid "<Ctrl> + F"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7197
 # File: bin/openerp.glade, line: 7197
+# File: bin/openerp.glade, line: 5212
 # File: bin/openerp.glade, line: 5212
 #, fuzzy
 msgid "Connect"
@@ -2967,11 +3461,13 @@ msgstr "Nderlidhja..."
 # File: bin/openerp.glade, line: 7212
 # File: bin/openerp.glade, line: 7212
 # File: bin/openerp.glade, line: 5227
+# File: bin/openerp.glade, line: 5227
 msgid "<Ctrl> + O"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7226
 # File: bin/openerp.glade, line: 7226
+# File: bin/openerp.glade, line: 5241
 # File: bin/openerp.glade, line: 5241
 #, fuzzy
 msgid "Main Shortcuts"
@@ -2980,11 +3476,13 @@ msgstr "RrugeShkurtesa"
 # File: bin/openerp.glade, line: 7243
 # File: bin/openerp.glade, line: 7243
 # File: bin/openerp.glade, line: 5258
+# File: bin/openerp.glade, line: 5258
 msgid "F2"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7256
 # File: bin/openerp.glade, line: 7256
+# File: bin/openerp.glade, line: 5271
 # File: bin/openerp.glade, line: 5271
 #, fuzzy
 msgid "<b>Shortcuts in relation fields</b>"
@@ -2993,6 +3491,7 @@ msgstr "<b>Emri juaj: </b>"
 # File: bin/openerp.glade, line: 7271
 # File: bin/openerp.glade, line: 7271
 # File: bin/openerp.glade, line: 5286
+# File: bin/openerp.glade, line: 5286
 #, fuzzy
 msgid "<b>Shortcuts in text entries</b>"
 msgstr "<b>Emri juaj: </b>"
@@ -3000,11 +3499,13 @@ msgstr "<b>Emri juaj: </b>"
 # File: bin/openerp.glade, line: 7284
 # File: bin/openerp.glade, line: 7284
 # File: bin/openerp.glade, line: 5299
+# File: bin/openerp.glade, line: 5299
 msgid "Open current field"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7299
 # File: bin/openerp.glade, line: 7299
+# File: bin/openerp.glade, line: 5314
 # File: bin/openerp.glade, line: 5314
 msgid "Add a new line/field"
 msgstr ""
@@ -3012,11 +3513,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 7314
 # File: bin/openerp.glade, line: 7314
 # File: bin/openerp.glade, line: 5329
+# File: bin/openerp.glade, line: 5329
 msgid "F1"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7327
 # File: bin/openerp.glade, line: 7327
+# File: bin/openerp.glade, line: 5342
 # File: bin/openerp.glade, line: 5342
 #, fuzzy
 msgid "Auto-Complete text field"
@@ -3025,16 +3528,19 @@ msgstr "Pastro fushen"
 # File: bin/openerp.glade, line: 7342
 # File: bin/openerp.glade, line: 7342
 # File: bin/openerp.glade, line: 5357
+# File: bin/openerp.glade, line: 5357
 msgid "<Enter>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7355
 # File: bin/openerp.glade, line: 7355
 # File: bin/openerp.glade, line: 5370
+# File: bin/openerp.glade, line: 5370
 #, fuzzy
 msgid "Previous editable widget"
 msgstr "Paraprak"
 #
+# File: bin/openerp.glade, line: 5385
 # File: bin/openerp.glade, line: 5385
 msgid "<Shift> + <Tab>"
 msgstr ""
@@ -3042,17 +3548,20 @@ msgstr ""
 # File: bin/openerp.glade, line: 7383
 # File: bin/openerp.glade, line: 7383
 # File: bin/openerp.glade, line: 5398
+# File: bin/openerp.glade, line: 5398
 msgid "Next editable widget"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7398
 # File: bin/openerp.glade, line: 7398
 # File: bin/openerp.glade, line: 5413
+# File: bin/openerp.glade, line: 5413
 msgid "<Tab>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7411
 # File: bin/openerp.glade, line: 7411
+# File: bin/openerp.glade, line: 5426
 # File: bin/openerp.glade, line: 5426
 #, fuzzy
 msgid "Paste selected text"
@@ -3061,12 +3570,14 @@ msgstr "Largo shenimin e zgjedhur"
 # File: bin/openerp.glade, line: 7426
 # File: bin/openerp.glade, line: 7426
 # File: bin/openerp.glade, line: 5441
+# File: bin/openerp.glade, line: 5441
 #, fuzzy
 msgid "Copy selected text"
 msgstr "Largo shenimin e zgjedhur"
 #
 # File: bin/openerp.glade, line: 7441
 # File: bin/openerp.glade, line: 7441
+# File: bin/openerp.glade, line: 5456
 # File: bin/openerp.glade, line: 5456
 #, fuzzy
 msgid "Cut selected text"
@@ -3075,11 +3586,13 @@ msgstr "Largo shenimin e zgjedhur"
 # File: bin/openerp.glade, line: 7456
 # File: bin/openerp.glade, line: 7456
 # File: bin/openerp.glade, line: 5471
+# File: bin/openerp.glade, line: 5471
 msgid "<Ctrl> + V"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7469
 # File: bin/openerp.glade, line: 7469
+# File: bin/openerp.glade, line: 5484
 # File: bin/openerp.glade, line: 5484
 msgid "<Ctrl> + C"
 msgstr ""
@@ -3087,11 +3600,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 7482
 # File: bin/openerp.glade, line: 7482
 # File: bin/openerp.glade, line: 5497
+# File: bin/openerp.glade, line: 5497
 msgid "<Ctrl> + X"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7499
 # File: bin/openerp.glade, line: 7499
+# File: bin/openerp.glade, line: 5514
 # File: bin/openerp.glade, line: 5514
 #, fuzzy
 msgid "Edition Widgets"
@@ -3100,6 +3615,7 @@ msgstr "Azhuro dokumentin:"
 # File: bin/openerp.glade, line: 7537
 # File: bin/openerp.glade, line: 7537
 # File: bin/openerp.glade, line: 5552
+# File: bin/openerp.glade, line: 5552
 #, fuzzy
 msgid "Import from CSV"
 msgstr "Importo CSV Fajllin"
@@ -3107,11 +3623,13 @@ msgstr "Importo CSV Fajllin"
 # File: bin/openerp.glade, line: 7582
 # File: bin/openerp.glade, line: 7582
 # File: bin/openerp.glade, line: 5597
+# File: bin/openerp.glade, line: 5597
 msgid "<b>All fields</b>"
 msgstr "<b>Krejt fushat</b>"
 #
 # File: bin/openerp.glade, line: 7719
 # File: bin/openerp.glade, line: 7719
+# File: bin/openerp.glade, line: 5734
 # File: bin/openerp.glade, line: 5734
 #, fuzzy
 msgid "N_othing"
@@ -3120,17 +3638,20 @@ msgstr "Asgje"
 # File: bin/openerp.glade, line: 7778
 # File: bin/openerp.glade, line: 7778
 # File: bin/openerp.glade, line: 5793
+# File: bin/openerp.glade, line: 5793
 msgid "Auto-Detect"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7833
 # File: bin/openerp.glade, line: 7833
 # File: bin/openerp.glade, line: 5848
+# File: bin/openerp.glade, line: 5848
 msgid "<b>Fields to import</b>"
 msgstr "<b>Fushat per import</b>"
 #
 # File: bin/openerp.glade, line: 7868
 # File: bin/openerp.glade, line: 7868
+# File: bin/openerp.glade, line: 5883
 # File: bin/openerp.glade, line: 5883
 #, fuzzy
 msgid "File to Import:"
@@ -3139,11 +3660,13 @@ msgstr "<b>Fushat per import</b>"
 # File: bin/openerp.glade, line: 7942
 # File: bin/openerp.glade, line: 7942
 # File: bin/openerp.glade, line: 5957
+# File: bin/openerp.glade, line: 5957
 msgid "Lines to Skip:"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7971
 # File: bin/openerp.glade, line: 7971
+# File: bin/openerp.glade, line: 5986
 # File: bin/openerp.glade, line: 5986
 msgid "Text Delimiter:"
 msgstr ""
@@ -3151,11 +3674,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 7999
 # File: bin/openerp.glade, line: 7999
 # File: bin/openerp.glade, line: 6014
+# File: bin/openerp.glade, line: 6014
 msgid "Encoding:"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 8012
 # File: bin/openerp.glade, line: 8012
+# File: bin/openerp.glade, line: 6027
 # File: bin/openerp.glade, line: 6027
 #, fuzzy
 msgid "Field Separater:"
@@ -3164,17 +3689,20 @@ msgstr "Emri Fushes:"
 # File: bin/openerp.glade, line: 8024
 # File: bin/openerp.glade, line: 8024
 # File: bin/openerp.glade, line: 6039
+# File: bin/openerp.glade, line: 6039
 msgid "CSV Parameters"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 8103
 # File: bin/openerp.glade, line: 8103
 # File: bin/openerp.glade, line: 6118
+# File: bin/openerp.glade, line: 6118
 msgid "OpenERP"
 msgstr "OpenERP"
 #
 # File: bin/openerp.glade, line: 8199
 # File: bin/openerp.glade, line: 8199
+# File: bin/openerp.glade, line: 6214
 # File: bin/openerp.glade, line: 6214
 #, fuzzy
 msgid "Server"
@@ -3183,11 +3711,13 @@ msgstr "Serveri:"
 # File: bin/openerp.glade, line: 8209
 # File: bin/openerp.glade, line: 8209
 # File: bin/openerp.glade, line: 6224
+# File: bin/openerp.glade, line: 6224
 msgid "<b>Connect to a OpenERP server</b>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 8268
 # File: bin/openerp.glade, line: 8268
+# File: bin/openerp.glade, line: 6283
 # File: bin/openerp.glade, line: 6283
 #, fuzzy
 msgid "Protocol connection:"
@@ -3196,11 +3726,13 @@ msgstr "Zgjedheni akcionin tuaj"
 # File: bin/openerp.glade, line: 8314
 # File: bin/openerp.glade, line: 8314
 # File: bin/openerp.glade, line: 6329
+# File: bin/openerp.glade, line: 6329
 msgid "Port:"
 msgstr "Porti:"
 #
 # File: bin/openerp.glade, line: 8366
 # File: bin/openerp.glade, line: 8366
+# File: bin/openerp.glade, line: 6381
 # File: bin/openerp.glade, line: 6381
 #, fuzzy
 msgid "Choose a database..."
@@ -3209,12 +3741,14 @@ msgstr "Zgjedhe daten"
 # File: bin/openerp.glade, line: 8381
 # File: bin/openerp.glade, line: 8381
 # File: bin/openerp.glade, line: 6396
+# File: bin/openerp.glade, line: 6396
 #, fuzzy
 msgid "<b>Backup a database</b>"
 msgstr "Krijo resursin e ri"
 #
 # File: bin/openerp.glade, line: 8612
 # File: bin/openerp.glade, line: 8612
+# File: bin/openerp.glade, line: 6627
 # File: bin/openerp.glade, line: 6627
 #, fuzzy
 msgid "Restore a database"
@@ -3223,6 +3757,7 @@ msgstr "Zgjedhe daten"
 # File: bin/openerp.glade, line: 8625
 # File: bin/openerp.glade, line: 8625
 # File: bin/openerp.glade, line: 6640
+# File: bin/openerp.glade, line: 6640
 #, fuzzy
 msgid "<b>Restore a database</b>"
 msgstr "Krijo resursin e ri"
@@ -3230,11 +3765,13 @@ msgstr "Krijo resursin e ri"
 # File: bin/openerp.glade, line: 8669
 # File: bin/openerp.glade, line: 8669
 # File: bin/openerp.glade, line: 6684
+# File: bin/openerp.glade, line: 6684
 msgid "(must not contain any special char)"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 8698
 # File: bin/openerp.glade, line: 8698
+# File: bin/openerp.glade, line: 6713
 # File: bin/openerp.glade, line: 6713
 #, fuzzy
 msgid "New database name:"
@@ -3249,12 +3786,16 @@ msgstr "Zgjedhe daten"
 # File: bin/openerp.glade, line: 6813
 # File: bin/openerp.glade, line: 6959
 # File: bin/openerp.glade, line: 7458
+# File: bin/openerp.glade, line: 6813
+# File: bin/openerp.glade, line: 6959
+# File: bin/openerp.glade, line: 7458
 #, fuzzy
 msgid "http://localhost:8069"
 msgstr "localhost"
 #
 # File: bin/openerp.glade, line: 8872
 # File: bin/openerp.glade, line: 8872
+# File: bin/openerp.glade, line: 6887
 # File: bin/openerp.glade, line: 6887
 #, fuzzy
 msgid "Create a new database"
@@ -3263,12 +3804,14 @@ msgstr "Krijo te dhenat e reja"
 # File: bin/openerp.glade, line: 8885
 # File: bin/openerp.glade, line: 8885
 # File: bin/openerp.glade, line: 6900
+# File: bin/openerp.glade, line: 6900
 #, fuzzy
 msgid "<b>Create a new database</b>"
 msgstr "Krijo resursin e ri"
 #
 # File: bin/openerp.glade, line: 8956
 # File: bin/openerp.glade, line: 8956
+# File: bin/openerp.glade, line: 6971
 # File: bin/openerp.glade, line: 6971
 msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
@@ -3278,12 +3821,14 @@ msgstr ""
 # File: bin/openerp.glade, line: 8960
 # File: bin/openerp.glade, line: 8960
 # File: bin/openerp.glade, line: 6975
+# File: bin/openerp.glade, line: 6975
 #, fuzzy
 msgid "OpenERP Server:"
 msgstr "OpenERP"
 #
 # File: bin/openerp.glade, line: 8990
 # File: bin/openerp.glade, line: 8990
+# File: bin/openerp.glade, line: 7005
 # File: bin/openerp.glade, line: 7005
 msgid ""
 "This is the password of the user that have the rights to administer "
@@ -3294,11 +3839,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 9026
 # File: bin/openerp.glade, line: 9026
 # File: bin/openerp.glade, line: 7041
+# File: bin/openerp.glade, line: 7041
 msgid "(<i>admin</i>, by default)"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 9091
 # File: bin/openerp.glade, line: 9091
+# File: bin/openerp.glade, line: 7106
 # File: bin/openerp.glade, line: 7106
 msgid ""
 "Choose the name of the database that will be created. The name must not "
@@ -3308,12 +3855,14 @@ msgstr ""
 # File: bin/openerp.glade, line: 9093
 # File: bin/openerp.glade, line: 9093
 # File: bin/openerp.glade, line: 7108
+# File: bin/openerp.glade, line: 7108
 #, fuzzy
 msgid "New Database Name:"
 msgstr "Zgjedhe daten"
 #
 # File: bin/openerp.glade, line: 9117
 # File: bin/openerp.glade, line: 9117
+# File: bin/openerp.glade, line: 7132
 # File: bin/openerp.glade, line: 7132
 msgid ""
 "Choose the default language that will be installed for this database. You "
@@ -3324,12 +3873,14 @@ msgstr ""
 # File: bin/openerp.glade, line: 9119
 # File: bin/openerp.glade, line: 9119
 # File: bin/openerp.glade, line: 7134
+# File: bin/openerp.glade, line: 7134
 #, fuzzy
 msgid "Default Language:"
 msgstr "Vlera Definuar:"
 #
 # File: bin/openerp.glade, line: 9132
 # File: bin/openerp.glade, line: 9132
+# File: bin/openerp.glade, line: 7147
 # File: bin/openerp.glade, line: 7147
 msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
@@ -3339,11 +3890,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 9134
 # File: bin/openerp.glade, line: 9134
 # File: bin/openerp.glade, line: 7149
+# File: bin/openerp.glade, line: 7149
 msgid "Administrator Password:"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 9146
 # File: bin/openerp.glade, line: 9146
+# File: bin/openerp.glade, line: 7161
 # File: bin/openerp.glade, line: 7161
 msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
@@ -3353,12 +3906,14 @@ msgstr ""
 # File: bin/openerp.glade, line: 9148
 # File: bin/openerp.glade, line: 9148
 # File: bin/openerp.glade, line: 7163
+# File: bin/openerp.glade, line: 7163
 #, fuzzy
 msgid "Confirm Password:"
 msgstr "Shifra:"
 #
 # File: bin/openerp.glade, line: 9239
 # File: bin/openerp.glade, line: 9239
+# File: bin/openerp.glade, line: 7254
 # File: bin/openerp.glade, line: 7254
 msgid ""
 "Check this box if you want demonstration data to be installed on your new "
@@ -3369,11 +3924,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 9242
 # File: bin/openerp.glade, line: 9242
 # File: bin/openerp.glade, line: 7257
+# File: bin/openerp.glade, line: 7257
 msgid "Load Demonstration Data:"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 9299
 # File: bin/openerp.glade, line: 9299
+# File: bin/openerp.glade, line: 7314
 # File: bin/openerp.glade, line: 7314
 #, fuzzy
 msgid "Change password"
@@ -3382,12 +3939,14 @@ msgstr "Ndrro Rrenjen"
 # File: bin/openerp.glade, line: 9316
 # File: bin/openerp.glade, line: 9316
 # File: bin/openerp.glade, line: 7331
+# File: bin/openerp.glade, line: 7331
 #, fuzzy
 msgid "<b>Change your super admin password</b>"
 msgstr "Shifra:"
 #
 # File: bin/openerp.glade, line: 9469
 # File: bin/openerp.glade, line: 9469
+# File: bin/openerp.glade, line: 7484
 # File: bin/openerp.glade, line: 7484
 #, fuzzy
 msgid "Old password:"
@@ -3396,12 +3955,14 @@ msgstr "Shifra:"
 # File: bin/openerp.glade, line: 9482
 # File: bin/openerp.glade, line: 9482
 # File: bin/openerp.glade, line: 7497
+# File: bin/openerp.glade, line: 7497
 #, fuzzy
 msgid "New password:"
 msgstr "Shifra:"
 #
 # File: bin/openerp.glade, line: 9495
 # File: bin/openerp.glade, line: 9495
+# File: bin/openerp.glade, line: 7510
 # File: bin/openerp.glade, line: 7510
 #, fuzzy
 msgid "New password confirmation:"
@@ -3410,6 +3971,7 @@ msgstr "Shifra:"
 # File: bin/openerp.glade, line: 9554
 # File: bin/openerp.glade, line: 9554
 # File: bin/openerp.glade, line: 7569
+# File: bin/openerp.glade, line: 7569
 #, fuzzy
 msgid "OpenERP Message"
 msgstr "OpenERP licensa"
@@ -3417,17 +3979,20 @@ msgstr "OpenERP licensa"
 # File: bin/openerp.glade, line: 9633
 # File: bin/openerp.glade, line: 9633
 # File: bin/openerp.glade, line: 7648
+# File: bin/openerp.glade, line: 7648
 msgid "Database creation"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 9666
 # File: bin/openerp.glade, line: 9666
 # File: bin/openerp.glade, line: 7681
+# File: bin/openerp.glade, line: 7681
 msgid "<b>Database created successfully!</b>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 9698
 # File: bin/openerp.glade, line: 9698
+# File: bin/openerp.glade, line: 7713
 # File: bin/openerp.glade, line: 7713
 msgid ""
 "You can connect to the new database using one of the following account:\n"
@@ -3438,17 +4003,20 @@ msgstr ""
 # File: bin/openerp.glade, line: 9826
 # File: bin/openerp.glade, line: 9826
 # File: bin/openerp.glade, line: 7841
+# File: bin/openerp.glade, line: 7841
 msgid "Extension Manager"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 9930
 # File: bin/openerp.glade, line: 9930
 # File: bin/openerp.glade, line: 7945
+# File: bin/openerp.glade, line: 7945
 msgid "Concurrency exception"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 9955
 # File: bin/openerp.glade, line: 9955
+# File: bin/openerp.glade, line: 7970
 # File: bin/openerp.glade, line: 7970
 msgid ""
 "<b>\n"
@@ -3464,11 +4032,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 10018
 # File: bin/openerp.glade, line: 10018
 # File: bin/openerp.glade, line: 8033
+# File: bin/openerp.glade, line: 8033
 msgid "Compare"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 10064
 # File: bin/openerp.glade, line: 10064
+# File: bin/openerp.glade, line: 8079
 # File: bin/openerp.glade, line: 8079
 msgid "Write anyway"
 msgstr ""
@@ -3476,11 +4046,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 10093
 # File: bin/openerp.glade, line: 10093
 # File: bin/openerp.glade, line: 8108
+# File: bin/openerp.glade, line: 8108
 msgid "window1"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 10165
 # File: bin/openerp.glade, line: 10165
+# File: bin/openerp.glade, line: 8180
 # File: bin/openerp.glade, line: 8180
 msgid "Today"
 msgstr ""
@@ -3488,11 +4060,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 10211
 # File: bin/openerp.glade, line: 10211
 # File: bin/openerp.glade, line: 8226
+# File: bin/openerp.glade, line: 8226
 msgid "September 2008"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 10225
 # File: bin/openerp.glade, line: 10225
+# File: bin/openerp.glade, line: 8240
 # File: bin/openerp.glade, line: 8240
 msgid "Day"
 msgstr ""
@@ -3500,23 +4074,28 @@ msgstr ""
 # File: bin/openerp.glade, line: 10249
 # File: bin/openerp.glade, line: 10249
 # File: bin/openerp.glade, line: 8264
+# File: bin/openerp.glade, line: 8264
 msgid "Month"
 msgstr ""
 #
+# File: bin/win_error.glade, line: 40
 # File: bin/win_error.glade, line: 40
 msgid "label"
 msgstr ""
 #
 # File: bin/win_error.glade, line: 102
+# File: bin/win_error.glade, line: 102
 msgid "Click here for details about the maintenance proposition"
 msgstr ""
 #
+# File: bin/win_error.glade, line: 119
 # File: bin/win_error.glade, line: 119
 msgid "<i>_Maintenance</i>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 3301
 # File: bin/openerp.glade, line: 3301
+# File: bin/win_error.glade, line: 150
 # File: bin/win_error.glade, line: 150
 msgid ""
 "<b>Maintenance Contract.</b>\n"
@@ -3531,6 +4110,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 3362
 # File: bin/openerp.glade, line: 4205
 # File: bin/win_error.glade, line: 184
+# File: bin/win_error.glade, line: 184
 #, fuzzy
 msgid "Explain what you did:"
 msgstr "Pershkruja se cfare ka ndodhe: "
@@ -3540,12 +4120,14 @@ msgstr "Pershkruja se cfare ka ndodhe: "
 # File: bin/openerp.glade, line: 3376
 # File: bin/openerp.glade, line: 4191
 # File: bin/win_error.glade, line: 196
+# File: bin/win_error.glade, line: 196
 #, fuzzy
 msgid "Others Comments:"
 msgstr "Verejtje Tjera: "
 #
 # File: bin/openerp.glade, line: 3460
 # File: bin/openerp.glade, line: 3460
+# File: bin/win_error.glade, line: 278
 # File: bin/win_error.glade, line: 278
 msgid "Send to Maintenance Team"
 msgstr ""
@@ -3554,6 +4136,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 4304
 # File: bin/openerp.glade, line: 3534
 # File: bin/openerp.glade, line: 4304
+# File: bin/win_error.glade, line: 326
 # File: bin/win_error.glade, line: 326
 #, fuzzy
 msgid "<i>_Support Request</i>"
@@ -3566,6 +4149,7 @@ msgstr "<b>Kerkesa Perkrahese</b>"
 # File: bin/openerp.glade, line: 3648
 # File: bin/openerp.glade, line: 3926
 # File: bin/win_error.glade, line: 353
+# File: bin/win_error.glade, line: 353
 #, fuzzy
 msgid "Details"
 msgstr "Detalet"
@@ -3577,14 +4161,17 @@ msgstr "Detalet"
 # File: bin/openerp.glade, line: 3648
 # File: bin/openerp.glade, line: 3926
 # File: bin/win_error.glade, line: 369
+# File: bin/win_error.glade, line: 369
 #, fuzzy
 msgid "<i>_Details</i>"
 msgstr "Detalet"
 #
 # File: bin/win_error.glade, line: 398
+# File: bin/win_error.glade, line: 398
 msgid "gtk-close"
 msgstr ""
 #
+# File: bin/dia_survey.glade, line: 32
 # File: bin/dia_survey.glade, line: 32
 msgid ""
 "Please fill in the following form in order to help us to improve <b><span "
@@ -3595,6 +4182,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 6065
 # File: bin/openerp.glade, line: 6065
 # File: bin/dia_survey.glade, line: 56
+# File: bin/dia_survey.glade, line: 56
 #, fuzzy
 msgid "<b>Your company</b>"
 msgstr "<b>Kompania juaj: </b>"
@@ -3602,11 +4190,13 @@ msgstr "<b>Kompania juaj: </b>"
 # File: bin/openerp.glade, line: 5791
 # File: bin/openerp.glade, line: 5791
 # File: bin/dia_survey.glade, line: 84
+# File: bin/dia_survey.glade, line: 84
 msgid "Open Source:"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 6304
 # File: bin/openerp.glade, line: 6304
+# File: bin/dia_survey.glade, line: 537
 # File: bin/dia_survey.glade, line: 537
 #, fuzzy
 msgid "Your Company:"
@@ -3615,22 +4205,26 @@ msgstr "<b>Kompania juaj: </b>"
 # File: bin/openerp.glade, line: 6051
 # File: bin/openerp.glade, line: 6051
 # File: bin/dia_survey.glade, line: 548
+# File: bin/dia_survey.glade, line: 548
 msgid "Industry:"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 5937
 # File: bin/openerp.glade, line: 5937
 # File: bin/dia_survey.glade, line: 561
+# File: bin/dia_survey.glade, line: 561
 #, fuzzy
 msgid "Your Role:"
 msgstr "Zgjedhjet e juaja:"
 #
+# File: bin/dia_survey.glade, line: 574
 # File: bin/dia_survey.glade, line: 574
 msgid "Employees:"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 5953
 # File: bin/openerp.glade, line: 5953
+# File: bin/dia_survey.glade, line: 587
 # File: bin/dia_survey.glade, line: 587
 #, fuzzy
 msgid "Country:"
@@ -3639,12 +4233,14 @@ msgstr "Ora :"
 # File: bin/openerp.glade, line: 5953
 # File: bin/openerp.glade, line: 5953
 # File: bin/dia_survey.glade, line: 600
+# File: bin/dia_survey.glade, line: 600
 #, fuzzy
 msgid "City:"
 msgstr "Ora :"
 #
 # File: bin/openerp.glade, line: 5887
 # File: bin/openerp.glade, line: 5887
+# File: bin/dia_survey.glade, line: 627
 # File: bin/dia_survey.glade, line: 627
 #, fuzzy
 msgid "System:"
@@ -3653,6 +4249,7 @@ msgstr "Gjendja:"
 # File: bin/openerp.glade, line: 6166
 # File: bin/openerp.glade, line: 6166
 # File: bin/dia_survey.glade, line: 681
+# File: bin/dia_survey.glade, line: 681
 #, fuzzy
 msgid "<b>Your interrest</b>"
 msgstr "<b>Emri juaj: </b>"
@@ -3660,17 +4257,21 @@ msgstr "<b>Emri juaj: </b>"
 # File: bin/openerp.glade, line: 5831
 # File: bin/openerp.glade, line: 5831
 # File: bin/dia_survey.glade, line: 713
+# File: bin/dia_survey.glade, line: 713
 msgid "How did you hear about us:"
 msgstr ""
 #
+# File: bin/dia_survey.glade, line: 750
 # File: bin/dia_survey.glade, line: 750
 msgid "We plan to use Open ERP"
 msgstr ""
 #
 # File: bin/dia_survey.glade, line: 764
+# File: bin/dia_survey.glade, line: 764
 msgid "We plan to offer services on Open ERP"
 msgstr ""
 #
+# File: bin/dia_survey.glade, line: 800
 # File: bin/dia_survey.glade, line: 800
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
@@ -3678,9 +4279,11 @@ msgstr ""
 # File: bin/openerp.glade, line: 6318
 # File: bin/openerp.glade, line: 6318
 # File: bin/dia_survey.glade, line: 831
+# File: bin/dia_survey.glade, line: 831
 msgid "<b>Keep Informed</b>"
 msgstr ""
 #
+# File: bin/dia_survey.glade, line: 859
 # File: bin/dia_survey.glade, line: 859
 msgid "I want to receive the Open ERP ebook (PDF) by email"
 msgstr ""
@@ -3688,10 +4291,12 @@ msgstr ""
 # File: bin/openerp.glade, line: 6238
 # File: bin/openerp.glade, line: 6238
 # File: bin/dia_survey.glade, line: 886
+# File: bin/dia_survey.glade, line: 886
 #, fuzzy
 msgid "Phone / Mobile:"
 msgstr "Numri Telefonit: "
 #
+# File: bin/dia_survey.glade, line: 899
 # File: bin/dia_survey.glade, line: 899
 msgid "E-mail:"
 msgstr ""
@@ -3699,17 +4304,21 @@ msgstr ""
 # File: bin/openerp.glade, line: 6253
 # File: bin/openerp.glade, line: 6253
 # File: bin/dia_survey.glade, line: 932
+# File: bin/dia_survey.glade, line: 932
 #, fuzzy
 msgid "Your Name:"
 msgstr "Zgjedhjet e juaja:"
 #
 # File: bin/dia_survey.glade, line: 970
+# File: bin/dia_survey.glade, line: 970
 msgid "gtk-cancel"
 msgstr ""
 #
 # File: bin/dia_survey.glade, line: 980
+# File: bin/dia_survey.glade, line: 980
 msgid "gtk-ok"
 msgstr ""
+#
 #
 #
 # File: bin/widget/view/form_gtk/many2one.py, line: 143
@@ -3719,11 +4328,13 @@ msgstr ""
 #~ msgstr "Tjetri: Asnje shenim i zgjedhur!"
 #
 #
+#
 # File: bin/widget/view/form_gtk/many2one.py, line: 157
 # File: bin/widget/view/form_gtk/many2one.py, line: 157
 #, fuzzy
 #~ msgid "Open this record"
 #~ msgstr "Tjetri: Asnje shenim i zgjedhur!"
+#
 #
 #
 # File: bin/openerp.glade, line: 3205
@@ -3736,11 +4347,13 @@ msgstr ""
 #~ msgstr "OpenERP - Gabimi"
 #
 #
+#
 # File: bin/openerp.glade, line: 3334
 # File: bin/openerp.glade, line: 3334
 #, fuzzy
 #~ msgid "<b>Contract name:</b>"
 #~ msgstr "<b>Emri juaj: </b>"
+#
 #
 #
 # File: bin/openerp.glade, line: 3493
@@ -3750,11 +4363,13 @@ msgstr ""
 #~ msgstr "<b>Kerkesa Perkrahese</b>"
 #
 #
+#
 # File: bin/openerp.glade, line: 3693
 # File: bin/openerp.glade, line: 3693
 #, fuzzy
 #~ msgid "<b>_Error</b>"
 #~ msgstr "<b>Kodi gabimit:</b>"
+#
 #
 #
 # File: bin/openerp.glade, line: 3813
@@ -3764,10 +4379,12 @@ msgstr ""
 #~ msgstr "<b>Kodi gabimit:</b>"
 #
 #
+#
 # File: bin/openerp.glade, line: 3827
 # File: bin/openerp.glade, line: 3827
 #~ msgid "<b>Error code:</b>"
 #~ msgstr "<b>Kodi gabimit:</b>"
+#
 #
 #
 # File: bin/openerp.glade, line: 3844
@@ -3780,10 +4397,12 @@ msgstr ""
 #~ "Ju lutem tentoni prape"
 #
 #
+#
 # File: bin/openerp.glade, line: 3867
 # File: bin/openerp.glade, line: 3867
 #~ msgid "<i>Click on the Support Request tab if you need more help !</i>"
 #~ msgstr "<i>Kliko ne Tabin e kerkesave per ndihme nese ju nevojitet !</i>"
+#
 #
 #
 # File: bin/openerp.glade, line: 3886
@@ -3791,6 +4410,7 @@ msgstr ""
 #, fuzzy
 #~ msgid "De_scription"
 #~ msgstr "Pershkrimi"
+#
 #
 #
 # File: bin/openerp.glade, line: 3954
@@ -3811,11 +4431,13 @@ msgstr ""
 #~ "</i>"
 #
 #
+#
 # File: bin/openerp.glade, line: 4014
 # File: bin/openerp.glade, line: 4014
 #, fuzzy
 #~ msgid "Phone Number:"
 #~ msgstr "Numri Telefonit: "
+#
 #
 #
 # File: bin/openerp.glade, line: 4074
@@ -3825,10 +4447,12 @@ msgstr ""
 #~ msgstr "<b>Kerkesa Perkrahese</b>"
 #
 #
+#
 # File: bin/openerp.glade, line: 4113
 # File: bin/openerp.glade, line: 4113
 #~ msgid "Send Support Request"
 #~ msgstr "Dergo Kerkesen Perkrahjes"
+#
 #
 #
 # File: bin/openerp.glade, line: 4244
@@ -3838,11 +4462,13 @@ msgstr ""
 #~ msgstr "<b>Emaili juaj: </b>"
 #
 #
+#
 # File: bin/openerp.glade, line: 5440
 # File: bin/openerp.glade, line: 5440
 #, fuzzy
 #~ msgid "OpenERP Survey"
 #~ msgstr "OpenERP"
+#
 #
 #
 # File: bin/openerp.glade, line: 5456
@@ -3853,9 +4479,11 @@ msgstr ""
 #
 #
 #
+#
 #, fuzzy
 #~ msgid "_Theme"
 #~ msgstr "Pema"
+#
 #
 #
 #
@@ -3865,9 +4493,11 @@ msgstr ""
 #
 #
 #
+#
 #, fuzzy
 #~ msgid "Default Theme"
 #~ msgstr "Vlera Definuar:"
+#
 #
 #
 #
@@ -3877,9 +4507,11 @@ msgstr ""
 #
 #
 #
+#
 #, fuzzy
 #~ msgid "Reload / Undo Form"
 #~ msgstr "Ri_Lexo"
+#
 #
 #
 #
@@ -3888,8 +4520,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "OpenERP - Filter"
 #~ msgstr "OpenERP - Filtrat"
+#
 #
 #
 #
@@ -3899,9 +4533,11 @@ msgstr ""
 #
 #
 #
+#
 #, fuzzy
 #~ msgid "on _field:"
 #~ msgstr "ne fushen:"
+#
 #
 #
 #
@@ -3911,9 +4547,11 @@ msgstr ""
 #
 #
 #
+#
 #, fuzzy
 #~ msgid "Filter:"
 #~ msgstr "Filtri:"
+#
 #
 #
 #
@@ -3923,9 +4561,11 @@ msgstr ""
 #
 #
 #
+#
 #, fuzzy
 #~ msgid "N_ONE"
 #~ msgstr "ASNJE"
+#
 #
 #
 #
@@ -3934,8 +4574,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Set to _Default"
 #~ msgstr "Vendosi _Definuarat"
+#
 #
 #
 #
@@ -3944,8 +4586,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "-"
 #~ msgstr "-"
+#
 #
 #
 #
@@ -3954,13 +4598,16 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Search with this name"
 #~ msgstr "Kerko me kete emer"
 #
 #
 #
+#
 #~ msgid "Clear the field"
 #~ msgstr "Pastro fushen"
+#
 #
 #
 #
@@ -3975,13 +4622,16 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "OpenERP - Attachment"
 #~ msgstr "OpenERP - Bashkangjitja"
 #
 #
 #
+#
 #~ msgid "Filename:"
 #~ msgstr "Emri fajllit:"
+#
 #
 #
 #
@@ -3991,8 +4641,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "OpenERP - Ressource Edit"
 #~ msgstr "OpenERP - Resurs Azhuruesi"
+#
 #
 #
 #
@@ -4001,14 +4653,17 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "OpenERP - Date & Time selection"
 #~ msgstr "OpenERP - Zgjedhja e Dates dhe Kohes"
+#
 #
 #
 #
 #, fuzzy
 #~ msgid "Company:"
 #~ msgstr "Domeni:"
+#
 #
 #
 #

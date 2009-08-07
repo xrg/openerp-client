@@ -22,9 +22,11 @@ msgstr ""
 # File: bin/modules/action/main.py, line: 46
 # File: bin/modules/action/main.py, line: 46
 # File: bin/modules/action/main.py, line: 46
+# File: bin/modules/action/main.py, line: 46
 msgid "Nothing to print!"
 msgstr "Печатать нечего !"
 #
+# File: bin/modules/action/main.py, line: 63
 # File: bin/modules/action/main.py, line: 63
 # File: bin/modules/action/main.py, line: 63
 # File: bin/modules/action/main.py, line: 63
@@ -38,9 +40,12 @@ msgstr "Слишком длинная задержка, печать отмен�
 # File: bin/modules/action/main.py, line: 178
 # File: bin/modules/action/main.py, line: 179
 # File: bin/modules/action/main.py, line: 177
+# File: bin/modules/action/main.py, line: 177
 msgid "Select your action"
 msgstr "Выберите действие"
 #
+# File: bin/modules/action/wizard.py, line: 137
+# File: bin/modules/gui/main.py, line: 172
 # File: bin/modules/action/wizard.py, line: 137
 # File: bin/modules/gui/main.py, line: 172
 msgid "OpenERP Computing"
@@ -50,6 +55,8 @@ msgstr ""
 # File: bin/modules/action/wizard.py, line: 143
 # File: bin/modules/action/wizard.py, line: 143
 # File: bin/modules/action/wizard.py, line: 143
+# File: bin/modules/action/wizard.py, line: 147
+# File: bin/modules/gui/main.py, line: 183
 # File: bin/modules/action/wizard.py, line: 147
 # File: bin/modules/gui/main.py, line: 183
 msgid "Operation in progress"
@@ -63,6 +70,9 @@ msgstr "Действие выполняется"
 # File: bin/modules/gui/main.py, line: 340
 # File: bin/modules/gui/main.py, line: 353
 # File: bin/modules/action/wizard.py, line: 147
+# File: bin/modules/action/wizard.py, line: 151
+# File: bin/modules/gui/main.py, line: 187
+# File: bin/modules/gui/main.py, line: 639
 # File: bin/modules/action/wizard.py, line: 151
 # File: bin/modules/gui/main.py, line: 187
 # File: bin/modules/gui/main.py, line: 639
@@ -81,6 +91,9 @@ msgstr ""
 # File: bin/rpc.py, line: 141
 # File: bin/rpc.py, line: 142
 # File: bin/modules/action/wizard.py, line: 171
+# File: bin/modules/action/wizard.py, line: 175
+# File: bin/modules/gui/main.py, line: 210
+# File: bin/rpc.py, line: 140
 # File: bin/modules/action/wizard.py, line: 175
 # File: bin/modules/gui/main.py, line: 210
 # File: bin/rpc.py, line: 140
@@ -114,6 +127,13 @@ msgstr "В соединении отказано!"
 # File: bin/modules/gui/main.py, line: 224
 # File: bin/rpc.py, line: 186
 # File: bin/rpc.py, line: 188
+# File: bin/modules/action/wizard.py, line: 187
+# File: bin/modules/action/wizard.py, line: 193
+# File: bin/modules/action/wizard.py, line: 195
+# File: bin/modules/gui/main.py, line: 218
+# File: bin/modules/gui/main.py, line: 224
+# File: bin/rpc.py, line: 186
+# File: bin/rpc.py, line: 188
 msgid "Application Error"
 msgstr "Ошибка приложения"
 #
@@ -125,6 +145,8 @@ msgstr "Ошибка приложения"
 # File: bin/rpc.py, line: 189
 # File: bin/rpc.py, line: 190
 # File: bin/modules/action/wizard.py, line: 191
+# File: bin/modules/action/wizard.py, line: 195
+# File: bin/rpc.py, line: 188
 # File: bin/modules/action/wizard.py, line: 195
 # File: bin/rpc.py, line: 188
 msgid "View details"
@@ -141,6 +163,9 @@ msgstr "Просмотреть детали"
 # File: bin/modules/gui/main.py, line: 87
 # File: bin/modules/gui/main.py, line: 436
 # File: bin/modules/gui/main.py, line: 1445
+# File: bin/modules/gui/main.py, line: 87
+# File: bin/modules/gui/main.py, line: 436
+# File: bin/modules/gui/main.py, line: 1445
 msgid "Could not connect to server !"
 msgstr "Невозможно соединиться с сервером !"
 #
@@ -149,6 +174,12 @@ msgstr "Невозможно соединиться с сервером !"
 # File: bin/openerp.glade, line: 7362
 # File: bin/openerp.glade, line: 7684
 # File: bin/openerp.glade, line: 8329
+# File: bin/modules/gui/main.py, line: 91
+# File: bin/openerp.glade, line: 72
+# File: bin/openerp.glade, line: 6270
+# File: bin/openerp.glade, line: 6506
+# File: bin/openerp.glade, line: 6828
+# File: bin/openerp.glade, line: 7473
 # File: bin/modules/gui/main.py, line: 91
 # File: bin/openerp.glade, line: 72
 # File: bin/openerp.glade, line: 6270
@@ -184,14 +215,23 @@ msgstr "Сервер:"
 # File: bin/openerp.glade, line: 6785
 # File: bin/openerp.glade, line: 7082
 # File: bin/openerp.glade, line: 7430
+# File: bin/modules/gui/main.py, line: 102
+# File: bin/openerp.glade, line: 98
+# File: bin/openerp.glade, line: 6542
+# File: bin/openerp.glade, line: 6785
+# File: bin/openerp.glade, line: 7082
+# File: bin/openerp.glade, line: 7430
 msgid "Change"
 msgstr "Сменить"
 #
 # File: bin/modules/gui/main.py, line: 109
 # File: bin/openerp.glade, line: 7009
+# File: bin/modules/gui/main.py, line: 109
+# File: bin/openerp.glade, line: 7009
 msgid "Super Administrator Password:"
 msgstr ""
 #
+# File: bin/modules/gui/main.py, line: 240
 # File: bin/modules/gui/main.py, line: 240
 msgid "Migration Scripts"
 msgstr ""
@@ -200,6 +240,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 1890
 # File: bin/openerp.glade, line: 1890
 # File: bin/openerp.glade, line: 1906
+# File: bin/modules/gui/main.py, line: 243
 # File: bin/modules/gui/main.py, line: 243
 #, fuzzy
 msgid "Contract ID:"
@@ -210,14 +251,17 @@ msgstr "_Контакт"
 # File: bin/openerp.glade, line: 372
 # File: bin/openerp.glade, line: 372
 # File: bin/modules/gui/main.py, line: 249
+# File: bin/modules/gui/main.py, line: 249
 #, fuzzy
 msgid "Contract Password:"
 msgstr "Пароль администратора"
 #
 # File: bin/modules/gui/main.py, line: 264
+# File: bin/modules/gui/main.py, line: 264
 msgid "You already have the latest version"
 msgstr ""
 #
+# File: bin/modules/gui/main.py, line: 269
 # File: bin/modules/gui/main.py, line: 269
 msgid "The following updates are available:"
 msgstr ""
@@ -235,6 +279,7 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 374
 # File: bin/modules/gui/main.py, line: 376
 # File: bin/modules/gui/main.py, line: 281
+# File: bin/modules/gui/main.py, line: 281
 #, fuzzy
 msgid "You can now migrate your databases."
 msgstr "Невозможно создать базу данных."
@@ -244,18 +289,22 @@ msgstr "Невозможно создать базу данных."
 # File: bin/openerp.glade, line: 8872
 # File: bin/openerp.glade, line: 7743
 # File: bin/modules/gui/main.py, line: 286
+# File: bin/modules/gui/main.py, line: 286
 #, fuzzy
 msgid "Migrate Database"
 msgstr "Создать новую базу данных"
 #
 # File: bin/modules/gui/main.py, line: 315
+# File: bin/modules/gui/main.py, line: 315
 msgid "Your database has been upgraded."
 msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 317
+# File: bin/modules/gui/main.py, line: 317
 msgid "Your databases have been upgraded."
 msgstr ""
 #
+# File: bin/modules/gui/main.py, line: 432
 # File: bin/modules/gui/main.py, line: 432
 msgid "Unknown"
 msgstr ""
@@ -270,9 +319,12 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 1161
 # File: bin/modules/gui/main.py, line: 443
 # File: bin/modules/gui/main.py, line: 1449
+# File: bin/modules/gui/main.py, line: 443
+# File: bin/modules/gui/main.py, line: 1449
 msgid "No database found, you must create one !"
 msgstr "База данный не найдена, надо создать !"
 #
+# File: bin/modules/gui/main.py, line: 467
 # File: bin/modules/gui/main.py, line: 467
 #, python-format
 msgid ""
@@ -280,6 +332,7 @@ msgid ""
 "may not work properly. Use it at your own risks."
 msgstr ""
 #
+# File: bin/modules/gui/main.py, line: 595
 # File: bin/modules/gui/main.py, line: 595
 msgid "Sorry,'"
 msgstr ""
@@ -294,6 +347,8 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 312
 # File: bin/modules/gui/main.py, line: 595
 # File: bin/modules/gui/main.py, line: 598
+# File: bin/modules/gui/main.py, line: 595
+# File: bin/modules/gui/main.py, line: 598
 msgid "Bad database name !"
 msgstr "Неправильное название базы данных !"
 #
@@ -301,6 +356,7 @@ msgstr "Неправильное название базы данных !"
 # File: bin/modules/gui/main.py, line: 299
 # File: bin/modules/gui/main.py, line: 299
 # File: bin/modules/gui/main.py, line: 312
+# File: bin/modules/gui/main.py, line: 598
 # File: bin/modules/gui/main.py, line: 598
 msgid ""
 "The database name must contain only normal characters or \"_\".\n"
@@ -310,6 +366,7 @@ msgstr ""
 "Нельзя использовать умляуты, пробелы и специальные символыю"
 #
 # File: bin/modules/gui/main.py, line: 626
+# File: bin/modules/gui/main.py, line: 626
 msgid "OpenERP Database Installation"
 msgstr ""
 #
@@ -317,6 +374,7 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 336
 # File: bin/modules/gui/main.py, line: 336
 # File: bin/modules/gui/main.py, line: 349
+# File: bin/modules/gui/main.py, line: 635
 # File: bin/modules/gui/main.py, line: 635
 msgid "<b>Operation in progress</b>"
 msgstr "<b>Действие выполняется</b>"
@@ -336,6 +394,9 @@ msgstr "<b>Действие выполняется</b>"
 # File: bin/modules/gui/main.py, line: 658
 # File: bin/modules/gui/main.py, line: 660
 # File: bin/modules/gui/main.py, line: 662
+# File: bin/modules/gui/main.py, line: 658
+# File: bin/modules/gui/main.py, line: 660
+# File: bin/modules/gui/main.py, line: 662
 msgid "Could not create database."
 msgstr "Невозможно создать базу данных."
 #
@@ -343,6 +404,7 @@ msgstr "Невозможно создать базу данных."
 # File: bin/modules/gui/main.py, line: 359
 # File: bin/modules/gui/main.py, line: 359
 # File: bin/modules/gui/main.py, line: 372
+# File: bin/modules/gui/main.py, line: 658
 # File: bin/modules/gui/main.py, line: 658
 msgid "Database already exists !"
 msgstr "База данных уже существует !"
@@ -364,6 +426,10 @@ msgstr "База данных уже существует !"
 # File: bin/modules/gui/main.py, line: 1342
 # File: bin/modules/gui/main.py, line: 1361
 # File: bin/modules/gui/main.py, line: 1437
+# File: bin/modules/gui/main.py, line: 660
+# File: bin/modules/gui/main.py, line: 1342
+# File: bin/modules/gui/main.py, line: 1361
+# File: bin/modules/gui/main.py, line: 1437
 msgid "Bad database administrator password !"
 msgstr "Неправильный пароль администратора базы данных !"
 #
@@ -377,6 +443,8 @@ msgstr "Неправильный пароль администратора ба�
 # File: bin/modules/gui/main.py, line: 383
 # File: bin/modules/gui/main.py, line: 662
 # File: bin/modules/gui/main.py, line: 669
+# File: bin/modules/gui/main.py, line: 662
+# File: bin/modules/gui/main.py, line: 669
 msgid "Error during database creation !"
 msgstr "Ошибка при создании базы данных !"
 #
@@ -384,6 +452,7 @@ msgstr "Ошибка при создании базы данных !"
 # File: bin/modules/gui/main.py, line: 370
 # File: bin/modules/gui/main.py, line: 370
 # File: bin/modules/gui/main.py, line: 383
+# File: bin/modules/gui/main.py, line: 669
 # File: bin/modules/gui/main.py, line: 669
 msgid ""
 "The server crashed during installation.\n"
@@ -397,6 +466,7 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 388
 # File: bin/modules/gui/main.py, line: 401
 # File: bin/modules/gui/main.py, line: 687
+# File: bin/modules/gui/main.py, line: 687
 msgid "The following users have been installed on your database:"
 msgstr "Следующие учетные записи были созданы для вашей базы данных:"
 #
@@ -404,6 +474,7 @@ msgstr "Следующие учетные записи были созданы �
 # File: bin/modules/gui/main.py, line: 388
 # File: bin/modules/gui/main.py, line: 388
 # File: bin/modules/gui/main.py, line: 401
+# File: bin/modules/gui/main.py, line: 687
 # File: bin/modules/gui/main.py, line: 687
 msgid "You can now connect to the database as an administrator."
 msgstr "Теперь вы можете подключиться к базе данных как администратор."
@@ -418,6 +489,8 @@ msgstr "Теперь вы можете подключиться к базе да
 # File: bin/modules/gui/main.py, line: 775
 # File: bin/modules/gui/main.py, line: 731
 # File: bin/modules/gui/main.py, line: 1064
+# File: bin/modules/gui/main.py, line: 731
+# File: bin/modules/gui/main.py, line: 1064
 msgid "Press Ctrl+O to login"
 msgstr "Нажмите <Ctrl+O> для подключения"
 #
@@ -426,6 +499,7 @@ msgstr "Нажмите <Ctrl+O> для подключения"
 # File: bin/modules/gui/main.py, line: 605
 # File: bin/modules/gui/main.py, line: 617
 # File: bin/modules/gui/main.py, line: 906
+# File: bin/modules/gui/main.py, line: 906
 msgid "Edit"
 msgstr "Изменить"
 #
@@ -433,6 +507,7 @@ msgstr "Изменить"
 # File: bin/modules/gui/main.py, line: 694
 # File: bin/modules/gui/main.py, line: 694
 # File: bin/modules/gui/main.py, line: 706
+# File: bin/modules/gui/main.py, line: 995
 # File: bin/modules/gui/main.py, line: 995
 #, python-format
 msgid "%s request(s)"
@@ -443,6 +518,7 @@ msgstr "%s запрос(ов)"
 # File: bin/modules/gui/main.py, line: 696
 # File: bin/modules/gui/main.py, line: 708
 # File: bin/modules/gui/main.py, line: 997
+# File: bin/modules/gui/main.py, line: 997
 msgid "No request"
 msgstr "Запросов нет"
 #
@@ -450,6 +526,7 @@ msgstr "Запросов нет"
 # File: bin/modules/gui/main.py, line: 698
 # File: bin/modules/gui/main.py, line: 698
 # File: bin/modules/gui/main.py, line: 710
+# File: bin/modules/gui/main.py, line: 999
 # File: bin/modules/gui/main.py, line: 999
 #, python-format
 msgid " - %s request(s) sended"
@@ -459,6 +536,7 @@ msgstr " Отправлено   - %s запросов"
 # File: bin/modules/gui/main.py, line: 734
 # File: bin/modules/gui/main.py, line: 734
 # File: bin/modules/gui/main.py, line: 746
+# File: bin/modules/gui/main.py, line: 1035
 # File: bin/modules/gui/main.py, line: 1035
 msgid ""
 "Connection error !\n"
@@ -471,6 +549,7 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 736
 # File: bin/modules/gui/main.py, line: 736
 # File: bin/modules/gui/main.py, line: 748
+# File: bin/modules/gui/main.py, line: 1037
 # File: bin/modules/gui/main.py, line: 1037
 #, fuzzy
 msgid ""
@@ -485,6 +564,7 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 761
 # File: bin/modules/gui/main.py, line: 773
 # File: bin/modules/gui/main.py, line: 1062
+# File: bin/modules/gui/main.py, line: 1062
 msgid "Not logged !"
 msgstr "Отключен !"
 #
@@ -492,6 +572,7 @@ msgstr "Отключен !"
 # File: bin/modules/gui/main.py, line: 833
 # File: bin/modules/gui/main.py, line: 833
 # File: bin/modules/gui/main.py, line: 849
+# File: bin/modules/gui/main.py, line: 1138
 # File: bin/modules/gui/main.py, line: 1138
 msgid ""
 "You can not log into the system !\n"
@@ -512,6 +593,8 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 888
 # File: bin/modules/gui/main.py, line: 1170
 # File: bin/modules/gui/main.py, line: 1177
+# File: bin/modules/gui/main.py, line: 1170
+# File: bin/modules/gui/main.py, line: 1177
 msgid "Do you really want to quit ?"
 msgstr "Вы подтверждаете выход?"
 #
@@ -519,6 +602,7 @@ msgstr "Вы подтверждаете выход?"
 # File: bin/modules/gui/main.py, line: 927
 # File: bin/modules/gui/main.py, line: 927
 # File: bin/modules/gui/main.py, line: 943
+# File: bin/modules/gui/main.py, line: 1232
 # File: bin/modules/gui/main.py, line: 1232
 #, python-format
 msgid "Attachments (%d)"
@@ -529,6 +613,7 @@ msgstr "Вложения (%d)"
 # File: bin/modules/gui/main.py, line: 940
 # File: bin/modules/gui/main.py, line: 956
 # File: bin/modules/gui/main.py, line: 1245
+# File: bin/modules/gui/main.py, line: 1245
 msgid "Attachments"
 msgstr "Вложения"
 #
@@ -536,6 +621,7 @@ msgstr "Вложения"
 # File: bin/modules/gui/main.py, line: 1035
 # File: bin/modules/gui/main.py, line: 1035
 # File: bin/modules/gui/main.py, line: 1051
+# File: bin/modules/gui/main.py, line: 1333
 # File: bin/modules/gui/main.py, line: 1333
 msgid "Delete a database"
 msgstr "Удалить базу данных"
@@ -545,6 +631,7 @@ msgstr "Удалить базу данных"
 # File: bin/modules/gui/main.py, line: 1041
 # File: bin/modules/gui/main.py, line: 1057
 # File: bin/modules/gui/main.py, line: 1339
+# File: bin/modules/gui/main.py, line: 1339
 msgid "Database dropped successfully !"
 msgstr "База данных успешно сброшена!"
 #
@@ -553,6 +640,7 @@ msgstr "База данных успешно сброшена!"
 # File: bin/modules/gui/main.py, line: 1044
 # File: bin/modules/gui/main.py, line: 1060
 # File: bin/modules/gui/main.py, line: 1342
+# File: bin/modules/gui/main.py, line: 1342
 msgid "Could not drop database."
 msgstr "Невозможно сбросить базу данных"
 #
@@ -560,6 +648,7 @@ msgstr "Невозможно сбросить базу данных"
 # File: bin/modules/gui/main.py, line: 1046
 # File: bin/modules/gui/main.py, line: 1046
 # File: bin/modules/gui/main.py, line: 1062
+# File: bin/modules/gui/main.py, line: 1344
 # File: bin/modules/gui/main.py, line: 1344
 msgid "Couldn't drop database"
 msgstr "Невозможно сбросить базу данных"
@@ -584,6 +673,10 @@ msgstr "Невозможно сбросить базу данных"
 # File: bin/widget/view/form_gtk/image.py, line: 112
 # File: bin/widget/view/form_gtk/url.py, line: 112
 # File: bin/openerp.glade, line: 5893
+# File: bin/modules/gui/main.py, line: 1347
+# File: bin/widget/view/form_gtk/image.py, line: 112
+# File: bin/widget/view/form_gtk/url.py, line: 112
+# File: bin/openerp.glade, line: 5893
 msgid "Open..."
 msgstr "Открыть..."
 #
@@ -591,6 +684,7 @@ msgstr "Открыть..."
 # File: bin/modules/gui/main.py, line: 1060
 # File: bin/modules/gui/main.py, line: 1060
 # File: bin/modules/gui/main.py, line: 1076
+# File: bin/modules/gui/main.py, line: 1358
 # File: bin/modules/gui/main.py, line: 1358
 msgid "Database restored successfully !"
 msgstr "База данных успешно воссстановлена !"
@@ -600,6 +694,7 @@ msgstr "База данных успешно воссстановлена !"
 # File: bin/modules/gui/main.py, line: 1063
 # File: bin/modules/gui/main.py, line: 1079
 # File: bin/modules/gui/main.py, line: 1361
+# File: bin/modules/gui/main.py, line: 1361
 msgid "Could not restore database."
 msgstr "Невозможно восстановить базу данных."
 #
@@ -608,9 +703,11 @@ msgstr "Невозможно восстановить базу данных."
 # File: bin/modules/gui/main.py, line: 1065
 # File: bin/modules/gui/main.py, line: 1081
 # File: bin/modules/gui/main.py, line: 1363
+# File: bin/modules/gui/main.py, line: 1363
 msgid "Couldn't restore database"
 msgstr "Невозможно восстановить базу данных"
 #
+# File: bin/modules/gui/main.py, line: 1402
 # File: bin/modules/gui/main.py, line: 1402
 msgid "Confirmation password does not match new password, operation cancelled!"
 msgstr ""
@@ -620,13 +717,16 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 1100
 # File: bin/modules/gui/main.py, line: 1116
 # File: bin/modules/gui/main.py, line: 1404
+# File: bin/modules/gui/main.py, line: 1404
 msgid "Validation Error."
 msgstr "Ошибка проверки."
 #
 # File: bin/modules/gui/main.py, line: 1412
+# File: bin/modules/gui/main.py, line: 1412
 msgid "Could not change the Super Admin password."
 msgstr ""
 #
+# File: bin/modules/gui/main.py, line: 1413
 # File: bin/modules/gui/main.py, line: 1413
 msgid "Bad password provided !"
 msgstr ""
@@ -635,6 +735,7 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 1111
 # File: bin/modules/gui/main.py, line: 1111
 # File: bin/modules/gui/main.py, line: 1127
+# File: bin/modules/gui/main.py, line: 1415
 # File: bin/modules/gui/main.py, line: 1415
 msgid "Error, password not changed."
 msgstr "Ошибка, пароль не изменен."
@@ -647,6 +748,8 @@ msgstr "Ошибка, пароль не изменен."
 # File: bin/modules/gui/main.py, line: 1134
 # File: bin/modules/gui/main.py, line: 1133
 # File: bin/modules/gui/main.py, line: 1153
+# File: bin/modules/gui/main.py, line: 1421
+# File: bin/modules/gui/main.py, line: 1441
 # File: bin/modules/gui/main.py, line: 1421
 # File: bin/modules/gui/main.py, line: 1441
 msgid "Backup a database"
@@ -677,13 +780,20 @@ msgstr "Резервное копирование базы данных."
 # File: bin/printer/printer.py, line: 212
 # File: bin/widget/view/form_gtk/binary.py, line: 162
 # File: bin/widget/view/form_gtk/image.py, line: 119
+# File: bin/modules/gui/main.py, line: 1424
+# File: bin/modules/gui/window/win_export.py, line: 289
+# File: bin/printer/printer.py, line: 212
+# File: bin/widget/view/form_gtk/binary.py, line: 162
+# File: bin/widget/view/form_gtk/image.py, line: 119
 msgid "Save As..."
 msgstr "Сохранить как..."
 #
 # File: bin/modules/gui/main.py, line: 1434
+# File: bin/modules/gui/main.py, line: 1434
 msgid "Database backed up successfully !"
 msgstr ""
 #
+# File: bin/modules/gui/main.py, line: 1437
 # File: bin/modules/gui/main.py, line: 1437
 msgid "Could not backup the database."
 msgstr ""
@@ -693,9 +803,11 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 1132
 # File: bin/modules/gui/main.py, line: 1151
 # File: bin/modules/gui/main.py, line: 1439
+# File: bin/modules/gui/main.py, line: 1439
 msgid "Couldn't backup database."
 msgstr "Невозможно резервное копирование базы данных."
 #
+# File: bin/modules/gui/window/win_extension.py, line: 115
 # File: bin/modules/gui/window/win_extension.py, line: 115
 msgid "This extension is already defined"
 msgstr ""
@@ -705,15 +817,18 @@ msgstr ""
 # File: bin/modules/gui/window/win_preference.py, line: 69
 # File: bin/modules/gui/window/win_preference.py, line: 69
 # File: bin/modules/gui/window/win_preference.py, line: 69
+# File: bin/modules/gui/window/win_preference.py, line: 69
 msgid "Preference"
 msgstr "Предпочтения"
 #
+# File: bin/modules/gui/window/win_preference.py, line: 80
 # File: bin/modules/gui/window/win_preference.py, line: 80
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
 #
+# File: bin/modules/gui/window/win_preference.py, line: 82
 # File: bin/modules/gui/window/win_preference.py, line: 82
 msgid "Default language modified !"
 msgstr ""
@@ -723,17 +838,21 @@ msgstr ""
 # File: bin/modules/gui/window/__init__.py, line: 33
 # File: bin/modules/gui/window/__init__.py, line: 33
 # File: bin/modules/gui/window/__init__.py, line: 33
+# File: bin/modules/gui/window/__init__.py, line: 33
 msgid "Unknown Window"
 msgstr "Неизвестное окно"
 #
+# File: bin/modules/gui/window/form.py, line: 165
 # File: bin/modules/gui/window/form.py, line: 165
 msgid "Resource ID does not exist for this object!"
 msgstr ""
 #
 # File: bin/modules/gui/window/form.py, line: 221
+# File: bin/modules/gui/window/form.py, line: 221
 msgid "No record selected ! You can only attach to existing record."
 msgstr ""
 #
+# File: bin/modules/gui/window/form.py, line: 233
 # File: bin/modules/gui/window/form.py, line: 233
 msgid "You have to select a record !"
 msgstr ""
@@ -748,6 +867,8 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 215
 # File: bin/modules/gui/window/form.py, line: 239
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 43
+# File: bin/modules/gui/window/form.py, line: 239
+# File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 43
 msgid "ID"
 msgstr "ID"
 #
@@ -755,6 +876,7 @@ msgstr "ID"
 # File: bin/modules/gui/window/form.py, line: 216
 # File: bin/modules/gui/window/form.py, line: 216
 # File: bin/modules/gui/window/form.py, line: 216
+# File: bin/modules/gui/window/form.py, line: 240
 # File: bin/modules/gui/window/form.py, line: 240
 msgid "Creation User"
 msgstr "Создание учетной записи"
@@ -764,6 +886,7 @@ msgstr "Создание учетной записи"
 # File: bin/modules/gui/window/form.py, line: 217
 # File: bin/modules/gui/window/form.py, line: 217
 # File: bin/modules/gui/window/form.py, line: 241
+# File: bin/modules/gui/window/form.py, line: 241
 msgid "Creation Date"
 msgstr "Дата создания"
 #
@@ -771,6 +894,7 @@ msgstr "Дата создания"
 # File: bin/modules/gui/window/form.py, line: 218
 # File: bin/modules/gui/window/form.py, line: 218
 # File: bin/modules/gui/window/form.py, line: 218
+# File: bin/modules/gui/window/form.py, line: 242
 # File: bin/modules/gui/window/form.py, line: 242
 msgid "Latest Modification by"
 msgstr "Автор последнего изменения"
@@ -780,6 +904,7 @@ msgstr "Автор последнего изменения"
 # File: bin/modules/gui/window/form.py, line: 219
 # File: bin/modules/gui/window/form.py, line: 219
 # File: bin/modules/gui/window/form.py, line: 243
+# File: bin/modules/gui/window/form.py, line: 243
 msgid "Latest Modification Date"
 msgstr "Дата последнего изменения"
 #
@@ -787,6 +912,7 @@ msgstr "Дата последнего изменения"
 # File: bin/modules/gui/window/form.py, line: 230
 # File: bin/modules/gui/window/form.py, line: 230
 # File: bin/modules/gui/window/form.py, line: 230
+# File: bin/modules/gui/window/form.py, line: 254
 # File: bin/modules/gui/window/form.py, line: 254
 msgid ""
 "Record is not saved ! \n"
@@ -800,6 +926,7 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 233
 # File: bin/modules/gui/window/form.py, line: 233
 # File: bin/modules/gui/window/form.py, line: 257
+# File: bin/modules/gui/window/form.py, line: 257
 msgid "Are you sure to remove this record ?"
 msgstr "Вы уверены, что хотите удалить текущую запись?"
 #
@@ -808,13 +935,16 @@ msgstr "Вы уверены, что хотите удалить текущую �
 # File: bin/modules/gui/window/form.py, line: 235
 # File: bin/modules/gui/window/form.py, line: 235
 # File: bin/modules/gui/window/form.py, line: 259
+# File: bin/modules/gui/window/form.py, line: 259
 msgid "Are you sure to remove those records ?"
 msgstr "Вы уверены, что хотите удалить эти записи?"
 #
 # File: bin/modules/gui/window/form.py, line: 263
+# File: bin/modules/gui/window/form.py, line: 263
 msgid "Resources cleared."
 msgstr ""
 #
+# File: bin/modules/gui/window/form.py, line: 265
 # File: bin/modules/gui/window/form.py, line: 265
 msgid "Resources successfully removed."
 msgstr ""
@@ -824,13 +954,19 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 273
 # File: bin/modules/gui/window/form.py, line: 273
 # File: bin/modules/gui/window/form.py, line: 298
+# File: bin/modules/gui/window/form.py, line: 298
 msgid "Working now on the duplicated document !"
 msgstr "Работа в копии документа !"
 #
 # File: bin/modules/gui/window/form.py, line: 306
+# File: bin/modules/gui/window/form.py, line: 306
 msgid "Document Saved."
 msgstr ""
 #
+# File: bin/modules/gui/window/form.py, line: 308
+# File: bin/modules/gui/window/form.py, line: 309
+# File: bin/widget/view/form_gtk/parser.py, line: 137
+# File: bin/widget/view/form_gtk/parser.py, line: 138
 # File: bin/modules/gui/window/form.py, line: 308
 # File: bin/modules/gui/window/form.py, line: 309
 # File: bin/widget/view/form_gtk/parser.py, line: 137
@@ -853,6 +989,8 @@ msgstr ""
 # File: bin/openerp.glade, line: 3912
 # File: bin/modules/gui/window/form.py, line: 308
 # File: bin/widget/view/form_gtk/parser.py, line: 137
+# File: bin/modules/gui/window/form.py, line: 308
+# File: bin/widget/view/form_gtk/parser.py, line: 137
 #, fuzzy
 msgid "Error !"
 msgstr "Подробнее об ошибке"
@@ -867,6 +1005,8 @@ msgstr "Подробнее об ошибке"
 # File: bin/modules/gui/window/form.py, line: 397
 # File: bin/modules/gui/window/form.py, line: 328
 # File: bin/modules/gui/window/form.py, line: 423
+# File: bin/modules/gui/window/form.py, line: 328
+# File: bin/modules/gui/window/form.py, line: 423
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
@@ -874,6 +1014,7 @@ msgstr ""
 "Текущая запись была изменена\n"
 "Вы хотите ее сохранить?"
 #
+# File: bin/modules/gui/window/form.py, line: 375
 # File: bin/modules/gui/window/form.py, line: 375
 msgid "You must select one or several records !"
 msgstr ""
@@ -883,6 +1024,7 @@ msgstr ""
 # File: bin/modules/gui/window/form.py, line: 358
 # File: bin/modules/gui/window/form.py, line: 358
 # File: bin/modules/gui/window/form.py, line: 384
+# File: bin/modules/gui/window/form.py, line: 384
 msgid "Print Screen"
 msgstr "Печать копии экрана"
 #
@@ -890,6 +1032,7 @@ msgstr "Печать копии экрана"
 # File: bin/modules/gui/window/form.py, line: 378
 # File: bin/modules/gui/window/form.py, line: 378
 # File: bin/modules/gui/window/form.py, line: 378
+# File: bin/modules/gui/window/form.py, line: 404
 # File: bin/modules/gui/window/form.py, line: 404
 msgid "No record selected"
 msgstr "Нет выбранных записей"
@@ -899,6 +1042,7 @@ msgstr "Нет выбранных записей"
 # File: bin/modules/gui/window/form.py, line: 383
 # File: bin/modules/gui/window/form.py, line: 383
 # File: bin/modules/gui/window/form.py, line: 409
+# File: bin/modules/gui/window/form.py, line: 409
 msgid "New document"
 msgstr "Новый документ"
 #
@@ -906,6 +1050,7 @@ msgstr "Новый документ"
 # File: bin/modules/gui/window/form.py, line: 385
 # File: bin/modules/gui/window/form.py, line: 385
 # File: bin/modules/gui/window/form.py, line: 385
+# File: bin/modules/gui/window/form.py, line: 411
 # File: bin/modules/gui/window/form.py, line: 411
 msgid "Editing document (id: "
 msgstr "Редактирование документа (id: "
@@ -915,6 +1060,7 @@ msgstr "Редактирование документа (id: "
 # File: bin/modules/gui/window/form.py, line: 386
 # File: bin/modules/gui/window/form.py, line: 386
 # File: bin/modules/gui/window/form.py, line: 412
+# File: bin/modules/gui/window/form.py, line: 412
 msgid "Record: "
 msgstr "Запись: "
 #
@@ -922,6 +1068,7 @@ msgstr "Запись: "
 # File: bin/modules/gui/window/form.py, line: 387
 # File: bin/modules/gui/window/form.py, line: 387
 # File: bin/modules/gui/window/form.py, line: 387
+# File: bin/modules/gui/window/form.py, line: 413
 # File: bin/modules/gui/window/form.py, line: 413
 msgid " of "
 msgstr " из "
@@ -931,6 +1078,7 @@ msgstr " из "
 # File: bin/modules/gui/window/win_export.py, line: 52
 # File: bin/modules/gui/window/win_export.py, line: 52
 # File: bin/modules/gui/window/win_export.py, line: 51
+# File: bin/modules/gui/window/win_export.py, line: 51
 msgid " record(s) saved !"
 msgstr " записей сохранено !"
 #
@@ -938,6 +1086,7 @@ msgstr " записей сохранено !"
 # File: bin/modules/gui/window/win_export.py, line: 55
 # File: bin/modules/gui/window/win_export.py, line: 55
 # File: bin/modules/gui/window/win_export.py, line: 55
+# File: bin/modules/gui/window/win_export.py, line: 54
 # File: bin/modules/gui/window/win_export.py, line: 54
 msgid ""
 "Operation failed !\n"
@@ -951,6 +1100,7 @@ msgstr ""
 # File: bin/modules/gui/window/win_export.py, line: 79
 # File: bin/modules/gui/window/win_export.py, line: 79
 # File: bin/modules/gui/window/win_export.py, line: 78
+# File: bin/modules/gui/window/win_export.py, line: 78
 msgid "Error Opening Excel !"
 msgstr "Ошибка открытия Excel !"
 #
@@ -958,6 +1108,7 @@ msgstr "Ошибка открытия Excel !"
 # File: bin/modules/gui/window/win_export.py, line: 81
 # File: bin/modules/gui/window/win_export.py, line: 81
 # File: bin/modules/gui/window/win_export.py, line: 81
+# File: bin/modules/gui/window/win_export.py, line: 80
 # File: bin/modules/gui/window/win_export.py, line: 80
 msgid ""
 "Function only available for MS Office !\n"
@@ -977,10 +1128,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 3595
 # File: bin/openerp.glade, line: 3754
 # File: bin/modules/gui/window/win_export.py, line: 281
+# File: bin/modules/gui/window/win_export.py, line: 281
 #, fuzzy
 msgid "Exportation Error !"
 msgstr "Ошибка приложения!"
 #
+# File: bin/modules/gui/window/tree.py, line: 190
+# File: bin/modules/gui/window/tree.py, line: 246
 # File: bin/modules/gui/window/tree.py, line: 190
 # File: bin/modules/gui/window/tree.py, line: 246
 # File: bin/modules/gui/window/tree.py, line: 190
@@ -999,6 +1153,7 @@ msgstr "Нет выбранного ресурса !"
 # File: bin/modules/gui/window/tree.py, line: 204
 # File: bin/modules/gui/window/tree.py, line: 204
 # File: bin/modules/gui/window/tree.py, line: 204
+# File: bin/modules/gui/window/tree.py, line: 204
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
@@ -1006,6 +1161,7 @@ msgstr ""
 "Вы уверены, что хотите\n"
 "удалить текущую запись?"
 #
+# File: bin/modules/gui/window/tree.py, line: 209
 # File: bin/modules/gui/window/tree.py, line: 209
 # File: bin/modules/gui/window/tree.py, line: 209
 # File: bin/modules/gui/window/tree.py, line: 209
@@ -1019,24 +1175,30 @@ msgstr "Ошибка при удалении ресурса!"
 # File: bin/modules/gui/window/tree.py, line: 220
 # File: bin/modules/gui/window/tree.py, line: 220
 # File: bin/modules/gui/window/tree.py, line: 220
+# File: bin/modules/gui/window/tree.py, line: 220
 msgid "Unable to chroot: no tree resource selected"
 msgstr "Невохможно изменить корневой каталог: не выбран ресурс дерева"
 #
+# File: bin/modules/gui/window/win_search.py, line: 50
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 51
 # File: bin/modules/gui/window/win_search.py, line: 50
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 51
 msgid "OpenERP - Link"
 msgstr ""
 #
 # File: bin/modules/gui/window/win_search.py, line: 147
+# File: bin/modules/gui/window/win_search.py, line: 147
 #, python-format
 msgid "OpenERP Search: %s"
 msgstr ""
 #
 # File: bin/modules/gui/window/win_search.py, line: 148
+# File: bin/modules/gui/window/win_search.py, line: 148
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
 msgstr ""
 #
+# File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
@@ -1050,13 +1212,16 @@ msgstr "Описание"
 # File: bin/modules/gui/window/view_tree/parse.py, line: 36
 # File: bin/modules/gui/window/view_tree/parse.py, line: 36
 # File: bin/modules/gui/window/view_tree/parse.py, line: 36
+# File: bin/modules/gui/window/view_tree/parse.py, line: 36
 msgid "Tree"
 msgstr "В виде дерева"
 #
 # File: bin/modules/gui/window/win_import.py, line: 52
+# File: bin/modules/gui/window/win_import.py, line: 52
 msgid "The file is empty !"
 msgstr ""
 #
+# File: bin/modules/gui/window/win_import.py, line: 52
 # File: bin/modules/gui/window/win_import.py, line: 52
 msgid "Importation !"
 msgstr ""
@@ -1066,6 +1231,7 @@ msgstr ""
 # File: bin/modules/gui/window/win_import.py, line: 54
 # File: bin/modules/gui/window/win_import.py, line: 54
 # File: bin/modules/gui/window/win_import.py, line: 58
+# File: bin/modules/gui/window/win_import.py, line: 58
 msgid "XML-RPC error !"
 msgstr "Ошибка XML-RPC !"
 #
@@ -1073,6 +1239,7 @@ msgstr "Ошибка XML-RPC !"
 # File: bin/modules/gui/window/win_import.py, line: 57
 # File: bin/modules/gui/window/win_import.py, line: 57
 # File: bin/modules/gui/window/win_import.py, line: 57
+# File: bin/modules/gui/window/win_import.py, line: 63
 # File: bin/modules/gui/window/win_import.py, line: 63
 #, fuzzy
 msgid "Imported one object !"
@@ -1082,6 +1249,7 @@ msgstr "Импортировано %d объектов !"
 # File: bin/modules/gui/window/win_import.py, line: 57
 # File: bin/modules/gui/window/win_import.py, line: 57
 # File: bin/modules/gui/window/win_import.py, line: 57
+# File: bin/modules/gui/window/win_import.py, line: 65
 # File: bin/modules/gui/window/win_import.py, line: 65
 #, python-format
 msgid "Imported %d objects !"
@@ -1098,6 +1266,7 @@ msgstr "Импортировано %d объектов !"
 # File: bin/openerp.glade, line: 3595
 # File: bin/openerp.glade, line: 3754
 # File: bin/modules/gui/window/win_import.py, line: 71
+# File: bin/modules/gui/window/win_import.py, line: 71
 #, fuzzy
 msgid "Importation Error !"
 msgstr "Ошибка приложения!"
@@ -1112,9 +1281,12 @@ msgstr "Ошибка приложения!"
 # File: bin/modules/gui/window/win_import.py, line: 97
 # File: bin/modules/gui/window/win_import.py, line: 102
 # File: bin/modules/gui/window/win_import.py, line: 106
+# File: bin/modules/gui/window/win_import.py, line: 102
+# File: bin/modules/gui/window/win_import.py, line: 106
 msgid "Field name"
 msgstr "Название поля"
 #
+# File: bin/modules/gui/window/win_import.py, line: 189
 # File: bin/modules/gui/window/win_import.py, line: 189
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
@@ -1125,10 +1297,12 @@ msgstr ""
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 # File: bin/modules/gui/window/win_import.py, line: 223
+# File: bin/modules/gui/window/win_import.py, line: 223
 #, fuzzy
 msgid "You have not selected any fields to import"
 msgstr "Необходимо выбрать ресурс!"
 #
+# File: bin/modules/gui/window/win_selection.py, line: 52
 # File: bin/modules/gui/window/win_selection.py, line: 52
 # File: bin/modules/gui/window/win_selection.py, line: 52
 # File: bin/modules/gui/window/win_selection.py, line: 52
@@ -1142,9 +1316,11 @@ msgstr "Название"
 # File: bin/modules/gui/window/win_selection.py, line: 56
 # File: bin/modules/gui/window/win_selection.py, line: 56
 # File: bin/modules/gui/window/win_selection.py, line: 56
+# File: bin/modules/gui/window/win_selection.py, line: 56
 msgid "Ressource Name"
 msgstr "Название ресурса"
 #
+# File: bin/modules/gui/window/win_selection.py, line: 56
 # File: bin/modules/gui/window/win_selection.py, line: 56
 # File: bin/modules/gui/window/win_selection.py, line: 56
 # File: bin/modules/gui/window/win_selection.py, line: 56
@@ -1158,9 +1334,11 @@ msgstr "Названия"
 # File: bin/rpc.py, line: 142
 # File: bin/rpc.py, line: 143
 # File: bin/rpc.py, line: 141
+# File: bin/rpc.py, line: 141
 msgid "Connection refused!"
 msgstr "В соединении отказано!"
 #
+# File: bin/rpc.py, line: 171
 # File: bin/rpc.py, line: 171
 msgid ""
 "Unable to reach to OpenERP server !\n"
@@ -1168,13 +1346,16 @@ msgid ""
 msgstr ""
 #
 # File: bin/rpc.py, line: 171
+# File: bin/rpc.py, line: 171
 msgid "Connection Error"
 msgstr ""
 #
 # File: bin/openerp-client.py, line: 139
+# File: bin/openerp-client.py, line: 139
 msgid "Closing OpenERP, KeyboardInterrupt"
 msgstr ""
 #
+# File: bin/plugins/__init__.py, line: 28
 # File: bin/plugins/__init__.py, line: 28
 # File: bin/plugins/__init__.py, line: 28
 # File: bin/plugins/__init__.py, line: 28
@@ -1188,9 +1369,11 @@ msgstr "Печать процесса"
 # File: bin/plugins/__init__.py, line: 29
 # File: bin/plugins/__init__.py, line: 29
 # File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
 msgid "Print Workflow (Complex)"
 msgstr "Печать процесса (сложн.)"
 #
+# File: bin/plugins/__init__.py, line: 41
 # File: bin/plugins/__init__.py, line: 41
 # File: bin/plugins/__init__.py, line: 41
 # File: bin/plugins/__init__.py, line: 41
@@ -1204,9 +1387,11 @@ msgstr "Для данного ресурса нет доступного доп�
 # File: bin/plugins/__init__.py, line: 43
 # File: bin/plugins/__init__.py, line: 43
 # File: bin/plugins/__init__.py, line: 43
+# File: bin/plugins/__init__.py, line: 43
 msgid "Choose a Plugin"
 msgstr "Выберите Дополнение"
 #
+# File: bin/common/common.py, line: 211
 # File: bin/common/common.py, line: 211
 msgid ""
 "Thank you for the feedback !\n"
@@ -1215,6 +1400,7 @@ msgid ""
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
 #
+# File: bin/common/common.py, line: 221
 # File: bin/common/common.py, line: 221
 msgid ""
 "Thank you for testing OpenERP !\n"
@@ -1230,9 +1416,12 @@ msgstr ""
 # File: bin/common/common.py, line: 343
 # File: bin/common/common.py, line: 298
 # File: bin/common/common.py, line: 324
+# File: bin/common/common.py, line: 324
 msgid "Support request sent !"
 msgstr "Запрос в поддержку отослан !"
 #
+# File: bin/common/common.py, line: 344
+# File: bin/common/common.py, line: 387
 # File: bin/common/common.py, line: 344
 # File: bin/common/common.py, line: 387
 msgid ""
@@ -1261,6 +1450,7 @@ msgid ""
 msgstr ""
 #
 # File: bin/common/common.py, line: 367
+# File: bin/common/common.py, line: 367
 #, python-format
 msgid ""
 "\n"
@@ -1286,11 +1476,13 @@ msgid ""
 msgstr ""
 #
 # File: bin/common/common.py, line: 442
+# File: bin/common/common.py, line: 442
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
 #
+# File: bin/common/common.py, line: 445
 # File: bin/common/common.py, line: 445
 #, python-format
 msgid ""
@@ -1300,6 +1492,7 @@ msgid ""
 msgstr ""
 #
 # File: bin/common/common.py, line: 445
+# File: bin/common/common.py, line: 445
 msgid "Error"
 msgstr ""
 #
@@ -1308,9 +1501,11 @@ msgstr ""
 # File: bin/common/common.py, line: 499
 # File: bin/common/common.py, line: 545
 # File: bin/common/common.py, line: 598
+# File: bin/common/common.py, line: 598
 msgid "Open with..."
 msgstr "Открыть с помощью..."
 #
+# File: bin/options.py, line: 108
 # File: bin/options.py, line: 108
 #, python-format
 msgid "OpenERP Client %s"
@@ -1321,9 +1516,11 @@ msgstr ""
 # File: bin/options.py, line: 89
 # File: bin/options.py, line: 108
 # File: bin/options.py, line: 109
+# File: bin/options.py, line: 109
 msgid "specify alternate config file"
 msgstr "укажите альтернативный файл настроек"
 #
+# File: bin/options.py, line: 110
 # File: bin/options.py, line: 110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
 msgstr ""
@@ -1332,6 +1529,7 @@ msgstr ""
 # File: bin/options.py, line: 94
 # File: bin/options.py, line: 94
 # File: bin/options.py, line: 113
+# File: bin/options.py, line: 111
 # File: bin/options.py, line: 111
 #, fuzzy, python-format
 msgid "specify the log level: %s"
@@ -1342,12 +1540,14 @@ msgstr "укажите порт сервера"
 # File: bin/options.py, line: 93
 # File: bin/options.py, line: 112
 # File: bin/options.py, line: 112
+# File: bin/options.py, line: 112
 msgid "specify the user login"
 msgstr "укажите учетную запись"
 #
 # File: bin/options.py, line: 94
 # File: bin/options.py, line: 94
 # File: bin/options.py, line: 94
+# File: bin/options.py, line: 113
 # File: bin/options.py, line: 113
 # File: bin/options.py, line: 113
 msgid "specify the server port"
@@ -1358,9 +1558,11 @@ msgstr "укажите порт сервера"
 # File: bin/options.py, line: 95
 # File: bin/options.py, line: 114
 # File: bin/options.py, line: 114
+# File: bin/options.py, line: 114
 msgid "specify the server ip/name"
 msgstr "укажите ip/имя сервера"
 #
+# File: bin/printer/printer.py, line: 176
 # File: bin/printer/printer.py, line: 176
 #, python-format
 msgid "Unable to handle %s filetype"
@@ -1370,6 +1572,7 @@ msgstr ""
 # File: bin/printer/printer.py, line: 181
 # File: bin/printer/printer.py, line: 181
 # File: bin/printer/printer.py, line: 181
+# File: bin/printer/printer.py, line: 185
 # File: bin/printer/printer.py, line: 185
 msgid ""
 "Linux Automatic Printing not implemented.\n"
@@ -1383,6 +1586,7 @@ msgstr ""
 # File: bin/printer/printer.py, line: 189
 # File: bin/printer/printer.py, line: 189
 # File: bin/printer/printer.py, line: 193
+# File: bin/printer/printer.py, line: 193
 msgid "Error no report"
 msgstr "Ошибка в отчете"
 #
@@ -1391,6 +1595,7 @@ msgstr "Ошибка в отчете"
 # File: bin/printer/printer.py, line: 215
 # File: bin/printer/printer.py, line: 215
 # File: bin/printer/printer.py, line: 220
+# File: bin/printer/printer.py, line: 220
 msgid "Error writing the file!"
 msgstr "Ошибка записи в файл!"
 #
@@ -1398,9 +1603,12 @@ msgstr "Ошибка записи в файл!"
 # File: bin/widget_search/checkbox.py, line: 49
 # File: bin/widget_search/checkbox.py, line: 36
 # File: bin/widget_search/checkbox.py, line: 49
+# File: bin/widget_search/checkbox.py, line: 36
+# File: bin/widget_search/checkbox.py, line: 49
 msgid "Yes"
 msgstr "Да"
 #
+# File: bin/widget_search/checkbox.py, line: 37
 # File: bin/widget_search/checkbox.py, line: 37
 # File: bin/widget_search/checkbox.py, line: 37
 msgid "No"
@@ -1436,9 +1644,17 @@ msgstr "Нет"
 # File: bin/widget_search/calendar.py, line: 117
 # File: bin/widget_search/char.py, line: 47
 # File: bin/widget_search/reference.py, line: 74
+# File: bin/widget_search/checkbox.py, line: 55
+# File: bin/widget_search/spinbutton.py, line: 69
+# File: bin/widget_search/spinint.py, line: 73
+# File: bin/widget_search/calendar.py, line: 117
+# File: bin/widget_search/char.py, line: 47
+# File: bin/widget_search/reference.py, line: 74
 msgid "The content of the widget or ValueError if not valid"
 msgstr "Содержимое виджета или ValueError при ошибке"
 #
+# File: bin/widget_search/date_widget.py, line: 65
+# File: bin/widget/view/form_gtk/date_widget.py, line: 65
 # File: bin/widget_search/date_widget.py, line: 65
 # File: bin/widget/view/form_gtk/date_widget.py, line: 65
 msgid ""
@@ -1458,9 +1674,11 @@ msgstr ""
 # File: bin/widget_search/form.py, line: 145
 # File: bin/widget_search/form.py, line: 145
 # File: bin/widget_search/form.py, line: 145
+# File: bin/widget_search/form.py, line: 145
 msgid "Limit :"
 msgstr "Лимит :"
 #
+# File: bin/widget_search/form.py, line: 154
 # File: bin/widget_search/form.py, line: 154
 # File: bin/widget_search/form.py, line: 154
 # File: bin/widget_search/form.py, line: 154
@@ -1474,9 +1692,11 @@ msgstr "Смещение :"
 # File: bin/widget_search/form.py, line: 193
 # File: bin/widget_search/form.py, line: 193
 # File: bin/widget_search/form.py, line: 193
+# File: bin/widget_search/form.py, line: 193
 msgid "Parameters :"
 msgstr "Параметраы :"
 #
+# File: bin/widget_search/form.py, line: 301
 # File: bin/widget_search/form.py, line: 301
 msgid "The content of the form or exception if not valid"
 msgstr ""
@@ -1484,6 +1704,7 @@ msgstr ""
 # File: bin/widget_search/calendar.py, line: 51
 # File: bin/widget_search/calendar.py, line: 51
 # File: bin/widget_search/calendar.py, line: 51
+# File: bin/widget_search/calendar.py, line: 55
 # File: bin/widget_search/calendar.py, line: 55
 # File: bin/widget_search/calendar.py, line: 55
 msgid "Start date"
@@ -1509,6 +1730,10 @@ msgstr "Дата начала"
 # File: bin/widget_search/calendar.py, line: 79
 # File: bin/widget/view/form_gtk/calendar.py, line: 62
 # File: bin/widget/view/form_gtk/calendar.py, line: 175
+# File: bin/widget_search/calendar.py, line: 59
+# File: bin/widget_search/calendar.py, line: 79
+# File: bin/widget/view/form_gtk/calendar.py, line: 62
+# File: bin/widget/view/form_gtk/calendar.py, line: 175
 msgid "Open the calendar widget"
 msgstr "Открыть виджет календаря"
 #
@@ -1517,9 +1742,13 @@ msgstr "Открыть виджет календаря"
 # File: bin/widget_search/calendar.py, line: 70
 # File: bin/widget_search/calendar.py, line: 75
 # File: bin/widget_search/calendar.py, line: 75
+# File: bin/widget_search/calendar.py, line: 75
 msgid "End date"
 msgstr "Дата окончания"
 #
+# File: bin/widget_search/calendar.py, line: 120
+# File: bin/widget/view/form_gtk/calendar.py, line: 132
+# File: bin/widget/view/form_gtk/calendar.py, line: 252
 # File: bin/widget_search/calendar.py, line: 120
 # File: bin/widget/view/form_gtk/calendar.py, line: 132
 # File: bin/widget/view/form_gtk/calendar.py, line: 252
@@ -1531,19 +1760,23 @@ msgstr ""
 # File: bin/widget_search/wid_int.py, line: 44
 # File: bin/widget_search/wid_int.py, line: 44
 # File: bin/widget_search/wid_int.py, line: 44
+# File: bin/widget_search/wid_int.py, line: 44
 #, fuzzy
 msgid "The content of the widget or exception if not valid"
 msgstr "Содержимое виджета или Исключение при ошибке"
 #
+# File: bin/translate.py, line: 184
 # File: bin/translate.py, line: 184
 #, python-format
 msgid "Unable to set locale %s"
 msgstr ""
 #
 # File: bin/widget/view/gantt_gtk/parser_dummy.py, line: 31
+# File: bin/widget/view/gantt_gtk/parser_dummy.py, line: 31
 msgid "Gantt view not yet implemented !"
 msgstr ""
 #
+# File: bin/widget/view/gantt_gtk/parser_dummy.py, line: 32
 # File: bin/widget/view/gantt_gtk/parser_dummy.py, line: 32
 msgid ""
 "The gantt view is not available in this GTK Client, you should use the web "
@@ -1551,10 +1784,12 @@ msgid ""
 msgstr ""
 #
 # File: bin/widget/view/widget_parse.py, line: 53
+# File: bin/widget/view/widget_parse.py, line: 53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
 msgstr ""
 #
+# File: bin/widget/view/widget_parse.py, line: 63
 # File: bin/widget/view/widget_parse.py, line: 63
 msgid "No valid view found for this object!"
 msgstr ""
@@ -1564,12 +1799,14 @@ msgstr ""
 # File: bin/widget/view/form.py, line: 153
 # File: bin/widget/view/form.py, line: 170
 # File: bin/widget/view/form.py, line: 170
+# File: bin/widget/view/form.py, line: 170
 msgid "You must save this record to use the relate button !"
 msgstr "Необходимо сохранить запись для использования кнопки Отношение!"
 #
 # File: bin/widget/view/form.py, line: 165
 # File: bin/widget/view/form.py, line: 165
 # File: bin/widget/view/form.py, line: 165
+# File: bin/widget/view/form.py, line: 182
 # File: bin/widget/view/form.py, line: 182
 # File: bin/widget/view/form.py, line: 182
 msgid "You must select a record to use the relate button !"
@@ -1591,6 +1828,10 @@ msgstr "Необходимо выбрать запись для использо
 # File: bin/widget/view/form_gtk/parser.py, line: 496
 # File: bin/widget/view/form_gtk/parser.py, line: 653
 # File: bin/widget/view/form_gtk/parser.py, line: 710
+# File: bin/widget/view/form.py, line: 200
+# File: bin/widget/view/form_gtk/parser.py, line: 556
+# File: bin/widget/view/form_gtk/parser.py, line: 670
+# File: bin/widget/view/form_gtk/parser.py, line: 727
 # File: bin/widget/view/form.py, line: 200
 # File: bin/widget/view/form_gtk/parser.py, line: 556
 # File: bin/widget/view/form_gtk/parser.py, line: 670
@@ -1618,6 +1859,10 @@ msgstr "Отсутвуют другие доступные языки!"
 # File: bin/widget/view/form_gtk/parser.py, line: 572
 # File: bin/widget/view/form_gtk/parser.py, line: 676
 # File: bin/widget/view/form_gtk/parser.py, line: 733
+# File: bin/widget/view/form.py, line: 207
+# File: bin/widget/view/form_gtk/parser.py, line: 572
+# File: bin/widget/view/form_gtk/parser.py, line: 676
+# File: bin/widget/view/form_gtk/parser.py, line: 733
 msgid "Add Translation"
 msgstr "Добавить перевод"
 #
@@ -1631,9 +1876,13 @@ msgstr "Добавить перевод"
 # File: bin/widget/view/form_gtk/parser.py, line: 772
 # File: bin/widget/view/form.py, line: 258
 # File: bin/widget/view/form_gtk/parser.py, line: 789
+# File: bin/widget/view/form.py, line: 258
+# File: bin/widget/view/form_gtk/parser.py, line: 789
 msgid "Translate label"
 msgstr "Перевести ярлык"
 #
+# File: bin/widget/view/form_gtk/interface.py, line: 47
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 148
 # File: bin/widget/view/form_gtk/interface.py, line: 47
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 148
 # File: bin/widget/view/form_gtk/interface.py, line: 47
@@ -1646,13 +1895,16 @@ msgstr "Установить значение по умолчанию"
 # File: bin/widget/view/form_gtk/interface.py, line: 48
 # File: bin/widget/view/form_gtk/interface.py, line: 48
 # File: bin/widget/view/form_gtk/interface.py, line: 48
+# File: bin/widget/view/form_gtk/interface.py, line: 48
 msgid "Set as default"
 msgstr "Установить по умолчанию"
 #
 # File: bin/widget/view/form_gtk/binary.py, line: 77
+# File: bin/widget/view/form_gtk/binary.py, line: 77
 msgid "Select"
 msgstr ""
 #
+# File: bin/widget/view/form_gtk/binary.py, line: 81
 # File: bin/widget/view/form_gtk/binary.py, line: 81
 msgid "Open"
 msgstr ""
@@ -1665,6 +1917,8 @@ msgstr ""
 # File: bin/widget/view/form_gtk/image.py, line: 79
 # File: bin/widget/view/form_gtk/image.py, line: 79
 # File: bin/widget/view/form_gtk/binary.py, line: 85
+# File: bin/widget/view/form_gtk/binary.py, line: 85
+# File: bin/widget/view/form_gtk/image.py, line: 80
 # File: bin/widget/view/form_gtk/binary.py, line: 85
 # File: bin/widget/view/form_gtk/image.py, line: 80
 msgid "Save As"
@@ -1680,9 +1934,13 @@ msgstr "Сохранить как"
 # File: bin/widget/view/form_gtk/binary.py, line: 89
 # File: bin/widget/view/form_gtk/binary.py, line: 89
 # File: bin/widget/view/form_gtk/image.py, line: 89
+# File: bin/widget/view/form_gtk/binary.py, line: 89
+# File: bin/widget/view/form_gtk/image.py, line: 89
 msgid "Clear"
 msgstr "Очистить"
 #
+# File: bin/widget/view/form_gtk/binary.py, line: 114
+# File: bin/widget/view/form_gtk/binary.py, line: 158
 # File: bin/widget/view/form_gtk/binary.py, line: 114
 # File: bin/widget/view/form_gtk/binary.py, line: 158
 msgid "Unable to read the file data"
@@ -1690,18 +1948,23 @@ msgstr ""
 #
 # File: bin/widget/view/form_gtk/binary.py, line: 124
 # File: bin/widget/view/form_gtk/binary.py, line: 150
+# File: bin/widget/view/form_gtk/binary.py, line: 124
+# File: bin/widget/view/form_gtk/binary.py, line: 150
 #, python-format
 msgid "Error reading the file: %s"
 msgstr ""
 #
 # File: bin/widget/view/form_gtk/binary.py, line: 133
+# File: bin/widget/view/form_gtk/binary.py, line: 133
 msgid "All Files"
 msgstr ""
 #
 # File: bin/widget/view/form_gtk/binary.py, line: 143
+# File: bin/widget/view/form_gtk/binary.py, line: 143
 msgid "Select a file..."
 msgstr ""
 #
+# File: bin/widget/view/form_gtk/binary.py, line: 172
 # File: bin/widget/view/form_gtk/binary.py, line: 172
 #, python-format
 msgid "Error writing the file: %s"
@@ -1712,6 +1975,7 @@ msgstr ""
 # File: bin/widget/view/form_gtk/image.py, line: 70
 # File: bin/widget/view/form_gtk/image.py, line: 70
 # File: bin/widget/view/form_gtk/image.py, line: 71
+# File: bin/widget/view/form_gtk/image.py, line: 71
 msgid "Set Image"
 msgstr "Задать изображение"
 #
@@ -1720,6 +1984,7 @@ msgstr "Задать изображение"
 # File: bin/widget/view/form_gtk/image.py, line: 100
 # File: bin/widget/view/form_gtk/image.py, line: 100
 # File: bin/widget/view/form_gtk/image.py, line: 102
+# File: bin/widget/view/form_gtk/image.py, line: 102
 msgid "All files"
 msgstr "Все файлы"
 #
@@ -1727,6 +1992,7 @@ msgstr "Все файлы"
 # File: bin/widget/view/form_gtk/image.py, line: 104
 # File: bin/widget/view/form_gtk/image.py, line: 104
 # File: bin/widget/view/form_gtk/image.py, line: 104
+# File: bin/widget/view/form_gtk/image.py, line: 106
 # File: bin/widget/view/form_gtk/image.py, line: 106
 msgid "Images"
 msgstr "Изображения"
@@ -1741,6 +2007,8 @@ msgstr "Изображения"
 # File: bin/widget/view/form_gtk/calendar.py, line: 260
 # File: bin/widget/view/form_gtk/calendar.py, line: 126
 # File: bin/widget/view/form_gtk/calendar.py, line: 249
+# File: bin/widget/view/form_gtk/calendar.py, line: 126
+# File: bin/widget/view/form_gtk/calendar.py, line: 249
 msgid "This widget is readonly !"
 msgstr "Этот виджет доступен только для чтения!"
 #
@@ -1748,6 +2016,7 @@ msgstr "Этот виджет доступен только для чтения!
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
 # File: bin/widget/view/form_gtk/calendar.py, line: 269
+# File: bin/widget/view/form_gtk/calendar.py, line: 258
 # File: bin/widget/view/form_gtk/calendar.py, line: 258
 msgid "Hour:"
 msgstr "Часов:"
@@ -1757,9 +2026,11 @@ msgstr "Часов:"
 # File: bin/widget/view/form_gtk/calendar.py, line: 250
 # File: bin/widget/view/form_gtk/calendar.py, line: 272
 # File: bin/widget/view/form_gtk/calendar.py, line: 261
+# File: bin/widget/view/form_gtk/calendar.py, line: 261
 msgid "Minute:"
 msgstr "Минут:"
 #
+# File: bin/widget/view/form_gtk/parser.py, line: 61
 # File: bin/widget/view/form_gtk/parser.py, line: 61
 # File: bin/widget/view/form_gtk/parser.py, line: 61
 # File: bin/widget/view/form_gtk/parser.py, line: 61
@@ -1773,6 +2044,7 @@ msgstr "Неправильное изображение для кнопки!"
 # File: bin/widget/view/form_gtk/parser.py, line: 480
 # File: bin/widget/view/form_gtk/parser.py, line: 486
 # File: bin/widget/view/form_gtk/parser.py, line: 539
+# File: bin/widget/view/form_gtk/parser.py, line: 539
 #, fuzzy
 msgid "Enter some text to the related field before adding translations!"
 msgstr "Необходимо сохранить ресурс перед добавлением перевода!"
@@ -1782,6 +2054,7 @@ msgstr "Необходимо сохранить ресурс перед доба
 # File: bin/widget/view/form_gtk/parser.py, line: 480
 # File: bin/widget/view/form_gtk/parser.py, line: 486
 # File: bin/widget/view/form_gtk/parser.py, line: 546
+# File: bin/widget/view/form_gtk/parser.py, line: 546
 msgid "You need to save resource before adding translations!"
 msgstr "Необходимо сохранить ресурс перед добавлением перевода!"
 #
@@ -1790,9 +2063,11 @@ msgstr "Необходимо сохранить ресурс перед доба
 # File: bin/widget/view/form_gtk/parser.py, line: 772
 # File: bin/widget/view/form_gtk/parser.py, line: 778
 # File: bin/widget/view/form_gtk/parser.py, line: 795
+# File: bin/widget/view/form_gtk/parser.py, line: 795
 msgid "Translate view"
 msgstr "Перевести вид"
 #
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 151
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 151
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 151
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 151
@@ -1803,9 +2078,11 @@ msgstr "Установить по умолчанию"
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 162
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 162
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 162
 msgid "Create a new entry"
 msgstr "Создать новую запись"
 #
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 172
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 172
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 172
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 172
@@ -1819,14 +2096,17 @@ msgstr "Изменить текущую запись"
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 182
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 182
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 182
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 182
 msgid "Remove this entry"
 msgstr "Удалить текущую проводку"
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 194
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 194
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 194
 msgid "Previous"
 msgstr "Предыдущий"
 #
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 207
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 207
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 207
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 207
@@ -1840,9 +2120,11 @@ msgstr "Далее"
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 219
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 219
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 219
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 219
 msgid "Switch"
 msgstr "Выбор"
 #
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
@@ -1852,6 +2134,7 @@ msgid "You have to select a resource !"
 msgstr "Необходимо выбрать ресурс!"
 #
 # File: bin/widget/view/form_gtk/many2one.py, line: 156
+# File: bin/widget/view/form_gtk/many2one.py, line: 156
 msgid "Open this resource"
 msgstr ""
 #
@@ -1859,11 +2142,14 @@ msgstr ""
 #
 # File: bin/widget/view/form_gtk/many2one.py, line: 160
 # File: bin/widget/view/form_gtk/many2one.py, line: 159
+# File: bin/widget/view/form_gtk/many2one.py, line: 159
 msgid "Search a resource"
 msgstr "Поиск ресурса"
 #
 # File: bin/widget/view/form_gtk/many2one.py, line: 171
 # File: bin/openerp.glade, line: 1356
+# File: bin/widget/view/form_gtk/many2one.py, line: 167
+# File: bin/openerp.glade, line: 1389
 # File: bin/widget/view/form_gtk/many2one.py, line: 167
 # File: bin/openerp.glade, line: 1389
 msgid "Action"
@@ -1873,6 +2159,7 @@ msgstr "Действие"
 # File: bin/widget/view/form_gtk/many2one.py, line: 169
 # File: bin/widget/view/form_gtk/many2one.py, line: 169
 # File: bin/widget/view/form_gtk/many2one.py, line: 172
+# File: bin/widget/view/form_gtk/many2one.py, line: 168
 # File: bin/widget/view/form_gtk/many2one.py, line: 168
 msgid "Report"
 msgstr "Отчет"
@@ -1887,9 +2174,12 @@ msgstr "Отчет"
 # File: bin/widget/view/list.py, line: 274
 # File: bin/widget/view/form_gtk/many2one.py, line: 368
 # File: bin/widget/view/list.py, line: 274
+# File: bin/widget/view/form_gtk/many2one.py, line: 368
+# File: bin/widget/view/list.py, line: 274
 msgid "You must select a record to use the relation !"
 msgstr "Необходимо выбрать запись для использования Отношения!"
 #
+# File: bin/widget/view/form_gtk/wid_common.py, line: 60
 # File: bin/widget/view/form_gtk/wid_common.py, line: 60
 # File: bin/widget/view/form_gtk/wid_common.py, line: 60
 # File: bin/widget/view/form_gtk/wid_common.py, line: 60
@@ -1908,9 +2198,12 @@ msgstr "Применимо всегда!"
 # File: bin/openerp.glade, line: 1214
 # File: bin/widget/view/form_gtk/reference.py, line: 92
 # File: bin/openerp.glade, line: 1247
+# File: bin/widget/view/form_gtk/reference.py, line: 92
+# File: bin/openerp.glade, line: 1247
 msgid "Create a new resource"
 msgstr "Создать новый ресурс"
 #
+# File: bin/widget/view/form_gtk/reference.py, line: 93
 # File: bin/widget/view/form_gtk/reference.py, line: 93
 # File: bin/widget/view/form_gtk/reference.py, line: 93
 # File: bin/widget/view/form_gtk/reference.py, line: 93
@@ -1924,40 +2217,50 @@ msgstr "Найти / Открыть ресурс"
 # File: bin/widget/view/graph_gtk/parser.py, line: 65
 # File: bin/widget/view/graph_gtk/parser.py, line: 65
 # File: bin/widget/view/graph_gtk/parser.py, line: 65
+# File: bin/widget/view/graph_gtk/parser.py, line: 65
 msgid "Can not generate graph !"
 msgstr "Невозможно построить график!"
 #
 # File: bin/widget/view/tree_gtk/date_renderer.py, line: 200
+# File: bin/widget/view/tree_gtk/date_renderer.py, line: 200
 msgid "Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."
 msgstr ""
 #
+# File: bin/widget/view/tree_gtk/editabletree.py, line: 124
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 124
 #, python-format
 msgid "Shortcut: %s"
 msgstr ""
 #
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 124
+# File: bin/widget/view/tree_gtk/editabletree.py, line: 124
 msgid "F1 New - F2 Open/Search"
 msgstr ""
 #
+# File: bin/widget/view/tree_gtk/editabletree.py, line: 189
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 189
 #, python-format
 msgid "Warning; field %s is required!"
 msgstr ""
 #
 # File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 31
+# File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 31
 msgid "Calendar View Error !"
 msgstr ""
 #
+# File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 32
 # File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 32
 msgid "You must intall the library python-hippocanvas to use calendars."
 msgstr ""
 #
 # File: bin/widget/view/calendar_gtk/parser.py, line: 242
 # File: bin/openerp.glade, line: 8252
+# File: bin/widget/view/calendar_gtk/parser.py, line: 242
+# File: bin/openerp.glade, line: 8252
 msgid "Week"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 6
 # File: bin/openerp.glade, line: 6
 msgid "OpenERP - Login"
 msgstr ""
@@ -1972,10 +2275,13 @@ msgstr ""
 # File: bin/openerp.glade, line: 7298
 # File: bin/openerp.glade, line: 116
 # File: bin/openerp.glade, line: 6442
+# File: bin/openerp.glade, line: 116
+# File: bin/openerp.glade, line: 6442
 msgid "Database:"
 msgstr "База данных:"
 #
 # File: bin/openerp.glade, line: 133
+# File: bin/openerp.glade, line: 131
 # File: bin/openerp.glade, line: 131
 msgid "User:"
 msgstr "Пользователь:"
@@ -1986,15 +2292,20 @@ msgstr "Пользователь:"
 # File: bin/openerp.glade, line: 146
 # File: bin/openerp.glade, line: 6428
 # File: bin/openerp.glade, line: 6728
+# File: bin/openerp.glade, line: 146
+# File: bin/openerp.glade, line: 6428
+# File: bin/openerp.glade, line: 6728
 msgid "Password:"
 msgstr "Пароль:"
 #
 # File: bin/openerp.glade, line: 257
 # File: bin/openerp.glade, line: 255
+# File: bin/openerp.glade, line: 255
 msgid "_File"
 msgstr "_Файл"
 #
 # File: bin/openerp.glade, line: 264
+# File: bin/openerp.glade, line: 262
 # File: bin/openerp.glade, line: 262
 msgid "_Connect..."
 msgstr "_Подключение..."
@@ -2004,6 +2315,7 @@ msgstr "_Подключение..."
 # File: bin/openerp.glade, line: 280
 # File: bin/openerp.glade, line: 280
 # File: bin/openerp.glade, line: 278
+# File: bin/openerp.glade, line: 278
 msgid "_Disconnect"
 msgstr "_Отключение"
 #
@@ -2011,6 +2323,7 @@ msgstr "_Отключение"
 # File: bin/openerp.glade, line: 300
 # File: bin/openerp.glade, line: 300
 # File: bin/openerp.glade, line: 300
+# File: bin/openerp.glade, line: 298
 # File: bin/openerp.glade, line: 298
 msgid "Databases"
 msgstr "Базы данных"
@@ -2020,6 +2333,7 @@ msgstr "Базы данных"
 # File: bin/openerp.glade, line: 307
 # File: bin/openerp.glade, line: 307
 # File: bin/openerp.glade, line: 305
+# File: bin/openerp.glade, line: 305
 msgid "_New database"
 msgstr "_Новая база данных"
 #
@@ -2027,6 +2341,7 @@ msgstr "_Новая база данных"
 # File: bin/openerp.glade, line: 322
 # File: bin/openerp.glade, line: 322
 # File: bin/openerp.glade, line: 322
+# File: bin/openerp.glade, line: 320
 # File: bin/openerp.glade, line: 320
 msgid "_Restore database"
 msgstr "_Восстановить базу данный"
@@ -2036,6 +2351,7 @@ msgstr "_Восстановить базу данный"
 # File: bin/openerp.glade, line: 337
 # File: bin/openerp.glade, line: 337
 # File: bin/openerp.glade, line: 335
+# File: bin/openerp.glade, line: 335
 msgid "_Backup database"
 msgstr "Создать _резервную копию базы"
 #
@@ -2044,9 +2360,11 @@ msgstr "Создать _резервную копию базы"
 # File: bin/openerp.glade, line: 352
 # File: bin/openerp.glade, line: 352
 # File: bin/openerp.glade, line: 350
+# File: bin/openerp.glade, line: 350
 msgid "Dro_p database"
 msgstr "_Удалить базу данных"
 #
+# File: bin/openerp.glade, line: 370
 # File: bin/openerp.glade, line: 370
 msgid "_Download Migrations Code"
 msgstr ""
@@ -2055,6 +2373,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 300
 # File: bin/openerp.glade, line: 300
 # File: bin/openerp.glade, line: 300
+# File: bin/openerp.glade, line: 385
 # File: bin/openerp.glade, line: 385
 #, fuzzy
 msgid "_Migrate Database(s)"
@@ -2065,6 +2384,7 @@ msgstr "Базы данных"
 # File: bin/openerp.glade, line: 372
 # File: bin/openerp.glade, line: 372
 # File: bin/openerp.glade, line: 405
+# File: bin/openerp.glade, line: 405
 msgid "Administrator Password"
 msgstr "Пароль администратора"
 #
@@ -2072,6 +2392,7 @@ msgstr "Пароль администратора"
 # File: bin/openerp.glade, line: 417
 # File: bin/openerp.glade, line: 417
 # File: bin/openerp.glade, line: 417
+# File: bin/openerp.glade, line: 450
 # File: bin/openerp.glade, line: 450
 msgid "_User"
 msgstr "_Пользователь"
@@ -2081,6 +2402,7 @@ msgstr "_Пользователь"
 # File: bin/openerp.glade, line: 425
 # File: bin/openerp.glade, line: 425
 # File: bin/openerp.glade, line: 458
+# File: bin/openerp.glade, line: 458
 msgid "_Preferences"
 msgstr "_Параметры"
 #
@@ -2088,6 +2410,7 @@ msgstr "_Параметры"
 # File: bin/openerp.glade, line: 445
 # File: bin/openerp.glade, line: 445
 # File: bin/openerp.glade, line: 445
+# File: bin/openerp.glade, line: 478
 # File: bin/openerp.glade, line: 478
 msgid "_Send a request"
 msgstr "Отправить _запрос"
@@ -2097,25 +2420,30 @@ msgstr "Отправить _запрос"
 # File: bin/openerp.glade, line: 460
 # File: bin/openerp.glade, line: 460
 # File: bin/openerp.glade, line: 493
+# File: bin/openerp.glade, line: 493
 msgid "_Read my requests"
 msgstr "Прочитать _мои запросы"
 #
 # File: bin/openerp.glade, line: 480
+# File: bin/openerp.glade, line: 513
 # File: bin/openerp.glade, line: 513
 msgid "_Waiting Requests"
 msgstr "Ожидающие запросы"
 #
 # File: bin/openerp.glade, line: 493
 # File: bin/openerp.glade, line: 526
+# File: bin/openerp.glade, line: 526
 msgid "For_m"
 msgstr "Форма"
 #
 # File: bin/openerp.glade, line: 501
 # File: bin/openerp.glade, line: 534
+# File: bin/openerp.glade, line: 534
 msgid "_New"
 msgstr "Создать"
 #
 # File: bin/openerp.glade, line: 517
+# File: bin/openerp.glade, line: 550
 # File: bin/openerp.glade, line: 550
 msgid "_Save"
 msgstr "Сохранить"
@@ -2125,6 +2453,7 @@ msgstr "Сохранить"
 # File: bin/openerp.glade, line: 533
 # File: bin/openerp.glade, line: 533
 # File: bin/openerp.glade, line: 566
+# File: bin/openerp.glade, line: 566
 msgid "Copy this resource"
 msgstr "Скопировать объект"
 #
@@ -2133,10 +2462,12 @@ msgstr "Скопировать объект"
 # File: bin/openerp.glade, line: 534
 # File: bin/openerp.glade, line: 534
 # File: bin/openerp.glade, line: 567
+# File: bin/openerp.glade, line: 567
 msgid "_Duplicate"
 msgstr "_Продублировать"
 #
 # File: bin/openerp.glade, line: 550
+# File: bin/openerp.glade, line: 583
 # File: bin/openerp.glade, line: 583
 msgid "_Delete"
 msgstr "_Удалить"
@@ -2146,15 +2477,18 @@ msgstr "_Удалить"
 # File: bin/openerp.glade, line: 571
 # File: bin/openerp.glade, line: 571
 # File: bin/openerp.glade, line: 604
+# File: bin/openerp.glade, line: 604
 msgid "Find"
 msgstr "Поиск"
 #
 # File: bin/openerp.glade, line: 587
 # File: bin/openerp.glade, line: 620
+# File: bin/openerp.glade, line: 620
 msgid "Ne_xt"
 msgstr "Следующий"
 #
 # File: bin/openerp.glade, line: 603
+# File: bin/openerp.glade, line: 636
 # File: bin/openerp.glade, line: 636
 msgid "Pre_vious"
 msgstr "Предыдущий"
@@ -2164,6 +2498,7 @@ msgstr "Предыдущий"
 # File: bin/openerp.glade, line: 619
 # File: bin/openerp.glade, line: 619
 # File: bin/openerp.glade, line: 652
+# File: bin/openerp.glade, line: 652
 msgid "Switch to list/form"
 msgstr "Переключение список/форма"
 #
@@ -2172,6 +2507,7 @@ msgstr "Переключение список/форма"
 # File: bin/openerp.glade, line: 635
 # File: bin/openerp.glade, line: 635
 # File: bin/openerp.glade, line: 668
+# File: bin/openerp.glade, line: 668
 msgid "_Menu"
 msgstr "_Меню"
 #
@@ -2179,6 +2515,7 @@ msgstr "_Меню"
 # File: bin/openerp.glade, line: 656
 # File: bin/openerp.glade, line: 656
 # File: bin/openerp.glade, line: 656
+# File: bin/openerp.glade, line: 689
 # File: bin/openerp.glade, line: 689
 msgid "_New Home Tab"
 msgstr "Новая главная вкладка"
@@ -2193,6 +2530,8 @@ msgstr "Новая главная вкладка"
 # File: bin/openerp.glade, line: 5872
 # File: bin/openerp.glade, line: 705
 # File: bin/openerp.glade, line: 5016
+# File: bin/openerp.glade, line: 705
+# File: bin/openerp.glade, line: 5016
 msgid "Close Tab"
 msgstr "Закрыть вкладку"
 #
@@ -2200,6 +2539,7 @@ msgstr "Закрыть вкладку"
 # File: bin/openerp.glade, line: 688
 # File: bin/openerp.glade, line: 688
 # File: bin/openerp.glade, line: 688
+# File: bin/openerp.glade, line: 721
 # File: bin/openerp.glade, line: 721
 msgid "Previous Tab"
 msgstr "Предыдущая вкладка"
@@ -2214,6 +2554,8 @@ msgstr "Предыдущая вкладка"
 # File: bin/openerp.glade, line: 5928
 # File: bin/openerp.glade, line: 730
 # File: bin/openerp.glade, line: 5072
+# File: bin/openerp.glade, line: 730
+# File: bin/openerp.glade, line: 5072
 msgid "Next Tab"
 msgstr "Следующая вкладка"
 #
@@ -2221,6 +2563,7 @@ msgstr "Следующая вкладка"
 # File: bin/openerp.glade, line: 711
 # File: bin/openerp.glade, line: 711
 # File: bin/openerp.glade, line: 711
+# File: bin/openerp.glade, line: 744
 # File: bin/openerp.glade, line: 744
 msgid "View _logs"
 msgstr "Посмотреть протокол"
@@ -2230,10 +2573,12 @@ msgstr "Посмотреть протокол"
 # File: bin/openerp.glade, line: 719
 # File: bin/openerp.glade, line: 719
 # File: bin/openerp.glade, line: 752
+# File: bin/openerp.glade, line: 752
 msgid "_Go to resource ID..."
 msgstr "Перейти к объекту ID..."
 #
 # File: bin/openerp.glade, line: 733
+# File: bin/openerp.glade, line: 766
 # File: bin/openerp.glade, line: 766
 msgid "_Open"
 msgstr "Открыть"
@@ -2243,20 +2588,24 @@ msgstr "Открыть"
 # File: bin/openerp.glade, line: 748
 # File: bin/openerp.glade, line: 748
 # File: bin/openerp.glade, line: 781
+# File: bin/openerp.glade, line: 781
 msgid "Reloa_d / Undo"
 msgstr "Отменить / прочесть повторно"
 #
 # File: bin/openerp.glade, line: 769
+# File: bin/openerp.glade, line: 802
 # File: bin/openerp.glade, line: 802
 msgid "Repeat latest _action"
 msgstr "Повторить посл. действие"
 #
 # File: bin/openerp.glade, line: 783
 # File: bin/openerp.glade, line: 816
+# File: bin/openerp.glade, line: 816
 msgid "_Preview in PDF"
 msgstr "Просмотр в pdf"
 #
 # File: bin/openerp.glade, line: 799
+# File: bin/openerp.glade, line: 832
 # File: bin/openerp.glade, line: 832
 msgid "Previe_w in editor"
 msgstr "Просмотр в редакторе"
@@ -2266,6 +2615,7 @@ msgstr "Просмотр в редакторе"
 # File: bin/openerp.glade, line: 819
 # File: bin/openerp.glade, line: 819
 # File: bin/openerp.glade, line: 852
+# File: bin/openerp.glade, line: 852
 msgid "Expor_t data..."
 msgstr "Экспорт данных"
 #
@@ -2274,29 +2624,35 @@ msgstr "Экспорт данных"
 # File: bin/openerp.glade, line: 834
 # File: bin/openerp.glade, line: 834
 # File: bin/openerp.glade, line: 867
+# File: bin/openerp.glade, line: 867
 msgid "I_mport data..."
 msgstr "Импорт данных"
 #
 # File: bin/openerp.glade, line: 846
 # File: bin/openerp.glade, line: 879
+# File: bin/openerp.glade, line: 879
 msgid "_Options"
 msgstr "Опции"
 #
+# File: bin/openerp.glade, line: 886
 # File: bin/openerp.glade, line: 886
 msgid "_Extension Manager"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 861
 # File: bin/openerp.glade, line: 894
+# File: bin/openerp.glade, line: 894
 msgid "_Menubar"
 msgstr "Меню"
 #
 # File: bin/openerp.glade, line: 869
 # File: bin/openerp.glade, line: 902
+# File: bin/openerp.glade, line: 902
 msgid "Text _and Icons"
 msgstr "Текст и иконки"
 #
 # File: bin/openerp.glade, line: 877
+# File: bin/openerp.glade, line: 910
 # File: bin/openerp.glade, line: 910
 msgid "_Icons only"
 msgstr "Только иконки"
@@ -2306,6 +2662,7 @@ msgstr "Только иконки"
 # File: bin/openerp.glade, line: 886
 # File: bin/openerp.glade, line: 886
 # File: bin/openerp.glade, line: 919
+# File: bin/openerp.glade, line: 919
 msgid "_Text only"
 msgstr "Только текст"
 #
@@ -2313,6 +2670,7 @@ msgstr "Только текст"
 # File: bin/openerp.glade, line: 899
 # File: bin/openerp.glade, line: 899
 # File: bin/openerp.glade, line: 899
+# File: bin/openerp.glade, line: 932
 # File: bin/openerp.glade, line: 932
 msgid "_Forms"
 msgstr "Формы"
@@ -2322,6 +2680,7 @@ msgstr "Формы"
 # File: bin/openerp.glade, line: 907
 # File: bin/openerp.glade, line: 907
 # File: bin/openerp.glade, line: 940
+# File: bin/openerp.glade, line: 940
 msgid "Right Toolbar"
 msgstr "Правая панель"
 #
@@ -2329,6 +2688,7 @@ msgstr "Правая панель"
 # File: bin/openerp.glade, line: 915
 # File: bin/openerp.glade, line: 915
 # File: bin/openerp.glade, line: 915
+# File: bin/openerp.glade, line: 948
 # File: bin/openerp.glade, line: 948
 msgid "Tabs default position"
 msgstr "Положение вкладок по умолчанию"
@@ -2338,6 +2698,7 @@ msgstr "Положение вкладок по умолчанию"
 # File: bin/openerp.glade, line: 923
 # File: bin/openerp.glade, line: 923
 # File: bin/openerp.glade, line: 956
+# File: bin/openerp.glade, line: 956
 msgid "Top"
 msgstr "По верху"
 #
@@ -2345,6 +2706,7 @@ msgstr "По верху"
 # File: bin/openerp.glade, line: 931
 # File: bin/openerp.glade, line: 931
 # File: bin/openerp.glade, line: 931
+# File: bin/openerp.glade, line: 964
 # File: bin/openerp.glade, line: 964
 msgid "Left"
 msgstr "По левому краю"
@@ -2354,6 +2716,7 @@ msgstr "По левому краю"
 # File: bin/openerp.glade, line: 940
 # File: bin/openerp.glade, line: 940
 # File: bin/openerp.glade, line: 973
+# File: bin/openerp.glade, line: 973
 msgid "Right"
 msgstr "По правому краю"
 #
@@ -2361,6 +2724,7 @@ msgstr "По правому краю"
 # File: bin/openerp.glade, line: 949
 # File: bin/openerp.glade, line: 949
 # File: bin/openerp.glade, line: 949
+# File: bin/openerp.glade, line: 982
 # File: bin/openerp.glade, line: 982
 msgid "Bottom"
 msgstr "По нижнему краю"
@@ -2370,6 +2734,7 @@ msgstr "По нижнему краю"
 # File: bin/openerp.glade, line: 962
 # File: bin/openerp.glade, line: 962
 # File: bin/openerp.glade, line: 995
+# File: bin/openerp.glade, line: 995
 msgid "Tabs default orientation"
 msgstr "Расоложение вкладок по умолчанию"
 #
@@ -2377,6 +2742,7 @@ msgstr "Расоложение вкладок по умолчанию"
 # File: bin/openerp.glade, line: 970
 # File: bin/openerp.glade, line: 970
 # File: bin/openerp.glade, line: 970
+# File: bin/openerp.glade, line: 1003
 # File: bin/openerp.glade, line: 1003
 msgid "Horizontal"
 msgstr "По горизонтали"
@@ -2386,15 +2752,18 @@ msgstr "По горизонтали"
 # File: bin/openerp.glade, line: 978
 # File: bin/openerp.glade, line: 978
 # File: bin/openerp.glade, line: 1011
+# File: bin/openerp.glade, line: 1011
 msgid "Vertical"
 msgstr "По вертикали"
 #
 # File: bin/openerp.glade, line: 995
 # File: bin/openerp.glade, line: 1028
+# File: bin/openerp.glade, line: 1028
 msgid "_Print"
 msgstr "Печать"
 #
 # File: bin/openerp.glade, line: 1002
+# File: bin/openerp.glade, line: 1035
 # File: bin/openerp.glade, line: 1035
 msgid "Previe_w before print"
 msgstr "Предв. просмотр перед печатью"
@@ -2404,6 +2773,7 @@ msgstr "Предв. просмотр перед печатью"
 # File: bin/openerp.glade, line: 1026
 # File: bin/openerp.glade, line: 1026
 # File: bin/openerp.glade, line: 1059
+# File: bin/openerp.glade, line: 1059
 msgid "_Save options"
 msgstr "Сохранить настройки"
 #
@@ -2411,6 +2781,7 @@ msgstr "Сохранить настройки"
 # File: bin/openerp.glade, line: 1046
 # File: bin/openerp.glade, line: 1046
 # File: bin/openerp.glade, line: 1046
+# File: bin/openerp.glade, line: 1079
 # File: bin/openerp.glade, line: 1079
 msgid "_Plugins"
 msgstr "Дополнения"
@@ -2420,6 +2791,7 @@ msgstr "Дополнения"
 # File: bin/openerp.glade, line: 1054
 # File: bin/openerp.glade, line: 1054
 # File: bin/openerp.glade, line: 1087
+# File: bin/openerp.glade, line: 1087
 msgid "_Execute a plugin"
 msgstr "Исполнить дополнение"
 #
@@ -2428,6 +2800,7 @@ msgstr "Исполнить дополнение"
 # File: bin/openerp.glade, line: 1074
 # File: bin/openerp.glade, line: 1074
 # File: bin/openerp.glade, line: 1107
+# File: bin/openerp.glade, line: 1107
 msgid "_Shortcuts"
 msgstr "Горячие клавиши"
 #
@@ -2435,6 +2808,7 @@ msgstr "Горячие клавиши"
 # File: bin/openerp.glade, line: 1082
 # File: bin/openerp.glade, line: 1082
 # File: bin/openerp.glade, line: 1082
+# File: bin/openerp.glade, line: 1115
 # File: bin/openerp.glade, line: 1115
 msgid "_Help"
 msgstr "_Справка"
@@ -2449,15 +2823,19 @@ msgstr "_Справка"
 # File: bin/openerp.glade, line: 5243
 # File: bin/openerp.glade, line: 1122
 # File: bin/openerp.glade, line: 4387
+# File: bin/openerp.glade, line: 1122
+# File: bin/openerp.glade, line: 4387
 msgid "Support Request"
 msgstr "Запрос на поддержку"
 #
 # File: bin/openerp.glade, line: 1109
 # File: bin/openerp.glade, line: 1142
+# File: bin/openerp.glade, line: 1142
 msgid "User _Manual"
 msgstr "Руководство пользователя"
 #
 # File: bin/openerp.glade, line: 1124
+# File: bin/openerp.glade, line: 1157
 # File: bin/openerp.glade, line: 1157
 msgid "_Contextual Help"
 msgstr "Контекстная помощь"
@@ -2467,6 +2845,7 @@ msgstr "Контекстная помощь"
 # File: bin/openerp.glade, line: 1140
 # File: bin/openerp.glade, line: 1140
 # File: bin/openerp.glade, line: 1173
+# File: bin/openerp.glade, line: 1173
 msgid "_Tips"
 msgstr "Советы"
 #
@@ -2474,6 +2853,7 @@ msgstr "Советы"
 # File: bin/openerp.glade, line: 1155
 # File: bin/openerp.glade, line: 1155
 # File: bin/openerp.glade, line: 1155
+# File: bin/openerp.glade, line: 1188
 # File: bin/openerp.glade, line: 1188
 msgid "Keyboard Shortcuts"
 msgstr "Горячие клавиши"
@@ -2483,10 +2863,12 @@ msgstr "Горячие клавиши"
 # File: bin/openerp.glade, line: 1168
 # File: bin/openerp.glade, line: 1168
 # File: bin/openerp.glade, line: 1201
+# File: bin/openerp.glade, line: 1201
 msgid "_License"
 msgstr "Лицензия"
 #
 # File: bin/openerp.glade, line: 1183
+# File: bin/openerp.glade, line: 1216
 # File: bin/openerp.glade, line: 1216
 msgid "_About..."
 msgstr "О программе"
@@ -2496,6 +2878,7 @@ msgstr "О программе"
 # File: bin/openerp.glade, line: 1225
 # File: bin/openerp.glade, line: 1225
 # File: bin/openerp.glade, line: 1258
+# File: bin/openerp.glade, line: 1258
 msgid "Edit / Save this resource"
 msgstr "Редактировать/Сохранить объект"
 #
@@ -2504,35 +2887,43 @@ msgstr "Редактировать/Сохранить объект"
 # File: bin/openerp.glade, line: 1241
 # File: bin/openerp.glade, line: 1241
 # File: bin/openerp.glade, line: 1274
+# File: bin/openerp.glade, line: 1274
 msgid "Delete this resource"
 msgstr "Удалить объект"
 #
 # File: bin/openerp.glade, line: 1254
+# File: bin/openerp.glade, line: 1287
 # File: bin/openerp.glade, line: 1287
 msgid "Go to previous matched search"
 msgstr "К предыдущему объекту"
 #
 # File: bin/openerp.glade, line: 1265
 # File: bin/openerp.glade, line: 1298
+# File: bin/openerp.glade, line: 1298
 msgid "Go to next matched resource"
 msgstr "К следующему объекту"
 #
+# File: bin/openerp.glade, line: 1311
 # File: bin/openerp.glade, line: 1311
 msgid "List"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 1323
+# File: bin/openerp.glade, line: 1323
 msgid "Form"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 1336
 # File: bin/openerp.glade, line: 1336
 msgid "Calendar"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 1346
+# File: bin/openerp.glade, line: 1346
 msgid "Graph"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 1359
 # File: bin/openerp.glade, line: 1359
 msgid "Gantt"
 msgstr ""
@@ -2542,6 +2933,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 1344
 # File: bin/openerp.glade, line: 1344
 # File: bin/openerp.glade, line: 1377
+# File: bin/openerp.glade, line: 1377
 msgid "Print documents"
 msgstr "Распечатать документы"
 #
@@ -2549,6 +2941,7 @@ msgstr "Распечатать документы"
 # File: bin/openerp.glade, line: 1355
 # File: bin/openerp.glade, line: 1355
 # File: bin/openerp.glade, line: 1355
+# File: bin/openerp.glade, line: 1388
 # File: bin/openerp.glade, line: 1388
 msgid "Launch actions about this resource"
 msgstr "Запустить действия для этого объекта"
@@ -2558,6 +2951,7 @@ msgstr "Запустить действия для этого объекта"
 # File: bin/openerp.glade, line: 1368
 # File: bin/openerp.glade, line: 1368
 # File: bin/openerp.glade, line: 1401
+# File: bin/openerp.glade, line: 1401
 msgid "Add an attachment to this resource"
 msgstr "Добавить вложение к объекту"
 #
@@ -2565,6 +2959,7 @@ msgstr "Добавить вложение к объекту"
 # File: bin/openerp.glade, line: 1369
 # File: bin/openerp.glade, line: 1369
 # File: bin/openerp.glade, line: 1369
+# File: bin/openerp.glade, line: 1402
 # File: bin/openerp.glade, line: 1402
 msgid "Attachment"
 msgstr "Вложение"
@@ -2577,6 +2972,8 @@ msgstr "Вложение"
 # File: bin/openerp.glade, line: 1385
 # File: bin/openerp.glade, line: 1384
 # File: bin/openerp.glade, line: 1385
+# File: bin/openerp.glade, line: 1417
+# File: bin/openerp.glade, line: 1418
 # File: bin/openerp.glade, line: 1417
 # File: bin/openerp.glade, line: 1418
 msgid "Menu"
@@ -2592,6 +2989,8 @@ msgstr "Меню"
 # File: bin/openerp.glade, line: 1403
 # File: bin/openerp.glade, line: 1435
 # File: bin/openerp.glade, line: 1436
+# File: bin/openerp.glade, line: 1435
+# File: bin/openerp.glade, line: 1436
 msgid "Reload"
 msgstr "Открыть заново"
 #
@@ -2599,24 +2998,29 @@ msgstr "Открыть заново"
 #
 # File: bin/openerp.glade, line: 1420
 # File: bin/openerp.glade, line: 1453
+# File: bin/openerp.glade, line: 1453
 msgid "Close this window"
 msgstr "Закрыть текущее окно"
 #
 # File: bin/openerp.glade, line: 1464
+# File: bin/openerp.glade, line: 1497
 # File: bin/openerp.glade, line: 1497
 msgid "Requests:"
 msgstr "Запросы:"
 #
 # File: bin/openerp.glade, line: 1487
 # File: bin/openerp.glade, line: 1520
+# File: bin/openerp.glade, line: 1520
 msgid "Read my Requests"
 msgstr "Прочитать мои запросы"
 #
 # File: bin/openerp.glade, line: 1508
 # File: bin/openerp.glade, line: 1541
+# File: bin/openerp.glade, line: 1541
 msgid "Send a new request"
 msgstr "Отправить новый запрос"
 #
+# File: bin/openerp.glade, line: 1581
 # File: bin/openerp.glade, line: 1581
 msgid "OpenERP - Tree Resources"
 msgstr ""
@@ -2626,9 +3030,11 @@ msgstr ""
 # File: bin/openerp.glade, line: 1585
 # File: bin/openerp.glade, line: 1601
 # File: bin/openerp.glade, line: 1634
+# File: bin/openerp.glade, line: 1634
 msgid "Shortcuts"
 msgstr "Горячие кнопки"
 #
+# File: bin/openerp.glade, line: 1743
 # File: bin/openerp.glade, line: 1743
 msgid "OpenERP - Forms"
 msgstr ""
@@ -2638,19 +3044,23 @@ msgstr ""
 # File: bin/openerp.glade, line: 1718
 # File: bin/openerp.glade, line: 1734
 # File: bin/openerp.glade, line: 1767
+# File: bin/openerp.glade, line: 1767
 msgid "State:"
 msgstr "Состояние:"
 #
 # File: bin/openerp.glade, line: 1799
+# File: bin/openerp.glade, line: 1799
 msgid "OpenERP - About"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 1813
 # File: bin/openerp.glade, line: 1813
 msgid ""
 "<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 1852
 # File: bin/openerp.glade, line: 1852
 msgid ""
 "\n"
@@ -2668,9 +3078,11 @@ msgid ""
 msgstr ""
 #
 # File: bin/openerp.glade, line: 1880
+# File: bin/openerp.glade, line: 1880
 msgid "_OpenERP"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 1908
 # File: bin/openerp.glade, line: 1908
 msgid ""
 "\n"
@@ -2692,13 +3104,17 @@ msgstr ""
 # File: bin/openerp.glade, line: 1890
 # File: bin/openerp.glade, line: 1906
 # File: bin/openerp.glade, line: 1939
+# File: bin/openerp.glade, line: 1939
 msgid "_Contact"
 msgstr "_Контакт"
 #
 # File: bin/openerp.glade, line: 1991
+# File: bin/openerp.glade, line: 1991
 msgid "Open ERP - Forms widget"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 2170
+# File: bin/openerp.glade, line: 4733
 # File: bin/openerp.glade, line: 2170
 # File: bin/openerp.glade, line: 4733
 msgid "OpenERP - Confirmation"
@@ -2710,37 +3126,47 @@ msgstr ""
 # File: bin/openerp.glade, line: 2198
 # File: bin/openerp.glade, line: 4761
 # File: bin/openerp.glade, line: 6147
+# File: bin/openerp.glade, line: 2198
+# File: bin/openerp.glade, line: 4761
+# File: bin/openerp.glade, line: 6147
 msgid "Hello World!"
 msgstr "Привет Мир!"
 #
+# File: bin/openerp.glade, line: 2247
 # File: bin/openerp.glade, line: 2247
 msgid "OpenERP - Selection"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 2228
 # File: bin/openerp.glade, line: 2261
+# File: bin/openerp.glade, line: 2261
 msgid "Your selection:"
 msgstr "Ваш выбор:"
 #
 # File: bin/openerp.glade, line: 2341
+# File: bin/openerp.glade, line: 2341
 msgid "OpenERP - Dialog"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 2365
 # File: bin/openerp.glade, line: 2365
 msgid "OpenERP, Field Preference target"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 2363
 # File: bin/openerp.glade, line: 2396
+# File: bin/openerp.glade, line: 2396
 msgid "_only for you"
 msgstr "только для вас"
 #
 # File: bin/openerp.glade, line: 2377
 # File: bin/openerp.glade, line: 2410
+# File: bin/openerp.glade, line: 2410
 msgid "for _all users"
 msgstr "для всех пользователей"
 #
 # File: bin/openerp.glade, line: 2397
+# File: bin/openerp.glade, line: 2430
 # File: bin/openerp.glade, line: 2430
 msgid "<b>Value applicable for:</b>"
 msgstr "<b>Значение применимо для:</b>"
@@ -2750,24 +3176,29 @@ msgstr "<b>Значение применимо для:</b>"
 # File: bin/openerp.glade, line: 2417
 # File: bin/openerp.glade, line: 2433
 # File: bin/openerp.glade, line: 2466
+# File: bin/openerp.glade, line: 2466
 msgid "<b>Value applicable if:</b>"
 msgstr "<b>Значение применимо, если:</b>"
 #
 # File: bin/openerp.glade, line: 2451
+# File: bin/openerp.glade, line: 2484
 # File: bin/openerp.glade, line: 2484
 msgid "Field _Name:"
 msgstr "Название поля"
 #
 # File: bin/openerp.glade, line: 2465
 # File: bin/openerp.glade, line: 2498
+# File: bin/openerp.glade, line: 2498
 msgid "_Domain:"
 msgstr "Домен"
 #
 # File: bin/openerp.glade, line: 2524
 # File: bin/openerp.glade, line: 2557
+# File: bin/openerp.glade, line: 2557
 msgid "Default _value:"
 msgstr "Значение по умолчанию"
 #
+# File: bin/openerp.glade, line: 2612
 # File: bin/openerp.glade, line: 2612
 msgid "OpenERP - Export to CSV"
 msgstr ""
@@ -2777,21 +3208,26 @@ msgstr ""
 # File: bin/openerp.glade, line: 2611
 # File: bin/openerp.glade, line: 2627
 # File: bin/openerp.glade, line: 2660
+# File: bin/openerp.glade, line: 2660
 msgid "Save List"
 msgstr "Сохранить список"
 #
+# File: bin/openerp.glade, line: 2708
 # File: bin/openerp.glade, line: 2708
 msgid "Remove List"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 2763
+# File: bin/openerp.glade, line: 2763
 msgid "<b>Exports List</b>"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 2780
+# File: bin/openerp.glade, line: 2780
 msgid "<b>Predefined Exports</b>"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 2805
 # File: bin/openerp.glade, line: 2805
 msgid "Import Compatible"
 msgstr ""
@@ -2801,16 +3237,20 @@ msgstr ""
 # File: bin/openerp.glade, line: 7833
 # File: bin/openerp.glade, line: 6704
 # File: bin/openerp.glade, line: 2822
+# File: bin/openerp.glade, line: 2822
 #, fuzzy
 msgid "<b>Select an Option to Export</b>"
 msgstr "<b>Импортируемые поля</b>"
 #
+# File: bin/openerp.glade, line: 2869
 # File: bin/openerp.glade, line: 2869
 msgid "Available Fields"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 2835
 # File: bin/openerp.glade, line: 6495
+# File: bin/openerp.glade, line: 2912
+# File: bin/openerp.glade, line: 5639
 # File: bin/openerp.glade, line: 2912
 # File: bin/openerp.glade, line: 5639
 msgid "_Add"
@@ -2820,14 +3260,18 @@ msgstr "Добавить"
 # File: bin/openerp.glade, line: 6542
 # File: bin/openerp.glade, line: 2959
 # File: bin/openerp.glade, line: 5686
+# File: bin/openerp.glade, line: 2959
+# File: bin/openerp.glade, line: 5686
 msgid "_Remove"
 msgstr "Удалить"
 #
 # File: bin/openerp.glade, line: 2930
 # File: bin/openerp.glade, line: 3007
+# File: bin/openerp.glade, line: 3007
 msgid "_Nothing"
 msgstr "Ничего"
 #
+# File: bin/openerp.glade, line: 3062
 # File: bin/openerp.glade, line: 3062
 msgid "Fields to Export"
 msgstr ""
@@ -2836,6 +3280,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 2999
 # File: bin/openerp.glade, line: 2999
 # File: bin/openerp.glade, line: 3015
+# File: bin/openerp.glade, line: 3092
 # File: bin/openerp.glade, line: 3092
 msgid ""
 "Open in Excel\n"
@@ -2849,18 +3294,22 @@ msgstr ""
 # File: bin/openerp.glade, line: 3018
 # File: bin/openerp.glade, line: 3034
 # File: bin/openerp.glade, line: 3111
+# File: bin/openerp.glade, line: 3111
 msgid "Add _field names"
 msgstr "Добавить названия полей"
 #
 # File: bin/openerp.glade, line: 3051
 # File: bin/openerp.glade, line: 3128
+# File: bin/openerp.glade, line: 3128
 msgid "<b>Opti_ons</b>"
 msgstr "<b>Опции</b>"
 #
 # File: bin/openerp.glade, line: 3187
+# File: bin/openerp.glade, line: 3187
 msgid "OpenERP - Search"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 3299
 # File: bin/openerp.glade, line: 3299
 msgid "OpenERP - Preferences"
 msgstr ""
@@ -2870,6 +3319,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 4365
 # File: bin/openerp.glade, line: 3236
 # File: bin/openerp.glade, line: 3313
+# File: bin/openerp.glade, line: 3313
 msgid "<b>User preferences</b>"
 msgstr "<b>Пользовательские установки</b>"
 #
@@ -2877,6 +3327,7 @@ msgstr "<b>Пользовательские установки</b>"
 # File: bin/openerp.glade, line: 4431
 # File: bin/openerp.glade, line: 4431
 # File: bin/openerp.glade, line: 3302
+# File: bin/openerp.glade, line: 3379
 # File: bin/openerp.glade, line: 3379
 msgid "Tip of the Day"
 msgstr "Совет дня"
@@ -2886,6 +3337,7 @@ msgstr "Совет дня"
 # File: bin/openerp.glade, line: 4478
 # File: bin/openerp.glade, line: 3349
 # File: bin/openerp.glade, line: 3426
+# File: bin/openerp.glade, line: 3426
 msgid "_Display a new tip next time?"
 msgstr "Выводить новый совет в следующий раз?"
 #
@@ -2893,6 +3345,7 @@ msgstr "Выводить новый совет в следующий раз?"
 # File: bin/openerp.glade, line: 4531
 # File: bin/openerp.glade, line: 4531
 # File: bin/openerp.glade, line: 3402
+# File: bin/openerp.glade, line: 3479
 # File: bin/openerp.glade, line: 3479
 msgid "Pre_vious Tip"
 msgstr "Предыдущий совет"
@@ -2902,13 +3355,16 @@ msgstr "Предыдущий совет"
 # File: bin/openerp.glade, line: 4577
 # File: bin/openerp.glade, line: 3448
 # File: bin/openerp.glade, line: 3525
+# File: bin/openerp.glade, line: 3525
 msgid "Ne_xt Tip"
 msgstr "Следующий совет"
 #
 # File: bin/openerp.glade, line: 3571
+# File: bin/openerp.glade, line: 3571
 msgid "OpenERP - License"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 3586
 # File: bin/openerp.glade, line: 3586
 msgid "OpenERP license"
 msgstr ""
@@ -2918,6 +3374,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 5336
 # File: bin/openerp.glade, line: 4207
 # File: bin/openerp.glade, line: 4284
+# File: bin/openerp.glade, line: 4284
 msgid "Go to resource ID"
 msgstr "Перейти к объекту с ID"
 #
@@ -2926,9 +3383,11 @@ msgstr "Перейти к объекту с ID"
 # File: bin/openerp.glade, line: 5386
 # File: bin/openerp.glade, line: 4257
 # File: bin/openerp.glade, line: 4334
+# File: bin/openerp.glade, line: 4334
 msgid "Search ID:"
 msgstr "Поиск ID:"
 #
+# File: bin/openerp.glade, line: 4413
 # File: bin/openerp.glade, line: 4413
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
@@ -2943,6 +3402,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 6457
 # File: bin/openerp.glade, line: 5328
 # File: bin/openerp.glade, line: 4472
+# File: bin/openerp.glade, line: 4472
 msgid "Phone number:"
 msgstr "Телефон:"
 #
@@ -2954,6 +3414,7 @@ msgstr "Телефон:"
 # File: bin/openerp.glade, line: 6470
 # File: bin/openerp.glade, line: 5341
 # File: bin/openerp.glade, line: 4485
+# File: bin/openerp.glade, line: 4485
 msgid "Emergency:"
 msgstr "Скорая помощь:"
 #
@@ -2964,6 +3425,7 @@ msgstr "Скорая помощь:"
 # File: bin/openerp.glade, line: 4041
 # File: bin/openerp.glade, line: 6484
 # File: bin/openerp.glade, line: 5355
+# File: bin/openerp.glade, line: 4499
 # File: bin/openerp.glade, line: 4499
 msgid ""
 "Not Urgent\n"
@@ -2981,6 +3443,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 6517
 # File: bin/openerp.glade, line: 5388
 # File: bin/openerp.glade, line: 4532
+# File: bin/openerp.glade, line: 4532
 msgid "<b>Support contract id:</b>"
 msgstr "<b>Договор поддержки №:</b>"
 #
@@ -2988,6 +3451,7 @@ msgstr "<b>Договор поддержки №:</b>"
 # File: bin/openerp.glade, line: 6574
 # File: bin/openerp.glade, line: 6574
 # File: bin/openerp.glade, line: 5445
+# File: bin/openerp.glade, line: 4589
 # File: bin/openerp.glade, line: 4589
 msgid "Other comments:"
 msgstr "Прочие комментарии:"
@@ -2997,6 +3461,7 @@ msgstr "Прочие комментарии:"
 # File: bin/openerp.glade, line: 6588
 # File: bin/openerp.glade, line: 5459
 # File: bin/openerp.glade, line: 4603
+# File: bin/openerp.glade, line: 4603
 msgid "Explain your problem:"
 msgstr "Опигите вашу проблему:"
 #
@@ -3004,6 +3469,7 @@ msgstr "Опигите вашу проблему:"
 # File: bin/openerp.glade, line: 6627
 # File: bin/openerp.glade, line: 6627
 # File: bin/openerp.glade, line: 5498
+# File: bin/openerp.glade, line: 4642
 # File: bin/openerp.glade, line: 4642
 msgid "<b>Your email:</b>"
 msgstr "<b>Ваша эл.почта:</b>"
@@ -3016,6 +3482,7 @@ msgstr "<b>Ваша эл.почта:</b>"
 # File: bin/openerp.glade, line: 6641
 # File: bin/openerp.glade, line: 5512
 # File: bin/openerp.glade, line: 4656
+# File: bin/openerp.glade, line: 4656
 msgid "<b>Your Company:</b>"
 msgstr "<b>Ваша компания:</b>"
 #
@@ -3027,6 +3494,7 @@ msgstr "<b>Ваша компания:</b>"
 # File: bin/openerp.glade, line: 6655
 # File: bin/openerp.glade, line: 5526
 # File: bin/openerp.glade, line: 4670
+# File: bin/openerp.glade, line: 4670
 msgid "<b>Your name:</b>"
 msgstr "<b>Ваше имя:</b>"
 #
@@ -3035,9 +3503,11 @@ msgstr "<b>Ваше имя:</b>"
 # File: bin/openerp.glade, line: 6808
 # File: bin/openerp.glade, line: 5679
 # File: bin/openerp.glade, line: 4823
+# File: bin/openerp.glade, line: 4823
 msgid "Keyboard shortcuts"
 msgstr "Горячие клавиши:"
 #
+# File: bin/openerp.glade, line: 4845
 # File: bin/openerp.glade, line: 4845
 msgid "<b>Shortcuts for OpenERP</b>"
 msgstr ""
@@ -3047,6 +3517,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 6844
 # File: bin/openerp.glade, line: 5715
 # File: bin/openerp.glade, line: 4859
+# File: bin/openerp.glade, line: 4859
 msgid "Close window without saving"
 msgstr "Закрыть окно без сохранения"
 #
@@ -3054,6 +3525,7 @@ msgstr "Закрыть окно без сохранения"
 # File: bin/openerp.glade, line: 6859
 # File: bin/openerp.glade, line: 6859
 # File: bin/openerp.glade, line: 5730
+# File: bin/openerp.glade, line: 4874
 # File: bin/openerp.glade, line: 4874
 msgid "<Ctrl> + <Esc>"
 msgstr "<Ctrl+Esc>"
@@ -3063,6 +3535,7 @@ msgstr "<Ctrl+Esc>"
 # File: bin/openerp.glade, line: 6873
 # File: bin/openerp.glade, line: 5744
 # File: bin/openerp.glade, line: 4888
+# File: bin/openerp.glade, line: 4888
 msgid "<i>When editing a resource in a popup window</i>"
 msgstr "<i>При редактировании объекта во всплываюшем окне</i>"
 #
@@ -3070,6 +3543,7 @@ msgstr "<i>При редактировании объекта во всплыв�
 # File: bin/openerp.glade, line: 6889
 # File: bin/openerp.glade, line: 6889
 # File: bin/openerp.glade, line: 5760
+# File: bin/openerp.glade, line: 4904
 # File: bin/openerp.glade, line: 4904
 msgid "Save and Close window"
 msgstr "Сохранить и закрыть окно"
@@ -3079,6 +3553,7 @@ msgstr "Сохранить и закрыть окно"
 # File: bin/openerp.glade, line: 6904
 # File: bin/openerp.glade, line: 5775
 # File: bin/openerp.glade, line: 4919
+# File: bin/openerp.glade, line: 4919
 msgid "<Ctrl> + <Enter>"
 msgstr "<Ctrl+Enter>"
 #
@@ -3086,6 +3561,7 @@ msgstr "<Ctrl+Enter>"
 # File: bin/openerp.glade, line: 6917
 # File: bin/openerp.glade, line: 6917
 # File: bin/openerp.glade, line: 5788
+# File: bin/openerp.glade, line: 4932
 # File: bin/openerp.glade, line: 4932
 msgid "Switch view mode"
 msgstr "Перейти в режим вида"
@@ -3095,6 +3571,7 @@ msgstr "Перейти в режим вида"
 # File: bin/openerp.glade, line: 6932
 # File: bin/openerp.glade, line: 5803
 # File: bin/openerp.glade, line: 4947
+# File: bin/openerp.glade, line: 4947
 msgid "<Ctrl> + L"
 msgstr "<Ctrl+L>"
 #
@@ -3102,6 +3579,7 @@ msgstr "<Ctrl+L>"
 # File: bin/openerp.glade, line: 6945
 # File: bin/openerp.glade, line: 6945
 # File: bin/openerp.glade, line: 5816
+# File: bin/openerp.glade, line: 4960
 # File: bin/openerp.glade, line: 4960
 msgid "Next record"
 msgstr "Следующая запись"
@@ -3111,6 +3589,7 @@ msgstr "Следующая запись"
 # File: bin/openerp.glade, line: 6960
 # File: bin/openerp.glade, line: 5831
 # File: bin/openerp.glade, line: 4975
+# File: bin/openerp.glade, line: 4975
 msgid "Previous record"
 msgstr "Предыдущая запись"
 #
@@ -3118,6 +3597,7 @@ msgstr "Предыдущая запись"
 # File: bin/openerp.glade, line: 6975
 # File: bin/openerp.glade, line: 6975
 # File: bin/openerp.glade, line: 5846
+# File: bin/openerp.glade, line: 4990
 # File: bin/openerp.glade, line: 4990
 msgid "<PgDn>"
 msgstr "<PgDn>"
@@ -3127,6 +3607,7 @@ msgstr "<PgDn>"
 # File: bin/openerp.glade, line: 6988
 # File: bin/openerp.glade, line: 5859
 # File: bin/openerp.glade, line: 5003
+# File: bin/openerp.glade, line: 5003
 msgid "<PgUp>"
 msgstr "<PgUp>"
 #
@@ -3134,6 +3615,7 @@ msgstr "<PgUp>"
 # File: bin/openerp.glade, line: 7016
 # File: bin/openerp.glade, line: 7016
 # File: bin/openerp.glade, line: 5887
+# File: bin/openerp.glade, line: 5031
 # File: bin/openerp.glade, line: 5031
 msgid "Save"
 msgstr "Сохранить"
@@ -3143,6 +3625,7 @@ msgstr "Сохранить"
 # File: bin/openerp.glade, line: 7031
 # File: bin/openerp.glade, line: 5902
 # File: bin/openerp.glade, line: 5046
+# File: bin/openerp.glade, line: 5046
 msgid "<Ctrl> + W"
 msgstr "<Ctrl+W>"
 #
@@ -3150,6 +3633,7 @@ msgstr "<Ctrl+W>"
 # File: bin/openerp.glade, line: 7044
 # File: bin/openerp.glade, line: 7044
 # File: bin/openerp.glade, line: 5915
+# File: bin/openerp.glade, line: 5059
 # File: bin/openerp.glade, line: 5059
 msgid "<Ctrl> + S"
 msgstr "<Ctrl+S>"
@@ -3159,6 +3643,7 @@ msgstr "<Ctrl+S>"
 # File: bin/openerp.glade, line: 7072
 # File: bin/openerp.glade, line: 5943
 # File: bin/openerp.glade, line: 5087
+# File: bin/openerp.glade, line: 5087
 msgid "<Ctrl> + <PgDn>"
 msgstr "<Ctrl+PgDn>"
 #
@@ -3166,6 +3651,7 @@ msgstr "<Ctrl+PgDn>"
 # File: bin/openerp.glade, line: 7085
 # File: bin/openerp.glade, line: 7085
 # File: bin/openerp.glade, line: 5956
+# File: bin/openerp.glade, line: 5100
 # File: bin/openerp.glade, line: 5100
 msgid "Previous tab"
 msgstr "Предыдущая вкладка"
@@ -3175,6 +3661,7 @@ msgstr "Предыдущая вкладка"
 # File: bin/openerp.glade, line: 7100
 # File: bin/openerp.glade, line: 5971
 # File: bin/openerp.glade, line: 5115
+# File: bin/openerp.glade, line: 5115
 msgid "<Ctrl> + <PgUp>"
 msgstr "<Ctrl+PgUp>"
 #
@@ -3182,6 +3669,7 @@ msgstr "<Ctrl+PgUp>"
 # File: bin/openerp.glade, line: 7113
 # File: bin/openerp.glade, line: 7113
 # File: bin/openerp.glade, line: 5984
+# File: bin/openerp.glade, line: 5128
 # File: bin/openerp.glade, line: 5128
 msgid "New"
 msgstr "Новый"
@@ -3191,6 +3679,7 @@ msgstr "Новый"
 # File: bin/openerp.glade, line: 7128
 # File: bin/openerp.glade, line: 5999
 # File: bin/openerp.glade, line: 5143
+# File: bin/openerp.glade, line: 5143
 msgid "<Ctrl> + N"
 msgstr "<Ctrl+N>"
 #
@@ -3198,6 +3687,7 @@ msgstr "<Ctrl+N>"
 # File: bin/openerp.glade, line: 7141
 # File: bin/openerp.glade, line: 7141
 # File: bin/openerp.glade, line: 6012
+# File: bin/openerp.glade, line: 5156
 # File: bin/openerp.glade, line: 5156
 msgid "Delete"
 msgstr "Удалить"
@@ -3207,6 +3697,7 @@ msgstr "Удалить"
 # File: bin/openerp.glade, line: 7156
 # File: bin/openerp.glade, line: 6027
 # File: bin/openerp.glade, line: 5171
+# File: bin/openerp.glade, line: 5171
 msgid "<Ctrl> + D"
 msgstr "<Ctrl+D>"
 #
@@ -3214,6 +3705,7 @@ msgstr "<Ctrl+D>"
 # File: bin/openerp.glade, line: 7169
 # File: bin/openerp.glade, line: 7169
 # File: bin/openerp.glade, line: 6040
+# File: bin/openerp.glade, line: 5184
 # File: bin/openerp.glade, line: 5184
 msgid "Find / Search"
 msgstr "Поиск"
@@ -3223,6 +3715,7 @@ msgstr "Поиск"
 # File: bin/openerp.glade, line: 7184
 # File: bin/openerp.glade, line: 6055
 # File: bin/openerp.glade, line: 5199
+# File: bin/openerp.glade, line: 5199
 msgid "<Ctrl> + F"
 msgstr "<Ctrl+F>"
 #
@@ -3230,6 +3723,7 @@ msgstr "<Ctrl+F>"
 # File: bin/openerp.glade, line: 7197
 # File: bin/openerp.glade, line: 7197
 # File: bin/openerp.glade, line: 6068
+# File: bin/openerp.glade, line: 5212
 # File: bin/openerp.glade, line: 5212
 msgid "Connect"
 msgstr "Подключиться"
@@ -3239,6 +3733,7 @@ msgstr "Подключиться"
 # File: bin/openerp.glade, line: 7212
 # File: bin/openerp.glade, line: 6083
 # File: bin/openerp.glade, line: 5227
+# File: bin/openerp.glade, line: 5227
 msgid "<Ctrl> + O"
 msgstr "<Ctrl+O>"
 #
@@ -3246,6 +3741,7 @@ msgstr "<Ctrl+O>"
 # File: bin/openerp.glade, line: 7226
 # File: bin/openerp.glade, line: 7226
 # File: bin/openerp.glade, line: 6097
+# File: bin/openerp.glade, line: 5241
 # File: bin/openerp.glade, line: 5241
 msgid "Main Shortcuts"
 msgstr "Главные горячие клавиши"
@@ -3255,6 +3751,7 @@ msgstr "Главные горячие клавиши"
 # File: bin/openerp.glade, line: 7243
 # File: bin/openerp.glade, line: 6114
 # File: bin/openerp.glade, line: 5258
+# File: bin/openerp.glade, line: 5258
 msgid "F2"
 msgstr "F2"
 #
@@ -3262,6 +3759,7 @@ msgstr "F2"
 # File: bin/openerp.glade, line: 7256
 # File: bin/openerp.glade, line: 7256
 # File: bin/openerp.glade, line: 6127
+# File: bin/openerp.glade, line: 5271
 # File: bin/openerp.glade, line: 5271
 msgid "<b>Shortcuts in relation fields</b>"
 msgstr "<b>Горячие главиши в полях отношений</b>"
@@ -3271,6 +3769,7 @@ msgstr "<b>Горячие главиши в полях отношений</b>"
 # File: bin/openerp.glade, line: 7271
 # File: bin/openerp.glade, line: 6142
 # File: bin/openerp.glade, line: 5286
+# File: bin/openerp.glade, line: 5286
 msgid "<b>Shortcuts in text entries</b>"
 msgstr "<b>Горячие клавиши в текстовых полях</b>"
 #
@@ -3278,6 +3777,7 @@ msgstr "<b>Горячие клавиши в текстовых полях</b>"
 # File: bin/openerp.glade, line: 7284
 # File: bin/openerp.glade, line: 7284
 # File: bin/openerp.glade, line: 6155
+# File: bin/openerp.glade, line: 5299
 # File: bin/openerp.glade, line: 5299
 msgid "Open current field"
 msgstr "Открыть текущее поле"
@@ -3287,6 +3787,7 @@ msgstr "Открыть текущее поле"
 # File: bin/openerp.glade, line: 7299
 # File: bin/openerp.glade, line: 6170
 # File: bin/openerp.glade, line: 5314
+# File: bin/openerp.glade, line: 5314
 msgid "Add a new line/field"
 msgstr "Добавить новую строку / поле"
 #
@@ -3294,6 +3795,7 @@ msgstr "Добавить новую строку / поле"
 # File: bin/openerp.glade, line: 7314
 # File: bin/openerp.glade, line: 7314
 # File: bin/openerp.glade, line: 6185
+# File: bin/openerp.glade, line: 5329
 # File: bin/openerp.glade, line: 5329
 msgid "F1"
 msgstr "F1"
@@ -3303,6 +3805,7 @@ msgstr "F1"
 # File: bin/openerp.glade, line: 7327
 # File: bin/openerp.glade, line: 6198
 # File: bin/openerp.glade, line: 5342
+# File: bin/openerp.glade, line: 5342
 msgid "Auto-Complete text field"
 msgstr "Автоматическое заполнение текстового поля"
 #
@@ -3310,6 +3813,7 @@ msgstr "Автоматическое заполнение текстового �
 # File: bin/openerp.glade, line: 7342
 # File: bin/openerp.glade, line: 7342
 # File: bin/openerp.glade, line: 6213
+# File: bin/openerp.glade, line: 5357
 # File: bin/openerp.glade, line: 5357
 msgid "<Enter>"
 msgstr "<Enter>"
@@ -3319,6 +3823,7 @@ msgstr "<Enter>"
 # File: bin/openerp.glade, line: 7355
 # File: bin/openerp.glade, line: 6226
 # File: bin/openerp.glade, line: 5370
+# File: bin/openerp.glade, line: 5370
 msgid "Previous editable widget"
 msgstr "Предыдущий изменяемый виджет"
 #
@@ -3326,6 +3831,7 @@ msgstr "Предыдущий изменяемый виджет"
 # File: bin/openerp.glade, line: 7370
 # File: bin/openerp.glade, line: 7370
 # File: bin/openerp.glade, line: 6241
+# File: bin/openerp.glade, line: 5385
 # File: bin/openerp.glade, line: 5385
 #, fuzzy
 msgid "<Shift> + <Tab>"
@@ -3336,6 +3842,7 @@ msgstr "<Shift+Tab>"
 # File: bin/openerp.glade, line: 7383
 # File: bin/openerp.glade, line: 6254
 # File: bin/openerp.glade, line: 5398
+# File: bin/openerp.glade, line: 5398
 msgid "Next editable widget"
 msgstr "Следующий изменяемый виджет"
 #
@@ -3343,6 +3850,7 @@ msgstr "Следующий изменяемый виджет"
 # File: bin/openerp.glade, line: 7398
 # File: bin/openerp.glade, line: 7398
 # File: bin/openerp.glade, line: 6269
+# File: bin/openerp.glade, line: 5413
 # File: bin/openerp.glade, line: 5413
 msgid "<Tab>"
 msgstr "<Tab>"
@@ -3352,6 +3860,7 @@ msgstr "<Tab>"
 # File: bin/openerp.glade, line: 7411
 # File: bin/openerp.glade, line: 6282
 # File: bin/openerp.glade, line: 5426
+# File: bin/openerp.glade, line: 5426
 msgid "Paste selected text"
 msgstr "Поместить выделенный текст"
 #
@@ -3359,6 +3868,7 @@ msgstr "Поместить выделенный текст"
 # File: bin/openerp.glade, line: 7426
 # File: bin/openerp.glade, line: 7426
 # File: bin/openerp.glade, line: 6297
+# File: bin/openerp.glade, line: 5441
 # File: bin/openerp.glade, line: 5441
 msgid "Copy selected text"
 msgstr "Скопировать выделенный текст"
@@ -3368,6 +3878,7 @@ msgstr "Скопировать выделенный текст"
 # File: bin/openerp.glade, line: 7441
 # File: bin/openerp.glade, line: 6312
 # File: bin/openerp.glade, line: 5456
+# File: bin/openerp.glade, line: 5456
 msgid "Cut selected text"
 msgstr "Вырезать выделенный текст"
 #
@@ -3375,6 +3886,7 @@ msgstr "Вырезать выделенный текст"
 # File: bin/openerp.glade, line: 7456
 # File: bin/openerp.glade, line: 7456
 # File: bin/openerp.glade, line: 6327
+# File: bin/openerp.glade, line: 5471
 # File: bin/openerp.glade, line: 5471
 msgid "<Ctrl> + V"
 msgstr "<Ctrl+V>"
@@ -3384,6 +3896,7 @@ msgstr "<Ctrl+V>"
 # File: bin/openerp.glade, line: 7469
 # File: bin/openerp.glade, line: 6340
 # File: bin/openerp.glade, line: 5484
+# File: bin/openerp.glade, line: 5484
 msgid "<Ctrl> + C"
 msgstr "<Ctrl+C>"
 #
@@ -3391,6 +3904,7 @@ msgstr "<Ctrl+C>"
 # File: bin/openerp.glade, line: 7482
 # File: bin/openerp.glade, line: 7482
 # File: bin/openerp.glade, line: 6353
+# File: bin/openerp.glade, line: 5497
 # File: bin/openerp.glade, line: 5497
 msgid "<Ctrl> + X"
 msgstr "<Ctrl+X>"
@@ -3400,6 +3914,7 @@ msgstr "<Ctrl+X>"
 # File: bin/openerp.glade, line: 7499
 # File: bin/openerp.glade, line: 6370
 # File: bin/openerp.glade, line: 5514
+# File: bin/openerp.glade, line: 5514
 msgid "Edition Widgets"
 msgstr "Изменяемые виджеты"
 #
@@ -3408,15 +3923,18 @@ msgstr "Изменяемые виджеты"
 # File: bin/openerp.glade, line: 7537
 # File: bin/openerp.glade, line: 6408
 # File: bin/openerp.glade, line: 5552
+# File: bin/openerp.glade, line: 5552
 msgid "Import from CSV"
 msgstr "Импорт из CSV"
 #
 # File: bin/openerp.glade, line: 6453
 # File: bin/openerp.glade, line: 5597
+# File: bin/openerp.glade, line: 5597
 msgid "<b>All fields</b>"
 msgstr "<b>Все поля</b>"
 #
 # File: bin/openerp.glade, line: 6590
+# File: bin/openerp.glade, line: 5734
 # File: bin/openerp.glade, line: 5734
 msgid "N_othing"
 msgstr "Ничего"
@@ -3426,6 +3944,7 @@ msgstr "Ничего"
 # File: bin/openerp.glade, line: 7778
 # File: bin/openerp.glade, line: 6649
 # File: bin/openerp.glade, line: 5793
+# File: bin/openerp.glade, line: 5793
 msgid "Auto-Detect"
 msgstr "Автоопределение"
 #
@@ -3433,6 +3952,7 @@ msgstr "Автоопределение"
 # File: bin/openerp.glade, line: 7833
 # File: bin/openerp.glade, line: 7833
 # File: bin/openerp.glade, line: 6704
+# File: bin/openerp.glade, line: 5848
 # File: bin/openerp.glade, line: 5848
 msgid "<b>Fields to import</b>"
 msgstr "<b>Импортируемые поля</b>"
@@ -3442,6 +3962,7 @@ msgstr "<b>Импортируемые поля</b>"
 # File: bin/openerp.glade, line: 7868
 # File: bin/openerp.glade, line: 6739
 # File: bin/openerp.glade, line: 5883
+# File: bin/openerp.glade, line: 5883
 msgid "File to Import:"
 msgstr "Импортируемый файл:"
 #
@@ -3449,6 +3970,7 @@ msgstr "Импортируемый файл:"
 # File: bin/openerp.glade, line: 7942
 # File: bin/openerp.glade, line: 7942
 # File: bin/openerp.glade, line: 6813
+# File: bin/openerp.glade, line: 5957
 # File: bin/openerp.glade, line: 5957
 msgid "Lines to Skip:"
 msgstr "Пропустить строки:"
@@ -3458,6 +3980,7 @@ msgstr "Пропустить строки:"
 # File: bin/openerp.glade, line: 7971
 # File: bin/openerp.glade, line: 6842
 # File: bin/openerp.glade, line: 5986
+# File: bin/openerp.glade, line: 5986
 msgid "Text Delimiter:"
 msgstr "Разделитель текста:"
 #
@@ -3465,6 +3988,7 @@ msgstr "Разделитель текста:"
 # File: bin/openerp.glade, line: 7999
 # File: bin/openerp.glade, line: 7999
 # File: bin/openerp.glade, line: 6870
+# File: bin/openerp.glade, line: 6014
 # File: bin/openerp.glade, line: 6014
 msgid "Encoding:"
 msgstr "Кодировка:"
@@ -3474,6 +3998,7 @@ msgstr "Кодировка:"
 # File: bin/openerp.glade, line: 8012
 # File: bin/openerp.glade, line: 6883
 # File: bin/openerp.glade, line: 6027
+# File: bin/openerp.glade, line: 6027
 msgid "Field Separater:"
 msgstr "Разделитель полей:"
 #
@@ -3482,9 +4007,11 @@ msgstr "Разделитель полей:"
 # File: bin/openerp.glade, line: 8024
 # File: bin/openerp.glade, line: 6895
 # File: bin/openerp.glade, line: 6039
+# File: bin/openerp.glade, line: 6039
 msgid "CSV Parameters"
 msgstr "Параметры CSV"
 #
+# File: bin/openerp.glade, line: 6118
 # File: bin/openerp.glade, line: 6118
 msgid "OpenERP"
 msgstr ""
@@ -3494,9 +4021,11 @@ msgstr ""
 # File: bin/openerp.glade, line: 8199
 # File: bin/openerp.glade, line: 7070
 # File: bin/openerp.glade, line: 6214
+# File: bin/openerp.glade, line: 6214
 msgid "Server"
 msgstr "Сервер"
 #
+# File: bin/openerp.glade, line: 6224
 # File: bin/openerp.glade, line: 6224
 msgid "<b>Connect to a OpenERP server</b>"
 msgstr ""
@@ -3506,10 +4035,12 @@ msgstr ""
 # File: bin/openerp.glade, line: 8268
 # File: bin/openerp.glade, line: 7139
 # File: bin/openerp.glade, line: 6283
+# File: bin/openerp.glade, line: 6283
 msgid "Protocol connection:"
 msgstr "Протокол соединения:"
 #
 # File: bin/openerp.glade, line: 7185
+# File: bin/openerp.glade, line: 6329
 # File: bin/openerp.glade, line: 6329
 msgid "Port:"
 msgstr "Порт:"
@@ -3519,6 +4050,7 @@ msgstr "Порт:"
 # File: bin/openerp.glade, line: 8366
 # File: bin/openerp.glade, line: 7237
 # File: bin/openerp.glade, line: 6381
+# File: bin/openerp.glade, line: 6381
 msgid "Choose a database..."
 msgstr "Выберите базу данных..."
 #
@@ -3526,6 +4058,7 @@ msgstr "Выберите базу данных..."
 # File: bin/openerp.glade, line: 8381
 # File: bin/openerp.glade, line: 8381
 # File: bin/openerp.glade, line: 7252
+# File: bin/openerp.glade, line: 6396
 # File: bin/openerp.glade, line: 6396
 msgid "<b>Backup a database</b>"
 msgstr "<b>Резервное копирование базы данных</b>"
@@ -3535,6 +4068,7 @@ msgstr "<b>Резервное копирование базы данных</b>"
 # File: bin/openerp.glade, line: 8612
 # File: bin/openerp.glade, line: 7483
 # File: bin/openerp.glade, line: 6627
+# File: bin/openerp.glade, line: 6627
 msgid "Restore a database"
 msgstr "Восстановить базу данных"
 #
@@ -3542,6 +4076,7 @@ msgstr "Восстановить базу данных"
 # File: bin/openerp.glade, line: 8625
 # File: bin/openerp.glade, line: 8625
 # File: bin/openerp.glade, line: 7496
+# File: bin/openerp.glade, line: 6640
 # File: bin/openerp.glade, line: 6640
 msgid "<b>Restore a database</b>"
 msgstr "<b>Восстановить базу данных</b>"
@@ -3551,6 +4086,7 @@ msgstr "<b>Восстановить базу данных</b>"
 # File: bin/openerp.glade, line: 8669
 # File: bin/openerp.glade, line: 7540
 # File: bin/openerp.glade, line: 6684
+# File: bin/openerp.glade, line: 6684
 msgid "(must not contain any special char)"
 msgstr "(не должно содердать специальных символов)"
 #
@@ -3558,6 +4094,7 @@ msgstr "(не должно содердать специальных симво�
 # File: bin/openerp.glade, line: 8698
 # File: bin/openerp.glade, line: 8698
 # File: bin/openerp.glade, line: 7569
+# File: bin/openerp.glade, line: 6713
 # File: bin/openerp.glade, line: 6713
 msgid "New database name:"
 msgstr "Название новой базы данных:"
@@ -3577,6 +4114,9 @@ msgstr "Название новой базы данных:"
 # File: bin/openerp.glade, line: 6813
 # File: bin/openerp.glade, line: 6959
 # File: bin/openerp.glade, line: 7458
+# File: bin/openerp.glade, line: 6813
+# File: bin/openerp.glade, line: 6959
+# File: bin/openerp.glade, line: 7458
 msgid "http://localhost:8069"
 msgstr "http://localhost:8069"
 #
@@ -3584,6 +4124,7 @@ msgstr "http://localhost:8069"
 # File: bin/openerp.glade, line: 8872
 # File: bin/openerp.glade, line: 8872
 # File: bin/openerp.glade, line: 7743
+# File: bin/openerp.glade, line: 6887
 # File: bin/openerp.glade, line: 6887
 msgid "Create a new database"
 msgstr "Создать новую базу данных"
@@ -3593,9 +4134,11 @@ msgstr "Создать новую базу данных"
 # File: bin/openerp.glade, line: 8885
 # File: bin/openerp.glade, line: 7756
 # File: bin/openerp.glade, line: 6900
+# File: bin/openerp.glade, line: 6900
 msgid "<b>Create a new database</b>"
 msgstr "<b>Создать новую базу данных</b>"
 #
+# File: bin/openerp.glade, line: 6971
 # File: bin/openerp.glade, line: 6971
 msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
@@ -3603,9 +4146,11 @@ msgid ""
 msgstr ""
 #
 # File: bin/openerp.glade, line: 6975
+# File: bin/openerp.glade, line: 6975
 msgid "OpenERP Server:"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 7005
 # File: bin/openerp.glade, line: 7005
 msgid ""
 "This is the password of the user that have the rights to administer "
@@ -3613,6 +4158,7 @@ msgid ""
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 #
+# File: bin/openerp.glade, line: 7041
 # File: bin/openerp.glade, line: 7041
 msgid "(<i>admin</i>, by default)"
 msgstr ""
@@ -3622,6 +4168,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 9091
 # File: bin/openerp.glade, line: 7962
 # File: bin/openerp.glade, line: 7106
+# File: bin/openerp.glade, line: 7106
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
@@ -3630,6 +4177,7 @@ msgstr ""
 "специальных символов. Пример: 'terp'."
 #
 # File: bin/openerp.glade, line: 7108
+# File: bin/openerp.glade, line: 7108
 msgid "New Database Name:"
 msgstr ""
 #
@@ -3637,6 +4185,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 9117
 # File: bin/openerp.glade, line: 9117
 # File: bin/openerp.glade, line: 7988
+# File: bin/openerp.glade, line: 7132
 # File: bin/openerp.glade, line: 7132
 msgid ""
 "Choose the default language that will be installed for this database. You "
@@ -3647,9 +4196,11 @@ msgstr ""
 "После установки вы можете добавлять новые языки через меню администратора."
 #
 # File: bin/openerp.glade, line: 7134
+# File: bin/openerp.glade, line: 7134
 msgid "Default Language:"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 7147
 # File: bin/openerp.glade, line: 7147
 msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
@@ -3657,9 +4208,11 @@ msgid ""
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7149
+# File: bin/openerp.glade, line: 7149
 msgid "Administrator Password:"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 7161
 # File: bin/openerp.glade, line: 7161
 msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
@@ -3667,9 +4220,11 @@ msgid ""
 msgstr ""
 #
 # File: bin/openerp.glade, line: 7163
+# File: bin/openerp.glade, line: 7163
 msgid "Confirm Password:"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 7254
 # File: bin/openerp.glade, line: 7254
 msgid ""
 "Check this box if you want demonstration data to be installed on your new "
@@ -3677,6 +4232,7 @@ msgid ""
 "products, partners, etc."
 msgstr ""
 #
+# File: bin/openerp.glade, line: 7257
 # File: bin/openerp.glade, line: 7257
 msgid "Load Demonstration Data:"
 msgstr ""
@@ -3686,6 +4242,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 9299
 # File: bin/openerp.glade, line: 8170
 # File: bin/openerp.glade, line: 7314
+# File: bin/openerp.glade, line: 7314
 msgid "Change password"
 msgstr "Изменить пароль"
 #
@@ -3693,6 +4250,7 @@ msgstr "Изменить пароль"
 # File: bin/openerp.glade, line: 9316
 # File: bin/openerp.glade, line: 9316
 # File: bin/openerp.glade, line: 8187
+# File: bin/openerp.glade, line: 7331
 # File: bin/openerp.glade, line: 7331
 msgid "<b>Change your super admin password</b>"
 msgstr "<b>Изменить ваш пароьл суперпользователя</b>"
@@ -3702,6 +4260,7 @@ msgstr "<b>Изменить ваш пароьл суперпользовател
 # File: bin/openerp.glade, line: 9469
 # File: bin/openerp.glade, line: 8340
 # File: bin/openerp.glade, line: 7484
+# File: bin/openerp.glade, line: 7484
 msgid "Old password:"
 msgstr "Старый пароль:"
 #
@@ -3709,6 +4268,7 @@ msgstr "Старый пароль:"
 # File: bin/openerp.glade, line: 9482
 # File: bin/openerp.glade, line: 9482
 # File: bin/openerp.glade, line: 8353
+# File: bin/openerp.glade, line: 7497
 # File: bin/openerp.glade, line: 7497
 msgid "New password:"
 msgstr "Новый пароль:"
@@ -3718,9 +4278,11 @@ msgstr "Новый пароль:"
 # File: bin/openerp.glade, line: 9495
 # File: bin/openerp.glade, line: 8366
 # File: bin/openerp.glade, line: 7510
+# File: bin/openerp.glade, line: 7510
 msgid "New password confirmation:"
 msgstr "Подтвердите новый пароль:"
 #
+# File: bin/openerp.glade, line: 7569
 # File: bin/openerp.glade, line: 7569
 msgid "OpenERP Message"
 msgstr ""
@@ -3730,6 +4292,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 9633
 # File: bin/openerp.glade, line: 8504
 # File: bin/openerp.glade, line: 7648
+# File: bin/openerp.glade, line: 7648
 msgid "Database creation"
 msgstr "Создание базы данных"
 #
@@ -3738,6 +4301,7 @@ msgstr "Создание базы данных"
 # File: bin/openerp.glade, line: 9666
 # File: bin/openerp.glade, line: 8537
 # File: bin/openerp.glade, line: 7681
+# File: bin/openerp.glade, line: 7681
 msgid "<b>Database created successfully!</b>"
 msgstr "<b>База данных успешно создана!</b>"
 #
@@ -3745,6 +4309,7 @@ msgstr "<b>База данных успешно создана!</b>"
 # File: bin/openerp.glade, line: 9698
 # File: bin/openerp.glade, line: 9698
 # File: bin/openerp.glade, line: 8569
+# File: bin/openerp.glade, line: 7713
 # File: bin/openerp.glade, line: 7713
 msgid ""
 "You can connect to the new database using one of the following account:\n"
@@ -3757,6 +4322,7 @@ msgstr ""
 "    Администратор: admin / admin "
 #
 # File: bin/openerp.glade, line: 7841
+# File: bin/openerp.glade, line: 7841
 msgid "Extension Manager"
 msgstr ""
 #
@@ -3765,6 +4331,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 9930
 # File: bin/openerp.glade, line: 8801
 # File: bin/openerp.glade, line: 7945
+# File: bin/openerp.glade, line: 7945
 msgid "Concurrency exception"
 msgstr "Исключение параллельного выполнения"
 #
@@ -3772,6 +4339,7 @@ msgstr "Исключение параллельного выполнения"
 # File: bin/openerp.glade, line: 9955
 # File: bin/openerp.glade, line: 9955
 # File: bin/openerp.glade, line: 8826
+# File: bin/openerp.glade, line: 7970
 # File: bin/openerp.glade, line: 7970
 msgid ""
 "<b>\n"
@@ -3797,6 +4365,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 10018
 # File: bin/openerp.glade, line: 8889
 # File: bin/openerp.glade, line: 8033
+# File: bin/openerp.glade, line: 8033
 msgid "Compare"
 msgstr "Сравнить"
 #
@@ -3805,41 +4374,51 @@ msgstr "Сравнить"
 # File: bin/openerp.glade, line: 10064
 # File: bin/openerp.glade, line: 8935
 # File: bin/openerp.glade, line: 8079
+# File: bin/openerp.glade, line: 8079
 msgid "Write anyway"
 msgstr "Все равно записать"
 #
+# File: bin/openerp.glade, line: 8108
 # File: bin/openerp.glade, line: 8108
 msgid "window1"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 8180
+# File: bin/openerp.glade, line: 8180
 msgid "Today"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 8226
 # File: bin/openerp.glade, line: 8226
 msgid "September 2008"
 msgstr ""
 #
 # File: bin/openerp.glade, line: 8240
+# File: bin/openerp.glade, line: 8240
 msgid "Day"
 msgstr ""
 #
+# File: bin/openerp.glade, line: 8264
 # File: bin/openerp.glade, line: 8264
 msgid "Month"
 msgstr ""
 #
 # File: bin/win_error.glade, line: 40
+# File: bin/win_error.glade, line: 40
 msgid "label"
 msgstr ""
 #
+# File: bin/win_error.glade, line: 102
 # File: bin/win_error.glade, line: 102
 msgid "Click here for details about the maintenance proposition"
 msgstr ""
 #
 # File: bin/win_error.glade, line: 119
+# File: bin/win_error.glade, line: 119
 msgid "<i>_Maintenance</i>"
 msgstr ""
 #
+# File: bin/win_error.glade, line: 150
 # File: bin/win_error.glade, line: 150
 msgid ""
 "<b>Maintenance Contract.</b>\n"
@@ -3857,6 +4436,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 4205
 # File: bin/win_error.glade, line: 184
 # File: bin/win_error.glade, line: 184
+# File: bin/win_error.glade, line: 184
 msgid "Explain what you did:"
 msgstr "Опишите ваши действия:"
 #
@@ -3868,29 +4448,36 @@ msgstr "Опишите ваши действия:"
 # File: bin/openerp.glade, line: 4191
 # File: bin/win_error.glade, line: 196
 # File: bin/win_error.glade, line: 196
+# File: bin/win_error.glade, line: 196
 msgid "Others Comments:"
 msgstr "Прочие комментарии:"
 #
+# File: bin/win_error.glade, line: 278
 # File: bin/win_error.glade, line: 278
 msgid "Send to Maintenance Team"
 msgstr ""
 #
 # File: bin/win_error.glade, line: 326
+# File: bin/win_error.glade, line: 326
 msgid "<i>_Support Request</i>"
 msgstr ""
 #
+# File: bin/win_error.glade, line: 353
 # File: bin/win_error.glade, line: 353
 msgid "Details"
 msgstr ""
 #
 # File: bin/win_error.glade, line: 369
+# File: bin/win_error.glade, line: 369
 msgid "<i>_Details</i>"
 msgstr ""
 #
 # File: bin/win_error.glade, line: 398
+# File: bin/win_error.glade, line: 398
 msgid "gtk-close"
 msgstr ""
 #
+# File: bin/dia_survey.glade, line: 32
 # File: bin/dia_survey.glade, line: 32
 msgid ""
 "Please fill in the following form in order to help us to improve <b><span "
@@ -3903,6 +4490,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 6065
 # File: bin/openerp.glade, line: 4936
 # File: bin/dia_survey.glade, line: 56
+# File: bin/dia_survey.glade, line: 56
 #, fuzzy
 msgid "<b>Your company</b>"
 msgstr "<b>Ваша компания:</b>"
@@ -3912,9 +4500,11 @@ msgstr "<b>Ваша компания:</b>"
 # File: bin/openerp.glade, line: 5791
 # File: bin/openerp.glade, line: 4662
 # File: bin/dia_survey.glade, line: 84
+# File: bin/dia_survey.glade, line: 84
 msgid "Open Source:"
 msgstr "Open Source:"
 #
+# File: bin/dia_survey.glade, line: 537
 # File: bin/dia_survey.glade, line: 537
 msgid "Your Company:"
 msgstr ""
@@ -3924,6 +4514,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 6051
 # File: bin/openerp.glade, line: 4922
 # File: bin/dia_survey.glade, line: 548
+# File: bin/dia_survey.glade, line: 548
 msgid "Industry:"
 msgstr "Отрасль:"
 #
@@ -3932,6 +4523,7 @@ msgstr "Отрасль:"
 # File: bin/openerp.glade, line: 5937
 # File: bin/openerp.glade, line: 4808
 # File: bin/dia_survey.glade, line: 561
+# File: bin/dia_survey.glade, line: 561
 msgid "Your Role:"
 msgstr "Ваша роль:"
 #
@@ -3939,6 +4531,7 @@ msgstr "Ваша роль:"
 # File: bin/openerp.glade, line: 6038
 # File: bin/openerp.glade, line: 6038
 # File: bin/openerp.glade, line: 4909
+# File: bin/dia_survey.glade, line: 574
 # File: bin/dia_survey.glade, line: 574
 #, fuzzy
 msgid "Employees:"
@@ -3949,6 +4542,7 @@ msgstr "Кол-во сотрудников:"
 # File: bin/openerp.glade, line: 5953
 # File: bin/openerp.glade, line: 4824
 # File: bin/dia_survey.glade, line: 587
+# File: bin/dia_survey.glade, line: 587
 msgid "Country:"
 msgstr "Страна:"
 #
@@ -3956,6 +4550,7 @@ msgstr "Страна:"
 # File: bin/openerp.glade, line: 5953
 # File: bin/openerp.glade, line: 5953
 # File: bin/openerp.glade, line: 4824
+# File: bin/dia_survey.glade, line: 600
 # File: bin/dia_survey.glade, line: 600
 #, fuzzy
 msgid "City:"
@@ -3966,6 +4561,7 @@ msgstr "Страна:"
 # File: bin/openerp.glade, line: 5887
 # File: bin/openerp.glade, line: 4758
 # File: bin/dia_survey.glade, line: 627
+# File: bin/dia_survey.glade, line: 627
 msgid "System:"
 msgstr "Система:"
 #
@@ -3973,6 +4569,7 @@ msgstr "Система:"
 # File: bin/openerp.glade, line: 6166
 # File: bin/openerp.glade, line: 6166
 # File: bin/openerp.glade, line: 5037
+# File: bin/dia_survey.glade, line: 681
 # File: bin/dia_survey.glade, line: 681
 #, fuzzy
 msgid "<b>Your interrest</b>"
@@ -3983,17 +4580,21 @@ msgstr "<b>Ваши интересы:</b>"
 # File: bin/openerp.glade, line: 5831
 # File: bin/openerp.glade, line: 4702
 # File: bin/dia_survey.glade, line: 713
+# File: bin/dia_survey.glade, line: 713
 msgid "How did you hear about us:"
 msgstr "Как вы узнали о нас:"
 #
+# File: bin/dia_survey.glade, line: 750
 # File: bin/dia_survey.glade, line: 750
 msgid "We plan to use Open ERP"
 msgstr ""
 #
 # File: bin/dia_survey.glade, line: 764
+# File: bin/dia_survey.glade, line: 764
 msgid "We plan to offer services on Open ERP"
 msgstr ""
 #
+# File: bin/dia_survey.glade, line: 800
 # File: bin/dia_survey.glade, line: 800
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
@@ -4003,13 +4604,16 @@ msgstr ""
 # File: bin/openerp.glade, line: 6318
 # File: bin/openerp.glade, line: 5189
 # File: bin/dia_survey.glade, line: 831
+# File: bin/dia_survey.glade, line: 831
 msgid "<b>Keep Informed</b>"
 msgstr "<b>Получать информацию</b>"
 #
 # File: bin/dia_survey.glade, line: 859
+# File: bin/dia_survey.glade, line: 859
 msgid "I want to receive the Open ERP ebook (PDF) by email"
 msgstr ""
 #
+# File: bin/dia_survey.glade, line: 886
 # File: bin/dia_survey.glade, line: 886
 msgid "Phone / Mobile:"
 msgstr ""
@@ -4019,21 +4623,26 @@ msgstr ""
 # File: bin/openerp.glade, line: 6291
 # File: bin/openerp.glade, line: 5162
 # File: bin/dia_survey.glade, line: 899
+# File: bin/dia_survey.glade, line: 899
 #, fuzzy
 msgid "E-mail:"
 msgstr "Эл. почта:"
 #
 # File: bin/dia_survey.glade, line: 932
+# File: bin/dia_survey.glade, line: 932
 msgid "Your Name:"
 msgstr ""
 #
+# File: bin/dia_survey.glade, line: 970
 # File: bin/dia_survey.glade, line: 970
 msgid "gtk-cancel"
 msgstr ""
 #
 # File: bin/dia_survey.glade, line: 980
+# File: bin/dia_survey.glade, line: 980
 msgid "gtk-ok"
 msgstr ""
+#
 #
 #
 # File: bin/options.py, line: 90
@@ -4044,12 +4653,14 @@ msgstr ""
 #~ msgstr "включить минимальную отладку"
 #
 #
+#
 # File: bin/options.py, line: 91
 # File: bin/options.py, line: 91
 # File: bin/options.py, line: 91
 # File: bin/options.py, line: 110
 #~ msgid "specify channels to log"
 #~ msgstr "укажите, какие каналы протоколировать"
+#
 #
 #
 # File: bin/options.py, line: 92
@@ -4062,6 +4673,7 @@ msgstr ""
 #
 #
 #
+#
 # File: bin/openerp.glade, line: 3813
 # File: bin/openerp.glade, line: 3813
 # File: bin/openerp.glade, line: 3813
@@ -4069,8 +4681,10 @@ msgstr ""
 #~ msgstr "<b>Ошибка 404</b>"
 #
 #
+#
 #~ msgid "<b>Error code:</b>"
 #~ msgstr "<b>Код ошибки:</b>"
+#
 #
 #
 #~ msgid ""
@@ -4079,6 +4693,7 @@ msgstr ""
 #~ msgstr ""
 #~ "Запрошенная страница не существует !\n"
 #~ "Попробуйте еще раз"
+#
 #
 #
 #
@@ -4091,8 +4706,10 @@ msgstr ""
 #~ "справка !</i>"
 #
 #
+#
 #~ msgid "De_scription"
 #~ msgstr "Описание"
+#
 #
 #
 #
@@ -4103,8 +4720,10 @@ msgstr ""
 #~ msgstr "<b>id контакта поддержки</b>"
 #
 #
+#
 #~ msgid "Send Support Request"
 #~ msgstr "Отправить запрос"
+#
 #
 #
 #
@@ -4118,8 +4737,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "You can use this feature in the web client"
 #~ msgstr "Вы можете использовать эту функцию в веб клиенте"
+#
 #
 #
 #
@@ -4132,8 +4753,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "No resource selected !"
 #~ msgstr "Ресурсы не выбраны !"
+#
 #
 #
 #
@@ -4146,8 +4769,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Invalid form !"
 #~ msgstr "Ошибочная форма !"
+#
 #
 #
 #
@@ -4160,8 +4785,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Are you sure you want to remove this attachment ?"
 #~ msgstr "Вы уверены, что хотите удалить это вложение ?"
+#
 #
 #
 #
@@ -4174,8 +4801,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Can not write file !"
 #~ msgstr "Не удается записать файл !"
+#
 #
 #
 #
@@ -4192,8 +4821,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Do not use special characters !"
 #~ msgstr "Не используйте специальные символы !"
+#
 #
 #
 #
@@ -4206,8 +4837,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Default Theme"
 #~ msgstr "Тема Оформления по умолчанию"
+#
 #
 #
 #
@@ -4220,8 +4853,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Tiny ERP Theme"
 #~ msgstr "Тема Tiny ERP"
+#
 #
 #
 #
@@ -4234,8 +4869,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Switch current view: form / list / graph"
 #~ msgstr "Переключить вид: форма / список  / график"
+#
 #
 #
 #
@@ -4248,16 +4885,20 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "_Tiny ERP"
 #~ msgstr "_Tiny ERP"
+#
 #
 #
 #~ msgid "Remove selected entry"
 #~ msgstr "Удалить выделенную запись"
 #
 #
+#
 #~ msgid "Tiny ERP - Filter"
 #~ msgstr "Tiny ERP - Фильтр"
+#
 #
 #
 #~ msgid "test"
@@ -4267,12 +4908,15 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Filter:"
 #~ msgstr "Фильтр:"
 #
 #
+#
 #~ msgid "<b><u>Actions</u></b>"
 #~ msgstr "<b><u>Действия</u></b>"
+#
 #
 #
 #~ msgid "-"
@@ -4282,16 +4926,20 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Date de début"
 #~ msgstr "Дата начала"
+#
 #
 #
 #~ msgid "Search with this name"
 #~ msgstr "Искать с таким именем"
 #
 #
+#
 #~ msgid "Clear the field"
 #~ msgstr "Очистить поле"
+#
 #
 #
 #~ msgid ""
@@ -4307,8 +4955,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Tiny ERP - Attachment"
 #~ msgstr "Tiny ERP - Вложения"
+#
 #
 #
 #
@@ -4318,8 +4968,10 @@ msgstr ""
 #~ msgstr "Имя файла:"
 #
 #
+#
 #~ msgid "Description:"
 #~ msgstr "Описание:"
+#
 #
 #
 #
@@ -4329,8 +4981,10 @@ msgstr ""
 #~ msgstr "Сохранить текст:"
 #
 #
+#
 #~ msgid "Tiny ERP - Ressource Edit"
 #~ msgstr "Tiny ERP - Редактирование объектов"
+#
 #
 #
 #
@@ -4340,8 +4994,10 @@ msgstr ""
 #~ msgstr "Tiny ERP - Список"
 #
 #
+#
 #~ msgid "Tiny ERP - Date & Time selection"
 #~ msgstr "Tiny ERP - выбор даты и времени"
+#
 #
 #
 #
@@ -4355,12 +5011,15 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Company:"
 #~ msgstr "Организация:"
 #
 #
+#
 #~ msgid "Tiny ERP"
 #~ msgstr "Tiny ERP"
+#
 #
 #
 #
@@ -4373,8 +5032,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "(use 'admin', if you did not changed it)"
 #~ msgstr "(используйте 'admin', если вы не меняли пароль)"
+#
 #
 #
 #
@@ -4387,8 +5048,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "(must not contain any special character)"
 #~ msgstr "(не должен содержать специальных символов)"
+#
 #
 #
 #
@@ -4401,8 +5064,10 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Normal"
 #~ msgstr "Нормальный"
+#
 #
 #
 #
@@ -4415,36 +5080,45 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Reload / Undo Form"
 #~ msgstr "Перечитать / отменить изменения"
+#
 #
 #
 #~ msgid "Titre"
 #~ msgstr "Титр"
 #
 #
+#
 #~ msgid "S_earch:"
 #~ msgstr "Пои_ск"
+#
 #
 #
 #~ msgid "on _field:"
 #~ msgstr "по полю"
 #
 #
+#
 #~ msgid "_Unselect"
 #~ msgstr "_Отменить выделение"
+#
 #
 #
 #~ msgid "AL_L"
 #~ msgstr "Все"
 #
 #
+#
 #~ msgid "N_ONE"
 #~ msgstr "Ничего"
 #
 #
+#
 #~ msgid "Set to _Default"
 #~ msgstr "Установить по умолчанию"
+#
 #
 #
 #~ msgid "Value _Preference"
@@ -4454,12 +5128,15 @@ msgstr ""
 #
 #
 #
+#
 #~ msgid "Tiny ERP - Search Widgets"
 #~ msgstr "Tiny ERP - Виджеты поиска"
 #
 #
+#
 #~ msgid "Tiny ERP - Error"
 #~ msgstr "Tiny ERP - Ошибка"
+#
 #
 #
 #~ msgid ""
