@@ -7,8 +7,8 @@ Build-Depends: debhelper (>= 7), quilt, python-dev
 Build-Depends-Indep: python-glade2, python-gtk2
 Standards-Version: 3.8.2
 Homepage: http://www.openerp.com/
-Vcs-Browser: http://git.debian.net/?p=debian/openerp-client.git
-Vcs-Git: git://git.debian.net/git/debian/openerp-client.git
+Vcs-Browser: http://git.debian-maintainers.org/?p=open-object/openerp-client.git
+Vcs-Git: git://git.debian-maintainers.org/git/open-object/openerp-client.git
 
 Package: openerp-client
 Architecture: all
