@@ -3,7 +3,7 @@ Section: x11
 Priority: optional
 Maintainer: Debian Open Object Maintainers <open-object@lists.debian-maintainers.org>
 Uploaders: Daniel Baumann <daniel@debian.org>
-Build-Depends: debhelper (>= 7), quilt, python-dev
+Build-Depends: debhelper (>= 7), python-dev, quilt
 Build-Depends-Indep: python-glade2, python-gtk2
 Standards-Version: 3.8.2
 Homepage: http://www.openerp.com/
@@ -12,8 +12,11 @@ Vcs-Git: git://git.debian-maintainers.org/git/open-object/openerp-client.git
 
 Package: openerp-client
 Architecture: all
-Depends: ${misc:Depends}, python, python-egenix-mxdatetime, python-glade2, python-gtk2
-Recommends: python-hippocanvas, python-matplotlib, openoffice.org-writer, evince | pdf-viewer
+Depends:
+ ${misc:Depends}, python, python-egenix-mxdatetime, python-glade2, python-gtk2
+Recommends:
+ python-hippocanvas, python-matplotlib, openoffice.org-writer,
+ evince | pdf-viewer
 Suggests: openerp-server
 Description: Enterprise Resource Management (client)
  OpenERP, previously known as TinyERP, is a complete ERP and CRM. The main
