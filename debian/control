@@ -19,12 +19,12 @@ Recommends:
  evince | pdf-viewer
 Suggests: openerp-server
 Description: Enterprise Resource Management (client)
- OpenERP, previously known as TinyERP, is a complete ERP and CRM. The main
+ Open ERP, previously known as TinyERP, is a complete ERP and CRM. The main
  features are accounting (analytic and financial), stock management, sales and
  purchases management, tasks automation, marketing campaigns, help desk, POS,
  etc. Technical features include a distributed server, flexible workflows, an
  object database, a dynamic GUI, customizable reports, and NET-RPC and XML-RPC
  interfaces.
  .
- This package contains the OpenERP client, install openerp-server package for
+ This package contains the Open ERP client, install openerp-server package for
  the server.
