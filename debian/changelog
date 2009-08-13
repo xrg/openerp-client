@@ -1,3 +1,109 @@
+openerp-client (5.0.2-0-1ubuntu1) intrepid; urgency=low
+
+  [ Christophe Simonis ]
+  * [REL] 5.0.2
+  * [IMP] update translations
+  * [IMP] regenerate translation files
+
+  [ Jay (Open ERP) ]
+  * [FIX] default_xxx in context was passed to relational
+    fields,corrected.
+
+  [ Christophe Simonis ]
+  * [FIX] login_message: shown only if it is a valid pango markup...
+
+  [ Jay (Open ERP) ]
+  * [FIX] Import : fields auto-detect corrected
+
+  [ Christophe Simonis ]
+  * [IMP] show the login_message if available
+
+  [ husen daudi ]
+  * Merged
+  * [IMP] Added tiff file type opener in printer.py
+
+  [ Jay (Open ERP) ]
+  * [FIX] M2O improved for search button on non-null text issue
+  * [FIX] Setting default value was not saving the record
+
+  [ Olivier Laurent ]
+  * [MERGE]
+  * [FIX] setup.py: py2exe now adds 'zoneinfo' directory in library.zip
+
+  [ Jay (Open ERP) ]
+  * [FIX] Print screen respecting context
+  * [FIX] Import : context passed to server for language translation
+
+  [ Olivier Laurent ]
+  * [FIX] fixed some errors in french translations
+  * [FIX] fixed a KeyError when selection item name contains accented
+    characters
+
+  [ Harry (Open ERP) ]
+  * [IMP] export window : use context for import compatable option in
+    pass argument instend of added new argemenent
+  * [IMP] added Database ID/ ID fields in import/export and also add
+    option for import compatable in export window
+
+  [ Jay (Open ERP) ]
+  * [FIX] Reference Field : field updated on moving records
+  * [FIX] removed inconsistency in notification message.
+  * [FIX] Image widget : Attrs/onchanges won't affect image contents
+
+  [ husen daudi ]
+  * [IMP] Improved environment information message
+
+  [ Jay (Open ERP) ]
+  * [FIX] Many2one : corrected set() method to display blank value
+  * [FIX] Text_tag widget : corrected the problem of not accepting non-
+    enlgish characters
+
+  [ P. Christeas ]
+  * [IMP] Handle one more exception, when listing db's.
+
+  [ Jay (Open ERP) ]
+  * [FIX] translation pop up will be opened only for non-null data
+
+  [ Olivier Laurent ]
+  * [MERGE]
+  * [FIX] fixed a KeyError when selection item name contains accented
+    characters
+
+  [ Jay (Open ERP) ]
+  * [IMP] Set Error Message box readonly
+
+  [ husen daudi ]
+  * [Merge] Better error message with environment information
+  * [FIX] Reset pagging on search
+
+  [ Jay (Open ERP) ]
+  * [IMP] Error Message improved
+
+  [ Jimmy Angelakos ]
+  * Minor translation fix
+
+  [ P. Christeas ]
+  * Revert Canonical's "contribution" to the project.
+
+  [ Jay (Open ERP) ]
+  * [FIX] GTK client will not freeze on sql_constraint fail with
+    gtk.dialog
+  * [FIX] Text_tag widget corrected
+
+  [ Olivier Laurent ]
+  * [MERGE]
+  * [IMP] french translations
+
+  [ Stephane Wirtel ]
+  * [FIX] Add the long built-in type for the res_id
+
+  [ husen daudi ]
+  * [FIX] fields.related with type=selection
+
+  [ Panos Christeas ]
+
+ -- Panos Christeas <panos>  Thu, 13 Aug 2009 10:09:00 +0300
+
 openerp-client (5.0.1-0-1ubuntu2) jaunty; urgency=low
 
   *  Updated Greek Translations.
