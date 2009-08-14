@@ -22,8 +22,7 @@
 ##############################################################################
 
 name = 'openerp-client'
-version = '5.0.2'
-release = '0'
+version = '5.0.3-bzr'
 description = 'OpenERP Client'
 long_desc = '''\
 OpenERP is a complete ERP and CRM. The main features are accounting (analytic
