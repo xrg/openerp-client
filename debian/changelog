@@ -115,6 +115,19 @@ openerp-client (5.0.6-0-1test1) unstable; urgency=low
 
  -- panos <panos@debian.pefnos2>  Mon, 02 Nov 2009 19:24:07 -0500
 
+openerp-client (5.0.2-0-2) unstable; urgency=low
+
+  * Updating maintainer field.
+  * Updating vcs fields.
+  * Sorting and wrapping depends.
+  * Correcting spelling of Open ERP.
+  * Tidy debhelper install file.
+  * Minimizing rules file.
+  * Correcting icon entry in desktop file, according to specification
+    the entry should not have a file extension.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 15 Aug 2009 19:01:36 +0200
+ 
 openerp-client (5.0.2-0-1ubuntu1) intrepid; urgency=low
 
   [ Christophe Simonis ]
