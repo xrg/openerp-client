@@ -231,7 +231,7 @@ class many2one(interface.widget_interface):
     def _menu_sig_default(self, obj):
         res = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['model'], 'default_get', [self.attrs['name']])
 
-    def sig_find(self, widget, event=None, leave=False):
+    def sig_find(self, widget, event=None, leave=True):
         self.ok = False
         self.wid_text.disconnect(self.wid_text_focus_out_id)
         if not self._readonly:
