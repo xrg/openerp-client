@@ -171,7 +171,7 @@ class main(service.Service):
                 return False
         keyact = {}
         for action in actions:
-            keyact[action['name']] = action
+            keyact[action['name'].encode('utf8')] = action
         keyact.update(adds)
 
         res = common.selection(_('Select your action'), keyact)
