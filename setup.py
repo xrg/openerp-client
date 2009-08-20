@@ -144,7 +144,7 @@ if os.name <> 'nt' and sys.argv[1] == 'build_po':
 options = {
     "py2exe": {
         "compressed": 1,
-        "optimize": 2,
+        "optimize": 1,
         "dist_dir": 'dist',
         "packages": ["encodings","gtk", "matplotlib", "pytz", "OpenSSL"],
         "includes": "pango,atk,gobject,cairo,atk,pangocairo,matplotlib._path",
