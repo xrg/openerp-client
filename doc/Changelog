@@ -1,8 +1,32 @@
+2009-08-21: 5.0.3
+=================
+
+Bugfixes
+--------
+
+ * https://launchpad.net/bugs/404211
+   * OpenERP Handling any files to be opened through browser
+ * https://launchpad.net/bugs/405332
+   * prevent open search window when exact matching text is available
+ * https://launchpad.net/bugs/393428
+   * KeyError When printing report whose names are translated
+ * https://launchpad.net/bugs/411438
+   * KeyError When printing report whose names are translated
+
+
+Improvements
+------------
+
+ * py2exe: optimize 1
+ * do not use arange
+
+
 2009-08-11: 5.0.2
 =================
 
 Bugfixes
 --------
+
  * Not linked to a bug report:
    * Import : fields auto-detect corrected
    * setup.py: py2exe now adds 'zoneinfo' directory in library.zip
@@ -57,6 +81,7 @@ Bugfixes
 
 Improvements
 ------------
+
  * update translations
  * regenerate translation files
  * show the login_message if available
@@ -68,40 +93,48 @@ Improvements
  * Error Message improved
 
 
-
 2009-05-26: 5.0.1
 =================
+
 TODO
 
 2009-02-12: 5.0.0-3
 ===================
+
 TODO
 
 2009-02-08: 5.0.0-2
 ===================
+
 TODO
 
 2009-02-06: 5.0.0
 =================
+
 TODO
 
 2009-01-03: 5.0.0-rc3
 =====================
+
 TODO
 
 2008-12-22: 5.0.0-rc2
 =====================
+
 TODO
 
 2008-12-01: 5.0.0-rc1.1
 =======================
+
 TODO
 
 2008-11-28: 5.0.0-rc1
 =====================
+
 TODO
 
 2008-11-03: 5.0.0-alpha
 =======================
+
 TODO
 
