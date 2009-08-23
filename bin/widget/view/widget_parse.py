@@ -49,7 +49,10 @@ class widget_parse(interface.parser_interface):
             if not node.nodeType == node.ELEMENT_NODE:
                 continue
             if node.localName not in parsers:
-                raise Exception(_("This type (%s) is not supported by the GTK client !") % node.localName)
+	        import logging
+		log = logging.getLogger()
+		log.warning(_("This type (%s) is not supported by the GTK client !") % node.localName)
+		continue
             widget_parser, view_parser = parsers[node.localName]
             # Select the parser for the view (form, tree, graph, calendar or gantt)
             widget = widget_parser(self.window, self.parent, self.attrs, screen)
