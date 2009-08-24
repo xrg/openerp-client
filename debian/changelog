@@ -115,6 +115,16 @@ openerp-client (5.0.6-0-1test1) unstable; urgency=low
 
  -- panos <panos@debian.pefnos2>  Mon, 02 Nov 2009 19:24:07 -0500
 
+openerp-client (5.0.3-0-1) unstable; urgency=low
+
+  * Updating package to standards version 3.8.3.
+  * Adding maintainer homepage field to control.
+  * Marking maintainer homepage field to be also included in binary
+    packages and changelog.
+  * Merging upstream version 5.0.3-0.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 24 Aug 2009 20:13:33 +0200
+
 openerp-client (5.0.2-0-2) unstable; urgency=low
 
   * Updating maintainer field.
