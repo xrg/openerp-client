@@ -91,22 +91,28 @@ class ViewGraph(object):
                     val = str(m[x].get_client(m))
                     res[x] = selection.get(val, val)
                 elif self.fields[x]['type'] == 'date':
-                    date = time.strptime(m[x].get_client(m), DT_FORMAT)
-                    res[x] = time.strftime(LDFMT, date)
+                    if m[x].get_client(m):
+                        date = time.strptime(m[x].get_client(m), DT_FORMAT)
+                        res[x] = time.strftime(LDFMT, date)
+                    else:
+                        res[x]=''
                 elif self.fields[x]['type'] == 'datetime':
-                    date = time.strptime(m[x].get_client(m), DHM_FORMAT)
-                    if rpc.session.context.get('tz'):
-                        try:
-                            import pytz
-                            lzone = pytz.timezone(rpc.session.context['tz'])
-                            szone = pytz.timezone(rpc.session.timezone)
-                            dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                            sdt = szone.localize(dt, is_dst=True)
-                            ldt = sdt.astimezone(lzone)
-                            date = ldt.timetuple()
-                        except:
-                            pass
-                    res[x] = time.strftime(LDFMT + ' %H:%M:%S', date)
+                    if m[x].get_client(m):
+                        date = time.strptime(m[x].get_client(m), DHM_FORMAT)
+                        if rpc.session.context.get('tz'):
+                            try:
+                                import pytz
+                                lzone = pytz.timezone(rpc.session.context['tz'])
+                                szone = pytz.timezone(rpc.session.timezone)
+                                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+                                sdt = szone.localize(dt, is_dst=True)
+                                ldt = sdt.astimezone(lzone)
+                                date = ldt.timetuple()
+                            except:
+                                pass
+                        res[x] = time.strftime(LDFMT + ' %H:%M:%S', date)
+                    else:
+                        res[x] = ''
                 else:
                     res[x] = float(m[x].get_client(m))
             datas.append(res)
