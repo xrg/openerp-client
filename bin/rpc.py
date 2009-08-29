@@ -208,7 +208,7 @@ class rpc_session(object):
 	global session_counter
 	if not self._ogws.has_key(obj):
 		if (self.rpcproto == 'xmlrpc'):
-			self._ogws[obj] = xmlrpc_gw(self._url, self.db, self.uid, self._passwd)
+			self._ogws[obj] = xmlrpc_gw(self._url, self.db, self.uid, self._passwd, obj = obj)
 		else:
 			raise Exception("Unknown proto: %s" % self.rpcproto)
 		

@@ -97,7 +97,7 @@ class mysocket:
         else:
             return res[0]
 
-from xmlrpclib import Transport
+from xmlrpclib import Transport,ProtocolError
 
 import httplib
 class HTTP11(httplib.HTTP):
