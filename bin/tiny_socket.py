@@ -97,5 +97,109 @@ class mysocket:
         else:
             return res[0]
 
+from xmlrpclib import Transport
+
+import httplib
+class HTTP11(httplib.HTTP):
+	_http_vsn = 11
+	_http_vsn_str = 'HTTP/1.1'
+
+class PersistentTransport(Transport):
+    """Handles an HTTP transaction to an XML-RPC server, persistently."""
+
+    def __init__(self, use_datetime=0):
+        self._use_datetime = use_datetime
+	self._http = {}
+	print "Using persistent transport"
+
+    def make_connection(self, host):
+        # create a HTTP connection object from a host descriptor
+	if not self._http.has_key(host):
+		host, extra_headers, x509 = self.get_host_info(host)
+		self._http[host] = HTTP11(host)
+		print "New connection to",host
+	return self._http[host]
+
+    def get_host_info(self, host):
+	host, extra_headers, x509 = Transport.get_host_info(self,host)
+	if extra_headers == None:
+		extra_headers = []
+		
+	extra_headers.append( ( 'Connection', 'keep-alive' ))
+	
+        return host, extra_headers, x509
+
+    def _parse_response(self, response):
+        """ read response from input file/socket, and parse it
+	    We are persistent, so it is important to only parse
+	    the right amount of input
+	"""
+
+        p, u = self.getparser()
+
+	while not response.isclosed():
+		rdata = response.read(1024)
+		if not rdata:
+			break
+		if self.verbose:
+			print "body:", repr(response)
+		p.feed(rdata)
+		if len(rdata)<1024:
+			break
+
+        p.close()
+        return u.close()
+
+    def request(self, host, handler, request_body, verbose=0):
+        # issue XML-RPC request
+
+        h = self.make_connection(host)
+        if verbose:
+            h.set_debuglevel(1)
+
+        self.send_request(h, handler, request_body)
+        self.send_host(h, host)
+        self.send_user_agent(h)
+        self.send_content(h, request_body)
+
+	resp = h._conn.getresponse()
+	# TODO: except BadStatusLine, e:
+	
+        errcode, errmsg, headers = resp.status, resp.reason, resp.msg
+	
+
+        if errcode != 200:
+            raise ProtocolError( host + handler, errcode, errmsg, headers )
+
+        self.verbose = verbose
+
+        try:
+            sock = h._conn.sock
+        except AttributeError:
+            sock = None
+
+        return self._parse_response(resp)
+
+class SafePersistentTransport(Transport):
+    """Handles an HTTPS transaction to an XML-RPC server."""
+
+    # FIXME: mostly untested
+
+    def make_connection(self, host):
+        # create a HTTPS connection object from a host descriptor
+        # host may be a string, or a (host, x509-dict) tuple
+	if not self._http.has_key(host):
+		import httplib
+		host, extra_headers, x509 = self.get_host_info(host)
+		try:
+			HTTPS = httplib.HTTPS
+		except AttributeError:
+			raise NotImplementedError(
+				"your version of httplib doesn't support HTTPS"
+				)
+		else:
+			self._http[host] = HTTPS(host, None, **(x509 or {}))
+	return self._http[host]
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

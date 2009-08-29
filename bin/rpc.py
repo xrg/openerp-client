@@ -29,10 +29,13 @@ import service
 import common
 import options
 import os
+import urllib
 
 import re
 
 CONCURRENCY_CHECK_FIELD = '__last_update'
+
+session_counter = 0
 
 class rpc_exception(Exception):
     def __init__(self, code, backtrace):
@@ -74,7 +77,14 @@ class xmlrpc_gw(gw_inter):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
     def __init__(self, url, db, uid, passwd, obj='/object'):
         gw_inter.__init__(self, url, db, uid, passwd, obj)
-        self._sock = xmlrpclib.ServerProxy(url+obj,verbose=0)
+	ttype, someuri = urllib.splittype(url)
+        if ttype not in ("http", "https"):
+            raise IOError, "unsupported XML-RPC protocol"
+        if ttype == "https":
+            transport = tiny_socket.SafePersistentTransport()
+        else:
+            transport = tiny_socket.PersistentTransport()
+        self._sock = xmlrpclib.ServerProxy(url+obj, transport=transport, verbose=0)
     def exec_auth(self, method, *args):
         logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
         res = self.execute(method, self._uid, self._passwd, *args)
@@ -98,6 +108,9 @@ class xmlrpc_gw(gw_inter):
         result = getattr(self._sock,method)(self._db, *args)
         return self.__convert(result)
 
+    def login(self):
+	return self._sock.login(self._db, self._uid, self._passwd)
+
 class tinySocket_gw(gw_inter):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
     def __init__(self, url, db, uid, passwd, obj='/object'):
@@ -117,7 +130,7 @@ class tinySocket_gw(gw_inter):
         return res
 
 class rpc_session(object):
-    __slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_gw', 'db', 'context', 'timezone')
+    __slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_ogws', 'db', 'context', 'timezone', 'rpcproto')
     def __init__(self):
         self._open = False
         self._url = None
@@ -125,14 +138,15 @@ class rpc_session(object):
         self.uid = None
         self.context = {}
         self.uname = None
-        self._gw = xmlrpc_gw
+        self._ogws = {}
         self.db = None
+	self.rpcproto = None
         self.timezone = 'utc'
 
     def rpc_exec(self, obj, method, *args):
         try:
-            sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
-            return sock.execute(method, *args)
+            #sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
+            return self.gw(obj).execute(method, *args)
         except socket.error, e:
             common.message(str(e), title=_('Connection refused !'), type=gtk.MESSAGE_ERROR)
             raise rpc_exception(69, _('Connection refused!'))
@@ -141,15 +155,15 @@ class rpc_session(object):
 
     def rpc_exec_auth_try(self, obj, method, *args):
         if self._open:
-            sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
-            return sock.exec_auth(method, *args)
+            #sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
+            return self.gw(obj).exec_auth(method, *args)
         else:
             raise rpc_exception(1, 'not logged')
 
     def rpc_exec_auth_wo(self, obj, method, *args):
         try:
-            sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
-            return sock.exec_auth(method, *args)
+            #sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
+            return self_gw(obj).exec_auth(method, *args)
         except xmlrpclib.Fault, err:
             a = rpc_exception(err.faultCode, err.faultString)
         except tiny_socket.Myexception, err:
@@ -162,8 +176,8 @@ class rpc_session(object):
     def rpc_exec_auth(self, obj, method, *args):
         if self._open:
             try:
-                sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
-                return sock.exec_auth(method, *args)
+                #sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
+                return self.gw(obj).exec_auth(method, *args)
             except socket.error, e:
                 common.message(_('Unable to reach to OpenERP server !\nYou should check your connection to the network and the OpenERP server.'), _('Connection Error'), type=gtk.MESSAGE_ERROR)
                 raise rpc_exception(69, 'Connection refused!')
@@ -188,12 +202,28 @@ class rpc_session(object):
         else:
             raise rpc_exception(1, 'not logged')
 
+    def gw(self,obj):
+	""" Return the persistent gateway for some object
+	"""
+	global session_counter
+	if not self._ogws.has_key(obj):
+		if (self.rpcproto == 'xmlrpc'):
+			self._ogws[obj] = xmlrpc_gw(self._url, self.db, self.uid, self._passwd)
+		else:
+			raise Exception("Unknown proto: %s" % self.rpcproto)
+		
+		session_counter = session_counter + 1
+		if (session_counter % 100):
+			print "Sessions:", session_counter
+	
+	return self._ogws[obj]
+
     def login(self, uname, passwd, url, port, protocol, db):
         _protocol = protocol
         if _protocol == 'http://' or _protocol == 'https://':
+	    self.rpcproto = 'xmlrpc'
             _url = _protocol + url+':'+str(port)+'/xmlrpc'
             _sock = xmlrpclib.ServerProxy(_url+'/common')
-            self._gw = xmlrpc_gw
             try:
                 res = _sock.login(db or '', uname or '', passwd or '')
             except socket.error,e:
@@ -230,9 +260,6 @@ class rpc_session(object):
         self._passwd = passwd
         self.db = db
 
-        #CHECKME: is this useful? maybe it's used to see if there is no
-        # exception raised?
-        sock = self._gw(self._url, self.db, self.uid, self._passwd)
         self.context_reload()
         return 1
 
@@ -355,6 +382,7 @@ class rpc_session(object):
         if self._open :
             self._open = False
             self.uname = None
+	    self._ogws = {}
             self.uid = None
             self._passwd = None
 
