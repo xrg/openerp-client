@@ -49,15 +49,8 @@ class environment(object):
         return True
 
     def get_client_info(self):
-        try:
-            rev_id = os.popen('bzr revision-info').read()
-            if not rev_id:
-                rev_id = 'Bazaar Package not Found !'
-        except Exception,e:
-            rev_id = 'Exception: %s\n' % (tools.ustr(e))
-        environment = 'OpenERP-Client Version : %s\n'\
-                      'Last revision No. & ID :%s'\
-                      %(release.version,rev_id)
+        environment = 'OpenERP-Client Version : %s'\
+                      %(release.version)
         return environment
 
 if __name__=="__main__":

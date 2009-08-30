@@ -91,6 +91,7 @@ class configmanager(object):
             'printer.path': 'none',
             'logging.level': 'INFO',
             'logging.output': 'stdout',
+	    'logging.env_info': True,
             'client.default_path': os.path.expanduser('~'),
             'support.recipient': 'support@openerp.com',
             'support.support_id' : '',
@@ -109,16 +110,20 @@ class configmanager(object):
         parser = optparse.OptionParser(version=_("OpenERP Client %s" % openerp_version))
         parser.add_option("-c", "--config", dest="config",help=_("specify alternate config file"))
         parser.add_option("-v", "--verbose", dest="log_level", action='store_const', const="debug", help=_("Enable basic debugging. Alias for '--log-level=debug'"))
-        parser.add_option("-l", "--log-level", dest="log_level", type='choice', choices=loglevels, default='error', help=_("specify the log level: %s") % ", ".join(loglevels))
+        parser.add_option("-l", "--log-level", dest="log_level", type='choice', choices=loglevels, default=False, help=_("specify the log level: %s") % ", ".join(loglevels))
         parser.add_option("-u", "--user", dest="login", help=_("specify the user login"))
         parser.add_option("-p", "--port", dest="port", help=_("specify the server port"))
         parser.add_option("-s", "--server", dest="server", help=_("specify the server ip/name"))
+        parser.add_option("", "--no-env-info", dest="no_env_info", help=_("suppress printing of environment info in errors"), action='store_true')
         (opt, args) = parser.parse_args()
 
         self.rcfile = self._get_rcfile(fname, opt.config)
         self.load()
 
-        self.options['logging.level'] = opt.log_level
+	if opt.log_level:
+		self.options['logging.level'] = opt.log_level
+	if opt.no_env_info:
+		self.options['logging.env_info'] = False
 
         for arg in ('login', 'port', 'server'):
             if getattr(opt, arg):

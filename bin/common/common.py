@@ -332,6 +332,8 @@ def error(title, message, details='', parent=None, disconnected_mode=False, erro
     Show an error dialog with the support request or the maintenance
     """
     log = logging.getLogger('common.message')
+    if options.options['logging.env_info']:
+	details = get_client_environment() + details
     log.error('Message %s: %s' % (str(message),details))
 
     show_message = True
@@ -608,13 +610,6 @@ colors = {
 }
 
 def get_client_environment():
-    try:
-        rev_id = os.popen('bzr revision-info').read()
-        if not rev_id:
-            rev_id = 'Bazaar Package not Found !'
-    except Exception,e:
-        rev_id = 'Exception: %s\n' % (tools.ustr(e))
-
     os_lang = '.'.join( [x for x in locale.getdefaultlocale() if x] )
     if not os_lang:
         os_lang = 'NOT SET'
@@ -634,10 +629,9 @@ def get_client_environment():
                    'Operating System Architecture : %s\n' \
                    'Operating System Locale : %s\n'\
                    'Python Version : %s\n'\
-                   'OpenERP-Client Version : %s\n'\
-                   'Last revision No. & ID :%s'\
+                   'OpenERP-Client Version : %s'\
                     %(platform.release(), platform.version(), platform.architecture()[0],
-                      os_lang, platform.python_version(),release.version,rev_id)
+                      os_lang, platform.python_version(),release.version)
     return environment
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
