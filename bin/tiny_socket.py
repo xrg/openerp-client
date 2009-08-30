@@ -103,6 +103,9 @@ import httplib
 class HTTP11(httplib.HTTP):
 	_http_vsn = 11
 	_http_vsn_str = 'HTTP/1.1'
+	
+	def is_idle(self):
+		return self._conn and self._conn._HTTPConnection__state == httplib._CS_IDLE
 
 class PersistentTransport(Transport):
     """Handles an HTTP transaction to an XML-RPC server, persistently."""
@@ -118,6 +121,16 @@ class PersistentTransport(Transport):
 		host, extra_headers, x509 = self.get_host_info(host)
 		self._http[host] = HTTP11(host)
 		print "New connection to",host
+	if not self._http[host].is_idle():
+		# Here, we need to discard a busy or broken connection.
+		# It might be the case that another thread is using that
+		# connection, so it makes more sense to let the garbage
+		# collector clear it.
+		self._http[host] = None
+		host, extra_headers, x509 = self.get_host_info(host)
+		self._http[host] = HTTP11(host)
+		print "New connection to",host
+	
 	return self._http[host]
 
     def get_host_info(self, host):
@@ -162,23 +175,25 @@ class PersistentTransport(Transport):
         self.send_user_agent(h)
         self.send_content(h, request_body)
 
-	resp = h._conn.getresponse()
-	# TODO: except BadStatusLine, e:
-	
-        errcode, errmsg, headers = resp.status, resp.reason, resp.msg
-	
+	resp = None
+	try:
+		resp = h._conn.getresponse()
+		# TODO: except BadStatusLine, e:
+		
+		errcode, errmsg, headers = resp.status, resp.reason, resp.msg
+		if errcode != 200:
+		    raise ProtocolError( host + handler, errcode, errmsg, headers )
 
-        if errcode != 200:
-            raise ProtocolError( host + handler, errcode, errmsg, headers )
+		self.verbose = verbose
 
-        self.verbose = verbose
+		try:
+		    sock = h._conn.sock
+		except AttributeError:
+		    sock = None
 
-        try:
-            sock = h._conn.sock
-        except AttributeError:
-            sock = None
-
-        return self._parse_response(resp)
+		return self._parse_response(resp)
+	finally:
+		if resp: resp.close()
 
 class SafePersistentTransport(Transport):
     """Handles an HTTPS transaction to an XML-RPC server."""
