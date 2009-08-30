@@ -196,7 +196,7 @@ class rpc_session(object):
                     else:
                         common.error(_('Application Error'), e.faultCode, e.faultString)
                 else:
-                    common.error(_('Application Error'), _('View details'), str(e))
+                    common.error(_('Application Error'), _('View details'), str(e) or str(type(e)))
                 #TODO Must propagate the exception?
                 raise
         else:
