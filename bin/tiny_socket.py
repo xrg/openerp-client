@@ -107,6 +107,22 @@ class HTTP11(httplib.HTTP):
 	def is_idle(self):
 		return self._conn and self._conn._HTTPConnection__state == httplib._CS_IDLE
 
+try:
+	class HTTPS(httplib.HTTPS):
+		_http_vsn = 11
+		_http_vsn_str = 'HTTP/1.1'
+		
+		def is_idle(self):
+			return self._conn and self._conn._HTTPConnection__state == httplib._CS_IDLE
+
+except AttributeError:
+    # if not in httplib, define a class that will always fail.
+    class HTTPS():
+	def __init__(self,*args):
+		raise NotImplementedError( "your version of httplib doesn't support HTTPS" )
+	
+
+
 class PersistentTransport(Transport):
     """Handles an HTTP transaction to an XML-RPC server, persistently."""
 
@@ -195,7 +211,7 @@ class PersistentTransport(Transport):
 	finally:
 		if resp: resp.close()
 
-class SafePersistentTransport(Transport):
+class SafePersistentTransport(PersistentTransport):
     """Handles an HTTPS transaction to an XML-RPC server."""
 
     # FIXME: mostly untested
@@ -206,14 +222,7 @@ class SafePersistentTransport(Transport):
 	if not self._http.has_key(host):
 		import httplib
 		host, extra_headers, x509 = self.get_host_info(host)
-		try:
-			HTTPS = httplib.HTTPS
-		except AttributeError:
-			raise NotImplementedError(
-				"your version of httplib doesn't support HTTPS"
-				)
-		else:
-			self._http[host] = HTTPS(host, None, **(x509 or {}))
+		self._http[host] = HTTPS(host, None, **(x509 or {}))
 	return self._http[host]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
