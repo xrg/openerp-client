@@ -35,7 +35,6 @@ import common
 import options
 import printer
 
-
 class wid_binary(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
@@ -88,6 +87,15 @@ class wid_binary(interface.widget_interface):
         self.but_remove = binButton('gtk-clear', _('Clear'), False)
         self.but_remove.connect('clicked', self.sig_remove)
         self.widget.pack_start(self.but_remove, expand=False, fill=False)
+
+	if attrs.get('signature') or True:
+		self.but_sign = binButton('gtk-edit', _('Sign'), False)
+		self.but_sign.connect('clicked', self.sig_sign)
+		self.widget.pack_start(self.but_sign, expand=False, fill=False)
+
+		self.but_verify = binButton('search', _('Verify'), False)
+		self.but_verify.connect('clicked', self.sig_verify)
+		self.widget.pack_start(self.but_verify, expand=False, fill=False)
 
         self.model_field = False
         self.has_filename = attrs.get('filename')
@@ -175,6 +183,55 @@ class wid_binary(interface.widget_interface):
         if self.has_filename:
             self._view.model.set({self.has_filename: False}, modified=True)
         self.display(self._view.model, False)
+
+    def sig_sign(self,widget=None):
+	print "sign!"
+	import subprocess
+	from rpc import RPCProxy
+        try:
+	    if self._view.model.is_modified():
+		common.message(_('Cannot sign a modified record. Please save it first!'))
+		return False
+            filename = self._get_filename()
+            if filename:
+                data = self._view.model.value.get(self.data_field_name)
+                if not data:
+                    data = self._view.model.get(self.data_field_name)[self.data_field_name]
+                    if not data:
+                        raise Exception(_("Unable to read the file data"))
+
+                ext = os.path.splitext(filename)[1][1:]
+                (fileno, fp_name) = tempfile.mkstemp('.'+ext, 'openerp_')
+
+                os.write(fileno, base64.decodestring(data))
+                os.close(fileno)
+		sig_name = fp_name+'.asc'
+		# here, the batch mode will make sure that gpg will fail if the 
+		# temporary file is atacked.
+		res = subprocess.call(['gpg', '-ab','--batch', '-o', sig_name, fp_name], shell=False)
+		if res <0:
+			raise Exception(_("GPG failed with code %d") % (0-res))
+		print "gpg finished"
+		os.unlink(fp_name)
+		fp = file(sig_name,'rb')
+		signature = fp.read()
+		print "signature:",signature
+		os.unlink(sig_name)
+		
+		fid = self._view.model.id
+		print "file id:",fid
+		rpc = RPCProxy('document.signature')
+		newsig = rpc.create( {'sig_type': 'gpg', 'file_id': fid, 'signature': signature })
+		print "after create", newsig
+		rpc.write([newsig],{'keyid':'<default>'})
+		self._view.model.reload()
+		
+        except Exception, ex:
+            common.message(_('Error signing the file: %s') % str(ex))
+            raise
+
+    def sig_verify(self,widget=None):
+        print "verify!"
 
     def display(self, model, model_field):
         def btn_activate(state):
