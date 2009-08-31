@@ -108,6 +108,10 @@ class HTTP11(httplib.HTTP):
 		return self._conn and self._conn._HTTPConnection__state == httplib._CS_IDLE
 
 try:
+	if sys.version_info[0:2] < (2,6):
+	        # print "No https for python %d.%d" % sys.version_info[0:2]
+		raise AttributeError()
+
 	class HTTPS(httplib.HTTPS):
 		_http_vsn = 11
 		_http_vsn_str = 'HTTP/1.1'
