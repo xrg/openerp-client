@@ -105,6 +105,9 @@ class xmlrpc_gw(gw_inter):
             return result
 
     def execute(self, method, *args):
+	# If a socket error occurs here, we will let it propagate.
+	# it is safer than trying an operation twice (it may perform double
+	# actions, which mess with the data).
         result = getattr(self._sock,method)(self._db, *args)
         return self.__convert(result)
 

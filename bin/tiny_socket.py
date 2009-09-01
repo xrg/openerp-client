@@ -118,6 +118,8 @@ try:
 		
 		def is_idle(self):
 			return self._conn and self._conn._HTTPConnection__state == httplib._CS_IDLE
+			# Still, we have a problem here, because we cannot tell if the connection is
+			# closed.
 
 except AttributeError:
     # if not in httplib, define a class that will always fail.
