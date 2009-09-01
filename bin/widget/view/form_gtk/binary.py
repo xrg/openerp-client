@@ -188,6 +188,8 @@ class wid_binary(interface.widget_interface):
 	print "sign!"
 	import subprocess
 	from rpc import RPCProxy
+	fp_name = False
+	sig_name = False
         try:
 	    if self._view.model.is_modified():
 		common.message(_('Cannot sign a modified record. Please save it first!'))
@@ -205,6 +207,16 @@ class wid_binary(interface.widget_interface):
 
                 os.write(fileno, base64.decodestring(data))
                 os.close(fileno)
+		r = common.sur_3b( _("Do you want to see the file first?\nFile is at %s\n\nPressing 'No' will sign anyway, 'Cancel' will not sign the file") % fp_name)
+		if r == 'ok':
+			printer.printer.print_file(fp_name, ext, preview=True)
+		elif r == 'ko' or r == 'no':
+			pass
+		else:
+			return False
+		r = common.sur(_("Are you sure now that you want to sign this document?"))
+		if not r :
+			return False
 		sig_name = fp_name+'.asc'
 		# here, the batch mode will make sure that gpg will fail if the 
 		# temporary file is atacked.
@@ -212,11 +224,9 @@ class wid_binary(interface.widget_interface):
 		if res <0:
 			raise Exception(_("GPG failed with code %d") % (0-res))
 		print "gpg finished"
-		os.unlink(fp_name)
 		fp = file(sig_name,'rb')
 		signature = fp.read()
 		print "signature:",signature
-		os.unlink(sig_name)
 		
 		fid = self._view.model.id
 		print "file id:",fid
@@ -224,16 +234,24 @@ class wid_binary(interface.widget_interface):
 		newsig = rpc.create( {'sig_type': 'gpg', 'file_id': fid, 'signature': signature })
 		print "after create", newsig
 		rpc.write([newsig],{'keyid':'<default>'})
+		common.message(_("Document signed."))
 		self._view.model.reload()
 		
         except Exception, ex:
             common.message(_('Error signing the file: %s') % str(ex))
             raise
+	finally:
+		if fp_name:
+			os.unlink(fp_name)
+		if sig_name:
+			os.unlink(sig_name)
 
     def sig_verify(self,widget=None):
         print "verify!"
 	import subprocess
 	from rpc import RPCProxy
+	fp_name = False
+	sig_name = False
         try:
 	    if self._view.model.is_modified():
 		common.message(_('Cannot verify a modified record. Please save it first!'))
@@ -278,21 +296,28 @@ class wid_binary(interface.widget_interface):
 			print "res:",rp.returncode
 			sig_results.append((sig, rp.returncode, resv, out, err))
 			os.unlink(fsigname)
+			fsigname = False
 		print "gpg verifications finished"
 		os.unlink(fp_name)
+		fp_name = False
 		
-		msg = _("Verification results:")
+		msg = ""
 		for sr in sig_results:
 			wuid = sr[0]['write_uid'] and sr[0]['write_uid'][1] or '?'
 			msg += _("\nSignature by %s[%s] at %s: %s\n%s\n") % \
 				(wuid,sr[0]['keyid'],sr[0]['write_date'],sr[2],sr[4])
 		
-		common.message(msg)
+		common.message_box(_("Verification results"),msg)
 		return True
 		
         except Exception, ex:
             common.message(_('Error verifying the file: %s') % str(ex))
             raise
+	finally:
+		if fp_name:
+			os.unlink(fp_name)
+		if fsigname:
+			os.unlink(fsigname)
 
     def display(self, model, model_field):
         def btn_activate(state):
