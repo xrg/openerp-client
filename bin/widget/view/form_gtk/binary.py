@@ -232,6 +232,67 @@ class wid_binary(interface.widget_interface):
 
     def sig_verify(self,widget=None):
         print "verify!"
+	import subprocess
+	from rpc import RPCProxy
+        try:
+	    if self._view.model.is_modified():
+		common.message(_('Cannot verify a modified record. Please save it first!'))
+		return False
+            filename = self._get_filename()
+            if filename:
+                data = self._view.model.value.get(self.data_field_name)
+                if not data:
+                    data = self._view.model.get(self.data_field_name)[self.data_field_name]
+                    if not data:
+                        raise Exception(_("Unable to read the file data"))
+
+		# First, download and save the file..
+                ext = os.path.splitext(filename)[1][1:]
+                (fileno, fp_name) = tempfile.mkstemp('.'+ext, 'openerp_')
+
+                os.write(fileno, base64.decodestring(data))
+                os.close(fileno)
+		
+		# Second, get all signatures:
+		fid = self._view.model.id
+		print "file id:",fid
+		rpc = RPCProxy('document.signature')
+		sigs = rpc.search( [ ('sig_type','=', 'gpg'), ('file_id','=', fid)])
+		print "sigs:",sigs
+		if not sigs or not len(sigs):
+			common.message(_("No signatures found for file"))
+			return None
+		sig_results = []
+		for sig in rpc.read(sigs,['keyid','signature','write_uid','write_date']):
+			print "Checking:",sig
+			(fsigno, fsigname) = tempfile.mkstemp('.'+ext+'.asc', 'openerp_')
+			os.write(fsigno, sig['signature'])
+			os.close(fsigno)
+			rp = subprocess.Popen(['gpg', '--verify','--batch', fsigname, fp_name], 
+				shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+			(out,err) = rp.communicate()
+			if rp.returncode == 0:
+				resv = _("valid.")
+			else:
+				resv= _("INVALID!")
+			print "res:",rp.returncode
+			sig_results.append((sig, rp.returncode, resv, out, err))
+			os.unlink(fsigname)
+		print "gpg verifications finished"
+		os.unlink(fp_name)
+		
+		msg = _("Verification results:")
+		for sr in sig_results:
+			wuid = sr[0]['write_uid'] and sr[0]['write_uid'][1] or '?'
+			msg += _("\nSignature by %s[%s] at %s: %s\n%s\n") % \
+				(wuid,sr[0]['keyid'],sr[0]['write_date'],sr[2],sr[4])
+		
+		common.message(msg)
+		return True
+		
+        except Exception, ex:
+            common.message(_('Error verifying the file: %s') % str(ex))
+            raise
 
     def display(self, model, model_field):
         def btn_activate(state):
