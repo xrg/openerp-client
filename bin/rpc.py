@@ -216,7 +216,7 @@ class rpc_session(object):
 			raise Exception("Unknown proto: %s" % self.rpcproto)
 		
 		session_counter = session_counter + 1
-		if (session_counter % 100):
+		if (session_counter % 100) == 0:
 			print "Sessions:", session_counter
 	
 	return self._ogws[obj]

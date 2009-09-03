@@ -135,14 +135,14 @@ class PersistentTransport(Transport):
     def __init__(self, use_datetime=0):
         self._use_datetime = use_datetime
 	self._http = {}
-	print "Using persistent transport"
+	# print "Using persistent transport"
 
     def make_connection(self, host):
         # create a HTTP connection object from a host descriptor
 	if not self._http.has_key(host):
 		host, extra_headers, x509 = self.get_host_info(host)
 		self._http[host] = HTTP11(host)
-		print "New connection to",host
+		# print "New connection to",host
 	if not self._http[host].is_idle():
 		# Here, we need to discard a busy or broken connection.
 		# It might be the case that another thread is using that
@@ -151,7 +151,7 @@ class PersistentTransport(Transport):
 		self._http[host] = None
 		host, extra_headers, x509 = self.get_host_info(host)
 		self._http[host] = HTTP11(host)
-		print "New connection to",host
+		# print "New connection to",host
 	
 	return self._http[host]
 
@@ -188,11 +188,20 @@ class PersistentTransport(Transport):
     def request(self, host, handler, request_body, verbose=0):
         # issue XML-RPC request
 
-        h = self.make_connection(host)
-        if verbose:
-            h.set_debuglevel(1)
+	try:
+		h = self.make_connection(host)
+		if verbose:
+		    h.set_debuglevel(1)
 
-        self.send_request(h, handler, request_body)
+		self.send_request(h, handler, request_body)
+	except httplib.CannotSendRequest:
+		# try once more..
+		h = self.make_connection(host)
+		if verbose:
+		    h.set_debuglevel(1)
+
+		self.send_request(h, handler, request_body)
+
         self.send_host(h, host)
         self.send_user_agent(h)
         self.send_content(h, request_body)
