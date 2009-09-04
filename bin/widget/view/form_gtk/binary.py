@@ -221,8 +221,11 @@ class wid_binary(interface.widget_interface):
 		# here, the batch mode will make sure that gpg will fail if the 
 		# temporary file is atacked.
 		res = subprocess.call(['gpg', '-ab','--batch', '-o', sig_name, fp_name], shell=False)
-		if res <0:
-			raise Exception(_("GPG failed with code %d") % (0-res))
+		# todo: get the stdout and print a better exception.
+		if res > 0:
+			raise Exception(_("GPG failed with code %d") % (res))
+		elif res < 0:
+			raise Exception(_("GPG terminated with signal %d") % (0-res))
 		print "gpg finished"
 		fp = file(sig_name,'rb')
 		signature = fp.read()
