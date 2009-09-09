@@ -118,18 +118,22 @@ class tinySocket_gw(gw_inter):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
     def __init__(self, url, db, uid, passwd, obj='/object'):
         gw_inter.__init__(self, url, db, uid, passwd, obj)
-        self._sock = tiny_socket.mysocket()
         self._obj = obj[1:]
+    def __del__(self):
+	pass
     def exec_auth(self, method, *args):
         logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
         res = self.execute(method, self._uid, self._passwd, *args)
         logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
     def execute(self, method, *args):
+	# We are not yet ready for persistent connections, so open and close
+	# the connectionn at each call.
+        self._sock = tiny_socket.mysocket()
         self._sock.connect(self._url)
         self._sock.mysend((self._obj, method, self._db)+args)
         res = self._sock.myreceive()
-        self._sock.disconnect()
+	self._sock.disconnect()
         return res
 
 class rpc_session(object):
@@ -179,9 +183,15 @@ class rpc_session(object):
     def rpc_exec_auth(self, obj, method, *args):
         if self._open:
             try:
-                #sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
                 return self.gw(obj).exec_auth(method, *args)
             except socket.error, e:
+		import traceback, sys
+		if hasattr(e, 'traceback'):
+			tb = e.traceback
+		else:
+			tb = sys.exc_info()
+		tb_s = "".join(traceback.format_exception(*tb))
+		print 'socket error:',e, "\n", tb_s
                 common.message(_('Unable to reach to OpenERP server !\nYou should check your connection to the network and the OpenERP server.'), _('Connection Error'), type=gtk.MESSAGE_ERROR)
                 raise rpc_exception(69, 'Connection refused!')
             except Exception, e:
@@ -212,6 +222,8 @@ class rpc_session(object):
 	if not self._ogws.has_key(obj):
 		if (self.rpcproto == 'xmlrpc'):
 			self._ogws[obj] = xmlrpc_gw(self._url, self.db, self.uid, self._passwd, obj = obj)
+		elif self.rpcproto == 'netrpc':
+			self._ogws[obj] = tinySocket_gw(self._url, self.db, self.uid, self._passwd, obj = obj)
 		else:
 			raise Exception("Unknown proto: %s" % self.rpcproto)
 		
@@ -240,10 +252,10 @@ class rpc_session(object):
                 self._open=False
                 self.uid=False
                 return -2
-        else:
+        else: #maybe elif ..
             _url = _protocol+url+':'+str(port)
             _sock = tiny_socket.mysocket()
-            self._gw = tinySocket_gw
+	    self.rpcproto = "netrpc"
             try:
                 _sock.connect(url, int(port))
                 _sock.mysend(('common', 'login', db or '', uname or '', passwd or ''))
