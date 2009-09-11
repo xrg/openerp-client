@@ -49,7 +49,7 @@ class float_time(interface.widget_interface):
     def text_to_float(self, text):
         try:
             if text and ':' in text:
-                return round(int(text.split(':')[0]) + int(text.split(':')[1]) / 60.0,2)
+                return round(int(text.split(':')[0]) + int(text.split(':')[1]) / 60.0,4)
             else:
                 return locale.atof(text)
         except:
@@ -68,7 +68,7 @@ class float_time(interface.widget_interface):
             return False
         super(float_time, self).display(model, model_field)
         val = model_field.get(model)
-        t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,2) * 60)
+        t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,4) * 60)
         if val<0:
             t = '-'+t
         self.widget.set_text(t)
