@@ -231,282 +231,241 @@ Other</property>
                       <widget class="GtkComboBoxEntry" id="combo_country">
                         <property name="visible">True</property>
                         <property name="items">
-AALAND ISLANDS
-AFGHANISTAN
-ALBANIA
-ALGERIA
-AMERICAN SAMOA
-ANDORRA
-ANGOLA
-ANGUILLA
-ANTARCTICA
-ANTIGUA AND BARBUDA
-ARGENTINA
-ARMENIA
-ARUBA
-AUSTRALIA
-AUSTRIA
-AZERBAIJAN
-BAHAMAS
-BAHRAIN
-BANGLADESH
-BARBADOS
-BELARUS
-BELGIUM
-BELIZE
-BENIN
-BERMUDA
-BHUTAN
-BOLIVIA
-BOSNIA AND HERZEGOWINA
-BOTSWANA
-BOUVET ISLAND
-BRAZIL
-BRITISH INDIAN OCEAN TERRITORY
-BRUNEI DARUSSALAM
-BULGARIA
-BURKINA FASO
-BURUNDI
-CAMBODIA
-CAMEROON
-CANADA
-CAPE VERDE
-CAYMAN ISLANDS
-CENTRAL AFRICAN REPUBLIC
-CHAD
-CHILE
-CHINA
-CHRISTMAS ISLAND
-COCOS (KEELING) ISLANDS
-COLOMBIA
-COMOROS
-CONGO
-COOK ISLANDS
-COSTA RICA
-COTE D'IVOIRE
-CROATIA
-CUBA
-CYPRUS
-CZECH REPUBLIC
-DENMARK
-DJIBOUTI
-DOMINICA
-DOMINICAN REPUBLIC
-ECUADOR
-EGYPT
-EL SALVADOR
-EQUATORIAL GUINEA
-ERITREA
-ESTONIA
-ETHIOPIA
-FALKLAND ISLANDS (MALVINAS)
-FAROE ISLANDS
-FIJI
-FINLAND
-FRANCE
-FRENCH GUIANA
-FRENCH POLYNESIA
-FRENCH SOUTHERN TERRITORIES
-GABON
-GAMBIA
-GEORGIA
-GERMANY
-GHANA
-GIBRALTAR
-GREECE
-GREENLAND
-GRENADA
-GUADELOUPE
-GUAM
-GUATEMALA
-GUINEA
-GUINEA-BISSAU
-GUYANA
-HAITI
-HEARD AND MC DONALD ISLANDS
-HONDURAS
-HONG KONG
-HUNGARY
-ICELAND
-INDIA
-INDONESIA
-IRAN
-IRAQ
-IRELAND
-ISRAEL
-ITALY
-JAMAICA
-JAPAN
-JORDAN
-KAZAKHSTAN
-KENYA
-KIRIBATI
-KOREA
-KUWAIT
-KYRGYZSTAN
-LAO
-LATVIA
-LEBANON
-LESOTHO
-LIBERIA
-LIBYAN ARAB JAMAHIRIYA
-LIECHTENSTEIN
-LITHUANIA
-LUXEMBOURG
-MACAU
-MACEDONIA
-MADAGASCAR
-MALAWI
-MALAYSIA
-MALDIVES
-MALI
-MALTA
-MARSHALL ISLANDS
-MARTINIQUE
-MAURITANIA
-MAURITIUS
-MAYOTTE
-MEXICO
-MICRONESIA
-MOLDOVA
-MONACO
-MONGOLIA
-MONTSERRAT
-MOROCCO
-MOZAMBIQUE
-MYANMAR
-NAMIBIA
-NAURU
-NEPAL
-NETHERLANDS
-NETHERLANDS ANTILLES
-NEW CALEDONIA
-NEW ZEALAND
-NICARAGUA
-NIGER
-NIGERIA
-NIUE
-NORFOLK ISLAND
-NORTHERN MARIANA ISLANDS
-NORWAY
-OMAN
-PAKISTAN
-PALAU
-PANAMA
-PAPUA NEW GUINEA
-PARAGUAY
-PERU
-PHILIPPINES
-PITCAIRPITCAIRN
-POLAND
-PORTUGAL
-PUERTO RICO
-QATAR
-REUNION
-ROMANIA
-RUSSIAN FEDERATION
-RWANDA
-SAINT HELENA
-SAINT KITTS AND NEVIS
-SAINT LUCIA
-SAINT PIERRE AND MIQUELON
-SAINT VINCENT AND THE GRENADINES
-SAMOA
-SAN MARINO
-SAO TOME AND PRINCIPE
-SAUDI ARABIA
-SENEGAL
-SERBIA AND MONTENEGRO
-SEYCHELLES
-SIERRA LEONE
-SINGAPORE
-SLOVAKIA
-SLOVENIA
-SOLOMON ISLANDS
-SOMALIA
-SOUTH AFRICA
-SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS
-SPAIN
-SRI LANKA
-SUDAN
-SURINAME
-SVALBARD AND JAN MAYEN ISLANDS
-SWAZILAND
-SWEDEN
-SWITZERLAND
-SYRIAN ARAB REPUBLIC
-TAIWAN
-TAJIKISTAN
-TANZANIA
-N
-POLAND
-PORTUGAL
-PUERTO RICO
-QATAR
-REUNION
-ROMANIA
-RUSSIAN FEDERATION
-RWANDA
-SAINT HELENA
-SAINT KITTS AND NEVIS
-SAINT LUCIA
-SAINT PIERRE AND MIQUELON
-SAINT VINCENT AND THE GRENADINES
-SAMOA
-SAN MARINO
-SAO TOME AND PRINCIPE
-SAUDI ARABIA
-SENEGAL
-SERBIA AND MONTENEGRO
-SEYCHELLES
-SIERRA LEONE
-SINGAPORE
-SLOVAKIA
-SLOVENIA
-SOLOMON ISLANDS
-SOMALIA
-SOUTH AFRICA
-SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS
-SPAIN
-SRI LANKA
-SUDAN
-SURINAME
-SVALBARD AND JAN MAYEN ISLANDS
-SWAZILAND
-SWEDEN
-SWITZERLAND
-SYRIAN ARAB REPUBLIC
-TAIWAN
-TAJIKISTAN
-TANZANIA
-THAILAND
-TIMOR-LESTE
-TOGO
-TOKELAU
-TONGA
-TRINIDAD AND TOBAGO
-TUNISIA
-TURKEY
-TURKMENISTAN
-TURKS AND CAICOS ISLANDS
-TUVALU
-UGANDA
-UKRAINE
-UNITED ARAB EMIRATES
-UNITED KINGDOM
-UNITED STATES
-URUGUAY
-UZBEKISTAN
-VANUATU
-VATICAN CITY STATE
-VENEZUELA
-VIET NAM
-VIRGIN ISLANDS
-WALLIS AND FUTUNA ISLANDS
-WESTERN SAHARA
-YEMEN
-ZAMBIA
-ZIMBABWE</property>
+Aaland Islands
+Afghanistan
+Albania
+Algeria
+American Samoa
+Andorra
+Angola
+Anguilla
+Antarctica
+Antigua And Barbuda
+Argentina
+Armenia
+Aruba
+Australia
+Austria
+Azerbaijan
+Bahamas
+Bahrain
+Bangladesh
+Barbados
+Belarus
+Belgium
+Belize
+Benin
+Bermuda
+Bhutan
+Bolivia
+Bosnia And Herzegowina
+Botswana
+Bouvet Island
+Brazil
+British Indian Ocean Territory
+Brunei Darussalam
+Bulgaria
+Burkina Faso
+Burundi
+Cambodia
+Cameroon
+Canada
+Cape Verde
+Cayman Islands
+Central African Republic
+Chad
+Chile
+China
+Christmas Island
+Cocos (Keeling) Islands
+Colombia
+Comoros
+Congo
+Cook Islands
+Costa Rica
+Cote D'ivoire
+Croatia
+Cuba
+Cyprus
+Czech Republic
+Denmark
+Djibouti
+Dominica
+Dominican Republic
+Ecuador
+Egypt
+El Salvador
+Equatorial Guinea
+Eritrea
+Estonia
+Ethiopia
+Falkland Islands (Malvinas)
+Faroe Islands
+Fiji
+Finland
+France
+French Guiana
+French Polynesia
+French Southern Territories
+Gabon
+Gambia
+Georgia
+Germany
+Ghana
+Gibraltar
+Greece
+Greenland
+Grenada
+Guadeloupe
+Guam
+Guatemala
+Guinea
+Guinea-Bissau
+Guyana
+Haiti
+Heard And Mc Donald Islands
+Honduras
+Hong Kong
+Hungary
+Iceland
+India
+Indonesia
+Iran
+Iraq
+Ireland
+Israel
+Italy
+Jamaica
+Japan
+Jordan
+Kazakhstan
+Kenya
+Kiribati
+Korea
+Kuwait
+Kyrgyzstan
+Lao
+Latvia
+Lebanon
+Lesotho
+Liberia
+Libyan Arab Jamahiriya
+Liechtenstein
+Lithuania
+Luxembourg
+Macau
+Macedonia
+Madagascar
+Malawi
+Malaysia
+Maldives
+Mali
+Malta
+Marshall Islands
+Martinique
+Mauritania
+Mauritius
+Mayotte
+Mexico
+Micronesia
+Moldova
+Monaco
+Mongolia
+Montserrat
+Morocco
+Mozambique
+Myanmar
+Namibia
+Nauru
+Nepal
+Netherlands
+Netherlands Antilles
+New Caledonia
+New Zealand
+Nicaragua
+Niger
+Nigeria
+Niue
+Norfolk Island
+Northern Mariana Islands
+Norway
+Oman
+Pakistan
+Palau
+Panama
+Papua New Guinea
+Paraguay
+Peru
+Philippines
+Pitcairpitcairn
+Poland
+Portugal
+Puerto Rico
+Qatar
+Reunion
+Romania
+Russian Federation
+Rwanda
+Saint Helena
+Saint Kitts And Nevis
+Saint Lucia
+Saint Pierre And Miquelon
+Saint Vincent And The Grenadines
+Samoa
+San Marino
+Sao Tome And Principe
+Saudi Arabia
+Senegal
+Serbia And Montenegro
+Seychelles
+Sierra Leone
+Singapore
+Slovakia
+Slovenia
+Solomon Islands
+Somalia
+South Ifrica
+South Georgia And The South Sandwich Islands
+Spain
+Sri Lanka
+Sudan
+Suriname
+Svalbard And Jan Mayen Islands
+Swaziland
+Sweden
+Switzerland
+Syrian Arab Republic
+Taiwan
+Tajikistan
+Tanzania
+Thailand
+Timor-leste
+Togo
+Tokelau
+Tonga
+Trinidad And Tobago
+Tunisia
+Turkey
+Turkmenistan
+Turks And Caicos Islands
+Tuvalu
+Uganda
+Ukraine
+United Arab Emirates
+United Kingdom
+United States
+Uruguay
+Uzbekistan
+Vanuatu
+Vatican City State
+Venezuela
+Viet Nam
+Virgin Islands
+Wallis And Futuna Islands
+Western Sahara
+Yemen
+Zambia
+Zimbabwe</property>
                         <child internal-child="entry">
                           <widget class="GtkEntry" id="comboboxentry-entry1">
                             <property name="visible">True</property>
