@@ -110,6 +110,7 @@ class CharField(object):
 
     def set_default(self, model, value):
         res = self.set(model, value)
+        model.cond_default(self.attrs['name'], self.get(model))
         if self.attrs.get('on_change',False):
             model.on_change(self.attrs['on_change'])
         return res
@@ -124,6 +125,7 @@ class CharField(object):
         try:
             attrs_changes = eval(self.attrs.get('attrs',"{}"))
         except:
+            model.value.update({'uid':rpc.session.uid})
             attrs_changes = eval(self.attrs.get('attrs',"{}"),model.value)
             for k,v in attrs_changes.items():
                 for i in range(0,len(v)):
@@ -250,7 +252,7 @@ class M2OField(CharField):
     '''
     internal = (id, name)
     '''
-
+    
     def create(self, model):
         return False
 

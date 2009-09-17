@@ -32,8 +32,11 @@ def expr_eval(string, context={}):
     context['time'] = time
     if isinstance(string, basestring):
 #        return eval(string, context)
-        string=string.replace("'active_id'","active_id")
-        temp=eval(string, context)
+        string = string.replace("'active_id'","active_id")
+        try:
+            temp = eval(string, context)
+        except:
+            return {}
         return temp
     else:
         return string

@@ -83,14 +83,23 @@ class parser_tree(interface.parser_interface):
         for node in root_node.childNodes:
             node_attrs = tools.node_attributes(node)
             if node.localName == 'button':
-                cell = Cell('button')(node_attrs['string'])
-                cell.attrs=node_attrs
-                cell.name=node_attrs['name']
-                cell.type=node_attrs.get('type','object')
-                cell.context=node_attrs.get('context',{})
-                cell.model=model
+                cell = Cell('button')(node_attrs['string'],editable)
+                cell.attrs = node_attrs
+                cell.name = node_attrs['name']
+                cell.type = node_attrs.get('type','object')
+                cell.context = node_attrs.get('context',{})
+                cell.model = model
                 treeview.cells[node_attrs['name']] = cell
                 col = gtk.TreeViewColumn(None, cell)
+                col.set_clickable(True)
+                col._type = 'Button'
+                col.name = node_attrs['name']
+                col_label = gtk.Label('Action')
+                col_label.set_markup('<b>%s</b>' % node_attrs['string'])
+                if node_attrs.get('help',False):
+                    col_label.set_tooltip_markup('<span foreground=\"darkred\">'+tools.to_xml(node_attrs['string'])+' :</span>\n'+tools.to_xml(node_attrs['help']))
+                col_label.show()
+                col.set_widget(col_label)                
                 btn_list.append(col)
 
             if node.localName == 'field':
@@ -104,6 +113,7 @@ class parser_tree(interface.parser_interface):
                         node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
                 fields[fname].update(node_attrs)
                 node_attrs.update(fields[fname])
+                node_attrs['editable'] = editable
                 cell = Cell(fields[fname]['type'])(fname, treeview, node_attrs,
                         self.window)
                 treeview.cells[fname] = cell
@@ -304,25 +314,44 @@ class Datetime(GenericDate):
             return ''
         date = DT.datetime.strptime(value, self.server_format)
         
-        if rpc.session.context.get('tz'):
-            import pytz
-            lzone = pytz.timezone(str(rpc.session.context['tz']))
-            szone = pytz.timezone(rpc.session.timezone)
-            sdt = szone.localize(date, is_dst=True)
-            date = sdt.astimezone(lzone)
-        return date.strftime(self.display_format)
+        if 'tz' in rpc.session.context and  rpc.session.context['tz']:
+            try:
+                import pytz
+                lzone = pytz.timezone(str(rpc.session.context['tz']))
+                szone = pytz.timezone(rpc.session.timezone)
+                sdt = lzone.localize(dt, is_dst=True)
+                ldt = sdt.astimezone(lzone)
+                date = ldt.timetuple()
+                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+            except Exception, e:
+                pass
+          
+        return dt.strftime(self.display_format)
 
     def value_from_text(self, model, text):
         if not text:
             return False
-        date = DT.datetime.strptime(text, self.display_format)
-        if rpc.session.context.get('tz'):
-            import pytz
-            lzone = pytz.timezone(str(rpc.session.context['tz']))
-            szone = pytz.timezone(rpc.session.timezone)
-            ldt = lzone.localize(date, is_dst=True)
-            sdt = ldt.astimezone(szone)
-            date = sdt.timetuple()
+        try:
+            #date = mx.DateTime.strptime(text, self.display_format)
+            date = tools.datetime_util.strptime(text, self.display_format)
+        except:
+            try:
+                dt = list(time.localtime())
+                dt[2] = int(text)
+                date = tuple(dt)
+            except:
+                return False
+        if 'tz' in rpc.session.context:
+            try:
+                import pytz
+                lzone = pytz.timezone(str(rpc.session.context['tz']))
+                szone = pytz.timezone(rpc.session.timezone)
+                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+                ldt = lzone.localize(dt, is_dst=True)
+                sdt = ldt.astimezone(szone)
+                date = sdt.timetuple()
+            except:
+                pass
         return date.strftime(self.server_format)
 
 class Float(Char):
@@ -496,6 +525,7 @@ class ProgressBar(object):
         self.field_name = field_name
         self.attrs = attrs or {}
         self.renderer = gtk.CellRendererProgress()
+        self.editable = attrs.get('editable',False)        
         self.treeview = treeview
         if not window:
             window = service.LocalService('gui.main').window
@@ -523,14 +553,17 @@ class CellRendererButton(gtk.GenericCellRenderer):
     __gproperties__ = {
             "text": (gobject.TYPE_STRING, None, "Text",
                 "Displayed text", gobject.PARAM_READWRITE),
+            "editable" : (gobject.TYPE_BOOLEAN, None, None,
+                True, gobject.PARAM_READWRITE),                
     }
     __gsignals__ = {
             'clicked': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
                 (gobject.TYPE_STRING, )),
     }
-    def __init__(self, text=""):
+    def __init__(self, text="", editable= True):
         self.__gobject_init__()
         self.text = text
+        self.editable = editable        
         self.border = gtk.Button().border_width
         self.set_property('mode', gtk.CELL_RENDERER_MODE_EDITABLE)
         self.clicking = False
@@ -543,6 +576,8 @@ class CellRendererButton(gtk.GenericCellRenderer):
 
     def __get_model_state(self, widget, cell_area):
         path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
+        if not path:
+            return False        
         modelgrp = widget.get_model()
         model = modelgrp.models[path[0][0]]
 
@@ -608,10 +643,14 @@ class CellRendererButton(gtk.GenericCellRenderer):
         return (x, y, width, height)
 
     def on_start_editing(self, event, widget, path, background_area,
-            cell_area, flags):
-        
-        if not self.__is_visible(widget, cell_area):
-            return
+            cell_area, flags, oneclick={}):
+        if not oneclick:
+            if not self.__is_visible(widget, cell_area):
+                return
+        else:
+            current_state = oneclick['record'].value.get('state',False)
+            if current_state not in self.__get_states():
+                return
         
         if (event is None) or ((event.type == gtk.gdk.BUTTON_PRESS) \
                 or (event.type == gtk.gdk.KEY_PRESS \
@@ -619,9 +658,9 @@ class CellRendererButton(gtk.GenericCellRenderer):
             self.clicking = True
             widget.queue_draw()
             gtk.main_iteration()
-            model=widget.screen.current_model
+            model = widget.screen.current_model
             if widget.screen.current_model.validate():
-                id = widget.screen.save_current()
+                id = oneclick and oneclick['record'].id or widget.screen.save_current()
                 if not self.attrs.get('confirm',False) or \
                         common.sur(self.attrs['confirm']):
                     button_type = self.attrs.get('type', 'workflow')
@@ -663,7 +702,7 @@ class CellRendererButton(gtk.GenericCellRenderer):
             def timeout(self, widget):
                 self.clicking = False
                 widget.queue_draw()
-            gobject.timeout_add(60, timeout, self, widget)
+#            gobject.timeout_add(60, timeout, self, widget)
 gobject.type_register(CellRendererButton)
 
 

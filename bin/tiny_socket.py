@@ -26,6 +26,16 @@ import options
 
 DNS_CACHE = {}
 
+# disable Nagle problem.
+# -> http://www.cmlenz.net/archives/2008/03/python-httplib-performance-problems
+realsocket = socket.socket
+def socketwrap(family=socket.AF_INET, type=socket.SOCK_STREAM, proto=0):
+    sockobj = realsocket(family, type, proto)
+    sockobj.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+    return sockobj
+socket.socket = socketwrap
+
+
 class Myexception(Exception):
     def __init__(self, faultCode, faultString):
         self.faultCode = faultCode

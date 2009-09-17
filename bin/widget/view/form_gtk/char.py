@@ -55,6 +55,8 @@ class char(interface.widget_interface):
         self.widget.set_editable(not value)
         #self.widget.set_sensitive(not value)
 
+    def grab_focus(self):
+        return self.widget.grab_focus()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -51,7 +51,7 @@ class calendar(interface.widget_interface):
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
         self.entry.set_property('activates_default', True)
-        self.entry.connect('key_press_event', self.sig_key_press)        
+        self.entry.connect('key_press_event', self.sig_key_press)
         self.entry.connect('button_press_event', self._menu_open)
         self.entry.connect('activate', self.sig_activate)
         self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
@@ -74,6 +74,9 @@ class calendar(interface.widget_interface):
     def _color_widget(self):
         return self.entry
 
+    def grab_focus(self):
+        return self.entry.grab_focus()
+
     def _readonly_set(self, value):
         interface.widget_interface._readonly_set(self, value)
         self.entry.set_editable(not value)
@@ -86,7 +89,7 @@ class calendar(interface.widget_interface):
         if event.keyval == gtk.keysyms.F2:
             self.cal_open(widget, event)
             return True
-        
+
     def get_value(self, model):
         str = self.entry.get_text()
         if str == '':
@@ -196,6 +199,9 @@ class datetime(interface.widget_interface):
     def _color_widget(self):
         return self.entry
 
+    def grab_focus(self):
+        return self.entry.grab_focus()
+
     def _readonly_set(self, value):
         self.readonly = value
         self.entry.set_editable(not value)
@@ -207,7 +213,7 @@ class datetime(interface.widget_interface):
         if event.keyval == gtk.keysyms.F2:
             self.cal_open(widget,event)
             return True
-        
+
     def get_value(self, model, timezone=True):
         str = self.entry.get_text()
         if str=='':
@@ -330,6 +336,9 @@ class stime(interface.widget_interface):
 
     def _color_widget(self):
         return self.entry
+
+    def grab_focus(self):
+        return self.entry.grab_focus()
 
     def get_value(self, model):
         str = self.entry.get_text()

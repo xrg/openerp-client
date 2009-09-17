@@ -95,7 +95,7 @@ class dialog(object):
         if not target:
             vp.set_size_request(min(width - 20, x + 20),min(height - 60, y + 25))
         else:
-            vp.set_size_request(x,y)
+            vp.set_size_request(min(width - 20, x + 15),min(height - 60, y + 20))
         self.dia.show_all()
         self.screen.display()
 
@@ -171,6 +171,9 @@ class many2one(interface.widget_interface):
             ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', '', [], 'ilike', {})
             if ids:
                 self.load_completion(ids,attrs)
+
+    def grab_focus(self):
+        return self.wid_text.grab_focus()
 
     def load_completion(self,ids,attrs):
         self.completion = gtk.EntryCompletion()

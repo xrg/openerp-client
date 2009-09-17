@@ -23,18 +23,29 @@
 import gtk
 import gobject
 import wid_int
+import rpc
+import tools
 
 class selection(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={}, model=None):
         wid_int.wid_int.__init__(self, name, parent, attrs)
 
         self.widget = gtk.combo_box_entry_new_text()
         self.widget.child.set_editable(True)
-        self.widget.child.connect('key_press_event', self.sig_key_press)
-        self._selection={}
+        self.attrs = attrs
+        self._selection = {}
+        self.name = name
+        
+        if attrs.get('context',False):
+            self.widget.child.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("#d2d2ff"))
+            self.widget.child.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#d2d2ff"))
+            self.widget.set_tooltip_markup("This Field comes with a context")
+#        else:
+#            self.widget.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ffffff"))
+#            self.widget.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ffffff"))        
         if 'selection' in attrs:
             self.set_popdown(attrs.get('selection',[]))
-
+            
     def set_popdown(self, selection):
         self.model = self.widget.get_model()
         self.model.clear()
@@ -42,34 +53,42 @@ class selection(wid_int.wid_int):
         lst = []
         for (i,j) in selection:
             name = str(j)
-            if type(i)==type(1):
-                name+=' ('+str(i)+')'
             lst.append(name)
             self._selection[name]=i
-        self.widget.append_text('')
         for l in lst:
             self.widget.append_text(l)
+        if '' not in self._selection:
+            self.widget.append_text('')
         return lst
-
-    def sig_key_press(self, widget, event):
-        completion=gtk.EntryCompletion()
-        completion.set_inline_selection(True)
-        if (event.type == gtk.gdk.KEY_PRESS) \
-            and ((event.state & gtk.gdk.CONTROL_MASK) != 0) \
-            and (event.keyval == gtk.keysyms.space):
-            self.entry.popup()
-        elif not (event.keyval==65362 or event.keyval==65364):
-            completion.set_model(self.model)
-            widget.set_completion(completion)
-            completion.set_text_column(0)
 
     def _value_get(self):
         model = self.widget.get_model()
         index = self.widget.get_active()
+        ctx = None
+        if self.attrs.get('context',False):
+            ctx = self.attrs['context']
+          
         if index>=0:
             res = self._selection.get(model[index][0], False)
+            if ctx:
+                if rpc.session.context.get('search_context',False):
+                    for k in tools.expr_eval(ctx, {'self':False}).keys():
+                        if k in rpc.session.context['search_context'].keys():
+                            del rpc.session.context['search_context'][k]
             if res:
+                if ctx:
+                    rpc.session.context['search_context'] = tools.expr_eval(ctx, {'self':res})
                 return [(self.name,'=',res)]
+        else:
+            if ctx:
+                if rpc.session.context.get('search_context',False):
+                    for k in tools.expr_eval(ctx, {'self':False}).keys():
+                        if k in rpc.session.context['search_context'].keys():
+                            del rpc.session.context['search_context'][k]
+                
+            res = self.widget.child.get_text()
+            if res:
+                return [(self.name,'ilike',res)]
         return []
 
     def _value_set(self, value):

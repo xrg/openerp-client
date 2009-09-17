@@ -126,22 +126,29 @@ class ModelRecord(signal_event.signal_event):
 
     def save(self, reload=True):
         self._check_load()
-
-        if not self.id:
-            value = self.get(get_readonly=False)
-            self.id = self.rpc.create(value, self.context_get())
+        try:
             if not self.id:
-                self.failed_validation()
-
-        else:
-            if not self.is_modified():
-                return self.id
-            value = self.get(get_readonly=False, get_modifiedonly=True)
-            context = self.context_get().copy()
-            self.update_context_with_concurrency_check_data(context)
-            if not self.rpc.write([self.id], value, context):
+                value = self.get(get_readonly=False)
+                self.id = self.rpc.create(value, self.context_get())
+#                if not self.id:
+#                    self.failed_validation()
+    
+            else:
+                if not self.is_modified():
+                    return self.id
+                value = self.get(get_readonly=False, get_modifiedonly=True)
+                context = self.context_get().copy()
+                self.update_context_with_concurrency_check_data(context)
+                self.rpc.write([self.id], value, context)
+#                if not self.rpc.write([self.id], value, context):
+#                    self.failed_validation()
+#                    return False
+        except Exception,e:
+            if hasattr(e,'faultCode') and e.faultCode.find('ValidateError')>-1:
                 self.failed_validation()
                 return False
+            pass
+            
         self._loaded = False
         if reload:
             self.reload()

@@ -153,7 +153,7 @@ class win_export(object):
         self.wid_write_field_names = self.glade.get_widget('add_field_names_cb')
         self.wid_import_compatible = self.glade.get_widget('import_compatible')
         action = self.wid_action.set_active(os.name!='nt')
-        
+
         self.glade.signal_connect('on_but_unselect_all_clicked', self.sig_unsel_all)
         self.glade.signal_connect('on_but_select_all_clicked', self.sig_sel_all)
         self.glade.signal_connect('on_but_select_clicked', self.sig_sel)

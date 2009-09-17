@@ -210,5 +210,8 @@ class image_wid(interface.widget_interface):
         self.but_save_as.set_sensitive(not value)
         self.but_remove.set_sensitive(not value)
         self.is_readonly = value
+        
+    def grab_focus(self):
+        return self.image.grab_focus()
+        
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-

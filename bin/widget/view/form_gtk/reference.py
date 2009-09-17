@@ -134,6 +134,9 @@ class reference(interface.widget_interface):
     def _color_widget(self):
         return self.wid_text
 
+    def grab_focus(self):
+        return self.widget_combo.grab_focus()
+
     def set_value(self, model, model_field):
         return
 

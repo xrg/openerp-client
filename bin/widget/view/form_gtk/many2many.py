@@ -162,6 +162,8 @@ class many2many(interface.widget_interface):
     def set_value(self, model, model_field):
         model_field.set_client(model, [x.id for x in self.screen.models.models])
 
+    def grab_focus(self):
+        return self.wid_text.grab_focus()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

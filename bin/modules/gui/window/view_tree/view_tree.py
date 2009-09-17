@@ -174,7 +174,8 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
             return None
         for x in path:
             node.append( (x, tree) )
-            tree = tree[x][2]
+            if x <= (len(tree)-1):
+                tree = tree[x] and tree[x][2] or None
         return node
 
     def on_get_value(self, node, column):

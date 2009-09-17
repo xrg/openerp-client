@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    Copyright (c) 2008-2009 B2CK, Bertrand Chenal, Cedric Krier (D&D in lists)
 #    $Id$
@@ -146,9 +146,9 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 class ViewList(parser_view):
 
     def __init__(self, window, screen, widget, children=None, buttons=None,
-            toolbar=None):
+            toolbar=None, submenu=None):
         super(ViewList, self).__init__(window, screen, widget, children,
-                buttons, toolbar)
+                buttons, toolbar, submenu=submenu)
         self.store = None
         self.view_type = 'tree'
         self.model_add_new = True
@@ -200,7 +200,7 @@ class ViewList(parser_view):
         treeview.emit_stop_by_name('drag-drop')
         treeview.drag_get_data(context, context.targets[-1], time)
         return True
-        
+
     def drag_data_get(self, treeview, context, selection, target_id,
             etime):
         treeview.emit_stop_by_name('drag-data-get')
@@ -211,7 +211,7 @@ class ViewList(parser_view):
         treeselection.selected_foreach(_func_sel_get, data)
         data = str(data[0])
         selection.set(selection.target, 8, data)
-        
+
     def drag_data_received(self, treeview, context, x, y, selection,
             info, etime):
         treeview.emit_stop_by_name('drag-data-received')
@@ -239,7 +239,8 @@ class ViewList(parser_view):
         treeview.emit_stop_by_name('drag-data-delete')
 
     def __hello(self, treeview, event, *args):
-        if event.button==3:
+
+        if event.button in [1,3]:
             path = treeview.get_path_at_pos(int(event.x),int(event.y))
             selection = treeview.get_selection()
             if selection.get_mode() == gtk.SELECTION_SINGLE:
@@ -251,20 +252,30 @@ class ViewList(parser_view):
             m = model.models[path[0][0]]
 
             # TODO: add menu cache
-            if path[1]._type=='many2one':
-                value = m[path[1].name].get(m)
-                resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.screen.fields[path[1].name]['relation'], False)], False, rpc.session.context)
-                resrelate = map(lambda x:x[2], resrelate)
-                menu = gtk.Menu()
-                for x in resrelate:
-                    x['string'] = x['name']
-                    item = gtk.ImageMenuItem('... '+x['name'])
-                    f = lambda action, value, model: lambda x: self._click_and_relate(action, value, model)
-                    item.connect('activate', f(x, value, self.screen.fields[path[1].name]['relation']))
-                    item.set_sensitive(bool(value))
-                    item.show()
-                    menu.append(item)
-                menu.popup(None,None,None,event.button,event.time)
+            if event.button == 1:
+                # first click on button
+                if path[1]._type == 'Button':
+                    cell_button = path[1].get_cells()[0]
+                    cell_button.on_start_editing(event,treeview,1,None,None,0,oneclick={'record':m})
+                    self.screen.current_model = m
+#                    self.display()
+                    treeview.screen.reload()
+            else:
+                # Here it goes for right click
+                if path[1]._type=='many2one':
+                    value = m[path[1].name].get(m)
+                    resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.screen.fields[path[1].name]['relation'], False)], False, rpc.session.context)
+                    resrelate = map(lambda x:x[2], resrelate)
+                    menu = gtk.Menu()
+                    for x in resrelate:
+                        x['string'] = x['name']
+                        item = gtk.ImageMenuItem('... '+x['name'])
+                        f = lambda action, value, model: lambda x: self._click_and_relate(action, value, model)
+                        item.connect('activate', f(x, value, self.screen.fields[path[1].name]['relation']))
+                        item.set_sensitive(bool(value))
+                        item.show()
+                        menu.append(item)
+                    menu.popup(None,None,None,event.button,event.time)
 
     def _click_and_relate(self, action, value, model):
         data={}

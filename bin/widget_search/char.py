@@ -21,25 +21,43 @@
 ##############################################################################
 
 import gtk
-
+import rpc
 import wid_int
+import tools
 
 
 class char(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}):
         wid_int.wid_int.__init__(self, name, parent, attrs)
-
+        self.attrs = attrs
         self.widget = gtk.Entry()
         self.widget.set_max_length(int(attrs.get('size',16)))
         self.widget.set_width_chars(5)
         self.widget.set_property('activates_default', True)
+        if attrs.get('context',False):
+            self.widget.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("#d2d2ff"))
+            self.widget.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#d2d2ff"))
+            self.widget.set_tooltip_markup("This Field comes with a context")
+#        else:
+#            self.widget.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ffffff"))
+#            self.widget.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ffffff"))    
 
     def _value_get(self):
         s = self.widget.get_text()
+        ctx = None
+        if self.attrs.get('context',False):
+            ctx = self.attrs['context']
         if s:
+            if ctx:
+                rpc.session.context['search_context'] = tools.expr_eval(ctx, {'self':s})
             return [(self.name,self.attrs.get('comparator','ilike'),s)]
         else:
-            return []
+            if ctx:
+                if rpc.session.context.get('search_context',False):
+                    for k in tools.expr_eval(ctx, {'self':False}).keys():
+                        if k in rpc.session.context['search_context'].keys():
+                            rpc.session.context['search_context'].pop(k)
+        return []
 
     def _value_set(self, value):
         self.widget.set_text(value)

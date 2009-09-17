@@ -90,6 +90,7 @@ class ViewCalendar(object):
         
         self._radio_month.set_active(True)
         self.mode = 'month'
+        self.modex = 'month'
         
         self.fields = fields
         self.attrs = attrs
@@ -223,6 +224,11 @@ class ViewCalendar(object):
 
                 self.cal_model.remove_events()
                 self.cal_model.add_events(self.__get_events())
+                self.modex = self.mode
+                self.mode = self.mode == 'month' and 'week' or 'month'
+                self.refresh()
+                self.mode = self.modex
+
                 
         self.refresh()
 

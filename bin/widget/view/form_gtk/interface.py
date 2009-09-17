@@ -37,6 +37,7 @@ class widget_interface(object):
         if attrs is None:
             attrs = {}
         self.parent = parent
+        self.position = 0        
         self._window = window
         self._view = None
         self.attrs = attrs
@@ -137,6 +138,9 @@ class widget_interface(object):
     def sig_changed(self):
         if self.attrs.get('on_change',False):
             self._view.view_form.screen.on_change(self.attrs['on_change'])
+
+    def grab_focus(self):
+        return self.widget.grab_focus()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

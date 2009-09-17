@@ -201,5 +201,8 @@ class wid_binary(interface.widget_interface):
     def _color_widget(self):
         return self.wid_text
 
+    def grab_focus(self):
+        return self.wid_text.grab_focus()
+    
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

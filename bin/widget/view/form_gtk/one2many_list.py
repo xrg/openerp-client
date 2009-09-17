@@ -362,5 +362,8 @@ class one2many_list(interface.widget_interface):
             model.modified_fields.setdefault(model_field.name)
         return True
 
+    def grab_focus(self):
+        return self.screen.widget.grab_focus()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

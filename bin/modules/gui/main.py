@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -171,7 +171,7 @@ class DatabaseDialog(gtk.Dialog):
                     win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
                     win.set_title(_('OpenERP Computing'))
                     win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                    win.set_modal(True) 
+                    win.set_modal(True)
                     vbox = gtk.VBox(False, 0)
                     hbox = gtk.HBox(False, 13)
                     hbox.set_border_width(10)
@@ -308,8 +308,8 @@ class MigrationDatabaseDialog(DatabaseDialog):
     def on_response_accept(self):
         databases = [ item[1] for item in self.model if bool(item[0]) ]
         if databases:
-            rpc.session.migrate_databases(self.serverEntry.get_text(), 
-                                          self.adminPwdEntry.get_text(), 
+            rpc.session.migrate_databases(self.serverEntry.get_text(),
+                                          self.adminPwdEntry.get_text(),
                                           databases)
             if len(databases) == 1:
                 self.message = _("Your database has been upgraded.")
@@ -724,6 +724,7 @@ class terp_main(service.Service):
         self.status_bar_main = self.glade.get_widget('hbox_status_main')
         self.status_bar_main.show()
         self.toolbar = self.glade.get_widget('main_toolbar')
+        self.sb_company = self.glade.get_widget('sb_company')
         self.sb_requests = self.glade.get_widget('sb_requests')
         self.sb_username = self.glade.get_widget('sb_user_name')
         self.sb_servername = self.glade.get_widget('sb_user_server')
@@ -945,6 +946,12 @@ class terp_main(service.Service):
     def sig_user_preferences(self, *args):
         win =win_preference.win_preference(parent=self.window)
         win.run()
+        id = self.sb_company.get_context_id('message')
+        comp=self.company_set()
+        if comp:
+            self.sb_company.push(id, comp)
+        else:
+            self.sb_company.push(id, '')
         return True
 
     def sig_win_close(self, *args):
@@ -986,6 +993,21 @@ class terp_main(service.Service):
         except:
             return False
 
+    def company_set(self):
+        try:
+            uid = rpc.session.uid
+            ids = rpc.session.rpc_exec_auth_try('/object', 'execute',
+                    'res.users', 'get_current_company')
+            if len(ids):
+                message = _('%s') % ids[0][1]
+            else:
+                message = _('No Company')
+            id = self.sb_company.get_context_id('message')
+            self.sb_company.push(id, message)
+            return ids[0][1]
+        except:
+            return []
+
     def request_set(self):
         try:
             uid = rpc.session.uid
@@ -996,7 +1018,7 @@ class terp_main(service.Service):
             else:
                 message = _('No request')
             if len(ids2):
-                message += _(' - %s request(s) sended') % len(ids2)
+                message += _(' - %s request(s) sent') % len(ids2)
             id = self.sb_requests.get_context_id('message')
             self.sb_requests.push(id, message)
             return (ids,ids2)
@@ -1031,6 +1053,7 @@ class terp_main(service.Service):
                     else:
                         self.secure_img.hide()
                     self.request_set()
+                    self.company_set()
                 elif log_response == RES_CNX_ERROR:
                     common.message(_('Connection error !\nUnable to connect to the server !'))
                 elif log_response == RES_BAD_PASSWORD:
@@ -1058,6 +1081,8 @@ class terp_main(service.Service):
                 res = False
         id = self.sb_requests.get_context_id('message')
         self.sb_requests.push(id, '')
+        id = self.sb_company.get_context_id('message')
+        self.sb_company.push(id, '')
         id = self.sb_username.get_context_id('message')
         self.sb_username.push(id, _('Not logged !'))
         id = self.sb_servername.get_context_id('message')
@@ -1184,7 +1209,7 @@ class terp_main(service.Service):
         self.pages.append(win)
         box = gtk.HBox(False, 0)
 
-        # Draw the close button on the right 
+        # Draw the close button on the right
         closebtn = gtk.Button()
         image = gtk.Image()
         image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
@@ -1422,7 +1447,10 @@ class terp_main(service.Service):
         if not db_name:
             return
         filename = common.file_selection(_('Save As...'),
-                action=gtk.FILE_CHOOSER_ACTION_SAVE, parent=self.window, preview=False)
+                action=gtk.FILE_CHOOSER_ACTION_SAVE,
+                parent=self.window,
+                preview=False,
+                filename='%s_%s.sql' % (db_name, time.strftime('%Y%m%d_%H:%M'),))
 
         if filename:
             try:

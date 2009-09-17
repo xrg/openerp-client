@@ -34,7 +34,7 @@ class parser_interface(object):
         self.screen = screen
 
 class parser_view(object):
-    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None):
+    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None, submenu=None):
         if window is None:
             window = service.LocalService('gui.main').window
         self.window = window

@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -25,8 +25,8 @@ from interface import parser_view
 class ViewGantt(parser_view):
 
     def __init__(self, window, screen, widget, children=None, buttons=None,
-            toolbar=None):
-        super(ViewGantt, self).__init__(window, screen, widget, children, buttons, toolbar)
+            toolbar=None, submenu=None):
+        super(ViewGantt, self).__init__(window, screen, widget, children, buttons, toolbar, submenu)
         self.view_type = 'gantt'
         self.view = widget
         self.model_add_new = False

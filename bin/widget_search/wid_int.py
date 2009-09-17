@@ -25,7 +25,8 @@ import gtk
 import rpc
 
 class wid_int(object):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={}, call=None):
+        self.call = call
         self._value = None
         self.parent = parent
         self.name = name

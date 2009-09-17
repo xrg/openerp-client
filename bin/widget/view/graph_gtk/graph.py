@@ -84,22 +84,26 @@ class ViewGraph(object):
         for m in models:
             res = {}
             for x in self.axis_data.keys():
+                field_val = m[x].get_client(m)                
                 if self.fields[x]['type'] in ('many2one', 'char','time','text'):
-                    res[x] = str(m[x].get_client(m))
+                    res[x] = field_val and str(field_val) or 'Undefined'
                 elif self.fields[x]['type'] == 'selection':
                     selection = dict(m[x].attrs['selection'])
-                    val = str(m[x].get_client(m))
-                    res[x] = selection.get(val, val)
+                    if field_val:
+                        val = str(field_val)
+                        res[x] = selection.get(val, val)
+                    else:
+                        res[x] = 'Undefined'
                 elif self.fields[x]['type'] == 'date':
-                    if m[x].get_client(m):
-                        date = time.strptime(m[x].get_client(m), DT_FORMAT)
+                    if field_val:
+                        date = time.strptime(field_val, DT_FORMAT)
                         res[x] = time.strftime(LDFMT, date)
                     else:
-                        res[x]=''
+                        res[x] = 'Undefined'
                 elif self.fields[x]['type'] == 'datetime':
-                    if m[x].get_client(m):
-                        date = time.strptime(m[x].get_client(m), DHM_FORMAT)
-                        if rpc.session.context.get('tz'):
+                    if field_val:
+                        date = time.strptime(field_val, DHM_FORMAT)
+                        if 'tz' in rpc.session.context:
                             try:
                                 import pytz
                                 lzone = pytz.timezone(rpc.session.context['tz'])
@@ -112,9 +116,9 @@ class ViewGraph(object):
                                 pass
                         res[x] = time.strftime(LDFMT + ' %H:%M:%S', date)
                     else:
-                        res[x] = ''
+                        res[x] = 'Undefined'  
                 else:
-                    res[x] = float(m[x].get_client(m))
+                    res[x] = float(field_val)
             datas.append(res)
         tinygraph.tinygraph(self._subplot, self.attrs.get('type', 'pie'), self.axis, self.axis_data, datas, axis_group_field=self.axis_group, orientation=self.attrs.get('orientation', 'vertical'))
         # the draw function may generate exception but it is not a problem as it will be redraw latter

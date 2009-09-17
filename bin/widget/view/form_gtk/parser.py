@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -109,7 +109,7 @@ class Button(Observable):
                         obj = service.LocalService('action.main')
                         for rs in result:
                             obj._exec_action(rs, datas)
-                            
+
                 elif button_type == 'object':
                     if not id:
                         return
@@ -156,7 +156,7 @@ class StateAwareWidget(object):
 
     def attrs_set(self, model):
         sa = hasattr(self.widget, 'attrs') and self.widget.attrs or {}
-        attrs_changes = eval(sa.get('attrs',"{}"))
+        attrs_changes = eval(sa.get('attrs',"{}"),{'uid':rpc.session.uid})
         for k,v in attrs_changes.items():
             result = True
             for condition in v:
@@ -265,6 +265,11 @@ class _container(object):
         table.set_focus_chain(wid_list)
 
 class parser_form(widget.view.interface.parser_interface):
+    def __init__(self, window, parent=None, attrs=None, screen=None):
+           super(parser_form, self).__init__(window, parent=parent, attrs=attrs,
+                    screen=screen)
+           self.widget_id = 0
+
     def parse(self, model, root_node, fields, notebook=None, paned=None, tooltips=None):
         dict_widget = {}
         saw_list = []   # state aware widget list
@@ -291,7 +296,10 @@ class parser_form(widget.view.interface.parser_interface):
                 icon.set_from_stock(attrs['name'], gtk.ICON_SIZE_DIALOG)
                 container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
             elif node.localName=='separator':
-                vbox = gtk.VBox()
+                if 'position' in attrs and attrs['position']=='verticle':
+                    vbox = gtk.HBox()
+                else:
+                    vbox = gtk.VBox()
                 if 'string' in attrs:
                     text = attrs.get('string', 'No String Attr.')
                     l = gtk.Label('<b>'+(text.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;'))+'</b>')
@@ -302,7 +310,10 @@ class parser_form(widget.view.interface.parser_interface):
                     eb.add(l)
                     container.trans_box_label.append((eb, text, None))
                     vbox.pack_start(eb)
-                vbox.pack_start(gtk.HSeparator())
+                if 'position' in attrs and attrs['position']=='verticle':
+                    vbox.pack_start(gtk.VSeparator(), padding=2, expand=False, fill=False)
+                else:
+                    vbox.pack_start(gtk.HSeparator())
                 container.wid_add(vbox,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
             elif node.localName=='label':
                 text = attrs.get('string', '')
@@ -412,6 +423,9 @@ class parser_form(widget.view.interface.parser_interface):
                     fields[name]['filename'] = attrs['filename']
 
                 widget_act = widgets_type[type][0](self.window, self.parent, model, fields[name])
+                self.widget_id += 1
+                widget_act.position = self.widget_id
+
                 label = None
                 if not int(attrs.get('nolabel', 0)):
                     # TODO space before ':' depends of lang (ex: english no space)
@@ -609,6 +623,12 @@ class parser_form(widget.view.interface.parser_interface):
                 label = gtk.Label(lang['name'] + ' :')
             label.set_alignment(1.0, 0.5)
             (entry, yoptions) = widget_duplicate(widget_entry)
+
+             # Setting the writable property according to main widget
+            if isinstance(entry,gtk.Entry):
+                entry.set_sensitive(widget_entry.get_editable())
+            elif isinstance(entry,gtk.ScrolledWindow):
+                entry.child.set_sensitive(widget_entry.child.get_editable())
 
             hbox = gtk.HBox(homogeneous=False)
             if code == lang['code']:

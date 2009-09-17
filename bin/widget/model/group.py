@@ -181,9 +181,15 @@ class ModelRecordGroup(signal_event.signal_event):
         if not self.fields:
             return self.pre_load(ids, display)
         c = rpc.session.context.copy()
+        if c.get('search_context',False):
+            for k,v in c['search_context'].items():
+                if k not in c.keys():
+                    c[k] = v
+        
         c.update(self.context)
         c['bin_size'] = True
         values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
+        rpc.session.context['search_context'] = {}
         if not values:
             return False
         newmod = False

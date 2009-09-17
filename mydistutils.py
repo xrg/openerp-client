@@ -43,6 +43,9 @@ except ImportError:
     except ImportError:
         sys.exit('Error: Can not find dsextras or gtk.dsextras')
 
+# get python short version
+py_short_version = '%s.%s' % sys.version_info[:2]
+
 
 class l10napp_build(build):
 
@@ -61,7 +64,10 @@ class l10napp_install(install):
 
     def run(self):
         # create startup script
-        start_script = "#!/bin/sh\ncd %s\nexec %s ./openerp-client.py $@\n" % (os.path.join(self.install_libbase, "openerp-client"), sys.executable)
+        # start_script = "#!/bin/sh\ncd %s\nexec %s ./openerp-client.py $@\n" % (opj(self.install_libbase, "openerp-client"), sys.executable)
+        opj = os.path.join
+        openerp_site_packages = opj('/usr', 'lib', 'python%s' % py_short_version, 'site-packages', 'openerp-client')
+        start_script = "#!/bin/sh\ncd %s\nexec %s ./openerp-client.py $@\n" % (openerp_site_packages, sys.executable)
         # write script
         f = open('openerp-client', 'w')
         f.write(start_script)

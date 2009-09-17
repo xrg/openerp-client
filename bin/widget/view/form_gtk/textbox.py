@@ -55,6 +55,9 @@ class textbox(interface.widget_interface):
 
     def _color_widget(self):
         return self.tv
+    
+    def grab_focus(self):
+        return self.tv.grab_focus()    
 
     def set_value(self, model, model_field):
         buffer = self.tv.get_buffer()

@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -45,7 +45,7 @@ parsers = {
 }
 
 class widget_parse(interface.parser_interface):
-    def parse(self, screen, root_node, fields, toolbar={}):
+    def parse(self, screen, root_node, fields, toolbar={}, submenu={}):
         for node in root_node.childNodes:
             if not node.nodeType == node.ELEMENT_NODE:
                 continue
@@ -56,8 +56,7 @@ class widget_parse(interface.parser_interface):
             widget = widget_parser(self.window, self.parent, self.attrs, screen)
             wid, child, buttons, on_write = widget.parse(screen.resource, node, fields)
             screen.set_on_write(on_write)
-
-            res = view_parser(self.window, screen, wid, child, buttons, toolbar)
+            res = view_parser(self.window, screen, wid, child, buttons, toolbar, submenu)
             res.title = widget.title
             return res
         raise Exception(_("No valid view found for this object!"))

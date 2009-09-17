@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution    
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -27,6 +27,8 @@ import gettext
 import xmlrpclib
 import common
 import service
+from xml import dom
+import copy
 
 import rpc
 
@@ -113,6 +115,7 @@ class win_search(object):
         self.context = context
         self.context.update(rpc.session.context)
         self.sel_multi = sel_multi
+        self.offset = 0
         self.glade = glade.XML(common.terp_path("openerp.glade"),'win_search',gettext.textdomain())
         self.win = self.glade.get_widget('win_search')
         self.win.set_icon(common.OPENERP_ICON)
@@ -125,11 +128,64 @@ class win_search(object):
         self.view = self.screen.current_view
         self.view.unset_editable()
         sel = self.view.widget_tree.get_selection()
+ 
+        self.filter_widget = None
+        self.search_count = 0
 
         if not sel_multi:
             sel.set_mode('single')
         else:
             sel.set_mode(gtk.SELECTION_MULTIPLE)
+
+        self.screen.widget.set_spacing(5)
+        self.parent_hbox = gtk.HBox(homogeneous=False, spacing=0)
+        self.hbox = gtk.HBox(homogeneous=False, spacing=0)        
+        self.parent_hbox.pack_start(gtk.Label(''), expand=True, fill=True)
+        self.parent_hbox.pack_start(self.hbox, expand=False, fill=False)
+        
+        self.limit_combo = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
+        self.combo = gtk.ComboBox(self.limit_combo)
+        cell = gtk.CellRendererText()
+        self.combo.pack_start(cell, True)
+        self.combo.add_attribute(cell, 'text', 1)
+
+        self.selection = []
+        search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', model, 'search_count', [], self.context)
+        tmp_search_count = search_count
+        i = 1
+        while tmp_search_count>100 :
+            self.selection.append([i*100,'0/'+str(i*100)+' of '+str(search_count)])
+            if i>5:
+                break
+            i += 1
+            tmp_search_count -= 100
+        self.selection.append([search_count, '0/'+str(search_count)+' of '+str(search_count)]) 
+        for lim in self.selection:
+            self.limit_combo.append(lim)
+        self.combo.set_active(0)
+        self.hbox.pack_start(self.combo, 0, 0)
+        self.hbox.pack_start(gtk.VSeparator(),padding=3, expand=False, fill=False)
+
+# Previous Button
+        self.but_previous = gtk.Button()
+        icon = gtk.Image()
+        icon.set_from_stock('gtk-go-back', gtk.ICON_SIZE_SMALL_TOOLBAR)
+        self.but_previous.set_relief(gtk.RELIEF_NONE)
+        self.but_previous.set_image(icon)
+        self.hbox.pack_start(self.but_previous, 0, 0)
+        self.but_previous.connect('clicked', self.search_offset_previous)
+
+#Forward button
+        icon2 = gtk.Image()
+        icon2.set_from_stock('gtk-go-forward', gtk.ICON_SIZE_SMALL_TOOLBAR)
+        self.but_next = gtk.Button()
+        self.but_next.set_image(icon2)
+        self.but_next.set_relief(gtk.RELIEF_NONE)
+        self.hbox.pack_start(self.but_next, 0, 0)
+        self.but_next.connect('clicked', self.search_offset_next)
+
+        self.screen.widget.pack_start(self.parent_hbox, expand=False, fill=False)
+        self.screen.screen_container.show_filter()
         vp = gtk.Viewport()
         vp.set_shadow_type(gtk.SHADOW_NONE)
         vp.add(self.screen.widget)
@@ -141,11 +197,38 @@ class win_search(object):
 
         self.model_name = model
 
-        view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'form', self.context)
-        self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win)
-
+        view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'search', self.context)
+        if view_form['type'] == 'form':
+            def encode(s):
+                if isinstance(s, unicode):
+                    return s.encode('utf8')
+                return s
+            def process_child(node, new_node, doc):
+                        for child in node.childNodes:
+                            if child.localName=='field' and child.hasAttribute('select') and child.getAttribute('select')=='1':
+                                if child.childNodes:
+                                    fld = doc.createElement('field')
+                                    for attr in child.attributes.keys():
+                                        fld.setAttribute(attr, child.getAttribute(attr))
+                                    new_node.appendChild(fld)
+                                else:
+                                    new_node.appendChild(child)
+                            elif child.localName in ('page','group','notebook'):
+                                process_child(child, new_node, doc)
+                            
+            dom_arc = dom.minidom.parseString(encode(view_form['arch']))
+            new_node = copy.deepcopy(dom_arc)
+            for child_node in new_node.childNodes[0].childNodes:
+                if child_node.nodeType == child_node.ELEMENT_NODE:
+                    new_node.childNodes[0].removeChild(child_node)
+            process_child(dom_arc.childNodes[0],new_node.childNodes[0],dom_arc)
+            
+            view_form['arch']=new_node.toxml()
+        hda = (self, self.find)
+        self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win, col=5, call= hda)
+        
         self.title = _('OpenERP Search: %s') % self.form.name
-        self.title_results = _('OpenERP Search: %s (%%d result(s))') % self.form.name
+        self.title_results = _('OpenERP Search: %s (%%d result(s))') % (self.form.name.replace('%',''),)
         self.win.set_title(self.title)
         x, y = self.form.widget.size_request()
 
@@ -158,8 +241,8 @@ class win_search(object):
         self.old_offset = self.old_limit = None
         if self.ids:
             self.old_search = []
-            self.old_limit = self.form.get_limit()
-            self.old_offset = self.form.get_offset()
+            self.old_limit = self.get_limit()
+            self.old_offset = self.offset
 
         self.view.widget.show_all()
         if self.form.focusable:
@@ -177,9 +260,9 @@ class win_search(object):
         return False
 
     def find(self, widget=None, *args):
-        limit = self.form.get_limit()
-        offset = self.form.get_offset()
-        if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset) and not self.first:
+        limit = self.get_limit()
+        offset = self.offset
+        if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset) and not self.first and widget:
             self.win.response(gtk.RESPONSE_OK)
             return False
         self.first = False
@@ -193,9 +276,23 @@ class win_search(object):
         except:
             # Try if it is not an old server
             self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
+
         self.reload()
         self.old_search = self.form.value
         self.win.set_title(self.title_results % len(self.ids))
+        if len(self.ids) < limit:
+            self.search_count = len(self.ids)
+        else:
+            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search_count', [], self.context)        
+        if offset<=0:
+            self.but_previous.set_sensitive(False)
+        else:
+            self.but_previous.set_sensitive(True)
+
+        if offset+limit>=self.search_count:
+            self.but_next.set_sensitive(False)
+        else:
+            self.but_next.set_sensitive(True)        
         return True
 
     def reload(self):
@@ -214,6 +311,21 @@ class win_search(object):
 
     def go(self):
         end = False
+        limit = self.get_limit()
+        offset = self.offset
+        if len(self.ids) < limit:
+            self.search_count = len(self.ids)
+        else:
+            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search_count', [], self.context)        
+        if offset<=0:
+            self.but_previous.set_sensitive(False)
+        else:
+            self.but_previous.set_sensitive(True)
+
+        if offset+limit>=self.search_count:
+            self.but_next.set_sensitive(False)
+        else:
+            self.but_next.set_sensitive(True)                
         while not end:
             button = self.win.run()
             if button == gtk.RESPONSE_OK:
@@ -235,4 +347,18 @@ class win_search(object):
             dia.destroy()
         return res
 
+    def search_offset_next(self, button):
+        offset = self.offset
+        limit = self.get_limit()
+        self.offset = offset+limit
+        self.find()
+
+    def search_offset_previous(self, button):
+        offset = self.offset
+        limit = self.get_limit()
+        self.offset = (max(offset-limit,0))
+        self.find()
+
+    def get_limit(self):
+        return int(self.limit_combo.get_value(self.combo.get_active_iter(), 0))
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

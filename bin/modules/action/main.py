@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -21,6 +21,7 @@
 ##############################################################################
 
 import os
+import copy
 import time
 import base64
 import datetime
@@ -31,6 +32,7 @@ import printer
 import common
 import tools
 from widget.view.form_gtk.many2one import dialog
+from xml import dom
 
 class main(service.Service):
     def __init__(self, name='action.main'):
@@ -81,10 +83,41 @@ class main(service.Service):
     def _exec_action(self, action, datas, context={}):
         if isinstance(action, bool) or 'type' not in action:
             return
-        if action['type']=='ir.actions.act_window':
+        if action['type'] in ['ir.actions.act_window', 'ir.actions.submenu']:
             for key in ('res_id', 'res_model', 'view_type', 'view_mode',
-                    'limit', 'auto_refresh'):
+                    'limit', 'auto_refresh', 'search_view', 'search_view_id'):
                 datas[key] = action.get(key, datas.get(key, None))
+
+            if not datas['search_view'] and datas['search_view_id']:
+                 datas['search_view'] = str(rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', datas['search_view_id'], 'search', context))
+
+            elif not datas['search_view'] and not datas['search_view_id']:
+                def encode(s):
+                    if isinstance(s, unicode):
+                        return s.encode('utf8')
+                    return s
+                def process_child(node, new_node, doc):
+                    for child in node.childNodes:
+                        if child.localName=='field' and child.hasAttribute('select') and child.getAttribute('select')=='1':
+                            if child.childNodes:
+                                fld = doc.createElement('field')
+                                for attr in child.attributes.keys():
+                                    fld.setAttribute(attr, child.getAttribute(attr))
+                                new_node.appendChild(fld)
+                            else:
+                                new_node.appendChild(child)
+                        elif child.localName in ('page','group','notebook'):
+                            process_child(child, new_node, doc)
+
+                form_arch = rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', False, 'form', context)
+                dom_arc = dom.minidom.parseString(encode(form_arch['arch']))
+                new_node = copy.deepcopy(dom_arc)
+                for child_node in new_node.childNodes[0].childNodes:
+                    if child_node.nodeType == child_node.ELEMENT_NODE:
+                        new_node.childNodes[0].removeChild(child_node)
+                process_child(dom_arc.childNodes[0],new_node.childNodes[0],dom_arc)
+                form_arch['arch'] = new_node.toxml()
+                datas['search_view'] = str(form_arch)
 
             if datas['limit'] is None or datas['limit'] == 0:
                 datas['limit'] = 80
@@ -125,7 +158,7 @@ class main(service.Service):
                 obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
                         action['view_type'], datas.get('window',None), ctx,
                         datas['view_mode'], name=action.get('name', False),
-                        limit=datas['limit'], auto_refresh=datas['auto_refresh'])
+                        limit=datas['limit'], auto_refresh=datas['auto_refresh'], search_view = datas['search_view'])
 
         elif action['type']=='ir.actions.server':
             ctx = context.copy()

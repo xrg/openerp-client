@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -19,7 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
+import os
 import gtk
 from gtk import glade
 
@@ -76,38 +76,104 @@ class ViewWidget(object):
     modelfield = property(_get_modelfield)
 
 class ViewForm(parser_view):
-    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None):
-        super(ViewForm, self).__init__(window, screen, widget, children, state_aware_widgets, toolbar)
+    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None, submenu=None):
+        super(ViewForm, self).__init__(window, screen, widget, children, state_aware_widgets, toolbar, submenu)
         self.view_type = 'form'
         self.model_add_new = False
         self.prev = 0
         self.flag=False
         self.current = 0
-
         for w in self.state_aware_widgets:
             if isinstance(w.widget, Button):
                 w.widget.form = self
-
         self.widgets = dict([(name, ViewWidget(self, widget, name)) for name, widget in children.items()])
+
+        sm_vbox = False
+        if submenu:
+            expander = gtk.Expander("Submenus")
+            sm_vbox = gtk.VBox()
+            sm_hbox = gtk.HBox()
+            sm_eb = gtk.EventBox()
+            sm_eb.add(sm_hbox)
+            sm_eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("gray"))
+            expander.add(sm_eb)
+            for sub in eval(submenu):
+                sbutton = gtk.Button()
+                icon = gtk.Image()
+                file_path = os.path.realpath("icons")
+                iname = sub.get('icon', 'terp-marketing').split('-')[1]
+                pixbuf = gtk.gdk.pixbuf_new_from_file(file_path + '/' + iname + '.png')
+                icon_set = gtk.IconSet(pixbuf)
+                icon.set_from_icon_set(icon_set, gtk.ICON_SIZE_BUTTON)
+                lbl = gtk.Label(sub.get('name', 'Undefined'))
+                lbl.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
+                hb = gtk.HBox(False, 5)
+                hb.pack_start(icon, False, False)
+                hb.pack_start(lbl, False, False)
+                sbutton.add(hb)
+                sm_hbox.pack_start(sbutton, False, False, 0)
+                def _action_submenu(but, action):
+                    act_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.data', 'search', [('name','=',action['action_id'])])
+                    res_model = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.data', 'read', act_id, ['res_id'])
+                    data = {}
+                    context = self.screen.context
+                    act = action.copy()
+                    self.screen.save_current()
+                    id = self.screen.current_model and self.screen.current_model.id
+                    if not (id):
+                        common.message(_('You must save this record to use the relate button !'))
+                        return False
+                    self.screen.display()
+                    obj = service.LocalService('action.main')
+                    if not res_model:
+                        common.message(_('Action not defined !'))
+                        return None
+                    res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', res_model[0]['res_id'], False)
+                    res['domain'] = self.screen.current_model.expr_eval(res['domain'], check_load=False)
+                    res['context'] = str(self.screen.current_model.expr_eval(res['context'], check_load=False))
+                    value = obj._exec_action(res, data, context)
+                    self.screen.reload()
+                    return value
+                sbutton.connect('clicked', _action_submenu, sub)
+            sm_vbox.pack_start(expander, False, False, 1)
+            sm_vbox.pack_end(self.widget, True, True, 0)
 
         if toolbar:
             hb = gtk.HBox()
-            hb.pack_start(self.widget)
+            if sm_vbox:
+                hb.pack_start(sm_vbox)
+            else:
+                hb.pack_start(self.widget)
+
 #            self.hpaned = gtk.HPaned()
 #            self.hpaned.pack1(self.widget,True,False)
-
             #tb = gtk.Toolbar()
             #tb.set_orientation(gtk.ORIENTATION_VERTICAL)
             #tb.set_style(gtk.TOOLBAR_BOTH_HORIZ)
             #tb.set_icon_size(gtk.ICON_SIZE_MENU)
             tb = gtk.VBox()
-
             eb = gtk.EventBox()
+            if toolbar['print'] or toolbar['action'] or toolbar['relate']:
+                lb = gtk.Label()
+                lb.set_markup("Sidebar")
+                expander_tool = gtk.Expander(lb.get_text())
+                tooltips = gtk.Tooltips()
+                tooltips.set_tip(expander_tool, _('Hide/Show Sidebar'))
+                tooltips.set_tip(eb, _('Click here to open'))
+                tooltips.enable()
+                expander_tool.add(eb)
+                expander_tool.set_expanded(True)
+                def expander_callback(expander_tool, user_data):
+                    if expander_tool.get_expanded():
+                        expander_tool.set_label(lb.get_text())
+                    else:
+                        expander_tool.set_label('')
+                expander_tool.connect("notify::expanded", expander_callback)
+                hb.pack_start(expander_tool, False, False)
+            else:
+                hb.pack_start(eb, False, False)
             eb.add(tb)
             eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
-
-
-            hb.pack_start(eb, False, False)
             self.widget = hb
 #            self.hpaned.pack2(eb,False,True)
 #            self.hpaned.connect("button-press-event",self.move_paned_press)
@@ -115,18 +181,16 @@ class ViewForm(parser_view):
 #            window.connect("window-state-event",self.move_paned_window,window)
 #            self.widget = self.hpaned
 
-
             sep = False
             #setLabel={'print':'Reports','action':'Wizards','relate':'Direct Links'}
-            
             for icontype in ('print', 'action', 'relate'):
-                    
+
                 if icontype in ('action','relate') and sep:
                     #tb.insert(gtk.SeparatorToolItem(), -1)
                     tb.pack_start(gtk.HSeparator(), False, False, 2)
                     sep = False
-                     
-                #list_done = []     
+
+                #list_done = []
                 for tool in toolbar[icontype]:
                     #if icontype not in list_done:
                     #    l = gtk.Label('<b>' + setLabel[icontype] + '</b>')
@@ -264,12 +328,11 @@ class ViewForm(parser_view):
                         return True
 
                     tbutton.connect('clicked', _action, tool, icontype)
-
                     tbutton.connect('button_press_event', _translate_label,
                             tool, self.window)
 
                     sep = True
-                    
+
 #    def move_paned_press(self, widget, event):
 #        if not self.prev:
 #            self.prev = self.hpaned.get_position()
@@ -307,7 +370,7 @@ class ViewForm(parser_view):
 #        self.prev = 0
 #        self.current = 0
 #        self.flag = False
-#        return False                    
+#        return False
 
 
     def __getitem__(self, name):
@@ -354,6 +417,7 @@ class ViewForm(parser_view):
         try:
             attrs_changes = eval(att_obj.attrs.get('attrs',"{}"))
         except:
+             model.value.update({'uid':rpc.session.uid})
              attrs_changes = eval(att_obj.attrs.get('attrs',"{}"),model.value)
              for k,v in attrs_changes.items():
                 for i in range(0,len(v)):
@@ -377,9 +441,13 @@ class ViewForm(parser_view):
                 if k=='readonly':
                     obj.set_sensitive(True)
 
-    def set_notebook(self,model,nb):
+    def set_notebook(self,model,nb,focus_widget=None):
         for i in range(0,nb.get_n_pages()):
             page = nb.get_nth_page(i)
+            if focus_widget:
+                if focus_widget.widget.widget.is_ancestor(page):
+                    nb.set_current_page(i)
+                focus_widget.widget.grab_focus()
             if nb.get_tab_label(page).attrs.get('attrs',False):
                 self.attrs_set(model, page, nb.get_tab_label(page))
 
@@ -404,7 +472,28 @@ class ViewForm(parser_view):
         return True
 
     def set_cursor(self, new=False):
-        pass
+        focus_widget = None
+        model = self.screen.current_model
+        position = 0
+        position = len(self.widgets)
 
+        if model:
+            for widgets in self.widgets.values():
+                modelfield = model.mgroup.mfields.get(widgets.widget_name, None)
+                if not modelfield:
+                    continue
+                if not modelfield.get_state_attrs(model).get('valid', True):
+                     if widgets.widget.position > position:
+                          continue
+                     position = widgets.widget.position
+                     focus_widget = widgets
+            for x in self.widget.get_children():
+                if (type(x)==gtk.Table):
+                    for y in x.get_children():
+                        if type(y)==gtk.Notebook:
+                            self.set_notebook(model,y,focus_widget)
+                elif type(x)==gtk.Notebook:
+                    self.set_notebook(model,x,focus_widget)
+        return True
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

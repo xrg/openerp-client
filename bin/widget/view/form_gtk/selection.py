@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -45,10 +45,9 @@ class selection(interface.widget_interface):
 
         # the dropdown button is not focusable by a tab
         self.widget.set_focus_chain([self.child])
-
         self.ok = True
         self._selection={}
-        
+
         self.set_popdown(attrs.get('selection', []))
 
     def set_popdown(self, selection):
@@ -83,10 +82,15 @@ class selection(interface.widget_interface):
             and (event.keyval == gtk.keysyms.space):
             self.entry.popup()
         elif not (event.keyval == gtk.keysyms.Up or event.keyval == gtk.keysyms.Down):
+            completion.set_match_func(self.match_func,widget)
             completion.set_model(self.model)
             widget.set_completion(completion)
             completion.set_text_column(0)
-
+    
+    def match_func(self, completion, key, iter, widget):
+         model = completion.get_model()
+         return model[iter][0].lower().find(widget.get_text().lower()) >= 0 and True or False
+     
     def sig_activate(self, *args):
         text = self.child.get_text()
         value = False
@@ -135,5 +139,7 @@ class selection(interface.widget_interface):
     def _color_widget(self):
         return self.child
 
+    def grab_focus(self):
+        return self.entry.grab_focus()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
