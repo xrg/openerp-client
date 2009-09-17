@@ -1,0 +1,159 @@
+# -*- encoding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution    
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+
+import gtk
+import mx.DateTime
+import gettext
+from gtk import glade
+
+import tools
+import wid_int
+import common
+
+DT_FORMAT = '%Y-%m-%d'
+DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
+
+class custom_filter(wid_int.wid_int):
+    def __init__(self, name, parent, attrs={}, call=None):
+        wid_int.wid_int.__init__(self, name, parent, attrs)
+        win_gl = glade.XML(common.terp_path("openerp.glade"),"hbox_custom_filter",gettext.textdomain())
+        self.widget = win_gl.get_widget('hbox_custom_filter')
+
+        # Processing fields
+        self.combo_fields = win_gl.get_widget('combo_fields')
+        self.field_selection = {}
+        
+        fields = attrs.get('fields',None)
+        for item in fields:
+            self.field_selection[item[1]] = (item[0],item[2])
+            self.combo_fields.append_text(item[1])
+            
+        self.combo_fields.set_active(0)
+        
+        # Processing operator combo
+        self.combo_op = win_gl.get_widget('combo_operator')
+        self.op_selection = {}
+        
+        for item in (['ilike', _('contains')],
+                ['not ilike', _('doesn\'t contain')],
+                ['=', _('is equal to')],
+                ['<>',_('is not equal to')],
+                ['>',_('greater than')],
+                ['<',_('less than')],
+                ['in',_('in')],
+                ['not in',_('not in')],
+                ):
+            self.op_selection[item[1]] = item[0]
+            self.combo_op.append_text(item[1])
+            
+        self.combo_op.set_active(0)
+        
+        # Processing text value
+        self.right_text = win_gl.get_widget('right_compare')
+        # Processing Custom conditions
+        self.condition_next = win_gl.get_widget('cond_custom')
+        self.condition_next.set_active(0)
+        
+        self.condition_next.hide()
+        # Processing Removal of panel
+        self.remove_filter = win_gl.get_widget('remove_custom')
+        self.remove_filter.set_relief(gtk.RELIEF_NONE)
+        
+        try:
+            self.right_text.set_tooltip_markup(tools.to_xml("Enter Values separated by ',' if operator 'in' or 'not in' is chosen.\nFor Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d %H:%M:%S' formats respectively."))
+        except:
+            pass
+        
+        self.remove_filter.connect('clicked',call,self)
+
+    def _value_get(self):
+#        if not self.right_text.get_text():
+#            return []
+        try:
+            field_left = self.field_selection[self.combo_fields.get_active_text()][0]
+            field_type = self.field_selection[self.combo_fields.get_active_text()][1]
+            operator = self.op_selection[self.combo_op.get_active_text()]
+
+            right_text =  self.right_text.get_text() or False
+            
+            try:
+                
+                right_text = (field_type == 'integer' and int(right_text)) or right_text
+                right_text = (field_type == 'float' and float(right_text)) or right_text
+                right_text = (field_type == 'boolean' and bool(right_text)) or right_text
+                
+                if field_type == 'date' and right_text:
+                    dt_right_text = mx.DateTime.strptime(right_text,DT_FORMAT)
+                    right_text = dt_right_text.strftime(DT_FORMAT)
+                    
+                if field_type == 'datetime' and right_text:
+                    right_text = len(right_text)==10 and (right_text + ' 00:00:00') or right_text
+                    dttime_right_text = mx.DateTime.strptime(right_text,DHM_FORMAT)
+                    right_text = dttime_right_text.strftime(DHM_FORMAT)
+                    
+                self.right_text.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("white"))
+                self.right_text.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("white"))       
+            
+            except Exception,e:
+                right_text = ''
+                self.right_text.set_text('Invalid Value')
+                self.right_text.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("#ff6969"))
+                self.right_text.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ff6969"))
+
+            if operator in ['ilike','not ilike']:
+                if field_type in ['integer','float','date','datetime','boolean']:
+                    operator = (operator == 'like') and '=' or '!='
+                else:
+                    right_text = '%' + right_text + '%'     
+            
+            if operator in ['<','>'] and field_type not in ['integer','float','date','datetime','boolean']:
+                    operator = '='
+            
+            if operator in ['in','not in']:
+                right_text = right_text.split(',')
+            
+            condition = self.condition_next.get_active_text()
+            condition = eval(condition,{'AND':'&','OR':'|'})
+
+            domain = [condition,(field_left,operator,right_text)]
+            return domain
+        
+        except Exception,e:
+            return []
+
+    def sig_exec(self, widget):
+        pass
+
+    def clear(self):
+        pass
+    
+    def _value_set(self, value):
+        pass
+    
+    def remove_custom_widget(self, button):
+        button.parent.destroy()
+        return True   
+
+    value = property(_value_get, _value_set, None,
+      'The content of the widget or ValueError if not valid')
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
