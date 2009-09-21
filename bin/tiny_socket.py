@@ -106,7 +106,7 @@ class HTTP11(httplib.HTTP):
 	
 	def is_idle(self):
 		return self._conn and self._conn._HTTPConnection__state == httplib._CS_IDLE
-
+	
 try:
 	if sys.version_info[0:2] < (2,6):
 	        # print "No https for python %d.%d" % sys.version_info[0:2]
@@ -196,6 +196,7 @@ class PersistentTransport(Transport):
 		self.send_request(h, handler, request_body)
 	except httplib.CannotSendRequest:
 		# try once more..
+		if h: h.close()
 		h = self.make_connection(host)
 		if verbose:
 		    h.set_debuglevel(1)
