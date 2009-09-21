@@ -115,6 +115,12 @@ openerp-client (5.0.6-0-1test1) unstable; urgency=low
 
  -- panos <panos@debian.pefnos2>  Mon, 02 Nov 2009 19:24:07 -0500
  
+ openerp-client (5.0.5-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.5.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 21 Sep 2009 20:35:31 +0200
+
  openerp-client (5.0.4-1) unstable; urgency=low
 
   * Adding README.source.
