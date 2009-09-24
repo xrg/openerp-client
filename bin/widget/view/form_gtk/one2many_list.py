@@ -157,10 +157,8 @@ class one2many_list(interface.widget_interface):
         menubar.add(menuitem_title)
         hb.pack_start(menubar, expand=True, fill=True)
 
-        tooltips = gtk.Tooltips()
-
         self.eb_new = gtk.EventBox()
-        tooltips.set_tip(self.eb_new, _('Create a new entry'))
+        self.eb_new.set_tooltip_text(_('Create a new entry'))
         self.eb_new.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb_new.connect('button_press_event', self._sig_new)
         img_new = gtk.Image()
@@ -170,7 +168,7 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(self.eb_new, expand=False, fill=False)
 
         self.eb_open = gtk.EventBox()
-        tooltips.set_tip(self.eb_open, _('Edit this entry'))
+        self.eb_open.set_tooltip_text(_('Edit this entry'))
         self.eb_open.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb_open.connect('button_press_event', self._sig_edit)
         img_open = gtk.Image()
@@ -180,7 +178,7 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(self.eb_open, expand=False, fill=False)
 
         self.eb_del = gtk.EventBox()
-        tooltips.set_tip(self.eb_del, _('Remove this entry'))
+	self.eb_del.set_tooltip_text(_('Remove this entry'))
         self.eb_del.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb_del.connect('button_press_event', self._sig_remove)
         img_del = gtk.Image()
@@ -202,7 +200,7 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(self.eb_prev_page, expand=False, fill=False)
 
         self.eb_pre = gtk.EventBox()
-        tooltips.set_tip(self.eb_pre, _('Previous Record'))
+	self.eb_pre.set_tooltip_text(_('Previous Record'))
         self.eb_pre.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb_pre.connect('button_press_event', self._sig_previous)
         img_pre = gtk.Image()
@@ -215,7 +213,7 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(self.label, expand=False, fill=False)
 
         self.eb_next = gtk.EventBox()
-        tooltips.set_tip(self.eb_next, _('Next Record'))
+	self.eb_next.set_tooltip_text(_('Next Record'))
         self.eb_next.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb_next.connect('button_press_event', self._sig_next)
         img_next = gtk.Image()
@@ -238,7 +236,7 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
         eb_switch = gtk.EventBox()
-        tooltips.set_tip(eb_switch, _('Switch'))
+	eb_switch.set_tooltip_text(_('Switch'))
         eb_switch.set_events(gtk.gdk.BUTTON_PRESS)
         eb_switch.connect('button_press_event', self.switch_view)
         img_switch = gtk.Image()
@@ -258,7 +256,6 @@ class one2many_list(interface.widget_interface):
         self.cb.connect('changed', self.limit_changed)
         hb.pack_start(self.cb, expand=False, fill=False)
 
-        tooltips.enable()
         self.widget.pack_start(hb, expand=False, fill=True)
         self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=self.parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate, default_get=attrs.get('default_get', {}), window=self._window, readonly=self._readonly, limit=20)
         self.screen.type = 'one2many'
