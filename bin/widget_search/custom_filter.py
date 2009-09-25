@@ -118,7 +118,7 @@ class custom_filter(wid_int.wid_int):
                 self.right_text.set_text('Invalid Value')
                 self.right_text.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("#ff6969"))
                 self.right_text.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ff6969"))
-
+                return []
             if operator in ['ilike','not ilike']:
                 if field_type in ['integer','float','date','datetime','boolean']:
                     operator = (operator == 'like') and '=' or '!='
