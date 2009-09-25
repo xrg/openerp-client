@@ -46,6 +46,8 @@ import datetime as DT
 import service
 import gobject
 import pango
+import mx.DateTime
+from mx.DateTime import *
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed)
@@ -312,8 +314,14 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        date = DT.datetime.strptime(value, self.server_format)
         
+        t = tools.datetime_util.strptime(value, self.server_format)
+        if isinstance(t, type(mx.DateTime.now())) and not hasattr(t, 'timetuple'):
+            date = tuple(map(lambda x: int(x), t.tuple()))
+        else:
+            date = tools.datetime_util.strptime(value, self.server_format).timetuple()
+        dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+                
         if 'tz' in rpc.session.context and  rpc.session.context['tz']:
             try:
                 import pytz
