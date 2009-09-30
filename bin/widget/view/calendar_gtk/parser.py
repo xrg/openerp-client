@@ -167,6 +167,9 @@ class ViewCalendar(object):
             t = list(args[0].timetuple()[:3])
         self.date = DateTime.DateTime(*t)
         self.display(None)
+        self.screen.context.update({'default_' +self.date_start:self.date.strftime('%Y-%m-%d %H:%M:%S')})
+        self.screen.switch_view(mode='form')
+        self.screen.new()
 
     def _today(self, widget, *args, **argv):
         self.date = DateTime.today()
