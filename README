@@ -1,38 +1,34 @@
-Spiff GtkWidgets
------------------
+= Spiff GtkWidgets =
+
 This library is part of the Spiff platform.
 
 Spiff Gtk Widgets contains a number of Gtk widgets 
 by other Spiff components:
 
-  - A calendar similar to Google's online calendar
-  - A text view that supports advanced features like undo/redo, annotations,
-    auto-indenting bullet point lists, etc. 
+* A calendar similar to Google's online calendar.
+* A text view that supports advanced features like undo/redo, annotations, 
+auto-indenting bullet point lists, etc. 
 
 
-Dependencies
--------------
-python-hippocanvas
+= Dependencies =
+
+* pygtk 2.4 or greater
+* python-hippocanvas
 
 
-Contact
---------
-Mailing List: http://groups.google.com/group/spiff-devel/
+= Contact =
+
+Mailing List: [http://groups.google.com/group/spiff-devel/]
 
 
-Dependencies
--------------
-pygtk 2.4 or greater
+= Usage =
+
+Examples can be found in the tests/SpiffGtkWidgets/ directory of this project.
 
 
-Usage
-------
-Examples can be found in the tests/SpiffGtkWidgets/ directory.
+= Calendar Usage =
 
-
-Calendar Usage
----------------
-##############################
+#Text
 import datetime
 from SpiffGtkWidgets.Calendar import Calendar, Model, Event
 
@@ -53,4 +49,4 @@ model.add_event(event)
 
 calendar.connect('event-clicked', on_event_clicked)
 calendar.connect('day-selected',  on_day_selected)
-##############################
+#End
