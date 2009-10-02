@@ -3,6 +3,11 @@
 %:
 	dh ${@} --with quilt
 
+override_dh_auto_clean:
+	dh_auto_clean
+
+	rm -rf build
+
 override_dh_auto_install:
 	python setup.py install --no-compile --prefix=$(CURDIR)/debian/openerp-client/usr
 
