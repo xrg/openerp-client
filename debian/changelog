@@ -1,3 +1,10 @@
+openerp-client (5.0.6-2) unstable; urgency=low
+
+  * Manually removing build directory in clean target (Closes: #549215).
+  * Making quilt build-depends versioned (Closes: #549212).
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 03 Oct 2009 08:41:01 +0200
+
 openerp-client (5.0.6-1) unstable; urgency=low
 
   * Merging upstream version 5.0.6.
