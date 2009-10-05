@@ -37,7 +37,7 @@ import service
 #
 # TODO: make it works with references
 #
-def import_csv(csv_data, f, model, fields):
+def import_csv(csv_data, f, model, fields, context=None):
     fname = csv_data['fname']
     content = file(fname,'rb').read()
     input=cStringIO.StringIO(content)
@@ -51,9 +51,8 @@ def import_csv(csv_data, f, model, fields):
     if not datas:
         common.warning(_('The file is empty !'), _('Importation !'))
         return False
-
     try:
-        res = rpc.session.rpc_exec_auth('/object', 'execute', model, 'import_data', f, datas, 'init', '', False, rpc.session.context)
+        res = rpc.session.rpc_exec_auth('/object', 'execute', model, 'import_data', f, datas, 'init', '', False, context)
     except Exception, e:
         common.warning(str(e), _('XML-RPC error !'))
         return False
@@ -72,7 +71,7 @@ def import_csv(csv_data, f, model, fields):
     return True
 
 class win_import(object):
-    def __init__(self, model, fields, preload = [], parent=None):
+    def __init__(self, model, fields, preload = [], parent=None, local_context=None):
         self.glade = glade.XML(common.terp_path("openerp.glade"), 'win_import',
                 gettext.textdomain())
         self.glade.get_widget('import_csv_combo').set_active(0)
@@ -80,7 +79,7 @@ class win_import(object):
         self.model = model
         self.fields_data = {}
         self.invert = False
-        
+        self.context = local_context or {}
         if parent is None:
             parent = service.LocalService('gui.main').window
         self.win.set_transient_for(parent)
@@ -245,9 +244,9 @@ class win_import(object):
                             for key, value in self.fields_invert.items():
                                 if key.encode('utf8') == f:
                                     inverted.append(value)
-                        return import_csv(csv, inverted, self.model, self.fields_invert)
+                        return import_csv(csv, inverted, self.model, self.fields_invert, context=self.context)
                     else:
-                        return import_csv(csv, fields, self.model, self.fields)
+                        return import_csv(csv, fields, self.model, self.fields, context=self.context)
                 return False
             else:
                 self.parent.present()
