@@ -209,7 +209,7 @@ class _container(object):
         table.resize(y+1,self.col[-1])
 
     def wid_add(self, widget, name=None, expand=False, ypadding=2, rowspan=1,
-            colspan=1, translate=False, fname=None, help=False, fill=False):
+            colspan=1, translate=False, fname=None, help=False, fill=False, invisible=False):
         (table, x, y) = self.cont[-1]
         if colspan>self.col[-1]:
             colspan=self.col[-1]
@@ -263,6 +263,8 @@ class _container(object):
         wid_list = table.get_children()
         wid_list.reverse()
         table.set_focus_chain(wid_list)
+        if invisible:
+            hbox.hide()
 
 class parser_form(widget.view.interface.parser_interface):
     def parse(self, model, root_node, fields, notebook=None, paned=None, tooltips=None):
@@ -399,10 +401,6 @@ class parser_form(widget.view.interface.parser_interface):
                 fields[name]['model']=model
                 if not type in widgets_type:
                     continue
-                if attrs.get('invisible', False):
-                    visval = eval(attrs['invisible'], {'context':self.screen.context})
-                    if visval:
-                        continue
 
                 fields[name]['name'] = name
                 if 'saves' in attrs:
@@ -427,6 +425,10 @@ class parser_form(widget.view.interface.parser_interface):
                 if attrs.get('height', False) or attrs.get('width', False):
                     widget_act.widget.set_size_request(
                             int(attrs.get('width', -1)), int(attrs.get('height', -1)))
+                if attrs.get('invisible', False):
+                    visval = eval(attrs['invisible'], {'context':self.screen.context})
+                    if visval:
+                        continue
                 container.wid_add(widget_act.widget, label, expand, translate=fields[name].get('translate',False), colspan=size, fname=name, help=hlp, fill=fill)
 
             elif node.localName=='group':
