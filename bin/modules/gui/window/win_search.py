@@ -27,7 +27,7 @@ import gettext
 import xmlrpclib
 import common
 import service
-from xml import dom
+from lxml import etree
 import copy
 
 import rpc
@@ -203,27 +203,27 @@ class win_search(object):
                 if isinstance(s, unicode):
                     return s.encode('utf8')
                 return s
-            def process_child(node, new_node, doc):
-                        for child in node.childNodes:
-                            if child.localName=='field' and child.hasAttribute('select') and child.getAttribute('select')=='1':
-                                if child.childNodes:
-                                    fld = doc.createElement('field')
-                                    for attr in child.attributes.keys():
-                                        fld.setAttribute(attr, child.getAttribute(attr))
-                                    new_node.appendChild(fld)
+            def process_child(node, new_node, doc):                                
+                        for child in node.getchildren():
+                            if child.tag=='field' and child.get('select') and child.get('select')=='1':
+                                if child.getchildren():
+                                    fld = etree.Element('field')
+                                    for attr in child.attrib.keys():
+                                        fld.set(attr, child.get(attr))
+                                    new_node.append(fld)
                                 else:
-                                    new_node.appendChild(child)
-                            elif child.localName in ('page','group','notebook'):
-                                process_child(child, new_node, doc)
-                            
-            dom_arc = dom.minidom.parseString(encode(view_form['arch']))
-            new_node = copy.deepcopy(dom_arc)
-            for child_node in new_node.childNodes[0].childNodes:
-                if child_node.nodeType == child_node.ELEMENT_NODE:
-                    new_node.childNodes[0].removeChild(child_node)
-            process_child(dom_arc.childNodes[0],new_node.childNodes[0],dom_arc)
+                                    new_node.append(child)
+                            elif child.tag in ('page','group','notebook'):
+                                process_child(child, new_node, doc)    
             
-            view_form['arch']=new_node.toxml()
+            dom_arc = etree.XML(encode(view_form['arch']))
+            new_node = copy.deepcopy(dom_arc)
+            for child_node in new_node.getchildren()[0].getchildren():
+                    new_node.getchildren()[0].remove(child_node)
+            process_child(dom_arc.getchildren()[0],new_node.getchildren()[0],dom_arc)
+            
+            view_form['arch']=etree.tostring(new_node)
+
         hda = (self, self.find)
         self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win, col=5, call= hda)
         
