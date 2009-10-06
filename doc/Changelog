@@ -1,3 +1,39 @@
+
+2009-09-22: 5.0.6
+=================
+
+Bugfixes
+--------
+
+ * https://bugs.launchpad.net/bugs/356853
+   * import_csv: encoding problem on import and also fixed problem of many2many,many2one import fields
+ * https://launchpad.net/bugs/434068
+   * Date,DateTime widgets handling of values(user may pass rong date/datetime formats)
+ * https://launchpad.net/bugs/434488
+   * Tree_report_options : unicode error corrected
+
+
+2009-09-17: 5.0.5
+=================
+
+Bugfixes
+--------
+
+ * Not linked to a bug report:
+   * Many2One : When value is set, Search button should display full list.
+ * https://launchpad.net/bugs/427447
+ * https://launchpad.net/bugs/415811
+   * Calendar problem for days stripline
+ * https://launchpad.net/bugs/424177
+   * Rounding value problem in float_time widget
+
+
+Improvements
+------------
+
+ * Survey form : Countries display Corrected
+
+
 2009-08-28: 5.0.4
 =================
 

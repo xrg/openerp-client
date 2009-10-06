@@ -115,7 +115,10 @@ def selection(title, values, alwaysask=False, parent=None):
                 (model, iter) = sel
                 if iter:
                     res = model.get_value(iter, 0)
-                    res = (res, values[res])
+                    try:
+                        res = (res, values[res.decode('utf8')])
+                    except:
+                        res = (res, values[res])    
                 else:
                     ok = False
             else:

@@ -290,7 +290,7 @@ class GenericDate(Char):
         if not value:
             return ''
         try:
-            date = DT.datetime.strptime(value, self.server_format)
+            date = DT.datetime.strptime(value[:10], self.server_format)
             return date.strftime(self.display_format)
         except:
             return ''
@@ -299,7 +299,7 @@ class GenericDate(Char):
         dt = self.renderer.date_get(self.renderer.editable)
         res = dt and dt.strftime(self.server_format)
         if res:
-            DT.datetime.strptime(res, self.server_format)
+            DT.datetime.strptime(res[:10], self.server_format)
         return res
 
 class Date(GenericDate):
@@ -314,12 +314,12 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        
-        t = tools.datetime_util.strptime(value, self.server_format)
+       
+        t = tools.datetime_util.strptime(value[:19], self.server_format)
         if isinstance(t, type(mx.DateTime.now())) and not hasattr(t, 'timetuple'):
             date = tuple(map(lambda x: int(x), t.tuple()))
         else:
-            date = tools.datetime_util.strptime(value, self.server_format).timetuple()
+            date = tools.datetime_util.strptime(value[:19], self.server_format).timetuple()
         dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
                 
         if 'tz' in rpc.session.context and  rpc.session.context['tz']:
@@ -341,7 +341,7 @@ class Datetime(GenericDate):
             return False
         try:
             #date = mx.DateTime.strptime(text, self.display_format)
-            date = tools.datetime_util.strptime(text, self.display_format)
+            date = tools.datetime_util.strptime(text[:19], self.display_format)
         except:
             try:
                 dt = list(time.localtime())

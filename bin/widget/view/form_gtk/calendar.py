@@ -95,7 +95,7 @@ class calendar(interface.widget_interface):
         if str == '':
             return False
         try:
-            date1 = DT.strptime(str, self.format)
+            date1 = DT.strptime(str[:10], self.format)
         except:
             return False
         
@@ -121,7 +121,7 @@ class calendar(interface.widget_interface):
             if len(value)>10:
                 value=value[:10]
             #date=mx.DateTime.strptime(value, DT_FORMAT)
-            date=DT.strptime(value, DT_FORMAT)
+            date=DT.strptime(value[:10], DT_FORMAT)
             t=date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
@@ -219,7 +219,7 @@ class datetime(interface.widget_interface):
         if str=='':
             return False
         try:
-            date = DT.strptime(str, self.format)
+            date = DT.strptime(str[:19], self.format)
         except:
             return False
         if rpc.session.context.get('tz',False) and timezone:
@@ -250,7 +250,7 @@ class datetime(interface.widget_interface):
         if not dt_val:
             self.entry.clear()
         else:
-            date = DT.strptime(dt_val, DHM_FORMAT)
+            date = DT.strptime(dt_val[:19], DHM_FORMAT)
             if rpc.session.context.get('tz',False) and timezone:
                 import pytz
                 lzone = pytz.timezone(rpc.session.context['tz'])
@@ -345,7 +345,7 @@ class stime(interface.widget_interface):
         if str=='':
             res = False
         try:
-            t = time.strptime(str, self.format)
+            t = time.strptime(str[:8], self.format)
         except:
             return False
         return time.strftime(HM_FORMAT, t)
@@ -366,7 +366,7 @@ class stime(interface.widget_interface):
         if not dt_val:
             self.entry.clear()
         else:
-            date = time.strptime(dt_val, HM_FORMAT)
+            date = time.strptime(dt_val[:8], HM_FORMAT)
             if rpc.session.context.get('tz',False) and timezone:
                 import pytz
                 lzone = pytz.timezone(rpc.session.context['tz'])

@@ -159,6 +159,7 @@ class many2one(interface.widget_interface):
         self.but_find = Button('gtk-find', self.sig_find, _('Search a resource'))
         self.widget.pack_start(self.but_find, padding=2, expand=False, fill=False)
 
+        self.value_on_field = ''
         self.ok = True
         self._readonly = False
         self.model_type = attrs['relation']
@@ -242,7 +243,11 @@ class many2one(interface.widget_interface):
             context = self._view.modelfield.context_get(self._view.model)
             self.wid_text.grab_focus()
 
-            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text() or '', domain, 'ilike', context)
+            name_search = self.wid_text.get_text() or ''
+            if name_search == self.value_on_field:
+                name_search = ''
+                
+            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', name_search, domain, 'ilike', context)
             if (len(ids)==1) and leave:
                 self._view.modelfield.set_client(self._view.model, ids[0],
                         force_change=True)
@@ -330,7 +335,9 @@ class many2one(interface.widget_interface):
         super(many2one, self).display(model, model_field)
         self.ok=False
         res = model_field.get_client(model)
-        self.wid_text.set_text((res and str(res)) or '')
+        value_set = (res and str(res)) or ''
+        self.wid_text.set_text(value_set)
+        self.value_on_field = value_set
         self.but_open.set_sensitive(bool(res))
         self.ok=True
 
