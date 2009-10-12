@@ -37,8 +37,8 @@ class selection(wid_int.wid_int):
         self.name = name
         
         if attrs.get('context',False):
-            self.widget.child.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("#d2d2ff"))
-            self.widget.child.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#d2d2ff"))
+            self.widget.child.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("turquoise"))
+            self.widget.child.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("turquoise"))
             self.widget.set_tooltip_markup("This Field comes with a context")
 #        else:
 #            self.widget.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ffffff"))
