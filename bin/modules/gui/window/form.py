@@ -299,12 +299,20 @@ class form(object):
         pass
 
     def sig_save(self, widget=None, sig_new=True, auto_continue=True):
-        id = self.screen.save_current()
+        res = self.screen.save_current()        
+        warning = False
+        if isinstance(res,dict):
+            id = res.get('id',False)
+            warning = res.get('warning',False)
+        else:
+            id = res            
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
         else:
             common.warning(_('Invalid form, correct red fields !'),_('Error !'))
             self.message_state(_('Invalid form, correct red fields !'), color="red")
+        if warning:
+            common.warning(warning,_('Warning !'))    
         return bool(id)
 
     def sig_previous(self, widget=None):
