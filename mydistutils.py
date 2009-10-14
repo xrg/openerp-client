@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*-
-
+# -*- encoding: utf-8 -*-
+##############################################################################
+#    
 #   This file is part of Gnomolicious.
 #
 #   Gnomolicious is free software; you can redistribute it and/or modify
@@ -16,7 +17,10 @@
 #   along with Gnomolicious; if not, write to the Free Software
 #   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
-#   (C) 2003, 2005 Terje Røsten <terjeros@phys.ntnu.no>, Nicolas Évrard
+#   (C) 2003, 2005 Terje RÃžsten <terjeros@phys.ntnu.no>, Nicolas Ãvrard     
+#
+##############################################################################
+
 
 import sys
 import os
