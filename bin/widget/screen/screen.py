@@ -279,6 +279,7 @@ class Screen(signal_event.signal_event):
                                    'sequence':20,
                                    'action':'ir.actions.act_window,'+str(action_id),
                                    'parent_id':parent_menu_id[0],
+                                   'icon':'STOCK_JUSTIFY_FILL',
                                    }
                         menu_id = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'create', menu_data)
                         sc_data={'name':action_name,
