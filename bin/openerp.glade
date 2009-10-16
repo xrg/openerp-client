@@ -7765,7 +7765,7 @@ Latin1</property>
                         <child>
                           <widget class="GtkLabel" id="label46558">
                             <property name="visible">True</property>
-                            <property name="label">Connect Later</property>
+                            <property name="label" translatable="yes" >Connect Later</property>
                             <property name="use_underline">True</property>
                           </widget>
                           <packing>
@@ -7809,7 +7809,7 @@ Latin1</property>
                         <child>
                           <widget class="GtkLabel" id="label46557">
                             <property name="visible">True</property>
-                            <property name="label">Connect now</property>
+                            <property name="label" translatable="yes">Connect now</property>
                             <property name="use_underline">True</property>
                           </widget>
                           <packing>
