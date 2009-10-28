@@ -43,6 +43,8 @@ class filter(wid_int.wid_int):
         self.butt.set_image(icon)
         self.butt.set_image_position(gtk.POS_TOP)
         self.domain = attrs['domain']
+        if attrs.get('default',False):
+            self.butt.set_active(True)        
         self.butt.set_alignment(0.3, 0.3)
         self.butt.connect('toggled', call[1])
         self.widget = self.butt
