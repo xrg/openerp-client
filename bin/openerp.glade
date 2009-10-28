@@ -174,6 +174,16 @@
                         <property name="position">1</property>
                       </packing>
                     </child>
+                    <child>
+                        <widget class="GtkEntry" id="ent_db">
+                            <property name="visible">True</property>
+                        </widget>
+                        <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                        </packing>
+                    </child>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -6481,6 +6491,16 @@ Latin1</property>
                       <widget class="GtkComboBox" id="combo_db_select">
                         <property name="visible">True</property>
                       </widget>
+                    </child>
+                    <child>
+                        <widget class="GtkEntry" id="entry_db">
+                            <property name="visible">True</property>
+                        </widget>
+                        <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                        </packing>
                     </child>
                     <child>
                       <widget class="GtkLabel" id="label_db_select">

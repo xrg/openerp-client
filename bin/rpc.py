@@ -25,7 +25,7 @@ import logging
 import socket
 
 import tiny_socket
-
+from psycopg2 import OperationalError
 import service
 import common
 import options
@@ -200,6 +200,8 @@ class rpc_session(object):
                 res = _sock.login(db or '', uname or '', passwd or '')
             except socket.error,e:
                 return -1
+            except Exception, e:
+                return 0
             if not res:
                 self._open=False
                 self.uid=False

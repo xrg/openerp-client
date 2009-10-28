@@ -118,7 +118,6 @@ class DatabaseDialog(gtk.Dialog):
         self.show_all()
         self.messageLabel.hide()
         res = super(DatabaseDialog, self).run()
-
         if res == gtk.RESPONSE_ACCEPT:
             self.run_thread()
 
@@ -339,6 +338,8 @@ def _refresh_dblist(db_widget, url, dbtoload=None):
     liststore = db_widget.get_model()
     liststore.clear()
     result = rpc.session.list_db(url)
+    if not result:
+        return -2
     if result==-1:
         return -1
     for db_num, db_name in enumerate(result):
@@ -416,8 +417,9 @@ def _server_ask(server_widget, parent=None):
 class db_login(object):
     def __init__(self):
         self.win_gl = glade.XML(common.terp_path("openerp.glade"),"win_login",gettext.textdomain())
+        
 
-    def refreshlist(self, widget, db_widget, label, url, butconnect=False):
+    def refreshlist(self, widget, db_widget, label, url, butconnect=False, db_entry=None):
 
         def check_server_version(url):
             try:
@@ -431,12 +433,17 @@ class db_login(object):
                 return (False, _('Unknown'), release.version)
 
         res = _refresh_dblist(db_widget, url)
+        db_entry = self.win_gl.get_widget('ent_db')
+        label.hide()
+        db_entry.hide()
         if res == -1:
             label.set_label('<b>'+_('Could not connect to server !')+'</b>')
             db_widget.hide()
             label.show()
             if butconnect:
                 butconnect.set_sensitive(False)
+            if db_entry.get_property('visible'):
+                 db_entry.set_property('visible', False)
         else:
             if res==0:
                 label.set_label('<b>'+_('No database found, you must create one !')+'</b>')
@@ -444,6 +451,16 @@ class db_login(object):
                 label.show()
                 if butconnect:
                     butconnect.set_sensitive(False)
+            elif res == -2:
+                db_widget.hide()
+                dbname = options.options['login.db']
+                if options.options['login.db']=='None':
+                    dbname = ''
+                db_entry.set_text(dbname)
+                db_entry.show()
+                res = len(db_entry.get_text())
+                if butconnect:
+                        butconnect.set_sensitive(True)
             else:
                 lm = rpc.session.login_message(url)
                 if lm:
@@ -487,8 +504,10 @@ class db_login(object):
         db_widget = self.win_gl.get_widget('combo_db')
         change_button = self.win_gl.get_widget('but_server')
         label = self.win_gl.get_widget('combo_label')
+        db_entry = self.win_gl.get_widget('ent_db')
         label.hide()
-
+        db_entry.hide()
+        
         host = options.options['login.server']
         port = options.options['login.port']
         protocol = options.options['login.protocol']
@@ -504,7 +523,7 @@ class db_login(object):
         db_widget.pack_start(cell, True)
         db_widget.add_attribute(cell, 'text', 0)
 
-        res = self.refreshlist(None, db_widget, label, url, but_connect)
+        res = self.refreshlist(None, db_widget, label, url, but_connect, db_entry=db_entry)
         change_button.connect_after('clicked', self.refreshlist_ask, server_widget, db_widget, label, but_connect, url, win)
 
         if dbname:
@@ -522,8 +541,13 @@ class db_login(object):
             options.options['login.login'] = login.get_text()
             options.options['login.port'] = m.group(3)
             options.options['login.protocol'] = m.group(1)
-            options.options['login.db'] = db_widget.get_active_text()
-            result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), db_widget.get_active_text())
+            if (not db_widget.get_property('visible')) and db_entry.get_property('visible'):
+                options.options['login.db'] = db_entry.get_text()
+                db_name = db_entry.get_text()
+            else:
+                options.options['login.db'] = db_widget.get_active_text()
+                db_name = db_widget.get_active_text()
+            result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), db_name)
         else:
             parent.present()
             win.destroy()
@@ -1028,6 +1052,7 @@ class terp_main(service.Service):
         RES_OK = 1
         RES_BAD_PASSWORD = -2
         RES_CNX_ERROR = -1
+        RES_NO_DATABASE = 0
         try:
             log_response = RES_BAD_PASSWORD
             res = None
@@ -1053,10 +1078,15 @@ class terp_main(service.Service):
                         self.secure_img.hide()
                     self.request_set()
                     self.company_set()
+                elif log_response == RES_NO_DATABASE:
+                    common.warning( _('Please Specify proper database Name'), _('Database does not Exists'))
+                    self.sig_login(dbname=dbname)
+                    return True
                 elif log_response == RES_CNX_ERROR:
                     common.message(_('Connection error !\nUnable to connect to the server !'))
                 elif log_response == RES_BAD_PASSWORD:
                     common.message(_('Authentication error !\nBad Username or Password !'))
+                
         except rpc.rpc_exception:
             rpc.session.logout()
             raise
@@ -1466,16 +1496,29 @@ class terp_main(service.Service):
                     common.warning(_("Couldn't backup database."), parent=self.window)
 
     def _choose_db_select(self, title=_("Backup a database")):
-        def refreshlist(widget, db_widget, label, url):
+        def refreshlist(widget, db_widget, label, url, db_entry=None):
             res = _refresh_dblist(db_widget, url)
+            if not db_entry: db_entry = dialog.get_widget('entry_db')
+            db_entry.hide()
             if res == -1:
                 label.set_label('<b>'+_('Could not connect to server !')+'</b>')
                 db_widget.hide()
+                db_entry.hide()
                 label.show()
             elif res==0:
                 label.set_label('<b>'+_('No database found, you must create one !')+'</b>')
                 db_widget.hide()
+                db_entry.hide()
                 label.show()
+            elif res == -2:
+                db_widget.hide()
+                label.hide()
+                dbname = options.options['login.db']
+                if options.options['login.db']=='None':
+                    dbname = ''
+                db_entry.set_text(dbname)
+                db_entry.show()
+                res = len(db_entry.get_text())
             else:
                 lm = rpc.session.login_message(url)
                 if lm:
@@ -1509,8 +1552,9 @@ class terp_main(service.Service):
         pass_widget = dialog.get_widget('ent_passwd_select')
         server_widget = dialog.get_widget('ent_server_select')
         db_widget = dialog.get_widget('combo_db_select')
+        db_entry = dialog.get_widget('entry_db')
         label = dialog.get_widget('label_db_select')
-
+        db_entry.hide()
 
         dialog.get_widget('db_select_label').set_markup('<b>'+title+'</b>')
 
@@ -1521,7 +1565,7 @@ class terp_main(service.Service):
         liststore = gtk.ListStore(str)
         db_widget.set_model(liststore)
 
-        refreshlist(None, db_widget, label, url)
+        refreshlist(None, db_widget, label, url, db_entry=db_entry)
         change_button = dialog.get_widget('but_server_select')
         change_button.connect_after('clicked', refreshlist_ask, server_widget, db_widget, label, win)
 
@@ -1535,7 +1579,10 @@ class terp_main(service.Service):
         url = False
         passwd = False
         if res == gtk.RESPONSE_OK:
-            db = db_widget.get_active_text()
+            if (not db_widget.get_property('visible')) and db_entry.get_property('visible'):
+                db = db_entry.get_text()
+            else:
+                db = db_widget.get_active_text()
             url = server_widget.get_text()
             passwd = pass_widget.get_text()
         self.window.present()
