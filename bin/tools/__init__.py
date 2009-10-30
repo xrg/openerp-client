@@ -20,6 +20,7 @@
 ##############################################################################
 
 import time
+import datetime
 import os
 if os.name == 'nt':
     import win32
@@ -29,6 +30,7 @@ def expr_eval(string, context={}):
     context['uid'] = rpc.session.uid
     context['current_date'] = time.strftime('%Y-%m-%d')
     context['time'] = time
+    context['datetime'] = datetime
     if isinstance(string, basestring):
 #        return eval(string, context)
         string = string.replace("'active_id'","active_id")
