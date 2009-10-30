@@ -92,7 +92,10 @@ class parser_tree(interface.parser_interface):
                 treeview.cells[node_attrs['name']] = cell
                 col = gtk.TreeViewColumn(None, cell)
                 btn_list.append(col)
-
+                cell.set_property('editable',False)
+                col._type = 'Button'
+                col.name = node_attrs['name']
+                
             if node.localName == 'field':
                 fname = str(node_attrs['name'])
                 if fields[fname]['type'] in ('image', 'binary'):
@@ -523,6 +526,8 @@ class CellRendererButton(gtk.GenericCellRenderer):
     __gproperties__ = {
             "text": (gobject.TYPE_STRING, None, "Text",
                 "Displayed text", gobject.PARAM_READWRITE),
+            "editable" : (gobject.TYPE_BOOLEAN, None, None,
+                True, gobject.PARAM_READWRITE),
     }
     __gsignals__ = {
             'clicked': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
@@ -537,6 +542,7 @@ class CellRendererButton(gtk.GenericCellRenderer):
         self.xalign = 0.0
         self.yalign = 0.5
         self.textborder = 4
+#        self.set_property('editable',False)
 
     def __get_states(self):
         return [e for e in self.attrs.get('states','').split(',') if e]
