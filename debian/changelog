@@ -1,3 +1,120 @@
+openerp-client (5.0.6-0-1test1) unstable; urgency=low
+
+  [ Christophe Simonis ]
+  * [IMP] change version number
+  * [MERGE]
+
+  [ Jay (Open ERP) ]
+  * [FIX] OpenERP Handling any files to be opened through browser
+
+  [ Christophe Simonis ]
+  * [FIX] KeyError When printing report whose names are translated
+
+  [ olt ]
+  * [IMP] do not use arange
+  * [IMP] py2exe: optimize 1
+
+  [ Christophe Simonis ]
+  * [REL] 5.0.3
+
+  [ P. Christeas ]
+  * Don't fail if one view cannot be handled in GTK.
+
+  [ HDA (OpenERP) ]
+  * Fixed problem in graph while date is False
+
+  [ Harry (Open ERP) ]
+  * [FIX] win_import: remove ID and Database ID from one2many field
+    population and for many2one & many2many field , only add Database
+    ID,ID
+
+  [ Christophe Simonis ]
+  * [REL] 5.0.4
+  * [IMP] change version number
+  * [IMP] change version number
+
+  [ P. Christeas ]
+  * [IMP] Support persistent connections to server!
+  * New xmlrpc: re-enable get_timezone, fix non-'object' calls
+  * [IMP]: an option to suppress env_info at error messages.
+  * [IMP] better exception printing
+  * Fixes for python 2.5 and errors in connections.
+  * Fix the code for https (persistent) connections.
+  * Attempt to cripple https for python 2.5
+  * alpha: produce gpg signatures through binary widget.
+  * Signature verification process.
+  * Document signatures: ask before signing, better verification dlg.
+  * Comments on persistent connections.
+  * Fix exception handling in wizard. Was the code pasted there?
+  * Retry requests if they are not sent at all. Less messages.
+  * Better handling of gpg-sign's return value.
+  * Bring back netrpc for client.
+
+  [ Jay (Open ERP) ]
+  * [FIX] Rounding value problem in float_time widget
+  * [FIX] Calendar problem for days stripline
+  * [IMP] Survey form : Countries display Corrected
+  * [FIX] Many2One : When value is set, Search button should display
+    full list.
+
+  [ tailor ]
+  * [IMP] updated changelog file
+  * [IMP] updated release.py to 5.0.5
+
+  [ P. Christeas ]
+  * Better handling of broken connections.
+
+  [ Jay (Open ERP) ]
+  * [FIX] Date,DateTime widgets handling of values(user may pass rong
+    date/datetime formats)
+  * [FIX] Tree_report_options : unicode error corrected
+
+  [ tailor ]
+  * [IMP] updated changelog file for 5.0.6 release
+
+  [ Harry (Open ERP) ]
+  * [FIX]import_csv: encoding problem on import and also fixed problem
+    of many2many,many2one import fields
+
+  [ ame (Tiny) ]
+  * [REL] 5.0.6
+
+  [ P. Christeas ]
+  * Fix some widgets wrt. tooltip Gtk API
+  * A few more ports to tooltip API.
+
+  [ Christophe Simonis ]
+  * [FIX] actions.server can return a list of actions to execute...
+
+  [ P. Christeas ]
+  * [Fix] When calling an action, id must be integer.
+
+  [ Jay (Open ERP) ]
+  * [FIX] Calendar view : New record for a click on any day
+
+  [ Fabien Pinckaers ]
+  * [fix] security
+  * merge
+
+  [ Christophe Simonis ]
+  * [FIX] do not crop confirmation messages
+
+  [ Jay (Open ERP) ]
+  * [FIX] Terms made translatable for DB Creation
+
+  [ Stephane Wirtel ]
+  * [IMP] Add the support of the context for the button tag (type:
+    action & object)
+  * [MERGE]
+
+  [ Jay (Open ERP) ]
+  * [FIX] Date Widgets got nonfunctional when something raised an
+    exception
+
+  [ panos ]
+
+ -- panos <panos@debian.pefnos2>  Mon, 02 Nov 2009 19:24:07 -0500
+
 openerp-client (5.0.2-0-1ubuntu1) intrepid; urgency=low
 
   [ Christophe Simonis ]
