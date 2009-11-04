@@ -105,7 +105,10 @@ class calendar(interface.widget_interface):
             return time.strftime(DT_FORMAT)
 
     def set_value(self, model, model_field):
-        model_field.set_client(model, self.get_value(model))
+        try:
+            model_field.set_client(model, self.get_value(model))
+        except:
+            return False   
         return True
 
     def display(self, model, model_field):
@@ -236,7 +239,10 @@ class datetime(interface.widget_interface):
             return time.strftime(DHM_FORMAT)
 
     def set_value(self, model, model_field):
-        model_field.set_client(model, self.get_value(model))
+        try:
+            model_field.set_client(model, self.get_value(model))
+        except:
+            return False   
         return True
 
     def display(self, model, model_field):
@@ -350,8 +356,11 @@ class stime(interface.widget_interface):
         return time.strftime(HM_FORMAT, t)
 
     def set_value(self, model, model_field):
-        res = self.get_value(model)
-        model_field.set_client(model, res)
+        try:
+            res = self.get_value(model)
+            model_field.set_client(model, res)
+        except:
+            return False    
         return True
 
     def display(self, model, model_field):

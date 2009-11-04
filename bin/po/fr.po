@@ -3174,7 +3174,7 @@ msgid ""
 "<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
-"<b>À propos d'OpenERP<b>\n"
+"<b>À propos d'OpenERP</b>\n"
 "<i>L'ERP et CRM OpenSource le plus avancé !</i>"
 
 #

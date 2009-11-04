@@ -112,11 +112,15 @@ class Button(Observable):
                 elif button_type == 'object':
                     if not id:
                         return
+                    context = model.context_get()
+                    if 'context' in self.attrs:
+                        context.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
+
                     result = rpc.session.rpc_exec_auth(
                         '/object', 'execute',
                         self.form.screen.name,
                         self.attrs['name'],
-                        [id], model.context_get()
+                        [id], context
                     )
                     if type(result)==type({}):
                         self.form.screen.window.destroy()
@@ -127,8 +131,14 @@ class Button(Observable):
                 elif button_type == 'action':
                     obj = service.LocalService('action.main')
                     action_id = int(self.attrs['name'])
-                    obj.execute(action_id, {'model':self.form.screen.name, 'id': id or False,
-                        'ids': id and [id] or [], 'report_type': 'pdf'}, context=self.form.screen.context)
+
+                    context = self.form.screen.context.copy()
+
+                    if 'context' in self.attrs:
+                        context.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
+
+                    obj.execute(action_id, {'model':self.form.screen.name, 'id': id or False, 'ids': id and [id] or [], 'report_type': 'pdf'}, context=context)
+
                 else:
                     raise Exception, 'Unallowed button type'
                 self.form.screen.reload()
