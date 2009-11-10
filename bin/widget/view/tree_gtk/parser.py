@@ -118,7 +118,7 @@ class parser_tree(interface.parser_interface):
                         node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
                 if fields[fname]['type'] == 'selection':
                     if fields[fname].get('selection',[]):
-                        node_attrs['selection']=fields[fname]['selection']
+                        node_attrs['selection'] = fields[fname]['selection']                        
                 fields[fname].update(node_attrs)
                 node_attrs.update(fields[fname])
                 node_attrs['editable'] = editable
@@ -520,11 +520,11 @@ class Selection(Char):
         self.renderer.set_property('text-column', 1)
 
     def get_textual_value(self, model):
-        selection = dict(model[self.field_name].attrs['selection'])
+        selection = dict(self.attrs['selection'])
         return selection.get(model[self.field_name].get(model), '')
 
     def value_from_text(self, model, text):
-        selection = model[self.field_name].attrs['selection']
+        selection = self.attrs['selection']
         res = False
         for val, txt in selection:
             if txt[:len(text)].lower() == text.lower():
