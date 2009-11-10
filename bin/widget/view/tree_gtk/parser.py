@@ -116,6 +116,9 @@ class parser_tree(interface.parser_interface):
                 for boolean_fields in ('readonly', 'required'):
                     if boolean_fields in node_attrs:
                         node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
+                if fields[fname]['type'] == 'selection':
+                    if fields[fname].get('selection',[]):
+                        node_attrs['selection']=fields[fname]['selection']
                 fields[fname].update(node_attrs)
                 node_attrs.update(fields[fname])
                 node_attrs['editable'] = editable

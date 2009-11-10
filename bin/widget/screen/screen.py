@@ -511,6 +511,13 @@ class Screen(signal_event.signal_event):
                         if attrs['widget']=='one2many_list':
                             attrs['widget']='one2many'
                         attrs['type'] = attrs['widget']
+                    if attrs.get('selection',[]):
+                        attrs['selection'] = eval(attrs['selection'])
+                        for att_key, att_val in attrs['selection'].items():
+                            for sel in fields[str(attrs['name'])]['selection']:
+                                if att_key == sel[0]:
+                                    sel[1] = att_val
+                        attrs['selection'] = fields[str(attrs['name'])]['selection']
                     fields[str(attrs['name'])].update(attrs)
             for node2 in node.childNodes:
                 _parse_fields(node2, fields)

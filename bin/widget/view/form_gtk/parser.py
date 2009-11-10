@@ -417,6 +417,8 @@ class parser_form(widget.view.interface.parser_interface):
                 name = str(attrs['name'])
                 del attrs['name']
                 type = attrs.get('widget', fields[name]['type'])
+                if 'selection' in attrs:
+                    attrs['selection'] = fields[name]['selection']
                 fields[name].update(attrs)
                 fields[name]['model']=model
                 if not type in widgets_type:
