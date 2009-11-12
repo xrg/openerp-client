@@ -226,6 +226,7 @@ class form(object):
             return
         if mode<>self.screen.current_view.view_type:
             self.screen.switch_view(mode=mode)
+            self.sig_reload()
 
     def sig_logs(self, widget=None):
         id = self.id_get()
@@ -263,7 +264,8 @@ class form(object):
                 self.message_state(_('Resources cleared.'), color='darkgreen')
             else:
                 self.message_state(_('Resources successfully removed.'), color='darkgreen')
-
+        self.sig_reload()
+        
     def sig_import(self, widget=None):
         fields = []
         while(self.screen.view_to_load):
@@ -296,7 +298,8 @@ class form(object):
             self.screen.load([new_id])
             self.screen.current_view.set_cursor()
             self.message_state(_('Working now on the duplicated document !'))
-
+        self.sig_reload()
+        
     def _form_save(self, auto_continue=True):
         pass
 
