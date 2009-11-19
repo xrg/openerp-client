@@ -41,10 +41,10 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
 
     def _format_time(self, event):
         hour, minute = event.start.timetuple()[3:5]
-        if minute == 0:
-            text = '%d %s' % (hour, event.caption)
-        else:
-            text = '%d:%02d %s' % (hour, minute, event.caption)
+#        if minute == 0:
+#            text = '%d %s' % (hour, event.caption)
+#        else:
+        text = '%d:%02d %s' % (hour, minute, event.caption)
         return text
 
 
