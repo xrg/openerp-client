@@ -225,8 +225,11 @@ class Screen(signal_event.signal_event):
             view.reload = True
 
     def _record_changed(self, model_group, signal, *args):
-        for view in self.views:
-            view.signal_record_changed(signal[0], model_group.models, signal[1], *args)
+        try:
+            for view in self.views:
+                view.signal_record_changed(signal[0], model_group.models, signal[1], *args)
+        except:
+            pass        
 
     def _model_changed(self, model_group, model):
         if (not model) or (model==self.current_model):
