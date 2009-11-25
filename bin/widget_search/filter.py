@@ -30,6 +30,7 @@ class filter(wid_int.wid_int):
         
         if name:
             self.butt = gtk.ToggleButton(name)
+            self.butt.set_size_request(90,45)
         else:
             self.butt = gtk.ToggleButton()
             self.butt.set_relief(gtk.RELIEF_NONE)

@@ -83,7 +83,7 @@ class _container(object):
             vbox.pack_start(label, expand=False)
             vbox.pack_start(widget, expand=expand, fill=False)
             wid = vbox
-            wid.set_border_width(5)
+            wid.set_border_width(2)
         else:
             wid = widget
             if help:
@@ -230,7 +230,7 @@ class parse(object):
                                     mywidget.pack_start(sep,False,True,5)
                                 else:
                                     sep = gtk.VSeparator()
-                                    sep.set_size_request(3,45)
+                                    sep.set_size_request(3,40)
                                     mywidget.pack_start(sep,False,False,5)
                                 
 #                        mywidget.pack_start(widget_act.widget,expand=False,fill=False)

@@ -152,25 +152,25 @@ class ViewForm(parser_view):
             #tb.set_icon_size(gtk.ICON_SIZE_MENU)
             tb = gtk.VBox()
             eb = gtk.EventBox()
-            if toolbar['print'] or toolbar['action'] or toolbar['relate']:
-                lb = gtk.Label()
-                lb.set_markup("Sidebar")
-                expander_tool = gtk.Expander(lb.get_text())
-                tooltips = gtk.Tooltips()
-                tooltips.set_tip(expander_tool, _('Hide/Show Sidebar'))
-                tooltips.set_tip(eb, _('Click here to open'))
-                tooltips.enable()
-                expander_tool.add(eb)
-                expander_tool.set_expanded(True)
-                def expander_callback(expander_tool, user_data):
-                    if expander_tool.get_expanded():
-                        expander_tool.set_label(lb.get_text())
-                    else:
-                        expander_tool.set_label('')
-                expander_tool.connect("notify::expanded", expander_callback)
-                hb.pack_start(expander_tool, False, False)
-            else:
-                hb.pack_start(eb, False, False)
+#            if toolbar['print'] or toolbar['action'] or toolbar['relate']:
+#                lb = gtk.Label()
+#                lb.set_markup("Sidebar")
+#                expander_tool = gtk.Expander(lb.get_text())
+#                tooltips = gtk.Tooltips()
+#                tooltips.set_tip(expander_tool, _('Hide/Show Sidebar'))
+#                tooltips.set_tip(eb, _('Click here to open'))
+#                tooltips.enable()
+#                expander_tool.add(eb)
+#                expander_tool.set_expanded(True)
+#                def expander_callback(expander_tool, user_data):
+#                    if expander_tool.get_expanded():
+#                        expander_tool.set_label(lb.get_text())
+#                    else:
+#                        expander_tool.set_label('')
+#                expander_tool.connect("notify::expanded", expander_callback)
+#                hb.pack_start(expander_tool, False, False)
+#            else:
+            hb.pack_start(eb, False, False)
             eb.add(tb)
             eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
             self.widget = hb
