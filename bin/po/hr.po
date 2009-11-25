@@ -1,32 +1,36 @@
-# Hungarian translation of Tiny ERP.
-# Copyright (C) 2005
-# This file is distributed under the same license as the TinyERP package.
-# Fabien Pinckaers <fp@tiny.be>, 2005.
-#
+# Croatian translation for openobject-client
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the openobject-client package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Tiny ERP V2.0\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: openobject-client\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2008-12-31 14:42+0100\n"
-"PO-Revision-Date: 2009-07-21 07:59+0000\n"
-"Last-Translator: Dukai Gábor <Unknown>\n"
-"Language-Team: Hungarian <hu@gnome.hu>\n"
+"PO-Revision-Date: 2009-08-26 09:28+0000\n"
+"Last-Translator: Dragan Jovanovic <dragan.jovanovic@strojotex.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-25 04:47+0000\n"
+"X-Launchpad-Export-Date: 2009-11-25 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+
+#: bin/widget_search/calendar.py:120 bin/widget/view/form_gtk/calendar.py:133
+#: bin/widget/view/form_gtk/calendar.py:263
+msgid "OpenERP - Date selection"
+msgstr "OpenERP - Odabir datuma"
 
 #: bin/widget_search/reference.py:74 bin/widget_search/spinint.py:73
 #: bin/widget_search/spinbutton.py:69 bin/widget_search/calendar.py:117
 #: bin/widget_search/char.py:47 bin/widget_search/checkbox.py:55
 msgid "The content of the widget or ValueError if not valid"
-msgstr ""
+msgstr "Sadržaj kontrole ili pogrešna vrijednost ako nije ispravan"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or excpetion if not valid"
-msgstr ""
+msgstr "Sadržaj kontrole ili iznimka ako nije ispravan"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -41,325 +45,306 @@ msgid ""
 "You can also use \"=\" to set the date to the current date/time and '-' to "
 "clear the field."
 msgstr ""
-"Különleges műveleteket tud végezni a +, - és = billentyűkkel. A plusz és a "
-"mínusz növeli illetve csökkenti a dátumot a megadott értékkel. Az egyenlő a "
-"dátum egy részét teszi a megadott értékkel egyenlővé. Megadható értékek "
-"fajtái: 12h = 12 óra, 8d = 8 nap, 4w = 4 hét, 1m = 1 hónap, 2y = 2 év. "
-"Néhány példa az alkalmazásra:\n"
-"* +21d: 21 napot ad a dátumhoz\n"
-"* =23w: a dátumot az év 23. hetére állítja\n"
-"* -4m: négy hónappal korábbi dátumot állít be\n"
-"Magában az = a mai dátumot állítja be, magában a - pedig törli a mezőt."
+"Možete koristiti specijalne operacije pritiskajući +, - ili =. Plus/minus "
+"uvećava/umanjuje trenutno odabran datum. Jednako postavlja dio odabranog "
+"datuma. Dostupne promjenjive: 12h = 12 sati, 8d = 8 dana, 4w = 4 tjedna, 1m "
+"= 1 mjesec, 2y = 2 godine. Nekoliko primjera:\n"
+"*+21d: dodaje 21 dan odabranoj godini\n"
+"*=23w: postavlja datum na 23. tjedan u godini\n"
+"*-4m: oduzmi četiri mjeseca od tekućeg datuma\n"
+"Također možete upotrijebiti \"=\" da biste podesili datum na tekući "
+"datum/vrijeme i '-'  da očistite polje."
 
 #: bin/widget_search/calendar.py:55
 msgid "Start date"
-msgstr "Kezdő dátum"
+msgstr "Početni datum"
 
 #: bin/widget_search/calendar.py:59 bin/widget_search/calendar.py:79
 #: bin/widget/view/form_gtk/calendar.py:63
 #: bin/widget/view/form_gtk/calendar.py:176
 msgid "Open the calendar widget"
-msgstr "Naptárfelület megnyitása"
+msgstr "Otvori kalendar kontrolu"
 
 #: bin/widget_search/calendar.py:75
 msgid "End date"
-msgstr "Befejezés dátuma"
-
-#: bin/widget_search/calendar.py:120 bin/widget/view/form_gtk/calendar.py:133
-#: bin/widget/view/form_gtk/calendar.py:263
-msgid "OpenERP - Date selection"
-msgstr "OpenERP - Dátumválasztás"
+msgstr "Završni datum"
 
 #: bin/widget_search/form.py:145
 msgid "Limit :"
-msgstr "Korlát"
+msgstr "Granica:"
 
 #: bin/widget_search/form.py:154
 msgid "Offset :"
-msgstr "Eltolás"
+msgstr "Pomak:"
 
 #: bin/widget_search/form.py:193
 msgid "Parameters :"
-msgstr "Paraméterek :"
+msgstr "Parametri:"
 
 #: bin/widget_search/form.py:301
 msgid "The content of the form or exception if not valid"
-msgstr ""
+msgstr "Sadržaj forme ili iznimka ako nije u redu"
 
-#
-# File: bin/widget_search/checkbox.py, line: 36
-# File: bin/widget_search/checkbox.py, line: 49
 #: bin/widget_search/checkbox.py:36 bin/widget_search/checkbox.py:49
 msgid "Yes"
-msgstr "Igen"
+msgstr "Da"
 
-#
-# File: bin/widget_search/checkbox.py, line: 37
 #: bin/widget_search/checkbox.py:37
 msgid "No"
-msgstr "Nem"
+msgstr "Ne"
 
 #: bin/widget/view/graph_gtk/parser.py:65
 msgid "Can not generate graph !"
-msgstr "Nem lehet a diagramot előállítani!"
+msgstr "Ne mogu generirati grafikon !"
 
 #: bin/widget/view/widget_parse.py:53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
-msgstr "A(z) %s tipus nem támogatott a GTK kliensben!"
+msgstr "Ovaj tip (%s) nije podržan od strane GTK klijenta !"
 
 #: bin/widget/view/widget_parse.py:63
 msgid "No valid view found for this object!"
-msgstr "Érvényes nézet nem található az objektumhoz."
+msgstr "Nije pronađen pogled za tekući objekt!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid "Gantt view not yet implemented !"
-msgstr "A Gantt nézet még nem támogatott!"
+msgstr "Gantt pogled nije još implementiran !"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:32
 msgid ""
 "The gantt view is not available in this GTK Client, you should use the web "
 "interface or switch to the calendar view."
 msgstr ""
-"A Gantt nézet még nem támogatott a GTK kliensben. Használja a web felületet "
-"vagy váltson naptár nézetre."
+"Gantt pogled nije dostupan u ovom GTK klijentu, koristite web sučelje ili se "
+"prebacite u kalendar pogled."
 
 #: bin/widget/view/tree_gtk/date_renderer.py:200
 msgid ""
 "Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."
 msgstr ""
-"Nyomja meg <i>'+'</i>, <i>'-'</i> vagy <i>'='</i> különleges dátum "
-"művelethez."
+"Pritisnite <i>'+'<i>, <i>'-'<i> ili <i>'='<i> za specijalne radnje nad "
+"datumom."
 
 #: bin/widget/view/tree_gtk/editabletree.py:125
 #, python-format
 msgid "Shortcut: %s"
-msgstr "Gyorselérés: %s"
+msgstr "Prečac: %s"
 
 #: bin/widget/view/tree_gtk/editabletree.py:125
 msgid "F1 New - F2 Open/Search"
-msgstr "F1 Új - F2 Megnyitás/Keresés"
+msgstr "F1 Novi - F2 Otvori/Traži"
 
 #: bin/widget/view/tree_gtk/editabletree.py:190
 #, python-format
 msgid "Warning; field %s is required!"
-msgstr "Figyelem; °%s mezőt kötelező kitölteni!"
+msgstr "Upozorenje: polje %s je neophodno!"
 
 #: bin/widget/view/form.py:170
 msgid "You must save this record to use the relate button !"
-msgstr "El kell menteni a rekordot a Kapcsolási gomb használatához!"
+msgstr "Morate spremiti tekući zapis za korištenje gumba za povezivanje !"
 
 #: bin/widget/view/form.py:182
 msgid "You must select a record to use the relate button !"
-msgstr "Ki kell választani egy rekordot a Kapcsolódási gomb használatához!"
+msgstr "Morate odabrati zapis za korištenje gumba za povezivanje !"
 
 #: bin/widget/view/form.py:200 bin/widget/view/form_gtk/parser.py:496
 #: bin/widget/view/form_gtk/parser.py:653
 #: bin/widget/view/form_gtk/parser.py:710
 msgid "No other language available!"
-msgstr "Másik nyelv nem elérhető!"
+msgstr "Nije dostupan drugi jezik!"
 
 #: bin/widget/view/form.py:207 bin/widget/view/form_gtk/parser.py:555
 #: bin/widget/view/form_gtk/parser.py:659
 #: bin/widget/view/form_gtk/parser.py:716
 msgid "Add Translation"
-msgstr "Fordítás hozzáadása"
+msgstr "Dodaj prijevod"
 
 #: bin/widget/view/form.py:258 bin/widget/view/form_gtk/parser.py:772
 msgid "Translate label"
-msgstr "Cimke fordítása"
+msgstr "Prevedi natpis"
 
 #: bin/widget/view/form_gtk/reference.py:92 bin/openerp.glade:1214
 msgid "Create a new resource"
-msgstr "Új rekord"
+msgstr "Nova stavka"
 
 #: bin/widget/view/form_gtk/reference.py:93
 msgid "Search / Open a resource"
-msgstr "Keresés / Megnyitás"
+msgstr "Traži / Otvori stavku"
 
-#
-# File: bin/widget/view/form_gtk/interface.py, line: 47
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 148
 #: bin/widget/view/form_gtk/interface.py:47
 #: bin/widget/view/form_gtk/one2many_list.py:148
 msgid "Set to default value"
-msgstr "Alapértelmezett értékek betöltése"
+msgstr "Postavi na zadanu vrijednost"
 
 #: bin/widget/view/form_gtk/interface.py:48
 msgid "Set as default"
-msgstr "Beállítás alapértelmezetként"
+msgstr "Postavi da bude zadano"
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
-msgstr "A gomb ikonja érvénytelen!"
+msgstr "Pogrešna ikonica za gumb !"
 
 #: bin/widget/view/form_gtk/parser.py:134 bin/modules/gui/window/form.py:283
 msgid "Invalid form, correct red fields !"
-msgstr "Érvénytelen űrlap, javítsa ki a piros mezőket!"
+msgstr "Neispravan obrazac, popravite crvena polja !"
 
 #: bin/widget/view/form_gtk/parser.py:486
 msgid "You need to save resource before adding translations!"
-msgstr "El kell menteni a forrást mielőtt hozzáadja a fordítást!"
+msgstr "Morate spremiti stavku prije dodavanja prijevoda!"
 
 #: bin/widget/view/form_gtk/parser.py:778
 msgid "Translate view"
-msgstr "Nézet fordítása."
+msgstr "Prevedi pogled"
 
 #: bin/widget/view/form_gtk/image.py:70
 msgid "Set Image"
-msgstr "Kép beállítása"
+msgstr "Zadaj sliku"
 
 #: bin/widget/view/form_gtk/image.py:79 bin/widget/view/form_gtk/binary.py:85
 msgid "Save As"
-msgstr "Mentés másként"
+msgstr "Spremi kao"
 
 #: bin/widget/view/form_gtk/image.py:88 bin/widget/view/form_gtk/binary.py:89
 msgid "Clear"
-msgstr "Törlés"
+msgstr "Očisti"
 
 #: bin/widget/view/form_gtk/image.py:100
 msgid "All files"
-msgstr "Minden fájl"
+msgstr "Sve datoteke"
 
 #: bin/widget/view/form_gtk/image.py:104
 msgid "Images"
-msgstr "Képek"
+msgstr "Slike"
 
 #: bin/widget/view/form_gtk/image.py:110 bin/widget/view/form_gtk/url.py:112
 #: bin/modules/gui/main.py:1065 bin/openerp.glade:6749
 msgid "Open..."
-msgstr "Megnyitás"
+msgstr "Otvori..."
 
 #: bin/widget/view/form_gtk/image.py:117
 #: bin/widget/view/form_gtk/binary.py:162 bin/modules/gui/main.py:1136
 #: bin/modules/gui/window/win_export.py:282 bin/printer/printer.py:207
 msgid "Save As..."
-msgstr "Mentés másként..."
+msgstr "Spremi kao..."
 
 #: bin/widget/view/form_gtk/wid_common.py:60
 msgid "Always applicable !"
-msgstr "Mindig használható!"
+msgstr "Uvijek primjenjivo !"
 
 #: bin/widget/view/form_gtk/binary.py:77
 msgid "Select"
-msgstr "Kiválaszt"
+msgstr "Odaberi"
 
 #: bin/widget/view/form_gtk/binary.py:81
 msgid "Open"
-msgstr "Megnyitás"
+msgstr "Otvori"
 
 #: bin/widget/view/form_gtk/binary.py:114
 #: bin/widget/view/form_gtk/binary.py:158
 msgid "Unable to read the file data"
-msgstr "File nem olvasható"
+msgstr "Nisam u mogućnosti pročitati podatke iz datoteke"
 
 #: bin/widget/view/form_gtk/binary.py:124
 #: bin/widget/view/form_gtk/binary.py:150
 #, python-format
 msgid "Error reading the file: %s"
-msgstr "A(z) %s file nem olvasható!"
+msgstr "Greška pri čitanju datoteke: %s"
 
 #: bin/widget/view/form_gtk/binary.py:133
 msgid "All Files"
-msgstr "Minden fájl"
+msgstr "Sve datoteke"
 
 #: bin/widget/view/form_gtk/binary.py:143
 msgid "Select a file..."
-msgstr "Válassz fájlt..."
+msgstr "Odaberite datoteku..."
 
 #: bin/widget/view/form_gtk/binary.py:172
 #, python-format
 msgid "Error writing the file: %s"
-msgstr "A(z) %s file nem írható"
+msgstr "Greška pri zapisivanju datoteke: %s"
 
 #: bin/widget/view/form_gtk/calendar.py:127
 #: bin/widget/view/form_gtk/calendar.py:260
 msgid "This widget is readonly !"
-msgstr "Ez az alkalmazás csak olvasható!"
+msgstr "Ovaj grafički element je samo za čitanje !"
 
 #: bin/widget/view/form_gtk/calendar.py:269
 msgid "Hour:"
-msgstr "Óra:"
+msgstr "Sat:"
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Minute:"
-msgstr "Perc:"
+msgstr "Minuta:"
 
 #: bin/widget/view/form_gtk/many2one.py:146
 msgid "Open this resource"
-msgstr "Elem megnyitása"
+msgstr "Otvori odabranu stavku"
 
 #: bin/widget/view/form_gtk/many2one.py:160
 msgid "Search a resource"
-msgstr "Elem keresése"
+msgstr "Traži stavku"
 
-#
-# File: bin/widget/view/form_gtk/many2one.py, line: 171
-# File: bin/openerp.glade, line: 1356
 #: bin/widget/view/form_gtk/many2one.py:171 bin/openerp.glade:1356
 msgid "Action"
-msgstr "Művelet"
+msgstr "Radnja"
 
 #: bin/widget/view/form_gtk/many2one.py:172
 msgid "Report"
-msgstr "Jelentés"
+msgstr "Izvješće"
 
 #: bin/widget/view/form_gtk/many2one.py:372 bin/widget/view/list.py:274
 msgid "You must select a record to use the relation !"
-msgstr "Ki kell választani egy rekordot a reláció használatához!"
+msgstr "Morate odabrati zapis za korištenje veze !"
 
 #: bin/widget/view/form_gtk/one2many_list.py:51
 #: bin/modules/gui/window/win_search.py:50
 msgid "OpenERP - Link"
-msgstr "OpenERP - Hivatkozás"
+msgstr "OpenERP - Veza"
 
 #: bin/widget/view/form_gtk/one2many_list.py:151
 msgid "Set Default"
-msgstr "Beállítás alapértelmezetként."
+msgstr "Postavi da bude zadano"
 
-#
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 162
 #: bin/widget/view/form_gtk/one2many_list.py:162
 msgid "Create a new entry"
-msgstr "Új bejegyzés létrehozása"
+msgstr "Stvori novu stavku"
 
 #: bin/widget/view/form_gtk/one2many_list.py:172
 msgid "Edit this entry"
-msgstr "Bejegyzés szerkesztése"
+msgstr "Uredi ovu stavku"
 
-#
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 182
 #: bin/widget/view/form_gtk/one2many_list.py:182
 msgid "Remove this entry"
-msgstr "Bejegyzés törlése"
+msgstr "Ukloni ovu stavku"
 
 #: bin/widget/view/form_gtk/one2many_list.py:194
 msgid "Previous"
-msgstr "Vissza"
+msgstr "Prethodno"
 
 #: bin/widget/view/form_gtk/one2many_list.py:207
 msgid "Next"
-msgstr "Tovább"
+msgstr "Sljedeće"
 
 #: bin/widget/view/form_gtk/one2many_list.py:219
 msgid "Switch"
-msgstr "Átvált"
+msgstr "Preklopnik"
 
 #: bin/widget/view/form_gtk/one2many_list.py:269
 msgid "You have to select a resource !"
-msgstr "Ki kell választani egy erőforrást !"
+msgstr "Morate odabrati stavku !"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "Calendar View Error !"
-msgstr "Naptár nézet hiba!"
+msgstr "Greška u pogledu kalendara !"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:32
 msgid "You must intall the library python-hippocanvas to use calendars."
-msgstr "A naptár használatához telepítse python-hippocanvas könyvtárat."
+msgstr ""
+"Morate instalirati biblioteku python-hippocanvas za korištenje kalendara."
 
 #: bin/widget/view/calendar_gtk/parser.py:239 bin/openerp.glade:9108
 msgid "Week"
-msgstr "Hét"
+msgstr "Tjedan"
 
 #: bin/common/common.py:186
 msgid ""
@@ -368,10 +353,10 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
-"Köszönjük visszajelzését!\n"
-"Véleményét elküldtük az OpenERP-nek.\n"
-"Most már létrehozhat új adatbázist vagy\n"
-"kapcsolódhat egy már meglévő szerverhez a \"Fájl\" menüben."
+"Hvala na povratnim informacijama!\n"
+"Vaši komentari su poslani u OpenERP.\n"
+"Trebali biste početi stvaranjem nove baze ili\n"
+"povezivanjem na postojeći server preko \"Datoteka\" izbornika."
 
 #: bin/common/common.py:193
 msgid ""
@@ -379,13 +364,13 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
-"Köszönjük hogy tesztelte az OpenERP-t!\n"
-"Most már létrehozhat új adatbázist vagy\n"
-"kapcsolódhat egy már meglévő szerverhez a \"Fájl\" menüben."
+"Hvala za testiranje OpenERP-a !\n"
+"Trebali biste početi stvaranjem nove baze ili\n"
+"povezivanjem na postojeći server preko \"Datoteka\" izbornika."
 
 #: bin/common/common.py:298
 msgid "Support request sent !"
-msgstr "Segítségkérés elküldve!"
+msgstr "Zahtjev za podrškom poslan !"
 
 #: bin/common/common.py:316
 msgid ""
@@ -412,6 +397,29 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>Dojavljena je nepoznata greška.</b>\n"
+"\n"
+"<b>Nemate ispravan Open ERP ugovor o održavanju!</b>\n"
+"Ako aktivno koristite Open ERP, preporučljivo je da se pretplatite \n"
+"na program o održavanju.\n"
+"\n"
+"Open ERP program o održavanju pružavam garanciju za otklanjanje grešaka u "
+"programu i\n"
+"automatski sustav za migraciju tako da možemo ukloniti vaš problem u roku od "
+"nekoliko\n"
+"sati. Ako imate ugovor o održavanju, ova greška bi trebala biti poslana \n"
+"timu za kvalitetu Open ERP-a.\n"
+"\n"
+"Program održavanja nudi vam:\n"
+"* Automatske nadogradnje na novu verziju,\n"
+"* Garanciju za uklanjanje grešaka u programu,\n"
+"* Mjesečna najava potencijalnih grešaka u programu i njihovih ispravki,\n"
+"* Sigurnosna upozorenja putem emaila i automatska nadogradnja,\n"
+"* Pristup klijentkom portalu.\n"
+"\n"
+"Možete upotrijebiti link ispod za više informacija. Detalji o grešci\n"
+"su prikazani na drugoj kartici.\n"
 
 #: bin/common/common.py:339
 #, python-format
@@ -437,12 +445,32 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Dojavljena je nepoznata greška.</b>\n"
+"\n"
+"Vaš ugovor o održavanju ne pokriva sve module instalirane na vašem sustavu "
+"!\n"
+"Ako aktivno koristite Open ERP, preporučljivo je da nadogradite vaš ugovor.\n"
+"\n"
+"Ako ste razvili vlastite module ili instalirali modul treće strane, možemo\n"
+"vam ponuditi dodatni ugovor o održavanju za ove module. Nakon\n"
+"što pregleda vaše module, naš tim za upravljanje kvalitetom će osigurati da "
+"će nadograditi\n"
+"automatski za sve buduće verzije Open ERP bez dodatnih troškova.\n"
+"\n"
+"Ovdje je lista modula koji nisu pokriveni vašim ugovorom o održavanu:\n"
+"%s\n"
+"\n"
+"Možete koristiti link ispod za više informacija. Detalji o grešci\n"
+"su prikazani na drugoj kartici."
 
 #: bin/common/common.py:390
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
+"Vaš problem je postan tima za upravljanje kvalitetom !\n"
+"Kontaktirati ćemo vas kada analiziramo problem."
 
 #: bin/common/common.py:392
 #, python-format
@@ -450,109 +478,111 @@ msgid ""
 "Your problem could <u>NOT</u> be sent to the quality team !\n"
 "Please report this error manually at %s"
 msgstr ""
+"Vaš problem <u>NIJE</u> mogao biti poslan timu za upravljanje kvalitetom !\n"
+"Molimo obavjestite nas o grešci ručno na %s"
 
 #: bin/common/common.py:545
 msgid "Open with..."
-msgstr "Megnyitás ezzel..."
+msgstr "Otvori s..."
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr "Folyamatlista Nyomtatása"
+msgstr "Ispis tijeka rada"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
-msgstr "Folyamatlista Nyomtatása (Komplex)"
+msgstr "Ispis tijeka rada (kompleksno)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr "Nincs elérhető plugin ehez az erőforráshoz !"
+msgstr "Ne postoji dostupan dodatak za tekuću stavku !"
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
-msgstr "Válassz plugint-t"
+msgstr "Odaberite dodatak"
 
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s"
-msgstr "Nem lehet beállítani a %s nyelvet"
+msgstr "Nisam u mogućnosti postaviti mjesto %s"
 
 #: bin/rpc.py:142 bin/modules/action/wizard.py:171
 msgid "Connection refused !"
-msgstr "Csatlakozás elutasítva !"
+msgstr "Povezivanje odbijeno !"
 
 #: bin/rpc.py:143
 msgid "Connection refused!"
-msgstr "Kapcsolat elutasítva !"
+msgstr "Povezivanje odbijeno !"
 
 #: bin/rpc.py:173
 msgid ""
 "Unable to reach to OpenERP server !\n"
 "You should check your connection to the network and the OpenERP server."
 msgstr ""
-"Nem lehet elérni az OpenERP szervert!\n"
-"Ellenőrizze a hálózati kapcsolatot és az OpenERP szervert."
+"Nisam u mogućnosti kontaktirati OpenERP poslužitelj !\n"
+"Provjeri vezu na mrežu i OpenERP poslužitelj."
 
 #: bin/rpc.py:173
 msgid "Connection Error"
-msgstr "Kapcsolódási hiba"
+msgstr "Greška pri spajanju"
 
 #: bin/rpc.py:188 bin/rpc.py:190 bin/modules/action/wizard.py:183
 #: bin/modules/action/wizard.py:189 bin/modules/action/wizard.py:191
 msgid "Application Error"
-msgstr "Alkalmazás Hiba"
+msgstr "Graška u programu"
 
 #: bin/rpc.py:190 bin/modules/action/wizard.py:191
 msgid "View details"
-msgstr "Részletek megtekintése"
+msgstr "Pogledaj detalje"
 
 #: bin/openerp-client.py:130
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr "OpenERP bezárása, KeyboardInterrupt"
+msgstr "zatvaram OpenERP, Keyboardinterrupt"
 
 #: bin/options.py:107
 #, python-format
 msgid "OpenERP Client %s"
-msgstr "OpenERP Kliens %s"
+msgstr "OpenERP klijent %s"
 
 #: bin/options.py:108
 msgid "specify alternate config file"
-msgstr "adjon meg alternatív konfig fájlt"
+msgstr "navedite dopunsku konfiguracijsku datoteku"
 
 #: bin/options.py:109
 msgid "enable basic debugging"
-msgstr "alap hibakövetés engedélyezése"
+msgstr "uključi osnovno uklanjanje grešaka"
 
 #: bin/options.py:110
 msgid "specify channels to log"
-msgstr ""
+msgstr "navedite kanale za dnevnik"
 
 #: bin/options.py:111
 msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-msgstr "adja meg a naplózás szintjét: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+msgstr "odaberite nivo dnevnila: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 
 #: bin/options.py:112
 msgid "specify the user login"
-msgstr "adja meg a felhasználónevet"
+msgstr "navedite korisničke podatke za prijavu"
 
 #: bin/options.py:113
 msgid "specify the server port"
-msgstr ""
+msgstr "navedite port na poslužitelju"
 
 #: bin/options.py:114
 msgid "specify the server ip/name"
-msgstr ""
+msgstr "navedite ip adresu/naziv poslužitelja"
 
 #: bin/modules/gui/main.py:154
 msgid "Unknown"
-msgstr "Ismeretlen"
+msgstr "Nepoznato"
 
 #: bin/modules/gui/main.py:158 bin/modules/gui/main.py:1157
 msgid "Could not connect to server !"
-msgstr "Nem lehet csatlakozni a szerverhez !"
+msgstr "Ne mogu se spojiti na server !"
 
 #: bin/modules/gui/main.py:165 bin/modules/gui/main.py:1161
 msgid "No database found, you must create one !"
-msgstr "Nem található adatbázis, létre kell hozni egyet!"
+msgstr "Nije pronađena niti jedna baza podataka, morate stvoriti jednu !"
 
 #: bin/modules/gui/main.py:178
 #, python-format
@@ -560,117 +590,117 @@ msgid ""
 "The versions of the server (%s) and the client (%s) missmatch. The client "
 "may not work properly. Use it at your own risks."
 msgstr ""
-"A szerver verziója (%s) és a kliens (%s) verziója nem egyezik. A kliens "
-"program nem fog működni rendesen. Csak saját felelősségre használja."
+"Verzija poslužitelja (%s) i klijenta (%s) se ne slažu. Postoji mogućnost da "
+"klijent neće raditi ispravno. Koristite na vlastiti rizik."
 
 #: bin/modules/gui/main.py:309
 msgid "Sorry,'"
-msgstr "Sajnáljuk,"
+msgstr "Oprostite,'"
 
 #: bin/modules/gui/main.py:309 bin/modules/gui/main.py:312
 msgid "Bad database name !"
-msgstr "Rossz adatbázis név !"
+msgstr "Neispravan naziv baze podataka !"
 
 #: bin/modules/gui/main.py:312
 msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
-"Az adatbázis neve csak a normál karaktereket vagy az \"_\" karaktert "
-"tartalmazhatja.\n"
-"Kelülje az ékezeteket, a space-t vagy a speciális karakterek használatát."
+"Naziv baze podataka mora sadržavati samo nromalne znakove ili \"_\".\n"
+"Morate izbjeći sve znakove koji ne postoje u engleskoj abecedi, razmake ili "
+"specijalne znakove."
 
 #: bin/modules/gui/main.py:340
 msgid "OpenERP Database Installation"
-msgstr "OpenERP Adatbázis Telepítése"
+msgstr "Instalacija OpenERP baze podataka"
 
 #: bin/modules/gui/main.py:349
 msgid "<b>Operation in progress</b>"
-msgstr "<b>Művelet folyamatban van</b>"
+msgstr "<b>Postupak u tijeku</b>"
 
 #: bin/modules/gui/main.py:353 bin/modules/action/wizard.py:147
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
-"Kérem várjon\n"
-"a művelet eltarthat egy ideig..."
+"Molimo sačekajte,\n"
+"ovaj postupak može potrajati..."
 
 #: bin/modules/gui/main.py:372 bin/modules/gui/main.py:374
 #: bin/modules/gui/main.py:376
 msgid "Could not create database."
-msgstr "Az adatbázis nem hozható létre."
+msgstr "Ne mogu stvoriti bazu podataka."
 
 #: bin/modules/gui/main.py:372
 msgid "Database already exists !"
-msgstr "Az adatbázis már létezik!"
+msgstr "baza podataka već postoji !"
 
 #: bin/modules/gui/main.py:374 bin/modules/gui/main.py:1060
 #: bin/modules/gui/main.py:1079 bin/modules/gui/main.py:1149
 msgid "Bad database administrator password !"
-msgstr "Hibás adatbázis adminisztrátori jelszó !"
+msgstr "Pogrešna administratorska lozinka na bazi podataka !"
 
 #: bin/modules/gui/main.py:376 bin/modules/gui/main.py:383
 msgid "Error during database creation !"
-msgstr "Hiba az adatbázis készítésekor!"
+msgstr "Greška prilikom stvaranja baze podataka !"
 
 #: bin/modules/gui/main.py:383
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
-"A szerver összeomlott az installálás során.\n"
-"Javasoljuk, hogy dobja el az adatbázist."
+"Poslužitelj se srušio tijekom instalacije.\n"
+"Preporučamo brisanje ove baze podataka."
 
 #: bin/modules/gui/main.py:401
 msgid "The following users have been installed on your database:"
-msgstr "A következő felhasználók telepítésre kerültek az adatbázisba:"
+msgstr "Sljedeći korisnici su instalirani na vašu bazu:"
 
 #: bin/modules/gui/main.py:401
 msgid "You can now connect to the database as an administrator."
-msgstr "Mostmár kapcsolódhat az adatbázishoz adminisztrátorként."
+msgstr "Možete se spojiti na bazu podataka kao administrator."
 
 #: bin/modules/gui/main.py:445 bin/modules/gui/main.py:775
 msgid "Press Ctrl+O to login"
-msgstr "Bejelentkezéshez nyomja meg a Ctrl+O-t."
+msgstr "Pritisnite Ctrl+O za prijavu"
 
 #: bin/modules/gui/main.py:617
 msgid "Edit"
-msgstr "Szerkesztés"
+msgstr "Uredi"
 
 #: bin/modules/gui/main.py:706
 #, python-format
 msgid "%s request(s)"
-msgstr "%s kérés"
+msgstr "%s zahtjev(a)"
 
 #: bin/modules/gui/main.py:708
 msgid "No request"
-msgstr "Nincs kérés"
+msgstr "Nema zahtjeva"
 
 #: bin/modules/gui/main.py:710
 #, python-format
 msgid " - %s request(s) sended"
-msgstr " - %s kérése várakozik"
+msgstr " %s zahtjeva poslano"
 
 #: bin/modules/gui/main.py:746
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
-"Kapcsolódási hiba!\n"
-"Szerverhez kapcsolódás nem lehetséges!"
+"Greška pri povezivanju !\n"
+"Nisam u mogućnosti povezati se sa poslužiteljom !"
 
 #: bin/modules/gui/main.py:748
 msgid ""
 "Connection error !\n"
 "Bad username or password !"
 msgstr ""
-"Kapcsolódási hiba!\n"
-"Rossz felhasználónév vagy jelszó!"
+"Greška pri povezivanju !\n"
+"Pogrešno korisničko ime ili lozinka !"
 
 #: bin/modules/gui/main.py:773
 msgid "Not logged !"
-msgstr "Nincs bejelentkezve !"
+msgstr "Neprijavljen !"
 
 #: bin/modules/gui/main.py:849
 msgid ""
@@ -678,740 +708,728 @@ msgid ""
 "Ask the administrator to verify\n"
 "you have an action defined for your user."
 msgstr ""
-"A rendszerbe nem jelentkezhet be !\n"
-"Kérje az adminisztrátor jóváhagyását\n"
-"a felhasználójához egy akció van hozzárendelve."
+"Ne možete se prijaviti u sustav !\n"
+"Zamolite administratora sustava da provjeri\n"
+"da li imate radnju definiranu za vašeg korisnika."
 
 #: bin/modules/gui/main.py:881 bin/modules/gui/main.py:888
 msgid "Do you really want to quit ?"
-msgstr "Tényleg ki akar lépni?"
+msgstr "Želite li zaista završiti s radom ?"
 
 #: bin/modules/gui/main.py:943
 #, python-format
 msgid "Attachments (%d)"
-msgstr "Mellékletek (%d)"
+msgstr "Privitaka (%d)"
 
 #: bin/modules/gui/main.py:956
 msgid "Attachments"
-msgstr "Mellékletek"
+msgstr "Privitci"
 
 #: bin/modules/gui/main.py:1051
 msgid "Delete a database"
-msgstr "Adatbázis törlése"
+msgstr "Izbriši bazu podataka"
 
 #: bin/modules/gui/main.py:1057
 msgid "Database dropped successfully !"
-msgstr "Adatbázis sikeresen eldobva !"
+msgstr "Baza uspješno izbrisana !"
 
 #: bin/modules/gui/main.py:1060
 msgid "Could not drop database."
-msgstr "Nem lehet törölni az adatbázist."
+msgstr "Ne mogu izbirsati bazu podataka."
 
 #: bin/modules/gui/main.py:1062
 msgid "Couldn't drop database"
-msgstr "Nem tudtam törölni az adatbázist"
+msgstr "Nisam mogao izbrisati bazu podataka"
 
 #: bin/modules/gui/main.py:1076
 msgid "Database restored successfully !"
-msgstr "Adatbázis sikeresen helyreállítva !"
+msgstr "Baza uspješno obnovljena !"
 
 #: bin/modules/gui/main.py:1079
 msgid "Could not restore database."
-msgstr ""
+msgstr "Nisam mogao obnoviti bazu podataka."
 
 #: bin/modules/gui/main.py:1081
 msgid "Couldn't restore database"
-msgstr ""
+msgstr "Nisam mogao obnoviti bazu podataka."
 
 #: bin/modules/gui/main.py:1114
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr ""
+msgstr "Lozinka za potvrdu se ne slaže sa novom lozinkom, postupak prekinut!"
 
 #: bin/modules/gui/main.py:1116
 msgid "Validation Error."
-msgstr ""
+msgstr "Greška pri provjeri valjanosti."
 
 #: bin/modules/gui/main.py:1124
 msgid "Could not change the Super Admin password."
-msgstr ""
+msgstr "Nisam mogao izmjeniti Super Admin lozinku"
 
 #: bin/modules/gui/main.py:1125
 msgid "Bad password provided !"
-msgstr ""
+msgstr "Unesena pogrešna lozinka !"
 
 #: bin/modules/gui/main.py:1127
 msgid "Error, password not changed."
-msgstr ""
+msgstr "Greška, lozinka nije promjenjena."
 
 #: bin/modules/gui/main.py:1133 bin/modules/gui/main.py:1153
 msgid "Backup a database"
-msgstr "Adatbázis mentése"
+msgstr "Izrada sigurnosne kopije baze podataka."
 
 #: bin/modules/gui/main.py:1146
 msgid "Database backed up successfully !"
-msgstr "Az adatbázis mentése sikerült!"
+msgstr "Uspješno izrađena sigurnosna kopija baze podataka !"
 
 #: bin/modules/gui/main.py:1149
 msgid "Could not backup the database."
-msgstr "Az adatbázis mentése nem lehetséges."
+msgstr "Nisam mogao izraditi sigurnosnu kopiju baze podataka !"
 
 #: bin/modules/gui/main.py:1151
 msgid "Couldn't backup database."
-msgstr ""
+msgstr "Nisam mogao izraditi sigurnosnu kopiju baze podataka !"
 
 #: bin/modules/gui/window/win_extension.py:115
 msgid "This extension is already defined"
-msgstr ""
+msgstr "Ovaj dodatak je već definiran"
 
 #: bin/modules/gui/window/view_tree/parse.py:36
 msgid "Tree"
-msgstr ""
+msgstr "Stablo"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:43
 #: bin/modules/gui/window/form.py:215
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:49
 msgid "Description"
-msgstr "Leírás"
+msgstr "Opis"
 
 #: bin/modules/gui/window/win_selection.py:52
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #: bin/modules/gui/window/win_selection.py:56
 msgid "Ressource Name"
-msgstr ""
+msgstr "Naziv stavke"
 
 #: bin/modules/gui/window/win_selection.py:56
 msgid "Names"
-msgstr ""
+msgstr "Nazivi"
 
 #: bin/modules/gui/window/win_preference.py:69
 msgid "Preference"
-msgstr "Testreszabás"
+msgstr "Postavke"
 
 #: bin/modules/gui/window/win_import.py:54
 msgid "XML-RPC error !"
-msgstr ""
+msgstr "Greška u XML-RPC !"
 
 #: bin/modules/gui/window/win_import.py:57
 #, python-format
 msgid "Imported %d objects !"
-msgstr ""
+msgstr "Uvezeno %d objekata !"
 
 #: bin/modules/gui/window/win_import.py:93
 #: bin/modules/gui/window/win_import.py:97
 msgid "Field name"
-msgstr "Mezőnév"
+msgstr "Naziv polja"
 
 #: bin/modules/gui/window/tree.py:190 bin/modules/gui/window/tree.py:246
 msgid "No resource selected!"
-msgstr "Nem választott ki semmilyen elemet!"
+msgstr "Nije odabrana stavka!"
 
 #: bin/modules/gui/window/tree.py:204
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
 msgstr ""
-"Biztos törölni akarja\n"
-"ezt a rekordot?"
+"Jeste sigurni da\n"
+"želite ukloniti ovaj zapis?"
 
 #: bin/modules/gui/window/tree.py:209
 msgid "Error removing resource!"
-msgstr ""
+msgstr "Greška pri uklanjanju stavke!"
 
 #: bin/modules/gui/window/tree.py:220
 msgid "Unable to chroot: no tree resource selected"
 msgstr ""
+"Nisam umogućnosti izvršiti chroot: nije odabrano stablo elemenata sustava"
 
 #: bin/modules/gui/window/__init__.py:33
 msgid "Unknown Window"
-msgstr ""
+msgstr "Nepoznati prozor"
 
 #: bin/modules/gui/window/win_search.py:143
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr "OpenERP keresés: %s"
+msgstr "OpenERP pretraga: %s"
 
 #: bin/modules/gui/window/win_search.py:144
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr "OpenERP keresés: %s (%%d találat)"
+msgstr "OpenERP pretraga: %s (%%d rezultata)"
 
 #: bin/modules/gui/window/win_export.py:52
 msgid " record(s) saved !"
-msgstr ""
+msgstr " zapisa spremljeno !"
 
 #: bin/modules/gui/window/win_export.py:55
 msgid ""
 "Operation failed !\n"
 "I/O error"
 msgstr ""
+"Postupak prekinut !\n"
+"U/I pogreška"
 
 #: bin/modules/gui/window/win_export.py:79
 msgid "Error Opening Excel !"
-msgstr ""
+msgstr "Greška pri pokretanju Excel-a !"
 
 #: bin/modules/gui/window/win_export.py:81
 msgid ""
 "Function only available for MS Office !\n"
 "Sorry, OOo users :("
 msgstr ""
+"Funkcija dostupna samo za MS Office !\n"
+"Ispričavamo se Openoffice korisnicima :("
 
 #: bin/modules/gui/window/form.py:197
 msgid "No record selected ! You can only attach to existing record."
-msgstr ""
-"Nincs rekord kiválasztva ! Csak már létező rekordhoz csatolhat mellékletet."
+msgstr "Nije odabram zapis ! Možete priložiti samo na postojeći zapis."
 
 #: bin/modules/gui/window/form.py:209
 msgid "You have to select a record !"
-msgstr "Ki kell választania egy rekordot !"
+msgstr "Morate odabrati zapis !"
 
 #: bin/modules/gui/window/form.py:216
 msgid "Creation User"
-msgstr "Létrehozta"
+msgstr "Stvorio korisnik"
 
 #: bin/modules/gui/window/form.py:217
 msgid "Creation Date"
-msgstr "Létrehozás dátuma"
+msgstr "Datum stvaranja"
 
 #: bin/modules/gui/window/form.py:218
 msgid "Latest Modification by"
-msgstr "Utoljára módosította"
+msgstr "Zadnja izmjena od strane"
 
 #: bin/modules/gui/window/form.py:219
 msgid "Latest Modification Date"
-msgstr "Utolsó módosítás dátuma"
+msgstr "Datum zadnje izmjene"
 
 #: bin/modules/gui/window/form.py:230
 msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
 msgstr ""
+"Zapis nije spremljen ! \n"
+" Želite li izbrisati tekući zapis ?"
 
 #: bin/modules/gui/window/form.py:233
 msgid "Are you sure to remove this record ?"
-msgstr "Biztos törölni akarja ezt a rekordot ?"
+msgstr "Jeste sigurni da želite ukloniti ovaj zapis ?"
 
 #: bin/modules/gui/window/form.py:235
 msgid "Are you sure to remove those records ?"
-msgstr "Biztos törölni akarja azokat a rekordokat ?"
+msgstr "Jeste sigurni da želite ukloniti ove zapise ?"
 
 #: bin/modules/gui/window/form.py:239
 msgid "Resources cleared."
-msgstr ""
+msgstr "Stavke izbrisane."
 
 #: bin/modules/gui/window/form.py:241
 msgid "Resources successfully removed."
-msgstr "A rekordo(ka)t sikeresen törölte."
+msgstr "Stavke uspješno uklonjene."
 
 #: bin/modules/gui/window/form.py:273
 msgid "Working now on the duplicated document !"
-msgstr "Most az új másolaton dolgozik !"
+msgstr "Trenutno radite na dupliciranom dokumentu !"
 
 #: bin/modules/gui/window/form.py:281
 msgid "Document Saved."
-msgstr "Rekord elmentve."
+msgstr "Dokument spremljen."
 
 #: bin/modules/gui/window/form.py:302 bin/modules/gui/window/form.py:397
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
 msgstr ""
-"Módosította ezt a rekordot,\n"
-"el akarja menteni ?"
+"Ovaj zapis je izmjenjen\n"
+"želite li ga spremiti ?"
 
 #: bin/modules/gui/window/form.py:349
 msgid "You must select one or several records !"
-msgstr "Ki kell választania egy vagy több rekordot !"
+msgstr "Morate odabrati jedan ili više zapisa !"
 
 #: bin/modules/gui/window/form.py:358
 msgid "Print Screen"
-msgstr "Képernyőkép"
+msgstr "Ispiši zaslon"
 
 #: bin/modules/gui/window/form.py:378
 msgid "No record selected"
-msgstr "Nincs rekord kiválasztva"
+msgstr "Nije odabran niti jedan zapis"
 
 #: bin/modules/gui/window/form.py:383
 msgid "New document"
-msgstr ""
+msgstr "Novi dokument"
 
 #: bin/modules/gui/window/form.py:385
 msgid "Editing document (id: "
-msgstr "Szerkesztés alatt (id: "
+msgstr "Obrada dokumenta (id: "
 
 #: bin/modules/gui/window/form.py:386
 msgid "Record: "
-msgstr "Rekord: "
+msgstr "Zapis: "
 
 #: bin/modules/gui/window/form.py:387
 msgid " of "
-msgstr " , összesen "
+msgstr " od "
 
 #: bin/modules/action/main.py:46
 msgid "Nothing to print!"
-msgstr ""
+msgstr "Ne postoji ništa za ispisati!"
 
 #: bin/modules/action/main.py:63
 msgid "Printing aborted, too long delay !"
-msgstr ""
+msgstr "Ispis prekinut, predugačko kašnjenje !"
 
 #: bin/modules/action/main.py:179
 msgid "Select your action"
-msgstr "Válasszon műveletet"
+msgstr "Odaberite radnju"
 
 #: bin/modules/action/wizard.py:133
 msgid "OpenERP Computing"
-msgstr "OpenERP dolgozik"
+msgstr "OpenERP Računam"
 
 #: bin/modules/action/wizard.py:143
 msgid "Operation in progress"
-msgstr "Művelet folyamatban van"
+msgstr "Operacija se izvršava"
 
 #: bin/printer/printer.py:172
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr ""
+msgstr "Nisam u mogućnosti obraditi %s vrstu datoteke"
 
 #: bin/printer/printer.py:181
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
+"Automatski ispis na Linuxu nije implementiran.\n"
+"Koristite opciju za predpregled ispisa !"
 
 #: bin/printer/printer.py:189
 msgid "Error no report"
-msgstr ""
+msgstr "Greška nema izvješća"
 
 #: bin/printer/printer.py:215
 msgid "Error writing the file!"
-msgstr "Hiba a fájl írása során!"
+msgstr "Greška pri zapisivanju datoteke!"
 
 #: bin/openerp.glade:8
 msgid "OpenERP - Login"
-msgstr "OpenERP - Bejelentkezés"
+msgstr "OpenERP - Prijava"
 
-#
-# File: bin/openerp.glade, line: 74
-# File: bin/openerp.glade, line: 7126
-# File: bin/openerp.glade, line: 7362
-# File: bin/openerp.glade, line: 7684
-# File: bin/openerp.glade, line: 8329
 #: bin/openerp.glade:74 bin/openerp.glade:7126 bin/openerp.glade:7362
 #: bin/openerp.glade:7684 bin/openerp.glade:8329
 msgid "Server:"
-msgstr "Szerver:"
+msgstr "Poslužitelj:"
 
 #: bin/openerp.glade:100 bin/openerp.glade:7398 bin/openerp.glade:7641
 #: bin/openerp.glade:7938 bin/openerp.glade:8286
 msgid "Change"
-msgstr "Változtatás"
+msgstr "Izmijeni"
 
 #: bin/openerp.glade:118 bin/openerp.glade:7298
 msgid "Database:"
-msgstr "Adatbázis:"
+msgstr "Baza podataka:"
 
-#
-# File: bin/openerp.glade, line: 133
 #: bin/openerp.glade:133
 msgid "User:"
-msgstr "Felhasználó:"
+msgstr "Korisnik:"
 
-#
-# File: bin/openerp.glade, line: 148
-# File: bin/openerp.glade, line: 7284
-# File: bin/openerp.glade, line: 7584
 #: bin/openerp.glade:148 bin/openerp.glade:7284 bin/openerp.glade:7584
 msgid "Password:"
-msgstr "Jelszó:"
+msgstr "Lozinka:"
 
-#
-# File: bin/openerp.glade, line: 257
 #: bin/openerp.glade:257
 msgid "_File"
-msgstr "_Fájl"
+msgstr "_Datoteka"
 
 #: bin/openerp.glade:264
 msgid "_Connect..."
-msgstr "_Csatlakozás…"
+msgstr "_Spoji..."
 
 #: bin/openerp.glade:280
 msgid "_Disconnect"
-msgstr "_Megszakítás"
+msgstr "_Prekini vezu"
 
 #: bin/openerp.glade:300
 msgid "Databases"
-msgstr "Adatbázisok"
+msgstr "Baze podataka"
 
 #: bin/openerp.glade:307
 msgid "_New database"
-msgstr "Új adatbázis"
+msgstr "_Nova baza podataka"
 
 #: bin/openerp.glade:322
 msgid "_Restore database"
-msgstr ""
+msgstr "_Obnovi bazu podataka"
 
 #: bin/openerp.glade:337
 msgid "_Backup database"
-msgstr ""
+msgstr "_Napravi sigurnosnu kopiju baze podataka"
 
 #: bin/openerp.glade:352
 msgid "Dro_p database"
-msgstr ""
+msgstr "Izbriši bazu _podataka"
 
 #: bin/openerp.glade:372
 msgid "Administrator Password"
-msgstr ""
+msgstr "Administratorska lozinka"
 
 #: bin/openerp.glade:417
 msgid "_User"
-msgstr "F_elhasználó"
+msgstr "_Korisnik"
 
 #: bin/openerp.glade:425
 msgid "_Preferences"
-msgstr "_Testreszabás"
+msgstr "_Postavke"
 
 #: bin/openerp.glade:445
 msgid "_Send a request"
-msgstr "Kérés _küldése"
+msgstr "_Pošalji zahtjev"
 
 #: bin/openerp.glade:460
 msgid "_Read my requests"
-msgstr "Kéréseim _olvasása"
+msgstr "_Pročitaj moje zahtjeve"
 
 #: bin/openerp.glade:480
 msgid "_Waiting Requests"
-msgstr "_Várakozó kéréseim"
+msgstr "_Zahtjevi na čekanju"
 
 #: bin/openerp.glade:493
 msgid "For_m"
-msgstr "Űr_lap"
+msgstr "For_ma"
 
 #: bin/openerp.glade:501
 msgid "_New"
-msgstr "Ú_j"
+msgstr "_Novo"
 
 #: bin/openerp.glade:517
 msgid "_Save"
-msgstr "Menté_s"
+msgstr "_Spremi"
 
 #: bin/openerp.glade:533
 msgid "Copy this resource"
-msgstr ""
+msgstr "Kopiraj odabranu stavku"
 
 #: bin/openerp.glade:534
 msgid "_Duplicate"
-msgstr "_Duplázás"
+msgstr "_Dupliciraj"
 
 #: bin/openerp.glade:550
 msgid "_Delete"
-msgstr "_Törlés"
+msgstr "_Obriši"
 
 #: bin/openerp.glade:571
 msgid "Find"
-msgstr "Keresés"
+msgstr "Pronađi"
 
 #: bin/openerp.glade:587
 msgid "Ne_xt"
-msgstr "Tová_bb"
+msgstr "Slj_edeće"
 
 #: bin/openerp.glade:603
 msgid "Pre_vious"
-msgstr "_Vissza"
+msgstr "Pre_thodno"
 
 #: bin/openerp.glade:619
 msgid "Switch to list/form"
-msgstr "Lista/űrlap váltás"
+msgstr "Prebaci na listu/obrazac"
 
 #: bin/openerp.glade:635
 msgid "_Menu"
-msgstr "_Menü"
+msgstr "_Izbornik"
 
 #: bin/openerp.glade:656
 msgid "_New Home Tab"
-msgstr "Új _kezdőlap"
+msgstr "_Nova početna kartica"
 
 #: bin/openerp.glade:672 bin/openerp.glade:5872
 msgid "Close Tab"
-msgstr "Lap bezárása"
+msgstr "Zatvori karticu"
 
 #: bin/openerp.glade:688
 msgid "Previous Tab"
-msgstr "Előző lap"
+msgstr "Prethodna kartica"
 
 #: bin/openerp.glade:697 bin/openerp.glade:5928
 msgid "Next Tab"
-msgstr "Következő lap"
+msgstr "Sljedeća kartica"
 
 #: bin/openerp.glade:711
 msgid "View _logs"
-msgstr "Nap_ló megtekintése"
+msgstr "Pogledaj _dnevnik izmjena"
 
 #: bin/openerp.glade:719
 msgid "_Go to resource ID..."
-msgstr "Rekord _ID-re ugrás..."
+msgstr "_Idi na stavku ID..."
 
 #: bin/openerp.glade:733
 msgid "_Open"
-msgstr "Meg_nyitás"
+msgstr "_Otvori"
 
 #: bin/openerp.glade:748
 msgid "Reloa_d / Undo"
-msgstr "Újratöltés / _Visszavonás"
+msgstr "Ponovno učitaj/Poništi"
 
 #: bin/openerp.glade:769
 msgid "Repeat latest _action"
-msgstr "Utolsó _művelet megismétlése"
+msgstr "Ponovi z_adnju radnju"
 
 #: bin/openerp.glade:783
 msgid "_Preview in PDF"
-msgstr "Előnézet _PDF-ben"
+msgstr "_Pregledaj u PDF-u"
 
 #: bin/openerp.glade:799
 msgid "Previe_w in editor"
-msgstr "Előnézet _szerkesztőben"
+msgstr "Pregledaj u editoru"
 
 #: bin/openerp.glade:819
 msgid "Expor_t data..."
-msgstr "Adat _export..."
+msgstr "Izvezi podatke..."
 
 #: bin/openerp.glade:834
 msgid "I_mport data..."
-msgstr "Adat _import..."
+msgstr "Uvezi podatke..."
 
 #: bin/openerp.glade:846
 msgid "_Options"
-msgstr "Beállítás_ok"
+msgstr "_Odrednice"
 
 #: bin/openerp.glade:853
 msgid "_Extension Manager"
-msgstr "_Kiegészítés kezelő"
+msgstr "_Upravitelj dodataka"
 
 #: bin/openerp.glade:861
 msgid "_Menubar"
-msgstr "_Ikonsor"
+msgstr "_Izbornička traka"
 
 #: bin/openerp.glade:869
 msgid "Text _and Icons"
-msgstr "Szöv_eg és ikonok"
+msgstr "Tekst _i ikonice"
 
 #: bin/openerp.glade:877
 msgid "_Icons only"
-msgstr "Csak _ikonok"
+msgstr "_Samo ikone"
 
 #: bin/openerp.glade:886
 msgid "_Text only"
-msgstr "Csak _szöveg"
+msgstr "_Samo tekst"
 
 #: bin/openerp.glade:899
 msgid "_Forms"
-msgstr "Űr_lapok"
+msgstr "_Obrasci"
 
 #: bin/openerp.glade:907
 msgid "Right Toolbar"
-msgstr "Jobboldali eszköztár"
+msgstr "Desna alatna traka"
 
 #: bin/openerp.glade:915
 msgid "Tabs default position"
-msgstr "Lapok alaphelyzete"
+msgstr "Zadana pozicija kartica"
 
 #: bin/openerp.glade:923
 msgid "Top"
-msgstr "Felül"
+msgstr "Vrh"
 
 #: bin/openerp.glade:931
 msgid "Left"
-msgstr "Bal oldalon"
+msgstr "Lijevo"
 
 #: bin/openerp.glade:940
 msgid "Right"
-msgstr "Jobb oldalon"
+msgstr "Desno"
 
 #: bin/openerp.glade:949
 msgid "Bottom"
-msgstr "Alul"
+msgstr "Dno"
 
 #: bin/openerp.glade:962
 msgid "Tabs default orientation"
-msgstr "Lapok alapelrendezése"
+msgstr "Zadana orjentacija kartica"
 
 #: bin/openerp.glade:970
 msgid "Horizontal"
-msgstr "Vízszintes"
+msgstr "Vodoravno"
 
 #: bin/openerp.glade:978
 msgid "Vertical"
-msgstr "Függőleges"
+msgstr "Okomito"
 
 #: bin/openerp.glade:995
 msgid "_Print"
-msgstr "_Nyomtatás"
+msgstr "_Ispis"
 
 #: bin/openerp.glade:1002
 msgid "Previe_w before print"
-msgstr "_Előnézet mielőtt nyomtatna"
+msgstr "Predpregle_d ispisa"
 
 #: bin/openerp.glade:1026
 msgid "_Save options"
-msgstr "Beállítá_sok mentése"
+msgstr "_Spremi postavke"
 
 #: bin/openerp.glade:1046
 msgid "_Plugins"
-msgstr "_Bővítmények"
+msgstr "_Dodatci"
 
 #: bin/openerp.glade:1054
 msgid "_Execute a plugin"
-msgstr "Bővítmény _futtatása"
+msgstr "_Izvrši dodatak"
 
 #: bin/openerp.glade:1074
 msgid "_Shortcuts"
-msgstr "_Gyorsmenü"
+msgstr "_Prečaci"
 
 #: bin/openerp.glade:1082
 msgid "_Help"
-msgstr "_Súgó"
+msgstr "_Pomoć"
 
 #: bin/openerp.glade:1089 bin/openerp.glade:5243
 msgid "Support Request"
-msgstr ""
+msgstr "Zahtjev za podršku"
 
 #: bin/openerp.glade:1109
 msgid "User _Manual"
-msgstr "_Felhasználói kézikönyv"
+msgstr "Korisnički _priručnik"
 
 #: bin/openerp.glade:1124
 msgid "_Contextual Help"
-msgstr ""
+msgstr "_Kontekstna pomoć"
 
 #: bin/openerp.glade:1140
 msgid "_Tips"
-msgstr "_Tippek"
+msgstr "_Tipovi"
 
 #: bin/openerp.glade:1155
 msgid "Keyboard Shortcuts"
-msgstr "Gyorsbillentyűk"
+msgstr "Prečaci tipkovnice"
 
 #: bin/openerp.glade:1168
 msgid "_License"
-msgstr "_Licenc"
+msgstr "_Licenca"
 
 #: bin/openerp.glade:1183
 msgid "_About..."
-msgstr "_Névjegy..."
+msgstr "_O programu..."
 
 #: bin/openerp.glade:1225
 msgid "Edit / Save this resource"
-msgstr "Rekord szerkesztése/mentése"
+msgstr "Obrada/Spremanje odabrane stavke"
 
 #: bin/openerp.glade:1241
 msgid "Delete this resource"
-msgstr "Rekord törlése"
+msgstr "Izbriši stavku"
 
 #: bin/openerp.glade:1254
 msgid "Go to previous matched search"
-msgstr "Előző találathoz lép"
+msgstr "Idi na prethodno pronađeno"
 
 #: bin/openerp.glade:1265
 msgid "Go to next matched resource"
-msgstr "Következő találathoz lép"
+msgstr "Idi na sljedeće pronađeno"
 
 #: bin/openerp.glade:1278
 msgid "List"
-msgstr "Lista"
+msgstr "Popis"
 
 #: bin/openerp.glade:1290
 msgid "Form"
-msgstr "Űrlap"
+msgstr "Obrazac"
 
 #: bin/openerp.glade:1303
 msgid "Calendar"
-msgstr "Naptár"
+msgstr "Kalendar"
 
 #: bin/openerp.glade:1313
 msgid "Graph"
-msgstr "Diagram"
+msgstr "Grafikon"
 
 #: bin/openerp.glade:1326
 msgid "Gantt"
-msgstr ""
+msgstr "Gantt"
 
 #: bin/openerp.glade:1344
 msgid "Print documents"
-msgstr "Rekordok nyomtatása"
+msgstr "Ispis dokumenata"
 
-#
-# File: bin/openerp.glade, line: 1355
 #: bin/openerp.glade:1355
 msgid "Launch actions about this resource"
-msgstr "Elemmel kapcsolatos műveletek indítása"
+msgstr "Pokreni radnje nad odabranom stavkom"
 
 #: bin/openerp.glade:1368
 msgid "Add an attachment to this resource"
-msgstr "Mellékletet csatol ehhez a rekordhoz"
+msgstr "Dodaj privitak odabranoj stavci"
 
 #: bin/openerp.glade:1369
 msgid "Attachment"
-msgstr ""
+msgstr "Privitak"
 
 #: bin/openerp.glade:1384 bin/openerp.glade:1385
 msgid "Menu"
-msgstr "Menü"
+msgstr "Izbornik"
 
 #: bin/openerp.glade:1402 bin/openerp.glade:1403
 msgid "Reload"
-msgstr "Újratöltés"
+msgstr "Osvježi"
 
-#
-# File: bin/openerp.glade, line: 1420
 #: bin/openerp.glade:1420
 msgid "Close this window"
-msgstr "Ablak bezárása"
+msgstr "Zatvori tekući prozor"
 
 #: bin/openerp.glade:1464
 msgid "Requests:"
-msgstr "Kérések:"
+msgstr "Zahtjevi:"
 
 #: bin/openerp.glade:1487
 msgid "Read my Requests"
-msgstr ""
+msgstr "Pročitaj moje zahtjeve"
 
-#
-# File: bin/openerp.glade, line: 1508
 #: bin/openerp.glade:1508
 msgid "Send a new request"
-msgstr "Új kérés küldése"
+msgstr "Pošalji novi zahtjev"
 
 #: bin/openerp.glade:1548
 msgid "OpenERP - Tree Resources"
-msgstr ""
+msgstr "OpenERP - Stablo elemenata sustava"
 
 #: bin/openerp.glade:1601
 msgid "Shortcuts"
-msgstr "Gyorsmenü"
+msgstr "Prečaci"
 
 #: bin/openerp.glade:1710
 msgid "OpenERP - Forms"
-msgstr ""
+msgstr "OpenERP - Obrasci"
 
 #: bin/openerp.glade:1734
 msgid "State:"
-msgstr "Állapot:"
+msgstr "Stanje:"
 
 #: bin/openerp.glade:1766
 msgid "OpenERP - About"
-msgstr "OpenERP - Névjegy"
+msgstr "OpenERP - O programu"
 
 #: bin/openerp.glade:1780
 msgid ""
 "<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
-"<b>Az OpenERP névjegye</b>\n"
-"<i>A legfejlettebb nyílt forráskódú ERP és CRM !</i>"
+"<b>O OpenERP</b>\n"
+"<i>Najnapredniji ERP i CRM otvorenog koda ! </i>"
 
 #: bin/openerp.glade:1819
 msgid ""
@@ -1428,10 +1446,21 @@ msgid ""
 "\n"
 "More Info on www.openerp.com !"
 msgstr ""
+"\n"
+"OpenERP - GTK Client - v%s\n"
+"OpenERP je ERP+CRM otvorenog koda\n"
+"za male i srednje velike tvrtke.\n"
+"\n"
+"Cijeli izvorni kod je distribuiran pod\n"
+"uvjetima GNU Public licence.\n"
+"\n"
+"(c) 2003-DANAS, Tiny sprl\n"
+"\n"
+"Više informacija na www.openerp.com !"
 
 #: bin/openerp.glade:1847
 msgid "_OpenERP"
-msgstr ""
+msgstr "_OpenERP"
 
 #: bin/openerp.glade:1875
 msgid ""
@@ -1448,260 +1477,267 @@ msgid ""
 "Mail: sales@tiny.be\n"
 "Web: http://tiny.be"
 msgstr ""
+"\n"
+"(c) 2003-DANAS - Tiny sprl\n"
+"OpenERP je proizvod tvrtke Tiny sprl:\n"
+"\n"
+"Tiny sprl\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
+"Belgium\n"
+"\n"
+"Tel : (+32)81.81.37.00\n"
+"Mail: sales@tiny.be\n"
+"Web: http://tiny.be"
 
 #: bin/openerp.glade:1906
 msgid "_Contact"
-msgstr ""
+msgstr "_Kontakt"
 
 #: bin/openerp.glade:1958
 msgid "Open ERP - Forms widget"
-msgstr ""
+msgstr "Open ERP - Kontrola obrazaca"
 
 #: bin/openerp.glade:2137 bin/openerp.glade:5589
 msgid "OpenERP - Confirmation"
-msgstr "OpenERP - Megerősítés"
+msgstr "OpenERP - Potvrda"
 
-#
-# File: bin/openerp.glade, line: 2165
-# File: bin/openerp.glade, line: 5617
-# File: bin/openerp.glade, line: 7003
 #: bin/openerp.glade:2165 bin/openerp.glade:5617 bin/openerp.glade:7003
 msgid "Hello World!"
-msgstr "Helló világ!"
+msgstr "Zdravo svijete!"
 
 #: bin/openerp.glade:2214
 msgid "OpenERP - Selection"
-msgstr "OpenERP - Választás"
+msgstr "OpenERP - Odabir"
 
-#
-# File: bin/openerp.glade, line: 2228
 #: bin/openerp.glade:2228
 msgid "Your selection:"
-msgstr "Az ön választásai:"
+msgstr "Vaš odabir:"
 
 #: bin/openerp.glade:2308
 msgid "OpenERP - Dialog"
-msgstr ""
+msgstr "OpenERP - Okvira za dijalog"
 
 #: bin/openerp.glade:2332
 msgid "OpenERP, Field Preference target"
-msgstr ""
+msgstr "OpenERP, cilj postavki polja"
 
 #: bin/openerp.glade:2363
 msgid "_only for you"
-msgstr ""
+msgstr "_samo za vas"
 
 #: bin/openerp.glade:2377
 msgid "for _all users"
-msgstr ""
+msgstr "z_a sve korisnike"
 
-#
-# File: bin/openerp.glade, line: 2397
 #: bin/openerp.glade:2397
 msgid "<b>Value applicable for:</b>"
-msgstr "<b>Alkalmazandó:</b>"
+msgstr "<b>Vrijednost primjenjiva za:</b>"
 
 #: bin/openerp.glade:2433
 msgid "<b>Value applicable if:</b>"
-msgstr ""
+msgstr "<b>Vrijednost primjeniva ako:</b>"
 
 #: bin/openerp.glade:2451
 msgid "Field _Name:"
-msgstr ""
+msgstr "_Naziv polja:"
 
 #: bin/openerp.glade:2465
 msgid "_Domain:"
-msgstr ""
+msgstr "_Domena:"
 
 #: bin/openerp.glade:2524
 msgid "Default _value:"
-msgstr ""
+msgstr "Zadana _vrijednost:"
 
 #: bin/openerp.glade:2579
 msgid "OpenERP - Export to CSV"
-msgstr ""
+msgstr "OpenERP - Izvoz u CSV"
 
 #: bin/openerp.glade:2627
 msgid "Save List"
-msgstr ""
+msgstr "Spremi popis"
 
 #: bin/openerp.glade:2675
 msgid "Remove List"
-msgstr ""
+msgstr "Ukloni popis"
 
 #: bin/openerp.glade:2730
 msgid "<b>Exports List</b>"
-msgstr ""
+msgstr "<b>Izvozi liste </b>"
 
 #: bin/openerp.glade:2747
 msgid "<b>Predefined Exports</b>"
-msgstr ""
+msgstr "<b>Predefinirani izvozi</b>"
 
 #: bin/openerp.glade:2792
 msgid "Available Fields"
-msgstr ""
+msgstr "Raspoloživa polja"
 
 #: bin/openerp.glade:2835 bin/openerp.glade:6495
 msgid "_Add"
-msgstr ""
+msgstr "_Dodaj"
 
 #: bin/openerp.glade:2882 bin/openerp.glade:6542
 msgid "_Remove"
-msgstr ""
+msgstr "_Ukloni"
 
 #: bin/openerp.glade:2930
 msgid "_Nothing"
-msgstr ""
+msgstr "_Ništa"
 
 #: bin/openerp.glade:2985
 msgid "Fields to Export"
-msgstr ""
+msgstr "Polja za izvoz"
 
 #: bin/openerp.glade:3015
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
 msgstr ""
+"Otvori u Excel-u\n"
+"Spremi kao CSV"
 
 #: bin/openerp.glade:3034
 msgid "Add _field names"
-msgstr ""
+msgstr "Dodaj _nazive polja"
 
 #: bin/openerp.glade:3051
 msgid "<b>Opti_ons</b>"
-msgstr ""
+msgstr "<b>P_ostavke</b>"
 
 #: bin/openerp.glade:3110
 msgid "OpenERP - Search"
-msgstr "OpenERP - Keresés"
+msgstr "OpenERP - Pretraga"
 
 #: bin/openerp.glade:3222
 msgid "OpenERP - Preferences"
-msgstr ""
+msgstr "OpenERP - Postavke"
 
 #: bin/openerp.glade:3236
 msgid "<b>User preferences</b>"
-msgstr "<b>Saját beállításaim</b>"
+msgstr "<b>Korisničke postavke</b>"
 
-#
-# File: bin/openerp.glade, line: 3302
 #: bin/openerp.glade:3302
 msgid "Tip of the Day"
-msgstr "A nap tippje"
+msgstr "Tip dana"
 
 #: bin/openerp.glade:3349
 msgid "_Display a new tip next time?"
-msgstr ""
+msgstr "_Prikaži novi tip sljedeći put?"
 
 #: bin/openerp.glade:3402
 msgid "Pre_vious Tip"
-msgstr ""
+msgstr "Pre_thodni tip"
 
 #: bin/openerp.glade:3448
 msgid "Ne_xt Tip"
-msgstr ""
+msgstr "S_ljedeći tip"
 
 #: bin/openerp.glade:3494
 msgid "OpenERP - License"
-msgstr "OpenERP - Licenc"
+msgstr "OpenERP - Licenca"
 
 #: bin/openerp.glade:3509
 msgid "OpenERP license"
-msgstr "Az OpenERP licence"
+msgstr "OpenERP - Licenca"
 
 #: bin/openerp.glade:4207
 msgid "Go to resource ID"
-msgstr "Rekord ID-re ugrás..."
+msgstr "Idi na stavku ID"
 
 #: bin/openerp.glade:4257
 msgid "Search ID:"
-msgstr "ID keresése:"
+msgstr "Pretraga ID:"
 
 #: bin/openerp.glade:4311
 msgid "OpenERP Survey"
-msgstr ""
+msgstr "OpenERP anketa"
 
 #: bin/openerp.glade:4327
 msgid "<b>OpenERP Survey</b>"
-msgstr ""
+msgstr "<b>OpenERP anketa</b>"
 
 #: bin/openerp.glade:4340
 msgid ""
 "<i>Please fill in the following form in order to help us to improve OpenERP "
 "and better target new developments.</i>"
 msgstr ""
+"<i>Molimo popunite sljedeći obrazac da biste nam pomogli unaprijediti "
+"OpenERP i bolje ciljati nove razvoje.</i>"
 
 #: bin/openerp.glade:4662
 msgid "Open Source:"
-msgstr ""
+msgstr "Otvoreni kod:"
 
 #: bin/openerp.glade:4702
 msgid "How did you hear about us:"
-msgstr ""
+msgstr "Kako ste čuli za nas:"
 
 #: bin/openerp.glade:4758
 msgid "System:"
-msgstr ""
+msgstr "Sustav:"
 
 #: bin/openerp.glade:4808
 msgid "Your Role:"
-msgstr ""
+msgstr "Vaša uloga:"
 
 #: bin/openerp.glade:4824
 msgid "Country:"
-msgstr ""
+msgstr "Država:"
 
 #: bin/openerp.glade:4909
 msgid "# Employees:"
-msgstr ""
+msgstr "Broj zaposlenih:"
 
 #: bin/openerp.glade:4922
 msgid "Industry:"
-msgstr ""
+msgstr "Djelatnost:"
 
 #: bin/openerp.glade:4936
 msgid "<b>Your company:</b>"
-msgstr ""
+msgstr "<b>Vaša tvrtka:</b>"
 
 #: bin/openerp.glade:4968
 msgid "We plan to use OpenERP"
-msgstr ""
+msgstr "Planiramo koristiti OpenERP"
 
 #: bin/openerp.glade:4982
 msgid "We plan to offer services on OpenERP"
-msgstr ""
+msgstr "Planiramo nuditi usluge za OpenERP"
 
 #: bin/openerp.glade:5003
 msgid "Tell us why you try OpenERP and what are your current softwares:"
 msgstr ""
+"Recite nam zašto testirate OpenERP i koje trenutno koristite programe:"
 
 #: bin/openerp.glade:5037
 msgid "<b>Your interrest:</b>"
-msgstr ""
+msgstr "<b>Vaši interesi:</b>"
 
 #: bin/openerp.glade:5094
 msgid "I want to be contacted for a demonstration"
-msgstr ""
+msgstr "Želim biti kontaktiran u vezi predstavljanja proizvoda"
 
 #: bin/openerp.glade:5109
 msgid "Phone / Mobile:"
-msgstr ""
+msgstr "Telefon/Mobitel:"
 
 #: bin/openerp.glade:5124
 msgid "Your Name:"
-msgstr ""
+msgstr "Vaše ime:"
 
 #: bin/openerp.glade:5162
 msgid "E-Mail:"
-msgstr ""
+msgstr "E-mail:"
 
 #: bin/openerp.glade:5175
 msgid "Your Company:"
-msgstr ""
+msgstr "Vaša tvrtka:"
 
 #: bin/openerp.glade:5189
 msgid "<b>Keep Informed</b>"
-msgstr ""
+msgstr "<b>Ostanite informirani</b>"
 
 #: bin/openerp.glade:5269
 msgid ""
@@ -1711,14 +1747,20 @@ msgid ""
 "Note that we may not reply if you do not have a support contract with Tiny "
 "or an official partner.</i>"
 msgstr ""
+"<b>Popunite ovaj obrazac da biste prijavili greške u programu i/ili poslali "
+"zahtjev za podršku.</b>\n"
+"<i>\n"
+"Vaš zahtjev će biti poslan OpenERP timu koji će vam odgovorit uskoro.\n"
+"Napominjemo da možda nećete biti kontaktirani ako nemate ugovor o podršci sa "
+"tvrtkom Tiny ili službenim partnerom.</i>"
 
 #: bin/openerp.glade:5328
 msgid "Phone number:"
-msgstr ""
+msgstr "Telefonski broj:"
 
 #: bin/openerp.glade:5341
 msgid "Emergency:"
-msgstr ""
+msgstr "Hitnost:"
 
 #: bin/openerp.glade:5355
 msgid ""
@@ -1727,338 +1769,335 @@ msgid ""
 "Urgent\n"
 "Very Urgent"
 msgstr ""
+"Nije hitno\n"
+"Srednje\n"
+"Hitno\n"
+"Vrlo hitno"
 
 #: bin/openerp.glade:5388
 msgid "<b>Support contract id:</b>"
-msgstr ""
+msgstr "<b>Šifra ugovora za podršku:</b>"
 
 #: bin/openerp.glade:5445
 msgid "Other comments:"
-msgstr ""
+msgstr "Ostali komentari:"
 
 #: bin/openerp.glade:5459
 msgid "Explain your problem:"
-msgstr ""
+msgstr "Objasnite vaš problem:"
 
 #: bin/openerp.glade:5498
 msgid "<b>Your email:</b>"
-msgstr ""
+msgstr "<b>Vaš email:</b>"
 
 #: bin/openerp.glade:5512
 msgid "<b>Your Company:</b>"
-msgstr ""
+msgstr "<b>Vaša tvrtka:</b>"
 
 #: bin/openerp.glade:5526
 msgid "<b>Your name:</b>"
-msgstr ""
+msgstr "<b>Vaše ime:</b>"
 
 #: bin/openerp.glade:5679
 msgid "Keyboard shortcuts"
-msgstr "Gyorsbillentyűk"
+msgstr "Prečaci tipkovnice"
 
 #: bin/openerp.glade:5701
 msgid "<b>Shortcuts for OpenERP</b>"
-msgstr "<b>OpenERP gyorsbillenytűi</b>"
+msgstr "<b>Prečaci za OpenERP</b>"
 
 #: bin/openerp.glade:5715
 msgid "Close window without saving"
-msgstr "Ablak bezárása mentés nélkül"
+msgstr "zatvori prozor bez spremanja"
 
 #: bin/openerp.glade:5730
 msgid "<Ctrl> + <Esc>"
-msgstr ""
+msgstr "<Ctrl> + <Esc>"
 
 #: bin/openerp.glade:5744
 msgid "<i>When editing a resource in a popup window</i>"
-msgstr "<i>Felugró ablakban szerkesztés közben</i>"
+msgstr "<i>Kada obrađujete stavku u skočnom prozoru</i>"
 
 #: bin/openerp.glade:5760
 msgid "Save and Close window"
-msgstr "Mentés és ablak bezárása"
+msgstr "Spremi i zatvori prozor"
 
 #: bin/openerp.glade:5775
 msgid "<Ctrl> + <Enter>"
-msgstr ""
+msgstr "<Ctrl> + <Enter>"
 
 #: bin/openerp.glade:5788
 msgid "Switch view mode"
-msgstr "Lista/űrlap váltás"
+msgstr "Prebaci način prikaza"
 
 #: bin/openerp.glade:5803
 msgid "<Ctrl> + L"
-msgstr ""
+msgstr "<Ctrl> + L"
 
 #: bin/openerp.glade:5816
 msgid "Next record"
-msgstr "Következő rekord"
+msgstr "Sljedeći zapis"
 
 #: bin/openerp.glade:5831
 msgid "Previous record"
-msgstr "Előző rekord"
+msgstr "Prethodni zapis"
 
 #: bin/openerp.glade:5846
 msgid "<PgDn>"
-msgstr ""
+msgstr "<PgDn>"
 
 #: bin/openerp.glade:5859
 msgid "<PgUp>"
-msgstr ""
+msgstr "<PgUp>"
 
-#
-# File: bin/openerp.glade, line: 5887
 #: bin/openerp.glade:5887
 msgid "Save"
-msgstr "Mentés"
+msgstr "Spremi"
 
 #: bin/openerp.glade:5902
 msgid "<Ctrl> + W"
-msgstr ""
+msgstr "<Ctrl> + W"
 
 #: bin/openerp.glade:5915
 msgid "<Ctrl> + S"
-msgstr ""
+msgstr "<Ctrl> + S"
 
 #: bin/openerp.glade:5943
 msgid "<Ctrl> + <PgDn>"
-msgstr ""
+msgstr "<Ctrl> + <PgDn>"
 
 #: bin/openerp.glade:5956
 msgid "Previous tab"
-msgstr "Előző lap"
+msgstr "Prethodna kartica"
 
 #: bin/openerp.glade:5971
 msgid "<Ctrl> + <PgUp>"
-msgstr ""
+msgstr "<Ctrl> + <PgUp>"
 
-#
-# File: bin/openerp.glade, line: 5984
 #: bin/openerp.glade:5984
 msgid "New"
-msgstr "Új"
+msgstr "Novi"
 
 #: bin/openerp.glade:5999
 msgid "<Ctrl> + N"
-msgstr ""
+msgstr "<Ctrl> + N"
 
-#
-# File: bin/openerp.glade, line: 6012
 #: bin/openerp.glade:6012
 msgid "Delete"
-msgstr "Törlés"
+msgstr "Izbriši"
 
 #: bin/openerp.glade:6027
 msgid "<Ctrl> + D"
-msgstr ""
+msgstr "<Ctrl> + D"
 
 #: bin/openerp.glade:6040
 msgid "Find / Search"
-msgstr "Keresés"
+msgstr "Pretraga"
 
 #: bin/openerp.glade:6055
 msgid "<Ctrl> + F"
-msgstr ""
+msgstr "<Ctrl> + F"
 
 #: bin/openerp.glade:6068
 msgid "Connect"
-msgstr "Csatlakozás"
+msgstr "Poveži"
 
 #: bin/openerp.glade:6083
 msgid "<Ctrl> + O"
-msgstr ""
+msgstr "<Ctrl> + O"
 
 #: bin/openerp.glade:6097
 msgid "Main Shortcuts"
-msgstr "Főbb gyorsbillentyűk"
+msgstr "Glavni prečaci"
 
 #: bin/openerp.glade:6114
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
 #: bin/openerp.glade:6127
 msgid "<b>Shortcuts in relation fields</b>"
-msgstr "<b>Kapcsolatmezők gyorsbillentyűi</b>"
+msgstr "<b>Prečaci u povezanim poljima</b>"
 
 #: bin/openerp.glade:6142
 msgid "<b>Shortcuts in text entries</b>"
-msgstr "<b>Szövegbevitel gyorsbillentyűi</b>"
+msgstr "<b>Prečaci u tekstualnim stavkama</b>"
 
 #: bin/openerp.glade:6155
 msgid "Open current field"
-msgstr "Kapcsolódó mező keresése"
+msgstr "Otvori tekuće polje"
 
 #: bin/openerp.glade:6170
 msgid "Add a new line/field"
-msgstr "Új kapcsolódó rekord létrehozása"
+msgstr "Dodaju novu liniju/polje"
 
 #: bin/openerp.glade:6185
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: bin/openerp.glade:6198
 msgid "Auto-Complete text field"
-msgstr "Szövegmező automatikus kiegészítése"
+msgstr "Tekst polje sa samozavršetkom"
 
 #: bin/openerp.glade:6213
 msgid "<Enter>"
-msgstr ""
+msgstr "<Enter>"
 
 #: bin/openerp.glade:6226
 msgid "Previous editable widget"
-msgstr "Előző szerkeszthető mező"
+msgstr "Prethodna obradiva kontrola"
 
 #: bin/openerp.glade:6241
 msgid "<Shist> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.glade:6254
 msgid "Next editable widget"
-msgstr "Következő szerkeszthető mező"
+msgstr "Sljedeća obradiva kontrola"
 
 #: bin/openerp.glade:6269
 msgid "<Tab>"
-msgstr ""
+msgstr "<Tab>"
 
 #: bin/openerp.glade:6282
 msgid "Paste selected text"
-msgstr "Kijelölt szöveg beillesztése"
+msgstr "Zalijepi odabrani tekst"
 
 #: bin/openerp.glade:6297
 msgid "Copy selected text"
-msgstr "Kijelölt szöveg másolása"
+msgstr "Kopiraj odabrani tekst"
 
 #: bin/openerp.glade:6312
 msgid "Cut selected text"
-msgstr "Kijelölt szöveg kivágása"
+msgstr "Izreži odabrani tekst"
 
 #: bin/openerp.glade:6327
 msgid "<Ctrl> + V"
-msgstr ""
+msgstr "<Ctrl> + V"
 
 #: bin/openerp.glade:6340
 msgid "<Ctrl> + C"
-msgstr ""
+msgstr "<Ctrl> + C"
 
 #: bin/openerp.glade:6353
 msgid "<Ctrl> + X"
-msgstr ""
+msgstr "<Ctrl> + X"
 
 #: bin/openerp.glade:6370
 msgid "Edition Widgets"
-msgstr "Szerkesztés közben"
+msgstr "Kontrole za izmjene"
 
 #: bin/openerp.glade:6408
 msgid "Import from CSV"
-msgstr ""
+msgstr "Uvezi iz CSV"
 
-#
-# File: bin/openerp.glade, line: 6453
 #: bin/openerp.glade:6453
 msgid "<b>All fields</b>"
-msgstr "<b>Minden mező</b>"
+msgstr "<b>Sva polja</b>"
 
 #: bin/openerp.glade:6590
 msgid "N_othing"
-msgstr ""
+msgstr "N_išta"
 
 #: bin/openerp.glade:6649
 msgid "Auto-Detect"
-msgstr ""
+msgstr "Auto-detekcija"
 
-#
-# File: bin/openerp.glade, line: 6704
 #: bin/openerp.glade:6704
 msgid "<b>Fields to import</b>"
-msgstr "<b>Importálandó mezők</b>"
+msgstr "<b>Polja za uvoz</b>"
 
 #: bin/openerp.glade:6739
 msgid "File to Import:"
-msgstr ""
+msgstr "Datoteka za uvoz:"
 
 #: bin/openerp.glade:6813
 msgid "Lines to Skip:"
-msgstr ""
+msgstr "Linije za preskočiti:"
 
 #: bin/openerp.glade:6842
 msgid "Text Delimiter:"
-msgstr ""
+msgstr "Tekstualni graničnik:"
 
 #: bin/openerp.glade:6870
 msgid "Encoding:"
-msgstr ""
+msgstr "Kodiranje:"
 
 #: bin/openerp.glade:6883
 msgid "Field Separater:"
-msgstr ""
+msgstr "Razdjelnik polja:"
 
 #: bin/openerp.glade:6895
 msgid "CSV Parameters"
-msgstr ""
+msgstr "CSV parametri"
 
 #: bin/openerp.glade:6974
 msgid "OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #: bin/openerp.glade:7070
 msgid "Server"
-msgstr ""
+msgstr "Poslužitelj"
 
 #: bin/openerp.glade:7080
 msgid "<b>Connect to a OpenERP server</b>"
-msgstr "<b>Csatlakozás OpenERP szerverhez</b>"
+msgstr "<b>Povezivanje na OpenERP poslužitelj</b>"
 
 #: bin/openerp.glade:7139
 msgid "Protocol connection:"
-msgstr "Protokoll:"
+msgstr "Protokol povezivanja:"
 
 #: bin/openerp.glade:7185
 msgid "Port:"
-msgstr ""
+msgstr "Port:"
 
 #: bin/openerp.glade:7237
 msgid "Choose a database..."
-msgstr ""
+msgstr "Odaberite bazu podataka..."
 
 #: bin/openerp.glade:7252
 msgid "<b>Backup a database</b>"
-msgstr ""
+msgstr "<b>Stvori sigurnosnu kopiju baze podataka</b>"
 
 #: bin/openerp.glade:7483
 msgid "Restore a database"
-msgstr ""
+msgstr "Obnovi bazu podataka iz sigurnosne kopije"
 
 #: bin/openerp.glade:7496
 msgid "<b>Restore a database</b>"
-msgstr ""
+msgstr "<b>Obnovi bazu podataka iz sigurnosne kopije</b>"
 
 #: bin/openerp.glade:7540
 msgid "(must not contain any special char)"
-msgstr ""
+msgstr "(ne smije sadržavati specijalne znakove)"
 
 #: bin/openerp.glade:7569
 msgid "New database name:"
-msgstr ""
+msgstr "Naziv nove baze podataka:"
 
 #: bin/openerp.glade:7669 bin/openerp.glade:7815 bin/openerp.glade:8314
 msgid "http://localhost:8069"
-msgstr ""
+msgstr "http://localhost:8069"
 
 #: bin/openerp.glade:7743
 msgid "Create a new database"
-msgstr ""
+msgstr "Stvori novu bazu podataka"
 
 #: bin/openerp.glade:7756
 msgid "<b>Create a new database</b>"
-msgstr ""
+msgstr "<b>Stvori novu bazu podatakan</b>"
 
 #: bin/openerp.glade:7827
 msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
+"Ovo je URL OpenERP poslužitelja. Koristite 'localhost' ako je server "
+"instaliran na ovom računalu. Kliknite na 'Izmjena' da biste promjenili "
+"adresu."
 
 #: bin/openerp.glade:7831
 msgid "OpenERP Server:"
-msgstr ""
+msgstr "OpenERP poslužitelj:"
 
 #: bin/openerp.glade:7861
 msgid ""
@@ -2066,24 +2105,29 @@ msgid ""
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
+"Ovo je lozinka korisnika koji ima prava za administraciju baza podataka. Ovo "
+"nije OpenERP korisnik, nego samo super administrator. Ako ju niste mjenjali, "
+"lozinka je admin nakon instalacije."
 
 #: bin/openerp.glade:7865
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "Lozinka super administratora:"
 
 #: bin/openerp.glade:7897
 msgid "(<i>admin</i>, by default)"
-msgstr ""
+msgstr "(<i>admin</i> zadano)"
 
 #: bin/openerp.glade:7962
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
+"Odaberite naziv baze podataka koja biti stvorena. Ime ne smije sadržavati "
+"specijalne znakove. Primjer: 'terp'."
 
 #: bin/openerp.glade:7964
 msgid "New Database Name:"
-msgstr ""
+msgstr "Naziv nove baze podataka:"
 
 #: bin/openerp.glade:7988
 msgid ""
@@ -2091,30 +2135,37 @@ msgid ""
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
+"Odaberi zadani jezik koji će biti instaliran za ovu bazu podataka. Bit ćete "
+"u stanju instalirati nove jezike nakon instalacije putem administratorskog "
+"izbornika."
 
 #: bin/openerp.glade:7990
 msgid "Default Language:"
-msgstr ""
+msgstr "Zadani jezik:"
 
 #: bin/openerp.glade:8003
 msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
 "new database."
 msgstr ""
+"Ovo je lozinka '<i>admin</i>' korisnika koji će biti stvoren u vašoj novoj "
+"bazi."
 
 #: bin/openerp.glade:8005
 msgid "Administrator Password:"
-msgstr ""
+msgstr "Adminstratorska lozinka:"
 
 #: bin/openerp.glade:8017
 msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
 "new database. It has to be the same than the above field."
 msgstr ""
+"Ovo je loizinka '<i>admin</i>' korisnika koji će biti stvoren u vašoj novoj "
+"bazi. Mora biti ista kao i u polju iznad."
 
 #: bin/openerp.glade:8019
 msgid "Confirm Password:"
-msgstr ""
+msgstr "Potvrdite lozinku:"
 
 #: bin/openerp.glade:8110
 msgid ""
@@ -2122,42 +2173,45 @@ msgid ""
 "database. These data will help you to understand OpenERP, with predefined "
 "products, partners, etc."
 msgstr ""
+"Zakačite ovu kućicu ako želite instalirati demonstracijske podatke u vašu "
+"novu bazu. Ovi podatci će vam pomoći u razumijevanju OpenERP-a, sa "
+"predefiniranim artiklima, partnerima, itd."
 
 #: bin/openerp.glade:8113
 msgid "Load Demonstration Data:"
-msgstr ""
+msgstr "Učitaj demonstracijske podatke:"
 
 #: bin/openerp.glade:8170
 msgid "Change password"
-msgstr ""
+msgstr "Promjeni lozinku"
 
 #: bin/openerp.glade:8187
 msgid "<b>Change your super admin password</b>"
-msgstr ""
+msgstr "<b>Izmjenite lozinku super administratora</b>"
 
 #: bin/openerp.glade:8340
 msgid "Old password:"
-msgstr ""
+msgstr "Stara lozinka:"
 
 #: bin/openerp.glade:8353
 msgid "New password:"
-msgstr ""
+msgstr "Nova lozinka:"
 
 #: bin/openerp.glade:8366
 msgid "New password confirmation:"
-msgstr ""
+msgstr "Potvrda nove lozinke:"
 
 #: bin/openerp.glade:8425
 msgid "OpenERP Message"
-msgstr ""
+msgstr "OpenERP Poruka"
 
 #: bin/openerp.glade:8504
 msgid "Database creation"
-msgstr ""
+msgstr "Stvaranje baze podataka"
 
 #: bin/openerp.glade:8537
 msgid "<b>Database created successfully!</b>"
-msgstr ""
+msgstr "<b>Baza podataka uspješno stvorena!</b>"
 
 #: bin/openerp.glade:8569
 msgid ""
@@ -2165,14 +2219,17 @@ msgid ""
 "\n"
 "    Administrator: admin / admin "
 msgstr ""
+"Možete se spojiti na novu bazu podataka korištenjem sljedećeg računa:\n"
+"\n"
+"    Administrator: admin/admin "
 
 #: bin/openerp.glade:8697
 msgid "Extension Manager"
-msgstr "Kiegészítés kezelő"
+msgstr "Upravitelj dodataka"
 
 #: bin/openerp.glade:8801
 msgid "Concurrency exception"
-msgstr "Egyidejűségi hiba"
+msgstr "Podatci izmjenjeni na drugoj radnoj stanici"
 
 #: bin/openerp.glade:8826
 msgid ""
@@ -2186,53 +2243,53 @@ msgid ""
 "   - \"Write anyway\" to save your current version.\n"
 msgstr ""
 "<b>\n"
-"Figyelem, egyszerre többen akarják ugyanazt menteni:\n"
-"</b>\n"
-"Ezt a rekordot valaki a közben mentette el, míg ön dolgozott rajta.\n"
-"  Válasszon:\n"
-"   - \"Mégsem\" hogy elálljon a mentéstől.\n"
-"   - \"Összehasonlítás\" hogy lássa a módosított változatot.\n"
-"   - \"Felülírás\" hogy az ön változata kerüljön mentésre.\n"
+"Upozorenje prilikom spremanja:\n"
+"<b>\n"
+"Tekući dokument je izmjenjen na drugoj radnoj stanici za vrijeme obrade.\n"
+"  Odaberite:\n"
+"   - \"Odustani\" da biste odustali od spremanja.\n"
+"   - \"Usporedi\" da biste vidjeli izmjenjenu verziju.\n"
+"   - \"Spremi svakako\" da biste spremili vašu tekuću verziju.\n"
 
 #: bin/openerp.glade:8889
 msgid "Compare"
-msgstr "Összehasonlítás"
+msgstr "Usporedi"
 
 #: bin/openerp.glade:8935
 msgid "Write anyway"
-msgstr "Felülírás"
+msgstr "Spremi svakako"
 
 #: bin/openerp.glade:8964
 msgid "window1"
-msgstr ""
+msgstr "prozor1"
 
 #: bin/openerp.glade:9036
 msgid "Today"
-msgstr "Ma"
+msgstr "Danas"
 
 #: bin/openerp.glade:9082
 msgid "September 2008"
-msgstr ""
+msgstr "Rujan 2008"
 
 #: bin/openerp.glade:9096
 msgid "Day"
-msgstr "Nap"
+msgstr "Dan"
 
 #: bin/openerp.glade:9120
 msgid "Month"
-msgstr "Hónap"
+msgstr "Mjesec"
 
 #: bin/win_error.glade:40
 msgid "label"
-msgstr ""
+msgstr "oznaka"
 
 #: bin/win_error.glade:102
 msgid "Click here for details about the maintenance proposition"
-msgstr ""
+msgstr "Kliknite ovdje za detalje o prijedlogu održavanja"
 
 #: bin/win_error.glade:119
 msgid "<i>_Maintenance</i>"
-msgstr ""
+msgstr "<i>_Održavanje</i>"
 
 #: bin/win_error.glade:150
 msgid ""
@@ -2242,31 +2299,35 @@ msgid ""
 "shortly.\n"
 "</i>"
 msgstr ""
+"<b>Ugovor za održavanje.</b>\n"
+"<i>\n"
+"Vaši zahtjevi će biti poslani OpenERP-u, te će vam se uskoro javiti tim za "
+"održavanje."
 
 #: bin/win_error.glade:184
 msgid "Explain what you did:"
-msgstr ""
+msgstr "Opišite što ste radili:"
 
 #: bin/win_error.glade:196
 msgid "Others Comments:"
-msgstr ""
+msgstr "Ostali komentari:"
 
 #: bin/win_error.glade:278
 msgid "Send to Maintenance Team"
-msgstr ""
+msgstr "Pošalji timu za održavanje"
 
 #: bin/win_error.glade:326
 msgid "<i>_Support Request</i>"
-msgstr ""
+msgstr "<i>_Zahtjev za podršku</i>"
 
 #: bin/win_error.glade:353
 msgid "Details"
-msgstr "Részletek"
+msgstr "Detalji"
 
 #: bin/win_error.glade:369
 msgid "<i>_Details</i>"
-msgstr ""
+msgstr "<i>_Detalji</i>"
 
 #: bin/win_error.glade:398
 msgid "gtk-close"
-msgstr ""
+msgstr "gtk-zatvori"
