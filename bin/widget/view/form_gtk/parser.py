@@ -406,6 +406,7 @@ class parser_form(widget.view.interface.parser_interface):
             elif node.localName=='field':
                 name = str(attrs['name'])
                 del attrs['name']
+                name = unicode(name)
                 type = attrs.get('widget', fields[name]['type'])
                 fields[name].update(attrs)
                 fields[name]['model']=model

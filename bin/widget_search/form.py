@@ -113,7 +113,7 @@ class parse(object):
             self.title = attrs.get('string','Form')
             self.container.new(self.col)
         elif name=='field':
-            val  = attrs.get('select', False) or self.fields[str(attrs['name'])].get('select', False)
+            val  = attrs.get('select', False) or self.fields[unicode(attrs['name'])].get('select', False)
             if val:
                 if int(val) <= 1:
                     self.add_widget(name, attrs, val)

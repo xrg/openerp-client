@@ -348,7 +348,7 @@ class Screen(signal_event.signal_event):
                         if attrs['widget']=='one2many_list':
                             attrs['widget']='one2many'
                         attrs['type'] = attrs['widget']
-                    fields[str(attrs['name'])].update(attrs)
+                    fields[unicode(attrs['name'])].update(attrs)
             for node2 in node.childNodes:
                 _parse_fields(node2, fields)
         dom = xml.dom.minidom.parseString(arch)
