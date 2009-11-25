@@ -1,0 +1,2333 @@
+# Finnish translation for openobject-client
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the openobject-client package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openobject-client\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-12-31 14:42+0100\n"
+"PO-Revision-Date: 2009-10-07 05:49+0000\n"
+"Last-Translator: Ville Liski <Unknown>\n"
+"Language-Team: Finnish <fi@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-11-25 04:47+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: bin/widget_search/reference.py:74 bin/widget_search/spinint.py:73
+#: bin/widget_search/spinbutton.py:69 bin/widget_search/calendar.py:117
+#: bin/widget_search/char.py:47 bin/widget_search/checkbox.py:55
+msgid "The content of the widget or ValueError if not valid"
+msgstr "Widgetin tai ValueError:n sisältö jos ei validi"
+
+#: bin/widget_search/wid_int.py:44
+msgid "The content of the widget or excpetion if not valid"
+msgstr "Widgetin tai poikkeuksen sisältö jos ei validi"
+
+#: bin/widget_search/date_widget.py:65
+#: bin/widget/view/form_gtk/date_widget.py:65
+msgid ""
+"You can use special operation by pressing +, - or =.  Plus/minus "
+"adds/decrease the variable to the current selected date. Equals set part of "
+"selected date. Available variables: 12h = 12 hours, 8d = 8 days, 4w = 4 "
+"weeks, 1m = 1 month, 2y = 2 years. Some examples:\n"
+"* +21d : adds 21 days to selected year\n"
+"* =23w : set date to the 23th week of the year\n"
+"* -4m : decrease 4 months to the current date\n"
+"You can also use \"=\" to set the date to the current date/time and '-' to "
+"clear the field."
+msgstr ""
+"Voit käyttää erikoisoperaatiota painamalla +, - tai =. Plus/miinus "
+"lisää/vähentää muuttujaa valitussa päiväyksessä. Yhtäkuin merkki asettaa "
+"osan valitusta päiväyksestä. Muuttuja: 12h = 12 tuntia, 8d = 8 päivää, 4w = "
+"4 viikkoa, 1m = 1 kuukausi, 2y = 2 vuotta. Esimerkkejä:\n"
+"* +21d: lisää 21 päivää valittuun vuoteen\n"
+"* =23w: asettaa päiväyksen vuoden 23:lle viikolle\n"
+"* -4m: vähentää 4 kuukautta valitusta vuodesta\n"
+"Voit myös käyttää \"=\" -merkkiä asettaaksesi päiväyksen tälle hetkelle ja "
+"\"-\" -merkkiä tyhjentääksesi kentän."
+
+#: bin/widget_search/calendar.py:55
+msgid "Start date"
+msgstr "Aloituspäivämäärä"
+
+#: bin/widget_search/calendar.py:59 bin/widget_search/calendar.py:79
+#: bin/widget/view/form_gtk/calendar.py:63
+#: bin/widget/view/form_gtk/calendar.py:176
+msgid "Open the calendar widget"
+msgstr "Avaa kalenteri widgetti"
+
+#: bin/widget_search/calendar.py:75
+msgid "End date"
+msgstr "Loppupäivämäärä"
+
+#: bin/widget_search/calendar.py:120 bin/widget/view/form_gtk/calendar.py:133
+#: bin/widget/view/form_gtk/calendar.py:263
+msgid "OpenERP - Date selection"
+msgstr "OpenERP - Päiväyksen valinta"
+
+#: bin/widget_search/form.py:145
+msgid "Limit :"
+msgstr "Raja:"
+
+#: bin/widget_search/form.py:154
+msgid "Offset :"
+msgstr "Siirros:"
+
+#: bin/widget_search/form.py:193
+msgid "Parameters :"
+msgstr "Parametrit:"
+
+#: bin/widget_search/form.py:301
+msgid "The content of the form or exception if not valid"
+msgstr "Lomakkeen tai poikkeuksen sisältö jos ei validi"
+
+#: bin/widget_search/checkbox.py:36 bin/widget_search/checkbox.py:49
+msgid "Yes"
+msgstr "Kyllä"
+
+#: bin/widget_search/checkbox.py:37
+msgid "No"
+msgstr "Ei"
+
+#: bin/widget/view/graph_gtk/parser.py:65
+msgid "Can not generate graph !"
+msgstr "Kuvaajaa ei voi luoda!"
+
+#: bin/widget/view/widget_parse.py:53
+#, python-format
+msgid "This type (%s) is not supported by the GTK client !"
+msgstr "Tämä tyyppi (%s) ei ole tuettu GTK pääteohjelmassa!"
+
+#: bin/widget/view/widget_parse.py:63
+msgid "No valid view found for this object!"
+msgstr "Näkymää ei löytynyt tälle objektille!"
+
+#: bin/widget/view/gantt_gtk/parser_dummy.py:31
+msgid "Gantt view not yet implemented !"
+msgstr "Gantt näkymä ei ole vielä tehty!"
+
+#: bin/widget/view/gantt_gtk/parser_dummy.py:32
+msgid ""
+"The gantt view is not available in this GTK Client, you should use the web "
+"interface or switch to the calendar view."
+msgstr ""
+"Gantt näkymä ei ole käytettävissä GTK pääteohjelmassa, käytä web-"
+"käyttöliittymää tai vaihda kalenterinäkymään."
+
+#: bin/widget/view/tree_gtk/date_renderer.py:200
+msgid ""
+"Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."
+msgstr ""
+"Paina <i>'+'</i>, <i>'-'</i> tai <i>'='</i> suorittaaksesi erityisiä "
+"operaatioita päiväykselle."
+
+#: bin/widget/view/tree_gtk/editabletree.py:125
+#, python-format
+msgid "Shortcut: %s"
+msgstr "Oikotie: %s"
+
+#: bin/widget/view/tree_gtk/editabletree.py:125
+msgid "F1 New - F2 Open/Search"
+msgstr "F1 Uusi - F2 Avaa/Haku"
+
+#: bin/widget/view/tree_gtk/editabletree.py:190
+#, python-format
+msgid "Warning; field %s is required!"
+msgstr "Varoitus; kenttä %s on pakollinen!"
+
+#: bin/widget/view/form.py:170
+msgid "You must save this record to use the relate button !"
+msgstr "Tallenna tietue ennenkuin käytät liitä-nappia!"
+
+#: bin/widget/view/form.py:182
+msgid "You must select a record to use the relate button !"
+msgstr "Valitse tietue johon käytät liitä-nappia!"
+
+#: bin/widget/view/form.py:200 bin/widget/view/form_gtk/parser.py:496
+#: bin/widget/view/form_gtk/parser.py:653
+#: bin/widget/view/form_gtk/parser.py:710
+msgid "No other language available!"
+msgstr "Ei muita kieliä käytettävissä!"
+
+#: bin/widget/view/form.py:207 bin/widget/view/form_gtk/parser.py:555
+#: bin/widget/view/form_gtk/parser.py:659
+#: bin/widget/view/form_gtk/parser.py:716
+msgid "Add Translation"
+msgstr "Lisää käännös"
+
+#: bin/widget/view/form.py:258 bin/widget/view/form_gtk/parser.py:772
+msgid "Translate label"
+msgstr "Käännä etiketti"
+
+#: bin/widget/view/form_gtk/reference.py:92 bin/openerp.glade:1214
+msgid "Create a new resource"
+msgstr "Luo uusi resurssi"
+
+#: bin/widget/view/form_gtk/reference.py:93
+msgid "Search / Open a resource"
+msgstr "Haku / Avaa resurssi"
+
+#: bin/widget/view/form_gtk/interface.py:47
+#: bin/widget/view/form_gtk/one2many_list.py:148
+msgid "Set to default value"
+msgstr "Aseta oletusarvoon"
+
+#: bin/widget/view/form_gtk/interface.py:48
+msgid "Set as default"
+msgstr "Aseta oletusarvoksi"
+
+#: bin/widget/view/form_gtk/parser.py:61
+msgid "Wrong icon for the button !"
+msgstr "Väärä ikoni napille!"
+
+#: bin/widget/view/form_gtk/parser.py:134 bin/modules/gui/window/form.py:283
+msgid "Invalid form, correct red fields !"
+msgstr "Virheellinen lomake, korjaa punaiset kentät!"
+
+#: bin/widget/view/form_gtk/parser.py:486
+msgid "You need to save resource before adding translations!"
+msgstr "Tallenna resurssi ennen käännöksen lisäämistä!"
+
+#: bin/widget/view/form_gtk/parser.py:778
+msgid "Translate view"
+msgstr "Käännä näkymä"
+
+#: bin/widget/view/form_gtk/image.py:70
+msgid "Set Image"
+msgstr "Aseta kuva"
+
+#: bin/widget/view/form_gtk/image.py:79 bin/widget/view/form_gtk/binary.py:85
+msgid "Save As"
+msgstr "Tallenna nimellä"
+
+#: bin/widget/view/form_gtk/image.py:88 bin/widget/view/form_gtk/binary.py:89
+msgid "Clear"
+msgstr "Tyhjennä"
+
+#: bin/widget/view/form_gtk/image.py:100
+msgid "All files"
+msgstr "Kaikki tiedostot"
+
+#: bin/widget/view/form_gtk/image.py:104
+msgid "Images"
+msgstr "Kuvat"
+
+#: bin/widget/view/form_gtk/image.py:110 bin/widget/view/form_gtk/url.py:112
+#: bin/modules/gui/main.py:1065 bin/openerp.glade:6749
+msgid "Open..."
+msgstr "Avaa..."
+
+#: bin/widget/view/form_gtk/image.py:117
+#: bin/widget/view/form_gtk/binary.py:162 bin/modules/gui/main.py:1136
+#: bin/modules/gui/window/win_export.py:282 bin/printer/printer.py:207
+msgid "Save As..."
+msgstr "Tallenna nimellä..."
+
+#: bin/widget/view/form_gtk/wid_common.py:60
+msgid "Always applicable !"
+msgstr "Aina soveltuva!"
+
+#: bin/widget/view/form_gtk/binary.py:77
+msgid "Select"
+msgstr "Valitse"
+
+#: bin/widget/view/form_gtk/binary.py:81
+msgid "Open"
+msgstr "Avaa"
+
+#: bin/widget/view/form_gtk/binary.py:114
+#: bin/widget/view/form_gtk/binary.py:158
+msgid "Unable to read the file data"
+msgstr "Tiedoston lukeminen epäonnistui"
+
+#: bin/widget/view/form_gtk/binary.py:124
+#: bin/widget/view/form_gtk/binary.py:150
+#, python-format
+msgid "Error reading the file: %s"
+msgstr "Virhe luettaessa tiedostoa: %s"
+
+#: bin/widget/view/form_gtk/binary.py:133
+msgid "All Files"
+msgstr "Kaikki tiedostot"
+
+#: bin/widget/view/form_gtk/binary.py:143
+msgid "Select a file..."
+msgstr "Valitse tiedosto..."
+
+#: bin/widget/view/form_gtk/binary.py:172
+#, python-format
+msgid "Error writing the file: %s"
+msgstr "Virhe kirjoitettaessa tiedostoa: %s"
+
+#: bin/widget/view/form_gtk/calendar.py:127
+#: bin/widget/view/form_gtk/calendar.py:260
+msgid "This widget is readonly !"
+msgstr "Tämä widgetti on vainluku tilassa!"
+
+#: bin/widget/view/form_gtk/calendar.py:269
+msgid "Hour:"
+msgstr "Tunti:"
+
+#: bin/widget/view/form_gtk/calendar.py:272
+msgid "Minute:"
+msgstr "Minuutti:"
+
+#: bin/widget/view/form_gtk/many2one.py:146
+msgid "Open this resource"
+msgstr "Avaa tämä resurssi"
+
+#: bin/widget/view/form_gtk/many2one.py:160
+msgid "Search a resource"
+msgstr "Hae resurssi"
+
+#: bin/widget/view/form_gtk/many2one.py:171 bin/openerp.glade:1356
+msgid "Action"
+msgstr "Toiminto"
+
+#: bin/widget/view/form_gtk/many2one.py:172
+msgid "Report"
+msgstr "Raportti"
+
+#: bin/widget/view/form_gtk/many2one.py:372 bin/widget/view/list.py:274
+msgid "You must select a record to use the relation !"
+msgstr "Valitse tietue käyttääksesi relaatiota!"
+
+#: bin/widget/view/form_gtk/one2many_list.py:51
+#: bin/modules/gui/window/win_search.py:50
+msgid "OpenERP - Link"
+msgstr "OpenERP - Linkki"
+
+#: bin/widget/view/form_gtk/one2many_list.py:151
+msgid "Set Default"
+msgstr "Aseta oletus"
+
+#: bin/widget/view/form_gtk/one2many_list.py:162
+msgid "Create a new entry"
+msgstr "Luo uusi merkintä"
+
+#: bin/widget/view/form_gtk/one2many_list.py:172
+msgid "Edit this entry"
+msgstr "Muokkaa tätä merkintää"
+
+#: bin/widget/view/form_gtk/one2many_list.py:182
+msgid "Remove this entry"
+msgstr "Poista tämä merkintä"
+
+#: bin/widget/view/form_gtk/one2many_list.py:194
+msgid "Previous"
+msgstr "Edellinen"
+
+#: bin/widget/view/form_gtk/one2many_list.py:207
+msgid "Next"
+msgstr "Seuraava"
+
+#: bin/widget/view/form_gtk/one2many_list.py:219
+msgid "Switch"
+msgstr "Vaihda"
+
+#: bin/widget/view/form_gtk/one2many_list.py:269
+msgid "You have to select a resource !"
+msgstr "Valitse resurssi!"
+
+#: bin/widget/view/calendar_gtk/parser_dummy.py:31
+msgid "Calendar View Error !"
+msgstr "Kalenteri näkymä virhe!"
+
+#: bin/widget/view/calendar_gtk/parser_dummy.py:32
+msgid "You must intall the library python-hippocanvas to use calendars."
+msgstr ""
+"Sinun täytyy asentaa python-hippocanvas kirjasto käyttääksesi kalenteria."
+
+#: bin/widget/view/calendar_gtk/parser.py:239 bin/openerp.glade:9108
+msgid "Week"
+msgstr "Viikko"
+
+#: bin/common/common.py:186
+msgid ""
+"Thank you for the feedback !\n"
+"Your comments have been sent to OpenERP.\n"
+"You should now start by creating a new database or\n"
+"connecting to an existing server through the \"File\" menu."
+msgstr ""
+"Kiitos palautteesta!\n"
+"Kommenttisi on lähetetty OpenERP:lle.\n"
+"Aloita tekemällä uusi tietokanta tai\n"
+"ota yhteys olemassaolevaan palvelimeen \"Tiedosto\" valikosta."
+
+#: bin/common/common.py:193
+msgid ""
+"Thank you for testing OpenERP !\n"
+"You should now start by creating a new database or\n"
+"connecting to an existing server through the \"File\" menu."
+msgstr ""
+"Kiitos kun testasit OpenERP:iä!\n"
+"Aloita tekemällä uusi tietokanta tai\n"
+"ota yhteys olemassaolevaan palvelimeen \"Tiedosto\" valikosta."
+
+#: bin/common/common.py:298
+msgid "Support request sent !"
+msgstr "Tukipyyntö lähetetty!"
+
+#: bin/common/common.py:316
+msgid ""
+"\n"
+"<b>An unknown error has been reported.</b>\n"
+"\n"
+"<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+"If you are using Open ERP in production, it is highly suggested to "
+"subscribe\n"
+"a maintenance program.\n"
+"\n"
+"The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+"automatic migration system so that we can fix your problems within a few\n"
+"hours. If you had a maintenance contract, this error would have been sent\n"
+"to the quality team of the Open ERP editor.\n"
+"\n"
+"The maintenance program offers you:\n"
+"* Automatic migrations on new versions,\n"
+"* A bugfix guarantee,\n"
+"* Monthly announces of potential bugs and their fixes,\n"
+"* Security alerts by email and automatic migration,\n"
+"* Access to the customer portal.\n"
+"\n"
+"You can use the link bellow for more information. The detail of the error\n"
+"is displayed on the second tab.\n"
+msgstr ""
+"\n"
+"<b>Tuntematon virhe on raportoitu.</b>\n"
+"\n"
+"<b>Sinulle ei ole voimassaolevaa Open ERP huoltosopimusta!</b>\n"
+"Jos käytät Open ERP -ohjelmistoa tuotantokäytössä, on hyvin suositeltavaa "
+"ostaa\n"
+"huoltosopimus.\n"
+"\n"
+"Open ERP -huoltosopimus sisältää bugikorjaustakuun ja automatisoidun "
+"siirtymäjärjestelmän siten,\n"
+"että voimme korjata ongelman muutamassa tunnissa. Jos teillä on "
+"huoltosopimus, tämä virhe olisi\n"
+"lähetetty laadunvalvontaryhmälle.\n"
+"\n"
+"Huoltosopimus tarjoaa sinulle:\n"
+"* automaattisen siirtymisen uusiin versioihin\n"
+"* bugikorjaustakuun\n"
+"* kuukausittainen ilmoitus mahdollisista bugeista ja niiden korjauksista\n"
+"* tietoturvahälytykset sähköpostilla ja automaattisen siirtymisen\n"
+"* pääsyn asiakasportaaliin\n"
+"\n"
+"Käytä alla olevaa linkkiä saadaksesi lisätietoja. Virheen lisätiedot\n"
+"löytyvät seuraavasta välilehdestä.\n"
+
+#: bin/common/common.py:339
+#, python-format
+msgid ""
+"\n"
+"<b>An unknown error has been reported.</b>\n"
+"\n"
+"Your maintenance contract does not cover all modules installed in your "
+"system !\n"
+"If you are using Open ERP in production, it is highly suggested to upgrade "
+"your\n"
+"contract.\n"
+"\n"
+"If you have developped your own modules or installed third party module, we\n"
+"can provide you an additional maintenance contract for these modules. After\n"
+"having reviewed your modules, our quality team will ensure they will "
+"migrate\n"
+"automatically for all futur stable versions of Open ERP at no extra cost.\n"
+"\n"
+"Here is the list of modules not covered by your maintenance contract:\n"
+"%s\n"
+"\n"
+"You can use the link bellow for more information. The detail of the error\n"
+"is displayed on the second tab."
+msgstr ""
+"\n"
+"<b>Tuntematon virhe on raportoitu.</b>\n"
+"\n"
+"Huoltosopimuksesi ei kata kaikkia moduuleja, jotka ovat järjestelmäsi "
+"käytössä!\n"
+"Jos käytät Open ERP -ohjelmistoa tuotannossa, on hyvin suositeltavaa, että "
+"päivität\n"
+"huoltosopimuksesi.\n"
+"\n"
+"Jos olet kehittänyt omia moduuleja tai asentanut kolmannen osapuolen "
+"moduuleja,\n"
+"voimme tarjota sinulle huoltosopimuksen myös näille moduuleille. "
+"Moduuleiden\n"
+"tarkistamisen jälkeen laadunvalvontaryhmämme takaa, että ne siirtyvät "
+"automaattisesti\n"
+"kaikissa tulevaisuuden vakaissa Open ERP -ohjelmistoversioissa ilman "
+"lisämaksua.\n"
+"\n"
+"Alla lista moduuleista jotka eivät ole huoltosopimuksen piirissä:\n"
+"%s\n"
+"\n"
+"Käytä alla olevaa linkkiä saadaksesi lisätietoja. Virheen lisätiedot\n"
+"löytyvät seuraavasta välilehdestä."
+
+#: bin/common/common.py:390
+msgid ""
+"Your problem has been sent to the quality team !\n"
+"We will recontact you after analysing the problem."
+msgstr ""
+"Ongelmasi on lähetetty laadunvalvonta ryhmälle!\n"
+"Otamme yhteyttä kun olemme analysoineet ongelman."
+
+#: bin/common/common.py:392
+#, python-format
+msgid ""
+"Your problem could <u>NOT</u> be sent to the quality team !\n"
+"Please report this error manually at %s"
+msgstr ""
+"Ongelmaasi <u>EI</u> voitu lähettää laadunvalvonta ryhmälle!\n"
+"Raportoi tämä virhe manuaalisesti %s"
+
+#: bin/common/common.py:545
+msgid "Open with..."
+msgstr "Avaa sovelluksella..."
+
+#: bin/plugins/__init__.py:28
+msgid "Print Workflow"
+msgstr "Tulosta työnkulku"
+
+#: bin/plugins/__init__.py:29
+msgid "Print Workflow (Complex)"
+msgstr "Tulosta työnkulku (Monimutkainen)"
+
+#: bin/plugins/__init__.py:41
+msgid "No available plugin for this resource !"
+msgstr "Tälle resurssille ei löytynyt liitännäistä!"
+
+#: bin/plugins/__init__.py:43
+msgid "Choose a Plugin"
+msgstr "Valitse liitännäinen"
+
+#: bin/translate.py:183
+#, python-format
+msgid "Unable to set locale %s"
+msgstr "Lokalisointia %s ei voitu valita"
+
+#: bin/rpc.py:142 bin/modules/action/wizard.py:171
+msgid "Connection refused !"
+msgstr "Yhteyden muodostus evätty!"
+
+#: bin/rpc.py:143
+msgid "Connection refused!"
+msgstr "Yhteyden muodostus evätty!"
+
+#: bin/rpc.py:173
+msgid ""
+"Unable to reach to OpenERP server !\n"
+"You should check your connection to the network and the OpenERP server."
+msgstr ""
+"OpenERP palvelinta ei löytynyt!\n"
+"Tarkista verkkoasetuksesi ja/tai OpenERP palvelin."
+
+#: bin/rpc.py:173
+msgid "Connection Error"
+msgstr "Yhteysvirhe"
+
+#: bin/rpc.py:188 bin/rpc.py:190 bin/modules/action/wizard.py:183
+#: bin/modules/action/wizard.py:189 bin/modules/action/wizard.py:191
+msgid "Application Error"
+msgstr "Sovellusvirhe"
+
+#: bin/rpc.py:190 bin/modules/action/wizard.py:191
+msgid "View details"
+msgstr "Yksityiskohdat"
+
+#: bin/openerp-client.py:130
+msgid "Closing OpenERP, KeyboardInterrupt"
+msgstr "OpenERP sammutetaan, keskeytys näppäimistöltä"
+
+#: bin/options.py:107
+#, python-format
+msgid "OpenERP Client %s"
+msgstr "OpenERP pääte %s"
+
+#: bin/options.py:108
+msgid "specify alternate config file"
+msgstr "määritä vaihtoehtoinen konfigurointi tiedosto"
+
+#: bin/options.py:109
+msgid "enable basic debugging"
+msgstr "salli normaali debuggaus"
+
+#: bin/options.py:110
+msgid "specify channels to log"
+msgstr "määritä kanavat jotka menevät lokiin"
+
+#: bin/options.py:111
+msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+msgstr "määritä lokin taso: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+
+#: bin/options.py:112
+msgid "specify the user login"
+msgstr "määritä käyttäjäntunnistus"
+
+#: bin/options.py:113
+msgid "specify the server port"
+msgstr "määritä palvelimen portti"
+
+#: bin/options.py:114
+msgid "specify the server ip/name"
+msgstr "määritä palvelimen ip-osoite/nimi"
+
+#: bin/modules/gui/main.py:154
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: bin/modules/gui/main.py:158 bin/modules/gui/main.py:1157
+msgid "Could not connect to server !"
+msgstr "Ei voitu yhdistää palvelimeen!"
+
+#: bin/modules/gui/main.py:165 bin/modules/gui/main.py:1161
+msgid "No database found, you must create one !"
+msgstr "Tietokantaa ei löytynyt, sinun täytyy luoda tietokanta!"
+
+#: bin/modules/gui/main.py:178
+#, python-format
+msgid ""
+"The versions of the server (%s) and the client (%s) missmatch. The client "
+"may not work properly. Use it at your own risks."
+msgstr ""
+"Palvelimen (%s) ja päätteen (%s) versiot eivät täsmää. Voi olla, että pääte "
+"ei toimi oikein. Käyttö omalla vastuulla."
+
+#: bin/modules/gui/main.py:309
+msgid "Sorry,'"
+msgstr "Olen pahoillani,'"
+
+#: bin/modules/gui/main.py:309 bin/modules/gui/main.py:312
+msgid "Bad database name !"
+msgstr "Virheellinen tietokannan nimi!"
+
+#: bin/modules/gui/main.py:312
+msgid ""
+"The database name must contain only normal characters or \"_\".\n"
+"You must avoid all accents, space or special characters."
+msgstr ""
+"Tietokannan nimessä voi olla vain kirjoitusmerkkejä tai \"_\".\n"
+"Vältä muita erikois- ja välimerkkejä."
+
+#: bin/modules/gui/main.py:340
+msgid "OpenERP Database Installation"
+msgstr "OpenERP tietokannan asennus"
+
+#: bin/modules/gui/main.py:349
+msgid "<b>Operation in progress</b>"
+msgstr "<b>Operaatio käynnissä</b>"
+
+#: bin/modules/gui/main.py:353 bin/modules/action/wizard.py:147
+msgid ""
+"Please wait,\n"
+"this operation may take a while..."
+msgstr ""
+"Odota,\n"
+"tämä operaatio voi kestää..."
+
+#: bin/modules/gui/main.py:372 bin/modules/gui/main.py:374
+#: bin/modules/gui/main.py:376
+msgid "Could not create database."
+msgstr "Tietokannan luominen epäonnistui."
+
+#: bin/modules/gui/main.py:372
+msgid "Database already exists !"
+msgstr "Tietokanta on jo olemassa!"
+
+#: bin/modules/gui/main.py:374 bin/modules/gui/main.py:1060
+#: bin/modules/gui/main.py:1079 bin/modules/gui/main.py:1149
+msgid "Bad database administrator password !"
+msgstr "Tietokannan pääkäyttäjän salasana virheellinen!"
+
+#: bin/modules/gui/main.py:376 bin/modules/gui/main.py:383
+msgid "Error during database creation !"
+msgstr "Virhe tapahtui tietokantaa luodessa!"
+
+#: bin/modules/gui/main.py:383
+msgid ""
+"The server crashed during installation.\n"
+"We suggest you to drop this database."
+msgstr ""
+"Palvelin sammui virheen vuoksi asennuksen aikana.\n"
+"Suosittelemme poistamaan tietokannan."
+
+#: bin/modules/gui/main.py:401
+msgid "The following users have been installed on your database:"
+msgstr "Seuraavat käyttäjät on lisätty tietokantaan:"
+
+#: bin/modules/gui/main.py:401
+msgid "You can now connect to the database as an administrator."
+msgstr "Voit nyt kirjautua tietokantaan pääkäyttäjänä."
+
+#: bin/modules/gui/main.py:445 bin/modules/gui/main.py:775
+msgid "Press Ctrl+O to login"
+msgstr "Paina Ctrl+O kirjautuaksesi sisään"
+
+#: bin/modules/gui/main.py:617
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: bin/modules/gui/main.py:706
+#, python-format
+msgid "%s request(s)"
+msgstr "%s pyyntö(ä)"
+
+#: bin/modules/gui/main.py:708
+msgid "No request"
+msgstr "Ei pyyntöjä"
+
+#: bin/modules/gui/main.py:710
+#, python-format
+msgid " - %s request(s) sended"
+msgstr " - %s pyyntö(ä) lähetetty"
+
+#: bin/modules/gui/main.py:746
+msgid ""
+"Connection error !\n"
+"Unable to connect to the server !"
+msgstr ""
+"Yhteysvirhe!\n"
+"Palvelimeen ei voitu muodostaa yhteyttä!"
+
+#: bin/modules/gui/main.py:748
+msgid ""
+"Connection error !\n"
+"Bad username or password !"
+msgstr ""
+"Yhteysvirhe!\n"
+"Virheellinen käyttäjätunnus tai salasana!"
+
+#: bin/modules/gui/main.py:773
+msgid "Not logged !"
+msgstr "Et ole kirjautunut!"
+
+#: bin/modules/gui/main.py:849
+msgid ""
+"You can not log into the system !\n"
+"Ask the administrator to verify\n"
+"you have an action defined for your user."
+msgstr ""
+"Et voi kirjautua järjestelmään!\n"
+"Pyydä pääkäyttäjää varmistamaan,\n"
+"että käyttäjällesi on määritelty toiminto."
+
+#: bin/modules/gui/main.py:881 bin/modules/gui/main.py:888
+msgid "Do you really want to quit ?"
+msgstr "Oletko varma, että haluat lopettaa?"
+
+#: bin/modules/gui/main.py:943
+#, python-format
+msgid "Attachments (%d)"
+msgstr "Liitteet (%d)"
+
+#: bin/modules/gui/main.py:956
+msgid "Attachments"
+msgstr "Liitteet"
+
+#: bin/modules/gui/main.py:1051
+msgid "Delete a database"
+msgstr "Poista tietokanta"
+
+#: bin/modules/gui/main.py:1057
+msgid "Database dropped successfully !"
+msgstr "Tietokanta poistettu onnistuneesti!"
+
+#: bin/modules/gui/main.py:1060
+msgid "Could not drop database."
+msgstr "Tietokannan poistaminen epäonnistui."
+
+#: bin/modules/gui/main.py:1062
+msgid "Couldn't drop database"
+msgstr "Tietokannan poistaminen epäonnistui"
+
+#: bin/modules/gui/main.py:1076
+msgid "Database restored successfully !"
+msgstr "Tietokanta palautettu onnistuneesti!"
+
+#: bin/modules/gui/main.py:1079
+msgid "Could not restore database."
+msgstr "Tietokannan palautus epäonnistui."
+
+#: bin/modules/gui/main.py:1081
+msgid "Couldn't restore database"
+msgstr "Tietokannan palautus epäonnistui"
+
+#: bin/modules/gui/main.py:1114
+msgid ""
+"Confirmation password does not match new password, operation cancelled!"
+msgstr "Salasanat eivät täsmää, operaatio peruttu!"
+
+#: bin/modules/gui/main.py:1116
+msgid "Validation Error."
+msgstr "Oikeellisuuden tarkistuksesa tapahtui virhe."
+
+#: bin/modules/gui/main.py:1124
+msgid "Could not change the Super Admin password."
+msgstr "Pääjärjestelmäkäyttäjän salasanaa ei voitu vaihtaa."
+
+#: bin/modules/gui/main.py:1125
+msgid "Bad password provided !"
+msgstr "Huono salasana tarjottu!"
+
+#: bin/modules/gui/main.py:1127
+msgid "Error, password not changed."
+msgstr "Virhe! Salasanaa ei vaihdettu."
+
+#: bin/modules/gui/main.py:1133 bin/modules/gui/main.py:1153
+msgid "Backup a database"
+msgstr "Tee tietokannasta varmuuskopio"
+
+#: bin/modules/gui/main.py:1146
+msgid "Database backed up successfully !"
+msgstr "Tietokannan varmuuskopiointi onnistui!"
+
+#: bin/modules/gui/main.py:1149
+msgid "Could not backup the database."
+msgstr "Tietokannan varmuuskopiointi ei onnistunut."
+
+#: bin/modules/gui/main.py:1151
+msgid "Couldn't backup database."
+msgstr "Tietokannan varmuuskopiointi ei onnistunut."
+
+#: bin/modules/gui/window/win_extension.py:115
+msgid "This extension is already defined"
+msgstr "Tämä laajennus on jo määritelty"
+
+#: bin/modules/gui/window/view_tree/parse.py:36
+msgid "Tree"
+msgstr "Puu"
+
+#: bin/modules/gui/window/view_tree/view_tree_sc.py:43
+#: bin/modules/gui/window/form.py:215
+msgid "ID"
+msgstr "ID"
+
+#: bin/modules/gui/window/view_tree/view_tree_sc.py:49
+msgid "Description"
+msgstr "Kuvaus"
+
+#: bin/modules/gui/window/win_selection.py:52
+msgid "Name"
+msgstr "Nimi"
+
+#: bin/modules/gui/window/win_selection.py:56
+msgid "Ressource Name"
+msgstr "Resurssin nimi"
+
+#: bin/modules/gui/window/win_selection.py:56
+msgid "Names"
+msgstr "Nimet"
+
+#: bin/modules/gui/window/win_preference.py:69
+msgid "Preference"
+msgstr "Etusija"
+
+#: bin/modules/gui/window/win_import.py:54
+msgid "XML-RPC error !"
+msgstr "XML-RPC virhe!"
+
+#: bin/modules/gui/window/win_import.py:57
+#, python-format
+msgid "Imported %d objects !"
+msgstr "%d objektia tuotu!"
+
+#: bin/modules/gui/window/win_import.py:93
+#: bin/modules/gui/window/win_import.py:97
+msgid "Field name"
+msgstr "Kentän nimi"
+
+#: bin/modules/gui/window/tree.py:190 bin/modules/gui/window/tree.py:246
+msgid "No resource selected!"
+msgstr "Ei valittuja resursseja!"
+
+#: bin/modules/gui/window/tree.py:204
+msgid ""
+"Are you sure you want\n"
+"to remove this record?"
+msgstr ""
+"Oletko varma, että haluat\n"
+"poistaa tämän tietueen?"
+
+#: bin/modules/gui/window/tree.py:209
+msgid "Error removing resource!"
+msgstr "Virhe poistettaessa resurssia!"
+
+#: bin/modules/gui/window/tree.py:220
+msgid "Unable to chroot: no tree resource selected"
+msgstr "Chroot epäonnistui: et ole valinnut resurssia puusta"
+
+#: bin/modules/gui/window/__init__.py:33
+msgid "Unknown Window"
+msgstr "Tuntematon ikkuna"
+
+#: bin/modules/gui/window/win_search.py:143
+#, python-format
+msgid "OpenERP Search: %s"
+msgstr "OpenERP Haku: %s"
+
+#: bin/modules/gui/window/win_search.py:144
+#, python-format
+msgid "OpenERP Search: %s (%%d result(s))"
+msgstr "OpenERP Haku: %s (%%d tulos(ta))"
+
+#: bin/modules/gui/window/win_export.py:52
+msgid " record(s) saved !"
+msgstr " tietue(tta) tallennettu!"
+
+#: bin/modules/gui/window/win_export.py:55
+msgid ""
+"Operation failed !\n"
+"I/O error"
+msgstr ""
+"Operaatio epäonnistui!\n"
+"I/O virhe"
+
+#: bin/modules/gui/window/win_export.py:79
+msgid "Error Opening Excel !"
+msgstr "Virhe avattaessa Exceliä!"
+
+#: bin/modules/gui/window/win_export.py:81
+msgid ""
+"Function only available for MS Office !\n"
+"Sorry, OOo users :("
+msgstr ""
+"Toimintoa voi käyttää ainoastaan MS Officessa!\n"
+"OOo käyttäjät; olemme todella pahoillamme :("
+
+#: bin/modules/gui/window/form.py:197
+msgid "No record selected ! You can only attach to existing record."
+msgstr ""
+"Ei valittua tietuetta! Liittäminen onnistuu vain olemassa olevaan "
+"tietueeseen."
+
+#: bin/modules/gui/window/form.py:209
+msgid "You have to select a record !"
+msgstr "Sinun täytyy valita tietue!"
+
+#: bin/modules/gui/window/form.py:216
+msgid "Creation User"
+msgstr "Luontikäyttäjä"
+
+#: bin/modules/gui/window/form.py:217
+msgid "Creation Date"
+msgstr "Luontipäiväys"
+
+#: bin/modules/gui/window/form.py:218
+msgid "Latest Modification by"
+msgstr "Viimeisin muokkaus"
+
+#: bin/modules/gui/window/form.py:219
+msgid "Latest Modification Date"
+msgstr "Viimeisen muokkauksen päiväys"
+
+#: bin/modules/gui/window/form.py:230
+msgid ""
+"Record is not saved ! \n"
+" Do You want to Clear Current Record ?"
+msgstr ""
+"Tietuetta ei ole tallennettu! \n"
+" Haluatko tyhjentää tämän tietueen?"
+
+#: bin/modules/gui/window/form.py:233
+msgid "Are you sure to remove this record ?"
+msgstr "Oletko varma, että haluat poistaa tämän tietueen?"
+
+#: bin/modules/gui/window/form.py:235
+msgid "Are you sure to remove those records ?"
+msgstr "Oletko varma, että haluat poistaa nuo tietueet?"
+
+#: bin/modules/gui/window/form.py:239
+msgid "Resources cleared."
+msgstr "Resurssit tyhjennetty."
+
+#: bin/modules/gui/window/form.py:241
+msgid "Resources successfully removed."
+msgstr "Resurssit poistettu onnistuneesti."
+
+#: bin/modules/gui/window/form.py:273
+msgid "Working now on the duplicated document !"
+msgstr "Työskentelet nyt kopioidulla dokumentilla!"
+
+#: bin/modules/gui/window/form.py:281
+msgid "Document Saved."
+msgstr "Dokumentti tallennettu."
+
+#: bin/modules/gui/window/form.py:302 bin/modules/gui/window/form.py:397
+msgid ""
+"This record has been modified\n"
+"do you want to save it ?"
+msgstr ""
+"Tietuetta muutettu,\n"
+"haluatko tallentaa sen?"
+
+#: bin/modules/gui/window/form.py:349
+msgid "You must select one or several records !"
+msgstr "Valitse vähintään yksi tietue!"
+
+#: bin/modules/gui/window/form.py:358
+msgid "Print Screen"
+msgstr "Tulosta näytön sisältö"
+
+#: bin/modules/gui/window/form.py:378
+msgid "No record selected"
+msgstr "Et ole valinnut yhtään tietuetta"
+
+#: bin/modules/gui/window/form.py:383
+msgid "New document"
+msgstr "Uusi asiakirja"
+
+#: bin/modules/gui/window/form.py:385
+msgid "Editing document (id: "
+msgstr "Asiakirjan muokkaus (id: "
+
+#: bin/modules/gui/window/form.py:386
+msgid "Record: "
+msgstr "Tietue: "
+
+#: bin/modules/gui/window/form.py:387
+msgid " of "
+msgstr " josta "
+
+#: bin/modules/action/main.py:46
+msgid "Nothing to print!"
+msgstr "Ei tulostettavaa!"
+
+#: bin/modules/action/main.py:63
+msgid "Printing aborted, too long delay !"
+msgstr "Tulostus keskeytetty, liian pitkä viive!"
+
+#: bin/modules/action/main.py:179
+msgid "Select your action"
+msgstr "Valitse toimintosi"
+
+#: bin/modules/action/wizard.py:133
+msgid "OpenERP Computing"
+msgstr "OpenERP Computing"
+
+#: bin/modules/action/wizard.py:143
+msgid "Operation in progress"
+msgstr "Toiminto käynnissä"
+
+#: bin/printer/printer.py:172
+#, python-format
+msgid "Unable to handle %s filetype"
+msgstr "Tiedostotyyppiä %s ei voi käsitellä"
+
+#: bin/printer/printer.py:181
+msgid ""
+"Linux Automatic Printing not implemented.\n"
+"Use preview option !"
+msgstr ""
+"Linuxin automaattista tulostusta ei ole tehty.\n"
+"Käytä esikatselu ominaisuutta!"
+
+#: bin/printer/printer.py:189
+msgid "Error no report"
+msgstr "Virhe, ei raporttia"
+
+#: bin/printer/printer.py:215
+msgid "Error writing the file!"
+msgstr "Virhe kirjoitettaessa tiedostoa!"
+
+#: bin/openerp.glade:8
+msgid "OpenERP - Login"
+msgstr "OpenERP - Kirjautuminen"
+
+#: bin/openerp.glade:74 bin/openerp.glade:7126 bin/openerp.glade:7362
+#: bin/openerp.glade:7684 bin/openerp.glade:8329
+msgid "Server:"
+msgstr "Palvelin:"
+
+#: bin/openerp.glade:100 bin/openerp.glade:7398 bin/openerp.glade:7641
+#: bin/openerp.glade:7938 bin/openerp.glade:8286
+msgid "Change"
+msgstr "Muuta"
+
+#: bin/openerp.glade:118 bin/openerp.glade:7298
+msgid "Database:"
+msgstr "Tietokanta:"
+
+#: bin/openerp.glade:133
+msgid "User:"
+msgstr "Käyttäjä:"
+
+#: bin/openerp.glade:148 bin/openerp.glade:7284 bin/openerp.glade:7584
+msgid "Password:"
+msgstr "Salasana:"
+
+#: bin/openerp.glade:257
+msgid "_File"
+msgstr "_Tiedosto"
+
+#: bin/openerp.glade:264
+msgid "_Connect..."
+msgstr "_Yhdistä"
+
+#: bin/openerp.glade:280
+msgid "_Disconnect"
+msgstr "_Katkaise yhteys"
+
+#: bin/openerp.glade:300
+msgid "Databases"
+msgstr "Tietokannat"
+
+#: bin/openerp.glade:307
+msgid "_New database"
+msgstr "_Uusi tietokanta"
+
+#: bin/openerp.glade:322
+msgid "_Restore database"
+msgstr "_Palauta tietokanta"
+
+#: bin/openerp.glade:337
+msgid "_Backup database"
+msgstr "_Varmuuskopioi tietokanta"
+
+#: bin/openerp.glade:352
+msgid "Dro_p database"
+msgstr "_Poista tietokanta"
+
+#: bin/openerp.glade:372
+msgid "Administrator Password"
+msgstr "Pääkäyttäjän salasana"
+
+#: bin/openerp.glade:417
+msgid "_User"
+msgstr "Käy_ttäjä"
+
+#: bin/openerp.glade:425
+msgid "_Preferences"
+msgstr "_Asetukset"
+
+#: bin/openerp.glade:445
+msgid "_Send a request"
+msgstr "_Lähetä pyyntö"
+
+#: bin/openerp.glade:460
+msgid "_Read my requests"
+msgstr "L_ue kaikki pyyntöni"
+
+#: bin/openerp.glade:480
+msgid "_Waiting Requests"
+msgstr "_Odottavat pyynnöt"
+
+#: bin/openerp.glade:493
+msgid "For_m"
+msgstr "Lo_make"
+
+#: bin/openerp.glade:501
+msgid "_New"
+msgstr "_Uusi"
+
+#: bin/openerp.glade:517
+msgid "_Save"
+msgstr "_Tallenna"
+
+#: bin/openerp.glade:533
+msgid "Copy this resource"
+msgstr "Kopioi tämä resurssi"
+
+#: bin/openerp.glade:534
+msgid "_Duplicate"
+msgstr "_Monista"
+
+#: bin/openerp.glade:550
+msgid "_Delete"
+msgstr "_Poista"
+
+#: bin/openerp.glade:571
+msgid "Find"
+msgstr "Etsi"
+
+#: bin/openerp.glade:587
+msgid "Ne_xt"
+msgstr "Seu_raava"
+
+#: bin/openerp.glade:603
+msgid "Pre_vious"
+msgstr "E_dellinen"
+
+#: bin/openerp.glade:619
+msgid "Switch to list/form"
+msgstr "Vaihda lista/lomake näkymään"
+
+#: bin/openerp.glade:635
+msgid "_Menu"
+msgstr "_Valikko"
+
+#: bin/openerp.glade:656
+msgid "_New Home Tab"
+msgstr "_Uusi Koti välilehti"
+
+#: bin/openerp.glade:672 bin/openerp.glade:5872
+msgid "Close Tab"
+msgstr "Sulje välilehti"
+
+#: bin/openerp.glade:688
+msgid "Previous Tab"
+msgstr "Edellinen välilehti"
+
+#: bin/openerp.glade:697 bin/openerp.glade:5928
+msgid "Next Tab"
+msgstr "Seuraava välilehti"
+
+#: bin/openerp.glade:711
+msgid "View _logs"
+msgstr "Tarkastele _lokeja"
+
+#: bin/openerp.glade:719
+msgid "_Go to resource ID..."
+msgstr "_Mene resusrssi ID:hen..."
+
+#: bin/openerp.glade:733
+msgid "_Open"
+msgstr "_Avaa"
+
+#: bin/openerp.glade:748
+msgid "Reloa_d / Undo"
+msgstr "Päivi_tä / Kumoa"
+
+#: bin/openerp.glade:769
+msgid "Repeat latest _action"
+msgstr "Toista viimeisin _toiminto"
+
+#: bin/openerp.glade:783
+msgid "_Preview in PDF"
+msgstr "_Esikatsele PDF muodossa"
+
+#: bin/openerp.glade:799
+msgid "Previe_w in editor"
+msgstr "Esi_katsele editorissa"
+
+#: bin/openerp.glade:819
+msgid "Expor_t data..."
+msgstr "_Vie tiedot..."
+
+#: bin/openerp.glade:834
+msgid "I_mport data..."
+msgstr "T_uo tiedot..."
+
+#: bin/openerp.glade:846
+msgid "_Options"
+msgstr "_Valinnat"
+
+#: bin/openerp.glade:853
+msgid "_Extension Manager"
+msgstr "_Laajennusten hallinta"
+
+#: bin/openerp.glade:861
+msgid "_Menubar"
+msgstr "_Valikkopalkki"
+
+#: bin/openerp.glade:869
+msgid "Text _and Icons"
+msgstr "Teksti ja _Ikonit"
+
+#: bin/openerp.glade:877
+msgid "_Icons only"
+msgstr "Va_in kuvakkeet"
+
+#: bin/openerp.glade:886
+msgid "_Text only"
+msgstr "Vain _teksti"
+
+#: bin/openerp.glade:899
+msgid "_Forms"
+msgstr "Lo_makkeet"
+
+#: bin/openerp.glade:907
+msgid "Right Toolbar"
+msgstr "Oikea työkalupalkki"
+
+#: bin/openerp.glade:915
+msgid "Tabs default position"
+msgstr "Välilehtien oletussijainti"
+
+#: bin/openerp.glade:923
+msgid "Top"
+msgstr "Yläosa"
+
+#: bin/openerp.glade:931
+msgid "Left"
+msgstr "Vasen"
+
+#: bin/openerp.glade:940
+msgid "Right"
+msgstr "Oikea"
+
+#: bin/openerp.glade:949
+msgid "Bottom"
+msgstr "Alaosa"
+
+#: bin/openerp.glade:962
+msgid "Tabs default orientation"
+msgstr "Välilehtien oletussuunta"
+
+#: bin/openerp.glade:970
+msgid "Horizontal"
+msgstr "Vaakataso"
+
+#: bin/openerp.glade:978
+msgid "Vertical"
+msgstr "Pystytaso"
+
+#: bin/openerp.glade:995
+msgid "_Print"
+msgstr "_Tulosta"
+
+#: bin/openerp.glade:1002
+msgid "Previe_w before print"
+msgstr "Esi_katsele ennen tulostusta"
+
+#: bin/openerp.glade:1026
+msgid "_Save options"
+msgstr "_Tallenna valinnat"
+
+#: bin/openerp.glade:1046
+msgid "_Plugins"
+msgstr "_Liitännäiset"
+
+#: bin/openerp.glade:1054
+msgid "_Execute a plugin"
+msgstr "_Suorita liitännäinen"
+
+#: bin/openerp.glade:1074
+msgid "_Shortcuts"
+msgstr "O_ikotiet"
+
+#: bin/openerp.glade:1082
+msgid "_Help"
+msgstr "_Apua"
+
+#: bin/openerp.glade:1089 bin/openerp.glade:5243
+msgid "Support Request"
+msgstr "Tukipyyntö"
+
+#: bin/openerp.glade:1109
+msgid "User _Manual"
+msgstr "K_äyttöohje"
+
+#: bin/openerp.glade:1124
+msgid "_Contextual Help"
+msgstr "_Kontekstuaalinen apu"
+
+#: bin/openerp.glade:1140
+msgid "_Tips"
+msgstr "V_inkit"
+
+#: bin/openerp.glade:1155
+msgid "Keyboard Shortcuts"
+msgstr "Pikanäppäimet"
+
+#: bin/openerp.glade:1168
+msgid "_License"
+msgstr "_Lisenssi"
+
+#: bin/openerp.glade:1183
+msgid "_About..."
+msgstr "_Tietoja..."
+
+#: bin/openerp.glade:1225
+msgid "Edit / Save this resource"
+msgstr "Muokkaa / Tallenna tämä resurssi"
+
+#: bin/openerp.glade:1241
+msgid "Delete this resource"
+msgstr "Poista tämä resurssi"
+
+#: bin/openerp.glade:1254
+msgid "Go to previous matched search"
+msgstr "Mene aiempaan hakuun"
+
+#: bin/openerp.glade:1265
+msgid "Go to next matched resource"
+msgstr "Mene seuraavaa hakuosuman resurssiin"
+
+#: bin/openerp.glade:1278
+msgid "List"
+msgstr "Lista"
+
+#: bin/openerp.glade:1290
+msgid "Form"
+msgstr "Lomake"
+
+#: bin/openerp.glade:1303
+msgid "Calendar"
+msgstr "Kalenteri"
+
+#: bin/openerp.glade:1313
+msgid "Graph"
+msgstr "Kuvaaja"
+
+#: bin/openerp.glade:1326
+msgid "Gantt"
+msgstr "Gantt"
+
+#: bin/openerp.glade:1344
+msgid "Print documents"
+msgstr "Tulosta dokumentit"
+
+#: bin/openerp.glade:1355
+msgid "Launch actions about this resource"
+msgstr "Käynnistä toimenpiteet koskien tätä resurssia"
+
+#: bin/openerp.glade:1368
+msgid "Add an attachment to this resource"
+msgstr "Lisää liite tähän resurssiin"
+
+#: bin/openerp.glade:1369
+msgid "Attachment"
+msgstr "Liite"
+
+#: bin/openerp.glade:1384 bin/openerp.glade:1385
+msgid "Menu"
+msgstr "Valikko"
+
+#: bin/openerp.glade:1402 bin/openerp.glade:1403
+msgid "Reload"
+msgstr "Päivitä"
+
+#: bin/openerp.glade:1420
+msgid "Close this window"
+msgstr "Sulje ikkuna"
+
+#: bin/openerp.glade:1464
+msgid "Requests:"
+msgstr "Pyynnöt:"
+
+#: bin/openerp.glade:1487
+msgid "Read my Requests"
+msgstr "Lue pyyntöni"
+
+#: bin/openerp.glade:1508
+msgid "Send a new request"
+msgstr "Lähetä uusi pyyntö"
+
+#: bin/openerp.glade:1548
+msgid "OpenERP - Tree Resources"
+msgstr "OpenERP - Puun resurssit"
+
+#: bin/openerp.glade:1601
+msgid "Shortcuts"
+msgstr "Oikopolut"
+
+#: bin/openerp.glade:1710
+msgid "OpenERP - Forms"
+msgstr "OpenERP - Lomakkeet"
+
+#: bin/openerp.glade:1734
+msgid "State:"
+msgstr "Tila:"
+
+#: bin/openerp.glade:1766
+msgid "OpenERP - About"
+msgstr "OpenERP - Tiedot"
+
+#: bin/openerp.glade:1780
+msgid ""
+"<b>About OpenERP</b>\n"
+"<i>The most advanced Open Source ERP &amp; CRM !</i>"
+msgstr ""
+"<b>OpenERP tiedot</b>\n"
+"<i>Kehittynein Avoimen Lähdekoodin ERP- ja CRM-järjestelmä!</i>"
+
+#: bin/openerp.glade:1819
+msgid ""
+"\n"
+"OpenERP - GTK Client - v%s\n"
+"\n"
+"OpenERP is an Open Source ERP+CRM\n"
+"for small to medium businesses.\n"
+"\n"
+"The whole source code is distributed under\n"
+"the terms of the GNU Public Licence.\n"
+"\n"
+"(c) 2003-TODAY, Tiny sprl\n"
+"\n"
+"More Info on www.openerp.com !"
+msgstr ""
+"\n"
+"OpenERP - GTK pääte - v%s\n"
+"\n"
+"OpenERP on Avoimen Lähdekoodin ERP+CRM\n"
+"pienille ja keskisuurille yrityksille.\n"
+"\n"
+"Lähdekoodi on kokonaisuudessaan\n"
+"julkaistu GNU Public lisenssin alla.\n"
+"\n"
+"(c) 2003-TODAY, Tiny sprl\n"
+"\n"
+"Lisätiedot www.openerp.com!"
+
+#: bin/openerp.glade:1847
+msgid "_OpenERP"
+msgstr "_OpenERP"
+
+#: bin/openerp.glade:1875
+msgid ""
+"\n"
+"(c) 2003-TODAY - Tiny sprl\n"
+"OpenERP is a product of Tiny sprl:\n"
+"\n"
+"Tiny sprl\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
+"Belgium\n"
+"\n"
+"Tel : (+32)81.81.37.00\n"
+"Mail: sales@tiny.be\n"
+"Web: http://tiny.be"
+msgstr ""
+"\n"
+"(c) 2003-TODAY - tiny sprl\n"
+"OpenERP on Tiny sprl:n tuote\n"
+"\n"
+"Tiny sprl\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
+"Belgium\n"
+"\n"
+"Puhelin: (+32)81.81.37.00\n"
+"Sähköposti: sales@tiny.be\n"
+"WWW: http://tiny.be"
+
+#: bin/openerp.glade:1906
+msgid "_Contact"
+msgstr "_Yhteystieto"
+
+#: bin/openerp.glade:1958
+msgid "Open ERP - Forms widget"
+msgstr "Open ERP - Lomake widgetti"
+
+#: bin/openerp.glade:2137 bin/openerp.glade:5589
+msgid "OpenERP - Confirmation"
+msgstr "OpenERP - Vahvistus"
+
+#: bin/openerp.glade:2165 bin/openerp.glade:5617 bin/openerp.glade:7003
+msgid "Hello World!"
+msgstr "Tere mualima!"
+
+#: bin/openerp.glade:2214
+msgid "OpenERP - Selection"
+msgstr "OpenERP - Valinta"
+
+#: bin/openerp.glade:2228
+msgid "Your selection:"
+msgstr "Valintasi:"
+
+#: bin/openerp.glade:2308
+msgid "OpenERP - Dialog"
+msgstr "OpenERP - Dialogi"
+
+#: bin/openerp.glade:2332
+msgid "OpenERP, Field Preference target"
+msgstr "OpenERP, kentän asetusten kohde"
+
+#: bin/openerp.glade:2363
+msgid "_only for you"
+msgstr "_vain sinulle"
+
+#: bin/openerp.glade:2377
+msgid "for _all users"
+msgstr "_kaikille käyttäjille"
+
+#: bin/openerp.glade:2397
+msgid "<b>Value applicable for:</b>"
+msgstr "<b>Arvoa käytetään:</b>"
+
+#: bin/openerp.glade:2433
+msgid "<b>Value applicable if:</b>"
+msgstr "<b>Arvoa käytetään jos:</b>"
+
+#: bin/openerp.glade:2451
+msgid "Field _Name:"
+msgstr "Kentän _nimi:"
+
+#: bin/openerp.glade:2465
+msgid "_Domain:"
+msgstr "_Toimialue:"
+
+#: bin/openerp.glade:2524
+msgid "Default _value:"
+msgstr "_Oletusarvo"
+
+#: bin/openerp.glade:2579
+msgid "OpenERP - Export to CSV"
+msgstr "OpenERP - Vie CSV-tiedostoon"
+
+#: bin/openerp.glade:2627
+msgid "Save List"
+msgstr "Talleta lista"
+
+#: bin/openerp.glade:2675
+msgid "Remove List"
+msgstr "Poista lista"
+
+#: bin/openerp.glade:2730
+msgid "<b>Exports List</b>"
+msgstr "<b>Vie lista</b>"
+
+#: bin/openerp.glade:2747
+msgid "<b>Predefined Exports</b>"
+msgstr "<b>Esimääritellyt viennit</b>"
+
+#: bin/openerp.glade:2792
+msgid "Available Fields"
+msgstr "Käytettävissä olevat kentät"
+
+#: bin/openerp.glade:2835 bin/openerp.glade:6495
+msgid "_Add"
+msgstr "_Lisää"
+
+#: bin/openerp.glade:2882 bin/openerp.glade:6542
+msgid "_Remove"
+msgstr "_Poista"
+
+#: bin/openerp.glade:2930
+msgid "_Nothing"
+msgstr "_Tyhjä"
+
+#: bin/openerp.glade:2985
+msgid "Fields to Export"
+msgstr "Tuo kentät"
+
+#: bin/openerp.glade:3015
+msgid ""
+"Open in Excel\n"
+"Save as CSV"
+msgstr "Avaa Excelissä"
+
+#: bin/openerp.glade:3034
+msgid "Add _field names"
+msgstr "Lisää _kenttien nimiä"
+
+#: bin/openerp.glade:3051
+msgid "<b>Opti_ons</b>"
+msgstr "<b>Vaihtoehdot</b>"
+
+#: bin/openerp.glade:3110
+msgid "OpenERP - Search"
+msgstr "OpenERP - Etsi"
+
+#: bin/openerp.glade:3222
+msgid "OpenERP - Preferences"
+msgstr "OpenERP - Asetukset"
+
+#: bin/openerp.glade:3236
+msgid "<b>User preferences</b>"
+msgstr "<b>Käyttäjä asetukset</b>"
+
+#: bin/openerp.glade:3302
+msgid "Tip of the Day"
+msgstr "Päivän vinkki"
+
+#: bin/openerp.glade:3349
+msgid "_Display a new tip next time?"
+msgstr "_Näytä uusi vihje ensi kerralla?"
+
+#: bin/openerp.glade:3402
+msgid "Pre_vious Tip"
+msgstr "Edellinen vihje"
+
+#: bin/openerp.glade:3448
+msgid "Ne_xt Tip"
+msgstr "Seuraava vihje"
+
+#: bin/openerp.glade:3494
+msgid "OpenERP - License"
+msgstr "OpenERP -Lisenssi"
+
+#: bin/openerp.glade:3509
+msgid "OpenERP license"
+msgstr "OpenERP lisenssi"
+
+#: bin/openerp.glade:4207
+msgid "Go to resource ID"
+msgstr "Siirry resurssi ID"
+
+#: bin/openerp.glade:4257
+msgid "Search ID:"
+msgstr "Haku ID:"
+
+#: bin/openerp.glade:4311
+msgid "OpenERP Survey"
+msgstr "OpenERP kartoitus"
+
+#: bin/openerp.glade:4327
+msgid "<b>OpenERP Survey</b>"
+msgstr "<b>OpenERP kartoitus</b>"
+
+#: bin/openerp.glade:4340
+msgid ""
+"<i>Please fill in the following form in order to help us to improve OpenERP "
+"and better target new developments.</i>"
+msgstr ""
+"<i>Täytä oheinen kaavake auttaaksesi meitä kehittämään OpenEPR:iä ja "
+"kohdentamaan kehitystyötä, kiitos.</i>"
+
+#: bin/openerp.glade:4662
+msgid "Open Source:"
+msgstr "Avoin lähdekoodi"
+
+#: bin/openerp.glade:4702
+msgid "How did you hear about us:"
+msgstr "Miten kuulit meistä:"
+
+#: bin/openerp.glade:4758
+msgid "System:"
+msgstr "Järjestelmä:"
+
+#: bin/openerp.glade:4808
+msgid "Your Role:"
+msgstr "Roolisi:"
+
+#: bin/openerp.glade:4824
+msgid "Country:"
+msgstr "Maa:"
+
+#: bin/openerp.glade:4909
+msgid "# Employees:"
+msgstr "# Työntekijät:"
+
+#: bin/openerp.glade:4922
+msgid "Industry:"
+msgstr "Toimiala:"
+
+#: bin/openerp.glade:4936
+msgid "<b>Your company:</b>"
+msgstr "<b>Yrityksesi:</b>"
+
+#: bin/openerp.glade:4968
+msgid "We plan to use OpenERP"
+msgstr "Aiomme käyttää OpenERP:tä"
+
+#: bin/openerp.glade:4982
+msgid "We plan to offer services on OpenERP"
+msgstr "Aiomme tarjota palveluita OpenERP:iin"
+
+#: bin/openerp.glade:5003
+msgid "Tell us why you try OpenERP and what are your current softwares:"
+msgstr ""
+"Kerro meille, miksi kokeilit OpenERP:iä ja mitkä ovat nykyiset ohjelmasi:"
+
+#: bin/openerp.glade:5037
+msgid "<b>Your interrest:</b>"
+msgstr "<b>Kiinnostuksesi:</b>"
+
+#: bin/openerp.glade:5094
+msgid "I want to be contacted for a demonstration"
+msgstr "Haluan, että minuun otetaan yhteyttä esittelyä varten"
+
+#: bin/openerp.glade:5109
+msgid "Phone / Mobile:"
+msgstr "Puhelin / GSM:"
+
+#: bin/openerp.glade:5124
+msgid "Your Name:"
+msgstr "Nimesi:"
+
+#: bin/openerp.glade:5162
+msgid "E-Mail:"
+msgstr "Sähköposti:"
+
+#: bin/openerp.glade:5175
+msgid "Your Company:"
+msgstr "Yrityksesi:"
+
+#: bin/openerp.glade:5189
+msgid "<b>Keep Informed</b>"
+msgstr "<b>Pidä ajantasalla</b>"
+
+#: bin/openerp.glade:5269
+msgid ""
+"<b>Complete this form to submit your bug and/or send a support request.</b>\n"
+"<i>\n"
+"Your request will be sent to the OpenERP team and we will reply shortly.\n"
+"Note that we may not reply if you do not have a support contract with Tiny "
+"or an official partner.</i>"
+msgstr ""
+"<b>Täydennä tämä formi lähettääksesi ilmoituksen bugista tai "
+"apurequestin.</b>\n"
+"<i>Sinun pyyntö lähetetään OpenERP tiimille ja me vastaamme piakkoin.\n"
+"Huomaa, että emme välttämättä vastaa jos sinulla on tukisopimus Tinyn kanssa "
+"tai virallinen partneri.</i>"
+
+#: bin/openerp.glade:5328
+msgid "Phone number:"
+msgstr "Puhelinnumero:"
+
+#: bin/openerp.glade:5341
+msgid "Emergency:"
+msgstr "Kiireellinen:"
+
+#: bin/openerp.glade:5355
+msgid ""
+"Not Urgent\n"
+"Medium\n"
+"Urgent\n"
+"Very Urgent"
+msgstr ""
+"Ei kiireellinen\n"
+"Jonkin verran kiireellinen\n"
+"Kiireellinen\n"
+"Todella kiireellinen"
+
+#: bin/openerp.glade:5388
+msgid "<b>Support contract id:</b>"
+msgstr "<b>Tuen sopimus id:</b>"
+
+#: bin/openerp.glade:5445
+msgid "Other comments:"
+msgstr "Muita kommentteja:"
+
+#: bin/openerp.glade:5459
+msgid "Explain your problem:"
+msgstr "Selitä ongelmasi:"
+
+#: bin/openerp.glade:5498
+msgid "<b>Your email:</b>"
+msgstr "E-mail:"
+
+#: bin/openerp.glade:5512
+msgid "<b>Your Company:</b>"
+msgstr "Yrityksesi:"
+
+#: bin/openerp.glade:5526
+msgid "<b>Your name:</b>"
+msgstr "Nimesi:"
+
+#: bin/openerp.glade:5679
+msgid "Keyboard shortcuts"
+msgstr "Pikanäppäimet"
+
+#: bin/openerp.glade:5701
+msgid "<b>Shortcuts for OpenERP</b>"
+msgstr "<b>Pikakuvakkeet OpenERP:iin</b>"
+
+#: bin/openerp.glade:5715
+msgid "Close window without saving"
+msgstr "Sulje ikkuna tallentamatta"
+
+#: bin/openerp.glade:5730
+msgid "<Ctrl> + <Esc>"
+msgstr "<Ctrl> + <Esc>"
+
+#: bin/openerp.glade:5744
+msgid "<i>When editing a resource in a popup window</i>"
+msgstr "<i>Kun muokkaat resurssia ponnahdusikkunassa</i>"
+
+#: bin/openerp.glade:5760
+msgid "Save and Close window"
+msgstr "Tallenna ja sulje ikkuna"
+
+#: bin/openerp.glade:5775
+msgid "<Ctrl> + <Enter>"
+msgstr "<Ctrl> + <Enter>"
+
+#: bin/openerp.glade:5788
+msgid "Switch view mode"
+msgstr "Vaihda esikatselutilaan"
+
+#: bin/openerp.glade:5803
+msgid "<Ctrl> + L"
+msgstr "<Ctrl> + L"
+
+#: bin/openerp.glade:5816
+msgid "Next record"
+msgstr "Seuraava tietue"
+
+#: bin/openerp.glade:5831
+msgid "Previous record"
+msgstr "Edellinen tietue"
+
+#: bin/openerp.glade:5846
+msgid "<PgDn>"
+msgstr "<PgDn>"
+
+#: bin/openerp.glade:5859
+msgid "<PgUp>"
+msgstr "<PgUp>"
+
+#: bin/openerp.glade:5887
+msgid "Save"
+msgstr "Tallenna"
+
+#: bin/openerp.glade:5902
+msgid "<Ctrl> + W"
+msgstr "<Ctrl> + W"
+
+#: bin/openerp.glade:5915
+msgid "<Ctrl> + S"
+msgstr "<Ctrl> + S"
+
+#: bin/openerp.glade:5943
+msgid "<Ctrl> + <PgDn>"
+msgstr "<Ctrl> + <PgDn>"
+
+#: bin/openerp.glade:5956
+msgid "Previous tab"
+msgstr "Edellinen välilehti"
+
+#: bin/openerp.glade:5971
+msgid "<Ctrl> + <PgUp>"
+msgstr "<Ctrl> + <PgUp>"
+
+#: bin/openerp.glade:5984
+msgid "New"
+msgstr "Uusi..."
+
+#: bin/openerp.glade:5999
+msgid "<Ctrl> + N"
+msgstr "<Ctrl> + N"
+
+#: bin/openerp.glade:6012
+msgid "Delete"
+msgstr "Poista"
+
+#: bin/openerp.glade:6027
+msgid "<Ctrl> + D"
+msgstr "<Ctrl> + D"
+
+#: bin/openerp.glade:6040
+msgid "Find / Search"
+msgstr "Etsi"
+
+#: bin/openerp.glade:6055
+msgid "<Ctrl> + F"
+msgstr "<Ctrl> + F"
+
+#: bin/openerp.glade:6068
+msgid "Connect"
+msgstr "Muodosta yhteys"
+
+#: bin/openerp.glade:6083
+msgid "<Ctrl> + O"
+msgstr "<Ctrl> + O"
+
+#: bin/openerp.glade:6097
+msgid "Main Shortcuts"
+msgstr "Tärkeimmat pikakuvakkeet"
+
+#: bin/openerp.glade:6114
+msgid "F2"
+msgstr "F2"
+
+#: bin/openerp.glade:6127
+msgid "<b>Shortcuts in relation fields</b>"
+msgstr "<b>Pikakuvakkeet yhteyskenttiin</b>"
+
+#: bin/openerp.glade:6142
+msgid "<b>Shortcuts in text entries</b>"
+msgstr "<b>Pikakuvakkeet tekstitietueisiin</b>"
+
+#: bin/openerp.glade:6155
+msgid "Open current field"
+msgstr "Avaa nykyinen kenttä"
+
+#: bin/openerp.glade:6170
+msgid "Add a new line/field"
+msgstr "Lisää uusi rivi / kenttä"
+
+#: bin/openerp.glade:6185
+msgid "F1"
+msgstr "F1"
+
+#: bin/openerp.glade:6198
+msgid "Auto-Complete text field"
+msgstr "Automaattinen täydennys tekstikenttään"
+
+#: bin/openerp.glade:6213
+msgid "<Enter>"
+msgstr "<Syötä>"
+
+#: bin/openerp.glade:6226
+msgid "Previous editable widget"
+msgstr "Aikaisempi muokattava vimpain."
+
+#: bin/openerp.glade:6241
+msgid "<Shist> + <Tab>"
+msgstr "<Shift> + <Tab>"
+
+#: bin/openerp.glade:6254
+msgid "Next editable widget"
+msgstr "Seuraava muokattava vimpain."
+
+#: bin/openerp.glade:6269
+msgid "<Tab>"
+msgstr "<Tab>"
+
+#: bin/openerp.glade:6282
+msgid "Paste selected text"
+msgstr "Liitä valittu teksti"
+
+#: bin/openerp.glade:6297
+msgid "Copy selected text"
+msgstr "Kopioi valittu teksti"
+
+#: bin/openerp.glade:6312
+msgid "Cut selected text"
+msgstr "Leikkaa valittu teksti"
+
+#: bin/openerp.glade:6327
+msgid "<Ctrl> + V"
+msgstr "<Ctrl> + V"
+
+#: bin/openerp.glade:6340
+msgid "<Ctrl> + C"
+msgstr "<Ctrl> + C"
+
+#: bin/openerp.glade:6353
+msgid "<Ctrl> + X"
+msgstr "<Ctrl> + X"
+
+#: bin/openerp.glade:6370
+msgid "Edition Widgets"
+msgstr "Muokkausvimpaimet"
+
+#: bin/openerp.glade:6408
+msgid "Import from CSV"
+msgstr "Tuo CSV-tiedostosta"
+
+#: bin/openerp.glade:6453
+msgid "<b>All fields</b>"
+msgstr "<b>Kaikki kentät</b>"
+
+#: bin/openerp.glade:6590
+msgid "N_othing"
+msgstr "EI_mitään"
+
+#: bin/openerp.glade:6649
+msgid "Auto-Detect"
+msgstr "Tunnista automaattisesti"
+
+#: bin/openerp.glade:6704
+msgid "<b>Fields to import</b>"
+msgstr "<b>Tuotavat kentät</b>"
+
+#: bin/openerp.glade:6739
+msgid "File to Import:"
+msgstr "Tiedoston tuominen:"
+
+#: bin/openerp.glade:6813
+msgid "Lines to Skip:"
+msgstr "Ohitettavat rivit:"
+
+#: bin/openerp.glade:6842
+msgid "Text Delimiter:"
+msgstr "Tekstin rajaerotin:"
+
+#: bin/openerp.glade:6870
+msgid "Encoding:"
+msgstr "Merkistö:"
+
+#: bin/openerp.glade:6883
+msgid "Field Separater:"
+msgstr "Kenttäerotin:"
+
+#: bin/openerp.glade:6895
+msgid "CSV Parameters"
+msgstr "CSV Parametrit"
+
+#: bin/openerp.glade:6974
+msgid "OpenERP"
+msgstr "OpenERP"
+
+#: bin/openerp.glade:7070
+msgid "Server"
+msgstr "Palvelin"
+
+#: bin/openerp.glade:7080
+msgid "<b>Connect to a OpenERP server</b>"
+msgstr "<b>Muodosta yhteys OpenERP serverille</b>"
+
+#: bin/openerp.glade:7139
+msgid "Protocol connection:"
+msgstr "Protokollayhteys:"
+
+#: bin/openerp.glade:7185
+msgid "Port:"
+msgstr "Portti:"
+
+#: bin/openerp.glade:7237
+msgid "Choose a database..."
+msgstr "Valitse tietokanta..."
+
+#: bin/openerp.glade:7252
+msgid "<b>Backup a database</b>"
+msgstr "<b>Varmuuskopioi tietokanta</b>"
+
+#: bin/openerp.glade:7483
+msgid "Restore a database"
+msgstr "Restore a database"
+
+#: bin/openerp.glade:7496
+msgid "<b>Restore a database</b>"
+msgstr "<b>Palauta tietokanta</b>"
+
+#: bin/openerp.glade:7540
+msgid "(must not contain any special char)"
+msgstr "(ei saa sisältää erikoismerkkejä)"
+
+#: bin/openerp.glade:7569
+msgid "New database name:"
+msgstr "Uuden tietokannan nimi:"
+
+#: bin/openerp.glade:7669 bin/openerp.glade:7815 bin/openerp.glade:8314
+msgid "http://localhost:8069"
+msgstr "http://localhost:8069"
+
+#: bin/openerp.glade:7743
+msgid "Create a new database"
+msgstr "Luo uusi tietokanta"
+
+#: bin/openerp.glade:7756
+msgid "<b>Create a new database</b>"
+msgstr "<b>Luo uusi tietokanta</b>"
+
+#: bin/openerp.glade:7827
+msgid ""
+"This is the URL of the OpenERP server. Use 'localhost' if the server is "
+"installed on this computer. Click on 'Change' to change the address."
+msgstr ""
+"Tämä on URL-osoite OpenERP-serverille. Käytä 'localhost' arvoa, jos serveri "
+"on asennettu tälle tietokoneelle. Paina 'Vaihda' vaihtaaksesi osoitetta."
+
+#: bin/openerp.glade:7831
+msgid "OpenERP Server:"
+msgstr "OpenERP serveri:"
+
+#: bin/openerp.glade:7861
+msgid ""
+"This is the password of the user that have the rights to administer "
+"databases. This is not a OpenERP user, just a super administrator. If you "
+"did not changed it, the password is 'admin' after installation."
+msgstr ""
+"Tämä salasana on käyttäjän jolla on käyttöoikeudet hallita tietokantaan. "
+"Tämä ei ole OpenERP-käyttäjä, ainoastaan pääkäyttäjä. Jos et vaihtanut "
+"salasanaa, se on 'admin' asennuksen jälkeen."
+
+#: bin/openerp.glade:7865
+msgid "Super Administrator Password:"
+msgstr "Pääkäyttäjän salasana:"
+
+#: bin/openerp.glade:7897
+msgid "(<i>admin</i>, by default)"
+msgstr "(<i>admin</i>, oletuksena)"
+
+#: bin/openerp.glade:7962
+msgid ""
+"Choose the name of the database that will be created. The name must not "
+"contain any special character. Exemple: 'terp'."
+msgstr ""
+"Valitse tietokannan nimi, joka luodaan. Nimi ei saa sisältää "
+"erikoismerkkejä. Esimerkiksi: 'terp'."
+
+#: bin/openerp.glade:7964
+msgid "New Database Name:"
+msgstr "Uuden tietokannan nimi:"
+
+#: bin/openerp.glade:7988
+msgid ""
+"Choose the default language that will be installed for this database. You "
+"will be able to install new languages after installation through the "
+"administration menu."
+msgstr ""
+"Valitse oletuskieli joka asennetaan tähän tietokantaan. Voit asentaa lisää "
+"kieliä asennuksen jälkeen ylläpitäjän valikosta."
+
+#: bin/openerp.glade:7990
+msgid "Default Language:"
+msgstr "Oletuskieli:"
+
+#: bin/openerp.glade:8003
+msgid ""
+"This is the password of the '<i>admin</i>' user that will be created in your "
+"new database."
+msgstr ""
+"Tämä on salasana käyttäjälle '<i>admin</i>', joka luodaan uuteen "
+"tietokantaan."
+
+#: bin/openerp.glade:8005
+msgid "Administrator Password:"
+msgstr "Ylläpitäjän Salasana:"
+
+#: bin/openerp.glade:8017
+msgid ""
+"This is the password of the '<i>admin</i>' user that will be created in your "
+"new database. It has to be the same than the above field."
+msgstr ""
+"Tämä on käyttäjän '<i>admin</i>' salasana. Käyttäjä luodaan uuteen "
+"tietokantaan. Sen on oltava sama, kuin ylläoleva kenttä."
+
+#: bin/openerp.glade:8019
+msgid "Confirm Password:"
+msgstr "Vahvista salasana:"
+
+#: bin/openerp.glade:8110
+msgid ""
+"Check this box if you want demonstration data to be installed on your new "
+"database. These data will help you to understand OpenERP, with predefined "
+"products, partners, etc."
+msgstr ""
+"Valitse tämä jos tahdot esityksen, kuinka dataa asetetaan sinun uuteen "
+"tietokantaan. Nämä esimerkkituotteet, partnerit jne. auttavat sinua "
+"ymmärtämään OpenERP:tä."
+
+#: bin/openerp.glade:8113
+msgid "Load Demonstration Data:"
+msgstr "Lataa esittely materiaali:"
+
+#: bin/openerp.glade:8170
+msgid "Change password"
+msgstr "Vaihda salasana"
+
+#: bin/openerp.glade:8187
+msgid "<b>Change your super admin password</b>"
+msgstr "<b>Muuta sinun pääkäyttäjän salasana</b>"
+
+#: bin/openerp.glade:8340
+msgid "Old password:"
+msgstr "Vanha salasana:"
+
+#: bin/openerp.glade:8353
+msgid "New password:"
+msgstr "Uusi salasana:"
+
+#: bin/openerp.glade:8366
+msgid "New password confirmation:"
+msgstr "Uuden salasanan vahvistaminen:"
+
+#: bin/openerp.glade:8425
+msgid "OpenERP Message"
+msgstr "OpenERP viesti"
+
+#: bin/openerp.glade:8504
+msgid "Database creation"
+msgstr "Tietokannan luominen"
+
+#: bin/openerp.glade:8537
+msgid "<b>Database created successfully!</b>"
+msgstr "<b>Tietokanta luotu onnistuneesti!</b>"
+
+#: bin/openerp.glade:8569
+msgid ""
+"You can connect to the new database using one of the following account:\n"
+"\n"
+"    Administrator: admin / admin "
+msgstr ""
+"Voit aina yhdistää uuteen tietokantaan käyttäen seuraavaa tunnusta:\n"
+"Pääkäyttäjä: admin / admin "
+
+#: bin/openerp.glade:8697
+msgid "Extension Manager"
+msgstr "Lisäosien hallinta"
+
+#: bin/openerp.glade:8801
+msgid "Concurrency exception"
+msgstr "Samanaikaisuuden odotus"
+
+#: bin/openerp.glade:8826
+msgid ""
+"<b>\n"
+"Write concurrency warning:\n"
+"</b>\n"
+"This document has been modified while you were editing it.\n"
+"  Choose:\n"
+"   - \"Cancel\" to cancel saving.\n"
+"   - \"Compare\" to see the modified version.\n"
+"   - \"Write anyway\" to save your current version.\n"
+msgstr ""
+"<b>\n"
+"Kirjoita samanaikaisuusvaroitus:\n"
+"</b>\n"
+"Tätä dokumenttia on muokattu samanaikaisesti, kuin sinä muokkasit sitä.\n"
+"Valitse:\n"
+"- \"Peru\" peruaksesi säästön.\n"
+"- \"Vertaile\" nähdäksesi muokatun version.\n"
+"- \"Kirjoita kuitenkin\" tallettaaksesi nykyisen version.\n"
+
+#: bin/openerp.glade:8889
+msgid "Compare"
+msgstr "Vertaile"
+
+#: bin/openerp.glade:8935
+msgid "Write anyway"
+msgstr "Kirjoita silti"
+
+#: bin/openerp.glade:8964
+msgid "window1"
+msgstr "window1"
+
+#: bin/openerp.glade:9036
+msgid "Today"
+msgstr "Tänään"
+
+#: bin/openerp.glade:9082
+msgid "September 2008"
+msgstr "Syyskuu 2008"
+
+#: bin/openerp.glade:9096
+msgid "Day"
+msgstr "päivä"
+
+#: bin/openerp.glade:9120
+msgid "Month"
+msgstr "kuukausi"
+
+#: bin/win_error.glade:40
+msgid "label"
+msgstr "merkintä"
+
+#: bin/win_error.glade:102
+msgid "Click here for details about the maintenance proposition"
+msgstr "Klikkaa tästä saadaksesi lisätietoa ylläpitoehdotuksista"
+
+#: bin/win_error.glade:119
+msgid "<i>_Maintenance</i>"
+msgstr "<i>_Ylläpito</i>"
+
+#: bin/win_error.glade:150
+msgid ""
+"<b>Maintenance Contract.</b>\n"
+"<i>\n"
+"Your request will be send to OpenERP and maintenance team will reply you "
+"shortly.\n"
+"</i>"
+msgstr ""
+"<b>Ylläpitosopimus.</b>\n"
+"<i>\n"
+"Sinun pyyntösi lähetetään OpenERP:lle ja ylläpitotiimi vastaa piakkoin.\n"
+"</i>"
+
+#: bin/win_error.glade:184
+msgid "Explain what you did:"
+msgstr "Selitä mitä teit:"
+
+#: bin/win_error.glade:196
+msgid "Others Comments:"
+msgstr "Muita kommentteja:"
+
+#: bin/win_error.glade:278
+msgid "Send to Maintenance Team"
+msgstr "Lähetä huoltoryhmälle"
+
+#: bin/win_error.glade:326
+msgid "<i>_Support Request</i>"
+msgstr "<i>_Tukipyyntö</i>"
+
+#: bin/win_error.glade:353
+msgid "Details"
+msgstr "Detaily"
+
+#: bin/win_error.glade:369
+msgid "<i>_Details</i>"
+msgstr "<i>_Yksityiskohdat</i>"
+
+#: bin/win_error.glade:398
+msgid "gtk-close"
+msgstr "gtk-sulje"

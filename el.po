@@ -1,0 +1,2351 @@
+# Greek translation for openobject-client
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the openobject-client package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openobject-client\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-12-31 14:42+0100\n"
+"PO-Revision-Date: 2009-05-05 22:01+0000\n"
+"Last-Translator: Makis Nicolaou <mark.nicolaou@gmail.com>\n"
+"Language-Team: Greek <el@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-11-25 04:47+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: bin/widget_search/reference.py:74 bin/widget_search/spinint.py:73
+#: bin/widget_search/spinbutton.py:69 bin/widget_search/calendar.py:117
+#: bin/widget_search/char.py:47 bin/widget_search/checkbox.py:55
+msgid "The content of the widget or ValueError if not valid"
+msgstr "Το περιεχόμενο του Widget ή της τιμής σφάλματος δεν είναι έγκυρα"
+
+#: bin/widget_search/wid_int.py:44
+msgid "The content of the widget or excpetion if not valid"
+msgstr "Το περιεχόμενο της εξαίρεσης ή του Widget δεν είναι έγκυρα"
+
+#: bin/widget_search/date_widget.py:65
+#: bin/widget/view/form_gtk/date_widget.py:65
+msgid ""
+"You can use special operation by pressing +, - or =.  Plus/minus "
+"adds/decrease the variable to the current selected date. Equals set part of "
+"selected date. Available variables: 12h = 12 hours, 8d = 8 days, 4w = 4 "
+"weeks, 1m = 1 month, 2y = 2 years. Some examples:\n"
+"* +21d : adds 21 days to selected year\n"
+"* =23w : set date to the 23th week of the year\n"
+"* -4m : decrease 4 months to the current date\n"
+"You can also use \"=\" to set the date to the current date/time and '-' to "
+"clear the field."
+msgstr ""
+"Μπορείτε να χρησιμοποιείσετε ειδικές λειτουργίες πληκτρολογώντας +, - ή =. "
+"Σύν/Πλήν αυξάνει/μειώνει την μεταβλητή στην επιλεγμένη ημερομηνία. Το ίσον "
+"καθορίζει μέρος της επιλεγμένης ημερομηνίας. Διαθέσιμες παράμετροι: 12h = 12 "
+"ώρες, 8d = 8 ημέρες, 4w = 4 εβδομάδες, 1m = 1 μήνας, 2y = 2 χρόνια. Μερικά "
+"παραδείγματα:\n"
+"* +21d : προσθέτει 21 ημέρες στο επιλεγμένο έτος\n"
+"* =23w : ορίζει την ημερομηνία στην 23η εβδομάδα του έτους\n"
+"* -4m : μειώνει 4 μήνες στην τρέχουσα ημερομηνία\n"
+"Μπορείτε επίσης να χρησιμοποιείσετε \"=\" για να ορίσετε την ημερομηνία στην "
+"τρέχουσα ημερομηνία/ώρα και '-' για να καθαρίσετε το πεδίο."
+
+#: bin/widget_search/calendar.py:55
+msgid "Start date"
+msgstr "Ημερομηνία από"
+
+#: bin/widget_search/calendar.py:59 bin/widget_search/calendar.py:79
+#: bin/widget/view/form_gtk/calendar.py:63
+#: bin/widget/view/form_gtk/calendar.py:176
+msgid "Open the calendar widget"
+msgstr "Ανοίγμα του παράθυρου ημερολογίου"
+
+#: bin/widget_search/calendar.py:75
+msgid "End date"
+msgstr "Ημερομηνία έως"
+
+#: bin/widget_search/calendar.py:120 bin/widget/view/form_gtk/calendar.py:133
+#: bin/widget/view/form_gtk/calendar.py:263
+msgid "OpenERP - Date selection"
+msgstr "OpenERP - Επιλογή ημερομηνίας"
+
+#: bin/widget_search/form.py:145
+msgid "Limit :"
+msgstr "Όριο"
+
+#: bin/widget_search/form.py:154
+msgid "Offset :"
+msgstr "Offset :"
+
+#: bin/widget_search/form.py:193
+msgid "Parameters :"
+msgstr "Παράμετροι"
+
+#: bin/widget_search/form.py:301
+msgid "The content of the form or exception if not valid"
+msgstr "Το περιεχόμενο της φόρμας ή της εξαίρεσης δεν είναι έγκυρη"
+
+#: bin/widget_search/checkbox.py:36 bin/widget_search/checkbox.py:49
+msgid "Yes"
+msgstr "Ναι"
+
+#: bin/widget_search/checkbox.py:37
+msgid "No"
+msgstr "Όχι"
+
+#: bin/widget/view/graph_gtk/parser.py:65
+msgid "Can not generate graph !"
+msgstr "Αδυναμία δημιουργίας γραφήματος!"
+
+#: bin/widget/view/widget_parse.py:53
+#, python-format
+msgid "This type (%s) is not supported by the GTK client !"
+msgstr "Ο τύπος %s δέν υποστηρίζεται από τον πελάτη GTK!"
+
+#: bin/widget/view/widget_parse.py:63
+msgid "No valid view found for this object!"
+msgstr "Καμία έγκυρη όψη δεν βρέθηκε για αυτό το αντικείμενο!"
+
+#: bin/widget/view/gantt_gtk/parser_dummy.py:31
+msgid "Gantt view not yet implemented !"
+msgstr "Η λειτουργία Gantt δεν έχει υλοποιηθεί ακόμα!"
+
+#: bin/widget/view/gantt_gtk/parser_dummy.py:32
+msgid ""
+"The gantt view is not available in this GTK Client, you should use the web "
+"interface or switch to the calendar view."
+msgstr ""
+"Η όψη gantt δεν είναι διαθέσιμη στον πελάτη GTK, θα πρέπει να "
+"χρησιμοποιήσετε το περιβάλλον web ή την όψη ημερολογίου."
+
+#: bin/widget/view/tree_gtk/date_renderer.py:200
+msgid ""
+"Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."
+msgstr ""
+"Πληκτρολογήστε <i>'+'</i>, <i>'-'</i> ή <i>'='</i> για ειδικές λειτουργίες "
+"ημερομηνίας."
+
+#: bin/widget/view/tree_gtk/editabletree.py:125
+#, python-format
+msgid "Shortcut: %s"
+msgstr "Συντόμευση: %s"
+
+#: bin/widget/view/tree_gtk/editabletree.py:125
+msgid "F1 New - F2 Open/Search"
+msgstr "F1 Νέο - F2 Άνοιγμα/Αναζήτηση"
+
+#: bin/widget/view/tree_gtk/editabletree.py:190
+#, python-format
+msgid "Warning; field %s is required!"
+msgstr "Προσοχή: Το πεδίο %s απαιτείται!"
+
+#: bin/widget/view/form.py:170
+msgid "You must save this record to use the relate button !"
+msgstr ""
+"Θα πρέπει να αποθηκεύσετε την τρέχουσα εγγραφή για να χρησιμοποιήσετε το "
+"πλήκτρο συσχετισμού!"
+
+#: bin/widget/view/form.py:182
+msgid "You must select a record to use the relate button !"
+msgstr ""
+"Θα πρέπει να επιλέξετε μια εγγραφή για να μπορέσετε να χρησιμοποιήσετε το "
+"πλήκτρο συσχετισμού!"
+
+#: bin/widget/view/form.py:200 bin/widget/view/form_gtk/parser.py:496
+#: bin/widget/view/form_gtk/parser.py:653
+#: bin/widget/view/form_gtk/parser.py:710
+msgid "No other language available!"
+msgstr "Δεν υπάρχει άλλη διαθέσιμη γλώσσα!"
+
+#: bin/widget/view/form.py:207 bin/widget/view/form_gtk/parser.py:555
+#: bin/widget/view/form_gtk/parser.py:659
+#: bin/widget/view/form_gtk/parser.py:716
+msgid "Add Translation"
+msgstr "Προσθήκη Μετάφρασης"
+
+#: bin/widget/view/form.py:258 bin/widget/view/form_gtk/parser.py:772
+msgid "Translate label"
+msgstr "Ετικέττα μετάφρασης"
+
+#: bin/widget/view/form_gtk/reference.py:92 bin/openerp.glade:1214
+msgid "Create a new resource"
+msgstr "Δημιουργία νέου πόρου"
+
+#: bin/widget/view/form_gtk/reference.py:93
+msgid "Search / Open a resource"
+msgstr "Ανεύρεση / Άνοιγμα ενός πόρου"
+
+#: bin/widget/view/form_gtk/interface.py:47
+#: bin/widget/view/form_gtk/one2many_list.py:148
+msgid "Set to default value"
+msgstr "Ορισμός αρχικής τιμής"
+
+#: bin/widget/view/form_gtk/interface.py:48
+msgid "Set as default"
+msgstr "Ορισμός ως προεπιλογή"
+
+#: bin/widget/view/form_gtk/parser.py:61
+msgid "Wrong icon for the button !"
+msgstr "Λάθος εικονίδιο για το κουμπί!"
+
+#: bin/widget/view/form_gtk/parser.py:134 bin/modules/gui/window/form.py:283
+msgid "Invalid form, correct red fields !"
+msgstr "Μη έγκυρη φόρμα, διορθώστε τα κόκκινα πεδία!"
+
+#: bin/widget/view/form_gtk/parser.py:486
+msgid "You need to save resource before adding translations!"
+msgstr "Πρέπει να αποθηκεύσετε τους πόρους πρίν προσθέσετε μεταφράσεις!"
+
+#: bin/widget/view/form_gtk/parser.py:778
+msgid "Translate view"
+msgstr "Όψη μετάφρασης"
+
+#: bin/widget/view/form_gtk/image.py:70
+msgid "Set Image"
+msgstr "Ορισμός Εικόνας"
+
+#: bin/widget/view/form_gtk/image.py:79 bin/widget/view/form_gtk/binary.py:85
+msgid "Save As"
+msgstr "Αποθήκευση ως"
+
+#: bin/widget/view/form_gtk/image.py:88 bin/widget/view/form_gtk/binary.py:89
+msgid "Clear"
+msgstr "Εκκαθάριση"
+
+#: bin/widget/view/form_gtk/image.py:100
+msgid "All files"
+msgstr "Όλα τα αρχεία"
+
+#: bin/widget/view/form_gtk/image.py:104
+msgid "Images"
+msgstr "Εικόνες"
+
+#: bin/widget/view/form_gtk/image.py:110 bin/widget/view/form_gtk/url.py:112
+#: bin/modules/gui/main.py:1065 bin/openerp.glade:6749
+msgid "Open..."
+msgstr "Άνοιγμα..."
+
+#: bin/widget/view/form_gtk/image.py:117
+#: bin/widget/view/form_gtk/binary.py:162 bin/modules/gui/main.py:1136
+#: bin/modules/gui/window/win_export.py:282 bin/printer/printer.py:207
+msgid "Save As..."
+msgstr "Αποθήκευση ως..."
+
+#: bin/widget/view/form_gtk/wid_common.py:60
+msgid "Always applicable !"
+msgstr "Always applicable !"
+
+#: bin/widget/view/form_gtk/binary.py:77
+msgid "Select"
+msgstr "Επιλογή"
+
+#: bin/widget/view/form_gtk/binary.py:81
+msgid "Open"
+msgstr "Άνοιγμα"
+
+#: bin/widget/view/form_gtk/binary.py:114
+#: bin/widget/view/form_gtk/binary.py:158
+msgid "Unable to read the file data"
+msgstr "Αδυναμία ανάγνωσης δεδομένων αρχείου"
+
+#: bin/widget/view/form_gtk/binary.py:124
+#: bin/widget/view/form_gtk/binary.py:150
+#, python-format
+msgid "Error reading the file: %s"
+msgstr "Σφάλμα ανάγνωσης του αρχείου: %s"
+
+#: bin/widget/view/form_gtk/binary.py:133
+msgid "All Files"
+msgstr "Όλα τα Αρχεία"
+
+#: bin/widget/view/form_gtk/binary.py:143
+msgid "Select a file..."
+msgstr "Επιλογή αρχείου..."
+
+#: bin/widget/view/form_gtk/binary.py:172
+#, python-format
+msgid "Error writing the file: %s"
+msgstr "Σφάλμα εγγραφής του αρχείου: %s"
+
+#: bin/widget/view/form_gtk/calendar.py:127
+#: bin/widget/view/form_gtk/calendar.py:260
+msgid "This widget is readonly !"
+msgstr "Αυτό το widget είναι μόνο για ανάγνωση!"
+
+#: bin/widget/view/form_gtk/calendar.py:269
+msgid "Hour:"
+msgstr "Ώρα:"
+
+#: bin/widget/view/form_gtk/calendar.py:272
+msgid "Minute:"
+msgstr "Λεπτό:"
+
+#: bin/widget/view/form_gtk/many2one.py:146
+msgid "Open this resource"
+msgstr "Άνοιγμα αυτού του πόρου"
+
+#: bin/widget/view/form_gtk/many2one.py:160
+msgid "Search a resource"
+msgstr "Αναζήτηση πόρου"
+
+#: bin/widget/view/form_gtk/many2one.py:171 bin/openerp.glade:1356
+msgid "Action"
+msgstr "Ενέργεια"
+
+#: bin/widget/view/form_gtk/many2one.py:172
+msgid "Report"
+msgstr "Αναφορά"
+
+#: bin/widget/view/form_gtk/many2one.py:372 bin/widget/view/list.py:274
+msgid "You must select a record to use the relation !"
+msgstr "Πρέπει να επιλέξετε μια εγγραφή για να χρησιμοποιήσετε τη σχέση!"
+
+#: bin/widget/view/form_gtk/one2many_list.py:51
+#: bin/modules/gui/window/win_search.py:50
+msgid "OpenERP - Link"
+msgstr "OpenERP - Σύνδεσμος"
+
+#: bin/widget/view/form_gtk/one2many_list.py:151
+msgid "Set Default"
+msgstr "Ορισμός ως Προεπιλογή"
+
+#: bin/widget/view/form_gtk/one2many_list.py:162
+msgid "Create a new entry"
+msgstr "Δημιουργία νέας εγγραφής"
+
+#: bin/widget/view/form_gtk/one2many_list.py:172
+msgid "Edit this entry"
+msgstr "Επεξεργασία τρέχουσας εγγραφής"
+
+#: bin/widget/view/form_gtk/one2many_list.py:182
+msgid "Remove this entry"
+msgstr "Διαγραφή τρέχουσας εγγραφής"
+
+#: bin/widget/view/form_gtk/one2many_list.py:194
+msgid "Previous"
+msgstr "Προηγούμενο"
+
+#: bin/widget/view/form_gtk/one2many_list.py:207
+msgid "Next"
+msgstr "Επόμενο"
+
+#: bin/widget/view/form_gtk/one2many_list.py:219
+msgid "Switch"
+msgstr "Αλλαγή"
+
+#: bin/widget/view/form_gtk/one2many_list.py:269
+msgid "You have to select a resource !"
+msgstr "Πρέπει να επιλέξετε έναν πόρο!"
+
+#: bin/widget/view/calendar_gtk/parser_dummy.py:31
+msgid "Calendar View Error !"
+msgstr "Σφάλμα Εμφάνισης Ημερολογίου!"
+
+#: bin/widget/view/calendar_gtk/parser_dummy.py:32
+msgid "You must intall the library python-hippocanvas to use calendars."
+msgstr ""
+"Πρέπει να εγκαταστήσετε την βιβλιοθήκη python-hippocanvas για να "
+"χρησιμοποιήσετε τα ημερολόγια."
+
+#: bin/widget/view/calendar_gtk/parser.py:239 bin/openerp.glade:9108
+msgid "Week"
+msgstr "Εβδομάδα"
+
+#: bin/common/common.py:186
+msgid ""
+"Thank you for the feedback !\n"
+"Your comments have been sent to OpenERP.\n"
+"You should now start by creating a new database or\n"
+"connecting to an existing server through the \"File\" menu."
+msgstr ""
+"Ευχαριστούμε για τις πληροφορίες!\n"
+"Τα σχόλιά σας στάλθηκαν στο OpenERP.\n"
+"Τώρα θα πρέπει να συνεχίσετε δημιουργόντας μια νέα βάση δεδομένων ή\n"
+"κάνοντας σύνδεση με έναν υπάρχον διακομιστή μέσα από το μενού \"Αρχείο\"."
+
+#: bin/common/common.py:193
+msgid ""
+"Thank you for testing OpenERP !\n"
+"You should now start by creating a new database or\n"
+"connecting to an existing server through the \"File\" menu."
+msgstr ""
+"Ευχαριστούμε που δοκιμάσατε το OpenERP!\n"
+"Τώρα θα πρέπει να συνεχίσετε δημιουργόντας μια νέα βάση δεδομένων ή\n"
+"κάνοντας σύνδεση με έναν υπάρχον διακομιστή μέσα από το μενού \"Αρχείο\"."
+
+#: bin/common/common.py:298
+msgid "Support request sent !"
+msgstr "Η αίτηση για υποστήριξη απεστάλη!"
+
+#: bin/common/common.py:316
+msgid ""
+"\n"
+"<b>An unknown error has been reported.</b>\n"
+"\n"
+"<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+"If you are using Open ERP in production, it is highly suggested to "
+"subscribe\n"
+"a maintenance program.\n"
+"\n"
+"The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+"automatic migration system so that we can fix your problems within a few\n"
+"hours. If you had a maintenance contract, this error would have been sent\n"
+"to the quality team of the Open ERP editor.\n"
+"\n"
+"The maintenance program offers you:\n"
+"* Automatic migrations on new versions,\n"
+"* A bugfix guarantee,\n"
+"* Monthly announces of potential bugs and their fixes,\n"
+"* Security alerts by email and automatic migration,\n"
+"* Access to the customer portal.\n"
+"\n"
+"You can use the link bellow for more information. The detail of the error\n"
+"is displayed on the second tab.\n"
+msgstr ""
+"\n"
+"<b>Αναφέρθηκε ένα άγνωστο λάθος.</b>\n"
+"\n"
+"<b>Δεν έχετε κάποιο έγκυρο συμβόλαιο συτήρησης του Open ERP!</b>\n"
+"Αν χρησιμοποιείτε το Open ERP στην παραγωγή, προτείνεται να εγγραφείτε\n"
+"σε κάποιο πρόγραμμα συντήρησης.\n"
+"\n"
+"Το συμβόλαιο συντήρησης σας προμηθεύει με εγγύηση διόρθωσης σφαλμάτων και "
+"ένα\n"
+"αυτόματο σύστημα ολοκλήρωσης έτσι ώστε να μπορείτε να διορθώνετε τα "
+"προβλήματά σας μέσα σε μερικές\n"
+"ώρες. Αν είχατε συμβόλαιο συντήρησης, αυτό το σφάλμα θα είχε αποσταλεί\n"
+"στην ομάδα ποιότητας του Open ERP editor.\n"
+"\n"
+"Το πρόγραμμα συντήρησης σας προσφέρει:\n"
+"* Αυτόματη ολοκλήρωση σε νέες εκδόσεις,\n"
+"* Εγγύηση διόρθωσης σφαλμάτων,\n"
+"* Μηνιαίες δηλώσεις πιθανών σφαλμάτων και τις διορθώσεις τους,\n"
+"* Ειδοποιήσεις ασφαλείας μέσω e-mail και αυτόματη ολοκλήρωση,\n"
+"* Πρόσβαση στο portal των πελατών.\n"
+"\n"
+"Μπορείτε να χρησιμοποιήσετε τον παρακάτω σύνδεσμο για περισσότερες "
+"πληροφορίες. Οι λεπτομέρειες του σφάλματος\n"
+"εμφανίζονται στην δεύτερη καρτέλα.\n"
+
+#: bin/common/common.py:339
+#, python-format
+msgid ""
+"\n"
+"<b>An unknown error has been reported.</b>\n"
+"\n"
+"Your maintenance contract does not cover all modules installed in your "
+"system !\n"
+"If you are using Open ERP in production, it is highly suggested to upgrade "
+"your\n"
+"contract.\n"
+"\n"
+"If you have developped your own modules or installed third party module, we\n"
+"can provide you an additional maintenance contract for these modules. After\n"
+"having reviewed your modules, our quality team will ensure they will "
+"migrate\n"
+"automatically for all futur stable versions of Open ERP at no extra cost.\n"
+"\n"
+"Here is the list of modules not covered by your maintenance contract:\n"
+"%s\n"
+"\n"
+"You can use the link bellow for more information. The detail of the error\n"
+"is displayed on the second tab."
+msgstr ""
+"\n"
+"<b>Ένα άγνωστο σφάλμα έχει αναφερθεί.</b>\n"
+"\n"
+"Το συμβόλαιο συντήρησης σας δεν καλύπτει όλες τις ενότητες που έχουν "
+"εγκατασταθεί στο σύστημα σας !\n"
+"Εάν χρησιμοποιείτε το Open ERP παραγωγικά, προτείνεται να αναβαθμίσετε το "
+"συμβόλαιο σας.\n"
+"\n"
+"Εάν έχετε αναπτύξει δικές σας ενότητες ή έχετε εγκαταστήσει ενότητες τρίτων "
+"κατασκευαστών, μπορούμε να σας παρέχουμε ένα επιπλέον συμβόλαιο συντήρησης "
+"για αυτές τις ενότητες. Εφόσον έχουμε ελέγξει τις ενότητες σας , η ομάδα "
+"ποιότητας θα διασφαλίσει την αυτόματη μετάβαση για όλες τις μελλοντικές "
+"σταθερές αναβαθμίσεις του Open ERP χωρίς καμία επιπλέον επιβάρυνση.\n"
+"\n"
+"Εδω είναι μια λίστα ενοτήτων που δεν καλύπτονται απο το τρέχων συμβόλαιο "
+"συντήρησης που έχετε:\n"
+"%s\n"
+"\n"
+"Μπορείτε να χρησιμοποιήσετε την παρακάτω σύνδεση για να δείτε περισσότερες "
+"πληροφορίες. Η λεπτομέρειες του σφάλματος εμφανίζεται στο δεύτερο tab."
+
+#: bin/common/common.py:390
+msgid ""
+"Your problem has been sent to the quality team !\n"
+"We will recontact you after analysing the problem."
+msgstr ""
+"Το πρόβλημά σας απεστάλη στην ομάδα ποιότητας!\n"
+"Θα επικοινωνήσουμε μαζί σας μετά την ανάλυση του προβλήματος."
+
+#: bin/common/common.py:392
+#, python-format
+msgid ""
+"Your problem could <u>NOT</u> be sent to the quality team !\n"
+"Please report this error manually at %s"
+msgstr ""
+"Το πρόβλημα σας <u>ΔΕΝ</u> αποστάλθηκε στην ομάδα ποιότητας!\n"
+"Παρακαλώ αναφέρετε το σφάλμα χειροκίνητα στο %s"
+
+#: bin/common/common.py:545
+msgid "Open with..."
+msgstr "Άνοιγμα με..."
+
+#: bin/plugins/__init__.py:28
+msgid "Print Workflow"
+msgstr "Εκτύπωση Εργασίας"
+
+#: bin/plugins/__init__.py:29
+msgid "Print Workflow (Complex)"
+msgstr "Εκτύπωση Εργσασίας (Πολύπλοκο)"
+
+#: bin/plugins/__init__.py:41
+msgid "No available plugin for this resource !"
+msgstr "Κανένα διαθέσιμο επιπρόσθετο πρόγραμμα (plugin) για αυτόν τον πόρο!"
+
+#: bin/plugins/__init__.py:43
+msgid "Choose a Plugin"
+msgstr "Επιλέξτε επιπρόσθετο πρόγραμμα (plugin)"
+
+#: bin/translate.py:183
+#, python-format
+msgid "Unable to set locale %s"
+msgstr "Αδυναμία ορισμού περιοχής %s"
+
+#: bin/rpc.py:142 bin/modules/action/wizard.py:171
+msgid "Connection refused !"
+msgstr "Άρνηση σύνδεσης!"
+
+#: bin/rpc.py:143
+msgid "Connection refused!"
+msgstr "Άρνηση σύνδεσης!"
+
+#: bin/rpc.py:173
+msgid ""
+"Unable to reach to OpenERP server !\n"
+"You should check your connection to the network and the OpenERP server."
+msgstr ""
+"Αδυναμία επικοινωνίας με τον εξυπηρετητή OpenERP\n"
+"Θα πρέπει να ελέγξετε τις συνδέσεις σας στο δίκτυο και τον εξυπηρετητή "
+"OpenERP."
+
+#: bin/rpc.py:173
+msgid "Connection Error"
+msgstr "Σφάλμα σύνδεσης"
+
+#: bin/rpc.py:188 bin/rpc.py:190 bin/modules/action/wizard.py:183
+#: bin/modules/action/wizard.py:189 bin/modules/action/wizard.py:191
+msgid "Application Error"
+msgstr "Σφάλμα Προγράμματος"
+
+#: bin/rpc.py:190 bin/modules/action/wizard.py:191
+msgid "View details"
+msgstr "Λεπτομέρειες"
+
+#: bin/openerp-client.py:130
+msgid "Closing OpenERP, KeyboardInterrupt"
+msgstr "Το OpenERP κλείνει, KeyboardInterrupt"
+
+#: bin/options.py:107
+#, python-format
+msgid "OpenERP Client %s"
+msgstr "Πελάτης OpenERP %s"
+
+#: bin/options.py:108
+msgid "specify alternate config file"
+msgstr "δηλώστε εναλλακτικό αρχείο config"
+
+#: bin/options.py:109
+msgid "enable basic debugging"
+msgstr "ενεργοποίηση βασικής αποσφαλμάτωσης"
+
+#: bin/options.py:110
+msgid "specify channels to log"
+msgstr "δηλώστε κανάλια για καταγραφή"
+
+#: bin/options.py:111
+msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+msgstr "δηλώστε το επίπεδο καταγραφής: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+
+#: bin/options.py:112
+msgid "specify the user login"
+msgstr "δηλώστε την είσοδο χρήστη"
+
+#: bin/options.py:113
+msgid "specify the server port"
+msgstr "δηλώστε την πύλη του εξυπηρετητή"
+
+#: bin/options.py:114
+msgid "specify the server ip/name"
+msgstr "δηλώστε το όνομα/ip του εξυπηρετητή"
+
+#: bin/modules/gui/main.py:154
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#: bin/modules/gui/main.py:158 bin/modules/gui/main.py:1157
+msgid "Could not connect to server !"
+msgstr "Αδυναμία επικοινωνίας με τον εξυπηρετητή!"
+
+#: bin/modules/gui/main.py:165 bin/modules/gui/main.py:1161
+msgid "No database found, you must create one !"
+msgstr "Καμία βάση δεδομένων δεν βρέθηκε, θα πρέπει να δημιουργήσετε μία!"
+
+#: bin/modules/gui/main.py:178
+#, python-format
+msgid ""
+"The versions of the server (%s) and the client (%s) missmatch. The client "
+"may not work properly. Use it at your own risks."
+msgstr ""
+"Οι εκδόσεις του εξυπηρετητή (%s) και του πελάτη (%s) δεν συμβαδίζουν. Ο "
+"πελάτης μπορεί να μην λειτουργήσει σωστά. Προχωρήστε με δική σας ευθύνη."
+
+#: bin/modules/gui/main.py:309
+msgid "Sorry,'"
+msgstr "Λυπάμαι."
+
+#: bin/modules/gui/main.py:309 bin/modules/gui/main.py:312
+msgid "Bad database name !"
+msgstr "Λανθασμένο όνομα βάσης δεδομένων!"
+
+#: bin/modules/gui/main.py:312
+msgid ""
+"The database name must contain only normal characters or \"_\".\n"
+"You must avoid all accents, space or special characters."
+msgstr ""
+"Η βάση δεδομένων θα πρέπει να περιέχει μόνο κανονικούς χαρακτήρες ή \"_\"\n"
+"Θα πρέπει να αποφεύγετε τονισμούς, κενά ή ειδικούς χαρακτήρες."
+
+#: bin/modules/gui/main.py:340
+msgid "OpenERP Database Installation"
+msgstr "Εγκατάσταση βάσης δεδομένων OpenERP"
+
+#: bin/modules/gui/main.py:349
+msgid "<b>Operation in progress</b>"
+msgstr "<b>Λειτουργία σε εξέλιξη<b>"
+
+#: bin/modules/gui/main.py:353 bin/modules/action/wizard.py:147
+msgid ""
+"Please wait,\n"
+"this operation may take a while..."
+msgstr ""
+"Παρακαλώ περιμένετε.\n"
+"αυτή η λειτουργία θα πάρει λίγο χρόνο..."
+
+#: bin/modules/gui/main.py:372 bin/modules/gui/main.py:374
+#: bin/modules/gui/main.py:376
+msgid "Could not create database."
+msgstr "Αδυναμία δημιουργίας βάσης δεδομένων"
+
+#: bin/modules/gui/main.py:372
+msgid "Database already exists !"
+msgstr "Η βάση δεδομένων υπάρχει ήδη!"
+
+#: bin/modules/gui/main.py:374 bin/modules/gui/main.py:1060
+#: bin/modules/gui/main.py:1079 bin/modules/gui/main.py:1149
+msgid "Bad database administrator password !"
+msgstr "Λανθασμένος κωδικός διαχειριστή βάσης δεδομένων!"
+
+#: bin/modules/gui/main.py:376 bin/modules/gui/main.py:383
+msgid "Error during database creation !"
+msgstr "Σφάλμα κατα την δημιουργία βάσης δεδομένων!"
+
+#: bin/modules/gui/main.py:383
+msgid ""
+"The server crashed during installation.\n"
+"We suggest you to drop this database."
+msgstr ""
+"Ο εξυπηρετητής δεν ανταποκρίθηκε κατα την εγκατάσταση.\n"
+"Προτείνουμε να διαγράψετε την βάση δεδομένων."
+
+#: bin/modules/gui/main.py:401
+msgid "The following users have been installed on your database:"
+msgstr "Οι ακόλουθοι χρήστες έχουν εγκατασταθεί στην βάση δεδομένων σας."
+
+#: bin/modules/gui/main.py:401
+msgid "You can now connect to the database as an administrator."
+msgstr "Μπορείτε τώρα να συνδεθείτε στην βάση δεδομένων σαν διαχειριστής."
+
+#: bin/modules/gui/main.py:445 bin/modules/gui/main.py:775
+msgid "Press Ctrl+O to login"
+msgstr "Πληκτρολογήστε Ctrl+O για εισαγωγή στο σύστημα"
+
+#: bin/modules/gui/main.py:617
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#: bin/modules/gui/main.py:706
+#, python-format
+msgid "%s request(s)"
+msgstr "%s αιτήση/σεις"
+
+#: bin/modules/gui/main.py:708
+msgid "No request"
+msgstr "Καμία αίτηση"
+
+#: bin/modules/gui/main.py:710
+#, python-format
+msgid " - %s request(s) sended"
+msgstr " - %s αιτήση/σεις στάλθηκαν"
+
+#: bin/modules/gui/main.py:746
+msgid ""
+"Connection error !\n"
+"Unable to connect to the server !"
+msgstr ""
+"Σφάλμα σύνδεσης!\n"
+"Αδυναμία σύνδεσης με τον εξυπηρετητή!"
+
+#: bin/modules/gui/main.py:748
+msgid ""
+"Connection error !\n"
+"Bad username or password !"
+msgstr ""
+"Σφάλμα σύνδεσης!\n"
+"Λανθασμένο όνομα χρήστη ή κωδικός πρόσβασης!"
+
+#: bin/modules/gui/main.py:773
+msgid "Not logged !"
+msgstr "Δεν είστε συνδεμένος!"
+
+#: bin/modules/gui/main.py:849
+msgid ""
+"You can not log into the system !\n"
+"Ask the administrator to verify\n"
+"you have an action defined for your user."
+msgstr ""
+"Δεν μπορείτε να μπείτε στο σύστημα!\n"
+"Ζητήστε απο τον διαχειριστή σας να ελέγξει\n"
+"και να ορίσει μιά ενέργεια για τον χρήστη σας."
+
+#: bin/modules/gui/main.py:881 bin/modules/gui/main.py:888
+msgid "Do you really want to quit ?"
+msgstr "Θέλετε να αποσυνδεθείτε;"
+
+#: bin/modules/gui/main.py:943
+#, python-format
+msgid "Attachments (%d)"
+msgstr "Επισυνάψεις (%d)"
+
+#: bin/modules/gui/main.py:956
+msgid "Attachments"
+msgstr "Επισυνάψεις"
+
+#: bin/modules/gui/main.py:1051
+msgid "Delete a database"
+msgstr "Διαγραφή μιάς βάσης δεδομένων"
+
+#: bin/modules/gui/main.py:1057
+msgid "Database dropped successfully !"
+msgstr "Η διαγραφή της βάσης δεδομένων έγινε με επιτυχία!"
+
+#: bin/modules/gui/main.py:1060
+msgid "Could not drop database."
+msgstr "Αδυναμία διαγραφής της βάσης δεδομένων"
+
+#: bin/modules/gui/main.py:1062
+msgid "Couldn't drop database"
+msgstr "Αδυναμία διαγραφής της βάσης δεδομένων."
+
+#: bin/modules/gui/main.py:1076
+msgid "Database restored successfully !"
+msgstr "Η βάση δεδομένων αποκαταστάθηκε με επιτυχία!"
+
+#: bin/modules/gui/main.py:1079
+msgid "Could not restore database."
+msgstr "Αδυναμία αποκατάστασης της βάσης δεδομένων."
+
+#: bin/modules/gui/main.py:1081
+msgid "Couldn't restore database"
+msgstr "Αδυναμία αποκατάστασης της βάσης δεδομένων."
+
+#: bin/modules/gui/main.py:1114
+msgid ""
+"Confirmation password does not match new password, operation cancelled!"
+msgstr ""
+"Ο κωδικός επαλήθευσης δεν ταιριάζει με τον νέο κωδικό, η λειτουργία "
+"ακυρώθηκε!"
+
+#: bin/modules/gui/main.py:1116
+msgid "Validation Error."
+msgstr "Σφάλμα επαλήθευσης."
+
+#: bin/modules/gui/main.py:1124
+msgid "Could not change the Super Admin password."
+msgstr "Αδυναμία αλλαγής του κωδικού πρόσβασης για τον χρήστη Super Admin."
+
+#: bin/modules/gui/main.py:1125
+msgid "Bad password provided !"
+msgstr "Παρασχέθηκε λανθασμένος κωδικός!"
+
+#: bin/modules/gui/main.py:1127
+msgid "Error, password not changed."
+msgstr "Σφάλμα, ο κωδικός δεν άλλαξε"
+
+#: bin/modules/gui/main.py:1133 bin/modules/gui/main.py:1153
+msgid "Backup a database"
+msgstr "Αντιγραφή ασφαλείας βάσης δεδομένων"
+
+#: bin/modules/gui/main.py:1146
+msgid "Database backed up successfully !"
+msgstr "Έγινε αντιγραφή ασφαλείας της βάσης δεδομένων με επιτυχία!"
+
+#: bin/modules/gui/main.py:1149
+msgid "Could not backup the database."
+msgstr "Αδυναμία αντιγραφής ασφαλείας της βάσης δεδομένων."
+
+#: bin/modules/gui/main.py:1151
+msgid "Couldn't backup database."
+msgstr "Αδυναμία αντιγραφής ασφαλείας της βάσης δεδομένων."
+
+#: bin/modules/gui/window/win_extension.py:115
+msgid "This extension is already defined"
+msgstr "Αυτή η επέκταση έχει ήδη καθοριστεί."
+
+#: bin/modules/gui/window/view_tree/parse.py:36
+msgid "Tree"
+msgstr "Δένδρο"
+
+#: bin/modules/gui/window/view_tree/view_tree_sc.py:43
+#: bin/modules/gui/window/form.py:215
+msgid "ID"
+msgstr "Αναγνωριστικό"
+
+#: bin/modules/gui/window/view_tree/view_tree_sc.py:49
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: bin/modules/gui/window/win_selection.py:52
+msgid "Name"
+msgstr "Όνομα"
+
+#: bin/modules/gui/window/win_selection.py:56
+msgid "Ressource Name"
+msgstr "Όνομα Πόρου"
+
+#: bin/modules/gui/window/win_selection.py:56
+msgid "Names"
+msgstr "Ονόματα"
+
+#: bin/modules/gui/window/win_preference.py:69
+msgid "Preference"
+msgstr "Προτιμήσεις"
+
+#: bin/modules/gui/window/win_import.py:54
+msgid "XML-RPC error !"
+msgstr "Σφάλμα XML-RPC!"
+
+#: bin/modules/gui/window/win_import.py:57
+#, python-format
+msgid "Imported %d objects !"
+msgstr "Εισαγωγή %d αντικειμένων!"
+
+#: bin/modules/gui/window/win_import.py:93
+#: bin/modules/gui/window/win_import.py:97
+msgid "Field name"
+msgstr "Όνομα πεδίου"
+
+#: bin/modules/gui/window/tree.py:190 bin/modules/gui/window/tree.py:246
+msgid "No resource selected!"
+msgstr "Κανένας πόρος δεν επιλέχθηκε!"
+
+#: bin/modules/gui/window/tree.py:204
+msgid ""
+"Are you sure you want\n"
+"to remove this record?"
+msgstr ""
+"Είστε σίγουροι ότι θέλετε να \n"
+"αφαιρέσετε αυτήν την εγγραφή;"
+
+#: bin/modules/gui/window/tree.py:209
+msgid "Error removing resource!"
+msgstr "Σφάλμα αφαίρεσης πόρου!"
+
+#: bin/modules/gui/window/tree.py:220
+msgid "Unable to chroot: no tree resource selected"
+msgstr "Αδυναμία λειτουργίας chroot: κανένας πόρος δένδρου δεν επιλέχθηκε"
+
+#: bin/modules/gui/window/__init__.py:33
+msgid "Unknown Window"
+msgstr "Άγνωστο παράθυρο"
+
+#: bin/modules/gui/window/win_search.py:143
+#, python-format
+msgid "OpenERP Search: %s"
+msgstr "Ανεύρεση OpenERP: %s"
+
+#: bin/modules/gui/window/win_search.py:144
+#, python-format
+msgid "OpenERP Search: %s (%%d result(s))"
+msgstr "Ανεύρεση OpenERP: %s (%%d αποτέλεσμα(τα))"
+
+#: bin/modules/gui/window/win_export.py:52
+msgid " record(s) saved !"
+msgstr " εγγραφή(ες) αποθηκεύτηκαν!"
+
+#: bin/modules/gui/window/win_export.py:55
+msgid ""
+"Operation failed !\n"
+"I/O error"
+msgstr ""
+"Η λειτουργία απέτυχε!\n"
+"Σφάλμα I/O"
+
+#: bin/modules/gui/window/win_export.py:79
+msgid "Error Opening Excel !"
+msgstr "Σφάλμα ανοίγματος Excel!"
+
+#: bin/modules/gui/window/win_export.py:81
+msgid ""
+"Function only available for MS Office !\n"
+"Sorry, OOo users :("
+msgstr ""
+"Η λειτουργία είναι διαθέσιμη μόνον για το MS Office!\n"
+"Λυπάμαι, ΟΟο χρήστες :{"
+
+#: bin/modules/gui/window/form.py:197
+msgid "No record selected ! You can only attach to existing record."
+msgstr ""
+"Καμία εγγραφή δεν επιλέχθηκε! Μπορείτε μόνο σε υπάρχουσες εγγραφές να "
+"επισυνάψετε."
+
+#: bin/modules/gui/window/form.py:209
+msgid "You have to select a record !"
+msgstr "Πρέπει να επιλέξετε μιά εγγραφή!"
+
+#: bin/modules/gui/window/form.py:216
+msgid "Creation User"
+msgstr "Δημιουργία Χρήστη"
+
+#: bin/modules/gui/window/form.py:217
+msgid "Creation Date"
+msgstr "Δημιουργία Ημερομηνίας"
+
+#: bin/modules/gui/window/form.py:218
+msgid "Latest Modification by"
+msgstr "Τελευταία αλλαγή από"
+
+#: bin/modules/gui/window/form.py:219
+msgid "Latest Modification Date"
+msgstr "Τελευταία ημερομηνία αλλαγής"
+
+#: bin/modules/gui/window/form.py:230
+msgid ""
+"Record is not saved ! \n"
+" Do You want to Clear Current Record ?"
+msgstr ""
+"Η εγγραφή δεν αποθηκεύτηκε!\n"
+" Θέλετε να διαγράψετε την τρέχουσα εγγραφή;"
+
+#: bin/modules/gui/window/form.py:233
+msgid "Are you sure to remove this record ?"
+msgstr "Θέλετε σίγουρα να διαγράψετε αυτήν την εγγραφή;"
+
+#: bin/modules/gui/window/form.py:235
+msgid "Are you sure to remove those records ?"
+msgstr "Θέλετε σίγουρα να διαγράψετε αυτές τις εγγραφές;"
+
+#: bin/modules/gui/window/form.py:239
+msgid "Resources cleared."
+msgstr "Οι πόροι καθαρίστηκαν"
+
+#: bin/modules/gui/window/form.py:241
+msgid "Resources successfully removed."
+msgstr "Οι πόροι διαγράφτηκαν με επιτυχία."
+
+#: bin/modules/gui/window/form.py:273
+msgid "Working now on the duplicated document !"
+msgstr "Εργασία σε εξέλιξη για το διπλότυπο έγγραφο!"
+
+#: bin/modules/gui/window/form.py:281
+msgid "Document Saved."
+msgstr "Το αρχείο αποθηκεύτηκε."
+
+#: bin/modules/gui/window/form.py:302 bin/modules/gui/window/form.py:397
+msgid ""
+"This record has been modified\n"
+"do you want to save it ?"
+msgstr ""
+"Αυτή η εγγραφή έχει τροποποιηθει\n"
+"θέλετε να την αποθηκεύσετε;"
+
+#: bin/modules/gui/window/form.py:349
+msgid "You must select one or several records !"
+msgstr "Θα πρέπει να επιλέξετε μία ή περισσότερες εγγραφές!"
+
+#: bin/modules/gui/window/form.py:358
+msgid "Print Screen"
+msgstr "Εκτύπωση οθόνης"
+
+#: bin/modules/gui/window/form.py:378
+msgid "No record selected"
+msgstr "Καμία εγγραφή επιλεγμένη"
+
+#: bin/modules/gui/window/form.py:383
+msgid "New document"
+msgstr "Νέο αρχείο"
+
+#: bin/modules/gui/window/form.py:385
+msgid "Editing document (id: "
+msgstr "Επεξεργασία εγγράφου (id: "
+
+#: bin/modules/gui/window/form.py:386
+msgid "Record: "
+msgstr "Εγγραφή: "
+
+#: bin/modules/gui/window/form.py:387
+msgid " of "
+msgstr " απο "
+
+#: bin/modules/action/main.py:46
+msgid "Nothing to print!"
+msgstr "Δεν υπάρχει τίποτα προς εκτύπωση!"
+
+#: bin/modules/action/main.py:63
+msgid "Printing aborted, too long delay !"
+msgstr "Η εκτύπωση ακυρώθηκε, μεγάλη καθυστέρηση!"
+
+#: bin/modules/action/main.py:179
+msgid "Select your action"
+msgstr "Επιλέξτε ενέργεια"
+
+#: bin/modules/action/wizard.py:133
+msgid "OpenERP Computing"
+msgstr "OpenERP Computing"
+
+#: bin/modules/action/wizard.py:143
+msgid "Operation in progress"
+msgstr "Λειτουργία σε εξέλιξη"
+
+#: bin/printer/printer.py:172
+#, python-format
+msgid "Unable to handle %s filetype"
+msgstr "Αδυναμία χειρισμού %s τυπου αρχείου"
+
+#: bin/printer/printer.py:181
+msgid ""
+"Linux Automatic Printing not implemented.\n"
+"Use preview option !"
+msgstr ""
+"Αυτόματη εκτύπωση Linux δεν έχει υλοποιηθεί.\n"
+"Χρησιμοποιήστε την επιλογή προεπισκόπησης!"
+
+#: bin/printer/printer.py:189
+msgid "Error no report"
+msgstr "Σφάλμα καμία αναφορά"
+
+#: bin/printer/printer.py:215
+msgid "Error writing the file!"
+msgstr "Σφάλμα κατα την καταγραφή του αρχείο!"
+
+#: bin/openerp.glade:8
+msgid "OpenERP - Login"
+msgstr "OpenERP - Είσοδος"
+
+#: bin/openerp.glade:74 bin/openerp.glade:7126 bin/openerp.glade:7362
+#: bin/openerp.glade:7684 bin/openerp.glade:8329
+msgid "Server:"
+msgstr "Εξυπηρετητής:"
+
+#: bin/openerp.glade:100 bin/openerp.glade:7398 bin/openerp.glade:7641
+#: bin/openerp.glade:7938 bin/openerp.glade:8286
+msgid "Change"
+msgstr "Αλλαγή"
+
+#: bin/openerp.glade:118 bin/openerp.glade:7298
+msgid "Database:"
+msgstr "Βάση Δεδομένων:"
+
+#: bin/openerp.glade:133
+msgid "User:"
+msgstr "Χρήστης:"
+
+#: bin/openerp.glade:148 bin/openerp.glade:7284 bin/openerp.glade:7584
+msgid "Password:"
+msgstr "Κωδικός:"
+
+#: bin/openerp.glade:257
+msgid "_File"
+msgstr "...Αρχείο"
+
+#: bin/openerp.glade:264
+msgid "_Connect..."
+msgstr "...Σύνδεση..."
+
+#: bin/openerp.glade:280
+msgid "_Disconnect"
+msgstr "...Αποσύνδεση"
+
+#: bin/openerp.glade:300
+msgid "Databases"
+msgstr "Βάσεις Δεδομένων"
+
+#: bin/openerp.glade:307
+msgid "_New database"
+msgstr "...Νέα Βάση Δεδομένων"
+
+#: bin/openerp.glade:322
+msgid "_Restore database"
+msgstr "...Αποκατάσταση Βάσης Δεδομένων"
+
+#: bin/openerp.glade:337
+msgid "_Backup database"
+msgstr "...Αντιγραφή Ασφαλείας Βάσης Δεδομένων"
+
+#: bin/openerp.glade:352
+msgid "Dro_p database"
+msgstr "Διαγραφή Βάσης Δεδομένων"
+
+#: bin/openerp.glade:372
+msgid "Administrator Password"
+msgstr "Κωδικός Διαχειριστή"
+
+#: bin/openerp.glade:417
+msgid "_User"
+msgstr "...Χρήστης"
+
+#: bin/openerp.glade:425
+msgid "_Preferences"
+msgstr "...Προτιμήσεις"
+
+#: bin/openerp.glade:445
+msgid "_Send a request"
+msgstr "...Αποστολή μιάς αίτησης"
+
+#: bin/openerp.glade:460
+msgid "_Read my requests"
+msgstr "...Προβολή των αιτήσεων μου"
+
+#: bin/openerp.glade:480
+msgid "_Waiting Requests"
+msgstr "...Αιτήσεις σε αναμονή"
+
+#: bin/openerp.glade:493
+msgid "For_m"
+msgstr "For_m"
+
+#: bin/openerp.glade:501
+msgid "_New"
+msgstr "...Νέο"
+
+#: bin/openerp.glade:517
+msgid "_Save"
+msgstr "...Αποθήκευση"
+
+#: bin/openerp.glade:533
+msgid "Copy this resource"
+msgstr "Αντιγραφή αυτού του πόρου"
+
+#: bin/openerp.glade:534
+msgid "_Duplicate"
+msgstr "...Διπλοτυπία"
+
+#: bin/openerp.glade:550
+msgid "_Delete"
+msgstr "...Διαγραφή"
+
+#: bin/openerp.glade:571
+msgid "Find"
+msgstr "Εύρεση"
+
+#: bin/openerp.glade:587
+msgid "Ne_xt"
+msgstr "Επόμενο"
+
+#: bin/openerp.glade:603
+msgid "Pre_vious"
+msgstr "Προηγούμενο"
+
+#: bin/openerp.glade:619
+msgid "Switch to list/form"
+msgstr "Εναλλαγή σε λίστα/φόρμα"
+
+#: bin/openerp.glade:635
+msgid "_Menu"
+msgstr "...Μενού"
+
+#: bin/openerp.glade:656
+msgid "_New Home Tab"
+msgstr "_New Home Tab"
+
+#: bin/openerp.glade:672 bin/openerp.glade:5872
+msgid "Close Tab"
+msgstr "Close Tab"
+
+#: bin/openerp.glade:688
+msgid "Previous Tab"
+msgstr "Previous Tab"
+
+#: bin/openerp.glade:697 bin/openerp.glade:5928
+msgid "Next Tab"
+msgstr "Next Tab"
+
+#: bin/openerp.glade:711
+msgid "View _logs"
+msgstr "Προβολή καταγραφών"
+
+#: bin/openerp.glade:719
+msgid "_Go to resource ID..."
+msgstr "_Μετάβαση στο αναγνωριστικό πόρου..."
+
+#: bin/openerp.glade:733
+msgid "_Open"
+msgstr "...Άνοιγμα"
+
+#: bin/openerp.glade:748
+msgid "Reloa_d / Undo"
+msgstr "Reloa_d / Undo"
+
+#: bin/openerp.glade:769
+msgid "Repeat latest _action"
+msgstr "Επανάληψη τελευταίας ενέργειας"
+
+#: bin/openerp.glade:783
+msgid "_Preview in PDF"
+msgstr "Προεπισκόπηση σε PDF"
+
+#: bin/openerp.glade:799
+msgid "Previe_w in editor"
+msgstr "Προεπισκόπηση σε επεξεργαστή"
+
+#: bin/openerp.glade:819
+msgid "Expor_t data..."
+msgstr "Εξαγωγή δεδομένων..."
+
+#: bin/openerp.glade:834
+msgid "I_mport data..."
+msgstr "Εισαγωγή δεδομένων..."
+
+#: bin/openerp.glade:846
+msgid "_Options"
+msgstr "...Επιλογές"
+
+#: bin/openerp.glade:853
+msgid "_Extension Manager"
+msgstr "...Διαχειριστής Επεκτάσεων"
+
+#: bin/openerp.glade:861
+msgid "_Menubar"
+msgstr "...Μπάρα Εργαλείων"
+
+#: bin/openerp.glade:869
+msgid "Text _and Icons"
+msgstr "Κείμενο και Εικονίδια"
+
+#: bin/openerp.glade:877
+msgid "_Icons only"
+msgstr "...Μόνο Εικονίδια"
+
+#: bin/openerp.glade:886
+msgid "_Text only"
+msgstr "...Μόνο Κείμενο"
+
+#: bin/openerp.glade:899
+msgid "_Forms"
+msgstr "...Φόρμες"
+
+#: bin/openerp.glade:907
+msgid "Right Toolbar"
+msgstr "Δεξιά μπάρα εργαλείων"
+
+#: bin/openerp.glade:915
+msgid "Tabs default position"
+msgstr "Tabs default position"
+
+#: bin/openerp.glade:923
+msgid "Top"
+msgstr "Πάνω"
+
+#: bin/openerp.glade:931
+msgid "Left"
+msgstr "Αριστερά"
+
+#: bin/openerp.glade:940
+msgid "Right"
+msgstr "Δεξιά"
+
+#: bin/openerp.glade:949
+msgid "Bottom"
+msgstr "Κάτω"
+
+#: bin/openerp.glade:962
+msgid "Tabs default orientation"
+msgstr "Tabs default orientation"
+
+#: bin/openerp.glade:970
+msgid "Horizontal"
+msgstr "Οριζόντια"
+
+#: bin/openerp.glade:978
+msgid "Vertical"
+msgstr "Κάθετα"
+
+#: bin/openerp.glade:995
+msgid "_Print"
+msgstr "...Εκτύπωση"
+
+#: bin/openerp.glade:1002
+msgid "Previe_w before print"
+msgstr "Προεπισκόπηση πριν την εκτύπωση"
+
+#: bin/openerp.glade:1026
+msgid "_Save options"
+msgstr "...Αποθήκευση επιλογών"
+
+#: bin/openerp.glade:1046
+msgid "_Plugins"
+msgstr "_Plugins"
+
+#: bin/openerp.glade:1054
+msgid "_Execute a plugin"
+msgstr "_Execute a plugin"
+
+#: bin/openerp.glade:1074
+msgid "_Shortcuts"
+msgstr "Συντομεύσεις"
+
+#: bin/openerp.glade:1082
+msgid "_Help"
+msgstr "Βοήθεια"
+
+#: bin/openerp.glade:1089 bin/openerp.glade:5243
+msgid "Support Request"
+msgstr "Αίτηση Υποστήριξης"
+
+#: bin/openerp.glade:1109
+msgid "User _Manual"
+msgstr "Οδηγίες Χρήσης"
+
+#: bin/openerp.glade:1124
+msgid "_Contextual Help"
+msgstr "_Contextual Help"
+
+#: bin/openerp.glade:1140
+msgid "_Tips"
+msgstr "_Tips"
+
+#: bin/openerp.glade:1155
+msgid "Keyboard Shortcuts"
+msgstr "Συντομεύσεις Πληκτρολογίου"
+
+#: bin/openerp.glade:1168
+msgid "_License"
+msgstr "Άδεια"
+
+#: bin/openerp.glade:1183
+msgid "_About..."
+msgstr "Περί..."
+
+#: bin/openerp.glade:1225
+msgid "Edit / Save this resource"
+msgstr "Επεξεργασία/Αποθήκευση αυτού του πόρου"
+
+#: bin/openerp.glade:1241
+msgid "Delete this resource"
+msgstr "Διαγραφή αυτού του πόρου"
+
+#: bin/openerp.glade:1254
+msgid "Go to previous matched search"
+msgstr "Μετάβαση στα προηγούμενα αποτελέσματα αναζήτησης"
+
+#: bin/openerp.glade:1265
+msgid "Go to next matched resource"
+msgstr "Μετάβαση στα επόμενα αποτελέσματα αναζήτησης"
+
+#: bin/openerp.glade:1278
+msgid "List"
+msgstr "Λίστα"
+
+#: bin/openerp.glade:1290
+msgid "Form"
+msgstr "Φόρμα"
+
+#: bin/openerp.glade:1303
+msgid "Calendar"
+msgstr "Ημερολόγιο"
+
+#: bin/openerp.glade:1313
+msgid "Graph"
+msgstr "Γράφημα"
+
+#: bin/openerp.glade:1326
+msgid "Gantt"
+msgstr "Gantt"
+
+#: bin/openerp.glade:1344
+msgid "Print documents"
+msgstr "Εκτύπωση εγγράφων"
+
+#: bin/openerp.glade:1355
+msgid "Launch actions about this resource"
+msgstr "Εκτέλεση ενεργειών για αυτόν τον πόρο"
+
+#: bin/openerp.glade:1368
+msgid "Add an attachment to this resource"
+msgstr "Επισύναψη σε αυτόν τον πόρο"
+
+#: bin/openerp.glade:1369
+msgid "Attachment"
+msgstr "Επισύναψη"
+
+#: bin/openerp.glade:1384 bin/openerp.glade:1385
+msgid "Menu"
+msgstr "Μενού"
+
+#: bin/openerp.glade:1402 bin/openerp.glade:1403
+msgid "Reload"
+msgstr "Reload"
+
+#: bin/openerp.glade:1420
+msgid "Close this window"
+msgstr "Κλείσιμο του παραθύρου"
+
+#: bin/openerp.glade:1464
+msgid "Requests:"
+msgstr "Αιτήσεις:"
+
+#: bin/openerp.glade:1487
+msgid "Read my Requests"
+msgstr "Ανάγνωση των αιτήσεων μου"
+
+#: bin/openerp.glade:1508
+msgid "Send a new request"
+msgstr "Αποστολή νέας αίτησης"
+
+#: bin/openerp.glade:1548
+msgid "OpenERP - Tree Resources"
+msgstr "OpenERP - Πόροι δένδρου"
+
+#: bin/openerp.glade:1601
+msgid "Shortcuts"
+msgstr "Συντομεύσεις"
+
+#: bin/openerp.glade:1710
+msgid "OpenERP - Forms"
+msgstr "OpenERP - Φόρμες"
+
+#: bin/openerp.glade:1734
+msgid "State:"
+msgstr "Κατάσταση:"
+
+#: bin/openerp.glade:1766
+msgid "OpenERP - About"
+msgstr "OpenERP - Περί"
+
+#: bin/openerp.glade:1780
+msgid ""
+"<b>About OpenERP</b>\n"
+"<i>The most advanced Open Source ERP &amp; CRM !</i>"
+msgstr ""
+"<b>Περί του OpenERP</b>\n"
+"<i>Το πιό αναπτυγμένο ERP ανοιχτού κώδικα &amp; CRM !</i>"
+
+#: bin/openerp.glade:1819
+msgid ""
+"\n"
+"OpenERP - GTK Client - v%s\n"
+"\n"
+"OpenERP is an Open Source ERP+CRM\n"
+"for small to medium businesses.\n"
+"\n"
+"The whole source code is distributed under\n"
+"the terms of the GNU Public Licence.\n"
+"\n"
+"(c) 2003-TODAY, Tiny sprl\n"
+"\n"
+"More Info on www.openerp.com !"
+msgstr ""
+"\n"
+"OpenERP - Πελάτης GTK - v%s\n"
+"\n"
+"Το OpenERP είναι ένα ERP+CRM ανοιχτού κώδικα\n"
+"για μικρές και μεσαίες επιχειρήσεις.\n"
+"\n"
+"Ολόκληρος ο πηγαίος κώδικας διανέμεται υπό \n"
+"τους όρους της άδειας GNU Public Licence.\n"
+"\n"
+"(c) 2003-TODAY, Tiny sprl\n"
+"\n"
+"Περισσότερες πληροφορίες στο www.openerp.com !"
+
+#: bin/openerp.glade:1847
+msgid "_OpenERP"
+msgstr "_OpenERP"
+
+#: bin/openerp.glade:1875
+msgid ""
+"\n"
+"(c) 2003-TODAY - Tiny sprl\n"
+"OpenERP is a product of Tiny sprl:\n"
+"\n"
+"Tiny sprl\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
+"Belgium\n"
+"\n"
+"Tel : (+32)81.81.37.00\n"
+"Mail: sales@tiny.be\n"
+"Web: http://tiny.be"
+msgstr ""
+"\n"
+"(c) 2003-TODAY - Tiny sprl\n"
+"Το OpenERP είναι ένα προϊόν της Tiny sprl:\n"
+"\n"
+"Tiny sprl\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
+"Βέλγιο\n"
+"\n"
+"Τηλέφωνο : (+32)81.81.37.00\n"
+"Mail: sales@tiny.be\n"
+"Ιστότοπος: http://tiny.be"
+
+#: bin/openerp.glade:1906
+msgid "_Contact"
+msgstr "...Επαφή"
+
+#: bin/openerp.glade:1958
+msgid "Open ERP - Forms widget"
+msgstr "Open ERP - Forms widget"
+
+#: bin/openerp.glade:2137 bin/openerp.glade:5589
+msgid "OpenERP - Confirmation"
+msgstr "OpenERP - Επιβεβαίωση"
+
+#: bin/openerp.glade:2165 bin/openerp.glade:5617 bin/openerp.glade:7003
+msgid "Hello World!"
+msgstr "Hello World!"
+
+#: bin/openerp.glade:2214
+msgid "OpenERP - Selection"
+msgstr "OpenERP - Επιλογή"
+
+#: bin/openerp.glade:2228
+msgid "Your selection:"
+msgstr "Η επιλογή σας:"
+
+#: bin/openerp.glade:2308
+msgid "OpenERP - Dialog"
+msgstr "OpenERP - Διάλογος"
+
+#: bin/openerp.glade:2332
+msgid "OpenERP, Field Preference target"
+msgstr "OpenERP, Στόχος Προτίμησης Πεδίου"
+
+#: bin/openerp.glade:2363
+msgid "_only for you"
+msgstr "_only for you"
+
+#: bin/openerp.glade:2377
+msgid "for _all users"
+msgstr "για όλους τους χρήστες"
+
+#: bin/openerp.glade:2397
+msgid "<b>Value applicable for:</b>"
+msgstr "<b>Η τιμή εφαρμόζεται για:</b>"
+
+#: bin/openerp.glade:2433
+msgid "<b>Value applicable if:</b>"
+msgstr "<b>Οι τιμές εφαρμόζονται αν:</b>"
+
+#: bin/openerp.glade:2451
+msgid "Field _Name:"
+msgstr "Όνομα Πεδίου:"
+
+#: bin/openerp.glade:2465
+msgid "_Domain:"
+msgstr "...Τομέας:"
+
+#: bin/openerp.glade:2524
+msgid "Default _value:"
+msgstr "Προκαθορισμένη τιμή:"
+
+#: bin/openerp.glade:2579
+msgid "OpenERP - Export to CSV"
+msgstr "OpenERP - Εξαγωγή σε CSV"
+
+#: bin/openerp.glade:2627
+msgid "Save List"
+msgstr "Αποθήκευση Λίστας"
+
+#: bin/openerp.glade:2675
+msgid "Remove List"
+msgstr "Αφαίρεση Λίστας"
+
+#: bin/openerp.glade:2730
+msgid "<b>Exports List</b>"
+msgstr "<b>Εξαγωγή Λίστας</b>"
+
+#: bin/openerp.glade:2747
+msgid "<b>Predefined Exports</b>"
+msgstr "<b>Προκαθορισμένες Εξαγωγές</b>"
+
+#: bin/openerp.glade:2792
+msgid "Available Fields"
+msgstr "Διαθεσιμα Πεδία"
+
+#: bin/openerp.glade:2835 bin/openerp.glade:6495
+msgid "_Add"
+msgstr "_Πρόσθεση"
+
+#: bin/openerp.glade:2882 bin/openerp.glade:6542
+msgid "_Remove"
+msgstr "_Αφαίρεση"
+
+#: bin/openerp.glade:2930
+msgid "_Nothing"
+msgstr "_Nothing"
+
+#: bin/openerp.glade:2985
+msgid "Fields to Export"
+msgstr "Πεδία για Εξαγωγή"
+
+#: bin/openerp.glade:3015
+msgid ""
+"Open in Excel\n"
+"Save as CSV"
+msgstr ""
+"Άνοιγμα σε Excel\n"
+"Αποθήκευση σε CSV"
+
+#: bin/openerp.glade:3034
+msgid "Add _field names"
+msgstr "Add _field names"
+
+#: bin/openerp.glade:3051
+msgid "<b>Opti_ons</b>"
+msgstr "<b>Opti_ons</b>"
+
+#: bin/openerp.glade:3110
+msgid "OpenERP - Search"
+msgstr "OpenERP - Εύρεση"
+
+#: bin/openerp.glade:3222
+msgid "OpenERP - Preferences"
+msgstr "OpenERP - Προτιμήσεις"
+
+#: bin/openerp.glade:3236
+msgid "<b>User preferences</b>"
+msgstr "<b>Προτιμήσεις χρήστη</b>"
+
+#: bin/openerp.glade:3302
+msgid "Tip of the Day"
+msgstr "Βοήθεια της ημέρας"
+
+#: bin/openerp.glade:3349
+msgid "_Display a new tip next time?"
+msgstr "_Εμφάνιση νέας βοήθειας την επόμενη φορά;"
+
+#: bin/openerp.glade:3402
+msgid "Pre_vious Tip"
+msgstr "Pre_vious Tip"
+
+#: bin/openerp.glade:3448
+msgid "Ne_xt Tip"
+msgstr "Ne_xt Tip"
+
+#: bin/openerp.glade:3494
+msgid "OpenERP - License"
+msgstr "OpenERP - Άδεια"
+
+#: bin/openerp.glade:3509
+msgid "OpenERP license"
+msgstr "OpenERP άδεια"
+
+#: bin/openerp.glade:4207
+msgid "Go to resource ID"
+msgstr "Μετάβαση σε ID πόρου"
+
+#: bin/openerp.glade:4257
+msgid "Search ID:"
+msgstr "ID εύρεσης:"
+
+#: bin/openerp.glade:4311
+msgid "OpenERP Survey"
+msgstr "OpenERP Survey"
+
+#: bin/openerp.glade:4327
+msgid "<b>OpenERP Survey</b>"
+msgstr "<b>OpenERP Survey</b>"
+
+#: bin/openerp.glade:4340
+msgid ""
+"<i>Please fill in the following form in order to help us to improve OpenERP "
+"and better target new developments.</i>"
+msgstr ""
+"<i>Παρακαλούμε συμπληρώστε την παρακάτω φόρμα για να μας βοηθήσετε να "
+"βελτιώσουμε το OpenERP και να στοχεύσουμε σε νέες αναπτύξεις του.</i>"
+
+#: bin/openerp.glade:4662
+msgid "Open Source:"
+msgstr "Ανοιχτός Κώδικας:"
+
+#: bin/openerp.glade:4702
+msgid "How did you hear about us:"
+msgstr "Πως μάθατε για εμάς:"
+
+#: bin/openerp.glade:4758
+msgid "System:"
+msgstr "Σύστημα:"
+
+#: bin/openerp.glade:4808
+msgid "Your Role:"
+msgstr "Ο Ρόλος σας:"
+
+#: bin/openerp.glade:4824
+msgid "Country:"
+msgstr "Χώρα:"
+
+#: bin/openerp.glade:4909
+msgid "# Employees:"
+msgstr "# Υπαλλήλων:"
+
+#: bin/openerp.glade:4922
+msgid "Industry:"
+msgstr "Είδος Επιχείρησης:"
+
+#: bin/openerp.glade:4936
+msgid "<b>Your company:</b>"
+msgstr "<b>Η εταιρία σας:</b>"
+
+#: bin/openerp.glade:4968
+msgid "We plan to use OpenERP"
+msgstr "Σκοπεύουμε να χρησιμοποιήσουμε το OpenERP"
+
+#: bin/openerp.glade:4982
+msgid "We plan to offer services on OpenERP"
+msgstr "Σκοπεύουμε να παρέχουμε υπηρεσίες πάνω στο OpenERP"
+
+#: bin/openerp.glade:5003
+msgid "Tell us why you try OpenERP and what are your current softwares:"
+msgstr ""
+"Πείτε μας γιατί δοκιμάζετε το OpenERP και ποιά είναι τα τρέχοντα λογισμικά "
+"σας:"
+
+#: bin/openerp.glade:5037
+msgid "<b>Your interrest:</b>"
+msgstr "<b>Τα ενδιαφέροντα σας:</b>"
+
+#: bin/openerp.glade:5094
+msgid "I want to be contacted for a demonstration"
+msgstr "Θα ήθελα να μου παρέχουν μιά επίδειξη"
+
+#: bin/openerp.glade:5109
+msgid "Phone / Mobile:"
+msgstr "Τηλέφωνο / Κινητό:"
+
+#: bin/openerp.glade:5124
+msgid "Your Name:"
+msgstr "Το Όνομα σας:"
+
+#: bin/openerp.glade:5162
+msgid "E-Mail:"
+msgstr "E-Mail:"
+
+#: bin/openerp.glade:5175
+msgid "Your Company:"
+msgstr "Η εταιρία σας:"
+
+#: bin/openerp.glade:5189
+msgid "<b>Keep Informed</b>"
+msgstr "<b>Keep Informed</b>"
+
+#: bin/openerp.glade:5269
+msgid ""
+"<b>Complete this form to submit your bug and/or send a support request.</b>\n"
+"<i>\n"
+"Your request will be sent to the OpenERP team and we will reply shortly.\n"
+"Note that we may not reply if you do not have a support contract with Tiny "
+"or an official partner.</i>"
+msgstr ""
+"<b>Συμπληρώστε αυτήν την φόρμα για να υποβάλετε το σφάλμα ή/και να "
+"αποστείλετε μία αίτηση υποστήριξης.</b>\n"
+"<i>\n"
+"Η αίτηση σας θα αποσταλλεί στην ομάδα του OpenERP και θα σας απαντήσουμε "
+"σύντομα.\n"
+"Σημειώστε ότι μπορεί να μην απαντήσουμε εάν δεν έχετε συμβόλαιο συντήρησης "
+"με την Tiny ή με κάποιον επίσημο συνεργάτη μας.</i>"
+
+#: bin/openerp.glade:5328
+msgid "Phone number:"
+msgstr "Αριθμός τηλεφώνου:"
+
+#: bin/openerp.glade:5341
+msgid "Emergency:"
+msgstr "Επείγον:"
+
+#: bin/openerp.glade:5355
+msgid ""
+"Not Urgent\n"
+"Medium\n"
+"Urgent\n"
+"Very Urgent"
+msgstr ""
+"Όχι Επείγον\n"
+"Μέτριο\n"
+"Επείγον\n"
+"Πολύ Επείγον"
+
+#: bin/openerp.glade:5388
+msgid "<b>Support contract id:</b>"
+msgstr "<b>Αριθμός Σύμβασης:</b>"
+
+#: bin/openerp.glade:5445
+msgid "Other comments:"
+msgstr "Άλλα σχόλια:"
+
+#: bin/openerp.glade:5459
+msgid "Explain your problem:"
+msgstr "Εξηγήστε το πρόβλημα σας:"
+
+#: bin/openerp.glade:5498
+msgid "<b>Your email:</b>"
+msgstr "<b>Το email σας:</b>"
+
+#: bin/openerp.glade:5512
+msgid "<b>Your Company:</b>"
+msgstr "<b>Η εταιρία σας:</b>"
+
+#: bin/openerp.glade:5526
+msgid "<b>Your name:</b>"
+msgstr "<b>Το όνομα σας:</b>"
+
+#: bin/openerp.glade:5679
+msgid "Keyboard shortcuts"
+msgstr "Συντομεύσεις πληκτρολογίου"
+
+#: bin/openerp.glade:5701
+msgid "<b>Shortcuts for OpenERP</b>"
+msgstr "<b>Συντομεύσεις του OpenERP</b>"
+
+#: bin/openerp.glade:5715
+msgid "Close window without saving"
+msgstr "Κλείσιμο παραθύρου χωρίς αποθήκευση"
+
+#: bin/openerp.glade:5730
+msgid "<Ctrl> + <Esc>"
+msgstr "<Ctrl> + <Esc>"
+
+#: bin/openerp.glade:5744
+msgid "<i>When editing a resource in a popup window</i>"
+msgstr "<i>Όταν επεξεργάζεστε έναν πόρο μέσα σε ένα αναδυόμενο παράθυρο</i>"
+
+#: bin/openerp.glade:5760
+msgid "Save and Close window"
+msgstr "Αποθήκευση και Κλείσιμο παραθύρου"
+
+#: bin/openerp.glade:5775
+msgid "<Ctrl> + <Enter>"
+msgstr "<Ctrl> + <Enter>"
+
+#: bin/openerp.glade:5788
+msgid "Switch view mode"
+msgstr "Εναλλαγή σε κατάσταση προβολής"
+
+#: bin/openerp.glade:5803
+msgid "<Ctrl> + L"
+msgstr "<Ctrl> + L"
+
+#: bin/openerp.glade:5816
+msgid "Next record"
+msgstr "Νέα εγγραφή"
+
+#: bin/openerp.glade:5831
+msgid "Previous record"
+msgstr "Προηγούμενη εγγραφή"
+
+#: bin/openerp.glade:5846
+msgid "<PgDn>"
+msgstr "<PgDn>"
+
+#: bin/openerp.glade:5859
+msgid "<PgUp>"
+msgstr "<PgUp>"
+
+#: bin/openerp.glade:5887
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#: bin/openerp.glade:5902
+msgid "<Ctrl> + W"
+msgstr "<Ctrl> + W"
+
+#: bin/openerp.glade:5915
+msgid "<Ctrl> + S"
+msgstr "<Ctrl> + S"
+
+#: bin/openerp.glade:5943
+msgid "<Ctrl> + <PgDn>"
+msgstr "<Ctrl> + <PgDn>"
+
+#: bin/openerp.glade:5956
+msgid "Previous tab"
+msgstr "Previous tab"
+
+#: bin/openerp.glade:5971
+msgid "<Ctrl> + <PgUp>"
+msgstr "<Ctrl> + <PgUp>"
+
+#: bin/openerp.glade:5984
+msgid "New"
+msgstr "Νέο"
+
+#: bin/openerp.glade:5999
+msgid "<Ctrl> + N"
+msgstr "<Ctrl> + N"
+
+#: bin/openerp.glade:6012
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: bin/openerp.glade:6027
+msgid "<Ctrl> + D"
+msgstr "<Ctrl> + D"
+
+#: bin/openerp.glade:6040
+msgid "Find / Search"
+msgstr "Εύρεση"
+
+#: bin/openerp.glade:6055
+msgid "<Ctrl> + F"
+msgstr "<Ctrl> + F"
+
+#: bin/openerp.glade:6068
+msgid "Connect"
+msgstr "Σύνδεση"
+
+#: bin/openerp.glade:6083
+msgid "<Ctrl> + O"
+msgstr "<Ctrl> + O"
+
+#: bin/openerp.glade:6097
+msgid "Main Shortcuts"
+msgstr "Κύριες Συντομεύσεις"
+
+#: bin/openerp.glade:6114
+msgid "F2"
+msgstr "F2"
+
+#: bin/openerp.glade:6127
+msgid "<b>Shortcuts in relation fields</b>"
+msgstr "<b>Συντομεύσεις σε πεδία σχετισμού</b>"
+
+#: bin/openerp.glade:6142
+msgid "<b>Shortcuts in text entries</b>"
+msgstr "<b>Συντομεύσεις σε εγγραφές κειμένου</b>"
+
+#: bin/openerp.glade:6155
+msgid "Open current field"
+msgstr "Άνοιγμα τρέχοντος πεδίου"
+
+#: bin/openerp.glade:6170
+msgid "Add a new line/field"
+msgstr "Πρόσθεση νέας γραμμής/πεδίου"
+
+#: bin/openerp.glade:6185
+msgid "F1"
+msgstr "F1"
+
+#: bin/openerp.glade:6198
+msgid "Auto-Complete text field"
+msgstr "Αυτοσυμπληρούμενα πεδία κειμένου"
+
+#: bin/openerp.glade:6213
+msgid "<Enter>"
+msgstr "<Enter>"
+
+#: bin/openerp.glade:6226
+msgid "Previous editable widget"
+msgstr "Previous editable widget"
+
+#: bin/openerp.glade:6241
+msgid "<Shist> + <Tab>"
+msgstr "<Shist> + <Tab>"
+
+#: bin/openerp.glade:6254
+msgid "Next editable widget"
+msgstr "Next editable widget"
+
+#: bin/openerp.glade:6269
+msgid "<Tab>"
+msgstr "<Tab>"
+
+#: bin/openerp.glade:6282
+msgid "Paste selected text"
+msgstr "Επικόλληση επιλεγμένου κειμένου"
+
+#: bin/openerp.glade:6297
+msgid "Copy selected text"
+msgstr "Αντιγραφή επιλεγμένου κειμένου"
+
+#: bin/openerp.glade:6312
+msgid "Cut selected text"
+msgstr "Αποκοπή επιλεγμένου κειμένου"
+
+#: bin/openerp.glade:6327
+msgid "<Ctrl> + V"
+msgstr "<Ctrl> + V"
+
+#: bin/openerp.glade:6340
+msgid "<Ctrl> + C"
+msgstr "<Ctrl> + C"
+
+#: bin/openerp.glade:6353
+msgid "<Ctrl> + X"
+msgstr "<Ctrl> + X"
+
+#: bin/openerp.glade:6370
+msgid "Edition Widgets"
+msgstr "Edition Widgets"
+
+#: bin/openerp.glade:6408
+msgid "Import from CSV"
+msgstr "Εισαγωγή απο CSV"
+
+#: bin/openerp.glade:6453
+msgid "<b>All fields</b>"
+msgstr "<b>Όλα τα πεδία</b>"
+
+#: bin/openerp.glade:6590
+msgid "N_othing"
+msgstr "N_othing"
+
+#: bin/openerp.glade:6649
+msgid "Auto-Detect"
+msgstr "Αυτόματη ανίχνευση"
+
+#: bin/openerp.glade:6704
+msgid "<b>Fields to import</b>"
+msgstr "<b>Πεδία προς εισαγωγή</b>"
+
+#: bin/openerp.glade:6739
+msgid "File to Import:"
+msgstr "Αρχείο προς Εισαγωγή:"
+
+#: bin/openerp.glade:6813
+msgid "Lines to Skip:"
+msgstr "Γραμμές προς παράβλεψη:"
+
+#: bin/openerp.glade:6842
+msgid "Text Delimiter:"
+msgstr "Διαχωριστής Κειμένου:"
+
+#: bin/openerp.glade:6870
+msgid "Encoding:"
+msgstr "Κωδικοποίηση:"
+
+#: bin/openerp.glade:6883
+msgid "Field Separater:"
+msgstr "Διαχωριστής Πεδίου:"
+
+#: bin/openerp.glade:6895
+msgid "CSV Parameters"
+msgstr "Παράμετροι CSV"
+
+#: bin/openerp.glade:6974
+msgid "OpenERP"
+msgstr "OpenERP"
+
+#: bin/openerp.glade:7070
+msgid "Server"
+msgstr "Διακομιστής"
+
+#: bin/openerp.glade:7080
+msgid "<b>Connect to a OpenERP server</b>"
+msgstr "<b>Σύνδεση με έναν διακομιστή OpenERP</b>"
+
+#: bin/openerp.glade:7139
+msgid "Protocol connection:"
+msgstr "Πρωτόκολλο σύνδεσης:"
+
+#: bin/openerp.glade:7185
+msgid "Port:"
+msgstr "Πύλη:"
+
+#: bin/openerp.glade:7237
+msgid "Choose a database..."
+msgstr "Επιλογή βάσης δεδομένων..."
+
+#: bin/openerp.glade:7252
+msgid "<b>Backup a database</b>"
+msgstr "<b>Αντιγραφή ασφαλείας βάσης δεδομένων</b>"
+
+#: bin/openerp.glade:7483
+msgid "Restore a database"
+msgstr "Αποκατάσταση βάσης δεδομένων"
+
+#: bin/openerp.glade:7496
+msgid "<b>Restore a database</b>"
+msgstr "<b>Αποκατάσταση βάσης δεδομένων</b>"
+
+#: bin/openerp.glade:7540
+msgid "(must not contain any special char)"
+msgstr "(δεν πρέπει να περιέχει ειδικούς χαρακτήρες)"
+
+#: bin/openerp.glade:7569
+msgid "New database name:"
+msgstr "Νέο όνομα βάσης δεδομένων:"
+
+#: bin/openerp.glade:7669 bin/openerp.glade:7815 bin/openerp.glade:8314
+msgid "http://localhost:8069"
+msgstr "http://localhost:8069"
+
+#: bin/openerp.glade:7743
+msgid "Create a new database"
+msgstr "Δημιουργία νέας βάσης δεδομένων"
+
+#: bin/openerp.glade:7756
+msgid "<b>Create a new database</b>"
+msgstr "<b>Δημιουργία μιάς νέας βάσης δεδομένων</b>"
+
+#: bin/openerp.glade:7827
+msgid ""
+"This is the URL of the OpenERP server. Use 'localhost' if the server is "
+"installed on this computer. Click on 'Change' to change the address."
+msgstr ""
+"Αυτό είναι το URL του διακομιστή OpenERP. Χρησιμοποιήστε 'localhost' εάν ο "
+"διακομιστής είναι εγκατεστημένος σε αυτόν τον υπολογιστή. Πιέστε το 'Αλλαγή "
+"για αλλαγή της διεύθυνσης."
+
+#: bin/openerp.glade:7831
+msgid "OpenERP Server:"
+msgstr "Διακομιστής OpenERP:"
+
+#: bin/openerp.glade:7861
+msgid ""
+"This is the password of the user that have the rights to administer "
+"databases. This is not a OpenERP user, just a super administrator. If you "
+"did not changed it, the password is 'admin' after installation."
+msgstr ""
+"Αυτός είναι ο κωδικός εισόδου του χρήστη που έχει δικαίωμα επιτήρησης των "
+"βάσεων δεδομένων. Δεν είναι χρήστης του OpenERP, απλά ένας υπερχρήστης. Εάν "
+"δεν το αλλάξατε, ο κωδικός 'admin' θα ισχύει μετά την εγκατάσταση."
+
+#: bin/openerp.glade:7865
+msgid "Super Administrator Password:"
+msgstr "Κωδικός Super Administrator:"
+
+#: bin/openerp.glade:7897
+msgid "(<i>admin</i>, by default)"
+msgstr "(<i>admin</i>, απο προεπιλογή)"
+
+#: bin/openerp.glade:7962
+msgid ""
+"Choose the name of the database that will be created. The name must not "
+"contain any special character. Exemple: 'terp'."
+msgstr ""
+"Επιλέξτε το όνομα της βασης που θέλετε να δημιουργήσετε. Το όνομα της βάσης "
+"δεν πρέπει να περιέχει ειδικούς χαρακτήρες"
+
+#: bin/openerp.glade:7964
+msgid "New Database Name:"
+msgstr "Όνομα Νέας Βάσης Δεδομένων:"
+
+#: bin/openerp.glade:7988
+msgid ""
+"Choose the default language that will be installed for this database. You "
+"will be able to install new languages after installation through the "
+"administration menu."
+msgstr ""
+"Επιλέξτε την προκαθορισμένη γλώσσα που θα εγκατασταθεί για αυτήν την βάση "
+"δεδομένων. Θα είστε σε θέση να εγκαταστήσετε νέες γλώσσες και μετά την λήξη "
+"της εγκατάστασης μέσω του μενού διαχείρισης"
+
+#: bin/openerp.glade:7990
+msgid "Default Language:"
+msgstr "Προεπιλεγμένη Γλώσσα:"
+
+#: bin/openerp.glade:8003
+msgid ""
+"This is the password of the '<i>admin</i>' user that will be created in your "
+"new database."
+msgstr ""
+"Αυτός ο κωδικός προορίζεται για τον χρήστη '<i>admin</i>' ο οποίος θα "
+"δημιουργηθεί στην νέα βάση δεδομένων σας."
+
+#: bin/openerp.glade:8005
+msgid "Administrator Password:"
+msgstr "Κωδικός Διαχειριστή:"
+
+#: bin/openerp.glade:8017
+msgid ""
+"This is the password of the '<i>admin</i>' user that will be created in your "
+"new database. It has to be the same than the above field."
+msgstr ""
+"Αυτός είναι ο κωδικός πρόσβασης του χρήστη '<i>admin</i>' που θα "
+"δημιουργηθεί στην βάση δεδομένων σας. Θα πρέπει να είναι ίδιο με το παραπάνω "
+"πεδίο."
+
+#: bin/openerp.glade:8019
+msgid "Confirm Password:"
+msgstr "Επιβεβαίωση Κωδικού:"
+
+#: bin/openerp.glade:8110
+msgid ""
+"Check this box if you want demonstration data to be installed on your new "
+"database. These data will help you to understand OpenERP, with predefined "
+"products, partners, etc."
+msgstr ""
+"Ελέγξτε αυτό το παράθυρο εάν θέλετε να εγκαταστήσετε δεδομένα επίδειξης στην "
+"βάση δεδομένων. Αυτά τα δεδομένα θα σας βοηθήσουν να κατανοήσετε το OpenERP "
+"με προκαθορισμένα προϊόντα, συνεργάτες κλπ."
+
+#: bin/openerp.glade:8113
+msgid "Load Demonstration Data:"
+msgstr "Φόρτωση δεδομένων επίδειξης:"
+
+#: bin/openerp.glade:8170
+msgid "Change password"
+msgstr "Αλλαγή κωδικού"
+
+#: bin/openerp.glade:8187
+msgid "<b>Change your super admin password</b>"
+msgstr "<b>Αλλάξτε τον κωδικό του super admin</b>"
+
+#: bin/openerp.glade:8340
+msgid "Old password:"
+msgstr "Παλιός κωδικός:"
+
+#: bin/openerp.glade:8353
+msgid "New password:"
+msgstr "Νέος κωδικός:"
+
+#: bin/openerp.glade:8366
+msgid "New password confirmation:"
+msgstr "Επιβεβαίωση νέου κωδικού:"
+
+#: bin/openerp.glade:8425
+msgid "OpenERP Message"
+msgstr "Μήνυμα OpenERP"
+
+#: bin/openerp.glade:8504
+msgid "Database creation"
+msgstr "Δημιουργία βάσης δεδομένων"
+
+#: bin/openerp.glade:8537
+msgid "<b>Database created successfully!</b>"
+msgstr "<b>Η βάση δεδομένων δημιουργήθηκε με επιτυχία!</b>"
+
+#: bin/openerp.glade:8569
+msgid ""
+"You can connect to the new database using one of the following account:\n"
+"\n"
+"    Administrator: admin / admin "
+msgstr ""
+"Μπορείτε να συνδεθείτε στην νέα βάση δεδομένων χρησιμοποιώντας έναν απο τους "
+"παρακάτω λογαριασμούς:\n"
+"\n"
+"    Διαχειριστής: admin / admin "
+
+#: bin/openerp.glade:8697
+msgid "Extension Manager"
+msgstr "Διαχειριστής Επεκτάσεων"
+
+#: bin/openerp.glade:8801
+msgid "Concurrency exception"
+msgstr "Concurrency exception"
+
+#: bin/openerp.glade:8826
+msgid ""
+"<b>\n"
+"Write concurrency warning:\n"
+"</b>\n"
+"This document has been modified while you were editing it.\n"
+"  Choose:\n"
+"   - \"Cancel\" to cancel saving.\n"
+"   - \"Compare\" to see the modified version.\n"
+"   - \"Write anyway\" to save your current version.\n"
+msgstr ""
+"<b>\n"
+"Εγγραφή συνεχόμενης προειδοποίησης:\n"
+"</b>\n"
+"Αυτό το έγγραφο έχει τροποποιηθεί την ώρα που εσείς το τροποποιούσατε.\n"
+"  Επιλέξτε:\n"
+"   - \"Άκυρο\" για να ακυρώσετε την αποθήκευση.\n"
+"   - \"Σύγκριση\" για να δείτε την τροποποιημένη έκδοση.\n"
+"   - \"Εγγραφή παρόλα αυτά\" για να αποθηκεύσετε την τρέχουσα έκδοση.\n"
+
+#: bin/openerp.glade:8889
+msgid "Compare"
+msgstr "Σύγκριση"
+
+#: bin/openerp.glade:8935
+msgid "Write anyway"
+msgstr "Εγγραφή παρόλα αυτά"
+
+#: bin/openerp.glade:8964
+msgid "window1"
+msgstr "παράθυρο1"
+
+#: bin/openerp.glade:9036
+msgid "Today"
+msgstr "Σήμερα"
+
+#: bin/openerp.glade:9082
+msgid "September 2008"
+msgstr "Σεπτέμβριος 2008"
+
+#: bin/openerp.glade:9096
+msgid "Day"
+msgstr "Ημέρα"
+
+#: bin/openerp.glade:9120
+msgid "Month"
+msgstr "Μήνας"
+
+#: bin/win_error.glade:40
+msgid "label"
+msgstr "ετικέττα"
+
+#: bin/win_error.glade:102
+msgid "Click here for details about the maintenance proposition"
+msgstr "Κάντε κλίκ εδώ για λεπτομέρειες στην πρόταση συντήρησης"
+
+#: bin/win_error.glade:119
+msgid "<i>_Maintenance</i>"
+msgstr "<i>_Συντήρηση</i>"
+
+#: bin/win_error.glade:150
+msgid ""
+"<b>Maintenance Contract.</b>\n"
+"<i>\n"
+"Your request will be send to OpenERP and maintenance team will reply you "
+"shortly.\n"
+"</i>"
+msgstr ""
+"<b>Συμβόλαιο Συντήρησης.</b>\n"
+"<i>\n"
+"Η αίτηση σας θα αποσταλλεί στο OpenERP και το τμήμα συντήρησης θα σας "
+"απαντήσουν σύντομα.\n"
+"</i>"
+
+#: bin/win_error.glade:184
+msgid "Explain what you did:"
+msgstr "Εξηγήστε τί κάνατε:"
+
+#: bin/win_error.glade:196
+msgid "Others Comments:"
+msgstr "Σχόλια Άλλων:"
+
+#: bin/win_error.glade:278
+msgid "Send to Maintenance Team"
+msgstr "Αποστολή στην Ομάδα Συντήρησης"
+
+#: bin/win_error.glade:326
+msgid "<i>_Support Request</i>"
+msgstr "<i>_Αίτηση Υποστήριξης</i>"
+
+#: bin/win_error.glade:353
+msgid "Details"
+msgstr "Λεπτομέρειες"
+
+#: bin/win_error.glade:369
+msgid "<i>_Details</i>"
+msgstr "<i>_Λεπτομέρειες</i>"
+
+#: bin/win_error.glade:398
+msgid "gtk-close"
+msgstr "gtk-κλείσιμο"
