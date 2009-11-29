@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:21+0000\n"
-"Last-Translator: Makis Nicolaou <mark.nicolaou@gmail.com>\n"
+"PO-Revision-Date: 2009-11-28 17:20+0000\n"
+"Last-Translator: Andreas Porevopoulos <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:36+0000\n"
+"X-Launchpad-Export-Date: 2009-11-29 04:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -53,12 +53,12 @@ msgstr "δηλώστε εναλλακτικό αρχείο config"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "Επιτρέπει την αποσφαλμάτωση. Ψευδώνυμο του '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "καθορίζει το επίπεδο καταγραφής: %s"
 
 #: bin/options.py:112
 msgid "specify the user login"
@@ -199,6 +199,28 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Ένα άγνωστο λάθος αναθέρθηκε</b>\n"
+"\n"
+"Το συμβόλαιο συντήρηση σας δεν καλύπτει όλα τα πρόσθετα που έχετε "
+"εγκαταστήσει στο σύστημα σας!\n"
+"Αν χρησιμοποιείτε την Open ERP στην παραγωγή, συνιστάται να αναβαθμίσετε το\n"
+"συμβόλαιο σας.\n"
+"\n"
+"Αν έχετε αναπτύξει δικά σας πρόσθετα ή αν έχετε εγκαταστήσει πρόσθετα "
+"τρίτων, μπορούμε\n"
+"να σας προσφέρουμε πρόσθετο συμβόλαιο συντήρησης για αυτά. Αφού\n"
+"τα εξετάσει, η ομάδα ποιότητας μας θα βεβαιώσει ότι θα μπορούν να "
+"αναβαθμιστούν\n"
+"αυτόματα για όλες τις επόμενες εκδόσεις της Open ERP χωρίς επιπλέον κόστος.\n"
+"\n"
+"Εδώ είναι μια λίστα με τα πρόσθετα που δεν καλύπτονται από το συμβόλαιο "
+"σας:\n"
+"%s\n"
+"\n"
+"Μπορείτε να χρησιμοποιήσετε τον σύνδεσμο παρακάτω για περισσότερες "
+"πληροφορίες. Οι λεπτομέρειες\n"
+"του λάθους εμφανίζονται στον επόμενο πίνακα."
 
 #: bin/common/common.py:443
 msgid ""
@@ -215,10 +237,13 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Το πρόβλημα σας ΔΕΝ μπόρεσε να αποσταλεί στην ομάδα ποιότητας!\n"
+"Παρακαλώ αναφέρατε το πρόβλημα μόνος σας στο:\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Σφάλμα"
 
 #: bin/common/common.py:599
 msgid "Open with..."
@@ -256,7 +281,7 @@ msgstr "Το περιεχόμενο της φόρμας ή της εξαίρεσ
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "Το περιεχόμενο του widget ή εξαίρεση αν μη έγκυρο"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -349,11 +374,11 @@ msgstr "Ανεύρεση OpenERP: %s (%%d αποτέλεσμα(τα))"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "Το αρχείο είναι κενό!"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "ΕΙσαγωγή!"
 
 #: bin/modules/gui/window/win_import.py:57
 msgid "XML-RPC error !"
@@ -361,7 +386,7 @@ msgstr "Σφάλμα XML-RPC!"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "Εισήχθη ένα αντικείμενο!"
 
 #: bin/modules/gui/window/win_import.py:64
 #, python-format
@@ -370,7 +395,7 @@ msgstr "Εισαγωγή %d αντικειμένων!"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "Λάθος εισαγωγής!"
 
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
@@ -381,10 +406,12 @@ msgstr "Όνομα πεδίου"
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
+"Δεν μπορείτε να εισάγετε αυτό το πεδίο %s, γιατί δεν μπορούμε να το "
+"προσδιορίσουμε"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "Δεν επιλέξατε πεδία για εισαγωγή"
 
 #: bin/modules/gui/window/win_selection.py:52
 msgid "Name"
@@ -424,11 +451,11 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Λάθος εξαγωγής!"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "Δεν υπάρχει ο κωδικός του πόρου για αυτό το αντικείμενο!"
 
 #: bin/modules/gui/window/form.py:221
 msgid "No record selected ! You can only attach to existing record."
@@ -501,7 +528,7 @@ msgstr "Μη έγκυρη φόρμα, διορθώστε τα κόκκινα π�
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "Σφάλμα !"
 
 #: bin/modules/gui/window/form.py:328 bin/modules/gui/window/form.py:423
 msgid ""
@@ -584,10 +611,12 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"Η προεπιλεγμένη γλώσσα του περιβάλλοντος έχει αλλαχθεί, μην ξεχάσετε να "
+"επανεκκινήσετε το πελάτη-πρόγραμμα για να την ενεργοποιήσετε."
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "Η γλώσσα τροποποιήθηκε!"
 
 #: bin/modules/gui/main.py:87 bin/modules/gui/main.py:436
 #: bin/modules/gui/main.py:1445
@@ -627,39 +656,39 @@ msgstr ""
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Εντολές αναβάθμισης"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "Ταυτότητα συμβολαίου"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "Κωδικός συμβολαίου"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Έχετε ήδη την τελευταία έκδοση"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Οι παρακάτω ενημρώσεις είναι διαθέσιμες"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Τώρα μπορείτε να ανβαθμίσετε τα αρχεία σας."
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "Αναβάθμιση αρχείων"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Το αρχείο σας αναβαθμίστηκε."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Τα αρχεία σας αναβαθμίστηκαν."
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
@@ -771,6 +800,8 @@ msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Λάθος πιστοποίησης!\n"
+"Λάθος όνομα χρήστη ή κωδικός!"
 
 #: bin/modules/gui/main.py:1062
 msgid "Not logged !"
@@ -1033,6 +1064,7 @@ msgstr "Σφάλμα εγγραφής του αρχείου: %s"
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
 msgstr ""
+"Λανθασμένη ημερομηνία! Το έτος πρέπει να είναι μαγλύτερο από το 1899!"
 
 #: bin/widget/view/form_gtk/calendar.py:130
 #: bin/widget/view/form_gtk/calendar.py:263
@@ -1042,7 +1074,7 @@ msgstr "Αυτό το widget είναι μόνο για ανάγνωση!"
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Λανθασμένη ώρα! Το έτος πρέπει να είναι μαγλύτερο από το 1899!"
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Hour:"
@@ -1059,6 +1091,7 @@ msgstr "Λάθος εικονίδιο για το κουμπί!"
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
 msgstr ""
+"Εισάγετε κάποιο κείμενο στο σχετικό πεδίο πριν προσθέσετε μεταφράσεις!"
 
 #: bin/widget/view/form_gtk/parser.py:548
 msgid "You need to save resource before adding translations!"
@@ -1185,11 +1218,11 @@ msgstr "Διαγραφή Βάσης Δεδομένων"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "_Κατεβάστε τον κώδικα αναβάθμίσης"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "_Αναβαθμ;iστε τα αρχεία"
 
 #: bin/openerp.glade:405
 msgid "Administrator Password"
@@ -1673,11 +1706,11 @@ msgstr "<b>Προκαθορισμένες Εξαγωγές</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Συμβατή εισαγωγή"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>Κάντε μια επιλογή για εξαγωγή</b>"
 
 #: bin/openerp.glade:2871
 msgid "Available Fields"
@@ -1973,7 +2006,7 @@ msgstr "Previous editable widget"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.glade:5400
 msgid "Next editable widget"
@@ -2248,11 +2281,11 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "Συνδεθείτε αργότερα"
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "Συνδεθείτε τώρα"
 
 #: bin/openerp.glade:7843
 msgid "Extension Manager"
@@ -2370,10 +2403,13 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"Παρακαλώ συμπληρώστε την ακόλουθη φόρμα για να μας βοηθήσετε να εξελίξουμε "
+"την <b><span foreground=\"red\"><i>Open</i></span> ERP</b> και να "
+"στοχεύσουμε καλύτερα την εξέλιξη της."
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "<b>Η εταιρεία σας</b>"
 
 #: bin/dia_survey.glade:84
 msgid "Open Source:"
@@ -2393,7 +2429,7 @@ msgstr "Ο Ρόλος σας:"
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "Εργαζόμενοι:"
 
 #: bin/dia_survey.glade:546
 msgid "Country:"
@@ -2401,7 +2437,7 @@ msgstr "Χώρα:"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "Πόλη:"
 
 #: bin/dia_survey.glade:586
 msgid "System:"
@@ -2409,7 +2445,7 @@ msgstr "Σύστημα:"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>Το ενδiαφέρον σας</b>"
 
 #: bin/dia_survey.glade:672
 msgid "How did you hear about us:"
@@ -2417,15 +2453,16 @@ msgstr "Πως μάθατε για εμάς:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "Σκοπεύουμε να χρησιμοποιήσουμε την Open ERP"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "Σκοπεύουμε να προσφέρουμε υπηρεσίες στην Open ERP"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"Πείτε μας γιατί δοκιμάζετε την Open ERP και ποιές εφαρμογές έχετε τώρα:"
 
 #: bin/dia_survey.glade:790
 msgid "<b>Keep Informed</b>"
@@ -2433,7 +2470,7 @@ msgstr "<b>Keep Informed</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "Θέλω να λάβω το βιβλίο (PDF) της Open ERP με email"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
@@ -2441,7 +2478,7 @@ msgstr "Τηλέφωνο / Κινητό:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "E-mail:"
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
@@ -2449,11 +2486,11 @@ msgstr "Το Όνομα σας:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "Άκυρο"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "ΟΚ"
 
 #~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 #~ msgstr "δηλώστε το επίπεδο καταγραφής: INFO, DEBUG, WARNING, ERROR, CRITICAL"
