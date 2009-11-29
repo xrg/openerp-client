@@ -27,27 +27,22 @@ import wid_int
 class filter(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}, call=None):
         wid_int.wid_int.__init__(self, name, parent, attrs)
-        
         if name:
             self.butt = gtk.ToggleButton(name)
             if len(name) < 10:
-                self.butt.set_size_request(90,45)
+                self.butt.set_size_request(90,-1)
         else:
             self.butt = gtk.ToggleButton()
             self.butt.set_relief(gtk.RELIEF_NONE)
         icon = gtk.Image()
         icon.set_from_stock(attrs.get('icon','gtk-home'), 1)
-        if attrs.get('help',False):
-            try:
-                self.butt.set_tooltip_markup(tools.to_xml(attrs['help']))
-            except:
-                pass
         self.butt.set_image(icon)
         self.butt.set_image_position(gtk.POS_TOP)
+        if attrs.get('help',False):
+            self.butt.set_tooltip_markup(tools.to_xml(attrs['help']))
         self.domain = attrs['domain']
-        if attrs.get('default',False):
-            self.butt.set_active(True)        
-        self.butt.set_alignment(0.3, 0.3)
+        self.butt.set_active(bool(attrs.get('default',False)))
+        self.butt.set_alignment(0.5, 0.5)
         self.butt.connect('toggled', call[1])
         self.widget = self.butt
 
