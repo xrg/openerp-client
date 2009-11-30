@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-28 17:20+0000\n"
+"PO-Revision-Date: 2009-11-29 21:59+0000\n"
 "Last-Translator: Andreas Porevopoulos <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-29 04:35+0000\n"
+"X-Launchpad-Export-Date: 2009-11-30 04:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -1222,7 +1222,7 @@ msgstr "_Κατεβάστε τον κώδικα αναβάθμίσης"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr "_Αναβαθμ;iστε τα αρχεία"
+msgstr "_Αναβαθμiστε τα αρχεία"
 
 #: bin/openerp.glade:405
 msgid "Administrator Password"
@@ -2395,7 +2395,7 @@ msgstr "<i>_Λεπτομέρειες</i>"
 
 #: bin/win_error.glade:398
 msgid "gtk-close"
-msgstr "gtk-κλείσιμο"
+msgstr "Κλείσιμο"
 
 #: bin/dia_survey.glade:32
 msgid ""
