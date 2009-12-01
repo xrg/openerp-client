@@ -78,16 +78,34 @@ class Button(Observable):
         model = self.form.screen.current_model
         self.form.set_value()
         button_type = self.attrs.get('special', '')
+
         if button_type=='cancel':
             self.form.screen.window.destroy()
             if 'name' in self.attrs.keys():
-                result = rpc.session.rpc_exec_auth(
-                            '/object', 'execute',
-                            self.form.screen.name,
-                            self.attrs['name'],[], model.context_get())
-                datas = {}
-                obj = service.LocalService('action.main')
-                obj._exec_action(result,datas,context=self.form.screen.context)
+                type_button = self.attrs.get('type','object')
+
+                if type_button == 'action':
+                    obj = service.LocalService('action.main')
+                    action_id = int(self.attrs['name'])
+
+                    context_action = self.form.screen.context.copy()
+                    
+                    if 'context' in self.attrs:
+                        context_action.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
+
+                    obj.execute(action_id, {'model':self.form.screen.name, 'id': False, 'ids': [], 'report_type': 'pdf'}, context=context_action)
+
+                elif type_button == 'object':
+                    result = rpc.session.rpc_exec_auth(
+                                '/object', 'execute',
+                                self.form.screen.name,
+                                self.attrs['name'],[], model.context_get())
+                    datas = {}
+                    obj = service.LocalService('action.main')
+                    obj._exec_action(result,datas,context=self.form.screen.context)
+                else:
+                    raise Exception, 'Unallowed button type'
+                
         elif model.validate():
             id = self.form.screen.save_current()
             if not self.attrs.get('confirm',False) or \
