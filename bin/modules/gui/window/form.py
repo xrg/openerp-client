@@ -412,8 +412,10 @@ class form(object):
             name2 = _('New document')
             if signal_data[3]:
                 name2 = _('Editing document (id: ')+str(signal_data[3])+')'
+            # Total Records should never change    
+            tot_count = signal_data[2] < signal_data[1] and  str(signal_data[1]) or str(signal_data[2])
             msg = _('Record: ') + name + ' / ' + str(signal_data[1]) + \
-                    _(' of ') + str(signal_data[2]) + ' - ' + name2
+                    _(' of ') + str(tot_count) + ' - ' + name2
         sb = self.glade.get_widget('stat_form')
         cid = sb.get_context_id('message')
         sb.push(cid, msg)
