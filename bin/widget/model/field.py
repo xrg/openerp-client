@@ -121,10 +121,10 @@ class CharField(object):
         return False
 
     def attrs_set(self, model):
+        uid = rpc.session.uid
         try:
             attrs_changes = eval(self.attrs.get('attrs',"{}"))
         except:
-            model.value.update({'uid':rpc.session.uid})
             attrs_changes = eval(self.attrs.get('attrs',"{}"),model.value)
             for k,v in attrs_changes.items():
                 for i in range(0,len(v)):
