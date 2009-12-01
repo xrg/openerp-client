@@ -8,35 +8,35 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:32+0000\n"
-"Last-Translator: oogii <orkhon_j@yahoo.com>\n"
+"PO-Revision-Date: 2009-11-30 19:28+0000\n"
+"Last-Translator: Munkhbayar Batkhuu <bmr333@gmail.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:36+0000\n"
+"X-Launchpad-Export-Date: 2009-12-01 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr ""
+msgstr "Урсгал хэвлэх"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
-msgstr ""
+msgstr "Ажлын урсгал хэвлэх"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr ""
+msgstr "Үүнд Плагин алга"
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
-msgstr ""
+msgstr "Плагинаа сонго"
 
 #: bin/translate.py:184
 #, python-format
 msgid "Unable to set locale %s"
-msgstr ""
+msgstr "%s локалыг тохируулж чадсангүй"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
@@ -45,11 +45,11 @@ msgstr ""
 #: bin/options.py:108
 #, python-format
 msgid "OpenERP Client %s"
-msgstr ""
+msgstr "OpenERP Клиент %s"
 
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr ""
+msgstr "Өөр тохиргоо заа"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
@@ -62,20 +62,20 @@ msgstr ""
 
 #: bin/options.py:112
 msgid "specify the user login"
-msgstr ""
+msgstr "Хэрэглэгчээ сонгох"
 
 #: bin/options.py:113
 msgid "specify the server port"
-msgstr ""
+msgstr "Серверийн порт"
 
 #: bin/options.py:114
 msgid "specify the server ip/name"
-msgstr ""
+msgstr "Серверийн нэр/хаяг"
 
 #: bin/printer/printer.py:185
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr ""
+msgstr "%s төрлийн файлтай ажиллаж чадахгүй"
 
 #: bin/printer/printer.py:190
 msgid ""
@@ -85,17 +85,17 @@ msgstr ""
 
 #: bin/printer/printer.py:198
 msgid "Error no report"
-msgstr ""
+msgstr "Алдааны дугаар"
 
 #: bin/printer/printer.py:217 bin/modules/gui/window/win_export.py:289
 #: bin/modules/gui/main.py:1424 bin/widget/view/form_gtk/binary.py:162
 #: bin/widget/view/form_gtk/image.py:119
 msgid "Save As..."
-msgstr ""
+msgstr "Нэр өөрчилж хадгалах..."
 
 #: bin/printer/printer.py:225
 msgid "Error writing the file!"
-msgstr ""
+msgstr "Файлд бичих алдаа"
 
 #: bin/common/common.py:212
 msgid ""
@@ -183,11 +183,11 @@ msgstr ""
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Алдаа"
 
 #: bin/common/common.py:599
 msgid "Open with..."
-msgstr ""
+msgstr "Үүгээр нээх..."
 
 #: bin/widget_search/checkbox.py:36 bin/widget_search/checkbox.py:49
 msgid "Yes"
@@ -209,7 +209,7 @@ msgstr "Хязгаар :"
 
 #: bin/widget_search/form.py:154
 msgid "Offset :"
-msgstr ""
+msgstr "Эхлэл"
 
 #: bin/widget_search/form.py:193
 msgid "Parameters :"
@@ -245,7 +245,7 @@ msgstr "Эхлэх огноо"
 #: bin/widget/view/form_gtk/calendar.py:62
 #: bin/widget/view/form_gtk/calendar.py:184
 msgid "Open the calendar widget"
-msgstr ""
+msgstr "Хуанли нээх"
 
 #: bin/widget_search/calendar.py:75
 msgid "End date"
@@ -258,31 +258,33 @@ msgstr "ERP-огноо сонгох"
 
 #: bin/rpc.py:140 bin/modules/gui/main.py:210 bin/modules/action/wizard.py:175
 msgid "Connection refused !"
-msgstr ""
+msgstr "Холбогдох боломжгүй!"
 
 #: bin/rpc.py:141
 msgid "Connection refused!"
-msgstr ""
+msgstr "Холбогдох боломжгүй!"
 
 #: bin/rpc.py:171
 msgid ""
 "Unable to reach to OpenERP server !\n"
 "You should check your connection to the network and the OpenERP server."
 msgstr ""
+"OpenERP серверт холбогдох боломж алга!\n"
+"Сүлжээ, серверээ шалгана уу."
 
 #: bin/rpc.py:171
 msgid "Connection Error"
-msgstr ""
+msgstr "Холболтын Алдаа"
 
 #: bin/rpc.py:186 bin/rpc.py:188 bin/modules/gui/main.py:218
 #: bin/modules/gui/main.py:224 bin/modules/action/wizard.py:187
 #: bin/modules/action/wizard.py:193 bin/modules/action/wizard.py:195
 msgid "Application Error"
-msgstr ""
+msgstr "Програмын алдаа"
 
 #: bin/rpc.py:188 bin/modules/action/wizard.py:195
 msgid "View details"
-msgstr ""
+msgstr "Дэлгэрэнгүйг харах"
 
 #: bin/modules/gui/window/win_search.py:50
 #: bin/widget/view/form_gtk/one2many_list.py:51
@@ -301,33 +303,33 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "Файл хоосон байна!"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "Чухал !"
 
 #: bin/modules/gui/window/win_import.py:57
 msgid "XML-RPC error !"
-msgstr ""
+msgstr "XML-RPC алдаа !"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "Нэг объект импортлов !"
 
 #: bin/modules/gui/window/win_import.py:64
 #, python-format
 msgid "Imported %d objects !"
-msgstr ""
+msgstr "%d объект импортлов !"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "Чухал Алдаа !"
 
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
 msgid "Field name"
-msgstr ""
+msgstr "Талбарын нэр"
 
 #: bin/modules/gui/window/win_import.py:186
 #, python-format
@@ -340,29 +342,31 @@ msgstr ""
 
 #: bin/modules/gui/window/win_selection.py:52
 msgid "Name"
-msgstr ""
+msgstr "Нэр"
 
 #: bin/modules/gui/window/win_selection.py:56
 msgid "Ressource Name"
-msgstr ""
+msgstr "Нөөцийн нэр"
 
 #: bin/modules/gui/window/win_selection.py:56
 msgid "Names"
-msgstr ""
+msgstr "Нэрс"
 
 #: bin/modules/gui/window/win_export.py:51
 msgid " record(s) saved !"
-msgstr ""
+msgstr " Бичлэг хадгалагдсан 1"
 
 #: bin/modules/gui/window/win_export.py:54
 msgid ""
 "Operation failed !\n"
 "I/O error"
 msgstr ""
+"Үйлдэл амжилтгүй боллоо !\n"
+"Оролт гаралтын төхөөмөржийн алдаа"
 
 #: bin/modules/gui/window/win_export.py:78
 msgid "Error Opening Excel !"
-msgstr ""
+msgstr "Excel нээх алдаа !"
 
 #: bin/modules/gui/window/win_export.py:80
 msgid ""
@@ -372,7 +376,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Экспортлох алдаа !"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
@@ -384,28 +388,28 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:233
 msgid "You have to select a record !"
-msgstr ""
+msgstr "Та бичлэг сонгох ёстой !"
 
 #: bin/modules/gui/window/form.py:239
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:43
 msgid "ID"
-msgstr ""
+msgstr "Дугаар"
 
 #: bin/modules/gui/window/form.py:240
 msgid "Creation User"
-msgstr ""
+msgstr "Үүсгэсэн хэрэглэгч"
 
 #: bin/modules/gui/window/form.py:241
 msgid "Creation Date"
-msgstr ""
+msgstr "Үүсгэсэн огноо"
 
 #: bin/modules/gui/window/form.py:242
 msgid "Latest Modification by"
-msgstr ""
+msgstr "Сүүлд өөрчилсөн"
 
 #: bin/modules/gui/window/form.py:243
 msgid "Latest Modification Date"
-msgstr ""
+msgstr "Сүүлд өөрчилсөн"
 
 #: bin/modules/gui/window/form.py:254
 msgid ""
@@ -415,27 +419,27 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:257
 msgid "Are you sure to remove this record ?"
-msgstr ""
+msgstr "Энэ бичлэгийг устгахад итгэлтэй байна уу ?"
 
 #: bin/modules/gui/window/form.py:259
 msgid "Are you sure to remove those records ?"
-msgstr ""
+msgstr "Энэ бичлэгүүдийг устгахад итгэлтэй байна уу ?"
 
 #: bin/modules/gui/window/form.py:263
 msgid "Resources cleared."
-msgstr ""
+msgstr "Нөөцийг арилгав."
 
 #: bin/modules/gui/window/form.py:265
 msgid "Resources successfully removed."
-msgstr ""
+msgstr "Нөөцийг устгав."
 
 #: bin/modules/gui/window/form.py:298
 msgid "Working now on the duplicated document !"
-msgstr ""
+msgstr "Яг одоо хувилсан баримт дээр ажиллаж байна !"
 
 #: bin/modules/gui/window/form.py:306
 msgid "Document Saved."
-msgstr ""
+msgstr "Баримт хадгалагдсан."
 
 #: bin/modules/gui/window/form.py:308 bin/modules/gui/window/form.py:309
 #: bin/widget/view/form_gtk/parser.py:137
@@ -445,7 +449,7 @@ msgstr "Форм буруу, улаан талбарыг засна уу !"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "Алдаа!"
 
 #: bin/modules/gui/window/form.py:328 bin/modules/gui/window/form.py:423
 msgid ""
@@ -459,15 +463,15 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:384
 msgid "Print Screen"
-msgstr ""
+msgstr "Дэлгэц хэвлэх"
 
 #: bin/modules/gui/window/form.py:404
 msgid "No record selected"
-msgstr ""
+msgstr "Бичлэг сонгогдоогүй"
 
 #: bin/modules/gui/window/form.py:409
 msgid "New document"
-msgstr ""
+msgstr "Шинэ баримт"
 
 #: bin/modules/gui/window/form.py:411
 msgid "Editing document (id: "
@@ -475,23 +479,23 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:412
 msgid "Record: "
-msgstr ""
+msgstr "Бичлэг: "
 
 #: bin/modules/gui/window/form.py:413
 msgid " of "
-msgstr ""
+msgstr " ийн "
 
 #: bin/modules/gui/window/view_tree/parse.py:36
 msgid "Tree"
-msgstr ""
+msgstr "Мод"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:49
 msgid "Description"
-msgstr ""
+msgstr "Тайлбар"
 
 #: bin/modules/gui/window/__init__.py:33
 msgid "Unknown Window"
-msgstr ""
+msgstr "Үл мэдэх цонх"
 
 #: bin/modules/gui/window/win_extension.py:115
 msgid "This extension is already defined"
@@ -517,7 +521,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_preference.py:69
 msgid "Preference"
-msgstr ""
+msgstr "Тохиргоо"
 
 #: bin/modules/gui/window/win_preference.py:80
 msgid ""
@@ -527,34 +531,34 @@ msgstr ""
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "Үндсэн хэл өөрчлөгдөв !"
 
 #: bin/modules/gui/main.py:87 bin/modules/gui/main.py:436
 #: bin/modules/gui/main.py:1445
 msgid "Could not connect to server !"
-msgstr ""
+msgstr "Сервертэй холбогдох боломжгүй !"
 
 #: bin/modules/gui/main.py:91 bin/openerp.glade:72 bin/openerp.glade:6272
 #: bin/openerp.glade:6508 bin/openerp.glade:6830 bin/openerp.glade:7475
 msgid "Server:"
-msgstr ""
+msgstr "Сервер:"
 
 #: bin/modules/gui/main.py:102 bin/openerp.glade:98 bin/openerp.glade:6544
 #: bin/openerp.glade:6787 bin/openerp.glade:7084 bin/openerp.glade:7432
 msgid "Change"
-msgstr ""
+msgstr "Өөрчлөх"
 
 #: bin/modules/gui/main.py:109 bin/openerp.glade:7011
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "Супер админы нууц үг:"
 
 #: bin/modules/gui/main.py:172 bin/modules/action/wizard.py:137
 msgid "OpenERP Computing"
-msgstr ""
+msgstr "OpenERP тооцоолж байна"
 
 #: bin/modules/gui/main.py:183 bin/modules/action/wizard.py:147
 msgid "Operation in progress"
-msgstr ""
+msgstr "Үйлдэл хийгдэж байна"
 
 #: bin/modules/gui/main.py:187 bin/modules/gui/main.py:639
 #: bin/modules/action/wizard.py:151
@@ -562,6 +566,10 @@ msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
+"Уучлаарай, түр хүлээнэ үү.\n"
+"Энэ үйлдэл жоохон цаг авах нь...\n"
+"/та ер нь харьж бай дөө... /\n"
+"/bmr jokes/"
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
@@ -569,19 +577,19 @@ msgstr ""
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "Гэрээний Дугаар:"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "Гэрээний нууц үг:"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Таньд сүүлийн хувилбар байна"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Доорхи програмын шинэчлэл байна:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
@@ -601,11 +609,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
-msgstr ""
+msgstr "Тодорхойгүй"
 
 #: bin/modules/gui/main.py:443 bin/modules/gui/main.py:1449
 msgid "No database found, you must create one !"
-msgstr ""
+msgstr "Бааз олдсонгүй, та эхлээд үүсгэх хэрэгтэй !"
 
 #: bin/modules/gui/main.py:467
 #, python-format
@@ -616,11 +624,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:595
 msgid "Sorry,'"
-msgstr ""
+msgstr "Уучилаарай, '"
 
 #: bin/modules/gui/main.py:595 bin/modules/gui/main.py:598
 msgid "Bad database name !"
-msgstr ""
+msgstr "Баазын нэр буруу !"
 
 #: bin/modules/gui/main.py:598
 msgid ""
@@ -634,16 +642,16 @@ msgstr ""
 
 #: bin/modules/gui/main.py:635
 msgid "<b>Operation in progress</b>"
-msgstr ""
+msgstr "<b>Үйлдэл хийгдэж байна</b>"
 
 #: bin/modules/gui/main.py:658 bin/modules/gui/main.py:660
 #: bin/modules/gui/main.py:662
 msgid "Could not create database."
-msgstr ""
+msgstr "Бааз үүсгэж чадсангүй."
 
 #: bin/modules/gui/main.py:658
 msgid "Database already exists !"
-msgstr ""
+msgstr "Ийм Бааз байна!"
 
 #: bin/modules/gui/main.py:660 bin/modules/gui/main.py:1342
 #: bin/modules/gui/main.py:1361 bin/modules/gui/main.py:1437
@@ -674,37 +682,41 @@ msgstr ""
 
 #: bin/modules/gui/main.py:906
 msgid "Edit"
-msgstr ""
+msgstr "Засах"
 
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr ""
+msgstr "%s хүсэлт"
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr ""
+msgstr "Хүсэлт алга"
 
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sended"
-msgstr ""
+msgstr " - %s хүсэлт илгээв"
 
 #: bin/modules/gui/main.py:1035
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
+"Холболтын алдаа !\n"
+"Сервертэй холбоо тогтоох боломжгүй байна!"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Нэвтрэх алдаа !\n"
+"Нэр эсвэл нууц үг буруу !"
 
 #: bin/modules/gui/main.py:1062
 msgid "Not logged !"
-msgstr ""
+msgstr "Холбогдоогүй !"
 
 #: bin/modules/gui/main.py:1138
 msgid ""
@@ -715,37 +727,37 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1170 bin/modules/gui/main.py:1177
 msgid "Do you really want to quit ?"
-msgstr ""
+msgstr "Та үнэхээр гарах гэж байна уу?"
 
 #: bin/modules/gui/main.py:1232
 #, python-format
 msgid "Attachments (%d)"
-msgstr ""
+msgstr "(%d) Хавсралт"
 
 #: bin/modules/gui/main.py:1245
 msgid "Attachments"
-msgstr ""
+msgstr "Хавсралтууд"
 
 #: bin/modules/gui/main.py:1333
 msgid "Delete a database"
-msgstr ""
+msgstr "Бааз устгах"
 
 #: bin/modules/gui/main.py:1339
 msgid "Database dropped successfully !"
-msgstr ""
+msgstr "Баазыг амжилттай устгав !"
 
 #: bin/modules/gui/main.py:1342
 msgid "Could not drop database."
-msgstr ""
+msgstr "Баазыг устгаж чадсангүй"
 
 #: bin/modules/gui/main.py:1344
 msgid "Couldn't drop database"
-msgstr ""
+msgstr "Баазыг устгаж чадсангүй"
 
 #: bin/modules/gui/main.py:1347 bin/widget/view/form_gtk/image.py:112
 #: bin/widget/view/form_gtk/url.py:112 bin/openerp.glade:5895
 msgid "Open..."
-msgstr ""
+msgstr "Нээх..."
 
 #: bin/modules/gui/main.py:1358
 msgid "Database restored successfully !"
@@ -766,7 +778,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1404
 msgid "Validation Error."
-msgstr ""
+msgstr "Нягтлах алдаа."
 
 #: bin/modules/gui/main.py:1412
 msgid "Could not change the Super Admin password."
@@ -774,7 +786,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1413
 msgid "Bad password provided !"
-msgstr ""
+msgstr "Нууц үг буруу !"
 
 #: bin/modules/gui/main.py:1415
 msgid "Error, password not changed."
@@ -782,31 +794,31 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1421 bin/modules/gui/main.py:1441
 msgid "Backup a database"
-msgstr ""
+msgstr "Баазын нөөц хуулбар авах"
 
 #: bin/modules/gui/main.py:1434
 msgid "Database backed up successfully !"
-msgstr ""
+msgstr "Баазыг амжилттай хуулж авлаа !"
 
 #: bin/modules/gui/main.py:1437
 msgid "Could not backup the database."
-msgstr ""
+msgstr "Бааз хуулж чадсангүй"
 
 #: bin/modules/gui/main.py:1439
 msgid "Couldn't backup database."
-msgstr ""
+msgstr "Бааз хуулж чадсангүй"
 
 #: bin/modules/action/main.py:46
 msgid "Nothing to print!"
-msgstr ""
+msgstr "Хэвлэх юм алга!"
 
 #: bin/modules/action/main.py:63
 msgid "Printing aborted, too long delay !"
-msgstr ""
+msgstr "Хэвлэлт цуцлагдав, хэт удаан пауз !"
 
 #: bin/modules/action/main.py:180
 msgid "Select your action"
-msgstr ""
+msgstr "Үйлдлээ сонгоно уу"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid "Gantt view not yet implemented !"
