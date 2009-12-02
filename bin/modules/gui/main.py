@@ -1408,8 +1408,9 @@ class terp_main(service.Service):
                 f = file(filename, 'rb')
                 data_b64 = base64.encodestring(f.read())
                 f.close()
-                rpc.session.db_exec(url, 'restore', passwd, db_name, data_b64)
-                common.message(_("Database restored successfully !"), parent=self.window)
+                res = rpc.session.db_exec(url, 'restore', passwd, db_name, data_b64)
+                if res:
+                    common.message(_("Database restored successfully !"), parent=self.window)
             except Exception,e:
                 if (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
                     common.warning(_('Bad database administrator password !'),_("Could not restore database."), parent=self.window)
