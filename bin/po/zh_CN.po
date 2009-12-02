@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:42+0000\n"
+"PO-Revision-Date: 2009-12-01 15:20+0000\n"
 "Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:37+0000\n"
+"X-Launchpad-Export-Date: 2009-12-02 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -253,7 +253,7 @@ msgstr ""
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 #
 # File: bin/common/common.py, line: 499
@@ -434,7 +434,7 @@ msgstr "OpenERP 搜索：%s（%%d result(s)）"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "该文件是空的！"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
@@ -449,7 +449,7 @@ msgstr "XML-RPC出错！"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "已经导入一个对象！"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 57
@@ -461,7 +461,7 @@ msgstr "导入了 %d 个对象！"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "导入错误！"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 93
@@ -476,11 +476,11 @@ msgstr "栏目名称"
 #: bin/modules/gui/window/win_import.py:186
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
-msgstr ""
+msgstr "您不能导入字段 %s，因为我们不能自动检测它"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "您没有选择任何要导入的字段"
 
 #
 # File: bin/modules/gui/window/win_selection.py, line: 52
@@ -541,11 +541,11 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "导入错误！"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "该对象的资源标识符不存在！"
 
 #: bin/modules/gui/window/form.py:221
 msgid "No record selected ! You can only attach to existing record."
@@ -645,7 +645,7 @@ msgstr "表单无效，请重新输入红色的字段"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "错误！"
 
 #
 # File: bin/modules/gui/window/form.py, line: 302
@@ -774,11 +774,11 @@ msgstr "偏好设定"
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
-msgstr ""
+msgstr "界面的默认语言已经修改，请别忘记重新启动客户端以便使您的语言设置生效"
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "默认语言已修改！"
 
 #
 # File: bin/modules/gui/main.py, line: 145
@@ -842,39 +842,39 @@ msgstr ""
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr ""
+msgstr "迁移脚本列表"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "合同号："
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "合同密码："
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "已经是最新版本了"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "有如下更新可用："
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "您现在可以迁移您的数据库了。"
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "迁移数据库"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "您的数据库已升级。"
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "您的数据库已经升级。"
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
@@ -1049,6 +1049,8 @@ msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"认证错误！\n"
+"无效的用户名或密码！"
 
 #
 # File: bin/modules/gui/main.py, line: 761
@@ -1438,7 +1440,7 @@ msgstr "写入文件: %s发生错误"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "无效的日期！年份必须大于 1899！"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 115
@@ -1453,7 +1455,7 @@ msgstr "该部件为只读！"
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "无效的日期！年份必须大于 1899！"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
@@ -1689,11 +1691,11 @@ msgstr "删除帐套(_p)"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "下载迁移代码(_D)"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "迁移数据库(_M)"
 
 #
 # File: bin/openerp.glade, line: 372
@@ -2440,7 +2442,7 @@ msgstr ""
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>选择一个要导出的选项</b>"
 
 #: bin/openerp.glade:2871
 msgid "Available Fields"
@@ -2926,7 +2928,7 @@ msgstr "上一可编辑窗口"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #
 # File: bin/openerp.glade, line: 7383
@@ -3309,11 +3311,11 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "稍候再连接"
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "立即连接"
 
 #: bin/openerp.glade:7843
 msgid "Extension Manager"
@@ -3455,7 +3457,7 @@ msgstr ""
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "<b>您的公司</b>"
 
 #
 # File: bin/openerp.glade, line: 5791
@@ -3484,7 +3486,7 @@ msgstr "角色："
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "员工列表"
 
 #
 # File: bin/openerp.glade, line: 5953
@@ -3495,7 +3497,7 @@ msgstr "国家:"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "城市："
 
 #
 # File: bin/openerp.glade, line: 5887
@@ -3517,15 +3519,15 @@ msgstr "你如何知道我们："
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "我们计划使用 Open ERP"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "我们计划提供基于 Open ERP 的服务"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
-msgstr ""
+msgstr "告诉我们您为什么试用 Open ERP 和您当前在使用的软件："
 
 #
 # File: bin/openerp.glade, line: 6318
@@ -3536,7 +3538,7 @@ msgstr "<b>保持联系</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "我希望通过电子邮件接收 Open ERP 的电子书（PDF）"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
@@ -3544,7 +3546,7 @@ msgstr "电话/ 手机:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "电子邮件："
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
@@ -3552,11 +3554,11 @@ msgstr "您的姓名:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #
 # File: bin/modules/gui/main.py, line: 736
