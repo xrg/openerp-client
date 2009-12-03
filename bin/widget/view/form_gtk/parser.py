@@ -109,57 +109,7 @@ class Button(Observable):
             id = self.form.screen.save_current()
             if not self.attrs.get('confirm',False) or \
                     common.sur(self.attrs['confirm']):
-                button_type = self.attrs.get('type', 'workflow')
-                if button_type == 'workflow':
-                    result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
-                                            self.form.screen.name,
-                                            self.attrs['name'], id)
-                    if type(result)==type({}):
-                        if result['type']== 'ir.actions.act_window_close':
-                            self.form.screen.window.destroy()
-                        else:
-                            datas = {'ids':[id]}
-                            obj = service.LocalService('action.main')
-                            obj._exec_action(result, datas)
-                    elif type([]) == type(result):
-                        datas = {'ids':[id]}
-                        obj = service.LocalService('action.main')
-                        for rs in result:
-                            obj._exec_action(rs, datas)
-
-                elif button_type == 'object':
-                    if not id:
-                        return
-                    context = model.context_get()
-                    if 'context' in self.attrs:
-                        context.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
-
-                    result = rpc.session.rpc_exec_auth(
-                        '/object', 'execute',
-                        self.form.screen.name,
-                        self.attrs['name'],
-                        [id], context
-                    )
-                    if type(result)==type({}):
-                        self.form.screen.window.destroy()
-                        datas = {}
-                        obj = service.LocalService('action.main')
-                        obj._exec_action(result,datas,context=self.form.screen.context)
-
-                elif button_type == 'action':
-                    obj = service.LocalService('action.main')
-                    action_id = int(self.attrs['name'])
-
-                    context = self.form.screen.context.copy()
-
-                    if 'context' in self.attrs:
-                        context.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
-
-                    obj.execute(action_id, {'model':self.form.screen.name, 'id': id or False, 'ids': id and [id] or [], 'report_type': 'pdf'}, context=context)
-
-                else:
-                    raise Exception, 'Unallowed button type'
-                self.form.screen.reload()
+                model.get_button_action(self.form.screen,id,self.attrs)
         else:
             common.warning(_('Invalid form, correct red fields !'), _('Error !') )
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")

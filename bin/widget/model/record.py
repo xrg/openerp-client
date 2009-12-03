@@ -300,5 +300,71 @@ class ModelRecord(signal_event.signal_event):
             data[fname] = value
         self.set_default(data)
 
+    # Performing button clicks on both forms of view: list and form.
+    def get_button_action(self, screen, id=None, attrs={}):
+        
+        """Arguments:
+        screen : Screen to be worked upon
+        id     : Id of the record for which the button is clicked
+        attrs  : Button Attributes
+        """
+
+        if not id:
+            id = self.id
+        if not attrs.get('confirm',False) or \
+                    common.sur(attrs['confirm']):
+                button_type = attrs.get('type', 'workflow')
+                if button_type == 'workflow':
+                    result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
+                                            self.resource,
+                                            attrs['name'], self.id)
+                    if type(result)==type({}):
+                        if result['type']== 'ir.actions.act_window_close':
+                            screen.window.destroy()
+                        else:
+                            datas = {'ids':[id],'id':id}
+                            obj = service.LocalService('action.main')
+                            obj._exec_action(result, datas)
+                    elif type([]) == type(result):
+                        datas = {'ids':[id]}
+                        obj = service.LocalService('action.main')
+                        for rs in result:
+                            obj._exec_action(rs, datas)
+
+                elif button_type == 'object':
+                    if not self.id:
+                        return
+                    context = self.context_get()
+                    if 'context' in attrs:
+                        context.update(self.expr_eval(attrs['context'], check_load=False))
+
+                    result = rpc.session.rpc_exec_auth(
+                        '/object', 'execute',
+                        self.resource,
+                        attrs['name'],
+                        [id], context
+                    )
+                    
+                    if type(result)==type({}):
+                        screen.window.destroy()
+                        datas = {}
+                        obj = service.LocalService('action.main')
+                        obj._exec_action(result,datas,context=screen.context)
+
+                elif button_type == 'action':
+                    obj = service.LocalService('action.main')
+                    action_id = int(attrs['name'])
+
+                    context = screen.context.copy()
+                    if 'context' in attrs:
+                        context.update(self.expr_eval(attrs['context'], check_load=False))
+
+                    obj.execute(action_id, {'model':self.resource, 'id': id or False, 'ids': id and [id] or [], 'report_type': 'pdf'}, context=context)
+
+                else:
+                    raise Exception, 'Unallowed button type'
+                screen.reload()
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
