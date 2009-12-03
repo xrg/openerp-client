@@ -256,10 +256,14 @@ class ViewList(parser_view):
                 # first click on button
                 if path[1]._type == 'Button':
                     cell_button = path[1].get_cells()[0]
-                    cell_button.on_start_editing(event,treeview,1,None,None,0,oneclick={'record':m})
+                    # Calling actions
+                    m.get_button_action(self.screen,m.id,path[1].attrs)
+#                    cell_button.on_start_editing(event,treeview,1,None,None,0,oneclick={'record':m})
                     self.screen.current_model = m
 #                    self.display()
+                    self.screen.reload()
                     treeview.screen.reload()
+                    
             else:
                 # Here it goes for right click
                 if path[1]._type=='many2one':
