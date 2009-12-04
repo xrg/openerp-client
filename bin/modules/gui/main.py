@@ -1487,7 +1487,7 @@ class terp_main(service.Service):
         pass_widget = dialog.get_widget('ent_passwd_select')
         server_widget = dialog.get_widget('ent_server_select')
         db_widget = dialog.get_widget('combo_db_select')
-        entry_db = dialog.get_widget('ent_db_select')
+        entry_db = dialog.get_widget('entry_db_select')
         label = dialog.get_widget('label_db_select')
 
 
