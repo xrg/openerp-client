@@ -56,27 +56,53 @@ def export_csv(fname, fields, result, write_title=False):
 def open_excel(fields, result):
     if os.name == 'nt':
         try:
-            from win32com.client import Dispatch
-            xlApp = Dispatch("Excel.Application")
-            xlApp.Workbooks.Add()
-            for col in range(len(fields)):
-                xlApp.ActiveSheet.Cells(1,col+1).Value = fields[col]
-            sht = xlApp.ActiveSheet
-            for a in result:
-                for b in range(len(a)):
-                    if type(a[b]) == type(''):
-                        a[b]=a[b].decode('utf-8','replace')
-                    elif type(a[b]) == type([]):
-                        if len(a[b])==2:
-                            a[b] = a[b][1].decode('utf-8','replace')
-                        else:
-                            a[b] = ''
-            sht.Range(sht.Cells(2, 1), sht.Cells(len(result)+1, len(fields))).Value = result
-            xlApp.Visible = 1
+            if len(fields) > 0:
+                from win32com.client import Dispatch
+                import pywintypes
+                xlApp = Dispatch("Excel.Application")
+                xlApp.Workbooks.Add()
+                for col in range(len(fields)):
+                    xlApp.ActiveSheet.Cells(1,col+1).Value = fields[col]
+                sht = xlApp.ActiveSheet
+                for a in result:
+                    for b in range(len(a)):
+                        if type(a[b]) == type(''):
+                            a[b]=a[b].decode('utf-8','replace')
+                        elif type(a[b]) == type([]):
+                            if len(a[b])==2:
+                                a[b] = a[b][1].decode('utf-8','replace')
+                            else:
+                                a[b] = ''
+                sht.Range(sht.Cells(2, 1), sht.Cells(len(result)+1, len(fields))).Value = result
+                xlApp.Visible = 1
         except:
             common.error(_('Error Opening Excel !'),'')
     else:
-        common.message(_("Function only available for MS Office !\nSorry, OOo users :("))
+#        common.message(_("Function only available for MS Office !\nSorry, OOo users :("))
+        try:
+            import subprocess
+            import time
+            retcode = subprocess.call(["soffice", "-accept=socket,host=localhost,port=2002;urp;", "-nodefault"], shell=False)
+            from oootools import OOoTools
+            for i in range(10):
+                ooo = OOoTools('localhost', 2002)
+                if ooo and ooo.desktop:
+                    break
+                time.sleep(1)
+            doc = ooo.desktop.loadComponentFromURL("private:factory/scalc",'_blank',0,())
+            sheet = doc.CurrentController.ActiveSheet
+            for col in range(len(fields)):
+                cell = sheet.getCellByPosition(col, 0)
+                cell.String = fields[col]
+            if len(fields) > 0:
+                cellrange = sheet.getCellRangeByPosition(0, 1, len(fields) - 1, len(result))
+                tresult = []
+                for i in range(len(result)):
+                    tresult.append(tuple(result[i]))
+                    tresult = tuple(tresult)
+                cellrange.setDataArray(tresult)
+        except:
+            common.error(_('Error Opening Excel !'),'')
 
 def datas_read(ids, model, fields, fields_view, prefix='', context=None):
     ctx = context.copy()    
@@ -152,6 +178,20 @@ class win_export(object):
         self.wid_write_field_names = self.glade.get_widget('add_field_names_cb')
         self.wid_import_compatible = self.glade.get_widget('import_compatible')
         action = self.wid_action.set_active(os.name!='nt')
+        
+        if os.name != 'nt':
+            self.wid_action.remove_text(0)
+        else:
+            try:
+                from win32com.client import Dispatch
+                import pywintypes
+                xlApp = Dispatch("Excel.Application")
+            except Exception,e:
+                if isinstance(e, pywintypes.com_error):
+                    action = self.wid_action.set_active(isinstance(e, pywintypes.com_error))
+                    self.wid_action.remove_text(0)
+                else:
+                    pass
 
         self.glade.signal_connect('on_but_unselect_all_clicked', self.sig_unsel_all)
         self.glade.signal_connect('on_but_select_all_clicked', self.sig_sel_all)
@@ -282,7 +322,7 @@ class win_export(object):
             result = result.get('datas',[])
             if import_comp:
                 fields2 = fields                        
-            if not action:
+            if self.wid_action.get_active_text() == "Open in Excel":
                 open_excel(fields2, result)
             else:
                 fname = common.file_selection(_('Save As...'),
