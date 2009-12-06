@@ -8,13 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:22+0000\n"
-"Last-Translator: Harry (Open ERP) <hmo@tinyerp.com>\n"
+"PO-Revision-Date: 2009-12-05 21:26+0000\n"
+"Last-Translator: Jordi Esteve - http://www.zikzakmedia.com "
+"<jesteve@zikzakmedia.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:37+0000\n"
+"X-Launchpad-Export-Date: 2009-12-06 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -83,12 +84,12 @@ msgstr "especifica archivo de configuración alterno"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "Activa depuración báscia. Alias para '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "indica el nivel de log: %s"
 
 #
 # File: bin/options.py, line: 93
@@ -284,6 +285,30 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Un error desconocido ha sido reportado.</ b>\n"
+"\n"
+"¡Su contrato de mantenimiento no cubre todos los módulos instalados en su "
+"sistema!\n"
+"Si está utilizando OpenERP en producción, es muy recomendable actualizar su\n"
+"contrato.\n"
+"\n"
+"Si ha desarrollado sus propios módulos o instalado módulos de terceros, "
+"podemos\n"
+"ofrecerle un contrato de mantenimiento adicional para estos módulos. Después "
+"de\n"
+"revisar los módulos, nuestro equipo de calidad se asegurará que van a "
+"migrar\n"
+"automáticamente para todas las futuras versiones estables de OpenERP sin "
+"costo adicional.\n"
+"\n"
+"Esta es la lista de módulos que no están cubiertos por su contrato de "
+"mantenimiento:\n"
+"%s\n"
+"\n"
+"Puede utilizar el enlace de abajo para más información. El detalle de los "
+"errores\n"
+"se muestra en la segunda pestaña."
 
 #: bin/common/common.py:443
 msgid ""
@@ -300,10 +325,13 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"¡Su problema *NO* puede ser enviado al equipo de calidad!\n"
+"Informe de este error manualmente a:\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #
 # File: bin/common/common.py, line: 499
@@ -391,7 +419,7 @@ msgstr "El contenido del formulario o excepción si no es válido"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "El contenido del widget o excepción si no es válido"
 
 #
 # File: bin/widget_search/date_widget.py, line: 65
@@ -574,11 +602,11 @@ msgstr "Búsqueda OpenERP: %s (%%d resultado(s))"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "¡El fichero está vacío!"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "¡Importación!"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 54
@@ -590,7 +618,7 @@ msgstr "¡Error de XML-RPC!"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "¡Importado un objeto!"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 57
@@ -603,7 +631,7 @@ msgstr "¡Se ha importado %d objetos!"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "¡Error de importación!"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 93
@@ -621,10 +649,11 @@ msgstr "Nombre del campo"
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
+"No se puede importar este campo %s, porqué no se puede auto detectarlo."
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "No ha seleccionado ningún campo a importar"
 
 #
 # File: bin/modules/gui/window/win_selection.py, line: 52
@@ -692,11 +721,11 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "¡Error de exportación!"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "¡No existe un recurso con este ID para este objeto!"
 
 #
 # File: bin/modules/gui/window/form.py, line: 197
@@ -833,7 +862,7 @@ msgstr "!Formulario inválido, corrija los campos en rojo!"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "¡Error!"
 
 #: bin/modules/gui/window/form.py:328 bin/modules/gui/window/form.py:423
 msgid ""
@@ -981,10 +1010,12 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"El idioma por defecto de la interfaz ha sido modificado, no olvide "
+"rearrancar el cliente para tener la interfaz en su idioma."
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "¡Idioma por defecto modificado!"
 
 #
 # File: bin/modules/gui/main.py, line: 145
@@ -1082,39 +1113,39 @@ msgstr ""
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Programas (scripts) de migración"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "ID del contrato:"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "Contraseña del contrato:"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Ya tiene la última versión."
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Las siguientes actualizaciones están disponibles:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Ahora puede migrar sus bases de datos."
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "Migrar base de datos"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Su base de datos ha sido actualizada."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Sus bases de datos han sido actualizadas."
 
 #
 # File: bin/modules/gui/main.py, line: 141
@@ -1333,6 +1364,8 @@ msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"¡Error de autenticación!\n"
+"¡Nombre de usuario o contraseña errónea!"
 
 #
 # File: bin/modules/gui/main.py, line: 761
@@ -1819,7 +1852,7 @@ msgstr "Error escribiendo el archivo: %s"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "¡Valor de fecha erróneo! El año debe ser mayo que 1899."
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 115
@@ -1836,7 +1869,7 @@ msgstr "¡Este control es de sólo lectura!"
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "¡Valor de fecha-hora erróneo! El año debe ser mayo que 1899."
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
@@ -1864,7 +1897,7 @@ msgstr "¡Icono erróneo para el botón!"
 
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "¡Introduzca algún texto en el campo antes de añadir traducciones!"
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 480
@@ -2122,11 +2155,11 @@ msgstr "_Eliminar la base de datos"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "_Descargar código de migraciones"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "_Migrar base(s) de datos"
 
 #
 # File: bin/openerp.glade, line: 372
@@ -3052,11 +3085,11 @@ msgstr "<b>Exportaciones predefinidas</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Importación compatible"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>Seleccione una opción para exportar</b>"
 
 #
 # File: bin/openerp.glade, line: 2776
@@ -3644,7 +3677,7 @@ msgstr "Control editable anterior"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Mayús> + <Tab>"
 
 #
 # File: bin/openerp.glade, line: 7383
@@ -4146,11 +4179,11 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "Conectar más tarde"
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "Conectar ahora"
 
 #
 # File: bin/openerp.glade, line: 9826
@@ -4326,10 +4359,13 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"Por favor rellene el siguiente formulario para ayudarnos a mejorar <b><span "
+"foreground=\"red\"><i>Open</i></span> ERP</b> y afrontar mejora nuevos "
+"desarrollos."
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "<b>Su empresa/organización</b>"
 
 #
 # File: bin/openerp.glade, line: 5791
@@ -4365,7 +4401,7 @@ msgstr "Su cargo:"
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "Empleados:"
 
 #
 # File: bin/openerp.glade, line: 5953
@@ -4377,7 +4413,7 @@ msgstr "País"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "Ciudad:"
 
 #
 # File: bin/openerp.glade, line: 5887
@@ -4389,7 +4425,7 @@ msgstr "Sistema:"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>Su interés</b>"
 
 #
 # File: bin/openerp.glade, line: 5831
@@ -4401,15 +4437,16 @@ msgstr "Como nos ha conocido:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "Queremos utilizar OpenERP"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "Queremos ofrecer servicios sobre OpenERP"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"Indíquenos porqué está probando OpenERP y cuales son sus programas actuales:"
 
 #
 # File: bin/openerp.glade, line: 6318
@@ -4421,7 +4458,7 @@ msgstr "<b>Mantenerse informado</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "Quiero recibir el libro de OpenERP (PDF) por correo electrónico"
 
 #
 # File: bin/openerp.glade, line: 6238
@@ -4433,7 +4470,7 @@ msgstr "Teléfono / Móvil:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "Correo electrónico:"
 
 #
 # File: bin/openerp.glade, line: 6253
@@ -4445,11 +4482,11 @@ msgstr "Su nombre:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "Aceptar"
 
 #
 # File: bin/modules/gui/main.py, line: 736
