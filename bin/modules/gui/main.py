@@ -349,7 +349,6 @@ def _get_db_name_from_url(url):
     return ''
 
 def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
-    print _get_db_name_from_url(url)
     if not dbtoload:
         dbtoload = options.options['login.db'] or ''
         if not dbtoload:
