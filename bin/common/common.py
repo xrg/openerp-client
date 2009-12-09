@@ -622,10 +622,11 @@ def open_file(value, parent):
 # Color set
 
 colors = {
-    'invalid':'#ff6969',
-    'readonly':'#eeebe7',
-    'required':'#d2d2ff',
-    'normal':'white'
+    'invalid' : options['colors.invalid'],
+    'readonly' : options['colors.readonly'],
+    'required' : options['colors.required'],
+    'required_fg' : options['colors.required_fg'],
+    'normal' : options['colors.normal']
 }
 
 def get_client_environment():
