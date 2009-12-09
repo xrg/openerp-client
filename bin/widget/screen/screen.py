@@ -125,8 +125,11 @@ class Screen(signal_event.signal_event):
                 arch=''
                 for i in range(1,len(child_node)):
                     arch+=child_node[i].toxml()
-                view_form['arch']=view_form['arch'][0:len(view_form['arch'])-7]+arch
-                view_form['arch']=view_form['arch']+'\n</form>'
+                view_form['arch'] = view_form['arch'][0:len(view_form['arch'])-7]
+                #Special case when form is replaced,we need to remove </form>
+                view_form['arch'] = view_form['arch'].replace('</form>','')
+                
+                view_form['arch'] = view_form['arch'] + arch + '\n</form>'
                 view_form['fields'].update(view_tree['fields'])
                 self.filter_widget = widget_search.form(view_form['arch'],
                         view_form['fields'], self.name, self.window,
@@ -136,7 +139,7 @@ class Screen(signal_event.signal_event):
                         self.search_offset_next,
                         self.search_offset_previous)
                 self.filter_widget.set_limit(self.limit)
-
+                
         if active and show_search:
             self.screen_container.show_filter()
         else:
