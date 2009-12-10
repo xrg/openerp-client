@@ -124,11 +124,14 @@ class Screen(signal_event.signal_event):
                 child_node=dom.childNodes[0].childNodes
                 arch=''
                 for i in range(1,len(child_node)):
-                    arch+=child_node[i].toxml()
-                view_form['arch'] = view_form['arch'][0:len(view_form['arch'])-7]
+                    arch += child_node[i].toxml()
+                #Generic case when we need to remove the last occurance of </form> from form view    
+                view_form['arch'] = view_form['arch'][0:view_form['arch'].rfind('</form>')]
                 #Special case when form is replaced,we need to remove </form>
-                view_form['arch'] = view_form['arch'].replace('</form>','')
-                
+                find_form = view_form['arch'].rfind('</form>')
+                if find_form > 0:
+                    view_form['arch'] = view_form['arch'][0:find_form]
+
                 view_form['arch'] = view_form['arch'] + arch + '\n</form>'
                 view_form['fields'].update(view_tree['fields'])
                 self.filter_widget = widget_search.form(view_form['arch'],
