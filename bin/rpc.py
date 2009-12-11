@@ -293,22 +293,7 @@ class rpc_session(object):
     def login_message(self, url):
         try:
             return self.exec_no_except(url, 'common', 'login_message')
-        except xmlrpclib.ProtocolError, err:
-                common.error(_('XML-RPC error occured'),'Code: %s : %s' % (err.errcode, err.errmsg),
-                        "URL1: %s\nUrl: %s\n Headers: %s" % (url+'/xmlrpc/db',err.url, err.headers))
-                return -1
-        except socket.error, err:
-                import locale
-                language, in_encoding = locale.getdefaultlocale()
-                try:
-                        err_string = err[1].decode(in_encoding)
-                except:
-                        err_string = str(err)
-                common.warning(err_string,_('Socket error'))
-                return -1
         except:
-            import sys
-            common.error(_('Cannot list db'),str(sys.exc_info()))
             return False
 
     def list_db(self, url):
