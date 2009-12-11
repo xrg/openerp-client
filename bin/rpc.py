@@ -75,7 +75,7 @@ class xmlrpc_gw(gw_inter):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
     def __init__(self, url, db, uid, passwd, obj='/object'):
         gw_inter.__init__(self, url, db, uid, passwd, obj)
-        self._sock = xmlrpclib.ServerProxy(url+obj)
+        self._sock = xmlrpclib.ServerProxy(url+obj,verbose=1)
     def exec_auth(self, method, *args):
         logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
         res = self.execute(method, self._uid, self._passwd, *args)
@@ -198,6 +198,7 @@ class rpc_session(object):
             try:
                 res = _sock.login(db or '', uname or '', passwd or '')
             except socket.error,e:
+		common.error(_('Login error:'), str(e))
                 return -1
             except Exception, e:
                 return 0
@@ -215,6 +216,7 @@ class rpc_session(object):
                 res = _sock.myreceive()
                 _sock.disconnect()
             except socket.error,e:
+		common.error(_('Login error:'), str(e))
                 return -1
             if not res:
                 self._open=False
@@ -248,13 +250,25 @@ class rpc_session(object):
     def login_message(self, url):
         try:
             return self.exec_no_except(url, 'common', 'login_message')
+	except xmlrpclib.ProtocolError, err:
+		common.error(_('XML-RPC error occured'),'Code: %s : %s' % (err.errcode, err.errmsg),
+			"URL1: %s\nUrl: %s\n Headers: %s" % (url+'/xmlrpc/db',err.url, err.headers))
+		return -1
+	except socket.error, err:
+		import locale
+		language, in_encoding = locale.getdefaultlocale()
+		common.error(_('Socket error'),err[1].decode(in_encoding),str(err[0]))
+		return -1
         except:
+            import sys
+            common.error(_('Cannot list db'),str(sys.exc_info()))
             return False
 
     def list_db(self, url):
         try:
             return self.db_exec_no_except(url, 'list')
         except (xmlrpclib.Fault, tiny_socket.Myexception), e:
+	    common.error(_('Cannot list db:'), str(e))
             if e.faultCode == 'AccessDenied':
                 return None
             raise
