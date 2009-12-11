@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -88,10 +88,10 @@ class ModelRecord(signal_event.signal_event):
             self.reload()
             return True
         return False
-    
+
     def update_context_with_concurrency_check_data(self, context):
         if self.id and self.is_modified():
-            context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%d" % (self.resource, self.id)] = self._concurrency_check_data
+            context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%s" % (self.resource, self.id)] = self._concurrency_check_data
         for name, field in self.mgroup.mfields.items():
             if isinstance(field, O2MField):
                 v = self.value[field.name]
@@ -131,7 +131,7 @@ class ModelRecord(signal_event.signal_event):
                 self.id = self.rpc.create(value, self.context_get())
 #                if not self.id:
 #                    self.failed_validation()
-    
+
             else:
                 if not self.is_modified():
                     return self.id
@@ -147,7 +147,7 @@ class ModelRecord(signal_event.signal_event):
                 self.failed_validation()
                 return False
             pass
-            
+
         self._loaded = False
         if reload:
             self.reload()
@@ -233,7 +233,7 @@ class ModelRecord(signal_event.signal_event):
             self.modified_fields = {}
         if signal:
             self.signal('record-changed')
-    
+
     def reload(self):
         return self._reload(self.mgroup.mfields.keys() + [CONCURRENCY_CHECK_FIELD])
 
@@ -302,7 +302,7 @@ class ModelRecord(signal_event.signal_event):
 
     # Performing button clicks on both forms of view: list and form.
     def get_button_action(self, screen, id=None, attrs={}):
-        
+
         """Arguments:
         screen : Screen to be worked upon
         id     : Id of the record for which the button is clicked
@@ -344,7 +344,7 @@ class ModelRecord(signal_event.signal_event):
                         attrs['name'],
                         [id], context
                     )
-                    
+
                     if type(result)==type({}):
                         screen.window.destroy()
                         datas = {}
