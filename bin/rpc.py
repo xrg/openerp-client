@@ -77,7 +77,7 @@ class xmlrpc_gw(gw_inter):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
     def __init__(self, url, db, uid, passwd, obj='/object'):
         gw_inter.__init__(self, url, db, uid, passwd, obj)
-	ttype, someuri = urllib.splittype(url)
+        ttype, someuri = urllib.splittype(url)
         if ttype not in ("http", "https"):
             raise IOError, "unsupported XML-RPC protocol"
         if ttype == "https":
@@ -105,14 +105,14 @@ class xmlrpc_gw(gw_inter):
             return result
 
     def execute(self, method, *args):
-	# If a socket error occurs here, we will let it propagate.
-	# it is safer than trying an operation twice (it may perform double
-	# actions, which mess with the data).
+        # If a socket error occurs here, we will let it propagate.
+        # it is safer than trying an operation twice (it may perform double
+        # actions, which mess with the data).
         result = getattr(self._sock,method)(self._db, *args)
         return self.__convert(result)
 
     def login(self):
-	return self._sock.login(self._db, self._uid, self._passwd)
+        return self._sock.login(self._db, self._uid, self._passwd)
 
 class tinySocket_gw(gw_inter):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
@@ -120,20 +120,20 @@ class tinySocket_gw(gw_inter):
         gw_inter.__init__(self, url, db, uid, passwd, obj)
         self._obj = obj[1:]
     def __del__(self):
-	pass
+        pass
     def exec_auth(self, method, *args):
         logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
         res = self.execute(method, self._uid, self._passwd, *args)
         logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
     def execute(self, method, *args):
-	# We are not yet ready for persistent connections, so open and close
-	# the connectionn at each call.
+        # We are not yet ready for persistent connections, so open and close
+        # the connectionn at each call.
         self._sock = tiny_socket.mysocket()
         self._sock.connect(self._url)
         self._sock.mysend((self._obj, method, self._db)+args)
         res = self._sock.myreceive()
-	self._sock.disconnect()
+        self._sock.disconnect()
         return res
 
 class rpc_session(object):
@@ -147,7 +147,7 @@ class rpc_session(object):
         self.uname = None
         self._ogws = {}
         self.db = None
-	self.rpcproto = None
+        self.rpcproto = None
         self.timezone = 'utc'
 
     def rpc_exec(self, obj, method, *args):
@@ -185,13 +185,13 @@ class rpc_session(object):
             try:
                 return self.gw(obj).exec_auth(method, *args)
             except socket.error, e:
-		import traceback, sys
-		if hasattr(e, 'traceback'):
-			tb = e.traceback
-		else:
-			tb = sys.exc_info()
-		tb_s = "".join(traceback.format_exception(*tb))
-		print 'socket error:',e, "\n", tb_s
+                import traceback, sys
+                if hasattr(e, 'traceback'):
+                        tb = e.traceback
+                else:
+                        tb = sys.exc_info()
+                tb_s = "".join(traceback.format_exception(*tb))
+                print 'socket error:',e, "\n", tb_s
                 common.message(_('Unable to reach to OpenERP server !\nYou should check your connection to the network and the OpenERP server.'), _('Connection Error'), type=gtk.MESSAGE_ERROR)
                 raise rpc_exception(69, 'Connection refused!')
             except Exception, e:
@@ -216,38 +216,38 @@ class rpc_session(object):
             raise rpc_exception(1, 'not logged')
 
     def gw(self,obj):
-	""" Return the persistent gateway for some object
-	"""
-	global session_counter
-	if not self._ogws.has_key(obj):
-		if (self.rpcproto == 'xmlrpc'):
-			self._ogws[obj] = xmlrpc_gw(self._url, self.db, self.uid, self._passwd, obj = obj)
-		elif self.rpcproto == 'netrpc':
-			self._ogws[obj] = tinySocket_gw(self._url, self.db, self.uid, self._passwd, obj = obj)
-		else:
-			raise Exception("Unknown proto: %s" % self.rpcproto)
-		
-		session_counter = session_counter + 1
-		if (session_counter % 100) == 0:
-			print "Sessions:", session_counter
-	
-	return self._ogws[obj]
+        """ Return the persistent gateway for some object
+        """
+        global session_counter
+        if not self._ogws.has_key(obj):
+                if (self.rpcproto == 'xmlrpc'):
+                        self._ogws[obj] = xmlrpc_gw(self._url, self.db, self.uid, self._passwd, obj = obj)
+                elif self.rpcproto == 'netrpc':
+                        self._ogws[obj] = tinySocket_gw(self._url, self.db, self.uid, self._passwd, obj = obj)
+                else:
+                        raise Exception("Unknown proto: %s" % self.rpcproto)
+                
+                session_counter = session_counter + 1
+                if (session_counter % 100) == 0:
+                        print "Sessions:", session_counter
+        
+        return self._ogws[obj]
 
     def login(self, uname, passwd, url, port, protocol, db):
         _protocol = protocol
         if _protocol == 'http://' or _protocol == 'https://':
-	    self.rpcproto = 'xmlrpc'
+            self.rpcproto = 'xmlrpc'
             _url = _protocol + url+':'+str(port)+'/xmlrpc'
             _sock = xmlrpclib.ServerProxy(_url+'/common')
             try:
                 res = _sock.login(db or '', uname or '', passwd or '')
             except socket.error,e:
-		common.error(_('Login error:'), str(e))
+                common.error(_('Login error:'), str(e))
                 return -1
-	    except:
-		import sys
-		common.error(_('Login error:'),str(sys.exc_info()))
-		return 0
+            except:
+                import sys
+                common.error(_('Login error:'),str(sys.exc_info()))
+                return 0
             if not res:
                 self._open=False
                 self.uid=False
@@ -255,14 +255,14 @@ class rpc_session(object):
         else: #maybe elif ..
             _url = _protocol+url+':'+str(port)
             _sock = tiny_socket.mysocket()
-	    self.rpcproto = "netrpc"
+            self.rpcproto = "netrpc"
             try:
                 _sock.connect(url, int(port))
                 _sock.mysend(('common', 'login', db or '', uname or '', passwd or ''))
                 res = _sock.myreceive()
                 _sock.disconnect()
             except socket.error,e:
-		common.error(_('Login error:'), str(e))
+                common.error(_('Login error:'), str(e))
                 return -1
             if not res:
                 self._open=False
@@ -293,19 +293,19 @@ class rpc_session(object):
     def login_message(self, url):
         try:
             return self.exec_no_except(url, 'common', 'login_message')
-	except xmlrpclib.ProtocolError, err:
-		common.error(_('XML-RPC error occured'),'Code: %s : %s' % (err.errcode, err.errmsg),
-			"URL1: %s\nUrl: %s\n Headers: %s" % (url+'/xmlrpc/db',err.url, err.headers))
-		return -1
-	except socket.error, err:
-		import locale
-		language, in_encoding = locale.getdefaultlocale()
-		try:
-			err_string = err[1].decode(in_encoding)
-		except:
-			err_string = str(err)
-		common.warning(err_string,_('Socket error'))
-		return -1
+        except xmlrpclib.ProtocolError, err:
+                common.error(_('XML-RPC error occured'),'Code: %s : %s' % (err.errcode, err.errmsg),
+                        "URL1: %s\nUrl: %s\n Headers: %s" % (url+'/xmlrpc/db',err.url, err.headers))
+                return -1
+        except socket.error, err:
+                import locale
+                language, in_encoding = locale.getdefaultlocale()
+                try:
+                        err_string = err[1].decode(in_encoding)
+                except:
+                        err_string = str(err)
+                common.warning(err_string,_('Socket error'))
+                return -1
         except:
             import sys
             common.error(_('Cannot list db'),str(sys.exc_info()))
@@ -314,25 +314,25 @@ class rpc_session(object):
     def list_db(self, url):
         try:
             return self.db_exec_no_except(url, 'list')
-	except socket.error, err:
-	    import locale
-	    language, in_encoding = locale.getdefaultlocale()
-	    common.warning(err[1].decode(in_encoding),_('Socket error'))
-	    return -1
-	except RuntimeError, err:
-		import locale
-		language, in_encoding = locale.getdefaultlocale()
-		try:
-			err_string = err[1].decode(in_encoding)
-		except:
-			err_string = str(err)
-		common.warning(err_string,_('Cannot list db:'))
-		return -1
-	except tiny_socket.Myexception,e:
-		common.warning(e.faultString,_('Cannot list db:'))
-		return -1
+        except socket.error, err:
+            import locale
+            language, in_encoding = locale.getdefaultlocale()
+            common.warning(err[1].decode(in_encoding),_('Socket error'))
+            return -1
+        except RuntimeError, err:
+                import locale
+                language, in_encoding = locale.getdefaultlocale()
+                try:
+                        err_string = err[1].decode(in_encoding)
+                except:
+                        err_string = str(err)
+                common.warning(err_string,_('Cannot list db:'))
+                return -1
+        except tiny_socket.Myexception,e:
+                common.warning(e.faultString,_('Cannot list db:'))
+                return -1
         except Exception, e:
-	    common.warning(str(e), _('Cannot list db:'))
+            common.warning(str(e), _('Cannot list db:'))
             return -1
 
     def db_exec_no_except(self, url, method, *args):
@@ -397,7 +397,7 @@ class rpc_session(object):
         if self._open :
             self._open = False
             self.uname = None
-	    self._ogws = {}
+            self._ogws = {}
             self.uid = None
             self._passwd = None
 
