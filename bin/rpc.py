@@ -137,7 +137,7 @@ class tinySocket_gw(gw_inter):
         return res
 
 class rpc_session(object):
-    __slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_ogws', 'db', 'context', 'timezone', 'rpcproto')
+    __slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_ogws', 'db', 'context', 'timezone', 'rpcproto', 'server_version')
     def __init__(self):
         self._open = False
         self._url = None
@@ -158,7 +158,7 @@ class rpc_session(object):
             common.message(str(e), title=_('Connection refused !'), type=gtk.MESSAGE_ERROR)
             raise rpc_exception(69, _('Connection refused!'))
         except xmlrpclib.Fault, err:
-            raise rpc_exception(err.faultCode, err.faultString)
+            raise rpc_exception(err.faultCode, err.faultString or str(err))
 
     def rpc_exec_auth_try(self, obj, method, *args):
         if self._open:
@@ -374,6 +374,17 @@ class rpc_session(object):
                 common.warning(_('Server timezone is not recognized (%s)!\nTime values will be displayed without timezone conversion.'%self.timezone))
             except:
                 common.warning(_('The "pytz" Python library is missing!\nTime values will be displayed as if located in the server timezone.'))
+        try:
+            url = self._url
+            if url.endswith('/xmlrpc'):
+                url = url[:-7]
+            sv = self.db_exec_no_except(url, 'server_version')
+            self.server_version = map(int, sv.split('.'))
+            print "Connected to a server ver: %s" % (self.server_version)
+        except Exception, e:
+            import traceback
+            traceback.print_exc()
+            common.warning(_("Could not get server's version: %s") % e)
 
     def logged(self):
         return self._open
