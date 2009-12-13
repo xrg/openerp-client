@@ -24,7 +24,7 @@ import pygtk
 pygtk.require('2.0')
 import gobject
 
-from rpc import RPCProxy
+from rpc import RPCProxy, session
 import rpc
 
 import gtk
@@ -127,8 +127,11 @@ class parse(object):
             for new_field in new_fields:
                 if isinstance(new_field['select_level'],(str,unicode)):
                     new_field['select_level'] = eval(new_field['select_level'],dict_select)
-                if isinstance(new_field['selectable'],(str,unicode)):
-                    new_field['selectable'] = eval(new_field['selectable'],dict_select)
+		if rpc.session.server_version[:2] >= (5, 1):
+                    if isinstance(new_field['selectable'],(str,unicode)):
+                        new_field['selectable'] = eval(new_field['selectable'],dict_select)
+		else:
+		    new_field['selectable'] = False
                 field_dict[new_field['name']]= {
                                                 'string': new_field['field_description'],
                                                 'type' : new_field['ttype'],

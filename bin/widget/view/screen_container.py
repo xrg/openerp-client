@@ -23,7 +23,7 @@ import gtk
 from gtk import glade
 import gobject
 
-from rpc import RPCProxy
+from rpc import RPCProxy, session
 import rpc
 
 
@@ -47,10 +47,13 @@ class screen_container(object):
 
     def fill_filter_combo(self, model):
         self.action_list.clear()
-        my_acts = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'get_filters', model)
-        filters_list=[['blk','','-- Filters --']]
-        sorted_filters = [[act.get('domain',act['id']),act['context'],act['name']] for act in my_acts]
-        sorted_filters.sort(lambda x, y: cmp(x[2], y[2]))
+	if rpc.session.server_version[:2] >= (5, 1):
+            my_acts = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'get_filters', model)
+	else:
+	    my_acts = []
+        filters_list=[['blk','-- Filters --']]
+        sorted_filters = [[act.get('domain',act['id']),act['name']] for act in my_acts]
+        sorted_filters.sort(lambda x, y: cmp(x[1], y[1]))
         filters_list += sorted_filters
         filters_list += [['blk','','--Actions--'],['sh','','Save as a Shortcut'],['sf','','Save as a Filter'],['mf','','Manage Filters']]
 

@@ -21,7 +21,7 @@
 
 import xml.dom.minidom
 
-from rpc import RPCProxy
+from rpc import RPCProxy, session
 import rpc
 import gettext
 from mx import DateTime
@@ -495,8 +495,12 @@ class Screen(signal_event.signal_event):
                     submenu=self.views_preload[view_type].get('submenu', False),
                     context=context)
         else:
-            view = self.rpc.fields_view_get(view_id, view_type, self.context,
+            if rpc.session.server_version[:2] >= (5, 1):
+                view = self.rpc.fields_view_get(view_id, view_type, self.context,
                     self.hastoolbar, self.hassubmenu)
+            else:
+                view = self.rpc.fields_view_get(view_id, view_type, self.context,
+                    self.hastoolbar)
             return self.add_view(view['arch'], view['fields'], display,
                     toolbar=view.get('toolbar', False), submenu=view.get('submenu', False), context=context)
 
