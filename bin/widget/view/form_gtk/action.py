@@ -51,7 +51,9 @@ class action(interface.widget_interface):
 
         if self.action['type']=='ir.actions.act_window':
             if not self.action.get('domain', False):
-                self.action['domain']='[]'
+                self.action['domain'] = '[]'
+            if attrs.get('domain',False):
+                self.action['domain'] = attrs.get('domain')
             self.context = {'active_id': False, 'active_ids': []}
             self.context.update(eval(self.action.get('context', '{}'), self.context.copy()))
             a = self.context.copy()
