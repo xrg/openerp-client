@@ -153,9 +153,13 @@ class many2one(interface.widget_interface):
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
         self.but_open = Button('gtk-open', self.sig_edit, _('Open this resource'))
+        self.but_open.set_size_request(30,30)
+        self.but_open.set_relief(gtk.RELIEF_NONE)
         self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
 
         self.but_find = Button('gtk-find', self.sig_find, _('Search a resource'))
+        self.but_find.set_size_request(30,30)
+        self.but_find.set_relief(gtk.RELIEF_NONE)
         self.widget.pack_start(self.but_find, padding=2, expand=False, fill=False)
 
         self.value_on_field = ''
