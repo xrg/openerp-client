@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -49,7 +49,7 @@ class EvalEnvironment(object):
 
 
 class ModelRecord(signal_event.signal_event):
-    def __init__(self, resource, id, group=None, parent=None, new=False ):
+    def __init__(self, resource, id, group=None, parent=None, new=False):
         super(ModelRecord, self).__init__()
         self.resource = str(resource)
         self.rpc = RPCProxy(self.resource)
@@ -62,9 +62,9 @@ class ModelRecord(signal_event.signal_event):
         self.modified = False
         self.modified_fields = {}
         self._concurrency_check_data = False
-        for key,val in self.mgroup.mfields.items():
+        for key, val in self.mgroup.mfields.items():
             self.value[key] = val.create(self)
-            if (new and val.attrs['type']=='one2many') and (val.attrs.get('mode','tree,form').startswith('form')):
+            if (new and val.attrs['type']=='one2many') and (val.attrs.get('mode', 'tree,form').startswith('form')):
                 mod = self.value[key].model_new()
                 self.value[key].model_add(mod)
 
@@ -88,10 +88,10 @@ class ModelRecord(signal_event.signal_event):
             self.reload()
             return True
         return False
-    
+
     def update_context_with_concurrency_check_data(self, context):
         if self.id and self.is_modified():
-            context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%d" % (self.resource, self.id)] = self._concurrency_check_data
+            context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%s" % (self.resource, self.id)] = self._concurrency_check_data
         for name, field in self.mgroup.mfields.items():
             if isinstance(field, O2MField):
                 v = self.value[field.name]
@@ -106,7 +106,7 @@ class ModelRecord(signal_event.signal_event):
         for name, field in self.mgroup.mfields.items():
             if (get_readonly or not field.get_state_attrs(self).get('readonly', False)) \
                 and (not get_modifiedonly or (field.name in self.modified_fields or isinstance(field, O2MField))):
-                    value.append((name, field.get(self, readonly=get_readonly,
+                    value.append((name, field.get(self, readonly=get_readonly, 
                         modified=get_modifiedonly)))
         value = dict(value)
         if includeid:
@@ -131,7 +131,7 @@ class ModelRecord(signal_event.signal_event):
                 self.id = self.rpc.create(value, self.context_get())
 #                if not self.id:
 #                    self.failed_validation()
-    
+
             else:
                 if not self.is_modified():
                     return self.id
@@ -142,12 +142,12 @@ class ModelRecord(signal_event.signal_event):
 #                if not self.rpc.write([self.id], value, context):
 #                    self.failed_validation()
 #                    return False
-        except Exception,e:
-            if hasattr(e,'faultCode') and e.faultCode.find('ValidateError')>-1:
+        except Exception, e:
+            if hasattr(e, 'faultCode') and e.faultCode.find('ValidateError')>-1:
                 self.failed_validation()
                 return False
             pass
-            
+
         self._loaded = False
         if reload:
             self.reload()
@@ -233,7 +233,7 @@ class ModelRecord(signal_event.signal_event):
             self.modified_fields = {}
         if signal:
             self.signal('record-changed')
-    
+
     def reload(self):
         return self._reload(self.mgroup.mfields.keys() + [CONCURRENCY_CHECK_FIELD])
 
@@ -283,7 +283,7 @@ class ModelRecord(signal_event.signal_event):
                     if fieldname not in self.mgroup.mfields:
                         continue
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
-            warning=response.get('warning',{})
+            warning=response.get('warning', {})
             if warning:
                 common.warning(warning['message'], warning['title'])
         self.signal('record-changed')
@@ -293,7 +293,7 @@ class ModelRecord(signal_event.signal_event):
 
     def cond_default(self, field, value):
         ir = RPCProxy('ir.values')
-        values = ir.get('default', '%s=%s' % (field, value),
+        values = ir.get('default', '%s=%s' % (field, value), 
                         [(self.resource, False)], False, {})
         data = {}
         for index, fname, value in values:
@@ -302,7 +302,7 @@ class ModelRecord(signal_event.signal_event):
 
     # Performing button clicks on both forms of view: list and form.
     def get_button_action(self, screen, id=None, attrs={}):
-        
+
         """Arguments:
         screen : Screen to be worked upon
         id     : Id of the record for which the button is clicked
@@ -311,18 +311,18 @@ class ModelRecord(signal_event.signal_event):
 
         if not id:
             id = self.id
-        if not attrs.get('confirm',False) or \
+        if not attrs.get('confirm', False) or \
                     common.sur(attrs['confirm']):
                 button_type = attrs.get('type', 'workflow')
                 if button_type == 'workflow':
-                    result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
-                                            self.resource,
+                    result = rpc.session.rpc_exec_auth('/object', 'exec_workflow', 
+                                            self.resource, 
                                             attrs['name'], self.id)
                     if type(result)==type({}):
                         if result['type']== 'ir.actions.act_window_close':
                             screen.window.destroy()
                         else:
-                            datas = {'ids':[id],'id':id}
+                            datas = {'ids':[id], 'id':id}
                             obj = service.LocalService('action.main')
                             obj._exec_action(result, datas)
                     elif type([]) == type(result):
@@ -339,17 +339,17 @@ class ModelRecord(signal_event.signal_event):
                         context.update(self.expr_eval(attrs['context'], check_load=False))
 
                     result = rpc.session.rpc_exec_auth(
-                        '/object', 'execute',
-                        self.resource,
-                        attrs['name'],
+                        '/object', 'execute', 
+                        self.resource, 
+                        attrs['name'], 
                         [id], context
                     )
-                    
+
                     if type(result)==type({}):
                         screen.window.destroy()
                         datas = {}
                         obj = service.LocalService('action.main')
-                        obj._exec_action(result,datas,context=screen.context)
+                        obj._exec_action(result, datas, context=screen.context)
 
                 elif button_type == 'action':
                     obj = service.LocalService('action.main')
