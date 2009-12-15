@@ -215,7 +215,8 @@ class Char(object):
         text = self.get_textual_value(model)
         cell.set_property('text', text)
         color = self.get_color(model)
-        cell.set_property('foreground', str(color))
+        if color is not None:
+            cell.set_property('foreground', str(color))
         if self.attrs['type'] in ('float', 'integer', 'boolean'):
             align = 1
         else:
@@ -226,6 +227,7 @@ class Char(object):
                 cell.set_property('background', common.colors.get('invalid', 'white'))
             elif bool(int(field.get_state_attrs(model).get('required', 0))):
                 cell.set_property('background', common.colors.get('required', 'white'))
+                cell.set_property('foreground', common.colors.get('required_fg'))
         cell.set_property('xalign', align)
 
     def get_color(self, model):
@@ -234,7 +236,7 @@ class Char(object):
             if model.expr_eval(expr, check_load=False):
                 to_display = color
                 break
-        return to_display or 'black'
+        return to_display or None
 
     def open_remote(self, model, create, changed=False, text=None):
         raise NotImplementedError

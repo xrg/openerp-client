@@ -46,6 +46,7 @@ class url(interface.widget_interface):
         img = gtk.Image()
         img.set_from_stock('gtk-jump-to', gtk.ICON_SIZE_BUTTON)
         self.button.set_image(img)
+        self.button.set_size_request(30,30)
         self.button.set_relief(gtk.RELIEF_NONE)
         self.button.connect('clicked', self.button_clicked)
         self.button.set_alignment(0.5, 0.5)
