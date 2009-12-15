@@ -39,7 +39,8 @@ class selection(interface.widget_interface):
         self.child.connect('key_press_event', self.sig_key_press)
         self.child.connect('activate', self.sig_activate)
         self.child.connect_after('focus-out-event', self.sig_activate)
-        self.entry.set_size_request(int(attrs.get('size', -1)), -1)
+        self.entry.set_size_request(24, -1)
+        #self.entry.set_size_request(int(attrs.get('size', -1)), -1)
         self.widget.pack_start(self.entry, expand=True, fill=True)
 
         # the dropdown button is not focusable by a tab
