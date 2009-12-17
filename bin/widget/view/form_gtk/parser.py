@@ -123,7 +123,7 @@ class Button(Observable):
                             obj = service.LocalService('action.main')
                             obj._exec_action(result, datas)
                     elif type([]) == type(result):
-                        datas = {'ids':[id]}
+                        datas = {'ids' : [id], 'model' : self.form.screen.name, }
                         obj = service.LocalService('action.main')
                         for rs in result:
                             obj._exec_action(rs, datas)
@@ -143,7 +143,7 @@ class Button(Observable):
                     )
                     if type(result)==type({}):
                         self.form.screen.window.destroy()
-                        datas = {}
+                        datas = {'ids' : [id], 'model' : self.form.screen.name, }
                         obj = service.LocalService('action.main')
                         obj._exec_action(result,datas,context=self.form.screen.context)
 
