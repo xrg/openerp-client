@@ -8,28 +8,22 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:33+0000\n"
-"Last-Translator: Harry (Open ERP) <hmo@tinyerp.com>\n"
+"PO-Revision-Date: 2009-12-16 10:46+0000\n"
+"Last-Translator: Pieter J. Kersten (EduSense BV) <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:36+0000\n"
+"X-Launchpad-Export-Date: 2009-12-17 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#
-# File: bin/plugins/__init__.py, line: 28
-# File: bin/plugins/__init__.py, line: 28
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr "Druk workflow af"
+msgstr "Druk werkschema af"
 
-#
-# File: bin/plugins/__init__.py, line: 29
-# File: bin/plugins/__init__.py, line: 29
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
-msgstr "Druk workflow af (uitgebreid)"
+msgstr "Druk werkschema af (uitgebreid)"
 
 #
 # File: bin/plugins/__init__.py, line: 41
@@ -45,48 +39,36 @@ msgstr "Geen beschikbare plugin voor deze hulpbron!"
 msgid "Choose a Plugin"
 msgstr "Kies een plugin"
 
-#
-# File: bin/translate.py, line: 183
 #: bin/translate.py:184
 #, python-format
 msgid "Unable to set locale %s"
-msgstr "Niet mogelijk de instellen van %s te wijzigen"
+msgstr "Niet mogelijk de taal %s in te stellen"
 
-#
-# File: bin/openerp-client.py, line: 130
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr "OpenERP wordt gesloten, onbekende fout."
+msgstr "OpenERP wordt afgesloten, onderbreking vanaf toetsenbord"
 
-#
-# File: bin/options.py, line: 107
 #: bin/options.py:108
 #, python-format
 msgid "OpenERP Client %s"
-msgstr "OpenERP Client %s"
+msgstr "OpenERP client %s"
 
-#
-# File: bin/options.py, line: 89
-# File: bin/options.py, line: 89
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr "Specificeer een vervangende configuratiefile"
+msgstr "Geef een vervangend configuratiebestand"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "Schakel basis-debugging in. Alias voor '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "Stel het log-niveau in: %s"
 
-#
-# File: bin/options.py, line: 93
-# File: bin/options.py, line: 93
 #: bin/options.py:112
 msgid "specify the user login"
-msgstr "Specificeer de inloggegevens"
+msgstr "Geef de inloggegevens"
 
 #
 # File: bin/options.py, line: 94
@@ -109,15 +91,13 @@ msgstr "Stel de servernaam/het ip-adres in"
 msgid "Unable to handle %s filetype"
 msgstr "Soort bestand (%s) kan niet verwerkt worden."
 
-#
-# File: bin/printer/printer.py, line: 181
 #: bin/printer/printer.py:190
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
-"Automatisch printen onder Linux is niet geimplementeerd.\n"
-"Gebruikt de preview-optie!"
+"Automatisch afdrukken is voor Linux niet geïmplementeerd.\n"
+"Gebruikt de voorbeeld-optie!"
 
 #
 # File: bin/printer/printer.py, line: 189
@@ -150,8 +130,6 @@ msgstr "Opslaan als..."
 msgid "Error writing the file!"
 msgstr "Fout bij wegschrijven bestand!"
 
-#
-# File: bin/common/common.py, line: 186
 #: bin/common/common.py:212
 msgid ""
 "Thank you for the feedback !\n"
@@ -160,21 +138,19 @@ msgid ""
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
 "Dank voor uw feedback!\n"
-"De opmerkingen zijn verzonden naar OpenERP.\n"
-"Er kan een database worden aangemaakt of\n"
-"verbinding gezocht worden met een bestaande server."
+"Uw opmerkingen zijn verzonden naar OpenERP.\n"
+"U kunt nu een nieuwe database aanmaken of verbinding\n"
+"maken met een bestaande server via het 'Bestand'-menu."
 
-#
-# File: bin/common/common.py, line: 193
 #: bin/common/common.py:222
 msgid ""
 "Thank you for testing OpenERP !\n"
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
-"Dank voor het testen van OpenERP!\n"
-"Er kan een database worden aangemaakt of\n"
-"verbinding gezocht worden met een bestaande server."
+"Dank voor het testen van OpenERP !\n"
+"U kunt nu een nieuwe database aanmaken of verbinding\n"
+"maken met een bestaande server via het 'Bestand'-menu."
 
 #
 # File: bin/common/common.py, line: 298
@@ -256,12 +232,35 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Een onbekende fout trad op.</b>\n"
+"\n"
+"Uw onderhoudscontract dekt niet alle in uw systeem geïnstalleerde modules !\n"
+"Als u OpenERP in een productie-omgeving gebruikt, raden wij u ten zeerste "
+"aan\n"
+"om uw contract op te waarderen.\n"
+"\n"
+"Als u zelf-ontwikkelde modules of van die van derden heeft geïnstalleerd, "
+"kunnen\n"
+"wij u hiervoor een aanvullend onderhoudscontract bieden. Na een beoordeling\n"
+"zal ons kwaliteitsteam zorgdragen dat deze automatisch mee-migreren naar\n"
+"elke volgende stabiele versie van OpenERP zonder meerkosten.\n"
+"\n"
+"Hier is de lijst van modules die niet gedekt worden door uw "
+"onderhoudscontract:\n"
+"%s\n"
+"\n"
+"U kunt onderstaande verwijzing volgen voor meer informatie. De details van "
+"de\n"
+"foutmelding staan op het tweede tabblad."
 
 #: bin/common/common.py:443
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
-msgstr "Het probleem is verzonden aan het kwaliteitsteam !"
+msgstr ""
+"Het probleem is verzonden aan het kwaliteitsteam !\n"
+"Wij zullen u na analyse van het probleem benaderen."
 
 #: bin/common/common.py:446
 #, python-format
@@ -270,10 +269,13 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Uw probleem kon *NIET* aan het kwaliteitsteam verstuurd worden !\n"
+"Rapporteer dit alstublieft handmatig bij:\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Fout"
 
 #
 # File: bin/common/common.py, line: 499
@@ -329,7 +331,7 @@ msgstr "De inhoud van het formulier of uitzondering indien niet geldig"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "De inhoud van het widget of de uitzondering indien niet geldig"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -344,14 +346,15 @@ msgid ""
 "You can also use \"=\" to set the date to the current date/time and '-' to "
 "clear the field."
 msgstr ""
-"Door +, - of = in te drukken kun je speciale acties uitvoeren. Plus/minus "
+"Door +, - of = in te drukken kun u speciale acties uitvoeren. Plus/minus "
 "verhoogt/verlaagt de geselecteerde datum met een variabele. Gelijkteken zet "
 "een deel van de datum. Beschikbare variabelen: 12h = 12 uur, 8d = 8 dagen, "
 "4w = 4 weken, 1m = 1 maand, 2y = 2 jaar. Voorbeelden:\n"
 "* +21d : ga 21 dagen vooruit\n"
 "* =23w : zet de datum op de 23-ste week van het jaar\n"
 "* -4m : ga 4 maanden terug\n"
-"Gebruik = voor de huidige datum/tijd en '-' om het veld leeg te halen."
+"U kunt ook = gebruiken voor de huidige datum/tijd en '-' om het veld leeg te "
+"maken."
 
 #
 # File: bin/widget_search/calendar.py, line: 51
@@ -385,7 +388,7 @@ msgstr "Einddatum"
 #: bin/widget_search/calendar.py:120 bin/widget/view/form_gtk/calendar.py:136
 #: bin/widget/view/form_gtk/calendar.py:266
 msgid "OpenERP - Date selection"
-msgstr "OpenERP - selecteer datum"
+msgstr "OpenERP - datumkeuze"
 
 #
 # File: bin/modules/action/wizard.py, line: 171
@@ -413,11 +416,9 @@ msgstr ""
 "OpenERP server kan niet worden bereikt!\n"
 "Controleer uw netwerkverbinding of de OpenERP server."
 
-#
-# File: bin/rpc.py, line: 173
 #: bin/rpc.py:171
 msgid "Connection Error"
-msgstr "Connectiefout"
+msgstr "Verbindingsfout"
 
 #
 # File: bin/modules/action/wizard.py, line: 183
@@ -469,7 +470,7 @@ msgstr "OpenERP zoekopdracht: %s (%%d resultaten)"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "Het bestand is leeg!"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
@@ -484,19 +485,16 @@ msgstr "XML-RPC fout!"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "Eén object geimporteerd!"
 
-#
-# File: bin/modules/gui/window/win_import.py, line: 57
-# File: bin/modules/gui/window/win_import.py, line: 57
 #: bin/modules/gui/window/win_import.py:64
 #, python-format
 msgid "Imported %d objects !"
-msgstr "%d regels geimporteerd!"
+msgstr "%d regels geïmporteerd!"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "Importfout!"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 93
@@ -512,10 +510,11 @@ msgstr "Veldnaam"
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
+"U kunt dit veld %s niet importeren, omdat we het niet kunnen auto-detecteren."
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "U heeft geen velden gekozen om te importeren."
 
 #
 # File: bin/modules/gui/window/win_selection.py, line: 52
@@ -524,11 +523,9 @@ msgstr ""
 msgid "Name"
 msgstr "Naam"
 
-#
-# File: bin/modules/gui/window/win_selection.py, line: 56
 #: bin/modules/gui/window/win_selection.py:56
 msgid "Ressource Name"
-msgstr "Elementnaam"
+msgstr "Naam hulpbron"
 
 #
 # File: bin/modules/gui/window/win_selection.py, line: 56
@@ -558,24 +555,21 @@ msgstr ""
 msgid "Error Opening Excel !"
 msgstr "Fout bij openenen Excel!"
 
-#
-# File: bin/modules/gui/window/win_export.py, line: 81
-# File: bin/modules/gui/window/win_export.py, line: 81
 #: bin/modules/gui/window/win_export.py:80
 msgid ""
 "Function only available for MS Office !\n"
 "Sorry, OOo users :("
 msgstr ""
-"Functie allen beschikbaar voor MS Office!\n"
+"Functie alleen beschikbaar voor MS Office!\n"
 "Sorry, OOo users :("
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Exportfout !"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "Hulpbron-ID bestaat niet voor dit object!"
 
 #
 # File: bin/modules/gui/window/form.py, line: 197
@@ -614,12 +608,9 @@ msgstr "Maar gebruiker aan"
 msgid "Creation Date"
 msgstr "Aanmaakdatum"
 
-#
-# File: bin/modules/gui/window/form.py, line: 218
-# File: bin/modules/gui/window/form.py, line: 218
 #: bin/modules/gui/window/form.py:242
 msgid "Latest Modification by"
-msgstr "Laatste wijziging door"
+msgstr "Laatst gewijzigd door"
 
 #
 # File: bin/modules/gui/window/form.py, line: 219
@@ -628,47 +619,33 @@ msgstr "Laatste wijziging door"
 msgid "Latest Modification Date"
 msgstr "Laatste wijzigingsdatum"
 
-#
-# File: bin/modules/gui/window/form.py, line: 230
 #: bin/modules/gui/window/form.py:254
 msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
 msgstr ""
-"Item is niet opgeslagen!\n"
-"Wil je het huidige item verwijderen?"
+"Regel is niet opgeslagen!\n"
+"Wilt u de huidige regel schonen?"
 
-#
-# File: bin/modules/gui/window/form.py, line: 233
-# File: bin/modules/gui/window/form.py, line: 233
 #: bin/modules/gui/window/form.py:257
 msgid "Are you sure to remove this record ?"
-msgstr "Weet je zeker dat je dit item wilt verwijderen?"
+msgstr "Weet u zeker dat u deze regel wilt verwijderen?"
 
-#
-# File: bin/modules/gui/window/form.py, line: 235
-# File: bin/modules/gui/window/form.py, line: 235
 #: bin/modules/gui/window/form.py:259
 msgid "Are you sure to remove those records ?"
-msgstr "Weet je zeker dat je deze items wilt verwijderen?"
+msgstr "Weet u zeker dat u deze regels wilt verwijderen?"
 
-#
-# File: bin/modules/gui/window/form.py, line: 239
 #: bin/modules/gui/window/form.py:263
 msgid "Resources cleared."
-msgstr "Elementen verwijderd"
+msgstr "Hulpbronnen geschoond."
 
-#
-# File: bin/modules/gui/window/form.py, line: 241
 #: bin/modules/gui/window/form.py:265
 msgid "Resources successfully removed."
-msgstr "Elementen succesvol verwijderd."
+msgstr "Hulpbronnen met succes verwijderd."
 
-#
-# File: bin/modules/gui/window/form.py, line: 273
 #: bin/modules/gui/window/form.py:298
 msgid "Working now on the duplicated document !"
-msgstr "Je werkt nu in het gekopieerde document!"
+msgstr "U werkt nu aan het gekopieerde document !"
 
 #
 # File: bin/modules/gui/window/form.py, line: 281
@@ -676,48 +653,35 @@ msgstr "Je werkt nu in het gekopieerde document!"
 msgid "Document Saved."
 msgstr "Document opgeslagen"
 
-#
-# File: bin/widget/view/form_gtk/parser.py, line: 134
-# File: bin/modules/gui/window/form.py, line: 283
 #: bin/modules/gui/window/form.py:308 bin/modules/gui/window/form.py:309
 #: bin/widget/view/form_gtk/parser.py:137
 #: bin/widget/view/form_gtk/parser.py:138
 msgid "Invalid form, correct red fields !"
-msgstr "Foutief formulier, corrigeer roodgekleurde velden"
+msgstr "Foutief formulier, corrigeer roodgekleurde velden !"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "Fout !"
 
-#
-# File: bin/modules/gui/window/form.py, line: 302
-# File: bin/modules/gui/window/form.py, line: 397
 #: bin/modules/gui/window/form.py:328 bin/modules/gui/window/form.py:423
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
 msgstr ""
-"Item is aangepast.\n"
-"Wil je de wijzigingen opslaan?"
+"Deze regel is gewijzigd.\n"
+"Wilt u de wijzigingen bewaren?"
 
-#
-# File: bin/modules/gui/window/form.py, line: 349
 #: bin/modules/gui/window/form.py:375
 msgid "You must select one or several records !"
-msgstr "Selecteer een of meerdere regels!"
+msgstr "Kies één of meerdere regels!"
 
-#
-# File: bin/modules/gui/window/form.py, line: 358
-# File: bin/modules/gui/window/form.py, line: 358
 #: bin/modules/gui/window/form.py:384
 msgid "Print Screen"
-msgstr "Print Screen"
+msgstr "Schermafdruk"
 
-#
-# File: bin/modules/gui/window/form.py, line: 378
 #: bin/modules/gui/window/form.py:404
 msgid "No record selected"
-msgstr "Geen item geselecteerd."
+msgstr "Geen regel geselecteerd."
 
 #
 # File: bin/modules/gui/window/form.py, line: 383
@@ -732,11 +696,9 @@ msgstr "Nieuw document"
 msgid "Editing document (id: "
 msgstr "Wijzigen document (id: "
 
-#
-# File: bin/modules/gui/window/form.py, line: 386
 #: bin/modules/gui/window/form.py:412
 msgid "Record: "
-msgstr "Item: "
+msgstr "Regel: "
 
 #
 # File: bin/modules/gui/window/form.py, line: 387
@@ -769,34 +731,26 @@ msgstr "Onbekend venster"
 msgid "This extension is already defined"
 msgstr "Deze extensie is al ingesteld"
 
-#
-# File: bin/modules/gui/window/tree.py, line: 190
-# File: bin/modules/gui/window/tree.py, line: 246
 #: bin/modules/gui/window/tree.py:190 bin/modules/gui/window/tree.py:246
 msgid "No resource selected!"
-msgstr "Geen elementen geselecteerd!"
+msgstr "Geen hulpbronnen geselecteerd!"
 
-#
-# File: bin/modules/gui/window/tree.py, line: 204
 #: bin/modules/gui/window/tree.py:204
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
 msgstr ""
-"Weet je zeker dat je dit\n"
-"item wilt verwijderen?"
+"Weet u zeker dat u deze\n"
+"regel wilt verwijderen?"
 
-#
-# File: bin/modules/gui/window/tree.py, line: 209
 #: bin/modules/gui/window/tree.py:209
 msgid "Error removing resource!"
-msgstr "Fout bij verwijderen item!"
+msgstr "Fout bij verwijderen hulpbron!"
 
-#
-# File: bin/modules/gui/window/tree.py, line: 220
 #: bin/modules/gui/window/tree.py:220
 msgid "Unable to chroot: no tree resource selected"
-msgstr "Niet mogelijk, geen elementen geselecteerd."
+msgstr ""
+"Niet in staat om van tak te veranderen: geen boomstructuur geselecteerd."
 
 #
 # File: bin/modules/gui/window/win_preference.py, line: 69
@@ -810,10 +764,12 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"De standaard-taal van de interface is gewijzigd. Vergeet niet de client te "
+"herstarten om de wijzigingen zichtbaar te maken."
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "Standaard-taal gewijzigd !"
 
 #
 # File: bin/modules/gui/main.py, line: 145
@@ -857,15 +813,13 @@ msgstr "Server:"
 msgid "Change"
 msgstr "Wijzigen"
 
-#
-# File: bin/openerp.glade, line: 7865
 #: bin/modules/gui/main.py:109 bin/openerp.glade:7011
 msgid "Super Administrator Password:"
-msgstr "Super-administrator wachtwoord:"
+msgstr "Wachtwoord superbeheerder:"
 
 #: bin/modules/gui/main.py:172 bin/modules/action/wizard.py:137
 msgid "OpenERP Computing"
-msgstr "OpenERP Berekent"
+msgstr "OpenERP berekent"
 
 #
 # File: bin/modules/action/wizard.py, line: 143
@@ -888,39 +842,39 @@ msgstr ""
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Migratie-scripts"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "Contractnr:"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "Contract wachtwoord:"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "U beschikt al over de laatste versie"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "De volgende updates zijn beschikbaar:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "U kunt uw databases nu migreren."
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "Migreer database"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Uw database is opgewaardeerd."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Uw databases zijn opgewaardeerd."
 
 #
 # File: bin/modules/gui/main.py, line: 154
@@ -928,14 +882,9 @@ msgstr ""
 msgid "Unknown"
 msgstr "Onbekend"
 
-#
-# File: bin/modules/gui/main.py, line: 152
-# File: bin/modules/gui/main.py, line: 1142
-# File: bin/modules/gui/main.py, line: 152
-# File: bin/modules/gui/main.py, line: 1142
 #: bin/modules/gui/main.py:443 bin/modules/gui/main.py:1449
 msgid "No database found, you must create one !"
-msgstr "Geen database aanwezig; maak een nieuwe aan!"
+msgstr "Geen database gevonden, u dient er één te maken !"
 
 #
 # File: bin/modules/gui/main.py, line: 178
@@ -963,15 +912,13 @@ msgstr "Sorry,"
 msgid "Bad database name !"
 msgstr "Verkeerde databasenaam!"
 
-#
-# File: bin/modules/gui/main.py, line: 312
 #: bin/modules/gui/main.py:598
 msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
-"De database mag geen speciale tekens bevatten.\n"
-"Vermijd alle speciale tekens."
+"De database mag alleen normale tekens en \"_\" bevatten.\n"
+"Vermijd alle speciale tekens en spaties."
 
 #
 # File: bin/modules/gui/main.py, line: 340
@@ -979,23 +926,14 @@ msgstr ""
 msgid "OpenERP Database Installation"
 msgstr "OpenERP database-installatie"
 
-#
-# File: bin/modules/gui/main.py, line: 349
 #: bin/modules/gui/main.py:635
 msgid "<b>Operation in progress</b>"
-msgstr "<n> Handeling wordt uitgevoerd </b>"
+msgstr "<b>Handeling wordt uitgevoerd</b>"
 
-#
-# File: bin/modules/gui/main.py, line: 359
-# File: bin/modules/gui/main.py, line: 361
-# File: bin/modules/gui/main.py, line: 363
-# File: bin/modules/gui/main.py, line: 359
-# File: bin/modules/gui/main.py, line: 361
-# File: bin/modules/gui/main.py, line: 363
 #: bin/modules/gui/main.py:658 bin/modules/gui/main.py:660
 #: bin/modules/gui/main.py:662
 msgid "Could not create database."
-msgstr "Database kan niet worden aangemaakt"
+msgstr "Kon database niet aanmaken"
 
 #
 # File: bin/modules/gui/main.py, line: 359
@@ -1004,17 +942,10 @@ msgstr "Database kan niet worden aangemaakt"
 msgid "Database already exists !"
 msgstr "Database bestaat al!"
 
-#
-# File: bin/modules/gui/main.py, line: 361
-# File: bin/modules/gui/main.py, line: 1044
-# File: bin/modules/gui/main.py, line: 1063
-# File: bin/modules/gui/main.py, line: 361
-# File: bin/modules/gui/main.py, line: 1044
-# File: bin/modules/gui/main.py, line: 1063
 #: bin/modules/gui/main.py:660 bin/modules/gui/main.py:1342
 #: bin/modules/gui/main.py:1361 bin/modules/gui/main.py:1437
 msgid "Bad database administrator password !"
-msgstr "Verkeerde administrator wachtwoord!"
+msgstr "Verkeerd beheerderwachtwoord!"
 
 #
 # File: bin/modules/gui/main.py, line: 363
@@ -1025,29 +956,21 @@ msgstr "Verkeerde administrator wachtwoord!"
 msgid "Error during database creation !"
 msgstr "Fout tijdens aanmaken database!"
 
-#
-# File: bin/modules/gui/main.py, line: 370
-# File: bin/modules/gui/main.py, line: 370
 #: bin/modules/gui/main.py:669
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
-"Serverfout tijdens installatie, advies om database niet meer te gebruiken."
+"Serverfout tijdens installatie\n"
+"We adviseren deze database te verwijderen."
 
-#
-# File: bin/modules/gui/main.py, line: 388
-# File: bin/modules/gui/main.py, line: 388
 #: bin/modules/gui/main.py:687
 msgid "The following users have been installed on your database:"
-msgstr "De volgende gebruikers zijn aangemaakt in de database:"
+msgstr "De volgende gebruikers zijn aangemaakt in uw database:"
 
-#
-# File: bin/modules/gui/main.py, line: 388
-# File: bin/modules/gui/main.py, line: 388
 #: bin/modules/gui/main.py:687
 msgid "You can now connect to the database as an administrator."
-msgstr "Er kan verbinding gemaakt worden als administrator."
+msgstr "Er kan nu verbinding worden gemaakt als beheerder."
 
 #
 # File: bin/modules/gui/main.py, line: 432
@@ -1087,20 +1010,21 @@ msgstr "Geen aanvraag"
 msgid " - %s request(s) sended"
 msgstr " - %s aanvragen verzonden"
 
-#
-# File: bin/modules/gui/main.py, line: 734
-# File: bin/modules/gui/main.py, line: 734
 #: bin/modules/gui/main.py:1035
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
-msgstr "Niet mogelijk op verbinding te maken met de server!"
+msgstr ""
+"Verbindingsfout !\n"
+"Kan geen verbinding maken met de server !"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Authenticatiefout !\n"
+"Verkeerde gebruikersnaam en/of wachtwoord !"
 
 #
 # File: bin/modules/gui/main.py, line: 773
@@ -1108,32 +1032,24 @@ msgstr ""
 msgid "Not logged !"
 msgstr "Niet ingelogd!"
 
-#
-# File: bin/modules/gui/main.py, line: 849
 #: bin/modules/gui/main.py:1138
 msgid ""
 "You can not log into the system !\n"
 "Ask the administrator to verify\n"
 "you have an action defined for your user."
 msgstr ""
-"Je kunt niet inloggen in het systeem!\n"
-"Vraag de administrator om het probleem te achterhalen."
+"U kunt niet in het systeem inloggen !\n"
+"Vraag de beheerder te controleren dat\n"
+"er een actie is ingesteld voor uw gebruiker."
 
-#
-# File: bin/modules/gui/main.py, line: 865
-# File: bin/modules/gui/main.py, line: 872
-# File: bin/modules/gui/main.py, line: 865
-# File: bin/modules/gui/main.py, line: 872
 #: bin/modules/gui/main.py:1170 bin/modules/gui/main.py:1177
 msgid "Do you really want to quit ?"
-msgstr "Weet je zeker dat je wilt afsluiten?"
+msgstr "Weet u zeker dat u wilt afsluiten?"
 
-#
-# File: bin/modules/gui/main.py, line: 943
 #: bin/modules/gui/main.py:1232
 #, python-format
 msgid "Attachments (%d)"
-msgstr "Bijlage (%d)"
+msgstr "Bijlagen (%d)"
 
 #
 # File: bin/modules/gui/main.py, line: 940
@@ -1156,19 +1072,13 @@ msgstr "Verwijder een database"
 msgid "Database dropped successfully !"
 msgstr "Database succesvol verwijderd!"
 
-#
-# File: bin/modules/gui/main.py, line: 1044
-# File: bin/modules/gui/main.py, line: 1044
 #: bin/modules/gui/main.py:1342
 msgid "Could not drop database."
-msgstr "Database kan niet worden verwijderd."
+msgstr "Kon database niet verwijderen."
 
-#
-# File: bin/modules/gui/main.py, line: 1046
-# File: bin/modules/gui/main.py, line: 1046
 #: bin/modules/gui/main.py:1344
 msgid "Couldn't drop database"
-msgstr "Database kan niet worden verwijderd."
+msgstr "Kon database niet verwijderen."
 
 #
 # File: bin/modules/gui/main.py, line: 1049
@@ -1191,25 +1101,19 @@ msgstr "Openen..."
 msgid "Database restored successfully !"
 msgstr "Database succesvol teruggezet!"
 
-#
-# File: bin/modules/gui/main.py, line: 1063
-# File: bin/modules/gui/main.py, line: 1063
 #: bin/modules/gui/main.py:1361
 msgid "Could not restore database."
-msgstr "Database kan niet worden teruggezet."
+msgstr "Kon database niet terugzetten."
 
-#
-# File: bin/modules/gui/main.py, line: 1065
-# File: bin/modules/gui/main.py, line: 1065
 #: bin/modules/gui/main.py:1363
 msgid "Couldn't restore database"
-msgstr "Database kan niet worden teruggezet."
+msgstr "Kon database niet terugzetten."
 
 #: bin/modules/gui/main.py:1402
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
 msgstr ""
-"Het bevestigde wachtwoord komt niet overeen met het nieuwe wachtwoord.\r\n"
+"Het controle-wachtwoord komt niet overeen met het nieuwe wachtwoord.\r\n"
 "Operatie beëindigd!"
 
 #
@@ -1220,11 +1124,11 @@ msgstr "Toegangsfout"
 
 #: bin/modules/gui/main.py:1412
 msgid "Could not change the Super Admin password."
-msgstr "Super Admin wachtwoord wijzigen niet mogelijk."
+msgstr "Kon het wacthwoord voor de superbeheerder niet wijzigen."
 
 #: bin/modules/gui/main.py:1413
 msgid "Bad password provided !"
-msgstr "Incorrect wachtwoord in gegeven."
+msgstr "Foutief wachtwoord opgegeven."
 
 #
 # File: bin/modules/gui/main.py, line: 1127
@@ -1247,14 +1151,11 @@ msgstr "Backup database succesvol !"
 
 #: bin/modules/gui/main.py:1437
 msgid "Could not backup the database."
-msgstr "Backup maken onmogelijk"
+msgstr "Kon databasebackup niet maken"
 
-#
-# File: bin/modules/gui/main.py, line: 1132
-# File: bin/modules/gui/main.py, line: 1132
 #: bin/modules/gui/main.py:1439
 msgid "Couldn't backup database."
-msgstr "Database kan niet worden verwijderd."
+msgstr "Backup maken onmogelijk"
 
 #
 # File: bin/modules/action/main.py, line: 46
@@ -1270,11 +1171,9 @@ msgstr "Geen gegevens om af te drukken!"
 msgid "Printing aborted, too long delay !"
 msgstr "Printen afgebroken, geen reactie."
 
-#
-# File: bin/modules/action/main.py, line: 179
 #: bin/modules/action/main.py:180
 msgid "Select your action"
-msgstr "Selecteer je handeling."
+msgstr "Kies uw actie"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid "Gantt view not yet implemented !"
@@ -1294,12 +1193,10 @@ msgid ""
 msgstr ""
 "Druk <i>'+'</i>, <i>'-'</i> or <i>'='</i> voor specifieke datum-aanpassingen."
 
-#
-# File: bin/widget/view/tree_gtk/editabletree.py, line: 125
 #: bin/widget/view/tree_gtk/editabletree.py:124
 #, python-format
 msgid "Shortcut: %s"
-msgstr "Snelkoppeling: %s"
+msgstr "Sneltoets: %s"
 
 #
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 125
@@ -1378,7 +1275,7 @@ msgstr "Het type (%s) wordt niet ondersteund in de GTK client"
 
 #: bin/widget/view/widget_parse.py:63
 msgid "No valid view found for this object!"
-msgstr "Geen geldige weergave gevonden voor dit object"
+msgstr "Geen geldige weergave gevonden voor dit object!"
 
 #
 # File: bin/widget/view/form_gtk/wid_common.py, line: 60
@@ -1417,27 +1314,18 @@ msgstr "Zoek een hulpbron"
 msgid "Action"
 msgstr "Actie"
 
-#
-# File: bin/widget/view/form_gtk/many2one.py, line: 169
-# File: bin/widget/view/form_gtk/many2one.py, line: 169
 #: bin/widget/view/form_gtk/many2one.py:169
 msgid "Report"
-msgstr "Rapport"
+msgstr "Overzicht"
 
-#
-# File: bin/widget/view/form_gtk/many2one.py, line: 369
-# File: bin/widget/view/list.py, line: 274
-# File: bin/widget/view/form_gtk/many2one.py, line: 369
-# File: bin/widget/view/list.py, line: 274
 #: bin/widget/view/form_gtk/many2one.py:375 bin/widget/view/list.py:274
 msgid "You must select a record to use the relation !"
-msgstr "Eerst een regel selecteren voordat deze optie gebruikt kan worden!"
+msgstr ""
+"U dient eerst een regel te selecteren voordat u de relatie kunt gebruiken!"
 
-#
-# File: bin/widget/view/form_gtk/binary.py, line: 77
 #: bin/widget/view/form_gtk/binary.py:77
 msgid "Select"
-msgstr "Selecteer"
+msgstr "Kies"
 
 #
 # File: bin/widget/view/form_gtk/binary.py, line: 81
@@ -1483,9 +1371,11 @@ msgstr "Fout bij het lezen van het bestand: %s"
 msgid "All Files"
 msgstr "Alle bestanden"
 
+#
+# File: bin/widget/view/form_gtk/binary.py, line: 143
 #: bin/widget/view/form_gtk/binary.py:143
 msgid "Select a file..."
-msgstr "Selecteer een bestand..."
+msgstr "Kies een bestand..."
 
 #
 # File: bin/widget/view/form_gtk/binary.py, line: 172
@@ -1497,7 +1387,7 @@ msgstr "Fout bij het schrijven van het bestand: %s"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Ongeldige waarde voor datum! Jaar dient groter te zijn dan 1899 !"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 115
@@ -1513,6 +1403,7 @@ msgstr "Deze is alleen-lezen"
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
 msgstr ""
+"Ongeldige waarde voor datum/tijd! Jaar dient groter te zijn dan 1899 !"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
@@ -1535,10 +1426,12 @@ msgstr "Verkeerd pictogram voor de knop!"
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
 msgstr ""
+"Voer enige tekst in in het gerelateerde veld voordat u begint met vertalen!"
 
 #: bin/widget/view/form_gtk/parser.py:548
 msgid "You need to save resource before adding translations!"
-msgstr "Selecteer eerst een hulpbron alvorens een vertaling toe te voegen!"
+msgstr ""
+"U dient de hulpbron eerst op te slaan voordat u een vertaling toevoegt!"
 
 #: bin/widget/view/form_gtk/parser.py:797
 msgid "Translate view"
@@ -1574,12 +1467,9 @@ msgstr "Stel in als standaardwaarde"
 msgid "Set as default"
 msgstr "Als standaard instellen"
 
-#
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 151
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 151
 #: bin/widget/view/form_gtk/one2many_list.py:151
 msgid "Set Default"
-msgstr "Standaard instellen"
+msgstr "Gebruik standaardwaarde"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 162
@@ -1616,19 +1506,13 @@ msgstr "Vorige"
 msgid "Next"
 msgstr "Volgende"
 
-#
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 219
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 219
 #: bin/widget/view/form_gtk/one2many_list.py:219
 msgid "Switch"
-msgstr "Omschakelen"
+msgstr "Wisselen"
 
-#
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 269
-# File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 #: bin/widget/view/form_gtk/one2many_list.py:269
 msgid "You have to select a resource !"
-msgstr "Selecteer een hulpbron"
+msgstr "U dient een hulpbron te kiezen !"
 
 #
 # File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 31
@@ -1636,11 +1520,10 @@ msgstr "Selecteer een hulpbron"
 msgid "Calendar View Error !"
 msgstr "Fout in kalenderbeeld!"
 
-#
-# File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 32
 #: bin/widget/view/calendar_gtk/parser_dummy.py:32
 msgid "You must intall the library python-hippocanvas to use calendars."
-msgstr "Installeer eerst de python-hippocanvas op kalenders te gebruiken!"
+msgstr ""
+"Voor het gebruik van kalenders dient u python-hippocanvas te installeren."
 
 #
 # File: bin/widget/view/calendar_gtk/parser.py, line: 239
@@ -1731,18 +1614,15 @@ msgstr "Verwijder database"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "_Download migratie code"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "_Migreer database(s)"
 
-#
-# File: bin/openerp.glade, line: 372
-# File: bin/openerp.glade, line: 372
 #: bin/openerp.glade:405
 msgid "Administrator Password"
-msgstr "Wachtwoord administrator"
+msgstr "Wachtwoord beheerder"
 
 #
 # File: bin/openerp.glade, line: 417
@@ -1770,17 +1650,13 @@ msgstr "Verzend een verzoek"
 msgid "_Read my requests"
 msgstr "Lees mijn verzoeken"
 
-#
-# File: bin/openerp.glade, line: 480
 #: bin/openerp.glade:513
 msgid "_Waiting Requests"
-msgstr "Lopende verzoeken"
+msgstr "_Wachtende verzoeken"
 
-#
-# File: bin/openerp.glade, line: 493
 #: bin/openerp.glade:526
 msgid "For_m"
-msgstr "Formulier"
+msgstr "For_mulier"
 
 #
 # File: bin/openerp.glade, line: 501
@@ -1796,11 +1672,9 @@ msgstr "_Nieuw"
 msgid "_Save"
 msgstr "Op_slaan"
 
-#
-# File: bin/openerp.glade, line: 533
 #: bin/openerp.glade:566
 msgid "Copy this resource"
-msgstr "Kopieer dit element"
+msgstr "Kopieer deze hulpbron"
 
 #
 # File: bin/openerp.glade, line: 534
@@ -1837,12 +1711,9 @@ msgstr "Volgende"
 msgid "Pre_vious"
 msgstr "_Vorige"
 
-#
-# File: bin/openerp.glade, line: 619
-# File: bin/openerp.glade, line: 619
 #: bin/openerp.glade:652
 msgid "Switch to list/form"
-msgstr "Wijzig van lijst/formulier"
+msgstr "Wissel tussen lijst/formulier"
 
 #
 # File: bin/openerp.glade, line: 635
@@ -1851,12 +1722,9 @@ msgstr "Wijzig van lijst/formulier"
 msgid "_Menu"
 msgstr "_Menu"
 
-#
-# File: bin/openerp.glade, line: 656
-# File: bin/openerp.glade, line: 656
 #: bin/openerp.glade:689
 msgid "_New Home Tab"
-msgstr "_Nieuwe menutab"
+msgstr "_Nieuw menutab"
 
 #
 # File: bin/openerp.glade, line: 672
@@ -1867,33 +1735,21 @@ msgstr "_Nieuwe menutab"
 msgid "Close Tab"
 msgstr "Tabblad sluiten"
 
-#
-# File: bin/openerp.glade, line: 688
-# File: bin/openerp.glade, line: 688
 #: bin/openerp.glade:721
 msgid "Previous Tab"
-msgstr "Vorig Tabblad"
+msgstr "Vorig tabblad"
 
-#
-# File: bin/openerp.glade, line: 697
-# File: bin/openerp.glade, line: 7057
-# File: bin/openerp.glade, line: 697
-# File: bin/openerp.glade, line: 7057
 #: bin/openerp.glade:730 bin/openerp.glade:5074
 msgid "Next Tab"
-msgstr "Volgend Tabblad"
+msgstr "Volgend tabblad"
 
-#
-# File: bin/openerp.glade, line: 711
 #: bin/openerp.glade:744
 msgid "View _logs"
-msgstr "Bekijk logregister"
+msgstr "Bekijk _logs"
 
-#
-# File: bin/openerp.glade, line: 719
 #: bin/openerp.glade:752
 msgid "_Go to resource ID..."
-msgstr "_Ga naar element ID"
+msgstr "_Ga naar hulpbron ID"
 
 #
 # File: bin/openerp.glade, line: 733
@@ -1902,44 +1758,29 @@ msgstr "_Ga naar element ID"
 msgid "_Open"
 msgstr "_Openen"
 
-#
-# File: bin/openerp.glade, line: 748
 #: bin/openerp.glade:781
 msgid "Reloa_d / Undo"
-msgstr "Herla_den / Ongedaan maken"
+msgstr "Herla_den / herstel"
 
-#
-# File: bin/openerp.glade, line: 769
 #: bin/openerp.glade:802
 msgid "Repeat latest _action"
-msgstr "Herhaal laatste handeling"
+msgstr "Herhaal laatste h_andeling"
 
-#
-# File: bin/openerp.glade, line: 783
-# File: bin/openerp.glade, line: 783
 #: bin/openerp.glade:816
 msgid "_Preview in PDF"
-msgstr "_Preview in PDF"
+msgstr "Voorbeeld in _PDF"
 
-#
-# File: bin/openerp.glade, line: 799
 #: bin/openerp.glade:832
 msgid "Previe_w in editor"
-msgstr "Preview in de editor"
+msgstr "Voorbeeld in editor"
 
-#
-# File: bin/openerp.glade, line: 819
-# File: bin/openerp.glade, line: 819
 #: bin/openerp.glade:852
 msgid "Expor_t data..."
-msgstr "Expor_teer gegevens"
+msgstr "Expor_teer gegevens..."
 
-#
-# File: bin/openerp.glade, line: 834
-# File: bin/openerp.glade, line: 834
 #: bin/openerp.glade:867
 msgid "I_mport data..."
-msgstr "I_mporteer gegevens"
+msgstr "I_mporteer gegevens..."
 
 #
 # File: bin/openerp.glade, line: 846
@@ -1987,12 +1828,9 @@ msgstr "Alleen _tekst"
 msgid "_Forms"
 msgstr "_Formulieren"
 
-#
-# File: bin/openerp.glade, line: 907
-# File: bin/openerp.glade, line: 907
 #: bin/openerp.glade:940
 msgid "Right Toolbar"
-msgstr "Rechter menu"
+msgstr "Rechter menubalk"
 
 #
 # File: bin/openerp.glade, line: 915
@@ -2029,11 +1867,9 @@ msgstr "Rechts"
 msgid "Bottom"
 msgstr "Onderkant"
 
-#
-# File: bin/openerp.glade, line: 962
 #: bin/openerp.glade:995
 msgid "Tabs default orientation"
-msgstr "Standaard tabinstelling"
+msgstr "Standaard oriëntatie tabblad"
 
 #
 # File: bin/openerp.glade, line: 970
@@ -2056,11 +1892,9 @@ msgstr "Verticaal"
 msgid "_Print"
 msgstr "Afdrukken"
 
-#
-# File: bin/openerp.glade, line: 1002
 #: bin/openerp.glade:1035
 msgid "Previe_w before print"
-msgstr "Preview voor printen"
+msgstr "Voorbeeld voor afdrukken"
 
 #
 # File: bin/openerp.glade, line: 1026
@@ -2076,18 +1910,13 @@ msgstr "_Sla opties op"
 msgid "_Plugins"
 msgstr "_Plugins"
 
-#
-# File: bin/openerp.glade, line: 1054
 #: bin/openerp.glade:1087
 msgid "_Execute a plugin"
-msgstr "Installeer een plugin"
+msgstr "Vo_er een plugin uit"
 
-#
-# File: bin/openerp.glade, line: 1074
-# File: bin/openerp.glade, line: 1074
 #: bin/openerp.glade:1107
 msgid "_Shortcuts"
-msgstr "_Snelkoppelingen"
+msgstr "_Sneltoetsen"
 
 #
 # File: bin/openerp.glade, line: 1082
@@ -2103,18 +1932,13 @@ msgstr "_Help"
 msgid "Support Request"
 msgstr "Ondersteuningsaanvraag"
 
-#
-# File: bin/openerp.glade, line: 1109
-# File: bin/openerp.glade, line: 1109
 #: bin/openerp.glade:1142
 msgid "User _Manual"
-msgstr "Handleiding"
+msgstr "Gebruikershandleiding"
 
-#
-# File: bin/openerp.glade, line: 1124
 #: bin/openerp.glade:1157
 msgid "_Contextual Help"
-msgstr "_Help"
+msgstr "_Contextuele hulp"
 
 #
 # File: bin/openerp.glade, line: 1140
@@ -2143,17 +1967,13 @@ msgstr "_Licentie"
 msgid "_About..."
 msgstr "Info"
 
-#
-# File: bin/openerp.glade, line: 1225
 #: bin/openerp.glade:1258
 msgid "Edit / Save this resource"
-msgstr "Wijzig / sla dit element op"
+msgstr "Wijzig / bewaar deze hulpbron"
 
-#
-# File: bin/openerp.glade, line: 1241
 #: bin/openerp.glade:1274
 msgid "Delete this resource"
-msgstr "Verwijder dit element"
+msgstr "Verwijder deze hulpbron"
 
 #
 # File: bin/openerp.glade, line: 1254
@@ -2185,11 +2005,9 @@ msgstr "Formulier"
 msgid "Calendar"
 msgstr "Kalender"
 
-#
-# File: bin/openerp.glade, line: 1313
 #: bin/openerp.glade:1346
 msgid "Graph"
-msgstr "Grafiek"
+msgstr "Diagram"
 
 #
 # File: bin/openerp.glade, line: 1326
@@ -2204,17 +2022,13 @@ msgstr "Gantt"
 msgid "Print documents"
 msgstr "Druk documenten af"
 
-#
-# File: bin/openerp.glade, line: 1355
 #: bin/openerp.glade:1388
 msgid "Launch actions about this resource"
-msgstr "Onderneem actie ten aanzien van dit element"
+msgstr "Onderneem actie ten aanzien van deze hulpbron"
 
-#
-# File: bin/openerp.glade, line: 1368
 #: bin/openerp.glade:1401
 msgid "Add an attachment to this resource"
-msgstr "Voeg een bijlage aan dit element toe"
+msgstr "Voeg een bijlage toe aan deze hulpbron"
 
 #
 # File: bin/openerp.glade, line: 1369
@@ -2247,12 +2061,9 @@ msgstr "Opnieuw laden"
 msgid "Close this window"
 msgstr "Sluit dit venster"
 
-#
-# File: bin/openerp.glade, line: 1448
-# File: bin/openerp.glade, line: 1448
 #: bin/openerp.glade:1497
 msgid "Requests:"
-msgstr "Aanvragen"
+msgstr "Aanvragen:"
 
 #
 # File: bin/openerp.glade, line: 1471
@@ -2268,11 +2079,9 @@ msgstr "Lees mijn aanvragen"
 msgid "Send a new request"
 msgstr "Verzend een aanvraag"
 
-#
-# File: bin/openerp.glade, line: 1548
 #: bin/openerp.glade:1581
 msgid "OpenERP - Tree Resources"
-msgstr "OpenERP - elementen"
+msgstr "OpenERP - Boomhulpbronnen"
 
 #
 # File: bin/openerp.glade, line: 1585
@@ -2281,11 +2090,9 @@ msgstr "OpenERP - elementen"
 msgid "Shortcuts"
 msgstr "Snelkoppelingen"
 
-#
-# File: bin/openerp.glade, line: 1710
 #: bin/openerp.glade:1743
 msgid "OpenERP - Forms"
-msgstr "OpenERP formulieren"
+msgstr "OpenERP - Formulieren"
 
 #
 # File: bin/openerp.glade, line: 1718
@@ -2294,11 +2101,9 @@ msgstr "OpenERP formulieren"
 msgid "State:"
 msgstr "Status:"
 
-#
-# File: bin/openerp.glade, line: 1766
 #: bin/openerp.glade:1799
 msgid "OpenERP - About"
-msgstr "Over OpenERP"
+msgstr "OpenERP - Over"
 
 #
 # File: bin/openerp.glade, line: 1780
@@ -2310,8 +2115,6 @@ msgstr ""
 "<b>Over OpenERP</b>\n"
 "<i>De meest geavanceerde open source ERP & CRM !</i>"
 
-#
-# File: bin/openerp.glade, line: 1819
 #: bin/openerp.glade:1852
 msgid ""
 "\n"
@@ -2331,12 +2134,12 @@ msgstr ""
 "OpenERP - GTK Client - v%s\n"
 "\n"
 "OpenERP is een open source ERP+CRM\n"
-"voor het midden en kleinbedrijf\n"
+"voor het midden- en kleinbedrijf\n"
 "\n"
-"De gehele broncode is vrijgegeven onder\n"
-"een openbare GNU licentie\n"
+"De volledige broncode is vrijgegeven onder\n"
+"de voorwaarden van de GNU Publieke Licentie\n"
 "\n"
-"(c) 2003-TODAY, Tiny sprl\n"
+"(c) 2003-vandaag, Tiny sprl\n"
 "\n"
 "Meer informatie op www.openerp.com!"
 
@@ -2387,30 +2190,21 @@ msgstr "_Contact"
 msgid "Open ERP - Forms widget"
 msgstr "OpenERP - Formulier widget"
 
-#
-# File: bin/openerp.glade, line: 2137
-# File: bin/openerp.glade, line: 5589
 #: bin/openerp.glade:2170 bin/openerp.glade:4735
 msgid "OpenERP - Confirmation"
-msgstr "OpenERP - overeenkomst"
+msgstr "OpenERP - Overeenkomst"
 
-#
-# File: bin/openerp.glade, line: 2214
 #: bin/openerp.glade:2249
 msgid "OpenERP - Selection"
-msgstr "OpenERP - selectie"
+msgstr "OpenERP - Keuze"
 
-#
-# File: bin/openerp.glade, line: 2228
 #: bin/openerp.glade:2263
 msgid "Your selection:"
-msgstr "Uw selectie"
+msgstr "Uw keuze:"
 
-#
-# File: bin/openerp.glade, line: 2308
 #: bin/openerp.glade:2343
 msgid "OpenERP - Dialog"
-msgstr "OpenERP - dialoog"
+msgstr "OpenERP - Dialoog"
 
 #
 # File: bin/openerp.glade, line: 2332
@@ -2418,31 +2212,21 @@ msgstr "OpenERP - dialoog"
 msgid "OpenERP, Field Preference target"
 msgstr "OpenERP, veldinstellingen"
 
-#
-# File: bin/openerp.glade, line: 2347
-# File: bin/openerp.glade, line: 2347
 #: bin/openerp.glade:2398
 msgid "_only for you"
-msgstr "alleen voor huidige gebruiker"
+msgstr "alleen v_oor u"
 
-#
-# File: bin/openerp.glade, line: 2361
-# File: bin/openerp.glade, line: 2361
 #: bin/openerp.glade:2412
 msgid "for _all users"
-msgstr "voor alle gebruikers"
+msgstr "voor _alle gebruikers"
 
-#
-# File: bin/openerp.glade, line: 2397
 #: bin/openerp.glade:2432
 msgid "<b>Value applicable for:</b>"
-msgstr "<b>Waarde toepassen op:</b>"
+msgstr "<b>Waarde toepasbaar op:</b>"
 
-#
-# File: bin/openerp.glade, line: 2433
 #: bin/openerp.glade:2468
 msgid "<b>Value applicable if:</b>"
-msgstr "<b>Waarde toepassen wanneer:</b>"
+msgstr "<b>Waarde toepasbaar wanneer:</b>"
 
 #
 # File: bin/openerp.glade, line: 2435
@@ -2465,11 +2249,9 @@ msgstr "_Domein:"
 msgid "Default _value:"
 msgstr "Standaardwaarde"
 
-#
-# File: bin/openerp.glade, line: 2579
 #: bin/openerp.glade:2614
 msgid "OpenERP - Export to CSV"
-msgstr "OpenERP - exporteer naar CSV"
+msgstr "OpenERP - Exporteer naar CSV"
 
 #
 # File: bin/openerp.glade, line: 2611
@@ -2484,11 +2266,9 @@ msgstr "Lijst opslaan"
 msgid "Remove List"
 msgstr "Lijst verwijderen"
 
-#
-# File: bin/openerp.glade, line: 2730
 #: bin/openerp.glade:2765
 msgid "<b>Exports List</b>"
-msgstr "<b>Exporteer lijsten</b>"
+msgstr "<b>Exportlijsten</b>"
 
 #
 # File: bin/openerp.glade, line: 2747
@@ -2498,11 +2278,11 @@ msgstr "<b>Voorgedefinieerde exportinstellingen</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Geschikt voor import"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>Kies een optie om te exporteren</b>"
 
 #
 # File: bin/openerp.glade, line: 2792
@@ -2535,20 +2315,17 @@ msgstr "_Verwijderen"
 msgid "_Nothing"
 msgstr "_Niets"
 
-#
-# File: bin/openerp.glade, line: 2985
 #: bin/openerp.glade:3064
 msgid "Fields to Export"
-msgstr "Velden om te exporteren"
+msgstr "Te exporteren velden"
 
-#
-# File: bin/openerp.glade, line: 2999
-# File: bin/openerp.glade, line: 2999
 #: bin/openerp.glade:3094
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
-msgstr "Openene in Excel"
+msgstr ""
+"Openen in Excel\n"
+"Sla op als CSV"
 
 #
 # File: bin/openerp.glade, line: 3034
@@ -2562,11 +2339,9 @@ msgstr "Voeg veldnamen toe"
 msgid "<b>Opti_ons</b>"
 msgstr "<b>Opties</b>"
 
-#
-# File: bin/openerp.glade, line: 3110
 #: bin/openerp.glade:3189
 msgid "OpenERP - Search"
-msgstr "OpenERP - zoeken"
+msgstr "OpenERP - Zoeken"
 
 #
 # File: bin/openerp.glade, line: 3222
@@ -2604,11 +2379,9 @@ msgstr "Vorige tip"
 msgid "Ne_xt Tip"
 msgstr "Volgende tip"
 
-#
-# File: bin/openerp.glade, line: 3494
 #: bin/openerp.glade:3573
 msgid "OpenERP - License"
-msgstr "OpenERP - licentie"
+msgstr "OpenERP - Licentie"
 
 #
 # File: bin/openerp.glade, line: 3509
@@ -2616,11 +2389,9 @@ msgstr "OpenERP - licentie"
 msgid "OpenERP license"
 msgstr "OpenERP licentie"
 
-#
-# File: bin/openerp.glade, line: 4207
 #: bin/openerp.glade:4286
 msgid "Go to resource ID"
-msgstr "Ga naar het element-id"
+msgstr "Ga naar hulpbron-ID"
 
 #
 # File: bin/openerp.glade, line: 4257
@@ -2628,8 +2399,6 @@ msgstr "Ga naar het element-id"
 msgid "Search ID:"
 msgstr "Zoek ID:"
 
-#
-# File: bin/openerp.glade, line: 5269
 #: bin/openerp.glade:4415
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
@@ -2638,13 +2407,13 @@ msgid ""
 "Note that we may not reply if you do not have a support contract with Tiny "
 "or an official partner.</i>"
 msgstr ""
-"<b>Vul dit formulier is om een bug te melden van een ondersteuningsaanvraag "
-"te versturen.</b>\n"
+"<b>Vul dit formulier is om een fout te melden en/of een "
+"ondersteuningsverzoek te versturen.</b>\n"
 "<i>\n"
-"Uw aanvraag zal verzonden worden naar OpenERP en er zal zo snel mogelijk "
-"contact met u worden opgenomen.\n"
-"Neem in acht dat er niet gereageerd zal worden als u geen contract heeft met "
-"OpenERP of een officiele partner.</i>"
+"Uw verzoek zal verzonden worden naar het OpenERP-team. Er zal zo snel "
+"mogelijk contact met u worden opgenomen.\n"
+"Merk op dat er niet gereageerd zal worden als u geen onderhoudscontract "
+"heeft met OpenERP of een officiele partner.</i>"
 
 #
 # File: bin/openerp.glade, line: 5328
@@ -2696,23 +2465,13 @@ msgstr "Leg uw probleem uit:"
 msgid "<b>Your email:</b>"
 msgstr "<b>Uw e-mail:</b>"
 
-#
-# File: bin/openerp.glade, line: 4258
-# File: bin/openerp.glade, line: 6641
-# File: bin/openerp.glade, line: 4258
-# File: bin/openerp.glade, line: 6641
 #: bin/openerp.glade:4658
 msgid "<b>Your Company:</b>"
-msgstr "<b>Je bedrijf:</b>"
+msgstr "<b>Uw bedrijf:</b>"
 
-#
-# File: bin/openerp.glade, line: 4272
-# File: bin/openerp.glade, line: 6655
-# File: bin/openerp.glade, line: 4272
-# File: bin/openerp.glade, line: 6655
 #: bin/openerp.glade:4672
 msgid "<b>Your name:</b>"
-msgstr "<b>Je naam:</b>"
+msgstr "<b>Uw naam:</b>"
 
 #
 # File: bin/openerp.glade, line: 2165
@@ -2728,11 +2487,9 @@ msgstr "Hallo wereld!"
 msgid "Keyboard shortcuts"
 msgstr "Sneltoetsen"
 
-#
-# File: bin/openerp.glade, line: 5701
 #: bin/openerp.glade:4847
 msgid "<b>Shortcuts for OpenERP</b>"
-msgstr "<b>Sneltoetsen voor OpenERP</b>"
+msgstr "<b>Sneltoetsen in OpenERP</b>"
 
 #
 # File: bin/openerp.glade, line: 5715
@@ -2746,11 +2503,9 @@ msgstr "Sluit venster zonder opslaan"
 msgid "<Ctrl> + <Esc>"
 msgstr "<Ctrl> + <Esc>"
 
-#
-# File: bin/openerp.glade, line: 5744
 #: bin/openerp.glade:4890
 msgid "<i>When editing a resource in a popup window</i>"
-msgstr "<i>Wanneer een item wordt gewijzig in een popup-venster</i>"
+msgstr "<i>Wanneer een hulpbron wordt gewijzigd in een popup-venster</i>"
 
 #
 # File: bin/openerp.glade, line: 5760
@@ -2764,11 +2519,9 @@ msgstr "Sla op en sluit venster"
 msgid "<Ctrl> + <Enter>"
 msgstr "<Ctrl> + <Enter>"
 
-#
-# File: bin/openerp.glade, line: 5788
 #: bin/openerp.glade:4934
 msgid "Switch view mode"
-msgstr "Wijzig beeld"
+msgstr "Wissel weergavemodus"
 
 #
 # File: bin/openerp.glade, line: 5803
@@ -2776,17 +2529,13 @@ msgstr "Wijzig beeld"
 msgid "<Ctrl> + L"
 msgstr "<Ctrl> + L"
 
-#
-# File: bin/openerp.glade, line: 5816
 #: bin/openerp.glade:4962
 msgid "Next record"
-msgstr "Volgende item"
+msgstr "Volgende regel"
 
-#
-# File: bin/openerp.glade, line: 5831
 #: bin/openerp.glade:4977
 msgid "Previous record"
-msgstr "Vorige item"
+msgstr "Vorige regel"
 
 #
 # File: bin/openerp.glade, line: 5846
@@ -2914,11 +2663,9 @@ msgstr "<b>Sneltoetsen in tekstvakken</b>"
 msgid "Open current field"
 msgstr "Open huidige veld"
 
-#
-# File: bin/openerp.glade, line: 6170
 #: bin/openerp.glade:5316
 msgid "Add a new line/field"
-msgstr "Voeg een nieuwe regel toe"
+msgstr "Voeg een nieuwe regel/veld toe"
 
 #
 # File: bin/openerp.glade, line: 6185
@@ -2926,11 +2673,9 @@ msgstr "Voeg een nieuwe regel toe"
 msgid "F1"
 msgstr "F1"
 
-#
-# File: bin/openerp.glade, line: 6198
 #: bin/openerp.glade:5344
 msgid "Auto-Complete text field"
-msgstr "Auto-compleet tekstveld"
+msgstr "Tekstveld auto-aanvullen"
 
 #
 # File: bin/openerp.glade, line: 6213
@@ -2938,21 +2683,17 @@ msgstr "Auto-compleet tekstveld"
 msgid "<Enter>"
 msgstr "<Enter>"
 
-#
-# File: bin/openerp.glade, line: 6226
 #: bin/openerp.glade:5372
 msgid "Previous editable widget"
-msgstr "Vorige instelbare widget"
+msgstr "Vorige te wijzigen widget"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
-#
-# File: bin/openerp.glade, line: 6254
 #: bin/openerp.glade:5400
 msgid "Next editable widget"
-msgstr "Volgende instelbare widget"
+msgstr "Volgende te wijzigen widget"
 
 #
 # File: bin/openerp.glade, line: 6269
@@ -3026,23 +2767,17 @@ msgstr "N_iets"
 msgid "Auto-Detect"
 msgstr "Auto-detect"
 
-#
-# File: bin/openerp.glade, line: 6704
 #: bin/openerp.glade:5850
 msgid "<b>Fields to import</b>"
-msgstr "<b>Velden om te importeren</b>"
+msgstr "<b>Te importeren velden</b>"
 
-#
-# File: bin/openerp.glade, line: 6739
 #: bin/openerp.glade:5885
 msgid "File to Import:"
-msgstr "Bestand om te importeren:"
+msgstr "Te importeren bestand:"
 
-#
-# File: bin/openerp.glade, line: 6813
 #: bin/openerp.glade:5959
 msgid "Lines to Skip:"
-msgstr "Regels overslaan:"
+msgstr "Regels over te slaan:"
 
 #
 # File: bin/openerp.glade, line: 6842
@@ -3062,11 +2797,9 @@ msgstr "Codering:"
 msgid "Field Separater:"
 msgstr "Veldscheidingsteken"
 
-#
-# File: bin/openerp.glade, line: 6895
 #: bin/openerp.glade:6041
 msgid "CSV Parameters"
-msgstr "CSV Parameters"
+msgstr "CSV-parameters"
 
 #
 # File: bin/openerp.glade, line: 6974
@@ -3122,11 +2855,9 @@ msgstr "Zet een database terug"
 msgid "<b>Restore a database</b>"
 msgstr "<b>Zet een database terug</b>"
 
-#
-# File: bin/openerp.glade, line: 7540
 #: bin/openerp.glade:6686
 msgid "(must not contain any special char)"
-msgstr "(mag geen special tekens bevatten)"
+msgstr "(mag geen speciale tekens bevatten)"
 
 #
 # File: bin/openerp.glade, line: 7569
@@ -3142,45 +2873,35 @@ msgstr "Nieuwe database naam:"
 msgid "http://localhost:8069"
 msgstr "http://localhost:8069"
 
-#
-# File: bin/openerp.glade, line: 7743
 #: bin/openerp.glade:6889
 msgid "Create a new database"
-msgstr "Een nieuwe database maken"
+msgstr "Maak een nieuwe database"
 
-#
-# File: bin/openerp.glade, line: 7756
 #: bin/openerp.glade:6902
 msgid "<b>Create a new database</b>"
-msgstr "<b>Een nieuwe database maken</b>"
+msgstr "<b>Maak een nieuwe database</b>"
 
-#
-# File: bin/openerp.glade, line: 7827
 #: bin/openerp.glade:6973
 msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
-"Dit is de URL van de OpenERP server. Gebruik ' localhost' aks de server op "
-"deze computer is geinstalleerd. Klik op 'verander' op het adres te wijzigen."
+"Dit is de URL van de OpenERP server. Gebruik ' localhost' als de server op "
+"deze computer is geïnstalleerd. Klik op 'Wijzig' om het adres te wijzigen."
 
-#
-# File: bin/openerp.glade, line: 7831
 #: bin/openerp.glade:6977
 msgid "OpenERP Server:"
-msgstr "OpenERP Server:"
+msgstr "OpenERP-server:"
 
-#
-# File: bin/openerp.glade, line: 7861
 #: bin/openerp.glade:7007
 msgid ""
 "This is the password of the user that have the rights to administer "
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
-"Dit is het wachtwoord van de gebruiker welke alle rechten heeft in de "
-"databases. Dit is geen OpenERP gebruiker, alleen een super-administrator. "
-"Als dit wachtwoord nog niet is veranderd is deze na installatie 'admin'."
+"Dit is het wachtwoord van de gebruiker die rechten heeft om databases te "
+"beheren. Dit is geen OpenERP gebruiker, maar een superbeheerder. Als u dit "
+"niet gewijzigd heeft, is dit na installatie 'admin'."
 
 #
 # File: bin/openerp.glade, line: 7897
@@ -3188,15 +2909,13 @@ msgstr ""
 msgid "(<i>admin</i>, by default)"
 msgstr "(<i>admin</i>, standaard)"
 
-#
-# File: bin/openerp.glade, line: 7962
 #: bin/openerp.glade:7108
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
-"Kies de naam van de database welke gemaakt moet worden. De naam mag geen "
-"speciale tekens bevatten. Bijvoorbeeld: 'terp'."
+"Kies de naam van de database die zal worden gemaakt. De naam mag geen "
+"speciale tekens bevatten. Voorbeeld: 'terp'."
 
 #
 # File: bin/openerp.glade, line: 7964
@@ -3204,16 +2923,14 @@ msgstr ""
 msgid "New Database Name:"
 msgstr "Naam nieuwe database"
 
-#
-# File: bin/openerp.glade, line: 7988
 #: bin/openerp.glade:7134
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
-"Kies de standaardtaal welke geinstalleerd wordt voor deze database. Het is "
-"mogelijk de taal te wijzigen na installatie in het admin-menu."
+"Kies de standaardtaal die geïnstalleerd wordt voor deze database. Het is "
+"mogelijk nieuwe talen te installeren na installatie middels het Beheer-menu."
 
 #
 # File: bin/openerp.glade, line: 7990
@@ -3221,31 +2938,26 @@ msgstr ""
 msgid "Default Language:"
 msgstr "Standaardtaal:"
 
-#
-# File: bin/openerp.glade, line: 8003
 #: bin/openerp.glade:7149
 msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
 "new database."
 msgstr ""
-"Dit is het wachtwoord van de '<i>admin</i>' gebruiker welke aangemaakt wordt "
-"in de nieuwe database."
+"Dit is het wachtwoord van de '<i>admin</i>' gebruiker die aangemaakt zal "
+"worden in uw nieuwe database."
 
-#
-# File: bin/openerp.glade, line: 8005
 #: bin/openerp.glade:7151
 msgid "Administrator Password:"
-msgstr "Adminstrator wachtwoord:"
+msgstr "Wachtwoord beheerder:"
 
-#
-# File: bin/openerp.glade, line: 8017
 #: bin/openerp.glade:7163
 msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
 "new database. It has to be the same than the above field."
 msgstr ""
-"Dit is het wachtwoord van de '<i>admin</i>' gebruiker welke aangemaakt wordt "
-"in de nieuwe database. Deze is hetzelfde als in het veld hierboven."
+"Dit is het wachtwoord van de '<i>admin</i>' gebruiker die aangemaakt zal "
+"worden in uw nieuwe database. Deze dient gelijk te zijn aan die in het veld "
+"hierboven."
 
 #
 # File: bin/openerp.glade, line: 8019
@@ -3253,17 +2965,15 @@ msgstr ""
 msgid "Confirm Password:"
 msgstr "Bevestig wachtwoord:"
 
-#
-# File: bin/openerp.glade, line: 8110
 #: bin/openerp.glade:7256
 msgid ""
 "Check this box if you want demonstration data to be installed on your new "
 "database. These data will help you to understand OpenERP, with predefined "
 "products, partners, etc."
 msgstr ""
-"Selecteer dit vakje als de voorbeeldgegevens moeten worden ingeladen in de "
-"nieuwe database. Deze gegevens zullen u helpen de werking van OpenERP te "
-"begrijpen."
+"Vink dit aan als u de voorbeeldgegevens wilt laden in uw nieuwe database. "
+"Deze gegevens zullen u helpen de werking van OpenERP te begrijpen met "
+"voorgedefinieerde producten, relaties, enz."
 
 #
 # File: bin/openerp.glade, line: 8113
@@ -3277,11 +2987,9 @@ msgstr "Laad voorbeeldgegevens"
 msgid "Change password"
 msgstr "Wijzig wachtwoord"
 
-#
-# File: bin/openerp.glade, line: 8187
 #: bin/openerp.glade:7333
 msgid "<b>Change your super admin password</b>"
-msgstr "<b>Wijzig uw super-admin wachtwoord</b>"
+msgstr "<b>Wijzig uw superbeheerder wachtwoord</b>"
 
 #
 # File: bin/openerp.glade, line: 8340
@@ -3295,17 +3003,13 @@ msgstr "Oud wachtwoord"
 msgid "New password:"
 msgstr "Nieuw wachtwoord:"
 
-#
-# File: bin/openerp.glade, line: 8366
 #: bin/openerp.glade:7512
 msgid "New password confirmation:"
-msgstr "Nieuw wachtwoord bevestigen"
+msgstr "Nieuw wachtwoord bevestigen:"
 
-#
-# File: bin/openerp.glade, line: 8425
 #: bin/openerp.glade:7571
 msgid "OpenERP Message"
-msgstr "OpenERP bericht"
+msgstr "OpenERP-bericht"
 
 #
 # File: bin/openerp.glade, line: 8504
@@ -3328,15 +3032,15 @@ msgstr ""
 "Er kan verbinding gemaakt worden met de nieuw database met de volgende "
 "gegevens:\n"
 "\n"
-"    Administrator: admin / admin "
+"    Beheerder: admin / admin "
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "Verbind later"
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "Verbind nu"
 
 #
 # File: bin/openerp.glade, line: 8697
@@ -3403,11 +3107,9 @@ msgstr "Vandaag"
 msgid "September 2008"
 msgstr "September 2008"
 
-#
-# File: bin/openerp.glade, line: 9096
 #: bin/openerp.glade:8242
 msgid "Day"
-msgstr "dag"
+msgstr "Dag"
 
 #
 # File: bin/openerp.glade, line: 9120
@@ -3421,7 +3123,7 @@ msgstr "label"
 
 #: bin/win_error.glade:102
 msgid "Click here for details about the maintenance proposition"
-msgstr "Hier klikken voor de details over het onderhoudsvoorstel"
+msgstr "Klik hier voor details van het onderhoudsvoorstel"
 
 #: bin/win_error.glade:119
 msgid "<i>_Maintenance</i>"
@@ -3443,14 +3145,9 @@ msgstr ""
 "snel mogelijk reageren.\n"
 "</i>"
 
-#
-# File: bin/openerp.glade, line: 3362
-# File: bin/openerp.glade, line: 4205
-# File: bin/openerp.glade, line: 3362
-# File: bin/openerp.glade, line: 4205
 #: bin/win_error.glade:184
 msgid "Explain what you did:"
-msgstr "Leg uit wat je deed:"
+msgstr "Leg uit waar u mee bezig was:"
 
 #
 # File: bin/openerp.glade, line: 3376
@@ -3489,16 +3186,17 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"Vul alstublieft het volgende formulier in om ons te helpen <b><span "
+"foreground=\"red\"><i>Open</i></span>ERP</b> verder te verbeteren en nieuwe "
+"ontwikkelingen te adresseren."
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "<b>Uw bedrijf</b>"
 
-#
-# File: bin/openerp.glade, line: 4662
 #: bin/dia_survey.glade:84
 msgid "Open Source:"
-msgstr "Open brondocument"
+msgstr "Open Source:"
 
 #
 # File: bin/openerp.glade, line: 5175
@@ -3520,17 +3218,15 @@ msgstr "Uw rol:"
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "Werknemers:"
 
-#
-# File: bin/openerp.glade, line: 4824
 #: bin/dia_survey.glade:546
 msgid "Country:"
-msgstr "Land"
+msgstr "Land:"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "Plaats:"
 
 #
 # File: bin/openerp.glade, line: 4758
@@ -3540,7 +3236,7 @@ msgstr "Systeem:"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>Uw interessen</b>"
 
 #
 # File: bin/openerp.glade, line: 4702
@@ -3550,15 +3246,17 @@ msgstr "Hoe heeft u over ons gehoord:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "Wij denken OpenERP te gaan gebruiken"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "We denken OpenERP diensten aan te gaan bieden"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"Vertel ons alstublieft waarom u OpenERP uitprobeert en wat uw huidige "
+"software is:"
 
 #
 # File: bin/openerp.glade, line: 5189
@@ -3568,7 +3266,7 @@ msgstr "<b>Blijf op de hoogte</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "Ik wil graag het OpenERP-ebook (PDF) per email toegestuurd krijgen"
 
 #
 # File: bin/openerp.glade, line: 5109
@@ -3578,21 +3276,19 @@ msgstr "Telefoonnummer:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "E-mail:"
 
-#
-# File: bin/openerp.glade, line: 5124
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
-msgstr "Uw naam"
+msgstr "Uw naam:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #
 # File: bin/modules/gui/main.py, line: 736
