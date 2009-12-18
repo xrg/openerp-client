@@ -647,8 +647,6 @@ class ViewList(parser_view):
             for renderer in col.get_cell_renderers():
                 if isinstance(renderer, gtk.CellRendererToggle):
                     renderer.set_property('activatable', value)
-                elif not isinstance(renderer, gtk.CellRendererProgress) and not isinstance(renderer, gtk.CellRendererPixbuf):
-                    renderer.set_property('editable', value)
                 elif isinstance(renderer, parser.CellRendererButton):
                     renderer.set_property('visible',False)
                 if value in ('top','bottom'):
