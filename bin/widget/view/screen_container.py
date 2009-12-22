@@ -45,13 +45,13 @@ class screen_container(object):
 
     def fill_group_combo(self, model):
         fields_list = []
-        self.search_view = rpc.session.rpc_exec_auth('/object', 'execute',
-                            model, 'fields_view_get', False, 'form')
+        self.search_view = rpc.session.rpc_exec_auth('/object', 'execute',model, 'fields_view_get', False, 'form')
         for k,v in self.search_view['fields'].items():
             if v['type'] in ('many2one','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
                 fields_list.append([k,v['string'],v['type']])
         if fields_list:
             fields_list.sort(lambda x, y: cmp(x[1], y[1]))
+        self.groupbyStore.append([''])
         for item in fields_list:
            self.groupbyStore.append([item[1]])
 
