@@ -186,7 +186,7 @@ class _container(object):
         table.resize(y+1,self.col[-1])
 
     def wid_add(self, widget, name=None, expand=False, ypadding=2, rowspan=1,
-            colspan=1, translate=False, fname=None, help=False, fill=False, invisible=False):
+            colspan=1, translate=False, fname=None, help=False, fill=False, invisible=False, model=False):
         (table, x, y) = self.cont[-1]
         if colspan>self.col[-1]:
             colspan=self.col[-1]
@@ -207,13 +207,23 @@ class _container(object):
             eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
             self.trans_box_label.append((eb, name, fname))
             eb.add(label)
-            if help:
-                try:
+            try:
+                uid = rpc.session.uid
+                if help and uid ==1:
+                    eb.set_tooltip_markup("""<span foreground="darkred"><b>%s</b></span>\n%s\n<span foreground="#009900"><b>%s:</b> %s - <b>%s</b>: %s</span>""" % 
+                                          (tools.to_xml(name), tools.to_xml(help), _('Field'), tools.to_xml(fname), _('Object'), tools.to_xml(model)))
+                    label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
+                    eb.show()
+                elif help and uid != 1:
                     eb.set_tooltip_markup('<span foreground=\"darkred\"><b>'+tools.to_xml(name)+'</b></span>\n'+tools.to_xml(help))
-                except:
-                    pass
-                label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
-                eb.show()
+                    label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
+                    eb.show()
+                elif not help and uid ==1:
+                    eb.set_tooltip_markup("""<span foreground="#009900"><b>%s:</b> %s - <b>%s</b>: %s</span>""" % 
+                                          (_('Field'), tools.to_xml(fname), _('Object'), tools.to_xml(model)))
+            except:
+                pass
+
             if '_' in name:
                 label.set_text_with_mnemonic(name)
                 label.set_mnemonic_widget(widget)
@@ -423,7 +433,7 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
-                container.wid_add(widget_act.widget, label, expand, translate=fields[name].get('translate',False), colspan=size, fname=name, help=hlp, fill=fill)
+                container.wid_add(widget_act.widget, label, expand, translate=fields[name].get('translate',False), colspan=size, fname=name, help=hlp, fill=fill, model=model)
 
             elif node.localName=='group':
                 frame = gtk.Frame(attrs.get('string', None))
