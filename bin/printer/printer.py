@@ -91,7 +91,7 @@ class Printer(object):
             return opener
         if os.name == 'nt':
             if options.options['printer.preview']:
-                if options.options['printer.softpath'] == 'none':
+                if options.options['printer.softpath'] in ['None','none']:
                     return lambda fn: os.startfile(fn)
                 else:
                     return lambda fn: os.system(options.options['printer.softpath'] + ' ' + fn)
@@ -99,7 +99,7 @@ class Printer(object):
                 return lambda fn: print_w32_filename(fn)
         else:
             if options.options['printer.preview']:
-                if options.options['printer.softpath'] == 'none':
+                if options.options['printer.softpath'] in ['None','none']:
                     prog = self._findInPath(['xdg-open', 'evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview', 'acroread', 'open'])
                     def opener(fn):
                         self.__opener( lambda: os.execv(prog, (os.path.basename(prog), fn) ))
