@@ -208,12 +208,17 @@ class _container(object):
             self.trans_box_label.append((eb, name, fname))
             eb.add(label)
             try:
-                if help:
+                uid = rpc.session.uid
+                if help and uid ==1:
                     eb.set_tooltip_markup("""<span foreground="darkred"><b>%s</b></span>\n%s\n<span foreground="#009900"><b>%s:</b> %s [%s]</span>""" % 
                                           (tools.to_xml(name), tools.to_xml(help), _('Field name'), tools.to_xml(fname), tools.to_xml(model)))
                     label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
                     eb.show()
-                else:
+                elif help and uid != 1:
+                    eb.set_tooltip_markup('<span foreground=\"darkred\"><b>'+tools.to_xml(name)+'</b></span>\n'+tools.to_xml(help))
+                    label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
+                    eb.show()
+                elif not help and uid ==1:
                     eb.set_tooltip_markup("""<span foreground="#009900"><b>%s:</b> %s [%s]</span>""" % 
                                           (_('Field name'), tools.to_xml(fname), tools.to_xml(model)))
             except:
