@@ -107,6 +107,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                                 ldt = sdt.astimezone(lzone)
                                 date = ldt.timetuple()
                             except:
+                                #ignore and consider client is in server TZ
                                 pass
                         x[field] = time.strftime(display_format, date)
             if self.fields_type[field]['type'] in ('one2one','many2one'):

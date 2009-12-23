@@ -308,11 +308,15 @@ class Datetime(GenericDate):
         date = DT.datetime.strptime(value[:19], self.server_format)
         
         if rpc.session.context.get('tz'):
-            import pytz
-            lzone = pytz.timezone(str(rpc.session.context['tz']))
-            szone = pytz.timezone(rpc.session.timezone)
-            sdt = szone.localize(date, is_dst=True)
-            date = sdt.astimezone(lzone)
+            try:
+                import pytz
+                lzone = pytz.timezone(str(rpc.session.context['tz']))
+                szone = pytz.timezone(rpc.session.timezone)
+                sdt = szone.localize(date, is_dst=True)
+                date = sdt.astimezone(lzone)
+            except:
+                #ignore and consider client is in server TZ
+                pass
         return date.strftime(self.display_format)
 
     def value_from_text(self, model, text):
@@ -320,12 +324,16 @@ class Datetime(GenericDate):
             return False
         date = DT.datetime.strptime(text[:19], self.display_format)
         if rpc.session.context.get('tz'):
-            import pytz
-            lzone = pytz.timezone(str(rpc.session.context['tz']))
-            szone = pytz.timezone(rpc.session.timezone)
-            ldt = lzone.localize(date, is_dst=True)
-            sdt = ldt.astimezone(szone)
-            date = sdt.timetuple()
+            try:
+                import pytz
+                lzone = pytz.timezone(str(rpc.session.context['tz']))
+                szone = pytz.timezone(rpc.session.timezone)
+                ldt = lzone.localize(date, is_dst=True)
+                sdt = ldt.astimezone(szone)
+                date = sdt.timetuple()
+            except:
+                #ignore and consider client is in server TZ
+                pass
         return date.strftime(self.server_format)
 
 class Float(Char):

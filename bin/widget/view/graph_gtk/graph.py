@@ -109,6 +109,7 @@ class ViewGraph(object):
                                 ldt = sdt.astimezone(lzone)
                                 date = ldt.timetuple()
                             except:
+                                #ignore and consider client is in server TZ
                                 pass
                         res[x] = time.strftime(LDFMT + ' %H:%M:%S', date)
                     else:
