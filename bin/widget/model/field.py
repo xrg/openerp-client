@@ -245,6 +245,15 @@ class IntegerField(CharField):
     def validate(self, model):
         self.get_state_attrs(model)['valid'] = True
         return True
+    
+    def set_client(self, model, value, test_state=True, force_change=False):
+        internal = model.value.get(self.name, False)
+        self.set(model, value, test_state)
+        if int(internal or False) != (model.value.get(self.name,False) or False):
+            model.modified = True
+            model.modified_fields.setdefault(self.name)
+            self.sig_changed(model)
+            model.signal('record-changed', model)
 
 
 class M2OField(CharField):

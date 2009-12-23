@@ -43,19 +43,17 @@ class spinint(interface.widget_interface):
 
     def set_value(self, model, model_field):
         self.widget.update()
-        model_field.set_client(model, self.widget.get_value_as_int())
+        model_field.set_client(model, int(self.widget.get_value()))
 
     def display(self, model, model_field):
         if not model_field:
             self.widget.set_value(0)
             return False
         super(spinint, self).display(model, model_field)
-        value = model_field.get(model)
-        if isinstance(value, int):
+        try:
+            value = int(model_field.get(model))
             self.widget.set_value(value)
-        elif isinstance(value, float):
-            self.widget.set_value(int(value))
-        else:
+        except:
             self.widget.set_value(0)
 
     def _readonly_set(self, value):

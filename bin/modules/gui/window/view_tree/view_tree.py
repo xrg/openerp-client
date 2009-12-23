@@ -121,6 +121,9 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                 interger, digit = self.fields_type[field].get('digits', (16,2))
                 for x in res_ids:
                     x[field] = tools.locale_format('%.' + str(digit) + 'f', x[field] or 0.0)
+            if self.fields_type[field]['type'] in ('integer',):
+                for x in res_ids:
+                    x[field] = tools.locale_format('%d', int(x[field]) or 0)
             if self.fields_type[field]['type'] in ('float_time',):
                 for x in res_ids:
                     val = '%02d:%02d' % (math.floor(abs(x[field])),
@@ -383,7 +386,7 @@ class view_tree(object):
 
 fields_list_type = {
     'checkbox': gobject.TYPE_BOOLEAN,
-    'integer': gobject.TYPE_INT,
+#    'integer': gobject.TYPE_INT,
 }
 
 

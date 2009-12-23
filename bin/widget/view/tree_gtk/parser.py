@@ -253,7 +253,7 @@ class Int(Char):
         return int(text)
 
     def get_textual_value(self, model):
-        return tools.locale_format('%d', model[self.field_name].get_client(model) or 0)
+        return tools.locale_format('%d', int(model[self.field_name].get_client(model)) or 0)
 
 class Boolean(Int):
 
