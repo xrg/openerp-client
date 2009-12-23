@@ -32,6 +32,7 @@ import widget_search
 import signal_event
 import tools
 import service
+import copy
 
 
 class Screen(signal_event.signal_event):
@@ -90,6 +91,7 @@ class Screen(signal_event.signal_event):
         self.tree_saves = tree_saves
         self.limit = limit
         self.readonly= readonly
+        self.view_fields = {} # Used to switch self.fields when the view switchs
 
         if view_type:
             self.view_to_load = view_type[1:]
@@ -276,6 +278,7 @@ class Screen(signal_event.signal_event):
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
         self.current_view.set_value()
+        self.fields = {}
         if self.current_model and self.current_model not in self.models.models:
             self.current_model = None
         if mode:
@@ -302,6 +305,11 @@ class Screen(signal_event.signal_event):
                 self.__current_view = len(self.views) - 1
             else:
                 self.__current_view = (self.__current_view + 1) % len(self.views)
+        
+        self.fields = self.view_fields.get(self.__current_view, self.fields) # Switch the fields
+        # TODO: maybe add_fields_custom is needed instead of add_fields on some cases
+        self.models.add_fields(self.fields, self.models) # Switch the model fields too
+        
         widget = self.current_view.widget
         self.screen_container.set(self.current_view.widget)
         if self.current_model:
@@ -386,6 +394,10 @@ class Screen(signal_event.signal_event):
             self.__current_view = len(self.views) - 1
             self.current_view.display()
             self.screen_container.set(view.widget)
+        
+        # Store the fields for this view (we will use them when switching views)
+        self.view_fields[len(self.views)-1] = copy.deepcopy(self.fields)
+
         return view
 
     def editable_get(self):
