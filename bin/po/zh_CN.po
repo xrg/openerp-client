@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-12-08 06:13+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2009-12-23 08:52+0000\n"
+"Last-Translator: Shelly <Unknown>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-09 04:31+0000\n"
+"X-Launchpad-Export-Date: 2009-12-24 04:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -68,12 +68,12 @@ msgstr "定义替换的config文件"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "开启调试 指定运行参数'--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "日志详细程度 %s"
 
 #
 # File: bin/options.py, line: 93
@@ -250,6 +250,8 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"未自动发送错误报告. 请发送下面的错误给我们. 谢谢您!\n"
+"\t %s"
 
 #: bin/common/common.py:446
 msgid "Error"
@@ -408,14 +410,9 @@ msgstr "连接错误"
 msgid "Application Error"
 msgstr "应用程序出错！"
 
-#
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
 #: bin/rpc.py:188 bin/modules/action/wizard.py:195
 msgid "View details"
-msgstr "错误详情"
+msgstr "查阅细节"
 
 #: bin/modules/gui/window/win_search.py:50
 #: bin/widget/view/form_gtk/one2many_list.py:51
@@ -438,7 +435,7 @@ msgstr "该文件是空的！"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "导入源数据"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 54
@@ -463,15 +460,10 @@ msgstr "导入了 %d 个对象！"
 msgid "Importation Error !"
 msgstr "导入错误！"
 
-#
-# File: bin/modules/gui/window/win_import.py, line: 93
-# File: bin/modules/gui/window/win_import.py, line: 97
-# File: bin/modules/gui/window/win_import.py, line: 93
-# File: bin/modules/gui/window/win_import.py, line: 97
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
 msgid "Field name"
-msgstr "栏目名称"
+msgstr "字段名"
 
 #: bin/modules/gui/window/win_import.py:186
 #, python-format
@@ -503,12 +495,9 @@ msgstr "资源名称"
 msgid "Names"
 msgstr "名称"
 
-#
-# File: bin/modules/gui/window/win_export.py, line: 52
-# File: bin/modules/gui/window/win_export.py, line: 52
 #: bin/modules/gui/window/win_export.py:51
 msgid " record(s) saved !"
-msgstr " 记录已保存！"
+msgstr " 条记录保存成功"
 
 #
 # File: bin/modules/gui/window/win_export.py, line: 55
@@ -565,12 +554,9 @@ msgstr "请选择一条记录！"
 msgid "ID"
 msgstr "ID"
 
-#
-# File: bin/modules/gui/window/form.py, line: 216
-# File: bin/modules/gui/window/form.py, line: 216
 #: bin/modules/gui/window/form.py:240
 msgid "Creation User"
-msgstr "创建用户"
+msgstr "创建者"
 
 #
 # File: bin/modules/gui/window/form.py, line: 217
@@ -593,30 +579,19 @@ msgstr "最新更改者"
 msgid "Latest Modification Date"
 msgstr "最新更改日期"
 
-#
-# File: bin/modules/gui/window/form.py, line: 230
-# File: bin/modules/gui/window/form.py, line: 230
 #: bin/modules/gui/window/form.py:254
 msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
-msgstr ""
-"记录尚未保存！\n"
-"您是否要清楚本记录？"
+msgstr "未保存, 确认清除当前记录数据?"
 
-#
-# File: bin/modules/gui/window/form.py, line: 233
-# File: bin/modules/gui/window/form.py, line: 233
 #: bin/modules/gui/window/form.py:257
 msgid "Are you sure to remove this record ?"
-msgstr "您确定要移除此记录？"
+msgstr "确认删除?"
 
-#
-# File: bin/modules/gui/window/form.py, line: 235
-# File: bin/modules/gui/window/form.py, line: 235
 #: bin/modules/gui/window/form.py:259
 msgid "Are you sure to remove those records ?"
-msgstr "您确定要移除这些记录？"
+msgstr "确认删除"
 
 #: bin/modules/gui/window/form.py:263
 msgid "Resources cleared."
@@ -635,13 +610,13 @@ msgstr "现在工作于复制的表单！"
 
 #: bin/modules/gui/window/form.py:306
 msgid "Document Saved."
-msgstr "文档已保存。"
+msgstr "保存成功!"
 
 #: bin/modules/gui/window/form.py:308 bin/modules/gui/window/form.py:309
 #: bin/widget/view/form_gtk/parser.py:137
 #: bin/widget/view/form_gtk/parser.py:138
 msgid "Invalid form, correct red fields !"
-msgstr "表单无效，请重新输入红色的字段"
+msgstr "无效数据，请更正红色字段"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
@@ -664,12 +639,9 @@ msgstr ""
 msgid "You must select one or several records !"
 msgstr "请选择一或多条记录！"
 
-#
-# File: bin/modules/gui/window/form.py, line: 358
-# File: bin/modules/gui/window/form.py, line: 358
 #: bin/modules/gui/window/form.py:384
 msgid "Print Screen"
-msgstr "打印屏幕"
+msgstr "打印"
 
 #
 # File: bin/modules/gui/window/form.py, line: 378
@@ -678,12 +650,9 @@ msgstr "打印屏幕"
 msgid "No record selected"
 msgstr "未选择记录"
 
-#
-# File: bin/modules/gui/window/form.py, line: 383
-# File: bin/modules/gui/window/form.py, line: 383
 #: bin/modules/gui/window/form.py:409
 msgid "New document"
-msgstr "新建单据"
+msgstr "新建文档"
 
 #
 # File: bin/modules/gui/window/form.py, line: 385
@@ -699,26 +668,17 @@ msgstr "编辑表单（id： "
 msgid "Record: "
 msgstr "记录： "
 
-#
-# File: bin/modules/gui/window/form.py, line: 387
-# File: bin/modules/gui/window/form.py, line: 387
 #: bin/modules/gui/window/form.py:413
 msgid " of "
-msgstr " - "
+msgstr " 页，共 "
 
-#
-# File: bin/modules/gui/window/view_tree/parse.py, line: 36
-# File: bin/modules/gui/window/view_tree/parse.py, line: 36
 #: bin/modules/gui/window/view_tree/parse.py:36
 msgid "Tree"
-msgstr "树状列表"
+msgstr "树形列表"
 
-#
-# File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
-# File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:49
 msgid "Description"
-msgstr "说明"
+msgstr "备注"
 
 #
 # File: bin/modules/gui/window/__init__.py, line: 33
@@ -740,14 +700,11 @@ msgstr "扩展已被定义"
 msgid "No resource selected!"
 msgstr "未选择资源！"
 
-#
-# File: bin/modules/gui/window/tree.py, line: 204
-# File: bin/modules/gui/window/tree.py, line: 204
 #: bin/modules/gui/window/tree.py:204
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
-msgstr "您确定要移除此记录？"
+msgstr "确认删除?"
 
 #
 # File: bin/modules/gui/window/tree.py, line: 209
@@ -819,12 +776,9 @@ msgstr "超级管理员密码:"
 msgid "OpenERP Computing"
 msgstr "系统正在计算"
 
-#
-# File: bin/modules/action/wizard.py, line: 143
-# File: bin/modules/action/wizard.py, line: 143
 #: bin/modules/gui/main.py:183 bin/modules/action/wizard.py:147
 msgid "Operation in progress"
-msgstr "操作进行中"
+msgstr "请稍候......"
 
 #
 # File: bin/modules/action/wizard.py, line: 147
@@ -929,24 +883,14 @@ msgstr "安装 OpenERP 帐套数据库"
 msgid "<b>Operation in progress</b>"
 msgstr "<b>操作进行中</b>"
 
-#
-# File: bin/modules/gui/main.py, line: 359
-# File: bin/modules/gui/main.py, line: 361
-# File: bin/modules/gui/main.py, line: 363
-# File: bin/modules/gui/main.py, line: 359
-# File: bin/modules/gui/main.py, line: 361
-# File: bin/modules/gui/main.py, line: 363
 #: bin/modules/gui/main.py:658 bin/modules/gui/main.py:660
 #: bin/modules/gui/main.py:662
 msgid "Could not create database."
-msgstr "无法创建帐套。"
+msgstr "创建帐套数据库失败。"
 
-#
-# File: bin/modules/gui/main.py, line: 359
-# File: bin/modules/gui/main.py, line: 359
 #: bin/modules/gui/main.py:658
 msgid "Database already exists !"
-msgstr "该数据库名已存在！"
+msgstr "帐套已存在!"
 
 #
 # File: bin/modules/gui/main.py, line: 361
@@ -969,15 +913,12 @@ msgstr "数据库管理员密码不正确！"
 msgid "Error during database creation !"
 msgstr "创建帐套出错！"
 
-#
-# File: bin/modules/gui/main.py, line: 370
-# File: bin/modules/gui/main.py, line: 370
 #: bin/modules/gui/main.py:669
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
-"数据库创建不成功。\n"
+"账套数据库创建不成功。\n"
 "建议删除该数据库（帐套）。"
 
 #
@@ -1010,20 +951,14 @@ msgstr "按 Ctrl+O登录"
 msgid "Edit"
 msgstr "编辑"
 
-#
-# File: bin/modules/gui/main.py, line: 694
-# File: bin/modules/gui/main.py, line: 694
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr "%s 条请求"
+msgstr "%s个请求"
 
-#
-# File: bin/modules/gui/main.py, line: 696
-# File: bin/modules/gui/main.py, line: 696
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr "没有请求"
+msgstr "无请求"
 
 #
 # File: bin/modules/gui/main.py, line: 698
@@ -1110,19 +1045,13 @@ msgstr "删除帐套"
 msgid "Database dropped successfully !"
 msgstr "帐套删除成功！"
 
-#
-# File: bin/modules/gui/main.py, line: 1044
-# File: bin/modules/gui/main.py, line: 1044
 #: bin/modules/gui/main.py:1342
 msgid "Could not drop database."
-msgstr "无法删除帐套。"
+msgstr "删除帐套数据库失败。"
 
-#
-# File: bin/modules/gui/main.py, line: 1046
-# File: bin/modules/gui/main.py, line: 1046
 #: bin/modules/gui/main.py:1344
 msgid "Couldn't drop database"
-msgstr "无法删除帐套"
+msgstr "删除帐套数据库失败"
 
 #
 # File: bin/modules/gui/main.py, line: 1049
@@ -1145,19 +1074,13 @@ msgstr "打开..."
 msgid "Database restored successfully !"
 msgstr "帐套恢复成功！"
 
-#
-# File: bin/modules/gui/main.py, line: 1063
-# File: bin/modules/gui/main.py, line: 1063
 #: bin/modules/gui/main.py:1361
 msgid "Could not restore database."
-msgstr "无法恢复帐套"
+msgstr "恢复帐套数据失败。"
 
-#
-# File: bin/modules/gui/main.py, line: 1065
-# File: bin/modules/gui/main.py, line: 1065
 #: bin/modules/gui/main.py:1363
 msgid "Couldn't restore database"
-msgstr "无法恢复帐套"
+msgstr "恢复帐套数据失败"
 
 #: bin/modules/gui/main.py:1402
 msgid ""
@@ -1179,12 +1102,9 @@ msgstr "不能修改超级管理员密码。"
 msgid "Bad password provided !"
 msgstr "密码错误！"
 
-#
-# File: bin/modules/gui/main.py, line: 1111
-# File: bin/modules/gui/main.py, line: 1111
 #: bin/modules/gui/main.py:1415
 msgid "Error, password not changed."
-msgstr "错误，密码未更改。"
+msgstr "出错，密码未更改。"
 
 #
 # File: bin/modules/gui/main.py, line: 1117
@@ -1210,12 +1130,9 @@ msgstr "数据库备份失败。"
 msgid "Couldn't backup database."
 msgstr "无法备份帐套"
 
-#
-# File: bin/modules/action/main.py, line: 46
-# File: bin/modules/action/main.py, line: 46
 #: bin/modules/action/main.py:46
 msgid "Nothing to print!"
-msgstr "没有可打印的内容！"
+msgstr "没有打印的内容！"
 
 #
 # File: bin/modules/action/main.py, line: 63
@@ -1224,12 +1141,9 @@ msgstr "没有可打印的内容！"
 msgid "Printing aborted, too long delay !"
 msgstr "打印超时退出！"
 
-#
-# File: bin/modules/action/main.py, line: 178
-# File: bin/modules/action/main.py, line: 178
 #: bin/modules/action/main.py:180
 msgid "Select your action"
-msgstr "选择需执行动作"
+msgstr "选择相关操作"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid "Gantt view not yet implemented !"
@@ -3454,6 +3368,8 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"请在下面填写您的意见或建议,以便完善<b><span foreground=\"red\"><i>Open</i></span>ERP</b>的Dia "
+"快速开发."
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
