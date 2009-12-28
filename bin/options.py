@@ -103,12 +103,6 @@ class configmanager(object):
             'help.index': 'http://doc.openerp.com/',
             'help.context': 'http://doc.openerp.com/index.php?model=%(model)s&lang=%(lang)s',
             'client.timeout': 300,
-            'colors.invalid': '#ff6969',
-            'colors.readonly': '#eeebe7',
-            'colors.required': '#d2d2ff',
-            'colors.required_fg': 'black',
-            'colors.normal': 'white'
-            
         }
         loglevels = ('critical', 'error', 'warning', 'info', 'debug', 'debug_rpc', 'debug_rpc_answer', 'notset')
         parser = optparse.OptionParser(version=_("OpenERP Client %s" % openerp_version))
