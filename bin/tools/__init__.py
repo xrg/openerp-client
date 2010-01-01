@@ -70,37 +70,37 @@ def node_attributes(node):
 
 #FIXME use spaces
 def calc_condition(self,model,con):
-	if model and (con[0] in model.mgroup.fields):
-		val = model[con[0]].get(model)
-		if con[1]=="=" or con[1]=="==":
-			if val==con[2]:
+    if model and (con[0] in model.mgroup.fields):
+        val = model[con[0]].get(model)
+        if con[1]=="=" or con[1]=="==":
+            if val==con[2]:
 				return True
-		elif con[1]=="!=" or con[1]=="<>":
+        elif con[1]=="!=" or con[1]=="<>":
 			if val!=con[2]:
 				return True
-		elif con[1]=="<":
-			if val<con[2]:
+        elif con[1]=="<":
+            if val<con[2]:
 				return True
-		elif con[1]==">":
+        elif con[1]==">":
 			if val>con[2]:
 				return True
-		elif con[1]=="<=":
+        elif con[1]=="<=":
 			if val<=con[2]:
 				return True
-		elif con[1]==">=":
+        elif con[1]==">=":
 			if val>=con[2]:
 				return True
-		elif con[1].lower()=="in":
+        elif con[1].lower()=="in":
 			for cond in con[2]:
 				if val == cond:
 					return True
-		elif con[1].lower()=="not in":
+        elif con[1].lower()=="not in":
 			for cond in con[2]:
 				if val == cond:
 					return False
 			return True
-		return False
-
+        return False
+    
 def call_log(fun):
     """Debug decorator
        TODO: Add optionnal execution time

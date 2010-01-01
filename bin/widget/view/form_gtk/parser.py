@@ -138,7 +138,6 @@ class StateAwareWidget(object):
             result = True
             for condition in v:
                 result = result and tools.calc_condition(self,model,condition)
-                    
             if result:
                 if k=='invisible':
                     self.widget.hide()

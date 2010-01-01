@@ -103,7 +103,8 @@ class parser_tree(interface.parser_interface):
                 if node_attrs.get('help',False):
                     col_label.set_tooltip_markup('<span foreground=\"darkred\">'+tools.to_xml(node_attrs['string'])+' :</span>\n'+tools.to_xml(node_attrs['help']))
                 col_label.show()
-                col.set_widget(col_label)                
+                col.set_widget(col_label)   
+                         
                 btn_list.append(col)
                 col._type = 'Button'
                 col.name = node_attrs['name']
@@ -693,48 +694,66 @@ class CellRendererButton(object):
     def __init__(self, field_name, treeview=None, attrs=None, window=None):
         self.field_name = field_name
         self.attrs = attrs or {}
-        self.renderer = gtk.CellRendererPixbuf()
         self.treeview = treeview
+        self.renderer = gtk.CellRendererPixbuf()
         self.window = window or service.LocalService('gui.main').window
-        self.renderer.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+#        self.renderer.set_property('stock-id', self.attrs.get('icon','gtk-help'))
 
-#    def __get_states(self):
-#        return [e for e in self.attrs.get('states','').split(',') if e]
-#
-#    def __get_model_state(self, widget, cell_area):
-#        path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
-#        if not path:
-#            return False        
-#        modelgrp = widget.get_model()
-#        model = modelgrp.models[path[0][0]]
-#
-#        if model and ('state' in model.mgroup.fields):
-#            state = model['state'].get(model)
-#        else:
-#            state = 'draft'
-#        return state
-#    
-#    def __is_visible(self, widget, cell_area):
-#        states = self.__get_states()
-#        model_state = self.__get_model_state(widget, cell_area)
-#        return (not states) or (model_state in states)
+    def __get_states(self):
+        return [e for e in self.attrs.get('states','').split(',') if e]
 
+    def __get_model_state(self, widget, cell_area):
+        path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
+        if not path:
+            return False        
+        modelgrp = widget.get_model()
+        model = modelgrp.models[path[0][0]]
+
+        if model and ('state' in model.mgroup.fields):
+            state = model['state'].get(model)
+        else:
+            state = 'draft'
+        return state
+    
+    def __is_visible(self, widget, cell_area):
+        states = self.__get_states()
+        model_state = self.__get_model_state(widget, cell_area)
+        return (not states) or (model_state in states)
+
+    def attrs_set(self, model):
+        if self.attrs.get('attrs',False):
+            attrs_changes = eval(self.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
+            for k,v in attrs_changes.items():
+                result = False
+                for condition in v:
+                    result = tools.calc_condition(self,model,condition)
+                if result:
+                    if k=='invisible':
+                        return True
+                    elif k=='readonly':
+                        return True
+        return False
+    
     def setter(self, column, cell, store, iter):
         #TODO
-        pass
-        
-#        model = store.get_value(iter, 0)
-#        current_state = self.get_textual_value(model) or 'draft'
-#        tv = column.get_tree_view()
-#        valid_states = self.__get_states() or []
-        # change this according to states or attrs: to not show the icon
-#        cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+        model = store.get_value(iter, 0)
+        current_state = self.get_textual_value(model) or 'draft'
+        tv = column.get_tree_view()
+        valid_states = self.__get_states() or []
+#         change this according to states or attrs: to not show the icon
+        attrs_check = self.attrs_set(model)
+        if attrs_check or current_state not in valid_states:
+            cell.set_property('stock-id', None)
+        else:
+            cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
 
     def open_remote(self, model, create, changed=False, text=None):
         raise NotImplementedError
 
     def get_textual_value(self, model):
-        return model['state'].get_client(model)
+        if model.get('state',False):
+            return model['state'].get_client(model)
+        return False
 
     def value_from_text(self, model, text):
         return 0
