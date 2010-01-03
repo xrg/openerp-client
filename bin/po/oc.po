@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-01-01 11:22+0000\n"
-"Last-Translator: zo <romain.hoareau@sfr.fr>\n"
+"PO-Revision-Date: 2010-01-02 21:36+0000\n"
+"Last-Translator: Yannig MARCHEGAY (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-02 04:35+0000\n"
+"X-Launchpad-Export-Date: 2010-01-03 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -27,7 +27,7 @@ msgstr ""
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr ""
+msgstr "Pas de modul d'extension disponible per aquesta ressorsa !"
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
