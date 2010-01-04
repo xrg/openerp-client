@@ -193,11 +193,21 @@ class Char(object):
         if not window:
             window = service.LocalService('gui.main').window
         self.window = window
-
+    
+    def attrs_set(self, model, cell):
+        if self.attrs.get('attrs',False):
+            attrs_changes = eval(self.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
+            for k,v in attrs_changes.items():
+                result = False
+                for condition in v:
+                    result = tools.calc_condition(self,model,condition)
+                model[self.field_name].get_state_attrs(model)[k] = result
+                            
     def setter(self, column, cell, store, iter):
         model = store.get_value(iter, 0)
         text = self.get_textual_value(model)
         cell.set_property('text', text)
+        self.attrs_set(model, cell)
         color = self.get_color(model)
         cell.set_property('foreground', str(color))
         if self.attrs['type'] in ('float', 'integer', 'boolean'):
@@ -210,6 +220,8 @@ class Char(object):
                 cell.set_property('background', common.colors.get('invalid', 'white'))
             elif bool(int(field.get_state_attrs(model).get('required', 0))):
                 cell.set_property('background', common.colors.get('required', 'white'))
+            else:
+                cell.set_property('background', None)    
         cell.set_property('xalign', align)
 
     def get_color(self, model):
@@ -251,6 +263,18 @@ class Boolean(Int):
         model = store.get_value(iter, 0)
         value = self.get_textual_value(model)
         cell.set_active(bool(value))
+        attrs_check = self.attrs_set(model, cell)
+        if self.treeview.editable:
+            field = model[self.field_name]
+            if not field.get_state_attrs(model).get('readonly', True):
+                cell.set_property('sensitive',True)
+            else:
+                cell.set_property('sensitive',False)
+            
+            if field.get_state_attrs(model).get('required', True): 
+                cell.set_property('cell-background',common.colors.get('required', 'white'))
+            else:
+                cell.set_property('cell-background',None)   
 
     def _sig_toggled(self, renderer, path):
         store = self.treeview.get_model()
