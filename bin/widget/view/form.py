@@ -380,6 +380,10 @@ class ViewForm(parser_view):
     def set_notebook(self,model,nb):
         for i in range(0,nb.get_n_pages()):
             page = nb.get_nth_page(i)
+            children_notebooks = page.get_children()
+            for child in children_notebooks:
+                if isinstance(child,gtk.Notebook):
+                    self.set_notebook(model,child)
             if nb.get_tab_label(page).attrs.get('attrs',False):
                 self.attrs_set(model, page, nb.get_tab_label(page))
 
