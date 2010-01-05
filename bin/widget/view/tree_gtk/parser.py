@@ -322,53 +322,14 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-       
-        t = tools.datetime_util.strptime(value[:19], self.server_format)
-        if isinstance(t, type(mx.DateTime.now())) and not hasattr(t, 'timetuple'):
-            date = tuple(map(lambda x: int(x), t.tuple()))
-        else:
-            date = tools.datetime_util.strptime(value[:19], self.server_format).timetuple()
-        dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                
-        if 'tz' in rpc.session.context and  rpc.session.context['tz']:
-            try:
-                import pytz
-                lzone = pytz.timezone(str(rpc.session.context['tz']))
-                szone = pytz.timezone(rpc.session.timezone)
-                sdt = lzone.localize(dt, is_dst=True)
-                ldt = sdt.astimezone(lzone)
-                date = ldt.timetuple()
-                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-            except Exception, e:
-                pass
-          
-        return dt.strftime(self.display_format)
+        return tools.datetime_util.server_to_local_timestamp(value[:19],
+                self.server_format, self.display_format)
 
     def value_from_text(self, model, text):
         if not text:
             return False
-        try:
-            #date = mx.DateTime.strptime(text, self.display_format)
-            date = tools.datetime_util.strptime(text[:19], self.display_format)
-        except:
-            try:
-                dt = list(time.localtime())
-                dt[2] = int(text)
-                date = tuple(dt)
-            except:
-                return False
-        if 'tz' in rpc.session.context:
-            try:
-                import pytz
-                lzone = pytz.timezone(str(rpc.session.context['tz']))
-                szone = pytz.timezone(rpc.session.timezone)
-                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                ldt = lzone.localize(dt, is_dst=True)
-                sdt = ldt.astimezone(szone)
-                date = sdt.timetuple()
-            except:
-                pass
-        return date.strftime(self.server_format)
+        return tools.datetime_util.local_to_server_timestamp(text[:19],
+                self.display_format, self.server_format)
 
 class Float(Char):
     def get_textual_value(self, model):

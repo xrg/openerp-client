@@ -304,8 +304,11 @@ class rpc_session(object):
             self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
             try:
                 import pytz
+                pytz.timezone(self.timezone)
+            except pytz.UnknownTimeZoneError:
+                common.warning(_('Server timezone is not recognized (%s)!\nTime values will be displayed without timezone conversion.'%self.timezone))
             except:
-                common.warning('You select a timezone but OpenERP could not find pytz library !\nThe timezone functionality will be disabled.')
+                common.warning(_('The "pytz" Python library is missing!\nTime values will be displayed without timezone conversion.'))
 
     def logged(self):
         return self._open
