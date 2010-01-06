@@ -216,12 +216,17 @@ class Char(object):
             align = 0
         if self.treeview.editable:
             field = model[self.field_name]
+            
+            #setting the cell property editable or not
+            cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
+                
             if not field.get_state_attrs(model).get('valid', True):
                 cell.set_property('background', common.colors.get('invalid', 'white'))
             elif bool(int(field.get_state_attrs(model).get('required', 0))):
                 cell.set_property('background', common.colors.get('required', 'white'))
             else:
-                cell.set_property('background', None)    
+                cell.set_property('background', None)
+                  
         cell.set_property('xalign', align)
 
     def get_color(self, model):
@@ -266,10 +271,8 @@ class Boolean(Int):
         attrs_check = self.attrs_set(model, cell)
         if self.treeview.editable:
             field = model[self.field_name]
-            if not field.get_state_attrs(model).get('readonly', True):
-                cell.set_property('sensitive',True)
-            else:
-                cell.set_property('sensitive',False)
+
+            cell.set_property('sensitive',not field.get_state_attrs(model).get('readonly', False))
             
             if field.get_state_attrs(model).get('required', True): 
                 cell.set_property('cell-background',common.colors.get('required', 'white'))
