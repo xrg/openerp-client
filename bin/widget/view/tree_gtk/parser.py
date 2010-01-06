@@ -202,11 +202,28 @@ class Char(object):
                 for condition in v:
                     result = tools.calc_condition(self,model,condition)
                 model[self.field_name].get_state_attrs(model)[k] = result
+
+    def state_set(self, model, state='draft'):
+        ro = model.mgroup._readonly
+        field = model[self.field_name]
+        state_changes = dict(field.attrs.get('states',{}).get(state,[]))
+        if 'readonly' in state_changes:
+            field.get_state_attrs(model)['readonly'] = state_changes['readonly'] or ro
+        else:
+            field.get_state_attrs(model)['readonly'] = field.attrs.get('readonly',False) or ro
+        if 'required' in state_changes:
+            field.get_state_attrs(model)['required'] = state_changes['required']
+        else:
+            field.get_state_attrs(model)['required'] = field.attrs.get('required',False)
+        if 'value' in state_changes:
+            field.set(model, state_changes['value'], test_state=False, modified=True)
                             
     def setter(self, column, cell, store, iter):
         model = store.get_value(iter, 0)
         text = self.get_textual_value(model)
         cell.set_property('text', text)
+        if model.get('state',False) and model['state']:
+            self.state_set(model, model['state'].get(model))
         self.attrs_set(model, cell)
         color = self.get_color(model)
         cell.set_property('foreground', str(color))
@@ -268,7 +285,9 @@ class Boolean(Int):
         model = store.get_value(iter, 0)
         value = self.get_textual_value(model)
         cell.set_active(bool(value))
-        attrs_check = self.attrs_set(model, cell)
+        if model.get('state',False) and model['state']:
+            self.state_set(model, model['state'].get(model))
+        self.attrs_set(model, cell)
         if self.treeview.editable:
             field = model[self.field_name]
 
