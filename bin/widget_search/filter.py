@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -45,11 +45,19 @@ class filter(wid_int.wid_int):
         self.butt.set_alignment(0.5, 0.5)
         self.butt.connect('toggled', call[1])
         self.widget = self.butt
+        self.context = {}
 
     def _value_get(self):
+        import rpc
         if self.butt.get_active():
+            if self.attrs.get('context',False):
+                self.context = tools.expr_eval(self.attrs['context'], {})
+                rpc.session.context['search_context'] = self.context
             return tools.expr_eval(self.domain)
         else:
+            if self.context and rpc.session.context['search_context'].get('group_by',False):
+                del rpc.session.context['search_context']['group_by']
+                del self.context['group_by']
             return []
 
     def sig_exec(self, widget):
@@ -57,10 +65,10 @@ class filter(wid_int.wid_int):
 
     def clear(self):
         self.butt.set_active(False)
-        
+
     def _value_set(self, value):
         pass
-       
+
 
     value = property(_value_get, _value_set, None,
       'The content of the widget or ValueError if not valid')

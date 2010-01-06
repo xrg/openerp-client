@@ -43,18 +43,6 @@ class screen_container(object):
     def widget_get(self):
         return self.vbox
 
-    def fill_group_combo(self, model):
-        fields_list = []
-        self.search_view = rpc.session.rpc_exec_auth('/object', 'execute',model, 'fields_view_get', False, 'tree')
-        for k,v in self.search_view['fields'].items():
-            if v['type'] in ('many2one'):
-                fields_list.append([k,v['string'],v['type']])
-        if fields_list:
-            fields_list.sort(lambda x, y: cmp(x[1], y[1]))
-        self.groupbyStore.append([''])
-        for item in fields_list:
-           self.groupbyStore.append([item[1]])
-
     def fill_filter_combo(self, model):
         self.action_list.clear()
         my_acts = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'get_filters', model)
@@ -93,14 +81,14 @@ class screen_container(object):
         hb1.set_layout(gtk.BUTTONBOX_START)
         hb2 = gtk.HBox(homogeneous=False, spacing=0)
         hb3 = gtk.HBox(homogeneous=False, spacing=0)
-        hb4 = gtk.HBox(homogeneous=False, spacing=0)
+       # hb4 = gtk.HBox(homogeneous=False, spacing=0)
 
         hs = gtk.HBox(homogeneous=False, spacing=0)
 
         hs.pack_start(hb1, expand=False, fill=False)
         hs.pack_start(hb2, expand=True, fill=True)
-        hs.pack_start(hb3, expand=False, fill=False)
-        hs.pack_end(hb4, expand=False, fill=False)
+      #  hs.pack_start(hb3, expand=False, fill=False)
+        hs.pack_end(hb3, expand=False, fill=False)
 
 #Find Clear Buttons
         self.button = gtk.Button(stock=gtk.STOCK_FIND)
@@ -136,18 +124,6 @@ class screen_container(object):
         hb2.pack_start(self.action_combo, expand=False, fill=False)
         hb2.pack_start(self.button_dynamic, expand=False, fill=False)
         hb2.pack_start(gtk.Label(''), expand=True, fill=True)
-# Group by box:
-
-        hb3.pack_start(gtk.Label('Group by :  '), expand=True, fill=True)
-        self.groupbyStore = gtk.ListStore(gobject.TYPE_STRING)
-        self.groupby_combo = gtk.ComboBox(self.groupbyStore)
-        cell = gtk.CellRendererText()
-        self.groupby_combo.pack_start(cell, True)
-        self.groupby_combo.add_attribute(cell, 'text', 0)
-        self.fill_group_combo(model)
-        hb3.pack_start(self.groupby_combo, expand=False, fill=False)
-        self.groupby_combo.set_active(0)
-        self.groupby_combo.connect('changed', execute_action)
 
 # Limit combo
         self.limit_combo = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
@@ -157,11 +133,11 @@ class screen_container(object):
         self.combo.add_attribute(cell, 'text', 1)
 
         self.selection = []
-        hb4.pack_start(self.combo, expand=False, fill=False)
+        hb3.pack_start(self.combo, expand=False, fill=False)
         self.fill_limit_combo(search_count)
         self.combo.set_active(0)
 
-        hb4.pack_start(gtk.VSeparator(),padding=3, expand=False, fill=False)
+        hb3.pack_start(gtk.VSeparator(),padding=3, expand=False, fill=False)
 
 #Back Forward Buttons
 
@@ -179,8 +155,8 @@ class screen_container(object):
         self.but_next.set_relief(gtk.RELIEF_NONE)
         self.but_next.connect('clicked', next_fnct)
 
-        hb4.pack_start(self.but_previous, expand=False, fill=False)
-        hb4.pack_start(self.but_next, expand=False, fill=False)
+        hb3.pack_start(self.but_previous, expand=False, fill=False)
+        hb3.pack_start(self.but_next, expand=False, fill=False)
 
         hs.show_all()
         self.filter_vbox.pack_start(hs, expand=False, fill=False)

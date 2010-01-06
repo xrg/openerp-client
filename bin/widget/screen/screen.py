@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -60,14 +60,14 @@ class Screen(signal_event.signal_event):
         if default_get is None:
             default_get = {}
         if search_view is None:
-            search_view = "{}"            
+            search_view = "{}"
 
         super(Screen, self).__init__()
 
         self.show_search = show_search
         self.search_count = 0
         self.hastoolbar = hastoolbar
-        self.hassubmenu = hassubmenu        
+        self.hassubmenu = hassubmenu
         self.default_get=default_get
         if not row_activate:
             self.row_activate = lambda self,screen=None: self.switch_view(screen, 'form')
@@ -100,10 +100,10 @@ class Screen(signal_event.signal_event):
         self.tree_saves = tree_saves
         self.limit = limit
         self.old_limit = limit
-        self.offset = 0        
+        self.offset = 0
         self.readonly= readonly
         self.action_domain = []
-        self.custom_panels = []        
+        self.custom_panels = []
 
         if view_type:
             self.view_to_load = view_type[1:]
@@ -135,13 +135,13 @@ class Screen(signal_event.signal_event):
                 self.filter_widget = widget_search.form(self.search_view['arch'],
                         self.search_view['fields'], self.name, self.window,
                         self.domain, (self, self.search_filter))
-                self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', [], self.context)                
+                self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', [], self.context)
                 self.screen_container.add_filter(self.filter_widget.widget,
                         self.search_filter, self.search_clear,
                         self.search_offset_next,
-                        self.search_offset_previous, self.search_count, 
+                        self.search_offset_previous, self.search_count,
                         self.execute_action, self.add_custom, self.name)
-                
+
         if active and show_search:
             self.screen_container.show_filter()
         else:
@@ -174,12 +174,13 @@ class Screen(signal_event.signal_event):
 
     def search_clear(self, *args):
         self.filter_widget.clear()
-        self.screen_container.action_combo.set_active(0)        
+        self.screen_container.action_combo.set_active(0)
         self.clear()
 
     def search_filter(self, *args):
         v = self.filter_widget and self.filter_widget.value or []
         v = self.action_domain and  (v + self.action_domain) or v
+        self.context.update(rpc.session.context)
         filter_keys = []
 
         for ele in v:
@@ -260,7 +261,7 @@ class Screen(signal_event.signal_event):
                 win.set_title('Shortcut Entry')
                 lbl = glade2.get_widget('label157')
                 lbl.set_text('Enter Shortcut Name:')
-            
+
             new_view_ids = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view', 'search', [('model','=',self.resource),('inherit_id','=',False)])
             view_datas = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view', 'read', new_view_ids, ['id','name','type'])
             cell = gtk.CellRendererText()
@@ -268,27 +269,27 @@ class Screen(signal_event.signal_event):
             form_combo.set_model(liststore_form)
             form_combo.pack_start(cell, True)
             form_combo.add_attribute(cell, 'text', 1)
-                        
+
             liststore_tree = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
             tree_combo.set_model(liststore_tree)
             tree_combo.pack_start(cell, True)
             tree_combo.add_attribute(cell, 'text', 1)
-                        
+
             liststore_graph = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
             graph_combo.set_model(liststore_graph)
             graph_combo.pack_start(cell, True)
             graph_combo.add_attribute(cell, 'text', 1)
-                                
+
             liststore_calendar = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
             calendar_combo.set_model(liststore_calendar)
             calendar_combo.pack_start(cell, True)
             calendar_combo.add_attribute(cell, 'text', 1)
-                        
+
             liststore_gantt = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
             gantt_combo.set_model(liststore_gantt)
             gantt_combo.pack_start(cell, True)
             gantt_combo.add_attribute(cell, 'text', 1)
-            
+
             for data in view_datas:
                 if data['type'] == 'form':
                     liststore_form.append([data['id'],data['name']])
@@ -304,14 +305,14 @@ class Screen(signal_event.signal_event):
             tree_combo.set_active(0)
             graph_combo.set_active(0)
             calendar_combo.set_active(0)
-            gantt_combo.set_active(0)                
+            gantt_combo.set_active(0)
             win.show_all()
             response = win.run()
             win.destroy()
             combo.set_active(0)
             if response == gtk.RESPONSE_OK and widget.get_text():
                 action_name = widget.get_text()
-                v_ids=[]                
+                v_ids=[]
                 if form_combo.get_active_text():
                     rec = {'view_mode':'form', 'view_id':form_combo.get_active_text(), 'sequence':2}
                     v_ids.append(rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window.view', 'create', rec))
@@ -325,7 +326,7 @@ class Screen(signal_event.signal_event):
                     rec = {'view_mode':'calendar', 'view_id':calendar_combo.get_active_text(), 'sequence':3}
                     v_ids.append(rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window.view', 'create', rec))
                 if gantt_combo.get_active_text():
-                    rec = {'view_mode':'gantt', 'view_id':gantt_combo.get_active_text(), 'sequence':5}                                        
+                    rec = {'view_mode':'gantt', 'view_id':gantt_combo.get_active_text(), 'sequence':5}
                     v_ids.append(rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window.view', 'create', rec))
 
                 datas={'name':action_name,
@@ -392,7 +393,7 @@ class Screen(signal_event.signal_event):
             for view in self.views:
                 view.signal_record_changed(signal[0], model_group.models, signal[1], *args)
         except:
-            pass        
+            pass
 
     def _model_changed(self, model_group, model):
         if (not model) or (model==self.current_model):
@@ -505,7 +506,7 @@ class Screen(signal_event.signal_event):
         if toolbar is None:
             toolbar = {}
         if submenu is None:
-            submenu = {}            
+            submenu = {}
         def _parse_fields(node, fields):
             if node.nodeType == node.ELEMENT_NODE:
                 if node.localName=='field':
@@ -520,7 +521,7 @@ class Screen(signal_event.signal_event):
                             for sel in fields[str(attrs['name'])]['selection']:
                                 if att_key == sel[0]:
                                     sel[1] = att_val
-                        attrs['selection'] = fields[str(attrs['name'])]['selection']                    
+                        attrs['selection'] = fields[str(attrs['name'])]['selection']
                     fields[unicode(attrs['name'])].update(attrs)
             for node2 in node.childNodes:
                 _parse_fields(node2, fields)
@@ -658,7 +659,7 @@ class Screen(signal_event.signal_event):
         id = False
         if self.current_view.view_type == 'form' and self.current_model:
             id = self.current_model.id
-            
+
             idx = self.models.models.index(self.current_model)
             if not id:
                 lst=[]
@@ -687,7 +688,7 @@ class Screen(signal_event.signal_event):
             self.current_view.set_cursor()
         if self.current_view.view_type == 'tree':
             ids = self.current_view.sel_ids_get()
-            
+
             ctx = self.models.context.copy()
             for m in self.models:
                 if m.id in ids:
@@ -709,7 +710,7 @@ class Screen(signal_event.signal_event):
         if limit:
             tot_rec = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', [], self.context)
             if limit < tot_rec:
-                self.screen_container.fill_limit_combo(tot_rec)        
+                self.screen_container.fill_limit_combo(tot_rec)
         self.models.load(ids, display=False)
         self.current_view.reset()
         if ids:

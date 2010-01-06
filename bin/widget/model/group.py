@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -65,7 +65,7 @@ class ModelList(list):
         super(ModelList, self).remove(obj)
         if not self.lock_signal:
             self.__screen.signal('record-changed', ('record-removed', idx))
-    
+
     def clear(self):
         for obj in range(len(self)):
             self.pop()
@@ -97,6 +97,9 @@ class ModelRecordGroup(signal_event.signal_event):
         self.models_removed = []
         self.on_write = ''
         self.is_wizard = is_wizard
+        self.child_group = False
+        self.groupBY = False
+
 
     def mfields_load(self, fkeys, models):
         for fname in fkeys:
@@ -146,7 +149,7 @@ class ModelRecordGroup(signal_event.signal_event):
             new_index = min(model_idx, len(self.models)-1)
             self.model_add(newmod, new_index)
         return result
-    
+
     def pre_load(self, ids, display=True):
         if not ids:
             return True
@@ -162,14 +165,28 @@ class ModelRecordGroup(signal_event.signal_event):
             self.signal('record-cleared')
         return True
 
-    def load_for(self, values):
+    def load_for(self, values, parent = None):
         if len(values)>10:
             self.models.lock_signal = True
         for value in values:
-            newmod = ModelRecord(self.resource, value['id'], parent=self.parent, group=self)
-            newmod.set(value)
-            self.models.append(newmod)
-            newmod.signal_connect(self, 'record-changed', self._record_changed)
+            if self.groupBY:
+                res = self.resource
+                if not self.child_group:
+                    res = None
+                newmod = ModelRecord(res,value['id'], parent=parent, group=self)
+                newmod.set(value)
+                self.models.append(newmod)
+                newmod.signal_connect(self, 'record-changed', self._record_changed)
+                if value.get('group_child',False) and len(value['group_child']):
+                    val = self.rpc.read(value['group_child'], self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], self._context)
+                    self.child_group = True
+                    self.load_for(val,parent=newmod)
+                    self.child_group = False
+            else:
+                newmod = ModelRecord(self.resource, value['id'], parent=self.parent, group=self)
+                newmod.set(value)
+                self.models.append(newmod)
+                newmod.signal_connect(self, 'record-changed', self._record_changed)
         if len(values)>10:
             self.models.lock_signal = False
             self.signal('record-cleared')
@@ -184,10 +201,18 @@ class ModelRecordGroup(signal_event.signal_event):
             for k,v in c['search_context'].items():
                 if k not in c.keys():
                     c[k] = v
-        
+
         c.update(self.context)
         c['bin_size'] = True
-        values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
+        if self._context.get('search_context',False):
+            self.groupBY = self._context.get('search_context',{}).get('group_by',False)
+        else:
+            self.groupBY = False
+        if self.groupBY:
+            values = rpc.session.rpc_exec_auth_try('/object', 'execute',
+                     self.resource, 'read_group', ids, self.fields, self.groupBY,self._context)
+        else:
+            values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
         rpc.session.context['search_context'] = {}
         if not values:
             return False
@@ -197,11 +222,11 @@ class ModelRecordGroup(signal_event.signal_event):
             self.signal('model-changed', newmod)
         self.current_idx = 0
         return True
-    
+
     def clear(self):
         self.models.clear()
         self.models_removed = []
-    
+
     def getContext(self):
         ctx = {}
         ctx.update(self._context)
@@ -244,7 +269,7 @@ class ModelRecordGroup(signal_event.signal_event):
             newmod.default_get(domain, ctx)
         self.signal('model-changed', newmod)
         return newmod
-    
+
     def model_remove(self, model):
         idx = self.models.index(model)
         self.models.remove(model)
@@ -266,7 +291,7 @@ class ModelRecordGroup(signal_event.signal_event):
         else:
             return None
         return self.models[self.current_idx]
-    
+
     def next(self):
         if self.models and self.current_idx is not None:
             self.current_idx = (self.current_idx + 1) % len(self.models)
