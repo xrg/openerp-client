@@ -215,10 +215,12 @@ class Char(object):
         text = self.get_textual_value(model)
         cell.set_property('text', text)
         color = self.get_color(model)
-        if self.treeview.screen.context.get('search_context',{}).get('group_by',False) and not model.parent:
-            color = 'red'
-        if model.parent:
-            color = 'black'
+        font = pango.FontDescription('Normal ')
+        cell.set_property('font-desc', font)
+        if self.treeview.screen.context.get('search_context',{}).get('group_by',False):
+            if not model.parent:
+                font = pango.FontDescription('bold ')
+                cell.set_property('font-desc', font)
         if color is not None:
             cell.set_property('foreground', str(color))
         if self.attrs['type'] in ('float', 'integer', 'boolean'):
