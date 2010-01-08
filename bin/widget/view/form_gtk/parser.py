@@ -190,7 +190,9 @@ class _container(object):
         if colspan>self.col[-1]:
             colspan=self.col[-1]
         a = name and 1 or 0
-        if colspan+x+a>self.col[-1]:
+        #Commented the following line in order to use colspan=4 and colspan=4 in same row 
+#        if colspan+x+a>self.col[-1]: 
+        if colspan+x>self.col[-1]:
             self.newline()
             (table, x, y) = self.cont[-1]
         yopt = False
