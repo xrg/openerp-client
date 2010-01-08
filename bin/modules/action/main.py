@@ -82,6 +82,8 @@ class main(service.Service):
     def _exec_action(self, action, datas, context={}):
         if isinstance(action, bool) or 'type' not in action:
             return
+        # Updating the context : Adding the context of action in order to use it on Views called from buttons
+        context.update(tools.expr_eval(action.get('context','{}'), context.copy()))
         if action['type'] in ['ir.actions.act_window', 'ir.actions.submenu']:
             for key in ('res_id', 'res_model', 'view_type', 'view_mode',
                     'limit', 'auto_refresh', 'search_view', 'search_view_id'):
@@ -89,7 +91,7 @@ class main(service.Service):
 
             if not datas['search_view'] and datas['search_view_id']:
                  datas['search_view'] = str(rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', datas['search_view_id'], 'search', context))
-            
+
             elif not datas['search_view'] and not datas['search_view_id']:
                 def encode(s):
                     if isinstance(s, unicode):
@@ -110,14 +112,14 @@ class main(service.Service):
                                 process_child(child, new_node, doc)
 
                 form_arch = rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', False, 'form', context)
-                
+
                 dom_arc = etree.XML(encode(form_arch['arch']))
                 new_node = copy.deepcopy(dom_arc)
-                                        
+
                 for child_node in new_node.getchildren()[0].getchildren():
                     new_node.getchildren()[0].remove(child_node)
                 process_child(dom_arc.getchildren()[0],new_node.getchildren()[0],dom_arc)
-                
+
                 form_arch['arch'] = etree.tostring(new_node)
                 datas['search_view'] = str(form_arch)
 
