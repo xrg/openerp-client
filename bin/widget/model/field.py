@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -70,7 +70,7 @@ class CharField(object):
         for c in context.items():
             if c[0].startswith('default_'):
                 del context_own[c[0]]
-        
+
         field_context_str = self.attrs.get('context', '{}') or '{}'
         if eval:
             field_context = model.expr_eval('dict(%s)' % field_context_str, check_load=check_load)
@@ -162,7 +162,7 @@ class CharField(object):
 class BinaryField(CharField):
     def __check_model(self, model):
         assert self.name in model.mgroup.mfields
-    
+
     def __check_load(self, model, modified, bin_size):
         if model.id and (self.name not in model.value or (model.value[self.name] is None)):
             c = rpc.session.context.copy()
@@ -212,7 +212,7 @@ class BinaryField(CharField):
 class SelectionField(CharField):
     def set(self, model, value, test_state=True, modified=False):
         value = isinstance(value,(list,tuple)) and len(value) and value[0] or value
-        
+
         if not self.get_state_attrs(model).get('required', False) and value is None:
             super(SelectionField, self).set(model, value, test_state, modified)
 
@@ -251,7 +251,7 @@ class M2OField(CharField):
     '''
     internal = (id, name)
     '''
-    
+
     def create(self, model):
         return False
 
@@ -368,7 +368,7 @@ class O2MField(CharField):
         from widget.model.group import ModelRecordGroup
         mod =  ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model)
         mod.signal_connect(mod, 'model-changed', self._model_changed)
-        model.value[self.name] =mod
+        model.value[self.name] = mod
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
         model.value[self.name].pre_load(value, display=False)
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)

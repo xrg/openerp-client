@@ -56,8 +56,10 @@ class filter(wid_int.wid_int):
             return tools.expr_eval(self.domain)
         else:
             if self.context and rpc.session.context['search_context'].get('group_by',False):
-                del rpc.session.context['search_context']['group_by']
-                del self.context['group_by']
+                if rpc.session.context['search_context'].has_key('group_by'):
+                    del rpc.session.context['search_context']['group_by']
+                if self.context.has_key('group_by'):
+                    del self.context['group_by']
             return []
 
     def sig_exec(self, widget):

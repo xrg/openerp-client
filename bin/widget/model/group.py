@@ -204,10 +204,8 @@ class ModelRecordGroup(signal_event.signal_event):
 
         c.update(self.context)
         c['bin_size'] = True
-        if self._context.get('search_context',False):
-            self.groupBY = self._context.get('search_context',{}).get('group_by',False)
-        else:
-            self.groupBY = False
+
+        self.groupBY = rpc.session.context.get('search_context',{}).get('group_by',False)
         if self.groupBY:
             values = rpc.session.rpc_exec_auth_try('/object', 'execute',
                      self.resource, 'read_group', ids, self.fields, self.groupBY,self._context)
@@ -340,6 +338,8 @@ class ModelRecordGroup(signal_event.signal_event):
 
         old = []
         new = []
+        if self.groupBY:
+            models = [ x for x in models if x.parent]
         for model in models:
             if model.id:
                 old.append(model.id)

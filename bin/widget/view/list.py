@@ -46,7 +46,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.set_property('leak_references', False)
 
     def added(self, modellist, position):
-        self.groupBY = self.model_group._context.get('search_context',{}).get('group_by',False)
+        self.groupBY = self.model_group.groupBY
         if modellist is self.models:
             model = self.models[position]
             if self.groupBY:
@@ -174,13 +174,16 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     def on_iter_next(self, node):
         if self.groupBY:
             try:
-                if node.parent:
-                    index = self.parent[node.parent].index(node)
-                    return self.parent[node.parent][index + 1]
+                if node:
+                    if node.parent:
+                        index = self.parent[node.parent].index(node)
+                        return self.parent[node.parent][index + 1]
+                    else:
+                        index = self.parent_keys.index(node)
+                        if index + 1 < len(self.parent_keys):
+                            return self.parent_keys[index + 1]
+                        return None
                 else:
-                    index = self.parent_keys.index(node)
-                    if index + 1 < len(self.parent_keys):
-                        return self.parent_keys[index + 1]
                     return None
             except IndexError:
                 return None
@@ -201,7 +204,9 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_iter_children(self, node):
         if self.groupBY:
-             return self.parent[node][0]
+            if node and self.parent:
+                return self.parent[node][0]
+            return None
         else:
             return None
 
@@ -213,10 +218,15 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_iter_nth_child(self, node, n):
         if self.groupBY:
-             if node and node.parent:
-                 return self.parent[node.parent][n]
-             else:
-                 return self.parent[self.parent_keys[n]][0]
+            if node:
+                 if node.parent:
+                     return self.parent[node.parent][n]
+                 else:
+                     return self.parent[node][0]
+            else:
+                if self.parent_keys:
+                    return self.parent_keys[n]
+                return None
         else:
             if node is None and self.models:
                 return self.on_get_iter(0)
@@ -391,9 +401,9 @@ class ViewList(parser_view):
             return
         if signal=='record-added':
             if self.screen.models.models<>self.widget_tree.get_model().old and self.groupBY:
-                self.widget_tree.get_model().parent_keys = []
-                self.widget_tree.get_model().parent = {}
-                self.widget_tree.get_model().old = []
+                #self.widget_tree.get_model().parent_keys = []
+                #self.widget_tree.get_model().parent = {}
+                #self.widget_tree.get_model().old = []
                 self.store = AdaptModelGroup(self.screen.models)
             self.store.added(*args)
             if self.groupBY:
@@ -435,7 +445,13 @@ class ViewList(parser_view):
         elif tree_sel.get_mode() == gtk.SELECTION_MULTIPLE:
             model, paths = tree_sel.get_selected_rows()
             if paths:
-                self.screen.current_model = model.models[paths[0][0]]
+                if self.groupBY:
+                    if len(paths[0]) > 1:
+                        self.screen.current_model = self.store.parent[self.store.parent_keys[paths[0][0]]][paths[0][1]]
+                    else:
+                        self.screen.current_model = self.store.parent_keys[paths[0][0]]
+                else:
+                    self.screen.current_model = model.models[paths[0][0]]
         self.update_children()
 
 
@@ -450,7 +466,7 @@ class ViewList(parser_view):
     # has not changed -> better ergonomy. To test
     #
     def display(self):
-        self.groupBY = self.screen.models._context.get('search_context',{}).get('group_by',False)
+        self.groupBY = self.screen.models.groupBY
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group or not self.groupBY:
             self.store = AdaptModelGroup(self.screen.models)
             if self.store:
@@ -488,13 +504,23 @@ class ViewList(parser_view):
     def sel_ids_get(self):
         def _func_sel_get(store, path, iter, ids):
             model = store.on_get_iter(path)
-            if model.id:
-                ids.append(model.id)
+            if self.groupBY:
+                if model.id and model.parent:
+                    ids.append(model.id)
+            else:
+                if model.id:
+                    ids.append(model.id)
         ids = []
         sel = self.widget_tree.get_selection()
         if sel:
             sel.selected_foreach(_func_sel_get, ids)
         return ids
+
+    def expand_row(self,path,open_all):
+        self.widget_tree.expand_row(path,open_all)
+
+    def collapse_row(self,path):
+        self.widget_tree.collapse_row(path)
 
     def sel_models_get(self):
         def _func_sel_get(store, path, iter, models):

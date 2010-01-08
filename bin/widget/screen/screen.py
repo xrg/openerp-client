@@ -90,6 +90,9 @@ class Screen(signal_event.signal_event):
         self.window=window
         self.is_wizard = is_wizard
         self.search_view = eval(search_view)
+        self.group_by = False
+        self.group_parents = []
+        self.group_childs = []
         models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context, is_wizard=is_wizard)
         self.models_set(models)
         self.current_model = None
@@ -181,6 +184,7 @@ class Screen(signal_event.signal_event):
         v = self.filter_widget and self.filter_widget.value or []
         v = self.action_domain and  (v + self.action_domain) or v
         self.context.update(rpc.session.context)
+        self.group_by = self.context.get('search_context',{}).get('group_by',False)
         filter_keys = []
 
         for ele in v:
@@ -407,18 +411,27 @@ class Screen(signal_event.signal_event):
     #
     def _set_current_model(self, value):
         self.__current_model = value
-        try:
-            offset = int(self.offset)
-        except:
-            offset = 0
-        try:
-            pos = self.models.models.index(value)
-        except:
-            pos = -1
-        self.signal('record-message', (pos + offset,
-            len(self.models.models or []) + offset,
-            self.search_count,
-            value and value.id))
+        if self.group_by:
+            if value and value.parent:
+                pos = self.group_childs.index(value)
+                val = value and value.id
+            else:
+                pos = -1
+                val = 'Group by Header'
+            self.signal('record-message', (pos,len(self.group_childs or []),self.search_count,val))
+        else:
+            try:
+                offset = int(self.offset)
+            except:
+                offset = 0
+            try:
+                pos = self.models.models.index(value)
+            except:
+                pos = -1
+            self.signal('record-message', (pos + offset,
+                len(self.models.models or []) + offset,
+                self.search_count,
+                value and value.id))
         return True
     current_model = property(_get_current_model, _set_current_model)
 
@@ -468,7 +481,6 @@ class Screen(signal_event.signal_event):
             self.new()
         self.display()
         self.current_view.set_cursor()
-
         main = service.LocalService('gui.main')
         if main:
             main.sb_set()
@@ -713,6 +725,9 @@ class Screen(signal_event.signal_event):
                 self.screen_container.fill_limit_combo(tot_rec)
         self.models.load(ids, display=False)
         self.current_view.reset()
+        if self.group_by:
+            self.group_parents = [ x for x in self.models.models if not x.parent]
+            self.group_childs = filter(lambda x:x not in self.group_parents,self.models.models)
         if ids:
             self.display(ids[0])
         else:
@@ -733,12 +748,17 @@ class Screen(signal_event.signal_event):
 
     def display_next(self):
         self.current_view.set_value()
+        if self.group_by and not self.current_view.view_type == 'form':
+            if self.current_model in self.group_parents:
+                 self.current_view.expand_row((self.group_parents.index(self.current_model),), False)
         if self.current_model in self.models.models:
             idx = self.models.models.index(self.current_model)
             idx = (idx+1) % len(self.models.models)
             self.current_model = self.models.models[idx]
         else:
             self.current_model = len(self.models.models) and self.models.models[0]
+        if self.group_by and self.current_view.view_type == 'form' and not self.current_model.parent:
+            self.display_next()
         if self.current_model:
             self.current_model.validate_set()
         self.display()
@@ -746,6 +766,9 @@ class Screen(signal_event.signal_event):
 
     def display_prev(self):
         self.current_view.set_value()
+        if self.group_by and not self.current_view.view_type == 'form':
+            if self.current_model in self.group_parents:
+                 self.current_view.collapse_row((self.group_parents.index(self.current_model),))
         if self.current_model in self.models.models:
             idx = self.models.models.index(self.current_model)-1
             if idx<0:
@@ -753,7 +776,8 @@ class Screen(signal_event.signal_event):
             self.current_model = self.models.models[idx]
         else:
             self.current_model = len(self.models.models) and self.models.models[-1]
-
+        if self.group_by and self.current_view.view_type == 'form' and not self.current_model.parent:
+            self.display_prev()
         if self.current_model:
             self.current_model.validate_set()
         self.display()
