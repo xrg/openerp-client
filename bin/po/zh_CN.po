@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-12-24 06:47+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2010-01-10 01:48+0000\n"
+"Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-25 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-01-10 07:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -31,19 +31,13 @@ msgstr "打印工作流"
 msgid "Print Workflow (Complex)"
 msgstr "打印工作流（高级）"
 
-#
-# File: bin/plugins/__init__.py, line: 41
-# File: bin/plugins/__init__.py, line: 41
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr "该资源未定义插件程序！"
+msgstr "该资源没有可用插件！"
 
-#
-# File: bin/plugins/__init__.py, line: 43
-# File: bin/plugins/__init__.py, line: 43
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
-msgstr "选择插件程序"
+msgstr "选择一个插件"
 
 #: bin/translate.py:184
 #, python-format
@@ -59,12 +53,9 @@ msgstr "OpenERP关闭中，键盘中断"
 msgid "OpenERP Client %s"
 msgstr "OpenERP 客户端 %s"
 
-#
-# File: bin/options.py, line: 89
-# File: bin/options.py, line: 89
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr "定义替换的config文件"
+msgstr "指定替代的配置文件"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
@@ -101,23 +92,17 @@ msgstr "设置服务器IP或名称"
 msgid "Unable to handle %s filetype"
 msgstr "不能处理 %s 文件类型"
 
-#
-# File: bin/printer/printer.py, line: 181
-# File: bin/printer/printer.py, line: 181
 #: bin/printer/printer.py:190
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
-"Linux的自动打印功能未设置。\n"
+"未实现 Linux 的自动打印。\n"
 " 使用预览选项！"
 
-#
-# File: bin/printer/printer.py, line: 189
-# File: bin/printer/printer.py, line: 189
 #: bin/printer/printer.py:198
 msgid "Error no report"
-msgstr "出错：没有报表"
+msgstr "生成报表出错！"
 
 #
 # File: bin/modules/gui/main.py, line: 1120
@@ -136,12 +121,9 @@ msgstr "出错：没有报表"
 msgid "Save As..."
 msgstr "另存为..."
 
-#
-# File: bin/printer/printer.py, line: 215
-# File: bin/printer/printer.py, line: 215
 #: bin/printer/printer.py:225
 msgid "Error writing the file!"
-msgstr "写入文件出错！"
+msgstr "写文件时发生错误！"
 
 #: bin/common/common.py:212
 msgid ""
@@ -149,7 +131,7 @@ msgid ""
 "Your comments have been sent to OpenERP.\n"
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
-msgstr "谢谢您的反馈！你的建议已被发送到OpenERP.现在请通过“文件”菜单新建数据库或者连接到一台存在的服务器。"
+msgstr "谢谢您的反馈！您的建议已被发送到 OpenERP。现在请通过“文件”菜单新建数据库或者连接到一台存在的服务器。"
 
 #: bin/common/common.py:222
 msgid ""
