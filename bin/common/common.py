@@ -452,6 +452,8 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     return True
 
 def to_xml(s):
+    if not s:
+        return ''
     from cgi import escape
     return escape(s)
 
