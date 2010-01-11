@@ -177,27 +177,26 @@ class Screen(signal_event.signal_event):
         self.screen_container.action_combo.set_active(0)
         self.clear()
 
-    def get_calenderDomain(self, start=None,old_date='',mode='months'):
+    def get_calenderDomain(self, start=None,old_date='',mode='month'):
         args = []
         if not old_date:
             old_date = DateTime.today()
-        elif old_date == DateTime.today():
-            if start:
-                if mode =='month':
-                    start_date = (old_date + DateTime.RelativeDateTime(months = -1)).strftime('%Y-%m-%d')
-                    args.append((start, '>',start_date))
-                    end_date = (old_date + DateTime.RelativeDateTime(months = 1)).strftime('%Y-%m-%d')
-                    args.append((start, '<',end_date))
-                if mode=='week':
-                    start_date = (old_date + DateTime.RelativeDateTime(weeks = -1)).strftime('%Y-%m-%d')
-                    args.append((start, '>',start_date))
-                    end_date = (old_date + DateTime.RelativeDateTime(weeks = 1)).strftime('%Y-%m-%d')
-                    args.append((start, '<',end_date))
-                if mode=='day':
-                    start_date = (old_date + DateTime.RelativeDateTime(days = -1)).strftime('%Y-%m-%d')
-                    args.append((start, '>',start_date))
-                    end_date = (old_date + DateTime.RelativeDateTime(days = 1)).strftime('%Y-%m-%d')
-                    args.append((start, '<',end_date))
+        if old_date == DateTime.today():
+            if mode =='month':
+                start_date = (old_date + DateTime.RelativeDateTime(months = -1)).strftime('%Y-%m-%d')
+                args.append((start, '>',start_date))
+                end_date = (old_date + DateTime.RelativeDateTime(months = 1)).strftime('%Y-%m-%d')
+                args.append((start, '<',end_date))
+            if mode=='week':
+                start_date = (old_date + DateTime.RelativeDateTime(weeks = -1)).strftime('%Y-%m-%d')
+                args.append((start, '>',start_date))
+                end_date = (old_date + DateTime.RelativeDateTime(weeks = 1)).strftime('%Y-%m-%d')
+                args.append((start, '<',end_date))
+            if mode=='day':
+                start_date = (old_date + DateTime.RelativeDateTime(days = -1)).strftime('%Y-%m-%d')
+                args.append((start, '>',start_date))
+                end_date = (old_date + DateTime.RelativeDateTime(days = 1)).strftime('%Y-%m-%d')
+                args.append((start, '<',end_date))
         else:
             if mode =='month':
                 end_date = (old_date + DateTime.RelativeDateTime(months = 1)).strftime('%Y-%m-%d')
