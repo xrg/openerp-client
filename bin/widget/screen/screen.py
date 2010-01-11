@@ -218,7 +218,6 @@ class Screen(signal_event.signal_event):
             mode = self.current_view.view.mode
             calendar_domain = self.get_calenderDomain(start,old_date,mode)
             v += calendar_domain
-            limit = 100
         filter_keys = []
 
         for ele in v:
