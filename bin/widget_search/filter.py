@@ -19,7 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
+import rpc
 import gtk
 import tools
 import wid_int
@@ -48,11 +48,11 @@ class filter(wid_int.wid_int):
         self.context = {}
 
     def _value_get(self):
-        import rpc
         if self.butt.get_active():
             if self.attrs.get('context',False):
                 self.context = tools.expr_eval(self.attrs['context'], {})
-                rpc.session.context['search_context'] = self.context
+                if not rpc.session.context['search_context'].get('group_by',False):
+                    rpc.session.context['search_context'] = self.context
             return tools.expr_eval(self.domain)
         else:
             if self.context and rpc.session.context['search_context'].get('group_by',False):

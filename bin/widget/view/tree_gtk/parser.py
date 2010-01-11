@@ -304,6 +304,9 @@ class GenericDate(Char):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
+        if self.treeview.screen.context.get('search_context',{}).get('group_by',False):
+            return value
+
         try:
             date = DT.datetime.strptime(value[:10], self.server_format)
             return date.strftime(self.display_format)
@@ -329,6 +332,8 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
+        if self.treeview.screen.context.get('search_context',{}).get('group_by',False):
+            return value
 
         t = tools.datetime_util.strptime(value[:19], self.server_format)
         if isinstance(t, type(mx.DateTime.now())) and not hasattr(t, 'timetuple'):
