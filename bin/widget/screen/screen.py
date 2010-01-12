@@ -550,6 +550,8 @@ class Screen(signal_event.signal_event):
         return id
 
     def load(self, ids):
+        if not isinstance(ids,list):
+            ids = [ids]
         self.models.load(ids, display=False)
         self.current_view.reset()
         if ids:
