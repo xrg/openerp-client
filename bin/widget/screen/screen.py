@@ -412,7 +412,7 @@ class Screen(signal_event.signal_event):
     def _set_current_model(self, value):
         self.__current_model = value
         if self.group_by:
-            if value and value.parent:
+            if value and value.group_by_parent:
                 pos = self.group_childs.index(value)
                 val = value and value.id
             else:
@@ -726,7 +726,7 @@ class Screen(signal_event.signal_event):
         self.models.load(ids, display=False)
         self.current_view.reset()
         if self.group_by:
-            self.group_parents = [ x for x in self.models.models if not x.parent]
+            self.group_parents = [ x for x in self.models.models if not x.group_by_parent]
             self.group_childs = filter(lambda x:x not in self.group_parents,self.models.models)
         if ids:
             self.display(ids[0])
@@ -757,7 +757,7 @@ class Screen(signal_event.signal_event):
             self.current_model = self.models.models[idx]
         else:
             self.current_model = len(self.models.models) and self.models.models[0]
-        if self.group_by and self.current_view.view_type == 'form' and not self.current_model.parent:
+        if self.group_by and self.current_view.view_type == 'form' and not self.current_model.group_by_parent:
             self.display_next()
         if self.current_model:
             self.current_model.validate_set()
@@ -776,7 +776,7 @@ class Screen(signal_event.signal_event):
             self.current_model = self.models.models[idx]
         else:
             self.current_model = len(self.models.models) and self.models.models[-1]
-        if self.group_by and self.current_view.view_type == 'form' and not self.current_model.parent:
+        if self.group_by and self.current_view.view_type == 'form' and not self.current_model.group_by_parent:
             self.display_prev()
         if self.current_model:
             self.current_model.validate_set()

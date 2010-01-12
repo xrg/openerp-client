@@ -50,11 +50,11 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         if modellist is self.models:
             model = self.models[position]
             if self.groupBY:
-                if not model.parent:
+                if not model.group_by_parent:
                     self.parent_keys.insert(len(self.parent.keys()) + 1,model)
                     self.parent[model] = []
                 else:
-                    self.parent[model.parent].append(model)
+                    self.parent[model.group_by_parent].append(model)
                 self.old.append(model)
             self.emit('row_inserted', self.on_get_path(model),
                       self.get_iter(self.on_get_path(model)))
@@ -125,8 +125,8 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_get_path(self, iter):
         if self.groupBY:
-             if iter.parent:
-                 return (self.parent_keys.index(iter.parent),self.parent[iter.parent].index(iter))
+             if iter.group_by_parent:
+                 return (self.parent_keys.index(iter.group_by_parent),self.parent[iter.group_by_parent].index(iter))
              else:
                  return (self.parent_keys.index(iter),)
         else:
@@ -167,7 +167,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     def on_get_value(self, node, column):
         assert column == 0
         if self.groupBY:
-            if node.parent:
+            if node.group_by_parent:
                 return node
         return node
 
@@ -175,9 +175,9 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         if self.groupBY:
             try:
                 if node:
-                    if node.parent:
-                        index = self.parent[node.parent].index(node)
-                        return self.parent[node.parent][index + 1]
+                    if node.group_by_parent:
+                        index = self.parent[node.group_by_parent].index(node)
+                        return self.parent[node.group_by_parent][index + 1]
                     else:
                         index = self.parent_keys.index(node)
                         if index + 1 < len(self.parent_keys):
@@ -195,7 +195,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_iter_has_child(self, node):
         if self.groupBY:
-             if not node.parent:
+             if not node.group_by_parent:
                  return self.parent[node] != []
              else:
                  return False
@@ -219,8 +219,8 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     def on_iter_nth_child(self, node, n):
         if self.groupBY:
             if node:
-                 if node.parent:
-                     return self.parent[node.parent][n]
+                 if node.group_by_parent:
+                     return self.parent[node.group_by_parent][n]
                  else:
                      return self.parent[node][0]
             else:
@@ -234,8 +234,8 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_iter_parent(self, node):
         if self.groupBY:
-              if node.parent:
-                  return node.parent
+              if node.group_by_parent:
+                  return node.group_by_parent
               else:
                   return None
         else:
@@ -505,7 +505,7 @@ class ViewList(parser_view):
         def _func_sel_get(store, path, iter, ids):
             model = store.on_get_iter(path)
             if self.groupBY:
-                if model.id and model.parent:
+                if model.id and model.group_by_parent:
                     ids.append(model.id)
             else:
                 if model.id:

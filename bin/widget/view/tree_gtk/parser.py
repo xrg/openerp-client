@@ -218,7 +218,7 @@ class Char(object):
         font = pango.FontDescription('Normal ')
         cell.set_property('font-desc', font)
         if self.treeview.screen.context.get('search_context',{}).get('group_by',False):
-            if not model.parent:
+            if not model.group_by_parent:
                 font = pango.FontDescription('bold ')
                 cell.set_property('font-desc', font)
         if color is not None:

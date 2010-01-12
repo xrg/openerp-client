@@ -165,7 +165,7 @@ class ModelRecordGroup(signal_event.signal_event):
             self.signal('record-cleared')
         return True
 
-    def load_for(self, values, parent = None):
+    def load_for(self, values, group_by_parent = None):
         if len(values)>10:
             self.models.lock_signal = True
         for value in values:
@@ -173,14 +173,14 @@ class ModelRecordGroup(signal_event.signal_event):
                 res = self.resource
                 if not self.child_group:
                     res = None
-                newmod = ModelRecord(res,value['id'], parent=parent, group=self)
+                newmod = ModelRecord(res,value['id'], group_by_parent = group_by_parent, parent=self.parent, group=self)
                 newmod.set(value)
                 self.models.append(newmod)
                 newmod.signal_connect(self, 'record-changed', self._record_changed)
                 if value.get('group_child',False) and len(value['group_child']):
                     val = self.rpc.read(value['group_child'], self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], self._context)
                     self.child_group = True
-                    self.load_for(val,parent=newmod)
+                    self.load_for(val,group_by_parent=newmod)
                     self.child_group = False
             else:
                 newmod = ModelRecord(self.resource, value['id'], parent=self.parent, group=self)
@@ -339,7 +339,7 @@ class ModelRecordGroup(signal_event.signal_event):
         old = []
         new = []
         if self.groupBY:
-            models = [ x for x in models if x.parent]
+            models = [ x for x in models if x.group_by_parent]
         for model in models:
             if model.id:
                 old.append(model.id)
