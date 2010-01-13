@@ -454,6 +454,10 @@ class ViewForm(parser_view):
                 if focus_widget.widget.widget.is_ancestor(page):
                     nb.set_current_page(i)
                 focus_widget.widget.grab_focus()
+            children_notebooks = page.get_children()
+            for child in children_notebooks:
+                if isinstance(child,gtk.Notebook):
+                    self.set_notebook(model,child)
             if nb.get_tab_label(page).attrs.get('attrs',False):
                 self.attrs_set(model, page, nb.get_tab_label(page))
 

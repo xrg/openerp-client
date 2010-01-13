@@ -115,7 +115,7 @@ class Printer(object):
         if os.name == 'nt':
             return lambda fn: os.startfile(fn)
         else:
-            if options.options['printer.softpath_html'] == 'none':
+            if options.options['printer.softpath_html'] is None:
                 prog = self._findInPath(['ooffice', 'ooffice2', 'openoffice', 'soffice'])
                 def opener(fn):
                     pid = os.fork()

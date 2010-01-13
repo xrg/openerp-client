@@ -326,28 +326,83 @@ class MigrationDatabaseDialog(DatabaseDialog):
 
     def on_server_entry_changed_after(self, entry):
         self.clear_screen()
-        result = rpc.session.list_db(entry.get_text())
-        if result != -1:
+        try:
+            result = rpc.session.list_db(entry.get_text())
+        except:
+            return
+        if result:
             for db_num, db_name in enumerate(result):
                 self.model.set( self.model.append(), 0, False, 1, db_name)
 
-def _refresh_dblist(db_widget, url, dbtoload=None):
+def _get_db_name_from_url(url):
+    if not url:
+        return ''
+    url = url.split('://', 1)[1].rsplit(':', 1)[0]
+    if '.' in url:
+        import socket
+        try:
+            socket.inet_aton(url)
+        except socket.error:
+            return url.split('.', 1)[0]
+    return ''
+
+def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
     if not dbtoload:
-        dbtoload = options.options['login.db']
-    index = 0
+        dbtoload = options.options['login.db'] or ''
+        if not dbtoload:
+            dbtoload = _get_db_name_from_url(url)
+    
+    label.hide()
+
     liststore = db_widget.get_model()
     liststore.clear()
-    result = rpc.session.list_db(url)
-    if not result:
-        return -2
-    if result==-1:
-        return -1
-    for db_num, db_name in enumerate(result):
-        liststore.append([db_name])
-        if db_name == dbtoload:
-            index = db_num
-    db_widget.set_active(index)
-    return len(liststore)
+    try:
+        result = rpc.session.list_db(url)
+    except:
+        label.set_label('<b>'+_('Could not connect to server !')+'</b>')
+        db_widget.hide()
+        entry_db.hide()
+        label.show()
+        if butconnect:
+            butconnect.set_sensitive(False)
+        return False
+
+    if result is None:
+        entry_db.show()
+        entry_db.set_text(dbtoload)
+        entry_db.grab_focus()
+        db_widget.hide()
+    else:
+        entry_db.hide()
+        
+        if not result:
+            label.set_label('<b>'+_('No database found, you must create one !')+'</b>')
+            label.show()
+            db_widget.hide()
+            if butconnect:
+                butconnect.set_sensitive(False)
+        else:
+            db_widget.show()
+            index = 0    
+            for db_num, db_name in enumerate(result):
+                liststore.append([db_name])
+                if db_name == dbtoload:
+                    index = db_num
+            db_widget.set_active(index)
+            if butconnect:
+                butconnect.set_sensitive(True)
+
+    lm = rpc.session.login_message(url)
+    if lm:
+        try:
+            parse_markup(lm)
+        except:
+            pass
+        else:
+            label.set_label(lm)
+            label.show()
+
+    return True
 
 def _refresh_langlist(lang_widget, url):
     liststore = lang_widget.get_model()
@@ -419,7 +474,7 @@ class db_login(object):
         self.win_gl = glade.XML(common.terp_path("openerp.glade"),"win_login",gettext.textdomain())
         
 
-    def refreshlist(self, widget, db_widget, label, url, butconnect=False, db_entry=None):
+    def refreshlist(self, widget, db_widget, entry_db, label, url, butconnect=False):
 
         def check_server_version(url):
             try:
@@ -432,60 +487,14 @@ class db_login(object):
                 # the server doesn't understand the request. It's mean that it's an old version of the server
                 return (False, _('Unknown'), release.version)
 
-        res = _refresh_dblist(db_widget, url)
-        db_entry = self.win_gl.get_widget('ent_db')
-        label.hide()
-        db_entry.hide()
-        if res == -1:
-            label.set_label('<b>'+_('Could not connect to server !')+'</b>')
-            db_widget.hide()
-            label.show()
-            if butconnect:
-                butconnect.set_sensitive(False)
-            if db_entry.get_property('visible'):
-                 db_entry.set_property('visible', False)
-        else:
-            if res==0:
-                label.set_label('<b>'+_('No database found, you must create one !')+'</b>')
-                db_widget.hide()
-                label.show()
-                if butconnect:
-                    butconnect.set_sensitive(False)
-            elif res == -2:
-                db_widget.hide()
-                dbname = options.options['login.db']
-                if options.options['login.db']=='None':
-                    dbname = ''
-                db_entry.set_text(dbname)
-                db_entry.show()
-                res = len(db_entry.get_text())
-                if butconnect:
-                        butconnect.set_sensitive(True)
-            else:
-                lm = rpc.session.login_message(url)
-                if lm:
-                    try:
-                        parse_markup(lm)
-                    except:
-                        label.hide()
-                    else:
-                        label.set_label(lm)
-                        label.show()
-                else:
-                    label.hide()
-
-                db_widget.show()
-                if butconnect:
-                    butconnect.set_sensitive(True)
-
+        if _refresh_dblist(db_widget, entry_db, label, butconnect, url):
             is_same_version, server_version, client_version = check_server_version(url)
             if not is_same_version:
                 common.warning(_('The versions of the server (%s) and the client (%s) missmatch. The client may not work properly. Use it at your own risks.') % (server_version, client_version,))
-        return res
 
-    def refreshlist_ask(self,widget, server_widget, db_widget, label, butconnect = False, url=False, parent=None):
+    def refreshlist_ask(self,widget, server_widget, db_widget, entry_db, label, butconnect = False, url=False, parent=None):
         url = _server_ask(server_widget, parent) or url
-        return self.refreshlist(widget, db_widget, label, url, butconnect)
+        return self.refreshlist(widget, db_widget, entry_db, label, url, butconnect)
 
     def run(self, dbname=None, parent=None):
         uid = 0
@@ -502,11 +511,12 @@ class db_login(object):
         server_widget = self.win_gl.get_widget('ent_server')
         but_connect = self.win_gl.get_widget('button_connect')
         db_widget = self.win_gl.get_widget('combo_db')
+        entry_db = self.win_gl.get_widget('ent_db')
         change_button = self.win_gl.get_widget('but_server')
         label = self.win_gl.get_widget('combo_label')
-        db_entry = self.win_gl.get_widget('ent_db')
+#        db_entry = self.win_gl.get_widget('ent_db')
         label.hide()
-        db_entry.hide()
+        entry_db.hide()
         
         host = options.options['login.server']
         port = options.options['login.port']
@@ -523,8 +533,8 @@ class db_login(object):
         db_widget.pack_start(cell, True)
         db_widget.add_attribute(cell, 'text', 0)
 
-        res = self.refreshlist(None, db_widget, label, url, but_connect, db_entry=db_entry)
-        change_button.connect_after('clicked', self.refreshlist_ask, server_widget, db_widget, label, but_connect, url, win)
+        res = self.refreshlist(None, db_widget, entry_db, label, url, but_connect)
+        change_button.connect_after('clicked', self.refreshlist_ask, server_widget, db_widget, entry_db, label, but_connect, url, win)
 
         if dbname:
             iter = liststore.get_iter_root()
@@ -541,9 +551,9 @@ class db_login(object):
             options.options['login.login'] = login.get_text()
             options.options['login.port'] = m.group(3)
             options.options['login.protocol'] = m.group(1)
-            if (not db_widget.get_property('visible')) and db_entry.get_property('visible'):
-                options.options['login.db'] = db_entry.get_text()
-                db_name = db_entry.get_text()
+            if (not db_widget.get_property('visible')) and entry_db.get_property('visible'):
+                options.options['login.db'] = entry_db.get_text()
+                db_name = entry_db.get_text()
             else:
                 options.options['login.db'] = db_widget.get_active_text()
                 db_name = db_widget.get_active_text()
@@ -1497,50 +1507,12 @@ class terp_main(service.Service):
                     common.warning(_("Couldn't backup database."), parent=self.window)
 
     def _choose_db_select(self, title=_("Backup a database")):
-        def refreshlist(widget, db_widget, label, url, db_entry=None):
-            res = _refresh_dblist(db_widget, url)
-            if not db_entry: db_entry = dialog.get_widget('entry_db')
-            db_entry.hide()
-            if res == -1:
-                label.set_label('<b>'+_('Could not connect to server !')+'</b>')
-                db_widget.hide()
-                db_entry.hide()
-                label.show()
-            elif res==0:
-                label.set_label('<b>'+_('No database found, you must create one !')+'</b>')
-                db_widget.hide()
-                db_entry.hide()
-                label.show()
-            elif res == -2:
-                db_widget.hide()
-                label.hide()
-                dbname = options.options['login.db']
-                if options.options['login.db']=='None':
-                    dbname = ''
-                db_entry.set_text(dbname)
-                db_entry.show()
-                res = len(db_entry.get_text())
-            else:
-                lm = rpc.session.login_message(url)
-                if lm:
-                    try:
-                        parse_markup(lm)
-                    except:
-                        label.hide()
-                    else:
-                        label.set_label(lm)
-                        label.show()
-                else:
-                    label.hide()
-                db_widget.show()
-            return res
 
-        def refreshlist_ask(widget, server_widget, db_widget, label, parent=None):
+        def refreshlist_ask(widget, server_widget, db_widget, entry_db, label, parent=None):
             url = _server_ask(server_widget, parent)
             if not url:
                 return None
-            refreshlist(widget, db_widget, label, url)
-            return  url
+            _refresh_dblist(db_widget, entry_db, label, False, url)
 
         dialog = glade.XML(common.terp_path("openerp.glade"), "win_db_select",
                 gettext.textdomain())
@@ -1553,9 +1525,9 @@ class terp_main(service.Service):
         pass_widget = dialog.get_widget('ent_passwd_select')
         server_widget = dialog.get_widget('ent_server_select')
         db_widget = dialog.get_widget('combo_db_select')
-        db_entry = dialog.get_widget('entry_db')
+        entry_db = dialog.get_widget('entry_db_select')
         label = dialog.get_widget('label_db_select')
-        db_entry.hide()
+        entry_db.hide()
 
         dialog.get_widget('db_select_label').set_markup('<b>'+title+'</b>')
 
@@ -1566,9 +1538,9 @@ class terp_main(service.Service):
         liststore = gtk.ListStore(str)
         db_widget.set_model(liststore)
 
-        refreshlist(None, db_widget, label, url, db_entry=db_entry)
+        _refresh_dblist(db_widget, entry_db, label, False, url)
         change_button = dialog.get_widget('but_server_select')
-        change_button.connect_after('clicked', refreshlist_ask, server_widget, db_widget, label, win)
+        change_button.connect_after('clicked', refreshlist_ask, server_widget, db_widget, entry_db, label, win)
 
         cell = gtk.CellRendererText()
         db_widget.pack_start(cell, True)
@@ -1580,8 +1552,8 @@ class terp_main(service.Service):
         url = False
         passwd = False
         if res == gtk.RESPONSE_OK:
-            if (not db_widget.get_property('visible')) and db_entry.get_property('visible'):
-                db = db_entry.get_text()
+            if (not db_widget.get_property('visible')) and entry_db.get_property('visible'):
+                db = entry_db.get_text()
             else:
                 db = db_widget.get_active_text()
             url = server_widget.get_text()

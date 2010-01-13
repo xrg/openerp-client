@@ -54,11 +54,33 @@ class selection(wid_int.wid_int):
             name = str(j)
             lst.append(name)
             self._selection[name]=i
-        for l in lst:
-            self.widget.append_text(l)
+        ind=1
         if '' not in self._selection:
             self.widget.append_text('')
+            ind += 1
+        self.indexes = {}
+        for l in lst:
+            self.widget.append_text(l)
+            self.indexes[l] = ind
+            ind += 1
         return lst
+
+    def sig_key_press(self, widget, event):
+        completion=gtk.EntryCompletion()
+        completion.set_inline_selection(True)
+        if (event.type == gtk.gdk.KEY_PRESS) \
+            and ((event.state & gtk.gdk.CONTROL_MASK) != 0) \
+            and (event.keyval == gtk.keysyms.space):
+            self.entry.popup()
+        elif not (event.keyval==65362 or event.keyval==65364):
+            completion.set_model(self.model)
+            widget.set_completion(completion)
+            completion.set_text_column(0)
+
+        # Setting the selected  value active on the entry widget while selection is made by keypress
+        if self._selection.get(widget.get_text(),''):
+            # to let this value count into domain calculation
+            self.widget.set_active(self.indexes[widget.get_text()])
 
     def _value_get(self):
         model = self.widget.get_model()

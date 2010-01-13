@@ -38,6 +38,7 @@ import signal_event
 import tools
 import service
 import common
+import copy
 
 
 class Screen(signal_event.signal_event):
@@ -104,6 +105,7 @@ class Screen(signal_event.signal_event):
         self.readonly= readonly
         self.action_domain = []
         self.custom_panels = []
+        self.view_fields = {} # Used to switch self.fields when the view switchs
 
         if view_type:
             self.view_to_load = view_type[1:]
@@ -141,7 +143,7 @@ class Screen(signal_event.signal_event):
                         self.search_offset_next,
                         self.search_offset_previous, self.search_count,
                         self.execute_action, self.add_custom, self.name)
-
+                
         if active and show_search:
             self.screen_container.show_filter()
         else:
@@ -470,6 +472,7 @@ class Screen(signal_event.signal_event):
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
         self.current_view.set_value()
+        self.fields = {}
         if self.current_model and self.current_model not in self.models.models:
             self.current_model = None
         if mode:
@@ -496,6 +499,11 @@ class Screen(signal_event.signal_event):
                 self.__current_view = len(self.views) - 1
             else:
                 self.__current_view = (self.__current_view + 1) % len(self.views)
+        
+        self.fields = self.view_fields.get(self.__current_view, self.fields) # Switch the fields
+        # TODO: maybe add_fields_custom is needed instead of add_fields on some cases
+        self.models.add_fields(self.fields, self.models) # Switch the model fields too
+        
         widget = self.current_view.widget
         self.screen_container.set(self.current_view.widget)
         if self.current_model:
@@ -590,6 +598,10 @@ class Screen(signal_event.signal_event):
             self.__current_view = len(self.views) - 1
             self.current_view.display()
             self.screen_container.set(view.widget)
+        
+        # Store the fields for this view (we will use them when switching views)
+        self.view_fields[len(self.views)-1] = copy.deepcopy(self.fields)
+
         return view
 
     def editable_get(self):

@@ -255,8 +255,10 @@ class rpc_session(object):
     def list_db(self, url):
         try:
             return self.db_exec_no_except(url, 'list')
-        except Exception, e:
-            return -1
+        except (xmlrpclib.Fault, tiny_socket.Myexception), e:
+            if e.faultCode == 'AccessDenied':
+                return None
+            raise
 
     def db_exec_no_except(self, url, method, *args):
         return self.exec_no_except(url, 'db', method, *args)
@@ -301,6 +303,9 @@ class rpc_session(object):
                     else:
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
         if self.context.get('tz'):
+            # FIXME: Timezone handling
+            #   rpc_session.timezone contains the server's idea of its timezone (from time.tzname[0]),
+            #   which is quite quite unreliable in some cases. We'll fix this in trunk.
             self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
             try:
                 import pytz
@@ -308,7 +313,7 @@ class rpc_session(object):
             except pytz.UnknownTimeZoneError:
                 common.warning(_('Server timezone is not recognized (%s)!\nTime values will be displayed without timezone conversion.'%self.timezone))
             except:
-                common.warning(_('The "pytz" Python library is missing!\nTime values will be displayed without timezone conversion.'))
+                common.warning(_('The "pytz" Python library is missing!\nTime values will be displayed as if located in the server timezone.'))
 
     def logged(self):
         return self._open

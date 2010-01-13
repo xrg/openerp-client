@@ -96,6 +96,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                     if x[field]:
                         x[field] = datetime_util.server_to_local_timestamp(x[field],
                                         DHM_FORMAT, display_format)
+
             if self.fields_type[field]['type'] in ('one2one','many2one'):
                 for x in res_ids:
                     if x[field]:

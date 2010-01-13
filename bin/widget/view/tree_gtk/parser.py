@@ -171,7 +171,7 @@ class parser_tree(interface.parser_interface):
                     col.connect('clicked', sort_model, treeview)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
-                visval = eval(fields[fname].get('invisible', 'False'), {'context':self.screen.context})
+                visval = eval(str(fields[fname].get('invisible', 'False')), {'context':self.screen.context})
                 col.set_visible(not visval)
                 n = treeview.append_column(col)
                 if 'sum' in fields[fname] and fields[fname]['type'] \
@@ -210,11 +210,38 @@ class Char(object):
         if not window:
             window = service.LocalService('gui.main').window
         self.window = window
+    
+    def attrs_set(self, model, cell):
+        if self.attrs.get('attrs',False):
+            attrs_changes = eval(self.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
+            for k,v in attrs_changes.items():
+                result = False
+                for condition in v:
+                    result = tools.calc_condition(self,model,condition)
+                model[self.field_name].get_state_attrs(model)[k] = result
 
+    def state_set(self, model, state='draft'):
+        ro = model.mgroup._readonly
+        field = model[self.field_name]
+        state_changes = dict(field.attrs.get('states',{}).get(state,[]))
+        if 'readonly' in state_changes:
+            field.get_state_attrs(model)['readonly'] = state_changes['readonly'] or ro
+        else:
+            field.get_state_attrs(model)['readonly'] = field.attrs.get('readonly',False) or ro
+        if 'required' in state_changes:
+            field.get_state_attrs(model)['required'] = state_changes['required']
+        else:
+            field.get_state_attrs(model)['required'] = field.attrs.get('required',False)
+        if 'value' in state_changes:
+            field.set(model, state_changes['value'], test_state=False, modified=True)
+                            
     def setter(self, column, cell, store, iter):
         model = store.get_value(iter, 0)
         text = self.get_textual_value(model)
         cell.set_property('text', text)
+        if model.value.get('state',False):
+            self.state_set(model, model.value.get('state','draft'))
+        self.attrs_set(model, cell)
         color = self.get_color(model)
         cell.set_property('foreground', str(color))
         if self.attrs['type'] in ('float', 'integer', 'boolean'):
@@ -223,10 +250,17 @@ class Char(object):
             align = 0
         if self.treeview.editable:
             field = model[self.field_name]
+            
+            #setting the cell property editable or not
+            cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
+                
             if not field.get_state_attrs(model).get('valid', True):
                 cell.set_property('background', common.colors.get('invalid', 'white'))
             elif bool(int(field.get_state_attrs(model).get('required', 0))):
                 cell.set_property('background', common.colors.get('required', 'white'))
+            else:
+                cell.set_property('background', None)
+                  
         cell.set_property('xalign', align)
 
     def get_color(self, model):
@@ -268,6 +302,18 @@ class Boolean(Int):
         model = store.get_value(iter, 0)
         value = self.get_textual_value(model)
         cell.set_active(bool(value))
+        if model.value.get('state',False):
+            self.state_set(model, model.value.get('state','draft'))
+        self.attrs_set(model, cell)
+        if self.treeview.editable:
+            field = model[self.field_name]
+
+            cell.set_property('sensitive',not field.get_state_attrs(model).get('readonly', False))
+            
+            if field.get_state_attrs(model).get('required', True): 
+                cell.set_property('cell-background',common.colors.get('required', 'white'))
+            else:
+                cell.set_property('cell-background',None)   
 
     def _sig_toggled(self, renderer, path):
         store = self.treeview.get_model()
