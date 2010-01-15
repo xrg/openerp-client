@@ -758,7 +758,7 @@ class CellRendererButton(object):
         raise NotImplementedError
 
     def get_textual_value(self, model):
-        if model.get('state',False):
+        if model['state']:
             return model['state'].get_client(model)
         return False
 
