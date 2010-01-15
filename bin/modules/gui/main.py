@@ -1297,8 +1297,8 @@ class terp_main(service.Service):
             self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
 
-            page.destroy()
-            del page
+            #page.destroy()
+            #del page
         return self.notebook.get_current_page() != -1
 
     def _wid_get(self,page_num=None):
