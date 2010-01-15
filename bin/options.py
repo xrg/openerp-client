@@ -91,7 +91,7 @@ class configmanager(object):
             'printer.path': 'none',
             'logging.level': 'INFO',
             'logging.output': 'stdout',
-	    'logging.env_info': True,
+            'logging.env_info': True,
             'client.default_path': os.path.expanduser('~'),
             'support.recipient': 'support@openerp.com',
             'support.support_id' : '',
@@ -120,10 +120,10 @@ class configmanager(object):
         self.rcfile = self._get_rcfile(fname, opt.config)
         self.load()
 
-	if opt.log_level:
-		self.options['logging.level'] = opt.log_level
-	if opt.no_env_info:
-		self.options['logging.env_info'] = False
+        if opt.log_level:
+                self.options['logging.level'] = opt.log_level
+        if opt.no_env_info:
+                self.options['logging.env_info'] = False
 
         for arg in ('login', 'port', 'server'):
             if getattr(opt, arg):
