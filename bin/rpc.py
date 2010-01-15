@@ -25,7 +25,6 @@ import logging
 import socket
 
 import tiny_socket
-from psycopg2 import OperationalError
 import service
 import common
 import options
