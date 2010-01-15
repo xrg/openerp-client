@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:39+0000\n"
-"Last-Translator: Harry (Open ERP) <hmo@tinyerp.com>\n"
+"PO-Revision-Date: 2010-01-14 17:24+0000\n"
+"Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-01-15 04:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -1041,7 +1041,7 @@ msgstr "Kan inte läsa filen: %s"
 
 #: bin/widget/view/form_gtk/binary.py:133
 msgid "All Files"
-msgstr "Alla Filer"
+msgstr "Alla filer"
 
 #: bin/widget/view/form_gtk/binary.py:143
 msgid "Select a file..."
@@ -1176,7 +1176,7 @@ msgstr "Lösenord:"
 
 #: bin/openerp.glade:255
 msgid "_File"
-msgstr "_fil"
+msgstr "_Arkiv"
 
 #: bin/openerp.glade:262
 msgid "_Connect..."
@@ -2017,7 +2017,7 @@ msgstr ""
 
 #: bin/openerp.glade:5885
 msgid "File to Import:"
-msgstr ""
+msgstr "Fil att importera:"
 
 #: bin/openerp.glade:5959
 msgid "Lines to Skip:"
