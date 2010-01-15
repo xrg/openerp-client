@@ -744,7 +744,7 @@ class CellRendererButton(object):
     def setter(self, column, cell, store, iter):
         #TODO
         model = store.get_value(iter, 0)
-        current_state = self.get_textual_value(model) or 'draft'
+        current_state = self.get_textual_value(model, 'draft')
         tv = column.get_tree_view()
         valid_states = self.__get_states() or []
 #         change this according to states or attrs: to not show the icon
@@ -757,10 +757,10 @@ class CellRendererButton(object):
     def open_remote(self, model, create, changed=False, text=None):
         raise NotImplementedError
 
-    def get_textual_value(self, model):
+    def get_textual_value(self, model, default=False):
         if model['state']:
             return model['state'].get_client(model)
-        return False
+        return default
 
     def value_from_text(self, model, text):
         return 0
