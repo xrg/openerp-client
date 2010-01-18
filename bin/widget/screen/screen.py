@@ -370,7 +370,11 @@ class Screen(signal_event.signal_event):
 #        self.action_domain=[]
 #        combo.set_active(0)
 
-    def models_set(self, models):
+    def models_set(self, models, groupby = False):
+        if groupby:
+            models.one2many = groupby
+        else:
+            models.one2many = False
         import time
         c = time.time()
         if self.models:
@@ -409,15 +413,20 @@ class Screen(signal_event.signal_event):
     #
     # Check more or less fields than in the screen !
     #
+    def set_group_parents(self):
+        self.group_parents = [ x for x in self.models.models if not x.group_by_parent]
+        self.group_childs = filter(lambda x:x not in self.group_parents,self.models.models)
+
     def _set_current_model(self, value):
+        self.set_group_parents()
         self.__current_model = value
-        if self.group_by:
+        if self.group_by or self.models.one2many:
             if value and value.group_by_parent:
                 pos = self.group_childs.index(value)
                 val = value and value.id
             else:
                 pos = -1
-                val = 'Group by Header'
+                val = None
             self.signal('record-message', (pos,len(self.group_childs or []),self.search_count,val))
         else:
             try:
@@ -446,6 +455,9 @@ class Screen(signal_event.signal_event):
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
+        if self.group_by or self.models.one2many:
+            if self.current_model and not self.current_model.resource:
+                return True
         self.current_view.set_value()
         if self.current_model and self.current_model not in self.models.models:
             self.current_model = None
@@ -671,7 +683,6 @@ class Screen(signal_event.signal_event):
         id = False
         if self.current_view.view_type == 'form' and self.current_model:
             id = self.current_model.id
-
             idx = self.models.models.index(self.current_model)
             if not id:
                 lst=[]
@@ -700,17 +711,17 @@ class Screen(signal_event.signal_event):
             self.current_view.set_cursor()
         if self.current_view.view_type == 'tree':
             ids = self.current_view.sel_ids_get()
-
             ctx = self.models.context.copy()
             for m in self.models:
                 if m.id in ids:
                     m.update_context_with_concurrency_check_data(ctx)
-
             if unlink and ids:
                 if not self.rpc.unlink(ids, ctx):
                     return False
             for model in self.current_view.sel_models_get():
                 self.models.remove(model)
+            if self.models.one2many:
+                self.current_view.reload = True
             self.current_model = None
             self.display()
             self.current_view.set_cursor()
@@ -725,9 +736,6 @@ class Screen(signal_event.signal_event):
                 self.screen_container.fill_limit_combo(tot_rec)
         self.models.load(ids, display=False)
         self.current_view.reset()
-        if self.group_by:
-            self.group_parents = [ x for x in self.models.models if not x.group_by_parent]
-            self.group_childs = filter(lambda x:x not in self.group_parents,self.models.models)
         if ids:
             self.display(ids[0])
         else:
@@ -747,8 +755,9 @@ class Screen(signal_event.signal_event):
             )
 
     def display_next(self):
+        self.set_group_parents()
         self.current_view.set_value()
-        if self.group_by and not self.current_view.view_type == 'form':
+        if self.group_by or self.models.one2many and not self.current_view.view_type == 'form':
             if self.current_model in self.group_parents:
                  self.current_view.expand_row((self.group_parents.index(self.current_model),), False)
         if self.current_model in self.models.models:
@@ -765,8 +774,9 @@ class Screen(signal_event.signal_event):
         self.current_view.set_cursor()
 
     def display_prev(self):
+        self.set_group_parents()
         self.current_view.set_value()
-        if self.group_by and not self.current_view.view_type == 'form':
+        if self.group_by or self.models.one2many and not self.current_view.view_type == 'form':
             if self.current_model in self.group_parents:
                  self.current_view.collapse_row((self.group_parents.index(self.current_model),))
         if self.current_model in self.models.models:

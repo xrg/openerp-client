@@ -51,7 +51,10 @@ class EvalEnvironment(object):
 class ModelRecord(signal_event.signal_event):
     def __init__(self, resource, id, group=None, group_by_parent = None, parent=None, new=False):
         super(ModelRecord, self).__init__()
-        self.resource = str(resource)
+        if resource:
+            self.resource = str(resource)
+        else:
+            self.resource = resource
         self.rpc = RPCProxy(self.resource)
         self.id = id
         self._loaded = False

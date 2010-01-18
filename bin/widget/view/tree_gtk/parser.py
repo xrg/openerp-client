@@ -217,7 +217,7 @@ class Char(object):
         color = self.get_color(model)
         font = pango.FontDescription('Normal ')
         cell.set_property('font-desc', font)
-        if self.treeview.screen.context.get('search_context',{}).get('group_by',False):
+        if self.treeview.screen.context.get('search_context',{}).get('group_by',False) or self.treeview.screen.models.one2many:
             if not model.group_by_parent:
                 font = pango.FontDescription('bold ')
                 cell.set_property('font-desc', font)
@@ -304,7 +304,7 @@ class GenericDate(Char):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        if self.treeview.screen.context.get('search_context',{}).get('group_by',False):
+        if self.treeview.screen.context.get('search_context',{}).get('group_by',False) or self.treeview.screen.models.one2many:
             return value
 
         try:
@@ -332,7 +332,7 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        if self.treeview.screen.context.get('search_context',{}).get('group_by',False):
+        if self.treeview.screen.context.get('search_context',{}).get('group_by',False) or self.treeview.screen.models.one2many:
             return value
 
         t = tools.datetime_util.strptime(value[:19], self.server_format)

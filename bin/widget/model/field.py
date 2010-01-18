@@ -331,7 +331,10 @@ class O2MField(CharField):
 
     def __init__(self, parent, attrs):
         super(O2MField, self).__init__(parent, attrs)
-        self.context={}
+        try:
+            self.context = eval(attrs['context'] or "{}")
+        except:
+            self.context = {}
 
     def create(self, model):
         from widget.model.group import ModelRecordGroup
@@ -369,8 +372,15 @@ class O2MField(CharField):
         mod =  ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model)
         mod.signal_connect(mod, 'model-changed', self._model_changed)
         model.value[self.name] = mod
+
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
-        model.value[self.name].pre_load(value, display=False)
+        if self.context.get('group_by',False):
+            mod.one2many = self.context.get('group_by',False)
+            values = rpc.session.rpc_exec_auth_try('/object', 'execute',
+                      self.attrs['relation'],'read_group', value, self.attrs['views']['tree']['fields'],mod.one2many)
+            model.value[self.name].pre_load(values, display=False)
+        else:
+            model.value[self.name].pre_load(value, display=False)
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 
     def set_client(self, model, value, test_state=False, force_change=False):

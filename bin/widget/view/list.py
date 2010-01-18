@@ -40,21 +40,29 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.last_sort = None
         self.sort_asc = True
         self.groupBY = False
+        self.o2M_group = self.model_group.one2many
         self.parent = {}
         self.parent_keys = []
         self.old = []
         self.set_property('leak_references', False)
+        if self.o2M_group:
+            self.set_o2m_Models(self.models)
+
+
+    def set_o2m_Models(self,models):
+        for model in models:
+            if not model.group_by_parent:
+                self.parent_keys.insert(len(self.parent.keys()),model)
+                self.parent[model] = []
+            else:
+                self.parent[model.group_by_parent].append(model)
 
     def added(self, modellist, position):
         self.groupBY = self.model_group.groupBY
         if modellist is self.models:
             model = self.models[position]
             if self.groupBY:
-                if not model.group_by_parent:
-                    self.parent_keys.insert(len(self.parent.keys()) + 1,model)
-                    self.parent[model] = []
-                else:
-                    self.parent[model.group_by_parent].append(model)
+                self.set_o2m_Models([model])
                 self.old.append(model)
             self.emit('row_inserted', self.on_get_path(model),
                       self.get_iter(self.on_get_path(model)))
@@ -101,7 +109,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         return self.model_group.writen(id)
 
     def __len__(self):
-        if self.groupBY:
+        if self.groupBY or self.o2M_group:
             length = 0
             for val in self.parent.values():
                 length += len(val)
@@ -112,7 +120,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     ## Mandatory GenericTreeModel methods
 
     def on_get_flags(self):
-        if self.groupBY:
+        if self.groupBY or self.o2M_group:
              return gtk.TREE_MODEL_ITERS_PERSIST
         else:
             return gtk.TREE_MODEL_LIST_ONLY
@@ -124,7 +132,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         return gobject.TYPE_PYOBJECT
 
     def on_get_path(self, iter):
-        if self.groupBY:
+        if self.groupBY or self.o2M_group:
              if iter.group_by_parent:
                  return (self.parent_keys.index(iter.group_by_parent),self.parent[iter.group_by_parent].index(iter))
              else:
@@ -133,7 +141,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
             return self.models.index(iter)
 
     def on_get_iter(self, path):
-        if self.groupBY:
+        if self.groupBY or self.o2M_group:
             if len(self.parent.keys()):
                 if isinstance(path, tuple) and len(path) == 1:
                     path = path[0]
@@ -166,13 +174,13 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_get_value(self, node, column):
         assert column == 0
-        if self.groupBY:
+        if self.groupBY or self.o2M_group:
             if node.group_by_parent:
                 return node
         return node
 
     def on_iter_next(self, node):
-        if self.groupBY:
+        if self.groupBY or self.o2M_group:
             try:
                 if node:
                     if node.group_by_parent:
@@ -194,7 +202,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
                 return None
 
     def on_iter_has_child(self, node):
-        if self.groupBY:
+        if self.groupBY or self.o2M_group:
              if not node.group_by_parent:
                  return self.parent[node] != []
              else:
@@ -203,7 +211,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
             return False
 
     def on_iter_children(self, node):
-        if self.groupBY:
+        if self.groupBY or self.o2M_group:
             if node and self.parent:
                 return self.parent[node][0]
             return None
@@ -211,13 +219,13 @@ class AdaptModelGroup(gtk.GenericTreeModel):
             return None
 
     def on_iter_n_children(self, node):
-        if self.groupBY:
+        if self.groupBY or self.o2M_group:
             return len(self.parent[node])
         else:
             return 0
 
     def on_iter_nth_child(self, node, n):
-        if self.groupBY:
+        if self.groupBY or self.o2M_group:
             if node:
                  if node.group_by_parent:
                      return self.parent[node.group_by_parent][n]
@@ -233,7 +241,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
             return None
 
     def on_iter_parent(self, node):
-        if self.groupBY:
+        if self.groupBY or self.o2M_group:
               if node.group_by_parent:
                   return node.group_by_parent
               else:
@@ -260,6 +268,8 @@ class ViewList(parser_view):
         self.reload = False
         self.children = children
         self.groupBY = False
+        self.o2m_group = False
+
         if children:
             hbox = gtk.HBox()
             self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
@@ -401,14 +411,12 @@ class ViewList(parser_view):
             return
         if signal=='record-added':
             if self.screen.models.models<>self.widget_tree.get_model().old and self.groupBY:
-                #self.widget_tree.get_model().parent_keys = []
-                #self.widget_tree.get_model().parent = {}
-                #self.widget_tree.get_model().old = []
                 self.store = AdaptModelGroup(self.screen.models)
             self.store.added(*args)
             if self.groupBY:
                 self.widget_tree.set_model(self.store)
                 self.groupBY = False
+
         elif signal=='record-removed':
             self.store.removed(*args)
         else:
@@ -431,7 +439,7 @@ class ViewList(parser_view):
         del self.widget
 
     def __sig_switch(self, treeview, *args):
-        if self.groupBY:
+        if self.groupBY or self.o2m_group:
             if len(args[0])<= 1:
                 return
         self.screen.row_activate(self.screen)
@@ -445,7 +453,7 @@ class ViewList(parser_view):
         elif tree_sel.get_mode() == gtk.SELECTION_MULTIPLE:
             model, paths = tree_sel.get_selected_rows()
             if paths:
-                if self.groupBY:
+                if self.groupBY or self.o2m_group:
                     if len(paths[0]) > 1:
                         self.screen.current_model = self.store.parent[self.store.parent_keys[paths[0][0]]][paths[0][1]]
                     else:
@@ -467,10 +475,15 @@ class ViewList(parser_view):
     #
     def display(self):
         self.groupBY = self.screen.models.groupBY
+        self.o2m_group = self.screen.models.one2many
+        if self.o2m_group:
+            self.groupBY = True
+
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group or not self.groupBY:
             self.store = AdaptModelGroup(self.screen.models)
             if self.store:
                 self.widget_tree.set_model(self.store)
+            self.o2m_group =  False
         self.reload = False
         if not self.screen.current_model:
             #
@@ -504,7 +517,7 @@ class ViewList(parser_view):
     def sel_ids_get(self):
         def _func_sel_get(store, path, iter, ids):
             model = store.on_get_iter(path)
-            if self.groupBY:
+            if self.groupBY or self.o2m_group:
                 if model.id and model.group_by_parent:
                     ids.append(model.id)
             else:
