@@ -103,8 +103,7 @@ class parser_tree(interface.parser_interface):
                     col_label.set_tooltip_markup('<span foreground=\"darkred\">'+tools.to_xml(node_attrs['string'])+' :</span>\n'+tools.to_xml(node_attrs['help']))
                 col_label.show()
                 col.set_widget(col_label)
-
-                btn_list.append(col)
+                treeview.append_column(col)
                 col._type = 'Button'
                 col.name = node_attrs['name']
 
@@ -187,8 +186,7 @@ class parser_tree(interface.parser_interface):
                     label_sum.set_use_markup(True)
                     dict_widget[n] = (fname, label, label_sum,
                             fields[fname].get('digits', (16,2))[1], label_bold)
-        for btn in btn_list:
-            treeview.append_column(btn)
+
         return treeview, dict_widget, [], on_write
 
 class UnsettableColumn(Exception):
