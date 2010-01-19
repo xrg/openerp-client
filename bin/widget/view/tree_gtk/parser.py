@@ -30,7 +30,6 @@ import tools.datetime_util
 
 from rpc import RPCProxy
 from editabletree import EditableTreeView
-from decoratedtree import DecoratedTreeView
 from widget.view import interface
 
 import time
@@ -69,7 +68,7 @@ class parser_tree(interface.parser_interface):
         if editable:
             treeview = EditableTreeView(editable)
         else:
-            treeview = DecoratedTreeView(editable)
+            treeview = EditableTreeView(editable)
         treeview.colors = dict()
         self.treeview = treeview
         for color_spec in attrs.get('colors', '').split(';'):

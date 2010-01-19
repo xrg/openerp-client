@@ -89,7 +89,6 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         return res
 
 
-    # if changed, please update the corresponded method in the DecoratedTreeView class
     def get_columns(self, include_non_visible=True, include_non_editable=True):
         def column_is_editable(column):
             renderer = column.get_cell_renderers()[0]
