@@ -175,8 +175,9 @@ class ModelRecordGroup(signal_event.signal_event):
         return True
 
     def load_for(self, values, group_by_parent = None):
-        if len(values)>10:
-            self.models.lock_signal = True
+        if not self.groupBY:
+            if len(values)>10:
+                self.models.lock_signal = False
         for value in values:
             if self.groupBY:
                 res = self.resource
