@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -301,6 +301,8 @@ class one2many_list(interface.widget_interface):
 
     def _sig_edit(self, *args):
         if self.screen.current_model:
+            if self.screen.models.one2many and not  self.screen.current_model.resource:
+                return True
             dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly)
             ok, value = dia.run()
             dia.destroy()
@@ -348,7 +350,10 @@ class one2many_list(interface.widget_interface):
         super(one2many_list, self).display(model, model_field)
         new_models = model_field.get_client(model)
         if self.screen.models != new_models:
-            self.screen.models_set(new_models)
+            if model_field.context.get('group_by',False):
+                self.screen.models_set(new_models, groupby = model_field.context['group_by'])
+            else:
+                self.screen.models_set(new_models)
             if (self.screen.current_view.view_type=='tree') and self.screen.editable_get():
                 self.screen.current_model = None
         self.screen.display()

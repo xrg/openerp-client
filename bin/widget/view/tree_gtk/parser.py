@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -102,12 +102,12 @@ class parser_tree(interface.parser_interface):
                 if node_attrs.get('help',False):
                     col_label.set_tooltip_markup('<span foreground=\"darkred\">'+tools.to_xml(node_attrs['string'])+' :</span>\n'+tools.to_xml(node_attrs['help']))
                 col_label.show()
-                col.set_widget(col_label)   
-                         
+                col.set_widget(col_label)
+
                 btn_list.append(col)
                 col._type = 'Button'
                 col.name = node_attrs['name']
-                
+
             if node.localName == 'field':
                 fname = str(node_attrs['name'])
                 if fields[fname]['type'] in ('image', 'binary'):
@@ -119,7 +119,7 @@ class parser_tree(interface.parser_interface):
                         node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
                 if fields[fname]['type'] == 'selection':
                     if fields[fname].get('selection',[]):
-                        node_attrs['selection'] = fields[fname]['selection']                        
+                        node_attrs['selection'] = fields[fname]['selection']
                 fields[fname].update(node_attrs)
                 node_attrs.update(fields[fname])
                 node_attrs['editable'] = editable
@@ -127,7 +127,7 @@ class parser_tree(interface.parser_interface):
                         self.window)
                 treeview.cells[fname] = cell
                 renderer = cell.renderer
-                
+
                 write_enable = editable and not node_attrs.get('readonly', False)
                 if isinstance(renderer, gtk.CellRendererToggle):
                     renderer.set_property('activatable', write_enable)
@@ -209,7 +209,7 @@ class Char(object):
         if not window:
             window = service.LocalService('gui.main').window
         self.window = window
-    
+
     def attrs_set(self, model, cell):
         if self.attrs.get('attrs',False):
             attrs_changes = eval(self.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
@@ -233,7 +233,7 @@ class Char(object):
             field.get_state_attrs(model)['required'] = field.attrs.get('required',False)
         if 'value' in state_changes:
             field.set(model, state_changes['value'], test_state=False, modified=True)
-                            
+
     def setter(self, column, cell, store, iter):
         model = store.get_value(iter, 0)
         text = self.get_textual_value(model)
@@ -242,24 +242,31 @@ class Char(object):
             self.state_set(model, model.value.get('state','draft'))
         self.attrs_set(model, cell)
         color = self.get_color(model)
-        cell.set_property('foreground', str(color))
+        font = pango.FontDescription('Normal ')
+        cell.set_property('font-desc', font)
+        if self.treeview.screen.context.get('search_context',{}).get('group_by',False) or self.treeview.screen.models.one2many:
+            if not model.group_by_parent:
+                font = pango.FontDescription('bold ')
+                cell.set_property('font-desc', font)
+        if color is not None:
+            cell.set_property('foreground', str(color))
         if self.attrs['type'] in ('float', 'integer', 'boolean'):
             align = 1
         else:
             align = 0
         if self.treeview.editable:
             field = model[self.field_name]
-            
+
             #setting the cell property editable or not
             cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
-                
+
             if not field.get_state_attrs(model).get('valid', True):
                 cell.set_property('background', common.colors.get('invalid', 'white'))
             elif bool(int(field.get_state_attrs(model).get('required', 0))):
                 cell.set_property('background', common.colors.get('required', 'white'))
             else:
                 cell.set_property('background', None)
-                  
+
         cell.set_property('xalign', align)
 
     def get_color(self, model):
@@ -308,11 +315,11 @@ class Boolean(Int):
             field = model[self.field_name]
 
             cell.set_property('sensitive',not field.get_state_attrs(model).get('readonly', False))
-            
-            if field.get_state_attrs(model).get('required', True): 
+
+            if field.get_state_attrs(model).get('required', True):
                 cell.set_property('cell-background',common.colors.get('required', 'white'))
             else:
-                cell.set_property('cell-background',None)   
+                cell.set_property('cell-background',None)
 
     def _sig_toggled(self, renderer, path):
         store = self.treeview.get_model()
@@ -342,6 +349,9 @@ class GenericDate(Char):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
+        if self.treeview.screen.context.get('search_context',{}).get('group_by',False) or self.treeview.screen.models.one2many:
+            return value
+
         try:
             date = DT.datetime.strptime(value[:10], self.server_format)
             return date.strftime(self.display_format)
@@ -367,6 +377,8 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
+        if self.treeview.screen.context.get('search_context',{}).get('group_by',False) or self.treeview.screen.models.one2many:
+            return value
         return tools.datetime_util.server_to_local_timestamp(value[:19],
                 self.server_format, self.display_format)
 
@@ -547,7 +559,7 @@ class ProgressBar(object):
         self.field_name = field_name
         self.attrs = attrs or {}
         self.renderer = gtk.CellRendererProgress()
-        self.editable = attrs.get('editable',False)        
+        self.editable = attrs.get('editable',False)
         self.treeview = treeview
         if not window:
             window = service.LocalService('gui.main').window
@@ -585,7 +597,7 @@ class ProgressBar(object):
 #    def __init__(self, text="", editable= True):
 #        self.__gobject_init__()
 #        self.text = text
-#        self.editable = editable        
+#        self.editable = editable
 #        self.border = gtk.Button().border_width
 #        self.set_property('mode', gtk.CELL_RENDERER_MODE_EDITABLE)
 #        self.clicking = False
@@ -600,7 +612,7 @@ class ProgressBar(object):
 #    def __get_model_state(self, widget, cell_area):
 #        path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
 #        if not path:
-#            return False        
+#            return False
 #        modelgrp = widget.get_model()
 #        model = modelgrp.models[path[0][0]]
 #
@@ -609,7 +621,7 @@ class ProgressBar(object):
 #        else:
 #            state = 'draft'
 #        return state
-#    
+#
 #    def __is_visible(self, widget, cell_area):
 #        states = self.__get_states()
 #        model_state = self.__get_model_state(widget, cell_area)
@@ -636,7 +648,7 @@ class ProgressBar(object):
 #                None, widget, "button",
 #                cell_area.x, cell_area.y,
 #                cell_area.width, cell_area.height)
-#        
+#
 #        #layout = widget.create_pango_layout('')
 #        #layout.set_font_description(widget.style.font_desc)
 #        #w, h = layout.get_size()
@@ -674,7 +686,7 @@ class ProgressBar(object):
 #            current_state = oneclick['record'].value.get('state',False)
 #            if current_state not in self.__get_states():
 #                return
-#        
+#
 #        if (event is None) or ((event.type == gtk.gdk.BUTTON_PRESS) \
 #                or (event.type == gtk.gdk.KEY_PRESS \
 #                    and event.keyval == gtk.keysyms.space)):
@@ -711,7 +723,7 @@ class CellRendererButton(object):
     def __get_model_state(self, widget, cell_area):
         path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
         if not path:
-            return False        
+            return False
         modelgrp = widget.get_model()
         model = modelgrp.models[path[0][0]]
 
@@ -720,7 +732,7 @@ class CellRendererButton(object):
         else:
             state = 'draft'
         return state
-    
+
     def __is_visible(self, widget, cell_area):
         states = self.__get_states()
         model_state = self.__get_model_state(widget, cell_area)
@@ -739,7 +751,7 @@ class CellRendererButton(object):
                     elif k=='readonly':
                         return True
         return False
-    
+
     def setter(self, column, cell, store, iter):
         #TODO
         model = store.get_value(iter, 0)
