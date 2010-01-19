@@ -2,7 +2,7 @@
 ##############################################################################
 #    
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -103,12 +103,6 @@ class configmanager(object):
             'help.index': 'http://doc.openerp.com/',
             'help.context': 'http://doc.openerp.com/index.php?model=%(model)s&lang=%(lang)s',
             'client.timeout': 300,
-            'colors.invalid': '#ff6969',
-            'colors.readonly': '#eeebe7',
-            'colors.required': '#d2d2ff',
-            'colors.required_fg': 'black',
-            'colors.normal': 'white'
-            
         }
         loglevels = ('critical', 'error', 'warning', 'info', 'debug', 'debug_rpc', 'debug_rpc_answer', 'notset')
         parser = optparse.OptionParser(version=_("OpenERP Client %s" % openerp_version))
@@ -175,6 +169,8 @@ class configmanager(object):
                         value = True
                     if value=='False' or value=='false':
                         value = False
+                    if value=='None' or value=='none':
+                        value = None
                     self.options[section+'.'+name] = value
         except Exception, e:
             import logging

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -220,23 +220,8 @@ class datetime(interface.widget_interface):
         str = self.entry.get_text()
         if str=='':
             return False
-        try:
-            date = DT.strptime(str[:19], self.format)
-        except:
-            return False
-        if rpc.session.context.get('tz',False) and timezone:
-            import pytz
-            lzone = pytz.timezone(rpc.session.context['tz'])
-            szone = pytz.timezone(rpc.session.timezone)
-            ldt = lzone.localize(date, is_dst=True)
-            sdt = ldt.astimezone(szone)
-            date = sdt
-
-        try:
-            return date.strftime(DHM_FORMAT)
-        except ValueError:
-            common.message(_('Invalid datetime value! Year must be greater than 1899 !'))
-            return time.strftime(DHM_FORMAT)
+        return tools.datetime_util.local_to_server_timestamp(str[:19], self.format, DHM_FORMAT,
+                        tz_offset=timezone, ignore_unparsable_time=False)
 
     def set_value(self, model, model_field):
         try:
@@ -255,15 +240,8 @@ class datetime(interface.widget_interface):
         if not dt_val:
             self.entry.clear()
         else:
-            date = DT.strptime(dt_val[:19], DHM_FORMAT)
-            if rpc.session.context.get('tz',False) and timezone:
-                import pytz
-                lzone = pytz.timezone(rpc.session.context['tz'])
-                szone = pytz.timezone(rpc.session.timezone)
-                sdt = szone.localize(date, is_dst=True)
-                ldt = sdt.astimezone(lzone)
-                date = ldt
-            t=date.strftime(self.format)
+            t = tools.datetime_util.server_to_local_timestamp(dt_val[:19],
+                    DHM_FORMAT, self.format, tz_offset=timezone)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
             self.entry.set_text(t)
@@ -374,16 +352,8 @@ class stime(interface.widget_interface):
         if not dt_val:
             self.entry.clear()
         else:
-            date = time.strptime(dt_val[:8], HM_FORMAT)
-            if rpc.session.context.get('tz',False) and timezone:
-                import pytz
-                lzone = pytz.timezone(rpc.session.context['tz'])
-                szone = pytz.timezone(rpc.session.timezone)
-                dt = DT(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                sdt = szone.localize(dt, is_dst=True)
-                ldt = sdt.astimezone(lzone)
-                date = ldt.timetuple()
-            t=time.strftime(self.format, date)
+            t = tools.datetime_util.server_to_local_timestamp(dt_val[:8], HM_FORMAT,
+                    self.format, tz_offset=timezone)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
             self.entry.set_text(t)

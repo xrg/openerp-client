@@ -2,7 +2,7 @@
 ##############################################################################
 #    
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -95,25 +95,14 @@ class ViewGraph(object):
                         res[x] = 'Undefined'
                 elif self.fields[x]['type'] == 'date':
                     if field_val:
-                        date = time.strptime(field_val, DT_FORMAT)
-                        res[x] = time.strftime(LDFMT, date)
+                        res[x] = datetime_util.server_to_local_timestamp(field_val,
+                                    DT_FORMAT, LDFMT, tz_offset=False)
                     else:
                         res[x] = 'Undefined'
                 elif self.fields[x]['type'] == 'datetime':
                     if field_val:
-                        date = time.strptime(field_val, DHM_FORMAT)
-                        if 'tz' in rpc.session.context:
-                            try:
-                                import pytz
-                                lzone = pytz.timezone(rpc.session.context['tz'])
-                                szone = pytz.timezone(rpc.session.timezone)
-                                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                                sdt = szone.localize(dt, is_dst=True)
-                                ldt = sdt.astimezone(lzone)
-                                date = ldt.timetuple()
-                            except:
-                                pass
-                        res[x] = time.strftime(LDFMT + ' %H:%M:%S', date)
+                        res[x] = datetime_util.server_to_local_timestamp(field_val,
+                                    DHM_FORMAT, LDFMT+' %H:%M:%S')
                     else:
                         res[x] = 'Undefined'  
                 else:

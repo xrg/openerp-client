@@ -6493,7 +6493,7 @@ Latin1</property>
                       </widget>
                     </child>
                     <child>
-                        <widget class="GtkEntry" id="entry_db">
+                        <widget class="GtkEntry" id="entry_db_select">
                             <property name="visible">True</property>
                         </widget>
                         <packing>

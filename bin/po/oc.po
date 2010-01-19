@@ -8,57 +8,57 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:33+0000\n"
+"PO-Revision-Date: 2010-01-18 05:28+0000\n"
 "Last-Translator: Cédric VALMARY <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-01-19 04:41+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr ""
+msgstr "Estampar lo flux de trabalh"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
-msgstr ""
+msgstr "Estampar lo flux de trabalh (complèxe)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr ""
+msgstr "Pas d'empeuton disponible per aquesta ressorsa !"
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
-msgstr ""
+msgstr "Causir un empeuton"
 
 #: bin/translate.py:184
 #, python-format
 msgid "Unable to set locale %s"
-msgstr ""
+msgstr "Impossible de metre la locala %s"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "Tampadura de OpenERP, Interrupcion clavièr"
 
 #: bin/options.py:108
 #, python-format
 msgid "OpenERP Client %s"
-msgstr ""
+msgstr "Client OpenERP %s"
 
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr ""
+msgstr "especificatz un fichièr de configuracion alternatiu"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "Activar las traças. Acorchi per '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "especificar lo nivèl de log : %s"
 
 #: bin/options.py:112
 msgid "specify the user login"
@@ -85,13 +85,13 @@ msgstr ""
 
 #: bin/printer/printer.py:198
 msgid "Error no report"
-msgstr ""
+msgstr "Error, pas de rapòrt"
 
 #: bin/printer/printer.py:217 bin/modules/gui/window/win_export.py:289
 #: bin/modules/gui/main.py:1424 bin/widget/view/form_gtk/binary.py:162
 #: bin/widget/view/form_gtk/image.py:119
 msgid "Save As..."
-msgstr ""
+msgstr "Enregistrar jos..."
 
 #: bin/printer/printer.py:225
 msgid "Error writing the file!"

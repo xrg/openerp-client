@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -104,6 +104,7 @@ class parser_tree(interface.parser_interface):
                     col_label.set_tooltip_markup('<span foreground=\"darkred\">'+tools.to_xml(node_attrs['string'])+' :</span>\n'+tools.to_xml(node_attrs['help']))
                 col_label.show()
                 col.set_widget(col_label)
+
                 btn_list.append(col)
                 col._type = 'Button'
                 col.name = node_attrs['name']
@@ -170,7 +171,7 @@ class parser_tree(interface.parser_interface):
                     col.connect('clicked', sort_model, treeview)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
-                visval = eval(fields[fname].get('invisible', 'False'), {'context':self.screen.context})
+                visval = eval(str(fields[fname].get('invisible', 'False')), {'context':self.screen.context})
                 col.set_visible(not visval)
                 n = treeview.append_column(col)
                 if 'sum' in fields[fname] and fields[fname]['type'] \
@@ -210,10 +211,37 @@ class Char(object):
             window = service.LocalService('gui.main').window
         self.window = window
 
+    def attrs_set(self, model, cell):
+        if self.attrs.get('attrs',False):
+            attrs_changes = eval(self.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
+            for k,v in attrs_changes.items():
+                result = False
+                for condition in v:
+                    result = tools.calc_condition(self,model,condition)
+                model[self.field_name].get_state_attrs(model)[k] = result
+
+    def state_set(self, model, state='draft'):
+        ro = model.mgroup._readonly
+        field = model[self.field_name]
+        state_changes = dict(field.attrs.get('states',{}).get(state,[]))
+        if 'readonly' in state_changes:
+            field.get_state_attrs(model)['readonly'] = state_changes['readonly'] or ro
+        else:
+            field.get_state_attrs(model)['readonly'] = field.attrs.get('readonly',False) or ro
+        if 'required' in state_changes:
+            field.get_state_attrs(model)['required'] = state_changes['required']
+        else:
+            field.get_state_attrs(model)['required'] = field.attrs.get('required',False)
+        if 'value' in state_changes:
+            field.set(model, state_changes['value'], test_state=False, modified=True)
+
     def setter(self, column, cell, store, iter):
         model = store.get_value(iter, 0)
         text = self.get_textual_value(model)
         cell.set_property('text', text)
+        if model.value.get('state',False):
+            self.state_set(model, model.value.get('state','draft'))
+        self.attrs_set(model, cell)
         color = self.get_color(model)
         font = pango.FontDescription('Normal ')
         cell.set_property('font-desc', font)
@@ -229,11 +257,17 @@ class Char(object):
             align = 0
         if self.treeview.editable:
             field = model[self.field_name]
+
+            #setting the cell property editable or not
+            cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
+
             if not field.get_state_attrs(model).get('valid', True):
                 cell.set_property('background', common.colors.get('invalid', 'white'))
             elif bool(int(field.get_state_attrs(model).get('required', 0))):
                 cell.set_property('background', common.colors.get('required', 'white'))
-                cell.set_property('foreground', common.colors.get('required_fg'))
+            else:
+                cell.set_property('background', None)
+
         cell.set_property('xalign', align)
 
     def get_color(self, model):
@@ -242,7 +276,7 @@ class Char(object):
             if model.expr_eval(expr, check_load=False):
                 to_display = color
                 break
-        return to_display or None
+        return to_display or 'black'
 
     def open_remote(self, model, create, changed=False, text=None):
         raise NotImplementedError
@@ -259,7 +293,7 @@ class Int(Char):
         return int(text)
 
     def get_textual_value(self, model):
-        return tools.locale_format('%d', model[self.field_name].get_client(model) or 0)
+        return tools.locale_format('%d', int(model[self.field_name].get_client(model)) or 0)
 
 class Boolean(Int):
 
@@ -275,6 +309,18 @@ class Boolean(Int):
         model = store.get_value(iter, 0)
         value = self.get_textual_value(model)
         cell.set_active(bool(value))
+        if model.value.get('state',False):
+            self.state_set(model, model.value.get('state','draft'))
+        self.attrs_set(model, cell)
+        if self.treeview.editable:
+            field = model[self.field_name]
+
+            cell.set_property('sensitive',not field.get_state_attrs(model).get('readonly', False))
+
+            if field.get_state_attrs(model).get('required', True):
+                cell.set_property('cell-background',common.colors.get('required', 'white'))
+            else:
+                cell.set_property('cell-background',None)
 
     def _sig_toggled(self, renderer, path):
         store = self.treeview.get_model()
@@ -334,53 +380,14 @@ class Datetime(GenericDate):
             return ''
         if self.treeview.screen.context.get('search_context',{}).get('group_by',False) or self.treeview.screen.models.one2many:
             return value
-
-        t = tools.datetime_util.strptime(value[:19], self.server_format)
-        if isinstance(t, type(mx.DateTime.now())) and not hasattr(t, 'timetuple'):
-            date = tuple(map(lambda x: int(x), t.tuple()))
-        else:
-            date = tools.datetime_util.strptime(value[:19], self.server_format).timetuple()
-        dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-
-        if 'tz' in rpc.session.context and  rpc.session.context['tz']:
-            try:
-                import pytz
-                lzone = pytz.timezone(str(rpc.session.context['tz']))
-                szone = pytz.timezone(rpc.session.timezone)
-                sdt = lzone.localize(dt, is_dst=True)
-                ldt = sdt.astimezone(lzone)
-                date = ldt.timetuple()
-                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-            except Exception, e:
-                pass
-
-        return dt.strftime(self.display_format)
+        return tools.datetime_util.server_to_local_timestamp(value[:19],
+                self.server_format, self.display_format)
 
     def value_from_text(self, model, text):
         if not text:
             return False
-        try:
-            #date = mx.DateTime.strptime(text, self.display_format)
-            date = tools.datetime_util.strptime(text[:19], self.display_format)
-        except:
-            try:
-                dt = list(time.localtime())
-                dt[2] = int(text)
-                date = tuple(dt)
-            except:
-                return False
-        if 'tz' in rpc.session.context:
-            try:
-                import pytz
-                lzone = pytz.timezone(str(rpc.session.context['tz']))
-                szone = pytz.timezone(rpc.session.timezone)
-                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                ldt = lzone.localize(dt, is_dst=True)
-                sdt = ldt.astimezone(szone)
-                date = sdt.timetuple()
-            except:
-                pass
-        return date.strftime(self.server_format)
+        return tools.datetime_util.local_to_server_timestamp(text[:19],
+                self.display_format, self.server_format)
 
 class Float(Char):
     def get_textual_value(self, model):
@@ -706,48 +713,66 @@ class CellRendererButton(object):
     def __init__(self, field_name, treeview=None, attrs=None, window=None):
         self.field_name = field_name
         self.attrs = attrs or {}
-        self.renderer = gtk.CellRendererPixbuf()
         self.treeview = treeview
+        self.renderer = gtk.CellRendererPixbuf()
         self.window = window or service.LocalService('gui.main').window
-        self.renderer.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+#        self.renderer.set_property('stock-id', self.attrs.get('icon','gtk-help'))
 
-#    def __get_states(self):
-#        return [e for e in self.attrs.get('states','').split(',') if e]
-#
-#    def __get_model_state(self, widget, cell_area):
-#        path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
-#        if not path:
-#            return False
-#        modelgrp = widget.get_model()
-#        model = modelgrp.models[path[0][0]]
-#
-#        if model and ('state' in model.mgroup.fields):
-#            state = model['state'].get(model)
-#        else:
-#            state = 'draft'
-#        return state
-#
-#    def __is_visible(self, widget, cell_area):
-#        states = self.__get_states()
-#        model_state = self.__get_model_state(widget, cell_area)
-#        return (not states) or (model_state in states)
+    def __get_states(self):
+        return [e for e in self.attrs.get('states','').split(',') if e]
+
+    def __get_model_state(self, widget, cell_area):
+        path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
+        if not path:
+            return False
+        modelgrp = widget.get_model()
+        model = modelgrp.models[path[0][0]]
+
+        if model and ('state' in model.mgroup.fields):
+            state = model['state'].get(model)
+        else:
+            state = 'draft'
+        return state
+
+    def __is_visible(self, widget, cell_area):
+        states = self.__get_states()
+        model_state = self.__get_model_state(widget, cell_area)
+        return (not states) or (model_state in states)
+
+    def attrs_set(self, model):
+        if self.attrs.get('attrs',False):
+            attrs_changes = eval(self.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
+            for k,v in attrs_changes.items():
+                result = False
+                for condition in v:
+                    result = tools.calc_condition(self,model,condition)
+                if result:
+                    if k=='invisible':
+                        return True
+                    elif k=='readonly':
+                        return True
+        return False
 
     def setter(self, column, cell, store, iter):
         #TODO
-        pass
-
-#        model = store.get_value(iter, 0)
-#        current_state = self.get_textual_value(model) or 'draft'
-#        tv = column.get_tree_view()
-#        valid_states = self.__get_states() or []
-        # change this according to states or attrs: to not show the icon
-#        cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+        model = store.get_value(iter, 0)
+        current_state = self.get_textual_value(model, 'draft')
+        tv = column.get_tree_view()
+        valid_states = self.__get_states() or []
+#         change this according to states or attrs: to not show the icon
+        attrs_check = self.attrs_set(model)
+        if attrs_check or current_state not in valid_states:
+            cell.set_property('stock-id', None)
+        else:
+            cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
 
     def open_remote(self, model, create, changed=False, text=None):
         raise NotImplementedError
 
-    def get_textual_value(self, model):
-        return model['state'].get_client(model)
+    def get_textual_value(self, model, default=False):
+        if model['state']:
+            return model['state'].get_client(model)
+        return default
 
     def value_from_text(self, model, text):
         return 0

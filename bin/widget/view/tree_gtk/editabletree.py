@@ -2,7 +2,7 @@
 ##############################################################################
 #    
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -93,6 +93,8 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
     def get_columns(self, include_non_visible=True, include_non_editable=True):
         def column_is_editable(column):
             renderer = column.get_cell_renderers()[0]
+            if isinstance(renderer,gtk.CellRendererPixbuf):
+                return True
             if isinstance(renderer,gtk.CellRendererProgress):
                 return True
             if isinstance(renderer, (gtk.CellRendererToggle,gtk.CellRendererProgress)):

@@ -2,7 +2,7 @@
 ##############################################################################
 #    
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -88,26 +88,15 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                 display_format = LDFMT
                 for x in res_ids:
                     if x[field]:
-                        date = time.strptime(x[field], DT_FORMAT)
-                        x[field] = time.strftime(display_format, date)
+                        x[field] = datetime_util.server_to_local_timestamp(x[field],
+                                        DT_FORMAT, display_format, tz_offset=False)
             if self.fields_type[field]['type'] in ('datetime',):
                 display_format = LDFMT + ' %H:%M:%S'
                 for x in res_ids:
                     if x[field]:
-                        date = time.strptime(x[field], DHM_FORMAT)
-                        if rpc.session.context.get('tz'):
-                            try:
-                                import pytz
-                                lzone = pytz.timezone(rpc.session.context['tz'])
-                                szone = pytz.timezone(rpc.session.timezone)
-                                dt = DT.datetime(date[0], date[1], date[2],
-                                        date[3], date[4], date[5], date[6])
-                                sdt = szone.localize(dt, is_dst=True)
-                                ldt = sdt.astimezone(lzone)
-                                date = ldt.timetuple()
-                            except:
-                                pass
-                        x[field] = time.strftime(display_format, date)
+                        x[field] = datetime_util.server_to_local_timestamp(x[field],
+                                        DHM_FORMAT, display_format)
+
             if self.fields_type[field]['type'] in ('one2one','many2one'):
                 for x in res_ids:
                     if x[field]:
@@ -121,6 +110,9 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                 interger, digit = self.fields_type[field].get('digits', (16,2))
                 for x in res_ids:
                     x[field] = tools.locale_format('%.' + str(digit) + 'f', x[field] or 0.0)
+            if self.fields_type[field]['type'] in ('integer',):
+                for x in res_ids:
+                    x[field] = tools.locale_format('%d', int(x[field]) or 0)
             if self.fields_type[field]['type'] in ('float_time',):
                 for x in res_ids:
                     val = '%02d:%02d' % (math.floor(abs(x[field])),
@@ -383,7 +375,7 @@ class view_tree(object):
 
 fields_list_type = {
     'checkbox': gobject.TYPE_BOOLEAN,
-    'integer': gobject.TYPE_INT,
+#    'integer': gobject.TYPE_INT,
 }
 
 

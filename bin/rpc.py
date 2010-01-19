@@ -2,7 +2,7 @@
 ##############################################################################
 #    
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -25,7 +25,6 @@ import logging
 import socket
 
 import tiny_socket
-from psycopg2 import OperationalError
 import service
 import common
 import options
@@ -255,8 +254,10 @@ class rpc_session(object):
     def list_db(self, url):
         try:
             return self.db_exec_no_except(url, 'list')
-        except Exception, e:
-            return -1
+        except (xmlrpclib.Fault, tiny_socket.Myexception), e:
+            if e.faultCode == 'AccessDenied':
+                return None
+            raise
 
     def db_exec_no_except(self, url, method, *args):
         return self.exec_no_except(url, 'db', method, *args)
@@ -301,11 +302,17 @@ class rpc_session(object):
                     else:
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
         if self.context.get('tz'):
+            # FIXME: Timezone handling
+            #   rpc_session.timezone contains the server's idea of its timezone (from time.tzname[0]),
+            #   which is quite quite unreliable in some cases. We'll fix this in trunk.
             self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
             try:
                 import pytz
+                pytz.timezone(self.timezone)
+            except pytz.UnknownTimeZoneError:
+                common.warning(_('Server timezone is not recognized (%s)!\nTime values will be displayed without timezone conversion.'%self.timezone))
             except:
-                common.warning('You select a timezone but OpenERP could not find pytz library !\nThe timezone functionality will be disabled.')
+                common.warning(_('The "pytz" Python library is missing!\nTime values will be displayed as if located in the server timezone.'))
 
     def logged(self):
         return self._open

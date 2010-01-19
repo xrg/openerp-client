@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    Copyright (c) 2008-2009 B2CK, Bertrand Chenal, Cedric Krier (D&D in lists)
 #    $Id$
 #
@@ -61,12 +61,9 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.groupBY = self.model_group.groupBY
         if modellist is self.models:
             model = self.models[position]
-            print "added:::::::::",model
             if self.groupBY:
                 self.set_o2m_Models([model])
                 self.old.append(model)
-            print "Self parent child",self.parent_child
-            print "Self parent keys",self.parent_keys,self
             self.emit('row_inserted', self.on_get_path(model),
                       self.get_iter(self.on_get_path(model)))
 
@@ -349,6 +346,20 @@ class ViewList(parser_view):
     def drag_data_delete(self, treeview, context):
         treeview.emit_stop_by_name('drag-data-delete')
 
+    def attrs_set(self, model,path):
+        if path.attrs.get('attrs',False):
+            attrs_changes = eval(path.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
+            for k,v in attrs_changes.items():
+                result = True
+                for condition in v:
+                    result = tools.calc_condition(self,model,condition)
+                if result:
+                    if k=='invisible':
+                        return False
+                    elif k=='readonly':
+                        return False
+        return True
+
     def __hello(self, treeview, event, *args):
 
         if event.button in [1,3]:
@@ -361,19 +372,19 @@ class ViewList(parser_view):
             if (not path) or not path[0]:
                 return False
             m = model.models[path[0][0]]
-
             # TODO: add menu cache
             if event.button == 1:
                 # first click on button
                 if path[1]._type == 'Button':
                     cell_button = path[1].get_cells()[0]
                     # Calling actions
-                    m.get_button_action(self.screen,m.id,path[1].attrs)
-#                    cell_button.on_start_editing(event,treeview,1,None,None,0,oneclick={'record':m})
-                    self.screen.current_model = m
-#                    self.display()
-                    self.screen.reload()
-                    treeview.screen.reload()
+
+                    attrs_check = self.attrs_set(m,path[1])
+                    if attrs_check and m['state'].get(m) in path[1].attrs['states'].split(','):
+                        m.get_button_action(self.screen,m.id,path[1].attrs)
+                        self.screen.current_model = m
+                        self.screen.reload()
+                        treeview.screen.reload()
 
             else:
                 # Here it goes for right click
@@ -419,7 +430,6 @@ class ViewList(parser_view):
             if self.groupBY:
                 self.widget_tree.set_model(self.store)
                 self.groupBY = False
-
         elif signal=='record-removed':
             self.store.removed(*args)
         else:
@@ -559,7 +569,6 @@ class ViewList(parser_view):
                     renderer.set_property('activatable', False)
                 elif not isinstance(renderer, gtk.CellRendererProgress):
                     renderer.set_property('editable', False)
-
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

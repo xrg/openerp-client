@@ -2,7 +2,7 @@
 ##############################################################################
 #    
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -622,11 +622,10 @@ def open_file(value, parent):
 # Color set
 
 colors = {
-    'invalid' : options['colors.invalid'],
-    'readonly' : options['colors.readonly'],
-    'required' : options['colors.required'],
-    'required_fg' : options['colors.required_fg'],
-    'normal' : options['colors.normal']
+    'invalid':'#ff6969',
+    'readonly':'#eeebe7',
+    'required':'#d2d2ff',
+    'normal':'white'
 }
 
 def get_client_environment():

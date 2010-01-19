@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -454,6 +454,10 @@ class ViewForm(parser_view):
                 if focus_widget.widget.widget.is_ancestor(page):
                     nb.set_current_page(i)
                 focus_widget.widget.grab_focus()
+            children_notebooks = page.get_children()
+            for child in children_notebooks:
+                if isinstance(child,gtk.Notebook):
+                    self.set_notebook(model,child)
             if nb.get_tab_label(page).attrs.get('attrs',False):
                 self.attrs_set(model, page, nb.get_tab_label(page))
 

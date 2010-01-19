@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -24,7 +24,7 @@ import xml.dom.minidom
 from rpc import RPCProxy
 import rpc
 import gettext
-
+from mx import DateTime
 import gtk
 import gobject
 from gtk import glade
@@ -38,6 +38,7 @@ import signal_event
 import tools
 import service
 import common
+import copy
 
 
 class Screen(signal_event.signal_event):
@@ -107,6 +108,7 @@ class Screen(signal_event.signal_event):
         self.readonly= readonly
         self.action_domain = []
         self.custom_panels = []
+        self.view_fields = {} # Used to switch self.fields when the view switchs
 
         if view_type:
             self.view_to_load = view_type[1:]
@@ -180,11 +182,49 @@ class Screen(signal_event.signal_event):
         self.screen_container.action_combo.set_active(0)
         self.clear()
 
+    def get_calenderDomain(self, start=None,old_date='',mode='month'):
+        args = []
+        if not old_date:
+            old_date = DateTime.today()
+        if old_date == DateTime.today():
+            if mode =='month':
+                start_date = (old_date + DateTime.RelativeDateTime(months = -1)).strftime('%Y-%m-%d')
+                args.append((start, '>',start_date))
+                end_date = (old_date + DateTime.RelativeDateTime(months = 1)).strftime('%Y-%m-%d')
+                args.append((start, '<',end_date))
+            if mode=='week':
+                start_date = (old_date + DateTime.RelativeDateTime(weeks = -1)).strftime('%Y-%m-%d')
+                args.append((start, '>',start_date))
+                end_date = (old_date + DateTime.RelativeDateTime(weeks = 1)).strftime('%Y-%m-%d')
+                args.append((start, '<',end_date))
+            if mode=='day':
+                start_date = (old_date + DateTime.RelativeDateTime(days = -1)).strftime('%Y-%m-%d')
+                args.append((start, '>',start_date))
+                end_date = (old_date + DateTime.RelativeDateTime(days = 1)).strftime('%Y-%m-%d')
+                args.append((start, '<',end_date))
+        else:
+            if mode =='month':
+                end_date = (old_date + DateTime.RelativeDateTime(months = 1)).strftime('%Y-%m-%d')
+            if mode=='week':
+                end_date = (old_date + DateTime.RelativeDateTime(weeks = 1)).strftime('%Y-%m-%d')
+            if mode=='day':
+                end_date = (old_date + DateTime.RelativeDateTime(days = 1)).strftime('%Y-%m-%d')
+            old_date = old_date.strftime('%Y-%m-%d')
+            args = [(start,'>',old_date),(start,'<',end_date)]
+        return args
+
     def search_filter(self, *args):
         v = self.filter_widget and self.filter_widget.value or []
         v = self.action_domain and  (v + self.action_domain) or v
         self.context.update(rpc.session.context)
         self.group_by = self.context.get('search_context',{}).get('group_by',False)
+        limit=self.screen_container.get_limit()
+        if self.current_view.view_type == 'calendar':
+            start = self.current_view.view.date_start
+            old_date = self.current_view.view.date
+            mode = self.current_view.view.mode
+            calendar_domain = self.get_calenderDomain(start,old_date,mode)
+            v += calendar_domain
         filter_keys = []
 
         for ele in v:
@@ -202,7 +242,6 @@ class Screen(signal_event.signal_event):
 #        v.extend((key, op, value) for key, op, value in domain if key not in filter_keys and not (key=='active' and self.context.get('active_test', False)))
         if self.latest_search != v:
             self.offset = 0
-        limit=self.screen_container.get_limit()
         offset=self.offset
         self.latest_search = v
         ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, 0, self.context)
@@ -459,6 +498,7 @@ class Screen(signal_event.signal_event):
             if self.current_model and not self.current_model.resource:
                 return True
         self.current_view.set_value()
+        self.fields = {}
         if self.current_model and self.current_model not in self.models.models:
             self.current_model = None
         if mode:
@@ -485,6 +525,11 @@ class Screen(signal_event.signal_event):
                 self.__current_view = len(self.views) - 1
             else:
                 self.__current_view = (self.__current_view + 1) % len(self.views)
+
+        self.fields = self.view_fields.get(self.__current_view, self.fields) # Switch the fields
+        # TODO: maybe add_fields_custom is needed instead of add_fields on some cases
+        self.models.add_fields(self.fields, self.models) # Switch the model fields too
+
         widget = self.current_view.widget
         self.screen_container.set(self.current_view.widget)
         if self.current_model:
@@ -578,6 +623,10 @@ class Screen(signal_event.signal_event):
             self.__current_view = len(self.views) - 1
             self.current_view.display()
             self.screen_container.set(view.widget)
+
+        # Store the fields for this view (we will use them when switching views)
+        self.view_fields[len(self.views)-1] = copy.deepcopy(self.fields)
+
         return view
 
     def editable_get(self):
@@ -683,6 +732,7 @@ class Screen(signal_event.signal_event):
         id = False
         if self.current_view.view_type == 'form' and self.current_model:
             id = self.current_model.id
+
             idx = self.models.models.index(self.current_model)
             if not id:
                 lst=[]
@@ -711,6 +761,7 @@ class Screen(signal_event.signal_event):
             self.current_view.set_cursor()
         if self.current_view.view_type == 'tree':
             ids = self.current_view.sel_ids_get()
+
             ctx = self.models.context.copy()
             for m in self.models:
                 if m.id in ids:

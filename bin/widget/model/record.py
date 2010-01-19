@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -183,6 +183,7 @@ class ModelRecord(signal_event.signal_event):
             field.get_state_attrs(self)['valid'] = True
         if change:
             self.signal('record-changed')
+        self.reload()
         return change
 
     def validate(self):

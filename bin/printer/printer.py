@@ -2,7 +2,7 @@
 ##############################################################################
 #    
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -91,7 +91,7 @@ class Printer(object):
             return opener
         if os.name == 'nt':
             if options.options['printer.preview']:
-                if options.options['printer.softpath'] == 'none':
+                if options.options['printer.softpath'] in ['None','none']:
                     return lambda fn: os.startfile(fn)
                 else:
                     return lambda fn: os.system(options.options['printer.softpath'] + ' ' + fn)
@@ -99,7 +99,7 @@ class Printer(object):
                 return lambda fn: print_w32_filename(fn)
         else:
             if options.options['printer.preview']:
-                if options.options['printer.softpath'] == 'none':
+                if options.options['printer.softpath'] in ['None','none']:
                     prog = self._findInPath(['xdg-open', 'evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview', 'acroread', 'open'])
                     def opener(fn):
                         self.__opener( lambda: os.execv(prog, (os.path.basename(prog), fn) ))
@@ -115,7 +115,7 @@ class Printer(object):
         if os.name == 'nt':
             return lambda fn: os.startfile(fn)
         else:
-            if options.options['printer.softpath_html'] == 'none':
+            if options.options['printer.softpath_html'] is None:
                 prog = self._findInPath(['ooffice', 'ooffice2', 'openoffice', 'soffice'])
                 def opener(fn):
                     pid = os.fork()

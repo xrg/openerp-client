@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -152,7 +152,7 @@ class CharField(object):
         else:
             self.get_state_attrs(model)['required'] = self.attrs['required']
         if 'value' in state_changes:
-            self.set(model, value, test_state=False, modified=True)
+            self.set(model, state_changes['value'], test_state=False, modified=True)
 
     def get_state_attrs(self, model):
         if self.name not in model.state_attrs:
@@ -245,6 +245,15 @@ class IntegerField(CharField):
     def validate(self, model):
         self.get_state_attrs(model)['valid'] = True
         return True
+    
+    def set_client(self, model, value, test_state=True, force_change=False):
+        internal = model.value.get(self.name, False)
+        self.set(model, value, test_state)
+        if int(internal or False) != (model.value.get(self.name,False) or False):
+            model.modified = True
+            model.modified_fields.setdefault(self.name)
+            self.sig_changed(model)
+            model.signal('record-changed', model)
 
 
 class M2OField(CharField):
