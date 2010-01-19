@@ -104,7 +104,10 @@ class parser_tree(interface.parser_interface):
                     treeview.sequence = True
                 for boolean_fields in ('readonly', 'required'):
                     if boolean_fields in node_attrs:
-                        node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
+                        if node_attrs[boolean_fields] in ('True', 'False'):
+                            node_attrs[boolean_fields] = eval(node_attrs[boolean_fields])
+                        else:    
+                            node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
                 fields[fname].update(node_attrs)
                 node_attrs.update(fields[fname])
                 cell = Cell(fields[fname]['type'])(fname, treeview, node_attrs,
