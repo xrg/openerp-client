@@ -243,7 +243,10 @@ class ModelRecord(signal_event.signal_event):
         return self._reload(self.mgroup.mfields.keys() + [CONCURRENCY_CHECK_FIELD])
 
     def _reload(self, fields):
+
         if not self.id:
+            return
+        if self.mgroup.groupBY or self.mgroup.one2many and  not self.resource:
             return
         c = rpc.session.context.copy()
         c.update(self.context_get())

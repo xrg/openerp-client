@@ -808,7 +808,7 @@ class Screen(signal_event.signal_event):
     def display_next(self):
         self.set_group_parents()
         self.current_view.set_value()
-        if self.group_by or self.models.one2many and not self.current_view.view_type == 'form':
+        if (self.group_by or self.models.one2many) and (not self.current_view.view_type == 'form'):
             if self.current_model in self.group_parents:
                  self.current_view.expand_row((self.group_parents.index(self.current_model),), False)
         if self.current_model in self.models.models:
@@ -827,7 +827,7 @@ class Screen(signal_event.signal_event):
     def display_prev(self):
         self.set_group_parents()
         self.current_view.set_value()
-        if self.group_by or self.models.one2many and not self.current_view.view_type == 'form':
+        if (self.group_by or self.models.one2many) and (not self.current_view.view_type == 'form'):
             if self.current_model in self.group_parents:
                  self.current_view.collapse_row((self.group_parents.index(self.current_model),))
         if self.current_model in self.models.models:
