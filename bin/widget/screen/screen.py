@@ -253,7 +253,7 @@ class Screen(signal_event.signal_event):
         self.update_scroll()
 
         self.clear()
-        self.load(ids)
+        self.load(ids,v)
         return True
 
     def add_custom(self, dynamic_button):
@@ -779,13 +779,13 @@ class Screen(signal_event.signal_event):
             id = ids
         return id
 
-    def load(self, ids):
+    def load(self, ids, domain=[]):
         limit = self.screen_container.get_limit()
         if limit:
             tot_rec = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', [], self.context)
             if limit < tot_rec:
                 self.screen_container.fill_limit_combo(tot_rec)
-        self.models.load(ids, display=False)
+        self.models.load(ids, display=False, domain=domain)
         self.current_view.reset()
         if ids:
             self.display(ids[0])

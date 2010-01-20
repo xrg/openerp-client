@@ -199,7 +199,7 @@ class ModelRecordGroup(signal_event.signal_event):
             self.models.lock_signal = False
             self.signal('record-cleared')
 
-    def load(self, ids, display=True):
+    def load(self, ids, display=True, domain=[]):
         if not ids:
             return True
         if not self.fields:
@@ -216,7 +216,7 @@ class ModelRecordGroup(signal_event.signal_event):
         self.groupBY = rpc.session.context.get('search_context',{}).get('group_by',False)
         if self.groupBY:
             values = rpc.session.rpc_exec_auth_try('/object', 'execute',
-                     self.resource, 'read_group', ids, self.fields, self.groupBY,self._context)
+                     self.resource, 'read_group', domain, self.fields, self.groupBY,self._context)
         else:
             values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
         rpc.session.context['search_context'] = {}
@@ -378,7 +378,7 @@ class ModelRecordGroup(signal_event.signal_event):
                     to_add_normal.append(f)
             if to_add_normal:
                 if self.one2many:
-                    values = self.rpc.read_group(old,self.fields,self.one2many, ctx)
+                    values = self.rpc.read_group([('id','in',old)],self.fields,self.one2many, ctx)
                 else:
                     values = self.rpc.read(old, to_add_normal, ctx)
                 if values:

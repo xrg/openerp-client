@@ -386,7 +386,7 @@ class O2MField(CharField):
         if self.context.get('group_by',False):
             mod.one2many = self.context.get('group_by',False)
             values = rpc.session.rpc_exec_auth_try('/object', 'execute',
-                      self.attrs['relation'],'read_group', value, self.attrs['views']['tree']['fields'],mod.one2many)
+                      self.attrs['relation'],'read_group', [('id','in',value)], self.attrs['views']['tree']['fields'],mod.one2many)
             model.value[self.name].pre_load(values, display=False)
         else:
             model.value[self.name].pre_load(value, display=False)
