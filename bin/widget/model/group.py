@@ -114,6 +114,7 @@ class ModelRecordGroup(signal_event.signal_event):
     def set_sequence(self, field='sequence'):
         index = 0
         for model in self.models:
+            print model
             if model[field]:
                 if index >= model[field].get(model):
                     index += 1
