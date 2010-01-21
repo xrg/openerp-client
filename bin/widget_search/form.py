@@ -227,10 +227,8 @@ class parse(object):
                                     sep = gtk.VSeparator()
                                     sep.set_size_request(3,40)
                                     mywidget.pack_start(sep,False,False,5)
-#                        mywidget.pack_start(widget_act.widget,expand=False,fill=False)
                     wid = container.wid_add(mywidget, 1,label, int(self.fields[str(attrs['name'])].get('expand',0)),xoptions=xoptions)
                     dict_widget[str(attrs['name'])] = (widget_act, wid, int(val))
-            
             elif node.localName == 'filter':
                 name = str(attrs.get('string','filter'))
                 widget_act = filter.filter(name, self.parent, attrs, call)
@@ -249,12 +247,18 @@ class parse(object):
                     sep = gtk.VSeparator()
                     sep.set_size_request(3,45)
                     sep_box.pack_start(sep,False,False,5)
-                    
                 wid = container.wid_add(sep_box,xoptions=gtk.SHRINK)
                 wid.show()
-                
-            if node.localName=='group':
-                frame = gtk.Frame(attrs.get('string', None))
+
+            elif node.localName=='newline':
+                container.newline()
+            elif node.localName=='group':
+                if attrs.get('expand',False):
+                    frame = gtk.Expander(attrs.get('string', None))
+                else:
+                    frame = gtk.Frame(attrs.get('string', None))
+                    if not attrs.get('string', None):
+                        frame.set_shadow_type(gtk.SHADOW_NONE)
                 frame.attrs=attrs
                 frame.set_border_width(0)
 
@@ -264,24 +268,9 @@ class parse(object):
                 dict_widget.update(widgets)
                 frame.add(self.widget)
                 if not attrs.get('string', None):
-                    frame.set_shadow_type(gtk.SHADOW_NONE)
                     container.get().set_border_width(0)
                 container.pop()
-        
-#        if not flag:
-#            
-##Button for dynamic domain
-#            flag = 1
-#            img2 = gtk.Image()
-#            img2.set_from_stock('gtk-add', gtk.ICON_SIZE_BUTTON)
-#            self.button_dynamic = gtk.Button()
-#            self.button_dynamic.set_image(img2)
-#            self.button_dynamic.set_relief(gtk.RELIEF_NONE)
-#            self.button_dynamic.set_alignment(0.3,0.3)
-#                    
-#            table = container.get()
-#            table.attach(self.button_dynamic, 0, 1, 0, 1, yoptions=gtk.FILL, xoptions=gtk.FILL, ypadding=2, xpadding=0)
-            
+
         self.widget = container.pop()
         self.container = container
         return self.widget, dict_widget
