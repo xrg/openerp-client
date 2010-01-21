@@ -244,11 +244,13 @@ class Screen(signal_event.signal_event):
             self.offset = 0
         offset=self.offset
         self.latest_search = v
-        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, 0, self.context)
-        if len(ids) < limit:
-            self.search_count = len(ids)
-        else:
-            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', v, self.context)
+        ids = []
+        if not self.group_by:
+            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, 0, self.context)
+            if len(ids) < limit:
+                self.search_count = len(ids)
+            else:
+                self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', v, self.context)
 
         self.update_scroll()
 
@@ -785,7 +787,7 @@ class Screen(signal_event.signal_event):
             tot_rec = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', [], self.context)
             if limit < tot_rec:
                 self.screen_container.fill_limit_combo(tot_rec)
-        self.models.load(ids, display=False, domain=domain)
+        self.models.load(ids, display=False, domain=domain, offset=self.offset, limit=limit)
         self.current_view.reset()
         if ids:
             self.display(ids[0])
