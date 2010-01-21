@@ -184,7 +184,7 @@ class ModelRecordGroup(signal_event.signal_event):
                 res = self.resource
                 if not group_by_parent:
                     res = None
-                newmod = ModelRecord(res,value['id'], group_by_parent = group_by_parent, parent=self.parent, group=self)
+                newmod = ModelRecord(self.resource, value['id'], group_by_parent = group_by_parent, parent=self.parent, group=self)
                 newmod.set(value)
                 self.models.append(newmod)
                 newmod.signal_connect(self, 'record-changed', self._record_changed)
@@ -200,8 +200,9 @@ class ModelRecordGroup(signal_event.signal_event):
             self.models.lock_signal = False
             self.signal('record-cleared')
 
-    def load(self, ids, display=True, domain=[]):
-        if not ids:
+    def load(self, ids, display=True, domain=[], offset=0, limit=80):
+        self.groupBY = rpc.session.context.get('search_context',{}).get('group_by',False)
+        if not ids and not self.groupBY:
             return True
         if not self.fields:
             return self.pre_load(ids, display)
@@ -214,10 +215,10 @@ class ModelRecordGroup(signal_event.signal_event):
         c.update(self.context)
         c['bin_size'] = True
 
-        self.groupBY = rpc.session.context.get('search_context',{}).get('group_by',False)
+        
         if self.groupBY:
             values = rpc.session.rpc_exec_auth_try('/object', 'execute',
-                     self.resource, 'read_group', domain, self.fields, self.groupBY,self._context)
+                     self.resource, 'read_group', domain, self.fields, self.groupBY, offset, limit, self._context)
         else:
             values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
         rpc.session.context['search_context'] = {}
