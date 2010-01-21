@@ -30,7 +30,7 @@ class filter(wid_int.wid_int):
         if name:
             self.butt = gtk.ToggleButton(name)
             if len(name) < 10:
-                self.butt.set_size_request(90,-1)
+                self.butt.set_size_request(70,-1)
         else:
             self.butt = gtk.ToggleButton()
             self.butt.set_relief(gtk.RELIEF_NONE)
@@ -70,7 +70,6 @@ class filter(wid_int.wid_int):
 
     def _value_set(self, value):
         pass
-
 
     value = property(_value_get, _value_set, None,
       'The content of the widget or ValueError if not valid')

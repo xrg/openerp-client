@@ -176,15 +176,12 @@ class parse(object):
         dict_widget = {}
         psr.Parse(xml_data)
         self.name_lst += self.name_lst1
-        
         container = _container(max_width)
         attrs = tools.node_attributes(root_node)
         container.new(col=int(attrs.get('col', self.col)))
         self.container = container
-        
         filter_hbox =  gtk.HBox(homogeneous=False, spacing=0)
         filter_button_exists = False
-        
         for node in root_node.childNodes:
             if not node.nodeType==node.ELEMENT_NODE:
                 continue
@@ -193,7 +190,6 @@ class parse(object):
                 val  = attrs.get('select', False) or self.fields[str(attrs['name'])].get('select', False)
                 if val:
                     type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
-                    
                     self.fields[str(attrs['name'])].update(attrs)
                     self.fields[str(attrs['name'])]['model']=self.model
                     if type not in widgets_type:
@@ -213,7 +209,7 @@ class parse(object):
                         mywidget = gtk.HBox(homogeneous=False, spacing=0)
                         mywidget.pack_start(widget_act.widget,expand=False,fill=False)
                         xoptions = gtk.SHRINK
-                        i = 0           
+                        i = 0
                         for node_child in node.childNodes:
                             if node_child.localName == 'filter':
                                 i += 1
@@ -222,7 +218,6 @@ class parse(object):
                                 mywidget.pack_start(widget_child.widget)
                                 dict_widget[str(attrs['name']) + str(i)] = (widget_child, mywidget, int(val))
                             elif node_child.localName == 'separator':
-                                
                                 attrs_child = tools.node_attributes(node_child)
                                 if attrs_child.get('orientation','vertical') == 'horizontal':
                                     sep = gtk.HSeparator()
@@ -232,7 +227,6 @@ class parse(object):
                                     sep = gtk.VSeparator()
                                     sep.set_size_request(3,40)
                                     mywidget.pack_start(sep,False,False,5)
-                                
 #                        mywidget.pack_start(widget_act.widget,expand=False,fill=False)
                     wid = container.wid_add(mywidget, 1,label, int(self.fields[str(attrs['name'])].get('expand',0)),xoptions=xoptions)
                     dict_widget[str(attrs['name'])] = (widget_act, wid, int(val))
@@ -242,7 +236,6 @@ class parse(object):
                 widget_act = filter.filter(name, self.parent, attrs, call)
                 wid = container.wid_add(widget_act.butt,xoptions=gtk.SHRINK, help=attrs.get('help',False))
                 dict_widget[name]=(widget_act, widget_act, 1)
-                
             elif node.localName == 'separator':
                 
                 if attrs.get('orientation','vertical') == 'horizontal':
