@@ -175,22 +175,26 @@ class ModelRecordGroup(signal_event.signal_event):
             self.signal('record-cleared')
         return True
 
-    def load_for(self, values, group_by_parent = None):
+    def load_for(self, values, group_by_parent = None, domain=[]):
         if not self.groupBY:
             if len(values)>10:
                 self.models.lock_signal = False
+        uniq_id = 1
         for value in values:
             if self.groupBY:
                 res = self.resource
                 if not group_by_parent:
                     res = None
-                newmod = ModelRecord(self.resource, value['id'], group_by_parent = group_by_parent, parent=self.parent, group=self)
+                newmod = ModelRecord(self.resource, uniq_id, group_by_parent = group_by_parent, parent=self.parent, group=self)
+                uniq_id += 1
                 newmod.set(value)
                 self.models.append(newmod)
                 newmod.signal_connect(self, 'record-changed', self._record_changed)
-                if value.get('group_child',False) and len(value['group_child']):
-                    val = self.rpc.read(value['group_child'], self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], self._context)
-                    self.load_for(val,group_by_parent=newmod)
+                if value.get('__domain',False) and len(value['__domain']):
+                    child_domain = domain + value['__domain']
+                    child_ids = self.rpc.search(child_domain)
+                    val = self.rpc.read(child_ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], self._context)
+                    self.load_for(val,group_by_parent=newmod,domain=domain)
             else:
                 newmod = ModelRecord(self.resource, value['id'], parent=self.parent, group=self)
                 newmod.set(value)
@@ -225,7 +229,7 @@ class ModelRecordGroup(signal_event.signal_event):
         if not values:
             return False
         newmod = False
-        self.load_for(values)
+        self.load_for(values, domain=domain)
         if newmod and display:
             self.signal('model-changed', newmod)
         self.current_idx = 0
