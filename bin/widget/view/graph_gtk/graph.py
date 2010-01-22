@@ -95,13 +95,13 @@ class ViewGraph(object):
                         res[x] = 'Undefined'
                 elif self.fields[x]['type'] == 'date':
                     if field_val:
-                        res[x] = datetime_util.server_to_local_timestamp(field_val,
+                        res[x] = tools.datetime_util.server_to_local_timestamp(field_val,
                                     DT_FORMAT, LDFMT, tz_offset=False)
                     else:
                         res[x] = 'Undefined'
                 elif self.fields[x]['type'] == 'datetime':
                     if field_val:
-                        res[x] = datetime_util.server_to_local_timestamp(field_val,
+                        res[x] = tools.datetime_util.server_to_local_timestamp(field_val,
                                     DHM_FORMAT, LDFMT+' %H:%M:%S')
                     else:
                         res[x] = 'Undefined'  
