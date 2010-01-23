@@ -475,6 +475,8 @@ class ViewList(parser_view):
     #
     def display(self):
         if True or self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
+            if self.screen.context.get('group_by',False):
+                self.unset_editable()
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
@@ -534,13 +536,14 @@ class ViewList(parser_view):
         self.screen.on_change(callback)
 
     def unset_editable(self):
-        self.widget_tree.editable = False
+        self.set_editable(False)
+
+    def set_editable(self, value=True):
+        self.widget_tree.editable = value
         for col in self.widget_tree.get_columns():
             for renderer in col.get_cell_renderers():
                 if isinstance(renderer, gtk.CellRendererToggle):
-                    renderer.set_property('activatable', False)
-                elif not isinstance(renderer, gtk.CellRendererProgress):
-                    renderer.set_property('editable', False)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+                    renderer.set_property('activatable', value)
+                elif not isinstance(renderer, gtk.CellRendererProgress) and not isinstance(renderer, gtk.CellRendererPixbuf):
+                    renderer.set_property('editable', value)
 
