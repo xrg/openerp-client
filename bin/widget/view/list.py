@@ -37,6 +37,8 @@ class field_record(object):
         return self.name
     def get(self, *args):
         return self.name
+    def get_state_attrs(self, *args, **argv):
+        return {}
     def set_client(self,*args):
         pass
     def set(self,*args):
@@ -77,10 +79,13 @@ def echo(fn):
 
 
 class list_record(object):
-    def __init__(self, mgroup, parent=None, context=None):
+    def __init__(self, mgroup, parent=None, context=None, domain=None):
         self.mgroup = mgroup
+        self.mgroup.list_parent = parent
+        self.mgroup.list_group = self
         self.parent = parent
         self.context = context or {}
+        self.domain = domain
         self.loaded = False
         self.lst = []
         self.load()
@@ -92,13 +97,13 @@ class list_record(object):
         gb = self.context.get('group_by', False)
         if gb:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group', 
-                self.context.get('__domain', []), self.mgroup.fields.keys(), gb, 0, False, self.context)
+                self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
             for r in records:
                 rec = group_record(r)
                 self.add(rec)
                 ctx = {'__domain': r.get('__domain', [])}
                 ctx.update(r.get('__context', {}))
-                l = list_record(self.mgroup, parent=rec, context=ctx)
+                l = list_record(self.mgroup, parent=rec, context=ctx, domain=self.domain)
                 rec.children = l
 
         else:
@@ -110,7 +115,11 @@ class list_record(object):
                     res.append(self.mgroup.get_by_id(id))
                 self.add_list(res)
             else:
-                self.add_list(self.mgroup.models)
+                self.lst = self.mgroup.models
+                for m in self.mgroup.models:
+                    m.list_group = self
+                    m.list_parent = self.parent
+                #self.add_list(self.mgroup.models)
 
     def add(self, lst):
         lst.list_parent = self.parent
@@ -130,12 +139,12 @@ class list_record(object):
         return len(self.lst)
 
 class AdaptModelGroup(gtk.GenericTreeModel):
-    def __init__(self, model_group, context={}):
+    def __init__(self, model_group, context={}, domain=[]):
         super(AdaptModelGroup, self).__init__()
         self.model_group = model_group
         self.context = context or {}
-        print context
-        self.models = list_record(model_group, context=context)
+        self.domain = domain
+        self.models = list_record(model_group, context=context, domain=self.domain)
         self.set_property('leak_references', False)
 
     def added(self, modellist, position):
@@ -208,7 +217,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         while iter:
             result.insert(0,iter.list_group.lst.index(iter))
             iter = iter.list_parent
-        return result
+        return tuple(result)
 
     def on_get_iter(self, path):
         mods = self.models
@@ -465,10 +474,12 @@ class ViewList(parser_view):
     # has not changed -> better ergonomy. To test
     #
     def display(self):
-        if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
-            self.store = AdaptModelGroup(self.screen.models, self.screen.context)
+        if True or self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
+            self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
+        else:
+            self.store.invalidate_iters()
         self.reload = False
         if not self.screen.current_model:
             #

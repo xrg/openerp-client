@@ -74,7 +74,7 @@ class Screen(signal_event.signal_event):
             self.row_activate = row_activate
         self.create_new = create_new
         self.name = model_name
-        self.domain = domain
+        self.domain_init = domain
         self.latest_search = []
         self.views_preload = views_preload
         self.resource = model_name
@@ -101,7 +101,6 @@ class Screen(signal_event.signal_event):
         self.old_limit = limit
         self.offset = 0
         self.readonly= readonly
-        self.action_domain = []
         self.custom_panels = []
         self.view_fields = {} # Used to switch self.fields when the view switchs
 
@@ -114,10 +113,13 @@ class Screen(signal_event.signal_event):
             self.screen_container.set(view.widget)
         self.display()
 
-    def context_update(self, ctx={}):
+    def context_update(self, ctx={}, dmn=[]):
         self.context = self.context_init.copy()
         self.context.update(rpc.session.context)
         self.context.update(ctx)
+
+        self.domain = self.domain_init[:]
+        self.domain += dmn
 
 
     def readonly_get(self):
@@ -215,9 +217,8 @@ class Screen(signal_event.signal_event):
 
     def search_filter(self, *args):
         val = self.filter_widget and self.filter_widget.value or {}
-        self.context_update(val.get('context',{}))
-        v = val.get('domain',[])
-        v = self.action_domain and  (v + self.action_domain) or v
+        self.context_update(val.get('context',{}), val.get('domain',[]))
+        v = self.domain
         limit=self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
             start = self.current_view.view.date_start
@@ -248,7 +249,6 @@ class Screen(signal_event.signal_event):
             self.search_count = len(ids)
         else:
             self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', v, self.context)
-        self.context['__domain']=v
         self.update_scroll()
         self.clear()
         self.load(ids)
@@ -270,7 +270,6 @@ class Screen(signal_event.signal_event):
 
     def execute_action(self, combo):
         flag = combo.get_active_text()
-        self.action_domain = []
 
         # 'mf' Section manages Filters
         if flag == 'mf':
@@ -398,12 +397,13 @@ class Screen(signal_event.signal_event):
                         shortcut_id = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view_sc', 'create', sc_data)
                 return True
         else:
-            try:
-                self.action_domain = flag and tools.expr_eval(flag) or []
-                if isinstance(self.action_domain,type([])):
-                    self.search_filter()
-            except Exception, e:
-                return True
+            pass
+            #try:
+            #    self.action_domain = flag and tools.expr_eval(flag) or []
+            #    if isinstance(self.action_domain,type([])):
+            #        self.search_filter()
+            #except Exception, e:
+            #    return True
 #        self.action_domain=[]
 #        combo.set_active(0)
 
@@ -614,6 +614,7 @@ class Screen(signal_event.signal_event):
             return False
 
     def new(self, default=True, context={}):
+        print 'Call NEW', context
         if self.current_view and self.current_view.view_type == 'tree' \
                 and not self.current_view.widget_tree.editable:
             self.switch_view(mode='form')
@@ -621,8 +622,10 @@ class Screen(signal_event.signal_event):
         ctx.update(context)
         model = self.models.model_new(default, self.domain, ctx)
         if (not self.current_view) or self.current_view.model_add_new or self.create_new:
+            print 'Adding', model.list_parent, model.list_group
             self.models.model_add(model, self.new_model_position())
         self.current_model = model
+        print model.list_group, model.list_parent
         self.current_model.validate_set()
         self.display()
         if self.current_view:

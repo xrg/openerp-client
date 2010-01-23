@@ -98,6 +98,9 @@ class ModelRecordGroup(signal_event.signal_event):
         self.on_write = ''
         self.is_wizard = is_wizard
 
+        self.list_parent = False
+        self.list_group = False
+
     def index(self, model):
         return self.models.index(model)
 
@@ -237,8 +240,10 @@ class ModelRecordGroup(signal_event.signal_event):
             ctx.update(self.context)
             newmod.default_get(domain, ctx)
         self.signal('model-changed', newmod)
+        newmod.list_parent = self.list_parent
+        newmod.list_group = self.list_group
         return newmod
-    
+
     def model_remove(self, model):
         idx = self.models.index(model)
         self.models.remove(model)

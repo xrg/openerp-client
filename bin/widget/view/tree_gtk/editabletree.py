@@ -132,6 +132,10 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         return super(EditableTreeView, self).set_cursor(path, focus_column,
                 start_editing)
 
+    def get_cursor(self):
+        res = super(EditableTreeView, self).get_cursor()
+        return res
+
     def set_value(self):
         path, column = self.get_cursor()
         store = self.get_model()
@@ -243,22 +247,21 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             model.modified = True
             model.modified_fields.setdefault(column.name)
             return False
-
         return True
 
     def _key_down(self, path, store, column):
         if path[0] == len(store) - 1 and self.editable == 'bottom':
             self.on_create_line()
-        new_path = (path[0] + 1) % len(store)
+        new_path = ((path[0] + 1) % len(store),)
         self.set_cursor(new_path, column, True)
         return new_path
 
     def _key_up(self, path, store, column):
         if path[0] == 0 and self.editable == 'top':
             self.on_create_line()
-            new_path = 0
+            new_path = (0,)
         else:
-            new_path = (path[0] - 1) % len(store)
+            new_path = ((path[0] - 1) % len(store),)
         self.set_cursor(new_path, column, True)
         return new_path
 
