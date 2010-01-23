@@ -61,7 +61,6 @@ def sort_model(column, treeview):
 class parser_tree(interface.parser_interface):
     def parse(self, model, root_node, fields):
         dict_widget = {}
-        btn_list=[]
         attrs = tools.node_attributes(root_node)
         on_write = attrs.get('on_write', '')
         editable = attrs.get('editable', False)
@@ -97,17 +96,16 @@ class parser_tree(interface.parser_interface):
                 col.name = node_attrs['name']
                 col._type = 'Button'
                 col.attrs = node_attrs
-                col_label = gtk.Label('Action')
-                col_label.set_markup('<b>%s</b>' % node_attrs['string'])
+                col_label = gtk.Label('')
+                #col_label.set_markup('<b>%s</b>' % node_attrs['string'])
                 if node_attrs.get('help',False):
                     col_label.set_tooltip_markup('<span foreground=\"darkred\">'+tools.to_xml(node_attrs['string'])+' :</span>\n'+tools.to_xml(node_attrs['help']))
                 col_label.show()
-                col.set_widget(col_label)   
-                         
-                btn_list.append(col)
+                col.set_widget(col_label)
+ 
+                treeview.append_column(col)
                 col._type = 'Button'
                 col.name = node_attrs['name']
-                
             if node.localName == 'field':
                 fname = str(node_attrs['name'])
                 if fields[fname]['type'] in ('image', 'binary'):
@@ -187,8 +185,6 @@ class parser_tree(interface.parser_interface):
                     label_sum.set_use_markup(True)
                     dict_widget[n] = (fname, label, label_sum,
                             fields[fname].get('digits', (16,2))[1], label_bold)
-        for btn in btn_list:
-            treeview.append_column(btn)
         return treeview, dict_widget, [], on_write
 
 class UnsettableColumn(Exception):
@@ -285,7 +281,7 @@ class Int(Char):
         return int(text)
 
     def get_textual_value(self, model):
-        return tools.locale_format('%d', int(model[self.field_name].get_client(model)) or 0)
+        return tools.locale_format('%d', int(model[self.field_name].get_client(model) or 0))
 
 class Boolean(Int):
 
@@ -389,7 +385,7 @@ class Float(Char):
 
 class FloatTime(Char):
     def get_textual_value(self, model):
-        val = model[self.field_name].get_client(model)
+        val = model[self.field_name].get_client(model) or 0
         t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,4) * 60)
         if val<0:
             t = '-'+t

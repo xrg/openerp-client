@@ -40,28 +40,27 @@ class filter(wid_int.wid_int):
         self.butt.set_image_position(gtk.POS_TOP)
         if attrs.get('help',False):
             self.butt.set_tooltip_markup(tools.to_xml(attrs['help']))
-        self.domain = attrs['domain']
+        self.domain = attrs.get('domain', "[]")
+        self.context = attrs.get('context', "{}")
         self.butt.set_active(bool(attrs.get('default',False)))
         self.butt.set_alignment(0.5, 0.5)
         self.butt.connect('toggled', call[1])
         self.widget = self.butt
 
     def _value_get(self):
-        if self.butt.get_active():
-            return tools.expr_eval(self.domain)
-        else:
-            return []
+        if not self.butt.get_active():
+            return {}
+        return {'domain': tools.expr_eval(self.domain),
+            'context': tools.expr_eval(self.context)}
 
     def sig_exec(self, widget):
         pass
 
     def clear(self):
         self.butt.set_active(False)
-        
+
     def _value_set(self, value):
         pass
-       
-
     value = property(_value_get, _value_set, None,
       'The content of the widget or ValueError if not valid')
 

@@ -52,8 +52,6 @@ class Screen(signal_event.signal_event):
             view_ids = []
         if view_type is None:
             view_type = ['tree', 'form']
-        if context is None:
-            context = {}
         if views_preload is None:
             views_preload = {}
         if domain is None:
@@ -81,8 +79,8 @@ class Screen(signal_event.signal_event):
         self.views_preload = views_preload
         self.resource = model_name
         self.rpc = RPCProxy(model_name)
-        self.context = context
-        self.context.update(rpc.session.context)
+        self.context_init = context or {}
+        self.context_update()
         self.views = []
         self.fields = {}
         self.view_ids = view_ids
@@ -115,6 +113,11 @@ class Screen(signal_event.signal_event):
             view = self.add_view_id(view_id, view_type[0])
             self.screen_container.set(view.widget)
         self.display()
+
+    def context_update(self, ctx={}):
+        self.context = self.context_init.copy()
+        self.context.update(rpc.session.context)
+        self.context.update(ctx)
 
 
     def readonly_get(self):
@@ -211,7 +214,9 @@ class Screen(signal_event.signal_event):
         return args
 
     def search_filter(self, *args):
-        v = self.filter_widget and self.filter_widget.value or []
+        val = self.filter_widget and self.filter_widget.value or {}
+        self.context_update(val.get('context',{}))
+        v = val.get('domain',[])
         v = self.action_domain and  (v + self.action_domain) or v
         limit=self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
@@ -234,7 +239,6 @@ class Screen(signal_event.signal_event):
                 if key not in filter_keys and not (key=='active' and self.context.get('active_test', False)):
                     v.append((key, op, value))
 
-#        v.extend((key, op, value) for key, op, value in domain if key not in filter_keys and not (key=='active' and self.context.get('active_test', False)))
         if self.latest_search != v:
             self.offset = 0
         offset=self.offset
@@ -244,9 +248,8 @@ class Screen(signal_event.signal_event):
             self.search_count = len(ids)
         else:
             self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', v, self.context)
-
+        self.context['__domain']=v
         self.update_scroll()
-
         self.clear()
         self.load(ids)
         return True
@@ -369,8 +372,8 @@ class Screen(signal_event.signal_event):
 
                 datas={'name':action_name,
                        'res_model':self.name,
-                       'domain':str(self.filter_widget and self.filter_widget.value),
-                       'context':str({}),
+                       'domain':str(self.filter_widget and self.filter_widget.value.get('domain',[])),
+                       'context':str(self.filter_widget and self.filter_widget.value.get('context',{})),
                        'view_ids':[(6,0,v_ids)],
                        'search_view_id':self.search_view['view_id'],
                        'filter':True,
@@ -755,10 +758,10 @@ class Screen(signal_event.signal_event):
 
     def load(self, ids):
         limit = self.screen_container.get_limit()
-        if limit:
+        if len(ids) >= limit:
             tot_rec = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', [], self.context)
-            if limit < tot_rec:
-                self.screen_container.fill_limit_combo(tot_rec)
+            #if limit < tot_rec:
+            #    self.screen_container.fill_limit_combo(tot_rec)
         self.models.load(ids, display=False)
         self.current_view.reset()
         if ids:

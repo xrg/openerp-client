@@ -36,8 +36,8 @@ class wid_int(object):
         self.value = ''
         
     def _value_get(self):
-        return self._value
-        
+        return {'domain': [(self.name,'=',self._value)]}
+
     def _value_set(self, value):
         self._value = value
         

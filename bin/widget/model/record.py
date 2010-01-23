@@ -49,11 +49,12 @@ class EvalEnvironment(object):
 
 
 class ModelRecord(signal_event.signal_event):
-    def __init__(self, resource, id, group=None, parent=None, new=False):
+    def __init__(self, resource, id, group=None, parent=None, new=False, list_parent=None):
         super(ModelRecord, self).__init__()
         self.resource = str(resource)
         self.rpc = RPCProxy(self.resource)
         self.id = id
+        self.list_parent = list_parent
         self._loaded = False
         self.parent = parent
         self.mgroup = group
@@ -129,19 +130,12 @@ class ModelRecord(signal_event.signal_event):
             if not self.id:
                 value = self.get(get_readonly=False)
                 self.id = self.rpc.create(value, self.context_get())
-#                if not self.id:
-#                    self.failed_validation()
-
             else:
                 if not self.is_modified():
                     return self.id
                 value = self.get(get_readonly=False, get_modifiedonly=True)
                 context = self.context_get().copy()
-                self.update_context_with_concurrency_check_data(context)
                 self.rpc.write([self.id], value, context)
-#                if not self.rpc.write([self.id], value, context):
-#                    self.failed_validation()
-#                    return False
         except Exception, e:
             if hasattr(e, 'faultCode') and e.faultCode.find('ValidateError')>-1:
                 self.failed_validation()

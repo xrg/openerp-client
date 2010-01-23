@@ -85,32 +85,19 @@ class selection(wid_int.wid_int):
     def _value_get(self):
         model = self.widget.get_model()
         index = self.widget.get_active()
-        ctx = None
-        if self.attrs.get('context',False):
-            ctx = self.attrs['context']
-          
+        res = self.widget.child.get_text()
+        context = {}
+        operator = 'ilike'
         if index>=0:
             res = self._selection.get(model[index][0], False)
-            if ctx:
-                if rpc.session.context.get('search_context',False):
-                    for k in tools.expr_eval(ctx, {'self':False}).keys():
-                        if k in rpc.session.context['search_context'].keys():
-                            del rpc.session.context['search_context'][k]
-            if res:
-                if ctx:
-                    rpc.session.context['search_context'] = tools.expr_eval(ctx, {'self':res})
-                return [(self.name,'=',res)]
-        else:
-            if ctx:
-                if rpc.session.context.get('search_context',False):
-                    for k in tools.expr_eval(ctx, {'self':False}).keys():
-                        if k in rpc.session.context['search_context'].keys():
-                            del rpc.session.context['search_context'][k]
-                
-            res = self.widget.child.get_text()
-            if res:
-                return [(self.name,'ilike',res)]
-        return []
+            operator = '='
+            context = tools.expr_eval(self.attrs.get('context',"{}"), {'self':res})
+        if res:
+            return {
+                    'domain':[(self.name,operator,res)],
+                    'context': context
+            }
+        return {}
 
     def _value_set(self, value):
         if value==False:

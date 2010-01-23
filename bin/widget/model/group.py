@@ -98,6 +98,9 @@ class ModelRecordGroup(signal_event.signal_event):
         self.on_write = ''
         self.is_wizard = is_wizard
 
+    def index(self, model):
+        return self.models.index(model)
+
     def mfields_load(self, fkeys, models):
         for fname in fkeys:
             fvalue = models.fields[fname]
@@ -150,29 +153,25 @@ class ModelRecordGroup(signal_event.signal_event):
     def pre_load(self, ids, display=True):
         if not ids:
             return True
-        if len(ids)>10:
-            self.models.lock_signal = True
+        self.models.lock_signal = True
         for id in ids:
             newmod = ModelRecord(self.resource, id, parent=self.parent, group=self)
             self.model_add(newmod)
-            if display:
-                self.signal('model-changed', newmod)
-        if len(ids)>10:
-            self.models.lock_signal = False
-            self.signal('record-cleared')
+            #if display:
+            #    self.signal('model-changed', newmod)
+        self.models.lock_signal = False
+        self.signal('record-cleared')
         return True
 
     def load_for(self, values):
-        if len(values)>10:
-            self.models.lock_signal = True
+        self.models.lock_signal = True
         for value in values:
             newmod = ModelRecord(self.resource, value['id'], parent=self.parent, group=self)
             newmod.set(value)
             self.models.append(newmod)
             newmod.signal_connect(self, 'record-changed', self._record_changed)
-        if len(values)>10:
-            self.models.lock_signal = False
-            self.signal('record-cleared')
+        self.models.lock_signal = False
+        self.signal('record-cleared')
 
     def load(self, ids, display=True):
         if not ids:
@@ -180,28 +179,23 @@ class ModelRecordGroup(signal_event.signal_event):
         if not self.fields:
             return self.pre_load(ids, display)
         c = rpc.session.context.copy()
-        if c.get('search_context',False):
-            for k,v in c['search_context'].items():
-                if k not in c.keys():
-                    c[k] = v
-        
         c.update(self.context)
         c['bin_size'] = True
         values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
-        rpc.session.context['search_context'] = {}
         if not values:
             return False
-        newmod = False
         self.load_for(values)
-        if newmod and display:
-            self.signal('model-changed', newmod)
+
+        #newmod = False
+        #if newmod and display:
+        #    self.signal('model-changed', newmod)
         self.current_idx = 0
         return True
-    
+
     def clear(self):
         self.models.clear()
         self.models_removed = []
-    
+   
     def getContext(self):
         ctx = {}
         ctx.update(self._context)

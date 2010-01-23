@@ -58,9 +58,8 @@ class reference(wid_int.wid_int):
 
     def _value_get(self):
         if self.get_model():
-            return [(self.name, 'like', self.get_model()+',')]
-        else:
-            return []
+            return {'domain': [(self.name, 'like', self.get_model()+',')]}
+        return {}
 
     def _value_set(self, value):
         if value==False:

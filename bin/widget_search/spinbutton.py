@@ -59,7 +59,7 @@ class spinbutton(wid_int.wid_int):
             res.append((self.name, '>=', self.spin1.get_value()))
         elif (self.spin2.get_value() == self.spin1.get_value()) and (self.spin1.get_value() != 0.0):
             res.append((self.name, '=', self.spin1.get_value()))
-        return res
+        return {'domain':res}
 
     def _value_set(self, value):
         self.spin1.set_value(value)

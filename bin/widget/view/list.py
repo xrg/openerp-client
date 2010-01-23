@@ -30,15 +30,112 @@ import service
 import locale
 from interface import parser_view
 
+class field_record(object):
+    def __init__(self, name):
+        self.name = name
+    def get_client(self, *args):
+        return self.name
+    def get(self, *args):
+        return self.name
+    def set_client(self,*args):
+        pass
+    def set(self,*args):
+        pass
+
+class group_record(object):
+    def __init__(self, value={}):
+        self.list_parent = None
+        self._children = []
+        self.value = value
+        self.id = False
+
+    def getChildren(self):
+        self._children.load()
+        return self._children
+
+    def setChildren(self, c):
+        self._children = c
+        return c
+    children = property(getChildren, setChildren)
+
+    def expr_eval(self, *args, **argv):
+        return True
+
+    def __setitem__(self, attr, val):
+        pass
+
+    def __getitem__(self, attr):
+        return field_record(self.value.get(attr, ''))
+
+def echo(fn):
+    def wrapped(self, *v, **k):
+        name = fn.__name__
+        res = fn(self, *v, **k)
+        print '%10s' % (name,), v, res
+        return res
+    return wrapped
+
+
+class list_record(object):
+    def __init__(self, mgroup, parent=None, context=None):
+        self.mgroup = mgroup
+        self.parent = parent
+        self.context = context or {}
+        self.loaded = False
+        self.lst = []
+        self.load()
+
+    def load(self):
+        if self.loaded:
+            return
+        self.loaded = True
+        gb = self.context.get('group_by', False)
+        if gb:
+            records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group', 
+                self.context.get('__domain', []), self.mgroup.fields.keys(), gb, 0, False, self.context)
+            for r in records:
+                rec = group_record(r)
+                self.add(rec)
+                ctx = {'__domain': r.get('__domain', [])}
+                ctx.update(r.get('__context', {}))
+                l = list_record(self.mgroup, parent=rec, context=ctx)
+                rec.children = l
+
+        else:
+            if self.context.get('__domain'):
+                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'))
+                self.mgroup.load(ids)
+                res= []
+                for id in ids:
+                    res.append(self.mgroup.get_by_id(id))
+                self.add_list(res)
+            else:
+                self.add_list(self.mgroup.models)
+
+    def add(self, lst):
+        lst.list_parent = self.parent
+        lst.list_group = self
+        self.lst.append(lst)
+
+    def add_list(self, lst):
+        for l in lst:
+            self.add(l)
+
+    def __getitem__(self, i):
+        self.load()
+        return self.lst[i]
+
+    def __len__(self):
+        self.load()
+        return len(self.lst)
 
 class AdaptModelGroup(gtk.GenericTreeModel):
-
-    def __init__(self, model_group):
+    def __init__(self, model_group, context={}):
         super(AdaptModelGroup, self).__init__()
         self.model_group = model_group
-        self.models = model_group.models
-        self.last_sort = None
-        self.sort_asc = True
+        self.context = context or {}
+        print context
+        self.models = list_record(model_group, context=context)
         self.set_property('leak_references', False)
 
     def added(self, modellist, position):
@@ -74,16 +171,17 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.invalidate_iters()
 
     def sort(self, name):
-        self.sort_asc = not (self.sort_asc and (self.last_sort == name))
-        self.last_sort = name
-        if self.sort_asc:
-            f = lambda x,y: cmp(x[name].get_client(x), y[name].get_client(y))
-        else:
-            f = lambda x,y: -1 * cmp(x[name].get_client(x), y[name].get_client(y))
-        self.models.sort(f)
-        for idx, row in enumerate(self.models):
-            iter = self.get_iter(idx)
-            self.row_changed(self.get_path(iter), iter)
+        pass
+        #self.sort_asc = not (self.sort_asc and (self.last_sort == name))
+        #self.last_sort = name
+        #if self.sort_asc:
+        #    f = lambda x,y: cmp(x[name].get_client(x), y[name].get_client(y))
+        #else:
+        #    f = lambda x,y: -1 * cmp(x[name].get_client(x), y[name].get_client(y))
+        #self.models.sort(f)
+        #for idx, row in enumerate(self.models):
+        #    iter = self.get_iter(idx)
+        #    self.row_changed(self.get_path(iter), iter)
 
     def saved(self, id):
         return self.model_group.writen(id)
@@ -94,6 +192,8 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     ## Mandatory GenericTreeModel methods
 
     def on_get_flags(self):
+        if self.context.get('group_by', False):
+            return gtk.TREE_MODEL_ITERS_PERSIST
         return gtk.TREE_MODEL_LIST_ONLY
 
     def on_get_n_columns(self):
@@ -103,18 +203,20 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         return gobject.TYPE_PYOBJECT
 
     def on_get_path(self, iter):
-        return self.models.index(iter)
+        iter2 = iter
+        result = []
+        while iter:
+            result.insert(0,iter.list_group.lst.index(iter))
+            iter = iter.list_parent
+        return result
 
     def on_get_iter(self, path):
-        if isinstance(path, tuple):
-            path = path[0]
-        if self.models:
-            if path<len(self.models):
-                return self.models[path]
-            else:
-                return None
-        else:
-            return None
+        mods = self.models
+        for p in path[:-1]:
+            mods = mods[p].children
+        if path[-1]<len(mods):
+            return mods[path[-1]]
+        return None
 
     def on_get_value(self, node, column):
         assert column == 0
@@ -122,29 +224,31 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_iter_next(self, node):
         try:
-            return self.on_get_iter(self.on_get_path(node) + 1)
+            i = node.list_group.lst.index(node) + 1
+            return node.list_group[i]
         except IndexError:
             return None
 
     def on_iter_has_child(self, node):
-        return False
+        return bool(getattr(node,'children',None))
 
     def on_iter_children(self, node):
-        return None
+        return getattr(node,'children',[])[0]
 
     def on_iter_n_children(self, node):
-        return 0
+        return len(getattr(node,'children',[]))
 
     def on_iter_nth_child(self, node, n):
-        if node is None and self.models:
-            return self.on_get_iter(0)
+        if node is None:
+            return self.on_get_iter([n])
+        if n<len(getattr(node,'children',[])):
+            return getattr(node,'children',[])[n]
         return None
 
     def on_iter_parent(self, node):
-        return None
+        return node.list_parent
 
 class ViewList(parser_view):
-
     def __init__(self, window, screen, widget, children=None, buttons=None,
             toolbar=None, submenu=None):
         super(ViewList, self).__init__(window, screen, widget, children,
@@ -161,7 +265,6 @@ class ViewList(parser_view):
         self.widget_tree.screen = screen
         self.reload = False
         self.children = children
-
         if children:
             hbox = gtk.HBox()
             self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
@@ -253,7 +356,6 @@ class ViewList(parser_view):
         return True
 
     def __hello(self, treeview, event, *args):
-
         if event.button in [1,3]:
             path = treeview.get_path_at_pos(int(event.x),int(event.y))
             selection = treeview.get_selection()
@@ -310,7 +412,6 @@ class ViewList(parser_view):
         value = obj._exec_action(act, data, context)
         return value
 
-
     def signal_record_changed(self, signal, *args):
         if not self.store:
             return
@@ -345,13 +446,13 @@ class ViewList(parser_view):
             model, iter = tree_sel.get_selected()
             if iter:
                 path = model.get_path(iter)[0]
-                self.screen.current_model = model.models[path]
+                self.screen.current_model = model.on_get_iter(path)
         elif tree_sel.get_mode() == gtk.SELECTION_MULTIPLE:
             model, paths = tree_sel.get_selected_rows()
             if paths:
-                self.screen.current_model = model.models[paths[0][0]]
+                iter = model.on_get_iter(paths[0])
+                self.screen.current_model = iter
         self.update_children()
-
 
     def set_value(self):
         if self.widget_tree.editable:
@@ -365,7 +466,7 @@ class ViewList(parser_view):
     #
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
-            self.store = AdaptModelGroup(self.screen.models)
+            self.store = AdaptModelGroup(self.screen.models, self.screen.context)
             if self.store:
                 self.widget_tree.set_model(self.store)
         self.reload = False
