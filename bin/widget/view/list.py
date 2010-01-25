@@ -485,6 +485,7 @@ class ViewList(parser_view):
                 self.unset_editable()
             else:
                 self.widget_tree.move_column_after(self.widget_tree.get_columns()[0],self.last_col)
+                self.set_editable()
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
