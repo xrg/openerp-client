@@ -178,9 +178,9 @@ def setlang(lang=None):
         lang_enc = str(lang2 + '.' + encoding)
         try:
             locale.setlocale(locale.LC_ALL, lang_enc)
-        except Exception,e:
+        except Exception, e:
             logging.getLogger('translate').warning(
-                    _('Unable to set locale %s: %s') % (lang_enc,e))
+                    _('Unable to set locale %s: %s') % (lang_enc, e))
 
         lang = gettext.translation(APP, DIR, languages=[lang], fallback=True)
         lang.install(unicode=1)
