@@ -54,7 +54,7 @@ class Screen(signal_event.signal_event):
             view_type = ['tree', 'form']
         if views_preload is None:
             views_preload = {}
-        if domain is None:
+        if not domain:
             domain = []
         if default_get is None:
             default_get = {}
