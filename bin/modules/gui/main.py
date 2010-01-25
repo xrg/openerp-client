@@ -381,6 +381,12 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
             db_widget.hide()
             if butconnect:
                 butconnect.set_sensitive(False)
+        elif isinstance(result, (int, long)):
+            label.set_label('<b>'+ ( _('Error %d !') % result )+'</b>')
+            label.show()
+            db_widget.hide()
+            if butconnect:
+                butconnect.set_sensitive(False)
         else:
             db_widget.show()
             index = 0    
