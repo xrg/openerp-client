@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution   
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    Copyright (c) 2008-2009 B2CK, Bertrand Chenal, Cedric Krier (D&D in lists)
 #    $Id$
@@ -96,7 +96,7 @@ class list_record(object):
         self.loaded = True
         gb = self.context.get('group_by', False)
         if gb:
-            records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group', 
+            records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
                 self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
             for r in records:
                 rec = group_record(r)
@@ -274,6 +274,9 @@ class ViewList(parser_view):
         self.widget_tree.screen = screen
         self.reload = False
         self.children = children
+        self.last_col = None
+        self.col_visible = False
+        self.tree_editable = False
         if children:
             hbox = gtk.HBox()
             self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
@@ -387,7 +390,7 @@ class ViewList(parser_view):
                         self.screen.current_model = m
                         self.screen.reload()
                         treeview.screen.reload()
-                    
+
             else:
                 # Here it goes for right click
                 if path[1]._type=='many2one':
@@ -476,7 +479,29 @@ class ViewList(parser_view):
     def display(self):
         if True or self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
             if self.screen.context.get('group_by',False):
-                self.unset_editable()
+                for col in self.widget_tree.get_columns():
+                    if col.name == self.screen.context.get('group_by',False):
+                        if not col.get_visible():
+                            col.set_visible(not col.get_visible())
+                            self.col_visible = True
+                        self.widget_tree.move_column_after(col,None)
+                        break
+                    self.last_col = col
+                if self.widget_tree.editable:
+                    self.unset_editable()
+                    self.tree_editable = True
+            else:
+                if self.last_col:
+                    self.widget_tree.move_column_after(self.widget_tree.get_columns()[0],self.last_col)
+                    if self.col_visible:
+                        pos = self.widget_tree.get_columns().index(self.last_col) + 1
+                        col = self.widget_tree.get_columns()[pos]
+                        col.set_visible(not self.col_visible)
+                        self.col_visible = False
+                    if self.tree_editable:
+                        self.set_editable()
+                        self.tree_editable = False
+                    self.last_col = None
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
