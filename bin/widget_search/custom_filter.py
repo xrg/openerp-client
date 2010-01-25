@@ -86,8 +86,6 @@ class custom_filter(wid_int.wid_int):
         self.remove_filter.connect('clicked',call,self)
 
     def _value_get(self):
-#        if not self.right_text.get_text():
-#            return []
         try:
             field_left = self.field_selection[self.combo_fields.get_active_text()][0]
             field_type = self.field_selection[self.combo_fields.get_active_text()][1]
@@ -118,7 +116,7 @@ class custom_filter(wid_int.wid_int):
                 self.right_text.set_text('Invalid Value')
                 self.right_text.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("#ff6969"))
                 self.right_text.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ff6969"))
-                return []
+                return {}
             if operator in ['ilike','not ilike']:
                 if field_type in ['integer','float','date','datetime','boolean']:
                     operator = (operator == 'like') and '=' or '!='
@@ -135,10 +133,10 @@ class custom_filter(wid_int.wid_int):
             condition = eval(condition,{'AND':'&','OR':'|'})
 
             domain = [condition,(field_left,operator,right_text)]
-            return domain
+            return {'domain':domain}
         
         except Exception,e:
-            return []
+            return {}
 
     def sig_exec(self, widget):
         pass

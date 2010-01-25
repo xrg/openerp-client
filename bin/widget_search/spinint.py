@@ -63,7 +63,7 @@ class spinint(wid_int.wid_int):
             res.append((self.name, '>=', self.spin1.get_value_as_int()))
         elif (self.spin2.get_value_as_int() == self.spin1.get_value_as_int()) and (self.spin1.get_value_as_int() != 0):
             res.append((self.name, '=', self.spin1.get_value_as_int()))
-        return res
+        return {'domain':res}
 
     def _value_set(self, value):
         self.spin1.set_value(value)

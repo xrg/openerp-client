@@ -256,12 +256,18 @@ class parse(object):
                     sep = gtk.VSeparator()
                     sep.set_size_request(3,45)
                     sep_box.pack_start(sep,False,False,5)
-                    
                 wid = container.wid_add(sep_box,xoptions=gtk.SHRINK)
                 wid.show()
-                
-            if node.localName=='group':
-                frame = gtk.Frame(attrs.get('string', None))
+            elif node.localName=='newline':
+                container.newline()
+
+            elif node.localName=='group':
+                if attrs.get('expand',False):
+                    frame = gtk.Expander(attrs.get('string', None))
+                else:
+                    frame = gtk.Frame(attrs.get('string', None))
+                    if not attrs.get('string', None):
+                        frame.set_shadow_type(gtk.SHADOW_NONE)
                 frame.attrs=attrs
                 frame.set_border_width(0)
 
@@ -271,10 +277,9 @@ class parse(object):
                 dict_widget.update(widgets)
                 frame.add(self.widget)
                 if not attrs.get('string', None):
-                    frame.set_shadow_type(gtk.SHADOW_NONE)
                     container.get().set_border_width(0)
                 container.pop()
-        
+
 #        if not flag:
 #            
 ##Button for dynamic domain
@@ -377,30 +382,19 @@ class form(wid_int.wid_int):
             fct(obj)
 
     def _value_get(self):
-        res = []
-
-        for x in self.widgets:
-            res += self.widgets[x][0].value
-        
-        for y in self.custom_widgets:
-            res += self.custom_widgets[y][0].value
-
-        if res:
-            if len(res)>1 and res[-2] in ['&','|']:
-                if len(res) == 2:
-                    res = [res[1]]
-                else:
-                    res1 = res[:-2]
-                    res2 = res[-1:]
-                    res = res1 + res2
-        return res
+        domain = []
+        context = {}
+        for x in self.widgets.values() + self.custom_widgets.values():
+            domain += x[0].value.get('domain',[])
+            context.update( x[0].value.get('context',{}) )
+        return {'domain':domain, 'context':context}
 
     def _value_set(self, value):
         for x in value:
             if x in self.widgets:
                 self.widgets[x][0].value = value[x]
             if x in self.custom_widgets:
-                self.custom_widgets[x][0].value = value[x]    
+                self.custom_widgets[x][0].value = value[x]
 
     value = property(_value_get, _value_set, None, _('The content of the form or exception if not valid'))
 

@@ -52,8 +52,6 @@ class Screen(signal_event.signal_event):
             view_ids = []
         if view_type is None:
             view_type = ['tree', 'form']
-        if context is None:
-            context = {}
         if views_preload is None:
             views_preload = {}
         if domain is None:
@@ -76,13 +74,13 @@ class Screen(signal_event.signal_event):
             self.row_activate = row_activate
         self.create_new = create_new
         self.name = model_name
-        self.domain = domain
+        self.domain_init = domain
         self.latest_search = []
         self.views_preload = views_preload
         self.resource = model_name
         self.rpc = RPCProxy(model_name)
-        self.context = context
-        self.context.update(rpc.session.context)
+        self.context_init = context or {}
+        self.context_update()
         self.views = []
         self.fields = {}
         self.view_ids = view_ids
@@ -91,9 +89,6 @@ class Screen(signal_event.signal_event):
         self.window=window
         self.is_wizard = is_wizard
         self.search_view = eval(search_view)
-        self.group_by = False
-        self.group_parents = []
-        self.group_childs = []
         models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context, is_wizard=is_wizard)
         self.models_set(models)
         self.current_model = None
@@ -106,7 +101,6 @@ class Screen(signal_event.signal_event):
         self.old_limit = limit
         self.offset = 0
         self.readonly= readonly
-        self.action_domain = []
         self.custom_panels = []
         self.view_fields = {} # Used to switch self.fields when the view switchs
 
@@ -118,6 +112,14 @@ class Screen(signal_event.signal_event):
             view = self.add_view_id(view_id, view_type[0])
             self.screen_container.set(view.widget)
         self.display()
+
+    def context_update(self, ctx={}, dmn=[]):
+        self.context = self.context_init.copy()
+        self.context.update(rpc.session.context)
+        self.context.update(ctx)
+
+        self.domain = self.domain_init[:]
+        self.domain += dmn
 
 
     def readonly_get(self):
@@ -146,7 +148,7 @@ class Screen(signal_event.signal_event):
                         self.search_offset_next,
                         self.search_offset_previous, self.search_count,
                         self.execute_action, self.add_custom, self.name)
-
+                
         if active and show_search:
             self.screen_container.show_filter()
         else:
@@ -214,10 +216,9 @@ class Screen(signal_event.signal_event):
         return args
 
     def search_filter(self, *args):
-        v = self.filter_widget and self.filter_widget.value or []
-        v = self.action_domain and  (v + self.action_domain) or v
-        self.context.update(rpc.session.context)
-        self.group_by = self.context.get('search_context',{}).get('group_by',False)
+        val = self.filter_widget and self.filter_widget.value or {}
+        self.context_update(val.get('context',{}), val.get('domain',[]))
+        v = self.domain
         limit=self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
             start = self.current_view.view.date_start
@@ -239,7 +240,6 @@ class Screen(signal_event.signal_event):
                 if key not in filter_keys and not (key=='active' and self.context.get('active_test', False)):
                     v.append((key, op, value))
 
-#        v.extend((key, op, value) for key, op, value in domain if key not in filter_keys and not (key=='active' and self.context.get('active_test', False)))
         if self.latest_search != v:
             self.offset = 0
         offset=self.offset
@@ -249,9 +249,7 @@ class Screen(signal_event.signal_event):
             self.search_count = len(ids)
         else:
             self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', v, self.context)
-
         self.update_scroll()
-
         self.clear()
         self.load(ids)
         return True
@@ -272,7 +270,6 @@ class Screen(signal_event.signal_event):
 
     def execute_action(self, combo):
         flag = combo.get_active_text()
-        self.action_domain = []
 
         # 'mf' Section manages Filters
         if flag == 'mf':
@@ -374,8 +371,8 @@ class Screen(signal_event.signal_event):
 
                 datas={'name':action_name,
                        'res_model':self.name,
-                       'domain':str(self.filter_widget and self.filter_widget.value),
-                       'context':str({}),
+                       'domain':str(self.filter_widget and self.filter_widget.value.get('domain',[])),
+                       'context':str(self.filter_widget and self.filter_widget.value.get('context',{})),
                        'view_ids':[(6,0,v_ids)],
                        'search_view_id':self.search_view['view_id'],
                        'filter':True,
@@ -400,20 +397,17 @@ class Screen(signal_event.signal_event):
                         shortcut_id = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view_sc', 'create', sc_data)
                 return True
         else:
-            try:
-                self.action_domain = flag and tools.expr_eval(flag) or []
-                if isinstance(self.action_domain,type([])):
-                    self.search_filter()
-            except Exception, e:
-                return True
+            pass
+            #try:
+            #    self.action_domain = flag and tools.expr_eval(flag) or []
+            #    if isinstance(self.action_domain,type([])):
+            #        self.search_filter()
+            #except Exception, e:
+            #    return True
 #        self.action_domain=[]
 #        combo.set_active(0)
 
-    def models_set(self, models, groupby = False):
-        if groupby:
-            models.one2many = groupby
-        else:
-            models.one2many = False
+    def models_set(self, models):
         import time
         c = time.time()
         if self.models:
@@ -452,34 +446,20 @@ class Screen(signal_event.signal_event):
     #
     # Check more or less fields than in the screen !
     #
-    def set_group_parents(self):
-        self.group_parents = [ x for x in self.models.models if not x.group_by_parent]
-        self.group_childs = filter(lambda x:x not in self.group_parents,self.models.models)
-
     def _set_current_model(self, value):
-        self.set_group_parents()
         self.__current_model = value
-        if self.group_by or self.models.one2many:
-            if value and value.group_by_parent:
-                pos = self.group_childs.index(value)
-                val = value and value.id
-            else:
-                pos = -1
-                val = None
-            self.signal('record-message', (pos,len(self.group_childs or []),self.search_count,val))
-        else:
-            try:
-                offset = int(self.offset)
-            except:
-                offset = 0
-            try:
-                pos = self.models.models.index(value)
-            except:
-                pos = -1
-            self.signal('record-message', (pos + offset,
-                len(self.models.models or []) + offset,
-                self.search_count,
-                value and value.id))
+        try:
+            offset = int(self.offset)
+        except:
+            offset = 0
+        try:
+            pos = self.models.models.index(value)
+        except:
+            pos = -1
+        self.signal('record-message', (pos + offset,
+            len(self.models.models or []) + offset,
+            self.search_count,
+            value and value.id))
         return True
     current_model = property(_get_current_model, _set_current_model)
 
@@ -494,9 +474,6 @@ class Screen(signal_event.signal_event):
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
-        if self.group_by or self.models.one2many:
-            if self.current_model and not self.current_model.resource:
-                return True
         self.current_view.set_value()
         self.fields = {}
         if self.current_model and self.current_model not in self.models.models:
@@ -525,11 +502,11 @@ class Screen(signal_event.signal_event):
                 self.__current_view = len(self.views) - 1
             else:
                 self.__current_view = (self.__current_view + 1) % len(self.views)
-
+        
         self.fields = self.view_fields.get(self.__current_view, self.fields) # Switch the fields
         # TODO: maybe add_fields_custom is needed instead of add_fields on some cases
         self.models.add_fields(self.fields, self.models) # Switch the model fields too
-
+        
         widget = self.current_view.widget
         self.screen_container.set(self.current_view.widget)
         if self.current_model:
@@ -538,6 +515,7 @@ class Screen(signal_event.signal_event):
             self.new()
         self.display()
         self.current_view.set_cursor()
+
         main = service.LocalService('gui.main')
         if main:
             main.sb_set()
@@ -623,7 +601,7 @@ class Screen(signal_event.signal_event):
             self.__current_view = len(self.views) - 1
             self.current_view.display()
             self.screen_container.set(view.widget)
-
+        
         # Store the fields for this view (we will use them when switching views)
         self.view_fields[len(self.views)-1] = copy.deepcopy(self.fields)
 
@@ -636,6 +614,7 @@ class Screen(signal_event.signal_event):
             return False
 
     def new(self, default=True, context={}):
+        print 'Call NEW', context
         if self.current_view and self.current_view.view_type == 'tree' \
                 and not self.current_view.widget_tree.editable:
             self.switch_view(mode='form')
@@ -643,8 +622,10 @@ class Screen(signal_event.signal_event):
         ctx.update(context)
         model = self.models.model_new(default, self.domain, ctx)
         if (not self.current_view) or self.current_view.model_add_new or self.create_new:
+            print 'Adding', model.list_parent, model.list_group
             self.models.model_add(model, self.new_model_position())
         self.current_model = model
+        print model.list_group, model.list_parent
         self.current_model.validate_set()
         self.display()
         if self.current_view:
@@ -766,13 +747,12 @@ class Screen(signal_event.signal_event):
             for m in self.models:
                 if m.id in ids:
                     m.update_context_with_concurrency_check_data(ctx)
+
             if unlink and ids:
                 if not self.rpc.unlink(ids, ctx):
                     return False
             for model in self.current_view.sel_models_get():
                 self.models.remove(model)
-            if self.models.one2many:
-                self.current_view.reload = True
             self.current_model = None
             self.display()
             self.current_view.set_cursor()
@@ -781,10 +761,10 @@ class Screen(signal_event.signal_event):
 
     def load(self, ids):
         limit = self.screen_container.get_limit()
-        if limit:
+        if len(ids) >= limit:
             tot_rec = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', [], self.context)
-            if limit < tot_rec:
-                self.screen_container.fill_limit_combo(tot_rec)
+            #if limit < tot_rec:
+            #    self.screen_container.fill_limit_combo(tot_rec)
         self.models.load(ids, display=False)
         self.current_view.reset()
         if ids:
@@ -806,30 +786,20 @@ class Screen(signal_event.signal_event):
             )
 
     def display_next(self):
-        self.set_group_parents()
         self.current_view.set_value()
-        if (self.group_by or self.models.one2many) and (not self.current_view.view_type == 'form'):
-            if self.current_model in self.group_parents:
-                 self.current_view.expand_row((self.group_parents.index(self.current_model),), False)
         if self.current_model in self.models.models:
             idx = self.models.models.index(self.current_model)
             idx = (idx+1) % len(self.models.models)
             self.current_model = self.models.models[idx]
         else:
             self.current_model = len(self.models.models) and self.models.models[0]
-        if self.group_by and self.current_view.view_type == 'form' and not self.current_model.group_by_parent:
-            self.display_next()
         if self.current_model:
             self.current_model.validate_set()
         self.display()
         self.current_view.set_cursor()
 
     def display_prev(self):
-        self.set_group_parents()
         self.current_view.set_value()
-        if (self.group_by or self.models.one2many) and (not self.current_view.view_type == 'form'):
-            if self.current_model in self.group_parents:
-                 self.current_view.collapse_row((self.group_parents.index(self.current_model),))
         if self.current_model in self.models.models:
             idx = self.models.models.index(self.current_model)-1
             if idx<0:
@@ -837,8 +807,7 @@ class Screen(signal_event.signal_event):
             self.current_model = self.models.models[idx]
         else:
             self.current_model = len(self.models.models) and self.models.models[-1]
-        if self.group_by and self.current_view.view_type == 'form' and not self.current_model.group_by_parent:
-            self.display_prev()
+
         if self.current_model:
             self.current_model.validate_set()
         self.display()

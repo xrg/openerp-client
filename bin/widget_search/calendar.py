@@ -99,6 +99,7 @@ class calendar(wid_int.wid_int):
             self.cal_open(widget, event, dest, parent)
             return True
         
+
     def _value_get(self):
         res = []
         val = self._date_get(self.entry1.get_text())
@@ -107,7 +108,7 @@ class calendar(wid_int.wid_int):
         val = self._date_get(self.entry2.get_text())
         if val:
             res.append((self.name, '<=', val))
-        return res
+        return {'domain':res}
 
     def _value_set(self, value):
         self.entry1.set_text(value)
@@ -221,7 +222,7 @@ class datetime(wid_int.wid_int):
         val = self._date_get(self.entry2.get_text())
         if val:
             res.append((self.name, '<=', val))
-        return res
+        return {'domain':res}
 
     def _value_set(self, value):
         self.entry1.set_text(value)

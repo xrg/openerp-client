@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#
+#    
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
 #
 ##############################################################################
 
@@ -65,7 +65,7 @@ class ModelList(list):
         super(ModelList, self).remove(obj)
         if not self.lock_signal:
             self.__screen.signal('record-changed', ('record-removed', idx))
-
+    
     def clear(self):
         for obj in range(len(self)):
             self.pop()
@@ -97,9 +97,12 @@ class ModelRecordGroup(signal_event.signal_event):
         self.models_removed = []
         self.on_write = ''
         self.is_wizard = is_wizard
-        self.groupBY = False
-        self.one2many =  False
 
+        self.list_parent = False
+        self.list_group = False
+
+    def index(self, model):
+        return self.models.index(model)
 
     def mfields_load(self, fkeys, models):
         for fname in fkeys:
@@ -149,55 +152,29 @@ class ModelRecordGroup(signal_event.signal_event):
             new_index = min(model_idx, len(self.models)-1)
             self.model_add(newmod, new_index)
         return result
-
-    def pre_load(self, ids, display=True, group_by_parent = None):
+    
+    def pre_load(self, ids, display=True):
         if not ids:
             return True
-        if len(ids)>10:
-            self.models.lock_signal = True
-
+        self.models.lock_signal = True
         for id in ids:
-            if isinstance(id, dict):
-                newmod = ModelRecord(None, id['id'], parent=self.parent, group=self)
-                self.model_add(newmod)
-                if display:
-                    self.signal('model-changed', newmod)
-                if id.get('group_child',False) and len(id['group_child']):
-                    self.pre_load(id['group_child'],display,group_by_parent=newmod)
-            else:
-                newmod = ModelRecord(self.resource, id, parent=self.parent, group=self,group_by_parent=group_by_parent)
-                self.model_add(newmod)
-                if display:
-                    self.signal('model-changed', newmod)
-        if len(ids)>10:
-            self.models.lock_signal = False
-            self.signal('record-cleared')
+            newmod = ModelRecord(self.resource, id, parent=self.parent, group=self)
+            self.model_add(newmod)
+            #if display:
+            #    self.signal('model-changed', newmod)
+        self.models.lock_signal = False
+        self.signal('record-cleared')
         return True
 
-    def load_for(self, values, group_by_parent = None):
-        if not self.groupBY:
-            if len(values)>10:
-                self.models.lock_signal = False
+    def load_for(self, values):
+        self.models.lock_signal = True
         for value in values:
-            if self.groupBY:
-                res = self.resource
-                if not group_by_parent:
-                    res = None
-                newmod = ModelRecord(res,value['id'], group_by_parent = group_by_parent, parent=self.parent, group=self)
-                newmod.set(value)
-                self.models.append(newmod)
-                newmod.signal_connect(self, 'record-changed', self._record_changed)
-                if value.get('group_child',False) and len(value['group_child']):
-                    val = self.rpc.read(value['group_child'], self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], self._context)
-                    self.load_for(val,group_by_parent=newmod)
-            else:
-                newmod = ModelRecord(self.resource, value['id'], parent=self.parent, group=self)
-                newmod.set(value)
-                self.models.append(newmod)
-                newmod.signal_connect(self, 'record-changed', self._record_changed)
-        if len(values)>10:
-            self.models.lock_signal = False
-            self.signal('record-cleared')
+            newmod = ModelRecord(self.resource, value['id'], parent=self.parent, group=self)
+            newmod.set(value)
+            self.models.append(newmod)
+            newmod.signal_connect(self, 'record-changed', self._record_changed)
+        self.models.lock_signal = False
+        self.signal('record-cleared')
 
     def load(self, ids, display=True):
         if not ids:
@@ -205,34 +182,23 @@ class ModelRecordGroup(signal_event.signal_event):
         if not self.fields:
             return self.pre_load(ids, display)
         c = rpc.session.context.copy()
-        if c.get('search_context',False):
-            for k,v in c['search_context'].items():
-                if k not in c.keys():
-                    c[k] = v
-
         c.update(self.context)
         c['bin_size'] = True
-
-        self.groupBY = rpc.session.context.get('search_context',{}).get('group_by',False)
-        if self.groupBY:
-            values = rpc.session.rpc_exec_auth_try('/object', 'execute',
-                     self.resource, 'read_group', ids, self.fields, self.groupBY,self._context)
-        else:
-            values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
-        rpc.session.context['search_context'] = {}
+        values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
         if not values:
             return False
-        newmod = False
         self.load_for(values)
-        if newmod and display:
-            self.signal('model-changed', newmod)
+
+        #newmod = False
+        #if newmod and display:
+        #    self.signal('model-changed', newmod)
         self.current_idx = 0
         return True
 
     def clear(self):
         self.models.clear()
         self.models_removed = []
-
+   
     def getContext(self):
         ctx = {}
         ctx.update(self._context)
@@ -274,6 +240,8 @@ class ModelRecordGroup(signal_event.signal_event):
             ctx.update(self.context)
             newmod.default_get(domain, ctx)
         self.signal('model-changed', newmod)
+        newmod.list_parent = self.list_parent
+        newmod.list_group = self.list_group
         return newmod
 
     def model_remove(self, model):
@@ -297,7 +265,7 @@ class ModelRecordGroup(signal_event.signal_event):
         else:
             return None
         return self.models[self.current_idx]
-
+    
     def next(self):
         if self.models and self.current_idx is not None:
             self.current_idx = (self.current_idx + 1) % len(self.models)
@@ -346,8 +314,6 @@ class ModelRecordGroup(signal_event.signal_event):
 
         old = []
         new = []
-        if self.groupBY or self.one2many:
-            models = [ x for x in models if x.group_by_parent]
         for model in models:
             if model.id:
                 old.append(model.id)
@@ -355,17 +321,6 @@ class ModelRecordGroup(signal_event.signal_event):
                 new.append(model)
         ctx = context.copy()
         if len(old) and len(to_add):
-            def set_values(values):
-                for v in values:
-                    id = v['id']
-                    if 'id' not in to_add:
-                        del v['id']
-                    self[id].set(v, signal=False)
-                    if self.one2many and v.has_key('group_child') and len(v['group_child']):
-                        values = self.rpc.read(v['group_child'], to_add_normal, ctx)
-                        set_values(values)
-                return True
-
             ctx.update(rpc.session.context)
             ctx.update(self.context)
 
@@ -377,12 +332,13 @@ class ModelRecordGroup(signal_event.signal_event):
                 else:
                     to_add_normal.append(f)
             if to_add_normal:
-                if self.one2many:
-                    values = self.rpc.read_group(old,self.fields,self.one2many, ctx)
-                else:
-                    values = self.rpc.read(old, to_add_normal, ctx)
+                values = self.rpc.read(old, to_add_normal, ctx)
                 if values:
-                    set_values(values)
+                    for v in values:
+                        id = v['id']
+                        if 'id' not in to_add:
+                            del v['id']
+                        self[id].set(v, signal=False)
             if to_add_binary:
                 data = {}.fromkeys(to_add_binary, None)
                 for m in self.models:

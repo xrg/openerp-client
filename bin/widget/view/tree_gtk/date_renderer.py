@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#
+#    
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
 #
 ##############################################################################
 
@@ -46,8 +46,8 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
         self.regex = '^'+self.regex+'$'
 
     def _is_not_generic_property(self, name):
-        return name in ('editable', 'text', 'foreground', 'background','font-desc')
-
+        return name in ('editable', 'text', 'foreground', 'background')
+    
     def set_property(self, name, value):
         if not self._is_not_generic_property(name):
             return super(DecoratorRenderer, self).set_property(name, value)
@@ -64,6 +64,8 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
         return self.renderer1.get_size(widget, cell_area)
 
     def on_render(self, window, widget, background_area, cell_area, expose_area, flags):
+        if not isinstance(window, gtk.gdk.Window):
+            print '*** bug', window
         return self.renderer1.render(window, widget, background_area, cell_area, expose_area, flags)
 
     def on_activate(self, event, widget, path, background_area, cell_area, flags):
@@ -129,8 +131,8 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
                 return True
             else:
                 return False
-        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus,
-                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus,
+        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus, 
+                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus, 
                               gtk.keysyms.KP_Equal, gtk.keysyms.equal):
                 self.mode_cmd = True
                 self.date_get(editable)
@@ -184,7 +186,7 @@ class date_callback(object):
     def event(self, widget, event):
         if event.keyval in (gtk.keysyms.BackSpace,):
             self.value = self.value[:-1]
-
+        
         self.value += event.string
         self.display(widget)
         return True

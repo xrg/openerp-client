@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
+#    OpenERP, Open Source Management Solution   
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    Copyright (c) 2008-2009 B2CK, Bertrand Chenal, Cedric Krier (D&D in lists)
 #    $Id$
@@ -30,40 +30,126 @@ import service
 import locale
 from interface import parser_view
 
+class field_record(object):
+    def __init__(self, name):
+        self.name = name
+    def get_client(self, *args):
+        return self.name
+    def get(self, *args):
+        return self.name
+    def get_state_attrs(self, *args, **argv):
+        return {}
+    def set_client(self,*args):
+        pass
+    def set(self,*args):
+        pass
+
+class group_record(object):
+    def __init__(self, value={}):
+        self.list_parent = None
+        self._children = []
+        self.value = value
+        self.id = False
+
+    def getChildren(self):
+        self._children.load()
+        return self._children
+
+    def setChildren(self, c):
+        self._children = c
+        return c
+    children = property(getChildren, setChildren)
+
+    def expr_eval(self, *args, **argv):
+        return True
+
+    def __setitem__(self, attr, val):
+        pass
+
+    def __getitem__(self, attr):
+        return field_record(self.value.get(attr, ''))
+
+def echo(fn):
+    def wrapped(self, *v, **k):
+        name = fn.__name__
+        res = fn(self, *v, **k)
+        print '%10s' % (name,), v, res
+        return res
+    return wrapped
+
+
+class list_record(object):
+    def __init__(self, mgroup, parent=None, context=None, domain=None):
+        self.mgroup = mgroup
+        self.mgroup.list_parent = parent
+        self.mgroup.list_group = self
+        self.parent = parent
+        self.context = context or {}
+        self.domain = domain
+        self.loaded = False
+        self.lst = []
+        self.load()
+
+    def load(self):
+        if self.loaded:
+            return
+        self.loaded = True
+        gb = self.context.get('group_by', False)
+        if gb:
+            records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group', 
+                self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
+            for r in records:
+                rec = group_record(r)
+                self.add(rec)
+                ctx = {'__domain': r.get('__domain', [])}
+                ctx.update(r.get('__context', {}))
+                l = list_record(self.mgroup, parent=rec, context=ctx, domain=self.domain)
+                rec.children = l
+
+        else:
+            if self.context.get('__domain'):
+                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'))
+                self.mgroup.load(ids)
+                res= []
+                for id in ids:
+                    res.append(self.mgroup.get_by_id(id))
+                self.add_list(res)
+            else:
+                self.lst = self.mgroup.models
+                for m in self.mgroup.models:
+                    m.list_group = self
+                    m.list_parent = self.parent
+                #self.add_list(self.mgroup.models)
+
+    def add(self, lst):
+        lst.list_parent = self.parent
+        lst.list_group = self
+        self.lst.append(lst)
+
+    def add_list(self, lst):
+        for l in lst:
+            self.add(l)
+
+    def __getitem__(self, i):
+        self.load()
+        return self.lst[i]
+
+    def __len__(self):
+        self.load()
+        return len(self.lst)
 
 class AdaptModelGroup(gtk.GenericTreeModel):
-
-    def __init__(self, model_group):
+    def __init__(self, model_group, context={}, domain=[]):
         super(AdaptModelGroup, self).__init__()
         self.model_group = model_group
-        self.models = model_group.models
-        self.last_sort = None
-        self.sort_asc = True
-        self.groupBY = False
-        self.o2M_group = self.model_group.one2many
-        self.parent_child = {}
-        self.parent_keys = []
-        self.old = []
+        self.context = context or {}
+        self.domain = domain
+        self.models = list_record(model_group, context=context, domain=self.domain)
         self.set_property('leak_references', False)
-        if self.o2M_group:
-            self.set_o2m_Models(self.models)
-
-
-    def set_o2m_Models(self,models):
-        for model in models:
-            if not model.group_by_parent:
-                self.parent_keys.insert(len(self.parent_child.keys()),model)
-                self.parent_child[model] = []
-            else:
-                self.parent_child[model.group_by_parent].append(model)
 
     def added(self, modellist, position):
-        self.groupBY = self.model_group.groupBY
         if modellist is self.models:
             model = self.models[position]
-            if self.groupBY:
-                self.set_o2m_Models([model])
-                self.old.append(model)
             self.emit('row_inserted', self.on_get_path(model),
                       self.get_iter(self.on_get_path(model)))
 
@@ -94,36 +180,30 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.invalidate_iters()
 
     def sort(self, name):
-        self.sort_asc = not (self.sort_asc and (self.last_sort == name))
-        self.last_sort = name
-        if self.sort_asc:
-            f = lambda x,y: cmp(x[name].get_client(x), y[name].get_client(y))
-        else:
-            f = lambda x,y: -1 * cmp(x[name].get_client(x), y[name].get_client(y))
-        self.models.sort(f)
-        for idx, row in enumerate(self.models):
-            iter = self.get_iter(idx)
-            self.row_changed(self.get_path(iter), iter)
+        pass
+        #self.sort_asc = not (self.sort_asc and (self.last_sort == name))
+        #self.last_sort = name
+        #if self.sort_asc:
+        #    f = lambda x,y: cmp(x[name].get_client(x), y[name].get_client(y))
+        #else:
+        #    f = lambda x,y: -1 * cmp(x[name].get_client(x), y[name].get_client(y))
+        #self.models.sort(f)
+        #for idx, row in enumerate(self.models):
+        #    iter = self.get_iter(idx)
+        #    self.row_changed(self.get_path(iter), iter)
 
     def saved(self, id):
         return self.model_group.writen(id)
 
     def __len__(self):
-        if self.groupBY or self.o2M_group:
-            length = 0
-            for val in self.parent_child.values():
-                length += len(val)
-            return length
-        else:
-            return len(self.models)
+        return len(self.models)
 
     ## Mandatory GenericTreeModel methods
 
     def on_get_flags(self):
-        if self.groupBY or self.o2M_group:
-             return gtk.TREE_MODEL_ITERS_PERSIST
-        else:
-            return gtk.TREE_MODEL_LIST_ONLY
+        if self.context.get('group_by', False):
+            return gtk.TREE_MODEL_ITERS_PERSIST
+        return gtk.TREE_MODEL_LIST_ONLY
 
     def on_get_n_columns(self):
         return 1
@@ -132,125 +212,52 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         return gobject.TYPE_PYOBJECT
 
     def on_get_path(self, iter):
-        if self.groupBY or self.o2M_group:
-             if iter.group_by_parent:
-                 return (self.parent_keys.index(iter.group_by_parent),self.parent_child[iter.group_by_parent].index(iter))
-             else:
-                 return (self.parent_keys.index(iter),)
-        else:
-            return self.models.index(iter)
+        iter2 = iter
+        result = []
+        while iter:
+            result.insert(0,iter.list_group.lst.index(iter))
+            iter = iter.list_parent
+        return tuple(result)
 
     def on_get_iter(self, path):
-        if self.groupBY or self.o2M_group:
-            if len(self.parent_child.keys()):
-                if isinstance(path, tuple) and len(path) == 1:
-                    path = path[0]
-                    if path < len(self.parent_keys):
-                        return self.parent_keys[path]
-                    else:
-                        return None
-                elif isinstance(path, int):
-                    path = path
-                    if path < len(self.parent_keys):
-                        return self.parent_keys[path]
-                    else:
-                        return None
-                elif isinstance(path, tuple) and len(path) > 1:
-                    return self.parent_child[self.parent_keys[path[0]]][path[1]]
-                else:
-                    return None
-            else:
-                return None
-        else:
-            if isinstance(path, tuple):
-                path = path[0]
-            if self.models:
-                if path<len(self.models):
-                    return self.models[path]
-                else:
-                    return None
-            else:
-                return None
+        mods = self.models
+        for p in path[:-1]:
+            mods = mods[p].children
+        if path[-1]<len(mods):
+            return mods[path[-1]]
+        return None
 
     def on_get_value(self, node, column):
         assert column == 0
-        if self.groupBY or self.o2M_group:
-            if node.group_by_parent:
-                return node
         return node
 
     def on_iter_next(self, node):
-        if self.groupBY or self.o2M_group:
-            try:
-                if node:
-                    if node.group_by_parent:
-                        index = self.parent_child[node.group_by_parent].index(node)
-                        return self.parent_child[node.group_by_parent][index + 1]
-                    else:
-                        index = self.parent_keys.index(node)
-                        if index + 1 < len(self.parent_keys):
-                            return self.parent_keys[index + 1]
-                        return None
-                else:
-                    return None
-            except IndexError:
-                return None
-        else:
-            try:
-                return self.on_get_iter(self.on_get_path(node) + 1)
-            except IndexError:
-                return None
+        try:
+            i = node.list_group.lst.index(node) + 1
+            return node.list_group[i]
+        except IndexError:
+            return None
 
     def on_iter_has_child(self, node):
-        if self.groupBY or self.o2M_group:
-             if not node.group_by_parent:
-                 return self.parent_child[node] != []
-             else:
-                 return False
-        else:
-            return False
+        return bool(getattr(node,'children',None))
 
     def on_iter_children(self, node):
-        if self.groupBY or self.o2M_group:
-            if node and self.parent_child:
-                return self.parent_child[node][0]
-            return None
-        else:
-            return None
+        return getattr(node,'children',[])[0]
 
     def on_iter_n_children(self, node):
-        if self.groupBY or self.o2M_group:
-            return len(self.parent_child[node])
-        else:
-            return 0
+        return len(getattr(node,'children',[]))
 
     def on_iter_nth_child(self, node, n):
-        if self.groupBY or self.o2M_group:
-            if node:
-                 if node.group_by_parent:
-                     return self.parent_child[node.group_by_parent][n]
-                 else:
-                     return self.parent_child[node][0]
-            else:
-                if self.parent_keys:
-                    return self.parent_keys[n]
-                return None
-        else:
-            if node is None and self.models:
-                return self.on_get_iter(0)
-            return None
+        if node is None:
+            return self.on_get_iter([n])
+        if n<len(getattr(node,'children',[])):
+            return getattr(node,'children',[])[n]
+        return None
 
     def on_iter_parent(self, node):
-        if self.groupBY or self.o2M_group:
-              if node.group_by_parent:
-                  return node.group_by_parent
-              else:
-                  return None
-        else:
-            return None
+        return node.list_parent
 
 class ViewList(parser_view):
-
     def __init__(self, window, screen, widget, children=None, buttons=None,
             toolbar=None, submenu=None):
         super(ViewList, self).__init__(window, screen, widget, children,
@@ -267,9 +274,6 @@ class ViewList(parser_view):
         self.widget_tree.screen = screen
         self.reload = False
         self.children = children
-        self.groupBY = False
-        self.o2m_group = False
-
         if children:
             hbox = gtk.HBox()
             self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
@@ -361,7 +365,6 @@ class ViewList(parser_view):
         return True
 
     def __hello(self, treeview, event, *args):
-
         if event.button in [1,3]:
             path = treeview.get_path_at_pos(int(event.x),int(event.y))
             selection = treeview.get_selection()
@@ -378,14 +381,13 @@ class ViewList(parser_view):
                 if path[1]._type == 'Button':
                     cell_button = path[1].get_cells()[0]
                     # Calling actions
-
                     attrs_check = self.attrs_set(m,path[1])
                     if attrs_check and m['state'].get(m) in path[1].attrs['states'].split(','):
                         m.get_button_action(self.screen,m.id,path[1].attrs)
                         self.screen.current_model = m
                         self.screen.reload()
                         treeview.screen.reload()
-
+                    
             else:
                 # Here it goes for right click
                 if path[1]._type=='many2one':
@@ -419,17 +421,11 @@ class ViewList(parser_view):
         value = obj._exec_action(act, data, context)
         return value
 
-
     def signal_record_changed(self, signal, *args):
         if not self.store:
             return
         if signal=='record-added':
-            if self.screen.models.models<>self.widget_tree.get_model().old and self.groupBY:
-                self.store = AdaptModelGroup(self.screen.models)
             self.store.added(*args)
-            if self.groupBY:
-                self.widget_tree.set_model(self.store)
-                self.groupBY = False
         elif signal=='record-removed':
             self.store.removed(*args)
         else:
@@ -452,9 +448,6 @@ class ViewList(parser_view):
         del self.widget
 
     def __sig_switch(self, treeview, *args):
-        if self.groupBY or self.o2m_group:
-            if len(args[0])<= 1:
-                return
         self.screen.row_activate(self.screen)
 
     def __select_changed(self, tree_sel):
@@ -462,19 +455,13 @@ class ViewList(parser_view):
             model, iter = tree_sel.get_selected()
             if iter:
                 path = model.get_path(iter)[0]
-                self.screen.current_model = model.models[path]
+                self.screen.current_model = model.on_get_iter(path)
         elif tree_sel.get_mode() == gtk.SELECTION_MULTIPLE:
             model, paths = tree_sel.get_selected_rows()
             if paths:
-                if self.groupBY or self.o2m_group:
-                    if len(paths[0]) > 1:
-                        self.screen.current_model = self.store.parent_child[self.store.parent_keys[paths[0][0]]][paths[0][1]]
-                    else:
-                        self.screen.current_model = self.store.parent_keys[paths[0][0]]
-                else:
-                    self.screen.current_model = model.models[paths[0][0]]
+                iter = model.on_get_iter(paths[0])
+                self.screen.current_model = iter
         self.update_children()
-
 
     def set_value(self):
         if self.widget_tree.editable:
@@ -487,17 +474,14 @@ class ViewList(parser_view):
     # has not changed -> better ergonomy. To test
     #
     def display(self):
-        self.groupBY = self.screen.models.groupBY
-        self.o2m_group = self.screen.models.one2many
-        if self.o2m_group:
-            self.groupBY = True
-        if self.groupBY and not self.o2m_group:
-            return
-        if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group or not self.groupBY:
-            self.store = AdaptModelGroup(self.screen.models)
+        if True or self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
+            if self.screen.context.get('group_by',False):
+                self.unset_editable()
+            self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
-            self.o2m_group =  False
+        else:
+            self.store.invalidate_iters()
         self.reload = False
         if not self.screen.current_model:
             #
@@ -531,23 +515,13 @@ class ViewList(parser_view):
     def sel_ids_get(self):
         def _func_sel_get(store, path, iter, ids):
             model = store.on_get_iter(path)
-            if self.groupBY or self.o2m_group:
-                if model.id and model.group_by_parent:
-                    ids.append(model.id)
-            else:
-                if model.id:
-                    ids.append(model.id)
+            if model.id:
+                ids.append(model.id)
         ids = []
         sel = self.widget_tree.get_selection()
         if sel:
             sel.selected_foreach(_func_sel_get, ids)
         return ids
-
-    def expand_row(self,path,open_all):
-        self.widget_tree.expand_row(path,open_all)
-
-    def collapse_row(self,path):
-        self.widget_tree.collapse_row(path)
 
     def sel_models_get(self):
         def _func_sel_get(store, path, iter, models):
@@ -562,13 +536,14 @@ class ViewList(parser_view):
         self.screen.on_change(callback)
 
     def unset_editable(self):
-        self.widget_tree.editable = False
+        self.set_editable(False)
+
+    def set_editable(self, value=True):
+        self.widget_tree.editable = value
         for col in self.widget_tree.get_columns():
             for renderer in col.get_cell_renderers():
                 if isinstance(renderer, gtk.CellRendererToggle):
-                    renderer.set_property('activatable', False)
-                elif not isinstance(renderer, gtk.CellRendererProgress):
-                    renderer.set_property('editable', False)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+                    renderer.set_property('activatable', value)
+                elif not isinstance(renderer, gtk.CellRendererProgress) and not isinstance(renderer, gtk.CellRendererPixbuf):
+                    renderer.set_property('editable', value)
 

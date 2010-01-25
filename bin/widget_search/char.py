@@ -36,27 +36,18 @@ class char(wid_int.wid_int):
         if attrs.get('context',False):
             self.widget.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("turquoise"))
             self.widget.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("turquoise"))
-            self.widget.set_tooltip_markup("This Field comes with a context")
-#        else:
-#            self.widget.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ffffff"))
-#            self.widget.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ffffff"))    
 
     def _value_get(self):
         s = self.widget.get_text()
-        ctx = None
-        if self.attrs.get('context',False):
-            ctx = self.attrs['context']
+        domain = []
+        context = {}
         if s:
-            if ctx:
-                rpc.session.context['search_context'] = tools.expr_eval(ctx, {'self':s})
-            return [(self.name,self.attrs.get('comparator','ilike'),s)]
-        else:
-            if ctx:
-                if rpc.session.context.get('search_context',False):
-                    for k in tools.expr_eval(ctx, {'self':False}).keys():
-                        if k in rpc.session.context['search_context'].keys():
-                            rpc.session.context['search_context'].pop(k)
-        return []
+            domain = [(self.name,self.attrs.get('comparator','ilike'),s)]
+            context = tools.expr_eval(self.attrs.get('context',"{}"), {'self': s})
+        return {
+            'domain':domain,
+            'context': context
+        }
 
     def _value_set(self, value):
         self.widget.set_text(value)
