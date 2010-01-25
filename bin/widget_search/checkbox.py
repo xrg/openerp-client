@@ -46,7 +46,7 @@ class checkbox(wid_int.wid_int):
         val = self.entry.get_text()
         domain = []
         context = {}
-        if s:
+        if val:
             domain = [(self.name,'=',int(val==_('Yes')))]
             context = tools.expr_eval(self.attrs.get('context',"{}"), {'self': val})
         return {
