@@ -378,6 +378,9 @@ class ViewList(parser_view):
             if (not path) or not path[0]:
                 return False
             m = model.models[path[0][0]]
+            if self.screen.context.get('group_by',False):
+                if not len(path[0])> 1: return False
+                m = m.children[path[0][-1]]
             # TODO: add menu cache
             if event.button == 1:
                 # first click on button
@@ -451,7 +454,8 @@ class ViewList(parser_view):
         del self.widget
 
     def __sig_switch(self, treeview, *args):
-        self.screen.row_activate(self.screen)
+        if not isinstance(self.screen.current_model,group_record):
+            self.screen.row_activate(self.screen)
 
     def __select_changed(self, tree_sel):
         if tree_sel.get_mode() == gtk.SELECTION_SINGLE:
