@@ -454,7 +454,8 @@ class ViewList(parser_view):
         del self.widget
 
     def __sig_switch(self, treeview, *args):
-        self.screen.row_activate(self.screen)
+        if not isinstance(self.screen.current_model,group_record):
+            self.screen.row_activate(self.screen)
 
     def __select_changed(self, tree_sel):
         if tree_sel.get_mode() == gtk.SELECTION_SINGLE:
