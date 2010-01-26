@@ -175,12 +175,12 @@ def setlang(lang=None):
         elif os.name == 'mac':
             encoding = 'UTF-8'
 
-        lang_enc = lang2 + '.' + encoding
+        lang_enc = str(lang2 + '.' + encoding)
         try:
             locale.setlocale(locale.LC_ALL, lang_enc)
-        except:
+        except Exception,e:
             logging.getLogger('translate').warning(
-                    _('Unable to set locale %s') % lang_enc)
+                    _('Unable to set locale %s: %s') % (lang_enc,e))
 
         lang = gettext.translation(APP, DIR, languages=[lang], fallback=True)
         lang.install(unicode=1)
