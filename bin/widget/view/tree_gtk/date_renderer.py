@@ -64,7 +64,9 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
         return self.renderer1.get_size(widget, cell_area)
 
     def on_render(self, window, widget, background_area, cell_area, expose_area, flags):
-        return self.renderer1.render(widget.window, widget, background_area, cell_area, expose_area, flags)
+        if not isinstance(window, gtk.gdk.Window):
+            print '*** bug', window
+        return self.renderer1.render(window, widget, background_area, cell_area, expose_area, flags)
 
     def on_activate(self, event, widget, path, background_area, cell_area, flags):
         return self.renderer1.activate(event, widget, path, background_area, cell_area, flags)
