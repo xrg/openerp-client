@@ -54,7 +54,7 @@ class Screen(signal_event.signal_event):
             view_type = ['tree', 'form']
         if views_preload is None:
             views_preload = {}
-        if domain is None:
+        if not domain:
             domain = []
         if default_get is None:
             default_get = {}
@@ -148,7 +148,7 @@ class Screen(signal_event.signal_event):
                         self.search_offset_next,
                         self.search_offset_previous, self.search_count,
                         self.execute_action, self.add_custom, self.name)
-                
+
         if active and show_search:
             self.screen_container.show_filter()
         else:
@@ -502,11 +502,11 @@ class Screen(signal_event.signal_event):
                 self.__current_view = len(self.views) - 1
             else:
                 self.__current_view = (self.__current_view + 1) % len(self.views)
-        
+
         self.fields = self.view_fields.get(self.__current_view, self.fields) # Switch the fields
         # TODO: maybe add_fields_custom is needed instead of add_fields on some cases
         self.models.add_fields(self.fields, self.models) # Switch the model fields too
-        
+
         widget = self.current_view.widget
         self.screen_container.set(self.current_view.widget)
         if self.current_model:
@@ -601,7 +601,7 @@ class Screen(signal_event.signal_event):
             self.__current_view = len(self.views) - 1
             self.current_view.display()
             self.screen_container.set(view.widget)
-        
+
         # Store the fields for this view (we will use them when switching views)
         self.view_fields[len(self.views)-1] = copy.deepcopy(self.fields)
 
@@ -614,7 +614,6 @@ class Screen(signal_event.signal_event):
             return False
 
     def new(self, default=True, context={}):
-        print 'Call NEW', context
         if self.current_view and self.current_view.view_type == 'tree' \
                 and not self.current_view.widget_tree.editable:
             self.switch_view(mode='form')
@@ -622,10 +621,8 @@ class Screen(signal_event.signal_event):
         ctx.update(context)
         model = self.models.model_new(default, self.domain, ctx)
         if (not self.current_view) or self.current_view.model_add_new or self.create_new:
-            print 'Adding', model.list_parent, model.list_group
             self.models.model_add(model, self.new_model_position())
         self.current_model = model
-        print model.list_group, model.list_parent
         self.current_model.validate_set()
         self.display()
         if self.current_view:
