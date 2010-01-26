@@ -379,7 +379,8 @@ class ViewList(parser_view):
                 return False
             m = model.models[path[0][0]]
             if self.screen.context.get('group_by',False):
-                m = model.models[0].children.lst[path[0][-1]]
+                if not len(path[0])> 1: return False
+                m = m.children[path[0][-1]]
             # TODO: add menu cache
             if event.button == 1:
                 # first click on button

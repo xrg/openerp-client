@@ -261,13 +261,13 @@ class win_search(object):
     def find(self, widget=None, *args):
         limit = self.get_limit()
         offset = self.offset
-        if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset) and not self.first and widget:
+        if (self.old_search == self.form.value.get('domain',[])) and (self.old_limit==limit) and (self.old_offset==offset) and not self.first and widget:
             self.win.response(gtk.RESPONSE_OK)
             return False
         self.first = False
         self.old_offset = offset
         self.old_limit = limit
-        v = self.form.value
+        v = self.form.value.get('domain',[])
         v_keys = map(lambda x: x[0], v)
         v += self.domain
         try:
@@ -277,7 +277,7 @@ class win_search(object):
             self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
 
         self.reload()
-        self.old_search = self.form.value
+        self.old_search = self.form.value.get('domain',[])
         self.win.set_title(self.title_results % len(self.ids))
         if len(self.ids) < limit:
             self.search_count = len(self.ids)
