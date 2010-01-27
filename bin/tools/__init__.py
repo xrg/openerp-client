@@ -42,7 +42,7 @@ def launch_browser(url):
     import webbrowser
     import sys
     if sys.platform == 'win32':
-        webbrowser.open(url)
+        webbrowser.open(url.decode('utf-8'))
     else:
         import os
         pid = os.fork()
