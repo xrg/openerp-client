@@ -347,6 +347,7 @@ class one2many_list(interface.widget_interface):
             return False
         super(one2many_list, self).display(model, model_field)
         new_models = model_field.get_client(model)
+        print new_models, self.screen.models
         if self.screen.models != new_models:
             self.screen.models_set(new_models)
             if (self.screen.current_view.view_type=='tree') and self.screen.editable_get():

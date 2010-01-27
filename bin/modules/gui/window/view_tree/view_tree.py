@@ -36,11 +36,11 @@ import rpc
 import parse
 
 import tools
-import tools.datetime_util
+from tools import datetime_util
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
-LDFMT = tools.datetime_util.get_date_format()
+LDFMT = datetime_util.get_date_format()
 
 # BUG: ids = []
 #
