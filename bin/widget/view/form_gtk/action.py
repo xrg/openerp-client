@@ -40,7 +40,7 @@ class action(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-        self.act_id=attrs['name']
+        self.act_id = int(attrs['name'])        
         res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [self.act_id], ['type'], rpc.session.context)
         if not res:
             raise Exception, 'ActionNotFound'
