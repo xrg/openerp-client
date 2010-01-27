@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:41+0000\n"
-"Last-Translator: TruongSinh Tran <truongsinh.tran@nha297.com>\n"
+"PO-Revision-Date: 2010-01-26 12:50+0000\n"
+"Last-Translator: hoangan <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-01-27 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -843,7 +843,7 @@ msgstr "Không thể tạo biểu đồ"
 
 #: bin/widget/view/form.py:170
 msgid "You must save this record to use the relate button !"
-msgstr "Bạn phải lưu lại bản ghi này để sử dụng nút lệnh liên quan"
+msgstr "Bạn phải lưu lại để sử dụng nút lệnh liên quan"
 
 #: bin/widget/view/form.py:182
 msgid "You must select a record to use the relate button !"
@@ -853,7 +853,7 @@ msgstr ""
 #: bin/widget/view/form_gtk/parser.py:672
 #: bin/widget/view/form_gtk/parser.py:729
 msgid "No other language available!"
-msgstr "Không có ngôn ngữ nào khác có sẵn"
+msgstr "Không có ngôn ngữ  có sẵn nào khác"
 
 #: bin/widget/view/form.py:207 bin/widget/view/form_gtk/parser.py:574
 #: bin/widget/view/form_gtk/parser.py:678
@@ -884,7 +884,7 @@ msgstr "Tạo tài nguyên mới"
 
 #: bin/widget/view/form_gtk/reference.py:93
 msgid "Search / Open a resource"
-msgstr "Tìm kiếm/ Mở tài nguyên"
+msgstr "Tiềm kiếm / Xem chi tiết"
 
 #: bin/widget/view/form_gtk/many2one.py:156
 msgid "Open this resource"

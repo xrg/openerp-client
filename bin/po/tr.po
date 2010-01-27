@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:40+0000\n"
-"Last-Translator: Harry (Open ERP) <hmo@tinyerp.com>\n"
+"PO-Revision-Date: 2010-01-26 23:14+0000\n"
+"Last-Translator: Oktay Altunergil <oktaya@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-01-27 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -54,11 +54,12 @@ msgstr "alternatif konfigirasyon dosyası belirle"
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
 msgstr ""
+"Temel hata ayıklamayı faal hale getir. '--log-level=debug' ile aynıdır."
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "log seviyesini belirtin: %s"
 
 #: bin/options.py:112
 msgid "specify the user login"
@@ -217,7 +218,7 @@ msgstr ""
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Hata"
 
 #: bin/common/common.py:599
 msgid "Open with..."
@@ -344,11 +345,11 @@ msgstr "OpenERP Arama: %s (%%d sonuç(lar))"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "Dosya boş !"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "İçealım !"
 
 #: bin/modules/gui/window/win_import.py:57
 msgid "XML-RPC error !"
@@ -356,7 +357,7 @@ msgstr "XML-RPC hatası !"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "Bir obje içe alındı."
 
 #: bin/modules/gui/window/win_import.py:64
 #, python-format
@@ -365,7 +366,7 @@ msgstr "%d kadar objeler içeri aktarıldı !"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "İçe alım hatası. !"
 
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
@@ -494,7 +495,7 @@ msgstr "Geçersiz form, kırmızı alanları doğrulayın !"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "Hata !"
 
 #: bin/modules/gui/window/form.py:328 bin/modules/gui/window/form.py:423
 msgid ""
@@ -575,10 +576,12 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"Arayüzün varsayılan dili değişti. Arayüzü kendi dilinizde kullanmak için "
+"istemciyi yeniden başlatmayı unutmayınız."
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "Varsayılan dil değişti !"
 
 #: bin/modules/gui/main.py:87 bin/modules/gui/main.py:436
 #: bin/modules/gui/main.py:1445
@@ -597,7 +600,7 @@ msgstr "Değiş"
 
 #: bin/modules/gui/main.py:109 bin/openerp.glade:7011
 msgid "Super Administrator Password:"
-msgstr "Üst Yönetici Şifresi:"
+msgstr "Üst Yönetici Parolası:"
 
 #: bin/modules/gui/main.py:172 bin/modules/action/wizard.py:137
 msgid "OpenERP Computing"
@@ -622,19 +625,19 @@ msgstr ""
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "Sözleşme No:"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "Sözleşme Parolası:"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Halihazırda son sürümü kullanıyorsunuz"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Aşağıdaki güncellemeler mevcuttur:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
@@ -705,7 +708,7 @@ msgstr "Veritabanı zaten var !"
 #: bin/modules/gui/main.py:660 bin/modules/gui/main.py:1342
 #: bin/modules/gui/main.py:1361 bin/modules/gui/main.py:1437
 msgid "Bad database administrator password !"
-msgstr "Geçersiz veritabanı yöneticisi şifresi !"
+msgstr "Geçersiz veritabanı yöneticisi parolası !"
 
 #: bin/modules/gui/main.py:662 bin/modules/gui/main.py:669
 msgid "Error during database creation !"
@@ -826,7 +829,7 @@ msgstr "Veritabanı geri yüklenemiyor."
 #: bin/modules/gui/main.py:1402
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr "Onaylama şifresi yeni şifre ile uyuşmuyor, işlem iptal edildi!"
+msgstr "Onaylama parolası yeni parola ile uyuşmuyor, işlem iptal edildi!"
 
 #: bin/modules/gui/main.py:1404
 msgid "Validation Error."
@@ -834,7 +837,7 @@ msgstr "Doğrulama Hatası."
 
 #: bin/modules/gui/main.py:1412
 msgid "Could not change the Super Admin password."
-msgstr "Super Admin şifresi değiştirilemiyor."
+msgstr "Üst Admin parolası değiştirilemiyor."
 
 #: bin/modules/gui/main.py:1413
 msgid "Bad password provided !"
@@ -1135,7 +1138,7 @@ msgstr "Kullanıcı:"
 
 #: bin/openerp.glade:146 bin/openerp.glade:6430 bin/openerp.glade:6730
 msgid "Password:"
-msgstr "Şifre:"
+msgstr "Parola:"
 
 #: bin/openerp.glade:255
 msgid "_File"
@@ -1383,7 +1386,7 @@ msgstr "_Eklenti Çalıştır"
 
 #: bin/openerp.glade:1107
 msgid "_Shortcuts"
-msgstr "_Kıssayollar"
+msgstr "_Kısa Yollar"
 
 #: bin/openerp.glade:1115
 msgid "_Help"
@@ -1407,7 +1410,7 @@ msgstr "_İpuçları"
 
 #: bin/openerp.glade:1188
 msgid "Keyboard Shortcuts"
-msgstr "Klavye Kıssayolları"
+msgstr "Klavye Kısayolları"
 
 #: bin/openerp.glade:1201
 msgid "_License"
@@ -1499,7 +1502,7 @@ msgstr "OpenERP - Ağaç Kaynakları"
 
 #: bin/openerp.glade:1634
 msgid "Shortcuts"
-msgstr "Kıssayollar"
+msgstr "Kısayollar"
 
 #: bin/openerp.glade:1743
 msgid "OpenERP - Forms"
@@ -1806,7 +1809,7 @@ msgstr "Merhaba Dünya !"
 
 #: bin/openerp.glade:4825
 msgid "Keyboard shortcuts"
-msgstr "Klavye Kıssayolları"
+msgstr "Klavye kısayolları"
 
 #: bin/openerp.glade:4847
 msgid "<b>Shortcuts for OpenERP</b>"
@@ -1914,7 +1917,7 @@ msgstr "<Ctrl> + O"
 
 #: bin/openerp.glade:5243
 msgid "Main Shortcuts"
-msgstr "Ana Kıssayollar"
+msgstr "Ana Kısayollar"
 
 #: bin/openerp.glade:5260
 msgid "F2"
@@ -1926,7 +1929,7 @@ msgstr "<b>ilişkili alan Kıssayolları</b>"
 
 #: bin/openerp.glade:5288
 msgid "<b>Shortcuts in text entries</b>"
-msgstr "<b>Yazı Kıssayolları</b>"
+msgstr "<b>Yazı Kısayolları</b>"
 
 #: bin/openerp.glade:5301
 msgid "Open current field"
@@ -2110,8 +2113,9 @@ msgid ""
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
-"Bu veritabanı yönetiçisi şifresidir. Bu bir OpenERP kullanıcısı değildir, "
-"Sadece üst yöneticidir.Eğer değişmezseniz kurulumdan sonra şifre 'admin' dir"
+"Bu veritabanı yönetiçisi parolasıdır. Bu bir OpenERP kullanıcısı değildir, "
+"Sadece üst yöneticidir. Eğer değişmezseniz kurulumdan sonra parola 'admin' "
+"dir"
 
 #: bin/openerp.glade:7043
 msgid "(<i>admin</i>, by default)"
@@ -2146,11 +2150,13 @@ msgstr "Varsayılan Dil:"
 msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
 "new database."
-msgstr "Bu yeni veritabanınızın '<i>yönetici</i>'kullanıcının şifresidir.."
+msgstr ""
+"Bu yeni veritabanınızda oluşturulacak '<i>yönetici</i>' kullanıcının "
+"parolasıdır."
 
 #: bin/openerp.glade:7151
 msgid "Administrator Password:"
-msgstr "Yönetici Şifresi:"
+msgstr "Yönetici Parolası:"
 
 #: bin/openerp.glade:7163
 msgid ""
@@ -2162,7 +2168,7 @@ msgstr ""
 
 #: bin/openerp.glade:7165
 msgid "Confirm Password:"
-msgstr "Şifre Onayla:"
+msgstr "Parolayı Doğrula:"
 
 #: bin/openerp.glade:7256
 msgid ""
@@ -2182,23 +2188,23 @@ msgstr "Demo Data Aç:"
 
 #: bin/openerp.glade:7316
 msgid "Change password"
-msgstr "Şifre Değiş:"
+msgstr "Parola değiştir"
 
 #: bin/openerp.glade:7333
 msgid "<b>Change your super admin password</b>"
-msgstr "<b>Üst Yönetim Şifresini Değiş</b>"
+msgstr "b>Üst yönetim parolanızı değiştirin</b>"
 
 #: bin/openerp.glade:7486
 msgid "Old password:"
-msgstr "Eski Şifre:"
+msgstr "Eski Parola:"
 
 #: bin/openerp.glade:7499
 msgid "New password:"
-msgstr "Yeni Şifre:"
+msgstr "Yeni parola:"
 
 #: bin/openerp.glade:7512
 msgid "New password confirmation:"
-msgstr "Yeni Şifre Tekrar:"
+msgstr "Yeni parola onayı:"
 
 #: bin/openerp.glade:7571
 msgid "OpenERP Message"
@@ -2333,7 +2339,7 @@ msgstr "<i>_Detaylar</i>"
 
 #: bin/win_error.glade:398
 msgid "gtk-close"
-msgstr "gtk-kapat"
+msgstr "gtk-close"
 
 #: bin/dia_survey.glade:32
 msgid ""
@@ -2364,7 +2370,7 @@ msgstr "Sizin Kuralınız:"
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "Çalışanlar:"
 
 #: bin/dia_survey.glade:546
 msgid "Country:"
@@ -2372,7 +2378,7 @@ msgstr "Ülke"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "Şehir:"
 
 #: bin/dia_survey.glade:586
 msgid "System:"
@@ -2412,7 +2418,7 @@ msgstr "Telefon / Cep:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "E-Posta:"
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
@@ -2420,11 +2426,11 @@ msgstr "İsminiz:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #, python-format
 #~ msgid ""
