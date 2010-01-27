@@ -32,13 +32,13 @@ def expr_eval(string, context={}):
     context['time'] = time
     context['datetime'] = datetime
     if isinstance(string, basestring):
-	try:
+        try:
             string = string.replace("'active_id'","active_id")
             temp = eval(string, context)
-	except:
-	    import sys
-	    sys.stderr.write('Error %s\n%s\n' %(sys.exc_info(),str(context)))
-	    return {}
+        except:
+            import sys
+            sys.stderr.write('Error %s\n%s\n' %(sys.exc_info(),str(context)))
+            return {}
         return temp
     else:
         return string
@@ -69,37 +69,36 @@ def node_attributes(node):
             result[attrs.item(i).localName] = eval(attrs.item(i).nodeValue)
     return result
 
-#FIXME use spaces
 def calc_condition(self,model,con):
     if model and (con[0] in model.mgroup.fields):
         val = model[con[0]].get(model)
         if con[1]=="=" or con[1]=="==":
             if val==con[2]:
-				return True
+                return True
         elif con[1]=="!=" or con[1]=="<>":
-			if val!=con[2]:
-				return True
+            if val!=con[2]:
+                return True
         elif con[1]=="<":
             if val<con[2]:
-				return True
+                return True
         elif con[1]==">":
-			if val>con[2]:
-				return True
+            if val>con[2]:
+                return True
         elif con[1]=="<=":
-			if val<=con[2]:
-				return True
+            if val<=con[2]:
+                return True
         elif con[1]==">=":
-			if val>=con[2]:
-				return True
+            if val>=con[2]:
+                return True
         elif con[1].lower()=="in":
-			for cond in con[2]:
-				if val == cond:
-					return True
+            for cond in con[2]:
+                if val == cond:
+                    return True
         elif con[1].lower()=="not in":
-			for cond in con[2]:
-				if val == cond:
-					return False
-			return True
+            for cond in con[2]:
+                if val == cond:
+                    return False
+                return True
         return False
     
 def call_log(fun):
