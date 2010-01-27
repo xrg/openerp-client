@@ -481,8 +481,9 @@ class ViewList(parser_view):
     # has not changed -> better ergonomy. To test
     #
     def display(self):
-        if True or self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
+        if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
             if self.screen.context.get('group_by',False):
+                self.screen.models.models.clear()
                 for col in self.widget_tree.get_columns():
                     if col.name == self.screen.context.get('group_by',False):
                         if not col.get_visible():
@@ -566,6 +567,12 @@ class ViewList(parser_view):
 
     def unset_editable(self):
         self.set_editable(False)
+
+    def expand_row(self, path, open_all):
+        self.widget_tree.expand_row(path, open_all)
+
+    def collapse_row(self, path):
+        self.widget_tree.collapse_row(path)
 
     def set_editable(self, value=True):
         self.widget_tree.editable = value
