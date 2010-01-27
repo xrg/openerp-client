@@ -32,6 +32,7 @@ from gtk import glade
 from widget.model.group import ModelRecordGroup
 
 from widget.view.screen_container import screen_container
+from widget.view.list import group_record
 import widget_search
 
 import signal_event
@@ -776,6 +777,11 @@ class Screen(signal_event.signal_event):
 
     def display_next(self):
         self.current_view.set_value()
+        if self.context.get('group_by',False):
+            if isinstance(self.current_model, group_record):
+                path = self.current_view.store.on_get_path(self.current_model)
+                self.current_view.expand_row(path, False)
+                self.current_model = self.current_model.children[-1]
         if self.current_model in self.models.models:
             idx = self.models.models.index(self.current_model)
             idx = (idx+1) % len(self.models.models)
@@ -789,6 +795,14 @@ class Screen(signal_event.signal_event):
 
     def display_prev(self):
         self.current_view.set_value()
+        if self.context.get('group_by',False):
+            if self.current_model.list_parent:
+                if self.current_model.list_parent.children.lst.index(self.current_model) == 0:
+                    self.current_model = self.current_model.list_parent
+            if isinstance(self.current_model, group_record):
+                path = self.current_view.store.on_get_path(self.current_model)
+                self.current_view.collapse_row(path)
+                self.current_model = self.current_model.children[0]
         if self.current_model in self.models.models:
             idx = self.models.models.index(self.current_model)-1
             if idx<0:
