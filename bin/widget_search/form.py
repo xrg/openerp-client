@@ -387,6 +387,16 @@ class form(wid_int.wid_int):
         for x in self.widgets.values() + self.custom_widgets.values():
             domain += x[0].value.get('domain',[])
             context.update( x[0].value.get('context',{}) )
+            
+        if domain:
+            if len(domain)>1 and domain[-2] in ['&','|']:
+                if len(domain) == 2:
+                    domain = [domain[1]]
+                else:
+                    res1 = domain[:-2]
+                    res2 = domain[-1:]
+                    domain = res1 + res2
+                                
         return {'domain':domain, 'context':context}
 
     def _value_set(self, value):

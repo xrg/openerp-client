@@ -229,17 +229,9 @@ class Screen(signal_event.signal_event):
             v += calendar_domain
         filter_keys = []
 
-        for ele in v:
+        for ele in self.domain:
             if isinstance(ele,tuple):
                 filter_keys.append(ele[0])
-
-        for element in self.domain:
-            if not isinstance(element,tuple): # Filtering '|' symbol
-                v.append(element)
-            else:
-                (key, op, value) = element
-                if key not in filter_keys and not (key=='active' and self.context.get('active_test', False)):
-                    v.append((key, op, value))
 
         if self.latest_search != v:
             self.offset = 0
