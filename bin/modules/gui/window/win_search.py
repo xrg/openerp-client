@@ -184,7 +184,10 @@ class win_search(object):
 
         self.model_name = model
 
-        view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'search', self.context)
+        if rpc.session.server_version[:2] >= (5, 1):
+            view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'search', self.context)
+        else:
+            view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'form', self.context)
         if view_form['type'] == 'form':
             def encode(s):
                 if isinstance(s, unicode):
