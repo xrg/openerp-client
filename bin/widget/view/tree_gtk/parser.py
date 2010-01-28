@@ -107,6 +107,8 @@ class parser_tree(interface.parser_interface):
                     col_label.set_tooltip_markup('<span foreground=\"darkred\">'+tools.to_xml(node_attrs['string'])+' :</span>\n'+tools.to_xml(node_attrs['help']))
                 col_label.show()
                 col.set_widget(col_label)
+                col.set_min_width(20)
+                col.set_max_width(20)
 
                 treeview.append_column(col)
                 col._type = 'Button'
