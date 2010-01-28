@@ -154,10 +154,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     def cancel(self):
         pass
 
-    def changed_all(self, *args):
-        self.emit('row_deleted', position)
-        self.invalidate_iters()
-
     def move(self, path, position):
         idx = path[0]
         self.model_group.model_move(self.models[idx], position)
