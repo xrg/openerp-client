@@ -101,14 +101,23 @@ class calendar(wid_int.wid_int):
         
 
     def _value_get(self):
-        res = []
-        val = self._date_get(self.entry1.get_text())
-        if val:
-            res.append((self.name, '>=', val))
-        val = self._date_get(self.entry2.get_text())
-        if val:
-            res.append((self.name, '<=', val))
-        return {'domain':res}
+        val = {'domain': [], 'context':{}}
+        val1 = self._date_get(self.entry1.get_text())
+        val2 = self._date_get(self.entry2.get_text())
+        if self.attrs.get('context', False):
+            val['context'] = eval(self.attrs['context'], {'self': val1, 'self2': val2})
+        if not self.attrs.get('domain', False):
+            res = []
+            val2 = self._date_get(self.entry1.get_text())
+            if val2:
+                res.append((self.name, '>=', val2))
+            val2 = self._date_get(self.entry2.get_text())
+            if val2:
+                res.append((self.name, '<=', val2))
+            val['domain'] = res
+        else:
+            val['domain'] = eval(self.attrs['domain'], {'self': val1, 'self2': val2})
+        return val
 
     def _value_set(self, value):
         self.entry1.set_text(value)

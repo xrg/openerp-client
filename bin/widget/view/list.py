@@ -179,19 +179,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.model_group.model_remove(self.models[idx])
         self.invalidate_iters()
 
-    def sort(self, name):
-        pass
-        #self.sort_asc = not (self.sort_asc and (self.last_sort == name))
-        #self.last_sort = name
-        #if self.sort_asc:
-        #    f = lambda x,y: cmp(x[name].get_client(x), y[name].get_client(y))
-        #else:
-        #    f = lambda x,y: -1 * cmp(x[name].get_client(x), y[name].get_client(y))
-        #self.models.sort(f)
-        #for idx, row in enumerate(self.models):
-        #    iter = self.get_iter(idx)
-        #    self.row_changed(self.get_path(iter), iter)
-
     def saved(self, id):
         return self.model_group.writen(id)
 

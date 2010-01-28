@@ -54,9 +54,14 @@ def send_keys(renderer, editable, position, treeview):
     if isinstance(editable, gtk.ComboBoxEntry):
         editable.connect('changed', treeview.on_editing_done)
 
-def sort_model(column, treeview):
-    model = treeview.get_model()
-    model.sort(column.name)
+def sort_model(column, screen):
+    if screen.sort == column.name:
+        screen.sort = column.name+' desc'
+    else:
+        screen.sort = column.name
+    screen.offset = 0
+    screen.search_filter()
+    #screen.display()
 
 class parser_tree(interface.parser_interface):
     def parse(self, model, root_node, fields):
@@ -165,7 +170,7 @@ class parser_tree(interface.parser_interface):
                     width = twidth.get(fields[fname]['type'], 100)
                 col.set_min_width(width)
                 if not treeview.sequence:
-                    col.connect('clicked', sort_model, treeview)
+                    col.connect('clicked', sort_model, self.screen)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 visval = eval(str(fields[fname].get('invisible', 'False')), {'context':self.screen.context})
