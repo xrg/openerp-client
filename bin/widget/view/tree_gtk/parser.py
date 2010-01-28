@@ -347,6 +347,8 @@ class GenericDate(Char):
             date = DT.datetime.strptime(value[:10], self.server_format)
             return date.strftime(self.display_format)
         except:
+            if self.treeview.screen.context.get('group_by',False):
+                return value
             return ''
 
     def value_from_text(self, model, text):
