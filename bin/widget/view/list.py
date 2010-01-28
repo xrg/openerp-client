@@ -489,9 +489,11 @@ class ViewList(parser_view):
                         if not col.get_visible():
                             col.set_visible(not col.get_visible())
                             self.col_visible = True
+                        pos = self.widget_tree.get_columns().index(col) - 1
+                        if not pos == -1:
+                            self.last_col = self.widget_tree.get_columns()[pos]
                         self.widget_tree.move_column_after(col,None)
                         break
-                    self.last_col = col
                 if self.widget_tree.editable:
                     self.unset_editable()
                     self.tree_editable = True
@@ -503,10 +505,11 @@ class ViewList(parser_view):
                         col = self.widget_tree.get_columns()[pos]
                         col.set_visible(not self.col_visible)
                         self.col_visible = False
-                    if self.tree_editable:
-                        self.set_editable()
-                        self.tree_editable = False
                     self.last_col = None
+                if self.tree_editable:
+                    self.set_editable()
+                    self.tree_editable = False
+
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
