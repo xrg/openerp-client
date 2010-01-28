@@ -486,6 +486,9 @@ class ViewList(parser_view):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
             if self.screen.context.get('group_by',False):
                 self.screen.models.models.clear()
+                if self.last_col:
+                    self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col)
+                    self.last_col = None
                 for col in self.widget_tree.get_columns():
                     if col.name == self.screen.context.get('group_by',False):
                         if not col.get_visible():
@@ -493,7 +496,7 @@ class ViewList(parser_view):
                             self.col_visible = True
                         pos = self.widget_tree.get_columns().index(col) - 1
                         if not pos == -1:
-                            self.last_col = self.widget_tree.get_columns()[pos]
+                            self.last_col = self.widget_tree.get_column(pos)
                         self.widget_tree.move_column_after(col,None)
                         break
                 if self.widget_tree.editable:
@@ -501,10 +504,10 @@ class ViewList(parser_view):
                     self.tree_editable = True
             else:
                 if self.last_col:
-                    self.widget_tree.move_column_after(self.widget_tree.get_columns()[0],self.last_col)
+                    self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col)
                     if self.col_visible:
                         pos = self.widget_tree.get_columns().index(self.last_col) + 1
-                        col = self.widget_tree.get_columns()[pos]
+                        col = self.widget_tree.get_column(pos)
                         col.set_visible(not self.col_visible)
                         self.col_visible = False
                     self.last_col = None
