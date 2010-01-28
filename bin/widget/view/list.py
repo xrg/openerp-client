@@ -148,10 +148,9 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.set_property('leak_references', False)
 
     def added(self, modellist, position):
-        if modellist is self.models:
-            model = self.models[position]
-            self.emit('row_inserted', self.on_get_path(model),
-                      self.get_iter(self.on_get_path(model)))
+        model = modellist[position]
+        self.emit('row_inserted', self.on_get_path(model),
+                  self.get_iter(self.on_get_path(model)))
 
     def cancel(self):
         pass
@@ -278,7 +277,7 @@ class ViewList(parser_view):
 
         self.display()
 
-        self.widget_tree.connect('button-press-event', self.__hello)
+        self.widget_tree.connect('button-press-event', self.__contextual_menu)
         self.widget_tree.connect_after('row-activated', self.__sig_switch)
         selection = self.widget_tree.get_selection()
         selection.set_mode(gtk.SELECTION_MULTIPLE)
@@ -356,7 +355,7 @@ class ViewList(parser_view):
                         return False
         return True
 
-    def __hello(self, treeview, event, *args):
+    def __contextual_menu(self, treeview, event, *args):
         if event.button in [1,3]:
             path = treeview.get_path_at_pos(int(event.x),int(event.y))
             selection = treeview.get_selection()

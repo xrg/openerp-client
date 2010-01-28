@@ -39,6 +39,8 @@ class screen_container(object):
         self.vbox.pack_end(self.sw)
         self.filter_vbox = None
         self.button = None
+        self.but_previous = None
+        self.but_next = None
 
     def widget_get(self):
         return self.vbox
