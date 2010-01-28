@@ -73,7 +73,6 @@ def echo(fn):
     def wrapped(self, *v, **k):
         name = fn.__name__
         res = fn(self, *v, **k)
-        print '%10s' % (name,), v, res
         return res
     return wrapped
 

@@ -134,7 +134,6 @@ class Screen(signal_event.signal_event):
     readonly = property(readonly_get, readonly_set)
 
     def search_active(self, active=True, show_search=True):
-
         if active:
             if not self.filter_widget:
                 if not self.search_view:
@@ -239,7 +238,6 @@ class Screen(signal_event.signal_event):
             self.offset = 0
         offset=self.offset
         self.latest_search = v
-        print 'search', self.sort
         ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, self.sort, self.context)
         if len(ids) < limit:
             self.search_count = len(ids)
@@ -247,7 +245,6 @@ class Screen(signal_event.signal_event):
             self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', v, self.context)
         self.update_scroll()
         self.clear()
-        print ids
         self.load(ids)
         return True
 
