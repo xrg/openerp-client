@@ -220,6 +220,8 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         return tuple(result)
 
     def on_get_iter(self, path):
+        if not isinstance(path,(list, tuple)):
+            path = (path,)
         mods = self.models
         for p in path[:-1]:
             mods = mods[p].children
@@ -509,7 +511,6 @@ class ViewList(parser_view):
                 if self.tree_editable:
                     self.set_editable()
                     self.tree_editable = False
-
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
