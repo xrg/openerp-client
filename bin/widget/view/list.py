@@ -26,6 +26,7 @@ import gtk
 import tools
 
 import rpc
+from rpc import RPCProxy
 import service
 import locale
 from interface import parser_view
@@ -321,14 +322,27 @@ class ViewList(parser_view):
         model = treeview.get_model()
         data = eval(selection.data)
         drop_info = treeview.get_dest_row_at_pos(x, y)
+        group_by = self.screen.context.get('group_by',False)
         if drop_info:
             path, position = drop_info
-            idx = path[0]
-            if position in (gtk.TREE_VIEW_DROP_BEFORE,
-                    gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
-                model.move(data, idx)
+            if group_by:
+                target_group = model.models[path[0]]
+                target_domain = filter(lambda x: x[0] == group_by, target_group.children.context.get('__domain',[]))[0]
+                source_group = model.models[data[0]]
+                source_group_child = source_group.children.lst[data[1]]
+                rpc = RPCProxy(source_group_child.resource)
+                rpc.write([source_group_child.id], {target_domain[0]:target_domain[2]})
+                self.reload = True
+                self.screen.reload()
+                self.expand_row((data[0],))
+                self.expand_row((path[0],))
             else:
-                model.move(data, idx + 1)
+                idx = path[0]
+                if position in (gtk.TREE_VIEW_DROP_BEFORE,
+                        gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
+                    model.move(data, idx)
+                else:
+                    model.move(data, idx + 1)
         context.drop_finish(False, etime)
         if treeview.sequence:
             self.screen.models.set_sequence(field='sequence')
@@ -556,7 +570,7 @@ class ViewList(parser_view):
     def unset_editable(self):
         self.set_editable(False)
 
-    def expand_row(self, path, open_all):
+    def expand_row(self, path, open_all = False):
         self.widget_tree.expand_row(path, open_all)
 
     def collapse_row(self, path):
