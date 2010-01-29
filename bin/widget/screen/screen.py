@@ -780,7 +780,7 @@ class Screen(signal_event.signal_event):
         if self.context.get('group_by',False):
             if isinstance(self.current_model, group_record):
                 path = self.current_view.store.on_get_path(self.current_model)
-                self.current_view.expand_row(path, False)
+                self.current_view.expand_row(path)
                 self.current_model = self.current_model.children[-1]
         if self.current_model in self.models.models:
             idx = self.models.models.index(self.current_model)
