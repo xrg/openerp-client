@@ -69,6 +69,7 @@ class Screen(signal_event.signal_event):
         self.hastoolbar = hastoolbar
         self.hassubmenu = hassubmenu
         self.default_get=default_get
+        self.sort = False
         if not row_activate:
             self.row_activate = lambda self,screen=None: self.switch_view(screen, 'form')
         else:
@@ -133,7 +134,6 @@ class Screen(signal_event.signal_event):
     readonly = property(readonly_get, readonly_set)
 
     def search_active(self, active=True, show_search=True):
-
         if active:
             if not self.filter_widget:
                 if not self.search_view:
@@ -158,15 +158,16 @@ class Screen(signal_event.signal_event):
     def update_scroll(self, *args):
         offset=self.offset
         limit = self.screen_container.get_limit()
-        if offset<=0:
-            self.screen_container.but_previous.set_sensitive(False)
-        else:
-            self.screen_container.but_previous.set_sensitive(True)
-
-        if offset+limit>=self.search_count:
-            self.screen_container.but_next.set_sensitive(False)
-        else:
-            self.screen_container.but_next.set_sensitive(True)
+        if self.screen_container.but_previous:
+            if offset<=0:
+                self.screen_container.but_previous.set_sensitive(False)
+            else:
+                self.screen_container.but_previous.set_sensitive(True)
+        if self.screen_container.but_next:
+            if offset+limit>=self.search_count:
+                self.screen_container.but_next.set_sensitive(False)
+            else:
+                self.screen_container.but_next.set_sensitive(True)
 
     def search_offset_next(self, *args):
         offset=self.offset
@@ -237,7 +238,7 @@ class Screen(signal_event.signal_event):
             self.offset = 0
         offset=self.offset
         self.latest_search = v
-        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, 0, self.context)
+        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, self.sort, self.context)
         if len(ids) < limit:
             self.search_count = len(ids)
         else:
@@ -751,10 +752,9 @@ class Screen(signal_event.signal_event):
 
     def load(self, ids):
         limit = self.screen_container.get_limit()
+        # I am not sure this is usefull ? The limit is computed by the search ?
         if len(ids) >= limit:
             tot_rec = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', [], self.context)
-            #if limit < tot_rec:
-            #    self.screen_container.fill_limit_combo(tot_rec)
         self.models.load(ids, display=False)
         self.current_view.reset()
         if ids:

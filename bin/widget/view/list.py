@@ -73,7 +73,6 @@ def echo(fn):
     def wrapped(self, *v, **k):
         name = fn.__name__
         res = fn(self, *v, **k)
-        print '%10s' % (name,), v, res
         return res
     return wrapped
 
@@ -148,17 +147,12 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.set_property('leak_references', False)
 
     def added(self, modellist, position):
-        if modellist is self.models:
-            model = self.models[position]
-            self.emit('row_inserted', self.on_get_path(model),
-                      self.get_iter(self.on_get_path(model)))
+        model = modellist[position]
+        self.emit('row_inserted', self.on_get_path(model),
+                  self.get_iter(self.on_get_path(model)))
 
     def cancel(self):
         pass
-
-    def changed_all(self, *args):
-        self.emit('row_deleted', position)
-        self.invalidate_iters()
 
     def move(self, path, position):
         idx = path[0]
@@ -178,19 +172,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         idx = self.get_path(iter)[0]
         self.model_group.model_remove(self.models[idx])
         self.invalidate_iters()
-
-    def sort(self, name):
-        pass
-        #self.sort_asc = not (self.sort_asc and (self.last_sort == name))
-        #self.last_sort = name
-        #if self.sort_asc:
-        #    f = lambda x,y: cmp(x[name].get_client(x), y[name].get_client(y))
-        #else:
-        #    f = lambda x,y: -1 * cmp(x[name].get_client(x), y[name].get_client(y))
-        #self.models.sort(f)
-        #for idx, row in enumerate(self.models):
-        #    iter = self.get_iter(idx)
-        #    self.row_changed(self.get_path(iter), iter)
 
     def saved(self, id):
         return self.model_group.writen(id)
@@ -291,7 +272,7 @@ class ViewList(parser_view):
 
         self.display()
 
-        self.widget_tree.connect('button-press-event', self.__hello)
+        self.widget_tree.connect('button-press-event', self.__contextual_menu)
         self.widget_tree.connect_after('row-activated', self.__sig_switch)
         selection = self.widget_tree.get_selection()
         selection.set_mode(gtk.SELECTION_MULTIPLE)
@@ -369,7 +350,7 @@ class ViewList(parser_view):
                         return False
         return True
 
-    def __hello(self, treeview, event, *args):
+    def __contextual_menu(self, treeview, event, *args):
         if event.button in [1,3]:
             path = treeview.get_path_at_pos(int(event.x),int(event.y))
             selection = treeview.get_selection()
