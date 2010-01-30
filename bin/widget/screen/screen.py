@@ -468,6 +468,8 @@ class Screen(signal_event.signal_event):
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
+        if isinstance(self.current_model,group_record):
+          return
         self.current_view.set_value()
         self.fields = {}
         if self.current_model and self.current_model not in self.models.models:
@@ -777,7 +779,7 @@ class Screen(signal_event.signal_event):
 
     def display_next(self):
         self.current_view.set_value()
-        if self.context.get('group_by',False):
+        if self.context.get('group_by',False) and not self.current_view.view_type == 'form':
             if isinstance(self.current_model, group_record):
                 path = self.current_view.store.on_get_path(self.current_model)
                 self.current_view.expand_row(path)
@@ -795,7 +797,7 @@ class Screen(signal_event.signal_event):
 
     def display_prev(self):
         self.current_view.set_value()
-        if self.context.get('group_by',False):
+        if self.context.get('group_by',False) and not self.current_view.view_type == 'form':
             if self.current_model.list_parent:
                 if self.current_model.list_parent.children.lst.index(self.current_model) == 0:
                     self.current_model = self.current_model.list_parent
