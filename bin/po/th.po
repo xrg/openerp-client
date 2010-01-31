@@ -8,94 +8,96 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:40+0000\n"
-"Last-Translator: Harry (Open ERP) <hmo@tinyerp.com>\n"
+"PO-Revision-Date: 2010-01-30 05:37+0000\n"
+"Last-Translator: Songpon Phusing <p.songpon@gmail.com>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-01-31 04:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr ""
+msgstr "พิมพ์ขั้นตอนการทำงาน"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
-msgstr ""
+msgstr "พิมพ์ขั้นตอนการทำงาน(แบบซับซ้อน)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr ""
+msgstr "ส่วนเสริมไม่สามารถใช้ได้"
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
-msgstr ""
+msgstr "เลือกส่วนเสริม"
 
 #: bin/translate.py:184
 #, python-format
 msgid "Unable to set locale %s"
-msgstr ""
+msgstr "ตังค่าท้องถิ่นไม่ได้ %s"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "ปิดโปรแกรม ขัดจังหวะโดยแป้นพิมพ์"
 
 #: bin/options.py:108
 #, python-format
 msgid "OpenERP Client %s"
-msgstr ""
+msgstr "โปรแกรมลูกข่าย %s"
 
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr ""
+msgstr "ลืกไฟล์ตั้งค่าอื่น"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "เปิดดีบั๊กเบื้องต้น โดยพิพม์ '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "ระบุระดับการเก็บล๊อค %s"
 
 #: bin/options.py:112
 msgid "specify the user login"
-msgstr ""
+msgstr "ระบุชื่อเข้าระบบ"
 
 #: bin/options.py:113
 msgid "specify the server port"
-msgstr ""
+msgstr "ระบุพอร์ต ของ Server"
 
 #: bin/options.py:114
 msgid "specify the server ip/name"
-msgstr ""
+msgstr "ระบุ server ip หรือ ชื่อ"
 
 #: bin/printer/printer.py:185
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr ""
+msgstr "ไม่สามารถจัดการ ชนิดไฟล์นี้ %s"
 
 #: bin/printer/printer.py:190
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
+"ระบบการพิมพ์อัตโนมัติบนลีนุกซ์ ยังใช้ไม่ได้\n"
+"ใช่การดูคร่าวๆแทน"
 
 #: bin/printer/printer.py:198
 msgid "Error no report"
-msgstr ""
+msgstr "ผิดพลาดแบบไม่ทราบสาเหตุ"
 
 #: bin/printer/printer.py:217 bin/modules/gui/window/win_export.py:289
 #: bin/modules/gui/main.py:1424 bin/widget/view/form_gtk/binary.py:162
 #: bin/widget/view/form_gtk/image.py:119
 msgid "Save As..."
-msgstr ""
+msgstr "บันทึกเป็น..."
 
 #: bin/printer/printer.py:225
 msgid "Error writing the file!"
-msgstr ""
+msgstr "เขียนไฟล์ไม่ได้"
 
 #: bin/common/common.py:212
 msgid ""
@@ -104,6 +106,10 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
+"ขอบคุณมากครับที่ให้การตอบรับ\n"
+"คำแนะนำจะส่งกลับมาหาเรา\n"
+"คุณควรจะสร้างฐานข้อมูลใหม่\n"
+"ไปที่เมนู \"แฟ้ม\" เพื่อทำการเชื่อมต่อ"
 
 #: bin/common/common.py:222
 msgid ""
@@ -111,10 +117,13 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
+"ขอบคุณมากๆครับที่ทำการทดลอง OpenERP\n"
+"คุณควรจะสร้างฐานข้อมูลใหม่\n"
+"ไปที่เมนู \"แฟ้ม\" เพื่อทำการเชื่อมต่อ"
 
 #: bin/common/common.py:325
 msgid "Support request sent !"
-msgstr ""
+msgstr "ส่งคำร้องขอการสนับสนุนไปแล้ว"
 
 #: bin/common/common.py:345 bin/common/common.py:388
 msgid ""
@@ -2202,7 +2211,7 @@ msgstr ""
 
 #: bin/win_error.glade:398
 msgid "gtk-close"
-msgstr ""
+msgstr "gtk-close"
 
 #: bin/dia_survey.glade:32
 msgid ""
@@ -2241,59 +2250,60 @@ msgstr ""
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "อำเภอ"
 
 #: bin/dia_survey.glade:586
 msgid "System:"
-msgstr ""
+msgstr "ระบบ:"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>ความสนใจของคุณ</b>"
 
 #: bin/dia_survey.glade:672
 msgid "How did you hear about us:"
-msgstr ""
+msgstr "คุณรุ้จักเรามาก่อนไหม"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "เราจะใช้ OpenERP"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "เรามีแผนที่จะให้การบริการ OpenERP"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"เล่าเราได้ไหมครับว่า ทำไมถึงลองใช้ OpenERP และปัจจุบันคุณใช้ซอร์ฟแวร์อะไรอยู่"
 
 #: bin/dia_survey.glade:790
 msgid "<b>Keep Informed</b>"
-msgstr ""
+msgstr "<b> แนะนำ</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "ฉันต้องการรับหนังสืออีเลกทรอนิค OpenERP (PDF) ทางอีเมล์"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
-msgstr ""
+msgstr "โทรศัทพ์ / มือถือ"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "อีเมล์:"
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
-msgstr ""
+msgstr "ชื่อของคุณ:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #~ msgid "The content of the widget or excpetion if not valid"
 #~ msgstr "เนื้อหาของวิดเจ็ด หรือ ข้อยกเว้น ถ้าไม่ถูกต้อง"
