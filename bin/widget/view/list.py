@@ -259,8 +259,6 @@ class ViewList(parser_view):
         self.reload = False
         self.children = children
         self.last_col = None
-        self.col_visible = False
-        self.tree_editable = False
         if children:
             hbox = gtk.HBox()
             self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
@@ -491,29 +489,19 @@ class ViewList(parser_view):
                     self.last_col = None
                 for col in self.widget_tree.get_columns():
                     if col.name == self.screen.context.get('group_by',False):
-                        if not col.get_visible():
-                            col.set_visible(not col.get_visible())
-                            self.col_visible = True
                         pos = self.widget_tree.get_columns().index(col) - 1
                         if not pos == -1:
                             self.last_col = self.widget_tree.get_column(pos)
                         self.widget_tree.move_column_after(col,None)
-                        break
                 if self.widget_tree.editable:
                     self.unset_editable()
-                    self.tree_editable = True
             else:
                 if self.last_col:
                     self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col)
-                    if self.col_visible:
-                        pos = self.widget_tree.get_columns().index(self.last_col) + 1
-                        col = self.widget_tree.get_column(pos)
-                        col.set_visible(not self.col_visible)
-                        self.col_visible = False
                     self.last_col = None
-                if self.tree_editable:
+                if not self.widget_tree.editable:
                     self.set_editable()
-                    self.tree_editable = False
+            self.set_invisible_attr()
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
@@ -590,3 +578,8 @@ class ViewList(parser_view):
                 elif not isinstance(renderer, gtk.CellRendererProgress) and not isinstance(renderer, gtk.CellRendererPixbuf):
                     renderer.set_property('editable', value)
 
+    def set_invisible_attr(self):
+        for col in self.widget_tree.get_columns():
+            value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
+                           {'context':self.screen.context})
+            col.set_visible(not value)
