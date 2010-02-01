@@ -31,6 +31,7 @@ import wid_common
 import interface
 from widget.screen import Screen
 import service
+import tools
 
 
 class dialog(object):
@@ -130,7 +131,7 @@ class dialog(object):
 class one2many_list(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
-        self.context = eval(attrs['context'] or "{}")
+        self.context = tools.expr_eval(attrs['context'] or "{}")
         self._readonly = self.default_readonly
         self.widget = gtk.VBox(homogeneous=False, spacing=5)
 
