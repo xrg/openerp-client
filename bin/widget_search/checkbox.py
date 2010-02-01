@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -25,9 +25,10 @@ import gettext
 import common
 import wid_int
 import gobject
+import tools
 
 class checkbox(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={},screen=None):
         wid_int.wid_int.__init__(self, name, attrs)
 
         self.widget = gtk.combo_box_entry_new_text()
@@ -38,6 +39,9 @@ class checkbox(wid_int.wid_int):
         self.entry = self.widget.child
         self.entry.set_property('activates_default', True)
         self.entry.set_editable(False)
+        if attrs.get('default',False):
+            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
+            self.widget.child.set_text(value)
 
     def clear(self):
         self.widget.child.set_text('')
