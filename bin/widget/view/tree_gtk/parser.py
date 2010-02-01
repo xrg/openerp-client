@@ -31,7 +31,7 @@ import tools.datetime_util
 from rpc import RPCProxy
 from editabletree import EditableTreeView
 from widget.view import interface
-
+from widget.view.list import group_record
 import time
 import date_renderer
 
@@ -225,6 +225,8 @@ class Char(object):
                 model[self.field_name].get_state_attrs(model)[k] = result
 
     def state_set(self, model, state='draft'):
+        if isinstance(model,group_record):
+            return
         ro = model.mgroup._readonly
         field = model[self.field_name]
         state_changes = dict(field.attrs.get('states',{}).get(state,[]))
