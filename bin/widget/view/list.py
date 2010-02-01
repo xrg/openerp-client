@@ -259,6 +259,7 @@ class ViewList(parser_view):
         self.reload = False
         self.children = children
         self.last_col = None
+        self.tree_editable = False
         if children:
             hbox = gtk.HBox()
             self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
@@ -495,12 +496,14 @@ class ViewList(parser_view):
                         self.widget_tree.move_column_after(col,None)
                 if self.widget_tree.editable:
                     self.unset_editable()
+                    self.tree_editable = True
             else:
                 if self.last_col:
                     self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col)
                     self.last_col = None
-                if not self.widget_tree.editable:
+                if self.tree_editable:
                     self.set_editable()
+                    self.tree_editable = False
             self.set_invisible_attr()
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
