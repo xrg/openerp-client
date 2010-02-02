@@ -260,25 +260,25 @@ class Char(object):
             align = 1
         else:
             align = 0
-        if self.treeview.editable:
+
+        if not model.list_parent and self.treeview.screen.context.get('group_by',False):
+            cell.set_property('background', 'grey')
+        elif self.treeview.editable:
             field = model[self.field_name]
-
-            #setting the cell property editable or not
             cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
-
-            if not field.get_state_attrs(model).get('valid', True):
-                cell.set_property('background', common.colors.get('invalid', 'white'))
-            elif bool(int(field.get_state_attrs(model).get('required', 0))):
-                cell.set_property('background', common.colors.get('required', 'white'))
-            else:
-                cell.set_property('background', None)
-
-        cell.set_property('background', None)
-        if self.treeview.screen.context.get('group_by',False):
-            if not model.list_parent:
-                cell.set_property('background', 'grey')
-
+            self.set_color(cell, model)
+        else:
+            cell.set_property('background', None)
         cell.set_property('xalign', align)
+
+    def set_color(self, cell, model,group_by = False):
+        field = model[self.field_name]
+        if not field.get_state_attrs(model).get('valid', True):
+            cell.set_property('background', common.colors.get('invalid', 'white'))
+        elif bool(int(field.get_state_attrs(model).get('required', 0))):
+            cell.set_property('background', common.colors.get('required', 'white'))
+        else:
+            cell.set_property('background', None)
 
     def get_color(self, model):
         to_display = ''
