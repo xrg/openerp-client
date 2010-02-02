@@ -38,7 +38,7 @@ class char(wid_int.wid_int):
             self.widget.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("turquoise"))
         if self.attrs.get('default',False):
             value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
-            self.widget.set_text(value)
+            self.widget.set_text(value or '')
 
 
     def _value_get(self):
