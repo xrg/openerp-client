@@ -524,9 +524,14 @@ class ViewList(parser_view):
         ids = self.sel_ids_get()
         for c in self.children:
             value = 0.0
+            length = len(self.screen.models.models)
+            if ids:
+                length = len(ids)
             for model in self.screen.models.models:
                 if model.id in ids or not ids:
                     value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
+            if self.children[c][5] == 'avg' and length:
+                value = value/length
             label_str = tools.locale_format('%.' + str(self.children[c][3]) + 'f', value)
             if self.children[c][4]:
                 self.children[c][2].set_markup('<b>%s</b>' % label_str)
