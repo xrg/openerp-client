@@ -187,11 +187,12 @@ class ModelRecordGroup(signal_event.signal_event):
         values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
         if not values:
             return False
-        self.load_for(values)
-
-        #newmod = False
-        #if newmod and display:
-        #    self.signal('model-changed', newmod)
+        vdict = dict(map(lambda x: (x['id'], x), values))
+        v2 = []
+        for id in ids:
+            if id in vdict:
+                v2.append(vdict[id])
+        self.load_for(v2)
         self.current_idx = 0
         return True
 

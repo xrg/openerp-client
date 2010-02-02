@@ -198,7 +198,7 @@ class parse(object):
                     self.fields[str(attrs['name'])]['model']=self.model
                     if type not in widgets_type:
                         return False
-                    widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']])
+                    widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']],screen=call[0])
                     if 'string' in self.fields[str(attrs['name'])]:
                         label = self.fields[str(attrs['name'])]['string']+' :'
                     else:
@@ -387,7 +387,7 @@ class form(wid_int.wid_int):
         for x in self.widgets.values() + self.custom_widgets.values():
             domain += x[0].value.get('domain',[])
             context.update( x[0].value.get('context',{}) )
-            
+
         if domain:
             if len(domain)>1 and domain[-2] in ['&','|']:
                 if len(domain) == 2:
@@ -396,7 +396,7 @@ class form(wid_int.wid_int):
                     res1 = domain[:-2]
                     res2 = domain[-1:]
                     domain = res1 + res2
-                                
+
         return {'domain':domain, 'context':context}
 
     def _value_set(self, value):

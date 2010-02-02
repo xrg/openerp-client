@@ -26,6 +26,7 @@ import gtk
 import tools
 
 import rpc
+from rpc import RPCProxy
 import service
 import locale
 from interface import parser_view
@@ -73,7 +74,6 @@ def echo(fn):
     def wrapped(self, *v, **k):
         name = fn.__name__
         res = fn(self, *v, **k)
-        print '%10s' % (name,), v, res
         return res
     return wrapped
 
@@ -148,17 +148,12 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.set_property('leak_references', False)
 
     def added(self, modellist, position):
-        if modellist is self.models:
-            model = self.models[position]
-            self.emit('row_inserted', self.on_get_path(model),
-                      self.get_iter(self.on_get_path(model)))
+        model = modellist[position]
+        self.emit('row_inserted', self.on_get_path(model),
+                  self.get_iter(self.on_get_path(model)))
 
     def cancel(self):
         pass
-
-    def changed_all(self, *args):
-        self.emit('row_deleted', position)
-        self.invalidate_iters()
 
     def move(self, path, position):
         idx = path[0]
@@ -178,19 +173,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         idx = self.get_path(iter)[0]
         self.model_group.model_remove(self.models[idx])
         self.invalidate_iters()
-
-    def sort(self, name):
-        pass
-        #self.sort_asc = not (self.sort_asc and (self.last_sort == name))
-        #self.last_sort = name
-        #if self.sort_asc:
-        #    f = lambda x,y: cmp(x[name].get_client(x), y[name].get_client(y))
-        #else:
-        #    f = lambda x,y: -1 * cmp(x[name].get_client(x), y[name].get_client(y))
-        #self.models.sort(f)
-        #for idx, row in enumerate(self.models):
-        #    iter = self.get_iter(idx)
-        #    self.row_changed(self.get_path(iter), iter)
 
     def saved(self, id):
         return self.model_group.writen(id)
@@ -220,6 +202,8 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         return tuple(result)
 
     def on_get_iter(self, path):
+        if not isinstance(path,(list, tuple)):
+            path = (path,)
         mods = self.models
         for p in path[:-1]:
             mods = mods[p].children
@@ -275,7 +259,6 @@ class ViewList(parser_view):
         self.reload = False
         self.children = children
         self.last_col = None
-        self.col_visible = False
         self.tree_editable = False
         if children:
             hbox = gtk.HBox()
@@ -289,7 +272,7 @@ class ViewList(parser_view):
 
         self.display()
 
-        self.widget_tree.connect('button-press-event', self.__hello)
+        self.widget_tree.connect('button-press-event', self.__contextual_menu)
         self.widget_tree.connect_after('row-activated', self.__sig_switch)
         selection = self.widget_tree.get_selection()
         selection.set_mode(gtk.SELECTION_MULTIPLE)
@@ -338,14 +321,27 @@ class ViewList(parser_view):
         model = treeview.get_model()
         data = eval(selection.data)
         drop_info = treeview.get_dest_row_at_pos(x, y)
+        group_by = self.screen.context.get('group_by',False)
         if drop_info:
             path, position = drop_info
-            idx = path[0]
-            if position in (gtk.TREE_VIEW_DROP_BEFORE,
-                    gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
-                model.move(data, idx)
+            if group_by:
+                target_group = model.models[path[0]]
+                target_domain = filter(lambda x: x[0] == group_by, target_group.children.context.get('__domain',[]))[0]
+                source_group = model.models[data[0]]
+                source_group_child = source_group.children.lst[data[1]]
+                rpc = RPCProxy(source_group_child.resource)
+                rpc.write([source_group_child.id], {target_domain[0]:target_domain[2]})
+                self.reload = True
+                self.screen.reload()
+                self.expand_row((data[0],))
+                self.expand_row((path[0],))
             else:
-                model.move(data, idx + 1)
+                idx = path[0]
+                if position in (gtk.TREE_VIEW_DROP_BEFORE,
+                        gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
+                    model.move(data, idx)
+                else:
+                    model.move(data, idx + 1)
         context.drop_finish(False, etime)
         if treeview.sequence:
             self.screen.models.set_sequence(field='sequence')
@@ -367,7 +363,7 @@ class ViewList(parser_view):
                         return False
         return True
 
-    def __hello(self, treeview, event, *args):
+    def __contextual_menu(self, treeview, event, *args):
         if event.button in [1,3]:
             path = treeview.get_path_at_pos(int(event.x),int(event.y))
             selection = treeview.get_selection()
@@ -454,7 +450,7 @@ class ViewList(parser_view):
         del self.widget
 
     def __sig_switch(self, treeview, *args):
-        if not isinstance(self.screen.current_model,group_record):
+        if not isinstance(self.screen.current_model, group_record):
             self.screen.row_activate(self.screen)
 
     def __select_changed(self, tree_sel):
@@ -483,33 +479,32 @@ class ViewList(parser_view):
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
             if self.screen.context.get('group_by',False):
+                if self.screen.models.parent and self.screen.context.get('o2m',False):
+                    parent_value = self.screen.models.parent.value or {}
+                    mgroup = parent_value.get(self.screen.context.get('o2m',False),False)
+                    if mgroup:
+                        self.screen.domain = [('id','in',map(lambda x:x.id,mgroup.models))]
                 self.screen.models.models.clear()
+                if self.last_col:
+                    self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col)
+                    self.last_col = None
                 for col in self.widget_tree.get_columns():
                     if col.name == self.screen.context.get('group_by',False):
-                        if not col.get_visible():
-                            col.set_visible(not col.get_visible())
-                            self.col_visible = True
                         pos = self.widget_tree.get_columns().index(col) - 1
                         if not pos == -1:
-                            self.last_col = self.widget_tree.get_columns()[pos]
+                            self.last_col = self.widget_tree.get_column(pos)
                         self.widget_tree.move_column_after(col,None)
-                        break
                 if self.widget_tree.editable:
                     self.unset_editable()
                     self.tree_editable = True
             else:
                 if self.last_col:
-                    self.widget_tree.move_column_after(self.widget_tree.get_columns()[0],self.last_col)
-                    if self.col_visible:
-                        pos = self.widget_tree.get_columns().index(self.last_col) + 1
-                        col = self.widget_tree.get_columns()[pos]
-                        col.set_visible(not self.col_visible)
-                        self.col_visible = False
+                    self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col)
                     self.last_col = None
                 if self.tree_editable:
                     self.set_editable()
                     self.tree_editable = False
-
+            self.set_invisible_attr()
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
@@ -529,9 +524,14 @@ class ViewList(parser_view):
         ids = self.sel_ids_get()
         for c in self.children:
             value = 0.0
+            length = len(self.screen.models.models)
+            if ids:
+                length = len(ids)
             for model in self.screen.models.models:
                 if model.id in ids or not ids:
                     value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
+            if self.children[c][5] == 'avg' and length:
+                value = value/length
             label_str = tools.locale_format('%.' + str(self.children[c][3]) + 'f', value)
             if self.children[c][4]:
                 self.children[c][2].set_markup('<b>%s</b>' % label_str)
@@ -571,7 +571,7 @@ class ViewList(parser_view):
     def unset_editable(self):
         self.set_editable(False)
 
-    def expand_row(self, path, open_all):
+    def expand_row(self, path, open_all = False):
         self.widget_tree.expand_row(path, open_all)
 
     def collapse_row(self, path):
@@ -586,3 +586,8 @@ class ViewList(parser_view):
                 elif not isinstance(renderer, gtk.CellRendererProgress) and not isinstance(renderer, gtk.CellRendererPixbuf):
                     renderer.set_property('editable', value)
 
+    def set_invisible_attr(self):
+        for col in self.widget_tree.get_columns():
+            value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
+                           {'context':self.screen.context})
+            col.set_visible(not value)

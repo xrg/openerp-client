@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -26,15 +26,19 @@ import gettext
 import common
 import wid_int
 import rpc
+import tools
 
 class reference(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={},screen=None):
         wid_int.wid_int.__init__(self, name, parent, attrs)
 
         self.widget = gtk.combo_box_entry_new_text()
         self.widget.child.set_editable(False)
 
         self.set_popdown(attrs.get('selection', []))
+        if attrs.get('default',False):
+            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
+            self._value_set(int(value))
 
     def get_model(self):
         res = self.widget.child.get_text()

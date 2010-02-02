@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -39,13 +39,13 @@ LDFMT = tools.datetime_util.get_date_format()
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 class calendar(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={},screen=None):
         super(calendar, self).__init__(name, parent, attrs)
 
         tooltips = gtk.Tooltips()
         self.widget = gtk.HBox(spacing=3)
         self.format = LDFMT
-        
+
         self.widget1 = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry1 = self.widget1.widget
         self.entry1.set_property('width-chars', 10)
@@ -65,7 +65,7 @@ class calendar(wid_int.wid_int):
         self.widget.pack_start(self.eb1, expand=False, fill=False)
 
         self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
-        
+
         self.widget2 = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry2 = self.widget2.widget
         self.entry2.set_property('width-chars', 10)
@@ -85,6 +85,9 @@ class calendar(wid_int.wid_int):
         self.widget.pack_start(self.eb2, expand=False, fill=False)
 
         tooltips.enable()
+        if attrs.get('default',False):
+            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
+            self._value_set(value)
 
     def _date_get(self, str):
         try:
@@ -93,22 +96,31 @@ class calendar(wid_int.wid_int):
         except:
             return False
         return date.strftime(DT_FORMAT)
-    
+
     def sig_key_press(self, widget, event, dest, parent):
         if event.keyval == gtk.keysyms.F2:
             self.cal_open(widget, event, dest, parent)
             return True
-        
+
 
     def _value_get(self):
-        res = []
-        val = self._date_get(self.entry1.get_text())
-        if val:
-            res.append((self.name, '>=', val))
-        val = self._date_get(self.entry2.get_text())
-        if val:
-            res.append((self.name, '<=', val))
-        return {'domain':res}
+        val = {'domain': [], 'context':{}}
+        val1 = self._date_get(self.entry1.get_text())
+        val2 = self._date_get(self.entry2.get_text())
+        if self.attrs.get('context', False):
+            val['context'] = eval(self.attrs['context'], {'self': val1, 'self2': val2})
+        if not self.attrs.get('domain', False):
+            res = []
+            val2 = self._date_get(self.entry1.get_text())
+            if val2:
+                res.append((self.name, '>=', val2))
+            val2 = self._date_get(self.entry2.get_text())
+            if val2:
+                res.append((self.name, '<=', val2))
+            val['domain'] = res
+        else:
+            val['domain'] = eval(self.attrs['domain'], {'self': val1, 'self2': val2})
+        return val
 
     def _value_set(self, value):
         self.entry1.set_text(value)
@@ -151,16 +163,16 @@ class calendar(wid_int.wid_int):
     def sig_activate(self, fct):
         self.entry1.connect_after('activate', fct)
         self.entry2.connect_after('activate', fct)
-        
-        
+
+
 class datetime(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={},screen=None):
         super(datetime, self).__init__(name, parent, attrs)
 
         tooltips = gtk.Tooltips()
         self.widget = gtk.HBox(spacing=5)
         self.format = LDFMT+' %H:%M:%S'
-        
+
         self.widget1 = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry1 = self.widget1.widget
         self.entry1.set_property('width-chars', 19)
@@ -180,7 +192,7 @@ class datetime(wid_int.wid_int):
         self.widget.pack_start(self.eb1, expand=False, fill=False)
 
         self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
-        
+
         self.widget2 = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry2 = self.widget2.widget
         self.entry2.set_property('width-chars', 19)
@@ -198,8 +210,10 @@ class datetime(wid_int.wid_int):
         img.set_alignment(0.5, 0.5)
         self.eb2.add(img)
         self.widget.pack_start(self.eb2, expand=False, fill=False)
-
         tooltips.enable()
+        if attrs.get('default',False):
+            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
+            self._value_set(value)
 
     def _date_get(self, str):
         try:
@@ -208,12 +222,12 @@ class datetime(wid_int.wid_int):
         except:
             return False
         return date.strftime(DHM_FORMAT)
-    
+
     def sig_key_press(self, widget, event, dest, parent):
         if event.keyval == gtk.keysyms.F2:
             self.cal_open(widget, event, dest, parent)
             return True
-        
+
     def _value_get(self):
         res = []
         val = self._date_get(self.entry1.get_text())

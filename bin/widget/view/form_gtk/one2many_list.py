@@ -31,6 +31,7 @@ import wid_common
 import interface
 from widget.screen import Screen
 import service
+import tools
 
 
 class dialog(object):
@@ -130,7 +131,7 @@ class dialog(object):
 class one2many_list(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
-
+        self.context = tools.expr_eval(attrs['context'] or "{}")
         self._readonly = self.default_readonly
         self.widget = gtk.VBox(homogeneous=False, spacing=5)
 
@@ -228,6 +229,9 @@ class one2many_list(interface.widget_interface):
         self.widget.pack_start(hb, expand=False, fill=True)
 
         self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=self.parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate, default_get=attrs.get('default_get', {}), window=self._window, readonly=self._readonly)
+        if self.context.get('group_by',False):
+            self.context.update({'o2m':attrs['name']})
+        self.screen.context.update(self.context)
         self.screen.signal_connect(self, 'record-message', self._sig_label)
 
         menuitem_title.get_child().set_markup('<b>'+self.screen.current_view.title.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')+'</b>')

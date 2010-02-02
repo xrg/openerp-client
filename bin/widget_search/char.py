@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -26,7 +26,7 @@ import tools
 
 
 class char(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={},screen=None):
         wid_int.wid_int.__init__(self, name, parent, attrs)
         self.attrs = attrs
         self.widget = gtk.Entry()
@@ -36,6 +36,10 @@ class char(wid_int.wid_int):
         if attrs.get('context',False):
             self.widget.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("turquoise"))
             self.widget.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("turquoise"))
+        if self.attrs.get('default',False):
+            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
+            self.widget.set_text(value or '')
+
 
     def _value_get(self):
         s = self.widget.get_text()

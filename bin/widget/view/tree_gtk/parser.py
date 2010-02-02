@@ -31,7 +31,7 @@ import tools.datetime_util
 from rpc import RPCProxy
 from editabletree import EditableTreeView
 from widget.view import interface
-
+from widget.view.list import group_record
 import time
 import date_renderer
 
@@ -54,9 +54,14 @@ def send_keys(renderer, editable, position, treeview):
     if isinstance(editable, gtk.ComboBoxEntry):
         editable.connect('changed', treeview.on_editing_done)
 
-def sort_model(column, treeview):
-    model = treeview.get_model()
-    model.sort(column.name)
+def sort_model(column, screen):
+    if screen.sort == column.name:
+        screen.sort = column.name+' desc'
+    else:
+        screen.sort = column.name
+    screen.offset = 0
+    screen.search_filter()
+    #screen.display()
 
 class parser_tree(interface.parser_interface):
     def parse(self, model, root_node, fields):
@@ -102,6 +107,7 @@ class parser_tree(interface.parser_interface):
                     col_label.set_tooltip_markup('<span foreground=\"darkred\">'+tools.to_xml(node_attrs['string'])+' :</span>\n'+tools.to_xml(node_attrs['help']))
                 col_label.show()
                 col.set_widget(col_label)
+                col.set_fixed_width(20)
 
                 treeview.append_column(col)
                 col._type = 'Button'
@@ -143,6 +149,7 @@ class parser_tree(interface.parser_interface):
                 col_label.show()
                 col.set_widget(col_label)
 
+
                 col.name = fname
                 col._type = fields[fname]['type']
                 col.set_cell_data_func(renderer, cell.setter)
@@ -164,19 +171,27 @@ class parser_tree(interface.parser_interface):
                 else:
                     width = twidth.get(fields[fname]['type'], 100)
                 col.set_min_width(width)
+                if not twidth.get(fields[fname]['type'], False):
+                    col.set_expand(True)
                 if not treeview.sequence:
-                    col.connect('clicked', sort_model, treeview)
+                    col.connect('clicked', sort_model, self.screen)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 visval = eval(str(fields[fname].get('invisible', 'False')), {'context':self.screen.context})
                 col.set_visible(not visval)
                 n = treeview.append_column(col)
-                if 'sum' in fields[fname] and fields[fname]['type'] \
+                calculate = ''
+                if 'sum' in node_attrs.keys():
+                    calculate = 'sum'
+                elif 'avg' in node_attrs.keys():
+                    calculate = 'avg'
+
+                if calculate and fields[fname]['type'] \
                         in ('integer', 'float', 'float_time'):
                     label = gtk.Label()
                     label.set_use_markup(True)
-                    label_str = fields[fname]['sum'] + ': '
-                    label_bold = bool(int(fields[fname].get('sum_bold', 0)))
+                    label_str = fields[fname][calculate] + ': '
+                    label_bold = bool(int(fields[fname].get('bold', 0)))
                     if label_bold:
                         label.set_markup('<b>%s</b>' % label_str)
                     else:
@@ -184,7 +199,7 @@ class parser_tree(interface.parser_interface):
                     label_sum = gtk.Label()
                     label_sum.set_use_markup(True)
                     dict_widget[n] = (fname, label, label_sum,
-                            fields[fname].get('digits', (16,2))[1], label_bold)
+                            fields[fname].get('digits', (16,2))[1], label_bold, calculate)
         return treeview, dict_widget, [], on_write
 
 class UnsettableColumn(Exception):
@@ -216,6 +231,8 @@ class Char(object):
                 model[self.field_name].get_state_attrs(model)[k] = result
 
     def state_set(self, model, state='draft'):
+        if isinstance(model,group_record):
+            return
         ro = model.mgroup._readonly
         field = model[self.field_name]
         state_changes = dict(field.attrs.get('states',{}).get(state,[]))
@@ -243,25 +260,25 @@ class Char(object):
             align = 1
         else:
             align = 0
-        if self.treeview.editable:
+
+        if not model.list_parent and self.treeview.screen.context.get('group_by',False):
+            cell.set_property('background', 'grey')
+        elif self.treeview.editable:
             field = model[self.field_name]
-
-            #setting the cell property editable or not
             cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
-
-            if not field.get_state_attrs(model).get('valid', True):
-                cell.set_property('background', common.colors.get('invalid', 'white'))
-            elif bool(int(field.get_state_attrs(model).get('required', 0))):
-                cell.set_property('background', common.colors.get('required', 'white'))
-            else:
-                cell.set_property('background', None)
-
-        cell.set_property('background', None)
-        if self.treeview.screen.context.get('group_by',False):
-            if not model.list_parent:
-                cell.set_property('background', 'grey')
-
+            self.set_color(cell, model)
+        else:
+            cell.set_property('background', None)
         cell.set_property('xalign', align)
+
+    def set_color(self, cell, model,group_by = False):
+        field = model[self.field_name]
+        if not field.get_state_attrs(model).get('valid', True):
+            cell.set_property('background', common.colors.get('invalid', 'white'))
+        elif bool(int(field.get_state_attrs(model).get('required', 0))):
+            cell.set_property('background', common.colors.get('required', 'white'))
+        else:
+            cell.set_property('background', None)
 
     def get_color(self, model):
         to_display = ''
@@ -572,132 +589,6 @@ class ProgressBar(object):
 
     def value_from_text(self, model, text):
         return text
-
-
-#class CellRendererButton(gtk.GenericCellRenderer):
-#    __gproperties__ = {
-#            "text": (gobject.TYPE_STRING, None, "Text",
-#                "Displayed text", gobject.PARAM_READWRITE),
-#            "editable" : (gobject.TYPE_BOOLEAN, None, None,
-#                True, gobject.PARAM_READWRITE),
-#    }
-#    __gsignals__ = {
-#            'clicked': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-#                (gobject.TYPE_STRING, )),
-#    }
-#    def __init__(self, text="", editable= True):
-#        self.__gobject_init__()
-#        self.text = text
-#        self.editable = editable
-#        self.border = gtk.Button().border_width
-#        self.set_property('mode', gtk.CELL_RENDERER_MODE_EDITABLE)
-#        self.clicking = False
-#        self.xalign = 0.0
-#        self.yalign = 0.5
-#        self.textborder = 4
-##        self.set_property('editable',False)
-#
-#    def __get_states(self):
-#        return [e for e in self.attrs.get('states','').split(',') if e]
-#
-#    def __get_model_state(self, widget, cell_area):
-#        path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
-#        if not path:
-#            return False
-#        modelgrp = widget.get_model()
-#        model = modelgrp.models[path[0][0]]
-#
-#        if model and ('state' in model.mgroup.fields):
-#            state = model['state'].get(model)
-#        else:
-#            state = 'draft'
-#        return state
-#
-#    def __is_visible(self, widget, cell_area):
-#        states = self.__get_states()
-#        model_state = self.__get_model_state(widget, cell_area)
-#        return (not states) or (model_state in states)
-#
-#    def do_set_property(self, pspec, value):
-#        setattr(self, pspec.name, value)
-#
-#    def do_get_property(self, pspec):
-#        return getattr(self, pspec.name)
-#
-#    def on_render(self, window, widget, background_area, cell_area,
-#            expose_area, flags):
-#
-#        if not self.__is_visible(widget, cell_area):
-#            return True
-#
-#        state = gtk.STATE_NORMAL
-#        shadow = gtk.SHADOW_OUT
-#        if self.clicking and flags & gtk.CELL_RENDERER_SELECTED:
-#            state = gtk.STATE_ACTIVE
-#            shadow = gtk.SHADOW_IN
-#        widget.style.paint_box(window, state, shadow,
-#                None, widget, "button",
-#                cell_area.x, cell_area.y,
-#                cell_area.width, cell_area.height)
-#
-#        #layout = widget.create_pango_layout('')
-#        #layout.set_font_description(widget.style.font_desc)
-#        #w, h = layout.get_size()
-#        #x = cell_area.x
-#        #y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
-#        #window.draw_layout(widget.style.text_gc[0], x, y, layout)
-#
-#        layout = widget.create_pango_layout(self.text)
-#        layout.set_font_description(widget.style.font_desc)
-#        w, h = layout.get_size()
-#        x = int(cell_area.x + (cell_area.width - w / pango.SCALE) / 2)
-#        y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
-#        window.draw_layout(widget.style.text_gc[0], x, y, layout)
-#
-#    def on_get_size(self, widget, cell_area=None):
-#        width,height=90,18
-#        if cell_area:
-#            width = max(width + self.textborder * 2, cell_area.width)
-#        else:
-#            width += self.textborder * 2
-#            height += self.textborder * 2
-#        if cell_area:
-#            x = max(int(self.xalign * (cell_area.width - width)), 0)
-#            y = max(int(self.yalign * (cell_area.height - height)), 0)
-#        else:
-#            x, y = 0, 0
-#        return (x, y, width, height)
-#
-#    def on_start_editing(self, event, widget, path, background_area,
-#            cell_area, flags, oneclick={}):
-#        if not oneclick:
-#            if not self.__is_visible(widget, cell_area):
-#                return
-#        else:
-#            current_state = oneclick['record'].value.get('state',False)
-#            if current_state not in self.__get_states():
-#                return
-#
-#        if (event is None) or ((event.type == gtk.gdk.BUTTON_PRESS) \
-#                or (event.type == gtk.gdk.KEY_PRESS \
-#                    and event.keyval == gtk.keysyms.space)):
-#            self.clicking = True
-#            widget.queue_draw()
-#            gtk.main_iteration()
-#            model = widget.screen.current_model
-#            if widget.screen.current_model.validate():
-#                id = oneclick and oneclick['record'].id or widget.screen.save_current()
-#                if not self.attrs.get('confirm',False) or \
-#                        common.sur(self.attrs['confirm']):
-#                    model.get_button_action(widget.screen,id,self.attrs)
-#            else:
-#                widget.screen.display()
-#            self.emit("clicked", path)
-#            def timeout(self, widget):
-#                self.clicking = False
-#                widget.queue_draw()
-##            gobject.timeout_add(60, timeout, self, widget)
-#gobject.type_register(CellRendererButton)
 
 class CellRendererButton(object):
     def __init__(self, field_name, treeview=None, attrs=None, window=None):

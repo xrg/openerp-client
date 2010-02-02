@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-01-27 05:46+0000\n"
-"Last-Translator: Oktay Altunergil <oktaya@gmail.com>\n"
+"PO-Revision-Date: 2010-01-29 05:27+0000\n"
+"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-01-28 04:35+0000\n"
+"X-Launchpad-Export-Date: 2010-01-30 04:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -215,6 +215,9 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Sorununuz kalite ekibine gönderilemedi !\n"
+"Lütfen şu adresten hata bildiriminizi kendiniz yapınız:\n"
+"\t %s"
 
 #: bin/common/common.py:446
 msgid "Error"
@@ -376,11 +379,11 @@ msgstr "Alan adı"
 #: bin/modules/gui/window/win_import.py:186
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
-msgstr ""
+msgstr "%s alanını içe aktaramazsınız, çünkü otomatik olarak saptanamıyor."
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "İçe aktarılacak alan seçmediniz."
 
 #: bin/modules/gui/window/win_selection.py:52
 msgid "Name"
@@ -420,11 +423,11 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Dışa aktarım hatası!"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "Bu nesne için kaynak belirteci bulunmuyor."
 
 #: bin/modules/gui/window/form.py:221
 msgid "No record selected ! You can only attach to existing record."
@@ -621,7 +624,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Taşıma Betikleri"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
@@ -641,19 +644,19 @@ msgstr "Aşağıdaki güncellemeler mevcuttur:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Artık veritabanlarınızı taşıyabilirsiniz."
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "Veritabanı Taşı"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Veritabanınız güncellendi."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Veritabanlarınız güncellendi."
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
@@ -765,6 +768,8 @@ msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Kimlik denetleme hatası !\n"
+"Yanlıs Kullanıcı Adı veya Parola!"
 
 #: bin/modules/gui/main.py:1062
 msgid "Not logged !"
@@ -1021,7 +1026,7 @@ msgstr "%s dosya kayıdında hata"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Geçersiz tarih değeri! Yıl 1899'dan büyük olmalıdır !"
 
 #: bin/widget/view/form_gtk/calendar.py:130
 #: bin/widget/view/form_gtk/calendar.py:263
@@ -1031,7 +1036,7 @@ msgstr "Bu widget sadece okunabilir !"
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Geçersiz tarih ve saat değeri ! Yıl 1899'dan büyük olmalıdır."
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Hour:"
@@ -1047,7 +1052,7 @@ msgstr "Düğme için Yanlış simge !"
 
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "Çeviri girmeden önce ilgili alana bir miktar metin giriniz."
 
 #: bin/widget/view/form_gtk/parser.py:548
 msgid "You need to save resource before adding translations!"
@@ -1174,11 +1179,11 @@ msgstr "Verita_banı Sil"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "_Download Migrations Code"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "_Migrate Database(s)"
 
 #: bin/openerp.glade:405
 msgid "Administrator Password"
@@ -1659,11 +1664,11 @@ msgstr "<b>Önceden tanımlı Export</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "İçe Aktarım Uyumlu"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>Dışa aktarılacak bir Seçenek seç</b>"
 
 #: bin/openerp.glade:2871
 msgid "Available Fields"
@@ -1957,7 +1962,7 @@ msgstr "Önceki değişilebilen Widget"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.glade:5400
 msgid "Next editable widget"
@@ -2229,11 +2234,11 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "Daha Sonra Bağlan"
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "Şimdi Bağlan"
 
 #: bin/openerp.glade:7843
 msgid "Extension Manager"
@@ -2347,10 +2352,13 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"Lütfen aşağıdaki formu doldurarak <b><span "
+"foreground=\"red\"><i>Open</i></span> ERP</b>'yi iyileştirmemize ve sonraki "
+"sürümlerin geliştirilmesinde daha iyi hedefler oluşturmamıza yardımcı olunuz."
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "<b>Şirket Adı</b>"
 
 #: bin/dia_survey.glade:84
 msgid "Open Source:"
@@ -2386,7 +2394,7 @@ msgstr "Sistem:"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>İlgi Alanınız></b>"
 
 #: bin/dia_survey.glade:672
 msgid "How did you hear about us:"
@@ -2394,15 +2402,17 @@ msgstr "Bizden nasıl haberdar oldunuz:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "Open ERP kullanmayı düşünüyoruz."
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "Open ERP'ye bağlı hizmetler sunmayı düşünüyoruz."
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"Neden Open ERP'yi denediğinizi ve şu anda kullandığınız diğer yazılımları "
+"söyleyiniz:"
 
 #: bin/dia_survey.glade:790
 msgid "<b>Keep Informed</b>"
@@ -2410,7 +2420,7 @@ msgstr "<b>Devamlı Bilgilendir</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "Open ERP E-kitabını (PDF) E-Posta ile almak istiyorum."
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
