@@ -282,7 +282,7 @@ class ViewCalendar(object):
             fmt = DT_SERVER_FORMATS[typ]
 
             if event[fld] and fmt:
-                event[fld] = time.strptime(event[fld], fmt)
+                event[fld] = time.strptime(event[fld][:19], fmt)
 
             # default start time is 9:00 AM
             if typ == 'date' and fld == self.date_start:
