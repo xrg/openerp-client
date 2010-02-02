@@ -34,6 +34,11 @@ class parse(object):
         if name=='tree':
             self.title = attrs.get('string',_('Tree'))
             self.toolbar = bool(attrs.get('toolbar',False))
+            self.colors = {}
+            for color_spec in attrs.get('colors', '').split(';'):
+                if color_spec:
+                    colour, test = color_spec.split(':')
+                    self.colors[colour] = test
         elif name=='field':
             type = self.fields[attrs['name']]['type']
             field_name = attrs.get('string', self.fields[attrs['name']]['string'])
