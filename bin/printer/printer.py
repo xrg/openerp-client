@@ -89,24 +89,25 @@ class Printer(object):
             def opener(fn):
                 self.__opener( lambda: os.system('/usr/bin/open -a Preview ' + fn) )
             return opener
+        softpath = options.options['printer.softpath']
         if os.name == 'nt':
-            if options.options['printer.preview']:
-                if options.options['printer.softpath'] in ['None','none']:
+            if options.options['printer.preview']:                
+                if not softpath or (softpath and softpath in ['None','none']):
                     return lambda fn: os.startfile(fn)
                 else:
-                    return lambda fn: os.system(options.options['printer.softpath'] + ' ' + fn)
+                    return lambda fn: os.system(softpath + ' ' + fn)
             else:
                 return lambda fn: print_w32_filename(fn)
         else:
             if options.options['printer.preview']:
-                if options.options['printer.softpath'] in ['None','none']:
+                if not softpath or (softpath and softpath in ['None','none']):
                     prog = self._findInPath(['xdg-open', 'evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview', 'acroread', 'open'])
                     def opener(fn):
                         self.__opener( lambda: os.execv(prog, (os.path.basename(prog), fn) ))
                     return opener
                 else:
                     def opener(fn):
-                        self.__opener( lambda: os.execv(options.options['printer.softpath'], (os.path.basename(options.options['printer.softpath']), fn)) )
+                        self.__opener( lambda: os.execv(softpath, (os.path.basename(softpath), fn)) )
                     return opener
             else:
                 return lambda fn: print_linux_filename(fn)
