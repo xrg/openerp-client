@@ -30,7 +30,7 @@ import locale
 
 import rpc
 import tools
-import tools.datetime_util
+from tools import datetime_util
 
 from widget.view import interface
 
