@@ -590,4 +590,7 @@ class ViewList(parser_view):
         for col in self.widget_tree.get_columns():
             value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
                            {'context':self.screen.context})
+            if col.name == self.screen.context.get('group_by',False):
+                if not col.get_visible():
+                    value = col.get_visible()
             col.set_visible(not value)
