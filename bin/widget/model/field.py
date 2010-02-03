@@ -153,6 +153,7 @@ class CharField(object):
             self.get_state_attrs(model)['required'] = self.attrs['required']
         if 'value' in state_changes:
             self.set(model, state_changes['value'], test_state=False, modified=True)
+	# todo 'value_def'
 
     def get_state_attrs(self, model):
         if self.name not in model.state_attrs:

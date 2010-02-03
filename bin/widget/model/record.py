@@ -283,6 +283,19 @@ class ModelRecord(signal_event.signal_event):
         response = getattr(self.rpc, func_name)(ids, *args)
         if response:
             self.set(response.get('value', {}), modified=True)
+            if 'value_def' in response:
+                is_updated = False
+                for fieldname, val in response['value_def'].items():
+                    if fieldname not in self.mgroup.mfields:
+                        continue
+                    if not self.mgroup.mfields[fieldname].get(self):
+                        self.mgroup.mfields[fieldname].set(self, val, modified=True)
+                        is_updated = True
+                
+                if is_updated:
+                    self.modified = True
+                    self.signal('record-changed')
+        
             if 'domain' in response:
                 for fieldname, value in response['domain'].items():
                     if fieldname not in self.mgroup.mfields:
