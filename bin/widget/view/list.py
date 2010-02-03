@@ -30,7 +30,6 @@ from rpc import RPCProxy
 import service
 import locale
 from interface import parser_view
-from tree_gtk import parser
 
 class field_record(object):
     def __init__(self, name):
