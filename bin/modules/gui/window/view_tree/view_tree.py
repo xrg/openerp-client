@@ -55,16 +55,35 @@ LDFMT = datetime_util.get_date_format()
 # Node struct: [list of (pos, list) ]
 #
 class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
-    def __init__(self, ids, view, fields, fields_type, context={}, pixbufs={}, treeview=None):
+    def __init__(self, ids, view, fields, fields_type, context={}, pixbufs={}, treeview=None, colors='black'):
         gtk.GenericTreeModel.__init__(self)
         self.fields = fields
         self.fields_type = fields_type
         self.view = view
         self.roots = ids
+        self.colors = colors
+        self.color_ids = {}                
         self.context = context
         self.tree = self._node_process(self.roots)
         self.pixbufs = pixbufs
         self.treeview = treeview
+
+    def get_color(self,result):
+        color_ids = {}
+        for res in result:
+            color_ids[res['id']] = 'black'
+            res_lower={}
+            for key,vals in res.items():
+                if isinstance(vals,str):
+                    res_lower[key]= vals.lower()
+                else:
+                    res_lower[key] = vals
+            for color,expt in self.colors.items():
+                if isinstance(expt, basestring):
+                    val = tools.expr_eval(expt,res_lower)
+                    if val:
+                        color_ids[res_lower['id']] = color
+        return color_ids
 
     def _read(self, ids, fields):
         c = {}
@@ -126,6 +145,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         tree = []
         if self.view.get('field_parent', False):
             res = self._read(ids, self.fields+[self.view['field_parent']])
+            self.color_ids.update(self.get_color(res))                        
             for x in res:
                 tree.append( [ x['id'], None, [], x[self.view['field_parent']] ] )
                 tree[-1][1] = [ x[ y ] for y in self.fields]
@@ -286,6 +306,7 @@ class view_tree(object):
         p.parse(view_info['arch'], self.view)
         self.toolbar = p.toolbar
         self.pixbufs = p.pixbufs
+        self.colors = p.colors        
         self.name = p.title
         self.sel_multi = sel_multi
 
@@ -310,8 +331,23 @@ class view_tree(object):
     def reload(self):
         del self.model
         self.context.update(rpc.session.context)
-        self.model = view_tree_model(self.ids, self.view_info, self.fields_order, self.fields, context=self.context, pixbufs=self.pixbufs, treeview=self.view)
+        self.model = view_tree_model(self.ids, self.view_info, self.fields_order, self.fields, context=self.context, pixbufs=self.pixbufs, treeview=self.view , colors=self.colors)
         self.view.set_model(self.model)
+        local ={}
+        def render_column(column, cell, model, iter):
+            if not isinstance(cell, gtk.CellRendererPixbuf):
+                    list = zip(self.model.color_ids.keys(),self.model.color_ids.values())
+                    color_by ={}
+                    for k,v in list:
+                        color_by.setdefault(v,[]).append(str(k))
+                    for k ,v in color_by.items():
+                        if model.get_value(iter,0) in v:
+                            cell.set_property('foreground',k)
+
+        for column in self.view.get_columns():
+            renderers  = column.get_cell_renderers()
+            for ren in renderers:
+                column.set_cell_data_func(ren, render_column)
 
     def widget_get(self):
         return self.view
