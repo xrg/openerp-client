@@ -124,6 +124,7 @@ class Screen(signal_event.signal_event):
         self.domain += dmn
 
 
+
     def readonly_get(self):
         return self._readonly
 
@@ -264,8 +265,11 @@ class Screen(signal_event.signal_event):
 
     def execute_action(self, combo):
         flag = combo.get_active_text()
-
         # 'mf' Section manages Filters
+        def clear_domain():
+            for domain in self.latest_search:
+                if domain in self.domain_init:
+                    self.domain_init.remove(domain)
         if flag == 'mf':
             obj = service.LocalService('action.main')
             act={'name':'Manage Filters',
@@ -277,6 +281,7 @@ class Screen(signal_event.signal_event):
             value = obj._exec_action(act, {}, self.context)
 
         if flag in ['blk','mf']:
+            clear_domain()
             self.search_filter()
             combo.set_active(0)
             return True
@@ -391,13 +396,15 @@ class Screen(signal_event.signal_event):
                         shortcut_id = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view_sc', 'create', sc_data)
                 return True
         else:
-            pass
-            #try:
-            #    self.action_domain = flag and tools.expr_eval(flag) or []
-            #    if isinstance(self.action_domain,type([])):
-            #        self.search_filter()
-            #except Exception, e:
-            #    return True
+            try:
+                filter_domain = flag and tools.expr_eval(flag)
+                clear_domain()
+                self.domain_init += filter_domain or []
+                if isinstance(self.domain_init,type([])):
+                    self.search_filter()
+            except Exception, e:
+                return True
+
 #        self.action_domain=[]
 #        combo.set_active(0)
 
