@@ -105,7 +105,8 @@ class Screen(signal_event.signal_event):
         self.readonly= readonly
         self.custom_panels = []
         self.view_fields = {} # Used to switch self.fields when the view switchs
-
+        self.sort_domain = []
+        
         if view_type:
             self.view_to_load = view_type[1:]
             view_id = False
@@ -219,7 +220,7 @@ class Screen(signal_event.signal_event):
 
     def search_filter(self, *args):
         val = self.filter_widget and self.filter_widget.value or {}
-        self.context_update(val.get('context',{}), val.get('domain',[]))
+        self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
         v = self.domain
         limit=self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
@@ -245,6 +246,9 @@ class Screen(signal_event.signal_event):
             self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', v, self.context)
         self.update_scroll()
         self.clear()
+        if self.sort_domain in v:
+            v.remove(self.sort_domain)
+        self.sort_domain = []        
         self.load(ids)
         return True
 

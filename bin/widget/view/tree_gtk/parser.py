@@ -60,8 +60,9 @@ def sort_model(column, screen):
     else:
         screen.sort = column.name
     screen.offset = 0
+    res_ids = filter(None,map(lambda x:x.id,screen.models))
+    screen.sort_domain = [('id','in',res_ids)]
     screen.search_filter()
-    #screen.display()
 
 class parser_tree(interface.parser_interface):
     def parse(self, model, root_node, fields):
