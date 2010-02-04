@@ -293,89 +293,21 @@ class Screen(signal_event.signal_event):
             glade2 = glade.XML(common.terp_path("openerp.glade"),'dia_get_action',gettext.textdomain())
             widget = glade2.get_widget('action_name')
             win = glade2.get_widget('dia_get_action')
-            form_combo = glade2.get_widget('combo_form')
-            tree_combo = glade2.get_widget('combo_tree')
-            graph_combo = glade2.get_widget('combo_graph')
-            calendar_combo = glade2.get_widget('combo_calendar')
-            gantt_combo = glade2.get_widget('combo_gantt')
             win.set_icon(common.OPENERP_ICON)
             if flag == 'sh':
                 win.set_title('Shortcut Entry')
                 lbl = glade2.get_widget('label157')
                 lbl.set_text('Enter Shortcut Name:')
-
-            new_view_ids = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view', 'search', [('model','=',self.resource),('inherit_id','=',False)])
-            view_datas = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view', 'read', new_view_ids, ['id','name','type'])
-            cell = gtk.CellRendererText()
-            liststore_form = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
-            form_combo.set_model(liststore_form)
-            form_combo.pack_start(cell, True)
-            form_combo.add_attribute(cell, 'text', 1)
-
-            liststore_tree = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
-            tree_combo.set_model(liststore_tree)
-            tree_combo.pack_start(cell, True)
-            tree_combo.add_attribute(cell, 'text', 1)
-
-            liststore_graph = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
-            graph_combo.set_model(liststore_graph)
-            graph_combo.pack_start(cell, True)
-            graph_combo.add_attribute(cell, 'text', 1)
-
-            liststore_calendar = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
-            calendar_combo.set_model(liststore_calendar)
-            calendar_combo.pack_start(cell, True)
-            calendar_combo.add_attribute(cell, 'text', 1)
-
-            liststore_gantt = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
-            gantt_combo.set_model(liststore_gantt)
-            gantt_combo.pack_start(cell, True)
-            gantt_combo.add_attribute(cell, 'text', 1)
-
-            for data in view_datas:
-                if data['type'] == 'form':
-                    liststore_form.append([data['id'],data['name']])
-                elif data['type'] == 'tree':
-                    liststore_tree.append([data['id'],data['name']])
-                elif data['type'] == 'graph':
-                    liststore_graph.append([data['id'],data['name']])
-                elif data['type'] == 'calendar':
-                    liststore_calendar.append([data['id'],data['name']])
-                elif data['type'] == 'gantt':
-                    liststore_gantt.append([data['id'],data['name']])
-            form_combo.set_active(0)
-            tree_combo.set_active(0)
-            graph_combo.set_active(0)
-            calendar_combo.set_active(0)
-            gantt_combo.set_active(0)
             win.show_all()
             response = win.run()
             win.destroy()
             combo.set_active(0)
             if response == gtk.RESPONSE_OK and widget.get_text():
                 action_name = widget.get_text()
-                v_ids=[]
-                if form_combo.get_active_text():
-                    rec = {'view_mode':'form', 'view_id':form_combo.get_active_text(), 'sequence':2}
-                    v_ids.append(rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window.view', 'create', rec))
-                if tree_combo.get_active_text():
-                    rec = {'view_mode':'tree', 'view_id':tree_combo.get_active_text(), 'sequence':1}
-                    v_ids.append(rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window.view', 'create', rec))
-                if graph_combo.get_active_text():
-                    rec = {'view_mode':'graph', 'view_id':graph_combo.get_active_text(), 'sequence':4}
-                    v_ids.append(rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window.view', 'create', rec))
-                if calendar_combo.get_active_text():
-                    rec = {'view_mode':'calendar', 'view_id':calendar_combo.get_active_text(), 'sequence':3}
-                    v_ids.append(rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window.view', 'create', rec))
-                if gantt_combo.get_active_text():
-                    rec = {'view_mode':'gantt', 'view_id':gantt_combo.get_active_text(), 'sequence':5}
-                    v_ids.append(rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window.view', 'create', rec))
-
                 datas={'name':action_name,
                        'res_model':self.name,
                        'domain':str(self.filter_widget and self.filter_widget.value.get('domain',[])),
                        'context':str(self.filter_widget and self.filter_widget.value.get('context',{})),
-                       'view_ids':[(6,0,v_ids)],
                        'search_view_id':self.search_view['view_id'],
                        'filter':True,
                        'default_user_ids': [[6, 0, [rpc.session.uid]]],
@@ -407,9 +339,6 @@ class Screen(signal_event.signal_event):
                     self.search_filter()
             except Exception, e:
                 return True
-
-#        self.action_domain=[]
-#        combo.set_active(0)
 
     def models_set(self, models):
         import time
