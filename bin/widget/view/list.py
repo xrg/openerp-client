@@ -501,9 +501,11 @@ class ViewList(parser_view):
                 if self.last_col:
                     self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col)
                     self.last_col = None
-                if self.tree_editable:
+                if self.tree_editable or self.screen.context.get('set_editable',False):
                     self.set_editable()
                     self.tree_editable = False
+                else:
+                    self.unset_editable()
             self.set_invisible_attr()
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
