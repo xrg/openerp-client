@@ -58,23 +58,23 @@ class screen_container(object):
             self.action_list.append(lim)
         self.action_combo.set_active(0)
 
-    def fill_limit_combo(self, search_count):
+    def fill_limit_combo(self, search_count, limit=100):
         self.limit_combo.clear()
         self.selection = []    
         i = 1
         tmp_search_count = search_count 
-        while tmp_search_count>100 :
-            self.selection.append([i*100,'0/'+str(i*100)+' of '+str(search_count)])
+        while tmp_search_count>limit :
+            self.selection.append([i*limit,'0/'+str(i*limit)+' of '+str(search_count)])
             if i>5:
                 break
             i += 1
-            tmp_search_count -= 100
+            tmp_search_count -= limit
         self.selection.append([search_count, '0/'+str(search_count)+' of '+str(search_count)])
         for lim in self.selection:
             self.limit_combo.append(lim)
         self.combo.set_active(0)
             
-    def add_filter(self, widget, fnct, clear_fnct, next_fnct, prev_fnct, search_count=100, execute_action=None, add_custom=None, model=None):
+    def add_filter(self, widget, fnct, clear_fnct, next_fnct, prev_fnct, search_count=100, execute_action=None, add_custom=None, model=None, limit=100):
         self.filter_vbox = gtk.VBox(spacing=1)
         self.filter_vbox.set_border_width(1)
         self.filter_vbox.pack_start(widget, expand=True, fill=True)
@@ -136,7 +136,7 @@ class screen_container(object):
 
         self.selection = []
         hb3.pack_start(self.combo, expand=False, fill=False)
-        self.fill_limit_combo(search_count)
+        self.fill_limit_combo(search_count,limit)
         self.combo.set_active(0)
         
         hb3.pack_start(gtk.VSeparator(),padding=3, expand=False, fill=False)

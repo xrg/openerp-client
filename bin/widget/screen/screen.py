@@ -149,7 +149,7 @@ class Screen(signal_event.signal_event):
                         self.search_filter, self.search_clear,
                         self.search_offset_next,
                         self.search_offset_previous, self.search_count,
-                        self.execute_action, self.add_custom, self.name)
+                        self.execute_action, self.add_custom, self.name, self.limit)
 
         if active and show_search:
             self.screen_container.show_filter()

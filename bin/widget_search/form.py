@@ -263,14 +263,17 @@ class parse(object):
 
             elif node.localName=='group':
                 if attrs.get('expand',False):
-                    frame = gtk.Expander(attrs.get('string', None))
+                    attrs['expand'] = tools.expr_eval(attrs.get('expand',False),{'context':call[0].context})
+                    if attrs['expand']:
+                        frame = gtk.Expander(attrs.get('string', None))
+                    else:
+                        continue
                 else:
                     frame = gtk.Frame(attrs.get('string', None))
                     if not attrs.get('string', None):
                         frame.set_shadow_type(gtk.SHADOW_NONE)
                 frame.attrs=attrs
                 frame.set_border_width(0)
-
                 container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), ypadding=0)
                 container.new(int(attrs.get('col',8)))
                 widget, widgets = self.parse_filter(xml_data, max_width, node, call= call)
