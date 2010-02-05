@@ -588,11 +588,19 @@ class ViewList(parser_view):
         self.widget_tree.collapse_row(path)
 
     def set_editable(self, value=True):
+        from tree_gtk.parser import send_keys
+        from tree_gtk import date_renderer
         self.widget_tree.editable = value
         for col in self.widget_tree.get_columns():
             for renderer in col.get_cell_renderers():
-                if isinstance(renderer, gtk.CellRendererToggle):
-                    renderer.set_property('activatable', value)
+                if value in ('top','bottom'):
+                    write_enable = value
+                    if isinstance(renderer, gtk.CellRendererToggle):
+                        renderer.set_property('activatable', write_enable)
+                    elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo, date_renderer.DecoratorRenderer)):
+                        renderer.set_property('editable', write_enable)
+                    if write_enable:
+                        renderer.connect_after('editing-started', send_keys, self.widget_tree)
                 elif not isinstance(renderer, gtk.CellRendererProgress) and not isinstance(renderer, gtk.CellRendererPixbuf):
                     renderer.set_property('editable', value)
 
