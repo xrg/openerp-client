@@ -260,6 +260,7 @@ class ViewList(parser_view):
         self.children = children
         self.last_col = None
         self.tree_editable = False
+        self.is_editable = widget.editable
         if children:
             hbox = gtk.HBox()
             self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
@@ -493,19 +494,22 @@ class ViewList(parser_view):
                         pos = self.widget_tree.get_columns().index(col) - 1
                         if not pos == -1:
                             self.last_col = self.widget_tree.get_column(pos)
-                        self.widget_tree.move_column_after(col,None)
-                if self.widget_tree.editable:
+                        self.widget_tree.move_column_after(col,None) # move groupby column at first position
+                if self.widget_tree.editable: # If treeview editable in groupby unset editable
                     self.unset_editable()
                     self.tree_editable = True
             else:
                 if self.last_col:
-                    self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col)
+                    self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col) # move groupby column back to its original position
                     self.last_col = None
-                if self.tree_editable or self.screen.context.get('set_editable',False):
+                if self.tree_editable or self.screen.context.get('set_editable',False):# if context has set_editable=True or groupby has unset it
                     self.set_editable()
                     self.tree_editable = False
                 else:
-                    self.unset_editable()
+                    if self.is_editable: # for Normal Tree view with editable=True
+                        self.set_editable()
+                    else:
+                        self.unset_editable()
             self.set_invisible_attr()
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
