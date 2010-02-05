@@ -321,12 +321,12 @@ class ViewList(parser_view):
                     return
         model = treeview.get_model()
         data = eval(selection.data)
-        get_id = data[0]        
+        get_id = data[0]
         drop_info = treeview.get_dest_row_at_pos(x, y)
         group_by = self.screen.context.get('group_by',False)
         if drop_info:
             path, position = drop_info
-            rec_id = path[0]            
+            rec_id = path[0]
             if group_by:
                 target_group = model.models[path[0]]
                 target_domain = filter(lambda x: x[0] == group_by, target_group.children.context.get('__domain',[]))[0]
@@ -343,10 +343,10 @@ class ViewList(parser_view):
                 if position in (gtk.TREE_VIEW_DROP_BEFORE,
                         gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
                     model.move(data, idx)
-                    rec_id = idx                    
+                    rec_id = idx
                 else:
                     model.move(data, idx + 1)
-                    rec_id = idx+1                    
+                    rec_id = idx+1
         context.drop_finish(False, etime)
         if treeview.sequence and drop_info:
             self.screen.models.set_sequence(get_id,rec_id,field='sequence')
@@ -507,11 +507,11 @@ class ViewList(parser_view):
                     self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col) # move groupby column back to its original position
                     self.last_col = None
                 if self.tree_editable or self.screen.context.get('set_editable',False):# if context has set_editable=True or groupby has unset it
-                    self.set_editable()
+                    self.set_editable(self.is_editable or "bottom")
                     self.tree_editable = False
                 else:
                     if self.is_editable: # for Normal Tree view with editable=True
-                        self.set_editable()
+                        self.set_editable(self.is_editable)
                     else:
                         self.unset_editable()
             self.set_invisible_attr()
