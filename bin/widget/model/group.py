@@ -114,17 +114,26 @@ class ModelRecordGroup(signal_event.signal_event):
     def model_move(self, model, position=0):
         self.models.move(model, position)
 
-    def set_sequence(self, field='sequence'):
-        index = 0
-        for model in self.models:
-            if model[field]:
-                if index >= model[field].get(model):
-                    index += 1
-                    model[field].set(model, index, modified=True)
-                else:
-                    index = model[field].get(model)
-                if model.id:
-                    model.save()
+    def set_sequence(self, get_id, rec_id, field='sequence'):
+        seq_id = {}
+        if get_id < rec_id:
+            for x in range(get_id, rec_id):
+                    seq_id[x] = self.models[x][field].get(self.models[x])
+            sort_seq = [seq_id.values()[-1]] + seq_id.values()[:-1]
+            index = 0
+            for x in range(get_id, rec_id):
+                self.models[x][field].set(self.models[x], sort_seq[index], modified=True)
+                self.models[x].save()
+                index = index +1
+        else:
+            for x in range(rec_id,get_id+1):
+                seq_id[x] = self.models[x][field].get(self.models[x])
+            sort_seq = seq_id.values()[1:] + [seq_id.values()[0]]
+            index = 0
+            for x in range(rec_id,get_id+1):
+                self.models[x][field].set(self.models[x], sort_seq[index], modified=True)
+                self.models[x].save()
+                index = index +1
 
     def save(self):
         for model in self.models:
