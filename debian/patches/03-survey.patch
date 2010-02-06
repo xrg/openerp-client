@@ -1,0 +1,18 @@
+Author: Daniel Baumann <daniel@debian.org>
+Description: Disable survey completely (Closes: #560688).
+
+diff -Naurp openerp-client.orig/bin/openerp-client.py openerp-client/bin/openerp-client.py
+--- openerp-client.orig/bin/openerp-client.py	2010-02-06 10:03:21.000000000 +0100
++++ openerp-client/bin/openerp-client.py	2010-02-06 10:04:30.000000000 +0100
+@@ -130,9 +130,8 @@ for fname in os.listdir(pix_file):
+ 
+ try:
+     win = modules.gui.main.terp_main()
+-    if not common.terp_survey():
+-        if options.options.rcexist:
+-            win.sig_login()
++    if options.options.rcexist:
++        win.sig_login()
+     gtk.main()
+ except KeyboardInterrupt, e:
+     log = logging.getLogger('common')
