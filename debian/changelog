@@ -1,3 +1,13 @@
+openerp-client (5.0.6-3) unstable; urgency=low
+
+  * Adding explicit debian source version 1.0 until switch to 3.0.
+  * Updating year in copyright file.
+  * Updating to standards 3.8.4.
+  * Adding patch to completely disable the annoying survey on startup
+    (Closes: #560688).
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 06 Feb 2010 10:13:25 +0100
+
 openerp-client (5.0.6-2) unstable; urgency=low
 
   * Manually removing build directory in clean target (Closes: #549215).
