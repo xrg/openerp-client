@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-12-07 06:02+0000\n"
+"PO-Revision-Date: 2010-02-06 16:51+0000\n"
 "Last-Translator: Jordi Esteve - http://www.zikzakmedia.com "
 "<jesteve@zikzakmedia.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-08 04:39+0000\n"
+"X-Launchpad-Export-Date: 2010-02-07 04:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -178,14 +178,9 @@ msgstr ""
 "Podeu començar creant una nova base de dades o\n"
 "connectant a un servidor existent mitjançant el menú Fitxer."
 
-#
-# File: bin/common/common.py, line: 289
-# File: bin/common/common.py, line: 343
-# File: bin/common/common.py, line: 289
-# File: bin/common/common.py, line: 343
 #: bin/common/common.py:325
 msgid "Support request sent !"
-msgstr "Petició de suport enviada!"
+msgstr "Sol·licitud de suport enviada!"
 
 #: bin/common/common.py:345 bin/common/common.py:388
 msgid ""
@@ -1113,28 +1108,19 @@ msgstr "Premeu Ctrl+O per connectar-vos"
 msgid "Edit"
 msgstr "Edita"
 
-#
-# File: bin/modules/gui/main.py, line: 694
-# File: bin/modules/gui/main.py, line: 694
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr "%s petició(ns)"
+msgstr "%s sol·licitud(s)"
 
-#
-# File: bin/modules/gui/main.py, line: 696
-# File: bin/modules/gui/main.py, line: 696
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr "No hi ha peticions"
+msgstr "No hi ha sol·licituds"
 
-#
-# File: bin/modules/gui/main.py, line: 698
-# File: bin/modules/gui/main.py, line: 698
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sended"
-msgstr " - %s petició(ns) enviades"
+msgstr " - %s sol·licitud(s) enviades"
 
 #
 # File: bin/modules/gui/main.py, line: 734
@@ -1846,26 +1832,17 @@ msgstr "_Usuari"
 msgid "_Preferences"
 msgstr "_Preferències"
 
-#
-# File: bin/openerp.glade, line: 445
-# File: bin/openerp.glade, line: 445
 #: bin/openerp.glade:478
 msgid "_Send a request"
-msgstr "Envia una petició"
+msgstr "Envia una sol·licitud"
 
-#
-# File: bin/openerp.glade, line: 460
-# File: bin/openerp.glade, line: 460
 #: bin/openerp.glade:493
 msgid "_Read my requests"
-msgstr "Llegi_r les meves peticions"
+msgstr "Llegi_r les meves sol·licituds"
 
-#
-# File: bin/openerp.glade, line: 480
-# File: bin/openerp.glade, line: 480
 #: bin/openerp.glade:513
 msgid "_Waiting Requests"
-msgstr "Peticions en _espera"
+msgstr "Sol·licituds en _espera"
 
 #
 # File: bin/openerp.glade, line: 493
@@ -2200,14 +2177,9 @@ msgstr "Drecere_s"
 msgid "_Help"
 msgstr "A_juda"
 
-#
-# File: bin/openerp.glade, line: 1089
-# File: bin/openerp.glade, line: 6372
-# File: bin/openerp.glade, line: 1089
-# File: bin/openerp.glade, line: 6372
 #: bin/openerp.glade:1122 bin/openerp.glade:4389
 msgid "Support Request"
-msgstr "Envia petició de suport"
+msgstr "Envia sol·licitud de suport"
 
 #
 # File: bin/openerp.glade, line: 1109
@@ -2366,26 +2338,17 @@ msgstr "Refresca"
 msgid "Close this window"
 msgstr "Tanca aquesta finestra"
 
-#
-# File: bin/openerp.glade, line: 1448
-# File: bin/openerp.glade, line: 1448
 #: bin/openerp.glade:1497
 msgid "Requests:"
-msgstr "Peticions:"
+msgstr "Sol·licituds:"
 
-#
-# File: bin/openerp.glade, line: 1471
-# File: bin/openerp.glade, line: 1471
 #: bin/openerp.glade:1520
 msgid "Read my Requests"
-msgstr "Llegeix les meves peticions"
+msgstr "Llegeix les meves sol·licituds"
 
-#
-# File: bin/openerp.glade, line: 1492
-# File: bin/openerp.glade, line: 1492
 #: bin/openerp.glade:1541
 msgid "Send a new request"
-msgstr "Envia una nova petició"
+msgstr "Envia una nova sol·licitud"
 
 #
 # File: bin/openerp.glade, line: 1532
@@ -2782,9 +2745,6 @@ msgstr "Ves a l'ID del registre"
 msgid "Search ID:"
 msgstr "Cerca ID:"
 
-#
-# File: bin/openerp.glade, line: 6398
-# File: bin/openerp.glade, line: 6398
 #: bin/openerp.glade:4415
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
@@ -2793,10 +2753,11 @@ msgid ""
 "Note that we may not reply if you do not have a support contract with Tiny "
 "or an official partner.</i>"
 msgstr ""
-"<b>Ompliu aquest formulari per enviar l'informe d'error i/o fer una petició "
-"de suport.</b>\n"
+"<b>Ompliu aquest formulari per enviar l'informe d'error i/o fer una "
+"sol·licitud de suport.</b>\n"
 "<i>\n"
-"La petició serà enviada a OpenERP i serà contestada el més aviat possible.\n"
+"La sol·licitud serà enviada a OpenERP i serà contestada el més aviat "
+"possible.\n"
 "Tingueu en compte que és possible que no obtingueu resposta si la vostra "
 "empresa no té un contracte de suport amb Tiny o amb un soci oficial.</i>"
 
@@ -3700,7 +3661,7 @@ msgid ""
 msgstr ""
 "<b>Contracte de manteniment.</b>\n"
 "<i>\n"
-"La vostra petició serà enviada a OpenERP i un equip de manteniment us "
+"La vostra sol·licitud serà enviada a OpenERP i un equip de manteniment us "
 "respondrà en poc temps.\n"
 "</i>"
 
@@ -3728,7 +3689,7 @@ msgstr "Envia a l'equip de manteniment"
 
 #: bin/win_error.glade:326
 msgid "<i>_Support Request</i>"
-msgstr "<i>Petició de _suport</i>"
+msgstr "<i>Sol·licitud de _suport</i>"
 
 #: bin/win_error.glade:353
 msgid "Details"

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-01-29 05:27+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2010-02-07 02:01+0000\n"
+"Last-Translator: Oktay Altunergil <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-03 04:46+0000\n"
+"X-Launchpad-Export-Date: 2010-02-07 04:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -199,6 +199,31 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"Bu pencere size OpenERP bakım sözleşmeleri ile ilgili bilgi vermek için "
+"programda bir hata oluştuğunda görüntülenmektedir. Hatanın sebebi bir bakım "
+"sözleşmeniz olmaması değildir. Bu sadece \"Eğer sözleşmeniz olsaydı bu "
+"hatayı tamir ederdik\" anlamında bir hatırlatmadır.\n"
+"\n"
+"<b>An unknown error has been reported.</b>\n"
+"\n"
+"Your maintenance contract does not cover all modules installed in your "
+"system !\n"
+"If you are using Open ERP in production, it is highly suggested to upgrade "
+"your\n"
+"contract.\n"
+"\n"
+"If you have developed your own modules or installed third party module, we\n"
+"can provide you an additional maintenance contract for these modules. After\n"
+"having reviewed your modules, our quality team will ensure they will "
+"migrate\n"
+"automatically for all future stable versions of Open ERP at no extra cost.\n"
+"\n"
+"Here is the list of modules not covered by your maintenance contract:\n"
+"%s\n"
+"\n"
+"You can use the link bellow for more information. The detail of the error\n"
+"is displayed on the second tab."
 
 #: bin/common/common.py:443
 msgid ""
@@ -259,7 +284,7 @@ msgstr "Form içeriği veya uygulaması geçersiz"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "(Bu ifadenin İngilizce aslı bozuk olduğundan çevrilememiştir)"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -973,7 +998,7 @@ msgstr "Bir kaynağı ara"
 
 #: bin/widget/view/form_gtk/many2one.py:168 bin/openerp.glade:1389
 msgid "Action"
-msgstr "Eylem"
+msgstr "İşlem"
 
 #: bin/widget/view/form_gtk/many2one.py:169
 msgid "Report"
