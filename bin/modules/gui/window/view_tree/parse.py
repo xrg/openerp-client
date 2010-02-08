@@ -42,7 +42,7 @@ class parse(object):
         elif name=='field':
             type = self.fields[attrs['name']]['type']
             field_name = attrs.get('string', self.fields[attrs['name']]['string'])
-            if type!='checkbox':
+            if type!='boolean':
                 column = gtk.TreeViewColumn(field_name) #, cell, text=self.pos)
                 if 'icon' in attrs:
                     render_pixbuf = gtk.CellRendererPixbuf()
