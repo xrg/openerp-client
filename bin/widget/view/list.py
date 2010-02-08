@@ -593,16 +593,16 @@ class ViewList(parser_view):
         self.widget_tree.editable = value
         for col in self.widget_tree.get_columns():
             for renderer in col.get_cell_renderers():
-                if value in ('top','bottom'):
-                    write_enable = value
-                    if isinstance(renderer, gtk.CellRendererToggle):
-                        renderer.set_property('activatable', write_enable)
-                    elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo, date_renderer.DecoratorRenderer)):
-                        renderer.set_property('editable', write_enable)
-                    if write_enable:
-                        renderer.connect_after('editing-started', send_keys, self.widget_tree)
+                if isinstance(renderer, gtk.CellRendererToggle):
+                    renderer.set_property('activatable', value)
                 elif not isinstance(renderer, gtk.CellRendererProgress) and not isinstance(renderer, gtk.CellRendererPixbuf):
                     renderer.set_property('editable', value)
+                if value in ('top','bottom'):
+                    if isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo, date_renderer.DecoratorRenderer)):
+                        renderer.set_property('editable', value)
+                    if value:
+                        renderer.connect_after('editing-started', send_keys, self.widget_tree)
+
 
     def set_invisible_attr(self):
         for col in self.widget_tree.get_columns():
