@@ -197,8 +197,11 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         iter2 = iter
         result = []
         while iter:
-            result.insert(0,iter.list_group.lst.index(iter))
-            iter = iter.list_parent
+            try:
+                result.insert(0,iter.list_group.lst.index(iter))
+                iter = iter.list_parent
+            except:
+                return (0,0)
         return tuple(result)
 
     def on_get_iter(self, path):
