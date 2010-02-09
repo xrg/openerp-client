@@ -102,6 +102,7 @@ class parser_tree(interface.parser_interface):
                 col.name = node_attrs['name']
                 col._type = 'Button'
                 col.attrs = node_attrs
+                col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 col_label = gtk.Label('')
                 #col_label.set_markup('<b>%s</b>' % node_attrs['string'])
                 if node_attrs.get('help',False):
