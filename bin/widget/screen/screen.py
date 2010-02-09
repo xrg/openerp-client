@@ -106,6 +106,7 @@ class Screen(signal_event.signal_event):
         self.custom_panels = []
         self.view_fields = {} # Used to switch self.fields when the view switchs
         self.sort_domain = []
+        self.old_ctx = {}
 
         if view_type:
             self.view_to_load = view_type[1:]
@@ -269,7 +270,10 @@ class Screen(signal_event.signal_event):
     def execute_action(self, combo):
         flag = combo.get_active_text()
         # 'mf' Section manages Filters
-        def clear_domain():
+        def clear_domain_ctx():
+            for key in self.old_ctx.keys():
+                if self.context_init.has_key(key):
+                    del self.context_init[key]
             for domain in self.latest_search:
                 if domain in self.domain_init:
                     self.domain_init.remove(domain)
@@ -284,7 +288,7 @@ class Screen(signal_event.signal_event):
             value = obj._exec_action(act, {}, self.context)
 
         if flag in ['blk','mf']:
-            clear_domain()
+            clear_domain_ctx()
             self.search_filter()
             combo.set_active(0)
             return True
@@ -333,11 +337,18 @@ class Screen(signal_event.signal_event):
         else:
             try:
                 filter_domain = flag and tools.expr_eval(flag)
-                clear_domain()
+                clear_domain_ctx()
+                if combo.get_active() >= 0:
+                    combo_model = combo.get_model()
+                    val = combo_model[combo.get_active()][1]
+                    if val:
+                        self.old_ctx = eval(val)
+                        self.context_init.update(self.old_ctx)
                 self.domain_init += filter_domain or []
                 if isinstance(self.domain_init,type([])):
                     self.search_filter()
-            except Exception, e:
+                    self.reload()
+            except Exception:
                 return True
 
     def models_set(self, models):

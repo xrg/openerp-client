@@ -499,27 +499,17 @@ class ViewList(parser_view):
                         if not pos == -1:
                             self.last_col = self.widget_tree.get_column(pos)
                         self.widget_tree.move_column_after(col,None) # move groupby column at first position
-                if self.widget_tree.editable: # If treeview editable in groupby unset editable
-                    self.unset_editable()
-                    self.tree_editable = True
             else:
                 if self.last_col:
                     self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col) # move groupby column back to its original position
                     self.last_col = None
-                if self.tree_editable or self.screen.context.get('set_editable',False):# if context has set_editable=True or groupby has unset it
-                    self.set_editable(self.is_editable or "bottom")
-                    self.tree_editable = False
-                else:
-                    if self.is_editable: # for Normal Tree view with editable=True
-                        self.set_editable(self.is_editable)
-                    else:
-                        self.unset_editable()
             self.set_invisible_attr()
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
         else:
             self.store.invalidate_iters()
+        self.check_editable()
         self.reload = False
         if not self.screen.current_model:
             #
@@ -578,14 +568,25 @@ class ViewList(parser_view):
         self.set_value()
         self.screen.on_change(callback)
 
-    def unset_editable(self):
-        self.set_editable(False)
-
     def expand_row(self, path, open_all = False):
         self.widget_tree.expand_row(path, open_all)
 
     def collapse_row(self, path):
         self.widget_tree.collapse_row(path)
+
+    def check_editable(self):
+        if self.screen.context.get('group_by',False):
+            if self.widget_tree.editable: # If treeview editable in groupby unset editable
+                self.set_editable(False)
+                self.tree_editable = True
+        elif self.tree_editable or self.screen.context.get('set_editable',False):# if context has set_editable=True or groupby has unset it
+            self.set_editable(self.is_editable or "bottom")
+            self.tree_editable = False
+        else:
+            if self.is_editable: # for Normal Tree view with editable=True
+                self.set_editable(self.is_editable)
+            else:
+                self.set_editable(False)
 
     def set_editable(self, value=True):
         from tree_gtk.parser import send_keys
