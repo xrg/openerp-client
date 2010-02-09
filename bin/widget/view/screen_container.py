@@ -48,21 +48,21 @@ class screen_container(object):
     def fill_filter_combo(self, model):
         self.action_list.clear()
         my_acts = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'get_filters', model)
-        filters_list=[['blk','-- Filters --']]
-        sorted_filters = [[act.get('domain',act['id']),act['name']] for act in my_acts]
-        sorted_filters.sort(lambda x, y: cmp(x[1], y[1]))
+        filters_list=[['blk','','-- Filters --']]
+        sorted_filters = [[act.get('domain',act['id']),act['context'],act['name']] for act in my_acts]
+        sorted_filters.sort(lambda x, y: cmp(x[2], y[2]))
         filters_list += sorted_filters
-        filters_list += [['blk','--Actions--'],['sh','Save as a Shortcut'],['sf','Save as a Filter'],['mf','Manage Filters']]
-        
+        filters_list += [['blk','','--Actions--'],['sh','','Save as a Shortcut'],['sf','','Save as a Filter'],['mf','','Manage Filters']]
+
         for lim in filters_list:
             self.action_list.append(lim)
         self.action_combo.set_active(0)
 
     def fill_limit_combo(self, search_count, limit=100):
         self.limit_combo.clear()
-        self.selection = []    
+        self.selection = []
         i = 1
-        tmp_search_count = search_count 
+        tmp_search_count = search_count
         while tmp_search_count>limit :
             self.selection.append([i*limit,'0/'+str(i*limit)+' of '+str(search_count)])
             if i>5:
@@ -73,17 +73,17 @@ class screen_container(object):
         for lim in self.selection:
             self.limit_combo.append(lim)
         self.combo.set_active(0)
-            
+
     def add_filter(self, widget, fnct, clear_fnct, next_fnct, prev_fnct, search_count=100, execute_action=None, add_custom=None, model=None, limit=100):
         self.filter_vbox = gtk.VBox(spacing=1)
         self.filter_vbox.set_border_width(1)
         self.filter_vbox.pack_start(widget, expand=True, fill=True)
-        
+
         hb1 = gtk.HButtonBox()
         hb1.set_spacing(5)
         hb1.set_layout(gtk.BUTTONBOX_START)
         hb2 = gtk.HBox(homogeneous=False, spacing=0)
-        hb3 = gtk.HBox(homogeneous=False, spacing=0)        
+        hb3 = gtk.HBox(homogeneous=False, spacing=0)
 
         hs = gtk.HBox(homogeneous=False, spacing=0)
 
@@ -96,23 +96,23 @@ class screen_container(object):
         self.button.connect('clicked', fnct)
         self.button.set_property('can_default', True)
         hb1.pack_start(self.button, expand=False, fill=False)
-        
+
         button_clear = gtk.Button(stock=gtk.STOCK_CLEAR)
         button_clear.connect('clicked', clear_fnct)
         hb1.pack_start(button_clear, expand=False, fill=False)
 
 #Action Filter and custom Filter Button
-#actions combo        
-        self.action_list = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
+#actions combo
+        self.action_list = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
         self.action_combo = gtk.ComboBox(self.action_list)
         cell = gtk.CellRendererText()
         self.action_combo.pack_start(cell, True)
-        self.action_combo.add_attribute(cell, 'text', 1)
+        self.action_combo.add_attribute(cell, 'text', 2)
 
         self.fill_filter_combo(model)
         self.action_combo.set_active(0)
         self.action_combo.connect('changed', execute_action)
-        
+
 #Custom Filter Button
         img2 = gtk.Image()
         img2.set_from_stock('gtk-add', gtk.ICON_SIZE_BUTTON)
@@ -138,9 +138,9 @@ class screen_container(object):
         hb3.pack_start(self.combo, expand=False, fill=False)
         self.fill_limit_combo(search_count,limit)
         self.combo.set_active(0)
-        
+
         hb3.pack_start(gtk.VSeparator(),padding=3, expand=False, fill=False)
-        
+
 #Back Forward Buttons
 
         self.but_previous = gtk.Button()
@@ -149,7 +149,7 @@ class screen_container(object):
         self.but_previous.set_image(icon)
         self.but_previous.set_relief(gtk.RELIEF_NONE)
         self.but_previous.connect('clicked', prev_fnct)
-        
+
         icon2 = gtk.Image()
         icon2.set_from_stock('gtk-go-forward', gtk.ICON_SIZE_SMALL_TOOLBAR)
         self.but_next = gtk.Button()
@@ -159,7 +159,7 @@ class screen_container(object):
 
         hb3.pack_start(self.but_previous, expand=False, fill=False)
         hb3.pack_start(self.but_next, expand=False, fill=False)
-        
+
         hs.show_all()
         self.filter_vbox.pack_start(hs, expand=False, fill=False)
         hs = gtk.HSeparator()
