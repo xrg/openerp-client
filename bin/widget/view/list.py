@@ -323,17 +323,21 @@ class ViewList(parser_view):
         data = eval(selection.data)
         get_id = data[0]
         drop_info = treeview.get_dest_row_at_pos(x, y)
-        group_by = self.screen.context.get('group_by',False)
         if drop_info:
             path, position = drop_info
             rec_id = path[0]
+            group_by = self.screen.context.get('group_by',False)
             if group_by:
-                target_group = model.models[path[0]]
+                source_group = model.on_get_iter(data)
+                target_group = model.models[rec_id]
+                if not source_group.list_parent:
+                    source_group_child = source_group.getChildren().lst[:]
+                else:
+                    source_group_child = [source_group]
+                self.screen.current_model = source_group_child[0]
                 target_domain = filter(lambda x: x[0] == group_by, target_group.children.context.get('__domain',[]))[0]
-                source_group = model.models[data[0]]
-                source_group_child = source_group.children.lst[data[1]]
-                rpc = RPCProxy(source_group_child.resource)
-                rpc.write([source_group_child.id], {target_domain[0]:target_domain[2]})
+                rpc = RPCProxy(source_group_child[0].resource)
+                rpc.write(map(lambda x:x.id,source_group_child), {target_domain[0]:target_domain[2]})
                 self.reload = True
                 self.screen.reload()
                 self.expand_row((data[0],))
@@ -573,6 +577,9 @@ class ViewList(parser_view):
 
     def collapse_row(self, path):
         self.widget_tree.collapse_row(path)
+
+    def unset_editable(self):
+        self.set_editable(False)
 
     def check_editable(self):
         if self.screen.context.get('group_by',False):
