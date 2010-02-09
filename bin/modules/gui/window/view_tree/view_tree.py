@@ -341,7 +341,7 @@ class view_tree(object):
                     for k,v in list:
                         color_by.setdefault(v,[]).append(str(k))
                     for k ,v in color_by.items():
-                        if model.get_value(iter,0) in v:
+                        if model.get_value(iter,0) in v and not isinstance(cell,gtk.CellRendererToggle):
                             cell.set_property('foreground',k)
 
         for column in self.view.get_columns():
@@ -410,7 +410,7 @@ class view_tree(object):
             self.view.get_selection().select_iter(iter)
 
 fields_list_type = {
-    'checkbox': gobject.TYPE_BOOLEAN,
+    'boolean': gobject.TYPE_BOOLEAN,
 #    'integer': gobject.TYPE_INT,
 }
 
