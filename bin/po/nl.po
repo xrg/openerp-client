@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-12-17 06:10+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2010-02-09 08:50+0000\n"
+"Last-Translator: Pieter J. Kersten (EduSense BV) <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-18 04:32+0000\n"
+"X-Launchpad-Export-Date: 2010-02-10 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -42,7 +42,7 @@ msgstr "Kies een plugin"
 #: bin/translate.py:184
 #, python-format
 msgid "Unable to set locale %s"
-msgstr "Niet mogelijk de taal %s in te stellen"
+msgstr "Niet mogelijk lokalisatie %s in te stellen"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
@@ -137,7 +137,7 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
-"Dank voor uw feedback!\n"
+"Bedankt voor uw feedback!\n"
 "Uw opmerkingen zijn verzonden naar OpenERP.\n"
 "U kunt nu een nieuwe database aanmaken of verbinding\n"
 "maken met een bestaande server via het 'Bestand'-menu."
@@ -148,7 +148,7 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
-"Dank voor het testen van OpenERP !\n"
+"Bedankt voor het testen van OpenERP !\n"
 "U kunt nu een nieuwe database aanmaken of verbinding\n"
 "maken met een bestaande server via het 'Bestand'-menu."
 
@@ -1136,18 +1136,13 @@ msgstr "Foutief wachtwoord opgegeven."
 msgid "Error, password not changed."
 msgstr "Fout, wachtwoord niet gewijzigd."
 
-#
-# File: bin/modules/gui/main.py, line: 1117
-# File: bin/modules/gui/main.py, line: 1134
-# File: bin/modules/gui/main.py, line: 1117
-# File: bin/modules/gui/main.py, line: 1134
 #: bin/modules/gui/main.py:1421 bin/modules/gui/main.py:1441
 msgid "Backup a database"
-msgstr "Backup een database"
+msgstr "Maak een databasebackup"
 
 #: bin/modules/gui/main.py:1434
 msgid "Database backed up successfully !"
-msgstr "Backup database succesvol !"
+msgstr "Databasebackup met succes gemaakt !"
 
 #: bin/modules/gui/main.py:1437
 msgid "Could not backup the database."
@@ -2837,11 +2832,9 @@ msgstr "Poort:"
 msgid "Choose a database..."
 msgstr "Kies een database..."
 
-#
-# File: bin/openerp.glade, line: 7252
 #: bin/openerp.glade:6398
 msgid "<b>Backup a database</b>"
-msgstr "<b>Backup een database</b>"
+msgstr "<b>Maak een databasebackup</b>"
 
 #
 # File: bin/openerp.glade, line: 7483
