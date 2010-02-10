@@ -491,6 +491,7 @@ class ViewList(parser_view):
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
             if self.screen.context.get('group_by',False):
+                self.screen.context.update({'avg':self.widget_tree.avg_fields})
                 if self.screen.models.parent and self.screen.context.get('o2m',False):
                     parent_value = self.screen.models.parent.value or {}
                     mgroup = parent_value.get(self.screen.context.get('o2m',False),False)
