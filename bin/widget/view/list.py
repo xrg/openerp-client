@@ -532,6 +532,7 @@ class ViewList(parser_view):
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
             if self.screen.context.get('group_by',False):
+                self.screen.context.update({'avg':self.widget_tree.avg_fields})
                 if self.screen.models.parent and self.screen.context.get('o2m',False):
                     parent_value = self.screen.models.parent.value or {}
                     mgroup = parent_value.get(self.screen.context.get('o2m',False),False)
@@ -551,12 +552,12 @@ class ViewList(parser_view):
                 if self.last_col:
                     self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col) # move groupby column back to its original position
                     self.last_col = None
-            self.set_invisible_attr()
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
         else:
             self.store.invalidate_iters()
+        self.set_invisible_attr()
         self.check_editable()
         self.reload = False
         if not self.screen.current_model:

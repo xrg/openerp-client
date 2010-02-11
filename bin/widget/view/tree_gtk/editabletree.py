@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -29,11 +29,12 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
     leaving_model_events = (gtk.keysyms.Up, gtk.keysyms.Down,
                             gtk.keysyms.Return, gtk.keysyms.KP_Enter)
     leaving_events = leaving_model_events + (gtk.keysyms.Tab,
-                                             gtk.keysyms.ISO_Left_Tab) 
+                                             gtk.keysyms.ISO_Left_Tab)
 
     def __init__(self, position):
         super(EditableTreeView, self).__init__()
         self.editable = position
+        self.avg_fields = []
         self.cells = {}
 
     def on_quit_cell(self, current_model, fieldname, value):
@@ -100,7 +101,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
                 return renderer.get_property('activatable')
             else:
                 return renderer.get_property('editable')
-        
+
         columns = super(EditableTreeView, self).get_columns()
         if not include_non_visible:
             columns = filter(lambda c: c.get_visible(), columns)
@@ -192,7 +193,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
                     if col.name in invalid_fields:
                         break
                 self.set_cursor(path, col, True)
-                msg = _('Warning; field %s is required!') % ('<b>%s</b>' % invalid_fields[col.name]) 
+                msg = _('Warning; field %s is required!') % ('<b>%s</b>' % invalid_fields[col.name])
                 self.warn('misc-message', msg, "red")
                 return True
 
