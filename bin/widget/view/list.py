@@ -126,6 +126,7 @@ class list_record(object):
         lst.list_group = self
         self.lst.append(lst)
 
+
     def add_list(self, lst):
         for l in lst:
             self.add(l)
@@ -314,6 +315,34 @@ class ViewList(parser_view):
         data = str(data[0])
         selection.set(selection.target, 8, data)
 
+    def group_by_move(self,model_list,get_id,rec_id,field='sequence'):
+        seq_ids = []
+        for x in range(len(model_list.children.lst)):
+            mod =  model_list.children.lst[x]
+            seq_ids += [mod[field].get(mod)]
+
+        set_list = list(set(seq_ids))
+        l = model_list.children.lst
+        if len(seq_ids) != len(set_list):
+            set_list.sort()
+            repeat = set_list[-1]
+            mod_list = seq_ids[len(set_list):]
+            for e in range(len(mod_list)):
+                repeat = repeat + 1
+                mod_list[e]= repeat
+            seq_ids = set_list + mod_list
+        else:
+            l.insert(rec_id,l[get_id])
+            if get_id < rec_id:
+                del l[get_id]
+            else:
+                del l[get_id +1]
+        for x in range(len(l)):
+            mod = l[x]
+            mod[field].set(mod, seq_ids[x], modified=True)
+            mod.save()
+
+
     def drag_data_received(self, treeview, context, x, y, selection,
             info, etime):
         treeview.emit_stop_by_name('drag-data-received')
@@ -331,16 +360,28 @@ class ViewList(parser_view):
             rec_id = path[0]
             group_by = self.screen.context.get('group_by',False)
             if group_by:
-                source_group = model.on_get_iter(data)
-                target_group = model.models[rec_id]
-                if not source_group.list_parent:
-                    source_group_child = source_group.getChildren().lst[:]
+                if data[0]==path[0]:
+                    source_models_list = model.models[data[0]]
+                    if position in (gtk.TREE_VIEW_DROP_BEFORE,
+                        gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
+                        p = path[1]
+                    else:
+                        if path[1]:
+                            p = path[1] +1
+                        else:
+                            p =0
+                    self.group_by_move(source_models_list, data[1], p)
                 else:
-                    source_group_child = [source_group]
-                self.screen.current_model = source_group_child[0]
-                target_domain = filter(lambda x: x[0] == group_by, target_group.children.context.get('__domain',[]))[0]
-                rpc = RPCProxy(source_group_child[0].resource)
-                rpc.write(map(lambda x:x.id,source_group_child), {target_domain[0]:target_domain[2]})
+                    source_group = model.on_get_iter(data)
+                    target_group = model.models[rec_id]
+                    if not source_group.list_parent:
+                        source_group_child = source_group.getChildren().lst[:]
+                    else:
+                        source_group_child = [source_group]
+                    self.screen.current_model = source_group_child[0]
+                    target_domain = filter(lambda x: x[0] == group_by, target_group.children.context.get('__domain',[]))[0]
+                    rpc = RPCProxy(source_group_child[0].resource)
+                    rpc.write(map(lambda x:x.id,source_group_child), {target_domain[0]:target_domain[2]})
                 self.reload = True
                 self.screen.reload()
                 self.expand_row((data[0],))
