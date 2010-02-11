@@ -511,12 +511,12 @@ class ViewList(parser_view):
                 if self.last_col:
                     self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col) # move groupby column back to its original position
                     self.last_col = None
-            self.set_invisible_attr()
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
         else:
             self.store.invalidate_iters()
+        self.set_invisible_attr()
         self.check_editable()
         self.reload = False
         if not self.screen.current_model:
