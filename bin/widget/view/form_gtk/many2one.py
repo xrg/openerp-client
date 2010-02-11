@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -78,6 +78,7 @@ class dialog(object):
         vp.set_shadow_type(gtk.SHADOW_NONE)
         scroll.add(vp)
         self.screen = Screen(model, view_ids=view_ids, domain=domain, context=context, window=self.dia, view_type=view_type)
+        self.screen.type = 'many2one'
         if id:
             self.screen.load([id])
         else:
@@ -249,7 +250,7 @@ class many2one(interface.widget_interface):
             name_search = self.wid_text.get_text() or ''
             if name_search == self.value_on_field:
                 name_search = ''
-                
+
             ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', name_search, domain, 'ilike', context)
             if (len(ids)==1) and leave:
                 self._view.modelfield.set_client(self._view.model, ids[0],

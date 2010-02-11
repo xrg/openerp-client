@@ -60,8 +60,8 @@ def sort_model(column, screen):
     else:
         screen.sort = column.name
     screen.offset = 0
-    res_ids = filter(None,map(lambda x:x.id,screen.models))
-    screen.sort_domain = [('id','in',res_ids)]
+    if screen.type in ('many2many','one2many','many2one'):
+        screen.sort_domain = [('id','in',screen.ids_get())]
     screen.search_filter()
 
 class parser_tree(interface.parser_interface):
