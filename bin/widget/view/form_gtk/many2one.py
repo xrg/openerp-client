@@ -245,11 +245,9 @@ class many2one(interface.widget_interface):
             domain = self._view.modelfield.domain_get(self._view.model)
             context = self._view.modelfield.context_get(self._view.model)
             self.wid_text.grab_focus()
-
             name_search = self.wid_text.get_text() or ''
             if name_search == self.value_on_field:
                 name_search = ''
-                
             ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', name_search, domain, 'ilike', context)
             if (len(ids)==1) and leave:
                 self._view.modelfield.set_client(self._view.model, ids[0],
