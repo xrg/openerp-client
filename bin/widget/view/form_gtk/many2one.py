@@ -78,7 +78,6 @@ class dialog(object):
         vp.set_shadow_type(gtk.SHADOW_NONE)
         scroll.add(vp)
         self.screen = Screen(model, view_ids=view_ids, domain=domain, context=context, window=self.dia, view_type=view_type)
-        self.screen.type = 'many2one'
         if id:
             self.screen.load([id])
         else:

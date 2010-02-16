@@ -60,7 +60,7 @@ def sort_model(column, screen):
     else:
         screen.sort = column.name
     screen.offset = 0
-    if screen.type in ('many2many','one2many','many2one'):
+    if screen.type in ('many2many','one2many'):
         screen.sort_domain = [('id','in',screen.ids_get())]
     screen.search_filter()
 
