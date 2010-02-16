@@ -146,11 +146,10 @@ class Screen(signal_event.signal_event):
                 self.filter_widget = widget_search.form(self.search_view['arch'],
                         self.search_view['fields'], self.name, self.window,
                         self.domain, (self, self.search_filter))
-                self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', [], self.context)
                 self.screen_container.add_filter(self.filter_widget.widget,
                         self.search_filter, self.search_clear,
                         self.search_offset_next,
-                        self.search_offset_previous, self.search_count,
+                        self.search_offset_previous,
                         self.execute_action, self.add_custom, self.name, self.limit)
 
         if active and show_search:
@@ -167,7 +166,7 @@ class Screen(signal_event.signal_event):
             else:
                 self.screen_container.but_previous.set_sensitive(True)
         if self.screen_container.but_next:
-            if offset+limit>=self.search_count:
+            if not limit or offset+limit>=self.search_count:
                 self.screen_container.but_next.set_sensitive(False)
             else:
                 self.screen_container.but_next.set_sensitive(True)
@@ -699,9 +698,6 @@ class Screen(signal_event.signal_event):
 
     def load(self, ids):
         limit = self.screen_container.get_limit()
-        # I am not sure this is usefull ? The limit is computed by the search ?
-        if len(ids) >= limit:
-            tot_rec = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', [], self.context)
         self.models.load(ids, display=False)
         self.current_view.reset()
         if ids:
