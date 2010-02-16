@@ -533,11 +533,8 @@ class ViewList(parser_view):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
             if self.screen.context.get('group_by',False):
                 self.screen.context.update({'avg':self.widget_tree.avg_fields})
-                if self.screen.models.parent and self.screen.context.get('o2m',False):
-                    parent_value = self.screen.models.parent.value or {}
-                    mgroup = parent_value.get(self.screen.context.get('o2m',False),False)
-                    if mgroup:
-                        self.screen.domain = [('id','in',map(lambda x:x.id,mgroup.models))]
+                if self.screen.type == 'one2many':
+                    self.screen.domain = [('id','in',self.screen.ids_get())]
                 self.screen.models.models.clear()
                 if self.last_col:
                     self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col)
