@@ -262,6 +262,8 @@ class parse(object):
                 container.newline()
 
             elif node.localName=='group':
+                if attrs.get('invisible', False):
+                    continue
                 if attrs.get('expand',False):
                     attrs['expand'] = tools.expr_eval(attrs.get('expand',False),{'context':call[0].context})
                     if attrs['expand']:
@@ -282,20 +284,6 @@ class parse(object):
                 if not attrs.get('string', None):
                     container.get().set_border_width(0)
                 container.pop()
-
-#        if not flag:
-#
-##Button for dynamic domain
-#            flag = 1
-#            img2 = gtk.Image()
-#            img2.set_from_stock('gtk-add', gtk.ICON_SIZE_BUTTON)
-#            self.button_dynamic = gtk.Button()
-#            self.button_dynamic.set_image(img2)
-#            self.button_dynamic.set_relief(gtk.RELIEF_NONE)
-#            self.button_dynamic.set_alignment(0.3,0.3)
-#
-#            table = container.get()
-#            table.attach(self.button_dynamic, 0, 1, 0, 1, yoptions=gtk.FILL, xoptions=gtk.FILL, ypadding=2, xpadding=0)
 
         self.widget = container.pop()
         self.container = container
@@ -319,13 +307,6 @@ class form(wid_int.wid_int):
 
         self.widget, self.widgets = parser.parse_filter(xml_arch, ww, dom.firstChild, call=call)
         self.rows = 4
-#        self.button_dynamic = parser.button_dynamic
-
-#        fields_list = []
-#        for k,v in self.fields.items():
-#            if v['type'] in ('many2one','char','float','integer','date','datetime','selection','many2many','boolean'):
-#                fields_list.append([k,v['string'],v['type']])
-#        self.button_dynamic.connect('clicked', self.add_custom, self.widget, fields_list)
         self.focusable = parser.focusable
         self.id=None
         self.widget.show_all()

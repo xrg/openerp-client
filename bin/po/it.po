@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-12-07 06:02+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2010-02-15 05:49+0000\n"
+"Last-Translator: Luigi Grilli <luigi.grilli@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-08 04:39+0000\n"
+"X-Launchpad-Export-Date: 2010-02-15 14:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -306,6 +306,9 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"NON è stato possibile inviare il tuo problema al team di qualità!\n"
+"Cortesemente riporta l'errore a:\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
@@ -407,7 +410,7 @@ msgstr ""
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "Il contenuto del widget o dell'eccezzione non è valido"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -639,6 +642,8 @@ msgstr "Nome campo"
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
+"Impossibile importare il campo %s, perchè non è stato possibile auto-"
+"identificarlo"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
@@ -2237,7 +2242,7 @@ msgstr "Elimina database"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "_Scarica Codici di Migrazione"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
@@ -3164,7 +3169,7 @@ msgstr "<b>Esportazioni predefinite</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Compatibile all'Importazione"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
@@ -4496,7 +4501,7 @@ msgstr "Sistema:"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>Interesse</b>"
 
 #
 # File: bin/openerp.glade, line: 5831
@@ -4509,15 +4514,17 @@ msgstr "Da dove hai sentito parlare di noi:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "Pensiamo di usare Open ERP"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "Pensiamo di utilizzare i servizi di Open ERP"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"Spiegaci perchè hai provato Open ERP e quali sono i software che utilizzi "
+"attualmente:"
 
 #
 # File: bin/openerp.glade, line: 6318
@@ -4530,7 +4537,7 @@ msgstr "<b>Resta informato</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "Vorrei ricevere l'ebook di Open ERP (pdf) via email"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
@@ -4546,11 +4553,11 @@ msgstr "Il tuo nome"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #
 # File: bin/widget_search/wid_int.py, line: 44

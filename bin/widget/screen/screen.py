@@ -521,12 +521,6 @@ class Screen(signal_event.signal_event):
                 _parse_fields(node2, fields)
         dom = xml.dom.minidom.parseString(arch)
         _parse_fields(dom, fields)
-        for dom in self.domain:
-            if dom[0] in fields:
-                field_dom = str(fields[dom[0]].setdefault('domain',
-                        []))
-                fields[dom[0]]['domain'] = field_dom[:1] + \
-                        str(('id', dom[1], dom[2])) + ',' + field_dom[1:]
 
         from widget.view.widget_parse import widget_parse
         models = self.models.models

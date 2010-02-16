@@ -111,6 +111,8 @@ class parser_tree(interface.parser_interface):
                 col_label.show()
                 col.set_widget(col_label)
                 col.set_fixed_width(20)
+                visval = eval(str(node_attrs.get('invisible', 'False')), {'context':self.screen.context})
+                col.set_visible(not visval)
 
                 treeview.append_column(col)
                 col._type = 'Button'
@@ -173,9 +175,10 @@ class parser_tree(interface.parser_interface):
                     width = int(fields[fname]['width'])
                 else:
                     width = twidth.get(fields[fname]['type'], 100)
-                col.set_min_width(width)
                 if not twidth.get(fields[fname]['type'], False):
                     col.set_expand(True)
+                else:
+                    col.set_min_width(width)
                 if not treeview.sequence:
                     col.connect('clicked', sort_model, self.screen)
                 col.set_resizable(True)
