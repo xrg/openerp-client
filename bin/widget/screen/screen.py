@@ -70,6 +70,7 @@ class Screen(signal_event.signal_event):
         self.hassubmenu = hassubmenu
         self.default_get=default_get
         self.sort = False
+        self.type = None
         if not row_activate:
             self.row_activate = lambda self,screen=None: self.switch_view(screen, 'form')
         else:
