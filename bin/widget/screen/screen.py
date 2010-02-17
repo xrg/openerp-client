@@ -122,7 +122,6 @@ class Screen(signal_event.signal_event):
         self.context = self.context_init.copy()
         self.context.update(rpc.session.context)
         self.context.update(ctx)
-
         self.domain = self.domain_init[:]
         self.domain += dmn
 
@@ -698,7 +697,7 @@ class Screen(signal_event.signal_event):
 
     def load(self, ids):
         limit = self.screen_container.get_limit()
-        self.models.load(ids, display=False)
+        self.models.load(ids, display=False, context=self.context)
         self.current_view.reset()
         if ids:
             self.display(ids[0])
