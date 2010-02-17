@@ -46,27 +46,28 @@ class field_record(object):
         pass
 
 class group_record(object):
-    def __init__(self, value={}):
+    def __init__(self, value={}, ctx={}, domain=[], mgroup=None):
         self.list_parent = None
-        self._children = []
+        self._children = None
+        self.domain = domain
+        self.ctx = ctx
         self.value = value
         self.id = False
-
+        self.has_children = True
+        self.mgroup = mgroup
     def getChildren(self):
-        self._children.load()
+        if self._children is None:
+            self._children = list_record(self.mgroup, parent=self, context=self.ctx, domain=self.domain)
+        #self._children.load()
         return self._children
-
     def setChildren(self, c):
         self._children = c
         return c
     children = property(getChildren, setChildren)
-
     def expr_eval(self, *args, **argv):
         return True
-
     def __setitem__(self, attr, val):
         pass
-
     def __getitem__(self, attr):
         return field_record(self.value.get(attr, ''))
 
@@ -99,13 +100,10 @@ class list_record(object):
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
                 self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
             for r in records:
-                rec = group_record(r)
-                self.add(rec)
                 ctx = {'__domain': r.get('__domain', [])}
                 ctx.update(r.get('__context', {}))
-                l = list_record(self.mgroup, parent=rec, context=ctx, domain=self.domain)
-                rec.children = l
-
+                rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup)
+                self.add(rec)
         else:
             if self.context.get('__domain'):
                 ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'))
@@ -227,10 +225,12 @@ class AdaptModelGroup(gtk.GenericTreeModel):
             return None
 
     def on_iter_has_child(self, node):
-        return bool(getattr(node,'children',None))
+        res = hasattr(node,'has_children')
+        return res
 
     def on_iter_children(self, node):
-        return getattr(node,'children',[])[0]
+        res = getattr(node,'children',[])[0]
+        return res
 
     def on_iter_n_children(self, node):
         return len(getattr(node,'children',[]))
