@@ -98,7 +98,7 @@ class dialog(object):
                     break
             except Exception,e:
                 # Passing all exceptions, most preferably the one of sql_constraint
-                pass    
+                pass
         return False
 
     def destroy(self):
@@ -127,7 +127,7 @@ class win_search(object):
         self.view = self.screen.current_view
         self.view.unset_editable()
         sel = self.view.widget_tree.get_selection()
- 
+
         self.filter_widget = None
         self.search_count = 0
 
@@ -138,28 +138,16 @@ class win_search(object):
 
         self.screen.widget.set_spacing(5)
         self.parent_hbox = gtk.HBox(homogeneous=False, spacing=0)
-        self.hbox = gtk.HBox(homogeneous=False, spacing=0)        
+        self.hbox = gtk.HBox(homogeneous=False, spacing=0)
         self.parent_hbox.pack_start(gtk.Label(''), expand=True, fill=True)
         self.parent_hbox.pack_start(self.hbox, expand=False, fill=False)
-        
+
         self.limit_combo = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
         self.combo = gtk.ComboBox(self.limit_combo)
         cell = gtk.CellRendererText()
         self.combo.pack_start(cell, True)
         self.combo.add_attribute(cell, 'text', 1)
-
-        self.selection = []
-        search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', model, 'search_count', [], self.context)
-        tmp_search_count = search_count
-        i = 1
-        while tmp_search_count>100 :
-            self.selection.append([i*100,'0/'+str(i*100)+' of '+str(search_count)])
-            if i>5:
-                break
-            i += 1
-            tmp_search_count -= 100
-        self.selection.append([search_count, '0/'+str(search_count)+' of '+str(search_count)]) 
-        for lim in self.selection:
+        for lim in [[100,'100'],[200,'200'],[500,'500'],[False,'Unlimited']]:
             self.limit_combo.append(lim)
         self.combo.set_active(0)
         self.hbox.pack_start(self.combo, 0, 0)
@@ -202,7 +190,7 @@ class win_search(object):
                 if isinstance(s, unicode):
                     return s.encode('utf8')
                 return s
-            def process_child(node, new_node, doc):                                
+            def process_child(node, new_node, doc):
                         for child in node.getchildren():
                             if child.tag=='field' and child.get('select') and child.get('select')=='1':
                                 if child.getchildren():
@@ -213,19 +201,19 @@ class win_search(object):
                                 else:
                                     new_node.append(child)
                             elif child.tag in ('page','group','notebook'):
-                                process_child(child, new_node, doc)    
-            
+                                process_child(child, new_node, doc)
+
             dom_arc = etree.XML(encode(view_form['arch']))
             new_node = copy.deepcopy(dom_arc)
             for child_node in new_node.getchildren()[0].getchildren():
                     new_node.getchildren()[0].remove(child_node)
             process_child(dom_arc.getchildren()[0],new_node.getchildren()[0],dom_arc)
-            
+
             view_form['arch']=etree.tostring(new_node)
 
         hda = (self, self.find)
         self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win, col=5, call= hda)
-        
+
         self.title = _('OpenERP Search: %s') % self.form.name
         self.title_results = _('OpenERP Search: %s (%%d result(s))') % (self.form.name.replace('%',''),)
         self.win.set_title(self.title)
@@ -282,16 +270,15 @@ class win_search(object):
         if len(self.ids) < limit:
             self.search_count = len(self.ids)
         else:
-            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search_count', [], self.context)        
+            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search_count', [], self.context)
         if offset<=0:
             self.but_previous.set_sensitive(False)
         else:
             self.but_previous.set_sensitive(True)
-
-        if offset+limit>=self.search_count:
+        if not limit or offset+limit >= self.search_count:
             self.but_next.set_sensitive(False)
         else:
-            self.but_next.set_sensitive(True)        
+            self.but_next.set_sensitive(True)
         return True
 
     def reload(self):
@@ -315,16 +302,16 @@ class win_search(object):
         if len(self.ids) < limit:
             self.search_count = len(self.ids)
         else:
-            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search_count', [], self.context)        
+            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search_count', [], self.context)
         if offset<=0:
             self.but_previous.set_sensitive(False)
         else:
             self.but_previous.set_sensitive(True)
 
-        if offset+limit>=self.search_count:
+        if offset+limit >= self.search_count:
             self.but_next.set_sensitive(False)
         else:
-            self.but_next.set_sensitive(True)                
+            self.but_next.set_sensitive(True)
         while not end:
             button = self.win.run()
             if button == gtk.RESPONSE_OK:
@@ -359,5 +346,8 @@ class win_search(object):
         self.find()
 
     def get_limit(self):
-        return int(self.limit_combo.get_value(self.combo.get_active_iter(), 0))
+        try:
+            return int(self.limit_combo.get_value(self.combo.get_active_iter(), 0))
+        except:
+            return False
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

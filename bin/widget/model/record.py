@@ -107,7 +107,7 @@ class ModelRecord(signal_event.signal_event):
         for name, field in self.mgroup.mfields.items():
             if (get_readonly or not field.get_state_attrs(self).get('readonly', False)) \
                 and (not get_modifiedonly or (field.name in self.modified_fields or isinstance(field, O2MField))):
-                    value.append((name, field.get(self, readonly=get_readonly, 
+                    value.append((name, field.get(self, readonly=get_readonly,
                         modified=get_modifiedonly)))
         value = dict(value)
         if includeid:
@@ -288,7 +288,7 @@ class ModelRecord(signal_event.signal_event):
 
     def cond_default(self, field, value):
         ir = RPCProxy('ir.values')
-        values = ir.get('default', '%s=%s' % (field, value), 
+        values = ir.get('default', '%s=%s' % (field, value),
                         [(self.resource, False)], False, {})
         data = {}
         for index, fname, value in values:
@@ -310,8 +310,8 @@ class ModelRecord(signal_event.signal_event):
                     common.sur(attrs['confirm']):
                 button_type = attrs.get('type', 'workflow')
                 if button_type == 'workflow':
-                    result = rpc.session.rpc_exec_auth('/object', 'exec_workflow', 
-                                            self.resource, 
+                    result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
+                                            self.resource,
                                             attrs['name'], self.id)
                     if type(result)==type({}):
                         if result['type']== 'ir.actions.act_window_close':
@@ -334,9 +334,9 @@ class ModelRecord(signal_event.signal_event):
                         context.update(self.expr_eval(attrs['context'], check_load=False))
 
                     result = rpc.session.rpc_exec_auth(
-                        '/object', 'execute', 
-                        self.resource, 
-                        attrs['name'], 
+                        '/object', 'execute',
+                        self.resource,
+                        attrs['name'],
                         [id], context
                     )
 

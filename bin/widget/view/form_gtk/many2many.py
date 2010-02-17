@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -73,6 +73,7 @@ class many2many(interface.widget_interface):
 
         self.screen = Screen(attrs['relation'], view_type=['tree'],
                 views_preload=attrs.get('views', {}))
+        self.screen.type = 'many2many'
         scroll.add_with_viewport(self.screen.widget)
         self.widget.pack_start(scroll, expand=True, fill=True)
 
@@ -107,7 +108,7 @@ class many2many(interface.widget_interface):
 #        if len(ids)<>1:
         win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain, parent=self._window)
         ids = win.go()
-            
+
         if ids == None:
             ids=[]
         if len(self.avail_ids) and len(ids):

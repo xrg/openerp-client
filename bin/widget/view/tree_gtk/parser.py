@@ -60,13 +60,14 @@ def sort_model(column, screen):
     else:
         screen.sort = column.name
     screen.offset = 0
-    res_ids = filter(None,map(lambda x:x.id,screen.models))
-    screen.sort_domain = [('id','in',res_ids)]
+    if screen.type in ('many2many','one2many'):
+        screen.sort_domain = [('id','in',screen.ids_get())]
     screen.search_filter()
 
 class parser_tree(interface.parser_interface):
     def parse(self, model, root_node, fields):
         dict_widget = {}
+        avg_fields = []
         attrs = tools.node_attributes(root_node)
         on_write = attrs.get('on_write', '')
         editable = attrs.get('editable', False)
@@ -102,6 +103,7 @@ class parser_tree(interface.parser_interface):
                 col.name = node_attrs['name']
                 col._type = 'Button'
                 col.attrs = node_attrs
+                col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 col_label = gtk.Label('')
                 #col_label.set_markup('<b>%s</b>' % node_attrs['string'])
                 if node_attrs.get('help',False):
@@ -109,6 +111,8 @@ class parser_tree(interface.parser_interface):
                 col_label.show()
                 col.set_widget(col_label)
                 col.set_fixed_width(20)
+                visval = eval(str(node_attrs.get('invisible', 'False')), {'context':self.screen.context})
+                col.set_visible(not visval)
 
                 treeview.append_column(col)
                 col._type = 'Button'
@@ -121,7 +125,11 @@ class parser_tree(interface.parser_interface):
                     treeview.sequence = True
                 for boolean_fields in ('readonly', 'required'):
                     if boolean_fields in node_attrs:
-                        node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
+                        if node_attrs[boolean_fields] in ('True', 'False'):
+                            node_attrs[boolean_fields] = eval(node_attrs[boolean_fields])
+                        else:    
+                            node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
+
                 if fields[fname]['type'] == 'selection':
                     if fields[fname].get('selection',[]):
                         node_attrs['selection'] = fields[fname]['selection']
@@ -171,9 +179,10 @@ class parser_tree(interface.parser_interface):
                     width = int(fields[fname]['width'])
                 else:
                     width = twidth.get(fields[fname]['type'], 100)
-                col.set_min_width(width)
                 if not twidth.get(fields[fname]['type'], False):
                     col.set_expand(True)
+                else:
+                    col.set_min_width(width)
                 if not treeview.sequence:
                     col.connect('clicked', sort_model, self.screen)
                 col.set_resizable(True)
@@ -186,6 +195,7 @@ class parser_tree(interface.parser_interface):
                     calculate = 'sum'
                 elif 'avg' in node_attrs.keys():
                     calculate = 'avg'
+                    treeview.avg_fields.append(fname)
 
                 if calculate and fields[fname]['type'] \
                         in ('integer', 'float', 'float_time'):

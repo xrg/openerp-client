@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -65,7 +65,7 @@ class ModelList(list):
         super(ModelList, self).remove(obj)
         if not self.lock_signal:
             self.__screen.signal('record-changed', ('record-removed', idx))
-    
+
     def clear(self):
         for obj in range(len(self)):
             self.pop()
@@ -115,25 +115,48 @@ class ModelRecordGroup(signal_event.signal_event):
         self.models.move(model, position)
 
     def set_sequence(self, get_id, rec_id, field='sequence'):
-        seq_id = {}
-        if get_id < rec_id:
-            for x in range(get_id, rec_id):
-                    seq_id[x] = self.models[x][field].get(self.models[x])
-            sort_seq = [seq_id.values()[-1]] + seq_id.values()[:-1]
+        seq_ids = []
+        index = 0
+        for module in self.models:
+             seq_ids += [module[field].get(module)]
+             index = index +1
+
+        set_list = list(set(seq_ids))
+        if len(seq_ids) != len(set_list):
+            set_list.sort()
+            repeat = set_list[-1]
+            mod_list = seq_ids[len(set_list):]
+            for e in range(len(mod_list)):
+                repeat = repeat + 1
+                mod_list[e]= repeat
+            final_list = set_list + mod_list
+
             index = 0
-            for x in range(get_id, rec_id):
-                self.models[x][field].set(self.models[x], sort_seq[index], modified=True)
-                self.models[x].save()
+            for module in self.models:
+                module[field].set(module, final_list[index], modified=True)
+                module.save()
                 index = index +1
         else:
-            for x in range(rec_id,get_id+1):
-                seq_id[x] = self.models[x][field].get(self.models[x])
-            sort_seq = seq_id.values()[1:] + [seq_id.values()[0]]
-            index = 0
-            for x in range(rec_id,get_id+1):
-                self.models[x][field].set(self.models[x], sort_seq[index], modified=True)
-                self.models[x].save()
-                index = index +1
+            seq_id = []
+            if get_id < rec_id:
+                for x in range(get_id, rec_id):
+                        seq_id += [self.models[x][field].get(self.models[x])]
+                sort_seq = [seq_id[-1]] + seq_id[:-1]
+                index = 0
+                for x in range(get_id, rec_id):
+                    self.models[x][field].set(self.models[x], sort_seq[index], modified=True)
+                    self.models[x].save()
+                    index = index +1
+            else:
+                for x in range(rec_id,get_id+1):
+                    seq_id  += [self.models[x][field].get(self.models[x])]
+                sort_seq = seq_id[1:] + [seq_id[0]]
+                index = 0
+                for x in range(rec_id,get_id+1):
+                    self.models[x][field].set(self.models[x], sort_seq[index], modified=True)
+                    self.models[x].save()
+                    index = index +1
+
 
     def save(self):
         for model in self.models:
@@ -161,7 +184,7 @@ class ModelRecordGroup(signal_event.signal_event):
             new_index = min(model_idx, len(self.models)-1)
             self.model_add(newmod, new_index)
         return result
-    
+
     def pre_load(self, ids, display=True):
         if not ids:
             return True
@@ -185,13 +208,14 @@ class ModelRecordGroup(signal_event.signal_event):
         self.models.lock_signal = False
         self.signal('record-cleared')
 
-    def load(self, ids, display=True):
+    def load(self, ids, display=True, context={}):
         if not ids:
             return True
         if not self.fields:
             return self.pre_load(ids, display)
         c = rpc.session.context.copy()
         c.update(self.context)
+        c.update(context)
         c['bin_size'] = True
         values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
         if not values:
@@ -208,7 +232,7 @@ class ModelRecordGroup(signal_event.signal_event):
     def clear(self):
         self.models.clear()
         self.models_removed = []
-   
+
     def getContext(self):
         ctx = {}
         ctx.update(self._context)
@@ -275,7 +299,7 @@ class ModelRecordGroup(signal_event.signal_event):
         else:
             return None
         return self.models[self.current_idx]
-    
+
     def next(self):
         if self.models and self.current_idx is not None:
             self.current_idx = (self.current_idx + 1) % len(self.models)
