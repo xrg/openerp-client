@@ -28,11 +28,13 @@ import tree_gtk
 import graph_gtk
 import calendar_gtk
 import gantt_gtk
+import diagram_gtk
 
 from form import ViewForm
 from list import ViewList
 from graph import ViewGraph
 from calendar import ViewCalendar
+from diagram import ViewDiagram
 from gantt import ViewGantt
 
 parsers = {
@@ -41,6 +43,7 @@ parsers = {
     'graph': (graph_gtk.parser_graph, ViewGraph),
     'calendar' : (calendar_gtk.parser_calendar, ViewCalendar),
     'gantt' : (gantt_gtk.parser_gantt, ViewGantt),
+    'diagram' : (diagram_gtk.parser_diagram, ViewDiagram),
 }
 
 class widget_parse(interface.parser_interface):
