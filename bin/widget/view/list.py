@@ -46,6 +46,7 @@ class field_record(object):
         pass
 
 class group_record(object):
+
     def __init__(self, value={}, ctx={}, domain=[], mgroup=None):
         self.list_parent = None
         self._children = None
@@ -55,19 +56,25 @@ class group_record(object):
         self.id = False
         self.has_children = True
         self.mgroup = mgroup
+
     def getChildren(self):
         if self._children is None:
             self._children = list_record(self.mgroup, parent=self, context=self.ctx, domain=self.domain)
         #self._children.load()
         return self._children
+
     def setChildren(self, c):
         self._children = c
         return c
+
     children = property(getChildren, setChildren)
+
     def expr_eval(self, *args, **argv):
         return True
+
     def __setitem__(self, attr, val):
         pass
+
     def __getitem__(self, attr):
         return field_record(self.value.get(attr, ''))
 
@@ -625,17 +632,12 @@ class ViewList(parser_view):
 
     def check_editable(self):
         if self.screen.context.get('group_by',False):
-            if self.widget_tree.editable: # If treeview editable in groupby unset editable
+            if self.widget_tree.editable: # Treeview is editable in groupby unset editable
                 self.set_editable(False)
-                self.tree_editable = True
-        elif self.tree_editable or self.screen.context.get('set_editable',False):# if context has set_editable=True or groupby has unset it
+        elif self.is_editable or self.screen.context.get('set_editable',False):#Treeview editable by default or set_editable in context
             self.set_editable(self.is_editable or "bottom")
-            self.tree_editable = False
         else:
-            if self.is_editable: # for Normal Tree view with editable=True
-                self.set_editable(self.is_editable)
-            else:
-                self.set_editable(False)
+            self.set_editable(False)
 
     def set_editable(self, value=True):
         from tree_gtk.parser import send_keys
@@ -651,7 +653,10 @@ class ViewList(parser_view):
                     if isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo, date_renderer.DecoratorRenderer)):
                         renderer.set_property('editable', value)
                     if value:
-                        renderer.connect_after('editing-started', send_keys, self.widget_tree)
+                        if self.widget_tree.handlers.has_key(col):
+                            if self.widget_tree.handlers[col]:
+                                renderer.disconnect(self.widget_tree.handlers[col])
+                        self.widget_tree.handlers[col] = renderer.connect_after('editing-started', send_keys, self.widget_tree)
 
 
     def set_invisible_attr(self):
