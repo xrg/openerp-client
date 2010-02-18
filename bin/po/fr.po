@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-02-06 05:54+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2010-02-16 14:24+0000\n"
+"Last-Translator: Numérigraphe <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-07 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-02-17 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -505,14 +505,10 @@ msgstr "Erreur XML-RPC !"
 msgid "Imported one object !"
 msgstr "Un objet importé !"
 
-#
-# File: bin/modules/gui/window/win_import.py, line: 57
-# File: bin/modules/gui/window/win_import.py, line: 57
-# File: bin/modules/gui/window/win_import.py, line: 57
 #: bin/modules/gui/window/win_import.py:64
 #, python-format
 msgid "Imported %d objects !"
-msgstr "Objets %d importés !"
+msgstr "%d objets importés !"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
@@ -600,7 +596,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr "Erreur d'export !"
+msgstr "Erreur d'exportation !"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
@@ -2691,11 +2687,11 @@ msgstr "<b>Listes d'exportations</b>"
 
 #: bin/openerp.glade:2782
 msgid "<b>Predefined Exports</b>"
-msgstr "<b>Exports prédéfinis</b>"
+msgstr "<b>Exportations prédéfinies</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr "Import compatible"
+msgstr "Compatible avec l'importation de données"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
@@ -3345,13 +3341,9 @@ msgstr "Rien"
 msgid "Auto-Detect"
 msgstr "Détecter automatiquement"
 
-#
-# File: bin/openerp.glade, line: 7833
-# File: bin/openerp.glade, line: 7833
-# File: bin/openerp.glade, line: 7833
 #: bin/openerp.glade:5850
 msgid "<b>Fields to import</b>"
-msgstr "<b>Champ à importer</b>"
+msgstr "<b>Champs à importer</b>"
 
 #
 # File: bin/openerp.glade, line: 7868
