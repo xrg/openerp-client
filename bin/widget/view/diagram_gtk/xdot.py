@@ -1699,19 +1699,11 @@ class DotWindow(gtk.Window):
     </ui>
     '''
 
-    def __init__(self,window):
+    def __init__(self,window, widget):
         self.widget = DotWidget()
         self.widget.connect('clicked', self.on_url_clicked)
         self.graph = Graph()
         window = window
-        a = 0
-        v_box = ""
-        for i in window.get_child():
-            if a == 2 :
-                s = i.get_children()[i.get_current_page()]
-                s.remove(s.get_children()[0])
-                v_box = i.get_children()[i.get_current_page()]
-            a += 1
         # Create a UIManager instance
         uimanager = self.uimanager = gtk.UIManager()
 
@@ -1739,9 +1731,9 @@ class DotWindow(gtk.Window):
 
         # Create a Toolbar
         toolbar = uimanager.get_widget('/ToolBar')
-        v_box.pack_start(toolbar, False)
+        widget.pack_start(toolbar, False)
 
-        v_box.pack_start(self.widget)
+        widget.pack_start(self.widget)
 
         window.set_focus(self.widget)
 

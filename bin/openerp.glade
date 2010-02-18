@@ -8159,6 +8159,17 @@ This document has been modified while you were editing it.
       </widget>
     </child>
   </widget>
+  
+  <widget class="GtkWindow" id="win_view_diagram">
+    <property name="visible">True</property>
+    <property name="title" translatable="yes">window1</property>
+    <child>
+      <widget class="GtkVBox" id="widget_view_diagram">
+        <property name="visible">True</property>
+       </widget>
+     </child>
+  </widget>
+  
   <widget class="GtkWindow" id="win_view_calendar">
     <property name="visible">True</property>
     <property name="title" translatable="yes">window1</property>
