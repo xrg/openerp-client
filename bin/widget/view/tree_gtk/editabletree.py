@@ -36,6 +36,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         self.editable = position
         self.avg_fields = []
         self.cells = {}
+        self.handlers = {}
 
     def on_quit_cell(self, current_model, fieldname, value):
         modelfield = current_model[fieldname]

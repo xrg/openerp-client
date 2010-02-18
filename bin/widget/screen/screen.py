@@ -239,6 +239,10 @@ class Screen(signal_event.signal_event):
             self.offset = 0
         offset=self.offset
         self.latest_search = v
+        if self.context.get('group_by',False):
+            self.current_view.reload = True
+            self.display()
+            return True
         ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, self.sort, self.context)
         if len(ids) < limit:
             self.search_count = len(ids)
@@ -430,10 +434,8 @@ class Screen(signal_event.signal_event):
                     self.__current_view = vid
                     ok = True
                     break
-            while not ok and len(self.view_to_load):
-                self.load_view_to_load()
-                if self.current_view.view_type==mode:
-                    ok = True
+            if len(self.view_to_load) and mode in self.view_to_load:
+                self.load_view_to_load(mode=mode)
             for vid in range(len(self.views)):
                 if self.views[vid].view_type==mode:
                     self.__current_view = vid
@@ -469,13 +471,12 @@ class Screen(signal_event.signal_event):
 
     def load_view_to_load(self, mode=False):
         if len(self.view_to_load):
-            if self.view_ids:
-                view_id = self.view_ids.pop(0)
-                view_type = self.view_to_load.pop(0)
+            if mode:
+                idx = self.view_to_load.index(mode)
             else:
-                view_id = False
-                view_type = self.view_to_load.pop(0)
-            self.add_view_id(view_id, view_type)
+                idx = 0
+            type = self.view_to_load.pop(idx)
+            self.add_view_id(False,type)
 
     def add_view_custom(self, arch, fields, display=False, toolbar={}, submenu={}):
         return self.add_view(arch, fields, display, True, toolbar=toolbar, submenu=submenu)
