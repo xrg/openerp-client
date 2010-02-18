@@ -118,6 +118,7 @@ class parser_tree(interface.parser_interface):
                 col._type = 'Button'
                 col.name = node_attrs['name']
             if node.localName == 'field':
+                handler_id = False
                 fname = str(node_attrs['name'])
                 if fields[fname]['type'] in ('image', 'binary'):
                     continue    # not showed types
@@ -127,7 +128,7 @@ class parser_tree(interface.parser_interface):
                     if boolean_fields in node_attrs:
                         if node_attrs[boolean_fields] in ('True', 'False'):
                             node_attrs[boolean_fields] = eval(node_attrs[boolean_fields])
-                        else:    
+                        else:
                             node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
 
                 if fields[fname]['type'] == 'selection':
@@ -147,9 +148,10 @@ class parser_tree(interface.parser_interface):
                 elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo, date_renderer.DecoratorRenderer)):
                     renderer.set_property('editable', write_enable)
                 if write_enable:
-                    renderer.connect_after('editing-started', send_keys, treeview)
+                    handler_id = renderer.connect_after('editing-started', send_keys, treeview)
 
                 col = gtk.TreeViewColumn(None, renderer)
+                treeview.handlers[col] = handler_id
                 col_label = gtk.Label('')
                 if fields[fname].get('required', False):
                     col_label.set_markup('<b>%s</b>' % fields[fname]['string'])
