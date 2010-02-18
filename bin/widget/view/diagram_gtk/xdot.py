@@ -1550,6 +1550,11 @@ class DotWidget(gtk.DrawingArea):
     def on_zoom_fit(self, action):
         self.zoom_to_fit()
 
+    def on_print(self, action):
+        #TODO Print Current workflow in PDF format
+        pass
+
+
     def on_zoom_100(self, action):
         self.zoom_image(1.0)
 
@@ -1695,6 +1700,7 @@ class DotWindow(gtk.Window):
             <toolitem action="ZoomOut"/>
             <toolitem action="ZoomFit"/>
             <toolitem action="Zoom100"/>
+            <toolitem action="Print"/>
         </toolbar>
     </ui>
     '''
@@ -1721,6 +1727,7 @@ class DotWindow(gtk.Window):
             ('ZoomOut', gtk.STOCK_ZOOM_OUT, None, None, None, self.widget.on_zoom_out),
             ('ZoomFit', gtk.STOCK_ZOOM_FIT, None, None, None, self.widget.on_zoom_fit),
             ('Zoom100', gtk.STOCK_ZOOM_100, None, None, None, self.widget.on_zoom_100),
+            ('Print', gtk.STOCK_PRINT, None, None, None, self.widget.on_print),
         ))
 
         # Add the actiongroup to the uimanager

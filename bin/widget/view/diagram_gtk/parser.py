@@ -66,8 +66,8 @@ class Viewdiagram(object):
             node_lst[node[0]]  = node[1]['name']
 
         for edge in dict['transitions'].items():
-            graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])], node_lst[str(edge[1][1])],fontsize='10',URL=edge[0]))
-#            graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])], node_lst[str(edge[1][1])], label=dict['signal'].get(edge[0],False),  fontsize='10',))
+#            graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])], node_lst[str(edge[1][1])],fontsize='10',URL=edge[0]))
+            graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])], node_lst[str(edge[1][1])], label=dict['signal'].get(edge[0],False),  fontsize='10',))
         file =  graph.create_xdot()
         self.window.set_dotcode(file)
 
