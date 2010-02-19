@@ -154,9 +154,9 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.set_property('leak_references', False)
 
     def added(self, modellist, position):
-        model = modellist[position]
-        self.emit('row_inserted', self.on_get_path(model),
-                  self.get_iter(self.on_get_path(model)))
+        self.models.loaded = False
+        path = len(modellist) - 1
+        self.emit('row_inserted',path,self.get_iter(path))        
 
     def cancel(self):
         pass
