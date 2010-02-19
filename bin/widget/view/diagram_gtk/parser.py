@@ -54,15 +54,8 @@ class Viewdiagram(object):
         dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', self.id,self.model, self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),(140, 180), rpc.session.context)
         node_lst = {}
 
-        shape=''
-        color=''
-        if self.node.get('bgcolor',False):
-            color = self.node["bgcolor"]
-        if self.node.get('shape',False):
-            shape = self.node["shape"]
-
         for node in dict['nodes'].items():
-            graph.add_node(pydot.Node(node[1]['name'],style="filled",shape=shape,color=color,URL=node[1]['name']))
+            graph.add_node(pydot.Node(node[1]['name'],style="filled",shape=self.node.get('shape',''),color=self.node.get('bgcolor',''),URL=node[1]['name']))
             node_lst[node[0]]  = node[1]['name']
 
         for edge in dict['transitions'].items():
