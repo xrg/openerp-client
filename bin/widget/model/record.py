@@ -238,10 +238,12 @@ class ModelRecord(signal_event.signal_event):
         c = rpc.session.context.copy()
         c.update(self.context_get())
         c['bin_size'] = True
-        res = self.rpc.read([self.id], fields, c)
-        if res:
-            value = res[0]
-            self.set(value)
+        for key,val in self.value.items():
+            if isinstance(val,type(self.mgroup)):
+                self.value[key] = map(lambda x:x.id,val.models)
+        if self.value:
+            self.set(self.value)
+
 
     def expr_eval(self, dom, check_load=True):
         if not isinstance(dom, basestring):
