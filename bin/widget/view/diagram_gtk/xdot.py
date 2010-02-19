@@ -377,13 +377,26 @@ def square_distance(x1, y1, x2, y2):
 
 class Edge(Element):
 
-    def __init__(self, src, dst, points, shapes):
+    def __init__(self, src, dst, points, shapes, url):
         Element.__init__(self, shapes)
         self.src = src
         self.dst = dst
         self.points = points
+        self.url = url
 
     RADIUS = 10
+    def is_inside(self, x, y):
+        for tup in self.points:
+            if tup[0] >= x-10 and tup[0] <= x+ 10 and tup[1] >= y-10 and tup[1] <= y + 10 :
+                return True
+        return False
+
+    def get_url(self, x, y, point):
+        if self.url is None:
+            return None
+        if self.is_inside(x, y):
+            return Url(self, self.url)
+        return None
 
     def get_jump(self, x, y):
         if square_distance(x, y, *self.points[0]) <= self.RADIUS*self.RADIUS:
@@ -425,6 +438,11 @@ class Graph(Shape):
     def get_url(self, x, y):
         for node in self.nodes:
             url = node.get_url(x, y)
+            if url is not None:
+                return url
+            
+        for edge in self.edges:
+            url = edge.get_url(x, y,edge.points)
             if url is not None:
                 return url
         return None
@@ -1130,7 +1148,8 @@ class XDotParser(DotParser):
         if shapes:
             src = self.node_by_name[src_id]
             dst = self.node_by_name[dst_id]
-            self.edges.append(Edge(src, dst, points, shapes))
+            url = attrs.get('URL', None)
+            self.edges.append(Edge(src, dst, points, shapes, url))
 
     def parse(self):
         DotParser.parse(self)
@@ -1220,8 +1239,8 @@ class MoveToAnimation(LinearAnimation):
     def animate(self, t):
         sx, sy = self.source_x, self.source_y
         tx, ty = self.target_x, self.target_y
-        self.dot_widget.x = tx * t + sx * (1-t)
-        self.dot_widget.y = ty * t + sy * (1-t)
+        self.dot_widget.x = self.source_x # tx * t + sx * (1-t)
+        self.dot_widget.y = self.source_y #ty * t + sy * (1-t)
         self.dot_widget.queue_draw()
 
 

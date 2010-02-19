@@ -38,7 +38,6 @@ class Viewdiagram(object):
     def __init__(self,window, model, node_attr, arrow_attr, fields, attrs, screen):
         self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_diagram', gettext.textdomain())
         self.widget = self.glade.get_widget('widget_view_diagram')
-
         self.model = model
         self.screen = screen
         self.node = node_attr
@@ -55,12 +54,22 @@ class Viewdiagram(object):
         node_lst = {}
 
         for node in dict['nodes'].items():
-            graph.add_node(pydot.Node(node[1]['name'],style="filled",shape=self.node.get('shape',''),color=self.node.get('bgcolor',''),URL=node[1]['name']))
+            graph.add_node(pydot.Node(node[1]['name'],
+                                      style="filled",
+                                      shape=self.node.get('shape',''),
+                                      color=self.node.get('bgcolor',''),
+                                      URL=node[1]['name'],
+                                      ))
             node_lst[node[0]]  = node[1]['name']
 
         for edge in dict['transitions'].items():
 #            graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])], node_lst[str(edge[1][1])],fontsize='10',URL=edge[0]))
-            graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])], node_lst[str(edge[1][1])], label=dict['signal'].get(edge[0],False),  fontsize='10',))
+            graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])], 
+                                      node_lst[str(edge[1][1])], 
+                                      label=dict['signal'].get(edge[0],False),
+                                      URL = dict['signal'].get(edge[0],False),  
+                                      fontsize='10',
+                                      ))
         file =  graph.create_xdot()
         self.window.set_dotcode(file)
 
