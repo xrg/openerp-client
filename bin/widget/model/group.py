@@ -188,8 +188,8 @@ class ModelRecordGroup(signal_event.signal_event):
     def pre_load(self, ids, display=True):
         if not ids:
             return True
-	if isinstance(ids, int):
-	    ids = [ids,]
+        if isinstance(ids, int):
+            ids = [ids,]
         self.models.lock_signal = True
         for id in ids:
             newmod = ModelRecord(self.resource, id, parent=self.parent, group=self)
