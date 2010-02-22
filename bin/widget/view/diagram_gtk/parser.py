@@ -47,12 +47,11 @@ class Viewdiagram(object):
         self.draw_diagram()
 
     def draw_diagram(self):
-
         self.id = self.screen.current_model.id
-        graph = pydot.Dot(graph_type='digraph',size='7.3, 10.1', center='1', ratio='auto', rotate='0', rankdir='TB')
-        dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', self.id,self.model, self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),(140, 180), rpc.session.context)
+        signal=self.arrow.get('signal',False)
+        graph = pydot.Dot(graph_type='digraph')
+        dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', self.id,self.model, self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),signal,(140, 180), rpc.session.context)
         node_lst = {}
-
         for node in dict['nodes'].items():
             graph.add_node(pydot.Node(node[1]['name'],
                                       style="filled",
@@ -61,13 +60,11 @@ class Viewdiagram(object):
                                       URL=node[1]['name'],
                                       ))
             node_lst[node[0]]  = node[1]['name']
-
         for edge in dict['transitions'].items():
-#            graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])], node_lst[str(edge[1][1])],fontsize='10',URL=edge[0]))
-            graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])], 
-                                      node_lst[str(edge[1][1])], 
-                                      label=dict['signal'].get(edge[0],False),
-                                      URL = dict['signal'].get(edge[0],False),  
+            graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])],
+                                      node_lst[str(edge[1][1])],
+                                      label=dict['signal'].get(edge[0],False)[1],
+                                      URL = dict['signal'].get(edge[0],False)[1],
                                       fontsize='10',
                                       ))
         file =  graph.create_xdot()
