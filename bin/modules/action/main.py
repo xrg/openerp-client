@@ -86,7 +86,7 @@ class main(service.Service):
         context.update(tools.expr_eval(action.get('context','{}'), context.copy()))
         if action['type'] in ['ir.actions.act_window', 'ir.actions.submenu']:
             for key in ('res_id', 'res_model', 'view_type', 'view_mode',
-                    'limit', 'auto_refresh', 'search_view', 'search_view_id'):
+                    'limit', 'auto_refresh', 'search_view', 'auto_search', 'search_view_id'):
                 datas[key] = action.get(key, datas.get(key, None))
 
             if not datas['search_view'] and datas['search_view_id']:
@@ -162,7 +162,7 @@ class main(service.Service):
                 obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
                         action['view_type'], datas.get('window',None), ctx,
                         datas['view_mode'], name=action.get('name', False),
-                        limit=datas['limit'], auto_refresh=datas['auto_refresh'], search_view = datas['search_view'])
+                        limit=datas['limit'], auto_refresh=datas['auto_refresh'], auto_search = datas['auto_search'], search_view = datas['search_view'])
 
         elif action['type']=='ir.actions.server':
             ctx = context.copy()

@@ -419,7 +419,7 @@ class ViewForm(parser_view):
     def signal_record_changed(self, *args):
         pass
 
-    def attrs_set(self, model, obj, att_obj):
+    def attrs_set(self, model, obj, att_obj, notebook, rank):
         try:
             attrs_changes = eval(att_obj.attrs.get('attrs',"{}"))
         except:
@@ -439,6 +439,8 @@ class ViewForm(parser_view):
             if result:
                 if k=='invisible':
                     obj.hide()
+                if k=='focus':
+                    notebook.set_current_page(rank)
                 elif k=='readonly':
                     obj.set_sensitive(False)
             else:
@@ -459,7 +461,7 @@ class ViewForm(parser_view):
                 if isinstance(child,gtk.Notebook):
                     self.set_notebook(model,child)
             if nb.get_tab_label(page).attrs.get('attrs',False):
-                self.attrs_set(model, page, nb.get_tab_label(page))
+                self.attrs_set(model, page, nb.get_tab_label(page), nb, i)
 
     def display(self):
         model = self.screen.current_model

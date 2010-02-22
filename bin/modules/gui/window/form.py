@@ -49,7 +49,7 @@ from widget.screen import Screen
 class form(object):
     def __init__(self, model, res_id=False, domain=None, view_type=None,
             view_ids=None, window=None, context=None, name=False, limit=80,
-            auto_refresh=False, search_view=None):
+            auto_refresh=False, auto_search=True, search_view=None):
         if not view_type:
             view_type = ['form','tree']
         if domain is None:
@@ -72,7 +72,7 @@ class form(object):
         self.screen = Screen(self.model, view_type=view_type,
                 context=self.context, view_ids=view_ids, domain=domain,
                 hastoolbar=options.options['form.toolbar'], hassubmenu=options.options['form.submenu'],
-                show_search=True, window=self.window, limit=limit, readonly=bool(auto_refresh), search_view=search_view)
+                show_search=True, window=self.window, limit=limit, readonly=bool(auto_refresh), auto_search=auto_search, search_view=search_view)
         self.screen.signal_connect(self, 'record-message', self._record_message)
         self.screen.widget.show()
         oregistry.add_receiver('misc-message', self._misc_message)
