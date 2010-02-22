@@ -720,32 +720,30 @@ class Screen(signal_event.signal_event):
 
     def display_next(self):
         self.current_view.set_value()
-        if self.context.get('group_by',False) and not self.current_view.view_type == 'form':
-            if isinstance(self.current_model, group_record):
+        if self.context.get('group_by',False):
+            if not self.models.models:
+                self.models.list_group.lst[0].children
+            elif isinstance(self.current_model, group_record):
                 path = self.current_view.store.on_get_path(self.current_model)
                 self.current_view.expand_row(path)
-                self.current_model = self.current_model.children[-1]
+            elif self.models.models.index(self.current_model) + 1 == len(self.models.models):
+                idx = self.models.list_parent.list_group.lst.index(self.current_model.list_parent)
+                idx = (idx+1) % len(self.models.list_parent.list_group.lst)
+                self.models.list_parent.list_group.lst[idx].children
         if self.current_model in self.models.models:
             idx = self.models.models.index(self.current_model)
             idx = (idx+1) % len(self.models.models)
             self.current_model = self.models.models[idx]
         else:
             self.current_model = len(self.models.models) and self.models.models[0]
-        if self.current_model:
-            self.current_model.validate_set()
-        self.display()
+        if not self.context.get('group_by',False) or self.current_view.view_type == 'form':
+            if self.current_model:
+                self.current_model.validate_set()
+            self.display()
         self.current_view.set_cursor()
 
     def display_prev(self):
         self.current_view.set_value()
-        if self.context.get('group_by',False) and not self.current_view.view_type == 'form':
-            if self.current_model.list_parent:
-                if self.current_model.list_parent.children.lst.index(self.current_model) == 0:
-                    self.current_model = self.current_model.list_parent
-            if isinstance(self.current_model, group_record):
-                path = self.current_view.store.on_get_path(self.current_model)
-                self.current_view.collapse_row(path)
-                self.current_model = self.current_model.children[0]
         if self.current_model in self.models.models:
             idx = self.models.models.index(self.current_model)-1
             if idx<0:
@@ -753,10 +751,10 @@ class Screen(signal_event.signal_event):
             self.current_model = self.models.models[idx]
         else:
             self.current_model = len(self.models.models) and self.models.models[-1]
-
-        if self.current_model:
-            self.current_model.validate_set()
-        self.display()
+        if not self.context.get('group_by',False) or self.current_view.view_type == 'form':
+            if self.current_model:
+                self.current_model.validate_set()
+            self.display()
         self.current_view.set_cursor()
 
     def sel_ids_get(self):
