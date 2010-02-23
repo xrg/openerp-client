@@ -472,11 +472,13 @@ class Screen(signal_event.signal_event):
     def load_view_to_load(self, mode=False):
         if len(self.view_to_load):
             if mode:
+                view_id = self.view_ids.pop(0)
                 idx = self.view_to_load.index(mode)
             else:
                 idx = 0
+                view_id = False
             type = self.view_to_load.pop(idx)
-            self.add_view_id(False,type)
+            self.add_view_id(view_id,type)
 
     def add_view_custom(self, arch, fields, display=False, toolbar={}, submenu={}):
         return self.add_view(arch, fields, display, True, toolbar=toolbar, submenu=submenu)
