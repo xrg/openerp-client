@@ -1773,13 +1773,7 @@ class DotWindow(gtk.Window):
 
     def on_url_clicked(self, widget, url, event):
         if url.split('_')[-1] == 'node':
-            attrs = {'string': 'workflow', 
-                     'views': {'form':{'fields': 
-                                {'name': {'string': 'Name', 'views': {}, 'required': True, u'name': 'name', 'readonly': False, 'selectable': True, 'type': 'char', u'select': '1', 'size': 64}},
-                                 'arch': '<form string="Workflow"><field name="name"/></form>'}},
-                                  u'colspan': '4', 'relation': 'workflow.activity', 'selectable': True, 
-                                  u'name':u'activities', u'nolabel': '1', 'required': False, 
-                                  'readonly': True, 'context': '', 'model': 'workflow', 'type': 'one2many'}
+            attrs = {}
             group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields= {}, parent = self.parent_model)
             current_model = record.ModelRecord(self.node_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
             one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = attrs)

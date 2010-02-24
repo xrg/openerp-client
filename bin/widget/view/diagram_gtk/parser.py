@@ -36,7 +36,7 @@ import pydot # import pydot or you're not going to get anywhere my friend
 
 
 class Viewdiagram(object):
-    def __init__(self,window, model, node_attr, arrow_attr, fields, attrs, screen1):
+    def __init__(self,window, model, node_attr, arrow_attr, fields, attrs, screen):
         self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_diagram', gettext.textdomain())
         self.widget = self.glade.get_widget('widget_view_diagram')
         self.model = model
