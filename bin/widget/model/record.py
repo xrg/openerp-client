@@ -243,6 +243,7 @@ class ModelRecord(signal_event.signal_event):
             value = res[0]
             self.set(value)
 
+
     def expr_eval(self, dom, check_load=True):
         if not isinstance(dom, basestring):
             return dom

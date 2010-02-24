@@ -48,7 +48,7 @@ class Screen(signal_event.signal_event):
             parent=None, context=None, views_preload=None, tree_saves=True,
             domain=None, create_new=False, row_activate=None, hastoolbar=False,
             hassubmenu=False,default_get=None, show_search=False, window=None,
-            limit=80, readonly=False, is_wizard=False, search_view=None):
+            limit=80, readonly=False, auto_search=True, is_wizard=False, search_view=None):
         if view_ids is None:
             view_ids = []
         if view_type is None:
@@ -65,6 +65,7 @@ class Screen(signal_event.signal_event):
         super(Screen, self).__init__()
 
         self.show_search = show_search
+        self.auto_search = auto_search
         self.search_count = 0
         self.hastoolbar = hastoolbar
         self.hassubmenu = hassubmenu
@@ -219,6 +220,9 @@ class Screen(signal_event.signal_event):
         return args
 
     def search_filter(self, *args):
+        if not self.auto_search:
+            self.auto_search = True
+            return
         val = self.filter_widget and self.filter_widget.value or {}
         self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
         v = self.domain
