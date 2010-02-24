@@ -24,6 +24,7 @@ import re
 import locale
 import gtk
 import math
+import cgi
 
 import tools
 import tools.datetime_util
@@ -126,7 +127,7 @@ class parser_tree(interface.parser_interface):
                 col = gtk.TreeViewColumn(None, renderer)
                 col_label = gtk.Label('')
                 if fields[fname].get('required', False):
-                    col_label.set_markup('<b>%s</b>' % fields[fname]['string'])
+                    col_label.set_markup('<b>%s</b>' % cgi.escape(fields[fname]['string']))
                 else:
                     col_label.set_text(fields[fname]['string'])
                 col_label.show()
