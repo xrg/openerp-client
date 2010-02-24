@@ -476,8 +476,8 @@ class Screen(signal_event.signal_event):
     def load_view_to_load(self, mode=False):
         if len(self.view_to_load):
             if mode:
-                view_id = self.view_ids.pop(0)
                 idx = self.view_to_load.index(mode)
+                view_id = self.view_ids.pop(idx)
             else:
                 idx = 0
                 view_id = False
