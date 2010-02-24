@@ -90,7 +90,8 @@ class many2many(interface.widget_interface):
 
     def row_activate(self, screen):
         gui_window = service.LocalService('gui.window')
-        dia = dialog(screen.name, id=screen.id_get(), attrs=self.attrs, window=screen.window,context=screen.context,target=False, view_type=['form'])
+        domain = self._view.modelfield.domain_get(self._view.model)
+        dia = dialog(screen.name, id=screen.id_get(), attrs=self.attrs, domain=domain, window=screen.window,context=screen.context,target=False, view_type=['form'])
         if dia.dia.get_has_separator():
             dia.dia.set_has_separator(False)
         dia.run()
