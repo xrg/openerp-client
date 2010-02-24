@@ -39,7 +39,7 @@ import pango
 import pangocairo
 from widget.view.form_gtk import one2many_list
 from widget.model import  record
-from widget.model import group 
+from widget.model import group
 
 # See http://www.graphviz.org/pub/scm/graphviz-cairo/plugin/cairo/gvrender_cairo.c
 
@@ -442,7 +442,7 @@ class Graph(Shape):
             url = node.get_url(x, y)
             if url is not None:
                 return url
-            
+
         for edge in self.edges:
             url = edge.get_url(x, y,edge.points)
             if url is not None:
@@ -1467,7 +1467,7 @@ class DotWidget(gtk.DrawingArea):
     def set_xdotcode(self, xdotcode):
         parser = XDotParser(xdotcode)
         self.graph = parser.parse()
-        
+
         self.zoom_image(self.zoom_ratio, center=True)
 
     def reload(self):
@@ -1776,12 +1776,16 @@ class DotWindow(gtk.Window):
             attrs = {}
             group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields= {}, parent = self.parent_model)
             current_model = record.ModelRecord(self.node_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
-            one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = attrs)
-        
+            dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = attrs)
+            ok, value = dia.run()
+            dia.destroy()
         elif url.split('_')[-1] == 'edge':
             group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields= {}, parent = self.parent_model)
             current_model = record.ModelRecord(self.arrow_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
-            one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = {'context':{}})
+            dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = {'context':{}})
+            ok, value = dia.run()
+            dia.destroy()
+
 #        dialog = gtk.MessageDialog(
 #                parent = self,
 #                buttons = gtk.BUTTONS_OK,
