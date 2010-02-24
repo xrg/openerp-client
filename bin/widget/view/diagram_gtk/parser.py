@@ -34,8 +34,9 @@ import math
 import xdot
 import pydot # import pydot or you're not going to get anywhere my friend
 
+
 class Viewdiagram(object):
-    def __init__(self,window, model, node_attr, arrow_attr, fields, attrs, screen):
+    def __init__(self,window, model, node_attr, arrow_attr, fields, attrs, screen1):
         self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_diagram', gettext.textdomain())
         self.widget = self.glade.get_widget('widget_view_diagram')
         self.model = model
@@ -43,7 +44,7 @@ class Viewdiagram(object):
         self.node = node_attr
         self.arrow = arrow_attr
         self.id = screen.current_model.id
-        self.window = xdot.DotWindow(window,self.widget)
+        self.window = xdot.DotWindow(window,self.widget, self.screen.current_model, node_attr, arrow_attr)
         self.draw_diagram()
 
     def draw_diagram(self):
@@ -57,14 +58,14 @@ class Viewdiagram(object):
                                       style="filled",
                                       shape=self.node.get('shape',''),
                                       color=self.node.get('bgcolor',''),
-                                      URL=node[1]['name'],
+                                      URL=node[1]['name'] + "_" + node[0]  + "_node",
                                       ))
             node_lst[node[0]]  = node[1]['name']
         for edge in dict['transitions'].items():
             graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])],
                                       node_lst[str(edge[1][1])],
                                       label=dict['signal'].get(edge[0],False)[1],
-                                      URL = dict['signal'].get(edge[0],False)[1],
+                                      URL = dict['signal'].get(edge[0],False)[1] + "_" + edge[0] + "_edge",
                                       fontsize='10',
                                       ))
         file =  graph.create_xdot()

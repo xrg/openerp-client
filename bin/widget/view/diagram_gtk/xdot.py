@@ -37,7 +37,9 @@ import gtk.keysyms
 import cairo
 import pango
 import pangocairo
-
+from widget.view.form_gtk import one2many_list
+from widget.model import  record
+from widget.model import group 
 
 # See http://www.graphviz.org/pub/scm/graphviz-cairo/plugin/cairo/gvrender_cairo.c
 
@@ -1724,10 +1726,14 @@ class DotWindow(gtk.Window):
     </ui>
     '''
 
-    def __init__(self,window, widget):
+    def __init__(self,window, widget, parent_model, node_attr, arrow_attr):
         self.widget = DotWidget()
+        self.parent_model = parent_model
+        self.node_attr = node_attr
+        self.arrow_attr = arrow_attr
         self.widget.connect('clicked', self.on_url_clicked)
         self.graph = Graph()
+        self.window1 = window
         window = window
         # Create a UIManager instance
         uimanager = self.uimanager = gtk.UIManager()
@@ -1766,12 +1772,28 @@ class DotWindow(gtk.Window):
        # window.show_all()
 
     def on_url_clicked(self, widget, url, event):
-        dialog = gtk.MessageDialog(
-                parent = self,
-                buttons = gtk.BUTTONS_OK,
-                message_format="%s clicked" % url)
-        dialog.connect('response', lambda dialog, response: dialog.destroy())
-        dialog.run()
+        if url.split('_')[-1] == 'node':
+            attrs = {'string': 'workflow', 
+                     'views': {'form':{'fields': 
+                                {'name': {'string': 'Name', 'views': {}, 'required': True, u'name': 'name', 'readonly': False, 'selectable': True, 'type': 'char', u'select': '1', 'size': 64}},
+                                 'arch': '<form string="Workflow"><field name="name"/></form>'}},
+                                  u'colspan': '4', 'relation': 'workflow.activity', 'selectable': True, 
+                                  u'name':u'activities', u'nolabel': '1', 'required': False, 
+                                  'readonly': True, 'context': '', 'model': 'workflow', 'type': 'one2many'}
+            group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields= {}, parent = self.parent_model)
+            current_model = record.ModelRecord(self.node_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
+            one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = attrs)
+        
+        elif url.split('_')[-1] == 'edge':
+            group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields= {}, parent = self.parent_model)
+            current_model = record.ModelRecord(self.arrow_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
+            one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = {'context':{}})
+#        dialog = gtk.MessageDialog(
+#                parent = self,
+#                buttons = gtk.BUTTONS_OK,
+#                message_format="%s clicked" % url)
+#        dialog.connect('response', lambda dialog, response: dialog.destroy())
+#        dialog.run()
         return True
 
 #    def update(self, filename):
