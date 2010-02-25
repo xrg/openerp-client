@@ -1778,7 +1778,7 @@ class DotWindow(gtk.Window):
                 modify_value = value.modified_fields
                 for key,val in modify_value.items():
                     modify_value[key] = value.value[key]
-                    if type(value.value[key]) == type([]):
+                    if type(value.value[key]) in [type([]), type(())]:
                         modify_value[key] = value.value[key][0]
                 rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
                             'write', [int(url.split('_')[-2])], modify_value)
