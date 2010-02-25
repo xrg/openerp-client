@@ -40,6 +40,7 @@ import pangocairo
 from widget.view.form_gtk import one2many_list
 from widget.model import  record
 from widget.model import group
+import common
 
 # See http://www.graphviz.org/pub/scm/graphviz-cairo/plugin/cairo/gvrender_cairo.c
 
@@ -1780,7 +1781,12 @@ class DotWindow(gtk.Window):
 
     def delete_data(self):
         if self.url.split('_')[-1] == 'node':
-            rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
+            data = rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
+                                'read', [self.url.split('_')[-2]] ,['flow_start'])[0]
+            if data['flow_start']:
+                common.message(_("You cannot delete starting node"))
+            else:
+                rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
                                 'unlink', [self.url.split('_')[-2]])
             self.screen.reload()
         elif self.url.split('_')[-1] == 'edge':
@@ -1829,6 +1835,20 @@ class DotWindow(gtk.Window):
         self.dia_select.set_property('default-width', 100)
         self.dia_select.set_property('default-height', 50)
         self.dia_select.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+        
+
+        h_box_label = gtk.HBox()
+        self.dia_select.get_child().add(h_box_label)
+        h_box_label.show()
+        if url.split('_')[-1] == "node":
+            name = "Activity Name :- "
+        elif url.split('_')[-1] == "edge":
+            name = "Transition Signal :- "
+        label = gtk.Label( name  + "_".join(map(str, url.split('_')[:-2])))
+        label.set_alignment(0, 0.5)
+        h_box_label.set_border_width(10)
+        h_box_label.pack_start(label)
+        label.show()
         
         h_box = gtk.HBox()
         self.dia_select.get_child().add(h_box)
