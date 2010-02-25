@@ -1752,8 +1752,8 @@ class DotWindow(gtk.Window):
         self.actiongroup = actiongroup
         # Create actions
         actiongroup.add_actions((
-            ('node', gtk.STOCK_ADD, 'ADD NODE', None, None, self.widget.on_print),
-            ('edge', gtk.STOCK_ADD, 'ADD EDGE', None, None, self.widget.on_print),
+            ('node', gtk.STOCK_ADD, 'ADD NODE', None, None, self.on_node_create),
+            ('edge', gtk.STOCK_ADD, 'ADD EDGE', None, None, self.on_edge_create),
             ('ZoomIn', gtk.STOCK_ZOOM_IN, None, None, None, self.widget.on_zoom_in),
             ('ZoomOut', gtk.STOCK_ZOOM_OUT, None, None, None, self.widget.on_zoom_out),
             ('ZoomFit', gtk.STOCK_ZOOM_FIT, None, None, None, self.widget.on_zoom_fit),
@@ -1770,7 +1770,7 @@ class DotWindow(gtk.Window):
         widget.pack_start(self.widget)
         window.set_focus(self.widget)
        # window.show_all()
-        
+
     def clicked(self,widget,data = None):
         if widget.get_label() == 'gtk-edit':
             self.edit_data()
@@ -1835,7 +1835,7 @@ class DotWindow(gtk.Window):
         self.dia_select.set_property('default-width', 100)
         self.dia_select.set_property('default-height', 50)
         self.dia_select.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-        
+
 
         h_box_label = gtk.HBox()
         self.dia_select.get_child().add(h_box_label)
@@ -1849,7 +1849,7 @@ class DotWindow(gtk.Window):
         h_box_label.set_border_width(10)
         h_box_label.pack_start(label)
         label.show()
-        
+
         h_box = gtk.HBox()
         self.dia_select.get_child().add(h_box)
         h_box.show()
@@ -1858,18 +1858,50 @@ class DotWindow(gtk.Window):
         but_edit.connect("clicked", self.clicked)
         h_box.pack_start(but_edit)
         but_edit.show()
-        
+
         but_delete = gtk.Button("Delete",stock = gtk.STOCK_DELETE)
         but_delete.connect("clicked", self.clicked)
         h_box.pack_start(but_delete)
         but_delete.show()
-        
+
         but_close = gtk.Button("Close",stock = gtk.STOCK_CLOSE)
         but_close.connect("clicked", self.clicked)
         h_box.pack_start(but_close)
         but_close.show()
 
         ok = self.dia_select.run()
+        return True
+
+
+
+    def on_node_create(self,event):
+        group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields= {}, parent = self.parent_model)
+        current_model = record.ModelRecord(self.node_attr.get('object',False), id = self.screen.current_model.id, parent = self.parent_model, group =group_cur )
+        dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = None, window = self.window_new, attrs = self.attrs['node'])
+        ok, value = dia.run()
+        if ok:
+            value.value['wkf_id']=self.parent_model.id
+            rpc.session.rpc_exec_auth('/object',
+                                      'execute',
+                                      self.node_attr.get('object',False),
+                                      'create',value.value)
+#            print id
+            self.screen.reload()
+        dia.destroy()
+        return True
+
+    def on_edge_create(self,event):
+        group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields= {}, parent = self.parent_model)
+        current_model = record.ModelRecord(self.arrow_attr.get('object',False), id = self.screen.current_model.id, parent = self.parent_model, group =group_cur )
+        dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = None, window = self.window_new, attrs = self.attrs['arrow'])
+        ok, value = dia.run()
+#        if ok:
+#            value.value['wkf_id']=self.parent_model.id
+#            value.value['name']='tttt'
+#            rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
+#                        'create',value.value)
+#            self.screen.reload()
+        dia.destroy()
         return True
 
 #    def update(self, filename):
