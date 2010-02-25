@@ -1726,7 +1726,7 @@ class DotWindow(gtk.Window):
     </ui>
     '''
 
-    def __init__(self,window, widget, screen, node_attr, arrow_attr):
+    def __init__(self,window, widget, screen, node_attr, arrow_attr, attrs):
         self.widget = DotWidget()
         self.screen = screen
         self.parent_model = screen.current_model
@@ -1736,6 +1736,7 @@ class DotWindow(gtk.Window):
         self.graph = Graph()
         self.window1 = window
         window = window
+        self.attrs = attrs
         # Create a UIManager instance
         uimanager = self.uimanager = gtk.UIManager()
 
@@ -1774,10 +1775,10 @@ class DotWindow(gtk.Window):
 
     def on_url_clicked(self, widget, url, event):
         if url.split('_')[-1] == 'node':
-            attrs = {}
             group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields= {}, parent = self.parent_model)
             current_model = record.ModelRecord(self.node_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
-            dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = attrs)
+            
+            dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = self.attrs['node'])
             ok, value = dia.run()
             if ok:
                 all_value = value.value
@@ -1793,7 +1794,7 @@ class DotWindow(gtk.Window):
         elif url.split('_')[-1] == 'edge':
             group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields= {}, parent = self.parent_model)
             current_model = record.ModelRecord(self.arrow_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
-            dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = {'context':{}})
+            dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = self.attrs['arrow'])
             ok, value = dia.run()
             if ok:
                 all_value = value.value

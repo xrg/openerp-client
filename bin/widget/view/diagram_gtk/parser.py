@@ -44,7 +44,7 @@ class Viewdiagram(object):
         self.node = node_attr
         self.arrow = arrow_attr
         self.id = screen.current_model.id
-        self.window = xdot.DotWindow(window,self.widget, self.screen, node_attr, arrow_attr)
+        self.window = xdot.DotWindow(window,self.widget, self.screen, node_attr, arrow_attr, attrs)
         self.draw_diagram()
 
     def draw_diagram(self):
@@ -88,9 +88,26 @@ class parser_diagram(interface.parser_interface):
         for node in root_node.childNodes:
             node_attrs = node_attributes(node)
             if node.localName == 'node':
+                node_fields = []
+                for child in node._get_childNodes():
+                    if node_attributes(child) and node_attributes(child).get('name',False):
+                        node_fields.append(node_attributes(child)['name'])
+                fields = rpc.session.rpc_exec_auth('/object', 'execute', node_attrs.get('object',False), 'fields_get',node_fields)
+                for key,val in fields.items():
+                    fields[key]['name'] = key
+                attrs['node'] = {'string' :node_attributes(root_node).get('string',False), 'views':{'form': {'fields': fields,'arch' : node.toxml('utf-8').replace('node','form')}}}
                 node_attr = node_attrs
             if node.localName == 'arrow':
+                arrow_fields = []
+                for child in node._get_childNodes():
+                    if node_attributes(child) and node_attributes(child).get('name',False):
+                        arrow_fields.append(node_attributes(child)['name'])
+                fields = rpc.session.rpc_exec_auth('/object', 'execute', node_attrs.get('object',False), 'fields_get',arrow_fields)
+                for key,val in fields.items():
+                    fields[key]['name'] = key
+                attrs['arrow'] = {'string' :node_attributes(root_node).get('string',False), 'views':{'form': {'fields': fields,'arch' : node.toxml('utf-8').replace('arrow','form')}}}
                 arrow_attr = node_attrs
+        node_attrs ={}
         view = Viewdiagram(self.window, model, node_attr, arrow_attr, fields, attrs,self.screen)
         return view, {}, [], ''
 
