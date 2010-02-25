@@ -31,10 +31,11 @@ import common
 
 from widget.screen import Screen
 import interface
-
+import service
 import rpc
 
 from modules.gui.window.win_search import win_search
+from widget.view.form_gtk.many2one import dialog
 
 class many2many(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
@@ -72,7 +73,7 @@ class many2many(interface.widget_interface):
         scroll.set_shadow_type(gtk.SHADOW_NONE)
 
         self.screen = Screen(attrs['relation'], view_type=['tree'],
-                views_preload=attrs.get('views', {}))
+                views_preload=attrs.get('views', {}),row_activate=self.row_activate)
         self.screen.type = 'many2many'
         scroll.add_with_viewport(self.screen.widget)
         self.widget.pack_start(scroll, expand=True, fill=True)
@@ -86,6 +87,15 @@ class many2many(interface.widget_interface):
         else:
             for i in self.screen.models.models:
                 self.avail_ids.add(i.id)
+
+    def row_activate(self, screen):
+        gui_window = service.LocalService('gui.window')
+        domain = self._view.modelfield.domain_get(self._view.model)
+        dia = dialog(screen.name, id=screen.id_get(), attrs=self.attrs, domain=domain, window=screen.window,context=screen.context,target=False, view_type=['form'])
+        if dia.dia.get_has_separator():
+            dia.dia.set_has_separator(False)
+        dia.run()
+        dia.destroy()
 
     def destroy(self):
         self.screen.destroy()
