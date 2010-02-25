@@ -1774,9 +1774,20 @@ class DotWindow(gtk.Window):
         if widget.get_label() == 'gtk-edit':
             self.edit_data()
         elif widget.get_label() == 'gtk-delete':
-            pass
+            self.delete_data()
         elif widget.get_label() == 'gtk-close':
             self.dia_select.destroy()
+
+    def delete_data(self):
+        if self.url.split('_')[-1] == 'node':
+            rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
+                                'unlink', [self.url.split('_')[-2]])
+            self.screen.reload()
+        elif self.url.split('_')[-1] == 'edge':
+            rpc.session.rpc_exec_auth('/object', 'execute', self.arrow_attr.get('object',False),
+                            'unlink', [self.url.split('_')[-2]])
+            self.screen.reload()
+        self.dia_select.destroy()
 
     def edit_data(self):
         self.dia_select.destroy()
@@ -1822,10 +1833,6 @@ class DotWindow(gtk.Window):
         h_box = gtk.HBox()
         self.dia_select.get_child().add(h_box)
         h_box.show()
-        but_close = gtk.Button("Close",stock = gtk.STOCK_CLOSE)
-        but_close.connect("clicked", self.clicked)
-        h_box.pack_start(but_close)
-        but_close.show()
 
         but_edit = gtk.Button("Edit",stock = gtk.STOCK_EDIT)
         but_edit.connect("clicked", self.clicked)
@@ -1837,6 +1844,11 @@ class DotWindow(gtk.Window):
         h_box.pack_start(but_delete)
         but_delete.show()
         
+        but_close = gtk.Button("Close",stock = gtk.STOCK_CLOSE)
+        but_close.connect("clicked", self.clicked)
+        h_box.pack_start(but_close)
+        but_close.show()
+
         ok = self.dia_select.run()
         return True
 
