@@ -389,7 +389,7 @@ class Edge(Element):
     RADIUS = 10
     def is_inside(self, x, y):
         for tup in self.points:
-            if tup[0] >= x-10 and tup[0] <= x+ 10 and tup[1] >= y-10 and tup[1] <= y + 10 :
+            if tup[0] >= x-5 and tup[0] <= x+ 5 and tup[1] >= y - 5 and tup[1] <= y + 5 :
                 return True
         return False
 
@@ -1736,20 +1736,17 @@ class DotWindow(gtk.Window):
         self.arrow_attr = arrow_attr
         self.widget.connect('clicked', self.on_url_clicked)
         self.graph = Graph()
-        self.window1 = window
+        self.window_new = window
         window = window
         self.attrs = attrs
         # Create a UIManager instance
         uimanager = self.uimanager = gtk.UIManager()
-
         # Add the accelerator group to the toplevel window
         accelgroup = uimanager.get_accel_group()
         window.add_accel_group(accelgroup)
-
         # Create an ActionGroup
         actiongroup = gtk.ActionGroup('Actions')
         self.actiongroup = actiongroup
-
         # Create actions
         actiongroup.add_actions((
             ('node', gtk.STOCK_ADD, 'ADD NODE', None, None, self.widget.on_print),
@@ -1760,37 +1757,29 @@ class DotWindow(gtk.Window):
             ('Zoom100', gtk.STOCK_ZOOM_100, None, None, None, self.widget.on_zoom_100),
             ('Print', gtk.STOCK_PRINT, None, None, None, self.widget.on_print),
         ))
-
         # Add the actiongroup to the uimanager
         uimanager.insert_action_group(actiongroup, 0)
-
         # Add a UI descrption
         uimanager.add_ui_from_string(self.ui)
-
         # Create a Toolbar
         toolbar = uimanager.get_widget('/ToolBar')
         widget.pack_start(toolbar, False)
-
         widget.pack_start(self.widget)
-
         window.set_focus(self.widget)
-
        # window.show_all()
 
     def on_url_clicked(self, widget, url, event):
         if url.split('_')[-1] == 'node':
             group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields= {}, parent = self.parent_model)
             current_model = record.ModelRecord(self.node_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
-
-            dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = self.attrs['node'])
+            dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window_new, attrs = self.attrs['node'])
             ok, value = dia.run()
             if ok:
-                all_value = value.value
                 modify_value = value.modified_fields
                 for key,val in modify_value.items():
-                    modify_value[key] = all_value[key]
-                    if type(all_value[key]) == type([]):
-                        modify_value[key] = all_value[key][0]
+                    modify_value[key] = value.value[key]
+                    if type(value.value[key]) == type([]):
+                        modify_value[key] = value.value[key][0]
                 rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
                             'write', [int(url.split('_')[-2])], modify_value)
                 self.screen.reload()
@@ -1798,26 +1787,18 @@ class DotWindow(gtk.Window):
         elif url.split('_')[-1] == 'edge':
             group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields= {}, parent = self.parent_model)
             current_model = record.ModelRecord(self.arrow_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
-            dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = self.attrs['arrow'])
+            dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window_new, attrs = self.attrs['arrow'])
             ok, value = dia.run()
             if ok:
-                all_value = value.value
                 modify_value = value.modified_fields
                 for key,val in modify_value.items():
-                    modify_value[key] = all_value[key]
-                    if type(all_value[key]) == type([]):
-                        modify_value[key] = all_value[key][0]
+                    modify_value[key] = value.value[key]
+                    if type(value.value[key]) == type([]):
+                        modify_value[key] = value.value[key][0]
                 rpc.session.rpc_exec_auth('/object', 'execute', self.arrow_attr.get('object',False),
                             'write', [int(url.split('_')[-2])], modify_value)
                 self.screen.reload()
             dia.destroy()
-
-#        dialog = gtk.MessageDialog(
-#                parent = self,
-#                buttons = gtk.BUTTONS_OK,
-#                message_format="%s clicked" % url)
-#        dialog.connect('response', lambda dialog, response: dialog.destroy())
-#        dialog.run()
         return True
 
 #    def update(self, filename):
