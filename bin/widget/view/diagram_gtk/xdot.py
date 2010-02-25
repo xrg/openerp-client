@@ -1717,6 +1717,8 @@ class DotWindow(gtk.Window):
     ui = '''
     <ui>
         <toolbar name="ToolBar">
+            <toolitem action="node"/>
+            <toolitem action="edge"/>
             <toolitem action="ZoomIn"/>
             <toolitem action="ZoomOut"/>
             <toolitem action="ZoomFit"/>
@@ -1750,6 +1752,8 @@ class DotWindow(gtk.Window):
 
         # Create actions
         actiongroup.add_actions((
+            ('node', gtk.STOCK_ADD, 'ADD NODE', None, None, self.widget.on_print),
+            ('edge', gtk.STOCK_ADD, 'ADD EDGE', None, None, self.widget.on_print),
             ('ZoomIn', gtk.STOCK_ZOOM_IN, None, None, None, self.widget.on_zoom_in),
             ('ZoomOut', gtk.STOCK_ZOOM_OUT, None, None, None, self.widget.on_zoom_out),
             ('ZoomFit', gtk.STOCK_ZOOM_FIT, None, None, None, self.widget.on_zoom_fit),
@@ -1777,7 +1781,7 @@ class DotWindow(gtk.Window):
         if url.split('_')[-1] == 'node':
             group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields= {}, parent = self.parent_model)
             current_model = record.ModelRecord(self.node_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
-            
+
             dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = self.attrs['node'])
             ok, value = dia.run()
             if ok:
