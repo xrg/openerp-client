@@ -29,7 +29,7 @@ import math
 import colorsys
 import time
 import re
-
+import rpc
 import gobject
 import gtk
 import gtk.gdk
@@ -1726,9 +1726,10 @@ class DotWindow(gtk.Window):
     </ui>
     '''
 
-    def __init__(self,window, widget, parent_model, node_attr, arrow_attr):
+    def __init__(self,window, widget, screen, node_attr, arrow_attr):
         self.widget = DotWidget()
-        self.parent_model = parent_model
+        self.screen = screen
+        self.parent_model = screen.current_model
         self.node_attr = node_attr
         self.arrow_attr = arrow_attr
         self.widget.connect('clicked', self.on_url_clicked)
@@ -1778,12 +1779,32 @@ class DotWindow(gtk.Window):
             current_model = record.ModelRecord(self.node_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
             dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = attrs)
             ok, value = dia.run()
+            if ok:
+                all_value = value.value
+                modify_value = value.modified_fields
+                for key,val in modify_value.items():
+                    modify_value[key] = all_value[key]
+                    if type(all_value[key]) == type([]):
+                        modify_value[key] = all_value[key][0]
+                rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
+                            'write', [int(url.split('_')[-2])], modify_value)
+                self.screen.reload()
             dia.destroy()
         elif url.split('_')[-1] == 'edge':
             group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields= {}, parent = self.parent_model)
             current_model = record.ModelRecord(self.arrow_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
             dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window1, attrs = {'context':{}})
             ok, value = dia.run()
+            if ok:
+                all_value = value.value
+                modify_value = value.modified_fields
+                for key,val in modify_value.items():
+                    modify_value[key] = all_value[key]
+                    if type(all_value[key]) == type([]):
+                        modify_value[key] = all_value[key][0]
+                rpc.session.rpc_exec_auth('/object', 'execute', self.arrow_attr.get('object',False),
+                            'write', [int(url.split('_')[-2])], modify_value)
+                self.screen.reload()
             dia.destroy()
 
 #        dialog = gtk.MessageDialog(

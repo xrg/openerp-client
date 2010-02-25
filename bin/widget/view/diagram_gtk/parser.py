@@ -44,7 +44,7 @@ class Viewdiagram(object):
         self.node = node_attr
         self.arrow = arrow_attr
         self.id = screen.current_model.id
-        self.window = xdot.DotWindow(window,self.widget, self.screen.current_model, node_attr, arrow_attr)
+        self.window = xdot.DotWindow(window,self.widget, self.screen, node_attr, arrow_attr)
         self.draw_diagram()
 
     def draw_diagram(self):
