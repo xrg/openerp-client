@@ -1739,6 +1739,8 @@ class DotWindow(gtk.Window):
         self.window_new = window
         window = window
         self.attrs = attrs
+        self.url = None
+        self.dia_select = None
         # Create a UIManager instance
         uimanager = self.uimanager = gtk.UIManager()
         # Add the accelerator group to the toplevel window
@@ -1767,11 +1769,20 @@ class DotWindow(gtk.Window):
         widget.pack_start(self.widget)
         window.set_focus(self.widget)
        # window.show_all()
+        
+    def clicked(self,widget,data = None):
+        if widget.get_label() == 'gtk-edit':
+            self.edit_data()
+        elif widget.get_label() == 'gtk-delete':
+            pass
+        elif widget.get_label() == 'gtk-close':
+            self.dia_select.destroy()
 
-    def on_url_clicked(self, widget, url, event):
-        if url.split('_')[-1] == 'node':
+    def edit_data(self):
+        self.dia_select.destroy()
+        if self.url.split('_')[-1] == 'node':
             group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields= {}, parent = self.parent_model)
-            current_model = record.ModelRecord(self.node_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
+            current_model = record.ModelRecord(self.node_attr.get('object',False), id = int(self.url.split('_')[-2]), parent = self.parent_model, group =group_cur )
             dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window_new, attrs = self.attrs['node'])
             ok, value = dia.run()
             if ok:
@@ -1781,12 +1792,12 @@ class DotWindow(gtk.Window):
                     if type(value.value[key]) in [type([]), type(())]:
                         modify_value[key] = value.value[key][0]
                 rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
-                            'write', [int(url.split('_')[-2])], modify_value)
+                            'write', [int(self.url.split('_')[-2])], modify_value)
                 self.screen.reload()
             dia.destroy()
-        elif url.split('_')[-1] == 'edge':
+        elif self.url.split('_')[-1] == 'edge':
             group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields= {}, parent = self.parent_model)
-            current_model = record.ModelRecord(self.arrow_attr.get('object',False), id = int(url.split('_')[-2]), parent = self.parent_model, group =group_cur )
+            current_model = record.ModelRecord(self.arrow_attr.get('object',False), id = int(self.url.split('_')[-2]), parent = self.parent_model, group =group_cur )
             dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window_new, attrs = self.attrs['arrow'])
             ok, value = dia.run()
             if ok:
@@ -1796,9 +1807,37 @@ class DotWindow(gtk.Window):
                     if type(value.value[key]) in [type([]), type(())]:
                         modify_value[key] = value.value[key][0]
                 rpc.session.rpc_exec_auth('/object', 'execute', self.arrow_attr.get('object',False),
-                            'write', [int(url.split('_')[-2])], modify_value)
+                            'write', [int(self.url.split('_')[-2])], modify_value)
                 self.screen.reload()
             dia.destroy()
+
+    def on_url_clicked(self, widget, url, event):
+        self.url = url
+        self.dia_select = gtk.Dialog('OpenERP - Link', self.window_new,
+                        gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
+        self.dia_select.set_property('default-width', 100)
+        self.dia_select.set_property('default-height', 50)
+        self.dia_select.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+        
+        h_box = gtk.HBox()
+        self.dia_select.get_child().add(h_box)
+        h_box.show()
+        but_close = gtk.Button("Close",stock = gtk.STOCK_CLOSE)
+        but_close.connect("clicked", self.clicked)
+        h_box.pack_start(but_close)
+        but_close.show()
+
+        but_edit = gtk.Button("Edit",stock = gtk.STOCK_EDIT)
+        but_edit.connect("clicked", self.clicked)
+        h_box.pack_start(but_edit)
+        but_edit.show()
+        
+        but_delete = gtk.Button("Delete",stock = gtk.STOCK_DELETE)
+        but_delete.connect("clicked", self.clicked)
+        h_box.pack_start(but_delete)
+        but_delete.show()
+        
+        ok = self.dia_select.run()
         return True
 
 #    def update(self, filename):
