@@ -53,6 +53,8 @@ class Viewdiagram(object):
         graph = pydot.Dot(graph_type='digraph')
         dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', self.id,self.model, self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),signal,(140, 180), rpc.session.context)
         node_lst = {}
+        for node in dict['blank_nodes']:
+            dict['nodes'][str(node['id'])] = {'name' : node['name']}
         for node in dict['nodes'].items():
             graph.add_node(pydot.Node(node[1]['name'],
                                       style="filled",
@@ -68,14 +70,8 @@ class Viewdiagram(object):
                                       URL = dict['signal'].get(edge[0],False)[1] + "_" + edge[0] + "_edge",
                                       fontsize='10',
                                       ))
-        if dict['blank_nodes']:
-            for node in dict['blank_nodes']:
-                graph.add_node(pydot.Node(node['name'],style="filled",
-                                      shape=self.node.get('shape',''),
-                                      color=self.node.get('bgcolor',''),
-                                      URL=node['name'] + "_" + str(node['id'])  + "_node",
-                                      ))
-                                        
+        if not dict['nodes']:
+            return True   
         file =  graph.create_xdot()
         self.window.set_dotcode(file, id = self.id)
 
