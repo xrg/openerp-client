@@ -1889,12 +1889,14 @@ class DotWindow(gtk.Window):
         current_model = record.ModelRecord(self.arrow_attr.get('object',False), id = self.screen.current_model.id, parent = self.parent_model, group =group_cur )
         dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = None, window = self.window_new, attrs = self.attrs['arrow'])
         ok, value = dia.run()
-#        if ok:
-#            value.value['wkf_id']=self.parent_model.id
-#            value.value['name']='tttt'
-#            rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
-#                        'create',value.value)
-#            self.screen.reload()
+        if ok:
+            cre_value = value.value
+            for key,val in cre_value.items():
+                if type(cre_value[key]) in [type([]), type(())]:
+                    cre_value[key] = cre_value[key][0]
+            rpc.session.rpc_exec_auth('/object', 'execute', self.arrow_attr.get('object',False),
+                        'create',cre_value)
+            self.screen.reload()
         dia.destroy()
         return True
 

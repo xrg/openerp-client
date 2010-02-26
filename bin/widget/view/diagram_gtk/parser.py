@@ -68,6 +68,8 @@ class Viewdiagram(object):
                                       URL = dict['signal'].get(edge[0],False)[1] + "_" + edge[0] + "_edge",
                                       fontsize='10',
                                       ))
+        if not graph.node_list:
+            return False
         file =  graph.create_xdot()
         self.window.set_dotcode(file)
 
