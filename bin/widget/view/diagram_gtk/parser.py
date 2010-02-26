@@ -71,13 +71,13 @@ class Viewdiagram(object):
                                       fontsize='10',
                                       ))
         if not dict['nodes']:
-            return True   
+            return False
         file =  graph.create_xdot()
         self.window.set_dotcode(file, id = self.id)
 
     def display(self,screen, models):
         self.draw_diagram()
-        pass
+        return False
 
 class parser_diagram(interface.parser_interface):
     def __init__(self, window, parent=None, attrs=None, screen=None):
