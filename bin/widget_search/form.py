@@ -189,6 +189,10 @@ class parse(object):
             if not node.nodeType==node.ELEMENT_NODE:
                 continue
             attrs = tools.node_attributes(node)
+            if attrs.get('invisible', False):
+                visval = eval(attrs['invisible'], {'context':call[0].context})
+                if visval:
+                    continue
             if node.localName=='field':
                 val  = attrs.get('select', False) or self.fields[str(attrs['name'])].get('select', False) or self.view_type == 'search'
                 if val:
