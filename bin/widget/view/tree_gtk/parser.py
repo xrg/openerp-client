@@ -85,12 +85,13 @@ class parser_tree(interface.parser_interface):
         if not self.title:
             self.title = attrs.get('string', 'Unknown')
 
-
         treeview.sequence = False
+        treeview.connect("motion-notify-event", treeview.set_tooltip)
+
         for node in root_node.childNodes:
             node_attrs = tools.node_attributes(node)
             if node.localName == 'button':
-                cell = Cell('button')(node_attrs['string'],treeview,node_attrs)
+                cell = Cell('button')(node_attrs['string'], treeview, node_attrs)
                 cell.name = node_attrs['name']
                 cell.attrs = node_attrs
                 cell.type = node_attrs.get('type','object')
@@ -104,12 +105,9 @@ class parser_tree(interface.parser_interface):
                 col._type = 'Button'
                 col.attrs = node_attrs
                 col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
-                col_label = gtk.Label('')
-                #col_label.set_markup('<b>%s</b>' % node_attrs['string'])
+                col.tooltip = node_attrs['string']
                 if node_attrs.get('help',False):
-                    col_label.set_tooltip_markup('<span foreground=\"darkred\">'+tools.to_xml(node_attrs['string'])+' :</span>\n'+tools.to_xml(node_attrs['help']))
-                col_label.show()
-                col.set_widget(col_label)
+                    col.tooltip = node_attrs['string'] +':\n' + node_attrs['help']
                 col.set_fixed_width(20)
                 visval = eval(str(node_attrs.get('invisible', 'False')), {'context':self.screen.context})
                 col.set_visible(not visval)
