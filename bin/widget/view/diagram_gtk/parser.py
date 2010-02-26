@@ -68,10 +68,16 @@ class Viewdiagram(object):
                                       URL = dict['signal'].get(edge[0],False)[1] + "_" + edge[0] + "_edge",
                                       fontsize='10',
                                       ))
-        if not graph.node_list:
-            return False
+        if dict['blank_nodes']:
+            for node in dict['blank_nodes']:
+                graph.add_node(pydot.Node(node['name'],style="filled",
+                                      shape=self.node.get('shape',''),
+                                      color=self.node.get('bgcolor',''),
+                                      URL=node['name'] + "_" + str(node['id'])  + "_node",
+                                      ))
+                                        
         file =  graph.create_xdot()
-        self.window.set_dotcode(file)
+        self.window.set_dotcode(file, id = self.id)
 
     def display(self,screen, models):
         self.draw_diagram()

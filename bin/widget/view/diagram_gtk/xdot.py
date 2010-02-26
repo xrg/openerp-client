@@ -1742,6 +1742,7 @@ class DotWindow(gtk.Window):
         self.attrs = attrs
         self.url = None
         self.dia_select = None
+        self.id = None
         # Create a UIManager instance
         uimanager = self.uimanager = gtk.UIManager()
         # Add the accelerator group to the toplevel window
@@ -1874,12 +1875,11 @@ class DotWindow(gtk.Window):
         dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = None, window = self.window_new, attrs = self.attrs['node'])
         ok, value = dia.run()
         if ok:
-            value.value['wkf_id']=self.parent_model.id
+            value.value['wkf_id']=self.id
             rpc.session.rpc_exec_auth('/object',
                                       'execute',
                                       self.node_attr.get('object',False),
                                       'create',value.value)
-#            print id
             self.screen.reload()
         dia.destroy()
         return True
@@ -1915,7 +1915,8 @@ class DotWindow(gtk.Window):
     def set_filter(self, filter):
         self.widget.set_filter(filter)
 
-    def set_dotcode(self, dotcode, filename='<stdin>'):
+    def set_dotcode(self, dotcode, filename='<stdin>', id = 0):
+        self.id = id
         if self.widget.set_dotcode(dotcode, filename):
 #            self.set_title(os.path.basename(filename) + ' - Dot Viewer')
             self.widget.zoom_to_fit()
