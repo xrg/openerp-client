@@ -1781,18 +1781,12 @@ class DotWindow(gtk.Window):
 
     def delete_data(self):
         if self.url.split('_')[-1] == 'node':
-            data = rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
-                                'read', [self.url.split('_')[-2]] ,['flow_start'])[0]
-            if data['flow_start']:
-                common.message(_("You cannot delete starting node"))
-            else:
-                rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
-                                'unlink', [self.url.split('_')[-2]])
-            self.screen.reload()
+            rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
+                            'unlink', [int(self.url.split('_')[-2])])
         elif self.url.split('_')[-1] == 'edge':
             rpc.session.rpc_exec_auth('/object', 'execute', self.arrow_attr.get('object',False),
-                            'unlink', [self.url.split('_')[-2]])
-            self.screen.reload()
+                            'unlink', [int(self.url.split('_')[-2])])
+        self.screen.reload()
         self.dia_select.destroy()
 
     def edit_data(self):
