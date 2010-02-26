@@ -1553,12 +1553,13 @@ class DotWidget(gtk.DrawingArea):
         rect.y += self.ZOOM_TO_FIT_MARGIN
         rect.width -= 2 * self.ZOOM_TO_FIT_MARGIN
         rect.height -= 2 * self.ZOOM_TO_FIT_MARGIN
-        zoom_ratio = min(
-            float(rect.width)/float(self.graph.width),
-            float(rect.height)/float(self.graph.height)
-        )
-        self.zoom_image(zoom_ratio, center=True)
-        self.zoom_to_fit_on_resize = True
+        if self.graph.width:
+            zoom_ratio = min(
+                float(rect.width)/float(self.graph.width),
+                float(rect.height)/float(self.graph.height)
+            )
+            self.zoom_image(zoom_ratio, center=True)
+            self.zoom_to_fit_on_resize = True
 
     ZOOM_INCREMENT = 1.25
     ZOOM_TO_FIT_MARGIN = 12

@@ -70,9 +70,9 @@ class Viewdiagram(object):
                                       URL = dict['signal'].get(edge[0],False)[1] + "_" + edge[0] + "_edge",
                                       fontsize='10',
                                       ))
-        if not dict['nodes']:
-            return False
         file =  graph.create_xdot()
+        if not dict['nodes']:
+            file = """digraph G {}"""
         self.window.set_dotcode(file, id = self.id)
 
     def display(self,screen, models):
