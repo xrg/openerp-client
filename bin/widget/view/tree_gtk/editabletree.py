@@ -37,6 +37,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         self.avg_fields = []
         self.cells = {}
         self.handlers = {}
+        self.treeview_tooltip = None
 
     def on_quit_cell(self, current_model, fieldname, value):
         modelfield = current_model[fieldname]
@@ -61,6 +62,19 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         # And finally the conditional default
         #if modelfield.attrs.get('change_default', False):
         #   current_model.cond_default(fieldname, real_value)
+
+    def set_tooltip(self, treeview, event):
+        if event.state:
+            path = self.get_path_at_pos(int(event.x), int(event.y))
+            if path:
+                col = path[1]
+                for renderer in col.get_cell_renderers():
+                    if self.treeview_tooltip:
+                        self.treeview_tooltip.set_tip(treeview,'')
+                    if isinstance(renderer,gtk.CellRendererPixbuf):
+                        if renderer.get_property('stock-id'):
+                            self.treeview_tooltip = gtk.Tooltips()
+                            self.treeview_tooltip.set_tip(treeview, col.tooltip)
 
     def on_open_remote(self, current_model, fieldname, create, value):
         modelfield = current_model[fieldname]
@@ -122,6 +136,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         current = cols.index(col)
         idx = (current - 1) % len(cols)
         return cols[idx]
+
 
     def set_cursor(self, path, focus_column=None, start_editing=False):
         if focus_column and (focus_column._type in ('many2one','many2many')):
