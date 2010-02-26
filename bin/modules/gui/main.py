@@ -353,7 +353,7 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
         dbtoload = options.options['login.db'] or ''
         if not dbtoload:
             dbtoload = _get_db_name_from_url(url)
-    
+
     label.hide()
 
     liststore = db_widget.get_model()
@@ -374,9 +374,11 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
         entry_db.set_text(dbtoload)
         entry_db.grab_focus()
         db_widget.hide()
+        if butconnect:
+            butconnect.set_sensitive(True)
     else:
         entry_db.hide()
-        
+
         if not result:
             label.set_label('<b>'+_('No database found, you must create one !')+'</b>')
             label.show()
@@ -385,7 +387,7 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
                 butconnect.set_sensitive(False)
         else:
             db_widget.show()
-            index = 0    
+            index = 0
             for db_num, db_name in enumerate(result):
                 liststore.append([db_name])
                 if db_name == dbtoload:
