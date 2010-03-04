@@ -33,9 +33,6 @@ class char(wid_int.wid_int):
         self.widget.set_max_length(int(attrs.get('size',16)))
         self.widget.set_width_chars(15)
         self.widget.set_property('activates_default', True)
-        if attrs.get('context',False):
-            self.widget.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("turquoise"))
-            self.widget.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("turquoise"))
         if self.attrs.get('default',False):
             value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
             self.widget.set_text(value or '')
