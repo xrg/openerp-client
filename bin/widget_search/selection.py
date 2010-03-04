@@ -34,14 +34,6 @@ class selection(wid_int.wid_int):
         self.attrs = attrs
         self._selection = {}
         self.name = name
-
-        if attrs.get('context',False):
-            self.widget.child.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("turquoise"))
-            self.widget.child.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("turquoise"))
-            self.widget.set_tooltip_markup("This Field comes with a context")
-#        else:
-#            self.widget.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ffffff"))
-#            self.widget.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ffffff"))
         if 'selection' in attrs:
             self.set_popdown(attrs.get('selection',[]))
         if attrs.get('default',False):
