@@ -65,11 +65,6 @@ class _container(object):
 
         self.count += 1
         (table, x, y) = self.cont[-1]
-        if colspan>self.col[-1]:
-            colspan=self.col[-1]
-        if colspan+x>self.col[-1]:
-            self.newline()
-            (table, x, y) = self.cont[-1]
         if name:
             vbox = gtk.VBox(homogeneous=False, spacing=2)
             label = gtk.Label(name)

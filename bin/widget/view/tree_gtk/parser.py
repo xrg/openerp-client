@@ -653,7 +653,7 @@ class CellRendererButton(object):
         valid_states = self.__get_states() or []
 #         change this according to states or attrs: to not show the icon
         attrs_check = self.attrs_set(model)
-        if attrs_check or current_state not in valid_states:
+        if attrs_check or current_state not in valid_states or isinstance(model, group_record):
             cell.set_property('stock-id', None)
         else:
             cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))

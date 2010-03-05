@@ -156,7 +156,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     def added(self, modellist, position):
         self.models.loaded = False
         path = len(modellist) - 1
-        self.emit('row_inserted',path,self.get_iter(path))        
+        self.emit('row_inserted',path,self.get_iter(path))
 
     def cancel(self):
         pass
@@ -664,6 +664,5 @@ class ViewList(parser_view):
             value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
                            {'context':self.screen.context})
             if col.name == self.screen.context.get('group_by',False):
-                if not col.get_visible():
-                    value = col.get_visible()
+                value = False
             col.set_visible(not value)
