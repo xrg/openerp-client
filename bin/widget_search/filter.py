@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -42,7 +42,7 @@ class filter(wid_int.wid_int):
             self.butt.set_tooltip_markup(tools.to_xml(attrs['help']))
         self.domain = attrs.get('domain', "[]")
         self.context = attrs.get('context', "{}")
-        self.butt.set_active(bool(attrs.get('default',False)))
+        self.butt.set_active(tools.expr_eval(str(attrs.get('default', 'False')),{'context':call[0].context}))
         self.butt.set_alignment(0.5, 0.5)
         self.butt.connect('toggled', call[1])
         self.widget = self.butt
