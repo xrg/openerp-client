@@ -8,30 +8,30 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:37+0000\n"
-"Last-Translator: Radoslav Sloboda <rado.sloboda@gmail.com>\n"
+"PO-Revision-Date: 2010-03-06 13:56+0000\n"
+"Last-Translator: Peter Kohaut <peter.kohaut@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-03-07 05:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr "Vytlačiť harmonogram"
+msgstr "Vytlačiť pracovný tok"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
-msgstr "Vytlačiť harmonogram (úplne)"
+msgstr "Vytlačiť pracovný tok (úplne)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr "Nie je prístupný rozširujúci modul pre tento zdroj."
+msgstr "Nie je prístupný zásuvný modul pre tento zdroj."
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
-msgstr "Vyberte si rozširujúci modul"
+msgstr "Vyberte si zásuvný modul"
 
 #: bin/translate.py:184
 #, python-format
@@ -40,7 +40,7 @@ msgstr "Nedajú sa nastaviť lokálne konvencie %s"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr "OpenERP skončí, prerušenie z klávesnice"
+msgstr "OpenERP končí, prerušenie z klávesnice"
 
 #: bin/options.py:108
 #, python-format
@@ -49,20 +49,20 @@ msgstr "OpenERP klient %s"
 
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr "špecifikujte alternatívny konfiguračný súbor"
+msgstr "zadajte alternatívny konfiguračný súbor"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "Povoliť základné ladenie. Alias pre '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "zadajte úroveň logovnia: %s"
 
 #: bin/options.py:112
 msgid "specify the user login"
-msgstr "zadajte užívateľské meno"
+msgstr "zadajte používateľské meno"
 
 #: bin/options.py:113
 msgid "specify the server port"
@@ -75,14 +75,14 @@ msgstr "zadajte IP adresu / meno servera"
 #: bin/printer/printer.py:185
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr "Neznáme %s typy súborov"
+msgstr "Neznámy typ súboru %s"
 
 #: bin/printer/printer.py:190
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
-"Linux nezrealizoval automatickú tlač.\n"
+"Automatická tlač  nie je implementovaná v Linuxe.\n"
 "Použite možnosť náhľadu!"
 
 #: bin/printer/printer.py:198
@@ -106,10 +106,10 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
-"Ďakujeme za vašu odozvu !\n"
+"Ďakujeme za vašu odozvu!\n"
 "Vaše komentáre boli odoslané na OpenERP.\n"
 "Ďalej by ste mali vytvoriť novú databázu,\n"
-"alebo sa pripojiť k existujúcemu serveru  cez položku menu \"Súbor\"."
+"alebo sa pripojiť k existujúcemu serveru cez položku menu \"Súbor\"."
 
 #: bin/common/common.py:222
 msgid ""
@@ -117,13 +117,13 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
-"Ďakujeme, že ste si otestovali OpenERP !\n"
+"Ďakujeme za testovanie OpenERP !\n"
 "Ďalej by ste mali vytvoriť novú databázu,\n"
-"alebo sa pripojiť k existujúcemu serveru  cez položku menu \"Súbor\"."
+"alebo sa pripojiť k existujúcemu serveru cez položku menu \"Súbor\"."
 
 #: bin/common/common.py:325
 msgid "Support request sent !"
-msgstr "Bola odoslaná požiadavka na technickú podporu !"
+msgstr "Požiadavka bola odoslaná na technickú podporu!"
 
 #: bin/common/common.py:345 bin/common/common.py:388
 msgid ""
@@ -153,26 +153,26 @@ msgstr ""
 "\n"
 "<b>Bola nahlásená neznáma chyba.</b>\n"
 "\n"
-"<b>Nemáte platnú zmluvu o podpore a udržiavaní Open ERP !</b>\n"
-"Ak používate Open ERP v produkčnom prostredí, veľmi sa odporúča predplatiť "
+"<b>Nemáte platnú zmluvu o podpore Open ERP!</b>\n"
+"Ak používate Open ERP v produkčnom prostredí, veľmi sa odporúčame predplatiť "
 "si\n"
-"udržiavací program.\n"
+"program podpory.\n"
 "\n"
-"Open ERP udržiavacia zmluva vám dáva záruku opravenie chýb \n"
+"Open ERP zmluva o podpore vám dáva záruku opravenia chýb \n"
 "a automatický migračný systém, takže môžeme vyriešiť vaše problémy v "
 "priebehu\n"
-"niekoľkých hodín. Keby ste mali udržiavaciu zmluvu, toto hlásenie o chybe \n"
-"by bolo odoslané na tím udržiavania kvality Open ERP.\n"
+"niekoľkých hodín. Keby ste mali zmluvu o podpore, toto hlásenie o chybe \n"
+"by bolo odoslané tímu pre zabezpečenie kvality Open ERP.\n"
 "\n"
-"Program údržby vám zaisťuje:\n"
-"* Automatickú  migráciu na nové verzie,\n"
+"Program podpory vám zaisťuje:\n"
+"* Automatickú migráciu na nové verzie,\n"
 "* Záruku opravy chýb programu,\n"
 "* Mesačné informácie o potenciálnych chybách a spôsobe ich odstránenia,\n"
 "* Upozornenia o bezpečnostných nedostatkoch a automatickú migráciu,\n"
 "* Prístup na zákaznícky internetový portál.\n"
 "\n"
-"Môžete použiť nižšieuvedený odkaz pre ďalšie informácie. Detaily o chybe\n"
-"sú vypísané v druhom tabelátore.\n"
+"Môžete použiť nižšie uvedený odkaz pre ďalšie informácie. Detaily o chybe\n"
+"sú vypísané v druhej záložke.\n"
 
 #: bin/common/common.py:368
 #, python-format
@@ -198,13 +198,31 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Bola nahlásená neznáma chyba.</b>\n"
+"\n"
+"Vaša zmluva o podpore  nepokrýva všetky moduly nainštalované vo vašom "
+"systéme!\n"
+"Ak používate Open ERP v produkčnom prostredí, veľmi sa odporúčame prejsť na "
+"vyššiu úroveň zmluvy o podpore.\n"
+"\n"
+"Ak ste vyvinuli vlastné moduly alebo ste nainštalovali moduly iného výrobcu, "
+"môžme vám ponúknuť dodatočnú zmluvu o podpore pre tieto moduly. Po "
+"skontrolovaní modulov, náš tým zabezpečenia kvality zabezpečí ich prechod na "
+"všetky novšie verzie Open ERP bez dodatočných poplatkov.\n"
+"\n"
+"Zoznam modulov, ktoré nie sú pokryté vašou zmluvou o podpore:\n"
+"%s\n"
+"\n"
+"Môžete použiť nižšie uvedený odkaz pre ďalšie informácie. Detaily o chybe\n"
+"sú vypísané v druhej záložke."
 
 #: bin/common/common.py:443
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
-"Váš problém bol odoslaný nášmu tímu pre udržiavanie kvality.\n"
+"Váš problém bol odoslaný nášmu tímu pre zabezpečenie kvality.\n"
 "Po analýze problému vás budeme znovu kontaktovať."
 
 #: bin/common/common.py:446
@@ -214,10 +232,13 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Váš problém NEBOLO možné odoslať týmu na zabezpečenie kvality!\n"
+"Prosím nahláste túto chybu ručne na:\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Chyba"
 
 #: bin/common/common.py:599
 msgid "Open with..."
@@ -256,7 +277,7 @@ msgstr "Obsah formulára, alebo výnimka, ak nie je platný"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "Obsah grafického prvku,alebo výnimka, ak nie je platný"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -284,7 +305,7 @@ msgstr ""
 
 #: bin/widget_search/calendar.py:55
 msgid "Start date"
-msgstr "Počiatočný dátum"
+msgstr "Dátum začiatku"
 
 #: bin/widget_search/calendar.py:59 bin/widget_search/calendar.py:79
 #: bin/widget/view/form_gtk/calendar.py:62
@@ -294,7 +315,7 @@ msgstr "Otvoriť okno s kalendárom"
 
 #: bin/widget_search/calendar.py:75
 msgid "End date"
-msgstr "Koncový dátum"
+msgstr "Dátum ukončenia"
 
 #: bin/widget_search/calendar.py:120 bin/widget/view/form_gtk/calendar.py:136
 #: bin/widget/view/form_gtk/calendar.py:266
@@ -325,7 +346,7 @@ msgstr "Chyba pripojenia"
 #: bin/modules/gui/main.py:224 bin/modules/action/wizard.py:187
 #: bin/modules/action/wizard.py:193 bin/modules/action/wizard.py:195
 msgid "Application Error"
-msgstr "Chyba v aplikácii"
+msgstr "Chyba aplikácie"
 
 #: bin/rpc.py:188 bin/modules/action/wizard.py:195
 msgid "View details"
@@ -348,11 +369,11 @@ msgstr "OpenERP vyhľadávanie: %s (%%d výsledok(ov))"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "Tento súbor je prázdny!"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "Import!"
 
 #: bin/modules/gui/window/win_import.py:57
 msgid "XML-RPC error !"
@@ -360,16 +381,16 @@ msgstr "XML-RPC chyba !"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "Importovaný jeden objekt!"
 
 #: bin/modules/gui/window/win_import.py:64
 #, python-format
 msgid "Imported %d objects !"
-msgstr "Nahraných %d objektov!"
+msgstr "Importovaných %d objektov!"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "Chyba importu!"
 
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
@@ -379,11 +400,11 @@ msgstr "Názov poľa"
 #: bin/modules/gui/window/win_import.py:186
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
-msgstr ""
+msgstr "Nemôžte importovať toto pole %s, lebo sa nedalo automaticky nájsť."
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "Nevybrali ste žiadne polia na import."
 
 #: bin/modules/gui/window/win_selection.py:52
 msgid "Name"
@@ -419,15 +440,15 @@ msgid ""
 "Sorry, OOo users :("
 msgstr ""
 "Funkcie k dispozícii iba pre MS Office!\n"
-"Je nám ľúto, OOo užívateľov: ("
+"Prepáčte používatelia OpenOffice  :("
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Chyba exportu!"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "Neexistuje ID zdroja pre tento objekt!"
 
 #: bin/modules/gui/window/form.py:221
 msgid "No record selected ! You can only attach to existing record."
@@ -442,11 +463,11 @@ msgstr "Musíte vybrať záznam!"
 #: bin/modules/gui/window/form.py:239
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:43
 msgid "ID"
-msgstr "ID:"
+msgstr "ID"
 
 #: bin/modules/gui/window/form.py:240
 msgid "Creation User"
-msgstr "Vytvoril užívateľ"
+msgstr "Vytvoril používateľ"
 
 #: bin/modules/gui/window/form.py:241
 msgid "Creation Date"
@@ -486,7 +507,7 @@ msgstr "Zdroje úspešne odstránené."
 
 #: bin/modules/gui/window/form.py:298
 msgid "Working now on the duplicated document !"
-msgstr "Teraz pracuje na duplicitnom dokumente!"
+msgstr "Teraz pracuje na duplikovanom dokumente!"
 
 #: bin/modules/gui/window/form.py:306
 msgid "Document Saved."
@@ -500,7 +521,7 @@ msgstr "Neplatný formulár, opravte červeno vyznačené polia !"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "Chyba!"
 
 #: bin/modules/gui/window/form.py:328 bin/modules/gui/window/form.py:423
 msgid ""
@@ -516,7 +537,7 @@ msgstr "Musíte vybrať jeden alebo niekoľko záznamov!"
 
 #: bin/modules/gui/window/form.py:384
 msgid "Print Screen"
-msgstr "Vytlačiť obrazovku"
+msgstr "Obrázok z obrazovky"
 
 #: bin/modules/gui/window/form.py:404
 msgid "No record selected"
@@ -544,7 +565,7 @@ msgstr "Stromová štruktúra"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:49
 msgid "Description"
-msgstr "Opis"
+msgstr "Popis"
 
 #: bin/modules/gui/window/__init__.py:33
 msgid "Unknown Window"
@@ -568,7 +589,7 @@ msgstr ""
 
 #: bin/modules/gui/window/tree.py:209
 msgid "Error removing resource!"
-msgstr "Chyba pri odstránení zdroja!"
+msgstr "Chyba pri odstraňovaní zdroja!"
 
 #: bin/modules/gui/window/tree.py:220
 msgid "Unable to chroot: no tree resource selected"
@@ -583,15 +604,17 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"Predvolený jazyk rozhrania bol zmenený, nezabudnite reštartovať klienta aby "
+"ste mali rozhranie vo vašom jazyku."
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "Predvolený jazyk bol zmenený!"
 
 #: bin/modules/gui/main.py:87 bin/modules/gui/main.py:436
 #: bin/modules/gui/main.py:1445
 msgid "Could not connect to server !"
-msgstr "Nedá sa pripojiť k serveru !"
+msgstr "Nedá sa pripojiť k serveru!"
 
 #: bin/modules/gui/main.py:91 bin/openerp.glade:72 bin/openerp.glade:6272
 #: bin/openerp.glade:6508 bin/openerp.glade:6830 bin/openerp.glade:7475
@@ -626,39 +649,39 @@ msgstr ""
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Skripty prechodu"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "ID zmluvy:"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "Heslo zmluvy:"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Už máte poslednú verziu"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Dostupné sú nasledovné aktualizácie:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Už môže migrovať vaše databázy."
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "Migrovať databázu"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Vaša databáza bola aktualizovaná."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Vaše databázy boli aktualizovné."
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
@@ -666,7 +689,7 @@ msgstr "Neznámy"
 
 #: bin/modules/gui/main.py:443 bin/modules/gui/main.py:1449
 msgid "No database found, you must create one !"
-msgstr "Nenašla sa žiadna databáza, musíte nejakú vytvoriť !"
+msgstr "Nenašla sa žiadna databáza, musíte nejakú vytvoriť!"
 
 #: bin/modules/gui/main.py:467
 #, python-format
@@ -683,7 +706,7 @@ msgstr "Ľutujeme,'"
 
 #: bin/modules/gui/main.py:595 bin/modules/gui/main.py:598
 msgid "Bad database name !"
-msgstr "Nesprávne meno databázy !"
+msgstr "Nesprávne meno databázy!"
 
 #: bin/modules/gui/main.py:598
 msgid ""
@@ -695,16 +718,16 @@ msgstr ""
 
 #: bin/modules/gui/main.py:626
 msgid "OpenERP Database Installation"
-msgstr "Inštaláci databázy OpenERP"
+msgstr "Inštalácia databázy OpenERP"
 
 #: bin/modules/gui/main.py:635
 msgid "<b>Operation in progress</b>"
-msgstr "<b>Operácia prebiaha</b>"
+msgstr "<b>Operácia prebieha</b>"
 
 #: bin/modules/gui/main.py:658 bin/modules/gui/main.py:660
 #: bin/modules/gui/main.py:662
 msgid "Could not create database."
-msgstr "Nedá sa vytvoriť databáza."
+msgstr "Nie je možné vytvoriť databázu."
 
 #: bin/modules/gui/main.py:658
 msgid "Database already exists !"
@@ -713,11 +736,11 @@ msgstr "Databáza s daným menom už existuje !"
 #: bin/modules/gui/main.py:660 bin/modules/gui/main.py:1342
 #: bin/modules/gui/main.py:1361 bin/modules/gui/main.py:1437
 msgid "Bad database administrator password !"
-msgstr "Nesprávne heslo administrátora databázy !"
+msgstr "Nesprávne heslo administrátora databázy!"
 
 #: bin/modules/gui/main.py:662 bin/modules/gui/main.py:669
 msgid "Error during database creation !"
-msgstr "Chyba pri vytváraní databázy !"
+msgstr "Chyba pri vytváraní databázy!"
 
 #: bin/modules/gui/main.py:669
 msgid ""
@@ -770,6 +793,8 @@ msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Chyba autentifikácie!\n"
+"Zlé používateľské meno alebo heslo"
 
 #: bin/modules/gui/main.py:1062
 msgid "Not logged !"
@@ -1029,7 +1054,7 @@ msgstr "Chyba pri zapisovaní súboru: %s"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Zlá hodnota dátumu! Rok musí byť vačší ako 1899!"
 
 #: bin/widget/view/form_gtk/calendar.py:130
 #: bin/widget/view/form_gtk/calendar.py:263
@@ -1039,7 +1064,7 @@ msgstr "Tento grafický prvok je len na čítanie, nie je modifikovateľný !"
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Zlá hodnota dátumu a času! Rok musí byť vačší ako 1899!"
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Hour:"
@@ -1055,7 +1080,7 @@ msgstr "Nesprávna ikonka pre tlačidlo !"
 
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "Zadajte text do súvisiaceho pola pred pridávaním prekladov!"
 
 #: bin/widget/view/form_gtk/parser.py:548
 msgid "You need to save resource before adding translations!"
@@ -1181,11 +1206,11 @@ msgstr "Odstrá_niť databázu"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "_Stiahnuť migračný kód"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "_Migrácia databázy/áz"
 
 #: bin/openerp.glade:405
 msgid "Administrator Password"
@@ -1669,11 +1694,11 @@ msgstr "<b>Preddefinované exporty</ b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Kompatibilný import"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>Vyberte možnosť na export</b>"
 
 #: bin/openerp.glade:2871
 msgid "Available Fields"
@@ -1969,7 +1994,7 @@ msgstr "Predchádzajúca úprava widgetu"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.glade:5400
 msgid "Next editable widget"
@@ -2163,6 +2188,8 @@ msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
 "new database."
 msgstr ""
+"Toto je heslo užívateľa '<i>admin</i>', ktorý bude vytvorený vo vašej novej "
+"databáze."
 
 #: bin/openerp.glade:7151
 msgid "Administrator Password:"
@@ -2173,6 +2200,8 @@ msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
 "new database. It has to be the same than the above field."
 msgstr ""
+"Toto je heslo užívateľa '<i>admin</i>', ktorý bude vytvorený vo vašej novej "
+"databáze. Musí byť rovnaké ako v poli vyššie."
 
 #: bin/openerp.glade:7165
 msgid "Confirm Password:"
@@ -2236,11 +2265,11 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "Pripojiť neskôr"
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "Pripojiť teraz"
 
 #: bin/openerp.glade:7843
 msgid "Extension Manager"
@@ -2248,7 +2277,7 @@ msgstr "Správca rozšírení"
 
 #: bin/openerp.glade:7947
 msgid "Concurrency exception"
-msgstr ""
+msgstr "Chyba súbežnosti"
 
 #: bin/openerp.glade:7972
 msgid ""
@@ -2350,10 +2379,12 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"Prosím vyplnte nasledovný formulár aby ste nám pomohli zlepšiť <b><span "
+"foreground=\"red\"><i>Open</i></span> ERP</b> a lepšie zamerať nový vývoj."
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "<b>Vaša spoločnosť</b>"
 
 #: bin/dia_survey.glade:84
 msgid "Open Source:"
@@ -2373,7 +2404,7 @@ msgstr "Vaša rola:"
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "Zamestnanci:"
 
 #: bin/dia_survey.glade:546
 msgid "Country:"
@@ -2381,7 +2412,7 @@ msgstr "Krajina:"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "Mesto:"
 
 #: bin/dia_survey.glade:586
 msgid "System:"
@@ -2389,7 +2420,7 @@ msgstr "Systém:"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>Váš záujem</b>"
 
 #: bin/dia_survey.glade:672
 msgid "How did you hear about us:"
@@ -2397,15 +2428,15 @@ msgstr "Ako ste sa o nás dozvedeli:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "Plánujeme používate Open ERP"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "Plánujeme ponúkať služby nad Open ERP"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
-msgstr ""
+msgstr "Povedzte nám prečo skúšate Open ERP a aký softvér teraz používate:"
 
 #: bin/dia_survey.glade:790
 msgid "<b>Keep Informed</b>"
@@ -2413,7 +2444,7 @@ msgstr "<b>Priebežne informovať </ b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "Chcem obdržať elektronickú knihu (PDF) Open ERP e-mailom"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
@@ -2421,7 +2452,7 @@ msgstr "Telefón / Mobil:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "Email:"
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
@@ -2429,11 +2460,11 @@ msgstr "Vaše meno:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #~ msgid "The content of the widget or excpetion if not valid"
 #~ msgstr "Obsah grafického prvku, alebo výnimka, ak hodnota nie je platná"
