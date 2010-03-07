@@ -282,6 +282,8 @@ class many2one(interface.widget_interface):
         self.ok=True
 
     def sig_focus_out(self, widget, event=None, leave=False):
+        if not self._view.modelfield:
+            return
         res = self._view.modelfield.get_client(self._view.model)
         if self.wid_text.get_text() and not res:
             self.sig_find(widget, event, leave=True)
