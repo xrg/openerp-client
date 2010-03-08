@@ -67,7 +67,6 @@ def sort_model(column, screen):
 class parser_tree(interface.parser_interface):
     def parse(self, model, root_node, fields):
         dict_widget = {}
-        avg_fields = []
         attrs = tools.node_attributes(root_node)
         on_write = attrs.get('on_write', '')
         editable = attrs.get('editable', False)
@@ -195,7 +194,6 @@ class parser_tree(interface.parser_interface):
                     calculate = 'sum'
                 elif 'avg' in node_attrs.keys():
                     calculate = 'avg'
-                    treeview.avg_fields.append(fname)
 
                 if calculate and fields[fname]['type'] \
                         in ('integer', 'float', 'float_time'):
