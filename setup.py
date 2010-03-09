@@ -57,13 +57,17 @@ execfile(opj('bin', 'release.py'))
 if sys.argv[1] == 'bdist_rpm':
     version = version.split('-')[0]
 
-
 # get python short version
 py_short_version = '%s.%s' % sys.version_info[:2]
 
-required_modules = [('gtk', 'gtk python bindings'),
-                    ('gtk.glade', 'glade python bindings'),
-                    ('mx.DateTime', 'date and time handling routines for Python')]
+required_modules = [
+    ('lxml', 'lxml module: pythonic libxml2 and libxslt bindings'),
+    ('pytz', 'Timezone handling library for Python'),
+    ('gtk', 'gtk python bindings'),
+    ('gtk.glade', 'glade python bindings'),
+    ('mx.DateTime', 'date and time handling routines for Python')
+]
+
 
 def check_modules():
     ok = True
@@ -145,7 +149,11 @@ options = {
         "compressed": 1,
         "optimize": 1,
         "dist_dir": 'dist',
-        "packages": ["encodings","gtk", "matplotlib", "pytz", "OpenSSL"],
+        "packages": [
+            "encodings","gtk", "matplotlib", "pytz", "OpenSSL",
+            "lxml", "lxml.builder", "lxml._elementpath", "lxml.etree",
+            "lxml.objectify", "decimal"
+        ],
         "includes": "pango,atk,gobject,cairo,atk,pangocairo,matplotlib._path",
         "excludes": ["Tkinter", "tcl", "TKconstants"],
         "dll_excludes": [

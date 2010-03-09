@@ -34,7 +34,6 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
     def __init__(self, position):
         super(EditableTreeView, self).__init__()
         self.editable = position
-        self.avg_fields = []
         self.cells = {}
         self.handlers = {}
         self.treeview_tooltip = None

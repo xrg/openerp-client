@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -23,6 +23,7 @@
 import gtk
 from gtk import glade
 
+import copy
 import time
 import datetime as DT
 import StringIO
@@ -33,6 +34,7 @@ import tools
 from tools import datetime_util
 
 from widget.view import interface
+from widget.view.list import group_record
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
@@ -67,6 +69,7 @@ class ViewGraph(object):
         self.fields = fields
         self.model = model
         self.axis = axis
+        self.old_axis = axis
         self.editable = False
         self.widget.editable = False
         self.axis_data = axis_data
@@ -80,14 +83,22 @@ class ViewGraph(object):
 
     def display(self, models):
         datas = []
+        self.axis = copy.copy(self.old_axis)
+        group_by = self.widget.screen.context.get('group_by', False)
+        if group_by:
+            models = models.models or models.list_group.lst
+            self.axis[0] = group_by
         for m in models:
             res = {}
-            for x in self.axis_data.keys():
-                field_val = m[x].get_client(m)                
+            for x in self.axis:
+                field_val = m[x].get_client(m)
                 if self.fields[x]['type'] in ('many2one', 'char','time','text'):
                     res[x] = field_val and str(field_val) or 'Undefined'
                 elif self.fields[x]['type'] == 'selection':
-                    selection = dict(m[x].attrs['selection'])
+                    if group_by and isinstance(m, group_record):
+                        selection = dict(m.children[0][x].attrs['selection'])
+                    else:
+                        selection = dict(m[x].attrs['selection'])
                     if field_val:
                         val = str(field_val)
                         res[x] = selection.get(val, val)
@@ -104,9 +115,9 @@ class ViewGraph(object):
                         res[x] = datetime_util.server_to_local_timestamp(field_val,
                                     DHM_FORMAT, LDFMT+' %H:%M:%S')
                     else:
-                        res[x] = 'Undefined'  
+                        res[x] = 'Undefined'
                 else:
-                    res[x] = float(field_val)
+                    res[x] = field_val and float(field_val) or 0.0
             datas.append(res)
         tinygraph.tinygraph(self._subplot, self.attrs.get('type', 'pie'), self.axis, self.axis_data, datas, axis_group_field=self.axis_group, orientation=self.attrs.get('orientation', 'vertical'))
         # the draw function may generate exception but it is not a problem as it will be redraw latter
