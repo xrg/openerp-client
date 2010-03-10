@@ -41,6 +41,7 @@ class _container(object):
         self.width = {}
         self.count = 0
         self.col=[]
+        self.flag = True
     def new(self, col=8):
         self.col.append(col)
         table = gtk.Table(1, col)
@@ -53,16 +54,25 @@ class _container(object):
         return self.cont[-1][0]
     def pop(self):
         (table, x, y) = self.cont.pop()
+        if self.cont and self.flag:
+            self.flag = False
+            tab = []
+            for cont in self.cont:
+                tab += [cont[0]]
+            table_new =  tab + [table]
+            return table_new
         self.col.pop()
         return table
-    def newline(self):
+    def newline(self,new_table):
         (table, x, y) = self.cont[-1]
         if x>0:
             self.cont[-1] = (table, 1, y+1)
-        table.resize(y+1,self.col[-1])
+        if new_table:
+            self.new(col=4)
+#           table= gtk.Table(1, 8)
+#        table.resize(y+1,self.col[-1])
 
     def wid_add(self, widget, colspan=1, name=None, expand=False, xoptions=False, ypadding=0, help=False, rowspan=1):
-
         self.count += 1
         (table, x, y) = self.cont[-1]
         if name:
@@ -133,7 +143,6 @@ class parse(object):
                                                 }
             self.fields.update(field_dict)
             self.name_lst1=[('field',(field_dict[x])) for x in field_dict]
-
         self.parent = parent
         self.model = model
         self.col = col
@@ -192,7 +201,6 @@ class parse(object):
                 val  = attrs.get('select', False) or self.fields[str(attrs['name'])].get('select', False) or self.view_type == 'search'
                 if val:
                     type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
-
                     self.fields[str(attrs['name'])].update(attrs)
                     self.fields[str(attrs['name'])]['model']=self.model
                     if type not in widgets_type:
@@ -207,11 +215,9 @@ class parse(object):
                         self.focusable = widget_act.widget
 
                     mywidget = widget_act.widget
-                    xoptions = 0
                     if node.childNodes:
                         mywidget = gtk.HBox(homogeneous=False, spacing=0)
-                        mywidget.pack_start(widget_act.widget,expand=False,fill=False)
-                        xoptions = gtk.SHRINK
+                        mywidget.pack_start(widget_act.widget,expand=True,fill=True)
                         i = 0
                         for node_child in node.childNodes:
                             if node_child.localName == 'filter':
@@ -221,7 +227,6 @@ class parse(object):
                                 mywidget.pack_start(widget_child.widget)
                                 dict_widget[str(attrs['name']) + str(i)] = (widget_child, mywidget, int(val))
                             elif node_child.localName == 'separator':
-
                                 attrs_child = tools.node_attributes(node_child)
                                 if attrs_child.get('orientation','vertical') == 'horizontal':
                                     sep = gtk.HSeparator()
@@ -231,8 +236,8 @@ class parse(object):
                                     sep = gtk.VSeparator()
                                     sep.set_size_request(3,40)
                                     mywidget.pack_start(sep,False,False,5)
-
 #                        mywidget.pack_start(widget_act.widget,expand=False,fill=False)
+                    xoptions = gtk.SHRINK
                     wid = container.wid_add(mywidget, 1,label, int(self.fields[str(attrs['name'])].get('expand',0)),xoptions=xoptions)
                     dict_widget[str(attrs['name'])] = (widget_act, wid, int(val))
 
@@ -243,7 +248,6 @@ class parse(object):
                 dict_widget[name]=(widget_act, widget_act, 1)
 
             elif node.localName == 'separator':
-
                 if attrs.get('orientation','vertical') == 'horizontal':
                     sep_box = gtk.VBox(homogeneous=False, spacing=0)
                     sep = gtk.HSeparator()
@@ -258,7 +262,10 @@ class parse(object):
                 wid = container.wid_add(sep_box,xoptions=gtk.SHRINK)
                 wid.show()
             elif node.localName=='newline':
-                container.newline()
+                flag = False
+                if node.parentNode.localName == 'group':
+                    flag = True
+                container.newline(flag)
 
             elif node.localName=='group':
                 if attrs.get('invisible', False):
@@ -279,11 +286,18 @@ class parse(object):
                 container.new(int(attrs.get('col',8)))
                 widget, widgets = self.parse_filter(xml_data, max_width, node, call= call)
                 dict_widget.update(widgets)
-                frame.add(self.widget)
+                if isinstance(widget, list):
+                    tb = gtk.Table(1, 1, True)
+                    row = 1
+                    for table in widget:
+                        tb.attach(table, 0, 1, row-1, row)
+                        row +=1
+                    frame.add(tb)
+                else:
+                    frame.add(widget)
                 if not attrs.get('string', None):
                     container.get().set_border_width(0)
                 container.pop()
-
         self.widget = container.pop()
         self.container = container
         return self.widget, dict_widget
