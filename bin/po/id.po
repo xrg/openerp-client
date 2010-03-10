@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-01-31 05:55+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2010-03-09 07:10+0000\n"
+"Last-Translator: suwidi@dev.web.id <Unknown>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-03 04:46+0000\n"
+"X-Launchpad-Export-Date: 2010-03-10 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -87,7 +87,7 @@ msgstr ""
 
 #: bin/printer/printer.py:198
 msgid "Error no report"
-msgstr ""
+msgstr "Kesalahan tanpa laporan"
 
 #: bin/printer/printer.py:217 bin/modules/gui/window/win_export.py:289
 #: bin/modules/gui/main.py:1424 bin/widget/view/form_gtk/binary.py:162
@@ -196,6 +196,18 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Kesalahan tak terduga telah dilaporkan</b>\n"
+"Kontrak maintenance tidak mencakup semua modul yang terinstall !, jika "
+"system ini digunakan dalam perusahaan sangat disarankan untuk upgrade "
+"kontrak maintenance Anda.\n"
+"Jika modul merupakan buatan anda maka kami akan memberikan kontrak setelah "
+"menguji modul ini.\n"
+"\n"
+"Berikut adalah daftar modul yang tercantum dalam modul kontrak anda:\n"
+"%s\n"
+"\n"
+"Gunakan link untuk melihat detail"
 
 #: bin/common/common.py:443
 msgid ""
@@ -215,7 +227,7 @@ msgstr ""
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Galat"
 
 #: bin/common/common.py:599
 msgid "Open with..."
@@ -333,150 +345,152 @@ msgstr "openERP - Tautan"
 #: bin/modules/gui/window/win_search.py:147
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr ""
+msgstr "Pencarian OpenERP: %s"
 
 #: bin/modules/gui/window/win_search.py:148
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr ""
+msgstr "Pencarian OpenERP: %s (%%d result(s))"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "Berkas kosong !"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "Penting !"
 
 #: bin/modules/gui/window/win_import.py:57
 msgid "XML-RPC error !"
-msgstr ""
+msgstr "XML-RPC bermasalah !"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "Terimpor satu item"
 
 #: bin/modules/gui/window/win_import.py:64
 #, python-format
 msgid "Imported %d objects !"
-msgstr ""
+msgstr "Terimpor %d item!"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "Error penting"
 
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
 msgid "Field name"
-msgstr ""
+msgstr "nama Field"
 
 #: bin/modules/gui/window/win_import.py:186
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
-msgstr ""
+msgstr "Anda tidak bisa mengimport  %s, karena field tidak terdeteksi"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "Anda belum memilih field untuk di import"
 
 #: bin/modules/gui/window/win_selection.py:52
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #: bin/modules/gui/window/win_selection.py:56
 msgid "Ressource Name"
-msgstr ""
+msgstr "Nama sumber"
 
 #: bin/modules/gui/window/win_selection.py:56
 msgid "Names"
-msgstr ""
+msgstr "Nama-nama"
 
 #: bin/modules/gui/window/win_export.py:51
 msgid " record(s) saved !"
-msgstr ""
+msgstr " Data tersimpan !"
 
 #: bin/modules/gui/window/win_export.py:54
 msgid ""
 "Operation failed !\n"
 "I/O error"
-msgstr ""
+msgstr "Operasi gagal ! I/O bermasalah"
 
 #: bin/modules/gui/window/win_export.py:78
 msgid "Error Opening Excel !"
-msgstr ""
+msgstr "Gagal membuka Excel !"
 
 #: bin/modules/gui/window/win_export.py:80
 msgid ""
 "Function only available for MS Office !\n"
 "Sorry, OOo users :("
-msgstr ""
+msgstr "Fungsi hanya tersedia didalam aplikasi MS Excel !"
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Pengimporan bermasalah"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "ID sumber tidak tersedia pada item ini !"
 
 #: bin/modules/gui/window/form.py:221
 msgid "No record selected ! You can only attach to existing record."
-msgstr ""
+msgstr "Tidak ada data terpilih, Anda hanya bisa mengabil data bersangkutan"
 
 #: bin/modules/gui/window/form.py:233
 msgid "You have to select a record !"
-msgstr ""
+msgstr "Satu data telah terpilih !"
 
 #: bin/modules/gui/window/form.py:239
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:43
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: bin/modules/gui/window/form.py:240
 msgid "Creation User"
-msgstr ""
+msgstr "Pembuatan pengguna (user)"
 
 #: bin/modules/gui/window/form.py:241
 msgid "Creation Date"
-msgstr ""
+msgstr "Tanggal dibuat"
 
 #: bin/modules/gui/window/form.py:242
 msgid "Latest Modification by"
-msgstr ""
+msgstr "Modifikasi Terakhir oleh:"
 
 #: bin/modules/gui/window/form.py:243
 msgid "Latest Modification Date"
-msgstr ""
+msgstr "Tanggal Modifikasi Terakhir"
 
 #: bin/modules/gui/window/form.py:254
 msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
 msgstr ""
+"Data belum tersimpang\n"
+"Apakah anda ingin membuang data ini?"
 
 #: bin/modules/gui/window/form.py:257
 msgid "Are you sure to remove this record ?"
-msgstr ""
+msgstr "Yakin membuang data ini ?"
 
 #: bin/modules/gui/window/form.py:259
 msgid "Are you sure to remove those records ?"
-msgstr ""
+msgstr "Yakin membuang semua data ini ?"
 
 #: bin/modules/gui/window/form.py:263
 msgid "Resources cleared."
-msgstr ""
+msgstr "Sumber telah dibersihkan"
 
 #: bin/modules/gui/window/form.py:265
 msgid "Resources successfully removed."
-msgstr ""
+msgstr "Berhasil membersihkan semua sumber"
 
 #: bin/modules/gui/window/form.py:298
 msgid "Working now on the duplicated document !"
-msgstr ""
+msgstr "Bekerja pada dukumen ganda"
 
 #: bin/modules/gui/window/form.py:306
 msgid "Document Saved."
-msgstr ""
+msgstr "Dokumen tersimpan."
 
 #: bin/modules/gui/window/form.py:308 bin/modules/gui/window/form.py:309
 #: bin/widget/view/form_gtk/parser.py:137
@@ -486,89 +500,95 @@ msgstr "Form salah, perbaiki filed dengan label merah!"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "Galat"
 
 #: bin/modules/gui/window/form.py:328 bin/modules/gui/window/form.py:423
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
 msgstr ""
+"Data telah dirubah\n"
+"Anda ingin menyimpannya?"
 
 #: bin/modules/gui/window/form.py:375
 msgid "You must select one or several records !"
-msgstr ""
+msgstr "Anda harus memilih data satu atau lebih !"
 
 #: bin/modules/gui/window/form.py:384
 msgid "Print Screen"
-msgstr ""
+msgstr "Cetak Layar"
 
 #: bin/modules/gui/window/form.py:404
 msgid "No record selected"
-msgstr ""
+msgstr "Data belum terpilih"
 
 #: bin/modules/gui/window/form.py:409
 msgid "New document"
-msgstr ""
+msgstr "Dokumen baru"
 
 #: bin/modules/gui/window/form.py:411
 msgid "Editing document (id: "
-msgstr ""
+msgstr "Modifikasi dokument (id: "
 
 #: bin/modules/gui/window/form.py:412
 msgid "Record: "
-msgstr ""
+msgstr "Data: "
 
 #: bin/modules/gui/window/form.py:413
 msgid " of "
-msgstr ""
+msgstr " dari "
 
 #: bin/modules/gui/window/view_tree/parse.py:36
 msgid "Tree"
-msgstr ""
+msgstr "Pohon"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:49
 msgid "Description"
-msgstr ""
+msgstr "Deskripsi"
 
 #: bin/modules/gui/window/__init__.py:33
 msgid "Unknown Window"
-msgstr ""
+msgstr "Tampilan Tak Dikenal"
 
 #: bin/modules/gui/window/win_extension.py:115
 msgid "This extension is already defined"
-msgstr ""
+msgstr "Extension ini telah dipilh"
 
 #: bin/modules/gui/window/tree.py:190 bin/modules/gui/window/tree.py:246
 msgid "No resource selected!"
-msgstr ""
+msgstr "Belum ada sumber terpilih"
 
 #: bin/modules/gui/window/tree.py:204
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
 msgstr ""
+"Anda yakin membuang\n"
+"data ini?"
 
 #: bin/modules/gui/window/tree.py:209
 msgid "Error removing resource!"
-msgstr ""
+msgstr "Gagall membuang sumber !"
 
 #: bin/modules/gui/window/tree.py:220
 msgid "Unable to chroot: no tree resource selected"
-msgstr ""
+msgstr "Tidak bisa chroot: tidak ada cabang sumber dipilih"
 
 #: bin/modules/gui/window/win_preference.py:69
 msgid "Preference"
-msgstr ""
+msgstr "Tampilan"
 
 #: bin/modules/gui/window/win_preference.py:80
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"Pilhan bahasa sudah dirubah, jangan lupa men-start ulang untuk melihat efek "
+"perubahan"
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "Pakem bahasa sudah dirubah"
 
 #: bin/modules/gui/main.py:87 bin/modules/gui/main.py:436
 #: bin/modules/gui/main.py:1445
@@ -578,12 +598,12 @@ msgstr "Tidak dapat menghubungi server !"
 #: bin/modules/gui/main.py:91 bin/openerp.glade:72 bin/openerp.glade:6272
 #: bin/openerp.glade:6508 bin/openerp.glade:6830 bin/openerp.glade:7475
 msgid "Server:"
-msgstr ""
+msgstr "Server:"
 
 #: bin/modules/gui/main.py:102 bin/openerp.glade:98 bin/openerp.glade:6544
 #: bin/openerp.glade:6787 bin/openerp.glade:7084 bin/openerp.glade:7432
 msgid "Change"
-msgstr ""
+msgstr "Ubah"
 
 #: bin/modules/gui/main.py:109 bin/openerp.glade:7011
 msgid "Super Administrator Password:"
@@ -591,11 +611,11 @@ msgstr "Password Super Administrator:"
 
 #: bin/modules/gui/main.py:172 bin/modules/action/wizard.py:137
 msgid "OpenERP Computing"
-msgstr ""
+msgstr "OpenERP sedang bekerja"
 
 #: bin/modules/gui/main.py:183 bin/modules/action/wizard.py:147
 msgid "Operation in progress"
-msgstr ""
+msgstr "Operasi sedang bekerja"
 
 #: bin/modules/gui/main.py:187 bin/modules/gui/main.py:639
 #: bin/modules/action/wizard.py:151
@@ -608,39 +628,39 @@ msgstr ""
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Scrip untuk migrasi"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "ID Kontrak"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "Kata kunci"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Anda sudah menggunakan versi terbaru"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Vesri terbaru tersedia adalah:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Andan dapat migrasi database."
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "Migrasi Database"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Database sukses termigrasi"
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Database sukses termigrasi"
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
@@ -665,13 +685,15 @@ msgstr "Maar,'"
 
 #: bin/modules/gui/main.py:595 bin/modules/gui/main.py:598
 msgid "Bad database name !"
-msgstr ""
+msgstr "Nama database tidak benar"
 
 #: bin/modules/gui/main.py:598
 msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
+"Nama basisdata hanya boleh terdiri atas karakter normal atau \"_\"\n"
+"Anda harus menghidari segala aksen, spasi atau karakter khusus"
 
 #: bin/modules/gui/main.py:626
 msgid "OpenERP Database Installation"
@@ -684,72 +706,78 @@ msgstr "<b>proses sedang dijalankan</b>"
 #: bin/modules/gui/main.py:658 bin/modules/gui/main.py:660
 #: bin/modules/gui/main.py:662
 msgid "Could not create database."
-msgstr ""
+msgstr "Tidak dapat membuat database"
 
 #: bin/modules/gui/main.py:658
 msgid "Database already exists !"
-msgstr ""
+msgstr "Database sudah ada !"
 
 #: bin/modules/gui/main.py:660 bin/modules/gui/main.py:1342
 #: bin/modules/gui/main.py:1361 bin/modules/gui/main.py:1437
 msgid "Bad database administrator password !"
-msgstr ""
+msgstr "Kata kunci adaministrator salah"
 
 #: bin/modules/gui/main.py:662 bin/modules/gui/main.py:669
 msgid "Error during database creation !"
-msgstr ""
+msgstr "Galat saat pembuataan database !"
 
 #: bin/modules/gui/main.py:669
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
+"Server gagal pada saat instalasi\n"
+"Disarankan anda untuk membuang database ini"
 
 #: bin/modules/gui/main.py:687
 msgid "The following users have been installed on your database:"
-msgstr ""
+msgstr "Pengguna ini sudah ada dalam database:"
 
 #: bin/modules/gui/main.py:687
 msgid "You can now connect to the database as an administrator."
-msgstr ""
+msgstr "Silakan mencoba database sebagai administrator."
 
 #: bin/modules/gui/main.py:731 bin/modules/gui/main.py:1064
 msgid "Press Ctrl+O to login"
-msgstr ""
+msgstr "Tekan Ctrl+O untuk login"
 
 #: bin/modules/gui/main.py:906
 msgid "Edit"
-msgstr ""
+msgstr "Sunting"
 
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr ""
+msgstr "%s request(s)"
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr ""
+msgstr "Tidak ada pesan"
 
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sended"
-msgstr ""
+msgstr " - %s pesan terkirim"
 
 #: bin/modules/gui/main.py:1035
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
+"Koneksi bermasalah !\n"
+"Tidak bisa kontak server !"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Galat !\n"
+"Username atau Password tidak cocok !"
 
 #: bin/modules/gui/main.py:1062
 msgid "Not logged !"
-msgstr ""
+msgstr "Anda belum login!"
 
 #: bin/modules/gui/main.py:1138
 msgid ""
@@ -757,35 +785,37 @@ msgid ""
 "Ask the administrator to verify\n"
 "you have an action defined for your user."
 msgstr ""
+"Anda tidak bisa login !\n"
+"Mintalah kepada administrator Anda."
 
 #: bin/modules/gui/main.py:1170 bin/modules/gui/main.py:1177
 msgid "Do you really want to quit ?"
-msgstr ""
+msgstr "Yakin ingin keluar ?"
 
 #: bin/modules/gui/main.py:1232
 #, python-format
 msgid "Attachments (%d)"
-msgstr ""
+msgstr "Lampiran (%d)"
 
 #: bin/modules/gui/main.py:1245
 msgid "Attachments"
-msgstr ""
+msgstr "Lampiran"
 
 #: bin/modules/gui/main.py:1333
 msgid "Delete a database"
-msgstr ""
+msgstr "Hapus database"
 
 #: bin/modules/gui/main.py:1339
 msgid "Database dropped successfully !"
-msgstr ""
+msgstr "Database telah dihapus !"
 
 #: bin/modules/gui/main.py:1342
 msgid "Could not drop database."
-msgstr ""
+msgstr "Tidak dapa menghapus database."
 
 #: bin/modules/gui/main.py:1344
 msgid "Couldn't drop database"
-msgstr ""
+msgstr "Tidak dapa menghapus database."
 
 #: bin/modules/gui/main.py:1347 bin/widget/view/form_gtk/image.py:112
 #: bin/widget/view/form_gtk/url.py:112 bin/openerp.glade:5895
@@ -794,64 +824,64 @@ msgstr "Buka..."
 
 #: bin/modules/gui/main.py:1358
 msgid "Database restored successfully !"
-msgstr ""
+msgstr "Database berhasil dikembalikan"
 
 #: bin/modules/gui/main.py:1361
 msgid "Could not restore database."
-msgstr ""
+msgstr "Tidak dapat mengembalikan database"
 
 #: bin/modules/gui/main.py:1363
 msgid "Couldn't restore database"
-msgstr ""
+msgstr "Tidak dapat mengembalikan database."
 
 #: bin/modules/gui/main.py:1402
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr ""
+msgstr "Kata kunci kedua tidak cocok, proses gagal."
 
 #: bin/modules/gui/main.py:1404
 msgid "Validation Error."
-msgstr ""
+msgstr "Kesalahan validasi"
 
 #: bin/modules/gui/main.py:1412
 msgid "Could not change the Super Admin password."
-msgstr ""
+msgstr "Kata kunci Super Admin tidak dapat dirubah"
 
 #: bin/modules/gui/main.py:1413
 msgid "Bad password provided !"
-msgstr ""
+msgstr "Salah kata kunci"
 
 #: bin/modules/gui/main.py:1415
 msgid "Error, password not changed."
-msgstr ""
+msgstr "Galat, sandi tidak berubah."
 
 #: bin/modules/gui/main.py:1421 bin/modules/gui/main.py:1441
 msgid "Backup a database"
-msgstr ""
+msgstr "Backup a database"
 
 #: bin/modules/gui/main.py:1434
 msgid "Database backed up successfully !"
-msgstr ""
+msgstr "Database berhasil dibackup!"
 
 #: bin/modules/gui/main.py:1437
 msgid "Could not backup the database."
-msgstr ""
+msgstr "Database tidak bisa dibackup."
 
 #: bin/modules/gui/main.py:1439
 msgid "Couldn't backup database."
-msgstr ""
+msgstr "Backup database gagal."
 
 #: bin/modules/action/main.py:46
 msgid "Nothing to print!"
-msgstr ""
+msgstr "Tidak ada yang dicetak!"
 
 #: bin/modules/action/main.py:63
 msgid "Printing aborted, too long delay !"
-msgstr ""
+msgstr "Cetak gagal, terlalu lama menunggu !"
 
 #: bin/modules/action/main.py:180
 msgid "Select your action"
-msgstr ""
+msgstr "Pilih tidakan anda"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid "Gantt view not yet implemented !"
@@ -997,7 +1027,7 @@ msgstr "Gagal menulis file: %s"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Nilai bermasalah, gunakan tahun setelah 1899"
 
 #: bin/widget/view/form_gtk/calendar.py:130
 #: bin/widget/view/form_gtk/calendar.py:263
@@ -1007,7 +1037,7 @@ msgstr "Widget ini redonly"
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Jam tanggal bermasalah, gunakan tahun setelah 1899"
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Hour:"
@@ -1023,7 +1053,7 @@ msgstr "Icon salah untuk tombol ini!"
 
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "Masukan kata sebelum menambahkan terjemahan!"
 
 #: bin/widget/view/form_gtk/parser.py:548
 msgid "You need to save resource before adding translations!"
@@ -1101,207 +1131,207 @@ msgstr "Minggu"
 
 #: bin/openerp.glade:6
 msgid "OpenERP - Login"
-msgstr ""
+msgstr "OpenERP - Login"
 
 #: bin/openerp.glade:116 bin/openerp.glade:6444
 msgid "Database:"
-msgstr ""
+msgstr "Database"
 
 #: bin/openerp.glade:131
 msgid "User:"
-msgstr ""
+msgstr "Pengguna:"
 
 #: bin/openerp.glade:146 bin/openerp.glade:6430 bin/openerp.glade:6730
 msgid "Password:"
-msgstr ""
+msgstr "Kata Sandi:"
 
 #: bin/openerp.glade:255
 msgid "_File"
-msgstr ""
+msgstr "_File"
 
 #: bin/openerp.glade:262
 msgid "_Connect..."
-msgstr ""
+msgstr "_Menyambung..."
 
 #: bin/openerp.glade:278
 msgid "_Disconnect"
-msgstr ""
+msgstr "_Terputus"
 
 #: bin/openerp.glade:298
 msgid "Databases"
-msgstr ""
+msgstr "Database"
 
 #: bin/openerp.glade:305
 msgid "_New database"
-msgstr ""
+msgstr "_New database"
 
 #: bin/openerp.glade:320
 msgid "_Restore database"
-msgstr ""
+msgstr "_Mengembalikan database"
 
 #: bin/openerp.glade:335
 msgid "_Backup database"
-msgstr ""
+msgstr "_Backup database"
 
 #: bin/openerp.glade:350
 msgid "Dro_p database"
-msgstr ""
+msgstr "Menghapus database"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "_Unduh Skrip Migrasi"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "_Migrasi database"
 
 #: bin/openerp.glade:405
 msgid "Administrator Password"
-msgstr ""
+msgstr "Kata sandi Administrator"
 
 #: bin/openerp.glade:450
 msgid "_User"
-msgstr ""
+msgstr "_Pengguna"
 
 #: bin/openerp.glade:458
 msgid "_Preferences"
-msgstr ""
+msgstr "_Pengaturan"
 
 #: bin/openerp.glade:478
 msgid "_Send a request"
-msgstr ""
+msgstr "_Kirim permintaan (Pesan)"
 
 #: bin/openerp.glade:493
 msgid "_Read my requests"
-msgstr ""
+msgstr "_Membaca pesan permintaan saya"
 
 #: bin/openerp.glade:513
 msgid "_Waiting Requests"
-msgstr ""
+msgstr "_Menunggu Permintaan"
 
 #: bin/openerp.glade:526
 msgid "For_m"
-msgstr ""
+msgstr "Copy text   \t For_m"
 
 #: bin/openerp.glade:534
 msgid "_New"
-msgstr ""
+msgstr "_Baru"
 
 #: bin/openerp.glade:550
 msgid "_Save"
-msgstr ""
+msgstr "_Simpan"
 
 #: bin/openerp.glade:566
 msgid "Copy this resource"
-msgstr ""
+msgstr "Salin sumber ini"
 
 #: bin/openerp.glade:567
 msgid "_Duplicate"
-msgstr ""
+msgstr "_Gandakan"
 
 #: bin/openerp.glade:583
 msgid "_Delete"
-msgstr ""
+msgstr "_Hapus"
 
 #: bin/openerp.glade:604
 msgid "Find"
-msgstr ""
+msgstr "Cari"
 
 #: bin/openerp.glade:620
 msgid "Ne_xt"
-msgstr ""
+msgstr "_lanjut"
 
 #: bin/openerp.glade:636
 msgid "Pre_vious"
-msgstr ""
+msgstr "_Sebelum"
 
 #: bin/openerp.glade:652
 msgid "Switch to list/form"
-msgstr ""
+msgstr "Pindah to list/form"
 
 #: bin/openerp.glade:668
 msgid "_Menu"
-msgstr ""
+msgstr "_Menu"
 
 #: bin/openerp.glade:689
 msgid "_New Home Tab"
-msgstr ""
+msgstr "_Tab baru depan"
 
 #: bin/openerp.glade:705 bin/openerp.glade:5018
 msgid "Close Tab"
-msgstr ""
+msgstr "Tutup Tab"
 
 #: bin/openerp.glade:721
 msgid "Previous Tab"
-msgstr ""
+msgstr "Tab sebelum"
 
 #: bin/openerp.glade:730 bin/openerp.glade:5074
 msgid "Next Tab"
-msgstr ""
+msgstr "Tab lanjut"
 
 #: bin/openerp.glade:744
 msgid "View _logs"
-msgstr ""
+msgstr "Tampilkan log"
 
 #: bin/openerp.glade:752
 msgid "_Go to resource ID..."
-msgstr ""
+msgstr "_Go to resource ID..."
 
 #: bin/openerp.glade:766
 msgid "_Open"
-msgstr ""
+msgstr "_Buka"
 
 #: bin/openerp.glade:781
 msgid "Reloa_d / Undo"
-msgstr ""
+msgstr "Reloa_d / Undo"
 
 #: bin/openerp.glade:802
 msgid "Repeat latest _action"
-msgstr ""
+msgstr "Ulangi proses ter_akhir"
 
 #: bin/openerp.glade:816
 msgid "_Preview in PDF"
-msgstr ""
+msgstr "_Tampikan dalam PDF"
 
 #: bin/openerp.glade:832
 msgid "Previe_w in editor"
-msgstr ""
+msgstr "Tampikan pada Editor"
 
 #: bin/openerp.glade:852
 msgid "Expor_t data..."
-msgstr ""
+msgstr "Expor_t data..."
 
 #: bin/openerp.glade:867
 msgid "I_mport data..."
-msgstr ""
+msgstr "I_mport data..."
 
 #: bin/openerp.glade:879
 msgid "_Options"
-msgstr ""
+msgstr "Pengaturan"
 
 #: bin/openerp.glade:886
 msgid "_Extension Manager"
-msgstr ""
+msgstr "Pengaturan _Extension"
 
 #: bin/openerp.glade:894
 msgid "_Menubar"
-msgstr ""
+msgstr "_Menubar"
 
 #: bin/openerp.glade:902
 msgid "Text _and Icons"
-msgstr ""
+msgstr "Text  _dan Ikon"
 
 #: bin/openerp.glade:910
 msgid "_Icons only"
-msgstr ""
+msgstr "_Ikon saja"
 
 #: bin/openerp.glade:919
 msgid "_Text only"
-msgstr ""
+msgstr "_Teks saja"
 
 #: bin/openerp.glade:932
 msgid "_Forms"
-msgstr ""
+msgstr "_Forms"
 
 #: bin/openerp.glade:940
 msgid "Right Toolbar"
@@ -1309,23 +1339,23 @@ msgstr ""
 
 #: bin/openerp.glade:948
 msgid "Tabs default position"
-msgstr ""
+msgstr "Taps pada posisi asli"
 
 #: bin/openerp.glade:956
 msgid "Top"
-msgstr ""
+msgstr "Atas"
 
 #: bin/openerp.glade:964
 msgid "Left"
-msgstr ""
+msgstr "Kiri"
 
 #: bin/openerp.glade:973
 msgid "Right"
-msgstr ""
+msgstr "Kanan"
 
 #: bin/openerp.glade:982
 msgid "Bottom"
-msgstr ""
+msgstr "Dasar"
 
 #: bin/openerp.glade:995
 msgid "Tabs default orientation"
@@ -1333,15 +1363,15 @@ msgstr ""
 
 #: bin/openerp.glade:1003
 msgid "Horizontal"
-msgstr ""
+msgstr "Mendatar"
 
 #: bin/openerp.glade:1011
 msgid "Vertical"
-msgstr ""
+msgstr "Tegak"
 
 #: bin/openerp.glade:1028
 msgid "_Print"
-msgstr ""
+msgstr "_Cetak"
 
 #: bin/openerp.glade:1035
 msgid "Previe_w before print"
@@ -1349,11 +1379,11 @@ msgstr ""
 
 #: bin/openerp.glade:1059
 msgid "_Save options"
-msgstr ""
+msgstr "_Opsi penyimpanan"
 
 #: bin/openerp.glade:1079
 msgid "_Plugins"
-msgstr ""
+msgstr "_Plugin"
 
 #: bin/openerp.glade:1087
 msgid "_Execute a plugin"
@@ -1361,19 +1391,19 @@ msgstr ""
 
 #: bin/openerp.glade:1107
 msgid "_Shortcuts"
-msgstr ""
+msgstr "_Shortcut"
 
 #: bin/openerp.glade:1115
 msgid "_Help"
-msgstr ""
+msgstr "_Bantuan"
 
 #: bin/openerp.glade:1122 bin/openerp.glade:4389
 msgid "Support Request"
-msgstr ""
+msgstr "Permintaan dukungan"
 
 #: bin/openerp.glade:1142
 msgid "User _Manual"
-msgstr ""
+msgstr "Pentunjuk penggunaan"
 
 #: bin/openerp.glade:1157
 msgid "_Contextual Help"
@@ -1381,19 +1411,19 @@ msgstr ""
 
 #: bin/openerp.glade:1173
 msgid "_Tips"
-msgstr ""
+msgstr "_Tips"
 
 #: bin/openerp.glade:1188
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Tombol pintas Keyboad"
 
 #: bin/openerp.glade:1201
 msgid "_License"
-msgstr ""
+msgstr "_Lisensi"
 
 #: bin/openerp.glade:1216
 msgid "_About..."
-msgstr ""
+msgstr "_Tentang..."
 
 #: bin/openerp.glade:1258
 msgid "Edit / Save this resource"
@@ -1401,7 +1431,7 @@ msgstr ""
 
 #: bin/openerp.glade:1274
 msgid "Delete this resource"
-msgstr ""
+msgstr "Hapus sumber ini"
 
 #: bin/openerp.glade:1287
 msgid "Go to previous matched search"
@@ -2338,15 +2368,15 @@ msgstr ""
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
-msgstr ""
+msgstr "Nama Anda:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-batal"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-oke"
 
 #~ msgid "The content of the widget or excpetion if not valid"
 #~ msgstr "Isi dari widget atau exception jika tidak valid"
