@@ -15,7 +15,7 @@ Architecture: all
 Depends:
  ${misc:Depends}, python, python-egenix-mxdatetime, python-glade2, python-gtk2
 Recommends:
- python-hippocanvas, python-matplotlib, openoffice.org-writer,
+ python-hippocanvas, python-matplotlib, python-openssl, openoffice.org-writer,
  evince | pdf-viewer
 Suggests: openerp-server
 Description: Enterprise Resource Management (client)
