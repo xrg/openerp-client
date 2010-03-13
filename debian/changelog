@@ -1,3 +1,13 @@
+openerp-client (5.0.7-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.7.
+  * Adding python-openssl to recommends (Closes: #570976).
+  * Updating copyright file.
+  * Updating README.source.
+  * Resorting the dh call to more common order.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 13 Mar 2010 13:08:19 +0100
+
 openerp-client (5.0.6-3) unstable; urgency=low
 
   * Adding explicit debian source version 1.0 until switch to 3.0.
