@@ -58,11 +58,15 @@ class Button(Observable):
                 import logging
                 log = logging.getLogger('common')
                 log.warning(_('Wrong icon for the button !'))
+
 #           self.widget.set_use_stock(True)
 #       self.widget.set_label(args['label'])
 
         self.widget.show()
         self.widget.connect('clicked', self.button_clicked)
+
+    def grab_focus(self):
+        self.widget.grab_focus()
 
     def hide(self):
         return self.widget.hide()
@@ -88,7 +92,7 @@ class Button(Observable):
                     action_id = int(self.attrs['name'])
 
                     context_action = self.form.screen.context.copy()
-                    
+
                     if 'context' in self.attrs:
                         context_action.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
 
@@ -104,7 +108,7 @@ class Button(Observable):
                     obj._exec_action(result,datas,context=self.form.screen.context)
                 else:
                     raise Exception, 'Unallowed button type'
-                
+
         elif model.validate():
             id = self.form.screen.save_current()
             if not self.attrs.get('confirm',False) or \
@@ -134,6 +138,8 @@ class StateAwareWidget(object):
     def attrs_set(self, model):
         sa = hasattr(self.widget, 'attrs') and self.widget.attrs or {}
         attrs_changes = eval(sa.get('attrs',"{}"),{'uid':rpc.session.uid})
+        if sa.get('default_focus',False):
+            self.widget.grab_focus()
         for k,v in attrs_changes.items():
             result = True
             for condition in v:
@@ -149,7 +155,7 @@ class StateAwareWidget(object):
                 if k=='readonly':
                     self.widget.set_sensitive(True)
                 if k=='invisible':
-                    self.widget.show()        
+                    self.widget.show()
 
 
 class _container(object):
@@ -190,8 +196,8 @@ class _container(object):
         if colspan>self.col[-1]:
             colspan=self.col[-1]
         a = name and 1 or 0
-        #Commented the following line in order to use colspan=4 and colspan=4 in same row 
-#        if colspan+x+a>self.col[-1]: 
+        #Commented the following line in order to use colspan=4 and colspan=4 in same row
+#        if colspan+x+a>self.col[-1]:
         if colspan+x>self.col[-1]:
             self.newline()
             (table, x, y) = self.cont[-1]
@@ -211,7 +217,7 @@ class _container(object):
             try:
                 uid = rpc.session.uid
                 if help and uid ==1:
-                    eb.set_tooltip_markup("""<span foreground="darkred"><b>%s</b></span>\n%s\n<span foreground="#009900"><b>%s:</b> %s - <b>%s</b>: %s</span>""" % 
+                    eb.set_tooltip_markup("""<span foreground="darkred"><b>%s</b></span>\n%s\n<span foreground="#009900"><b>%s:</b> %s - <b>%s</b>: %s</span>""" %
                                           (tools.to_xml(name), tools.to_xml(help), _('Field'), tools.to_xml(fname), _('Object'), tools.to_xml(model)))
                     label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
                     eb.show()
@@ -220,7 +226,7 @@ class _container(object):
                     label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
                     eb.show()
                 elif not help and uid ==1:
-                    eb.set_tooltip_markup("""<span foreground="#009900"><b>%s:</b> %s - <b>%s</b>: %s</span>""" % 
+                    eb.set_tooltip_markup("""<span foreground="#009900"><b>%s:</b> %s - <b>%s</b>: %s</span>""" %
                                           (_('Field'), tools.to_xml(fname), _('Object'), tools.to_xml(model)))
             except:
                 pass
@@ -497,7 +503,7 @@ class parser_form(widget.view.interface.parser_interface):
         return container.pop(), dict_widget, saw_list, on_write
 
     def translate(self, widget, event, model, name, src, widget_entry):
-        
+
         #widget accessor functions
         def value_get(widget):
             if type(widget) == type(gtk.Entry()):
@@ -540,13 +546,13 @@ class parser_form(widget.view.interface.parser_interface):
                 return sw, gtk.FILL | gtk.EXPAND
             else:
                 return None, False
-            
+
         if not value_get(widget_entry):
             common.message(
                     _('Enter some text to the related field before adding translations!'),
                     parent=self.window)
             return False
-        
+
         id = self.screen.current_model.id
         if not id:
             common.message(
