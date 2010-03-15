@@ -73,11 +73,11 @@ class wid_binary(interface.widget_interface):
 
                 self.add(box)
 
-        self.but_select = binButton('gtk-open', _('Select'), True)
+        self.but_select = binButton('gtk-open', _('Select'), False)
         self.but_select.connect('clicked', self.sig_select)
         self.widget.pack_start(self.but_select, expand=False, fill=False)
 
-        self.but_exec = binButton('gtk-execute', _('Open'), True)
+        self.but_exec = binButton('gtk-execute', _('Open'), False)
         self.but_exec.connect('clicked', self.sig_execute)
         self.widget.pack_start(self.but_exec, expand=False, fill=False)
 
