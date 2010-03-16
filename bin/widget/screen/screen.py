@@ -742,9 +742,13 @@ class Screen(signal_event.signal_event):
             self.current_model = self.models.models[idx]
         else:
             self.current_model = len(self.models.models) and self.models.models[0]
-        if not self.context.get('group_by',False) or self.current_view.view_type == 'form':
+        if not self.type == 'one2many'  \
+            and (not self.context.get('group_by',False) \
+                 or self.current_view.view_type == 'form'):
             if self.current_model:
                 self.current_model.validate_set()
+            self.display()
+        if self.type == 'one2many':
             self.display()
         self.current_view.set_cursor()
 
@@ -757,9 +761,13 @@ class Screen(signal_event.signal_event):
             self.current_model = self.models.models[idx]
         else:
             self.current_model = len(self.models.models) and self.models.models[-1]
-        if not self.context.get('group_by',False) or self.current_view.view_type == 'form':
+        if not self.type == 'one2many' \
+            and (not self.context.get('group_by',False) \
+                 or self.current_view.view_type == 'form'):
             if self.current_model:
                 self.current_model.validate_set()
+            self.display()
+        if self.type == 'one2many':
             self.display()
         self.current_view.set_cursor()
 
