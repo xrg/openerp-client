@@ -26,7 +26,6 @@ class pager(object):
     def __init__(self, object, relation, screen):
         self.object = object
         self.rpc = RPCProxy(relation)
-        self.counter = 0
         self.screen = screen
         self.domain = []
         self.set_flag = False
@@ -51,13 +50,16 @@ class pager(object):
             return
         self.screen.limit = self.get_active_text()
         self.screen.offset = 0
-        self.counter = 0
         self.set_models(self.screen.offset, self.screen.limit)
 
     def set_sensitivity(self):
        offset = self.screen.offset
        limit = self.screen.limit
        total_rec = self.screen.search_count
+       try:
+           pos = self.screen.models.models.index(self.screen.current_model)
+       except:
+           pos = -1
 
        self.object.eb_prev_page.set_sensitive(True)
        self.object.eb_pre.set_sensitive(True)
@@ -67,14 +69,14 @@ class pager(object):
        if offset <= 0:
            self.object.eb_prev_page.set_sensitive(False)
 
-       if self.counter <= 0 :
-            self.object.eb_pre.set_sensitive(False)
+       if pos <= 0:
+           self.object.eb_pre.set_sensitive(False)
 
        if offset + limit >= total_rec:
             self.object.eb_next_page.set_sensitive(False)
 
-       if self.counter == total_rec - 1:
-            self.object.eb_next.set_sensitive(False)
+       if self.screen.models.models and pos == len(self.screen.models.models) - 1:
+           self.object.eb_next.set_sensitive(False)
 
     def set_models(self, offset=0, limit=20):
         parent = self.screen.models.parent
@@ -87,40 +89,28 @@ class pager(object):
         self.set_sensitivity()
 
     def next_record(self):
-        self.counter += 1
-        if self.counter >= self.screen.limit + self.screen.offset:
-            self.screen.offset = self.screen.limit + self.screen.offset
-            self.set_models(self.screen.offset, self.screen.limit)
-            return
         self.screen.display_next()
         self.set_sensitivity()
         return
 
     def prev_record(self):
-        self.counter -= 1
-        if self.counter < self.screen.offset:
-            self.screen.offset = max(self.screen.offset - self.screen.limit, 0)
-            self.set_models(self.screen.offset, self.screen.limit)
         self.screen.display_prev()
         self.set_sensitivity()
         return
 
     def next_page(self):
         self.screen.offset = self.screen.offset + self.screen.limit
-        self.counter = self.screen.offset
         self.set_models(self.screen.offset, self.screen.limit)
         return
 
     def prev_page(self):
         self.screen.offset = max(self.screen.offset - self.screen.limit, 0)
-        self.counter = self.screen.offset
         self.set_models(self.screen.offset, self.screen.limit)
         return
 
     def reset_pager(self):
         self.set_flag = True
         self.screen.offset = 0
-        self.counter = 0
         self.object.cb.set_active(0)
         self.screen.limit = self.get_active_text()
         self.set_sensitivity()

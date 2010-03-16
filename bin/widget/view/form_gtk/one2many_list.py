@@ -190,7 +190,7 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(self.eb_del, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
-    # FIRST
+     # Previous Page
         self.eb_prev_page = gtk.EventBox()
         tooltips.set_tip(self.eb_prev_page, _('Previous Page'))
         self.eb_prev_page.set_events(gtk.gdk.BUTTON_PRESS)
@@ -224,7 +224,7 @@ class one2many_list(interface.widget_interface):
         self.eb_next.add(img_next)
         hb.pack_start(self.eb_next, expand=False, fill=False)
 
-        # LAST
+        # Next Page
         self.eb_next_page = gtk.EventBox()
         tooltips.set_tip(self.eb_next_page, _('Next Page'))
         self.eb_next_page.set_events(gtk.gdk.BUTTON_PRESS)
