@@ -57,8 +57,7 @@ class _container(object):
         if self.cont and self.flag:
             self.flag = False
             tab = []
-            for cont in self.cont:
-                tab += [cont[0]]
+            tab = [cont[0] for cont in self.cont]
             table_new =  tab + [table]
             return table_new
         self.col.pop()
@@ -262,10 +261,7 @@ class parse(object):
                 wid = container.wid_add(sep_box,xoptions=gtk.SHRINK)
                 wid.show()
             elif node.localName=='newline':
-                flag = False
-                if node.parentNode.localName == 'group':
-                    flag = True
-                container.newline(flag)
+                container.newline(node.parentNode.localName == 'group')
 
             elif node.localName=='group':
                 if attrs.get('invisible', False):
