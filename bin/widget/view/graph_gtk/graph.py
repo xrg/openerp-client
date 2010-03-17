@@ -88,9 +88,10 @@ class ViewGraph(object):
         if group_by:
             models = models.models or models.list_group.lst
             self.axis[0] = group_by
+            self.axis_data[group_by] = {}
         for m in models:
             res = {}
-            for x in self.axis:
+            for x in self.axis_data.keys():
                 field_val = m[x].get_client(m)
                 if self.fields[x]['type'] in ('many2one', 'char','time','text'):
                     res[x] = field_val and str(field_val) or 'Undefined'
