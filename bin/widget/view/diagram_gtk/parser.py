@@ -34,7 +34,6 @@ import math
 import xdot
 import pydot # import pydot or you're not going to get anywhere my friend
 
-
 class Viewdiagram(object):
     def __init__(self,window, model, node_attr, arrow_attr, attrs, screen):
         self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_diagram', gettext.textdomain())
@@ -73,7 +72,7 @@ class Viewdiagram(object):
         file =  graph.create_xdot()
         if not dict['nodes']:
             file = """digraph G {}"""
-        self.window.set_dotcode(file, id = self.id)
+        self.window.set_dotcode(file, id=self.id, graph=graph)
 
     def display(self,screen, models):
         self.draw_diagram()

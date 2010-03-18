@@ -41,6 +41,7 @@ from widget.view.form_gtk import one2many_list
 from widget.model import  record
 from widget.model import group
 import common
+import printer
 
 # See http://www.graphviz.org/pub/scm/graphviz-cairo/plugin/cairo/gvrender_cairo.c
 
@@ -1573,11 +1574,6 @@ class DotWidget(gtk.DrawingArea):
     def on_zoom_fit(self, action):
         self.zoom_to_fit()
 
-    def on_print(self, action):
-        #TODO Print Current workflow in PDF format
-        pass
-
-
     def on_zoom_100(self, action):
         self.zoom_image(1.0)
 
@@ -1760,7 +1756,7 @@ class DotWindow(gtk.Window):
             ('ZoomOut', gtk.STOCK_ZOOM_OUT, None, None, None, self.widget.on_zoom_out),
             ('ZoomFit', gtk.STOCK_ZOOM_FIT, None, None, None, self.widget.on_zoom_fit),
             ('Zoom100', gtk.STOCK_ZOOM_100, None, None, None, self.widget.on_zoom_100),
-            ('Print', gtk.STOCK_PRINT, None, None, None, self.widget.on_print),
+            ('Print', gtk.STOCK_PRINT, None, None, None, self.on_print),
         ))
         # Add the actiongroup to the uimanager
         uimanager.insert_action_group(actiongroup, 0)
@@ -1771,7 +1767,13 @@ class DotWindow(gtk.Window):
         widget.pack_start(toolbar, False)
         widget.pack_start(self.widget)
         window.set_focus(self.widget)
+        self.graph = None
        # window.show_all()
+
+    def on_print(self, action):
+        if self.graph:
+            self.graph.write('OpenERP.pdf', format='pdf')
+            printer.printer.print_file("OpenERP.pdf", "pdf", preview=True)
 
     def clicked(self,widget,data = None):
         if widget.get_label() == 'gtk-edit':
@@ -1916,8 +1918,9 @@ class DotWindow(gtk.Window):
     def set_filter(self, filter):
         self.widget.set_filter(filter)
 
-    def set_dotcode(self, dotcode, filename='<stdin>', id = 0):
+    def set_dotcode(self, dotcode, filename='<stdin>', id = 0, graph=None):
         self.id = id
+        self.graph = graph
         if self.widget.set_dotcode(dotcode, filename):
 #            self.set_title(os.path.basename(filename) + ' - Dot Viewer')
             self.widget.zoom_to_fit()
