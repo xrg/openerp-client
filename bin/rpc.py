@@ -346,7 +346,10 @@ class RPCFunction(object):
         self.func = func_name
 
     def __call__(self, *args):
-        return session.rpc_exec_auth('/object', 'execute', self.object, self.func, *args)
+        if args[1] == "diagram" and self.object != "workflow":
+            return session.rpc_exec_auth('/object', 'execute', "workflow", self.func, *args)
+        else:
+            return session.rpc_exec_auth('/object', 'execute', self.object, self.func, *args)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
