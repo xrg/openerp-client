@@ -1772,8 +1772,11 @@ class DotWindow(gtk.Window):
 
     def on_print(self, action):
         if self.graph:
-            self.graph.write('OpenERP.pdf', format='pdf')
-            printer.printer.print_file("OpenERP.pdf", "pdf", preview=True)
+            import tempfile
+            (fileno, fp_name) = tempfile.mkstemp('.pdf', 'openerp_')
+            self.graph.write(fp_name, format='pdf')
+            os.close(fileno)
+            printer.printer.print_file(fp_name, "pdf", preview=True)
 
     def clicked(self,widget,data = None):
         if widget.get_label() == 'gtk-edit':
