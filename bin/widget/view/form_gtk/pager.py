@@ -76,7 +76,8 @@ class pager(object):
        if offset + limit >= total_rec:
             self.object.eb_next_page.set_sensitive(False)
 
-       if self.screen.models.models and pos == len(self.screen.models.models) - 1:
+       if self.screen.models.models and \
+           pos == len(self.screen.models.models) - 1 or pos <= 0:
            self.object.eb_next.set_sensitive(False)
 
     def set_models(self, offset=0, limit=20):
