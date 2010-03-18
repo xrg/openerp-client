@@ -192,6 +192,8 @@ class main(service.Service):
             if 'window' in datas:
                 win=datas['window']
                 del datas['window']
+            if not datas:
+                datas = action.get('datas',[])            
             self.exec_report(action['report_name'], datas, context)
 
         elif action['type']=='ir.actions.act_url':
