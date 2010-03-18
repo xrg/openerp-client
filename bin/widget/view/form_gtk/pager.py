@@ -32,8 +32,9 @@ class pager(object):
 
     def search_count(self):
         parent = self.screen.models.parent
-        if not parent or not self.screen.models.models:return
-        parent_ids = map(lambda x:x.id,[parent])
+        if not (parent or self.screen.models.models):
+            return
+        parent_ids = parent.id and [parent.id] or []
         self.domain = [(self.object.parent_field,'in',parent_ids)]
         self.screen.search_count = self.rpc.search_count(self.domain)
 
@@ -53,30 +54,31 @@ class pager(object):
         self.set_models(self.screen.offset, self.screen.limit)
 
     def set_sensitivity(self):
-       offset = self.screen.offset
-       limit = self.screen.limit
-       total_rec = self.screen.search_count
-       try:
-           pos = self.screen.models.models.index(self.screen.current_model)
-       except:
-           pos = -1
-
-       self.object.eb_prev_page.set_sensitive(True)
-       self.object.eb_pre.set_sensitive(True)
-       self.object.eb_next_page.set_sensitive(True)
-       self.object.eb_next.set_sensitive(True)
-
-       if offset <= 0:
-           self.object.eb_prev_page.set_sensitive(False)
-
-       if pos <= 0:
-           self.object.eb_pre.set_sensitive(False)
-
-       if offset + limit >= total_rec:
+        offset = self.screen.offset
+        limit = self.screen.limit
+        total_rec = self.screen.search_count
+        try:
+            pos = self.screen.models.models.index(self.screen.current_model)
+        except:
+            pos = -1
+    
+        self.object.eb_prev_page.set_sensitive(True)
+        self.object.eb_pre.set_sensitive(True)
+        self.object.eb_next_page.set_sensitive(True)
+        self.object.eb_next.set_sensitive(True)
+    
+        if offset <= 0:
+            self.object.eb_prev_page.set_sensitive(False)
+    
+        if pos <= 0:
+            self.object.eb_pre.set_sensitive(False)
+    
+        if offset + limit >= total_rec:
             self.object.eb_next_page.set_sensitive(False)
-
-       if self.screen.models.models and pos == len(self.screen.models.models) - 1:
-           self.object.eb_next.set_sensitive(False)
+    
+        if self.screen.models.models and \
+            pos == len(self.screen.models.models) - 1 or pos <= 0:
+            self.object.eb_next.set_sensitive(False)
 
     def set_models(self, offset=0, limit=20):
         parent = self.screen.models.parent
