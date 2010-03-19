@@ -33,6 +33,7 @@ import options
 import os
 
 import re
+import pytz
 
 CONCURRENCY_CHECK_FIELD = '__last_update'
 
@@ -307,14 +308,13 @@ class rpc_session(object):
             #   which is quite quite unreliable in some cases. We'll fix this in trunk.
             self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
             try:
-                import pytz
                 try:
                     pytz.timezone(self.timezone)
                 except pytz.UnknownTimeZoneError:
                     #common.warning(_('Server timezone is not recognized!\nTime values will be displayed as if located in the server timezone. '))
                     pass
-            except:
-                common.warning(_('The "pytz" Python library is missing!\nTime values will be displayed as if located in the server timezone.'))
+            except Exception, ex:
+                common.warning(_('The "pytz" Python library is missing!\nTime values will be displayed as if located in the server timezone. %r -- %r') % (ex, self.timezone))
 
     def logged(self):
         return self._open
