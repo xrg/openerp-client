@@ -21,7 +21,7 @@
 #
 ##############################################################################
 
-# setup from TinERP
+# setup from TinyERP
 #   taken from straw http://www.nongnu.org/straw/index.html
 #   taken from gnomolicious http://www.nongnu.org/gnomolicious/
 #   adapted by Nicolas Évrard <nicoe@altern.org>
@@ -208,29 +208,59 @@ setup(name             = name,
       )
 
 if has_py2exe:
-  # Sometime between pytz-2008a and pytz-2008i common_timezones started to
-  # include only names of zones with a corresponding data file in zoneinfo.
-  # pytz installs the zoneinfo directory tree in the same directory
-  # as the pytz/__init__.py file. These data files are loaded using
-  # pkg_resources.resource_stream. py2exe does not copy this to library.zip so
-  # resource_stream can't find the files and common_timezones is empty when
-  # read in the py2exe executable.
-  # This manually copies zoneinfo into the zip. See also
-  # http://code.google.com/p/googletransitdatafeed/issues/detail?id=121
-  import pytz
-  import zipfile
-  # Make sure the layout of pytz hasn't changed
-  assert (pytz.__file__.endswith('__init__.pyc') or
+    # Sometime between pytz-2008a and pytz-2008i common_timezones started to
+    # include only names of zones with a corresponding data file in zoneinfo.
+    # pytz installs the zoneinfo directory tree in the same directory
+    # as the pytz/__init__.py file. These data files are loaded using
+    # pkg_resources.resource_stream. py2exe does not copy this to library.zip so
+    # resource_stream can't find the files and common_timezones is empty when
+    # read in the py2exe executable.
+    # This manually copies zoneinfo into the zip. See also
+    # http://code.google.com/p/googletransitdatafeed/issues/detail?id=121
+    import pytz
+    import zipfile
+    import tempfile
+    import shutil
+    # Make sure the layout of pytz hasn't changed
+    assert (pytz.__file__.endswith('__init__.pyc') or
           pytz.__file__.endswith('__init__.py')), pytz.__file__
-  zoneinfo_dir = os.path.join(os.path.dirname(pytz.__file__), 'zoneinfo')
-  # '..\\Lib\\pytz\\__init__.py' -> '..\\Lib'
-  disk_basedir = os.path.dirname(os.path.dirname(pytz.__file__))
-  zipfile_path = os.path.join(options['py2exe']['dist_dir'], 'library.zip')
-  z = zipfile.ZipFile(zipfile_path, 'a')
-  for absdir, directories, filenames in os.walk(zoneinfo_dir):
-    assert absdir.startswith(disk_basedir), (absdir, disk_basedir)
-    zip_dir = absdir[len(disk_basedir):]
-    for f in filenames:
-      z.write(os.path.join(absdir, f), os.path.join(zip_dir, f))
-  z.close()
+
+    temp_dir = None
+    pytz_dir = os.path.dirname(pytz.__file__)
+    zoneinfo_dir = os.path.join(pytz_dir, 'zoneinfo')
+    if not os.path.exists(zoneinfo_dir):
+        egg = os.path.dirname(pytz_dir)
+
+        if zipfile.is_zipfile(egg):
+            temp_dir = tempfile.mkdtemp()
+            zoneinfo_dir = os.path.join(temp_dir, 'pytz', 'zoneinfo')
+            os.makedirs(zoneinfo_dir)
+
+            archive = zipfile.ZipFile(egg)
+            for filename in archive.namelist():
+                if filename.startswith('pytz/zoneinfo/'):
+                    file_path = os.path.join(temp_dir, filename)
+                    destination = file_path.replace('/', os.sep)
+                    if not file_path.endswith('/'):
+                        try:
+                            os.makedirs(os.path.dirname(destination))
+                        except os.error:
+                            pass
+                        fp = file(destination, 'w')
+                        fp.write(archive.read(filename))
+                        fp.close()
+            archive.close()
+
+    # '..\\Lib\\pytz\\__init__.py' -> '..\\Lib'
+    disk_basedir = os.path.dirname(os.path.dirname(zoneinfo_dir))
+    zipfile_path = os.path.join(options['py2exe']['dist_dir'], 'library.zip')
+    z = zipfile.ZipFile(zipfile_path, 'a')
+    for absdir, directories, filenames in os.walk(zoneinfo_dir):
+        zip_dir = absdir[len(disk_basedir):]
+        for f in filenames:
+            z.write(os.path.join(absdir, f), os.path.join(zip_dir, f))
+    z.close()
+
+    if temp_dir is not None:
+        shutil.rmtree(temp_dir)
 
