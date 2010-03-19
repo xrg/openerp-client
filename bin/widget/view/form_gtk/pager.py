@@ -34,6 +34,8 @@ class pager(object):
         parent = self.screen.models.parent
         if not (parent or self.screen.models.models):
             return
+        if not self.object.parent_field:
+            return 
         parent_ids = parent.id and [parent.id] or []
         self.domain = [(self.object.parent_field,'in',parent_ids)]
         self.screen.search_count = self.rpc.search_count(self.domain)
