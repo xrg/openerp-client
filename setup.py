@@ -44,7 +44,7 @@ if os.name == 'nt':
 
     origIsSystemDLL = py2exe.build_exe.isSystemDLL
     def isSystemDLL(pathname):
-        if os.path.basename(pathname).lower() in ("msvcp71.dll",):
+        if os.path.basename(pathname).lower() in ("msvcp71.dll", "mfc71.dll"):
                 return 0
         return origIsSystemDLL(pathname)
     py2exe.build_exe.isSystemDLL = isSystemDLL
