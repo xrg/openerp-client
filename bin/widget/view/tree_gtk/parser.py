@@ -543,6 +543,7 @@ class Selection(Char):
 
     def value_from_text(self, model, text):
         selection = model[self.field_name].attrs['selection']
+        text = tools.ustr(text)
         res = False
         for val, txt in selection:
             if txt[:len(text)].lower() == text.lower():
