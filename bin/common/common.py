@@ -209,14 +209,14 @@ def terp_survey():
                 upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
                 options['survey.position']=SURVEY_VERSION
                 options.save()
+                parent.present()
+                win.destroy()
                 common.message(_('Thank you for the feedback !\n\
 Your comments have been sent to OpenERP.\n\
 You should now start by creating a new database or\n\
 connecting to an existing server through the "File" menu.'))
-                parent.present()
-                win.destroy()
                 break
-        elif res == gtk.RESPONSE_CANCEL:
+        elif res == gtk.RESPONSE_CANCEL or gtk.RESPONSE_DELETE_EVENT:
             parent.present()
             win.destroy()
             common.message(_('Thank you for testing OpenERP !\n\
