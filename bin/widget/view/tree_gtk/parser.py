@@ -370,7 +370,13 @@ class Datetime(GenericDate):
     def value_from_text(self, model, text):
         if not text:
             return False
-        date = DT.datetime.strptime(text[:19], self.display_format)
+
+        try:
+            date = DT.datetime.strptime(text[:19], self.display_format)
+        except ValueError, ex:
+            #ValueError: time data '__/__/____ __:__:__' does not match format '%m/%d/%Y %H:%M:%S'
+            return False
+
         if rpc.session.context.get('tz'):
             lzone = pytz.timezone(str(rpc.session.context['tz']))
             szone = pytz.timezone(rpc.session.timezone)
