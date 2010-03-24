@@ -33,6 +33,7 @@ class ViewCalendar(parser_view):
         self.model_add_new = False
         self.widget = widget.widget
         self.view.screen = screen
+        self.reload = False
 
     def cancel(self):
         pass
@@ -58,10 +59,17 @@ class ViewCalendar(parser_view):
         pass
     
     def display(self):
-        self.view.display(self.screen.models)
-        return None
+        do_reload = False
+        if self.reload \
+            or (not self.view.models) \
+            or self.screen.models <> self.view.models_record_group:
+            do_reload = True
+        if do_reload:
+            self.view.display(self.screen.models)
+        self.reload = False
 
     def signal_record_changed(self, *args):
+        self.reload = True
         pass
 
     def sel_ids_get(self):
@@ -74,6 +82,8 @@ class ViewCalendar(parser_view):
         pass
 
     def set_cursor(self, new=False):
+        # we don't set_cursor for now, as we're not showing selected
+        # item in a special way
         pass
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

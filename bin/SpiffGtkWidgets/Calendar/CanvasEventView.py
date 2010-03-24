@@ -45,7 +45,8 @@ class CanvasEventView(hippo.CanvasBox):
 
 
     def on_model_event_removed(self, model, event):
-        if event not in self.event_items:
+        if event is not None \
+            and event not in self.event_items:
             return
         self.update()
 
