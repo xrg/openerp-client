@@ -68,7 +68,7 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
         for col in range(count):
             font = self.cal.font.copy()
             font.set_style(pango.STYLE_ITALIC)
-            text = hippo.CanvasText(text   = 'more',
+            text = hippo.CanvasText(text   = ' ',
                                     font   = font.to_string(),
                                     xalign = hippo.ALIGNMENT_CENTER)
             self.append(text, hippo.PACK_FIXED)
