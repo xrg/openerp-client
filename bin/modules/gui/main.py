@@ -1058,6 +1058,8 @@ class terp_main(service.Service):
                 log_response = rpc.session.login(*res)
                 if log_response == RES_OK:
                     options.options.save()
+                    if len(res) == 6:
+                        service.LocalService('gui.main').window.set_title("OpenERP [%s]" % res[5])
                     id = self.sig_win_menu(quiet=False)
                     if id:
                         self.sig_home_new(quiet=True, except_id=id)
@@ -1099,6 +1101,7 @@ class terp_main(service.Service):
         self.sb_servername.push(id, _('Press Ctrl+O to login'))
         self.secure_img.hide()
         self.shortcut_unset()
+        service.LocalService('gui.main').window.set_title("OpenERP")
         self.glade.get_widget('but_menu').set_sensitive(False)
         self.glade.get_widget('user').set_sensitive(False)
         self.glade.get_widget('form').set_sensitive(False)
