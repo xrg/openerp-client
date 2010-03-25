@@ -35,6 +35,7 @@ from xml.parsers import expat
 import options
 import rpc
 import parse
+import pytz
 
 import tools
 import tools.datetime_util
@@ -97,23 +98,20 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                     if x[field]:
                         date = time.strptime(x[field], DHM_FORMAT)
                         if rpc.session.context.get('tz'):
-                            try:
-                                import pytz
-                                lzone = pytz.timezone(rpc.session.context['tz'])
-                                szone = pytz.timezone(rpc.session.timezone)
-                                dt = DT.datetime(date[0], date[1], date[2],
-                                        date[3], date[4], date[5], date[6])
-                                sdt = szone.localize(dt, is_dst=True)
-                                ldt = sdt.astimezone(lzone)
-                                date = ldt.timetuple()
-                            except:
-                                #ignore and consider client is in server TZ
-                                pass
+                            lzone = pytz.timezone(rpc.session.context['tz'])
+                            szone = pytz.timezone(rpc.session.timezone)
+                            dt = DT.datetime(date[0], date[1], date[2],
+                                    date[3], date[4], date[5], date[6])
+                            sdt = szone.localize(dt, is_dst=True)
+                            ldt = sdt.astimezone(lzone)
+                            date = ldt.timetuple()
                         x[field] = time.strftime(display_format, date)
+
             if self.fields_type[field]['type'] in ('one2one','many2one'):
                 for x in res_ids:
                     if x[field]:
                         x[field] = x[field][1]
+
             if self.fields_type[field]['type'] in ('selection'):
                 for x in res_ids:
                     if x[field]:

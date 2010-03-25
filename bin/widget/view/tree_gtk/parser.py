@@ -47,6 +47,7 @@ import datetime as DT
 import service
 import gobject
 import pango
+import pytz
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed)
@@ -358,33 +359,33 @@ class Datetime(GenericDate):
         date = DT.datetime.strptime(value[:19], self.server_format)
         
         if rpc.session.context.get('tz'):
-            try:
-                import pytz
-                lzone = pytz.timezone(str(rpc.session.context['tz']))
-                szone = pytz.timezone(rpc.session.timezone)
-                sdt = szone.localize(date, is_dst=True)
-                date = sdt.astimezone(lzone)
-            except:
-                #ignore and consider client is in server TZ
-                pass
-        return date.strftime(self.display_format)
+            lzone = pytz.timezone(str(rpc.session.context['tz']))
+            szone = pytz.timezone(rpc.session.timezone)
+            sdt = szone.localize(date, is_dst=True)
+            date = sdt.astimezone(lzone)
+        if isinstance(date, DT.datetime):
+            return date.strftime(self.display_format)
+        return time.strftime(self.display_format, date)
 
     def value_from_text(self, model, text):
         if not text:
             return False
-        date = DT.datetime.strptime(text[:19], self.display_format)
+
+        try:
+            date = DT.datetime.strptime(text[:19], self.display_format)
+        except ValueError, ex:
+            #ValueError: time data '__/__/____ __:__:__' does not match format '%m/%d/%Y %H:%M:%S'
+            return False
+
         if rpc.session.context.get('tz'):
-            try:
-                import pytz
-                lzone = pytz.timezone(str(rpc.session.context['tz']))
-                szone = pytz.timezone(rpc.session.timezone)
-                ldt = lzone.localize(date, is_dst=True)
-                sdt = ldt.astimezone(szone)
-                date = sdt.timetuple()
-            except:
-                #ignore and consider client is in server TZ
-                pass
-        return date.strftime(self.server_format)
+            lzone = pytz.timezone(str(rpc.session.context['tz']))
+            szone = pytz.timezone(rpc.session.timezone)
+            ldt = lzone.localize(date, is_dst=True)
+            sdt = ldt.astimezone(szone)
+            date = sdt.timetuple()
+        if isinstance(date, DT.datetime):
+            return date.strftime(self.server_format)
+        return time.strftime(self.server_format, date)
 
 class Float(Char):
     def get_textual_value(self, model):

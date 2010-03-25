@@ -35,6 +35,7 @@ import locale
 import rpc
 import service
 import tools
+import pytz
 
 import date_widget
 
@@ -216,16 +217,11 @@ class datetime(interface.widget_interface):
         except:
             return False
         if rpc.session.context.get('tz',False) and timezone:
-            try:
-                import pytz
-                lzone = pytz.timezone(rpc.session.context['tz'])
-                szone = pytz.timezone(rpc.session.timezone)
-                ldt = lzone.localize(date, is_dst=True)
-                sdt = ldt.astimezone(szone)
-                date = sdt
-            except:
-                #ignore and consider client is in server TZ
-                pass
+            lzone = pytz.timezone(rpc.session.context['tz'])
+            szone = pytz.timezone(rpc.session.timezone)
+            ldt = lzone.localize(date, is_dst=True)
+            sdt = ldt.astimezone(szone)
+            date = sdt
 
         try:
             return date.strftime(DHM_FORMAT)
@@ -253,7 +249,6 @@ class datetime(interface.widget_interface):
             date = DT.strptime(dt_val[:19], DHM_FORMAT)
             if rpc.session.context.get('tz',False) and timezone:
                 try:
-                    import pytz
                     lzone = pytz.timezone(rpc.session.context['tz'])
                     szone = pytz.timezone(rpc.session.timezone)
                     sdt = szone.localize(date, is_dst=True)
@@ -372,17 +367,13 @@ class stime(interface.widget_interface):
         else:
             date = time.strptime(dt_val[:8], HM_FORMAT)
             if rpc.session.context.get('tz',False) and timezone:
-                try: 
-                    import pytz
-                    lzone = pytz.timezone(rpc.session.context['tz'])
-                    szone = pytz.timezone(rpc.session.timezone)
-                    dt = DT(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                    sdt = szone.localize(dt, is_dst=True)
-                    ldt = sdt.astimezone(lzone)
-                    date = ldt.timetuple()
-                except:
-                    #ignore and consider client is in server TZ
-                    pass
+                lzone = pytz.timezone(rpc.session.context['tz'])
+                szone = pytz.timezone(rpc.session.timezone)
+                dt = DT(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+                sdt = szone.localize(dt, is_dst=True)
+                ldt = sdt.astimezone(lzone)
+                date = ldt.timetuple()
+
             t=time.strftime(self.format, date)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))

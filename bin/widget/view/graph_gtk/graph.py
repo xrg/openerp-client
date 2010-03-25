@@ -32,7 +32,7 @@ import locale
 import rpc
 import tools
 import tools.datetime_util
-
+import pytz
 from widget.view import interface
 
 DT_FORMAT = '%Y-%m-%d'
@@ -100,17 +100,12 @@ class ViewGraph(object):
                     if m[x].get_client(m):
                         date = time.strptime(m[x].get_client(m), DHM_FORMAT)
                         if rpc.session.context.get('tz'):
-                            try:
-                                import pytz
-                                lzone = pytz.timezone(rpc.session.context['tz'])
-                                szone = pytz.timezone(rpc.session.timezone)
-                                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                                sdt = szone.localize(dt, is_dst=True)
-                                ldt = sdt.astimezone(lzone)
-                                date = ldt.timetuple()
-                            except:
-                                #ignore and consider client is in server TZ
-                                pass
+                            lzone = pytz.timezone(rpc.session.context['tz'])
+                            szone = pytz.timezone(rpc.session.timezone)
+                            dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+                            sdt = szone.localize(dt, is_dst=True)
+                            ldt = sdt.astimezone(lzone)
+                            date = ldt.timetuple()
                         res[x] = time.strftime(LDFMT + ' %H:%M:%S', date)
                     else:
                         res[x] = ''
