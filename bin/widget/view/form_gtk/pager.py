@@ -35,10 +35,15 @@ class pager(object):
         if not (parent or self.screen.models.models):
             return
         if not self.object.parent_field:
-            return 
+            return
         parent_ids = parent.id and [parent.id] or []
         self.domain = [(self.object.parent_field,'in',parent_ids)]
         self.screen.search_count = self.rpc.search_count(self.domain)
+        if self.screen.current_model:
+            pos = self.screen.models.models.index(self.screen.current_model)
+            self.screen.signal('record-message', (pos + self.screen.offset,
+                len(self.screen.models.models or []) + self.screen.offset,
+                self.screen.search_count, self.screen.current_model.id))
 
     def get_active_text(self):
         model = self.object.cb.get_model()
@@ -79,7 +84,7 @@ class pager(object):
             self.object.eb_next_page.set_sensitive(False)
 
         if self.screen.models.models and \
-            pos == len(self.screen.models.models) - 1 or pos <= 0:
+            pos == len(self.screen.models.models) - 1 or pos < 0:
             self.object.eb_next.set_sensitive(False)
 
     def set_models(self, offset=0, limit=20):

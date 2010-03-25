@@ -374,9 +374,6 @@ class one2many_list(interface.widget_interface):
                         self.screen.current_view.widget.set_sensitive(False)
 
     def _sig_label(self, screen, signal_data):
-        if not signal_data[2]:
-            self.pager.search_count()
-            signal_data = (signal_data[0],signal_data[1],self.screen.search_count,signal_data[3])
         name = '_'
         if signal_data[0] >= 0:
             name = str(signal_data[0] + 1)
