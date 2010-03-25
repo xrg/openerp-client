@@ -94,7 +94,10 @@ class many2many(interface.widget_interface):
         dia = dialog(screen.name, id=screen.id_get(), attrs=self.attrs, domain=domain, window=screen.window,context=screen.context,target=False, view_type=['form'])
         if dia.dia.get_has_separator():
             dia.dia.set_has_separator(False)
-        dia.run()
+        ok, value = dia.run()
+        if ok:
+            screen.current_model.validate_set()
+            screen.current_view.set_value()
         dia.destroy()
 
     def destroy(self):
