@@ -236,8 +236,9 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         return res
 
     def on_iter_children(self, node):
-        res = getattr(node,'children',[])[0]
-        return res
+        res = getattr(node,'children',[])
+        if res:
+            return res[0]
 
     def on_iter_n_children(self, node):
         return len(getattr(node,'children',[]))
@@ -394,6 +395,7 @@ class ViewList(parser_view):
                     rpc.write(map(lambda x:x.id,source_group_child),val)
                     self.reload = True
                     self.screen.reload()
+                    treeview.expand_all()
             else:
                 idx = path[0]
                 if position in (gtk.TREE_VIEW_DROP_BEFORE,
