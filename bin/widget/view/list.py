@@ -374,13 +374,8 @@ class ViewList(parser_view):
                 if data[:-1] == path[:-1]:
                     if position in (gtk.TREE_VIEW_DROP_BEFORE,
                         gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
-                        p = path[1]
                         m_path = path[-1]
                     else:
-                        if path[1]:
-                            p = path[1] +1
-                        else:
-                            p = 0
                         m_path = path[-1] + 1
                     source_models_list = model.on_get_iter(path[:-1])
                     self.group_by_move(source_models_list, data[-1], m_path)
