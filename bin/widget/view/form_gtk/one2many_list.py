@@ -262,6 +262,8 @@ class one2many_list(interface.widget_interface):
         self.widget.pack_start(hb, expand=False, fill=True)
         self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=self.parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate, default_get=attrs.get('default_get', {}), window=self._window, readonly=self._readonly, limit=20)
         self.screen.type = 'one2many'
+        if self.context.get('group_by',False):
+            self.context['group_by'] = [self.context['group_by']]
         self.screen.context.update(self.context)
         self.screen.signal_connect(self, 'record-message', self._sig_label)
         menuitem_title.get_child().set_markup('<b>'+self.screen.current_view.title.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')+'</b>')
