@@ -49,6 +49,10 @@ class filter(wid_int.wid_int):
 
     def _value_get(self):
         if not self.butt.get_active():
+            ctx = tools.expr_eval(self.context)
+            group = ctx.get('group_by',False)
+            if group:
+                return {'context': {'remove_group':group}}
             return {}
         return {'domain': tools.expr_eval(self.domain),
             'context': tools.expr_eval(self.context)}

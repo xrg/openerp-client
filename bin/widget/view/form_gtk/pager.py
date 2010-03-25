@@ -61,21 +61,21 @@ class pager(object):
             pos = self.screen.models.models.index(self.screen.current_model)
         except:
             pos = -1
-    
+
         self.object.eb_prev_page.set_sensitive(True)
         self.object.eb_pre.set_sensitive(True)
         self.object.eb_next_page.set_sensitive(True)
         self.object.eb_next.set_sensitive(True)
-    
+
         if offset <= 0:
             self.object.eb_prev_page.set_sensitive(False)
-    
+
         if pos <= 0:
             self.object.eb_pre.set_sensitive(False)
-    
+
         if offset + limit >= total_rec:
             self.object.eb_next_page.set_sensitive(False)
-    
+
         if self.screen.models.models and \
             pos == len(self.screen.models.models) - 1 or pos <= 0:
             self.object.eb_next.set_sensitive(False)

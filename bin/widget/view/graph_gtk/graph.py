@@ -87,8 +87,8 @@ class ViewGraph(object):
         group_by = self.widget.screen.context.get('group_by', False)
         if group_by:
             models = models.models or models.list_group.lst
-            self.axis[0] = group_by
-            self.axis_data[group_by] = {}
+            self.axis[0] = group_by[0]
+            self.axis_data[group_by[0]] = {}
         for m in models:
             res = {}
             for x in self.axis_data.keys():

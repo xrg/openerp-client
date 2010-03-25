@@ -109,7 +109,6 @@ class Screen(signal_event.signal_event):
         self.view_fields = {} # Used to switch self.fields when the view switchs
         self.sort_domain = []
         self.old_ctx = {}
-
         if view_type:
             self.view_to_load = view_type[1:]
             view_id = False
@@ -724,36 +723,86 @@ class Screen(signal_event.signal_event):
                     show_search=self.show_search and vt in ('tree', 'graph','calendar'),
             )
 
+    def groupby_next(self):
+        if not self.models.models:
+             self.current_model = self.models.list_group.lst[0]
+        elif self.current_view.store.on_iter_has_child(self.current_model):
+                path = self.current_view.store.on_get_path(self.current_model)
+                if path == (0,):
+                     self.current_view.expand_row(path)
+                self.current_model = self.current_view.store.on_iter_children(self.current_model)
+        else:
+            if self.current_model in self.current_model.list_group.lst:
+                idx = self.current_model.list_group.lst.index(self.current_model)
+                if idx + 1 >= len(self.current_model.list_group.lst):
+                    parent = True
+                    while parent:
+                        parent = self.current_view.store.on_iter_parent(self.current_model)
+                        if parent:
+                            self.current_model = parent
+                            if self.current_view.store.on_iter_next(parent):
+                                break
+                    self.current_model = self.current_view.store.on_iter_next(self.current_model)
+                    if self.current_model == None:
+                        self.current_model = self.current_view.store.on_get_iter \
+                                            (self.current_view.store.on_get_path \
+                                             (self.current_view.store.get_iter_first()))
+                else:
+                    idx = (idx+1) % len(self.current_model.list_group.lst)
+                    self.current_model = self.current_model.list_group.lst[idx]
+        if self.current_model:
+            path = self.current_view.store.on_get_path(self.current_model)
+            self.current_view.expand_row(path)
+        return
+
+    def groupby_prev(self):
+        if not self.models.models :
+             self.current_model = self.models.list_group.lst[-1]
+        else:
+             if self.current_model in self.current_model.list_group.lst:
+                idx = self.current_model.list_group.lst.index(self.current_model) - 1
+                if idx < 0 :
+                    parent = self.current_view.store.on_iter_parent(self.current_model)
+                    if parent:
+                        self.current_model = parent
+                else:
+                    idx = (idx) % len(self.current_model.list_group.lst)
+                    self.current_model = self.current_model.list_group.lst[idx]
+        if self.current_model:
+            path = self.current_view.store.on_get_path(self.current_model)
+            self.current_view.collapse_row(path)
+        return
+
     def display_next(self):
         self.current_view.set_value()
-        if self.context.get('group_by',False):
-            if not self.models.models:
-                self.models.list_group.lst[0].children
-            elif isinstance(self.current_model, group_record):
-                path = self.current_view.store.on_get_path(self.current_model)
-                self.current_view.expand_row(path)
-            elif self.models.models.index(self.current_model) + 1 == len(self.models.models):
-                idx = self.models.list_parent.list_group.lst.index(self.current_model.list_parent)
-                idx = (idx+1) % len(self.models.list_parent.list_group.lst)
-                self.models.list_parent.list_group.lst[idx].children
-        if self.current_model in self.models.models:
-            idx = self.models.models.index(self.current_model)
-            idx = (idx+1) % len(self.models.models)
-            self.current_model = self.models.models[idx]
+        if self.context.get('group_by',False) or \
+                    not self.current_view.view_type == 'form':
+            if self.current_model:
+                self.groupby_next()
         else:
-            self.current_model = len(self.models.models) and self.models.models[0]
+            if self.current_model in self.models.models:
+                idx = self.models.models.index(self.current_model)
+                idx = (idx+1) % len(self.models.models)
+                self.current_model = self.models.models[idx]
+            else:
+                self.current_model = len(self.models.models) and self.models.models[0]
         self.check_state()
         self.current_view.set_cursor()
 
     def display_prev(self):
         self.current_view.set_value()
-        if self.current_model in self.models.models:
-            idx = self.models.models.index(self.current_model)-1
-            if idx<0:
-                idx = len(self.models.models)-1
-            self.current_model = self.models.models[idx]
+        if self.context.get('group_by',False) or \
+                 not self.current_view.view_type == 'form':
+            if self.current_model:
+               self.groupby_prev()
         else:
-            self.current_model = len(self.models.models) and self.models.models[-1]
+            if self.current_model in self.models.models:
+                idx = self.models.models.index(self.current_model)-1
+                if idx<0:
+                    idx = len(self.models.models)-1
+                self.current_model = self.models.models[idx]
+            else:
+                self.current_model = len(self.models.models) and self.models.models[-1]
         self.check_state()
         self.current_view.set_cursor()
 
