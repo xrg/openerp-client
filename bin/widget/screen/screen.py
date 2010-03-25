@@ -775,7 +775,7 @@ class Screen(signal_event.signal_event):
 
     def display_next(self):
         self.current_view.set_value()
-        if self.context.get('group_by',False) or \
+        if self.context.get('group_by',False) and \
                     not self.current_view.view_type == 'form':
             if self.current_model:
                 self.groupby_next()
@@ -791,7 +791,7 @@ class Screen(signal_event.signal_event):
 
     def display_prev(self):
         self.current_view.set_value()
-        if self.context.get('group_by',False) or \
+        if self.context.get('group_by',False) and \
                  not self.current_view.view_type == 'form':
             if self.current_model:
                self.groupby_prev()
