@@ -341,6 +341,7 @@ class O2MField(CharField):
     def __init__(self, parent, attrs):
         super(O2MField, self).__init__(parent, attrs)
         self.context={}
+        self.limit = 20
 
     def create(self, model):
         from widget.model.group import ModelRecordGroup
@@ -379,6 +380,8 @@ class O2MField(CharField):
         mod.signal_connect(mod, 'model-changed', self._model_changed)
         model.value[self.name] = mod
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
+        if value:
+            value = value[:self.limit]
         model.value[self.name].pre_load(value, display=False)
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 

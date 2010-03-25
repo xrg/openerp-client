@@ -92,6 +92,7 @@ class pager(object):
         ids = self.rpc.search(self.domain, offset, limit)
         if not ids:return
         model_field = parent.mgroup.mfields[self.object.attrs['name']]
+        model_field.limit = limit
         model_field.set(parent, ids)
         self.object.display(parent, model_field)
         self.screen.current_view.set_cursor()
