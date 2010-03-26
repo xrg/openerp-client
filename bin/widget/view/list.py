@@ -237,8 +237,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_iter_children(self, node):
         res = getattr(node,'children',[])
-        if res:
-            return res[0]
+        return res and res[0] or []
 
     def on_iter_n_children(self, node):
         return len(getattr(node,'children',[]))

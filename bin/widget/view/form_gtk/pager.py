@@ -32,14 +32,14 @@ class pager(object):
 
     def search_count(self):
         parent = self.screen.models.parent
-        if not (parent or self.screen.models.models):
+        if not (parent and self.screen.models.models):
             return
         if not self.object.parent_field:
             return
         parent_ids = parent.id and [parent.id] or []
         self.domain = [(self.object.parent_field,'in',parent_ids)]
         self.screen.search_count = self.rpc.search_count(self.domain)
-        if self.screen.current_model:
+        if self.screen.current_model in self.screen.models.models:
             pos = self.screen.models.models.index(self.screen.current_model)
             self.screen.signal('record-message', (pos + self.screen.offset,
                 len(self.screen.models.models or []) + self.screen.offset,
