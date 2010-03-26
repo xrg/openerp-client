@@ -564,7 +564,7 @@ msgstr "Database kan niet worden teruggezet."
 # File: bin/modules/gui/main.py, line: 1402
 msgid "Confirmation password does not match new password, operation cancelled!"
 msgstr ""
-"Het bevestigde wachtwoord komt niet overeen met het nieuwe wachtwoord.\r\n"
+"Het bevestigde wachtwoord komt niet overeen met het nieuwe wachtwoord.\n"
 "Operatie beëindigd!"
 #
 # File: bin/modules/gui/main.py, line: 1116
@@ -2594,7 +2594,7 @@ msgstr "OpenERP formulieren"
 # File: bin/openerp.glade, line: 1767
 # File: bin/openerp.glade, line: 1767
 msgid "State:"
-msgstr "Provincie"
+msgstr "Status:"
 #
 # File: bin/openerp.glade, line: 1766
 # File: bin/openerp.glade, line: 1799
