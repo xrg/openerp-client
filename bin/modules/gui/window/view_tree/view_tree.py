@@ -98,13 +98,22 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                     if x[field]:
                         date = time.strptime(x[field], DHM_FORMAT)
                         if rpc.session.context.get('tz'):
-                            lzone = pytz.timezone(rpc.session.context['tz'])
-                            szone = pytz.timezone(rpc.session.timezone)
-                            dt = DT.datetime(date[0], date[1], date[2],
-                                    date[3], date[4], date[5], date[6])
-                            sdt = szone.localize(dt, is_dst=True)
-                            ldt = sdt.astimezone(lzone)
-                            date = ldt.timetuple()
+                            try:
+                                lzone = pytz.timezone(rpc.session.context['tz'])
+                                szone = pytz.timezone(rpc.session.timezone)
+                                dt = DT.datetime(date[0], date[1], date[2],
+                                        date[3], date[4], date[5], date[6])
+                                sdt = szone.localize(dt, is_dst=True)
+                                ldt = sdt.astimezone(lzone)
+                                date = ldt.timetuple()
+                            except pytz.UnknownTimeZoneError:
+                                # Timezones are sometimes invalid under Windows
+                                # and hard to figure out, so as a low-risk fix
+                                # in stable branch we will simply ignore the
+                                # exception and consider client in server TZ
+                                # (and sorry about the code duplication as well,
+                                # this is fixed properly in trunk)
+                                pass
                         x[field] = time.strftime(display_format, date)
 
             if self.fields_type[field]['type'] in ('one2one','many2one'):

@@ -357,12 +357,21 @@ class Datetime(GenericDate):
         if not value:
             return ''
         date = DT.datetime.strptime(value[:19], self.server_format)
-        
+
         if rpc.session.context.get('tz'):
-            lzone = pytz.timezone(str(rpc.session.context['tz']))
-            szone = pytz.timezone(rpc.session.timezone)
-            sdt = szone.localize(date, is_dst=True)
-            date = sdt.astimezone(lzone)
+            try:
+                lzone = pytz.timezone(rpc.session.context['tz'])
+                szone = pytz.timezone(rpc.session.timezone)
+                sdt = szone.localize(date, is_dst=True)
+                date = sdt.astimezone(lzone)
+            except pytz.UnknownTimeZoneError:
+                # Timezones are sometimes invalid under Windows
+                # and hard to figure out, so as a low-risk fix
+                # in stable branch we will simply ignore the
+                # exception and consider client in server TZ
+                # (and sorry about the code duplication as well,
+                # this is fixed properly in trunk)
+                pass
         if isinstance(date, DT.datetime):
             return date.strftime(self.display_format)
         return time.strftime(self.display_format, date)
@@ -370,7 +379,6 @@ class Datetime(GenericDate):
     def value_from_text(self, model, text):
         if not text:
             return False
-
         try:
             date = DT.datetime.strptime(text[:19], self.display_format)
         except ValueError, ex:
@@ -378,11 +386,21 @@ class Datetime(GenericDate):
             return False
 
         if rpc.session.context.get('tz'):
-            lzone = pytz.timezone(str(rpc.session.context['tz']))
-            szone = pytz.timezone(rpc.session.timezone)
-            ldt = lzone.localize(date, is_dst=True)
-            sdt = ldt.astimezone(szone)
-            date = sdt.timetuple()
+            try:
+                lzone = pytz.timezone(rpc.session.context['tz'])
+                szone = pytz.timezone(rpc.session.timezone)
+                ldt = lzone.localize(date, is_dst=True)
+                sdt = ldt.astimezone(szone)
+                date = sdt.timetuple()
+            except pytz.UnknownTimeZoneError:
+                # Timezones are sometimes invalid under Windows
+                # and hard to figure out, so as a low-risk fix
+                # in stable branch we will simply ignore the
+                # exception and consider client in server TZ
+                # (and sorry about the code duplication as well,
+                # this is fixed properly in trunk)
+                pass
+
         if isinstance(date, DT.datetime):
             return date.strftime(self.server_format)
         return time.strftime(self.server_format, date)
