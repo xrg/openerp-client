@@ -30,6 +30,7 @@ from rpc import RPCProxy
 import service
 import locale
 from interface import parser_view
+from widget.model.record import ModelRecord
 
 class field_record(object):
     def __init__(self, name):
@@ -325,12 +326,8 @@ class ViewList(parser_view):
         data = str(data[0])
         selection.set(selection.target, 8, data)
 
-    def group_by_move(self,model_list,get_id,rec_id,field='sequence'):
-        seq_ids = []
-        for x in range(len(model_list.children.lst)):
-            mod =  model_list.children.lst[x]
-            seq_ids += [mod[field].get(mod)]
-
+    def group_by_move(self, model_list, get_id, rec_id, field='sequence'):
+        seq_ids = map(lambda x: x[field].get(x), model_list.children.lst)
         set_list = list(set(seq_ids))
         l = model_list.children.lst
         if len(seq_ids) != len(set_list):
@@ -368,10 +365,12 @@ class ViewList(parser_view):
 
         if drop_info:
             path, position = drop_info
+            self.source_group_child = []
             rec_id = model.on_iter_has_child(model.on_get_iter(path)) and path or path[:-1]
             group_by = self.screen.context.get('group_by',False)
             if group_by:
-                if data[:-1] == path[:-1]:
+                if data and path and data[:-1] == path[:-1] \
+                            and isinstance(model.on_get_iter(data), ModelRecord):
                     if position in (gtk.TREE_VIEW_DROP_BEFORE,
                         gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
                         m_path = path[-1]
@@ -383,18 +382,25 @@ class ViewList(parser_view):
                     source_group = model.on_get_iter(data)
                     target_group = model.on_get_iter(rec_id)
                     if model.on_iter_has_child(source_group):
-                        source_group_child = source_group.getChildren().lst[:]
+                        def process(parent):
+                            for child in parent.getChildren().lst:
+                                if model.on_iter_has_child(child):
+                                    process(child)
+                                else:
+                                    self.source_group_child.append(child)
+                        process(source_group)
                     else:
-                        source_group_child = [source_group]
-                    self.screen.current_model = source_group_child[0]
-                    target_domain = filter(lambda x: x[0] in group_by, target_group.children.context.get('__domain',[]))
-                    val = {}
-                    map(lambda x:val.update({x[0]:x[2]}),target_domain)
-                    rpc = RPCProxy(source_group_child[0].resource)
-                    rpc.write(map(lambda x:x.id,source_group_child),val)
-                    self.reload = True
-                    self.screen.reload()
-                    treeview.expand_all()
+                        self.source_group_child = [source_group]
+                    if self.source_group_child:
+                        self.screen.current_model = self.source_group_child[0]
+                        target_domain = filter(lambda x: x[0] in group_by, target_group.children.context.get('__domain',[]))
+                        val = {}
+                        map(lambda x:val.update({x[0]:x[2]}),target_domain)
+                        rpc = RPCProxy(self.source_group_child[0].resource)
+                        rpc.write(map(lambda x:x.id,self.source_group_child),val)
+                        self.reload = True
+                        self.screen.reload()
+                treeview.expand_all()
             else:
                 idx = path[0]
                 if position in (gtk.TREE_VIEW_DROP_BEFORE,
