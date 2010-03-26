@@ -436,7 +436,8 @@ class ViewList(parser_view):
             if (not path) or not path[0]:
                 return False
             m = model.models[path[0][0]]
-            if self.screen.context.get('group_by',False):
+            groupby = self.screen.context.get('group_by',False)
+            if groupby:
                 if not len(path[0])> 1: return False
                 m = self.store.on_get_iter(path[0])
             # TODO: add menu cache
@@ -449,6 +450,8 @@ class ViewList(parser_view):
                     if attrs_check and m['state'].get(m) in path[1].attrs['states'].split(','):
                         m.get_button_action(self.screen,m.id,path[1].attrs)
                         self.screen.current_model = m
+                    if groupby:
+                        treeview.expand_all()
 
             else:
                 # Here it goes for right click
