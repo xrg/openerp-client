@@ -78,16 +78,6 @@ class many2many(interface.widget_interface):
         scroll.add_with_viewport(self.screen.widget)
         self.widget.pack_start(scroll, expand=True, fill=True)
 
-#        self.old = None
-        self.avail_ids = set()
-
-    def check_exist(self):
-        if not len(self.screen.models.models):
-            self.avail_ids.clear()
-        else:
-            for i in self.screen.models.models:
-                self.avail_ids.add(i.id)
-
     def row_activate(self, screen):
         gui_window = service.LocalService('gui.window')
         domain = self._view.modelfield.domain_get(self._view.model)
@@ -117,35 +107,18 @@ class many2many(interface.widget_interface):
 
         ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
         ids = map(lambda x: x[0], ids)
-        self.check_exist()
-#        if len(ids)<>1:
         win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain, parent=self._window)
         ids = win.go()
-
         if ids == None:
-            ids=[]
-        if len(self.avail_ids) and len(ids):
-            for i in ids:
-                if i not in self.avail_ids:
-                    newids.append(i)
-                    flag=True
-            if flag==True:
-                ids=newids
-            else:
-                ids=[]
-        self.screen.load(ids)
-        for i in ids:
-            self.avail_ids.add(i)
+            ids = []
+        old_ids = map(lambda y:y.id,self.screen.models.models)
+        new_ids = [id for id in ids if id not in old_ids]
+        self.screen.load(new_ids)
         self.screen.display()
         self.wid_text.set_text('')
         self._focus_out()
 
     def _sig_remove(self, *args):
-        rem_id=[]
-        self.check_exist()
-        rem_id=self.screen.current_view.sel_ids_get()
-        for i in rem_id:
-            self.avail_ids.remove(i)
         self.screen.remove()
         self.screen.display()
         self._focus_out()
@@ -164,11 +137,8 @@ class many2many(interface.widget_interface):
         ids = []
         if model_field:
             ids = model_field.get_client(model)
-#        if ids<>self.old:
         self.screen.clear()
         self.screen.load(ids)
-#        self.old = ids
-        self.avail_ids.clear()
         self.screen.display()
         return True
 
