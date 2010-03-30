@@ -242,13 +242,15 @@ class many2many(interface.widget_interface):
         self.screen.display()
         if self.screen.models.models:
             self.screen.current_models = self.screen.models.models[0]
-        self.pager.search_count()
-        self.pager.set_sensitivity()
-        self.screen.current_view.set_cursor()
+        if model and model.id:
+            self.pager.search_count()
+            self.pager.set_sensitivity()
+            self.screen.current_view.set_cursor()
         return True
 
     def set_value(self, model, model_field):
-        model_field.set_client(model, model.m2m_cache[self.name])
+        if self.name in model.m2m_cache:
+            model_field.set_client(model, model.m2m_cache[self.name])
 
     def grab_focus(self):
         return self.wid_text.grab_focus()
