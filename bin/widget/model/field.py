@@ -304,26 +304,28 @@ class M2MField(CharField):
 
     def __init__(self, parent, attrs):
         super(M2MField, self).__init__(parent, attrs)
+        self.limit = 20
 
     def create(self, model):
         return []
 
     def get(self, model, check_load=True, readonly=True, modified=False):
-        return [(6, 0, model.value[self.name] or [])]
+        return [(6, 0, model.m2m_cache[self.name] or [])]
 
     def get_client(self, model):
         return model.value[self.name] or []
 
     def set(self, model, value, test_state=False, modified=False):
+        value = value[:self.limit]
         model.value[self.name] = value or []
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
 
     def set_client(self, model, value, test_state=False, force_change=False):
-        internal = model.value[self.name]
         self.set(model, value, test_state, modified=False)
-        if set(internal) != set(value):
+        if model.is_m2m_modified:
+            model.is_m2m_modified = False
             model.modified = True
             model.modified_fields.setdefault(self.name)
             self.sig_changed(model)

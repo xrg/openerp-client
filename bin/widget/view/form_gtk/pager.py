@@ -28,17 +28,20 @@ class pager(object):
         self.rpc = RPCProxy(relation)
         self.screen = screen
         self.domain = []
-        self.set_flag = False
+        self.type = screen.type
 
     def search_count(self):
-        parent = self.screen.models.parent
-        if not (parent and self.screen.models.models):
-            return
-        if not self.object.parent_field:
-            return
-        parent_ids = parent.id and [parent.id] or []
-        self.domain = [(self.object.parent_field,'in',parent_ids)]
-        self.screen.search_count = self.rpc.search_count(self.domain)
+        if self.type == 'one2many':
+            parent = self.screen.models.parent
+            if not (parent and self.screen.models.models):
+                return
+            if not self.object.parent_field:
+                return
+            parent_ids = parent.id and [parent.id] or []
+            self.domain = [(self.object.parent_field,'in',parent_ids)]
+            self.screen.search_count = self.rpc.search_count(self.domain)
+        else:
+            self.screen.search_count = len(self.object.model.m2m_cache[self.object.name])
         if self.screen.current_model in self.screen.models.models:
             pos = self.screen.models.models.index(self.screen.current_model)
             self.screen.signal('record-message', (pos + self.screen.offset,
@@ -53,9 +56,6 @@ class pager(object):
         return int(model[active][0])
 
     def limit_changed(self):
-        if self.set_flag:
-            self.set_flag = False
-            return
         self.screen.limit = self.get_active_text()
         self.screen.offset = 0
         self.set_models(self.screen.offset, self.screen.limit)
@@ -68,7 +68,6 @@ class pager(object):
             pos = self.screen.models.models.index(self.screen.current_model)
         except:
             pos = -1
-
         self.object.eb_prev_page.set_sensitive(True)
         self.object.eb_pre.set_sensitive(True)
         self.object.eb_next_page.set_sensitive(True)
@@ -88,13 +87,21 @@ class pager(object):
             self.object.eb_next.set_sensitive(False)
 
     def set_models(self, offset=0, limit=20):
-        parent = self.screen.models.parent
-        ids = self.rpc.search(self.domain, offset, limit)
-        if not ids:return
-        model_field = parent.mgroup.mfields[self.object.attrs['name']]
-        model_field.limit = limit
-        model_field.set(parent, ids)
-        self.object.display(parent, model_field)
+        if self.type == 'one2many':
+            parent = self.screen.models.parent
+            ids = self.rpc.search(self.domain, offset, limit)
+            if not ids:return
+            model_field = parent.mgroup.mfields[self.object.attrs['name']]
+            model_field.limit = limit
+            model_field.set(parent, ids)
+            self.object.display(parent, model_field)
+        else:
+            ids = self.object.model.m2m_cache[self.object.name][offset:offset + limit]
+            model_field = self.object.model_field
+            model_field.limit = limit
+            self.screen.models.clear()
+            self.screen.load(ids)
+            self.screen.display()
         self.screen.current_view.set_cursor()
         self.set_sensitivity()
 
@@ -119,8 +126,8 @@ class pager(object):
         return
 
     def reset_pager(self):
-        self.set_flag = True
         self.screen.offset = 0
-        self.object.cb.set_active(0)
         self.screen.limit = self.get_active_text()
+        if self.type == 'many2many':
+            self.set_models(self.screen.offset, self.screen.limit)
         self.set_sensitivity()
