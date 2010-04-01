@@ -274,9 +274,6 @@ class ViewList(parser_view):
         self.tree_editable = False
         self.is_editable = widget.editable
         self.columns = self.widget_tree.get_columns()
-        self.col_pos = {}
-        for col in self.columns:
-            self.col_pos[col] = self.columns.index(col)
         if children:
             hbox = gtk.HBox()
             self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
@@ -542,9 +539,16 @@ class ViewList(parser_view):
     def reset(self):
         pass
 
-    def set_column_to_default_pos(self, move_col = None):
-        prev_col = self.columns[self.col_pos[move_col] - 1]
-        self.widget_tree.move_column_after(move_col, prev_col)
+    def set_column_to_default_pos(self, move_col = False, last_grouped_col = False):
+        if last_grouped_col:
+            prev_col = filter(lambda col: col.name == last_grouped_col, \
+                             self.widget_tree.get_columns())[0]
+            self.widget_tree.move_column_after(move_col, prev_col)
+        else:
+            for col in self.columns:
+                if col == self.columns[0]:prev_col = None
+                self.widget_tree.move_column_after(col, prev_col)
+                prev_col = col
         self.changed_col.remove(move_col)
 
     def move_colums(self):
@@ -558,7 +562,7 @@ class ViewList(parser_view):
                         self.changed_col.append(col)
                         self.widget_tree.move_column_after(col, base_col)
                 else:
-                    if col in self.changed_col: self.set_column_to_default_pos(col)
+                    if col in self.changed_col: self.set_column_to_default_pos(col, groupby[-1])
         else:
             if self.changed_col: self.set_column_to_default_pos(self.changed_col[-1])
 
