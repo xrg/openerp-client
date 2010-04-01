@@ -86,7 +86,7 @@ class Viewdiagram(object):
             file =  graph.create_xdot()
             if not dict['nodes']:
                 file = """digraph G {}"""
-            self.window.set_dotcode(file, id=self.id, graph=graph)
+            self.window.set_dotcode(file, id=search_id, graph=graph)
 
     def display(self):
         self.draw_diagram()
