@@ -25,7 +25,6 @@ class ViewDiagram(parser_view):
 
     def __init__(self, window, screen, widget, children=None, buttons=None,
             toolbar=None, submenu=None):
-        
         super(ViewDiagram, self).__init__(window, screen, widget, children,
                 buttons, toolbar, submenu)
         self.view_type = 'diagram'
@@ -58,7 +57,7 @@ class ViewDiagram(parser_view):
         pass
 
     def display(self):
-        self.view.display(self.screen.models,self.view.screen)
+        self.view.display()
         return None
 
     def signal_record_changed(self, *args):

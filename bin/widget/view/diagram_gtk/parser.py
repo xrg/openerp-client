@@ -86,7 +86,7 @@ class Viewdiagram(object):
             file = """digraph G {}"""
         self.window.set_dotcode(file, id=self.id, graph=graph)
 
-    def display(self,screen, models):
+    def display(self):
         self.draw_diagram()
         return False
 

@@ -346,7 +346,7 @@ class RPCFunction(object):
         self.func = func_name
 
     def __call__(self, *args):
-        if args[1] == "diagram" and self.object != "workflow":
+        if len(args) > 1 and args[1] == "diagram" and self.object != "workflow":
             return session.rpc_exec_auth('/object', 'execute', "workflow", self.func, *args)
         else:
             return session.rpc_exec_auth('/object', 'execute', self.object, self.func, *args)
