@@ -272,6 +272,8 @@ class Char(object):
 
         if not model.list_parent and self.treeview.screen.context.get('group_by',False):
             cell.set_property('background', 'grey')
+            cell.set_property('foreground','blue')
+
         elif self.treeview.editable:
             field = model[self.field_name]
             cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))

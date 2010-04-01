@@ -89,6 +89,7 @@ class main(service.Service):
                     'limit', 'auto_refresh', 'search_view', 'auto_search', 'search_view_id'):
                 datas[key] = action.get(key, datas.get(key, None))
 
+            datas['auto_search'] = action.get('auto_search', True)
             if not datas['search_view'] and datas['search_view_id']:
                  datas['search_view'] = str(rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', datas['search_view_id'], 'search', context))
 
@@ -192,6 +193,8 @@ class main(service.Service):
             if 'window' in datas:
                 win=datas['window']
                 del datas['window']
+            if not datas:
+                datas = action.get('datas',[])            
             self.exec_report(action['report_name'], datas, context)
 
         elif action['type']=='ir.actions.act_url':

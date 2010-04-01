@@ -30,6 +30,7 @@ import wid_common
 
 import interface
 from widget.screen import Screen
+from pager import pager
 import service
 import tools
 
@@ -131,10 +132,10 @@ class dialog(object):
 class one2many_list(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
-        self.context = tools.expr_eval(attrs['context'] or "{}")
+        self.parent_field = attrs.get('parent_field', False)
+        self.context = tools.expr_eval(attrs.get('context',"{}"))
         self._readonly = self.default_readonly
         self.widget = gtk.VBox(homogeneous=False, spacing=5)
-
         hb = gtk.HBox(homogeneous=False, spacing=5)
         menubar = gtk.MenuBar()
         if hasattr(menubar, 'set_pack_direction') and \
@@ -189,29 +190,50 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(self.eb_del, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
+     # Previous Page
+        self.eb_prev_page = gtk.EventBox()
+        tooltips.set_tip(self.eb_prev_page, _('Previous Page'))
+        self.eb_prev_page.set_events(gtk.gdk.BUTTON_PRESS)
+        self.eb_prev_page.connect('button_press_event', self._sig_prev_page)
+        img_first = gtk.Image()
+        img_first.set_from_stock('gtk-goto-first', gtk.ICON_SIZE_MENU)
+        img_first.set_alignment(0.5, 0.5)
+        self.eb_prev_page.add(img_first)
+        hb.pack_start(self.eb_prev_page, expand=False, fill=False)
 
-        eb_pre = gtk.EventBox()
-        tooltips.set_tip(eb_pre, _('Previous'))
-        eb_pre.set_events(gtk.gdk.BUTTON_PRESS)
-        eb_pre.connect('button_press_event', self._sig_previous)
+        self.eb_pre = gtk.EventBox()
+        tooltips.set_tip(self.eb_pre, _('Previous Record'))
+        self.eb_pre.set_events(gtk.gdk.BUTTON_PRESS)
+        self.eb_pre.connect('button_press_event', self._sig_previous)
         img_pre = gtk.Image()
         img_pre.set_from_stock('gtk-go-back', gtk.ICON_SIZE_MENU)
         img_pre.set_alignment(0.5, 0.5)
-        eb_pre.add(img_pre)
-        hb.pack_start(eb_pre, expand=False, fill=False)
+        self.eb_pre.add(img_pre)
+        hb.pack_start(self.eb_pre, expand=False, fill=False)
 
         self.label = gtk.Label('(0,0)')
         hb.pack_start(self.label, expand=False, fill=False)
 
-        eb_next = gtk.EventBox()
-        tooltips.set_tip(eb_next, _('Next'))
-        eb_next.set_events(gtk.gdk.BUTTON_PRESS)
-        eb_next.connect('button_press_event', self._sig_next)
+        self.eb_next = gtk.EventBox()
+        tooltips.set_tip(self.eb_next, _('Next Record'))
+        self.eb_next.set_events(gtk.gdk.BUTTON_PRESS)
+        self.eb_next.connect('button_press_event', self._sig_next)
         img_next = gtk.Image()
         img_next.set_from_stock('gtk-go-forward', gtk.ICON_SIZE_MENU)
         img_next.set_alignment(0.5, 0.5)
-        eb_next.add(img_next)
-        hb.pack_start(eb_next, expand=False, fill=False)
+        self.eb_next.add(img_next)
+        hb.pack_start(self.eb_next, expand=False, fill=False)
+
+        # Next Page
+        self.eb_next_page = gtk.EventBox()
+        tooltips.set_tip(self.eb_next_page, _('Next Page'))
+        self.eb_next_page.set_events(gtk.gdk.BUTTON_PRESS)
+        self.eb_next_page.connect('button_press_event', self._sig_next_page)
+        img_last = gtk.Image()
+        img_last.set_from_stock('gtk-goto-last', gtk.ICON_SIZE_MENU)
+        img_last.set_alignment(0.5, 0.5)
+        self.eb_next_page.add(img_last)
+        hb.pack_start(self.eb_next_page, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
@@ -225,19 +247,27 @@ class one2many_list(interface.widget_interface):
         eb_switch.add(img_switch)
         hb.pack_start(eb_switch, expand=False, fill=False)
 
+        hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
+
+          # Limit Combo
+        self.cb = gtk.combo_box_new_text()
+        for limit in ['20','40','80','100']:
+            self.cb.append_text(limit)
+        self.cb.set_active(0)
+        tooltips.set_tip(self.cb, _('Choose Limit'))
+        self.cb.connect('changed', self.limit_changed)
+        hb.pack_start(self.cb, expand=False, fill=False)
+
         tooltips.enable()
         self.widget.pack_start(hb, expand=False, fill=True)
-
-        self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=self.parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate, default_get=attrs.get('default_get', {}), window=self._window, readonly=self._readonly)
+        self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=self.parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate, default_get=attrs.get('default_get', {}), window=self._window, readonly=self._readonly, limit=20)
         self.screen.type = 'one2many'
         self.screen.context.update(self.context)
         self.screen.signal_connect(self, 'record-message', self._sig_label)
-
         menuitem_title.get_child().set_markup('<b>'+self.screen.current_view.title.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')+'</b>')
-
         self.widget.pack_start(self.screen.widget, expand=True, fill=True)
-
         self.screen.widget.connect('key_press_event', self.on_keypress)
+        self.pager = pager(object=self, relation=attrs['relation'], screen=self.screen)
 
     def on_keypress(self, widget, event):
         if (not self._readonly) and ((event.keyval in (gtk.keysyms.N, gtk.keysyms.n) and event.state & gtk.gdk.CONTROL_MASK\
@@ -300,6 +330,7 @@ class one2many_list(interface.widget_interface):
                         value.signal('record-changed', value.parent)
                         self.screen.display()
                         dia.new()
+                self.pager.reset_pager()
                 dia.destroy()
 
     def _sig_edit(self, *args):
@@ -308,15 +339,24 @@ class one2many_list(interface.widget_interface):
             ok, value = dia.run()
             dia.destroy()
 
+    def limit_changed(self,*args):
+        self.pager.limit_changed()
+
+    def _sig_prev_page(self, *args):
+        self.pager.prev_page()
+
+    def _sig_next_page(self, *args):
+        self.pager.next_page()
+
     def _sig_next(self, *args):
         _, event = args
         if event.type == gtk.gdk.BUTTON_PRESS:
-            self.screen.display_next()
+            self.pager.next_record()
 
     def _sig_previous(self, *args):
         _, event = args
         if event.type == gtk.gdk.BUTTON_PRESS:
-            self.screen.display_prev()
+            self.pager.prev_record()
 
     def _sig_remove(self, *args):
         _, event = args
@@ -327,14 +367,18 @@ class one2many_list(interface.widget_interface):
                 msg = 'Are you sure to remove those records ?'
             if common.sur(msg):
                     self.screen.remove()
+                    self.pager.reset_pager()
                     if not self.screen.models.models:
                         self.screen.current_view.widget.set_sensitive(False)
 
     def _sig_label(self, screen, signal_data):
+        if not signal_data[2]:
+            self.pager.search_count()
+            signal_data = (signal_data[0],signal_data[1],self.screen.search_count,signal_data[3])
         name = '_'
         if signal_data[0] >= 0:
             name = str(signal_data[0] + 1)
-        line = '(%s/%s)' % (name, signal_data[1])
+        line = '(%s/%s of %s)' % (name, signal_data[1], signal_data[2])
         self.label.set_text(line)
 
     def _sig_refresh(self, *args):
@@ -348,6 +392,8 @@ class one2many_list(interface.widget_interface):
             self.screen.current_model = None
             self.screen.display()
             return False
+        self.pager.search_count()
+        self.pager.set_sensitivity()
         super(one2many_list, self).display(model, model_field)
         new_models = model_field.get_client(model)
         if self.screen.models != new_models:

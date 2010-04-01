@@ -377,7 +377,7 @@ class O2MField(CharField):
         from widget.model.group import ModelRecordGroup
         mod =  ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model)
         mod.signal_connect(mod, 'model-changed', self._model_changed)
-        model.value[self.name] =mod
+        model.value[self.name] = mod
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
         model.value[self.name].pre_load(value, display=False)
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
