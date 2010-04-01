@@ -175,7 +175,10 @@ class many2many(interface.widget_interface):
         ids = win.go()
 
         if ids == None: ids = []
-        self.model.m2m_cache[self.name] = list(set(self.model.m2m_cache[self.name] + ids))
+        if self.name in self.model.m2m_cache:
+            self.model.m2m_cache[self.name] = list(set(self.model.m2m_cache[self.name] + ids))
+        else:
+            self.model.m2m_cache[self.name] = ids
         self.model.is_m2m_modified = True
         self.wid_text.set_text('')
         self._focus_out()
@@ -184,14 +187,15 @@ class many2many(interface.widget_interface):
 
     def _sig_remove(self, *args):
         rem_id = self.screen.current_view.sel_ids_get()
-        [self.model.m2m_cache[self.name].remove(id) \
-             for id in rem_id if id in self.model.m2m_cache[self.name]]
-        self.model.is_m2m_modified = True
-        self.screen.remove()
-        self.screen.display()
-        self._focus_out()
-        self.pager.reset_pager()
-        self.pager.search_count()
+        if rem_id:
+            [self.model.m2m_cache[self.name].remove(id) \
+                 for id in rem_id if id in self.model.m2m_cache[self.name]]
+            self.model.is_m2m_modified = True
+            self.screen.remove()
+            self.screen.display()
+            self._focus_out()
+            self.pager.reset_pager()
+            self.pager.search_count()
 
     def _sig_activate(self, *args):
         self._sig_add()
