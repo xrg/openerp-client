@@ -59,14 +59,13 @@ class Viewdiagram(object):
             active_node = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'read',self.id, ['state'])['state']
         dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', search_id, "workflow", self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),signal,(140, 180), rpc.session.context)
         node_lst = {}
-        
+
         for node in dict['blank_nodes']:
             dict['nodes'][str(node['id'])] = {'name' : node['name']}
         for node in dict['nodes'].items():
             color=self.node.get('bgcolor','')
             if active_node == node[1]['name']:
                 color = "red"
-                
             graph.add_node(pydot.Node(node[1]['name'],
                                       style="filled",
                                       shape=self.node.get('shape',''),
@@ -75,6 +74,8 @@ class Viewdiagram(object):
                                       ))
             node_lst[node[0]]  = node[1]['name']
         for edge in dict['transitions'].items():
+            if len(edge) < 1 or str(edge[1][0]) not in node_lst or str(edge[1][1]) not in node_lst:
+                continue
             graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])],
                                       node_lst[str(edge[1][1])],
                                       label=dict['signal'].get(edge[0],False)[1],

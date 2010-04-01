@@ -540,7 +540,7 @@ class Screen(signal_event.signal_event):
         models = self.models.models
         if self.current_model and (self.current_model not in models):
             models = models + [self.current_model]
-        if context.get('view_type','') == 'diagram':
+        if context and context.get('view_type','') == 'diagram':
             fields = {}
         if custom:
             self.models.add_fields_custom(fields, self.models)
