@@ -132,8 +132,14 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                     x[field] = tools.locale_format('%.' + str(digit) + 'f', x[field] or 0.0)
             if self.fields_type[field]['type'] in ('float_time',):
                 for x in res_ids:
-                    val = '%02d:%02d' % (math.floor(abs(x[field])),
-                            round(abs(x[field]) % 1 + 0.01, 2) * 60)
+                    hours = math.floor(abs(x[field]))
+                    mins = round(abs(x[field]) % 1 + 0.01, 2)
+                    if mins >= 1.0:
+                        hours = hours + 1
+                        mins = 0.0
+                    else:
+                        mins = mins * 60
+                    val = '%02d:%02d' % (hours,mins)
                     if x[field] < 0:
                         val = '-' + val
                     x[field] = val
