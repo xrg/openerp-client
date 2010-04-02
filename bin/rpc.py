@@ -308,13 +308,11 @@ class rpc_session(object):
             #   which is quite quite unreliable in some cases. We'll fix this in trunk.
             self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
             try:
-                try:
-                    pytz.timezone(self.timezone)
-                except pytz.UnknownTimeZoneError:
-                    #common.warning(_('Server timezone is not recognized!\nTime values will be displayed as if located in the server timezone. '))
-                    pass
-            except Exception, ex:
-                common.warning(_('The "pytz" Python library is missing!\nTime values will be displayed as if located in the server timezone. %r -- %r') % (ex, self.timezone))
+                pytz.timezone(self.timezone)
+            except pytz.UnknownTimeZoneError:
+                # Server timezone is not recognized!
+                # Time values will be displayed as if located in the server timezone. (nothing we can do)
+                pass
 
     def logged(self):
         return self._open
