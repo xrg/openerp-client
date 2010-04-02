@@ -1577,7 +1577,7 @@ class DotWidget(gtk.DrawingArea):
     def on_zoom_100(self, action):
         self.zoom_image(1.0)
 
-    POS_INCREMENT = 100
+    POS_INCREMENT = 10
 
     def on_key_press_event(self, widget, event):
         if event.keyval == gtk.keysyms.Left:
@@ -1596,24 +1596,24 @@ class DotWidget(gtk.DrawingArea):
             self.y += self.POS_INCREMENT/self.zoom_ratio
             self.queue_draw()
             return True
-        if event.keyval == gtk.keysyms.Page_Up:
-            self.zoom_image(self.zoom_ratio * self.ZOOM_INCREMENT)
-            self.queue_draw()
-            return True
-        if event.keyval == gtk.keysyms.Page_Down:
-            self.zoom_image(self.zoom_ratio / self.ZOOM_INCREMENT)
-            self.queue_draw()
-            return True
-        if event.keyval == gtk.keysyms.Escape:
-            self.drag_action.abort()
-            self.drag_action = NullAction(self)
-            return True
-        if event.keyval == gtk.keysyms.r:
-            self.reload()
-            return True
-        if event.keyval == gtk.keysyms.q:
-            gtk.main_quit()
-            return True
+#        if event.keyval == gtk.keysyms.Page_Up:
+#            self.zoom_image(self.zoom_ratio * self.ZOOM_INCREMENT)
+#            self.queue_draw()
+#            return True
+#        if event.keyval == gtk.keysyms.Page_Down:
+#            self.zoom_image(self.zoom_ratio / self.ZOOM_INCREMENT)
+#            self.queue_draw()
+#            return True
+#        if event.keyval == gtk.keysyms.Escape:
+#            self.drag_action.abort()
+#            self.drag_action = NullAction(self)
+#            return True
+#        if event.keyval == gtk.keysyms.r:
+#            self.reload()
+#            return True
+#        if event.keyval == gtk.keysyms.q:
+#            gtk.main_quit()
+#            return True
         return False
 
     def get_drag_action(self, event):
@@ -1836,7 +1836,6 @@ class DotWindow(gtk.Window):
         self.dia_select.set_property('default-width', 100)
         self.dia_select.set_property('default-height', 50)
         self.dia_select.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-
 
         h_box_label = gtk.HBox()
         self.dia_select.get_child().add(h_box_label)

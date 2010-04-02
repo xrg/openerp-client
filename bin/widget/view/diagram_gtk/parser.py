@@ -42,35 +42,28 @@ class Viewdiagram(object):
         self.screen = screen
         self.node = node_attr
         self.arrow = arrow_attr
-        self.id = screen.current_model.id
+        self.id = None
+        if self.screen.current_model:
+            self.id = screen.current_model.id 
         self.window = xdot.DotWindow(window,self.widget, self.screen, node_attr, arrow_attr, attrs)
         self.draw_diagram()
 
     def draw_diagram(self):
-        self.id = self.screen.current_model.id
+        if self.screen.current_model:
+            self.id = self.screen.current_model.id 
         signal=self.arrow.get('signal',False)
         graph = pydot.Dot(graph_type='digraph')
-        search_id = self.id
-        active_node = ""
-        if self.model != "workflow":
-            search_id =  rpc.session.rpc_exec_auth('/object', 'execute', 'workflow', 'search', [('osv', '=', self.model)])
-            if search_id:
-                search_id = search_id[0]
-            active_node = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'read',self.id, ['state'])['state']
-        if search_id:
-            dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', search_id, "workflow", self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),signal,(140, 180), rpc.session.context)
+        if self.id:
+            dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', self.id, self.model, self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),signal,(140, 180), rpc.session.context)
             node_lst = {}
     
             for node in dict['blank_nodes']:
                 dict['nodes'][str(node['id'])] = {'name' : node['name']}
             for node in dict['nodes'].items():
-                color=self.node.get('bgcolor','')
-                if active_node == node[1]['name']:
-                    color = "red"
                 graph.add_node(pydot.Node(node[1]['name'],
                                           style="filled",
                                           shape=self.node.get('shape',''),
-                                          color=color,
+                                          color=self.node.get('bgcolor',''),
                                           URL=node[1]['name'] + "_" + node[0]  + "_node",
                                           ))
                 node_lst[node[0]]  = node[1]['name']
@@ -86,7 +79,7 @@ class Viewdiagram(object):
             file =  graph.create_xdot()
             if not dict['nodes']:
                 file = """digraph G {}"""
-            self.window.set_dotcode(file, id=search_id, graph=graph)
+            self.window.set_dotcode(file, id=self.id, graph=graph)
 
     def display(self):
         self.draw_diagram()

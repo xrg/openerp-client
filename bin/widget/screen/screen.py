@@ -109,7 +109,6 @@ class Screen(signal_event.signal_event):
         self.view_fields = {} # Used to switch self.fields when the view switchs
         self.sort_domain = []
         self.old_ctx = {}
-        self.diagram_arch = None
 
         if view_type:
             self.view_to_load = view_type[1:]
@@ -500,10 +499,6 @@ class Screen(signal_event.signal_event):
         else:
             view = self.rpc.fields_view_get(view_id, view_type, self.context,
                         self.hastoolbar, self.hassubmenu)
-            if view_type == "diagram" and self.name != "workflow":
-                self.diagram_arch = view['arch']
-                view['fields'] = {}
-                view['arch'] = ""
             context.update({'view_type' : view_type})
             return self.add_view(view['arch'], view['fields'], display,
                     toolbar=view.get('toolbar', False), submenu=view.get('submenu', False), context=context)
@@ -532,9 +527,8 @@ class Screen(signal_event.signal_event):
                     fields[unicode(attrs['name'])].update(attrs)
             for node2 in node.childNodes:
                 _parse_fields(node2, fields)
-        if arch:
-            dom = xml.dom.minidom.parseString(arch)
-            _parse_fields(dom, fields)
+        dom = xml.dom.minidom.parseString(arch)
+        _parse_fields(dom, fields)
 
         from widget.view.widget_parse import widget_parse
         models = self.models.models
@@ -549,11 +543,7 @@ class Screen(signal_event.signal_event):
         self.fields = self.models.fields
 
         parser = widget_parse(parent=self.parent, window=self.window)
-        if self.diagram_arch:
-            dom = xml.dom.minidom.parseString(self.diagram_arch)
-            self.diagram_arch = None
-        else:
-            dom = xml.dom.minidom.parseString(arch)
+        dom = xml.dom.minidom.parseString(arch)
         view = parser.parse(self, dom, self.fields, toolbar=toolbar, submenu=submenu)
         if view:
             self.views.append(view)
