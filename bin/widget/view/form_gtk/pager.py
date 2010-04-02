@@ -18,10 +18,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
+import gtk
 from rpc import RPCProxy
 
 class pager(object):
+
+    DEFAULT_LIMIT = 20
 
     def __init__(self, object, relation, screen):
         self.object = object
@@ -29,6 +31,17 @@ class pager(object):
         self.screen = screen
         self.domain = []
         self.type = screen.type
+
+    def create_event_box(self, tooltips, title, signal, stock_id):
+        event_box = gtk.EventBox()
+        tooltips.set_tip(event_box, title)
+        event_box.set_events(gtk.gdk.BUTTON_PRESS)
+        event_box.connect('button_press_event', signal)
+        img = gtk.Image()
+        img.set_from_stock(stock_id, gtk.ICON_SIZE_MENU)
+        img.set_alignment(0.5, 0.5)
+        event_box.add(img)
+        return event_box
 
     def search_count(self):
         if self.type == 'one2many':
@@ -86,7 +99,7 @@ class pager(object):
             pos == len(self.screen.models.models) - 1 or pos < 0:
             self.object.eb_next.set_sensitive(False)
 
-    def set_models(self, offset=0, limit=20):
+    def set_models(self, offset=0, limit=DEFAULT_LIMIT):
         if self.type == 'one2many':
             parent = self.screen.models.parent
             ids = self.rpc.search(self.domain, offset, limit)

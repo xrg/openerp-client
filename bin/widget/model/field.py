@@ -29,6 +29,8 @@ except NameError:
 
 import tools
 
+DEFAULT_PAGER_LIMIT = 20
+
 class ModelField(object):
     '''
     get: return the values to write to the server
@@ -304,7 +306,7 @@ class M2MField(CharField):
 
     def __init__(self, parent, attrs):
         super(M2MField, self).__init__(parent, attrs)
-        self.limit = 20
+        self.limit = DEFAULT_PAGER_LIMIT
 
     def create(self, model):
         return []
@@ -345,7 +347,7 @@ class O2MField(CharField):
     def __init__(self, parent, attrs):
         super(O2MField, self).__init__(parent, attrs)
         self.context={}
-        self.limit = 20
+        self.limit = DEFAULT_PAGER_LIMIT
 
     def create(self, model):
         from widget.model.group import ModelRecordGroup

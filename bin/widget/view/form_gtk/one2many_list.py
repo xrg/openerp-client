@@ -159,92 +159,55 @@ class one2many_list(interface.widget_interface):
 
         tooltips = gtk.Tooltips()
 
-        self.eb_new = gtk.EventBox()
-        tooltips.set_tip(self.eb_new, _('Create a new entry'))
-        self.eb_new.set_events(gtk.gdk.BUTTON_PRESS)
-        self.eb_new.connect('button_press_event', self._sig_new)
-        img_new = gtk.Image()
-        img_new.set_from_stock('gtk-new', gtk.ICON_SIZE_MENU)
-        img_new.set_alignment(0.5, 0.5)
-        self.eb_new.add(img_new)
+        self.screen = Screen(attrs['relation'],
+                            view_type=attrs.get('mode','tree,form').split(','),
+                            parent=self.parent, views_preload=attrs.get('views', {}),
+                            tree_saves=attrs.get('saves', False),
+                            create_new=True,
+                            row_activate=self._on_activate,
+                            default_get=attrs.get('default_get', {}),
+                            window=self._window, readonly=self._readonly, limit=pager.DEFAULT_LIMIT)
+
+        self.screen.type = 'one2many'
+        if self.context.get('group_by',False):
+            self.context['group_by'] = [self.context['group_by']]
+        self.screen.context.update(self.context)
+
+        self.pager = pager(object=self, relation=attrs['relation'], screen=self.screen)
+        # Button New
+        self.eb_new = self.pager.create_event_box(tooltips, _('Create a new entry'),self._sig_new, 'gtk-new')
         hb.pack_start(self.eb_new, expand=False, fill=False)
-
-        self.eb_open = gtk.EventBox()
-        tooltips.set_tip(self.eb_open, _('Edit this entry'))
-        self.eb_open.set_events(gtk.gdk.BUTTON_PRESS)
-        self.eb_open.connect('button_press_event', self._sig_edit)
-        img_open = gtk.Image()
-        img_open.set_from_stock('gtk-open', gtk.ICON_SIZE_MENU)
-        img_open.set_alignment(0.5, 0.5)
-        self.eb_open.add(img_open)
+        # Button Edit
+        self.eb_open = self.pager.create_event_box(tooltips, _('Edit this entry'),self._sig_edit, 'gtk-open')
         hb.pack_start(self.eb_open, expand=False, fill=False)
-
-        self.eb_del = gtk.EventBox()
-        tooltips.set_tip(self.eb_del, _('Remove this entry'))
-        self.eb_del.set_events(gtk.gdk.BUTTON_PRESS)
-        self.eb_del.connect('button_press_event', self._sig_remove)
-        img_del = gtk.Image()
-        img_del.set_from_stock('gtk-delete', gtk.ICON_SIZE_MENU)
-        img_del.set_alignment(0.5, 0.5)
-        self.eb_del.add(img_del)
+        # Button Delete
+        self.eb_del = self.pager.create_event_box(tooltips, _('Remove this entry'),self._sig_remove, 'gtk-delete')
         hb.pack_start(self.eb_del, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
-     # Previous Page
-        self.eb_prev_page = gtk.EventBox()
-        tooltips.set_tip(self.eb_prev_page, _('Previous Page'))
-        self.eb_prev_page.set_events(gtk.gdk.BUTTON_PRESS)
-        self.eb_prev_page.connect('button_press_event', self._sig_prev_page)
-        img_first = gtk.Image()
-        img_first.set_from_stock('gtk-goto-first', gtk.ICON_SIZE_MENU)
-        img_first.set_alignment(0.5, 0.5)
-        self.eb_prev_page.add(img_first)
+
+      # Button Previous Page
+        self.eb_prev_page = self.pager.create_event_box(tooltips, _('Previous Page'),self._sig_prev_page, 'gtk-goto-first')
         hb.pack_start(self.eb_prev_page, expand=False, fill=False)
-
-        self.eb_pre = gtk.EventBox()
-        tooltips.set_tip(self.eb_pre, _('Previous Record'))
-        self.eb_pre.set_events(gtk.gdk.BUTTON_PRESS)
-        self.eb_pre.connect('button_press_event', self._sig_previous)
-        img_pre = gtk.Image()
-        img_pre.set_from_stock('gtk-go-back', gtk.ICON_SIZE_MENU)
-        img_pre.set_alignment(0.5, 0.5)
-        self.eb_pre.add(img_pre)
+        # Button Previous Record
+        self.eb_pre = self.pager.create_event_box(tooltips, _('Previous Record'),self._sig_previous, 'gtk-go-back')
         hb.pack_start(self.eb_pre, expand=False, fill=False)
-
+        # Record display
         self.label = gtk.Label('(0,0)')
         hb.pack_start(self.label, expand=False, fill=False)
 
-        self.eb_next = gtk.EventBox()
-        tooltips.set_tip(self.eb_next, _('Next Record'))
-        self.eb_next.set_events(gtk.gdk.BUTTON_PRESS)
-        self.eb_next.connect('button_press_event', self._sig_next)
-        img_next = gtk.Image()
-        img_next.set_from_stock('gtk-go-forward', gtk.ICON_SIZE_MENU)
-        img_next.set_alignment(0.5, 0.5)
-        self.eb_next.add(img_next)
+        # Button Next
+        self.eb_next = self.pager.create_event_box(tooltips, _('Next Record'),self._sig_next, 'gtk-go-forward')
         hb.pack_start(self.eb_next, expand=False, fill=False)
 
-        # Next Page
-        self.eb_next_page = gtk.EventBox()
-        tooltips.set_tip(self.eb_next_page, _('Next Page'))
-        self.eb_next_page.set_events(gtk.gdk.BUTTON_PRESS)
-        self.eb_next_page.connect('button_press_event', self._sig_next_page)
-        img_last = gtk.Image()
-        img_last.set_from_stock('gtk-goto-last', gtk.ICON_SIZE_MENU)
-        img_last.set_alignment(0.5, 0.5)
-        self.eb_next_page.add(img_last)
+        # Button Next Page
+        self.eb_next_page = self.pager.create_event_box(tooltips, _('Next Page'),self._sig_next_page, 'gtk-goto-last')
         hb.pack_start(self.eb_next_page, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
-        eb_switch = gtk.EventBox()
-        tooltips.set_tip(eb_switch, _('Switch'))
-        eb_switch.set_events(gtk.gdk.BUTTON_PRESS)
-        eb_switch.connect('button_press_event', self.switch_view)
-        img_switch = gtk.Image()
-        img_switch.set_from_stock('gtk-justify-left', gtk.ICON_SIZE_MENU)
-        img_switch.set_alignment(0.5, 0.5)
-        eb_switch.add(img_switch)
+        # Button Switch
+        eb_switch = self.pager.create_event_box(tooltips, _('Switch'), self.switch_view, 'gtk-justify-left')
         hb.pack_start(eb_switch, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
@@ -260,16 +223,10 @@ class one2many_list(interface.widget_interface):
 
         tooltips.enable()
         self.widget.pack_start(hb, expand=False, fill=True)
-        self.screen = Screen(attrs['relation'], view_type=attrs.get('mode','tree,form').split(','), parent=self.parent, views_preload=attrs.get('views', {}), tree_saves=attrs.get('saves', False), create_new=True, row_activate=self._on_activate, default_get=attrs.get('default_get', {}), window=self._window, readonly=self._readonly, limit=20)
-        self.screen.type = 'one2many'
-        if self.context.get('group_by',False):
-            self.context['group_by'] = [self.context['group_by']]
-        self.screen.context.update(self.context)
         self.screen.signal_connect(self, 'record-message', self._sig_label)
         menuitem_title.get_child().set_markup('<b>'+self.screen.current_view.title.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')+'</b>')
         self.widget.pack_start(self.screen.widget, expand=True, fill=True)
         self.screen.widget.connect('key_press_event', self.on_keypress)
-        self.pager = pager(object=self, relation=attrs['relation'], screen=self.screen)
 
     def on_keypress(self, widget, event):
         if (not self._readonly) and ((event.keyval in (gtk.keysyms.N, gtk.keysyms.n) and event.state & gtk.gdk.CONTROL_MASK\

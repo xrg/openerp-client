@@ -65,52 +65,38 @@ class many2many(interface.widget_interface):
         hb.pack_start(self.wid_but_remove, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
-        # Previous Page
+
+        self.screen = Screen(attrs['relation'], view_type=['tree'],
+                views_preload=attrs.get('views', {}),
+                row_activate=self.row_activate,
+                limit=pager.DEFAULT_LIMIT)
+        self.screen.signal_connect(self, 'record-message', self._sig_label)
+        self.screen.type = 'many2many'
+        self.model = None
+        self.model_field = None
+        self.name = attrs['name']
+        self.pager = pager(object=self, relation=attrs['relation'], screen=self.screen)
+
         tooltips = gtk.Tooltips()
-        self.eb_prev_page = gtk.EventBox()
-        tooltips.set_tip(self.eb_prev_page, _('Previous Page'))
-        self.eb_prev_page.set_events(gtk.gdk.BUTTON_PRESS)
-        self.eb_prev_page.connect('button_press_event', self._sig_prev_page)
-        img_first = gtk.Image()
-        img_first.set_from_stock('gtk-goto-first', gtk.ICON_SIZE_MENU)
-        img_first.set_alignment(0.5, 0.5)
-        self.eb_prev_page.add(img_first)
+
+        # Button Previous Page
+        self.eb_prev_page = self.pager.create_event_box(tooltips, _('Previous Page'),self._sig_prev_page, 'gtk-goto-first')
         hb.pack_start(self.eb_prev_page, expand=False, fill=False)
 
-        # Previous Record
-        self.eb_pre = gtk.EventBox()
-        tooltips.set_tip(self.eb_pre, _('Previous Record'))
-        self.eb_pre.set_events(gtk.gdk.BUTTON_PRESS)
-        self.eb_pre.connect('button_press_event', self._sig_previous)
-        img_pre = gtk.Image()
-        img_pre.set_from_stock('gtk-go-back', gtk.ICON_SIZE_MENU)
-        img_pre.set_alignment(0.5, 0.5)
-        self.eb_pre.add(img_pre)
+        # Button Previous Record
+        self.eb_pre = self.pager.create_event_box(tooltips, _('Previous Record'),self._sig_previous, 'gtk-go-back')
         hb.pack_start(self.eb_pre, expand=False, fill=False)
 
+        # Record display
         self.label = gtk.Label('(0,0)')
         hb.pack_start(self.label, expand=False, fill=False)
 
-        # Next Record
-        self.eb_next = gtk.EventBox()
-        tooltips.set_tip(self.eb_next, _('Next Record'))
-        self.eb_next.set_events(gtk.gdk.BUTTON_PRESS)
-        self.eb_next.connect('button_press_event', self._sig_next)
-        img_next = gtk.Image()
-        img_next.set_from_stock('gtk-go-forward', gtk.ICON_SIZE_MENU)
-        img_next.set_alignment(0.5, 0.5)
-        self.eb_next.add(img_next)
+        # Button Next
+        self.eb_next = self.pager.create_event_box(tooltips, _('Next Record'),self._sig_next, 'gtk-go-forward')
         hb.pack_start(self.eb_next, expand=False, fill=False)
 
-        # Next Page
-        self.eb_next_page = gtk.EventBox()
-        tooltips.set_tip(self.eb_next_page, _('Next Page'))
-        self.eb_next_page.set_events(gtk.gdk.BUTTON_PRESS)
-        self.eb_next_page.connect('button_press_event', self._sig_next_page)
-        img_last = gtk.Image()
-        img_last.set_from_stock('gtk-goto-last', gtk.ICON_SIZE_MENU)
-        img_last.set_alignment(0.5, 0.5)
-        self.eb_next_page.add(img_last)
+        # Button Next Page
+        self.eb_next_page = self.pager.create_event_box(tooltips, _('Next Page'),self._sig_next_page, 'gtk-goto-last')
         hb.pack_start(self.eb_next_page, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
@@ -132,17 +118,8 @@ class many2many(interface.widget_interface):
         scroll.set_placement(gtk.CORNER_TOP_LEFT)
         scroll.set_shadow_type(gtk.SHADOW_NONE)
 
-        self.screen = Screen(attrs['relation'], view_type=['tree'],
-                views_preload=attrs.get('views', {}),row_activate=self.row_activate, limit=20)
-        self.screen.signal_connect(self, 'record-message', self._sig_label)
-        self.screen.type = 'many2many'
         scroll.add_with_viewport(self.screen.widget)
         self.widget.pack_start(scroll, expand=True, fill=True)
-
-        self.pager = pager(object=self, relation=attrs['relation'], screen=self.screen)
-        self.model = None
-        self.model_field = None
-        self.name = attrs['name']
 
     def row_activate(self, screen):
         gui_window = service.LocalService('gui.window')
@@ -169,12 +146,15 @@ class many2many(interface.widget_interface):
         domain = self._view.modelfield.domain_get(self._view.model)
         context = self._view.modelfield.context_get(self._view.model)
 
-        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
-        ids = map(lambda x: x[0], ids)
+        records = rpc.session.rpc_exec_auth('/object', 'execute',
+                                        self.attrs['relation'], 'name_search',
+                                        self.wid_text.get_text(), domain, 'ilike', context)
+        ids = [oid for oid, _ in records]
         win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain, parent=self._window)
         ids = win.go()
 
-        if ids == None: ids = []
+        if ids == None:
+            ids = []
         if self.name in self.model.m2m_cache:
             self.model.m2m_cache[self.name] = list(set(self.model.m2m_cache[self.name] + ids))
         else:
@@ -186,16 +166,18 @@ class many2many(interface.widget_interface):
         self.pager.search_count()
 
     def _sig_remove(self, *args):
-        rem_id = self.screen.current_view.sel_ids_get()
-        if rem_id:
-            [self.model.m2m_cache[self.name].remove(id) \
-                 for id in rem_id if id in self.model.m2m_cache[self.name]]
-            self.model.is_m2m_modified = True
-            self.screen.remove()
-            self.screen.display()
-            self._focus_out()
-            self.pager.reset_pager()
-            self.pager.search_count()
+        remove_ids = self.screen.current_view.sel_ids_get()
+        if not remove_ids:
+           return
+        for oid in remove_ids:
+            if oid in self.model.m2m_cache[self.name]:
+                self.model.m2m_cache[self.name].remove(oid)
+        self.model.is_m2m_modified = True
+        self.screen.remove()
+        self.screen.display()
+        self._focus_out()
+        self.pager.reset_pager()
+        self.pager.search_count()
 
     def _sig_activate(self, *args):
         self._sig_add()

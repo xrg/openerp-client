@@ -224,9 +224,7 @@ class ModelRecord(signal_event.signal_event):
                 later[fieldname]=value
                 continue
             if isinstance(self.mgroup.mfields[fieldname], field.M2MField):
-                if not fieldname in self.m2m_cache:
-                    self.m2m_cache[fieldname] = []
-                self.m2m_cache[fieldname] = value
+                self.m2m_cache.setdefault(fieldname, value or [])
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
         for fieldname, value in later.items():
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
