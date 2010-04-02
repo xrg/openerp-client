@@ -1799,9 +1799,9 @@ class DotWindow(gtk.Window):
     def edit_data(self):
         self.dia_select.destroy()
         if self.url.split('_')[-1] == 'node':
-            group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields= {}, parent = self.parent_model)
-            current_model = record.ModelRecord(self.node_attr.get('object',False), id = int(self.url.split('_')[-2]), parent = self.parent_model, group =group_cur )
-            dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window_new, attrs = self.attrs['node'])
+            group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields={}, parent=self.parent_model, context=rpc.session.context)
+            current_model = record.ModelRecord(self.node_attr.get('object',False), id=int(self.url.split('_')[-2]), parent=self.parent_model, group=group_cur )
+            dia = one2many_list.dialog(self.node_attr.get('object',False), parent=self.parent_model, model=current_model, window=self.window_new, attrs=self.attrs['node'])
             ok, value = dia.run()
             if ok:
                 modify_value = value.modified_fields
@@ -1814,9 +1814,9 @@ class DotWindow(gtk.Window):
                 self.screen.reload()
             dia.destroy()
         elif self.url.split('_')[-1] == 'edge':
-            group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields= {}, parent = self.parent_model)
-            current_model = record.ModelRecord(self.arrow_attr.get('object',False), id = int(self.url.split('_')[-2]), parent = self.parent_model, group =group_cur )
-            dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = current_model, window = self.window_new, attrs = self.attrs['arrow'])
+            group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields={}, parent=self.parent_model, context=rpc.session.context)
+            current_model = record.ModelRecord(self.arrow_attr.get('object',False), id=int(self.url.split('_')[-2]), parent=self.parent_model, group=group_cur )
+            dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent=self.parent_model, model=current_model, window=self.window_new, attrs= self.attrs['arrow'])
             ok, value = dia.run()
             if ok:
                 modify_value = value.modified_fields
@@ -1855,17 +1855,17 @@ class DotWindow(gtk.Window):
         self.dia_select.get_child().add(h_box)
         h_box.show()
 
-        but_edit = gtk.Button("Edit",stock = gtk.STOCK_EDIT)
+        but_edit = gtk.Button("Edit",stock=gtk.STOCK_EDIT)
         but_edit.connect("clicked", self.clicked)
         h_box.pack_start(but_edit)
         but_edit.show()
 
-        but_delete = gtk.Button("Delete",stock = gtk.STOCK_DELETE)
+        but_delete = gtk.Button("Delete",stock=gtk.STOCK_DELETE)
         but_delete.connect("clicked", self.clicked)
         h_box.pack_start(but_delete)
         but_delete.show()
 
-        but_close = gtk.Button("Close",stock = gtk.STOCK_CLOSE)
+        but_close = gtk.Button("Close",stock=gtk.STOCK_CLOSE)
         but_close.connect("clicked", self.clicked)
         h_box.pack_start(but_close)
         but_close.show()
@@ -1876,9 +1876,9 @@ class DotWindow(gtk.Window):
 
 
     def on_node_create(self,event):
-        group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields= {}, parent = self.parent_model)
-        current_model = record.ModelRecord(self.node_attr.get('object',False), id = self.screen.current_model.id, parent = self.parent_model, group =group_cur )
-        dia = one2many_list.dialog(self.node_attr.get('object',False), parent =self.parent_model, model = None, window = self.window_new, attrs = self.attrs['node'])
+        group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields={}, parent=self.parent_model, context=rpc.session.context)
+        current_model = record.ModelRecord(self.node_attr.get('object',False), id=self.screen.current_model.id, parent=self.parent_model, group=group_cur )
+        dia = one2many_list.dialog(self.node_attr.get('object',False), parent=self.parent_model, model=None, window=self.window_new, attrs=self.attrs['node'])
         ok, value = dia.run()
         if ok:
             value.value['wkf_id']=self.id
@@ -1891,9 +1891,9 @@ class DotWindow(gtk.Window):
         return True
 
     def on_edge_create(self,event):
-        group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields= {}, parent = self.parent_model)
-        current_model = record.ModelRecord(self.arrow_attr.get('object',False), id = self.screen.current_model.id, parent = self.parent_model, group =group_cur )
-        dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent =self.parent_model, model = None, window = self.window_new, attrs = self.attrs['arrow'])
+        group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields={}, parent=self.parent_model, context=rpc.session.context)
+        current_model = record.ModelRecord(self.arrow_attr.get('object',False), id=self.screen.current_model.id, parent=self.parent_model, group=group_cur )
+        dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent=self.parent_model, model=None, window=self.window_new, attrs=self.attrs['arrow'])
         ok, value = dia.run()
         if ok:
             cre_value = value.value
@@ -1921,7 +1921,7 @@ class DotWindow(gtk.Window):
     def set_filter(self, filter):
         self.widget.set_filter(filter)
 
-    def set_dotcode(self, dotcode, filename='<stdin>', id = 0, graph=None):
+    def set_dotcode(self, dotcode, filename='<stdin>', id=0, graph=None):
         self.id = id
         self.graph = graph
         if self.widget.set_dotcode(dotcode, filename):
