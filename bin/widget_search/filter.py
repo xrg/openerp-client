@@ -26,7 +26,7 @@ import wid_int
 
 class filter(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}, call=None):
-        wid_int.wid_int.__init__(self, name, parent, attrs)
+        wid_int.wid_int.__init__(self, name, parent, attrs,call)
         if name:
             self.butt = gtk.ToggleButton(name)
             if len(name) < 10:
@@ -42,7 +42,8 @@ class filter(wid_int.wid_int):
             self.butt.set_tooltip_markup(tools.to_xml(attrs['help']))
         self.domain = attrs.get('domain', "[]")
         self.context = attrs.get('context', "{}")
-        self.butt.set_active(tools.expr_eval(str(attrs.get('default', 'False')),{'context':call[0].context}))
+        if self.default_search:
+            self.butt.set_active(True)
         self.butt.set_alignment(0.5, 0.5)
         self.butt.connect('toggled', call[1])
         self.widget = self.butt

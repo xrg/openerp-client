@@ -193,7 +193,7 @@ class main(service.Service):
                 win=datas['window']
                 del datas['window']
             if not datas:
-                datas = action.get('datas',[])            
+                datas = action.get('datas',[])
             self.exec_report(action['report_name'], datas, context)
 
         elif action['type']=='ir.actions.act_url':
@@ -219,6 +219,7 @@ class main(service.Service):
         res = common.selection(_('Select your action'), keyact)
         if res:
             (name,action) = res
+            context.update(rpc.session.context)
             self._exec_action(action, data, context=context)
             return (name, action)
         return False

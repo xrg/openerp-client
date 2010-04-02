@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -31,16 +31,24 @@ class wid_int(object):
         self.name = name
         self.model = attrs.get('model', None)
         self.attrs = attrs
+        self.default_search = False
+        if self.attrs.get('name',False):
+            if isinstance(call, tuple):
+               default_context = call[0].context
+            else:
+               default_context = call.context
+            context_str = 'search_default_' + str(self.attrs['name'])
+            self.default_search = default_context.get(context_str,False)
 
     def clear(self):
         self.value = ''
-        
+
     def _value_get(self):
         return {'domain': [(self.name,'=',self._value)]}
 
     def _value_set(self, value):
         self._value = value
-        
+
     value = property(_value_get, _value_set, None, _('The content of the widget or exception if not valid'))
 
     def _readonly_set(self, value):
