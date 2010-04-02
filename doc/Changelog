@@ -1,3 +1,35 @@
+2010-04-02: 5.0.8
+=================
+
+Bugfixes
+--------
+
+ * Not linked to a bug report:
+   * Reverted wrong change on the exception handling of timezone conversions, to avoid regression.
+   * Return an empty string if the value of the field is null
+   * win32: add mfc71.dll into py2exe setup, because it's needed to get system font
+   * can't save document with selection in tree_gtk view containing accentuated data
+   * accept superadmin password with length > 16 on database creation window
+   * report timeout: really use client.timeout option for max_attends
+   * survey dialog: add window title, react to window 'delete event' (X)
+   * Switch from gtk.Tooltips to gtk.Tooltip API (deprecated as gtk 2.12)
+ * https://launchpad.net/bugs/548932
+   * widget="float_time" rounds off wrong value!
+ * https://launchpad.net/bugs/527800
+ * https://launchpad.net/bugs/531979
+   * setup.py: Correct the setup.py with the last pytz packaging
+   * Use the right format if the timezone is specified
+ * https://launchpad.net/bugs/527795
+   * Import : Quotechar may be set to empty, it should not crash the system
+
+
+Improvements
+------------
+
+ * on win32, try to force font style to system font (look really better!)
+ * Export window opens up with required fields having background blue(similar to import window)
+
+
 2010-03-01: 5.0.7
 =================
 
