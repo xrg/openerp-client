@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:29+0000\n"
-"Last-Translator: ekodaq <ceo@ekosdaq.com>\n"
+"PO-Revision-Date: 2010-04-04 03:05+0000\n"
+"Last-Translator: Bundo <bundo@bundo.biz>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-26 04:36+0000\n"
+"X-Launchpad-Export-Date: 2010-04-04 03:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -27,11 +27,11 @@ msgstr "워크플로우 출력 (복합)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr "이 리소스에 가용한 펄럭인이 없습니다 !"
+msgstr "이 리소스에 가용한 플러그인이 없습니다 !"
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
-msgstr "플럭인을 선택하세요"
+msgstr "플러그인을 선택하세요"
 
 #: bin/translate.py:184
 #, python-format
@@ -58,7 +58,7 @@ msgstr ""
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "로그 수준을 지정: %s"
 
 #: bin/options.py:112
 msgid "specify the user login"
@@ -87,13 +87,13 @@ msgstr ""
 
 #: bin/printer/printer.py:198
 msgid "Error no report"
-msgstr "리포트 없음 에러"
+msgstr "보고서 없음 오류"
 
 #: bin/printer/printer.py:217 bin/modules/gui/window/win_export.py:289
 #: bin/modules/gui/main.py:1424 bin/widget/view/form_gtk/binary.py:162
 #: bin/widget/view/form_gtk/image.py:119
 msgid "Save As..."
-msgstr "...로 저장"
+msgstr "다른 이름으로 저장..."
 
 #: bin/printer/printer.py:225
 msgid "Error writing the file!"
@@ -214,15 +214,15 @@ msgstr ""
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "오류"
 
 #: bin/common/common.py:599
 msgid "Open with..."
-msgstr "...로 열기"
+msgstr "다른 프로그램으로 열기.."
 
 #: bin/widget_search/checkbox.py:36 bin/widget_search/checkbox.py:49
 msgid "Yes"
-msgstr "네"
+msgstr "예"
 
 #: bin/widget_search/checkbox.py:37
 msgid "No"
@@ -248,11 +248,11 @@ msgstr "파라미터:"
 
 #: bin/widget_search/form.py:301
 msgid "The content of the form or exception if not valid"
-msgstr "유효하지 않을 경우, 양식 또는 예외의 컨텐트"
+msgstr "양식 또는  유효하지 않은 예외의 내용"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "위젯 또는 유효하지 않은 예외의 내용"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -285,7 +285,7 @@ msgstr "카렌더 위젯 열기"
 
 #: bin/widget_search/calendar.py:75
 msgid "End date"
-msgstr "마감 날짜"
+msgstr "종료일"
 
 #: bin/widget_search/calendar.py:120 bin/widget/view/form_gtk/calendar.py:136
 #: bin/widget/view/form_gtk/calendar.py:266
@@ -294,7 +294,7 @@ msgstr "OpenERP - 날짜 선택"
 
 #: bin/rpc.py:140 bin/modules/gui/main.py:210 bin/modules/action/wizard.py:175
 msgid "Connection refused !"
-msgstr "연결이 거부되었습니다 !"
+msgstr "접속이 거부되었습니다 !"
 
 #: bin/rpc.py:141
 msgid "Connection refused!"
@@ -308,22 +308,22 @@ msgstr "OpenERP 서버에 접속할 수 없습니다 !"
 
 #: bin/rpc.py:171
 msgid "Connection Error"
-msgstr "접속 에러"
+msgstr "접속 오류"
 
 #: bin/rpc.py:186 bin/rpc.py:188 bin/modules/gui/main.py:218
 #: bin/modules/gui/main.py:224 bin/modules/action/wizard.py:187
 #: bin/modules/action/wizard.py:193 bin/modules/action/wizard.py:195
 msgid "Application Error"
-msgstr "어플리케이션 에러"
+msgstr "프로그램 오류"
 
 #: bin/rpc.py:188 bin/modules/action/wizard.py:195
 msgid "View details"
-msgstr "상세 보기"
+msgstr "자세히 보기"
 
 #: bin/modules/gui/window/win_search.py:50
 #: bin/widget/view/form_gtk/one2many_list.py:51
 msgid "OpenERP - Link"
-msgstr "OpenERP - 링크"
+msgstr "OpenERP - 연결"
 
 #: bin/modules/gui/window/win_search.py:147
 #, python-format
@@ -337,19 +337,19 @@ msgstr "OpenERP 검색: %s (%%d 결과)"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "파일이 비어 있습니다 !"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "가져오기 !"
 
 #: bin/modules/gui/window/win_import.py:57
 msgid "XML-RPC error !"
-msgstr "XML-RPC 에러 !"
+msgstr "XML-RPC 오류 !"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "한 객체 가져옴"
 
 #: bin/modules/gui/window/win_import.py:64
 #, python-format
@@ -358,7 +358,7 @@ msgstr "%d 객체를 가져왔음 !"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "가져오기 오류 !"
 
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
@@ -394,11 +394,13 @@ msgstr " 레코드 저장 !"
 msgid ""
 "Operation failed !\n"
 "I/O error"
-msgstr "오퍼레이션 실패 !"
+msgstr ""
+"오퍼레이션 실패 !\n"
+"I/O 오류"
 
 #: bin/modules/gui/window/win_export.py:78
 msgid "Error Opening Excel !"
-msgstr "엑셀 열기 에러 !"
+msgstr "엑셀 열기 오류 !"
 
 #: bin/modules/gui/window/win_export.py:80
 msgid ""
@@ -410,7 +412,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "내보내기 오류 !"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
@@ -427,19 +429,19 @@ msgstr "레코드를 선택하십시오 !"
 #: bin/modules/gui/window/form.py:239
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:43
 msgid "ID"
-msgstr "D"
+msgstr "ID"
 
 #: bin/modules/gui/window/form.py:240
 msgid "Creation User"
-msgstr "생성 사용자"
+msgstr "사용자 생성"
 
 #: bin/modules/gui/window/form.py:241
 msgid "Creation Date"
-msgstr "생성 날짜"
+msgstr "만든 날짜"
 
 #: bin/modules/gui/window/form.py:242
 msgid "Latest Modification by"
-msgstr "최종 수정자:"
+msgstr "최종 수정자"
 
 #: bin/modules/gui/window/form.py:243
 msgid "Latest Modification Date"
@@ -455,11 +457,11 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:257
 msgid "Are you sure to remove this record ?"
-msgstr "이 레코드를 지울까요?"
+msgstr "이 레코드를 제거 할까요?"
 
 #: bin/modules/gui/window/form.py:259
 msgid "Are you sure to remove those records ?"
-msgstr "이 레코드들을 지울까요?"
+msgstr "이 레코드들을 제거 할까요?"
 
 #: bin/modules/gui/window/form.py:263
 msgid "Resources cleared."
@@ -485,7 +487,7 @@ msgstr "잘못된 양식, 빨간색 필드들을 수정하십시오 !"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "오류 !"
 
 #: bin/modules/gui/window/form.py:328 bin/modules/gui/window/form.py:423
 msgid ""
@@ -501,7 +503,7 @@ msgstr "하나 이상의 레코드를 선택하십시오 !"
 
 #: bin/modules/gui/window/form.py:384
 msgid "Print Screen"
-msgstr "화면 인쇄"
+msgstr "화면 출력"
 
 #: bin/modules/gui/window/form.py:404
 msgid "No record selected"
@@ -529,15 +531,15 @@ msgstr "트리"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:49
 msgid "Description"
-msgstr "설명"
+msgstr "요약"
 
 #: bin/modules/gui/window/__init__.py:33
 msgid "Unknown Window"
-msgstr "알려지지 않은 윈도우"
+msgstr "알 수 없는 창"
 
 #: bin/modules/gui/window/win_extension.py:115
 msgid "This extension is already defined"
-msgstr "이 익스텐션을 이미 정의되어 있습니다"
+msgstr "이 확장은 이미 정의되어 있습니다"
 
 #: bin/modules/gui/window/tree.py:190 bin/modules/gui/window/tree.py:246
 msgid "No resource selected!"
@@ -553,7 +555,7 @@ msgstr ""
 
 #: bin/modules/gui/window/tree.py:209
 msgid "Error removing resource!"
-msgstr "리소스 이동 에러"
+msgstr "리소스 이동중 오류"
 
 #: bin/modules/gui/window/tree.py:220
 msgid "Unable to chroot: no tree resource selected"
@@ -561,7 +563,7 @@ msgstr "chroot 불가능: 트리 리소스가 선택되지 않음"
 
 #: bin/modules/gui/window/win_preference.py:69
 msgid "Preference"
-msgstr "설정"
+msgstr "기본 설정"
 
 #: bin/modules/gui/window/win_preference.py:80
 msgid ""
@@ -571,7 +573,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "기본 언어 변경됨 !"
 
 #: bin/modules/gui/main.py:87 bin/modules/gui/main.py:436
 #: bin/modules/gui/main.py:1445
@@ -586,11 +588,11 @@ msgstr "서버:"
 #: bin/modules/gui/main.py:102 bin/openerp.glade:98 bin/openerp.glade:6544
 #: bin/openerp.glade:6787 bin/openerp.glade:7084 bin/openerp.glade:7432
 msgid "Change"
-msgstr "변경"
+msgstr "바꾸기"
 
 #: bin/modules/gui/main.py:109 bin/openerp.glade:7011
 msgid "Super Administrator Password:"
-msgstr "슈퍼 관리자 패스워드"
+msgstr "슈퍼 관리자 암호:"
 
 #: bin/modules/gui/main.py:172 bin/modules/action/wizard.py:137
 msgid "OpenERP Computing"
@@ -598,58 +600,60 @@ msgstr "OpenERP 컴퓨팅"
 
 #: bin/modules/gui/main.py:183 bin/modules/action/wizard.py:147
 msgid "Operation in progress"
-msgstr "진행 중인 오퍼레이션"
+msgstr "실행 중인 작업"
 
 #: bin/modules/gui/main.py:187 bin/modules/gui/main.py:639
 #: bin/modules/action/wizard.py:151
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
-msgstr "기다려 주십시오,"
+msgstr ""
+"기다려 주십시오,\n"
+"이 작업은 잠시 소요될 수 있습니다..."
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr ""
+msgstr "마이그레이션 스크립트"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "계약 ID:"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "계약 암호:"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "이미 최신 버전입니다."
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "다음 업데이트를 사용할 수 있습니다:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "이제 귀하의 데이터베이스를 이전할 수 있습니다."
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "데이타베이스 이전"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "귀하의 데이터베이스가 업그레이드 되었습니다."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "귀하의 데이터베이스가 업그레이드 되었습니다."
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
-msgstr "알려지지 않음"
+msgstr "알 수 없음"
 
 #: bin/modules/gui/main.py:443 bin/modules/gui/main.py:1449
 msgid "No database found, you must create one !"
-msgstr "데이터베이스가 없습니다. 먼저 하나를 만드세요 !"
+msgstr "데이터베이스가 없습니다. 먼저, 하나를 만드십시오 !"
 
 #: bin/modules/gui/main.py:467
 #, python-format
@@ -671,7 +675,9 @@ msgstr "잘못된 데이터베이스 이름 !"
 msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
-msgstr "데이터베이스 이름은 일반 문자 또는 \"_\" 만을 포함할 수 있습니다."
+msgstr ""
+"데이터베이스 이름은 일반 문자들과 \"_\"만 포함할 수 있습니다. \n"
+"강조 문자, 공백 또는 특수 문자는 사용하지 마십시오."
 
 #: bin/modules/gui/main.py:626
 msgid "OpenERP Database Installation"
@@ -679,7 +685,7 @@ msgstr "OpenERP 데이터베이스 설치"
 
 #: bin/modules/gui/main.py:635
 msgid "<b>Operation in progress</b>"
-msgstr "<b>진행 중인 오퍼레이션</b>"
+msgstr "<b>진행 중인 작업</b>"
 
 #: bin/modules/gui/main.py:658 bin/modules/gui/main.py:660
 #: bin/modules/gui/main.py:662
@@ -693,7 +699,7 @@ msgstr "데이터베이스가 이미 존재합니다 !"
 #: bin/modules/gui/main.py:660 bin/modules/gui/main.py:1342
 #: bin/modules/gui/main.py:1361 bin/modules/gui/main.py:1437
 msgid "Bad database administrator password !"
-msgstr "데이터페이스 관리자 패스워드 오류!"
+msgstr "데이터페이스 관리자 암호 오류!"
 
 #: bin/modules/gui/main.py:662 bin/modules/gui/main.py:669
 msgid "Error during database creation !"
@@ -703,7 +709,9 @@ msgstr "데이터베이스 생성 에러 !"
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
-msgstr "설치 중에 서버의 오류 발생 !"
+msgstr ""
+"설치 중에 서버가 다운되었습니다.\n"
+"이 데이터베이스를 삭제하는 게 좋겠습니다."
 
 #: bin/modules/gui/main.py:687
 msgid "The following users have been installed on your database:"
@@ -711,7 +719,7 @@ msgstr "아래 사용자들이 귀하의 데이터베이스에 설치되었습�
 
 #: bin/modules/gui/main.py:687
 msgid "You can now connect to the database as an administrator."
-msgstr "이제 데이타베이스에 관리자로 접속할 수 있습니다."
+msgstr "지금 관리자로 데이터베이스에 접속 할 수 있습니다."
 
 #: bin/modules/gui/main.py:731 bin/modules/gui/main.py:1064
 msgid "Press Ctrl+O to login"
@@ -724,16 +732,16 @@ msgstr "편집"
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr "%s 요구"
+msgstr "%s 요청(들)"
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr "요구 없음"
+msgstr "요청이 없음"
 
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sended"
-msgstr " - %s 요구가 전송됨"
+msgstr " - %s 요청(들)가 전송됨"
 
 #: bin/modules/gui/main.py:1035
 msgid ""
@@ -746,6 +754,8 @@ msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"인증 오류!\n"
+"잘못된 사용자 이름 또는 암호!"
 
 #: bin/modules/gui/main.py:1062
 msgid "Not logged !"
@@ -756,7 +766,10 @@ msgid ""
 "You can not log into the system !\n"
 "Ask the administrator to verify\n"
 "you have an action defined for your user."
-msgstr "귀하는 로그인 하실 수 없습니다 !"
+msgstr ""
+"시스템에 로그인할 수 없습니다 !\n"
+"귀하에게 부여된 권한에 대해\n"
+"관리자에게 문의하십시오."
 
 #: bin/modules/gui/main.py:1170 bin/modules/gui/main.py:1177
 msgid "Do you really want to quit ?"
@@ -807,23 +820,23 @@ msgstr "데이터베이스를 복원하지 못했습니다."
 #: bin/modules/gui/main.py:1402
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr "확인하신 패스워드가 새로운 패스워드와 일치하지 않습니다, 오퍼레이션 취소됨!"
+msgstr "확인하신 암호가 새로운 암호와 일치하지 않습니다, 작업이 취소되었습니다!"
 
 #: bin/modules/gui/main.py:1404
 msgid "Validation Error."
-msgstr "검증 에러."
+msgstr "검증 오류."
 
 #: bin/modules/gui/main.py:1412
 msgid "Could not change the Super Admin password."
-msgstr "슈퍼 관리자 패스워드를 변경할 수 없습니다."
+msgstr "슈퍼 관리자 암호를 변경할 수 없습니다."
 
 #: bin/modules/gui/main.py:1413
 msgid "Bad password provided !"
-msgstr "잘못된 패스워드 !"
+msgstr "잘못된 암호 !"
 
 #: bin/modules/gui/main.py:1415
 msgid "Error, password not changed."
-msgstr "에러, 패스워드가 변경되지 않았음."
+msgstr "오류, 암호가 변경되지 않았음."
 
 #: bin/modules/gui/main.py:1421 bin/modules/gui/main.py:1441
 msgid "Backup a database"
@@ -851,7 +864,7 @@ msgstr "입력 지연으로 출력이 취소 되었습니다 !"
 
 #: bin/modules/action/main.py:180
 msgid "Select your action"
-msgstr "액션을 선택하십시오"
+msgstr "작업을 선택하십시오"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid "Gantt view not yet implemented !"
@@ -871,11 +884,11 @@ msgstr "특별한 날짜 조작 작업은 <i>'+'</i>, <i>'-'</i> or <i>'='</i>�
 #: bin/widget/view/tree_gtk/editabletree.py:124
 #, python-format
 msgid "Shortcut: %s"
-msgstr "지름길: %s"
+msgstr "바로가기: %s"
 
 #: bin/widget/view/tree_gtk/editabletree.py:124
 msgid "F1 New - F2 Open/Search"
-msgstr "F1 새로 열기 - F2 열기/찾기"
+msgstr "F1 새로 열기 - F2 열기/검색"
 
 #: bin/widget/view/tree_gtk/editabletree.py:189
 #, python-format
@@ -929,7 +942,7 @@ msgstr "새로운 리소스 만들기"
 
 #: bin/widget/view/form_gtk/reference.py:93
 msgid "Search / Open a resource"
-msgstr "리소스 찾기/열기"
+msgstr "리소스 검색/열기"
 
 #: bin/widget/view/form_gtk/many2one.py:156
 msgid "Open this resource"
@@ -937,15 +950,15 @@ msgstr "이 리소스 열기"
 
 #: bin/widget/view/form_gtk/many2one.py:159
 msgid "Search a resource"
-msgstr "리소스 찾기"
+msgstr "리소스 검색"
 
 #: bin/widget/view/form_gtk/many2one.py:168 bin/openerp.glade:1389
 msgid "Action"
-msgstr "액션"
+msgstr "동작"
 
 #: bin/widget/view/form_gtk/many2one.py:169
 msgid "Report"
-msgstr "레포트"
+msgstr "보고서"
 
 #: bin/widget/view/form_gtk/many2one.py:375 bin/widget/view/list.py:274
 msgid "You must select a record to use the relation !"
@@ -965,7 +978,7 @@ msgstr "다른 이름으로 저장"
 
 #: bin/widget/view/form_gtk/binary.py:89 bin/widget/view/form_gtk/image.py:89
 msgid "Clear"
-msgstr "지우기"
+msgstr "비우기"
 
 #: bin/widget/view/form_gtk/binary.py:114
 #: bin/widget/view/form_gtk/binary.py:158
@@ -994,7 +1007,7 @@ msgstr "파일 쓰기 에러:%s"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "잘못된 날짜 값! 1899년보다 앞서야 합니다 !"
 
 #: bin/widget/view/form_gtk/calendar.py:130
 #: bin/widget/view/form_gtk/calendar.py:263
@@ -1004,7 +1017,7 @@ msgstr "이 위젯은 읽기 전용입니다 !"
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "잘못된 날짜시간값! 1899년보다 앞서야 합니다 !"
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Hour:"
@@ -1016,7 +1029,7 @@ msgstr "분:"
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
-msgstr "잘못된 버튼 아이콘 !"
+msgstr "잘못된 아이콘 단추 !"
 
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
@@ -1045,27 +1058,27 @@ msgstr "이미지"
 #: bin/widget/view/form_gtk/interface.py:47
 #: bin/widget/view/form_gtk/one2many_list.py:148
 msgid "Set to default value"
-msgstr "디폴트 값으로 설정"
+msgstr "기본값으로 설정"
 
 #: bin/widget/view/form_gtk/interface.py:48
 msgid "Set as default"
-msgstr "디폴트로 설정"
+msgstr "기본값으로 설정"
 
 #: bin/widget/view/form_gtk/one2many_list.py:151
 msgid "Set Default"
-msgstr "디폴트 설정"
+msgstr "기본값 설정"
 
 #: bin/widget/view/form_gtk/one2many_list.py:162
 msgid "Create a new entry"
-msgstr "새로운 엔트리 만들기"
+msgstr "새 항목 만들기"
 
 #: bin/widget/view/form_gtk/one2many_list.py:172
 msgid "Edit this entry"
-msgstr "이 엔트리 편집"
+msgstr "이 항목 편집"
 
 #: bin/widget/view/form_gtk/one2many_list.py:182
 msgid "Remove this entry"
-msgstr "이 엔트리 제거"
+msgstr "이 항목 제거"
 
 #: bin/widget/view/form_gtk/one2many_list.py:194
 msgid "Previous"
@@ -1109,19 +1122,19 @@ msgstr "사용자:"
 
 #: bin/openerp.glade:146 bin/openerp.glade:6430 bin/openerp.glade:6730
 msgid "Password:"
-msgstr "패스워드:"
+msgstr "암호:"
 
 #: bin/openerp.glade:255
 msgid "_File"
-msgstr "파일 (P)"
+msgstr "파일(_F)"
 
 #: bin/openerp.glade:262
 msgid "_Connect..."
-msgstr "접속 (C)..."
+msgstr "연결(_C)..."
 
 #: bin/openerp.glade:278
 msgid "_Disconnect"
-msgstr "접속 해제 (D)"
+msgstr "연결 끊기(_D)"
 
 #: bin/openerp.glade:298
 msgid "Databases"
@@ -1129,19 +1142,19 @@ msgstr "데이터베이스"
 
 #: bin/openerp.glade:305
 msgid "_New database"
-msgstr "새 데이터베이스 (N)"
+msgstr "새 데이터베이스(_N)"
 
 #: bin/openerp.glade:320
 msgid "_Restore database"
-msgstr "데이터베이스 복원 (R)"
+msgstr "데이터베이스 복원(_R)"
 
 #: bin/openerp.glade:335
 msgid "_Backup database"
-msgstr "데이터베이스 백업 (B)"
+msgstr "데이터베이스 백업(_B)"
 
 #: bin/openerp.glade:350
 msgid "Dro_p database"
-msgstr "데이터베이스 제거 (P)"
+msgstr "데이터베이스 제거(_P)"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
@@ -1153,39 +1166,39 @@ msgstr ""
 
 #: bin/openerp.glade:405
 msgid "Administrator Password"
-msgstr "관리자 패스워드"
+msgstr "관리자 암호"
 
 #: bin/openerp.glade:450
 msgid "_User"
-msgstr "사용자 (U)"
+msgstr "사용자(_U)"
 
 #: bin/openerp.glade:458
 msgid "_Preferences"
-msgstr "설정 (P)"
+msgstr "기본 설정(_P)"
 
 #: bin/openerp.glade:478
 msgid "_Send a request"
-msgstr "요청 전송 (S)"
+msgstr "전송 요청(_S)"
 
 #: bin/openerp.glade:493
 msgid "_Read my requests"
-msgstr "내 요청 내용 보기 (R)"
+msgstr "내 요청 내용 보기(_R)"
 
 #: bin/openerp.glade:513
 msgid "_Waiting Requests"
-msgstr "요청을 기다림 (W)"
+msgstr "요청을 기다림(_W)"
 
 #: bin/openerp.glade:526
 msgid "For_m"
-msgstr "양식 (m)"
+msgstr "양식(_M)"
 
 #: bin/openerp.glade:534
 msgid "_New"
-msgstr "새로 만들기 (N)"
+msgstr "새로 만들기(_N)"
 
 #: bin/openerp.glade:550
 msgid "_Save"
-msgstr "저장하기 (S)"
+msgstr "저장하기(_S)"
 
 #: bin/openerp.glade:566
 msgid "Copy this resource"
@@ -1193,11 +1206,11 @@ msgstr "이 리소스 복사"
 
 #: bin/openerp.glade:567
 msgid "_Duplicate"
-msgstr "복제하기 (D)"
+msgstr "복제(_D)"
 
 #: bin/openerp.glade:583
 msgid "_Delete"
-msgstr "삭제 (D)"
+msgstr "삭제(_D)"
 
 #: bin/openerp.glade:604
 msgid "Find"
@@ -1205,23 +1218,23 @@ msgstr "찾기"
 
 #: bin/openerp.glade:620
 msgid "Ne_xt"
-msgstr "다음 (x)"
+msgstr "다음(_X)"
 
 #: bin/openerp.glade:636
 msgid "Pre_vious"
-msgstr "이전 (v)"
+msgstr "이전(_V)"
 
 #: bin/openerp.glade:652
 msgid "Switch to list/form"
-msgstr "리스트/폼으로 전환"
+msgstr "목록/양식으로 전환"
 
 #: bin/openerp.glade:668
 msgid "_Menu"
-msgstr "메뉴 (M)"
+msgstr "메뉴(_M)"
 
 #: bin/openerp.glade:689
 msgid "_New Home Tab"
-msgstr "새 홈탭 (N)"
+msgstr "새 홈 탭(_N)"
 
 #: bin/openerp.glade:705 bin/openerp.glade:5018
 msgid "Close Tab"
@@ -1237,67 +1250,67 @@ msgstr "다음 탭"
 
 #: bin/openerp.glade:744
 msgid "View _logs"
-msgstr "로그 보기 (l)"
+msgstr "로그 보기(_L)"
 
 #: bin/openerp.glade:752
 msgid "_Go to resource ID..."
-msgstr "리소스 ID로 이동 (G)..."
+msgstr "리소스 ID로 이동(_G)..."
 
 #: bin/openerp.glade:766
 msgid "_Open"
-msgstr "열기 (O)"
+msgstr "열기(_O)"
 
 #: bin/openerp.glade:781
 msgid "Reloa_d / Undo"
-msgstr "리로드/실행 취소 (d)"
+msgstr "불러오기/실행 취소(_D)"
 
 #: bin/openerp.glade:802
 msgid "Repeat latest _action"
-msgstr "마지막 액션 반복 (a)"
+msgstr "마지막 실행 반복(_A)"
 
 #: bin/openerp.glade:816
 msgid "_Preview in PDF"
-msgstr "_PDF로 미리보기"
+msgstr "PDF로 미리보기(_P)"
 
 #: bin/openerp.glade:832
 msgid "Previe_w in editor"
-msgstr "편집기로 미리보기 (w)"
+msgstr "편집기로 미리보기(_W)"
 
 #: bin/openerp.glade:852
 msgid "Expor_t data..."
-msgstr "_데이터 보내기..."
+msgstr "데이터 보내기...(_T)"
 
 #: bin/openerp.glade:867
 msgid "I_mport data..."
-msgstr "데이터 가져오기 (m)..."
+msgstr "데이터 가져오기...(_M)"
 
 #: bin/openerp.glade:879
 msgid "_Options"
-msgstr "옵션 (O)"
+msgstr "설정 (_O)"
 
 #: bin/openerp.glade:886
 msgid "_Extension Manager"
-msgstr "익스텐션 매니저 (E)"
+msgstr "확장 관리자(_E)"
 
 #: bin/openerp.glade:894
 msgid "_Menubar"
-msgstr "메뉴 바 (M)"
+msgstr "메뉴 바 (_M)"
 
 #: bin/openerp.glade:902
 msgid "Text _and Icons"
-msgstr "텍스트와 아이콘 (a)"
+msgstr "텍스트와 아이콘(_A)"
 
 #: bin/openerp.glade:910
 msgid "_Icons only"
-msgstr "아이콘 만 (I)"
+msgstr "아이콘만(_I)"
 
 #: bin/openerp.glade:919
 msgid "_Text only"
-msgstr "텍스트 만 (T)"
+msgstr "텍스트만(_T)"
 
 #: bin/openerp.glade:932
 msgid "_Forms"
-msgstr "폼 (F)"
+msgstr "양식(_F)"
 
 #: bin/openerp.glade:940
 msgid "Right Toolbar"
@@ -1309,7 +1322,7 @@ msgstr "탭 디폴트 위치"
 
 #: bin/openerp.glade:956
 msgid "Top"
-msgstr "위"
+msgstr "위쪽"
 
 #: bin/openerp.glade:964
 msgid "Left"
@@ -1321,11 +1334,11 @@ msgstr "오른쪽"
 
 #: bin/openerp.glade:982
 msgid "Bottom"
-msgstr "아래"
+msgstr "아래쪽"
 
 #: bin/openerp.glade:995
 msgid "Tabs default orientation"
-msgstr "탭 디폴트 orientation"
+msgstr "탭 기본 방향"
 
 #: bin/openerp.glade:1003
 msgid "Horizontal"
@@ -1337,19 +1350,19 @@ msgstr "수직"
 
 #: bin/openerp.glade:1028
 msgid "_Print"
-msgstr "출력 (P)"
+msgstr "인쇄(_P)"
 
 #: bin/openerp.glade:1035
 msgid "Previe_w before print"
-msgstr "인쇄 미리보기 (w)"
+msgstr "인쇄 미리보기(_W)"
 
 #: bin/openerp.glade:1059
 msgid "_Save options"
-msgstr "옵션 저장 (S)"
+msgstr "설정 저장(_S)"
 
 #: bin/openerp.glade:1079
 msgid "_Plugins"
-msgstr "펄럭인 (P)"
+msgstr "플러그인(_P)"
 
 #: bin/openerp.glade:1087
 msgid "_Execute a plugin"
@@ -1357,11 +1370,11 @@ msgstr "펄럭인 실행 (E)"
 
 #: bin/openerp.glade:1107
 msgid "_Shortcuts"
-msgstr "지름길 (S)"
+msgstr "바로가기(_S)"
 
 #: bin/openerp.glade:1115
 msgid "_Help"
-msgstr "도움말 (H)"
+msgstr "도움말(_H)"
 
 #: bin/openerp.glade:1122 bin/openerp.glade:4389
 msgid "Support Request"
@@ -1369,27 +1382,27 @@ msgstr "지원 요청"
 
 #: bin/openerp.glade:1142
 msgid "User _Manual"
-msgstr "사용자 매뉴얼 (U)"
+msgstr "사용자 매뉴얼(_U)"
 
 #: bin/openerp.glade:1157
 msgid "_Contextual Help"
-msgstr "문맥 도움말 (C)"
+msgstr "문맥 도움말(_C)"
 
 #: bin/openerp.glade:1173
 msgid "_Tips"
-msgstr "팁 (T)"
+msgstr "팁(_T)"
 
 #: bin/openerp.glade:1188
 msgid "Keyboard Shortcuts"
-msgstr "단축키"
+msgstr "키보드 단축키"
 
 #: bin/openerp.glade:1201
 msgid "_License"
-msgstr "라이선스 (L)"
+msgstr "저작권(_L)"
 
 #: bin/openerp.glade:1216
 msgid "_About..."
-msgstr "소개 (A)..."
+msgstr "정보(_A)..."
 
 #: bin/openerp.glade:1258
 msgid "Edit / Save this resource"
@@ -1409,15 +1422,15 @@ msgstr "다음 검색 결과로 이동"
 
 #: bin/openerp.glade:1311
 msgid "List"
-msgstr "리스트"
+msgstr "목록"
 
 #: bin/openerp.glade:1323
 msgid "Form"
-msgstr "폼"
+msgstr "양식"
 
 #: bin/openerp.glade:1336
 msgid "Calendar"
-msgstr "카렌더"
+msgstr "달력"
 
 #: bin/openerp.glade:1346
 msgid "Graph"
@@ -1433,7 +1446,7 @@ msgstr "문서 출력"
 
 #: bin/openerp.glade:1388
 msgid "Launch actions about this resource"
-msgstr "이 리소스에 관한 액션 시작"
+msgstr "이 리소스에 관한 행동 시작"
 
 #: bin/openerp.glade:1401
 msgid "Add an attachment to this resource"
@@ -1453,7 +1466,7 @@ msgstr "다시 불러오기"
 
 #: bin/openerp.glade:1453
 msgid "Close this window"
-msgstr "이 윈도우 닫기"
+msgstr "이 창 닫기"
 
 #: bin/openerp.glade:1497
 msgid "Requests:"
@@ -1473,7 +1486,7 @@ msgstr "OpenERP - 트리 리소스"
 
 #: bin/openerp.glade:1634
 msgid "Shortcuts"
-msgstr "단축키"
+msgstr "바로 가기"
 
 #: bin/openerp.glade:1743
 msgid "OpenERP - Forms"
@@ -1492,7 +1505,7 @@ msgid ""
 "<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
-"<b>OpenERP</b>\n"
+"<b>OpenERP 정보</b>\n"
 "<i>가장 진보적인 오픈소스 ERP &amp; CRM !</i>"
 
 #: bin/openerp.glade:1852
@@ -1525,7 +1538,7 @@ msgstr ""
 
 #: bin/openerp.glade:1880
 msgid "_OpenERP"
-msgstr "Copy text   \t _OpenERP"
+msgstr "OpenERP(_O)"
 
 #: bin/openerp.glade:1908
 msgid ""
@@ -1557,11 +1570,11 @@ msgstr ""
 
 #: bin/openerp.glade:1939
 msgid "_Contact"
-msgstr "_문의"
+msgstr "연락처(_C)"
 
 #: bin/openerp.glade:1991
 msgid "Open ERP - Forms widget"
-msgstr "Open ERP - 폼 위젯"
+msgstr "Open ERP - 양식 위젯"
 
 #: bin/openerp.glade:2170 bin/openerp.glade:4735
 msgid "OpenERP - Confirmation"
@@ -1577,19 +1590,19 @@ msgstr "귀하의 선택:"
 
 #: bin/openerp.glade:2343
 msgid "OpenERP - Dialog"
-msgstr "OpenERP - 다이어로그"
+msgstr "OpenERP - 대화창"
 
 #: bin/openerp.glade:2367
 msgid "OpenERP, Field Preference target"
-msgstr "OpenERP. 필드 설정 타깃"
+msgstr "OpenERP. 필드 기본 설정 대상"
 
 #: bin/openerp.glade:2398
 msgid "_only for you"
-msgstr "귀하 만 (o)"
+msgstr "귀하 만(_O)"
 
 #: bin/openerp.glade:2412
 msgid "for _all users"
-msgstr "모든 사용자 (a)"
+msgstr "모든 사용자(_A)"
 
 #: bin/openerp.glade:2432
 msgid "<b>Value applicable for:</b>"
@@ -1605,11 +1618,11 @@ msgstr "필드 이름 (N):"
 
 #: bin/openerp.glade:2500
 msgid "_Domain:"
-msgstr "도메인 (D):"
+msgstr "도메인(_D):"
 
 #: bin/openerp.glade:2559
 msgid "Default _value:"
-msgstr "디폴트 값 (v):"
+msgstr "기본 값(_V):"
 
 #: bin/openerp.glade:2614
 msgid "OpenERP - Export to CSV"
@@ -1617,15 +1630,15 @@ msgstr "OpenERP - CSV로 내보내기"
 
 #: bin/openerp.glade:2662
 msgid "Save List"
-msgstr "리스트 저장"
+msgstr "목록 저장"
 
 #: bin/openerp.glade:2710
 msgid "Remove List"
-msgstr "리스트 제거"
+msgstr "목록 제거"
 
 #: bin/openerp.glade:2765
 msgid "<b>Exports List</b>"
-msgstr "<b>리스트 내보내기</b>"
+msgstr "<b>목록 내보내기</b>"
 
 #: bin/openerp.glade:2782
 msgid "<b>Predefined Exports</b>"
@@ -1633,27 +1646,27 @@ msgstr "<b>사전에 정의된 내보내기</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "가져오기 호환"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>내보내기 설정 선택</b>"
 
 #: bin/openerp.glade:2871
 msgid "Available Fields"
-msgstr "가용한 필드들"
+msgstr "사용 가능한 필드"
 
 #: bin/openerp.glade:2914 bin/openerp.glade:5641
 msgid "_Add"
-msgstr "더하기 (A)"
+msgstr "추가(_A)"
 
 #: bin/openerp.glade:2961 bin/openerp.glade:5688
 msgid "_Remove"
-msgstr "제거하기 (R)"
+msgstr "제거(_R)"
 
 #: bin/openerp.glade:3009
 msgid "_Nothing"
-msgstr "없음 (N)"
+msgstr "없음(_N)"
 
 #: bin/openerp.glade:3064
 msgid "Fields to Export"
@@ -1669,11 +1682,11 @@ msgstr ""
 
 #: bin/openerp.glade:3113
 msgid "Add _field names"
-msgstr "필드 이름 추가 (f)"
+msgstr "필드 이름 추가 (_F)"
 
 #: bin/openerp.glade:3130
 msgid "<b>Opti_ons</b>"
-msgstr "<b>옵션 (o)</b>"
+msgstr "<b>설정(_O)</b>"
 
 #: bin/openerp.glade:3189
 msgid "OpenERP - Search"
@@ -1681,11 +1694,11 @@ msgstr "OpenERP - 검색"
 
 #: bin/openerp.glade:3301
 msgid "OpenERP - Preferences"
-msgstr "OpenERP - 설정"
+msgstr "OpenERP - 기본 설정"
 
 #: bin/openerp.glade:3315
 msgid "<b>User preferences</b>"
-msgstr "<b>사용자 설정</b>"
+msgstr "<b>사용자 기본 설정</b>"
 
 #: bin/openerp.glade:3381
 msgid "Tip of the Day"
@@ -1693,15 +1706,15 @@ msgstr "오늘의 팁"
 
 #: bin/openerp.glade:3428
 msgid "_Display a new tip next time?"
-msgstr "다음 번에도 새로운 팁을 보여드릴까요? (D)"
+msgstr "다음 번에도 새로운 팁을 표시할까요?(_D)"
 
 #: bin/openerp.glade:3481
 msgid "Pre_vious Tip"
-msgstr "이전 팁 (v)"
+msgstr "이전 팁(_V)"
 
 #: bin/openerp.glade:3527
 msgid "Ne_xt Tip"
-msgstr "다음 팁 (x)"
+msgstr "다음 팁(_X)"
 
 #: bin/openerp.glade:3573
 msgid "OpenERP - License"
@@ -1759,7 +1772,7 @@ msgstr "<b>지원 요청 id:</b>"
 
 #: bin/openerp.glade:4591
 msgid "Other comments:"
-msgstr "다른 코멘트:"
+msgstr "기타 의견:"
 
 #: bin/openerp.glade:4605
 msgid "Explain your problem:"
@@ -1771,7 +1784,7 @@ msgstr "<b>귀하의 email:</b>"
 
 #: bin/openerp.glade:4658
 msgid "<b>Your Company:</b>"
-msgstr "<b>귀사:</b>"
+msgstr "<b>회사:</b>"
 
 #: bin/openerp.glade:4672
 msgid "<b>Your name:</b>"
@@ -1903,7 +1916,7 @@ msgstr "<b>관련 필드에서 단축키</b>"
 
 #: bin/openerp.glade:5288
 msgid "<b>Shortcuts in text entries</b>"
-msgstr "<b>텍스트 엔트리에서 단축키</b>"
+msgstr "<b>텍스트 항목에서 단축키</b>"
 
 #: bin/openerp.glade:5301
 msgid "Open current field"
@@ -1931,7 +1944,7 @@ msgstr "이전의 편집가능 위젯"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.glade:5400
 msgid "Next editable widget"
@@ -1979,11 +1992,11 @@ msgstr "<b>모든 필드</b>"
 
 #: bin/openerp.glade:5736
 msgid "N_othing"
-msgstr "N_othing"
+msgstr "없음(_O)"
 
 #: bin/openerp.glade:5795
 msgid "Auto-Detect"
-msgstr "자동 탐지"
+msgstr "자동-선택"
 
 #: bin/openerp.glade:5850
 msgid "<b>Fields to import</b>"
@@ -1991,7 +2004,7 @@ msgstr "<b>내보낼 필드들</b>"
 
 #: bin/openerp.glade:5885
 msgid "File to Import:"
-msgstr "내보낼 파일"
+msgstr "내보낼 파일:"
 
 #: bin/openerp.glade:5959
 msgid "Lines to Skip:"
@@ -1999,11 +2012,11 @@ msgstr "지나칠 라인들:"
 
 #: bin/openerp.glade:5988
 msgid "Text Delimiter:"
-msgstr "Text Delimiter:"
+msgstr "텍스트 구분 기호:"
 
 #: bin/openerp.glade:6016
 msgid "Encoding:"
-msgstr "암호화:"
+msgstr "인코딩:"
 
 #: bin/openerp.glade:6029
 msgid "Field Separater:"
@@ -2031,7 +2044,7 @@ msgstr "프로토콜 접속:"
 
 #: bin/openerp.glade:6331
 msgid "Port:"
-msgstr "포트"
+msgstr "포트:"
 
 #: bin/openerp.glade:6383
 msgid "Choose a database..."
@@ -2039,7 +2052,7 @@ msgstr "데이터베이스를 선택하세요..."
 
 #: bin/openerp.glade:6398
 msgid "<b>Backup a database</b>"
-msgstr "<b>데이터베이스 백업 </b>"
+msgstr "<b>데이터베이스 백업</b>"
 
 #: bin/openerp.glade:6629
 msgid "Restore a database"
@@ -2055,7 +2068,7 @@ msgstr "(특수 문자가 포함되면 안됩니다)"
 
 #: bin/openerp.glade:6715
 msgid "New database name:"
-msgstr "새로운 데이터베이스 이름:"
+msgstr "새 데이터베이스 이름:"
 
 #: bin/openerp.glade:6815 bin/openerp.glade:6961 bin/openerp.glade:7460
 msgid "http://localhost:8069"
@@ -2074,8 +2087,8 @@ msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
-"OpenERP 서버의 URL 입니다. 서버가 이 컴퓨터에 설치되어 있으면, 'localhost'를 이용하세요. 이 주소를 변경하려면, "
-"'변경'을 클릭하십시오."
+"OpenERP 서버의 URL입니다. 서버가 이 컴퓨터에 설치되어 있으면, 'localhost'를 이용하세요. 이 주소를 바꾸려면, "
+"'바꾸기'를 클릭하십시오."
 
 #: bin/openerp.glade:6977
 msgid "OpenERP Server:"
@@ -2087,12 +2100,12 @@ msgid ""
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
-"이 패스워드는 관리자 데이터베이스 권한을 가진 사용자의 패스워드로, OpenERP 사용자가 아니라, 슈퍼 관리자의 패스워드입니다. 설치 "
-"시, 디폴트로 'admin' 으로 설정되며, 설치 후에 바꿀 수 있습니다."
+"이 암호는 관리자 데이터베이스 권한을 가진 사용자의 암호로, OpenERP 사용자가 아니라, 슈퍼 관리자의 암호입니다. 설치 시, "
+"기본값은 'admin' 으로 설정되며, 설치 후에 바꿀 수 있습니다."
 
 #: bin/openerp.glade:7043
 msgid "(<i>admin</i>, by default)"
-msgstr "(디폴트 <i>admin</i>)"
+msgstr "(기본값, <i>admin</i>)"
 
 #: bin/openerp.glade:7108
 msgid ""
@@ -2109,31 +2122,31 @@ msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
 "administration menu."
-msgstr "이 데이터베이스의 디폴트 언어를 선택하세요. 관리자 메뉴를 통해, 언제든지 새 언어를 추가할 수 있습니다."
+msgstr "이 데이터베이스의 기본 언어를 선택하세요. 관리자 메뉴를 통해, 언제든지 새 언어를 추가할 수 있습니다."
 
 #: bin/openerp.glade:7136
 msgid "Default Language:"
-msgstr "디폴트 언어:"
+msgstr "기본 언어:"
 
 #: bin/openerp.glade:7149
 msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
 "new database."
-msgstr "새로운 데이터베이스에서 만들어질 '<i>admin</i>' 관리자를 위한 패스워드입니다."
+msgstr "새로운 데이터베이스에서 만들어질 '<i>admin</i>' 관리자를 위한 암호입니다."
 
 #: bin/openerp.glade:7151
 msgid "Administrator Password:"
-msgstr "관리자 패스워드"
+msgstr "관리자 암호:"
 
 #: bin/openerp.glade:7163
 msgid ""
 "This is the password of the '<i>admin</i>' user that will be created in your "
 "new database. It has to be the same than the above field."
-msgstr "새로운 데이터베이스에서 만들어질 '<i>admin</i>' 관리자를 위한 패스워드입니다. 위 필드 내용과 동일해야 합니다."
+msgstr "새로운 데이터베이스에서 만들어질 '<i>admin</i>' 관리자를 위한 임호입니다. 위 필드 내용과 동일해야 합니다."
 
 #: bin/openerp.glade:7165
 msgid "Confirm Password:"
-msgstr "패스워드 확인:"
+msgstr "암호 확인:"
 
 #: bin/openerp.glade:7256
 msgid ""
@@ -2150,23 +2163,23 @@ msgstr "데모 데이터 로드하기"
 
 #: bin/openerp.glade:7316
 msgid "Change password"
-msgstr "패스워드 변경"
+msgstr "암호 바꾸기"
 
 #: bin/openerp.glade:7333
 msgid "<b>Change your super admin password</b>"
-msgstr "<b>슈퍼 관리자 패스워드 변경</b>"
+msgstr "<b>슈퍼 관리자 암호 바꾸기</b>"
 
 #: bin/openerp.glade:7486
 msgid "Old password:"
-msgstr "이전 패스워드"
+msgstr "이전 암호"
 
 #: bin/openerp.glade:7499
 msgid "New password:"
-msgstr "새 패스워드"
+msgstr "새 암호"
 
 #: bin/openerp.glade:7512
 msgid "New password confirmation:"
-msgstr "새 패스워드 확인"
+msgstr "새 암호 확인"
 
 #: bin/openerp.glade:7571
 msgid "OpenERP Message"
@@ -2191,15 +2204,15 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "나중 접속"
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "지금 접속"
 
 #: bin/openerp.glade:7843
 msgid "Extension Manager"
-msgstr "익스텐션 매니저"
+msgstr "확장기능 관리자"
 
 #: bin/openerp.glade:7947
 msgid "Concurrency exception"
@@ -2263,7 +2276,7 @@ msgstr "유지 보수에 관한 상세 내용"
 
 #: bin/win_error.glade:119
 msgid "<i>_Maintenance</i>"
-msgstr "<i>_유지보수</i>"
+msgstr "<i>유지보수(_M)</i>"
 
 #: bin/win_error.glade:150
 msgid ""
@@ -2284,7 +2297,7 @@ msgstr "상황을 설명해 주십시오:"
 
 #: bin/win_error.glade:196
 msgid "Others Comments:"
-msgstr "기타:"
+msgstr "기타 의견:"
 
 #: bin/win_error.glade:278
 msgid "Send to Maintenance Team"
@@ -2292,19 +2305,19 @@ msgstr "유지보수 팀으로 전송"
 
 #: bin/win_error.glade:326
 msgid "<i>_Support Request</i>"
-msgstr "<i>지원 요청 (S)</i>"
+msgstr "<i>지원 요청(_S)</i>"
 
 #: bin/win_error.glade:353
 msgid "Details"
-msgstr "상세 내용"
+msgstr "자세히"
 
 #: bin/win_error.glade:369
 msgid "<i>_Details</i>"
-msgstr "<i>상세 내용 (D)</i>"
+msgstr "<i>자세한 내용(_D)</i>"
 
 #: bin/win_error.glade:398
 msgid "gtk-close"
-msgstr "gtk-close"
+msgstr "gtk-닫기"
 
 #: bin/dia_survey.glade:32
 msgid ""
@@ -2315,7 +2328,7 @@ msgstr ""
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "<b>귀사</b>"
 
 #: bin/dia_survey.glade:84
 msgid "Open Source:"
@@ -2335,7 +2348,7 @@ msgstr "직무:"
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "종업원 수:"
 
 #: bin/dia_survey.glade:546
 msgid "Country:"
@@ -2343,7 +2356,7 @@ msgstr "국가:"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "시:"
 
 #: bin/dia_survey.glade:586
 msgid "System:"
@@ -2351,7 +2364,7 @@ msgstr "시스템:"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>관심 거리</b>"
 
 #: bin/dia_survey.glade:672
 msgid "How did you hear about us:"
@@ -2359,11 +2372,11 @@ msgstr "어떻게 저희를 알게 되셨나요:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "우리는 오픈 ERP 솔루션을 사용할 계획"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "우리는 오픈 ERP에 대한 서비스를 제공할 계획"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
@@ -2383,7 +2396,7 @@ msgstr "전화/휴대폰:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "이메일:"
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
@@ -2391,11 +2404,11 @@ msgstr "성명:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-취소"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-확인"
 
 #~ msgid "The content of the widget or excpetion if not valid"
 #~ msgstr "유효하지않을 경우, 위젯 컨텐트 또는 예외"
