@@ -174,12 +174,15 @@ class one2many_list(interface.widget_interface):
         self.screen.context.update(self.context)
 
         self.pager = pager(object=self, relation=attrs['relation'], screen=self.screen)
+
         # Button New
         self.eb_new = self.pager.create_event_box(tooltips, _('Create a new entry'),self._sig_new, 'gtk-new')
         hb.pack_start(self.eb_new, expand=False, fill=False)
+
         # Button Edit
         self.eb_open = self.pager.create_event_box(tooltips, _('Edit this entry'),self._sig_edit, 'gtk-open')
         hb.pack_start(self.eb_open, expand=False, fill=False)
+
         # Button Delete
         self.eb_del = self.pager.create_event_box(tooltips, _('Remove this entry'),self._sig_remove, 'gtk-delete')
         hb.pack_start(self.eb_del, expand=False, fill=False)
@@ -189,9 +192,11 @@ class one2many_list(interface.widget_interface):
       # Button Previous Page
         self.eb_prev_page = self.pager.create_event_box(tooltips, _('Previous Page'),self._sig_prev_page, 'gtk-goto-first')
         hb.pack_start(self.eb_prev_page, expand=False, fill=False)
+
         # Button Previous Record
         self.eb_pre = self.pager.create_event_box(tooltips, _('Previous Record'),self._sig_previous, 'gtk-go-back')
         hb.pack_start(self.eb_pre, expand=False, fill=False)
+
         # Record display
         self.label = gtk.Label('(0,0)')
         hb.pack_start(self.label, expand=False, fill=False)
@@ -214,7 +219,7 @@ class one2many_list(interface.widget_interface):
 
           # Limit Combo
         self.cb = gtk.combo_box_new_text()
-        for limit in ['20','40','80','100']:
+        for limit in ['20','40','80','All']:
             self.cb.append_text(limit)
         self.cb.set_active(0)
         tooltips.set_tip(self.cb, _('Choose Limit'))

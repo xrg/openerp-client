@@ -103,7 +103,7 @@ class many2many(interface.widget_interface):
 
         # LIMIT COMBO
         self.cb = gtk.combo_box_new_text()
-        for limit in ['20','40','80','100']:
+        for limit in ['20','40','80','All']:
             self.cb.append_text(limit)
         self.cb.set_active(0)
         tooltips.set_tip(self.cb, _('Choose Limit'))

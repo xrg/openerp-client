@@ -65,8 +65,11 @@ class pager(object):
         model = self.object.cb.get_model()
         active = self.object.cb.get_active()
         if active < 0:
-            return None
-        return int(model[active][0])
+            return False
+        try:
+            return int(model[active][0])
+        except:
+            return False
 
     def limit_changed(self):
         self.screen.limit = self.get_active_text()
@@ -105,13 +108,19 @@ class pager(object):
             ids = self.rpc.search(self.domain, offset, limit)
             if not ids:return
             model_field = parent.mgroup.mfields[self.object.attrs['name']]
-            model_field.limit = limit
+            if not limit:
+                self.screen.limit = len(ids)
+            model_field.limit = limit or len(ids)
             model_field.set(parent, ids)
             self.object.display(parent, model_field)
         else:
-            ids = self.object.model.m2m_cache[self.object.name][offset:offset + limit]
+            if not limit:
+                ids = self.object.model.m2m_cache[self.object.name]
+                self.screen.limit = len(ids)
+            else:
+                ids = self.object.model.m2m_cache[self.object.name][offset:offset + limit]
             model_field = self.object.model_field
-            model_field.limit = limit
+            model_field.limit = limit or len(ids)
             self.screen.models.clear()
             self.screen.load(ids)
             self.screen.display()

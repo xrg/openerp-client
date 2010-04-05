@@ -320,8 +320,7 @@ class M2MField(CharField):
         return model.value[self.name] or []
 
     def set(self, model, value, test_state=False, modified=False):
-        value = value[:self.limit]
-        model.value[self.name] = value or []
+        model.value[self.name] = value and value[:self.limit] or []
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
