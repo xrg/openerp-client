@@ -230,8 +230,8 @@ class many2many(interface.widget_interface):
             self.screen.current_models = self.screen.models.models[0]
         if model and model.id:
             self.pager.search_count()
-            self.pager.set_sensitivity()
             self.screen.current_view.set_cursor()
+        self.pager.set_sensitivity()
         return True
 
     def set_value(self, model, model_field):

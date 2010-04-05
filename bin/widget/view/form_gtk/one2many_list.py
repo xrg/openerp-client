@@ -353,14 +353,14 @@ class one2many_list(interface.widget_interface):
             self.screen.current_model = None
             self.screen.display()
             return False
-        self.pager.search_count()
-        self.pager.set_sensitivity()
         super(one2many_list, self).display(model, model_field)
         new_models = model_field.get_client(model)
         if self.screen.models != new_models:
             self.screen.models_set(new_models)
             if (self.screen.current_view.view_type=='tree') and self.screen.editable_get():
                 self.screen.current_model = None
+        self.pager.search_count()
+        self.pager.set_sensitivity()
         self.screen.display()
         return True
 

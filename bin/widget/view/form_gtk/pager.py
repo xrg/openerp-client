@@ -88,6 +88,7 @@ class pager(object):
         self.object.eb_pre.set_sensitive(True)
         self.object.eb_next_page.set_sensitive(True)
         self.object.eb_next.set_sensitive(True)
+        self.object.cb.set_sensitive(True)
 
         if offset <= 0:
             self.object.eb_prev_page.set_sensitive(False)
@@ -101,6 +102,9 @@ class pager(object):
         if self.screen.models.models and \
             pos == len(self.screen.models.models) - 1 or pos < 0:
             self.object.eb_next.set_sensitive(False)
+
+        if not self.screen.models.models:
+            self.object.cb.set_sensitive(False)
 
     def set_models(self, offset=0, limit=DEFAULT_LIMIT):
         if self.type == 'one2many':
