@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -62,7 +62,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         self.view = view
         self.roots = ids
         self.colors = colors
-        self.color_ids = {}                
+        self.color_ids = {}
         self.context = context
         self.tree = self._node_process(self.roots)
         self.pixbufs = pixbufs
@@ -134,8 +134,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                     x[field] = tools.locale_format('%d', int(x[field]) or 0)
             if self.fields_type[field]['type'] in ('float_time',):
                 for x in res_ids:
-                    val = '%02d:%02d' % (math.floor(abs(x[field])),
-                            round(abs(x[field]) % 1 + 0.01, 2) * 60)
+                    val = datetime_util.float_time_convert(x[field])
                     if x[field] < 0:
                         val = '-' + val
                     x[field] = val
@@ -145,7 +144,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         tree = []
         if self.view.get('field_parent', False):
             res = self._read(ids, self.fields+[self.view['field_parent']])
-            self.color_ids.update(self.get_color(res))                        
+            self.color_ids.update(self.get_color(res))
             for x in res:
                 tree.append( [ x['id'], None, [], x[self.view['field_parent']] ] )
                 tree[-1][1] = [ x[ y ] for y in self.fields]
@@ -195,7 +194,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
             value = list[n][1][column-1]
         else:
             value = list[n][0]
-            
+
         if value==None or (value==False and type(value)==bool):
             res = ''
         else:
@@ -220,7 +219,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         if node==None:                    # added
             return [ (0, self.tree) ]     # added
         node = node[:]
-        (n, list) = node[-1]                 
+        (n, list) = node[-1]
         if list[n][2]==None:
             self._node_expand(list[n])
         if list[n][2]==[]:
@@ -306,7 +305,7 @@ class view_tree(object):
         p.parse(view_info['arch'], self.view)
         self.toolbar = p.toolbar
         self.pixbufs = p.pixbufs
-        self.colors = p.colors        
+        self.colors = p.colors
         self.name = p.title
         self.sel_multi = sel_multi
 
@@ -361,7 +360,7 @@ class view_tree(object):
             return []
         (model, iters) = sel
         return map(lambda x: int(model.get_value(model.get_iter(x), 0)), iters)
-        
+
     def sel_id_get(self):
         sel = self.view.get_selection().get_selected()
         if sel==None:

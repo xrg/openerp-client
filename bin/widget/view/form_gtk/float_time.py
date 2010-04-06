@@ -29,6 +29,7 @@ import locale
 import common
 import interface
 from mx.DateTime import DateTimeDelta
+from tools import datetime_util
 
 class float_time(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
@@ -67,7 +68,7 @@ class float_time(interface.widget_interface):
             return False
         super(float_time, self).display(model, model_field)
         val = model_field.get(model)
-        t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,4) * 60)
+        t= datetime_util.float_time_convert(val)
         if val<0:
             t = '-'+t
         self.widget.set_text(t)

@@ -421,7 +421,7 @@ class Float(Char):
 class FloatTime(Char):
     def get_textual_value(self, model):
         val = model[self.field_name].get_client(model) or 0
-        t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,4) * 60)
+        t= tools.datetime_util.float_time_convert(val)
         if val<0:
             t = '-'+t
         return t
