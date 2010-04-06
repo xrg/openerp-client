@@ -16,6 +16,10 @@ override_dh_auto_install:
 	mv debian/openerp-client/usr/lib/python*/site-packages/openerp-client debian/openerp-client/usr/lib
 	rm -rf debian/openerp-client/usr/lib/python*
 
+	# Adjusting localization names
+	mv debian/openerp-client/usr/share/locale/al debian/openerp-client/usr/share/locale/sq
+	mv debian/openerp-client/usr/share/locale/ua debian/openerp-client/usr/share/locale/uk
+
 	# Removing useless files
 	rm -rf debian/openerp-client/usr/share/doc/openerp-client-*
 
