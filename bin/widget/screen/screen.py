@@ -79,6 +79,8 @@ class Screen(signal_event.signal_event):
         self.create_new = create_new
         self.name = model_name
         self.domain_init = domain
+        self.action_domain = []
+        self.action_domain += domain
         self.latest_search = []
         self.views_preload = views_preload
         self.resource = model_name
@@ -283,6 +285,8 @@ class Screen(signal_event.signal_event):
             for domain in self.latest_search:
                 if domain in self.domain_init:
                     self.domain_init.remove(domain)
+            #append action domain to filter domain
+            self.domain_init += self.action_domain
         if flag == 'mf':
             obj = service.LocalService('action.main')
             act={'name':'Manage Filters',
