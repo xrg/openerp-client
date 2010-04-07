@@ -28,9 +28,8 @@ import gobject
 import tools
 
 class checkbox(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={},screen=None):
-        wid_int.wid_int.__init__(self, name, attrs)
-
+    def __init__(self, name, parent, attrs={}, screen=None):
+        wid_int.wid_int.__init__(self, name, parent, attrs, screen)
         self.widget = gtk.combo_box_entry_new_text()
         self.widget.append_text('')
         self.widget.append_text(_('Yes'))
@@ -39,9 +38,10 @@ class checkbox(wid_int.wid_int):
         self.entry = self.widget.child
         self.entry.set_property('activates_default', True)
         self.entry.set_editable(False)
-        if attrs.get('default',False):
-            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
-            self.widget.child.set_text(value)
+        if self.default_search:
+            if self.default_search == 1:
+                self.default_search = 'Yes'
+            self.widget.child.set_text(self.default_search.capitalize())
 
     def clear(self):
         self.widget.child.set_text('')

@@ -62,6 +62,8 @@ class ModelRecord(signal_event.signal_event):
         self.state_attrs = {}
         self.modified = False
         self.modified_fields = {}
+        self.m2m_cache = {}
+        self.is_m2m_modified = False
         self._concurrency_check_data = False
         for key, val in self.mgroup.mfields.items():
             self.value[key] = val.create(self)
@@ -221,6 +223,8 @@ class ModelRecord(signal_event.signal_event):
             if isinstance(self.mgroup.mfields[fieldname], field.O2MField):
                 later[fieldname]=value
                 continue
+            if isinstance(self.mgroup.mfields[fieldname], field.M2MField):
+                self.m2m_cache.setdefault(fieldname, value or [])
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
         for fieldname, value in later.items():
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)

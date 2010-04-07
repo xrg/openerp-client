@@ -31,7 +31,7 @@ import tools
 class spinint(wid_int.wid_int):
 
     def __init__(self, name, parent, attrs={},screen=None):
-        wid_int.wid_int.__init__(self, name, attrs)
+        wid_int.wid_int.__init__(self, name, parent, attrs, screen)
 
         self.widget = gtk.HBox(spacing=3)
 
@@ -48,9 +48,8 @@ class spinint(wid_int.wid_int):
         self.spin2.set_numeric(True)
         self.spin2.set_activates_default(True)
         self.widget.pack_start(self.spin2, expand=False, fill=True)
-        if attrs.get('default',False):
-            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
-            self._value_set(value)
+        if self.default_search:
+            self.spin1.set_value(self.default_search)
 
     def _value_get(self):
         res = []

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -23,6 +23,7 @@ import time
 from datetime import datetime
 import locale
 import rpc
+import math
 
 from mx.DateTime import RelativeDateTime
 from mx.DateTime import now
@@ -66,7 +67,7 @@ date_mapping = {
 }
 
 def get_date_format():
-    """Return locale date format string. If format string doesn't contain 
+    """Return locale date format string. If format string doesn't contain
     any of the `%Y, %m or %d` then returns default datetime format `%Y/%m/%d`
     """
 
@@ -82,9 +83,9 @@ def get_date_format():
 # RATIONALE BEHIND TIMESTAMP CALCULATIONS AND TIMEZONE MANAGEMENT:
 #  The server side never does any timestamp calculation, always
 #  sends them in a naive (timezone agnostic) format supposed to be
-#  expressed within the server timezone, and expects the clients to 
+#  expressed within the server timezone, and expects the clients to
 #  provide timestamps in the server timezone as well.
-#  It stores all timestamps in the database in naive format as well, 
+#  It stores all timestamps in the database in naive format as well,
 #  which also expresses the time in the server timezone.
 #  For this reason the server makes its timezone name available via the
 #  common/timezone_get() rpc method, which clients need to read
@@ -174,6 +175,17 @@ def local_to_server_timestamp(local_tstamp_str, local_format, server_format,
     """
     return _offset_format_timestamp(local_tstamp_str, local_format, server_format, False,
             tz_offset=tz_offset, ignore_unparsable_time=ignore_unparsable_time)
+
+def float_time_convert(float_val):
+        hours = math.floor(abs(float_val))
+        mins = round(abs(float_val)%1+0.01,2)
+        if mins >= 1.0:
+            hours = hours + 1
+            mins = 0.0
+        else:
+            mins = mins * 60
+        float_time = '%02d:%02d' % (hours,mins)
+        return float_time
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

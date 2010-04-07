@@ -26,8 +26,8 @@ import rpc
 import tools
 
 class selection(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}, model=None,screen=None):
-        wid_int.wid_int.__init__(self, name, parent, attrs)
+    def __init__(self, name, parent, attrs={}, model=None, screen=None):
+        wid_int.wid_int.__init__(self, name, parent, attrs, screen)
 
         self.widget = gtk.combo_box_entry_new_text()
         self.widget.child.set_editable(True)
@@ -36,9 +36,14 @@ class selection(wid_int.wid_int):
         self.name = name
         if 'selection' in attrs:
             self.set_popdown(attrs.get('selection',[]))
-        if attrs.get('default',False):
-            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
-            self._value_set(int(value))
+
+        if self.default_search:
+            if self.attrs['type'] == 'many2one':
+                self._value_set(int(self.default_search))
+            else:
+                self._value_set(str(self.default_search))
+                if self.widget.child.get_text() in self._selection.keys():
+                    self.widget.set_active(self.indexes[self.widget.child.get_text()]-1)
 
     def set_popdown(self, selection):
         self.model = self.widget.get_model()

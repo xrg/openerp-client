@@ -33,7 +33,7 @@ from widget.screen import Screen
 import interface
 import service
 import rpc
-
+from pager import pager
 from modules.gui.window.win_search import win_search
 from widget.view.form_gtk.many2one import dialog
 
@@ -64,6 +64,52 @@ class many2many(interface.widget_interface):
         self.wid_but_remove.connect('clicked', self._sig_remove)
         hb.pack_start(self.wid_but_remove, expand=False, fill=False)
 
+        hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
+
+        self.screen = Screen(attrs['relation'], view_type=['tree'],
+                views_preload=attrs.get('views', {}),
+                row_activate=self.row_activate,
+                limit=pager.DEFAULT_LIMIT)
+        self.screen.signal_connect(self, 'record-message', self._sig_label)
+        self.screen.type = 'many2many'
+        self.model = None
+        self.model_field = None
+        self.name = attrs['name']
+        self.pager = pager(object=self, relation=attrs['relation'], screen=self.screen)
+
+        tooltips = gtk.Tooltips()
+
+        # Button Previous Page
+        self.eb_prev_page = self.pager.create_event_box(tooltips, _('Previous Page'),self._sig_prev_page, 'gtk-goto-first')
+        hb.pack_start(self.eb_prev_page, expand=False, fill=False)
+
+        # Button Previous Record
+        self.eb_pre = self.pager.create_event_box(tooltips, _('Previous Record'),self._sig_previous, 'gtk-go-back')
+        hb.pack_start(self.eb_pre, expand=False, fill=False)
+
+        # Record display
+        self.label = gtk.Label('(0,0)')
+        hb.pack_start(self.label, expand=False, fill=False)
+
+        # Button Next
+        self.eb_next = self.pager.create_event_box(tooltips, _('Next Record'),self._sig_next, 'gtk-go-forward')
+        hb.pack_start(self.eb_next, expand=False, fill=False)
+
+        # Button Next Page
+        self.eb_next_page = self.pager.create_event_box(tooltips, _('Next Page'),self._sig_next_page, 'gtk-goto-last')
+        hb.pack_start(self.eb_next_page, expand=False, fill=False)
+
+        hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
+
+        # LIMIT COMBO
+        self.cb = gtk.combo_box_new_text()
+        for limit in ['20','40','80','All']:
+            self.cb.append_text(limit)
+        self.cb.set_active(0)
+        tooltips.set_tip(self.cb, _('Choose Limit'))
+        self.cb.connect('changed', self.limit_changed)
+        hb.pack_start(self.cb, expand=False, fill=False)
+
         self.widget.pack_start(hb, expand=False, fill=False)
         self.widget.pack_start(gtk.HSeparator(), expand=False, fill=True)
 
@@ -72,21 +118,8 @@ class many2many(interface.widget_interface):
         scroll.set_placement(gtk.CORNER_TOP_LEFT)
         scroll.set_shadow_type(gtk.SHADOW_NONE)
 
-        self.screen = Screen(attrs['relation'], view_type=['tree'],
-                views_preload=attrs.get('views', {}),row_activate=self.row_activate)
-        self.screen.type = 'many2many'
         scroll.add_with_viewport(self.screen.widget)
         self.widget.pack_start(scroll, expand=True, fill=True)
-
-#        self.old = None
-        self.avail_ids = set()
-
-    def check_exist(self):
-        if not len(self.screen.models.models):
-            self.avail_ids.clear()
-        else:
-            for i in self.screen.models.models:
-                self.avail_ids.add(i.id)
 
     def row_activate(self, screen):
         gui_window = service.LocalService('gui.window')
@@ -94,7 +127,10 @@ class many2many(interface.widget_interface):
         dia = dialog(screen.name, id=screen.id_get(), attrs=self.attrs, domain=domain, window=screen.window,context=screen.context,target=False, view_type=['form'])
         if dia.dia.get_has_separator():
             dia.dia.set_has_separator(False)
-        dia.run()
+        ok, value = dia.run()
+        if ok:
+            screen.current_model.validate_set()
+            screen.current_view.set_value()
         dia.destroy()
 
     def destroy(self):
@@ -103,49 +139,45 @@ class many2many(interface.widget_interface):
         del self.widget
 
     def _menu_sig_default(self, obj):
-        res = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['model'], 'default_get', [self.attrs['name']])
-        self.value = res.get(self.attrs['name'], False)
+        res = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['model'], 'default_get', [self.name])
+        self.value = res.get(self.name, False)
 
     def _sig_add(self, *args):
-        flag=False
-        newids=[]
         domain = self._view.modelfield.domain_get(self._view.model)
         context = self._view.modelfield.context_get(self._view.model)
 
-        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
-        ids = map(lambda x: x[0], ids)
-        self.check_exist()
-#        if len(ids)<>1:
+        records = rpc.session.rpc_exec_auth('/object', 'execute',
+                                        self.attrs['relation'], 'name_search',
+                                        self.wid_text.get_text(), domain, 'ilike', context)
+        ids = [oid for oid, _ in records]
         win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain, parent=self._window)
         ids = win.go()
 
         if ids == None:
-            ids=[]
-        if len(self.avail_ids) and len(ids):
-            for i in ids:
-                if i not in self.avail_ids:
-                    newids.append(i)
-                    flag=True
-            if flag==True:
-                ids=newids
-            else:
-                ids=[]
-        self.screen.load(ids)
-        for i in ids:
-            self.avail_ids.add(i)
-        self.screen.display()
+            ids = []
+        if self.name in self.model.m2m_cache:
+            self.model.m2m_cache[self.name] = list(set(self.model.m2m_cache[self.name] + ids))
+        else:
+            self.model.m2m_cache[self.name] = ids
+        self.model.is_m2m_modified = True
         self.wid_text.set_text('')
         self._focus_out()
+        self.pager.reset_pager()
+        self.pager.search_count()
 
     def _sig_remove(self, *args):
-        rem_id=[]
-        self.check_exist()
-        rem_id=self.screen.current_view.sel_ids_get()
-        for i in rem_id:
-            self.avail_ids.remove(i)
+        remove_ids = self.screen.current_view.sel_ids_get()
+        if not remove_ids:
+           return
+        for oid in remove_ids:
+            if oid in self.model.m2m_cache[self.name]:
+                self.model.m2m_cache[self.name].remove(oid)
+        self.model.is_m2m_modified = True
         self.screen.remove()
         self.screen.display()
         self._focus_out()
+        self.pager.reset_pager()
+        self.pager.search_count()
 
     def _sig_activate(self, *args):
         self._sig_add()
@@ -156,21 +188,55 @@ class many2many(interface.widget_interface):
         self.wid_but_remove.set_sensitive(not ro)
         self.wid_but_add.set_sensitive(not ro)
 
+    def limit_changed(self,*args):
+        self.pager.limit_changed()
+
+
+    def _sig_prev_page(self, *args):
+        self.pager.prev_page()
+
+    def _sig_next_page(self, *args):
+        self.pager.next_page()
+
+    def _sig_next(self, *args):
+        _, event = args
+        if event.type == gtk.gdk.BUTTON_PRESS:
+            self.pager.next_record()
+
+
+    def _sig_previous(self, *args):
+        _, event = args
+        if event.type == gtk.gdk.BUTTON_PRESS:
+            self.pager.prev_record()
+
+    def _sig_label(self, screen, signal_data):
+        name = '_'
+        if signal_data[0] >= 0:
+            name = str(signal_data[0] + 1)
+        line = '(%s/%s of %s)' % (name, signal_data[1], signal_data[2])
+        self.label.set_text(line)
+
     def display(self, model, model_field):
+        self.model = model
+        self.model_field = model_field
         super(many2many, self).display(model, model_field)
         ids = []
         if model_field:
             ids = model_field.get_client(model)
-#        if ids<>self.old:
         self.screen.clear()
         self.screen.load(ids)
-#        self.old = ids
-        self.avail_ids.clear()
         self.screen.display()
+        if self.screen.models.models:
+            self.screen.current_models = self.screen.models.models[0]
+        if model and model.id:
+            self.pager.search_count()
+            self.screen.current_view.set_cursor()
+        self.pager.set_sensitivity()
         return True
 
     def set_value(self, model, model_field):
-        model_field.set_client(model, [x.id for x in self.screen.models.models])
+        if self.name in model.m2m_cache:
+            model_field.set_client(model, model.m2m_cache[self.name])
 
     def grab_focus(self):
         return self.wid_text.grab_focus()

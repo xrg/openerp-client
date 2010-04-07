@@ -313,7 +313,7 @@ class form(wid_int.wid_int):
         ww, hw = 640,800
         if self.parent:
             ww, hw = self.parent.size_request()
-
+        self.groupby = []
         self.widget, self.widgets = parser.parse_filter(xml_arch, ww, dom.firstChild, call=call)
         self.rows = 4
         self.focusable = parser.focusable
@@ -377,10 +377,20 @@ class form(wid_int.wid_int):
     def _value_get(self):
         domain = []
         context = {}
+
         for x in self.widgets.values() + self.custom_widgets.values():
             domain += x[0].value.get('domain',[])
-            context.update( x[0].value.get('context',{}) )
-
+            ctx = x[0].value.get('context',{})
+            if ctx.get('group_by', False):
+                if not ctx['group_by'] in self.groupby:
+                    self.groupby.append(ctx['group_by'])
+            elif ctx.get('remove_group',False):
+                if ctx['remove_group'] in self.groupby:
+                    self.groupby.remove(ctx['remove_group'])
+            else:
+                context.update(ctx)
+        if self.groupby:
+            context.update({'group_by':self.groupby})
         if domain:
             if len(domain)>1 and domain[-2] in ['&','|']:
                 if len(domain) == 2:
