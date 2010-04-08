@@ -30,15 +30,13 @@ import tools
 
 class reference(wid_int.wid_int):
     def __init__(self, name, parent, attrs={},screen=None):
-        wid_int.wid_int.__init__(self, name, parent, attrs)
+        wid_int.wid_int.__init__(self, name, parent, attrs, screen)
 
         self.widget = gtk.combo_box_entry_new_text()
         self.widget.child.set_editable(False)
-
         self.set_popdown(attrs.get('selection', []))
-        if attrs.get('default',False):
-            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
-            self._value_set(int(value))
+        if self.default_search:
+                self._value_set(str(self.default_search))
 
     def get_model(self):
         res = self.widget.child.get_text()

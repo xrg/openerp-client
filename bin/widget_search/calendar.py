@@ -39,8 +39,8 @@ LDFMT = tools.datetime_util.get_date_format()
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 class calendar(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={},screen=None):
-        super(calendar, self).__init__(name, parent, attrs)
+    def __init__(self, name, parent, attrs={}, screen=None):
+        super(calendar, self).__init__(name, parent, attrs, screen)
 
         tooltips = gtk.Tooltips()
         self.widget = gtk.HBox(spacing=3)
@@ -85,9 +85,8 @@ class calendar(wid_int.wid_int):
         self.widget.pack_start(self.eb2, expand=False, fill=False)
 
         tooltips.enable()
-        if attrs.get('default',False):
-            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
-            self._value_set(value)
+        if self.default_search:
+            self.entry1.set_text(self.default_search)
 
     def _date_get(self, str):
         try:
@@ -111,10 +110,8 @@ class calendar(wid_int.wid_int):
             val['context'] = eval(self.attrs['context'], {'self': val1, 'self2': val2})
         if not self.attrs.get('domain', False):
             res = []
-            val2 = self._date_get(self.entry1.get_text())
-            if val2:
-                res.append((self.name, '>=', val2))
-            val2 = self._date_get(self.entry2.get_text())
+            if val1:
+                res.append((self.name, '>=', val1))
             if val2:
                 res.append((self.name, '<=', val2))
             val['domain'] = res
@@ -167,7 +164,7 @@ class calendar(wid_int.wid_int):
 
 class datetime(wid_int.wid_int):
     def __init__(self, name, parent, attrs={},screen=None):
-        super(datetime, self).__init__(name, parent, attrs)
+        super(datetime, self).__init__(name, parent, attrs, screen)
 
         tooltips = gtk.Tooltips()
         self.widget = gtk.HBox(spacing=5)
@@ -211,9 +208,8 @@ class datetime(wid_int.wid_int):
         self.eb2.add(img)
         self.widget.pack_start(self.eb2, expand=False, fill=False)
         tooltips.enable()
-        if attrs.get('default',False):
-            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
-            self._value_set(value)
+        if self.default_search:
+            self.entry1.set_text(self.default_search)
 
     def _date_get(self, str):
         try:

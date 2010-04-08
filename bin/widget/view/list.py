@@ -30,6 +30,7 @@ from rpc import RPCProxy
 import service
 import locale
 from interface import parser_view
+from widget.model.record import ModelRecord
 
 class field_record(object):
     def __init__(self, name):
@@ -236,8 +237,8 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         return res
 
     def on_iter_children(self, node):
-        res = getattr(node,'children',[])[0]
-        return res
+        res = getattr(node,'children',[])
+        return res and res[0] or []
 
     def on_iter_n_children(self, node):
         return len(getattr(node,'children',[]))
@@ -269,9 +270,10 @@ class ViewList(parser_view):
         self.widget_tree.screen = screen
         self.reload = False
         self.children = children
-        self.last_col = None
+        self.changed_col = []
         self.tree_editable = False
         self.is_editable = widget.editable
+        self.columns = self.widget_tree.get_columns()
         if children:
             hbox = gtk.HBox()
             self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
@@ -283,7 +285,6 @@ class ViewList(parser_view):
             hbox.show_all()
 
         self.display()
-
         self.widget_tree.connect('button-press-event', self.__contextual_menu)
         self.widget_tree.connect_after('row-activated', self.__sig_switch)
         selection = self.widget_tree.get_selection()
@@ -322,12 +323,8 @@ class ViewList(parser_view):
         data = str(data[0])
         selection.set(selection.target, 8, data)
 
-    def group_by_move(self,model_list,get_id,rec_id,field='sequence'):
-        seq_ids = []
-        for x in range(len(model_list.children.lst)):
-            mod =  model_list.children.lst[x]
-            seq_ids += [mod[field].get(mod)]
-
+    def group_by_move(self, model_list, get_id, rec_id, field='sequence'):
+        seq_ids = map(lambda x: x[field].get(x), model_list.children.lst)
         set_list = list(set(seq_ids))
         l = model_list.children.lst
         if len(seq_ids) != len(set_list):
@@ -362,37 +359,45 @@ class ViewList(parser_view):
         data = eval(selection.data)
         get_id = data[0]
         drop_info = treeview.get_dest_row_at_pos(x, y)
+
         if drop_info:
             path, position = drop_info
-            rec_id = path[0]
+            self.source_group_child = []
+            rec_id = model.on_iter_has_child(model.on_get_iter(path)) and path or path[:-1]
             group_by = self.screen.context.get('group_by',False)
             if group_by:
-                if data[0]==path[0]:
-                    source_models_list = model.models[data[0]]
+                if data and path and data[:-1] == path[:-1] \
+                            and isinstance(model.on_get_iter(data), ModelRecord):
                     if position in (gtk.TREE_VIEW_DROP_BEFORE,
                         gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
-                        p = path[1]
+                        m_path = path[-1]
                     else:
-                        if path[1]:
-                            p = path[1] +1
-                        else:
-                            p =0
-                    self.group_by_move(source_models_list, data[1], p)
+                        m_path = path[-1] + 1
+                    source_models_list = model.on_get_iter(path[:-1])
+                    self.group_by_move(source_models_list, data[-1], m_path)
                 else:
                     source_group = model.on_get_iter(data)
-                    target_group = model.models[rec_id]
-                    if not source_group.list_parent:
-                        source_group_child = source_group.getChildren().lst[:]
+                    target_group = model.on_get_iter(rec_id)
+                    if model.on_iter_has_child(source_group):
+                        def process(parent):
+                            for child in parent.getChildren().lst:
+                                if model.on_iter_has_child(child):
+                                    process(child)
+                                else:
+                                    self.source_group_child.append(child)
+                        process(source_group)
                     else:
-                        source_group_child = [source_group]
-                    self.screen.current_model = source_group_child[0]
-                    target_domain = filter(lambda x: x[0] == group_by, target_group.children.context.get('__domain',[]))[0]
-                    rpc = RPCProxy(source_group_child[0].resource)
-                    rpc.write(map(lambda x:x.id,source_group_child), {target_domain[0]:target_domain[2]})
-                self.reload = True
-                self.screen.reload()
-                self.expand_row((data[0],))
-                self.expand_row((path[0],))
+                        self.source_group_child = [source_group]
+                    if self.source_group_child:
+                        self.screen.current_model = self.source_group_child[0]
+                        target_domain = filter(lambda x: x[0] in group_by, target_group.children.context.get('__domain',[]))
+                        val = {}
+                        map(lambda x:val.update({x[0]:x[2]}),target_domain)
+                        rpc = RPCProxy(self.source_group_child[0].resource)
+                        rpc.write(map(lambda x:x.id,self.source_group_child),val)
+                        self.reload = True
+                        self.screen.reload()
+                treeview.expand_all()
             else:
                 idx = path[0]
                 if position in (gtk.TREE_VIEW_DROP_BEFORE,
@@ -403,8 +408,8 @@ class ViewList(parser_view):
                     model.move(data, idx + 1)
                     rec_id = idx+1
         context.drop_finish(False, etime)
-        if treeview.sequence and drop_info:
-            self.screen.models.set_sequence(get_id,rec_id,field='sequence')
+        if treeview.sequence and drop_info and not group_by:
+            self.screen.models.set_sequence(get_id, rec_id, field='sequence')
 
     def drag_data_delete(self, treeview, context):
         treeview.emit_stop_by_name('drag-data-delete')
@@ -434,9 +439,10 @@ class ViewList(parser_view):
             if (not path) or not path[0]:
                 return False
             m = model.models[path[0][0]]
-            if self.screen.context.get('group_by',False):
+            groupby = self.screen.context.get('group_by',False)
+            if groupby:
                 if not len(path[0])> 1: return False
-                m = m.children[path[0][-1]]
+                m = self.store.on_get_iter(path[0])
             # TODO: add menu cache
             if event.button == 1:
                 # first click on button
@@ -447,8 +453,8 @@ class ViewList(parser_view):
                     if attrs_check and m['state'].get(m) in path[1].attrs['states'].split(','):
                         m.get_button_action(self.screen,m.id,path[1].attrs)
                         self.screen.current_model = m
-                        self.screen.reload()
-                        treeview.screen.reload()
+                    if groupby:
+                        treeview.expand_all()
 
             else:
                 # Here it goes for right click
@@ -532,29 +538,41 @@ class ViewList(parser_view):
 
     def reset(self):
         pass
-    #
-    # self.widget.set_model(self.store) could be removed if the store
-    # has not changed -> better ergonomy. To test
-    #
+
+    def set_column_to_default_pos(self, move_col = False, last_grouped_col = False):
+        if last_grouped_col:
+            prev_col = filter(lambda col: col.name == last_grouped_col, \
+                             self.widget_tree.get_columns())[0]
+            self.widget_tree.move_column_after(move_col, prev_col)
+        else:
+            for col in self.columns:
+                if col == self.columns[0]:prev_col = None
+                self.widget_tree.move_column_after(col, prev_col)
+                prev_col = col
+        self.changed_col.remove(move_col)
+
+    def move_colums(self):
+        if self.screen.context.get('group_by',False):
+            groupby = self.screen.context['group_by']
+            for col in self.columns:
+                if col.name in groupby:
+                    if not col in self.changed_col:
+                        if len(groupby) == 1: base_col = None
+                        else: base_col = self.changed_col[-1]
+                        self.changed_col.append(col)
+                        self.widget_tree.move_column_after(col, base_col)
+                else:
+                    if col in self.changed_col: self.set_column_to_default_pos(col, groupby[-1])
+        else:
+            if self.changed_col: self.set_column_to_default_pos(self.changed_col[-1])
+
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
             if self.screen.context.get('group_by',False):
                 if self.screen.type == 'one2many':
                     self.screen.domain = [('id','in',self.screen.ids_get())]
                 self.screen.models.models.clear()
-                if self.last_col:
-                    self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col)
-                    self.last_col = None
-                for col in self.widget_tree.get_columns():
-                    if col.name == self.screen.context.get('group_by',False):
-                        pos = self.widget_tree.get_columns().index(col) - 1
-                        if not pos == -1:
-                            self.last_col = self.widget_tree.get_column(pos)
-                        self.widget_tree.move_column_after(col,None) # move groupby column at first position
-            else:
-                if self.last_col:
-                    self.widget_tree.move_column_after(self.widget_tree.get_column(0),self.last_col) # move groupby column back to its original position
-                    self.last_col = None
+            self.move_colums()
             self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
             if self.store:
                 self.widget_tree.set_model(self.store)
@@ -662,6 +680,6 @@ class ViewList(parser_view):
         for col in self.widget_tree.get_columns():
             value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
                            {'context':self.screen.context})
-            if col.name == self.screen.context.get('group_by',False):
+            if col.name in self.screen.context.get('group_by',[]):
                 value = False
             col.set_visible(not value)
