@@ -20,17 +20,12 @@
 ##############################################################################
 
 from widget.view import interface
-from tools import ustr, node_attributes
+from tools import node_attributes
 import gtk
 import gtk.glade
 import gettext
 import common
-from datetime import datetime, date
 import rpc
-from SpiffGtkWidgets import Calendar
-from mx import DateTime
-import time
-import math
 import xdot
 import pydot # import pydot or you're not going to get anywhere my friend
 

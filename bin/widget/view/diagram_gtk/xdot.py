@@ -37,11 +37,7 @@ import gtk.keysyms
 import cairo
 import pango
 import pangocairo
-from widget.view.form_gtk import one2many_list
 from widget.view.form_gtk.many2one import dialog
-from widget.model import  record
-from widget.model import group
-import common
 import printer
 
 # See http://www.graphviz.org/pub/scm/graphviz-cairo/plugin/cairo/gvrender_cairo.c
@@ -1730,7 +1726,6 @@ class DotWindow(gtk.Window):
     def __init__(self,window, widget, screen, node_attr, arrow_attr, attrs):
         self.widget = DotWidget()
         self.screen = screen
-        self.parent_model = screen.current_model
         self.node_attr = node_attr
         self.arrow_attr = arrow_attr
         self.widget.connect('clicked', self.on_url_clicked)
