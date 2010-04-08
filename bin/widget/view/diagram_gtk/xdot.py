@@ -46,7 +46,6 @@ import printer
 # - http://mirageiv.berlios.de/
 # - http://comix.sourceforge.net/
 
-
 class Pen:
     """Store pen attributes."""
 
@@ -89,7 +88,6 @@ class Shape:
             return self.highlight_pen
         else:
             return self.pen
-
 
 class TextShape(Shape):
 
@@ -191,7 +189,6 @@ class TextShape(Shape):
             cr.line_to(x+self.w, self.y)
             cr.stroke()
 
-
 class EllipseShape(Shape):
 
     def __init__(self, pen, x0, y0, w, h, filled=False):
@@ -220,7 +217,6 @@ class EllipseShape(Shape):
             cr.set_source_rgba(*pen.color)
             cr.stroke()
 
-
 class PolygonShape(Shape):
 
     def __init__(self, pen, points, filled=False):
@@ -246,7 +242,6 @@ class PolygonShape(Shape):
             cr.set_source_rgba(*pen.color)
             cr.stroke()
 
-
 class LineShape(Shape):
 
     def __init__(self, pen, points):
@@ -264,7 +259,6 @@ class LineShape(Shape):
         cr.set_line_width(pen.linewidth)
         cr.set_source_rgba(*pen.color)
         cr.stroke()
-
 
 class BezierShape(Shape):
 
@@ -293,7 +287,6 @@ class BezierShape(Shape):
             cr.set_source_rgba(*pen.color)
             cr.stroke()
 
-
 class CompoundShape(Shape):
 
     def __init__(self, shapes):
@@ -304,7 +297,6 @@ class CompoundShape(Shape):
         for shape in self.shapes:
             shape.draw(cr, highlight=highlight)
 
-
 class Url(object):
 
     def __init__(self, item, url, highlight=None):
@@ -313,7 +305,6 @@ class Url(object):
         if highlight is None:
             highlight = set([item])
         self.highlight = highlight
-
 
 class Jump(object):
 
@@ -324,7 +315,6 @@ class Jump(object):
         if highlight is None:
             highlight = set([item])
         self.highlight = highlight
-
 
 class Element(CompoundShape):
     """Base class for graph nodes and edges."""
@@ -337,7 +327,6 @@ class Element(CompoundShape):
 
     def get_jump(self, x, y):
         return None
-
 
 class Node(Element):
 
@@ -375,7 +364,6 @@ def square_distance(x1, y1, x2, y2):
     deltay = y2 - y1
     return deltax*deltax + deltay*deltay
 
-
 class Edge(Element):
 
     def __init__(self, src, dst, points, shapes, url):
@@ -405,7 +393,6 @@ class Edge(Element):
         if square_distance(x, y, *self.points[-1]) <= self.RADIUS*self.RADIUS:
             return Jump(self, self.src.x, self.src.y, highlight=set([self, self.src]))
         return None
-
 
 class Graph(Shape):
 
@@ -458,7 +445,6 @@ class Graph(Shape):
             if jump is not None:
                 return jump
         return None
-
 
 class XDotAttrParser:
     """Parser for xdot drawing attributes.
@@ -679,10 +665,8 @@ class XDotAttrParser:
             self.shapes.append(PolygonShape(self.pen, points, filled=True))
         self.shapes.append(PolygonShape(self.pen, points))
 
-
 EOF = -1
 SKIP = -2
-
 
 class ParseError(Exception):
 
@@ -694,7 +678,6 @@ class ParseError(Exception):
 
     def __str__(self):
         return ':'.join([str(part) for part in (self.filename, self.line, self.col, self.msg) if part != None])
-
 
 class Scanner:
     """Stateless scanner."""
@@ -729,7 +712,6 @@ class Scanner:
             c = buf[pos]
             return self.symbols.get(c, None), c, pos + 1
 
-
 class Token:
 
     def __init__(self, type, text, line, col):
@@ -737,7 +719,6 @@ class Token:
         self.text = text
         self.line = line
         self.col = col
-
 
 class Lexer:
 
@@ -823,7 +804,6 @@ class Lexer:
             pos = tabpos + 1
         self.col += len(text) - pos
 
-
 class Parser:
 
     def __init__(self, lexer):
@@ -847,7 +827,6 @@ class Parser:
         self.lookahead = self.lexer.next()
         return token
 
-
 ID = 0
 STR_ID = 1
 HTML_ID = 2
@@ -869,7 +848,6 @@ DIGRAPH = 15
 NODE = 16
 EDGE = 17
 SUBGRAPH = 18
-
 
 class DotScanner(Scanner):
 
@@ -898,7 +876,6 @@ class DotScanner(Scanner):
         # Edge operators
         (EDGE_OP, r'-[>-]', False),
     ]
-
     # symbol table
     symbols = {
         '[': LSQUARE,
@@ -911,7 +888,6 @@ class DotScanner(Scanner):
         '=': EQUAL,
         '+': PLUS,
     }
-
     # literal table
     literals = {
         'strict': STRICT,
@@ -924,7 +900,6 @@ class DotScanner(Scanner):
 
     ignorecase = True
 
-
 class DotLexer(Lexer):
 
     scanner = DotScanner()
@@ -933,7 +908,6 @@ class DotLexer(Lexer):
         # TODO: handle charset
         if type == STR_ID:
             text = text[1:-1]
-
             # line continuations
             text = text.replace('\\\r\n', '')
             text = text.replace('\\\r', '')
@@ -943,7 +917,6 @@ class DotLexer(Lexer):
             text = text.replace('\\n', '\n')
             text = text.replace('\\t', '\t')
             text = text.replace('\\', '')
-
             type = ID
 
         elif type == HTML_ID:
@@ -951,7 +924,6 @@ class DotLexer(Lexer):
             type = ID
 
         return type, text
-
 
 class DotParser(Parser):
 
@@ -1073,7 +1045,6 @@ class DotParser(Parser):
     def handle_edge(self, src_id, dst_id, attrs):
         pass
 
-
 class XDotParser(DotParser):
 
     def __init__(self, xdotcode):
@@ -1106,7 +1077,6 @@ class XDotParser(DotParser):
 
             self.width = xmax - xmin
             self.height = ymax - ymin
-
             self.top_graph = False
 
         for attr in ("_draw_", "_ldraw_", "_hdraw_", "_tdraw_", "_hldraw_", "_tldraw_"):
@@ -1154,7 +1124,6 @@ class XDotParser(DotParser):
 
     def parse(self):
         DotParser.parse(self)
-
         return Graph(self.width, self.height, self.shapes, self.nodes, self.edges)
 
     def parse_node_pos(self, pos):
@@ -1180,7 +1149,6 @@ class XDotParser(DotParser):
         y = (y + self.yoffset)*self.yscale
         return x, y
 
-
 class Animation(object):
 
     step = 0.03 # seconds
@@ -1201,7 +1169,6 @@ class Animation(object):
     def tick(self):
         self.stop()
 
-
 class NoAnimation(Animation):
 
     def start(self):
@@ -1209,7 +1176,6 @@ class NoAnimation(Animation):
 
     def stop(self):
         pass
-
 
 class LinearAnimation(Animation):
 
@@ -1227,7 +1193,6 @@ class LinearAnimation(Animation):
     def animate(self, t):
         pass
 
-
 class MoveToAnimation(LinearAnimation):
 
     def __init__(self, dot_widget, target_x, target_y):
@@ -1243,7 +1208,6 @@ class MoveToAnimation(LinearAnimation):
         self.dot_widget.x = self.source_x # tx * t + sx * (1-t)
         self.dot_widget.y = self.source_y #ty * t + sy * (1-t)
         self.dot_widget.queue_draw()
-
 
 class ZoomToAnimation(MoveToAnimation):
 
@@ -1269,7 +1233,6 @@ class ZoomToAnimation(MoveToAnimation):
         self.dot_widget.zoom_ratio = c*t + b*t*(1-t) + a*(1-t)
         self.dot_widget.zoom_to_fit_on_resize = False
         MoveToAnimation.animate(self, t)
-
 
 class DragAction(object):
 
@@ -1312,7 +1275,6 @@ class DragAction(object):
     def abort(self):
         pass
 
-
 class NullAction(DragAction):
 
     def on_motion_notify(self, event):
@@ -1331,7 +1293,6 @@ class NullAction(DragAction):
             dot_widget.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.ARROW))
             dot_widget.set_highlight(None)
 
-
 class PanAction(DragAction):
 
     def start(self):
@@ -1347,7 +1308,6 @@ class PanAction(DragAction):
 
     abort = stop
 
-
 class ZoomAction(DragAction):
 
     def drag(self, deltax, deltay):
@@ -1357,7 +1317,6 @@ class ZoomAction(DragAction):
 
     def stop(self):
         self.dot_widget.queue_draw()
-
 
 class ZoomAreaAction(DragAction):
 
@@ -1414,7 +1373,6 @@ class DotWidget(gtk.DrawingArea):
         self.connect("motion-notify-event", self.on_area_motion_notify)
         self.connect("scroll-event", self.on_area_scroll_event)
         self.connect("size-allocate", self.on_area_size_allocate)
-
         self.connect('key-press-event', self.on_key_press_event)
 
         self.x, self.y = 0.0, 0.0
@@ -1706,7 +1664,6 @@ class DotWidget(gtk.DrawingArea):
         x, y = self.window2graph(x, y)
         return self.graph.get_jump(x, y)
 
-
 class DotWindow(gtk.Window):
 
     ui = '''
@@ -1856,8 +1813,6 @@ class DotWindow(gtk.Window):
         ok = self.dia_select.run()
         return True
 
-
-
     def on_node_create(self,event):
         dia = dialog(self.node_attr.get('object',False), id=None, view_ids=[self.node_attr.get('form_view_ref',None)], context= self.screen.context, target=False, view_type=['form'])
         if dia.dia.get_has_separator():
@@ -1880,18 +1835,6 @@ class DotWindow(gtk.Window):
         dia.destroy()
         return True
 
-#    def update(self, filename):
-#        import os
-#        if not hasattr(self, "last_mtime"):
-#            self.last_mtime = None
-#
-#        current_mtime = os.stat(filename).st_mtime
-#        if current_mtime != self.last_mtime:
-#            self.last_mtime = current_mtime
-#            self.open_file(filename)
-#
-#        return True
-
     def set_filter(self, filter):
         self.widget.set_filter(filter)
 
@@ -1907,41 +1850,4 @@ class DotWindow(gtk.Window):
             self.set_title(os.path.basename(filename) + ' - Dot Viewer')
             self.widget.zoom_to_fit()
 
-#    def open_file(self, filename):
-#        try:
-#            fp = file(filename, 'rt')
-#            self.set_dotcode(fp.read(), filename)
-#            fp.close()
-#        except IOError, ex:
-#            dlg = gtk.MessageDialog(type=gtk.MESSAGE_ERROR,
-#                                    message_format=str(ex),
-#                                    buttons=gtk.BUTTONS_OK)
-#            dlg.set_title('Dot Viewer')
-#            dlg.run()
-#            dlg.destroy()
-#
-#    def on_open(self, action):
-#        chooser = gtk.FileChooserDialog(title="Open dot File",
-#                                        action=gtk.FILE_CHOOSER_ACTION_OPEN,
-#                                        buttons=(gtk.STOCK_CANCEL,
-#                                                 gtk.RESPONSE_CANCEL,
-#                                                 gtk.STOCK_OPEN,
-#                                                 gtk.RESPONSE_OK))
-#        chooser.set_default_response(gtk.RESPONSE_OK)
-#        filter = gtk.FileFilter()
-#        filter.set_name("Graphviz dot files")
-#        filter.add_pattern("*.dot")
-#        chooser.add_filter(filter)
-#        filter = gtk.FileFilter()
-#        filter.set_name("All files")
-#        filter.add_pattern("*")
-#        chooser.add_filter(filter)
-#        if chooser.run() == gtk.RESPONSE_OK:
-#            filename = chooser.get_filename()
-#            chooser.destroy()
-#            self.open_file(filename)
-#        else:
-#            chooser.destroy()
-#
-#    def on_reload(self, action):
-#        self.widget.reload()
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
