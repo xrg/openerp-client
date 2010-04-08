@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -29,6 +29,7 @@ import locale
 import common
 import interface
 from mx.DateTime import DateTimeDelta
+from tools import datetime_util
 
 class float_time(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
@@ -67,7 +68,7 @@ class float_time(interface.widget_interface):
             return False
         super(float_time, self).display(model, model_field)
         val = model_field.get(model)
-        t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,4) * 60)
+        t= datetime_util.float_time_convert(val)
         if val<0:
             t = '-'+t
         self.widget.set_text(t)
@@ -77,7 +78,7 @@ class float_time(interface.widget_interface):
         self.widget.set_sensitive(not value)
 
     def grab_focus(self):
-        return self.entry.grab_focus()
+        return self.widget.grab_focus()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

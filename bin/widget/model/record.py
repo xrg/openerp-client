@@ -62,6 +62,8 @@ class ModelRecord(signal_event.signal_event):
         self.state_attrs = {}
         self.modified = False
         self.modified_fields = {}
+        self.m2m_cache = {}
+        self.is_m2m_modified = False
         self._concurrency_check_data = False
         for key, val in self.mgroup.mfields.items():
             self.value[key] = val.create(self)
@@ -135,7 +137,9 @@ class ModelRecord(signal_event.signal_event):
                     return self.id
                 value = self.get(get_readonly=False, get_modifiedonly=True)
                 context = self.context_get().copy()
-                self.rpc.write([self.id], value, context)
+                res = self.rpc.write([self.id], value, context)
+                #if type(res) in (int, long):
+                #    self.id = res
         except Exception, e:
             if hasattr(e, 'faultCode') and e.faultCode.find('ValidateError')>-1:
                 self.failed_validation()
@@ -219,6 +223,8 @@ class ModelRecord(signal_event.signal_event):
             if isinstance(self.mgroup.mfields[fieldname], field.O2MField):
                 later[fieldname]=value
                 continue
+            if isinstance(self.mgroup.mfields[fieldname], field.M2MField):
+                self.m2m_cache.setdefault(fieldname, value or [])
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
         for fieldname, value in later.items():
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
@@ -342,7 +348,8 @@ class ModelRecord(signal_event.signal_event):
                     )
 
                     if type(result)==type({}):
-                        screen.window.destroy()
+                        if not result.get('nodestroy', False):
+                            screen.window.destroy()
                         datas = {}
                         obj = service.LocalService('action.main')
                         obj._exec_action(result, datas, context=screen.context)

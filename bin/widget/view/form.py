@@ -488,12 +488,13 @@ class ViewForm(parser_view):
         model = self.screen.current_model
         position = 0
         position = len(self.widgets)
-
         if model:
             for widgets in self.widgets.values():
                 modelfield = model.mgroup.mfields.get(widgets.widget_name, None)
                 if not modelfield:
                     continue
+                if modelfield.get_state_attrs(model).get('default_focus',False):
+                    focus_widget = widgets
                 if not modelfield.get_state_attrs(model).get('valid', True):
                      if widgets.widget.position > position:
                           continue

@@ -272,6 +272,8 @@ class Char(object):
 
         if not model.list_parent and self.treeview.screen.context.get('group_by',False):
             cell.set_property('background', 'grey')
+            cell.set_property('foreground','blue')
+
         elif self.treeview.editable:
             field = model[self.field_name]
             cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
@@ -419,7 +421,7 @@ class Float(Char):
 class FloatTime(Char):
     def get_textual_value(self, model):
         val = model[self.field_name].get_client(model) or 0
-        t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,4) * 60)
+        t= tools.datetime_util.float_time_convert(val)
         if val<0:
             t = '-'+t
         return t
