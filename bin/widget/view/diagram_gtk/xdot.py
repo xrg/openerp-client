@@ -38,6 +38,7 @@ import cairo
 import pango
 import pangocairo
 from widget.view.form_gtk import one2many_list
+from widget.view.form_gtk.many2one import dialog
 from widget.model import  record
 from widget.model import group
 import common
@@ -1799,34 +1800,22 @@ class DotWindow(gtk.Window):
     def edit_data(self):
         self.dia_select.destroy()
         if self.url.split('_')[-1] == 'node':
-            group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields={}, parent=self.parent_model, context=rpc.session.context)
-            current_model = record.ModelRecord(self.node_attr.get('object',False), id=int(self.url.split('_')[-2]), parent=self.parent_model, group=group_cur )
-            dia = one2many_list.dialog(self.node_attr.get('object',False), parent=self.parent_model, model=current_model, window=self.window_new, attrs=self.attrs['node'])
+            dia = dialog(self.node_attr.get('object',False), id=int(self.url.split('_')[-2]), view_ids=[self.node_attr.get('form_view_ref',None)], context= self.screen.context, target=False, view_type=['form'])
+            if dia.dia.get_has_separator():
+                dia.dia.set_has_separator(False)
             ok, value = dia.run()
             if ok:
-                modify_value = value.modified_fields
-                for key,val in modify_value.items():
-                    modify_value[key] = value.value[key]
-                    if type(value.value[key]) in [type([]), type(())]:
-                        modify_value[key] = value.value[key][0]
-                rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False),
-                            'write', [int(self.url.split('_')[-2])], modify_value)
-                self.screen.reload()
+                self.screen.current_model.validate_set()
+                self.screen.current_view.set_value()
             dia.destroy()
         elif self.url.split('_')[-1] == 'edge':
-            group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields={}, parent=self.parent_model, context=rpc.session.context)
-            current_model = record.ModelRecord(self.arrow_attr.get('object',False), id=int(self.url.split('_')[-2]), parent=self.parent_model, group=group_cur )
-            dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent=self.parent_model, model=current_model, window=self.window_new, attrs= self.attrs['arrow'])
+            dia = dialog(self.arrow_attr.get('object',False), id=int(self.url.split('_')[-2]), view_ids=[self.arrow_attr.get('form_view_ref',None)], context= self.screen.context, target=False, view_type=['form'])
+            if dia.dia.get_has_separator():
+                dia.dia.set_has_separator(False)
             ok, value = dia.run()
             if ok:
-                modify_value = value.modified_fields
-                for key,val in modify_value.items():
-                    modify_value[key] = value.value[key]
-                    if type(value.value[key]) in [type([]), type(())]:
-                        modify_value[key] = value.value[key][0]
-                rpc.session.rpc_exec_auth('/object', 'execute', self.arrow_attr.get('object',False),
-                            'write', [int(self.url.split('_')[-2])], modify_value)
-                self.screen.reload()
+                self.screen.current_model.validate_set()
+                self.screen.current_view.set_value()
             dia.destroy()
 
     def on_url_clicked(self, widget, url, event):
@@ -1875,33 +1864,24 @@ class DotWindow(gtk.Window):
 
 
     def on_node_create(self,event):
-        group_cur = group.ModelRecordGroup(self.node_attr.get('object',False),fields={}, parent=self.parent_model, context=rpc.session.context)
-        current_model = record.ModelRecord(self.node_attr.get('object',False), id=self.screen.current_model.id, parent=self.parent_model, group=group_cur )
-        dia = one2many_list.dialog(self.node_attr.get('object',False), parent=self.parent_model, model=None, window=self.window_new, attrs=self.attrs['node'])
+        dia = dialog(self.node_attr.get('object',False), id=None, view_ids=[self.node_attr.get('form_view_ref',None)], context= self.screen.context, target=False, view_type=['form'])
+        if dia.dia.get_has_separator():
+            dia.dia.set_has_separator(False)
         ok, value = dia.run()
         if ok:
-            value.value['wkf_id']=self.id
-            rpc.session.rpc_exec_auth('/object',
-                                      'execute',
-                                      self.node_attr.get('object',False),
-                                      'create',value.value)
-            self.screen.reload()
+            self.screen.current_model.validate_set()
+            self.screen.current_view.set_value()
         dia.destroy()
         return True
 
     def on_edge_create(self,event):
-        group_cur = group.ModelRecordGroup(self.arrow_attr.get('object',False),fields={}, parent=self.parent_model, context=rpc.session.context)
-        current_model = record.ModelRecord(self.arrow_attr.get('object',False), id=self.screen.current_model.id, parent=self.parent_model, group=group_cur )
-        dia = one2many_list.dialog(self.arrow_attr.get('object',False), parent=self.parent_model, model=None, window=self.window_new, attrs=self.attrs['arrow'])
+        dia = dialog(self.arrow_attr.get('object',False), id=None, view_ids=[self.arrow_attr.get('form_view_ref',None)], context= self.screen.context, target=False, view_type=['form'])
+        if dia.dia.get_has_separator():
+            dia.dia.set_has_separator(False)
         ok, value = dia.run()
         if ok:
-            cre_value = value.value
-            for key,val in cre_value.items():
-                if type(cre_value[key]) in [type([]), type(())]:
-                    cre_value[key] = cre_value[key][0]
-            rpc.session.rpc_exec_auth('/object', 'execute', self.arrow_attr.get('object',False),
-                        'create',cre_value)
-            self.screen.reload()
+            self.screen.current_model.validate_set()
+            self.screen.current_view.set_value()
         dia.destroy()
         return True
 

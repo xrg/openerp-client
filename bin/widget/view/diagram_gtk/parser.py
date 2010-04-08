@@ -98,27 +98,24 @@ class parser_diagram(interface.parser_interface):
         for node in root_node.childNodes:
             node_attrs = node_attributes(node)
             if node.localName == 'node':
-                node_fields = []
-                for child in node._get_childNodes():
-                    if node_attributes(child) and node_attributes(child).get('name',False):
-                        node_fields.append(node_attributes(child)['name'])
-                fields = rpc.session.rpc_exec_auth('/object', 'execute', node_attrs.get('object',False), 'fields_get',node_fields)
-                for key,val in fields.items():
-                    fields[key]['name'] = key
-                attrs['node'] = {'string' :node_attributes(root_node).get('string',False), 'views':{'form': {'fields': fields,'arch' : node.toxml('utf-8').replace('node','form')}}}
                 node_attr = node_attrs
             if node.localName == 'arrow':
-                arrow_fields = []
-                for child in node._get_childNodes():
-                    if node_attributes(child) and node_attributes(child).get('name',False):
-                        arrow_fields.append(node_attributes(child)['name'])
-                fields = rpc.session.rpc_exec_auth('/object', 'execute', node_attrs.get('object',False), 'fields_get',arrow_fields)
-                for key,val in fields.items():
-                    fields[key]['name'] = key
-                attrs['arrow'] = {'string' :node_attributes(root_node).get('string',False), 'views':{'form': {'fields': fields,'arch' : node.toxml('utf-8').replace('arrow','form')}}}
                 arrow_attr = node_attrs
+        if node_attr.get('form_view_ref',False):
+            view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'search' ,[('name','=', node_attr.get('form_view_ref',''))])
+            view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'read' ,view_id, ['res_id'])
+            print "view_id and view_id[0]['res_id']:",view_id and view_id[0]['res_id']
+            node_attr['form_view_ref'] = view_id and view_id[0]['res_id']
+        else:
+            node_attr['form_view_ref'] = None
+        if arrow_attr.get('form_view_ref',False):
+            view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'search' ,[('name','=', arrow_attr.get('form_view_ref',''))])
+            view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'read' ,view_id, ['res_id'])
+            arrow_attr['form_view_ref'] = view_id and view_id[0]['res_id']
+        else:
+            arrow_attr['form_view_ref'] = None
         view = Viewdiagram(self.window, model, node_attr, arrow_attr, attrs,self.screen)
         return view, {}, [], ''
-
+    
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
