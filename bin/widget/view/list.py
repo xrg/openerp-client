@@ -269,6 +269,7 @@ class ViewList(parser_view):
         self.widget.pack_start(scroll, expand=True, fill=True)
         self.widget_tree.screen = screen
         self.reload = False
+        children = dict(sorted(children.items(), lambda x, y: cmp(x[0], y[0])))
         self.children = children
         self.changed_col = []
         self.tree_editable = False

@@ -79,7 +79,9 @@ class dialog(object):
         vp = gtk.Viewport()
         vp.set_shadow_type(gtk.SHADOW_NONE)
         scroll.add(vp)
-        self.screen = Screen(model_name, view_type=['form'], parent=parent, window=self.dia, readonly=readonly, context=context)
+        self.screen = Screen(model_name, view_type=[], parent=parent,
+                             window=self.dia, readonly=readonly,
+                             context=context)
         self.screen.models._context.update(model_ctx)
         if not model:
             model = self.screen.new(context=context)
@@ -89,8 +91,11 @@ class dialog(object):
         if ('views' in attrs) and ('form' in attrs['views']):
             arch = attrs['views']['form']['arch']
             fields = attrs['views']['form']['fields']
-            self.screen.add_view(arch, fields, display=True,
-                    context=context)
+            self.screen.add_view(arch, fields, display=True, context=context)
+        else:
+            self.screen.add_view_id(False, 'form', display=True,
+                                    context=context)
+
         vp.add(self.screen.widget)
         x,y = self.screen.screen_container.size_get()
         vp.set_size_request(x,y+30)
