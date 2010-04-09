@@ -21,6 +21,7 @@
 
 import gobject
 import gtk
+import tools
 
 import gettext
 
@@ -66,10 +67,12 @@ class many2many(interface.widget_interface):
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
+        self.context = tools.expr_eval(attrs.get('context',"{}"))
+
         self.screen = Screen(attrs['relation'], view_type=['tree'],
                 views_preload=attrs.get('views', {}),
                 row_activate=self.row_activate,
-                limit=pager.DEFAULT_LIMIT)
+                limit=pager.DEFAULT_LIMIT, context=self.context)
         self.screen.signal_connect(self, 'record-message', self._sig_label)
         self.screen.type = 'many2many'
         self.model = None

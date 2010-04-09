@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-04-06 04:36+0000\n"
+"PO-Revision-Date: 2010-04-08 07:55+0000\n"
 "Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-07 03:46+0000\n"
+"X-Launchpad-Export-Date: 2010-04-09 03:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
-msgstr "印刷作業フロー(複合)"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
 msgstr "印刷作業フロー"
+
+#: bin/plugins/__init__.py:29
+msgid "Print Workflow (Complex)"
+msgstr "印刷作業フロー(複合)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
@@ -53,7 +53,7 @@ msgstr "選択すべき構成ファイル明細"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr "基本的なデバッグを可能にしてください。 別名、'--ログレベルはデバッグと等しいです'。"
+msgstr ""
 
 #: bin/options.py:111
 #, python-format
@@ -189,21 +189,6 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
-"\n"
-"<b>不明なエラーが報告されています。</b>\n"
-"<b>あなたの維持契約では、あなたのシステムにインストールされたすべてのモジュールをカバーしていません！</b>\n"
-"あなたが生産においてオープンERPを使っているならば、契約を更新する事をお勧めします。\n"
-"\n"
-"もしあなたがあなた自身でモジュールを開発するか、または第三者のモジュールをインストールしたなら、\n"
-"私たちはこれらのモジュールのために、追加の維持契約をあなたに提供できます。\n"
-"あなたのモジュールを見直した後に、\n"
-"当社の品質チームが、OpenERPの将来のバージョンに追加費用なしで移行することを保障します。\n"
-"\n"
-"ここに、あなたの維持契約でカバーされなかったモジュールのリストがあります:\n"
-"%s\n"
-"\n"
-"あなたの詳細については、bellowリンクを使用する事ができます。 \n"
-"エラーの詳細は2番目のタブに表示されます。"
 
 #: bin/common/common.py:443
 msgid ""
@@ -220,9 +205,6 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
-"あなたの問題は、品質チームに送ることができませんでした\n"
-"以下から手動で、このエラーを報告してください:\n"
-"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
@@ -581,12 +563,10 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
-"インタフェースの既定言語が変更されました,\\n\r\n"
-"変更を反映させるためには、クライアントの再起動を忘れないでください。"
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr "既定言語が修正されました！"
+msgstr ""
 
 #: bin/modules/gui/main.py:87 bin/modules/gui/main.py:436
 #: bin/modules/gui/main.py:1445
@@ -624,15 +604,15 @@ msgstr "しばらくお待ちください。この操作にはしばらく時間
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr "移行用スクリプト"
+msgstr ""
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr "契約ID："
+msgstr ""
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr "契約パスワード："
+msgstr ""
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
@@ -1170,11 +1150,11 @@ msgstr "データベースの削除(_P)"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr "移行コードダウンロード(_D)"
+msgstr ""
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr "データベースの移行(_M)"
+msgstr ""
 
 #: bin/openerp.glade:405
 msgid "Administrator Password"
@@ -1426,7 +1406,7 @@ msgstr "このリソース削除"
 
 #: bin/openerp.glade:1287
 msgid "Go to previous matched search"
-msgstr "前を検索"
+msgstr ""
 
 #: bin/openerp.glade:1298
 msgid "Go to next matched resource"
@@ -1535,16 +1515,6 @@ msgid ""
 "\n"
 "More Info on www.openerp.com !"
 msgstr ""
-"\n"
-"OpenERP--GTK Client - バージョン%s\n"
-"\n"
-"OpenERPは中小企業のためのオープンソース ERP+CRMです。\n"
-"\n"
-"全体のソースコードはGNU Public Licenceに関する諸条件で分配されます。\n"
-"\n"
-"(c) 2003-TODAY、Tiny sprl\n"
-"\n"
-"より多くの情報が、www.openerp.com上にあります !"
 
 #: bin/openerp.glade:1880
 msgid "_OpenERP"
@@ -1565,18 +1535,6 @@ msgid ""
 "Mail: sales@tiny.be\n"
 "Web: http://tiny.be"
 msgstr ""
-"\n"
-"(c) 2003-TODAY - Tiny sprl\n"
-"OpenERPはTiny sprlの製品です:\n"
-"\n"
-"Tiny sprl\n"
-"40 Chaussée de Namur\n"
-"1367 Gérompont\n"
-"ベルギー\n"
-"\n"
-"電話番号 : (+32)81.81.37.00\n"
-"メールアドレス: sales@tiny.be\n"
-"Web: http://tiny.be"
 
 #: bin/openerp.glade:1939
 msgid "_Contact"
@@ -1656,11 +1614,11 @@ msgstr "<b>定義図エクスポート</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr "インポートの互換性があります"
+msgstr ""
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr "<b>エクスポートするためにオプションを選択してください</b>"
+msgstr ""
 
 #: bin/openerp.glade:2871
 msgid "Available Fields"
@@ -1953,7 +1911,7 @@ msgstr "前の編集可能なウィジェット"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr "<Shift> + <Tab>キー"
+msgstr ""
 
 #: bin/openerp.glade:5400
 msgid "Next editable widget"
@@ -2219,11 +2177,11 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr "後で接続"
+msgstr ""
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr "今すぐ接続"
+msgstr ""
 
 #: bin/openerp.glade:7843
 msgid "Extension Manager"
@@ -2340,12 +2298,10 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
-"私たちが<b><span foreground=\\\"red\\\"><i>Open</i></span> ERP</b>を改良して、\r\n"
-"新しい開発をよりよくするのを助けるために、以下のフォームに記入してください。"
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr "<b>会社</b>"
+msgstr ""
 
 #: bin/dia_survey.glade:84
 msgid "Open Source:"
@@ -2365,7 +2321,7 @@ msgstr "役職"
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr "従業員:"
+msgstr ""
 
 #: bin/dia_survey.glade:546
 msgid "Country:"
@@ -2373,7 +2329,7 @@ msgstr "国:"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr "市"
+msgstr ""
 
 #: bin/dia_survey.glade:586
 msgid "System:"
@@ -2389,15 +2345,15 @@ msgstr "ここを知ったきっかけ:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr "私たちは、OpenERPを使用するのを計画しています。"
+msgstr ""
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr "私たちは、OpenERPでサービスを提供するのを計画しています。"
+msgstr ""
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
-msgstr "なぜOpenERPを試みるのか、そして、何が現在のソフトウェアであるか私たちに言ってください:"
+msgstr ""
 
 #: bin/dia_survey.glade:790
 msgid "<b>Keep Informed</b>"
@@ -2405,7 +2361,7 @@ msgstr ""
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr "メールでOpenERP ebook(PDF)を受け取りたいと思います。"
+msgstr ""
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
@@ -2413,7 +2369,7 @@ msgstr "電話/携帯 :"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr "メール:"
+msgstr ""
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
@@ -2421,11 +2377,11 @@ msgstr "お名前"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr "gtk-キャンセル"
+msgstr ""
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr "gtk-ok"
+msgstr ""
 
 #~ msgid "# Employees:"
 #~ msgstr "従業員"

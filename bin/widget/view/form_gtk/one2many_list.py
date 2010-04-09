@@ -37,14 +37,14 @@ import tools
 
 class dialog(object):
     def __init__(self, model_name, parent, model=None, attrs=None, model_ctx=None,
-            window=None, default_get_ctx=None, readonly=False):
+            window=None, context=None, readonly=False):
 
         if attrs is None:
             attrs = {}
         if model_ctx is None:
             model_ctx = {}
-        if default_get_ctx is None:
-            default_get_ctx = {}
+        if context is None:
+            context = {}
 
         if not window:
             window = service.LocalService('gui.main').window
@@ -68,7 +68,7 @@ class dialog(object):
         self.but_ok = self.dia.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
         self.but_ok.add_accelerator('clicked', self.accel_group, gtk.keysyms.Return, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
-        self.default_get_ctx = default_get_ctx
+        self.context = context
 
         scroll = gtk.ScrolledWindow()
         scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
@@ -79,22 +79,23 @@ class dialog(object):
         vp = gtk.Viewport()
         vp.set_shadow_type(gtk.SHADOW_NONE)
         scroll.add(vp)
-
-        self.screen = Screen(model_name, view_type=[], parent=parent, window=self.dia, readonly=readonly)
+        self.screen = Screen(model_name, view_type=[], parent=parent,
+                             window=self.dia, readonly=readonly,
+                             context=context)
         self.screen.models._context.update(model_ctx)
         if not model:
-            model = self.screen.new(context=default_get_ctx)
+            model = self.screen.new(context=context)
         else:
             self.screen.models.model_add(model)
         self.screen.current_model = model
         if ('views' in attrs) and ('form' in attrs['views']):
             arch = attrs['views']['form']['arch']
             fields = attrs['views']['form']['fields']
-            self.screen.add_view(arch, fields, display=True,
-                    context=default_get_ctx)
+            self.screen.add_view(arch, fields, display=True, context=context)
         else:
             self.screen.add_view_id(False, 'form', display=True,
-                    context=default_get_ctx)
+                                    context=context)
+
         vp.add(self.screen.widget)
         x,y = self.screen.screen_container.size_get()
         vp.set_size_request(x,y+30)
@@ -103,7 +104,7 @@ class dialog(object):
         self.screen.display()
 
     def new(self):
-        model = self.screen.new(context=self.default_get_ctx)
+        model = self.screen.new(context=self.context)
         self.screen.models.model_add(model)
         self.screen.current_model = model
         return True
@@ -159,19 +160,20 @@ class one2many_list(interface.widget_interface):
 
         tooltips = gtk.Tooltips()
 
+        if self.context.get('group_by',False):
+            self.context['group_by'] = [self.context['group_by']]
+
         self.screen = Screen(attrs['relation'],
                             view_type=attrs.get('mode','tree,form').split(','),
                             parent=self.parent, views_preload=attrs.get('views', {}),
                             tree_saves=attrs.get('saves', False),
                             create_new=True,
+                            context=self.context,
                             row_activate=self._on_activate,
                             default_get=attrs.get('default_get', {}),
                             window=self._window, readonly=self._readonly, limit=pager.DEFAULT_LIMIT)
 
         self.screen.type = 'one2many'
-        if self.context.get('group_by',False):
-            self.context['group_by'] = [self.context['group_by']]
-        self.screen.context.update(self.context)
 
         self.pager = pager(object=self, relation=attrs['relation'], screen=self.screen)
 
@@ -277,8 +279,7 @@ class one2many_list(interface.widget_interface):
 
     def _sig_new(self, *args):
         _, event = args
-        ctx = self._view.model.expr_eval(self.screen.default_get)
-        ctx.update(self._view.model.expr_eval('dict(%s)' % self.attrs.get('context', '')))
+        ctx = dict(self._view.model.expr_eval(self.screen.default_get), **self.context)
         if event.type in (gtk.gdk.BUTTON_PRESS, gtk.gdk.KEY_PRESS):
             if (self.screen.current_view.view_type=='form') or self.screen.editable_get():
                 self.screen.new(context=ctx)
@@ -286,7 +287,7 @@ class one2many_list(interface.widget_interface):
                 self.screen.current_view.widget.set_sensitive(True)
             else:
                 ok = 1
-                dia = dialog(self.attrs['relation'], parent=self._view.model, attrs=self.attrs, model_ctx=self.screen.models._context, default_get_ctx=ctx, window=self._window, readonly=self._readonly)
+                dia = dialog(self.attrs['relation'], parent=self._view.model, attrs=self.attrs, model_ctx=self.screen.models._context, window=self._window, readonly=self._readonly, context=ctx)
                 while ok:
                     ok, value = dia.run()
                     if ok:
@@ -299,7 +300,7 @@ class one2many_list(interface.widget_interface):
 
     def _sig_edit(self, *args):
         if self.screen.current_model:
-            dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly)
+            dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly, context=self.context)
             ok, value = dia.run()
             dia.destroy()
 

@@ -124,6 +124,8 @@ class form(object):
             self.handlers['radio_graph'] =  self.sig_switch_graph
         if 'calendar' in view_type:
             self.handlers['radio_calendar'] =  self.sig_switch_calendar
+        if 'diagram' in view_type:
+            self.handlers['radio_diagram'] =  self.sig_switch_diagram
         if res_id:
             if isinstance(res_id, (int, long,)):
                 res_id = [res_id]
@@ -136,6 +138,9 @@ class form(object):
 
         if auto_refresh and int(auto_refresh):
             gobject.timeout_add(int(auto_refresh) * 1000, self.sig_reload)
+
+    def sig_switch_diagram(self, widget=None):
+        return self.sig_switch(widget, 'diagram')
 
     def sig_switch_form(self, widget=None):
         return self.sig_switch(widget, 'form')
