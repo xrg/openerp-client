@@ -148,7 +148,7 @@ class form(object):
 
     def sig_switch_graph(self, widget=None):
         return self.sig_switch(widget, 'graph')
-    
+
     def get_resource(self,widget):
         all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])
         get_id = int(widget.get_value())
@@ -157,35 +157,35 @@ class form(object):
             if get_id in current_ids:
                 self.screen.display(get_id)
             else:
-                self.screen.load([get_id])    
+                self.screen.load([get_id])
             self.screen.current_view.set_cursor()
         else:
-            common.message(_('Resource ID does not exist for this object!'))    
-    
+            common.message(_('Resource ID does not exist for this object!'))
+
     def get_event(self, widget, event, win):
         if event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):
             win.destroy()
             self.get_resource(widget)
-        
-        
+
+
     def sig_goto(self, *args):
         if not self.modified_save():
             return
-        
+
         glade2 = glade.XML(common.terp_path("openerp.glade"),'dia_goto_id',gettext.textdomain())
         widget = glade2.get_widget('goto_spinbutton')
         win = glade2.get_widget('dia_goto_id')
         widget.connect('key_press_event',self.get_event,win)
-        
+
         win.set_transient_for(self.window)
         win.show_all()
 
         response = win.run()
         win.destroy()
-        
+
         if response == gtk.RESPONSE_OK:
             self.get_resource(widget)
-            
+
 
     def destroy(self):
         oregistry.remove_receiver('misc-message', self._misc_message)
@@ -263,7 +263,7 @@ class form(object):
             else:
                 self.message_state(_('Resources successfully removed.'), color='darkgreen')
         self.sig_reload()
-        
+
     def sig_import(self, widget=None):
         fields = []
         while(self.screen.view_to_load):
@@ -297,25 +297,25 @@ class form(object):
             self.screen.current_view.set_cursor()
             self.message_state(_('Working now on the duplicated document !'))
         self.sig_reload()
-        
+
     def _form_save(self, auto_continue=True):
         pass
 
     def sig_save(self, widget=None, sig_new=True, auto_continue=True):
-        res = self.screen.save_current()        
+        res = self.screen.save_current()
         warning = False
         if isinstance(res,dict):
             id = res.get('id',False)
             warning = res.get('warning',False)
         else:
-            id = res            
+            id = res
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
         else:
             common.warning(_('Invalid form, correct red fields !'),_('Error !'))
             self.message_state(_('Invalid form, correct red fields !'), color="red")
         if warning:
-            common.warning(warning,_('Warning !'))    
+            common.warning(warning,_('Warning !'))
         return bool(id)
 
     def sig_previous(self, widget=None):
@@ -368,15 +368,21 @@ class form(object):
                 return False
             ids = [id]
         if self.screen.current_view.view_type == 'tree':
-            sel_ids = self.screen.current_view.sel_ids_get()
+            sel_ids = self.screen.sel_ids_get()
             if sel_ids:
                 ids = sel_ids
-        if len(ids):
+        if len(ids) or self.screen.context.get('group_by',False):
             obj = service.LocalService('action.main')
+            data = {'model':self.screen.resource,
+                    'id': id or False,
+                    'ids':ids,
+                    'report_type': report_type,
+                    '_domain':self.screen.domain
+                   }
             if previous and self.previous_action:
-                obj._exec_action(self.previous_action[1], {'model':self.screen.resource, 'id': id or False, 'ids':ids, 'report_type': report_type}, self.screen.context)
+                obj._exec_action(self.previous_action[1], data, self.screen.context)
             else:
-                res = obj.exec_keyword(keyword, {'model':self.screen.resource, 'id': id or False, 'ids':ids, 'report_type': report_type}, adds, self.screen.context)
+                res = obj.exec_keyword(keyword, data, adds, self.screen.context)
                 if res:
                     self.previous_action = res
             self.sig_reload(test_modified=False)
@@ -418,7 +424,7 @@ class form(object):
             name2 = _('New document')
             if signal_data[3]:
                 name2 = _('Editing document (id: ')+str(signal_data[3])+')'
-            # Total Records should never change    
+            # Total Records should never change
             tot_count = signal_data[2] < signal_data[1] and  str(signal_data[1]) or str(signal_data[2])
             msg = _('Record: ') + name + ' / ' + str(signal_data[1]) + \
                     _(' of ') + str(tot_count) + ' - ' + name2
