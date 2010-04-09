@@ -42,7 +42,7 @@ class main(service.Service):
         ids = datas['ids']
         del datas['ids']
         if not ids:
-            ids =  rpc.session.rpc_exec_auth('/object', 'execute', datas['model'], 'search', [])
+            ids =  rpc.session.rpc_exec_auth('/object', 'execute', datas['model'], 'search', datas.get('_domain',[]))
             if ids == []:
                 common.message(_('Nothing to print!'))
                 return False
