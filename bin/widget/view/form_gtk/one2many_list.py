@@ -158,8 +158,6 @@ class one2many_list(interface.widget_interface):
         menubar.add(menuitem_title)
         hb.pack_start(menubar, expand=True, fill=True)
 
-        tooltips = gtk.Tooltips()
-
         if self.context.get('group_by',False):
             self.context['group_by'] = [self.context['group_by']]
 
@@ -178,25 +176,25 @@ class one2many_list(interface.widget_interface):
         self.pager = pager(object=self, relation=attrs['relation'], screen=self.screen)
 
         # Button New
-        self.eb_new = self.pager.create_event_box(tooltips, _('Create a new entry'),self._sig_new, 'gtk-new')
+        self.eb_new = self.pager.create_event_box(_('Create a new entry'), self._sig_new, 'gtk-new')
         hb.pack_start(self.eb_new, expand=False, fill=False)
 
         # Button Edit
-        self.eb_open = self.pager.create_event_box(tooltips, _('Edit this entry'),self._sig_edit, 'gtk-open')
+        self.eb_open = self.pager.create_event_box(_('Edit this entry'), self._sig_edit, 'gtk-open')
         hb.pack_start(self.eb_open, expand=False, fill=False)
 
         # Button Delete
-        self.eb_del = self.pager.create_event_box(tooltips, _('Remove this entry'),self._sig_remove, 'gtk-delete')
+        self.eb_del = self.pager.create_event_box(_('Remove this entry'), self._sig_remove, 'gtk-delete')
         hb.pack_start(self.eb_del, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
       # Button Previous Page
-        self.eb_prev_page = self.pager.create_event_box(tooltips, _('Previous Page'),self._sig_prev_page, 'gtk-goto-first')
+        self.eb_prev_page = self.pager.create_event_box(_('Previous Page'), self._sig_prev_page, 'gtk-goto-first')
         hb.pack_start(self.eb_prev_page, expand=False, fill=False)
 
         # Button Previous Record
-        self.eb_pre = self.pager.create_event_box(tooltips, _('Previous Record'),self._sig_previous, 'gtk-go-back')
+        self.eb_pre = self.pager.create_event_box(_('Previous Record'), self._sig_previous, 'gtk-go-back')
         hb.pack_start(self.eb_pre, expand=False, fill=False)
 
         # Record display
@@ -204,17 +202,17 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(self.label, expand=False, fill=False)
 
         # Button Next
-        self.eb_next = self.pager.create_event_box(tooltips, _('Next Record'),self._sig_next, 'gtk-go-forward')
+        self.eb_next = self.pager.create_event_box(_('Next Record'), self._sig_next, 'gtk-go-forward')
         hb.pack_start(self.eb_next, expand=False, fill=False)
 
         # Button Next Page
-        self.eb_next_page = self.pager.create_event_box(tooltips, _('Next Page'),self._sig_next_page, 'gtk-goto-last')
+        self.eb_next_page = self.pager.create_event_box(_('Next Page'), self._sig_next_page, 'gtk-goto-last')
         hb.pack_start(self.eb_next_page, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
         # Button Switch
-        eb_switch = self.pager.create_event_box(tooltips, _('Switch'), self.switch_view, 'gtk-justify-left')
+        eb_switch = self.pager.create_event_box(_('Switch'), self.switch_view, 'gtk-justify-left')
         hb.pack_start(eb_switch, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
@@ -224,11 +222,10 @@ class one2many_list(interface.widget_interface):
         for limit in ['20','40','80','All']:
             self.cb.append_text(limit)
         self.cb.set_active(0)
-        tooltips.set_tip(self.cb, _('Choose Limit'))
+        self.cb.set_tooltip_text(_('Choose Limit'))
         self.cb.connect('changed', self.limit_changed)
         hb.pack_start(self.cb, expand=False, fill=False)
 
-        tooltips.enable()
         self.widget.pack_start(hb, expand=False, fill=True)
         self.screen.signal_connect(self, 'record-message', self._sig_label)
         menuitem_title.get_child().set_markup('<b>'+self.screen.current_view.title.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')+'</b>')

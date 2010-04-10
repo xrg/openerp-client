@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -60,13 +60,11 @@ class DateEntry(gtk.Entry):
         self._interactive_input = True
         self.mode_cmd = False
         gobject.idle_add(self.set_position, 0)
-        tooltips = gtk.Tooltips()
-        tooltips.set_tip(self, _('''You can use special operation by pressing +, - or =.  Plus/minus adds/decrease the variable to the current selected date. Equals set part of selected date. Available variables: 12h = 12 hours, 8d = 8 days, 4w = 4 weeks, 1m = 1 month, 2y = 2 years. Some examples:
+        self.set_tooltip_text(_('''You can use special operation by pressing +, - or =.  Plus/minus adds/decrease the variable to the current selected date. Equals set part of selected date. Available variables: 12h = 12 hours, 8d = 8 days, 4w = 4 weeks, 1m = 1 month, 2y = 2 years. Some examples:
 * +21d : adds 21 days to selected year
 * =23w : set date to the 23th week of the year
 * -4m : decrease 4 months to the current date
 You can also use "=" to set the date to the current date/time and '-' to clear the field.'''))
-        tooltips.enable()
 
     def _on_insert_text(self, editable, value, length, position):
         if not self._interactive_input:
@@ -173,8 +171,8 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
                 if self.callback_process: self.callback_process(False, self, event)
                 self.stop_emission("key-press-event")
                 return True
-        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus, 
-                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus, 
+        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus,
+                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus,
                               gtk.keysyms.KP_Equal, gtk.keysyms.equal):
                 self.mode_cmd = True
                 self.date_get()
