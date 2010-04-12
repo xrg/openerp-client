@@ -26,6 +26,7 @@ import wid_int
 
 class filter(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}, call=None):
+        attrs['name'] = attrs.get('string',False)
         wid_int.wid_int.__init__(self, name, parent, attrs,call)
         if name:
             self.butt = gtk.ToggleButton(name)
