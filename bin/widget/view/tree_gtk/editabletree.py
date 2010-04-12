@@ -22,7 +22,7 @@
 import gtk
 import parser
 import observator
-
+from tools.debug import debug
 
 class EditableTreeView(gtk.TreeView, observator.Observable):
 
@@ -62,15 +62,14 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         #   current_model.cond_default(fieldname, real_value)
 
     def set_tooltip(self, treeview, event):
-        if event.state:
-            path = self.get_path_at_pos(int(event.x), int(event.y))
-            if path:
-                col = path[1]
-                for renderer in col.get_cell_renderers():
-                    treeview.set_tooltip_text('')
-                    if isinstance(renderer,gtk.CellRendererPixbuf):
-                        if renderer.get_property('stock-id'):
-                            treeview.set_tooltip_text(col.tooltip)
+        treeview.set_tooltip_text('')
+        path = self.get_path_at_pos(int(event.x), int(event.y))
+        if path:
+            col = path[1]
+            for renderer in col.get_cell_renderers():
+                if isinstance(renderer,gtk.CellRendererPixbuf):
+                    if renderer.get_property('stock-id'):
+                        treeview.set_tooltip_text(col.tooltip)
 
     def on_open_remote(self, current_model, fieldname, create, value):
         modelfield = current_model[fieldname]
