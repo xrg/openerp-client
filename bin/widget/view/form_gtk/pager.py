@@ -32,9 +32,9 @@ class pager(object):
         self.domain = []
         self.type = screen.type
 
-    def create_event_box(self, tooltips, title, signal, stock_id):
+    def create_event_box(self, title, signal, stock_id):
         event_box = gtk.EventBox()
-        tooltips.set_tip(event_box, title)
+        event_box.set_tooltip_text(title)
         event_box.set_events(gtk.gdk.BUTTON_PRESS)
         event_box.connect('button_press_event', signal)
         img = gtk.Image()

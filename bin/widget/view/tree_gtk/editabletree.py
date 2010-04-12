@@ -36,7 +36,6 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         self.editable = position
         self.cells = {}
         self.handlers = {}
-        self.treeview_tooltip = None
 
     def on_quit_cell(self, current_model, fieldname, value):
         modelfield = current_model[fieldname]
@@ -68,12 +67,10 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             if path:
                 col = path[1]
                 for renderer in col.get_cell_renderers():
-                    if self.treeview_tooltip:
-                        self.treeview_tooltip.set_tip(treeview,'')
+                    treeview.set_tooltip_text('')
                     if isinstance(renderer,gtk.CellRendererPixbuf):
                         if renderer.get_property('stock-id'):
-                            self.treeview_tooltip = gtk.Tooltips()
-                            self.treeview_tooltip.set_tip(treeview, col.tooltip)
+                            treeview.set_tooltip_text(col.tooltip)
 
     def on_open_remote(self, current_model, fieldname, create, value):
         modelfield = current_model[fieldname]
