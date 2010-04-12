@@ -44,17 +44,7 @@ class pager(object):
         return event_box
 
     def search_count(self):
-        if self.type == 'one2many':
-            parent = self.screen.models.parent
-            if not (parent and self.screen.models.models):
-                return
-            if not self.object.parent_field:
-                return
-            parent_ids = parent.id and [parent.id] or []
-            self.domain = [(self.object.parent_field,'in',parent_ids)]
-            self.screen.search_count = self.rpc.search_count(self.domain)
-        else:
-            self.screen.search_count = len(self.object.model.m2m_cache[self.object.name])
+        self.screen.search_count = len(self.object.model.pager_cache.get(self.object.name,[]))
         if self.screen.current_model in self.screen.models.models:
             pos = self.screen.models.models.index(self.screen.current_model)
             self.screen.signal('record-message', (pos + self.screen.offset,
@@ -107,24 +97,18 @@ class pager(object):
             self.object.cb.set_sensitive(False)
 
     def set_models(self, offset=0, limit=DEFAULT_LIMIT):
-        if self.type == 'one2many':
-            parent = self.screen.models.parent
-            ids = self.rpc.search(self.domain, offset, limit)
-            if not ids:return
-            model_field = parent.mgroup.mfields[self.object.attrs['name']]
-            if not limit:
-                self.screen.limit = len(ids)
-            model_field.limit = limit or len(ids)
-            model_field.set(parent, ids)
-            self.object.display(parent, model_field)
+        if not limit:
+            ids = self.object.model.pager_cache[self.object.name]
+            self.screen.limit = len(ids)
         else:
-            if not limit:
-                ids = self.object.model.m2m_cache[self.object.name]
-                self.screen.limit = len(ids)
-            else:
-                ids = self.object.model.m2m_cache[self.object.name][offset:offset + limit]
-            model_field = self.object.model_field
-            model_field.limit = limit or len(ids)
+            ids = self.object.model.pager_cache[self.object.name][offset:offset + limit]
+
+        self.object.model_field.limit = limit or len(ids)
+
+        if self.type == 'one2many':
+            self.object.model_field.set(self.object.model, ids)
+            self.object.display(self.object.model, self.object.model_field)
+        else:
             self.screen.models.clear()
             self.screen.load(ids)
             self.screen.display()
@@ -154,6 +138,4 @@ class pager(object):
     def reset_pager(self):
         self.screen.offset = 0
         self.screen.limit = self.get_active_text()
-        if self.type == 'many2many':
-            self.set_models(self.screen.offset, self.screen.limit)
         self.set_sensitivity()

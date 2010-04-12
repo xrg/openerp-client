@@ -133,7 +133,6 @@ class dialog(object):
 class one2many_list(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
-        self.parent_field = attrs.get('parent_field', False)
         self.context = tools.expr_eval(attrs.get('context',"{}"))
         self._readonly = self.default_readonly
         self.widget = gtk.VBox(homogeneous=False, spacing=5)
@@ -231,6 +230,9 @@ class one2many_list(interface.widget_interface):
         menuitem_title.get_child().set_markup('<b>'+self.screen.current_view.title.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')+'</b>')
         self.widget.pack_start(self.screen.widget, expand=True, fill=True)
         self.screen.widget.connect('key_press_event', self.on_keypress)
+        self.model = None
+        self.model_field = None
+        self.name = attrs['name']
 
     def on_keypress(self, widget, event):
         if (not self._readonly) and ((event.keyval in (gtk.keysyms.N, gtk.keysyms.n) and event.state & gtk.gdk.CONTROL_MASK\
@@ -300,6 +302,7 @@ class one2many_list(interface.widget_interface):
             dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly, context=self.context)
             ok, value = dia.run()
             dia.destroy()
+            self.pager.reset_pager()
 
     def limit_changed(self,*args):
         self.pager.limit_changed()
@@ -347,6 +350,8 @@ class one2many_list(interface.widget_interface):
         pass
 
     def display(self, model, model_field):
+        self.model = model
+        self.model_field = model_field
         if not model_field:
             self.screen.current_model = None
             self.screen.display()

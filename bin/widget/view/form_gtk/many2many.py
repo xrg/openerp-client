@@ -156,10 +156,10 @@ class many2many(interface.widget_interface):
 
         if ids == None:
             ids = []
-        if self.name in self.model.m2m_cache:
-            self.model.m2m_cache[self.name] = list(set(self.model.m2m_cache[self.name] + ids))
+        if self.name in self.model.pager_cache:
+            self.model.pager_cache[self.name] = list(set(self.model.pager_cache[self.name] + ids))
         else:
-            self.model.m2m_cache[self.name] = ids
+            self.model.pager_cache[self.name] = ids
         self.model.is_m2m_modified = True
         self.wid_text.set_text('')
         self._focus_out()
@@ -171,8 +171,8 @@ class many2many(interface.widget_interface):
         if not remove_ids:
            return
         for oid in remove_ids:
-            if oid in self.model.m2m_cache[self.name]:
-                self.model.m2m_cache[self.name].remove(oid)
+            if oid in self.model.pager_cache[self.name]:
+                self.model.pager_cache[self.name].remove(oid)
         self.model.is_m2m_modified = True
         self.screen.remove()
         self.screen.display()
@@ -236,8 +236,8 @@ class many2many(interface.widget_interface):
         return True
 
     def set_value(self, model, model_field):
-        if self.name in model.m2m_cache:
-            model_field.set_client(model, model.m2m_cache[self.name])
+        if self.name in model.pager_cache:
+            model_field.set_client(model, model.pager_cache[self.name])
 
     def grab_focus(self):
         return self.wid_text.grab_focus()
