@@ -61,11 +61,22 @@ class Viewdiagram(object):
                 if shape_field:
                     shape, field = shape_field.split(':')
                     shapes[shape] = field
+            colors = {}
+            for color_field in self.node.get('bgcolor','').split(';'):
+                if color_field:
+                    color, field = color_field.split(':')
+                    colors[color] = field
+
             for record in record_list:
                 record['shape'] = 'ellipse'     
                 for shape, expr in shapes.items():
                     if eval(expr, record):
                         record['shape'] = shape 
+
+                record['bgcolor'] = ''
+                for color, expr in colors.items():
+                    if eval(expr, record):
+                        record['bgcolor'] = color.strip()
 
             for node in dict['nodes'].items():
                 record = {}
@@ -77,7 +88,7 @@ class Viewdiagram(object):
                 graph.add_node(pydot.Node(node[1]['name'],
                                           style="filled",
                                           shape=record['shape'],
-                                          color=self.node.get('bgcolor',''),
+                                          color=record['bgcolor'],
                                           URL=node[1]['name'] + "_" + node[0]  + "_node",
                                           ))
                 node_lst[node[0]]  = node[1]['name']
