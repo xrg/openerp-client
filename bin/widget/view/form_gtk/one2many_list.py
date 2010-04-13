@@ -361,7 +361,10 @@ class one2many_list(interface.widget_interface):
         if self.screen.models != new_models:
             self.screen.models_set(new_models)
             if (self.screen.current_view.view_type=='tree') and self.screen.editable_get():
-                self.screen.current_model = None
+                if len(self.screen.models.models):
+                    self.screen.current_model = self.screen.models.models[0]
+                else:
+                    self.screen.current_model = None
         self.pager.search_count()
         self.pager.set_sensitivity()
         self.screen.display()

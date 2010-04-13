@@ -31,6 +31,7 @@ class pager(object):
         self.screen = screen
         self.domain = []
         self.type = screen.type
+        self.old_cnt = False
 
     def create_event_box(self, title, signal, stock_id):
         event_box = gtk.EventBox()
@@ -45,11 +46,18 @@ class pager(object):
 
     def search_count(self):
         self.screen.search_count = len(self.object.model.pager_cache.get(self.object.name,[]))
-        if self.screen.current_model in self.screen.models.models:
+        if self.screen.search_count != self.old_cnt:
+            self.reset_pager()
+        try:
             pos = self.screen.models.models.index(self.screen.current_model)
-            self.screen.signal('record-message', (pos + self.screen.offset,
-                len(self.screen.models.models or []) + self.screen.offset,
-                self.screen.search_count, self.screen.current_model.id))
+        except:
+            pos = -1
+            self.screen.offset = 0
+        curr_id =  self.screen.current_model and self.screen.current_model.id or None
+        self.old_cnt = self.screen.search_count
+        self.screen.signal('record-message', (pos + self.screen.offset,
+            len(self.screen.models.models or []) + self.screen.offset,
+            self.screen.search_count, curr_id))
 
     def get_active_text(self):
         model = self.object.cb.get_model()
@@ -79,7 +87,6 @@ class pager(object):
         self.object.eb_next_page.set_sensitive(True)
         self.object.eb_next.set_sensitive(True)
         self.object.cb.set_sensitive(True)
-
         if offset <= 0:
             self.object.eb_prev_page.set_sensitive(False)
 
