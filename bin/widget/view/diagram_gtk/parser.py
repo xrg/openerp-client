@@ -48,16 +48,35 @@ class Viewdiagram(object):
             self.id = self.screen.current_model.id 
         signal=self.arrow.get('signal',False)
         graph = pydot.Dot(graph_type='digraph')
+
         if self.id:
             dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', self.id, self.model, self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),signal,(140, 180), rpc.session.context)
             node_lst = {}
-    
             for node in dict['blank_nodes']:
                 dict['nodes'][str(node['id'])] = {'name' : node['name']}
+
+            record_list = rpc.session.rpc_exec_auth('/object', 'execute', self.node.get('object',False), 'read', dict['nodes'].keys())
+            shapes = {}
+            for shape_field in self.node.get('shape','').split(';'):
+                if shape_field:
+                    shape, field = shape_field.split(':')
+                    shapes[shape] = field   
+
             for node in dict['nodes'].items():
+                record = {}
+                for res in record_list:
+                    if int(node[0]) == int(res['id']):
+                        record = res
+                        break
+
+                shape_ori = 'ellipse'     
+                for shape, expr in shapes.items():
+                    if eval(expr, record):
+                        shape_ori = shape 
+
                 graph.add_node(pydot.Node(node[1]['name'],
                                           style="filled",
-                                          shape=self.node.get('shape',''),
+                                          shape=shape_ori,
                                           color=self.node.get('bgcolor',''),
                                           URL=node[1]['name'] + "_" + node[0]  + "_node",
                                           ))
