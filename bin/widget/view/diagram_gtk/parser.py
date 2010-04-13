@@ -102,13 +102,13 @@ class parser_diagram(interface.parser_interface):
             print "view_id and view_id[0]['res_id']:",view_id and view_id[0]['res_id']
             node_attr['form_view_ref'] = view_id and view_id[0]['res_id']
         else:
-            node_attr['form_view_ref'] = None
+            node_attr['form_view_ref'] = False
         if arrow_attr.get('form_view_ref',False):
             view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'search' ,[('name','=', arrow_attr.get('form_view_ref',''))])
             view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'read' ,view_id, ['res_id'])
             arrow_attr['form_view_ref'] = view_id and view_id[0]['res_id']
         else:
-            arrow_attr['form_view_ref'] = None
+            arrow_attr['form_view_ref'] = False
         view = Viewdiagram(self.window, model, node_attr, arrow_attr, attrs,self.screen)
         return view, {}, [], ''
     

@@ -1752,7 +1752,7 @@ class DotWindow(gtk.Window):
     def edit_data(self):
         self.dia_select.destroy()
         if self.url.split('_')[-1] == 'node':
-            dia = dialog(self.node_attr.get('object',False), id=int(self.url.split('_')[-2]), view_ids=[self.node_attr.get('form_view_ref',None)], context= self.screen.context, target=False, view_type=['form'])
+            dia = dialog(self.node_attr.get('object',False), id=int(self.url.split('_')[-2]), view_ids=[self.node_attr.get('form_view_ref',False)], context= self.screen.context, target=False, view_type=['form'])
             if dia.dia.get_has_separator():
                 dia.dia.set_has_separator(False)
             ok, value = dia.run()
@@ -1761,7 +1761,7 @@ class DotWindow(gtk.Window):
                 self.screen.current_view.set_value()
             dia.destroy()
         elif self.url.split('_')[-1] == 'edge':
-            dia = dialog(self.arrow_attr.get('object',False), id=int(self.url.split('_')[-2]), view_ids=[self.arrow_attr.get('form_view_ref',None)], context= self.screen.context, target=False, view_type=['form'])
+            dia = dialog(self.arrow_attr.get('object',False), id=int(self.url.split('_')[-2]), view_ids=[self.arrow_attr.get('form_view_ref',False)], context= self.screen.context, target=False, view_type=['form'])
             if dia.dia.get_has_separator():
                 dia.dia.set_has_separator(False)
             ok, value = dia.run()
@@ -1814,7 +1814,7 @@ class DotWindow(gtk.Window):
         return True
 
     def on_node_create(self,event):
-        dia = dialog(self.node_attr.get('object',False), id=None, view_ids=[self.node_attr.get('form_view_ref',None)], context= self.screen.context, target=False, view_type=['form'])
+        dia = dialog(self.node_attr.get('object',False), id=None, view_ids=[self.node_attr.get('form_view_ref',False)], context= self.screen.context, target=False, view_type=['form'])
         if dia.dia.get_has_separator():
             dia.dia.set_has_separator(False)
         ok, value = dia.run()
@@ -1825,7 +1825,7 @@ class DotWindow(gtk.Window):
         return True
 
     def on_edge_create(self,event):
-        dia = dialog(self.arrow_attr.get('object',False), id=None, view_ids=[self.arrow_attr.get('form_view_ref',None)], context= self.screen.context, target=False, view_type=['form'])
+        dia = dialog(self.arrow_attr.get('object',False), id=None, view_ids=[self.arrow_attr.get('form_view_ref',False)], context= self.screen.context, target=False, view_type=['form'])
         if dia.dia.get_has_separator():
             dia.dia.set_has_separator(False)
         ok, value = dia.run()
