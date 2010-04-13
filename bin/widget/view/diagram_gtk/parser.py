@@ -46,11 +46,10 @@ class Viewdiagram(object):
     def draw_diagram(self):
         if self.screen.current_model:
             self.id = self.screen.current_model.id 
-        signal=self.arrow.get('signal',False)
+        label=self.arrow.get('label',False)
         graph = pydot.Dot(graph_type='digraph')
-
         if self.id:
-            dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', self.id, self.model, self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),signal,(140, 180), rpc.session.context)
+            dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', self.id, self.model, self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),label,(140, 180), rpc.session.context)
             node_lst = {}
             for node in dict['blank_nodes']:
                 dict['nodes'][str(node['id'])] = {'name' : node['name']}
@@ -99,8 +98,8 @@ class Viewdiagram(object):
                     continue
                 graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])],
                                           node_lst[str(edge[1][1])],
-                                          label=dict['signal'].get(edge[0],False)[1],
-                                          URL = dict['signal'].get(edge[0],False)[1] + "_" + edge[0] + "_edge",
+                                          label=dict['label'].get(edge[0],False)[1],
+                                          URL = dict['label'].get(edge[0],False)[1] + "_" + edge[0] + "_edge",
                                           fontsize='10',
                                           ))
             file =  graph.create_xdot()
