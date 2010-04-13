@@ -74,9 +74,11 @@ class Viewdiagram(object):
                         record['shape'] = shape 
 
                 record['bgcolor'] = ''
+                record['style'] = ''
                 for color, expr in colors.items():
                     if eval(expr, record):
                         record['bgcolor'] = color.strip()
+                        record['style'] = 'filled' 
 
             for node in dict['nodes'].items():
                 record = {}
@@ -86,7 +88,7 @@ class Viewdiagram(object):
                         break
 
                 graph.add_node(pydot.Node(node[1]['name'],
-                                          style="filled",
+                                          style=record['style'],
                                           shape=record['shape'],
                                           color=record['bgcolor'],
                                           URL=node[1]['name'] + "_" + node[0]  + "_node",
