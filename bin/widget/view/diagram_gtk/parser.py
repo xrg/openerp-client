@@ -98,8 +98,8 @@ class Viewdiagram(object):
                     continue
                 graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])],
                                           node_lst[str(edge[1][1])],
-                                          label=dict['label'].get(edge[0],False)[1],
-                                          URL = dict['label'].get(edge[0],False)[1] + "_" + edge[0] + "_edge",
+                                          label=dict['label'].get(edge[0],False)[1] or  None,
+                                          URL = str(dict['label'].get(edge[0],False)[1] or  None) + "_" + edge[0] + "_edge",
                                           fontsize='10',
                                           ))
             file =  graph.create_xdot()
