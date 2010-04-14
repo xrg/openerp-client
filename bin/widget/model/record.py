@@ -250,7 +250,10 @@ class ModelRecord(signal_event.signal_event):
         res = self.rpc.read([self.id], fields, c)
         if res:
             value = res[0]
-            self.set(value)
+            if self.parent:
+                self.set(value,signal=False)
+            else:
+                self.set(value)
 
 
     def expr_eval(self, dom, check_load=True):
