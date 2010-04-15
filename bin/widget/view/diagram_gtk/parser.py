@@ -39,19 +39,19 @@ class Viewdiagram(object):
         self.arrow = arrow_attr
         self.id = None
         if self.screen.current_model:
-            self.id = screen.current_model.id 
+            self.id = screen.current_model.id
         self.window = xdot.DotWindow(window,self.widget, self.screen, node_attr, arrow_attr, attrs)
         self.draw_diagram()
 
     def draw_diagram(self):
         if self.screen.current_model:
-            self.id = self.screen.current_model.id 
+            self.id = self.screen.current_model.id
         signal=self.arrow.get('signal',False)
         graph = pydot.Dot(graph_type='digraph')
         if self.id:
             dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', self.id, self.model, self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),signal,(140, 180), rpc.session.context)
             node_lst = {}
-    
+
             for node in dict['blank_nodes']:
                 dict['nodes'][str(node['id'])] = {'name' : node['name']}
             for node in dict['nodes'].items():
@@ -99,7 +99,6 @@ class parser_diagram(interface.parser_interface):
         if node_attr.get('form_view_ref',False):
             view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'search' ,[('name','=', node_attr.get('form_view_ref',''))])
             view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'read' ,view_id, ['res_id'])
-            print "view_id and view_id[0]['res_id']:",view_id and view_id[0]['res_id']
             node_attr['form_view_ref'] = view_id and view_id[0]['res_id']
         else:
             node_attr['form_view_ref'] = None
@@ -111,6 +110,6 @@ class parser_diagram(interface.parser_interface):
             arrow_attr['form_view_ref'] = None
         view = Viewdiagram(self.window, model, node_attr, arrow_attr, attrs,self.screen)
         return view, {}, [], ''
-    
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
