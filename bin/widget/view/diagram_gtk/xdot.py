@@ -39,6 +39,7 @@ import pango
 import pangocairo
 from widget.view.form_gtk.many2one import dialog
 import printer
+from tools import node_attributes
 
 # See http://www.graphviz.org/pub/scm/graphviz-cairo/plugin/cairo/gvrender_cairo.c
 
