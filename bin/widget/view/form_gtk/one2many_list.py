@@ -113,6 +113,8 @@ class dialog(object):
         end = False
         while not end:
             res = self.dia.run()
+            if res == gtk.RESPONSE_CANCEL:
+                self.screen.current_model.cancel()
             end = (res != gtk.RESPONSE_OK) or self.screen.current_model.validate()
             if not end:
                 self.screen.display()
