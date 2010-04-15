@@ -1774,23 +1774,60 @@ class DotWindow(gtk.Window):
         self.url = url
         self.dia_select = gtk.Dialog('OpenERP - Link', self.window_new,
                         gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
-        self.dia_select.set_property('default-width', 100)
-        self.dia_select.set_property('default-height', 50)
+        self.dia_select.set_property('default-width', 200)
+        self.dia_select.set_property('default-height', 100)
         self.dia_select.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
 
         h_box_label = gtk.HBox()
         self.dia_select.get_child().add(h_box_label)
         h_box_label.show()
-        if url.split('_')[-1] == "node":
-            name = "Activity Name :- "
-        elif url.split('_')[-1] == "edge":
-            name = "Transition Signal :- "
-        label = gtk.Label( name  + "_".join(map(str, url.split('_')[:-2])))
-        label.set_alignment(0, 0.5)
-        h_box_label.set_border_width(10)
-        h_box_label.pack_start(label)
-        label.show()
 
+        v_box_label = gtk.VBox()
+        self.dia_select.get_child().add(v_box_label)
+        v_box_label.show()
+        data_display = {}
+        field_list = []
+
+        edit = ""
+        if url.split('_')[-1] == "node":
+            edit = "node"
+            record_list = rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False), 'read', int(self.url.split('_')[-2]))
+        elif url.split('_')[-1] == "edge":
+            edit= "arrow"
+            record_list = rpc.session.rpc_exec_auth('/object', 'execute', self.arrow_attr.get('object',False), 'read', int(self.url.split('_')[-2]))
+
+        data_display = self.attrs.get(edit,{}).get('views',{}).get('form',{}).get('fields',{})
+        arch =  self.attrs.get(edit,{}).get('views',{}).get('form',{}).get('arch',{})
+        for child in arch._get_childNodes():
+            if node_attributes(child) and node_attributes(child).get('name',False):
+                field_list.append(node_attributes(child))
+        
+        for field in field_list:
+            if bool(int(field.get('invisible',0))):
+                continue
+            v_box_label.set_border_width(10)
+            label = gtk.Label(data_display.get(field['name'],{}).get('string',field['name'])) 
+            label.set_alignment(0, 0)
+            label.set_max_width_chars(20)
+            label.show()
+
+            h_box_new = gtk.HBox()
+            h_box_new.show()
+            h_box_new.pack_start(label)
+            v_box_label.pack_start(h_box_new)
+
+            val = ""
+            if record_list[field.get('name')] and type(record_list[field.get('name')]) == list :
+                val = record_list[field.get('name')][1]
+            elif record_list[field.get('name')]:
+                val = record_list[field.get('name')]
+
+            label_string = gtk.Label(" : " + val)
+            label_string.set_alignment(0, 0)
+            label_string.set_max_width_chars(20)
+            label_string.show()
+            h_box_new.pack_start(label_string)
+        
         h_box = gtk.HBox()
         self.dia_select.get_child().add(h_box)
         h_box.show()
