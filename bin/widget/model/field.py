@@ -312,8 +312,8 @@ class M2MField(CharField):
         return []
 
     def get(self, model, check_load=True, readonly=True, modified=False):
-        if self.name in model.m2m_cache:
-            return [(6, 0, model.m2m_cache[self.name] or [])]
+        if self.name in model.pager_cache:
+            return [(6, 0, model.pager_cache[self.name] or [])]
         return []
 
     def get_client(self, model):
