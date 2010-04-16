@@ -130,9 +130,7 @@ class Button(gtk.Button):
         self.set_alignment(0.5, 0.5)
         self.set_property('can-focus', False)
 
-        tooltips = gtk.Tooltips()
-        tooltips.set_tip(self, tooltips_string)
-        tooltips.enable()
+        self.set_tooltip_text(tooltips_string)
 
 class many2one(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):

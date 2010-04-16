@@ -62,7 +62,7 @@ class ModelRecord(signal_event.signal_event):
         self.state_attrs = {}
         self.modified = False
         self.modified_fields = {}
-        self.m2m_cache = {}
+        self.pager_cache = {}
         self.is_m2m_modified = False
         self._concurrency_check_data = False
         for key, val in self.mgroup.mfields.items():
@@ -214,18 +214,21 @@ class ModelRecord(signal_event.signal_event):
         self.signal('record-changed')
 
     def set(self, val, modified=False, signal=True):
-        later={}
+        later = {}
         for fieldname, value in val.items():
             if fieldname == CONCURRENCY_CHECK_FIELD:
                 self._concurrency_check_data = value
             if fieldname not in self.mgroup.mfields:
                 continue
             if isinstance(self.mgroup.mfields[fieldname], field.O2MField):
-                later[fieldname]=value
-                continue
+                 self.pager_cache[fieldname] = value
+                 later[fieldname] = value
+                 continue
             if isinstance(self.mgroup.mfields[fieldname], field.M2MField):
-                self.m2m_cache.setdefault(fieldname, value or [])
+                self.pager_cache.setdefault(fieldname, value or [])
+
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
+
         for fieldname, value in later.items():
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
         self._loaded = True
@@ -247,7 +250,10 @@ class ModelRecord(signal_event.signal_event):
         res = self.rpc.read([self.id], fields, c)
         if res:
             value = res[0]
-            self.set(value)
+            if self.parent:
+                self.set(value,signal=False)
+            else:
+                self.set(value)
 
 
     def expr_eval(self, dom, check_load=True):

@@ -47,6 +47,8 @@ class ViewWidget(object):
             modelfield.state_set(model, state)
             if modelfield.attrs.get('attrs',False):
                 modelfield.attrs_set(model)
+            if hasattr(self.widget,'screen') and self.widget.screen.type in ('one2many','many2many'):
+                self.widget.pager.reset_pager()
             self.widget.display(model, modelfield)
         elif isinstance(self.widget, action):
             self.widget.display(model, False)
@@ -156,10 +158,8 @@ class ViewForm(parser_view):
 #                lb = gtk.Label()
 #                lb.set_markup("Sidebar")
 #                expander_tool = gtk.Expander(lb.get_text())
-#                tooltips = gtk.Tooltips()
-#                tooltips.set_tip(expander_tool, _('Hide/Show Sidebar'))
-#                tooltips.set_tip(eb, _('Click here to open'))
-#                tooltips.enable()
+#                expander_tool.set_tooltip_text(_('Hide/Show Sidebar'))
+#                eb.set_tooltip_text(_('Click here to open'))
 #                expander_tool.add(eb)
 #                expander_tool.set_expanded(True)
 #                def expander_callback(expander_tool, user_data):
@@ -244,15 +244,15 @@ class ViewForm(parser_view):
                             if not (id):
                                 common.message(_('You must select a record to use the relate button !'))
                                 return False
-                            if act.get('domain',False):    
+                            if act.get('domain',False):
                                 act['domain'] = self.screen.current_model.expr_eval(act['domain'], check_load=False)
-                            if act.get('context',False):    
+                            if act.get('context',False):
                                 act['context'] = str(self.screen.current_model.expr_eval(act['context'], check_load=False))
                             data = {
                                 'model': self.screen.name,
                                 'id': id,
-                                'ids': [id],                                
-                            }    
+                                'ids': [id],
+                            }
                         obj = service.LocalService('action.main')
                         value = obj._exec_action(act, data, context)
                         if type in ('print', 'action'):

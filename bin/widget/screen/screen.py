@@ -491,6 +491,8 @@ class Screen(signal_event.signal_event):
         return self.add_view(arch, fields, display, True, toolbar=toolbar, submenu=submenu)
 
     def add_view_id(self, view_id, view_type, display=False, context=None):
+        if context is None:
+            context = {}
         if view_type in self.views_preload:
             return self.add_view(self.views_preload[view_type]['arch'],
                     self.views_preload[view_type]['fields'], display,
@@ -499,7 +501,8 @@ class Screen(signal_event.signal_event):
                     context=context)
         else:
             view = self.rpc.fields_view_get(view_id, view_type, self.context,
-                    self.hastoolbar, self.hassubmenu)
+                        self.hastoolbar, self.hassubmenu)
+            context.update({'view_type' : view_type})
             return self.add_view(view['arch'], view['fields'], display,
                     toolbar=view.get('toolbar', False), submenu=view.get('submenu', False), context=context)
 
@@ -534,6 +537,8 @@ class Screen(signal_event.signal_event):
         models = self.models.models
         if self.current_model and (self.current_model not in models):
             models = models + [self.current_model]
+        if context and context.get('view_type','') == 'diagram':
+            fields = {}
         if custom:
             self.models.add_fields_custom(fields, self.models)
         else:

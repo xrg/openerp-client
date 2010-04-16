@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -52,7 +52,6 @@ class image_wid(interface.widget_interface):
         self.event.connect('drag_motion', self.drag_motion)
         self.event.connect('drag_data_received', self.drag_data_received)
 
-        self.tooltips = gtk.Tooltips()
         self.is_readonly = False
 
         self.image = gtk.Image()
@@ -67,7 +66,7 @@ class image_wid(interface.widget_interface):
         self.but_add.set_image(img_add)
         self.but_add.set_relief(gtk.RELIEF_NONE)
         self.but_add.connect('clicked', self.sig_add)
-        self.tooltips.set_tip(self.but_add, _('Set Image'))
+        self.but_add.set_tooltip_text(_('Set Image'))
         self.hbox.pack_start(self.but_add, expand=False, fill=False)
 
         self.but_save_as = gtk.Button()
@@ -76,7 +75,7 @@ class image_wid(interface.widget_interface):
         self.but_save_as.set_image(img_save_as)
         self.but_save_as.set_relief(gtk.RELIEF_NONE)
         self.but_save_as.connect('clicked', self.sig_save_as)
-        self.tooltips.set_tip(self.but_save_as, _('Save As'))
+        self.but_save_as.set_tooltip_text(_('Save As'))
         self.hbox.pack_start(self.but_save_as, expand=False, fill=False)
 
         self.but_remove = gtk.Button()
@@ -85,13 +84,11 @@ class image_wid(interface.widget_interface):
         self.but_remove.set_image(img_remove)
         self.but_remove.set_relief(gtk.RELIEF_NONE)
         self.but_remove.connect('clicked', self.sig_remove)
-        self.tooltips.set_tip(self.but_remove, _('Clear'))
+        self.but_remove.set_tooltip_text(_('Clear'))
         self.hbox.pack_start(self.but_remove, expand=False, fill=False)
 
         self.alignment.add(self.hbox)
         self.widget.pack_start(self.alignment, expand=False, fill=False)
-
-        self.tooltips.enable()
 
         self.update_img()
         self._old_model = False
@@ -119,7 +116,7 @@ class image_wid(interface.widget_interface):
                 action=gtk.FILE_CHOOSER_ACTION_SAVE)
         if filename:
             file(filename, 'wb').write(decodestring(self._value))
-    
+
     def sig_remove(self, widget):
         self._value = ''
         self.update_img()
@@ -209,8 +206,8 @@ class image_wid(interface.widget_interface):
         self.but_save_as.set_sensitive(not value)
         self.but_remove.set_sensitive(not value)
         self.is_readonly = value
-        
+
     def grab_focus(self):
         return self.image.grab_focus()
-        
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

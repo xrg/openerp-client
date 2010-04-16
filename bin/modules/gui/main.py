@@ -351,7 +351,7 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
         dbtoload = options.options['login.db'] or ''
         if not dbtoload:
             dbtoload = _get_db_name_from_url(url)
-    
+
     label.hide()
 
     liststore = db_widget.get_model()
@@ -374,7 +374,7 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
         db_widget.hide()
     else:
         entry_db.hide()
-        
+
         if not result:
             label.set_label('<b>'+_('No database found, you must create one !')+'</b>')
             label.show()
@@ -383,7 +383,7 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
                 butconnect.set_sensitive(False)
         else:
             db_widget.show()
-            index = 0    
+            index = 0
             for db_num, db_name in enumerate(result):
                 liststore.append([db_name])
                 if db_name == dbtoload:
@@ -472,7 +472,7 @@ def _server_ask(server_widget, parent=None):
 class db_login(object):
     def __init__(self):
         self.win_gl = glade.XML(common.terp_path("openerp.glade"),"win_login",gettext.textdomain())
-        
+
 
     def refreshlist(self, widget, db_widget, entry_db, label, url, butconnect=False):
 
@@ -517,7 +517,7 @@ class db_login(object):
 #        db_entry = self.win_gl.get_widget('ent_db')
         label.hide()
         entry_db.hide()
-        
+
         host = options.options['login.server']
         port = options.options['login.port']
         protocol = options.options['login.protocol']
@@ -836,7 +836,7 @@ class terp_main(service.Service):
 
         self.buttons = {}
         for button in ('but_new', 'but_save', 'but_remove', 'but_search', 'but_previous', 'but_next', 'but_action', 'but_open', 'but_print', 'but_close', 'but_reload', 'but_switch','but_attach',
-                       'radio_tree','radio_form','radio_graph','radio_calendar', 'radio_gantt'):
+                       'radio_tree','radio_form','radio_graph','radio_calendar','radio_diagram', 'radio_gantt'):
             self.glade.signal_connect('on_'+button+'_clicked', self._sig_child_call, button)
             self.buttons[button]=self.glade.get_widget(button)
 
@@ -1096,7 +1096,7 @@ class terp_main(service.Service):
                     common.message(_('Connection error !\nUnable to connect to the server !'))
                 elif log_response == RES_BAD_PASSWORD:
                     common.message(_('Authentication error !\nBad Username or Password !'))
-                
+
         except rpc.rpc_exception:
             rpc.session.logout()
             raise
@@ -1259,7 +1259,9 @@ class terp_main(service.Service):
         closebtn.set_size_request(w + 8, h + 4)
         closebtn.unset_flags(gtk.CAN_FOCUS)
 
-        box.pack_start(gtk.Label(win.name), True, True)
+        box_label = gtk.Label(win.name)
+
+        box.pack_start(box_label, True, True)
         box.pack_end(closebtn, False, False)
 
         self.notebook.append_page(win.widget, box)
@@ -1267,7 +1269,7 @@ class terp_main(service.Service):
             # since pygtk 2.10
             self.notebook.set_tab_reorderable(win.widget, True)
 
-        closebtn.connect("clicked", self.sig_win_close,win.widget)
+        closebtn.connect("clicked", self.sig_win_close, win.widget)
         pagenum = self.notebook.page_num(win.widget)
         pagenum = self.notebook.page_num(image)
 

@@ -1351,6 +1351,16 @@
               </widget>
             </child>
             <child>
+              <widget class="GtkRadioToolButton" id="radio_diagram">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Diagram</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-select-color</property>
+                <property name="group">radio_tree</property>
+                <signal name="clicked" handler="on_radio_diagram_clicked"/>
+              </widget>
+            </child>
+            <child>
               <widget class="GtkRadioToolButton" id="radio_graph">
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">Graph</property>
@@ -8149,6 +8159,17 @@ This document has been modified while you were editing it.
       </widget>
     </child>
   </widget>
+  
+  <widget class="GtkWindow" id="win_view_diagram">
+    <property name="visible">True</property>
+    <property name="title" translatable="yes">window1</property>
+    <child>
+      <widget class="GtkVBox" id="widget_view_diagram">
+        <property name="visible">True</property>
+       </widget>
+     </child>
+  </widget>
+  
   <widget class="GtkWindow" id="win_view_calendar">
     <property name="visible">True</property>
     <property name="title" translatable="yes">window1</property>

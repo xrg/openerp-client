@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -73,6 +73,7 @@ class reference(interface.widget_interface):
         self.but_new.connect('clicked', self.sig_new)
         self.but_new.set_alignment(0.5, 0.5)
         self.but_new.set_property('can-focus', False)
+        self.but_new.set_tooltip_text(_('Create a new resource'))
         self.widget.pack_start(self.but_new, expand=False, fill=False)
 
         self.but_open = gtk.Button()
@@ -85,12 +86,8 @@ class reference(interface.widget_interface):
         self.but_open.connect('clicked', self.sig_edit)
         self.but_open.set_alignment(0.5, 0.5)
         self.but_open.set_property('can-focus', False)
+        self.but_open.set_tooltip_text(_('Search / Open a resource'))
         self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
-
-        tooltips = gtk.Tooltips()
-        tooltips.set_tip(self.but_new, _('Create a new resource'))
-        tooltips.set_tip(self.but_open, _('Search / Open a resource'))
-        tooltips.enable()
 
         self.ok = True
         self._readonly = False

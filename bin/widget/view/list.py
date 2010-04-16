@@ -619,8 +619,17 @@ class ViewList(parser_view):
     def sel_ids_get(self):
         def _func_sel_get(store, path, iter, ids):
             model = store.on_get_iter(path)
-            if model.id:
-                ids.append(model.id)
+            if isinstance(model, group_record):
+                def process(parent):
+                    for child in parent.children.lst:
+                        if store.on_iter_has_child(child):
+                            process(child)
+                        else:
+                            ids.append(child.id)
+                process(model)
+            else:
+                if model.id:
+                    ids.append(model.id)
         ids = []
         sel = self.widget_tree.get_selection()
         if sel:
