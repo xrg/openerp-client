@@ -988,9 +988,10 @@ class terp_main(service.Service):
         return True
 
     def sig_win_close(self, *args):
-        if args[1].button in [1,2]:
-            page_num = self.notebook.page_num(args[2])
-            self._sig_child_call(args[0], 'but_close', page_num)
+        page_num = None
+        if len(args) >= 2:
+            page_num = self.notebook.page_num(args[1])
+        self._sig_child_call(args[0], 'but_close', page_num)
 
     def sig_request_new(self, args=None):
         obj = service.LocalService('gui.window')
@@ -1258,14 +1259,17 @@ class terp_main(service.Service):
         closebtn.set_size_request(w + 8, h + 4)
         closebtn.unset_flags(gtk.CAN_FOCUS)
 
-        box.pack_start(gtk.Label(win.name), True, True)
+        box_label = gtk.Label(win.name)
+
+        box.pack_start(box_label, True, True)
         box.pack_end(closebtn, False, False)
 
         self.notebook.append_page(win.widget, box)
         if hasattr(self.notebook, 'set_tab_reorderable' ):
             # since pygtk 2.10
             self.notebook.set_tab_reorderable(win.widget, True)
-        closebtn.connect("button-press-event",self.sig_win_close,win.widget)
+
+        closebtn.connect("clicked", self.sig_win_close, win.widget)
         pagenum = self.notebook.page_num(win.widget)
         pagenum = self.notebook.page_num(image)
 
