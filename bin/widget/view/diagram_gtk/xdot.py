@@ -1759,22 +1759,11 @@ class DotWindow(gtk.Window):
         self.dia_select.destroy()
         if self.url.split('_')[-1] == 'node':
             dia = dialog(self.node_attr.get('object',False), id=int(self.url.split('_')[-2]), view_ids=[self.node_attr.get('form_view_ref',False)], context= self.screen.context, target=False, view_type=['form'])
-            if dia.dia.get_has_separator():
-                dia.dia.set_has_separator(False)
-            ok, value = dia.run()
-            if ok:
-                self.screen.current_model.validate_set()
-                self.screen.current_view.set_value()
-            dia.destroy()
         elif self.url.split('_')[-1] == 'edge':
             dia = dialog(self.arrow_attr.get('object',False), id=int(self.url.split('_')[-2]), view_ids=[self.arrow_attr.get('form_view_ref',False)], context= self.screen.context, target=False, view_type=['form'])
-            if dia.dia.get_has_separator():
-                dia.dia.set_has_separator(False)
-            ok, value = dia.run()
-            if ok:
-                self.screen.current_model.validate_set()
-                self.screen.current_view.set_value()
-            dia.destroy()
+        
+        if self.url.split('_')[-1] in ['node', 'edge']:
+            self.dia_destroy(dia)
 
     def on_url_clicked(self, widget, url, event):
         self.url = url
@@ -1814,7 +1803,6 @@ class DotWindow(gtk.Window):
             v_box_label.set_border_width(10)
             label = gtk.Label(data_display.get(field['name'],{}).get('string',field['name'])) 
             label.set_alignment(0, 0)
-            label.set_max_width_chars(20)
             label.show()
 
             h_box_new = gtk.HBox()
@@ -1858,17 +1846,15 @@ class DotWindow(gtk.Window):
 
     def on_node_create(self,event):
         dia = dialog(self.node_attr.get('object',False), id=None, view_ids=[self.node_attr.get('form_view_ref',False)], context= self.screen.context, target=False, view_type=['form'])
-        if dia.dia.get_has_separator():
-            dia.dia.set_has_separator(False)
-        ok, value = dia.run()
-        if ok:
-            self.screen.current_model.validate_set()
-            self.screen.current_view.set_value()
-        dia.destroy()
+        self.dia_destroy(dia)
         return True
 
     def on_edge_create(self,event):
         dia = dialog(self.arrow_attr.get('object',False), id=None, view_ids=[self.arrow_attr.get('form_view_ref',False)], context= self.screen.context, target=False, view_type=['form'])
+        self.dia_destroy(dia)
+        return True
+
+    def dia_destroy(self, dia):
         if dia.dia.get_has_separator():
             dia.dia.set_has_separator(False)
         ok, value = dia.run()
