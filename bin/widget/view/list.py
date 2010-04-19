@@ -104,7 +104,8 @@ class list_record(object):
             return
         self.loaded = True
         gb = self.context.get('group_by', False)
-        if gb:
+        no_leaf = self.context.get('group_by_no_leaf', False)
+        if gb or isinstance(gb, list) and no_leaf:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
                 self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
             for r in records:
