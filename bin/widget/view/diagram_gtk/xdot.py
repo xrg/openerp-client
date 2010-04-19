@@ -1811,7 +1811,7 @@ class DotWindow(gtk.Window):
             v_box_label.pack_start(h_box_new)
 
             val = ""
-            if record_list[field.get('name')] and type(record_list[field.get('name')]) == list :
+            if record_list[field.get('name')] and type(record_list[field.get('name')]) in (list,tuple):
                 val = record_list[field.get('name')][1]
             elif record_list[field.get('name')]:
                 val = record_list[field.get('name')]
