@@ -275,6 +275,8 @@ class ViewList(parser_view):
         self.tree_editable = False
         self.is_editable = widget.editable
         self.columns = self.widget_tree.get_columns()
+        if self.widget_tree.sequence:
+            self.set_drag_and_drop(set=True)
         if children:
             hbox = gtk.HBox()
             self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
@@ -292,7 +294,8 @@ class ViewList(parser_view):
         selection.set_mode(gtk.SELECTION_MULTIPLE)
         selection.connect('changed', self.__select_changed)
 
-        if self.widget_tree.sequence:
+    def set_drag_and_drop(self,set=False):
+        if set or self.screen.context.get('group_by',False):
             self.widget_tree.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
                     [('MY_TREE_MODEL_ROW', gtk.TARGET_SAME_WIDGET, 0),],
                     gtk.gdk.ACTION_MOVE)
@@ -307,6 +310,9 @@ class ViewList(parser_view):
             self.widget_tree.connect("drag-data-get", self.drag_data_get)
             self.widget_tree.connect('drag-data-received', self.drag_data_received)
             self.widget_tree.connect('drag-data-delete', self.drag_data_delete)
+        else:
+            self.widget_tree.unset_rows_drag_source()
+            self.widget_tree.unset_rows_drag_dest()
 
     def drag_drop(self, treeview, context, x, y, time):
         treeview.emit_stop_by_name('drag-drop')

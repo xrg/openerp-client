@@ -55,6 +55,11 @@ def send_keys(renderer, editable, position, treeview):
         editable.connect('changed', treeview.on_editing_done)
 
 def sort_model(column, screen):
+    if column.name != 'sequence':
+        screen.current_view.set_drag_and_drop(set=False)
+    else:
+        screen.current_view.set_drag_and_drop(set=True)
+
     if screen.sort == column.name:
         screen.sort = column.name+' desc'
     else:
@@ -182,8 +187,7 @@ class parser_tree(interface.parser_interface):
                     col.set_expand(True)
                 else:
                     col.set_min_width(width)
-                if not treeview.sequence:
-                    col.connect('clicked', sort_model, self.screen)
+                col.connect('clicked', sort_model, self.screen)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 visval = eval(str(fields[fname].get('invisible', 'False')), {'context':self.screen.context})
