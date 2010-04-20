@@ -269,8 +269,8 @@ class Char(object):
             align = 1
         else:
             align = 0
-
-        if not model.list_parent and self.treeview.screen.context.get('group_by',False):
+        gb = self.treeview.screen.context.get('group_by', False)
+        if isinstance(model, group_record) and gb:
             font = pango.FontDescription('Times New Roman bold 10')
             cell.set_property('font-desc', font)
 
