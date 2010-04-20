@@ -639,14 +639,14 @@ class ViewList(parser_view):
             self.set_editable(False)
 
     def set_editable(self, value=True):
-        from tree_gtk.parser import send_keys
+        from tree_gtk.parser import send_keys, CellRendererButton
         from tree_gtk import date_renderer
         self.widget_tree.editable = value
         for col in self.widget_tree.get_columns():
             for renderer in col.get_cell_renderers():
                 if isinstance(renderer, gtk.CellRendererToggle):
                     renderer.set_property('activatable', value)
-                elif isinstance(renderer, parser.CellRendererButton):
+                elif isinstance(renderer, CellRendererButton):
                     renderer.set_property('visible',False)
                 if value in ('top','bottom'):
                     if isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo, date_renderer.DecoratorRenderer)):
