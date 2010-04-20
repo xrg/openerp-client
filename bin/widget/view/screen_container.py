@@ -51,11 +51,11 @@ class screen_container(object):
             my_acts = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'get_filters', model)
         else:
             my_acts = []
-        filters_list=[['blk',_('-- Filters --')]]
-        sorted_filters = [[act.get('domain',act['id']),act['name']] for act in my_acts]
-        sorted_filters.sort(lambda x, y: cmp(x[1], y[1]))
+        filters_list=[['blk', '', _('-- Filters --')]]
+        sorted_filters = [[act.get('domain',act['id']), act['context'], act['name']] for act in my_acts]
+        sorted_filters.sort(lambda x, y: cmp(x[2], y[2]))
         filters_list += sorted_filters
-        filters_list += [['blk',_('--Actions--')],['sh',_('Save as a Shortcut')],['sf',_('Save as a Filter')],['mf',_('Manage Filters')]]
+        filters_list += [['blk','',_('--Actions--')],['sh','',_('Save as a Shortcut')],['sf','',_('Save as a Filter')],['mf','',_('Manage Filters')]]
 
         for lim in filters_list:
             self.action_list.append(lim)
