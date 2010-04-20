@@ -48,14 +48,14 @@ class field_record(object):
 
 class group_record(object):
 
-    def __init__(self, value={}, ctx={}, domain=[], mgroup=None):
+    def __init__(self, value={}, ctx={}, domain=[], mgroup=None, child = True):
         self.list_parent = None
         self._children = None
         self.domain = domain
         self.ctx = ctx
         self.value = value
         self.id = False
-        self.has_children = True
+        self.has_children = child
         self.mgroup = mgroup
 
     def getChildren(self):
@@ -109,12 +109,17 @@ class list_record(object):
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
                 self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
             for r in records:
-                ctx = {'__domain': r.get('__domain', [])}
-                ctx.update(r.get('__context', {}))
-                rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup)
+                child = True
+                __ctx = r.get('__context', {})
+                inner_gb = __ctx.get('group_by', [])
+                if no_leaf and not len(inner_gb):
+                    child = False
+                ctx = {'__domain': r.get('__domain', []),'group_by_no_leaf':no_leaf}
+                ctx.update(__ctx)
+                rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child)
                 self.add(rec)
         else:
-            if self.context.get('__domain'):
+            if self.context.get('__domain') and not no_leaf:
                 ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'))
                 self.mgroup.load(ids)
                 res= []
@@ -122,10 +127,11 @@ class list_record(object):
                     res.append(self.mgroup.get_by_id(id))
                 self.add_list(res)
             else:
-                self.lst = self.mgroup.models
-                for m in self.mgroup.models:
-                    m.list_group = self
-                    m.list_parent = self.parent
+                if not no_leaf:
+                    self.lst = self.mgroup.models
+                    for m in self.mgroup.models:
+                        m.list_group = self
+                        m.list_parent = self.parent
                 #self.add_list(self.mgroup.models)
 
     def add(self, lst):
@@ -234,15 +240,15 @@ class AdaptModelGroup(gtk.GenericTreeModel):
             return None
 
     def on_iter_has_child(self, node):
-        res = hasattr(node,'has_children')
+        res = getattr(node,'has_children', False)
         return res
 
     def on_iter_children(self, node):
-        res = getattr(node,'children',[])
+        res = getattr(node, 'children', [])
         return res and res[0] or []
 
     def on_iter_n_children(self, node):
-        return len(getattr(node,'children',[]))
+        return len(getattr(node, 'children', []))
 
     def on_iter_nth_child(self, node, n):
         if node is None:
