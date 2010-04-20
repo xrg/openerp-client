@@ -166,7 +166,7 @@ class parser_tree(interface.parser_interface):
                     'integer': 60,
                     'float': 80,
                     'float_time': 80,
-		    'float_sci': 80,
+                    'float_sci': 80,
                     'date': 70,
                     'datetime': 120,
                     'selection': 90,
@@ -425,8 +425,8 @@ class Float_Sci(Char):
         return tools.locale_format('%.' + str(digit) + 'e', model[self.field_name].get_client(model) or 0.0)
 
     def value_from_text(self, model, text):
-	if not text:
-	    return False
+        if not text:
+            return False
         try:
             return locale.atof(text)
         except:
