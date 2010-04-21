@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-04-15 04:20+0000\n"
+"PO-Revision-Date: 2010-04-20 04:12+0000\n"
 "Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-16 03:54+0000\n"
+"X-Launchpad-Export-Date: 2010-04-21 04:05+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-
-#: bin/plugins/__init__.py:28
-msgid "Print Workflow"
-msgstr "印刷作業フロー"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
 msgstr "印刷作業フロー(複合)"
+
+#: bin/plugins/__init__.py:28
+msgid "Print Workflow"
+msgstr "印刷作業フロー"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
@@ -1406,7 +1406,7 @@ msgstr "このリソース削除"
 
 #: bin/openerp.glade:1287
 msgid "Go to previous matched search"
-msgstr ""
+msgstr "前を検索"
 
 #: bin/openerp.glade:1298
 msgid "Go to next matched resource"

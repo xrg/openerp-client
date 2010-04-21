@@ -1104,6 +1104,8 @@ class terp_main(service.Service):
         self.glade.get_widget('user').set_sensitive(True)
         self.glade.get_widget('form').set_sensitive(True)
         self.glade.get_widget('plugins').set_sensitive(True)
+        title = "%s%s@%s:%s/%s" % (res[4], res[0], res[2], res[3], res[5])
+        self.window.set_title(_('OpenERP - %s') % title )
         return True
 
     def sig_logout(self, widget):
@@ -1132,6 +1134,7 @@ class terp_main(service.Service):
         self.glade.get_widget('user').set_sensitive(False)
         self.glade.get_widget('form').set_sensitive(False)
         self.glade.get_widget('plugins').set_sensitive(False)
+        self.window.set_title(_('OpenERP') )
         rpc.session.logout()
         return True
 

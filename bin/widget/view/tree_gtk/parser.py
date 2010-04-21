@@ -269,10 +269,10 @@ class Char(object):
             align = 1
         else:
             align = 0
-
-        if not model.list_parent and self.treeview.screen.context.get('group_by',False):
-            cell.set_property('background', 'grey')
-            cell.set_property('foreground','blue')
+        gb = self.treeview.screen.context.get('group_by', False)
+        if isinstance(model, group_record) and gb:
+            font = pango.FontDescription('Times New Roman bold 10')
+            cell.set_property('font-desc', font)
 
         elif self.treeview.editable:
             field = model[self.field_name]
@@ -280,6 +280,7 @@ class Char(object):
             self.set_color(cell, model)
         else:
             cell.set_property('background', None)
+            cell.set_property('font-desc', None)
         cell.set_property('xalign', align)
 
     def set_color(self, cell, model,group_by = False):
