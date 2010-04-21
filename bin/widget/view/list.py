@@ -560,13 +560,19 @@ class ViewList(parser_view):
         self.changed_col.remove(move_col)
 
     def move_colums(self):
-        if self.screen.context.get('group_by',False):
+        if self.screen.context.get('group_by', False):
             groupby = self.screen.context['group_by']
-            for col in self.columns:
+            group_col = []
+            for x in groupby:
+                group_col += [col for col in self.columns if col.name == x]
+            group_col = group_col + filter(lambda x:x.name not in groupby, self.columns)
+            for col in group_col:
                 if col.name in groupby:
                     if not col in self.changed_col:
-                        if len(groupby) == 1: base_col = None
-                        else: base_col = self.changed_col[-1]
+                        if not len(self.changed_col):
+                            base_col = None
+                        else:
+                            base_col = self.changed_col[-1]
                         self.changed_col.append(col)
                         self.widget_tree.move_column_after(col, base_col)
                 else:
@@ -576,7 +582,7 @@ class ViewList(parser_view):
 
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
-            if self.screen.context.get('group_by',False):
+            if self.screen.context.get('group_by', False):
                 if self.screen.type == 'one2many':
                     self.screen.domain = [('id','in',self.screen.ids_get())]
                 self.screen.models.models.clear()
