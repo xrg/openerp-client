@@ -65,7 +65,6 @@ required_modules = [
     ('pytz', 'Timezone handling library for Python'),
     ('gtk', 'gtk python bindings'),
     ('gtk.glade', 'glade python bindings'),
-    ('mx.DateTime', 'date and time handling routines for Python')
 ]
 
 

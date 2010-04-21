@@ -25,9 +25,6 @@ import datetime as DT
 import gettext
 import locale
 
-import mx.DateTime
-from mx.DateTime import *
-
 import tools
 import tools.datetime_util
 import common
@@ -88,7 +85,6 @@ class calendar(wid_int.wid_int):
 
     def _date_get(self, str):
         try:
-            #date = mx.DateTime.strptime(str, LDFMT)
             date = tools.datetime_util.strptime(str, LDFMT)
         except:
             return False
@@ -210,7 +206,6 @@ class datetime(wid_int.wid_int):
 
     def _date_get(self, str):
         try:
-            #date = mx.DateTime.strptime(str, LDFMT)
             date = tools.datetime_util.strptime(str, self.format)
         except:
             return False
