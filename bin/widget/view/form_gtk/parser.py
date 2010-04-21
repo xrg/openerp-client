@@ -318,6 +318,7 @@ class parser_form(widget.view.interface.parser_interface):
                 label.set_use_markup(True)
                 if 'align' in attrs:
                     label.set_alignment(float(attrs['align'] or 0.0), 0.5)
+                label.set_size_request(int(attrs.get('width', -1)) , -1)
                 eb = gtk.EventBox()
                 eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
                 eb.add(label)
