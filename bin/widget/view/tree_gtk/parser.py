@@ -167,21 +167,37 @@ class parser_tree(interface.parser_interface):
                     'float': 80,
                     'float_time': 80,
                     'date': 70,
-                    'datetime': 120,
+                    'datetime': 145,
                     'selection': 90,
                     'char': 100,
                     'one2many': 50,
                     'many2many': 50,
                     'boolean': 20,
+                    'progressbar':150
+                }
+                tmax_width={
+                    'integer':170,
+                    'float':300,
+                    'float_time':150,
+                    'date':100,
+                    'datetime':145,
+                    'selection': 250,
+                    'progressbar':200,
+                    'float_time':100,
+                    'boolean': 80,
                 }
                 if 'width' in fields[fname]:
                     width = int(fields[fname]['width'])
+                    max_width = False
                 else:
                     width = twidth.get(fields[fname]['type'], 100)
+                    max_width = tmax_width.get(fields[fname]['type'],False)
                 if not twidth.get(fields[fname]['type'], False):
                     col.set_expand(True)
                 else:
                     col.set_min_width(width)
+                    if max_width:
+                        col.set_max_width(max_width)
                 if not treeview.sequence:
                     col.connect('clicked', sort_model, self.screen)
                 col.set_resizable(True)
