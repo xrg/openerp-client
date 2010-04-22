@@ -266,12 +266,10 @@ class parse(object):
             elif node.localName=='group':
                 if attrs.get('invisible', False):
                     continue
-                if attrs.get('expand',False):
+                if attrs.get('expand', False):
                     attrs['expand'] = tools.expr_eval(attrs.get('expand',False),{'context':call[0].context})
-                    if attrs['expand']:
-                        frame = gtk.Expander(attrs.get('string', None))
-                    else:
-                        continue
+                    frame = gtk.Expander(attrs.get('string', None))
+                    frame.set_expanded(bool(attrs['expand']))
                 else:
                     frame = gtk.Frame(attrs.get('string', None))
                     if not attrs.get('string', None):
