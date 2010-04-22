@@ -216,6 +216,8 @@ class rpc_session(object):
                 _sock.disconnect()
             except socket.error,e:
                 return -1
+            except Exception:
+                return 0
             if not res:
                 self._open=False
                 self.uid=False

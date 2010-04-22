@@ -1089,7 +1089,7 @@ class terp_main(service.Service):
                     self.request_set()
                     self.company_set()
                 elif log_response == RES_NO_DATABASE:
-                    common.warning( _('Please specify proper database name.'), _('Database does not Exist!'))
+                    common.warning( _('Please double-check the database name or contact your administrator to verify the database status.'), _('Database cannot be accessed or does not exist'))
                     self.sig_login(dbname=dbname)
                     return True
                 elif log_response == RES_CNX_ERROR:
