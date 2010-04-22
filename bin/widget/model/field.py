@@ -137,8 +137,7 @@ class CharField(object):
                             attrs_changes[k][i]=cond
         for k,v in attrs_changes.items():
             result = True
-            for condition in v:
-                result = result and tools.calc_condition(self,model,condition)
+            result = tools.calc_condition(self, model, v)
             if result:
                self.get_state_attrs(model)[k]=True
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -69,38 +69,51 @@ def node_attributes(node):
     return result
 
 #FIXME use spaces
-def calc_condition(self,model,con):
-    if model and (con[0] in model.mgroup.fields):
-        val = model[con[0]].get(model)
-        if con[1]=="=" or con[1]=="==":
-            if val==con[2]:
-				return True
-        elif con[1]=="!=" or con[1]=="<>":
-			if val!=con[2]:
-				return True
-        elif con[1]=="<":
-            if val<con[2]:
-				return True
-        elif con[1]==">":
-			if val>con[2]:
-				return True
-        elif con[1]=="<=":
-			if val<=con[2]:
-				return True
-        elif con[1]==">=":
-			if val>=con[2]:
-				return True
-        elif con[1].lower()=="in":
-			for cond in con[2]:
-				if val == cond:
-					return True
-        elif con[1].lower()=="not in":
-			for cond in con[2]:
-				if val == cond:
-					return False
-			return True
-        return False
-    
+def calc_condition(self, model, cond):
+    cond_main = cond[:]
+    try:
+        return ConditionExpr(cond).eval(model)
+    except:
+        import common
+        common.error('Wrong attrs Implementation!','You have wrongly specified conditions in attrs %s' %(cond_main,))
+
+class ConditionExpr(object):
+    OPERATORS = {'=': lambda x, y, model: model[x].get(model) == y,
+                 '!=': lambda x, y, model: model[x].get(model) != y,
+                 '<': lambda x, y, model: model[x].get(model) < y,
+                 '>': lambda x, y, model: model[x].get(model) > y,
+                 '<=': lambda x, y, model: model[x].get(model) <= y,
+                '>=': lambda x, y, model: model[x].get(model) >= y,
+                 'in': lambda x, y, model: model[x].get(model) in y,
+                 'not in': lambda x, y, model: model[x].get(model) not in y}
+
+    OPERAND_MAPPER = {'<>': '!=', '==': '='}
+
+    def __init__(self, condition):
+        self.cond = condition
+
+    def eval(self, context):
+        def evaluate(cond):
+            if isinstance(cond,bool):
+                return cond
+            left, operand, right = cond
+            real_op = self.OPERAND_MAPPER.get(operand.lower(), operand)
+            return self.OPERATORS[real_op](left, right, context)
+
+        def find_index(con):
+            index=-1
+            for a in range(len(con)):
+                if con[a] == '|':
+                    index = a
+            return index
+        ind = find_index(self.cond)
+        while(ind!= -1):
+            result = any((evaluate(self.cond[ind+1]),evaluate(self.cond[ind+2])))
+            self.cond.__delslice__(ind,ind+3)
+            self.cond.__setslice__(ind,ind,[result])
+            ind = find_index(self.cond)
+        return all(evaluate(expr) for expr in self.cond)
+
 def call_log(fun):
     """Debug decorator
        TODO: Add optionnal execution time

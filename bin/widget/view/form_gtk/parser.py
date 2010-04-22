@@ -142,8 +142,7 @@ class StateAwareWidget(object):
             self.widget.grab_focus()
         for k,v in attrs_changes.items():
             result = True
-            for condition in v:
-                result = result and tools.calc_condition(self,model,condition)
+            result = result and tools.calc_condition(self, model, v)
             if result:
                 if k=='invisible':
                     self.widget.hide()
