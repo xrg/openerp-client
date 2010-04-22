@@ -160,4 +160,19 @@ def locale_format(format, value):
         label_str = label_str.replace('\xa0', '\xc2\xa0')
     return label_str
 
+def format_connection_string(login, _passwd, server, port, protocol, dbname):
+#def format_connection_string(*args):
+#    print repr(args)
+#    login, _passwd, server, port, protocol, dbname = args
+    DEFAULT_PORT = {
+        'http://': 8069,
+        'https://': 8069,
+        'socket://': 8070,
+    }
+    result = '%s%s@%s' % (protocol, login, server)
+    if port and DEFAULT_PORT.get(protocol) != int(port):
+        result += ':%s' % (port,)
+    result += '/%s' % (dbname,)
+    return result
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
