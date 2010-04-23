@@ -24,7 +24,8 @@ import xml.dom.minidom
 from rpc import RPCProxy
 import rpc
 import gettext
-from mx import DateTime
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 import gtk
 import gobject
 from gtk import glade
@@ -191,31 +192,34 @@ class Screen(signal_event.signal_event):
 
     def get_calenderDomain(self, start=None,old_date='',mode='month'):
         args = []
+        old_date = old_date.date()
         if not old_date:
-            old_date = DateTime.today()
-        if old_date == DateTime.today():
+            old_date = datetime.today().date()
+        if old_date == datetime.today().date():
             if mode =='month':
-                start_date = (old_date + DateTime.RelativeDateTime(months = -1)).strftime('%Y-%m-%d')
+                start_date = (old_date + relativedelta(months=-1)).strftime('%Y-%m-%d')
                 args.append((start, '>',start_date))
-                end_date = (old_date + DateTime.RelativeDateTime(months = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(months=+1)).strftime('%Y-%m-%d')
                 args.append((start, '<',end_date))
+                
             if mode=='week':
-                start_date = (old_date + DateTime.RelativeDateTime(weeks = -1)).strftime('%Y-%m-%d')
+                start_date = (old_date + relativedelta(weeks=-1)).strftime('%Y-%m-%d')
                 args.append((start, '>',start_date))
-                end_date = (old_date + DateTime.RelativeDateTime(weeks = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(weeks=+1)).strftime('%Y-%m-%d')
                 args.append((start, '<',end_date))
+                
             if mode=='day':
-                start_date = (old_date + DateTime.RelativeDateTime(days = -1)).strftime('%Y-%m-%d')
+                start_date = (old_date + relativedelta(days=-1)).strftime('%Y-%m-%d')
                 args.append((start, '>',start_date))
-                end_date = (old_date + DateTime.RelativeDateTime(days = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(days=+1)).strftime('%Y-%m-%d')
                 args.append((start, '<',end_date))
         else:
             if mode =='month':
-                end_date = (old_date + DateTime.RelativeDateTime(months = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(months=+1)).strftime('%Y-%m-%d')
             if mode=='week':
-                end_date = (old_date + DateTime.RelativeDateTime(weeks = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(weeks=+1)).strftime('%Y-%m-%d')
             if mode=='day':
-                end_date = (old_date + DateTime.RelativeDateTime(days = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(days=+1)).strftime('%Y-%m-%d')
             old_date = old_date.strftime('%Y-%m-%d')
             args = [(start,'>',old_date),(start,'<',end_date)]
         return args
