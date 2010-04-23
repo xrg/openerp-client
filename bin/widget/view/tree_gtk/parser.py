@@ -55,11 +55,7 @@ def send_keys(renderer, editable, position, treeview):
         editable.connect('changed', treeview.on_editing_done)
 
 def sort_model(column, screen):
-    if column.name != 'sequence':
-        screen.current_view.set_drag_and_drop(set=False)
-    else:
-        screen.current_view.set_drag_and_drop(set=True)
-
+    screen.current_view.set_drag_and_drop(column.name == 'sequence')
     if screen.sort == column.name:
         screen.sort = column.name+' desc'
     else:
