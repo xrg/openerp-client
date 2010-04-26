@@ -175,17 +175,18 @@ class parser_tree(interface.parser_interface):
                     'progressbar':(150,200)
                 }
 
-                if 'width' in fields[fname]:
-                    min_width =  max_width = int(fields[fname]['width'])
-                else:
-                    min_width = twidth.get(fields[fname]['type'], False) and twidth[fields[fname]['type']][0]
-                    max_width = twidth.get(fields[fname]['type'], False) and twidth[fields[fname]['type']][1]
-                if not twidth.get(fields[fname]['type'], False):
+                if col._type not in twidth:
                     col.set_expand(True)
                 else:
+                    if 'width' in fields[fname]:
+                        min_width = max_width = int(fields[fname]['width'])
+                    else:
+                        min_width, max_width = twidth[col._type]
+
                     col.set_min_width(min_width)
                     if max_width:
                         col.set_max_width(max_width)
+
                 col.connect('clicked', sort_model, self.screen)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
