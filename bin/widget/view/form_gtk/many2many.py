@@ -80,14 +80,12 @@ class many2many(interface.widget_interface):
         self.name = attrs['name']
         self.pager = pager(object=self, relation=attrs['relation'], screen=self.screen)
 
-        tooltips = gtk.Tooltips()
-
         # Button Previous Page
-        self.eb_prev_page = self.pager.create_event_box(tooltips, _('Previous Page'),self._sig_prev_page, 'gtk-goto-first')
+        self.eb_prev_page = self.pager.create_event_box(_('Previous Page'), self._sig_prev_page, 'gtk-goto-first')
         hb.pack_start(self.eb_prev_page, expand=False, fill=False)
 
         # Button Previous Record
-        self.eb_pre = self.pager.create_event_box(tooltips, _('Previous Record'),self._sig_previous, 'gtk-go-back')
+        self.eb_pre = self.pager.create_event_box(_('Previous Record'), self._sig_previous, 'gtk-go-back')
         hb.pack_start(self.eb_pre, expand=False, fill=False)
 
         # Record display
@@ -95,11 +93,11 @@ class many2many(interface.widget_interface):
         hb.pack_start(self.label, expand=False, fill=False)
 
         # Button Next
-        self.eb_next = self.pager.create_event_box(tooltips, _('Next Record'),self._sig_next, 'gtk-go-forward')
+        self.eb_next = self.pager.create_event_box(_('Next Record'), self._sig_next, 'gtk-go-forward')
         hb.pack_start(self.eb_next, expand=False, fill=False)
 
         # Button Next Page
-        self.eb_next_page = self.pager.create_event_box(tooltips, _('Next Page'),self._sig_next_page, 'gtk-goto-last')
+        self.eb_next_page = self.pager.create_event_box(_('Next Page'), self._sig_next_page, 'gtk-goto-last')
         hb.pack_start(self.eb_next_page, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
@@ -109,7 +107,7 @@ class many2many(interface.widget_interface):
         for limit in ['20','40','80','All']:
             self.cb.append_text(limit)
         self.cb.set_active(0)
-        tooltips.set_tip(self.cb, _('Choose Limit'))
+        self.cb.set_tooltip_text(_('Choose Limit'))
         self.cb.connect('changed', self.limit_changed)
         hb.pack_start(self.cb, expand=False, fill=False)
 
@@ -158,10 +156,10 @@ class many2many(interface.widget_interface):
 
         if ids == None:
             ids = []
-        if self.name in self.model.m2m_cache:
-            self.model.m2m_cache[self.name] = list(set(self.model.m2m_cache[self.name] + ids))
+        if self.name in self.model.pager_cache:
+            self.model.pager_cache[self.name] = list(set(self.model.pager_cache[self.name] + ids))
         else:
-            self.model.m2m_cache[self.name] = ids
+            self.model.pager_cache[self.name] = ids
         self.model.is_m2m_modified = True
         self.wid_text.set_text('')
         self._focus_out()
@@ -173,8 +171,8 @@ class many2many(interface.widget_interface):
         if not remove_ids:
            return
         for oid in remove_ids:
-            if oid in self.model.m2m_cache[self.name]:
-                self.model.m2m_cache[self.name].remove(oid)
+            if oid in self.model.pager_cache[self.name]:
+                self.model.pager_cache[self.name].remove(oid)
         self.model.is_m2m_modified = True
         self.screen.remove()
         self.screen.display()
@@ -238,8 +236,8 @@ class many2many(interface.widget_interface):
         return True
 
     def set_value(self, model, model_field):
-        if self.name in model.m2m_cache:
-            model_field.set_client(model, model.m2m_cache[self.name])
+        if self.name in model.pager_cache:
+            model_field.set_client(model, model.pager_cache[self.name])
 
     def grab_focus(self):
         return self.wid_text.grab_focus()

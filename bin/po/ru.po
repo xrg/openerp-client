@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-28 12:59+0000\n"
-"Last-Translator: kolianus <Unknown>\n"
+"PO-Revision-Date: 2010-04-09 04:27+0000\n"
+"Last-Translator: Nikolay Chesnokov <chesnokov_n@msn.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-11-29 04:35+0000\n"
+"X-Launchpad-Export-Date: 2010-04-10 03:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -68,12 +68,12 @@ msgstr "укажите альтернативный файл настроек"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "Разрешить ьазовую отладку.  Синоним для '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "определите уровень отладки: %s"
 
 #
 # File: bin/options.py, line: 93
@@ -270,7 +270,7 @@ msgstr ""
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Ошибка"
 
 #
 # File: bin/common/common.py, line: 499
@@ -353,7 +353,7 @@ msgstr "Содержание формы или исключение, если з
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "Это содержимое окна вывода или исключения если не верно"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -517,11 +517,11 @@ msgstr "Поиск OpenERP: %s (%%d результат(-ов))"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "Файл пуст!"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "Импортировано"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 54
@@ -534,7 +534,7 @@ msgstr "Ошибка XML-RPC !"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "Импортирован один объект"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 57
@@ -548,7 +548,7 @@ msgstr "Импортировано %d объектов !"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "Ошибка импорта"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 93
@@ -646,11 +646,11 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Ошибка экспорта!"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "Идентификатор ресурса не существует для этого объекта!"
 
 #: bin/modules/gui/window/form.py:221
 msgid "No record selected ! You can only attach to existing record."
@@ -772,7 +772,7 @@ msgstr "Неверная форма, скорректируйте поля, вы
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "Ошибка !"
 
 #
 # File: bin/modules/gui/window/form.py, line: 302
@@ -938,10 +938,12 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"Язык интерфейса по умолчанию изменен, использование интерфейса возможно "
+"только после перезапуска программы(клиента)"
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "Язык по умолчанию изменен!"
 
 #
 # File: bin/modules/gui/main.py, line: 145
@@ -1031,7 +1033,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Скрипт миграции"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
