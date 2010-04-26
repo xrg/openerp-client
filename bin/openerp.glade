@@ -7028,8 +7028,7 @@ Latin1</property>
                     <property name="xalign">1</property>
                     <property name="xpad">3</property>
                     <property name="ypad">3</property>
-                    <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;OpenERP Server:</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">OpenERP Server:</property>
                   </widget>
                   <packing>
                     <property name="x_options">GTK_FILL</property>
@@ -7063,8 +7062,7 @@ Latin1</property>
                     <property name="xalign">1</property>
                     <property name="xpad">3</property>
                     <property name="ypad">3</property>
-                    <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;Super Administrator Password:</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Super Administrator Password:</property>
                     <property name="justify">GTK_JUSTIFY_RIGHT</property>
                   </widget>
                   <packing>
@@ -7083,7 +7081,6 @@ Latin1</property>
                     <property name="visibility">False</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
-                    <property name="text" translatable="yes">admin</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -7164,8 +7161,7 @@ Latin1</property>
                     <property name="visible">True</property>
                     <property name="tooltip" translatable="yes">Choose the name of the database that will be created. The name must not contain any special character. Exemple: 'terp'.</property>
                     <property name="xalign">1</property>
-                    <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;New Database Name:</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">New Database Name:</property>
                   </widget>
                   <packing>
                     <property name="top_attach">2</property>
@@ -7191,7 +7187,7 @@ Latin1</property>
                     <property name="visible">True</property>
                     <property name="tooltip" translatable="yes">Choose the default language that will be installed for this database. You will be able to install new languages after installation through the administration menu.</property>
                     <property name="xalign">1</property>
-                    <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;Default Language:</property>
+                    <property name="label" translatable="yes">Default Language:</property>
                     <property name="use_markup">True</property>
                   </widget>
                   <packing>
@@ -7204,10 +7200,9 @@ Latin1</property>
                 <child>
                   <widget class="GtkLabel" id="label46572">
                     <property name="visible">True</property>
-                    <property name="tooltip" translatable="yes">This is the password of the 'admin' user that will be created in your new database.</property>
+                    <property name="tooltip" translatable="yes">This is the password of the '&lt;i&gt;admin&lt;/i&gt;' user that will be created in your new database.</property>
                     <property name="xalign">1</property>
-	                <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;Administrator Password:</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Administrator Password:</property>
                   </widget>
                   <packing>
                     <property name="top_attach">7</property>
@@ -7219,10 +7214,9 @@ Latin1</property>
                 <child>
                   <widget class="GtkLabel" id="label46573">
                     <property name="visible">True</property>
-                    <property name="tooltip" translatable="yes">This is the password of the 'admin' user that will be created in your new database. It has to be the same than the above field.</property>
+                    <property name="tooltip" translatable="yes">This is the password of the '&lt;i&gt;admin&lt;/i&gt;' user that will be created in your new database. It has to be the same than the above field.</property>
                     <property name="xalign">1</property>
-	                <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;Confirm Password:</property>
-            	    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Confirm Password:</property>
                   </widget>
                   <packing>
                     <property name="top_attach">8</property>
@@ -7316,8 +7310,7 @@ Latin1</property>
                         <property name="tooltip" translatable="yes">Check this box if you want demonstration data to be installed on your new database. These data will help you to understand OpenERP, with predefined products, partners, etc.</property>
                         <property name="xalign">1</property>
                         <property name="yalign">0.46000000834465027</property>
-                        <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;Load Demonstration Data:</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Load Demonstration Data:</property>
                       </widget>
                     </child>
                   </widget>
@@ -8166,7 +8159,7 @@ This document has been modified while you were editing it.
       </widget>
     </child>
   </widget>
-
+  
   <widget class="GtkWindow" id="win_view_diagram">
     <property name="visible">True</property>
     <property name="title" translatable="yes">window1</property>
@@ -8176,7 +8169,7 @@ This document has been modified while you were editing it.
        </widget>
      </child>
   </widget>
-
+  
   <widget class="GtkWindow" id="win_view_calendar">
     <property name="visible">True</property>
     <property name="title" translatable="yes">window1</property>
