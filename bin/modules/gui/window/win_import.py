@@ -41,7 +41,7 @@ def import_csv(csv_data, f, model, fields, context=None):
     content = file(fname,'rb').read()
     input=cStringIO.StringIO(content)
     input.seek(0)
-    data = list(csv.reader(input, quotechar=csv_data['del'], delimiter=csv_data['sep']))[int(csv_data['skip']):]
+    data = list(csv.reader(input, quotechar=csv_data['del'] or '"', delimiter=csv_data['sep']))[int(csv_data['skip']):]
     datas = []
     for line in data:
         if not line:
@@ -162,7 +162,7 @@ class win_import(object):
 
         self.glade.get_widget('import_csv_skip').set_value(1)
         try:
-            data = csv.reader(file(fname), quotechar=csvdel, delimiter=csvsep)
+            data = csv.reader(file(fname), quotechar=csvdel or '"', delimiter=csvsep)
         except:
             common.warning('Error opening .CSV file', 'Input Error.')
             return True

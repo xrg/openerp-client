@@ -372,6 +372,8 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
         entry_db.set_text(dbtoload)
         entry_db.grab_focus()
         db_widget.hide()
+        if butconnect:
+            butconnect.set_sensitive(True)
     else:
         entry_db.hide()
 

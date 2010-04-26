@@ -75,7 +75,8 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             return
 
         text = self.get_text()
-        pos = text != self.initial_value and self.get_position() or 0
+        current_pos = self.get_position()
+        pos = (current_pos < 10  or text != self.initial_value) and current_pos or 0
 
         if length != 1:
             # TODO: Implement paste

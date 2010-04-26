@@ -138,14 +138,14 @@ class win_export(object):
         self.view2.set_headers_visible(False)
 
         cell = gtk.CellRendererText()
-        column = gtk.TreeViewColumn('Field name', cell, text=0)
+        column = gtk.TreeViewColumn('Field name', cell, text=0, background=2)
         self.view1.append_column(column)
 
         cell = gtk.CellRendererText()
         column = gtk.TreeViewColumn('Field name', cell, text=0)
         self.view2.append_column(column)
 
-        self.model1 = gtk.TreeStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
+        self.model1 = gtk.TreeStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
         self.model2 = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
 
         for f in preload:
@@ -160,7 +160,7 @@ class win_export(object):
                 if prefix_node:
                     self.fields_data[prefix_node + field]['string'] = '%s%s' % (prefix_value, self.fields_data[prefix_node + field]['string'])
                 st_name = fields[field]['string'] or field 
-                node = self.model1.insert(prefix, 0, [st_name, prefix_node+field])
+                node = self.model1.insert(prefix, 0, [st_name, prefix_node+field, (fields[field].get('required', False) and '#ddddff') or 'white'])
                 self.fields[prefix_node+field] = (st_name, fields[field].get('relation', False))
                 if fields[field].get('relation', False) and level>0:
                     fields2 = rpc.session.rpc_exec_auth('/object', 'execute', fields[field]['relation'], 'fields_get', False, rpc.session.context)
