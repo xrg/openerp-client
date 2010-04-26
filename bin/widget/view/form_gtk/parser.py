@@ -287,7 +287,7 @@ class parser_form(widget.view.interface.parser_interface):
                 icon.set_from_stock(attrs['name'], gtk.ICON_SIZE_DIALOG)
                 container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
             elif node.localName=='separator':
-                if 'position' in attrs and attrs['position']=='verticle':
+                if 'position' in attrs and attrs['position']=='vertical':
                     vbox = gtk.HBox()
                 else:
                     vbox = gtk.VBox()
@@ -301,7 +301,7 @@ class parser_form(widget.view.interface.parser_interface):
                     eb.add(l)
                     container.trans_box_label.append((eb, text, None))
                     vbox.pack_start(eb)
-                if 'position' in attrs and attrs['position']=='verticle':
+                if 'position' in attrs and attrs['position']=='vertical':
                     vbox.pack_start(gtk.VSeparator(), padding=2, expand=False, fill=False)
                 else:
                     vbox.pack_start(gtk.HSeparator())
