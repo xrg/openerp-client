@@ -26,12 +26,18 @@ import gtk
 import gtk.glade
 import gettext
 import common
+import gobject
 from datetime import datetime, date
 
 from SpiffGtkWidgets import Calendar
 from mx import DateTime
 import time
 import math
+
+import rpc
+from rpc import RPCProxy
+
+import widget.model.field as wmodel_fields
 
 COLOR_PALETTE = ['#f57900', '#cc0000', '#d400a8', '#75507b', '#3465a4', '#73d216', '#c17d11', '#edd400',
                  '#fcaf3e', '#ef2929', '#ff00c9', '#ad7fa8', '#729fcf', '#8ae234', '#e9b96e', '#fce94f',
@@ -67,15 +73,20 @@ class TinyCalModel(Calendar.Model):
             self.events[self.next_event_id] = event
             event.id = self.next_event_id
             self.next_event_id += 1
+        # Force view update
+        self.emit('event-added', None)
 
     def remove_events(self):
         self.events = {}
+        # Force view update
+        self.emit('event-removed', None)
 
 
 class ViewCalendar(object):
     TV_COL_ID = 0
     TV_COL_COLOR = 1
     TV_COL_LABEL = 2
+    TV_COL_TOGGLE = 3
 
     def __init__(self, model, axis, fields, attrs):
         self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_calendar', gettext.textdomain())
@@ -87,10 +98,9 @@ class ViewCalendar(object):
         self._radio_day = self.glade.get_widget('radio_day')
         self._small_calendar = self.glade.get_widget('calendar_small')
         self._calendar_treeview = self.glade.get_widget('calendar_treeview')
-        
         self._radio_month.set_active(True)
         self.mode = 'month'
-        
+
         self.fields = fields
         self.attrs = attrs
         self.axis = axis
@@ -114,7 +124,7 @@ class ViewCalendar(object):
         self.glade.signal_connect('on_button_day_clicked', self._change_view, 'day')
         self.glade.signal_connect('on_button_week_clicked', self._change_view, 'week')
         self.glade.signal_connect('on_button_month_clicked', self._change_view, 'month')
-        
+
         self.date = DateTime.today()
 
         self.string = attrs.get('string', '')
@@ -122,19 +132,33 @@ class ViewCalendar(object):
         self.date_delay = attrs.get('date_delay')
         self.date_stop = attrs.get('date_stop')
         self.color_field = attrs.get('color')
-        self.day_length = int(attrs.get('day_length', 8))
+        self.color_field_custom = attrs.get('color_custom', 'color')
+        self.color_model = False
+        self.color_filters = {}
         self.colors = {}
+
+        self.day_length = int(attrs.get('day_length', 8))
         self.models = None
+        self.models_record_group = None
 
         if self.color_field:
-            model = gtk.ListStore(str, str, str)
-            self._calendar_treeview.set_model(model)
+            self.color_model = gtk.ListStore(str, str, str, gobject.TYPE_BOOLEAN)
+            self._calendar_treeview.set_model(self.color_model)
             self._calendar_treeview.get_selection().set_mode(gtk.SELECTION_NONE)
 
             for c in (self.TV_COL_ID, self.TV_COL_COLOR):
                 column = gtk.TreeViewColumn(None, gtk.CellRendererText(), text=c)
                 self._calendar_treeview.append_column(column)
-                column.set_visible(False) 
+                column.set_visible(False)
+
+            # Row toogle
+            renderer = gtk.CellRendererToggle()
+            renderer.set_property('activatable', True)
+            renderer.connect('toggled', self._treeview_toggled, self.color_model, self.color_filters)
+            column = gtk.TreeViewColumn(None, renderer)
+            column.add_attribute(renderer, "active", self.TV_COL_TOGGLE)
+            column.set_cell_data_func(renderer, self._treeview_setter)
+            self._calendar_treeview.append_column(column)
 
             renderer = gtk.CellRendererText()
             column = gtk.TreeViewColumn(None, renderer, text=self.TV_COL_LABEL)
@@ -144,11 +168,37 @@ class ViewCalendar(object):
             column.set_widget(col_label)
             column.set_cell_data_func(renderer, self._treeview_setter)
             self._calendar_treeview.append_column(column)
-            
+
+    def _treeview_toggled(self, renderer, path, model, color_filters):
+        it = model.get_iter(path)
+        curval = model.get(it, self.TV_COL_TOGGLE)[0]
+        newval = not curval
+        model.set(it, self.TV_COL_TOGGLE, newval)
+
+        value = model.get(it, self.TV_COL_ID)
+        if isinstance(value, (tuple,list)):
+            value = value[0]
+
+        # update filters
+        if not newval:
+            # remove from filter
+            try:
+                color_filters.pop(value)
+            except KeyError:
+                # item anymore in dictionary
+                pass
+        else:
+            # add to filter
+            color_filters[value] = True
+
+        self.display(None, force=True)
 
     def _treeview_setter(self, column, cell, store, iter):
         color = store.get_value(iter, self.TV_COL_COLOR)
-        cell.set_property('background', str(color))
+        if isinstance(cell, gtk.CellRendererText):
+            cell.set_property('background', str(color))
+        elif isinstance(cell, gtk.CellRendererToggle):
+            cell.set_property('cell-background', str(color))
 
     def add_to_treeview(self, name, value, color):
         value = str(value)
@@ -157,31 +207,42 @@ class ViewCalendar(object):
             if row[self.TV_COL_ID] == value:
                 return  # id already in the treeview
         iter = model.append()
-        model.set(iter, self.TV_COL_ID, value, self.TV_COL_COLOR, color, self.TV_COL_LABEL, name)
+        model.set(iter, self.TV_COL_ID, value,
+                        self.TV_COL_COLOR, color,
+                        self.TV_COL_LABEL, name,
+                        self.TV_COL_TOGGLE, False)
 
-    def _change_small(self, widget, *args, **argv):
+    def _change_small(self, widget, date_selected, hippo_event, *args, **argv):
         if isinstance(widget, gtk.Calendar):
             t = list(widget.get_date())
             t[1] += 1
         else:
-            t = list(args[0].timetuple()[:3])
+            t = list(date_selected.timetuple()[:3])
         self.date = DateTime.DateTime(*t)
         self.display(None)
-        self.screen.context.update({'default_' +self.date_start:self.date.strftime('%Y-%m-%d %H:%M:%S')})
-        self.screen.switch_view(mode='form')
-        self.screen.new()
+
+        # if action = double click
+        if hippo_event.button == 1:
+            if hippo_event.count == 1: # simple clic
+                # simply display new current day
+                return
+            elif hippo_event.count >= 2: # double clic or more
+                self.screen.context.update({'default_' +self.date_start:self.date.strftime('%Y-%m-%d %H:%M:%S')})
+                self.screen.switch_view(mode='form')
+                self.screen.new()
 
     def _today(self, widget, *args, **argv):
         self.date = DateTime.today()
         self.display(None)
 
     def _back_forward(self, widget, type, *args, **argv):
-        if self.mode=='day':
-            self.date = self.date + DateTime.RelativeDateTime(days=type)
-        if self.mode=='week':
-            self.date = self.date + DateTime.RelativeDateTime(weeks=type)
-        if self.mode=='month':
-            self.date = self.date + DateTime.RelativeDateTime(months=type)
+        relatime = DateTime.RelativeDateTime
+        if self.mode == 'day':
+            self.date += relatime(days=type)
+        if self.mode == 'week':
+            self.date += relatime(weeks=type)
+        if self.mode == 'month':
+            self.date += relatime(months=type)
         self.display(None)
 
     def _change_view(self, widget, type, *args, **argv):
@@ -189,44 +250,81 @@ class ViewCalendar(object):
             return True
         self.process = True
         self.mode = type
-        self.display(None)
+        self.display(None, force=True)
         self.process = False
         return True
 
     def _on_event_clicked(self, calendar, calendar_event, hippo_event):
-        if hippo_event.button == 1 and hippo_event.count == 1:   # simple-left-click
+        if hippo_event.button == 1 and hippo_event.count >= 2:
+            # user have double clicked
             self.screen.current_model = calendar_event.model
             self.screen.switch_view(mode='form')
-            
+
     def __update_colors(self):
-        self.colors = {}
         if self.color_field:
-            for model in self.models:
-                
-                key = model.value[self.color_field]
-                name = key
-                value = key
+            self.colors = self._get_colors(self.models, self.color_field, self.color_field_custom)
 
-                if isinstance(key, (tuple, list)):
-                    value, name = key
-                    key = tuple(key)
+    def _get_colors(self, models, color_field, color_field_custom):
+        auto_color_count = 0 # how many color do we need to generate auto.
+        colors = {}
 
-                self.colors[key] = (name, value, None)
+        for model in models:
+            name = value = key = model.value[color_field]
 
-            colors = choice_colors(len(self.colors))
-            for i, (key, value) in enumerate(self.colors.items()):
-                self.colors[key] = (value[0], value[1], colors[i])
+            if isinstance(key, (tuple, list)):
+                value, name = key
+                key = tuple(key)
 
-    def display(self, models):
+            if key in colors:
+                # already present skip
+                continue
+
+            # if field is many2one, try to get color from object
+            # 'color' field
+            field_color = None
+            field_widget = model.mgroup.mfields.get(color_field, False)
+            if field_widget and field_widget.attrs['type'] == 'many2one':
+                fproxy = RPCProxy(field_widget.attrs['relation'])
+                try:
+                    fdata = fproxy.read(value, [color_field_custom])
+                    if fdata:
+                        field_color = fdata.get(color_field_custom) and str(fdata.get(color_field_custom)) or None
+                except Exception, e:
+                    #TODO: Need to limit exception
+                    print(e)
+                    pass
+
+            if not field_color:
+                # increment total color to generate
+                auto_color_count += 1
+
+            colors[key] = (name, value, field_color)
+
+        auto_colors = choice_colors(auto_color_count)
+        colors_idx = 0
+        for key, value in colors.items():
+            color_value = value[2]
+            if not color_value:
+                color_value = auto_colors[colors_idx]
+                colors_idx += 1
+            colors[key] = (value[0], value[1], color_value)
+        # return new colors
+        return colors
+
+    def display(self, models, force=False):
         if models:
             self.models = models.models
+            self.models_record_group = models
 
             if self.models:
                 self.__update_colors()
 
                 self.cal_model.remove_events()
                 self.cal_model.add_events(self.__get_events())
-                
+        elif force == True:
+            self.cal_model.remove_events()
+            self.cal_model.add_events(self.__get_events())
+
         self.refresh()
 
     def refresh(self):
@@ -235,15 +333,15 @@ class ViewCalendar(object):
         from locale import getlocale
         sysencoding = getlocale()[1]
 
-        if self.mode=='month':
+        if self.mode == 'month':
             self._radio_month.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_MONTH
             self._label_current.set_text(ustr(self.date.strftime('%B %Y'), sysencoding))
-        elif self.mode=='week':
+        elif self.mode == 'week':
             self._radio_week.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_WEEK
             self._label_current.set_text(_('Week') + ' ' + self.date.strftime('%W, %Y'))
-        elif self.mode=='day':
+        elif self.mode == 'day':
             self._radio_day.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_CUSTOM
             d1 = datetime(*t[:3])
@@ -254,13 +352,29 @@ class ViewCalendar(object):
         self.cal_view.selected = date(*list(t)[:3])
         self._small_calendar.select_month(t[1]-1,t[0])
         self._small_calendar.select_day(t[2])
-        
+
         self.cal_view.refresh()
 
 
     def __get_events(self):
+        do_color_filtering = len(self.color_filters.keys()) and True or False
+        color_filters = self.color_filters
+
         events = []
         for model in self.models:
+            filter_state = 'keep'
+            if do_color_filtering:
+                model_value = model.value.get(self.color_field, False)
+                if isinstance(model_value, (tuple,list)):
+                    model_value = str(model_value[0])
+                if model_value and model_value not in color_filters:
+                    filter_state = 'skip'
+
+            if filter_state == 'skip':
+                # We need to skip this item
+                continue
+
+
             e = self.__get_event(model)
             if e:
                 if e.color_info:
@@ -292,14 +406,14 @@ class ViewCalendar(object):
                     event[fld] = tuple(ds)
 
     def __get_event(self, model):
-        
+
         event = model.value.copy()
         self.__convert(event)
 
-        caption = ''     
-        description = [] 
-        starts = None   
-        ends = None      
+        caption = ''
+        description = []
+        starts = None
+        ends = None
 
         if self.axis:
 
@@ -383,6 +497,7 @@ class ViewCalendar(object):
                          bg_color = (all_day or self.mode != 'month') and color or 'white',
                          text_color = (all_day or self.mode != 'month') and 'black' or color,
         )
+
 
 
 class parser_calendar(interface.parser_interface):
