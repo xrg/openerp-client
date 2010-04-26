@@ -163,39 +163,28 @@ class parser_tree(interface.parser_interface):
                 col.set_cell_data_func(renderer, cell.setter)
                 col.set_clickable(True)
                 twidth = {
-                    'integer': 60,
-                    'float': 80,
-                    'float_time': 80,
-                    'date': 70,
-                    'datetime': 145,
-                    'selection': 90,
-                    'char': 100,
-                    'one2many': 50,
-                    'many2many': 50,
-                    'boolean': 20,
-                    'progressbar':150
+                    'integer': (60,170),
+                    'float': (80,300),
+                    'float_time': (80,150),
+                    'date': (70,100),
+                    'datetime': (145,145),
+                    'selection': (90,250),
+                    'char': (100,False),
+                    'one2many': (50,False),
+                    'many2many': (50,False),
+                    'boolean': (20,80),
+                    'progressbar':(150,200)
                 }
-                tmax_width={
-                    'integer':170,
-                    'float':300,
-                    'float_time':150,
-                    'date':100,
-                    'datetime':145,
-                    'selection': 250,
-                    'progressbar':200,
-                    'float_time':100,
-                    'boolean': 80,
-                }
+
                 if 'width' in fields[fname]:
-                    width = int(fields[fname]['width'])
-                    max_width = False
+                    min_width =  max_width = int(fields[fname]['width'])
                 else:
-                    width = twidth.get(fields[fname]['type'], 100)
-                    max_width = tmax_width.get(fields[fname]['type'],False)
+                    min_width = twidth.get(fields[fname]['type'], False) and twidth[fields[fname]['type']][0]
+                    max_width = twidth.get(fields[fname]['type'], False) and twidth[fields[fname]['type']][1]
                 if not twidth.get(fields[fname]['type'], False):
                     col.set_expand(True)
                 else:
-                    col.set_min_width(width)
+                    col.set_min_width(min_width)
                     if max_width:
                         col.set_max_width(max_width)
                 if not treeview.sequence:
