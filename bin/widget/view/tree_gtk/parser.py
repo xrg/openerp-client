@@ -45,8 +45,6 @@ import datetime as DT
 import service
 import gobject
 import pango
-import mx.DateTime
-from mx.DateTime import *
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed)

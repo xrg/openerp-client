@@ -28,7 +28,6 @@ import locale
 
 import common
 import interface
-from mx.DateTime import DateTimeDelta
 from tools import datetime_util
 
 class float_time(interface.widget_interface):

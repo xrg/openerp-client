@@ -21,8 +21,6 @@
 
 import time
 from datetime import datetime as DT
-#import mx
-#from mx import DateTime as DT
 
 import gtk
 
@@ -120,7 +118,6 @@ class calendar(interface.widget_interface):
         else:
             if len(value)>10:
                 value=value[:10]
-            #date=mx.DateTime.strptime(value, DT_FORMAT)
             date=DT.strptime(value[:10], DT_FORMAT)
             t=date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
