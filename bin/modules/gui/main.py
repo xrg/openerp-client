@@ -705,41 +705,23 @@ class db_create(object):
         pbar.pulse()
         if progress == 1.0:
             win.destroy()
-
-            pwdlst = '\n'.join(map(lambda x: '    - %s: %s / %s' % (x['name'],x['login'],x['password']), users))
-            dialog = glade.XML(common.terp_path("openerp.glade"), "dia_dbcreate_ok", gettext.textdomain())
-            win = dialog.get_widget('dia_dbcreate_ok')
-            if not parent:
-                parent = service.LocalService('gui.main').window
-            win.set_transient_for(parent)
-            win.show_all()
-            buffer = dialog.get_widget('dia_tv').get_buffer()
-
-            buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-            iter_start = buffer.get_start_iter()
-            buffer.insert(iter_start, _('The following users have been installed on your database:')+'\n\n'+ pwdlst + '\n\n'+_('You can now connect to the database as an administrator.'))
-            res = win.run()
-            parent.present()
-            win.destroy()
-
-            if res == gtk.RESPONSE_OK:
-                m = re.match('^(http[s]?://|socket://)([\w.]+):(\d{1,5})$', url)
-                ok = False
-                for x in users:
-                    if x['login']=='admin' and m:
-                        res = [x['login'], x['password']]
-                        res.append( m.group(2) )
-                        res.append( m.group(3) )
-                        res.append( m.group(1) )
-                        res.append( dbname )
-                        log_response = rpc.session.login(*res)
-                        if log_response == 1:
-                            options.options['login.login'] = x['login']
-                            id = self.terp_main.sig_win_menu(quiet=False)
-                            ok = True
-                            break
-                if not ok:
-                    self.sig_login(dbname=dbname)
+            m = re.match('^(http[s]?://|socket://)([\w.]+):(\d{1,5})$', url)
+            ok = False
+            for x in users:
+                if x['login']=='admin' and m:
+                    res = [x['login'], x['password']]
+                    res.append( m.group(2) )
+                    res.append( m.group(3) )
+                    res.append( m.group(1) )
+                    res.append( dbname )
+                    log_response = rpc.session.login(*res)
+                    if log_response == 1:
+                        options.options['login.login'] = x['login']
+                        id = self.terp_main.sig_win_menu(quiet=False)
+                        ok = True
+                        break
+            if not ok:
+                self.sig_login(dbname=dbname)
             return False
         return True
 
