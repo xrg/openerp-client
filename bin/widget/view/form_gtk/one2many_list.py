@@ -190,7 +190,7 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
      # Previous Page
         self.eb_prev_page = gtk.EventBox()
-        tooltips.set_tip(self.eb_prev_page, _('Previous Page'))
+        self.eb_prev_page.set_tooltip_text(_('Previous Page'))
         self.eb_prev_page.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb_prev_page.connect('button_press_event', self._sig_prev_page)
         img_first = gtk.Image()
@@ -224,7 +224,7 @@ class one2many_list(interface.widget_interface):
 
         # Next Page
         self.eb_next_page = gtk.EventBox()
-        tooltips.set_tip(self.eb_next_page, _('Next Page'))
+        self.eb_next_page.set_tooltip_text(_('Next Page'))
         self.eb_next_page.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb_next_page.connect('button_press_event', self._sig_next_page)
         img_last = gtk.Image()
@@ -252,7 +252,7 @@ class one2many_list(interface.widget_interface):
         for limit in ['20','40','80','100']:
             self.cb.append_text(limit)
         self.cb.set_active(0)
-        tooltips.set_tip(self.cb, _('Choose Limit'))
+        self.cb.set_tooltip_text(_('Choose Limit'))
         self.cb.connect('changed', self.limit_changed)
         hb.pack_start(self.cb, expand=False, fill=False)
 
