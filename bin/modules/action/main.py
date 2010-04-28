@@ -142,7 +142,7 @@ class main(service.Service):
             if not action.get('domain', False):
                 action['domain']='[]'
             ctx = context.copy()
-            ctx.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])} )
+            ctx.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[]), 'active_model': datas.get('model',False)})
             ctx.update(tools.expr_eval(action.get('context','{}'), ctx.copy()))
 
             a = ctx.copy()
