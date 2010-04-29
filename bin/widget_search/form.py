@@ -353,15 +353,15 @@ class form(wid_int.wid_int):
         return True
 
     def add_custom(self, widget, table, fields):
+        new_table = gtk.Table(1,1,False)
         panel = widgets_type['custom_filter'][0]('', self.parent,{'fields':fields},call=self.remove_custom)
         x =  self.rows
-        table.resize(x,4)
-        table.attach(panel.widget,1, 4, x, x+1, yoptions=gtk.FILL, xoptions=gtk.FILL, ypadding=2, xpadding=0)
+        new_table.attach(panel.widget,0, 1, x, x+1, xoptions=gtk.FILL, yoptions=gtk.FILL , ypadding=2, xpadding=0)
         panelx = 'panel' + str(x)
-        self.custom_widgets[panelx] = (panel,table,1)
-        self.rows +=1
-        table.show()
-
+        self.custom_widgets[panelx] = (panel, new_table, 1)
+        table.attach(new_table, 1, 9, x, x+1)
+        self.rows += 1
+        table.show_all()
         return panel
 
     def toggle(self, widget, event=None):
