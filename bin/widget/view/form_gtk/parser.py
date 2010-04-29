@@ -413,6 +413,9 @@ class parser_form(widget.view.interface.parser_interface):
                 if 'filename' in attrs:
                     fields[name]['filename'] = attrs['filename']
 
+                if fields[name]['type'] == 'many2one' and 'search_mode' in attrs:
+                    fields[name]['search_mode'] = attrs['search_mode']
+
                 widget_act = widgets_type[type][0](self.window, self.parent, model, fields[name])
                 self.widget_id += 1
                 widget_act.position = self.widget_id
