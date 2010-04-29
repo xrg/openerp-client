@@ -29,6 +29,8 @@ except NameError:
 
 import tools
 
+DEFAULT_PAGER_LIMIT = 20
+
 class ModelField(object):
     '''
     get: return the values to write to the server
@@ -308,26 +310,29 @@ class M2MField(CharField):
 
     def __init__(self, parent, attrs):
         super(M2MField, self).__init__(parent, attrs)
+        self.limit = DEFAULT_PAGER_LIMIT
 
     def create(self, model):
         return []
 
     def get(self, model, check_load=True, readonly=True, modified=False):
-        return [(6, 0, model.value[self.name] or [])]
+        if self.name in model.pager_cache:
+            return [(6, 0, model.pager_cache[self.name] or [])]
+        return []
 
     def get_client(self, model):
         return model.value[self.name] or []
 
     def set(self, model, value, test_state=False, modified=False):
-        model.value[self.name] = value or []
+        model.value[self.name] = value and value[:self.limit] or []
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
 
     def set_client(self, model, value, test_state=False, force_change=False):
-        internal = model.value[self.name]
         self.set(model, value, test_state, modified=False)
-        if set(internal) != set(value):
+        if model.is_m2m_modified:
+            model.is_m2m_modified = False
             model.modified = True
             model.modified_fields.setdefault(self.name)
             self.sig_changed(model)
@@ -345,6 +350,7 @@ class O2MField(CharField):
     def __init__(self, parent, attrs):
         super(O2MField, self).__init__(parent, attrs)
         self.context={}
+        self.limit = DEFAULT_PAGER_LIMIT
 
     def create(self, model):
         from widget.model.group import ModelRecordGroup
@@ -383,6 +389,8 @@ class O2MField(CharField):
         mod.signal_connect(mod, 'model-changed', self._model_changed)
         model.value[self.name] = mod
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
+        if value:
+            value = value[:self.limit]
         model.value[self.name].pre_load(value, display=False)
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 

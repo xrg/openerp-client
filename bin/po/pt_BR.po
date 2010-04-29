@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-12-15 06:28+0000\n"
-"Last-Translator: Fabio Henrique de Souza <fabiohsouza@gmail.com>\n"
+"PO-Revision-Date: 2010-03-24 05:40+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-16 05:02+0000\n"
+"X-Launchpad-Export-Date: 2010-03-26 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -69,7 +69,7 @@ msgstr "informe um arquivo de configuração alternativo"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "Habilitar debug basico. Apelido para '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
@@ -240,6 +240,29 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Um erro desconhecido foi informado.</b>\n"
+"\n"
+"Seu contrato de manutenção não acoberta todos os módulos instalados em seu "
+"sistema !\n"
+"Se voce está usando o OpenERP em produção, nós sugerimos que voce atualize "
+"seu \n"
+"contrato.\n"
+"\n"
+"Se voce desenvolveu seus próprios módulos ou instalou módulos de terceiros, "
+"nós\n"
+"podemos fornecer contrato adicional para estes módulos. Depois\n"
+"de rever seus módulos, nossa equipe de qualidade poderar garantir sua "
+"migração\n"
+"automaticamente para todas as versões estáveis futuras do OpenERP, sem custo "
+"extra.\n"
+"\n"
+"Aqui está a lista de módulos não acobertados pelo seu contrato de "
+"manutenção:\n"
+"%s\n"
+"\n"
+"Voce pode usar o link abaixo para mais informações. O detalhe do erro\n"
+"será exibido na segunda aba."
 
 #: bin/common/common.py:443
 msgid ""
@@ -256,6 +279,9 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Seu problema pode NÃO ter sido enviado para a equipe de qualidade!\n"
+"Por favor, informe o erro manualmente em:\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
@@ -319,7 +345,7 @@ msgstr "O conteúdo do formulário, ou exceção se inválido"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "O conteúdo do campo ou exceção se não válido"
 
 #
 # File: bin/widget_search/date_widget.py, line: 65
@@ -1420,6 +1446,7 @@ msgstr "Ícone errado para o botão !"
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
 msgstr ""
+"Entre com algum texto para o campo relacionado antes de adicionar traduções!"
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 486
@@ -2300,7 +2327,7 @@ msgstr "<b>Exportação pré-definida</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Importar compatibilidade"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
@@ -3272,6 +3299,9 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"Por favor preencha o seguinte form na ordem para ajudar-nos para melhorar "
+"<b><span foreground=\"red\"><i>Abrir</i></span> ERP</b>  e melhorar os novos "
+"desenvolvimentos."
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
@@ -3342,6 +3372,7 @@ msgstr "Nós planejamos oferecer serviços para o OpenERP"
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"Fale-nos sobre porque voce usa o OpenERP e quais seus softwares atuais:"
 
 #
 # File: bin/openerp.glade, line: 5189

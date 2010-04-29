@@ -39,8 +39,8 @@ LDFMT = tools.datetime_util.get_date_format()
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 class calendar(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={},screen=None):
-        super(calendar, self).__init__(name, parent, attrs)
+    def __init__(self, name, parent, attrs={}, screen=None):
+        super(calendar, self).__init__(name, parent, attrs, screen)
 
         self.widget = gtk.HBox(spacing=3)
         self.format = LDFMT
@@ -50,11 +50,11 @@ class calendar(wid_int.wid_int):
         self.entry1.set_property('width-chars', 10)
         self.entry1.set_property('activates_default', True)
         self.entry1.connect('key_press_event', self.sig_key_press, self.entry1, parent)
-	self.entry1.set_tooltip_text(_('Start date'))
+        self.entry1.set_tooltip_text(_('Start date'))
         self.widget.pack_start(self.widget1, expand=False, fill=True)
 
         self.eb1 = gtk.EventBox()
-	self.eb1.set_tooltip_text(_('Open the calendar widget'))
+        self.eb1.set_tooltip_text(_('Open the calendar widget'))
         self.eb1.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb1.connect('button_press_event', self.cal_open, self.entry1, parent)
         img = gtk.Image()
@@ -70,11 +70,11 @@ class calendar(wid_int.wid_int):
         self.entry2.set_property('width-chars', 10)
         self.entry2.set_property('activates_default', True)
         self.entry2.connect('key_press_event', self.sig_key_press, self.entry2, parent)
-	self.entry2.set_tooltip_text(_('End date'))
+        self.entry2.set_tooltip_text(_('End date'))
         self.widget.pack_start(self.widget2, expand=False, fill=True)
 
         self.eb2 = gtk.EventBox()
-	self.eb2.set_tooltip_text(_('Open the calendar widget'))
+        self.eb2.set_tooltip_text(_('Open the calendar widget'))
         self.eb2.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb2.connect('button_press_event', self.cal_open, self.entry2, parent)
         img = gtk.Image()
@@ -83,9 +83,9 @@ class calendar(wid_int.wid_int):
         self.eb2.add(img)
         self.widget.pack_start(self.eb2, expand=False, fill=False)
 
-        if attrs.get('default',False):
-            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
-            self._value_set(value)
+        if self.default_search:
+            self.entry1.set_text(self.default_search)
+
     def _date_get(self, str):
         try:
             #date = mx.DateTime.strptime(str, LDFMT)
@@ -108,10 +108,8 @@ class calendar(wid_int.wid_int):
             val['context'] = eval(self.attrs['context'], {'self': val1, 'self2': val2})
         if not self.attrs.get('domain', False):
             res = []
-            val2 = self._date_get(self.entry1.get_text())
-            if val2:
-                res.append((self.name, '>=', val2))
-            val2 = self._date_get(self.entry2.get_text())
+            if val1:
+                res.append((self.name, '>=', val1))
             if val2:
                 res.append((self.name, '<=', val2))
             val['domain'] = res
@@ -164,9 +162,8 @@ class calendar(wid_int.wid_int):
 
 class datetime(wid_int.wid_int):
     def __init__(self, name, parent, attrs={},screen=None):
-        super(datetime, self).__init__(name, parent, attrs)
+        super(datetime, self).__init__(name, parent, attrs, screen)
 
-        tooltips = gtk.Tooltips()
         self.widget = gtk.HBox(spacing=5)
         self.format = LDFMT+' %H:%M:%S'
 
@@ -175,11 +172,11 @@ class datetime(wid_int.wid_int):
         self.entry1.set_property('width-chars', 19)
         self.entry1.set_property('activates_default', True)
         self.entry1.connect('key_press_event', self.sig_key_press, self.entry1, parent)
-        tooltips.set_tip(self.entry1, _('Start date'))
+        self.entry1.set_tooltip_text(_('Start date'))
         self.widget.pack_start(self.widget1, expand=False, fill=True)
 
         self.eb1 = gtk.EventBox()
-        tooltips.set_tip(self.eb1, _('Open the calendar widget'))
+        self.eb1.set_tooltip_text('Open the calendar widget')
         self.eb1.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb1.connect('button_press_event', self.cal_open, self.entry1, parent)
         img = gtk.Image()
@@ -195,11 +192,11 @@ class datetime(wid_int.wid_int):
         self.entry2.set_property('width-chars', 19)
         self.entry2.set_property('activates_default', True)
         self.entry2.connect('key_press_event', self.sig_key_press, self.entry2, parent)
-        tooltips.set_tip(self.entry2, _('End date'))
+        self.entry2.set_tooltip_text(_('End date'))
         self.widget.pack_start(self.widget2, expand=False, fill=True)
 
         self.eb2 = gtk.EventBox()
-        tooltips.set_tip(self.eb2, _('Open the calendar widget'))
+        self.eb2.set_tooltip_text(_('Open the calendar widget'))
         self.eb2.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb2.connect('button_press_event', self.cal_open, self.entry2, parent)
         img = gtk.Image()
@@ -207,10 +204,9 @@ class datetime(wid_int.wid_int):
         img.set_alignment(0.5, 0.5)
         self.eb2.add(img)
         self.widget.pack_start(self.eb2, expand=False, fill=False)
-        tooltips.enable()
-        if attrs.get('default',False):
-            value = tools.expr_eval(str(attrs.get('default', 'False')),{'context':screen.context})
-            self._value_set(value)
+
+        if self.default_search:
+            self.entry1.set_text(self.default_search)
 
     def _date_get(self, str):
         try:

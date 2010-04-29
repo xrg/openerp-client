@@ -46,7 +46,7 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
         self.regex = '^'+self.regex+'$'
 
     def _is_not_generic_property(self, name):
-        return name in ('editable', 'text', 'foreground', 'background')
+        return name in ('editable', 'text', 'foreground', 'background','font-desc')
 
     def set_property(self, name, value):
         if not self._is_not_generic_property(name):

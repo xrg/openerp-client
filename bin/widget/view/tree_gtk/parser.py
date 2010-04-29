@@ -270,10 +270,10 @@ class Char(object):
             align = 1
         else:
             align = 0
-
-        if not model.list_parent and self.treeview.screen.context.get('group_by',False):
-            cell.set_property('background', 'grey')
-            cell.set_property('foreground','blue')
+        gb = self.treeview.screen.context.get('group_by', False)
+        if isinstance(model, group_record) and gb:
+            font = pango.FontDescription('Times New Roman bold 10')
+            cell.set_property('font-desc', font)
 
         elif self.treeview.editable:
             field = model[self.field_name]
@@ -281,6 +281,7 @@ class Char(object):
             self.set_color(cell, model)
         else:
             cell.set_property('background', None)
+            cell.set_property('font-desc', None)
         cell.set_property('xalign', align)
 
     def set_color(self, cell, model,group_by = False):
@@ -435,7 +436,7 @@ class Float_Sci(Char):
 class FloatTime(Char):
     def get_textual_value(self, model):
         val = model[self.field_name].get_client(model) or 0
-        t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,4) * 60)
+        t= tools.datetime_util.float_time_convert(val)
         if val<0:
             t = '-'+t
         return t

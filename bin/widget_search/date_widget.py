@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -170,8 +170,8 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
                 if self.callback_process: self.callback_process(False, self, event)
                 self.stop_emission("key-press-event")
                 return True
-        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus, 
-                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus, 
+        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus,
+                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus,
                               gtk.keysyms.KP_Equal, gtk.keysyms.equal):
                 self.mode_cmd = True
                 self.date_get()

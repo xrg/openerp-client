@@ -42,7 +42,7 @@ class main(service.Service):
         ids = datas['ids']
         del datas['ids']
         if not ids:
-            ids =  rpc.session.rpc_exec_auth('/object', 'execute', datas['model'], 'search', [])
+            ids =  rpc.session.rpc_exec_auth('/object', 'execute', datas['model'], 'search', datas.get('_domain',[]))
             if ids == []:
                 common.message(_('Nothing to print!'))
                 return False
@@ -89,6 +89,7 @@ class main(service.Service):
                     'limit', 'auto_refresh', 'search_view', 'auto_search', 'search_view_id'):
                 datas[key] = action.get(key, datas.get(key, None))
 
+            datas['auto_search'] = action.get('auto_search', True)
             if not datas['search_view'] and datas['search_view_id']:
                  datas['search_view'] = str(rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', datas['search_view_id'], 'search', context))
 
@@ -199,7 +200,7 @@ class main(service.Service):
                 win=datas['window']
                 del datas['window']
             if not datas:
-                datas = action.get('datas',[])            
+                datas = action.get('datas',[])
             self.exec_report(action['report_name'], datas, context)
 
         elif action['type']=='ir.actions.act_url':
@@ -225,6 +226,7 @@ class main(service.Service):
         res = common.selection(_('Select your action'), keyact)
         if res:
             (name,action) = res
+            context.update(rpc.session.context)
             self._exec_action(action, data, context=context)
             return (name, action)
         return False
