@@ -7128,7 +7128,7 @@ Latin1</property>
                               <widget class="GtkImage" id="image3410">
                                 <property name="visible">True</property>
                                 <property name="stock">gtk-network</property>
-                                <property name="icon_size">2</property>
+                                <property name="icon_size">1</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -7155,7 +7155,7 @@ Latin1</property>
                   <packing>
                     <property name="left_attach">2</property>
                     <property name="right_attach">3</property>
-                    <property name="x_options"></property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options"></property>
                   </packing>
                 </child>
