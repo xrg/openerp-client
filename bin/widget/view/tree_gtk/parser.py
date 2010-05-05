@@ -24,6 +24,7 @@ import re
 import locale
 import gtk
 import math
+import cgi
 
 import tools
 import tools.datetime_util
@@ -151,7 +152,7 @@ class parser_tree(interface.parser_interface):
                 treeview.handlers[col] = handler_id
                 col_label = gtk.Label('')
                 if fields[fname].get('required', False):
-                    col_label.set_markup('<b>%s</b>' % fields[fname]['string'])
+                    col_label.set_markup('<b>%s</b>' % cgi.escape(fields[fname]['string']))
                 else:
                     col_label.set_text(fields[fname]['string'])
                 col_label.show()
@@ -565,6 +566,7 @@ class Selection(Char):
 
     def value_from_text(self, model, text):
         selection = self.attrs['selection']
+        text = tools.ustr(text)
         res = False
         for val, txt in selection:
             if txt[:len(text)].lower() == text.lower():

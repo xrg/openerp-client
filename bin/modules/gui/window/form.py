@@ -230,6 +230,7 @@ class form(object):
         if mode<>self.screen.current_view.view_type:
             self.screen.switch_view(mode=mode)
             self.sig_reload()
+            self.screen.current_view.set_cursor()
 
     def sig_logs(self, widget=None):
         id = self.id_get()
