@@ -457,9 +457,15 @@ class parser_form(widget.view.interface.parser_interface):
                         continue
                 saw_list.append(StateAwareWidget(frame, states))
 
-                container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
+                if attrs.get("width",False) or attrs.get("height"):
+                    frame.set_size_request(int(attrs.get('width', -1)) ,int(attrs.get('height', -1)))
+                    hbox = gtk.HBox(homogeneous=False, spacing=0)
+                    hbox.pack_start(frame, expand=False, fill=False, padding=0)
+                    group_wid = hbox
+                else:
+                    group_wid = frame
+                container.wid_add(group_wid, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
                 container.new(int(attrs.get('col',4)))
-
                 widget, widgets, saws, on_write = self.parse(model, node, fields)
                 dict_widget.update(widgets)
                 saw_list += saws
