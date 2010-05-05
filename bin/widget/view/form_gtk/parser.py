@@ -64,7 +64,14 @@ class Button(Observable):
 
         self.widget.show()
         self.widget.connect('clicked', self.button_clicked)
-
+        
+        default_width = self.widget.size_request()[0]
+        default_height = self.widget.size_request()[1]
+        max_width = self.widget.get_screen().get_width()/5
+        if default_width > max_width:
+            self.widget.set_size_request(max_width, default_height)
+        
+        
     def grab_focus(self):
         self.widget.grab_focus()
 

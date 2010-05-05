@@ -29,7 +29,7 @@ except NameError:
 
 import tools
 
-DEFAULT_PAGER_LIMIT = 20
+DEFAULT_PAGER_LIMIT = 100
 
 class ModelField(object):
     '''

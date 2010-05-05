@@ -25,35 +25,29 @@ import locale
 import rpc
 import math
 
-from mx.DateTime import RelativeDateTime
-from mx.DateTime import now
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
-try:
-    from mx.DateTime import strptime
-except ImportError:
-    # strptime does not exist on windows. we emulate it
-    from mx.DateTime import mktime
-    def strptime(s, f):
-        return mktime(time.strptime(s, f))
+strptime=datetime.strptime
 
 date_operation = {
-    '^=w(\d+)$': lambda dt,r: dt+RelativeDateTime(day=0, month=0, weeks = int(r.group(1))),
-    '^=d(\d+)$': lambda dt,r: dt+RelativeDateTime(day=int(r.group(1))),
-    '^=m(\d+)$': lambda dt,r: dt+RelativeDateTime(month = int(r.group(1))),
-    '^=y(2\d\d\d)$': lambda dt,r: dt+RelativeDateTime(year = int(r.group(1))),
-    '^=h(\d+)$': lambda dt,r: dt+RelativeDateTime(hour = int(r.group(1))),
-    '^=(\d+)w$': lambda dt,r: dt+RelativeDateTime(day=0, month=0, weeks = int(r.group(1))),
-    '^=(\d+)d$': lambda dt,r: dt+RelativeDateTime(day=int(r.group(1))),
-    '^=(\d+)m$': lambda dt,r: dt+RelativeDateTime(month = int(r.group(1))),
-    '^=(2\d\d\d)y$': lambda dt,r: dt+RelativeDateTime(year = int(r.group(1))),
-    '^=(\d+)h$': lambda dt,r: dt+RelativeDateTime(hour = int(r.group(1))),
-    '^([\\+-]\d+)h$': lambda dt,r: dt+RelativeDateTime(hours = int(r.group(1))),
-    '^([\\+-]\d+)w$': lambda dt,r: dt+RelativeDateTime(days = 7*int(r.group(1))),
-    '^([\\+-]\d+)d$': lambda dt,r: dt+RelativeDateTime(days = int(r.group(1))),
-    '^([\\+-]\d+)m$': lambda dt,r: dt+RelativeDateTime(months = int(r.group(1))),
-    '^([\\+-]\d+)y$': lambda dt,r: dt+RelativeDateTime(years = int(r.group(1))),
-    '^=$': lambda dt,r: now(),
-    '^-$': lambda dt,r: False
+    '^=w(\d+)$': lambda dt,r: dt+relativedelta(day=0, month=0, weeks = int(r.group(1))),
+    '^=d(\d+)$': lambda dt,r: dt+relativedelta(day=int(r.group(1))),
+    '^=m(\d+)$': lambda dt,r: dt+relativedelta(month = int(r.group(1))),
+    '^=y(2\d\d\d)$': lambda dt,r: dt+relativedelta(year = int(r.group(1))),
+    '^=h(\d+)$': lambda dt,r: dt+relativedelta(hour = int(r.group(1))),
+    '^=(\d+)w$': lambda dt,r: dt+relativedelta(day=0, month=0, weeks = int(r.group(1))),
+    '^=(\d+)d$': lambda dt,r: dt+relativedelta(day=int(r.group(1))),
+    '^=(\d+)m$': lambda dt,r: dt+relativedelta(month = int(r.group(1))),
+    '^=(2\d\d\d)y$': lambda dt,r: dt+relativedelta(year = int(r.group(1))),
+    '^=(\d+)h$': lambda dt,r: dt+relativedelta(hour = int(r.group(1))),
+    '^([\\+-]\d+)h$': lambda dt,r: dt+relativedelta(hours = int(r.group(1))),
+    '^([\\+-]\d+)w$': lambda dt,r: dt+relativedelta(days = 7*int(r.group(1))),
+    '^([\\+-]\d+)d$': lambda dt,r: dt+relativedelta(days = int(r.group(1))),
+    '^([\\+-]\d+)m$': lambda dt,r: dt+relativedelta(months = int(r.group(1))),
+    '^([\\+-]\d+)y$': lambda dt,r: dt+relativedelta(years = int(r.group(1))),
+    '^=$': lambda dt,r: datetime.now(),
+     '^-$': lambda dt,r: False
 }
 
 date_mapping = {

@@ -122,29 +122,25 @@ class parser_diagram(interface.parser_interface):
         arrow_attr = None
         for node in root_node.childNodes:
             node_attrs = node_attributes(node)
-
+            type = ""
+            node_fields = []
             if node.localName == 'node':
-                node_fields = []
+                type = "node"
+                node_attr = node_attrs
+
+            if node.localName == 'arrow':
+                type = "arrow"
+                arrow_attr = node_attrs
+
+            if type in ['node','arrow']:
                 for child in node._get_childNodes():
                     if node_attributes(child) and node_attributes(child).get('name',False):
                         node_fields.append(node_attributes(child)['name'])
                 fields = rpc.session.rpc_exec_auth('/object', 'execute', node_attrs.get('object',False), 'fields_get',node_fields)
+        
                 for key,val in fields.items():
                     fields[key]['name'] = key
-                attrs['node'] = {'string' :node_attributes(root_node).get('string',False), 'views':{'form': {'fields': fields,'arch' : node}}}
-                node_attr = node_attrs
-
-            if node.localName == 'arrow':
-                arrow_fields = []
-                for child in node._get_childNodes():
-                    if node_attributes(child) and node_attributes(child).get('name',False):
-                        arrow_fields.append(node_attributes(child)['name'])
-                fields = rpc.session.rpc_exec_auth('/object', 'execute', node_attrs.get('object',False), 'fields_get',arrow_fields)
-
-                for key,val in fields.items():
-                    fields[key]['name'] = key
-                attrs['arrow'] = {'string' :node_attributes(root_node).get('string',False), 'views':{'form': {'fields': fields,'arch' : node}}}
-                arrow_attr = node_attrs
+                attrs[type] = {'string' :node_attributes(root_node).get('string',False), 'views':{'form': {'fields': fields,'arch' : node}}}
 
         if node_attr.get('form_view_ref',False):
             view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'search' ,[('name','=', node_attr.get('form_view_ref',''))])

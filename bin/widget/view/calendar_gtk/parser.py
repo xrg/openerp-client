@@ -29,7 +29,8 @@ import gobject
 from datetime import datetime, date
 
 from SpiffGtkWidgets import Calendar
-from mx import DateTime
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 import time
 import math
 
@@ -126,7 +127,7 @@ class ViewCalendar(object):
         self.glade.signal_connect('on_button_week_clicked', self._change_view, 'week')
         self.glade.signal_connect('on_button_month_clicked', self._change_view, 'month')
 
-        self.date = DateTime.today()
+        self.date = datetime.today()
 
         self.string = attrs.get('string', '')
         self.date_start = attrs.get('date_start')
@@ -219,7 +220,7 @@ class ViewCalendar(object):
             t[1] += 1
         else:
             t = list(date_selected.timetuple()[:3])
-        self.date = DateTime.DateTime(*t)
+        self.date = datetime(*t[0:6])
         self.display(None)
 
         # if action = double click
@@ -233,17 +234,17 @@ class ViewCalendar(object):
                 self.screen.new()
 
     def _today(self, widget, *args, **argv):
-        self.date = DateTime.today()
+        self.date = datetime.today()
         self.display(None)
 
     def _back_forward(self, widget, type, *args, **argv):
         relatime = DateTime.RelativeDateTime
         if self.mode == 'day':
-            self.date += relatime(days=type)
+            self.date = self.date + relativedelta(days=type)
         if self.mode == 'week':
-            self.date += relatime(weeks=type)
+            self.date = self.date + relativedelta(weeks=type)
         if self.mode == 'month':
-            self.date += relatime(months=type)
+            self.date = self.date + relativedelta(months=type)
         self.screen.search_filter()
         self.display(None)
 
@@ -336,7 +337,7 @@ class ViewCalendar(object):
         self.refresh()
 
     def refresh(self):
-        t = self.date.tuple()
+        t = self.date.timetuple()
         from tools import ustr
         from locale import getlocale
         sysencoding = getlocale()[1]
@@ -459,10 +460,8 @@ class ViewCalendar(object):
                     if not h:
                         n = n - 1
                     span = n + 1
-
-            t=DateTime.mktime(starts)
-            ends = time.localtime(t.ticks() + (h * 60 * 60) + (n * 24 * 60 * 60))
-
+                    
+            ends= time.localtime(time.mktime(starts)+(h * 60 * 60) + (n * 24 * 60 * 60))
 
         if starts and self.date_stop:
 

@@ -95,37 +95,6 @@ class main(service.Service):
             if not datas['search_view'] and datas['search_view_id']:
                  datas['search_view'] = str(rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', datas['search_view_id'], 'search', context))
 
-            elif not datas['search_view'] and not datas['search_view_id']:
-                def encode(s):
-                    if isinstance(s, unicode):
-                        return s.encode('utf8')
-                    return s
-                def process_child(node, new_node, doc):
-
-                    for child in node.getchildren():
-                        if child.tag=='field' and child.get('select') and child.get('select')=='1':
-                            if child.getchildren():
-                                fld = etree.Element('field')
-                                for attr in child.attrib.keys():
-                                        fld.set(attr, child.get(attr))
-                                new_node.append(fld)
-                            else:
-                                new_node.append(child)
-                        elif child.tag in ('page','group','notebook'):
-                                process_child(child, new_node, doc)
-
-                form_arch = rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', False, 'form', context)
-
-                dom_arc = etree.XML(encode(form_arch['arch']))
-                new_node = copy.deepcopy(dom_arc)
-
-                for child_node in new_node.getchildren()[0].getchildren():
-                    new_node.getchildren()[0].remove(child_node)
-                process_child(dom_arc.getchildren()[0],new_node.getchildren()[0],dom_arc)
-
-                form_arch['arch'] = etree.tostring(new_node)
-                datas['search_view'] = str(form_arch)
-
             if datas['limit'] is None or datas['limit'] == 0:
                 datas['limit'] = 80
 
@@ -144,7 +113,7 @@ class main(service.Service):
             if not action.get('domain', False):
                 action['domain']='[]'
             ctx = context.copy()
-            ctx.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])} )
+            ctx.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[]), 'active_model': datas.get('model',False)})
             ctx.update(tools.expr_eval(action.get('context','{}'), ctx.copy()))
 
             a = ctx.copy()
