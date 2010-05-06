@@ -342,10 +342,9 @@ class ModelRecord(signal_event.signal_event):
                 elif button_type == 'object':
                     if not self.id:
                         return
-                    context = self.context_get()
+                    context = self.context_get()                    
                     if 'context' in attrs:
                         context.update(self.expr_eval(attrs['context'], check_load=False))
-
                     result = rpc.session.rpc_exec_auth(
                         '/object', 'execute',
                         self.resource,
@@ -356,9 +355,9 @@ class ModelRecord(signal_event.signal_event):
                     if type(result)==type({}):
                         if not result.get('nodestroy', False):
                             screen.window.destroy()
-                        datas = {}
-                        obj = service.LocalService('action.main')
-                        obj._exec_action(result, datas, context=screen.context)
+                        datas = {'id': context.get('active_id',False), 'ids': context.get('active_ids',[]), 'model': context.get('active_model',False)}
+                        obj = service.LocalService('action.main')                        
+                        obj._exec_action(result, datas, context=context)
 
                 elif button_type == 'action':
                     obj = service.LocalService('action.main')
