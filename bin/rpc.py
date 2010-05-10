@@ -321,7 +321,7 @@ class rpc_session(object):
         return self._open
 
     def logout(self):
-        if self._open :
+        if self._open:
             self._open = False
             self.uname = None
             self.uid = None
