@@ -312,9 +312,10 @@ class rpc_session(object):
                 import pytz
                 pytz.timezone(self.timezone)
             except pytz.UnknownTimeZoneError:
-                common.warning(_('Server timezone is not recognized (%s)!\nTime values will be displayed without timezone conversion.'%self.timezone))
-            except:
-                common.warning(_('The "pytz" Python library is missing!\nTime values will be displayed as if located in the server timezone.'))
+                # Server timezone is not recognized!
+                # Time values will be displayed as if located in the server timezone. (nothing we can do)
+                pass
+                
 
     def logged(self):
         return self._open
