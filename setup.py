@@ -168,6 +168,16 @@ options = {
     }
 }
 
+complementary_arguments = dict()
+
+if sys.platform == 'win32':
+    complementary_arguments['windows'] = [
+        {
+            'script' : os.path.join('bin', 'openerp-client.py'),
+            'icon_resources' : [(1, os.path.join('bin', 'pixmaps', 'openerp-icon.ico'))],
+        }
+    ]
+
 setup(name             = name,
       version          = version,
       description      = description,
@@ -207,11 +217,11 @@ setup(name             = name,
                           'openerp-client.plugins'] + list(find_plugins()),
       package_dir      = {'openerp-client': 'bin'},
       distclass = os.name <> 'nt' and L10nAppDistribution or None,
-      windows=[{"script":"bin\\openerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\openerp-icon.ico")]}],
-      extras_required={
-          'timezone' : ['pytz'],
-      },
+      #extras_required={
+      #    'timezone' : ['pytz'],
+      #},
       options = options,
+      **complementary_arguments
       )
 
 if has_py2exe:
