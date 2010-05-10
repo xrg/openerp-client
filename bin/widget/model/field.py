@@ -193,6 +193,8 @@ class BinaryField(CharField):
     def get(self, model, check_load=True, readonly=True, modified=False):
         self.__check_model(model)
         self.__check_load(model, modified, False)
+        if not model.value.get(self.name, False):
+            return model.value.get(self.get_size_name(), False) or False
         return model.value.get(self.name, False) or False
 
     def get_client(self, model):
