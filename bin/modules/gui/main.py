@@ -63,7 +63,7 @@ class StockButton(gtk.Button):
     def __init__(self, label, stock):
         gtk.Button.__init__(self, label)
         self.icon = gtk.Image()
-        self.icon.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
+        self.icon.set_from_stock(stock, gtk.ICON_SIZE_MENU)
         self.set_image(self.icon)
 
 class DatabaseDialog(gtk.Dialog):
