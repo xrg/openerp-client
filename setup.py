@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-# setup from TinyERP
+# setup for OpenERP GTK client
 #   taken from straw http://www.nongnu.org/straw/index.html
 #   taken from gnomolicious http://www.nongnu.org/gnomolicious/
 #   adapted by Nicolas Évrard <nicoe@altern.org>
