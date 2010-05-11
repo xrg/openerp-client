@@ -98,13 +98,9 @@ class wid_binary(interface.widget_interface):
         self.__ro = value
         if value:
             self.but_select.hide()
-            self.but_exec.hide()
-            self.but_save_as.hide()
             self.but_remove.hide()
         else:
             self.but_select.show()
-            self.but_exec.show()
-            self.but_save_as.show()
             self.but_remove.show()
 
     def _get_filename(self):
