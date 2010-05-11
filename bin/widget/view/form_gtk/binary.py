@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -49,15 +49,15 @@ class wid_binary(interface.widget_interface):
         self.filters = attrs.get('filters', None)
         if self.filters:
             self.filters = self.filters.split(',')
-        
+
         class binButton(gtk.Button):
             def __init__(self, stock, title, long=True):
                 assert stock is not None
                 super(binButton, self).__init__()
-                
+
                 box = gtk.HBox()
                 box.set_spacing(2)
-                
+
                 img = gtk.Image()
                 img.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
                 box.pack_start(img, expand=False, fill=False)
@@ -96,9 +96,17 @@ class wid_binary(interface.widget_interface):
 
     def _readonly_set(self, value):
         self.__ro = value
-        self.but_select.set_sensitive(not value)
-        self.but_remove.set_sensitive(not value)
-    
+        if value:
+            self.but_select.hide()
+            self.but_exec.hide()
+            self.but_save_as.hide()
+            self.but_remove.hide()
+        else:
+            self.but_select.show()
+            self.but_exec.show()
+            self.but_save_as.show()
+            self.but_remove.show()
+
     def _get_filename(self):
         return self._view.model.value.get(self.has_filename) or self._view.model.value.get('name', self.data_field_name)
 
@@ -189,7 +197,7 @@ class wid_binary(interface.widget_interface):
         super(wid_binary, self).display(model, model_field)
         self.model_field = model_field
         disp_text = model_field.get_client(model)
-        
+
         self.wid_text.set_text(disp_text and str(disp_text) or '')
         btn_activate(bool(disp_text))
         return True
@@ -202,6 +210,6 @@ class wid_binary(interface.widget_interface):
 
     def grab_focus(self):
         return self.wid_text.grab_focus()
-    
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
