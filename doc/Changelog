@@ -1,3 +1,15 @@
+2010-05-05: 5.0.10
+==================
+
+Bugfixes
+--------
+
+ * https://launchpad.net/bugs/539722
+   * O2M : close button should not remember changes of the record
+ * https://launchpad.net/bugs/571202
+   * Remove the pyc and bak files in the tarballs
+
+
 2010-04-02: 5.0.9
 =================
 
