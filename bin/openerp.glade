@@ -7489,7 +7489,7 @@ Latin1</property>
                               <widget class="GtkImage" id="image3484">
                                 <property name="visible">True</property>
                                 <property name="stock">gtk-network</property>
-                                <property name="icon_size">2</property>
+                                <property name="icon_size">1</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
