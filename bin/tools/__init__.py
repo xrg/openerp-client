@@ -22,6 +22,7 @@
 import time
 import datetime
 import os
+import operator
 if os.name == 'nt':
     import win32
 
@@ -78,16 +79,23 @@ def calc_condition(self, model, cond):
         common.error('Wrong attrs Implementation!','You have wrongly specified conditions in attrs %s' %(cond_main,))
 
 class ConditionExpr(object):
-    OPERATORS = {'=': lambda x, y, model: model[x].get(model) == y,
-                 '!=': lambda x, y, model: model[x].get(model) != y,
-                 '<': lambda x, y, model: model[x].get(model) < y,
-                 '>': lambda x, y, model: model[x].get(model) > y,
-                 '<=': lambda x, y, model: model[x].get(model) <= y,
-                '>=': lambda x, y, model: model[x].get(model) >= y,
-                 'in': lambda x, y, model: model[x].get(model) in y,
-                 'not in': lambda x, y, model: model[x].get(model) not in y}
-
-    OPERAND_MAPPER = {'<>': '!=', '==': '='}
+    def get_result(self,x,op,y,model):
+        if op=='=':
+            return operator.eq(model[x].get(model),y)
+        elif op=='!=' or op=='<>':
+            return operator.ne(model[x].get(model),y)
+        elif op=='<':
+            return operator.lt(model[x].get(model),y)
+        elif op=='>':
+            return operator.gt(model[x].get(model),y)
+        elif op=='<=':
+            return operator.le(model[x].get(model),y)
+        elif op=='>=':
+            return operator.lt(model[x].get(model),y)
+        elif op=='in':
+            return operator.contains(model[x].get(model),y)
+        elif op=='not in':
+            return operator.not_(operator.contains(model[x].get(model),y))
 
     def __init__(self, condition):
         self.cond = condition
@@ -96,9 +104,8 @@ class ConditionExpr(object):
         def evaluate(cond):
             if isinstance(cond,bool):
                 return cond
-            left, operand, right = cond
-            real_op = self.OPERAND_MAPPER.get(operand.lower(), operand)
-            return self.OPERATORS[real_op](left, right, context)
+            left, opr, right = cond
+            return self.get_result(left,opr,right,context)
 
         def find_index(con):
             index=-1
