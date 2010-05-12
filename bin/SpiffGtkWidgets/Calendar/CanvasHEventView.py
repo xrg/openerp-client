@@ -68,7 +68,7 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
         for col in range(count):
             font = self.cal.font.copy()
             font.set_style(pango.STYLE_ITALIC)
-            text = hippo.CanvasText(text   = 'more',
+            text = hippo.CanvasText(text   = ' ',
                                     font   = font.to_string(),
                                     xalign = hippo.ALIGNMENT_CENTER)
             self.append(text, hippo.PACK_FIXED)
@@ -119,6 +119,10 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
 
 
     def update(self):
+        # Don't crash if we didn't have a range now
+        if self.range is None:
+            return
+
         days = (self.range[1] - self.range[0]).days + 1
         self.table.set_column_count(days)
         self.table.set_row_count(-1)

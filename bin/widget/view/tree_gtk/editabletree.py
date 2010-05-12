@@ -104,10 +104,10 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         def column_is_editable(column):
             renderer = column.get_cell_renderers()[0]
             if isinstance(renderer,gtk.CellRendererPixbuf):
-                return True
+                return False
             if isinstance(renderer,gtk.CellRendererProgress):
-                return True
-            if isinstance(renderer, (gtk.CellRendererToggle,gtk.CellRendererProgress)):
+                return False
+            if isinstance(renderer,gtk.CellRendererToggle):
                 return renderer.get_property('activatable')
             else:
                 return renderer.get_property('editable')

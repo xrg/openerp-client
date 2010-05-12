@@ -64,7 +64,14 @@ class Button(Observable):
 
         self.widget.show()
         self.widget.connect('clicked', self.button_clicked)
-
+        
+        default_width = self.widget.size_request()[0]
+        default_height = self.widget.size_request()[1]
+        max_width = self.widget.get_screen().get_width()/5
+        if default_width > max_width:
+            self.widget.set_size_request(max_width, default_height)
+        
+        
     def grab_focus(self):
         self.widget.grab_focus()
 
@@ -114,6 +121,7 @@ class Button(Observable):
             if not self.attrs.get('confirm',False) or \
                     common.sur(self.attrs['confirm']):
                 model.get_button_action(self.form.screen,id,self.attrs)
+                self.warn('misc-message', '')
         else:
             common.warning(_('Invalid form, correct red fields !'), _('Error !') )
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")

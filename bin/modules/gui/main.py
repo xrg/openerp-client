@@ -372,6 +372,8 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
         entry_db.set_text(dbtoload)
         entry_db.grab_focus()
         db_widget.hide()
+        if butconnect:
+            butconnect.set_sensitive(True)
     else:
         entry_db.hide()
 
@@ -1086,7 +1088,10 @@ class terp_main(service.Service):
         self.glade.get_widget('user').set_sensitive(True)
         self.glade.get_widget('form').set_sensitive(True)
         self.glade.get_widget('plugins').set_sensitive(True)
-        title = "%s%s@%s:%s/%s" % (res[4], res[0], res[2], res[3], res[5])
+
+        title = tools.format_connection_string(*res)
+        sbid = self.sb_servername.get_context_id('message')
+        self.sb_servername.push(sbid, title)
         self.window.set_title(_('OpenERP - %s') % title )
         return True
 
@@ -1177,10 +1182,6 @@ class terp_main(service.Service):
             return False
         id = self.sb_username.get_context_id('message')
         self.sb_username.push(id, act_id[0]['name'] or '')
-        id = self.sb_servername.get_context_id('message')
-        data = urlparse.urlsplit(rpc.session._url)
-        self.sb_servername.push(id, data[0]+':'+(data[1] and '//'+data[1] \
-                or data[2])+' ['+options.options['login.db']+']')
         if not act_id[0][type]:
             if quiet:
                 return False

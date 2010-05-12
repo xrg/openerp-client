@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -131,6 +131,9 @@ try:
     win = modules.gui.main.terp_main()
     if options.options.rcexist:
         win.sig_login()
+    if os.name == 'nt':
+        from tools.win32 import get_systemfont_style
+        gtk.rc_parse_string(get_systemfont_style())
     gtk.main()
 except KeyboardInterrupt, e:
     log = logging.getLogger('common')

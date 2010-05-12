@@ -143,7 +143,6 @@ def upload_data(email, data, type='SURVEY', supportid=''):
     a.start()
     return True
 
-
 def file_selection(title, filename='', parent=None, action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True, multi=False, filters=None):
     if action == gtk.FILE_CHOOSER_ACTION_OPEN:
         buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK)

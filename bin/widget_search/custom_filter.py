@@ -21,7 +21,7 @@
 ##############################################################################
 
 import gtk
-import mx.DateTime
+from datetime import datetime
 import gettext
 from gtk import glade
 
@@ -100,12 +100,12 @@ class custom_filter(wid_int.wid_int):
                 right_text = (field_type == 'boolean' and bool(right_text)) or right_text
                 
                 if field_type == 'date' and right_text:
-                    dt_right_text = mx.DateTime.strptime(right_text,DT_FORMAT)
+                    dt_right_text = datetime.strptime(right_text,DT_FORMAT)
                     right_text = dt_right_text.strftime(DT_FORMAT)
                     
                 if field_type == 'datetime' and right_text:
                     right_text = len(right_text)==10 and (right_text + ' 00:00:00') or right_text
-                    dttime_right_text = mx.DateTime.strptime(right_text,DHM_FORMAT)
+                    dttime_right_text = datetime.strptime(right_text,DHM_FORMAT)
                     right_text = dttime_right_text.strftime(DHM_FORMAT)
                     
                 self.right_text.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("white"))

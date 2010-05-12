@@ -345,7 +345,6 @@ class ModelRecord(signal_event.signal_event):
                     context = self.context_get()
                     if 'context' in attrs:
                         context.update(self.expr_eval(attrs['context'], check_load=False))
-
                     result = rpc.session.rpc_exec_auth(
                         '/object', 'execute',
                         self.resource,
@@ -358,7 +357,7 @@ class ModelRecord(signal_event.signal_event):
                             screen.window.destroy()
                         datas = {}
                         obj = service.LocalService('action.main')
-                        obj._exec_action(result, datas, context=screen.context)
+                        obj._exec_action(result, datas, context=context)
 
                 elif button_type == 'action':
                     obj = service.LocalService('action.main')

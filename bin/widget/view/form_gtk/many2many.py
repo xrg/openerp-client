@@ -103,12 +103,7 @@ class many2many(interface.widget_interface):
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
         # LIMIT COMBO
-        self.cb = gtk.combo_box_new_text()
-        for limit in ['20','40','80','All']:
-            self.cb.append_text(limit)
-        self.cb.set_active(0)
-        self.cb.set_tooltip_text(_('Choose Limit'))
-        self.cb.connect('changed', self.limit_changed)
+        self.cb = self.pager.create_combo_box(_('Choose Limit'), self.limit_changed)
         hb.pack_start(self.cb, expand=False, fill=False)
 
         self.widget.pack_start(hb, expand=False, fill=False)
