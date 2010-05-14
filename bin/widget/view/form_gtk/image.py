@@ -202,9 +202,14 @@ class image_wid(interface.widget_interface):
         return model_field.set_client(model, self._value or False)
 
     def _readonly_set(self, value):
-        self.but_add.set_sensitive(not value)
-        self.but_save_as.set_sensitive(not value)
-        self.but_remove.set_sensitive(not value)
+        if value:
+            self.but_add.hide()
+            self.but_save_as.hide()
+            self.but_remove.hide()
+        else:
+            self.but_add.show()
+            self.but_save_as.show()
+            self.but_remove.show()
         self.is_readonly = value
 
     def grab_focus(self):

@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-# setup from TinyERP
+# setup for OpenERP GTK client
 #   taken from straw http://www.nongnu.org/straw/index.html
 #   taken from gnomolicious http://www.nongnu.org/gnomolicious/
 #   adapted by Nicolas Évrard <nicoe@altern.org>
@@ -95,7 +95,7 @@ def data_files():
         for (dp, dn, names) in os.walk('share\\locale'):
             files.append((dp, map(lambda x: opj('bin', dp, x), names)))
         os.chdir('..')
-        files.append((".",["bin\\openerp.glade", 'bin\\dia_survey.glade', "bin\\win_error.glade", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
+        files.append((".",["bin\\openerp.glade", "bin\\win_error.glade", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
         files.append(("pixmaps", glob.glob("bin\\pixmaps\\*.*")))
         files.append(("po", glob.glob("bin\\po\\*.*")))
         files.append(("icons", glob.glob("bin\\icons\\*.png")))
@@ -109,7 +109,7 @@ def data_files():
         files.append((opj('share', 'pixmaps', 'openerp-client', 'icons'),
             glob.glob('bin/icons/*.png')))
         files.append((opj('share', 'openerp-client'), ['bin/openerp.glade', 'bin/tipoftheday.txt',
-                                                       'bin/win_error.glade', 'bin/dia_survey.glade']))
+                                                       'bin/win_error.glade']))
     return files
 
 included_plugins = ['workflow_print']
@@ -168,6 +168,16 @@ options = {
     }
 }
 
+complementary_arguments = dict()
+
+if sys.platform == 'win32':
+    complementary_arguments['windows'] = [
+        {
+            'script' : os.path.join('bin', 'openerp-client.py'),
+            'icon_resources' : [(1, os.path.join('bin', 'pixmaps', 'openerp-icon.ico'))],
+        }
+    ]
+
 setup(name             = name,
       version          = version,
       description      = description,
@@ -207,11 +217,11 @@ setup(name             = name,
                           'openerp-client.plugins'] + list(find_plugins()),
       package_dir      = {'openerp-client': 'bin'},
       distclass = os.name <> 'nt' and L10nAppDistribution or None,
-      windows=[{"script":"bin\\openerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\openerp-icon.ico")]}],
-      extras_required={
-          'timezone' : ['pytz'],
-      },
+      #extras_required={
+      #    'timezone' : ['pytz'],
+      #},
       options = options,
+      **complementary_arguments
       )
 
 if has_py2exe:

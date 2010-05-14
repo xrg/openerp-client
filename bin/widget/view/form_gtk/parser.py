@@ -197,7 +197,7 @@ class _container(object):
             self.cont[-1] = (table, 0, y+1)
         table.resize(y+1,self.col[-1])
 
-    def wid_add(self, widget, name=None, expand=False, ypadding=2, rowspan=1,
+    def wid_add(self, widget, name=None, xoptions=False, expand=False, ypadding=2, rowspan=1,
             colspan=1, translate=False, fname=None, help=False, fill=False, invisible=False, model=False):
         (table, x, y) = self.cont[-1]
         if colspan>self.col[-1]:
@@ -213,6 +213,9 @@ class _container(object):
             yopt = yopt | gtk.EXPAND
         if fill:
             yopt = yopt | gtk.FILL
+        if not xoptions:
+            xoptions = gtk.FILL|gtk.EXPAND
+
         if colspan == 1 and a == 1:
             colspan = 2
         if name:
@@ -258,8 +261,8 @@ class _container(object):
             ebox.add(img)
             hbox.pack_start(ebox, fill=False, expand=False)
             hbox.show_all()
-        table.attach(hbox, x+a, x+colspan, y, y+rowspan, yoptions=yopt,
-                ypadding=ypadding, xpadding=2)
+        table.attach(hbox, x+a, x+colspan, y, y+rowspan,xoptions=xoptions, yoptions=yopt,
+            ypadding=ypadding, xpadding=2)
         self.cont[-1] = (table, x+colspan, y)
         wid_list = table.get_children()
         wid_list.reverse()
@@ -295,8 +298,8 @@ class parser_form(widget.view.interface.parser_interface):
                 icon.set_from_stock(attrs['name'], gtk.ICON_SIZE_DIALOG)
                 container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
             elif node.localName=='separator':
-                if 'position' in attrs and attrs['position']=='verticle':
-                    vbox = gtk.HBox()
+                if 'position' in attrs and attrs['position']=='vertical':
+                    vbox = gtk.HBox(homogeneous=False, spacing=0)
                 else:
                     vbox = gtk.VBox()
                 if 'string' in attrs:
@@ -309,11 +312,16 @@ class parser_form(widget.view.interface.parser_interface):
                     eb.add(l)
                     container.trans_box_label.append((eb, text, None))
                     vbox.pack_start(eb)
-                if 'position' in attrs and attrs['position']=='verticle':
-                    vbox.pack_start(gtk.VSeparator(), padding=2, expand=False, fill=False)
+                if 'position' in attrs and attrs['position']=='vertical':
+                    vsep = gtk.VSeparator()
+                    rowspan = int(attrs.get('rowspan', '1'))
+                    vsep.set_size_request(1, 20*rowspan)
+                    vbox.pack_start(vsep, False, False, 5)
+                    xoptions = gtk.SHRINK
                 else:
+                    xoptions = False
                     vbox.pack_start(gtk.HSeparator())
-                container.wid_add(vbox,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
+                container.wid_add(vbox,colspan=int(attrs.get('colspan',1)), xoptions=xoptions,expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
             elif node.localName=='label':
                 text = attrs.get('string', '')
                 if not text:
@@ -444,7 +452,7 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
-                container.wid_add(widget_act.widget, label, expand, translate=fields[name].get('translate',False), colspan=size, fname=name, help=hlp, fill=fill, model=model)
+                container.wid_add(widget=widget_act.widget, name=label, expand=expand, translate=fields[name].get('translate',False), colspan=size, fname=name, help=hlp, fill=fill, model=model)
 
             elif node.localName=='group':
                 frame = gtk.Frame(attrs.get('string', None))
@@ -457,9 +465,15 @@ class parser_form(widget.view.interface.parser_interface):
                         continue
                 saw_list.append(StateAwareWidget(frame, states))
 
-                container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
+                if attrs.get("width",False) or attrs.get("height"):
+                    frame.set_size_request(int(attrs.get('width', -1)) ,int(attrs.get('height', -1)))
+                    hbox = gtk.HBox(homogeneous=False, spacing=0)
+                    hbox.pack_start(frame, expand=False, fill=False, padding=0)
+                    group_wid = hbox
+                else:
+                    group_wid = frame
+                container.wid_add(group_wid, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
                 container.new(int(attrs.get('col',4)))
-
                 widget, widgets, saws, on_write = self.parse(model, node, fields)
                 dict_widget.update(widgets)
                 saw_list += saws
