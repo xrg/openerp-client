@@ -204,7 +204,7 @@ class parse(object):
                     self.fields[str(attrs['name'])].update(attrs)
                     self.fields[str(attrs['name'])]['model']=self.model
                     if type not in widgets_type:
-                        return False
+                        continue
                     widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']],screen=call[0])
                     if 'string' in self.fields[str(attrs['name'])]:
                         label = self.fields[str(attrs['name'])]['string']+' :'
