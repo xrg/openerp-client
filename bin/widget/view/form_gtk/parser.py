@@ -64,14 +64,13 @@ class Button(Observable):
 
         self.widget.show()
         self.widget.connect('clicked', self.button_clicked)
-        
+
         default_width = self.widget.size_request()[0]
         default_height = self.widget.size_request()[1]
         max_width = self.widget.get_screen().get_width()/5
         if default_width > max_width:
             self.widget.set_size_request(max_width, default_height)
-        
-        
+
     def grab_focus(self):
         self.widget.grab_focus()
 
@@ -472,7 +471,7 @@ class parser_form(widget.view.interface.parser_interface):
                     group_wid = hbox
                 else:
                     group_wid = frame
-                container.wid_add(group_wid, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
+                container.wid_add(group_wid, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',1)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
                 container.new(int(attrs.get('col',4)))
                 widget, widgets, saws, on_write = self.parse(model, node, fields)
                 dict_widget.update(widgets)
