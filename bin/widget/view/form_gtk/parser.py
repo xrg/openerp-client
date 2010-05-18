@@ -471,7 +471,7 @@ class parser_form(widget.view.interface.parser_interface):
                     group_wid = hbox
                 else:
                     group_wid = frame
-                container.wid_add(group_wid, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',1)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
+                container.wid_add(group_wid, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
                 container.new(int(attrs.get('col',4)))
                 widget, widgets, saws, on_write = self.parse(model, node, fields)
                 dict_widget.update(widgets)
