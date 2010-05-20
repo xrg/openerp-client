@@ -129,8 +129,9 @@ class Button(Observable):
 
 
 class StateAwareWidget(object):
-    def __init__(self, widget, states=None):
+    def __init__(self, widget, label=None, states=None):
         self.widget = widget
+        self.label = label
         self.states = states or []
 
     def __getattr__(self, a):
@@ -143,7 +144,8 @@ class StateAwareWidget(object):
             self.widget.hide()
 
     def attrs_set(self, model):
-        sa = hasattr(self.widget, 'attrs') and self.widget.attrs or {}
+        sa = getattr(self.widget, 'attrs') or {}
+
         attrs_changes = eval(sa.get('attrs',"{}"),{'uid':rpc.session.uid})
         if sa.get('default_focus',False):
             self.widget.grab_focus()
@@ -151,18 +153,16 @@ class StateAwareWidget(object):
             result = True
             for condition in v:
                 result = result and tools.calc_condition(self,model,condition)
-            if result:
-                if k=='invisible':
-                    self.widget.hide()
-                elif k=='readonly':
-                    self.widget.set_sensitive(False)
-                else:
-                    self.widget.set_sensitive(False and sa.get('readonly',False))
-            else:
-                if k=='readonly':
-                    self.widget.set_sensitive(True)
-                if k=='invisible':
-                    self.widget.show()
+
+            if k == 'invisible':
+                func = ['show', 'hide'][bool(result)]
+                getattr(self.widget, func)()
+                if self.label:
+                    getattr(self.label, func)()
+            elif k == 'readonly':
+                self.widget.set_sensitive(not result)
+                if self.label:
+                    self.label.set_sensitive(not result)
 
 
 class _container(object):
@@ -196,12 +196,49 @@ class _container(object):
             self.cont[-1] = (table, 0, y+1)
         table.resize(y+1,self.col[-1])
 
-    def wid_add(self, widget, name=None, xoptions=False, expand=False, ypadding=2, rowspan=1,
-            colspan=1, translate=False, fname=None, help=False, fill=False, invisible=False, model=False):
+    def create_label(self, name, markup=False, align=1.0, wrap=False,
+                     angle=None, width=None, fname=None, help=None, model=None):
+        label = gtk.Label(name)
+        if markup:
+            label.set_use_markup(True)
+
+        eb = gtk.EventBox()
+        eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
+        self.trans_box_label.append((eb, name, fname))
+        eb.add(label)
+
+        uid = rpc.session.uid
+        tooltip = ''
+        if help:
+            tooltip = '<span foreground="darkred"><b>%s</b></span>\n%s' % \
+                        (tools.to_xml(name), tools.to_xml(help))
+            label.set_markup('<sup><span foreground="darkgreen">?</span></sup>' + tools.to_xml(name))
+        if fname and model and uid == 1:
+            if tooltip:
+                tooltip += '\n'
+            tooltip += '<span foreground="#009900"><b>%s:</b> %s - <b>%s:</b> %s</span>' % \
+                        (_('Field'), tools.to_xml(fname), _('Object'), tools.to_xml(model))
+        if tooltip:
+            eb.set_tooltip_markup(tooltip)
+
+
+        label.set_alignment(align, 0.5)
+
+        if width:
+            label.set_size_request(width, -1)
+
+        label.set_line_wrap(bool(int(wrap)))
+        if angle:
+            label.set_angle(int(angle))
+
+
+        return eb
+
+    def wid_add(self, widget, label=None, xoptions=False, expand=False, ypadding=2, rowspan=1,
+            colspan=1, translate=False, fname=None, fill=False, invisible=False):
         (table, x, y) = self.cont[-1]
         if colspan>self.col[-1]:
             colspan=self.col[-1]
-        a = name and 1 or 0
         #Commented the following line in order to use colspan=4 and colspan=4 in same row
 #        if colspan+x+a>self.col[-1]:
         if colspan+x>self.col[-1]:
@@ -215,37 +252,20 @@ class _container(object):
         if not xoptions:
             xoptions = gtk.FILL|gtk.EXPAND
 
-        if colspan == 1 and a == 1:
+        if colspan == 1 and label:
             colspan = 2
-        if name:
-            label = gtk.Label(name)
-            eb = gtk.EventBox()
-            eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
-            self.trans_box_label.append((eb, name, fname))
-            eb.add(label)
-            try:
-                uid = rpc.session.uid
-                if help and uid ==1:
-                    eb.set_tooltip_markup("""<span foreground="darkred"><b>%s</b></span>\n%s\n<span foreground="#009900"><b>%s:</b> %s - <b>%s</b>: %s</span>""" %
-                                          (tools.to_xml(name), tools.to_xml(help), _('Field'), tools.to_xml(fname), _('Object'), tools.to_xml(model)))
-                    label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
-                    eb.show()
-                elif help and uid != 1:
-                    eb.set_tooltip_markup('<span foreground=\"darkred\"><b>'+tools.to_xml(name)+'</b></span>\n'+tools.to_xml(help))
-                    label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
-                    eb.show()
-                elif not help and uid ==1:
-                    eb.set_tooltip_markup("""<span foreground="#009900"><b>%s:</b> %s - <b>%s</b>: %s</span>""" %
-                                          (_('Field'), tools.to_xml(fname), _('Object'), tools.to_xml(model)))
-            except:
-                pass
-
-            if '_' in name:
-                label.set_text_with_mnemonic(name)
-                label.set_mnemonic_widget(widget)
-            label.set_alignment(1.0, 0.5)
-            table.attach(eb, x, x+1, y, y+rowspan, yoptions=yopt,
+        if label:
+            table.attach(label, x, x+1, y, y+rowspan, yoptions=yopt,
                     xoptions=gtk.FILL, ypadding=ypadding, xpadding=2)
+
+            real_label = label
+            if isinstance(label, gtk.EventBox):
+                real_label = label.child
+            txt = real_label.get_text()
+            if '_' in txt:
+                real_label.set_text_with_mnemonic(txt)
+                real_label.set_mnemonic_widget(widget)
+
         hbox = widget
         hbox.show_all()
         if translate:
@@ -255,12 +275,12 @@ class _container(object):
             img.set_from_stock('terp-translate', gtk.ICON_SIZE_MENU)
             ebox = gtk.EventBox()
             ebox.set_events(gtk.gdk.BUTTON_PRESS_MASK)
-            self.trans_box.append((ebox, name, fname, widget))
+            self.trans_box.append((ebox, translate, fname, widget))
 
             ebox.add(img)
             hbox.pack_start(ebox, fill=False, expand=False)
             hbox.show_all()
-        table.attach(hbox, x+a, x+colspan, y, y+rowspan,xoptions=xoptions, yoptions=yopt,
+        table.attach(hbox, x+int(bool(label)), x+colspan, y, y+rowspan,xoptions=xoptions, yoptions=yopt,
             ypadding=ypadding, xpadding=2)
         self.cont[-1] = (table, x+colspan, y)
         wid_list = table.get_children()
@@ -295,7 +315,7 @@ class parser_form(widget.view.interface.parser_interface):
             if node.localName=='image':
                 icon = gtk.Image()
                 icon.set_from_stock(attrs['name'], gtk.ICON_SIZE_DIALOG)
-                container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
+                container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, fill=int(attrs.get('fill', 0)))
             elif node.localName=='separator':
                 if 'position' in attrs and attrs['position']=='vertical':
                     vbox = gtk.HBox(homogeneous=False, spacing=0)
@@ -320,7 +340,7 @@ class parser_form(widget.view.interface.parser_interface):
                 else:
                     xoptions = False
                     vbox.pack_start(gtk.HSeparator())
-                container.wid_add(vbox,colspan=int(attrs.get('colspan',1)), xoptions=xoptions,expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
+                container.wid_add(vbox,colspan=int(attrs.get('colspan',1)), xoptions=xoptions,expand=int(attrs.get('expand',0)), ypadding=10, fill=int(attrs.get('fill', 0)))
             elif node.localName=='label':
                 text = attrs.get('string', '')
                 if not text:
@@ -329,25 +349,22 @@ class parser_form(widget.view.interface.parser_interface):
                             text += node.data
                         else:
                             text += node.toxml()
-                label = gtk.Label(text)
-                label.set_use_markup(True)
-                if 'align' in attrs:
-                    label.set_alignment(float(attrs['align'] or 0.0), 0.5)
-                label.set_size_request(int(attrs.get('width', -1)) , -1)
-                eb = gtk.EventBox()
-                eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
-                eb.add(label)
-                container.trans_box_label.append((eb, text, None))
 
-                if 'angle' not in attrs:
-                    label.set_line_wrap(True)
-                    label.set_angle(int(attrs.get('angle', 0)))
+                align = float(attrs.get('align', 0))
+
+                eb = container.create_label(text, markup=True, align=align,
+                                            width=int(attrs.get('width', -1)),
+                                            angle=attrs.get('angle'),
+                                            wrap=attrs.get('wrap', True),
+                                            help=attrs.get('help'))
+
+
+                container.trans_box_label.append((eb, text, None))
 
                 container.wid_add(
                     eb,
                     colspan=int(attrs.get('colspan', 1)),
                     expand=False,
-                    help=attrs.get('help', False),
                     fill=int(attrs.get('fill', 0))
                 )
 
@@ -361,8 +378,8 @@ class parser_form(widget.view.interface.parser_interface):
                         continue
                 button = Button(attrs)
                 states = [e for e in attrs.get('states','').split(',') if e]
-                saw_list.append(StateAwareWidget(button, states))
-                container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)), help=attrs.get('help', False))
+                saw_list.append(StateAwareWidget(button, states=states))
+                container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)))
 
             elif node.localName=='notebook':
                 if attrs.get('invisible', False):
@@ -451,7 +468,14 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
-                container.wid_add(widget=widget_act.widget, name=label, expand=expand, translate=fields[name].get('translate',False), colspan=size, fname=name, help=hlp, fill=fill, model=model)
+
+                translate = label if fields[name].get('translate') else None
+                widget_label = container.create_label(label, fname=name, help=hlp, model=model) if label else None
+
+                if attrs.get('attrs'):
+                    saw_list.append(StateAwareWidget(widget_act, widget_label))
+
+                container.wid_add(widget=widget_act.widget, label=widget_label, expand=expand, translate=translate, colspan=size, fname=name, fill=fill)
 
             elif node.localName=='group':
                 frame = gtk.Frame(attrs.get('string', None))
@@ -462,7 +486,7 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
-                saw_list.append(StateAwareWidget(frame, states))
+                saw_list.append(StateAwareWidget(frame, states=states))
 
                 if attrs.get("width",False) or attrs.get("height"):
                     frame.set_size_request(int(attrs.get('width', -1)) ,int(attrs.get('height', -1)))

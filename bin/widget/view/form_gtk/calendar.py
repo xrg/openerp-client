@@ -225,11 +225,11 @@ class datetime(interface.widget_interface):
 
     def display(self, model, model_field):
         if not model_field:
-            return self.show(False)
+            return self.set_datetime(False)
         super(datetime, self).display(model, model_field)
-        self.show(model_field.get(model))
+        self.set_datetime(model_field.get(model))
 
-    def show(self, dt_val, timezone=True):
+    def set_datetime(self, dt_val, timezone=True):
         if not dt_val:
             self.entry.clear()
         else:
@@ -290,7 +290,7 @@ class datetime(interface.widget_interface):
             except ValueError:
                 common.message(_('Invalid datetime value! Year must be greater than 1899 !'))
             else:
-                self.show(value, timezone=False)
+                self.set_datetime(value, timezone=False)
 
         self._focus_out()
         win.destroy()
@@ -336,12 +336,12 @@ class stime(interface.widget_interface):
 
     def display(self, model, model_field):
         if not model_field:
-            return self.show(False)
+            return self.set_datetime(False)
         super(stime, self).display(model, model_field)
         self.entry.set_text(model_field.get(model) or '00:00:00')
         return True
 
-    def show(self, dt_val, timezone=True):
+    def set_datetime(self, dt_val, timezone=True):
         if not dt_val:
             self.entry.clear()
         else:
