@@ -379,6 +379,8 @@ class rpc_session(object):
             if url.endswith('/xmlrpc'):
                 url = url[:-7]
             sv = self.db_exec_no_except(url, 'server_version')
+            if sv.endswith('dev'):
+                sv = sv[:-3]
             self.server_version = map(int, sv.split('.'))
             print "Connected to a server ver: %s" % (self.server_version)
         except Exception, e:
