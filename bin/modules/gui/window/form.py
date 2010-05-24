@@ -154,9 +154,10 @@ class form(object):
     def sig_switch_graph(self, widget=None):
         return self.sig_switch(widget, 'graph')
 
-    def get_resource(self,widget):
+    def get_resource(self, widget=None, get_id=None):
         all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])
-        get_id = int(widget.get_value())
+        if widget:
+            get_id = int(widget.get_value())
         if get_id in all_ids:
             current_ids = self.screen.ids_get()
             if get_id in current_ids:
@@ -227,9 +228,12 @@ class form(object):
     def sig_switch(self, widget=None, mode=None):
         if not self.modified_save():
             return
+        id = self.screen.id_get()
         if mode<>self.screen.current_view.view_type:
             self.screen.switch_view(mode=mode)
             self.sig_reload()
+            if id:
+                self.get_resource(get_id=id)
 
     def sig_logs(self, widget=None):
         id = self.id_get()

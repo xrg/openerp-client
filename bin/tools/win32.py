@@ -20,8 +20,15 @@
 ##############################################################################
 
 import time
-import datetime 
+import datetime
 import locale
+
+import win32ui
+import win32con
+try:
+    import winxpgui as win32gui
+except:
+    import win32gui
 
 if not hasattr(locale, 'nl_langinfo'):
     def nl_langinfo(param):
@@ -37,3 +44,23 @@ if not hasattr(locale, 'nl_langinfo'):
     if not hasattr(locale, 'D_FMT'):
         locale.D_FMT = None
 
+def get_systemfont_style():
+    # Get DC
+    hdc = win32gui.GetDC(0)
+    # Get system DPI
+    dpi = win32ui.GetDeviceCaps(hdc, win32con.LOGPIXELSY)
+    # Get system font, it's name and size
+    z = win32gui.SystemParametersInfo(win32con.SPI_GETNONCLIENTMETRICS)
+    font = z['lfMessageFont']
+    font_name = font.lfFaceName
+    font_size = int(round(abs(font.lfHeight) * 72 / dpi))
+    # Release DC
+    win32gui.ReleaseDC(0, hdc)
+    # Construct sytle for all widget
+    font_style = '''
+        style "openerp-user-font" {
+            font_name = "%s %s"
+        }
+        widget_class "*" style "openerp-user-font"
+    ''' % (font_name, font_size)
+    return font_style

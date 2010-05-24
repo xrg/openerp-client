@@ -33,6 +33,7 @@ from xml.parsers import expat
 import sys
 import wid_int
 import tools
+from lxml import etree
 
 class _container(object):
     def __init__(self, max_width):
@@ -186,7 +187,7 @@ class parse(object):
 
         container = _container(max_width)
         attrs = tools.node_attributes(root_node)
-        container.new(col=int(attrs.get('col', self.col)))
+        container.new()
         self.container = container
 
         filter_hbox =  gtk.HBox(homogeneous=False, spacing=0)
@@ -206,7 +207,7 @@ class parse(object):
                     self.fields[str(attrs['name'])].update(attrs)
                     self.fields[str(attrs['name'])]['model']=self.model
                     if type not in widgets_type:
-                        return False
+                        continue
                     widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']],screen=call[0])
                     if 'string' in self.fields[str(attrs['name'])]:
                         label = self.fields[str(attrs['name'])]['string']+' :'
@@ -279,8 +280,8 @@ class parse(object):
                         frame.set_shadow_type(gtk.SHADOW_NONE)
                 frame.attrs=attrs
                 frame.set_border_width(0)
-                container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), ypadding=0)
-                container.new(int(attrs.get('col',8)))
+                container.wid_add(frame, colspan=1, expand=int(attrs.get('expand',0)), ypadding=0)
+                container.new()
                 widget, widgets = self.parse_filter(xml_data, max_width, node, call= call)
                 dict_widget.update(widgets)
                 if isinstance(widget, list):
@@ -302,6 +303,7 @@ class parse(object):
 class form(wid_int.wid_int):
     def __init__(self, xml_arch, fields, model=None, parent=None, domain=[], call=None, col=6):
         wid_int.wid_int.__init__(self, 'Form', parent)
+        xml_arch = self.xml_process(xml_arch)
         dom = xml.dom.minidom.parseString(xml_arch)
         parser = parse(parent, fields, model=model, col=col, view_type = dom.firstChild.localName)
         self.parent = parent
@@ -325,6 +327,28 @@ class form(wid_int.wid_int):
         value = {}
         for x in self.widgets.values():
             x[0].sig_activate(self.sig_activate)
+
+    def xml_process(self,xml_arch):
+        root = etree.fromstring(xml_arch)
+        group =  etree.Element("group")
+        em_list = []
+        for element in root.iterchildren():
+            if element.tag == "group":
+                em_list.append(element)
+            elif element.tag == "newline":
+                if group.getchildren():
+                    em_list.append(group)
+                em_list.append(element)
+                group =  etree.Element("group")
+            else:
+                group.append(element)
+        if group.getchildren():
+            em_list.append(group)
+
+        search =  etree.Element("search")
+        for element in em_list:
+            search.append(element)
+        return etree.tostring(search)
 
     def clear(self, *args):
         for panel in self.custom_widgets:
@@ -356,15 +380,15 @@ class form(wid_int.wid_int):
         return True
 
     def add_custom(self, widget, table, fields):
+        new_table = gtk.Table(1,1,False)
         panel = widgets_type['custom_filter'][0]('', self.parent,{'fields':fields},call=self.remove_custom)
         x =  self.rows
-        table.resize(x,4)
-        table.attach(panel.widget,1, 4, x, x+1, yoptions=gtk.FILL, xoptions=gtk.FILL, ypadding=2, xpadding=0)
+        new_table.attach(panel.widget,0, 1, x, x+1, xoptions=gtk.FILL, yoptions=gtk.FILL , ypadding=2, xpadding=0)
         panelx = 'panel' + str(x)
-        self.custom_widgets[panelx] = (panel,table,1)
-        self.rows +=1
-        table.show()
-
+        self.custom_widgets[panelx] = (panel, new_table, 1)
+        table.attach(new_table, 1, 9, x, x+1)
+        self.rows += 1
+        table.show_all()
         return panel
 
     def toggle(self, widget, event=None):

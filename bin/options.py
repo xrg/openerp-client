@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -53,21 +53,21 @@ def get_home_dir():
         return '.'
 
 class configmanager(object):
-    
+
     def __get_prefix(self):
         if self.__prefix is None:
             f = os.path.normpath(__file__)
             sitepackages_prefix = os.path.join('lib', 'python%s' % sys.version[:3], 'site-packages', release.name, os.path.basename(f))
             home_prefix = os.path.join('lib', 'python', release.name, os.path.basename(f))
-            
+
             for p in [sitepackages_prefix, home_prefix]:
                 if f.endswith(p):
                     self.__prefix = f[:-len(p)]
                     break
             if self.__prefix is None:
-                self.__prefix = sys.prefix 
+                self.__prefix = sys.prefix
 
-        return self.__prefix            
+        return self.__prefix
 
     def __init__(self,fname=None):
         self.__prefix = None
@@ -83,7 +83,6 @@ class configmanager(object):
             'path.pixmaps': os.path.join(self.__get_prefix(), 'share', 'pixmaps', release.name),
             'tip.autostart': False,
             'tip.position': 0,
-            'survey.position': 0,
             'form.autosave': False,
             'printer.preview': True,
             'printer.softpath': 'none',

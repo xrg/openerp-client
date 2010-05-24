@@ -4,7 +4,8 @@ include Makefile
 include rpminstall_sh.txt
 include mydistutils.py
 include msgfmt.py
+include setup.nsi
 graft bin
 graft man
 graft doc
-graft pixmaps
+global-exclude *pyc *~

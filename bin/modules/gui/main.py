@@ -63,7 +63,7 @@ class StockButton(gtk.Button):
     def __init__(self, label, stock):
         gtk.Button.__init__(self, label)
         self.icon = gtk.Image()
-        self.icon.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
+        self.icon.set_from_stock(stock, gtk.ICON_SIZE_MENU)
         self.set_image(self.icon)
 
 class DatabaseDialog(gtk.Dialog):
@@ -372,6 +372,8 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
         entry_db.set_text(dbtoload)
         entry_db.grab_focus()
         db_widget.hide()
+        if butconnect:
+            butconnect.set_sensitive(True)
     else:
         entry_db.hide()
 
@@ -711,41 +713,23 @@ class db_create(object):
         pbar.pulse()
         if progress == 1.0:
             win.destroy()
-
-            pwdlst = '\n'.join(map(lambda x: '    - %s: %s / %s' % (x['name'],x['login'],x['password']), users))
-            dialog = glade.XML(common.terp_path("openerp.glade"), "dia_dbcreate_ok", gettext.textdomain())
-            win = dialog.get_widget('dia_dbcreate_ok')
-            if not parent:
-                parent = service.LocalService('gui.main').window
-            win.set_transient_for(parent)
-            win.show_all()
-            buffer = dialog.get_widget('dia_tv').get_buffer()
-
-            buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-            iter_start = buffer.get_start_iter()
-            buffer.insert(iter_start, _('The following users have been installed on your database:')+'\n\n'+ pwdlst + '\n\n'+_('You can now connect to the database as an administrator.'))
-            res = win.run()
-            parent.present()
-            win.destroy()
-
-            if res == gtk.RESPONSE_OK:
-                m = re.match('^(http[s]?://|socket://)([\w.]+):(\d{1,5})$', url)
-                ok = False
-                for x in users:
-                    if x['login']=='admin' and m:
-                        res = [x['login'], x['password']]
-                        res.append( m.group(2) )
-                        res.append( m.group(3) )
-                        res.append( m.group(1) )
-                        res.append( dbname )
-                        log_response = rpc.session.login(*res)
-                        if log_response == 1:
-                            options.options['login.login'] = x['login']
-                            id = self.terp_main.sig_win_menu(quiet=False)
-                            ok = True
-                            break
-                if not ok:
-                    self.sig_login(dbname=dbname)
+            m = re.match('^(http[s]?://|socket://)([\w.]+):(\d{1,5})$', url)
+            ok = False
+            for x in users:
+                if x['login']=='admin' and m:
+                    res = [x['login'], x['password']]
+                    res.append( m.group(2) )
+                    res.append( m.group(3) )
+                    res.append( m.group(1) )
+                    res.append( dbname )
+                    log_response = rpc.session.login(*res)
+                    if log_response == 1:
+                        options.options['login.login'] = x['login']
+                        id = self.terp_main.sig_win_menu(quiet=False)
+                        ok = True
+                        break
+            if not ok:
+                self.sig_login(dbname=dbname)
             return False
         return True
 
@@ -1112,7 +1096,10 @@ class terp_main(service.Service):
         self.glade.get_widget('user').set_sensitive(True)
         self.glade.get_widget('form').set_sensitive(True)
         self.glade.get_widget('plugins').set_sensitive(True)
-        title = "%s%s@%s:%s/%s" % (res[4], res[0], res[2], res[3], res[5])
+
+        title = tools.format_connection_string(*res)
+        sbid = self.sb_servername.get_context_id('message')
+        self.sb_servername.push(sbid, title)
         self.window.set_title(_('OpenERP - %s') % title )
         return True
 
@@ -1203,10 +1190,6 @@ class terp_main(service.Service):
             return False
         id = self.sb_username.get_context_id('message')
         self.sb_username.push(id, act_id[0]['name'] or '')
-        id = self.sb_servername.get_context_id('message')
-        data = urlparse.urlsplit(rpc.session._url)
-        self.sb_servername.push(id, data[0]+':'+(data[1] and '//'+data[1] \
-                or data[2])+' ['+options.options['login.db']+']')
         if not act_id[0][type]:
             if quiet:
                 return False

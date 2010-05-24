@@ -6585,7 +6585,7 @@ Latin1</property>
                               <widget class="GtkImage" id="image3411">
                                 <property name="visible">True</property>
                                 <property name="stock">gtk-network</property>
-                                <property name="icon_size">2</property>
+                                <property name="icon_size">1</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -7028,7 +7028,8 @@ Latin1</property>
                     <property name="xalign">1</property>
                     <property name="xpad">3</property>
                     <property name="ypad">3</property>
-                    <property name="label" translatable="yes">OpenERP Server:</property>
+                    <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;OpenERP Server:</property>
+                    <property name="use_markup">True</property>
                   </widget>
                   <packing>
                     <property name="x_options">GTK_FILL</property>
@@ -7062,7 +7063,8 @@ Latin1</property>
                     <property name="xalign">1</property>
                     <property name="xpad">3</property>
                     <property name="ypad">3</property>
-                    <property name="label" translatable="yes">Super Administrator Password:</property>
+                    <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;Super Administrator Password:</property>
+                    <property name="use_markup">True</property>
                     <property name="justify">GTK_JUSTIFY_RIGHT</property>
                   </widget>
                   <packing>
@@ -7076,11 +7078,11 @@ Latin1</property>
                   <widget class="GtkEntry" id="ent_password_new">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="has_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
+                    <property name="text" translatable="yes">admin</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -7125,7 +7127,7 @@ Latin1</property>
                               <widget class="GtkImage" id="image3410">
                                 <property name="visible">True</property>
                                 <property name="stock">gtk-network</property>
-                                <property name="icon_size">2</property>
+                                <property name="icon_size">1</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -7152,7 +7154,7 @@ Latin1</property>
                   <packing>
                     <property name="left_attach">2</property>
                     <property name="right_attach">3</property>
-                    <property name="x_options"></property>
+                    <property name="x_options">GTK_FILL</property>
                     <property name="y_options"></property>
                   </packing>
                 </child>
@@ -7161,7 +7163,8 @@ Latin1</property>
                     <property name="visible">True</property>
                     <property name="tooltip" translatable="yes">Choose the name of the database that will be created. The name must not contain any special character. Exemple: 'terp'.</property>
                     <property name="xalign">1</property>
-                    <property name="label" translatable="yes">New Database Name:</property>
+                    <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;New Database Name:</property>
+                    <property name="use_markup">True</property>
                   </widget>
                   <packing>
                     <property name="top_attach">2</property>
@@ -7187,7 +7190,7 @@ Latin1</property>
                     <property name="visible">True</property>
                     <property name="tooltip" translatable="yes">Choose the default language that will be installed for this database. You will be able to install new languages after installation through the administration menu.</property>
                     <property name="xalign">1</property>
-                    <property name="label" translatable="yes">Default Language:</property>
+                    <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;Default Language:</property>
                     <property name="use_markup">True</property>
                   </widget>
                   <packing>
@@ -7200,9 +7203,10 @@ Latin1</property>
                 <child>
                   <widget class="GtkLabel" id="label46572">
                     <property name="visible">True</property>
-                    <property name="tooltip" translatable="yes">This is the password of the '&lt;i&gt;admin&lt;/i&gt;' user that will be created in your new database.</property>
+                    <property name="tooltip" translatable="yes">This is the password of the 'admin' user that will be created in your new database.</property>
                     <property name="xalign">1</property>
-                    <property name="label" translatable="yes">Administrator Password:</property>
+                    <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;Administrator Password:</property>
+                    <property name="use_markup">True</property>
                   </widget>
                   <packing>
                     <property name="top_attach">7</property>
@@ -7214,9 +7218,10 @@ Latin1</property>
                 <child>
                   <widget class="GtkLabel" id="label46573">
                     <property name="visible">True</property>
-                    <property name="tooltip" translatable="yes">This is the password of the '&lt;i&gt;admin&lt;/i&gt;' user that will be created in your new database. It has to be the same than the above field.</property>
+                    <property name="tooltip" translatable="yes">This is the password of the 'admin' user that will be created in your new database. It has to be the same than the above field.</property>
                     <property name="xalign">1</property>
-                    <property name="label" translatable="yes">Confirm Password:</property>
+                    <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;Confirm Password:</property>
+            	    <property name="use_markup">True</property>
                   </widget>
                   <packing>
                     <property name="top_attach">8</property>
@@ -7289,6 +7294,7 @@ Latin1</property>
                   <widget class="GtkEntry" id="ent_db_new">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="has_focus">True</property>
                     <property name="max_length">32</property>
                     <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
@@ -7310,7 +7316,8 @@ Latin1</property>
                         <property name="tooltip" translatable="yes">Check this box if you want demonstration data to be installed on your new database. These data will help you to understand OpenERP, with predefined products, partners, etc.</property>
                         <property name="xalign">1</property>
                         <property name="yalign">0.46000000834465027</property>
-                        <property name="label" translatable="yes">Load Demonstration Data:</property>
+                        <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;Load Demonstration Data:</property>
+                        <property name="use_markup">True</property>
                       </widget>
                     </child>
                   </widget>
@@ -7328,6 +7335,15 @@ Latin1</property>
             <property name="fill">False</property>
             <property name="position">3</property>
           </packing>
+        </child>
+         <child>
+          	<widget class="GtkHSeparator" id="button_separator">
+            	<property name="visible">True</property>
+          	</widget>
+          	<packing>
+            	<property name="expand">False</property>
+            	<property name="position">4</property>
+          	</packing>
         </child>
         <child internal-child="action_area">
           <widget class="GtkHButtonBox" id="hbuttonbox7">
@@ -7473,7 +7489,7 @@ Latin1</property>
                               <widget class="GtkImage" id="image3484">
                                 <property name="visible">True</property>
                                 <property name="stock">gtk-network</property>
-                                <property name="icon_size">2</property>
+                                <property name="icon_size">1</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -7688,198 +7704,6 @@ Latin1</property>
                 <property name="use_stock">True</property>
                 <property name="response_id">-7</property>
               </widget>
-            </child>
-          </widget>
-          <packing>
-            <property name="expand">False</property>
-            <property name="pack_type">GTK_PACK_END</property>
-          </packing>
-        </child>
-      </widget>
-    </child>
-  </widget>
-  <widget class="GtkDialog" id="dia_dbcreate_ok">
-    <property name="width_request">550</property>
-    <property name="height_request">300</property>
-    <property name="title" translatable="yes">Database creation</property>
-    <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
-    <property name="default_width">550</property>
-    <property name="default_height">300</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
-    <child internal-child="vbox">
-      <widget class="GtkVBox" id="dialog-vbox35">
-        <property name="visible">True</property>
-        <child>
-          <widget class="GtkHBox" id="hbox78">
-            <property name="visible">True</property>
-            <child>
-              <widget class="GtkImage" id="image3696">
-                <property name="visible">True</property>
-                <property name="yalign">0</property>
-                <property name="xpad">10</property>
-                <property name="ypad">16</property>
-                <property name="stock">gtk-dialog-info</property>
-                <property name="icon_size">6</property>
-              </widget>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkVBox" id="vbox56">
-                <property name="visible">True</property>
-                <child>
-                  <widget class="GtkLabel" id="label46553">
-                    <property name="visible">True</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Database created successfully!&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkHSeparator" id="hseparator36">
-                    <property name="visible">True</property>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="padding">3</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkScrolledWindow" id="scrolledwindow43">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                    <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                    <property name="shadow_type">GTK_SHADOW_IN</property>
-                    <child>
-                      <widget class="GtkTextView" id="dia_tv">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="editable">False</property>
-                        <property name="wrap_mode">GTK_WRAP_WORD</property>
-                        <property name="text" translatable="yes">You can connect to the new database using one of the following account:
-
-    Administrator: admin / admin </property>
-                      </widget>
-                    </child>
-                  </widget>
-                  <packing>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-              </widget>
-              <packing>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </widget>
-          <packing>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child internal-child="action_area">
-          <widget class="GtkHButtonBox" id="dialog-action_area31">
-            <property name="visible">True</property>
-            <property name="layout_style">GTK_BUTTONBOX_END</property>
-            <child>
-              <widget class="GtkButton" id="button89">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="response_id">-7</property>
-                <signal name="clicked" handler="on_but_close_clicked"/>
-                <child>
-                  <widget class="GtkAlignment" id="alignment55">
-                    <property name="visible">True</property>
-                    <property name="xscale">0</property>
-                    <property name="yscale">0</property>
-                    <child>
-                      <widget class="GtkHBox" id="hbox82">
-                        <property name="visible">True</property>
-                        <property name="spacing">2</property>
-                        <child>
-                          <widget class="GtkImage" id="image4164">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-close</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="label46558">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes" >Connect Later</property>
-                            <property name="use_underline">True</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </widget>
-                    </child>
-                  </widget>
-                </child>
-              </widget>
-            </child>
-            <child>
-              <widget class="GtkButton" id="button91">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="has_default">True</property>
-                <property name="response_id">-5</property>
-                <child>
-                  <widget class="GtkAlignment" id="alignment54">
-                    <property name="visible">True</property>
-                    <property name="xscale">0</property>
-                    <property name="yscale">0</property>
-                    <child>
-                      <widget class="GtkHBox" id="hbox81">
-                        <property name="visible">True</property>
-                        <property name="spacing">2</property>
-                        <child>
-                          <widget class="GtkImage" id="image4163">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-go-forward</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="label46557">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Connect now</property>
-                            <property name="use_underline">True</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </widget>
-                    </child>
-                  </widget>
-                </child>
-              </widget>
-              <packing>
-                <property name="position">1</property>
-              </packing>
             </child>
           </widget>
           <packing>
@@ -8159,7 +7983,7 @@ This document has been modified while you were editing it.
       </widget>
     </child>
   </widget>
-  
+
   <widget class="GtkWindow" id="win_view_diagram">
     <property name="visible">True</property>
     <property name="title" translatable="yes">window1</property>
@@ -8169,7 +7993,7 @@ This document has been modified while you were editing it.
        </widget>
      </child>
   </widget>
-  
+
   <widget class="GtkWindow" id="win_view_calendar">
     <property name="visible">True</property>
     <property name="title" translatable="yes">window1</property>

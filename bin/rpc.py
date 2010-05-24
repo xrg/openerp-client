@@ -371,9 +371,9 @@ class rpc_session(object):
                 import pytz
                 pytz.timezone(self.timezone)
             except pytz.UnknownTimeZoneError:
-                common.warning(_('Server timezone is not recognized (%s)!\nTime values will be displayed without timezone conversion.'%self.timezone))
-            except:
-                common.warning(_('The "pytz" Python library is missing!\nTime values will be displayed as if located in the server timezone.'))
+                # Server timezone is not recognized!
+                # Time values will be displayed as if located in the server timezone. (nothing we can do)
+                pass
         try:
             url = self._url
             if url.endswith('/xmlrpc'):
@@ -390,7 +390,7 @@ class rpc_session(object):
         return self._open
 
     def logout(self):
-        if self._open :
+        if self._open:
             self._open = False
             self.uname = None
             self._ogws = {}
