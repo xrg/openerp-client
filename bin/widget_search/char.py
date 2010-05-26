@@ -42,7 +42,7 @@ class char(wid_int.wid_int):
         context = {}
         if s:
             if self.attrs.get('domain',False):
-                domain = tools.expr_eval(self.attrs['domain', {'self': s})
+                domain = tools.expr_eval(self.attrs['domain'], {'self': s})
             else:
                 domain = [(self.name,self.attrs.get('comparator','ilike'),s)]
             context = tools.expr_eval(self.attrs.get('context',"{}"), {'self': s})
