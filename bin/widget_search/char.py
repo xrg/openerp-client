@@ -34,14 +34,17 @@ class char(wid_int.wid_int):
         self.widget.set_width_chars(15)
         self.widget.set_property('activates_default', True)
         if self.default_search:
-            self.widget.set_text(self.default_search or '')
+            self.widget.set_text(str(self.default_search) or '')
 
     def _value_get(self):
         s = self.widget.get_text()
         domain = []
         context = {}
         if s:
-            domain = [(self.name,self.attrs.get('comparator','ilike'),s)]
+            if self.attrs.get('domain',False):
+                domain = tools.expr_eval(self.attrs['domain'], {'self': s})
+            else:
+                domain = [(self.name,self.attrs.get('comparator','ilike'),s)]
             context = tools.expr_eval(self.attrs.get('context',"{}"), {'self': s})
         return {
             'domain':domain,
