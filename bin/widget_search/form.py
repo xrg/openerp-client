@@ -406,6 +406,8 @@ class form(wid_int.wid_int):
             if ctx.get('group_by', False):
                 if not ctx['group_by'] in self.groupby:
                     self.groupby.append(ctx['group_by'])
+                    del ctx['group_by']
+                    context.update(ctx)
             elif ctx.get('remove_group',False):
                 if ctx['remove_group'] in self.groupby:
                     self.groupby.remove(ctx['remove_group'])
