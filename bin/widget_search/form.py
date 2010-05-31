@@ -403,16 +403,17 @@ class form(wid_int.wid_int):
         for x in self.widgets.values() + self.custom_widgets.values():
             domain += x[0].value.get('domain',[])
             ctx = x[0].value.get('context',{})
-            if ctx.get('group_by', False):
-                if not ctx['group_by'] in self.groupby:
-                    self.groupby.append(ctx['group_by'])
-                    del ctx['group_by']
-                    context.update(ctx)
-            elif ctx.get('remove_group',False):
-                if ctx['remove_group'] in self.groupby:
-                    self.groupby.remove(ctx['remove_group'])
-            else:
-                context.update(ctx)
+            ctx_groupby = ctx.pop('group_by', False)
+            ctx_remove_group = ctx.pop('remove_group',False)
+            if ctx_groupby:
+                if not isinstance(ctx_groupby, list):
+                    ctx_groupby = [ctx_groupby]
+                [self.groupby.append(x) for x in ctx_groupby if x not in self.groupby]
+            elif ctx_remove_group:
+                if not isinstance(ctx_remove_group, list):
+                    ctx_remove_group = [ctx_remove_group]
+                [self.groupby.remove(x) for x in ctx_remove_group if x in self.groupby]
+            context.update(ctx)
         if self.groupby:
             context.update({'group_by':self.groupby})
         if domain:
