@@ -141,5 +141,14 @@ class widget_interface(object):
     def grab_focus(self):
         return self.widget.grab_focus()
 
+    def hide(self):
+        return self.widget.hide()
+
+    def show(self):
+        return self.widget.show()
+
+    def set_sensitive(self, value):
+        return self.widget.set_sensitive(value)
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
