@@ -127,7 +127,6 @@ class calendar(interface.widget_interface):
 
     def cal_open(self, widget, event, model=None, window=None):
         if self.readonly:
-            common.message(_('This widget is readonly !'))
             return True
 
         if not window:
@@ -242,7 +241,6 @@ class datetime(interface.widget_interface):
 
     def cal_open(self, widget, event, model=None, window=None):
         if self.readonly:
-            common.message(_('This widget is readonly !'))
             return True
 
         win = gtk.Dialog(_('OpenERP - Date selection'), window,
