@@ -22,15 +22,10 @@
 import xml.dom.minidom
 import pygtk
 pygtk.require('2.0')
-import gobject
-
-from rpc import RPCProxy
-import rpc
 
 import gtk
 from xml.parsers import expat
 
-import sys
 import wid_int
 import tools
 from lxml import etree
@@ -110,9 +105,8 @@ class _container(object):
         return wid
 
 class parse(object):
-    def __init__(self, parent, fields, model='', col=6, view_type = None):
+    def __init__(self, parent, fields, model='', col=6):
         self.fields = fields
-        self.view_type = view_type
         self.name_lst = []
         self.name_lst1 = []
         dict_select = {'True':'1','False':'0','1':'1','0':'0'}
@@ -187,8 +181,6 @@ class parse(object):
         container.new()
         self.container = container
 
-        filter_hbox =  gtk.HBox(homogeneous=False, spacing=0)
-        filter_button_exists = False
         for node in root_node.childNodes:
             if not node.nodeType==node.ELEMENT_NODE:
                 continue
@@ -198,48 +190,45 @@ class parse(object):
                 if visval:
                     continue
             if node.localName=='field':
-                val  = attrs.get('select', False) or self.fields[str(attrs['name'])].get('select', False) or self.view_type == 'search'
-                if val:
-                    type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
-                    self.fields[str(attrs['name'])].update(attrs)
-                    self.fields[str(attrs['name'])]['model']=self.model
-                    if type not in widgets_type:
-                        continue
-                    widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']],screen=call[0])
-                    if 'string' in self.fields[str(attrs['name'])]:
-                        label = self.fields[str(attrs['name'])]['string']+' :'
-                    else:
-                        label = None
-                    size = widgets_type[type][1]
-                    if not self.focusable:
-                        self.focusable = widget_act.widget
+                type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
+                self.fields[str(attrs['name'])].update(attrs)
+                self.fields[str(attrs['name'])]['model']=self.model
+                if type not in widgets_type:
+                    continue
+                widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']],screen=call[0])
+                if 'string' in self.fields[str(attrs['name'])]:
+                    label = self.fields[str(attrs['name'])]['string']+' :'
+                else:
+                    label = None
+                if not self.focusable:
+                    self.focusable = widget_act.widget
 
-                    mywidget = widget_act.widget
-                    if node.childNodes:
-                        mywidget = gtk.HBox(homogeneous=False, spacing=0)
-                        mywidget.pack_start(widget_act.widget,expand=True,fill=True)
-                        i = 0
-                        for node_child in node.childNodes:
-                            if node_child.localName == 'filter':
-                                i += 1
-                                attrs_child = tools.node_attributes(node_child)
-                                widget_child = widgets_type['filter'][0]('', self.parent, attrs_child, call)
-                                mywidget.pack_start(widget_child.widget)
-                                dict_widget[str(attrs['name']) + str(i)] = (widget_child, mywidget, int(val))
-                            elif node_child.localName == 'separator':
-                                attrs_child = tools.node_attributes(node_child)
-                                if attrs_child.get('orientation','vertical') == 'horizontal':
-                                    sep = gtk.HSeparator()
-                                    sep.set_size_request(30,5)
-                                    mywidget.pack_start(sep,False,True,5)
-                                else:
-                                    sep = gtk.VSeparator()
-                                    sep.set_size_request(3,40)
-                                    mywidget.pack_start(sep,False,False,5)
-#                        mywidget.pack_start(widget_act.widget,expand=False,fill=False)
-                    xoptions = gtk.SHRINK
-                    wid = container.wid_add(mywidget, 1,label, int(self.fields[str(attrs['name'])].get('expand',0)),xoptions=xoptions)
-                    dict_widget[str(attrs['name'])] = (widget_act, wid, int(val))
+                mywidget = widget_act.widget
+                if node.childNodes:
+                    mywidget = gtk.HBox(homogeneous=False, spacing=0)
+                    mywidget.pack_start(widget_act.widget,expand=True,fill=True)
+                    i = 0
+                    for node_child in node.childNodes:
+                        if node_child.localName == 'filter':
+                            i += 1
+                            attrs_child = tools.node_attributes(node_child)
+                            widget_child = widgets_type['filter'][0]('', self.parent, attrs_child, call)
+                            mywidget.pack_start(widget_child.widget)
+                            dict_widget[str(attrs['name']) + str(i)] = (widget_child, mywidget, 1)
+                        elif node_child.localName == 'separator':
+                            attrs_child = tools.node_attributes(node_child)
+                            if attrs_child.get('orientation','vertical') == 'horizontal':
+                                sep = gtk.HSeparator()
+                                sep.set_size_request(30,5)
+                                mywidget.pack_start(sep,False,True,5)
+                            else:
+                                sep = gtk.VSeparator()
+                                sep.set_size_request(3,40)
+                                mywidget.pack_start(sep,False,False,5)
+#                    mywidget.pack_start(widget_act.widget,expand=False,fill=False)
+                xoptions = gtk.SHRINK
+                wid = container.wid_add(mywidget, 1,label, int(self.fields[str(attrs['name'])].get('expand',0)),xoptions=xoptions)
+                dict_widget[str(attrs['name'])] = (widget_act, wid, 1)
 
             elif node.localName == 'filter':
                 name = str(attrs.get('string','filter'))
@@ -302,7 +291,8 @@ class form(wid_int.wid_int):
         wid_int.wid_int.__init__(self, 'Form', parent)
         xml_arch = self.xml_process(xml_arch)
         dom = xml.dom.minidom.parseString(xml_arch)
-        parser = parse(parent, fields, model=model, col=col, view_type = dom.firstChild.localName)
+        assert dom.firstChild.localName == 'search'
+        parser = parse(parent, fields, model=model, col=col)
         self.parent = parent
         self.fields = fields
         self.model = model
@@ -321,7 +311,6 @@ class form(wid_int.wid_int):
         self.widget.show_all()
         self.name="" #parser.title
         self.show()
-        value = {}
         for x in self.widgets.values():
             x[0].sig_activate(self.sig_activate)
 

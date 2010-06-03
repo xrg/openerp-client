@@ -23,11 +23,8 @@ import gtk
 from gtk import glade
 import gobject
 import gettext
-import xmlrpclib
 import common
 import service
-from lxml import etree
-import copy
 
 import rpc
 
@@ -96,7 +93,7 @@ class dialog(object):
                         self.screen.display()
                 else:
                     break
-            except Exception,e:
+            except Exception:
                 # Passing all exceptions, most preferably the one of sql_constraint
                 pass
         return False
@@ -185,32 +182,6 @@ class win_search(object):
         self.model_name = model
 
         view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'search', self.context)
-        if view_form['type'] == 'form':
-            def encode(s):
-                if isinstance(s, unicode):
-                    return s.encode('utf8')
-                return s
-            def process_child(node, new_node, doc):
-                        for child in node.getchildren():
-                            if child.tag=='field' and child.get('select') and child.get('select')=='1':
-                                if child.getchildren():
-                                    fld = etree.Element('field')
-                                    for attr in child.attrib.keys():
-                                        fld.set(attr, child.get(attr))
-                                    new_node.append(fld)
-                                else:
-                                    new_node.append(child)
-                            elif child.tag in ('page','group','notebook'):
-                                process_child(child, new_node, doc)
-
-            dom_arc = etree.XML(encode(view_form['arch']))
-            new_node = copy.deepcopy(dom_arc)
-            for child_node in new_node.getchildren()[0].getchildren():
-                    new_node.getchildren()[0].remove(child_node)
-            process_child(dom_arc.getchildren()[0],new_node.getchildren()[0],dom_arc)
-
-            view_form['arch']=etree.tostring(new_node)
-
         hda = (self, self.find)
         self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win, col=5, call= hda)
 
@@ -256,7 +227,6 @@ class win_search(object):
         self.old_offset = offset
         self.old_limit = limit
         v = self.form.value.get('domain',[])
-        v_keys = map(lambda x: x[0], v)
         v += self.domain
         try:
             self.ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, self.context)
