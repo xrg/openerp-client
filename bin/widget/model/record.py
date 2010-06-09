@@ -280,7 +280,7 @@ class ModelRecord(signal_event.signal_event):
         if not match:
             raise Exception, 'ERROR: Wrong on_change trigger: %s' % callback
         func_name = match.group(1)
-        arg_names = [n.strip() for n in match.group(2).split(',')]
+        arg_names = [n.strip() for n in match.group(2).split(',') if n.strip()]
         args = [self.expr_eval(arg) for arg in arg_names]
         ids = self.id and [self.id] or []
         response = getattr(self.rpc, func_name)(ids, *args)
