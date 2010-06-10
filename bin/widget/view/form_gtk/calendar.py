@@ -301,6 +301,8 @@ class stime(interface.widget_interface):
         self.format = '%H:%M:%S'
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
+        self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
+        self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
         self.value=False
 
     def _readonly_set(self, value):
