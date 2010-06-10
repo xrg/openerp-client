@@ -269,7 +269,8 @@ class Screen(signal_event.signal_event):
         fields_list = []
         for k,v in self.search_view['fields'].items():
             if v['type'] in ('many2one','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
-                fields_list.append([k,v['string'],v['type']])
+                selection = v.get('selection', False)
+                fields_list.append([k,v['string'], v['type'], selection])
         if fields_list:
             fields_list.sort(lambda x, y: cmp(x[1], y[1]))
         panel = self.filter_widget.add_custom(self.filter_widget, self.filter_widget.widget, fields_list)

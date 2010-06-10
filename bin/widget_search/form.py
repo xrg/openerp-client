@@ -371,6 +371,7 @@ class form(wid_int.wid_int):
         x =  self.rows
         new_table.attach(panel.widget,0, 1, x, x+1, xoptions=gtk.FILL, yoptions=gtk.FILL , ypadding=2, xpadding=0)
         panelx = 'panel' + str(x)
+        panel.sig_activate(self.sig_activate)
         self.custom_widgets[panelx] = (panel, new_table, 1)
         table.attach(new_table, 1, 9, x, x+1)
         self.rows += 1
