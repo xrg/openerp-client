@@ -577,7 +577,7 @@ class Screen(signal_event.signal_event):
             self.switch_view(mode='form')
         ctx = self.context.copy()
         ctx.update(context)
-        model = self.models.model_new(default, self.domain, ctx)
+        model = self.models.model_new(default, self.action_domain, ctx)
         if (not self.current_view) or self.current_view.model_add_new or self.create_new:
             self.models.model_add(model, self.new_model_position())
         self.current_model = model
