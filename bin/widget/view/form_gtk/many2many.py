@@ -219,6 +219,8 @@ class many2many(interface.widget_interface):
         ids = []
         if model_field:
             ids = model_field.get_client(model)
+            self.model.pager_cache.setdefault(model_field.name, model.value[model_field.name] or [])
+            self.pager.search_count()
         self.screen.clear()
         self.screen.load(ids)
         self.screen.display()
@@ -231,6 +233,7 @@ class many2many(interface.widget_interface):
         return True
 
     def set_value(self, model, model_field):
+        self.model.pager_cache.setdefault(model_field.name, model.value[model_field.name] or [])
         if self.name in model.pager_cache:
             model_field.set_client(model, model.pager_cache[self.name])
 
