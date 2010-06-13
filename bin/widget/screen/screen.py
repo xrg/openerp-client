@@ -142,8 +142,12 @@ class Screen(signal_event.signal_event):
         if active:
             if not self.filter_widget:
                 if not self.search_view:
+                    if rpc.session.server_version[:2] >= (6,0):
+                        svt = 'search'
+                    else:
+                        svt = 'form'
                     self.search_view = rpc.session.rpc_exec_auth('/object', 'execute',
-                            self.name, 'fields_view_get', False, 'search',
+                            self.name, 'fields_view_get', False, svt,
                             self.context)
                 self.filter_widget = widget_search.form(self.search_view['arch'],
                         self.search_view['fields'], self.name, self.window,
