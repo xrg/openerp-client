@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-12-01 05:48+0000\n"
-"Last-Translator: Munkhbayar Batkhuu <bmr333@gmail.com>\n"
+"PO-Revision-Date: 2010-06-15 10:31+0000\n"
+"Last-Translator: oogii <orkhon_j@yahoo.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-02 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-06-16 03:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -1789,7 +1789,7 @@ msgstr ""
 
 #: bin/openerp.glade:5130
 msgid "New"
-msgstr ""
+msgstr "Шинэ"
 
 #: bin/openerp.glade:5145
 msgid "<Ctrl> + N"
@@ -1985,7 +1985,7 @@ msgstr ""
 
 #: bin/openerp.glade:6715
 msgid "New database name:"
-msgstr ""
+msgstr "Шинэ датабаазын нэр:"
 
 #: bin/openerp.glade:6815 bin/openerp.glade:6961 bin/openerp.glade:7460
 msgid "http://localhost:8069"
@@ -1993,7 +1993,7 @@ msgstr ""
 
 #: bin/openerp.glade:6889
 msgid "Create a new database"
-msgstr ""
+msgstr "Шинэ датабааз үүсгэх"
 
 #: bin/openerp.glade:6902
 msgid "<b>Create a new database</b>"
@@ -2028,7 +2028,7 @@ msgstr ""
 
 #: bin/openerp.glade:7110
 msgid "New Database Name:"
-msgstr ""
+msgstr "Шинэ Датабаазын Нэр"
 
 #: bin/openerp.glade:7134
 msgid ""
