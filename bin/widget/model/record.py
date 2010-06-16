@@ -206,9 +206,11 @@ class ModelRecord(signal_event.signal_event):
         return value
 
     def set_default(self, val):
-        for fieldname, value in val.items():
+        a = val.items()
+        for fieldname, value in a: #val.items():
             if fieldname not in self.mgroup.mfields:
                 continue
+            self.mgroup.mfields[fieldname].set_default(self, value)
             self.mgroup.mfields[fieldname].set_default(self, value)
         self._loaded = True
         self.signal('record-changed')
@@ -300,13 +302,14 @@ class ModelRecord(signal_event.signal_event):
         self.signal('attrs-changed')
 
     def cond_default(self, field, value):
-        ir = RPCProxy('ir.values')
-        values = ir.get('default', '%s=%s' % (field, value),
-                        [(self.resource, False)], False, {})
-        data = {}
-        for index, fname, value in values:
-            data[fname] = value
-        self.set_default(data)
+        pass
+        #ir = RPCProxy('ir.values')
+        #values = ir.get('default', '%s=%s' % (field, value),
+        #                [(self.resource, False)], False, {})
+        #data = {}
+        #for index, fname, value in values:
+        #    data[fname] = value
+        #self.set_default(data)
 
     # Performing button clicks on both forms of view: list and form.
     def get_button_action(self, screen, id=None, attrs={}):
