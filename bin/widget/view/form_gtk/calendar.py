@@ -127,7 +127,6 @@ class calendar(interface.widget_interface):
 
     def cal_open(self, widget, event, model=None, window=None):
         if self.readonly:
-            common.message(_('This widget is readonly !'))
             return True
 
         if not window:
@@ -242,7 +241,6 @@ class datetime(interface.widget_interface):
 
     def cal_open(self, widget, event, model=None, window=None):
         if self.readonly:
-            common.message(_('This widget is readonly !'))
             return True
 
         win = gtk.Dialog(_('OpenERP - Date selection'), window,
@@ -303,6 +301,8 @@ class stime(interface.widget_interface):
         self.format = '%H:%M:%S'
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
+        self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
+        self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
         self.value=False
 
     def _readonly_set(self, value):

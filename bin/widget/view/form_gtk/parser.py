@@ -469,7 +469,7 @@ class parser_form(widget.view.interface.parser_interface):
                     if visval:
                         continue
 
-                translate = label if fields[name].get('translate') else None
+                translate = fields[name]['string'] if fields[name].get('translate') else None
                 widget_label = container.create_label(label, fname=name, help=hlp, model=model) if label else None
 
                 if attrs.get('attrs'):

@@ -206,9 +206,11 @@ class ModelRecord(signal_event.signal_event):
         return value
 
     def set_default(self, val):
-        for fieldname, value in val.items():
+        a = val.items()
+        for fieldname, value in a: #val.items():
             if fieldname not in self.mgroup.mfields:
                 continue
+            self.mgroup.mfields[fieldname].set_default(self, value)
             self.mgroup.mfields[fieldname].set_default(self, value)
         self._loaded = True
         self.signal('record-changed')
@@ -280,7 +282,7 @@ class ModelRecord(signal_event.signal_event):
         if not match:
             raise Exception, 'ERROR: Wrong on_change trigger: %s' % callback
         func_name = match.group(1)
-        arg_names = [n.strip() for n in match.group(2).split(',')]
+        arg_names = [n.strip() for n in match.group(2).split(',') if n.strip()]
         args = [self.expr_eval(arg) for arg in arg_names]
         ids = self.id and [self.id] or []
         response = getattr(self.rpc, func_name)(ids, *args)
@@ -300,13 +302,14 @@ class ModelRecord(signal_event.signal_event):
         self.signal('attrs-changed')
 
     def cond_default(self, field, value):
-        ir = RPCProxy('ir.values')
-        values = ir.get('default', '%s=%s' % (field, value),
-                        [(self.resource, False)], False, {})
-        data = {}
-        for index, fname, value in values:
-            data[fname] = value
-        self.set_default(data)
+        pass
+        #ir = RPCProxy('ir.values')
+        #values = ir.get('default', '%s=%s' % (field, value),
+        #                [(self.resource, False)], False, {})
+        #data = {}
+        #for index, fname, value in values:
+        #    data[fname] = value
+        #self.set_default(data)
 
     # Performing button clicks on both forms of view: list and form.
     def get_button_action(self, screen, id=None, attrs={}):

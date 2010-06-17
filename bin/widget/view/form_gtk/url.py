@@ -48,6 +48,7 @@ class url(interface.widget_interface):
         self.button.set_image(img)
         self.button.set_size_request(30,30)
         self.button.set_relief(gtk.RELIEF_NONE)
+        self.button.set_tooltip_text(_('Open this resource'))
         self.button.connect('clicked', self.button_clicked)
         self.button.set_alignment(0.5, 0.5)
         self.button.set_property('can-focus', False)
