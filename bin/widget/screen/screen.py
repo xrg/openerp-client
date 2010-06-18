@@ -323,20 +323,20 @@ class Screen(signal_event.signal_event):
             combo.set_active(0)
             if response == gtk.RESPONSE_OK and widget.get_text():
                 action_name = widget.get_text()
-                datas={'name':action_name,
+                values={'name':action_name,
                        'model_id':self.name,
                        'domain':str(self.filter_widget and self.filter_widget.value.get('domain',[])),
                        'context':str(self.filter_widget and self.filter_widget.value.get('context',{})),
                        'user_id':rpc.session.uid
                        }
                 if flag == 'sf':
-                    action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'create', datas)
+                    action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'create', values, self.context)
                     self.screen_container.fill_filter_combo(self.name)
                 if flag == 'sh':
-                    datas.update({'res_model':self.name,
+                    values.update({'res_model':self.name,
                                   'search_view_id':self.search_view['view_id'],
                                   'default_user_ids': [[6, 0, [rpc.session.uid]]]})
-                    rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'create_shortcut', datas)
+                    rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'create_shortcut', values, self.context)
         else:
             try:
                 filter_domain = flag and tools.expr_eval(flag)
