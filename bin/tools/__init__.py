@@ -22,21 +22,25 @@
 import time
 import datetime
 import os
+import logging
+
 if os.name == 'nt':
     import win32
 
-def expr_eval(string, context={}):
+def expr_eval(string, context=None):
     import rpc
+    if context is None:
+        context = {}
     context['uid'] = rpc.session.uid
     context['current_date'] = time.strftime('%Y-%m-%d')
     context['time'] = time
     context['datetime'] = datetime
     if isinstance(string, basestring):
-#        return eval(string, context)
-        string = string.replace("'active_id'","active_id")
         try:
+            string = string.replace("'active_id'","active_id")
             temp = eval(string, context)
-        except:
+        except Exception, e:
+            logging.getLogger('tools.expr_eval').exception(string)
             return {}
         return temp
     else:
