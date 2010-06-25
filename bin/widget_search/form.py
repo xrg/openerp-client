@@ -109,7 +109,6 @@ class parse(object):
         self.fields = fields
         self.name_lst = []
         self.name_lst1 = []
-        dict_select = {'True':'1','False':'0','1':'1','0':'0'}
         all_field_ids =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search', [('model','=',str(model))])
         if len(fields) != len(all_field_ids):
             new_fields = []
@@ -120,9 +119,9 @@ class parse(object):
             field_dict = {}
             for new_field in new_fields:
                 if isinstance(new_field['select_level'],(str,unicode)):
-                    new_field['select_level'] = eval(new_field['select_level'],dict_select)
+                    new_field['select_level'] = tools.str2bool(new_field['select_level'], False)
                 if isinstance(new_field['selectable'],(str,unicode)):
-                    new_field['selectable'] = eval(new_field['selectable'],dict_select)
+                    new_field['selectable'] = tools.str2bool(new_field['selectable'], False)
                 field_dict[new_field['name']]= {
                                                 'string': new_field['field_description'],
                                                 'type' : new_field['ttype'],

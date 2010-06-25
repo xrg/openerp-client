@@ -178,4 +178,30 @@ def format_connection_string(login, _passwd, server, port, protocol, dbname):
     result += '/%s' % (dbname,)
     return result
 
+def str2bool(string, default=None):
+    """Convert a string representing a boolean into the corresponding boolean
+
+         True  | False
+       --------+---------
+        'True' | 'False'
+        '1'    | '0'
+        'on'   | 'off'
+        't'    | 'f'
+
+    If string can't be converted and default value is not None, default value
+    returned, else a ValueError is raised
+    """
+    assert isinstance(string, basestring)
+    mapping = {
+        True: "true t 1 on".split(),
+        False: "false f 0 off".split(),
+    }
+    string = string.lower()
+    for value in mapping:
+        if string in mapping[value]:
+            return value
+    if default is not None:
+        return default
+    raise ValueError("%r does not represent a valid boolean value" % (string,))
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
