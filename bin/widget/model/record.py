@@ -206,11 +206,9 @@ class ModelRecord(signal_event.signal_event):
         return value
 
     def set_default(self, val):
-        a = val.items()
-        for fieldname, value in a: #val.items():
+        for fieldname, value in val.items():
             if fieldname not in self.mgroup.mfields:
                 continue
-            self.mgroup.mfields[fieldname].set_default(self, value)
             self.mgroup.mfields[fieldname].set_default(self, value)
         self._loaded = True
         self.signal('record-changed')
