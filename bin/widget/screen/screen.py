@@ -268,7 +268,7 @@ class Screen(signal_event.signal_event):
     def add_custom(self, dynamic_button):
         fields_list = []
         for k,v in self.search_view['fields'].items():
-            if v['type'] in ('many2one','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
+            if v['type'] in ('many2one','text','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
                 fields_list.append([k,v['string'],v['type']])
         if fields_list:
             fields_list.sort(lambda x, y: cmp(x[1], y[1]))
