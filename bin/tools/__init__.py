@@ -41,7 +41,7 @@ def expr_eval(string, context=None):
             return {}
         try:
             temp = eval(string, context)
-        except Exception:
+        except Exception, e:
             logging.getLogger('tools.expr_eval').exception(string)
             return {}
         return temp
