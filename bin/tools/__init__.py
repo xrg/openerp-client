@@ -37,8 +37,7 @@ def expr_eval(string, context=None):
     context['datetime'] = datetime
     if isinstance(string, basestring):
         try:
-            string = string.replace("'active_id'","active_id")
-            temp = eval(string, context)
+            temp = eval(string or 'False', context)
         except Exception, e:
             logging.getLogger('tools.expr_eval').exception(string)
             return {}
