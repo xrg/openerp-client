@@ -36,9 +36,12 @@ def expr_eval(string, context=None):
     context['time'] = time
     context['datetime'] = datetime
     if isinstance(string, basestring):
+        string = string.strip()
+        if not string:
+            return {}
         try:
-            temp = eval(string or 'False', context)
-        except Exception, e:
+            temp = eval(string, context)
+        except Exception:
             logging.getLogger('tools.expr_eval').exception(string)
             return {}
         return temp
