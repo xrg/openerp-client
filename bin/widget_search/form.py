@@ -110,9 +110,10 @@ class parse(object):
         self.name_lst = []
         self.name_lst1 = []
         dict_select = {'True':'1','False':'0','1':'1','0':'0'}
-        all_fields = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_get', False)
-        if len(fields) != len(all_fields):
+        all_field_ids =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search', [('model','=',str(model))])
+        if len(fields) != len(all_field_ids):
             new_fields = []
+            all_fields =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'read', all_field_ids)
             for item in all_fields:
                 if item['name'] not in fields:
                     new_fields.append(item)
