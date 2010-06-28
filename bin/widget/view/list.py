@@ -36,8 +36,12 @@ class field_record(object):
     def __init__(self, name):
         self.name = name
     def get_client(self, *args):
+        if isinstance(self.name, (list,tuple)):
+            return self.name[1]
         return self.name
     def get(self, *args):
+        if isinstance(self.name, (list,tuple)):
+            return self.name[0]
         return self.name
     def get_state_attrs(self, *args, **argv):
         return {}
@@ -455,9 +459,9 @@ class ViewList(parser_view):
             m = model.models[path[0][0]]
             groupby = self.screen.context.get('group_by',False)
             if groupby:
-                if not len(path[0])> 1: return False
                 m = self.store.on_get_iter(path[0])
             # TODO: add menu cache
+
             if event.button == 1:
                 # first click on button
                 if path[1]._type == 'Button':
