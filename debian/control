@@ -5,7 +5,7 @@ Maintainer: Debian Open Object Maintainers <open-object@lists.debian-maintainers
 Uploaders: Daniel Baumann <daniel@debian.org>
 Build-Depends: debhelper (>= 7.0.50~), python, quilt (>= 0.46-7)
 Build-Depends-Indep: python-glade2, python-gtk2
-Standards-Version: 3.8.4
+Standards-Version: 3.9.0
 Homepage: http://www.openerp.com/
 Vcs-Browser: http://git.debian-maintainers.org/?p=open-object/openerp-client.git
 Vcs-Git: git://git.debian-maintainers.org/git/open-object/openerp-client.git
