@@ -324,12 +324,16 @@ class ModelRecordGroup(signal_event.signal_event):
     def add_fields_custom(self, fields, models):
         to_add = []
         for f in fields.keys():
-            if not f in models.fields:
+            add_field = True
+            if f in models.fields:
+                if fields[f].get('widget','') == models.fields[f].get('widget',''):
+                    models.fields[f].update(fields[f])
+                    add_field = False
+            if add_field:
                 models.fields[f] = fields[f]
                 models.fields[f]['name'] = f
                 to_add.append(f)
-            else:
-                models.fields[f].update(fields[f])
+                
         self.mfields_load(to_add, models)
         for fname in to_add:
             for m in models.models:

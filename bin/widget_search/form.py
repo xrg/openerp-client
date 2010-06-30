@@ -25,7 +25,7 @@ pygtk.require('2.0')
 
 import gtk
 from xml.parsers import expat
-
+import rpc
 import wid_int
 import tools
 from lxml import etree
@@ -105,36 +105,18 @@ class _container(object):
         return wid
 
 class parse(object):
-    def __init__(self, parent, fields, model='', col=6):
+    def __init__(self, parent, fields, model, col=6):
         self.fields = fields
         self.name_lst = []
         self.name_lst1 = []
-        dict_select = {'True':'1','False':'0','1':'1','0':'0'}
-        import rpc
-        all_field_ids =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search', [('model','=',str(model))])
-        if len(fields) != len(all_field_ids):
-            new_fields = []
-            all_fields =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'read', all_field_ids)
-            for item in all_fields:
-                if item['name'] not in fields:
-                    new_fields.append(item)
-            field_dict = {}
-            for new_field in new_fields:
-                if isinstance(new_field['select_level'],(str,unicode)):
-                    new_field['select_level'] = eval(new_field['select_level'],dict_select)
-                if isinstance(new_field['selectable'],(str,unicode)):
-                    new_field['selectable'] = eval(new_field['selectable'],dict_select)
-                field_dict[new_field['name']]= {
-                                                'string': new_field['field_description'],
-                                                'type' : new_field['ttype'],
-                                                'select': new_field['select_level'],
-                                                'name' : new_field['name'],
-                                                'readonly': new_field['readonly'],
-                                                'relation': new_field['relation'],
-                                                'required': new_field['required'],
-                                                'translate': new_field['translate'],
-                                                'selectable': new_field['selectable'],
-                                                }
+
+        all_fields = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_get')
+        if len(fields) != len(all_fields):
+            common_fields = [f for f in all_fields if f in fields]
+            for f in common_fields:
+                del all_fields[f]
+            field_dict = all_fields
+
             self.fields.update(field_dict)
             self.name_lst1=[('field',(field_dict[x])) for x in field_dict]
         self.parent = parent

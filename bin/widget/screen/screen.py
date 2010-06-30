@@ -201,13 +201,13 @@ class Screen(signal_event.signal_event):
                 args.append((start, '>',start_date))
                 end_date = (old_date + relativedelta(months=+1)).strftime('%Y-%m-%d')
                 args.append((start, '<',end_date))
-                
+
             if mode=='week':
                 start_date = (old_date + relativedelta(weeks=-1)).strftime('%Y-%m-%d')
                 args.append((start, '>',start_date))
                 end_date = (old_date + relativedelta(weeks=+1)).strftime('%Y-%m-%d')
                 args.append((start, '<',end_date))
-                
+
             if mode=='day':
                 start_date = (old_date + relativedelta(days=-1)).strftime('%Y-%m-%d')
                 args.append((start, '>',start_date))
@@ -268,7 +268,7 @@ class Screen(signal_event.signal_event):
     def add_custom(self, dynamic_button):
         fields_list = []
         for k,v in self.search_view['fields'].items():
-            if v['type'] in ('many2one','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
+            if v['type'] in ('many2one','text','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
                 fields_list.append([k,v['string'],v['type']])
         if fields_list:
             fields_list.sort(lambda x, y: cmp(x[1], y[1]))
@@ -294,11 +294,11 @@ class Screen(signal_event.signal_event):
         if flag == 'mf':
             obj = service.LocalService('action.main')
             act={'name':'Manage Filters',
-                 'res_model':'ir.actions.act_window',
+                 'res_model':'ir.filters',
                  'type':'ir.actions.act_window',
                  'view_type':'form',
                  'view_mode':'tree,form',
-                 'domain':'[(\'filter\',\'=\',True),(\'res_model\',\'=\',\''+self.name+'\'),(\'default_user_ids\',\'in\',(\''+str(rpc.session.uid)+'\',))]'}
+                 'domain':'[(\'model_id\',\'=\',\''+self.name+'\'),(\'user_id\',\'=\',(\''+str(rpc.session.uid)+'\',))]'}
             value = obj._exec_action(act, {}, self.context)
 
         if flag in ['blk','mf']:
@@ -322,31 +322,20 @@ class Screen(signal_event.signal_event):
             combo.set_active(0)
             if response == gtk.RESPONSE_OK and widget.get_text():
                 action_name = widget.get_text()
-                datas={'name':action_name,
-                       'res_model':self.name,
+                values={'name':action_name,
+                       'model_id':self.name,
                        'domain':str(self.filter_widget and self.filter_widget.value.get('domain',[])),
                        'context':str(self.filter_widget and self.filter_widget.value.get('context',{})),
-                       'search_view_id':self.search_view['view_id'],
-                       'filter':True,
-                       'default_user_ids': [[6, 0, [rpc.session.uid]]],
+                       'user_id':rpc.session.uid
                        }
-                action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'create', datas)
-                self.screen_container.fill_filter_combo(self.name)
+                if flag == 'sf':
+                    action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'create', values, self.context)
+                    self.screen_container.fill_filter_combo(self.name)
                 if flag == 'sh':
-                    parent_menu_id = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'search', [('name','=','Custom Shortcuts')])
-                    if parent_menu_id:
-                        menu_data={'name':action_name,
-                                   'sequence':20,
-                                   'action':'ir.actions.act_window,'+str(action_id),
-                                   'parent_id':parent_menu_id[0],
-                                   'icon':'STOCK_JUSTIFY_FILL',
-                                   }
-                        menu_id = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'create', menu_data)
-                        sc_data={'name':action_name,
-                                 'sequence': 1,
-                                 'res_id': menu_id,
-                                   }
-                        shortcut_id = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view_sc', 'create', sc_data)
+                    values.update({'res_model':self.name,
+                                  'search_view_id':self.search_view['view_id'],
+                                  'default_user_ids': [[6, 0, [rpc.session.uid]]]})
+                    rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'create_shortcut', values, self.context)
                 return True
         else:
             try:
