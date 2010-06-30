@@ -225,7 +225,7 @@ class ModelRecord(signal_event.signal_event):
                  later[fieldname] = value
                  continue
             if isinstance(self.mgroup.mfields[fieldname], field.M2MField):
-                self.pager_cache.setdefault(fieldname, value or [])
+                self.pager_cache[fieldname] = value
 
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
 
