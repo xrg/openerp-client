@@ -44,7 +44,7 @@ class custom_filter(wid_int.wid_int):
         
         fields = attrs.get('fields',None)
         for item in fields:
-            self.field_selection[item[1]] = (item[0],item[2])
+            self.field_selection[item[1]] = (item[0], item[2], item[3])
             self.combo_fields.append_text(item[1])
             
         self.combo_fields.set_active(0)
@@ -131,6 +131,18 @@ class custom_filter(wid_int.wid_int):
             
             condition = self.condition_next.get_active_text()
             condition = eval(condition,{'AND':'&','OR':'|'})
+            
+            if field_type == 'selection' and right_text:
+                right_text_se =  self.right_text.get_text()
+                keys = []
+                for selection in self.field_selection[self.combo_fields.get_active_text()][2]:
+                    if selection[1].lower().find(right_text_se.lower()) != -1:
+                        keys.append(selection[0])
+                right_text = keys
+                if operator in ['ilike','=','in']:
+                    operator = 'in'
+                else:
+                    operator = 'not in'
 
             domain = [condition,(field_left,operator,right_text)]
             return {'domain':domain}
@@ -150,6 +162,9 @@ class custom_filter(wid_int.wid_int):
     def remove_custom_widget(self, button):
         button.parent.destroy()
         return True   
+
+    def sig_activate(self, fct):
+        self.right_text.connect_after('activate', fct)
 
     value = property(_value_get, _value_set, None,
       'The content of the widget or ValueError if not valid')
