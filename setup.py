@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -16,7 +16,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -29,13 +29,13 @@ import imp
 import sys
 import os
 import glob
-
+import logging
 from stat import ST_MODE
 
 from distutils.file_util import copy_file
 from distutils.core import setup
 from mydistutils import L10nAppDistribution
-
+log = logging.getLogger('setup')
 has_py2exe = False
 if os.name == 'nt':
     import py2exe
@@ -76,7 +76,7 @@ def check_modules():
             exec('import %s' % modname)
         except ImportError:
             ok = False
-            print 'Error: python module %s (%s) is required' % (modname, desc)
+            log.error('python module %s (%s) is required' % (modname, desc))
 
     if not ok:
         sys.exit(1)
@@ -190,16 +190,16 @@ setup(name             = name,
       data_files       = data_files(),
       translations     = translations(),
       scripts          = ['openerp-client'],
-      packages         = ['openerp-client', 
-                          'openerp-client.common', 
-                          'openerp-client.modules', 
+      packages         = ['openerp-client',
+                          'openerp-client.common',
+                          'openerp-client.modules',
                           'openerp-client.modules.action',
                           'openerp-client.modules.gui',
                           'openerp-client.modules.gui.window',
                           'openerp-client.modules.gui.window.view_sel',
                           'openerp-client.modules.gui.window.view_tree',
                           'openerp-client.modules.spool',
-                          'openerp-client.printer', 
+                          'openerp-client.printer',
                           'openerp-client.tools',
                           'openerp-client.tinygraph',
                           'openerp-client.widget',
