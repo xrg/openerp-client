@@ -370,7 +370,7 @@ is displayed on the second tab.
     win.destroy()
     return True
 
-def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
+def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None, italic_font=False):
     if not parent:
         parent=service.LocalService('gui.main').window
     dialog = gtk.MessageDialog(parent,
@@ -379,7 +379,8 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     msg = to_xml(msg)
     if title is not None:
         msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
-
+        if italic_font:
+            msg = '<span font="italic"><b>%s</b>\n\n%s</span>' % (to_xml(title), msg)
     dialog.set_icon(OPENERP_ICON)
     dialog.set_markup(msg)
     dialog.show_all()
