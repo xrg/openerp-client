@@ -269,7 +269,8 @@ class Screen(signal_event.signal_event):
         fields_list = []
         for k,v in self.search_view['fields'].items():
             if v['type'] in ('many2one','text','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
-                fields_list.append([k,v['string'],v['type']])
+                selection = v.get('selection', False)
+                fields_list.append([k,v['string'], v['type'], selection])
         if fields_list:
             fields_list.sort(lambda x, y: cmp(x[1], y[1]))
         panel = self.filter_widget.add_custom(self.filter_widget, self.filter_widget.widget, fields_list)
@@ -336,7 +337,6 @@ class Screen(signal_event.signal_event):
                                   'search_view_id':self.search_view['view_id'],
                                   'default_user_ids': [[6, 0, [rpc.session.uid]]]})
                     rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'create_shortcut', values, self.context)
-                return True
         else:
             try:
                 filter_domain = flag and tools.expr_eval(flag)
@@ -566,7 +566,7 @@ class Screen(signal_event.signal_event):
             self.switch_view(mode='form')
         ctx = self.context.copy()
         ctx.update(context)
-        model = self.models.model_new(default, self.domain, ctx)
+        model = self.models.model_new(default, self.action_domain, ctx)
         if (not self.current_view) or self.current_view.model_add_new or self.create_new:
             self.models.model_add(model, self.new_model_position())
         self.current_model = model

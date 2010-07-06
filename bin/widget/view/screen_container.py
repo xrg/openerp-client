@@ -53,7 +53,6 @@ class screen_container(object):
         sorted_filters.sort(lambda x, y: cmp(x[2], y[2]))
         filters_list += sorted_filters
         filters_list += [['blk','','--Actions--'],['sh','','Save as a Shortcut'],['sf','','Save as a Filter'],['mf','','Manage Filters']]
-
         for lim in filters_list:
             self.action_list.append(lim)
         self.action_combo.set_active(0)
