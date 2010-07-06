@@ -93,14 +93,14 @@ class Printer(object):
                 self.__opener(lambda: os.system('open ' + fn))
             return opener
         softpath = options.options['printer.softpath']
-        if os.name == 'nt':
+        if platform.system() == 'Windows':
             if options.options['printer.preview']:
                 if not softpath or (softpath and softpath in ['None','none']):
-                    return lambda fn: os.startfile(fn)
+                    return os.startfile
                 else:
                     return lambda fn: os.system(softpath + ' ' + fn)
             else:
-                return lambda fn: print_w32_filename(fn)
+                return print_w32_filename
         else:
             if options.options['printer.preview']:
                 if not softpath or (softpath and softpath in ['None','none']):
@@ -113,7 +113,7 @@ class Printer(object):
                         self.__opener( lambda: os.execv(softpath, (os.path.basename(softpath), fn)) )
                     return opener
             else:
-                return lambda fn: print_linux_filename(fn)
+                return print_linux_filename
     
     def _findSXWOpener(self):
         if os.name == 'nt':
