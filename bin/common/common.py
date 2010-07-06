@@ -378,9 +378,10 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None, italic_font=Fal
       type, gtk.BUTTONS_OK)
     msg = to_xml(msg)
     if title is not None:
-        msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
         if italic_font:
-            msg = '<span font="italic"><b>%s</b>\n\n%s</span>' % (to_xml(title), msg)
+            msg = '<span foreground="red"><b>%s</b></span>\n\n\n<span font="italic">%s</span>' % (to_xml(title), msg)
+        else:
+            msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
     dialog.set_icon(OPENERP_ICON)
     dialog.set_markup(msg)
     dialog.show_all()
