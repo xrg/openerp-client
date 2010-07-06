@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -27,6 +27,8 @@ import optparse
 import xmlrpclib
 import release
 import tools
+import logging
+
 class environment(object):
     def __init__(self, login, password, dbname, host='localhost', port=8069):
         self.login = login
@@ -34,18 +36,19 @@ class environment(object):
         self.db = dbname
         self.host = host
         self.port = port
+        self.log = logging.getLogger('environment')
 
     def get_with_server_info(self):
         try:
             login_socket = xmlrpclib.ServerProxy('http://%s:%s/xmlrpc/common' % (self.host, self.port))
             self.uid = login_socket.login(self.db, self.login, self.passwd)
             if self.uid:
-                print login_socket.get_server_environment() + self.get_client_info()
+                self.log.info(login_socket.get_server_environment() + self.get_client_info())
                 login_socket.logout(self.db, self.login, self.passwd)
             else:
-                print "bad login or password from "+self.login+" using database "+self.db
-        except Exception,e:
-                print e
+                self.log.info("bad login or password from "+self.login+" using database "+self.db)
+        except Exception, e:
+                self.log.exception(e)
         return True
 
     def get_client_info(self):
@@ -73,7 +76,6 @@ Examples:
 """
 
     parser = optparse.OptionParser(uses)
-
     parser.add_option("-l", "--login", dest="login", help="Login of the user in Open ERP")
     parser.add_option("-p", "--password", dest="password", help="Password of the user in Open ERP")
     parser.add_option("-d", "--database", dest="dbname", help="Database name")
@@ -107,9 +109,8 @@ Examples:
                     %(platform.release(), platform.version(), platform.architecture()[0],
                       os_lang, platform.python_version())
 
-        print environment + client_info
-        print '\nFor server Information you need to pass database(-d), login(-l),password(-p)'
+        parser.log.info(environment + client_info)
+        parser.log.info('\nFor server Information you need to pass database(-d), login(-l),password(-p)')
         sys.exit(1)
-
     else:
         parser.get_with_server_info()
