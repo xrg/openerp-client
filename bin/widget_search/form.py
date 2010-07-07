@@ -172,12 +172,13 @@ class parse(object):
                 if visval:
                     continue
             if node.localName=='field':
+                self.fields[str(attrs['name'])]['domain'] = []
                 type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
                 self.fields[str(attrs['name'])].update(attrs)
                 self.fields[str(attrs['name'])]['model']=self.model
                 if type not in widgets_type:
                     continue
-                widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']],screen=call[0])
+                widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']], screen=call[0])
                 if 'string' in self.fields[str(attrs['name'])]:
                     label = self.fields[str(attrs['name'])]['string']+' :'
                 else:
@@ -396,7 +397,6 @@ class form(wid_int.wid_int):
                     res1 = domain[:-2]
                     res2 = domain[-1:]
                     domain = res1 + res2
-
         return {'domain':domain, 'context':context}
 
     def _value_set(self, value):
