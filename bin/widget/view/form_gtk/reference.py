@@ -155,7 +155,6 @@ class reference(interface.widget_interface):
             model, (id, name) = value
         if id:
             if not leave:
-                #print self._window
                 dia = dialog(model, id, attrs=self.attrs, window=self._window)
                 ok, id = dia.run()
                 if ok:

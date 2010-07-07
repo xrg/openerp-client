@@ -36,7 +36,7 @@ import math
 
 import rpc
 from rpc import RPCProxy
-
+import logging
 import widget.model.field as wmodel_fields
 
 COLOR_PALETTE = ['#f57900', '#cc0000', '#d400a8', '#75507b', '#3465a4', '#73d216', '#c17d11', '#edd400',
@@ -102,7 +102,7 @@ class ViewCalendar(object):
         self._radio_month.set_active(True)
         self.mode = 'month'
         self.modex = 'month'
-
+        self.log = logging.getLogger('calender')
         self.fields = fields
         self.attrs = attrs
         self.axis = axis
@@ -294,7 +294,7 @@ class ViewCalendar(object):
                         field_color = fdata.get(color_field_custom) and str(fdata.get(color_field_custom)) or None
                 except Exception, e:
                     #TODO: Need to limit exception
-                    print(e)
+                    self.log.exception(e)
                     pass
 
             if not field_color:
@@ -460,7 +460,7 @@ class ViewCalendar(object):
                     if not h:
                         n = n - 1
                     span = n + 1
-                    
+
             ends= time.localtime(time.mktime(starts)+(h * 60 * 60) + (n * 24 * 60 * 60))
 
         if starts and self.date_stop:

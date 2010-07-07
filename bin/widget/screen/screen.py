@@ -229,7 +229,12 @@ class Screen(signal_event.signal_event):
             self.auto_search = True
             return
         val = self.filter_widget and self.filter_widget.value or {}
-        self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
+        if self.current_view.view_type == 'graph' and self.current_view.view.key:
+            self.domain = self.domain_init[:]
+            self.domain += val.get('domain',[]) + self.sort_domain
+        else:
+            self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
+            
         v = self.domain
         limit=self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
@@ -248,7 +253,7 @@ class Screen(signal_event.signal_event):
             self.offset = 0
         offset=self.offset
         self.latest_search = v
-        if self.context.get('group_by',False):
+        if self.context.get('group_by',False) and not self.current_view.view_type == 'graph':
             self.current_view.reload = True
             self.display()
             return True
@@ -421,7 +426,7 @@ class Screen(signal_event.signal_event):
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
-        if isinstance(self.current_model,group_record):
+        if isinstance(self.current_model, group_record) and mode != 'graph':
           return
         self.current_view.set_value()
         self.fields = {}

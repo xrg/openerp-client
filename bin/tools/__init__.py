@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -80,45 +80,46 @@ def calc_condition(self,model,con):
         val = model[con[0]].get(model)
         if con[1]=="=" or con[1]=="==":
             if val==con[2]:
-				return True
+                return True
         elif con[1]=="!=" or con[1]=="<>":
-			if val!=con[2]:
-				return True
+            if val!=con[2]:
+                return True
         elif con[1]=="<":
             if val<con[2]:
-				return True
+                return True
         elif con[1]==">":
-			if val>con[2]:
-				return True
+            if val>con[2]:
+                return True
         elif con[1]=="<=":
-			if val<=con[2]:
-				return True
+            if val<=con[2]:
+                return True
         elif con[1]==">=":
-			if val>=con[2]:
-				return True
+            if val>=con[2]:
+                return True
         elif con[1].lower()=="in":
-			for cond in con[2]:
-				if val == cond:
-					return True
+            for cond in con[2]:
+                if val == cond:
+                    return True
         elif con[1].lower()=="not in":
-			for cond in con[2]:
-				if val == cond:
-					return False
-			return True
+            for cond in con[2]:
+                if val == cond:
+                    return False
+            return True
         return False
-    
+
 def call_log(fun):
     """Debug decorator
        TODO: Add optionnal execution time
     """
     def f(*args, **kwargs):
-        print "call %s with %r, %r:" % (getattr(fun, '__name__', str(fun)), args, kwargs),
+        log = logging.getLogger('call_log')
+        log.info("call %s with %r, %r:" % (getattr(fun, '__name__', str(fun)), args, kwargs))
         try:
             r = fun(*args, **kwargs)
-            print repr(r)
+            log.info(repr(r))
             return r
         except Exception, ex:
-            print "Exception: %r" % (ex,)
+            log.exception("Exception: %r" % (ex,))
             raise
     return f
 
@@ -168,7 +169,6 @@ def locale_format(format, value):
 
 def format_connection_string(login, _passwd, server, port, protocol, dbname):
 #def format_connection_string(*args):
-#    print repr(args)
 #    login, _passwd, server, port, protocol, dbname = args
     DEFAULT_PORT = {
         'http://': 8069,
