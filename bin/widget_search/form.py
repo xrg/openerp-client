@@ -26,7 +26,7 @@ from rpc import session
 
 import gtk
 from xml.parsers import expat
-
+import rpc
 import wid_int
 import tools
 from lxml import etree
@@ -106,39 +106,18 @@ class _container(object):
         return wid
 
 class parse(object):
-    def __init__(self, parent, fields, model='', col=6):
+    def __init__(self, parent, fields, model, col=6):
         self.fields = fields
         self.name_lst = []
         self.name_lst1 = []
-        dict_select = {'True':'1','False':'0','1':'1','0':'0'}
-        import rpc
-        all_field_ids =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search', [('model','=',str(model))])
-        if len(fields) != len(all_field_ids):
-            new_fields = []
-            all_fields =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'read', all_field_ids)
-            for item in all_fields:
-                if item['name'] not in fields:
-                    new_fields.append(item)
-            field_dict = {}
-            for new_field in new_fields:
-                if isinstance(new_field['select_level'],(str,unicode)):
-                    new_field['select_level'] = eval(new_field['select_level'],dict_select)
-		if rpc.session.server_version[:2] >= (5, 1):
-                    if isinstance(new_field['selectable'],(str,unicode)):
-                        new_field['selectable'] = eval(new_field['selectable'],dict_select)
-		else:
-		    new_field['selectable'] = False
-                field_dict[new_field['name']]= {
-                                                'string': new_field['field_description'],
-                                                'type' : new_field['ttype'],
-                                                'select': new_field['select_level'],
-                                                'name' : new_field['name'],
-                                                'readonly': new_field['readonly'],
-                                                'relation': new_field['relation'],
-                                                'required': new_field['required'],
-                                                'translate': new_field['translate'],
-                                                'selectable': new_field['selectable'],
-                                                }
+
+        all_fields = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_get')
+        if len(fields) != len(all_fields):
+            common_fields = [f for f in all_fields if f in fields]
+            for f in common_fields:
+                del all_fields[f]
+            field_dict = all_fields
+
             self.fields.update(field_dict)
             self.name_lst1=[('field',(field_dict[x])) for x in field_dict]
         self.parent = parent
@@ -194,12 +173,13 @@ class parse(object):
                 if visval:
                     continue
             if node.localName=='field':
+                self.fields[str(attrs['name'])]['domain'] = []
                 type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
                 self.fields[str(attrs['name'])].update(attrs)
                 self.fields[str(attrs['name'])]['model']=self.model
                 if type not in widgets_type:
                     continue
-                widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']],screen=call[0])
+                widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']], screen=call[0])
                 if 'string' in self.fields[str(attrs['name'])]:
                     label = self.fields[str(attrs['name'])]['string']+' :'
                 else:
@@ -375,6 +355,7 @@ class form(wid_int.wid_int):
         x =  self.rows
         new_table.attach(panel.widget,0, 1, x, x+1, xoptions=gtk.FILL, yoptions=gtk.FILL , ypadding=2, xpadding=0)
         panelx = 'panel' + str(x)
+        panel.sig_activate(self.sig_activate)
         self.custom_widgets[panelx] = (panel, new_table, 1)
         table.attach(new_table, 1, 9, x, x+1)
         self.rows += 1
@@ -417,7 +398,6 @@ class form(wid_int.wid_int):
                     res1 = domain[:-2]
                     res2 = domain[-1:]
                     domain = res1 + res2
-
         return {'domain':domain, 'context':context}
 
     def _value_set(self, value):

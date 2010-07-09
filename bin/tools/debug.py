@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,10 +15,10 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
+import logging
 def logged(showtime):
     def log(f, res, *args, **kwargs):
         vector = ['Call -> function: %s' % f]
@@ -27,7 +27,7 @@ def logged(showtime):
         for key, value in kwargs.items():
             vector.append( '  kwarg %10s: %r' % ( key, value ) )
         vector.append( '  result: %r' % res )
-        print "\n".join(vector)
+        debug_log = logging.getLogger('debug').info("\n".join(vector))
 
     def outerwrapper(f):
         def wrapper(*args, **kwargs):
@@ -41,7 +41,7 @@ def logged(showtime):
             finally:
                 log(f, res, *args, **kwargs)
                 if showtime:
-                    print "  time delta: %s" % (time.time() - now)
+                    wrapper_log = logging.getLogger('wrapper').info("  time delta: %s" % (time.time() - now))
         return wrapper
     return outerwrapper
 
@@ -59,7 +59,7 @@ def debug(what):
         >>> func_foo(42)
 
         This will output on the logger:
-        
+
             [Wed Dec 25 00:00:00 2008] DEBUG:func_foo:baz = 42
             [Wed Dec 25 00:00:00 2008] DEBUG:func_foo:qnx = (42, 42)
 

@@ -48,7 +48,7 @@ class screen_container(object):
     def fill_filter_combo(self, model):
         self.action_list.clear()
         if rpc.session.server_version[:2] >= (5, 1):
-            my_acts = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'get_filters', model)
+            my_acts = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'get_filters', model)
         else:
             my_acts = []
         filters_list=[['blk', '', _('-- Filters --')]]
@@ -56,7 +56,6 @@ class screen_container(object):
         sorted_filters.sort(lambda x, y: cmp(x[2], y[2]))
         filters_list += sorted_filters
         filters_list += [['blk','',_('--Actions--')],['sh','',_('Save as a Shortcut')],['sf','',_('Save as a Filter')],['mf','',_('Manage Filters')]]
-
         for lim in filters_list:
             self.action_list.append(lim)
         self.action_combo.set_active(0)

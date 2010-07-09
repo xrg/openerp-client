@@ -351,7 +351,7 @@ def error(title, message, details='', parent=None, disconnected_mode=False, erro
     error_in_error = None
     return True
 
-def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
+def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None, italic_font=False):
     if not parent:
         parent=service.LocalService('gui.main').window
     dialog = gtk.MessageDialog(parent,
@@ -359,8 +359,10 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
       type, gtk.BUTTONS_OK)
     msg = to_xml(msg)
     if title is not None:
-        msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
-
+        if italic_font:
+            msg = '<span foreground="red"><b>%s</b></span>\n\n\n<span font="italic">%s</span>' % (to_xml(title), msg)
+        else:
+            msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
     dialog.set_icon(OPENERP_ICON)
     dialog.set_markup(msg)
     dialog.show_all()

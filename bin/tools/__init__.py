@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -36,8 +36,10 @@ def expr_eval(string, context=None):
     context['time'] = time
     context['datetime'] = datetime
     if isinstance(string, basestring):
+        string = string.strip()
+        if not string:
+            return {}
         try:
-            string = string.replace("'active_id'","active_id")
             temp = eval(string, context)
         except Exception, e:
             logging.getLogger('tools.expr_eval').exception(string)
@@ -101,21 +103,22 @@ def calc_condition(self,model,con):
             for cond in con[2]:
                 if val == cond:
                     return False
-                return True
+            return True
         return False
-    
+
 def call_log(fun):
     """Debug decorator
        TODO: Add optionnal execution time
     """
     def f(*args, **kwargs):
-        print "call %s with %r, %r:" % (getattr(fun, '__name__', str(fun)), args, kwargs),
+        log = logging.getLogger('call_log')
+        log.info("call %s with %r, %r:" % (getattr(fun, '__name__', str(fun)), args, kwargs))
         try:
             r = fun(*args, **kwargs)
-            print repr(r)
+            log.info(repr(r))
             return r
         except Exception, ex:
-            print "Exception: %r" % (ex,)
+            log.exception("Exception: %r" % (ex,))
             raise
     return f
 
@@ -165,7 +168,6 @@ def locale_format(format, value):
 
 def format_connection_string(login, _passwd, server, port, protocol, dbname):
 #def format_connection_string(*args):
-#    print repr(args)
 #    login, _passwd, server, port, protocol, dbname = args
     DEFAULT_PORT = {
         'http://': 8069,
@@ -177,5 +179,31 @@ def format_connection_string(login, _passwd, server, port, protocol, dbname):
         result += ':%s' % (port,)
     result += '/%s' % (dbname,)
     return result
+
+def str2bool(string, default=None):
+    """Convert a string representing a boolean into the corresponding boolean
+
+         True  | False
+       --------+---------
+        'True' | 'False'
+        '1'    | '0'
+        'on'   | 'off'
+        't'    | 'f'
+
+    If string can't be converted and default value is not None, default value
+    returned, else a ValueError is raised
+    """
+    assert isinstance(string, basestring)
+    mapping = {
+        True: "true t 1 on".split(),
+        False: "false f 0 off".split(),
+    }
+    string = string.lower()
+    for value in mapping:
+        if string in mapping[value]:
+            return value
+    if default is not None:
+        return default
+    raise ValueError("%r does not represent a valid boolean value" % (string,))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
