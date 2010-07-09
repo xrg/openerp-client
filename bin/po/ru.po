@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-07-07 22:30+0000\n"
+"PO-Revision-Date: 2010-07-08 05:34+0000\n"
 "Last-Translator: Pomazan Bogdan <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-08 03:49+0000\n"
+"X-Launchpad-Export-Date: 2010-07-09 03:55+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -267,6 +267,9 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Ваша проблема не была отправлена разработчикам!\n"
+"Пожалуйста, сообщите об ошибке вручную:\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
@@ -568,6 +571,7 @@ msgstr "Название поля"
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
+"Вы не можете импортировать поле %s, потому что мы не можем определить его"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
@@ -1049,7 +1053,7 @@ msgstr "Вы уже имеете последнюю версию"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Доступны следующие обновления"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
@@ -2901,11 +2905,11 @@ msgstr "<b>Предопределенный Экспорт</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Подходит для импорта"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>Выберете вариант для экспорта</b>"
 
 #: bin/openerp.glade:2871
 msgid "Available Fields"
@@ -3496,7 +3500,7 @@ msgstr "Предыдущий изменяемый виджет"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #
 # File: bin/openerp.glade, line: 7383
@@ -4216,11 +4220,13 @@ msgstr "Вы планируете использовать OpenERP"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "Вы планируете предоставлять услуги по Open ERP"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"Объясните нам, почему вы пробуете Open ERP и какое у вас программное "
+"обеспечение:"
 
 #
 # File: bin/openerp.glade, line: 6318
@@ -4234,6 +4240,7 @@ msgstr "<b>Получать информацию</b>"
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
 msgstr ""
+"Я хочу получать электронные книги по  Open ERP (PDF) на электронную почту"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
