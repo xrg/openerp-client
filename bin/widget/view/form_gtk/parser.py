@@ -146,7 +146,11 @@ class StateAwareWidget(object):
     def attrs_set(self, model):
         sa = getattr(self.widget, 'attrs') or {}
 
-        attrs_changes = eval(sa.get('attrs',"{}"),{'uid':rpc.session.uid})
+        attrs_str = sa.get('attrs',False)
+        if attrs_str:
+            attrs_changes = eval(attrs_str,{'uid':rpc.session.uid})
+        else:
+            attrs_changes = {}
         if sa.get('default_focus',False):
             self.widget.grab_focus()
         for k,v in attrs_changes.items():
