@@ -26,6 +26,7 @@ import gtk.glade
 import gettext
 import common
 import gobject
+from mx import DateTime
 from datetime import datetime, date
 
 from SpiffGtkWidgets import Calendar
