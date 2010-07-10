@@ -137,7 +137,7 @@ class tinySocket_gw(gw_inter):
         return res
 
 class rpc_session(object):
-    __slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_ogws', 'db', 'context', 'timezone', 'rpcproto', 'server_version')
+    __slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_ogws', 'db', 'context', 'timezone', 'rpcproto', 'server_version', 'server_options')
     def __init__(self):
         self._open = False
         self._url = None
@@ -374,10 +374,11 @@ class rpc_session(object):
                 # Server timezone is not recognized!
                 # Time values will be displayed as if located in the server timezone. (nothing we can do)
                 pass
+
+        url = self._url
+        if url.endswith('/xmlrpc'):
+            url = url[:-7]
         try:
-            url = self._url
-            if url.endswith('/xmlrpc'):
-                url = url[:-7]
             sv = self.db_exec_no_except(url, 'server_version')
             if sv.endswith('dev'):
                 sv = sv[:-3]
@@ -387,6 +388,19 @@ class rpc_session(object):
             import traceback
             traceback.print_exc()
             common.warning(_("Could not get server's version: %s") % e)
+
+        try:
+            opts = self.exec_no_except(url, 'common', 'get_options')
+            self.server_options = opts
+            print "Server options: %s" % (self.server_options,)
+        except xmlrpclib.Fault, err:
+            # TODO diagnose other faults.
+            self.server_options = []
+        except Exception, e:
+            import traceback
+            traceback.print_exc()
+            common.warning(_("Could not get server's options: %s") % e)
+            self.server_options = []
 
     def logged(self):
         return self._open
