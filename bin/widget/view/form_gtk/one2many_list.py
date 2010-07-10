@@ -362,6 +362,8 @@ class one2many_list(interface.widget_interface):
                     self.screen.current_model = self.screen.models.models[0]
                 else:
                     self.screen.current_model = None
+        self.eb_open.set_sensitive(self.screen.models.models and True or False)
+        self.eb_del.set_sensitive(self.screen.models.models and True or False)
         self.pager.search_count()
         self.pager.set_sensitivity()
         self.screen.display()
