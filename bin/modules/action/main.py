@@ -188,15 +188,29 @@ class main(service.Service):
         for action in actions:
             keyact[action['name'].encode('utf8')] = action
         keyact.update(adds)
-
         res = common.selection(_('Select your action'), keyact)
         if res:
             (name,action) = res
             context.update(rpc.session.context)
+            if action.get('display_help', False):
+                action_id = action.get('id', False)
+                title = action.get('name', '')
+                help_msg =  action.get('help', False)
+                self.display_help(action_id, title, help_msg)
             self._exec_action(action, data, context=context)
             return (name, action)
         return False
 
+    def display_help(self, action_id=False, title='', help=False):
+        if not help:
+            return False
+        if title:
+            title = _(title)
+        common.message(help, title, italic_font=True)
+        value = {'default_user_ids':[(4, rpc.session.uid)]}
+        rpc.session.rpc_exec_auth('/object', 'execute',
+                        'ir.actions.act_window', 'write', action_id, value, rpc.session.context)
+        return True
 main()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
