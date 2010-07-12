@@ -29,7 +29,7 @@ except NameError:
 
 import tools
 
-DEFAULT_PAGER_LIMIT = 20
+DEFAULT_PAGER_LIMIT = 100
 
 class ModelField(object):
     '''
@@ -192,6 +192,8 @@ class BinaryField(CharField):
     def get(self, model, check_load=True, readonly=True, modified=False):
         self.__check_model(model)
         self.__check_load(model, modified, False)
+        if not model.value.get(self.name, False):
+            return model.value.get(self.get_size_name(), False) or False
         return model.value.get(self.name, False) or False
 
     def get_client(self, model):
@@ -408,6 +410,7 @@ class O2MField(CharField):
             mod = model.value[self.name].model_new(default=False)
             mod.set_default(record)
             model.value[self.name].model_add(mod)
+            mod.modified = True
         model.value[self.name].current_model = mod
         #mod.signal('record-changed')
         return True
@@ -437,7 +440,10 @@ class ReferenceField(CharField):
 
     def get(self, model, check_load=True, readonly=True, modified=False):
         if model.value[self.name]:
-            return '%s,%d' % (model.value[self.name][0], model.value[self.name][1][0])
+            val = model.value[self.name]
+            if not isinstance(val, (tuple, list)):
+                val = eval(val)
+            return '%s,%d' % (val[0], val[1][0])
         return False
 
     def set_client(self, model, value, test_state=False, force_change=False):

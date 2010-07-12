@@ -219,12 +219,7 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
           # Limit Combo
-        self.cb = gtk.combo_box_new_text()
-        for limit in ['20','40','80','All']:
-            self.cb.append_text(limit)
-        self.cb.set_active(0)
-        self.cb.set_tooltip_text(_('Choose Limit'))
-        self.cb.connect('changed', self.limit_changed)
+        self.cb = self.pager.create_combo_box(_('Choose Limit'), self.limit_changed)
         hb.pack_start(self.cb, expand=False, fill=False)
 
         self.widget.pack_start(hb, expand=False, fill=True)
@@ -367,6 +362,8 @@ class one2many_list(interface.widget_interface):
                     self.screen.current_model = self.screen.models.models[0]
                 else:
                     self.screen.current_model = None
+        self.eb_open.set_sensitive(self.screen.models.models and True or False)
+        self.eb_del.set_sensitive(self.screen.models.models and True or False)
         self.pager.search_count()
         self.pager.set_sensitivity()
         self.screen.display()

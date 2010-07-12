@@ -23,21 +23,27 @@ import time
 import datetime
 import os
 import operator
+import logging
+
 if os.name == 'nt':
     import win32
 
-def expr_eval(string, context={}):
+def expr_eval(string, context=None):
     import rpc
+    if context is None:
+        context = {}
     context['uid'] = rpc.session.uid
     context['current_date'] = time.strftime('%Y-%m-%d')
     context['time'] = time
     context['datetime'] = datetime
     if isinstance(string, basestring):
-#        return eval(string, context)
-        string = string.replace("'active_id'","active_id")
+        string = string.strip()
+        if not string:
+            return {}
         try:
             temp = eval(string, context)
-        except:
+        except Exception, e:
+            logging.getLogger('tools.expr_eval').exception(string)
             return {}
         return temp
     else:
@@ -120,19 +126,19 @@ class ConditionExpr(object):
             self.cond.__setslice__(ind,ind,[result])
             ind = find_index(self.cond)
         return all(evaluate(expr) for expr in self.cond)
-
 def call_log(fun):
     """Debug decorator
        TODO: Add optionnal execution time
     """
     def f(*args, **kwargs):
-        print "call %s with %r, %r:" % (getattr(fun, '__name__', str(fun)), args, kwargs),
+        log = logging.getLogger('call_log')
+        log.info("call %s with %r, %r:" % (getattr(fun, '__name__', str(fun)), args, kwargs))
         try:
             r = fun(*args, **kwargs)
-            print repr(r)
+            log.info(repr(r))
             return r
         except Exception, ex:
-            print "Exception: %r" % (ex,)
+            log.exception("Exception: %r" % (ex,))
             raise
     return f
 
@@ -179,5 +185,45 @@ def locale_format(format, value):
     if not locale.getpreferredencoding().lower().startswith('utf'):
         label_str = label_str.replace('\xa0', '\xc2\xa0')
     return label_str
+
+def format_connection_string(login, _passwd, server, port, protocol, dbname):
+#def format_connection_string(*args):
+#    login, _passwd, server, port, protocol, dbname = args
+    DEFAULT_PORT = {
+        'http://': 8069,
+        'https://': 8069,
+        'socket://': 8070,
+    }
+    result = '%s%s@%s' % (protocol, login, server)
+    if port and DEFAULT_PORT.get(protocol) != int(port):
+        result += ':%s' % (port,)
+    result += '/%s' % (dbname,)
+    return result
+
+def str2bool(string, default=None):
+    """Convert a string representing a boolean into the corresponding boolean
+
+         True  | False
+       --------+---------
+        'True' | 'False'
+        '1'    | '0'
+        'on'   | 'off'
+        't'    | 'f'
+
+    If string can't be converted and default value is not None, default value
+    returned, else a ValueError is raised
+    """
+    assert isinstance(string, basestring)
+    mapping = {
+        True: "true t 1 on".split(),
+        False: "false f 0 off".split(),
+    }
+    string = string.lower()
+    for value in mapping:
+        if string in mapping[value]:
+            return value
+    if default is not None:
+        return default
+    raise ValueError("%r does not represent a valid boolean value" % (string,))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

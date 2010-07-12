@@ -21,8 +21,6 @@
 
 import time
 from datetime import datetime as DT
-#import mx
-#from mx import DateTime as DT
 
 import gtk
 
@@ -120,7 +118,6 @@ class calendar(interface.widget_interface):
         else:
             if len(value)>10:
                 value=value[:10]
-            #date=mx.DateTime.strptime(value, DT_FORMAT)
             date=DT.strptime(value[:10], DT_FORMAT)
             t=date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
@@ -130,7 +127,6 @@ class calendar(interface.widget_interface):
 
     def cal_open(self, widget, event, model=None, window=None):
         if self.readonly:
-            common.message(_('This widget is readonly !'))
             return True
 
         if not window:
@@ -228,11 +224,11 @@ class datetime(interface.widget_interface):
 
     def display(self, model, model_field):
         if not model_field:
-            return self.show(False)
+            return self.set_datetime(False)
         super(datetime, self).display(model, model_field)
-        self.show(model_field.get(model))
+        self.set_datetime(model_field.get(model))
 
-    def show(self, dt_val, timezone=True):
+    def set_datetime(self, dt_val, timezone=True):
         if not dt_val:
             self.entry.clear()
         else:
@@ -245,7 +241,6 @@ class datetime(interface.widget_interface):
 
     def cal_open(self, widget, event, model=None, window=None):
         if self.readonly:
-            common.message(_('This widget is readonly !'))
             return True
 
         win = gtk.Dialog(_('OpenERP - Date selection'), window,
@@ -293,7 +288,7 @@ class datetime(interface.widget_interface):
             except ValueError:
                 common.message(_('Invalid datetime value! Year must be greater than 1899 !'))
             else:
-                self.show(value, timezone=False)
+                self.set_datetime(value, timezone=False)
 
         self._focus_out()
         win.destroy()
@@ -306,6 +301,8 @@ class stime(interface.widget_interface):
         self.format = '%H:%M:%S'
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
+        self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
+        self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
         self.value=False
 
     def _readonly_set(self, value):
@@ -339,12 +336,12 @@ class stime(interface.widget_interface):
 
     def display(self, model, model_field):
         if not model_field:
-            return self.show(False)
+            return self.set_datetime(False)
         super(stime, self).display(model, model_field)
         self.entry.set_text(model_field.get(model) or '00:00:00')
         return True
 
-    def show(self, dt_val, timezone=True):
+    def set_datetime(self, dt_val, timezone=True):
         if not dt_val:
             self.entry.clear()
         else:

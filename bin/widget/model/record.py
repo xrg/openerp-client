@@ -225,7 +225,7 @@ class ModelRecord(signal_event.signal_event):
                  later[fieldname] = value
                  continue
             if isinstance(self.mgroup.mfields[fieldname], field.M2MField):
-                self.pager_cache.setdefault(fieldname, value or [])
+                self.pager_cache[fieldname] = value
 
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
 
@@ -280,7 +280,7 @@ class ModelRecord(signal_event.signal_event):
         if not match:
             raise Exception, 'ERROR: Wrong on_change trigger: %s' % callback
         func_name = match.group(1)
-        arg_names = [n.strip() for n in match.group(2).split(',')]
+        arg_names = [n.strip() for n in match.group(2).split(',') if n.strip()]
         args = [self.expr_eval(arg) for arg in arg_names]
         ids = self.id and [self.id] or []
         response = getattr(self.rpc, func_name)(ids, *args)
@@ -300,13 +300,15 @@ class ModelRecord(signal_event.signal_event):
         self.signal('attrs-changed')
 
     def cond_default(self, field, value):
-        ir = RPCProxy('ir.values')
-        values = ir.get('default', '%s=%s' % (field, value),
-                        [(self.resource, False)], False, {})
-        data = {}
-        for index, fname, value in values:
-            data[fname] = value
-        self.set_default(data)
+        if field in self.mgroup.mfields:
+            if self.mgroup.mfields[field].attrs.get('change_default', False):
+                ir = RPCProxy('ir.values')
+                values = ir.get('default', '%s=%s' % (field, value),
+                                [(self.resource, False)], False, {})
+                data = {}
+                for index, fname, value in values:
+                    data[fname] = value
+                self.set_default(data)
 
     # Performing button clicks on both forms of view: list and form.
     def get_button_action(self, screen, id=None, attrs={}):
@@ -345,7 +347,6 @@ class ModelRecord(signal_event.signal_event):
                     context = self.context_get()
                     if 'context' in attrs:
                         context.update(self.expr_eval(attrs['context'], check_load=False))
-
                     result = rpc.session.rpc_exec_auth(
                         '/object', 'execute',
                         self.resource,
@@ -358,7 +359,7 @@ class ModelRecord(signal_event.signal_event):
                             screen.window.destroy()
                         datas = {}
                         obj = service.LocalService('action.main')
-                        obj._exec_action(result, datas, context=screen.context)
+                        obj._exec_action(result, datas, context=context)
 
                 elif button_type == 'action':
                     obj = service.LocalService('action.main')

@@ -84,6 +84,10 @@ class CanvasVEventView(CanvasEventView):
 
 
     def update(self):
+        # Don't crash if we didn't have a range now
+        if self.range is None:
+            return
+
         # Remove old events.
         for item in self.table.get_children():
             self.table.remove(item)

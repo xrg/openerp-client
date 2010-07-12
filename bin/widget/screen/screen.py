@@ -24,7 +24,8 @@ import xml.dom.minidom
 from rpc import RPCProxy
 import rpc
 import gettext
-from mx import DateTime
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 import gtk
 import gobject
 from gtk import glade
@@ -142,7 +143,7 @@ class Screen(signal_event.signal_event):
             if not self.filter_widget:
                 if not self.search_view:
                     self.search_view = rpc.session.rpc_exec_auth('/object', 'execute',
-                            self.name, 'fields_view_get', False, 'form',
+                            self.name, 'fields_view_get', False, 'search',
                             self.context)
                 self.filter_widget = widget_search.form(self.search_view['arch'],
                         self.search_view['fields'], self.name, self.window,
@@ -191,31 +192,34 @@ class Screen(signal_event.signal_event):
 
     def get_calenderDomain(self, start=None,old_date='',mode='month'):
         args = []
+        old_date = old_date.date()
         if not old_date:
-            old_date = DateTime.today()
-        if old_date == DateTime.today():
+            old_date = datetime.today().date()
+        if old_date == datetime.today().date():
             if mode =='month':
-                start_date = (old_date + DateTime.RelativeDateTime(months = -1)).strftime('%Y-%m-%d')
+                start_date = (old_date + relativedelta(months=-1)).strftime('%Y-%m-%d')
                 args.append((start, '>',start_date))
-                end_date = (old_date + DateTime.RelativeDateTime(months = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(months=+1)).strftime('%Y-%m-%d')
                 args.append((start, '<',end_date))
+
             if mode=='week':
-                start_date = (old_date + DateTime.RelativeDateTime(weeks = -1)).strftime('%Y-%m-%d')
+                start_date = (old_date + relativedelta(weeks=-1)).strftime('%Y-%m-%d')
                 args.append((start, '>',start_date))
-                end_date = (old_date + DateTime.RelativeDateTime(weeks = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(weeks=+1)).strftime('%Y-%m-%d')
                 args.append((start, '<',end_date))
+
             if mode=='day':
-                start_date = (old_date + DateTime.RelativeDateTime(days = -1)).strftime('%Y-%m-%d')
+                start_date = (old_date + relativedelta(days=-1)).strftime('%Y-%m-%d')
                 args.append((start, '>',start_date))
-                end_date = (old_date + DateTime.RelativeDateTime(days = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(days=+1)).strftime('%Y-%m-%d')
                 args.append((start, '<',end_date))
         else:
             if mode =='month':
-                end_date = (old_date + DateTime.RelativeDateTime(months = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(months=+1)).strftime('%Y-%m-%d')
             if mode=='week':
-                end_date = (old_date + DateTime.RelativeDateTime(weeks = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(weeks=+1)).strftime('%Y-%m-%d')
             if mode=='day':
-                end_date = (old_date + DateTime.RelativeDateTime(days = 1)).strftime('%Y-%m-%d')
+                end_date = (old_date + relativedelta(days=+1)).strftime('%Y-%m-%d')
             old_date = old_date.strftime('%Y-%m-%d')
             args = [(start,'>',old_date),(start,'<',end_date)]
         return args
@@ -225,7 +229,12 @@ class Screen(signal_event.signal_event):
             self.auto_search = True
             return
         val = self.filter_widget and self.filter_widget.value or {}
-        self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
+        if self.current_view.view_type == 'graph' and self.current_view.view.key:
+            self.domain = self.domain_init[:]
+            self.domain += val.get('domain',[]) + self.sort_domain
+        else:
+            self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
+            
         v = self.domain
         limit=self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
@@ -244,7 +253,7 @@ class Screen(signal_event.signal_event):
             self.offset = 0
         offset=self.offset
         self.latest_search = v
-        if self.context.get('group_by',False):
+        if self.context.get('group_by',False) and not self.current_view.view_type == 'graph':
             self.current_view.reload = True
             self.display()
             return True
@@ -264,8 +273,9 @@ class Screen(signal_event.signal_event):
     def add_custom(self, dynamic_button):
         fields_list = []
         for k,v in self.search_view['fields'].items():
-            if v['type'] in ('many2one','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
-                fields_list.append([k,v['string'],v['type']])
+            if v['type'] in ('many2one','text','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
+                selection = v.get('selection', False)
+                fields_list.append([k,v['string'], v['type'], selection])
         if fields_list:
             fields_list.sort(lambda x, y: cmp(x[1], y[1]))
         panel = self.filter_widget.add_custom(self.filter_widget, self.filter_widget.widget, fields_list)
@@ -290,11 +300,11 @@ class Screen(signal_event.signal_event):
         if flag == 'mf':
             obj = service.LocalService('action.main')
             act={'name':'Manage Filters',
-                 'res_model':'ir.actions.act_window',
+                 'res_model':'ir.filters',
                  'type':'ir.actions.act_window',
                  'view_type':'form',
                  'view_mode':'tree,form',
-                 'domain':'[(\'filter\',\'=\',True),(\'res_model\',\'=\',\''+self.name+'\'),(\'default_user_ids\',\'in\',(\''+str(rpc.session.uid)+'\',))]'}
+                 'domain':'[(\'model_id\',\'=\',\''+self.name+'\'),(\'user_id\',\'=\',(\''+str(rpc.session.uid)+'\',))]'}
             value = obj._exec_action(act, {}, self.context)
 
         if flag in ['blk','mf']:
@@ -318,32 +328,20 @@ class Screen(signal_event.signal_event):
             combo.set_active(0)
             if response == gtk.RESPONSE_OK and widget.get_text():
                 action_name = widget.get_text()
-                datas={'name':action_name,
-                       'res_model':self.name,
+                values={'name':action_name,
+                       'model_id':self.name,
                        'domain':str(self.filter_widget and self.filter_widget.value.get('domain',[])),
                        'context':str(self.filter_widget and self.filter_widget.value.get('context',{})),
-                       'search_view_id':self.search_view['view_id'],
-                       'filter':True,
-                       'default_user_ids': [[6, 0, [rpc.session.uid]]],
+                       'user_id':rpc.session.uid
                        }
-                action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'create', datas)
-                self.screen_container.fill_filter_combo(self.name)
+                if flag == 'sf':
+                    action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'create', values, self.context)
+                    self.screen_container.fill_filter_combo(self.name)
                 if flag == 'sh':
-                    parent_menu_id = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'search', [('name','=','Custom Shortcuts')])
-                    if parent_menu_id:
-                        menu_data={'name':action_name,
-                                   'sequence':20,
-                                   'action':'ir.actions.act_window,'+str(action_id),
-                                   'parent_id':parent_menu_id[0],
-                                   'icon':'STOCK_JUSTIFY_FILL',
-                                   }
-                        menu_id = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'create', menu_data)
-                        sc_data={'name':action_name,
-                                 'sequence': 1,
-                                 'res_id': menu_id,
-                                   }
-                        shortcut_id = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view_sc', 'create', sc_data)
-                return True
+                    values.update({'res_model':self.name,
+                                  'search_view_id':self.search_view['view_id'],
+                                  'default_user_ids': [[6, 0, [rpc.session.uid]]]})
+                    rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'create_shortcut', values, self.context)
         else:
             try:
                 filter_domain = flag and tools.expr_eval(flag)
@@ -428,7 +426,7 @@ class Screen(signal_event.signal_event):
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
-        if isinstance(self.current_model,group_record):
+        if isinstance(self.current_model, group_record) and mode != 'graph':
           return
         self.current_view.set_value()
         self.fields = {}
@@ -573,7 +571,7 @@ class Screen(signal_event.signal_event):
             self.switch_view(mode='form')
         ctx = self.context.copy()
         ctx.update(context)
-        model = self.models.model_new(default, self.domain, ctx)
+        model = self.models.model_new(default, self.action_domain, ctx)
         if (not self.current_view) or self.current_view.model_add_new or self.create_new:
             self.models.model_add(model, self.new_model_position())
         self.current_model = model

@@ -23,7 +23,7 @@ import gtk
 import rpc
 import wid_int
 import tools
-
+import common
 
 class char(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}, screen=None):
@@ -34,6 +34,14 @@ class char(wid_int.wid_int):
         self.widget.set_width_chars(15)
         self.widget.set_property('activates_default', True)
         if self.default_search:
+            model = self.attrs.get('relation', '')
+            if attrs.get('type','') == 'many2one' and model:
+                try:
+                    value = rpc.session.rpc_exec_auth('/object', 'execute', model, 'name_get', self.default_search)
+                except rpc.rpc_exception, e:
+                    common.error(_('Error: ')+str(e.type), e.message, e.data)
+                    value = []
+                self.default_search = value and value[0] and value[0][1] or ''
             self.widget.set_text(self.default_search or '')
 
     def _value_get(self):
@@ -41,7 +49,10 @@ class char(wid_int.wid_int):
         domain = []
         context = {}
         if s:
-            domain = [(self.name,self.attrs.get('comparator','ilike'),s)]
+            if self.attrs.get('domain',False):
+                domain = tools.expr_eval(self.attrs['domain'], {'self': s})
+            else:
+                domain = [(self.name,self.attrs.get('comparator','ilike'),s)]
             context = tools.expr_eval(self.attrs.get('context',"{}"), {'self': s})
         return {
             'domain':domain,

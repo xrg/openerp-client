@@ -22,17 +22,13 @@
 import xml.dom.minidom
 import pygtk
 pygtk.require('2.0')
-import gobject
-
-from rpc import RPCProxy
-import rpc
 
 import gtk
 from xml.parsers import expat
-
-import sys
+import rpc
 import wid_int
 import tools
+from lxml import etree
 
 class _container(object):
     def __init__(self, max_width):
@@ -109,37 +105,18 @@ class _container(object):
         return wid
 
 class parse(object):
-    def __init__(self, parent, fields, model='', col=6, view_type = None):
+    def __init__(self, parent, fields, model, col=6):
         self.fields = fields
-        self.view_type = view_type
         self.name_lst = []
         self.name_lst1 = []
-        dict_select = {'True':'1','False':'0','1':'1','0':'0'}
-        import rpc
-        all_field_ids =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search', [('model','=',str(model))])
-        if len(fields) != len(all_field_ids):
-            new_fields = []
-            all_fields =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'read', all_field_ids)
-            for item in all_fields:
-                if item['name'] not in fields:
-                    new_fields.append(item)
-            field_dict = {}
-            for new_field in new_fields:
-                if isinstance(new_field['select_level'],(str,unicode)):
-                    new_field['select_level'] = eval(new_field['select_level'],dict_select)
-                if isinstance(new_field['selectable'],(str,unicode)):
-                    new_field['selectable'] = eval(new_field['selectable'],dict_select)
-                field_dict[new_field['name']]= {
-                                                'string': new_field['field_description'],
-                                                'type' : new_field['ttype'],
-                                                'select': new_field['select_level'],
-                                                'name' : new_field['name'],
-                                                'readonly': new_field['readonly'],
-                                                'relation': new_field['relation'],
-                                                'required': new_field['required'],
-                                                'translate': new_field['translate'],
-                                                'selectable': new_field['selectable'],
-                                                }
+
+        all_fields = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_get')
+        if len(fields) != len(all_fields):
+            common_fields = [f for f in all_fields if f in fields]
+            for f in common_fields:
+                del all_fields[f]
+            field_dict = all_fields
+
             self.fields.update(field_dict)
             self.name_lst1=[('field',(field_dict[x])) for x in field_dict]
         self.parent = parent
@@ -183,11 +160,9 @@ class parse(object):
 
         container = _container(max_width)
         attrs = tools.node_attributes(root_node)
-        container.new(col=int(attrs.get('col', self.col)))
+        container.new()
         self.container = container
 
-        filter_hbox =  gtk.HBox(homogeneous=False, spacing=0)
-        filter_button_exists = False
         for node in root_node.childNodes:
             if not node.nodeType==node.ELEMENT_NODE:
                 continue
@@ -197,48 +172,56 @@ class parse(object):
                 if visval:
                     continue
             if node.localName=='field':
-                val  = attrs.get('select', False) or self.fields[str(attrs['name'])].get('select', False) or self.view_type == 'search'
-                if val:
-                    type = attrs.get('widget', self.fields[str(attrs['name'])]['type'])
-                    self.fields[str(attrs['name'])].update(attrs)
-                    self.fields[str(attrs['name'])]['model']=self.model
-                    if type not in widgets_type:
-                        return False
-                    widget_act = widgets_type[type][0](str(attrs['name']), self.parent, self.fields[attrs['name']],screen=call[0])
-                    if 'string' in self.fields[str(attrs['name'])]:
-                        label = self.fields[str(attrs['name'])]['string']+' :'
-                    else:
-                        label = None
-                    size = widgets_type[type][1]
-                    if not self.focusable:
-                        self.focusable = widget_act.widget
+                field_name = str(attrs['name'])
+                field_dic = self.fields[field_name]
+                if field_dic.get('type') == 'many2one' and field_dic.get('domain'):
+                    # domains at the model level are meant for the target relationship,
+                    # while domains in search views are meant to replace the normal
+                    # filtering that would result from entering data in the field.
+                    # So we convert the former into a 'domain_relation' attribute,
+                    # to be used only when looking up values, while the latter is
+                    # preserved.
+                    field_dic['domain_relation'] = field_dic['domain']
+                    del field_dic['domain']
+                type = attrs.get('widget', field_dic['type'])
+                field_dic.update(attrs)
+                field_dic['model'] = self.model
+                if type not in widgets_type:
+                    continue
+                widget_act = widgets_type[type][0](field_name, self.parent, field_dic, screen=call[0])
+                if 'string' in field_dic:
+                    label = field_dic['string']+' :'
+                else:
+                    label = None
+                if not self.focusable:
+                    self.focusable = widget_act.widget
 
-                    mywidget = widget_act.widget
-                    if node.childNodes:
-                        mywidget = gtk.HBox(homogeneous=False, spacing=0)
-                        mywidget.pack_start(widget_act.widget,expand=True,fill=True)
-                        i = 0
-                        for node_child in node.childNodes:
-                            if node_child.localName == 'filter':
-                                i += 1
-                                attrs_child = tools.node_attributes(node_child)
-                                widget_child = widgets_type['filter'][0]('', self.parent, attrs_child, call)
-                                mywidget.pack_start(widget_child.widget)
-                                dict_widget[str(attrs['name']) + str(i)] = (widget_child, mywidget, int(val))
-                            elif node_child.localName == 'separator':
-                                attrs_child = tools.node_attributes(node_child)
-                                if attrs_child.get('orientation','vertical') == 'horizontal':
-                                    sep = gtk.HSeparator()
-                                    sep.set_size_request(30,5)
-                                    mywidget.pack_start(sep,False,True,5)
-                                else:
-                                    sep = gtk.VSeparator()
-                                    sep.set_size_request(3,40)
-                                    mywidget.pack_start(sep,False,False,5)
-#                        mywidget.pack_start(widget_act.widget,expand=False,fill=False)
-                    xoptions = gtk.SHRINK
-                    wid = container.wid_add(mywidget, 1,label, int(self.fields[str(attrs['name'])].get('expand',0)),xoptions=xoptions)
-                    dict_widget[str(attrs['name'])] = (widget_act, wid, int(val))
+                mywidget = widget_act.widget
+                if node.childNodes:
+                    mywidget = gtk.HBox(homogeneous=False, spacing=0)
+                    mywidget.pack_start(widget_act.widget,expand=True,fill=True)
+                    i = 0
+                    for node_child in node.childNodes:
+                        if node_child.localName == 'filter':
+                            i += 1
+                            attrs_child = tools.node_attributes(node_child)
+                            widget_child = widgets_type['filter'][0]('', self.parent, attrs_child, call)
+                            mywidget.pack_start(widget_child.widget)
+                            dict_widget[str(attrs['name']) + str(i)] = (widget_child, mywidget, 1)
+                        elif node_child.localName == 'separator':
+                            attrs_child = tools.node_attributes(node_child)
+                            if attrs_child.get('orientation','vertical') == 'horizontal':
+                                sep = gtk.HSeparator()
+                                sep.set_size_request(30,5)
+                                mywidget.pack_start(sep,False,True,5)
+                            else:
+                                sep = gtk.VSeparator()
+                                sep.set_size_request(3,40)
+                                mywidget.pack_start(sep,False,False,5)
+#                    mywidget.pack_start(widget_act.widget,expand=False,fill=False)
+                xoptions = gtk.SHRINK
+                wid = container.wid_add(mywidget, 1,label, int(self.fields[str(attrs['name'])].get('expand',0)),xoptions=xoptions)
+                dict_widget[str(attrs['name'])] = (widget_act, wid, 1)
 
             elif node.localName == 'filter':
                 name = str(attrs.get('string','filter'))
@@ -276,8 +259,8 @@ class parse(object):
                         frame.set_shadow_type(gtk.SHADOW_NONE)
                 frame.attrs=attrs
                 frame.set_border_width(0)
-                container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), ypadding=0)
-                container.new(int(attrs.get('col',8)))
+                container.wid_add(frame, colspan=1, expand=int(attrs.get('expand',0)), ypadding=0)
+                container.new()
                 widget, widgets = self.parse_filter(xml_data, max_width, node, call= call)
                 dict_widget.update(widgets)
                 if isinstance(widget, list):
@@ -299,8 +282,10 @@ class parse(object):
 class form(wid_int.wid_int):
     def __init__(self, xml_arch, fields, model=None, parent=None, domain=[], call=None, col=6):
         wid_int.wid_int.__init__(self, 'Form', parent)
+        xml_arch = self.xml_process(xml_arch)
         dom = xml.dom.minidom.parseString(xml_arch)
-        parser = parse(parent, fields, model=model, col=col, view_type = dom.firstChild.localName)
+        assert dom.firstChild.localName == 'search'
+        parser = parse(parent, fields, model=model, col=col)
         self.parent = parent
         self.fields = fields
         self.model = model
@@ -319,9 +304,30 @@ class form(wid_int.wid_int):
         self.widget.show_all()
         self.name="" #parser.title
         self.show()
-        value = {}
         for x in self.widgets.values():
             x[0].sig_activate(self.sig_activate)
+
+    def xml_process(self,xml_arch):
+        root = etree.fromstring(xml_arch)
+        group =  etree.Element("group")
+        em_list = []
+        for element in root.iterchildren():
+            if element.tag == "group":
+                em_list.append(element)
+            elif element.tag == "newline":
+                if group.getchildren():
+                    em_list.append(group)
+                em_list.append(element)
+                group =  etree.Element("group")
+            else:
+                group.append(element)
+        if group.getchildren():
+            em_list.append(group)
+
+        search =  etree.Element("search")
+        for element in em_list:
+            search.append(element)
+        return etree.tostring(search)
 
     def clear(self, *args):
         for panel in self.custom_widgets:
@@ -353,15 +359,16 @@ class form(wid_int.wid_int):
         return True
 
     def add_custom(self, widget, table, fields):
+        new_table = gtk.Table(1,1,False)
         panel = widgets_type['custom_filter'][0]('', self.parent,{'fields':fields},call=self.remove_custom)
         x =  self.rows
-        table.resize(x,4)
-        table.attach(panel.widget,1, 4, x, x+1, yoptions=gtk.FILL, xoptions=gtk.FILL, ypadding=2, xpadding=0)
+        new_table.attach(panel.widget,0, 1, x, x+1, xoptions=gtk.FILL, yoptions=gtk.FILL , ypadding=2, xpadding=0)
         panelx = 'panel' + str(x)
-        self.custom_widgets[panelx] = (panel,table,1)
-        self.rows +=1
-        table.show()
-
+        panel.sig_activate(self.sig_activate)
+        self.custom_widgets[panelx] = (panel, new_table, 1)
+        table.attach(new_table, 1, 9, x, x+1)
+        self.rows += 1
+        table.show_all()
         return panel
 
     def toggle(self, widget, event=None):
@@ -379,14 +386,17 @@ class form(wid_int.wid_int):
         for x in self.widgets.values() + self.custom_widgets.values():
             domain += x[0].value.get('domain',[])
             ctx = x[0].value.get('context',{})
-            if ctx.get('group_by', False):
-                if not ctx['group_by'] in self.groupby:
-                    self.groupby.append(ctx['group_by'])
-            elif ctx.get('remove_group',False):
-                if ctx['remove_group'] in self.groupby:
-                    self.groupby.remove(ctx['remove_group'])
-            else:
-                context.update(ctx)
+            ctx_groupby = ctx.pop('group_by', False)
+            ctx_remove_group = ctx.pop('remove_group',False)
+            if ctx_groupby:
+                if not isinstance(ctx_groupby, list):
+                    ctx_groupby = [ctx_groupby]
+                [self.groupby.append(x) for x in ctx_groupby if x not in self.groupby]
+            elif ctx_remove_group:
+                if not isinstance(ctx_remove_group, list):
+                    ctx_remove_group = [ctx_remove_group]
+                [self.groupby.remove(x) for x in ctx_remove_group if x in self.groupby]
+            context.update(ctx)
         if self.groupby:
             context.update({'group_by':self.groupby})
         if domain:
@@ -397,7 +407,6 @@ class form(wid_int.wid_int):
                     res1 = domain[:-2]
                     res2 = domain[-1:]
                     domain = res1 + res2
-
         return {'domain':domain, 'context':context}
 
     def _value_set(self, value):

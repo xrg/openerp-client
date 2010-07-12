@@ -103,12 +103,7 @@ class many2many(interface.widget_interface):
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
         # LIMIT COMBO
-        self.cb = gtk.combo_box_new_text()
-        for limit in ['20','40','80','All']:
-            self.cb.append_text(limit)
-        self.cb.set_active(0)
-        self.cb.set_tooltip_text(_('Choose Limit'))
-        self.cb.connect('changed', self.limit_changed)
+        self.cb = self.pager.create_combo_box(_('Choose Limit'), self.limit_changed)
         hb.pack_start(self.cb, expand=False, fill=False)
 
         self.widget.pack_start(hb, expand=False, fill=False)
@@ -224,18 +219,16 @@ class many2many(interface.widget_interface):
         ids = []
         if model_field:
             ids = model_field.get_client(model)
+            self.model.pager_cache.setdefault(model_field.name, model.value[model_field.name] or [])
+            self.pager.search_count()
         self.screen.clear()
         self.screen.load(ids)
         self.screen.display()
-        if self.screen.models.models:
-            self.screen.current_models = self.screen.models.models[0]
-        if model and model.id:
-            self.pager.search_count()
-            self.screen.current_view.set_cursor()
         self.pager.set_sensitivity()
         return True
 
     def set_value(self, model, model_field):
+        self.model.pager_cache.setdefault(model_field.name, model.value[model_field.name] or [])
         if self.name in model.pager_cache:
             model_field.set_client(model, model.pager_cache[self.name])
 

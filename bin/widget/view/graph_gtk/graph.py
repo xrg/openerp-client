@@ -71,6 +71,7 @@ class ViewGraph(object):
         self.axis = axis
         self.old_axis = axis
         self.editable = False
+        self.key = False
         self.widget.editable = False
         self.axis_data = axis_data
         self.axis_group = {}
@@ -86,9 +87,15 @@ class ViewGraph(object):
         self.axis = copy.copy(self.old_axis)
         group_by = self.widget.screen.context.get('group_by', False)
         if group_by:
-            models = models.models or models.list_group.lst
+            if not self.key:
+                del self.widget.screen.context['group_by']
+                self.key = True
+                self.widget.screen.search_filter()
+                models = self.widget.screen.models
+                self.widget.screen.context['group_by'] = group_by
             self.axis[0] = group_by[0]
             self.axis_data[group_by[0]] = {}
+
         for m in models:
             res = {}
             for x in self.axis_data.keys():
@@ -96,10 +103,7 @@ class ViewGraph(object):
                 if self.fields[x]['type'] in ('many2one', 'char','time','text'):
                     res[x] = field_val and str(field_val) or 'Undefined'
                 elif self.fields[x]['type'] == 'selection':
-                    if group_by and isinstance(m, group_record):
-                        selection = dict(m.children[0][x].attrs['selection'])
-                    else:
-                        selection = dict(m[x].attrs['selection'])
+                    selection = dict(m[x].attrs['selection'])
                     if field_val:
                         val = str(field_val)
                         res[x] = selection.get(val, val)

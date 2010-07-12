@@ -23,7 +23,7 @@ from rpc import RPCProxy
 
 class pager(object):
 
-    DEFAULT_LIMIT = 20
+    DEFAULT_LIMIT = 100
 
     def __init__(self, object, relation, screen):
         self.object = object
@@ -31,6 +31,15 @@ class pager(object):
         self.screen = screen
         self.domain = []
         self.type = screen.type
+
+    def create_combo_box(self, tooltip, signal):
+        combo = gtk.combo_box_new_text()
+        for limit in ['100','250','500','ALL']:
+            combo.append_text(limit)
+        combo.set_active(0)
+        combo.set_tooltip_text(tooltip)
+        combo.connect('changed', signal)
+        return combo
 
     def create_event_box(self, title, signal, stock_id):
         event_box = gtk.EventBox()
@@ -81,7 +90,6 @@ class pager(object):
         self.object.eb_pre.set_sensitive(True)
         self.object.eb_next_page.set_sensitive(True)
         self.object.eb_next.set_sensitive(True)
-        self.object.cb.set_sensitive(True)
         if offset <= 0:
             self.object.eb_prev_page.set_sensitive(False)
 
@@ -95,8 +103,14 @@ class pager(object):
             pos == len(self.screen.models.models) - 1 or pos < 0:
             self.object.eb_next.set_sensitive(False)
 
-        if not self.screen.models.models:
-            self.object.cb.set_sensitive(False)
+        if not self.screen.models.models or total_rec <= self.DEFAULT_LIMIT:
+            self.object.cb.hide()
+            self.object.eb_prev_page.hide()
+            self.object.eb_next_page.hide()
+        else:
+            self.object.cb.show()
+            self.object.eb_prev_page.show()
+            self.object.eb_next_page.show()
 
     def set_models(self, offset=0, limit=DEFAULT_LIMIT):
         if not limit:

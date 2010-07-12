@@ -30,6 +30,7 @@ import wizard
 import printer
 import common
 import tools
+import options
 from widget.view.form_gtk.many2one import dialog
 from lxml import etree
 
@@ -52,6 +53,7 @@ class main(service.Service):
         report_id = rpc.session.rpc_exec_auth('/report', 'report', name, ids, datas, ctx)
         state = False
         attempt = 0
+        max_attemps = int(options.options.get('client.timeout') or 0)
         while not state:
             val = rpc.session.rpc_exec_auth('/report', 'report_get', report_id)
             if not val:
@@ -60,7 +62,7 @@ class main(service.Service):
             if not state:
                 time.sleep(1)
                 attempt += 1
-            if attempt>200:
+            if attempt>max_attemps:
                 common.message(_('Printing aborted, too long delay !'))
                 return False
         printer.print_data(val)
@@ -93,37 +95,6 @@ class main(service.Service):
             if not datas['search_view'] and datas['search_view_id']:
                  datas['search_view'] = str(rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', datas['search_view_id'], 'search', context))
 
-            elif not datas['search_view'] and not datas['search_view_id']:
-                def encode(s):
-                    if isinstance(s, unicode):
-                        return s.encode('utf8')
-                    return s
-                def process_child(node, new_node, doc):
-
-                    for child in node.getchildren():
-                        if child.tag=='field' and child.get('select') and child.get('select')=='1':
-                            if child.getchildren():
-                                fld = etree.Element('field')
-                                for attr in child.attrib.keys():
-                                        fld.set(attr, child.get(attr))
-                                new_node.append(fld)
-                            else:
-                                new_node.append(child)
-                        elif child.tag in ('page','group','notebook'):
-                                process_child(child, new_node, doc)
-
-                form_arch = rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', False, 'form', context)
-
-                dom_arc = etree.XML(encode(form_arch['arch']))
-                new_node = copy.deepcopy(dom_arc)
-
-                for child_node in new_node.getchildren()[0].getchildren():
-                    new_node.getchildren()[0].remove(child_node)
-                process_child(dom_arc.getchildren()[0],new_node.getchildren()[0],dom_arc)
-
-                form_arch['arch'] = etree.tostring(new_node)
-                datas['search_view'] = str(form_arch)
-
             if datas['limit'] is None or datas['limit'] == 0:
                 datas['limit'] = 80
 
@@ -142,7 +113,8 @@ class main(service.Service):
             if not action.get('domain', False):
                 action['domain']='[]'
             ctx = context.copy()
-            ctx.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])} )
+            if datas.get('id',False):
+                ctx.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[]), 'active_model': datas.get('model',False)})
             ctx.update(tools.expr_eval(action.get('context','{}'), ctx.copy()))
 
             a = ctx.copy()
@@ -216,15 +188,29 @@ class main(service.Service):
         for action in actions:
             keyact[action['name'].encode('utf8')] = action
         keyact.update(adds)
-
         res = common.selection(_('Select your action'), keyact)
         if res:
             (name,action) = res
             context.update(rpc.session.context)
+            if action.get('display_help', False):
+                action_id = action.get('id', False)
+                title = action.get('name', '')
+                help_msg =  action.get('help', False)
+                self.display_help(action_id, title, help_msg)
             self._exec_action(action, data, context=context)
             return (name, action)
         return False
 
+    def display_help(self, action_id=False, title='', help=False):
+        if not help:
+            return False
+        if title:
+            title = _(title)
+        common.message(help, title, italic_font=True)
+        value = {'default_user_ids':[(4, rpc.session.uid)]}
+        rpc.session.rpc_exec_auth('/object', 'execute',
+                        'ir.actions.act_window', 'write', action_id, value, rpc.session.context)
+        return True
 main()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

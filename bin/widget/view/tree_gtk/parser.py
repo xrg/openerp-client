@@ -24,6 +24,7 @@ import re
 import locale
 import gtk
 import math
+import cgi
 
 import tools
 import tools.datetime_util
@@ -45,8 +46,6 @@ import datetime as DT
 import service
 import gobject
 import pango
-import mx.DateTime
-from mx.DateTime import *
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed)
@@ -55,6 +54,7 @@ def send_keys(renderer, editable, position, treeview):
         editable.connect('changed', treeview.on_editing_done)
 
 def sort_model(column, screen):
+    screen.current_view.set_drag_and_drop(column.name == 'sequence')
     if screen.sort == column.name:
         screen.sort = column.name+' desc'
     else:
@@ -151,7 +151,7 @@ class parser_tree(interface.parser_interface):
                 treeview.handlers[col] = handler_id
                 col_label = gtk.Label('')
                 if fields[fname].get('required', False):
-                    col_label.set_markup('<b>%s</b>' % fields[fname]['string'])
+                    col_label.set_markup('<b>%s</b>' % cgi.escape(fields[fname]['string']))
                 else:
                     col_label.set_text(fields[fname]['string'])
                 col_label.show()
@@ -163,27 +163,32 @@ class parser_tree(interface.parser_interface):
                 col.set_cell_data_func(renderer, cell.setter)
                 col.set_clickable(True)
                 twidth = {
-                    'integer': 60,
-                    'float': 80,
-                    'float_time': 80,
-                    'date': 70,
-                    'datetime': 120,
-                    'selection': 90,
-                    'char': 100,
-                    'one2many': 50,
-                    'many2many': 50,
-                    'boolean': 20,
+                    'integer': (60,170),
+                    'float': (80,300),
+                    'float_time': (80,150),
+                    'date': (70,100),
+                    'datetime': (145,145),
+                    'selection': (90,250),
+                    'char': (100,False),
+                    'one2many': (50,False),
+                    'many2many': (50,False),
+                    'boolean': (20,80),
+                    'progressbar':(150,200)
                 }
-                if 'width' in fields[fname]:
-                    width = int(fields[fname]['width'])
-                else:
-                    width = twidth.get(fields[fname]['type'], 100)
-                if not twidth.get(fields[fname]['type'], False):
+
+                if col._type not in twidth:
                     col.set_expand(True)
                 else:
-                    col.set_min_width(width)
-                if not treeview.sequence:
-                    col.connect('clicked', sort_model, self.screen)
+                    if 'width' in fields[fname]:
+                        min_width = max_width = int(fields[fname]['width'])
+                    else:
+                        min_width, max_width = twidth[col._type]
+
+                    col.set_min_width(min_width)
+                    if max_width:
+                        col.set_max_width(max_width)
+
+                col.connect('clicked', sort_model, self.screen)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 visval = eval(str(fields[fname].get('invisible', 'False')), {'context':self.screen.context})
@@ -565,6 +570,7 @@ class Selection(Char):
 
     def value_from_text(self, model, text):
         selection = self.attrs['selection']
+        text = tools.ustr(text)
         res = False
         for val, txt in selection:
             if txt[:len(text)].lower() == text.lower():
