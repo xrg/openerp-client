@@ -174,15 +174,6 @@ class parse(object):
             if node.localName=='field':
                 field_name = str(attrs['name'])
                 field_dic = self.fields[field_name]
-                if field_dic.get('type') == 'many2one' and field_dic.get('domain'):
-                    # domains at the model level are meant for the target relationship,
-                    # while domains in search views are meant to replace the normal
-                    # filtering that would result from entering data in the field.
-                    # So we convert the former into a 'domain_relation' attribute,
-                    # to be used only when looking up values, while the latter is
-                    # preserved.
-                    field_dic['domain_relation'] = field_dic['domain']
-                    del field_dic['domain']
                 type = attrs.get('widget', field_dic['type'])
                 field_dic.update(attrs)
                 field_dic['model'] = self.model
