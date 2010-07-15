@@ -273,6 +273,10 @@ class one2many_list(interface.widget_interface):
         self.screen.readonly = value
         self.screen.display()
 
+    def set_disable(self, value):
+        self.eb_open.set_sensitive(value)
+        self.eb_del.set_sensitive(value)
+
     def _sig_new(self, *args):
         _, event = args
         ctx = dict(self._view.model.expr_eval(self.screen.default_get), **self.context)
@@ -281,6 +285,7 @@ class one2many_list(interface.widget_interface):
                 self.screen.new(context=ctx)
                 self._readonly = False
                 self.screen.current_view.widget.set_sensitive(True)
+                self.set_disable(True)
             else:
                 ok = 1
                 dia = dialog(self.attrs['relation'], parent=self._view.model, attrs=self.attrs, model_ctx=self.screen.models._context, window=self._window, readonly=self._readonly, context=ctx)
@@ -291,6 +296,7 @@ class one2many_list(interface.widget_interface):
                         value.signal('record-changed', value.parent)
                         self.screen.display()
                         dia.new()
+                        self.set_disable(True)
                 self.pager.reset_pager()
                 dia.destroy()
 
@@ -362,8 +368,7 @@ class one2many_list(interface.widget_interface):
                     self.screen.current_model = self.screen.models.models[0]
                 else:
                     self.screen.current_model = None
-        self.eb_open.set_sensitive(self.screen.models.models and True or False)
-        self.eb_del.set_sensitive(self.screen.models.models and True or False)
+        self.set_disable(self.screen.models.models and True or False)
         self.pager.search_count()
         self.pager.set_sensitivity()
         self.screen.display()
