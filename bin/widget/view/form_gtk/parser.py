@@ -152,20 +152,15 @@ class StateAwareWidget(object):
         for k,v in attrs_changes.items():
             result = True
             result = result and tools.calc_condition(self, model, v)
-            if result:
-                if k=='invisible':
-                    self.widget.hide()
-                if k=='readonly':
-                    self.widget.set_sensitive(False)
-                else:
-                    self.widget.set_sensitive(True)
-            else:
-                if k=='readonly':
-                    self.widget.set_sensitive(False)
-                else:
-                    self.widget.set_sensitive(True)
-                if k=='invisible':
-                    self.widget.show()
+            if k == 'invisible':
+                func = ['show', 'hide'][bool(result)]
+                getattr(self.widget, func)()
+                if self.label:
+                        getattr(self.label, func)()
+            elif k == 'readonly':
+                    self.widget.set_sensitive(not result)
+                    if self.label:
+                        self.label.set_sensitive(not result)
 
 
 class _container(object):
