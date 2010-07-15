@@ -155,12 +155,14 @@ class StateAwareWidget(object):
             if result:
                 if k=='invisible':
                     self.widget.hide()
-                elif k=='readonly':
+                if k=='readonly':
                     self.widget.set_sensitive(False)
                 else:
-                    self.widget.set_sensitive(False and sa.get('readonly',False))
+                    self.widget.set_sensitive(True)
             else:
                 if k=='readonly':
+                    self.widget.set_sensitive(False)
+                else:
                     self.widget.set_sensitive(True)
                 if k=='invisible':
                     self.widget.show()

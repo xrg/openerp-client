@@ -240,8 +240,7 @@ class Char(object):
             attrs_changes = eval(self.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
             for k,v in attrs_changes.items():
                 result = False
-                for condition in v:
-                    result = tools.calc_condition(self,model,condition)
+                result = tools.calc_condition(self,model,v)
                 model[self.field_name].get_state_attrs(model)[k] = result
 
     def state_set(self, model, state='draft'):
@@ -643,8 +642,7 @@ class CellRendererButton(object):
             attrs_changes = eval(self.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
             for k,v in attrs_changes.items():
                 result = False
-                for condition in v:
-                    result = tools.calc_condition(self,model,condition)
+                result = tools.calc_condition(self,model,v)
                 if result:
                     if k=='invisible':
                         return True

@@ -437,8 +437,7 @@ class ViewList(parser_view):
             attrs_changes = eval(path.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
             for k,v in attrs_changes.items():
                 result = True
-                for condition in v:
-                    result = tools.calc_condition(self,model,condition)
+                result = tools.calc_condition(self,model,v)
                 if result:
                     if k=='invisible':
                         return False

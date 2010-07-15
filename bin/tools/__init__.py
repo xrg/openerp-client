@@ -85,47 +85,57 @@ def calc_condition(self, model, cond):
         common.error('Wrong attrs Implementation!','You have wrongly specified conditions in attrs %s' %(cond_main,))
 
 class ConditionExpr(object):
-    def get_result(self,x,op,y,model):
-        if op=='=':
-            return operator.eq(model[x].get(model),y)
-        elif op=='!=' or op=='<>':
-            return operator.ne(model[x].get(model),y)
-        elif op=='<':
-            return operator.lt(model[x].get(model),y)
-        elif op=='>':
-            return operator.gt(model[x].get(model),y)
-        elif op=='<=':
-            return operator.le(model[x].get(model),y)
-        elif op=='>=':
-            return operator.lt(model[x].get(model),y)
-        elif op=='in':
-            return operator.contains(model[x].get(model),y)
-        elif op=='not in':
-            return operator.not_(operator.contains(model[x].get(model),y))
+    OPERATORS = {'=': getattr(operator, 'eq'),
+                 '!=': getattr(operator, 'ne'),
+                 '<': getattr(operator, 'lt'),
+                 '>': getattr(operator, 'gt'),
+                 '<=': getattr(operator, 'le'),
+                 '>=': getattr(operator, 'ge'),
+                 'in': getattr(operator, 'contains'),
+                 'not in': getattr(operator, 'contains')}
+
+    OPERAND_MAPPER = {'<>': '!=', '==': '='}
 
     def __init__(self, condition):
         self.cond = condition
 
     def eval(self, context):
-        def evaluate(cond):
-            if isinstance(cond,bool):
-                return cond
-            left, opr, right = cond
-            return self.get_result(left,opr,right,context)
+        if context:
+            def evaluate(cond):
+                if isinstance(cond,bool):
+                    return cond
+                left, oper, right = cond
+                real_op = self.OPERAND_MAPPER.get(oper.lower(), oper)
+                if oper in ('in','not in'):
+                    res = self.OPERATORS[real_op](right, context[left].get(context))
+                    if oper == 'not in':
+                        res = operator.not_(res)
+                else:
+                    res = self.OPERATORS[real_op](context[left].get(context), right)
 
-        def find_index(con):
-            index=-1
-            for a in range(len(con)):
-                if con[a] == '|':
-                    index = a
-            return index
-        ind = find_index(self.cond)
-        while(ind!= -1):
-            result = any((evaluate(self.cond[ind+1]),evaluate(self.cond[ind+2])))
-            self.cond.__delslice__(ind,ind+3)
-            self.cond.__setslice__(ind,ind,[result])
-            ind = find_index(self.cond)
-        return all(evaluate(expr) for expr in self.cond)
+                return res
+
+            def find_index(con):
+                index_or = index_and = -1
+                for a in range(len(con)):
+                    if con[a] == '|':
+                        index_or = a
+                    if con[a] == '&':
+                        index_and = a
+                return [index_or, index_and]
+            ind_or,ind_and = find_index(self.cond)
+            while(ind_or != -1 or ind_and != -1):
+                if ind_or > ind_and:
+                    ind = ind_or
+                    result = any((evaluate(self.cond[ind+1]), evaluate(self.cond[ind+2])))
+                if ind_and > ind_or:
+                    ind = ind_and
+                    result = all((evaluate(self.cond[ind+1]), evaluate(self.cond[ind+2])))
+                self.cond.__delslice__(ind, ind+3)
+                self.cond.__setslice__(ind, ind, [result])
+                ind_or,ind_and = find_index(self.cond)
+            res = all(evaluate(expr) for expr in self.cond)
+            return res
 def call_log(fun):
     """Debug decorator
        TODO: Add optionnal execution time
