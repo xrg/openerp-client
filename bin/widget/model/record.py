@@ -206,10 +206,16 @@ class ModelRecord(signal_event.signal_event):
         return value
 
     def set_default(self, val):
+        fields_with_on_change = {}
         for fieldname, value in val.items():
             if fieldname not in self.mgroup.mfields:
                 continue
+            # Fields with on_change should be processed later
+            if self.mgroup.mfields[fieldname].attrs.get('on_change',False):
+                fields_with_on_change[fieldname] = value
             self.mgroup.mfields[fieldname].set_default(self, value)
+        for field, value in fields_with_on_change.items():
+            self.mgroup.mfields[field].set_default(self, value)
         self._loaded = True
         self.signal('record-changed')
 
