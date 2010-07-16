@@ -86,6 +86,7 @@ class parser_tree(interface.parser_interface):
 
         treeview.sequence = False
         treeview.connect("motion-notify-event", treeview.set_tooltip)
+        treeview.connect('key-press-event', treeview.on_tree_key_press)
 
         for node in root_node.childNodes:
             node_attrs = tools.node_attributes(node)

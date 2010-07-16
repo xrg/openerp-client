@@ -299,7 +299,7 @@ class ViewList(parser_view):
             hbox.show_all()
 
         self.display()
-        self.widget_tree.connect('button-press-event', self.__contextual_menu)
+        self.widget_tree.connect('button_press_event', self.__contextual_menu)
         self.widget_tree.connect_after('row-activated', self.__sig_switch)
         selection = self.widget_tree.get_selection()
         selection.set_mode(gtk.SELECTION_MULTIPLE)
@@ -446,6 +446,33 @@ class ViewList(parser_view):
                         return False
         return True
 
+
+    def copy_by_row(self, model, path, iter, tree_view):
+        columns = tree_view.get_columns()
+        model = model.get(iter,0)
+        copy_row = ""
+        titel = ""
+        for col in columns:
+            if col._type != 'Button' and col.name in model[0].value :
+                if col._type == 'many2one':
+                   copy_row += unicode(model[0].value[col.name] and model[0].value[col.name][1])
+                else:
+                   copy_row += unicode(model[0].value[col.name])
+                copy_row += '\t'
+                if not tree_view.copy_table:
+                    titel += col.get_widget().get_text() + '\t'
+        if titel:
+            tree_view.copy_table += titel  + '\n'
+        tree_view.copy_table += copy_row + '\n'
+
+    def copy_selection(self, menu, tree_view, tree_selection):
+        tree_view.copy_table = ""
+        tree_selection.selected_foreach(self.copy_by_row, tree_view)
+        tree_view.copy_table
+        clipboard = gtk.clipboard_get()
+        clipboard.set_text(unicode(tree_view.copy_table))
+        clipboard.store()
+
     def __contextual_menu(self, treeview, event, *args):
         if event.button in [1,3]:
             path = treeview.get_path_at_pos(int(event.x),int(event.y))
@@ -477,11 +504,27 @@ class ViewList(parser_view):
 
             else:
                 # Here it goes for right click
+                selected_rows = selection.get_selected_rows()
+                if len(selected_rows[1])>1:
+                    event.state =  gtk.gdk.CONTROL_MASK
+                    for row in selected_rows[1]:
+                        selection.select_path(row)
+                    selection.unselect_path(path[0])
+
+                menu = gtk.Menu()
+                item = gtk.ImageMenuItem(_(gtk.STOCK_COPY))
+                item.connect('activate',self.copy_selection, treeview, selection)
+                item.show()
+                menu.append(item)
+
                 if path[1]._type=='many2one':
                     value = m[path[1].name].get(m)
                     resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.screen.fields[path[1].name]['relation'], False)], False, rpc.session.context)
                     resrelate = map(lambda x:x[2], resrelate)
-                    menu = gtk.Menu()
+                    if resrelate:
+                        item=gtk.SeparatorMenuItem()
+                        item.show()
+                        menu.append(item)
                     for x in resrelate:
                         x['string'] = x['name']
                         item = gtk.ImageMenuItem('... '+x['name'])
@@ -490,7 +533,7 @@ class ViewList(parser_view):
                         item.set_sensitive(bool(value))
                         item.show()
                         menu.append(item)
-                    menu.popup(None,None,None,event.button,event.time)
+                menu.popup(None,None,None,event.button,event.time)
 
     def _click_and_relate(self, action, value, model):
         data={}
