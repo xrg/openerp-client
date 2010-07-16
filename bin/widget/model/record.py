@@ -210,10 +210,17 @@ class ModelRecord(signal_event.signal_event):
         for fieldname, value in val.items():
             if fieldname not in self.mgroup.mfields:
                 continue
-            # Fields with on_change should be processed later
+            # Fields with on_change should be processed last otherwise
+            # we might override the values the on_change() sets with
+            # the next defaults. There's still a possible issue with
+            # the order in which we process the defaults of the fields
+            # with on_change() in case they cascade, but that's fixable
+            # normally in the view a single clean on_change on the first 
+            # field.
             if self.mgroup.mfields[fieldname].attrs.get('on_change',False):
                 fields_with_on_change[fieldname] = value
-            self.mgroup.mfields[fieldname].set_default(self, value)
+            else:
+                self.mgroup.mfields[fieldname].set_default(self, value)
         for field, value in fields_with_on_change.items():
             self.mgroup.mfields[field].set_default(self, value)
         self._loaded = True
