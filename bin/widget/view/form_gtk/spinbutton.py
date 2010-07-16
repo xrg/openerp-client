@@ -32,7 +32,7 @@ class spinbutton(interface.widget_interface):
         self.widget = gtk.SpinButton(adj, 1.0, digits=int( attrs.get('digits',(14,2))[1] ) )
         self.widget.set_numeric(True)
         self.widget.set_activates_default(True)
-        self.widget.connect('button_press_event', self._menu_open)
+        self.widget.connect('populate-popup', self._menu_open)
         if self.attrs['readonly']:
             self._readonly_set(True)
         self.widget.connect('focus-in-event', lambda x,y: self._focus_in())

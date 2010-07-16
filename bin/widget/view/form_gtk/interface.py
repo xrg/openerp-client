@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -36,7 +36,7 @@ class widget_interface(object):
         if attrs is None:
             attrs = {}
         self.parent = parent
-        self.position = 0        
+        self.position = 0
         self._window = window
         self._view = None
         self.attrs = attrs
@@ -96,21 +96,23 @@ class widget_interface(object):
                 self.attrs.get('string', self._view.widget_name), model,
                 value, deps, window=self._window)
 
-    def _menu_open(self, obj, event):
-        if event.button == 3:
-            menu = gtk.Menu()
-            for stock_id,callback,sensitivity in self._menu_entries:
-                if stock_id:
-                    item = gtk.ImageMenuItem(stock_id)
-                    if callback:
-                        item.connect("activate",callback)
-                    item.set_sensitive(sensitivity)
-                else:
-                    item=gtk.SeparatorMenuItem()
-                item.show()
-                menu.append(item)
-            menu.popup(None,None,None,event.button,event.time)
-            return True
+    def _menu_open(self, obj, menu):
+        item = gtk.SeparatorMenuItem()
+        item.show()
+        menu.attach(item, 0, 1, 4, 5)
+        i = 5
+        for stock_id, callback, sensitivity in self._menu_entries:
+            if stock_id:
+                item = gtk.ImageMenuItem(stock_id)
+                if callback:
+                    item.connect("activate",callback)
+                item.set_sensitive(sensitivity)
+            else:
+                item = gtk.SeparatorMenuItem()
+            item.show()
+            menu.attach(item, 0, 1, i, i+1)
+            i= i+1
+        return True
 
     def _focus_in(self):
         pass
