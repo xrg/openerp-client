@@ -23,7 +23,7 @@ import os
 import sys
 import tempfile
 import time
-
+from datetime import datetime
 import base64
 
 import gtk
@@ -104,7 +104,9 @@ class wid_binary(interface.widget_interface):
             self.but_remove.show()
 
     def _get_filename(self):
-        return self._view.model.value.get(self.has_filename) or self._view.model.value.get('name', self.data_field_name)
+        return self._view.model.value.get(self.has_filename) \
+               or self._view.model.value.get('name', self.data_field_name) \
+               or datetime.now().strftime('%c')
 
     def sig_execute(self,widget=None):
         try:
