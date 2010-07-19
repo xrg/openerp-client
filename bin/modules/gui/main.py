@@ -972,11 +972,14 @@ class terp_main(service.Service):
         return True
 
     def sig_win_close(self, *args):
-        button = args[1].button
-        if (isinstance(args[0], gtk.Button) and button in [1,2]) \
-                or (isinstance(args[0], gtk.EventBox) and button == 2):
-            page_num = self.notebook.page_num(args[2])
-            self._sig_child_call(args[0], 'but_close', page_num)
+        if len(args) >= 2:
+            button = args[1].button
+            if (isinstance(args[0], gtk.Button) and button in [1,2]) \
+                    or (isinstance(args[0], gtk.EventBox) and button == 2):
+                page_num = self.notebook.page_num(args[2])
+                self._sig_child_call(args[0], 'but_close', page_num)
+        elif len(args) and isinstance(args[0], gtk.ImageMenuItem):
+            self._sig_child_call(args[0], 'but_close', None)
 
     def sig_request_new(self, args=None):
         obj = service.LocalService('gui.window')
