@@ -144,7 +144,7 @@ class many2one(interface.widget_interface):
         self.wid_text = gtk.Entry()
         self.wid_text.set_property('width-chars', 13)
         self.wid_text.connect('key_press_event', self.sig_key_press)
-        self.wid_text.connect('button_press_event', self._menu_open)
+        self.wid_text.connect('populate-popup', self._menu_open)
         self.wid_text.connect_after('changed', self.sig_changed)
         self.wid_text.connect_after('activate', self.sig_activate)
         self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
@@ -340,32 +340,33 @@ class many2one(interface.widget_interface):
         self.but_open.set_sensitive(bool(res))
         self.ok=True
 
-    def _menu_open(self, obj, event):
-        if event.button == 3:
-            value = self._view.modelfield.get(self._view.model)
-            if not self._menu_loaded:
-                resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.model_type, False)], False, rpc.session.context)
-                resrelate = map(lambda x:x[2], resrelate)
+    def _menu_open(self, obj, menu):
+        value = self._view.modelfield.get(self._view.model)
+        if not self._menu_loaded:
+            resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.model_type, False)], False, rpc.session.context)
+            resrelate = map(lambda x:x[2], resrelate)
+            if resrelate:
                 self._menu_entries.append((None, None, None))
-                for x in resrelate:
-                    x['string'] = x['name']
-                    f = lambda action: lambda x: self.click_and_relate(action)
-                    self._menu_entries.append(('... '+x['name'], f(x), 0))
-            self._menu_loaded = True
-
-            menu = gtk.Menu()
-            for stock_id,callback,sensitivity in self._menu_entries:
-                if stock_id:
-                    item = gtk.ImageMenuItem(stock_id)
-                    if callback:
-                        item.connect("activate",callback)
-                    item.set_sensitive(bool(sensitivity or value))
-                else:
-                    item=gtk.SeparatorMenuItem()
-                item.show()
-                menu.append(item)
-            menu.popup(None,None,None,event.button,event.time)
-            return True
+            for x in resrelate:
+                x['string'] = x['name']
+                f = lambda action: lambda x: self.click_and_relate(action)
+                self._menu_entries.append(('... '+x['name'], f(x), 0))
+        self._menu_loaded = True
+        item=gtk.SeparatorMenuItem()
+        item.show()
+        menu.attach(item,0,1,4,5)
+        i=5
+        for stock_id,callback,sensitivity in self._menu_entries:
+            if stock_id:
+                item = gtk.ImageMenuItem(stock_id)
+                if callback:
+                    item.connect("activate",callback)
+                item.set_sensitive(bool(sensitivity or value))
+            else:
+                item=gtk.SeparatorMenuItem()
+            item.show()
+            menu.attach(item,0,1,i,i+1)
+            i= i+1
         return False
 
     def click_and_relate(self, action):

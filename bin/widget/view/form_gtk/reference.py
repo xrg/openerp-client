@@ -58,7 +58,7 @@ class reference(interface.widget_interface):
         self.wid_text = gtk.Entry()
         self.wid_text.set_property('width-chars', 13)
         self.wid_text.connect('key_press_event', self.sig_key_press)
-        self.wid_text.connect('button_press_event', self._menu_open)
+        self.wid_text.connect('populate-popup', self._menu_open)
         self.wid_text.connect_after('changed', self.sig_changed)
         self.wid_text.connect_after('activate', self.sig_activate)
         self.wid_text_focus_out_id = self.wid_text.connect_after(

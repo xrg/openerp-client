@@ -35,7 +35,7 @@ class selection(interface.widget_interface):
         self.child = self.entry.get_child()
         self.child.set_property('activates_default', True)
         self.child.connect('changed', self.sig_changed)
-        self.child.connect('button_press_event', self._menu_open)
+        self.child.connect('populate-popup', self._menu_open)
         self.child.connect('key_press_event', self.sig_key_press)
         self.child.connect('activate', self.sig_activate)
         self.child.connect_after('focus-out-event', self.sig_activate)

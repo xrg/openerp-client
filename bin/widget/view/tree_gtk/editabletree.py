@@ -36,6 +36,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         self.editable = position
         self.cells = {}
         self.handlers = {}
+        self.copy_table = ""
 
     def on_quit_cell(self, current_model, fieldname, value):
         modelfield = current_model[fieldname]
@@ -163,6 +164,12 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
                 txt = entry.get_active_text()
             self.on_quit_cell(model, column.name, txt)
         return True
+    
+    def on_tree_key_press(self, tree_view, event):
+        if event.state & gtk.gdk.CONTROL_MASK and event.keyval in (gtk.keysyms.C, gtk.keysyms.c):
+            selection = tree_view.get_selection()
+            menu = False
+            self.screen.current_view.copy_selection(menu, tree_view, selection)
 
     def on_keypressed(self, entry, event):
         path, column = self.get_cursor()
