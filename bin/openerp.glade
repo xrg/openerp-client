@@ -812,7 +812,7 @@
                             <property name="label" translatable="yes">Repeat latest _action</property>
                             <property name="use_underline">True</property>
                             <signal name="activate" handler="on_form_repeat_activate"/>
-                            <accelerator key="Z" modifiers="GDK_CONTROL_MASK" signal="activate"/>
+                            <accelerator key="E" modifiers="GDK_CONTROL_MASK" signal="activate"/>
                           </widget>
                         </child>
                         <child>
