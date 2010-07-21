@@ -322,15 +322,13 @@ class parser_form(widget.view.interface.parser_interface):
             attrs = tools.node_attributes(root_node)
             self.title = attrs.get('string', 'Unknown')
 
-        for node in root_node.childNodes:
-            if not node.nodeType==node.ELEMENT_NODE:
-                continue
+        for node in root_node:
             attrs = tools.node_attributes(node)
-            if node.localName=='image':
+            if node.tag=='image':
                 icon = gtk.Image()
                 icon.set_from_stock(attrs['name'], gtk.ICON_SIZE_DIALOG)
                 container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, fill=int(attrs.get('fill', 0)))
-            elif node.localName=='separator':
+            elif node.tag=='separator':
                 if 'position' in attrs and attrs['position']=='vertical':
                     vbox = gtk.HBox(homogeneous=False, spacing=0)
                 else:
@@ -355,15 +353,11 @@ class parser_form(widget.view.interface.parser_interface):
                     xoptions = False
                     vbox.pack_start(gtk.HSeparator())
                 container.wid_add(vbox,colspan=int(attrs.get('colspan',1)), xoptions=xoptions,expand=int(attrs.get('expand',0)), ypadding=10, fill=int(attrs.get('fill', 0)))
-            elif node.localName=='label':
+            elif node.tag=='label':
                 text = attrs.get('string', '')
                 if not text:
-                    for node in node.childNodes:
-                        if node.nodeType == node.TEXT_NODE:
-                            text += node.data
-                        else:
-                            text += node.toxml()
-
+                    for node in node:
+                        text += node.text
                 align = float(attrs.get('align', 0))
 
                 eb = container.create_label(text, markup=True, align=align,
@@ -382,10 +376,10 @@ class parser_form(widget.view.interface.parser_interface):
                     fill=int(attrs.get('fill', 0))
                 )
 
-            elif node.localName=='newline':
+            elif node.tag=='newline':
                 container.newline()
 
-            elif node.localName=='button':
+            elif node.tag=='button':
                 if attrs.get('invisible', False):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
@@ -395,7 +389,7 @@ class parser_form(widget.view.interface.parser_interface):
                 saw_list.append(StateAwareWidget(button, states=states))
                 container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)))
 
-            elif node.localName=='notebook':
+            elif node.tag=='notebook':
                 if attrs.get('invisible', False):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
@@ -423,7 +417,7 @@ class parser_form(widget.view.interface.parser_interface):
                 saw_list += saws
                 dict_widget.update(widgets)
 
-            elif node.localName=='page':
+            elif node.tag=='page':
                 if attrs.get('invisible', False):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
@@ -440,7 +434,7 @@ class parser_form(widget.view.interface.parser_interface):
                 dict_widget.update(widgets)
                 notebook.append_page(widget, l)
 
-            elif node.localName=='field':
+            elif node.tag =='field':
                 name = str(attrs['name'])
                 del attrs['name']
                 name = unicode(name)
@@ -494,7 +488,7 @@ class parser_form(widget.view.interface.parser_interface):
 
                 container.wid_add(widget=widget_act.widget, label=widget_label, expand=expand, translate=translate, colspan=size, fname=name, fill=fill)
 
-            elif node.localName=='group':
+            elif node.tag =='group':
                 frame = gtk.Frame(attrs.get('string', None))
                 frame.attrs=attrs
                 frame.set_border_width(0)
@@ -522,7 +516,7 @@ class parser_form(widget.view.interface.parser_interface):
                     frame.set_shadow_type(gtk.SHADOW_NONE)
                     container.get().set_border_width(0)
                 container.pop()
-            elif node.localName=='hpaned':
+            elif node.tag =='hpaned':
                 hp = gtk.HPaned()
                 container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True, fill=True)
                 _, widgets, saws, on_write = self.parse(model, node, fields, paned=hp)
@@ -530,7 +524,7 @@ class parser_form(widget.view.interface.parser_interface):
                 dict_widget.update(widgets)
                 #if 'position' in attrs:
                 #   hp.set_position(int(attrs['position']))
-            elif node.localName=='vpaned':
+            elif node.tag =='vpaned':
                 hp = gtk.VPaned()
                 container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True, fill=True)
                 _, widgets, saws, on_write = self.parse(model, node, fields, paned=hp)
@@ -538,17 +532,17 @@ class parser_form(widget.view.interface.parser_interface):
                 dict_widget.update(widgets)
                 if 'position' in attrs:
                     hp.set_position(int(attrs['position']))
-            elif node.localName=='child1':
+            elif node.tag =='child1':
                 widget, widgets, saws, on_write = self.parse(model, node, fields, paned=paned)
                 saw_list += saws
                 dict_widget.update(widgets)
                 paned.pack1(widget, resize=True, shrink=True)
-            elif node.localName=='child2':
+            elif node.tag =='child2':
                 widget, widgets, saws, on_write = self.parse(model, node, fields, paned=paned)
                 saw_list += saws
                 dict_widget.update(widgets)
                 paned.pack2(widget, resize=True, shrink=True)
-            elif node.localName=='action':
+            elif node.tag =='action':
                 from action import action
                 name = str(attrs['name'])
                 widget_act = action(self.window, self.parent, model, attrs)

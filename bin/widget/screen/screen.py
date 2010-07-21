@@ -18,9 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-import xml.dom.minidom
-
+from lxml import etree
 from rpc import RPCProxy
 import rpc
 import gettext
@@ -514,25 +512,24 @@ class Screen(signal_event.signal_event):
         if submenu is None:
             submenu = {}
         def _parse_fields(node, fields):
-            if node.nodeType == node.ELEMENT_NODE:
-                if node.localName=='field':
-                    attrs = tools.node_attributes(node)
-                    if attrs.get('widget', False):
-                        if attrs['widget']=='one2many_list':
-                            attrs['widget']='one2many'
-                        attrs['type'] = attrs['widget']
-                    if attrs.get('selection',[]):
-                        attrs['selection'] = eval(attrs['selection'])
-                        for att_key, att_val in attrs['selection'].items():
-                            for sel in fields[str(attrs['name'])]['selection']:
-                                if att_key == sel[0]:
-                                    sel[1] = att_val
-                        attrs['selection'] = fields[str(attrs['name'])]['selection']
-                    fields[unicode(attrs['name'])].update(attrs)
-            for node2 in node.childNodes:
+            if node.tag =='field':
+                attrs = tools.node_attributes(node)
+                if attrs.get('widget', False):
+                    if attrs['widget']=='one2many_list':
+                        attrs['widget']='one2many'
+                    attrs['type'] = attrs['widget']
+                if attrs.get('selection',[]):
+                    attrs['selection'] = eval(attrs['selection'])
+                    for att_key, att_val in attrs['selection'].items():
+                        for sel in fields[str(attrs['name'])]['selection']:
+                            if att_key == sel[0]:
+                                sel[1] = att_val
+                    attrs['selection'] = fields[str(attrs['name'])]['selection']
+                fields[unicode(attrs['name'])].update(attrs)
+            for node2 in node:
                 _parse_fields(node2, fields)
-        dom = xml.dom.minidom.parseString(arch)
-        _parse_fields(dom, fields)
+        root_node = etree.XML(arch)
+        _parse_fields(root_node, fields)
 
         from widget.view.widget_parse import widget_parse
         models = self.models.models
@@ -547,8 +544,7 @@ class Screen(signal_event.signal_event):
         self.fields = self.models.fields
 
         parser = widget_parse(parent=self.parent, window=self.window)
-        dom = xml.dom.minidom.parseString(arch)
-        view = parser.parse(self, dom, self.fields, toolbar=toolbar, submenu=submenu)
+        view = parser.parse(self, root_node, self.fields, toolbar=toolbar, submenu=submenu)
         if view:
             self.views.append(view)
 
