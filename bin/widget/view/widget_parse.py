@@ -57,6 +57,8 @@ class widget_parse(interface.parser_interface):
             # Select the parser for the view (form, tree, graph, calendar or gantt)
             widget = widget_parser(self.window, self.parent, self.attrs, screen)
             wid, child, buttons, on_write = widget.parse(screen.resource, node, fields)
+            if isinstance(wid, calendar_gtk.EmptyCalendar):
+                view_parser = calendar_gtk.DummyViewCalendar
             screen.set_on_write(on_write)
             res = view_parser(self.window, screen, wid, child, buttons, toolbar, submenu)
             res.title = widget.title

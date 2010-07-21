@@ -73,6 +73,7 @@ class Screen(signal_event.signal_event):
         self.default_get=default_get
         self.sort = False
         self.type = None
+        self.dummy_cal = False
         if not row_activate:
             self.row_activate = lambda self,screen=None: self.switch_view(screen, 'form')
         else:
@@ -234,7 +235,7 @@ class Screen(signal_event.signal_event):
             self.domain += val.get('domain',[]) + self.sort_domain
         else:
             self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
-            
+
         v = self.domain
         limit=self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
@@ -428,6 +429,8 @@ class Screen(signal_event.signal_event):
     def switch_view(self, screen=None, mode=False):
         if isinstance(self.current_model, group_record) and mode != 'graph':
           return
+        if mode == 'calendar' and self.dummy_cal:
+            mode = 'dummycalendar'
         self.current_view.set_value()
         self.fields = {}
         if self.current_model and self.current_model not in self.models.models:

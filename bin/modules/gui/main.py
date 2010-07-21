@@ -1310,7 +1310,10 @@ class terp_main(service.Service):
             view = self._wid_get()
         if view and hasattr(view, 'screen'):
             self._handler_ok = False
-            self.glade.get_widget('radio_'+view.screen.current_view.view_type).set_active(True)
+            type = view.screen.current_view.view_type
+            if type == 'dummycalendar':
+                type = 'calendar'
+            self.glade.get_widget('radio_'+type).set_active(True)
             self._handler_ok = True
         self._update_attachment_button(view)
         for x in self.buttons:
