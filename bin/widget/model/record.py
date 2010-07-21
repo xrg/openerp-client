@@ -215,7 +215,7 @@ class ModelRecord(signal_event.signal_event):
             # the next defaults. There's still a possible issue with
             # the order in which we process the defaults of the fields
             # with on_change() in case they cascade, but that's fixable
-            # normally in the view a single clean on_change on the first 
+            # normally in the view a single clean on_change on the first
             # field.
             if self.mgroup.mfields[fieldname].attrs.get('on_change',False):
                 fields_with_on_change[fieldname] = value
@@ -386,7 +386,8 @@ class ModelRecord(signal_event.signal_event):
 
                 else:
                     raise Exception, 'Unallowed button type'
-                screen.reload()
+                if screen.current_model:
+                    screen.reload()
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -23,14 +23,15 @@ import time
 import datetime
 import os
 import logging
+import rpc
 
 if os.name == 'nt':
     import win32
 
 def expr_eval(string, context=None):
-    import rpc
     if context is None:
         context = {}
+    context.update(rpc.session.context)
     context['uid'] = rpc.session.uid
     context['current_date'] = time.strftime('%Y-%m-%d')
     context['time'] = time
