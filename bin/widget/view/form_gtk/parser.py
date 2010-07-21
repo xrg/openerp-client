@@ -161,8 +161,6 @@ class StateAwareWidget(object):
                     getattr(self.label, func)()
             elif k == 'readonly':
                 self.widget.set_sensitive(not result)
-                if self.label:
-                    self.label.set_sensitive(not result)
 
 
 class _container(object):
