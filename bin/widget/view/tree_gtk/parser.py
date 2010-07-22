@@ -88,9 +88,9 @@ class parser_tree(interface.parser_interface):
         treeview.connect("motion-notify-event", treeview.set_tooltip)
         treeview.connect('key-press-event', treeview.on_tree_key_press)
 
-        for node in root_node.childNodes:
+        for node in root_node:
             node_attrs = tools.node_attributes(node)
-            if node.localName == 'button':
+            if node.tag == 'button':
                 cell = Cell('button')(node_attrs['string'], treeview, node_attrs)
                 cell.name = node_attrs['name']
                 cell.attrs = node_attrs
@@ -115,7 +115,7 @@ class parser_tree(interface.parser_interface):
                 treeview.append_column(col)
                 col._type = 'Button'
                 col.name = node_attrs['name']
-            if node.localName == 'field':
+            if node.tag == 'field':
                 handler_id = False
                 fname = str(node_attrs['name'])
                 if fields[fname]['type'] in ('image', 'binary'):
