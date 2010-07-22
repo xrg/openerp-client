@@ -304,7 +304,11 @@ class Screen(signal_event.signal_event):
                  'view_type':'form',
                  'view_mode':'tree,form',
                  'domain':'[(\'model_id\',\'=\',\''+self.name+'\'),(\'user_id\',\'=\','+str(rpc.session.uid)+')]'}
-            value = obj._exec_action(act, {}, self.context)
+            ctx = self.context.copy()
+            for key in ('group_by','group_by_no_leaf'):
+                if ctx.has_key(key):
+                    del ctx[key]
+            value = obj._exec_action(act, {}, ctx)
 
         if flag in ['blk','mf']:
             clear_domain_ctx()
