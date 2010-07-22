@@ -303,7 +303,7 @@ class Screen(signal_event.signal_event):
                  'type':'ir.actions.act_window',
                  'view_type':'form',
                  'view_mode':'tree,form',
-                 'domain':'[(\'model_id\',\'=\',\''+self.name+'\'),(\'user_id\',\'=\',(\''+str(rpc.session.uid)+'\',))]'}
+                 'domain':'[(\'model_id\',\'=\',\''+self.name+'\'),(\'user_id\',\'=\','+str(rpc.session.uid)+')]'}
             value = obj._exec_action(act, {}, self.context)
 
         if flag in ['blk','mf']:
