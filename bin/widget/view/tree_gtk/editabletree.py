@@ -171,7 +171,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             menu = False
             self.screen.current_view.copy_selection(menu, tree_view, selection)
 
-    def on_keypressed(self, entry, event):
+    def on_keypressed(self, entry, event, cell_value):
         path, column = self.get_cursor()
         store = self.get_model()
         model = store.get_value(store.get_iter(path), 0)
@@ -236,6 +236,12 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             if model.id is None:
                 store.remove(store.get_iter(path))
                 self.screen.current_model = False
+            else:
+                if model.modified_fields.has_key(column.name):
+                    del model.modified_fields[column.name]
+                if not model.modified_fields:
+                     model.modified = False
+                entry.set_text(cell_value)
             if not path[0]:
                 self.screen.current_model = False
             self.screen.display()
