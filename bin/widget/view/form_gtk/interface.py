@@ -99,7 +99,10 @@ class widget_interface(object):
     def _menu_open(self, obj, menu):
         item = gtk.SeparatorMenuItem()
         item.show()
-        menu.attach(item, 0, 1, 4, 5)
+        if isinstance(obj, gtk.TextView):
+            menu.insert(item, -1)
+        else:
+            menu.attach(item, 0, 1, 4, 5)
         i = 5
         for stock_id, callback, sensitivity in self._menu_entries:
             if stock_id:
@@ -110,7 +113,10 @@ class widget_interface(object):
             else:
                 item = gtk.SeparatorMenuItem()
             item.show()
-            menu.attach(item, 0, 1, i, i+1)
+            if isinstance(obj, gtk.TextView):
+                menu.insert(item, -1)
+            else:
+                menu.attach(item, 0, 1, i, i+1)
             i= i+1
         return True
 
