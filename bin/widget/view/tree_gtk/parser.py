@@ -48,7 +48,7 @@ import gobject
 import pango
 
 def send_keys(renderer, editable, position, treeview):
-    editable.connect('key_press_event', treeview.on_keypressed)
+    editable.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
     editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
     if isinstance(editable, gtk.ComboBoxEntry):
         editable.connect('changed', treeview.on_editing_done)
@@ -318,7 +318,7 @@ class Char(object):
 class Int(Char):
 
     def value_from_text(self, model, text):
-        return int(text)
+        return tools.str2int(text)
 
     def get_textual_value(self, model):
         return tools.locale_format('%d', int(model[self.field_name].get_client(model) or 0))
@@ -420,10 +420,7 @@ class Float(Char):
         return tools.locale_format('%.' + str(digit) + 'f', model[self.field_name].get_client(model) or 0.0)
 
     def value_from_text(self, model, text):
-        try:
-            return locale.atof(text)
-        except:
-            return 0.0
+        return tools.str2float(text)
 
 class FloatTime(Char):
     def get_textual_value(self, model):

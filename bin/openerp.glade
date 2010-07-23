@@ -1126,6 +1126,14 @@
                     <property name="use_underline">True</property>
                     <child>
                       <widget class="GtkMenu" id="help_menu">
+                      <child>
+                          <widget class="GtkCheckMenuItem" id="opt_debug_mode_tooltip">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Enable Debug Mode Tooltips</property>
+                            <property name="use_underline">True</property>
+                            <signal name="activate" handler="on_opt_debug_mode_activate"/>
+                          </widget>
+                        </child>
                         <child>
                           <widget class="GtkImageMenuItem" id="support">
                             <property name="visible">True</property>

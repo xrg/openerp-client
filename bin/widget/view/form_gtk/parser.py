@@ -195,7 +195,7 @@ class _container(object):
         table.resize(y+1,self.col[-1])
 
     def create_label(self, name, markup=False, align=1.0, wrap=False,
-                     angle=None, width=None, fname=None, help=None, model=None, detail_tooltip=False):
+                     angle=None, width=None, fname=None, help=None, detail_tooltip=False):
         label = gtk.Label(name)
         if markup:
             label.set_use_markup(True)
@@ -211,13 +211,8 @@ class _container(object):
             tooltip = '<span foreground="darkred"><b>%s</b></span>\n%s' % \
                         (tools.to_xml(name), tools.to_xml(help))
             label.set_markup('<sup><span foreground="darkgreen">?</span></sup>' + tools.to_xml(name))
-        if fname and model and uid == 1:
-            if tooltip:
-                tooltip += '\n'
-            tooltip += '<span foreground="#009900"><b>%s:</b> %s - <b>%s:</b> %s</span>' % \
-                        (_('Field'), tools.to_xml(fname), _('Object'), tools.to_xml(model))
-            if detail_tooltip:
-                tooltip += '\n<span foreground="red">%s</span>' % (tools.to_xml(detail_tooltip))
+        if detail_tooltip:
+            tooltip += (help and '\n' or '') + detail_tooltip
         if tooltip:
             eb.set_tooltip_markup(tooltip)
 
@@ -298,14 +293,16 @@ class parser_form(widget.view.interface.parser_interface):
                                       'digits','function','store','fnct_search','fnct_inv','fnct_inv_arg',
                                       'func_obj','func_method','related_columns','third_table','states',
                                       'translate','change_default','size','selection']
-    def create_detail_tooltip(self, field_attr={}):
-        tooltip = ''
+
+    def create_detail_tooltip(self, name='', field_attr={}):
+        tooltip = '<span foreground="#009900"><b>%s:</b> %s - <b>%s:</b> %s' % \
+                (_('Field'), tools.to_xml(name), _('Object'), tools.to_xml(field_attr.get('model','')))
         attributes = field_attr.keys()
         attributes.sort()
         for attr in attributes:
             if attr in self.accepted_attr_list:
-                tooltip += attr + ':' + str(field_attr[attr]) + '\n'
-        return tooltip
+                tooltip += '\n<b>%s:</b> %s' %(tools.to_xml(str(attr).capitalize()),tools.to_xml(str(field_attr[attr])))
+        return tooltip + '</span>'
 
     def parse(self, model, root_node, fields, notebook=None, paned=None):
         dict_widget = {}
@@ -477,10 +474,10 @@ class parser_form(widget.view.interface.parser_interface):
 
                 translate = fields[name]['string'] if fields[name].get('translate') else None
                 detail_tooltip = False
-                if options.options['logging.level'] in ('debug', 'debug_rpc','debug_rpc_answer'):
-                    detail_tooltip = self.create_detail_tooltip(fields[name])
+                if options.options['debug_mode_tooltips']:
+                    detail_tooltip = self.create_detail_tooltip(name, fields[name])
 
-                widget_label = container.create_label(label, fname=name, help=hlp, model=model, detail_tooltip=detail_tooltip) if label else None
+                widget_label = container.create_label(label, help=hlp, fname=name, detail_tooltip=detail_tooltip) if label else None
                 if attrs.get('attrs'):
                     saw_list.append(StateAwareWidget(widget_act, widget_label))
 
