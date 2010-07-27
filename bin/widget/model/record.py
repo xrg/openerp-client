@@ -387,7 +387,7 @@ class ModelRecord(signal_event.signal_event):
 
                 else:
                     raise Exception, 'Unallowed button type'
-                if screen.current_model:
+                if screen.current_model and screen.current_view.view_type != 'tree':
                     screen.reload()
 
 
