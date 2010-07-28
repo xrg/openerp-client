@@ -40,7 +40,7 @@ class float_time(interface.widget_interface):
         self.widget.set_width_chars(5)
         self.widget.set_property('activates_default', True)
 
-        self.widget.connect('button_press_event', self._menu_open)
+        self.widget.connect('populate-popup', self._menu_open)
         self.widget.connect('activate', self.sig_activate)
         self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
         self.widget.connect('focus-out-event', lambda x,y: self._focus_out())

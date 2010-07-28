@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-02-14 06:12+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2010-07-21 05:02+0000\n"
+"Last-Translator: Giedrius Slavinskas <giedrius.slavinskas@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-17 04:55+0000\n"
+"X-Launchpad-Export-Date: 2010-07-22 03:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -262,7 +262,7 @@ msgstr ""
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Klaida"
 
 #
 # File: bin/common/common.py, line: 499
@@ -451,11 +451,11 @@ msgstr "OpenERP paieška: %s (%%d rezultatai(ų))"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "Tuščias failas!"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "Importuojant!"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 54
@@ -466,7 +466,7 @@ msgstr "XML-RPC klaida!"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "Importuotas vienas objektas!"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 57
@@ -478,7 +478,7 @@ msgstr "Importuota %d objektų!"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "Klaida importuojant!"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 93
@@ -493,11 +493,11 @@ msgstr "Lauko pavadinimas"
 #: bin/modules/gui/window/win_import.py:186
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
-msgstr ""
+msgstr "Laukas %s automatiškai neaptinkamas, todėl negalima importuoti"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "Jūs nepasirinkote jokio lauko, kurį importuoti"
 
 #
 # File: bin/modules/gui/window/win_selection.py, line: 52
@@ -658,7 +658,7 @@ msgstr "Klaidinga forma, ištaisykite raudonus laukus!"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "Klaida!"
 
 #
 # File: bin/modules/gui/window/form.py, line: 302
@@ -877,11 +877,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Jūs turite naujausią versiją"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Galimi atnaujinimai:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
@@ -893,11 +893,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Jūsų duomenų bazė buvo atnaujinta."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Jūsų duomenų bazės buvo atnaujintos."
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
@@ -947,12 +947,9 @@ msgstr ""
 msgid "OpenERP Database Installation"
 msgstr "OpenERP Duomenų bazės įdiegimas"
 
-#
-# File: bin/modules/gui/main.py, line: 336
-# File: bin/modules/gui/main.py, line: 336
 #: bin/modules/gui/main.py:635
 msgid "<b>Operation in progress</b>"
-msgstr "<b>Operacija vykdoma>/b>"
+msgstr "<b>Vykdomas veiksmas</b>"
 
 #
 # File: bin/modules/gui/main.py, line: 359
@@ -1065,6 +1062,8 @@ msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Tapatybės nustatymo klaida!\n"
+"Neteisingai įvestas naudotojo vardas arba slaptažodis!"
 
 #
 # File: bin/modules/gui/main.py, line: 761
@@ -2419,11 +2418,11 @@ msgstr "<b>Pasirinktieji eksportavimai</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Pritaikyti importavimui"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>Pasirinkite nustatymus eksportavimui</b>"
 
 #: bin/openerp.glade:2871
 msgid "Available Fields"
@@ -2903,7 +2902,7 @@ msgstr "Ankstesnis redaguojamas valdiklis"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Lyg2> + <Tab>"
 
 #
 # File: bin/openerp.glade, line: 7383
@@ -3297,11 +3296,11 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "Prisijungti vėliau"
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "Prisijungti dabar"
 
 #: bin/openerp.glade:7843
 msgid "Extension Manager"
@@ -3443,10 +3442,13 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"Prašome užpildyti šią formą. Taip mums padėsite pagerinti <b><span "
+"foreground=\"red\"><i>Open</i></span> ERP</b> bei planuoti naujus "
+"patobulinimus."
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "Jūsų įmonė"
 
 #
 # File: bin/openerp.glade, line: 5791
@@ -3475,7 +3477,7 @@ msgstr "Jūsų pareigos:"
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "Darbuotojų:"
 
 #
 # File: bin/openerp.glade, line: 5953
@@ -3486,7 +3488,7 @@ msgstr "Šalis:"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "Miestas:"
 
 #
 # File: bin/openerp.glade, line: 5887
@@ -3497,7 +3499,7 @@ msgstr "Sistema:"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>Jūsų susidomėjimas</b>"
 
 #
 # File: bin/openerp.glade, line: 5831
@@ -3508,15 +3510,17 @@ msgstr "Kaip jūs apie mus sužinojote:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "Planuojame naudoti Open ERP"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "Planuojame teikti Open ERP paslaugas"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"Papasakokite mums, kodėl išbandėte Open ERP bei kokią programinę įrangą šiuo "
+"metu naudojate:"
 
 #
 # File: bin/openerp.glade, line: 6318
@@ -3527,7 +3531,7 @@ msgstr "<b>Būkite informuoti</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "Noriu gauti elektroninę Open ERP knygą (PDF) paštu"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
@@ -3535,7 +3539,7 @@ msgstr "Telefonas / Mobilus tel:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "El. pašto adresas:"
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
@@ -3543,7 +3547,7 @@ msgstr "Jūsų vardas:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gt-cancel"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"

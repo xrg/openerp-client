@@ -48,7 +48,7 @@ import gobject
 import pango
 
 def send_keys(renderer, editable, position, treeview):
-    editable.connect('key_press_event', treeview.on_keypressed)
+    editable.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
     editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
     if isinstance(editable, gtk.ComboBoxEntry):
         editable.connect('changed', treeview.on_editing_done)
@@ -86,10 +86,11 @@ class parser_tree(interface.parser_interface):
 
         treeview.sequence = False
         treeview.connect("motion-notify-event", treeview.set_tooltip)
+        treeview.connect('key-press-event', treeview.on_tree_key_press)
 
-        for node in root_node.childNodes:
+        for node in root_node:
             node_attrs = tools.node_attributes(node)
-            if node.localName == 'button':
+            if node.tag == 'button':
                 cell = Cell('button')(node_attrs['string'], treeview, node_attrs)
                 cell.name = node_attrs['name']
                 cell.attrs = node_attrs
@@ -114,7 +115,7 @@ class parser_tree(interface.parser_interface):
                 treeview.append_column(col)
                 col._type = 'Button'
                 col.name = node_attrs['name']
-            if node.localName == 'field':
+            if node.tag == 'field':
                 handler_id = False
                 fname = str(node_attrs['name'])
                 if fields[fname]['type'] in ('image', 'binary'):
@@ -322,7 +323,7 @@ class Char(object):
 class Int(Char):
 
     def value_from_text(self, model, text):
-        return int(text)
+        return tools.str2int(text)
 
     def get_textual_value(self, model):
         return tools.locale_format('%d', int(model[self.field_name].get_client(model) or 0))
@@ -424,10 +425,7 @@ class Float(Char):
         return tools.locale_format('%.' + str(digit) + 'f', model[self.field_name].get_client(model) or 0.0)
 
     def value_from_text(self, model, text):
-        try:
-            return locale.atof(text)
-        except:
-            return 0.0
+        return tools.str2float(text)
 
 class Float_Sci(Char):
     def get_textual_value(self, model):

@@ -91,6 +91,7 @@ class configmanager(object):
             'logging.level': 'INFO',
             'logging.output': 'stdout',
             'logging.env_info': True,
+            'debug_mode_tooltips':False,
             'client.default_path': os.path.expanduser('~'),
             'support.recipient': 'support@openerp.com',
             'support.support_id' : '',

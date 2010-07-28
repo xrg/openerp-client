@@ -160,7 +160,8 @@ class ModelRecord(signal_event.signal_event):
             for d in domain:
                 if d[0] in self.mgroup.fields:
                     if d[1] == '=':
-                        val[d[0]] = d[2]
+                        if d[2]:
+                            val[d[0]] = d[2]
                     if d[1] == 'in' and len(d[2]) == 1:
                         val[d[0]] = d[2][0]
             self.set_default(val)
@@ -206,10 +207,23 @@ class ModelRecord(signal_event.signal_event):
         return value
 
     def set_default(self, val):
+        fields_with_on_change = {}
         for fieldname, value in val.items():
             if fieldname not in self.mgroup.mfields:
                 continue
-            self.mgroup.mfields[fieldname].set_default(self, value)
+            # Fields with on_change should be processed last otherwise
+            # we might override the values the on_change() sets with
+            # the next defaults. There's still a possible issue with
+            # the order in which we process the defaults of the fields
+            # with on_change() in case they cascade, but that's fixable
+            # normally in the view a single clean on_change on the first
+            # field.
+            if self.mgroup.mfields[fieldname].attrs.get('on_change',False):
+                fields_with_on_change[fieldname] = value
+            else:
+                self.mgroup.mfields[fieldname].set_default(self, value)
+        for field, value in fields_with_on_change.items():
+            self.mgroup.mfields[field].set_default(self, value)
         self._loaded = True
         self.signal('record-changed')
 
@@ -395,7 +409,8 @@ class ModelRecord(signal_event.signal_event):
 
                 else:
                     raise Exception, 'Unallowed button type'
-                screen.reload()
+                if screen.current_model and screen.current_view.view_type != 'tree':
+                    screen.reload()
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -35,14 +35,32 @@ class checkbox(interface.widget_interface):
 
     def _readonly_set(self, value):
         self.widget.set_sensitive(not value)
-        
+
     def _toggled(self, button):
         self._focus_out()
         self._focus_in()
-        
+
     def set_value(self, model, model_field):
         model_field.set_client(model, int(self.widget.get_active()))
-     
+
+
+    def _menu_open(self, obj, event):
+        if event.button == 3:
+            menu = gtk.Menu()
+            for stock_id,callback,sensitivity in self._menu_entries:
+                if stock_id:
+                    item = gtk.ImageMenuItem(stock_id)
+                    if callback:
+                        item.connect("activate",callback)
+                    item.set_sensitive(sensitivity)
+                else:
+                    item=gtk.SeparatorMenuItem()
+                item.show()
+                menu.append(item)
+            menu.popup(None,None,None,event.button,event.time)
+            return True
+
+
     def display(self, model, model_field):
         if not model_field:
             self.widget.set_active(False)
