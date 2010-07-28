@@ -497,11 +497,8 @@ class ViewList(parser_view):
                     attrs_check = self.attrs_set(m,path[1])
                     if attrs_check and m['state'].get(m) in path[1].attrs['states'].split(','):
                         m.get_button_action(self.screen,m.id,path[1].attrs)
+                        self.screen.current_model = None
                         m.reload()
-                        self.screen.current_model = m
-                    if groupby:
-                        treeview.expand_all()
-
             else:
                 # Here it goes for right click
                 selected_rows = selection.get_selected_rows()

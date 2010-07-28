@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution    
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -41,18 +41,18 @@ class custom_filter(wid_int.wid_int):
         # Processing fields
         self.combo_fields = win_gl.get_widget('combo_fields')
         self.field_selection = {}
-        
+
         fields = attrs.get('fields',None)
         for item in fields:
             self.field_selection[item[1]] = (item[0], item[2], item[3])
             self.combo_fields.append_text(item[1])
-            
+
         self.combo_fields.set_active(0)
-        
+
         # Processing operator combo
         self.combo_op = win_gl.get_widget('combo_operator')
         self.op_selection = {}
-        
+
         for item in (['ilike', _('contains')],
                 ['not ilike', _('doesn\'t contain')],
                 ['=', _('is equal to')],
@@ -64,25 +64,25 @@ class custom_filter(wid_int.wid_int):
                 ):
             self.op_selection[item[1]] = item[0]
             self.combo_op.append_text(item[1])
-            
+
         self.combo_op.set_active(0)
-        
+
         # Processing text value
         self.right_text = win_gl.get_widget('right_compare')
         # Processing Custom conditions
         self.condition_next = win_gl.get_widget('cond_custom')
         self.condition_next.set_active(0)
-        
+
         self.condition_next.hide()
         # Processing Removal of panel
         self.remove_filter = win_gl.get_widget('remove_custom')
         self.remove_filter.set_relief(gtk.RELIEF_NONE)
-        
+
         try:
             self.right_text.set_tooltip_markup(tools.to_xml("Enter Values separated by ',' if operator 'in' or 'not in' is chosen.\nFor Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d %H:%M:%S' formats respectively."))
         except:
             pass
-        
+
         self.remove_filter.connect('clicked',call,self)
 
     def _value_get(self):
@@ -92,25 +92,25 @@ class custom_filter(wid_int.wid_int):
             operator = self.op_selection[self.combo_op.get_active_text()]
 
             right_text =  self.right_text.get_text() or False
-            
+
             try:
-                
+
                 right_text = (field_type == 'integer' and int(right_text)) or right_text
                 right_text = (field_type == 'float' and float(right_text)) or right_text
                 right_text = (field_type == 'boolean' and bool(right_text)) or right_text
-                
+
                 if field_type == 'date' and right_text:
                     dt_right_text = datetime.strptime(right_text,DT_FORMAT)
                     right_text = dt_right_text.strftime(DT_FORMAT)
-                    
+
                 if field_type == 'datetime' and right_text:
                     right_text = len(right_text)==10 and (right_text + ' 00:00:00') or right_text
                     dttime_right_text = datetime.strptime(right_text,DHM_FORMAT)
                     right_text = dttime_right_text.strftime(DHM_FORMAT)
-                    
+
                 self.right_text.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("white"))
-                self.right_text.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("white"))       
-            
+                self.right_text.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("white"))
+
             except Exception,e:
                 right_text = ''
                 self.right_text.set_text('Invalid Value')
@@ -119,19 +119,19 @@ class custom_filter(wid_int.wid_int):
                 return {}
             if operator in ['ilike','not ilike']:
                 if field_type in ['integer','float','date','datetime','boolean']:
-                    operator = (operator == 'like') and '=' or '!='
+                    operator = (operator == 'ilike') and '=' or '!='
                 else:
-                    right_text = '%' + right_text + '%'     
-            
+                    right_text = '%' + right_text + '%'
+
             if operator in ['<','>'] and field_type not in ['integer','float','date','datetime','boolean']:
                     operator = '='
-            
+
             if operator in ['in','not in']:
                 right_text = right_text.split(',')
-            
+
             condition = self.condition_next.get_active_text()
             condition = eval(condition,{'AND':'&','OR':'|'})
-            
+
             if field_type == 'selection' and right_text:
                 right_text_se =  self.right_text.get_text()
                 keys = []
@@ -146,7 +146,7 @@ class custom_filter(wid_int.wid_int):
 
             domain = [condition,(field_left,operator,right_text)]
             return {'domain':domain}
-        
+
         except Exception,e:
             return {}
 
@@ -155,13 +155,13 @@ class custom_filter(wid_int.wid_int):
 
     def clear(self):
         pass
-    
+
     def _value_set(self, value):
         pass
-    
+
     def remove_custom_widget(self, button):
         button.parent.destroy()
-        return True   
+        return True
 
     def sig_activate(self, fct):
         self.right_text.connect_after('activate', fct)

@@ -160,7 +160,8 @@ class ModelRecord(signal_event.signal_event):
             for d in domain:
                 if d[0] in self.mgroup.fields:
                     if d[1] == '=':
-                        val[d[0]] = d[2]
+                        if d[2]:
+                            val[d[0]] = d[2]
                     if d[1] == 'in' and len(d[2]) == 1:
                         val[d[0]] = d[2][0]
             self.set_default(val)
@@ -386,7 +387,7 @@ class ModelRecord(signal_event.signal_event):
 
                 else:
                     raise Exception, 'Unallowed button type'
-                if screen.current_model:
+                if screen.current_model and screen.current_view.view_type != 'tree':
                     screen.reload()
 
 
