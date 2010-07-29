@@ -1,21 +1,23 @@
 # Greek translation for openobject-client
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the openobject-client package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# P. Christeas <p_christ@hol.gr>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-02-07 21:04+0000\n"
-"Last-Translator: Georgios <Unknown>\n"
-"Language-Team: Greek <el@li.org>\n"
+"PO-Revision-Date: 2010-07-29 15:38+0300\n"
+"Last-Translator: P. Christeas <p_christ@hol.gr>\n"
+"Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-02-08 04:45+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
@@ -378,7 +380,7 @@ msgstr "Το αρχείο είναι κενό!"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr "ΕΙσαγωγή!"
+msgstr "Εισαγωγή!"
 
 #: bin/modules/gui/window/win_import.py:57
 msgid "XML-RPC error !"
@@ -1182,15 +1184,15 @@ msgstr "Κωδικός:"
 
 #: bin/openerp.glade:255
 msgid "_File"
-msgstr "...Αρχείο"
+msgstr "_Αρχείο"
 
 #: bin/openerp.glade:262
 msgid "_Connect..."
-msgstr "...Σύνδεση..."
+msgstr "_Σύνδεση..."
 
 #: bin/openerp.glade:278
 msgid "_Disconnect"
-msgstr "...Αποσύνδεση"
+msgstr "_Αποσύνδεση"
 
 #: bin/openerp.glade:298
 msgid "Databases"
@@ -1198,15 +1200,15 @@ msgstr "Βάσεις Δεδομένων"
 
 #: bin/openerp.glade:305
 msgid "_New database"
-msgstr "...Νέα Βάση Δεδομένων"
+msgstr "_Νέα Βάση Δεδομένων"
 
 #: bin/openerp.glade:320
 msgid "_Restore database"
-msgstr "...Αποκατάσταση Βάσης Δεδομένων"
+msgstr "_Αποκατάσταση Βάσης Δεδομένων"
 
 #: bin/openerp.glade:335
 msgid "_Backup database"
-msgstr "...Αντιγραφή Ασφαλείας Βάσης Δεδομένων"
+msgstr "_Αντίγραφο Ασφαλείας Βάσης Δεδομένων"
 
 #: bin/openerp.glade:350
 msgid "Dro_p database"
@@ -1226,35 +1228,35 @@ msgstr "Κωδικός Διαχειριστή"
 
 #: bin/openerp.glade:450
 msgid "_User"
-msgstr "...Χρήστης"
+msgstr "_Χρήστης"
 
 #: bin/openerp.glade:458
 msgid "_Preferences"
-msgstr "...Προτιμήσεις"
+msgstr "_Προτιμήσεις"
 
 #: bin/openerp.glade:478
 msgid "_Send a request"
-msgstr "...Αποστολή μιάς αίτησης"
+msgstr "_Αποστολή μιας αίτησης"
 
 #: bin/openerp.glade:493
 msgid "_Read my requests"
-msgstr "...Προβολή των αιτήσεων μου"
+msgstr "_Προβολή των αιτήσεων μου"
 
 #: bin/openerp.glade:513
 msgid "_Waiting Requests"
-msgstr "...Αιτήσεις σε αναμονή"
+msgstr "_Αιτήσεις σε αναμονή"
 
 #: bin/openerp.glade:526
 msgid "For_m"
-msgstr "For_m"
+msgstr "Φόρ_μα"
 
 #: bin/openerp.glade:534
 msgid "_New"
-msgstr "...Νέο"
+msgstr "_Νέο"
 
 #: bin/openerp.glade:550
 msgid "_Save"
-msgstr "...Αποθήκευση"
+msgstr "_Αποθήκευση"
 
 #: bin/openerp.glade:566
 msgid "Copy this resource"
@@ -1262,11 +1264,11 @@ msgstr "Αντιγραφή αυτού του πόρου"
 
 #: bin/openerp.glade:567
 msgid "_Duplicate"
-msgstr "...Διπλοτυπία"
+msgstr "_Διπλασιασμός"
 
 #: bin/openerp.glade:583
 msgid "_Delete"
-msgstr "...Διαγραφή"
+msgstr "_Διαγραφή"
 
 #: bin/openerp.glade:604
 msgid "Find"
@@ -2653,7 +2655,7 @@ msgid ""
 "Unable to preview image file !\n"
 "Verify the format."
 msgstr ""
-"Αδυναμία προεπισκόπησης αρχείου εικόνας !\n"
+"Αδυναμία προεπισκόπισης αρχείου εικόνας !\n"
 "Επαληθεύστε τον τύπο."
 
 #: bin/modules/action/main.py:69
@@ -2740,7 +2742,7 @@ msgstr "Ακριβές Αντίγραφο"
 
 #: bin/terp.glade:933
 msgid "_New Menu Tab"
-msgstr "_Νέα Καρτέλλα Μενού"
+msgstr "_Νέα Καρτέλα Μενού"
 
 #: bin/terp.glade:1231
 msgid "Client Mode"
@@ -3102,7 +3104,7 @@ msgstr "<b>Το email σας: </b>"
 
 #: bin/terp.glade:7715
 msgid "Explain what you did: "
-msgstr "Επεξηγείστε τι κάνατε:"
+msgstr "Επεξηγήστε τι κάνατε:"
 
 #: bin/terp.glade:7743
 msgid "Others Comments: "
