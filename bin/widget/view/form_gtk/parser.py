@@ -324,7 +324,8 @@ class parser_form(widget.view.interface.parser_interface):
                 icon.set_from_stock(attrs['name'], gtk.ICON_SIZE_DIALOG)
                 container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, fill=int(attrs.get('fill', 0)))
             elif node.tag=='separator':
-                if 'position' in attrs and attrs['position']=='vertical':
+                orientation = attrs.get('orientation', 'horizontal')
+                if orientation == 'vertical':
                     vbox = gtk.HBox(homogeneous=False, spacing=0)
                 else:
                     vbox = gtk.VBox()
@@ -338,7 +339,7 @@ class parser_form(widget.view.interface.parser_interface):
                     eb.add(l)
                     container.trans_box_label.append((eb, text, None))
                     vbox.pack_start(eb)
-                if 'position' in attrs and attrs['position']=='vertical':
+                if orientation == 'vertical':
                     vsep = gtk.VSeparator()
                     rowspan = int(attrs.get('rowspan', '1'))
                     vsep.set_size_request(1, 20*rowspan)
