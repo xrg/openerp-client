@@ -42,6 +42,8 @@ def expr_eval(string, context=None):
         string = string.strip()
         if not string:
             return {}
+        # sometimes the server returns the active_id  as a string
+        string = string.replace("'active_id'","active_id")
         try:
             temp = eval(string, context)
         except Exception, e:
@@ -181,7 +183,7 @@ def format_connection_string(login, _passwd, server, port, protocol, dbname):
     return result
 
 def str2int(string, default=None):
-    assert isinstance(string, basestring)    
+    assert isinstance(string, basestring)
     try:
         integer = locale.atoi(string)
         return integer

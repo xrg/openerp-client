@@ -135,9 +135,7 @@ class main(service.Service):
                         limit=datas['limit'], auto_refresh=datas['auto_refresh'], auto_search = datas['auto_search'], search_view = datas['search_view'])
 
         elif action['type']=='ir.actions.server':
-            ctx = context.copy()
-            ctx.update({'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])})
-            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.server', 'run', [action['id']], ctx)
+            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.server', 'run', [action['id']], context)
             if res:
                 if not isinstance(res, list):
                     res = [res]

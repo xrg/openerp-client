@@ -544,13 +544,12 @@ class parser_form(widget.view.interface.parser_interface):
                 dict_widget[name] = widget_act
                 container.wid_add(widget_act.widget, colspan=int(attrs.get('colspan', 3)), expand=True, fill=True)
         for (ebox,src,name,widget) in container.trans_box:
-            ebox.connect('button_press_event',self.translate, model, name, src, widget)
+            ebox.connect('button_press_event',self.translate, model, name, src, widget, self.screen, self.window)
         for (ebox,src,name) in container.trans_box_label:
-            ebox.connect('button_press_event', self.translate_label, model, name, src)
+            ebox.connect('button_press_event', self.translate_label, model, name, src, self.window)
         return container.pop(), dict_widget, saw_list, on_write
 
-    def translate(self, widget, event, model, name, src, widget_entry):
-
+    def translate(self, widget, event, model, name, src, widget_entry, screen, window):
         #widget accessor functions
         def value_get(widget):
             if type(widget) == type(gtk.Entry()):
@@ -600,13 +599,13 @@ class parser_form(widget.view.interface.parser_interface):
                     parent=self.window)
             return False
 
-        id = self.screen.current_model.id
+        id = screen.current_model.id
         if not id:
             common.message(
                     _('You need to save resource before adding translations!'),
                     parent=self.window)
             return False
-        id = self.screen.current_model.save(reload=False)
+        id = screen.current_model.save(reload=False)
         uid = rpc.session.uid
 
         lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
@@ -614,7 +613,7 @@ class parser_form(widget.view.interface.parser_interface):
 
         if not lang_ids:
             common.message(_('No other language available!'),
-                    parent=self.window)
+                    parent=window)
             return False
         langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
                 'read', lang_ids, ['code', 'name'])
@@ -629,7 +628,7 @@ class parser_form(widget.view.interface.parser_interface):
                 return val
 
 
-        win = gtk.Dialog(_('Add Translation'), self.window,
+        win = gtk.Dialog(_('Add Translation'), window,
                 gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
         win.vbox.set_spacing(5)
         win.set_property('default-width', 600)
@@ -720,15 +719,15 @@ class parser_form(widget.view.interface.parser_interface):
                             'write', [id], {str(name):  new_val['value']},
                             context)
             if response == gtk.RESPONSE_CANCEL:
-                self.window.present()
+                window.present()
                 win.destroy()
                 return
-        self.screen.current_model.reload()
-        self.window.present()
+        screen.current_model.reload()
+        window.present()
         win.destroy()
         return True
 
-    def translate_label(self, widget, event, model, name, src):
+    def translate_label(self, widget, event, model, name, src, window):
         def callback_label(self, widget, event, model, name, src, window=None):
             lang_ids = rpc.session.rpc_exec_auth('/object', 'execute',
                     'res.lang', 'search', [('translatable', '=', '1')])
@@ -853,14 +852,12 @@ class parser_form(widget.view.interface.parser_interface):
         menu = gtk.Menu()
         if name:
             item = gtk.ImageMenuItem(_('Translate label'))
-            item.connect("activate", callback_label, widget, event, model,
-                    name, src, self.window)
+            item.connect("activate", callback_label, widget, event, model, name, src, window)
             item.set_sensitive(1)
             item.show()
             menu.append(item)
         item = gtk.ImageMenuItem(_('Translate view'))
-        item.connect("activate", callback_view, widget, event, model, src,
-                self.window)
+        item.connect("activate", callback_view, widget, event, model, src, window)
         item.set_sensitive(1)
         item.show()
         menu.append(item)
