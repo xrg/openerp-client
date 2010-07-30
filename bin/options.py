@@ -150,9 +150,13 @@ class configmanager(object):
                 osection,oname = o.split('.')
                 if not p.has_section(osection):
                     p.add_section(osection)
+                if o == 'logging.level' and self.options[o].lower() in ('debug_rpc', 'debug_rpc_answer', 'notset'):
+                    # Never set a level lower than DEBUG
+                    p.set(osection,oname,'debug')
+                    continue
                 p.set(osection,oname,self.options[o])
             p.write(file(self.rcfile,'wb'))
-        except:
+        except Exception, e:
             import logging
             log = logging.getLogger('common.options')
             log.warn('Unable to write config file %s !'% (self.rcfile,))
