@@ -280,6 +280,7 @@ class one2many_list(interface.widget_interface):
     def _sig_new(self, *args):
         _, event = args
         ctx = dict(self._view.model.expr_eval(self.screen.default_get), **self.context)
+        ctx.update(self._view.model.expr_eval('dict(%s)' % self.attrs.get('context', '{}')))
         if event.type in (gtk.gdk.BUTTON_PRESS, gtk.gdk.KEY_PRESS):
             if (self.screen.current_view.view_type=='form') or self.screen.editable_get():
                 self.screen.new(context=ctx)
