@@ -46,7 +46,6 @@ class dialog(object):
             domain = []
         if context is None:
             context = {}
-
         if not window:
             window = service.LocalService('gui.main').window
 
@@ -89,12 +88,16 @@ class dialog(object):
             self.dia.set_title(self.dia.get_title() + ' - ' + self.screen.current_view.title)
         vp.add(self.screen.widget)
 
-        x,y = self.screen.screen_container.size_get()
-        width, height = window.get_size()
-        if not target:
-            vp.set_size_request(min(width - 20, x + 20), min(height - 60, y + 25))
+        width, height = self.screen.screen_container.size_get()
+        window_width, window_height = window.get_size()
+        dia_width, dia_height = self.dia.get_size()
+
+        widget_width = min(window_width - 20, max(dia_width, width + 20))
+        if target:
+            widget_height = min(window_height - 60, height)
         else:
-            vp.set_size_request(min(width - 20, x), min(height - 60, y))
+            widget_height = min(window_height - 60, height + 20)
+        vp.set_size_request(widget_width, widget_height)
         self.dia.show_all()
         self.screen.display()
 
