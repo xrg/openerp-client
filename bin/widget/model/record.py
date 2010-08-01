@@ -154,10 +154,10 @@ class ModelRecord(signal_event.signal_event):
             self._reload([CONCURRENCY_CHECK_FIELD])
         return self.id
 
-    def default_get(self, domain=[], context={}):
+    def default_get(self, domain=None, context=None):
         if len(self.mgroup.fields):
             val = self.rpc.default_get(self.mgroup.fields.keys(), context)
-            for d in domain:
+            for d in domain or []:
                 if d[0] in self.mgroup.fields:
                     if d[1] == '=':
                         if d[2]:
@@ -347,7 +347,7 @@ class ModelRecord(signal_event.signal_event):
                 self.set_default(data)
 
     # Performing button clicks on both forms of view: list and form.
-    def get_button_action(self, screen, id=None, attrs={}):
+    def get_button_action(self, screen, id=None, attrs=None):
 
         """Arguments:
         screen : Screen to be worked upon
@@ -355,6 +355,8 @@ class ModelRecord(signal_event.signal_event):
         attrs  : Button Attributes
         """
 
+        if attrs is None:
+            attrs = {}
         if not id:
             id = self.id
         if not attrs.get('confirm', False) or \
