@@ -284,7 +284,7 @@ class one2many_list(interface.widget_interface):
     def set_disable(self, value):
         self.eb_open.set_sensitive(value)
         if self._readonly:
-            value = not value
+            value = not self._readonly
         self.eb_del.set_sensitive(value)
 
     def _sig_new(self, *args):
