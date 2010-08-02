@@ -26,6 +26,7 @@ import gtk
 import math
 import cgi
 
+
 import tools
 import tools.datetime_util
 
@@ -53,7 +54,8 @@ def send_keys(renderer, editable, position, treeview):
     if isinstance(editable, gtk.ComboBoxEntry):
         editable.connect('changed', treeview.on_editing_done)
 
-def sort_model(column, screen):
+def sort_model(column, screen, treeview):
+    group_by = screen.context.get('group_by',False)
     screen.current_view.set_drag_and_drop(column.name == 'sequence')
     if screen.sort == column.name:
         screen.sort = column.name+' desc'
@@ -62,7 +64,11 @@ def sort_model(column, screen):
     screen.offset = 0
     if screen.type in ('many2many','one2many'):
         screen.sort_domain = [('id','in',screen.ids_get())]
-    screen.search_filter()
+    if group_by:
+        model = treeview.get_model()
+        model.sort(column, screen, treeview)
+    else:
+        screen.search_filter()
 
 class parser_tree(interface.parser_interface):
     def parse(self, model, root_node, fields):
@@ -189,7 +195,7 @@ class parser_tree(interface.parser_interface):
                     if max_width:
                         col.set_max_width(max_width)
 
-                col.connect('clicked', sort_model, self.screen)
+                col.connect('clicked', sort_model, self.screen, treeview)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 visval = eval(str(fields[fname].get('invisible', 'False')), {'context':self.screen.context})
