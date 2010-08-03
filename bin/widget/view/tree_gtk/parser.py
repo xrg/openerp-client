@@ -306,10 +306,14 @@ class Char(object):
 
     def get_color(self, model):
         to_display = ''
-        for color, expr in self.treeview.colors.items():
-            if model.expr_eval(expr, check_load=False):
-                to_display = color
-                break
+        try:
+            for color, expr in self.treeview.colors.items():
+                if model.expr_eval(expr, check_load=False):
+                    to_display = color
+                    break
+        except Exception:
+            # we can still continue if we can't get the color..
+            pass
         return to_display or 'black'
 
     def open_remote(self, model, create, changed=False, text=None):
