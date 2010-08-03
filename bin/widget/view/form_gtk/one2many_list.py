@@ -135,7 +135,15 @@ class dialog(object):
 class one2many_list(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
-        self.context = tools.expr_eval(attrs.get('context',"{}"))
+        self.context = {}
+        #TODO:
+            # group by context are evaled here as we need the context in screen
+            # while displaying.
+            # We need a better way to eval context that has group_by'
+            # We needed to do this as normal context also get evaled here
+            # and results in a traceback which should not be evaled here.
+        if str(attrs.get('context',"{}")).find('group_by') != -1:
+            self.context = tools.expr_eval(attrs.get('context',"{}"))
         self._readonly = self.default_readonly
         self.widget = gtk.VBox(homogeneous=False, spacing=5)
         hb = gtk.HBox(homogeneous=False, spacing=5)
@@ -275,6 +283,8 @@ class one2many_list(interface.widget_interface):
 
     def set_disable(self, value):
         self.eb_open.set_sensitive(value)
+        if self._readonly:
+            value = not self._readonly
         self.eb_del.set_sensitive(value)
 
     def _sig_new(self, *args):

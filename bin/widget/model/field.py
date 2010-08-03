@@ -67,10 +67,11 @@ class CharField(object):
     def context_get(self, model, check_load=True, eval=True):
         context = {}
         context.update(self.parent.context)
-        # removing default keys of the parent context
+        # removing default keys,group_by of the parent context
         context_own = context.copy()
         for c in context.items():
-            if c[0].startswith('default_') or c[0] in ('set_editable','set_visible'):
+            if c[0].startswith('default_') or c[0] in ('set_editable','set_visible')\
+             or c[0] == 'group_by':
                 del context_own[c[0]]
 
         field_context_str = self.attrs.get('context', '{}') or '{}'
