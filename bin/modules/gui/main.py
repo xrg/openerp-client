@@ -505,6 +505,7 @@ class db_login(object):
             parent = service.LocalService('gui.main').window
         win.set_transient_for(parent)
         win.set_icon(common.OPENERP_ICON)
+        win.set_resizable(False)
         win.show_all()
         img = self.win_gl.get_widget('image_tinyerp')
         img.set_from_file(common.terp_path_pixmaps('openerp.png'))
