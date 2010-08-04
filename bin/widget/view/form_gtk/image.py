@@ -120,12 +120,15 @@ class image_wid(interface.widget_interface):
                or datetime.now().strftime('%c')
 
     def sig_save_as(self, widget):
-        filename = common.file_selection(_('Save As...'), filename=self._get_filename(), parent=self._window,
-                action=gtk.FILE_CHOOSER_ACTION_SAVE)
-        if filename:
-            fp = file(filename,'wb+')
-            fp.write(decodestring(self._value))
-            fp.close()
+        if not self._value:
+            common.warning('There is no image to save as !',_('Warning'))
+        else:
+            filename = common.file_selection(_('Save As...'), filename=self._get_filename(), parent=self._window,
+                    action=gtk.FILE_CHOOSER_ACTION_SAVE)
+            if filename:
+                fp = file(filename,'wb+')
+                fp.write(decodestring(self._value))
+                fp.close()
 
     def sig_remove(self, widget):
         self._value = ''
