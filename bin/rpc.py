@@ -75,15 +75,15 @@ class gw_inter(object):
 
 class xmlrpc_gw(gw_inter):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
-    def __init__(self, url, db, uid, passwd, obj='/object'):
+    def __init__(self, url, db, uid, passwd, obj='/object', send_gzip=False):
         gw_inter.__init__(self, url, db, uid, passwd, obj)
         ttype, someuri = urllib.splittype(url)
         if ttype not in ("http", "https"):
             raise IOError, "unsupported XML-RPC protocol"
         if ttype == "https":
-            transport = tiny_socket.SafePersistentTransport()
+            transport = tiny_socket.SafePersistentTransport(send_gzip=send_gzip)
         else:
-            transport = tiny_socket.PersistentTransport()
+            transport = tiny_socket.PersistentTransport(send_gzip=send_gzip)
         self._sock = xmlrpclib.ServerProxy(url+obj, transport=transport, verbose=0)
     def exec_auth(self, method, *args):
         logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
@@ -149,6 +149,7 @@ class rpc_session(object):
         self.db = None
         self.rpcproto = None
         self.timezone = 'utc'
+        self.server_options = []
 
     def rpc_exec(self, obj, method, *args):
         try:
@@ -221,7 +222,9 @@ class rpc_session(object):
         global session_counter
         if not self._ogws.has_key(obj):
                 if (self.rpcproto == 'xmlrpc'):
-                        self._ogws[obj] = xmlrpc_gw(self._url, self.db, self.uid, self._passwd, obj = obj)
+                        self._ogws[obj] = xmlrpc_gw(self._url, self.db,
+                                    self.uid, self._passwd, obj=obj,
+                                    send_gzip=('xmlrpc-gzip' in self.server_options))
                 elif self.rpcproto == 'netrpc':
                         self._ogws[obj] = tinySocket_gw(self._url, self.db, self.uid, self._passwd, obj = obj)
                 else:

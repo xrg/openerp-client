@@ -23,6 +23,8 @@ import socket
 import cPickle
 import sys
 import options
+import gzip
+import StringIO
 
 DNS_CACHE = {}
 
@@ -132,9 +134,10 @@ except AttributeError:
 class PersistentTransport(Transport):
     """Handles an HTTP transaction to an XML-RPC server, persistently."""
 
-    def __init__(self, use_datetime=0):
+    def __init__(self, use_datetime=0, send_gzip=False):
         self._use_datetime = use_datetime
         self._http = {}
+        self._send_gzip = send_gzip
         # print "Using persistent transport"
 
     def make_connection(self, host):
@@ -172,15 +175,30 @@ class PersistentTransport(Transport):
 
         p, u = self.getparser()
 
-        while not response.isclosed():
-            rdata = response.read(1024)
-            if not rdata:
-                break
-            if self.verbose:
-                print "body:", repr(response)
-            p.feed(rdata)
-            if len(rdata)<1024:
-                break
+        if response.msg.get('content-encoding') == 'gzip':
+            gzdata = StringIO.StringIO()
+            while not response.isclosed():
+                rdata = response.read(1024)
+                if not rdata:
+                    break
+                gzdata.write(rdata)
+            gzdata.seek(0)
+            rbuffer = gzip.GzipFile(mode='rb', fileobj=gzdata)
+            while True:
+                respdata = rbuffer.read()
+                if not respdata:
+                    break
+                p.feed(respdata)
+        else:
+            while not response.isclosed():
+                rdata = response.read(1024)
+                if not rdata:
+                    break
+                if self.verbose:
+                    print "body:", repr(response)
+                p.feed(rdata)
+                if len(rdata)<1024:
+                    break
 
         p.close()
         return u.close()
@@ -226,6 +244,28 @@ class PersistentTransport(Transport):
             return self._parse_response(resp)
         finally:
             if resp: resp.close()
+
+    def send_content(self, connection, request_body):
+        connection.putheader("Content-Type", "text/xml")
+        
+        if self._send_gzip and len(request_body) > 512:
+            buffer = StringIO.StringIO()
+            output = gzip.GzipFile(mode='wb', fileobj=buffer)
+            output.write(request_body)
+            output.close()
+            buffer.seek(0)
+            request_body = buffer.getvalue()
+            connection.putheader('Content-Encoding', 'gzip')
+
+        connection.putheader("Content-Length", str(len(request_body)))
+        connection.putheader("Accept-Encoding",'gzip')
+        connection.endheaders()
+        if request_body:
+            connection.send(request_body)
+
+    def send_request(self, connection, handler, request_body):
+        connection.putrequest("POST", handler, skip_accept_encoding=1)
+
 
 class SafePersistentTransport(PersistentTransport):
     """Handles an HTTPS transaction to an XML-RPC server."""
