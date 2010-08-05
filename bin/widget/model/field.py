@@ -186,6 +186,8 @@ class BinaryField(CharField):
         model.value[name] = value
         if (not get_binary_size) and value:
             model.value[self.get_size_name()] = tools.human_size(len(value))
+        if not value:
+            model.value[self.get_size_name()] = ""
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
