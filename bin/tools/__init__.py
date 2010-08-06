@@ -33,7 +33,6 @@ if os.name == 'nt':
 def expr_eval(string, context=None):
     if context is None:
         context = {}
-    context.update(rpc.session.context)
     context['uid'] = rpc.session.uid
     context['current_date'] = time.strftime('%Y-%m-%d')
     context['time'] = time
