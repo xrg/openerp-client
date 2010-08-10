@@ -260,7 +260,7 @@ class reference(interface.widget_interface):
             self.last_key[1] += 1
         else:
             self.last_key = [ key, 1 ]
-        if not self.key_catalog.has_key(key):
+        if not key in self.key_catalog:
             return
         self.entry.set_active_iter(self.key_catalog[key][self.last_key[1] \
                 % len(self.key_catalog[key])])

@@ -92,9 +92,9 @@ class dialog(object):
         window_width, window_height = window.get_size()
         dia_width, dia_height = self.dia.get_size()
 
-        widget_width = min(window_width - 20, max(dia_width, width + 20))
+        widget_width = min(window_width - 20, max(dia_width, width + 30))
         if target:
-            widget_height = min(window_height - 60, height)
+            widget_height = min(window_height - 60, height + 10)
         else:
             widget_height = min(window_height - 60, height + 20)
         vp.set_size_request(widget_width, widget_height)

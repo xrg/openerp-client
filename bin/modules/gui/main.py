@@ -170,6 +170,7 @@ class DatabaseDialog(gtk.Dialog):
                     win.set_title(_('OpenERP Computing'))
                     win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
                     win.set_modal(True)
+                    win.set_resizable(False)
                     vbox = gtk.VBox(False, 0)
                     hbox = gtk.HBox(False, 13)
                     hbox.set_border_width(10)
@@ -511,6 +512,7 @@ class db_login(object):
             parent = service.LocalService('gui.main').window
         win.set_transient_for(parent)
         win.set_icon(common.OPENERP_ICON)
+        win.set_resizable(False)
         win.show_all()
         img = self.win_gl.get_widget('image_tinyerp')
         img.set_from_file(common.terp_path_pixmaps('openerp.png'))
@@ -665,6 +667,7 @@ class db_create(object):
                 win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
                 win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
                 win.set_title(_('OpenERP Database Installation'))
+                win.set_resizable(False)
                 vbox = gtk.VBox(False, 0)
                 hbox = gtk.HBox(False, 13)
                 hbox.set_border_width(10)

@@ -24,6 +24,7 @@
 import gobject
 import gtk
 import tools
+import itertools
 
 import rpc
 from rpc import RPCProxy
@@ -191,6 +192,42 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         idx = self.get_path(iter)[0]
         self.model_group.model_remove(self.models[idx])
         self.invalidate_iters()
+
+    def sort(self, column, screen, treeview):
+        group_by = self.context.get('group_by',False)
+        group_by_no_leaf = self.context.get('group_by_no_leaf',False)
+        model = treeview.get_model()
+        model_list = [model.models.lst]
+        if screen.sort == column.name:
+            f = lambda x,y: cmp(x[column.name].get_client(x), y[column.name].get_client(y))
+        else:
+            f = lambda x,y: -1 * cmp(x[column.name].get_client(x), y[column.name].get_client(y))
+
+        if column.name in group_by:
+            level = group_by.index(column.name)
+        else:
+            level = len(group_by)
+            if group_by_no_leaf:level -= 1
+
+        def all_expanded_rows(self, path):
+            if path and len(path)-1  == level:
+                treeview.collapse_row(path)
+        treeview.map_expanded_rows(all_expanded_rows)
+
+        def get_modelchildren(models):
+            childrens = []
+            for mod in models:
+                if mod._children:
+                    childrens.append(mod._children.lst)
+            return childrens
+
+        for i in range(level+1):
+            if i == level:
+                for li in model_list:
+                    li.sort(f)
+            else:
+                model_list = list(itertools.chain(*model_list))
+                model_list = get_modelchildren(model_list)
 
     def saved(self, id):
         return self.model_group.writen(id)
@@ -451,7 +488,7 @@ class ViewList(parser_view):
         columns = tree_view.get_columns()
         model = model.get(iter,0)
         copy_row = ""
-        titel = ""
+        title = ""
         for col in columns:
             if col._type != 'Button' and col.name in model[0].value :
                 if col._type == 'many2one':
@@ -460,9 +497,9 @@ class ViewList(parser_view):
                    copy_row += unicode(model[0].value[col.name])
                 copy_row += '\t'
                 if not tree_view.copy_table:
-                    titel += col.get_widget().get_text() + '\t'
-        if titel:
-            tree_view.copy_table += titel  + '\n'
+                    title += col.get_widget().get_text() + '\t'
+        if title:
+            tree_view.copy_table += title  + '\n'
         tree_view.copy_table += copy_row + '\n'
 
     def copy_selection(self, menu, tree_view, tree_selection):
@@ -627,9 +664,11 @@ class ViewList(parser_view):
                         self.changed_col.append(col)
                         self.widget_tree.move_column_after(col, base_col)
                 else:
-                    if col in self.changed_col: self.set_column_to_default_pos(col, groupby[-1])
+                    if col in self.changed_col:
+                        self.set_column_to_default_pos(col, groupby[-1])
         else:
-            if self.changed_col: self.set_column_to_default_pos(self.changed_col[-1])
+            if self.changed_col:
+                self.set_column_to_default_pos(self.changed_col[-1])
 
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
@@ -742,7 +781,7 @@ class ViewList(parser_view):
                     old_value = renderer.get_property('editable')
                     renderer.set_property('editable', value and old_value)
                 if value in ('top','bottom'):
-                    if self.widget_tree.handlers.has_key(col):
+                    if col in self.widget_tree.handlers:
                         if self.widget_tree.handlers[col]:
                             renderer.disconnect(self.widget_tree.handlers[col])
                     self.widget_tree.handlers[col] = renderer.connect_after('editing-started', send_keys, self.widget_tree)

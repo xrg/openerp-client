@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -135,6 +135,7 @@ def execute(action, datas, state='init', parent=None, context=None):
                             win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
                             win.set_title(_('OpenERP Computing'))
                             win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+                            win.set_resizable(False)
                             vbox = gtk.VBox(False, 0)
                             hbox = gtk.HBox(False, 13)
                             hbox.set_border_width(10)
