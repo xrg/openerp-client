@@ -58,6 +58,15 @@ class rpc_exception(Exception):
         log = logging.getLogger('rpc.exception')
         log.warning('CODE %s: %s' % (str(code), self.message))
 
+    def _get_message(self):
+        return self._message
+
+    def _set_message(self, message):
+        self._message = message
+
+    message = property(_get_message, _set_message)
+
+
 class gw_inter(object):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
     def __init__(self, url, db, uid, passwd, obj='/object'):
