@@ -262,14 +262,14 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
             maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
-<b>You do not have a valid Open ERP maintenance contract !</b>
-If you are using Open ERP in production, it is highly suggested to subscribe
+<b>You do not have a valid OpenERP maintenance contract !</b>
+If you are using OpenERP in production, it is highly suggested to subscribe
 a maintenance program.
 
-The Open ERP maintenance contract provides you a bugfix guarantee and an
+The OpenERP maintenance contract provides you a bugfix guarantee and an
 automatic migration system so that we can fix your problems within a few
 hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the Open ERP editor.
+to the quality team of the OpenERP editor.
 
 The maintenance program offers you:
 * Automatic migrations on new versions,
@@ -286,13 +286,13 @@ is displayed on the second tab.
 <b>An unknown error has been reported.</b>
 
 Your maintenance contract does not cover all modules installed in your system !
-If you are using Open ERP in production, it is highly suggested to upgrade your
+If you are using OpenERP in production, it is highly suggested to upgrade your
 contract.
 
 If you have developed your own modules or installed third party module, we
 can provide you an additional maintenance contract for these modules. After
 having reviewed your modules, our quality team will ensure they will migrate
-automatically for all future stable versions of Open ERP at no extra cost.
+automatically for all future stable versions of OpenERP at no extra cost.
 
 Here is the list of modules not covered by your maintenance contract:
 %s
@@ -305,14 +305,14 @@ is displayed on the second tab.""") % (", ".join(maintenance['uncovered_modules'
         maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
-<b>You do not have a valid Open ERP maintenance contract !</b>
-If you are using Open ERP in production, it is highly suggested to subscribe
+<b>You do not have a valid OpenERP maintenance contract !</b>
+If you are using OpenERP in production, it is highly suggested to subscribe
 a maintenance program.
 
-The Open ERP maintenance contract provides you a bugfix guarantee and an
+The OpenERP maintenance contract provides you a bugfix guarantee and an
 automatic migration system so that we can fix your problems within a few
 hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the Open ERP editor.
+to the quality team of the OpenERP editor.
 
 The maintenance program offers you:
 * Automatic migrations on new versions,
@@ -331,7 +331,7 @@ is displayed on the second tab.
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
     win.set_icon(OPENERP_ICON)
-    win.set_title("Open ERP - %s" % title)
+    win.set_title("OpenERP - %s" % title)
 
     xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % escape(message))
 
