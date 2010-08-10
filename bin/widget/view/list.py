@@ -781,7 +781,7 @@ class ViewList(parser_view):
                     old_value = renderer.get_property('editable')
                     renderer.set_property('editable', value and old_value)
                 if value in ('top','bottom'):
-                    if self.widget_tree.handlers.has_key(col):
+                    if col in self.widget_tree.handlers:
                         if self.widget_tree.handlers[col]:
                             renderer.disconnect(self.widget_tree.handlers[col])
                     self.widget_tree.handlers[col] = renderer.connect_after('editing-started', send_keys, self.widget_tree)

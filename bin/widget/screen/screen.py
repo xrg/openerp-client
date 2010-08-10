@@ -289,7 +289,7 @@ class Screen(signal_event.signal_event):
         # 'mf' Section manages Filters
         def clear_domain_ctx():
             for key in self.old_ctx.keys():
-                if self.context_init.has_key(key):
+                if key in self.context_init:
                     del self.context_init[key]
             for domain in self.latest_search:
                 if domain in self.domain_init:
@@ -306,7 +306,7 @@ class Screen(signal_event.signal_event):
                  'domain':'[(\'model_id\',\'=\',\''+self.name+'\'),(\'user_id\',\'=\','+str(rpc.session.uid)+')]'}
             ctx = self.context.copy()
             for key in ('group_by','group_by_no_leaf'):
-                if ctx.has_key(key):
+                if key in ctx:
                     del ctx[key]
             value = obj._exec_action(act, {}, ctx)
 

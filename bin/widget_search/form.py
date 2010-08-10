@@ -134,12 +134,12 @@ class parse(object):
 
     def dummy_start(self,name,attrs):
             flag=False
-            if name =='field' and attrs.has_key('name'):
+            if name =='field' and 'name' in attrs:
                     for i in range (0,len(self.name_lst)):
                        if 'name' in self.name_lst[i][1]:
                            if self.name_lst[i][1]['name']==attrs['name']:
                                flag=True
-                               if attrs.has_key('select'):
+                               if 'select' in attrs:
                                    self.name_lst[i]=(name,attrs)
                     if not flag:
                         self.name_lst.append((name,attrs))
