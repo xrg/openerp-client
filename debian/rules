@@ -8,20 +8,5 @@ override_dh_auto_clean:
 
 	rm -rf build
 
-override_dh_auto_install:
-	python setup.py install --no-compile --prefix=$(CURDIR)/debian/openerp-client/usr
-
-	# Adjusting program location
-	sed -i -e 's|cd .*python.*/site-packages|cd /usr/lib|' debian/openerp-client/usr/bin/openerp-client
-	mv debian/openerp-client/usr/lib/python*/site-packages/openerp-client debian/openerp-client/usr/lib
-	rm -rf debian/openerp-client/usr/lib/python*
-
-	# Adjusting localization names
-	mv debian/openerp-client/usr/share/locale/al debian/openerp-client/usr/share/locale/sq
-	mv debian/openerp-client/usr/share/locale/ua debian/openerp-client/usr/share/locale/uk
-
-	# Removing useless files
-	rm -rf debian/openerp-client/usr/share/doc/openerp-client-*
-
 override_dh_installchangelogs:
 	dh_installchangelogs doc/Changelog
