@@ -245,7 +245,8 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             if not path[0]:
                 self.screen.current_model = False
             self.screen.display()
-            self.set_cursor(path, column, False)
+            if len(self.screen.models.models):
+                self.set_cursor(path, column, False)
         elif event.keyval in (gtk.keysyms.F1, gtk.keysyms.F2):
             if (column._type not in ('many2one','many2many')):
                 return True
