@@ -71,31 +71,30 @@ def sort_model(column, screen, treeview):
         screen.search_filter()
 
 class parser_tree(interface.parser_interface):
+
     def parse(self, model, root_node, fields):
         dict_widget = {}
         attrs = tools.node_attributes(root_node)
         on_write = attrs.get('on_write', '')
         editable = attrs.get('editable', False)
-        if editable:
-            treeview = EditableTreeView(editable)
-        else:
-            treeview = EditableTreeView(editable)
+        treeview = EditableTreeView(editable)
         treeview.colors = dict()
         self.treeview = treeview
+
         for color_spec in attrs.get('colors', '').split(';'):
             if color_spec:
                 colour, test = color_spec.split(':')
                 treeview.colors[colour] = test
-        treeview.set_property('rules-hint', True)
         if not self.title:
             self.title = attrs.get('string', 'Unknown')
-
+        treeview.set_property('rules-hint', True)
         treeview.sequence = False
         treeview.connect("motion-notify-event", treeview.set_tooltip)
         treeview.connect('key-press-event', treeview.on_tree_key_press)
 
         for node in root_node:
             node_attrs = tools.node_attributes(node)
+
             if node.tag == 'button':
                 cell = Cell('button')(node_attrs['string'], treeview, node_attrs)
                 cell.name = node_attrs['name']
@@ -117,10 +116,10 @@ class parser_tree(interface.parser_interface):
                 col.set_fixed_width(20)
                 visval = eval(str(node_attrs.get('invisible', 'False')), {'context':self.screen.context})
                 col.set_visible(not visval)
-
                 treeview.append_column(col)
                 col._type = 'Button'
                 col.name = node_attrs['name']
+
             if node.tag == 'field':
                 handler_id = False
                 fname = str(node_attrs['name'])
@@ -163,8 +162,6 @@ class parser_tree(interface.parser_interface):
                     col_label.set_text(fields[fname]['string'])
                 col_label.show()
                 col.set_widget(col_label)
-
-
                 col.name = fname
                 col._type = fields[fname]['type']
                 col.set_cell_data_func(renderer, cell.setter)

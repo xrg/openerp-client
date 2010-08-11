@@ -164,7 +164,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
                 txt = entry.get_active_text()
             self.on_quit_cell(model, column.name, txt)
         return True
-    
+
     def on_tree_key_press(self, tree_view, event):
         if event.state & gtk.gdk.CONTROL_MASK and event.keyval in (gtk.keysyms.C, gtk.keysyms.c):
             selection = tree_view.get_selection()
@@ -237,7 +237,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
                 store.remove(store.get_iter(path))
                 self.screen.current_model = False
             else:
-                if model.modified_fields.has_key(column.name):
+                if column.name in model.modified_fields:
                     del model.modified_fields[column.name]
                 if not model.modified_fields:
                      model.modified = False
