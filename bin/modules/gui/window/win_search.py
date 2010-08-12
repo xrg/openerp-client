@@ -184,6 +184,7 @@ class win_search(object):
         view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'search', self.context)
         hda = (self, self.find)
         self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win, col=5, call= hda)
+        self.screen.filter_widget = self.form
 
         self.title = _('OpenERP Search: %s') % self.form.name
         self.title_results = _('OpenERP Search: %s (%%d result(s))') % (self.form.name.replace('%',''),)
