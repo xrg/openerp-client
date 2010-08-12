@@ -305,6 +305,10 @@ class ModelRecord(signal_event.signal_event):
                     if fieldname not in self.mgroup.mfields:
                         continue
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
+            if 'context' in response:
+                value = response.get('context', {})
+                self.mgroup.context = value
+
             warning=response.get('warning', {})
             if warning:
                 common.warning(warning['message'], warning['title'])
