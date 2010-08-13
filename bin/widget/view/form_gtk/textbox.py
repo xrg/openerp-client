@@ -37,7 +37,7 @@ class textbox(interface.widget_interface):
 
         self.tv = gtk.TextView()
         self.tv.set_wrap_mode(gtk.WRAP_WORD)
-        self.tv.connect('button_press_event', self._menu_open)
+        self.tv.connect('populate-popup', self._menu_open)
         self.tv.set_accepts_tab(False)
         self.tv.connect('focus-out-event', lambda x,y: self._focus_out())
         if not attrs.get('readonly'):

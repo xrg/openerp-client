@@ -67,10 +67,11 @@ class CharField(object):
     def context_get(self, model, check_load=True, eval=True):
         context = {}
         context.update(self.parent.context)
-        # removing default keys of the parent context
+        # removing default keys,group_by of the parent context
         context_own = context.copy()
         for c in context.items():
-            if c[0].startswith('default_') or c[0] in ('set_editable','set_visible'):
+            if c[0].startswith('default_') or c[0] in ('set_editable','set_visible')\
+             or c[0] == 'group_by':
                 del context_own[c[0]]
 
         field_context_str = self.attrs.get('context', '{}') or '{}'
@@ -185,6 +186,8 @@ class BinaryField(CharField):
         model.value[name] = value
         if (not get_binary_size) and value:
             model.value[self.get_size_name()] = tools.human_size(len(value))
+        if not value:
+            model.value[self.get_size_name()] = ""
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
@@ -192,10 +195,12 @@ class BinaryField(CharField):
 
     def get(self, model, check_load=True, readonly=True, modified=False):
         self.__check_model(model)
-        self.__check_load(model, modified, False)
-        if not model.value.get(self.name, False):
+        if check_load:
+            self.__check_load(model, modified, False)
+        res = model.value.get(self.name, False)
+        if not res:
             return model.value.get(self.get_size_name(), False) or False
-        return model.value.get(self.name, False) or False
+        return res
 
     def get_client(self, model):
         self.__check_model(model)

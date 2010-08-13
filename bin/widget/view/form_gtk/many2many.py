@@ -48,7 +48,7 @@ class many2many(interface.widget_interface):
         self.wid_text = gtk.Entry()
         self.wid_text.set_property('width_chars', 13)
         self.wid_text.connect('activate', self._sig_activate)
-        self.wid_text.connect('button_press_event', self._menu_open)
+        self.wid_text.connect('populate-popup', self._menu_open)
         hb.pack_start(self.wid_text, expand=True, fill=True)
 
         hb.pack_start(gtk.VSeparator(), padding=2, expand=False, fill=False)
@@ -146,6 +146,7 @@ class many2many(interface.widget_interface):
                                         self.attrs['relation'], 'name_search',
                                         self.wid_text.get_text(), domain, 'ilike', context)
         ids = [oid for oid, _ in records]
+        self.wid_text.set_text('')
         win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain, parent=self._window)
         ids = win.go()
 
@@ -156,7 +157,6 @@ class many2many(interface.widget_interface):
         else:
             self.model.pager_cache[self.name] = ids
         self.model.is_m2m_modified = True
-        self.wid_text.set_text('')
         self._focus_out()
         self.pager.reset_pager()
         self.pager.search_count()

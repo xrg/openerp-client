@@ -25,6 +25,7 @@ from base64 import encodestring, decodestring
 import pygtk
 pygtk.require('2.0')
 import gtk
+from datetime import datetime
 
 import common
 import interface
@@ -76,6 +77,8 @@ class image_wid(interface.widget_interface):
         self.but_save_as.set_relief(gtk.RELIEF_NONE)
         self.but_save_as.connect('clicked', self.sig_save_as)
         self.but_save_as.set_tooltip_text(_('Save As'))
+        self.has_filename = attrs.get('filename')
+        self.data_field_name = attrs.get('name')
         self.hbox.pack_start(self.but_save_as, expand=False, fill=False)
 
         self.but_remove = gtk.Button()
@@ -111,11 +114,21 @@ class image_wid(interface.widget_interface):
             self._value = encodestring(file(filename, 'rb').read())
             self.update_img()
 
+    def _get_filename(self):
+        return self._view.model.value.get(self.has_filename) \
+               or self._view.model.value.get('name', self.data_field_name) \
+               or datetime.now().strftime('%c')
+
     def sig_save_as(self, widget):
-        filename = common.file_selection(_('Save As...'), parent=self._window,
-                action=gtk.FILE_CHOOSER_ACTION_SAVE)
-        if filename:
-            file(filename, 'wb').write(decodestring(self._value))
+        if not self._value:
+            common.warning('There is no image to save as !',_('Warning'))
+        else:
+            filename = common.file_selection(_('Save As...'), filename=self._get_filename(), parent=self._window,
+                    action=gtk.FILE_CHOOSER_ACTION_SAVE)
+            if filename:
+                fp = file(filename,'wb+')
+                fp.write(decodestring(self._value))
+                fp.close()
 
     def sig_remove(self, widget):
         self._value = ''

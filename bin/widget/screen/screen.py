@@ -18,9 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-import xml.dom.minidom
-
+from lxml import etree
 from rpc import RPCProxy
 import rpc
 import gettext
@@ -73,6 +71,7 @@ class Screen(signal_event.signal_event):
         self.default_get=default_get
         self.sort = False
         self.type = None
+        self.dummy_cal = False
         if not row_activate:
             self.row_activate = lambda self,screen=None: self.switch_view(screen, 'form')
         else:
@@ -234,7 +233,7 @@ class Screen(signal_event.signal_event):
             self.domain += val.get('domain',[]) + self.sort_domain
         else:
             self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
-            
+
         v = self.domain
         limit=self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
@@ -290,7 +289,7 @@ class Screen(signal_event.signal_event):
         # 'mf' Section manages Filters
         def clear_domain_ctx():
             for key in self.old_ctx.keys():
-                if self.context_init.has_key(key):
+                if key in self.context_init:
                     del self.context_init[key]
             for domain in self.latest_search:
                 if domain in self.domain_init:
@@ -304,8 +303,12 @@ class Screen(signal_event.signal_event):
                  'type':'ir.actions.act_window',
                  'view_type':'form',
                  'view_mode':'tree,form',
-                 'domain':'[(\'model_id\',\'=\',\''+self.name+'\'),(\'user_id\',\'=\',(\''+str(rpc.session.uid)+'\',))]'}
-            value = obj._exec_action(act, {}, self.context)
+                 'domain':'[(\'model_id\',\'=\',\''+self.name+'\'),(\'user_id\',\'=\','+str(rpc.session.uid)+')]'}
+            ctx = self.context.copy()
+            for key in ('group_by','group_by_no_leaf'):
+                if key in ctx:
+                    del ctx[key]
+            value = obj._exec_action(act, {}, ctx)
 
         if flag in ['blk','mf']:
             clear_domain_ctx()
@@ -428,6 +431,8 @@ class Screen(signal_event.signal_event):
     def switch_view(self, screen=None, mode=False):
         if isinstance(self.current_model, group_record) and mode != 'graph':
           return
+        if mode == 'calendar' and self.dummy_cal:
+            mode = 'dummycalendar'
         self.current_view.set_value()
         self.fields = {}
         if self.current_model and self.current_model not in self.models.models:
@@ -511,25 +516,24 @@ class Screen(signal_event.signal_event):
         if submenu is None:
             submenu = {}
         def _parse_fields(node, fields):
-            if node.nodeType == node.ELEMENT_NODE:
-                if node.localName=='field':
-                    attrs = tools.node_attributes(node)
-                    if attrs.get('widget', False):
-                        if attrs['widget']=='one2many_list':
-                            attrs['widget']='one2many'
-                        attrs['type'] = attrs['widget']
-                    if attrs.get('selection',[]):
-                        attrs['selection'] = eval(attrs['selection'])
-                        for att_key, att_val in attrs['selection'].items():
-                            for sel in fields[str(attrs['name'])]['selection']:
-                                if att_key == sel[0]:
-                                    sel[1] = att_val
-                        attrs['selection'] = fields[str(attrs['name'])]['selection']
-                    fields[unicode(attrs['name'])].update(attrs)
-            for node2 in node.childNodes:
+            if node.tag =='field':
+                attrs = tools.node_attributes(node)
+                if attrs.get('widget', False):
+                    if attrs['widget']=='one2many_list':
+                        attrs['widget']='one2many'
+                    attrs['type'] = attrs['widget']
+                if attrs.get('selection',[]):
+                    attrs['selection'] = eval(attrs['selection'])
+                    for att_key, att_val in attrs['selection'].items():
+                        for sel in fields[str(attrs['name'])]['selection']:
+                            if att_key == sel[0]:
+                                sel[1] = att_val
+                    attrs['selection'] = fields[str(attrs['name'])]['selection']
+                fields[unicode(attrs['name'])].update(attrs)
+            for node2 in node:
                 _parse_fields(node2, fields)
-        dom = xml.dom.minidom.parseString(arch)
-        _parse_fields(dom, fields)
+        root_node = etree.XML(arch)
+        _parse_fields(root_node, fields)
 
         from widget.view.widget_parse import widget_parse
         models = self.models.models
@@ -544,8 +548,7 @@ class Screen(signal_event.signal_event):
         self.fields = self.models.fields
 
         parser = widget_parse(parent=self.parent, window=self.window)
-        dom = xml.dom.minidom.parseString(arch)
-        view = parser.parse(self, dom, self.fields, toolbar=toolbar, submenu=submenu)
+        view = parser.parse(self, root_node, self.fields, toolbar=toolbar, submenu=submenu)
         if view:
             self.views.append(view)
 

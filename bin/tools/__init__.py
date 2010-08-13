@@ -23,12 +23,14 @@ import time
 import datetime
 import os
 import logging
+import locale
+
+import rpc
 
 if os.name == 'nt':
     import win32
 
 def expr_eval(string, context=None):
-    import rpc
     if context is None:
         context = {}
     context['uid'] = rpc.session.uid
@@ -39,6 +41,8 @@ def expr_eval(string, context=None):
         string = string.strip()
         if not string:
             return {}
+        # sometimes the server returns the active_id  as a string
+        string = string.replace("'active_id'","active_id")
         try:
             temp = eval(string, context)
         except Exception, e:
@@ -64,15 +68,12 @@ def launch_browser(url):
         os.wait()
 
 def node_attributes(node):
-    result = {}
-    attrs = node.attributes
+    attrs = dict(node.attrib)
     if attrs is None:
         return {}
-    for i in range(attrs.length):
-        result[attrs.item(i).localName] = str(attrs.item(i).nodeValue)
-        if attrs.item(i).localName == "digits" and isinstance(attrs.item(i).nodeValue, (str, unicode)):
-            result[attrs.item(i).localName] = eval(attrs.item(i).nodeValue)
-    return result
+    if 'digits' in attrs and isinstance(attrs['digits'],(str,unicode)):
+        attrs['digits'] = eval(attrs['digits'])
+    return attrs
 
 #FIXME use spaces
 def calc_condition(self,model,con):
@@ -161,7 +162,6 @@ def ustr(value, from_encoding='utf-8'):
     return unicode(value, from_encoding)
 
 def locale_format(format, value):
-    import locale
     label_str = locale.format(format, value, True)
     if not locale.getpreferredencoding().lower().startswith('utf'):
         label_str = label_str.replace('\xa0', '\xc2\xa0')
@@ -180,6 +180,27 @@ def format_connection_string(login, _passwd, server, port, protocol, dbname):
         result += ':%s' % (port,)
     result += '/%s' % (dbname,)
     return result
+
+def str2int(string, default=None):
+    assert isinstance(string, basestring)
+    try:
+        integer = locale.atoi(string)
+        return integer
+    except:
+        if default is not None:
+            return default
+    raise ValueError("%r does not represent a valid integer value" % (string,))
+
+
+def str2float(string, default=None):
+    assert isinstance(string, basestring)
+    try:
+        float = locale.atof(string)
+        return float
+    except:
+        if default is not None:
+            return default
+    raise ValueError("%r does not represent a valid float value" % (string,))
 
 def str2bool(string, default=None):
     """Convert a string representing a boolean into the corresponding boolean

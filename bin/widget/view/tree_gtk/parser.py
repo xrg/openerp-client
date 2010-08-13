@@ -26,6 +26,7 @@ import gtk
 import math
 import cgi
 
+
 import tools
 import tools.datetime_util
 
@@ -48,12 +49,13 @@ import gobject
 import pango
 
 def send_keys(renderer, editable, position, treeview):
-    editable.connect('key_press_event', treeview.on_keypressed)
+    editable.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
     editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
     if isinstance(editable, gtk.ComboBoxEntry):
         editable.connect('changed', treeview.on_editing_done)
 
-def sort_model(column, screen):
+def sort_model(column, screen, treeview):
+    group_by = screen.context.get('group_by',False)
     screen.current_view.set_drag_and_drop(column.name == 'sequence')
     if screen.sort == column.name:
         screen.sort = column.name+' desc'
@@ -62,34 +64,38 @@ def sort_model(column, screen):
     screen.offset = 0
     if screen.type in ('many2many','one2many'):
         screen.sort_domain = [('id','in',screen.ids_get())]
-    screen.search_filter()
+    if group_by:
+        model = treeview.get_model()
+        model.sort(column, screen, treeview)
+    else:
+        screen.search_filter()
 
 class parser_tree(interface.parser_interface):
+
     def parse(self, model, root_node, fields):
         dict_widget = {}
         attrs = tools.node_attributes(root_node)
         on_write = attrs.get('on_write', '')
         editable = attrs.get('editable', False)
-        if editable:
-            treeview = EditableTreeView(editable)
-        else:
-            treeview = EditableTreeView(editable)
+        treeview = EditableTreeView(editable)
         treeview.colors = dict()
         self.treeview = treeview
+
         for color_spec in attrs.get('colors', '').split(';'):
             if color_spec:
                 colour, test = color_spec.split(':')
                 treeview.colors[colour] = test
-        treeview.set_property('rules-hint', True)
         if not self.title:
             self.title = attrs.get('string', 'Unknown')
-
+        treeview.set_property('rules-hint', True)
         treeview.sequence = False
         treeview.connect("motion-notify-event", treeview.set_tooltip)
+        treeview.connect('key-press-event', treeview.on_tree_key_press)
 
-        for node in root_node.childNodes:
+        for node in root_node:
             node_attrs = tools.node_attributes(node)
-            if node.localName == 'button':
+
+            if node.tag == 'button':
                 cell = Cell('button')(node_attrs['string'], treeview, node_attrs)
                 cell.name = node_attrs['name']
                 cell.attrs = node_attrs
@@ -110,11 +116,11 @@ class parser_tree(interface.parser_interface):
                 col.set_fixed_width(20)
                 visval = eval(str(node_attrs.get('invisible', 'False')), {'context':self.screen.context})
                 col.set_visible(not visval)
-
                 treeview.append_column(col)
                 col._type = 'Button'
                 col.name = node_attrs['name']
-            if node.localName == 'field':
+
+            if node.tag == 'field':
                 handler_id = False
                 fname = str(node_attrs['name'])
                 if fields[fname]['type'] in ('image', 'binary'):
@@ -156,8 +162,6 @@ class parser_tree(interface.parser_interface):
                     col_label.set_text(fields[fname]['string'])
                 col_label.show()
                 col.set_widget(col_label)
-
-
                 col.name = fname
                 col._type = fields[fname]['type']
                 col.set_cell_data_func(renderer, cell.setter)
@@ -188,7 +192,7 @@ class parser_tree(interface.parser_interface):
                     if max_width:
                         col.set_max_width(max_width)
 
-                col.connect('clicked', sort_model, self.screen)
+                col.connect('clicked', sort_model, self.screen, treeview)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 visval = eval(str(fields[fname].get('invisible', 'False')), {'context':self.screen.context})
@@ -277,8 +281,10 @@ class Char(object):
         gb = self.treeview.screen.context.get('group_by', False)
         if isinstance(model, group_record) and gb:
             font = pango.FontDescription('Times New Roman bold 10')
+            if self.field_name in model.field_with_empty_labels:
+                cell.set_property('foreground', '#AAAAAA')
+                font = pango.FontDescription('italic 10')
             cell.set_property('font-desc', font)
-
         elif self.treeview.editable:
             field = model[self.field_name]
             cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
@@ -299,10 +305,14 @@ class Char(object):
 
     def get_color(self, model):
         to_display = ''
-        for color, expr in self.treeview.colors.items():
-            if model.expr_eval(expr, check_load=False):
-                to_display = color
-                break
+        try:
+            for color, expr in self.treeview.colors.items():
+                if model.expr_eval(expr, check_load=False):
+                    to_display = color
+                    break
+        except Exception:
+            # we can still continue if we can't get the color..
+            pass
         return to_display or 'black'
 
     def open_remote(self, model, create, changed=False, text=None):
@@ -317,7 +327,7 @@ class Char(object):
 class Int(Char):
 
     def value_from_text(self, model, text):
-        return int(text)
+        return tools.str2int(text)
 
     def get_textual_value(self, model):
         return tools.locale_format('%d', int(model[self.field_name].get_client(model) or 0))
@@ -419,10 +429,7 @@ class Float(Char):
         return tools.locale_format('%.' + str(digit) + 'f', model[self.field_name].get_client(model) or 0.0)
 
     def value_from_text(self, model, text):
-        try:
-            return locale.atof(text)
-        except:
-            return 0.0
+        return tools.str2float(text)
 
 class FloatTime(Char):
     def get_textual_value(self, model):

@@ -58,6 +58,15 @@ class rpc_exception(Exception):
         log = logging.getLogger('rpc.exception')
         log.warning('CODE %s: %s' % (str(code), self.message))
 
+    def _get_message(self):
+        return self._message
+
+    def _set_message(self, message):
+        self._message = message
+
+    message = property(_get_message, _set_message)
+
+
 class gw_inter(object):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
     def __init__(self, url, db, uid, passwd, obj='/object'):
@@ -112,10 +121,19 @@ class tinySocket_gw(gw_inter):
         return res
     def execute(self, method, *args):
         self._sock.connect(self._url)
-        self._sock.mysend((self._obj, method, self._db)+args)
-        res = self._sock.myreceive()
-        self._sock.disconnect()
-        return res
+        try:
+            self._sock.mysend((self._obj, method, self._db)+args)
+            res = self._sock.myreceive()
+            self._sock.disconnect()
+            return res
+        except Exception,e:
+            try:
+                self._sock.disconnect()
+            except Exception:
+                pass
+            # make sure we keep the exception context, even
+            # if disconnect() raised above.
+            raise e
 
 class rpc_session(object):
     __slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_gw', 'db', 'context', 'timezone')

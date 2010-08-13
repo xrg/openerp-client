@@ -26,6 +26,7 @@ import gtk.glade
 import gettext
 import common
 import gobject
+from mx import DateTime
 from datetime import datetime, date
 
 from SpiffGtkWidgets import Calendar
@@ -514,9 +515,9 @@ class parser_calendar(interface.parser_interface):
 
         axis = []
         axis_data = {}
-        for node in root_node.childNodes:
+        for node in root_node:
             node_attrs = node_attributes(node)
-            if node.localName == 'field':
+            if node.tag == 'field':
                 axis.append(str(node_attrs['name']))
                 axis_data[str(node_attrs['name'])] = node_attrs
 
