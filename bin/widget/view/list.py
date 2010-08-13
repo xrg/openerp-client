@@ -36,18 +36,23 @@ from widget.model.record import ModelRecord
 class field_record(object):
     def __init__(self, name):
         self.name = name
+
     def get_client(self, *args):
         if isinstance(self.name, (list,tuple)):
             return self.name[1]
         return self.name
+
     def get(self, *args):
         if isinstance(self.name, (list,tuple)):
             return self.name[0]
         return self.name
+
     def get_state_attrs(self, *args, **argv):
         return {}
+
     def set_client(self,*args):
         pass
+
     def set(self,*args):
         pass
 
@@ -62,6 +67,7 @@ class group_record(object):
         self.id = False
         self.has_children = child
         self.mgroup = mgroup
+        self.field_with_empty_labels = []
 
     def getChildren(self):
         if self._children is None:
@@ -121,11 +127,12 @@ class list_record(object):
                     child = False
                 ctx = {'__domain': r.get('__domain', []),'group_by_no_leaf':no_leaf}
                 ctx.update(__ctx)
-                for field in gb:
-                    if not r.get(field, False):
-                        if field in inner_gb:continue
-                        r[field] = 'Undefined'
                 rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child)
+                for field in gb:
+                    if not rec.value.get(field, False):
+                        if field in inner_gb:continue
+                        rec.value[field] = 'Undefined'
+                        rec.field_with_empty_labels.append(field)
                 self.add(rec)
         else:
             if self.context.get('__domain') and not no_leaf:
