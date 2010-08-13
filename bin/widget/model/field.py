@@ -327,6 +327,8 @@ class M2MField(CharField):
         return model.value[self.name] or []
 
     def set(self, model, value, test_state=False, modified=False):
+        if isinstance(value, int):
+            value = [value]
         model.value[self.name] = value and value[:self.limit] or []
         if modified:
             model.modified = True
