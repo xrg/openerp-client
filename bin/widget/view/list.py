@@ -121,6 +121,10 @@ class list_record(object):
                     child = False
                 ctx = {'__domain': r.get('__domain', []),'group_by_no_leaf':no_leaf}
                 ctx.update(__ctx)
+                for field in gb:
+                    if not r.get(field, False):
+                        if field in inner_gb:continue
+                        r[field] = 'Undefined'
                 rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child)
                 self.add(rec)
         else:
