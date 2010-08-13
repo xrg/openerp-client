@@ -208,6 +208,8 @@ class rpc_session(object):
                         else:
                             common.warning(a.args[1], a.args[0])
                     else:
+                        if isinstance(e.faultCode, int):
+                            e.faultCode = str(e.faultCode)
                         common.error(_('Application Error'), e.faultCode, e.faultString)
                 else:
                     common.error(_('Application Error'), _('View details'), str(e) or str(type(e)))
