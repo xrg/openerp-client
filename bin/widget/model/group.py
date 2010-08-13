@@ -233,6 +233,9 @@ class ModelRecordGroup(signal_event.signal_event):
         self.models.clear()
         self.models_removed = []
 
+    def setContext(self, ctx):
+        self._context.update(ctx)
+    
     def getContext(self):
         ctx = {}
         ctx.update(self._context)
@@ -242,7 +245,7 @@ class ModelRecordGroup(signal_event.signal_event):
         #else:
         #   ctx['active_id'] = False
         return ctx
-    context = property(getContext)
+    context = property(getContext, setContext)
 
     def model_add(self, model, position=-1):
         #
