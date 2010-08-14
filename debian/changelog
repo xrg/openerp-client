@@ -1,3 +1,11 @@
+openerp-client (5.0.12-2) unstable; urgency=low
+
+  * Removing debhelper auto install overrides.
+  * Updating standards version to 3.9.1.
+  * Reverting to manual setup.py call, updated for version 5.0.12.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 14 Aug 2010 16:52:10 +0200
+
 openerp-client (5.0.12-1) unstable; urgency=low
 
   * Updating standards version to 3.9.0.
