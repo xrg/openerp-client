@@ -1793,10 +1793,10 @@ class DotWindow(gtk.Window):
 
         data_display = self.attrs.get(edit,{}).get('views',{}).get('form',{}).get('fields',{})
         arch =  self.attrs.get(edit,{}).get('views',{}).get('form',{}).get('arch',{})
-        for child in arch._get_childNodes():
+        for child in arch:
             if node_attributes(child) and node_attributes(child).get('name',False):
                 field_list.append(node_attributes(child))
-        
+
         for field in field_list:
             if bool(int(field.get('invisible',0))):
                 continue
