@@ -102,6 +102,8 @@ class Viewdiagram(object):
                                           fontsize='10',
                                           ))
             file =  graph.create_xdot()
+            if 'node_parent_field' in dict:
+                self.node['parent_field'] = dict['node_parent_field']
             if not dict['nodes']:
                 file = """digraph G {}"""
             self.window.set_dotcode(file, id=self.id, graph=graph)
