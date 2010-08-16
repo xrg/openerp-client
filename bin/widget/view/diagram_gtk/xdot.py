@@ -1793,10 +1793,10 @@ class DotWindow(gtk.Window):
 
         data_display = self.attrs.get(edit,{}).get('views',{}).get('form',{}).get('fields',{})
         arch =  self.attrs.get(edit,{}).get('views',{}).get('form',{}).get('arch',{})
-        for child in arch._get_childNodes():
+        for child in arch:
             if node_attributes(child) and node_attributes(child).get('name',False):
                 field_list.append(node_attributes(child))
-        
+
         for field in field_list:
             if bool(int(field.get('invisible',0))):
                 continue
@@ -1816,12 +1816,12 @@ class DotWindow(gtk.Window):
             elif record_list[field.get('name')]:
                 val = record_list[field.get('name')]
 
-            label_string = gtk.Label(" : " + val)
+            label_string = gtk.Label(": %s" % val)
             label_string.set_alignment(0, 0)
             label_string.set_max_width_chars(20)
             label_string.show()
             h_box_new.pack_start(label_string)
-        
+
         h_box = gtk.HBox()
         self.dia_select.get_child().add(h_box)
         h_box.show()
@@ -1845,7 +1845,11 @@ class DotWindow(gtk.Window):
         return True
 
     def on_node_create(self,event):
-        dia = dialog(self.node_attr.get('object',False), id=None, view_ids=[self.node_attr.get('form_view_ref',False)], context= self.screen.context, target=False, view_type=['form'])
+        context = dict(self.screen.context)
+        if 'parent_field' in self.node_attr:
+            # set the default value for the field that will link the new record to its container
+            context['default_%s'%(self.node_attr.get('parent_field'))] = self.id
+        dia = dialog(self.node_attr.get('object',False), id=None, view_ids=[self.node_attr.get('form_view_ref',False)], context=context, target=False, view_type=['form'])
         self.dia_destroy(dia)
         return True
 
