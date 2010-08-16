@@ -281,8 +281,10 @@ class Char(object):
         gb = self.treeview.screen.context.get('group_by', False)
         if isinstance(model, group_record) and gb:
             font = pango.FontDescription('Times New Roman bold 10')
+            if self.field_name in model.field_with_empty_labels:
+                cell.set_property('foreground', '#AAAAAA')
+                font = pango.FontDescription('italic 10')
             cell.set_property('font-desc', font)
-
         elif self.treeview.editable:
             field = model[self.field_name]
             cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))

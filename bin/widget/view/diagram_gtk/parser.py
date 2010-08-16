@@ -27,7 +27,7 @@ import gettext
 import common
 import rpc
 import xdot
-import pydot # import pydot or you're not going to get anywhere my friend
+import pydot
 
 class Viewdiagram(object):
     def __init__(self,window, model, node_attr, arrow_attr, attrs, screen):
@@ -45,7 +45,7 @@ class Viewdiagram(object):
 
     def draw_diagram(self):
         if self.screen.current_model:
-            self.id = self.screen.current_model.id 
+            self.id = self.screen.current_model.id
         label=self.arrow.get('label',False)
         graph = pydot.Dot(graph_type='digraph')
         if self.id:
@@ -102,6 +102,8 @@ class Viewdiagram(object):
                                           fontsize='10',
                                           ))
             file =  graph.create_xdot()
+            if 'node_parent_field' in dict:
+                self.node['parent_field'] = dict['node_parent_field']
             if not dict['nodes']:
                 file = """digraph G {}"""
             self.window.set_dotcode(file, id=self.id, graph=graph)
@@ -120,20 +122,20 @@ class parser_diagram(interface.parser_interface):
         self.title = attrs.get('string', 'diagram')
         node_attr = None
         arrow_attr = None
-        for node in root_node.childNodes:
+        for node in root_node:
             node_attrs = node_attributes(node)
             type = ""
             node_fields = []
-            if node.localName == 'node':
+            if node.tag == 'node':
                 type = "node"
                 node_attr = node_attrs
 
-            if node.localName == 'arrow':
+            if node.tag == 'arrow':
                 type = "arrow"
                 arrow_attr = node_attrs
 
             if type in ['node','arrow']:
-                for child in node._get_childNodes():
+                for child in node:
                     if node_attributes(child) and node_attributes(child).get('name',False):
                         node_fields.append(node_attributes(child)['name'])
                 fields = rpc.session.rpc_exec_auth('/object', 'execute', node_attrs.get('object',False), 'fields_get',node_fields)
