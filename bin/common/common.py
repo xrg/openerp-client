@@ -39,8 +39,42 @@ import ConfigParser
 
 import threading
 import time
-
+import pango
 import rpc
+
+class WrapLabel(gtk.Label):
+    __gtype_name__ = 'WrapLabel'
+
+    def __init__(self, str=None):
+        gtk.Label.__init__(self)
+
+        self.__wrap_width = 0
+        self.layout = self.get_layout()
+        self.layout.set_wrap(pango.WRAP_WORD_CHAR)
+        self.set_alignment(0.0, 0.0)
+
+    def do_size_request(self, requisition):
+        layout = self.get_layout()
+        width, height = layout.get_pixel_size()
+        requisition.width = 0
+        requisition.height = height
+
+    def do_size_allocate(self, allocation):
+        gtk.Label.do_size_allocate(self, allocation)
+        self.__set_wrap_width(allocation.width)
+
+    def set_markup(self, str):
+        gtk.Label.set_markup(self, str)
+        self.__set_wrap_width(self.__wrap_width)
+
+    def __set_wrap_width(self, width):
+        if width == 0:
+            return
+        layout = self.get_layout()
+        layout.set_width(width * pango.SCALE)
+        if self.__wrap_width != width:
+            self.__wrap_width = width
+            self.queue_resize()
 
 def _search_file(file, dir='path.share'):
     tests = [
@@ -370,7 +404,7 @@ is displayed on the second tab.
     win.destroy()
     return True
 
-def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None, italic_font=False):
+def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     dialog = gtk.MessageDialog(parent,
@@ -378,11 +412,7 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None, italic_font=Fal
       type, gtk.BUTTONS_OK)
     msg = to_xml(msg)
     if title is not None:
-        if italic_font:
-            msg = '<span foreground="red"><b>%s</b></span>\n\n\n<span font="italic">%s</span>' % (to_xml(title), msg)
-            dialog.set_title("OpenERP - Tip")
-        else:
-            msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
+        msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
     dialog.set_icon(OPENERP_ICON)
     dialog.set_markup(msg)
     dialog.show_all()
