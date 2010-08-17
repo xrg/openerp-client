@@ -62,7 +62,7 @@ class window(service.Service):
                 view = rpc.session.rpc_exec_auth('/object', 'execute', model,
                         'fields_view_get', False, view_type, context)
 
-            win = tree.tree(view, model, res_id, domain, context,
+            win = tree.tree(view, model, res_id, domain, context,help=help,
                     window=window, name=name)
             spool = service.LocalService('spool')
             spool.publish('gui.window', win, {})

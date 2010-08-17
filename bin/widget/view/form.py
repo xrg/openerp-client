@@ -89,6 +89,16 @@ class ViewForm(parser_view):
                 w.widget.form = self
         self.widgets = dict([(name, ViewWidget(self, widget, name)) for name, widget in children.items()])
         sm_vbox = False
+        self.help = help
+        self.help_frame = False
+        if self.help:
+            self.help_frame = common.get_action_help(self.help, self.close_help)
+            if self.help_frame:
+                vbox = gtk.VBox()
+                vbox.pack_start(self.help_frame, expand=False, fill=False, padding=2)
+                vbox.pack_end(self.widget)
+                vbox.show_all()
+                self.widget = vbox
         if submenu:
             expander = gtk.Expander("Submenus")
             sm_vbox = gtk.VBox()
@@ -337,16 +347,6 @@ class ViewForm(parser_view):
                             tool, self.window)
 
                     sep = True
-        self.help = help
-        self.help_frame = False
-        if self.help:
-            self.help_frame = common.get_action_help(self.help, self.close_help)
-            if self.help_frame:
-                vbox = gtk.VBox()
-                vbox.pack_start(self.help_frame, expand=False, fill=False, padding=2)
-                vbox.pack_end(self.widget)
-                vbox.show_all()
-                self.widget = vbox
 
     def close_help(self, *args):
         if not self.help_frame:
