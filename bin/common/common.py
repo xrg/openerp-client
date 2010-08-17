@@ -76,6 +76,44 @@ class WrapLabel(gtk.Label):
             self.__wrap_width = width
             self.queue_resize()
 
+def get_action_help(help={}, callback=None):
+    if help.get('msg', False):
+        msg = help.get('msg', '')
+        title = help.get('title', '')
+
+        help_label = WrapLabel()
+        help_label.set_line_wrap(True)
+        help_label.set_use_markup(True)
+        help_label.set_label('<span foreground="red"><b><u>%s</u></b></span>\n<span font="italic">%s</span>' \
+                             % (to_xml(title), msg))
+
+        closebtn = gtk.Button()
+        image = gtk.Image()
+        image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+        w, h = image.size_request()
+        closebtn.set_image(image)
+        closebtn.set_relief(gtk.RELIEF_NONE)
+        closebtn.set_size_request(w + 8, h + 6)
+        closebtn.unset_flags(gtk.CAN_FOCUS)
+        if callback:
+            closebtn.connect('clicked', callback)
+        box = gtk.HBox()
+        box_label = gtk.Label()
+        box_label.set_use_markup(True)
+        box_label.set_label('<b>OpenERP - Tip</b>')
+        box.pack_start(box_label, True, True)
+        box.pack_end(closebtn, False, False)
+        box.show_all()
+
+        help_frame = gtk.Frame()
+        help_frame.set_label_widget(box)
+        help_frame.set_label_align(0.3,0.3)
+        help_frame.set_shadow_type(gtk.SHADOW_ETCHED_IN)
+        help_frame.add(help_label)
+        help_frame.show_all()
+        return help_frame
+    return False
+
 def _search_file(file, dir='path.share'):
     tests = [
         lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), x),

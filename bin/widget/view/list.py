@@ -314,7 +314,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
 class ViewList(parser_view):
     def __init__(self, window, screen, widget, children=None, buttons=None,
-            toolbar=None, submenu=None):
+            toolbar=None, submenu=None, help={}):
         super(ViewList, self).__init__(window, screen, widget, children,
                 buttons, toolbar, submenu=submenu)
         self.store = None

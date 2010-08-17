@@ -24,7 +24,7 @@ from interface import parser_view
 class ViewGantt(parser_view):
 
     def __init__(self, window, screen, widget, children=None, buttons=None,
-            toolbar=None, submenu=None):
+            toolbar=None, submenu=None, help={}):
         super(ViewGantt, self).__init__(window, screen, widget, children, buttons, toolbar, submenu)
         self.view_type = 'gantt'
         self.view = widget
@@ -54,7 +54,7 @@ class ViewGantt(parser_view):
 
     def reset(self):
         pass
-    
+
     def display(self):
         self.view.display(self.screen.models)
         return None

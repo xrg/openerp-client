@@ -68,7 +68,7 @@ class form(object):
         self.domain = domain
         self.context = context
         self.screen = Screen(self.model, view_type=view_type,
-                context=self.context, view_ids=view_ids, domain=domain,
+                context=self.context, view_ids=view_ids, domain=domain,help=help,
                 hastoolbar=options.options['form.toolbar'], hassubmenu=options.options['form.submenu'],
                 show_search=True, window=self.window, limit=limit, readonly=bool(auto_refresh), auto_search=auto_search, search_view=search_view)
         self.screen.signal_connect(self, 'record-message', self._record_message)
@@ -79,47 +79,9 @@ class form(object):
             self.name = self.screen.current_view.title
         else:
             self.name = name
-        self.help = help
-        vbox = gtk.VBox()
-        # Display Help
-        if self.help.get('msg', False):
-            msg = self.help.get('msg', '')
-            help_label = common.WrapLabel()
-            help_label.set_line_wrap(True)
-            help_label.set_use_markup(True)
-            help_label.set_label('<span foreground="red"><b>%s</b></span>\n<span font="italic">%s</span>' \
-                                 % (common.to_xml(self.name), msg))
-
-            closebtn = gtk.Button()
-            image = gtk.Image()
-            image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
-            w, h = image.size_request()
-            closebtn.set_image(image)
-            closebtn.set_relief(gtk.RELIEF_NONE)
-            closebtn.set_size_request(w + 8, h + 6)
-            closebtn.unset_flags(gtk.CAN_FOCUS)
-            closebtn.connect('clicked', self.close_help)
-
-            box = gtk.HBox()
-            box_label = gtk.Label()
-            box_label.set_use_markup(True)
-            box_label.set_label('<b>OpenERP - Tip</b>')
-            box.pack_start(box_label, True, True)
-            box.pack_end(closebtn, False, False)
-            box.show_all()
-
-            self.help_frame = gtk.Frame()
-            self.help_frame.set_label_widget(box)
-            self.help_frame.set_label_align(0.5, 0.5)
-            self.help_frame.set_shadow_type(gtk.SHADOW_ETCHED_IN)
-            self.help_frame.add(help_label)
-            self.help_frame.show_all()
-            vbox.pack_start(self.help_frame, expand=False, fill=False, padding=2)
-        vbox.pack_start(self.screen.widget)
-        vbox.show_all()
         vp = gtk.Viewport()
         vp.set_shadow_type(gtk.SHADOW_NONE)
-        vp.add(vbox)
+        vp.add(self.screen.widget)
         vp.show()
         self.sw = gtk.ScrolledWindow()
         self.sw.set_shadow_type(gtk.SHADOW_NONE)
@@ -208,16 +170,6 @@ class form(object):
         if event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):
             win.destroy()
             self.get_resource(widget)
-
-    def close_help(self, *args):
-        action_id = self.help.get('action_id', False)
-        if action_id:
-            value = {'default_user_ids':[(4, rpc.session.uid)]}
-            rpc.session.rpc_exec_auth('/object', 'execute',
-                        'ir.actions.act_window', 'write', action_id, value, rpc.session.context)
-            self.help_frame.hide_all()
-        return True
-
 
     def sig_goto(self, *args):
         if not self.modified_save():

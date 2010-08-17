@@ -122,7 +122,7 @@ class main(service.Service):
             if action.get('display_help', False):
                 help['action_id'] = action.get('id', False)
                 help['msg'] =  action.get('help', False)
-
+                help['title'] = action.get('name', False)
             if datas.get('domain', False):
                 domain.append(datas['domain'])
             if action.get('target', False)=='new':
