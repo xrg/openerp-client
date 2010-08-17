@@ -99,7 +99,7 @@ def get_action_help(help={}, callback=None):
         box = gtk.HBox()
         box_label = gtk.Label()
         box_label.set_use_markup(True)
-        box_label.set_label('<span foreground="red"><b> %s - Tips</b></span>'%to_xml(title))
+        box_label.set_label('<b> %s - Tips</b>'%to_xml(title))
         box.pack_start(box_label, True, True)
         box.pack_end(closebtn, False, False)
         box.show_all()
