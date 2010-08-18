@@ -331,6 +331,7 @@ class Screen(signal_event.signal_event):
                 lbl.set_text('Enter Shortcut Name:')
             win.show_all()
             response = win.run()
+            # grab a safe copy of the entered text before destroy() to avoid GTK bug https://bugzilla.gnome.org/show_bug.cgi?id=613241
             action_name = widget.get_text()
             win.destroy()
             combo.set_active(0)
