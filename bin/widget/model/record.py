@@ -161,7 +161,12 @@ class ModelRecord(signal_event.signal_event):
                 if d[0] in self.mgroup.fields:
                     if d[1] == '=':
                         if d[2]:
-                            val[d[0]] = d[2]
+                            value = d[2]
+                            # domain containing fields like M2M/O2M should return values as list
+                            if self.mgroup.fields[d[0]].get('type', '') in ('many2many','one2many'):
+                                if not isinstance(d[2], (bool,list)):
+                                    value = [d[2]]
+                            val[d[0]] = value
                     if d[1] == 'in' and len(d[2]) == 1:
                         val[d[0]] = d[2][0]
             self.set_default(val)
