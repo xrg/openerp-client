@@ -43,7 +43,7 @@ import copy
 
 class Screen(signal_event.signal_event):
 
-    def __init__(self, model_name, view_ids=None, view_type=None,
+    def __init__(self, model_name, view_ids=None, view_type=None,help={},
             parent=None, context=None, views_preload=None, tree_saves=True,
             domain=None, create_new=False, row_activate=None, hastoolbar=False,
             hassubmenu=False,default_get=None, show_search=False, window=None,
@@ -62,7 +62,6 @@ class Screen(signal_event.signal_event):
             search_view = "{}"
 
         super(Screen, self).__init__()
-
         self.show_search = show_search
         self.auto_search = auto_search
         self.search_count = 0
@@ -111,12 +110,16 @@ class Screen(signal_event.signal_event):
         self.view_fields = {} # Used to switch self.fields when the view switchs
         self.sort_domain = []
         self.old_ctx = {}
+        self.help_mode = False
         if view_type:
             self.view_to_load = view_type[1:]
             view_id = False
             if view_ids:
                 view_id = view_ids.pop(0)
-            view = self.add_view_id(view_id, view_type[0])
+            if view_type[0] in ('tree','graph','calendar'):
+                self.screen_container.help = help
+                self.help_mode = view_type[0]
+            view = self.add_view_id(view_id, view_type[0], help=help)
             self.screen_container.set(view.widget)
         self.display()
 
@@ -157,6 +160,7 @@ class Screen(signal_event.signal_event):
             self.screen_container.show_filter()
         else:
             self.screen_container.hide_filter()
+
 
     def update_scroll(self, *args):
         offset=self.offset
@@ -493,23 +497,23 @@ class Screen(signal_event.signal_event):
     def add_view_custom(self, arch, fields, display=False, toolbar={}, submenu={}):
         return self.add_view(arch, fields, display, True, toolbar=toolbar, submenu=submenu)
 
-    def add_view_id(self, view_id, view_type, display=False, context=None):
+    def add_view_id(self, view_id, view_type, display=False, help={}, context=None):
         if context is None:
             context = {}
         if view_type in self.views_preload:
             return self.add_view(self.views_preload[view_type]['arch'],
                     self.views_preload[view_type]['fields'], display,
                     toolbar=self.views_preload[view_type].get('toolbar', False),
-                    submenu=self.views_preload[view_type].get('submenu', False),
+                    submenu=self.views_preload[view_type].get('submenu', False), help=help,
                     context=context)
         else:
             view = self.rpc.fields_view_get(view_id, view_type, self.context,
                         self.hastoolbar, self.hassubmenu)
             context.update({'view_type' : view_type})
-            return self.add_view(view['arch'], view['fields'], display,
+            return self.add_view(view['arch'], view['fields'], display, help=help,
                     toolbar=view.get('toolbar', False), submenu=view.get('submenu', False), context=context)
 
-    def add_view(self, arch, fields, display=False, custom=False, toolbar=None, submenu=None,
+    def add_view(self, arch, fields, display=False, custom=False, toolbar=None, submenu=None, help={},
             context=None):
         if toolbar is None:
             toolbar = {}
@@ -548,7 +552,7 @@ class Screen(signal_event.signal_event):
         self.fields = self.models.fields
 
         parser = widget_parse(parent=self.parent, window=self.window)
-        view = parser.parse(self, root_node, self.fields, toolbar=toolbar, submenu=submenu)
+        view = parser.parse(self, root_node, self.fields, toolbar=toolbar, submenu=submenu, help=help)
         if view:
             self.views.append(view)
 
@@ -728,6 +732,11 @@ class Screen(signal_event.signal_event):
             self.current_view.display()
             self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
             vt = self.current_view.view_type
+            if self.screen_container.help_frame:
+                if vt != self.help_mode:
+                    self.screen_container.help_frame.hide_all()
+                else:
+                    self.screen_container.help_frame.show_all()
             self.search_active(
                     active=self.show_search and vt in ('tree', 'graph', 'calendar'),
                     show_search=self.show_search and vt in ('tree', 'graph','calendar'),

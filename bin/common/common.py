@@ -39,8 +39,82 @@ import ConfigParser
 
 import threading
 import time
-
+import pango
 import rpc
+
+class WrapLabel(gtk.Label):
+    __gtype_name__ = 'WrapLabel'
+
+    def __init__(self, str=None):
+        gtk.Label.__init__(self)
+
+        self.__wrap_width = 0
+        self.layout = self.get_layout()
+        self.layout.set_wrap(pango.WRAP_WORD_CHAR)
+        self.set_alignment(0.0, 0.0)
+
+    def do_size_request(self, requisition):
+        layout = self.get_layout()
+        width, height = layout.get_pixel_size()
+        requisition.width = 0
+        requisition.height = height
+
+    def do_size_allocate(self, allocation):
+        gtk.Label.do_size_allocate(self, allocation)
+        self.__set_wrap_width(allocation.width)
+
+    def set_markup(self, str):
+        gtk.Label.set_markup(self, str)
+        self.__set_wrap_width(self.__wrap_width)
+
+    def __set_wrap_width(self, width):
+        if width == 0:
+            return
+        layout = self.get_layout()
+        layout.set_width(width * pango.SCALE)
+        if self.__wrap_width != width:
+            self.__wrap_width = width
+            self.queue_resize()
+
+def get_action_help(help={}, callback=None):
+    if help.get('msg', False):
+        msg = help.get('msg', '')
+        title = help.get('title', '')
+
+        help_label = WrapLabel()
+        help_label.set_line_wrap(True)
+        help_label.set_use_markup(True)
+        help_label.set_label('\n<span font="italic">%s</span>'% (msg))
+
+        table = gtk.Table(1, 8)
+        table.attach(gtk.Label(''), 0, 3, 0, 1)
+        table.attach(help_label, 4, 8, 0, 1)
+
+        closebtn = gtk.Button()
+        image = gtk.Image()
+        image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+        w, h = image.size_request()
+        closebtn.set_image(image)
+        closebtn.set_relief(gtk.RELIEF_NONE)
+        closebtn.set_size_request(w + 8, h + 6)
+        closebtn.unset_flags(gtk.CAN_FOCUS)
+        if callback:
+            closebtn.connect('clicked', callback)
+        box = gtk.HBox()
+        box_label = gtk.Label()
+        box_label.set_use_markup(True)
+        box_label.set_label('<b> %s - Tips</b>'%to_xml(title))
+        box.pack_start(box_label, True, True)
+        box.pack_end(closebtn, False, False)
+        box.show_all()
+
+        help_frame = gtk.Frame()
+        help_frame.set_label_widget(box)
+        help_frame.set_label_align(0.5,0.5)
+        help_frame.add(table)
+        help_frame.show_all()
+        return help_frame
+    return False
 
 def _search_file(file, dir='path.share'):
     tests = [
@@ -370,7 +444,7 @@ is displayed on the second tab.
     win.destroy()
     return True
 
-def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None, italic_font=False):
+def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     dialog = gtk.MessageDialog(parent,
@@ -378,11 +452,7 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None, italic_font=Fal
       type, gtk.BUTTONS_OK)
     msg = to_xml(msg)
     if title is not None:
-        if italic_font:
-            msg = '<span foreground="red"><b>%s</b></span>\n\n\n<span font="italic">%s</span>' % (to_xml(title), msg)
-            dialog.set_title("OpenERP - Tip")
-        else:
-            msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
+        msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
     dialog.set_icon(OPENERP_ICON)
     dialog.set_markup(msg)
     dialog.show_all()
