@@ -331,11 +331,11 @@ class Screen(signal_event.signal_event):
                 lbl.set_text('Enter Shortcut Name:')
             win.show_all()
             response = win.run()
+            action_name = widget.get_text()
             win.destroy()
             combo.set_active(0)
-            if response == gtk.RESPONSE_OK and widget.get_text():
-                action_name = widget.get_text()
-                values={'name':action_name,
+            if response == gtk.RESPONSE_OK and action_name:
+                values = {'name':action_name,
                        'model_id':self.name,
                        'domain':str(self.filter_widget and self.filter_widget.value.get('domain',[])),
                        'context':str(self.filter_widget and self.filter_widget.value.get('context',{})),
