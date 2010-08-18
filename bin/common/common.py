@@ -86,6 +86,10 @@ def get_action_help(help={}, callback=None):
         help_label.set_use_markup(True)
         help_label.set_label('\n<span font="italic">%s</span>'% (msg))
 
+        table = gtk.Table(1, 8)
+        table.attach(gtk.Label(''), 0, 3, 0, 1)
+        table.attach(help_label, 4, 8, 0, 1)
+
         closebtn = gtk.Button()
         image = gtk.Image()
         image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
@@ -107,8 +111,7 @@ def get_action_help(help={}, callback=None):
         help_frame = gtk.Frame()
         help_frame.set_label_widget(box)
         help_frame.set_label_align(0.5,0.5)
-        help_frame.set_shadow_type(gtk.SHADOW_ETCHED_IN)
-        help_frame.add(help_label)
+        help_frame.add(table)
         help_frame.show_all()
         return help_frame
     return False

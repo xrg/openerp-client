@@ -68,6 +68,10 @@ class screen_container(object):
     def add_filter(self, widget, fnct, clear_fnct, next_fnct, prev_fnct, execute_action=None, add_custom=None, model=None, limit=100):
         self.filter_vbox = gtk.VBox(spacing=1)
         self.filter_vbox.set_border_width(1)
+        if self.help:
+            self.help_frame = common.get_action_help(self.help, self.close_help)
+            if self.help_frame:
+                self.filter_vbox.pack_start(self.help_frame, expand=False, fill=False, padding=3)
         self.filter_vbox.pack_start(widget, expand=True, fill=True)
 
         hb1 = gtk.HButtonBox()
@@ -156,10 +160,6 @@ class screen_container(object):
         hs = gtk.HSeparator()
         hs.show()
         self.filter_vbox.pack_start(hs, expand=True, fill=False)
-        if self.help:
-            self.help_frame = common.get_action_help(self.help, self.close_help)
-            if self.help_frame:
-                self.vbox.pack_start(self.help_frame, expand=False, fill=False, padding=2)
         self.vbox.pack_start(self.filter_vbox, expand=False, fill=True)
 
     def close_help(self, *args):
