@@ -118,7 +118,11 @@ class main(service.Service):
             domain_ctx['time'] = time
             domain_ctx['datetime'] = datetime
             domain = tools.expr_eval(action['domain'], domain_ctx)
-
+            help = {}
+            if action.get('display_help', False):
+                help['action_id'] = action.get('id', False)
+                help['msg'] =  action.get('help', False)
+                help['title'] = action.get('name', False)
             if datas.get('domain', False):
                 domain.append(datas['domain'])
             if action.get('target', False)=='new':
@@ -131,7 +135,7 @@ class main(service.Service):
                 obj = service.LocalService('gui.window')
                 obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
                         action['view_type'], datas.get('window',None), context,
-                        datas['view_mode'], name=action.get('name', False),
+                        datas['view_mode'], name=action.get('name', False), help=help,
                         limit=datas['limit'], auto_refresh=datas['auto_refresh'], auto_search = datas['auto_search'], search_view = datas['search_view'])
 
         elif action['type']=='ir.actions.server':
@@ -187,25 +191,10 @@ class main(service.Service):
         if res:
             (name,action) = res
             context.update(rpc.session.context)
-            if action.get('display_help', False):
-                action_id = action.get('id', False)
-                title = action.get('name', '')
-                help_msg =  action.get('help', False)
-                self.display_help(action_id, title, help_msg)
             self._exec_action(action, data, context=context)
             return (name, action)
         return False
 
-    def display_help(self, action_id=False, title='', help=False):
-        if not help:
-            return False
-        if title:
-            title = _(title)
-        common.message(help, title, italic_font=True)
-        value = {'default_user_ids':[(4, rpc.session.uid)]}
-        rpc.session.rpc_exec_auth('/object', 'execute',
-                        'ir.actions.act_window', 'write', action_id, value, rpc.session.context)
-        return True
 main()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

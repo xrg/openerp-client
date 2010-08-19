@@ -22,7 +22,7 @@
 import gtk
 from gtk import glade
 import gobject
-
+import common
 from rpc import RPCProxy
 import rpc
 
@@ -41,6 +41,8 @@ class screen_container(object):
         self.button = None
         self.but_previous = None
         self.but_next = None
+        self.help_frame = False
+        self.help = {}
 
     def widget_get(self):
         return self.vbox
@@ -66,6 +68,10 @@ class screen_container(object):
     def add_filter(self, widget, fnct, clear_fnct, next_fnct, prev_fnct, execute_action=None, add_custom=None, model=None, limit=100):
         self.filter_vbox = gtk.VBox(spacing=1)
         self.filter_vbox.set_border_width(1)
+        if self.help:
+            self.help_frame = common.get_action_help(self.help, self.close_help)
+            if self.help_frame:
+                self.filter_vbox.pack_start(self.help_frame, expand=False, fill=False, padding=3)
         self.filter_vbox.pack_start(widget, expand=True, fill=True)
 
         hb1 = gtk.HButtonBox()
@@ -155,6 +161,18 @@ class screen_container(object):
         hs.show()
         self.filter_vbox.pack_start(hs, expand=True, fill=False)
         self.vbox.pack_start(self.filter_vbox, expand=False, fill=True)
+
+    def close_help(self, *args):
+        if not self.help_frame:
+            return True
+        action_id = self.help.get('action_id', False)
+        if action_id:
+            value = {'default_user_ids':[(4, rpc.session.uid)]}
+            rpc.session.rpc_exec_auth('/object', 'execute',
+                        'ir.actions.act_window', 'write', action_id, value, rpc.session.context)
+            self.help_frame.hide_all()
+            self.help_frame = False
+        return True
 
     def show_filter(self):
         if self.filter_vbox:
