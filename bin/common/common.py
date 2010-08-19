@@ -51,7 +51,7 @@ class WrapLabel(gtk.Label):
         self.__wrap_width = 0
         self.layout = self.get_layout()
         self.layout.set_wrap(pango.WRAP_WORD_CHAR)
-        self.set_alignment(0.0, 0.0)
+        self.set_alignment(0.3, 0.3)
 
     def do_size_request(self, requisition):
         layout = self.get_layout()
@@ -71,7 +71,7 @@ class WrapLabel(gtk.Label):
         if width == 0:
             return
         layout = self.get_layout()
-        layout.set_width(width * pango.SCALE)
+        layout.set_width((width * pango.SCALE)/2)
         if self.__wrap_width != width:
             self.__wrap_width = width
             self.queue_resize()
@@ -83,12 +83,9 @@ def get_action_help(help={}, callback=None):
 
         help_label = WrapLabel()
         help_label.set_line_wrap(True)
+
         help_label.set_use_markup(True)
         help_label.set_label('\n<span font="italic">%s</span>'% (msg))
-
-        table = gtk.Table(1, 8)
-        table.attach(gtk.Label(''), 0, 3, 0, 1)
-        table.attach(help_label, 4, 8, 0, 1)
 
         closebtn = gtk.Button()
         image = gtk.Image()
@@ -111,7 +108,7 @@ def get_action_help(help={}, callback=None):
         help_frame = gtk.Frame()
         help_frame.set_label_widget(box)
         help_frame.set_label_align(0.5,0.5)
-        help_frame.add(table)
+        help_frame.add(help_label)
         help_frame.show_all()
         return help_frame
     return False
