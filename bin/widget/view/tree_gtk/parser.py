@@ -626,7 +626,7 @@ class CellRendererButton(object):
 
     def __get_states(self):
         return [e for e in self.attrs.get('states','').split(',') if e]
-
+   
     def __get_model_state(self, widget, cell_area):
         path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
         if not path:
@@ -665,12 +665,14 @@ class CellRendererButton(object):
         current_state = self.get_textual_value(model, 'draft')
         tv = column.get_tree_view()
         valid_states = self.__get_states() or []
-#         change this according to states or attrs: to not show the icon
+#       change this according to states or attrs: to not show the icon
         attrs_check = self.attrs_set(model)
-        if attrs_check or current_state not in valid_states or isinstance(model, group_record):
+        if valid_states and current_state not in valid_states:
             cell.set_property('stock-id', None)
         else:
             cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+            cell.set_property("sensitive", not attrs_check)
+
 
     def open_remote(self, model, create, changed=False, text=None):
         raise NotImplementedError
