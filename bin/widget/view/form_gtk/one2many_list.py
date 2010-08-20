@@ -345,6 +345,8 @@ class one2many_list(interface.widget_interface):
             else:
                 msg = 'Are you sure to remove those records ?'
             if common.sur(msg):
+                    model = self.screen.current_model
+                    model.signal('record-changed', model.parent)
                     self.screen.remove()
                     self.pager.reset_pager()
                     if not self.screen.models.models:
