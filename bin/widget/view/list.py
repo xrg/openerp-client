@@ -542,9 +542,10 @@ class ViewList(parser_view):
                 if path[1]._type == 'Button':
                     cell_button = path[1].get_cells()[0]
                     # Calling actions
-                    attrs_check = self.attrs_set(m,path[1])
-                    if attrs_check and m['state'].get(m) in path[1].attrs['states'].split(','):
-                        m.get_button_action(self.screen,m.id,path[1].attrs)
+                    attrs_check = self.attrs_set(m, path[1])
+                    states = [e for e in path[1].attrs.get('states','').split(',') if e]
+                    if (attrs_check and not states) or (attrs_check and m['state'].get(m) in states):
+                        m.get_button_action(self.screen, m.id, path[1].attrs)
                         self.screen.current_model = None
                         m.reload()
             else:
