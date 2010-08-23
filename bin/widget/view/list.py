@@ -124,7 +124,7 @@ class list_record(object):
         if gb or isinstance(gb, list) and no_leaf:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
                 self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
-            if not records:
+            if not records and self.parent:
                 self.add_dummny_record(gb[0])
             else:
                 for r in records:
