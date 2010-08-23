@@ -110,6 +110,11 @@ class list_record(object):
         self.lst = []
         self.load()
 
+    def add_dummny_record(self, group_field):
+        record = { group_field:'This group is now empty ! Please refresh the list.'}
+        rec = group_record(record, ctx=self.context, domain=self.domain, mgroup=self.mgroup, child = False)
+        self.add(rec)
+
     def load(self):
         if self.loaded:
             return
@@ -119,29 +124,37 @@ class list_record(object):
         if gb or isinstance(gb, list) and no_leaf:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
                 self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
-            for r in records:
-                child = True
-                __ctx = r.get('__context', {})
-                inner_gb = __ctx.get('group_by', [])
-                if no_leaf and not len(inner_gb):
-                    child = False
-                ctx = {'__domain': r.get('__domain', []),'group_by_no_leaf':no_leaf}
-                ctx.update(__ctx)
-                rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child)
-                for field in gb:
-                    if not rec.value.get(field, False):
-                        if field in inner_gb:continue
-                        rec.value[field] = 'Undefined'
-                        rec.field_with_empty_labels.append(field)
-                self.add(rec)
+            if not records:
+                self.add_dummny_record(gb[0])
+            else:
+                for r in records:
+                    child = True
+                    __ctx = r.get('__context', {})
+                    inner_gb = __ctx.get('group_by', [])
+                    if no_leaf and not len(inner_gb):
+                        child = False
+                    ctx = {'__domain': r.get('__domain', []),'group_by_no_leaf':no_leaf}
+                    if not no_leaf:
+                        ctx.update({'__field':gb[-1]})
+                    ctx.update(__ctx)
+                    rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child)
+                    for field in gb:
+                        if not rec.value.get(field, False):
+                            if field in inner_gb:continue
+                            rec.value[field] = 'Undefined'
+                            rec.field_with_empty_labels.append(field)
+                    self.add(rec)
         else:
             if self.context.get('__domain') and not no_leaf:
                 ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'))
-                self.mgroup.load(ids)
-                res= []
-                for id in ids:
-                    res.append(self.mgroup.get_by_id(id))
-                self.add_list(res)
+                if not ids:
+                     self.add_dummny_record(self.context['__field'])
+                else:
+                    self.mgroup.load(ids)
+                    res= []
+                    for id in ids:
+                        res.append(self.mgroup.get_by_id(id))
+                    self.add_list(res)
             else:
                 if not no_leaf:
                     self.lst = self.mgroup.models
