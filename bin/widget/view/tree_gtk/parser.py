@@ -167,17 +167,17 @@ class parser_tree(interface.parser_interface):
                 col.set_cell_data_func(renderer, cell.setter)
                 col.set_clickable(True)
                 twidth = {
-                    'integer': (60,170),
-                    'float': (80,300),
+                    'integer': (60, 170),
+                    'float': (80, 300),
                     'float_time': (80,150),
-                    'date': (70,100),
-                    'datetime': (145,145),
-                    'selection': (90,250),
-                    'char': (100,False),
-                    'one2many': (50,False),
-                    'many2many': (50,False),
-                    'boolean': (20,80),
-                    'progressbar':(150,200)
+                    'date': (70, False),
+                    'datetime': (145, 145),
+                    'selection': (90, 250),
+                    'char': (100, False),
+                    'one2many': (50, False),
+                    'many2many': (50, False),
+                    'boolean': (20, 80),
+                    'progressbar':(150, 200)
                 }
 
                 if col._type not in twidth:
@@ -626,7 +626,7 @@ class CellRendererButton(object):
 
     def __get_states(self):
         return [e for e in self.attrs.get('states','').split(',') if e]
-   
+
     def __get_model_state(self, widget, cell_area):
         path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
         if not path:
