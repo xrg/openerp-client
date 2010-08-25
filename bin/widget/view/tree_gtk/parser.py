@@ -274,11 +274,13 @@ class Char(object):
         self.attrs_set(model, cell)
         color = self.get_color(model)
         cell.set_property('foreground', str(color))
+        align = 0
         if self.attrs['type'] in ('float', 'integer', 'boolean'):
             align = 1
-        else:
-            align = 0
         gb = self.treeview.screen.context.get('group_by', False)
+        cell.set_property('font-desc', None)
+        cell.set_property('background', None)
+        cell.set_property('xalign', align)
         if isinstance(model, group_record) and gb:
             font = pango.FontDescription('Times New Roman bold 10')
             if self.field_name in model.field_with_empty_labels:
@@ -289,19 +291,15 @@ class Char(object):
             field = model[self.field_name]
             cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
             self.set_color(cell, model)
-        else:
-            cell.set_property('background', None)
-            cell.set_property('font-desc', None)
-        cell.set_property('xalign', align)
 
     def set_color(self, cell, model,group_by = False):
         field = model[self.field_name]
+        cell.set_property('background', None)
         if not field.get_state_attrs(model).get('valid', True):
             cell.set_property('background', common.colors.get('invalid', 'white'))
         elif bool(int(field.get_state_attrs(model).get('required', 0))):
             cell.set_property('background', common.colors.get('required', 'white'))
-        else:
-            cell.set_property('background', None)
+
 
     def get_color(self, model):
         to_display = ''
