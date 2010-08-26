@@ -545,11 +545,14 @@ def ask(question, parent=None):
 
     response = win.run()
     parent.present()
+    # grab a safe copy of the entered text before destroy()
+    #to avoid GTK bug https://bugzilla.gnome.org/show_bug.cgi?id=613241
+    value = entry.get_text()
     win.destroy()
     if response == gtk.RESPONSE_CANCEL:
         return None
     else:
-        return entry.get_text()
+        return value
 
 def concurrency(resource, id, context, parent=None):
     dia = glade.XML(common.terp_path("openerp.glade"),'dialog_concurrency_exception',gettext.textdomain())
