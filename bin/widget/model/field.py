@@ -387,6 +387,9 @@ class O2MField(CharField):
         return result
 
     def set(self, model, value, test_state=False, modified=False):
+        if value and not isinstance(value[0], int):
+            model = self.set_default(model, value)
+            return
         from widget.model.group import ModelRecordGroup
         mod =  ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model)
         mod.signal_connect(mod, 'model-changed', self._model_changed)
@@ -419,7 +422,7 @@ class O2MField(CharField):
             mod.modified = True
         model.value[self.name].current_model = mod
         #mod.signal('record-changed')
-        return True
+        return model
 
     def get_default(self, model):
         res = map(lambda x: x.get_default(), model.value[self.name].models or [])
