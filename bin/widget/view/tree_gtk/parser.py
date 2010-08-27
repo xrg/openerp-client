@@ -50,11 +50,16 @@ import pango
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
+    editable.set_data('renderer', renderer)
     editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
     if isinstance(editable, gtk.ComboBoxEntry):
         editable.connect('changed', treeview.on_editing_done)
 
 def sort_model(column, screen, treeview):
+    unsaved_model =  [x for x in screen.models if x.id == None or x.modified]
+    if unsaved_model:
+        res =  common.message(_('You have unsaved record(s) !  \n\nPlease Save them before sorting !'))
+        return res
     group_by = screen.context.get('group_by',False)
     screen.current_view.set_drag_and_drop(column.name == 'sequence')
     if screen.sort == column.name:
