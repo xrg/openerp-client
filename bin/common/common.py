@@ -39,8 +39,79 @@ import ConfigParser
 
 import threading
 import time
-
+import pango
 import rpc
+
+class WrapLabel(gtk.Label):
+    __gtype_name__ = 'WrapLabel'
+
+    def __init__(self, str=None):
+        gtk.Label.__init__(self)
+
+        self.__wrap_width = 0
+        self.layout = self.get_layout()
+        self.layout.set_wrap(pango.WRAP_WORD_CHAR)
+        self.set_alignment(0.3, 0.3)
+
+    def do_size_request(self, requisition):
+        layout = self.get_layout()
+        width, height = layout.get_pixel_size()
+        requisition.width = 0
+        requisition.height = height
+
+    def do_size_allocate(self, allocation):
+        gtk.Label.do_size_allocate(self, allocation)
+        self.__set_wrap_width(allocation.width)
+
+    def set_markup(self, str):
+        gtk.Label.set_markup(self, str)
+        self.__set_wrap_width(self.__wrap_width)
+
+    def __set_wrap_width(self, width):
+        if width == 0:
+            return
+        layout = self.get_layout()
+        layout.set_width((width * pango.SCALE)/2)
+        if self.__wrap_width != width:
+            self.__wrap_width = width
+            self.queue_resize()
+
+def get_action_help(help={}, callback=None):
+    if help.get('msg', False):
+        msg = help.get('msg', '')
+        title = help.get('title', '')
+
+        help_label = WrapLabel()
+        help_label.set_line_wrap(True)
+
+        help_label.set_use_markup(True)
+        help_label.set_label('\n<span font="italic">%s</span>'% (msg))
+
+        closebtn = gtk.Button()
+        image = gtk.Image()
+        image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+        w, h = image.size_request()
+        closebtn.set_image(image)
+        closebtn.set_relief(gtk.RELIEF_NONE)
+        closebtn.set_size_request(w + 8, h + 6)
+        closebtn.unset_flags(gtk.CAN_FOCUS)
+        if callback:
+            closebtn.connect('clicked', callback)
+        box = gtk.HBox()
+        box_label = gtk.Label()
+        box_label.set_use_markup(True)
+        box_label.set_label('<b> %s - Tips</b>'%to_xml(title))
+        box.pack_start(box_label, True, True)
+        box.pack_end(closebtn, False, False)
+        box.show_all()
+
+        help_frame = gtk.Frame()
+        help_frame.set_label_widget(box)
+        help_frame.set_label_align(0.5,0.5)
+        help_frame.add(help_label)
+        help_frame.show_all()
+        return help_frame
+    return False
 
 def _search_file(file, dir='path.share'):
     tests = [
@@ -262,14 +333,14 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
             maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
-<b>You do not have a valid Open ERP maintenance contract !</b>
-If you are using Open ERP in production, it is highly suggested to subscribe
+<b>You do not have a valid OpenERP maintenance contract !</b>
+If you are using OpenERP in production, it is highly suggested to subscribe
 a maintenance program.
 
-The Open ERP maintenance contract provides you a bugfix guarantee and an
+The OpenERP maintenance contract provides you a bugfix guarantee and an
 automatic migration system so that we can fix your problems within a few
 hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the Open ERP editor.
+to the quality team of the OpenERP editor.
 
 The maintenance program offers you:
 * Automatic migrations on new versions,
@@ -286,13 +357,13 @@ is displayed on the second tab.
 <b>An unknown error has been reported.</b>
 
 Your maintenance contract does not cover all modules installed in your system !
-If you are using Open ERP in production, it is highly suggested to upgrade your
+If you are using OpenERP in production, it is highly suggested to upgrade your
 contract.
 
 If you have developed your own modules or installed third party module, we
 can provide you an additional maintenance contract for these modules. After
 having reviewed your modules, our quality team will ensure they will migrate
-automatically for all future stable versions of Open ERP at no extra cost.
+automatically for all future stable versions of OpenERP at no extra cost.
 
 Here is the list of modules not covered by your maintenance contract:
 %s
@@ -305,14 +376,14 @@ is displayed on the second tab.""") % (", ".join(maintenance['uncovered_modules'
         maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
-<b>You do not have a valid Open ERP maintenance contract !</b>
-If you are using Open ERP in production, it is highly suggested to subscribe
+<b>You do not have a valid OpenERP maintenance contract !</b>
+If you are using OpenERP in production, it is highly suggested to subscribe
 a maintenance program.
 
-The Open ERP maintenance contract provides you a bugfix guarantee and an
+The OpenERP maintenance contract provides you a bugfix guarantee and an
 automatic migration system so that we can fix your problems within a few
 hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the Open ERP editor.
+to the quality team of the OpenERP editor.
 
 The maintenance program offers you:
 * Automatic migrations on new versions,
@@ -331,7 +402,7 @@ is displayed on the second tab.
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
     win.set_icon(OPENERP_ICON)
-    win.set_title("Open ERP - %s" % title)
+    win.set_title("OpenERP - %s" % title)
 
     xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % escape(message))
 
@@ -370,7 +441,7 @@ is displayed on the second tab.
     win.destroy()
     return True
 
-def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None, italic_font=False):
+def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     dialog = gtk.MessageDialog(parent,
@@ -378,10 +449,7 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None, italic_font=Fal
       type, gtk.BUTTONS_OK)
     msg = to_xml(msg)
     if title is not None:
-        if italic_font:
-            msg = '<span foreground="red"><b>%s</b></span>\n\n\n<span font="italic">%s</span>' % (to_xml(title), msg)
-        else:
-            msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
+        msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
     dialog.set_icon(OPENERP_ICON)
     dialog.set_markup(msg)
     dialog.show_all()
@@ -477,11 +545,14 @@ def ask(question, parent=None):
 
     response = win.run()
     parent.present()
+    # grab a safe copy of the entered text before destroy()
+    #to avoid GTK bug https://bugzilla.gnome.org/show_bug.cgi?id=613241
+    value = entry.get_text()
     win.destroy()
     if response == gtk.RESPONSE_CANCEL:
         return None
     else:
-        return entry.get_text()
+        return value
 
 def concurrency(resource, id, context, parent=None):
     dia = glade.XML(common.terp_path("openerp.glade"),'dialog_concurrency_exception',gettext.textdomain())

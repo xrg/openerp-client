@@ -170,6 +170,7 @@ class DatabaseDialog(gtk.Dialog):
                     win.set_title(_('OpenERP Computing'))
                     win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
                     win.set_modal(True)
+                    win.set_resizable(False)
                     vbox = gtk.VBox(False, 0)
                     hbox = gtk.HBox(False, 13)
                     hbox.set_border_width(10)
@@ -505,6 +506,7 @@ class db_login(object):
             parent = service.LocalService('gui.main').window
         win.set_transient_for(parent)
         win.set_icon(common.OPENERP_ICON)
+        win.set_resizable(False)
         win.show_all()
         img = self.win_gl.get_widget('image_tinyerp')
         img.set_from_file(common.terp_path_pixmaps('openerp.png'))
@@ -659,6 +661,7 @@ class db_create(object):
                 win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
                 win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
                 win.set_title(_('OpenERP Database Installation'))
+                win.set_resizable(False)
                 vbox = gtk.VBox(False, 0)
                 hbox = gtk.HBox(False, 13)
                 hbox.set_border_width(10)
@@ -801,6 +804,7 @@ class terp_main(service.Service):
             'on_opt_form_tab_bottom_activate': lambda x: self.sig_form_tab('bottom'),
             'on_opt_form_tab_orientation_horizontal_activate': lambda x: self.sig_form_tab_orientation(0),
             'on_opt_form_tab_orientation_vertical_activate': lambda x: self.sig_form_tab_orientation(90),
+            'on_opt_debug_mode_activate':self.sig_debug_mode_tooltip,
             'on_help_index_activate': self.sig_help_index,
             'on_help_contextual_activate': self.sig_help_context,
             'on_help_licence_activate': self.sig_licence,
@@ -889,6 +893,7 @@ class terp_main(service.Service):
         self.sig_form_tab(options.options['client.form_tab'] or 'left')
         self.glade.get_widget('opt_form_tab_orientation_'+(str(options.options['client.form_tab_orientation']) or '0')).set_active(True)
         self.sig_form_tab_orientation(options.options['client.form_tab_orientation'] or 0)
+        self.sig_debug_mode_tooltip()
         for signal in dict:
             self.glade.signal_connect(signal, dict[signal][0], dict[signal][1])
             self.glade.get_widget(dict[signal][2]).set_active(int(bool(options.options[dict[signal][1]])))
@@ -972,10 +977,14 @@ class terp_main(service.Service):
         return True
 
     def sig_win_close(self, *args):
-        page_num = None
         if len(args) >= 2:
-            page_num = self.notebook.page_num(args[1])
-        self._sig_child_call(args[0], 'but_close', page_num)
+            button = args[1].button
+            if (isinstance(args[0], gtk.Button) and button in [1,2]) \
+                    or (isinstance(args[0], gtk.EventBox) and button == 2):
+                page_num = self.notebook.page_num(args[2])
+                self._sig_child_call(args[0], 'but_close', page_num)
+        elif len(args) and isinstance(args[0], gtk.ImageMenuItem):
+            self._sig_child_call(args[0], 'but_close', None)
 
     def sig_request_new(self, args=None):
         obj = service.LocalService('gui.window')
@@ -1125,6 +1134,16 @@ class terp_main(service.Service):
         rpc.session.logout()
         return True
 
+    def sig_debug_mode_tooltip(self, widget=None):
+        if widget:
+            options.options['debug_mode_tooltips'] = widget.get_active()
+        else:
+            mode = options.options['logging.level']
+            if mode in ('debug', 'debug_rpc','debug_rpc_answer'):
+                options.options['debug_mode_tooltips'] = True
+                self.glade.get_widget('opt_debug_mode_tooltip').set_active(True)
+
+
     def sig_help_index(self, widget):
         tools.launch_browser(options.options['help.index'])
 
@@ -1246,8 +1265,11 @@ class terp_main(service.Service):
         closebtn.unset_flags(gtk.CAN_FOCUS)
 
         box_label = gtk.Label(win.name)
-
-        box.pack_start(box_label, True, True)
+        event_box = gtk.EventBox()
+        event_box.add(box_label)
+        event_box.set_visible_window(False)
+        event_box.set_events(gtk.gdk.BUTTON_PRESS_MASK)
+        box.pack_start(event_box, True, True)
         box.pack_end(closebtn, False, False)
 
         self.notebook.append_page(win.widget, box)
@@ -1255,7 +1277,8 @@ class terp_main(service.Service):
             # since pygtk 2.10
             self.notebook.set_tab_reorderable(win.widget, True)
 
-        closebtn.connect("clicked", self.sig_win_close, win.widget)
+        event_box.connect("button_press_event", self.sig_win_close, win.widget)
+        closebtn.connect("button-press-event", self.sig_win_close, win.widget)
         pagenum = self.notebook.page_num(win.widget)
         pagenum = self.notebook.page_num(image)
 
@@ -1302,7 +1325,10 @@ class terp_main(service.Service):
             view = self._wid_get()
         if view and hasattr(view, 'screen'):
             self._handler_ok = False
-            self.glade.get_widget('radio_'+view.screen.current_view.view_type).set_active(True)
+            type = view.screen.current_view.view_type
+            if type == 'dummycalendar':
+                type = 'calendar'
+            self.glade.get_widget('radio_'+type).set_active(True)
             self._handler_ok = True
         self._update_attachment_button(view)
         for x in self.buttons:

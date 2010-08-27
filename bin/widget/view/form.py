@@ -77,7 +77,7 @@ class ViewWidget(object):
     modelfield = property(_get_modelfield)
 
 class ViewForm(parser_view):
-    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None, submenu=None):
+    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None, submenu=None, help={}):
         super(ViewForm, self).__init__(window, screen, widget, children, state_aware_widgets, toolbar, submenu)
         self.view_type = 'form'
         self.model_add_new = False
@@ -88,8 +88,17 @@ class ViewForm(parser_view):
             if isinstance(w.widget, Button):
                 w.widget.form = self
         self.widgets = dict([(name, ViewWidget(self, widget, name)) for name, widget in children.items()])
-
         sm_vbox = False
+        self.help = help
+        self.help_frame = False
+        if self.help:
+            self.help_frame = common.get_action_help(self.help, self.close_help)
+            if self.help_frame:
+                vbox = gtk.VBox()
+                vbox.pack_start(self.help_frame, expand=False, fill=False, padding=2)
+                vbox.pack_end(self.widget)
+                vbox.show_all()
+                self.widget = vbox
         if submenu:
             expander = gtk.Expander("Submenus")
             sm_vbox = gtk.VBox()
@@ -339,6 +348,17 @@ class ViewForm(parser_view):
 
                     sep = True
 
+    def close_help(self, *args):
+        if not self.help_frame:
+            return True
+        action_id = self.help.get('action_id', False)
+        if action_id:
+            value = {'default_user_ids':[(4, rpc.session.uid)]}
+            rpc.session.rpc_exec_auth('/object', 'execute',
+                        'ir.actions.act_window', 'write', action_id, value, rpc.session.context)
+            self.help_frame.hide_all()
+            self.help_frame = False
+        return True
 #    def move_paned_press(self, widget, event):
 #        if not self.prev:
 #            self.prev = self.hpaned.get_position()

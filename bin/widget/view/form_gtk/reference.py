@@ -58,7 +58,7 @@ class reference(interface.widget_interface):
         self.wid_text = gtk.Entry()
         self.wid_text.set_property('width-chars', 13)
         self.wid_text.connect('key_press_event', self.sig_key_press)
-        self.wid_text.connect('button_press_event', self._menu_open)
+        self.wid_text.connect('populate-popup', self._menu_open)
         self.wid_text.connect_after('changed', self.sig_changed)
         self.wid_text.connect_after('activate', self.sig_activate)
         self.wid_text_focus_out_id = self.wid_text.connect_after(
@@ -260,7 +260,7 @@ class reference(interface.widget_interface):
             self.last_key[1] += 1
         else:
             self.last_key = [ key, 1 ]
-        if not self.key_catalog.has_key(key):
+        if not key in self.key_catalog:
             return
         self.entry.set_active_iter(self.key_catalog[key][self.last_key[1] \
                 % len(self.key_catalog[key])])

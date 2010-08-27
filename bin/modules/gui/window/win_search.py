@@ -21,6 +21,7 @@
 
 import gtk
 from gtk import glade
+from copy import deepcopy
 import gobject
 import gettext
 import common
@@ -106,7 +107,6 @@ class dialog(object):
 class win_search(object):
     def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None):
         self.model = model
-        self.first = True
         self.domain =domain
         self.context = context
         self.context.update(rpc.session.context)
@@ -184,6 +184,7 @@ class win_search(object):
         view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'search', self.context)
         hda = (self, self.find)
         self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win, col=5, call= hda)
+        self.screen.filter_widget = self.form
 
         self.title = _('OpenERP Search: %s') % self.form.name
         self.title_results = _('OpenERP Search: %s (%%d result(s))') % (self.form.name.replace('%',''),)
@@ -195,10 +196,9 @@ class win_search(object):
         self.ids = ids
         if self.ids:
             self.reload()
-        self.old_search = None
+        self.old_search = {}
         self.old_offset = self.old_limit = None
         if self.ids:
-            self.old_search = []
             self.old_limit = self.get_limit()
             self.old_offset = self.offset
 
@@ -220,36 +220,39 @@ class win_search(object):
     def find(self, widget=None, *args):
         limit = self.get_limit()
         offset = self.offset
-        if (self.old_search == self.form.value.get('domain',[])) and (self.old_limit==limit) and (self.old_offset==offset) and not self.first and widget:
-            self.win.response(gtk.RESPONSE_OK)
+        if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset):
             return False
-        self.first = False
         self.old_offset = offset
         self.old_limit = limit
         v = self.form.value.get('domain',[])
         v += self.domain
-        try:
-            self.ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, self.context)
-        except:
-            # Try if it is not an old server
-            self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
+        self.old_search = deepcopy(self.form.value)
+        group_context = self.form.value.get('context')
+        self.context.update(group_context)
+        if self.context.get('group_by',False):
+            self.screen.search_filter()
+        else:
+            try:
+                self.ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, self.context)
+            except:
+                # Try if it is not an old server
+                self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
 
-        self.reload()
-        self.old_search = self.form.value.get('domain',[])
-        self.win.set_title(self.title_results % len(self.ids))
-        if len(self.ids) < limit:
-            self.search_count = len(self.ids)
-        else:
-            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search_count', [], self.context)
-        if offset<=0:
-            self.but_previous.set_sensitive(False)
-        else:
-            self.but_previous.set_sensitive(True)
-        if not limit or offset+limit >= self.search_count:
-            self.but_next.set_sensitive(False)
-        else:
-            self.but_next.set_sensitive(True)
-        return True
+            self.reload()
+            self.win.set_title(self.title_results % len(self.ids))
+            if len(self.ids) < limit:
+                self.search_count = len(self.ids)
+            else:
+                self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search_count', [], self.context)
+            if offset<=0:
+                self.but_previous.set_sensitive(False)
+            else:
+                self.but_previous.set_sensitive(True)
+            if not limit or offset+limit >= self.search_count:
+                self.but_next.set_sensitive(False)
+            else:
+                self.but_next.set_sensitive(True)
+            return True
 
     def reload(self):
         self.screen.clear()
@@ -282,15 +285,14 @@ class win_search(object):
             self.but_next.set_sensitive(False)
         else:
             self.but_next.set_sensitive(True)
+
         while not end:
             button = self.win.run()
             if button == gtk.RESPONSE_OK:
                 res = self.sel_ids_get() or self.ids
                 end = True
             elif button== gtk.RESPONSE_APPLY:
-                end = not self.find()
-                if end:
-                    res = self.sel_ids_get() or self.ids
+                self.find()
             else:
                 res = None
                 end = True

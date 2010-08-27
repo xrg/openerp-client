@@ -76,8 +76,8 @@ Examples:
 """
 
     parser = optparse.OptionParser(uses)
-    parser.add_option("-l", "--login", dest="login", help="Login of the user in Open ERP")
-    parser.add_option("-p", "--password", dest="password", help="Password of the user in Open ERP")
+    parser.add_option("-l", "--login", dest="login", help="Login of the user in OpenERP")
+    parser.add_option("-p", "--password", dest="password", help="Password of the user in OpenERP")
     parser.add_option("-d", "--database", dest="dbname", help="Database name")
     parser.add_option("-P", "--port", dest="port", help="Port",default=8069)
     parser.add_option("-H", "--host", dest="host", help="Host",default='localhost')

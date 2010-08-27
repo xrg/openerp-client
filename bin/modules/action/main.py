@@ -85,6 +85,8 @@ class main(service.Service):
         if isinstance(action, bool) or 'type' not in action:
             return
         # Updating the context : Adding the context of action in order to use it on Views called from buttons
+        if datas.get('id',False):
+            context.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[]), 'active_model': datas.get('model',False)})
         context.update(tools.expr_eval(action.get('context','{}'), context.copy()))
         if action['type'] in ['ir.actions.act_window', 'ir.actions.submenu']:
             for key in ('res_id', 'res_model', 'view_type', 'view_mode',
@@ -112,20 +114,19 @@ class main(service.Service):
 
             if not action.get('domain', False):
                 action['domain']='[]'
-            ctx = context.copy()
-            if datas.get('id',False):
-                ctx.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[]), 'active_model': datas.get('model',False)})
-            ctx.update(tools.expr_eval(action.get('context','{}'), ctx.copy()))
-
-            a = ctx.copy()
-            a['time'] = time
-            a['datetime'] = datetime
-            domain = tools.expr_eval(action['domain'], a)
-
+            domain_ctx = context.copy()
+            domain_ctx['time'] = time
+            domain_ctx['datetime'] = datetime
+            domain = tools.expr_eval(action['domain'], domain_ctx)
+            help = {}
+            if action.get('display_help', False):
+                help['action_id'] = action.get('id', False)
+                help['msg'] =  action.get('help', False)
+                help['title'] = action.get('name', False)
             if datas.get('domain', False):
                 domain.append(datas['domain'])
             if action.get('target', False)=='new':
-                dia = dialog(datas['res_model'], id=datas.get('res_id',None), window=datas.get('window',None), domain=domain, context=ctx, view_ids=view_ids,target=True, view_type=datas.get('view_mode', 'tree').split(','))
+                dia = dialog(datas['res_model'], id=datas.get('res_id',None), window=datas.get('window',None), domain=domain, context=context, view_ids=view_ids,target=True, view_type=datas.get('view_mode', 'tree').split(','))
                 if dia.dia.get_has_separator():
                     dia.dia.set_has_separator(False)
                 dia.run()
@@ -133,14 +134,12 @@ class main(service.Service):
             else:
                 obj = service.LocalService('gui.window')
                 obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
-                        action['view_type'], datas.get('window',None), ctx,
-                        datas['view_mode'], name=action.get('name', False),
+                        action['view_type'], datas.get('window',None), context,
+                        datas['view_mode'], name=action.get('name', False), help=help,
                         limit=datas['limit'], auto_refresh=datas['auto_refresh'], auto_search = datas['auto_search'], search_view = datas['search_view'])
 
         elif action['type']=='ir.actions.server':
-            ctx = context.copy()
-            ctx.update({'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])})
-            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.server', 'run', [action['id']], ctx)
+            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.server', 'run', [action['id']], context)
             if res:
                 if not isinstance(res, list):
                     res = [res]
@@ -192,25 +191,10 @@ class main(service.Service):
         if res:
             (name,action) = res
             context.update(rpc.session.context)
-            if action.get('display_help', False):
-                action_id = action.get('id', False)
-                title = action.get('name', '')
-                help_msg =  action.get('help', False)
-                self.display_help(action_id, title, help_msg)
             self._exec_action(action, data, context=context)
             return (name, action)
         return False
 
-    def display_help(self, action_id=False, title='', help=False):
-        if not help:
-            return False
-        if title:
-            title = _(title)
-        common.message(help, title, italic_font=True)
-        value = {'default_user_ids':[(4, rpc.session.uid)]}
-        rpc.session.rpc_exec_auth('/object', 'execute',
-                        'ir.actions.act_window', 'write', action_id, value, rpc.session.context)
-        return True
 main()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

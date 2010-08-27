@@ -18,9 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-import xml.dom.minidom
-
+from lxml import etree
 from rpc import RPCProxy
 import rpc
 import gettext
@@ -45,7 +43,7 @@ import copy
 
 class Screen(signal_event.signal_event):
 
-    def __init__(self, model_name, view_ids=None, view_type=None,
+    def __init__(self, model_name, view_ids=None, view_type=None,help={},
             parent=None, context=None, views_preload=None, tree_saves=True,
             domain=None, create_new=False, row_activate=None, hastoolbar=False,
             hassubmenu=False,default_get=None, show_search=False, window=None,
@@ -64,7 +62,6 @@ class Screen(signal_event.signal_event):
             search_view = "{}"
 
         super(Screen, self).__init__()
-
         self.show_search = show_search
         self.auto_search = auto_search
         self.search_count = 0
@@ -73,6 +70,7 @@ class Screen(signal_event.signal_event):
         self.default_get=default_get
         self.sort = False
         self.type = None
+        self.dummy_cal = False
         if not row_activate:
             self.row_activate = lambda self,screen=None: self.switch_view(screen, 'form')
         else:
@@ -112,12 +110,16 @@ class Screen(signal_event.signal_event):
         self.view_fields = {} # Used to switch self.fields when the view switchs
         self.sort_domain = []
         self.old_ctx = {}
+        self.help_mode = False
         if view_type:
             self.view_to_load = view_type[1:]
             view_id = False
             if view_ids:
                 view_id = view_ids.pop(0)
-            view = self.add_view_id(view_id, view_type[0])
+            if view_type[0] in ('tree','graph','calendar'):
+                self.screen_container.help = help
+                self.help_mode = view_type[0]
+            view = self.add_view_id(view_id, view_type[0], help=help)
             self.screen_container.set(view.widget)
         self.display()
 
@@ -158,6 +160,7 @@ class Screen(signal_event.signal_event):
             self.screen_container.show_filter()
         else:
             self.screen_container.hide_filter()
+
 
     def update_scroll(self, *args):
         offset=self.offset
@@ -234,7 +237,7 @@ class Screen(signal_event.signal_event):
             self.domain += val.get('domain',[]) + self.sort_domain
         else:
             self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
-            
+
         v = self.domain
         limit=self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
@@ -290,7 +293,7 @@ class Screen(signal_event.signal_event):
         # 'mf' Section manages Filters
         def clear_domain_ctx():
             for key in self.old_ctx.keys():
-                if self.context_init.has_key(key):
+                if key in self.context_init:
                     del self.context_init[key]
             for domain in self.latest_search:
                 if domain in self.domain_init:
@@ -304,8 +307,12 @@ class Screen(signal_event.signal_event):
                  'type':'ir.actions.act_window',
                  'view_type':'form',
                  'view_mode':'tree,form',
-                 'domain':'[(\'model_id\',\'=\',\''+self.name+'\'),(\'user_id\',\'=\',(\''+str(rpc.session.uid)+'\',))]'}
-            value = obj._exec_action(act, {}, self.context)
+                 'domain':'[(\'model_id\',\'=\',\''+self.name+'\'),(\'user_id\',\'=\','+str(rpc.session.uid)+')]'}
+            ctx = self.context.copy()
+            for key in ('group_by','group_by_no_leaf'):
+                if key in ctx:
+                    del ctx[key]
+            value = obj._exec_action(act, {}, ctx)
 
         if flag in ['blk','mf']:
             clear_domain_ctx()
@@ -324,11 +331,12 @@ class Screen(signal_event.signal_event):
                 lbl.set_text('Enter Shortcut Name:')
             win.show_all()
             response = win.run()
+            # grab a safe copy of the entered text before destroy() to avoid GTK bug https://bugzilla.gnome.org/show_bug.cgi?id=613241
+            action_name = widget.get_text()
             win.destroy()
             combo.set_active(0)
-            if response == gtk.RESPONSE_OK and widget.get_text():
-                action_name = widget.get_text()
-                values={'name':action_name,
+            if response == gtk.RESPONSE_OK and action_name:
+                values = {'name':action_name,
                        'model_id':self.name,
                        'domain':str(self.filter_widget and self.filter_widget.value.get('domain',[])),
                        'context':str(self.filter_widget and self.filter_widget.value.get('context',{})),
@@ -428,6 +436,8 @@ class Screen(signal_event.signal_event):
     def switch_view(self, screen=None, mode=False):
         if isinstance(self.current_model, group_record) and mode != 'graph':
           return
+        if mode == 'calendar' and self.dummy_cal:
+            mode = 'dummycalendar'
         self.current_view.set_value()
         self.fields = {}
         if self.current_model and self.current_model not in self.models.models:
@@ -488,48 +498,47 @@ class Screen(signal_event.signal_event):
     def add_view_custom(self, arch, fields, display=False, toolbar={}, submenu={}):
         return self.add_view(arch, fields, display, True, toolbar=toolbar, submenu=submenu)
 
-    def add_view_id(self, view_id, view_type, display=False, context=None):
+    def add_view_id(self, view_id, view_type, display=False, help={}, context=None):
         if context is None:
             context = {}
         if view_type in self.views_preload:
             return self.add_view(self.views_preload[view_type]['arch'],
                     self.views_preload[view_type]['fields'], display,
                     toolbar=self.views_preload[view_type].get('toolbar', False),
-                    submenu=self.views_preload[view_type].get('submenu', False),
+                    submenu=self.views_preload[view_type].get('submenu', False), help=help,
                     context=context)
         else:
             view = self.rpc.fields_view_get(view_id, view_type, self.context,
                         self.hastoolbar, self.hassubmenu)
             context.update({'view_type' : view_type})
-            return self.add_view(view['arch'], view['fields'], display,
+            return self.add_view(view['arch'], view['fields'], display, help=help,
                     toolbar=view.get('toolbar', False), submenu=view.get('submenu', False), context=context)
 
-    def add_view(self, arch, fields, display=False, custom=False, toolbar=None, submenu=None,
+    def add_view(self, arch, fields, display=False, custom=False, toolbar=None, submenu=None, help={},
             context=None):
         if toolbar is None:
             toolbar = {}
         if submenu is None:
             submenu = {}
         def _parse_fields(node, fields):
-            if node.nodeType == node.ELEMENT_NODE:
-                if node.localName=='field':
-                    attrs = tools.node_attributes(node)
-                    if attrs.get('widget', False):
-                        if attrs['widget']=='one2many_list':
-                            attrs['widget']='one2many'
-                        attrs['type'] = attrs['widget']
-                    if attrs.get('selection',[]):
-                        attrs['selection'] = eval(attrs['selection'])
-                        for att_key, att_val in attrs['selection'].items():
-                            for sel in fields[str(attrs['name'])]['selection']:
-                                if att_key == sel[0]:
-                                    sel[1] = att_val
-                        attrs['selection'] = fields[str(attrs['name'])]['selection']
-                    fields[unicode(attrs['name'])].update(attrs)
-            for node2 in node.childNodes:
+            if node.tag =='field':
+                attrs = tools.node_attributes(node)
+                if attrs.get('widget', False):
+                    if attrs['widget']=='one2many_list':
+                        attrs['widget']='one2many'
+                    attrs['type'] = attrs['widget']
+                if attrs.get('selection',[]):
+                    attrs['selection'] = eval(attrs['selection'])
+                    for att_key, att_val in attrs['selection'].items():
+                        for sel in fields[str(attrs['name'])]['selection']:
+                            if att_key == sel[0]:
+                                sel[1] = att_val
+                    attrs['selection'] = fields[str(attrs['name'])]['selection']
+                fields[unicode(attrs['name'])].update(attrs)
+            for node2 in node:
                 _parse_fields(node2, fields)
-        dom = xml.dom.minidom.parseString(arch)
-        _parse_fields(dom, fields)
+        root_node = etree.XML(arch)
+        _parse_fields(root_node, fields)
 
         from widget.view.widget_parse import widget_parse
         models = self.models.models
@@ -544,8 +553,7 @@ class Screen(signal_event.signal_event):
         self.fields = self.models.fields
 
         parser = widget_parse(parent=self.parent, window=self.window)
-        dom = xml.dom.minidom.parseString(arch)
-        view = parser.parse(self, dom, self.fields, toolbar=toolbar, submenu=submenu)
+        view = parser.parse(self, root_node, self.fields, toolbar=toolbar, submenu=submenu, help=help)
         if view:
             self.views.append(view)
 
@@ -725,6 +733,11 @@ class Screen(signal_event.signal_event):
             self.current_view.display()
             self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
             vt = self.current_view.view_type
+            if self.screen_container.help_frame:
+                if vt != self.help_mode:
+                    self.screen_container.help_frame.hide_all()
+                else:
+                    self.screen_container.help_frame.show_all()
             self.search_active(
                     active=self.show_search and vt in ('tree', 'graph', 'calendar'),
                     show_search=self.show_search and vt in ('tree', 'graph','calendar'),

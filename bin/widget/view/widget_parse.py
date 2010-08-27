@@ -21,7 +21,7 @@
 
 
 import interface
-import xml.dom.minidom
+from lxml import etree
 
 import form_gtk
 import tree_gtk
@@ -47,18 +47,18 @@ parsers = {
 }
 
 class widget_parse(interface.parser_interface):
-    def parse(self, screen, root_node, fields, toolbar={}, submenu={}):
-        for node in root_node.childNodes:
-            if not node.nodeType == node.ELEMENT_NODE:
-                continue
-            if node.localName not in parsers:
-                raise Exception(_("This type (%s) is not supported by the GTK client !") % node.localName)
-            widget_parser, view_parser = parsers[node.localName]
+    def parse(self, screen, node, fields, toolbar={}, submenu={}, help={}):
+        if node is not None:
+            if node.tag not in parsers:
+                raise Exception(_("This type (%s) is not supported by the GTK client !") % node.tag)
+            widget_parser, view_parser = parsers[node.tag]
             # Select the parser for the view (form, tree, graph, calendar or gantt)
             widget = widget_parser(self.window, self.parent, self.attrs, screen)
             wid, child, buttons, on_write = widget.parse(screen.resource, node, fields)
+            if isinstance(wid, calendar_gtk.EmptyCalendar):
+                view_parser = calendar_gtk.DummyViewCalendar
             screen.set_on_write(on_write)
-            res = view_parser(self.window, screen, wid, child, buttons, toolbar, submenu)
+            res = view_parser(self.window, screen, wid, child, buttons, toolbar, submenu, help=help)
             res.title = widget.title
             return res
         raise Exception(_("No valid view found for this object!"))

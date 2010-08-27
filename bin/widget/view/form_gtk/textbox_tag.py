@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -148,32 +148,32 @@ class textbox_tag(interface.widget_interface):
         is_set = {}
         for tag in tags:
             for key, value in self.tagdict[tag].items():
-                if key == 'font_desc' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
+                if key == 'font_desc' and tag.get_priority() > (key in is_set and is_set[key]) or 0:
 #                   self.sizeButton.set_value(int(value[-2:]))
 #                   is_set[key] = tag.get_priority()
                     pass
-                elif key == 'foreground' and  tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
+                elif key == 'foreground' and  tag.get_priority() > (key in is_set and is_set[key]) or 0:
 #                   self.colorButton.set_color(gtk.gdk.color_parse(value))
 #                   is_set[key] = tag.get_priority()
 #                   color_priority = tag.get_priority()
                     pass
-                elif key == 'weight' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
+                elif key == 'weight' and tag.get_priority() > (key in is_set and is_set[key]) or 0:
                     self.boldButton.set_active(True)
                     is_set[key] = tag.get_priority()
-                elif key == 'style' and value == 'italic' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
+                elif key == 'style' and value == 'italic' and tag.get_priority() > (key in is_set and is_set[key]) or 0:
                     self.italicButton.set_active(True)
                     is_set[key] = tag.get_priority()
-                elif key == 'underline' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
+                elif key == 'underline' and tag.get_priority() > (key in is_set and is_set[key]) or 0:
                     self.underlineButton.set_active(True)
                     is_set[key] = tag.get_priority()
-                elif key == 'strikethrough' and tag.get_priority() > (is_set.has_key(key) and is_set[key]) or 0:
+                elif key == 'strikethrough' and tag.get_priority() > (key in is_set and is_set[key]) or 0:
                     self.strikethroughButton.set_active(True)
                     is_set[key] = tag.get_priority()
         #if no color defined, set to defalt (black)
-        if not is_set.has_key('foreground'):
+        if not 'foreground' in is_set:
 #           self.colorButton.set_color(gtk.gdk.color_parse('#000000'))
             pass
-        if not is_set.has_key('font_desc'):
+        if not 'font_desc' in is_set:
 #           self.sizeButton.set_value(10)
             pass
 
@@ -196,15 +196,15 @@ class textbox_tag(interface.widget_interface):
             if fontattrs:
                 attrs.extend(fontattrs)
             if fontdesc and fontdesc!='Normal':
-                if not self.tags.has_key(font1.to_string()):
+                if not font1.to_string() in self.tags:
                     tag=self.buf.create_tag()
                     tag.set_property('font-desc',font1)
-                    if not self.tagdict.has_key(tag): self.tagdict[tag]={}
+                    if not tag in self.tagdict: self.tagdict[tag]={}
                     self.tagdict[tag]['face']=str(font.get_family())
                     self.tags[font1.to_string()]=tag
                 tags.append(self.tags[font1.to_string()])
         if lang:
-            if not self.tags.has_key(lang):
+            if not lang in self.tags:
                 tag = self.buf.create_tag()
                 tag.set_property('language',lang)
                 self.tags[lang]=tag
@@ -215,7 +215,7 @@ class textbox_tag(interface.widget_interface):
                 if a.type == pango.ATTR_FOREGROUND:
                     gdkcolor = self.pango_color_to_gdk(a.color)
                     key = 'foreground%s'%self.color_to_hex(gdkcolor)
-                    if not self.tags.has_key(key):
+                    if not key in self.tags:
                         self.tags[key]=self.buf.create_tag()
                         self.tags[key].set_property('foreground-gdk',gdkcolor)
                         self.tagdict[self.tags[key]]={}
@@ -225,22 +225,22 @@ class textbox_tag(interface.widget_interface):
                     gdkcolor = self.pango_color_to_gdk(a.color)
                     tag.set_property('background-gdk',gdkcolor)
                     key = 'background%s'%self.color_to_hex(gdkcolor)
-                    if not self.tags.has_key(key):
+                    if not key in self.tags:
                         self.tags[key]=self.buf.create_tag()
                         self.tags[key].set_property('background-gdk',gdkcolor)
                         self.tagdict[self.tags[key]]={}
                         self.tagdict[self.tags[key]]['background']="#%s"%self.color_to_hex(gdkcolor)
                     tags.append(self.tags[key])
-                if self.pango_translation_properties.has_key(a.type):
+                if a.type in self.pango_translation_properties:
                     prop=self.pango_translation_properties[a.type]
                     val=getattr(a,'value')
                     #tag.set_property(prop,val)
                     mval = val
-                    if self.attval_to_markup.has_key(prop):
-                        if self.attval_to_markup[prop].has_key(val):
+                    if prop in self.attval_to_markup:
+                        if val in self.attval_to_markup[prop]:
                             mval = self.attval_to_markup[prop][val]
                     key="%s%s"%(prop,val)
-                    if not self.tags.has_key(key):
+                    if not key in self.tags:
                         self.tags[key]=self.buf.create_tag()
                         self.tags[key].set_property(prop,val)
                         self.tagdict[self.tags[key]]={}
@@ -256,7 +256,7 @@ class textbox_tag(interface.widget_interface):
         for pos in range(self.buf.get_char_count()):
             iter=self.buf.get_iter_at_offset(pos)
             for tag in iter.get_tags():
-                if tagdict.has_key(tag):
+                if tag in tagdict:
                     if tagdict[tag][-1][1] == pos - 1:
                         tagdict[tag][-1] = (tagdict[tag][-1][0],pos)
                     else:
@@ -269,7 +269,7 @@ class textbox_tag(interface.widget_interface):
             for tag, bound_list in tagdict.items():
                 for bound in bound_list:
                     if at_pos >= bound[0] and at_pos < bound[1]:
-                        if not new_tagdict.has_key(tag):
+                        if not tag in new_tagdict:
                             new_tagdict[tag] = []
                         new_tagdict[tag].append(bound)
         else:
@@ -283,11 +283,11 @@ class textbox_tag(interface.widget_interface):
         for k,v in tagdict.items():
             stag,etag = self.tag_to_markup(k)
             for st,end in v:
-                if cuts.has_key(st):
+                if st in cuts:
                     cuts[st].append(stag) #add start tags second
                 else:
                     cuts[st]=[stag]
-                if cuts.has_key(end+1):
+                if end+1 in cuts:
                     cuts[end+1]=[etag]+cuts[end+1] #add end tags first
                 else:
                     cuts[end+1]=[etag]
@@ -311,7 +311,7 @@ class textbox_tag(interface.widget_interface):
     def tag_to_markup (self, tag):
         stag="<span"
         for k,v in self.tagdict[tag].items():
-            if self.html_tags.has_key(k) and (self.html_tags[k].has_key(k) or self.html_tags[k].has_key(v)):
+            if k in self.html_tags and (k in self.html_tags[k] or v in self.html_tags[k]):
                 if k in ['color','face']:
                     stag='<font %s="%s">'%(k,v)
                     etag="</font>"
@@ -330,7 +330,7 @@ class textbox_tag(interface.widget_interface):
         nicks = font.get_set_fields().value_nicks
         attrs = []
         for n in nicks:
-            if self.desc_to_attr_table.has_key(n):
+            if n in self.desc_to_attr_table:
                 Attr,norm = self.desc_to_attr_table[n]
                 # create an attribute with our current value
                 attrs.append(Attr(getattr(font,'get_%s'%n)()))
@@ -388,7 +388,7 @@ class textbox_tag(interface.widget_interface):
             self.buf.apply_tag(tag, insert_iter, insert_iter)
 
     def remove_tag (self, tag):
-        if self.tags_dic.has_key(tag) :
+        if tag in self.tags_dic:
             del self.tags_dic[tag]
         selection = self.get_selection()
         if selection:
@@ -433,7 +433,7 @@ class textbox_tag(interface.widget_interface):
             parsed, txt, separator = pango.parse_markup(txt)
         except Exception ,e:
             pass
-        
+
         try:
             attrIter = parsed.get_iterator()
         except Exception ,e:

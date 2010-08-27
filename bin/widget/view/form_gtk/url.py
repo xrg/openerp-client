@@ -37,6 +37,7 @@ class url(interface.widget_interface):
         self.entry.set_visibility(not attrs.get('password', False))
         self.entry.set_width_chars(5)
         self.entry.set_property('activates_default', True)
+        self.entry.connect('populate-popup', self._menu_open)
         self.entry.connect('activate', self.sig_activate)
         self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
         self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
