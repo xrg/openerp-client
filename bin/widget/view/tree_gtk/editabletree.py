@@ -290,9 +290,17 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             new_path = ((path[0] - 1) % len(store),)
         self.set_cursor(new_path, column, True)
         return new_path
+    
+    def get_column_by_renderer(self, renderer): 
+        for col in self.get_columns():
+            if col.get_cell_renderers()[0] == renderer:
+                return col
 
     def on_editing_done(self, entry, model=False):
+        renderer = entry.get_data('renderer')
         path, column = self.get_cursor()
+        if renderer != column.get_cell_renderers()[0]:
+            column = self.get_column_by_renderer(renderer)
         if not path:
             return True
         if not model:
