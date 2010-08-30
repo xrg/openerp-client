@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -40,6 +40,8 @@ class parse(object):
                     colour, test = color_spec.split(':')
                     self.colors[colour] = test
         elif name=='field':
+            if attrs.get('invisible', False):
+                return True
             type = self.fields[attrs['name']]['type']
             field_name = attrs.get('string', self.fields[attrs['name']]['string'])
             if type!='boolean':
@@ -49,8 +51,8 @@ class parse(object):
                     column.pack_start(render_pixbuf, expand=False)
                     column.add_attribute(render_pixbuf, 'pixbuf', self.pos)
                     self.fields_order.append(str(attrs['icon']))
-                    self.pixbufs[self.pos]=True
-                    self.pos+=1
+                    self.pixbufs[self.pos] = True
+                    self.pos += 1
 
                 cell = gtk.CellRendererText()
                 cell.set_fixed_height_from_font(1)
@@ -61,7 +63,7 @@ class parse(object):
             else:
                 cell = gtk.CellRendererToggle()
                 column = gtk.TreeViewColumn (field_name, cell, active=self.pos)
-            self.pos+=1
+            self.pos += 1
             column.set_resizable(1)
             self.fields_order.append(str(attrs['name']))
             self.tree.append_column(column)
