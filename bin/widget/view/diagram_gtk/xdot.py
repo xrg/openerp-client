@@ -1737,12 +1737,12 @@ class DotWindow(gtk.Window):
             os.close(fileno)
             printer.printer.print_file(fp_name, "pdf", preview=True)
 
-    def clicked(self,widget,data = None):
-        if widget.get_label() == 'gtk-edit':
+    def clicked(self, response=None):
+        if response == gtk.RESPONSE_APPLY:
             self.edit_data()
-        elif widget.get_label() == 'gtk-delete':
+        elif response == gtk.RESPONSE_DELETE_EVENT:
             self.delete_data()
-        elif widget.get_label() == 'gtk-close':
+        elif response == gtk.RESPONSE_CLOSE:
             self.dia_select.destroy()
 
     def delete_data(self):
@@ -1761,7 +1761,7 @@ class DotWindow(gtk.Window):
             dia = dialog(self.node_attr.get('object',False), id=int(self.url.split('_')[-2]), view_ids=[self.node_attr.get('form_view_ref',False)], context= self.screen.context, target=False, view_type=['form'])
         elif self.url.split('_')[-1] == 'edge':
             dia = dialog(self.arrow_attr.get('object',False), id=int(self.url.split('_')[-2]), view_ids=[self.arrow_attr.get('form_view_ref',False)], context= self.screen.context, target=False, view_type=['form'])
-        
+
         if self.url.split('_')[-1] in ['node', 'edge']:
             self.dia_destroy(dia)
 
@@ -1773,17 +1773,18 @@ class DotWindow(gtk.Window):
         self.dia_select.set_property('default-height', 100)
         self.dia_select.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
 
-        h_box_label = gtk.HBox()
-        self.dia_select.get_child().add(h_box_label)
-        h_box_label.show()
+        but_close = self.dia_select.add_button(gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE)
+        but_del = self.dia_select.add_button(gtk.STOCK_DELETE, gtk.RESPONSE_DELETE_EVENT)
+        but_edit = self.dia_select.add_button(gtk.STOCK_EDIT, gtk.RESPONSE_APPLY)
+
 
         v_box_label = gtk.VBox()
         self.dia_select.get_child().add(v_box_label)
-        v_box_label.show()
+
         data_display = {}
         field_list = []
-
         edit = ""
+
         if url.split('_')[-1] == "node":
             edit = "node"
             record_list = rpc.session.rpc_exec_auth('/object', 'execute', self.node_attr.get('object',False), 'read', int(self.url.split('_')[-2]))
@@ -1798,50 +1799,29 @@ class DotWindow(gtk.Window):
                 field_list.append(node_attributes(child))
 
         for field in field_list:
-            if bool(int(field.get('invisible',0))):
+            if bool(int(field.get('invisible', 0))):
                 continue
-            v_box_label.set_border_width(10)
-            label = gtk.Label(data_display.get(field['name'],{}).get('string',field['name'])) 
-            label.set_alignment(0, 0)
-            label.show()
 
-            h_box_new = gtk.HBox()
-            h_box_new.show()
-            h_box_new.pack_start(label)
-            v_box_label.pack_start(h_box_new)
+            val = '<b>' + data_display.get(field['name'],{}).get('string', field['name']) + ' : </b>'
 
-            val = ""
-            if record_list[field.get('name')] and type(record_list[field.get('name')]) in (list,tuple):
-                val = record_list[field.get('name')][1]
+            if record_list[field.get('name')] and type(record_list[field.get('name')]) in (list, tuple):
+                val += str(record_list[field.get('name')][1])
             elif record_list[field.get('name')]:
-                val = record_list[field.get('name')]
+                val += str(record_list[field.get('name')])
 
-            label_string = gtk.Label(": %s" % val)
-            label_string.set_alignment(0, 0)
-            label_string.set_max_width_chars(20)
-            label_string.show()
-            h_box_new.pack_start(label_string)
-
-        h_box = gtk.HBox()
-        self.dia_select.get_child().add(h_box)
-        h_box.show()
-
-        but_edit = gtk.Button("Edit",stock=gtk.STOCK_EDIT)
-        but_edit.connect("clicked", self.clicked)
-        h_box.pack_start(but_edit)
-        but_edit.show()
-
-        but_delete = gtk.Button("Delete",stock=gtk.STOCK_DELETE)
-        but_delete.connect("clicked", self.clicked)
-        h_box.pack_start(but_delete)
-        but_delete.show()
-
-        but_close = gtk.Button("Close",stock=gtk.STOCK_CLOSE)
-        but_close.connect("clicked", self.clicked)
-        h_box.pack_start(but_close)
-        but_close.show()
-
+            label = gtk.Label()
+            label.set_alignment(0, 0.0)
+            label.set_use_markup(True)
+            label.set_markup(val)
+            label.show()
+            v_box_label.pack_start(label)
+        label = gtk.Label('')
+        label.show()
+        v_box_label.pack_end(label)
+        v_box_label.show()
         ok = self.dia_select.run()
+        if ok:
+            self.clicked(ok)
         return True
 
     def on_node_create(self,event):
