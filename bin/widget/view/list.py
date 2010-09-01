@@ -140,7 +140,9 @@ class list_record(object):
                     rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child)
                     for field in gb:
                         if not rec.value.get(field, False):
-                            if field in inner_gb:continue
+                            field_type = self.mgroup.fields.get(field, {}).get('type', False)
+                            if field in inner_gb or field_type in ('integer', 'float'):
+                                continue
                             rec.value[field] = 'Undefined'
                             rec.field_with_empty_labels.append(field)
                     self.add(rec)
