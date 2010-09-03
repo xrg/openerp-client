@@ -221,8 +221,8 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
         # Button Switch
-        eb_switch = self.pager.create_event_box(_('Switch'), self.switch_view, 'gtk-justify-left')
-        hb.pack_start(eb_switch, expand=False, fill=False)
+        self.eb_switch = self.pager.create_event_box(_('Switch'), self.switch_view, 'gtk-justify-left')
+        hb.pack_start(self.eb_switch, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
@@ -283,6 +283,7 @@ class one2many_list(interface.widget_interface):
 
     def set_disable(self, value):
         self.eb_open.set_sensitive(value)
+        self.eb_switch.set_sensitive(value)
         if self._readonly:
             value = not self._readonly
         self.eb_del.set_sensitive(value)
