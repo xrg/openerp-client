@@ -160,7 +160,12 @@ class StateAwareWidget(object):
                 if self.label:
                     getattr(self.label, func)()
             elif k == 'readonly':
-                self.widget.set_sensitive(not result)
+                #TODO:
+                # find a solution for all widget like O2M, M2M
+                if isinstance(self.widget, many2one.many2one):
+                    self.widget._readonly_set(result)
+                else:
+                    self.widget.set_sensitive(not result)
 
 
 class _container(object):

@@ -228,7 +228,7 @@ class many2one(interface.widget_interface):
     def _readonly_set(self, value):
         self._readonly = value
         self.wid_text.set_editable(not value)
-        #self.but_new.set_sensitive(not value)
+        self.but_find.set_sensitive(not value)
 
     def _color_widget(self):
         return self.wid_text
