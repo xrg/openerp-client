@@ -176,6 +176,15 @@ class BinaryField(CharField):
 
     def get_size_name(self):
         return "%s.size" % self.name
+    
+    def validate(self, model):
+        ok = True
+        if bool(self.get_state_attrs(model).get('required', 0)):
+            name = "%s.size" % self.name
+            if not model.value.get(name, False):
+                ok=False
+        self.get_state_attrs(model)['valid'] = ok
+        return ok
 
     def set(self, model, value, test_state=True, modified=False, get_binary_size=True):
         self.__check_model(model)
