@@ -117,10 +117,8 @@ class Button(Observable):
 
         elif model.validate():
             id = self.form.screen.save_current()
-            if not self.attrs.get('confirm',False) or \
-                    common.sur(self.attrs['confirm']):
-                model.get_button_action(self.form.screen,id,self.attrs)
-                self.warn('misc-message', '')
+            model.get_button_action(self.form.screen, id, self.attrs)
+            self.warn('misc-message', '')
         else:
             common.warning(_('Invalid form, correct red fields !'), _('Error !') )
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
