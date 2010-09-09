@@ -55,10 +55,11 @@ LDFMT = datetime_util.get_date_format()
 # Node struct: [list of (pos, list) ]
 #
 class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
-    def __init__(self, ids, view, fields, fields_type, context={}, pixbufs={}, treeview=None, colors='black'):
+    def __init__(self, ids, view, fields, fields_type, invisible_fields=[], context={}, pixbufs={}, treeview=None, colors='black'):
         gtk.GenericTreeModel.__init__(self)
         self.fields = fields
         self.fields_type = fields_type
+        self.invisible_fields = invisible_fields
         self.view = view
         self.roots = ids
         self.colors = colors
@@ -74,13 +75,13 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
             color_ids[res['id']] = 'black'
             res_lower={}
             for key,vals in res.items():
-                if isinstance(vals,str):
+                if isinstance(vals, str):
                     res_lower[key]= vals.lower()
                 else:
                     res_lower[key] = vals
             for color,expt in self.colors.items():
                 if isinstance(expt, basestring):
-                    val = tools.expr_eval(expt,res_lower)
+                    val = tools.expr_eval(expt, res_lower)
                     if val:
                         color_ids[res_lower['id']] = color
         return color_ids
@@ -89,6 +90,8 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         c = {}
         c.update(rpc.session.context)
         c.update(self.context)
+        if self.invisible_fields:
+            fields += self.invisible_fields
         try:
             res_ids = rpc.session.rpc_exec_auth_try('/object', 'execute',
                     self.view['model'], 'read', ids, fields, c)
@@ -102,7 +105,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                     else:
                         val[f] = ''
                 res_ids.append(val)
-        for field in self.fields:
+        for field in self.fields + self.invisible_fields:
             if self.fields_type[field]['type'] in ('date',):
                 display_format = LDFMT
                 for x in res_ids:
@@ -133,7 +136,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                     x[field] = tools.locale_format('%.' + str(digit) + 'f', x[field] or 0.0)
             if self.fields_type[field]['type'] in ('integer',):
                 for x in res_ids:
-                    x[field] = tools.locale_format('%d', int(x[field]) or 0)
+                    x[field] = int(tools.locale_format('%d', int(x[field]) or 0))
             if self.fields_type[field]['type'] in ('float_time',):
                 for x in res_ids:
                     val = datetime_util.float_time_convert(x[field])
@@ -322,6 +325,7 @@ class view_tree(object):
         self.ids=ids
         self.view_info = view_info
         self.fields_order = p.fields_order
+        self.invisible_fields = p.invisible_fields
         self.model = None
         self.reload()
 
@@ -332,7 +336,7 @@ class view_tree(object):
     def reload(self):
         del self.model
         self.context.update(rpc.session.context)
-        self.model = view_tree_model(self.ids, self.view_info, self.fields_order, self.fields, context=self.context, pixbufs=self.pixbufs, treeview=self.view , colors=self.colors)
+        self.model = view_tree_model(self.ids, self.view_info, self.fields_order, self.fields, self.invisible_fields, context=self.context, pixbufs=self.pixbufs, treeview=self.view , colors=self.colors)
         self.view.set_model(self.model)
         local ={}
         def render_column(column, cell, model, iter):

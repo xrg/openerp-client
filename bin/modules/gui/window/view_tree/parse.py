@@ -31,7 +31,7 @@ class parse(object):
         self.pixbufs = {}
 
     def _psr_start(self, name, attrs):
-        if name=='tree':
+        if name == 'tree':
             self.title = attrs.get('string',_('Tree'))
             self.toolbar = bool(attrs.get('toolbar',False))
             self.colors = {}
@@ -39,13 +39,14 @@ class parse(object):
                 if color_spec:
                     colour, test = color_spec.split(':')
                     self.colors[colour] = test
-        elif name=='field':
+        elif name == 'field':
             if attrs.get('invisible', False):
+                self.invisible_fields.append(str(attrs['name']))
                 return True
             type = self.fields[attrs['name']]['type']
             field_name = attrs.get('string', self.fields[attrs['name']]['string'])
             if type!='boolean':
-                column = gtk.TreeViewColumn(field_name) #, cell, text=self.pos)
+                column = gtk.TreeViewColumn(field_name)
                 if 'icon' in attrs:
                     render_pixbuf = gtk.CellRendererPixbuf()
                     column.pack_start(render_pixbuf, expand=False)
@@ -53,7 +54,6 @@ class parse(object):
                     self.fields_order.append(str(attrs['icon']))
                     self.pixbufs[self.pos] = True
                     self.pos += 1
-
                 cell = gtk.CellRendererText()
                 cell.set_fixed_height_from_font(1)
                 if type=='float':
@@ -87,7 +87,8 @@ class parse(object):
         self.tree = tree
         self.pos = 1
 
-        self.fields_order=[]
+        self.fields_order = []
+        self.invisible_fields = []
 
         psr = expat.ParserCreate()
         psr.StartElementHandler = self._psr_start
