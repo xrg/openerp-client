@@ -562,6 +562,8 @@ class ViewList(parser_view):
                     if (attrs_check and not states) or (attrs_check and m['state'].get(m) in states):
                         m.get_button_action(self.screen, m.id, path[1].attrs)
                         self.screen.current_model = None
+                        if self.screen.parent:
+                            self.screen.parent.reload()
                         m.reload()
             else:
                 # Here it goes for right click

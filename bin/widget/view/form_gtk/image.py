@@ -33,6 +33,7 @@ import tempfile
 import urllib
 
 NOIMAGE = file(common.terp_path_pixmaps("noimage.png"), 'rb').read()
+REQUIRED_IMG = file(common.terp_path_pixmaps("image_required.png"), 'rb').read()
 
 
 class image_wid(interface.widget_interface):
@@ -41,6 +42,8 @@ class image_wid(interface.widget_interface):
         interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
 
         self._value = ''
+        self._set_required_img = False
+        self.attrs = attrs
         self.height = int(attrs.get('img_height', 100))
         self.width = int(attrs.get('img_width', 300))
 
@@ -132,6 +135,7 @@ class image_wid(interface.widget_interface):
 
     def sig_remove(self, widget):
         self._value = ''
+        self.set_value(self._view.model, self._view.model.mgroup.mfields[self.attrs['name']])
         self.update_img()
 
     def drag_motion(self, widget, context, x, y, timestamp):
@@ -161,7 +165,10 @@ class image_wid(interface.widget_interface):
 
     def update_img(self):
         if not self._value:
-            data = NOIMAGE
+            if self._set_required_img:
+                data = REQUIRED_IMG
+            else:
+                data = NOIMAGE
         else:
             data = decodestring(self._value)
 
@@ -226,6 +233,9 @@ class image_wid(interface.widget_interface):
         self.is_readonly = value
 
     def grab_focus(self):
+        self._set_required_img = True
+        self.update_img()
+        self._set_required_img = False
         return self.image.grab_focus()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

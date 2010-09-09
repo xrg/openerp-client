@@ -32,7 +32,7 @@ import service
 import rpc
 
 import copy
-
+import pango
 import options
 
 
@@ -117,10 +117,8 @@ class Button(Observable):
 
         elif model.validate():
             id = self.form.screen.save_current()
-            if not self.attrs.get('confirm',False) or \
-                    common.sur(self.attrs['confirm']):
-                model.get_button_action(self.form.screen,id,self.attrs)
-                self.warn('misc-message', '')
+            model.get_button_action(self.form.screen, id, self.attrs)
+            self.warn('misc-message', '')
         else:
             common.warning(_('Invalid form, correct red fields !'), _('Error !') )
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
@@ -201,7 +199,12 @@ class _container(object):
 
     def create_label(self, name, markup=False, align=1.0, wrap=False,
                      angle=None, width=None, fname=None, help=None, detail_tooltip=False):
-        label = gtk.Label(name)
+        if fname is None:
+            label = common.WrapLabel(x=align, y=0)
+            label.set_label(name)
+        else:
+            label = gtk.Label(name)
+            label.set_alignment(align, 0.5)
         if markup:
             label.set_use_markup(True)
 
@@ -209,7 +212,6 @@ class _container(object):
         eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
         self.trans_box_label.append((eb, name, fname))
         eb.add(label)
-
         uid = rpc.session.uid
         tooltip = ''
         if help:
@@ -220,9 +222,6 @@ class _container(object):
             tooltip += (help and '\n' or '') + detail_tooltip
         if tooltip:
             eb.set_tooltip_markup(tooltip)
-
-
-        label.set_alignment(align, 0.5)
 
         if width:
             label.set_size_request(width, -1)
