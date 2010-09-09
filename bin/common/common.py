@@ -45,15 +45,13 @@ import rpc
 class WrapLabel(gtk.Label):
     __gtype_name__ = 'WrapLabel'
 
-    def __init__(self, str=None, x=0.3, y=0.3, half_width=False, wrap=True):
+    def __init__(self, str=None):
         gtk.Label.__init__(self)
+
         self.__wrap_width = 0
         self.layout = self.get_layout()
-        self.wrap = wrap
-        if self.wrap:
-            self.layout.set_wrap(pango.WRAP_WORD_CHAR)
-        self.set_alignment(x, y)
-        self.half_width = half_width
+        self.layout.set_wrap(pango.WRAP_WORD_CHAR)
+        self.set_alignment(0.3, 0.3)
 
     def do_size_request(self, requisition):
         layout = self.get_layout()
@@ -63,22 +61,17 @@ class WrapLabel(gtk.Label):
 
     def do_size_allocate(self, allocation):
         gtk.Label.do_size_allocate(self, allocation)
-        if self.wrap:
-            self.__set_wrap_width(allocation.width)
+        self.__set_wrap_width(allocation.width)
 
     def set_markup(self, str):
         gtk.Label.set_markup(self, str)
-        if self.wrap:
-            self.__set_wrap_width(self.__wrap_width)
+        self.__set_wrap_width(self.__wrap_width)
 
     def __set_wrap_width(self, width):
         if width == 0:
             return
         layout = self.get_layout()
-        if self.half_width:
-            layout.set_width((width * pango.SCALE)/2)
-        else:
-            layout.set_width(width * pango.SCALE)
+        layout.set_width((width * pango.SCALE)/2)
         if self.__wrap_width != width:
             self.__wrap_width = width
             self.queue_resize()
@@ -88,7 +81,8 @@ def get_action_help(help={}, callback=None):
         msg = help.get('msg', '')
         title = help.get('title', '')
 
-        help_label = WrapLabel(half_width=True)
+        help_label = WrapLabel()
+        help_label.set_line_wrap(True)
 
         help_label.set_use_markup(True)
         help_label.set_label('\n<span font="italic">%s</span>'% (msg))
