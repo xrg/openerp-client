@@ -200,11 +200,12 @@ class _container(object):
     def create_label(self, name, markup=False, align=1.0, wrap=False,
                      angle=None, width=None, fname=None, help=None, detail_tooltip=False):
         if fname is None:
-            label = common.WrapLabel(x=align, y=0)
+            label = common.WrapLabel(x=align, y=0, wrap=bool(int(wrap)))
             label.set_label(name)
         else:
             label = gtk.Label(name)
             label.set_alignment(align, 0.5)
+            label.set_line_wrap(bool(int(wrap)))
         if markup:
             label.set_use_markup(True)
 
@@ -225,12 +226,8 @@ class _container(object):
 
         if width:
             label.set_size_request(width, -1)
-
-        label.set_line_wrap(bool(int(wrap)))
         if angle:
             label.set_angle(int(angle))
-
-
         return eb
 
     def wid_add(self, widget, label=None, xoptions=False, expand=False, ypadding=2, rowspan=1,
