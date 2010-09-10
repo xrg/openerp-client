@@ -62,7 +62,7 @@ class CharField(object):
 
     def domain_get(self, model):
         dom = self.attrs.get('domain', '[]')
-        return model.expr_eval(dom)
+        return model.expr_eval(dom) or []
 
     def context_get(self, model, check_load=True, eval=True):
         context = {}
