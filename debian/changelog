@@ -1,3 +1,9 @@
+openerp-client (5.0.13-1) experimental; urgency=low
+
+  * Merging upstream version 5.0.13.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 13 Sep 2010 09:06:23 +0200
+
 openerp-client (5.0.12-2) unstable; urgency=low
 
   * Removing debhelper auto install overrides.
