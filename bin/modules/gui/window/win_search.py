@@ -269,6 +269,8 @@ class win_search(object):
         self.win.destroy()
 
     def go(self):
+        ## This is if the user has set some filters by default with search_default_XXX
+        self.find()
         end = False
         limit = self.get_limit()
         offset = self.offset

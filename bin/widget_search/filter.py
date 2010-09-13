@@ -38,8 +38,9 @@ class filter(wid_int.wid_int):
         icon.set_from_stock(attrs.get('icon','gtk-home'), 1)
         self.butt.set_image(icon)
         self.butt.set_image_position(gtk.POS_TOP)
-        if attrs.get('help',False):
-            self.butt.set_tooltip_markup(tools.to_xml(attrs['help']))
+        help = attrs.get('help', False) or attrs.get('string', False)
+        if help:
+            self.butt.set_tooltip_markup(tools.to_xml(help))
         self.domain = attrs.get('domain', "[]")
         self.context = attrs.get('context', "{}")
         if self.default_search:

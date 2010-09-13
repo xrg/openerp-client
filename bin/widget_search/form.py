@@ -213,7 +213,8 @@ class parse(object):
             elif node.tag == 'filter':
                 name = str(attrs.get('string','filter'))
                 widget_act = filter.filter(name, self.parent, attrs, call)
-                wid = container.wid_add(widget_act.butt,xoptions=gtk.SHRINK, help=attrs.get('help',False))
+                help = attrs.get('help', False) or name
+                wid = container.wid_add(widget_act.butt, xoptions=gtk.SHRINK, help=help)
                 dict_widget[name]=(widget_act, widget_act, 1)
 
             elif node.tag == 'separator':
