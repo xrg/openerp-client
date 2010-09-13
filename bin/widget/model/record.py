@@ -370,8 +370,7 @@ class ModelRecord(signal_event.signal_event):
                 result = rpc.session.rpc_exec_auth('/object', 'execute',
                                                    self.resource,attrs['name'], [id], context)
                 if isinstance(result, dict):
-                    if not result.get('nodestroy', False) and \
-                       result.get('type', '') != 'ir.actions.report.xml':
+                    if not result.get('nodestroy', False):
                         screen.window.destroy()
                     obj._exec_action(result, {}, context=context)
 
