@@ -1,3 +1,9 @@
+openerp-client (5.0.14-1) experimental; urgency=low
+
+  * Merging upstream version 5.0.14.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 14 Sep 2010 22:56:02 +0200
+
 openerp-client (5.0.13-1) experimental; urgency=low
 
   * Merging upstream version 5.0.13.
