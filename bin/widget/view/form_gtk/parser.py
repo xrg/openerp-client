@@ -131,6 +131,7 @@ class StateAwareWidget(object):
         self.widget = widget
         self.label = label
         self.states = states or []
+        self.frame_child = {}
 
     def __getattr__(self, a):
         return self.widget.__getattribute__(a)
@@ -158,13 +159,22 @@ class StateAwareWidget(object):
                 if self.label:
                     getattr(self.label, func)()
             elif k == 'readonly':
-                #TODO:
-                # find a solution for all widget like O2M, M2M
-                if isinstance(self.widget, many2one.many2one):
-                    self.widget._readonly_set(result)
+                if isinstance(self.widget, gtk.Frame):
+                    for name, wid in self.frame_child.iteritems():
+                        self.set_sensitive(wid, not result)
                 else:
-                    self.widget.set_sensitive(not result)
-
+                    self.set_sensitive(self.widget, not result)
+    ## This method is hacked here because field labels that are readonly
+    ## should not change their looks to readonly GTK widgets as it makes
+    ## the label text very difficult to read in some themes.
+    def set_sensitive(self, widget, value):
+        if hasattr(widget, "get_children") and not \
+            isinstance(widget, gtk.ComboBoxEntry):
+            for wid in widget.get_children():
+               self.set_sensitive(wid, value)
+        if not isinstance(widget, gtk.Label):
+            widget.set_sensitive(value)
+        return True
 
 class _container(object):
     def __init__(self):
@@ -495,7 +505,8 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
-                saw_list.append(StateAwareWidget(frame, states=states))
+                state_aware = StateAwareWidget(frame, states=states)
+                saw_list.append(state_aware)
 
                 if attrs.get("width",False) or attrs.get("height"):
                     frame.set_size_request(int(attrs.get('width', -1)) ,int(attrs.get('height', -1)))
@@ -507,6 +518,7 @@ class parser_form(widget.view.interface.parser_interface):
                 container.wid_add(group_wid, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
                 container.new(int(attrs.get('col',4)))
                 widget, widgets, saws, on_write = self.parse(model, node, fields)
+                state_aware.frame_child.update(widgets)
                 dict_widget.update(widgets)
                 saw_list += saws
                 frame.add(widget)
