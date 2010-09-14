@@ -195,6 +195,11 @@ class one2many_list(interface.widget_interface):
         if self.context.get('group_by',False):
             self.context['group_by'] = [self.context['group_by']]
 
+        # the context to pass to default_get can be optionally specified in
+        # the context of the one2many field. We also support a legacy
+        # 'default_get' attribute for the same effect (pending removal)
+        default_get_ctx = (attrs.get('default_get') or attrs.get('context'))
+
         self.screen = Screen(attrs['relation'],
                             view_type=attrs.get('mode','tree,form').split(','),
                             parent=self.parent, views_preload=attrs.get('views', {}),
@@ -202,7 +207,7 @@ class one2many_list(interface.widget_interface):
                             create_new=True,
                             context=self.context,
                             row_activate=self._on_activate,
-                            default_get=attrs.get('default_get', {}),
+                            default_get=default_get_ctx,
                             window=self._window, readonly=self._readonly, limit=pager.DEFAULT_LIMIT)
 
         self.screen.type = 'one2many'
