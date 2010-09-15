@@ -74,7 +74,17 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         for res in result:
             color_ids[res['id']] = 'black'
             res_lower = {}
-            for key,vals in res.iteritems():
+            for key, vals in res.iteritems():
+                if self.fields_type.get(key, False) and vals != 'False':
+                    type = self.fields_type[key]['type']
+                    if type == 'date':
+                        res_lower[key] = datetime_util.local_to_server_timestamp(vals,
+                                         LDFMT, DT_FORMAT, tz_offset=False)
+                        continue
+                    elif type == 'datetime':
+                        res_lower[key] = datetime_util.local_to_server_timestamp(vals,
+                                         LDFMT + ' %H:%M:%S', DT_FORMAT)
+                        continue
                 if isinstance(vals, (str, unicode)):
                     res_lower[key]= vals.lower()
                 else:
