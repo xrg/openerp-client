@@ -105,13 +105,14 @@ class dialog(object):
 
 
 class win_search(object):
-    def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None):
+    def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None, search_mode='tree'):
         self.model = model
         self.domain =domain
         self.context = context
         self.context.update(rpc.session.context)
         self.sel_multi = sel_multi
         self.offset = 0
+        self.search_mode = search_mode
         self.glade = glade.XML(common.terp_path("openerp.glade"),'win_search',gettext.textdomain())
         self.win = self.glade.get_widget('win_search')
         self.win.set_icon(common.OPENERP_ICON)
@@ -119,19 +120,20 @@ class win_search(object):
             parent = service.LocalService('gui.main').window
         self.parent = parent
         self.win.set_transient_for(parent)
-
-        self.screen = Screen(model, view_type=['tree'], context=self.context, parent=self.win)
-        self.view = self.screen.current_view
-        self.view.unset_editable()
-        sel = self.view.widget_tree.get_selection()
-
         self.filter_widget = None
         self.search_count = 0
 
-        if not sel_multi:
-            sel.set_mode('single')
-        else:
-            sel.set_mode(gtk.SELECTION_MULTIPLE)
+        self.screen = Screen(model, view_type=[self.search_mode], context=self.context, parent=self.win)
+        self.view = self.screen.current_view
+
+        if search_mode == 'gallery':
+            sel_mode = sel_multi and gtk.SELECTION_MULTIPLE or gtk.SELECTION_SINGLE
+            self.view.widget.set_selection_mode(sel_mode)
+        else: # 'tree'
+            self.view.unset_editable()
+            sel = self.view.widget_tree.get_selection()
+            sel_mode = sel_multi and gtk.SELECTION_MULTIPLE or 'single'
+            sel.set_mode(sel_mode)
 
         self.screen.widget.set_spacing(5)
         self.parent_hbox = gtk.HBox(homogeneous=False, spacing=0)
@@ -176,8 +178,13 @@ class win_search(object):
         sw = self.glade.get_widget('search_sw')
         sw.add(vp)
         sw.show_all()
-        self.view.widget_tree.connect('row_activated', self.sig_activate)
-        self.view.widget_tree.connect('button_press_event', self.sig_button)
+
+        if search_mode == 'gallery':
+            self.view.widget.connect('item-activated', self.sig_activate)
+            self.view.widget.connect('button_press_event', self.sig_button)
+        else: # 'tree'
+            self.view.widget_tree.connect('row_activated', self.sig_activate)
+            self.view.widget_tree.connect('button_press_event', self.sig_button)
 
         self.model_name = model
 
@@ -207,7 +214,10 @@ class win_search(object):
             self.form.focusable.grab_focus()
 
     def sig_activate(self, treeview, path, column, *args):
-        self.view.widget_tree.emit_stop_by_name('row_activated')
+        if self.search_mode == 'gallery':
+            self.view.widget.emit_stop_by_name('item-activated')
+        else: # 'tree'
+            self.view.widget_tree.emit_stop_by_name('row_activated')
         if not self.sel_multi:
             self.win.response(gtk.RESPONSE_OK)
         return False
@@ -259,9 +269,15 @@ class win_search(object):
     def reload(self):
         self.screen.clear()
         self.screen.load(self.ids)
-        sel = self.view.widget_tree.get_selection()
-        if sel.get_mode() == gtk.SELECTION_MULTIPLE:
-            sel.select_all()
+
+        if self.search_mode == 'gallery':
+            sel = self.view.widget.get_selection_mode()
+            if sel == gtk.SELECTION_MULTIPLE:
+                self.view.widget.select_all()
+        else: # 'tree'
+            sel = self.view.widget_tree.get_selection()
+            if sel.get_mode() == gtk.SELECTION_MULTIPLE:
+                sel.select_all()
 
     def sel_ids_get(self):
         return self.screen.sel_ids_get()
