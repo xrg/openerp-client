@@ -127,7 +127,7 @@ class ViewGraph(object):
         tinygraph.tinygraph(self._subplot, self.attrs.get('type', 'pie'), self.axis, self.axis_data, datas, axis_group_field=self.axis_group, orientation=self.attrs.get('orientation', 'vertical'))
         # the draw function may generate exception but it is not a problem as it will be redraw latter
         try:
-            self._subplot.draw()
+            self._subplot.draw(None)
             #XXX it must have some better way to force the redraw but this one works
             self._canvas.queue_resize()
         except:

@@ -217,7 +217,7 @@ class win_search(object):
             self.win.response(gtk.RESPONSE_OK)
         return False
 
-    def find(self, widget=None, *args):
+    def find(self, widget=None, load_default=False, *args):
         limit = self.get_limit()
         offset = self.offset
         if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset):
@@ -226,6 +226,8 @@ class win_search(object):
         self.old_limit = limit
         v = self.form.value.get('domain',[])
         v += self.domain
+        if load_default:
+            v += [('id','in', self.ids)]
         self.old_search = deepcopy(self.form.value)
         group_context = self.form.value.get('context')
         self.context.update(group_context)
@@ -270,7 +272,7 @@ class win_search(object):
 
     def go(self):
         ## This is if the user has set some filters by default with search_default_XXX
-        self.find()
+        self.find(load_default=True)
         end = False
         limit = self.get_limit()
         offset = self.offset
