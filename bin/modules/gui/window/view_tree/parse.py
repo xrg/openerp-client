@@ -38,7 +38,8 @@ class parse(object):
             for color_spec in attrs.get('colors', '').split(';'):
                 if color_spec:
                     colour, test = color_spec.split(':')
-                    self.colors[colour] = test
+                    self.colors.setdefault(colour,[])
+                    self.colors[colour].append(test)
         elif name == 'field':
             if attrs.get('invisible', False):
                 self.invisible_fields.append(str(attrs['name']))

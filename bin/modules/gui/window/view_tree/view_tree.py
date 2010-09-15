@@ -73,17 +73,22 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         color_ids = {}
         for res in result:
             color_ids[res['id']] = 'black'
-            res_lower={}
-            for key,vals in res.items():
-                if isinstance(vals, str):
+            res_lower = {}
+            for key,vals in res.iteritems():
+                if isinstance(vals, (str, unicode)):
                     res_lower[key]= vals.lower()
                 else:
                     res_lower[key] = vals
-            for color,expt in self.colors.items():
-                if isinstance(expt, basestring):
-                    val = tools.expr_eval(expt, res_lower)
+            for color, expt in self.colors.iteritems():
+                val = False
+                for cond in expt:
+                    if isinstance(cond, basestring):
+                        val = tools.expr_eval(cond, res_lower)
                     if val:
                         color_ids[res_lower['id']] = color
+                        break
+                if val:
+                    break
         return color_ids
 
     def _read(self, ids, fields):
@@ -106,39 +111,33 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                         val[f] = ''
                 res_ids.append(val)
         for field in self.fields + self.invisible_fields:
-            if self.fields_type[field]['type'] in ('date',):
-                display_format = LDFMT
-                for x in res_ids:
+            for x in res_ids:
+                if self.fields_type[field]['type'] in ('date',):
+                    display_format = LDFMT
                     if x[field]:
                         x[field] = datetime_util.server_to_local_timestamp(x[field],
-                                        DT_FORMAT, display_format, tz_offset=False)
-            if self.fields_type[field]['type'] in ('datetime',):
-                display_format = LDFMT + ' %H:%M:%S'
-                for x in res_ids:
+                                    DT_FORMAT, display_format, tz_offset=False)
+                    else:
+                        x[field] = str(x[field])
+                elif self.fields_type[field]['type'] in ('datetime',):
+                    display_format = LDFMT + ' %H:%M:%S'
                     if x[field]:
                         x[field] = datetime_util.server_to_local_timestamp(x[field],
-                                        DHM_FORMAT, display_format)
-
-
-            if self.fields_type[field]['type'] in ('one2one','many2one'):
-                for x in res_ids:
+                                    DHM_FORMAT, display_format)
+                    else:
+                        x[field] = str(x[field])
+                elif self.fields_type[field]['type'] in ('one2one','many2one'):
                     if x[field]:
                         x[field] = x[field][1]
-
-            if self.fields_type[field]['type'] in ('selection'):
-                for x in res_ids:
+                elif self.fields_type[field]['type'] in ('selection'):
                     if x[field]:
-                        x[field] = dict(self.fields_type[field]['selection']
-                                ).get(x[field],'')
-            if self.fields_type[field]['type'] in ('float',):
-                interger, digit = self.fields_type[field].get('digits', (16,2))
-                for x in res_ids:
+                        x[field] = dict(self.fields_type[field]['selection']).get(x[field],'')
+                elif self.fields_type[field]['type'] in ('float',):
+                    interger, digit = self.fields_type[field].get('digits', (16,2))
                     x[field] = tools.locale_format('%.' + str(digit) + 'f', x[field] or 0.0)
-            if self.fields_type[field]['type'] in ('integer',):
-                for x in res_ids:
+                elif self.fields_type[field]['type'] in ('integer',):
                     x[field] = int(tools.locale_format('%d', int(x[field]) or 0))
-            if self.fields_type[field]['type'] in ('float_time',):
-                for x in res_ids:
+                elif self.fields_type[field]['type'] in ('float_time',):
                     val = datetime_util.float_time_convert(x[field])
                     if x[field] < 0:
                         val = '-' + val
@@ -405,7 +404,7 @@ class view_tree(object):
             while ids!=[]:
                 val = ids.pop()
                 while True:
-                    if int(model.get_value(iter,0))==val:
+                    if int(model.get_value(iter,0)) == val:
                         self.view.expand_row( model.get_path(iter), False)
                         break
                     if not model.iter_next(iter):
