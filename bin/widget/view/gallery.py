@@ -20,13 +20,11 @@
 #
 ##############################################################################
 
-import gobject
-import gtk
 from interface import parser_view
 
 class ViewGallery(parser_view):
 
-    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None, submenu=None):
+    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None, submenu=None, help=None):
         super(ViewGallery, self).__init__(window, screen, widget, children, state_aware_widgets, toolbar, submenu)
         self.view_type = 'gallery'
         self.model_add_new = False

@@ -20,11 +20,9 @@
 #
 ##############################################################################
 
-import locale
 import gtk
 import tools
 
-from rpc import RPCProxy
 from widget.view import interface
 
 class EmptyGallery(object):
@@ -45,9 +43,9 @@ class parser_gallery(interface.parser_interface):
             'image': False,
             'text': False,
         }
-        for node in root_node.childNodes:
+        for node in root_node:
             node_attrs = tools.node_attributes(node)
-            if node.localName == 'field':
+            if node.tag == 'field':
                 node_type = node_attrs.get('type', '')
                 if node_type in gallery_fields:
                     gallery_fields[node_type] = node_attrs.get('name', False)
@@ -55,7 +53,7 @@ class parser_gallery(interface.parser_interface):
         try:
             import gallery
             view = gallery.ViewGallery(model, fields, attrs, gallery_fields)
-        except Exception, e:
+        except Exception:
             import common
             import traceback
             import sys
