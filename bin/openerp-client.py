@@ -59,6 +59,7 @@ import pygtk
 pygtk.require('2.0')
 import gtk
 import gtk.glade
+from glib import GError
 
 #gtk.gdk.threads_init() # causes the GTK client to block everything.
 
@@ -117,10 +118,12 @@ for fname in os.listdir(pix_file):
     ffname = os.path.join(pix_file,fname)
     if not os.path.isfile(ffname):
         continue
-    iname = os.path.splitext(fname)[0]
+    iname, ext = os.path.splitext(fname)
     try:
         pixbuf = gtk.gdk.pixbuf_new_from_file(ffname)
-    except:
+    except GError:
+        if ext == '.svg':
+            sys.stderr.write('Please install librsvg\n')
         pixbuf = None
         continue
     if pixbuf:

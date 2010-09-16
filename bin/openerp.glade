@@ -1397,6 +1397,19 @@
               </packing>
             </child>
             <child>
+              <widget class="GtkRadioToolButton" id="radio_gallery">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Gallery</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">terp-eog-image-collection</property>
+                <property name="group">radio_tree</property>
+                <signal name="clicked" handler="on_radio_gallery_clicked"/>
+              </widget>
+              <packing>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkSeparatorToolItem" id="separatortoolitem9">
                 <property name="visible">True</property>
               </widget>

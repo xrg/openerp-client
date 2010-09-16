@@ -124,6 +124,8 @@ class form(object):
             self.handlers['radio_calendar'] =  self.sig_switch_calendar
         if 'diagram' in view_type:
             self.handlers['radio_diagram'] =  self.sig_switch_diagram
+        if 'gallery' in view_type:
+            self.handlers['radio_gallery'] = self.sig_switch_gallery
         if res_id:
             if isinstance(res_id, (int, long,)):
                 res_id = [res_id]
@@ -131,7 +133,7 @@ class form(object):
         else:
             if self.screen.current_view.view_type == 'form':
                 self.sig_new(autosave=False)
-            if self.screen.current_view.view_type in ('tree', 'graph', 'calendar'):
+            if self.screen.current_view.view_type in ('tree', 'graph', 'calendar', 'gallery'):
                 self.screen.search_filter()
 
         if auto_refresh and int(auto_refresh):
@@ -151,6 +153,9 @@ class form(object):
 
     def sig_switch_graph(self, widget=None):
         return self.sig_switch(widget, 'graph')
+
+    def sig_switch_gallery(self, widget=None):
+        return self.sig_switch(widget, 'gallery')
 
     def get_resource(self, widget=None, get_id=None):
         all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])

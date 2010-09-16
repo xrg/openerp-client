@@ -89,7 +89,8 @@ class parser_tree(interface.parser_interface):
         for color_spec in attrs.get('colors', '').split(';'):
             if color_spec:
                 colour, test = color_spec.split(':')
-                treeview.colors[colour] = test
+                treeview.colors.setdefault(colour,[])
+                treeview.colors[colour].append(test)
         if not self.title:
             self.title = attrs.get('string', 'Unknown')
         treeview.set_property('rules-hint', True)
@@ -307,11 +308,15 @@ class Char(object):
 
 
     def get_color(self, model):
-        to_display = ''
+        to_display = False
         try:
-            for color, expr in self.treeview.colors.items():
-                if model.expr_eval(expr, check_load=False):
-                    to_display = color
+            for color, expr in self.treeview.colors.iteritems():
+                to_display = False
+                for cond in expr:
+                    if model.expr_eval(cond, check_load=False):
+                        to_display = color
+                        break
+                if to_display:
                     break
         except Exception:
             # we can still continue if we can't get the color..
