@@ -59,7 +59,7 @@ class parser_gallery(interface.parser_interface):
             import sys
             tb_s = reduce(lambda x, y: x + y, traceback.format_exception(
                 sys.exc_type, sys.exc_value, sys.exc_traceback))
-            common.error('Gallery', _('Can not generate galllery !'), details=tb_s,
+            common.error('Gallery', _('Can not generate gallery !'), details=tb_s,
                     parent=self.window)
             view = EmptyGallery(model, fields, attrs, gallery_fields)
         return view, {}, [], on_write
