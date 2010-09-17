@@ -856,6 +856,24 @@ class Screen(signal_event.signal_event):
         self.current_model.on_change(callback)
         self.display()
 
+    def make_buttons_readonly(self, value=False):
+        # This method has been created because
+        # Some times if the user executes an action on an unsaved record in a dialog box
+        # the record gets saved in the dialog's Group before going to the particular widgets group
+        # and as a result it crashes. So we just set the buttons visible on the
+        # dialog box screen to non-sensitive if the model is not saved.
+        def process(widget, val):
+            for wid in widget:
+                if hasattr(wid, 'get_children'):
+                    process(wid, val=value)
+                if isinstance(wid, gtk.Button) and \
+                    not isinstance(wid.parent, (gtk.HBox,gtk.VBox)):
+                    wid.set_sensitive(val)
+        if value and not self.current_model.id:
+            return True
+        process(self.widget, value)
+
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
