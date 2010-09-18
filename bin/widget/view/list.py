@@ -730,9 +730,15 @@ class ViewList(parser_view):
             length = len(self.screen.models.models)
             if ids:
                 length = len(ids)
-            for model in self.screen.models.models:
+            cal_model = self.screen.models.models
+            if not cal_model:
+                cal_model = self.store.models.lst
+            for model in cal_model:
                 if model.id in ids or not ids:
-                    value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
+                    if isinstance(model, group_record):
+                        value += model[self.children[c][0]].get()
+                    else:
+                        value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
             if self.children[c][5] == 'avg' and length:
                 value = value/length
             label_str = tools.locale_format('%.' + str(self.children[c][3]) + 'f', value)

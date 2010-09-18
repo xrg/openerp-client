@@ -114,7 +114,8 @@ class dialog(object):
         else:
             self.screen.add_view_id(False, 'form', display=True,
                                     context=context)
-
+        if not model or model.id is None:
+            self.screen.make_buttons_readonly()
         vp.add(self.screen.widget)
         x,y = self.screen.screen_container.size_get()
         vp.set_size_request(x,y+30)
@@ -126,6 +127,7 @@ class dialog(object):
         model = self.screen.new(context=self.context)
         self.screen.models.model_add(model)
         self.screen.current_model = model
+        self.screen.make_buttons_readonly()
         return True
 
     def get_response(self, button=None, response_id=False):
@@ -302,6 +304,7 @@ class one2many_list(interface.widget_interface):
             return False
 
     def switch_view(self, btn, arg):
+        self.screen.make_buttons_readonly(True)
         self.screen.switch_view()
 
     def _readonly_set(self, value):
@@ -325,6 +328,7 @@ class one2many_list(interface.widget_interface):
         if event.type in (gtk.gdk.BUTTON_PRESS, gtk.gdk.KEY_PRESS):
             if (self.screen.current_view.view_type=='form') or self.screen.editable_get():
                 self.screen.new(context=ctx)
+                self.screen.make_buttons_readonly()
                 self._readonly = False
                 self.screen.current_view.widget.set_sensitive(True)
                 self.set_disable(True)
