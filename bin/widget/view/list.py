@@ -824,6 +824,10 @@ class ViewList(parser_view):
 
     def set_invisible_attr(self):
         for col in self.widget_tree.get_columns():
+            if col._type == 'datetime':
+                col.set_max_width(145)
+                if self.screen.context.get('group_by',False):
+                    col.set_max_width(180)
             value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
                            {'context':self.screen.context})
             if col.name in self.screen.context.get('group_by',[]):
