@@ -333,9 +333,7 @@ class ModelRecord(signal_event.signal_event):
                         continue
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
             if 'context' in response:
-                value = response.get('context', {})
-                self.mgroup.context = value
-
+                self.mgroup.context.update(response['context'])
             warning=response.get('warning', {})
             if warning:
                 common.warning(warning['message'], warning['title'])
