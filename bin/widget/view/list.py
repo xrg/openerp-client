@@ -36,18 +36,23 @@ from widget.model.record import ModelRecord
 class field_record(object):
     def __init__(self, name):
         self.name = name
+
     def get_client(self, *args):
         if isinstance(self.name, (list,tuple)):
             return self.name[1]
         return self.name
+
     def get(self, *args):
         if isinstance(self.name, (list,tuple)):
             return self.name[0]
         return self.name
+
     def get_state_attrs(self, *args, **argv):
         return {}
+
     def set_client(self,*args):
         pass
+
     def set(self,*args):
         pass
 
@@ -62,6 +67,7 @@ class group_record(object):
         self.id = False
         self.has_children = child
         self.mgroup = mgroup
+        self.field_with_empty_labels = []
 
     def getChildren(self):
         if self._children is None:
@@ -104,6 +110,11 @@ class list_record(object):
         self.lst = []
         self.load()
 
+    def add_dummny_record(self, group_field):
+        record = { group_field:'This group is now empty ! Please refresh the list.'}
+        rec = group_record(record, ctx=self.context, domain=self.domain, mgroup=self.mgroup, child = False)
+        self.add(rec)
+
     def load(self):
         if self.loaded:
             return
@@ -113,24 +124,39 @@ class list_record(object):
         if gb or isinstance(gb, list) and no_leaf:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
                 self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
-            for r in records:
-                child = True
-                __ctx = r.get('__context', {})
-                inner_gb = __ctx.get('group_by', [])
-                if no_leaf and not len(inner_gb):
-                    child = False
-                ctx = {'__domain': r.get('__domain', []),'group_by_no_leaf':no_leaf}
-                ctx.update(__ctx)
-                rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child)
-                self.add(rec)
+            if not records and self.parent:
+                self.add_dummny_record(gb[0])
+            else:
+                for r in records:
+                    child = True
+                    __ctx = r.get('__context', {})
+                    inner_gb = __ctx.get('group_by', [])
+                    if no_leaf and not len(inner_gb):
+                        child = False
+                    ctx = {'__domain': r.get('__domain', []),'group_by_no_leaf':no_leaf}
+                    if not no_leaf:
+                        ctx.update({'__field':gb[-1]})
+                    ctx.update(__ctx)
+                    rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child)
+                    for field in gb:
+                        if not rec.value.get(field, False):
+                            field_type = self.mgroup.fields.get(field, {}).get('type', False)
+                            if field in inner_gb or field_type in ('integer', 'float'):
+                                continue
+                            rec.value[field] = 'Undefined'
+                            rec.field_with_empty_labels.append(field)
+                    self.add(rec)
         else:
             if self.context.get('__domain') and not no_leaf:
                 ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'))
-                self.mgroup.load(ids)
-                res= []
-                for id in ids:
-                    res.append(self.mgroup.get_by_id(id))
-                self.add_list(res)
+                if not ids:
+                     self.add_dummny_record(self.context['__field'])
+                else:
+                    self.mgroup.load(ids)
+                    res= []
+                    for id in ids:
+                        res.append(self.mgroup.get_by_id(id))
+                    self.add_list(res)
             else:
                 if not no_leaf:
                     self.lst = self.mgroup.models
@@ -303,7 +329,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
 class ViewList(parser_view):
     def __init__(self, window, screen, widget, children=None, buttons=None,
-            toolbar=None, submenu=None):
+            toolbar=None, submenu=None, help={}):
         super(ViewList, self).__init__(window, screen, widget, children,
                 buttons, toolbar, submenu=submenu)
         self.store = None
@@ -531,10 +557,13 @@ class ViewList(parser_view):
                 if path[1]._type == 'Button':
                     cell_button = path[1].get_cells()[0]
                     # Calling actions
-                    attrs_check = self.attrs_set(m,path[1])
-                    if attrs_check and m['state'].get(m) in path[1].attrs['states'].split(','):
-                        m.get_button_action(self.screen,m.id,path[1].attrs)
+                    attrs_check = self.attrs_set(m, path[1])
+                    states = [e for e in path[1].attrs.get('states','').split(',') if e]
+                    if (attrs_check and not states) or (attrs_check and m['state'].get(m) in states):
+                        m.get_button_action(self.screen, m.id, path[1].attrs)
                         self.screen.current_model = None
+                        if self.screen.parent:
+                            self.screen.parent.reload()
                         m.reload()
             else:
                 # Here it goes for right click
@@ -698,12 +727,18 @@ class ViewList(parser_view):
         ids = self.sel_ids_get()
         for c in self.children:
             value = 0.0
-            length = len(self.screen.models.models)
+            cal_model = self.screen.models.models
+            if not cal_model:
+                cal_model = self.store.models.lst
+            length = len(cal_model)
             if ids:
                 length = len(ids)
-            for model in self.screen.models.models:
-                if model.id in ids or not ids:
-                    value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
+            for model in cal_model:
+                if model.id in ids or model in ids or not ids:
+                    if isinstance(model, group_record):
+                        value += model[self.children[c][0]].get()
+                    else:
+                        value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
             if self.children[c][5] == 'avg' and length:
                 value = value/length
             label_str = tools.locale_format('%.' + str(self.children[c][3]) + 'f', value)
@@ -728,7 +763,7 @@ class ViewList(parser_view):
                         if store.on_iter_has_child(child):
                             process(child)
                         else:
-                            ids.append(child.id)
+                            ids.append(child.id or parent)
                 process(model)
             else:
                 if model.id:
@@ -789,6 +824,10 @@ class ViewList(parser_view):
 
     def set_invisible_attr(self):
         for col in self.widget_tree.get_columns():
+            if col._type == 'datetime':
+                col.set_max_width(145)
+                if self.screen.context.get('group_by',False):
+                    col.set_max_width(180)
             value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
                            {'context':self.screen.context})
             if col.name in self.screen.context.get('group_by',[]):

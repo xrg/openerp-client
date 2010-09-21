@@ -76,6 +76,9 @@ class spinint(wid_int.wid_int):
 
     def clear(self):
         self.value = 0.0
+    
+    def grab_focus(self):
+        self.spin1.grab_focus()
 
     def sig_activate(self, fct):
         self.spin1.connect_after('activate', fct)

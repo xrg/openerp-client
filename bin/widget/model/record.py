@@ -161,7 +161,12 @@ class ModelRecord(signal_event.signal_event):
                 if d[0] in self.mgroup.fields:
                     if d[1] == '=':
                         if d[2]:
-                            val[d[0]] = d[2]
+                            value = d[2]
+                            # domain containing fields like M2M/O2M should return values as list
+                            if self.mgroup.fields[d[0]].get('type', '') in ('many2many','one2many'):
+                                if not isinstance(d[2], (bool,list)):
+                                    value = [d[2]]
+                            val[d[0]] = value
                     if d[1] == 'in' and len(d[2]) == 1:
                         val[d[0]] = d[2][0]
             self.set_default(val)
@@ -327,6 +332,10 @@ class ModelRecord(signal_event.signal_event):
                     if fieldname not in self.mgroup.mfields:
                         continue
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
+            if 'context' in response:
+                value = response.get('context', {})
+                self.mgroup.context = value
+
             warning=response.get('warning', {})
             if warning:
                 common.warning(warning['message'], warning['title'])
@@ -384,7 +393,7 @@ class ModelRecord(signal_event.signal_event):
                     context.update(self.expr_eval(attrs['context'], check_load=False))
                 result = rpc.session.rpc_exec_auth('/object', 'execute',
                                                    self.resource,attrs['name'], [id], context)
-                if type(result)==type({}):
+                if isinstance(result, dict):
                     if not result.get('nodestroy', False):
                         screen.window.destroy()
                     obj._exec_action(result, {}, context=context)

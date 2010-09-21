@@ -217,9 +217,11 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
 
         if event.keyval == gtk.keysyms.Tab:
             new_col = self.__next_column(column)
+            self.scroll_to_cell(path, new_col, True, 0.0, 0.5)
             self.set_cursor(path, new_col, True)
         elif event.keyval == gtk.keysyms.ISO_Left_Tab:
             new_col = self.__prev_column(column)
+            self.scroll_to_cell(path, new_col, True, 0.0, 0.5)
             self.set_cursor(path, new_col, True)
         elif event.keyval == gtk.keysyms.Up:
             self._key_up(path, store, column)
@@ -245,7 +247,8 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             if not path[0]:
                 self.screen.current_model = False
             self.screen.display()
-            self.set_cursor(path, column, False)
+            if len(self.screen.models.models):
+                self.set_cursor(path, column, False)
         elif event.keyval in (gtk.keysyms.F1, gtk.keysyms.F2):
             if (column._type not in ('many2one','many2many')):
                 return True
@@ -290,8 +293,16 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         self.set_cursor(new_path, column, True)
         return new_path
 
+    def get_column_by_renderer(self, renderer):
+        for col in self.get_columns():
+            if col.get_cell_renderers()[0] == renderer:
+                return col
+
     def on_editing_done(self, entry, model=False):
+        renderer = entry.get_data('renderer')
         path, column = self.get_cursor()
+        if renderer != column.get_cell_renderers()[0]:
+            column = self.get_column_by_renderer(renderer)
         if not path:
             return True
         if not model:

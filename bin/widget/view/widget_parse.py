@@ -29,6 +29,7 @@ import graph_gtk
 import calendar_gtk
 import gantt_gtk
 import diagram_gtk
+import gallery_gtk
 
 from form import ViewForm
 from list import ViewList
@@ -36,6 +37,7 @@ from graph import ViewGraph
 from calendar import ViewCalendar
 from diagram import ViewDiagram
 from gantt import ViewGantt
+from gallery import ViewGallery
 
 parsers = {
     'form' : (form_gtk.parser_form, ViewForm),
@@ -43,11 +45,12 @@ parsers = {
     'graph': (graph_gtk.parser_graph, ViewGraph),
     'calendar' : (calendar_gtk.parser_calendar, ViewCalendar),
     'gantt' : (gantt_gtk.parser_gantt, ViewGantt),
+    'gallery': (gallery_gtk.parser_gallery, ViewGallery),
     'diagram' : (diagram_gtk.parser_diagram, ViewDiagram),
 }
 
 class widget_parse(interface.parser_interface):
-    def parse(self, screen, node, fields, toolbar={}, submenu={}):
+    def parse(self, screen, node, fields, toolbar={}, submenu={}, help={}):
         if node is not None:
             if node.tag not in parsers:
 		log = logging.getLogger()
@@ -61,7 +64,7 @@ class widget_parse(interface.parser_interface):
             if isinstance(wid, calendar_gtk.EmptyCalendar):
                 view_parser = calendar_gtk.DummyViewCalendar
             screen.set_on_write(on_write)
-            res = view_parser(self.window, screen, wid, child, buttons, toolbar, submenu)
+            res = view_parser(self.window, screen, wid, child, buttons, toolbar, submenu, help=help)
             res.title = widget.title
             return res
         raise Exception(_("No valid view found for this object!"))

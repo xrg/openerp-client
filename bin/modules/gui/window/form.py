@@ -39,16 +39,14 @@ import common
 import service
 import options
 import copy
-
 import gc
 
 from observator import oregistry
 from widget.screen import Screen
 
-
 class form(object):
     def __init__(self, model, res_id=False, domain=None, view_type=None,
-            view_ids=None, window=None, context=None, name=False, limit=80,
+            view_ids=None, window=None, context=None, name=False, help={}, limit=80,
             auto_refresh=False, auto_search=True, search_view=None):
         if not view_type:
             view_type = ['form','tree']
@@ -70,7 +68,7 @@ class form(object):
         self.domain = domain
         self.context = context
         self.screen = Screen(self.model, view_type=view_type,
-                context=self.context, view_ids=view_ids, domain=domain,
+                context=self.context, view_ids=view_ids, domain=domain,help=help,
                 hastoolbar=options.options['form.toolbar'], hassubmenu=options.options['form.submenu'],
                 show_search=True, window=self.window, limit=limit, readonly=bool(auto_refresh), auto_search=auto_search, search_view=search_view)
         self.screen.signal_connect(self, 'record-message', self._record_message)
@@ -126,6 +124,8 @@ class form(object):
             self.handlers['radio_calendar'] =  self.sig_switch_calendar
         if 'diagram' in view_type:
             self.handlers['radio_diagram'] =  self.sig_switch_diagram
+        if 'gallery' in view_type:
+            self.handlers['radio_gallery'] = self.sig_switch_gallery
         if res_id:
             if isinstance(res_id, (int, long,)):
                 res_id = [res_id]
@@ -133,7 +133,7 @@ class form(object):
         else:
             if self.screen.current_view.view_type == 'form':
                 self.sig_new(autosave=False)
-            if self.screen.current_view.view_type in ('tree', 'graph', 'calendar'):
+            if self.screen.current_view.view_type in ('tree', 'graph', 'calendar', 'gallery'):
                 self.screen.search_filter()
 
         if auto_refresh and int(auto_refresh):
@@ -154,6 +154,9 @@ class form(object):
     def sig_switch_graph(self, widget=None):
         return self.sig_switch(widget, 'graph')
 
+    def sig_switch_gallery(self, widget=None):
+        return self.sig_switch(widget, 'gallery')
+
     def get_resource(self, widget=None, get_id=None):
         all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])
         if widget:
@@ -172,7 +175,6 @@ class form(object):
         if event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):
             win.destroy()
             self.get_resource(widget)
-
 
     def sig_goto(self, *args):
         if not self.modified_save():

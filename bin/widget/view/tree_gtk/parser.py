@@ -50,11 +50,16 @@ import pango
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
+    editable.set_data('renderer', renderer)
     editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
     if isinstance(editable, gtk.ComboBoxEntry):
         editable.connect('changed', treeview.on_editing_done)
 
 def sort_model(column, screen, treeview):
+    unsaved_model =  [x for x in screen.models if x.id == None or x.modified]
+    if unsaved_model:
+        res =  common.message(_('You have unsaved record(s) !  \n\nPlease Save them before sorting !'))
+        return res
     group_by = screen.context.get('group_by',False)
     screen.current_view.set_drag_and_drop(column.name == 'sequence')
     if screen.sort == column.name:
@@ -84,7 +89,8 @@ class parser_tree(interface.parser_interface):
         for color_spec in attrs.get('colors', '').split(';'):
             if color_spec:
                 colour, test = color_spec.split(':')
-                treeview.colors[colour] = test
+                treeview.colors.setdefault(colour,[])
+                treeview.colors[colour].append(test)
         if not self.title:
             self.title = attrs.get('string', 'Unknown')
         treeview.set_property('rules-hint', True)
@@ -167,18 +173,18 @@ class parser_tree(interface.parser_interface):
                 col.set_cell_data_func(renderer, cell.setter)
                 col.set_clickable(True)
                 twidth = {
-                    'integer': (60,170),
-                    'float': (80,300),
+                    'integer': (60, 170),
+                    'float': (80, 300),
                     'float_time': (80,150),
                     'float_sci': 80,
-                    'date': (70,100),
-                    'datetime': (145,145),
-                    'selection': (90,250),
-                    'char': (100,False),
-                    'one2many': (50,False),
-                    'many2many': (50,False),
-                    'boolean': (20,80),
-                    'progressbar':(150,200)
+                    'date': (70, False),
+                    'datetime': (145, 145),
+                    'selection': (90, 250),
+                    'char': (100, False),
+                    'one2many': (50, False),
+                    'many2many': (50, False),
+                    'boolean': (20, 80),
+                    'progressbar':(150, 200)
                 }
 
                 if col._type not in twidth:
@@ -275,39 +281,43 @@ class Char(object):
         self.attrs_set(model, cell)
         color = self.get_color(model)
         cell.set_property('foreground', str(color))
+        align = 0
         if self.attrs['type'] in ('float', 'integer', 'boolean'):
             align = 1
-        else:
-            align = 0
         gb = self.treeview.screen.context.get('group_by', False)
+        cell.set_property('font-desc', None)
+        cell.set_property('background', None)
+        cell.set_property('xalign', align)
         if isinstance(model, group_record) and gb:
             font = pango.FontDescription('Times New Roman bold 10')
+            if self.field_name in model.field_with_empty_labels:
+                cell.set_property('foreground', '#AAAAAA')
+                font = pango.FontDescription('italic 10')
             cell.set_property('font-desc', font)
-
         elif self.treeview.editable:
             field = model[self.field_name]
             cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
             self.set_color(cell, model)
-        else:
-            cell.set_property('background', None)
-            cell.set_property('font-desc', None)
-        cell.set_property('xalign', align)
 
     def set_color(self, cell, model,group_by = False):
         field = model[self.field_name]
+        cell.set_property('background', None)
         if not field.get_state_attrs(model).get('valid', True):
             cell.set_property('background', common.colors.get('invalid', 'white'))
         elif bool(int(field.get_state_attrs(model).get('required', 0))):
             cell.set_property('background', common.colors.get('required', 'white'))
-        else:
-            cell.set_property('background', None)
+
 
     def get_color(self, model):
-        to_display = ''
+        to_display = False
         try:
-            for color, expr in self.treeview.colors.items():
-                if model.expr_eval(expr, check_load=False):
-                    to_display = color
+            for color, expr in self.treeview.colors.iteritems():
+                to_display = False
+                for cond in expr:
+                    if model.expr_eval(cond, check_load=False):
+                        to_display = color
+                        break
+                if to_display:
                     break
         except Exception:
             # we can still continue if we can't get the color..
@@ -677,12 +687,14 @@ class CellRendererButton(object):
         current_state = self.get_textual_value(model, 'draft')
         tv = column.get_tree_view()
         valid_states = self.__get_states() or []
-#         change this according to states or attrs: to not show the icon
+#       change this according to states or attrs: to not show the icon
         attrs_check = self.attrs_set(model)
-        if attrs_check or current_state not in valid_states or isinstance(model, group_record):
+        if valid_states and current_state not in valid_states or isinstance(model, group_record):
             cell.set_property('stock-id', None)
         else:
             cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+            cell.set_property("sensitive", not attrs_check)
+
 
     def open_remote(self, model, create, changed=False, text=None):
         raise NotImplementedError

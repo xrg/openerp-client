@@ -108,6 +108,9 @@ class selection(wid_int.wid_int):
 
     def clear(self):
         self.widget.child.set_text('')
+        
+    def grab_focus(self):
+        return self.widget.child.grab_focus()
 
     value = property(_value_get, _value_set, None,
       'The content of the widget or ValueError if not valid')

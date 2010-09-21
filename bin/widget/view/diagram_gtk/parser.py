@@ -27,7 +27,10 @@ import gettext
 import common
 import rpc
 import xdot
-import pydot # import pydot or you're not going to get anywhere my friend
+import pydot
+
+def quote_string(s):
+    return '"' + s + '"'
 
 class Viewdiagram(object):
     def __init__(self,window, model, node_attr, arrow_attr, attrs, screen):
@@ -45,16 +48,19 @@ class Viewdiagram(object):
 
     def draw_diagram(self):
         if self.screen.current_model:
-            self.id = self.screen.current_model.id 
-        label=self.arrow.get('label',False)
+            self.id = self.screen.current_model.id
+        label = self.arrow.get('label',False)
         graph = pydot.Dot(graph_type='digraph')
         if self.id:
-            dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get', self.id, self.model, self.node.get('object',False), self.arrow.get('object',False),self.arrow.get('source',False),self.arrow.get('destination',False),label,(140, 180), rpc.session.context)
+            dict = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'graph_get',
+                                             self.id, self.model, self.node.get('object', False),
+                                             self.arrow.get('object', False),self.arrow.get('source', False),
+                                             self.arrow.get('destination', False),label,(140, 180), rpc.session.context)
             node_lst = {}
             for node in dict['blank_nodes']:
                 dict['nodes'][str(node['id'])] = {'name' : node['name']}
 
-            record_list = rpc.session.rpc_exec_auth('/object', 'execute', self.node.get('object',False), 'read', dict['nodes'].keys())
+            record_list = rpc.session.rpc_exec_auth('/object', 'execute', self.node.get('object', False),'read', dict['nodes'].keys())
             shapes = {}
             for shape_field in self.node.get('shape','').split(';'):
                 if shape_field:
@@ -67,41 +73,40 @@ class Viewdiagram(object):
                     colors[color] = field
 
             for record in record_list:
-                record['shape'] = 'ellipse'     
-                for shape, expr in shapes.items():
+                record['shape'] = 'ellipse'
+                for shape, expr in shapes.iteritems():
                     if eval(expr, record):
-                        record['shape'] = shape 
-
+                        record['shape'] = shape
                 record['bgcolor'] = ''
                 record['style'] = ''
-                for color, expr in colors.items():
+                for color, expr in colors.iteritems():
                     if eval(expr, record):
                         record['bgcolor'] = color.strip()
-                        record['style'] = 'filled' 
-            for node in dict['nodes'].items():
+                        record['style'] = 'filled'
+            for node in dict['nodes'].iteritems():
                 record = {}
                 for res in record_list:
                     if int(node[0]) == int(res['id']):
                         record = res
                         break
-
-                graph.add_node(pydot.Node(node[1]['name'],
+                graph.add_node(pydot.Node(quote_string(node[1]['name']),
                                           style=record['style'],
                                           shape=record['shape'],
                                           color=record['bgcolor'],
-                                          URL=node[1]['name'] + "_" + node[0]  + "_node",
+                                          URL=quote_string(node[1]['name'] + "_" + node[0]  + "_node"),
                                           ))
                 node_lst[node[0]]  = node[1]['name']
-            for edge in dict['transitions'].items():
+            for edge in dict['transitions'].iteritems():
                 if len(edge) < 1 or str(edge[1][0]) not in node_lst or str(edge[1][1]) not in node_lst:
                     continue
-                graph.add_edge(pydot.Edge(node_lst[str(edge[1][0])],
-                                          node_lst[str(edge[1][1])],
-                                          label=dict['label'].get(edge[0],False)[1] or  None,
-                                          URL = str(dict['label'].get(edge[0],False)[1] or  None) + "_" + edge[0] + "_edge",
+                graph.add_edge(pydot.Edge(quote_string(node_lst[str(edge[1][0])]),quote_string(node_lst[str(edge[1][1])]),
+                                          label=dict['label'].get(edge[0], False)[1] or  None,
+                                          URL = quote_string(dict['label'].get(edge[0], '')[1] + "_" + edge[0] + "_edge"),
                                           fontsize='10',
                                           ))
             file =  graph.create_xdot()
+            if 'node_parent_field' in dict:
+                self.node['parent_field'] = dict['node_parent_field']
             if not dict['nodes']:
                 file = """digraph G {}"""
             self.window.set_dotcode(file, id=self.id, graph=graph)
@@ -115,48 +120,48 @@ class parser_diagram(interface.parser_interface):
            super(parser_diagram, self).__init__(window, parent=parent, attrs=attrs,
                     screen=screen)
            self.window = window
+
+    def get_view(self, view_name = ''):
+        view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'search' ,[('name','=', view_name)])
+        view = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'read' , view_id, ['res_id'])
+        return view and view[0]['res_id']
+
     def parse(self, model, root_node, fields):
         attrs = node_attributes(root_node)
         self.title = attrs.get('string', 'diagram')
         node_attr = None
         arrow_attr = None
-        for node in root_node.childNodes:
+        for node in root_node:
             node_attrs = node_attributes(node)
-            type = ""
             node_fields = []
-            if node.localName == 'node':
-                type = "node"
+            if node.tag == 'node':
                 node_attr = node_attrs
-
-            if node.localName == 'arrow':
-                type = "arrow"
+            if node.tag == 'arrow':
                 arrow_attr = node_attrs
 
-            if type in ['node','arrow']:
-                for child in node._get_childNodes():
-                    if node_attributes(child) and node_attributes(child).get('name',False):
+            if node.tag in ['node','arrow']:
+                for child in node:
+                    if node_attributes(child) and node_attributes(child).get('name', False):
                         node_fields.append(node_attributes(child)['name'])
-                fields = rpc.session.rpc_exec_auth('/object', 'execute', node_attrs.get('object',False), 'fields_get',node_fields)
-        
-                for key,val in fields.items():
-                    fields[key]['name'] = key
-                attrs[type] = {'string' :node_attributes(root_node).get('string',False), 'views':{'form': {'fields': fields,'arch' : node}}}
+                fields = rpc.session.rpc_exec_auth('/object', 'execute', node_attrs.get('object',False),'fields_get',node_fields)
 
-        if node_attr.get('form_view_ref',False):
-            view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'search' ,[('name','=', node_attr.get('form_view_ref',''))])
-            view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'read' ,view_id, ['res_id'])
-            node_attr['form_view_ref'] = view_id and view_id[0]['res_id']
+                for key, val in fields.iteritems():
+                    fields[key]['name'] = key
+                attrs[node.tag] = {'string' :node_attributes(root_node).get('string', False),
+                               'views':{'form': {'fields': fields,'arch' : node}}
+                               }
+
+        if node_attr.get('form_view_ref', False):
+            node_attr['form_view_ref'] = self.get_view(node_attr.get('form_view_ref',''))
         else:
             node_attr['form_view_ref'] = False
 
-        if arrow_attr.get('form_view_ref',False):
-            view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'search' ,[('name','=', arrow_attr.get('form_view_ref',''))])
-            view_id = rpc.session.rpc_exec_auth('/object', 'execute', "ir.model.data", 'read' ,view_id, ['res_id'])
-            arrow_attr['form_view_ref'] = view_id and view_id[0]['res_id']
+        if arrow_attr.get('form_view_ref', False):
+            arrow_attr['form_view_ref'] = self.get_view(arrow_attr.get('form_view_ref',''))
         else:
             arrow_attr['form_view_ref'] = False
-        
-        view = Viewdiagram(self.window, model, node_attr, arrow_attr, attrs,self.screen)
+
+        view = Viewdiagram(self.window, model, node_attr, arrow_attr, attrs, self.screen)
 
         return view, {}, [], ''
 

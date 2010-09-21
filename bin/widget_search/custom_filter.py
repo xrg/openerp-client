@@ -87,27 +87,31 @@ class custom_filter(wid_int.wid_int):
 
     def _value_get(self):
         try:
+            false_value_domain = []
+            type_cast = {'integer':lambda x:int(x),
+                         'float':lambda x:float(x),
+                         'boolean':lambda x:bool(eval(x)),
+                         'date':lambda x:(datetime.strptime(x, DT_FORMAT)).strftime(DT_FORMAT),
+                         'datetime':lambda x:(datetime.strptime(x, DHM_FORMAT)).strftime(DHM_FORMAT)
+                        }
             field_left = self.field_selection[self.combo_fields.get_active_text()][0]
             field_type = self.field_selection[self.combo_fields.get_active_text()][1]
             operator = self.op_selection[self.combo_op.get_active_text()]
-
             right_text =  self.right_text.get_text() or False
 
+            if operator in ['not ilike','<>', 'not in'] and field_type != 'boolean':
+                false_value_domain = ['|', (field_left,'=', False)]
             try:
-
-                right_text = (field_type == 'integer' and int(right_text)) or right_text
-                right_text = (field_type == 'float' and float(right_text)) or right_text
-                right_text = (field_type == 'boolean' and bool(right_text)) or right_text
-
-                if field_type == 'date' and right_text:
-                    dt_right_text = datetime.strptime(right_text,DT_FORMAT)
-                    right_text = dt_right_text.strftime(DT_FORMAT)
-
-                if field_type == 'datetime' and right_text:
-                    right_text = len(right_text)==10 and (right_text + ' 00:00:00') or right_text
-                    dttime_right_text = datetime.strptime(right_text,DHM_FORMAT)
-                    right_text = dttime_right_text.strftime(DHM_FORMAT)
-
+                cast_type = True
+                if field_type in type_cast:
+                    if field_type in ('date','datetime'):
+                        if right_text:
+                            if field_type == 'datetime':
+                                right_text = len(right_text)==10 and (right_text + ' 00:00:00') or right_text
+                        else:
+                            cast_type = False
+                    if cast_type:
+                        right_text = type_cast[field_type](right_text)
                 self.right_text.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("white"))
                 self.right_text.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("white"))
 
@@ -144,7 +148,9 @@ class custom_filter(wid_int.wid_int):
                 else:
                     operator = 'not in'
 
-            domain = [condition,(field_left,operator,right_text)]
+            domain = [condition, (field_left, operator, right_text)]
+            if false_value_domain:
+                domain = false_value_domain + domain
             return {'domain':domain}
 
         except Exception,e:

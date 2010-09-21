@@ -94,6 +94,9 @@ class calendar(wid_int.wid_int):
         if event.keyval == gtk.keysyms.F2:
             self.cal_open(widget, event, dest, parent)
             return True
+    
+    def grab_focus(self):
+        return self.entry1.grab_focus()
 
 
     def _value_get(self):
@@ -232,6 +235,9 @@ class datetime(wid_int.wid_int):
 
     value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 
+    def grab_focus(self):
+        return self.entry1.grab_focus()
+    
     def cal_open(self, widget, event, dest, parent=None):
         win = gtk.Dialog(_('OpenERP - Date selection'), parent,
                 gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,

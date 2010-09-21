@@ -30,7 +30,8 @@ class char(wid_int.wid_int):
         wid_int.wid_int.__init__(self, name, parent, attrs, screen)
         self.attrs = attrs
         self.widget = gtk.Entry()
-        self.widget.set_max_length(int(attrs.get('size',16)))
+        if attrs.get('type') == 'char':
+            self.widget.set_max_length(int(attrs.get('size',16)))
         self.widget.set_width_chars(15)
         self.widget.set_property('activates_default', True)
         if self.default_search:
@@ -67,6 +68,9 @@ class char(wid_int.wid_int):
     def clear(self):
         self.value = ''
 
+    def grab_focus(self):
+        self.widget.grab_focus()
+        
     def _readonly_set(self, value):
         self.widget.set_editable(not value)
         self.widget.set_sensitive(not value)
