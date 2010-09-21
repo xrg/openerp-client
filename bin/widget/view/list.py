@@ -727,14 +727,14 @@ class ViewList(parser_view):
         ids = self.sel_ids_get()
         for c in self.children:
             value = 0.0
-            length = len(self.screen.models.models)
-            if ids:
-                length = len(ids)
             cal_model = self.screen.models.models
             if not cal_model:
                 cal_model = self.store.models.lst
+            length = len(cal_model)
+            if ids:
+                length = len(ids)
             for model in cal_model:
-                if model.id in ids or not ids:
+                if model.id in ids or model in ids or not ids:
                     if isinstance(model, group_record):
                         value += model[self.children[c][0]].get()
                     else:
@@ -763,7 +763,7 @@ class ViewList(parser_view):
                         if store.on_iter_has_child(child):
                             process(child)
                         else:
-                            ids.append(child.id)
+                            ids.append(child.id or parent)
                 process(model)
             else:
                 if model.id:
