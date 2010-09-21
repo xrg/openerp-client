@@ -68,6 +68,9 @@ class char(wid_int.wid_int):
     def clear(self):
         self.value = ''
 
+    def grab_focus(self):
+        self.widget.grab_focus()
+        
     def _readonly_set(self, value):
         self.widget.set_editable(not value)
         self.widget.set_sensitive(not value)

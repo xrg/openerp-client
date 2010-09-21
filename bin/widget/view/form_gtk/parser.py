@@ -44,6 +44,7 @@ class Button(Observable):
             'label': attrs.get('string', 'unknown')
         }
         self.widget = gtk.Button(**args)
+        self.widget.set_flags(gtk.CAN_DEFAULT)
 
         readonly = bool(int(attrs.get('readonly', '0')))
         self.set_sensitive(not readonly)
@@ -146,8 +147,6 @@ class StateAwareWidget(object):
         sa = getattr(self.widget, 'attrs') or {}
 
         attrs_changes = eval(sa.get('attrs',"{}"),{'uid':rpc.session.uid})
-        if sa.get('default_focus',False):
-            self.widget.grab_focus()
         for k,v in attrs_changes.items():
             result = True
             for condition in v:
@@ -301,6 +300,8 @@ class parser_form(widget.view.interface.parser_interface):
            super(parser_form, self).__init__(window, parent=parent, attrs=attrs,
                     screen=screen)
            self.widget_id = 0
+           self.default_focus_field = False
+           self.default_focus_button = False
            self.accepted_attr_list = ['type','domain','context','relation', 'widget',
                                       'digits','function','store','fnct_search','fnct_inv','fnct_inv_arg',
                                       'func_obj','func_method','related_columns','third_table','states',
@@ -392,7 +393,13 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
+
+                if 'default_focus' in attrs and not self.default_focus_button:
+                    attrs['focus_button'] = attrs['default_focus']
+                    self.default_focus_button = True
+
                 button = Button(attrs)
+
                 states = [e for e in attrs.get('states','').split(',') if e]
                 saw_list.append(StateAwareWidget(button, states=states))
                 container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)))
@@ -463,6 +470,10 @@ class parser_form(widget.view.interface.parser_interface):
 
                 if fields[name]['type'] == 'many2one' and 'search_mode' in attrs:
                     fields[name]['search_mode'] = attrs['search_mode']
+
+                if 'default_focus' in attrs and not self.default_focus_field:
+                    fields[name]['focus_field'] = attrs['default_focus']
+                    self.default_focus_field = True
 
                 widget_act = widgets_type[type][0](self.window, self.parent, model, fields[name])
                 self.widget_id += 1
