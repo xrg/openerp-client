@@ -69,6 +69,10 @@ class reference(wid_int.wid_int):
         for s in self._selection:
             if self._selection[s]==value:
                 self.widget.child.set_text(s)
+    
+         
+    def grab_focus(self):
+        return self.widget.child.grab_focus()
 
 
     value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))

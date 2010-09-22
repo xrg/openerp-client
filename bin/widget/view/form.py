@@ -496,11 +496,25 @@ class ViewForm(parser_view):
             state = model['state'].get(model)
         else:
             state = 'draft'
+        button_focus = field_focus = None
         for widget in self.widgets.values():
             widget.display(model, state)
+            if widget.widget.attrs.get('focus_field'):
+                field_focus =  widget.widget
+                
         for widget in self.state_aware_widgets:
             widget.state_set(state)
             widget.attrs_set(model)
+            if widget.widget.attrs.get('focus_button'):
+                button_focus =  widget.widget
+        
+        if field_focus:
+            field_focus.grab_focus()
+            
+        if button_focus:
+            self.screen.window.set_default(button_focus.widget)
+            if not field_focus:
+                button_focus.grab_focus()
         return True
 
     def set_cursor(self, new=False):
@@ -513,8 +527,6 @@ class ViewForm(parser_view):
                 modelfield = model.mgroup.mfields.get(widgets.widget_name, None)
                 if not modelfield:
                     continue
-                if modelfield.get_state_attrs(model).get('default_focus',False):
-                    focus_widget = widgets
                 if not modelfield.get_state_attrs(model).get('valid', True):
                      if widgets.widget.position > position:
                           continue

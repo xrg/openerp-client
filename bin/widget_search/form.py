@@ -327,6 +327,8 @@ class form(wid_int.wid_int):
 
     def show(self):
         for w, widget, value in  self.widgets.values():
+            if w.attrs.get('default_focus'):
+                w.grab_focus()
             if value >= 2:
                 widget.show()
         self._hide=False

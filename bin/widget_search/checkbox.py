@@ -57,6 +57,9 @@ class checkbox(wid_int.wid_int):
             'domain':domain,
             'context': context
         }
+        
+    def grab_focus(self):
+        self.widget.child.grab_focus()
 
     def _value_set(self, value):
         pass
