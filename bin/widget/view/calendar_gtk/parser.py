@@ -408,14 +408,16 @@ class ViewCalendar(object):
             if event[fld] and fmt:
                 event[fld] = time.strptime(event[fld][:19], fmt)
 
-            # default time is 9:00 AM (for start and stop date)
+            # default start/stop time is 9:00 AM / 5:00 PM
             # if you set it to 0:00, then Calendar.Event removes 1 second to date_stop,
             # which sets it back to the day before at 23:59:59
-            if typ == 'date':
-                if event[fld]:
-                    ds = list(event[fld])
+            if typ == 'date' and event[fld]:
+                ds = list(event[fld])
+                if fld == self.date_start:
                     ds[3] = 9
-                    event[fld] = tuple(ds)
+                elif fld == self.date_stop:
+                    ds[3] = 17
+                event[fld] = tuple(ds)
 
     def __get_event(self, model):
 
