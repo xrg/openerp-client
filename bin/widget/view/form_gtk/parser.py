@@ -302,7 +302,7 @@ class parser_form(widget.view.interface.parser_interface):
            self.widget_id = 0
            self.default_focus_field = False
            self.default_focus_button = False
-           self.accepted_attr_list = ['type','domain','context','relation', 'widget',
+           self.accepted_attr_list = ['type','domain','context','relation', 'widget','attrs',
                                       'digits','function','store','fnct_search','fnct_inv','fnct_inv_arg',
                                       'func_obj','func_method','related_columns','third_table','states',
                                       'translate','change_default','size','selection']
