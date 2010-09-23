@@ -219,7 +219,7 @@ class _container(object):
 
         def size_allocate(label, allocation):
             label.set_size_request( allocation.width - 2, -1 )
-        if fname is None and name:
+        if fname is None and name and len(name) > 50:
             label.connect( "size-allocate", size_allocate )
 
         uid = rpc.session.uid
