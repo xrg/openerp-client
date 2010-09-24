@@ -1709,13 +1709,13 @@ class DotWindow(gtk.Window):
         self.actiongroup = actiongroup
         # Create actions
         actiongroup.add_actions((
-            ('node', gtk.STOCK_ADD, 'ADD NODE', None, None, self.on_node_create),
-            ('edge', gtk.STOCK_ADD, 'ADD EDGE', None, None, self.on_edge_create),
-            ('ZoomIn', gtk.STOCK_ZOOM_IN, None, None, None, self.widget.on_zoom_in),
-            ('ZoomOut', gtk.STOCK_ZOOM_OUT, None, None, None, self.widget.on_zoom_out),
-            ('ZoomFit', gtk.STOCK_ZOOM_FIT, None, None, None, self.widget.on_zoom_fit),
-            ('Zoom100', gtk.STOCK_ZOOM_100, None, None, None, self.widget.on_zoom_100),
-            ('Print', gtk.STOCK_PRINT, None, None, None, self.on_print),
+            ('node', gtk.STOCK_ADD, 'ADD NODE', None, 'Add New Node', self.on_node_create),
+            ('edge', gtk.STOCK_ADD, 'ADD EDGE', None, 'Add New Edge', self.on_edge_create),
+            ('ZoomIn', gtk.STOCK_ZOOM_IN, None, None, 'Enlarge the Diagram', self.widget.on_zoom_in),
+            ('ZoomOut', gtk.STOCK_ZOOM_OUT, None, None, 'Shrink the Diagram', self.widget.on_zoom_out),
+            ('ZoomFit', gtk.STOCK_ZOOM_FIT, None, None, 'Fit the diagram to the window', self.widget.on_zoom_fit),
+            ('Zoom100', gtk.STOCK_ZOOM_100, None, None, 'Show the diagram at its normal size', self.widget.on_zoom_100),
+            ('Print', gtk.STOCK_PRINT, None, None, 'Print the Diagram', self.on_print),
         ))
         # Add the actiongroup to the uimanager
         uimanager.insert_action_group(actiongroup, 0)
@@ -1776,7 +1776,12 @@ class DotWindow(gtk.Window):
         but_close = self.dia_select.add_button(gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE)
         but_del = self.dia_select.add_button(gtk.STOCK_DELETE, gtk.RESPONSE_DELETE_EVENT)
         but_edit = self.dia_select.add_button(gtk.STOCK_EDIT, gtk.RESPONSE_APPLY)
-
+        label = 'Node'
+        if self.url.find('edge') != -1:
+            label = 'Edge'
+        but_close.set_tooltip_text('Close Current %s'%(label))
+        but_del.set_tooltip_text('Delete Current %s'%(label))
+        but_edit.set_tooltip_text('Edit Current %s'%(label))
 
         v_box_label = gtk.VBox()
         self.dia_select.get_child().add(v_box_label)
