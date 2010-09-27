@@ -25,7 +25,7 @@ import gobject
 import gtk
 import tools
 import itertools
-
+import copy
 import rpc
 from rpc import RPCProxy
 import service
@@ -668,22 +668,19 @@ class ViewList(parser_view):
         if last_grouped_col:
             prev_col = filter(lambda col: col.name == last_grouped_col, \
                              self.widget_tree.get_columns())[0]
-            self.widget_tree.move_column_after(move_col, prev_col)
+            self.widget_tree.move_column_after(move_col and move_col[0], prev_col)
         else:
             for col in self.columns:
                 if col == self.columns[0]:prev_col = None
                 self.widget_tree.move_column_after(col, prev_col)
                 prev_col = col
-        self.changed_col.remove(move_col)
+        for col in move_col:
+            self.changed_col.remove(col)
 
     def move_colums(self):
         if self.screen.context.get('group_by', False):
             groupby = self.screen.context['group_by']
-            group_col = []
-            for x in groupby:
-                group_col += [col for col in self.columns if col.name == x]
-            group_col = group_col + filter(lambda x:x.name not in groupby, self.columns)
-            for col in group_col:
+            for col in self.columns:
                 if col.name in groupby:
                     if not col in self.changed_col:
                         if not len(self.changed_col):
@@ -694,10 +691,11 @@ class ViewList(parser_view):
                         self.widget_tree.move_column_after(col, base_col)
                 else:
                     if col in self.changed_col:
-                        self.set_column_to_default_pos(col, groupby[-1])
+                        self.set_column_to_default_pos([col], groupby[-1])
         else:
             if self.changed_col:
-                self.set_column_to_default_pos(self.changed_col[-1])
+                remove_col = copy.copy(self.changed_col)
+                self.set_column_to_default_pos(remove_col)
 
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
