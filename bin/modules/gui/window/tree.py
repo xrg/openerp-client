@@ -89,7 +89,8 @@ class tree(object):
         self.help_frame = False
         wid = self.tree_res.widget_get()
         if self.help:
-            self.help_frame = common.get_action_help(self.help, self.close_help)
+            action_tips = common.action_tips(self.help)
+            self.help_frame = action_tips.help_frame
             if self.help_frame:
                 vbox = gtk.VBox()
                 vbox.pack_start(self.help_frame, expand=False, fill=False, padding=2)
@@ -105,18 +106,6 @@ class tree(object):
         for signal in dict:
             self.glade.signal_connect(signal, dict[signal])
         self.expand = True
-
-    def close_help(self, *args):
-        if not self.help_frame:
-            return True
-        action_id = self.help.get('action_id', False)
-        if action_id:
-            value = {'default_user_ids':[(4, rpc.session.uid)]}
-            rpc.session.rpc_exec_auth('/object', 'execute',
-                        'ir.actions.act_window', 'write', action_id, value, rpc.session.context)
-            self.help_frame.hide_all()
-            self.help_frame = False
-        return True
 
     def sig_reload(self, widget=None):
         self.tree_sc.update()

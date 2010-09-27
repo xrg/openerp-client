@@ -1186,21 +1186,6 @@
                           </widget>
                         </child>
                         <child>
-                          <widget class="GtkImageMenuItem" id="help_tips">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">_Tips</property>
-                            <property name="use_underline">True</property>
-                            <signal name="activate" handler="on_help_tips_activate"/>
-                            <child internal-child="image">
-                              <widget class="GtkImage" id="image4244">
-                                <property name="visible">True</property>
-                                <property name="stock">gtk-index</property>
-                                <property name="icon_size">1</property>
-                              </widget>
-                            </child>
-                          </widget>
-                        </child>
-                        <child>
                           <widget class="GtkMenuItem" id="shortcuts">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">Keyboard Shortcuts</property>
