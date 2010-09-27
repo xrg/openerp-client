@@ -92,7 +92,8 @@ class ViewForm(parser_view):
         self.help = help
         self.help_frame = False
         if self.help:
-            self.help_frame = common.get_action_help(self.help, self.close_help)
+            action_tips = common.action_tips(self.help)
+            self.help_frame = action_tips.help_frame
             if self.help_frame:
                 vbox = gtk.VBox()
                 vbox.pack_start(self.help_frame, expand=False, fill=False, padding=2)
@@ -348,17 +349,6 @@ class ViewForm(parser_view):
 
                     sep = True
 
-    def close_help(self, *args):
-        if not self.help_frame:
-            return True
-        action_id = self.help.get('action_id', False)
-        if action_id:
-            value = {'default_user_ids':[(4, rpc.session.uid)]}
-            rpc.session.rpc_exec_auth('/object', 'execute',
-                        'ir.actions.act_window', 'write', action_id, value, rpc.session.context)
-            self.help_frame.hide_all()
-            self.help_frame = False
-        return True
 #    def move_paned_press(self, widget, event):
 #        if not self.prev:
 #            self.prev = self.hpaned.get_position()
@@ -501,16 +491,16 @@ class ViewForm(parser_view):
             widget.display(model, state)
             if widget.widget.attrs.get('focus_field'):
                 field_focus =  widget.widget
-                
+
         for widget in self.state_aware_widgets:
             widget.state_set(state)
             widget.attrs_set(model)
             if widget.widget.attrs.get('focus_button'):
                 button_focus =  widget.widget
-        
+
         if field_focus:
             field_focus.grab_focus()
-            
+
         if button_focus:
             self.screen.window.set_default(button_focus.widget)
             if not field_focus:
