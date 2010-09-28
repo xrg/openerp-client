@@ -38,6 +38,8 @@ class filter(wid_int.wid_int):
         icon.set_from_stock(attrs.get('icon','gtk-home'), 1)
         self.butt.set_image(icon)
         self.butt.set_image_position(gtk.POS_TOP)
+        self.butt.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("grey"))
+        self.butt.modify_bg(gtk.STATE_PRELIGHT, gtk.gdk.color_parse("light grey"))
         help = attrs.get('help', False) or attrs.get('string', False)
         if help:
             self.butt.set_tooltip_markup(tools.to_xml(help))
