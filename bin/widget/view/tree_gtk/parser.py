@@ -288,6 +288,7 @@ class Char(object):
         cell.set_property('background', None)
         cell.set_property('xalign', align)
         if isinstance(model, group_record) and gb:
+            cell.set_property('foreground', 'black')
             font = pango.FontDescription('Times New Roman bold 10')
             if self.field_name in model.field_with_empty_labels:
                 cell.set_property('foreground', '#AAAAAA')
