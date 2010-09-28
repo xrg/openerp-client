@@ -143,6 +143,7 @@ class dialog(object):
             end = (res not in (gtk.RESPONSE_OK, gtk.RESPONSE_APPLY)) or self.screen.current_model.validate()
             if not end:
                 self.screen.display()
+                self.screen.current_view.set_cursor()
 
         if res in (gtk.RESPONSE_OK, gtk.RESPONSE_APPLY) :
             self.screen.current_view.set_value()

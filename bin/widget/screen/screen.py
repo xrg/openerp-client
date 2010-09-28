@@ -606,6 +606,7 @@ class Screen(signal_event.signal_event):
             self.current_model.cancel()
         if self.current_view:
             self.current_view.cancel()
+            self.current_view.reset()
 
     def save_current(self):
         if not self.current_model:
