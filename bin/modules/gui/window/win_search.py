@@ -87,11 +87,12 @@ class dialog(object):
         while True:
             try:
                 res = self.dia.run()
-                if res==gtk.RESPONSE_OK:
+                if res == gtk.RESPONSE_OK:
                     if self.screen.current_model.validate() and self.screen.save_current():
                         return self.screen.current_model.id
                     else:
                         self.screen.display()
+                        self.screen.current_view.set_cursor()
                 else:
                     break
             except Exception:
