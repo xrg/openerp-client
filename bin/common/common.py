@@ -433,6 +433,8 @@ is displayed on the second tab.
     win.set_icon(OPENERP_ICON)
     win.set_title("OpenERP - %s" % title)
 
+    if not isinstance(message, basestring):
+        message = str(message)
     xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % escape(message))
 
     details_buffer = gtk.TextBuffer()
