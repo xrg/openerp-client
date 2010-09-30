@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-04-25 04:19+0000\n"
-"Last-Translator: Dragan Jovanovic <dragan.jovanovic@strojotex.com>\n"
+"PO-Revision-Date: 2010-09-29 07:52+0000\n"
+"Last-Translator: Goran Kliska (Aplikacija d.o.o.) <gkliska@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-26 03:41+0000\n"
+"X-Launchpad-Export-Date: 2010-09-30 04:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/widget_search/calendar.py:120 bin/widget/view/form_gtk/calendar.py:136
@@ -350,7 +350,7 @@ msgstr "Datoteka je prazna"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "Uvoz!"
 
 #: bin/modules/gui/window/win_import.py:57
 msgid "XML-RPC error !"
@@ -358,7 +358,7 @@ msgstr "Greška u XML-RPC !"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "Uvezen jedan objekt !"
 
 #: bin/modules/gui/window/win_import.py:64
 #, python-format
@@ -367,7 +367,7 @@ msgstr "Uvezeno %d objekata !"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "Greška prilikom uvoza"
 
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
@@ -381,7 +381,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "Odaberite baqrem jedno polje za uvoz"
 
 #: bin/modules/gui/window/win_selection.py:52
 msgid "Name"
@@ -653,11 +653,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Vaša baza podataka je nadograđena."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Vaše baze podataka su nadograđene."
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
@@ -1027,7 +1027,7 @@ msgstr "Greška pri zapisivanju datoteke: %s"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Pogrešna vrijednost datuma ! Godina mora biti veća od 1899 !"
 
 #: bin/widget/view/form_gtk/calendar.py:130
 #: bin/widget/view/form_gtk/calendar.py:263
@@ -1037,7 +1037,7 @@ msgstr "Ovaj grafički element je samo za čitanje !"
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Pogrešna vrijednost vremena ! Godina mora biti veća od 1899 !"
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Hour:"

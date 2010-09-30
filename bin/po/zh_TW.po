@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-09-08 08:24+0000\n"
+"PO-Revision-Date: 2010-09-29 07:48+0000\n"
 "Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-09 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-09-30 04:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -48,11 +48,11 @@ msgstr "選擇插件程式"
 #: bin/translate.py:184
 #, python-format
 msgid "Unable to set locale %s"
-msgstr ""
+msgstr "無法將語言設為 %s"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "由於鍵盤送出終止指令，結束 OpenERP"
 
 #: bin/options.py:108
 #, python-format
@@ -68,12 +68,12 @@ msgstr "定義替換的config檔案"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "啟用基本除錯，相當於  '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "指定紀錄等級為: %s"
 
 #
 # File: bin/options.py, line: 93
@@ -222,6 +222,9 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"您的問題*無法*提交到品質控管小組！\n"
+"請依下列所示手動回報此問題:\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
@@ -265,11 +268,11 @@ msgstr "參數："
 
 #: bin/widget_search/form.py:301
 msgid "The content of the form or exception if not valid"
-msgstr ""
+msgstr "表單或例外的內容無效"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "視窗元件或者例外的內容無效"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -379,11 +382,11 @@ msgstr "OpenERP 搜尋: %s (%%d 筆結果)"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "檔案無任何內容"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "匯入!"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 54
@@ -416,11 +419,11 @@ msgstr "欄位名稱"
 #: bin/modules/gui/window/win_import.py:186
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
-msgstr ""
+msgstr "您無法匯入欄位 %s ，因為我們無法自動偵測它"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "您尚未選擇任何欄位匯入"
 
 #
 # File: bin/modules/gui/window/win_selection.py, line: 52
@@ -486,7 +489,7 @@ msgstr "此物件的資源ID不存在!"
 
 #: bin/modules/gui/window/form.py:221
 msgid "No record selected ! You can only attach to existing record."
-msgstr ""
+msgstr "尚未選擇任何紀錄! 你只能附加在已存在的紀錄"
 
 #: bin/modules/gui/window/form.py:233
 msgid "You have to select a record !"
@@ -708,7 +711,7 @@ msgstr "偏好設定"
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
-msgstr ""
+msgstr "預設的顯示語言已被修改，請不要忘記重新啟動客戶端"
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
@@ -762,7 +765,7 @@ msgstr "超級管理員密碼:"
 
 #: bin/modules/gui/main.py:172 bin/modules/action/wizard.py:137
 msgid "OpenERP Computing"
-msgstr ""
+msgstr "OpenERP 執行中"
 
 #
 # File: bin/modules/action/wizard.py, line: 143
@@ -791,11 +794,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "合約ID"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "合約密碼"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
@@ -807,19 +810,19 @@ msgstr "以下所列為可更新的項目:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "您現在可以轉移您的資料庫"
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "轉移資料庫"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "您的資料庫已升級"
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "您的資料庫已升級"
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
@@ -1098,7 +1101,7 @@ msgstr "無法恢復帳套"
 #: bin/modules/gui/main.py:1402
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr ""
+msgstr "確認必碼與新密碼不符，操作已被取消!"
 
 #
 # File: bin/modules/gui/main.py, line: 1100
@@ -2343,7 +2346,7 @@ msgstr "OpenERP - 授權許可"
 
 #: bin/openerp.glade:3588
 msgid "OpenERP license"
-msgstr ""
+msgstr "OpenERP 授權"
 
 #
 # File: bin/openerp.glade, line: 5336
@@ -2854,7 +2857,7 @@ msgstr "CSV參數"
 
 #: bin/openerp.glade:6120
 msgid "OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #
 # File: bin/openerp.glade, line: 8199
@@ -3315,7 +3318,7 @@ msgstr "<b>保持聯繫</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "我想收到 Open ERP 電子書(PDF), 請以電子郵件寄給我"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
@@ -3335,4 +3338,4 @@ msgstr "gtk-取消"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
