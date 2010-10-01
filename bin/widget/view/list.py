@@ -706,9 +706,9 @@ class ViewList(parser_view):
             for model in cal_model:
                 if model.id in ids or model in ids or not ids:
                     if isinstance(model, group_record):
-                        value += model[self.children[c][0]].get()
+                        value += float(model[self.children[c][0]].get() or 0.0)
                     else:
-                        value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
+                        value += float(model.fields_get()[self.children[c][0]].get(model, check_load=False) or 0.0)
             if self.children[c][5] == 'avg' and length:
                 value = value/length
             label_str = tools.locale_format('%.' + str(self.children[c][3]) + 'f', value)
