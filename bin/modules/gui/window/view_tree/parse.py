@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -31,27 +31,30 @@ class parse(object):
         self.pixbufs = {}
 
     def _psr_start(self, name, attrs):
-        if name=='tree':
+        if name == 'tree':
             self.title = attrs.get('string',_('Tree'))
             self.toolbar = bool(attrs.get('toolbar',False))
             self.colors = {}
             for color_spec in attrs.get('colors', '').split(';'):
                 if color_spec:
                     colour, test = color_spec.split(':')
-                    self.colors[colour] = test
-        elif name=='field':
+                    self.colors.setdefault(colour,[])
+                    self.colors[colour].append(test)
+        elif name == 'field':
+            if attrs.get('invisible', False):
+                self.invisible_fields.append(str(attrs['name']))
+                return True
             type = self.fields[attrs['name']]['type']
             field_name = attrs.get('string', self.fields[attrs['name']]['string'])
             if type!='boolean':
-                column = gtk.TreeViewColumn(field_name) #, cell, text=self.pos)
+                column = gtk.TreeViewColumn(field_name)
                 if 'icon' in attrs:
                     render_pixbuf = gtk.CellRendererPixbuf()
                     column.pack_start(render_pixbuf, expand=False)
                     column.add_attribute(render_pixbuf, 'pixbuf', self.pos)
                     self.fields_order.append(str(attrs['icon']))
-                    self.pixbufs[self.pos]=True
-                    self.pos+=1
-
+                    self.pixbufs[self.pos] = True
+                    self.pos += 1
                 cell = gtk.CellRendererText()
                 cell.set_fixed_height_from_font(1)
                 if type=='float':
@@ -61,7 +64,7 @@ class parse(object):
             else:
                 cell = gtk.CellRendererToggle()
                 column = gtk.TreeViewColumn (field_name, cell, active=self.pos)
-            self.pos+=1
+            self.pos += 1
             column.set_resizable(1)
             self.fields_order.append(str(attrs['name']))
             self.tree.append_column(column)
@@ -85,7 +88,8 @@ class parse(object):
         self.tree = tree
         self.pos = 1
 
-        self.fields_order=[]
+        self.fields_order = []
+        self.invisible_fields = []
 
         psr = expat.ParserCreate()
         psr.StartElementHandler = self._psr_start

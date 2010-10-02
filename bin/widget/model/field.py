@@ -62,7 +62,7 @@ class CharField(object):
 
     def domain_get(self, model):
         dom = self.attrs.get('domain', '[]')
-        return model.expr_eval(dom)
+        return model.expr_eval(dom) or []
 
     def context_get(self, model, check_load=True, eval=True):
         context = {}
@@ -146,13 +146,13 @@ class CharField(object):
         ro = model.mgroup._readonly
         state_changes = dict(self.attrs.get('states',{}).get(state,[]))
         if 'readonly' in state_changes:
-            self.get_state_attrs(model)['readonly'] = state_changes['readonly'] or ro
+            self.get_state_attrs(model)['readonly'] = state_changes.get('readonly', False) or ro
         else:
-            self.get_state_attrs(model)['readonly'] = self.attrs['readonly'] or ro
+            self.get_state_attrs(model)['readonly'] = self.attrs.get('readonly', False) or ro
         if 'required' in state_changes:
-            self.get_state_attrs(model)['required'] = state_changes['required']
+            self.get_state_attrs(model)['required'] = state_changes.get('required', False)
         else:
-            self.get_state_attrs(model)['required'] = self.attrs['required']
+            self.get_state_attrs(model)['required'] = self.attrs.get('required', False)
         if 'value' in state_changes:
             self.set(model, state_changes['value'], test_state=False, modified=True)
 
@@ -175,6 +175,15 @@ class BinaryField(CharField):
 
     def get_size_name(self):
         return "%s.size" % self.name
+
+    def validate(self, model):
+        ok = True
+        if bool(self.get_state_attrs(model).get('required', 0)):
+            name = "%s.size" % self.name
+            if not model.value.get(name, False):
+                ok=False
+        self.get_state_attrs(model)['valid'] = ok
+        return ok
 
     def set(self, model, value, test_state=True, modified=False, get_binary_size=True):
         self.__check_model(model)

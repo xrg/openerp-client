@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-08-26 06:35+0000\n"
+"PO-Revision-Date: 2010-09-29 07:48+0000\n"
 "Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-08-27 03:38+0000\n"
+"X-Launchpad-Export-Date: 2010-09-30 04:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -48,11 +48,11 @@ msgstr "選擇插件程式"
 #: bin/translate.py:184
 #, python-format
 msgid "Unable to set locale %s"
-msgstr ""
+msgstr "無法將語言設為 %s"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "由於鍵盤送出終止指令，結束 OpenERP"
 
 #: bin/options.py:108
 #, python-format
@@ -68,12 +68,12 @@ msgstr "定義替換的config檔案"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "啟用基本除錯，相當於  '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "指定紀錄等級為: %s"
 
 #
 # File: bin/options.py, line: 93
@@ -213,7 +213,7 @@ msgstr ""
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
-msgstr "您的問題已提交到質量小組！"
+msgstr "您的問題已提交到品質控管小組！"
 
 #: bin/common/common.py:446
 #, python-format
@@ -222,17 +222,17 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"您的問題*無法*提交到品質控管小組！\n"
+"請依下列所示手動回報此問題:\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
 msgstr "錯誤"
 
-#
-# File: bin/common/common.py, line: 499
-# File: bin/common/common.py, line: 499
 #: bin/common/common.py:599
 msgid "Open with..."
-msgstr "打開:"
+msgstr "以...開啟"
 
 #: bin/widget_search/checkbox.py:36 bin/widget_search/checkbox.py:49
 msgid "Yes"
@@ -242,24 +242,11 @@ msgstr "是(&Y)"
 msgid "No"
 msgstr "否(&N)"
 
-#
-# File: bin/widget_search/checkbox.py, line: 55
-# File: bin/widget_search/spinbutton.py, line: 69
-# File: bin/widget_search/spinint.py, line: 73
-# File: bin/widget_search/calendar.py, line: 106
-# File: bin/widget_search/char.py, line: 47
-# File: bin/widget_search/reference.py, line: 74
-# File: bin/widget_search/checkbox.py, line: 55
-# File: bin/widget_search/spinbutton.py, line: 69
-# File: bin/widget_search/spinint.py, line: 73
-# File: bin/widget_search/calendar.py, line: 106
-# File: bin/widget_search/char.py, line: 47
-# File: bin/widget_search/reference.py, line: 74
 #: bin/widget_search/checkbox.py:55 bin/widget_search/char.py:47
 #: bin/widget_search/reference.py:74 bin/widget_search/spinbutton.py:69
 #: bin/widget_search/calendar.py:117 bin/widget_search/spinint.py:73
 msgid "The content of the widget or ValueError if not valid"
-msgstr "如果無效時表單的內容或出錯信息"
+msgstr "如果無效時表單的內容或錯誤訊息"
 
 #: bin/widget_search/form.py:145
 msgid "Limit :"
@@ -281,11 +268,11 @@ msgstr "參數："
 
 #: bin/widget_search/form.py:301
 msgid "The content of the form or exception if not valid"
-msgstr ""
+msgstr "表單或例外的內容無效"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "視窗元件或者例外的內容無效"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -300,14 +287,12 @@ msgid ""
 "You can also use \"=\" to set the date to the current date/time and '-' to "
 "clear the field."
 msgstr ""
-"您可以使用特殊的操作如：＋，－或＝。\n"
-"增加，減少目前選定的日期。\n"
-"等於可以設置部分選定日期。如：12h＝12小時，8d＝8天，4w＝4週，1m＝1個月，2y＝2年。\n"
-"例子：\n"
-"* 21d：在選定的年份增加了21天。\n"
-"* ＝23w：在選定的年份指定至第23周。\n"
-"* －4m：在目前的日期減少4個月。\n"
-"您也可以使用 “＝” 設定日期到目前的日期／時間以及'－'以清除領域。"
+"你可以使用＋，－或=這些特殊含義的操作符。正／負符號在目前日期下增加/減少日期。等於號設定所選日期。操作符後的資料格式：12h表示12小時，8d表示8天，"
+"4w表示4周, 1m表示1個月,2y表示2年。應用舉例：\n"
+"* +21d: 在所選日期上新增21天\n"
+"* =23w: 設定日期為本年的第23周\n"
+"* -4m: 從目前日期減4個月\n"
+"你也可以使用「＝」來設定日期為目前日期／時間，使用「－」來清除該欄位。"
 
 #: bin/widget_search/calendar.py:55
 msgid "Start date"
@@ -317,7 +302,7 @@ msgstr "開始日期"
 #: bin/widget/view/form_gtk/calendar.py:62
 #: bin/widget/view/form_gtk/calendar.py:184
 msgid "Open the calendar widget"
-msgstr "打開日曆控件"
+msgstr "打開日曆"
 
 #: bin/widget_search/calendar.py:75
 msgid "End date"
@@ -326,7 +311,7 @@ msgstr "結束日期"
 #: bin/widget_search/calendar.py:120 bin/widget/view/form_gtk/calendar.py:136
 #: bin/widget/view/form_gtk/calendar.py:266
 msgid "OpenERP - Date selection"
-msgstr "OpenERP - 選擇日期"
+msgstr "OpenERP - 日期選擇"
 
 #
 # File: bin/modules/action/wizard.py, line: 171
@@ -397,11 +382,11 @@ msgstr "OpenERP 搜尋: %s (%%d 筆結果)"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "檔案無任何內容"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "匯入!"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 54
@@ -412,7 +397,7 @@ msgstr "XML-RPC出錯！"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "匯入一個物件!"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 57
@@ -424,26 +409,21 @@ msgstr "匯入了 %d 個物件！"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "匯入失敗!"
 
-#
-# File: bin/modules/gui/window/win_import.py, line: 93
-# File: bin/modules/gui/window/win_import.py, line: 97
-# File: bin/modules/gui/window/win_import.py, line: 93
-# File: bin/modules/gui/window/win_import.py, line: 97
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
 msgid "Field name"
-msgstr "欄目名稱"
+msgstr "欄位名稱"
 
 #: bin/modules/gui/window/win_import.py:186
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
-msgstr ""
+msgstr "您無法匯入欄位 %s ，因為我們無法自動偵測它"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "您尚未選擇任何欄位匯入"
 
 #
 # File: bin/modules/gui/window/win_selection.py, line: 52
@@ -491,28 +471,25 @@ msgstr ""
 msgid "Error Opening Excel !"
 msgstr "打開Excel出錯！"
 
-#
-# File: bin/modules/gui/window/win_export.py, line: 81
-# File: bin/modules/gui/window/win_export.py, line: 81
 #: bin/modules/gui/window/win_export.py:80
 msgid ""
 "Function only available for MS Office !\n"
 "Sorry, OOo users :("
 msgstr ""
 "該功能只提供給MS Office！\n"
-"抱歉，OOo的成員"
+"抱歉，OpenOffice的使用者 :("
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "匯出失敗!"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "此物件的資源ID不存在!"
 
 #: bin/modules/gui/window/form.py:221
 msgid "No record selected ! You can only attach to existing record."
-msgstr ""
+msgstr "尚未選擇任何紀錄! 你只能附加在已存在的紀錄"
 
 #: bin/modules/gui/window/form.py:233
 msgid "You have to select a record !"
@@ -556,16 +533,13 @@ msgstr "最新更改者"
 msgid "Latest Modification Date"
 msgstr "最新更改日期"
 
-#
-# File: bin/modules/gui/window/form.py, line: 230
-# File: bin/modules/gui/window/form.py, line: 230
 #: bin/modules/gui/window/form.py:254
 msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
 msgstr ""
 "記錄尚未儲存！\n"
-"您是否要清楚本記錄？"
+"您是否要清除本記錄？"
 
 #
 # File: bin/modules/gui/window/form.py, line: 233
@@ -737,11 +711,11 @@ msgstr "偏好設定"
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
-msgstr ""
+msgstr "預設的顯示語言已被修改，請不要忘記重新啟動客戶端"
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "預設的語言已被修改"
 
 #
 # File: bin/modules/gui/main.py, line: 145
@@ -791,7 +765,7 @@ msgstr "超級管理員密碼:"
 
 #: bin/modules/gui/main.py:172 bin/modules/action/wizard.py:137
 msgid "OpenERP Computing"
-msgstr ""
+msgstr "OpenERP 執行中"
 
 #
 # File: bin/modules/action/wizard.py, line: 143
@@ -820,35 +794,35 @@ msgstr ""
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "合約ID"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "合約密碼"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "您已經使用最新的版本"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "以下所列為可更新的項目:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "您現在可以轉移您的資料庫"
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "轉移資料庫"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "您的資料庫已升級"
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "您的資料庫已升級"
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
@@ -868,7 +842,7 @@ msgstr "沒有找到相應資料庫，請建立！"
 msgid ""
 "The versions of the server (%s) and the client (%s) missmatch. The client "
 "may not work properly. Use it at your own risks."
-msgstr "伺服器(%s)與客戶端(%s)版本不匹配。客戶端可能不能正確工作，請警惕操作後果。"
+msgstr "伺服器(%s)與客戶端(%s)版本不匹配。客戶端可能不能正確工作，如欲繼續使用，請自行承擔可能的風險。"
 
 #: bin/modules/gui/main.py:595
 msgid "Sorry,'"
@@ -1023,6 +997,8 @@ msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"驗證失敗!\n"
+"錯誤的使用者名稱或密碼"
 
 #
 # File: bin/modules/gui/main.py, line: 761
@@ -1125,7 +1101,7 @@ msgstr "無法恢復帳套"
 #: bin/modules/gui/main.py:1402
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr ""
+msgstr "確認必碼與新密碼不符，操作已被取消!"
 
 #
 # File: bin/modules/gui/main.py, line: 1100
@@ -1212,7 +1188,7 @@ msgstr "按下 <i>'+'</i>, <i>'-'</i> 或 <i>'='</i> 執行特別的日期計算
 #: bin/widget/view/tree_gtk/editabletree.py:124
 #, python-format
 msgid "Shortcut: %s"
-msgstr "捷徑： %s"
+msgstr "快速鍵: %s"
 
 #: bin/widget/view/tree_gtk/editabletree.py:124
 msgid "F1 New - F2 Open/Search"
@@ -1221,7 +1197,7 @@ msgstr "F1 新檔案 - F2 開啟舊檔／搜尋"
 #: bin/widget/view/tree_gtk/editabletree.py:189
 #, python-format
 msgid "Warning; field %s is required!"
-msgstr "注意；需要%s"
+msgstr "警告; 需要欄位 %s！"
 
 #: bin/widget/view/graph_gtk/parser.py:65
 msgid "Can not generate graph !"
@@ -1229,23 +1205,23 @@ msgstr "不能產生圖表"
 
 #: bin/widget/view/form.py:170
 msgid "You must save this record to use the relate button !"
-msgstr "您必須保存這個記錄以使用涉及的按鈕！"
+msgstr "必須在保持該記錄後再使用相關的按鈕！"
 
 #: bin/widget/view/form.py:182
 msgid "You must select a record to use the relate button !"
-msgstr "您必須選取一項記錄以使用涉及的按鈕！"
+msgstr "須選擇記錄後使用相關按鈕！"
 
 #: bin/widget/view/form.py:200 bin/widget/view/form_gtk/parser.py:558
 #: bin/widget/view/form_gtk/parser.py:672
 #: bin/widget/view/form_gtk/parser.py:729
 msgid "No other language available!"
-msgstr "沒有其他語言可供選擇"
+msgstr "未安裝其他語系！"
 
 #: bin/widget/view/form.py:207 bin/widget/view/form_gtk/parser.py:574
 #: bin/widget/view/form_gtk/parser.py:678
 #: bin/widget/view/form_gtk/parser.py:735
 msgid "Add Translation"
-msgstr "加入翻譯"
+msgstr "新增翻譯"
 
 #: bin/widget/view/form.py:258 bin/widget/view/form_gtk/parser.py:791
 msgid "Translate label"
@@ -1254,7 +1230,7 @@ msgstr "翻譯標籤"
 #: bin/widget/view/widget_parse.py:53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
-msgstr "GTK 客戶端不支援這類型的 (%s)"
+msgstr "GTK客戶端不支持類型(%s)"
 
 #: bin/widget/view/widget_parse.py:63
 msgid "No valid view found for this object!"
@@ -1291,7 +1267,7 @@ msgstr "動作"
 
 #: bin/widget/view/form_gtk/many2one.py:169
 msgid "Report"
-msgstr "報告"
+msgstr "報表"
 
 #
 # File: bin/widget/view/form_gtk/many2one.py, line: 369
@@ -1312,7 +1288,7 @@ msgstr "開啟"
 
 #: bin/widget/view/form_gtk/binary.py:85 bin/widget/view/form_gtk/image.py:80
 msgid "Save As"
-msgstr "另存為"
+msgstr "另存新檔"
 
 #: bin/widget/view/form_gtk/binary.py:89 bin/widget/view/form_gtk/image.py:89
 msgid "Clear"
@@ -1327,7 +1303,7 @@ msgstr "不能讀取檔案內的資料"
 #: bin/widget/view/form_gtk/binary.py:150
 #, python-format
 msgid "Error reading the file: %s"
-msgstr "讀取檔案錯誤：%s"
+msgstr "讀取檔案: %s發生錯誤"
 
 #: bin/widget/view/form_gtk/binary.py:133
 msgid "All Files"
@@ -1340,35 +1316,30 @@ msgstr "選擇一個檔案..."
 #: bin/widget/view/form_gtk/binary.py:172
 #, python-format
 msgid "Error writing the file: %s"
-msgstr "寫入檔案錯誤：%s"
+msgstr "寫入檔案: %s發生錯誤"
 
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "錯誤的日期! 必須大於1899年!"
 
-#
-# File: bin/widget/view/form_gtk/calendar.py, line: 115
-# File: bin/widget/view/form_gtk/calendar.py, line: 238
-# File: bin/widget/view/form_gtk/calendar.py, line: 115
-# File: bin/widget/view/form_gtk/calendar.py, line: 238
 #: bin/widget/view/form_gtk/calendar.py:130
 #: bin/widget/view/form_gtk/calendar.py:263
 msgid "This widget is readonly !"
-msgstr "該部件為只讀！"
+msgstr "該部件為唯讀"
 
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "錯誤的日期! 必須大於1899年!"
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Hour:"
-msgstr "時："
+msgstr "小時："
 
 #: bin/widget/view/form_gtk/calendar.py:275
 msgid "Minute:"
-msgstr "分："
+msgstr "分鐘："
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 61
@@ -1379,7 +1350,7 @@ msgstr "按鈕的圖示錯誤！"
 
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "在新增翻譯前在相關的欄位中輸入一些文字!"
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 480
@@ -1413,15 +1384,15 @@ msgstr "圖片"
 #: bin/widget/view/form_gtk/interface.py:47
 #: bin/widget/view/form_gtk/one2many_list.py:148
 msgid "Set to default value"
-msgstr "使用預設值"
+msgstr "設定為預設值"
 
 #: bin/widget/view/form_gtk/interface.py:48
 msgid "Set as default"
-msgstr "設定為預設值"
+msgstr "設定為預設"
 
 #: bin/widget/view/form_gtk/one2many_list.py:151
 msgid "Set Default"
-msgstr "設定為預設值"
+msgstr "設定為預設"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 162
@@ -1636,12 +1607,9 @@ msgstr "新增(_N)"
 msgid "_Save"
 msgstr "儲存(_S)"
 
-#
-# File: bin/openerp.glade, line: 533
-# File: bin/openerp.glade, line: 533
 #: bin/openerp.glade:566
 msgid "Copy this resource"
-msgstr "複製該對象"
+msgstr "複製此資源"
 
 #
 # File: bin/openerp.glade, line: 534
@@ -1699,30 +1667,17 @@ msgstr "選單(_M)"
 msgid "_New Home Tab"
 msgstr "新增首頁項(_N)"
 
-#
-# File: bin/openerp.glade, line: 672
-# File: bin/openerp.glade, line: 7001
-# File: bin/openerp.glade, line: 672
-# File: bin/openerp.glade, line: 7001
 #: bin/openerp.glade:705 bin/openerp.glade:5018
 msgid "Close Tab"
-msgstr "關閉"
+msgstr "關閉分頁"
 
-#
-# File: bin/openerp.glade, line: 688
-# File: bin/openerp.glade, line: 688
 #: bin/openerp.glade:721
 msgid "Previous Tab"
-msgstr "上一頁"
+msgstr "前一個分頁"
 
-#
-# File: bin/openerp.glade, line: 697
-# File: bin/openerp.glade, line: 7057
-# File: bin/openerp.glade, line: 697
-# File: bin/openerp.glade, line: 7057
 #: bin/openerp.glade:730 bin/openerp.glade:5074
 msgid "Next Tab"
-msgstr "下一頁"
+msgstr "下一個分頁"
 
 #
 # File: bin/openerp.glade, line: 711
@@ -1738,12 +1693,9 @@ msgstr "查看日誌(_l)"
 msgid "_Go to resource ID..."
 msgstr "至...(_G)"
 
-#
-# File: bin/openerp.glade, line: 733
-# File: bin/openerp.glade, line: 733
 #: bin/openerp.glade:766
 msgid "_Open"
-msgstr "打開(_O)"
+msgstr "開啟(_O)"
 
 #
 # File: bin/openerp.glade, line: 748
@@ -1938,35 +1890,21 @@ msgstr "運行插件(_E)"
 msgid "_Shortcuts"
 msgstr "快速鍵(_S)"
 
-#
-# File: bin/openerp.glade, line: 1082
-# File: bin/openerp.glade, line: 1082
 #: bin/openerp.glade:1115
 msgid "_Help"
-msgstr "幫助(_H)"
+msgstr "說明 (_H)"
 
-#
-# File: bin/openerp.glade, line: 1089
-# File: bin/openerp.glade, line: 6372
-# File: bin/openerp.glade, line: 1089
-# File: bin/openerp.glade, line: 6372
 #: bin/openerp.glade:1122 bin/openerp.glade:4389
 msgid "Support Request"
-msgstr "支持請求"
+msgstr "支援請求"
 
-#
-# File: bin/openerp.glade, line: 1109
-# File: bin/openerp.glade, line: 1109
 #: bin/openerp.glade:1142
 msgid "User _Manual"
-msgstr "成員手冊(_M)"
+msgstr "使用者手冊"
 
-#
-# File: bin/openerp.glade, line: 1124
-# File: bin/openerp.glade, line: 1124
 #: bin/openerp.glade:1157
 msgid "_Contextual Help"
-msgstr "線上幫助(_C)"
+msgstr "線上說明(_C)"
 
 #
 # File: bin/openerp.glade, line: 1140
@@ -2119,7 +2057,7 @@ msgstr "發送新的請求"
 
 #: bin/openerp.glade:1581
 msgid "OpenERP - Tree Resources"
-msgstr ""
+msgstr "OpenERP - 樹狀資源"
 
 #
 # File: bin/openerp.glade, line: 1585
@@ -2130,14 +2068,11 @@ msgstr "快速鍵"
 
 #: bin/openerp.glade:1743
 msgid "OpenERP - Forms"
-msgstr ""
+msgstr "OpenERP - 表單"
 
-#
-# File: bin/openerp.glade, line: 1718
-# File: bin/openerp.glade, line: 1718
 #: bin/openerp.glade:1767
 msgid "State:"
-msgstr "狀態："
+msgstr "省/州："
 
 #: bin/openerp.glade:1799
 msgid "OpenERP - About"
@@ -2148,6 +2083,8 @@ msgid ""
 "<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
+"<b>關於 OpenERP</b>\n"
+"<i>最先進的 Open Source ERP &amp; CRM !</i>"
 
 #: bin/openerp.glade:1852
 msgid ""
@@ -2169,7 +2106,7 @@ msgstr ""
 "OpenERP 是適合中小企業的開源ERP+CRM。\n"
 "是一款GPL開源產品.\n"
 "(c) 2003-TODAY, Tiny sprl\n"
-"更多信息：www.openerp.com !"
+"更多訊息：www.openerp.com !"
 
 #: bin/openerp.glade:1880
 msgid "_OpenERP"
@@ -2191,12 +2128,9 @@ msgid ""
 "Web: http://tiny.be"
 msgstr ""
 
-#
-# File: bin/openerp.glade, line: 1890
-# File: bin/openerp.glade, line: 1890
 #: bin/openerp.glade:1939
 msgid "_Contact"
-msgstr "聯繫(_C)"
+msgstr "聯絡人 (_C)"
 
 #: bin/openerp.glade:1991
 msgid "Open ERP - Forms widget"
@@ -2303,7 +2237,7 @@ msgstr ""
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>選擇一個選項以匯出</b>"
 
 #: bin/openerp.glade:2871
 msgid "Available Fields"
@@ -2336,7 +2270,7 @@ msgstr "移除全部(_N)"
 
 #: bin/openerp.glade:3064
 msgid "Fields to Export"
-msgstr ""
+msgstr "匯出欄位"
 
 #
 # File: bin/openerp.glade, line: 2999
@@ -2408,11 +2342,11 @@ msgstr "下一個提示(_x)"
 
 #: bin/openerp.glade:3573
 msgid "OpenERP - License"
-msgstr ""
+msgstr "OpenERP - 授權許可"
 
 #: bin/openerp.glade:3588
 msgid "OpenERP license"
-msgstr ""
+msgstr "OpenERP 授權"
 
 #
 # File: bin/openerp.glade, line: 5336
@@ -2785,7 +2719,7 @@ msgstr "上一可編輯視窗"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #
 # File: bin/openerp.glade, line: 7383
@@ -2815,12 +2749,9 @@ msgstr "粘貼所選文字"
 msgid "Copy selected text"
 msgstr "複製所選文字"
 
-#
-# File: bin/openerp.glade, line: 7441
-# File: bin/openerp.glade, line: 7441
 #: bin/openerp.glade:5458
 msgid "Cut selected text"
-msgstr "剪切所選文字"
+msgstr "剪下所選文字"
 
 #
 # File: bin/openerp.glade, line: 7456
@@ -2850,12 +2781,9 @@ msgstr "<Ctrl> + X"
 msgid "Edition Widgets"
 msgstr "編輯視窗"
 
-#
-# File: bin/openerp.glade, line: 7537
-# File: bin/openerp.glade, line: 7537
 #: bin/openerp.glade:5554
 msgid "Import from CSV"
-msgstr "從CSV匯入"
+msgstr "從CSV檔匯入"
 
 #
 # File: bin/openerp.glade, line: 7582
@@ -2929,7 +2857,7 @@ msgstr "CSV參數"
 
 #: bin/openerp.glade:6120
 msgid "OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #
 # File: bin/openerp.glade, line: 8199
@@ -2942,12 +2870,9 @@ msgstr "伺服器"
 msgid "<b>Connect to a OpenERP server</b>"
 msgstr "連線到OpenERP伺服器"
 
-#
-# File: bin/openerp.glade, line: 8268
-# File: bin/openerp.glade, line: 8268
 #: bin/openerp.glade:6285
 msgid "Protocol connection:"
-msgstr "連線協議："
+msgstr "通訊協定"
 
 #
 # File: bin/openerp.glade, line: 8314
@@ -3089,7 +3014,7 @@ msgstr "這是將在新資料庫建立的'<i>admin</i>'帳號的密碼，此密�
 
 #: bin/openerp.glade:7165
 msgid "Confirm Password:"
-msgstr "確認口令："
+msgstr "確認密碼:"
 
 #: bin/openerp.glade:7256
 msgid ""
@@ -3102,12 +3027,9 @@ msgstr "如果想在新資料庫中加入展示資料，請點選這個檢查框
 msgid "Load Demonstration Data:"
 msgstr "載入展示資料"
 
-#
-# File: bin/openerp.glade, line: 9299
-# File: bin/openerp.glade, line: 9299
 #: bin/openerp.glade:7316
 msgid "Change password"
-msgstr "改變密碼"
+msgstr "變更密碼"
 
 #
 # File: bin/openerp.glade, line: 9316
@@ -3139,7 +3061,7 @@ msgstr "新密碼確認："
 
 #: bin/openerp.glade:7571
 msgid "OpenERP Message"
-msgstr "OpenERP 信息"
+msgstr "OpenERP 訊息"
 
 #
 # File: bin/openerp.glade, line: 9633
@@ -3170,11 +3092,11 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "稍候連線"
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "現在連線"
 
 #: bin/openerp.glade:7843
 msgid "Extension Manager"
@@ -3313,10 +3235,12 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"請填寫下列表格以協助我們改善<b><span foreground=\"red\"><i>Open</i></span> ERP</b> "
+"並且邁向更好的發展目標"
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "您就職的公司:"
 
 #
 # File: bin/openerp.glade, line: 5791
@@ -3345,18 +3269,15 @@ msgstr "角色："
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "員工"
 
-#
-# File: bin/openerp.glade, line: 5953
-# File: bin/openerp.glade, line: 5953
 #: bin/dia_survey.glade:546
 msgid "Country:"
-msgstr "國家:"
+msgstr "國家/地區:"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "城市："
 
 #
 # File: bin/openerp.glade, line: 5887
@@ -3378,15 +3299,15 @@ msgstr "你如何知道我們："
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "我們計畫使用 Open ERP"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "我們計畫在 Open ERP 上提供服務"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
-msgstr ""
+msgstr "告訴我們為何你們試用 Open ERP 以及你們目前使用的軟體:"
 
 #
 # File: bin/openerp.glade, line: 6318
@@ -3397,7 +3318,7 @@ msgstr "<b>保持聯繫</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "我想收到 Open ERP 電子書(PDF), 請以電子郵件寄給我"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
@@ -3405,7 +3326,7 @@ msgstr "電話/ 手機:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "電子郵件："
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
@@ -3413,8 +3334,8 @@ msgstr "您的姓名:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-取消"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"

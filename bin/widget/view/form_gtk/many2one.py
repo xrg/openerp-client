@@ -105,11 +105,12 @@ class dialog(object):
         while True:
             try:
                 res = self.dia.run()
-                if res==gtk.RESPONSE_OK:
+                if res == gtk.RESPONSE_OK:
                     if self.screen.current_model.validate() and self.screen.save_current():
                         return (True, self.screen.current_model.name_get())
                     else:
                         self.screen.display()
+                        self.screen.current_view.set_cursor()
                 else:
                     break
             except Exception,e:
@@ -214,9 +215,11 @@ class many2one(interface.widget_interface):
             self.display(self._view.model, self._view.modelfield)
             self.ok = True
         else:
+            search_mode = self.attrs.get('search_mode', 'tree')
             win = win_search(self.attrs['relation'], sel_multi=False,
                     ids=map(lambda x: x[0], ids), context=context,
-                    domain=domain, window=self._window)
+                    domain=domain, window=self._window,
+                    search_mode=search_mode)
             ids = win.go()
             if ids:
                 name = rpc.session.rpc_exec_auth('/object', 'execute',
@@ -228,7 +231,7 @@ class many2one(interface.widget_interface):
     def _readonly_set(self, value):
         self._readonly = value
         self.wid_text.set_editable(not value)
-        #self.but_new.set_sensitive(not value)
+        self.but_find.set_sensitive(not value)
 
     def _color_widget(self):
         return self.wid_text
@@ -258,7 +261,8 @@ class many2one(interface.widget_interface):
                 self.ok = True
                 return True
 
-            win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self._window)
+            search_mode = self.attrs.get('search_mode', 'tree')
+            win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self._window, search_mode=search_mode)
             ids = win.go()
             if ids:
                 name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]

@@ -25,7 +25,7 @@ import gobject
 import gtk
 import tools
 import itertools
-
+import copy
 import rpc
 from rpc import RPCProxy
 import service
@@ -58,7 +58,7 @@ class field_record(object):
 
 class group_record(object):
 
-    def __init__(self, value={}, ctx={}, domain=[], mgroup=None, child = True):
+    def __init__(self, value={}, ctx={}, domain=[], mgroup=None, child = True, sort_order=False):
         self.list_parent = None
         self._children = None
         self.domain = domain
@@ -68,10 +68,11 @@ class group_record(object):
         self.has_children = child
         self.mgroup = mgroup
         self.field_with_empty_labels = []
+        self.sort_order = sort_order
 
     def getChildren(self):
         if self._children is None:
-            self._children = list_record(self.mgroup, parent=self, context=self.ctx, domain=self.domain)
+            self._children = list_record(self.mgroup, parent=self, context=self.ctx, domain=self.domain,sort_order=self.sort_order)
         #self._children.load()
         return self._children
 
@@ -99,7 +100,7 @@ def echo(fn):
 
 
 class list_record(object):
-    def __init__(self, mgroup, parent=None, context=None, domain=None):
+    def __init__(self, mgroup, parent=None, context=None, domain=None, sort_order=False):
         self.mgroup = mgroup
         self.mgroup.list_parent = parent
         self.mgroup.list_group = self
@@ -107,6 +108,7 @@ class list_record(object):
         self.context = context or {}
         self.domain = domain
         self.loaded = False
+        self.sort_order = sort_order
         self.lst = []
         self.load()
 
@@ -121,7 +123,7 @@ class list_record(object):
         self.loaded = True
         gb = self.context.get('group_by', False)
         no_leaf = self.context.get('group_by_no_leaf', False)
-        if gb or isinstance(gb, list) and no_leaf:
+        if gb or no_leaf:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
                 self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
             if not records and self.parent:
@@ -137,16 +139,18 @@ class list_record(object):
                     if not no_leaf:
                         ctx.update({'__field':gb[-1]})
                     ctx.update(__ctx)
-                    rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child)
+                    rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child,sort_order=self.sort_order)
                     for field in gb:
                         if not rec.value.get(field, False):
-                            if field in inner_gb:continue
+                            field_type = self.mgroup.fields.get(field, {}).get('type', False)
+                            if field in inner_gb or field_type in ('integer', 'float'):
+                                continue
                             rec.value[field] = 'Undefined'
                             rec.field_with_empty_labels.append(field)
                     self.add(rec)
         else:
             if self.context.get('__domain') and not no_leaf:
-                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'))
+                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, False, self.sort_order)
                 if not ids:
                      self.add_dummny_record(self.context['__field'])
                 else:
@@ -182,12 +186,12 @@ class list_record(object):
         return len(self.lst)
 
 class AdaptModelGroup(gtk.GenericTreeModel):
-    def __init__(self, model_group, context={}, domain=[]):
+    def __init__(self, model_group, context={}, domain=[], sort_order=False):
         super(AdaptModelGroup, self).__init__()
         self.model_group = model_group
         self.context = context or {}
         self.domain = domain
-        self.models = list_record(model_group, context=context, domain=self.domain)
+        self.models = list_record(model_group, context=context, domain=self.domain, sort_order=sort_order)
         self.set_property('leak_references', False)
 
     def added(self, modellist, position):
@@ -216,42 +220,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         idx = self.get_path(iter)[0]
         self.model_group.model_remove(self.models[idx])
         self.invalidate_iters()
-
-    def sort(self, column, screen, treeview):
-        group_by = self.context.get('group_by',False)
-        group_by_no_leaf = self.context.get('group_by_no_leaf',False)
-        model = treeview.get_model()
-        model_list = [model.models.lst]
-        if screen.sort == column.name:
-            f = lambda x,y: cmp(x[column.name].get_client(x), y[column.name].get_client(y))
-        else:
-            f = lambda x,y: -1 * cmp(x[column.name].get_client(x), y[column.name].get_client(y))
-
-        if column.name in group_by:
-            level = group_by.index(column.name)
-        else:
-            level = len(group_by)
-            if group_by_no_leaf:level -= 1
-
-        def all_expanded_rows(self, path):
-            if path and len(path)-1  == level:
-                treeview.collapse_row(path)
-        treeview.map_expanded_rows(all_expanded_rows)
-
-        def get_modelchildren(models):
-            childrens = []
-            for mod in models:
-                if mod._children:
-                    childrens.append(mod._children.lst)
-            return childrens
-
-        for i in range(level+1):
-            if i == level:
-                for li in model_list:
-                    li.sort(f)
-            else:
-                model_list = list(itertools.chain(*model_list))
-                model_list = get_modelchildren(model_list)
 
     def saved(self, id):
         return self.model_group.writen(id)
@@ -559,6 +527,8 @@ class ViewList(parser_view):
                     if (attrs_check and not states) or (attrs_check and m['state'].get(m) in states):
                         m.get_button_action(self.screen, m.id, path[1].attrs)
                         self.screen.current_model = None
+                        if self.screen.parent:
+                            self.screen.parent.reload()
                         m.reload()
             else:
                 # Here it goes for right click
@@ -663,21 +633,24 @@ class ViewList(parser_view):
         if last_grouped_col:
             prev_col = filter(lambda col: col.name == last_grouped_col, \
                              self.widget_tree.get_columns())[0]
-            self.widget_tree.move_column_after(move_col, prev_col)
+            self.widget_tree.move_column_after(move_col and move_col[0], prev_col)
         else:
             for col in self.columns:
                 if col == self.columns[0]:prev_col = None
                 self.widget_tree.move_column_after(col, prev_col)
                 prev_col = col
-        self.changed_col.remove(move_col)
+        for col in move_col:
+            self.changed_col.remove(col)
 
     def move_colums(self):
         if self.screen.context.get('group_by', False):
             groupby = self.screen.context['group_by']
+            # This is done to take the order of the columns
+            #as order in groupby list
             group_col = []
             for x in groupby:
                 group_col += [col for col in self.columns if col.name == x]
-            group_col = group_col + filter(lambda x:x.name not in groupby, self.columns)
+                group_col = group_col + filter(lambda x:x.name not in groupby, self.columns)
             for col in group_col:
                 if col.name in groupby:
                     if not col in self.changed_col:
@@ -689,10 +662,11 @@ class ViewList(parser_view):
                         self.widget_tree.move_column_after(col, base_col)
                 else:
                     if col in self.changed_col:
-                        self.set_column_to_default_pos(col, groupby[-1])
+                        self.set_column_to_default_pos([col], groupby[-1])
         else:
             if self.changed_col:
-                self.set_column_to_default_pos(self.changed_col[-1])
+                remove_col = copy.copy(self.changed_col)
+                self.set_column_to_default_pos(remove_col)
 
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
@@ -701,7 +675,7 @@ class ViewList(parser_view):
                     self.screen.domain = [('id','in',self.screen.ids_get())]
                 self.screen.models.models.clear()
             self.move_colums()
-            self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain)
+            self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain, self.screen.sort)
             if self.store:
                 self.widget_tree.set_model(self.store)
         else:
@@ -722,12 +696,18 @@ class ViewList(parser_view):
         ids = self.sel_ids_get()
         for c in self.children:
             value = 0.0
-            length = len(self.screen.models.models)
+            cal_model = self.screen.models.models
+            if not cal_model:
+                cal_model = self.store.models.lst
+            length = len(cal_model)
             if ids:
                 length = len(ids)
-            for model in self.screen.models.models:
-                if model.id in ids or not ids:
-                    value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
+            for model in cal_model:
+                if model.id in ids or model in ids or not ids:
+                    if isinstance(model, group_record):
+                        value += float(model[self.children[c][0]].get() or 0.0)
+                    else:
+                        value += float(model.fields_get()[self.children[c][0]].get(model, check_load=False) or 0.0)
             if self.children[c][5] == 'avg' and length:
                 value = value/length
             label_str = tools.locale_format('%.' + str(self.children[c][3]) + 'f', value)
@@ -752,7 +732,7 @@ class ViewList(parser_view):
                         if store.on_iter_has_child(child):
                             process(child)
                         else:
-                            ids.append(child.id)
+                            ids.append(child.id or parent)
                 process(model)
             else:
                 if model.id:
@@ -813,6 +793,10 @@ class ViewList(parser_view):
 
     def set_invisible_attr(self):
         for col in self.widget_tree.get_columns():
+            if col._type == 'datetime':
+                col.set_max_width(145)
+                if self.screen.context.get('group_by',False):
+                    col.set_max_width(180)
             value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
                            {'context':self.screen.context})
             if col.name in self.screen.context.get('group_by',[]):

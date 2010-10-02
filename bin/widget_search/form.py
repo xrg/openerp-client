@@ -213,7 +213,8 @@ class parse(object):
             elif node.tag == 'filter':
                 name = str(attrs.get('string','filter'))
                 widget_act = filter.filter(name, self.parent, attrs, call)
-                wid = container.wid_add(widget_act.butt,xoptions=gtk.SHRINK, help=attrs.get('help',False))
+                help = attrs.get('help', False) or name
+                wid = container.wid_add(widget_act.butt, xoptions=gtk.SHRINK, help=help)
                 dict_widget[name]=(widget_act, widget_act, 1)
 
             elif node.tag == 'separator':
@@ -326,6 +327,8 @@ class form(wid_int.wid_int):
 
     def show(self):
         for w, widget, value in  self.widgets.values():
+            if w.attrs.get('default_focus'):
+                w.grab_focus()
             if value >= 2:
                 widget.show()
         self._hide=False

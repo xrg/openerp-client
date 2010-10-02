@@ -577,6 +577,8 @@ class Screen(signal_event.signal_event):
         if self.current_view and self.current_view.view_type == 'tree' \
                 and not self.current_view.widget_tree.editable:
             self.switch_view(mode='form')
+        if self.current_view and self.current_view.view_type == 'gallery':
+            self.switch_view(mode='form')
         ctx = self.context.copy()
         ctx.update(context)
         model = self.models.model_new(default, self.action_domain, ctx)
@@ -604,6 +606,7 @@ class Screen(signal_event.signal_event):
             self.current_model.cancel()
         if self.current_view:
             self.current_view.cancel()
+            self.current_view.reset()
 
     def save_current(self):
         if not self.current_model:
@@ -697,7 +700,7 @@ class Screen(signal_event.signal_event):
                 self.current_model = None
             self.display()
             self.current_view.set_cursor()
-        if self.current_view.view_type == 'tree':
+        if self.current_view.view_type in ('tree','gallery'):
             ids = self.current_view.sel_ids_get()
 
             ctx = self.models.context.copy()
@@ -739,8 +742,8 @@ class Screen(signal_event.signal_event):
                 else:
                     self.screen_container.help_frame.show_all()
             self.search_active(
-                    active=self.show_search and vt in ('tree', 'graph', 'calendar'),
-                    show_search=self.show_search and vt in ('tree', 'graph','calendar'),
+                    active=self.show_search and vt in ('tree', 'graph', 'calendar', 'gallery'),
+                    show_search=self.show_search and vt in ('tree', 'graph','calendar', 'gallery'),
             )
 
     def groupby_next(self):
@@ -853,6 +856,24 @@ class Screen(signal_event.signal_event):
     def on_change(self, callback):
         self.current_model.on_change(callback)
         self.display()
+
+    def make_buttons_readonly(self, value=False):
+        # This method has been created because
+        # Some times if the user executes an action on an unsaved record in a dialog box
+        # the record gets saved in the dialog's Group before going to the particular widgets group
+        # and as a result it crashes. So we just set the buttons visible on the
+        # dialog box screen to non-sensitive if the model is not saved.
+        def process(widget, val):
+            for wid in widget:
+                if hasattr(wid, 'get_children'):
+                    process(wid, val=value)
+                if isinstance(wid, gtk.Button) and \
+                    not isinstance(wid.parent, (gtk.HBox,gtk.VBox)):
+                    wid.set_sensitive(val)
+        if value and not self.current_model.id:
+            return True
+        process(self.widget, value)
+
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

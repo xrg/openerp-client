@@ -50,12 +50,20 @@ import pango
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
+    editable.set_data('renderer', renderer)
     editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
     if isinstance(editable, gtk.ComboBoxEntry):
         editable.connect('changed', treeview.on_editing_done)
 
-def sort_model(column, screen, treeview):
-    group_by = screen.context.get('group_by',False)
+def sort_model(column, screen):
+    unsaved_model =  [x for x in screen.models if x.id == None or x.modified]
+    if unsaved_model:
+        res =  common.message(_('You have unsaved record(s) !  \n\nPlease Save them before sorting !'))
+        return res
+    group_by = screen.context.get('group_by',[])
+    group_by_no_leaf = screen.context.get('group_by_no_leaf',False)
+    if column.name in group_by or group_by_no_leaf:
+        return True
     screen.current_view.set_drag_and_drop(column.name == 'sequence')
     if screen.sort == column.name:
         screen.sort = column.name+' desc'
@@ -64,11 +72,10 @@ def sort_model(column, screen, treeview):
     screen.offset = 0
     if screen.type in ('many2many','one2many'):
         screen.sort_domain = [('id','in',screen.ids_get())]
+    screen.search_filter()
     if group_by:
-        model = treeview.get_model()
-        model.sort(column, screen, treeview)
-    else:
-        screen.search_filter()
+        screen.current_view.widget_tree.expand_all()
+
 
 class parser_tree(interface.parser_interface):
 
@@ -84,7 +91,8 @@ class parser_tree(interface.parser_interface):
         for color_spec in attrs.get('colors', '').split(';'):
             if color_spec:
                 colour, test = color_spec.split(':')
-                treeview.colors[colour] = test
+                treeview.colors.setdefault(colour,[])
+                treeview.colors[colour].append(test)
         if not self.title:
             self.title = attrs.get('string', 'Unknown')
         treeview.set_property('rules-hint', True)
@@ -192,7 +200,7 @@ class parser_tree(interface.parser_interface):
                     if max_width:
                         col.set_max_width(max_width)
 
-                col.connect('clicked', sort_model, self.screen, treeview)
+                col.connect('clicked', sort_model, self.screen)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 visval = eval(str(fields[fname].get('invisible', 'False')), {'context':self.screen.context})
@@ -281,6 +289,7 @@ class Char(object):
         cell.set_property('background', None)
         cell.set_property('xalign', align)
         if isinstance(model, group_record) and gb:
+            cell.set_property('foreground', 'black')
             font = pango.FontDescription('Times New Roman bold 10')
             if self.field_name in model.field_with_empty_labels:
                 cell.set_property('foreground', '#AAAAAA')
@@ -301,11 +310,15 @@ class Char(object):
 
 
     def get_color(self, model):
-        to_display = ''
+        to_display = False
         try:
-            for color, expr in self.treeview.colors.items():
-                if model.expr_eval(expr, check_load=False):
-                    to_display = color
+            for color, expr in self.treeview.colors.iteritems():
+                to_display = False
+                for cond in expr:
+                    if model.expr_eval(cond, check_load=False):
+                        to_display = color
+                        break
+                if to_display:
                     break
         except Exception:
             # we can still continue if we can't get the color..
@@ -663,7 +676,7 @@ class CellRendererButton(object):
         valid_states = self.__get_states() or []
 #       change this according to states or attrs: to not show the icon
         attrs_check = self.attrs_set(model)
-        if valid_states and current_state not in valid_states:
+        if valid_states and current_state not in valid_states or isinstance(model, group_record):
             cell.set_property('stock-id', None)
         else:
             cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))

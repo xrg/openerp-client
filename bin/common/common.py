@@ -76,42 +76,71 @@ class WrapLabel(gtk.Label):
             self.__wrap_width = width
             self.queue_resize()
 
-def get_action_help(help={}, callback=None):
-    if help.get('msg', False):
-        msg = help.get('msg', '')
-        title = help.get('title', '')
+class action_tips(object):
+    def __init__(self, help):
+        self.help = help
+        self.help_frame = False
+        self.create_action_tip()
 
-        help_label = WrapLabel()
-        help_label.set_line_wrap(True)
+    def close_or_disable_tips(self, button, disable_all=False):
+        if self.help_frame:
+            if disable_all:
+                rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write',
+                                          [rpc.session.uid], {'menu_tips':False})
+            self.help_frame.destroy()
+            self.help_frame = False
+        return True
 
-        help_label.set_use_markup(True)
-        help_label.set_label('\n<span font="italic">%s</span>'% (msg))
+    def create_action_tip(self):
+        if self.help.get('msg', False):
+            msg = self.help.get('msg', '')
+            title = self.help.get('title', '')
+            # The label to display tips
+            help_label = WrapLabel()
+            help_label.set_line_wrap(True)
+            help_label.set_use_markup(True)
+            help_label.set_label('\n<span font="italic">%s</span>'% (msg))
 
-        closebtn = gtk.Button()
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
-        w, h = image.size_request()
-        closebtn.set_image(image)
-        closebtn.set_relief(gtk.RELIEF_NONE)
-        closebtn.set_size_request(w + 8, h + 6)
-        closebtn.unset_flags(gtk.CAN_FOCUS)
-        if callback:
-            closebtn.connect('clicked', callback)
-        box = gtk.HBox()
-        box_label = gtk.Label()
-        box_label.set_use_markup(True)
-        box_label.set_label('<b> %s - Tips</b>'%to_xml(title))
-        box.pack_start(box_label, True, True)
-        box.pack_end(closebtn, False, False)
-        box.show_all()
+            # Close current tip button
+            closebtn = gtk.Button('Close current tip')
+            closebtn.set_tooltip_markup('''<span foreground="darkred"><b>Close Current Tip:</b></span>
+This will hide the current tip. It will be displayed again next time you open this menu item, unless you disable all tips using the <b>'Menu Tips'</b> option in the user preferences.''')
+            image = gtk.Image()
+            image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+            closebtn.set_image(image)
+            closebtn.set_relief(gtk.RELIEF_NONE)
+            closebtn.unset_flags(gtk.CAN_FOCUS)
+            closebtn.connect('clicked', self.close_or_disable_tips)
 
-        help_frame = gtk.Frame()
-        help_frame.set_label_widget(box)
-        help_frame.set_label_align(0.5,0.5)
-        help_frame.add(help_label)
-        help_frame.show_all()
-        return help_frame
-    return False
+             # Disable button
+            disablebtn = gtk.Button('Disable all tips')
+            disablebtn.set_tooltip_markup('''<span foreground="darkred"><b>Disable all tips:</b></span>
+This will disable the display of tips on all menu items.
+To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user preferences.''')
+            image1 = gtk.Image()
+            image1.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+            disablebtn.set_image(image1)
+            disablebtn.set_relief(gtk.RELIEF_NONE)
+            disablebtn.unset_flags(gtk.CAN_FOCUS)
+            disablebtn.connect('clicked', self.close_or_disable_tips, True)
+
+            # frame Title with the two above created buttons
+            box = gtk.HBox()
+            box_label = gtk.Label()
+            box_label.set_use_markup(True)
+            box_label.set_label('<b> %s - Tips</b>'%to_xml(title))
+            box.pack_start(box_label, True, True)
+            box.pack_end(disablebtn, False, False)
+            box.pack_end(closebtn, False, False)
+            box.show_all()
+            # finally the frame
+            self.help_frame = gtk.Frame()
+            self.help_frame.set_label_widget(box)
+            self.help_frame.set_label_align(0.5,0.5)
+            self.help_frame.add(help_label)
+            self.help_frame.show_all()
+            return True
+        return False
 
 def _search_file(file, dir='path.share'):
     tests = [
@@ -404,6 +433,8 @@ is displayed on the second tab.
     win.set_icon(OPENERP_ICON)
     win.set_title("OpenERP - %s" % title)
 
+    if not isinstance(message, basestring):
+        message = str(message)
     xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % escape(message))
 
     details_buffer = gtk.TextBuffer()

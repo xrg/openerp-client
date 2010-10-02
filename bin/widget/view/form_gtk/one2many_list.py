@@ -62,11 +62,30 @@ class dialog(object):
         self.accel_group = gtk.AccelGroup()
         self.dia.add_accel_group(self.accel_group)
 
-        self.but_cancel = self.dia.add_button(gtk.STOCK_CLOSE, gtk.RESPONSE_CANCEL)
+        action_area = self.dia.get_action_area()
+
+        self.but_cancel = gtk.Button('Cancel')
+        self.but_cancel.connect('clicked', self.get_response, gtk.RESPONSE_CANCEL)
+        icon = gtk.Image()
+        icon.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_BUTTON)
+        self.but_cancel.set_image(icon)
+        action_area.pack_start(self.but_cancel)
         self.but_cancel.add_accelerator('clicked', self.accel_group, gtk.keysyms.Escape, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
-        self.but_ok = self.dia.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
-        self.but_ok.add_accelerator('clicked', self.accel_group, gtk.keysyms.Return, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+        self.but_save_close = gtk.Button('Save & Close')
+        self.but_save_close.connect('clicked', self.get_response, gtk.RESPONSE_APPLY)
+        icon = gtk.Image()
+        icon.set_from_stock(gtk.STOCK_APPLY, gtk.ICON_SIZE_BUTTON)
+        self.but_save_close.set_image(icon)
+        action_area.pack_start(self.but_save_close)
+
+        self.but_save_new = gtk.Button('Save & New')
+        self.but_save_new.connect('clicked', self.get_response, gtk.RESPONSE_OK)
+        icon = gtk.Image()
+        icon.set_from_stock(gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON)
+        self.but_save_new.set_image(icon)
+        action_area.pack_start(self.but_save_new)
+        self.but_save_new.add_accelerator('clicked', self.accel_group, gtk.keysyms.Return, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
         self.context = context
 
@@ -95,7 +114,8 @@ class dialog(object):
         else:
             self.screen.add_view_id(False, 'form', display=True,
                                     context=context)
-
+        if not model or model.id is None:
+            self.screen.make_buttons_readonly()
         vp.add(self.screen.widget)
         x,y = self.screen.screen_container.size_get()
         vp.set_size_request(x,y+30)
@@ -107,7 +127,12 @@ class dialog(object):
         model = self.screen.new(context=self.context)
         self.screen.models.model_add(model)
         self.screen.current_model = model
+        self.screen.make_buttons_readonly()
         return True
+
+    def get_response(self, button=None, response_id=False):
+        if response_id:
+            return self.dia.response(response_id)
 
     def run(self, datas={}):
         end = False
@@ -115,15 +140,18 @@ class dialog(object):
             res = self.dia.run()
             if res == gtk.RESPONSE_CANCEL:
                 self.screen.current_model.cancel()
-            end = (res != gtk.RESPONSE_OK) or self.screen.current_model.validate()
+            end = (res not in (gtk.RESPONSE_OK, gtk.RESPONSE_APPLY)) or self.screen.current_model.validate()
             if not end:
                 self.screen.display()
+                self.screen.current_view.set_cursor()
 
-        if res==gtk.RESPONSE_OK:
+        if res in (gtk.RESPONSE_OK, gtk.RESPONSE_APPLY) :
             self.screen.current_view.set_value()
             model = self.screen.current_model
-            return (True, model)
-        return (False, False)
+            if res == gtk.RESPONSE_APPLY:
+                return (False, model, res)
+            return (True, model, res)
+        return (False, False, False)
 
     def destroy(self):
         self.screen.signal_unconnect(self)
@@ -170,6 +198,11 @@ class one2many_list(interface.widget_interface):
         if self.context.get('group_by',False):
             self.context['group_by'] = [self.context['group_by']]
 
+        # the context to pass to default_get can be optionally specified in
+        # the context of the one2many field. We also support a legacy
+        # 'default_get' attribute for the same effect (pending removal)
+        default_get_ctx = (attrs.get('default_get') or attrs.get('context'))
+
         self.screen = Screen(attrs['relation'],
                             view_type=attrs.get('mode','tree,form').split(','),
                             parent=self.parent, views_preload=attrs.get('views', {}),
@@ -177,7 +210,7 @@ class one2many_list(interface.widget_interface):
                             create_new=True,
                             context=self.context,
                             row_activate=self._on_activate,
-                            default_get=attrs.get('default_get', {}),
+                            default_get=default_get_ctx,
                             window=self._window, readonly=self._readonly, limit=pager.DEFAULT_LIMIT)
 
         self.screen.type = 'one2many'
@@ -221,8 +254,8 @@ class one2many_list(interface.widget_interface):
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
         # Button Switch
-        eb_switch = self.pager.create_event_box(_('Switch'), self.switch_view, 'gtk-justify-left')
-        hb.pack_start(eb_switch, expand=False, fill=False)
+        self.eb_switch = self.pager.create_event_box(_('Switch'), self.switch_view, 'gtk-justify-left')
+        hb.pack_start(self.eb_switch, expand=False, fill=False)
 
         hb.pack_start(gtk.VSeparator(), expand=False, fill=True)
 
@@ -272,6 +305,7 @@ class one2many_list(interface.widget_interface):
             return False
 
     def switch_view(self, btn, arg):
+        self.screen.make_buttons_readonly(True)
         self.screen.switch_view()
 
     def _readonly_set(self, value):
@@ -283,6 +317,7 @@ class one2many_list(interface.widget_interface):
 
     def set_disable(self, value):
         self.eb_open.set_sensitive(value)
+        self.eb_switch.set_sensitive(value)
         if self._readonly:
             value = not self._readonly
         self.eb_del.set_sensitive(value)
@@ -294,15 +329,16 @@ class one2many_list(interface.widget_interface):
         if event.type in (gtk.gdk.BUTTON_PRESS, gtk.gdk.KEY_PRESS):
             if (self.screen.current_view.view_type=='form') or self.screen.editable_get():
                 self.screen.new(context=ctx)
+                self.screen.make_buttons_readonly()
                 self._readonly = False
                 self.screen.current_view.widget.set_sensitive(True)
                 self.set_disable(True)
             else:
-                ok = 1
+                ok = True
                 dia = dialog(self.attrs['relation'], parent=self._view.model, attrs=self.attrs, model_ctx=self.screen.models._context, window=self._window, readonly=self._readonly, context=ctx)
                 while ok:
-                    ok, value = dia.run()
-                    if ok:
+                    ok, value, res = dia.run()
+                    if ok or res == gtk.RESPONSE_APPLY:
                         self.screen.models.model_add(value)
                         value.signal('record-changed', value.parent)
                         self.screen.display()
@@ -313,10 +349,20 @@ class one2many_list(interface.widget_interface):
 
     def _sig_edit(self, *args):
         if self.screen.current_model:
+            ok = True
+            edited_model = self.screen.current_model
             dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly, context=self.context)
-            ok, value = dia.run()
-            dia.destroy()
+            while ok:
+                ok, value, res = dia.run()
+                if res == gtk.RESPONSE_OK:
+                    dia.new()
+                if value and value != edited_model:
+                    self.screen.models.model_add(value)
+                    value.signal('record-changed', value.parent)
+                    self.screen.display()
             self.pager.reset_pager()
+            edited_model.modified = True
+            dia.destroy()
 
     def limit_changed(self,*args):
         self.pager.limit_changed()
