@@ -58,7 +58,7 @@ class field_record(object):
 
 class group_record(object):
 
-    def __init__(self, value={}, ctx={}, domain=[], mgroup=None, child = True, sort_order=None):
+    def __init__(self, value={}, ctx={}, domain=[], mgroup=None, child = True, sort_order=False):
         self.list_parent = None
         self._children = None
         self.domain = domain
@@ -100,7 +100,7 @@ def echo(fn):
 
 
 class list_record(object):
-    def __init__(self, mgroup, parent=None, context=None, domain=None, sort_order=None):
+    def __init__(self, mgroup, parent=None, context=None, domain=None, sort_order=False):
         self.mgroup = mgroup
         self.mgroup.list_parent = parent
         self.mgroup.list_group = self
@@ -150,7 +150,7 @@ class list_record(object):
                     self.add(rec)
         else:
             if self.context.get('__domain') and not no_leaf:
-                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, None, self.sort_order)
+                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, False, self.sort_order)
                 if not ids:
                      self.add_dummny_record(self.context['__field'])
                 else:
@@ -186,7 +186,7 @@ class list_record(object):
         return len(self.lst)
 
 class AdaptModelGroup(gtk.GenericTreeModel):
-    def __init__(self, model_group, context={}, domain=[], sort_order=None):
+    def __init__(self, model_group, context={}, domain=[], sort_order=False):
         super(AdaptModelGroup, self).__init__()
         self.model_group = model_group
         self.context = context or {}
@@ -706,9 +706,9 @@ class ViewList(parser_view):
             for model in cal_model:
                 if model.id in ids or model in ids or not ids:
                     if isinstance(model, group_record):
-                        value += model[self.children[c][0]].get()
+                        value += float(model[self.children[c][0]].get() or 0.0)
                     else:
-                        value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
+                        value += float(model.fields_get()[self.children[c][0]].get(model, check_load=False) or 0.0)
             if self.children[c][5] == 'avg' and length:
                 value = value/length
             label_str = tools.locale_format('%.' + str(self.children[c][3]) + 'f', value)
