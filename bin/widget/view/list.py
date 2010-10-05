@@ -724,10 +724,13 @@ class ViewList(parser_view):
             focus_column = len(columns) and columns[0] or None
             self.widget_tree.set_cursor(path, focus_column, new)
 
-    def sel_ids_get(self):
+    def sel_ids_get(self, print_screen = False):
         def _func_sel_get(store, path, iter, ids):
             model = store.on_get_iter(path)
-            if isinstance(model, group_record):
+            if isinstance(model, group_record) and print_screen:
+                if model.ctx.get('group_by_no_leaf',False) and model.ctx.get('__domain',False):
+                    ids.append(model)
+                    return
                 def process(parent):
                     for child in parent.children.lst:
                         if store.on_iter_has_child(child):
