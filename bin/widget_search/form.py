@@ -189,14 +189,17 @@ class parse(object):
                     mywidget.pack_start(widget_act.widget,expand=True,fill=True)
                     i = 0
                     for node_child in node:
+                        attrs_child = tools.node_attributes(node_child)
+                        if attrs_child.get('invisible', False):
+                            visval = eval(attrs_child['invisible'], {'context':call[0].context})
+                            if visval:
+                                continue
                         if node_child.tag == 'filter':
                             i += 1
-                            attrs_child = tools.node_attributes(node_child)
                             widget_child = widgets_type['filter'][0]('', self.parent, attrs_child, call)
                             mywidget.pack_start(widget_child.widget)
                             dict_widget[str(attrs['name']) + str(i)] = (widget_child, mywidget, 1)
                         elif node_child.tag == 'separator':
-                            attrs_child = tools.node_attributes(node_child)
                             if attrs_child.get('orientation','vertical') == 'horizontal':
                                 sep = gtk.HSeparator()
                                 sep.set_size_request(30,5)
