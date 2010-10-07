@@ -169,8 +169,9 @@ class form(object):
             else:
                 self.screen.load([get_id])
             self.screen.current_view.set_cursor()
-        else:
-            common.message(_('Resource ID does not exist for this object!'))
+        # Temporary Commented
+#        else:
+ #           common.message(_('Resource ID does not exist for this object!'))
 
     def get_event(self, widget, event, win):
         if event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):

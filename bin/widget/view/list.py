@@ -30,6 +30,7 @@ import rpc
 from rpc import RPCProxy
 import service
 import locale
+import common
 from interface import parser_view
 from widget.model.record import ModelRecord
 
@@ -512,10 +513,10 @@ class ViewList(parser_view):
                 model, paths = selection.get_selected_rows()
             if (not path) or not path[0]:
                 return False
-            m = model.models[path[0][0]]
+            current_active_model = model.models[path[0][0]]
             groupby = self.screen.context.get('group_by',False)
             if groupby:
-                m = self.store.on_get_iter(path[0])
+                current_active_model = self.store.on_get_iter(path[0])
             # TODO: add menu cache
 
             if event.button == 1:
@@ -523,14 +524,22 @@ class ViewList(parser_view):
                 if path[1]._type == 'Button':
                     cell_button = path[1].get_cells()[0]
                     # Calling actions
-                    attrs_check = self.attrs_set(m, path[1])
+                    attrs_check = self.attrs_set(current_active_model, path[1])
                     states = [e for e in path[1].attrs.get('states','').split(',') if e]
-                    if (attrs_check and not states) or (attrs_check and m['state'].get(m) in states):
-                        m.get_button_action(self.screen, m.id, path[1].attrs)
-                        self.screen.current_model = None
-                        if self.screen.parent:
-                            self.screen.parent.reload()
-                        m.reload()
+                    if (attrs_check and not states) or \
+                            (attrs_check and \
+                             current_active_model['state'].get(current_active_model) in states):
+                        if current_active_model.validate():
+                            id = current_active_model.id or self.screen.save_current()
+                            current_active_model.get_button_action(self.screen, id, path[1].attrs)
+                            self.screen.current_model = None
+                            if self.screen.parent:
+                                self.screen.parent.reload()
+                            current_active_model.reload()
+                        else:
+                           common.warning(_('Invalid form, correct red fields !'), _('Error !') )
+                           self.widget_tree.warn('misc-message', _('Invalid form, correct red fields !'), "red")
+                           self.screen.display()
             else:
                 # Here it goes for right click
                 selected_rows = selection.get_selected_rows()
@@ -547,11 +556,11 @@ class ViewList(parser_view):
                 menu.append(item)
 
                 if path[1]._type=='many2one':
-                    value = m[path[1].name].get(m)
+                    value = current_active_model[path[1].name].get(current_active_model)
                     resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.screen.fields[path[1].name]['relation'], False)], False, rpc.session.context)
                     resrelate = map(lambda x:x[2], resrelate)
                     if resrelate:
-                        item=gtk.SeparatorMenuItem()
+                        item = gtk.SeparatorMenuItem()
                         item.show()
                         menu.append(item)
                     for x in resrelate:
