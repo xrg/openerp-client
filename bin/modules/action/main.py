@@ -119,15 +119,12 @@ class main(service.Service):
             domain_ctx['datetime'] = datetime
             domain = tools.expr_eval(action['domain'], domain_ctx)
             help = {}
-            show_menu_help = rpc.session.rpc_exec_auth('/object', 'execute',
-                        'res.users', 'read', rpc.session.uid, ['menu_tips'], rpc.session.context)
-            show_menu_help = show_menu_help.get('menu_tips', False)
-            if show_menu_help:
-                 msg = action.get('help', False)
-                 title = action.get('name', False)
-                 if msg and len(msg):
-                     help['msg'] =  msg
-                     help['title'] = title
+            if action.get('display_menu_tip', False):
+                msg = action.get('help', False)
+                title = action.get('name', False)
+                if msg and len(msg):
+                    help['msg'] =  msg
+                    help['title'] = title
             if datas.get('domain', False):
                 domain.append(datas['domain'])
             if action.get('target', False)=='new':
