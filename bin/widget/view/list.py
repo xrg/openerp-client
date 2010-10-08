@@ -523,6 +523,8 @@ class ViewList(parser_view):
                 # first click on button
                 if path[1]._type == 'Button':
                     cell_button = path[1].get_cells()[0]
+                    if not cell_button.get_property('sensitive'):
+                        return
                     # Calling actions
                     attrs_check = self.attrs_set(current_active_model, path[1])
                     states = [e for e in path[1].attrs.get('states','').split(',') if e]
@@ -530,7 +532,7 @@ class ViewList(parser_view):
                             (attrs_check and \
                              current_active_model['state'].get(current_active_model) in states):
                         if current_active_model.validate():
-                            id = current_active_model.id or self.screen.save_current()
+                            id = self.screen.save_current()
                             current_active_model.get_button_action(self.screen, id, path[1].attrs)
                             self.screen.current_model = None
                             if self.screen.parent:
