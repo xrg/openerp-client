@@ -124,6 +124,7 @@ class Button(Observable):
             common.warning(_('Invalid form, correct red fields !'), _('Error !') )
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
             self.form.screen.display()
+            self.form.screen.current_view.set_cursor()
 
 
 

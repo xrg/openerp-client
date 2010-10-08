@@ -142,6 +142,44 @@ To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user pr
             return True
         return False
 
+
+def OpenERP_Progressbar(parent=None, title='OpenERP Computing'):
+    if not parent:
+        parent = service.LocalService('gui.main').window
+
+    win = gtk.Dialog('OpenERP', parent, gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
+    win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+    win.set_title(_(title))
+    win.set_resizable(False)
+    vbox = gtk.VBox(False, 0)
+
+    hbox = gtk.HBox(False, 13)
+    hbox.set_border_width(10)
+
+    img = gtk.Image()
+    img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
+    hbox.pack_start(img, expand=True, fill=False)
+
+    vbox2 = gtk.VBox(False, 0)
+    label = gtk.Label()
+    label.set_markup('<b>'+_('Operation in progress')+'</b>')
+    label.set_alignment(0.0, 0.5)
+    vbox2.pack_start(label, expand=True, fill=False)
+    vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
+    vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
+    hbox.pack_start(vbox2, expand=True, fill=True)
+    vbox.pack_start(hbox)
+
+    pb = gtk.ProgressBar()
+    pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
+    vbox.pack_start(pb, expand=True, fill=False)
+
+    win.vbox.pack_start(vbox, expand=True, fill=True)
+    win.set_has_separator(False)
+    win.set_transient_for(parent)
+    win.show_all()
+    return win, pb
+
 def _search_file(file, dir='path.share'):
     tests = [
         lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), x),
