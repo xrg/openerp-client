@@ -1452,7 +1452,7 @@ class terp_main(service.Service):
                 action=gtk.FILE_CHOOSER_ACTION_SAVE,
                 parent=self.window,
                 preview=False,
-                filename='%s_%s.sql' % (db_name, time.strftime('%Y%m%d_%H:%M'),))
+                filename=('%s_%s.sql' % (db_name, time.strftime('%Y%m%d_%H:%M'),)).replace(':','_'))
 
         if filename:
             try:
