@@ -114,6 +114,8 @@ class parser_tree(interface.parser_interface):
                 col = gtk.TreeViewColumn(None, cell.renderer)
                 col.set_clickable(True)
                 col.set_cell_data_func(cell.renderer, cell.setter)
+                col.name = node_attrs['name']
+                col.attrs = node_attrs
                 col._type = 'Button'
                 col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 col.tooltip = node_attrs['string']
