@@ -469,9 +469,6 @@ class parser_form(widget.view.interface.parser_interface):
                 if 'filename' in attrs:
                     fields[name]['filename'] = attrs['filename']
 
-                if fields[name]['type'] == 'many2one' and 'search_mode' in attrs:
-                    fields[name]['search_mode'] = attrs['search_mode']
-
                 if 'default_focus' in attrs and not self.default_focus_field:
                     fields[name]['focus_field'] = attrs['default_focus']
                     self.default_focus_field = True
