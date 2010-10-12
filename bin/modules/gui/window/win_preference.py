@@ -51,11 +51,11 @@ class win_preference(object):
         action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'action_get', {})
         action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', [action_id], False, rpc.session.context)[0]
 
-        view_ids=[]
+        view_ids = []
         if action.get('views', []):
-            view_ids=[x[0] for x in action['views']]
+            view_ids = [x[0] for x in action['views']]
         elif action.get('view_id', False):
-            view_ids=[action['view_id'][0]]
+            view_ids = [action['view_id'][0]]
 
         self.screen = Screen('res.users', view_type=[], window=parent)
         self.screen.add_view_id(view_ids[0], 'form', display=True)
@@ -70,7 +70,13 @@ class win_preference(object):
 
     def run(self, datas={}):
         lang = rpc.session.context.get('lang', 'en_US')
-        res = self.win.run()
+        end = False
+        while not end:
+            res = self.win.run()
+            end = (res != gtk.RESPONSE_OK) or self.screen.current_model.validate()
+            if not end:
+                self.screen.display()
+                self.screen.current_view.set_cursor()
         if res == gtk.RESPONSE_OK:
             rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write', [rpc.session.uid], self.screen.get())
             rpc.session.context_reload()
