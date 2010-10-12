@@ -47,7 +47,7 @@ class Screen(signal_event.signal_event):
             parent=None, context=None, views_preload=None, tree_saves=True,
             domain=None, create_new=False, row_activate=None, hastoolbar=False,
             hassubmenu=False,default_get=None, show_search=False, window=None,
-            limit=80, readonly=False, auto_search=True, is_wizard=False, search_view=None):
+            limit=80, readonly=False, auto_search=True, is_wizard=False, search_view=None,win_search=False):
         if view_ids is None:
             view_ids = []
         if view_type is None:
@@ -62,6 +62,10 @@ class Screen(signal_event.signal_event):
             search_view = "{}"
 
         super(Screen, self).__init__()
+        self.win_search = win_search
+        self.win_search_domain = []
+        self.win_search_ids = []
+        self.win_search_callback = False
         self.show_search = show_search
         self.auto_search = auto_search
         self.search_count = 0
@@ -97,7 +101,7 @@ class Screen(signal_event.signal_event):
         models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context, is_wizard=is_wizard)
         self.models_set(models)
         self.current_model = None
-        self.screen_container = screen_container()
+        self.screen_container = screen_container(self.win_search)
         self.filter_widget = None
         self.widget = self.screen_container.widget_get()
         self.__current_view = 0
@@ -163,7 +167,7 @@ class Screen(signal_event.signal_event):
 
 
     def update_scroll(self, *args):
-        offset=self.offset
+        offset = self.offset
         limit = self.screen_container.get_limit()
         if self.screen_container.but_previous:
             if offset<=0:
@@ -175,22 +179,29 @@ class Screen(signal_event.signal_event):
                 self.screen_container.but_next.set_sensitive(False)
             else:
                 self.screen_container.but_next.set_sensitive(True)
+        if self.win_search:
+            self.win_search_callback()
 
     def search_offset_next(self, *args):
         offset=self.offset
         limit = self.screen_container.get_limit()
         self.offset = offset+limit
         self.search_filter()
+        if self.win_search:
+            self.win_search_callback()
 
     def search_offset_previous(self, *args):
         offset=self.offset
         limit = self.screen_container.get_limit()
         self.offset = max(offset-limit,0)
         self.search_filter()
+        if self.win_search:
+            self.win_search_callback()
 
     def search_clear(self, *args):
         self.filter_widget.clear()
-        self.screen_container.action_combo.set_active(0)
+        if not self.win_search:
+            self.screen_container.action_combo.set_active(0)
         self.clear()
 
     def get_calenderDomain(self, start=None,old_date='',mode='month'):
@@ -239,7 +250,9 @@ class Screen(signal_event.signal_event):
             self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
 
         v = self.domain
-        limit=self.screen_container.get_limit()
+        if self.win_search:
+            v += self.win_search_domain
+        limit = self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
             start = self.current_view.view.date_start
             old_date = self.current_view.view.date
@@ -254,13 +267,19 @@ class Screen(signal_event.signal_event):
 
         if self.latest_search != v:
             self.offset = 0
-        offset=self.offset
+        offset = self.offset
         self.latest_search = v
         if self.context.get('group_by',False) and not self.current_view.view_type == 'graph':
             self.current_view.reload = True
             self.display()
             return True
         ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, self.sort, self.context)
+        self.win_search_ids = ids
+        if self.win_search and self.win_search_domain:
+            for dom in self.win_search_domain:
+                if dom in v:
+                    v.remove(dom)
+            self.win_search_domain = []
         if len(ids) < limit:
             self.search_count = len(ids)
         else:
@@ -577,8 +596,6 @@ class Screen(signal_event.signal_event):
         if self.current_view and self.current_view.view_type == 'tree' \
                 and not self.current_view.widget_tree.editable:
             self.switch_view(mode='form')
-        if self.current_view and self.current_view.view_type == 'gallery':
-            self.switch_view(mode='form')
         ctx = self.context.copy()
         ctx.update(context)
         model = self.models.model_new(default, self.action_domain, ctx)
@@ -700,7 +717,7 @@ class Screen(signal_event.signal_event):
                 self.current_model = None
             self.display()
             self.current_view.set_cursor()
-        if self.current_view.view_type in ('tree','gallery'):
+        if self.current_view.view_type == 'tree':
             ids = self.current_view.sel_ids_get()
 
             ctx = self.models.context.copy()
@@ -742,8 +759,8 @@ class Screen(signal_event.signal_event):
                 else:
                     self.screen_container.help_frame.show_all()
             self.search_active(
-                    active=self.show_search and vt in ('tree', 'graph', 'calendar', 'gallery'),
-                    show_search=self.show_search and vt in ('tree', 'graph','calendar', 'gallery'),
+                    active=self.show_search and vt in ('tree', 'graph', 'calendar'),
+                    show_search=self.show_search and vt in ('tree', 'graph','calendar'),
             )
 
     def groupby_next(self):

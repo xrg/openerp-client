@@ -215,11 +215,9 @@ class many2one(interface.widget_interface):
             self.display(self._view.model, self._view.modelfield)
             self.ok = True
         else:
-            search_mode = self.attrs.get('search_mode', 'tree')
             win = win_search(self.attrs['relation'], sel_multi=False,
                     ids=map(lambda x: x[0], ids), context=context,
-                    domain=domain, window=self._window,
-                    search_mode=search_mode)
+                    domain=domain, window=self._window)
             ids = win.go()
             if ids:
                 name = rpc.session.rpc_exec_auth('/object', 'execute',
@@ -261,8 +259,7 @@ class many2one(interface.widget_interface):
                 self.ok = True
                 return True
 
-            search_mode = self.attrs.get('search_mode', 'tree')
-            win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self._window, search_mode=search_mode)
+            win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self._window)
             ids = win.go()
             if ids:
                 name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]

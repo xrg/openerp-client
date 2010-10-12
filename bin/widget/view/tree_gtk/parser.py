@@ -115,8 +115,8 @@ class parser_tree(interface.parser_interface):
                 col.set_clickable(True)
                 col.set_cell_data_func(cell.renderer, cell.setter)
                 col.name = node_attrs['name']
-                col._type = 'Button'
                 col.attrs = node_attrs
+                col._type = 'Button'
                 col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 col.tooltip = node_attrs['string']
                 if node_attrs.get('help',False):
@@ -125,7 +125,6 @@ class parser_tree(interface.parser_interface):
                 visval = eval(str(node_attrs.get('invisible', 'False')), {'context':self.screen.context})
                 col.set_visible(not visval)
                 treeview.append_column(col)
-                col.name = node_attrs['name']
 
             if node.tag == 'field':
                 handler_id = False
@@ -672,21 +671,23 @@ class CellRendererButton(object):
     def setter(self, column, cell, store, iter):
         #TODO
         model = store.get_value(iter, 0)
-        if model.parent and not model.id:
+        if not isinstance(model, group_record) \
+               and model.parent and not model.id:
             cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
             cell.set_property("sensitive", False)
-            return
-        current_state = self.get_textual_value(model, 'draft')
-        tv = column.get_tree_view()
-        valid_states = self.__get_states() or []
-#       change this according to states or attrs: to not show the icon
-        attrs_check = self.attrs_set(model)
-        if valid_states and current_state not in valid_states or isinstance(model, group_record):
-            cell.set_property('stock-id', None)
         else:
-            cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
-            cell.set_property("sensitive", not attrs_check)
-    
+            current_state = self.get_textual_value(model, 'draft')
+            tv = column.get_tree_view()
+            valid_states = self.__get_states() or []
+    #       change this according to states or attrs: to not show the icon
+            attrs_check = self.attrs_set(model)
+            if valid_states and current_state not in valid_states \
+                                or isinstance(model, group_record):
+                cell.set_property('stock-id', None)
+            else:
+                cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+                cell.set_property("sensitive", not attrs_check)
+
     def open_remote(self, model, create, changed=False, text=None):
         raise NotImplementedError
 

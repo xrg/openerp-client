@@ -233,9 +233,11 @@ class ViewForm(parser_view):
                     #tb.insert(tbutton,-1)
 
                     def _action(button, action, type):
-                        data={}
-                        context=self.screen.context
-                        act=action.copy()
+                        data = {}
+                        context = self.screen.context
+                        if 'group_by' in context:
+                            del context['group_by']
+                        act = action.copy()
                         if type in ('print', 'action'):
                             self.screen.save_current()
                             id = self.screen.current_model and self.screen.current_model.id
