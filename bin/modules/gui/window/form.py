@@ -246,7 +246,8 @@ class form(object):
                 ('create_uid', _('Creation User')),
                 ('create_date', _('Creation Date')),
                 ('write_uid', _('Latest Modification by')),
-                ('write_date', _('Latest Modification Date'))
+                ('write_date', _('Latest Modification Date')),
+                ('xmlid', _('Internal Module Data ID'))
             ]
             for (key,val) in todo:
                 if line[key] and key in ('create_uid','write_uid','uid'):
