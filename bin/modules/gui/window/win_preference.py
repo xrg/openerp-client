@@ -71,7 +71,7 @@ class win_preference(object):
     def run(self, datas={}):
         lang = rpc.session.context.get('lang', 'en_US')
         res = self.win.run()
-        if res==gtk.RESPONSE_OK:
+        if res == gtk.RESPONSE_OK:
             rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write', [rpc.session.uid], self.screen.get())
             rpc.session.context_reload()
             new_lang = rpc.session.context.get('lang', 'en_US')

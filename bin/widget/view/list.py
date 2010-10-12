@@ -535,7 +535,7 @@ class ViewList(parser_view):
                             id = self.screen.save_current()
                             current_active_model.get_button_action(self.screen, id, path[1].attrs)
                             self.screen.current_model = None
-                            if self.screen.parent:
+                            if self.screen.parent and isinstance(self.screen.parent, ModelRecord):
                                 self.screen.parent.reload()
                             current_active_model.reload()
                         else:
