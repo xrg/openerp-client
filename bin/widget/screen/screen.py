@@ -577,8 +577,6 @@ class Screen(signal_event.signal_event):
         if self.current_view and self.current_view.view_type == 'tree' \
                 and not self.current_view.widget_tree.editable:
             self.switch_view(mode='form')
-        if self.current_view and self.current_view.view_type == 'gallery':
-            self.switch_view(mode='form')
         ctx = self.context.copy()
         ctx.update(context)
         model = self.models.model_new(default, self.action_domain, ctx)
@@ -700,7 +698,7 @@ class Screen(signal_event.signal_event):
                 self.current_model = None
             self.display()
             self.current_view.set_cursor()
-        if self.current_view.view_type in ('tree','gallery'):
+        if self.current_view.view_type == 'tree':
             ids = self.current_view.sel_ids_get()
 
             ctx = self.models.context.copy()
@@ -742,8 +740,8 @@ class Screen(signal_event.signal_event):
                 else:
                     self.screen_container.help_frame.show_all()
             self.search_active(
-                    active=self.show_search and vt in ('tree', 'graph', 'calendar', 'gallery'),
-                    show_search=self.show_search and vt in ('tree', 'graph','calendar', 'gallery'),
+                    active=self.show_search and vt in ('tree', 'graph', 'calendar'),
+                    show_search=self.show_search and vt in ('tree', 'graph','calendar'),
             )
 
     def groupby_next(self):
