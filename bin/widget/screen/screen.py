@@ -309,6 +309,9 @@ class Screen(signal_event.signal_event):
 
     def execute_action(self, combo):
         flag = combo.get_active_text()
+        combo_model = combo.get_model()
+        active_id = combo.get_active()
+        action_name = active_id != -1 and flag not in ['mf','blk','sh', 'sf'] and combo_model[active_id][2]
         # 'mf' Section manages Filters
         def clear_domain_ctx():
             for key in self.old_ctx.keys():
@@ -334,6 +337,7 @@ class Screen(signal_event.signal_event):
             value = obj._exec_action(act, {}, ctx)
 
         if flag in ['blk','mf']:
+            self.screen_container.last_active_filter = False
             clear_domain_ctx()
             self.search_filter()
             combo.set_active(0)
@@ -344,10 +348,19 @@ class Screen(signal_event.signal_event):
             widget = glade2.get_widget('action_name')
             win = glade2.get_widget('dia_get_action')
             win.set_icon(common.OPENERP_ICON)
+            lbl = glade2.get_widget('label157')
             if flag == 'sh':
                 win.set_title('Shortcut Entry')
-                lbl = glade2.get_widget('label157')
-                lbl.set_text('Enter Shortcut Name:')
+                lbl.set_text('Shortcut Name:')
+            else:
+                win.set_size_request(300, 165)
+                text_entry = glade2.get_widget('action_name')
+                lbl.set_text('Filter Name:')
+                table =  glade2.get_widget('table8')
+                info_lbl = gtk.Label('(Any existing filter with the \nsame name will be replaced)')
+                table.attach(info_lbl,1,2,2,3, gtk.FILL, gtk.EXPAND)
+                if self.screen_container.last_active_filter:
+                    text_entry.set_text(self.screen_container.last_active_filter)
             win.show_all()
             response = win.run()
             # grab a safe copy of the entered text before destroy() to avoid GTK bug https://bugzilla.gnome.org/show_bug.cgi?id=613241
@@ -355,22 +368,35 @@ class Screen(signal_event.signal_event):
             win.destroy()
             combo.set_active(0)
             if response == gtk.RESPONSE_OK and action_name:
+                filter_domain = self.filter_widget and self.filter_widget.value.get('domain',[])
+                filter_context = self.filter_widget and self.filter_widget.value.get('context',{})
                 values = {'name':action_name,
                        'model_id':self.name,
-                       'domain':str(self.filter_widget and self.filter_widget.value.get('domain',[])),
-                       'context':str(self.filter_widget and self.filter_widget.value.get('context',{})),
                        'user_id':rpc.session.uid
                        }
                 if flag == 'sf':
-                    action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'create', values, self.context)
-                    self.screen_container.fill_filter_combo(self.name)
+                    domain, context = self.screen_container.get_filter(action_name)
+                    for dom in eval(domain):
+                        if dom not in filter_domain:
+                            filter_domain.append(dom)
+                    groupby_list = eval(context).get('group_by',[]) + filter_context.get('group_by',[])
+                    filter_context.update(eval(context))
+                    filter_context.update({'group_by':groupby_list})
+                    values.update({'domain':str(filter_domain),
+                                   'context':str(filter_context),
+                                   })
+                    action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'create_or_replace', values, self.context)
+                    self.screen_container.fill_filter_combo(self.name, action_name)
                 if flag == 'sh':
                     values.update({'res_model':self.name,
-                                  'search_view_id':self.search_view['view_id'],
-                                  'default_user_ids': [[6, 0, [rpc.session.uid]]]})
+                                   'domain':str(filter_domain),
+                                   'context':str(filter_context),
+                                   'search_view_id':self.search_view['view_id'],
+                                   'default_user_ids': [[6, 0, [rpc.session.uid]]]})
                     rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'create_shortcut', values, self.context)
         else:
             try:
+                self.screen_container.last_active_filter = action_name
                 filter_domain = flag and tools.expr_eval(flag)
                 clear_domain_ctx()
                 if combo.get_active() >= 0:
