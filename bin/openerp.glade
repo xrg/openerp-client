@@ -3233,43 +3233,11 @@ Save as CSV</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">
-      <widget class="GtkVBox" id="dialog-vbox11">
+      <widget class="GtkVBox" id="win_search_vbox">
         <property name="visible">True</property>
+        <property name="spacing">2</property>
         <child>
-          <widget class="GtkHBox" id="search_hbox">
-            <property name="visible">True</property>
-            <child>
-              <placeholder/>
-            </child>
-          </widget>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
-          <widget class="GtkHSeparator" id="hseparator24">
-            <property name="visible">True</property>
-          </widget>
-          <packing>
-            <property name="expand">False</property>
-            <property name="position">3</property>
-          </packing>
-        </child>
-        <child>
-          <widget class="GtkScrolledWindow" id="search_sw">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-            <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-            <child>
-              <placeholder/>
-            </child>
-          </widget>
-          <packing>
-            <property name="position">4</property>
-          </packing>
+          <placeholder/>
         </child>
         <child internal-child="action_area">
           <widget class="GtkHButtonBox" id="dialog-action_area12">
