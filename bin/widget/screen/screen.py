@@ -269,7 +269,7 @@ class Screen(signal_event.signal_event):
             self.offset = 0
         offset = self.offset
         self.latest_search = v
-        if self.context.get('group_by',False) and not self.current_view.view_type == 'graph':
+        if 'group_by' in self.context and not self.current_view.view_type == 'graph':
             self.current_view.reload = True
             self.display()
             return True
