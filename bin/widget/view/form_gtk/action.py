@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -40,27 +40,23 @@ class action(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-        self.act_id = int(attrs['name'])        
+        self.act_id = int(attrs['name'])
         res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [self.act_id], ['type'], rpc.session.context)
         if not res:
             raise Exception, 'ActionNotFound'
-        type=res[0]['type']
+        type = res[0]['type']
         self.action = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [self.act_id], False, rpc.session.context)[0]
         if 'view_mode' in attrs:
             self.action['view_mode'] = attrs['view_mode']
 
-        if self.action['type']=='ir.actions.act_window':
+        if self.action['type'] == 'ir.actions.act_window':
             if not self.action.get('domain', False):
                 self.action['domain'] = '[]'
             if attrs.get('domain',False):
                 self.action['domain'] = attrs.get('domain')
             self.context = {'active_id': False, 'active_ids': []}
-            self.context.update(eval(self.action.get('context', '{}'), self.context.copy()))
-            a = self.context.copy()
-            a['time'] = time
-            a['datetime'] = datetime
-            self.domain = tools.expr_eval(self.action['domain'], a)
-
+            self.context.update(tools.expr_eval(self.action.get('context', '{}'), self.context.copy()))
+            self.domain = tools.expr_eval(self.action['domain'], self.context.copy())
             view_id = []
             if self.action['view_id']:
                 view_id = [self.action['view_id'][0]]
