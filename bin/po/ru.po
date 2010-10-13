@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-09-09 06:58+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-10-12 12:16+0000\n"
+"Last-Translator: Nikolay Chesnokov <chesnokov_n@msn.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-29 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-10-13 04:58+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -23,7 +23,7 @@ msgstr "Процесс печати"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
-msgstr ""
+msgstr "Процесс печати (подробн.)"
 
 #
 # File: bin/plugins/__init__.py, line: 41
@@ -1041,11 +1041,11 @@ msgstr "Скрипт миграции"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "Идентификатор контракта"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "Пароль контракта"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
@@ -1796,7 +1796,7 @@ msgstr "Этот виджет доступен только для чтения!
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Неверное значение даты или времени! Год должен быть больше чем 1899"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
@@ -2069,11 +2069,11 @@ msgstr "_Удалить базу данных"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "Загрузить Код Миграции"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "Мигрировать База(ы) данных"
 
 #
 # File: bin/openerp.glade, line: 372
