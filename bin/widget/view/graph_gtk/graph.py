@@ -97,7 +97,7 @@ class ViewGraph(object):
             # This is to get the missing field. if the field is not available in the graph view
             # for use case :graph view loaded directly from a dashboard and user executes groupby
             if self.axis[0] not in models.mfields:
-                missing_gb_field = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'fields_get', [self.axis[0]], None)
+                missing_gb_field = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'fields_get', [self.axis[0]], {})
                 if missing_gb_field:
                     models.add_fields(missing_gb_field, models)
 

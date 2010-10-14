@@ -381,7 +381,8 @@ class Screen(signal_event.signal_event):
                             filter_domain.append(dom)
                     groupby_list = eval(context).get('group_by',[]) + filter_context.get('group_by',[])
                     filter_context.update(eval(context))
-                    filter_context.update({'group_by':groupby_list})
+                    if groupby_list:
+                        filter_context.update({'group_by':groupby_list})
                     values.update({'domain':str(filter_domain),
                                    'context':str(filter_context),
                                    })
