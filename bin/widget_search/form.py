@@ -27,6 +27,7 @@ import rpc
 import wid_int
 import tools
 from lxml import etree
+import uuid
 
 class _container(object):
     def __init__(self, max_width):
@@ -187,7 +188,6 @@ class parse(object):
                 if node is not None and len(node):
                     mywidget = gtk.HBox(homogeneous=False, spacing=0)
                     mywidget.pack_start(widget_act.widget,expand=True,fill=True)
-                    i = 0
                     for node_child in node:
                         attrs_child = tools.node_attributes(node_child)
                         if attrs_child.get('invisible', False):
@@ -195,10 +195,9 @@ class parse(object):
                             if visval:
                                 continue
                         if node_child.tag == 'filter':
-                            i += 1
                             widget_child = widgets_type['filter'][0]('', self.parent, attrs_child, call)
                             mywidget.pack_start(widget_child.widget)
-                            dict_widget[str(attrs['name']) + str(i)] = (widget_child, mywidget, 1)
+                            dict_widget[str(attrs['name']) + str(uuid.uuid1())] = (widget_child, mywidget, 1)
                         elif node_child.tag == 'separator':
                             if attrs_child.get('orientation','vertical') == 'horizontal':
                                 sep = gtk.HSeparator()
@@ -218,7 +217,7 @@ class parse(object):
                 widget_act = filter.filter(name, self.parent, attrs, call)
                 help = attrs.get('help', False) or name
                 wid = container.wid_add(widget_act.butt, xoptions=gtk.SHRINK, help=help)
-                dict_widget[name]=(widget_act, widget_act, 1)
+                dict_widget[name + str(uuid.uuid1())] = (widget_act, widget_act, 1)
 
             elif node.tag == 'separator':
                 if attrs.get('orientation','vertical') == 'horizontal':

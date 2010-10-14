@@ -8,39 +8,39 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-06-16 04:09+0000\n"
-"Last-Translator: oogii <orkhon_j@yahoo.com>\n"
+"PO-Revision-Date: 2010-10-14 04:29+0000\n"
+"Last-Translator: Jacara <Unknown>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-29 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-10-14 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr "Урсгал хэвлэх"
+msgstr "Ажлын урсгал хэвлэх"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
-msgstr "Ажлын урсгал хэвлэх"
+msgstr "Ажлын урсгал хэвлэх (Бүтэн)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr "Үүнд Плагин алга"
+msgstr "Энэ нөөцөд шаардлагатай Plugin алга !"
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
-msgstr "Плагинаа сонго"
+msgstr "Plugin-аа сонгоно уу"
 
 #: bin/translate.py:184
 #, python-format
 msgid "Unable to set locale %s"
-msgstr "%s локалыг тохируулж чадсангүй"
+msgstr "%s локалчлалыг тохируулах боломжгүй"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "OpenERP хаагдаж байна, Гараар зогсоосон"
 
 #: bin/options.py:108
 #, python-format
@@ -49,16 +49,16 @@ msgstr "OpenERP Клиент %s"
 
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr "Өөр тохиргоо заа"
+msgstr "Өөр тохиргооны файл тодорхойлох"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "Суурь алдаа илрүүлэгчийг нээх. Түлхүүр үг '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "Тэмдгэлсэн логийн түвшин: %s"
 
 #: bin/options.py:112
 msgid "specify the user login"
@@ -66,7 +66,7 @@ msgstr "Хэрэглэгчээ сонгох"
 
 #: bin/options.py:113
 msgid "specify the server port"
-msgstr "Серверийн порт"
+msgstr "Серверийн порт тодорхойлох"
 
 #: bin/options.py:114
 msgid "specify the server ip/name"
@@ -75,17 +75,19 @@ msgstr "Серверийн нэр/хаяг"
 #: bin/printer/printer.py:185
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr "%s төрлийн файлтай ажиллаж чадахгүй"
+msgstr "%s төрлийн файлтай ажиллах боломжгүй"
 
 #: bin/printer/printer.py:190
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
+"Линукс Автомат Хэвлэлт хэрэгжээгүй байна.\n"
+"Урьдчилж харах боломжыг ашиглана уу !"
 
 #: bin/printer/printer.py:198
 msgid "Error no report"
-msgstr "Алдааны дугаар"
+msgstr "Алдааны мэдэгдэл алга"
 
 #: bin/printer/printer.py:217 bin/modules/gui/window/win_export.py:289
 #: bin/modules/gui/main.py:1424 bin/widget/view/form_gtk/binary.py:162
@@ -104,6 +106,11 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
+"Санал хүсэлт илгээсэнд баярлалаа !\n"
+"Таны сэтгэгдэл OpenERP -д илгээгдсэн.\n"
+"Та одоо шинэ өгөгдлийн бааз үүсгэж эхлэх эсвэл\n"
+"одоо байгаа өгөгдлийн бааз руу \"File\" цэсийн тусламжтайгаар\n"
+"нэвтрэх боломжтой."
 
 #: bin/common/common.py:222
 msgid ""
@@ -111,10 +118,14 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
+"OpenERP-г туршсанд баярлалаа !\n"
+"Та одоо шинэ өгөгдлийн бааз үүсгэж эхлэх эсвэл\n"
+"одоо байгаа өгөгдлийн бааз руу \"File\" цэсийн тусламжтайгаар\n"
+"нэвтрэх боломжтой."
 
 #: bin/common/common.py:325
 msgid "Support request sent !"
-msgstr ""
+msgstr "Тусламж хүсэлт илгээгдлээ !"
 
 #: bin/common/common.py:345 bin/common/common.py:388
 msgid ""
@@ -141,6 +152,28 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>Үл танигдах алдаа мэдээллэгдлээ.</b>\n"
+"\n"
+"<b>Танд тохирох Open ERP засвар үйлчилгээний гараа алга !</b>\n"
+"Хэрэв та Open ERP-г бодит хэрэгцээндээ ашиглаж байгаа бол засвар \n"
+"үйлчилгээний програм захиалахыг санал болгож байна.\n"
+"\n"
+"The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+"automatic migration system so that we can fix your problems within a few\n"
+"hours. If you had a maintenance contract, this error would have been sent\n"
+"to the quality team of the Open ERP editor.\n"
+"\n"
+"Засвар үйлчилгээний програм нь дараах боломжыг олгоно:\n"
+"* Шинэ хувилбартай автоматаар нийцүүлнэ,\n"
+"* Алдаа засах баталгаа,\n"
+"* Сар бүр алдаа болон тэднийг зассан тухай мэдээллээр хангана,\n"
+"* Хандах эрхийн асуудлын талаар автоматаар имэйл илгээнэ,\n"
+"* Үйлчлүүлэгчдийн порталд хандах боломжтой.\n"
+"\n"
+"Та илүү их мэдээллийг дараах линкээр авах боломжтой. Алдааны дэлгэрэнгүй "
+"мэдээлэл\n"
+"хоёрдох ТАБ-д тусгагдсан болно.\n"
 
 #: bin/common/common.py:368
 #, python-format
@@ -166,12 +199,35 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Үл танигдах алдаа мэдээллэгдлээ.</b>\n"
+"\n"
+"Таны засвар үйлчилгээний гэрээ таны системд суусан бүх \n"
+"модулид хамаарч чадархгүй байна ! Хэрэв та Open ERP-г \n"
+"бодит хэрэгцээндээ ашиглаж байгаа бол гэрээгээ шинэчлэхийг \n"
+"санал болгож байна.\n"
+"\n"
+"Хэрэв та өөрөө модуль хөгжүүлсэн, гуравдагч этгээдийн модулийг\n"
+"суулгасан бол бид танд тэдгээр модулид зориулсан нэмэлт гэрээг \n"
+"санал болгож байна. Таны модулиуд бидэнд шалгагдсны дараа \n"
+"манай чанарын баг тэдгээр модуль дээр ирээдүйн бүх шинэчлэлт,\n"
+"сайжруулалт, хувилбаруудыг нэмэлт үнэ хөлсгүйгээр нийцүүлэх\n"
+"баталгаа өгөх болно.\n"
+"\n"
+"Таны засвар үйлчилгээний гэрээнд хамрагдаагүй модулийн жагсаалт:\n"
+"%s\n"
+"\n"
+"Та илүү их мэдээллийг дараах линкээр авах боломжтой. Алдааны дэлгэрэнгүй "
+"мэдээлэл\n"
+"хоёрдох ТАБ-д тусгагдсан болно."
 
 #: bin/common/common.py:443
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
+"Таны асуудал, бэрхшээл чанарын багт илгээгдлээ !\n"
+"Бид асуудлыг судлаад удахгүй холбоо барих болно."
 
 #: bin/common/common.py:446
 #, python-format
@@ -180,6 +236,9 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Таны асуудал, бэрхшээл чанарын багт *ИЛГЭЭГДСЭНГҮЙ* !\n"
+"Энэ алдааг гар аргаар мэдээллэнэ үү:\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
@@ -201,7 +260,7 @@ msgstr "Үгүй"
 #: bin/widget_search/reference.py:74 bin/widget_search/spinbutton.py:69
 #: bin/widget_search/calendar.py:117 bin/widget_search/spinint.py:73
 msgid "The content of the widget or ValueError if not valid"
-msgstr ""
+msgstr "Виджетийн агуулга эсвэл алдаа гарсан үед ValueError"
 
 #: bin/widget_search/form.py:145
 msgid "Limit :"
@@ -217,11 +276,11 @@ msgstr "Параметрүүд :"
 
 #: bin/widget_search/form.py:301
 msgid "The content of the form or exception if not valid"
-msgstr ""
+msgstr "Формын агуулга эсвэл алдааны мэдэгдэл"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "Виджетийн агуулга эсвэл алдааны мэдэгдэл"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -236,6 +295,14 @@ msgid ""
 "You can also use \"=\" to set the date to the current date/time and '-' to "
 "clear the field."
 msgstr ""
+"Та дараах товчоор тусгай үйлдлүүдийг ашиглах боломжтой : +, - or =. "
+"Сонгогдсон огноон утгыг нэмэгдүүлэх, хорогдуулах. Тэнцүү тэмдэг нь "
+"сонгогдсон огноог хэсэгчилнэ. Боломжит хувилбар: 12h = 12 цаг, 8d = 8 хоног, "
+"4w = 4 долоо хоног, 1m = 1 сар, 2y = 2 жил. Жишээлбэл:\n"
+"* +21d : сонгогдсон жил дээр 12 өдөр нэмнэ\n"
+"* =23w : жилийн 23 дахь долоо хоногыг сонгоно\n"
+"* -4m : тухайн огноог дөрвөн долоо хоногоор ухраана\n"
+"Та ердөө \"=\" тэмдэгээр огноог тааруулах ба \"-\" тэмдэгээр цэвэрлэнэ."
 
 #: bin/widget_search/calendar.py:55
 msgid "Start date"
@@ -245,7 +312,7 @@ msgstr "Эхлэх огноо"
 #: bin/widget/view/form_gtk/calendar.py:62
 #: bin/widget/view/form_gtk/calendar.py:184
 msgid "Open the calendar widget"
-msgstr "Хуанли нээх"
+msgstr "Хуанлийн виджет нээх"
 
 #: bin/widget_search/calendar.py:75
 msgid "End date"
@@ -254,23 +321,23 @@ msgstr "Дуусах огноо"
 #: bin/widget_search/calendar.py:120 bin/widget/view/form_gtk/calendar.py:136
 #: bin/widget/view/form_gtk/calendar.py:266
 msgid "OpenERP - Date selection"
-msgstr "ERP-огноо сонгох"
+msgstr "OpenERP - Огноо сонголт"
 
 #: bin/rpc.py:140 bin/modules/gui/main.py:210 bin/modules/action/wizard.py:175
 msgid "Connection refused !"
-msgstr "Холбогдох боломжгүй!"
+msgstr "Холболт хориглогдсон !"
 
 #: bin/rpc.py:141
 msgid "Connection refused!"
-msgstr "Холбогдох боломжгүй!"
+msgstr "Холболт хориглогдсон !"
 
 #: bin/rpc.py:171
 msgid ""
 "Unable to reach to OpenERP server !\n"
 "You should check your connection to the network and the OpenERP server."
 msgstr ""
-"OpenERP серверт холбогдох боломж алга!\n"
-"Сүлжээ, серверээ шалгана уу."
+"OpenERP серверт холбогдох боломжгүй!\n"
+"Та өөрийн сүлжээ болон OpenERP серверийн сүлжээг шалгана уу."
 
 #: bin/rpc.py:171
 msgid "Connection Error"
@@ -289,17 +356,17 @@ msgstr "Дэлгэрэнгүйг харах"
 #: bin/modules/gui/window/win_search.py:50
 #: bin/widget/view/form_gtk/one2many_list.py:51
 msgid "OpenERP - Link"
-msgstr ""
+msgstr "OpenERP- линк"
 
 #: bin/modules/gui/window/win_search.py:147
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr ""
+msgstr "OpenERP хайлт: %s"
 
 #: bin/modules/gui/window/win_search.py:148
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr ""
+msgstr "OpenERP хайлт: %s (%%d result(s))"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
