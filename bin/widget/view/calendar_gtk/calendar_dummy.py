@@ -24,7 +24,7 @@ from widget.view.interface import parser_view
 class DummyViewCalendar(parser_view):
 
     def __init__(self, window, screen, widget, children=None, buttons=None,
-            toolbar=None, submenu=None):
+            toolbar=None, submenu=None, help=None):
         super(DummyViewCalendar, self).__init__(window, screen, widget, children,
                 buttons, toolbar, submenu)
         self.view_type = 'dummycalendar'

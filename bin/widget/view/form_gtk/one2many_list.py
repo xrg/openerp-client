@@ -143,6 +143,7 @@ class dialog(object):
             end = (res not in (gtk.RESPONSE_OK, gtk.RESPONSE_APPLY)) or self.screen.current_model.validate()
             if not end:
                 self.screen.display()
+                self.screen.current_view.set_cursor()
 
         if res in (gtk.RESPONSE_OK, gtk.RESPONSE_APPLY) :
             self.screen.current_view.set_value()
@@ -346,10 +347,12 @@ class one2many_list(interface.widget_interface):
                 dia.destroy()
 
     def _sig_edit(self, *args):
+        ctx = dict(self._view.model.expr_eval(self.screen.default_get), **self.context)
+        ctx.update(self._view.model.expr_eval('dict(%s)' % self.attrs.get('context', '{}')))
         if self.screen.current_model:
             ok = True
             edited_model = self.screen.current_model
-            dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly, context=self.context)
+            dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly, context=ctx)
             while ok:
                 ok, value, res = dia.run()
                 if res == gtk.RESPONSE_OK:

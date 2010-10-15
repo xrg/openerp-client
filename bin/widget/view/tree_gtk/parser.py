@@ -55,12 +55,15 @@ def send_keys(renderer, editable, position, treeview):
     if isinstance(editable, gtk.ComboBoxEntry):
         editable.connect('changed', treeview.on_editing_done)
 
-def sort_model(column, screen, treeview):
+def sort_model(column, screen):
     unsaved_model =  [x for x in screen.models if x.id == None or x.modified]
     if unsaved_model:
         res =  common.message(_('You have unsaved record(s) !  \n\nPlease Save them before sorting !'))
         return res
-    group_by = screen.context.get('group_by',False)
+    group_by = screen.context.get('group_by',[])
+    group_by_no_leaf = screen.context.get('group_by_no_leaf',False)
+    if column.name in group_by or group_by_no_leaf:
+        return True
     screen.current_view.set_drag_and_drop(column.name == 'sequence')
     if screen.sort == column.name:
         screen.sort = column.name+' desc'
@@ -69,11 +72,10 @@ def sort_model(column, screen, treeview):
     screen.offset = 0
     if screen.type in ('many2many','one2many'):
         screen.sort_domain = [('id','in',screen.ids_get())]
+    screen.search_filter()
     if group_by:
-        model = treeview.get_model()
-        model.sort(column, screen, treeview)
-    else:
-        screen.search_filter()
+        screen.current_view.widget_tree.expand_all()
+
 
 class parser_tree(interface.parser_interface):
 
@@ -113,8 +115,8 @@ class parser_tree(interface.parser_interface):
                 col.set_clickable(True)
                 col.set_cell_data_func(cell.renderer, cell.setter)
                 col.name = node_attrs['name']
-                col._type = 'Button'
                 col.attrs = node_attrs
+                col._type = 'Button'
                 col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 col.tooltip = node_attrs['string']
                 if node_attrs.get('help',False):
@@ -123,8 +125,6 @@ class parser_tree(interface.parser_interface):
                 visval = eval(str(node_attrs.get('invisible', 'False')), {'context':self.screen.context})
                 col.set_visible(not visval)
                 treeview.append_column(col)
-                col._type = 'Button'
-                col.name = node_attrs['name']
 
             if node.tag == 'field':
                 handler_id = False
@@ -199,7 +199,7 @@ class parser_tree(interface.parser_interface):
                     if max_width:
                         col.set_max_width(max_width)
 
-                col.connect('clicked', sort_model, self.screen, treeview)
+                col.connect('clicked', sort_model, self.screen)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 visval = eval(str(fields[fname].get('invisible', 'False')), {'context':self.screen.context})
@@ -289,6 +289,7 @@ class Char(object):
         cell.set_property('background', None)
         cell.set_property('xalign', align)
         if isinstance(model, group_record) and gb:
+            cell.set_property('foreground', 'black')
             font = pango.FontDescription('Times New Roman bold 10')
             if self.field_name in model.field_with_empty_labels:
                 cell.set_property('foreground', '#AAAAAA')
@@ -684,17 +685,22 @@ class CellRendererButton(object):
     def setter(self, column, cell, store, iter):
         #TODO
         model = store.get_value(iter, 0)
-        current_state = self.get_textual_value(model, 'draft')
-        tv = column.get_tree_view()
-        valid_states = self.__get_states() or []
-#       change this according to states or attrs: to not show the icon
-        attrs_check = self.attrs_set(model)
-        if valid_states and current_state not in valid_states or isinstance(model, group_record):
-            cell.set_property('stock-id', None)
-        else:
+        if not isinstance(model, group_record) \
+               and model.parent and not model.id:
             cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
-            cell.set_property("sensitive", not attrs_check)
-
+            cell.set_property("sensitive", False)
+        else:
+            current_state = self.get_textual_value(model, 'draft')
+            tv = column.get_tree_view()
+            valid_states = self.__get_states() or []
+    #       change this according to states or attrs: to not show the icon
+            attrs_check = self.attrs_set(model)
+            if valid_states and current_state not in valid_states \
+                                or isinstance(model, group_record):
+                cell.set_property('stock-id', None)
+            else:
+                cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+                cell.set_property("sensitive", not attrs_check)
 
     def open_remote(self, model, create, changed=False, text=None):
         raise NotImplementedError

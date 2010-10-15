@@ -29,7 +29,6 @@ import graph_gtk
 import calendar_gtk
 import gantt_gtk
 import diagram_gtk
-import gallery_gtk
 
 from form import ViewForm
 from list import ViewList
@@ -37,7 +36,6 @@ from graph import ViewGraph
 from calendar import ViewCalendar
 from diagram import ViewDiagram
 from gantt import ViewGantt
-from gallery import ViewGallery
 
 parsers = {
     'form' : (form_gtk.parser_form, ViewForm),
@@ -45,7 +43,6 @@ parsers = {
     'graph': (graph_gtk.parser_graph, ViewGraph),
     'calendar' : (calendar_gtk.parser_calendar, ViewCalendar),
     'gantt' : (gantt_gtk.parser_gantt, ViewGantt),
-    'gallery': (gallery_gtk.parser_gallery, ViewGallery),
     'diagram' : (diagram_gtk.parser_diagram, ViewDiagram),
 }
 

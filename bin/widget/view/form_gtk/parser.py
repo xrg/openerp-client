@@ -124,6 +124,7 @@ class Button(Observable):
             common.warning(_('Invalid form, correct red fields !'), _('Error !') )
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
             self.form.screen.display()
+            self.form.screen.current_view.set_cursor()
 
 
 
@@ -223,7 +224,7 @@ class _container(object):
 
         def size_allocate(label, allocation):
             label.set_size_request( allocation.width - 2, -1 )
-        if fname is None and name:
+        if fname is None and name and len(name) > 50:
             label.connect( "size-allocate", size_allocate )
 
         uid = rpc.session.uid
@@ -306,7 +307,7 @@ class parser_form(widget.view.interface.parser_interface):
            self.widget_id = 0
            self.default_focus_field = False
            self.default_focus_button = False
-           self.accepted_attr_list = ['type','domain','context','relation', 'widget',
+           self.accepted_attr_list = ['type','domain','context','relation', 'widget','attrs',
                                       'digits','function','store','fnct_search','fnct_inv','fnct_inv_arg',
                                       'func_obj','func_method','related_columns','third_table','states',
                                       'translate','change_default','size','selection']
@@ -471,9 +472,6 @@ class parser_form(widget.view.interface.parser_interface):
 
                 if 'filename' in attrs:
                     fields[name]['filename'] = attrs['filename']
-
-                if fields[name]['type'] == 'many2one' and 'search_mode' in attrs:
-                    fields[name]['search_mode'] = attrs['search_mode']
 
                 if 'default_focus' in attrs and not self.default_focus_field:
                     fields[name]['focus_field'] = attrs['default_focus']

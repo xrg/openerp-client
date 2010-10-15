@@ -95,7 +95,7 @@ class xmlrpc_gw(gw_inter):
             transport = tiny_socket.PersistentTransport(send_gzip=send_gzip)
         self._sock = xmlrpclib.ServerProxy(url+obj, transport=transport, verbose=0)
     def exec_auth(self, method, *args):
-        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
+        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, '*', args)))
         res = self.execute(method, self._uid, self._passwd, *args)
         logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
@@ -131,7 +131,7 @@ class tinySocket_gw(gw_inter):
     def __del__(self):
         pass
     def exec_auth(self, method, *args):
-        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
+        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, '*', args)))
         res = self.execute(method, self._uid, self._passwd, *args)
         logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res

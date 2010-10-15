@@ -119,10 +119,12 @@ class main(service.Service):
             domain_ctx['datetime'] = datetime
             domain = tools.expr_eval(action['domain'], domain_ctx)
             help = {}
-            if action.get('display_help', False):
-                help['action_id'] = action.get('id', False)
-                help['msg'] =  action.get('help', False)
-                help['title'] = action.get('name', False)
+            if action.get('display_menu_tip', False):
+                msg = action.get('help', False)
+                title = action.get('name', False)
+                if msg and len(msg):
+                    help['msg'] =  msg
+                    help['title'] = title
             if datas.get('domain', False):
                 domain.append(datas['domain'])
             if action.get('target', False)=='new':
