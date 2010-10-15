@@ -389,6 +389,8 @@ class Screen(signal_event.signal_event):
                     action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'create_or_replace', values, self.context)
                     self.screen_container.fill_filter_combo(self.name, action_name)
                 if flag == 'sh':
+                    filter_domain += self.domain_init
+                    filter_context.update(self.context_init)
                     values.update({'res_model':self.name,
                                    'domain':str(filter_domain),
                                    'context':str(filter_context),

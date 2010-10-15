@@ -42,40 +42,6 @@ import time
 import pango
 import rpc
 
-class WrapLabel(gtk.Label):
-    __gtype_name__ = 'WrapLabel'
-
-    def __init__(self, str=None):
-        gtk.Label.__init__(self)
-
-        self.__wrap_width = 0
-        self.layout = self.get_layout()
-        self.layout.set_wrap(pango.WRAP_WORD_CHAR)
-        self.set_alignment(0.3, 0.3)
-
-    def do_size_request(self, requisition):
-        layout = self.get_layout()
-        width, height = layout.get_pixel_size()
-        requisition.width = 0
-        requisition.height = height
-
-    def do_size_allocate(self, allocation):
-        gtk.Label.do_size_allocate(self, allocation)
-        self.__set_wrap_width(allocation.width)
-
-    def set_markup(self, str):
-        gtk.Label.set_markup(self, str)
-        self.__set_wrap_width(self.__wrap_width)
-
-    def __set_wrap_width(self, width):
-        if width == 0:
-            return
-        layout = self.get_layout()
-        layout.set_width((width * pango.SCALE)/2)
-        if self.__wrap_width != width:
-            self.__wrap_width = width
-            self.queue_resize()
-
 class action_tips(object):
     def __init__(self, help):
         self.help = help
@@ -94,12 +60,30 @@ class action_tips(object):
     def create_action_tip(self):
         if self.help.get('msg', False):
             msg = self.help.get('msg', '')
+            msg = msg.replace('\n',' ').replace('\t',' ')
+            if len(msg) < 80:
+                msg = '\t\t \t \t' + msg
             title = self.help.get('title', '')
-            # The label to display tips
-            help_label = WrapLabel()
-            help_label.set_line_wrap(True)
+
+            help_label = gtk.Label()
             help_label.set_use_markup(True)
-            help_label.set_label('\n<span font="italic">%s</span>'% (msg))
+            def size_allocate(label, allocation):
+                label.set_size_request( allocation.width - 2, -1 )
+            help_label.connect( "size-allocate", size_allocate )
+            help_label.set_label('<span font="italic" foreground="black">%s</span>'% (msg))
+
+            help_label.set_alignment(0.3, 1)
+            help_label.set_line_wrap(True)
+            help_label.set_justify(gtk.JUSTIFY_FILL)
+            layout = help_label.get_layout()
+            layout.set_wrap(pango.WRAP_WORD_CHAR)
+
+            table = gtk.Table(1, 8)
+            table.set_homogeneous(False)
+            table.set_col_spacings(40)
+            table.attach(help_label, 3, 6, 0, 1, ypadding=10)
+            label_box = gtk.EventBox()
+            label_box.add(table)
 
             # Close current tip button
             closebtn = gtk.Button('Close current tip')
@@ -137,7 +121,7 @@ To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user pr
             self.help_frame = gtk.Frame()
             self.help_frame.set_label_widget(box)
             self.help_frame.set_label_align(0.5,0.5)
-            self.help_frame.add(help_label)
+            self.help_frame.add(label_box)
             self.help_frame.show_all()
             return True
         return False
