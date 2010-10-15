@@ -381,13 +381,16 @@ class Screen(signal_event.signal_event):
                             filter_domain.append(dom)
                     groupby_list = eval(context).get('group_by',[]) + filter_context.get('group_by',[])
                     filter_context.update(eval(context))
-                    filter_context.update({'group_by':groupby_list})
+                    if groupby_list:
+                        filter_context.update({'group_by':groupby_list})
                     values.update({'domain':str(filter_domain),
                                    'context':str(filter_context),
                                    })
                     action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'create_or_replace', values, self.context)
                     self.screen_container.fill_filter_combo(self.name, action_name)
                 if flag == 'sh':
+                    filter_domain += self.domain_init
+                    filter_context.update(self.context_init)
                     values.update({'res_model':self.name,
                                    'domain':str(filter_domain),
                                    'context':str(filter_context),
