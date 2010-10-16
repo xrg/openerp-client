@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-10-15 04:16+0000\n"
+"PO-Revision-Date: 2010-10-15 08:58+0000\n"
 "Last-Translator: sugi <Unknown>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-15 04:41+0000\n"
+"X-Launchpad-Export-Date: 2010-10-16 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -1653,7 +1653,7 @@ msgstr "Жагсаалтыг устгах"
 
 #: bin/openerp.glade:2765
 msgid "<b>Exports List</b>"
-msgstr ""
+msgstr "<b>Жагсаалт гаргах</b>"
 
 #: bin/openerp.glade:2782
 msgid "<b>Predefined Exports</b>"
@@ -1677,11 +1677,11 @@ msgstr ""
 
 #: bin/openerp.glade:2961 bin/openerp.glade:5688
 msgid "_Remove"
-msgstr ""
+msgstr "Устгах"
 
 #: bin/openerp.glade:3009
 msgid "_Nothing"
-msgstr ""
+msgstr "Хоосон"
 
 #: bin/openerp.glade:3064
 msgid "Fields to Export"
@@ -1707,15 +1707,15 @@ msgstr "OpenERP - Хайх"
 
 #: bin/openerp.glade:3301
 msgid "OpenERP - Preferences"
-msgstr ""
+msgstr "OpenERP -ийн давуу тал"
 
 #: bin/openerp.glade:3315
 msgid "<b>User preferences</b>"
-msgstr ""
+msgstr "<b>Хэрэгдэгчийн давуу тал/b>"
 
 #: bin/openerp.glade:3381
 msgid "Tip of the Day"
-msgstr ""
+msgstr "Өдрийн зөвлөгөө"
 
 #: bin/openerp.glade:3428
 msgid "_Display a new tip next time?"
@@ -1723,11 +1723,11 @@ msgstr ""
 
 #: bin/openerp.glade:3481
 msgid "Pre_vious Tip"
-msgstr ""
+msgstr "Өмнөх зөвлөгөө"
 
 #: bin/openerp.glade:3527
 msgid "Ne_xt Tip"
-msgstr ""
+msgstr "Дараагийн зөвлөгөө"
 
 #: bin/openerp.glade:3573
 msgid "OpenERP - License"
@@ -1753,6 +1753,12 @@ msgid ""
 "Note that we may not reply if you do not have a support contract with Tiny "
 "or an official partner.</i>"
 msgstr ""
+"<b>Алдаагаа батлах эсвэл дэмжих хүсэлт илгээхийн тулд энэ формыг бөглөнө "
+"үү</b>\n"
+"<i>\n"
+"Таны хүсэлт OpenERP-ийн багт илгээгдэх ба бид таньд товч хариултыг илгээнэ.\n"
+"Note that we may not reply if you do not have a support contract with Tiny "
+"or an official partner.</i>"
 
 #: bin/openerp.glade:4474
 msgid "Phone number:"
@@ -1769,10 +1775,14 @@ msgid ""
 "Urgent\n"
 "Very Urgent"
 msgstr ""
+"Чухал биш\n"
+"Дундаж\n"
+"Чухал\n"
+"Маш чухал"
 
 #: bin/openerp.glade:4534
 msgid "<b>Support contract id:</b>"
-msgstr ""
+msgstr "<b>Гэрээний дугаар дэмжих</b>"
 
 #: bin/openerp.glade:4591
 msgid "Other comments:"
@@ -1952,7 +1962,7 @@ msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.glade:5400
 msgid "Next editable widget"
-msgstr ""
+msgstr "Засч болох дараагийн виджет"
 
 #: bin/openerp.glade:5415
 msgid "<Tab>"
@@ -2024,7 +2034,7 @@ msgstr "Кодлох:"
 
 #: bin/openerp.glade:6029
 msgid "Field Separater:"
-msgstr ""
+msgstr "Талбар тусгаарлагч"
 
 #: bin/openerp.glade:6041
 msgid "CSV Parameters"
@@ -2295,6 +2305,11 @@ msgid ""
 "shortly.\n"
 "</i>"
 msgstr ""
+"<b>Засварын гэрээ.</b>\n"
+"<i>\n"
+"Your request will be send to OpenERP and maintenance team will reply you "
+"shortly.\n"
+"</i>"
 
 #: bin/win_error.glade:184
 msgid "Explain what you did:"
@@ -2412,7 +2427,7 @@ msgstr "Таны нэр:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-г цуцлах"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
