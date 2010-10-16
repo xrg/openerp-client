@@ -89,7 +89,7 @@ class action(interface.widget_interface):
 
     def _sig_open(self, *args):
         obj = service.LocalService('action.main')
-        obj.execute(self.act_id, {})
+        obj.execute(self.act_id, datas={}, type=None, context={})
 
     def set_value(self, mode, model_field):
         self.screen.current_view.set_value()
