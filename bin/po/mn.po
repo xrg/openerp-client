@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-10-15 08:58+0000\n"
-"Last-Translator: sugi <Unknown>\n"
+"PO-Revision-Date: 2010-10-16 10:59+0000\n"
+"Last-Translator: Jacara <Unknown>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-16 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-10-17 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -23,7 +23,7 @@ msgstr "Ажлын урсгал хэвлэх"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
-msgstr "Ажлын урсгал хэвлэх (Бүтэн)"
+msgstr "Ажлын урсгал хэвлэх (Нүсэр)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
@@ -40,7 +40,7 @@ msgstr "%s локалчлалыг тохируулах боломжгүй"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr "OpenERP хаагдаж байна, Гараар зогсоосон"
+msgstr "OpenERP хаагдаж байна, Гарны таслалдал"
 
 #: bin/options.py:108
 #, python-format
@@ -53,16 +53,16 @@ msgstr "Өөр тохиргооны файл тодорхойлох"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr "Суурь алдаа илрүүлэгчийг нээх. Түлхүүр үг '--log-level=debug'"
+msgstr "Debug-н суурь горимыг зөвшөөрөх. Өөрөөр хэлбэл '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr "Тэмдгэлсэн логийн түвшин: %s"
+msgstr "логийн түвшин: %s -г заах"
 
 #: bin/options.py:112
 msgid "specify the user login"
-msgstr "Хэрэглэгчээ сонгох"
+msgstr "Хэрэглэгчийг оноох"
 
 #: bin/options.py:113
 msgid "specify the server port"
@@ -83,11 +83,11 @@ msgid ""
 "Use preview option !"
 msgstr ""
 "Линукс Автомат Хэвлэлт хэрэгжээгүй байна.\n"
-"Урьдчилж харах боломжыг ашиглана уу !"
+"Урьдчилж харах боломжийг ашиглана уу !"
 
 #: bin/printer/printer.py:198
 msgid "Error no report"
-msgstr "Алдааны мэдэгдэл алга"
+msgstr "Тайлан байхгүй алдаа"
 
 #: bin/printer/printer.py:217 bin/modules/gui/window/win_export.py:289
 #: bin/modules/gui/main.py:1424 bin/widget/view/form_gtk/binary.py:162
@@ -109,8 +109,8 @@ msgstr ""
 "Санал хүсэлт илгээсэнд баярлалаа !\n"
 "Таны сэтгэгдэл OpenERP -д илгээгдсэн.\n"
 "Та одоо шинэ өгөгдлийн бааз үүсгэж эхлэх эсвэл\n"
-"одоо байгаа өгөгдлийн бааз руу \"File\" цэсийн тусламжтайгаар\n"
-"нэвтрэх боломжтой."
+"одоо байгаа өгөгдлийн бааз руу \"Файл\" цэсийн тусламжтайгаар\n"
+"холбогдох боломжтой."
 
 #: bin/common/common.py:222
 msgid ""
@@ -120,12 +120,12 @@ msgid ""
 msgstr ""
 "OpenERP-г туршсанд баярлалаа !\n"
 "Та одоо шинэ өгөгдлийн бааз үүсгэж эхлэх эсвэл\n"
-"одоо байгаа өгөгдлийн бааз руу \"File\" цэсийн тусламжтайгаар\n"
-"нэвтрэх боломжтой."
+"одоо байгаа өгөгдлийн бааз руу \"Файл\" цэсийн тусламжтайгаар\n"
+"холбогдох боломжтой."
 
 #: bin/common/common.py:325
 msgid "Support request sent !"
-msgstr "Тусламж хүсэлт илгээгдлээ !"
+msgstr "Дэмжлэгийн хүсэлт илгээгдлээ !"
 
 #: bin/common/common.py:345 bin/common/common.py:388
 msgid ""
@@ -153,22 +153,24 @@ msgid ""
 "is displayed on the second tab.\n"
 msgstr ""
 "\n"
-"<b>Үл танигдах алдаа мэдээллэгдлээ.</b>\n"
+"<b>Үл танигдах алдаа мэдээлэгдлээ.</b>\n"
 "\n"
-"<b>Танд тохирох Open ERP засвар үйлчилгээний гараа алга !</b>\n"
+"<b>Танд Open ERP засвар үйлчилгээний хүчинтэй гэрээ алга !</b>\n"
 "Хэрэв та Open ERP-г бодит хэрэгцээндээ ашиглаж байгаа бол засвар \n"
-"үйлчилгээний програм захиалахыг санал болгож байна.\n"
+"үйлчилгээний хөтөлбөрт бүртгүүлэхийг чухал шаардлагатай.\n"
 "\n"
-"The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
-"automatic migration system so that we can fix your problems within a few\n"
-"hours. If you had a maintenance contract, this error would have been sent\n"
-"to the quality team of the Open ERP editor.\n"
+"Open ERP засвар үйлчилгээний гэрээ нь танд алдааны засварын баталгаа болон "
+"автомат \n"
+"шилжилт сайжруулалтыг үзүүлэх баталгааг өгдөг тул таны асуудлыг бид хэдхэн "
+"цагийн дотор шийдвэрлэнэ. \n"
+"Хэрэв засвар үйлчилгээний гэрээтэй байсан бол Open ERP чанарын багт энэ "
+"алдаа нь илгээгдэх юм.\n"
 "\n"
-"Засвар үйлчилгээний програм нь дараах боломжыг олгоно:\n"
-"* Шинэ хувилбартай автоматаар нийцүүлнэ,\n"
+"Засвар үйлчилгээний хөтөлбөр нь дараах боломжийг олгоно:\n"
+"* Шинэ хувилбар руу автомат шилжих,\n"
 "* Алдаа засах баталгаа,\n"
 "* Сар бүр алдаа болон тэднийг зассан тухай мэдээллээр хангана,\n"
-"* Хандах эрхийн асуудлын талаар автоматаар имэйл илгээнэ,\n"
+"* Нууцлалын асуудал болон автомат шилжилтийн талаар имэйл\n"
 "* Үйлчлүүлэгчдийн порталд хандах боломжтой.\n"
 "\n"
 "Та илүү их мэдээллийг дараах линкээр авах боломжтой. Алдааны дэлгэрэнгүй "
@@ -200,7 +202,7 @@ msgid ""
 "is displayed on the second tab."
 msgstr ""
 "\n"
-"<b>Үл танигдах алдаа мэдээллэгдлээ.</b>\n"
+"<b>Үл танигдах алдаа мэдээлэгдлээ.</b>\n"
 "\n"
 "Таны засвар үйлчилгээний гэрээ таны системд суусан бүх \n"
 "модулид хамаарч чадархгүй байна ! Хэрэв та Open ERP-г \n"
@@ -209,10 +211,9 @@ msgstr ""
 "\n"
 "Хэрэв та өөрөө модуль хөгжүүлсэн, гуравдагч этгээдийн модулийг\n"
 "суулгасан бол бид танд тэдгээр модулид зориулсан нэмэлт гэрээг \n"
-"санал болгож байна. Таны модулиуд бидэнд шалгагдсны дараа \n"
-"манай чанарын баг тэдгээр модуль дээр ирээдүйн бүх шинэчлэлт,\n"
-"сайжруулалт, хувилбаруудыг нэмэлт үнэ хөлсгүйгээр нийцүүлэх\n"
-"баталгаа өгөх болно.\n"
+"санал болгоно. Таны модулиуд бидэнд шалгагдсны дараа \n"
+"манай чанарын баг тэдгээр модуль ирээдүйн бүх шинэчлэлт рүү нэмэлт\n"
+"үнэ хөлсгүйгээр нийцүүлэх шилжин орж байх баталгаатай болно.\n"
 "\n"
 "Таны засвар үйлчилгээний гэрээнд хамрагдаагүй модулийн жагсаалт:\n"
 "%s\n"
@@ -260,7 +261,7 @@ msgstr "Үгүй"
 #: bin/widget_search/reference.py:74 bin/widget_search/spinbutton.py:69
 #: bin/widget_search/calendar.py:117 bin/widget_search/spinint.py:73
 msgid "The content of the widget or ValueError if not valid"
-msgstr "Виджетийн агуулга эсвэл алдаа гарсан үед ValueError"
+msgstr "Виджетийн агуулга эсвэл зөв биш бол ValueError"
 
 #: bin/widget_search/form.py:145
 msgid "Limit :"
@@ -589,7 +590,7 @@ msgstr "Нөөц устгалын алдаа!"
 
 #: bin/modules/gui/window/tree.py:220
 msgid "Unable to chroot: no tree resource selected"
-msgstr ""
+msgstr "Язгуур мөчир руу шилжих боломжгүй: Нөөцийн мөчир сонгогдоогүй байна."
 
 #: bin/modules/gui/window/win_preference.py:69
 msgid "Preference"
@@ -1199,7 +1200,7 @@ msgstr "Өгөгдлийн сан устгах"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "Шилжих кодыг татаж авах"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
@@ -1379,7 +1380,7 @@ msgstr "Доод"
 
 #: bin/openerp.glade:995
 msgid "Tabs default orientation"
-msgstr ""
+msgstr "Таабийн анхны чиглэл"
 
 #: bin/openerp.glade:1003
 msgid "Horizontal"
@@ -1403,11 +1404,11 @@ msgstr "Хадгалах сонголт"
 
 #: bin/openerp.glade:1079
 msgid "_Plugins"
-msgstr ""
+msgstr "Залгаас"
 
 #: bin/openerp.glade:1087
 msgid "_Execute a plugin"
-msgstr ""
+msgstr "Залгаасыг ажиллулах"
 
 #: bin/openerp.glade:1107
 msgid "_Shortcuts"
@@ -1546,6 +1547,8 @@ msgid ""
 "<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
+"<b>OpenERP-ийн тухай</b>\n"
+"<i>Хамгийн шилдэг нээлттэй эхийн ERP &amp; CRM !</i>"
 
 #: bin/openerp.glade:1852
 msgid ""
@@ -1562,10 +1565,22 @@ msgid ""
 "\n"
 "More Info on www.openerp.com !"
 msgstr ""
+"\n"
+"OpenERP - GTK клиент - v%s \n"
+"\n"
+"OpenERP бол  жижиг болон дунд бизнест зориулсан \n"
+"нээлттэй эхийн ERP+CRM \n"
+"\n"
+"Эх код нь бүхэлдээ GNU нийтийн лицензийн\n"
+"нөхцлийн дор тараагддаг.\n"
+"\n"
+"(c) 2003-Өнөөг хүртэл, Tiny sprl\n"
+"\n"
+"Илүү дэлгэрэнгүйг www.openerp.com сайтаас үзнэ үү!"
 
 #: bin/openerp.glade:1880
 msgid "_OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #: bin/openerp.glade:1908
 msgid ""
@@ -1582,6 +1597,18 @@ msgid ""
 "Mail: sales@tiny.be\n"
 "Web: http://tiny.be"
 msgstr ""
+"\n"
+"(c) 2003-Өнөөг хүртэл - Tiny sprl\n"
+"OpenERP нь Tiny sprl-ийн бүтээгдэхүүн юм \n"
+"\n"
+"Tiny sprl\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
+"Belgium\n"
+"\n"
+"Tel : (+32)81.81.37.00\n"
+"Mail: sales@tiny.be\n"
+"Web: http://tiny.be"
 
 #: bin/openerp.glade:1939
 msgid "_Contact"
@@ -1589,59 +1616,59 @@ msgstr "Холбоо"
 
 #: bin/openerp.glade:1991
 msgid "Open ERP - Forms widget"
-msgstr ""
+msgstr "Open ERP- Форм виджет"
 
 #: bin/openerp.glade:2170 bin/openerp.glade:4735
 msgid "OpenERP - Confirmation"
-msgstr ""
+msgstr "OpenERP - Магадлагаа"
 
 #: bin/openerp.glade:2249
 msgid "OpenERP - Selection"
-msgstr ""
+msgstr "OpenERP- Сонголт"
 
 #: bin/openerp.glade:2263
 msgid "Your selection:"
-msgstr ""
+msgstr "Таны сонголт:"
 
 #: bin/openerp.glade:2343
 msgid "OpenERP - Dialog"
-msgstr ""
+msgstr "OpenERP - Диалог"
 
 #: bin/openerp.glade:2367
 msgid "OpenERP, Field Preference target"
-msgstr ""
+msgstr "OpenERP, Талбарын зааж байгаа бай"
 
 #: bin/openerp.glade:2398
 msgid "_only for you"
-msgstr ""
+msgstr "Зөвхөн таньд"
 
 #: bin/openerp.glade:2412
 msgid "for _all users"
-msgstr ""
+msgstr "Бүх хэрэглэгчиддээ"
 
 #: bin/openerp.glade:2432
 msgid "<b>Value applicable for:</b>"
-msgstr ""
+msgstr "<b>Утгыг ашиглаж болох зориулалт:</b>"
 
 #: bin/openerp.glade:2468
 msgid "<b>Value applicable if:</b>"
-msgstr ""
+msgstr "<b>Утга ашиглаж болох нөхцөл:</b>"
 
 #: bin/openerp.glade:2486
 msgid "Field _Name:"
-msgstr ""
+msgstr "Талбрын нэр"
 
 #: bin/openerp.glade:2500
 msgid "_Domain:"
-msgstr ""
+msgstr "Домайн"
 
 #: bin/openerp.glade:2559
 msgid "Default _value:"
-msgstr ""
+msgstr "Заяамал утга"
 
 #: bin/openerp.glade:2614
 msgid "OpenERP - Export to CSV"
-msgstr ""
+msgstr "OpenERP - CSV экспортлох"
 
 #: bin/openerp.glade:2662
 msgid "Save List"
@@ -1657,15 +1684,15 @@ msgstr "<b>Жагсаалт гаргах</b>"
 
 #: bin/openerp.glade:2782
 msgid "<b>Predefined Exports</b>"
-msgstr ""
+msgstr "Тогтсон экспорт"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Нийцтэйг Импортлох"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>Экспортлох сонголтыг сонго</b>"
 
 #: bin/openerp.glade:2871
 msgid "Available Fields"
@@ -1673,7 +1700,7 @@ msgstr "Боломжтой талбрууд"
 
 #: bin/openerp.glade:2914 bin/openerp.glade:5641
 msgid "_Add"
-msgstr ""
+msgstr "Нэмэх"
 
 #: bin/openerp.glade:2961 bin/openerp.glade:5688
 msgid "_Remove"
@@ -1692,14 +1719,16 @@ msgid ""
 "Open in Excel\n"
 "Save as CSV"
 msgstr ""
+"Excel-р нээх\n"
+"CSV болгож хадгалах"
 
 #: bin/openerp.glade:3113
 msgid "Add _field names"
-msgstr ""
+msgstr "Талбрын нэр нэмэх"
 
 #: bin/openerp.glade:3130
 msgid "<b>Opti_ons</b>"
-msgstr ""
+msgstr "<b>Сонголт</b>"
 
 #: bin/openerp.glade:3189
 msgid "OpenERP - Search"
@@ -1719,7 +1748,7 @@ msgstr "Өдрийн зөвлөгөө"
 
 #: bin/openerp.glade:3428
 msgid "_Display a new tip next time?"
-msgstr ""
+msgstr "Дараагийн удаад шинэ зөвлөгөө харах уу?"
 
 #: bin/openerp.glade:3481
 msgid "Pre_vious Tip"
@@ -1739,7 +1768,7 @@ msgstr "OpenERP лиценз"
 
 #: bin/openerp.glade:4286
 msgid "Go to resource ID"
-msgstr ""
+msgstr "Нөөцийн дугаарлуу очих"
 
 #: bin/openerp.glade:4336
 msgid "Search ID:"
@@ -1826,7 +1855,7 @@ msgstr "<Ctrl> + <Esc>"
 
 #: bin/openerp.glade:4890
 msgid "<i>When editing a resource in a popup window</i>"
-msgstr ""
+msgstr "<i>Попап цонхонд нөөцийг хянах үед</i>"
 
 #: bin/openerp.glade:4906
 msgid "Save and Close window"
@@ -1926,11 +1955,11 @@ msgstr "F2"
 
 #: bin/openerp.glade:5273
 msgid "<b>Shortcuts in relation fields</b>"
-msgstr ""
+msgstr "<b>Холбоотой талбруудын товчлол</b>"
 
 #: bin/openerp.glade:5288
 msgid "<b>Shortcuts in text entries</b>"
-msgstr ""
+msgstr "<b>Текст оруулах товчлолууд</b>"
 
 #: bin/openerp.glade:5301
 msgid "Open current field"
@@ -1946,7 +1975,7 @@ msgstr "F1"
 
 #: bin/openerp.glade:5344
 msgid "Auto-Complete text field"
-msgstr ""
+msgstr "Автомат-Бөглөгддөг текст талбар"
 
 #: bin/openerp.glade:5359
 msgid "<Enter>"
@@ -1954,7 +1983,7 @@ msgstr "<Enter>"
 
 #: bin/openerp.glade:5372
 msgid "Previous editable widget"
-msgstr ""
+msgstr "Засч болох өмнөх виджет"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
@@ -1994,7 +2023,7 @@ msgstr "<Ctrl> + X"
 
 #: bin/openerp.glade:5516
 msgid "Edition Widgets"
-msgstr ""
+msgstr "Виджетүүдийг хэвлэх"
 
 #: bin/openerp.glade:5554
 msgid "Import from CSV"
@@ -2006,15 +2035,15 @@ msgstr "<b>Бүх талбар</b>"
 
 #: bin/openerp.glade:5736
 msgid "N_othing"
-msgstr ""
+msgstr "Хоосон"
 
 #: bin/openerp.glade:5795
 msgid "Auto-Detect"
-msgstr ""
+msgstr "Автоматаар илрүүлэх"
 
 #: bin/openerp.glade:5850
 msgid "<b>Fields to import</b>"
-msgstr ""
+msgstr "<b>Талбар оруулах</b>"
 
 #: bin/openerp.glade:5885
 msgid "File to Import:"
@@ -2050,7 +2079,7 @@ msgstr "Сервер"
 
 #: bin/openerp.glade:6226
 msgid "<b>Connect to a OpenERP server</b>"
-msgstr ""
+msgstr "<b>OpenERP сервертэй холбогдох</b>"
 
 #: bin/openerp.glade:6285
 msgid "Protocol connection:"
@@ -2078,7 +2107,7 @@ msgstr "<b>Өгөгдлийн санг сэргээх</b>"
 
 #: bin/openerp.glade:6686
 msgid "(must not contain any special char)"
-msgstr ""
+msgstr "(Онцгой тэмдэгт агуулж болохгүй)"
 
 #: bin/openerp.glade:6715
 msgid "New database name:"
@@ -2101,6 +2130,8 @@ msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
+"Энэ бол OpenERP серверийн интернэт хаяг. Серверээ өөрийн компьютер дээрээ "
+"суулгаад 'localhost'-ийг ашиглана. 'Change' дээр дарж хаягаа солино."
 
 #: bin/openerp.glade:6977
 msgid "OpenERP Server:"
@@ -2112,6 +2143,9 @@ msgid ""
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
+"Энэ нь өгөгдлийн санг удирдах эрхтэй хэрэглэгчийн нууц үг. Энэ нь OpenERP-"
+"ийн хэрэглэгч биш, зүгээрл супер админ нь юм. Хэрэв та өөрчлөөгүй бол "
+"суулгасны дараа нууц үг нь 'admin' байна."
 
 #: bin/openerp.glade:7043
 msgid "(<i>admin</i>, by default)"
@@ -2140,7 +2174,7 @@ msgstr ""
 
 #: bin/openerp.glade:7136
 msgid "Default Language:"
-msgstr "Хэл:"
+msgstr "Үндсэн хэл"
 
 #: bin/openerp.glade:7149
 msgid ""
@@ -2182,7 +2216,7 @@ msgstr "Жишээ өгөгдлийг Ачаалах:"
 
 #: bin/openerp.glade:7316
 msgid "Change password"
-msgstr ""
+msgstr "Нууц үг солих"
 
 #: bin/openerp.glade:7333
 msgid "<b>Change your super admin password</b>"
@@ -2202,7 +2236,7 @@ msgstr "Шинэ нууц үгээ баталгаажуулах:"
 
 #: bin/openerp.glade:7571
 msgid "OpenERP Message"
-msgstr ""
+msgstr "OpenERP-ийн мэссэж"
 
 #: bin/openerp.glade:7650
 msgid "Database creation"
@@ -2235,7 +2269,7 @@ msgstr "Өргөтгөлийн удирдлага"
 
 #: bin/openerp.glade:7947
 msgid "Concurrency exception"
-msgstr ""
+msgstr "Давхцалын алдаа"
 
 #: bin/openerp.glade:7972
 msgid ""
@@ -2263,7 +2297,7 @@ msgstr "Харьцуулах"
 
 #: bin/openerp.glade:8081
 msgid "Write anyway"
-msgstr ""
+msgstr "Ямар ч байсан бичих"
 
 #: bin/openerp.glade:8110
 msgid "window1"
@@ -2291,11 +2325,11 @@ msgstr "Хаяг"
 
 #: bin/win_error.glade:102
 msgid "Click here for details about the maintenance proposition"
-msgstr ""
+msgstr "Баталгаат засварын тухай энд дарж дэлгэрэнгүй харна"
 
 #: bin/win_error.glade:119
 msgid "<i>_Maintenance</i>"
-msgstr ""
+msgstr "<i>Засвар</i>"
 
 #: bin/win_error.glade:150
 msgid ""
@@ -2313,7 +2347,7 @@ msgstr ""
 
 #: bin/win_error.glade:184
 msgid "Explain what you did:"
-msgstr ""
+msgstr "Таны юу хийх тайлбар:"
 
 #: bin/win_error.glade:196
 msgid "Others Comments:"
@@ -2321,11 +2355,11 @@ msgstr "Бусад тайлбар:"
 
 #: bin/win_error.glade:278
 msgid "Send to Maintenance Team"
-msgstr ""
+msgstr "Засварын баг илгээх"
 
 #: bin/win_error.glade:326
 msgid "<i>_Support Request</i>"
-msgstr ""
+msgstr "Хүсэлтийг дэмжих"
 
 #: bin/win_error.glade:353
 msgid "Details"
@@ -2337,7 +2371,7 @@ msgstr "<i>_Details</i>"
 
 #: bin/win_error.glade:398
 msgid "gtk-close"
-msgstr ""
+msgstr "gtk-г хаах"
 
 #: bin/dia_survey.glade:32
 msgid ""
@@ -2345,6 +2379,9 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"<b><span foreground=\"red\"><i>Open</i></span> ERP</b> -г сайжруулах, шинэ "
+"хөгжүүлэлтийн зорилгыг зөв тодорхойлоход бидэнд туслаж дараах маягтыг "
+"бөглөнө үү."
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
@@ -2360,7 +2397,7 @@ msgstr "Танай байгууллага:"
 
 #: bin/dia_survey.glade:507
 msgid "Industry:"
-msgstr "Үйлдвэр:"
+msgstr "Үйлдвэрлэл:"
 
 #: bin/dia_survey.glade:520
 msgid "Your Role:"
@@ -2396,7 +2433,7 @@ msgstr "Бид Open ERP системийг хэрэглэхээр төлөвлө
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "Open ERP-д бид үйлчилгээнүүдийг санал болгохоор төлөвлөж байна."
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
@@ -2415,7 +2452,7 @@ msgstr ""
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
-msgstr "Утас:"
+msgstr "Утас/Гар утас:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
