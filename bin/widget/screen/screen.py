@@ -885,8 +885,8 @@ class Screen(signal_event.signal_event):
         if self.type == 'one2many':
             self.display()
 
-    def sel_ids_get(self, print_screen = False):
-        return self.current_view.sel_ids_get(print_screen)
+    def sel_ids_get(self):
+        return self.current_view.sel_ids_get()
 
     def id_get(self):
         if not self.current_model:

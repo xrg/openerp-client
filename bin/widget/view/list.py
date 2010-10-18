@@ -541,8 +541,6 @@ class ViewList(parser_view):
                                return False
                         else:
                             id = current_active_model.id
-                        active_ids = self.sel_ids_get()
-                        path[1].attrs.update({'context':{'active_id':id,'active_ids':active_ids}})
                         current_active_model.get_button_action(self.screen, id, path[1].attrs)
                         self.screen.current_model = None
                         if self.screen.parent and isinstance(self.screen.parent, ModelRecord):
@@ -742,13 +740,10 @@ class ViewList(parser_view):
             focus_column = len(columns) and columns[0] or None
             self.widget_tree.set_cursor(path, focus_column, new)
 
-    def sel_ids_get(self, print_screen = False):
+    def sel_ids_get(self):
         def _func_sel_get(store, path, iter, ids):
             model = store.on_get_iter(path)
-            if isinstance(model, group_record) and print_screen:
-                if model.ctx.get('group_by_no_leaf',False) and model.ctx.get('__domain',False):
-                    ids.append(model)
-                    return
+            if isinstance(model, group_record):
                 def process(parent):
                     for child in parent.children.lst:
                         if store.on_iter_has_child(child):

@@ -350,13 +350,13 @@ class ModelRecord(signal_event.signal_event):
             if button_type == 'workflow':
                 result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
                                                    self.resource, attrs['name'], self.id)
-                if isinstance(result, dict):
+                if type(result)==type({}):
                     if result['type']== 'ir.actions.act_window_close':
                         screen.window.destroy()
                     else:
                         datas = {'ids':[id], 'id':id}
                         obj._exec_action(result, datas)
-                elif isinstance(result, list):
+                elif type([]) == type(result):
                     datas = {'ids':[id]}
                     for rs in result:
                         obj._exec_action(rs, datas)

@@ -118,7 +118,6 @@ class Button(Observable):
 
         elif model.validate():
             id = self.form.screen.save_current()
-            self.attrs.update({'context':{'active_id':id,'active_ids':[id]}})
             model.get_button_action(self.form.screen, id, self.attrs)
             self.warn('misc-message', '')
         else:
