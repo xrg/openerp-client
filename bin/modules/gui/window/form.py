@@ -43,6 +43,7 @@ import gc
 
 from observator import oregistry
 from widget.screen import Screen
+from widget.view.list import group_record
 
 class form(object):
     def __init__(self, model, res_id=False, domain=None, view_type=None,
@@ -376,9 +377,15 @@ class form(object):
                 return False
             ids = [id]
         if self.screen.current_view.view_type == 'tree':
-            sel_ids = self.screen.sel_ids_get()
+            sel_ids = self.screen.sel_ids_get(print_screen = True)
             if sel_ids:
                 ids = sel_ids
+            tmp = []
+            for record in sel_ids:
+                if isinstance(record, group_record):
+                    tmp.append(record.ctx)
+            if tmp:
+                ids = tmp
         if len(ids) or self.screen.context.get('group_by',False):
             obj = service.LocalService('action.main')
             data = {'model':self.screen.resource,
