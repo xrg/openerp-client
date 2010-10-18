@@ -541,6 +541,8 @@ class ViewList(parser_view):
                                return False
                         else:
                             id = current_active_model.id
+                        active_ids = self.sel_ids_get()
+                        path[1].attrs.update({'context':{'active_id':id,'active_ids':active_ids}})
                         current_active_model.get_button_action(self.screen, id, path[1].attrs)
                         self.screen.current_model = None
                         if self.screen.parent and isinstance(self.screen.parent, ModelRecord):
