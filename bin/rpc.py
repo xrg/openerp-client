@@ -403,10 +403,9 @@ class rpc_session(object):
             url = url[:-7]
         try:
             sv = self.db_exec_no_except(url, 'server_version')
-            if sv.endswith('dev'):
-                sv = sv[:-3]
-            elif sv.endswith('-bzr'):
-                sv = sv[:-4]
+            for suff in ('dev', '-bzr', '-rc1', '-rc2'):
+                if sv.endswith(suff):
+                    sv = sv[:-len(suff)]
             self.server_version = map(int, sv.split('.'))
             print "Connected to a server ver: %s" % (self.server_version)
         except Exception, e:
