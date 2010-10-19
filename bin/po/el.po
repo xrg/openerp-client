@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-07-29 15:38+0300\n"
+"PO-Revision-Date: 2010-10-19 10:04+0300\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -21,11 +21,11 @@ msgstr ""
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr "Εκτύπωση Εργασίας"
+msgstr "Εκτύπωση ροής εργασίας"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (Complex)"
-msgstr "Εκτύπωση Εργσασίας (Πολύπλοκο)"
+msgstr "Εκτύπωση Ροής Εργασίας (Σύνθετη)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
@@ -55,7 +55,7 @@ msgstr "δηλώστε εναλλακτικό αρχείο config"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr "Επιτρέπει την αποσφαλμάτωση. Ψευδώνυμο του '--log-level=debug'"
+msgstr "Επιτρέπει την αποσφαλμάτωση. Ισοδύναμο του '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
