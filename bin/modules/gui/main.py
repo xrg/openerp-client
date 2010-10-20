@@ -386,15 +386,14 @@ def _refresh_langlist(lang_widget, url):
     liststore = lang_widget.get_model()
     liststore.clear()
     lang_list = rpc.session.db_exec_no_except(url, 'list_lang')
-    lang_list.append( ('en_US','English') )
-    for key,val in lang_list:
-        liststore.insert(0, (val,key))
     lang = rpc.session.context.get('lang', options.options.get('client.lang', 'en_US'))
-    lang_widget.set_active(0)
-    for idx, item in enumerate(lang_widget.get_model()):
-        if item[1] == lang:
-            lang_widget.set_active(idx)
-            break
+    active_idx = -1
+    for index, (key,val) in enumerate(lang_list):
+        if key == lang:
+            active_idx = index
+        liststore.append((val,key))
+    if active_idx != -1:
+        lang_widget.set_active(active_idx)
     return lang_list
 
 def _server_ask(server_widget, parent=None):
