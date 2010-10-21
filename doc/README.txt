@@ -15,16 +15,12 @@ database, dynamic GUIs, customizable reports, SOAP and XML-RPC interfaces, ...
 For more information, please visit:
 http://www.openerp.com
 
-About Tiny.be
-----------------
+About OpenERP S.A.
+------------------
 
-Tiny.be is a company specialising in the development of high-level applications
+OpenERP S.A. is a company specialising in the development of high-level applications
 and websites. All the company products are free software, released under the
 GNU GPL license.
 
-Our main products include: OpenERP (ERP & CRM for SMB), Tiny eCommerce
-(complete eCommerce system), OpenReport (automated generation of complex
-documents), Tiny Raytracer, ...
-
 For more information, please visit:
-http://www.tiny.be
+http://www.openerp.com
