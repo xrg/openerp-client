@@ -339,7 +339,8 @@ class Screen(signal_event.signal_event):
         if flag in ['blk','mf']:
             self.screen_container.last_active_filter = False
             clear_domain_ctx()
-            self.search_filter()
+            if flag == 'blk':
+                self.search_filter()
             combo.set_active(0)
             return True
         #This section handles shortcut and action creation

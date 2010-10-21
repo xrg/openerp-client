@@ -53,9 +53,10 @@ class screen_container(object):
         return self.vbox
 
     def fill_filter_combo(self, model, action_name = False):
-        self.action_combo.handler_block(self.handler_id)
-        self.action_list.clear()
-        self.action_combo.handler_unblock(self.handler_id)
+        if self.handler_id:
+            self.action_combo.handler_block(self.handler_id)
+            self.action_list.clear()
+            self.action_combo.handler_unblock(self.handler_id)
         active = False
         my_acts = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'get_filters', model)
         filters_list=[['blk','','-- Filters --']]
@@ -72,14 +73,12 @@ class screen_container(object):
         else:
             self.action_combo.set_active(0)
 
-
     def fill_limit_combo(self):
         self.limit_combo.clear()
         for lim in [[100,'100'],[200,'200'],[500,'500'],[None,'Unlimited']]:
             self.limit_combo.append(lim)
         self.combo.set_active(0)
-    
-    
+
     def get_filter(self, filter_name):
         def fnct(filterstore, path, iter, filter_name):
             if filterstore.get(iter, 2)[0].lower() == filter_name.lower():
@@ -129,11 +128,10 @@ class screen_container(object):
             cell = gtk.CellRendererText()
             self.action_combo.pack_start(cell, True)
             self.action_combo.add_attribute(cell, 'text', 2)
-            
-            self.handler_id = self.action_combo.connect('changed', execute_action)
+
             self.fill_filter_combo(model)
             self.action_combo.set_active(0)
-            
+            self.handler_id = self.action_combo.connect('changed', execute_action)
 
     #Custom Filter Button
             img2 = gtk.Image()
