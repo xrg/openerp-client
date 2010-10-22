@@ -70,7 +70,7 @@ class action_tips(object):
             def size_allocate(label, allocation):
                 label.set_size_request( allocation.width - 2, -1 )
             help_label.connect( "size-allocate", size_allocate )
-            help_label.set_label('<span font="italic" foreground="black">%s</span>'% (msg))
+            help_label.set_label('<span font_desc="italic" foreground="black">%s</span>'% (msg))
 
             help_label.set_alignment(0.3, 1)
             help_label.set_line_wrap(True)
