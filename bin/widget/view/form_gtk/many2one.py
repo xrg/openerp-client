@@ -251,7 +251,7 @@ class many2one(interface.widget_interface):
             if name_search == self.value_on_field:
                 name_search = ''
             ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', name_search, domain, 'ilike', context)
-            if (len(ids)==1) and leave:
+            if (len(ids)==1) and leave and event:
                 self._view.modelfield.set_client(self._view.model, ids[0],
                         force_change=True)
                 self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)

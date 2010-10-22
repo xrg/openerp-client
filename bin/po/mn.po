@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-10-17 07:49+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-10-20 10:05+0000\n"
+"Last-Translator: Jacara <Unknown>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-18 04:55+0000\n"
+"X-Launchpad-Export-Date: 2010-10-21 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -873,7 +873,7 @@ msgstr "Нууц үг буруу !"
 
 #: bin/modules/gui/main.py:1415
 msgid "Error, password not changed."
-msgstr "Алдаа, нууц үг солигдсонгүй."
+msgstr "Алдаа, нууц үг солигдоогүй."
 
 #: bin/modules/gui/main.py:1421 bin/modules/gui/main.py:1441
 msgid "Backup a database"
@@ -1408,7 +1408,7 @@ msgstr "Залгаас"
 
 #: bin/openerp.glade:1087
 msgid "_Execute a plugin"
-msgstr "Залгаасыг ажиллулах"
+msgstr "Залгаас ажиллуулах"
 
 #: bin/openerp.glade:1107
 msgid "_Shortcuts"
@@ -2359,7 +2359,7 @@ msgstr "Засварын баг илгээх"
 
 #: bin/win_error.glade:326
 msgid "<i>_Support Request</i>"
-msgstr "Хүсэлтийг дэмжих"
+msgstr "Дэмжлэг авах Хүсэлт"
 
 #: bin/win_error.glade:353
 msgid "Details"
