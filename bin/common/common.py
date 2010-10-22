@@ -26,6 +26,8 @@ from cgi import escape
 import tools
 import gettext
 
+from maint_messages import message_no_contract, message_partial_contract
+
 import os
 import sys
 import platform
@@ -393,71 +395,13 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
         maintenance = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'status')
 
         if maintenance['status'] == 'none':
-            maintenance_contract_message=_("""
-<b>An unknown error has been reported.</b>
-
-<b>You do not have a valid OpenERP maintenance contract !</b>
-If you are using OpenERP in production, it is highly suggested to subscribe
-a maintenance program.
-
-The OpenERP maintenance contract provides you a bugfix guarantee and an
-automatic migration system so that we can fix your problems within a few
-hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the OpenERP editor.
-
-The maintenance program offers you:
-* Automatic migrations on new versions,
-* A bugfix guarantee,
-* Monthly announces of potential bugs and their fixes,
-* Security alerts by email and automatic migration,
-* Access to the customer portal.
-
-You can use the link bellow for more information. The detail of the error
-is displayed on the second tab.
-""")
+            maintenance_contract_message = message_no_contract
         elif maintenance['status'] == 'partial':
-            maintenance_contract_message=_("""
-<b>An unknown error has been reported.</b>
-
-Your maintenance contract does not cover all modules installed in your system !
-If you are using OpenERP in production, it is highly suggested to upgrade your
-contract.
-
-If you have developed your own modules or installed third party module, we
-can provide you an additional maintenance contract for these modules. After
-having reviewed your modules, our quality team will ensure they will migrate
-automatically for all future stable versions of OpenERP at no extra cost.
-
-Here is the list of modules not covered by your maintenance contract:
-%s
-
-You can use the link bellow for more information. The detail of the error
-is displayed on the second tab.""") % (", ".join(maintenance['uncovered_modules']), )
+            maintenance_contract_message= message_partial_contract % (", ".join(maintenance['uncovered_modules']), )
         else:
             show_message = False
     else:
-        maintenance_contract_message=_("""
-<b>An unknown error has been reported.</b>
-
-<b>You do not have a valid OpenERP maintenance contract !</b>
-If you are using OpenERP in production, it is highly suggested to subscribe
-a maintenance program.
-
-The OpenERP maintenance contract provides you a bugfix guarantee and an
-automatic migration system so that we can fix your problems within a few
-hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the OpenERP editor.
-
-The maintenance program offers you:
-* Automatic migrations on new versions,
-* A bugfix guarantee,
-* Monthly announces of potential bugs and their fixes,
-* Security alerts by email and automatic migration,
-* Access to the customer portal.
-
-You can use the link bellow for more information. The detail of the error
-is displayed on the second tab.
-""")
+        maintenance_contract_message = message_no_contract
 
     xmlGlade = glade.XML(terp_path('win_error.glade'), 'dialog_error', gettext.textdomain())
     win = xmlGlade.get_widget('dialog_error')
