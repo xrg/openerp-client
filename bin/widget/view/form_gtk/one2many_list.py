@@ -182,7 +182,7 @@ class one2many_list(interface.widget_interface):
         menubar.add(menuitem_title)
         hb.pack_start(menubar, expand=True, fill=True)
 
-        if self.context.get('group_by',False):
+        if self.context.get('group_by'):
             self.context['group_by'] = [self.context['group_by']]
 
         # the context to pass to default_get can be optionally specified in

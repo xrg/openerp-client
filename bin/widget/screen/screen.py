@@ -269,7 +269,9 @@ class Screen(signal_event.signal_event):
             self.offset = 0
         offset = self.offset
         self.latest_search = v
-        if 'group_by' in self.context and not self.current_view.view_type == 'graph':
+        if self.context.get('group_by') or \
+               self.context.get('group_by_no_leaf') \
+               and not self.current_view.view_type == 'graph':
             self.current_view.reload = True
             self.display()
             return True
@@ -845,7 +847,7 @@ class Screen(signal_event.signal_event):
 
     def display_next(self):
         self.current_view.set_value()
-        if self.context.get('group_by',False) and \
+        if self.context.get('group_by') and \
             not self.current_view.view_type == 'form':
             if self.current_model:
                 self.groupby_next()
@@ -861,7 +863,7 @@ class Screen(signal_event.signal_event):
 
     def display_prev(self):
         self.current_view.set_value()
-        if self.context.get('group_by',False) and \
+        if self.context.get('group_by') and \
             not self.current_view.view_type == 'form':
             if self.current_model:
                self.groupby_prev()
@@ -878,7 +880,7 @@ class Screen(signal_event.signal_event):
 
     def check_state(self):
         if not self.type == 'one2many'  \
-            and (not self.context.get('group_by',False) \
+            and (not self.context.get('group_by') \
                 or self.current_view.view_type == 'form'):
             if self.current_model:
                 self.current_model.validate_set()

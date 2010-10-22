@@ -379,7 +379,7 @@ class form(object):
             sel_ids = self.screen.sel_ids_get()
             if sel_ids:
                 ids = sel_ids
-        if len(ids) or self.screen.context.get('group_by',False):
+        if len(ids) or self.screen.context.get('group_by'):
             obj = service.LocalService('action.main')
             data = {'model':self.screen.resource,
                     'id': id or False,
