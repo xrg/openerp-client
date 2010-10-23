@@ -123,7 +123,7 @@ class list_record(object):
             return
         self.loaded = True
         gb = self.context.get('group_by', [])
-        no_leaf = self.context.get('group_by_no_leaf', False)
+        no_leaf = self.context.get('group_by_no_leaf')
         if gb or no_leaf:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
                 self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
@@ -231,7 +231,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     ## Mandatory GenericTreeModel methods
 
     def on_get_flags(self):
-        if self.context.get('group_by', False):
+        if self.context.get('group_by'):
             return gtk.TREE_MODEL_ITERS_PERSIST
         return gtk.TREE_MODEL_LIST_ONLY
 
@@ -336,7 +336,7 @@ class ViewList(parser_view):
         selection.connect('changed', self.__select_changed)
 
     def set_drag_and_drop(self,dnd=False):
-        if dnd or self.screen.context.get('group_by',False):
+        if dnd or self.screen.context.get('group_by'):
             self.widget_tree.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
                     [('MY_TREE_MODEL_ROW', gtk.TARGET_SAME_WIDGET, 0),],
                     gtk.gdk.ACTION_MOVE)
@@ -412,7 +412,7 @@ class ViewList(parser_view):
             path, position = drop_info
             self.source_group_child = []
             rec_id = model.on_iter_has_child(model.on_get_iter(path)) and path or path[:-1]
-            group_by = self.screen.context.get('group_by',False)
+            group_by = self.screen.context.get('group_by')
             if group_by:
                 if data and path and data[:-1] == path[:-1] \
                             and isinstance(model.on_get_iter(data), ModelRecord):
@@ -514,7 +514,7 @@ class ViewList(parser_view):
             if (not path) or not path[0]:
                 return False
             current_active_model = model.models[path[0][0]]
-            groupby = self.screen.context.get('group_by',False)
+            groupby = self.screen.context.get('group_by')
             if groupby:
                 current_active_model = self.store.on_get_iter(path[0])
             # TODO: add menu cache
@@ -660,7 +660,7 @@ class ViewList(parser_view):
             self.changed_col.remove(col)
 
     def move_colums(self):
-        if self.screen.context.get('group_by', False):
+        if self.screen.context.get('group_by'):
             groupby = self.screen.context['group_by']
             # This is done to take the order of the columns
             #as order in groupby list
@@ -687,7 +687,7 @@ class ViewList(parser_view):
 
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
-            if self.screen.context.get('group_by', False):
+            if self.screen.context.get('group_by'):
                 if self.screen.type == 'one2many':
                     self.screen.domain = [('id','in',self.screen.ids_get())]
                 self.screen.models.models.clear()
@@ -782,7 +782,7 @@ class ViewList(parser_view):
         self.set_editable(False)
 
     def check_editable(self):
-        if self.screen.context.get('group_by',False):
+        if self.screen.context.get('group_by'):
             if self.widget_tree.editable: # Treeview is editable in groupby unset editable
                 self.set_editable(False)
         elif self.is_editable or self.screen.context.get('set_editable',False):#Treeview editable by default or set_editable in context
@@ -812,7 +812,7 @@ class ViewList(parser_view):
         for col in self.widget_tree.get_columns():
             if col._type == 'datetime':
                 col.set_max_width(145)
-                if self.screen.context.get('group_by',False):
+                if self.screen.context.get('group_by'):
                     col.set_max_width(180)
             value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
                            {'context':self.screen.context})

@@ -61,7 +61,7 @@ def sort_model(column, screen):
         res =  common.message(_('You have unsaved record(s) !  \n\nPlease Save them before sorting !'))
         return res
     group_by = screen.context.get('group_by',[])
-    group_by_no_leaf = screen.context.get('group_by_no_leaf',False)
+    group_by_no_leaf = screen.context.get('group_by_no_leaf')
     if column.name in group_by or group_by_no_leaf:
         return True
     screen.current_view.set_drag_and_drop(column.name == 'sequence')
@@ -283,7 +283,7 @@ class Char(object):
         align = 0
         if self.attrs['type'] in ('float', 'integer', 'boolean'):
             align = 1
-        gb = self.treeview.screen.context.get('group_by', False)
+        gb = self.treeview.screen.context.get('group_by')
         cell.set_property('font-desc', None)
         cell.set_property('background', None)
         cell.set_property('xalign', align)
@@ -299,7 +299,7 @@ class Char(object):
             cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
             self.set_color(cell, model)
 
-    def set_color(self, cell, model,group_by = False):
+    def set_color(self, cell, model, group_by = False):
         field = model[self.field_name]
         cell.set_property('background', None)
         if not field.get_state_attrs(model).get('valid', True):
@@ -400,7 +400,7 @@ class GenericDate(Char):
             date = DT.datetime.strptime(value[:10], self.server_format)
             return date.strftime(self.display_format)
         except:
-            if self.treeview.screen.context.get('group_by',False):
+            if self.treeview.screen.context.get('group_by'):
                 return value
             return ''
 

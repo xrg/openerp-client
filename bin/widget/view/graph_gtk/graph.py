@@ -84,7 +84,7 @@ class ViewGraph(object):
     def display(self, models):
         datas = []
         self.axis = copy.copy(self.old_axis)
-        group_by = self.widget.screen.context.get('group_by', False)
+        group_by = self.widget.screen.context.get('group_by')
         if group_by:
             if not self.key:
                 del self.widget.screen.context['group_by']
