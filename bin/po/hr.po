@@ -27,7 +27,7 @@ msgid "Print Workflow"
 msgstr "Ispis tijeka rada"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Ispis tijeka rada (kompleksno)"
 
 #: bin/plugins/__init__.py:41

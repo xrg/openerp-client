@@ -22,7 +22,7 @@ msgid "Print Workflow"
 msgstr "Drukuj obieg"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Drukuj obieg (złożone)"
 
 #: bin/plugins/__init__.py:41

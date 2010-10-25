@@ -22,7 +22,7 @@ msgid "Print Workflow"
 msgstr "Процесс печати"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Процесс печати (подробн.)"
 
 #

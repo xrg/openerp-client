@@ -22,7 +22,7 @@ msgid "Print Workflow"
 msgstr "พิมพ์ขั้นตอนการทำงาน"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "พิมพ์ขั้นตอนการทำงาน(แบบซับซ้อน)"
 
 #: bin/plugins/__init__.py:41
