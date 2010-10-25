@@ -24,7 +24,7 @@ msgid "Print Workflow"
 msgstr "Imprimir fluxo de traballo"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Imprimir fluxo de traballo (complexo)"
 
 #: bin/plugins/__init__.py:41

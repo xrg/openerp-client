@@ -22,7 +22,7 @@ msgid "Print Workflow"
 msgstr "워크플로우 출력"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "워크플로우 출력 (복합)"
 
 #: bin/plugins/__init__.py:41

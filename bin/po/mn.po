@@ -22,7 +22,7 @@ msgid "Print Workflow"
 msgstr "Ажлын урсгал хэвлэх"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Ажлын урсгал хэвлэх (Нүсэр)"
 
 #: bin/plugins/__init__.py:41
