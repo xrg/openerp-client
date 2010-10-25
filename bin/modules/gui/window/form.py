@@ -376,6 +376,7 @@ class form(object):
                 return False
             ids = [id]
         if self.screen.current_view.view_type == 'tree':
+            self.modified_save()
             sel_ids = self.screen.sel_ids_get()
             if sel_ids:
                 ids = sel_ids
