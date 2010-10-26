@@ -662,9 +662,9 @@ class CellRendererButton(object):
                 for condition in v:
                     result = tools.calc_condition(self,model,condition)
                 if result:
-                    if k=='invisible':
-                        return True
-                    elif k=='readonly':
+                    if k == 'invisible':
+                        return 'hide'
+                    elif k == 'readonly':
                         return True
         return False
 
@@ -679,10 +679,10 @@ class CellRendererButton(object):
             current_state = self.get_textual_value(model, 'draft')
             tv = column.get_tree_view()
             valid_states = self.__get_states() or []
-    #       change this according to states or attrs: to not show the icon
+            ## This changes the icon according to states or attrs: to not show /hide the icon
             attrs_check = self.attrs_set(model)
             if valid_states and current_state not in valid_states \
-                                or isinstance(model, group_record):
+                                or isinstance(model, group_record) or attrs_check == 'hide':
                 cell.set_property('stock-id', None)
             else:
                 cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
