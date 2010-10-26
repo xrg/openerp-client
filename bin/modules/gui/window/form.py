@@ -250,6 +250,10 @@ class form(object):
                 ('xmlid', _('Internal Module Data ID'))
             ]
             for (key,val) in todo:
+                if key not in line:
+                    # older servers may not emit 'xmlid' or anything we
+                    # may add here in the future
+                    continue
                 if line[key] and key in ('create_uid','write_uid','uid'):
                     line[key] = line[key][1]
                 message+=val+': '+str(line[key] or '/')+'\n'
