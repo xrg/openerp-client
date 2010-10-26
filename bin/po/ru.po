@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-10-21 08:37+0000\n"
-"Last-Translator: Kirill <Unknown>\n"
+"PO-Revision-Date: 2010-10-25 18:30+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-22 04:38+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 04:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -22,7 +22,7 @@ msgid "Print Workflow"
 msgstr "Процесс печати"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Процесс печати (подробн.)"
 
 #

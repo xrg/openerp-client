@@ -749,7 +749,8 @@ class ViewList(parser_view):
                         if store.on_iter_has_child(child):
                             process(child)
                         else:
-                            ids.append(child.id or parent)
+                            if child.id:
+                                ids.append(child.id)
                 process(model)
             else:
                 if model.id:

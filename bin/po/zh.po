@@ -1181,7 +1181,7 @@ msgstr ""
 # File: bin/plugins/__init__.py, line: 29
 # File: bin/plugins/__init__.py, line: 29
 # File: bin/plugins/__init__.py, line: 29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr ""
 #
 # File: bin/plugins/__init__.py, line: 41
