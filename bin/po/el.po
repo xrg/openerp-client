@@ -3072,21 +3072,30 @@ msgstr "Άκυρο"
 msgid "gtk-ok"
 msgstr "ΟΚ"
 
+#: bin/plugins/__init__.py:29
+msgid "Print Workflow (with subflows)"
+msgstr "Εκτύπωση Εργσασίας (Πολύπλοκο)"
+
 #
 #~ msgid "Tiny ERP Client %s"
 #~ msgstr "Tiny ERP Πελάτης %s"
+
 #
 #~ msgid "Unable to launch this file !"
 #~ msgstr "Αδυναμία εκτέλεσης αυτού του αρχείου !"
+
 #
 #~ msgid "Unable to launch the application associated to this content !"
 #~ msgstr "Αδυναμία εκτέλεσης της εφαρμογής που συνδέεται με το περιεχόμενο !"
+
 #
 #~ msgid "Do not use special characters !"
 #~ msgstr "Μη χρησιμοποιείτε ειδικούς χαρακτήρες !"
+
 #
 #~ msgid "Can not connect to server, please change it !"
 #~ msgstr "Αδυναμία σύνδεσης στο διακομιστή, ελέγξτε τις σχετικές ρυθμίσεις !"
+
 #
 #~ msgid ""
 #~ "The following users have been installed on your database:\n"
@@ -3094,100 +3103,131 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "Οι παρακάτω χρήστες έχουν εγκατασταθεί στη βάση:\n"
 #~ "\n"
+
 #
 #~ msgid "Default Theme"
 #~ msgstr "Προκαθορισμένο Θέμα"
+
 #
 #~ msgid " - %s pending request(s)"
 #~ msgstr "- %s αιτήματα σε αναμονή"
+
 #
 #~ msgid "Connection Error !"
 #~ msgstr "Σφάλμα σύνδεσης !"
+
 #
 #~ msgid ""
 #~ "Confirmation password do not match new password, operation cancelled!"
 #~ msgstr "O κωδικός δεν επιβεβαιώθηκε επιτυχώς, η ενέργεια ακυρώθηκε!"
+
 #
 #~ msgid "Could not change password database."
 #~ msgstr "Ήταν αδύνατη η αλλαγή του κωδικού της βάσης δεδομένων"
+
 #
 #~ msgid "Bas password provided !"
 #~ msgstr "Δόθηκε εσφαλμένος κωδικός !"
+
 #
 #~ msgid "Database backuped successfully !"
 #~ msgstr "Η βάση δεδομένων αντιγράφηκε επιτυχώς !"
+
 #
 #~ msgid "Export Data"
 #~ msgstr "Εξαγωγή Δεδομένων"
+
 #
 #~ msgid "Preferences"
 #~ msgstr "Προτιμήσεις"
+
 #
 #~ msgid "No resource selected !"
 #~ msgstr "Καμία εγγραφή δεν επιλέχθηκε !"
+
 #
 #~ msgid "You have to select one resource!"
 #~ msgstr "Πρέπει να διαλέξετε μια εγγραφή !"
+
 #
 #~ msgid "Owner"
 #~ msgstr "Ιδιοκτήτης"
+
 #
 #~ msgid "Group Owner"
 #~ msgstr "Ομάδα Ιδιοκτήτη"
+
 #
 #~ msgid "Access Level"
 #~ msgstr "Επίπεδο Πρόσβασης"
+
 #
 #~ msgid "Resource not removed !"
 #~ msgstr "Εγγραφή δεν διαγράφτηκε !"
+
 #
 #~ msgid "Resource removed."
 #~ msgstr "Εγγραφή διαγράφηκε."
+
 #
 #~ msgid "Document saved !"
 #~ msgstr "Εγγραφή Αποθηκεύθηκε"
+
 #
 #~ msgid "Invalid form !"
 #~ msgstr "Μη έγκυρη φόρμα !"
+
 #
 #~ msgid "No record selected!"
 #~ msgstr "Καμία επιλεγμένη εγγραφή!"
+
 #
 #~ msgid "No preference available for this resource !"
 #~ msgstr "Καμία διαθέσιμη προτίμηση για αυτή την εγγραφή !"
+
 #
 #, fuzzy
 #~ msgid "Tiny ERP Search: %s"
 #~ msgstr "Tiny ERP Αναζήτηση: %s"
+
 #
 #, fuzzy
 #~ msgid "Tiny ERP Search: %s (%%d result(s))"
 #~ msgstr "Tiny ERP Αναζήτηση: %s (%%d αποτελέσματα)"
+
 #
 #~ msgid "Switch View"
 #~ msgstr "Αλλαγή Εμφάνισης"
+
 #
 #~ msgid "Changt root"
 #~ msgstr "Αλλαγή βάσης"
+
 #
 #~ msgid "Print"
 #~ msgstr "Εκτύπωση"
+
 #
 #~ msgid "Close"
 #~ msgstr "Κλείσιμο"
+
 #
 #~ msgid "Are you sure you want to remove this attachment ?"
 #~ msgstr ""
 #~ "Είστε σίγουρος ότι επιθυμείτε την απομάκρυνση αυτού του συνημμένου ;"
+
 #
 #~ msgid "Select the destination file"
 #~ msgstr "Επιλέξτε το αρχείο προορισμού"
+
 #
 #~ msgid "Can not open file !"
 #~ msgstr "Αδυναμία ανάγνωσης αρχείου !"
+
 #
 #~ msgid "Can not write file !"
 #~ msgstr "Αδυναμία εγγραφής αρχείου !"
+
 #
 #~ msgid ""
 #~ "Unable to preview image file !\n"
@@ -3195,105 +3235,139 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "Αδυναμία προεπισκόπισης αρχείου εικόνας !\n"
 #~ "Επαληθεύστε τον τύπο."
+
 #
 #~ msgid "Error: "
 #~ msgstr "Σφάλμα: "
+
 #
 #~ msgid "No action defined!"
 #~ msgstr "Καμία ενέργεια δεν καθορίστηκε!"
+
 #
 #~ msgid "Relation Field: F1 New   F2 Open/Search"
 #~ msgstr "Συσχετιζόμενο πεδίο: F1 Νέα Εγγραφή   F2 Άνοιγμα/Εύρεση"
+
 #
 #~ msgid "Warning; field \"%s\" is required !"
 #~ msgstr "Προειδοποίηση: το πεδίο \"%s\" είναι υποχρεωτικό !"
+
 #
 #~ msgid "Select the file to attach"
 #~ msgstr "Επιλέξτε το αρχείο προς επισύναψη"
+
 #
 #~ msgid "Error reading the file"
 #~ msgstr "Σφάλμα κατά την ανάγνωση του αρχείου"
+
 #
 #~ msgid "Save attachment as..."
 #~ msgstr "Αποθήκευση συνημμένου ως..."
+
 #
 #~ msgid "%d bytes"
 #~ msgstr "%d bytes"
+
 #
 #~ msgid "Set default"
 #~ msgstr "Ορισμός προεπιλεγμένης τιμής"
+
 #
 #~ msgid "Invalid Form, correct red fields !"
 #~ msgstr "Μη έγκυρη φόρμα, διορθώστε τα κόκκινα πεδία!"
+
 #
 #~ msgid "Select a file"
 #~ msgstr "Επιλέξτε ένα αρχείο"
+
 #
 #~ msgid "Save as ..."
 #~ msgstr "Αποθήκευση ως ..."
+
 #
 #~ msgid "Open file ..."
 #~ msgstr "Άνοιγμα αρχείου..."
+
 #
 #~ msgid "Closing Tiny ERP, KeyboardInterrupt"
 #~ msgstr "Κλείσιμο Tiny ERP, KeyboardInterrupt"
+
 #
 #~ msgid "Write Report to File"
 #~ msgstr "Εγγραφή Αναφοράς σε Αρχείο"
+
 #
 #~ msgid "Tiny ERP - Login"
 #~ msgstr "Tiny ERP - Σύνδεση"
+
 #
 #~ msgid "localhost"
 #~ msgstr "localhost"
+
 #
 #~ msgid "Tiny ERP"
 #~ msgstr "Tiny ERP"
+
 #
 #~ msgid "Duplicate"
 #~ msgstr "Ακριβές Αντίγραφο"
+
 #
 #~ msgid "_New Menu Tab"
 #~ msgstr "_Νέα Καρτέλα Μενού"
+
 #
 #~ msgid "Client Mode"
 #~ msgstr "Κατάσταση λειτουργίας"
+
 #
 #~ msgid "Normal"
 #~ msgstr "Κανονική"
+
 #
 #~ msgid "Mode PDA"
 #~ msgstr "Υπολογιστής παλάμης (PDA)"
+
 #
 #~ msgid "_Theme"
 #~ msgstr "_Θέμα"
+
 #
 #~ msgid "Tiny ERP Theme"
 #~ msgstr "Tiny ERP Θέμα"
+
 #
 #~ msgid "Aqua OS X"
 #~ msgstr "Aqua OS X"
+
 #
 #~ msgid "_Licence"
 #~ msgstr "_Άδεια"
+
 #
 #~ msgid "Find a resource"
 #~ msgstr "Εύρεση εγγραφής"
+
 #
 #~ msgid "Switch current view: form / list"
 #~ msgstr "Αλλαγή εμφάνισης: φόρμα/λίστα"
+
 #
 #~ msgid "Other View"
 #~ msgstr "Άλλη Εμφάνιση"
+
 #
 #~ msgid "Tiny ERP - Tree Resources"
 #~ msgstr "Tiny ERP - Δενδρικές Εγγραφές"
+
 #
 #~ msgid "Tiny ERP - Forms"
 #~ msgstr "Tiny ERP - Φόρμες"
+
 #
 #~ msgid "Tiny ERP - About"
 #~ msgstr "Tiny ERP - Σχετικά"
+
 #
 #~ msgid ""
 #~ "<b>About Tiny ERP</b>\n"
@@ -3301,6 +3375,7 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "<b>Σχετικά με το Tiny ERP</b>\n"
 #~ "<i>Το πιο προχωρημένο ERP &amp; CRM Ανοιχτού Κώδικα !</i>"
+
 #
 #~ msgid ""
 #~ "\n"
@@ -3328,9 +3403,11 @@ msgstr "ΟΚ"
 #~ "(c) 2003-TODAY, Tiny sprl\n"
 #~ "\n"
 #~ "Περισσότερες Πληροφορίες στο www.TinyERP.com !"
+
 #
 #~ msgid "_Tiny ERP"
 #~ msgstr "_Tiny ERP"
+
 #
 #~ msgid ""
 #~ "\n"
@@ -3358,108 +3435,143 @@ msgstr "ΟΚ"
 #~ "Τηλ: (+32)81.81.37.00\n"
 #~ "E-Mail: sales@tiny.be\n"
 #~ "Web: http://tiny.be"
+
 #
 #~ msgid "Tiny ERP - forms widget"
 #~ msgstr "Tiny ERP - πεδία φόρμας"
+
 #
 #~ msgid "Titre"
 #~ msgstr "Τίτλος"
+
 #
 #~ msgid "(0/0)"
 #~ msgstr "(0/0)"
+
 #
 #~ msgid "Remove selected entry"
 #~ msgstr "Απομάκρυνση επιλεγμένης εγγραφής"
+
 #
 #~ msgid "label74"
 #~ msgstr "label74"
+
 #
 #~ msgid "-"
 #~ msgstr "-"
+
 #
 #~ msgid "Tiny ERP - Date selection"
 #~ msgstr "Tiny ERP - Επιλογή ημερομηνίας"
+
 #
 #~ msgid "Tiny ERP - Confirmation"
 #~ msgstr "Tiny ERP - Επιβεβαίωση"
+
 #
 #~ msgid "Tiny ERP - selection"
 #~ msgstr "Tiny ERP - Επιλογή"
+
 #
 #~ msgid "Tiny ERP - Filter"
 #~ msgstr "Tiny ERP - Φίλτρο"
+
 #
 #~ msgid "S_earch:"
 #~ msgstr "Εύρ_εση:"
+
 #
 #~ msgid "on _field:"
 #~ msgstr "βάση _πεδίου:"
+
 #
 #~ msgid "test"
 #~ msgstr "έλεγχος"
+
 #
 #~ msgid "_Select"
 #~ msgstr "_Επιλογή"
+
 #
 #~ msgid "_Unselect"
 #~ msgstr "_Αποεπιλογή"
+
 #
 #~ msgid "Filter: "
 #~ msgstr "Φίλτρο: "
+
 #
 #~ msgid "AL_L"
 #~ msgstr "Ο_ΛΑ"
+
 #
 #~ msgid "N_ONE"
 #~ msgstr "ΚΑΝ_ΕΝΑ"
+
 #
 #~ msgid "<b><u>Actions</u></b>"
 #~ msgstr "<b><u>Ενέργειες</u></b>"
+
 #
 #~ msgid "Tiny ERP - Dialog"
 #~ msgstr "Tiny ERP - Διάλογος"
+
 #
 #~ msgid "Set to _Default"
 #~ msgstr "Εισαγωγή προεπιλoγής"
+
 #
 #~ msgid "Value _Preference"
 #~ msgstr "_Προτίμηση Τιμής"
+
 #
 #~ msgid "Tiny ERP, Field Preference target"
 #~ msgstr "Tiny ERP, στόχος Προτίμησης Πεδίου"
+
 #
 #~ msgid "Tiny ERP - Export to CSV"
 #~ msgstr "Tiny ERP - Εξαγωγή σε CSV"
+
 #
 #~ msgid "<b>Predefined exports</b>"
 #~ msgstr "<b>Προκαθορισμένες λίστες πεδίων εξαγωγής</b>"
+
 #
 #~ msgid "<b>Fields to export</b>"
 #~ msgstr "<b>Πεδία προς εξαγωγή</b>"
+
 #
 #~ msgid "Tiny ERP - Search"
 #~ msgstr "Tiny ERP - Εύρεση"
+
 #
 #~ msgid "_Limit:"
 #~ msgstr "_Όριο:"
+
 #
 #~ msgid "Off_set:"
 #~ msgstr "Μετα_τόπιση:"
+
 #
 #~ msgid "Advanced search parameters"
 #~ msgstr "Προχωρημένες παράμετροι εύρεσης"
+
 #
 #~ msgid "Tiny ERP - Search Widgets"
 #~ msgstr "Tiny ERP - Πεδία Εύρεσης"
+
 #
 #~ msgid "Date de début"
 #~ msgstr "Ημερομηνία Έναρξης"
+
 #
 #~ msgid "Search with this name"
 #~ msgstr "Εύρεση με αυτό το όνομα"
+
 #
 #~ msgid "Clear the field"
 #~ msgstr "Καθαρισμός πεδίου"
+
 #
 #~ msgid ""
 #~ "\n"
@@ -3469,30 +3581,39 @@ msgstr "ΟΚ"
 #~ "\n"
 #~ "Ναι\n"
 #~ "Όχι"
+
 #
 #~ msgid "Tiny ERP - Attachment"
 #~ msgstr "Tiny ERP - Συνημμένο"
+
 #
 #~ msgid "Filename:"
 #~ msgstr "Όνομα αρχείου:"
+
 #
 #~ msgid "Description:"
 #~ msgstr "Περιγραφή:"
+
 #
 #~ msgid "Save text"
 #~ msgstr "Αποθήκευση κειμένου"
+
 #
 #~ msgid "Tiny ERP - Error"
 #~ msgstr "Tiny ERP - Σφάλμα"
+
 #
 #~ msgid "Application Error !"
 #~ msgstr "Σφάλμα Εφαρμογής !"
+
 #
 #~ msgid "Error 404"
 #~ msgstr "Σφάλμα 404"
+
 #
 #~ msgid "<b>Error code:</b>"
 #~ msgstr "<b>Λανθασμένος κωδικός:</b>"
+
 #
 #~ msgid ""
 #~ "This Page does not exist !\n"
@@ -3500,13 +3621,16 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "Αυτή η Σελίδα δεν υπάρχει !\n"
 #~ "Παρακαλώ ξαναπροσπαθήστε"
+
 #
 #~ msgid "<i>Click on the Support Request tab if you need more help !</i>"
 #~ msgstr ""
 #~ "<i>Πιέστε στο Αίτηση Υποστήριξης αν επιθυμείτε περισσότερη βοήθεια !</i>"
+
 #
 #~ msgid "De_scription"
 #~ msgstr "Πε_ριγραφή"
+
 #
 #~ msgid ""
 #~ "Error details\n"
@@ -3514,9 +3638,11 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "Λεπτομέρειες σφάλματος\n"
 #~ "dqsdsqdqsdsd"
+
 #
 #~ msgid "_Details"
 #~ msgstr "_Λεπτομέρειες"
+
 #
 #~ msgid ""
 #~ "<b>Complete this form to submit your bug and/or request a support.</b>\n"
@@ -3534,78 +3660,103 @@ msgstr "ΟΚ"
 #~ "Επισημαίνουμε ότι ίσως δεν σας απαντήσουμε αν η Εταιρεία Υποστήριξης σας "
 #~ "δεν είναι συνεργάτης μας.\n"
 #~ "</i>"
+
 #
 #~ msgid "<b>Your name: </b>"
 #~ msgstr "<b>Το ονοματεπώνυμο σας: </b>"
+
 #
 #~ msgid "<b>Your Company: </b>"
 #~ msgstr "<b>Η επωνυμία της επιχείρησης σας: </b>"
+
 #
 #~ msgid "<b>Your Email: </b>"
 #~ msgstr "<b>Το email σας: </b>"
+
 #
 #~ msgid "Explain what you did: "
 #~ msgstr "Επεξηγήστε τι κάνατε:"
+
 #
 #~ msgid "Others Comments: "
 #~ msgstr "Άλλες Παρατηρήσεις:"
+
 #
 #~ msgid "Send Support Request"
 #~ msgstr "Αποστολή Αίτησης Υποστήριξης"
+
 #
 #~ msgid "<b>support contract id  </b>"
 #~ msgstr "<b>κωδικός συμβολαίου υποστήριξης  </b>"
+
 #
 #~ msgid "Emergency: "
 #~ msgstr "Κατάσταση ανάγκης: "
+
 #
 #~ msgid "Phone Number: "
 #~ msgstr "Αριθμός Τηλεφώνου: "
+
 #
 #~ msgid "<b>_Support Request</b>"
 #~ msgstr "<b>_Αίτηση Υποστήριξης</b>"
+
 #
 #~ msgid "Tiny ERP - Ressource Edit"
 #~ msgstr "Tiny ERP - Επεξεργασία Εγγραφής"
+
 #
 #~ msgid "Tiny ERP - Link"
 #~ msgstr "Tiny ERP - Σύνδεσμος"
+
 #
 #~ msgid "Tiny ERP - List"
 #~ msgstr "Tiny ERP - Λίστα"
+
 #
 #~ msgid "Tiny ERP - Preferences"
 #~ msgstr "Tiny ERP - Προτιμήσεις"
+
 #
 #~ msgid "<b>Edit resource preferences</b>"
 #~ msgstr "<b>Επεξεργασία προτιμήσεων εγγραφής</b>"
+
 #
 #~ msgid "_Display a new tip next time ?"
 #~ msgstr "_Προβολή νέας συμβουλής της επόμενη φορά ;"
+
 #
 #~ msgid "Tiny ERP - Licence"
 #~ msgstr "Tiny ERP - Άδεια"
+
 #
 #~ msgid "Tiny ERP license"
 #~ msgstr "Tiny ERP άδεια"
+
 #
 #~ msgid "Tiny ERP - Date & Time selection"
 #~ msgstr "Tiny ERP - Επιλογή Ημερομηνίας & Ώρας"
+
 #
 #~ msgid "Hour :"
 #~ msgstr "Ώρα :"
+
 #
 #~ msgid "Minute :"
 #~ msgstr "Λεπτό :"
+
 #
 #~ msgid "GO to ressource ID"
 #~ msgstr "Πή_γαινε στην εγγραφή με ID..."
+
 #
 #~ msgid "Tiny ERP Survey"
 #~ msgstr "Tiny ERP Δημοσκόπηση"
+
 #
 #~ msgid "<b>Tiny ERP Survey</b>"
 #~ msgstr "<b>Tiny ERP Survey Δημοσκόπηση</b>"
+
 #
 #~ msgid ""
 #~ "<i>Please fill in the following form in order to help us to improve Tiny "
@@ -3613,15 +3764,19 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "<i>Παρακαλούμε συμπληρώστε την επόμενη φόρμα για να μας βοηθήσετε να "
 #~ "βελτιώσουμε το Tiny ERP στις επόμενες εκδόσεις του.</i>"
+
 #
 #~ msgid "Open Source: "
 #~ msgstr "Ανοιχτού Κώδικα: "
+
 #
 #~ msgid "We plan to use Tiny ERP"
 #~ msgstr "Σκοπεύουμε να χρησιμοποιήσουμε το Tiny ERP"
+
 #
 #~ msgid "We plan to offer services on Tiny ERP"
 #~ msgstr "Σκοπεύουμε να προσφέρουμε υπηρεσίες για το Tiny ERP"
+
 #
 #~ msgid ""
 #~ "Write here any comment, note or suggestion you have concerning Tiny "
@@ -3632,6 +3787,7 @@ msgstr "ΟΚ"
 #~ "Εδώ γράψτε σχόλια, παρατηρήσεις ή προτάσεις σχετικά με το Tiny ERP.\n"
 #~ "Ποια άλλα συστήματα ERP έχετε χρησιμοποιήσει στο παρελθόν και ποια είναι "
 #~ "τα μελλοντικά σας σχέδια για το Tiny ERP..."
+
 #
 #~ msgid ""
 #~ "(Get Tiny ERP announces, documentation and new releases by email, maximum "
@@ -3639,6 +3795,7 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "(Λάβετε μέσω email τις ανακοινώσεις, την τεκμηρίωση και τις νέες εκδόσεις "
 #~ "του Tiny ERP - \"μέχρι 6 email το χρόνο\")"
+
 #
 #~ msgid ""
 #~ "<b>Complete this form to submit your bug and/or make a request for "
@@ -3656,39 +3813,51 @@ msgstr "ΟΚ"
 #~ "επικοινωνήσουμε σύντομα μαζί σας.\n"
 #~ "Επισημαίνουμε ότι ίσως δεν σας απαντήσουμε αν η Εταιρεία Υποστήριξης σας "
 #~ "δεν είναι συνεργάτης μας.</i>"
+
 #
 #~ msgid "<b>Shortcuts for TinyERP</b>"
 #~ msgstr "<b>Συντομεύσεις πληκτρολογίου στο TinyERP</b>"
+
 #
 #~ msgid "<CTRL> + X"
 #~ msgstr "<CTRL> + X"
+
 #
 #~ msgid "<CTRL> + C"
 #~ msgstr "<CTRL> + C"
+
 #
 #~ msgid "<CTRL> + V"
 #~ msgstr "<CTRL> + V"
+
 #
 #~ msgid "<TAB>"
 #~ msgstr "<TAB>"
+
 #
 #~ msgid "<SHIFT> + <TAB>"
 #~ msgstr "<SHIFT> + <TAB>"
+
 #
 #~ msgid "<ENTER>"
 #~ msgstr "<ENTER>"
+
 #
 #~ msgid "File to Import: "
 #~ msgstr "Αρχείο για Εισαγωγή:"
+
 #
 #~ msgid "Sélectionner un fichier"
 #~ msgstr "Επιλέξτε έναν φάκελο"
+
 #
 #~ msgid ","
 #~ msgstr ","
+
 #
 #~ msgid "\""
 #~ msgstr "\""
+
 #
 #~ msgid ""
 #~ "UTF-8\n"
@@ -3696,24 +3865,31 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "UTF-8\n"
 #~ "Latin1"
+
 #
 #~ msgid "<b>Connect to a Tiny ERP server</b>"
 #~ msgstr "<b>Σύνδεση σε διακομιστή Tiny ERP</b>"
+
 #
 #~ msgid "8069"
 #~ msgstr "8069"
+
 #
 #~ msgid "Secure connection:"
 #~ msgstr "Ασφαλής σύνδεση:"
+
 #
 #~ msgid "Database: "
 #~ msgstr "Βάση: "
+
 #
 #~ msgid "New database name: "
 #~ msgstr "Νέο όνομα βάσης: "
+
 #
 #~ msgid "Tiny ERP server:"
 #~ msgstr "Tiny ERP διακομιστής:"
+
 #
 #~ msgid ""
 #~ "This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
@@ -3722,24 +3898,30 @@ msgstr "ΟΚ"
 #~ "Αυτό είναι το URL του διακομιστή υπηρεσιών Tiny ERP. Χρησιμοποιείστε "
 #~ "'localhost' αν ο διακομιστήςβρίσκεται εγκατεστημένος στον παρόν "
 #~ "υπολογιστή. Eπιλέξτε Αλλαγή, για να αλλάξετε τη διεύθυνση."
+
 #
 #~ msgid "Super admin password:"
 #~ msgstr "Κωδικός Υπερ-Διαχειριστή:"
+
 #
 #~ msgid "Default language:"
 #~ msgstr "Προεπιλεγμένη γλώσσα:"
+
 #
 #~ msgid "Load demonstration data: "
 #~ msgstr "Φόρτωμα δεδομένων επίδειξης: "
+
 #
 #~ msgid ""
 #~ "Check this box if you want demo data to be installed on your new database."
 #~ msgstr ""
 #~ "Μαρκάρετε αυτό το κουτί αν επιθυμείτε να εγκαταστήσετε δεδομένα επίδειξης "
 #~ "στη νέα σας βάση."
+
 #
 #~ msgid "(use 'admin', if you did not changed it)"
 #~ msgstr "(χρησιμοποιείστε 'admin', αν δε το αλλάξατε)"
+
 #
 #~ msgid ""
 #~ "This is the password of the user that have the rights to administer "
@@ -3750,31 +3932,40 @@ msgstr "ΟΚ"
 #~ "δεδομένων. Αυτός δεν είναι χρήστης του Tiny ERP, απλά ένας Υπερ-"
 #~ "Διαχειριστής. Αν δεν το αλλάξατε, ο κωδικός είναι 'admin' μετά την "
 #~ "εγκατάσταση."
+
 #
 #~ msgid "Hello World"
 #~ msgstr "Γεια σου Κόσμε!"
+
 #
 #~ msgid "(must not contain any special character)"
 #~ msgstr "(δεν πρέπει να περιέχει ειδικούς χαρακτήρες)"
+
 #
 #~ msgid "<b>Change your DB administration password</b>"
 #~ msgstr "<b>Αλλαγή Κωδικού Διαχειριστή Βάσης Δεδομένων</b>"
+
 #
 #~ msgid "Tiny ERP Message"
 #~ msgstr "Tiny ERP Μήνυμα"
+
 #
 #~ msgid "<b>Database created successfully !</b>"
 #~ msgstr "<b>H βάση δημιουργήθηκε επιτυχώς !</b>"
+
 #
 #~ msgid "Can not match the URL"
 #~ msgstr "Δεν ταιριάζει το URL "
+
 #
 #~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 #~ msgstr ""
 #~ "δηλώστε το επίπεδο καταγραφής: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+
 #
 #~ msgid "specify channels to log"
 #~ msgstr "δηλώστε κανάλια για καταγραφή"
+
 #
 #~ msgid ""
 #~ "Connection error !\n"
@@ -3782,6 +3973,7 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "Σφάλμα σύνδεσης!\n"
 #~ "Λανθασμένο όνομα χρήστη ή κωδικός πρόσβασης!"
+
 #
 #~ msgid ""
 #~ "<i>Please fill in the following form in order to help us to improve "
@@ -3789,38 +3981,49 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "<i>Παρακαλούμε συμπληρώστε την παρακάτω φόρμα για να μας βοηθήσετε να "
 #~ "βελτιώσουμε το OpenERP και να στοχεύσουμε σε νέες αναπτύξεις του.</i>"
+
 #
 #~ msgid "# Employees:"
 #~ msgstr "# Υπαλλήλων:"
+
 #
 #~ msgid "We plan to use OpenERP"
 #~ msgstr "Σκοπεύουμε να χρησιμοποιήσουμε το OpenERP"
+
 #
 #~ msgid "Tell us why you try OpenERP and what are your current softwares:"
 #~ msgstr ""
 #~ "Πείτε μας γιατί δοκιμάζετε το OpenERP και ποιά είναι τα τρέχοντα "
 #~ "λογισμικά σας:"
+
 #
 #~ msgid "We plan to offer services on OpenERP"
 #~ msgstr "Σκοπεύουμε να παρέχουμε υπηρεσίες πάνω στο OpenERP"
+
 #
 #~ msgid "<b>Your company:</b>"
 #~ msgstr "<b>Η εταιρία σας:</b>"
+
 #
 #~ msgid "I want to be contacted for a demonstration"
 #~ msgstr "Θα ήθελα να μου παρέχουν μιά επίδειξη"
+
 #
 #~ msgid "<b>Your interrest:</b>"
 #~ msgstr "<b>Τα ενδιαφέροντα σας:</b>"
+
 #
 #~ msgid "E-Mail:"
 #~ msgstr "E-Mail:"
+
 #
 #~ msgid "<Shist> + <Tab>"
 #~ msgstr "<Shist> + <Tab>"
+
 #
 #~ msgid "enable basic debugging"
 #~ msgstr "ενεργοποίηση βασικής αποσφαλμάτωσης"
+
 #
 #~ msgid ""
 #~ "\n"
@@ -3870,6 +4073,7 @@ msgstr "ΟΚ"
 #~ "Μπορείτε να χρησιμοποιήσετε την παρακάτω σύνδεση για να δείτε "
 #~ "περισσότερες πληροφορίες. Η λεπτομέρειες του σφάλματος εμφανίζεται στο "
 #~ "δεύτερο tab."
+
 #
 #~ msgid ""
 #~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
@@ -3877,18 +4081,23 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "Το πρόβλημα σας <u>ΔΕΝ</u> αποστάλθηκε στην ομάδα ποιότητας!\n"
 #~ "Παρακαλώ αναφέρετε το σφάλμα χειροκίνητα στο %s"
+
 #
 #~ msgid "OpenERP Survey"
 #~ msgstr "OpenERP Survey"
+
 #
 #~ msgid "<b>OpenERP Survey</b>"
 #~ msgstr "<b>OpenERP Survey</b>"
+
 #
 #~ msgid "The content of the widget or excpetion if not valid"
 #~ msgstr "Το περιεχόμενο της εξαίρεσης ή του Widget δεν είναι έγκυρα"
+
 #
 #~ msgid "dialog1"
 #~ msgstr "dialog1"
+
 #
 #~ msgid ""
 #~ "Imported %d objects !\n"
@@ -3896,18 +4105,23 @@ msgstr "ΟΚ"
 #~ msgstr ""
 #~ "Εισηχθήσαν %d εγγραφές !\n"
 #~ "Θα λάβετε αίτημα αναφοράς του τελικού αποτελέσματος."
+
 #
 #~ msgid "Server Parameters"
 #~ msgstr "Παράμετροι διακομιστή"
+
 #
 #~ msgid "demo"
 #~ msgstr "demo"
+
 #
 #~ msgid "<Esc>"
 #~ msgstr "<Esc>"
+
 #
 #~ msgid "<b>File Selection</b>"
 #~ msgstr "<b>Επιλογή Αρχείου</b>"
+
 #
 #~ msgid "Message"
 #~ msgstr "Μήνυμα"

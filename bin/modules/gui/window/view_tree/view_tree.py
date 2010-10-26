@@ -44,13 +44,13 @@ LDFMT = datetime_util.get_date_format()
 
 # BUG: ids = []
 #
-# Tree struct:  [ id, values, childs, childs_id ]
+# Tree struct:  [ id, values, children, children_id ]
 #
 #    values: [...]
-#    childs: [ tree_struct ]
-#            [] for no childs
-#            None for undevelopped (with childs!)
-#        assert: no childs => []
+#    children: [ tree_struct ]
+#            [] for no children
+#            None for undevelopped (with children!)
+#        assert: no children => []
 #
 # Node struct: [list of (pos, list) ]
 #

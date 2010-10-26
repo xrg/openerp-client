@@ -22,8 +22,8 @@ msgid "Print Workflow"
 msgstr "Imprimer le workflow"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
-msgstr "Imprimer le workflow (complet)"
+msgid "Print Workflow (with subflows)"
+msgstr "Imprimer le workflow (avec sous-flux)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"

@@ -6715,6 +6715,7 @@ Latin1</property>
                   <widget class="GtkEntry" id="ent_db">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
                   </widget>
                   <packing>

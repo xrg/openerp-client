@@ -22,7 +22,7 @@ msgid "Print Workflow"
 msgstr "Cetak alur kerja"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Cetak alur kerja (Kompleks)"
 
 #: bin/plugins/__init__.py:41

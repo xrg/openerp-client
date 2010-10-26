@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "印刷作業フロー(複合)"
 
 #: bin/plugins/__init__.py:28

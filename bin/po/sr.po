@@ -25,7 +25,7 @@ msgstr "Ispiši tok rada"
 # File: bin/plugins/__init__.py, line: 29
 # File: bin/plugins/__init__.py, line: 29
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Ispiši tok rada (Složeni)"
 
 #

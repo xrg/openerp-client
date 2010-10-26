@@ -28,7 +28,7 @@ msgstr "打印工作流"
 # File: bin/plugins/__init__.py, line: 29
 # File: bin/plugins/__init__.py, line: 29
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "打印工作流（高级）"
 
 #: bin/plugins/__init__.py:41
