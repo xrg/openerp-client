@@ -391,64 +391,68 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
 
     error_in_error = True
 
-    if not disconnected_mode:
-        maintenance = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'status')
+    try:
+        if not disconnected_mode:
+            maintenance = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'status')
 
-        if maintenance['status'] == 'none':
-            maintenance_contract_message = message_no_contract
-        elif maintenance['status'] == 'partial':
-            maintenance_contract_message= message_partial_contract % (", ".join(maintenance['uncovered_modules']), )
-        else:
-            show_message = False
-    else:
-        maintenance_contract_message = message_no_contract
-
-    xmlGlade = glade.XML(terp_path('win_error.glade'), 'dialog_error', gettext.textdomain())
-    win = xmlGlade.get_widget('dialog_error')
-    if not parent:
-        parent=service.LocalService('gui.main').window
-    win.set_transient_for(parent)
-    win.set_icon(OPENERP_ICON)
-    win.set_title("OpenERP - %s" % title)
-
-    if not isinstance(message, basestring):
-        message = str(message)
-    xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % escape(message))
-
-    details_buffer = gtk.TextBuffer()
-    details_buffer.set_text(details)
-    xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
-
-    if show_message:
-        xmlGlade.get_widget('maintenance_explanation').set_markup(maintenance_contract_message)
-
-    xmlGlade.get_widget('notebook').remove_page(int(show_message))
-
-    if not show_message:
-        def send(widget):
-            def get_text_from_text_view(textView):
-                """Retrieve the buffer from a text view and return the content of this buffer"""
-                buffer = textView.get_buffer()
-                return buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-
-            # Use details_buffer
-            tb = get_text_from_text_view(xmlGlade.get_widget('details_explanation'))
-            explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
-            remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
-
-            if rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'send', tb, explanation, remarks):
-                common.message(_('Your problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'), parent=win)
-                win.destroy()
+            if maintenance['status'] == 'none':
+                maintenance_contract_message = message_no_contract
+            elif maintenance['status'] == 'partial':
+                maintenance_contract_message= message_partial_contract % (", ".join(maintenance['uncovered_modules']), )
             else:
-                common.message(_('Your problem could *NOT* be sent to the quality team !\nPlease report this error manually at:\n\t%s') % ('http://openerp.com/report_bug.html',), title=_('Error'), type=gtk.MESSAGE_ERROR, parent=win)
+                show_message = False
+        else:
+            maintenance_contract_message = message_no_contract
 
-        xmlGlade.signal_connect('on_button_send_clicked', send)
-        xmlGlade.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
+        xmlGlade = glade.XML(terp_path('win_error.glade'), 'dialog_error', gettext.textdomain())
+        win = xmlGlade.get_widget('dialog_error')
+        if not parent:
+            parent=service.LocalService('gui.main').window
+        win.set_transient_for(parent)
+        win.set_icon(OPENERP_ICON)
+        win.set_title("OpenERP - %s" % title)
 
-    response = win.run()
-    parent.present()
-    win.destroy()
-    error_in_error = None
+        if not isinstance(message, basestring):
+            message = str(message)
+        xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % escape(message))
+
+        details_buffer = gtk.TextBuffer()
+        details_buffer.set_text(details)
+        xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
+
+        if show_message:
+            xmlGlade.get_widget('maintenance_explanation').set_markup(maintenance_contract_message)
+
+        xmlGlade.get_widget('notebook').remove_page(int(show_message))
+
+        if not show_message:
+            def send(widget):
+                def get_text_from_text_view(textView):
+                    """Retrieve the buffer from a text view and return the content of this buffer"""
+                    buffer = textView.get_buffer()
+                    return buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
+
+                # Use details_buffer
+                tb = get_text_from_text_view(xmlGlade.get_widget('details_explanation'))
+                explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
+                remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
+
+                if rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'send', tb, explanation, remarks):
+                    common.message(_('Your problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'), parent=win)
+                    win.destroy()
+                else:
+                    common.message(_('Your problem could *NOT* be sent to the quality team !\nPlease report this error manually at:\n\t%s') % ('http://openerp.com/report_bug.html',), title=_('Error'), type=gtk.MESSAGE_ERROR, parent=win)
+
+            xmlGlade.signal_connect('on_button_send_clicked', send)
+            xmlGlade.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
+
+        response = win.run()
+        parent.present()
+        win.destroy()
+    except Exception, e:
+        log.error("Cannot show error", exc_info=True)
+    finally:
+        error_in_error = False
     return True
 
 def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
