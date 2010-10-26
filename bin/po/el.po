@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-10-19 10:16+0300\n"
+"PO-Revision-Date: 2010-10-26 19:42+0300\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -564,12 +564,12 @@ msgstr "Αναγνωριστικό"
 #
 # File: bin/modules/gui/window/form.py, line: 240
 msgid "Creation User"
-msgstr "Δημιουργία Χρήστη"
+msgstr "Δημιουργία από"
 
 #
 # File: bin/modules/gui/window/form.py, line: 241
 msgid "Creation Date"
-msgstr "Δημιουργία Ημερομηνίας"
+msgstr "Δημιουργία στις"
 
 #
 # File: bin/modules/gui/window/form.py, line: 242
@@ -919,7 +919,7 @@ msgstr "Λανθασμένος κωδικός διαχειριστή βάσης 
 # File: bin/modules/gui/main.py, line: 662
 # File: bin/modules/gui/main.py, line: 669
 msgid "Error during database creation !"
-msgstr "Σφάλμα κατα την δημιουργία βάσης δεδομένων!"
+msgstr "Σφάλμα κατά την δημιουργία βάσης δεδομένων!"
 
 #
 # File: bin/modules/gui/main.py, line: 669
@@ -2654,7 +2654,7 @@ msgstr "Δημιουργία νέας βάσης δεδομένων"
 #
 # File: bin/openerp.glade, line: 6902
 msgid "<b>Create a new database</b>"
-msgstr "<b>Δημιουργία μιάς νέας βάσης δεδομένων</b>"
+msgstr "<b>Δημιουργία μιας νέας βάσης δεδομένων</b>"
 
 #
 # File: bin/openerp.glade, line: 6973
