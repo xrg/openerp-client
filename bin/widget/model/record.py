@@ -137,6 +137,7 @@ class ModelRecord(signal_event.signal_event):
                     return self.id
                 value = self.get(get_readonly=False, get_modifiedonly=True)
                 context = self.context_get().copy()
+                self.update_context_with_concurrency_check_data(context)
                 res = self.rpc.write([self.id], value, context)
                 #if type(res) in (int, long):
                 #    self.id = res
