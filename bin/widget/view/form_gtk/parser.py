@@ -161,9 +161,9 @@ class StateAwareWidget(object):
             elif k == 'readonly':
                 if isinstance(self.widget, gtk.Frame):
                     for name, wid in self.frame_child.iteritems():
-                        self.set_sensitive(wid, not result)
+                        self.set_sensitive(wid, result)
                 else:
-                    self.set_sensitive(self.widget, not result)
+                    self.set_sensitive(self.widget, result)
     ## This method is hacked here because field labels that are readonly
     ## should not change their looks to readonly GTK widgets as it makes
     ## the label text very difficult to read in some themes.
@@ -173,7 +173,10 @@ class StateAwareWidget(object):
             for wid in widget.get_children():
                self.set_sensitive(wid, value)
         if not isinstance(widget, gtk.Label):
-            widget.set_sensitive(value)
+            if hasattr(widget,'_readonly_set'):
+                widget._readonly_set(value)
+            else:
+                widget.set_sensitive(not value)
         return True
 
 class _container(object):
