@@ -92,7 +92,7 @@ class ModelRecord(signal_event.signal_event):
             return True
         return False
 
-    def update_context_with_concurrency_check_data(self, context):
+    def update_context_with_concurrency(self, context):
         if self.id and self.is_modified():
             context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%s" % (self.resource, self.id)] = self._concurrency_check_data
         for name, field in self.mgroup.mfields.items():
@@ -100,7 +100,7 @@ class ModelRecord(signal_event.signal_event):
                 v = self.value[field.name]
                 from itertools import chain
                 for m in chain(v.models, v.models_removed):
-                    m.update_context_with_concurrency_check_data(context)
+                    m.update_context_with_concurrency(context)
 
     def get(self, get_readonly=True, includeid=False, check_load=True, get_modifiedonly=False):
         if check_load:
@@ -137,6 +137,7 @@ class ModelRecord(signal_event.signal_event):
                     return self.id
                 value = self.get(get_readonly=False, get_modifiedonly=True)
                 context = self.context_get().copy()
+                self.update_context_with_concurrency(context)
                 res = self.rpc.write([self.id], value, context)
                 #if type(res) in (int, long):
                 #    self.id = res

@@ -124,7 +124,7 @@ class main(service.Service):
                 title = action.get('name', False)
                 if msg and len(msg):
                     help['msg'] =  msg
-                    help['title'] = title
+                    help['title'] = title or ''
             if datas.get('domain', False):
                 domain.append(datas['domain'])
             if action.get('target', False)=='new':
@@ -187,7 +187,8 @@ class main(service.Service):
                 return False
         keyact = {}
         for action in actions:
-            keyact[action['name'].encode('utf8')] = action
+            action_name = action.get('name') or ''
+            keyact[action_name.encode('utf8')] = action
         keyact.update(adds)
         res = common.selection(_('Select your action'), keyact)
         if res:

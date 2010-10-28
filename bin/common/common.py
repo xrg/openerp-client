@@ -112,7 +112,10 @@ To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user pr
             box = gtk.HBox()
             box_label = gtk.Label()
             box_label.set_use_markup(True)
-            box_label.set_label('<b> %s - Tips</b>'%to_xml(title))
+            tip_title = '<b>Tips</b>'
+            if title:
+                tip_title = '<b> %s - Tips</b>'%to_xml(title)
+            box_label.set_label(tip_title)
             box.pack_start(box_label, True, True)
             box.pack_end(disablebtn, False, False)
             box.pack_end(closebtn, False, False)
