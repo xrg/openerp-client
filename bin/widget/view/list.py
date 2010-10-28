@@ -445,7 +445,8 @@ class ViewList(parser_view):
                         rpc.write(map(lambda x:x.id,self.source_group_child),val)
                         self.reload = True
                         self.screen.reload()
-                treeview.expand_all()
+                for expand_path in (data, path):
+                    treeview.expand_to_path(expand_path)
             else:
                 idx = path[0]
                 if position in (gtk.TREE_VIEW_DROP_BEFORE,
