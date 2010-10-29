@@ -258,6 +258,7 @@ class rpc_session(object):
 
     def login(self, uname, passwd, url, port, protocol, db):
         _protocol = protocol
+        self._ogws = {}
         if _protocol == 'http://' or _protocol == 'https://':
             self.rpcproto = 'xmlrpc'
             _url = _protocol + url+':'+str(port)+'/xmlrpc'
@@ -370,6 +371,7 @@ class rpc_session(object):
     def context_reload(self):
         self.context = {}
         self.timezone = 'utc'
+        self.server_options = []
         self.context = self.rpc_exec_auth('/object', 'execute', 'res.users', 'context_get') or {}
         if 'lang' in self.context:
             import translate
@@ -419,12 +421,11 @@ class rpc_session(object):
             print "Server options: %s" % (self.server_options,)
         except xmlrpclib.Fault, err:
             # TODO diagnose other faults.
-            self.server_options = []
+            pass
         except Exception, e:
             import traceback
             traceback.print_exc()
             common.warning(_("Could not get server's options: %s") % e)
-            self.server_options = []
 
     def logged(self):
         return self._open
