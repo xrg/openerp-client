@@ -27,7 +27,7 @@ def logged(showtime):
         for key, value in kwargs.items():
             vector.append( '  kwarg %10s: %r' % ( key, value ) )
         vector.append( '  result: %r' % res )
-        debug_log = logging.getLogger('debug').info("\n".join(vector))
+        logging.getLogger('debug').info("\n".join(vector))
 
     def outerwrapper(f):
         def wrapper(*args, **kwargs):
@@ -41,7 +41,7 @@ def logged(showtime):
             finally:
                 log(f, res, *args, **kwargs)
                 if showtime:
-                    wrapper_log = logging.getLogger('wrapper').info("  time delta: %s" % (time.time() - now))
+                    logging.getLogger('wrapper').info("  time delta: %s" % (time.time() - now))
         return wrapper
     return outerwrapper
 
@@ -67,7 +67,6 @@ def debug(what):
             --log-level=debug
 
     """
-    import logging
     from inspect import stack
     import re
     from pprint import pformat
