@@ -26,8 +26,6 @@ import options
 import gzip
 import StringIO
 
-DNS_CACHE = {}
-
 # disable Nagle problem.
 # -> http://www.cmlenz.net/archives/2008/03/python-httplib-performance-problems
 class NoNagleSocket(socket.socket):
@@ -57,10 +55,7 @@ class mysocket:
         if not port:
             protocol, buf = host.split('//')
             host, port = buf.split(':')
-        if host in DNS_CACHE:
-            host = DNS_CACHE[host]
         self.sock.connect((host, int(port)))
-        DNS_CACHE[host], port = self.sock.getpeername()
 
     def disconnect(self):
         # on Mac, the connection is automatically shutdown when the server disconnect.
