@@ -153,6 +153,11 @@ class form(object):
         return self.sig_switch(widget, 'graph')
 
     def get_resource(self, widget=None, get_id=None):
+        ## This has been done due to virtual ids coming from
+        ## crm meeting. like '3-20101012155505' which are not in existence
+        ## and needed to be converted to real ids
+        if isinstance(get_id, str):
+            get_id = int(get_id.split('-')[0])
         all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])
         if widget:
             get_id = int(widget.get_value())
@@ -163,9 +168,9 @@ class form(object):
             else:
                 self.screen.load([get_id])
             self.screen.current_view.set_cursor()
-        # Temporary Commented
-#        else:
- #           common.message(_('Resource ID does not exist for this object!'))
+        else:
+            if widget:
+                common.message(_('Resource ID does not exist for this object!'))
 
     def get_event(self, widget, event, win):
         if event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):
@@ -319,7 +324,7 @@ class form(object):
             id = res
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
-        else:
+        elif len(self.screen.models.models):
             common.warning(_('Invalid form, correct red fields !'),_('Error !'))
             self.message_state(_('Invalid form, correct red fields !'), color="red")
         if warning:
