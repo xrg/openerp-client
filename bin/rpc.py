@@ -247,13 +247,13 @@ class rpc_session(object):
             raise rpc_exception(1, 'not logged')
 
     def rpc_exec_auth_wo(self, obj, method, *args):
-            sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
-            return sock.exec_auth(method, *args)
+        sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
+        return sock.exec_auth(method, *args)
 
     def rpc_exec_auth(self, obj, method, *args):
         if self._open:
-                sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
-                return sock.exec_auth(method, *args)
+            sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
+            return sock.exec_auth(method, *args)
         else:
             raise rpc_exception(1, 'not logged')
 
