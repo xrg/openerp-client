@@ -412,8 +412,8 @@ def _server_ask(server_widget, parent=None):
     protocol_widget = win_gl.get_widget('protocol')
 
     protocol = {
-        'XML-RPC': 'http://',
-        'NET-RPC (faster)': 'socket://',
+        'XML-RPC (port : 8069)': 'http://',
+        'NET-RPC (faster)(port : 8070)': 'socket://',
     }
 
     if check_ssl():
