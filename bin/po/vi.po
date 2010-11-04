@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-01-27 05:47+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2010-11-03 08:06+0000\n"
+"Last-Translator: Nguyễn Thịnh <thinhnverp@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-29 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-11-04 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -40,20 +40,20 @@ msgstr ""
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "Đóng OpenERP, bàn phim bị trục trặc"
 
 #: bin/options.py:108
 #, python-format
 msgid "OpenERP Client %s"
-msgstr ""
+msgstr "OpenERP Máy Khách %s"
 
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr ""
+msgstr "cấu hình file alternate"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "cho phép chạy từng bước cơ bản  Alias for '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
@@ -2241,11 +2241,11 @@ msgstr ""
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "Thành phố"
 
 #: bin/dia_survey.glade:586
 msgid "System:"
-msgstr ""
+msgstr "hệ thống"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
@@ -2253,47 +2253,48 @@ msgstr ""
 
 #: bin/dia_survey.glade:672
 msgid "How did you hear about us:"
-msgstr ""
+msgstr "hãy nói ý kiến của bạn về chúng tôi"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "kế hoạch dùng openerp của chúng tôi."
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "kế hoạch dùng openERP sau khi phục vụ"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"nói cho tôi biết tại sao bạn dùng openerp và phần mền hiện nay của bạn."
 
 #: bin/dia_survey.glade:790
 msgid "<b>Keep Informed</b>"
-msgstr ""
+msgstr "<b>gữi lệnh đã thực hiện</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "tôi muốn nhận sách về openerp (pdf) qua email"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
-msgstr ""
+msgstr "điện thoại / đi dộng"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "Email :"
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
-msgstr ""
+msgstr "Tên Bạn :"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "GTK- hủy"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "GTK - Chấp Nhận"
 
 #~ msgid "The content of the widget or excpetion if not valid"
 #~ msgstr "lưa"
