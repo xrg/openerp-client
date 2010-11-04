@@ -292,7 +292,7 @@ class many2one(interface.widget_interface):
             self.sig_find(widget, event, leave=True)
 
     def sig_activate(self, widget, event=None, leave=False):
-        self.sig_find(widget, event, leave=True)
+        return self.sig_find(widget, event, leave=True)
 
     def sig_new(self, *args):
         self.wid_text.disconnect(self.wid_text_focus_out_id)
@@ -317,8 +317,7 @@ class many2one(interface.widget_interface):
             if self._view.modelfield.get(self._view.model) or \
                     not self.wid_text.get_text():
                 return False
-            self.sig_activate(widget, event, leave=True)
-            return True
+            return not self.sig_activate(widget, event, leave=True)
         return False
 
     def sig_changed(self, *args):
