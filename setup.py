@@ -13,7 +13,7 @@ Spiff Gtk Widgets provides a collection of Gtk widgets:
 """,
       author           = 'Samuel Abels',
       author_email     = 'cheeseshop.python.org@debain.org',
-      license          = 'GPLv2',
+      license          = 'AGPLv3',
       package_dir      = {'': srcdir},
       packages         = [p for p in find_packages(srcdir)],
       install_requires = [],
@@ -22,7 +22,7 @@ Spiff Gtk Widgets provides a collection of Gtk widgets:
       classifiers      = [
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'License :: OSI Approved :: GNU Affero General Public License v3',
         'Programming Language :: Python',
         'Topic :: Security',
         'Topic :: Software Development :: Libraries',
