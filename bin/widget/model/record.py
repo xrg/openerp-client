@@ -347,7 +347,7 @@ class ModelRecord(signal_event.signal_event):
         if not attrs.get('confirm', False) or common.sur(attrs['confirm']):
             button_type = attrs.get('type', 'workflow')
             obj = service.LocalService('action.main')
-            
+
             if button_type == 'workflow':
                 result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
                                                    self.resource, attrs['name'], self.id)
@@ -371,8 +371,6 @@ class ModelRecord(signal_event.signal_event):
                 result = rpc.session.rpc_exec_auth('/object', 'execute',
                                                    self.resource,attrs['name'], [id], context)
                 if isinstance(result, dict):
-                    if 'menu_reload' in result:
-                        service.LocalService('gui.main').sig_win_menu(reload = True)
                     if not result.get('nodestroy', False):
                         screen.window.destroy()
                     obj._exec_action(result, {}, context=context)
