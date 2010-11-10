@@ -2846,7 +2846,6 @@ Web: http://tiny.be</property>
                         <property name="label" translatable="yes">Import Compatible</property>
                         <property name="use_underline">True</property>
                         <property name="response_id">0</property>
-                        <property name="active">True</property>
                         <property name="draw_indicator">True</property>
                       </widget>
                       <packing>
