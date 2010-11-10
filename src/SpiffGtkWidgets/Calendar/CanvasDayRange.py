@@ -107,14 +107,14 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
     def _get_event_view(self, row, start, end, horizontal):
         if horizontal:
-            if self.hevent_views.has_key(row):
+            if row in self.hevent_views:
                 view = self.hevent_views[row]
                 view.set_range(start, end)
                 return view
             view = CanvasHEventView(self.cal, start, end)
             self.hevent_views[row] = view
         else:
-            if self.vevent_views.has_key(row):
+            if row in self.vevent_views:
                 view = self.vevent_views[row]
                 view.set_range(start, end)
                 return view
@@ -128,7 +128,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
 
     def _remove_vevent_view(self, cell):
-        if not self.vevent_views.has_key(cell):
+        if cell not in self.vevent_views:
             return
         view = self.vevent_views[cell]
         self.gridbox.remove(view)
@@ -137,7 +137,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
 
     def _remove_hevent_view(self, cell):
-        if not self.hevent_views.has_key(cell):
+        if cell not in self.hevent_views:
             return
         view = self.hevent_views[cell]
         self.gridbox.remove(view)
