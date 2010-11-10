@@ -12,13 +12,13 @@ Spiff Gtk Widgets provides a collection of Gtk widgets:
   - A calendar similar to Google's online calendar
 """,
       author           = 'Samuel Abels',
-      author_email     = 'cheeseshop.python.org@debain.org',
+      author_email     = 'knipknap@gmail.com',
       license          = 'AGPLv3',
       package_dir      = {'': srcdir},
       packages         = [p for p in find_packages(srcdir)],
       install_requires = [],
       keywords         = 'spiff gtk widgets textview annotations calendar',
-      url              = 'http://code.google.com/p/spiff-gtkwidgets/',
+      url              = 'https://github.com/knipknap/SpiffGtkWidgets/',
       classifiers      = [
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',

@@ -1,4 +1,4 @@
-# Copyright (C) 2008 Samuel Abels <http://debain.org>
+# Copyright (C) 2008-2011 Samuel Abels
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License
