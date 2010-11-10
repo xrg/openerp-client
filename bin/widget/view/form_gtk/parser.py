@@ -62,7 +62,9 @@ class Button(Observable):
 
 #           self.widget.set_use_stock(True)
 #       self.widget.set_label(args['label'])
-
+        tooltip = attrs.get('help')
+        if tooltip:
+            self.widget.set_tooltip_markup(tooltip)
         self.widget.show()
         self.widget.connect('clicked', self.button_clicked)
 
