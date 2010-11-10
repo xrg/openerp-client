@@ -90,7 +90,6 @@ class Button(Observable):
         model = self.form.screen.current_model
         self.form.set_value()
         button_type = self.attrs.get('special', '')
-
         if button_type=='cancel':
             self.form.screen.window.destroy()
             if 'name' in self.attrs.keys():
@@ -112,6 +111,8 @@ class Button(Observable):
                                 '/object', 'execute',
                                 self.form.screen.name,
                                 self.attrs['name'],[], model.context_get())
+                    if 'menu_reload' in result:
+                        service.LocalService('gui.main').sig_win_menu(reload = True)
                     datas = {}
                     obj = service.LocalService('action.main')
                     obj._exec_action(result,datas,context=self.form.screen.context)

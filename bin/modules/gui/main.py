@@ -1131,10 +1131,12 @@ class terp_main(service.Service):
         win.set_transient_for(self.window)
         win.show_all()
 
-    def sig_win_menu(self, widget=None, quiet=True):
+    def sig_win_menu(self, widget=None, quiet=True, reload = False):
         for p in range(len(self.pages)):
             if self.pages[p].model=='ir.ui.menu':
                 self.notebook.set_current_page(p)
+                if reload:
+                    self.pages[p].handlers['but_reload']()
                 return True
         res = self.sig_win_new(widget, type='menu_id', quiet=quiet)
         if not res:
