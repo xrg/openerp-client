@@ -39,8 +39,133 @@ import ConfigParser
 
 import threading
 import time
-
+import pango
 import rpc
+
+class action_tips(object):
+    def __init__(self, help):
+        self.help = help
+        self.help_frame = False
+        self.create_action_tip()
+
+    def close_or_disable_tips(self, button, disable_all=False):
+        if self.help_frame:
+            if disable_all:
+                rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write',
+                                          [rpc.session.uid], {'menu_tips':False})
+            self.help_frame.destroy()
+            self.help_frame = False
+        return True
+
+    def create_action_tip(self):
+        if self.help.get('msg', False):
+            msg = self.help.get('msg', '')
+            msg = msg.replace('\n',' ').replace('\t',' ')
+            if len(msg) < 80:
+                msg = '\t\t \t \t' + msg
+            title = self.help.get('title', '')
+
+            help_label = gtk.Label()
+            help_label.set_use_markup(True)
+            def size_allocate(label, allocation):
+                label.set_size_request( allocation.width - 2, -1 )
+            help_label.connect( "size-allocate", size_allocate )
+            help_label.set_label('<span font_desc="italic" foreground="black">%s</span>'% (msg))
+
+            help_label.set_alignment(0.3, 1)
+            help_label.set_line_wrap(True)
+            help_label.set_justify(gtk.JUSTIFY_FILL)
+            layout = help_label.get_layout()
+            layout.set_wrap(pango.WRAP_WORD_CHAR)
+
+            table = gtk.Table(1, 8)
+            table.set_homogeneous(False)
+            table.set_col_spacings(40)
+            table.attach(help_label, 3, 6, 0, 1, ypadding=10)
+            label_box = gtk.EventBox()
+            label_box.add(table)
+
+            # Close current tip button
+            closebtn = gtk.Button('Close current tip')
+            closebtn.set_tooltip_markup('''<span foreground="darkred"><b>Close Current Tip:</b></span>
+This will hide the current tip. It will be displayed again next time you open this menu item, unless you disable all tips using the <b>'Menu Tips'</b> option in the user preferences.''')
+            image = gtk.Image()
+            image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+            closebtn.set_image(image)
+            closebtn.set_relief(gtk.RELIEF_NONE)
+            closebtn.unset_flags(gtk.CAN_FOCUS)
+            closebtn.connect('clicked', self.close_or_disable_tips)
+
+             # Disable button
+            disablebtn = gtk.Button('Disable all tips')
+            disablebtn.set_tooltip_markup('''<span foreground="darkred"><b>Disable all tips:</b></span>
+This will disable the display of tips on all menu items.
+To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user preferences.''')
+            image1 = gtk.Image()
+            image1.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+            disablebtn.set_image(image1)
+            disablebtn.set_relief(gtk.RELIEF_NONE)
+            disablebtn.unset_flags(gtk.CAN_FOCUS)
+            disablebtn.connect('clicked', self.close_or_disable_tips, True)
+
+            # frame Title with the two above created buttons
+            box = gtk.HBox()
+            box_label = gtk.Label()
+            box_label.set_use_markup(True)
+            tip_title = '<b>Tips</b>'
+            if title:
+                tip_title = '<b> %s - Tips</b>'%to_xml(title)
+            box_label.set_label(tip_title)
+            box.pack_start(box_label, True, True)
+            box.pack_end(disablebtn, False, False)
+            box.pack_end(closebtn, False, False)
+            box.show_all()
+            # finally the frame
+            self.help_frame = gtk.Frame()
+            self.help_frame.set_label_widget(box)
+            self.help_frame.set_label_align(0.5,0.5)
+            self.help_frame.add(label_box)
+            self.help_frame.show_all()
+            return True
+        return False
+
+
+def OpenERP_Progressbar(parent=None, title='OpenERP Computing'):
+    if not parent:
+        parent = service.LocalService('gui.main').window
+
+    win = gtk.Dialog('OpenERP', parent, gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
+    win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+    win.set_title(_(title))
+    win.set_resizable(False)
+    vbox = gtk.VBox(False, 0)
+
+    hbox = gtk.HBox(False, 13)
+    hbox.set_border_width(10)
+
+    img = gtk.Image()
+    img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
+    hbox.pack_start(img, expand=True, fill=False)
+
+    vbox2 = gtk.VBox(False, 0)
+    label = gtk.Label()
+    label.set_markup('<b>'+_('Operation in progress')+'</b>')
+    label.set_alignment(0.0, 0.5)
+    vbox2.pack_start(label, expand=True, fill=False)
+    vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
+    vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
+    hbox.pack_start(vbox2, expand=True, fill=True)
+    vbox.pack_start(hbox)
+
+    pb = gtk.ProgressBar()
+    pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
+    vbox.pack_start(pb, expand=True, fill=False)
+
+    win.vbox.pack_start(vbox, expand=True, fill=True)
+    win.set_has_separator(False)
+    win.set_transient_for(parent)
+    win.show_all()
+    return win, pb
 
 def _search_file(file, dir='path.share'):
     tests = [
@@ -262,14 +387,14 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
             maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
-<b>You do not have a valid Open ERP maintenance contract !</b>
-If you are using Open ERP in production, it is highly suggested to subscribe
+<b>You do not have a valid OpenERP maintenance contract !</b>
+If you are using OpenERP in production, it is highly suggested to subscribe
 a maintenance program.
 
-The Open ERP maintenance contract provides you a bugfix guarantee and an
+The OpenERP maintenance contract provides you a bugfix guarantee and an
 automatic migration system so that we can fix your problems within a few
 hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the Open ERP editor.
+to the quality team of the OpenERP editor.
 
 The maintenance program offers you:
 * Automatic migrations on new versions,
@@ -286,13 +411,13 @@ is displayed on the second tab.
 <b>An unknown error has been reported.</b>
 
 Your maintenance contract does not cover all modules installed in your system !
-If you are using Open ERP in production, it is highly suggested to upgrade your
+If you are using OpenERP in production, it is highly suggested to upgrade your
 contract.
 
 If you have developed your own modules or installed third party module, we
 can provide you an additional maintenance contract for these modules. After
 having reviewed your modules, our quality team will ensure they will migrate
-automatically for all future stable versions of Open ERP at no extra cost.
+automatically for all future stable versions of OpenERP at no extra cost.
 
 Here is the list of modules not covered by your maintenance contract:
 %s
@@ -305,14 +430,14 @@ is displayed on the second tab.""") % (", ".join(maintenance['uncovered_modules'
         maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
-<b>You do not have a valid Open ERP maintenance contract !</b>
-If you are using Open ERP in production, it is highly suggested to subscribe
+<b>You do not have a valid OpenERP maintenance contract !</b>
+If you are using OpenERP in production, it is highly suggested to subscribe
 a maintenance program.
 
-The Open ERP maintenance contract provides you a bugfix guarantee and an
+The OpenERP maintenance contract provides you a bugfix guarantee and an
 automatic migration system so that we can fix your problems within a few
 hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the Open ERP editor.
+to the quality team of the OpenERP editor.
 
 The maintenance program offers you:
 * Automatic migrations on new versions,
@@ -331,8 +456,10 @@ is displayed on the second tab.
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
     win.set_icon(OPENERP_ICON)
-    win.set_title("Open ERP - %s" % title)
+    win.set_title("OpenERP - %s" % title)
 
+    if not isinstance(message, basestring):
+        message = str(message)
     xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % escape(message))
 
     details_buffer = gtk.TextBuffer()
@@ -379,7 +506,6 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     msg = to_xml(msg)
     if title is not None:
         msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
-
     dialog.set_icon(OPENERP_ICON)
     dialog.set_markup(msg)
     dialog.show_all()
@@ -475,11 +601,14 @@ def ask(question, parent=None):
 
     response = win.run()
     parent.present()
+    # grab a safe copy of the entered text before destroy()
+    #to avoid GTK bug https://bugzilla.gnome.org/show_bug.cgi?id=613241
+    value = entry.get_text()
     win.destroy()
     if response == gtk.RESPONSE_CANCEL:
         return None
     else:
-        return entry.get_text()
+        return value
 
 def concurrency(resource, id, context, parent=None):
     dia = glade.XML(common.terp_path("openerp.glade"),'dialog_concurrency_exception',gettext.textdomain())

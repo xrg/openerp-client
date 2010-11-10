@@ -77,7 +77,7 @@ class ViewWidget(object):
     modelfield = property(_get_modelfield)
 
 class ViewForm(parser_view):
-    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None, submenu=None):
+    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None, submenu=None, help={}):
         super(ViewForm, self).__init__(window, screen, widget, children, state_aware_widgets, toolbar, submenu)
         self.view_type = 'form'
         self.model_add_new = False
@@ -88,8 +88,18 @@ class ViewForm(parser_view):
             if isinstance(w.widget, Button):
                 w.widget.form = self
         self.widgets = dict([(name, ViewWidget(self, widget, name)) for name, widget in children.items()])
-
         sm_vbox = False
+        self.help = help
+        self.help_frame = False
+        if self.help:
+            action_tips = common.action_tips(self.help)
+            self.help_frame = action_tips.help_frame
+            if self.help_frame:
+                vbox = gtk.VBox()
+                vbox.pack_start(self.help_frame, expand=False, fill=False, padding=2)
+                vbox.pack_end(self.widget)
+                vbox.show_all()
+                self.widget = vbox
         if submenu:
             expander = gtk.Expander("Submenus")
             sm_vbox = gtk.VBox()
@@ -145,65 +155,23 @@ class ViewForm(parser_view):
                 hb.pack_start(sm_vbox)
             else:
                 hb.pack_start(self.widget)
-
-#            self.hpaned = gtk.HPaned()
-#            self.hpaned.pack1(self.widget,True,False)
-            #tb = gtk.Toolbar()
-            #tb.set_orientation(gtk.ORIENTATION_VERTICAL)
-            #tb.set_style(gtk.TOOLBAR_BOTH_HORIZ)
-            #tb.set_icon_size(gtk.ICON_SIZE_MENU)
             tb = gtk.VBox()
             eb = gtk.EventBox()
-#            if toolbar['print'] or toolbar['action'] or toolbar['relate']:
-#                lb = gtk.Label()
-#                lb.set_markup("Sidebar")
-#                expander_tool = gtk.Expander(lb.get_text())
-#                expander_tool.set_tooltip_text(_('Hide/Show Sidebar'))
-#                eb.set_tooltip_text(_('Click here to open'))
-#                expander_tool.add(eb)
-#                expander_tool.set_expanded(True)
-#                def expander_callback(expander_tool, user_data):
-#                    if expander_tool.get_expanded():
-#                        expander_tool.set_label(lb.get_text())
-#                    else:
-#                        expander_tool.set_label('')
-#                expander_tool.connect("notify::expanded", expander_callback)
-#                hb.pack_start(expander_tool, False, False)
-#            else:
             hb.pack_start(eb, False, False)
             eb.add(tb)
             eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
             self.widget = hb
-#            self.hpaned.pack2(eb,False,True)
-#            self.hpaned.connect("button-press-event",self.move_paned_press)
-#            self.hpaned.connect("button-release-event",self.move_paned_release,window)
-#            window.connect("window-state-event",self.move_paned_window,window)
-#            self.widget = self.hpaned
-
             sep = False
-            #setLabel={'print':'Reports','action':'Wizards','relate':'Direct Links'}
             for icontype in ('print', 'action', 'relate'):
-
                 if icontype in ('action','relate') and sep:
-                    #tb.insert(gtk.SeparatorToolItem(), -1)
                     tb.pack_start(gtk.HSeparator(), False, False, 2)
                     sep = False
-
-                #list_done = []
                 for tool in toolbar[icontype]:
-                    #if icontype not in list_done:
-                    #    l = gtk.Label('<b>' + setLabel[icontype] + '</b>')
-                    #    l.set_use_markup(True)
-#                   #     l.set_alignment(0.0, 0.5) # If Labels want to be Left-aligned
-                    #    tb.pack_start(l, False, False, 3)
-                    #    tb.pack_start(gtk.HSeparator(), False, False, 2)
-                    #    list_done.append(icontype)
                     iconstock = {
                         'print': gtk.STOCK_PRINT,
                         'action': gtk.STOCK_EXECUTE,
                         'relate': gtk.STOCK_JUMP_TO,
                     }.get(icontype, gtk.STOCK_ABOUT)
-
                     icon = gtk.Image()
                     icon.set_from_stock(iconstock, gtk.ICON_SIZE_BUTTON)
                     lbl = gtk.Label(tool['string'])
@@ -217,15 +185,12 @@ class ViewForm(parser_view):
                     tbutton.set_relief(gtk.RELIEF_NONE)
                     tb.pack_start(tbutton, False, False, 2)
 
-                    #tbutton = gtk.ToolButton()
-                    #tbutton.set_label_widget(hb) #tool['string'])
-                    #tbutton.set_stock_id(iconstock)
-                    #tb.insert(tbutton,-1)
-
                     def _action(button, action, type):
-                        data={}
-                        context=self.screen.context
-                        act=action.copy()
+                        data = {}
+                        context = self.screen.context
+                        if 'group_by' in context:
+                            del context['group_by']
+                        act = action.copy()
                         if type in ('print', 'action'):
                             self.screen.save_current()
                             id = self.screen.current_model and self.screen.current_model.id
@@ -288,7 +253,6 @@ class ViewForm(parser_view):
                                         'execute', tool['type'], 'read',
                                         [tool['id']], ['name'], {'lang': code})
                                 val = val[0]
-
                                 label = gtk.Label(lang['name'])
                                 entry = gtk.Entry()
                                 entry.set_text(val['name'])
@@ -297,7 +261,6 @@ class ViewForm(parser_view):
                                 hbox.pack_start(label, expand=False, fill=False)
                                 hbox.pack_start(entry, expand=True, fill=True)
                                 vbox.pack_start(hbox, expand=False, fill=True)
-
                             vp = gtk.Viewport()
                             vp.set_shadow_type(gtk.SHADOW_NONE)
                             vp.add(vbox)
@@ -323,7 +286,6 @@ class ViewForm(parser_view):
                             window.present()
                             win.destroy()
                             return res
-
                         menu = gtk.Menu()
                         item = gtk.ImageMenuItem(_('Translate label'))
                         item.connect("activate", callback, tool, window)
@@ -332,52 +294,9 @@ class ViewForm(parser_view):
                         menu.append(item)
                         menu.popup(None,None,None,event.button,event.time)
                         return True
-
                     tbutton.connect('clicked', _action, tool, icontype)
-                    tbutton.connect('button_press_event', _translate_label,
-                            tool, self.window)
-
+                    tbutton.connect('button_press_event', _translate_label, tool, self.window)
                     sep = True
-
-#    def move_paned_press(self, widget, event):
-#        if not self.prev:
-#            self.prev = self.hpaned.get_position()
-#            return False
-#        if self.prev and not self.flag:
-#            self.prev = self.hpaned.get_position()
-#            return False
-#
-#    def move_paned_release(self, widget, event, w):
-#        if self.hpaned.get_position()<self.current and self.hpaned.get_position()!=self.prev:
-#            self.prev = self.hpaned.get_position()
-#        else:
-#            self.current= self.hpaned.get_position()
-#        if not self.flag and self.current == self.prev:
-#            self.flag=True
-#            self.hpaned.set_position(w.get_size()[0])
-#        elif not self.flag and self.current>self.prev:
-#            if self.hpaned.get_position()<self.current:
-#                self.hpaned.set_position(self.prev)
-#            else:
-#                self.hpaned.set_position(self.current)
-#        elif self.flag:
-#            if self.current<self.prev:
-#                self.hpaned.set_position(self.current)
-#            elif self.current>self.prev:
-#                self.hpaned.set_position(self.prev)
-#            self.flag=False
-#        self.current = self.hpaned.get_position() - 7
-#        return False
-#
-#    def move_paned_window(self, widget, event, w):
-#        if not self.prev:
-#            self.prev=self.hpaned.get_position()
-#        self.hpaned.set_position(self.prev)
-#        self.prev = 0
-#        self.current = 0
-#        self.flag = False
-#        return False
-
 
     def __getitem__(self, name):
         return self.widgets[name]
@@ -476,11 +395,25 @@ class ViewForm(parser_view):
             state = model['state'].get(model)
         else:
             state = 'draft'
+        button_focus = field_focus = None
         for widget in self.widgets.values():
             widget.display(model, state)
+            if widget.widget.attrs.get('focus_field'):
+                field_focus =  widget.widget
+
         for widget in self.state_aware_widgets:
             widget.state_set(state)
             widget.attrs_set(model)
+            if widget.widget.attrs.get('focus_button'):
+                button_focus =  widget.widget
+
+        if field_focus:
+            field_focus.grab_focus()
+
+        if button_focus:
+            self.screen.window.set_default(button_focus.widget)
+            if not field_focus:
+                button_focus.grab_focus()
         return True
 
     def set_cursor(self, new=False):
@@ -493,8 +426,6 @@ class ViewForm(parser_view):
                 modelfield = model.mgroup.mfields.get(widgets.widget_name, None)
                 if not modelfield:
                     continue
-                if modelfield.get_state_attrs(model).get('default_focus',False):
-                    focus_widget = widgets
                 if not modelfield.get_state_attrs(model).get('valid', True):
                      if widgets.widget.position > position:
                           continue

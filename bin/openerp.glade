@@ -812,7 +812,7 @@
                             <property name="label" translatable="yes">Repeat latest _action</property>
                             <property name="use_underline">True</property>
                             <signal name="activate" handler="on_form_repeat_activate"/>
-                            <accelerator key="Z" modifiers="GDK_CONTROL_MASK" signal="activate"/>
+                            <accelerator key="Y" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK" signal="activate"/>
                           </widget>
                         </child>
                         <child>
@@ -1126,6 +1126,14 @@
                     <property name="use_underline">True</property>
                     <child>
                       <widget class="GtkMenu" id="help_menu">
+                      <child>
+                          <widget class="GtkCheckMenuItem" id="opt_debug_mode_tooltip">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Enable Debug Mode Tooltips</property>
+                            <property name="use_underline">True</property>
+                            <signal name="activate" handler="on_opt_debug_mode_activate"/>
+                          </widget>
+                        </child>
                         <child>
                           <widget class="GtkImageMenuItem" id="support">
                             <property name="visible">True</property>
@@ -1172,21 +1180,6 @@
                               <widget class="GtkImage" id="image4243">
                                 <property name="visible">True</property>
                                 <property name="stock">gtk-jump-to</property>
-                                <property name="icon_size">1</property>
-                              </widget>
-                            </child>
-                          </widget>
-                        </child>
-                        <child>
-                          <widget class="GtkImageMenuItem" id="help_tips">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">_Tips</property>
-                            <property name="use_underline">True</property>
-                            <signal name="activate" handler="on_help_tips_activate"/>
-                            <child internal-child="image">
-                              <widget class="GtkImage" id="image4244">
-                                <property name="visible">True</property>
-                                <property name="stock">gtk-index</property>
                                 <property name="icon_size">1</property>
                               </widget>
                             </child>
@@ -1295,6 +1288,7 @@
               <widget class="GtkToolButton" id="but_previous">
                 <property name="visible">True</property>
                 <property name="tooltip" translatable="yes">Go to previous matched search</property>
+                <property name="label" translatable="yes">Previous</property>
                 <property name="stock_id">gtk-go-back</property>
                 <signal name="clicked" handler="on_but_previous_clicked"/>
               </widget>
@@ -1306,6 +1300,7 @@
               <widget class="GtkToolButton" id="but_next">
                 <property name="visible">True</property>
                 <property name="tooltip" translatable="yes">Go to next matched resource</property>
+                <property name="label" translatable="yes">Next</property>
                 <property name="stock_id">gtk-go-forward</property>
                 <signal name="clicked" handler="on_but_next_clicked"/>
               </widget>
@@ -2052,7 +2047,7 @@ Web: http://tiny.be</property>
                     <child>
                       <widget class="GtkHBox" id="toolbar11">
                         <property name="visible">True</property>
-	  		<child>
+        <child>
                           <widget class="GtkToggleToolButton" id="toggle_underline">
                             <property name="visible">True</property>
                             <property name="stock_id">gtk-underline</property>
@@ -2082,7 +2077,7 @@ Web: http://tiny.be</property>
                             <property name="expand">False</property>
                           </packing>
                         </child>
-			<child>
+      <child>
                           <widget class="GtkToggleToolButton" id="toggle_strikethrough">
                             <property name="visible">True</property>
                             <property name="stock_id">gtk-strikethrough</property>
@@ -2135,35 +2130,35 @@ Web: http://tiny.be</property>
                             <property name="expand">False</property>
                           </packing>
                         </child>
-			<child>
+      <child>
                       <widget class="GtkToolbar" id="toolbar111">
                         <property name="visible">True</property>
                         <property name="toolbar_style">GTK_TOOLBAR_ICONS</property>
-			<child>
-			  <widget class="GtkFontButton" id="font_button">
-			    <property name="visible">True</property>
-			    <property name="can_focus">True</property>
-			    <signal name="font-set" handler="on_font_button_clicked"/>
-			  </widget>
-			  <packing>
-			    <property name="padding">0</property>
-			    <property name="expand">False</property>
-			    <property name="fill">False</property>
-			 </packing>
-		       </child>
-		       <child>
-			    <widget class="GtkColorButton" id="color_button">
-			      <property name="visible">True</property>
-			      <property name="can_focus">True</property>
-			      <signal name="color-set" handler="on_color_button_clicked"/>
-			    </widget>
-			    <packing>
-			      <property name="padding">0</property>
-			      <property name="expand">False</property>
-			      <property name="fill">False</property>
-			    </packing>
-		       </child>
-		      </widget>
+      <child>
+        <widget class="GtkFontButton" id="font_button">
+          <property name="visible">True</property>
+          <property name="can_focus">True</property>
+          <signal name="font-set" handler="on_font_button_clicked"/>
+        </widget>
+        <packing>
+          <property name="padding">0</property>
+          <property name="expand">False</property>
+          <property name="fill">False</property>
+       </packing>
+           </child>
+           <child>
+          <widget class="GtkColorButton" id="color_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <signal name="color-set" handler="on_color_button_clicked"/>
+          </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+          </packing>
+           </child>
+          </widget>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
@@ -2844,7 +2839,7 @@ Web: http://tiny.be</property>
                 <child>
                     <widget class="GtkHBox" id="hbox100">
                     <property name="visible">True</property>
-	                <child>
+                  <child>
                       <widget class="GtkCheckButton" id="import_compatible">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -2860,7 +2855,7 @@ Web: http://tiny.be</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
-				   </widget>
+           </widget>
                 </child>
                 <child>
                   <widget class="GtkLabel" id="label100">
@@ -3238,43 +3233,11 @@ Save as CSV</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">
-      <widget class="GtkVBox" id="dialog-vbox11">
+      <widget class="GtkVBox" id="win_search_vbox">
         <property name="visible">True</property>
+        <property name="spacing">2</property>
         <child>
-          <widget class="GtkHBox" id="search_hbox">
-            <property name="visible">True</property>
-            <child>
-              <placeholder/>
-            </child>
-          </widget>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
-          <widget class="GtkHSeparator" id="hseparator24">
-            <property name="visible">True</property>
-          </widget>
-          <packing>
-            <property name="expand">False</property>
-            <property name="position">3</property>
-          </packing>
-        </child>
-        <child>
-          <widget class="GtkScrolledWindow" id="search_sw">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-            <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-            <child>
-              <placeholder/>
-            </child>
-          </widget>
-          <packing>
-            <property name="position">4</property>
-          </packing>
+          <placeholder/>
         </child>
         <child internal-child="action_area">
           <widget class="GtkHButtonBox" id="dialog-action_area12">
@@ -6752,6 +6715,7 @@ Latin1</property>
                   <widget class="GtkEntry" id="ent_db">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="activates_default">True</property>
                     <property name="width_chars">16</property>
                   </widget>
                   <packing>
@@ -7221,7 +7185,7 @@ Latin1</property>
                     <property name="tooltip" translatable="yes">This is the password of the 'admin' user that will be created in your new database. It has to be the same than the above field.</property>
                     <property name="xalign">1</property>
                     <property name="label" translatable="yes">&lt;sup&gt;&lt;b&gt;&lt;span foreground="dark green"&gt;?&lt;/span&gt;&lt;/b&gt;&lt;/sup&gt;Confirm Password:</property>
-            	    <property name="use_markup">True</property>
+                  <property name="use_markup">True</property>
                   </widget>
                   <packing>
                     <property name="top_attach">8</property>
@@ -7337,13 +7301,13 @@ Latin1</property>
           </packing>
         </child>
          <child>
-          	<widget class="GtkHSeparator" id="button_separator">
-            	<property name="visible">True</property>
-          	</widget>
-          	<packing>
-            	<property name="expand">False</property>
-            	<property name="position">4</property>
-          	</packing>
+            <widget class="GtkHSeparator" id="button_separator">
+              <property name="visible">True</property>
+            </widget>
+            <packing>
+              <property name="expand">False</property>
+              <property name="position">4</property>
+            </packing>
         </child>
         <child internal-child="action_area">
           <widget class="GtkHButtonBox" id="hbuttonbox7">
@@ -8314,10 +8278,10 @@ This document has been modified while you were editing it.
             <property name="items" translatable="yes"></property>
           </widget>
           <packing>
-	        <property name="expand">False</property>
-	        <property name="fill">False</property>
-	        <property name="position">1</property>
-	      </packing>
+          <property name="expand">False</property>
+          <property name="fill">False</property>
+          <property name="position">1</property>
+        </packing>
     </child>
     <child>
       <widget class="GtkComboBox" id="combo_operator">
@@ -8397,13 +8361,13 @@ OR</property>
             <property name="n_rows">2</property>
             <property name="n_columns">2</property>
             <child>
-		      <widget class="GtkEntry" id="action_name">
-		        <property name="visible">True</property>
-		        <property name="editable">True</property>
-		        <property name="can_focus">True</property>
-		        <property name="activates_default">True</property>
-		        <property name="width_chars">6</property>
-		      </widget>
+          <widget class="GtkEntry" id="action_name">
+            <property name="visible">True</property>
+            <property name="editable">True</property>
+            <property name="can_focus">True</property>
+            <property name="activates_default">True</property>
+            <property name="width_chars">6</property>
+          </widget>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>

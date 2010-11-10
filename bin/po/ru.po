@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-04-09 04:27+0000\n"
-"Last-Translator: Nikolay Chesnokov <chesnokov_n@msn.com>\n"
+"PO-Revision-Date: 2010-10-25 18:30+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-04-10 03:48+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 04:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -22,7 +22,7 @@ msgid "Print Workflow"
 msgstr "Процесс печати"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Процесс печати (подробн.)"
 
 #
@@ -68,7 +68,7 @@ msgstr "укажите альтернативный файл настроек"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr "Разрешить ьазовую отладку.  Синоним для '--log-level=debug'"
+msgstr "Разрешить базовую отладку. Синоним для '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
@@ -267,6 +267,9 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Ваша проблема не была отправлена разработчикам!\n"
+"Пожалуйста, сообщите об ошибке вручную:\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
@@ -568,10 +571,11 @@ msgstr "Название поля"
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
+"Вы не можете импортировать поле %s, потому что мы не можем определить его"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "Вы не выбрали ни одного поля для импорта"
 
 #
 # File: bin/modules/gui/window/win_selection.py, line: 52
@@ -1037,35 +1041,35 @@ msgstr "Скрипт миграции"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "Идентификатор контракта"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "Пароль контракта"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Вы уже имеете последнюю версию"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Доступны следующие обновления"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Вы не можете перенести вашу базу данных"
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "Перенос базы данных"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Ваша база данных была обновлена."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Ваши базы данных были обновлены"
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
@@ -1285,6 +1289,8 @@ msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Ошибка авторизации!\n"
+"Не правильное имя пользователя или пароль!"
 
 #
 # File: bin/modules/gui/main.py, line: 761
@@ -1771,7 +1777,7 @@ msgstr "Ошибка записи файла: %s"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Не правильный формат даты! Год должен быть в формате \"1899\"!"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 115
@@ -1790,7 +1796,7 @@ msgstr "Этот виджет доступен только для чтения!
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Неверное значение даты или времени! Год должен быть больше чем 1899"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
@@ -1821,7 +1827,7 @@ msgstr "Неправильное изображение для кнопки!"
 
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "Введите текст в смежной области, прежде чем добавлять переводы!"
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 480
@@ -2063,11 +2069,11 @@ msgstr "_Удалить базу данных"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "Загрузить Код Миграции"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "Мигрировать База(ы) данных"
 
 #
 # File: bin/openerp.glade, line: 372
@@ -2899,11 +2905,11 @@ msgstr "<b>Предопределенный Экспорт</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Подходит для импорта"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
-msgstr ""
+msgstr "<b>Выберете вариант для экспорта</b>"
 
 #: bin/openerp.glade:2871
 msgid "Available Fields"
@@ -3494,7 +3500,7 @@ msgstr "Предыдущий изменяемый виджет"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #
 # File: bin/openerp.glade, line: 7383
@@ -3977,11 +3983,11 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "Подключитесь позже."
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "Подключитесь сейчас."
 
 #: bin/openerp.glade:7843
 msgid "Extension Manager"
@@ -4133,10 +4139,13 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"Пожалуйста, заполните следующую форму для того, чтобы помочь нам улучшить "
+"<b>  <span foreground=\"red\"> <i> Open </ I> </ SPAN> ERP </ B> качество "
+"новых разработок"
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "<b>Ваша Компания</b>"
 
 #
 # File: bin/openerp.glade, line: 5791
@@ -4171,7 +4180,7 @@ msgstr "Ваша роль:"
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "Сотрудники:"
 
 #
 # File: bin/openerp.glade, line: 5953
@@ -4184,7 +4193,7 @@ msgstr "Страна:"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "Город:"
 
 #
 # File: bin/openerp.glade, line: 5887
@@ -4197,7 +4206,7 @@ msgstr "Система:"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>Ваши интересы</b>"
 
 #
 # File: bin/openerp.glade, line: 5831
@@ -4210,15 +4219,17 @@ msgstr "Как вы узнали о нас:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "Вы планируете использовать OpenERP"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "Вы планируете предоставлять услуги по Open ERP"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"Объясните нам, почему вы пробуете Open ERP и какое у вас программное "
+"обеспечение:"
 
 #
 # File: bin/openerp.glade, line: 6318
@@ -4232,6 +4243,7 @@ msgstr "<b>Получать информацию</b>"
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
 msgstr ""
+"Я хочу получать электронные книги по  Open ERP (PDF) на электронную почту"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
@@ -4239,7 +4251,7 @@ msgstr "Телефон:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "Адрес эл. почты:"
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
@@ -4247,11 +4259,11 @@ msgstr "Ваше имя:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "Отмена"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "Ok"
 
 #
 # File: bin/widget_search/wid_int.py, line: 44

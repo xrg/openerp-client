@@ -85,6 +85,8 @@ class main(service.Service):
         if isinstance(action, bool) or 'type' not in action:
             return
         # Updating the context : Adding the context of action in order to use it on Views called from buttons
+        if datas.get('id',False):
+            context.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[]), 'active_model': datas.get('model',False)})
         context.update(tools.expr_eval(action.get('context','{}'), context.copy()))
         if action['type'] in ['ir.actions.act_window', 'ir.actions.submenu']:
             for key in ('res_id', 'res_model', 'view_type', 'view_mode',
@@ -112,20 +114,21 @@ class main(service.Service):
 
             if not action.get('domain', False):
                 action['domain']='[]'
-            ctx = context.copy()
-            if datas.get('id',False):
-                ctx.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[]), 'active_model': datas.get('model',False)})
-            ctx.update(tools.expr_eval(action.get('context','{}'), ctx.copy()))
-
-            a = ctx.copy()
-            a['time'] = time
-            a['datetime'] = datetime
-            domain = tools.expr_eval(action['domain'], a)
-
+            domain_ctx = context.copy()
+            domain_ctx['time'] = time
+            domain_ctx['datetime'] = datetime
+            domain = tools.expr_eval(action['domain'], domain_ctx)
+            help = {}
+            if action.get('display_menu_tip', False):
+                msg = action.get('help', False)
+                title = action.get('name', False)
+                if msg and len(msg):
+                    help['msg'] =  msg
+                    help['title'] = title or ''
             if datas.get('domain', False):
                 domain.append(datas['domain'])
             if action.get('target', False)=='new':
-                dia = dialog(datas['res_model'], id=datas.get('res_id',None), window=datas.get('window',None), domain=domain, context=ctx, view_ids=view_ids,target=True, view_type=datas.get('view_mode', 'tree').split(','))
+                dia = dialog(datas['res_model'], id=datas.get('res_id',None), window=datas.get('window',None), domain=domain, context=context, view_ids=view_ids,target=True, view_type=datas.get('view_mode', 'tree').split(','))
                 if dia.dia.get_has_separator():
                     dia.dia.set_has_separator(False)
                 dia.run()
@@ -133,14 +136,12 @@ class main(service.Service):
             else:
                 obj = service.LocalService('gui.window')
                 obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
-                        action['view_type'], datas.get('window',None), ctx,
-                        datas['view_mode'], name=action.get('name', False),
+                        action['view_type'], datas.get('window',None), context,
+                        datas['view_mode'], name=action.get('name', False), help=help,
                         limit=datas['limit'], auto_refresh=datas['auto_refresh'], auto_search = datas['auto_search'], search_view = datas['search_view'])
 
         elif action['type']=='ir.actions.server':
-            ctx = context.copy()
-            ctx.update({'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])})
-            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.server', 'run', [action['id']], ctx)
+            res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.server', 'run', [action['id']], context)
             if res:
                 if not isinstance(res, list):
                     res = [res]
@@ -186,9 +187,9 @@ class main(service.Service):
                 return False
         keyact = {}
         for action in actions:
-            keyact[action['name'].encode('utf8')] = action
+            action_name = action.get('name') or ''
+            keyact[action_name.encode('utf8')] = action
         keyact.update(adds)
-
         res = common.selection(_('Select your action'), keyact)
         if res:
             (name,action) = res

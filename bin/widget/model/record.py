@@ -92,7 +92,7 @@ class ModelRecord(signal_event.signal_event):
             return True
         return False
 
-    def update_context_with_concurrency_check_data(self, context):
+    def update_context_with_concurrency(self, context):
         if self.id and self.is_modified():
             context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%s" % (self.resource, self.id)] = self._concurrency_check_data
         for name, field in self.mgroup.mfields.items():
@@ -100,7 +100,7 @@ class ModelRecord(signal_event.signal_event):
                 v = self.value[field.name]
                 from itertools import chain
                 for m in chain(v.models, v.models_removed):
-                    m.update_context_with_concurrency_check_data(context)
+                    m.update_context_with_concurrency(context)
 
     def get(self, get_readonly=True, includeid=False, check_load=True, get_modifiedonly=False):
         if check_load:
@@ -137,6 +137,7 @@ class ModelRecord(signal_event.signal_event):
                     return self.id
                 value = self.get(get_readonly=False, get_modifiedonly=True)
                 context = self.context_get().copy()
+                self.update_context_with_concurrency(context)
                 res = self.rpc.write([self.id], value, context)
                 #if type(res) in (int, long):
                 #    self.id = res
@@ -160,7 +161,13 @@ class ModelRecord(signal_event.signal_event):
             for d in domain:
                 if d[0] in self.mgroup.fields:
                     if d[1] == '=':
-                        val[d[0]] = d[2]
+                        if d[2]:
+                            value = d[2]
+                            # domain containing fields like M2M/O2M should return values as list
+                            if self.mgroup.fields[d[0]].get('type', '') in ('many2many','one2many'):
+                                if not isinstance(d[2], (bool,list)):
+                                    value = [d[2]]
+                            val[d[0]] = value
                     if d[1] == 'in' and len(d[2]) == 1:
                         val[d[0]] = d[2][0]
             self.set_default(val)
@@ -206,10 +213,23 @@ class ModelRecord(signal_event.signal_event):
         return value
 
     def set_default(self, val):
+        fields_with_on_change = {}
         for fieldname, value in val.items():
             if fieldname not in self.mgroup.mfields:
                 continue
-            self.mgroup.mfields[fieldname].set_default(self, value)
+            # Fields with on_change should be processed last otherwise
+            # we might override the values the on_change() sets with
+            # the next defaults. There's still a possible issue with
+            # the order in which we process the defaults of the fields
+            # with on_change() in case they cascade, but that's fixable
+            # normally in the view a single clean on_change on the first
+            # field.
+            if self.mgroup.mfields[fieldname].attrs.get('on_change',False):
+                fields_with_on_change[fieldname] = value
+            else:
+                self.mgroup.mfields[fieldname].set_default(self, value)
+        for field, value in fields_with_on_change.items():
+            self.mgroup.mfields[field].set_default(self, value)
         self._loaded = True
         self.signal('record-changed')
 
@@ -291,6 +311,10 @@ class ModelRecord(signal_event.signal_event):
                     if fieldname not in self.mgroup.mfields:
                         continue
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
+            if 'context' in response:
+                value = response.get('context', {})
+                self.mgroup.context = value
+
             warning=response.get('warning', {})
             if warning:
                 common.warning(warning['message'], warning['title'])
@@ -318,61 +342,53 @@ class ModelRecord(signal_event.signal_event):
         id     : Id of the record for which the button is clicked
         attrs  : Button Attributes
         """
-
         if not id:
             id = self.id
-        if not attrs.get('confirm', False) or \
-                    common.sur(attrs['confirm']):
-                button_type = attrs.get('type', 'workflow')
-                if button_type == 'workflow':
-                    result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
-                                            self.resource,
-                                            attrs['name'], self.id)
-                    if type(result)==type({}):
-                        if result['type']== 'ir.actions.act_window_close':
-                            screen.window.destroy()
-                        else:
-                            datas = {'ids':[id], 'id':id}
-                            obj = service.LocalService('action.main')
-                            obj._exec_action(result, datas)
-                    elif type([]) == type(result):
-                        datas = {'ids':[id]}
-                        obj = service.LocalService('action.main')
-                        for rs in result:
-                            obj._exec_action(rs, datas)
+        if not attrs.get('confirm', False) or common.sur(attrs['confirm']):
+            button_type = attrs.get('type', 'workflow')
+            obj = service.LocalService('action.main')
 
-                elif button_type == 'object':
-                    if not self.id:
-                        return
-                    context = self.context_get()
-                    if 'context' in attrs:
-                        context.update(self.expr_eval(attrs['context'], check_load=False))
-                    result = rpc.session.rpc_exec_auth(
-                        '/object', 'execute',
-                        self.resource,
-                        attrs['name'],
-                        [id], context
-                    )
+            if button_type == 'workflow':
+                result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
+                                                   self.resource, attrs['name'], self.id)
+                if type(result)==type({}):
+                    if result['type']== 'ir.actions.act_window_close':
+                        screen.window.destroy()
+                    else:
+                        datas = {'ids':[id], 'id':id}
+                        obj._exec_action(result, datas)
+                elif type([]) == type(result):
+                    datas = {'ids':[id]}
+                    for rs in result:
+                        obj._exec_action(rs, datas)
 
-                    if type(result)==type({}):
-                        if not result.get('nodestroy', False):
-                            screen.window.destroy()
-                        datas = {}
-                        obj = service.LocalService('action.main')
-                        obj._exec_action(result, datas, context=context)
+            elif button_type == 'object':
+                if not self.id:
+                    return
+                context = self.context_get()
+                if 'context' in attrs:
+                    context.update(self.expr_eval(attrs['context'], check_load=False))
+                result = rpc.session.rpc_exec_auth('/object', 'execute',
+                                                   self.resource,attrs['name'], [id], context)
+                if isinstance(result, dict):
+                    if not result.get('nodestroy', False):
+                        screen.window.destroy()
+                    obj._exec_action(result, {}, context=context)
 
-                elif button_type == 'action':
-                    obj = service.LocalService('action.main')
-                    action_id = int(attrs['name'])
-
-                    context = screen.context.copy()
-                    if 'context' in attrs:
-                        context.update(self.expr_eval(attrs['context'], check_load=False))
-
-                    obj.execute(action_id, {'model':self.resource, 'id': id or False, 'ids': id and [id] or [], 'report_type': 'pdf'}, context=context)
-
-                else:
-                    raise Exception, 'Unallowed button type'
+            elif button_type == 'action':
+                action_id = int(attrs['name'])
+                context = screen.context.copy()
+                if 'context' in attrs:
+                    context.update(self.expr_eval(attrs['context'], check_load=False))
+                datas = {'model':self.resource,
+                         'id': id or False,
+                         'ids': id and [id] or [],
+                         'report_type': 'pdf'
+                         }
+                obj.execute(action_id, datas, context=context)
+            else:
+                raise Exception, 'Unallowed button type'
+            if screen.current_model and screen.current_view.view_type != 'tree':
                 screen.reload()
 
 

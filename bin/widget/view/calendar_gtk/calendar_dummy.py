@@ -19,35 +19,32 @@
 #
 ##############################################################################
 
-import gobject
-import gtk
-from interface import parser_view
+from widget.view.interface import parser_view
 
-class ViewGraph(parser_view):
+class DummyViewCalendar(parser_view):
 
     def __init__(self, window, screen, widget, children=None, buttons=None,
-            toolbar=None, submenu=None, help={}):
-        super(ViewGraph, self).__init__(window, screen, widget, children,
+            toolbar=None, submenu=None, help=None):
+        super(DummyViewCalendar, self).__init__(window, screen, widget, children,
                 buttons, toolbar, submenu)
-        self.view_type = 'graph'
-        self.model_add_new = False
+        self.view_type = 'dummycalendar'
         self.view = widget
         self.widget = widget.widget
-        self.widget.screen = screen
+        screen.dummy_cal = True
+        self.view.screen = screen
+
 
     def cancel(self):
         pass
 
     def __str__(self):
-        return 'ViewGraph (%s)' % self.screen.resource
+        pass
 
     def __getitem__(self, name):
         return None
 
     def destroy(self):
-        self.widget.destroy()
-        del self.screen
-        del self.widget
+        pass
 
     def set_value(self):
         pass
@@ -55,15 +52,17 @@ class ViewGraph(parser_view):
     def reset(self):
         pass
 
+    def reset(self):
+        pass
+
     def display(self):
-        self.view.display(self.screen.models)
-        return None
+        pass
 
     def signal_record_changed(self, *args):
         pass
 
     def sel_ids_get(self):
-        return []
+        pass
 
     def on_change(self, callback):
         pass

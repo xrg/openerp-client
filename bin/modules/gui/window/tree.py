@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -32,7 +32,7 @@ import options
 import win_export
 
 class tree(object):
-    def __init__(self, view, model, res_id=False, domain=[], context={}, window=None, name=False):
+    def __init__(self, view, model, res_id=False, domain=[], context={}, help={}, window=None, name=False):
         self.glade = glade.XML(common.terp_path("openerp.glade"),'win_tree_container',gettext.textdomain())
         self.widget = self.glade.get_widget('win_tree_container')
         self.widget.show_all()
@@ -85,7 +85,22 @@ class tree(object):
             'on_tbsc_clicked': self.sc_btn,
         }
 
-        self.vp.add(self.tree_res.widget_get())
+        self.help = help
+        self.help_frame = False
+        wid = self.tree_res.widget_get()
+        if self.help:
+            action_tips = common.action_tips(self.help)
+            self.help_frame = action_tips.help_frame
+            if self.help_frame:
+                vbox = gtk.VBox()
+                vbox.pack_start(self.help_frame, expand=False, fill=False, padding=2)
+                vbox.pack_end(wid)
+                vbox.show_all()
+                wid = vbox
+        if self.help_frame:
+            self.vp.add_with_viewport(wid)
+        else:
+            self.vp.add(wid)
         self.sig_reload()
 
         for signal in dict:

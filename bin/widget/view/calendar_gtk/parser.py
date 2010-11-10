@@ -26,6 +26,7 @@ import gtk.glade
 import gettext
 import common
 import gobject
+from mx import DateTime
 from datetime import datetime, date
 
 from SpiffGtkWidgets import Calendar
@@ -407,12 +408,16 @@ class ViewCalendar(object):
             if event[fld] and fmt:
                 event[fld] = time.strptime(event[fld][:19], fmt)
 
-            # default start time is 9:00 AM
-            if typ == 'date' and fld == self.date_start:
-                if event[fld]:
-                    ds = list(event[fld])
+            # default start/stop time is 9:00 AM / 5:00 PM
+            # if you set it to 0:00, then Calendar.Event removes 1 second to date_stop,
+            # which sets it back to the day before at 23:59:59
+            if typ == 'date' and event[fld]:
+                ds = list(event[fld])
+                if fld == self.date_start:
                     ds[3] = 9
-                    event[fld] = tuple(ds)
+                elif fld == self.date_stop:
+                    ds[3] = 17
+                event[fld] = tuple(ds)
 
     def __get_event(self, model):
 
@@ -514,9 +519,9 @@ class parser_calendar(interface.parser_interface):
 
         axis = []
         axis_data = {}
-        for node in root_node.childNodes:
+        for node in root_node:
             node_attrs = node_attributes(node)
-            if node.localName == 'field':
+            if node.tag == 'field':
                 axis.append(str(node_attrs['name']))
                 axis_data[str(node_attrs['name'])] = node_attrs
 

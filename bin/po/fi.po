@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-05-19 11:24+0000\n"
-"Last-Translator: antsu <Unknown>\n"
+"PO-Revision-Date: 2010-10-25 18:12+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-27 03:42+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 04:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -22,7 +22,7 @@ msgid "Print Workflow"
 msgstr "Tulosta työnkulku"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Tulosta työnkulku (Monimutkainen)"
 
 #: bin/plugins/__init__.py:41

@@ -23,7 +23,7 @@ import os
 import sys
 import tempfile
 import time
-
+from datetime import datetime
 import base64
 
 import gtk
@@ -73,19 +73,19 @@ class wid_binary(interface.widget_interface):
 
                 self.add(box)
 
-        self.but_select = binButton('gtk-open', _('Select'), False)
+        self.but_select = binButton('terp-folder-orange', _('Select'), True)
         self.but_select.connect('clicked', self.sig_select)
         self.widget.pack_start(self.but_select, expand=False, fill=False)
 
-        self.but_exec = binButton('gtk-execute', _('Open'), False)
+        self.but_exec = binButton('terp-folder-blue', _('Open'), True)
         self.but_exec.connect('clicked', self.sig_execute)
         self.widget.pack_start(self.but_exec, expand=False, fill=False)
 
-        self.but_save_as = binButton('gtk-save-as', _('Save As'), False)
+        self.but_save_as = binButton('gtk-save-as', _('Save As'), True)
         self.but_save_as.connect('clicked', self.sig_save_as)
         self.widget.pack_start(self.but_save_as, expand=False, fill=False)
 
-        self.but_remove = binButton('gtk-clear', _('Clear'), False)
+        self.but_remove = binButton('gtk-clear', _('Clear'), True)
         self.but_remove.connect('clicked', self.sig_remove)
         self.widget.pack_start(self.but_remove, expand=False, fill=False)
 
@@ -104,7 +104,9 @@ class wid_binary(interface.widget_interface):
             self.but_remove.show()
 
     def _get_filename(self):
-        return self._view.model.value.get(self.has_filename) or self._view.model.value.get('name', self.data_field_name)
+        return self._view.model.value.get(self.has_filename) \
+               or self._view.model.value.get('name', self.data_field_name) \
+               or datetime.now().strftime('%c')
 
     def sig_execute(self,widget=None):
         try:

@@ -90,6 +90,7 @@ class configmanager(object):
             'printer.path': 'none',
             'logging.level': 'INFO',
             'logging.output': 'stdout',
+            'debug_mode_tooltips':False,
             'client.default_path': os.path.expanduser('~'),
             'support.recipient': 'support@openerp.com',
             'support.support_id' : '',
@@ -101,7 +102,7 @@ class configmanager(object):
             'client.filetype': {},
             'help.index': 'http://doc.openerp.com/',
             'help.context': 'http://doc.openerp.com/index.php?model=%(model)s&lang=%(lang)s',
-            'client.timeout': 300,
+            'client.timeout': 3600,
             'client.form_text_spellcheck': True,
         }
         loglevels = ('critical', 'error', 'warning', 'info', 'debug', 'debug_rpc', 'debug_rpc_answer', 'notset')

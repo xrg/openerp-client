@@ -13,7 +13,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA     
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 ##############################################################################
 
@@ -113,14 +113,14 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
     def _get_event_view(self, row, start, end, horizontal):
         if horizontal:
-            if self.hevent_views.has_key(row):
+            if row in self.hevent_views:
                 view = self.hevent_views[row]
                 view.set_range(start, end)
                 return view
             view = CanvasHEventView(self.cal, start, end)
             self.hevent_views[row] = view
         else:
-            if self.vevent_views.has_key(row):
+            if row in self.vevent_views:
                 view = self.vevent_views[row]
                 view.set_range(start, end)
                 return view
@@ -134,7 +134,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
 
     def _remove_vevent_view(self, cell):
-        if not self.vevent_views.has_key(cell):
+        if not cell in self.vevent_views:
             return
         view = self.vevent_views[cell]
         self.gridbox.remove(view)
@@ -143,7 +143,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
 
     def _remove_hevent_view(self, cell):
-        if not self.hevent_views.has_key(cell):
+        if not cell in self.hevent_views:
             return
         view = self.hevent_views[cell]
         self.gridbox.remove(view)
@@ -309,7 +309,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
                                 box_height = alloc[3])
 
 
-    def do_allocate(self, width, height, origin_changed): 
+    def do_allocate(self, width, height, origin_changed):
         days           = (self.range[1] - self.range[0]).days + 1
         rows           = int(math.ceil(float(days) / 7.0))
         cols           = days
@@ -342,8 +342,8 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
 
     def on_grid_paint(self, grid, ptr, rect):
-        # catching this signal is ugly, but trying to do this  
-        # in do_allocate() will result in painful to avoid event 
+        # catching this signal is ugly, but trying to do this
+        # in do_allocate() will result in painful to avoid event
         # loops.
         days = (self.range[1] - self.range[0]).days + 1
         rows = int(math.ceil(float(days) / 7.0))

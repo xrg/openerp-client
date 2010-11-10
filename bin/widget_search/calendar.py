@@ -81,7 +81,11 @@ class calendar(wid_int.wid_int):
         self.widget.pack_start(self.eb2, expand=False, fill=False)
 
         if self.default_search:
-            self.entry1.set_text(self.default_search)
+            try:
+                date = tools.datetime_util.strptime(self.default_search, DT_FORMAT)
+                self.entry1.set_text(date.strftime(LDFMT))
+            except:
+                pass
 
     def _date_get(self, str):
         try:
@@ -95,6 +99,8 @@ class calendar(wid_int.wid_int):
             self.cal_open(widget, event, dest, parent)
             return True
 
+    def grab_focus(self):
+        return self.entry1.grab_focus()
 
     def _value_get(self):
         val = {'domain': [], 'context':{}}
@@ -202,7 +208,11 @@ class datetime(wid_int.wid_int):
         self.widget.pack_start(self.eb2, expand=False, fill=False)
 
         if self.default_search:
-            self.entry1.set_text(self.default_search)
+            try:
+               date = tools.datetime_util.strptime(self.default_search, DHM_FORMAT)
+               self.entry1.set_text(date.strftime(self.format))
+            except:
+                pass
 
     def _date_get(self, str):
         try:
@@ -231,6 +241,9 @@ class datetime(wid_int.wid_int):
         self.entry2.set_text(value)
 
     value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
+
+    def grab_focus(self):
+        return self.entry1.grab_focus()
 
     def cal_open(self, widget, event, dest, parent=None):
         win = gtk.Dialog(_('OpenERP - Date selection'), parent,

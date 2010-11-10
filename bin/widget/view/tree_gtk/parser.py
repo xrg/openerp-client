@@ -26,6 +26,7 @@ import gtk
 import math
 import cgi
 
+
 import tools
 import tools.datetime_util
 
@@ -48,12 +49,21 @@ import gobject
 import pango
 
 def send_keys(renderer, editable, position, treeview):
-    editable.connect('key_press_event', treeview.on_keypressed)
+    editable.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
+    editable.set_data('renderer', renderer)
     editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
     if isinstance(editable, gtk.ComboBoxEntry):
         editable.connect('changed', treeview.on_editing_done)
 
 def sort_model(column, screen):
+    unsaved_model =  [x for x in screen.models if x.id == None or x.modified]
+    if unsaved_model:
+        res =  common.message(_('You have unsaved record(s) !  \n\nPlease Save them before sorting !'))
+        return res
+    group_by = screen.context.get('group_by',[])
+    group_by_no_leaf = screen.context.get('group_by_no_leaf')
+    if column.name in group_by or group_by_no_leaf:
+        return True
     screen.current_view.set_drag_and_drop(column.name == 'sequence')
     if screen.sort == column.name:
         screen.sort = column.name+' desc'
@@ -63,33 +73,37 @@ def sort_model(column, screen):
     if screen.type in ('many2many','one2many'):
         screen.sort_domain = [('id','in',screen.ids_get())]
     screen.search_filter()
+    if group_by:
+        screen.current_view.widget_tree.expand_all()
+
 
 class parser_tree(interface.parser_interface):
+
     def parse(self, model, root_node, fields):
         dict_widget = {}
         attrs = tools.node_attributes(root_node)
         on_write = attrs.get('on_write', '')
         editable = attrs.get('editable', False)
-        if editable:
-            treeview = EditableTreeView(editable)
-        else:
-            treeview = EditableTreeView(editable)
+        treeview = EditableTreeView(editable)
         treeview.colors = dict()
         self.treeview = treeview
+
         for color_spec in attrs.get('colors', '').split(';'):
             if color_spec:
                 colour, test = color_spec.split(':')
-                treeview.colors[colour] = test
-        treeview.set_property('rules-hint', True)
+                treeview.colors.setdefault(colour,[])
+                treeview.colors[colour].append(test)
         if not self.title:
             self.title = attrs.get('string', 'Unknown')
-
+        treeview.set_property('rules-hint', True)
         treeview.sequence = False
         treeview.connect("motion-notify-event", treeview.set_tooltip)
+        treeview.connect('key-press-event', treeview.on_tree_key_press)
 
-        for node in root_node.childNodes:
+        for node in root_node:
             node_attrs = tools.node_attributes(node)
-            if node.localName == 'button':
+
+            if node.tag == 'button':
                 cell = Cell('button')(node_attrs['string'], treeview, node_attrs)
                 cell.name = node_attrs['name']
                 cell.attrs = node_attrs
@@ -101,8 +115,8 @@ class parser_tree(interface.parser_interface):
                 col.set_clickable(True)
                 col.set_cell_data_func(cell.renderer, cell.setter)
                 col.name = node_attrs['name']
-                col._type = 'Button'
                 col.attrs = node_attrs
+                col._type = 'Button'
                 col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 col.tooltip = node_attrs['string']
                 if node_attrs.get('help',False):
@@ -110,11 +124,9 @@ class parser_tree(interface.parser_interface):
                 col.set_fixed_width(20)
                 visval = eval(str(node_attrs.get('invisible', 'False')), {'context':self.screen.context})
                 col.set_visible(not visval)
-
                 treeview.append_column(col)
-                col._type = 'Button'
-                col.name = node_attrs['name']
-            if node.localName == 'field':
+
+            if node.tag == 'field':
                 handler_id = False
                 fname = str(node_attrs['name'])
                 if fields[fname]['type'] in ('image', 'binary'):
@@ -156,24 +168,22 @@ class parser_tree(interface.parser_interface):
                     col_label.set_text(fields[fname]['string'])
                 col_label.show()
                 col.set_widget(col_label)
-
-
                 col.name = fname
                 col._type = fields[fname]['type']
                 col.set_cell_data_func(renderer, cell.setter)
                 col.set_clickable(True)
                 twidth = {
-                    'integer': (60,170),
-                    'float': (80,300),
+                    'integer': (60, 170),
+                    'float': (80, 300),
                     'float_time': (80,150),
-                    'date': (70,100),
-                    'datetime': (145,145),
-                    'selection': (90,250),
-                    'char': (100,False),
-                    'one2many': (50,False),
-                    'many2many': (50,False),
-                    'boolean': (20,80),
-                    'progressbar':(150,200)
+                    'date': (70, False),
+                    'datetime': (145, 145),
+                    'selection': (90, 250),
+                    'char': (100, False),
+                    'one2many': (50, False),
+                    'many2many': (50, False),
+                    'boolean': (20, 80),
+                    'progressbar':(150, 200)
                 }
 
                 if col._type not in twidth:
@@ -270,39 +280,48 @@ class Char(object):
         self.attrs_set(model, cell)
         color = self.get_color(model)
         cell.set_property('foreground', str(color))
+        align = 0
         if self.attrs['type'] in ('float', 'integer', 'boolean'):
             align = 1
-        else:
-            align = 0
-        gb = self.treeview.screen.context.get('group_by', False)
+        gb = self.treeview.screen.context.get('group_by')
+        cell.set_property('font-desc', None)
+        cell.set_property('background', None)
+        cell.set_property('xalign', align)
         if isinstance(model, group_record) and gb:
+            cell.set_property('foreground', 'black')
             font = pango.FontDescription('Times New Roman bold 10')
+            if self.field_name in model.field_with_empty_labels:
+                cell.set_property('foreground', '#AAAAAA')
+                font = pango.FontDescription('italic 10')
             cell.set_property('font-desc', font)
-
         elif self.treeview.editable:
             field = model[self.field_name]
             cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
             self.set_color(cell, model)
-        else:
-            cell.set_property('background', None)
-            cell.set_property('font-desc', None)
-        cell.set_property('xalign', align)
 
-    def set_color(self, cell, model,group_by = False):
+    def set_color(self, cell, model, group_by = False):
         field = model[self.field_name]
+        cell.set_property('background', None)
         if not field.get_state_attrs(model).get('valid', True):
             cell.set_property('background', common.colors.get('invalid', 'white'))
         elif bool(int(field.get_state_attrs(model).get('required', 0))):
             cell.set_property('background', common.colors.get('required', 'white'))
-        else:
-            cell.set_property('background', None)
+
 
     def get_color(self, model):
-        to_display = ''
-        for color, expr in self.treeview.colors.items():
-            if model.expr_eval(expr, check_load=False):
-                to_display = color
-                break
+        to_display = False
+        try:
+            for color, expr in self.treeview.colors.iteritems():
+                to_display = False
+                for cond in expr:
+                    if model.expr_eval(cond, check_load=False):
+                        to_display = color
+                        break
+                if to_display:
+                    break
+        except Exception:
+            # we can still continue if we can't get the color..
+            pass
         return to_display or 'black'
 
     def open_remote(self, model, create, changed=False, text=None):
@@ -317,7 +336,7 @@ class Char(object):
 class Int(Char):
 
     def value_from_text(self, model, text):
-        return int(text)
+        return tools.str2int(text)
 
     def get_textual_value(self, model):
         return tools.locale_format('%d', int(model[self.field_name].get_client(model) or 0))
@@ -381,7 +400,7 @@ class GenericDate(Char):
             date = DT.datetime.strptime(value[:10], self.server_format)
             return date.strftime(self.display_format)
         except:
-            if self.treeview.screen.context.get('group_by',False):
+            if self.treeview.screen.context.get('group_by'):
                 return value
             return ''
 
@@ -419,10 +438,7 @@ class Float(Char):
         return tools.locale_format('%.' + str(digit) + 'f', model[self.field_name].get_client(model) or 0.0)
 
     def value_from_text(self, model, text):
-        try:
-            return locale.atof(text)
-        except:
-            return 0.0
+        return tools.str2float(text)
 
 class FloatTime(Char):
     def get_textual_value(self, model):
@@ -646,24 +662,31 @@ class CellRendererButton(object):
                 for condition in v:
                     result = tools.calc_condition(self,model,condition)
                 if result:
-                    if k=='invisible':
-                        return True
-                    elif k=='readonly':
+                    if k == 'invisible':
+                        return 'hide'
+                    elif k == 'readonly':
                         return True
         return False
 
     def setter(self, column, cell, store, iter):
         #TODO
         model = store.get_value(iter, 0)
-        current_state = self.get_textual_value(model, 'draft')
-        tv = column.get_tree_view()
-        valid_states = self.__get_states() or []
-#         change this according to states or attrs: to not show the icon
-        attrs_check = self.attrs_set(model)
-        if attrs_check or current_state not in valid_states or isinstance(model, group_record):
-            cell.set_property('stock-id', None)
-        else:
+        if not isinstance(model, group_record) \
+               and model.parent and not model.id:
             cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+            cell.set_property("sensitive", False)
+        else:
+            current_state = self.get_textual_value(model, 'draft')
+            tv = column.get_tree_view()
+            valid_states = self.__get_states() or []
+            ## This changes the icon according to states or attrs: to not show /hide the icon
+            attrs_check = self.attrs_set(model)
+            if valid_states and current_state not in valid_states \
+                                or isinstance(model, group_record) or attrs_check == 'hide':
+                cell.set_property('stock-id', None)
+            else:
+                cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+                cell.set_property("sensitive", not attrs_check)
 
     def open_remote(self, model, create, changed=False, text=None):
         raise NotImplementedError

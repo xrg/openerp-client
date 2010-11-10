@@ -35,13 +35,14 @@ class char(interface.widget_interface):
         self.widget.set_visibility(not attrs.get('password', False))
         self.widget.set_width_chars(5)
 
-        self.widget.connect('button_press_event', self._menu_open)
+        self.widget.connect('populate-popup', self._menu_open)
         self.widget.connect('activate', self.sig_activate)
         self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
         self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
 
     def set_value(self, model, model_field):
         return model_field.set_client(model, self.widget.get_text() or False)
+    
 
     def display(self, model, model_field):
         if not model_field:

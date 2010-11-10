@@ -8,13 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-03-24 05:40+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-10-25 18:40+0000\n"
+"Last-Translator: Miguel Cabero - http://www.akretion.com "
+"<lemig@hotmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-26 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 04:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -26,7 +27,7 @@ msgstr "Imprimir Workflow"
 #
 # File: bin/plugins/__init__.py, line: 29
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Imprimir Workflow (Complexo)"
 
 #
@@ -496,13 +497,10 @@ msgstr "Importado(s) %d objeto(s) !"
 msgid "Importation Error !"
 msgstr "Erro de Impotação!"
 
-#
-# File: bin/modules/gui/window/win_import.py, line: 93
-# File: bin/modules/gui/window/win_import.py, line: 97
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
 msgid "Field name"
-msgstr "Nome do Campo"
+msgstr "Nome do campo"
 
 #: bin/modules/gui/window/win_import.py:186
 #, python-format

@@ -27,15 +27,18 @@
 #
 # Print or open a previewer
 #
-
-import os
 import base64
-import options 
-import sys
 import gc
-import common
+import platform
+import sys
 import time
+import os
+
 import gtk
+
+import common
+import options 
+
 
 class Printer(object):
 
@@ -74,43 +77,39 @@ class Printer(object):
             webbrowser.open('file://'+fn)
         return opener
 
-    def __opener(self, fnct):
-        pid = os.fork()
-        if not pid:
+    def _opener(self, fnct):
+        def opener(fn):
             pid = os.fork()
             if not pid:
-                fnct()
-            time.sleep(0.1)
-            sys.exit(0)
-        os.waitpid(pid, 0)
+                pid = os.fork()
+                if not pid:
+                    fnct(fn)
+                time.sleep(0.1)
+                sys.exit(0)
+            os.waitpid(pid, 0)
+        return opener
 
     def _findPDFOpener(self):
-        if os.name != 'nt' and os.uname()[0] == 'Darwin' :
-            def opener(fn):
-                self.__opener( lambda: os.system('/usr/bin/open -a Preview ' + fn) )
-            return opener
+        if platform.system() == 'Darwin':
+            return self._opener(lambda fn: os.system('open ' + fn))
         softpath = options.options['printer.softpath']
-        if os.name == 'nt':
-            if options.options['printer.preview']:                
+        if platform.system() == 'Windows':
+            if options.options['printer.preview']:
                 if not softpath or (softpath and softpath in ['None','none']):
-                    return lambda fn: os.startfile(fn)
+                    return os.startfile
                 else:
                     return lambda fn: os.system(softpath + ' ' + fn)
             else:
-                return lambda fn: print_w32_filename(fn)
+                return print_w32_filename
         else:
             if options.options['printer.preview']:
                 if not softpath or (softpath and softpath in ['None','none']):
-                    prog = self._findInPath(['xdg-open', 'evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview', 'acroread', 'open'])
-                    def opener(fn):
-                        self.__opener( lambda: os.execv(prog, (os.path.basename(prog), fn) ))
-                    return opener
+                    prog = self._findInPath(['xdg-open', 'gnome-open', 'see'])
+                    return self._opener(lambda fn: os.execv(prog, (os.path.basename(prog), fn)))
                 else:
-                    def opener(fn):
-                        self.__opener( lambda: os.execv(softpath, (os.path.basename(softpath), fn)) )
-                    return opener
+                    return self._opener(lambda fn: os.execv(softpath, (os.path.basename(softpath), fn)))
             else:
-                return lambda fn: print_linux_filename(fn)
+                return print_linux_filename
     
     def _findSXWOpener(self):
         if os.name == 'nt':

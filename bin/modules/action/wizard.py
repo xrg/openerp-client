@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -132,32 +132,7 @@ def execute(action, datas, state='init', parent=None, context=None):
                     i += 1
                     if i > 10:
                         if not win or not pb:
-                            win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
-                            win.set_title(_('OpenERP Computing'))
-                            win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                            vbox = gtk.VBox(False, 0)
-                            hbox = gtk.HBox(False, 13)
-                            hbox.set_border_width(10)
-                            img = gtk.Image()
-                            img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
-                            hbox.pack_start(img, expand=True, fill=False)
-                            vbox2 = gtk.VBox(False, 0)
-                            label = gtk.Label()
-                            label.set_markup('<b>'+_('Operation in progress')+'</b>')
-                            label.set_alignment(0.0, 0.5)
-                            vbox2.pack_start(label, expand=True, fill=False)
-                            vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
-                            vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
-                            hbox.pack_start(vbox2, expand=True, fill=True)
-                            vbox.pack_start(hbox)
-                            pb = gtk.ProgressBar()
-                            pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
-                            vbox.pack_start(pb, expand=True, fill=False)
-                            win.add(vbox)
-                            if not self.parent:
-                                self.parent = service.LocalService('gui.main').window
-                            win.set_transient_for(self.parent)
-                            win.show_all()
+                            win, pb = common.OpenERP_Progressbar(self.parent)
                         pb.pulse()
                         gtk.main_iteration()
                 if win:

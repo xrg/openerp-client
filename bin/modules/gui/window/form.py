@@ -39,16 +39,14 @@ import common
 import service
 import options
 import copy
-
 import gc
 
 from observator import oregistry
 from widget.screen import Screen
 
-
 class form(object):
     def __init__(self, model, res_id=False, domain=None, view_type=None,
-            view_ids=None, window=None, context=None, name=False, limit=80,
+            view_ids=None, window=None, context=None, name=False, help={}, limit=80,
             auto_refresh=False, auto_search=True, search_view=None):
         if not view_type:
             view_type = ['form','tree']
@@ -70,7 +68,7 @@ class form(object):
         self.domain = domain
         self.context = context
         self.screen = Screen(self.model, view_type=view_type,
-                context=self.context, view_ids=view_ids, domain=domain,
+                context=self.context, view_ids=view_ids, domain=domain,help=help,
                 hastoolbar=options.options['form.toolbar'], hassubmenu=options.options['form.submenu'],
                 show_search=True, window=self.window, limit=limit, readonly=bool(auto_refresh), auto_search=auto_search, search_view=search_view)
         self.screen.signal_connect(self, 'record-message', self._record_message)
@@ -155,6 +153,11 @@ class form(object):
         return self.sig_switch(widget, 'graph')
 
     def get_resource(self, widget=None, get_id=None):
+        ## This has been done due to virtual ids coming from
+        ## crm meeting. like '3-20101012155505' which are not in existence
+        ## and needed to be converted to real ids
+        if isinstance(get_id, str):
+            get_id = int(get_id.split('-')[0])
         all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])
         if widget:
             get_id = int(widget.get_value())
@@ -166,13 +169,13 @@ class form(object):
                 self.screen.load([get_id])
             self.screen.current_view.set_cursor()
         else:
-            common.message(_('Resource ID does not exist for this object!'))
+            if widget:
+                common.message(_('Resource ID does not exist for this object!'))
 
     def get_event(self, widget, event, win):
         if event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):
             win.destroy()
             self.get_resource(widget)
-
 
     def sig_goto(self, *args):
         if not self.modified_save():
@@ -248,7 +251,8 @@ class form(object):
                 ('create_uid', _('Creation User')),
                 ('create_date', _('Creation Date')),
                 ('write_uid', _('Latest Modification by')),
-                ('write_date', _('Latest Modification Date'))
+                ('write_date', _('Latest Modification Date')),
+                ('xmlid', _('Internal Module Data ID'))
             ]
             for (key,val) in todo:
                 if line[key] and key in ('create_uid','write_uid','uid'):
@@ -320,7 +324,7 @@ class form(object):
             id = res
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
-        else:
+        elif len(self.screen.models.models):
             common.warning(_('Invalid form, correct red fields !'),_('Error !'))
             self.message_state(_('Invalid form, correct red fields !'), color="red")
         if warning:
@@ -377,10 +381,11 @@ class form(object):
                 return False
             ids = [id]
         if self.screen.current_view.view_type == 'tree':
+            self.modified_save()
             sel_ids = self.screen.sel_ids_get()
             if sel_ids:
                 ids = sel_ids
-        if len(ids) or self.screen.context.get('group_by',False):
+        if len(ids) or self.screen.context.get('group_by'):
             obj = service.LocalService('action.main')
             data = {'model':self.screen.resource,
                     'id': id or False,

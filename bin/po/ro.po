@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-12-14 06:11+0000\n"
-"Last-Translator: Lucian Adrian Grijincu <lucian.grijincu@gmail.com>\n"
+"PO-Revision-Date: 2010-10-25 18:43+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-15 05:03+0000\n"
+"X-Launchpad-Export-Date: 2010-10-26 04:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -22,7 +22,7 @@ msgid "Print Workflow"
 msgstr "Tipărire Workflow"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Tipărire Workflow (Complex)"
 
 #: bin/plugins/__init__.py:41
@@ -216,7 +216,7 @@ msgstr ""
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Eroare"
 
 #: bin/common/common.py:599
 msgid "Open with..."
@@ -234,7 +234,7 @@ msgstr "Nu"
 #: bin/widget_search/reference.py:74 bin/widget_search/spinbutton.py:69
 #: bin/widget_search/calendar.py:117 bin/widget_search/spinint.py:73
 msgid "The content of the widget or ValueError if not valid"
-msgstr "Continutul widget-ului sau eroare valoare dac nu este valid"
+msgstr "Conținutul controlului sau ValueError dacă nu este valid controlul"
 
 #: bin/widget_search/form.py:145
 msgid "Limit :"
@@ -345,7 +345,7 @@ msgstr "OpenERP Caută: %s (%%d rezultate(s))"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "Fișierul este gol !"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
@@ -497,7 +497,7 @@ msgstr "Formular invalid, corectaţi câmpurile roşii!"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "Eroare !"
 
 #: bin/modules/gui/window/form.py:328 bin/modules/gui/window/form.py:423
 msgid ""
@@ -570,6 +570,8 @@ msgstr "Eroare la eliminarea resursei!"
 #: bin/modules/gui/window/tree.py:220
 msgid "Unable to chroot: no tree resource selected"
 msgstr ""
+"Nu pot configura folderul rădăcină: nicio resursă de tip arbore nu este "
+"selectată"
 
 #: bin/modules/gui/window/win_preference.py:69
 msgid "Preference"
@@ -1308,7 +1310,7 @@ msgstr "_Opțiuni"
 
 #: bin/openerp.glade:886
 msgid "_Extension Manager"
-msgstr ""
+msgstr "_Gestionar de extensii"
 
 #: bin/openerp.glade:894
 msgid "_Menubar"
@@ -1316,7 +1318,7 @@ msgstr "Bară _Meniu"
 
 #: bin/openerp.glade:902
 msgid "Text _and Icons"
-msgstr ""
+msgstr "Text și icoane"
 
 #: bin/openerp.glade:910
 msgid "_Icons only"
@@ -1332,7 +1334,7 @@ msgstr "_Formulare"
 
 #: bin/openerp.glade:940
 msgid "Right Toolbar"
-msgstr ""
+msgstr "Bara de unelte din dreapta"
 
 #: bin/openerp.glade:948
 msgid "Tabs default position"
@@ -1500,7 +1502,7 @@ msgstr "Trimite o nouă cerinţă"
 
 #: bin/openerp.glade:1581
 msgid "OpenERP - Tree Resources"
-msgstr ""
+msgstr "OpenERP - Resurse arbore"
 
 #: bin/openerp.glade:1634
 msgid "Shortcuts"
@@ -2248,7 +2250,7 @@ msgstr "Gestionar de extensii"
 
 #: bin/openerp.glade:7947
 msgid "Concurrency exception"
-msgstr ""
+msgstr "Excepție a sistemului de tranzacții concurențial"
 
 #: bin/openerp.glade:7972
 msgid ""
@@ -2261,6 +2263,14 @@ msgid ""
 "   - \"Compare\" to see the modified version.\n"
 "   - \"Write anyway\" to save your current version.\n"
 msgstr ""
+"<b>\n"
+"Afiseaza avertizare concurenta:\n"
+"</b>\n"
+"Acest document a fost modificat in timp ce l-ati editat.\n"
+"  Alegeti:\n"
+"   - \"Cancel\" pentru a anula salvarea.\n"
+"   - \"Compara\" pentru a vedea versiunea modificata.\n"
+"   - \"Salveaza oricum\" pentru a salva versiunea curenta.\n"
 
 #: bin/openerp.glade:8035
 msgid "Compare"

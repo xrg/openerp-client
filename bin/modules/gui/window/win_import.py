@@ -119,7 +119,9 @@ class win_import(object):
                 if (fields[field].get('type','') not in ('reference',)) \
                         and (not fields[field].get('readonly', False) \
                         or not dict(fields[field].get('states', {}).get(
-                            'draft', [('readonly', True)])).get('readonly', True)):
+                            'draft', [('readonly', True)])).get('readonly', True)\
+                        or not dict(fields[field].get('states', {}).get(
+                            field, [('readonly', True)])).get('readonly', True)):
                     self.fields_data[prefix_node+field] = fields[field]
                     st_name = prefix_value+fields[field]['string'] or field
                     node = self.model1.insert(prefix, 0, [st_name, prefix_node+field,

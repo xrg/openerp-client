@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-05-18 05:44+0000\n"
-"Last-Translator: shiguangyu@foxmail.com <shiguangyu@foxmail.com>\n"
+"PO-Revision-Date: 2010-10-27 08:57+0000\n"
+"Last-Translator: Sunrain <Unknown>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-27 03:42+0000\n"
+"X-Launchpad-Export-Date: 2010-10-28 05:05+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -28,7 +28,7 @@ msgstr "打印工作流"
 # File: bin/plugins/__init__.py, line: 29
 # File: bin/plugins/__init__.py, line: 29
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "打印工作流（高级）"
 
 #: bin/plugins/__init__.py:41
@@ -90,19 +90,19 @@ msgstr "设置服务器IP或名称"
 #: bin/printer/printer.py:185
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr "不能处理 %s 文件类型"
+msgstr "无法处理 %s 文件类型"
 
 #: bin/printer/printer.py:190
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
-"未实现 Linux 的自动打印。\n"
-" 使用预览选项！"
+"Linux 自动打印功能未实现。\n"
+"请使用预览选项！"
 
 #: bin/printer/printer.py:198
 msgid "Error no report"
-msgstr "生成报表出错！"
+msgstr "错误未报告"
 
 #
 # File: bin/modules/gui/main.py, line: 1120
@@ -218,6 +218,17 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>报告了一个未知错误<b>\n"
+"维护合同没有涵盖系统中安装的全部模块！如果您将OpenERP用于制造，强烈建议更新您的合同。\n"
+"如果您使用的是自己开发或第三方的模块，我们可以提供额外的维护合同。我们的质量管理团队将在检查您的模块之后，保证其在未来的OpenERP版本中都能自动移植且"
+"无需额外费用。\n"
+"\n"
+"Here is the list of modules not covered by your maintenance contract:\n"
+"%s\n"
+"\n"
+"You can use the link bellow for more information. The detail of the error\n"
+"is displayed on the second tab."
 
 #: bin/common/common.py:443
 msgid ""
@@ -1376,7 +1387,7 @@ msgstr "按钮的图标错误！"
 
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "添加至翻译之前请在相关字段内输入一些文字！"
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 480
@@ -2334,7 +2345,7 @@ msgstr "<b>预定义的导出设置</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "可兼容导入"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
@@ -3406,7 +3417,7 @@ msgstr "系统："
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>您的兴趣</b>"
 
 #
 # File: bin/openerp.glade, line: 5831
