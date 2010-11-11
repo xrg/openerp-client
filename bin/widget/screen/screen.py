@@ -783,6 +783,7 @@ class Screen(signal_event.signal_event):
             self.current_model = self.models[res_id]
         if self.views:
             self.current_view.display()
+            self.current_view.set_cursor()
             self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
             vt = self.current_view.view_type
             if self.screen_container.help_frame:
