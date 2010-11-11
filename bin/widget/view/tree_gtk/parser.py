@@ -582,7 +582,10 @@ class Selection(Char):
 
     def get_textual_value(self, model):
         selection = dict(self.attrs['selection'])
-        return selection.get(model[self.field_name].get(model), '')
+        selection_value = selection.get(model[self.field_name].get(model), '')
+        if isinstance(model, group_record):
+            return selection_value +  model[self.field_name].count
+        return selection_value
 
     def value_from_text(self, model, text):
         selection = self.attrs['selection']
