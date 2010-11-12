@@ -171,8 +171,10 @@ class BinaryField(CharField):
             c = rpc.session.context.copy()
             c.update(model.context_get())
             c['bin_size'] = bin_size
-            value = model.rpc.read([model.id], [self.name], c)[0][self.name]
-            self.set(model, value, modified=modified, get_binary_size=bin_size)
+            data = model.rpc.read([model.id], [self.name], c)
+            if data:
+                value = data[0][self.name]
+                self.set(model, value, modified=modified, get_binary_size=bin_size)
 
     def get_size_name(self):
         return "%s.size" % self.name
