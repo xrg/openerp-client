@@ -335,7 +335,10 @@ class M2MField(CharField):
         return []
 
     def get_client(self, model):
-        return model.pager_cache[self.name] or model.value[self.name] or []
+        res = []
+        if self.name in model.pager_cache:
+            res = model.pager_cache[self.name]
+        return res or model.value[self.name] or []
 
     def set(self, model, value, test_state=False, modified=False):
         model.value[self.name] = value and value[:self.limit] or []
