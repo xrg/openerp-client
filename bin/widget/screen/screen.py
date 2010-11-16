@@ -257,8 +257,8 @@ class Screen(signal_event.signal_event):
             self.offset = 0
         offset = self.offset
         self.latest_search = v
-        if self.context.get('group_by') or \
-               self.context.get('group_by_no_leaf') \
+        if (self.context.get('group_by') or \
+               self.context.get('group_by_no_leaf')) \
                and not self.current_view.view_type == 'graph':
             self.current_view.reload = True
             self.display()
