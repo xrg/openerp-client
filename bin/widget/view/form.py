@@ -82,7 +82,8 @@ class ViewForm(parser_view):
         self.view_type = 'form'
         self.model_add_new = False
         self.prev = 0
-        self.flag=False
+        self.window = window
+        self.flag = False
         self.current = 0
         for w in self.state_aware_widgets:
             if isinstance(w.widget, Button):
@@ -411,7 +412,7 @@ class ViewForm(parser_view):
             field_focus.grab_focus()
 
         if button_focus:
-            self.screen.window.set_default(button_focus.widget)
+            self.window.set_default(button_focus.widget)
             if not field_focus:
                 button_focus.grab_focus()
         return True
