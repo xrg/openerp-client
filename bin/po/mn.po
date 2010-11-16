@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-10-25 18:08+0000\n"
+"PO-Revision-Date: 2010-11-14 07:39+0000\n"
 "Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-26 04:37+0000\n"
+"X-Launchpad-Export-Date: 2010-11-15 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -40,7 +40,7 @@ msgstr "%s локалчлалыг тохируулах боломжгүй"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr "OpenERP хаагдаж байна, Гарны таслалдал"
+msgstr "OpenERP хаагдаж байна, Гарны тасалдал"
 
 #: bin/options.py:108
 #, python-format
@@ -526,7 +526,9 @@ msgstr "Алдаа!"
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
-msgstr "Энэ бичлэг засагдсан байна. Та хадгалахыг хүсч байна уу?"
+msgstr ""
+"Энэ бичлэг засагдсан байна.\n"
+" Та хадгалахыг хүсч байна уу?"
 
 #: bin/modules/gui/window/form.py:375
 msgid "You must select one or several records !"
@@ -1015,7 +1017,7 @@ msgstr "Нээх"
 
 #: bin/widget/view/form_gtk/binary.py:85 bin/widget/view/form_gtk/image.py:80
 msgid "Save As"
-msgstr "Нэрээр хадгалах"
+msgstr "Нэр өөрчилж хадгалах"
 
 #: bin/widget/view/form_gtk/binary.py:89 bin/widget/view/form_gtk/image.py:89
 msgid "Clear"
@@ -2468,4 +2470,4 @@ msgstr "gtk-г цуцлах"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr "GTK-ok"
+msgstr "GTK-тийм"
