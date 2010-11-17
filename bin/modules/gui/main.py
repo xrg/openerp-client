@@ -110,6 +110,7 @@ class DatabaseDialog(gtk.Dialog):
         self.table.attach(lbl, 0, 1, 2, 3)
         self.adminPwdEntry = gtk.Entry()
         self.adminPwdEntry.set_visibility(False)
+        self.adminPwdEntry.set_activates_default(True)
         self.table.attach(self.adminPwdEntry, 1, 2, 2, 3)
 
         self.vbox.add(self.table)
@@ -411,8 +412,8 @@ def _server_ask(server_widget, parent=None):
     protocol_widget = win_gl.get_widget('protocol')
 
     protocol = {
-        'XML-RPC': 'http://',
-        'NET-RPC (faster)': 'socket://',
+        'XML-RPC (port : 8069)': 'http://',
+        'NET-RPC (faster)(port : 8070)': 'socket://',
     }
 
     if check_ssl():

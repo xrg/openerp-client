@@ -123,7 +123,7 @@ class list_record(object):
             return
         self.loaded = True
         gb = self.context.get('group_by', [])
-        no_leaf = self.context.get('group_by_no_leaf')
+        no_leaf = self.context.get('group_by_no_leaf', False)
         if gb or no_leaf:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
                 self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
@@ -144,7 +144,7 @@ class list_record(object):
                     for field in gb:
                         if not rec.value.get(field, False):
                             field_type = self.mgroup.fields.get(field, {}).get('type', False)
-                            if field in inner_gb or field_type in ('integer', 'float'):
+                            if field in inner_gb or field_type in ('integer', 'float', 'boolean'):
                                 continue
                             rec.value[field] = 'Undefined'
                             rec.field_with_empty_labels.append(field)
