@@ -220,7 +220,9 @@ class ViewForm(parser_view):
                                 'ids': [id],
                             }
                         obj = service.LocalService('action.main')
+                        cursor = common.set_busy_cursor()
                         value = obj._exec_action(act, data, context)
+                        common.reset_busy_cursor(cursor)
                         if type in ('print', 'action'):
                             self.screen.reload()
                         return value

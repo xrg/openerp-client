@@ -186,23 +186,27 @@ class tree(object):
         self.sig_action(keyword='client_print_multi')
 
     def sig_action(self, widget=None, keyword='tree_but_action', id=None, report_type='pdf', warning=True):
-        ids = self.ids_get()
-
-        if not id and ids and len(ids):
-            id = ids[0]
-        if id:
-            ctx = self.context.copy()
-            if 'active_ids' in ctx:
-                del ctx['active_ids']
-            if 'active_id' in ctx:
-                del ctx['active_id']
-            obj = service.LocalService('action.main')
-            return obj.exec_keyword(keyword, {'model':self.model, 'id':id,
-                'ids':ids, 'report_type':report_type, 'window': self.window}, context=ctx,
-                warning=warning)
-        else:
-            common.message(_('No resource selected!'))
-        return False
+        cursor = common.set_busy_cursor()
+        try:
+            res = False
+            ids = self.ids_get()
+            if not id and ids and len(ids):
+                id = ids[0]
+            if id:
+                ctx = self.context.copy()
+                if 'active_ids' in ctx:
+                    del ctx['active_ids']
+                if 'active_id' in ctx:
+                    del ctx['active_id']
+                obj = service.LocalService('action.main')
+                res = obj.exec_keyword(keyword, {'model':self.model, 'id':id,
+                      'ids':ids, 'report_type':report_type, 'window': self.window}, context=ctx,
+                      warning=warning)
+            else:
+                common.message(_('No resource selected!'))
+        finally:
+            common.reset_busy_cursor(cursor)
+            return res
 
     def sig_open(self, widget, iter, path):
         if not self.sig_action(widget, 'tree_but_open', warning=False):
