@@ -167,6 +167,19 @@ def OpenERP_Progressbar(parent=None, title='OpenERP Computing'):
     win.show_all()
     return win, pb
 
+def set_busy_cursor():
+    root = gtk.gdk.screen_get_default()
+    cursor_win = root.get_active_window()
+    if cursor_win:
+        cursor_win.set_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
+    gtk.main_iteration(False)
+    return cursor_win
+
+def reset_busy_cursor(cursor_win=None):
+    if cursor_win:
+        cursor_win.set_cursor(None)
+    gtk.main_iteration()
+
 def _search_file(file, dir='path.share'):
     tests = [
         lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), x),
