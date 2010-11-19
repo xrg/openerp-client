@@ -13,7 +13,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA     
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 ##############################################################################
 
@@ -33,7 +33,7 @@ class Calendar(hippo.Canvas):
     RANGE_MONTH  = 2
     RANGE_CUSTOM = 3
 
-    def __init__(self, model):
+    def __init__(self, model, mode='month'):
         """
         Constructor.
         """
@@ -45,10 +45,14 @@ class Calendar(hippo.Canvas):
         self.realized      = False
         self.model         = model
         self.selected      = datetime.date(*time.localtime(time.time())[:3])
-        self.range         = self.RANGE_MONTH
-        self.visible_range = model.get_month_weeks(self.selected)
-        self.active_range  = model.get_month(self.selected)
-
+        if mode == 'week':
+            self.range         = self.RANGE_WEEK
+            self.visible_range = model.get_week(self.selected)
+            self.active_range  = self.visible_range
+        else:
+            self.range         = self.RANGE_MONTH
+            self.visible_range = model.get_month_weeks(self.selected)
+            self.active_range  = model.get_month(self.selected)
         # Widgets and canvas items.
         self.range_item = None
         self.colors     = None
