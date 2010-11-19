@@ -62,8 +62,6 @@ def sort_model(column, screen):
         return res
     group_by = screen.context.get('group_by',[])
     group_by_no_leaf = screen.context.get('group_by_no_leaf')
-    if column.name in group_by or group_by_no_leaf:
-        return True
     screen.current_view.set_drag_and_drop(column.name == 'sequence')
     if screen.sort == column.name:
         screen.sort = column.name+' desc'
@@ -73,9 +71,6 @@ def sort_model(column, screen):
     if screen.type in ('many2many','one2many'):
         screen.sort_domain = [('id','in',screen.ids_get())]
     screen.search_filter()
-    if group_by:
-        screen.current_view.widget_tree.expand_all()
-
 
 class parser_tree(interface.parser_interface):
 
