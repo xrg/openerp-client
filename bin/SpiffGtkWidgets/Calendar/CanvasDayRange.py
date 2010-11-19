@@ -257,7 +257,10 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
             # the 18 number is for the size of the scrollbar on the right
             # (don't know how to get it)
-            cell_x_off = math.ceil((float(cell_x_off)) * (width - grid_x - 18) / grid_w)
+            try:
+                cell_x_off = math.ceil((float(cell_x_off)) * (width - grid_x - 18) / grid_w)
+            except:
+                pass
 
             cell_w,      cell_h      = cell.get_allocation()
             x                        = int(grid_x + cell_x_off)

@@ -100,17 +100,23 @@ class ViewCalendar(object):
         self._small_calendar = self.glade.get_widget('calendar_small')
         self._calendar_treeview = self.glade.get_widget('calendar_treeview')
 
-        self._radio_month.set_active(True)
-        self.mode = 'month'
-        self.modex = 'month'
+        mode = attrs.get('mode','month')
         self.log = logging.getLogger('calender')
         self.fields = fields
         self.attrs = attrs
         self.axis = axis
         self.screen = None
+        if mode == 'day':
+            self._radio_day.set_active(True)
+        elif mode == 'week':
+            self._radio_week.set_active(True)
+        else:
+            self._radio_month.set_active(True)
+        self.mode = mode
+        self.modex = mode
 
         self.cal_model = TinyCalModel()
-        self.cal_view = Calendar.Calendar(self.cal_model)
+        self.cal_view = Calendar.Calendar(self.cal_model, mode)
         self.cal_view.connect('event-clicked', self._on_event_clicked)
         self.cal_view.connect('do_month_back_forward', self._back_forward)
         self.cal_view.connect('day-selected', self._change_small)
@@ -332,9 +338,6 @@ class ViewCalendar(object):
         elif force == True:
             self.cal_model.remove_events()
             self.cal_model.add_events(self.__get_events())
-
-
-
         self.refresh()
 
     def refresh(self):
