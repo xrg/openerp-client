@@ -204,38 +204,26 @@ class Screen(signal_event.signal_event):
             self.screen_container.action_combo.set_active(0)
         self.clear()
 
-    def get_calenderDomain(self, start=None,old_date='',mode='month'):
+    def get_calenderDomain(self, field_name=None, old_date='', mode='month'):
         args = []
         old_date = old_date.date()
         if not old_date:
             old_date = datetime.today().date()
-        if old_date == datetime.today().date():
-            if mode =='month':
-                start_date = (old_date + relativedelta(months=-1)).strftime('%Y-%m-%d')
-                args.append((start, '>',start_date))
-                end_date = (old_date + relativedelta(months=+1)).strftime('%Y-%m-%d')
-                args.append((start, '<',end_date))
-
-            if mode=='week':
-                start_date = (old_date + relativedelta(weeks=-1)).strftime('%Y-%m-%d')
-                args.append((start, '>',start_date))
-                end_date = (old_date + relativedelta(weeks=+1)).strftime('%Y-%m-%d')
-                args.append((start, '<',end_date))
-
-            if mode=='day':
-                start_date = (old_date + relativedelta(days=-1)).strftime('%Y-%m-%d')
-                args.append((start, '>',start_date))
-                end_date = (old_date + relativedelta(days=+1)).strftime('%Y-%m-%d')
-                args.append((start, '<',end_date))
-        else:
-            if mode =='month':
-                end_date = (old_date + relativedelta(months=+1)).strftime('%Y-%m-%d')
-            if mode=='week':
-                end_date = (old_date + relativedelta(weeks=+1)).strftime('%Y-%m-%d')
-            if mode=='day':
-                end_date = (old_date + relativedelta(days=+1)).strftime('%Y-%m-%d')
-            old_date = old_date.strftime('%Y-%m-%d')
-            args = [(start,'>',old_date),(start,'<',end_date)]
+        if mode =='month':
+            start_date = (old_date + relativedelta(months = -1)).strftime('%Y-%m-%d')
+            args.append((field_name, '>',start_date))
+            end_date = (old_date + relativedelta(months = 1)).strftime('%Y-%m-%d')
+            args.append((field_name, '<',end_date))
+        if mode=='week':
+            start_date = (old_date + relativedelta(weeks = -1)).strftime('%Y-%m-%d')
+            args.append((field_name, '>',start_date))
+            end_date = (old_date + relativedelta(weeks = 1)).strftime('%Y-%m-%d')
+            args.append((field_name, '<',end_date))
+        if mode=='day':
+            start_date = (old_date + relativedelta(days = -1)).strftime('%Y-%m-%d')
+            args.append((field_name, '>',start_date))
+            end_date = (old_date + relativedelta(days = 1)).strftime('%Y-%m-%d')
+            args.append((field_name, '<',end_date))
         return args
 
     def search_filter(self, *args):
@@ -254,10 +242,10 @@ class Screen(signal_event.signal_event):
             v += self.win_search_domain
         limit = self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
-            start = self.current_view.view.date_start
+            field_name = self.current_view.view.date_start
             old_date = self.current_view.view.date
             mode = self.current_view.view.mode
-            calendar_domain = self.get_calenderDomain(start,old_date,mode)
+            calendar_domain = self.get_calenderDomain(field_name, old_date, mode)
             v += calendar_domain
         filter_keys = []
 
@@ -269,8 +257,8 @@ class Screen(signal_event.signal_event):
             self.offset = 0
         offset = self.offset
         self.latest_search = v
-        if self.context.get('group_by') or \
-               self.context.get('group_by_no_leaf') \
+        if (self.context.get('group_by') or \
+               self.context.get('group_by_no_leaf')) \
                and not self.current_view.view_type == 'graph':
             self.current_view.reload = True
             self.display()
@@ -783,7 +771,6 @@ class Screen(signal_event.signal_event):
             self.current_model = self.models[res_id]
         if self.views:
             self.current_view.display()
-            self.current_view.set_cursor()
             self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
             vt = self.current_view.view_type
             if self.screen_container.help_frame:
