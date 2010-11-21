@@ -1,3 +1,11 @@
+openerp-client (5.0.15-1) experimental; urgency=low
+
+  * Merging upstream version 5.0.15.
+  * Updating to debhelper version 8.
+  * Switching to source format 3.0 (quilt).
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 21 Nov 2010 18:56:47 +0100
+
 openerp-client (5.0.14-1) experimental; urgency=low
 
   * Merging upstream version 5.0.14.
