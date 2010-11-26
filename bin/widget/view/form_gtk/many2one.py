@@ -172,7 +172,7 @@ class many2one(interface.widget_interface):
         self._menu_entries.append((None, None, None))
         self._menu_entries.append((_('Action'), lambda x: self.click_and_action('client_action_multi'),0))
         self._menu_entries.append((_('Report'), lambda x: self.click_and_action('client_print_multi'),0))
-
+        self.enter_pressed = False
         if attrs.get('completion',False):
             ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', '', [], 'ilike', {})
             if ids:
@@ -292,6 +292,7 @@ class many2one(interface.widget_interface):
             self.sig_find(widget, event, leave=True)
 
     def sig_activate(self, widget, event=None, leave=False):
+        event = self.enter_pressed and True or event
         return self.sig_find(widget, event, leave=True)
 
     def sig_new(self, *args):
@@ -307,6 +308,7 @@ class many2one(interface.widget_interface):
         self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
 
     def sig_key_press(self, widget, event, *args):
+        self.enter_pressed = False
         if event.keyval==gtk.keysyms.F1:
             self.sig_new(widget, event)
         elif event.keyval==gtk.keysyms.F2:
@@ -318,6 +320,9 @@ class many2one(interface.widget_interface):
                     not self.wid_text.get_text():
                 return False
             return not self.sig_activate(widget, event, leave=True)
+        elif event.keyval in (gtk.keysyms.KP_Enter,gtk.keysyms.Return):
+            if self.wid_text.get_text():
+                self.enter_pressed = True
         return False
 
     def sig_changed(self, *args):
