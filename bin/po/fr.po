@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-11-09 07:47+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-11-25 13:31+0000\n"
+"Last-Translator: Numérigraphe <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-10 05:02+0000\n"
+"X-Launchpad-Export-Date: 2010-11-26 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -600,7 +600,7 @@ msgstr "Erreur d'exportation !"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr "L'ID de la ressource n'existe pas pour cet objet !"
+msgstr "Aucune ressource ne porte cet id. pour cet objet !"
 
 #: bin/modules/gui/window/form.py:221
 msgid "No record selected ! You can only attach to existing record."
@@ -1016,9 +1016,10 @@ msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
-"Le nom de base de données doit seulement contenir des caractères normaux ou "
-"\"_\".\n"
-"Vous devez éviter les accents, l'espace et les caractères spéciaux."
+"Le nom de la base de données ne doit contenir que des lettres, des chiffres "
+"ou le caractère \"_\". \n"
+"Les lettres accentuées, les espaces et les caractères spéciaux ne sont pas "
+"autorisés."
 
 #
 # File: bin/openerp.glade, line: 9633
@@ -1054,17 +1055,13 @@ msgstr "Mot de passe administrateur de base de données incorrect !"
 msgid "Error during database creation !"
 msgstr "Erreur lors de la création de la base de données !"
 
-#
-# File: bin/modules/gui/main.py, line: 370
-# File: bin/modules/gui/main.py, line: 370
-# File: bin/modules/gui/main.py, line: 370
 #: bin/modules/gui/main.py:669
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
-"Le serveur s'est arrêté anormalement lors de l'installation.\n"
-"Nous vous suggérons de supprimer la base de données."
+"Une erreur est survenue sur le serveur pendant l'installation.\n"
+"Il est conseillé de supprimer cette base de données."
 
 #: bin/modules/gui/main.py:687
 msgid "The following users have been installed on your database:"
@@ -1448,7 +1445,7 @@ msgstr "Ce type (%s) n'est pas supporté par le client GTK !"
 
 #: bin/widget/view/widget_parse.py:63
 msgid "No valid view found for this object!"
-msgstr "Aucune vue valide pour cet objet !"
+msgstr "Aucune vue disponible pour cet objet !"
 
 #
 # File: bin/widget/view/form_gtk/wid_common.py, line: 60
@@ -2025,7 +2022,7 @@ msgstr "Voir _les journaux"
 
 #: bin/openerp.glade:752
 msgid "_Go to resource ID..."
-msgstr "Rechercher par identifiant"
+msgstr "Chercher par id."
 
 #
 # File: bin/openerp.glade, line: 733
@@ -2817,7 +2814,7 @@ msgstr "OpenERP Licence"
 
 #: bin/openerp.glade:4286
 msgid "Go to resource ID"
-msgstr "Rechercher par identifiant"
+msgstr "Chercher par id."
 
 #: bin/openerp.glade:4336
 msgid "Search ID:"
@@ -3221,25 +3218,17 @@ msgstr "Champs texte avec auto-complétion"
 msgid "<Enter>"
 msgstr "<Entrée>"
 
-#
-# File: bin/openerp.glade, line: 7355
-# File: bin/openerp.glade, line: 7355
-# File: bin/openerp.glade, line: 7355
 #: bin/openerp.glade:5372
 msgid "Previous editable widget"
-msgstr "Précedent composant modifiable"
+msgstr "Composant modifiable précédent"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
 msgstr "<Shift> + <Tab>"
 
-#
-# File: bin/openerp.glade, line: 7383
-# File: bin/openerp.glade, line: 7383
-# File: bin/openerp.glade, line: 7383
 #: bin/openerp.glade:5400
 msgid "Next editable widget"
-msgstr "Prochain composant modifiable"
+msgstr "Composant modifiable suivant"
 
 #
 # File: bin/openerp.glade, line: 7398
@@ -3483,13 +3472,9 @@ msgstr "Nom de la nouvelle base de données :"
 msgid "http://localhost:8069"
 msgstr "http://localhost:8069"
 
-#
-# File: bin/openerp.glade, line: 8872
-# File: bin/openerp.glade, line: 8872
-# File: bin/openerp.glade, line: 8872
 #: bin/openerp.glade:6889
 msgid "Create a new database"
-msgstr "Créer une nouvelle base de données."
+msgstr "Créer une nouvelle base de données"
 
 #
 # File: bin/openerp.glade, line: 8885
@@ -3518,9 +3503,9 @@ msgid ""
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 "Ceci est le mot de passe de l'utilisateur qui a les droits pour administrer "
-"les base de données. Ce n'est pas un utilisateur OpenERP, juste un super "
-"utilisateur. Si vous ne l'avez pas changé, le mot de passe est 'admin' après "
-"l'installation."
+"les base de données. Ce n'est pas un utilisateur OpenERP, uniquement un "
+"super-utilisateur. Si vous ne l'avez pas changé, le mot de passe est 'admin' "
+"après l'installation."
 
 #: bin/openerp.glade:7043
 msgid "(<i>admin</i>, by default)"
