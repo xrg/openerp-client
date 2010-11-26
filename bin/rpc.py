@@ -185,38 +185,19 @@ class tinySocket_gw(gw_inter):
         self.thread_loop = False
         self.exception = None
 
-        def execute_call(method, args):
-            self._sock.connect(self._url)
+        self._sock.connect(self._url)
+        try:
+            self._sock.mysend((self._obj, method, self._db)+args)
+            self.res = self._sock.myreceive()
+            self._sock.disconnect()
+        except Exception, e:
             try:
-                self._sock.mysend((self._obj, method, self._db)+args)
-                self.res = self._sock.myreceive()
                 self._sock.disconnect()
-            except Exception, e:
-                try:
-                    self._sock.disconnect()
-                except Exception:
-                    pass
-                self.exception = e
-            self.thread_loop = True
-            return True
-
-        thread.start_new_thread(execute_call, (method, args))
-        counter = 0
-        win = None
-        progressbar = None
-        while not self.thread_loop:
-            time.sleep(0.01)
-            counter += 1
-            if counter == 100:
-                if not win or not progressbar:
-                    win, progressbar = common.OpenERP_Progressbar()
-            if progressbar and (counter % 10) == 0:
-                progressbar.pulse()
-            if win:
-                gtk.main_iteration(False)
-        if win:
-            win.destroy()
-            gtk.main_iteration()
+            except Exception:
+                pass
+        
+            self.exception = e
+       
         if self.exception:
             self.raise_exception(self.exception)
         return self.res
