@@ -42,6 +42,15 @@ import re
 import xmlrpclib
 import base64
 
+import gc
+import thread
+from guppy import hpy
+import guppy.heapy.RM
+
+
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
 RESERVED_KEYWORDS=['absolute', 'action', 'all', 'alter', 'analyse', 'analyze', 'and', 'any', 'as', 'asc', 'authorization', 'between', 'binary', 'both',
             'case', 'cast', 'check', 'collate', 'column','constraint', 'create', 'cross', 'current_date', 'current_time', 'current_timestamp',
             'current_user','default', 'deferrable', 'desc', 'distinct', 'do', 'else', 'end', 'except', 'false', 'for', 'foreign', 'freeze',
@@ -684,6 +693,7 @@ class db_create(object):
 
 class terp_main(service.Service):
     def __init__(self, name='gui.main', audience='gui.*'):
+     
         service.Service.__init__(self, name, audience)
         self.exportMethod(self.win_add)
 
@@ -925,7 +935,10 @@ class terp_main(service.Service):
         return True
 
     def sig_win_close(self, *args):
+        print "Point de départ"
+        
         if len(args) >= 2:
+            print args[2].get_name()
             button = args[1].button
             if (isinstance(args[0], gtk.Button) and button in [1,2]) \
                     or (isinstance(args[0], gtk.EventBox) and button == 2):
@@ -1198,6 +1211,9 @@ class terp_main(service.Service):
         return True
 
     def win_add(self, win, datas):
+        """
+            Add a tab in client
+        """
         self.pages.append(win)
         box = gtk.HBox(False, 0)
 
@@ -1236,6 +1252,7 @@ class terp_main(service.Service):
         self.notebook.set_tab_label(image, box)
         image.show_all()
         self.notebook.set_current_page(-1)
+        print hpy().heap()
 
     def message(self, message):
         id = self.status_bar.get_context_id('message')
@@ -1284,6 +1301,10 @@ class terp_main(service.Service):
                 self.buttons[x].set_sensitive(view and (x in view.handlers))
 
     def _win_del(self,page_num=None):
+        """
+            Del tab in Client
+        """
+        
         if page_num is not None:
             pn = page_num
         else:
@@ -1294,9 +1315,18 @@ class terp_main(service.Service):
             self.notebook.remove_page(pn)
             self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
-
-            #page.destroy()
-            #del page
+            a = page
+           
+            page.destroy()
+            #int
+            print self.notebook.get_current_page()
+            print self.last_page
+            print self.current_page
+            print page
+            print self.notebook
+            #fin int
+            del page
+       
         return self.notebook.get_current_page() != -1
 
     def _wid_get(self,page_num=None):
@@ -1334,6 +1364,7 @@ class terp_main(service.Service):
                 self._win_del(page_num)
 
     def _sig_page_changed(self, widget=None, *args):
+        print "Change page"
         self.last_page = self.current_page
         self.current_page = self.notebook.get_current_page()
         self.sb_set()

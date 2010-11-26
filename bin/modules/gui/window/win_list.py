@@ -44,7 +44,6 @@ class win_list(object):
         self.model_name = model
         view = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_view_get', False, 'tree', context)
         self.view_data = view
-
         self.tree = widget.tree(view['arch'], view['fields'], model, sel_multi=sel_multi, search=search)
         self.tree.context = context
         self.fields = view['fields']

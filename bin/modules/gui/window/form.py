@@ -40,6 +40,8 @@ import service
 import options
 import copy
 import gc
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 
 from observator import oregistry
 from widget.screen import Screen
@@ -57,6 +59,8 @@ class form(object):
         if context is None:
             context = {}
 
+        print len(gc.get_objects())
+        print "init"
         fields = {}
         self.model = model
         self.window = window
@@ -136,6 +140,8 @@ class form(object):
 
         if auto_refresh and int(auto_refresh):
             gobject.timeout_add(int(auto_refresh) * 1000, self.sig_reload)
+            
+        print len(gc.get_objects())
 
     def sig_switch_diagram(self, widget=None):
         return self.sig_switch(widget, 'diagram')
@@ -197,6 +203,12 @@ class form(object):
 
 
     def destroy(self):
+        """
+            Destroy the page object and all the child 
+            (or at least should do this)
+        """
+        print "<<< destroy >>>>"
+        print len(gc.get_objects())
         oregistry.remove_receiver('misc-message', self._misc_message)
         self.screen.signal_unconnect(self)
         self.screen.destroy()
@@ -205,7 +217,14 @@ class form(object):
         del self.widget
         self.sw.destroy()
         del self.sw
+        
         gc.collect()
+        print len(gc.get_objects())
+       
+        
+    def __del__(self):
+        print "garbage collecion"
+        
 
     def ids_get(self):
         return self.screen.ids_get()
@@ -463,7 +482,11 @@ class form(object):
         return True
 
     def sig_close(self, urgent=False):
-        return self.modified_save(reload=False)
-
+        res = self.modified_save(reload=False)
+        return res
+    
+  
+        
+    
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
