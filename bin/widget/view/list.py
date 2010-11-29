@@ -249,8 +249,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         return gobject.TYPE_PYOBJECT
 
     def on_get_path(self, iter):
-        print "on_get_path"
-        print iter
         result = []
         while iter:
             try:
@@ -381,7 +379,6 @@ class ViewList(parser_view):
         selection.set(selection.target, 8, data)
 
     def group_by_move(self, model_list, get_id, rec_id, field='sequence'):
-        print "group_by_move"
         seq_ids = map(lambda x: x[field].get(x), model_list.children.lst)
         set_list = list(set(seq_ids))
         l = model_list.children.lst
@@ -631,7 +628,6 @@ class ViewList(parser_view):
         """
         Destroy the listmodel
         """
-        print "Destroy"
         self.widget_tree.destroy()
         del self.screen
         del self.widget_tree
@@ -795,7 +791,6 @@ class ViewList(parser_view):
         self.widget_tree.collapse_row(path)
 
     def get_expanded_rows(self, treeview, path):
-        print "get_expanded_rows"
         if self.widget_tree.row_expanded(path):
             self.expandedRows.append(path)
 
@@ -919,7 +914,6 @@ class ViewList(parser_view):
             if(node.value == v):
                 values.remove(v)
                 final_path.append(tuple(path))
-                print final_path
                 
         if len(values) < 1:
             return final_path

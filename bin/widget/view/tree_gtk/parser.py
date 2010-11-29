@@ -70,8 +70,7 @@ def sort_model(column, screen):
     expanded = []
     for path in screen.current_view.expandedRows:
         expanded.append(screen.current_view.get_id(path))
-    print "Path"
-    print screen.current_view.expandedRows
+
     if screen.sort == column.name:
         screen.sort = column.name+' desc'
     else:
@@ -81,11 +80,11 @@ def sort_model(column, screen):
         screen.sort_domain = [('id','in',screen.ids_get())]
     screen.search_filter()
     
- 
-    paths = screen.current_view.get_path(expanded)
-    for path in paths:
-        #path = screen.current_view.get_path(value)
-        screen.current_view.expand_row(path)
+    if len(expanded) > 0:
+        paths = screen.current_view.get_path(expanded)
+        for path in paths:
+            #path = screen.current_view.get_path(value)
+            screen.current_view.expand_row(path)
  
         
 
