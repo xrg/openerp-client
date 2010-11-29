@@ -132,7 +132,7 @@ class list_record(object):
         no_leaf = self.context.get('group_by_no_leaf', False)
         if gb or no_leaf:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
-                self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context, self.sort_order)
+                self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context)
             if not records and self.parent:
                 self.add_dummny_record(gb[0])
             else:
