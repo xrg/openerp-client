@@ -63,6 +63,15 @@ def sort_model(column, screen):
     group_by = screen.context.get('group_by',[])
     group_by_no_leaf = screen.context.get('group_by_no_leaf')
     screen.current_view.set_drag_and_drop(column.name == 'sequence')
+    
+    
+    screen.current_view.expandedRows = []
+    screen.current_view.widget_tree.map_expanded_rows(screen.current_view.get_expanded_rows)
+    expanded = []
+    for path in screen.current_view.expandedRows:
+        expanded.append(screen.current_view.get_id(path))
+    print "Path"
+    print screen.current_view.expandedRows
     if screen.sort == column.name:
         screen.sort = column.name+' desc'
     else:
@@ -71,6 +80,18 @@ def sort_model(column, screen):
     if screen.type in ('many2many','one2many'):
         screen.sort_domain = [('id','in',screen.ids_get())]
     screen.search_filter()
+    
+ 
+    for value in expanded:
+        path = screen.current_view.get_path(value)
+        screen.current_view.expand_row(path)
+ 
+        
+
+        
+
+      
+        
 
 class parser_tree(interface.parser_interface):
 
