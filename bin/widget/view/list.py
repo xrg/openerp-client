@@ -854,13 +854,13 @@ class ViewList(parser_view):
     """
         TODO : give path for a list of value
     """
-    def get_path(self, value):
+    def get_path(self, values):
         self.num_op = 0
         model = self.store
         root = model.on_get_iter((0,))
-        return self.compute_level([root],value,[[0]])
+        return self.compute_level([root],values,[[0]], [])
 
-    def compute_level(self, first_nodes, value, path_list):
+    def compute_level(self, first_nodes, values, path_list, final_path):
         """
             @param first_nodes : List of first child of every parent node
             @param path_list : list of path of first child
@@ -874,13 +874,13 @@ class ViewList(parser_view):
             node = first_nodes[i]
             self.add_next(node, q, path)
         
-        res = self.process_queue(q, value, visited_node)
+        res = self.process_queue(q, values, visited_node, final_path)
         if(res):
             return res
         
         
         (nodes_list, paths_list) = self.add_first_child(visited_node)
-        return self.compute_level(nodes_list, value, paths_list)
+        return self.compute_level(nodes_list, values, paths_list, final_path)
         
     def add_first_child(self, visited_node):
         nodes_list = []
@@ -906,15 +906,20 @@ class ViewList(parser_view):
         if self.store.on_iter_has_child(node):
             return self.add_next(self.store.on_iter_children(node), q, list(path))
     
-    def process_queue(self, q, value, visited_nodes):
+    def process_queue(self, q, value, visited_nodes, final_path):
         while(not q.empty()):
             (node, path) = q.get()
-            res = self.compute_node(node, value, path)
+            res = self.compute_node(node, value, path, final_path)
             if(res):
                 return res
             visited_nodes.put((node, list(path)))
 
-    def compute_node(self, node, value, path):
-        self.num_op += 1
-        if(node.value == value):
-            return tuple(path)
+    def compute_node(self, node, values, path, final_path):
+        for v in values:
+            if(node.value == v):
+                values.remove(v)
+                final_path.append(tuple(path))
+                print final_path
+                
+        if len(values) < 1:
+            return final_path

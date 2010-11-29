@@ -82,8 +82,9 @@ def sort_model(column, screen):
     screen.search_filter()
     
  
-    for value in expanded:
-        path = screen.current_view.get_path(value)
+    paths = screen.current_view.get_path(expanded)
+    for path in paths:
+        #path = screen.current_view.get_path(value)
         screen.current_view.expand_row(path)
  
         
