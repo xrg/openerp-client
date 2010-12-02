@@ -35,19 +35,24 @@ from interface import parser_view
 from widget.model.record import ModelRecord
 
 class field_record(object):
-    def __init__(self, name):
+    def __init__(self, name, count):
         self.name = name
+        if count:
+            count = ' (' + count +')'
+        self.count = count
 
     def get_client(self, *args):
         if isinstance(self.name, (list,tuple)):
-            return self.name[1]
+            return self.name[1] + self.count
+        if self.count:
+            return str(self.name) + self.count
         return self.name
 
     def get(self, *args):
         if isinstance(self.name, (list,tuple)):
             return self.name[0]
         return self.name
-
+    
     def get_state_attrs(self, *args, **argv):
         return {}
 
@@ -90,7 +95,8 @@ class group_record(object):
         pass
 
     def __getitem__(self, attr):
-        return field_record(self.value.get(attr, ''))
+        count = str(self.value.get('%s_count' % attr,''))
+        return field_record(self.value.get(attr, ''), count)
 
 def echo(fn):
     def wrapped(self, *v, **k):
@@ -140,7 +146,7 @@ class list_record(object):
                     if not no_leaf:
                         ctx.update({'__field':gb[-1]})
                     ctx.update(__ctx)
-                    rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child,sort_order=self.sort_order)
+                    rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child, sort_order=self.sort_order)
                     for field in gb:
                         if not rec.value.get(field, False):
                             field_type = self.mgroup.fields.get(field, {}).get('type', False)

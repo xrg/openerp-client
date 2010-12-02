@@ -128,7 +128,10 @@ class main(service.Service):
             if datas.get('domain', False):
                 domain.append(datas['domain'])
             if action.get('target', False)=='new':
-                dia = dialog(datas['res_model'], id=datas.get('res_id',None), window=datas.get('window',None), domain=domain, context=context, view_ids=view_ids,target=True, view_type=datas.get('view_mode', 'tree').split(','))
+                dia = dialog(datas['res_model'], id=datas.get('res_id',None),
+                             window=datas.get('window',None), domain=domain,
+                             context=context, view_ids=view_ids,target=True,
+                             view_type=datas.get('view_mode', 'tree').split(','), help=help)
                 if dia.dia.get_has_separator():
                     dia.dia.set_has_separator(False)
                 dia.run()

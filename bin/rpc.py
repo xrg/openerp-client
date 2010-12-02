@@ -135,6 +135,7 @@ class tinySocket_gw(gw_inter):
         res = self.execute(method, self._uid, self._passwd, *args)
         logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
+
     def execute(self, method, *args):
         # We are not yet ready for persistent connections, so open and close
         # the connectionn at each call.
