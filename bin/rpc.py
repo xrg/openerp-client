@@ -409,8 +409,8 @@ class rpc_session(object):
             for suff in ('dev', '-bzr', '-rc1', '-rc2'):
                 if sv.endswith(suff):
                     sv = sv[:-len(suff)]
-            self.server_version = map(int, sv.split('.'))
-            print "Connected to a server ver: %s" % (self.server_version)
+            self.server_version = tuple(map(int, sv.split('.')))
+            print "Connected to a server ver: %s" % (self.server_version,)
         except Exception, e:
             import traceback
             traceback.print_exc()
