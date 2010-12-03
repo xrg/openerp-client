@@ -109,7 +109,7 @@ class parse(object):
         self.name_lst = []
         self.name_lst1 = []
 
-        all_fields = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_get')
+        all_fields = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_get', rpc.session.context)
         if len(fields) != len(all_fields):
             common_fields = [f for f in all_fields if f in fields]
             for f in common_fields:
