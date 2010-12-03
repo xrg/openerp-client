@@ -26,9 +26,6 @@ import common
 from rpc import RPCProxy
 import rpc
 
-import gc
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
 
 class screen_container(object):
     def __init__(self, win_search=False):
@@ -56,7 +53,7 @@ class screen_container(object):
         if hasattr(self, 'action_combo') and self.action_combo:
             self.action_combo.destroy()
             del self.action_combo
-        #self.action_list.destroy()
+
         if hasattr(self, 'but_next') and self.but_next:
             self.but_next.destroy()
             del self.but_next
@@ -85,9 +82,6 @@ class screen_container(object):
             self.help_frame.destroy()
             del self.help_frame
     
-        
-        #self.limit_combo.destroy()
-        
         self.sw.destroy()
         self.vbox.destroy()
         self.vp.destroy()
@@ -104,14 +98,6 @@ class screen_container(object):
         del self.handler_id
         del self.help
         del self.last_active_filter
-        #'old_widget': False,
-        #'selection': [],
-        #'win_search': False},
-        #'context': {   },
-        #'domain': [],
-        print "== DONE destroy screen_container =="
-        pp.pprint(gc.get_referents(self))
-
 
     def widget_get(self):
         return self.vbox

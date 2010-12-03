@@ -138,8 +138,6 @@ class form(object):
 
         if auto_refresh and int(auto_refresh):
             gobject.timeout_add(int(auto_refresh) * 1000, self.sig_reload)
-            
-        print len(gc.get_objects())
 
     def sig_switch_diagram(self, widget=None):
         return self.sig_switch(widget, 'diagram')

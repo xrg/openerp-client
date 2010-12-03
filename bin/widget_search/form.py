@@ -29,10 +29,6 @@ import tools
 from lxml import etree
 import uuid
 
-import gc
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
-
 class _container(object):
     def __init__(self, max_width):
         self.cont = []
@@ -114,8 +110,6 @@ class _container(object):
         del self.flag
         del self.max_width
         del self.width
-        print "== DONE destroy widget_search.form._container =="
-        pp.pprint(gc.get_referents(self))
         
 
 class parse(object):
@@ -153,8 +147,6 @@ class parse(object):
         #'notebooks': [],
         del self.parent
         del self.widget
-        print '== DONE destroy widget_search.form.parser =='
-        pp.pprint(gc.get_referents(self))
 
     def custom_remove(self, button, custom_panel):
         custom_panel.destroy()
@@ -440,9 +432,8 @@ class form(wid_int.wid_int):
         self.widget.destroy()
         del self.call
         del self.fields
-        del self.widgets #TODO
+        del self.widgets 
         del self.attrs
-        #'call' #todo
         del self.focusable
         del self.groupby
         del self.model
@@ -451,8 +442,6 @@ class form(wid_int.wid_int):
         del self.parser
         del self.rows
         del self.widget
-        print "IN PROGRESS destroy widget_search.form"
-        pp.pprint(gc.get_referents(self))
         
     
     

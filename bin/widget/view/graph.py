@@ -84,9 +84,8 @@ class ViewGraph(parser_view):
         del self.widget
         del self.view
         del self.window
-        print 'TODO destroy view.graph'
-        pp.pprint(gc.get_referents(self))
-
+        del self.title
+        del self.view_type
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
