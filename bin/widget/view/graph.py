@@ -22,9 +22,7 @@
 import gobject
 import gtk
 from interface import parser_view
-import gc
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
+
 
 class ViewGraph(parser_view):
 
