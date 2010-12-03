@@ -47,8 +47,7 @@ import thread
 
 
 import gc
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
+
 
 RESERVED_KEYWORDS=['absolute', 'action', 'all', 'alter', 'analyse', 'analyze', 'and', 'any', 'as', 'asc', 'authorization', 'between', 'binary', 'both',
             'case', 'cast', 'check', 'collate', 'column','constraint', 'create', 'cross', 'current_date', 'current_time', 'current_timestamp',
@@ -1316,7 +1315,6 @@ class terp_main(service.Service):
             self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
             page.destroy()
-            print "END OF DESTROY"
             del page
             gc.collect()
             
