@@ -31,10 +31,6 @@ import rpc
 import options
 import win_export
 
-import gc
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
-
 class tree(object):
     def __init__(self, view, model, res_id=False, domain=[], context={}, help={}, window=None, name=False):
         self.glade = glade.XML(common.terp_path("openerp.glade"),'win_tree_container',gettext.textdomain())
@@ -313,8 +309,8 @@ class tree(object):
             return None
 
     def destroy(self):
-        print "TODO destroy gui.window.tree"
-        pp.pprint(gc.get_referents(self))
+        #TODO destroy gui.window.tree
+        pass
 
     def sig_close(self, urgent=False):
         return True

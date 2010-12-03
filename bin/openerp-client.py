@@ -128,7 +128,7 @@ for fname in os.listdir(pix_file):
         factory.add('terp-'+iname, icon_set)
 
 try:
-    win = modules.gui.main.terp_main() #create service
+    win = modules.gui.main.terp_main()
     if options.options.rcexist:
         win.sig_login()
     if os.name == 'nt':

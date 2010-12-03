@@ -144,7 +144,6 @@ class parse(object):
         del self.model
         del self.name_lst
         del self.name_lst1
-        #'notebooks': [],
         del self.parent
         del self.widget
 

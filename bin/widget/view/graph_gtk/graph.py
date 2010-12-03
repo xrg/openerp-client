@@ -35,9 +35,6 @@ from tools import datetime_util
 from widget.view import interface
 from widget.view.list import group_record
 
-import gc
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
@@ -143,8 +140,7 @@ class ViewGraph(object):
             pass
         
     def destroy(self):
-        print "TODO destroy GRAPH VIEW"
-        pp.pprint(gc.get_referents(self))
+        pass
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
