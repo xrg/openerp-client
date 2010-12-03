@@ -43,11 +43,6 @@ class ViewCalendar(parser_view):
     def __getitem__(self, name):
         return None
 
-    def destroy(self):
-        self.widget.destroy()
-        del self.screen
-        del self.widget
-
     def set_value(self):
         pass
 
@@ -84,6 +79,11 @@ class ViewCalendar(parser_view):
         # we don't set_cursor for now, as we're not showing selected
         # item in a special way
         pass
+    
+    def destroy(self):
+        self.widget.destroy()
+        del self.screen
+        del self.widget
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

@@ -73,6 +73,9 @@ class ViewGraph(parser_view):
 
     def set_cursor(self, new=False):
         pass
+    
+    def destroy(self):
+        pass
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

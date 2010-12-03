@@ -52,6 +52,7 @@ class win_list(object):
         self.fields_order = self.tree.fields_order
 
     def destroy(self):
+        print "destroy of win_list"
         self.tree.destroy()
         del self.fields_order
         del self.widget

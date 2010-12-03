@@ -304,7 +304,8 @@ class ViewForm(parser_view):
     def __getitem__(self, name):
         return self.widgets[name]
 
-    def destroy(self):
+    def destroy(self): 
+        print "TODO destroy widget.view.form"
         self.widget.destroy()
         for widget in self.widgets.keys():
             self.widgets[widget].widget.destroy()

@@ -34,6 +34,10 @@ import common
 from interface import parser_view
 from widget.model.record import ModelRecord
 
+import gc
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
 class field_record(object):
     def __init__(self, name):
         self.name = name
@@ -112,6 +116,19 @@ class list_record(object):
         self.sort_order = sort_order
         self.lst = []
         self.load()
+        
+    def destroy(self):
+        for model in self.lst:
+            model.destroy()
+            
+    
+        del self.context
+        del self.domain
+        del self.loaded
+        del self.mgroup
+        del self.lst
+        print "== DONE destroy widget.list.list_record =="
+        pp.pprint(gc.get_referents(self))
 
     def add_dummny_record(self, group_field):
         record = { group_field:'This group is now empty ! Please refresh the list.'}
@@ -821,3 +838,6 @@ class ViewList(parser_view):
             if col.name in self.screen.context.get('group_by',[]):
                 value = False
             col.set_visible(not value)
+            
+    def destroy(self):
+        pass

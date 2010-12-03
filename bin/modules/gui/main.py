@@ -42,12 +42,11 @@ import re
 import xmlrpclib
 import base64
 
-import gc
+
 import thread
-from guppy import hpy
-import guppy.heapy.RM
 
 
+import gc
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -1160,6 +1159,7 @@ class terp_main(service.Service):
                     'read', [rpc.session.uid], [type,'name'], rpc.session.context)
         except:
             return False
+        print "new"
         id = self.sb_username.get_context_id('message')
         self.sb_username.push(id, act_id[0]['name'] or '')
         if not act_id[0][type]:
@@ -1172,7 +1172,7 @@ class terp_main(service.Service):
         if except_id and act_id == except_id:
             return act_id
         obj = service.LocalService('action.main')
-        win = obj.execute(act_id, {'window':self.window})
+        obj.execute(act_id, {'window':self.window})
         try:
             user = rpc.session.rpc_exec_auth_wo('/object', 'execute', 'res.users',
                     'read', [rpc.session.uid], [type,'name'], rpc.session.context)
@@ -1252,7 +1252,6 @@ class terp_main(service.Service):
         self.notebook.set_tab_label(image, box)
         image.show_all()
         self.notebook.set_current_page(-1)
-        print hpy().heap()
 
     def message(self, message):
         id = self.status_bar.get_context_id('message')
@@ -1304,28 +1303,23 @@ class terp_main(service.Service):
         """
             Del tab in Client
         """
-        
         if page_num is not None:
             pn = page_num
         else:
             pn = self.notebook.get_current_page()
         if pn != -1:
+            
             self.notebook.disconnect(self.sig_id)
             page = self.pages.pop(pn)
+            
             self.notebook.remove_page(pn)
             self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
-            a = page
-           
             page.destroy()
-            #int
-            print self.notebook.get_current_page()
-            print self.last_page
-            print self.current_page
-            print page
-            print self.notebook
-            #fin int
+            print "END OF DESTROY"
             del page
+            gc.collect()
+            
        
         return self.notebook.get_current_page() != -1
 
@@ -1362,6 +1356,7 @@ class terp_main(service.Service):
                     self._update_attachment_button(wid)
             if button_name=='but_close' and res:
                 self._win_del(page_num)
+        
 
     def _sig_page_changed(self, widget=None, *args):
         print "Change page"
@@ -1556,8 +1551,7 @@ class terp_main(service.Service):
         return (url,db,passwd)
 
     def _choose_db_ent(self):
-        dialog = glade.XML(common.terp_path("openerp.glade"), "win_db_ent",
-                gettext.textdomain())
+        dialog = glade.XML(common.terp_path("openerp.glade"), "win_db_ent", gettext.textdomain())
         win = dialog.get_widget('win_db_ent')
         win.set_icon(common.OPENERP_ICON)
         win.set_transient_for(self.window)

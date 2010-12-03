@@ -29,6 +29,10 @@ import tools
 from lxml import etree
 import uuid
 
+import gc
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
 class _container(object):
     def __init__(self, max_width):
         self.cont = []
@@ -102,6 +106,17 @@ class _container(object):
         wid_list.reverse()
         table.set_focus_chain(wid_list)
         return wid
+    
+    def destroy(self):
+        del self.col
+        del self.cont
+        del self.count
+        del self.flag
+        del self.max_width
+        del self.width
+        print "== DONE destroy widget_search.form._container =="
+        pp.pprint(gc.get_referents(self))
+        
 
 class parse(object):
     def __init__(self, parent, fields, model, col=6):
@@ -123,6 +138,23 @@ class parse(object):
         self.col = col
         self.focusable = None
         self.add_widget_end = []
+        
+    def destroy(self):
+        self.container.destroy()
+        self.focusable.destroy()
+        self.widget.destroy()
+        del self.container
+        del self.col
+        del self.fields
+        del self.focusable
+        del self.model
+        del self.name_lst
+        del self.name_lst1
+        #'notebooks': [],
+        del self.parent
+        del self.widget
+        print '== DONE destroy widget_search.form.parser =='
+        pp.pprint(gc.get_referents(self))
 
     def custom_remove(self, button, custom_panel):
         custom_panel.destroy()
@@ -401,6 +433,29 @@ class form(wid_int.wid_int):
                     domain = res1 + res2
         return {'domain':domain, 'context':context}
 
+    def destroy(self):
+        
+        self.focusable.destroy()
+        self.parser.destroy()
+        self.widget.destroy()
+        del self.call
+        del self.fields
+        del self.widgets #TODO
+        del self.attrs
+        #'call' #todo
+        del self.focusable
+        del self.groupby
+        del self.model
+        del self.name
+        del self.parent
+        del self.parser
+        del self.rows
+        del self.widget
+        print "IN PROGRESS destroy widget_search.form"
+        pp.pprint(gc.get_referents(self))
+        
+    
+    
     def _value_set(self, value):
         for x in value:
             if x in self.widgets:
@@ -409,6 +464,8 @@ class form(wid_int.wid_int):
                 self.custom_widgets[x][0].value = value[x]
 
     value = property(_value_get, _value_set, None, _('The content of the form or exception if not valid'))
+    
+    
 
 import calendar
 import spinbutton
