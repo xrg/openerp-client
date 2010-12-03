@@ -22,9 +22,7 @@
 from rpc import RPCProxy
 import rpc
 
-import gc
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
+
 
 try:
     set
@@ -58,8 +56,6 @@ class CharField(object):
         
     def destroy(self):        
         self.generic_destroy()
-        print "== DONE destroy CHAR Field =="
-        pp.pprint(gc.get_referents(self))
         
     def generic_destroy(self):
         del self.attrs
@@ -181,8 +177,6 @@ class CharField(object):
 class BinaryField(CharField):
     def destroy(self):
         super(BinaryField, self).generic_destroy()
-        print "==  DONE destroy BINARY Field =="
-        pp.pprint(gc.get_referents(self))
     
     def __check_model(self, model):
         assert self.name in model.mgroup.mfields
@@ -254,8 +248,6 @@ class SelectionField(CharField):
     
     def destroy(self):
         super(SelectionField, self).generic_destroy()
-        print "== DONE destroy SELECTION Field =="
-        pp.pprint(gc.get_referents(self))
         
     def set(self, model, value, test_state=True, modified=False):
         value = isinstance(value,(list,tuple)) and len(value) and value[0] or value
@@ -269,8 +261,6 @@ class SelectionField(CharField):
 class FloatField(CharField):
     def destroy(self):
         super(FloatField, self).generic_destroy()
-        print "== DONE destroy FLOAT Field =="
-        pp.pprint(gc.get_referents(self))
     
     def validate(self, model):
         self.get_state_attrs(model)['valid'] = True
@@ -290,8 +280,6 @@ class IntegerField(CharField):
 
     def destroy(self):
         super(IntegerField, self).generic_destroy()
-        print "== DONE destroy Int Field =="
-        pp.pprint(gc.get_referents(self))
         
     def get(self, model, check_load=True, readonly=True, modified=False):
         return model.value.get(self.name, 0) or 0
@@ -320,8 +308,6 @@ class M2OField(CharField):
     
     def destroy(self):
         super(M2OField, self).generic_destroy()
-        print "== DONE destroy M2O Field =="
-        pp.pprint(gc.get_referents(self))
 
     def create(self, model):
         return False
@@ -371,9 +357,7 @@ class M2MField(CharField):
     def destroy(self):
         super(M2MField, self).generic_destroy()
         del self.limit
-        print "== DONE destroy M2M Field =="
-        pp.pprint(gc.get_referents(self))
-
+        
     def create(self, model):
         return []
 
@@ -423,8 +407,6 @@ class O2MField(CharField):
         super(O2MField, self).generic_destroy()
         del self.context
         del self.limit
-        print "== DONE destroy O2M Field =="
-        pp.pprint(gc.get_referents(self))
 
     def create(self, model):
         from widget.model.group import ModelRecordGroup
@@ -554,8 +536,6 @@ class ReferenceField(CharField):
             
     def destroy(self):
         super(ReferenceField, self).generic_destroy()
-        print "== DONE destroy REF Field =="
-        pp.pprint(gc.get_referents(self))
 
 TYPES = {
     'char' : CharField,

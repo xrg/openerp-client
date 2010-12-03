@@ -26,10 +26,6 @@ import field
 
 import signal_event
 
-import gc
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
-
 try:
     set
 except NameError:
@@ -125,8 +121,6 @@ class ModelRecordGroup(signal_event.signal_event):
         del self.models
         del self.resource
         del self.rpc
-        print "IN PROGRESS (CASE OF WIZARD) destroy record ModelRecordGroup =="
-        pp.pprint(gc.get_referents(self))
 
     def index(self, model):
         return self.models.index(model)

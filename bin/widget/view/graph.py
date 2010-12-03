@@ -22,6 +22,9 @@
 import gobject
 import gtk
 from interface import parser_view
+import gc
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 
 class ViewGraph(parser_view):
 
@@ -75,7 +78,15 @@ class ViewGraph(parser_view):
         pass
     
     def destroy(self):
-        pass
+        self.widget.destroy()
+        
+        del self.screen        
+        del self.widget
+        del self.view
+        del self.window
+        print 'TODO destroy view.graph'
+        pp.pprint(gc.get_referents(self))
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

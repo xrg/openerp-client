@@ -932,11 +932,8 @@ class terp_main(service.Service):
             self.sb_company.push(id, '')
         return True
 
-    def sig_win_close(self, *args):
-        print "Point de départ"
-        
+    def sig_win_close(self, *args):        
         if len(args) >= 2:
-            print args[2].get_name()
             button = args[1].button
             if (isinstance(args[0], gtk.Button) and button in [1,2]) \
                     or (isinstance(args[0], gtk.EventBox) and button == 2):
@@ -1158,7 +1155,6 @@ class terp_main(service.Service):
                     'read', [rpc.session.uid], [type,'name'], rpc.session.context)
         except:
             return False
-        print "new"
         id = self.sb_username.get_context_id('message')
         self.sb_username.push(id, act_id[0]['name'] or '')
         if not act_id[0][type]:
@@ -1357,7 +1353,6 @@ class terp_main(service.Service):
         
 
     def _sig_page_changed(self, widget=None, *args):
-        print "Change page"
         self.last_page = self.current_page
         self.current_page = self.notebook.get_current_page()
         self.sb_set()
