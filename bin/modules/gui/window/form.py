@@ -124,8 +124,6 @@ class form(object):
             self.handlers['radio_calendar'] =  self.sig_switch_calendar
         if 'diagram' in view_type:
             self.handlers['radio_diagram'] =  self.sig_switch_diagram
-        if 'gallery' in view_type:
-            self.handlers['radio_gallery'] = self.sig_switch_gallery
         if res_id:
             if isinstance(res_id, (int, long,)):
                 res_id = [res_id]
@@ -133,7 +131,7 @@ class form(object):
         else:
             if self.screen.current_view.view_type == 'form':
                 self.sig_new(autosave=False)
-            if self.screen.current_view.view_type in ('tree', 'graph', 'calendar', 'gallery'):
+            if self.screen.current_view.view_type in ('tree', 'graph', 'calendar'):
                 self.screen.search_filter()
 
         if auto_refresh and int(auto_refresh):
@@ -154,10 +152,12 @@ class form(object):
     def sig_switch_graph(self, widget=None):
         return self.sig_switch(widget, 'graph')
 
-    def sig_switch_gallery(self, widget=None):
-        return self.sig_switch(widget, 'gallery')
-
     def get_resource(self, widget=None, get_id=None):
+        ## This has been done due to virtual ids coming from
+        ## crm meeting. like '3-20101012155505' which are not in existence
+        ## and needed to be converted to real ids
+        if isinstance(get_id, str):
+            get_id = int(get_id.split('-')[0])
         all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])
         if widget:
             get_id = int(widget.get_value())
@@ -169,7 +169,8 @@ class form(object):
                 self.screen.load([get_id])
             self.screen.current_view.set_cursor()
         else:
-            common.message(_('Resource ID does not exist for this object!'))
+            if widget:
+                common.message(_('Resource ID does not exist for this object!'))
 
     def get_event(self, widget, event, win):
         if event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):
@@ -250,7 +251,8 @@ class form(object):
                 ('create_uid', _('Creation User')),
                 ('create_date', _('Creation Date')),
                 ('write_uid', _('Latest Modification by')),
-                ('write_date', _('Latest Modification Date'))
+                ('write_date', _('Latest Modification Date')),
+                ('xmlid', _('Internal Module Data ID'))
             ]
             for (key,val) in todo:
                 if line[key] and key in ('create_uid','write_uid','uid'):
@@ -322,7 +324,7 @@ class form(object):
             id = res
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
-        else:
+        elif len(self.screen.models.models):
             common.warning(_('Invalid form, correct red fields !'),_('Error !'))
             self.message_state(_('Invalid form, correct red fields !'), color="red")
         if warning:
@@ -379,10 +381,11 @@ class form(object):
                 return False
             ids = [id]
         if self.screen.current_view.view_type == 'tree':
+            self.modified_save()
             sel_ids = self.screen.sel_ids_get()
             if sel_ids:
                 ids = sel_ids
-        if len(ids) or self.screen.context.get('group_by',False):
+        if len(ids) or self.screen.context.get('group_by'):
             obj = service.LocalService('action.main')
             data = {'model':self.screen.resource,
                     'id': id or False,

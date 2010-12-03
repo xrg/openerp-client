@@ -28,7 +28,7 @@ import rpc
 
 
 class screen_container(object):
-    def __init__(self):
+    def __init__(self, win_search=False):
         self.old_widget = False
         self.sw = gtk.ScrolledWindow()
         self.sw.set_shadow_type(gtk.SHADOW_NONE)
@@ -36,6 +36,7 @@ class screen_container(object):
         self.vp = gtk.Viewport()
         self.vp.set_shadow_type(gtk.SHADOW_NONE)
         self.vbox = gtk.VBox()
+        self.last_active_filter = False
         self.vbox.pack_end(self.sw)
         self.filter_vbox = None
         self.button = None
@@ -43,21 +44,34 @@ class screen_container(object):
         self.but_next = None
         self.help_frame = False
         self.help = {}
+        self.win_search = win_search
+        self.domain = []
+        self.context = {}
+        self.handler_id = None
 
     def widget_get(self):
         return self.vbox
 
-    def fill_filter_combo(self, model):
-        self.action_list.clear()
+    def fill_filter_combo(self, model, action_name = False):
+        if self.handler_id:
+            self.action_combo.handler_block(self.handler_id)
+            self.action_list.clear()
+            self.action_combo.handler_unblock(self.handler_id)
+        active = False
         my_acts = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'get_filters', model)
         filters_list=[['blk','','-- Filters --']]
         sorted_filters = [[act.get('domain',act['id']),act['context'],act['name']] for act in my_acts]
         sorted_filters.sort(lambda x, y: cmp(x[2], y[2]))
         filters_list += sorted_filters
         filters_list += [['blk','','--Actions--'],['sh','','Save as a Shortcut'],['sf','','Save as a Filter'],['mf','','Manage Filters']]
-        for lim in filters_list:
-            self.action_list.append(lim)
-        self.action_combo.set_active(0)
+        for index, action in enumerate(filters_list):
+            if action[-1] == action_name:
+                active = index
+            self.action_list.append(action)
+        if active:
+            self.action_combo.set_active(active)
+        else:
+            self.action_combo.set_active(0)
 
     def fill_limit_combo(self):
         self.limit_combo.clear()
@@ -65,63 +79,73 @@ class screen_container(object):
             self.limit_combo.append(lim)
         self.combo.set_active(0)
 
+    def get_filter(self, filter_name):
+        def fnct(filterstore, path, iter, filter_name):
+            if filterstore.get(iter, 2)[0].lower() == filter_name.lower():
+                self.domain, self.context = filterstore.get(iter, 0, 1)
+        self.action_list.foreach(fnct, filter_name)
+        return str(self.domain),str(self.context)
+
     def add_filter(self, widget, fnct, clear_fnct, next_fnct, prev_fnct, execute_action=None, add_custom=None, model=None, limit=100):
         self.filter_vbox = gtk.VBox(spacing=1)
         self.filter_vbox.set_border_width(1)
-        if self.help:
+        if self.help and not self.win_search:
             action_tips = common.action_tips(self.help)
             self.help_frame = action_tips.help_frame
             if self.help_frame:
                 self.filter_vbox.pack_start(self.help_frame, expand=False, fill=False, padding=3)
         self.filter_vbox.pack_start(widget, expand=True, fill=True)
 
-        hb1 = gtk.HButtonBox()
-        hb1.set_spacing(5)
-        hb1.set_layout(gtk.BUTTONBOX_START)
-        hb2 = gtk.HBox(homogeneous=False, spacing=0)
-        hb3 = gtk.HBox(homogeneous=False, spacing=0)
-
         hs = gtk.HBox(homogeneous=False, spacing=0)
-
-        hs.pack_start(hb1, expand=False, fill=False)
-        hs.pack_start(hb2, expand=True, fill=True)
-        hs.pack_end(hb3, expand=False, fill=False)
-
-#Find Clear Buttons
-        self.button = gtk.Button(stock=gtk.STOCK_FIND)
-        self.button.connect('clicked', fnct)
-        self.button.set_property('can_default', True)
-        hb1.pack_start(self.button, expand=False, fill=False)
+        hb1 = gtk.HButtonBox()
+        hb1.set_layout(gtk.BUTTONBOX_START)
 
         button_clear = gtk.Button(stock=gtk.STOCK_CLEAR)
         button_clear.connect('clicked', clear_fnct)
-        hb1.pack_start(button_clear, expand=False, fill=False)
+        if self.win_search:
+            hb3 = hb1
+            hs.pack_start(hb3, expand=False, fill=False)
+            hb3.pack_start(button_clear, expand=False, fill=False)
+        else:
+            hb1.set_spacing(5)
+            hb2 = gtk.HBox(homogeneous=False, spacing=0)
+            hb3 = gtk.HBox(homogeneous=False, spacing=0)
+            hs.pack_start(hb1, expand=False, fill=False)
+            hs.pack_start(hb2, expand=True, fill=True)
+            hs.pack_end(hb3, expand=False, fill=False)
 
-#Action Filter and custom Filter Button
-#actions combo
-        self.action_list = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
-        self.action_combo = gtk.ComboBox(self.action_list)
-        cell = gtk.CellRendererText()
-        self.action_combo.pack_start(cell, True)
-        self.action_combo.add_attribute(cell, 'text', 2)
+    #Find Clear Buttons
+            self.button = gtk.Button(stock=gtk.STOCK_FIND)
+            self.button.connect('clicked', fnct)
+            self.button.set_property('can_default', True)
+            hb1.pack_start(self.button, expand=False, fill=False)
+            hb1.pack_start(button_clear, expand=False, fill=False)
 
-        self.fill_filter_combo(model)
-        self.action_combo.set_active(0)
-        self.action_combo.connect('changed', execute_action)
+    #Action Filter and custom Filter Button
+    #actions combo
+            self.action_list = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
+            self.action_combo = gtk.ComboBox(self.action_list)
+            cell = gtk.CellRendererText()
+            self.action_combo.pack_start(cell, True)
+            self.action_combo.add_attribute(cell, 'text', 2)
 
-#Custom Filter Button
-        img2 = gtk.Image()
-        img2.set_from_stock('gtk-add', gtk.ICON_SIZE_BUTTON)
-        self.button_dynamic = gtk.Button()
-        self.button_dynamic.set_image(img2)
-        self.button_dynamic.set_relief(gtk.RELIEF_NONE)
-        self.button_dynamic.set_alignment(0.3,0.3)
-        self.button_dynamic.connect('clicked', add_custom)
+            self.fill_filter_combo(model)
+            self.action_combo.set_active(0)
+            self.handler_id = self.action_combo.connect('changed', execute_action)
 
-        hb2.pack_start(gtk.Label(''), expand=True, fill=True)
-        hb2.pack_start(self.action_combo, expand=False, fill=False)
-        hb2.pack_start(self.button_dynamic, expand=False, fill=False)
-        hb2.pack_start(gtk.Label(''), expand=True, fill=True)
+    #Custom Filter Button
+            img2 = gtk.Image()
+            img2.set_from_stock('gtk-add', gtk.ICON_SIZE_BUTTON)
+            self.button_dynamic = gtk.Button()
+            self.button_dynamic.set_image(img2)
+            self.button_dynamic.set_relief(gtk.RELIEF_NONE)
+            self.button_dynamic.set_alignment(0.3,0.3)
+            self.button_dynamic.connect('clicked', add_custom)
+
+            hb2.pack_start(gtk.Label(''), expand=True, fill=True)
+            hb2.pack_start(self.action_combo, expand=False, fill=False)
+            hb2.pack_start(self.button_dynamic, expand=False, fill=False)
+            hb2.pack_start(gtk.Label(''), expand=True, fill=True)
 
 # Limit combo
         self.limit_combo = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
@@ -134,8 +158,6 @@ class screen_container(object):
         hb3.pack_start(self.combo, expand=False, fill=False)
         self.fill_limit_combo()
         self.combo.set_active(0)
-
-        hb3.pack_start(gtk.VSeparator(),padding=3, expand=False, fill=False)
 
 #Back Forward Buttons
 
@@ -152,10 +174,13 @@ class screen_container(object):
         self.but_next.set_image(icon2)
         self.but_next.set_relief(gtk.RELIEF_NONE)
         self.but_next.connect('clicked', next_fnct)
-
-        hb3.pack_start(self.but_previous, expand=False, fill=False)
-        hb3.pack_start(self.but_next, expand=False, fill=False)
-
+        next_prev_box = hb3
+        if self.win_search:
+            next_prev_box = gtk.HBox(homogeneous=False, spacing=0)
+            hs.pack_start(next_prev_box, expand=False, fill=False)
+        next_prev_box.pack_start(gtk.VSeparator(),padding=3, expand=False, fill=False)
+        next_prev_box.pack_start(self.but_previous, expand=False, fill=False)
+        next_prev_box.pack_start(self.but_next, expand=False, fill=False)
         hs.show_all()
         self.filter_vbox.pack_start(hs, expand=False, fill=False)
         hs = gtk.HSeparator()

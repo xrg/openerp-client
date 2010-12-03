@@ -30,23 +30,29 @@ import rpc
 from rpc import RPCProxy
 import service
 import locale
+import common
 from interface import parser_view
 from widget.model.record import ModelRecord
 
 class field_record(object):
-    def __init__(self, name):
+    def __init__(self, name, count):
         self.name = name
+        if count:
+            count = ' (' + count +')'
+        self.count = count
 
     def get_client(self, *args):
         if isinstance(self.name, (list,tuple)):
-            return self.name[1]
+            return self.name[1] + self.count
+        if self.count:
+            return str(self.name) + self.count
         return self.name
 
     def get(self, *args):
         if isinstance(self.name, (list,tuple)):
             return self.name[0]
         return self.name
-
+    
     def get_state_attrs(self, *args, **argv):
         return {}
 
@@ -89,7 +95,8 @@ class group_record(object):
         pass
 
     def __getitem__(self, attr):
-        return field_record(self.value.get(attr, ''))
+        count = str(self.value.get('%s_count' % attr,''))
+        return field_record(self.value.get(attr, ''), count)
 
 def echo(fn):
     def wrapped(self, *v, **k):
@@ -121,7 +128,7 @@ class list_record(object):
         if self.loaded:
             return
         self.loaded = True
-        gb = self.context.get('group_by', False)
+        gb = self.context.get('group_by', [])
         no_leaf = self.context.get('group_by_no_leaf', False)
         if gb or no_leaf:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
@@ -139,11 +146,11 @@ class list_record(object):
                     if not no_leaf:
                         ctx.update({'__field':gb[-1]})
                     ctx.update(__ctx)
-                    rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child,sort_order=self.sort_order)
+                    rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child, sort_order=self.sort_order)
                     for field in gb:
                         if not rec.value.get(field, False):
                             field_type = self.mgroup.fields.get(field, {}).get('type', False)
-                            if field in inner_gb or field_type in ('integer', 'float'):
+                            if field in inner_gb or field_type in ('integer', 'float', 'boolean'):
                                 continue
                             rec.value[field] = 'Undefined'
                             rec.field_with_empty_labels.append(field)
@@ -230,7 +237,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     ## Mandatory GenericTreeModel methods
 
     def on_get_flags(self):
-        if self.context.get('group_by', False):
+        if self.context.get('group_by'):
             return gtk.TREE_MODEL_ITERS_PERSIST
         return gtk.TREE_MODEL_LIST_ONLY
 
@@ -335,7 +342,7 @@ class ViewList(parser_view):
         selection.connect('changed', self.__select_changed)
 
     def set_drag_and_drop(self,dnd=False):
-        if dnd or self.screen.context.get('group_by',False):
+        if dnd or self.screen.context.get('group_by'):
             self.widget_tree.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
                     [('MY_TREE_MODEL_ROW', gtk.TARGET_SAME_WIDGET, 0),],
                     gtk.gdk.ACTION_MOVE)
@@ -411,7 +418,7 @@ class ViewList(parser_view):
             path, position = drop_info
             self.source_group_child = []
             rec_id = model.on_iter_has_child(model.on_get_iter(path)) and path or path[:-1]
-            group_by = self.screen.context.get('group_by',False)
+            group_by = self.screen.context.get('group_by')
             if group_by:
                 if data and path and data[:-1] == path[:-1] \
                             and isinstance(model.on_get_iter(data), ModelRecord):
@@ -444,7 +451,8 @@ class ViewList(parser_view):
                         rpc.write(map(lambda x:x.id,self.source_group_child),val)
                         self.reload = True
                         self.screen.reload()
-                treeview.expand_all()
+                for expand_path in (data, path):
+                    treeview.expand_to_path(expand_path)
             else:
                 idx = path[0]
                 if position in (gtk.TREE_VIEW_DROP_BEFORE,
@@ -511,25 +519,40 @@ class ViewList(parser_view):
                 model, paths = selection.get_selected_rows()
             if (not path) or not path[0]:
                 return False
-            m = model.models[path[0][0]]
-            groupby = self.screen.context.get('group_by',False)
+            current_active_model = model.models[path[0][0]]
+            groupby = self.screen.context.get('group_by')
             if groupby:
-                m = self.store.on_get_iter(path[0])
+                current_active_model = self.store.on_get_iter(path[0])
             # TODO: add menu cache
 
             if event.button == 1:
                 # first click on button
                 if path[1]._type == 'Button':
                     cell_button = path[1].get_cells()[0]
+                    if not cell_button.get_property('sensitive'):
+                        return
                     # Calling actions
-                    attrs_check = self.attrs_set(m, path[1])
+                    attrs_check = self.attrs_set(current_active_model, path[1])
                     states = [e for e in path[1].attrs.get('states','').split(',') if e]
-                    if (attrs_check and not states) or (attrs_check and m['state'].get(m) in states):
-                        m.get_button_action(self.screen, m.id, path[1].attrs)
+                    if (attrs_check and not states) or \
+                            (attrs_check and \
+                             current_active_model['state'].get(current_active_model) in states):
+                        if self.widget_tree.editable:
+                            if current_active_model.validate():
+                                id = self.screen.save_current()
+                            else:
+                               common.warning(_('Invalid form, correct red fields !'), _('Error !') )
+                               self.widget_tree.warn('misc-message', _('Invalid form, correct red fields !'), "red")
+                               self.screen.display()
+                               return False
+                        else:
+                            id = current_active_model.id
+                        current_active_model.get_button_action(self.screen, id, path[1].attrs)
                         self.screen.current_model = None
-                        if self.screen.parent:
+                        if self.screen.parent and isinstance(self.screen.parent, ModelRecord):
                             self.screen.parent.reload()
-                        m.reload()
+                        current_active_model.reload()
+
             else:
                 # Here it goes for right click
                 selected_rows = selection.get_selected_rows()
@@ -546,11 +569,11 @@ class ViewList(parser_view):
                 menu.append(item)
 
                 if path[1]._type=='many2one':
-                    value = m[path[1].name].get(m)
+                    value = current_active_model[path[1].name].get(current_active_model)
                     resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.screen.fields[path[1].name]['relation'], False)], False, rpc.session.context)
                     resrelate = map(lambda x:x[2], resrelate)
                     if resrelate:
-                        item=gtk.SeparatorMenuItem()
+                        item = gtk.SeparatorMenuItem()
                         item.show()
                         menu.append(item)
                     for x in resrelate:
@@ -643,7 +666,7 @@ class ViewList(parser_view):
             self.changed_col.remove(col)
 
     def move_colums(self):
-        if self.screen.context.get('group_by', False):
+        if self.screen.context.get('group_by'):
             groupby = self.screen.context['group_by']
             # This is done to take the order of the columns
             #as order in groupby list
@@ -670,7 +693,7 @@ class ViewList(parser_view):
 
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
-            if self.screen.context.get('group_by', False):
+            if self.screen.context.get('group_by'):
                 if self.screen.type == 'one2many':
                     self.screen.domain = [('id','in',self.screen.ids_get())]
                 self.screen.models.models.clear()
@@ -732,7 +755,8 @@ class ViewList(parser_view):
                         if store.on_iter_has_child(child):
                             process(child)
                         else:
-                            ids.append(child.id or parent)
+                            if child.id:
+                                ids.append(child.id)
                 process(model)
             else:
                 if model.id:
@@ -765,7 +789,7 @@ class ViewList(parser_view):
         self.set_editable(False)
 
     def check_editable(self):
-        if self.screen.context.get('group_by',False):
+        if self.screen.context.get('group_by'):
             if self.widget_tree.editable: # Treeview is editable in groupby unset editable
                 self.set_editable(False)
         elif self.is_editable or self.screen.context.get('set_editable',False):#Treeview editable by default or set_editable in context
@@ -795,7 +819,7 @@ class ViewList(parser_view):
         for col in self.widget_tree.get_columns():
             if col._type == 'datetime':
                 col.set_max_width(145)
-                if self.screen.context.get('group_by',False):
+                if self.screen.context.get('group_by'):
                     col.set_max_width(180)
             value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
                            {'context':self.screen.context})

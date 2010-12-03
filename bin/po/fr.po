@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-02-20 05:28+0000\n"
+"PO-Revision-Date: 2010-11-29 07:06+0000\n"
 "Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-29 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-11-30 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr "Imprimer le workflow"
+msgstr "Imprimer le flux de travail"
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
-msgstr "Imprimer le workflow (complet)"
+msgid "Print Workflow (with subflows)"
+msgstr "Imprimer le flux de travail (et ses sous flux)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
@@ -40,7 +40,7 @@ msgstr "Impossible de mettre la locale %s"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr "Fermeture de OpenERP, Interruption clavier"
+msgstr "Fermeture d'OpenERP, interruption au clavier"
 
 #: bin/options.py:108
 #, python-format
@@ -53,7 +53,7 @@ msgstr "indiquez un autre fichier de configuration"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr "Activer les traces. Raccouric pour '--log-level=debug'"
+msgstr "Activer le débogage de base. Raccourci pour '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
@@ -600,7 +600,7 @@ msgstr "Erreur d'exportation !"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr "L'ID de la ressource n'existe pas pour cet objet !"
+msgstr "Aucune ressource ne porte cet id. pour cet objet !"
 
 #: bin/modules/gui/window/form.py:221
 msgid "No record selected ! You can only attach to existing record."
@@ -909,13 +909,9 @@ msgstr "Serveur :"
 msgid "Change"
 msgstr "Modifier"
 
-#
-# File: bin/openerp.glade, line: 372
-# File: bin/openerp.glade, line: 372
-# File: bin/openerp.glade, line: 372
 #: bin/modules/gui/main.py:109 bin/openerp.glade:7011
 msgid "Super Administrator Password:"
-msgstr "Mot de passe Administrateur"
+msgstr "Mot de passe du super-administrateur:"
 
 #: bin/modules/gui/main.py:172 bin/modules/action/wizard.py:137
 msgid "OpenERP Computing"
@@ -951,7 +947,7 @@ msgstr "Scripts de migration"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr "Contrat ID :"
+msgstr "Id. du contrat :"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
@@ -975,11 +971,11 @@ msgstr "Migrer la base de données"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr "Votre base de donées a été migrée."
+msgstr "Votre base de donées a été migré."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr "Vos bases de données ont été migrées."
+msgstr "Vos bases de données ont migré."
 
 #
 # File: bin/modules/gui/window/__init__.py, line: 33
@@ -1000,8 +996,8 @@ msgid ""
 "may not work properly. Use it at your own risks."
 msgstr ""
 "Les versions du serveur (%s) et du client (%s) divergent. Le client ne "
-"devrez pas fonctionner correctement. Cette utilisation est à votre propre "
-"risque."
+"fonctionnera pet-être pas correctement. Cette utilisation est à votre "
+"risques et périls."
 
 #: bin/modules/gui/main.py:595
 msgid "Sorry,'"
@@ -1016,9 +1012,10 @@ msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
-"Le nom de base de données doit seulement contenir des caractères normaux ou "
-"\"_\".\n"
-"Vous devez éviter les accents, l'espace et les caractères spéciaux."
+"Le nom de la base de données ne doit contenir que des lettres, des chiffres "
+"ou le caractère \"_\". \n"
+"Les lettres accentuées, les espaces et les caractères spéciaux ne sont pas "
+"autorisés."
 
 #
 # File: bin/openerp.glade, line: 9633
@@ -1054,17 +1051,13 @@ msgstr "Mot de passe administrateur de base de données incorrect !"
 msgid "Error during database creation !"
 msgstr "Erreur lors de la création de la base de données !"
 
-#
-# File: bin/modules/gui/main.py, line: 370
-# File: bin/modules/gui/main.py, line: 370
-# File: bin/modules/gui/main.py, line: 370
 #: bin/modules/gui/main.py:669
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
-"Le serveur s'est arrêté anormalement lors de l'installation.\n"
-"Nous vous suggérons de supprimer la base de données."
+"Une erreur est survenue sur le serveur pendant l'installation.\n"
+"Il est conseillé de supprimer cette base de données."
 
 #: bin/modules/gui/main.py:687
 msgid "The following users have been installed on your database:"
@@ -1269,25 +1262,17 @@ msgstr ""
 "Le mot de passe de confirmation ne correspond pas à votre nouveau mot de "
 "passe : opération annulée !"
 
-#
-# File: bin/modules/gui/main.py, line: 1100
-# File: bin/modules/gui/main.py, line: 1100
-# File: bin/modules/gui/main.py, line: 1100
 #: bin/modules/gui/main.py:1404
 msgid "Validation Error."
-msgstr "Erreur de validation"
+msgstr "Erreur de validation."
 
 #: bin/modules/gui/main.py:1412
 msgid "Could not change the Super Admin password."
-msgstr "Impossible de changer le mot de passe du super administrateur."
+msgstr "Impossible de changer le mot de passe du super-administrateur."
 
-#
-# File: bin/modules/gui/main.py, line: 1109
-# File: bin/modules/gui/main.py, line: 1109
-# File: bin/modules/gui/main.py, line: 1109
 #: bin/modules/gui/main.py:1413
 msgid "Bad password provided !"
-msgstr "Mauvais mot de passe spécifié !"
+msgstr "Le mot de passe indiqué est incorrect !"
 
 #
 # File: bin/modules/gui/main.py, line: 1111
@@ -1448,7 +1433,7 @@ msgstr "Ce type (%s) n'est pas supporté par le client GTK !"
 
 #: bin/widget/view/widget_parse.py:63
 msgid "No valid view found for this object!"
-msgstr "Aucune vue valide pour cet objet !"
+msgstr "Aucune vue disponible pour cet objet !"
 
 #
 # File: bin/widget/view/form_gtk/wid_common.py, line: 60
@@ -1587,7 +1572,7 @@ msgstr "Erreur lors de l'écriture du fichier: %s"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr "Valeur de date invalide! L'année doit êtr eplus grande que 1899 !"
+msgstr "Date incorrecte ! L'année doit être après 1899 !"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 115
@@ -1604,8 +1589,7 @@ msgstr "Ce composant est en lecture seule !"
 #: bin/widget/view/form_gtk/calendar.py:230
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
-"Valeur de date et heure invalide! L'année doit êtr eplus grande que 1899 !"
+msgstr "Horodatage incorrecte ! L'année doit être supérieur à 1899 !"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
@@ -1839,7 +1823,7 @@ msgstr "Télécharger le code de migration"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr "_Migrer le(s) base(s) de données"
+msgstr "_Migrer la/les base(s) de données"
 
 #
 # File: bin/openerp.glade, line: 372
@@ -2025,7 +2009,7 @@ msgstr "Voir _les journaux"
 
 #: bin/openerp.glade:752
 msgid "_Go to resource ID..."
-msgstr "Rechercher par identifiant"
+msgstr "Chercher par id."
 
 #
 # File: bin/openerp.glade, line: 733
@@ -2276,7 +2260,7 @@ msgstr "_Manuel d'utilisation"
 
 #: bin/openerp.glade:1157
 msgid "_Contextual Help"
-msgstr "_Aide contextuelle"
+msgstr "Aide _contextuelle"
 
 #
 # File: bin/openerp.glade, line: 1140
@@ -2326,21 +2310,13 @@ msgstr "Editer/Sauvegarder cette resource"
 msgid "Delete this resource"
 msgstr "Supprimer cette ressource"
 
-#
-# File: bin/openerp.glade, line: 1254
-# File: bin/openerp.glade, line: 1254
-# File: bin/openerp.glade, line: 1254
 #: bin/openerp.glade:1287
 msgid "Go to previous matched search"
-msgstr "Aller à la recherche précédente"
+msgstr "Résultat de recherche précédent"
 
-#
-# File: bin/openerp.glade, line: 1265
-# File: bin/openerp.glade, line: 1265
-# File: bin/openerp.glade, line: 1265
 #: bin/openerp.glade:1298
 msgid "Go to next matched resource"
-msgstr "Aller à la recherche suivante"
+msgstr "Résultat de recherche suivant"
 
 #: bin/openerp.glade:1311
 msgid "List"
@@ -2562,13 +2538,9 @@ msgstr ""
 msgid "_Contact"
 msgstr "_Contact"
 
-#
-# File: bin/openerp.glade, line: 1942
-# File: bin/openerp.glade, line: 1942
-# File: bin/openerp.glade, line: 1942
 #: bin/openerp.glade:1991
 msgid "Open ERP - Forms widget"
-msgstr "OpenERP - Composant formulaire"
+msgstr "OpenERP - Composant de formulaire"
 
 #: bin/openerp.glade:2170 bin/openerp.glade:4735
 msgid "OpenERP - Confirmation"
@@ -2817,11 +2789,11 @@ msgstr "OpenERP Licence"
 
 #: bin/openerp.glade:4286
 msgid "Go to resource ID"
-msgstr "Rechercher par identifiant"
+msgstr "Chercher par id."
 
 #: bin/openerp.glade:4336
 msgid "Search ID:"
-msgstr "Identifiant recherché :"
+msgstr "Id. à rechercher:"
 
 #: bin/openerp.glade:4415
 msgid ""
@@ -2883,7 +2855,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 6517
 #: bin/openerp.glade:4534
 msgid "<b>Support contract id:</b>"
-msgstr "<b>Identifiant du contrat de support :</b>"
+msgstr "<b>Identifiant du contrat de support:</b>"
 
 #
 # File: bin/openerp.glade, line: 6574
@@ -3221,25 +3193,17 @@ msgstr "Champs texte avec auto-complétion"
 msgid "<Enter>"
 msgstr "<Entrée>"
 
-#
-# File: bin/openerp.glade, line: 7355
-# File: bin/openerp.glade, line: 7355
-# File: bin/openerp.glade, line: 7355
 #: bin/openerp.glade:5372
 msgid "Previous editable widget"
-msgstr "Précedent composant modifiable"
+msgstr "Composant modifiable précédent"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
 msgstr "<Shift> + <Tab>"
 
-#
-# File: bin/openerp.glade, line: 7383
-# File: bin/openerp.glade, line: 7383
-# File: bin/openerp.glade, line: 7383
 #: bin/openerp.glade:5400
 msgid "Next editable widget"
-msgstr "Prochain composant modifiable"
+msgstr "Composant modifiable suivant"
 
 #
 # File: bin/openerp.glade, line: 7398
@@ -3483,13 +3447,9 @@ msgstr "Nom de la nouvelle base de données :"
 msgid "http://localhost:8069"
 msgstr "http://localhost:8069"
 
-#
-# File: bin/openerp.glade, line: 8872
-# File: bin/openerp.glade, line: 8872
-# File: bin/openerp.glade, line: 8872
 #: bin/openerp.glade:6889
 msgid "Create a new database"
-msgstr "Créer une nouvelle base de données."
+msgstr "Créer une nouvelle base de données"
 
 #
 # File: bin/openerp.glade, line: 8885
@@ -3518,9 +3478,9 @@ msgid ""
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 "Ceci est le mot de passe de l'utilisateur qui a les droits pour administrer "
-"les base de données. Ce n'est pas un utilisateur OpenERP, juste un super "
-"utilisateur. Si vous ne l'avez pas changé, le mot de passe est 'admin' après "
-"l'installation."
+"les base de données. Ce n'est pas un utilisateur OpenERP, uniquement un "
+"super-utilisateur. Si vous ne l'avez pas changé, le mot de passe est 'admin' "
+"après l'installation."
 
 #: bin/openerp.glade:7043
 msgid "(<i>admin</i>, by default)"
@@ -3590,9 +3550,9 @@ msgid ""
 "database. These data will help you to understand OpenERP, with predefined "
 "products, partners, etc."
 msgstr ""
-"Cochez cette case si vous voulez que les données de démonstration soient "
+"Cocher cette case si vous voulez que les données de démonstration soient "
 "installées dans votre nouvelle base de données. Ces données vous aideront à "
-"comprendre OpenERP, avec des produits prédéfinis, partenaires, etc."
+"comprendre OpenERP. avec des produits prédéfinis, partenaires, etc."
 
 #: bin/openerp.glade:7259
 msgid "Load Demonstration Data:"
@@ -3606,13 +3566,9 @@ msgstr "Charger les données de démonstration :"
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
-#
-# File: bin/openerp.glade, line: 9316
-# File: bin/openerp.glade, line: 9316
-# File: bin/openerp.glade, line: 9316
 #: bin/openerp.glade:7333
 msgid "<b>Change your super admin password</b>"
-msgstr "<b>Changer votre mot de passe super administrateur</b>"
+msgstr "<b>Changer votre mot de passe super-administrateur</b>"
 
 #
 # File: bin/openerp.glade, line: 9469

@@ -49,7 +49,7 @@ class dialog(object):
         if not window:
             window = service.LocalService('gui.main').window
 
-        self.dia = gtk.Dialog(_('OpenERP - Link'), window,
+        self.dia = gtk.Dialog(_('OpenERP'), window,
                 gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
         self.window = window
         if ('string' in attrs) and attrs['string']:
@@ -61,30 +61,21 @@ class dialog(object):
 
         self.accel_group = gtk.AccelGroup()
         self.dia.add_accel_group(self.accel_group)
-
-        action_area = self.dia.get_action_area()
-
-        self.but_cancel = gtk.Button('Cancel')
-        self.but_cancel.connect('clicked', self.get_response, gtk.RESPONSE_CANCEL)
+        self.but_cancel = self.dia.add_button('Cancel', gtk.RESPONSE_CANCEL)
         icon = gtk.Image()
         icon.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_BUTTON)
         self.but_cancel.set_image(icon)
-        action_area.pack_start(self.but_cancel)
         self.but_cancel.add_accelerator('clicked', self.accel_group, gtk.keysyms.Escape, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
-        self.but_save_close = gtk.Button('Save & Close')
-        self.but_save_close.connect('clicked', self.get_response, gtk.RESPONSE_APPLY)
+        self.but_save_close = self.dia.add_button('Save & Close', gtk.RESPONSE_APPLY)
         icon = gtk.Image()
         icon.set_from_stock(gtk.STOCK_APPLY, gtk.ICON_SIZE_BUTTON)
         self.but_save_close.set_image(icon)
-        action_area.pack_start(self.but_save_close)
 
-        self.but_save_new = gtk.Button('Save & New')
-        self.but_save_new.connect('clicked', self.get_response, gtk.RESPONSE_OK)
+        self.but_save_new = self.dia.add_button('Save & New', gtk.RESPONSE_OK)
         icon = gtk.Image()
         icon.set_from_stock(gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON)
         self.but_save_new.set_image(icon)
-        action_area.pack_start(self.but_save_new)
         self.but_save_new.add_accelerator('clicked', self.accel_group, gtk.keysyms.Return, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
         self.context = context
@@ -129,10 +120,6 @@ class dialog(object):
         self.screen.current_model = model
         self.screen.make_buttons_readonly()
         return True
-
-    def get_response(self, button=None, response_id=False):
-        if response_id:
-            return self.dia.response(response_id)
 
     def run(self, datas={}):
         end = False
@@ -195,7 +182,7 @@ class one2many_list(interface.widget_interface):
         menubar.add(menuitem_title)
         hb.pack_start(menubar, expand=True, fill=True)
 
-        if self.context.get('group_by',False):
+        if self.context.get('group_by'):
             self.context['group_by'] = [self.context['group_by']]
 
         # the context to pass to default_get can be optionally specified in
@@ -348,10 +335,12 @@ class one2many_list(interface.widget_interface):
                 dia.destroy()
 
     def _sig_edit(self, *args):
+        ctx = dict(self._view.model.expr_eval(self.screen.default_get), **self.context)
+        ctx.update(self._view.model.expr_eval('dict(%s)' % self.attrs.get('context', '{}')))
         if self.screen.current_model:
             ok = True
             edited_model = self.screen.current_model
-            dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly, context=self.context)
+            dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly, context=ctx)
             while ok:
                 ok, value, res = dia.run()
                 if res == gtk.RESPONSE_OK:

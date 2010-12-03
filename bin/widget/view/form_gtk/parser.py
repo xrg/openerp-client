@@ -61,7 +61,9 @@ class Button(Observable):
 
 #           self.widget.set_use_stock(True)
 #       self.widget.set_label(args['label'])
-
+        tooltip = attrs.get('help')
+        if tooltip:
+            self.widget.set_tooltip_markup(tooltip)
         self.widget.show()
         self.widget.connect('clicked', self.button_clicked)
 
@@ -125,6 +127,7 @@ class Button(Observable):
             common.warning(_('Invalid form, correct red fields !'), _('Error !') )
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
             self.form.screen.display()
+            self.form.screen.current_view.set_cursor()
 
 
 
@@ -158,10 +161,32 @@ class StateAwareWidget(object):
                 if self.label:
                         getattr(self.label, func)()
             elif k == 'readonly':
+<<<<<<< TREE
                     self.widget.set_sensitive(not result)
                     if self.label:
                         self.label.set_sensitive(not result)
 
+=======
+                if isinstance(self.widget, gtk.Frame):
+                    for name, wid in self.frame_child.iteritems():
+                        self.set_sensitive(wid, result)
+                else:
+                    self.set_sensitive(self.widget, result)
+    ## This method is hacked here because field labels that are readonly
+    ## should not change their looks to readonly GTK widgets as it makes
+    ## the label text very difficult to read in some themes.
+    def set_sensitive(self, widget, value):
+        if hasattr(widget, "get_children") and not \
+            isinstance(widget, gtk.ComboBoxEntry):
+            for wid in widget.get_children():
+               self.set_sensitive(wid, value)
+        if not isinstance(widget, gtk.Label):
+            if hasattr(widget,'_readonly_set'):
+                widget._readonly_set(value)
+            else:
+                widget.set_sensitive(not value)
+        return True
+>>>>>>> MERGE-SOURCE
 
 class _container(object):
     def __init__(self):
@@ -449,6 +474,13 @@ class parser_form(widget.view.interface.parser_interface):
                 if 'filename' in attrs:
                     fields[name]['filename'] = attrs['filename']
 
+<<<<<<< TREE
+=======
+                if 'default_focus' in attrs and not self.default_focus_field:
+                    fields[name]['focus_field'] = attrs['default_focus']
+                    self.default_focus_field = True
+
+>>>>>>> MERGE-SOURCE
                 widget_act = widgets_type[type][0](self.window, self.parent, model, fields[name])
                 self.widget_id += 1
                 widget_act.position = self.widget_id

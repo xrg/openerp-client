@@ -67,11 +67,11 @@ class CharField(object):
     def context_get(self, model, check_load=True, eval=True):
         context = {}
         context.update(self.parent.context)
-        # removing default keys,group_by of the parent context
+        # removing default keys,group_by,search_default of the parent context
         context_own = context.copy()
         for c in context.items():
             if c[0].startswith('default_') or c[0] in ('set_editable','set_visible')\
-             or c[0] == 'group_by':
+             or c[0] == 'group_by' or c[0].startswith('search_default_'):
                 del context_own[c[0]]
 
         field_context_str = self.attrs.get('context', '{}') or '{}'
@@ -170,8 +170,10 @@ class BinaryField(CharField):
             c = rpc.session.context.copy()
             c.update(model.context_get())
             c['bin_size'] = bin_size
-            value = model.rpc.read([model.id], [self.name], c)[0][self.name]
-            self.set(model, value, modified=modified, get_binary_size=bin_size)
+            data = model.rpc.read([model.id], [self.name], c)
+            if data:
+                value = data[0][self.name]
+                self.set(model, value, modified=modified, get_binary_size=bin_size)
 
     def get_size_name(self):
         return "%s.size" % self.name
@@ -332,17 +334,22 @@ class M2MField(CharField):
         return []
 
     def get_client(self, model):
-        return model.value[self.name] or []
+        res = []
+        if self.name in model.pager_cache:
+            res = model.pager_cache[self.name]
+        return res or model.value[self.name] or []
 
     def set(self, model, value, test_state=False, modified=False):
         model.value[self.name] = value and value[:self.limit] or []
+        model.pager_cache[self.name] = value and value[:self.limit] or []
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
 
     def set_client(self, model, value, test_state=False, force_change=False):
+        internal = model.pager_cache[self.name]
         self.set(model, value, test_state, modified=False)
-        if model.is_m2m_modified:
+        if model.is_m2m_modified or set(internal) != set(value):
             model.is_m2m_modified = False
             model.modified = True
             model.modified_fields.setdefault(self.name)

@@ -110,6 +110,7 @@ class DatabaseDialog(gtk.Dialog):
         self.table.attach(lbl, 0, 1, 2, 3)
         self.adminPwdEntry = gtk.Entry()
         self.adminPwdEntry.set_visibility(False)
+        self.adminPwdEntry.set_activates_default(True)
         self.table.attach(self.adminPwdEntry, 1, 2, 2, 3)
 
         self.vbox.add(self.table)
@@ -166,32 +167,7 @@ class DatabaseDialog(gtk.Dialog):
 
             if i > 10:
                 if not win or not pb:
-                    win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
-                    win.set_title(_('OpenERP Computing'))
-                    win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                    win.set_modal(True)
-                    win.set_resizable(False)
-                    vbox = gtk.VBox(False, 0)
-                    hbox = gtk.HBox(False, 13)
-                    hbox.set_border_width(10)
-                    img = gtk.Image()
-                    img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
-                    hbox.pack_start(img, expand=True, fill=False)
-                    vbox2 = gtk.VBox(False, 0)
-                    label = gtk.Label()
-                    label.set_markup('<b>'+_('Operation in progress')+'</b>')
-                    label.set_alignment(0.0, 0.5)
-                    vbox2.pack_start(label, expand=True, fill=False)
-                    vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
-                    vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
-                    hbox.pack_start(vbox2, expand=True, fill=True)
-                    vbox.pack_start(hbox)
-                    pb = gtk.ProgressBar()
-                    pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
-                    vbox.pack_start(pb, expand=True, fill=False)
-                    win.add(vbox)
-                    win.set_transient_for(self)
-                    win.show_all()
+                    win, pb = common.OpenERP_Progressbar(self)
                 pb.pulse()
                 gtk.main_iteration()
         if win:
@@ -411,15 +387,14 @@ def _refresh_langlist(lang_widget, url):
     liststore = lang_widget.get_model()
     liststore.clear()
     lang_list = rpc.session.db_exec_no_except(url, 'list_lang')
-    lang_list.append( ('en_US','English') )
-    for key,val in lang_list:
-        liststore.insert(0, (val,key))
     lang = rpc.session.context.get('lang', options.options.get('client.lang', 'en_US'))
-    lang_widget.set_active(0)
-    for idx, item in enumerate(lang_widget.get_model()):
-        if item[1] == lang:
-            lang_widget.set_active(idx)
-            break
+    active_idx = -1
+    for index, (key,val) in enumerate(lang_list):
+        if key == lang:
+            active_idx = index
+        liststore.append((val,key))
+    if active_idx != -1:
+        lang_widget.set_active(active_idx)
     return lang_list
 
 def _server_ask(server_widget, parent=None):
@@ -437,8 +412,8 @@ def _server_ask(server_widget, parent=None):
     protocol_widget = win_gl.get_widget('protocol')
 
     protocol = {
-        'XML-RPC': 'http://',
-        'NET-RPC (faster)': 'socket://',
+        'XML-RPC (port : 8069)': 'http://',
+        'NET-RPC (faster)(port : 8070)': 'socket://',
     }
 
     if check_ssl():
@@ -654,43 +629,16 @@ class db_create(object):
 
         if res == gtk.RESPONSE_OK:
             try:
-                id=rpc.session.db_exec(url, 'list')
+                id = rpc.session.db_exec(url, 'list')
                 if db_name in id:
                     raise Exception('DbExist')
                 id = rpc.session.db_exec(url, 'create', passwd, db_name, demo_data, langreal, user_pass)
-                win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
-                win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                win.set_title(_('OpenERP Database Installation'))
-                win.set_resizable(False)
-                vbox = gtk.VBox(False, 0)
-                hbox = gtk.HBox(False, 13)
-                hbox.set_border_width(10)
-                img = gtk.Image()
-                img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
-                hbox.pack_start(img, expand=True, fill=False)
-                vbox2 = gtk.VBox(False, 0)
-                label = gtk.Label()
-                label.set_markup(_('<b>Operation in progress</b>'))
-                label.set_alignment(0.0, 0.5)
-                vbox2.pack_start(label, expand=True, fill=False)
-                vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
-                vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
-                hbox.pack_start(vbox2, expand=True, fill=True)
-                vbox.pack_start(hbox)
-                pb = gtk.ProgressBar()
-                pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
-                vbox.pack_start(pb, expand=True, fill=False)
-                win.add(vbox)
-                if not parent:
-                    parent = service.LocalService('gui.main').window
-                win.set_transient_for(parent)
-                win.show_all()
+                win, pb = common.OpenERP_Progressbar(parent, title='OpenERP Database Installation')
                 self.timer = gobject.timeout_add(1000, self.progress_timeout, pb, url, passwd, id, win, db_name, parent)
                 self.terp_main.glade.get_widget('but_menu').set_sensitive(True)
                 self.terp_main.glade.get_widget('user').set_sensitive(True)
                 self.terp_main.glade.get_widget('form').set_sensitive(True)
                 self.terp_main.glade.get_widget('plugins').set_sensitive(True)
-
             except Exception, e:
                 if e.args == ('DbExist',):
                     common.warning(_("Could not create database."),_('Database already exists !'))
@@ -824,7 +772,7 @@ class terp_main(service.Service):
 
         self.buttons = {}
         for button in ('but_new', 'but_save', 'but_remove', 'but_search', 'but_previous', 'but_next', 'but_action', 'but_open', 'but_print', 'but_close', 'but_reload', 'but_switch','but_attach',
-                       'radio_tree','radio_form','radio_graph','radio_calendar','radio_diagram', 'radio_gantt', 'radio_gallery'):
+                       'radio_tree','radio_form','radio_graph','radio_calendar','radio_diagram', 'radio_gantt'):
             self.glade.signal_connect('on_'+button+'_clicked', self._sig_child_call, button)
             self.buttons[button]=self.glade.get_widget(button)
 
@@ -1504,7 +1452,7 @@ class terp_main(service.Service):
                 action=gtk.FILE_CHOOSER_ACTION_SAVE,
                 parent=self.window,
                 preview=False,
-                filename='%s_%s.sql' % (db_name, time.strftime('%Y%m%d_%H:%M'),))
+                filename=('%s_%s.sql' % (db_name, time.strftime('%Y%m%d_%H:%M'),)).replace(':','_'))
 
         if filename:
             try:

@@ -153,9 +153,9 @@ _LOCALE2WIN32 = {
 
 def setlang(lang=None):
     APP = release.name
-    DIR = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'share/locale')
+    DIR = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'share', 'locale')
     if not os.path.isdir(DIR):
-        DIR = os.path.join(sys.prefix, 'share/locale')
+        DIR = os.path.join(sys.prefix, 'share', 'locale')
     if not os.path.isdir(DIR):
         gettext.install(APP, unicode=1)
         return False

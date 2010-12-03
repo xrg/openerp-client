@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-11-25 13:23+0000\n"
-"Last-Translator: ninaiz <inigo.rekalde@gmail.com>\n"
+"PO-Revision-Date: 2010-11-28 06:51+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-29 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-11-29 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -22,30 +22,30 @@ msgid "Print Workflow"
 msgstr ""
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr ""
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr ""
+msgstr "Ez dago plugin-ik eskuragarri baliabide honetarako!"
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
-msgstr ""
+msgstr "Hautatu plugin bat"
 
 #: bin/translate.py:184
 #, python-format
 msgid "Unable to set locale %s"
-msgstr ""
+msgstr "Ezin izan da %s locale-a ezarri"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "OpenERP ixten, KeyboardInterrupt"
 
 #: bin/options.py:108
 #, python-format
 msgid "OpenERP Client %s"
-msgstr ""
+msgstr "OpenERP bezeroa %s"
 
 #: bin/options.py:109
 msgid "specify alternate config file"
@@ -62,15 +62,15 @@ msgstr ""
 
 #: bin/options.py:112
 msgid "specify the user login"
-msgstr ""
+msgstr "zehaztu erabiltzailearen saio-hastea"
 
 #: bin/options.py:113
 msgid "specify the server port"
-msgstr ""
+msgstr "zehaztu zerbitzari-ataka"
 
 #: bin/options.py:114
 msgid "specify the server ip/name"
-msgstr ""
+msgstr "zehaztu zerbitzari ip-a/izena"
 
 #: bin/printer/printer.py:185
 #, python-format
@@ -91,11 +91,11 @@ msgstr ""
 #: bin/modules/gui/main.py:1424 bin/widget/view/form_gtk/binary.py:162
 #: bin/widget/view/form_gtk/image.py:119
 msgid "Save As..."
-msgstr "Honela Gorde..."
+msgstr "Gorde honela..."
 
 #: bin/printer/printer.py:225
 msgid "Error writing the file!"
-msgstr ""
+msgstr "Errorea fitxategia idaztean!"
 
 #: bin/common/common.py:212
 msgid ""
@@ -183,7 +183,7 @@ msgstr ""
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Errorea"
 
 #: bin/common/common.py:599
 msgid "Open with..."
@@ -213,15 +213,15 @@ msgstr ""
 
 #: bin/widget_search/form.py:193
 msgid "Parameters :"
-msgstr "Parametro:"
+msgstr "Parametroak:"
 
 #: bin/widget_search/form.py:301
 msgid "The content of the form or exception if not valid"
-msgstr ""
+msgstr "Formularioaren edukia edo salbuespena baliogabea bada"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "Widget-aren edukia edo salbuespena baliogabea bada"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -245,7 +245,7 @@ msgstr "Hasiera-data"
 #: bin/widget/view/form_gtk/calendar.py:62
 #: bin/widget/view/form_gtk/calendar.py:184
 msgid "Open the calendar widget"
-msgstr "Egutegia ireki"
+msgstr "Ireki egutegi-widget-a"
 
 #: bin/widget_search/calendar.py:75
 msgid "End date"
@@ -258,11 +258,11 @@ msgstr "OpenERP - Dataren aukeraketa"
 
 #: bin/rpc.py:140 bin/modules/gui/main.py:210 bin/modules/action/wizard.py:175
 msgid "Connection refused !"
-msgstr ""
+msgstr "Konexioa ukatu da!"
 
 #: bin/rpc.py:141
 msgid "Connection refused!"
-msgstr ""
+msgstr "Konexioa ukatu da!"
 
 #: bin/rpc.py:171
 msgid ""
@@ -278,65 +278,66 @@ msgstr "Konexio-errorea"
 #: bin/modules/gui/main.py:224 bin/modules/action/wizard.py:187
 #: bin/modules/action/wizard.py:193 bin/modules/action/wizard.py:195
 msgid "Application Error"
-msgstr ""
+msgstr "Aplikazio-errorea"
 
 #: bin/rpc.py:188 bin/modules/action/wizard.py:195
 msgid "View details"
-msgstr ""
+msgstr "Ikusi xehetasunak"
 
 #: bin/modules/gui/window/win_search.py:50
 #: bin/widget/view/form_gtk/one2many_list.py:51
 msgid "OpenERP - Link"
-msgstr ""
+msgstr "OpenERP - Esteka"
 
 #: bin/modules/gui/window/win_search.py:147
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr ""
+msgstr "OpenERP bilaketa: %s"
 
 #: bin/modules/gui/window/win_search.py:148
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr ""
+msgstr "OpenERP bilaketa: %s (%%d emaitza)"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "Fitxategia hutsik dago!"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "Inportazioa!"
 
 #: bin/modules/gui/window/win_import.py:57
 msgid "XML-RPC error !"
-msgstr ""
+msgstr "XML-RPC errorea!"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "Objektu bat inportatu da!"
 
 #: bin/modules/gui/window/win_import.py:64
 #, python-format
 msgid "Imported %d objects !"
-msgstr ""
+msgstr "%d objektu inportatu dira!"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "Inportazio-errorea!"
 
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
 msgid "Field name"
-msgstr ""
+msgstr "Eremu-izena"
 
 #: bin/modules/gui/window/win_import.py:186
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
+"Ezin duzu %s eremu hau inportatu, ezin baitugu automatikoki detektatu"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "Ez duzu eremurik hautatu inportazioa egiteko"
 
 #: bin/modules/gui/window/win_selection.py:52
 msgid "Name"
@@ -344,7 +345,7 @@ msgstr "Izena"
 
 #: bin/modules/gui/window/win_selection.py:56
 msgid "Ressource Name"
-msgstr ""
+msgstr "Baliabide-izena"
 
 #: bin/modules/gui/window/win_selection.py:56
 msgid "Names"
@@ -362,7 +363,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:78
 msgid "Error Opening Excel !"
-msgstr ""
+msgstr "Errorea Excel irekitzean!"
 
 #: bin/modules/gui/window/win_export.py:80
 msgid ""
@@ -372,7 +373,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Esportazio-errorea!"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
@@ -389,23 +390,23 @@ msgstr ""
 #: bin/modules/gui/window/form.py:239
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:43
 msgid "ID"
-msgstr "ID"
+msgstr "IDa"
 
 #: bin/modules/gui/window/form.py:240
 msgid "Creation User"
-msgstr ""
+msgstr "Sorrera-erabiltzailea"
 
 #: bin/modules/gui/window/form.py:241
 msgid "Creation Date"
-msgstr "Sortze data"
+msgstr "Sorrera-data"
 
 #: bin/modules/gui/window/form.py:242
 msgid "Latest Modification by"
-msgstr ""
+msgstr "Azken aldaketaren egilea"
 
 #: bin/modules/gui/window/form.py:243
 msgid "Latest Modification Date"
-msgstr ""
+msgstr "Azken aldaketaren data"
 
 #: bin/modules/gui/window/form.py:254
 msgid ""
@@ -415,27 +416,27 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:257
 msgid "Are you sure to remove this record ?"
-msgstr ""
+msgstr "Seguru zaude erregistro hau kendu nahi duzula?"
 
 #: bin/modules/gui/window/form.py:259
 msgid "Are you sure to remove those records ?"
-msgstr ""
+msgstr "Seguru zaude erregistro horiek kendu nahi dituzula?"
 
 #: bin/modules/gui/window/form.py:263
 msgid "Resources cleared."
-msgstr ""
+msgstr "Baliabideak garbitu dira."
 
 #: bin/modules/gui/window/form.py:265
 msgid "Resources successfully removed."
-msgstr ""
+msgstr "Baliabideak arrakastaz kendu dira."
 
 #: bin/modules/gui/window/form.py:298
 msgid "Working now on the duplicated document !"
-msgstr ""
+msgstr "Dokumentu bikoiztuan lanean orain!"
 
 #: bin/modules/gui/window/form.py:306
 msgid "Document Saved."
-msgstr ""
+msgstr "Dokumentua gorde da."
 
 #: bin/modules/gui/window/form.py:308 bin/modules/gui/window/form.py:309
 #: bin/widget/view/form_gtk/parser.py:137
@@ -445,7 +446,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "Errorea!"
 
 #: bin/modules/gui/window/form.py:328 bin/modules/gui/window/form.py:423
 msgid ""
@@ -455,15 +456,15 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:375
 msgid "You must select one or several records !"
-msgstr ""
+msgstr "Erregistro bat edo gehiago hautatu behar d(it)uzu!"
 
 #: bin/modules/gui/window/form.py:384
 msgid "Print Screen"
-msgstr "Pantaila Inprimatu"
+msgstr "Inprimatu pantaila"
 
 #: bin/modules/gui/window/form.py:404
 msgid "No record selected"
-msgstr ""
+msgstr "Ez da erregistrorik hautatu"
 
 #: bin/modules/gui/window/form.py:409
 msgid "New document"
@@ -475,7 +476,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:412
 msgid "Record: "
-msgstr ""
+msgstr "Erregistroa: "
 
 #: bin/modules/gui/window/form.py:413
 msgid " of "
@@ -499,7 +500,7 @@ msgstr ""
 
 #: bin/modules/gui/window/tree.py:190 bin/modules/gui/window/tree.py:246
 msgid "No resource selected!"
-msgstr ""
+msgstr "Ez da baliabiderik hautatu!"
 
 #: bin/modules/gui/window/tree.py:204
 msgid ""
@@ -509,7 +510,7 @@ msgstr ""
 
 #: bin/modules/gui/window/tree.py:209
 msgid "Error removing resource!"
-msgstr ""
+msgstr "Errorea baliabidea kentzean!"
 
 #: bin/modules/gui/window/tree.py:220
 msgid "Unable to chroot: no tree resource selected"
@@ -517,7 +518,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_preference.py:69
 msgid "Preference"
-msgstr ""
+msgstr "Hobespena"
 
 #: bin/modules/gui/window/win_preference.py:80
 msgid ""

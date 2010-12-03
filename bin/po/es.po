@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2009-12-07 06:00+0000\n"
+"PO-Revision-Date: 2010-11-29 06:53+0000\n"
 "Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
 "<jesteve@zikzakmedia.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-29 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-11-30 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -31,7 +31,7 @@ msgstr "Imprimir Flujo de Trabajo"
 # File: bin/plugins/__init__.py, line: 29
 # File: bin/plugins/__init__.py, line: 29
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
+msgid "Print Workflow (with subflows)"
 msgstr "Imprimir Flujo de Trabajo (Completo)"
 
 #
@@ -771,13 +771,9 @@ msgstr "Creacion Usuario"
 msgid "Creation Date"
 msgstr "Fecha Creación"
 
-#
-# File: bin/modules/gui/window/form.py, line: 218
-# File: bin/modules/gui/window/form.py, line: 218
-# File: bin/modules/gui/window/form.py, line: 218
 #: bin/modules/gui/window/form.py:242
 msgid "Latest Modification by"
-msgstr "Última Modificación por"
+msgstr "Última modificación realizada por"
 
 #
 # File: bin/modules/gui/window/form.py, line: 219
@@ -1514,13 +1510,9 @@ msgstr "No se ha podido cambiar la contraseña del super administrador."
 msgid "Bad password provided !"
 msgstr "¡Ha introducido una contraseña errónea!"
 
-#
-# File: bin/modules/gui/main.py, line: 1111
-# File: bin/modules/gui/main.py, line: 1111
-# File: bin/modules/gui/main.py, line: 1111
 #: bin/modules/gui/main.py:1415
 msgid "Error, password not changed."
-msgstr "Error, la clave no fue cambiada."
+msgstr "Error, la contraseña no ha sido cambiada."
 
 #
 # File: bin/modules/gui/main.py, line: 1117
@@ -2658,13 +2650,9 @@ msgstr "_Acerca de ..."
 msgid "Edit / Save this resource"
 msgstr "Editar / Guardar este registro"
 
-#
-# File: bin/openerp.glade, line: 1241
-# File: bin/openerp.glade, line: 1241
-# File: bin/openerp.glade, line: 1241
 #: bin/openerp.glade:1274
 msgid "Delete this resource"
-msgstr "Eliminar este registro"
+msgstr "Elimina este registro"
 
 #
 # File: bin/openerp.glade, line: 1254
@@ -3998,17 +3986,13 @@ msgstr ""
 msgid "(<i>admin</i>, by default)"
 msgstr "(<i>admin</i>, por defecto)"
 
-#
-# File: bin/openerp.glade, line: 9091
-# File: bin/openerp.glade, line: 9091
-# File: bin/openerp.glade, line: 9091
 #: bin/openerp.glade:7108
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
-"Escoja el nombre de la base de datos que será creada. No debe contener "
-"caracteres especiales. Ejemplo: 'terp'."
+"Introduzca el nombre de la base de datos que se creará. No debe contener "
+"caracteres especiales. Ejemplo: 'oerp'."
 
 #
 # File: bin/openerp.glade, line: 9093
@@ -4018,18 +4002,14 @@ msgstr ""
 msgid "New Database Name:"
 msgstr "Nuevo nombre de la base de datos:"
 
-#
-# File: bin/openerp.glade, line: 9117
-# File: bin/openerp.glade, line: 9117
-# File: bin/openerp.glade, line: 9117
 #: bin/openerp.glade:7134
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
-"Escoja el idioma por defecto que será instalado en esta base de datos. Usted "
-"podrá instalar nuevos idiomas después de la instalación desde el menú "
+"Seleccione el idioma por defecto que será instalado en esta base de datos. "
+"Podrá instalar nuevos idiomas después de la instalación desde el menú "
 "Administración."
 
 #
@@ -4076,17 +4056,13 @@ msgstr ""
 msgid "Confirm Password:"
 msgstr "Confirmar contraseña:"
 
-#
-# File: bin/openerp.glade, line: 9239
-# File: bin/openerp.glade, line: 9239
-# File: bin/openerp.glade, line: 9239
 #: bin/openerp.glade:7256
 msgid ""
 "Check this box if you want demonstration data to be installed on your new "
 "database. These data will help you to understand OpenERP, with predefined "
 "products, partners, etc."
 msgstr ""
-"Marque esta caja si desea instalar datos de ejemplo en su nueva base de "
+"Marque esta opción si desea instalar datos de ejemplo en su nueva base de "
 "datos. Estos datos le ayudarán a entender OpenERP, con productos, empresas, "
 "... predefinidos."
 

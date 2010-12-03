@@ -42,40 +42,6 @@ import time
 import pango
 import rpc
 
-class WrapLabel(gtk.Label):
-    __gtype_name__ = 'WrapLabel'
-
-    def __init__(self, str=None):
-        gtk.Label.__init__(self)
-
-        self.__wrap_width = 0
-        self.layout = self.get_layout()
-        self.layout.set_wrap(pango.WRAP_WORD_CHAR)
-        self.set_alignment(0.3, 0.3)
-
-    def do_size_request(self, requisition):
-        layout = self.get_layout()
-        width, height = layout.get_pixel_size()
-        requisition.width = 0
-        requisition.height = height
-
-    def do_size_allocate(self, allocation):
-        gtk.Label.do_size_allocate(self, allocation)
-        self.__set_wrap_width(allocation.width)
-
-    def set_markup(self, str):
-        gtk.Label.set_markup(self, str)
-        self.__set_wrap_width(self.__wrap_width)
-
-    def __set_wrap_width(self, width):
-        if width == 0:
-            return
-        layout = self.get_layout()
-        layout.set_width((width * pango.SCALE)/2)
-        if self.__wrap_width != width:
-            self.__wrap_width = width
-            self.queue_resize()
-
 class action_tips(object):
     def __init__(self, help):
         self.help = help
@@ -94,12 +60,30 @@ class action_tips(object):
     def create_action_tip(self):
         if self.help.get('msg', False):
             msg = self.help.get('msg', '')
+            msg = msg.replace('\n',' ').replace('\t',' ')
+            if len(msg) < 80:
+                msg = '\t\t \t \t' + msg
             title = self.help.get('title', '')
-            # The label to display tips
-            help_label = WrapLabel()
-            help_label.set_line_wrap(True)
+
+            help_label = gtk.Label()
             help_label.set_use_markup(True)
-            help_label.set_label('\n<span font="italic">%s</span>'% (msg))
+            def size_allocate(label, allocation):
+                label.set_size_request( allocation.width - 2, -1 )
+            help_label.connect( "size-allocate", size_allocate )
+            help_label.set_label('<span font_desc="italic" foreground="black">%s</span>'% (msg))
+
+            help_label.set_alignment(0.3, 1)
+            help_label.set_line_wrap(True)
+            help_label.set_justify(gtk.JUSTIFY_FILL)
+            layout = help_label.get_layout()
+            layout.set_wrap(pango.WRAP_WORD_CHAR)
+
+            table = gtk.Table(1, 8)
+            table.set_homogeneous(False)
+            table.set_col_spacings(40)
+            table.attach(help_label, 3, 6, 0, 1, ypadding=10)
+            label_box = gtk.EventBox()
+            label_box.add(table)
 
             # Close current tip button
             closebtn = gtk.Button('Close current tip')
@@ -128,7 +112,10 @@ To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user pr
             box = gtk.HBox()
             box_label = gtk.Label()
             box_label.set_use_markup(True)
-            box_label.set_label('<b> %s - Tips</b>'%to_xml(title))
+            tip_title = '<b>Tips</b>'
+            if title:
+                tip_title = '<b> %s - Tips</b>'%to_xml(title)
+            box_label.set_label(tip_title)
             box.pack_start(box_label, True, True)
             box.pack_end(disablebtn, False, False)
             box.pack_end(closebtn, False, False)
@@ -137,10 +124,61 @@ To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user pr
             self.help_frame = gtk.Frame()
             self.help_frame.set_label_widget(box)
             self.help_frame.set_label_align(0.5,0.5)
-            self.help_frame.add(help_label)
+            self.help_frame.add(label_box)
             self.help_frame.show_all()
             return True
         return False
+
+
+def OpenERP_Progressbar(parent=None, title='OpenERP Computing'):
+    if not parent:
+        parent = service.LocalService('gui.main').window
+
+    win = gtk.Dialog('OpenERP', parent, gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
+    win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+    win.set_title(_(title))
+    win.set_resizable(False)
+    vbox = gtk.VBox(False, 0)
+
+    hbox = gtk.HBox(False, 13)
+    hbox.set_border_width(10)
+
+    img = gtk.Image()
+    img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
+    hbox.pack_start(img, expand=True, fill=False)
+
+    vbox2 = gtk.VBox(False, 0)
+    label = gtk.Label()
+    label.set_markup('<b>'+_('Operation in progress')+'</b>')
+    label.set_alignment(0.0, 0.5)
+    vbox2.pack_start(label, expand=True, fill=False)
+    vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
+    vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
+    hbox.pack_start(vbox2, expand=True, fill=True)
+    vbox.pack_start(hbox)
+
+    pb = gtk.ProgressBar()
+    pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
+    vbox.pack_start(pb, expand=True, fill=False)
+
+    win.vbox.pack_start(vbox, expand=True, fill=True)
+    win.set_has_separator(False)
+    win.set_transient_for(parent)
+    win.show_all()
+    return win, pb
+
+def set_busy_cursor():
+    root = gtk.gdk.screen_get_default()
+    cursor_win = root.get_active_window()
+    if cursor_win:
+        cursor_win.set_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
+    gtk.main_iteration(False)
+    return cursor_win
+
+def reset_busy_cursor(cursor_win=None):
+    if cursor_win:
+        cursor_win.set_cursor(None)
+    gtk.main_iteration()
 
 def _search_file(file, dir='path.share'):
     tests = [

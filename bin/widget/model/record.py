@@ -92,7 +92,7 @@ class ModelRecord(signal_event.signal_event):
             return True
         return False
 
-    def update_context_with_concurrency_check_data(self, context):
+    def update_context_with_concurrency(self, context):
         if self.id and self.is_modified():
             context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%s" % (self.resource, self.id)] = self._concurrency_check_data
         for name, field in self.mgroup.mfields.items():
@@ -100,7 +100,7 @@ class ModelRecord(signal_event.signal_event):
                 v = self.value[field.name]
                 from itertools import chain
                 for m in chain(v.models, v.models_removed):
-                    m.update_context_with_concurrency_check_data(context)
+                    m.update_context_with_concurrency(context)
 
     def get(self, get_readonly=True, includeid=False, check_load=True, get_modifiedonly=False):
         if check_load:
@@ -137,6 +137,7 @@ class ModelRecord(signal_event.signal_event):
                     return self.id
                 value = self.get(get_readonly=False, get_modifiedonly=True)
                 context = self.context_get().copy()
+                self.update_context_with_concurrency(context)
                 res = self.rpc.write([self.id], value, context)
                 #if type(res) in (int, long):
                 #    self.id = res
@@ -341,55 +342,61 @@ class ModelRecord(signal_event.signal_event):
         id     : Id of the record for which the button is clicked
         attrs  : Button Attributes
         """
-        if not id:
-            id = self.id
-        if not attrs.get('confirm', False) or common.sur(attrs['confirm']):
-            button_type = attrs.get('type', 'workflow')
-            obj = service.LocalService('action.main')
-
-            if button_type == 'workflow':
-                result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
-                                                   self.resource, attrs['name'], self.id)
-                if type(result)==type({}):
-                    if result['type']== 'ir.actions.act_window_close':
-                        screen.window.destroy()
+        cursor =  common.set_busy_cursor()
+        reload = True
+        reset = False
+        try:
+            if not id:
+                id = self.id
+            if not attrs.get('confirm') or common.sur(attrs['confirm']):
+                button_type = attrs.get('type', 'workflow')
+                obj = service.LocalService('action.main')
+                if button_type == 'workflow':
+                    result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
+                                                       self.resource, attrs['name'], self.id)
+                    if isinstance(result, dict):
+                        if result['type'] == 'ir.actions.act_window_close':
+                            screen.window.destroy()
+                        else:
+                            datas = {'ids':[id], 'id':id}
+                            obj._exec_action(result, datas)
+                    elif isinstance(result, list):
+                        datas = {'ids':[id]}
+                        for rs in result:
+                            obj._exec_action(rs, datas)
+                elif button_type == 'object':
+                    if self.id:
+                        context = self.context_get()
+                        if 'context' in attrs:
+                            context.update(self.expr_eval(attrs['context'], check_load=False))
+                        result = rpc.session.rpc_exec_auth('/object', 'execute',
+                                                           self.resource,attrs['name'], [id], context)
+                        if isinstance(result, dict):
+                            if not result.get('nodestroy', False):
+                                screen.window.destroy()
+                            if result.get('type') in ('ir.actions.report.xml','ir.actions.report.custom'):
+                                common.reset_busy_cursor(cursor)
+                                reset = True
+                            obj._exec_action(result, {}, context=context)
                     else:
-                        datas = {'ids':[id], 'id':id}
-                        obj._exec_action(result, datas)
-                elif type([]) == type(result):
-                    datas = {'ids':[id]}
-                    for rs in result:
-                        obj._exec_action(rs, datas)
-
-            elif button_type == 'object':
-                if not self.id:
-                    return
-                context = self.context_get()
-                if 'context' in attrs:
-                    context.update(self.expr_eval(attrs['context'], check_load=False))
-                result = rpc.session.rpc_exec_auth('/object', 'execute',
-                                                   self.resource,attrs['name'], [id], context)
-                if isinstance(result, dict):
-                    if not result.get('nodestroy', False):
-                        screen.window.destroy()
-                    obj._exec_action(result, {}, context=context)
-
-            elif button_type == 'action':
-                action_id = int(attrs['name'])
-                context = screen.context.copy()
-                if 'context' in attrs:
-                    context.update(self.expr_eval(attrs['context'], check_load=False))
-                datas = {'model':self.resource,
-                         'id': id or False,
-                         'ids': id and [id] or [],
-                         'report_type': 'pdf'
-                         }
-                obj.execute(action_id, datas, context=context)
-            else:
-                raise Exception, 'Unallowed button type'
-            if screen.current_model and screen.current_view.view_type != 'tree':
-                screen.reload()
-
-
+                        reload = False
+                elif button_type == 'action':
+                    action_id = int(attrs['name'])
+                    context = screen.context.copy()
+                    if 'context' in attrs:
+                        context.update(self.expr_eval(attrs['context'], check_load=False))
+                    datas = {'model':self.resource,
+                             'id': id or False,
+                             'ids': id and [id] or [],
+                             'report_type': 'pdf'
+                             }
+                    obj.execute(action_id, datas, context=context)
+                else:
+                    raise Exception, 'Unallowed button type'
+                if reload and screen.current_model and screen.current_view.view_type != 'tree':
+                    screen.reload()
+        finally:
+            if not reset:
+                common.reset_busy_cursor(cursor)
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

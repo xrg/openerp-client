@@ -1740,9 +1740,11 @@ class DotWindow(gtk.Window):
     def clicked(self, response=None):
         if response == gtk.RESPONSE_APPLY:
             self.edit_data()
-        elif response == gtk.RESPONSE_DELETE_EVENT:
+        elif response == gtk.RESPONSE_REJECT:
             self.delete_data()
         elif response == gtk.RESPONSE_CLOSE:
+            self.dia_select.destroy()
+        elif response == gtk.RESPONSE_DELETE_EVENT:
             self.dia_select.destroy()
 
     def delete_data(self):
@@ -1774,7 +1776,12 @@ class DotWindow(gtk.Window):
         self.dia_select.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
 
         but_close = self.dia_select.add_button(gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE)
-        but_del = self.dia_select.add_button(gtk.STOCK_DELETE, gtk.RESPONSE_DELETE_EVENT)
+        ## Due to the limitation of gtk.Dialog we need to use this signal gtk.RESPONSE_REJECT for delete event.
+        ## http://www.pygtk.org/docs/pygtk/class-gtkdialog.html
+        ##If a dialog receives a delete event, the "response" signal will be emitted with a response ID of gtk.RESPONSE_DELETE_EVENT.
+
+
+        but_del = self.dia_select.add_button(gtk.STOCK_DELETE, gtk.RESPONSE_REJECT)
         but_edit = self.dia_select.add_button(gtk.STOCK_EDIT, gtk.RESPONSE_APPLY)
         label = 'Node'
         if self.url.find('edge') != -1:

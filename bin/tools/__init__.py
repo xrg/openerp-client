@@ -19,12 +19,13 @@
 #
 ##############################################################################
 
-import time
 import datetime
-import os
 import operator
 import logging
 import locale
+import os
+import time
+from dateutil.relativedelta import relativedelta
 
 import rpc
 
@@ -34,10 +35,13 @@ if os.name == 'nt':
 def expr_eval(string, context=None):
     if context is None:
         context = {}
-    context['uid'] = rpc.session.uid
-    context['current_date'] = time.strftime('%Y-%m-%d')
-    context['time'] = time
-    context['datetime'] = datetime
+    context.update(
+        uid = rpc.session.uid,
+        current_date = time.strftime('%Y-%m-%d'),
+        time = time,
+        datetime = datetime,
+        relativedelta = relativedelta,
+    )
     if isinstance(string, basestring):
         string = string.strip()
         if not string:

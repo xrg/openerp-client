@@ -29,7 +29,8 @@ import service
 import common
 import options
 import os
-
+import thread
+import time
 import re
 
 CONCURRENCY_CHECK_FIELD = '__last_update'
@@ -68,25 +69,54 @@ class rpc_exception(Exception):
 
 
 class gw_inter(object):
-    __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
+    __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj','thread_loop','res','exception')
     def __init__(self, url, db, uid, passwd, obj='/object'):
         self._url = url
         self._db = db
         self._uid = uid
         self._obj = obj
         self._passwd = passwd
+        self.thread_loop = False
+        self.exception = None
+        self.res = None
+
     def exec_auth(method, *args):
         pass
+
     def execute(method, *args):
         pass
+
+    def raise_exception(self, exception):
+        if isinstance(exception, socket.error):
+            common.message(_('Unable to reach to OpenERP server !\nYou should check your connection to the network and the OpenERP server.'), _('Connection Error'), type=gtk.MESSAGE_ERROR)
+            raise rpc_exception(69, 'Connection refused!')
+        else:
+            if isinstance(exception, xmlrpclib.Fault) \
+                    or isinstance(exception, tiny_socket.Myexception):
+                a = rpc_exception(exception.faultCode, exception.faultString)
+                if a.type in ('warning','UserError'):
+                    if a.message in ('ConcurrencyException') and len(args) > 4:
+                        if common.concurrency(args[0], args[2][0], args[4]):
+                            if CONCURRENCY_CHECK_FIELD in args[4]:
+                                del args[4][CONCURRENCY_CHECK_FIELD]
+                            return self.rpc_exec_auth(obj, method, *args)
+                    else:
+                        common.warning(a.data, a.message)
+                else:
+                    common.error(_('Application Error'), exception.faultCode, exception.faultString)
+            else:
+                common.error(_('Application Error'), _('View details'), str(exception))
+            raise exception
+
 
 class xmlrpc_gw(gw_inter):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
     def __init__(self, url, db, uid, passwd, obj='/object'):
         gw_inter.__init__(self, url, db, uid, passwd, obj)
         self._sock = xmlrpclib.ServerProxy(url+obj)
+
     def exec_auth(self, method, *args):
-        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
+        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, '*', args)))
         res = self.execute(method, self._uid, self._passwd, *args)
         logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
@@ -105,8 +135,38 @@ class xmlrpc_gw(gw_inter):
             return result
 
     def execute(self, method, *args):
-        result = getattr(self._sock,method)(self._db, *args)
-        return self.__convert(result)
+        self.thread_loop = False
+        self.exception = None
+
+        def execute_call(method, args):
+            try:
+                self.res = getattr(self._sock,method)(self._db, *args)
+                self.res = self.__convert(self.res)
+            except Exception, e:
+                self.exception = e
+            self.thread_loop = True
+            return True
+
+        thread.start_new_thread(execute_call, (method, args))
+        counter = 0
+        win = None
+        progressbar = None
+        while not self.thread_loop:
+            time.sleep(0.01)
+            counter += 1
+            if counter == 100:
+                if not win or not progressbar:
+                    win, progressbar = common.OpenERP_Progressbar()
+            if progressbar and (counter % 10) == 0:
+                progressbar.pulse()
+            if win:
+                gtk.main_iteration(False)
+        if win:
+            win.destroy()
+            gtk.main_iteration()
+        if self.exception:
+            self.raise_exception(self.exception)
+        return self.res
 
 class tinySocket_gw(gw_inter):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
@@ -114,26 +174,34 @@ class tinySocket_gw(gw_inter):
         gw_inter.__init__(self, url, db, uid, passwd, obj)
         self._sock = tiny_socket.mysocket()
         self._obj = obj[1:]
+
     def exec_auth(self, method, *args):
-        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
+        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, '*', args)))
         res = self.execute(method, self._uid, self._passwd, *args)
         logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
+
     def execute(self, method, *args):
+        self.thread_loop = False
+        self.exception = None
+
         self._sock.connect(self._url)
         try:
             self._sock.mysend((self._obj, method, self._db)+args)
-            res = self._sock.myreceive()
+            self.res = self._sock.myreceive()
             self._sock.disconnect()
-            return res
-        except Exception,e:
+        except Exception, e:
             try:
                 self._sock.disconnect()
             except Exception:
                 pass
-            # make sure we keep the exception context, even
-            # if disconnect() raised above.
-            raise e
+        
+            self.exception = e
+       
+        if self.exception:
+            self.raise_exception(self.exception)
+        return self.res
+
 
 class rpc_session(object):
     __slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_gw', 'db', 'context', 'timezone')
@@ -149,14 +217,8 @@ class rpc_session(object):
         self.timezone = 'utc'
 
     def rpc_exec(self, obj, method, *args):
-        try:
             sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
             return sock.execute(method, *args)
-        except socket.error, e:
-            common.message(str(e), title=_('Connection refused !'), type=gtk.MESSAGE_ERROR)
-            raise rpc_exception(69, _('Connection refused!'))
-        except xmlrpclib.Fault, err:
-            raise rpc_exception(err.faultCode, err.faultString)
 
     def rpc_exec_auth_try(self, obj, method, *args):
         if self._open:
@@ -166,44 +228,13 @@ class rpc_session(object):
             raise rpc_exception(1, 'not logged')
 
     def rpc_exec_auth_wo(self, obj, method, *args):
-        try:
-            sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
-            return sock.exec_auth(method, *args)
-        except xmlrpclib.Fault, err:
-            a = rpc_exception(err.faultCode, err.faultString)
-        except tiny_socket.Myexception, err:
-            a = rpc_exception(err.faultCode, err.faultString)
-        if a.code in ('warning', 'UserError'):
-            common.warning(a.data, a.message)
-            return None
-        raise a
+        sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
+        return sock.exec_auth(method, *args)
 
     def rpc_exec_auth(self, obj, method, *args):
         if self._open:
-            try:
-                sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
-                return sock.exec_auth(method, *args)
-            except socket.error, e:
-                common.message(_('Unable to reach to OpenERP server !\nYou should check your connection to the network and the OpenERP server.'), _('Connection Error'), type=gtk.MESSAGE_ERROR)
-                raise rpc_exception(69, 'Connection refused!')
-            except Exception, e:
-                if isinstance(e, xmlrpclib.Fault) \
-                        or isinstance(e, tiny_socket.Myexception):
-                    a = rpc_exception(e.faultCode, e.faultString)
-                    if a.type in ('warning','UserError'):
-                        if a.message in ('ConcurrencyException') and len(args) > 4:
-                            if common.concurrency(args[0], args[2][0], args[4]):
-                                if CONCURRENCY_CHECK_FIELD in args[4]:
-                                    del args[4][CONCURRENCY_CHECK_FIELD]
-                                return self.rpc_exec_auth(obj, method, *args)
-                        else:
-                            common.warning(a.data, a.message)
-                    else:
-                        common.error(_('Application Error'), e.faultCode, e.faultString)
-                else:
-                    common.error(_('Application Error'), _('View details'), str(e))
-                #TODO Must propagate the exception?
-                raise
+            sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
+            return sock.exec_auth(method, *args)
         else:
             raise rpc_exception(1, 'not logged')
 

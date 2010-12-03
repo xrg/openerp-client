@@ -119,19 +119,19 @@ class main(service.Service):
             domain_ctx['datetime'] = datetime
             domain = tools.expr_eval(action['domain'], domain_ctx)
             help = {}
-            show_menu_help = rpc.session.rpc_exec_auth('/object', 'execute',
-                        'res.users', 'read', rpc.session.uid, ['menu_tips'], rpc.session.context)
-            show_menu_help = show_menu_help.get('menu_tips', False)
-            if show_menu_help:
-                 msg = action.get('help', False)
-                 title = action.get('name', False)
-                 if msg and len(msg):
-                     help['msg'] =  msg
-                     help['title'] = title
+            if action.get('display_menu_tip', False):
+                msg = action.get('help', False)
+                title = action.get('name', False)
+                if msg and len(msg):
+                    help['msg'] =  msg
+                    help['title'] = title or ''
             if datas.get('domain', False):
                 domain.append(datas['domain'])
             if action.get('target', False)=='new':
-                dia = dialog(datas['res_model'], id=datas.get('res_id',None), window=datas.get('window',None), domain=domain, context=context, view_ids=view_ids,target=True, view_type=datas.get('view_mode', 'tree').split(','))
+                dia = dialog(datas['res_model'], id=datas.get('res_id',None),
+                             window=datas.get('window',None), domain=domain,
+                             context=context, view_ids=view_ids,target=True,
+                             view_type=datas.get('view_mode', 'tree').split(','), help=help)
                 if dia.dia.get_has_separator():
                     dia.dia.set_has_separator(False)
                 dia.run()
@@ -190,7 +190,8 @@ class main(service.Service):
                 return False
         keyact = {}
         for action in actions:
-            keyact[action['name'].encode('utf8')] = action
+            action_name = action.get('name') or ''
+            keyact[action_name.encode('utf8')] = action
         keyact.update(adds)
         res = common.selection(_('Select your action'), keyact)
         if res:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -45,7 +45,10 @@ class url(interface.widget_interface):
 
         self.button = gtk.Button()
         img = gtk.Image()
-        img.set_from_stock('gtk-jump-to', gtk.ICON_SIZE_BUTTON)
+        if attrs.get('widget',False) == 'email':
+            img.set_from_stock('terp-mail-message-new', gtk.ICON_SIZE_BUTTON)
+        else:
+            img.set_from_stock('gtk-jump-to', gtk.ICON_SIZE_BUTTON)
         self.button.set_image(img)
         self.button.set_size_request(30,30)
         self.button.set_relief(gtk.RELIEF_NONE)

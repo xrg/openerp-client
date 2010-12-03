@@ -47,7 +47,7 @@ class Screen(signal_event.signal_event):
             parent=None, context=None, views_preload=None, tree_saves=True,
             domain=None, create_new=False, row_activate=None, hastoolbar=False,
             hassubmenu=False,default_get=None, show_search=False, window=None,
-            limit=80, readonly=False, auto_search=True, is_wizard=False, search_view=None):
+            limit=80, readonly=False, auto_search=True, is_wizard=False, search_view=None,win_search=False):
         if view_ids is None:
             view_ids = []
         if view_type is None:
@@ -62,6 +62,10 @@ class Screen(signal_event.signal_event):
             search_view = "{}"
 
         super(Screen, self).__init__()
+        self.win_search = win_search
+        self.win_search_domain = []
+        self.win_search_ids = []
+        self.win_search_callback = False
         self.show_search = show_search
         self.auto_search = auto_search
         self.search_count = 0
@@ -97,7 +101,7 @@ class Screen(signal_event.signal_event):
         models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context, is_wizard=is_wizard)
         self.models_set(models)
         self.current_model = None
-        self.screen_container = screen_container()
+        self.screen_container = screen_container(self.win_search)
         self.filter_widget = None
         self.widget = self.screen_container.widget_get()
         self.__current_view = 0
@@ -163,7 +167,7 @@ class Screen(signal_event.signal_event):
 
 
     def update_scroll(self, *args):
-        offset=self.offset
+        offset = self.offset
         limit = self.screen_container.get_limit()
         if self.screen_container.but_previous:
             if offset<=0:
@@ -175,56 +179,51 @@ class Screen(signal_event.signal_event):
                 self.screen_container.but_next.set_sensitive(False)
             else:
                 self.screen_container.but_next.set_sensitive(True)
+        if self.win_search:
+            self.win_search_callback()
 
     def search_offset_next(self, *args):
         offset=self.offset
         limit = self.screen_container.get_limit()
         self.offset = offset+limit
         self.search_filter()
+        if self.win_search:
+            self.win_search_callback()
 
     def search_offset_previous(self, *args):
         offset=self.offset
         limit = self.screen_container.get_limit()
         self.offset = max(offset-limit,0)
         self.search_filter()
+        if self.win_search:
+            self.win_search_callback()
 
     def search_clear(self, *args):
         self.filter_widget.clear()
-        self.screen_container.action_combo.set_active(0)
+        if not self.win_search:
+            self.screen_container.action_combo.set_active(0)
         self.clear()
 
-    def get_calenderDomain(self, start=None,old_date='',mode='month'):
+    def get_calenderDomain(self, field_name=None, old_date='', mode='month'):
         args = []
         old_date = old_date.date()
         if not old_date:
             old_date = datetime.today().date()
-        if old_date == datetime.today().date():
-            if mode =='month':
-                start_date = (old_date + relativedelta(months=-1)).strftime('%Y-%m-%d')
-                args.append((start, '>',start_date))
-                end_date = (old_date + relativedelta(months=+1)).strftime('%Y-%m-%d')
-                args.append((start, '<',end_date))
-
-            if mode=='week':
-                start_date = (old_date + relativedelta(weeks=-1)).strftime('%Y-%m-%d')
-                args.append((start, '>',start_date))
-                end_date = (old_date + relativedelta(weeks=+1)).strftime('%Y-%m-%d')
-                args.append((start, '<',end_date))
-
-            if mode=='day':
-                start_date = (old_date + relativedelta(days=-1)).strftime('%Y-%m-%d')
-                args.append((start, '>',start_date))
-                end_date = (old_date + relativedelta(days=+1)).strftime('%Y-%m-%d')
-                args.append((start, '<',end_date))
-        else:
-            if mode =='month':
-                end_date = (old_date + relativedelta(months=+1)).strftime('%Y-%m-%d')
-            if mode=='week':
-                end_date = (old_date + relativedelta(weeks=+1)).strftime('%Y-%m-%d')
-            if mode=='day':
-                end_date = (old_date + relativedelta(days=+1)).strftime('%Y-%m-%d')
-            old_date = old_date.strftime('%Y-%m-%d')
-            args = [(start,'>',old_date),(start,'<',end_date)]
+        if mode =='month':
+            start_date = (old_date + relativedelta(months = -1)).strftime('%Y-%m-%d')
+            args.append((field_name, '>',start_date))
+            end_date = (old_date + relativedelta(months = 1)).strftime('%Y-%m-%d')
+            args.append((field_name, '<',end_date))
+        if mode=='week':
+            start_date = (old_date + relativedelta(weeks = -1)).strftime('%Y-%m-%d')
+            args.append((field_name, '>',start_date))
+            end_date = (old_date + relativedelta(weeks = 1)).strftime('%Y-%m-%d')
+            args.append((field_name, '<',end_date))
+        if mode=='day':
+            start_date = (old_date + relativedelta(days = -1)).strftime('%Y-%m-%d')
+            args.append((field_name, '>',start_date))
+            end_date = (old_date + relativedelta(days = 1)).strftime('%Y-%m-%d')
+            args.append((field_name, '<',end_date))
         return args
 
     def search_filter(self, *args):
@@ -239,12 +238,14 @@ class Screen(signal_event.signal_event):
             self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
 
         v = self.domain
-        limit=self.screen_container.get_limit()
+        if self.win_search:
+            v += self.win_search_domain
+        limit = self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
-            start = self.current_view.view.date_start
+            field_name = self.current_view.view.date_start
             old_date = self.current_view.view.date
             mode = self.current_view.view.mode
-            calendar_domain = self.get_calenderDomain(start,old_date,mode)
+            calendar_domain = self.get_calenderDomain(field_name, old_date, mode)
             v += calendar_domain
         filter_keys = []
 
@@ -254,13 +255,21 @@ class Screen(signal_event.signal_event):
 
         if self.latest_search != v:
             self.offset = 0
-        offset=self.offset
+        offset = self.offset
         self.latest_search = v
-        if self.context.get('group_by',False) and not self.current_view.view_type == 'graph':
+        if (self.context.get('group_by') or \
+               self.context.get('group_by_no_leaf')) \
+               and not self.current_view.view_type == 'graph':
             self.current_view.reload = True
             self.display()
             return True
         ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, self.sort, self.context)
+        self.win_search_ids = ids
+        if self.win_search and self.win_search_domain:
+            for dom in self.win_search_domain:
+                if dom in v:
+                    v.remove(dom)
+            self.win_search_domain = []
         if len(ids) < limit:
             self.search_count = len(ids)
         else:
@@ -290,6 +299,9 @@ class Screen(signal_event.signal_event):
 
     def execute_action(self, combo):
         flag = combo.get_active_text()
+        combo_model = combo.get_model()
+        active_id = combo.get_active()
+        action_name = active_id != -1 and flag not in ['mf','blk','sh', 'sf'] and combo_model[active_id][2]
         # 'mf' Section manages Filters
         def clear_domain_ctx():
             for key in self.old_ctx.keys():
@@ -315,8 +327,10 @@ class Screen(signal_event.signal_event):
             value = obj._exec_action(act, {}, ctx)
 
         if flag in ['blk','mf']:
+            self.screen_container.last_active_filter = False
             clear_domain_ctx()
-            self.search_filter()
+            if flag == 'blk':
+                self.search_filter()
             combo.set_active(0)
             return True
         #This section handles shortcut and action creation
@@ -325,10 +339,19 @@ class Screen(signal_event.signal_event):
             widget = glade2.get_widget('action_name')
             win = glade2.get_widget('dia_get_action')
             win.set_icon(common.OPENERP_ICON)
+            lbl = glade2.get_widget('label157')
             if flag == 'sh':
                 win.set_title('Shortcut Entry')
-                lbl = glade2.get_widget('label157')
-                lbl.set_text('Enter Shortcut Name:')
+                lbl.set_text('Shortcut Name:')
+            else:
+                win.set_size_request(300, 165)
+                text_entry = glade2.get_widget('action_name')
+                lbl.set_text('Filter Name:')
+                table =  glade2.get_widget('table8')
+                info_lbl = gtk.Label('(Any existing filter with the \nsame name will be replaced)')
+                table.attach(info_lbl,1,2,2,3, gtk.FILL, gtk.EXPAND)
+                if self.screen_container.last_active_filter:
+                    text_entry.set_text(self.screen_container.last_active_filter)
             win.show_all()
             response = win.run()
             # grab a safe copy of the entered text before destroy() to avoid GTK bug https://bugzilla.gnome.org/show_bug.cgi?id=613241
@@ -336,22 +359,38 @@ class Screen(signal_event.signal_event):
             win.destroy()
             combo.set_active(0)
             if response == gtk.RESPONSE_OK and action_name:
+                filter_domain = self.filter_widget and self.filter_widget.value.get('domain',[])
+                filter_context = self.filter_widget and self.filter_widget.value.get('context',{})
                 values = {'name':action_name,
                        'model_id':self.name,
-                       'domain':str(self.filter_widget and self.filter_widget.value.get('domain',[])),
-                       'context':str(self.filter_widget and self.filter_widget.value.get('context',{})),
                        'user_id':rpc.session.uid
                        }
                 if flag == 'sf':
-                    action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'create', values, self.context)
-                    self.screen_container.fill_filter_combo(self.name)
+                    domain, context = self.screen_container.get_filter(action_name)
+                    for dom in eval(domain):
+                        if dom not in filter_domain:
+                            filter_domain.append(dom)
+                    groupby_list = eval(context).get('group_by',[]) + filter_context.get('group_by',[])
+                    filter_context.update(eval(context))
+                    if groupby_list:
+                        filter_context.update({'group_by':groupby_list})
+                    values.update({'domain':str(filter_domain),
+                                   'context':str(filter_context),
+                                   })
+                    action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'create_or_replace', values, self.context)
+                    self.screen_container.fill_filter_combo(self.name, action_name)
                 if flag == 'sh':
+                    filter_domain += self.domain_init
+                    filter_context.update(self.context_init)
                     values.update({'res_model':self.name,
-                                  'search_view_id':self.search_view['view_id'],
-                                  'default_user_ids': [[6, 0, [rpc.session.uid]]]})
+                                   'domain':str(filter_domain),
+                                   'context':str(filter_context),
+                                   'search_view_id':self.search_view['view_id'],
+                                   'default_user_ids': [[6, 0, [rpc.session.uid]]]})
                     rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'create_shortcut', values, self.context)
         else:
             try:
+                self.screen_container.last_active_filter = action_name
                 filter_domain = flag and tools.expr_eval(flag)
                 clear_domain_ctx()
                 if combo.get_active() >= 0:
@@ -577,8 +616,6 @@ class Screen(signal_event.signal_event):
         if self.current_view and self.current_view.view_type == 'tree' \
                 and not self.current_view.widget_tree.editable:
             self.switch_view(mode='form')
-        if self.current_view and self.current_view.view_type == 'gallery':
-            self.switch_view(mode='form')
         ctx = self.context.copy()
         ctx.update(context)
         model = self.models.model_new(default, self.action_domain, ctx)
@@ -687,7 +724,7 @@ class Screen(signal_event.signal_event):
                 return False
 
             ctx = self.current_model.context_get().copy()
-            self.current_model.update_context_with_concurrency_check_data(ctx)
+            self.current_model.update_context_with_concurrency(ctx)
             if unlink and id:
                 if not self.rpc.unlink([id], ctx):
                     return False
@@ -700,13 +737,13 @@ class Screen(signal_event.signal_event):
                 self.current_model = None
             self.display()
             self.current_view.set_cursor()
-        if self.current_view.view_type in ('tree','gallery'):
+        if self.current_view.view_type == 'tree':
             ids = self.current_view.sel_ids_get()
 
             ctx = self.models.context.copy()
             for m in self.models:
                 if m.id in ids:
-                    m.update_context_with_concurrency_check_data(ctx)
+                    m.update_context_with_concurrency(ctx)
 
             if unlink and ids:
                 if not self.rpc.unlink(ids, ctx):
@@ -742,8 +779,8 @@ class Screen(signal_event.signal_event):
                 else:
                     self.screen_container.help_frame.show_all()
             self.search_active(
-                    active=self.show_search and vt in ('tree', 'graph', 'calendar', 'gallery'),
-                    show_search=self.show_search and vt in ('tree', 'graph','calendar', 'gallery'),
+                    active=self.show_search and vt in ('tree', 'graph', 'calendar'),
+                    show_search=self.show_search and vt in ('tree', 'graph','calendar'),
             )
 
     def groupby_next(self):
@@ -798,7 +835,7 @@ class Screen(signal_event.signal_event):
 
     def display_next(self):
         self.current_view.set_value()
-        if self.context.get('group_by',False) and \
+        if self.context.get('group_by') and \
             not self.current_view.view_type == 'form':
             if self.current_model:
                 self.groupby_next()
@@ -814,7 +851,7 @@ class Screen(signal_event.signal_event):
 
     def display_prev(self):
         self.current_view.set_value()
-        if self.context.get('group_by',False) and \
+        if self.context.get('group_by') and \
             not self.current_view.view_type == 'form':
             if self.current_model:
                self.groupby_prev()
@@ -831,7 +868,7 @@ class Screen(signal_event.signal_event):
 
     def check_state(self):
         if not self.type == 'one2many'  \
-            and (not self.context.get('group_by',False) \
+            and (not self.context.get('group_by') \
                 or self.current_view.view_type == 'form'):
             if self.current_model:
                 self.current_model.validate_set()

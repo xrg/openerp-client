@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-01-27 05:47+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2010-11-28 07:08+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-29 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-11-29 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr ""
+msgstr "Tiến trình in."
 
 #: bin/plugins/__init__.py:29
-msgid "Print Workflow (Complex)"
-msgstr ""
+msgid "Print Workflow (with subflows)"
+msgstr "In luồng công việc"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
@@ -31,29 +31,29 @@ msgstr ""
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
-msgstr ""
+msgstr "Chọn một Plugin"
 
 #: bin/translate.py:184
 #, python-format
 msgid "Unable to set locale %s"
-msgstr ""
+msgstr "Không thể cài đặt thông tin bản địa %s"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "Đóng OpenERP, bàn phim bị trục trặc"
 
 #: bin/options.py:108
 #, python-format
 msgid "OpenERP Client %s"
-msgstr ""
+msgstr "OpenERP Máy Khách %s"
 
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr ""
+msgstr "cấu hình file alternate"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "cho phép chạy từng bước cơ bản  Alias for '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
@@ -62,40 +62,40 @@ msgstr ""
 
 #: bin/options.py:112
 msgid "specify the user login"
-msgstr ""
+msgstr "Chỉ định người dùng đăng nhập"
 
 #: bin/options.py:113
 msgid "specify the server port"
-msgstr ""
+msgstr "Chỉ định cổng máy chủ"
 
 #: bin/options.py:114
 msgid "specify the server ip/name"
-msgstr ""
+msgstr "chỉ định IP/tên máy chủ"
 
 #: bin/printer/printer.py:185
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr ""
+msgstr "Không thể sử dụng kiểu file %s"
 
 #: bin/printer/printer.py:190
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
-msgstr ""
+msgstr "Chế độ in tự động của Linux chưa được hiện thực"
 
 #: bin/printer/printer.py:198
 msgid "Error no report"
-msgstr ""
+msgstr "Lỗi không có báo cáo"
 
 #: bin/printer/printer.py:217 bin/modules/gui/window/win_export.py:289
 #: bin/modules/gui/main.py:1424 bin/widget/view/form_gtk/binary.py:162
 #: bin/widget/view/form_gtk/image.py:119
 msgid "Save As..."
-msgstr ""
+msgstr "Lưu với tên khác..."
 
 #: bin/printer/printer.py:225
 msgid "Error writing the file!"
-msgstr ""
+msgstr "Lỗi ghi chép lên tập tin"
 
 #: bin/common/common.py:212
 msgid ""
@@ -104,6 +104,10 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
+"Cám ơn bạn đã phản hồi\n"
+"Thông điệp của bạn đã được gửi tới OpenERP\n"
+"Bây giờ bạn nên bắt đầu khởi tạo một cơ sở dữ liệu mới hoặc kết nôi đến một "
+"server qua trình đơn Menu"
 
 #: bin/common/common.py:222
 msgid ""
@@ -111,6 +115,9 @@ msgid ""
 "You should now start by creating a new database or\n"
 "connecting to an existing server through the \"File\" menu."
 msgstr ""
+"Cám ơn về sự kiểm tra OpenERP\n"
+"Bây giờ bạn nên bắt đầu khởi tạo một cơ sở dữ liệu mới hoặc kết nôi đến một "
+"server qua trình đơn Menu"
 
 #: bin/common/common.py:325
 msgid "Support request sent !"
@@ -2241,11 +2248,11 @@ msgstr ""
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "Thành phố"
 
 #: bin/dia_survey.glade:586
 msgid "System:"
-msgstr ""
+msgstr "hệ thống"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
@@ -2253,47 +2260,48 @@ msgstr ""
 
 #: bin/dia_survey.glade:672
 msgid "How did you hear about us:"
-msgstr ""
+msgstr "hãy nói ý kiến của bạn về chúng tôi"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "kế hoạch dùng openerp của chúng tôi."
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "kế hoạch dùng openERP sau khi phục vụ"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"nói cho tôi biết tại sao bạn dùng openerp và phần mền hiện nay của bạn."
 
 #: bin/dia_survey.glade:790
 msgid "<b>Keep Informed</b>"
-msgstr ""
+msgstr "<b>gữi lệnh đã thực hiện</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "tôi muốn nhận sách về openerp (pdf) qua email"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
-msgstr ""
+msgstr "Điện thoại / Di động"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "Email :"
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
-msgstr ""
+msgstr "Tên Bạn :"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "GTK- hủy"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "GTK - Chấp Nhận"
 
 #~ msgid "The content of the widget or excpetion if not valid"
 #~ msgstr "lưa"

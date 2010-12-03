@@ -106,14 +106,10 @@ class dialog(object):
 
 
 class win_search(object):
-    def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None, search_mode='tree'):
+    def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None):
         self.model = model
-        self.domain =domain
-        self.context = context
-        self.context.update(rpc.session.context)
         self.sel_multi = sel_multi
-        self.offset = 0
-        self.search_mode = search_mode
+        self.ids = ids
         self.glade = glade.XML(common.terp_path("openerp.glade"),'win_search',gettext.textdomain())
         self.win = self.glade.get_widget('win_search')
         self.win.set_icon(common.OPENERP_ICON)
@@ -121,104 +117,38 @@ class win_search(object):
             parent = service.LocalService('gui.main').window
         self.parent = parent
         self.win.set_transient_for(parent)
-        self.filter_widget = None
-        self.search_count = 0
-
-        self.screen = Screen(model, view_type=[self.search_mode], context=self.context, parent=self.win)
+        self.screen = Screen(model, view_type=['tree'], show_search=True, domain=domain,
+                             context=context, parent=self.win, win_search=True)
         self.view = self.screen.current_view
-
-        if search_mode == 'gallery':
-            sel_mode = sel_multi and gtk.SELECTION_MULTIPLE or gtk.SELECTION_SINGLE
-            self.view.widget.set_selection_mode(sel_mode)
-        else: # 'tree'
-            self.view.unset_editable()
-            sel = self.view.widget_tree.get_selection()
-            sel_mode = sel_multi and gtk.SELECTION_MULTIPLE or 'single'
-            sel.set_mode(sel_mode)
-
-        self.screen.widget.set_spacing(5)
-        self.parent_hbox = gtk.HBox(homogeneous=False, spacing=0)
-        self.hbox = gtk.HBox(homogeneous=False, spacing=0)
-        self.parent_hbox.pack_start(gtk.Label(''), expand=True, fill=True)
-        self.parent_hbox.pack_start(self.hbox, expand=False, fill=False)
-
-        self.limit_combo = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
-        self.combo = gtk.ComboBox(self.limit_combo)
-        cell = gtk.CellRendererText()
-        self.combo.pack_start(cell, True)
-        self.combo.add_attribute(cell, 'text', 1)
-        for lim in [[100,'100'],[200,'200'],[500,'500'],[False,'Unlimited']]:
-            self.limit_combo.append(lim)
-        self.combo.set_active(0)
-        self.hbox.pack_start(self.combo, 0, 0)
-        self.hbox.pack_start(gtk.VSeparator(),padding=3, expand=False, fill=False)
-
-# Previous Button
-        self.but_previous = gtk.Button()
-        icon = gtk.Image()
-        icon.set_from_stock('gtk-go-back', gtk.ICON_SIZE_SMALL_TOOLBAR)
-        self.but_previous.set_relief(gtk.RELIEF_NONE)
-        self.but_previous.set_image(icon)
-        self.hbox.pack_start(self.but_previous, 0, 0)
-        self.but_previous.connect('clicked', self.search_offset_previous)
-
-#Forward button
-        icon2 = gtk.Image()
-        icon2.set_from_stock('gtk-go-forward', gtk.ICON_SIZE_SMALL_TOOLBAR)
-        self.but_next = gtk.Button()
-        self.but_next.set_image(icon2)
-        self.but_next.set_relief(gtk.RELIEF_NONE)
-        self.hbox.pack_start(self.but_next, 0, 0)
-        self.but_next.connect('clicked', self.search_offset_next)
-
-        self.screen.widget.pack_start(self.parent_hbox, expand=False, fill=False)
-        self.screen.screen_container.show_filter()
+        if self.screen.filter_widget.focusable:
+            self.screen.filter_widget.focusable.grab_focus()
+        self.title = _('OpenERP Search: %s') % self.screen.name
+        self.title_results = _('OpenERP Search: %s (%%d result(s))') % (self.screen.name,)
+        self.win.set_title(self.title)
+        self.view.unset_editable()
+        sel = self.view.widget_tree.get_selection()
+        if not sel_multi:
+            sel.set_mode('single')
+        else:
+            sel.set_mode(gtk.SELECTION_MULTIPLE)
+        self.view.widget_tree.connect('row_activated', self.sig_activate)
+        self.view.widget_tree.connect('button_press_event', self.sig_button)
+        self.screen.win_search_callback = self.update_title
         vp = gtk.Viewport()
         vp.set_shadow_type(gtk.SHADOW_NONE)
         vp.add(self.screen.widget)
-        sw = self.glade.get_widget('search_sw')
-        sw.add(vp)
-        sw.show_all()
-
-        if search_mode == 'gallery':
-            self.view.widget.connect('item-activated', self.sig_activate)
-            self.view.widget.connect('button_press_event', self.sig_button)
-        else: # 'tree'
-            self.view.widget_tree.connect('row_activated', self.sig_activate)
-            self.view.widget_tree.connect('button_press_event', self.sig_button)
-
-        self.model_name = model
-
-        view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'search', self.context)
-        hda = (self, self.find)
-        self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win, col=5, call= hda)
-        self.screen.filter_widget = self.form
-
-        self.title = _('OpenERP Search: %s') % self.form.name
-        self.title_results = _('OpenERP Search: %s (%%d result(s))') % (self.form.name.replace('%',''),)
-        self.win.set_title(self.title)
-        x, y = self.form.widget.size_request()
-
-        hbox = self.glade.get_widget('search_hbox')
-        hbox.pack_start(self.form.widget)
-        self.ids = ids
-        if self.ids:
-            self.reload()
-        self.old_search = {}
-        self.old_offset = self.old_limit = None
-        if self.ids:
-            self.old_limit = self.get_limit()
-            self.old_offset = self.offset
-
-        self.view.widget.show_all()
-        if self.form.focusable:
-            self.form.focusable.grab_focus()
+        vp.show()
+        self.sw = gtk.ScrolledWindow()
+        self.sw.set_shadow_type(gtk.SHADOW_NONE)
+        self.sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        self.sw.add(vp)
+        self.sw.show()
+        self.wid = self.glade.get_widget('win_search_vbox')
+        self.wid.pack_start(self.sw)
+        self.wid.show_all()
 
     def sig_activate(self, treeview, path, column, *args):
-        if self.search_mode == 'gallery':
-            self.view.widget.emit_stop_by_name('item-activated')
-        else: # 'tree'
-            self.view.widget_tree.emit_stop_by_name('row_activated')
+        self.view.widget_tree.emit_stop_by_name('row_activated')
         if not self.sel_multi:
             self.win.response(gtk.RESPONSE_OK)
         return False
@@ -228,57 +158,20 @@ class win_search(object):
             self.win.response(gtk.RESPONSE_OK)
         return False
 
-    def find(self, widget=None, load_default=False, *args):
-        limit = self.get_limit()
-        offset = self.offset
-        if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset):
-            return False
-        self.old_offset = offset
-        self.old_limit = limit
-        v = self.form.value.get('domain',[])
-        v += self.domain
-        if load_default:
-            v += [('id','in', self.ids)]
-        self.old_search = deepcopy(self.form.value)
-        group_context = self.form.value.get('context')
-        self.context.update(group_context)
-        if self.context.get('group_by',False):
-            self.screen.search_filter()
-        else:
-            try:
-                self.ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, self.context)
-            except:
-                # Try if it is not an old server
-                self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
+    def find(self, widget=None, *args):
+        self.screen.search_filter()
+        self.update_title()
 
-            self.reload()
-            self.win.set_title(self.title_results % len(self.ids))
-            if len(self.ids) < limit:
-                self.search_count = len(self.ids)
-            else:
-                self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search_count', [], self.context)
-            if offset<=0:
-                self.but_previous.set_sensitive(False)
-            else:
-                self.but_previous.set_sensitive(True)
-            if not limit or offset+limit >= self.search_count:
-                self.but_next.set_sensitive(False)
-            else:
-                self.but_next.set_sensitive(True)
-            return True
+    def update_title(self):
+        self.ids = self.screen.win_search_ids
+        self.reload()
+        self.win.set_title(self.title_results % len(self.ids))
 
     def reload(self):
-        self.screen.clear()
-        self.screen.load(self.ids)
+        sel = self.view.widget_tree.get_selection()
+        if sel.get_mode() == gtk.SELECTION_MULTIPLE:
+            sel.select_all()
 
-        if self.search_mode == 'gallery':
-            sel = self.view.widget.get_selection_mode()
-            if sel == gtk.SELECTION_MULTIPLE:
-                self.view.widget.select_all()
-        else: # 'tree'
-            sel = self.view.widget_tree.get_selection()
-            if sel.get_mode() == gtk.SELECTION_MULTIPLE:
-                sel.select_all()
 
     def sel_ids_get(self):
         return self.screen.sel_ids_get()
@@ -289,24 +182,12 @@ class win_search(object):
 
     def go(self):
         ## This is if the user has set some filters by default with search_default_XXX
-        self.find(load_default=True)
+        if self.ids:
+            self.screen.win_search_domain += [('id','in', self.ids)]
+            self.find()
+        else:
+            self.screen.update_scroll()
         end = False
-        limit = self.get_limit()
-        offset = self.offset
-        if len(self.ids) < limit:
-            self.search_count = len(self.ids)
-        else:
-            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search_count', [], self.context)
-        if offset<=0:
-            self.but_previous.set_sensitive(False)
-        else:
-            self.but_previous.set_sensitive(True)
-
-        if offset+limit >= self.search_count:
-            self.but_next.set_sensitive(False)
-        else:
-            self.but_next.set_sensitive(True)
-
         while not end:
             button = self.win.run()
             if button == gtk.RESPONSE_OK:
@@ -318,29 +199,11 @@ class win_search(object):
                 res = None
                 end = True
         self.destroy()
-
-        if button== gtk.RESPONSE_ACCEPT:
-            dia = dialog(self.model, window=self.parent, domain=self.domain ,context=self.context)
+        if button == gtk.RESPONSE_ACCEPT:
+            dia = dialog(self.model, window=self.parent, domain=self.screen.domain_init ,context=self.screen.context)
             id = dia.run()
             res = id and [id] or None
             dia.destroy()
         return res
 
-    def search_offset_next(self, button):
-        offset = self.offset
-        limit = self.get_limit()
-        self.offset = offset+limit
-        self.find()
-
-    def search_offset_previous(self, button):
-        offset = self.offset
-        limit = self.get_limit()
-        self.offset = (max(offset-limit,0))
-        self.find()
-
-    def get_limit(self):
-        try:
-            return int(self.limit_combo.get_value(self.combo.get_active_iter(), 0))
-        except:
-            return False
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
