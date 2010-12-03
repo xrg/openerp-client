@@ -90,57 +90,68 @@ def calc_condition(self, model, cond):
         common.error('Wrong attrs Implementation!','You have wrongly specified conditions in attrs %s' %(cond_main,))
 
 class ConditionExpr(object):
-    OPERATORS = {'=': getattr(operator, 'eq'),
-                 '!=': getattr(operator, 'ne'),
-                 '<': getattr(operator, 'lt'),
-                 '>': getattr(operator, 'gt'),
-                 '<=': getattr(operator, 'le'),
-                 '>=': getattr(operator, 'ge'),
-                 'in': getattr(operator, 'contains'),
-                 'not in': getattr(operator, 'contains')}
 
     OPERAND_MAPPER = {'<>': '!=', '==': '='}
 
     def __init__(self, condition):
         self.cond = condition
 
-    def eval(self, context):
-        if context:
-            def evaluate(cond):
+    def eval(self, model):
+        if model:
+            eval_stack = [] # Stack used for evaluation
+            ops = ['=','!=','<','>','<=','>=','in','not in','<>','=='] 
+            
+            def is_operand(cond): # Method to check the Operands
+                if (len(cond)==3 and cond[1] in ops) or isinstance(cond,bool):
+                    return True
+                else:
+                    return False
+                
+            def evaluate(cond): # Method to evaluate the conditions
                 if isinstance(cond,bool):
                     return cond
                 left, oper, right = cond
-                real_op = self.OPERAND_MAPPER.get(oper.lower(), oper)
-                if oper in ('in','not in'):
-                    res = self.OPERATORS[real_op](right, context[left].get(context))
-                    if oper == 'not in':
-                        res = operator.not_(res)
-                else:
-                    res = self.OPERATORS[real_op](context[left].get(context), right)
-
+                oper = self.OPERAND_MAPPER.get(oper.lower(), oper)
+                if oper == '=':
+                    res = operator.eq(model[left].get(model),right)
+                elif oper == '!=':
+                    res = operator.ne(model[left].get(model),right)
+                elif oper == '<':
+                    res = operator.lt(model[left].get(model),right)
+                elif oper == '>':
+                    res = operator.gt(model[left].get(model),right)
+                elif oper == '<=':
+                    res = operator.le(model[left].get(model),right)
+                elif oper == '>=':
+                    res = operator.ge(model[left].get(model),right)
+                elif oper == 'in':
+                    res = operator.contains(right, model[left].get(model))
+                elif oper == 'not in':
+                    res = operator.contains(right, model[left].get(model))
+                    res = operator.not_(res)
                 return res
 
-            def find_index(con):
-                index_or = index_and = -1
-                for a in range(len(con)):
-                    if con[a] == '|':
-                        index_or = a
-                    if con[a] == '&':
-                        index_and = a
-                return [index_or, index_and]
-            ind_or,ind_and = find_index(self.cond)
-            while(ind_or != -1 or ind_and != -1):
-                if ind_or > ind_and:
-                    ind = ind_or
-                    result = any((evaluate(self.cond[ind+1]), evaluate(self.cond[ind+2])))
-                if ind_and > ind_or:
-                    ind = ind_and
-                    result = all((evaluate(self.cond[ind+1]), evaluate(self.cond[ind+2])))
-                self.cond.__delslice__(ind, ind+3)
-                self.cond.__setslice__(ind, ind, [result])
-                ind_or,ind_and = find_index(self.cond)
-            res = all(evaluate(expr) for expr in self.cond)
+            orig_stack = self.cond
+            orig_stack.reverse()
+            for condition in orig_stack:
+                if is_operand(condition): # If operand Push on Stack
+                    eval_stack.append(condition)
+                elif condition in ['|','&','!']: # If operator pop necessary operands from stack and evaluate and store the result back to stack
+                    if condition in ('|','&'):
+                        elem_1 = eval_stack.pop()
+                        elem_2 = eval_stack.pop()
+                        if condition=='|':
+                            result = any((evaluate(elem_1), evaluate(elem_2)))
+                        else:
+                            result = all((evaluate(elem_1), evaluate(elem_2)))
+                    elif condition == '!':
+                        elem_1 = eval_stack.pop()
+                        result =  not evaluate(elem_1)
+                    eval_stack.append(result)
+                    
+            res = all(evaluate(expr) for expr in eval_stack) # evaluate all the remaining elments if any
             return res
+        
 def call_log(fun):
     """Debug decorator
        TODO: Add optionnal execution time
