@@ -34,10 +34,6 @@ from gtk import glade
 import tools
 from field import O2MField
 
-import gc
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
-
 class EvalEnvironment(object):
     def __init__(self, parent):
         self.parent = parent
@@ -99,9 +95,6 @@ class ModelRecord(signal_event.signal_event):
         del self.pager_cache
         del self.parent
         del self.resource
-        print "== DONE destroy widget.model.record.ModelRecord =="
-        pp.pprint(gc.get_referents(self))
-        self.destroy = True
 
     def __getitem__(self, name):
         return self.mgroup.mfields.get(name, False)

@@ -204,13 +204,11 @@ class form(object):
             Destroy the page object and all the child 
             (or at least should do this)
         """
-        print "<<< destroy >>>>"
         oregistry.remove_receiver('misc-message', self._misc_message)
         self.screen.signal_unconnect(self)
         self.screen.destroy()
         self.widget.destroy()
         self.sw.destroy()
-        #self.window.destroy() #don't destroy the main window trust me !
         del self.screen
         del self.widget
         del self.sw
@@ -224,13 +222,6 @@ class form(object):
         del self.has_backup
         del self.model
         del self.name
-        
-        #Don't know if we need to destroy something inside
-        #del self.backup
-        #del self.previous_action
-        #del self.fields
-
-        pp.pprint(gc.get_referents(self))
         
     def ids_get(self):
         return self.screen.ids_get()
