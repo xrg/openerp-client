@@ -44,6 +44,7 @@ class Button(Observable):
             'label': attrs.get('string', 'unknown')
         }
         self.widget = gtk.Button(**args)
+        self.widget.set_flags(gtk.CAN_DEFAULT)
 
         readonly = bool(int(attrs.get('readonly', '0')))
         self.set_sensitive(not readonly)
@@ -119,10 +120,8 @@ class Button(Observable):
 
         elif model.validate():
             id = self.form.screen.save_current()
-            if not self.attrs.get('confirm',False) or \
-                    common.sur(self.attrs['confirm']):
-                model.get_button_action(self.form.screen,id,self.attrs)
-                self.warn('misc-message', '')
+            model.get_button_action(self.form.screen, id, self.attrs)
+            self.warn('misc-message', '')
         else:
             common.warning(_('Invalid form, correct red fields !'), _('Error !') )
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
@@ -136,6 +135,7 @@ class StateAwareWidget(object):
         self.widget = widget
         self.label = label
         self.states = states or []
+        self.frame_child = {}
 
     def __getattr__(self, a):
         return self.widget.__getattribute__(a)
@@ -150,8 +150,6 @@ class StateAwareWidget(object):
         sa = getattr(self.widget, 'attrs') or {}
 
         attrs_changes = eval(sa.get('attrs',"{}"),{'uid':rpc.session.uid})
-        if sa.get('default_focus',False):
-            self.widget.grab_focus()
         for k,v in attrs_changes.items():
             result = True
             result = result and tools.calc_condition(self, model, v)
@@ -159,7 +157,7 @@ class StateAwareWidget(object):
                 func = ['show', 'hide'][bool(result)]
                 getattr(self.widget, func)()
                 if self.label:
-                        getattr(self.label, func)()
+                    getattr(self.label, func)()
             elif k == 'readonly':
                 if isinstance(self.widget, gtk.Frame):
                     for name, wid in self.frame_child.iteritems():
@@ -214,15 +212,19 @@ class _container(object):
 
     def create_label(self, name, markup=False, align=1.0, wrap=False,
                      angle=None, width=None, fname=None, help=None, detail_tooltip=False):
+        
         label = gtk.Label(name)
-        if markup:
-            label.set_use_markup(True)
-
         eb = gtk.EventBox()
         eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
+        if markup:
+            label.set_use_markup(True)
         self.trans_box_label.append((eb, name, fname))
         eb.add(label)
-
+        
+        def size_allocate(label, allocation):
+            label.set_size_request( allocation.width - 2, -1 )
+        if fname is None and name and len(name) > 50:
+            label.connect( "size-allocate", size_allocate )
         uid = rpc.session.uid
         tooltip = ''
         if help:
@@ -233,18 +235,12 @@ class _container(object):
             tooltip += (help and '\n' or '') + detail_tooltip
         if tooltip:
             eb.set_tooltip_markup(tooltip)
-
-
         label.set_alignment(align, 0.5)
-
         if width:
             label.set_size_request(width, -1)
-
         label.set_line_wrap(bool(int(wrap)))
         if angle:
             label.set_angle(int(angle))
-
-
         return eb
 
     def wid_add(self, widget, label=None, xoptions=False, expand=False, ypadding=2, rowspan=1,
@@ -307,7 +303,9 @@ class parser_form(widget.view.interface.parser_interface):
            super(parser_form, self).__init__(window, parent=parent, attrs=attrs,
                     screen=screen)
            self.widget_id = 0
-           self.accepted_attr_list = ['type','domain','context','relation', 'widget',
+           self.default_focus_field = False
+           self.default_focus_button = False
+           self.accepted_attr_list = ['type','domain','context','relation', 'widget','attrs',
                                       'digits','function','store','fnct_search','fnct_inv','fnct_inv_arg',
                                       'func_obj','func_method','related_columns','third_table','states',
                                       'translate','change_default','size','selection']
@@ -398,7 +396,13 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
+                    
+                if 'default_focus' in attrs and not self.default_focus_button:
+                    attrs['focus_button'] = attrs['default_focus']
+                    self.default_focus_button = True
+              
                 button = Button(attrs)
+                
                 states = [e for e in attrs.get('states','').split(',') if e]
                 saw_list.append(StateAwareWidget(button, states=states))
                 container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)))
@@ -515,7 +519,8 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
-                saw_list.append(StateAwareWidget(frame, states=states))
+                state_aware = StateAwareWidget(frame, states=states)
+                saw_list.append(state_aware)
 
                 if attrs.get("width",False) or attrs.get("height"):
                     frame.set_size_request(int(attrs.get('width', -1)) ,int(attrs.get('height', -1)))
@@ -527,6 +532,7 @@ class parser_form(widget.view.interface.parser_interface):
                 container.wid_add(group_wid, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
                 container.new(int(attrs.get('col',4)))
                 widget, widgets, saws, on_write = self.parse(model, node, fields)
+                state_aware.frame_child.update(widgets)
                 dict_widget.update(widgets)
                 saw_list += saws
                 frame.add(widget)
