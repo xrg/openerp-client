@@ -42,11 +42,6 @@ class ViewDiagram(parser_view):
     def __getitem__(self, name):
         return None
 
-    def destroy(self):
-        self.widget.destroy()
-        del self.screen
-        del self.widget
-
     def set_value(self):
         pass
 
@@ -74,6 +69,11 @@ class ViewDiagram(parser_view):
 
     def set_cursor(self, new=False):
         pass
+    
+    def destroy(self):
+        self.widget.destroy()
+        del self.screen
+        del self.widget
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

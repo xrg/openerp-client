@@ -103,6 +103,7 @@ class dialog(object):
     def destroy(self):
         self.window.present()
         self.dia.destroy()
+        self.screen.destroy()
 
 
 class win_search(object):

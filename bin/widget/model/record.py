@@ -70,6 +70,31 @@ class ModelRecord(signal_event.signal_event):
             if (new and val.attrs['type']=='one2many') and (val.attrs.get('mode', 'tree,form').startswith('form')):
                 mod = self.value[key].model_new()
                 self.value[key].model_add(mod)
+                
+    def destroy(self):
+        if self.destroy:
+            return   
+        
+        if hasattr(self, 'list_group'):
+            del self.list_group
+            
+        if hasattr(self, 'mgroup'):
+            del self.mgroup
+            
+        del self.mgroup
+        del self.value
+        del self.state_attrs
+        del self.rpc
+        del self._concurrency_check_data
+        del self._loaded
+        del self.id
+        del self.is_m2m_modified
+        del self.list_parent
+        del self.modified
+        del self.modified_fields
+        del self.pager_cache
+        del self.parent
+        del self.resource
 
     def __getitem__(self, name):
         return self.mgroup.mfields.get(name, False)
