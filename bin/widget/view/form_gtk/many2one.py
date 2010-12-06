@@ -121,6 +121,7 @@ class dialog(object):
     def destroy(self):
         self.window.present()
         self.dia.destroy()
+        self.screen.destroy()
 
 class Button(gtk.Button):
     def __init__(self, stock_id, callback, tooltips_string):

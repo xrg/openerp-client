@@ -119,6 +119,17 @@ class list_record(object):
         self.sort_order = sort_order
         self.lst = []
         self.load()
+        
+    def destroy(self):
+        for model in self.lst:
+            model.destroy()
+            
+    
+        del self.context
+        del self.domain
+        del self.loaded
+        del self.mgroup
+        del self.lst
 
     def add_dummny_record(self, group_field):
         record = { group_field:'This group is now empty ! Please refresh the list.'}
@@ -850,11 +861,7 @@ class ViewList(parser_view):
             if col.name in self.screen.context.get('group_by',[]):
                 value = False
             col.set_visible(not value)
-    
-    
-
-   
-            
+         
     
     
         
@@ -924,3 +931,5 @@ class ViewList(parser_view):
                 
         if len(values) < 1:
             return final_path
+=======
+>>>>>>> MERGE-SOURCE

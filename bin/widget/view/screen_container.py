@@ -48,6 +48,56 @@ class screen_container(object):
         self.domain = []
         self.context = {}
         self.handler_id = None
+        
+    def destroy(self):        
+        if hasattr(self, 'action_combo') and self.action_combo:
+            self.action_combo.destroy()
+            del self.action_combo
+
+        if hasattr(self, 'but_next') and self.but_next:
+            self.but_next.destroy()
+            del self.but_next
+        
+        if hasattr(self, 'but_previous') and self.but_previous:
+            self.but_previous.destroy()
+            del self.but_previous
+            
+        if hasattr(self, 'button') and self.button:
+            self.button.destroy()
+            del self.button
+            
+        if hasattr(self, 'button_dynamic') and self.button_dynamic:
+            self.button_dynamic.destroy()
+            del self.button_dynamic
+            
+        if hasattr(self, 'combo') and self.combo:
+            self.combo.destroy()
+            del self.combo
+            
+        if hasattr(self, 'filter_vbox') and self.filter_vbox:
+            self.filter_vbox.destroy()
+            del self.filter_vbox
+            
+        if hasattr(self, 'help_frame') and self.help_frame:
+            self.help_frame.destroy()
+            del self.help_frame
+    
+        self.sw.destroy()
+        self.vbox.destroy()
+        self.vp.destroy()
+        
+        if hasattr(self, 'action_list'):
+            del self.action_list
+        
+        if hasattr(self, 'limit_combo'):
+            del self.limit_combo
+        
+        del self.sw
+        del self.vbox
+        del self.vp
+        del self.handler_id
+        del self.help
+        del self.last_active_filter
 
     def widget_get(self):
         return self.vbox

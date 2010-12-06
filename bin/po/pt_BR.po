@@ -8,14 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-10-25 18:40+0000\n"
-"Last-Translator: Miguel Cabero - http://www.akretion.com "
-"<lemig@hotmail.com>\n"
+"PO-Revision-Date: 2010-12-04 08:23+0000\n"
+"Last-Translator: Cristiano Korndörfer <codigo.aberto@dorfer.com.br>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-24 05:00+0000\n"
+"X-Launchpad-Export-Date: 2010-12-05 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -77,11 +76,9 @@ msgstr "Habilitar debug basico. Apelido para '--log-level=debug'"
 msgid "specify the log level: %s"
 msgstr "especificar o nivel do log: %s"
 
-#
-# File: bin/options.py, line: 112
 #: bin/options.py:112
 msgid "specify the user login"
-msgstr "informe o login do usuário"
+msgstr "Informe o nome de usuário"
 
 #
 # File: bin/options.py, line: 113
@@ -89,11 +86,9 @@ msgstr "informe o login do usuário"
 msgid "specify the server port"
 msgstr "informe a porta do servidor"
 
-#
-# File: bin/options.py, line: 114
 #: bin/options.py:114
 msgid "specify the server ip/name"
-msgstr "informe o ip/nome do servidor"
+msgstr ""
 
 #
 # File: bin/printer/printer.py, line: 172
@@ -112,23 +107,15 @@ msgstr ""
 "Impressão Automática do Linux não implementada.\n"
 "Use a opção 'prever' !"
 
-#
-# File: bin/printer/printer.py, line: 189
 #: bin/printer/printer.py:198
 msgid "Error no report"
-msgstr "Erro: sem report"
+msgstr "Erro não informado"
 
-#
-# File: bin/widget/view/form_gtk/image.py, line: 117
-# File: bin/widget/view/form_gtk/binary.py, line: 162
-# File: bin/modules/gui/main.py, line: 1136
-# File: bin/modules/gui/window/win_export.py, line: 282
-# File: bin/printer/printer.py, line: 207
 #: bin/printer/printer.py:217 bin/modules/gui/window/win_export.py:289
 #: bin/modules/gui/main.py:1424 bin/widget/view/form_gtk/binary.py:162
 #: bin/widget/view/form_gtk/image.py:119
 msgid "Save As..."
-msgstr "Salvar como..."
+msgstr "Salvar Como..."
 
 #
 # File: bin/printer/printer.py, line: 215
