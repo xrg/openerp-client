@@ -40,6 +40,10 @@ import service
 import common
 import copy
 
+import gc
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
 class Screen(signal_event.signal_event):
 
     def __init__(self, model_name, view_ids=None, view_type=None,help={},
@@ -474,7 +478,8 @@ class Screen(signal_event.signal_event):
         self.widget.destroy()            
         self.models.signal_unconnect(self)
         self.models.destroy()        
-        self.screen_container.destroy()
+
+        
         
         del self.models
         del self.widget
@@ -485,34 +490,24 @@ class Screen(signal_event.signal_event):
         del self.search_view
         del self._Screen__current_model
         del self._Screen__current_view
-        del self._readonly       
+         
         del self.action_domain
         del self.auto_search
-        del self.context
-        del self.context_init
         del self.create_new
-        del self.domain
-        del self.domain_init
         del self.dummy_cal
-        
-        del self.hassubmenu
-        del self.hastoolbar
+
         del self.help_mode
         del self.is_wizard
         del self.latest_search
-        del self.limit
-        del self.name
         del self.offset
         del self.old_ctx
-        del self.old_limit
+  
      
-        del self.resource
+
         del self.row_activate
-        del self.rpc
         del self.screen_container
         del self.search_count
         del self.show_search
-        del self.sort
         del self.tree_saves
         del self.type
         del self.view_ids
@@ -520,12 +515,14 @@ class Screen(signal_event.signal_event):
         del self.views_preload
         
         del self.win_search
-        del self.win_search_callback
-        del self.win_search_domain
-        del self.win_search_ids
+        del self.win_search_callback       
         del self.window
-
+        #pp.pprint(gc.get_referrers(self))
+        #print "+++++++++++++++++++++++++++"
+        #pp.pprint(gc.get_referents(self))
         
+    def __del__(self):
+        print "DELETION of screen.screen"
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):

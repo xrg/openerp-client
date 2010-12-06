@@ -55,15 +55,8 @@ class CharField(object):
         self.default_attrs = {}
         
     def destroy(self):        
-        self.generic_destroy()
-        
-    def generic_destroy(self):
-        del self.attrs
-        del self.default_attrs
-        del self.name
         del self.parent
-        del self.internal
-
+    
     def sig_changed(self, model):
         if self.get_state_attrs(model).get('readonly', False):
             return
@@ -174,10 +167,7 @@ class CharField(object):
             model.state_attrs[self.name] = self.attrs.copy()
         return model.state_attrs[self.name]
 
-class BinaryField(CharField):
-    def destroy(self):
-        super(BinaryField, self).generic_destroy()
-    
+class BinaryField(CharField):    
     def __check_model(self, model):
         assert self.name in model.mgroup.mfields
 
@@ -245,10 +235,6 @@ class BinaryField(CharField):
 
 
 class SelectionField(CharField):
-    
-    def destroy(self):
-        super(SelectionField, self).generic_destroy()
-        
     def set(self, model, value, test_state=True, modified=False):
         value = isinstance(value,(list,tuple)) and len(value) and value[0] or value
 
@@ -258,10 +244,7 @@ class SelectionField(CharField):
         if value in [sel[0] for sel in self.attrs['selection']]:
             super(SelectionField, self).set(model, value, test_state, modified)
 
-class FloatField(CharField):
-    def destroy(self):
-        super(FloatField, self).generic_destroy()
-    
+class FloatField(CharField):    
     def validate(self, model):
         self.get_state_attrs(model)['valid'] = True
         return True
@@ -276,11 +259,7 @@ class FloatField(CharField):
                 self.sig_changed(model)
                 model.signal('record-changed', model)
 
-class IntegerField(CharField):
-
-    def destroy(self):
-        super(IntegerField, self).generic_destroy()
-        
+class IntegerField(CharField):        
     def get(self, model, check_load=True, readonly=True, modified=False):
         return model.value.get(self.name, 0) or 0
 
@@ -306,9 +285,6 @@ class M2OField(CharField):
     internal = (id, name)
     '''
     
-    def destroy(self):
-        super(M2OField, self).generic_destroy()
-
     def create(self, model):
         return False
 
@@ -353,10 +329,6 @@ class M2MField(CharField):
     def __init__(self, parent, attrs):
         super(M2MField, self).__init__(parent, attrs)
         self.limit = DEFAULT_PAGER_LIMIT
-        
-    def destroy(self):
-        super(M2MField, self).generic_destroy()
-        del self.limit
         
     def create(self, model):
         return []
@@ -403,10 +375,8 @@ class O2MField(CharField):
         self.context={}
         self.limit = DEFAULT_PAGER_LIMIT
         
-    def destroy(self):
-        super(O2MField, self).generic_destroy()
-        del self.context
-        del self.limit
+  
+        
 
     def create(self, model):
         from widget.model.group import ModelRecordGroup
@@ -534,8 +504,7 @@ class ReferenceField(CharField):
             model.modified = True
             model.modified_fields.setdefault(self.name)
             
-    def destroy(self):
-        super(ReferenceField, self).generic_destroy()
+    
 
 TYPES = {
     'char' : CharField,

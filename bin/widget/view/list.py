@@ -120,11 +120,7 @@ class list_record(object):
         self.lst = []
         self.load()
         
-    def destroy(self):
-        for model in self.lst:
-            model.destroy()
-            
-    
+    def destroy(self):   
         del self.context
         del self.domain
         del self.loaded
