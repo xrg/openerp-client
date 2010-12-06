@@ -381,10 +381,13 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
     show_message = True
 
     if not disconnected_mode:
-        maintenance = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'status')
-
-        if maintenance['status'] == 'none':
-            maintenance_contract_message=_("""
+        try:
+            maintenance = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'status')
+        except:
+            maintenance = False
+        if maintenance:
+            if maintenance['status'] == 'none':
+                maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
 <b>You do not have a valid OpenERP maintenance contract !</b>
@@ -406,8 +409,8 @@ The maintenance program offers you:
 You can use the link bellow for more information. The detail of the error
 is displayed on the second tab.
 """)
-        elif maintenance['status'] == 'partial':
-            maintenance_contract_message=_("""
+            elif maintenance['status'] == 'partial':
+                maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
 Your maintenance contract does not cover all modules installed in your system !
@@ -424,10 +427,11 @@ Here is the list of modules not covered by your maintenance contract:
 
 You can use the link bellow for more information. The detail of the error
 is displayed on the second tab.""") % (", ".join(maintenance['uncovered_modules']), )
+            else:
+                show_message = False
+
         else:
-            show_message = False
-    else:
-        maintenance_contract_message=_("""
+            maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
 <b>You do not have a valid OpenERP maintenance contract !</b>
@@ -465,12 +469,10 @@ is displayed on the second tab.
     details_buffer = gtk.TextBuffer()
     details_buffer.set_text(details)
     xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
-
     if show_message:
         xmlGlade.get_widget('maintenance_explanation').set_markup(maintenance_contract_message)
 
     xmlGlade.get_widget('notebook').remove_page(int(show_message))
-
     if not show_message:
         def send(widget):
             def get_text_from_text_view(textView):
@@ -491,7 +493,6 @@ is displayed on the second tab.
 
         xmlGlade.signal_connect('on_button_send_clicked', send)
         xmlGlade.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
-
     response = win.run()
     parent.present()
     win.destroy()
