@@ -124,6 +124,21 @@ class list_record(object):
         record = { group_field:'This group is now empty ! Please refresh the list.'}
         rec = group_record(record, ctx=self.context, domain=self.domain, mgroup=self.mgroup, child = False)
         self.add(rec)
+        
+    def get_order(self, gb, sort_order):
+        """
+            @param gb : grouby parameter for read_group call
+            @param sort_order : order of sorting for the same read_group call
+            @return : sort_order if sort_order start with the same field as gb else None
+        """
+        if sort_order:
+            if(isinstance(gb, (tuple, list))):
+                gb = gb[0]
+                
+            if not sort_order.startswith(gb):
+                return None
+            
+        return sort_order
 
     def load(self):
         if self.loaded:
@@ -133,7 +148,7 @@ class list_record(object):
         no_leaf = self.context.get('group_by_no_leaf', False)
         if gb or no_leaf:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
-                self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context, self.sort_order)
+                self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context, self.get_order(gb, self.sort_order))
             if not records and self.parent:
                 self.add_dummny_record(gb[0])
             else:
@@ -846,9 +861,6 @@ class ViewList(parser_view):
     def get_id(self, path):
         return self.store.on_get_iter(path).value
 
-    """
-        TODO : give path for a list of value
-    """
     def get_path(self, values):
         self.num_op = 0
         model = self.store
@@ -861,7 +873,7 @@ class ViewList(parser_view):
             @param path_list : list of path of first child
             
         """
-        #@assert len(path_list) == len(first_nodes)
+        assert len(path_list) == len(first_nodes)
         visited_node = Queue.Queue()
         q = Queue.Queue()
         for i in xrange(0, len(first_nodes)):
@@ -874,8 +886,8 @@ class ViewList(parser_view):
             return res
         
         
-        (nodes_list, paths_list) = self.add_first_child(visited_node)
-        return self.compute_level(nodes_list, values, paths_list, final_path)
+        (nodes_list, new_path_list) = self.add_first_child(visited_node)
+        return self.compute_level(nodes_list, values, new_path_list, final_path)
         
     def add_first_child(self, visited_node):
         nodes_list = []
@@ -895,11 +907,6 @@ class ViewList(parser_view):
         if(next):
             path.append(path.pop() + 1) #We add 1 to the last level of the path
             self.add_next(next, q, list(path))
-            
-    def add_child(self, node, q, path):
-        path.append(0)
-        if self.store.on_iter_has_child(node):
-            return self.add_next(self.store.on_iter_children(node), q, list(path))
     
     def process_queue(self, q, value, visited_nodes, final_path):
         while(not q.empty()):

@@ -42,6 +42,8 @@ import re
 import xmlrpclib
 import base64
 
+import gc
+
 RESERVED_KEYWORDS=['absolute', 'action', 'all', 'alter', 'analyse', 'analyze', 'and', 'any', 'as', 'asc', 'authorization', 'between', 'binary', 'both',
             'case', 'cast', 'check', 'collate', 'column','constraint', 'create', 'cross', 'current_date', 'current_time', 'current_timestamp',
             'current_user','default', 'deferrable', 'desc', 'distinct', 'do', 'else', 'end', 'except', 'false', 'for', 'foreign', 'freeze',
@@ -1297,6 +1299,7 @@ class terp_main(service.Service):
 
             #page.destroy()
             #del page
+        gc.collect()
         return self.notebook.get_current_page() != -1
 
     def _wid_get(self,page_num=None):
