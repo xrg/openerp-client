@@ -31,20 +31,17 @@ class CanvasEvent(CanvasRectangle):
         Constructor.
         """
         self.cal    = cal
-        text        = kwargs.pop('text', '')
         self.event  = event
         self.rulers = []
         CanvasRectangle.__init__(self, **kwargs)
-
         # Create canvas items.
         self.text = hippo.CanvasText(xalign    = hippo.ALIGNMENT_CENTER,
                                      yalign    = hippo.ALIGNMENT_CENTER,
                                      size_mode = hippo.CANVAS_SIZE_ELLIPSIZE_END)
         self.append(self.text, hippo.PACK_EXPAND)
-        self.set_text(text)
 
-    def set_text(self, text):
-        self.text.set_property('text', text)
+    def set_text(self, text, description = ''):
+        self.text.set_property('text', text + ', ' + description)
 
 
     def set_text_color(self, newcolor):

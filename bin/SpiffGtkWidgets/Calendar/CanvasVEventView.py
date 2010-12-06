@@ -62,7 +62,7 @@ class CanvasVEventView(CanvasEventView):
         item.connect('button-release-event', self.on_event_button_release_event)
         self.table.set_column_expand(cols, True)
         self.table.add(item, cols + 1, cols + 2, event_off_rows, event_end_rows)
-        item.set_text(event.caption)
+        item.set_text(event.caption, event.description)
         item.set_property('color', color.to_int(event.bg_color))
         if event.text_color is not None:
             item.set_text_color(event.text_color)
