@@ -931,5 +931,4 @@ class ViewList(parser_view):
                 
         if len(values) < 1:
             return final_path
-=======
->>>>>>> MERGE-SOURCE
+
