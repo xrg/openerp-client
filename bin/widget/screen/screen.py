@@ -40,6 +40,10 @@ import service
 import common
 import copy
 
+import gc
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
 class Screen(signal_event.signal_event):
 
     def __init__(self, model_name, view_ids=None, view_type=None,help={},
@@ -512,7 +516,7 @@ class Screen(signal_event.signal_event):
         del self.win_search
         del self.win_search_callback       
         del self.window
-
+        pp.pprint(gc.get_referents(self))
         
     def __del__(self):
         print "DELETION of screen.screen"

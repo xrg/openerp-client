@@ -44,6 +44,10 @@ import copy
 from observator import oregistry
 from widget.screen import Screen
 
+import gc
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
 class form(object):
     def __init__(self, model, res_id=False, domain=None, view_type=None,
             view_ids=None, window=None, context=None, name=False, help={}, limit=80,
@@ -208,6 +212,7 @@ class form(object):
         self.sw.destroy()
         del self.screen 
         del self.handlers      
+        pp.pprint(gc.get_referents(self))
    
 
         
