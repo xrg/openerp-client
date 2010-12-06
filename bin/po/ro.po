@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-11-27 08:36+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-12-04 20:26+0000\n"
+"Last-Translator: Syraxes <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-28 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-12-05 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -27,7 +27,7 @@ msgstr "Tipărire Workflow (Complex)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr "Nu exist plugin disponibil pentru aceasta resursa !"
+msgstr "Nu există nici un plugin disponibil pentru această resursă !"
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
@@ -49,7 +49,7 @@ msgstr "OpenERP Client %s"
 
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr "specificati un fisier de configurare alternativ"
+msgstr "specificaţi un fişier de configurare alternativ"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
