@@ -144,7 +144,6 @@ class dialog(object):
         self.screen.signal_unconnect(self)
         self.window.present()
         self.dia.destroy()
-        self.screen.destroy()
 
 
 class one2many_list(interface.widget_interface):

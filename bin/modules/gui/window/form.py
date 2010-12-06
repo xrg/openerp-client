@@ -39,9 +39,7 @@ import common
 import service
 import options
 import copy
-import gc
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
+
 
 from observator import oregistry
 from widget.screen import Screen
@@ -198,6 +196,7 @@ class form(object):
             self.get_resource(widget)
 
     def destroy(self):
+        
         """
             Destroy the page object and all the child 
             (or at least should do this)
@@ -207,20 +206,14 @@ class form(object):
         self.screen.destroy()
         self.widget.destroy()
         self.sw.destroy()
-        del self.screen
-        del self.widget
-        del self.sw
+        del self.screen 
+        del self.handlers      
+   
+
         
-        
-        del self.window    
-        del self.glade
-        del self.handlers
-        del self.context
-        del self.domain
-        del self.has_backup
-        del self.model
-        del self.name
-        
+    def __del__(self):
+        print "DELETION OF modules.gui.window.form"
+
     def ids_get(self):
         return self.screen.ids_get()
 
