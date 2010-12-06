@@ -462,30 +462,27 @@ class Screen(signal_event.signal_event):
     current_model = property(_get_current_model, _set_current_model)
 
     def destroy(self):
-       
-        
         for view in self.views:
             view.destroy()
-                    
-        if hasattr(self, 'filter_widget') and self.filter_widget:        
+        if hasattr(self, 'filter_widget') and self.filter_widget:
             self.filter_widget.destroy()
             del self.filter_widget
-        
-        self.widget.destroy()            
+
+        self.widget.destroy()
         self.models.signal_unconnect(self)
-        self.models.destroy()        
+        self.models.destroy()
         self.screen_container.destroy()
-        
+
         del self.models
         del self.widget
-        
+
         del self.views
         del self.fields
         del self.view_fields
         del self.search_view
         del self._Screen__current_model
         del self._Screen__current_view
-        del self._readonly       
+        del self._readonly
         del self.action_domain
         del self.auto_search
         del self.context
@@ -494,7 +491,7 @@ class Screen(signal_event.signal_event):
         del self.domain
         del self.domain_init
         del self.dummy_cal
-        
+
         del self.hassubmenu
         del self.hastoolbar
         del self.help_mode
@@ -505,7 +502,7 @@ class Screen(signal_event.signal_event):
         del self.offset
         del self.old_ctx
         del self.old_limit
-     
+
         del self.resource
         del self.row_activate
         del self.rpc
@@ -518,14 +515,12 @@ class Screen(signal_event.signal_event):
         del self.view_ids
         del self.view_to_load
         del self.views_preload
-        
+
         del self.win_search
         del self.win_search_callback
         del self.win_search_domain
         del self.win_search_ids
         del self.window
-
-        
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
@@ -835,8 +830,8 @@ class Screen(signal_event.signal_event):
                 else:
                     self.screen_container.help_frame.show_all()
             self.search_active(
-                    active=self.show_search and vt in ('tree', 'graph', 'calendar'),
-                    show_search=self.show_search and vt in ('tree', 'graph','calendar'),
+                    active=self.show_search and vt in ('tree', 'graph'),
+                    show_search=self.show_search and vt in ('tree', 'graph'),
             )
 
     def groupby_next(self):
