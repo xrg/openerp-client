@@ -478,7 +478,8 @@ class Screen(signal_event.signal_event):
         self.widget.destroy()            
         self.models.signal_unconnect(self)
         self.models.destroy()        
-        self.screen_container.destroy()
+
+        
         
         del self.models
         del self.widget
@@ -516,7 +517,9 @@ class Screen(signal_event.signal_event):
         del self.win_search
         del self.win_search_callback       
         del self.window
-        pp.pprint(gc.get_referents(self))
+        #pp.pprint(gc.get_referrers(self))
+        #print "+++++++++++++++++++++++++++"
+        #pp.pprint(gc.get_referents(self))
         
     def __del__(self):
         print "DELETION of screen.screen"
