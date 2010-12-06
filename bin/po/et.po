@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-10-25 19:28+0000\n"
-"Last-Translator: Ahti Hinnov <sipelgas@gmail.com>\n"
+"PO-Revision-Date: 2010-11-30 09:51+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-24 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-12-01 04:58+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #
@@ -274,7 +274,7 @@ msgstr ""
 
 #: bin/common/common.py:446
 msgid "Error"
-msgstr ""
+msgstr "Viga"
 
 #
 # File: bin/common/common.py, line: 499
@@ -490,11 +490,11 @@ msgstr "OpenERP Otsing: %s (%%d tulemus(t))"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "The file is empty !"
-msgstr ""
+msgstr "Fail on tühi !"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "Importimine !"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 54
@@ -505,7 +505,7 @@ msgstr "XML-RPC viga !"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "Üks objekt imporditud !"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 57
@@ -517,7 +517,7 @@ msgstr "Imporditud %d objekti !"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "Importimise viga !"
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 93
@@ -532,11 +532,11 @@ msgstr "Välja nimi"
 #: bin/modules/gui/window/win_import.py:186
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
-msgstr ""
+msgstr "Sa ei saa importida %s välja, sest me ei suuda seda auto-tedektida"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "Sa ei valinud ühtegi välja importimiseks"
 
 #
 # File: bin/modules/gui/window/win_selection.py, line: 52
@@ -597,11 +597,11 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:281
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Eksportimise viga !"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "Ressursi ID ei eksisteeri selle objektijaoks!"
 
 #
 # File: bin/modules/gui/window/form.py, line: 197
@@ -709,7 +709,7 @@ msgstr "Vigane vorm, korrasta punased väljad !"
 
 #: bin/modules/gui/window/form.py:308 bin/widget/view/form_gtk/parser.py:137
 msgid "Error !"
-msgstr ""
+msgstr "Viga !"
 
 #: bin/modules/gui/window/form.py:328 bin/modules/gui/window/form.py:423
 msgid ""
@@ -840,10 +840,12 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"Vaikimisi keel on muudetud, ära unusta muudatuste nägemiseks klienti "
+"restartida"
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "Vaikimisi keel muudetud !"
 
 #
 # File: bin/modules/gui/main.py, line: 145
@@ -920,39 +922,39 @@ msgstr ""
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Migratsiooni skriptid"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "Kontakti ID:"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "Kontakti parool:"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Sul juba on viimane versioon"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Järgmised uuendused on saadaval:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Sa ei saa migreerida oma andmebaase."
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "Migreeri andmebaas"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Sinu andmebaas on uuendatud."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Sinu andmebaasid on uuendatud."
 
 #
 # File: bin/modules/gui/main.py, line: 154
@@ -1124,6 +1126,8 @@ msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Autoriseerimise viga !\n"
+"Vale kasutajanimi või parool !"
 
 #
 # File: bin/modules/gui/main.py, line: 761
@@ -1532,7 +1536,7 @@ msgstr "Viga faili %s kirjutamisel"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Vigane kuupäeva väärtus! Aasta peab olema suurem kui 1899 !"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 115
@@ -1572,7 +1576,7 @@ msgstr "Vale ikoon nupu jaoks !"
 
 #: bin/widget/view/form_gtk/parser.py:541
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "Sisesta tekst seotud väljale enne tõlgete lisamist!"
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 480
@@ -1789,11 +1793,11 @@ msgstr "_Eemalda andmebaas"
 
 #: bin/openerp.glade:370
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "_Laadi alla migratsiooni kood"
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "_Migreeri andmebaas(id)"
 
 #
 # File: bin/openerp.glade, line: 372
@@ -2575,7 +2579,7 @@ msgstr "<b>Eelmääratletud ekspordid</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Importimiseks ühilduv"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
@@ -3078,7 +3082,7 @@ msgstr "Eelmine muudetav vidin"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #
 # File: bin/openerp.glade, line: 7383
@@ -3508,11 +3512,11 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "Ühenda hiljem"
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "Ühenda nüüd"
 
 #
 # File: bin/openerp.glade, line: 8697
@@ -3671,7 +3675,7 @@ msgstr ""
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "<b>Sinu firma</b>"
 
 #
 # File: bin/openerp.glade, line: 5791
@@ -3700,7 +3704,7 @@ msgstr "Sinu Roll:"
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "Töötajad:"
 
 #
 # File: bin/openerp.glade, line: 5953
@@ -3711,7 +3715,7 @@ msgstr "Riik:"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "Linn:"
 
 #
 # File: bin/openerp.glade, line: 5887
@@ -3733,15 +3737,16 @@ msgstr "Kuidas sa meist kuulsid:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "Me plaanime kasutada Open ERP-i"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "Me plaanime pakkuda teenuseid Open ERP-le"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"Ütle meile miks sa proovid Open ERP-i ja millised on su praegused tarkvarad:"
 
 #
 # File: bin/openerp.glade, line: 6318
@@ -3752,7 +3757,7 @@ msgstr "<b>Hoia Informeeritud</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "Soovin saada Open ERP e-raamatut (PDF) emaili teel"
 
 #
 # File: bin/openerp.glade, line: 5109
@@ -3762,7 +3767,7 @@ msgstr "Telefon / Mobiil:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "E-post:"
 
 #
 # File: bin/openerp.glade, line: 5124

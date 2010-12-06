@@ -35,19 +35,24 @@ from interface import parser_view
 from widget.model.record import ModelRecord
 
 class field_record(object):
-    def __init__(self, name):
+    def __init__(self, name, count):
         self.name = name
+        if count:
+            count = ' (' + count +')'
+        self.count = count
 
     def get_client(self, *args):
         if isinstance(self.name, (list,tuple)):
-            return self.name[1]
+            return self.name[1] + self.count
+        if self.count:
+            return str(self.name) + self.count
         return self.name
 
     def get(self, *args):
         if isinstance(self.name, (list,tuple)):
             return self.name[0]
         return self.name
-
+    
     def get_state_attrs(self, *args, **argv):
         return {}
 
@@ -90,7 +95,8 @@ class group_record(object):
         pass
 
     def __getitem__(self, attr):
-        return field_record(self.value.get(attr, ''))
+        count = str(self.value.get('%s_count' % attr,''))
+        return field_record(self.value.get(attr, ''), count)
 
 def echo(fn):
     def wrapped(self, *v, **k):
@@ -112,6 +118,17 @@ class list_record(object):
         self.sort_order = sort_order
         self.lst = []
         self.load()
+        
+    def destroy(self):
+        for model in self.lst:
+            model.destroy()
+            
+    
+        del self.context
+        del self.domain
+        del self.loaded
+        del self.mgroup
+        del self.lst
 
     def add_dummny_record(self, group_field):
         record = { group_field:'This group is now empty ! Please refresh the list.'}
@@ -821,3 +838,5 @@ class ViewList(parser_view):
             if col.name in self.screen.context.get('group_by',[]):
                 value = False
             col.set_visible(not value)
+            
+   

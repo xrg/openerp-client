@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-11-24 08:17+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-12-04 20:26+0000\n"
+"Last-Translator: Syraxes <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-25 04:52+0000\n"
+"X-Launchpad-Export-Date: 2010-12-05 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
@@ -27,7 +27,7 @@ msgstr "Tipărire Workflow (Complex)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr "Nu exist plugin disponibil pentru aceasta resursa !"
+msgstr "Nu există nici un plugin disponibil pentru această resursă !"
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
@@ -36,7 +36,7 @@ msgstr "Alegeţi un Plugin"
 #: bin/translate.py:184
 #, python-format
 msgid "Unable to set locale %s"
-msgstr ""
+msgstr "Localizarea %s nu a putut fi setată"
 
 #: bin/openerp-client.py:139
 msgid "Closing OpenERP, KeyboardInterrupt"
@@ -49,16 +49,17 @@ msgstr "OpenERP Client %s"
 
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr "specificati un fisier de configurare alternativ"
+msgstr "specificaţi un fişier de configurare alternativ"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
 msgstr ""
+"Activare debugging. Este echivalent cu parametrul '--log-level=debug'"
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "specificarea nivelului de logging: %s"
 
 #: bin/options.py:112
 msgid "specify the user login"
@@ -213,6 +214,9 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Descrierea problemei *NU* a putut fi trimisă echipei de suport  !\n"
+"Vă rugăm să raportaţi eroarea la :\n"
+"\t%s"
 
 #: bin/common/common.py:446
 msgid "Error"
@@ -254,7 +258,7 @@ msgstr "Continutul formularului sau exceptie daca nu este valid"
 
 #: bin/widget_search/wid_int.py:44
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "Conţinutul widget-ului, sau excepţia în caz că nu este valid"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -349,7 +353,7 @@ msgstr "Fișierul este gol !"
 
 #: bin/modules/gui/window/win_import.py:52
 msgid "Importation !"
-msgstr ""
+msgstr "Import !"
 
 #: bin/modules/gui/window/win_import.py:57
 msgid "XML-RPC error !"
@@ -357,7 +361,7 @@ msgstr "Eroare XML-RPC !"
 
 #: bin/modules/gui/window/win_import.py:62
 msgid "Imported one object !"
-msgstr ""
+msgstr "A fost importat un obiect !"
 
 #: bin/modules/gui/window/win_import.py:64
 #, python-format
@@ -366,7 +370,7 @@ msgstr "%d obiecte importate!"
 
 #: bin/modules/gui/window/win_import.py:70
 msgid "Importation Error !"
-msgstr ""
+msgstr "Eroare la import !"
 
 #: bin/modules/gui/window/win_import.py:101
 #: bin/modules/gui/window/win_import.py:105
@@ -377,10 +381,11 @@ msgstr "Numele câmpului"
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
+"Cîmpul %s nu poate fi importat deoarece nu a reuşit autodetecţia acestuia"
 
 #: bin/modules/gui/window/win_import.py:220
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "Nu aţi selectat nici un cîmp pentru import"
 
 #: bin/modules/gui/window/win_selection.py:52
 msgid "Name"
@@ -424,7 +429,7 @@ msgstr "Eroare la export !"
 
 #: bin/modules/gui/window/form.py:165
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "Resource ID-ul nu există pentru acest obiect !"
 
 #: bin/modules/gui/window/form.py:221
 msgid "No record selected ! You can only attach to existing record."
@@ -582,10 +587,12 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"Limba implicită a interfeţei a fost modificată. Nu uitaţi să reporniţi "
+"clientul pentru a folosi aplicaţia în limba dorită"
 
 #: bin/modules/gui/window/win_preference.py:82
 msgid "Default language modified !"
-msgstr ""
+msgstr "A fost schimbată limba !"
 
 #: bin/modules/gui/main.py:87 bin/modules/gui/main.py:436
 #: bin/modules/gui/main.py:1445
@@ -608,7 +615,7 @@ msgstr "Parolă super administrator:"
 
 #: bin/modules/gui/main.py:172 bin/modules/action/wizard.py:137
 msgid "OpenERP Computing"
-msgstr ""
+msgstr "OpenERP Computing"
 
 #: bin/modules/gui/main.py:183 bin/modules/action/wizard.py:147
 msgid "Operation in progress"
@@ -625,39 +632,39 @@ msgstr ""
 
 #: bin/modules/gui/main.py:240
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Scripturi de migrare"
 
 #: bin/modules/gui/main.py:243
 msgid "Contract ID:"
-msgstr ""
+msgstr "ID contract:"
 
 #: bin/modules/gui/main.py:249
 msgid "Contract Password:"
-msgstr ""
+msgstr "Parola contract:"
 
 #: bin/modules/gui/main.py:264
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Aveţi deja ultima versiune"
 
 #: bin/modules/gui/main.py:269
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Lista de update-uri disponibile:"
 
 #: bin/modules/gui/main.py:281
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Acum puteţi începe migrarea bazelor de date."
 
 #: bin/modules/gui/main.py:286
 msgid "Migrate Database"
-msgstr ""
+msgstr "Migrare bază de date"
 
 #: bin/modules/gui/main.py:315
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Baza de date a fost actualizată."
 
 #: bin/modules/gui/main.py:317
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Bazele de date au fost actualizate."
 
 #: bin/modules/gui/main.py:432
 msgid "Unknown"
@@ -769,6 +776,8 @@ msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Eroare la autentificare !\n"
+"Numele de utilizator sau parola invalide !"
 
 #: bin/modules/gui/main.py:1062
 msgid "Not logged !"
@@ -1025,7 +1034,7 @@ msgstr "Eroare la scrierea fişierului: %s"
 #: bin/widget/view/form_gtk/calendar.py:102
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Dată invalidă ! Anul trebuie să fie mai mare decît 1899 !"
 
 #: bin/widget/view/form_gtk/calendar.py:130
 #: bin/widget/view/form_gtk/calendar.py:263
@@ -1036,6 +1045,7 @@ msgstr "Widget-ul nu poat fi modificat !"
 #: bin/widget/view/form_gtk/calendar.py:309
 msgid "Invalid datetime value! Year must be greater than 1899 !"
 msgstr ""
+"Valoare datetime invalidă ! Anul trebuie să fie mai mare decît 1899 !"
 
 #: bin/widget/view/form_gtk/calendar.py:272
 msgid "Hour:"
@@ -1182,7 +1192,7 @@ msgstr ""
 
 #: bin/openerp.glade:385
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "_Migrare baze de date"
 
 #: bin/openerp.glade:405
 msgid "Administrator Password"
@@ -1665,7 +1675,7 @@ msgstr "<b>Exporturi predefinite</b>"
 
 #: bin/openerp.glade:2807
 msgid "Import Compatible"
-msgstr ""
+msgstr "Import compatibil"
 
 #: bin/openerp.glade:2824
 msgid "<b>Select an Option to Export</b>"
@@ -1965,7 +1975,7 @@ msgstr "Widgetul editabil precedent"
 
 #: bin/openerp.glade:5387
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.glade:5400
 msgid "Next editable widget"
@@ -2238,11 +2248,11 @@ msgstr ""
 
 #: bin/openerp.glade:7768
 msgid "Connect Later"
-msgstr ""
+msgstr "Conectare mai tîrziu"
 
 #: bin/openerp.glade:7812
 msgid "Connect now"
-msgstr ""
+msgstr "Conectare acum"
 
 #: bin/openerp.glade:7843
 msgid "Extension Manager"
@@ -2360,10 +2370,12 @@ msgid ""
 "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
 "developments."
 msgstr ""
+"Vă rugăm să completaţi formularul de mai jos, pentru a ne ajuta să "
+"îmbunătăţim <b><span foreground=\"red\"><i>Open</i></span> ERP</b> ."
 
 #: bin/dia_survey.glade:56
 msgid "<b>Your company</b>"
-msgstr ""
+msgstr "<b>Compania dvs</b>"
 
 #: bin/dia_survey.glade:84
 msgid "Open Source:"
@@ -2383,7 +2395,7 @@ msgstr "Rolul Dumneavoastră:"
 
 #: bin/dia_survey.glade:533
 msgid "Employees:"
-msgstr ""
+msgstr "Angajati:"
 
 #: bin/dia_survey.glade:546
 msgid "Country:"
@@ -2391,7 +2403,7 @@ msgstr "Țara:"
 
 #: bin/dia_survey.glade:559
 msgid "City:"
-msgstr ""
+msgstr "Oraş:"
 
 #: bin/dia_survey.glade:586
 msgid "System:"
@@ -2399,7 +2411,7 @@ msgstr "Sistem:"
 
 #: bin/dia_survey.glade:640
 msgid "<b>Your interrest</b>"
-msgstr ""
+msgstr "<b>Interesul dumnevoastră</b>"
 
 #: bin/dia_survey.glade:672
 msgid "How did you hear about us:"
@@ -2407,15 +2419,17 @@ msgstr "Cum ati aflat de noi:"
 
 #: bin/dia_survey.glade:709
 msgid "We plan to use Open ERP"
-msgstr ""
+msgstr "Intenţionăm să utilizăm Open ERP"
 
 #: bin/dia_survey.glade:723
 msgid "We plan to offer services on Open ERP"
-msgstr ""
+msgstr "Intenţionăm să oferim servicii de consultanţă pentru Open ERP"
 
 #: bin/dia_survey.glade:759
 msgid "Tell us why you try Open ERP and what are your current softwares:"
 msgstr ""
+"Spuneţi-ne în ce scop încercaţi Open ERP şi care sunt produsele software pe "
+"care le utilizaţi în prezent:"
 
 #: bin/dia_survey.glade:790
 msgid "<b>Keep Informed</b>"
@@ -2423,7 +2437,7 @@ msgstr "<b>Tinut la curent</b>"
 
 #: bin/dia_survey.glade:818
 msgid "I want to receive the Open ERP ebook (PDF) by email"
-msgstr ""
+msgstr "Doresc să primesc manualul Open ERP (în format PDF) prin email"
 
 #: bin/dia_survey.glade:845
 msgid "Phone / Mobile:"
@@ -2431,7 +2445,7 @@ msgstr "Telefon / Mobil:"
 
 #: bin/dia_survey.glade:858
 msgid "E-mail:"
-msgstr ""
+msgstr "E-mail:"
 
 #: bin/dia_survey.glade:891
 msgid "Your Name:"
@@ -2439,11 +2453,11 @@ msgstr "Numele Dumneavoastră:"
 
 #: bin/dia_survey.glade:929
 msgid "gtk-cancel"
-msgstr ""
+msgstr "gtk-cancel"
 
 #: bin/dia_survey.glade:939
 msgid "gtk-ok"
-msgstr ""
+msgstr "gtk-ok"
 
 #~ msgid "# Employees:"
 #~ msgstr "Nr. Angajaţi:"
