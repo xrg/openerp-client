@@ -85,7 +85,7 @@ class selection(wid_int.wid_int):
     def _value_get(self):
         model = self.widget.get_model()
         index = self.widget.get_active()
-        res = self.widget.child.get_text()
+        res = self.widget.child and self.widget.child.get_text()
         context = {}
         operator = 'ilike'
         if index>=0:
