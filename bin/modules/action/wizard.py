@@ -90,6 +90,7 @@ class dialog(object):
             return (self.states[res], datas)
         else:
             self.dia.destroy()
+            self.screen.destroy()
             return False
 
 def execute(action, datas, state='init', parent=None, context=None):

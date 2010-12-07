@@ -100,6 +100,19 @@ class ModelRecordGroup(signal_event.signal_event):
 
         self.list_parent = False
         self.list_group = False
+        
+    def destroy(self):      
+        for field in self.mfields.values():
+            field.destroy()
+            
+        if self.list_group:
+            self.list_group.destroy()
+        
+            
+        del self.mfields
+        del self.fields        
+        del self.list_group
+        del self.models
 
     def index(self, model):
         return self.models.index(model)

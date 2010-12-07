@@ -23,6 +23,7 @@ import gobject
 import gtk
 from interface import parser_view
 
+
 class ViewGraph(parser_view):
 
     def __init__(self, window, screen, widget, children=None, buttons=None,
@@ -73,6 +74,13 @@ class ViewGraph(parser_view):
 
     def set_cursor(self, new=False):
         pass
+    
+    def destroy(self):
+        self.widget.destroy()        
+        del self.screen        
+        del self.widget
+        del self.view
+        del self.window
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

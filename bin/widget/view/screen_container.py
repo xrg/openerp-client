@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
+import gobject
 import gtk
 from gtk import glade
 import gobject
@@ -48,6 +48,12 @@ class screen_container(object):
         self.domain = []
         self.context = {}
         self.handler_id = None
+        
+    def __del__(self):
+        for (ref, value) in self.__dict__.items():
+            if(isinstance(value, gtk.Object)):
+                value.destroy()
+        print "DELETION of screen_container"
 
     def widget_get(self):
         return self.vbox
