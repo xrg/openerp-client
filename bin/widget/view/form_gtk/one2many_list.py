@@ -125,7 +125,7 @@ class dialog(object):
         end = False
         while not end:
             res = self.dia.run()
-            if res == gtk.RESPONSE_CANCEL:
+            if res in(gtk.RESPONSE_CANCEL, gtk.RESPONSE_DELETE_EVENT):
                 self.screen.current_model.cancel()
             end = (res not in (gtk.RESPONSE_OK, gtk.RESPONSE_APPLY)) or self.screen.current_model.validate()
             if not end:
