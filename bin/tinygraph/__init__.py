@@ -18,6 +18,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
 #
 ##############################################################################
+import tools
+HM_FORMAT = ' %H:%M:%S'
+LDFMT = tools.datetime_util.get_date_format()
+from datetime import datetime
 
 import matplotlib
 matplotlib.use('GTKCairo')
@@ -41,9 +45,10 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
         '**': lambda x,y: x**y
     }
     axis_group = {}
-    keys = {}
+    dic_lable = {}
     data_axis = []
     data_all = {}
+    axis_type = axis_data[axis[0]].get('type',False)
     for field in axis[1:]:
         data_all = {}
         for d in datas:
@@ -51,7 +56,7 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
             axis_group[group_eval] = 1
 
             data_all.setdefault(d[axis[0]], {})
-            keys[d[axis[0]]] = 1
+            dic_lable[d[axis[0]]] = 1
 
             if group_eval in  data_all[d[axis[0]]]:
                 oper = operators[axis_data[field].get('operator', '+')]
@@ -59,10 +64,29 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
             else:
                 data_all[d[axis[0]]][group_eval] = d[field]
         data_axis.append(data_all)
+  
     axis_group = axis_group.keys()
     axis_group.sort()
-    keys = keys.keys()
-    keys.sort()
+    axis_lable = dic_lable.keys()
+    axis_lable.sort()
+    
+    tmp = {}
+    except_tmp = []
+    if axis_type == 'datetime':
+        for lable in axis_lable:
+            try:
+                tmp[lable] = datetime.strptime(lable, LDFMT + HM_FORMAT)
+            except:
+                except_tmp += [lable]
+        axis_lable = sorted(tmp, key=tmp.__getitem__) + except_tmp
+            
+    if axis_type == 'date':
+        for lable in axis_lable:
+            try:
+                tmp[lable] = datetime.strptime(lable, LDFMT)
+            except:
+                except_tmp += [lable]
+        axis_lable = sorted(tmp, key=tmp.__getitem__) + except_tmp
 
     if not datas:
         return False
@@ -84,25 +108,25 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
             width =  0.9 / (float(n))
         else:
             width = 0.9
-        ind = map(lambda x: x+width*n/2, xrange(len(keys)))
+        ind = map(lambda x: x+width*n/2, xrange(len(axis_lable)))
         if orientation=='horizontal':
             subplot.set_yticks(ind)
-            subplot.set_yticklabels(tuple(keys), visible=True, ha='right', size=8)
+            subplot.set_yticklabels(tuple(axis_lable), visible=True, ha='right', size=8)
             subplot.xaxis.grid(True,'major',linestyle='-',color='gray')
         else:
             subplot.set_xticks(ind)
-            subplot.set_xticklabels(tuple(keys), visible=True, ha='right', size=8, rotation='vertical')
+            subplot.set_xticklabels(tuple(axis_lable), visible=True, ha='right', size=8, rotation='vertical')
             subplot.yaxis.grid(True,'major',linestyle='-',color='gray')
 
         colors = choice_colors(max(n,len(axis_group)))
         for i in range(n):
             datas = data_axis[i]
-            ind = map(lambda x: x+width*i*overlap+((1.0-overlap)*n*width)/4, xrange(len(keys)))
+            ind = map(lambda x: x+width*i*overlap+((1.0-overlap)*n*width)/4, xrange(len(axis_lable)))
             #ind = map(lambda x: x, xrange(len(keys)))
-            yoff = map(lambda x:0.0, keys)
+            yoff = map(lambda x:0.0, axis_lable)
 
             for y in range(len(axis_group)):
-                value = [ datas[x].get(axis_group[y],0.0) for x in keys]
+                value = [ datas[x].get(axis_group[y],0.0) for x in axis_lable]
                 if len(axis_group)>1:
                     color = colors[y]
                 else:
@@ -115,7 +139,6 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
                 for j in range(len(yoff)):
                     yoff[j]+=value[j]
             gvalue.append(aa)
-
         if True:
             if len(axis_group)>1:
                 axis_group = map(lambda x: x.split('/')[-1], axis_group)

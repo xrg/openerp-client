@@ -77,6 +77,7 @@ class ViewGraph(object):
         self.axis_group = {}
         for i in self.axis_data:
             self.axis_data[i]['string'] = self.fields[i]['string']
+            self.axis_data[i]['type'] = self.fields[i]['type']
             if self.axis_data[i].get('group', False):
                 self.axis_group[i]=1
                 self.axis.remove(i)
@@ -105,6 +106,8 @@ class ViewGraph(object):
         for m in models:
             res = {}
             for x in self.axis_data.keys():
+                if not self.axis_data[x]:
+                    self.axis_data[x] = self.fields[x]
                 field_val = m[x].get_client(m)
                 if self.fields[x]['type'] in ('many2one', 'char','time','text'):
                     res[x] = field_val and str(field_val) or 'Undefined'
