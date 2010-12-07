@@ -31,6 +31,7 @@ from rpc import RPCProxy
 import service
 import locale
 import common
+import Queue
 from interface import parser_view
 from widget.model.record import ModelRecord
 
@@ -119,11 +120,7 @@ class list_record(object):
         self.lst = []
         self.load()
         
-    def destroy(self):
-        for model in self.lst:
-            model.destroy()
-            
-    
+    def destroy(self):   
         del self.context
         del self.domain
         del self.loaded
@@ -134,6 +131,21 @@ class list_record(object):
         record = { group_field:'This group is now empty ! Please refresh the list.'}
         rec = group_record(record, ctx=self.context, domain=self.domain, mgroup=self.mgroup, child = False)
         self.add(rec)
+        
+    def get_order(self, gb, sort_order):
+        """
+            @param gb : grouby parameter for read_group call
+            @param sort_order : order of sorting for the same read_group call
+            @return : sort_order if sort_order start with the same field as gb else None
+        """
+        if sort_order:
+            if(isinstance(gb, (tuple, list))):
+                gb = gb[0]
+                
+            if not sort_order.startswith(gb):
+                return None
+            
+        return sort_order
 
     def load(self):
         if self.loaded:
@@ -143,7 +155,7 @@ class list_record(object):
         no_leaf = self.context.get('group_by_no_leaf', False)
         if gb or no_leaf:
             records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
-                self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context, self.sort_order)
+                self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context, self.get_order(gb, self.sort_order))
             if not records and self.parent:
                 self.add_dummny_record(gb[0])
             else:
@@ -259,7 +271,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         return gobject.TYPE_PYOBJECT
 
     def on_get_path(self, iter):
-        iter2 = iter
         result = []
         while iter:
             try:
@@ -330,6 +341,7 @@ class ViewList(parser_view):
         children = dict(sorted(children.items(), lambda x, y: cmp(x[0], y[0])))
         self.children = children
         self.changed_col = []
+        self.expandedRows = []
         self.tree_editable = False
         self.is_editable = widget.editable
         self.columns = self.widget_tree.get_columns()
@@ -635,6 +647,9 @@ class ViewList(parser_view):
         return None
 
     def destroy(self):
+        """
+        Destroy the listmodel
+        """
         self.widget_tree.destroy()
         del self.screen
         del self.widget_tree
@@ -797,6 +812,10 @@ class ViewList(parser_view):
     def collapse_row(self, path):
         self.widget_tree.collapse_row(path)
 
+    def get_expanded_rows(self, treeview, path):
+        if self.widget_tree.row_expanded(path):
+            self.expandedRows.append(path)
+
     def unset_editable(self):
         self.set_editable(False)
 
@@ -838,5 +857,74 @@ class ViewList(parser_view):
             if col.name in self.screen.context.get('group_by',[]):
                 value = False
             col.set_visible(not value)
+         
+    
+    
+        
+    def get_id(self, path):
+        return self.store.on_get_iter(path).value
+
+    def get_path(self, values):
+        self.num_op = 0
+        model = self.store
+        root = model.on_get_iter((0,))
+        return self.compute_level([root],values,[[0]], [])
+
+    def compute_level(self, first_nodes, values, path_list, final_path):
+        """
+            @param first_nodes : List of first child of every parent node
+            @param path_list : list of path of first child
             
-   
+        """
+        assert len(path_list) == len(first_nodes)
+        visited_node = Queue.Queue()
+        q = Queue.Queue()
+        for i in xrange(0, len(first_nodes)):
+            path = path_list[i]
+            node = first_nodes[i]
+            self.add_next(node, q, path)
+        
+        res = self.process_queue(q, values, visited_node, final_path)
+        if(res):
+            return res
+        
+        
+        (nodes_list, new_path_list) = self.add_first_child(visited_node)
+        return self.compute_level(nodes_list, values, new_path_list, final_path)
+        
+    def add_first_child(self, visited_node):
+        nodes_list = []
+        paths_list = []
+        while(not visited_node.empty()):
+            (node, path) = visited_node.get()
+            if self.store.on_iter_has_child(node):
+                path.append(0)
+                nodes_list.append(self.store.on_iter_children(node))
+                paths_list.append(list(path))
+            
+        return (nodes_list, paths_list)
+        
+    def add_next(self, node, q, path):
+        q.put((node, list(path)))
+        next = self.store.on_iter_next(node)
+        if(next):
+            path.append(path.pop() + 1) #We add 1 to the last level of the path
+            self.add_next(next, q, list(path))
+    
+    def process_queue(self, q, value, visited_nodes, final_path):
+        while(not q.empty()):
+            (node, path) = q.get()
+            res = self.compute_node(node, value, path, final_path)
+            if(res):
+                return res
+            visited_nodes.put((node, list(path)))
+
+    def compute_node(self, node, values, path, final_path):
+        for v in values:
+            if(node.value == v):
+                values.remove(v)
+                final_path.append(tuple(path))
+                
+        if len(values) < 1:
+            return final_path
+

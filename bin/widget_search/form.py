@@ -138,10 +138,7 @@ class parse(object):
         self.focusable.destroy()
         self.widget.destroy()
         del self.container
-        del self.col
-        del self.fields
         del self.focusable
-        del self.model
         del self.name_lst
         del self.name_lst1
         del self.parent
@@ -429,17 +426,11 @@ class form(wid_int.wid_int):
         self.focusable.destroy()
         self.parser.destroy()
         self.widget.destroy()
-        del self.call
-        del self.fields
+                
         del self.widgets 
-        del self.attrs
         del self.focusable
-        del self.groupby
-        del self.model
-        del self.name
         del self.parent
         del self.parser
-        del self.rows
         del self.widget
         
     

@@ -76,14 +76,11 @@ class ViewGraph(parser_view):
         pass
     
     def destroy(self):
-        self.widget.destroy()
-        
+        self.widget.destroy()        
         del self.screen        
         del self.widget
         del self.view
         del self.window
-        del self.title
-        del self.view_type
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

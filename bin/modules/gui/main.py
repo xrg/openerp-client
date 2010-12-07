@@ -42,12 +42,8 @@ import re
 import xmlrpclib
 import base64
 
-
 import thread
-
-
 import gc
-
 
 RESERVED_KEYWORDS=['absolute', 'action', 'all', 'alter', 'analyse', 'analyze', 'and', 'any', 'as', 'asc', 'authorization', 'between', 'binary', 'both',
             'case', 'cast', 'check', 'collate', 'column','constraint', 'create', 'cross', 'current_date', 'current_time', 'current_timestamp',
@@ -1310,11 +1306,11 @@ class terp_main(service.Service):
             self.notebook.remove_page(pn)
             self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
+
             page.destroy()
             del page
             gc.collect()
-            
-       
+
         return self.notebook.get_current_page() != -1
 
     def _wid_get(self,page_num=None):
