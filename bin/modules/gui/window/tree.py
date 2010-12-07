@@ -30,6 +30,7 @@ import view_tree
 import rpc
 import options
 import win_export
+import copy
 
 class tree(object):
     def __init__(self, view, model, res_id=False, domain=[], context={}, help={}, window=None, name=False):
@@ -317,8 +318,9 @@ class tree(object):
 
     def sig_save_as(self, widget=None):
         fields = []
+        tree_fields = copy.deepcopy(self.tree_res.fields)
         win = win_export.win_export(self.model, self.tree_res.sel_ids_get(),
-                self.tree_res.fields, [], parent=self.window, context=self.context)
+                tree_fields, [], parent=self.window, context=self.context)
         res = win.go()
 
 
