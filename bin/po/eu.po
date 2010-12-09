@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-11-25 02:00+0530\n"
-"PO-Revision-Date: 2010-11-28 06:51+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-12-08 14:22+0000\n"
+"Last-Translator: Asier Sarasua Garmendia <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-07 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-12-09 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow"
-msgstr ""
+msgstr "Inprimatu lan-fluxua"
 
 #: bin/plugins/__init__.py:29
 msgid "Print Workflow (with subflows)"
-msgstr ""
+msgstr "Inprimatu lan-fluxua (azpifluxuekin)"
 
 #: bin/plugins/__init__.py:41
 msgid "No available plugin for this resource !"
-msgstr "Ez dago plugin-ik eskuragarri baliabide honetarako!"
+msgstr "Ez dago pluginik eskuragarri baliabide honetarako!"
 
 #: bin/plugins/__init__.py:43
 msgid "Choose a Plugin"
@@ -49,16 +49,16 @@ msgstr "OpenERP bezeroa %s"
 
 #: bin/options.py:109
 msgid "specify alternate config file"
-msgstr ""
+msgstr "zehaztu konfigurazio-fitxategi alternatiboa"
 
 #: bin/options.py:110
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "Gaitu oinarrizko arazketa. '--log-level=debug' agindurako aliasa."
 
 #: bin/options.py:111
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "zehaztu egunkari-maila: %s"
 
 #: bin/options.py:112
 msgid "specify the user login"
@@ -75,7 +75,7 @@ msgstr "zehaztu zerbitzari ip-a/izena"
 #: bin/printer/printer.py:185
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr ""
+msgstr "Ezin da %s fitxategi-mota erabili"
 
 #: bin/printer/printer.py:190
 msgid ""
@@ -209,7 +209,7 @@ msgstr "Muga:"
 
 #: bin/widget_search/form.py:154
 msgid "Offset :"
-msgstr ""
+msgstr "Desplazamendua :"
 
 #: bin/widget_search/form.py:193
 msgid "Parameters :"
@@ -353,13 +353,15 @@ msgstr "Izenak"
 
 #: bin/modules/gui/window/win_export.py:51
 msgid " record(s) saved !"
-msgstr ""
+msgstr " erregistro gorde dira !"
 
 #: bin/modules/gui/window/win_export.py:54
 msgid ""
 "Operation failed !\n"
 "I/O error"
 msgstr ""
+"Eragiketak huts egin du !\n"
+"I/O errorea"
 
 #: bin/modules/gui/window/win_export.py:78
 msgid "Error Opening Excel !"
