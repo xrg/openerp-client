@@ -116,6 +116,8 @@ class image_wid(interface.widget_interface):
         if filename:
             self._value = encodestring(file(filename, 'rb').read())
             self.update_img()
+            if self.has_filename:
+                self._view.model.set({self.has_filename: os.path.basename(filename)}, modified=True)
 
     def _get_filename(self):
         return self._view.model.value.get(self.has_filename) \
