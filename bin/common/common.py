@@ -422,12 +422,10 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
         details_buffer = gtk.TextBuffer()
         details_buffer.set_text(details)
         xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
-
         if show_message:
             xmlGlade.get_widget('maintenance_explanation').set_markup(maintenance_contract_message)
 
         xmlGlade.get_widget('notebook').remove_page(int(show_message))
-
         if not show_message:
             def send(widget):
                 def get_text_from_text_view(textView):
@@ -448,7 +446,6 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
 
             xmlGlade.signal_connect('on_button_send_clicked', send)
             xmlGlade.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
-
         response = win.run()
         parent.present()
         win.destroy()

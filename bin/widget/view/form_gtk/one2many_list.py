@@ -125,7 +125,7 @@ class dialog(object):
         end = False
         while not end:
             res = self.dia.run()
-            if res == gtk.RESPONSE_CANCEL:
+            if res in(gtk.RESPONSE_CANCEL, gtk.RESPONSE_DELETE_EVENT):
                 self.screen.current_model.cancel()
             end = (res not in (gtk.RESPONSE_OK, gtk.RESPONSE_APPLY)) or self.screen.current_model.validate()
             if not end:
@@ -371,12 +371,12 @@ class one2many_list(interface.widget_interface):
             self.pager.prev_record()
 
     def _sig_remove(self, *args):
-        _, event = args
+        lst, event = args
         if event.type == gtk.gdk.BUTTON_PRESS:
             if self.screen.current_view.view_type == 'form':
-                msg = 'Are you sure to remove this record ?'
+                msg = _('Are you sure to remove this record ?')
             else:
-                msg = 'Are you sure to remove those records ?'
+                msg = _('Are you sure to remove those records ?')
             if common.sur(msg):
                     model = self.screen.current_model
                     model.signal('record-changed', model.parent)

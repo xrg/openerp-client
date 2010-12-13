@@ -41,6 +41,8 @@ class Event(object):
         self.all_day    = kwargs.get('all_day',    False)
         self.text_color = kwargs.get('text_color', None)
         self.bg_color   = kwargs.get('bg_color',   'orangered')
+        self.description = kwargs.get('description','')
+        
         if end is None:
             self.all_day = True
             self.end     = start

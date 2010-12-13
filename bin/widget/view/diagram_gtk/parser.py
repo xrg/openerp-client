@@ -143,7 +143,7 @@ class parser_diagram(interface.parser_interface):
                 for child in node:
                     if node_attributes(child) and node_attributes(child).get('name', False):
                         node_fields.append(node_attributes(child)['name'])
-                fields = rpc.session.rpc_exec_auth('/object', 'execute', node_attrs.get('object',False),'fields_get',node_fields)
+                fields = rpc.session.rpc_exec_auth('/object', 'execute', node_attrs.get('object',False),'fields_get', node_fields, rpc.session.context)
 
                 for key, val in fields.iteritems():
                     fields[key]['name'] = key

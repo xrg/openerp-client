@@ -90,7 +90,7 @@ class selection(wid_int.wid_int):
         operator = 'ilike'
         if index>=0:
             res = self._selection.get(model[index][0], False)
-            operator = '='
+            operator = self.attrs.get('operator','=')
             context = tools.expr_eval(self.attrs.get('context',"{}"), {'self':res})
         if res:
             return {
@@ -108,7 +108,7 @@ class selection(wid_int.wid_int):
 
     def clear(self):
         self.widget.child.set_text('')
-        
+
     def grab_focus(self):
         return self.widget.child.grab_focus()
 
