@@ -210,10 +210,6 @@ class form(object):
         del self.handlers      
    
 
-        
-    def __del__(self):
-        print "DELETION OF modules.gui.window.form"
-
     def ids_get(self):
         return self.screen.ids_get()
 

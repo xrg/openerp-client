@@ -55,7 +55,6 @@ class screen_container(object):
                 value.destroy()
                 
         del self.win_search
-        print "DELETION of screen_container"
 
     def widget_get(self):
         return self.vbox

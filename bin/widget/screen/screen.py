@@ -517,12 +517,9 @@ class Screen(signal_event.signal_event):
         del self.win_search
         del self.win_search_callback       
         del self.window
-        print "++++++++++++++++++++++++++"
-        pp.pprint(gc.get_referrers(self))
+
         
-    def __del__(self):
-        print "DELETION of screen.screen"
-        pp.pprint(gc.get_referrers(self))
+
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):

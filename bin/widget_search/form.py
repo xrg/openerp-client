@@ -424,7 +424,6 @@ class form(wid_int.wid_int):
     def destroy(self):
         for (ref, value) in self.__dict__.items():
             if isinstance(value, gtk.Object) and not isinstance(value, gtk.Window):
-                print ref
                 value.destroy()
         
         self.parser.destroy()
@@ -435,8 +434,6 @@ class form(wid_int.wid_int):
         del self.parser
         del self.widget
         
-    def __del__(self):
-        print "DELETION widget_search.form"
     
     def _value_set(self, value):
         for x in value:

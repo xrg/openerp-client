@@ -77,10 +77,7 @@ class ModelList(list):
         if not self.lock_signal:
             self.__screen.signal('record-changed', ('record-changed', key))
     
-    #TODO remove
-    def __del__(self):
-        del self.__screen
-        print "DELETION of ModeList"
+
 
 class ModelRecordGroup(signal_event.signal_event):
     def __init__(self, resource, fields, ids=[], parent=None, context={}, is_wizard=False):
