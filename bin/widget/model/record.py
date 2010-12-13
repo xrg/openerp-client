@@ -391,6 +391,8 @@ class ModelRecord(signal_event.signal_event):
                 raise Exception, 'Unallowed button type'
             if screen.current_model and screen.current_view.view_type != 'tree':
                 screen.reload()
+                
+            del screen
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
