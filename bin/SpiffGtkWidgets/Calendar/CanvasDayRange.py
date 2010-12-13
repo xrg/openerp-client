@@ -133,7 +133,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
 
     def _remove_vevent_view(self, cell):
-        if not cell in self.vevent_views:
+        if cell not in self.vevent_views:
             return
         view = self.vevent_views[cell]
         self.gridbox.remove(view)
@@ -142,7 +142,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
 
     def _remove_hevent_view(self, cell):
-        if not cell in self.hevent_views:
+        if cell not in self.hevent_views:
             return
         view = self.hevent_views[cell]
         self.gridbox.remove(view)

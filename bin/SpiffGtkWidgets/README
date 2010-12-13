@@ -16,11 +16,6 @@ auto-indenting bullet point lists, etc.
 * python-hippocanvas
 
 
-= Contact =
-
-Mailing List: [http://groups.google.com/group/spiff-devel/]
-
-
 = Usage =
 
 Examples can be found in the tests/SpiffGtkWidgets/ directory of this project.
