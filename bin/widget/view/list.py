@@ -650,10 +650,14 @@ class ViewList(parser_view):
         """
         Destroy the listmodel
         """
+        print "DESTROY of widget.list"
         self.widget_tree.destroy()
         del self.screen
         del self.widget_tree
         del self.widget
+        
+    def __del__(self):
+        print "DELETION of widget.list"
 
     def __sig_switch(self, treeview, *args):
         if not isinstance(self.screen.current_model, group_record):

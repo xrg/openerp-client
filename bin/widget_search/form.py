@@ -423,7 +423,7 @@ class form(wid_int.wid_int):
 
     def destroy(self):
         for (ref, value) in self.__dict__.items():
-            if(isinstance(value, gtk.Object)):
+            if isinstance(value, gtk.Object) and not isinstance(value, gtk.Window):
                 print ref
                 value.destroy()
         
