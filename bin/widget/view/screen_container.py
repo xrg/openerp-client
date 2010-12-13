@@ -52,6 +52,7 @@ class screen_container(object):
     def __del__(self):
         for (ref, value) in self.__dict__.items():
             if(isinstance(value, gtk.Object)):
+                print ref
                 value.destroy()
         print "DELETION of screen_container"
 
