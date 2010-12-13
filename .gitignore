@@ -1,4 +1,5 @@
-*.pyc
+*.py[co]
 *~
 /openerp-client
 /build
+/dist
