@@ -281,7 +281,7 @@ class win_export(object):
         self.pref_export.set_model(self.predef_model)
 
     def add_predef(self, button):
-        name = common.ask('What is the name of this export ?')
+        name = common.ask(_('What is the name of this export ?'))
         if not name:
             return 
         ir_export = rpc.RPCProxy('ir.exports')
