@@ -2,6 +2,7 @@
 ##############################################################################
 #    
 #    OpenERP, Open Source Management Solution
+#    Copyright (C) 2010 Samuel Abels
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -34,16 +35,16 @@ def int2gdk(i):
     return gtk.gdk.Color(red * 256, green * 256, blue * 256)
 
 def rgb2gdk(color):
-    red   = color[0] * 65535.0
-    green = color[1] * 65535.0
-    blue  = color[2] * 65535.0
+    red   = int(color[0] * 65535)
+    green = int(color[1] * 65535)
+    blue  = int(color[2] * 65535)
     return gtk.gdk.Color(red, green, blue)
 
 def rgba2gdk(color):
-    red   = color[0] * 65535.0
-    green = color[1] * 65535.0
-    blue  = color[2] * 65535.0
-    value = color[3] * 65535.0 # not supported by gdk.Color
+    red   = int(color[0] * 65535)
+    green = int(color[1] * 65535)
+    blue  = int(color[2] * 65535)
+    value = int(color[3] * 65535) # not supported by gdk.Color
     return gtk.gdk.Color(red, green, blue)
 
 def gdk2int(color):
@@ -83,3 +84,30 @@ def to_rgb(color):
 
 def to_rgba(color):
     return gdk2rgba(to_gdk(color))
+
+########################
+# Other functions.
+########################
+# Tango colors:
+# http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines
+#           light       mid       dark
+palette = (('#fce94f', '#edd400', '#c4a000'),  # Butter
+           ('#fcaf3e', '#f57900', '#ce5c00'),  # Orange
+           ('#e9b96e', '#c17d11', '#8f5902'),  # Chocolate
+           ('#8ae234', '#73d216', '#4e9a06'),  # Chameleon
+           ('#729fcf', '#3465a4', '#204a87'),  # Sky Blue
+           ('#ad7fa8', '#75507b', '#5c35cc'),  # Plum
+           ('#ef2929', '#cc0000', '#a40000'),  # Scarlet Red
+           ('#eeeeec', '#d3d7cf', '#babdb6'),  # Aluminium (bright)
+           ('#888a85', '#555753', '#2e3436'))  # Aluminium (dark)
+def from_string(string, n_colors = 1):
+    string += 'b'
+    tuple = palette[string.__hash__() % len(palette)]
+    if n_colors == 1:
+        return to_rgb(tuple[0])
+    return [to_rgb(color) for color in tuple[:n_colors]]
+
+def bg_color2text_color(color):
+    if sum(to_rgb(color)) > 1.9:
+        return 0, 0, 0
+    return 1, 1, 1

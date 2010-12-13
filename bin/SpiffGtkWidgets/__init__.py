@@ -20,6 +20,9 @@
 ##############################################################################
 
 import Calendar
+import FormEditor
+import TextEditor
+import Toolbox
 import color
 
 import inspect 

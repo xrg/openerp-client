@@ -49,8 +49,8 @@ class CanvasVEventView(CanvasEventView):
         event_len      = (event_end     - event_start).seconds
         range_len      = self.range[1] - self.range[0]
         seconds        = range_len.days * 24 * 60 * 60 + range_len.seconds
-        row_seconds    = ceil(seconds / float(rows))
-        event_off_rows = int(ceil(event_off / float(row_seconds)))
+        row_seconds    = seconds / float(rows)
+        event_off_rows = int(event_off / float(row_seconds))
         event_len_rows = int(ceil(event_len / float(row_seconds)))
         event_end_rows = event_off_rows + event_len_rows
 
@@ -70,7 +70,7 @@ class CanvasVEventView(CanvasEventView):
         radius_top_right    = 10
         radius_bottom_left  = 10
         radius_bottom_right = 10
-        if event.end > self.range[1]:
+        if event.end > self.range[1] + datetime.timedelta(0, 1):
             radius_bottom_left  = 0
             radius_bottom_right = 0
         if event.start < self.range[0]:

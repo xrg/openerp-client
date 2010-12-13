@@ -118,10 +118,8 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
 
 
     def update(self):
-        # Don't crash if we didn't have a range now
-        if self.range is None:
+        if not self.range or len(self.range) < 2 :
             return
-
         days = (self.range[1] - self.range[0]).days + 1
         self.table.set_column_count(days)
         self.table.set_row_count(-1)
