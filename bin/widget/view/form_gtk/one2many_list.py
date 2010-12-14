@@ -61,18 +61,18 @@ class dialog(object):
 
         self.accel_group = gtk.AccelGroup()
         self.dia.add_accel_group(self.accel_group)
-        self.but_cancel = self.dia.add_button('Cancel', gtk.RESPONSE_CANCEL)
+        self.but_cancel = self.dia.add_button(_('Cancel'), gtk.RESPONSE_CANCEL)
         icon = gtk.Image()
         icon.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_BUTTON)
         self.but_cancel.set_image(icon)
         self.but_cancel.add_accelerator('clicked', self.accel_group, gtk.keysyms.Escape, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
-        self.but_save_close = self.dia.add_button('Save & Close', gtk.RESPONSE_APPLY)
+        self.but_save_close = self.dia.add_button(_('Save & Close'), gtk.RESPONSE_APPLY)
         icon = gtk.Image()
         icon.set_from_stock(gtk.STOCK_APPLY, gtk.ICON_SIZE_BUTTON)
         self.but_save_close.set_image(icon)
 
-        self.but_save_new = self.dia.add_button('Save & New', gtk.RESPONSE_OK)
+        self.but_save_new = self.dia.add_button(_('Save & New'), gtk.RESPONSE_OK)
         icon = gtk.Image()
         icon.set_from_stock(gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON)
         self.but_save_new.set_image(icon)
@@ -144,6 +144,8 @@ class dialog(object):
         self.screen.signal_unconnect(self)
         self.window.present()
         self.dia.destroy()
+    
+    
 
 
 class one2many_list(interface.widget_interface):
@@ -274,7 +276,7 @@ class one2many_list(interface.widget_interface):
 
     def destroy(self):
         self.screen.destroy()
-
+        
     def _on_activate(self, screen, *args):
         self._sig_edit()
 

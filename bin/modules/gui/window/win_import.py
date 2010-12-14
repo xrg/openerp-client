@@ -65,7 +65,7 @@ def import_csv(csv_data, f, model, fields, context=None):
         d = ''
         for key,val in res[1].items():
             d+= ('\t%s: %s\n' % (str(key),str(val)))
-        error = u'Error trying to import this record:\n%s\nError Message:\n%s\n\n%s' % (d,res[2],res[3])
+        error = _(u'Error trying to import this record:\n%s\nError Message:\n%s\n\n%s') % (d,res[2],res[3])
         common.message_box(_('Importation Error !'), unicode(error))
     return True
 
@@ -166,7 +166,7 @@ class win_import(object):
         try:
             data = csv.reader(file(fname), quotechar=csvdel or '"', delimiter=csvsep)
         except:
-            common.warning('Error opening .CSV file', 'Input Error.')
+            common.warning(_('Error opening .CSV file'), _('Input Error.'))
             return True
         self.sig_unsel_all()
         word=''
@@ -187,7 +187,7 @@ class win_import(object):
                         raise Exception(_("You cannot import this field %s, because we cannot auto-detect it"))
                 break
         except:
-            common.warning('Error processing your first line of the file.\nField %s is unknown !' % (word,), 'Import Error.')
+            common.warning(_('Error processing your first line of the file.\nField %s is unknown !') % (word,), _('Import Error.'))
         return True
 
     def sig_sel_all(self, widget=None):

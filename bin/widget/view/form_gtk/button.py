@@ -44,6 +44,6 @@ class button(interface.widget_interface):
         pass
 
     value = property(_value_get, _value_set, None,
-      'The content of the widget or ValueError if not valid')
+      _('The content of the widget or ValueError if not valid'))
 
 

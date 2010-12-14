@@ -422,10 +422,11 @@ class form(wid_int.wid_int):
         return {'domain':domain, 'context':context}
 
     def destroy(self):
+        for (ref, value) in self.__dict__.items():
+            if isinstance(value, gtk.Object) and not isinstance(value, gtk.Window):
+                value.destroy()
         
-        self.focusable.destroy()
         self.parser.destroy()
-        self.widget.destroy()
                 
         del self.widgets 
         del self.focusable
@@ -433,7 +434,6 @@ class form(wid_int.wid_int):
         del self.parser
         del self.widget
         
-    
     
     def _value_set(self, value):
         for x in value:

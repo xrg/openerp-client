@@ -79,7 +79,7 @@ class custom_filter(wid_int.wid_int):
         self.remove_filter.set_relief(gtk.RELIEF_NONE)
 
         try:
-            self.right_text.set_tooltip_markup(tools.to_xml("Enter Values separated by ',' if operator 'in' or 'not in' is chosen.\nFor Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d %H:%M:%S' formats respectively."))
+            self.right_text.set_tooltip_markup(tools.to_xml(_("Enter Values separated by ',' if operator 'in' or 'not in' is chosen.\nFor Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d %H:%M:%S' formats respectively.")))
         except:
             pass
 
@@ -173,6 +173,6 @@ class custom_filter(wid_int.wid_int):
         self.right_text.connect_after('activate', fct)
 
     value = property(_value_get, _value_set, None,
-      'The content of the widget or ValueError if not valid')
+     _('The content of the widget or ValueError if not valid'))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

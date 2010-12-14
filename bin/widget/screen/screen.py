@@ -351,7 +351,7 @@ class Screen(signal_event.signal_event):
                 text_entry = glade2.get_widget('action_name')
                 lbl.set_text('Filter Name:')
                 table =  glade2.get_widget('table8')
-                info_lbl = gtk.Label('(Any existing filter with the \nsame name will be replaced)')
+                info_lbl = gtk.Label(_('(Any existing filter with the \nsame name will be replaced)'))
                 table.attach(info_lbl,1,2,2,3, gtk.FILL, gtk.EXPAND)
                 if self.screen_container.last_active_filter:
                     text_entry.set_text(self.screen_container.last_active_filter)
@@ -511,12 +511,6 @@ class Screen(signal_event.signal_event):
         del self.win_search
         del self.win_search_callback
         del self.window
-        #pp.pprint(gc.get_referrers(self))
-        #print "+++++++++++++++++++++++++++"
-        #pp.pprint(gc.get_referents(self))
-
-    def __del__(self):
-        print "DELETION of screen.screen"
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):

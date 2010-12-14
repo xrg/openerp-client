@@ -51,9 +51,10 @@ class screen_container(object):
         
     def __del__(self):
         for (ref, value) in self.__dict__.items():
-            if(isinstance(value, gtk.Object)):
+            if(isinstance(value, gtk.Object) and not isinstance(value, gtk.Window)):
                 value.destroy()
-        print "DELETION of screen_container"
+                
+        del self.win_search
 
     def widget_get(self):
         return self.vbox
@@ -69,7 +70,7 @@ class screen_container(object):
         sorted_filters = [[act.get('domain',act['id']),act['context'],act['name']] for act in my_acts]
         sorted_filters.sort(lambda x, y: cmp(x[2], y[2]))
         filters_list += sorted_filters
-        filters_list += [['blk','','--Actions--'],['sh','','Save as a Shortcut'],['sf','','Save as a Filter'],['mf','','Manage Filters']]
+        filters_list += [['blk','',_('--Actions--')],['sh','',_('Save as a Shortcut')],['sf','',_('Save as a Filter')],['mf','',_('Manage Filters')]]
         for index, action in enumerate(filters_list):
             if action[-1] == action_name:
                 active = index
