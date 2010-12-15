@@ -1,30 +1,30 @@
 # Vietnamese translation for openobject-client
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the openobject-client package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# Nguyen Thanh Phong <phong.nguyen_thanh@yahoo.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-11-28 07:08+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-12-15 00:31+0000\n"
+"Last-Translator: Phong Nguyen <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:55+0000\n"
+"X-Launchpad-Export-Date: 2010-12-15 04:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: vi\n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
-msgstr "Tiến trình in."
+msgstr "In luồng công việc"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
-msgstr "In luồng công việc"
+msgstr "In luồng công việc (với các luồng con)"
 
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
@@ -36,17 +36,17 @@ msgstr "Chọn một Plugin"
 
 #: bin/modules/action/wizard.py:150 bin/modules/gui/main.py:188 bin/rpc.py:156
 msgid "Connection refused !"
-msgstr ""
+msgstr "Kết nối bị từ chối !"
 
 #: bin/modules/action/wizard.py:162 bin/modules/action/wizard.py:168
 #: bin/modules/action/wizard.py:170 bin/modules/gui/main.py:196
 #: bin/modules/gui/main.py:202 bin/rpc.py:202 bin/rpc.py:204
 msgid "Application Error"
-msgstr ""
+msgstr "Lỗi Ứng dụng"
 
 #: bin/modules/action/wizard.py:170 bin/rpc.py:204
 msgid "View details"
-msgstr ""
+msgstr "Xem chi tiết"
 
 #: bin/modules/action/main.py:48
 msgid "Nothing to print!"
@@ -54,7 +54,7 @@ msgstr ""
 
 #: bin/modules/action/main.py:66
 msgid "Printing aborted, too long delay !"
-msgstr ""
+msgstr "Lệnh in bị hủy bỏ do trì hoãn quá lâu!"
 
 #: bin/modules/action/main.py:195
 msgid "Select your action"
@@ -62,21 +62,21 @@ msgstr ""
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr ""
+msgstr "Không thể kết nối đến máy chủ"
 
 #: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6278
 #: bin/openerp.glade:6524 bin/openerp.glade:6847 bin/openerp.glade:7508
 msgid "Server:"
-msgstr ""
+msgstr "Máy chủ"
 
 #: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6560
 #: bin/openerp.glade:6804 bin/openerp.glade:7103 bin/openerp.glade:7465
 msgid "Change"
-msgstr ""
+msgstr "Thay đổi"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "Mật khẩu Siêu quản trị viên:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
@@ -108,7 +108,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr ""
+msgstr "Chuyển đổi cơ sở dữ liệu"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
@@ -116,7 +116,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Cơ sở dữ liệu của bạn đã được nâng cấp."
 
 #: bin/modules/gui/main.py:295
 msgid "Your databases have been upgraded."
@@ -132,7 +132,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
-msgstr ""
+msgstr "Không biết"
 
 #: bin/modules/gui/main.py:474
 #, python-format
@@ -147,7 +147,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
-msgstr ""
+msgstr "Tên cơ sở dữ liệu không hợp lệ !"
 
 #: bin/modules/gui/main.py:613
 msgid ""
@@ -158,20 +158,20 @@ msgstr ""
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
 msgid "Could not create database."
-msgstr ""
+msgstr "Không thể tạo cơ sở dữ liệu."
 
 #: bin/modules/gui/main.py:647
 msgid "Database already exists !"
-msgstr ""
+msgstr "Cơ sở dữ liệu đã tồn tại!"
 
 #: bin/modules/gui/main.py:649 bin/modules/gui/main.py:1383
 #: bin/modules/gui/main.py:1403 bin/modules/gui/main.py:1482
 msgid "Bad database administrator password !"
-msgstr ""
+msgstr "Mật khẩu quản trị viên cơ sở dữ liệu không hợp lệ !"
 
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr ""
+msgstr "Lỗi trong quá trình tạo ra cơ sở dữ liệu!"
 
 #: bin/modules/gui/main.py:658
 msgid ""
@@ -181,7 +181,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"
-msgstr ""
+msgstr "Nhấn Ctrl+O để đăng nhập"
 
 #: bin/modules/gui/main.py:881
 msgid "Edit"
@@ -203,7 +203,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr ""
+msgstr "Không có yêu cầu"
 
 #: bin/modules/gui/main.py:999
 #, python-format
@@ -218,33 +218,37 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "CSDL không thể truy cập hoặc không tồn tại"
 
 #: bin/modules/gui/main.py:1041
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
+"Lỗi kết nối !\n"
+"Không thể kết nối tới máy chủ !"
 
 #: bin/modules/gui/main.py:1043
 msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Lỗi xác thực !\n"
+"Tên người dùng hoặc mật khẩu không hợp lệ !"
 
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #: bin/modules/gui/main.py:1076
 msgid "Not logged !"
-msgstr ""
+msgstr "Chưa đăng nhập"
 
 #: bin/modules/gui/main.py:1085 bin/widget/view/form_gtk/one2many_list.py:52
 #: bin/openerp.glade:6126
 msgid "OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #: bin/modules/gui/main.py:1159
 msgid ""
@@ -268,36 +272,36 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1374
 msgid "Delete a database"
-msgstr ""
+msgstr "Xóa bỏ một cơ sở dữ liệu"
 
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr ""
+msgstr "Cơ sở dữ liệu được hủy bỏ thành công!"
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr ""
+msgstr "Không thể hủy bỏ cơ sở dữ liệu."
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr ""
+msgstr "Không thể hủy bỏ cơ sở dữ liệu."
 
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
 msgid "Open..."
-msgstr ""
+msgstr "Mở..."
 
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
-msgstr ""
+msgstr "Cơ sở dữ liệu được phục hồi thành công!"
 
 #: bin/modules/gui/main.py:1403
 msgid "Could not restore database."
-msgstr ""
+msgstr "Không thể khôi phục lại cơ sở dữ liệu."
 
 #: bin/modules/gui/main.py:1405
 msgid "Couldn't restore database"
-msgstr ""
+msgstr "Không thể khôi phục lại cơ sở dữ liệu."
 
 #: bin/modules/gui/main.py:1444
 msgid ""
@@ -310,19 +314,19 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1454
 msgid "Could not change the Super Admin password."
-msgstr ""
+msgstr "Không thể thay đổi mật khẩu của Siêu quản trị viên."
 
 #: bin/modules/gui/main.py:1455
 msgid "Bad password provided !"
-msgstr ""
+msgstr "Mật khẩu cung cấp không hợp lệ !"
 
 #: bin/modules/gui/main.py:1457
 msgid "Error, password not changed."
-msgstr ""
+msgstr "Lỗi, mật khẩu không thay đổi."
 
 #: bin/modules/gui/main.py:1463 bin/modules/gui/main.py:1486
 msgid "Backup a database"
-msgstr ""
+msgstr "Sao lưu cơ sở dữ liệu"
 
 #: bin/modules/gui/main.py:1466 bin/modules/gui/window/win_export.py:328
 #: bin/printer/printer.py:216 bin/widget/view/form_gtk/image.py:129
@@ -332,15 +336,15 @@ msgstr "Lưu với tên khác..."
 
 #: bin/modules/gui/main.py:1479
 msgid "Database backed up successfully !"
-msgstr ""
+msgstr "Cơ sở dữ liệu được sao lưu thành công!"
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
-msgstr ""
+msgstr "Không thể sao lưu cơ sở dữ liệu."
 
 #: bin/modules/gui/main.py:1484
 msgid "Couldn't backup database."
-msgstr ""
+msgstr "Không thể sao lưu cơ sở dữ liệu."
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
@@ -409,7 +413,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:329
 msgid "Document Saved."
-msgstr ""
+msgstr "Tài liệu đã được lưu"
 
 #: bin/modules/gui/window/form.py:331 bin/modules/gui/window/form.py:332
 #: bin/widget/view/form_gtk/parser.py:126
@@ -421,11 +425,11 @@ msgstr ""
 #: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/list.py:568
 msgid "Error !"
-msgstr ""
+msgstr "Lỗi !"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "Cảnh báo !"
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
@@ -439,7 +443,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:416
 msgid "Print Screen"
-msgstr ""
+msgstr "In màn hình"
 
 #: bin/modules/gui/window/form.py:436
 msgid "No record selected"
@@ -447,7 +451,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:441
 msgid "New document"
-msgstr ""
+msgstr "Tài liệu mới"
 
 #: bin/modules/gui/window/form.py:443
 msgid "Editing document (id: "
@@ -455,15 +459,15 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:446
 msgid "Record: "
-msgstr ""
+msgstr "Bản ghi: "
 
 #: bin/modules/gui/window/form.py:447
 msgid " of "
-msgstr ""
+msgstr " của "
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "The file is empty !"
-msgstr ""
+msgstr "Tập tin rỗng"
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "Importation !"
@@ -471,7 +475,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:56
 msgid "XML-RPC error !"
-msgstr ""
+msgstr "Lỗi XML-RPC"
 
 #: bin/modules/gui/window/win_import.py:61
 msgid "Imported one object !"
@@ -500,7 +504,7 @@ msgstr ""
 #: bin/modules/gui/window/win_import.py:100
 #: bin/modules/gui/window/win_import.py:104
 msgid "Field name"
-msgstr ""
+msgstr "Tên trường"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
@@ -556,7 +560,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Ressource Name"
-msgstr ""
+msgstr "Tên tài nguyên"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Names"
@@ -564,7 +568,7 @@ msgstr ""
 
 #: bin/modules/gui/window/__init__.py:31
 msgid "Unknown Window"
-msgstr ""
+msgstr "Cửa sổ không xác định"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
@@ -582,15 +586,15 @@ msgstr ""
 
 #: bin/modules/gui/window/view_tree/parse.py:35
 msgid "Tree"
-msgstr ""
+msgstr "Cây"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:48
 msgid "Description"
-msgstr ""
+msgstr "Mô tả"
 
 #: bin/modules/gui/window/tree.py:204 bin/modules/gui/window/tree.py:260
 msgid "No resource selected!"
-msgstr ""
+msgstr "Không có tài nguyên được lựa chọn"
 
 #: bin/modules/gui/window/tree.py:218
 msgid ""
@@ -600,7 +604,7 @@ msgstr ""
 
 #: bin/modules/gui/window/tree.py:223
 msgid "Error removing resource!"
-msgstr ""
+msgstr "Lỗi xóa bỏ tài nguyên"
 
 #: bin/modules/gui/window/tree.py:234
 msgid "Unable to chroot: no tree resource selected"
@@ -651,11 +655,11 @@ msgstr "OpenERP Máy Khách %s"
 
 #: bin/options.py:110
 msgid "specify alternate config file"
-msgstr "cấu hình file alternate"
+msgstr "cấu hình file thay thế"
 
 #: bin/options.py:111
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr "cho phép chạy từng bước cơ bản  Alias for '--log-level=debug'"
+msgstr "cho phép chạy từng bước cơ bản. Tên gọi khác cho '--log-level=debug'"
 
 #: bin/options.py:112
 #, python-format
@@ -800,10 +804,13 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Vấn đề của bạn *KHÔNG* thể gửi đến được cho nhóm quản lý chất lượng !\n"
+"Vui lòng báo cáo lỗi này một cách thủ công tại:\n"
+"\t%s"
 
 #: bin/common/common.py:491
 msgid "Error"
-msgstr ""
+msgstr "Lỗi"
 
 #: bin/common/common.py:646
 msgid "Open with..."
@@ -817,13 +824,14 @@ msgstr ""
 #: bin/printer/printer.py:184
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr "Không thể sử dụng kiểu file %s"
+msgstr "Không thể xử lý kiểu tập tin %s"
 
 #: bin/printer/printer.py:189
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
-msgstr "Chế độ in tự động của Linux chưa được hiện thực"
+msgstr ""
+"Chế độ in tự động của Linux chưa được hiện thựcSử dụng chế độ xem trước !"
 
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
@@ -885,7 +893,7 @@ msgstr ""
 
 #: bin/widget_search/calendar.py:70 bin/widget_search/calendar.py:197
 msgid "End date"
-msgstr ""
+msgstr "Ngày kết thúc"
 
 #: bin/widget_search/calendar.py:129 bin/widget_search/calendar.py:249
 #: bin/widget/view/form_gtk/calendar.py:135
@@ -938,7 +946,7 @@ msgstr "Đồng ý"
 
 #: bin/widget_search/checkbox.py:36
 msgid "No"
-msgstr ""
+msgstr "Không"
 
 #: bin/widget/view/form.py:136 bin/widget/view/form.py:199
 msgid "You must save this record to use the relate button !"
@@ -970,7 +978,7 @@ msgstr ""
 
 #: bin/widget/view/calendar_gtk/parser.py:356 bin/openerp.glade:8106
 msgid "Week"
-msgstr ""
+msgstr "Tuần"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
@@ -1190,7 +1198,7 @@ msgstr "Thiết lập hình ảnh"
 
 #: bin/widget/view/form_gtk/image.py:82 bin/widget/view/form_gtk/binary.py:84
 msgid "Save As"
-msgstr ""
+msgstr "Lưu thành"
 
 #: bin/widget/view/form_gtk/image.py:93 bin/widget/view/form_gtk/binary.py:88
 msgid "Clear"
@@ -1198,35 +1206,35 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:104
 msgid "All files"
-msgstr ""
+msgstr "Tất cả các tập tin"
 
 #: bin/widget/view/form_gtk/image.py:108
 msgid "Images"
-msgstr ""
+msgstr "Các hình ảnh"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "Không có hình ảnh để lưu thành !"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "Cảnh báo"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
-msgstr ""
+msgstr "Mở tài nguyên này"
 
 #: bin/widget/view/form_gtk/many2one.py:163
 msgid "Search a resource"
-msgstr ""
+msgstr "Tìm kiếm một tài nguyên"
 
 #: bin/widget/view/form_gtk/many2one.py:174 bin/openerp.glade:1404
 msgid "Action"
-msgstr ""
+msgstr "Hành động"
 
 #: bin/widget/view/form_gtk/many2one.py:175
 msgid "Report"
-msgstr ""
+msgstr "Báo cáo"
 
 #: bin/widget/view/form_gtk/many2one.py:388 bin/widget/view/list.py:618
 msgid "You must select a record to use the relation !"
@@ -1246,11 +1254,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
-msgstr ""
+msgstr "Chọn"
 
 #: bin/widget/view/form_gtk/binary.py:80
 msgid "Open"
-msgstr ""
+msgstr "Mở"
 
 #: bin/widget/view/form_gtk/binary.py:119
 #: bin/widget/view/form_gtk/binary.py:163
@@ -1261,15 +1269,15 @@ msgstr "Không thể đọc file dữ liệu"
 #: bin/widget/view/form_gtk/binary.py:155
 #, python-format
 msgid "Error reading the file: %s"
-msgstr ""
+msgstr "Lỗi đọc tập tin: %s"
 
 #: bin/widget/view/form_gtk/binary.py:138
 msgid "All Files"
-msgstr ""
+msgstr "Tất cả tập tin"
 
 #: bin/widget/view/form_gtk/binary.py:148
 msgid "Select a file..."
-msgstr ""
+msgstr "Chọn một tập tin..."
 
 #: bin/widget/view/form_gtk/binary.py:177
 #, python-format
@@ -1287,11 +1295,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/calendar.py:252
 msgid "Hour:"
-msgstr ""
+msgstr "Giờ:"
 
 #: bin/widget/view/form_gtk/calendar.py:255
 msgid "Minute:"
-msgstr ""
+msgstr "Phút:"
 
 #: bin/widget/view/form_gtk/calendar.py:289
 msgid "Invalid datetime value! Year must be greater than 1899 !"
@@ -1329,19 +1337,19 @@ msgstr ""
 
 #: bin/openerp.glade:6
 msgid "OpenERP - Login"
-msgstr ""
+msgstr "OpenERP - Đăng nhập"
 
 #: bin/openerp.glade:116 bin/openerp.glade:6450
 msgid "Database:"
-msgstr ""
+msgstr "Cơ sở dữ liệu:"
 
 #: bin/openerp.glade:131
 msgid "User:"
-msgstr ""
+msgstr "Người sử dụng:"
 
 #: bin/openerp.glade:146 bin/openerp.glade:6436 bin/openerp.glade:6747
 msgid "Password:"
-msgstr ""
+msgstr "Mật khẩu"
 
 #: bin/openerp.glade:265
 msgid "_File"
@@ -1357,7 +1365,7 @@ msgstr ""
 
 #: bin/openerp.glade:308
 msgid "Databases"
-msgstr ""
+msgstr "Các cơ sở dữ liệu"
 
 #: bin/openerp.glade:315
 msgid "_New database"
@@ -1385,7 +1393,7 @@ msgstr ""
 
 #: bin/openerp.glade:415
 msgid "Administrator Password"
-msgstr ""
+msgstr "Mật khẩu quản trị viên"
 
 #: bin/openerp.glade:460
 msgid "_User"
@@ -1613,7 +1621,7 @@ msgstr ""
 
 #: bin/openerp.glade:1191
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Phím tắt"
 
 #: bin/openerp.glade:1204
 msgid "_License"
@@ -1625,11 +1633,11 @@ msgstr ""
 
 #: bin/openerp.glade:1261
 msgid "Edit / Save this resource"
-msgstr ""
+msgstr "Sửa / Lưu tài nguyên này"
 
 #: bin/openerp.glade:1277
 msgid "Delete this resource"
-msgstr ""
+msgstr "Xóa tài nguyên này"
 
 #: bin/openerp.glade:1290
 msgid "Go to previous matched search"
@@ -1637,7 +1645,7 @@ msgstr ""
 
 #: bin/openerp.glade:1291
 msgid "Previous"
-msgstr ""
+msgstr "Trước"
 
 #: bin/openerp.glade:1302
 msgid "Go to next matched resource"
@@ -1645,19 +1653,19 @@ msgstr ""
 
 #: bin/openerp.glade:1303
 msgid "Next"
-msgstr ""
+msgstr "Tiếp"
 
 #: bin/openerp.glade:1316
 msgid "List"
-msgstr ""
+msgstr "Danh sách"
 
 #: bin/openerp.glade:1328
 msgid "Form"
-msgstr ""
+msgstr "Mẫu"
 
 #: bin/openerp.glade:1341
 msgid "Calendar"
-msgstr ""
+msgstr "Lịch"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
@@ -1689,15 +1697,15 @@ msgstr ""
 
 #: bin/openerp.glade:1432 bin/openerp.glade:1433
 msgid "Menu"
-msgstr ""
+msgstr "Trình đơn"
 
 #: bin/openerp.glade:1450 bin/openerp.glade:1451
 msgid "Reload"
-msgstr ""
+msgstr "Nạp lại"
 
 #: bin/openerp.glade:1468
 msgid "Close this window"
-msgstr ""
+msgstr "Đóng cửa sổ này"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
@@ -2262,7 +2270,7 @@ msgstr ""
 
 #: bin/openerp.glade:6732
 msgid "New database name:"
-msgstr ""
+msgstr "Tên CSDL mới"
 
 #: bin/openerp.glade:6832 bin/openerp.glade:6978 bin/openerp.glade:7493
 msgid "http://localhost:8069"
@@ -2325,6 +2333,8 @@ msgid ""
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
+"Chọn ngôn ngữ mặc định được dùng cho cơ sở dữ liệu này. Bạn sẽ có thể cài "
+"đặt ngôn ngữ mới sau khi cài đặt thông qua trình đơn chính.."
 
 #: bin/openerp.glade:7156
 msgid ""
@@ -2369,23 +2379,23 @@ msgstr ""
 
 #: bin/openerp.glade:7349
 msgid "Change password"
-msgstr ""
+msgstr "Đổi mật khẩu"
 
 #: bin/openerp.glade:7366
 msgid "<b>Change your super admin password</b>"
-msgstr ""
+msgstr "<b> Thay đổi mật khẩu siêu quản trị viên của bạn </b>"
 
 #: bin/openerp.glade:7519
 msgid "Old password:"
-msgstr ""
+msgstr "Mật khẩu cũ:"
 
 #: bin/openerp.glade:7532
 msgid "New password:"
-msgstr ""
+msgstr "Mật khẩu mới"
 
 #: bin/openerp.glade:7545
 msgid "New password confirmation:"
-msgstr ""
+msgstr "Xác nhận mật khẩu mới"
 
 #: bin/openerp.glade:7604
 msgid "OpenERP Message"
@@ -2409,7 +2419,7 @@ msgstr ""
 
 #: bin/openerp.glade:7876
 msgid "Compare"
-msgstr ""
+msgstr "So sánh"
 
 #: bin/openerp.glade:7922
 msgid "Write anyway"
@@ -2421,7 +2431,7 @@ msgstr ""
 
 #: bin/openerp.glade:8034
 msgid "Today"
-msgstr ""
+msgstr "Hôm nay"
 
 #: bin/openerp.glade:8080
 msgid "September 2008"
@@ -2429,11 +2439,11 @@ msgstr ""
 
 #: bin/openerp.glade:8094
 msgid "Day"
-msgstr ""
+msgstr "Ngày"
 
 #: bin/openerp.glade:8118
 msgid "Month"
-msgstr ""
+msgstr "Tháng"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
@@ -2508,7 +2518,7 @@ msgstr ""
 
 #: bin/win_error.glade:387
 msgid "Details"
-msgstr ""
+msgstr "Chi tiết"
 
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
