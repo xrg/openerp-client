@@ -442,7 +442,7 @@ def _server_ask(server_widget, parent=None):
     res = win.run()
     if res == gtk.RESPONSE_OK:
         protocol = protocol[protocol_widget.get_active_text()]
-        url = '%s%s:%s' % (protocol, host_widget.get_text(), port_widget.get_text())
+        url = '%s%s:%s' % ((protocol).strip(), (host_widget.get_text()).strip(), (port_widget.get_text()).strip())
         server_widget.set_text(url)
         result = url
     parent.present()
@@ -687,7 +687,7 @@ class db_create(object):
 
 class terp_main(service.Service):
     def __init__(self, name='gui.main', audience='gui.*'):
-     
+
         service.Service.__init__(self, name, audience)
         self.exportMethod(self.win_add)
 
@@ -928,7 +928,7 @@ class terp_main(service.Service):
             self.sb_company.push(id, '')
         return True
 
-    def sig_win_close(self, *args):        
+    def sig_win_close(self, *args):
         if len(args) >= 2:
             button = args[1].button
             if (isinstance(args[0], gtk.Button) and button in [1,2]) \
@@ -1299,10 +1299,10 @@ class terp_main(service.Service):
         else:
             pn = self.notebook.get_current_page()
         if pn != -1:
-            
+
             self.notebook.disconnect(self.sig_id)
             page = self.pages.pop(pn)
-            
+
             self.notebook.remove_page(pn)
             self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
@@ -1346,7 +1346,7 @@ class terp_main(service.Service):
                     self._update_attachment_button(wid)
             if button_name=='but_close' and res:
                 self._win_del(page_num)
-        
+
 
     def _sig_page_changed(self, widget=None, *args):
         self.last_page = self.current_page
