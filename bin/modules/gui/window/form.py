@@ -329,10 +329,10 @@ class form(object):
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
         elif len(self.screen.models.models):
-            common.warning(_('Invalid form, correct red fields !'),_('Error !'))
+            common.warning(_('Invalid form, correct red fields !'),_('Error !'), parent=self.screen.current_view.window)
             self.message_state(_('Invalid form, correct red fields !'), color="red")
         if warning:
-            common.warning(warning,_('Warning !'))
+            common.warning(warning,_('Warning !'), parent=self.screen.current_view.window)
         return bool(id)
 
     def sig_previous(self, widget=None):

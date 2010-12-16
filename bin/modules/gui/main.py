@@ -149,7 +149,6 @@ class DatabaseDialog(gtk.Dialog):
         self.result = None
         self.error = False
         self.exception = None
-
         def go():
             try:
                 self.on_response_accept()
@@ -189,9 +188,9 @@ class DatabaseDialog(gtk.Dialog):
             except (tiny_socket.Myexception, xmlrpclib.Fault), err:
                 a = rpc_exception(err.faultCode, err.faultString)
                 if a.type in ('warning', 'UserError'):
-                    common.warning(a.data, a.message)
+                    common.warning(a.data, a.message, parent=self)
                 elif a.type == 'AccessDenied':
-                    common.warning(_('Bad Super Administrator Password'), self.get_title())
+                    common.warning(_('Bad Super Administrator Password'), self.get_title(), parent=self)
                 else:
                     common.error(_('Application Error'), err.faultCode, err.faultString, disconnected_mode=True)
             except Exception, e:
@@ -453,7 +452,7 @@ def _server_ask(server_widget, parent=None):
 class db_login(object):
     def __init__(self):
         self.win_gl = glade.XML(common.terp_path("openerp.glade"),"win_login",gettext.textdomain())
-
+        self.win = self.win_gl.get_widget('win_login')
 
     def refreshlist(self, widget, db_widget, entry_db, label, url, butconnect=False):
 
@@ -471,7 +470,7 @@ class db_login(object):
         if _refresh_dblist(db_widget, entry_db, label, butconnect, url):
             is_same_version, server_version, client_version = check_server_version(url)
             if not is_same_version:
-                common.warning(_('The versions of the server (%s) and the client (%s) missmatch. The client may not work properly. Use it at your own risks.') % (server_version, client_version,))
+                common.warning(_('The versions of the server (%s) and the client (%s) missmatch. The client may not work properly. Use it at your own risks.') % (server_version, client_version,),parent=self.win)
 
     def refreshlist_ask(self,widget, server_widget, db_widget, entry_db, label, butconnect = False, url=False, parent=None):
         url = _server_ask(server_widget, parent) or url
@@ -607,10 +606,10 @@ class db_create(object):
             res = win.run()
             db_name = self.db_widget.get_text().lower()
             if (res==gtk.RESPONSE_OK) and (db_name in RESERVED_KEYWORDS):
-                common.warning(_("Sorry,'" +db_name + "' cannot be the name of the database,it's a Reserved Keyword."), _('Bad database name !'), parent=parent)
+                common.warning(_("Sorry,'" +db_name + "' cannot be the name of the database,it's a Reserved Keyword."), _('Bad database name !'), parent=win)
                 continue
             if (res==gtk.RESPONSE_OK) and ((not db_name) or (not re.match('^[a-zA-Z0-9][a-zA-Z0-9_]+$', db_name))):
-                common.warning(_('The database name must contain only normal characters or "_".\nYou must avoid all accents, space or special characters.'), _('Bad database name !'), parent=parent)
+                common.warning(_('The database name must contain only normal characters or "_".\nYou must avoid all accents, space or special characters.'), _('Bad database name !'), parent=win)
 
             else:
                 break
@@ -644,11 +643,11 @@ class db_create(object):
                 self.terp_main.glade.get_widget('plugins').set_sensitive(True)
             except Exception, e:
                 if e.args == ('DbExist',):
-                    common.warning(_("Could not create database."),_('Database already exists !'))
+                    common.warning(_("Could not create database."),_('Database already exists !'), parent=parent)
                 elif (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
-                    common.warning(_('Bad database administrator password !'), _("Could not create database."))
+                    common.warning(_('Bad database administrator password !'), _("Could not create database."), parent=parent)
                 else:
-                    common.warning(_("Could not create database."),_('Error during database creation !'))
+                    common.warning(_("Could not create database."),_('Error during database creation !'), parent=parent)
 
     def progress_timeout(self, pbar, url, passwd, id, win, dbname, parent=None):
         try:

@@ -364,7 +364,7 @@ def support(*args):
         content = name +"(%s, %s, %s)"%(id_contract, company, phone) + _(" has reported the following bug:\n") + explanation + "\n" + _("remarks") + ":\n" + remarks
 
         if upload_data(fromaddr, content, 'support', id_contract):
-            common.message(_('Support request sent !'))
+            common.message(_('Support request sent !'), parent=win)
 
     parent.present()
     win.destroy()

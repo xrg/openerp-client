@@ -101,7 +101,7 @@ class Screen(signal_event.signal_event):
         self.window=window
         self.is_wizard = is_wizard
         self.search_view = eval(search_view)
-        models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context, is_wizard=is_wizard)
+        models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context, is_wizard=is_wizard, screen=self)
         self.models_set(models)
         self.current_model = None
         self.screen_container = screen_container(self.win_search)

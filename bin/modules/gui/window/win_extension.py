@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -33,6 +33,7 @@ class win_extension(object):
     def __init__(self, parent=None):
         glade = gtk.glade.XML(common.terp_path('openerp.glade'), 'win_extension', gettext.textdomain())
         self.win = glade.get_widget('win_extension')
+        self.win.set_transient_for(parent)
         self.win.set_icon(common.OPENERP_ICON)
         model = gtk.ListStore( str, str, str )
 
@@ -107,11 +108,10 @@ class win_extension(object):
         if column_id == 0:
             old_text = old_text.lower()
             new_text = new_text.lower()
-
         if old_text <> new_text:
             if column_id == 0:
                 if new_text in [ ext for ext, app, app_print in model ]:
-                    common.warning(_('This extension is already defined'), _('Extension Manager'))
+                    common.warning(_('This extension is already defined'), _('Extension Manager'), parent=self.win)
                     return
                 else:
                     model.set(iter, column_id, new_text)

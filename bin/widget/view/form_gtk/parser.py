@@ -123,7 +123,7 @@ class Button(Observable):
             model.get_button_action(self.form.screen, id, self.attrs)
             self.warn('misc-message', '')
         else:
-            common.warning(_('Invalid form, correct red fields !'), _('Error !') )
+            common.warning(_('Invalid form, correct red fields !'), _('Error !'),parent=self.form.screen.current_view.window)
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
             self.form.screen.display()
             self.form.screen.current_view.set_cursor()
