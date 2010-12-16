@@ -1173,8 +1173,10 @@ class terp_main(service.Service):
         return act_id
 
     def sig_home_new(self, widget=None, quiet=True, except_id=False):
-        return self.sig_win_new(widget, type='action_id', quiet=quiet,
+        open_menu = self.sig_win_new(widget, type='action_id', quiet=quiet,
                 except_id=except_id)
+        if not open_menu and widget:
+            self.sig_win_menu()
 
     def sig_plugin_execute(self, widget):
         import plugins
