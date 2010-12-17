@@ -302,7 +302,7 @@ class ViewForm(parser_view):
     def __getitem__(self, name):
         return self.widgets[name]
 
-    def destroy(self):
+    def destroy(self): 
         self.widget.destroy()
         for widget in self.widgets.keys():
             self.widgets[widget].widget.destroy()

@@ -42,6 +42,9 @@ import re
 import xmlrpclib
 import base64
 
+import thread
+import gc
+
 RESERVED_KEYWORDS=['absolute', 'action', 'all', 'alter', 'analyse', 'analyze', 'and', 'any', 'as', 'asc', 'authorization', 'between', 'binary', 'both',
             'case', 'cast', 'check', 'collate', 'column','constraint', 'create', 'cross', 'current_date', 'current_time', 'current_timestamp',
             'current_user','default', 'deferrable', 'desc', 'distinct', 'do', 'else', 'end', 'except', 'false', 'for', 'foreign', 'freeze',
@@ -188,7 +191,7 @@ class DatabaseDialog(gtk.Dialog):
                 if a.type in ('warning', 'UserError'):
                     common.warning(a.data, a.message)
                 elif a.type == 'AccessDenied':
-                    common.warning('Bad Super Administrator Password', self.get_title())
+                    common.warning(_('Bad Super Administrator Password'), self.get_title())
                 else:
                     common.error(_('Application Error'), err.faultCode, err.faultString, disconnected_mode=True)
             except Exception, e:
@@ -275,7 +278,7 @@ class MigrationDatabaseDialog(DatabaseDialog):
 
         # Add the text column (database name)
         renderer = gtk.CellRendererText()
-        col = gtk.TreeViewColumn("Database", renderer, text=1)
+        col = gtk.TreeViewColumn(_("Database"), renderer, text=1)
         treeview.append_column(col)
         sw.add(treeview)
         self.table.attach(sw, 0, 2, 3, 4)
@@ -291,7 +294,7 @@ class MigrationDatabaseDialog(DatabaseDialog):
             else:
                 self.message = _("Your databases have been upgraded.")
         else:
-            self.message = "You have not selected a database"
+            self.message = _("You have not selected a database")
 
     def _on_toggle_renderer__toggled(self, renderer, path, col_index):
         row = self.model[path]
@@ -684,6 +687,7 @@ class db_create(object):
 
 class terp_main(service.Service):
     def __init__(self, name='gui.main', audience='gui.*'):
+     
         service.Service.__init__(self, name, audience)
         self.exportMethod(self.win_add)
 
@@ -924,7 +928,7 @@ class terp_main(service.Service):
             self.sb_company.push(id, '')
         return True
 
-    def sig_win_close(self, *args):
+    def sig_win_close(self, *args):        
         if len(args) >= 2:
             button = args[1].button
             if (isinstance(args[0], gtk.Button) and button in [1,2]) \
@@ -1159,7 +1163,7 @@ class terp_main(service.Service):
         if except_id and act_id == except_id:
             return act_id
         obj = service.LocalService('action.main')
-        win = obj.execute(act_id, {'window':self.window})
+        obj.execute(act_id, {'window':self.window})
         try:
             user = rpc.session.rpc_exec_auth_wo('/object', 'execute', 'res.users',
                     'read', [rpc.session.uid], [type,'name'], rpc.session.context)
@@ -1198,6 +1202,9 @@ class terp_main(service.Service):
         return True
 
     def win_add(self, win, datas):
+        """
+            Add a tab in client
+        """
         self.pages.append(win)
         box = gtk.HBox(False, 0)
 
@@ -1284,19 +1291,26 @@ class terp_main(service.Service):
                 self.buttons[x].set_sensitive(view and (x in view.handlers))
 
     def _win_del(self,page_num=None):
+        """
+            Del tab in Client
+        """
         if page_num is not None:
             pn = page_num
         else:
             pn = self.notebook.get_current_page()
         if pn != -1:
+            
             self.notebook.disconnect(self.sig_id)
             page = self.pages.pop(pn)
+            
             self.notebook.remove_page(pn)
             self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
 
-            #page.destroy()
-            #del page
+            page.destroy()
+            del page
+            gc.collect()
+
         return self.notebook.get_current_page() != -1
 
     def _wid_get(self,page_num=None):
@@ -1332,6 +1346,7 @@ class terp_main(service.Service):
                     self._update_attachment_button(wid)
             if button_name=='but_close' and res:
                 self._win_del(page_num)
+        
 
     def _sig_page_changed(self, widget=None, *args):
         self.last_page = self.current_page
@@ -1525,8 +1540,7 @@ class terp_main(service.Service):
         return (url,db,passwd)
 
     def _choose_db_ent(self):
-        dialog = glade.XML(common.terp_path("openerp.glade"), "win_db_ent",
-                gettext.textdomain())
+        dialog = glade.XML(common.terp_path("openerp.glade"), "win_db_ent", gettext.textdomain())
         win = dialog.get_widget('win_db_ent')
         win.set_icon(common.OPENERP_ICON)
         win.set_transient_for(self.window)

@@ -40,6 +40,9 @@ import service
 import common
 import copy
 
+import gc
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 
 class Screen(signal_event.signal_event):
 
@@ -348,7 +351,7 @@ class Screen(signal_event.signal_event):
                 text_entry = glade2.get_widget('action_name')
                 lbl.set_text('Filter Name:')
                 table =  glade2.get_widget('table8')
-                info_lbl = gtk.Label('(Any existing filter with the \nsame name will be replaced)')
+                info_lbl = gtk.Label(_('(Any existing filter with the \nsame name will be replaced)'))
                 table.attach(info_lbl,1,2,2,3, gtk.FILL, gtk.EXPAND)
                 if self.screen_container.last_active_filter:
                     text_entry.set_text(self.screen_container.last_active_filter)
@@ -463,13 +466,60 @@ class Screen(signal_event.signal_event):
     current_model = property(_get_current_model, _set_current_model)
 
     def destroy(self):
+       
+        
         for view in self.views:
             view.destroy()
-            del view
-        #del self.current_model
+                    
+        if hasattr(self, 'filter_widget') and self.filter_widget:        
+            self.filter_widget.destroy()
+            del self.filter_widget
+        
+        self.widget.destroy()            
         self.models.signal_unconnect(self)
+        self.models.destroy()        
+
+        
+        
         del self.models
+        del self.widget
+        
         del self.views
+        del self.fields
+        del self.view_fields
+        del self.search_view
+        del self._Screen__current_model
+        del self._Screen__current_view
+         
+        del self.action_domain
+        del self.auto_search
+        del self.create_new
+        del self.dummy_cal
+
+        del self.help_mode
+        del self.is_wizard
+        del self.latest_search
+        del self.offset
+        del self.old_ctx
+  
+     
+
+        del self.row_activate
+        del self.screen_container
+        del self.search_count
+        del self.show_search
+        del self.tree_saves
+        del self.type
+        del self.view_ids
+        del self.view_to_load
+        del self.views_preload
+        
+        del self.win_search
+        del self.win_search_callback       
+        del self.window
+
+        
+
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):

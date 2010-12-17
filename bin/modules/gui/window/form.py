@@ -39,7 +39,7 @@ import common
 import service
 import options
 import copy
-import gc
+
 
 from observator import oregistry
 from widget.screen import Screen
@@ -195,17 +195,20 @@ class form(object):
         if response == gtk.RESPONSE_OK:
             self.get_resource(widget)
 
-
     def destroy(self):
+        
+        """
+            Destroy the page object and all the child 
+            (or at least should do this)
+        """
         oregistry.remove_receiver('misc-message', self._misc_message)
         self.screen.signal_unconnect(self)
         self.screen.destroy()
-        del self.screen
-        del self.glade
-        del self.widget
+        self.widget.destroy()
         self.sw.destroy()
-        del self.sw
-        gc.collect()
+        del self.screen 
+        del self.handlers      
+   
 
     def ids_get(self):
         return self.screen.ids_get()
@@ -463,7 +466,11 @@ class form(object):
         return True
 
     def sig_close(self, urgent=False):
-        return self.modified_save(reload=False)
-
+        res = self.modified_save(reload=False)
+        return res
+    
+  
+        
+    
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

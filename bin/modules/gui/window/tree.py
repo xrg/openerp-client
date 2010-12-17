@@ -309,6 +309,7 @@ class tree(object):
             return None
 
     def destroy(self):
+        #TODO destroy gui.window.tree
         pass
 
     def sig_close(self, urgent=False):

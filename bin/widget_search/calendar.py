@@ -51,7 +51,7 @@ class calendar(wid_int.wid_int):
         self.widget.pack_start(self.widget1, expand=False, fill=True)
 
         self.eb1 = gtk.EventBox()
-        self.eb1.set_tooltip_text('Open the calendar widget')
+        self.eb1.set_tooltip_text(_('Open the calendar widget'))
         self.eb1.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb1.connect('button_press_event', self.cal_open, self.entry1, parent)
         img = gtk.Image()
@@ -178,7 +178,7 @@ class datetime(wid_int.wid_int):
         self.widget.pack_start(self.widget1, expand=False, fill=True)
 
         self.eb1 = gtk.EventBox()
-        self.eb1.set_tooltip_text('Open the calendar widget')
+        self.eb1.set_tooltip_text(_('Open the calendar widget'))
         self.eb1.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb1.connect('button_press_event', self.cal_open, self.entry1, parent)
         img = gtk.Image()

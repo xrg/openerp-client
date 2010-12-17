@@ -95,7 +95,7 @@ class main(service.Service):
 
             datas['auto_search'] = action.get('auto_search', True)
             if not datas['search_view'] and datas['search_view_id']:
-                 datas['search_view'] = str(rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', datas['search_view_id'], 'search', context))
+                 datas['search_view'] = str(rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', isinstance(datas['search_view_id'], (tuple, list)) and datas['search_view_id'][0] or datas['search_view_id'], 'search', context))
 
             if datas['limit'] is None or datas['limit'] == 0:
                 datas['limit'] = 80
@@ -106,7 +106,6 @@ class main(service.Service):
                     view_ids=[x[0] for x in action['views']]
                     datas['view_mode']=",".join([x[1] for x in action['views']])
                 else:
-#                    view_ids=[(action['view_type']=='tree') and 1 or False,(action['view_type']=='form') and 1 or False]
                     if action.get('view_id', False):
                         view_ids=[action['view_id'][0]]
             elif action.get('view_id', False):

@@ -76,6 +76,8 @@ class ModelList(list):
         super(ModelList, self).__setitem__(key, value)
         if not self.lock_signal:
             self.__screen.signal('record-changed', ('record-changed', key))
+    
+
 
 class ModelRecordGroup(signal_event.signal_event):
     def __init__(self, resource, fields, ids=[], parent=None, context={}, is_wizard=False):
@@ -100,6 +102,19 @@ class ModelRecordGroup(signal_event.signal_event):
 
         self.list_parent = False
         self.list_group = False
+        
+    def destroy(self):      
+        for field in self.mfields.values():
+            field.destroy()
+            
+        if self.list_group:
+            self.list_group.destroy()
+        
+            
+        del self.mfields
+        del self.fields        
+        del self.list_group
+        del self.models
 
     def index(self, model):
         return self.models.index(model)

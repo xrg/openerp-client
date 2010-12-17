@@ -1419,7 +1419,7 @@ class DotWidget(gtk.DrawingArea):
             dialog = gtk.MessageDialog(type=gtk.MESSAGE_ERROR,
                                        message_format=str(ex),
                                        buttons=gtk.BUTTONS_OK)
-            dialog.set_title('Dot Viewer')
+            dialog.set_title(_('Dot Viewer'))
             dialog.run()
             dialog.destroy()
             return False
@@ -1709,13 +1709,13 @@ class DotWindow(gtk.Window):
         self.actiongroup = actiongroup
         # Create actions
         actiongroup.add_actions((
-            ('node', gtk.STOCK_ADD, 'ADD NODE', None, 'Add New Node', self.on_node_create),
-            ('edge', gtk.STOCK_ADD, 'ADD EDGE', None, 'Add New Edge', self.on_edge_create),
-            ('ZoomIn', gtk.STOCK_ZOOM_IN, None, None, 'Enlarge the Diagram', self.widget.on_zoom_in),
-            ('ZoomOut', gtk.STOCK_ZOOM_OUT, None, None, 'Shrink the Diagram', self.widget.on_zoom_out),
-            ('ZoomFit', gtk.STOCK_ZOOM_FIT, None, None, 'Fit the diagram to the window', self.widget.on_zoom_fit),
-            ('Zoom100', gtk.STOCK_ZOOM_100, None, None, 'Show the diagram at its normal size', self.widget.on_zoom_100),
-            ('Print', gtk.STOCK_PRINT, None, None, 'Print the Diagram', self.on_print),
+            ('node', gtk.STOCK_ADD, 'ADD NODE', None, _('Add New Node'), self.on_node_create),
+            ('edge', gtk.STOCK_ADD, 'ADD EDGE', None, _('Add New Edge'), self.on_edge_create),
+            ('ZoomIn', gtk.STOCK_ZOOM_IN, None, None, _('Enlarge the Diagram'), self.widget.on_zoom_in),
+            ('ZoomOut', gtk.STOCK_ZOOM_OUT, None, None, _('Shrink the Diagram'), self.widget.on_zoom_out),
+            ('ZoomFit', gtk.STOCK_ZOOM_FIT, None, None, _('Fit the diagram to the window'), self.widget.on_zoom_fit),
+            ('Zoom100', gtk.STOCK_ZOOM_100, None, None, _('Show the diagram at its normal size'), self.widget.on_zoom_100),
+            ('Print', gtk.STOCK_PRINT, None, None, _('Print the Diagram'), self.on_print),
         ))
         # Add the actiongroup to the uimanager
         uimanager.insert_action_group(actiongroup, 0)
@@ -1769,7 +1769,7 @@ class DotWindow(gtk.Window):
 
     def on_url_clicked(self, widget, url, event):
         self.url = url
-        self.dia_select = gtk.Dialog('OpenERP - Link', self.window_new,
+        self.dia_select = gtk.Dialog(_('OpenERP - Link'), self.window_new,
                         gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
         self.dia_select.set_property('default-width', 200)
         self.dia_select.set_property('default-height', 100)
@@ -1786,9 +1786,9 @@ class DotWindow(gtk.Window):
         label = 'Node'
         if self.url.find('edge') != -1:
             label = 'Edge'
-        but_close.set_tooltip_text('Close Current %s'%(label))
-        but_del.set_tooltip_text('Delete Current %s'%(label))
-        but_edit.set_tooltip_text('Edit Current %s'%(label))
+        but_close.set_tooltip_text(_('Close Current %s') %(label))
+        but_del.set_tooltip_text(_('Delete Current %s') %(label))
+        but_edit.set_tooltip_text(_('Edit Current %s') %(label))
 
         v_box_label = gtk.VBox()
         self.dia_select.get_child().add(v_box_label)
@@ -1872,7 +1872,7 @@ class DotWindow(gtk.Window):
 
     def set_xdotcode(self, xdotcode, filename='<stdin>'):
         if self.widget.set_xdotcode(xdotcode):
-            self.set_title(os.path.basename(filename) + ' - Dot Viewer')
+            self.set_title(os.path.basename(filename) + _(' - Dot Viewer'))
             self.widget.zoom_to_fit()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

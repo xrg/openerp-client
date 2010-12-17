@@ -133,6 +133,7 @@ class many2many(interface.widget_interface):
         self.screen.destroy()
         self.widget.destroy()
         del self.widget
+        del self.screen
 
     def _menu_sig_default(self, obj):
         res = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['model'], 'default_get', [self.name])
