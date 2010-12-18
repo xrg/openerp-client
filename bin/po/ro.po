@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-12-10 07:46+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-12-17 18:14+0000\n"
+"Last-Translator: Syraxes <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:55+0000\n"
+"X-Launchpad-Export-Date: 2010-12-18 05:02+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: ro\n"
 
@@ -112,7 +112,7 @@ msgstr "Migrare bază de date"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Baza de date"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -124,7 +124,7 @@ msgstr "Bazele de date au fost actualizate."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Nu ați selectat nici o bază de date"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
@@ -196,11 +196,11 @@ msgstr "Editare"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Nici o companie"
 
 #: bin/modules/gui/main.py:995
 #, python-format
@@ -214,17 +214,20 @@ msgstr "Zero cereri"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s cereri trimise"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"Vă rugăm să verificați că numele bazei de date este corect, sau apelați la "
+"administratorul bazei de date pentru ca acesta să verifice că baza de date "
+"este pornită."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "Baza de date nu poate fi accesată sau nu există"
 
 #: bin/modules/gui/main.py:1041
 msgid ""
@@ -245,7 +248,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #: bin/modules/gui/main.py:1076
 msgid "Not logged !"
@@ -443,7 +446,7 @@ msgstr "Eroare !"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "Atenţie !"
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
@@ -512,6 +515,12 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Eroare detectată la importul înregistrării:\n"
+"%s\n"
+"Mesajul de eroare:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -524,11 +533,11 @@ msgstr "Numele câmpului"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "Eroare la deschiderea fișierului .CSV"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "Input Error."
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -542,10 +551,12 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"Eroare la procesarea primei linii din fișier.\n"
+"Câmpul %s este necunoscut !"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "Eroare la import."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -553,11 +564,11 @@ msgstr "Nu aţi selectat nici un cîmp pentru import"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "Extensia"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "Aplicaţie"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
@@ -589,7 +600,7 @@ msgstr "Fereastră necunoscută"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "Preferinţe"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -652,7 +663,7 @@ msgstr "Eroare deschidere Excel!"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "Care este numele exportului ?"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
@@ -706,7 +717,7 @@ msgstr "specificati numele/ip-ul serverului"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "Închidere sugestiei"
 
 #: bin/common/common.py:90
 msgid ""
@@ -718,7 +729,7 @@ msgstr ""
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "Dezactivarea tuturor sugestiilor"
 
 #: bin/common/common.py:101
 msgid ""
@@ -730,7 +741,7 @@ msgstr ""
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "Sugestii"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
@@ -751,15 +762,15 @@ msgstr ""
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "Asigurați-vă că fișierul %s este corect"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " a raportat următorul bug:\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
-msgstr ""
+msgstr "remarci"
 
 #: bin/common/common.py:367
 msgid "Support request sent !"
@@ -849,7 +860,7 @@ msgstr "Deschide cu..."
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "Nu a putut fi activată localizarea %s: %s"
 
 #: bin/printer/printer.py:184
 #, python-format
@@ -867,6 +878,7 @@ msgstr ""
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
+"Eroare! Nu există date. Asigurați-vă că există suficiente date de tipărit !"
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
@@ -918,7 +930,7 @@ msgstr "Conţinutul widget-ului, sau excepţia în caz că nu este valid"
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "Eroare: "
 
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
@@ -943,35 +955,35 @@ msgstr "OpenERP - Selectare date"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "conţine"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "nu conține"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "este egal cu"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "este diferit de"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "mai mare decât"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "mai mic decât"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "in"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "not in"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -979,6 +991,10 @@ msgid ""
 "For Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d "
 "%H:%M:%S' formats respectively."
 msgstr ""
+"Introduceți valori separate prin ',' dacă ați ales operatorul 'in' sau 'not "
+"in' .\n"
+"Pentru valori de tip Date sau DateTime , specificați valori în formatul '%Y-"
+"%m-%d' , respectiv '%Y-%m-%d %H:%M:%S' ."
 
 #: bin/widget_search/checkbox.py:35 bin/widget_search/checkbox.py:54
 msgid "Yes"
@@ -994,7 +1010,7 @@ msgstr "Trebuie să salvaţi acestă înregistrare pentru a utiliza butonul!"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "Acțiunea nu este definită !"
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
@@ -1032,19 +1048,19 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--Acțiuni--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "Salvare ca shortcut"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Salvare ca filtru"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Administrare filtre"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1052,6 +1068,9 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"Există înregistrări nesalvate încă !  \n"
+"\n"
+"Salvați-le înainte de a sorta datele !"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 #, python-format
@@ -1092,19 +1111,19 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
-msgstr ""
+msgstr "Adăugare nod"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
-msgstr ""
+msgstr "Adăugare muchie"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "Mărirea diagramei"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "Micșorarea diagramei"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
@@ -1116,7 +1135,7 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "Tipărirea diagramei"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
@@ -1151,11 +1170,11 @@ msgstr "Icon greşit pentru buton!"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "Câmp"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "Obiect"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
@@ -1171,15 +1190,15 @@ msgstr "Traduce view"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "Anulare"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "Salvare & Închiderea ferestrei"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "Salvare & Creare înregistrare nouă"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
@@ -1205,22 +1224,22 @@ msgstr "Elimină această intrare"
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "Pagina anterioară"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr ""
+msgstr "Înregistrarea anterioară"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "Înregistrarea următoare"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "Pagina următoare"
 
 #: bin/widget/view/form_gtk/one2many_list.py:245
 msgid "Switch"
@@ -1261,7 +1280,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "Avertizare"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
@@ -1293,7 +1312,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "Operation not permited"
-msgstr ""
+msgstr "Operație nepermisă"
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
@@ -1718,7 +1737,7 @@ msgstr "Calendar"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
-msgstr ""
+msgstr "Diagramă"
 
 #: bin/openerp.glade:1361
 msgid "Graph"
@@ -1758,7 +1777,7 @@ msgstr "Închide această fereastră"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
-msgstr ""
+msgstr "Compania:"
 
 #: bin/openerp.glade:1535
 msgid "Requests:"
@@ -2616,7 +2635,7 @@ msgstr ""
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
-msgstr ""
+msgstr "Descrierea sumară a problemei:"
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"
