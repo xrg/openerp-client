@@ -118,6 +118,7 @@ class win_export(object):
         self.ids = ids
         self.model = model
         self.fields_data = {}
+        self.fields = {}
         if context is None:
             context = {}
         self.context = context
@@ -138,45 +139,31 @@ class win_export(object):
         self.view2.set_headers_visible(False)
 
         cell = gtk.CellRendererText()
-        column = gtk.TreeViewColumn('Field name', cell, text=0, background=2)
+        column = gtk.TreeViewColumn(_('Field Name'), cell, text=0, background=2)
         self.view1.append_column(column)
 
         cell = gtk.CellRendererText()
-        column = gtk.TreeViewColumn('Field name', cell, text=0)
+        column = gtk.TreeViewColumn(_('Field Name'), cell, text=0)
         self.view2.append_column(column)
+
+        #for f in preload:
+        #    self.model2.set(self.model2.append(), 0, f[1], 1, f[0])
+        self.wid_import_compatible = self.glade.get_widget('import_compatible')
 
         self.model1 = gtk.TreeStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
         self.model2 = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
 
-        for f in preload:
-            self.model2.set(self.model2.append(), 0, f[1], 1, f[0])
-
-        self.fields = {}
-        def model_populate(fields, prefix_node='', prefix=None, prefix_value='', level=2):
-            fields_order = fields.keys()
-            fields_order.sort(lambda x,y: -cmp(fields[x].get('string', ''), fields[y].get('string', '')))
-            for field in fields_order:
-                self.fields_data[prefix_node+field] = fields[field]
-                if prefix_node:
-                    self.fields_data[prefix_node + field]['string'] = '%s%s' % (prefix_value, self.fields_data[prefix_node + field]['string'])
-                st_name = fields[field]['string'] or field 
-                node = self.model1.insert(prefix, 0, [st_name, prefix_node+field, (fields[field].get('required', False) and '#ddddff') or 'white'])
-                self.fields[prefix_node+field] = (st_name, fields[field].get('relation', False))
-                if fields[field].get('relation', False) and level>0:
-                    fields2 = rpc.session.rpc_exec_auth('/object', 'execute', fields[field]['relation'], 'fields_get', False, rpc.session.context)
-                    fields2.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}})
-                    model_populate(fields2, prefix_node+field+'/', node, st_name+'/', level-1)
-        fields.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}}) 
-        model_populate(fields)
+        self.fields_original = fields
+        self.model_populate(self.fields_original)
 
         self.view1.set_model(self.model1)
         self.view2.set_model(self.model2)
         self.view1.show_all()
         self.view2.show_all()
 
+
         self.wid_action = self.glade.get_widget('win_saveas_combo')
         self.wid_write_field_names = self.glade.get_widget('add_field_names_cb')
-        self.wid_import_compatible = self.glade.get_widget('import_compatible')
         action = self.wid_action.set_active(os.name!='nt')
         
         if os.name != 'nt':
@@ -199,6 +186,7 @@ class win_export(object):
         self.glade.signal_connect('on_but_unselect_clicked', self.sig_unsel)
         self.glade.signal_connect('on_but_predefined_clicked', self.add_predef)
         self.glade.signal_connect('on_but_delpredefined_clicked', self.del_export_list_btn)
+        self.glade.signal_connect('on_import_toggled', self.import_toggled)
 
         # Creating the predefined export view
         self.pref_export = gtk.TreeView()
@@ -212,6 +200,33 @@ class win_export(object):
         # Fill the predefined export tree view and show everything
         self.fill_predefwin()
         self.pref_export.show_all()
+
+    def model_populate(self, fields, prefix_node='', prefix=None, prefix_value='', level=2):
+        import_comp = self.wid_import_compatible.get_active()
+        fields = fields.copy()
+        fields.update({'id':{'string':_('ID')}})
+        fields.update({'.id':{'string':_('Database ID')}}) 
+
+        fields_order = fields.keys()
+        fields_order.sort(lambda x,y: -cmp(fields[x].get('string', ''), fields[y].get('string', '')))
+        for field in fields_order:
+            if import_comp and fields[field].get('readonly', False):
+                continue
+            self.fields_data[prefix_node+field] = fields[field]
+            if prefix_node:
+                self.fields_data[prefix_node + field]['string'] = '%s%s' % (prefix_value, self.fields_data[prefix_node + field]['string'])
+            st_name = fields[field]['string'] or field 
+            node = self.model1.insert(prefix, 0, [st_name, prefix_node+field, (fields[field].get('required', False) and '#ddddff') or 'white'])
+            self.fields[prefix_node+field] = (st_name, fields[field].get('relation', False))
+            if fields[field].get('relation', False) and level>0:
+                if (fields[field]['type'] in ['many2many']) and import_comp:
+                    pass
+                else:
+                    if (not import_comp) or (fields[field]['type'] in ['one2many']):
+                        fields2 = rpc.session.rpc_exec_auth('/object', 'execute', fields[field]['relation'], 'fields_get', False, rpc.session.context)
+                        self.model_populate(fields2, prefix_node+field+'/', node, st_name+'/', level-1)
+                    else:
+                        self.model_populate({}, prefix_node+field+'/', node, st_name+'/', level-1)
 
     def del_export_list_key(self,widget, event, *args):
         if event.keyval==gtk.keysyms.Delete:
@@ -267,6 +282,11 @@ class win_export(object):
         for p in paths:
             store.remove(store.get_iter(p))
 
+    def import_toggled(self, widget=None):
+        self.model1.clear()
+        self.model2.clear()
+        self.model_populate(self.fields_original)
+
     def sig_unsel_all(self, widget=None):
         self.model2.clear()
     
@@ -306,22 +326,20 @@ class win_export(object):
             fields2 = []
             iter = self.model2.get_iter_root()
             while iter:
-                fields.append(self.model2.get_value(iter, 1))
+                fields.append(self.model2.get_value(iter, 1).replace('/.id','.id'))
                 fields2.append(self.model2.get_value(iter, 0))
                 iter = self.model2.iter_next(iter)
             action = self.wid_action.get_active()
             self.parent.present()
             self.win.destroy()
             import_comp = self.wid_import_compatible.get_active()
-            ctx = self.context.copy()
-            ctx['import_comp'] = import_comp            
             result = datas_read(self.ids, self.model, fields, self.fields_data, context=ctx)            
             if result.get('warning',False):
                 common.message_box(_('Exportation Error !'), unicode(result.get('warning',False)))
                 return False
             result = result.get('datas',[])
             if import_comp:
-                fields2 = fields                        
+                fields2 = fields
             if self.wid_action.get_active_text() == "Open in Excel":
                 open_excel(fields2, result)
             else:
