@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 import tools
@@ -64,12 +64,12 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
             else:
                 data_all[d[axis[0]]][group_eval] = d[field]
         data_axis.append(data_all)
-  
+
     axis_group = axis_group.keys()
     axis_group.sort()
     axis_lable = dic_lable.keys()
     axis_lable.sort()
-    
+
     tmp = {}
     except_tmp = []
     if axis_type == 'datetime':
@@ -79,7 +79,7 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
             except:
                 except_tmp += [lable]
         axis_lable = sorted(tmp, key=tmp.__getitem__) + except_tmp
-            
+
     if axis_type == 'date':
         for lable in axis_lable:
             try:
@@ -142,6 +142,7 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
         if True:
             if len(axis_group)>1:
                 axis_group = map(lambda x: x.split('/')[-1], axis_group)
+                gvalue2 = map(lambda x:gvalue2[x], range(len(axis_group)))
                 subplot.legend(gvalue2,axis_group,shadow=True,loc='best',prop = font_property)
             else:
                 t1 = [ axis_data[x]['string'] for x in axis[1:]]
