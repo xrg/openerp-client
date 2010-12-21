@@ -582,6 +582,7 @@ class parser_form(widget.view.interface.parser_interface):
         return container.pop(), dict_widget, saw_list, on_write
 
     def translate(self, widget, event, model, name, src, widget_entry, screen, window):
+        """Translation window for object data strings"""
         #widget accessor functions
         def value_get(widget):
             if type(widget) == type(gtk.Entry()):
@@ -639,27 +640,22 @@ class parser_form(widget.view.interface.parser_interface):
             return False
         id = screen.current_model.save(reload=False)
         uid = rpc.session.uid
-
+        # Find the translatable languages
         lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
                 'search', [('translatable','=','1')])
-
         if not lang_ids:
             common.message(_('No other language available!'),
                     parent=window)
             return False
         langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
                 'read', lang_ids, ['code', 'name'])
+        # get the code of the current language
+        current_lang = rpc.session.context.get('lang', 'en_US')
 
-        code = rpc.session.context.get('lang', 'en_US')
+        # There used to be a adapt_context() function here, to make sure we sent
+        # False instead of 'en_US'. But why do that at all ?
 
-        #change 'en' to false for context
-        def adapt_context(val):
-            if val == 'en_US':
-                return False
-            else:
-                return val
-
-
+        # Window
         win = gtk.Dialog(_('Add Translation'), window,
                 gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
         win.vbox.set_spacing(5)
@@ -667,19 +663,19 @@ class parser_form(widget.view.interface.parser_interface):
         win.set_property('default-height', 400)
         win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
         win.set_icon(common.OPENERP_ICON)
-
+        # Accelerators
         accel_group = gtk.AccelGroup()
         win.add_accel_group(accel_group)
-
+        # Buttons
         but_cancel = win.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
         but_cancel.add_accelerator('clicked', accel_group, gtk.keysyms.Escape,
                 gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
         but_ok = win.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
         but_ok.add_accelerator('clicked', accel_group, gtk.keysyms.Return,
                 gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-
+        # Vertical box
         vbox = gtk.VBox(spacing=5)
-
+        # Grid with all the translations
         entries_list = []
         table = gtk.Table(len(langs), 2)
         table.set_homogeneous(False)
@@ -688,11 +684,14 @@ class parser_form(widget.view.interface.parser_interface):
         table.set_border_width(1)
         i = 0
         for lang in langs:
+            # Make sure the context won't mutate
             context = copy.copy(rpc.session.context)
-            context['lang'] = adapt_context(lang['code'])
+            context['lang'] = lang['code']
+            # Read the string in this language 
             val = rpc.session.rpc_exec_auth('/object', 'execute', model,
                     'read', [id], [name], context)
             val = val[0]
+            # Label
             #TODO space before ':' depends of lang (ex: english no space)
             if gtk.widget_get_default_direction() == gtk.TEXT_DIR_RTL:
                 label = gtk.Label(': ' + lang['name'])
@@ -707,19 +706,21 @@ class parser_form(widget.view.interface.parser_interface):
             elif isinstance(entry,gtk.ScrolledWindow):
                 entry.child.set_sensitive(widget_entry.child.get_editable())
 
+            # Label and text box side by side
             hbox = gtk.HBox(homogeneous=False)
-            if code == lang['code']:
+            # Take the latest text in the user's language
+            if lang['code'] == current_lang:
                 value_set(entry,value_get(widget_entry))
             else:
                 value_set(entry,val[name])
-
-            entries_list.append((val['id'], lang['code'], entry))
+            
+            entries_list.append((lang['code'], entry))
             table.attach(label, 0, 1, i, i+1, yoptions=False, xoptions=gtk.FILL,
                     ypadding=2, xpadding=5)
             table.attach(entry, 1, 2, i, i+1, yoptions=yoptions,
                     ypadding=2, xpadding=5)
             i += 1
-
+        # Open the window
         vbox.pack_start(table)
         vp = gtk.Viewport()
         vp.set_shadow_type(gtk.SHADOW_NONE)
@@ -730,25 +731,25 @@ class parser_form(widget.view.interface.parser_interface):
         sv.add(vp)
         win.vbox.add(sv)
         win.show_all()
-
+        
+        # process the response
         ok = False
         data = []
         while not ok:
             response = win.run()
             ok = True
             if response == gtk.RESPONSE_OK:
-                to_save = map(lambda x : (x[0], x[1], value_get(x[2])),
-                        entries_list)
-                while to_save != []:
-                    new_val = {}
-                    new_val['id'],new_val['code'], new_val['value'] = to_save.pop()
-                    #update form field
-                    if new_val['code'] == code:
-                        value_set(widget_entry, new_val['value'])
+                # Get the values of all the text boxes
+                for code, entry in entries_list:
+                    value=value_get(entry)
+                    # update the previous form if the string in the user's language was just changed
+                    if code == current_lang:
+                        value_set(widget_entry, value)
+                    # write the new translation
                     context = copy.copy(rpc.session.context)
-                    context['lang'] = adapt_context(new_val['code'])
+                    context['lang'] = code
                     rpc.session.rpc_exec_auth('/object', 'execute', model,
-                            'write', [id], {str(name):  new_val['value']},
+                            'write', [id], {str(name):  value},
                             context)
             if response == gtk.RESPONSE_CANCEL:
                 window.present()
