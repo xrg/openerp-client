@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -41,8 +41,8 @@ class char(interface.widget_interface):
         self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
 
     def set_value(self, model, model_field):
-        return model_field.set_client(model, self.widget.get_text() or False)
-    
+        return model_field.set_client(model, (self.widget.get_text()).strip() or False)
+
 
     def display(self, model, model_field):
         if not model_field:
