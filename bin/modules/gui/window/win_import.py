@@ -134,8 +134,8 @@ class win_import(object):
                     if fields[field].get('type','') in ('many2one' , 'many2many' ) and level>0:
                         #self.fields[field+':id'] = fields[field]['string']
                         #self.fields_invert[fields[field]['string']] = field+':id'
-                        model_populate({'id':{'string':'ID'},'.id':{'string':_('Database ID')}}, \
-                                       prefix_node+field+':', node, st_name+'/', level-1)
+                        model_populate({'/id':{'string':'ID'},'.id':{'string':_('Database ID')}}, \
+                                       prefix_node+field, node, st_name+'/', level-1)
         fields.update({'id':{'string':'ID'},'.id':{'string':_('Database ID')}})
         model_populate(fields)
 
@@ -170,7 +170,6 @@ class win_import(object):
             return True
         self.sig_unsel_all()
         word=''
-        print self.fields.keys()
         try:
             for line in data:
                 for word in line:

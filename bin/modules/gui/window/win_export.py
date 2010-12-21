@@ -297,7 +297,10 @@ class win_export(object):
         export_ids = ir_export.search([('resource', '=', self.model)])
         for export in ir_export.read(export_ids):
             fields = ir_export_line.read(export['export_fields'])
-            self.predef_model.append(([f['name'] for f in fields], export['name'], ', '.join([self.fields_data[f['name']]['string'] for f in fields])))
+            try:
+                self.predef_model.append(([f['name'] for f in fields], export['name'], ', '.join([self.fields_data[f['name']]['string'] for f in fields])))
+            except:
+                pass
         self.pref_export.set_model(self.predef_model)
 
     def add_predef(self, button):
@@ -333,7 +336,7 @@ class win_export(object):
             self.parent.present()
             self.win.destroy()
             import_comp = self.wid_import_compatible.get_active()
-            result = datas_read(self.ids, self.model, fields, self.fields_data, context=ctx)            
+            result = datas_read(self.ids, self.model, fields, self.fields_data, context=self.context)
             if result.get('warning',False):
                 common.message_box(_('Exportation Error !'), unicode(result.get('warning',False)))
                 return False
@@ -345,7 +348,7 @@ class win_export(object):
             else:
                 fname = common.file_selection(_('Save As...'),
                         parent=self.parent, action=gtk.FILE_CHOOSER_ACTION_SAVE)
-                if fname:                    
+                if fname:
                     export_csv(fname, fields2, result, self.wid_write_field_names.get_active())
             return True
         else:
