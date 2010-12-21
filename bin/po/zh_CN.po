@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-12-04 08:26+0000\n"
-"Last-Translator: GongyuanMao <airforce.e@gmail.com>\n"
+"PO-Revision-Date: 2010-12-21 03:05+0000\n"
+"Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:56+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:27+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 
@@ -25,12 +25,9 @@ msgstr ""
 msgid "Print Workflow"
 msgstr "打印工作流"
 
-#
-# File: bin/plugins/__init__.py, line: 29
-# File: bin/plugins/__init__.py, line: 29
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
-msgstr "打印工作流（高级）"
+msgstr "打印工作流（包含子工作流）"
 
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
@@ -121,7 +118,7 @@ msgstr "超级管理员密码:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "无效的超级管理员密码"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -153,7 +150,7 @@ msgstr "迁移数据库"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "数据库"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -165,7 +162,7 @@ msgstr "您的数据库已经升级。"
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "您必须选择一个数据库"
 
 #
 # File: bin/modules/gui/main.py, line: 152
@@ -191,32 +188,24 @@ msgstr "服务器(%s)与客户端(%s)版本不匹配。客户端可能不能正�
 msgid "Sorry,'"
 msgstr "对不起,'"
 
-#
-# File: bin/modules/gui/main.py, line: 296
-# File: bin/modules/gui/main.py, line: 299
-# File: bin/modules/gui/main.py, line: 296
-# File: bin/modules/gui/main.py, line: 299
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
-msgstr "帐套名称不符合要求！"
+msgstr "数据库名称不符合要求！"
 
-#
-# File: bin/modules/gui/main.py, line: 299
-# File: bin/modules/gui/main.py, line: 299
 #: bin/modules/gui/main.py:613
 msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
-msgstr "帐套名称只能包含英文数字或\"_\"。"
+msgstr "数据库名称只能包含英文数字或\"_\"。"
 
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
 msgid "Could not create database."
-msgstr "创建帐套数据库失败。"
+msgstr "创建数据库失败。"
 
 #: bin/modules/gui/main.py:647
 msgid "Database already exists !"
-msgstr "帐套已存在!"
+msgstr "数据库已存在!"
 
 #
 # File: bin/modules/gui/main.py, line: 361
@@ -230,22 +219,17 @@ msgstr "帐套已存在!"
 msgid "Bad database administrator password !"
 msgstr "数据库管理员密码不正确！"
 
-#
-# File: bin/modules/gui/main.py, line: 363
-# File: bin/modules/gui/main.py, line: 370
-# File: bin/modules/gui/main.py, line: 363
-# File: bin/modules/gui/main.py, line: 370
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr "创建帐套出错！"
+msgstr "创建数据库出错！"
 
 #: bin/modules/gui/main.py:658
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
-"账套数据库创建不成功。\n"
-"建议删除该数据库（帐套）。"
+"数据库创建不成功。\n"
+"建议删除该数据库。"
 
 #
 # File: bin/modules/gui/main.py, line: 432
@@ -266,11 +250,11 @@ msgstr "编辑"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "没有公司"
 
 #: bin/modules/gui/main.py:995
 #, python-format
@@ -284,17 +268,17 @@ msgstr "无请求"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " 已发送 %s 个请求"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
-msgstr ""
+msgstr "请再次检查数据库名或者联系您的系统管理员确认数据库状态正常."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "无法访问数据库或数据库不存在。"
 
 #
 # File: bin/modules/gui/main.py, line: 734
@@ -318,7 +302,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #
 # File: bin/modules/gui/main.py, line: 761
@@ -369,27 +353,21 @@ msgstr "附件（%d）"
 msgid "Attachments"
 msgstr "附件"
 
-#
-# File: bin/modules/gui/main.py, line: 1035
-# File: bin/modules/gui/main.py, line: 1035
 #: bin/modules/gui/main.py:1374
 msgid "Delete a database"
-msgstr "删除帐套"
+msgstr "删除数据库"
 
-#
-# File: bin/modules/gui/main.py, line: 1041
-# File: bin/modules/gui/main.py, line: 1041
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr "帐套删除成功！"
+msgstr "删除数据库成功！"
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr "删除帐套数据库失败。"
+msgstr "删除数据库失败。"
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr "删除帐套数据库失败"
+msgstr "删除数据库失败"
 
 #
 # File: bin/modules/gui/main.py, line: 1049
@@ -405,16 +383,13 @@ msgstr "删除帐套数据库失败"
 msgid "Open..."
 msgstr "打开..."
 
-#
-# File: bin/modules/gui/main.py, line: 1060
-# File: bin/modules/gui/main.py, line: 1060
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
-msgstr "帐套恢复成功！"
+msgstr "数据库恢复成功！"
 
 #: bin/modules/gui/main.py:1403
 msgid "Could not restore database."
-msgstr "恢复帐套数据失败。"
+msgstr "恢复数据失败。"
 
 #: bin/modules/gui/main.py:1405
 msgid "Couldn't restore database"
@@ -444,14 +419,9 @@ msgstr "密码错误！"
 msgid "Error, password not changed."
 msgstr "出错，密码未更改。"
 
-#
-# File: bin/modules/gui/main.py, line: 1117
-# File: bin/modules/gui/main.py, line: 1134
-# File: bin/modules/gui/main.py, line: 1117
-# File: bin/modules/gui/main.py, line: 1134
 #: bin/modules/gui/main.py:1463 bin/modules/gui/main.py:1486
 msgid "Backup a database"
-msgstr "帐套备份"
+msgstr "备份数据库"
 
 #
 # File: bin/modules/gui/main.py, line: 1120
@@ -534,7 +504,7 @@ msgstr "最新更改日期"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "内部模块数据标识"
 
 #: bin/modules/gui/window/form.py:269
 msgid ""
@@ -585,7 +555,7 @@ msgstr "错误！"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "警告 !"
 
 #
 # File: bin/modules/gui/window/form.py, line: 302
@@ -674,6 +644,12 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"尝试导入如下记录时发生错误：\n"
+"%s\n"
+"错误信息：\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -686,11 +662,11 @@ msgstr "字段名"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "打开 .CSV 文件时发生错误"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "输入错误"
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -703,10 +679,12 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"处理文件首行时发生错误：\n"
+"未知字段“%s”！"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "导入错误"
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -714,15 +692,15 @@ msgstr "您没有选择任何要导入的字段"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "扩展"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "应用程序"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "打印处理器"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
@@ -762,7 +740,7 @@ msgstr "未知窗口"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "首选项"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -836,7 +814,7 @@ msgstr "打开Excel出错！"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "这个导出的名称？"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
@@ -898,7 +876,7 @@ msgstr "设置服务器IP或名称"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "关闭当前提示"
 
 #: bin/common/common.py:90
 msgid ""
@@ -907,10 +885,12 @@ msgid ""
 "open this menu item, unless you disable all tips using the <b>'Menu "
 "Tips'</b> option in the user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>关闭当前提示:</b></span>\n"
+"此举将隐藏当前提示，当下次显示此菜单时仍会显示提示。如果想彻底关闭所有提示，请设置用户首选项中的<b>“菜单提示”</b>选项."
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "禁用所有提示"
 
 #: bin/common/common.py:101
 msgid ""
@@ -922,7 +902,7 @@ msgstr ""
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "提示"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
@@ -948,7 +928,7 @@ msgstr ""
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "确保文件“%s”是正确的"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
@@ -1068,7 +1048,7 @@ msgstr ""
 
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
-msgstr ""
+msgstr "错误！找不到数据，请确保您有足够的数据来打印！"
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
@@ -1126,11 +1106,11 @@ msgstr ""
 
 #: bin/widget_search/wid_int.py:52
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "Widget的内容或者异常错误无效"
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "错误: "
 
 #
 # File: bin/widget_search/calendar.py, line: 51
@@ -1161,35 +1141,35 @@ msgstr "OpenERP - 日期选择"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "包含"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "不包含"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "等于"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "不等于"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "大于"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "小于"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "属于"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "不属于"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -1223,7 +1203,7 @@ msgstr "必须在保持该记录后再使用相关的按钮！"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "未定义动作！"
 
 #
 # File: bin/widget/view/form.py, line: 165
@@ -1285,19 +1265,19 @@ msgstr "要使用日历您必须安装python-hippocanvas库。"
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--动作--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "另存为快捷方式"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "另存为过滤器"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "管理过滤器"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1305,6 +1285,9 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"有尚未保存的记录！\n"
+"\n"
+"请在排序前先保存它们！"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 #, python-format
@@ -1347,50 +1330,50 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
-msgstr ""
+msgstr "添加新节点"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
-msgstr ""
+msgstr "添加新边"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "放大图表"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "缩小图表"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "让图表适合窗口"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "按正常大小显示"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "打印图表"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "关闭当前的 %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "删除当前的 %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "编辑当前的 %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
-msgstr ""
+msgstr " - Dot 图查看器"
 
 #
 # File: bin/widget/view/form_gtk/reference.py, line: 92
@@ -1417,11 +1400,11 @@ msgstr "按钮的图标错误！"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "字段"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "对象"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
@@ -1443,15 +1426,15 @@ msgstr "翻译视图"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "保存并关闭"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "保存并新建"
 
 #
 # File: bin/widget/view/form_gtk/interface.py, line: 47
@@ -1494,22 +1477,22 @@ msgstr "删除此项"
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "上一页"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr ""
+msgstr "上一条记录"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "下一条记录"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "下一页"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 219
@@ -1521,7 +1504,7 @@ msgstr "切换"
 #: bin/widget/view/form_gtk/one2many_list.py:251
 #: bin/widget/view/form_gtk/many2many.py:106
 msgid "Choose Limit"
-msgstr ""
+msgstr "选择限制"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
@@ -1571,11 +1554,11 @@ msgstr "图片"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "没有要另存的图像！"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
@@ -1621,11 +1604,11 @@ msgstr "设置为默认"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "You can not set to the default value here !"
-msgstr ""
+msgstr "您不能在此处设置默认值！"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "Operation not permited"
-msgstr ""
+msgstr "禁止操作"
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
@@ -1726,14 +1709,9 @@ msgstr "连接错误"
 msgid "OpenERP - Login"
 msgstr "OpenERP - 登录"
 
-#
-# File: bin/openerp.glade, line: 118
-# File: bin/openerp.glade, line: 8427
-# File: bin/openerp.glade, line: 118
-# File: bin/openerp.glade, line: 8427
 #: bin/openerp.glade:116 bin/openerp.glade:6450
 msgid "Database:"
-msgstr "帐套："
+msgstr "数据库："
 
 #
 # File: bin/openerp.glade, line: 133
@@ -1774,40 +1752,25 @@ msgstr "连接...(_C)"
 msgid "_Disconnect"
 msgstr "断线（_D)"
 
-#
-# File: bin/openerp.glade, line: 300
-# File: bin/openerp.glade, line: 300
 #: bin/openerp.glade:308
 msgid "Databases"
-msgstr "帐套"
+msgstr "数据库"
 
-#
-# File: bin/openerp.glade, line: 307
-# File: bin/openerp.glade, line: 307
 #: bin/openerp.glade:315
 msgid "_New database"
-msgstr "新帐套(_N)"
+msgstr "新建数据库(_N)"
 
-#
-# File: bin/openerp.glade, line: 322
-# File: bin/openerp.glade, line: 322
 #: bin/openerp.glade:330
 msgid "_Restore database"
-msgstr "恢复帐套(_R)"
+msgstr "恢复数据库(_R)"
 
-#
-# File: bin/openerp.glade, line: 337
-# File: bin/openerp.glade, line: 337
 #: bin/openerp.glade:345
 msgid "_Backup database"
-msgstr "备份帐套(_B)"
+msgstr "备份数据库(_B)"
 
-#
-# File: bin/openerp.glade, line: 352
-# File: bin/openerp.glade, line: 352
 #: bin/openerp.glade:360
 msgid "Dro_p database"
-msgstr "删除帐套(_p)"
+msgstr "删除数据库(_p)"
 
 #: bin/openerp.glade:380
 msgid "_Download Migrations Code"
@@ -2191,7 +2154,7 @@ msgstr "帮助(_H)"
 
 #: bin/openerp.glade:1132
 msgid "Enable Debug Mode Tooltips"
-msgstr ""
+msgstr "激活调试模式提示"
 
 #
 # File: bin/openerp.glade, line: 1089
@@ -2293,7 +2256,7 @@ msgstr "日历"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
-msgstr ""
+msgstr "图表"
 
 #: bin/openerp.glade:1361
 msgid "Graph"
@@ -2357,7 +2320,7 @@ msgstr "关闭窗口"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
-msgstr ""
+msgstr "公司："
 
 #
 # File: bin/openerp.glade, line: 1448
@@ -3234,33 +3197,21 @@ msgstr "连接协议："
 msgid "Port:"
 msgstr "端口："
 
-#
-# File: bin/openerp.glade, line: 8366
-# File: bin/openerp.glade, line: 8366
 #: bin/openerp.glade:6389
 msgid "Choose a database..."
-msgstr "选择帐套..."
+msgstr "选择数据库..."
 
-#
-# File: bin/openerp.glade, line: 8381
-# File: bin/openerp.glade, line: 8381
 #: bin/openerp.glade:6404
 msgid "<b>Backup a database</b>"
-msgstr "<b> 备份帐套</b>"
+msgstr "<b> 备份数据库</b>"
 
-#
-# File: bin/openerp.glade, line: 8612
-# File: bin/openerp.glade, line: 8612
 #: bin/openerp.glade:6645
 msgid "Restore a database"
-msgstr "帐套恢复"
+msgstr "恢复数据库"
 
-#
-# File: bin/openerp.glade, line: 8625
-# File: bin/openerp.glade, line: 8625
 #: bin/openerp.glade:6658
 msgid "<b>Restore a database</b>"
-msgstr "<b>帐套数据恢复</b>"
+msgstr "<b>恢复数据库</b>"
 
 #
 # File: bin/openerp.glade, line: 8669
@@ -3269,12 +3220,9 @@ msgstr "<b>帐套数据恢复</b>"
 msgid "(must not contain any special char)"
 msgstr "（请不要包含特殊字符）"
 
-#
-# File: bin/openerp.glade, line: 8698
-# File: bin/openerp.glade, line: 8698
 #: bin/openerp.glade:6732
 msgid "New database name:"
-msgstr "新建帐套名称："
+msgstr "新数据库名称："
 
 #
 # File: bin/openerp.glade, line: 8798
@@ -3287,19 +3235,13 @@ msgstr "新建帐套名称："
 msgid "http://localhost:8069"
 msgstr "http://localhost:8069"
 
-#
-# File: bin/openerp.glade, line: 8872
-# File: bin/openerp.glade, line: 8872
 #: bin/openerp.glade:6906
 msgid "Create a new database"
-msgstr "创建新帐套"
+msgstr "创建新数据库"
 
-#
-# File: bin/openerp.glade, line: 8885
-# File: bin/openerp.glade, line: 8885
 #: bin/openerp.glade:6919
 msgid "<b>Create a new database</b>"
-msgstr "<b>创建新帐套</b>"
+msgstr "<b>创建新数据库</b>"
 
 #: bin/openerp.glade:6990
 msgid ""
@@ -3311,6 +3253,7 @@ msgstr "这是OpenERP服务器的URL地址。如果服务器安装在本计算�
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Server:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP 服务器:"
 
 #: bin/openerp.glade:7025
 msgid ""
@@ -3324,29 +3267,26 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
-msgstr ""
+msgstr "<sup><b><span foreground=\"dark green\">?</span></b></sup>超级管理员密码:"
 
 #: bin/openerp.glade:7048
 msgid "admin"
-msgstr ""
+msgstr "admin"
 
 #: bin/openerp.glade:7062
 msgid "(<i>admin</i>, by default)"
 msgstr "(缺省为<i>admin</i>)"
 
-#
-# File: bin/openerp.glade, line: 9091
-# File: bin/openerp.glade, line: 9091
 #: bin/openerp.glade:7127
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
-msgstr "输入要创建的帐套名称，名称不能包含特殊字符。"
+msgstr "输入要创建的帐套（数据库）名称，名称不能包含特殊字符。"
 
 #: bin/openerp.glade:7129
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>New Database Name:"
-msgstr ""
+msgstr "<sup><b><span foreground=\"dark green\">?</span></b></sup>新数据库名:"
 
 #
 # File: bin/openerp.glade, line: 9117
@@ -3361,30 +3301,30 @@ msgstr "选择默认语言。你也可以在安装完成后通过管理菜单安
 #: bin/openerp.glade:7156
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
-msgstr ""
+msgstr "<sup><b><span foreground=\"dark green\">?</span></b></sup>默认语言:"
 
 #: bin/openerp.glade:7169
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
-msgstr ""
+msgstr "这是将与“系统管理员”用户一同创建的新帐套的密码。"
 
 #: bin/openerp.glade:7171
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Administrator "
 "Password:"
-msgstr ""
+msgstr "<sup><b><span foreground=\"dark green\">?</span></b></sup>系统管理员密码:"
 
 #: bin/openerp.glade:7184
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
-msgstr ""
+msgstr "这是将与“系统管理员”用户一同创建的新数据库密码。其必须与上面的字段相同。"
 
 #: bin/openerp.glade:7186
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
-msgstr ""
+msgstr "<sup><b><span foreground=\"dark green\">?</span></b></sup>重复输入确认密码:"
 
 #: bin/openerp.glade:7279
 msgid ""
@@ -3397,18 +3337,15 @@ msgstr "如果想在新数据库中加入演示数据，请点选这个检查框
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
 "Data:"
-msgstr ""
+msgstr "<sup><b><span foreground=\"dark green\">?</span></b></sup>载入演示数据:"
 
 #: bin/openerp.glade:7349
 msgid "Change password"
 msgstr "更改密码"
 
-#
-# File: bin/openerp.glade, line: 9316
-# File: bin/openerp.glade, line: 9316
 #: bin/openerp.glade:7366
 msgid "<b>Change your super admin password</b>"
-msgstr "<b>修改帐套管理员密码</b>"
+msgstr "<b>修改您的超级管理员密码</b>"
 
 #
 # File: bin/openerp.glade, line: 9469
@@ -3501,11 +3438,11 @@ msgstr "月"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
-msgstr ""
+msgstr "需要作为搜索条件的字段"
 
 #: bin/openerp.glade:8289
 msgid "Conditional Operators"
-msgstr ""
+msgstr "条件操作符"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
@@ -3516,18 +3453,20 @@ msgid ""
 "AND\n"
 "OR"
 msgstr ""
+"AND\n"
+"OR"
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "删除过滤器"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
-msgstr ""
+msgstr "过滤器条目"
 
 #: bin/openerp.glade:8395
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "输入过滤器名称"
 
 #: bin/win_error.glade:40
 msgid "label"
@@ -3574,7 +3513,7 @@ msgstr ""
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
-msgstr ""
+msgstr "问题简述："
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"
