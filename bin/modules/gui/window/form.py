@@ -46,7 +46,7 @@ from widget.screen import Screen
 
 class form(object):
     def __init__(self, model, res_id=False, domain=None, view_type=None,
-            view_ids=None, window=None, context=None, name=False, help={}, limit=80,
+            view_ids=None, window=None, context=None, name=False, help={}, limit=100,
             auto_refresh=False, auto_search=True, search_view=None):
         if not view_type:
             view_type = ['form','tree']
