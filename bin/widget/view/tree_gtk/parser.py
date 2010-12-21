@@ -63,8 +63,7 @@ def sort_model(column, screen):
     group_by = screen.context.get('group_by',[])
     group_by_no_leaf = screen.context.get('group_by_no_leaf')
     screen.current_view.set_drag_and_drop(column.name == 'sequence')
-    
-    
+
     screen.current_view.expandedRows = []
     screen.current_view.widget_tree.map_expanded_rows(screen.current_view.get_expanded_rows)
     expanded = []
@@ -79,19 +78,12 @@ def sort_model(column, screen):
     if screen.type in ('many2many','one2many'):
         screen.sort_domain = [('id','in',screen.ids_get())]
     screen.search_filter()
-    
+
     if len(expanded) > 0:
         paths = screen.current_view.get_path(expanded)
         for path in paths:
             #path = screen.current_view.get_path(value)
             screen.current_view.expand_row(path)
- 
-        
-
-        
-
-      
-        
 
 class parser_tree(interface.parser_interface):
 
@@ -296,7 +288,7 @@ class Char(object):
         color = self.get_color(model)
         cell.set_property('foreground', str(color))
         align = 0
-        if self.attrs['type'] in ('float', 'integer', 'boolean'):
+        if self.attrs['type'] in ('float', 'integer', 'boolean', 'float_time'):
             align = 1
         gb = self.treeview.screen.context.get('group_by')
         cell.set_property('font-desc', None)

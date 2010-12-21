@@ -76,11 +76,9 @@ class ModelList(list):
         super(ModelList, self).__setitem__(key, value)
         if not self.lock_signal:
             self.__screen.signal('record-changed', ('record-changed', key))
-    
-
 
 class ModelRecordGroup(signal_event.signal_event):
-    def __init__(self, resource, fields, ids=[], parent=None, context={}, is_wizard=False):
+    def __init__(self, resource, fields, ids=[], parent=None, context={}, is_wizard=False, screen=None):
         super(ModelRecordGroup, self).__init__()
         self._readonly = False
         self.parent = parent
@@ -91,6 +89,7 @@ class ModelRecordGroup(signal_event.signal_event):
         self.fields = fields
         self.mfields = {}
         self.mfields_load(fields.keys(), self)
+        self.screen = screen
 
         self.models = ModelList(self)
         self.current_idx = None
@@ -102,17 +101,14 @@ class ModelRecordGroup(signal_event.signal_event):
 
         self.list_parent = False
         self.list_group = False
-        
-    def destroy(self):      
+
+    def destroy(self):
         for field in self.mfields.values():
             field.destroy()
-            
         if self.list_group:
             self.list_group.destroy()
-        
-            
         del self.mfields
-        del self.fields        
+        del self.fields
         del self.list_group
         del self.models
 
@@ -250,7 +246,7 @@ class ModelRecordGroup(signal_event.signal_event):
 
     def setContext(self, ctx):
         self._context.update(ctx)
-    
+
     def getContext(self):
         ctx = {}
         ctx.update(self._context)
@@ -347,11 +343,13 @@ class ModelRecordGroup(signal_event.signal_event):
                 if fields[f].get('widget','') == models.fields[f].get('widget',''):
                     models.fields[f].update(fields[f])
                     add_field = False
+                if f in models.mfields and fields[f].get('type','') == 'one2many':
+                    add_field = False
             if add_field:
                 models.fields[f] = fields[f]
                 models.fields[f]['name'] = f
                 to_add.append(f)
-                
+
         self.mfields_load(to_add, models)
         for fname in to_add:
             for m in models.models:

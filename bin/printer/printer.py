@@ -186,7 +186,22 @@ class Printer(object):
 printer = Printer()
 
 def print_linux_filename(filename):
-    common.message(_('Linux Automatic Printing not implemented.\nUse preview option !'))
+    import gtkunixprint
+
+    def print_cb(printjob, data, errormsg):
+        if errormsg:
+            common.message(_('Error occurred while printing:\n%s') % errormsg)
+
+    pud = gtkunixprint.PrintUnixDialog(title=_('Print Report'))
+    response = pud.run()
+    if response == gtk.RESPONSE_OK:
+        printer = pud.get_selected_printer()
+        settings = pud.get_settings()
+        setup = pud.get_page_setup()
+        printjob = gtkunixprint.PrintJob('Printing %s' % filename, printer, settings, setup)
+        printjob.set_source_file(filename)
+        printjob.send(print_cb)
+    pud.destroy()
 
 def print_w32_filename(filename):
     import win32api

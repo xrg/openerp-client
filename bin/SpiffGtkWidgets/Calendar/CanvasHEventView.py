@@ -1,19 +1,18 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-# Copyright (C) 2008 Samuel Abels <http://debain.org>
+# Copyright (C) 2008-2011 Samuel Abels
 #
 # This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License version 2, as
-# published by the Free Software Foundation.
+# it under the terms of the GNU Affero General Public License
+# version 3 as published by the Free Software Foundation.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA     
+# along with this program. If not, see <http://www.gnu.org/licenses/>
 #
 ##############################################################################
 
@@ -92,13 +91,13 @@ class CanvasHEventView(CanvasEventView, hippo.CanvasItem):
                        event_off_days,
                        event_off_days + event_width_days,
                        len(self.event_items))
-        item.set_text(event.caption)
+        item.set_text(event.caption, event.description)
         item.set_property('color', color.to_int(event.bg_color))
         if self.show_normal and not util.same_day(event.start, event.end):
             item.set_property('color', color.to_int(event.bg_color))
         elif not event.all_day:
             time = self._format_time(event)
-            item.set_text(time)
+            item.set_text(time, event.description)
             item.set_text_properties(xalign = hippo.ALIGNMENT_START)
         if event.text_color is not None:
             item.set_text_color(event.text_color)
