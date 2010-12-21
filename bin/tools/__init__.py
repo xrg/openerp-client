@@ -20,6 +20,7 @@
 ##############################################################################
 
 import datetime
+import operator
 import logging
 import locale
 import os
@@ -80,38 +81,81 @@ def node_attributes(node):
     return attrs
 
 #FIXME use spaces
-def calc_condition(self,model,con):
-    if model and (con[0] in model.mgroup.fields):
-        val = model[con[0]].get(model)
-        if con[1]=="=" or con[1]=="==":
-            if val==con[2]:
-                return True
-        elif con[1]=="!=" or con[1]=="<>":
-            if val!=con[2]:
-                return True
-        elif con[1]=="<":
-            if val<con[2]:
-                return True
-        elif con[1]==">":
-            if val>con[2]:
-                return True
-        elif con[1]=="<=":
-            if val<=con[2]:
-                return True
-        elif con[1]==">=":
-            if val>=con[2]:
-                return True
-        elif con[1].lower()=="in":
-            for cond in con[2]:
-                if val == cond:
-                    return True
-        elif con[1].lower()=="not in":
-            for cond in con[2]:
-                if val == cond:
-                    return False
-            return True
-        return False
+def calc_condition(self, model, cond):
+    cond_main = cond[:]
+    try:
+        return ConditionExpr(cond).eval(model)
+    except:
+        import common
+        common.error('Wrong attrs Implementation!','You have wrongly specified conditions in attrs %s' %(cond_main,))
 
+class ConditionExpr(object):
+
+    OPERAND_MAPPER = {'<>': '!=', '==': '='}
+
+    def __init__(self, condition):
+        self.cond = condition
+
+    def eval(self, model):
+        if model:
+            eval_stack = [] # Stack used for evaluation
+            ops = ['=','!=','<','>','<=','>=','in','not in','<>','=='] 
+            
+            def is_operand(cond): # Method to check the Operands
+                if (len(cond)==3 and cond[1] in ops) or isinstance(cond,bool):
+                    return True
+                else:
+                    return False
+                
+            def evaluate(cond): # Method to evaluate the conditions
+                if isinstance(cond,bool):
+                    return cond
+                left, oper, right = cond
+                oper = self.OPERAND_MAPPER.get(oper.lower(), oper)
+                if oper == '=':
+                    res = operator.eq(model[left].get(model),right)
+                elif oper == '!=':
+                    res = operator.ne(model[left].get(model),right)
+                elif oper == '<':
+                    res = operator.lt(model[left].get(model),right)
+                elif oper == '>':
+                    res = operator.gt(model[left].get(model),right)
+                elif oper == '<=':
+                    res = operator.le(model[left].get(model),right)
+                elif oper == '>=':
+                    res = operator.ge(model[left].get(model),right)
+                elif oper == 'in':
+                    res = operator.contains(right, model[left].get(model))
+                elif oper == 'not in':
+                    res = operator.contains(right, model[left].get(model))
+                    res = operator.not_(res)
+                return res
+
+            #copy the list
+            eval_stack = self.cond[:]
+            
+            eval_stack.reverse()
+            while len(eval_stack) > 1:
+                condition = eval_stack.pop()
+                if is_operand(condition): # If operand Push on Stack
+                    eval_stack.append(condition)
+                    eval_stack.append('&') #by default it's a and
+                elif condition in ['|','&','!']: # If operator pop necessary operands from stack and evaluate and store the result back to stack
+                   
+                    if condition in ('|','&'):
+                        elem_1 = eval_stack.pop()
+                        elem_2 = eval_stack.pop()
+                        if condition=='|':
+                            result = any((evaluate(elem_1), evaluate(elem_2)))
+                        else:
+                            result = all((evaluate(elem_1), evaluate(elem_2)))
+                    elif condition == '!':
+                        elem_1 = eval_stack.pop()
+                        result =  not evaluate(elem_1)
+                    eval_stack.append(result)            
+            res = evaluate(eval_stack.pop()) # evaluate the last element
+            return res
+        
 def call_log(fun):
     """Debug decorator
        TODO: Add optionnal execution time

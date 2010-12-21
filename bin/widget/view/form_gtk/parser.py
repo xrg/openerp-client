@@ -152,9 +152,7 @@ class StateAwareWidget(object):
         attrs_changes = eval(sa.get('attrs',"{}"),{'uid':rpc.session.uid})
         for k,v in attrs_changes.items():
             result = True
-            for condition in v:
-                result = result and tools.calc_condition(self,model,condition)
-
+            result = result and tools.calc_condition(self, model, v)
             if k == 'invisible':
                 func = ['show', 'hide'][bool(result)]
                 getattr(self.widget, func)()
@@ -214,7 +212,7 @@ class _container(object):
 
     def create_label(self, name, markup=False, align=1.0, wrap=False,
                      angle=None, width=None, fname=None, help=None, detail_tooltip=False):
-
+        
         label = gtk.Label(name)
         eb = gtk.EventBox()
         eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
@@ -222,12 +220,11 @@ class _container(object):
             label.set_use_markup(True)
         self.trans_box_label.append((eb, name, fname))
         eb.add(label)
-
+        
         def size_allocate(label, allocation):
             label.set_size_request( allocation.width - 2, -1 )
         if fname is None and name and len(name) > 50:
             label.connect( "size-allocate", size_allocate )
-
         uid = rpc.session.uid
         tooltip = ''
         if help:
@@ -399,13 +396,13 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
-
+                    
                 if 'default_focus' in attrs and not self.default_focus_button:
                     attrs['focus_button'] = attrs['default_focus']
                     self.default_focus_button = True
-
+              
                 button = Button(attrs)
-
+                
                 states = [e for e in attrs.get('states','').split(',') if e]
                 saw_list.append(StateAwareWidget(button, states=states))
                 container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)))

@@ -144,9 +144,6 @@ class dialog(object):
         self.screen.signal_unconnect(self)
         self.window.present()
         self.dia.destroy()
-    
-    
-
 
 class one2many_list(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
@@ -276,7 +273,7 @@ class one2many_list(interface.widget_interface):
 
     def destroy(self):
         self.screen.destroy()
-        
+
     def _on_activate(self, screen, *args):
         self._sig_edit()
 
