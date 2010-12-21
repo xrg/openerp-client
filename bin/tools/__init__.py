@@ -88,6 +88,8 @@ def calc_condition(self, model, cond):
     except:
         import common
         common.error('Wrong attrs Implementation!','You have wrongly specified conditions in attrs %s' %(cond_main,))
+    
+    
 
 class ConditionExpr(object):
 
@@ -110,7 +112,13 @@ class ConditionExpr(object):
             def evaluate(cond): # Method to evaluate the conditions
                 if isinstance(cond,bool):
                     return cond
-                left, oper, right = cond
+                
+                
+                left, oper, right = cond    
+                if not model or not left in model.mgroup.fields:  #check that the field exist
+                    return False
+                    
+                
                 oper = self.OPERAND_MAPPER.get(oper.lower(), oper)
                 if oper == '=':
                     res = operator.eq(model[left].get(model),right)
