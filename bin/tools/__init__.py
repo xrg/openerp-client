@@ -131,12 +131,17 @@ class ConditionExpr(object):
                     res = operator.not_(res)
                 return res
 
-            orig_stack = self.cond
-            orig_stack.reverse()
-            for condition in orig_stack:
+            #copy the list
+            eval_stack = self.cond[:]
+            
+            eval_stack.reverse()
+            while len(eval_stack) > 1:
+                condition = eval_stack.pop()
                 if is_operand(condition): # If operand Push on Stack
                     eval_stack.append(condition)
+                    eval_stack.append('&') #by default it's a and
                 elif condition in ['|','&','!']: # If operator pop necessary operands from stack and evaluate and store the result back to stack
+                   
                     if condition in ('|','&'):
                         elem_1 = eval_stack.pop()
                         elem_2 = eval_stack.pop()
@@ -147,9 +152,8 @@ class ConditionExpr(object):
                     elif condition == '!':
                         elem_1 = eval_stack.pop()
                         result =  not evaluate(elem_1)
-                    eval_stack.append(result)
-                    
-            res = all(evaluate(expr) for expr in eval_stack) # evaluate all the remaining elments if any
+                    eval_stack.append(result)            
+            res = evaluate(eval_stack.pop()) # evaluate the last element
             return res
         
 def call_log(fun):
