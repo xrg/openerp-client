@@ -53,7 +53,7 @@ class field_record(object):
         if isinstance(self.name, (list,tuple)):
             return self.name[0]
         return self.name
-    
+
     def get_state_attrs(self, *args, **argv):
         return {}
 
@@ -119,8 +119,8 @@ class list_record(object):
         self.sort_order = sort_order
         self.lst = []
         self.load()
-        
-    def destroy(self):   
+
+    def destroy(self):
         del self.context
         del self.domain
         del self.loaded
@@ -131,7 +131,7 @@ class list_record(object):
         record = { group_field:'This group is now empty ! Please refresh the list.'}
         rec = group_record(record, ctx=self.context, domain=self.domain, mgroup=self.mgroup, child = False)
         self.add(rec)
-        
+
     def get_order(self, gb, sort_order):
         """
             @param gb : grouby parameter for read_group call
@@ -141,10 +141,10 @@ class list_record(object):
         if sort_order:
             if(isinstance(gb, (tuple, list))):
                 gb = gb[0]
-                
+
             if not sort_order.startswith(gb):
                 return None
-            
+
         return sort_order
 
     def load(self):
@@ -328,6 +328,7 @@ class ViewList(parser_view):
         super(ViewList, self).__init__(window, screen, widget, children,
                 buttons, toolbar, submenu=submenu)
         self.store = None
+        self.window = window
         self.view_type = 'tree'
         self.model_add_new = True
         self.widget = gtk.VBox()
@@ -497,8 +498,7 @@ class ViewList(parser_view):
             attrs_changes = eval(path.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
             for k,v in attrs_changes.items():
                 result = True
-                for condition in v:
-                    result = tools.calc_condition(self,model,condition)
+                result = tools.calc_condition(self,model,v)
                 if result:
                     if k=='invisible':
                         return False
@@ -565,7 +565,7 @@ class ViewList(parser_view):
                             if current_active_model.validate():
                                 id = self.screen.save_current()
                             else:
-                               common.warning(_('Invalid form, correct red fields !'), _('Error !') )
+                               common.warning(_('Invalid form, correct red fields !'), _('Error !'),parent=self.window)
                                self.widget_tree.warn('misc-message', _('Invalid form, correct red fields !'), "red")
                                self.screen.display()
                                return False
@@ -650,13 +650,10 @@ class ViewList(parser_view):
         """
         Destroy the listmodel
         """
-    
         self.widget_tree.destroy()
         del self.screen
         del self.widget_tree
         del self.widget
-        
- 
 
     def __sig_switch(self, treeview, *args):
         if not isinstance(self.screen.current_model, group_record):
@@ -860,10 +857,7 @@ class ViewList(parser_view):
             if col.name in self.screen.context.get('group_by',[]):
                 value = False
             col.set_visible(not value)
-         
-    
-    
-        
+
     def get_id(self, path):
         return self.store.on_get_iter(path).value
 
@@ -877,7 +871,7 @@ class ViewList(parser_view):
         """
             @param first_nodes : List of first child of every parent node
             @param path_list : list of path of first child
-            
+
         """
         assert len(path_list) == len(first_nodes)
         visited_node = Queue.Queue()
@@ -886,15 +880,15 @@ class ViewList(parser_view):
             path = path_list[i]
             node = first_nodes[i]
             self.add_next(node, q, path)
-        
+
         res = self.process_queue(q, values, visited_node, final_path)
         if(res):
             return res
-        
-        
+
+
         (nodes_list, new_path_list) = self.add_first_child(visited_node)
         return self.compute_level(nodes_list, values, new_path_list, final_path)
-        
+
     def add_first_child(self, visited_node):
         nodes_list = []
         paths_list = []
@@ -904,16 +898,16 @@ class ViewList(parser_view):
                 path.append(0)
                 nodes_list.append(self.store.on_iter_children(node))
                 paths_list.append(list(path))
-            
+
         return (nodes_list, paths_list)
-        
+
     def add_next(self, node, q, path):
         q.put((node, list(path)))
         next = self.store.on_iter_next(node)
         if(next):
             path.append(path.pop() + 1) #We add 1 to the last level of the path
             self.add_next(next, q, list(path))
-    
+
     def process_queue(self, q, value, visited_nodes, final_path):
         while(not q.empty()):
             (node, path) = q.get()
@@ -927,7 +921,7 @@ class ViewList(parser_view):
             if(node.value == v):
                 values.remove(v)
                 final_path.append(tuple(path))
-                
+
         if len(values) < 1:
             return final_path
 

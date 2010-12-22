@@ -147,7 +147,7 @@ def execute(action, datas, state='init', parent=None, context=None):
                     try:
                         raise self.exception
                     except socket.error, e:
-                        common.message(str(e), title=_('Connection refused !'), type=gtk.MESSAGE_ERROR)
+                        common.message(str(e), title=_('Connection refused !'), type=gtk.MESSAGE_ERROR, parent=self.parent)
                     except xmlrpclib.Fault, err:
                         a = rpc_exception(err.faultCode, err.faultString)
                         if a.type in ('warning', 'UserError'):
@@ -157,13 +157,13 @@ def execute(action, datas, state='init', parent=None, context=None):
                                         del args[4][CONCURRENCY_CHECK_FIELD]
                                     return self.rpc_exec_auth(obj, method, *args)
                             else:
-                                common.warning(a.data, a.message)
+                                common.warning(a.data, a.message, parent=self.parent)
                         else:
                             common.error(_('Application Error'), err.faultCode, err.faultString)
                     except tiny_socket.Myexception, err:
                         a = rpc_exception(err.faultCode, err.faultString)
                         if a.type in ('warning', 'UserError'):
-                            common.warning(a.data, a.message)
+                            common.warning(a.data, a.message, parent=self.parent)
                         else:
                             common.error(_('Application Error'), err.faultCode, err.faultString)
                     except Exception, e:

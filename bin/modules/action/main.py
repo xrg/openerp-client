@@ -98,7 +98,7 @@ class main(service.Service):
                  datas['search_view'] = str(rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', isinstance(datas['search_view_id'], (tuple, list)) and datas['search_view_id'][0] or datas['search_view_id'], 'search', context))
 
             if datas['limit'] is None or datas['limit'] == 0:
-                datas['limit'] = 80
+                datas['limit'] = 100
 
             view_ids=False
             if action.get('views', []):

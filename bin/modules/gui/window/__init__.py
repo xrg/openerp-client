@@ -36,7 +36,7 @@ class window(service.Service):
         service.Service.__init__(self, name)
     def create(self, view_ids, model, res_id=False, domain=None,
             view_type='form', window=None, context=None, mode=None, name=False,help={},
-            limit=80, auto_refresh=False, auto_search=True, search_view=None):
+            limit=100, auto_refresh=False, auto_search=True, search_view=None):
         if context is None:
             context = {}
         context.update(rpc.session.context)

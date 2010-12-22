@@ -50,7 +50,7 @@ class Screen(signal_event.signal_event):
             parent=None, context=None, views_preload=None, tree_saves=True,
             domain=None, create_new=False, row_activate=None, hastoolbar=False,
             hassubmenu=False,default_get=None, show_search=False, window=None,
-            limit=80, readonly=False, auto_search=True, is_wizard=False, search_view=None,win_search=False):
+            limit=100, readonly=False, auto_search=True, is_wizard=False, search_view=None,win_search=False):
         if view_ids is None:
             view_ids = []
         if view_type is None:
@@ -101,7 +101,7 @@ class Screen(signal_event.signal_event):
         self.window=window
         self.is_wizard = is_wizard
         self.search_view = eval(search_view)
-        models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context, is_wizard=is_wizard)
+        models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context, is_wizard=is_wizard, screen=self)
         self.models_set(models)
         self.current_model = None
         self.screen_container = screen_container(self.win_search)
@@ -466,31 +466,26 @@ class Screen(signal_event.signal_event):
     current_model = property(_get_current_model, _set_current_model)
 
     def destroy(self):
-       
-        
         for view in self.views:
             view.destroy()
-                    
-        if hasattr(self, 'filter_widget') and self.filter_widget:        
+        if hasattr(self, 'filter_widget') and self.filter_widget:
             self.filter_widget.destroy()
             del self.filter_widget
-        
-        self.widget.destroy()            
-        self.models.signal_unconnect(self)
-        self.models.destroy()        
 
-        
-        
+        self.widget.destroy()
+        self.models.signal_unconnect(self)
+        self.models.destroy()
+
         del self.models
         del self.widget
-        
+
         del self.views
         del self.fields
         del self.view_fields
         del self.search_view
         del self._Screen__current_model
         del self._Screen__current_view
-         
+
         del self.action_domain
         del self.auto_search
         del self.create_new
@@ -501,8 +496,7 @@ class Screen(signal_event.signal_event):
         del self.latest_search
         del self.offset
         del self.old_ctx
-  
-     
+
 
         del self.row_activate
         del self.screen_container
@@ -513,13 +507,10 @@ class Screen(signal_event.signal_event):
         del self.view_ids
         del self.view_to_load
         del self.views_preload
-        
+
         del self.win_search
-        del self.win_search_callback       
+        del self.win_search_callback
         del self.window
-
-        
-
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
@@ -829,8 +820,8 @@ class Screen(signal_event.signal_event):
                 else:
                     self.screen_container.help_frame.show_all()
             self.search_active(
-                    active=self.show_search and vt in ('tree', 'graph', 'calendar'),
-                    show_search=self.show_search and vt in ('tree', 'graph','calendar'),
+                    active=self.show_search and vt in ('tree', 'graph'),
+                    show_search=self.show_search and vt in ('tree', 'graph'),
             )
 
     def groupby_next(self):

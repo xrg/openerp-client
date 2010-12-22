@@ -149,7 +149,6 @@ class DatabaseDialog(gtk.Dialog):
         self.result = None
         self.error = False
         self.exception = None
-
         def go():
             try:
                 self.on_response_accept()
@@ -189,9 +188,9 @@ class DatabaseDialog(gtk.Dialog):
             except (tiny_socket.Myexception, xmlrpclib.Fault), err:
                 a = rpc_exception(err.faultCode, err.faultString)
                 if a.type in ('warning', 'UserError'):
-                    common.warning(a.data, a.message)
+                    common.warning(a.data, a.message, parent=self)
                 elif a.type == 'AccessDenied':
-                    common.warning(_('Bad Super Administrator Password'), self.get_title())
+                    common.warning(_('Bad Super Administrator Password'), self.get_title(), parent=self)
                 else:
                     common.error(_('Application Error'), err.faultCode, err.faultString, disconnected_mode=True)
             except Exception, e:
@@ -442,7 +441,7 @@ def _server_ask(server_widget, parent=None):
     res = win.run()
     if res == gtk.RESPONSE_OK:
         protocol = protocol[protocol_widget.get_active_text()]
-        url = '%s%s:%s' % (protocol, host_widget.get_text(), port_widget.get_text())
+        url = '%s%s:%s' % ((protocol).strip(), (host_widget.get_text()).strip(), (port_widget.get_text()).strip())
         server_widget.set_text(url)
         result = url
     parent.present()
@@ -453,7 +452,7 @@ def _server_ask(server_widget, parent=None):
 class db_login(object):
     def __init__(self):
         self.win_gl = glade.XML(common.terp_path("openerp.glade"),"win_login",gettext.textdomain())
-
+        self.win = self.win_gl.get_widget('win_login')
 
     def refreshlist(self, widget, db_widget, entry_db, label, url, butconnect=False):
 
@@ -471,7 +470,7 @@ class db_login(object):
         if _refresh_dblist(db_widget, entry_db, label, butconnect, url):
             is_same_version, server_version, client_version = check_server_version(url)
             if not is_same_version:
-                common.warning(_('The versions of the server (%s) and the client (%s) missmatch. The client may not work properly. Use it at your own risks.') % (server_version, client_version,))
+                common.warning(_('The versions of the server (%s) and the client (%s) missmatch. The client may not work properly. Use it at your own risks.') % (server_version, client_version,),parent=self.win)
 
     def refreshlist_ask(self,widget, server_widget, db_widget, entry_db, label, butconnect = False, url=False, parent=None):
         url = _server_ask(server_widget, parent) or url
@@ -607,10 +606,10 @@ class db_create(object):
             res = win.run()
             db_name = self.db_widget.get_text().lower()
             if (res==gtk.RESPONSE_OK) and (db_name in RESERVED_KEYWORDS):
-                common.warning(_("Sorry,'" +db_name + "' cannot be the name of the database,it's a Reserved Keyword."), _('Bad database name !'), parent=parent)
+                common.warning(_("Sorry,'" +db_name + "' cannot be the name of the database,it's a Reserved Keyword."), _('Bad database name !'), parent=win)
                 continue
             if (res==gtk.RESPONSE_OK) and ((not db_name) or (not re.match('^[a-zA-Z0-9][a-zA-Z0-9_]+$', db_name))):
-                common.warning(_('The database name must contain only normal characters or "_".\nYou must avoid all accents, space or special characters.'), _('Bad database name !'), parent=parent)
+                common.warning(_('The database name must contain only normal characters or "_".\nYou must avoid all accents, space or special characters.'), _('Bad database name !'), parent=win)
 
             else:
                 break
@@ -644,11 +643,11 @@ class db_create(object):
                 self.terp_main.glade.get_widget('plugins').set_sensitive(True)
             except Exception, e:
                 if e.args == ('DbExist',):
-                    common.warning(_("Could not create database."),_('Database already exists !'))
+                    common.warning(_("Could not create database."),_('Database already exists !'), parent=parent)
                 elif (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
-                    common.warning(_('Bad database administrator password !'), _("Could not create database."))
+                    common.warning(_('Bad database administrator password !'), _("Could not create database."), parent=parent)
                 else:
-                    common.warning(_("Could not create database."),_('Error during database creation !'))
+                    common.warning(_("Could not create database."),_('Error during database creation !'), parent=parent)
 
     def progress_timeout(self, pbar, url, passwd, id, win, dbname, parent=None):
         try:
@@ -687,7 +686,7 @@ class db_create(object):
 
 class terp_main(service.Service):
     def __init__(self, name='gui.main', audience='gui.*'):
-     
+
         service.Service.__init__(self, name, audience)
         self.exportMethod(self.win_add)
 
@@ -928,7 +927,7 @@ class terp_main(service.Service):
             self.sb_company.push(id, '')
         return True
 
-    def sig_win_close(self, *args):        
+    def sig_win_close(self, *args):
         if len(args) >= 2:
             button = args[1].button
             if (isinstance(args[0], gtk.Button) and button in [1,2]) \
@@ -1174,8 +1173,10 @@ class terp_main(service.Service):
         return act_id
 
     def sig_home_new(self, widget=None, quiet=True, except_id=False):
-        return self.sig_win_new(widget, type='action_id', quiet=quiet,
+        open_menu = self.sig_win_new(widget, type='action_id', quiet=quiet,
                 except_id=except_id)
+        if not open_menu and widget:
+            self.sig_win_menu()
 
     def sig_plugin_execute(self, widget):
         import plugins
@@ -1299,10 +1300,10 @@ class terp_main(service.Service):
         else:
             pn = self.notebook.get_current_page()
         if pn != -1:
-            
+
             self.notebook.disconnect(self.sig_id)
             page = self.pages.pop(pn)
-            
+
             self.notebook.remove_page(pn)
             self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
@@ -1346,7 +1347,7 @@ class terp_main(service.Service):
                     self._update_attachment_button(wid)
             if button_name=='but_close' and res:
                 self._win_del(page_num)
-        
+
 
     def _sig_page_changed(self, widget=None, *args):
         self.last_page = self.current_page

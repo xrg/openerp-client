@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -36,7 +36,7 @@ import service
 #
 # TODO: make it works with references
 #
-def import_csv(csv_data, f, model, fields, context=None):
+def import_csv(csv_data, f, model, fields, context=None, parent=None):
     fname = csv_data['fname']
     content = file(fname,'rb').read()
     input=cStringIO.StringIO(content)
@@ -48,14 +48,14 @@ def import_csv(csv_data, f, model, fields, context=None):
             continue
         datas.append(map(lambda x:x.decode(csv_data['combo']).encode('utf-8'), line))
     if not datas:
-        common.warning(_('The file is empty !'), _('Importation !'))
+        common.warning(_('The file is empty !'), _('Importation !'), parent=parent)
         return False
     try:
         res = rpc.session.rpc_exec_auth('/object', 'execute', model, 'import_data', f, datas, 'init', '', False, context)
     except Exception, e:
-        common.warning(str(e), _('XML-RPC error !'))
+        common.warning(str(e), _('XML-RPC error !'), parent=parent)
         return False
-    result = res[0]    
+    result = res[0]
     if result>=0:
         if result == 1:
             common.message(_('Imported one object !'))
@@ -166,7 +166,7 @@ class win_import(object):
         try:
             data = csv.reader(file(fname), quotechar=csvdel or '"', delimiter=csvsep)
         except:
-            common.warning(_('Error opening .CSV file'), _('Input Error.'))
+            common.warning(_('Error opening .CSV file'), _('Input Error.'), parent=self.win)
             return True
         self.sig_unsel_all()
         word=''
@@ -187,7 +187,7 @@ class win_import(object):
                         raise Exception(_("You cannot import this field %s, because we cannot auto-detect it"))
                 break
         except:
-            common.warning(_('Error processing your first line of the file.\nField %s is unknown !') % (word,), _('Import Error.'))
+            common.warning(_('Error processing your first line of the file.\nField %s is unknown !') % (word,), _('Import Error.'), parent=self.win)
         return True
 
     def sig_sel_all(self, widget=None):
@@ -218,7 +218,7 @@ class win_import(object):
             button = self.win.run()
             if button == gtk.RESPONSE_OK:
                 if not len(self.model2):
-                    common.warning(_("You have not selected any fields to import"))
+                    common.warning(_("You have not selected any fields to import"), parent=self.win)
                     continue
 
                 fields = []
@@ -237,17 +237,17 @@ class win_import(object):
                     'combo': self.glade.get_widget('import_csv_combo').get_active_text() or 'UTF-8'
                 }
                 self.parent.present()
-                self.win.destroy()                
+                self.win.destroy()
                 if csv['fname']:
                     if self.invert:
                         inverted = []
-                        for f in fields:  
+                        for f in fields:
                             for key, value in self.fields_invert.items():
                                 if key.encode('utf8') == f:
                                     inverted.append(value)
-                        return import_csv(csv, inverted, self.model, self.fields_invert, context=self.context)
+                        return import_csv(csv, inverted, self.model, self.fields_invert, context=self.context, parent=self.win)
                     else:
-                        return import_csv(csv, fields, self.model, self.fields, context=self.context)
+                        return import_csv(csv, fields, self.model, self.fields, context=self.context, parent=self.win)
                 return False
             else:
                 self.parent.present()

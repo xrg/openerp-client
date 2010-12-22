@@ -353,9 +353,7 @@ class ViewForm(parser_view):
                             cond=v[i][0],v[i][1],v[i][2][0]
                             attrs_changes[k][i]=cond
         for k,v in attrs_changes.items():
-            result = True
-            for condition in v:
-                result = result and tools.calc_condition(self,model,condition)
+            result = tools.calc_condition(self, model, v)
             if result:
                 if k=='invisible':
                     obj.hide()

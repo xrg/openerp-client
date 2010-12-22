@@ -53,10 +53,10 @@ class CharField(object):
         self.name = attrs['name']
         self.internal = False
         self.default_attrs = {}
-        
-    def destroy(self):        
+
+    def destroy(self):
         del self.parent
-    
+
     def sig_changed(self, model):
         if self.get_state_attrs(model).get('readonly', False):
             return
@@ -143,8 +143,7 @@ class CharField(object):
                             attrs_changes[k][i]=cond
         for k,v in attrs_changes.items():
             result = True
-            for condition in v:
-                result = result and tools.calc_condition(self,model,condition)
+            result = tools.calc_condition(self, model, v)
             if result:
                self.get_state_attrs(model)[k]=True
 
@@ -167,7 +166,7 @@ class CharField(object):
             model.state_attrs[self.name] = self.attrs.copy()
         return model.state_attrs[self.name]
 
-class BinaryField(CharField):    
+class BinaryField(CharField):
     def __check_model(self, model):
         assert self.name in model.mgroup.mfields
 
@@ -244,7 +243,7 @@ class SelectionField(CharField):
         if value in [sel[0] for sel in self.attrs['selection']]:
             super(SelectionField, self).set(model, value, test_state, modified)
 
-class FloatField(CharField):    
+class FloatField(CharField):
     def validate(self, model):
         self.get_state_attrs(model)['valid'] = True
         return True
@@ -259,7 +258,7 @@ class FloatField(CharField):
                 self.sig_changed(model)
                 model.signal('record-changed', model)
 
-class IntegerField(CharField):        
+class IntegerField(CharField):
     def get(self, model, check_load=True, readonly=True, modified=False):
         return model.value.get(self.name, 0) or 0
 
@@ -284,7 +283,7 @@ class M2OField(CharField):
     '''
     internal = (id, name)
     '''
-    
+
     def create(self, model):
         return False
 
@@ -329,7 +328,7 @@ class M2MField(CharField):
     def __init__(self, parent, attrs):
         super(M2MField, self).__init__(parent, attrs)
         self.limit = DEFAULT_PAGER_LIMIT
-        
+
     def create(self, model):
         return []
 
@@ -374,9 +373,6 @@ class O2MField(CharField):
         super(O2MField, self).__init__(parent, attrs)
         self.context={}
         self.limit = DEFAULT_PAGER_LIMIT
-        
-  
-        
 
     def create(self, model):
         from widget.model.group import ModelRecordGroup
@@ -465,6 +461,16 @@ class O2MField(CharField):
         return ok
 
 class ReferenceField(CharField):
+
+    def validate(self, model):
+        ok = True
+        if bool(self.get_state_attrs(model).get('required', 0)):
+            model_name, (id, name) = value = model.value[self.name]
+            if not value or int(id) < 1:
+                ok = False
+        self.get_state_attrs(model)['valid'] = ok
+        return ok
+
     def get_client(self, model):
         if model.value[self.name]:
             return model.value[self.name]
@@ -503,8 +509,6 @@ class ReferenceField(CharField):
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
-            
-    
 
 TYPES = {
     'char' : CharField,

@@ -129,7 +129,7 @@ class ViewCalendar(object):
         self.glade.signal_connect('on_but_forward_clicked', self._back_forward, 1)
         self.glade.signal_connect('on_but_back_clicked', self._back_forward, -1)
         self.glade.signal_connect('on_but_today_clicked', self._today)
-        self.glade.signal_connect('on_calendar_small_day_selected_double_click', self._change_small)
+        self.glade.signal_connect('on_calendar_small_day_selected_double_click', self._change_small, False,False)
         self.glade.signal_connect('on_button_day_clicked', self._change_view, 'day')
         self.glade.signal_connect('on_button_week_clicked', self._change_view, 'week')
         self.glade.signal_connect('on_button_month_clicked', self._change_view, 'month')
@@ -231,7 +231,7 @@ class ViewCalendar(object):
         self.display(None)
 
         # if action = double click
-        if hippo_event.button == 1:
+        if hippo_event and hippo_event.button == 1:
             if hippo_event.count == 1: # simple clic
                 # simply display new current day
                 return

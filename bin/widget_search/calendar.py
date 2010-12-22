@@ -225,6 +225,13 @@ class datetime(wid_int.wid_int):
         if event.keyval == gtk.keysyms.F2:
             self.cal_open(widget, event, dest, parent)
             return True
+    
+    def get_value(self, entry, timezone=True):
+        str = entry.get_text()
+        if str=='':
+            return False
+        return tools.datetime_util.local_to_server_timestamp(str[:19], self.format, DHM_FORMAT,
+                        tz_offset=timezone, ignore_unparsable_time=False)
 
     def _value_get(self):
         res = []
@@ -244,12 +251,32 @@ class datetime(wid_int.wid_int):
 
     def grab_focus(self):
         return self.entry1.grab_focus()
+    
+    def set_datetime(self, dt_val, entry, timezone=True):
+        if not dt_val:
+            entry.clear()
+        else:
+            t = tools.datetime_util.server_to_local_timestamp(dt_val[:19],
+                    DHM_FORMAT, self.format, tz_offset=timezone)
+            if len(t) > entry.get_width_chars():
+                entry.set_width_chars(len(t))
+            entry.set_text(t)
+        return True
 
     def cal_open(self, widget, event, dest, parent=None):
         win = gtk.Dialog(_('OpenERP - Date selection'), parent,
                 gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
                 (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                 gtk.STOCK_OK, gtk.RESPONSE_OK))
+
+        hbox = gtk.HBox()
+        hbox.pack_start(gtk.Label(_('Hour:')), expand=False, fill=False)
+        hour = gtk.SpinButton(gtk.Adjustment(0, 0, 23, 1, 5), 1, 0)
+        hbox.pack_start(hour, expand=True, fill=True)
+        hbox.pack_start(gtk.Label(_('Minute:')), expand=False, fill=False)
+        minute = gtk.SpinButton(gtk.Adjustment(0, 0, 59, 1, 10), 1, 0)
+        hbox.pack_start(minute, expand=True, fill=True)
+        win.vbox.pack_start(hbox, expand=False, fill=True)
 
         cal = gtk.Calendar()
         cal.display_options(gtk.CALENDAR_SHOW_HEADING|gtk.CALENDAR_SHOW_DAY_NAMES|gtk.CALENDAR_SHOW_WEEK_NUMBERS)
@@ -258,18 +285,35 @@ class datetime(wid_int.wid_int):
         win.show_all()
 
         try:
-            val = self._date_get(dest.get_text())
+            val = self.get_value(dest, timezone=False)
             if val:
+                hour.set_value(int(val[11:13]))
+                minute.set_value(int(val[-5:-3]))
                 cal.select_month(int(val[5:7])-1, int(val[0:4]))
                 cal.select_day(int(val[8:10]))
+            elif dest == self.entry1:
+                hour.set_value(0)
+                minute.set_value(0)
+            elif dest == self.entry2:
+                hour.set_value(23)
+                minute.set_value(59)
         except ValueError:
             pass
-
         response = win.run()
         if response == gtk.RESPONSE_OK:
-            year, month, day = cal.get_date()
-            dt = DT.date(year, month+1, day)
-            dest.set_text(dt.strftime(self.format))
+            hr = int(hour.get_value())
+            mi = int(minute.get_value())
+            dt = cal.get_date()
+            month = int(dt[1])+1
+            day = int(dt[2])
+            date = DT.datetime(dt[0], month, day, hr, mi)
+            try:
+                value = date.strftime(DHM_FORMAT)
+            except ValueError:
+                common.message(_('Invalid datetime value! Year must be greater than 1899 !'))
+            else:
+                self.set_datetime(value, dest, timezone=False)
+        
         win.destroy()
 
     def clear(self):

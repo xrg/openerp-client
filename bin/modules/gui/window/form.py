@@ -46,7 +46,7 @@ from widget.screen import Screen
 
 class form(object):
     def __init__(self, model, res_id=False, domain=None, view_type=None,
-            view_ids=None, window=None, context=None, name=False, help={}, limit=80,
+            view_ids=None, window=None, context=None, name=False, help={}, limit=100,
             auto_refresh=False, auto_search=True, search_view=None):
         if not view_type:
             view_type = ['form','tree']
@@ -196,9 +196,9 @@ class form(object):
             self.get_resource(widget)
 
     def destroy(self):
-        
+
         """
-            Destroy the page object and all the child 
+            Destroy the page object and all the child
             (or at least should do this)
         """
         oregistry.remove_receiver('misc-message', self._misc_message)
@@ -206,9 +206,8 @@ class form(object):
         self.screen.destroy()
         self.widget.destroy()
         self.sw.destroy()
-        del self.screen 
-        del self.handlers      
-   
+        del self.screen
+        del self.handlers
 
     def ids_get(self):
         return self.screen.ids_get()
@@ -284,14 +283,16 @@ class form(object):
         fields = []
         while(self.screen.view_to_load):
             self.screen.load_view_to_load()
-        win = win_import.win_import(self.model, self.screen.fields, fields, parent=self.window,local_context= self.screen.context)
+        screen_fields = copy.deepcopy(self.screen.fields)
+        win = win_import.win_import(self.model, screen_fields, fields, parent=self.window,local_context= self.screen.context)
         res = win.go()
 
     def sig_save_as(self, widget=None):
         fields = []
         while(self.screen.view_to_load):
             self.screen.load_view_to_load()
-        win = win_export.win_export(self.model, self.screen.ids_get(), self.screen.fields, fields, parent=self.window, context=self.context)
+        screen_fields = copy.deepcopy(self.screen.fields)
+        win = win_export.win_export(self.model, self.screen.ids_get(), screen_fields, fields, parent=self.window, context=self.context)
         res = win.go()
 
     def sig_new(self, widget=None, autosave=True):
@@ -328,10 +329,10 @@ class form(object):
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
         elif len(self.screen.models.models):
-            common.warning(_('Invalid form, correct red fields !'),_('Error !'))
+            common.warning(_('Invalid form, correct red fields !'),_('Error !'), parent=self.screen.current_view.window)
             self.message_state(_('Invalid form, correct red fields !'), color="red")
         if warning:
-            common.warning(warning,_('Warning !'))
+            common.warning(warning,_('Warning !'), parent=self.screen.current_view.window)
         return bool(id)
 
     def sig_previous(self, widget=None):
@@ -468,9 +469,6 @@ class form(object):
     def sig_close(self, urgent=False):
         res = self.modified_save(reload=False)
         return res
-    
-  
-        
-    
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
