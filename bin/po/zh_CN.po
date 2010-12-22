@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-12-21 03:05+0000\n"
+"PO-Revision-Date: 2010-12-21 15:17+0000\n"
 "Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-21 13:27+0000\n"
+"X-Launchpad-Export-Date: 2010-12-22 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 
@@ -3546,6 +3546,13 @@ msgstr "<i>详情（_D）</i>"
 #~ msgstr "现在可以以管理员的身份连接到数据库了。"
 
 #
+# File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 698
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s 条请求已发送。"
+
+#
 # File: bin/modules/gui/main.py, line: 736
 # File: bin/modules/gui/main.py, line: 736
 #~ msgid ""
@@ -3570,6 +3577,12 @@ msgstr "<i>详情（_D）</i>"
 #~ msgstr ""
 #~ "该功能只提供给MS Office！\n"
 #~ "抱歉，OOo的用户"
+
+#
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "打印工作流（高级）"
 
 #
 # File: bin/options.py, line: 90
@@ -3608,6 +3621,12 @@ msgstr "<i>详情（_D）</i>"
 # File: bin/widget/view/form_gtk/calendar.py, line: 238
 #~ msgid "This widget is readonly !"
 #~ msgstr "该部件为只读！"
+
+#
+# File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1140
+#~ msgid "_Tips"
+#~ msgstr "提示(_T)"
 
 #
 # File: bin/openerp.glade, line: 5791
@@ -3723,6 +3742,9 @@ msgstr "<i>详情（_D）</i>"
 #~ msgid "Your Name:"
 #~ msgstr "您的姓名:"
 
+#~ msgid "Your Company:"
+#~ msgstr "您就职的公司:"
+
 #~ msgid "New Database Name:"
 #~ msgstr "新数据库的名称:"
 
@@ -3738,8 +3760,26 @@ msgstr "<i>详情（_D）</i>"
 #~ msgid "Confirm Password:"
 #~ msgstr "确认口令："
 
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>维护合同。</b>\n"
+#~ "<i>\n"
+#~ "您的要求将提交到OpenERP，维护小组将很快回答您的问题。\n"
+#~ "</i>"
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "点击此处获取具体的维护建议"
+
 #~ msgid "gtk-close"
 #~ msgstr "gtk-关闭"
+
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "提交给维护小组"
 
 #~ msgid ""
 #~ "Thank you for testing OpenERP !\n"
@@ -3771,6 +3811,16 @@ msgstr "<i>详情（_D）</i>"
 #~ msgid "OpenERP Server:"
 #~ msgstr "OpenERP 服务器:"
 
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr "这是将在新数据库创建的'<i>admin</i>'帐号的密码。"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr "这是将在新数据库创建的'<i>admin</i>'帐号的密码，此密码应和上一个输入框的一样。"
+
 #~ msgid "Offset :"
 #~ msgstr "起始位置："
 
@@ -3779,6 +3829,48 @@ msgstr "<i>详情（_D）</i>"
 
 #~ msgid "<i>_Maintenance</i>"
 #~ msgstr "<i>系统维护（_M）</i>"
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>已报告了一个未知错误。</b>\n"
+#~ "\n"
+#~ "<b>您没有有效的 OpenERP 维护合同！</b>\n"
+#~ "如果您正在生产环境中使用本系统，我们高度建议您订阅一个维护计划。\n"
+#~ "\n"
+#~ "OpenERP 维护合同提供给您错误修正的保证并能自动地迁移系统所以您能够在几小时内修复您的问题。如果您有一个维护合同的话，此错误将会发送给 "
+#~ "OpenERP 编辑的质量控制小组。\n"
+#~ "\n"
+#~ "维护计划提供给您：\n"
+#~ "* 自动迁移到新版本\n"
+#~ "* 错误修正保证\n"
+#~ "* 月度错误通知和修正 \n"
+#~ "* 通过电子邮件发送的安全警报和自动迁移\n"
+#~ "* 访问客户门户\n"
+#~ "\n"
+#~ "访问下面的链接以获取更多信息。此错误的详情显示于第二个标签页中。\n"
 
 #, python-format
 #~ msgid ""
@@ -3832,6 +3924,9 @@ msgstr "<i>详情（_D）</i>"
 #~ msgid "<b>Your company</b>"
 #~ msgstr "<b>您的公司</b>"
 
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
+
 #~ msgid "gtk-ok"
 #~ msgstr "gtk-ok"
 
@@ -3853,6 +3948,10 @@ msgstr "<i>详情（_D）</i>"
 #~ msgid "I want to receive the Open ERP ebook (PDF) by email"
 #~ msgstr "我希望通过电子邮件接收 Open ERP 的电子书（PDF）"
 
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "无法进行本地化设置：%s"
+
 #~ msgid ""
 #~ "Please fill in the following form in order to help us to improve <b><span "
 #~ "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
@@ -3870,6 +3969,41 @@ msgstr "<i>详情（_D）</i>"
 
 #~ msgid "Error no report"
 #~ msgstr "错误未报告"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>报告了一个未知错误<b>\n"
+#~ "维护合同没有涵盖系统中安装的全部模块！如果您将OpenERP用于制造，强烈建议更新您的合同。\n"
+#~ "如果您使用的是自己开发或第三方的模块，我们可以提供额外的维护合同。我们的质量管理团队将在检查您的模块之后，保证其在未来的OpenERP版本中都能自动移植且"
+#~ "无需额外费用。\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
 
 #~ msgid "<b>Your interrest</b>"
 #~ msgstr "<b>您的兴趣</b>"
