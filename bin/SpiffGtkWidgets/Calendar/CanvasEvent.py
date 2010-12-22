@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-# Copyright (C) 2008 Samuel Abels <http://debain.org>
+# Copyright (C) 2008-2011 Samuel Abels
 #
 # This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License version 2, as
-# published by the Free Software Foundation.
+# it under the terms of the GNU Affero General Public License
+# version 3 as published by the Free Software Foundation.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA     
+# along with this program. If not, see <http://www.gnu.org/licenses/>
+#
 #
 ##############################################################################
 
@@ -31,20 +31,17 @@ class CanvasEvent(CanvasRectangle):
         Constructor.
         """
         self.cal    = cal
-        text        = kwargs.pop('text', '')
         self.event  = event
         self.rulers = []
         CanvasRectangle.__init__(self, **kwargs)
-
         # Create canvas items.
         self.text = hippo.CanvasText(xalign    = hippo.ALIGNMENT_CENTER,
                                      yalign    = hippo.ALIGNMENT_CENTER,
                                      size_mode = hippo.CANVAS_SIZE_ELLIPSIZE_END)
         self.append(self.text, hippo.PACK_EXPAND)
-        self.set_text(text)
 
-    def set_text(self, text):
-        self.text.set_property('text', text)
+    def set_text(self, text, description = ''):
+        self.text.set_property('text', text + ', ' + description)
 
 
     def set_text_color(self, newcolor):

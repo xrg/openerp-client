@@ -1,19 +1,18 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-# Copyright (C) 2008 Samuel Abels <http://debain.org>
+# Copyright (C) 2008-2011 Samuel Abels
 #
 # This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License version 2, as
-# published by the Free Software Foundation.
+# it under the terms of the GNU Affero General Public License
+# version 3 as published by the Free Software Foundation.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA     
+# along with this program. If not, see <http://www.gnu.org/licenses/>
 #
 ##############################################################################
 
@@ -49,24 +48,24 @@ def compute_lengths(allocated, min_lengths, natural_lengths, expand_map=None):
         for i in xrange(0, count):
             shrinks.append((i, natural_lengths[i] - min_lengths[i]))
         shrinks.sort(key=lambda t: t[1])
-            
+
         lines_remaining = count
         for (i, shrink) in shrinks:
             # If we can shrink the rest of the lines equally, do that. Otherwise
             # shrink this line as much as possible
             if shrink * lines_remaining >= to_shrink:
                 shrink = to_shrink // lines_remaining
-                
+
             lengths[i] -= shrink
             lines_remaining -= 1
             to_shrink -= shrink
-            
+
         return lengths
     elif to_shrink < 0 and expand_map != None and len(expand_map) > 0:
         expand_count = len(expand_map)
         lengths = copy.copy(natural_lengths)
         to_grow = -to_shrink
-            
+
         for i in xrange(0, count):
             if i in expand_map:
                 delta = to_grow // expand_count
@@ -87,13 +86,13 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
     def __init__(self, column_spacing=0, row_spacing=0):
         """
         Create a new TableLayout object
-        
+
         Arguments:
         column_spacing: Spacing between columns of items
         row_spacing: Spacing between rows. This is added between all rows, whether
            they are rows of items or header rows. You can add more spacing above
            or below a header item by setting i's padding.
-           
+
         """
 
         gobject.GObject.__init__(self)
@@ -125,7 +124,7 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
 
         if left == None and right == None:
             raise Exception("Either right or left must be specified")
-            
+
         if left == None:
             left = right - 1
         elif right == None:
@@ -135,7 +134,7 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
             raise Exception("Left attach is < 0")
         if right <= left:
             raise Exception("Right attach is <= left attach")
-        
+
         if top == None and bottom == None:
             raise Exception("Either bottom or top must be specified")
 
@@ -143,12 +142,12 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
             top = bottom - 1
         elif bottom == None:
             bottom = top + 1
-            
+
         if top < 0:
             raise Exception("Top attach is < 0")
         if bottom <= top:
             raise Exception("Bottom attach is <= top")
-        
+
         self.__box.append(child, flags=flags)
         box_child = self.__box.find_box_child(child)
         box_child.left = left
@@ -206,7 +205,7 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
 
     def get_column_count(self):
         columns = max(0, self.__cols)
-        
+
         for box_child in self.__box.get_layout_children():
             columns = max(columns, box_child.right)
 
@@ -214,10 +213,10 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
             columns = max(columns, column + 1)
 
         return columns
-    
+
     def get_row_count(self):
         rows = max(0, self.__rows)
-        
+
         for box_child in self.__box.get_layout_children():
             rows = max(rows, box_child.bottom)
 
@@ -231,19 +230,19 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
             return (count - 1) * self.__column_spacing
         else:
             return 0
-    
+
     def __get_total_row_spacing(self, count):
         if count > 1:
             return (count - 1) * self.__row_spacing
         else:
             return 0
-    
+
     def get_total_column_spacing(self):
         return self.__get_total_column_spacing(self.get_column_count())
-    
+
     def get_total_row_spacing(self):
         return self.__get_total_row_spacing(self.get_row_count())
-    
+
     def __get_request(self, count, get_start_end, get_request):
         min_lengths = [0 for i in xrange(0,count)]
         natural_lengths = [0 for i in xrange(0,count)]
@@ -253,7 +252,7 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
             start, end = get_start_end(box_child)
             if end != start + 1:
                 continue
-            
+
             (min_length, natural_length) = get_request(box_child)
 
             min_lengths[start] = max(min_lengths[start], min_length)
@@ -262,10 +261,10 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
         # Then process spanned children
         for box_child in self.__box.get_layout_children():
             start, end = get_start_end(box_child)
-            
+
             if end == start + 1:
                 continue
-            
+
             (min_length, natural_length) = get_request(box_child)
 
             current_min_length = 0
@@ -283,7 +282,7 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
                     min_lengths[i] += delta
                     excess -= delta
                     child_count -= 1
-                    
+
             if current_natural_length < natural_length:
                 excess = natural_length - current_natural_length
                 child_count = end - start
@@ -324,7 +323,7 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
         if self.__homogeneous_cols and width > 0 and cols > 0:
             return compute_homogeneus(width, cols)
         return compute_lengths(width, self.__min_widths, self.__natural_widths, self.__expand_columns)
-        
+
     def do_get_height_request(self, width):
         row_count            = self.get_row_count()
         total_row_spacing    = self.__get_total_row_spacing(row_count)
@@ -346,7 +345,7 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
         self.__natural_heights = natural_heights
 
 #        _logger.debug("height_request: min_heights=%s, natural_heights=%s", min_heights, natural_heights)
-        
+
         return (sum(self.__min_heights) + total_row_spacing, sum(self.__natural_heights) + total_row_spacing)
 
     def __compute_row_heights(self, height):
@@ -354,19 +353,19 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
         if self.__homogeneous_rows and height > 0 and rows > 0:
             return compute_homogeneus(height, rows)
         return compute_lengths(height, self.__min_heights, self.__natural_heights, self.__expand_rows)
-    
+
     def do_allocate(self, x, y, width, height, requested_width, requested_height, origin_changed):
         column_count = len(self.__min_widths)
         total_column_spacing = self.__get_total_column_spacing(column_count)
-        
+
         row_count = len(self.__min_heights)
         total_row_spacing = self.__get_total_row_spacing(row_count)
 
         widths = self.__compute_column_widths(width - total_column_spacing)
         heights = self.__compute_row_heights(height - total_row_spacing)
-            
+
 #        _logger.debug("allocate: widths=%s, heights=%s", widths, heights)
-        
+
         x = 0
         xs = []
         for width in widths:
@@ -380,7 +379,7 @@ class TableLayout(gobject.GObject,hippo.CanvasLayout):
             ys.append(y)
             y += height + self.__row_spacing
         ys.append(y)
-        
+
         for box_child in self.__box.get_layout_children():
             x = xs[box_child.left]
             width = xs[box_child.right] - x - self.__column_spacing

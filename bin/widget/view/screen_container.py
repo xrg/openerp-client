@@ -48,12 +48,12 @@ class screen_container(object):
         self.domain = []
         self.context = {}
         self.handler_id = None
-        
+
     def __del__(self):
         for (ref, value) in self.__dict__.items():
             if(isinstance(value, gtk.Object) and not isinstance(value, gtk.Window)):
                 value.destroy()
-                
+
         del self.win_search
 
     def widget_get(self):
@@ -80,11 +80,18 @@ class screen_container(object):
         else:
             self.action_combo.set_active(0)
 
-    def fill_limit_combo(self):
+    def fill_limit_combo(self, default_limit=False):
         self.limit_combo.clear()
-        for lim in [[100,'100'],[200,'200'],[500,'500'],[None,'Unlimited']]:
+        limits = []
+        if default_limit and default_limit not in [100, 200, 500]:
+            limits = [[int(default_limit), str(default_limit)]]
+        limits += [[100,'100'],[200,'200'],[500,'500'],[None,'Unlimited']]
+        index = 0
+        for lim in limits:
+            if lim[0] == default_limit:
+                index = limits.index(lim)
             self.limit_combo.append(lim)
-        self.combo.set_active(0)
+        self.combo.set_active(index)
 
     def get_filter(self, filter_name):
         def fnct(filterstore, path, iter, filter_name):
@@ -163,8 +170,7 @@ class screen_container(object):
 
         self.selection = []
         hb3.pack_start(self.combo, expand=False, fill=False)
-        self.fill_limit_combo()
-        self.combo.set_active(0)
+        self.fill_limit_combo(limit)
 
 #Back Forward Buttons
 

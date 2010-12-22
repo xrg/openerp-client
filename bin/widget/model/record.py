@@ -70,7 +70,7 @@ class ModelRecord(signal_event.signal_event):
             if (new and val.attrs['type']=='one2many') and (val.attrs.get('mode', 'tree,form').startswith('form')):
                 mod = self.value[key].model_new()
                 self.value[key].model_add(mod)
-                
+
 
     def __getitem__(self, name):
         return self.mgroup.mfields.get(name, False)
@@ -317,9 +317,9 @@ class ModelRecord(signal_event.signal_event):
                 value = response.get('context', {})
                 self.mgroup.context = value
 
-            warning=response.get('warning', {})
+            warning = response.get('warning', {})
             if warning:
-                common.warning(warning['message'], warning['title'])
+                common.warning(warning['message'], warning['title'], parent=self.mgroup.screen.current_view.window)
         self.signal('record-changed')
 
     def on_change_attrs(self, callback):
@@ -392,7 +392,7 @@ class ModelRecord(signal_event.signal_event):
                 raise Exception, 'Unallowed button type'
             if screen.current_model and screen.current_view.view_type != 'tree':
                 screen.reload()
-                
+
             del screen
 
 
