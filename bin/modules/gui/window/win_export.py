@@ -44,7 +44,7 @@ def export_csv(fname, fields, result, write_title=False):
                 if type(d)==types.StringType:
                     row.append(d.replace('\n',' ').replace('\t',' '))
                 else:
-                    row.append(d)
+                    row.append(d or '')
             writer.writerow(row)
         fp.close()
         common.message(str(len(result))+_(' record(s) saved !'))
