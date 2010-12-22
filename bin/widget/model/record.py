@@ -140,8 +140,9 @@ class ModelRecord(signal_event.signal_event):
                 context = self.context_get().copy()
                 self.update_context_with_concurrency(context)
                 res = self.rpc.write([self.id], value, context)
-                #if type(res) in (int, long):
-                #    self.id = res
+                if type(res)==type({}):
+                    obj = service.LocalService('action.main')
+                    obj._exec_action(res,{}, context)
         except Exception, e:
             if hasattr(e, 'faultCode') and e.faultCode.find('ValidateError')>-1:
                 self.failed_validation()
