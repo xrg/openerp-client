@@ -88,9 +88,9 @@ class action_tips(object):
             label_box.add(table)
 
             # Close current tip button
-            closebtn = gtk.Button('Close current tip')
-            closebtn.set_tooltip_markup('''<span foreground="darkred"><b>Close Current Tip:</b></span>
-This will hide the current tip. It will be displayed again next time you open this menu item, unless you disable all tips using the <b>'Menu Tips'</b> option in the user preferences.''')
+            closebtn = gtk.Button(_('Close current tip'))
+            closebtn.set_tooltip_markup(_('''<span foreground="darkred"><b>Close Current Tip:</b></span>
+This will hide the current tip. It will be displayed again next time you open this menu item, unless you disable all tips using the <b>'Menu Tips'</b> option in the user preferences.'''))
             image = gtk.Image()
             image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
             closebtn.set_image(image)
@@ -99,10 +99,10 @@ This will hide the current tip. It will be displayed again next time you open th
             closebtn.connect('clicked', self.close_or_disable_tips)
 
              # Disable button
-            disablebtn = gtk.Button('Disable all tips')
-            disablebtn.set_tooltip_markup('''<span foreground="darkred"><b>Disable all tips:</b></span>
+            disablebtn = gtk.Button(_('Disable all tips'))
+            disablebtn.set_tooltip_markup(_('''<span foreground="darkred"><b>Disable all tips:</b></span>
 This will disable the display of tips on all menu items.
-To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user preferences.''')
+To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user preferences.'''))
             image1 = gtk.Image()
             image1.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
             disablebtn.set_image(image1)
@@ -114,9 +114,9 @@ To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user pr
             box = gtk.HBox()
             box_label = gtk.Label()
             box_label.set_use_markup(True)
-            tip_title = '<b>Tips</b>'
+            tip_title = '<b>' + _('Tips') + '</b>'
             if title:
-                tip_title = '<b> %s - Tips</b>'%to_xml(title)
+                tip_title = '<b> %s - %s</b>' % ( to_xml(title),  _('Tips') )
             box_label.set_label(tip_title)
             box.pack_start(box_label, True, True)
             box.pack_end(disablebtn, False, False)
@@ -132,7 +132,7 @@ To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user pr
         return False
 
 
-def OpenERP_Progressbar(parent=None, title='OpenERP Computing'):
+def OpenERP_Progressbar(parent=None, title=_('OpenERP Computing')):
     if not parent:
         parent = service.LocalService('gui.main').window
 
@@ -189,7 +189,7 @@ try:
 except gobject.GError, e:
     log = logging.getLogger('init')
     log.fatal(str(e))
-    log.fatal('Ensure that the file %s is correct' % options.rcfile)
+    log.fatal(_('Ensure that the file %s is correct') % options.rcfile)
     exit(1)
 
 def selection(title, values, alwaysask=False, parent=None):
@@ -363,7 +363,7 @@ def support(*args):
         buffer = sur.get_widget('remark_textview').get_buffer()
         remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
-        content = name +"(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug:\n"+ explanation + "\nremarks:\n" + remarks
+        content = name +"(%s, %s, %s)"%(id_contract, company, phone) + _(" has reported the following bug:\n") + explanation + "\n" + _("remarks") + ":\n" + remarks
 
         if upload_data(fromaddr, content, 'support', id_contract):
             common.message(_('Support request sent !'))
@@ -437,8 +437,9 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
                 tb = get_text_from_text_view(xmlGlade.get_widget('details_explanation'))
                 explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
                 remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
+                summary = xmlGlade.get_widget('summary_entry').get_text()
 
-                if rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'send', tb, explanation, remarks):
+                if rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'send', tb, explanation, remarks, summary):
                     common.message(_('Your problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'), parent=win)
                     win.destroy()
                 else:

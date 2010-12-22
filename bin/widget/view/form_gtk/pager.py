@@ -155,3 +155,6 @@ class pager(object):
         self.screen.offset = 0
         self.screen.limit = self.get_active_text()
         self.set_sensitivity()
+        
+
+        

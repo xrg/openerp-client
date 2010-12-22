@@ -76,6 +76,8 @@ class ModelList(list):
         super(ModelList, self).__setitem__(key, value)
         if not self.lock_signal:
             self.__screen.signal('record-changed', ('record-changed', key))
+    
+
 
 class ModelRecordGroup(signal_event.signal_event):
     def __init__(self, resource, fields, ids=[], parent=None, context={}, is_wizard=False):

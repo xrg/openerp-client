@@ -126,7 +126,7 @@ class image_wid(interface.widget_interface):
 
     def sig_save_as(self, widget):
         if not self._value:
-            common.warning('There is no image to save as !',_('Warning'))
+            common.warning(_('There is no image to save as !'),_('Warning'))
         else:
             filename = common.file_selection(_('Save As...'), filename=self._get_filename(), parent=self._window,
                     action=gtk.FILE_CHOOSER_ACTION_SAVE)

@@ -39,7 +39,7 @@ class win_extension(object):
         self.treeview = glade.get_widget('treeview_extension')
         self.treeview.set_model(model)
 
-        for index, text in enumerate(['Extension', 'Application', 'Print Processor']):
+        for index, text in enumerate([_('Extension'), _('Application'), _('Print Processor')]):
             renderer = gtk.CellRendererText()
             renderer.set_property( 'editable', True )
             renderer.connect( 'edited', self._on_cell_renderer_edited )
@@ -111,7 +111,7 @@ class win_extension(object):
         if old_text <> new_text:
             if column_id == 0:
                 if new_text in [ ext for ext, app, app_print in model ]:
-                    common.warning(_('This extension is already defined'), 'Extension Manager')
+                    common.warning(_('This extension is already defined'), _('Extension Manager'))
                     return
                 else:
                     model.set(iter, column_id, new_text)

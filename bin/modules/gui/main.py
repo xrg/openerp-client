@@ -191,7 +191,7 @@ class DatabaseDialog(gtk.Dialog):
                 if a.type in ('warning', 'UserError'):
                     common.warning(a.data, a.message)
                 elif a.type == 'AccessDenied':
-                    common.warning('Bad Super Administrator Password', self.get_title())
+                    common.warning(_('Bad Super Administrator Password'), self.get_title())
                 else:
                     common.error(_('Application Error'), err.faultCode, err.faultString, disconnected_mode=True)
             except Exception, e:
@@ -278,7 +278,7 @@ class MigrationDatabaseDialog(DatabaseDialog):
 
         # Add the text column (database name)
         renderer = gtk.CellRendererText()
-        col = gtk.TreeViewColumn("Database", renderer, text=1)
+        col = gtk.TreeViewColumn(_("Database"), renderer, text=1)
         treeview.append_column(col)
         sw.add(treeview)
         self.table.attach(sw, 0, 2, 3, 4)
@@ -294,7 +294,7 @@ class MigrationDatabaseDialog(DatabaseDialog):
             else:
                 self.message = _("Your databases have been upgraded.")
         else:
-            self.message = "You have not selected a database"
+            self.message = _("You have not selected a database")
 
     def _on_toggle_renderer__toggled(self, renderer, path, col_index):
         row = self.model[path]

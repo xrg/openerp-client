@@ -71,6 +71,6 @@ class filter(wid_int.wid_int):
     def _value_set(self, value):
         pass
     value = property(_value_get, _value_set, None,
-      'The content of the widget or ValueError if not valid')
+      _('The content of the widget or ValueError if not valid'))
 
 

@@ -24,16 +24,16 @@ import gettext
 message_no_contract = _("""
 <b>An unknown error has been reported.</b>
 
-<b>You do not have a valid OpenERP maintenance contract !</b>
+<b>You do not have a valid OpenERP publisher warranty contract !</b>
 If you are using OpenERP in production, it is highly suggested to subscribe
-a maintenance program.
+a publisher warranty program.
 
-The OpenERP maintenance contract provides you a bugfix guarantee and an
+The OpenERP publisher warranty contract provides you a bugfix guarantee and an
 automatic migration system so that we can fix your problems within a few
-hours. If you had a maintenance contract, this error would have been sent
+hours. If you had a publisher warranty contract, this error would have been sent
 to the quality team of the OpenERP editor.
 
-The maintenance program offers you:
+The publisher warranty program offers you:
 * Automatic migrations on new versions,
 * A bugfix guarantee,
 * Monthly announces of potential bugs and their fixes,
@@ -47,16 +47,16 @@ is displayed on the second tab.
 message_partial_contract = _("""
 <b>An unknown error has been reported.</b>
 
-Your maintenance contract does not cover all modules installed in your system !
+Your publisher warranty contract does not cover all modules installed in your system !
 If you are using OpenERP in production, it is highly suggested to upgrade your
 contract.
 
 If you have developed your own modules or installed third party module, we
-can provide you an additional maintenance contract for these modules. After
+can provide you an additional publisher warranty contract for these modules. After
 having reviewed your modules, our quality team will ensure they will migrate
 automatically for all future stable versions of OpenERP at no extra cost.
 
-Here is the list of modules not covered by your maintenance contract:
+Here is the list of modules not covered by your publisher warranty contract:
 %s
 
 You can use the link bellow for more information. The detail of the error

@@ -2832,49 +2832,6 @@ Web: http://tiny.be</property>
             </child>
 
             <child>
-              <widget class="GtkFrame" id="frame100">
-                <property name="visible">True</property>
-                <property name="border_width">2</property>
-                <property name="label_xalign">0</property>
-                <child>
-                    <widget class="GtkHBox" id="hbox100">
-                    <property name="visible">True</property>
-                  <child>
-                      <widget class="GtkCheckButton" id="import_compatible">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Import Compatible</property>
-                        <property name="use_underline">True</property>
-                        <property name="response_id">0</property>
-                        <property name="draw_indicator">True</property>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-           </widget>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label100">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Select an Option to Export&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
-                    <property name="use_underline">True</property>
-                  </widget>
-                  <packing>
-                    <property name="type">label_item</property>
-                  </packing>
-                </child>
-              </widget>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child>
               <widget class="GtkHBox" id="hbox35">
                 <property name="visible">True</property>
                 <child>
@@ -3148,7 +3105,7 @@ Save as CSV</property>
                       <widget class="GtkCheckButton" id="add_field_names_cb">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="label" translatable="yes">Add _field names</property>
+                        <property name="label" translatable="yes">Add Field Names</property>
                         <property name="use_underline">True</property>
                         <property name="response_id">0</property>
                         <property name="active">True</property>
@@ -3160,6 +3117,29 @@ Save as CSV</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
+                <child>
+                    <widget class="GtkHBox" id="hbox100">
+                    <property name="visible">True</property>
+                    <child>
+                      <widget class="GtkCheckButton" id="import_compatible">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="label" translatable="yes">Import Compatible</property>
+                        <property name="use_underline">True</property>
+                        <property name="response_id">0</property>
+                        <property name="draw_indicator">True</property>
+                        <signal name="toggled" handler="on_import_toggled"/>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    </widget>
+                </child>
+
+
                   </widget>
                 </child>
                 <child>
@@ -5759,66 +5739,9 @@ Very Urgent</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
-                    <child>
-                      <widget class="GtkHSeparator" id="hseparator27">
-                        <property name="visible">True</property>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="padding">3</property>
-                        <property name="position">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <widget class="GtkButton" id="button_autodetect">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="response_id">0</property>
-                        <signal name="clicked" handler="on_but_autodetect_clicked"/>
-                        <child>
-                          <widget class="GtkAlignment" id="alignment44">
-                            <property name="visible">True</property>
-                            <property name="xscale">0</property>
-                            <property name="yscale">0</property>
-                            <child>
-                              <widget class="GtkHBox" id="hbox68">
-                                <property name="visible">True</property>
-                                <property name="spacing">2</property>
-                                <child>
-                                  <widget class="GtkImage" id="image2905">
-                                    <property name="visible">True</property>
-                                    <property name="stock">gtk-zoom-fit</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <widget class="GtkLabel" id="label247">
-                                    <property name="visible">True</property>
-                                    <property name="label" translatable="yes">Auto-Detect</property>
-                                    <property name="use_underline">True</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">False</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </widget>
-                            </child>
-                          </widget>
-                        </child>
-                      </widget>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">4</property>
-                      </packing>
-                    </child>
+
                   </widget>
+
                   <packing>
                     <property name="expand">False</property>
                     <property name="position">1</property>
@@ -5888,7 +5811,7 @@ Very Urgent</property>
                             <child>
                               <widget class="GtkLabel" id="label46547">
                                 <property name="visible">True</property>
-                                <property name="label" translatable="yes">File to Import:</property>
+                                <property name="label" translatable="yes">File to Import: </property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -5904,6 +5827,55 @@ Very Urgent</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
+                      <child>
+
+                      <widget class="GtkButton" id="button_autodetect">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="response_id">0</property>
+                        <signal name="clicked" handler="on_but_autodetect_clicked"/>
+                        <child>
+                          <widget class="GtkAlignment" id="alignment44">
+                            <property name="visible">True</property>
+                            <property name="xscale">0</property>
+                            <property name="yscale">0</property>
+                            <child>
+                              <widget class="GtkHBox" id="hbox68">
+                                <property name="visible">True</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <widget class="GtkImage" id="image2905">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-zoom-fit</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkLabel" id="label247">
+                                    <property name="visible">True</property>
+                                    <property name="label" translatable="yes">Auto-Detect</property>
+                                    <property name="use_underline">True</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </widget>
+                            </child>
+                          </widget>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -5914,7 +5886,7 @@ Very Urgent</property>
                           <widget class="GtkExpander" id="expander3">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="expanded">True</property>
+                            <property name="expanded">False</property>
                             <child>
                               <widget class="GtkTable" id="table21">
                                 <property name="visible">True</property>
@@ -6032,7 +6004,7 @@ Latin1</property>
                                   <widget class="GtkLabel" id="label46548">
                                     <property name="visible">True</property>
                                     <property name="xalign">1</property>
-                                    <property name="label" translatable="yes">Field Separater:</property>
+                                    <property name="label" translatable="yes">Field Separator: </property>
                                   </widget>
                                   <packing>
                                     <property name="x_options">GTK_FILL</property>
@@ -6063,7 +6035,7 @@ Latin1</property>
               </widget>
               <packing>
                 <property name="expand">False</property>
-                <property name="position">1</property>
+                <property name="position">0</property>
               </packing>
             </child>
           </widget>
@@ -6075,16 +6047,6 @@ Latin1</property>
           <widget class="GtkHButtonBox" id="dialog-action_area25">
             <property name="visible">True</property>
             <property name="layout_style">GTK_BUTTONBOX_END</property>
-            <child>
-              <widget class="GtkButton" id="helpbutton1">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="label">gtk-help</property>
-                <property name="use_stock">True</property>
-                <property name="response_id">-11</property>
-              </widget>
-            </child>
             <child>
               <widget class="GtkButton" id="cancelbutton16">
                 <property name="visible">True</property>

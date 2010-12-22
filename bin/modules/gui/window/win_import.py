@@ -65,7 +65,7 @@ def import_csv(csv_data, f, model, fields, context=None):
         d = ''
         for key,val in res[1].items():
             d+= ('\t%s: %s\n' % (str(key),str(val)))
-        error = u'Error trying to import this record:\n%s\nError Message:\n%s\n\n%s' % (d,res[2],res[3])
+        error = _(u'Error trying to import this record:\n%s\nError Message:\n%s\n\n%s') % (d,res[2],res[3])
         common.message_box(_('Importation Error !'), unicode(error))
     return True
 
@@ -134,9 +134,9 @@ class win_import(object):
                     if fields[field].get('type','') in ('many2one' , 'many2many' ) and level>0:
                         #self.fields[field+':id'] = fields[field]['string']
                         #self.fields_invert[fields[field]['string']] = field+':id'
-                        model_populate({'id':{'string':'ID'},'db_id':{'string':'Database ID'}}, \
+                        model_populate({'id':{'string':'ID'},'.id':{'string':_('Database ID')}}, \
                                        prefix_node+field+':', node, st_name+'/', level-1)
-        fields.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}})
+        fields.update({'id':{'string':'ID'},'.id':{'string':_('Database ID')}})
         model_populate(fields)
 
         #for f in fields:
@@ -166,10 +166,11 @@ class win_import(object):
         try:
             data = csv.reader(file(fname), quotechar=csvdel or '"', delimiter=csvsep)
         except:
-            common.warning('Error opening .CSV file', 'Input Error.')
+            common.warning(_('Error opening .CSV file'), _('Input Error.'))
             return True
         self.sig_unsel_all()
         word=''
+        print self.fields.keys()
         try:
             for line in data:
                 for word in line:
@@ -187,7 +188,7 @@ class win_import(object):
                         raise Exception(_("You cannot import this field %s, because we cannot auto-detect it"))
                 break
         except:
-            common.warning('Error processing your first line of the file.\nField %s is unknown !' % (word,), 'Import Error.')
+            common.warning(_('Error processing your first line of the file.\nField %s is unknown !') % (word,), _('Import Error.'))
         return True
 
     def sig_sel_all(self, widget=None):

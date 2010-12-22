@@ -51,9 +51,10 @@ class screen_container(object):
         
     def __del__(self):
         for (ref, value) in self.__dict__.items():
-            if(isinstance(value, gtk.Object)):
+            if(isinstance(value, gtk.Object) and not isinstance(value, gtk.Window)):
                 value.destroy()
-        print "DELETION of screen_container"
+                
+        del self.win_search
 
     def widget_get(self):
         return self.vbox
