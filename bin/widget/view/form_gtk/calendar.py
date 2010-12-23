@@ -32,19 +32,17 @@ import locale
 import rpc
 import service
 import tools
-
 import date_widget
+from tools import user_locale_format, datetime_util
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 HM_FORMAT = '%H:%M:%S'
 
-LDFMT = tools.datetime_util.get_date_format();
-
 class calendar(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, attrs=attrs)
-        self.format = LDFMT
+        self.format = user_locale_format.get_date_format()
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
         self.entry.set_property('activates_default', True)
@@ -119,7 +117,7 @@ class calendar(interface.widget_interface):
             if len(value)>10:
                 value=value[:10]
             date=DT.strptime(value[:10], DT_FORMAT)
-            t=date.strftime(self.format)
+            t = date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
             self.entry.set_text(t)
@@ -157,7 +155,7 @@ class calendar(interface.widget_interface):
             year, month, day = cal.get_date()
             dt = DT(year, month+1, day)
             try:
-                value = dt.strftime(LDFMT)
+                value = dt.strftime(self.format)
             except ValueError:
                 common.message(_('Invalid date value! Year must be greater than 1899 !'))
             else:
@@ -169,7 +167,7 @@ class calendar(interface.widget_interface):
 class datetime(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs=attrs)
-        self.format = LDFMT+' %H:%M:%S'
+        self.format = user_locale_format.get_datetime_format(True)
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
         self.entry.set_property('activates_default', True)
@@ -298,7 +296,7 @@ class stime(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, parent, attrs=attrs)
 
-        self.format = '%H:%M:%S'
+        self.format = user_locale_format.get_datetime_format()
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
         self.entry.connect('focus-in-event', lambda x,y: self._focus_in())

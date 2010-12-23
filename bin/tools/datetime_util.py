@@ -60,20 +60,6 @@ date_mapping = {
     '%S': ('__', '[_0-6][_0-9]'),
 }
 
-def get_date_format():
-    """Return locale date format string. If format string doesn't contain
-    any of the `%Y, %m or %d` then returns default datetime format `%Y/%m/%d`
-    """
-
-    fmt = locale.nl_langinfo(locale.D_FMT)
-    for x,y in [('%y','%Y'),('%B',''),('%A','')]:
-        fmt = fmt.replace(x, y)
-
-    if not (fmt.count('%Y') == 1 and fmt.count('%m') == 1 and fmt.count('%d') == 1):
-        return '%Y/%m/%d'
-
-    return fmt
-
 # RATIONALE BEHIND TIMESTAMP CALCULATIONS AND TIMEZONE MANAGEMENT:
 #  The server side never does any timestamp calculation, always
 #  sends them in a naive (timezone agnostic) format supposed to be

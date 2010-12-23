@@ -19,8 +19,8 @@
 #
 ##############################################################################
 import tools
+from tools import user_locale_format
 HM_FORMAT = ' %H:%M:%S'
-LDFMT = tools.datetime_util.get_date_format()
 from datetime import datetime
 
 import matplotlib
@@ -75,7 +75,7 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
     if axis_type == 'datetime':
         for lable in axis_lable:
             try:
-                tmp[lable] = datetime.strptime(lable, LDFMT + HM_FORMAT)
+                tmp[lable] = datetime.strptime(lable, user_locale_format.get_datetime_format(True))
             except:
                 except_tmp += [lable]
         axis_lable = sorted(tmp, key=tmp.__getitem__) + except_tmp
@@ -83,7 +83,7 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
     if axis_type == 'date':
         for lable in axis_lable:
             try:
-                tmp[lable] = datetime.strptime(lable, LDFMT)
+                tmp[lable] = datetime.strptime(lable, user_locale_format.get_date_format())
             except:
                 except_tmp += [lable]
         axis_lable = sorted(tmp, key=tmp.__getitem__) + except_tmp

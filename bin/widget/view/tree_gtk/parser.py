@@ -28,7 +28,7 @@ import cgi
 
 
 import tools
-import tools.datetime_util
+from tools import user_locale_format, datetime_util
 
 from rpc import RPCProxy
 from editabletree import EditableTreeView
@@ -420,11 +420,11 @@ class GenericDate(Char):
 
 class Date(GenericDate):
     server_format = '%Y-%m-%d'
-    display_format = tools.datetime_util.get_date_format()
+    display_format = user_locale_format.get_date_format()
 
 class Datetime(GenericDate):
     server_format = '%Y-%m-%d %H:%M:%S'
-    display_format = tools.datetime_util.get_date_format() + ' %H:%M:%S'
+    display_format = user_locale_format.get_datetime_format(True)
 
     def get_textual_value(self, model):
         value = model[self.field_name].get_client(model)
@@ -448,11 +448,12 @@ class Float(Char):
         return tools.str2float(text)
 
 class FloatTime(Char):
+
     def get_textual_value(self, model):
         val = model[self.field_name].get_client(model) or 0
-        t= tools.datetime_util.float_time_convert(val)
-        if val<0:
-            t = '-'+t
+        t = tools.datetime_util.float_time_convert(val)
+        if val < 0:
+            t = '-' + t
         return t
 
     def value_from_text(self, model, text):

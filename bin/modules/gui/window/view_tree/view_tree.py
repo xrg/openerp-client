@@ -36,11 +36,10 @@ import rpc
 import parse
 
 import tools
-from tools import datetime_util
+from tools import user_locale_format, datetime_util
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
-LDFMT = datetime_util.get_date_format()
 
 # BUG: ids = []
 #
@@ -79,11 +78,11 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                     type = self.fields_type[key]['type']
                     if type == 'date':
                         res_lower[key] = datetime_util.local_to_server_timestamp(vals,
-                                         LDFMT, DT_FORMAT, tz_offset=False)
+                                         user_locale_format.get_date_format(), DT_FORMAT, tz_offset=False)
                         continue
                     elif type == 'datetime':
                         res_lower[key] = datetime_util.local_to_server_timestamp(vals,
-                                         LDFMT + ' %H:%M:%S', DT_FORMAT)
+                                         user_locale_format.get_datetime_format(True), DT_FORMAT)
                         continue
                 if isinstance(vals, (str, unicode)):
                     res_lower[key]= vals.lower()
@@ -123,14 +122,14 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         for field in self.fields + self.invisible_fields:
             for x in res_ids:
                 if self.fields_type[field]['type'] in ('date',):
-                    display_format = LDFMT
+                    display_format = user_locale_format.get_date_format()
                     if x[field]:
                         x[field] = datetime_util.server_to_local_timestamp(x[field],
                                     DT_FORMAT, display_format, tz_offset=False)
                     else:
                         x[field] = str(x[field])
                 elif self.fields_type[field]['type'] in ('datetime',):
-                    display_format = LDFMT + ' %H:%M:%S'
+                    display_format = user_locale_format.get_datetime_format(True)
                     if x[field]:
                         x[field] = datetime_util.server_to_local_timestamp(x[field],
                                     DHM_FORMAT, display_format)

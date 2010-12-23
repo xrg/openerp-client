@@ -26,13 +26,12 @@ import gettext
 import locale
 
 import tools
-import tools.datetime_util
+from tools import user_locale_format, datetime_util
 import common
 
 import wid_int
 import date_widget
 
-LDFMT = tools.datetime_util.get_date_format()
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 class calendar(wid_int.wid_int):
@@ -40,7 +39,7 @@ class calendar(wid_int.wid_int):
         super(calendar, self).__init__(name, parent, attrs, screen)
 
         self.widget = gtk.HBox(spacing=3)
-        self.format = LDFMT
+        self.format = user_locale_format.get_date_format()
 
         self.widget1 = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry1 = self.widget1.widget
@@ -83,13 +82,13 @@ class calendar(wid_int.wid_int):
         if self.default_search:
             try:
                 date = tools.datetime_util.strptime(self.default_search, DT_FORMAT)
-                self.entry1.set_text(date.strftime(LDFMT))
+                self.entry1.set_text(date.strftime(self.format))
             except:
                 pass
 
     def _date_get(self, str):
         try:
-            date = tools.datetime_util.strptime(str, LDFMT)
+            date = tools.datetime_util.strptime(str, self.format)
         except:
             return False
         return date.strftime(DT_FORMAT)
@@ -149,7 +148,7 @@ class calendar(wid_int.wid_int):
         if response == gtk.RESPONSE_OK:
             year, month, day = cal.get_date()
             dt = DT.date(year, month+1, day)
-            dest.set_text(dt.strftime(LDFMT))
+            dest.set_text(dt.strftime(self.format))
         win.destroy()
 
     def clear(self):
@@ -167,7 +166,7 @@ class datetime(wid_int.wid_int):
         super(datetime, self).__init__(name, parent, attrs, screen)
 
         self.widget = gtk.HBox(spacing=5)
-        self.format = LDFMT+' %H:%M:%S'
+        self.format = user_locale_format.get_datetime_format(True)
 
         self.widget1 = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry1 = self.widget1.widget
@@ -225,10 +224,10 @@ class datetime(wid_int.wid_int):
         if event.keyval == gtk.keysyms.F2:
             self.cal_open(widget, event, dest, parent)
             return True
-    
+
     def get_value(self, entry, timezone=True):
         str = entry.get_text()
-        if str=='':
+        if str == '':
             return False
         return tools.datetime_util.local_to_server_timestamp(str[:19], self.format, DHM_FORMAT,
                         tz_offset=timezone, ignore_unparsable_time=False)
@@ -251,7 +250,7 @@ class datetime(wid_int.wid_int):
 
     def grab_focus(self):
         return self.entry1.grab_focus()
-    
+
     def set_datetime(self, dt_val, entry, timezone=True):
         if not dt_val:
             entry.clear()
@@ -313,7 +312,7 @@ class datetime(wid_int.wid_int):
                 common.message(_('Invalid datetime value! Year must be greater than 1899 !'))
             else:
                 self.set_datetime(value, dest, timezone=False)
-        
+
         win.destroy()
 
     def clear(self):
