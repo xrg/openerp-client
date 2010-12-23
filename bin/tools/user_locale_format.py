@@ -23,21 +23,28 @@ import locale
 from locale import localeconv
 
 
-""" Read the user lang from the context and get the date format from the server
-    this is done because there may be the case if the user has modified the default locale date
+""" When ever the user will connect to the server through client the client will
+    read all the userful values of the user's locale settings from the server and will update the
+    LOCALE_CACHE dictionary. Then when the client needs the values it will be just returned
+    form this LOCALE_CACHE.
+
+    This is done because there may be the case if the user has modified the default locale date
     format from administration/Translations/Languages.
+
     For Example: if the user has 'en_US' set as his locale and 'en_US' has date format as '%m/%d/%Y'
     but he changes the date format to '%d/%m/%Y' from the menu specified above.So previously the gtk client
     was just setting the locale format inspite of the user's modification in the locale settings.
 
     Previously we just returned the user's locale format inspite of his modifications the modifications
     we not taken into account.
+
     fmt = locale.nl_langinfo(locale.D_FMT)
     for x,y in [('%y','%Y'),('%B',''),('%A','')]:
         fmt = fmt.replace(x, y)
      if not (fmt.count('%Y') == 1 and fmt.count('%m') == 1 and fmt.count('%d') == 1):
          return '%Y/%m/%d'
-    return fmt """
+    return fmt
+"""
 
 
 LOCALE_CACHE = {'uid': 1,

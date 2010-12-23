@@ -346,7 +346,16 @@ class Int(Char):
         return tools.str2int(text)
 
     def get_textual_value(self, model):
-        return tools.locale_format('%d', int(model[self.field_name].get_client(model) or 0))
+        count = False
+        if isinstance(model, group_record):
+            val = int(model.value.get(self.field_name, 0))
+            count = model.value.get('%s_count' % self.field_name, '')
+        else:
+            val = int(model[self.field_name].get_client(model) or 0)
+        converted_val = user_locale_format.format('%d', val)
+        if count:
+            converted_val = str(converted_val) +  ' (' + str(count) + ')'
+        return converted_val
 
 class Boolean(Int):
 
@@ -440,9 +449,19 @@ class Datetime(GenericDate):
                 self.display_format, self.server_format)
 
 class Float(Char):
+
     def get_textual_value(self, model):
         interger, digit = self.attrs.get('digits', (16,2) )
-        return tools.locale_format('%.' + str(digit) + 'f', model[self.field_name].get_client(model) or 0.0)
+        count = False
+        if isinstance(model, group_record):
+            val = model.value.get(self.field_name, 0.0)
+            count = model.value.get('%s_count' % self.field_name,'')
+        else:
+            val = model[self.field_name].get_client(model) or 0.0
+        converted_val = user_locale_format.format('%.' + str(digit) + 'f', val)
+        if count:
+            converted_val = str(converted_val) +  ' (' + str(count) + ')'
+        return converted_val
 
     def value_from_text(self, model, text):
         return tools.str2float(text)

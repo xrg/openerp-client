@@ -143,9 +143,9 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                         x[field] = dict(self.fields_type[field]['selection']).get(x[field],'')
                 elif self.fields_type[field]['type'] in ('float',):
                     interger, digit = self.fields_type[field].get('digits', (16,2))
-                    x[field] = tools.locale_format('%.' + str(digit) + 'f', x[field] or 0.0)
+                    x[field] = user_locale_format.format('%.' + str(digit) + 'f', x[field] or 0.0)
                 elif self.fields_type[field]['type'] in ('integer',):
-                    x[field] = int(tools.locale_format('%d', int(x[field]) or 0))
+                    x[field] = int(user_locale_format.format('%d', int(x[field]) or 0))
                 elif self.fields_type[field]['type'] in ('float_time',):
                     val = datetime_util.float_time_convert(x[field])
                     if x[field] < 0:
