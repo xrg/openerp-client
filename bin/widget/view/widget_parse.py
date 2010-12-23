@@ -21,6 +21,7 @@
 
 
 import interface
+import logging
 from lxml import etree
 
 import form_gtk
@@ -50,8 +51,8 @@ class widget_parse(interface.parser_interface):
     def parse(self, screen, node, fields, toolbar={}, submenu={}, help={}):
         if node is not None:
             if node.tag not in parsers:
-		log = logging.getLogger()
-		log.warning(_("This type (%s) is not supported by the GTK client !") % node.localName)
+                log = logging.getLogger()
+                log.warning(_("This type (%s) is not supported by the GTK client !") % node.localName)
                 raise Exception(_("This type (%s) is not supported by the GTK client !") % node.tag)
             widget_parser, view_parser = parsers[node.tag]
 
