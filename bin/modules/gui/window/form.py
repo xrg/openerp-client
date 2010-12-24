@@ -46,7 +46,7 @@ from widget.screen import Screen
 
 class form(object):
     def __init__(self, model, res_id=False, domain=None, view_type=None,
-            view_ids=None, window=None, context=None, name=False, help={}, limit=80,
+            view_ids=None, window=None, context=None, name=False, help={}, limit=100,
             auto_refresh=False, auto_search=True, search_view=None):
         if not view_type:
             view_type = ['form','tree']
@@ -209,7 +209,6 @@ class form(object):
         del self.screen
         del self.handlers
 
-
     def ids_get(self):
         return self.screen.ids_get()
 
@@ -334,10 +333,10 @@ class form(object):
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
         elif len(self.screen.models.models):
-            common.warning(_('Invalid form, correct red fields !'),_('Error !'))
+            common.warning(_('Invalid form, correct red fields !'),_('Error !'), parent=self.screen.current_view.window)
             self.message_state(_('Invalid form, correct red fields !'), color="red")
         if warning:
-            common.warning(warning,_('Warning !'))
+            common.warning(warning,_('Warning !'), parent=self.screen.current_view.window)
         return bool(id)
 
     def sig_previous(self, widget=None):

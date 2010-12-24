@@ -291,9 +291,12 @@ class datetime(wid_int.wid_int):
                 minute.set_value(int(val[-5:-3]))
                 cal.select_month(int(val[5:7])-1, int(val[0:4]))
                 cal.select_day(int(val[8:10]))
-            else:
-                hour.set_value(time.localtime()[3])
-                minute.set_value(time.localtime()[4])
+            elif dest == self.entry1:
+                hour.set_value(0)
+                minute.set_value(0)
+            elif dest == self.entry2:
+                hour.set_value(23)
+                minute.set_value(59)
         except ValueError:
             pass
         response = win.run()

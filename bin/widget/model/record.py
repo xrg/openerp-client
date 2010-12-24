@@ -70,7 +70,7 @@ class ModelRecord(signal_event.signal_event):
             if (new and val.attrs['type']=='one2many') and (val.attrs.get('mode', 'tree,form').startswith('form')):
                 mod = self.value[key].model_new()
                 self.value[key].model_add(mod)
-                
+
 
     def __getitem__(self, name):
         return self.mgroup.mfields.get(name, False)
@@ -140,8 +140,9 @@ class ModelRecord(signal_event.signal_event):
                 context = self.context_get().copy()
                 self.update_context_with_concurrency(context)
                 res = self.rpc.write([self.id], value, context)
-                #if type(res) in (int, long):
-                #    self.id = res
+                if type(res)==type({}):
+                    obj = service.LocalService('action.main')
+                    obj._exec_action(res,{}, context)
         except Exception, e:
             if hasattr(e, 'faultCode') and e.faultCode.find('ValidateError')>-1:
                 self.failed_validation()
@@ -336,9 +337,9 @@ class ModelRecord(signal_event.signal_event):
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
             if 'context' in response:
                 self.mgroup.context.update(response['context'])
-            warning=response.get('warning', {})
+            warning = response.get('warning', {})
             if warning:
-                common.warning(warning['message'], warning['title'])
+                common.warning(warning['message'], warning['title'], parent=self.mgroup.screen.current_view.window)
         self.signal('record-changed')
 
     def on_change_attrs(self, callback):
@@ -413,7 +414,7 @@ class ModelRecord(signal_event.signal_event):
                 raise Exception, 'Unallowed button type'
             if screen.current_model and screen.current_view.view_type != 'tree':
                 screen.reload()
-                
+
             del screen
 
 
