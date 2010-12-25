@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Tiny ERP V2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-10-25 19:27+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-12-24 18:35+0000\n"
+"Last-Translator: NOVOTRADE SYSTEMHOUSE <Unknown>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-12-25 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: hu\n"
 
@@ -87,7 +87,7 @@ msgstr "Szuper Adminisztrátor Jelszó:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "Helytelen Szuper Adminisztrátor Jelszó"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -119,7 +119,7 @@ msgstr "Adatbázis Migráció"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Adatbázis"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -131,7 +131,7 @@ msgstr "Az Ön adatbázisai frissültek."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Nem választott adatbázist"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
@@ -204,7 +204,7 @@ msgstr "Szerkesztés"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
@@ -222,7 +222,7 @@ msgstr "Nincs kérés"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s kérés küldve"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
@@ -232,7 +232,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "Az adatbázis nem elérhető vagy nem létezik"
 
 #: bin/modules/gui/main.py:1041
 msgid ""
@@ -253,7 +253,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #: bin/modules/gui/main.py:1076
 msgid "Not logged !"
@@ -450,7 +450,7 @@ msgstr "Hiba !"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "Figyelem !"
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
@@ -551,7 +551,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "Import Hiba."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -2721,6 +2721,13 @@ msgstr "<i>_Részletek</i>"
 #~ msgid "This widget is readonly !"
 #~ msgstr "Ez az alkalmazás csak olvasható!"
 
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Folyamatlista Nyomtatása (Komplex)"
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Nem lehet beállítani a %s nyelvet"
+
 #~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 #~ msgstr "adja meg a naplózás szintjét: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 
@@ -2739,6 +2746,9 @@ msgstr "<i>_Részletek</i>"
 #~ msgid "Preference"
 #~ msgstr "Testreszabás"
 
+#~ msgid "_Tips"
+#~ msgstr "_Tippek"
+
 #~ msgid "<b>Operation in progress</b>"
 #~ msgstr "<b>Művelet folyamatban van</b>"
 
@@ -2746,11 +2756,110 @@ msgstr "<i>_Részletek</i>"
 #~ msgstr "Hiba nincs jelentve"
 
 #~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Ismeretlen hibát jelentett be.</b>\n"
+#~ "\n"
+#~ "<b>Ön nem rendelkezik érvényes Open ERP karbantartási szerződéssel!</b>\n"
+#~ "Ha Ön a termelésben használja az Open ERP-t, magasan ajánlott\n"
+#~ "egy karbantartási program előfizetése.\n"
+#~ "\n"
+#~ "Az Open ERP karbantartási szerződés hibaelhárítási garanciát nyújt Önnek és "
+#~ "egy\n"
+#~ "automatikus migrációs rendszert, azért hogy néhány órán belül "
+#~ "meghatározhassuk az Ön\n"
+#~ "problémáit. Ha Ön rendelkezett volna karbantartási szerződéssel, ezt a hibát "
+#~ "az Open ERP\n"
+#~ "szerkesztőjének minőségi csapatának küldték volna el.\n"
+#~ "\n"
+#~ "A karbantartási program a következőket nyújtja Önnek:\n"
+#~ "* Automatikus migráció az új verziókra,\n"
+#~ "* Hibaelhárítási garancia,\n"
+#~ "* Havi jelentés a potenciális hibákról és azok kijavításáról,\n"
+#~ "* Biztonsági figyelmeztetések e-mailben és automatikus migráció,\n"
+#~ "* Hozzáférés a vásárlói portálhoz.\n"
+#~ "\n"
+#~ "További információkért használja a lenti linket. A hiba részleteit\n"
+#~ "megtekintheti a második fülön.\n"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Ismeretlen hibát jelentett be.</b>\n"
+#~ "\n"
+#~ "Az Ön karbantartási szerződése nem foglalja magába az Ön rendszerébe "
+#~ "telepített összes modult !\n"
+#~ "Ha Ön a termelésben használja az Open ERP-t, magasan ajánlott az Ön "
+#~ "szerződésének\n"
+#~ "frissítése.\n"
+#~ "\n"
+#~ "Ha Ön a saját moduljait fejlesztette vagy külső modult telepített,\n"
+#~ "mi adhatunk Önnek egy kiegészítő karbantartási szerződést ezekre a "
+#~ "modulokra. Az Ön\n"
+#~ "moduljainak felülvizsgálata után, a mi minőségi csapatunk biztosítja ezek "
+#~ "automatikus\n"
+#~ "migrációját az összes jövőbeni Open ERP verziókhoz extra költség nélkül.\n"
+#~ "\n"
+#~ "Íme a lista azokról a modulokról, amelyeket nem foglal magába az Ön "
+#~ "karbantartási szerződése:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "További információkhoz használja a lenti linket. A hiba részleteit\n"
+#~ "megtekintheti a második fülön."
+
+#~ msgid ""
 #~ "Function only available for MS Office !\n"
 #~ "Sorry, OOo users :("
 #~ msgstr ""
 #~ "A funkció csak MS Office-szal érhető el !\n"
 #~ "Sajnáljuk, OpenOffice felhasználók :("
+
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s kérése elküldve"
 
 #~ msgid "OpenERP Server:"
 #~ msgstr "OpenERP Szerver:"
@@ -2761,8 +2870,22 @@ msgstr "<i>_Részletek</i>"
 #~ msgid "Default Language:"
 #~ msgstr "Alapértelmezett nyelv:"
 
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Ez az '<i>admin</i>' felhasználó jelszava, ami létre lesz hozva az Ön új "
+#~ "adatbázisában."
+
 #~ msgid "Administrator Password:"
 #~ msgstr "Adminisztrátor jelszó:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Ez az '<i>admin</i>' felhasználó jelszava, ami létre lesz hozva az Ön új "
+#~ "adatbázisában. Ennek meg kell egyeznie a fenti mezővel."
 
 #~ msgid "Confirm Password:"
 #~ msgstr "Jelszó megerősítése:"
@@ -2791,8 +2914,27 @@ msgstr "<i>_Részletek</i>"
 #~ msgid "Connect now"
 #~ msgstr "Kapcsolódás most"
 
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Kattintson ide a karbantartási javaslatok részleteiért"
+
 #~ msgid "<i>_Maintenance</i>"
 #~ msgstr "<i>_Karbantartás</i>"
+
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Karbantartási Szerződés.</b>\n"
+#~ "<i>\n"
+#~ "Kérését elküldjük az OpenErp és a karbantartási csapat részére és hamarosan "
+#~ "válaszolunk Önnek.\n"
+#~ "</i>"
+
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Küldés a Karbantartó csapatnak"
 
 #~ msgid "gtk-close"
 #~ msgstr "gtk-bezárás"
@@ -2811,6 +2953,9 @@ msgstr "<i>_Részletek</i>"
 
 #~ msgid "Open Source:"
 #~ msgstr "Nyílt Forráskód:"
+
+#~ msgid "Your Company:"
+#~ msgstr "Vállalata:"
 
 #~ msgid "Industry:"
 #~ msgstr "Iparág:"
@@ -2861,6 +3006,9 @@ msgstr "<i>_Részletek</i>"
 
 #~ msgid "Your Name:"
 #~ msgstr "Neve:"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-mégsem"
 
 #~ msgid "gtk-ok"
 #~ msgstr "gtk-ok"
