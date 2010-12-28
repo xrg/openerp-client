@@ -127,7 +127,7 @@ class dialog(object):
             res = self.dia.run()
             if res in(gtk.RESPONSE_CANCEL, gtk.RESPONSE_DELETE_EVENT):
                 self.screen.current_model.cancel()
-            end = (res not in (gtk.RESPONSE_OK, gtk.RESPONSE_APPLY)) or self.screen.current_model.validate()
+            end = self.screen.current_model.validate()
             if not end:
                 self.screen.display()
                 self.screen.current_view.set_cursor()
