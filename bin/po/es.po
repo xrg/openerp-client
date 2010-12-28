@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-11-29 06:53+0000\n"
+"PO-Revision-Date: 2010-12-27 16:25+0000\n"
 "Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
 "<jesteve@zikzakmedia.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:55+0000\n"
+"X-Launchpad-Export-Date: 2010-12-28 04:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: es\n"
 
@@ -686,13 +686,9 @@ msgstr "ID"
 msgid "Creation User"
 msgstr "Creacion Usuario"
 
-#
-# File: bin/modules/gui/window/form.py, line: 217
-# File: bin/modules/gui/window/form.py, line: 217
-# File: bin/modules/gui/window/form.py, line: 217
 #: bin/modules/gui/window/form.py:255
 msgid "Creation Date"
-msgstr "Fecha Creación"
+msgstr "Fecha creación"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
@@ -4491,6 +4487,14 @@ msgstr "<i>_Detalles</i>"
 #~ msgstr "Ahora puede conectarse a la base de datos como administrador."
 
 #
+# File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 698
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - % solicitud(es) enviada(s)"
+
+#
 # File: bin/modules/gui/main.py, line: 736
 # File: bin/modules/gui/main.py, line: 736
 # File: bin/modules/gui/main.py, line: 736
@@ -4518,6 +4522,13 @@ msgstr "<i>_Detalles</i>"
 #~ msgstr ""
 #~ "¡Función sólo disponible para MS Office!\n"
 #~ "Lo sentimos, usuarios de OpenOffice :("
+
+#
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Imprimir Flujo de Trabajo (Completo)"
 
 #
 # File: bin/common/common.py, line: 177
@@ -4613,6 +4624,13 @@ msgstr "<i>_Detalles</i>"
 # File: bin/widget/view/form_gtk/calendar.py, line: 238
 #~ msgid "This widget is readonly !"
 #~ msgstr "¡Este control es de sólo lectura!"
+
+#
+# File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1140
+#~ msgid "_Tips"
+#~ msgstr "Consejos"
 
 #
 # File: bin/openerp.glade, line: 5440
@@ -4745,6 +4763,13 @@ msgstr "<i>_Detalles</i>"
 #~ msgstr "Correo electrónico:"
 
 #
+# File: bin/openerp.glade, line: 6304
+# File: bin/openerp.glade, line: 6304
+# File: bin/openerp.glade, line: 6304
+#~ msgid "Your Company:"
+#~ msgstr "Su Empresa:"
+
+#
 # File: bin/openerp.glade, line: 6318
 # File: bin/openerp.glade, line: 6318
 # File: bin/openerp.glade, line: 6318
@@ -4829,15 +4854,109 @@ msgstr "<i>_Detalles</i>"
 #~ "    Administrador: admin / admin "
 
 #
+# File: bin/translate.py, line: 183
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "No es posible establecer la configuración local %s"
+
+#
+# File: bin/win_error.glade, line: 278
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Enviar al equipo de mantenimiento"
+
+#
 # File: bin/openerp.glade, line: 5094
 #~ msgid "I want to be contacted for a demonstration"
 #~ msgstr "Quiero que se pongan en contacto para una demostración"
+
+#
+# File: bin/win_error.glade, line: 150
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Contrato de mantenimiento.</b>\n"
+#~ "<i>\n"
+#~ "Su solicitud será enviada a OpenERP y un equipo de mantenimiento le "
+#~ "contestará en poco tiempo.\n"
+#~ "</i>"
+
+#
+# File: bin/openerp.glade, line: 8003
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Esta es la contraseña del usuario '<i>admin</i>' que se creará en su nueva "
+#~ "base de datos."
+
+#
+# File: bin/openerp.glade, line: 8017
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Esta es la contraseña del usuario '<i>admin</i>' que se creará en su nueva "
+#~ "base de datos. Debe ser la misma que la del campo anterior."
 
 #~ msgid "gtk-close"
 #~ msgstr "Cerrar"
 
 #~ msgid "<i>_Maintenance</i>"
 #~ msgstr "<i>_Mantenimiento</i>"
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Clicar aquí para detalles sobre la propuesta de mantenimiento"
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Un error desconocido ha sido comunicado.</b>\n"
+#~ "\n"
+#~ "<b>¡No dispone de un contrato válido de mantenimiento de OpenERP!</b>\n"
+#~ "Si está utilizando OpenERP en producción, se recomienda\n"
+#~ "subscribir un programa de mantenimiento.\n"
+#~ "\n"
+#~ "El contrato de mantenimiento de OpenERP le proporciona una garantía\n"
+#~ "de solución de errores y un sistema de migración automático para que\n"
+#~ "podamos arreglar sus problemas en pocas horas. Si tuviera un contrato\n"
+#~ "de mantenimiento, este error se habría enviado al equipo de calidad del\n"
+#~ "editor de OpenERP.\n"
+#~ "\n"
+#~ "El programa de mantenimiento le ofrece:\n"
+#~ "* Migraciones automáticas a nuevas versiones,\n"
+#~ "* Garantía de corrección de errores,\n"
+#~ "* Comunicados mensuales de errores potenciales y sus soluciones,\n"
+#~ "* Alertas de seguridad por correo electrónico y migraciones automáticas,\n"
+#~ "* Acceso al portal de cliente.\n"
+#~ "\n"
+#~ "Puede utilizar el enlace inferior para más información. El detalle del\n"
+#~ "error se muestra en la segunda pestaña.\n"
 
 #, python-format
 #~ msgid ""
@@ -4893,6 +5012,9 @@ msgstr "<i>_Detalles</i>"
 #~ "¡Su problema <u>NO</u> ha podido ser enviado al equipo de calidad!\n"
 #~ "Por favor informe de este error manualmente en %s"
 
+#~ msgid "gtk-cancel"
+#~ msgstr "Cancelar"
+
 #~ msgid "gtk-ok"
 #~ msgstr "Aceptar"
 
@@ -4938,3 +5060,51 @@ msgstr "<i>_Detalles</i>"
 
 #~ msgid "Connect now"
 #~ msgstr "Conectar ahora"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Un error desconocido ha sido comunicado.</ b>\n"
+#~ "\n"
+#~ "¡Su contrato de mantenimiento no cubre todos los módulos instalados en su "
+#~ "sistema!\n"
+#~ "Si está utilizando OpenERP en producción, es recomendable actualizar su "
+#~ "contrato.\n"
+#~ "\n"
+#~ "Si ha desarrollado sus propios módulos o instalado módulos de terceros, "
+#~ "podemos\n"
+#~ "ofrecerle un contrato de mantenimiento adicional para estos módulos. Después "
+#~ "de\n"
+#~ "revisar los módulos, nuestro equipo de calidad se asegurará que van a "
+#~ "migrar\n"
+#~ "automáticamente para todas las futuras versiones estables de OpenERP sin "
+#~ "costo adicional.\n"
+#~ "\n"
+#~ "Esta es la lista de módulos que no están cubiertos por su contrato de "
+#~ "mantenimiento:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Puede utilizar el enlace inferior para más información. El detalle del "
+#~ "error\n"
+#~ "se muestra en la segunda pestaña."
