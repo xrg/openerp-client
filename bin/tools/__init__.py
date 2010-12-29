@@ -85,11 +85,9 @@ def calc_condition(self, model, cond):
     cond_main = cond[:]
     try:
         return ConditionExpr(cond).eval(model)
-    except:
+    except Exception, e:
         import common
         common.error('Wrong attrs Implementation!','You have wrongly specified conditions in attrs %s' %(cond_main,))
-    
-    
 
 class ConditionExpr(object):
 
@@ -112,7 +110,6 @@ class ConditionExpr(object):
             def evaluate(cond): # Method to evaluate the conditions
                 if isinstance(cond,bool):
                     return cond
-                
                 
                 left, oper, right = cond    
                 if not model or not left in model.mgroup.fields:  #check that the field exist
@@ -140,30 +137,23 @@ class ConditionExpr(object):
                 return res
 
             #copy the list
-            eval_stack = self.cond[:]
-            
-            eval_stack.reverse()
-            while len(eval_stack) > 1:
-                condition = eval_stack.pop()
-                if is_operand(condition): # If operand Push on Stack
-                    eval_stack.append(condition)
-                    eval_stack.append('&') #by default it's a and
-                elif condition in ['|','&','!']: # If operator pop necessary operands from stack and evaluate and store the result back to stack
-                   
-                    if condition in ('|','&'):
-                        elem_1 = eval_stack.pop()
-                        elem_2 = eval_stack.pop()
-                        if condition=='|':
-                            result = any((evaluate(elem_1), evaluate(elem_2)))
-                        else:
-                            result = all((evaluate(elem_1), evaluate(elem_2)))
-                    elif condition == '!':
-                        elem_1 = eval_stack.pop()
-                        result =  not evaluate(elem_1)
-                    eval_stack.append(result)            
-            res = evaluate(eval_stack.pop()) # evaluate the last element
-            return res
-        
+            #eval_stack = self.cond[:]
+            #eval_stack.reverse()
+            res = []
+            for condition in self.cond[::-1]:
+                if is_operand(condition):
+                    res.append(evaluate(condition))
+                elif condition in ['|','&']:
+                    elem_1 = res.pop()
+                    elem_2 = res.pop()
+                    if condition=='|':
+                        res.append( any((evaluate(elem_1), evaluate(elem_2))) )
+                    else:
+                        res.append( all((evaluate(elem_1), evaluate(elem_2))) )
+                elif condition == '!':
+                    res.append(not res.pop())
+            return all(res)
+
 def call_log(fun):
     """Debug decorator
        TODO: Add optionnal execution time
