@@ -29,8 +29,6 @@ import sys
 import os
 import glob
 
-from mydistutils import L10nAppDistribution
-
 from setuptools import setup
 from distutils.sysconfig import get_python_lib
 
@@ -192,17 +190,12 @@ setup(name             = name,
                           'openerp-client.SpiffGtkWidgets.Calendar',
                           'openerp-client.plugins'] + list(find_plugins()),
       package_dir      = {'openerp-client': 'bin'},
-      distclass = sys.platform != 'win32' and L10nAppDistribution or None,
-      #extras_required={
-      #    'timezone' : ['pytz'],
-      #},
       options = options,
       install_requires = [
           'lxml',
           'pytz',
-          'gtk',
-          'gtk.glade',
-          'dateutil',
+          'PyGTK',
+          'python-dateutil',
       ],
       **complementary_arguments
 )
