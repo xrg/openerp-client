@@ -25,19 +25,17 @@
 #   taken from gnomolicious http://www.nongnu.org/gnomolicious/
 #   adapted by Nicolas Évrard <nicoe@altern.org>
 
-import imp
 import sys
 import os
 import glob
-import logging
-from stat import ST_MODE
 
-from distutils.file_util import copy_file
-from distutils.core import setup
 from mydistutils import L10nAppDistribution
-log = logging.getLogger('setup')
+
+from setuptools import setup
+from distutils.sysconfig import get_python_lib
+
 has_py2exe = False
-if os.name == 'nt':
+if sys.platform == 'win32':
     import py2exe
     has_py2exe = True
 
@@ -60,31 +58,10 @@ if sys.argv[1] == 'bdist_rpm':
 # get python short version
 py_short_version = '%s.%s' % sys.version_info[:2]
 
-required_modules = [
-    ('lxml', 'lxml module: pythonic libxml2 and libxslt bindings'),
-    ('pytz', 'Timezone handling library for Python'),
-    ('gtk', 'gtk python bindings'),
-    ('gtk.glade', 'glade python bindings'),
-    ('dateutil', 'date and time handling routines for Python')
-]
-
-
-def check_modules():
-    ok = True
-    for modname, desc in required_modules:
-        try:
-            exec('import %s' % modname)
-        except ImportError:
-            ok = False
-            log.error('python module %s (%s) is required' % (modname, desc))
-
-    if not ok:
-        sys.exit(1)
-
 def data_files():
     '''Build list of data files to be installed'''
     files = []
-    if os.name == 'nt':
+    if sys.platform == 'win32':
         import matplotlib
         datafiles = matplotlib.get_py2exe_datafiles()
         if isinstance(datafiles, list):
@@ -135,9 +112,7 @@ def translations():
         trans.append((dest % (lang, name), po))
     return trans
 
-check_modules()
-
-if os.name <> 'nt' and sys.argv[1] == 'build_po':
+if sys.platform != 'win32' and 'build_po' in sys.argv:
     os.system('(cd bin ; find . -name \*.py && find . -name \*.glade | xargs xgettext -o po/%s.pot)' % name)
     for file in ([ os.path.join('bin', 'po', fname) for fname in os.listdir('bin/po') ]):
         if os.path.isfile(file):
@@ -217,68 +192,17 @@ setup(name             = name,
                           'openerp-client.SpiffGtkWidgets.Calendar',
                           'openerp-client.plugins'] + list(find_plugins()),
       package_dir      = {'openerp-client': 'bin'},
-      distclass = os.name <> 'nt' and L10nAppDistribution or None,
+      distclass = sys.platform != 'win32' and L10nAppDistribution or None,
       #extras_required={
       #    'timezone' : ['pytz'],
       #},
       options = options,
+      install_requires = [
+          'lxml',
+          'pytz',
+          'gtk',
+          'gtk.glade',
+          'dateutil',
+      ],
       **complementary_arguments
-      )
-
-if has_py2exe:
-    # Sometime between pytz-2008a and pytz-2008i common_timezones started to
-    # include only names of zones with a corresponding data file in zoneinfo.
-    # pytz installs the zoneinfo directory tree in the same directory
-    # as the pytz/__init__.py file. These data files are loaded using
-    # pkg_resources.resource_stream. py2exe does not copy this to library.zip so
-    # resource_stream can't find the files and common_timezones is empty when
-    # read in the py2exe executable.
-    # This manually copies zoneinfo into the zip. See also
-    # http://code.google.com/p/googletransitdatafeed/issues/detail?id=121
-    import pytz
-    import zipfile
-    import tempfile
-    import shutil
-    # Make sure the layout of pytz hasn't changed
-    assert (pytz.__file__.endswith('__init__.pyc') or
-          pytz.__file__.endswith('__init__.py')), pytz.__file__
-
-    temp_dir = None
-    pytz_dir = os.path.dirname(pytz.__file__)
-    zoneinfo_dir = os.path.join(pytz_dir, 'zoneinfo')
-    if not os.path.exists(zoneinfo_dir):
-        egg = os.path.dirname(pytz_dir)
-
-        if zipfile.is_zipfile(egg):
-            temp_dir = tempfile.mkdtemp()
-            zoneinfo_dir = os.path.join(temp_dir, 'pytz', 'zoneinfo')
-            os.makedirs(zoneinfo_dir)
-
-            archive = zipfile.ZipFile(egg)
-            for filename in archive.namelist():
-                if filename.startswith('pytz/zoneinfo/'):
-                    file_path = os.path.join(temp_dir, filename)
-                    destination = file_path.replace('/', os.sep)
-                    if not file_path.endswith('/'):
-                        try:
-                            os.makedirs(os.path.dirname(destination))
-                        except os.error:
-                            pass
-                        fp = file(destination, 'w')
-                        fp.write(archive.read(filename))
-                        fp.close()
-            archive.close()
-
-    # '..\\Lib\\pytz\\__init__.py' -> '..\\Lib'
-    disk_basedir = os.path.dirname(os.path.dirname(zoneinfo_dir))
-    zipfile_path = os.path.join(options['py2exe']['dist_dir'], 'library.zip')
-    z = zipfile.ZipFile(zipfile_path, 'a')
-    for absdir, directories, filenames in os.walk(zoneinfo_dir):
-        zip_dir = absdir[len(disk_basedir):]
-        for f in filenames:
-            z.write(os.path.join(absdir, f), os.path.join(zip_dir, f))
-    z.close()
-
-    if temp_dir is not None:
-        shutil.rmtree(temp_dir)
-
+)
