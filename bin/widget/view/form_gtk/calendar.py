@@ -115,7 +115,7 @@ class calendar(interface.widget_interface):
         if not value:
             self.entry.clear()
         else:
-            date = DT.strptime(value, DT_FORMAT)
+            date = parse(value)
             date_disp = date.strftime(self.format)
             if len(date_disp) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(date_disp))
