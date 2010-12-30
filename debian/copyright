@@ -1,8 +1,3 @@
-Upstream-Contact: n/a
-Upstream-Homepage: http://www.openerp.com/
-Maintainer-Contact: Debian Open Object Maintainers <gnunet@lists.debian-maintainers.org>
-Maintainer-Homepage: http://open-object.debian-maintainers.org/
-
 Files: *
 Copyright: (C) 2004-2010 Tiny.be <info@tiny.be>
 License: GPL-3+
