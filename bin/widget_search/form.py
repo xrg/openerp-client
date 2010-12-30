@@ -102,7 +102,7 @@ class _container(object):
         wid_list.reverse()
         table.set_focus_chain(wid_list)
         return wid
-    
+
     def destroy(self):
         del self.col
         del self.cont
@@ -110,7 +110,7 @@ class _container(object):
         del self.flag
         del self.max_width
         del self.width
-        
+
 
 class parse(object):
     def __init__(self, parent, fields, model, col=6):
@@ -118,7 +118,7 @@ class parse(object):
         self.name_lst = []
         self.name_lst1 = []
 
-        all_fields = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_get', rpc.session.context)
+        all_fields = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_get', False, rpc.session.context)
         if len(fields) != len(all_fields):
             common_fields = [f for f in all_fields if f in fields]
             for f in common_fields:
@@ -132,7 +132,7 @@ class parse(object):
         self.col = col
         self.focusable = None
         self.add_widget_end = []
-        
+
     def destroy(self):
         self.container.destroy()
         self.focusable.destroy()
@@ -425,16 +425,15 @@ class form(wid_int.wid_int):
         for (ref, value) in self.__dict__.items():
             if isinstance(value, gtk.Object) and not isinstance(value, gtk.Window):
                 value.destroy()
-        
+
         self.parser.destroy()
-                
-        del self.widgets 
+
+        del self.widgets
         del self.focusable
         del self.parent
         del self.parser
         del self.widget
-        
-    
+
     def _value_set(self, value):
         for x in value:
             if x in self.widgets:
@@ -443,8 +442,6 @@ class form(wid_int.wid_int):
                 self.custom_widgets[x][0].value = value[x]
 
     value = property(_value_get, _value_set, None, _('The content of the form or exception if not valid'))
-    
-    
 
 import calendar
 import spinbutton

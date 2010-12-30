@@ -99,23 +99,21 @@ class ConditionExpr(object):
     def eval(self, model):
         if model:
             eval_stack = [] # Stack used for evaluation
-            ops = ['=','!=','<','>','<=','>=','in','not in','<>','=='] 
-            
+            ops = ['=','!=','<','>','<=','>=','in','not in','<>','==']
+
             def is_operand(cond): # Method to check the Operands
                 if (len(cond)==3 and cond[1] in ops) or isinstance(cond,bool):
                     return True
                 else:
                     return False
-                
+
             def evaluate(cond): # Method to evaluate the conditions
                 if isinstance(cond,bool):
                     return cond
-                
-                left, oper, right = cond    
+                left, oper, right = cond
                 if not model or not left in model.mgroup.fields:  #check that the field exist
                     return False
-                    
-                
+
                 oper = self.OPERAND_MAPPER.get(oper.lower(), oper)
                 if oper == '=':
                     res = operator.eq(model[left].get(model),right)
@@ -208,7 +206,7 @@ def ustr(value, from_encoding='utf-8'):
     return unicode(value, from_encoding)
 
 def locale_format(format, value):
-    label_str = locale.format(format, value, True)
+    label_str = locale.format(format, value, True, True)
     if not locale.getpreferredencoding().lower().startswith('utf'):
         label_str = label_str.replace('\xa0', '\xc2\xa0')
     return label_str

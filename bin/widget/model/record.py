@@ -161,7 +161,7 @@ class ModelRecord(signal_event.signal_event):
         if len(self.mgroup.fields):
             val = self.rpc.default_get(self.mgroup.fields.keys(), context)
             for d in domain:
-                if d[0] in self.mgroup.fields:
+                if d[0] in self.mgroup.fields and not self.mgroup.fields.get(d[0], {}).get('readonly',False):
                     if d[1] == '=':
                         if d[2]:
                             value = d[2]
