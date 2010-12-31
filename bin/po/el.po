@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-31 16:07+0200\n"
-"PO-Revision-Date: 2010-12-31 16:31+0200\n"
+"PO-Revision-Date: 2010-12-31 16:52+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -183,10 +183,9 @@ msgstr ""
 "πληροφορίες. Οι λεπτομέρειες του σφάλματος\n"
 "εμφανίζονται στην δεύτερη καρτέλα.\n"
 
-#
 # File: bin/common/common.py, line: 368
 #: bin/common/maint_messages.py:47
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "<b>An unknown error has been reported.</b>\n"
@@ -212,16 +211,16 @@ msgid ""
 "is displayed on the second tab."
 msgstr ""
 "\n"
-"<b>Ένα άγνωστο λάθος αναθέρθηκε</b>\n"
+"<b>Ένα άγνωστο λάθος αναφέρθηκε</b>\n"
 "\n"
-"Το συμβόλαιο συντήρηση σας δεν καλύπτει όλα τα πρόσθετα που έχετε "
+"Η εγγύηση εκδότη δεν καλύπτει όλα τα πρόσθετα που έχετε "
 "εγκαταστήσει στο σύστημα σας!\n"
-"Αν χρησιμοποιείτε την Open ERP στην παραγωγή, συνιστάται να αναβαθμίσετε το\n"
+"Αν χρησιμοποιείτε την Open ERP σε παραγωγή, συνιστάται να αναβαθμίσετε το "
 "συμβόλαιο σας.\n"
 "\n"
 "Αν έχετε αναπτύξει δικά σας πρόσθετα ή αν έχετε εγκαταστήσει πρόσθετα "
 "τρίτων, μπορούμε\n"
-"να σας προσφέρουμε πρόσθετο συμβόλαιο συντήρησης για αυτά. Αφού\n"
+"να σας προσφέρουμε πρόσθετο συμβόλαιο υποστήριξης για αυτά. Αφού\n"
 "τα εξετάσει, η ομάδα ποιότητας μας θα βεβαιώσει ότι θα μπορούν να "
 "αναβαθμιστούν\n"
 "αυτόματα για όλες τις επόμενες εκδόσεις της Open ERP χωρίς επιπλέον κόστος.\n"
@@ -320,13 +319,11 @@ msgstr "Αλλαγή"
 msgid "Super Administrator Password:"
 msgstr "Κωδικός Super Administrator:"
 
-#
 # File: bin/modules/gui/main.py, line: 109
 # File: bin/openerp.glade, line: 7011
 #: bin/modules/gui/main.py:193
-#, fuzzy
 msgid "Bad Super Administrator Password"
-msgstr "Κωδικός Super Administrator:"
+msgstr "Κωδικός Υπερ-Διαχειριστή:"
 
 #
 # File: bin/modules/gui/main.py, line: 240
@@ -388,12 +385,10 @@ msgstr "Η βάσης δεδομένων σας αναβαθμίστηκε."
 msgid "Your databases have been upgraded."
 msgstr "Οι βάσεις δεδομένων σας αναβαθμίστηκαν."
 
-#
 # File: bin/modules/gui/window/win_import.py, line: 220
 #: bin/modules/gui/main.py:296
-#, fuzzy
 msgid "You have not selected a database"
-msgstr "Δεν επιλέξατε πεδία για εισαγωγή"
+msgstr "Δεν έχετε επιλέξει βάση δεδομένων"
 
 #
 # File: bin/modules/gui/main.py, line: 443
@@ -527,12 +522,11 @@ msgstr "%s αιτήση(σεις)"
 msgid "No request"
 msgstr "Καμία αίτηση"
 
-#
 # File: bin/modules/gui/main.py, line: 999
 #: bin/modules/gui/main.py:1004
-#, fuzzy, python-format
+#, python-format
 msgid " - %s request(s) sent"
-msgstr " - %s αιτήση(σεις) στάλθηκαν"
+msgstr " - %s αίτηση(σεις) στάλθηκαν"
 
 #: bin/modules/gui/main.py:1044
 msgid "Database cannot be accessed or does not exist"
@@ -566,12 +560,11 @@ msgstr ""
 "Λάθος πιστοποίησης!\n"
 "Λάθος όνομα χρήστη ή κωδικός!"
 
-#
 # File: bin/openerp.glade, line: 1743
 #: bin/modules/gui/main.py:1063
-#, fuzzy, python-format
+#, python-format
 msgid "OpenERP - %s"
-msgstr "OpenERP - Φόρμες"
+msgstr "OpenERP - %s"
 
 #
 # File: bin/modules/gui/main.py, line: 1062
@@ -603,7 +596,7 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 1177
 #: bin/modules/gui/main.py:1200 bin/modules/gui/main.py:1207
 msgid "Do you really want to quit ?"
-msgstr "Θέλετε να αποσυνδεθείτε;"
+msgstr "Θέλετε πραγματικά να τερματίσετε;"
 
 #
 # File: bin/modules/gui/main.py, line: 1232
@@ -995,13 +988,11 @@ msgstr ""
 msgid "Error Opening Excel !"
 msgstr "Σφάλμα ανοίγματος Excel!"
 
-#
 # File: bin/openerp.glade, line: 2486
 #: bin/modules/gui/window/win_export.py:142
 #: bin/modules/gui/window/win_export.py:146
-#, fuzzy
 msgid "Field Name"
-msgstr "_Όνομα Πεδίου:"
+msgstr "Όνομα Πεδίου"
 
 #: bin/modules/gui/window/win_export.py:208
 #: bin/modules/gui/window/win_import.py:137
@@ -1035,12 +1026,10 @@ msgstr "Εφαρμογή"
 msgid "Extension"
 msgstr "Επέκταση"
 
-#
 # File: bin/openerp.glade, line: 1377
 #: bin/modules/gui/window/win_extension.py:43
-#, fuzzy
 msgid "Print Processor"
-msgstr "Εκτύπωση εγγράφων"
+msgstr "Επεξεργαστής Εκτυπώσεων"
 
 #
 # File: bin/openerp.glade, line: 7843
@@ -1110,11 +1099,9 @@ msgstr "Λάθος εισαγωγής !"
 msgid "Field name"
 msgstr "Όνομα πεδίου"
 
-#
 #: bin/modules/gui/window/win_import.py:169
-#, fuzzy
 msgid "Error opening .CSV file"
-msgstr "Σφάλμα κατά την ανάγνωση του αρχείου"
+msgstr "Σφάλμα κατά το άνοιγμα του CSV"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
@@ -1136,12 +1123,10 @@ msgid ""
 "Field %s is unknown !"
 msgstr ""
 
-#
 # File: bin/modules/gui/window/win_import.py, line: 70
 #: bin/modules/gui/window/win_import.py:190
-#, fuzzy
 msgid "Import Error."
-msgstr "Λάθος εισαγωγής !"
+msgstr "Λάθος εισαγωγής."
 
 #
 # File: bin/modules/gui/window/win_import.py, line: 220
@@ -1759,7 +1744,7 @@ msgstr "Κλείσιμο του παραθύρου"
 #: bin/openerp.glade:1512
 #, fuzzy
 msgid "Company:"
-msgstr "Η εταιρία σας:"
+msgstr "Εταιρεία:"
 
 #
 # File: bin/openerp.glade, line: 1497
@@ -2040,12 +2025,10 @@ msgstr ""
 "Άνοιγμα σε Excel\n"
 "Αποθήκευση σε CSV"
 
-#
 # File: bin/openerp.glade, line: 3113
 #: bin/openerp.glade:3108
-#, fuzzy
 msgid "Add Field Names"
-msgstr "Πρόσθεσε ονόματα _πεδίων"
+msgstr "Πρόσθεσε ονόματα πεδίων"
 
 #
 # File: bin/openerp.glade, line: 2807
@@ -2547,10 +2530,8 @@ msgstr "Διαχωριστής Κειμένου:"
 msgid "Encoding:"
 msgstr "Κωδικοποίηση:"
 
-#
 # File: bin/openerp.glade, line: 6029
 #: bin/openerp.glade:6008
-#, fuzzy
 msgid "Field Separator: "
 msgstr "Διαχωριστής Πεδίων:"
 
@@ -2721,15 +2702,13 @@ msgstr ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Προεπιλεγμένη "
 "Γλώσσα:"
 
-#
 # File: bin/openerp.glade, line: 7149
 #: bin/openerp.glade:7132
-#, fuzzy
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
-"Αυτός είναι ο κωδικός πρόσβασης του χρήστη '<i>admin</i>' ο οποίος θα "
+"Αυτός είναι ο κωδικός πρόσβασης του χρήστη 'admin' ο οποίος θα "
 "δημιουργηθεί στην νέα βάση δεδομένων σας."
 
 #: bin/openerp.glade:7134
@@ -2740,15 +2719,13 @@ msgstr ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Συνθηματικό "
 "Διαχειριστή:"
 
-#
 # File: bin/openerp.glade, line: 7163
 #: bin/openerp.glade:7147
-#, fuzzy
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
-"Αυτός είναι ο κωδικός πρόσβασης του χρήστη '<i>admin</i>' ο οποίος θα "
+"Αυτός είναι ο κωδικός πρόσβασης του χρήστη 'admin' ο οποίος θα "
 "δημιουργηθεί στην βάση δεδομένων σας. Θα πρέπει να είναι ίδιος με το "
 "παραπάνω πεδίο."
 
@@ -2910,12 +2887,10 @@ msgstr ""
 "ΚΑΙ\n"
 "Ή"
 
-#
 # File: bin/openerp.glade, line: 2710
 #: bin/openerp.glade:8293
-#, fuzzy
 msgid "Remove Filter"
-msgstr "Αφαίρεση Λίστας"
+msgstr "Αφαίρεση Φίλτρου"
 
 #
 #: bin/openerp.glade:8312
@@ -2923,12 +2898,10 @@ msgstr "Αφαίρεση Λίστας"
 msgid "Filter Entry"
 msgstr "Φίλτρο: "
 
-#
 # File: bin/openerp.glade, line: 2486
 #: bin/openerp.glade:8358
-#, fuzzy
 msgid "Enter Filter Name:"
-msgstr "_Όνομα Πεδίου:"
+msgstr "Δώστε όνομα Φίλτρου:"
 
 #
 # File: bin/options.py, line: 108
@@ -3007,12 +2980,10 @@ msgid ""
 "%s"
 msgstr ""
 
-#
 # File: bin/widget/view/form_gtk/many2one.py, line: 169
 #: bin/printer/printer.py:195
-#, fuzzy
 msgid "Print Report"
-msgstr "Αναφορά"
+msgstr "Εκτύπωση Αναφοράς"
 
 #: bin/printer/printer.py:212
 msgid "Error! No Data found. Make sure you have enough data to print!"
@@ -3058,36 +3029,35 @@ msgstr "Σφάλμα σύνδεσης"
 msgid "Cannot list db:"
 msgstr "Δεν βρίσκονται βάσεις:"
 
-#
 # File: bin/modules/gui/main.py, line: 87
 # File: bin/modules/gui/main.py, line: 436
 # File: bin/modules/gui/main.py, line: 1445
 #: bin/rpc.py:417
-#, fuzzy, python-format
+#, python-format
 msgid "Could not get server's version: %s"
-msgstr "Αδυναμία σύνδεσης με τον εξυπηρετητή !"
+msgstr "Δεν βρίσκεται η έκδοση του εξυπηρετητή: %s"
 
-#
 # File: bin/modules/gui/main.py, line: 87
 # File: bin/modules/gui/main.py, line: 436
 # File: bin/modules/gui/main.py, line: 1445
 #: bin/rpc.py:429
-#, fuzzy, python-format
+#, python-format
 msgid "Could not get server's options: %s"
-msgstr "Αδυναμία σύνδεσης με τον εξυπηρετητή !"
+msgstr "Δεν βρέθηκαν οι δυνατότητες εξυπηρετητή: %s"
 
-#
 # File: bin/translate.py, line: 184
 #: bin/translate.py:183
-#, fuzzy, python-format
+#, python-format
 msgid "Unable to set locale %s: %s"
-msgstr "Αδυναμία ορισμού περιοχής %s"
+msgstr "Αδυναμία ορισμού γλώσσας: %s"
 
 #: bin/widget/screen/screen.py:358
 msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
 msgstr ""
+"(Υπάρχοντα φίλτρα με το ίδιο όνομα\n"
+"θα αντικατασταθούν)"
 
 #
 # File: bin/widget/view/calendar_gtk/parser_dummy.py, line: 31
@@ -3103,11 +3073,9 @@ msgstr ""
 "Πρέπει να εγκαταστήσετε την βιβλιοθήκη python-hippocanvas για να "
 "χρησιμοποιήσετε τα ημερολόγια."
 
-#
 #: bin/widget/view/diagram_gtk/xdot.py:1422
-#, fuzzy
 msgid "Dot Viewer"
-msgstr "Άλλη Εμφάνιση"
+msgstr "Προβολέας Dot"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
@@ -3164,11 +3132,9 @@ msgstr ""
 "Θα πρέπει να αποθηκεύσετε την τρέχουσα εγγραφή για να χρησιμοποιήσετε το "
 "πλήκτρο συσχετισμού!"
 
-#
 #: bin/widget/view/form.py:141
-#, fuzzy
 msgid "Action not defined !"
-msgstr "Καμία ενέργεια δεν καθορίστηκε!"
+msgstr "Η ενέργεια δεν ορίστηκε!"
 
 #
 # File: bin/widget/view/form.py, line: 182
@@ -3299,11 +3265,9 @@ msgstr ""
 "Αν επιλέξετε \"Όχι\", θα συνεχίσετε να το υπογράψετε κανονικά. \n"
 "Με \"Ακύρωση\" δεν θα το υπογράψετε."
 
-#
 #: bin/widget/view/form_gtk/binary.py:223
-#, fuzzy
 msgid "Are you sure now that you want to sign this document?"
-msgstr "Είστε σίγουρος ότι επιθυμείτε την απομάκρυνση αυτού του συνημμένου ;"
+msgstr "Είστε σίγουρος ότι επιθυμείτε την υπογραφή αυτού του εγγράφου;"
 
 #: bin/widget/view/form_gtk/binary.py:232
 #, python-format
@@ -3315,19 +3279,16 @@ msgstr "Το GPG απέτυχε με κωδικό %d"
 msgid "GPG terminated with signal %d"
 msgstr "Το GPG τερμάτισε με κωδικό %d"
 
-#
 # File: bin/modules/gui/window/form.py, line: 306
 #: bin/widget/view/form_gtk/binary.py:246
-#, fuzzy
 msgid "Document signed."
-msgstr "Το αρχείο αποθηκεύτηκε."
+msgstr "Το αρχείο υπεγράφη."
 
-#
 # File: bin/widget/view/form_gtk/binary.py, line: 172
 #: bin/widget/view/form_gtk/binary.py:250
-#, fuzzy, python-format
+#, python-format
 msgid "Error signing the file: %s"
-msgstr "Σφάλμα εγγραφής του αρχείου: %s"
+msgstr "Σφάλμα υπογραφής του αρχείου: %s"
 
 #: bin/widget/view/form_gtk/binary.py:266
 msgid "Cannot verify a modified record. Please save it first!"
@@ -3362,12 +3323,11 @@ msgstr ""
 msgid "Verification results"
 msgstr "Αποτελέσματα επαλήθευσης"
 
-#
 # File: bin/widget/view/form_gtk/binary.py, line: 172
 #: bin/widget/view/form_gtk/binary.py:323
-#, fuzzy, python-format
+#, python-format
 msgid "Error verifying the file: %s"
-msgstr "Σφάλμα εγγραφής του αρχείου: %s"
+msgstr "Σφάλμα επαλήθευσης του αρχείου: %s"
 
 #
 # File: bin/widget_search/checkbox.py, line: 55
@@ -3503,21 +3463,17 @@ msgstr "Ορισμός προεπιλεγμένης τιμής"
 msgid "Set as default"
 msgstr "Ορισμός ως προεπιλογή"
 
-#
 # File: bin/modules/gui/main.py, line: 183
 # File: bin/modules/action/wizard.py, line: 147
 #: bin/widget/view/form_gtk/interface.py:63
-#, fuzzy
 msgid "Operation not permited"
-msgstr "Λειτουργία σε εξέλιξη"
+msgstr "Μη Επιτρεπτή Λειτουργία"
 
-#
 # File: bin/widget/view/form_gtk/interface.py, line: 47
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 148
 #: bin/widget/view/form_gtk/interface.py:63
-#, fuzzy
 msgid "You can not set to the default value here !"
-msgstr "Ορισμός προεπιλεγμένης τιμής"
+msgstr "Δεν μπορείτε να ορίσετε την προεπιλεγμένη τιμή εδώ!"
 
 # File: bin/openerp.glade, line: 721
 #: bin/widget/view/form_gtk/many2many.py:84
@@ -3711,19 +3667,15 @@ msgstr "--Ενέργειες--"
 msgid "Manage Filters"
 msgstr "Διαχείριση Φίλτρων"
 
-#
 # File: bin/widget/view/form_gtk/interface.py, line: 48
 #: bin/widget/view/screen_container.py:76
-#, fuzzy
 msgid "Save as a Filter"
-msgstr "Ορισμός ως προεπιλογή"
+msgstr "Αποθήκευση ως Φίλτρου"
 
-#
 # File: bin/openerp.glade, line: 5243
 #: bin/widget/view/screen_container.py:76
-#, fuzzy
 msgid "Save as a Shortcut"
-msgstr "Κύριες Συντομεύσεις"
+msgstr "Αποθήκευση ως Συντόμευσης"
 
 #
 # File: bin/widget/view/tree_gtk/date_renderer.py, line: 200
@@ -3827,12 +3779,10 @@ msgstr "μεγαλύτερο από"
 msgid "less than"
 msgstr "μικρότερο από"
 
-#
 # File: bin/openerp.glade, line: 604
 #: bin/widget_search/custom_filter.py:62
-#, fuzzy
 msgid "in"
-msgstr "Εύρεση"
+msgstr "ένα από"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
@@ -3863,12 +3813,10 @@ msgstr "Το περιεχόμενο του widget ή εξαίρεση αν μη 
 msgid "label"
 msgstr "ετικέττα"
 
-#
 # File: bin/win_error.glade, line: 102
 #: bin/win_error.glade:100
-#, fuzzy
 msgid "Click here for details about the publisher warranty proposition"
-msgstr "Κάντε κλίκ εδώ για λεπτομέρειες στην πρόταση συντήρησης"
+msgstr "Κάντε κλικ εδώ για λεπτομέρειες της Εγγύησης Εκδότη"
 
 #: bin/win_error.glade:120
 msgid "<i>_Publisher Warranty</i>"
