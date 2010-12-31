@@ -101,7 +101,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         return res
 
 
-    def get_columns(self, include_non_visible=True, include_non_editable=True):
+    def get_columns(self, include_non_visible=True, include_non_editable=True, model=False):
         def column_is_editable(column):
             renderer = column.get_cell_renderers()[0]
             if isinstance(renderer,gtk.CellRendererPixbuf):
@@ -111,6 +111,8 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             if isinstance(renderer,gtk.CellRendererToggle):
                 return renderer.get_property('activatable')
             else:
+                if model:
+                    return not model[column.name].get_state_attrs(model).get('readonly', False)
                 return renderer.get_property('editable')
 
         columns = super(EditableTreeView, self).get_columns()
@@ -120,15 +122,14 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             columns = filter(lambda c: column_is_editable(c), columns)
         return columns
 
-
-    def __next_column(self, col):
-        cols = self.get_columns(False, False)
+    def __next_column(self, col, model= False):
+        cols = self.get_columns(False, False, model)
         current = cols.index(col)
         idx = (current + 1) % len(cols)
         return cols[idx]
 
-    def __prev_column(self, col):
-        cols = self.get_columns(False, False)
+    def __prev_column(self, col, model=False):
+        cols = self.get_columns(False, False, model)
         current = cols.index(col)
         idx = (current - 1) % len(cols)
         return cols[idx]
@@ -216,11 +217,11 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
                 return True
 
         if event.keyval == gtk.keysyms.Tab:
-            new_col = self.__next_column(column)
+            new_col = self.__next_column(column, model)
             self.scroll_to_cell(path, new_col, True, 0.0, 0.5)
             self.set_cursor(path, new_col, True)
         elif event.keyval == gtk.keysyms.ISO_Left_Tab:
-            new_col = self.__prev_column(column)
+            new_col = self.__prev_column(column, model)
             self.scroll_to_cell(path, new_col, True, 0.0, 0.5)
             self.set_cursor(path, new_col, True)
         elif event.keyval == gtk.keysyms.Up:

@@ -26,9 +26,9 @@ import gtk
 import math
 import cgi
 
-
 import tools
 import tools.datetime_util
+from dateutil.parser import *
 
 from rpc import RPCProxy
 from editabletree import EditableTreeView
@@ -48,12 +48,13 @@ import service
 import gobject
 import pango
 
-def send_keys(renderer, editable, position, treeview):
-    editable.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
-    editable.set_data('renderer', renderer)
-    editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
-    if isinstance(editable, gtk.ComboBoxEntry):
-        editable.connect('changed', treeview.on_editing_done)
+def send_keys(renderer, entry, position, treeview):
+    if entry:
+        entry.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
+        entry.set_data('renderer', renderer)
+        entry.editing_done_id = entry.connect('editing_done', treeview.on_editing_done)
+        if isinstance(entry, gtk.ComboBoxEntry):
+            entry.connect('changed', treeview.on_editing_done)
 
 def sort_model(column, screen):
     unsaved_model =  [x for x in screen.models if x.id == None or x.modified]
@@ -405,8 +406,8 @@ class GenericDate(Char):
         if not value:
             return ''
         try:
-            date = DT.datetime.strptime(value[:10], self.server_format)
-            return date.strftime(self.display_format)
+            val = parse(value)
+            return val.strftime(self.display_format)
         except:
             if self.treeview.screen.context.get('group_by'):
                 return value
@@ -415,8 +416,6 @@ class GenericDate(Char):
     def value_from_text(self, model, text):
         dt = self.renderer.date_get(self.renderer.editable)
         res = dt and dt.strftime(self.server_format)
-        if res:
-            DT.datetime.strptime(res[:10], self.server_format)
         return res
 
 class Date(GenericDate):
@@ -431,13 +430,17 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        return tools.datetime_util.server_to_local_timestamp(value[:19],
+        val = parse(value)
+        val = val.strftime(self.server_format)
+        return tools.datetime_util.server_to_local_timestamp(val,
                 self.server_format, self.display_format)
 
     def value_from_text(self, model, text):
         if not text:
             return False
-        return tools.datetime_util.local_to_server_timestamp(text[:19],
+        text = parse(text)
+        text = text.strftime(self.display_format)
+        return tools.datetime_util.local_to_server_timestamp(text,
                 self.display_format, self.server_format)
 
 class Float(Char):

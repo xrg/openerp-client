@@ -211,7 +211,11 @@ class win_export(object):
         fields_order.sort(lambda x,y: -cmp(fields[x].get('string', ''), fields[y].get('string', '')))
         for field in fields_order:
             if import_comp and fields[field].get('readonly', False):
-                continue
+                ok = False
+                for sl in fields[field].get('states', {}).values():
+                    for s in sl:
+                        ok = ok or (s==('readonly',False))
+                if not ok: continue
             self.fields_data[prefix_node+field] = fields[field]
             if prefix_node:
                 self.fields_data[prefix_node + field]['string'] = '%s%s' % (prefix_value, self.fields_data[prefix_node + field]['string'])
