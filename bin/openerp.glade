@@ -478,6 +478,14 @@
                           </widget>
                         </child>
                         <child>
+                          <widget class="GtkImageMenuItem" id="change_passwd">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Change password</property>
+                            <property name="use_underline">True</property>
+                            <signal name="activate" handler="on_change_passwd_activate"/>
+                          </widget>
+                        </child>
+                        <child>
                           <widget class="GtkSeparatorMenuItem" id="item2">
                             <property name="visible">True</property>
                           </widget>
