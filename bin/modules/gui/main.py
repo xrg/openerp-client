@@ -1461,10 +1461,7 @@ class terp_main(service.Service):
                 except Exception,e:
                     if ('faultCode' in dir(e) and e.faultCode=="AccessDenied") \
                             or 'AccessDenied' in str(e):
-                        if type == 'user':
-                            common.warning(_("Could not change the password."),
-                                           _('Bad password provided !'), parent=win)
-                        else:
+                        if type =='admin':
                             common.warning(_("Could not change the Super Admin password."),
                                            _('Bad password provided !'), parent=win)
                     else:
