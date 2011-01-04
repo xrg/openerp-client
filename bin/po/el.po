@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-12-07 09:08+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2011-01-03 19:41+0000\n"
+"Last-Translator: Dimitris Andavoglou <dimitrisand@gmail.com>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:54+0000\n"
+"X-Launchpad-Export-Date: 2011-01-04 14:10+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: el\n"
 
@@ -112,7 +112,7 @@ msgstr "Αναβάθμιση βάσης δεδομένων"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Βάση δεδομένων"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -196,7 +196,7 @@ msgstr "Επεξεργασία"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
@@ -444,7 +444,7 @@ msgstr "Σφάλμα !"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "Προειδοποίηση!"
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
@@ -525,7 +525,7 @@ msgstr "Όνομα πεδίου"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "Σφάλμα άνοιγμα .CSV αρχείο"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
@@ -555,11 +555,11 @@ msgstr "Δεν επιλέξατε πεδία για εισαγωγή"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "Επέκταση"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "Εφαρμογή"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
@@ -591,7 +591,7 @@ msgstr "Άγνωστο παράθυρο"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "Προτιμήσεις"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -943,7 +943,7 @@ msgstr "OpenERP - Επιλογή ημερομηνίας"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "περιέχει"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
@@ -951,19 +951,19 @@ msgstr ""
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "είναι ίσο του"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "δεν είναι ίσο του"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "μεγαλύτερο από"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "μικρότερο από"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
@@ -1156,11 +1156,11 @@ msgstr "Λάθος εικονίδιο για το κουμπί!"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "Πεδίο"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "Αντικείμενο"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
@@ -1177,7 +1177,7 @@ msgstr "Μετάφραση καρτέλας"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
@@ -1211,7 +1211,7 @@ msgstr "Διαγραφή τρέχουσας εγγραφής"
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "Προηγούμενη Σελίδα"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
@@ -1226,7 +1226,7 @@ msgstr ""
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "Επόμενη Σελίδα"
 
 #: bin/widget/view/form_gtk/one2many_list.py:245
 msgid "Switch"
@@ -1267,7 +1267,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "Προειδοποίηση"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
@@ -1724,7 +1724,7 @@ msgstr "Ημερολόγιο"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
-msgstr ""
+msgstr "Διάγραμμα"
 
 #: bin/openerp.glade:1361
 msgid "Graph"
@@ -1764,7 +1764,7 @@ msgstr "Κλείσιμο του παραθύρου"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
-msgstr ""
+msgstr "Εταιρεία:"
 
 #: bin/openerp.glade:1535
 msgid "Requests:"
@@ -2410,7 +2410,7 @@ msgstr ""
 
 #: bin/openerp.glade:7048
 msgid "admin"
-msgstr ""
+msgstr "διαχειριστής"
 
 #: bin/openerp.glade:7062
 msgid "(<i>admin</i>, by default)"
@@ -2658,8 +2658,61 @@ msgstr "<i>_Λεπτομέρειες</i>"
 #~ "Τώρα θα πρέπει να συνεχίσετε δημιουργόντας μια νέα βάση δεδομένων ή\n"
 #~ "κάνοντας σύνδεση με έναν υπάρχον διακομιστή μέσα από το μενού \"Αρχείο\"."
 
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Αναφέρθηκε ένα άγνωστο λάθος.</b>\n"
+#~ "\n"
+#~ "<b>Δεν έχετε κάποιο έγκυρο συμβόλαιο συτήρησης του Open ERP!</b>\n"
+#~ "Αν χρησιμοποιείτε το Open ERP στην παραγωγή, προτείνεται να εγγραφείτε\n"
+#~ "σε κάποιο πρόγραμμα συντήρησης.\n"
+#~ "\n"
+#~ "Το συμβόλαιο συντήρησης σας προμηθεύει με εγγύηση διόρθωσης σφαλμάτων και "
+#~ "ένα\n"
+#~ "αυτόματο σύστημα ολοκλήρωσης έτσι ώστε να μπορείτε να διορθώνετε τα "
+#~ "προβλήματά σας μέσα σε μερικές\n"
+#~ "ώρες. Αν είχατε συμβόλαιο συντήρησης, αυτό το σφάλμα θα είχε αποσταλεί\n"
+#~ "στην ομάδα ποιότητας του Open ERP editor.\n"
+#~ "\n"
+#~ "Το πρόγραμμα συντήρησης σας προσφέρει:\n"
+#~ "* Αυτόματη ολοκλήρωση σε νέες εκδόσεις,\n"
+#~ "* Εγγύηση διόρθωσης σφαλμάτων,\n"
+#~ "* Μηνιαίες δηλώσεις πιθανών σφαλμάτων και τις διορθώσεις τους,\n"
+#~ "* Ειδοποιήσεις ασφαλείας μέσω e-mail και αυτόματη ολοκλήρωση,\n"
+#~ "* Πρόσβαση στο portal των πελατών.\n"
+#~ "\n"
+#~ "Μπορείτε να χρησιμοποιήσετε τον παρακάτω σύνδεσμο για περισσότερες "
+#~ "πληροφορίες. Οι λεπτομέρειες του σφάλματος\n"
+#~ "εμφανίζονται στην δεύτερη καρτέλα.\n"
+
 #~ msgid "gtk-close"
 #~ msgstr "gtk-κλείσιμο"
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Αδυναμία ορισμού περιοχής %s"
 
 #~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 #~ msgstr "δηλώστε το επίπεδο καταγραφής: INFO, DEBUG, WARNING, ERROR, CRITICAL"
@@ -2750,6 +2803,9 @@ msgstr "<i>_Λεπτομέρειες</i>"
 #~ msgid "E-Mail:"
 #~ msgstr "E-Mail:"
 
+#~ msgid "Your Company:"
+#~ msgstr "Η εταιρία σας:"
+
 #~ msgid "<b>Keep Informed</b>"
 #~ msgstr "<b>Keep Informed</b>"
 
@@ -2792,6 +2848,28 @@ msgstr "<i>_Λεπτομέρειες</i>"
 
 #~ msgid "<i>_Maintenance</i>"
 #~ msgstr "<i>_Συντήρηση</i>"
+
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Αποστολή στην Ομάδα Συντήρησης"
+
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Συμβόλαιο Συντήρησης.</b>\n"
+#~ "<i>\n"
+#~ "Η αίτηση σας θα αποσταλλεί στο OpenERP και το τμήμα συντήρησης θα σας "
+#~ "απαντήσουν σύντομα.\n"
+#~ "</i>"
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Κάντε κλίκ εδώ για λεπτομέρειες στην πρόταση συντήρησης"
+
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Εκτύπωση Εργσασίας (Πολύπλοκο)"
 
 #~ msgid "enable basic debugging"
 #~ msgstr "ενεργοποίηση βασικής αποσφαλμάτωσης"
@@ -2894,6 +2972,52 @@ msgstr "<i>_Λεπτομέρειες</i>"
 #~ msgid "Employees:"
 #~ msgstr "Εργαζόμενοι:"
 
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Ένα άγνωστο λάθος αναθέρθηκε</b>\n"
+#~ "\n"
+#~ "Το συμβόλαιο συντήρηση σας δεν καλύπτει όλα τα πρόσθετα που έχετε "
+#~ "εγκαταστήσει στο σύστημα σας!\n"
+#~ "Αν χρησιμοποιείτε την Open ERP στην παραγωγή, συνιστάται να αναβαθμίσετε το\n"
+#~ "συμβόλαιο σας.\n"
+#~ "\n"
+#~ "Αν έχετε αναπτύξει δικά σας πρόσθετα ή αν έχετε εγκαταστήσει πρόσθετα "
+#~ "τρίτων, μπορούμε\n"
+#~ "να σας προσφέρουμε πρόσθετο συμβόλαιο συντήρησης για αυτά. Αφού\n"
+#~ "τα εξετάσει, η ομάδα ποιότητας μας θα βεβαιώσει ότι θα μπορούν να "
+#~ "αναβαθμιστούν\n"
+#~ "αυτόματα για όλες τις επόμενες εκδόσεις της Open ERP χωρίς επιπλέον κόστος.\n"
+#~ "\n"
+#~ "Εδώ είναι μια λίστα με τα πρόσθετα που δεν καλύπτονται από το συμβόλαιο "
+#~ "σας:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Μπορείτε να χρησιμοποιήσετε τον σύνδεσμο παρακάτω για περισσότερες "
+#~ "πληροφορίες. Οι λεπτομέρειες\n"
+#~ "του λάθους εμφανίζονται στον επόμενο πίνακα."
+
 #~ msgid "Limit :"
 #~ msgstr "Όριο:"
 
@@ -2906,8 +3030,30 @@ msgstr "<i>_Λεπτομέρειες</i>"
 #~ msgid "Preference"
 #~ msgstr "Προτίμηση"
 
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s αιτήση(σεις) στάλθηκαν"
+
 #~ msgid "The following users have been installed on your database:"
 #~ msgstr "Οι ακόλουθοι χρήστες έχουν εγκατασταθεί στην βάση δεδομένων σας:"
+
+#~ msgid "_Tips"
+#~ msgstr "Συμ_βουλές"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Αυτός είναι ο κωδικός πρόσβασης του χρήστη '<i>admin</i>' ο οποίος θα "
+#~ "δημιουργηθεί στην νέα βάση δεδομένων σας."
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Αυτός είναι ο κωδικός πρόσβασης του χρήστη '<i>admin</i>' ο οποίος θα "
+#~ "δημιουργηθεί στην βάση δεδομένων σας. Θα πρέπει να είναι ίδιος με το "
+#~ "παραπάνω πεδίο."
 
 #~ msgid ""
 #~ "Please fill in the following form in order to help us to improve <b><span "
@@ -2920,3 +3066,6 @@ msgstr "<i>_Λεπτομέρειες</i>"
 
 #~ msgid "gtk-ok"
 #~ msgstr "gtk-ok"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-άκυρο"
