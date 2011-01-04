@@ -375,6 +375,7 @@ class form(object):
 
     def sig_action(self, keyword='client_action_multi', previous=False, report_type='pdf', adds={}):
         ids = self.screen.ids_get()
+        group_by = self.screen.context.get('group_by')
         if self.screen.current_model:
             id = self.screen.current_model.id
         else:
@@ -389,7 +390,7 @@ class form(object):
             sel_ids = self.screen.sel_ids_get()
             if sel_ids:
                 ids = sel_ids
-        if len(ids) or self.screen.context.get('group_by'):
+        if len(ids) or group_by:
             obj = service.LocalService('action.main')
             data = {'model':self.screen.resource,
                     'id': id or False,
@@ -397,6 +398,9 @@ class form(object):
                     'report_type': report_type,
                     '_domain':self.screen.domain
                    }
+            # When group by header is selected add it's children as a active_ids
+            if group_by:
+                self.screen.context.update({'active_id':id, 'active_ids':ids}) 
             if previous and self.previous_action:
                 obj._exec_action(self.previous_action[1], data, self.screen.context)
             else:
