@@ -405,8 +405,8 @@ class GenericDate(Char):
         if not value:
             return ''
         try:
-            val = parse(value)
-            return val.strftime(self.display_format)
+            date = DT.datetime.strptime(value[:10], self.server_format)
+            return date.strftime(self.display_format)
         except:
             if self.treeview.screen.context.get('group_by'):
                 return value
@@ -415,6 +415,8 @@ class GenericDate(Char):
     def value_from_text(self, model, text):
         dt = self.renderer.date_get(self.renderer.editable)
         res = dt and dt.strftime(self.server_format)
+        if res:
+            DT.datetime.strptime(res[:10], self.server_format)
         return res
 
 class Date(GenericDate):
@@ -429,17 +431,13 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        val = parse(value)
-        val = val.strftime(self.server_format)
-        return tools.datetime_util.server_to_local_timestamp(val,
+        return tools.datetime_util.server_to_local_timestamp(value[:19],
                 self.server_format, self.display_format)
 
     def value_from_text(self, model, text):
         if not text:
             return False
-        text = parse(text)
-        text = text.strftime(self.display_format)
-        return tools.datetime_util.local_to_server_timestamp(text,
+        return tools.datetime_util.local_to_server_timestamp(text[:19],
                 self.display_format, self.server_format)
 
 class Float(Char):

@@ -21,7 +21,7 @@
 
 import time
 from datetime import datetime as DT
-from dateutil.parser import *
+
 import gtk
 
 import gettext
@@ -86,15 +86,16 @@ class calendar(interface.widget_interface):
             return True
 
     def get_value(self, model):
-        date_str = self.entry.get_text()
-        if date_str == '':
+        str = self.entry.get_text()
+        if str == '':
             return False
         try:
-            date_obj = parse(date_str)
+            date1 = DT.strptime(str[:10], self.format)
         except:
             return False
+
         try:
-            return date_obj.strftime(DT_FORMAT)
+            return date1.strftime(DT_FORMAT)
         except ValueError:
             common.message(_('Invalid date value! Year must be greater than 1899 !'))
             return time.strftime(DT_FORMAT)
@@ -115,11 +116,13 @@ class calendar(interface.widget_interface):
         if not value:
             self.entry.clear()
         else:
-            date = parse(value)
-            date_disp = date.strftime(self.format)
-            if len(date_disp) > self.entry.get_width_chars():
-                self.entry.set_width_chars(len(date_disp))
-            self.entry.set_text(date_disp)
+            if len(value)>10:
+                value=value[:10]
+            date=DT.strptime(value[:10], DT_FORMAT)
+            t=date.strftime(self.format)
+            if len(t) > self.entry.get_width_chars():
+                self.entry.set_width_chars(len(t))
+            self.entry.set_text(t)
         return True
 
     def cal_open(self, widget, event, model=None, window=None):
@@ -144,9 +147,8 @@ class calendar(interface.widget_interface):
         try:
             val = self.get_value(model)
             if val:
-                val = parse(val)
-                cal.select_month(val.month -1 , val.year)
-                cal.select_day(val.day)
+                cal.select_month(int(val[5:7])-1, int(val[0:4]))
+                cal.select_day(int(val[8:10]))
         except ValueError:
             pass
 
@@ -207,12 +209,10 @@ class datetime(interface.widget_interface):
             return True
 
     def get_value(self, model, timezone=True):
-        date_str = self.entry.get_text()
-        if date_str == '':
+        str = self.entry.get_text()
+        if str=='':
             return False
-        date_obj = parse(date_str)
-        date_str_conv = date_obj.strftime(self.format)
-        return tools.datetime_util.local_to_server_timestamp(date_str_conv, self.format, DHM_FORMAT,
+        return tools.datetime_util.local_to_server_timestamp(str[:19], self.format, DHM_FORMAT,
                         tz_offset=timezone, ignore_unparsable_time=False)
 
     def set_value(self, model, model_field):
@@ -232,9 +232,7 @@ class datetime(interface.widget_interface):
         if not dt_val:
             self.entry.clear()
         else:
-            date_obj = parse(dt_val)
-            date_str_conv = date_obj.strftime(DHM_FORMAT)
-            t = tools.datetime_util.server_to_local_timestamp(date_str_conv,
+            t = tools.datetime_util.server_to_local_timestamp(dt_val[:19],
                     DHM_FORMAT, self.format, tz_offset=timezone)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
@@ -268,25 +266,23 @@ class datetime(interface.widget_interface):
         try:
             val = self.get_value(model, timezone=False)
             if val:
-                val = parse(val)
-                hour.set_value(val.hour)
-                minute.set_value(val.minute)
-                cal.select_month(val.month-1, val.year)
-                cal.select_day(val.day)
+                hour.set_value(int(val[11:13]))
+                minute.set_value(int(val[-5:-3]))
+                cal.select_month(int(val[5:7])-1, int(val[0:4]))
+                cal.select_day(int(val[8:10]))
             else:
-                local_time = time.localtime()
-                hour.set_value(local_time.tm_hour)
-                minute.set_value(local_time.tm_min)
+                hour.set_value(time.localtime()[3])
+                minute.set_value(time.localtime()[4])
         except ValueError:
             pass
         response = win.run()
         if response == gtk.RESPONSE_OK:
             hr = int(hour.get_value())
             mi = int(minute.get_value())
-            year, month, day = cal.get_date()
-            month = month + 1
-            day = day
-            date = DT(year, month, day, hr, mi)
+            dt = cal.get_date()
+            month = int(dt[1])+1
+            day = int(dt[2])
+            date = DT(dt[0], month, day, hr, mi)
             try:
                 value = date.strftime(DHM_FORMAT)
             except ValueError:
@@ -322,7 +318,7 @@ class stime(interface.widget_interface):
 
     def get_value(self, model):
         str = self.entry.get_text()
-        if str == '':
+        if str=='':
             res = False
         try:
             t = time.strptime(str[:8], self.format)
