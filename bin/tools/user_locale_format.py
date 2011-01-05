@@ -47,9 +47,7 @@ from locale import localeconv
 """
 
 
-LOCALE_CACHE = {'uid': 1,
-               'db':'terp',
-               'server':'localhost',
+LOCALE_CACHE = {
                'date_format':'%m/%d/%Y',
                'time_format':'%H:%M:%S',
                'grouping':[],
@@ -69,11 +67,6 @@ def set_locale_cache(lang_data = {}):
         if lang_data:
             if 'id' in lang_data:
                 del lang_data['id']
-            user_info = {'uid':rpc.session.uid,
-                         'db':rpc.session.db,
-                         'server':rpc.session._url
-                         }
-            lang_data.update(user_info)
             LOCALE_CACHE.update(lang_data)
     except:
         pass
@@ -167,7 +160,7 @@ def group(value, monetary=False, grouping=False, thousands_sep=''):
         seps += 1
     return result + spaces, seps
 
-def format(percent, value, grouping=False, monetary=False):
+def format(percent, value, grouping=True, monetary=False):
 
     """ Format() will return the language-specific output for float values
 
