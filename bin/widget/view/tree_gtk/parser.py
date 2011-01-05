@@ -48,12 +48,13 @@ import service
 import gobject
 import pango
 
-def send_keys(renderer, editable, position, treeview):
-    editable.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
-    editable.set_data('renderer', renderer)
-    editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
-    if isinstance(editable, gtk.ComboBoxEntry):
-        editable.connect('changed', treeview.on_editing_done)
+def send_keys(renderer, entry, position, treeview):
+    if entry:
+        entry.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
+        entry.set_data('renderer', renderer)
+        entry.editing_done_id = entry.connect('editing_done', treeview.on_editing_done)
+        if isinstance(entry, gtk.ComboBoxEntry):
+            entry.connect('changed', treeview.on_editing_done)
 
 def sort_model(column, screen):
     unsaved_model =  [x for x in screen.models if x.id == None or x.modified]
