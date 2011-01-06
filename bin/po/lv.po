@@ -8,23 +8,23 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-10-25 17:58+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2010-12-19 08:07+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-12-20 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: lv\n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
-msgstr "Drukāt procesu"
+msgstr "Drukāt darbplūsmu"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
-msgstr "Drukāt procesu (izvērsti)"
+msgstr "Drukāt darbplūsmu (ar apakšplūsmām)"
 
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
@@ -84,7 +84,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Migrācijas skripti"
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
@@ -92,7 +92,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr ""
+msgstr "Līguma parole:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
@@ -112,7 +112,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Datubāze"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -182,8 +182,8 @@ msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
-"Severis pārtrauca darbu instalācijas laikā.\n"
-"Mēs iesakam izdzēst šo datubāzi."
+"Serveris pārtrauca darbu instalācijas laikā.\n"
+"Mēs iesakām izdzēst šo datubāzi."
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"

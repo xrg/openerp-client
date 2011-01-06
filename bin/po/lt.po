@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-10-25 19:18+0000\n"
-"Last-Translator: Giedrius Slavinskas <giedrius.slavinskas@gmail.com>\n"
+"PO-Revision-Date: 2011-01-05 20:27+0000\n"
+"Last-Translator: Paulius Sladkevičius <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:54+0000\n"
+"X-Launchpad-Export-Date: 2011-01-06 04:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: lt\n"
 
@@ -149,7 +149,7 @@ msgstr "Super Administratoriaus Slaptažodis:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "Blogas super administratoriaus slaptažodis"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -157,11 +157,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
-msgstr ""
+msgstr "Kontrakto ID:"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr ""
+msgstr "Kontrakto slaptažodis:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
@@ -173,15 +173,15 @@ msgstr "Galimi atnaujinimai:"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Dabar galite migruoti savo duomenų bazes."
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr ""
+msgstr "Migruoti duomenų bazę"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Duomenų bazė"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -193,7 +193,7 @@ msgstr "Jūsų duomenų bazės buvo atnaujintos."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Jūs nepažymėjote duomenų bazės"
 
 #
 # File: bin/modules/gui/main.py, line: 152
@@ -302,11 +302,11 @@ msgstr "Redaguoti"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Nėra kompanijos"
 
 #
 # File: bin/modules/gui/main.py, line: 694
@@ -326,17 +326,19 @@ msgstr "Nėra užklausų"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s užklausa išsiųsta"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"Atidžiai patikrinkite duomenų bazės pavadinimas arba susisiekite su savo "
+"administratoriumi, kad patikrinti duomenų bazės būseną."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "Duomenų bazė neprieinama arba neegzistuoja"
 
 #
 # File: bin/modules/gui/main.py, line: 734
@@ -360,7 +362,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #
 # File: bin/modules/gui/main.py, line: 761
@@ -546,7 +548,7 @@ msgstr "Nepavyko sukurti duomenų bazės atsarginės kopijos."
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "Resurso ID neegzistuoja šiam objektui!"
 
 #: bin/modules/gui/window/form.py:231
 msgid "No record selected ! You can only attach to existing record."
@@ -657,7 +659,7 @@ msgstr "Klaida!"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "Įspėjimas!"
 
 #
 # File: bin/modules/gui/window/form.py, line: 302
@@ -755,6 +757,12 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Klaida importuojant šį įrašą:\n"
+"%s\n"
+"Klaidos žinutė:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -772,7 +780,7 @@ msgstr "Lauko pavadinimas"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "Klaida atveriant .CSV failą"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
@@ -789,10 +797,12 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"Klaida apdorojant jūsų failo pirmą eilutę.\n"
+"Laukas %s yra nežinomas!"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "Importavimo klaida."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -848,17 +858,19 @@ msgstr "Nežinomas langas"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "Nustatymai"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"Sąsajos numatyta kalba buvo pakeista, nepamirškite kliento paleisti iš "
+"naujo, norint turėti sąsają savo kalba"
 
 #: bin/modules/gui/window/win_preference.py:87
 msgid "Default language modified !"
-msgstr ""
+msgstr "Numatyta kalba pakeista!"
 
 #
 # File: bin/modules/gui/window/view_tree/parse.py, line: 36
@@ -933,11 +945,11 @@ msgstr "Klaida atidarant Excel!"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "Koks pavadinimas šio eksportavimo?"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Eksportavimo klaida!"
 
 #: bin/modules/gui/window/win_search.py:49
 #: bin/widget/view/diagram_gtk/xdot.py:1772
@@ -995,7 +1007,7 @@ msgstr "nustatyti serverio IP/pavadinimą"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "Uždaryti šį patarimą"
 
 #: bin/common/common.py:90
 msgid ""
@@ -1004,10 +1016,14 @@ msgid ""
 "open this menu item, unless you disable all tips using the <b>'Menu "
 "Tips'</b> option in the user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Uždaryti šį patarimą:</b></span>\n"
+"Tai paslėps šį patarimą. Jis bus rodomas kitą kartą vėl, kai atversite šį "
+"meniu punktą, nebent išjungsite visus patarimus <b>'Meniu patarimai'</b> "
+"parinktį naudotojo nustatymuose."
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "Išjungti visus patarimus"
 
 #: bin/common/common.py:101
 msgid ""
@@ -1016,10 +1032,14 @@ msgid ""
 "To re-enable tips you need to check the <b>'Menu Tips'</b> option in the "
 "user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Išjungti visus patarimus:</b></span>\n"
+"Tai išjungs visus patarimus visuose meniu punktuose.\n"
+"Norint vėl įjungti patarimus jūs turite pažymėti <b>'Meniu patarimai'</b> "
+"parinktį naudotojo nustatymuose."
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "Patarimai"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
@@ -1048,15 +1068,15 @@ msgstr ""
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "Užtikrinkite, kad šis failas %s yra teisingas"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " pranešė šią klaidą:\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
-msgstr ""
+msgstr "pastabos"
 
 #
 # File: bin/common/common.py, line: 289
@@ -1151,7 +1171,7 @@ msgstr "Atidaryti su..."
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "Negalima nustatyti jūsų lokalės %s: %s"
 
 #: bin/printer/printer.py:184
 #, python-format
@@ -1172,6 +1192,8 @@ msgstr ""
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
+"Klaida! Jokių duomenų nerasta. Patikrinkite ar yra pakankamai duomenų "
+"spausdinimui!"
 
 #
 # File: bin/printer/printer.py, line: 215
@@ -1226,7 +1248,7 @@ msgstr ""
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "Klaida: "
 
 #
 # File: bin/widget_search/calendar.py, line: 51
@@ -1266,35 +1288,35 @@ msgstr "OpenERP - Datos pasirinkimas"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "susideda iš"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "nesusideda iš"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "lygus"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "nelygus"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "daugiau nei"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "mažiau nei"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "yra"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "nėra"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -1302,6 +1324,10 @@ msgid ""
 "For Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d "
 "%H:%M:%S' formats respectively."
 msgstr ""
+"Įveskite reikšmes atskirdami kableliais, jeigu pasirinktas operacijos "
+"ženklas 'yra' arba 'nėra'.\n"
+"Datai arba datos ir laiko formatams, nurodykite tekstą atitinkamu formatu "
+"'%Y-%m-%d' arba '%Y-%m-%d %H:%M:%S'."
 
 #
 # File: bin/widget_search/checkbox.py, line: 36
@@ -1325,7 +1351,7 @@ msgstr "Jūs privalote išsaugoti įrašą prieš naudodami sąryšio mygtuką!"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "Veiksmas nėra nurodytas!"
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
@@ -1386,19 +1412,19 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--Veiksmai--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "Išsaugoti kaip nuorodą"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Išsaugoti kaip filtrą"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Valdyti filtrus"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1406,6 +1432,9 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"Jūs turite neišsaugotus įrašus!  \n"
+"\n"
+"Išsaugokite juos prieš rūšiavimą!"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 #, python-format
@@ -1520,15 +1549,15 @@ msgstr "Netinkama mygtuko piktograma!"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "Laukas"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "Objektas"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "Įveskite tekstą į susijusį lauką prieš pridedant vertimus!"
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 480
@@ -1546,15 +1575,15 @@ msgstr "Vertimo peržiūrą"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "Atsisakyti"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "Išsaugoti ir uždaryti"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "Išsaugoti ir sukurti naują"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
@@ -1589,22 +1618,22 @@ msgstr "Pašalinti šį įrašą"
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "Ankstesnis puslapis"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr ""
+msgstr "Ankstesnis įrašas"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "Kitas įrašas"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "Kitas puslapis"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 219
@@ -1616,7 +1645,7 @@ msgstr "Perjungti"
 #: bin/widget/view/form_gtk/one2many_list.py:251
 #: bin/widget/view/form_gtk/many2many.py:106
 msgid "Choose Limit"
-msgstr ""
+msgstr "Pasirinkite limitą"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
@@ -1670,7 +1699,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "Įspėjimas"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
@@ -1706,11 +1735,11 @@ msgstr "Nustatyti kaip numatytąją reikšmę"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "You can not set to the default value here !"
-msgstr ""
+msgstr "Jūs negalite čia nustatyti numatytosios reikšmės!"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "Operation not permited"
-msgstr ""
+msgstr "Operacija neleidžiama"
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
@@ -1754,7 +1783,7 @@ msgstr "Taikyti visada!"
 #: bin/widget/view/form_gtk/calendar.py:100
 #: bin/widget/view/form_gtk/calendar.py:162
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Neteisinga datos reikšmė! Metai turi būti didesni negu 1899!"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
@@ -1773,6 +1802,7 @@ msgstr "Minutė:"
 #: bin/widget/view/form_gtk/calendar.py:289
 msgid "Invalid datetime value! Year must be greater than 1899 !"
 msgstr ""
+"Neteisinga datos ir laiko reikšmė! Metai turi būti didesni negu 1899!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:30
 msgid "Gantt view not yet implemented !"
@@ -1791,6 +1821,8 @@ msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
 msgstr ""
+"(Bet kuris esamas filtras su \n"
+"tuo pačiu pavadinimu bus pakeistas)"
 
 #
 # File: bin/rpc.py, line: 142
@@ -1898,11 +1930,11 @@ msgstr "Nai_kinti duomenų bazę"
 
 #: bin/openerp.glade:380
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "_Parsisiųsti migracijos kodą"
 
 #: bin/openerp.glade:395
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "_Migruoti duomenų bazę(-es)"
 
 #
 # File: bin/openerp.glade, line: 372
@@ -2365,7 +2397,7 @@ msgstr "Kalendorius"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
-msgstr ""
+msgstr "Diagrama"
 
 #: bin/openerp.glade:1361
 msgid "Graph"
@@ -2428,7 +2460,7 @@ msgstr "Uždaryti šią kortelę"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
-msgstr ""
+msgstr "Kompanija:"
 
 #
 # File: bin/openerp.glade, line: 1448
@@ -3378,6 +3410,7 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Server:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP serveris:"
 
 #: bin/openerp.glade:7025
 msgid ""
@@ -3394,10 +3427,12 @@ msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
+"administratoriaus slaptažodis:"
 
 #: bin/openerp.glade:7048
 msgid "admin"
-msgstr ""
+msgstr "administratorius"
 
 #: bin/openerp.glade:7062
 msgid "(<i>admin</i>, by default)"
@@ -3415,6 +3450,8 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>New Database Name:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Naujas duomenų "
+"bazės pavadinimas:"
 
 #: bin/openerp.glade:7154
 msgid ""
@@ -3429,29 +3466,38 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Numatyta kalba:"
 
 #: bin/openerp.glade:7169
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
+"„Admin“ naudotojo slaptažodis, kuris bus sukurtas jūsų naujoje duomenų "
+"bazėje."
 
 #: bin/openerp.glade:7171
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Administrator "
 "Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Administratoriaus "
+"slaptažodis:"
 
 #: bin/openerp.glade:7184
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
+"„Admin“ naudotojo slaptažodis, kuris bus sukurtas jūsų naujoje duomenų "
+"bazėje. Jis turi būti toks pat kaip ir prieš tai įvestas."
 
 #: bin/openerp.glade:7186
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Patvirtinkite "
+"slaptažodį:"
 
 #: bin/openerp.glade:7279
 msgid ""
@@ -3468,6 +3514,8 @@ msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
 "Data:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Įkelti "
+"demonstracinius duomenis:"
 
 #
 # File: bin/openerp.glade, line: 9299
@@ -3574,33 +3622,35 @@ msgstr "Mėnuo"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
-msgstr ""
+msgstr "Laukai, kuriems bus taikomas paieškos kriterijus"
 
 #: bin/openerp.glade:8289
 msgid "Conditional Operators"
-msgstr ""
+msgstr "Sąlygų operacijų ženklai"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
-msgstr ""
+msgstr "Pasirinkimas bus pritaikomas su kitu filtru, jeigu"
 
 #: bin/openerp.glade:8317
 msgid ""
 "AND\n"
 "OR"
 msgstr ""
+"Ir\n"
+"Arba"
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "Pašalinti filtrą"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
-msgstr ""
+msgstr "Filtro įrašas"
 
 #: bin/openerp.glade:8395
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "Įveskite filtro pavadinimą:"
 
 #: bin/win_error.glade:40
 msgid "label"
@@ -3669,10 +3719,23 @@ msgstr "<i>_Detalės</i>"
 #~ "Dabar jūs galite prisijungti prie duomenų bazės kaip administratorius."
 
 #
+# File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 698
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s užklausa(os) išsiūsta(os)"
+
+#
 # File: bin/modules/gui/window/win_preference.py, line: 69
 # File: bin/modules/gui/window/win_preference.py, line: 69
 #~ msgid "Preference"
 #~ msgstr "Parinktys"
+
+#
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Spausdinti darbų srautą (Sudėtingas)"
 
 #
 # File: bin/options.py, line: 90
@@ -3697,6 +3760,12 @@ msgstr "<i>_Detalės</i>"
 # File: bin/printer/printer.py, line: 189
 #~ msgid "Error no report"
 #~ msgstr "Klaida nėra ataskaitos"
+
+#
+# File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1140
+#~ msgid "_Tips"
+#~ msgstr "_Patarimai"
 
 #
 # File: bin/openerp.glade, line: 5791
@@ -3816,8 +3885,19 @@ msgstr "<i>_Detalės</i>"
 #~ msgid "gtk-close"
 #~ msgstr "Užverti"
 
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Nepavyko nustatyti lokalės %s"
+
 #~ msgid "The following users have been installed on your database:"
 #~ msgstr "Jūsų duomenų bazėje buvo sukurti šie naudotojai:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Tai '<i>admin</i>' naudotojo, kuris bus sukurtas naujoje duomenų bazėje, "
+#~ "slaptažodis."
 
 #~ msgid "OpenERP Survey"
 #~ msgstr "OpenERP Apklausa"
@@ -3846,6 +3926,9 @@ msgstr "<i>_Detalės</i>"
 #~ msgid "Phone / Mobile:"
 #~ msgstr "Telefonas / Mobilus tel:"
 
+#~ msgid "Your Company:"
+#~ msgstr "Jūsų Organizacija:"
+
 #~ msgid "Administrator Password:"
 #~ msgstr "Administratoriaus slaptažodis:"
 
@@ -3857,6 +3940,34 @@ msgstr "<i>_Detalės</i>"
 
 #~ msgid "<i>_Maintenance</i>"
 #~ msgstr "<i>_Priežiūra</i>"
+
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Siūsti priežiūros komandai"
+
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Priežiūros sutartis.</b>\n"
+#~ "<i>\n"
+#~ "Jūsų užklausa bus išsiūsta OpenERP ir priežiūros komanda su jumis netrukus "
+#~ "susisieks.\n"
+#~ "</i>"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Tai '<i>admin</i>' naudotojo, kuris bus sukurtas naujoje duomenų bazėje, "
+#~ "slaptažodis. Jis turi būti identiškas aukščiau pateiktam slaptažodžiui."
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr ""
+#~ "Paspauskite čia norėdami gauti detalesnę informaciją apie priežiūros "
+#~ "pasiūlymus"
 
 #~ msgid "The content of the widget or excpetion if not valid"
 #~ msgstr "Klaidingas valdiklio turinys ar išimtys"
@@ -3906,6 +4017,99 @@ msgstr "<i>_Detalės</i>"
 #~ "Dėkojame už OpenERP testavimą!\n"
 #~ "Dabar pradėkite darbą sukurdami naują duomenų bazę arba\n"
 #~ "prisijunkdami prie jau veikiančio serverio - žr. meniu \"Failas\"."
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Pranešta apie nežinomą klaidą.</b>\n"
+#~ "\n"
+#~ "<b>Jūs neturite galiojančios OpenERP priežiūros sutarties!</b>\n"
+#~ "Jeigu OpenERP naudojate ne testavimui, rekomenduojame pasirašyti\n"
+#~ "priežiūros sutartį.\n"
+#~ "\n"
+#~ "OpenERP priežiūros sutartis jums garantuoja klaidų pataisymus ir\n"
+#~ "automatinę atnaujinimo sistemą. Tokiu būdų mes galėsime išspręsti jūsų\n"
+#~ "problemas keletos valandų bėgyje. Jeigu jūs turėtumėte priežiūros sutartį\n"
+#~ "ši klaida būtų išsiūsta OpenERP priežiūros komandai.\n"
+#~ "\n"
+#~ "Priežiūros programa jums siūlo:\n"
+#~ "*Automatinius atnaujinimus į naujesnes OpenERP versijas.\n"
+#~ "*Klaidų ištaisymo garantiją.\n"
+#~ "*Mėnesinius pranešimus apie klaidas ir jų ištaisymus.\n"
+#~ "*Saugumo įspėjimus el. paštu ir automatinius atnaujinimus.\n"
+#~ "*Prieigą prie naudotojų portalo.\n"
+#~ "\n"
+#~ "Daugiau informacijos galite gauti žemiau pateiktoje nuorodoje. Informacija "
+#~ "apie klaidą \n"
+#~ "rasite antroje kortelėje.\n"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developped your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all futur stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Pranešta apie nežinomą klaidą.</b>\n"
+#~ "\n"
+#~ "Jūsų priežiūros sutartis neapima visų jdiegtų modulių jūsų sistemoje!\n"
+#~ "Jeigu OpenERP naudojate ne testavimui, rekomenduojame atnaujinti jūsų "
+#~ "priežiūros\n"
+#~ "sutartį.\n"
+#~ "\n"
+#~ "Jeigu jūs naudojate jūsų pačių sukurtus modulius ar trečiųjų šalių modulius, "
+#~ "mes\n"
+#~ "galime jums suteikti papildomą priežiūrą šiems moduliams. Poto kai "
+#~ "peržiūrėsime jūsų\n"
+#~ "modulius, mūsų priežiūros komanda užtikrins, kad jūs galėsite automatiškai "
+#~ "atsinaujinti\n"
+#~ "į naujesnes OpenERP versijas be papildomų išlaidų.\n"
+#~ "\n"
+#~ "Čia yra modulių sąrašas kurių neapima esama priežiūros sutartis:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Daugiau informacijos galite gauti žemiau pateiktoje nuorodoje. Informaciją "
+#~ "apie \n"
+#~ "klaidą rasite antroje kortelėje."
 
 #, python-format
 #~ msgid ""
@@ -3975,3 +4179,6 @@ msgstr "<i>_Detalės</i>"
 
 #~ msgid "<b>Your interrest</b>"
 #~ msgstr "<b>Jūsų susidomėjimas</b>"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gt-cancel"

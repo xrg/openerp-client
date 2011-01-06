@@ -124,7 +124,7 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
             ind = map(lambda x: x+width*i*overlap+((1.0-overlap)*n*width)/4, xrange(len(axis_lable)))
             #ind = map(lambda x: x, xrange(len(keys)))
             yoff = map(lambda x:0.0, axis_lable)
-
+            
             for y in range(len(axis_group)):
                 value = [ datas[x].get(axis_group[y],0.0) for x in axis_lable]
                 if len(axis_group)>1:
@@ -133,8 +133,10 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
                     color = colors[i]
                 if orientation=='horizontal':
                     aa = subplot.barh(ind, tuple(value), width, left=yoff, color=color, edgecolor="#333333")[0]
+                    subplot.set_ylim(0, len(ind))
                 else:
                     aa = subplot.bar(ind, tuple(value), width, bottom=yoff, color=color, edgecolor="#333333")[0]
+                    subplot.set_xlim(0, len(ind))
                 gvalue2.append(aa)
                 for j in range(len(yoff)):
                     yoff[j]+=value[j]

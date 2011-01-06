@@ -26,7 +26,6 @@ import gtk
 import math
 import cgi
 
-
 import tools
 from tools import user_locale_format, datetime_util
 
@@ -48,12 +47,13 @@ import service
 import gobject
 import pango
 
-def send_keys(renderer, editable, position, treeview):
-    editable.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
-    editable.set_data('renderer', renderer)
-    editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
-    if isinstance(editable, gtk.ComboBoxEntry):
-        editable.connect('changed', treeview.on_editing_done)
+def send_keys(renderer, entry, position, treeview):
+    if entry:
+        entry.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
+        entry.set_data('renderer', renderer)
+        entry.editing_done_id = entry.connect('editing_done', treeview.on_editing_done)
+        if isinstance(entry, gtk.ComboBoxEntry):
+            entry.connect('changed', treeview.on_editing_done)
 
 def sort_model(column, screen):
     unsaved_model =  [x for x in screen.models if x.id == None or x.modified]
@@ -412,13 +412,11 @@ class GenericDate(Char):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        try:
+        elif isinstance(model, group_record):
+            return value
+        else:
             date = DT.datetime.strptime(value[:len(self.server_format) + 2], self.server_format)
             return date.strftime(self.display_format)
-        except:
-            if self.treeview.screen.context.get('group_by'):
-                return value
-            return ''
 
     def value_from_text(self, model, text):
         dt = self.renderer.date_get(self.renderer.editable)
@@ -439,8 +437,11 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        return tools.datetime_util.server_to_local_timestamp(value[:len(self.server_format) + 2],
-                self.server_format, self.display_format)
+        elif isinstance(model, group_record):
+            return value
+        else:
+            return tools.datetime_util.server_to_local_timestamp(value[:len(self.server_format) + 2],
+                                                                 self.server_format, self.display_format)
 
     def value_from_text(self, model, text):
         if not text:

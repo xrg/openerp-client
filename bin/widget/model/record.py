@@ -140,8 +140,9 @@ class ModelRecord(signal_event.signal_event):
                 context = self.context_get().copy()
                 self.update_context_with_concurrency(context)
                 res = self.rpc.write([self.id], value, context)
-                #if type(res) in (int, long):
-                #    self.id = res
+                if type(res)==type({}):
+                    obj = service.LocalService('action.main')
+                    obj._exec_action(res,{}, context)
         except Exception, e:
             if hasattr(e, 'faultCode') and e.faultCode.find('ValidateError')>-1:
                 self.failed_validation()
@@ -160,7 +161,7 @@ class ModelRecord(signal_event.signal_event):
         if len(self.mgroup.fields):
             val = self.rpc.default_get(self.mgroup.fields.keys(), context)
             for d in domain:
-                if d[0] in self.mgroup.fields:
+                if d[0] in self.mgroup.fields and not self.mgroup.fields.get(d[0], {}).get('readonly',False):
                     if d[1] == '=':
                         if d[2]:
                             value = d[2]
