@@ -8,14 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-12-17 07:14+0000\n"
-"Last-Translator: Lorenzo Battistini - agilebg.com "
-"<lorenzo.battistini@agilebg.com>\n"
+"PO-Revision-Date: 2011-01-05 16:48+0000\n"
+"Last-Translator: giudalo <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-18 05:02+0000\n"
+"X-Launchpad-Export-Date: 2011-01-06 04:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: it\n"
 
@@ -249,7 +248,7 @@ msgstr "Effettua la migrazione del Database"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -297,11 +296,9 @@ msgstr ""
 "potrebbe non funzionare correttamente. Lo si utilizzerà quindi, a proprio "
 "rischio e pericolo."
 
-#
-# File: bin/modules/gui/main.py, line: 309
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
-msgstr "Scusi,'"
+msgstr "Spiacente"
 
 # #-#-#-#-#  openerp-client-it.po (openobject-client)  #-#-#-#-#
 #
@@ -4597,6 +4594,14 @@ msgstr "<i>_Dettagli</i>"
 #~ msgstr "Questo widget è di sola lettura !"
 
 #
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Stampa Workflow (complesso)"
+
+#
 # File: bin/options.py, line: 90
 # File: bin/options.py, line: 90
 # File: bin/options.py, line: 90
@@ -4637,6 +4642,15 @@ msgstr "<i>_Dettagli</i>"
 #~ msgstr "Ora puoi collegarti al database come amministratore"
 
 #
+# File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 710
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " -%s richiesta/e inviata/e"
+
+#
 # File: bin/modules/gui/main.py, line: 736
 # File: bin/modules/gui/main.py, line: 736
 # File: bin/modules/gui/main.py, line: 736
@@ -4675,6 +4689,14 @@ msgstr "<i>_Dettagli</i>"
 # File: bin/printer/printer.py, line: 189
 #~ msgid "Error no report"
 #~ msgstr "Errore Nessun Rapporto"
+
+#
+# File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1140
+#~ msgid "_Tips"
+#~ msgstr "_Tips"
 
 #
 # File: bin/openerp.glade, line: 5791
@@ -4805,6 +4827,72 @@ msgstr "<i>_Dettagli</i>"
 #~ msgid "OpenERP Database Installation"
 #~ msgstr "OpenERP Installazione banca dati"
 
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>E' stato segnalato un errore sconosciuto.</b>\n"
+#~ "\n"
+#~ "<b>Non hai un valido contratto di assistenza OpenERP !</b>\n"
+#~ "Se si sta utilizzando Open ERP a scopo professionale è vivamente consigliato "
+#~ "che si sottoscriva un programma di assistenza.\n"
+#~ "\n"
+#~ "Il programma di assistenza Open ERP garantisce l'eliminazione di eventuali "
+#~ "errori riscontrati nel software e\n"
+#~ "un sistema di migrazione automatico così da permetterci di risolvere il "
+#~ "problema in poche\n"
+#~ "ore. Se si fosse avuto un contratto di assistenza, questo errore sarebbe "
+#~ "stato inviato\n"
+#~ "al team che si occupa della qualità dell'editor Open ERP.\n"
+#~ "\n"
+#~ "Il programma di assistenza offre:\n"
+#~ "* Migrazioni automatiche verso nuove versioni,\n"
+#~ "* La sistemazione degli errori del software eventualmente riscontrati,\n"
+#~ "* Aggiornamenti  mensili sugli  errori potenziali e le loro risoluzioni,\n"
+#~ "* Notifiche sulla sicurezza tramite email e migrazione automatica,\n"
+#~ "* Accesso al portale clienti.\n"
+#~ "\n"
+#~ "Si può utilizzare il link qui sotto per maggiori informazioni. Il dettaglio "
+#~ "dell'errore\n"
+#~ "è  visualizzabile sul secondo tab.\n"
+#~ "\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+
 #, python-format
 #~ msgid ""
 #~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
@@ -4847,6 +4935,9 @@ msgstr "<i>_Dettagli</i>"
 #~ msgid "Your Name:"
 #~ msgstr "Il tuo nome"
 
+#~ msgid "Your Company:"
+#~ msgstr "La tua società:"
+
 #~ msgid "New Database Name:"
 #~ msgstr "Nome del Nuovo Database"
 
@@ -4865,11 +4956,36 @@ msgstr "<i>_Dettagli</i>"
 #~ msgid "Administrator Password:"
 #~ msgstr "Password di amministratore"
 
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Questa è la password di '<i>amministratore</i>'  che sarà creata nel "
+#~ "database. Deve essere la stessa del campo qui sopra."
+
 #~ msgid "<i>_Maintenance</i>"
 #~ msgstr "<i>_Manutenzione</i>"
 
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Invia al Team di Manutenzione"
+
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr "<b>Contratto di Manutenzione.</b>"
+
 #~ msgid "Load Demonstration Data:"
 #~ msgstr "Carica i dati Dimostrativi:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Questa è la password del '<i> amministratore </ i>' che verrà creata nel "
+#~ "nuovo database."
 
 #, python-format
 #~ msgid ""
@@ -4917,6 +5033,9 @@ msgstr "<i>_Dettagli</i>"
 #~ "riscontrato\n"
 #~ "li trovi nel secondo tab."
 
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Clicca qui per i dettagli sulla proposta di manutenzione"
+
 #~ msgid ""
 #~ "Please fill in the following form in order to help us to improve <b><span "
 #~ "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
@@ -4963,6 +5082,60 @@ msgstr "<i>_Dettagli</i>"
 
 #~ msgid "I want to receive the Open ERP ebook (PDF) by email"
 #~ msgstr "Vorrei ricevere l'ebook di Open ERP (pdf) via email"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Un errore sconosciuto è stato riportato.</b>\n"
+#~ "\n"
+#~ "Il tuo contratto di manutenzione non copre tutti i moduli installati sul tuo "
+#~ "sistema!\n"
+#~ "Se stai usando Open ERP in ambiente di produzione, è altamente suggerito di "
+#~ "aggiornare il tuo\n"
+#~ "contratto.\n"
+#~ "\n"
+#~ "Se hai sviluppato i tuoi moduli o installato moduli di terze parti, noi\n"
+#~ "possiamo fornire un addizionale contratto di manutenzione per questi moduli. "
+#~ "Dopo\n"
+#~ "avere revisionato i moduli, il nostro team Qualità vi assicurerà che essi "
+#~ "potranno migrare\n"
+#~ "automaticamente per tutte le versioni stabili future di Open ERP senza costi "
+#~ "aggiuntivi.\n"
+#~ "\n"
+#~ "Ecco qui una lista di moduli non coperti dal tuo contratto di manutenzione:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Puoi usare il link qui sotto per ulteriori informazioni. Il dettaglio di "
+#~ "questo errore\n"
+#~ "è descritto nella seconda scheda."
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Non è stato possibile settare il locale %s"
 
 #~ msgid ""
 #~ "Thank you for the feedback !\n"

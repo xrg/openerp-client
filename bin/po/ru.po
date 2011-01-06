@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-12-23 08:25+0000\n"
-"Last-Translator: Nikolay Chesnokov <chesnokov_n@msn.com>\n"
+"PO-Revision-Date: 2011-01-05 23:47+0000\n"
+"Last-Translator: ILLIOS <mamed-off@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-25 04:50+0000\n"
+"X-Launchpad-Export-Date: 2011-01-06 04:35+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 
@@ -148,31 +148,10 @@ msgstr "Невозможно соединиться с сервером !"
 msgid "Server:"
 msgstr "Сервер:"
 
-#
-# File: bin/openerp.glade, line: 100
-# File: bin/openerp.glade, line: 8527
-# File: bin/openerp.glade, line: 8770
-# File: bin/openerp.glade, line: 9067
-# File: bin/openerp.glade, line: 9415
-# File: bin/openerp.glade, line: 100
-# File: bin/openerp.glade, line: 8527
-# File: bin/openerp.glade, line: 8770
-# File: bin/openerp.glade, line: 9067
-# File: bin/openerp.glade, line: 9415
-# File: bin/openerp.glade, line: 100
-# File: bin/openerp.glade, line: 8527
-# File: bin/openerp.glade, line: 8770
-# File: bin/openerp.glade, line: 9067
-# File: bin/openerp.glade, line: 9415
-# File: bin/openerp.glade, line: 100
-# File: bin/openerp.glade, line: 7398
-# File: bin/openerp.glade, line: 7641
-# File: bin/openerp.glade, line: 7938
-# File: bin/openerp.glade, line: 8286
 #: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6560
 #: bin/openerp.glade:6804 bin/openerp.glade:7103 bin/openerp.glade:7465
 msgid "Change"
-msgstr "Сменить"
+msgstr "Изменить"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
@@ -180,7 +159,7 @@ msgstr "Пароль главного Администратора:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr "Неверный пароль администратора"
+msgstr "Неверный пароль главного администратора"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -204,7 +183,7 @@ msgstr "Доступны следующие обновления"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr "Вы не можете перенести вашу базу данных"
+msgstr "Теперь вы можете перенести ваши базы данных"
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
@@ -226,18 +205,9 @@ msgstr "Ваши базы данных были обновлены"
 msgid "You have not selected a database"
 msgstr "Вы не выбрали базу данных"
 
-#
-# File: bin/modules/gui/main.py, line: 152
-# File: bin/modules/gui/main.py, line: 1142
-# File: bin/modules/gui/main.py, line: 152
-# File: bin/modules/gui/main.py, line: 1142
-# File: bin/modules/gui/main.py, line: 152
-# File: bin/modules/gui/main.py, line: 1142
-# File: bin/modules/gui/main.py, line: 165
-# File: bin/modules/gui/main.py, line: 1161
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr "База данный не найдена, надо создать !"
+msgstr "База данных не найдена, вы должны ее создать !"
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
@@ -459,20 +429,11 @@ msgid ""
 msgstr ""
 "Вы не можете подключиться к системе!\n"
 "Обратитесь к администратору, чтобы проверить,\n"
-"что для вашей пользовательской записи разрашены действия."
+"что для вашей пользовательской записи разрешены действия."
 
-#
-# File: bin/modules/gui/main.py, line: 865
-# File: bin/modules/gui/main.py, line: 872
-# File: bin/modules/gui/main.py, line: 865
-# File: bin/modules/gui/main.py, line: 872
-# File: bin/modules/gui/main.py, line: 865
-# File: bin/modules/gui/main.py, line: 872
-# File: bin/modules/gui/main.py, line: 881
-# File: bin/modules/gui/main.py, line: 888
 #: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
 msgid "Do you really want to quit ?"
-msgstr "Вы подтверждаете выход?"
+msgstr "Вы действительно хотите выйти ?"
 
 #
 # File: bin/modules/gui/main.py, line: 927
@@ -502,32 +463,17 @@ msgstr "Вложения"
 msgid "Delete a database"
 msgstr "Удалить базу данных"
 
-#
-# File: bin/modules/gui/main.py, line: 1041
-# File: bin/modules/gui/main.py, line: 1041
-# File: bin/modules/gui/main.py, line: 1041
-# File: bin/modules/gui/main.py, line: 1057
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr "База данных успешно сброшена!"
+msgstr "База данных успешно удалена!"
 
-#
-# File: bin/modules/gui/main.py, line: 1044
-# File: bin/modules/gui/main.py, line: 1044
-# File: bin/modules/gui/main.py, line: 1044
-# File: bin/modules/gui/main.py, line: 1060
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr "Невозможно сбросить базу данных"
+msgstr "Невозможно удалить базу данных."
 
-#
-# File: bin/modules/gui/main.py, line: 1046
-# File: bin/modules/gui/main.py, line: 1046
-# File: bin/modules/gui/main.py, line: 1046
-# File: bin/modules/gui/main.py, line: 1062
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr "Невозможно сбросить базу данных"
+msgstr "Невозможно удалить базу данных"
 
 #
 # File: bin/modules/gui/main.py, line: 1049
@@ -651,11 +597,11 @@ msgstr "Сохранить как..."
 
 #: bin/modules/gui/main.py:1479
 msgid "Database backed up successfully !"
-msgstr "Резервное сохранение базы данных успешно завершено !"
+msgstr "Резервное копирование базы данных успешно завершено !"
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
-msgstr "Резервное сохранение базы данных не может быть ввыполнено."
+msgstr "Резервное копирование базы данных не может быть выполнено."
 
 #
 # File: bin/modules/gui/main.py, line: 1132
