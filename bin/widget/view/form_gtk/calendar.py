@@ -88,7 +88,7 @@ class calendar(interface.widget_interface):
         if str == '':
             return False
         try:
-            date1 = DT.strptime(str[:10], self.format)
+            date1 = DT.strptime(str[:len(self.format) + 2], self.format)
         except:
             return False
 
@@ -114,9 +114,9 @@ class calendar(interface.widget_interface):
         if not value:
             self.entry.clear()
         else:
-            if len(value)>10:
-                value=value[:10]
-            date=DT.strptime(value[:10], DT_FORMAT)
+            if len(value) >= (len(DT_FORMAT) + 2):
+                value=value[:len(DT_FORMAT) + 2]
+            date = DT.strptime(value[:len(DT_FORMAT) + 2], DT_FORMAT)
             t = date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
@@ -145,8 +145,9 @@ class calendar(interface.widget_interface):
         try:
             val = self.get_value(model)
             if val:
-                cal.select_month(int(val[5:7])-1, int(val[0:4]))
-                cal.select_day(int(val[8:10]))
+                val = DT.strptime(val[:len(DT_FORMAT) + 2], DT_FORMAT)
+                cal.select_month(val.month-1, val.year)
+                cal.select_day(val.day)
         except ValueError:
             pass
 
@@ -210,7 +211,7 @@ class datetime(interface.widget_interface):
         str = self.entry.get_text()
         if str=='':
             return False
-        return tools.datetime_util.local_to_server_timestamp(str[:19], self.format, DHM_FORMAT,
+        return tools.datetime_util.local_to_server_timestamp(str[:len(self.format) + 2], self.format, DHM_FORMAT,
                         tz_offset=timezone, ignore_unparsable_time=False)
 
     def set_value(self, model, model_field):
@@ -230,7 +231,7 @@ class datetime(interface.widget_interface):
         if not dt_val:
             self.entry.clear()
         else:
-            t = tools.datetime_util.server_to_local_timestamp(dt_val[:19],
+            t = tools.datetime_util.server_to_local_timestamp(dt_val[:len(DHM_FORMAT) + 2],
                     DHM_FORMAT, self.format, tz_offset=timezone)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
@@ -264,10 +265,11 @@ class datetime(interface.widget_interface):
         try:
             val = self.get_value(model, timezone=False)
             if val:
-                hour.set_value(int(val[11:13]))
-                minute.set_value(int(val[-5:-3]))
-                cal.select_month(int(val[5:7])-1, int(val[0:4]))
-                cal.select_day(int(val[8:10]))
+                val = DT.strptime(val[:len(DHM_FORMAT) + 2], DHM_FORMAT)
+                hour.set_value(val.hour)
+                minute.set_value(val.minute)
+                cal.select_month(val.month-1, val.year)
+                cal.select_day(val.day)
             else:
                 hour.set_value(time.localtime()[3])
                 minute.set_value(time.localtime()[4])
@@ -277,10 +279,8 @@ class datetime(interface.widget_interface):
         if response == gtk.RESPONSE_OK:
             hr = int(hour.get_value())
             mi = int(minute.get_value())
-            dt = cal.get_date()
-            month = int(dt[1])+1
-            day = int(dt[2])
-            date = DT(dt[0], month, day, hr, mi)
+            year, month, day = cal.get_date()
+            date = DT(year, month+1, day, hr, mi)
             try:
                 value = date.strftime(DHM_FORMAT)
             except ValueError:
@@ -296,7 +296,7 @@ class stime(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, parent, attrs=attrs)
 
-        self.format = user_locale_format.get_datetime_format()
+        self.format = '%H:%M:%S'
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
         self.entry.connect('focus-in-event', lambda x,y: self._focus_in())

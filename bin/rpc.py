@@ -322,7 +322,7 @@ class rpc_session(object):
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
                     else:
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
-                tools.user_locale_format.set_locale_cache(lang_data and lang_data[0])
+                tools.user_locale_format.set_locale_cache(lang_data and lang_data[0] or {})
 
         if self.context.get('tz'):
             # FIXME: Timezone handling

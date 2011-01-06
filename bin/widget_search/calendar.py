@@ -139,8 +139,9 @@ class calendar(wid_int.wid_int):
         try:
             val = self._date_get(dest.get_text())
             if val:
-                cal.select_month(int(val[5:7])-1, int(val[0:4]))
-                cal.select_day(int(val[8:10]))
+                val = tools.datetime_util.strptime(val, DT_FORMAT)
+                cal.select_month(val.month-1, val.year)
+                cal.select_day(val.day)
         except ValueError:
             pass
 
@@ -255,7 +256,7 @@ class datetime(wid_int.wid_int):
         if not dt_val:
             entry.clear()
         else:
-            t = tools.datetime_util.server_to_local_timestamp(dt_val[:19],
+            t = tools.datetime_util.server_to_local_timestamp(dt_val[:len(DHM_FORMAT) + 2],
                     DHM_FORMAT, self.format, tz_offset=timezone)
             if len(t) > entry.get_width_chars():
                 entry.set_width_chars(len(t))
@@ -286,10 +287,11 @@ class datetime(wid_int.wid_int):
         try:
             val = self.get_value(dest, timezone=False)
             if val:
-                hour.set_value(int(val[11:13]))
-                minute.set_value(int(val[-5:-3]))
-                cal.select_month(int(val[5:7])-1, int(val[0:4]))
-                cal.select_day(int(val[8:10]))
+                val = DT.datetime.strptime(val[:len(DHM_FORMAT) + 2], DHM_FORMAT)
+                hour.set_value(val.hour)
+                minute.set_value(val.minute)
+                cal.select_month(val.month-1, val.year)
+                cal.select_day(val.day)
             elif dest == self.entry1:
                 hour.set_value(0)
                 minute.set_value(0)
@@ -302,10 +304,8 @@ class datetime(wid_int.wid_int):
         if response == gtk.RESPONSE_OK:
             hr = int(hour.get_value())
             mi = int(minute.get_value())
-            dt = cal.get_date()
-            month = int(dt[1])+1
-            day = int(dt[2])
-            date = DT.datetime(dt[0], month, day, hr, mi)
+            year, month, day = cal.get_date()
+            date = DT.datetime(year, month+1, day, hr, mi)
             try:
                 value = date.strftime(DHM_FORMAT)
             except ValueError:
