@@ -476,7 +476,7 @@ class db_login(object):
         if _refresh_dblist(db_widget, entry_db, label, butconnect, url):
             is_same_version, server_version, client_version = check_server_version(url)
             if not is_same_version:
-                common.warning(_('The versions of the server (%s) and the client (%s) missmatch. The client may not work properly. Use it at your own risks.') % (server_version, client_version,),parent=self.win)
+                common.warning(_('The versions of the server (%s) and the client (%s) mismatch. The client may not work properly. Use it at your own risk.') % (server_version, client_version,),parent=self.win)
 
     def refreshlist_ask(self,widget, server_widget, db_widget, entry_db, label, butconnect = False, url=False, parent=None):
         url = _server_ask(server_widget, parent) or url
@@ -1026,7 +1026,7 @@ class terp_main(service.Service):
                     raise
                 service.LocalService('gui.main').window.present()
                 self.sig_logout(widget)
-		# if user enters unicode data, it will crash here..
+                # if user enters unicode data, it will crash here..
                 log_response = rpc.session.login(*res)
                 if log_response == RES_OK:
                     options.options.save()
@@ -1035,7 +1035,7 @@ class terp_main(service.Service):
                         self.sig_home_new(quiet=True, except_id=id)
                     if res[4] == 'https://':
                         self.secure_img.show()
-			# TODO: put handler for SSL-info page. (or tooltip?)
+                        # TODO: put handler for SSL-info page. (or tooltip?)
                     else:
                         self.secure_img.hide()
                     self.request_set()
