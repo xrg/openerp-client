@@ -4,13 +4,13 @@
 # This file is distributed under the same license as the openobject-client package.
 #
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
-# P. Christeas <p_christ@hol.gr>, 2010.
+# P. Christeas <p_christ@hol.gr>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-31 16:07+0200\n"
-"PO-Revision-Date: 2010-12-31 16:52+0200\n"
+"PO-Revision-Date: 2011-01-06 11:56+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr ""
 
 #: bin/common/common.py:102
 msgid "Disable all tips"
-msgstr ""
+msgstr "Απενεργοποίηση Συμβουλών"
 
 #: bin/common/common.py:103
 msgid ""
@@ -48,7 +48,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 1173
 #: bin/common/common.py:117 bin/common/common.py:119
 msgid "Tips"
-msgstr "Συμ_βουλές"
+msgstr "Συμβουλές"
 
 #
 # File: bin/modules/gui/main.py, line: 172
@@ -3049,7 +3049,7 @@ msgstr "Δεν βρέθηκαν οι δυνατότητες εξυπηρετητ
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr "Αδυναμία ορισμού γλώσσας: %s"
+msgstr "Αδυναμία ορισμού γλώσσας %s: %s"
 
 #: bin/widget/screen/screen.py:358
 msgid ""
