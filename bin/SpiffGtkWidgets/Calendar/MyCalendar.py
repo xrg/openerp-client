@@ -27,15 +27,13 @@ class MyCalendar(object):
     """
 
     def __init__(self, week_start = calendar.SUNDAY):
-        """
-        Constructor.
+        """ Constructor.
         
         week_start -- the first day of the week, e.g. calendar.SUNDAY
         """
         assert week_start is not None
-	language, self.locale_encoding = locale.getdefaultlocale()
+        language, self.locale_encoding = locale.getdefaultlocale()
         self.calendar = calendar.Calendar(week_start)
-        
 
     def get_week(self, date):
         """
@@ -86,7 +84,8 @@ class MyCalendar(object):
 
     def get_day_name(self, date):
         day = calendar.weekday(*date.timetuple()[:3])
-        return calendar.day_name[day].decode(self.locale_encoding)
+        lang, encoding =  locale.getlocale()
+        return calendar.day_name[day].decode(encoding)
 
 
     def get_month_name(self, date):
