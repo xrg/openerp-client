@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-05 23:47+0000\n"
+"PO-Revision-Date: 2011-01-06 22:16+0000\n"
 "Last-Translator: ILLIOS <mamed-off@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-06 04:35+0000\n"
+"X-Launchpad-Export-Date: 2011-01-07 05:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 
@@ -678,7 +678,7 @@ msgstr "Дата последнего изменения"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr "Идентификатор данных внутренего модуля"
+msgstr "Идентификатор данных внутреннего модуля"
 
 #
 # File: bin/modules/gui/window/form.py, line: 230
@@ -744,7 +744,7 @@ msgstr "Неверная форма, скорректируйте поля, вы
 #: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/list.py:568
 msgid "Error !"
-msgstr "Ошибка !"
+msgstr ""
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
@@ -866,6 +866,12 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Ошибка при импорте записи:\n"
+"%s\n"
+"Сообщение об ошибке:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -1006,18 +1012,9 @@ msgstr "В виде дерева"
 msgid "Description"
 msgstr "Описание"
 
-#
-# File: bin/modules/gui/window/tree.py, line: 190
-# File: bin/modules/gui/window/tree.py, line: 246
-# File: bin/modules/gui/window/tree.py, line: 190
-# File: bin/modules/gui/window/tree.py, line: 246
-# File: bin/modules/gui/window/tree.py, line: 190
-# File: bin/modules/gui/window/tree.py, line: 246
-# File: bin/modules/gui/window/tree.py, line: 190
-# File: bin/modules/gui/window/tree.py, line: 246
 #: bin/modules/gui/window/tree.py:204 bin/modules/gui/window/tree.py:260
 msgid "No resource selected!"
-msgstr "Нет выбранного ресурса !"
+msgstr "Нет выбранного ресурса!"
 
 #
 # File: bin/modules/gui/window/tree.py, line: 204
