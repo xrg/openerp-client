@@ -7365,6 +7365,7 @@ Latin1</property>
                     <property name="can_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
+                    <property name="activates_default">True</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -7380,6 +7381,7 @@ Latin1</property>
                     <property name="can_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
+                    <property name="activates_default">True</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -7395,6 +7397,7 @@ Latin1</property>
                     <property name="can_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
+                    <property name="activates_default">True</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
