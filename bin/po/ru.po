@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-08 00:03+0000\n"
-"Last-Translator: ILLIOS <mamed-off@mail.ru>\n"
+"PO-Revision-Date: 2011-01-08 10:17+0000\n"
+"Last-Translator: Nkolay Parukhin <parukhin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-08 04:55+0000\n"
+"X-Launchpad-Export-Date: 2011-01-09 04:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 
@@ -1858,7 +1858,7 @@ msgstr "Сохранить и закрыть"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr "Сихранить и новая"
+msgstr "Сохранить и новая"
 
 #
 # File: bin/widget/view/form_gtk/interface.py, line: 47
