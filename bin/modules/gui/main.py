@@ -742,6 +742,7 @@ class terp_main(service.Service):
             'on_win_close_activate': self.sig_win_close,
             'on_support_activate': common.support,
             'on_preference_activate': self.sig_user_preferences,
+            'on_change_passwd_activate':lambda x:self.sig_db_password('user'),
             'on_read_requests_activate': self.sig_request_open,
             'on_send_request_activate': self.sig_request_new,
             'on_request_wait_activate': self.sig_request_wait,
@@ -765,7 +766,7 @@ class terp_main(service.Service):
             'on_db_restore_activate': self.sig_db_restore,
             'on_db_backup_activate': self.sig_db_dump,
             'on_db_drop_activate': self.sig_db_drop,
-            'on_admin_password_activate': self.sig_db_password,
+            'on_admin_password_activate': lambda x:self.sig_db_password('admin'),
             'on_extension_manager_activate': self.sig_extension_manager,
             'on_db_migrate_retrieve_script_activate': self.sig_db_migrate_retrieve_script,
             'on_db_migrate_activate' : self.sig_db_migrate,
@@ -917,10 +918,10 @@ class terp_main(service.Service):
         self.notebook.set_current_page(pn-1)
 
     def sig_user_preferences(self, *args):
-        win =win_preference.win_preference(parent=self.window)
+        win = win_preference.win_preference(parent=self.window)
         win.run()
         id = self.sb_company.get_context_id('message')
-        comp=self.company_set()
+        comp = self.company_set()
         if comp:
             self.sb_company.push(id, comp)
         else:
@@ -1415,7 +1416,7 @@ class terp_main(service.Service):
         win = win_extension.win_extension(self.window)
         win.run()
 
-    def sig_db_password(self, widget):
+    def sig_db_password(self, type):
         dialog = glade.XML(common.terp_path("openerp.glade"), "dia_passwd_change",
                 gettext.textdomain())
         win = dialog.get_widget('dia_passwd_change')
@@ -1423,40 +1424,66 @@ class terp_main(service.Service):
         win.set_transient_for(self.window)
         win.show_all()
         server_widget = dialog.get_widget('ent_server2')
+        ser_label = dialog.get_widget('label298')
         old_pass_widget = dialog.get_widget('old_passwd')
         new_pass_widget = dialog.get_widget('new_passwd')
         new_pass2_widget = dialog.get_widget('new_passwd2')
+        dia_label = dialog.get_widget('label294')
         change_button = dialog.get_widget('but_server_change1')
-        change_button.connect_after('clicked', lambda a,b: _server_ask(b, win), server_widget)
+        old_pass_widget.grab_focus()
 
-        host = options.options['login.server']
-        port = options.options['login.port']
-        protocol = options.options['login.protocol']
-        url = '%s%s:%s' % (protocol, host, port)
-        server_widget.set_text(url)
+        if type == 'admin':
+            host = options.options['login.server']
+            port = options.options['login.port']
+            protocol = options.options['login.protocol']
+            url = '%s%s:%s' % (protocol, host, port)
+            server_widget.set_text(url)
+            change_button.connect_after('clicked', lambda a,b: _server_ask(b, win), server_widget)
+        else:
+            dia_label.set_label(_('<b>Change your password</b>'))
+            server_widget.hide()
+            ser_label.hide()
+            change_button.hide()
+        end = False
+        while not end:
+            res = win.run()
+            if res == gtk.RESPONSE_OK:
+                old_passwd = old_pass_widget.get_text()
+                new_passwd = new_pass_widget.get_text()
+                new_passwd2 = new_pass2_widget.get_text()
+                if new_passwd != new_passwd2:
+                    new_pass_widget.set_text('')
+                    new_pass_widget.grab_focus()
+                    new_pass2_widget.set_text('')
+                    common.warning(_("Confirmation password does not match " \
+                            "new password, operation cancelled!"),
+                            _("Validation Error."), parent=win)
+                else:
+                    try:
+                        if type == 'user':
+                            rpc.session.rpc_exec_auth_wo('/object', 'execute', 'res.users', 'change_password',
+                                    old_passwd, new_passwd)
+                            rpc.session._passwd = new_passwd
+                        else:
+                            url = server_widget.get_text()
+                            rpc.session.db_exec(url, 'change_admin_password',
+                                    old_passwd, new_passwd)
+                        end = True
+                    except Exception, e:
 
-        res = win.run()
-        if res == gtk.RESPONSE_OK:
-            url = server_widget.get_text()
-            old_passwd = old_pass_widget.get_text()
-            new_passwd = new_pass_widget.get_text()
-            new_passwd2 = new_pass2_widget.get_text()
-            if new_passwd != new_passwd2:
-                common.warning(_("Confirmation password does not match " \
-                        "new password, operation cancelled!"),
-                        _("Validation Error."), parent=win)
+                        if type == 'admin':
+                            if ('faultCode' in dir(e) and e.faultCode=="AccessDenied") \
+                                    or 'AccessDenied' in str(e):
+                                    common.warning(_("Could not change the Super Admin password."),
+                                                   _('Bad password provided !'), parent=win)
+                        else:
+                            if e.type == 'warning':
+                                 common.warning(e.data, e.message, parent=win)
+                            elif e.type == 'AccessDenied':
+                                common.warning(_("Changing password failed, please verify old password."),
+                                               _('Bad password provided !'), parent=win)
             else:
-                try:
-                    rpc.session.db_exec(url, 'change_admin_password',
-                            old_passwd, new_passwd)
-                except Exception,e:
-                    if ('faultCode' in dir(e) and e.faultCode=="AccessDenied") \
-                            or str(e)=='AccessDenied':
-                        common.warning(_("Could not change the Super Admin password."),
-                                _('Bad password provided !'), parent=win)
-                    else:
-                        common.warning(_("Error, password not changed."),
-                                parent=win)
+                end = True
         self.window.present()
         win.destroy()
 

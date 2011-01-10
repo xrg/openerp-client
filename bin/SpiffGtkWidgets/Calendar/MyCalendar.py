@@ -18,6 +18,7 @@
 
 import datetime
 import calendar
+import locale
 
 
 class MyCalendar(object):
@@ -84,7 +85,8 @@ class MyCalendar(object):
 
     def get_day_name(self, date):
         day = calendar.weekday(*date.timetuple()[:3])
-        return calendar.day_name[day]
+        lang, encoding =  locale.getlocale()
+        return calendar.day_name[day].decode(encoding)
 
 
     def get_month_name(self, date):

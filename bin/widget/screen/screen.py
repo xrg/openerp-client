@@ -337,24 +337,20 @@ class Screen(signal_event.signal_event):
             combo.set_active(0)
             return True
         #This section handles shortcut and action creation
-        elif flag in ['sh','sf']:
+        elif flag in ['sf']:
             glade2 = glade.XML(common.terp_path("openerp.glade"),'dia_get_action',gettext.textdomain())
             widget = glade2.get_widget('action_name')
             win = glade2.get_widget('dia_get_action')
             win.set_icon(common.OPENERP_ICON)
             lbl = glade2.get_widget('label157')
-            if flag == 'sh':
-                win.set_title('Shortcut Entry')
-                lbl.set_text('Shortcut Name:')
-            else:
-                win.set_size_request(300, 165)
-                text_entry = glade2.get_widget('action_name')
-                lbl.set_text('Filter Name:')
-                table =  glade2.get_widget('table8')
-                info_lbl = gtk.Label(_('(Any existing filter with the \nsame name will be replaced)'))
-                table.attach(info_lbl,1,2,2,3, gtk.FILL, gtk.EXPAND)
-                if self.screen_container.last_active_filter:
-                    text_entry.set_text(self.screen_container.last_active_filter)
+            win.set_size_request(300, 165)
+            text_entry = glade2.get_widget('action_name')
+            lbl.set_text('Filter Name:')
+            table =  glade2.get_widget('table8')
+            info_lbl = gtk.Label(_('(Any existing filter with the \nsame name will be replaced)'))
+            table.attach(info_lbl,1,2,2,3, gtk.FILL, gtk.EXPAND)
+            if self.screen_container.last_active_filter:
+                text_entry.set_text(self.screen_container.last_active_filter)
             win.show_all()
             response = win.run()
             # grab a safe copy of the entered text before destroy() to avoid GTK bug https://bugzilla.gnome.org/show_bug.cgi?id=613241
