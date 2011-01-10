@@ -27,8 +27,7 @@ import math
 import cgi
 
 import tools
-import tools.datetime_util
-from dateutil.parser import *
+from tools import user_locale_format, datetime_util
 
 from rpc import RPCProxy
 from editabletree import EditableTreeView
@@ -347,7 +346,16 @@ class Int(Char):
         return tools.str2int(text)
 
     def get_textual_value(self, model):
-        return tools.locale_format('%d', int(model[self.field_name].get_client(model) or 0))
+        count = False
+        if isinstance(model, group_record):
+            val = int(model.value.get(self.field_name, 0))
+            count = model.value.get('%s_count' % self.field_name, '')
+        else:
+            val = int(model[self.field_name].get_client(model) or 0)
+        converted_val = user_locale_format.format('%d', val)
+        if count:
+            converted_val = str(converted_val) +  ' (' + str(count) + ')'
+        return converted_val
 
 class Boolean(Int):
 
@@ -407,24 +415,23 @@ class GenericDate(Char):
         elif isinstance(model, group_record):
             return value
         else:
-            val = parse(value)
-            return val.strftime(self.display_format)
-
+            date = DT.datetime.strptime(value[:len(self.server_format) + 2], self.server_format)
+            return date.strftime(self.display_format)
 
     def value_from_text(self, model, text):
         dt = self.renderer.date_get(self.renderer.editable)
         res = dt and dt.strftime(self.server_format)
         if res:
-            DT.datetime.strptime(res[:10], self.server_format)
+            DT.datetime.strptime(res[:len(self.server_format) + 2], self.server_format)
         return res
 
 class Date(GenericDate):
     server_format = '%Y-%m-%d'
-    display_format = tools.datetime_util.get_date_format()
+    display_format = user_locale_format.get_date_format()
 
 class Datetime(GenericDate):
     server_format = '%Y-%m-%d %H:%M:%S'
-    display_format = tools.datetime_util.get_date_format() + ' %H:%M:%S'
+    display_format = user_locale_format.get_datetime_format(True)
 
     def get_textual_value(self, model):
         value = model[self.field_name].get_client(model)
@@ -433,31 +440,40 @@ class Datetime(GenericDate):
         elif isinstance(model, group_record):
             return value
         else:
-            val = parse(value)
-            val = val.strftime(self.server_format)
-            return tools.datetime_util.server_to_local_timestamp(val,
-                    self.server_format, self.display_format)
+            return tools.datetime_util.server_to_local_timestamp(value[:len(self.server_format) + 2],
+                                                                 self.server_format, self.display_format)
 
     def value_from_text(self, model, text):
         if not text:
             return False
-        return tools.datetime_util.local_to_server_timestamp(text[:19],
+        return tools.datetime_util.local_to_server_timestamp(text[:len(self.display_format) + 2],
                 self.display_format, self.server_format)
 
 class Float(Char):
+
     def get_textual_value(self, model):
         interger, digit = self.attrs.get('digits', (16,2) )
-        return tools.locale_format('%.' + str(digit) + 'f', model[self.field_name].get_client(model) or 0.0)
+        count = False
+        if isinstance(model, group_record):
+            val = model.value.get(self.field_name, 0.0)
+            count = model.value.get('%s_count' % self.field_name,'')
+        else:
+            val = model[self.field_name].get_client(model) or 0.0
+        converted_val = user_locale_format.format('%.' + str(digit) + 'f', val)
+        if count:
+            converted_val = str(converted_val) +  ' (' + str(count) + ')'
+        return converted_val
 
     def value_from_text(self, model, text):
         return tools.str2float(text)
 
 class FloatTime(Char):
+
     def get_textual_value(self, model):
         val = model[self.field_name].get_client(model) or 0
-        t= tools.datetime_util.float_time_convert(val)
-        if val<0:
-            t = '-'+t
+        t = tools.datetime_util.float_time_convert(val)
+        if val < 0:
+            t = '-' + t
         return t
 
     def value_from_text(self, model, text):
