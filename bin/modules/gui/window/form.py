@@ -236,8 +236,8 @@ class form(object):
         id = self.screen.id_get()
         if mode<>self.screen.current_view.view_type:
             self.screen.switch_view(mode=mode)
-            self.sig_reload()
             if id:
+                self.sig_reload()
                 self.get_resource(get_id=id)
 
     def sig_logs(self, widget=None):

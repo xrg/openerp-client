@@ -70,7 +70,7 @@ class screen_container(object):
         sorted_filters = [[act.get('domain',act['id']),act['context'],act['name']] for act in my_acts]
         sorted_filters.sort(lambda x, y: cmp(x[2], y[2]))
         filters_list += sorted_filters
-        filters_list += [['blk','',_('--Actions--')],['sh','',_('Save as a Shortcut')],['sf','',_('Save as a Filter')],['mf','',_('Manage Filters')]]
+        filters_list += [['blk','',_('--Actions--')],['sf','',_('Save as a Filter')],['mf','',_('Manage Filters')]]
         for index, action in enumerate(filters_list):
             if action[-1] == action_name:
                 active = index
