@@ -1,5 +1,5 @@
 LANG=fr
-PYTHON_FILES=$(shell find -name "*py")
+PYTHON_FILES=$(shell find bin/ -name "*py")
 PYTHONC_FILES=$(shell find -name "*pyc")
 APP=openerp-client
 LANGS=$(shell for i in `find bin/po -name "*.po"`; do basename $$i | cut -d'.' -f1; done;)
@@ -11,7 +11,13 @@ clean:
 	rm -f bin/openerp.gladep
 
 translate_get:
-	xgettext -k_ -kN_ -o bin/po/$(APP).pot $(PYTHON_FILES) bin/openerp.glade bin/win_error.glade 
+	xgettext -k_ -kN_ \
+		--copyright-holder="OpenERP SA." \
+		--package-name="OpenERP GTK client" \
+		--package-version="6.0.0rc2" \
+		--msgid-bugs-address="openerp-expert-localization@lists.launchpad.net" \
+		-o bin/po/$(APP).pot \
+		$(PYTHON_FILES) bin/openerp.glade bin/win_error.glade
 
 translate_set:
 	for i in $(LANGS); do \
