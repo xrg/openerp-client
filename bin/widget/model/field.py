@@ -94,6 +94,8 @@ class CharField(object):
         return ok
 
     def set(self, model, value, test_state=True, modified=False):
+        if isinstance(value, basestring):
+            value = value.strip()
         model.value[self.name] = value
         if modified:
             model.modified = True
@@ -160,7 +162,6 @@ class CharField(object):
             self.get_state_attrs(model)['required'] = self.attrs.get('required', False)
         if 'value' in state_changes:
             self.set(model, state_changes['value'], test_state=False, modified=True)
-	# todo 'value_def'
 
     def get_state_attrs(self, model):
         if self.name not in model.state_attrs:
@@ -303,9 +304,6 @@ class M2OField(CharField):
         if value and isinstance(value, (int, str, unicode, long)):
             rpc2 = RPCProxy(self.attrs['relation'])
             result = rpc2.name_get([value], rpc.session.context)
-	    if (not result):
-		print "Cannot find default for %s from %s->[%s]" % \
-			(self.name,self.attrs['relation'],value)
             model.value[self.name] = result and result[0] or ''
         else:
             model.value[self.name] = value

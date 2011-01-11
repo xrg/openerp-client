@@ -30,7 +30,8 @@ import common
 import options
 import os
 import urllib
-
+import tools
+from tools import user_locale_format
 import re
 
 CONCURRENCY_CHECK_FIELD = '__last_update'
@@ -377,17 +378,19 @@ class rpc_session(object):
         if 'lang' in self.context:
             import translate
             translate.setlang(self.context['lang'])
-            options.options['client.lang']=self.context['lang']
-            ids = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('code', '=', self.context['lang'])])
-            if ids:
-                l = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', ids, ['direction'])
-                if l and 'direction' in l[0]:
-                    common.DIRECTION = l[0]['direction']
+            options.options['client.lang'] = self.context['lang']
+            lang_ids = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('code', '=', self.context['lang'])])
+            if lang_ids:
+                lang_data = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['date_format', 'time_format', 'grouping', 'decimal_point', 'thousands_sep','direction'])
+                if lang_data and 'direction' in lang_data[0]:
+                    common.DIRECTION = lang_data[0]['direction']
                     import gtk
                     if common.DIRECTION == 'rtl':
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
                     else:
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
+                tools.user_locale_format.set_locale_cache(lang_data and lang_data[0] or {})
+
         if self.context.get('tz'):
             # FIXME: Timezone handling
             #   rpc_session.timezone contains the server's idea of its timezone (from time.tzname[0]),
@@ -427,7 +430,6 @@ class rpc_session(object):
             import traceback
             traceback.print_exc()
             common.warning(_("Could not get server's options: %s") % e)
-
     def logged(self):
         return self._open
 

@@ -30,7 +30,7 @@ import StringIO
 import locale
 import rpc
 import tools
-from tools import datetime_util
+from tools import user_locale_format, datetime_util
 
 from widget.view import interface
 from widget.view.list import group_record
@@ -39,7 +39,6 @@ from widget.view.list import group_record
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 HM_FORMAT = '%H:%M:%S'
-LDFMT = tools.datetime_util.get_date_format()
 
 import tinygraph
 import matplotlib
@@ -121,13 +120,13 @@ class ViewGraph(object):
                 elif self.fields[x]['type'] == 'date':
                     if field_val:
                         res[x] = datetime_util.server_to_local_timestamp(field_val,
-                                    DT_FORMAT, LDFMT, tz_offset=False)
+                                    DT_FORMAT, user_locale_format.get_date_format(), tz_offset=False)
                     else:
                         res[x] = 'Undefined'
                 elif self.fields[x]['type'] == 'datetime':
                     if field_val:
                         res[x] = datetime_util.server_to_local_timestamp(field_val,
-                                    DHM_FORMAT, LDFMT+' %H:%M:%S')
+                                    DHM_FORMAT, user_locale_format.get_datetime_format(True))
                     else:
                         res[x] = 'Undefined'
                 else:
@@ -141,7 +140,7 @@ class ViewGraph(object):
             self._canvas.queue_resize()
         except:
             pass
-        
+
     def destroy(self):
         pass
 

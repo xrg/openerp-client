@@ -236,8 +236,8 @@ class form(object):
         id = self.screen.id_get()
         if mode<>self.screen.current_view.view_type:
             self.screen.switch_view(mode=mode)
-            self.sig_reload()
             if id:
+                self.sig_reload()
                 self.get_resource(get_id=id)
 
     def sig_logs(self, widget=None):
@@ -379,6 +379,7 @@ class form(object):
 
     def sig_action(self, keyword='client_action_multi', previous=False, report_type='pdf', adds={}):
         ids = self.screen.ids_get()
+        group_by = self.screen.context.get('group_by')
         if self.screen.current_model:
             id = self.screen.current_model.id
         else:
@@ -393,7 +394,7 @@ class form(object):
             sel_ids = self.screen.sel_ids_get()
             if sel_ids:
                 ids = sel_ids
-        if len(ids) or self.screen.context.get('group_by'):
+        if len(ids) or group_by:
             obj = service.LocalService('action.main')
             data = {'model':self.screen.resource,
                     'id': id or False,
@@ -401,6 +402,9 @@ class form(object):
                     'report_type': report_type,
                     '_domain':self.screen.domain
                    }
+            # When group by header is selected add it's children as a active_ids
+            if group_by:
+                self.screen.context.update({'active_id':id, 'active_ids':ids}) 
             if previous and self.previous_action:
                 obj._exec_action(self.previous_action[1], data, self.screen.context)
             else:
@@ -419,7 +423,7 @@ class form(object):
 
     def sig_print(self):
         self.sig_action('client_print_multi', adds={_('Print Screen').encode('utf8'): {'report_name':'printscreen.list', 'name':_('Print Screen'), 'type':'ir.actions.report.xml'},
-		_('Print Workflow'): {'report_name':'workflow.instance.graph', 'name':_('Print Workflow'), 'type':'ir.actions.report.int'}})
+                _('Print Workflow'): {'report_name':'workflow.instance.graph', 'name':_('Print Workflow'), 'type':'ir.actions.report.int'}})
 
     def sig_search(self, widget=None):
         if not self.modified_save():

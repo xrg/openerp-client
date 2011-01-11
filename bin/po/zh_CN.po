@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-02 08:49+0000\n"
+"PO-Revision-Date: 2011-01-10 16:29+0000\n"
 "Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-03 04:57+0000\n"
+"X-Launchpad-Export-Date: 2011-01-11 04:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 
@@ -574,9 +574,12 @@ msgstr "打印"
 msgid "No record selected"
 msgstr "未选择记录"
 
+#
+# File: bin/modules/gui/window/form.py, line: 383
+# File: bin/modules/gui/window/form.py, line: 383
 #: bin/modules/gui/window/form.py:441
 msgid "New document"
-msgstr "新建文档"
+msgstr "新建单据"
 
 #
 # File: bin/modules/gui/window/form.py, line: 385
@@ -888,6 +891,9 @@ msgid ""
 "To re-enable tips you need to check the <b>'Menu Tips'</b> option in the "
 "user preferences."
 msgstr ""
+"<span foreground=\\\"darkred\\\"><b>禁用所有的提示:</b></span>\\n\n"
+"这将禁用所有菜单项的提示标签.\\n\"\n"
+"你必须点击用户属性里的 <b>'菜单提示'</b> 选项来重新开启提示标签."
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
@@ -921,7 +927,7 @@ msgstr "确保文件“%s”是正确的"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " 报告以下错误信息：\\n\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
@@ -962,6 +968,26 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"\\n\n"
+"<b>报告一个未知的错误.</b>\\n\n"
+"\\n\n"
+"<b>您没有一个有效的OpenERP出版商保修合同!</b>\\n\n"
+"如果您在生产中使用OpenERP, 我们强烈建议申请出版商保修计划\\n\n"
+"\\n\n"
+"OpenERP的出版商根据保修合同提供您的错误修复保证和自动迁移系统，\\n\n"
+"使我们能够在几个小时内解决您的问题。如果你有一个出版商保修合同，\\n\n"
+"这个错误会被发送到了OpenERP高技术团队\\n\n"
+"\\n\n"
+"出版商保修计划为您提供::\\n\n"
+"* 自动升级到新的版本,\\n\n"
+"* 错误修复保障,\\n\n"
+"* 每月公布的潜在缺陷及其修复,\\n\n"
+"* 通过电子邮件和自动迁移安全警报,\\n\n"
+"* 访问用户门户网站.\\n\n"
+"\\n\n"
+"你可以使用链接來获取更多信息。\\n\n"
+"该错误的详细信息显示在第二个标签.\\n\n"
 
 #: bin/common/common.py:410
 #, python-format
@@ -989,6 +1015,21 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"\\n\n"
+"<b>报告一个未知的错误.</b>\\n\n"
+"\\n\n"
+"您的出版商保修合同不包括在你的系统中安装的所有模块！如果您在生产中使用OpenERP，这是强烈建议升级你的合同.\\n\n"
+"\\n\n"
+"如果您开发自己的模块或安装第三方模块\\n\n"
+"我们在审查你的模块后，与你签订另外关于这个模块的保修合同，\\n\n"
+"以确保我们的团队保证你的软件的迁移\\n\n"
+"\\n\n"
+"这里列出合同中不保修的模块的合同列表:\\n\n"
+"%s\\n\n"
+"\\n\n"
+"你可以使用链接來获取更多信息。\\n\n"
+"该错误的详细信息显示在第二个标签."
 
 #: bin/common/common.py:488
 msgid ""
@@ -1366,14 +1407,9 @@ msgstr "编辑当前的 %s"
 msgid " - Dot Viewer"
 msgstr " - Dot 图查看器"
 
-#
-# File: bin/widget/view/form_gtk/reference.py, line: 92
-# File: bin/openerp.glade, line: 1214
-# File: bin/widget/view/form_gtk/reference.py, line: 92
-# File: bin/openerp.glade, line: 1214
 #: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1250
 msgid "Create a new resource"
-msgstr "新建对象"
+msgstr "新建资源"
 
 #
 # File: bin/widget/view/form_gtk/reference.py, line: 93
@@ -1678,6 +1714,8 @@ msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
 msgstr ""
+"(任何已经存在的同名\\n\n"
+"T过滤器将被替换)"
 
 #
 # File: bin/rpc.py, line: 142
@@ -1820,12 +1858,9 @@ msgstr "等待回复的请求(_W)"
 msgid "For_m"
 msgstr "表单(_M)"
 
-#
-# File: bin/openerp.glade, line: 501
-# File: bin/openerp.glade, line: 501
 #: bin/openerp.glade:544
 msgid "_New"
-msgstr "新增(_N)"
+msgstr "新建(_N)"
 
 #
 # File: bin/openerp.glade, line: 517
@@ -1890,12 +1925,9 @@ msgstr "切换 列表/表单"
 msgid "_Menu"
 msgstr "菜单(_M)"
 
-#
-# File: bin/openerp.glade, line: 656
-# File: bin/openerp.glade, line: 656
 #: bin/openerp.glade:699
 msgid "_New Home Tab"
-msgstr "新增首页项(_N)"
+msgstr "新建首页标签页(_N)"
 
 #
 # File: bin/openerp.glade, line: 672
@@ -2294,14 +2326,9 @@ msgstr "附件"
 msgid "Menu"
 msgstr "菜单"
 
-#
-# File: bin/openerp.glade, line: 1402
-# File: bin/openerp.glade, line: 1403
-# File: bin/openerp.glade, line: 1402
-# File: bin/openerp.glade, line: 1403
 #: bin/openerp.glade:1450 bin/openerp.glade:1451
 msgid "Reload"
-msgstr "重新载入"
+msgstr "刷新"
 
 #
 #
@@ -3437,7 +3464,7 @@ msgstr "条件操作符"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
-msgstr ""
+msgstr "这次修改将在下一次过滤中使用"
 
 #: bin/openerp.glade:8317
 msgid ""

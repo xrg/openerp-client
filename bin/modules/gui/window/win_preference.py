@@ -80,7 +80,6 @@ class win_preference(object):
         if res == gtk.RESPONSE_OK:
             values = self.screen.get()
             rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write', [rpc.session.uid], values)
-            rpc.session._passwd = values.get('password')
             rpc.session.context_reload()
             new_lang = rpc.session.context.get('lang', 'en_US')
             if lang != new_lang:
