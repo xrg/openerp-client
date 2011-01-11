@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-08 10:17+0000\n"
-"Last-Translator: Nkolay Parukhin <parukhin@gmail.com>\n"
+"PO-Revision-Date: 2011-01-10 14:28+0000\n"
+"Last-Translator: serg_alban <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-09 04:51+0000\n"
+"X-Launchpad-Export-Date: 2011-01-11 04:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 
@@ -4077,6 +4077,8 @@ msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
+"Это пароль пользователя 'admin', который будет создан в Вашей новой базе "
+"данных."
 
 #: bin/openerp.glade:7171
 msgid ""
@@ -4315,7 +4317,7 @@ msgstr "Отправить гарантию каманде издателя"
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
-msgstr ""
+msgstr "Резюме проблемы:"
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"
