@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) YEAR OpenERP SA.
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-31 16:07+0200\n"
+"Project-Id-Version: OpenERP GTK client 6.0.0rc2\n"
+"Report-Msgid-Bugs-To: openerp-expert-localization@lists.launchpad.net\n"
+"POT-Creation-Date: 2011-01-12 01:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,13 +20,13 @@ msgstr ""
 msgid "Could not connect to server !"
 msgstr ""
 
-#: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6241
-#: bin/openerp.glade:6487 bin/openerp.glade:6810 bin/openerp.glade:7471
+#: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6249
+#: bin/openerp.glade:6495 bin/openerp.glade:6818 bin/openerp.glade:7482
 msgid "Server:"
 msgstr ""
 
-#: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6523
-#: bin/openerp.glade:6767 bin/openerp.glade:7066 bin/openerp.glade:7428
+#: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6531
+#: bin/openerp.glade:6775 bin/openerp.glade:7074 bin/openerp.glade:7439
 msgid "Change"
 msgstr ""
 
@@ -34,7 +34,7 @@ msgstr ""
 msgid "Super Administrator Password:"
 msgstr ""
 
-#: bin/modules/gui/main.py:187 bin/modules/action/wizard.py:150 bin/rpc.py:178
+#: bin/modules/gui/main.py:187 bin/modules/action/wizard.py:150 bin/rpc.py:179
 msgid "Connection refused !"
 msgstr ""
 
@@ -44,7 +44,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:195 bin/modules/gui/main.py:201
 #: bin/modules/action/wizard.py:162 bin/modules/action/wizard.py:168
-#: bin/modules/action/wizard.py:170 bin/rpc.py:232 bin/rpc.py:234
+#: bin/modules/action/wizard.py:170 bin/rpc.py:233 bin/rpc.py:235
 msgid "Application Error"
 msgstr ""
 
@@ -108,8 +108,8 @@ msgstr ""
 #: bin/modules/gui/main.py:479
 #, python-format
 msgid ""
-"The versions of the server (%s) and the client (%s) missmatch. The client "
-"may not work properly. Use it at your own risks."
+"The versions of the server (%s) and the client (%s) mismatch. The client may "
+"not work properly. Use it at your own risk."
 msgstr ""
 
 #: bin/modules/gui/main.py:615
@@ -135,8 +135,8 @@ msgstr ""
 msgid "Database already exists !"
 msgstr ""
 
-#: bin/modules/gui/main.py:654 bin/modules/gui/main.py:1392
-#: bin/modules/gui/main.py:1412 bin/modules/gui/main.py:1491
+#: bin/modules/gui/main.py:654 bin/modules/gui/main.py:1393
+#: bin/modules/gui/main.py:1413 bin/modules/gui/main.py:1518
 msgid "Bad database administrator password !"
 msgstr ""
 
@@ -150,165 +150,169 @@ msgid ""
 "We suggest you to drop this database."
 msgstr ""
 
-#: bin/modules/gui/main.py:709 bin/modules/gui/main.py:1085
+#: bin/modules/gui/main.py:709 bin/modules/gui/main.py:1086
 msgid "Press Ctrl+O to login"
 msgstr ""
 
-#: bin/modules/gui/main.py:886
+#: bin/modules/gui/main.py:887
 msgid "Edit"
 msgstr ""
 
-#: bin/modules/gui/main.py:985
+#: bin/modules/gui/main.py:986
 #, python-format
 msgid "%s"
 msgstr ""
 
-#: bin/modules/gui/main.py:987
+#: bin/modules/gui/main.py:988
 msgid "No Company"
 msgstr ""
 
-#: bin/modules/gui/main.py:1000
+#: bin/modules/gui/main.py:1001
 #, python-format
 msgid "%s request(s)"
 msgstr ""
 
-#: bin/modules/gui/main.py:1002
+#: bin/modules/gui/main.py:1003
 msgid "No request"
 msgstr ""
 
-#: bin/modules/gui/main.py:1004
+#: bin/modules/gui/main.py:1005
 #, python-format
 msgid " - %s request(s) sent"
 msgstr ""
 
-#: bin/modules/gui/main.py:1044
+#: bin/modules/gui/main.py:1045
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
 
-#: bin/modules/gui/main.py:1044
+#: bin/modules/gui/main.py:1045
 msgid "Database cannot be accessed or does not exist"
 msgstr ""
 
-#: bin/modules/gui/main.py:1048
+#: bin/modules/gui/main.py:1049
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
 
-#: bin/modules/gui/main.py:1050
+#: bin/modules/gui/main.py:1051
 msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
 
-#: bin/modules/gui/main.py:1063
+#: bin/modules/gui/main.py:1064
 #, python-format
 msgid "OpenERP - %s"
 msgstr ""
 
-#: bin/modules/gui/main.py:1083
+#: bin/modules/gui/main.py:1084
 msgid "Not logged !"
 msgstr ""
 
-#: bin/modules/gui/main.py:1092 bin/widget/view/form_gtk/one2many_list.py:52
-#: bin/openerp.glade:6089
+#: bin/modules/gui/main.py:1093 bin/widget/view/form_gtk/one2many_list.py:52
+#: bin/openerp.glade:6097
 msgid "OpenERP"
 msgstr ""
 
-#: bin/modules/gui/main.py:1166
+#: bin/modules/gui/main.py:1167
 msgid ""
 "You can not log into the system !\n"
 "Ask the administrator to verify\n"
 "you have an action defined for your user."
 msgstr ""
 
-#: bin/modules/gui/main.py:1200 bin/modules/gui/main.py:1207
+#: bin/modules/gui/main.py:1201 bin/modules/gui/main.py:1208
 msgid "Do you really want to quit ?"
 msgstr ""
 
-#: bin/modules/gui/main.py:1271
+#: bin/modules/gui/main.py:1272
 #, python-format
 msgid "Attachments (%d)"
 msgstr ""
 
-#: bin/modules/gui/main.py:1284
+#: bin/modules/gui/main.py:1285
 msgid "Attachments"
 msgstr ""
 
-#: bin/modules/gui/main.py:1383
+#: bin/modules/gui/main.py:1384
 msgid "Delete a database"
 msgstr ""
 
-#: bin/modules/gui/main.py:1389
+#: bin/modules/gui/main.py:1390
 msgid "Database dropped successfully !"
 msgstr ""
 
-#: bin/modules/gui/main.py:1392
+#: bin/modules/gui/main.py:1393
 msgid "Could not drop database."
 msgstr ""
 
-#: bin/modules/gui/main.py:1394
+#: bin/modules/gui/main.py:1395
 msgid "Couldn't drop database"
 msgstr ""
 
-#: bin/modules/gui/main.py:1397 bin/widget/view/form_gtk/image.py:114
-#: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5825
+#: bin/modules/gui/main.py:1398 bin/widget/view/form_gtk/image.py:114
+#: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5833
 msgid "Open..."
 msgstr ""
 
-#: bin/modules/gui/main.py:1409
+#: bin/modules/gui/main.py:1410
 msgid "Database restored successfully !"
 msgstr ""
 
-#: bin/modules/gui/main.py:1412
+#: bin/modules/gui/main.py:1413
 msgid "Could not restore database."
 msgstr ""
 
-#: bin/modules/gui/main.py:1414
+#: bin/modules/gui/main.py:1415
 msgid "Couldn't restore database"
 msgstr ""
 
-#: bin/modules/gui/main.py:1453
-msgid "Confirmation password does not match new password, operation cancelled!"
-msgstr ""
-
-#: bin/modules/gui/main.py:1455
-msgid "Validation Error."
-msgstr ""
-
-#: bin/modules/gui/main.py:1463
-msgid "Could not change the Super Admin password."
-msgstr ""
-
-#: bin/modules/gui/main.py:1464
-msgid "Bad password provided !"
+#: bin/modules/gui/main.py:1451
+msgid "<b>Change your password</b>"
 msgstr ""
 
 #: bin/modules/gui/main.py:1466
-msgid "Error, password not changed."
+msgid "Confirmation password does not match new password, operation cancelled!"
 msgstr ""
 
-#: bin/modules/gui/main.py:1472 bin/modules/gui/main.py:1495
+#: bin/modules/gui/main.py:1468
+msgid "Validation Error."
+msgstr ""
+
+#: bin/modules/gui/main.py:1485
+msgid "Could not change the Super Admin password."
+msgstr ""
+
+#: bin/modules/gui/main.py:1486 bin/modules/gui/main.py:1492
+msgid "Bad password provided !"
+msgstr ""
+
+#: bin/modules/gui/main.py:1491
+msgid "Changing password failed, please verify old password."
+msgstr ""
+
+#: bin/modules/gui/main.py:1499 bin/modules/gui/main.py:1522
 msgid "Backup a database"
 msgstr ""
 
-#: bin/modules/gui/main.py:1475 bin/modules/gui/window/win_export.py:353
+#: bin/modules/gui/main.py:1502 bin/modules/gui/window/win_export.py:353
 #: bin/widget/view/form_gtk/binary.py:175
 #: bin/widget/view/form_gtk/image.py:131 bin/printer/printer.py:231
 msgid "Save As..."
 msgstr ""
 
-#: bin/modules/gui/main.py:1488
+#: bin/modules/gui/main.py:1515
 msgid "Database backed up successfully !"
 msgstr ""
 
-#: bin/modules/gui/main.py:1491
+#: bin/modules/gui/main.py:1518
 msgid "Could not backup the database."
 msgstr ""
 
-#: bin/modules/gui/main.py:1493
+#: bin/modules/gui/main.py:1520
 msgid "Couldn't backup database."
 msgstr ""
 
@@ -434,13 +438,13 @@ msgid "Document Saved."
 msgstr ""
 
 #: bin/modules/gui/window/form.py:336 bin/modules/gui/window/form.py:337
-#: bin/widget/view/list.py:568 bin/widget/view/list.py:569
+#: bin/widget/view/list.py:569 bin/widget/view/list.py:570
 #: bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/form_gtk/parser.py:127
 msgid "Invalid form, correct red fields !"
 msgstr ""
 
-#: bin/modules/gui/window/form.py:336 bin/widget/view/list.py:568
+#: bin/modules/gui/window/form.py:336 bin/widget/view/list.py:569
 #: bin/widget/view/form_gtk/parser.py:126
 msgid "Error !"
 msgstr ""
@@ -449,41 +453,41 @@ msgstr ""
 msgid "Warning !"
 msgstr ""
 
-#: bin/modules/gui/window/form.py:358 bin/modules/gui/window/form.py:463
+#: bin/modules/gui/window/form.py:358 bin/modules/gui/window/form.py:467
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
 msgstr ""
 
-#: bin/modules/gui/window/form.py:412
+#: bin/modules/gui/window/form.py:416
 msgid "You must select one or several records !"
 msgstr ""
 
-#: bin/modules/gui/window/form.py:421
+#: bin/modules/gui/window/form.py:425
 msgid "Print Screen"
 msgstr ""
 
-#: bin/modules/gui/window/form.py:422 bin/plugins/__init__.py:27
+#: bin/modules/gui/window/form.py:426 bin/plugins/__init__.py:27
 msgid "Print Workflow"
 msgstr ""
 
-#: bin/modules/gui/window/form.py:442
+#: bin/modules/gui/window/form.py:446
 msgid "No record selected"
 msgstr ""
 
-#: bin/modules/gui/window/form.py:447
+#: bin/modules/gui/window/form.py:451
 msgid "New document"
 msgstr ""
 
-#: bin/modules/gui/window/form.py:449
+#: bin/modules/gui/window/form.py:453
 msgid "Editing document (id: "
 msgstr ""
 
-#: bin/modules/gui/window/form.py:452
+#: bin/modules/gui/window/form.py:456
 msgid "Record: "
 msgstr ""
 
-#: bin/modules/gui/window/form.py:453
+#: bin/modules/gui/window/form.py:457
 msgid " of "
 msgstr ""
 
@@ -506,13 +510,13 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: bin/modules/gui/window/win_preference.py:87
+#: bin/modules/gui/window/win_preference.py:86
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
 
-#: bin/modules/gui/window/win_preference.py:89
+#: bin/modules/gui/window/win_preference.py:88
 msgid "Default language modified !"
 msgstr ""
 
@@ -617,7 +621,7 @@ msgstr ""
 msgid "This extension is already defined"
 msgstr ""
 
-#: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7647
+#: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7658
 msgid "Extension Manager"
 msgstr ""
 
@@ -629,7 +633,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: bin/modules/action/wizard.py:170 bin/rpc.py:234
+#: bin/modules/action/wizard.py:170 bin/rpc.py:235
 msgid "View details"
 msgstr ""
 
@@ -651,10 +655,6 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:76
 msgid "--Actions--"
-msgstr ""
-
-#: bin/widget/view/screen_container.py:76
-msgid "Save as a Shortcut"
 msgstr ""
 
 #: bin/widget/view/screen_container.py:76
@@ -682,11 +682,11 @@ msgstr ""
 msgid "You must intall the library python-hippocanvas to use calendars."
 msgstr ""
 
-#: bin/widget/view/calendar_gtk/parser.py:356 bin/openerp.glade:8069
+#: bin/widget/view/calendar_gtk/parser.py:356 bin/openerp.glade:8080
 msgid "Week"
 msgstr ""
 
-#: bin/widget/view/list.py:618 bin/widget/view/form_gtk/many2one.py:390
+#: bin/widget/view/list.py:619 bin/widget/view/form_gtk/many2one.py:390
 msgid "You must select a record to use the relation !"
 msgstr ""
 
@@ -708,7 +708,7 @@ msgstr ""
 msgid "Warning; field %s is required!"
 msgstr ""
 
-#: bin/widget/view/tree_gtk/parser.py:62
+#: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
 "You have unsaved record(s) !  \n"
 "\n"
@@ -774,7 +774,7 @@ msgstr ""
 #: bin/widget_search/spinint.py:75 bin/widget_search/spinbutton.py:72
 #: bin/widget_search/reference.py:78 bin/widget_search/filter.py:74
 #: bin/widget_search/custom_filter.py:176 bin/widget_search/selection.py:116
-#: bin/widget_search/calendar.py:126 bin/widget_search/calendar.py:250
+#: bin/widget_search/calendar.py:125 bin/widget_search/calendar.py:250
 #: bin/widget_search/char.py:66
 msgid "The content of the widget or ValueError if not valid"
 msgstr ""
@@ -957,7 +957,7 @@ msgid ""
 "clear the field."
 msgstr ""
 
-#: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1250
+#: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1258
 msgid "Create a new resource"
 msgstr ""
 
@@ -969,33 +969,33 @@ msgstr ""
 msgid "Open this resource"
 msgstr ""
 
-#: bin/widget/view/form_gtk/calendar.py:58
-#: bin/widget/view/form_gtk/calendar.py:180 bin/widget_search/calendar.py:54
-#: bin/widget_search/calendar.py:74 bin/widget_search/calendar.py:181
+#: bin/widget/view/form_gtk/calendar.py:56
+#: bin/widget/view/form_gtk/calendar.py:181 bin/widget_search/calendar.py:53
+#: bin/widget_search/calendar.py:73 bin/widget_search/calendar.py:181
 #: bin/widget_search/calendar.py:201
 msgid "Open the calendar widget"
 msgstr ""
 
-#: bin/widget/view/form_gtk/calendar.py:99
-#: bin/widget/view/form_gtk/calendar.py:160
+#: bin/widget/view/form_gtk/calendar.py:98
+#: bin/widget/view/form_gtk/calendar.py:161
 msgid "Invalid date value! Year must be greater than 1899 !"
 msgstr ""
 
-#: bin/widget/view/form_gtk/calendar.py:132
-#: bin/widget/view/form_gtk/calendar.py:248 bin/widget_search/calendar.py:129
+#: bin/widget/view/form_gtk/calendar.py:133
+#: bin/widget/view/form_gtk/calendar.py:245 bin/widget_search/calendar.py:128
 #: bin/widget_search/calendar.py:267
 msgid "OpenERP - Date selection"
 msgstr ""
 
-#: bin/widget/view/form_gtk/calendar.py:254 bin/widget_search/calendar.py:273
+#: bin/widget/view/form_gtk/calendar.py:251 bin/widget_search/calendar.py:273
 msgid "Hour:"
 msgstr ""
 
-#: bin/widget/view/form_gtk/calendar.py:257 bin/widget_search/calendar.py:276
+#: bin/widget/view/form_gtk/calendar.py:254 bin/widget_search/calendar.py:276
 msgid "Minute:"
 msgstr ""
 
-#: bin/widget/view/form_gtk/calendar.py:293 bin/widget_search/calendar.py:313
+#: bin/widget/view/form_gtk/calendar.py:287 bin/widget_search/calendar.py:312
 msgid "Invalid datetime value! Year must be greater than 1899 !"
 msgstr ""
 
@@ -1003,7 +1003,7 @@ msgstr ""
 msgid "Search a resource"
 msgstr ""
 
-#: bin/widget/view/form_gtk/many2one.py:174 bin/openerp.glade:1404
+#: bin/widget/view/form_gtk/many2one.py:174 bin/openerp.glade:1412
 msgid "Action"
 msgstr ""
 
@@ -1130,7 +1130,7 @@ msgstr ""
 msgid "Can not generate graph !"
 msgstr ""
 
-#: bin/widget/screen/screen.py:358
+#: bin/widget/screen/screen.py:354
 msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
@@ -1191,11 +1191,11 @@ msgid ""
 "M:%S' formats respectively."
 msgstr ""
 
-#: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
+#: bin/widget_search/calendar.py:49 bin/widget_search/calendar.py:177
 msgid "Start date"
 msgstr ""
 
-#: bin/widget_search/calendar.py:70 bin/widget_search/calendar.py:197
+#: bin/widget_search/calendar.py:69 bin/widget_search/calendar.py:197
 msgid "End date"
 msgstr ""
 
@@ -1366,38 +1366,38 @@ msgstr ""
 msgid "Open with..."
 msgstr ""
 
-#: bin/rpc.py:179
+#: bin/rpc.py:180
 msgid "Connection refused!"
 msgstr ""
 
-#: bin/rpc.py:215
+#: bin/rpc.py:216
 msgid ""
 "Unable to reach to OpenERP server !\n"
 "You should check your connection to the network and the OpenERP server."
 msgstr ""
 
-#: bin/rpc.py:215
+#: bin/rpc.py:216
 msgid "Connection Error"
 msgstr ""
 
-#: bin/rpc.py:270 bin/rpc.py:274 bin/rpc.py:290
+#: bin/rpc.py:271 bin/rpc.py:275 bin/rpc.py:291
 msgid "Login error:"
 msgstr ""
 
-#: bin/rpc.py:336
+#: bin/rpc.py:337
 msgid "Socket error"
 msgstr ""
 
-#: bin/rpc.py:345
+#: bin/rpc.py:346
 msgid "Cannot list db:"
 msgstr ""
 
-#: bin/rpc.py:417
+#: bin/rpc.py:420
 #, python-format
 msgid "Could not get server's version: %s"
 msgstr ""
 
-#: bin/rpc.py:429
+#: bin/rpc.py:432
 #, python-format
 msgid "Could not get server's options: %s"
 msgstr ""
@@ -1457,7 +1457,7 @@ msgstr ""
 msgid "OpenERP - Login"
 msgstr ""
 
-#: bin/openerp.glade:116 bin/openerp.glade:6413
+#: bin/openerp.glade:116 bin/openerp.glade:6421
 msgid "Database:"
 msgstr ""
 
@@ -1465,7 +1465,7 @@ msgstr ""
 msgid "User:"
 msgstr ""
 
-#: bin/openerp.glade:146 bin/openerp.glade:6399 bin/openerp.glade:6710
+#: bin/openerp.glade:146 bin/openerp.glade:6407 bin/openerp.glade:6718
 msgid "Password:"
 msgstr ""
 
@@ -1521,353 +1521,357 @@ msgstr ""
 msgid "_Preferences"
 msgstr ""
 
-#: bin/openerp.glade:488
+#: bin/openerp.glade:483 bin/openerp.glade:7320
+msgid "Change password"
+msgstr ""
+
+#: bin/openerp.glade:496
 msgid "_Send a request"
 msgstr ""
 
-#: bin/openerp.glade:503
+#: bin/openerp.glade:511
 msgid "_Read my requests"
 msgstr ""
 
-#: bin/openerp.glade:523
+#: bin/openerp.glade:531
 msgid "_Waiting Requests"
 msgstr ""
 
-#: bin/openerp.glade:536
+#: bin/openerp.glade:544
 msgid "For_m"
 msgstr ""
 
-#: bin/openerp.glade:544
+#: bin/openerp.glade:552
 msgid "_New"
 msgstr ""
 
-#: bin/openerp.glade:560
+#: bin/openerp.glade:568
 msgid "_Save"
 msgstr ""
 
-#: bin/openerp.glade:576
+#: bin/openerp.glade:584
 msgid "Copy this resource"
 msgstr ""
 
-#: bin/openerp.glade:577
+#: bin/openerp.glade:585
 msgid "_Duplicate"
 msgstr ""
 
-#: bin/openerp.glade:593
+#: bin/openerp.glade:601
 msgid "_Delete"
 msgstr ""
 
-#: bin/openerp.glade:614
+#: bin/openerp.glade:622
 msgid "Find"
 msgstr ""
 
-#: bin/openerp.glade:630
+#: bin/openerp.glade:638
 msgid "Ne_xt"
 msgstr ""
 
-#: bin/openerp.glade:646
+#: bin/openerp.glade:654
 msgid "Pre_vious"
 msgstr ""
 
-#: bin/openerp.glade:662
+#: bin/openerp.glade:670
 msgid "Switch to list/form"
 msgstr ""
 
-#: bin/openerp.glade:678
+#: bin/openerp.glade:686
 msgid "_Menu"
 msgstr ""
 
-#: bin/openerp.glade:699
+#: bin/openerp.glade:707
 msgid "_New Home Tab"
 msgstr ""
 
-#: bin/openerp.glade:715 bin/openerp.glade:5005
+#: bin/openerp.glade:723 bin/openerp.glade:5013
 msgid "Close Tab"
 msgstr ""
 
-#: bin/openerp.glade:731
+#: bin/openerp.glade:739
 msgid "Previous Tab"
 msgstr ""
 
-#: bin/openerp.glade:740 bin/openerp.glade:5061
+#: bin/openerp.glade:748 bin/openerp.glade:5069
 msgid "Next Tab"
 msgstr ""
 
-#: bin/openerp.glade:754
+#: bin/openerp.glade:762
 msgid "View _logs"
 msgstr ""
 
-#: bin/openerp.glade:762
+#: bin/openerp.glade:770
 msgid "_Go to resource ID..."
 msgstr ""
 
-#: bin/openerp.glade:776
+#: bin/openerp.glade:784
 msgid "_Open"
 msgstr ""
 
-#: bin/openerp.glade:791
+#: bin/openerp.glade:799
 msgid "Reloa_d / Undo"
 msgstr ""
 
-#: bin/openerp.glade:812
+#: bin/openerp.glade:820
 msgid "Repeat latest _action"
 msgstr ""
 
-#: bin/openerp.glade:826
+#: bin/openerp.glade:834
 msgid "_Preview in PDF"
 msgstr ""
 
-#: bin/openerp.glade:842
+#: bin/openerp.glade:850
 msgid "Previe_w in editor"
 msgstr ""
 
-#: bin/openerp.glade:862
+#: bin/openerp.glade:870
 msgid "Expor_t data..."
 msgstr ""
 
-#: bin/openerp.glade:877
+#: bin/openerp.glade:885
 msgid "I_mport data..."
 msgstr ""
 
-#: bin/openerp.glade:889
+#: bin/openerp.glade:897
 msgid "_Options"
 msgstr ""
 
-#: bin/openerp.glade:896
+#: bin/openerp.glade:904
 msgid "_Extension Manager"
 msgstr ""
 
-#: bin/openerp.glade:904
+#: bin/openerp.glade:912
 msgid "_Menubar"
 msgstr ""
 
-#: bin/openerp.glade:912
+#: bin/openerp.glade:920
 msgid "Text _and Icons"
 msgstr ""
 
-#: bin/openerp.glade:920
+#: bin/openerp.glade:928
 msgid "_Icons only"
 msgstr ""
 
-#: bin/openerp.glade:929
+#: bin/openerp.glade:937
 msgid "_Text only"
 msgstr ""
 
-#: bin/openerp.glade:942
+#: bin/openerp.glade:950
 msgid "_Forms"
 msgstr ""
 
-#: bin/openerp.glade:950
+#: bin/openerp.glade:958
 msgid "Right Toolbar"
 msgstr ""
 
-#: bin/openerp.glade:958
+#: bin/openerp.glade:966
 msgid "Tabs default position"
 msgstr ""
 
-#: bin/openerp.glade:966
+#: bin/openerp.glade:974
 msgid "Top"
 msgstr ""
 
-#: bin/openerp.glade:974
+#: bin/openerp.glade:982
 msgid "Left"
 msgstr ""
 
-#: bin/openerp.glade:983
+#: bin/openerp.glade:991
 msgid "Right"
 msgstr ""
 
-#: bin/openerp.glade:992
+#: bin/openerp.glade:1000
 msgid "Bottom"
 msgstr ""
 
-#: bin/openerp.glade:1005
+#: bin/openerp.glade:1013
 msgid "Tabs default orientation"
 msgstr ""
 
-#: bin/openerp.glade:1013
+#: bin/openerp.glade:1021
 msgid "Horizontal"
 msgstr ""
 
-#: bin/openerp.glade:1021
+#: bin/openerp.glade:1029
 msgid "Vertical"
 msgstr ""
 
-#: bin/openerp.glade:1038
+#: bin/openerp.glade:1046
 msgid "_Print"
 msgstr ""
 
-#: bin/openerp.glade:1045
+#: bin/openerp.glade:1053
 msgid "Previe_w before print"
 msgstr ""
 
-#: bin/openerp.glade:1069
+#: bin/openerp.glade:1077
 msgid "_Save options"
 msgstr ""
 
-#: bin/openerp.glade:1089
+#: bin/openerp.glade:1097
 msgid "_Plugins"
 msgstr ""
 
-#: bin/openerp.glade:1097
+#: bin/openerp.glade:1105
 msgid "_Execute a plugin"
 msgstr ""
 
-#: bin/openerp.glade:1117
+#: bin/openerp.glade:1125
 msgid "_Shortcuts"
 msgstr ""
 
-#: bin/openerp.glade:1125
+#: bin/openerp.glade:1133
 msgid "_Help"
 msgstr ""
 
-#: bin/openerp.glade:1132
+#: bin/openerp.glade:1140
 msgid "Enable Debug Mode Tooltips"
 msgstr ""
 
-#: bin/openerp.glade:1140 bin/openerp.glade:4376
+#: bin/openerp.glade:1148 bin/openerp.glade:4384
 msgid "Support Request"
 msgstr ""
 
-#: bin/openerp.glade:1160
+#: bin/openerp.glade:1168
 msgid "User _Manual"
 msgstr ""
 
-#: bin/openerp.glade:1175
+#: bin/openerp.glade:1183
 msgid "_Contextual Help"
 msgstr ""
 
-#: bin/openerp.glade:1191
+#: bin/openerp.glade:1199
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: bin/openerp.glade:1204
+#: bin/openerp.glade:1212
 msgid "_License"
 msgstr ""
 
-#: bin/openerp.glade:1219
+#: bin/openerp.glade:1227
 msgid "_About..."
 msgstr ""
 
-#: bin/openerp.glade:1261
+#: bin/openerp.glade:1269
 msgid "Edit / Save this resource"
 msgstr ""
 
-#: bin/openerp.glade:1277
+#: bin/openerp.glade:1285
 msgid "Delete this resource"
 msgstr ""
 
-#: bin/openerp.glade:1290
+#: bin/openerp.glade:1298
 msgid "Go to previous matched search"
 msgstr ""
 
-#: bin/openerp.glade:1291
+#: bin/openerp.glade:1299
 msgid "Previous"
 msgstr ""
 
-#: bin/openerp.glade:1302
+#: bin/openerp.glade:1310
 msgid "Go to next matched resource"
 msgstr ""
 
-#: bin/openerp.glade:1303
+#: bin/openerp.glade:1311
 msgid "Next"
 msgstr ""
 
-#: bin/openerp.glade:1316
+#: bin/openerp.glade:1324
 msgid "List"
 msgstr ""
 
-#: bin/openerp.glade:1328
+#: bin/openerp.glade:1336
 msgid "Form"
 msgstr ""
 
-#: bin/openerp.glade:1341
+#: bin/openerp.glade:1349
 msgid "Calendar"
 msgstr ""
 
-#: bin/openerp.glade:1351
+#: bin/openerp.glade:1359
 msgid "Diagram"
 msgstr ""
 
-#: bin/openerp.glade:1361
+#: bin/openerp.glade:1369
 msgid "Graph"
 msgstr ""
 
-#: bin/openerp.glade:1374
+#: bin/openerp.glade:1382
 msgid "Gantt"
 msgstr ""
 
-#: bin/openerp.glade:1392
+#: bin/openerp.glade:1400
 msgid "Print documents"
 msgstr ""
 
-#: bin/openerp.glade:1403
+#: bin/openerp.glade:1411
 msgid "Launch actions about this resource"
 msgstr ""
 
-#: bin/openerp.glade:1416
+#: bin/openerp.glade:1424
 msgid "Add an attachment to this resource"
 msgstr ""
 
-#: bin/openerp.glade:1417
+#: bin/openerp.glade:1425
 msgid "Attachment"
 msgstr ""
 
-#: bin/openerp.glade:1432 bin/openerp.glade:1433
+#: bin/openerp.glade:1440 bin/openerp.glade:1441
 msgid "Menu"
 msgstr ""
 
-#: bin/openerp.glade:1450 bin/openerp.glade:1451
+#: bin/openerp.glade:1458 bin/openerp.glade:1459
 msgid "Reload"
 msgstr ""
 
-#: bin/openerp.glade:1468
+#: bin/openerp.glade:1476
 msgid "Close this window"
 msgstr ""
 
-#: bin/openerp.glade:1512
+#: bin/openerp.glade:1520
 msgid "Company:"
 msgstr ""
 
-#: bin/openerp.glade:1535
+#: bin/openerp.glade:1543
 msgid "Requests:"
 msgstr ""
 
-#: bin/openerp.glade:1558
+#: bin/openerp.glade:1566
 msgid "Read my Requests"
 msgstr ""
 
-#: bin/openerp.glade:1579
+#: bin/openerp.glade:1587
 msgid "Send a new request"
 msgstr ""
 
-#: bin/openerp.glade:1619
+#: bin/openerp.glade:1627
 msgid "OpenERP - Tree Resources"
 msgstr ""
 
-#: bin/openerp.glade:1672
+#: bin/openerp.glade:1680
 msgid "Shortcuts"
 msgstr ""
 
-#: bin/openerp.glade:1781
+#: bin/openerp.glade:1789
 msgid "OpenERP - Forms"
 msgstr ""
 
-#: bin/openerp.glade:1805
+#: bin/openerp.glade:1813
 msgid "State:"
 msgstr ""
 
-#: bin/openerp.glade:1837
+#: bin/openerp.glade:1845
 msgid "OpenERP - About"
 msgstr ""
 
-#: bin/openerp.glade:1851
+#: bin/openerp.glade:1859
 msgid ""
 "<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
 
-#: bin/openerp.glade:1890
+#: bin/openerp.glade:1898
 msgid ""
 "\n"
 "OpenERP - GTK Client - v%s\n"
@@ -1883,11 +1887,11 @@ msgid ""
 "More Info on www.openerp.com !"
 msgstr ""
 
-#: bin/openerp.glade:1918
+#: bin/openerp.glade:1926
 msgid "_OpenERP"
 msgstr ""
 
-#: bin/openerp.glade:1946
+#: bin/openerp.glade:1954
 msgid ""
 "\n"
 "(c) 2003-TODAY - Tiny sprl\n"
@@ -1903,165 +1907,165 @@ msgid ""
 "Web: http://tiny.be"
 msgstr ""
 
-#: bin/openerp.glade:1977
+#: bin/openerp.glade:1985
 msgid "_Contact"
 msgstr ""
 
-#: bin/openerp.glade:2029
+#: bin/openerp.glade:2037
 msgid "Open ERP - Forms widget"
 msgstr ""
 
-#: bin/openerp.glade:2208 bin/openerp.glade:4722
+#: bin/openerp.glade:2216 bin/openerp.glade:4730
 msgid "OpenERP - Confirmation"
 msgstr ""
 
-#: bin/openerp.glade:2287
+#: bin/openerp.glade:2295
 msgid "OpenERP - Selection"
 msgstr ""
 
-#: bin/openerp.glade:2301
+#: bin/openerp.glade:2309
 msgid "Your selection:"
 msgstr ""
 
-#: bin/openerp.glade:2381
+#: bin/openerp.glade:2389
 msgid "OpenERP - Dialog"
 msgstr ""
 
-#: bin/openerp.glade:2405
+#: bin/openerp.glade:2413
 msgid "OpenERP, Field Preference target"
 msgstr ""
 
-#: bin/openerp.glade:2436
+#: bin/openerp.glade:2444
 msgid "_only for you"
 msgstr ""
 
-#: bin/openerp.glade:2450
+#: bin/openerp.glade:2458
 msgid "for _all users"
 msgstr ""
 
-#: bin/openerp.glade:2470
+#: bin/openerp.glade:2478
 msgid "<b>Value applicable for:</b>"
 msgstr ""
 
-#: bin/openerp.glade:2506
+#: bin/openerp.glade:2514
 msgid "<b>Value applicable if:</b>"
 msgstr ""
 
-#: bin/openerp.glade:2524
+#: bin/openerp.glade:2532
 msgid "Field _Name:"
 msgstr ""
 
-#: bin/openerp.glade:2538
+#: bin/openerp.glade:2546
 msgid "_Domain:"
 msgstr ""
 
-#: bin/openerp.glade:2597
+#: bin/openerp.glade:2605
 msgid "Default _value:"
 msgstr ""
 
-#: bin/openerp.glade:2652
+#: bin/openerp.glade:2660
 msgid "OpenERP - Export to CSV"
 msgstr ""
 
-#: bin/openerp.glade:2700
+#: bin/openerp.glade:2708
 msgid "Save List"
 msgstr ""
 
-#: bin/openerp.glade:2748
+#: bin/openerp.glade:2756
 msgid "Remove List"
 msgstr ""
 
-#: bin/openerp.glade:2803
+#: bin/openerp.glade:2811
 msgid "<b>Exports List</b>"
 msgstr ""
 
-#: bin/openerp.glade:2820
+#: bin/openerp.glade:2828
 msgid "<b>Predefined Exports</b>"
 msgstr ""
 
-#: bin/openerp.glade:2866
+#: bin/openerp.glade:2874
 msgid "Available Fields"
 msgstr ""
 
-#: bin/openerp.glade:2909 bin/openerp.glade:5628
+#: bin/openerp.glade:2917 bin/openerp.glade:5636
 msgid "_Add"
 msgstr ""
 
-#: bin/openerp.glade:2956 bin/openerp.glade:5675
+#: bin/openerp.glade:2964 bin/openerp.glade:5683
 msgid "_Remove"
 msgstr ""
 
-#: bin/openerp.glade:3004
+#: bin/openerp.glade:3012
 msgid "_Nothing"
 msgstr ""
 
-#: bin/openerp.glade:3059
+#: bin/openerp.glade:3067
 msgid "Fields to Export"
 msgstr ""
 
-#: bin/openerp.glade:3089
+#: bin/openerp.glade:3097
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
 msgstr ""
 
-#: bin/openerp.glade:3108
+#: bin/openerp.glade:3116
 msgid "Add Field Names"
 msgstr ""
 
-#: bin/openerp.glade:3127
+#: bin/openerp.glade:3135
 msgid "Import Compatible"
 msgstr ""
 
-#: bin/openerp.glade:3149
+#: bin/openerp.glade:3157
 msgid "<b>Opti_ons</b>"
 msgstr ""
 
-#: bin/openerp.glade:3208
+#: bin/openerp.glade:3216
 msgid "OpenERP - Search"
 msgstr ""
 
-#: bin/openerp.glade:3288
+#: bin/openerp.glade:3296
 msgid "OpenERP - Preferences"
 msgstr ""
 
-#: bin/openerp.glade:3302
+#: bin/openerp.glade:3310
 msgid "<b>User preferences</b>"
 msgstr ""
 
-#: bin/openerp.glade:3368
+#: bin/openerp.glade:3376
 msgid "Tip of the Day"
 msgstr ""
 
-#: bin/openerp.glade:3415
+#: bin/openerp.glade:3423
 msgid "_Display a new tip next time?"
 msgstr ""
 
-#: bin/openerp.glade:3468
+#: bin/openerp.glade:3476
 msgid "Pre_vious Tip"
 msgstr ""
 
-#: bin/openerp.glade:3514
+#: bin/openerp.glade:3522
 msgid "Ne_xt Tip"
 msgstr ""
 
-#: bin/openerp.glade:3560
+#: bin/openerp.glade:3568
 msgid "OpenERP - License"
 msgstr ""
 
-#: bin/openerp.glade:3575
+#: bin/openerp.glade:3583
 msgid "OpenERP license"
 msgstr ""
 
-#: bin/openerp.glade:4273
+#: bin/openerp.glade:4281
 msgid "Go to resource ID"
 msgstr ""
 
-#: bin/openerp.glade:4323
+#: bin/openerp.glade:4331
 msgid "Search ID:"
 msgstr ""
 
-#: bin/openerp.glade:4402
+#: bin/openerp.glade:4410
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
 "<i>\n"
@@ -2070,15 +2074,15 @@ msgid ""
 "or an official partner.</i>"
 msgstr ""
 
-#: bin/openerp.glade:4461
+#: bin/openerp.glade:4469
 msgid "Phone number:"
 msgstr ""
 
-#: bin/openerp.glade:4474
+#: bin/openerp.glade:4482
 msgid "Emergency:"
 msgstr ""
 
-#: bin/openerp.glade:4488
+#: bin/openerp.glade:4496
 msgid ""
 "Not Urgent\n"
 "Medium\n"
@@ -2086,438 +2090,434 @@ msgid ""
 "Very Urgent"
 msgstr ""
 
-#: bin/openerp.glade:4521
+#: bin/openerp.glade:4529
 msgid "<b>Support contract id:</b>"
 msgstr ""
 
-#: bin/openerp.glade:4578
+#: bin/openerp.glade:4586
 msgid "Other comments:"
 msgstr ""
 
-#: bin/openerp.glade:4592
+#: bin/openerp.glade:4600
 msgid "Explain your problem:"
 msgstr ""
 
-#: bin/openerp.glade:4631
+#: bin/openerp.glade:4639
 msgid "<b>Your email:</b>"
 msgstr ""
 
-#: bin/openerp.glade:4645
+#: bin/openerp.glade:4653
 msgid "<b>Your Company:</b>"
 msgstr ""
 
-#: bin/openerp.glade:4659
+#: bin/openerp.glade:4667
 msgid "<b>Your name:</b>"
 msgstr ""
 
-#: bin/openerp.glade:4750 bin/openerp.glade:6118
+#: bin/openerp.glade:4758 bin/openerp.glade:6126
 msgid "Hello World!"
 msgstr ""
 
-#: bin/openerp.glade:4812
+#: bin/openerp.glade:4820
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#: bin/openerp.glade:4834
+#: bin/openerp.glade:4842
 msgid "<b>Shortcuts for OpenERP</b>"
 msgstr ""
 
-#: bin/openerp.glade:4848
+#: bin/openerp.glade:4856
 msgid "Close window without saving"
 msgstr ""
 
-#: bin/openerp.glade:4863
+#: bin/openerp.glade:4871
 msgid "<Ctrl> + <Esc>"
 msgstr ""
 
-#: bin/openerp.glade:4877
+#: bin/openerp.glade:4885
 msgid "<i>When editing a resource in a popup window</i>"
 msgstr ""
 
-#: bin/openerp.glade:4893
+#: bin/openerp.glade:4901
 msgid "Save and Close window"
 msgstr ""
 
-#: bin/openerp.glade:4908
+#: bin/openerp.glade:4916
 msgid "<Ctrl> + <Enter>"
 msgstr ""
 
-#: bin/openerp.glade:4921
+#: bin/openerp.glade:4929
 msgid "Switch view mode"
 msgstr ""
 
-#: bin/openerp.glade:4936
+#: bin/openerp.glade:4944
 msgid "<Ctrl> + L"
 msgstr ""
 
-#: bin/openerp.glade:4949
+#: bin/openerp.glade:4957
 msgid "Next record"
 msgstr ""
 
-#: bin/openerp.glade:4964
+#: bin/openerp.glade:4972
 msgid "Previous record"
 msgstr ""
 
-#: bin/openerp.glade:4979
+#: bin/openerp.glade:4987
 msgid "<PgDn>"
 msgstr ""
 
-#: bin/openerp.glade:4992
+#: bin/openerp.glade:5000
 msgid "<PgUp>"
 msgstr ""
 
-#: bin/openerp.glade:5020
+#: bin/openerp.glade:5028
 msgid "Save"
 msgstr ""
 
-#: bin/openerp.glade:5035
+#: bin/openerp.glade:5043
 msgid "<Ctrl> + W"
 msgstr ""
 
-#: bin/openerp.glade:5048
+#: bin/openerp.glade:5056
 msgid "<Ctrl> + S"
 msgstr ""
 
-#: bin/openerp.glade:5076
+#: bin/openerp.glade:5084
 msgid "<Ctrl> + <PgDn>"
 msgstr ""
 
-#: bin/openerp.glade:5089
+#: bin/openerp.glade:5097
 msgid "Previous tab"
 msgstr ""
 
-#: bin/openerp.glade:5104
+#: bin/openerp.glade:5112
 msgid "<Ctrl> + <PgUp>"
 msgstr ""
 
-#: bin/openerp.glade:5117
+#: bin/openerp.glade:5125
 msgid "New"
 msgstr ""
 
-#: bin/openerp.glade:5132
+#: bin/openerp.glade:5140
 msgid "<Ctrl> + N"
 msgstr ""
 
-#: bin/openerp.glade:5145
+#: bin/openerp.glade:5153
 msgid "Delete"
 msgstr ""
 
-#: bin/openerp.glade:5160
+#: bin/openerp.glade:5168
 msgid "<Ctrl> + D"
 msgstr ""
 
-#: bin/openerp.glade:5173
+#: bin/openerp.glade:5181
 msgid "Find / Search"
 msgstr ""
 
-#: bin/openerp.glade:5188
+#: bin/openerp.glade:5196
 msgid "<Ctrl> + F"
 msgstr ""
 
-#: bin/openerp.glade:5201
+#: bin/openerp.glade:5209
 msgid "Connect"
 msgstr ""
 
-#: bin/openerp.glade:5216
+#: bin/openerp.glade:5224
 msgid "<Ctrl> + O"
 msgstr ""
 
-#: bin/openerp.glade:5230
+#: bin/openerp.glade:5238
 msgid "Main Shortcuts"
 msgstr ""
 
-#: bin/openerp.glade:5247
+#: bin/openerp.glade:5255
 msgid "F2"
 msgstr ""
 
-#: bin/openerp.glade:5260
+#: bin/openerp.glade:5268
 msgid "<b>Shortcuts in relation fields</b>"
 msgstr ""
 
-#: bin/openerp.glade:5275
+#: bin/openerp.glade:5283
 msgid "<b>Shortcuts in text entries</b>"
 msgstr ""
 
-#: bin/openerp.glade:5288
+#: bin/openerp.glade:5296
 msgid "Open current field"
 msgstr ""
 
-#: bin/openerp.glade:5303
+#: bin/openerp.glade:5311
 msgid "Add a new line/field"
 msgstr ""
 
-#: bin/openerp.glade:5318
+#: bin/openerp.glade:5326
 msgid "F1"
 msgstr ""
 
-#: bin/openerp.glade:5331
+#: bin/openerp.glade:5339
 msgid "Auto-Complete text field"
 msgstr ""
 
-#: bin/openerp.glade:5346
+#: bin/openerp.glade:5354
 msgid "<Enter>"
 msgstr ""
 
-#: bin/openerp.glade:5359
+#: bin/openerp.glade:5367
 msgid "Previous editable widget"
 msgstr ""
 
-#: bin/openerp.glade:5374
+#: bin/openerp.glade:5382
 msgid "<Shift> + <Tab>"
 msgstr ""
 
-#: bin/openerp.glade:5387
+#: bin/openerp.glade:5395
 msgid "Next editable widget"
 msgstr ""
 
-#: bin/openerp.glade:5402
+#: bin/openerp.glade:5410
 msgid "<Tab>"
 msgstr ""
 
-#: bin/openerp.glade:5415
+#: bin/openerp.glade:5423
 msgid "Paste selected text"
 msgstr ""
 
-#: bin/openerp.glade:5430
+#: bin/openerp.glade:5438
 msgid "Copy selected text"
 msgstr ""
 
-#: bin/openerp.glade:5445
+#: bin/openerp.glade:5453
 msgid "Cut selected text"
 msgstr ""
 
-#: bin/openerp.glade:5460
+#: bin/openerp.glade:5468
 msgid "<Ctrl> + V"
 msgstr ""
 
-#: bin/openerp.glade:5473
+#: bin/openerp.glade:5481
 msgid "<Ctrl> + C"
 msgstr ""
 
-#: bin/openerp.glade:5486
+#: bin/openerp.glade:5494
 msgid "<Ctrl> + X"
 msgstr ""
 
-#: bin/openerp.glade:5503
+#: bin/openerp.glade:5511
 msgid "Edition Widgets"
 msgstr ""
 
-#: bin/openerp.glade:5541
+#: bin/openerp.glade:5549
 msgid "Import from CSV"
 msgstr ""
 
-#: bin/openerp.glade:5586
+#: bin/openerp.glade:5594
 msgid "<b>All fields</b>"
 msgstr ""
 
-#: bin/openerp.glade:5723
+#: bin/openerp.glade:5731
 msgid "N_othing"
 msgstr ""
 
-#: bin/openerp.glade:5780
+#: bin/openerp.glade:5788
 msgid "<b>Fields to import</b>"
 msgstr ""
 
-#: bin/openerp.glade:5815
+#: bin/openerp.glade:5823
 msgid "File to Import: "
 msgstr ""
 
-#: bin/openerp.glade:5860
+#: bin/openerp.glade:5868
 msgid "Auto-Detect"
 msgstr ""
 
-#: bin/openerp.glade:5938
+#: bin/openerp.glade:5946
 msgid "Lines to Skip:"
 msgstr ""
 
-#: bin/openerp.glade:5967
+#: bin/openerp.glade:5975
 msgid "Text Delimiter:"
 msgstr ""
 
-#: bin/openerp.glade:5995
+#: bin/openerp.glade:6003
 msgid "Encoding:"
 msgstr ""
 
-#: bin/openerp.glade:6008
+#: bin/openerp.glade:6016
 msgid "Field Separator: "
 msgstr ""
 
-#: bin/openerp.glade:6020
+#: bin/openerp.glade:6028
 msgid "CSV Parameters"
 msgstr ""
 
-#: bin/openerp.glade:6185
+#: bin/openerp.glade:6193
 msgid "Server"
 msgstr ""
 
-#: bin/openerp.glade:6195
+#: bin/openerp.glade:6203
 msgid "<b>Connect to a OpenERP server</b>"
 msgstr ""
 
-#: bin/openerp.glade:6254
+#: bin/openerp.glade:6262
 msgid "Protocol connection:"
 msgstr ""
 
-#: bin/openerp.glade:6300
+#: bin/openerp.glade:6308
 msgid "Port:"
 msgstr ""
 
-#: bin/openerp.glade:6352
+#: bin/openerp.glade:6360
 msgid "Choose a database..."
 msgstr ""
 
-#: bin/openerp.glade:6367
+#: bin/openerp.glade:6375
 msgid "<b>Backup a database</b>"
 msgstr ""
 
-#: bin/openerp.glade:6608
+#: bin/openerp.glade:6616
 msgid "Restore a database"
 msgstr ""
 
-#: bin/openerp.glade:6621
+#: bin/openerp.glade:6629
 msgid "<b>Restore a database</b>"
 msgstr ""
 
-#: bin/openerp.glade:6665
+#: bin/openerp.glade:6673
 msgid "(must not contain any special char)"
 msgstr ""
 
-#: bin/openerp.glade:6695
+#: bin/openerp.glade:6703
 msgid "New database name:"
 msgstr ""
 
-#: bin/openerp.glade:6795 bin/openerp.glade:6941 bin/openerp.glade:7456
+#: bin/openerp.glade:6803 bin/openerp.glade:6949 bin/openerp.glade:7467
 msgid "http://localhost:8069"
 msgstr ""
 
-#: bin/openerp.glade:6869
+#: bin/openerp.glade:6877
 msgid "Create a new database"
 msgstr ""
 
-#: bin/openerp.glade:6882
+#: bin/openerp.glade:6890
 msgid "<b>Create a new database</b>"
 msgstr ""
 
-#: bin/openerp.glade:6953
+#: bin/openerp.glade:6961
 msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
 
-#: bin/openerp.glade:6957
+#: bin/openerp.glade:6965
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Server:"
 msgstr ""
 
-#: bin/openerp.glade:6988
+#: bin/openerp.glade:6996
 msgid ""
 "This is the password of the user that have the rights to administer "
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
 
-#: bin/openerp.glade:6992
+#: bin/openerp.glade:7000
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
 
-#: bin/openerp.glade:7011
+#: bin/openerp.glade:7019
 msgid "admin"
 msgstr ""
 
-#: bin/openerp.glade:7025
+#: bin/openerp.glade:7033
 msgid "(<i>admin</i>, by default)"
 msgstr ""
 
-#: bin/openerp.glade:7090
+#: bin/openerp.glade:7098
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
 
-#: bin/openerp.glade:7092
+#: bin/openerp.glade:7100
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>New Database Name:"
 msgstr ""
 
-#: bin/openerp.glade:7117
+#: bin/openerp.glade:7125
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
 
-#: bin/openerp.glade:7119
+#: bin/openerp.glade:7127
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
 msgstr ""
 
-#: bin/openerp.glade:7132
+#: bin/openerp.glade:7140
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
 
-#: bin/openerp.glade:7134
+#: bin/openerp.glade:7142
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Administrator "
 "Password:"
 msgstr ""
 
-#: bin/openerp.glade:7147
+#: bin/openerp.glade:7155
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
 
-#: bin/openerp.glade:7149
+#: bin/openerp.glade:7157
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
 msgstr ""
 
-#: bin/openerp.glade:7242
+#: bin/openerp.glade:7250
 msgid ""
 "Check this box if you want demonstration data to be installed on your new "
 "database. These data will help you to understand OpenERP, with predefined "
 "products, partners, etc."
 msgstr ""
 
-#: bin/openerp.glade:7245
+#: bin/openerp.glade:7253
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
 "Data:"
 msgstr ""
 
-#: bin/openerp.glade:7312
-msgid "Change password"
-msgstr ""
-
-#: bin/openerp.glade:7329
+#: bin/openerp.glade:7337
 msgid "<b>Change your super admin password</b>"
 msgstr ""
 
-#: bin/openerp.glade:7482
+#: bin/openerp.glade:7493
 msgid "Old password:"
 msgstr ""
 
-#: bin/openerp.glade:7495
+#: bin/openerp.glade:7506
 msgid "New password:"
 msgstr ""
 
-#: bin/openerp.glade:7508
+#: bin/openerp.glade:7519
 msgid "New password confirmation:"
 msgstr ""
 
-#: bin/openerp.glade:7567
+#: bin/openerp.glade:7578
 msgid "OpenERP Message"
 msgstr ""
 
-#: bin/openerp.glade:7751
+#: bin/openerp.glade:7762
 msgid "Concurrency exception"
 msgstr ""
 
-#: bin/openerp.glade:7776
+#: bin/openerp.glade:7787
 msgid ""
 "<b>\n"
 "Write concurrency warning:\n"
@@ -2529,61 +2529,61 @@ msgid ""
 "   - \"Write anyway\" to save your current version.\n"
 msgstr ""
 
-#: bin/openerp.glade:7839
+#: bin/openerp.glade:7850
 msgid "Compare"
 msgstr ""
 
-#: bin/openerp.glade:7885
+#: bin/openerp.glade:7896
 msgid "Write anyway"
 msgstr ""
 
-#: bin/openerp.glade:7915 bin/openerp.glade:7925
+#: bin/openerp.glade:7926 bin/openerp.glade:7936
 msgid "window1"
 msgstr ""
 
-#: bin/openerp.glade:7997
+#: bin/openerp.glade:8008
 msgid "Today"
 msgstr ""
 
-#: bin/openerp.glade:8043
+#: bin/openerp.glade:8054
 msgid "September 2008"
 msgstr ""
 
-#: bin/openerp.glade:8057
+#: bin/openerp.glade:8068
 msgid "Day"
 msgstr ""
 
-#: bin/openerp.glade:8081
+#: bin/openerp.glade:8092
 msgid "Month"
 msgstr ""
 
-#: bin/openerp.glade:8239
+#: bin/openerp.glade:8250
 msgid "Fields on which Search criteria to be applied"
 msgstr ""
 
-#: bin/openerp.glade:8252
+#: bin/openerp.glade:8263
 msgid "Conditional Operators"
 msgstr ""
 
-#: bin/openerp.glade:8279
+#: bin/openerp.glade:8290
 msgid "The Choice will be applied with next filter if any"
 msgstr ""
 
-#: bin/openerp.glade:8280
+#: bin/openerp.glade:8291
 msgid ""
 "AND\n"
 "OR"
 msgstr ""
 
-#: bin/openerp.glade:8293
+#: bin/openerp.glade:8304
 msgid "Remove Filter"
 msgstr ""
 
-#: bin/openerp.glade:8312
+#: bin/openerp.glade:8323
 msgid "Filter Entry"
 msgstr ""
 
-#: bin/openerp.glade:8358
+#: bin/openerp.glade:8369
 msgid "Enter Filter Name:"
 msgstr ""
 
