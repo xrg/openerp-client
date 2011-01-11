@@ -741,7 +741,6 @@ class Screen(signal_event.signal_event):
 
             idx = self.models.models.index(self.current_model)
             if not id:
-                lst=[]
                 self.models.models.remove(self.models.models[idx])
                 self.current_model=None
                 if self.models.models:
