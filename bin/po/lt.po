@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-10 15:39+0000\n"
-"Last-Translator: Paulius Sladkevičius <Unknown>\n"
+"PO-Revision-Date: 2011-01-11 19:58+0000\n"
+"Last-Translator: Paulius Sladkevičius - http://www.inovera.lt <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-11 04:55+0000\n"
+"X-Launchpad-Export-Date: 2011-01-12 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: lt\n"
 
@@ -193,7 +193,7 @@ msgstr "Jūsų duomenų bazės buvo atnaujintos."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr "Jūs nepažymėjote duomenų bazės"
+msgstr "Jūs nepasirinkote duomenų bazės"
 
 #
 # File: bin/modules/gui/main.py, line: 152
@@ -357,7 +357,7 @@ msgid ""
 "Bad Username or Password !"
 msgstr ""
 "Tapatybės nustatymo klaida!\n"
-"Neteisingai įvestas naudotojo vardas arba slaptažodis!"
+"Klaidingai įvestas naudotojo vardas arba slaptažodis!"
 
 #: bin/modules/gui/main.py:1056
 #, python-format
@@ -1783,7 +1783,7 @@ msgstr "Taikyti visada!"
 #: bin/widget/view/form_gtk/calendar.py:100
 #: bin/widget/view/form_gtk/calendar.py:162
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr "Neteisinga datos reikšmė! Metai turi būti didesni negu 1899!"
+msgstr "Klaidinga datos reikšmė! Metai turi būti didesni negu 1899!"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
@@ -1801,8 +1801,7 @@ msgstr "Minutė:"
 
 #: bin/widget/view/form_gtk/calendar.py:289
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
-"Neteisinga datos ir laiko reikšmė! Metai turi būti didesni negu 1899!"
+msgstr "Klaidinga datos ir laiko reikšmė! Metai turi būti didesni negu 1899!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:30
 msgid "Gantt view not yet implemented !"
