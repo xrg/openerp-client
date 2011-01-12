@@ -26,13 +26,12 @@ import gettext
 import locale
 
 import tools
-import tools.datetime_util
+from tools import user_locale_format, datetime_util
 import common
 
 import wid_int
 import date_widget
 
-LDFMT = tools.datetime_util.get_date_format()
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 class calendar(wid_int.wid_int):
@@ -40,7 +39,7 @@ class calendar(wid_int.wid_int):
         super(calendar, self).__init__(name, parent, attrs, screen)
 
         self.widget = gtk.HBox(spacing=3)
-        self.format = LDFMT
+        self.format = user_locale_format.get_date_format()
 
         self.widget1 = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry1 = self.widget1.widget
@@ -83,13 +82,13 @@ class calendar(wid_int.wid_int):
         if self.default_search:
             try:
                 date = tools.datetime_util.strptime(self.default_search, DT_FORMAT)
-                self.entry1.set_text(date.strftime(LDFMT))
+                self.entry1.set_text(date.strftime(self.format))
             except:
                 pass
 
     def _date_get(self, str):
         try:
-            date = tools.datetime_util.strptime(str, LDFMT)
+            date = tools.datetime_util.strptime(str, self.format)
         except:
             return False
         return date.strftime(DT_FORMAT)
@@ -140,8 +139,9 @@ class calendar(wid_int.wid_int):
         try:
             val = self._date_get(dest.get_text())
             if val:
-                cal.select_month(int(val[5:7])-1, int(val[0:4]))
-                cal.select_day(int(val[8:10]))
+                val = tools.datetime_util.strptime(val, DT_FORMAT)
+                cal.select_month(val.month-1, val.year)
+                cal.select_day(val.day)
         except ValueError:
             pass
 
@@ -149,7 +149,7 @@ class calendar(wid_int.wid_int):
         if response == gtk.RESPONSE_OK:
             year, month, day = cal.get_date()
             dt = DT.date(year, month+1, day)
-            dest.set_text(dt.strftime(LDFMT))
+            dest.set_text(dt.strftime(self.format))
         win.destroy()
 
     def clear(self):
@@ -167,7 +167,7 @@ class datetime(wid_int.wid_int):
         super(datetime, self).__init__(name, parent, attrs, screen)
 
         self.widget = gtk.HBox(spacing=5)
-        self.format = LDFMT+' %H:%M:%S'
+        self.format = user_locale_format.get_datetime_format(True)
 
         self.widget1 = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry1 = self.widget1.widget
@@ -225,10 +225,10 @@ class datetime(wid_int.wid_int):
         if event.keyval == gtk.keysyms.F2:
             self.cal_open(widget, event, dest, parent)
             return True
-    
+
     def get_value(self, entry, timezone=True):
         str = entry.get_text()
-        if str=='':
+        if str == '':
             return False
         return tools.datetime_util.local_to_server_timestamp(str[:19], self.format, DHM_FORMAT,
                         tz_offset=timezone, ignore_unparsable_time=False)
@@ -251,12 +251,12 @@ class datetime(wid_int.wid_int):
 
     def grab_focus(self):
         return self.entry1.grab_focus()
-    
+
     def set_datetime(self, dt_val, entry, timezone=True):
         if not dt_val:
             entry.clear()
         else:
-            t = tools.datetime_util.server_to_local_timestamp(dt_val[:19],
+            t = tools.datetime_util.server_to_local_timestamp(dt_val[:len(DHM_FORMAT) + 2],
                     DHM_FORMAT, self.format, tz_offset=timezone)
             if len(t) > entry.get_width_chars():
                 entry.set_width_chars(len(t))
@@ -287,10 +287,11 @@ class datetime(wid_int.wid_int):
         try:
             val = self.get_value(dest, timezone=False)
             if val:
-                hour.set_value(int(val[11:13]))
-                minute.set_value(int(val[-5:-3]))
-                cal.select_month(int(val[5:7])-1, int(val[0:4]))
-                cal.select_day(int(val[8:10]))
+                val = DT.datetime.strptime(val[:len(DHM_FORMAT) + 2], DHM_FORMAT)
+                hour.set_value(val.hour)
+                minute.set_value(val.minute)
+                cal.select_month(val.month-1, val.year)
+                cal.select_day(val.day)
             elif dest == self.entry1:
                 hour.set_value(0)
                 minute.set_value(0)
@@ -303,17 +304,15 @@ class datetime(wid_int.wid_int):
         if response == gtk.RESPONSE_OK:
             hr = int(hour.get_value())
             mi = int(minute.get_value())
-            dt = cal.get_date()
-            month = int(dt[1])+1
-            day = int(dt[2])
-            date = DT.datetime(dt[0], month, day, hr, mi)
+            year, month, day = cal.get_date()
+            date = DT.datetime(year, month+1, day, hr, mi)
             try:
                 value = date.strftime(DHM_FORMAT)
             except ValueError:
                 common.message(_('Invalid datetime value! Year must be greater than 1899 !'))
             else:
                 self.set_datetime(value, dest, timezone=False)
-        
+
         win.destroy()
 
     def clear(self):

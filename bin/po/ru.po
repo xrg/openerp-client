@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-12-23 08:25+0000\n"
-"Last-Translator: Nikolay Chesnokov <chesnokov_n@msn.com>\n"
+"PO-Revision-Date: 2011-01-11 10:16+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-25 04:50+0000\n"
+"X-Launchpad-Export-Date: 2011-01-12 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 
@@ -148,31 +148,10 @@ msgstr "Невозможно соединиться с сервером !"
 msgid "Server:"
 msgstr "Сервер:"
 
-#
-# File: bin/openerp.glade, line: 100
-# File: bin/openerp.glade, line: 8527
-# File: bin/openerp.glade, line: 8770
-# File: bin/openerp.glade, line: 9067
-# File: bin/openerp.glade, line: 9415
-# File: bin/openerp.glade, line: 100
-# File: bin/openerp.glade, line: 8527
-# File: bin/openerp.glade, line: 8770
-# File: bin/openerp.glade, line: 9067
-# File: bin/openerp.glade, line: 9415
-# File: bin/openerp.glade, line: 100
-# File: bin/openerp.glade, line: 8527
-# File: bin/openerp.glade, line: 8770
-# File: bin/openerp.glade, line: 9067
-# File: bin/openerp.glade, line: 9415
-# File: bin/openerp.glade, line: 100
-# File: bin/openerp.glade, line: 7398
-# File: bin/openerp.glade, line: 7641
-# File: bin/openerp.glade, line: 7938
-# File: bin/openerp.glade, line: 8286
 #: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6560
 #: bin/openerp.glade:6804 bin/openerp.glade:7103 bin/openerp.glade:7465
 msgid "Change"
-msgstr "Сменить"
+msgstr "Изменить"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
@@ -180,7 +159,7 @@ msgstr "Пароль главного Администратора:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr "Неверный пароль администратора"
+msgstr "Неверный пароль главного администратора"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -204,7 +183,7 @@ msgstr "Доступны следующие обновления"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr "Вы не можете перенести вашу базу данных"
+msgstr "Теперь вы можете перенести ваши базы данных"
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
@@ -226,18 +205,9 @@ msgstr "Ваши базы данных были обновлены"
 msgid "You have not selected a database"
 msgstr "Вы не выбрали базу данных"
 
-#
-# File: bin/modules/gui/main.py, line: 152
-# File: bin/modules/gui/main.py, line: 1142
-# File: bin/modules/gui/main.py, line: 152
-# File: bin/modules/gui/main.py, line: 1142
-# File: bin/modules/gui/main.py, line: 152
-# File: bin/modules/gui/main.py, line: 1142
-# File: bin/modules/gui/main.py, line: 165
-# File: bin/modules/gui/main.py, line: 1161
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr "База данный не найдена, надо создать !"
+msgstr "База данных не найдена, вы должны ее создать !"
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
@@ -459,20 +429,11 @@ msgid ""
 msgstr ""
 "Вы не можете подключиться к системе!\n"
 "Обратитесь к администратору, чтобы проверить,\n"
-"что для вашей пользовательской записи разрашены действия."
+"что для вашей пользовательской записи разрешены действия."
 
-#
-# File: bin/modules/gui/main.py, line: 865
-# File: bin/modules/gui/main.py, line: 872
-# File: bin/modules/gui/main.py, line: 865
-# File: bin/modules/gui/main.py, line: 872
-# File: bin/modules/gui/main.py, line: 865
-# File: bin/modules/gui/main.py, line: 872
-# File: bin/modules/gui/main.py, line: 881
-# File: bin/modules/gui/main.py, line: 888
 #: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
 msgid "Do you really want to quit ?"
-msgstr "Вы подтверждаете выход?"
+msgstr "Вы действительно хотите выйти ?"
 
 #
 # File: bin/modules/gui/main.py, line: 927
@@ -502,32 +463,17 @@ msgstr "Вложения"
 msgid "Delete a database"
 msgstr "Удалить базу данных"
 
-#
-# File: bin/modules/gui/main.py, line: 1041
-# File: bin/modules/gui/main.py, line: 1041
-# File: bin/modules/gui/main.py, line: 1041
-# File: bin/modules/gui/main.py, line: 1057
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr "База данных успешно сброшена!"
+msgstr "База данных успешно удалена!"
 
-#
-# File: bin/modules/gui/main.py, line: 1044
-# File: bin/modules/gui/main.py, line: 1044
-# File: bin/modules/gui/main.py, line: 1044
-# File: bin/modules/gui/main.py, line: 1060
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr "Невозможно сбросить базу данных"
+msgstr "Невозможно удалить базу данных."
 
-#
-# File: bin/modules/gui/main.py, line: 1046
-# File: bin/modules/gui/main.py, line: 1046
-# File: bin/modules/gui/main.py, line: 1046
-# File: bin/modules/gui/main.py, line: 1062
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr "Невозможно сбросить базу данных"
+msgstr "Невозможно удалить базу данных"
 
 #
 # File: bin/modules/gui/main.py, line: 1049
@@ -651,11 +597,11 @@ msgstr "Сохранить как..."
 
 #: bin/modules/gui/main.py:1479
 msgid "Database backed up successfully !"
-msgstr "Резервное сохранение базы данных успешно завершено !"
+msgstr "Резервное копирование базы данных успешно завершено !"
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
-msgstr "Резервное сохранение базы данных не может быть ввыполнено."
+msgstr "Резервное копирование базы данных не может быть выполнено."
 
 #
 # File: bin/modules/gui/main.py, line: 1132
@@ -732,7 +678,7 @@ msgstr "Дата последнего изменения"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr "Идентификатор данных внутренего модуля"
+msgstr "Идентификатор данных внутреннего модуля"
 
 #
 # File: bin/modules/gui/window/form.py, line: 230
@@ -798,7 +744,7 @@ msgstr "Неверная форма, скорректируйте поля, вы
 #: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/list.py:568
 msgid "Error !"
-msgstr "Ошибка !"
+msgstr ""
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
@@ -920,6 +866,12 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Ошибка при импорте записи:\n"
+"%s\n"
+"Сообщение об ошибке:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -1060,18 +1012,9 @@ msgstr "В виде дерева"
 msgid "Description"
 msgstr "Описание"
 
-#
-# File: bin/modules/gui/window/tree.py, line: 190
-# File: bin/modules/gui/window/tree.py, line: 246
-# File: bin/modules/gui/window/tree.py, line: 190
-# File: bin/modules/gui/window/tree.py, line: 246
-# File: bin/modules/gui/window/tree.py, line: 190
-# File: bin/modules/gui/window/tree.py, line: 246
-# File: bin/modules/gui/window/tree.py, line: 190
-# File: bin/modules/gui/window/tree.py, line: 246
 #: bin/modules/gui/window/tree.py:204 bin/modules/gui/window/tree.py:260
 msgid "No resource selected!"
-msgstr "Нет выбранного ресурса !"
+msgstr "Нет выбранного ресурса!"
 
 #
 # File: bin/modules/gui/window/tree.py, line: 204
@@ -1086,23 +1029,13 @@ msgstr ""
 "Вы уверены, что хотите\n"
 "удалить текущую запись?"
 
-#
-# File: bin/modules/gui/window/tree.py, line: 209
-# File: bin/modules/gui/window/tree.py, line: 209
-# File: bin/modules/gui/window/tree.py, line: 209
-# File: bin/modules/gui/window/tree.py, line: 209
 #: bin/modules/gui/window/tree.py:223
 msgid "Error removing resource!"
-msgstr "Ошибка при удалении ресурса!"
+msgstr ""
 
-#
-# File: bin/modules/gui/window/tree.py, line: 220
-# File: bin/modules/gui/window/tree.py, line: 220
-# File: bin/modules/gui/window/tree.py, line: 220
-# File: bin/modules/gui/window/tree.py, line: 220
 #: bin/modules/gui/window/tree.py:234
 msgid "Unable to chroot: no tree resource selected"
-msgstr "Невохможно изменить корневой каталог: не выбран ресурс дерева"
+msgstr "Невозможно изменить корневой каталог: не выбран ресурс дерева"
 
 #
 # File: bin/modules/gui/window/win_export.py, line: 52
@@ -1162,7 +1095,7 @@ msgstr "Поиск OpenERP: %s (%%d результат(-ов))"
 #: bin/options.py:109
 #, python-format
 msgid "OpenERP Client %s"
-msgstr "OpenERP клиент %s"
+msgstr ""
 
 #
 # File: bin/options.py, line: 89
@@ -1220,6 +1153,10 @@ msgid ""
 "open this menu item, unless you disable all tips using the <b>'Menu "
 "Tips'</b> option in the user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Скрыть совет:</b></span>\n"
+"Это скроет текущий совет. Он появится в следующий раз, когда вы нажмете на "
+"этот пункт меню, но только если вы не отключите все советы при помощи опции "
+"<b>'Помощь для меню'</b> в настройках пользователя."
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
@@ -1232,6 +1169,9 @@ msgid ""
 "To re-enable tips you need to check the <b>'Menu Tips'</b> option in the "
 "user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Отключить показ советов:</b></span>\n"
+"Это отключит отображение всей помощи для пунктов меню. Для ее включения "
+"выберите опцию <b>'Помощь для меню'</b> в настройках пользователя."
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
@@ -1318,6 +1258,29 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>Обнаружена неизвестная ошибка.</b>\n"
+"\n"
+"<b>Вы не заключили гарантийный контракт с действительным издателем "
+"OpenERP!</b>\n"
+"Если вы используете OpenERP в производстве чрезвычайно рекомендуется\n"
+"подписаться на гарантийную программу издателя\n"
+"\n"
+"Гарантийный контракт с издателем OpenERP предоставит вам гарантию\n"
+"исправления ошибок и автоматическое средство миграции системы,\n"
+"которое позволит решить ваши проблемы в течение нескольких часов.\n"
+"Если вы обладаете гарантийным контрактом, то сообщение об этой\n"
+"ошибке будет послано отделу качества OpenERP\n"
+"\n"
+"Гарантийная программа предоставляет вам:\n"
+"* Автоматические миграции на новые версии,\n"
+"* Гарантию исправления ошибок,\n"
+"* Ежемесячные анонсы о потенциальных ошибках и их решения,\n"
+"* Оповещения безопасности по email и автоматическую миграцию,\n"
+"* Доступ к клиентскому порталу\n"
+"\n"
+"По ссылке ниже вы можете получить больше информации. Детали ошибки \n"
+"отображены на второй вкладке\n"
 
 #: bin/common/common.py:410
 #, python-format
@@ -1345,6 +1308,26 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Обнаружена неизвестная ошибка.</b>\n"
+"\n"
+"<b>Вы не заключили гарантийный контракт с действительным издателем "
+"OpenERP!</b>\n"
+"Если вы используете OpenERP в производстве чрезвычайно рекомендуется\n"
+"подписаться на гарантийную программу издателя\n"
+"\n"
+"Если вы разработали собственные модули или установили сторонние модули, мы\n"
+"можем предоставить вам дополнительную гарантию для этих модулей. После\n"
+"обзора ваших модулей наш отдел качества обеспечит их\n"
+"автоматическую миграцию для всех будущих стабильных версий OpenERP "
+"бесплатно.\n"
+"\n"
+"Ниже представлен список модулей не покрываемых вашим гарантийным "
+"контрактом:\n"
+"%s\n"
+"\n"
+"По ссылке ниже вы можете получить больше информации. Детали ошибки\n"
+"отображены на второй вкладке"
 
 #: bin/common/common.py:488
 msgid ""
@@ -1577,6 +1560,10 @@ msgid ""
 "For Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d "
 "%H:%M:%S' formats respectively."
 msgstr ""
+"Введите значения, разделенные запятой если выбраны операторы 'in' или 'not "
+"in'.\n"
+"Для форматов даты и даты/времени укажите текст в форматах '%Y-%m-%d' и '%Y-"
+"%m-%d %H:%M:%S' соответственно."
 
 #
 # File: bin/widget_search/checkbox.py, line: 36
@@ -1707,6 +1694,8 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"У вас есть несохраненные записи!  \n"
+"Пожалуйста сохраните их перед сортировкой!"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 #, python-format
@@ -1869,7 +1858,7 @@ msgstr "Сохранить и закрыть"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr "Сихранить и новая"
+msgstr "Сохранить и новая"
 
 #
 # File: bin/widget/view/form_gtk/interface.py, line: 47
@@ -2118,7 +2107,7 @@ msgstr "Применимо всегда!"
 #: bin/widget/view/form_gtk/calendar.py:100
 #: bin/widget/view/form_gtk/calendar.py:162
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr "Не правильный формат даты! Год должен быть в формате \"1899\"!"
+msgstr "Не правильный формат даты! Год должен быть больше 1899!"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
@@ -2159,6 +2148,8 @@ msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
 msgstr ""
+"(Любой существующий фильтр с \n"
+"таким же именем будет заменен)"
 
 #
 # File: bin/rpc.py, line: 142
@@ -2251,14 +2242,9 @@ msgstr "Базы данных"
 msgid "_New database"
 msgstr "_Новая база данных"
 
-#
-# File: bin/openerp.glade, line: 322
-# File: bin/openerp.glade, line: 322
-# File: bin/openerp.glade, line: 322
-# File: bin/openerp.glade, line: 322
 #: bin/openerp.glade:330
 msgid "_Restore database"
-msgstr "_Восстановить базу данный"
+msgstr "_Восстановить базу данных"
 
 #
 # File: bin/openerp.glade, line: 337
@@ -2295,14 +2281,9 @@ msgstr "Мигрировать База(ы) данных"
 msgid "Administrator Password"
 msgstr "Пароль администратора"
 
-#
-# File: bin/openerp.glade, line: 417
-# File: bin/openerp.glade, line: 417
-# File: bin/openerp.glade, line: 417
-# File: bin/openerp.glade, line: 417
 #: bin/openerp.glade:460
 msgid "_User"
-msgstr "_Пользователь"
+msgstr "По_льзователь"
 
 #
 # File: bin/openerp.glade, line: 425
@@ -2337,23 +2318,17 @@ msgstr "Прочитать _мои запросы"
 msgid "_Waiting Requests"
 msgstr "Ожидающие запросы"
 
-#
-# File: bin/openerp.glade, line: 493
 #: bin/openerp.glade:536
 msgid "For_m"
-msgstr "Форма"
+msgstr "_Форма"
 
-#
-# File: bin/openerp.glade, line: 501
 #: bin/openerp.glade:544
 msgid "_New"
-msgstr "Создать"
+msgstr "_Создать"
 
-#
-# File: bin/openerp.glade, line: 517
 #: bin/openerp.glade:560
 msgid "_Save"
-msgstr "Сохранить"
+msgstr "Со_хранить"
 
 #
 # File: bin/openerp.glade, line: 533
@@ -4102,6 +4077,8 @@ msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
+"Это пароль пользователя 'admin', который будет создан в Вашей новой базе "
+"данных."
 
 #: bin/openerp.glade:7171
 msgid ""
@@ -4340,7 +4317,7 @@ msgstr "Отправить гарантию каманде издателя"
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
-msgstr ""
+msgstr "Резюме проблемы:"
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"

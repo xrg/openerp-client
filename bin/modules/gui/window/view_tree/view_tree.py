@@ -36,11 +36,10 @@ import rpc
 import parse
 
 import tools
-from tools import datetime_util
+from tools import user_locale_format, datetime_util
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
-LDFMT = datetime_util.get_date_format()
 
 # BUG: ids = []
 #
@@ -79,11 +78,11 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                     type = self.fields_type[key]['type']
                     if type == 'date':
                         res_lower[key] = datetime_util.local_to_server_timestamp(vals,
-                                         LDFMT, DT_FORMAT, tz_offset=False)
+                                         user_locale_format.get_date_format(), DT_FORMAT, tz_offset=False)
                         continue
                     elif type == 'datetime':
                         res_lower[key] = datetime_util.local_to_server_timestamp(vals,
-                                         LDFMT + ' %H:%M:%S', DT_FORMAT)
+                                         user_locale_format.get_datetime_format(True), DT_FORMAT)
                         continue
                 if isinstance(vals, (str, unicode)):
                     res_lower[key]= vals.lower()
@@ -123,14 +122,14 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         for field in self.fields + self.invisible_fields:
             for x in res_ids:
                 if self.fields_type[field]['type'] in ('date',):
-                    display_format = LDFMT
+                    display_format = user_locale_format.get_date_format()
                     if x[field]:
                         x[field] = datetime_util.server_to_local_timestamp(x[field],
                                     DT_FORMAT, display_format, tz_offset=False)
                     else:
                         x[field] = str(x[field])
                 elif self.fields_type[field]['type'] in ('datetime',):
-                    display_format = LDFMT + ' %H:%M:%S'
+                    display_format = user_locale_format.get_datetime_format(True)
                     if x[field]:
                         x[field] = datetime_util.server_to_local_timestamp(x[field],
                                     DHM_FORMAT, display_format)
@@ -144,9 +143,9 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                         x[field] = dict(self.fields_type[field]['selection']).get(x[field],'')
                 elif self.fields_type[field]['type'] in ('float',):
                     interger, digit = self.fields_type[field].get('digits', (16,2))
-                    x[field] = tools.locale_format('%.' + str(digit) + 'f', x[field] or 0.0)
+                    x[field] = user_locale_format.format('%.' + str(digit) + 'f', x[field] or 0.0)
                 elif self.fields_type[field]['type'] in ('integer',):
-                    x[field] = int(tools.locale_format('%d', int(x[field]) or 0))
+                    x[field] = int(user_locale_format.format('%d', int(x[field]) or 0))
                 elif self.fields_type[field]['type'] in ('float_time',):
                     val = datetime_util.float_time_convert(x[field])
                     if x[field] < 0:

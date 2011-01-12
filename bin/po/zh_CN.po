@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-04 16:19+0000\n"
+"PO-Revision-Date: 2011-01-11 08:33+0000\n"
 "Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:46+0000\n"
+"X-Launchpad-Export-Date: 2011-01-12 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 
@@ -574,9 +574,12 @@ msgstr "打印"
 msgid "No record selected"
 msgstr "未选择记录"
 
+#
+# File: bin/modules/gui/window/form.py, line: 383
+# File: bin/modules/gui/window/form.py, line: 383
 #: bin/modules/gui/window/form.py:441
 msgid "New document"
-msgstr "新建文档"
+msgstr "新建单据"
 
 #
 # File: bin/modules/gui/window/form.py, line: 385
@@ -1404,14 +1407,9 @@ msgstr "编辑当前的 %s"
 msgid " - Dot Viewer"
 msgstr " - Dot 图查看器"
 
-#
-# File: bin/widget/view/form_gtk/reference.py, line: 92
-# File: bin/openerp.glade, line: 1214
-# File: bin/widget/view/form_gtk/reference.py, line: 92
-# File: bin/openerp.glade, line: 1214
 #: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1250
 msgid "Create a new resource"
-msgstr "新建对象"
+msgstr "新建资源"
 
 #
 # File: bin/widget/view/form_gtk/reference.py, line: 93
@@ -1860,12 +1858,9 @@ msgstr "等待回复的请求(_W)"
 msgid "For_m"
 msgstr "表单(_M)"
 
-#
-# File: bin/openerp.glade, line: 501
-# File: bin/openerp.glade, line: 501
 #: bin/openerp.glade:544
 msgid "_New"
-msgstr "新增(_N)"
+msgstr "新建(_N)"
 
 #
 # File: bin/openerp.glade, line: 517
@@ -1930,12 +1925,9 @@ msgstr "切换 列表/表单"
 msgid "_Menu"
 msgstr "菜单(_M)"
 
-#
-# File: bin/openerp.glade, line: 656
-# File: bin/openerp.glade, line: 656
 #: bin/openerp.glade:699
 msgid "_New Home Tab"
-msgstr "新增首页项(_N)"
+msgstr "新建首页标签页(_N)"
 
 #
 # File: bin/openerp.glade, line: 672
@@ -2334,14 +2326,9 @@ msgstr "附件"
 msgid "Menu"
 msgstr "菜单"
 
-#
-# File: bin/openerp.glade, line: 1402
-# File: bin/openerp.glade, line: 1403
-# File: bin/openerp.glade, line: 1402
-# File: bin/openerp.glade, line: 1403
 #: bin/openerp.glade:1450 bin/openerp.glade:1451
 msgid "Reload"
-msgstr "重新载入"
+msgstr "刷新"
 
 #
 #

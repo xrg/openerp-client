@@ -85,7 +85,7 @@ class view_tree_sc(object):
         res = self.value_get(0)
         res = eval(str(res))
         if res:
-            return int(res[0])
+            return int(res[0]) if isinstance(res,(list,tuple)) else res
         return None
 
     def serv_update(self, ids, action):

@@ -478,6 +478,14 @@
                           </widget>
                         </child>
                         <child>
+                          <widget class="GtkImageMenuItem" id="change_passwd">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Change password</property>
+                            <property name="use_underline">True</property>
+                            <signal name="activate" handler="on_change_passwd_activate"/>
+                          </widget>
+                        </child>
+                        <child>
                           <widget class="GtkSeparatorMenuItem" id="item2">
                             <property name="visible">True</property>
                           </widget>
@@ -7357,6 +7365,7 @@ Latin1</property>
                     <property name="can_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
+                    <property name="activates_default">True</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -7372,6 +7381,7 @@ Latin1</property>
                     <property name="can_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
+                    <property name="activates_default">True</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -7387,6 +7397,7 @@ Latin1</property>
                     <property name="can_focus">True</property>
                     <property name="max_length">16</property>
                     <property name="visibility">False</property>
+                    <property name="activates_default">True</property>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
