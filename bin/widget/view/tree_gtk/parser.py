@@ -428,10 +428,12 @@ class GenericDate(Char):
 class Date(GenericDate):
     server_format = '%Y-%m-%d'
     display_format = user_locale_format.get_date_format()
+    fmt_length = len((DT.datetime.now()).strftime(display_format))
 
 class Datetime(GenericDate):
     server_format = '%Y-%m-%d %H:%M:%S'
     display_format = user_locale_format.get_datetime_format(True)
+    fmt_length = len((DT.datetime.now()).strftime(display_format))
 
     def get_textual_value(self, model):
         value = model[self.field_name].get_client(model)
@@ -446,7 +448,7 @@ class Datetime(GenericDate):
     def value_from_text(self, model, text):
         if not text:
             return False
-        return tools.datetime_util.local_to_server_timestamp(text[:len(self.display_format) + 2],
+        return tools.datetime_util.local_to_server_timestamp(text[:self.fmt_length],
                 self.display_format, self.server_format)
 
 class Float(Char):
