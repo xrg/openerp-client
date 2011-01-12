@@ -28,8 +28,9 @@
 import sys
 import os
 import glob
-
+from os.path import join
 from setuptools import setup
+from setuptools.command.install import install
 from distutils.sysconfig import get_python_lib
 
 has_py2exe = False
@@ -141,6 +142,17 @@ options = {
     }
 }
 
+class openerp_client_install(install):
+    def run(self):
+        # create startup script
+        start_script = "#!/bin/sh\ncd %s\nexec %s ./openerp-client.py $@\n"\
+            % (join(self.install_libbase, "openerp-client"), sys.executable)
+        # write script
+        f = open('openerp-client', 'w')
+        f.write(start_script)
+        f.close()
+        install.run(self)
+
 complementary_arguments = dict()
 
 if sys.platform == 'win32':
@@ -162,6 +174,9 @@ setup(name             = name,
       license          = license,
       data_files       = data_files(),
       translations     = translations(),
+      cmdclass         = {
+          'install' : openerp_client_install,
+      },
       scripts          = ['openerp-client'],
       packages         = ['openerp-client',
                           'openerp-client.common',
