@@ -62,8 +62,25 @@ class build_scripts_app(build_scripts):
         if sys.platform != 'win32':
             self.announce("create startup script")
             opj = os.path.join
-
-            openerp_site_packages = opj('/usr', 'lib', 'python%s' % py_short_version, 'site-packages', 'openerp-client')
+            # Peek into "install" command to find out where it is going to install to
+            inst_cmd = self.get_finalized_command('install')
+            if inst_cmd:
+                # Note: we user the "purelib" because we don't ship binary
+                # executables. If we ever compile things into execs, we shall 
+                # use "platlib"
+                openerp_site_packages = opj(inst_cmd.install_purelib,'openerp-client')
+                if inst_cmd.root and openerp_site_packages.startswith(inst_cmd.root):
+                    # trick: when we install relative to root, we mostly mean to
+                    # temporary put the files there, and then move back to the
+                    # stripped prefix dir. So we don't write the full root into
+                    # the script
+                    iroot = inst_cmd.root
+                    if iroot.endswith('/'):
+                        iroot = iroot[:-1]
+                    openerp_site_packages = openerp_site_packages[len(iroot):]
+            else:
+                # Hard-code the Linux /usr/lib/pythonX.Y/... path
+                openerp_site_packages = opj('/usr', 'lib', 'python%s' % py_short_version, 'site-packages', 'openerp-client')
             start_script = "#!/bin/sh\ncd %s\nexec %s ./openerp-client.py $@\n" % (openerp_site_packages, sys.executable)
             # write script
             f = open('openerp-client', 'w')
