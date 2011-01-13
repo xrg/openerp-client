@@ -196,7 +196,7 @@ class ViewForm(parser_view):
                             self.screen.save_current()
                             id = self.screen.current_model and self.screen.current_model.id
                             if not (id):
-                                common.message(_('You must save this record to use the relate button !'))
+                                common.message(_('You must save this record to use the action button !'))
                                 return False
                             self.screen.display()
                             data = {
@@ -221,7 +221,7 @@ class ViewForm(parser_view):
                             }
                         obj = service.LocalService('action.main')
                         value = obj._exec_action(act, data, context)
-                        if type in ('print', 'action'):
+                        if type in ('print', 'action') or type == 'relate' and act.get('target') == 'new':
                             self.screen.reload()
                         return value
 
@@ -302,7 +302,7 @@ class ViewForm(parser_view):
     def __getitem__(self, name):
         return self.widgets[name]
 
-    def destroy(self): 
+    def destroy(self):
         self.widget.destroy()
         for widget in self.widgets.keys():
             self.widgets[widget].widget.destroy()
