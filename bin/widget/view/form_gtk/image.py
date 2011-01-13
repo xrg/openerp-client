@@ -166,13 +166,20 @@ class image_wid(interface.widget_interface):
                 self.update_img()
 
     def update_img(self):
+        data = NOIMAGE
         if not self._value:
             if self._set_required_img:
-                data = REQUIRED_IMG
-            else:
-                data = NOIMAGE
+                data = REQUIRED_IMG                
         else:
-            data = decodestring(self._value)
+            try:
+                data = decodestring(self._value)
+            except: 
+                import logging
+                log = logging.getLogger('common')
+                log.warning(_('Image corrupted'))
+
+                
+                
 
         pixbuf = None
         for type in ('jpeg', 'gif', 'png', 'bmp'):

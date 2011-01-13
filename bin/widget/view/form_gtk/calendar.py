@@ -43,6 +43,7 @@ class calendar(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, attrs=attrs)
         self.format = user_locale_format.get_date_format()
+        self.fmt_length = len((DT.now()).strftime(self.format))
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
         self.entry.set_property('activates_default', True)
@@ -88,7 +89,7 @@ class calendar(interface.widget_interface):
         if str == '':
             return False
         try:
-            date1 = DT.strptime(str[:len(self.format) + 2], self.format)
+            date1 = DT.strptime(str[:self.fmt_length], self.format)
         except:
             return False
 
@@ -120,6 +121,7 @@ class calendar(interface.widget_interface):
             t = date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
+                self.entry.set_max_length(len(t))
             self.entry.set_text(t)
         return True
 
@@ -169,6 +171,7 @@ class datetime(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs=attrs)
         self.format = user_locale_format.get_datetime_format(True)
+        self.fmt_length = len((DT.now()).strftime(self.format))
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
         self.entry.set_property('activates_default', True)
@@ -211,7 +214,7 @@ class datetime(interface.widget_interface):
         str = self.entry.get_text()
         if str=='':
             return False
-        return tools.datetime_util.local_to_server_timestamp(str[:len(self.format) + 2], self.format, DHM_FORMAT,
+        return tools.datetime_util.local_to_server_timestamp(str[:self.fmt_length], self.format, DHM_FORMAT,
                         tz_offset=timezone, ignore_unparsable_time=False)
 
     def set_value(self, model, model_field):
@@ -235,6 +238,7 @@ class datetime(interface.widget_interface):
                     DHM_FORMAT, self.format, tz_offset=timezone)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
+                self.entry.set_max_length(len(t))
             self.entry.set_text(t)
         return True
 
