@@ -329,7 +329,7 @@ class form(object):
             id = res
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
-        elif len(self.screen.models.models):
+        elif len(self.screen.models.models) and res != None:
             common.warning(_('Invalid form, correct red fields !'),_('Error !'), parent=self.screen.current_view.window)
             self.message_state(_('Invalid form, correct red fields !'), color="red")
         if warning:
@@ -401,7 +401,7 @@ class form(object):
                    }
             # When group by header is selected add it's children as a active_ids
             if group_by:
-                self.screen.context.update({'active_id':id, 'active_ids':ids}) 
+                self.screen.context.update({'active_id':id, 'active_ids':ids})
             if previous and self.previous_action:
                 obj._exec_action(self.previous_action[1], data, self.screen.context)
             else:
