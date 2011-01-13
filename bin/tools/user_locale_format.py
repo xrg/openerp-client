@@ -91,8 +91,8 @@ def get_datetime_format(with_date = False):
 
     fmt = LOCALE_CACHE.get('time_format', '%H:%M:%S')
     if with_date:
-        return get_date_format() + ' ' + fmt
-    return fmt
+        return str(get_date_format() + ' ' + fmt)
+    return str(fmt)
 
 
 def get_lang_int_float_format(monetary=False):
