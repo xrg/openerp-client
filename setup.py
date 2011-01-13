@@ -194,7 +194,6 @@ setup(name             = name,
       install_requires = [
           'lxml',
           'pytz',
-          'PyGTK',
           'python-dateutil',
       ],
       **complementary_arguments
