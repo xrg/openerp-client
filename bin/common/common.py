@@ -301,7 +301,7 @@ def support(*args):
     win.destroy()
     return True
 
-def error(title, message, details='', parent=None):
+def error(title, message, details='', parent=None, disconnected_mode=False):
     """
     Show an error dialog with the support request or the maintenance
     """
@@ -310,13 +310,12 @@ def error(title, message, details='', parent=None):
 
     show_message = True
 
-    try:
-        contract_ids = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'search', [])
-    except:
-        contract_ids = []
-    if not contract_ids:
-        maintenance_contract_message=_("""
-<i>Open ERP crashed for an unknown reason.</i>
+    if not disconnected_mode:
+        maintenance = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'status')
+    
+        if maintenance['status'] == 'none':
+            maintenance_contract_message=_("""
+<b>An unknown error has been reported.</b>
 
 <b>You do not have a valid Open ERP maintenance contract !</b>
 If you are using Open ERP in production, it is highly suggested to subscribe
@@ -337,27 +336,49 @@ The maintenance program offers you:
 You can use the link bellow for more information. The detail of the error
 is displayed on the second tab.
 """)
-    else:
-        contract = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'read', contract_ids, [])[0]
-        show_message = (contract['kind'] <> 'full')
-        if show_message:
+        elif maintenance['status'] == 'partial':
             maintenance_contract_message=_("""
-<b>Open ERP crashed for an unknown reason.</b>
+<b>An unknown error has been reported.</b>
 
 Your maintenance contract does not cover all modules installed in your system !
 If you are using Open ERP in production, it is highly suggested to upgrade your
 contract.
 
-If you have developped your own modules or installed third party module, we
+If you have developed your own modules or installed third party module, we
 can provide you an additional maintenance contract for these modules. After
 having reviewed your modules, our quality team will ensure they will migrate
-automatically for all futur stable versions of Open ERP at no extra cost.
+automatically for all future stable versions of Open ERP at no extra cost.
 
 Here is the list of modules not covered by your maintenance contract:
 %s
 
 You can use the link bellow for more information. The detail of the error
-is displayed on the second tab.""") % (",".join(result['modules']), )
+is displayed on the second tab.""") % (", ".join(maintenance['uncovered_modules']), )
+        else:
+            show_message = False
+    else:
+        maintenance_contract_message=_("""
+<b>An unknown error has been reported.</b>
+
+<b>You do not have a valid Open ERP maintenance contract !</b>
+If you are using Open ERP in production, it is highly suggested to subscribe
+a maintenance program.
+
+The Open ERP maintenance contract provides you a bugfix guarantee and an
+automatic migration system so that we can fix your problems within a few
+hours. If you had a maintenance contract, this error would have been sent
+to the quality team of the Open ERP editor.
+
+The maintenance program offers you:
+* Automatic migrations on new versions,
+* A bugfix guarantee,
+* Monthly announces of potential bugs and their fixes,
+* Security alerts by email and automatic migration,
+* Access to the customer portal.
+
+You can use the link bellow for more information. The detail of the error
+is displayed on the second tab.
+""")
 
     xmlGlade = glade.XML(terp_path('win_error.glade'), 'dialog_error', gettext.textdomain())
     win = xmlGlade.get_widget('dialog_error')
@@ -378,27 +399,23 @@ is displayed on the second tab.""") % (",".join(result['modules']), )
 
     xmlGlade.get_widget('notebook').remove_page(int(show_message))
 
-    def send(widget):
-        def get_text_from_text_view(textView):
-            """Retrieve the buffer from a text view and return the content of this buffer"""
-            buffer = textView.get_buffer()
-            return buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-            
-        # Use details_buffer
-        id_contract = contract['name']
-        traceback = get_text_from_text_view(xmlGlade.get_widget('details_explanation'))
-        explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
-        remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
-
-        content = "(%s) has reported the following bug:\n%s\nremarks: %s\nThe traceback is:\n%s" % (
-            id_contract, explanation, remarks, traceback
-        )
-
-        if upload_data('', content, 'error', id_contract):
-            common.message(_('You problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'))
-        return
-
     if not show_message:
+        def send(widget):
+            def get_text_from_text_view(textView):
+                """Retrieve the buffer from a text view and return the content of this buffer"""
+                buffer = textView.get_buffer()
+                return buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
+                
+            # Use details_buffer
+            tb = get_text_from_text_view(xmlGlade.get_widget('details_explanation'))
+            explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
+            remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
+
+            if rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'send', tb, explanation, remarks):
+                common.message(_('Your problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'))
+            else:
+                message(_('Your problem could <u>NOT</u> be sent to the quality team !\nPlease report this error manually at %s') % ('http://openerp.com/report_bug.html'))
+
         xmlGlade.signal_connect('on_button_send_clicked', send)
         xmlGlade.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
 

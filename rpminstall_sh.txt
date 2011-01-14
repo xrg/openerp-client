@@ -9,6 +9,6 @@
 #
 python setup.py install --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
 
-SUFFIX=bz2
+SUFFIX=gz
 mv INSTALLED_FILES INSTALLED_FILES.orig
 sed "s!\(/share/man/.*\)!\1.$SUFFIX!" INSTALLED_FILES.orig > INSTALLED_FILES

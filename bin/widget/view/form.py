@@ -105,7 +105,6 @@ class ViewForm(parser_view):
             eb = gtk.EventBox()
             eb.add(tb)
             eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
-            #tb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("blue"))
 
 
             hb.pack_start(eb, False, False)
@@ -144,9 +143,11 @@ class ViewForm(parser_view):
 
                     icon = gtk.Image()
                     icon.set_from_stock(iconstock, gtk.ICON_SIZE_BUTTON)
+                    lbl = gtk.Label(tool['string'])
+                    lbl.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
                     hb = gtk.HBox(False, 5)
                     hb.pack_start(icon, False, False)
-                    hb.pack_start(gtk.Label(tool['string']), False, False)
+                    hb.pack_start(lbl, False, False)
 
                     tbutton = gtk.Button()
                     tbutton.add(hb)

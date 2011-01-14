@@ -59,6 +59,260 @@ def check_ssl():
     except:
         return False
 
+class StockButton(gtk.Button):
+    def __init__(self, label, stock):
+        gtk.Button.__init__(self, label)
+        self.icon = gtk.Image()
+        self.icon.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
+        self.set_image(self.icon)
+
+class DatabaseDialog(gtk.Dialog):
+    def __init__(self, label, parent):
+        gtk.Dialog.__init__(
+            self, label, parent,
+            gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+            (gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
+             gtk.STOCK_OK, gtk.RESPONSE_ACCEPT)
+        )
+
+        self.set_icon(common.OPENERP_ICON)
+        self.set_default_response(gtk.RESPONSE_ACCEPT)
+        self.set_response_sensitive(gtk.RESPONSE_ACCEPT, False)
+
+        self.table = gtk.Table(3, 2, False)
+        self.table.set_row_spacings(5)
+        self.table.set_col_spacings(5)
+
+        self.messageLabel = gtk.Label('<b>'+_('Could not connect to server !')+'</b>')
+        self.messageLabel.set_use_markup(True)
+        self.messageLabel.hide()
+
+        lbl = gtk.Label(_("Server:"))
+        lbl.set_alignment(1.0, 0.5)
+        self.table.attach(lbl, 0, 1, 0, 1)
+        hbox = gtk.HBox(spacing=5)
+        self.serverEntry = gtk.Entry()
+        self.serverEntry.connect('changed', self.on_server_entry_changed, self.messageLabel)
+        self.serverEntry.set_text(self.default_server_url())
+        self.serverEntry.set_sensitive(False)
+
+        hbox.pack_start(self.serverEntry, False, False)
+
+        but_server = StockButton(_("Change"), gtk.STOCK_NETWORK)
+        but_server.connect_after('clicked', lambda *a: _server_ask(self.serverEntry, parent))
+        hbox.pack_start(but_server, False, False)
+        self.table.attach(hbox, 1, 2, 0, 1)
+
+        self.table.attach(self.messageLabel, 0, 2, 1, 2)
+
+        lbl = gtk.Label(_("Super Administrator Password:"))
+        lbl.set_alignment(1.0, 0.5)
+        self.table.attach(lbl, 0, 1, 2, 3)
+        self.adminPwdEntry = gtk.Entry()
+        self.table.attach(self.adminPwdEntry, 1, 2, 2, 3)
+
+        self.vbox.add(self.table)
+
+    def run(self):
+        self.show_all()
+        self.messageLabel.hide()
+        res = super(DatabaseDialog, self).run()
+
+        if res == gtk.RESPONSE_ACCEPT:
+            self.run_thread()
+
+        self.destroy()
+
+    def on_server_entry_changed(self, entry, message):
+        try:
+            rpc.session.about(entry.get_text())
+            self.clear_screen()
+            self.on_server_entry_changed_after(entry)
+            self.set_response_sensitive(gtk.RESPONSE_ACCEPT, True)
+        except Exception, ex:
+            self.clear_screen()
+            message.show()
+
+    def default_server_url(self):
+        return "%(protocol)s%(host)s:%(port)d" % {
+            'protocol' : options.options['login.protocol'],
+            'host' : options.options['login.server'],
+            'port' : int(options.options['login.port']),
+        }
+
+    def run_thread(self):
+        import thread
+        self.result = None
+        self.error = False
+        self.exception = None
+
+        def go():
+            try:
+                self.on_response_accept()
+                self.result = True
+            except Exception, e:
+                self.result = True
+                self.exception = e
+            return True
+
+        thread.start_new_thread(go, ())
+
+        i = 0
+        win = None
+        pb = None
+        while not self.result:
+            time.sleep(0.1)
+            i += 1
+
+            if i > 10:
+                if not win or not pb:
+                    win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
+                    win.set_title(_('OpenERP Computing'))
+                    win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+                    win.set_modal(True) 
+                    vbox = gtk.VBox(False, 0)
+                    hbox = gtk.HBox(False, 13)
+                    hbox.set_border_width(10)
+                    img = gtk.Image()
+                    img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
+                    hbox.pack_start(img, expand=True, fill=False)
+                    vbox2 = gtk.VBox(False, 0)
+                    label = gtk.Label()
+                    label.set_markup('<b>'+_('Operation in progress')+'</b>')
+                    label.set_alignment(0.0, 0.5)
+                    vbox2.pack_start(label, expand=True, fill=False)
+                    vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
+                    vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
+                    hbox.pack_start(vbox2, expand=True, fill=True)
+                    vbox.pack_start(hbox)
+                    pb = gtk.ProgressBar()
+                    pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
+                    vbox.pack_start(pb, expand=True, fill=False)
+                    win.add(vbox)
+                    win.set_transient_for(self)
+                    win.show_all()
+                pb.pulse()
+                gtk.main_iteration()
+        if win:
+            win.destroy()
+            gtk.main_iteration()
+
+        if self.exception:
+            import xmlrpclib
+            import socket
+            import tiny_socket
+            from rpc import rpc_exception
+            try:
+                raise self.exception
+            except socket.error, e:
+                common.message(str(e), title=_('Connection refused !'), type=gtk.MESSAGE_ERROR)
+            except (tiny_socket.Myexception, xmlrpclib.Fault), err:
+                a = rpc_exception(err.faultCode, err.faultString)
+                if a.type in ('warning', 'UserError'):
+                    common.warning(a.data, a.message)
+                elif a.type == 'AccessDenied':
+                    common.warning('Bad Super Administrator Password', self.get_title())
+                else:
+                    common.error(_('Application Error'), err.faultCode, err.faultString, disconnected_mode=True)
+            except Exception, e:
+                import sys
+                import traceback
+                tb = sys.exc_info()
+                tb_s = "".join(traceback.format_exception(*tb))
+                common.error(_('Application Error'), str(e), tb_s, disconnected_mode=True)
+        else:
+            common.message(self.message, self.get_title())
+
+    def on_response_accept(self):
+        pass
+
+    def on_server_entry_changed_after(self, entry):
+        pass
+
+    def clear_screen(self):
+        self.messageLabel.hide()
+
+class RetrieveMigrationScriptDialog(DatabaseDialog):
+    def __init__(self, parent):
+        DatabaseDialog.__init__(self, _("Migration Scripts"), parent)
+        self.table.resize(5, 2)
+
+        lbl = gtk.Label(_("Contract ID:"))
+        lbl.set_alignment(1.0, 0.5)
+        self.table.attach(lbl, 0, 1, 3, 4)
+        self.contractIdEntry = gtk.Entry()
+        self.table.attach(self.contractIdEntry, 1, 2, 3, 4)
+
+        lbl = gtk.Label(_("Contract Password:"))
+        lbl.set_alignment(1.0, 0.5)
+        self.table.attach(lbl, 0, 1, 4, 5)
+        self.contractPwdEntry = gtk.Entry()
+        self.table.attach(self.contractPwdEntry, 1, 2, 4, 5)
+
+    def on_response_accept(self):
+        # The OpenERP server fetchs the migration scripts
+        rpc.session.get_migration_scripts(
+            self.serverEntry.get_text(),
+            self.adminPwdEntry.get_text(),
+            self.contractIdEntry.get_text(),
+            self.contractPwdEntry.get_text(),
+        )
+        self.message = "Migration scripts fetched !"
+
+class MigrationDatabaseDialog(DatabaseDialog):
+    def __init__(self, parent):
+        self.model = gtk.ListStore(bool, str)
+        DatabaseDialog.__init__(self, _("Migrate Database"), parent)
+
+        sw = gtk.ScrolledWindow()
+        sw.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        treeview = gtk.TreeView(self.model)
+        treeview.set_rules_hint(True)
+        treeview.set_size_request(300, 380)
+
+        # Add the boolean column (apply)
+        renderer = gtk.CellRendererToggle()
+        renderer.set_property('activatable', True)
+        renderer.connect('toggled', self._on_toggle_renderer__toggled, 0)
+        col = gtk.TreeViewColumn("Apply", renderer, active=0)
+        treeview.append_column(col)
+
+        # Add the text column (database name)
+        renderer = gtk.CellRendererText()
+        col = gtk.TreeViewColumn("Database", renderer, text=1)
+        treeview.append_column(col)
+        sw.add(treeview)
+        self.table.attach(sw, 0, 2, 3, 4)
+
+    def on_response_accept(self):
+        databases = [ item[1] for item in self.model if bool(item[0]) ]
+        if databases:
+            rpc.session.migrate_databases(self.serverEntry.get_text(), 
+                                          self.adminPwdEntry.get_text(), 
+                                          databases)
+            if len(databases) == 1:
+                self.message = _("Your database has been upgraded.")
+            else:
+                self.message = _("Your databases have been upgraded.")
+            self.message += "\n" + _("Could you restart your server")
+        else:
+            self.message = "You have not selected a database"
+
+    def _on_toggle_renderer__toggled(self, renderer, path, col_index):
+        row = self.model[path]
+        row[col_index] = not row[col_index]
+
+    def clear_screen(self):
+        super(MigrationDatabaseDialog, self).clear_screen()
+        self.model.clear()
+
+    def on_server_entry_changed_after(self, entry):
+        self.clear_screen()
+        result = rpc.session.list_db(entry.get_text())
+        if result != -1:
+            for db_num, db_name in enumerate(result):
+                self.model.set( self.model.append(), 0, False, 1, db_name)
+
 def _refresh_dblist(db_widget, url, dbtoload=None):
     if not dbtoload:
         dbtoload = options.options['login.db']
@@ -68,7 +322,7 @@ def _refresh_dblist(db_widget, url, dbtoload=None):
     result = rpc.session.list_db(url)
     if result==-1:
         return -1
-    for db_num, db_name in enumerate(rpc.session.list_db(url)):
+    for db_num, db_name in enumerate(result):
         liststore.append([db_name])
         if db_name == dbtoload:
             index = db_num
@@ -109,7 +363,6 @@ def _server_ask(server_widget, parent=None):
 
     listprotocol = gtk.ListStore(str)
     protocol_widget.set_model(listprotocol)
-
 
     m = re.match('^(http[s]?://|socket://)([\w.-]+):(\d{1,5})$', server_widget.get_text())
     if m:
@@ -455,7 +708,8 @@ class terp_main(service.Service):
         self.notebook = gtk.Notebook()
         self.notebook.set_scrollable(True)
         self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
-        self.notebook.connect('page-reordered', self._sig_page_reordered)
+        if gtk.pygtk_version >= (2, 10, 0):
+            self.notebook.connect('page-reordered', self._sig_page_reordered)
         vbox = self.glade.get_widget('vbox_main')
         vbox.pack_start(self.notebook, expand=True, fill=True)
 
@@ -470,7 +724,7 @@ class terp_main(service.Service):
         self.current_page = 0
         self.last_page = 0
 
-        dict = {
+        callbacks_dict = {
             'on_login_activate': self.sig_login,
             'on_logout_activate': self.sig_logout,
             'on_win_next_activate': self.sig_win_next,
@@ -507,9 +761,11 @@ class terp_main(service.Service):
             'on_db_drop_activate': self.sig_db_drop,
             'on_admin_password_activate': self.sig_db_password,
             'on_extension_manager_activate': self.sig_extension_manager,
+            'on_db_migrate_retrieve_script_activate': self.sig_db_migrate_retrieve_script,
+            'on_db_migrate_activate' : self.sig_db_migrate,
         }
-        for signal in dict:
-            self.glade.signal_connect(signal, dict[signal])
+
+        self.glade.signal_autoconnect(callbacks_dict)
 
         self.buttons = {}
         for button in ('but_new', 'but_save', 'but_remove', 'but_search', 'but_previous', 'but_next', 'but_action', 'but_open', 'but_print', 'but_close', 'but_reload', 'but_switch','but_attach',
@@ -1079,6 +1335,12 @@ class terp_main(service.Service):
                     common.warning(_('Bad database administrator password !'),_("Could not restore database."), parent=self.window)
                 else:
                     common.warning(_("Couldn't restore database"), parent=self.window)
+
+    def sig_db_migrate_retrieve_script(self, widget):
+        RetrieveMigrationScriptDialog(self.window).run()
+
+    def sig_db_migrate(self, widget):
+        MigrationDatabaseDialog(self.window).run()
 
     def sig_extension_manager(self,widget):
         win = win_extension.win_extension(self.window)

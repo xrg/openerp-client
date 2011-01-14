@@ -44,6 +44,7 @@ class Printer(object):
             'doc': self._findHTMLOpener,
             'xls': self._findHTMLOpener,
             'sxw': self._findSXWOpener,
+            'odt': self._findSXWOpener,
         }
 
     def _findInPath(self, progs):
@@ -134,7 +135,6 @@ class Printer(object):
                         sys.exit(0)
                     os.waitpid(pid, 0)
                 return opener
-
     def print_file(self, fname, ftype, preview=False):
         app_to_run = None
         try:
