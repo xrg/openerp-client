@@ -234,80 +234,35 @@ class rpc_session(object):
         return 1
 
     def migrate_databases(self, url, password, databases):
-        m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
-        if not m:
-            raise Exception("This URL is not Error in the URL")
-        if m.group(1) == 'http://' or m.group(1) == 'https://':
-            sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
-            return sock.migrate_databases(password, databases)
-        else:
-            sock = tiny_socket.mysocket()
-            sock.sock.settimeout(None)
-            sock.connect(m.group(2), int(m.group(3)))
-            sock.mysend(('db', 'migrate_databases', password, databases))
-            res = sock.myreceive()
-            sock.disconnect()
-            return res
+        return self.exec_no_except(url, 'db', 'migrate_databases', password, databases)
+
+    def get_available_updates(self, url, password, contract_id, contract_password):
+        return self.exec_no_except(url, 'common', 'get_available_updates', password, contract_id, contract_password)
 
     def get_migration_scripts(self, url, password, contract_id, contract_password):
-        m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
-        if not m:
-            raise Exception("This URL is not Error in the URL")
-        if m.group(1) == 'http://' or m.group(1) == 'https://':
-            sock = xmlrpclib.ServerProxy(url + '/xmlrpc/common')
-            sock.get_migration_scripts(password, contract_id, contract_password)
-        else:
-            sock = tiny_socket.mysocket()
-            sock.connect(m.group(2), int(m.group(3)))
-            sock.mysend(('common', 'get_migration_scripts', password, contract_id, contract_password))
-            res = sock.myreceive()
-            sock.disconnect()
+        return self.exec_no_except(url, 'common', 'get_migration_scripts', password, contract_id, contract_password)
 
     def about(self, url):
-        m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
-        if not m:
-            raise Exception("This URL is not Error in the URL")
-        if m.group(1) == 'http://' or m.group(1) == 'https://':
-            sock = xmlrpclib.ServerProxy(url + '/xmlrpc/common')
-            return sock.about()
-        else:
-            sock = tiny_socket.mysocket()
-            sock.connect(m.group(2), int(m.group(3)))
-            sock.mysend(('common', 'about'))
-            res = sock.myreceive()
-            sock.disconnect()
-            return res
+        return self.exec_no_except(url, 'common', 'about')
 
     def list_db(self, url):
-        m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
-        if not m:
+        try:
+            return self.db_exec_no_except(url, 'list')
+        except Exception, e:
             return -1
-        if m.group(1) == 'http://' or m.group(1) == 'https://':
-            try:
-                sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
-                return sock.list()
-            except Exception, ex:
-                return -1
-        else:
-            sock = tiny_socket.mysocket()
-            try:
-                sock.connect(m.group(2), int(m.group(3)))
-                sock.mysend(('db', 'list'))
-                res = sock.myreceive()
-                sock.disconnect()
-                return res
-            except Exception, e:
-                return -1
 
     def db_exec_no_except(self, url, method, *args):
+        return self.exec_no_except(url, 'db', method, *args)
+
+    def exec_no_except(self, url, resource, method, *args):
         m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
         if m.group(1) == 'http://' or m.group(1) == 'https://':
-            sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
+            sock = xmlrpclib.ServerProxy(url + '/xmlrpc/' + resource)
             return getattr(sock, method)(*args)
         else:
             sock = tiny_socket.mysocket()
             sock.connect(m.group(2), int(m.group(3)))
-            sock.mysend(('db', method)+args)
+            sock.mysend((resource, method)+args)
             res = sock.myreceive()
             sock.disconnect()
             return res

@@ -57,7 +57,7 @@ class TinyEvent(Calendar.Event):
         r = []
         for x in self.__dict__:
             r.append("%s: %r" % (x, self.__dict__[x]))
-        return "\n".join(r)
+        return '<TinyEvent::\n\t' + "\n\t".join(r) + '\n>'
 
 class TinyCalModel(Calendar.Model):
     def add_events(self, events):
@@ -67,6 +67,9 @@ class TinyCalModel(Calendar.Model):
             self.events[self.next_event_id] = event
             event.id = self.next_event_id
             self.next_event_id += 1
+
+    def remove_events(self):
+        self.events = {}
 
 
 class ViewCalendar(object):
@@ -84,13 +87,16 @@ class ViewCalendar(object):
         self._radio_day = self.glade.get_widget('radio_day')
         self._small_calendar = self.glade.get_widget('calendar_small')
         self._calendar_treeview = self.glade.get_widget('calendar_treeview')
-
+        
+        self._radio_month.set_active(True)
+        self.mode = 'month'
+        
         self.fields = fields
         self.attrs = attrs
         self.axis = axis
         self.screen = None
 
-        self.cal_model = Calendar.Model()
+        self.cal_model = TinyCalModel()
         self.cal_view = Calendar.Calendar(self.cal_model)
         self.cal_view.connect('event-clicked', self._on_event_clicked)
         self.cal_view.connect('do_month_back_forward', self._back_forward)
@@ -108,8 +114,8 @@ class ViewCalendar(object):
         self.glade.signal_connect('on_button_day_clicked', self._change_view, 'day')
         self.glade.signal_connect('on_button_week_clicked', self._change_view, 'week')
         self.glade.signal_connect('on_button_month_clicked', self._change_view, 'month')
-        self.date = DateTime.now()
-        self.mode = 'month'
+        
+        self.date = DateTime.today()
 
         self.string = attrs.get('string', '')
         self.date_start = attrs.get('date_start')
@@ -163,7 +169,7 @@ class ViewCalendar(object):
         self.display(None)
 
     def _today(self, widget, *args, **argv):
-        self.date = DateTime.now()
+        self.date = DateTime.today()
         self.display(None)
 
     def _back_forward(self, widget, type, *args, **argv):
@@ -209,18 +215,15 @@ class ViewCalendar(object):
                 self.colors[key] = (value[0], value[1], colors[i])
 
     def display(self, models):
-
-
         if models:
             self.models = models.models
 
-        if self.models:
-            self.__update_colors()
+            if self.models:
+                self.__update_colors()
 
-            self.cal_model = TinyCalModel()
-            self.cal_view.model = self.cal_model
-
-            self.cal_model.add_events(self.__get_events())
+                self.cal_model.remove_events()
+                self.cal_model.add_events(self.__get_events())
+                
         self.refresh()
 
     def refresh(self):
@@ -228,30 +231,27 @@ class ViewCalendar(object):
         from tools import ustr
         from locale import getlocale
         sysencoding = getlocale()[1]
+
         if self.mode=='month':
             self._radio_month.set_active(True)
-            d1 = datetime(*list(t)[:6])
             self.cal_view.range = self.cal_view.RANGE_MONTH
-            self.cal_view.selected = date(*list(t)[:3])
             self._label_current.set_text(ustr(self.date.strftime('%B %Y'), sysencoding))
         elif self.mode=='week':
             self._radio_week.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_WEEK
-            d1 = datetime(*list(t)[:6])
-            self.cal_view.selected = date(*list(t)[:3])
             self._label_current.set_text(_('Week') + ' ' + self.date.strftime('%W, %Y'))
         elif self.mode=='day':
             self._radio_day.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_CUSTOM
-            d1 = datetime(*(list(t)[:3] + [00]))
-            d2 = datetime(*(list(t)[:3] + [23, 59, 59]))
-            self.cal_view.visible_range = d1, d2
-            self.cal_view.active_range = d1, d2
+            d1 = datetime(*t[:3])
+            d2 = Calendar.util.end_of_day(d1)
+            self.cal_view.active_range = self.cal_view.visible_range = d1, d2
             self._label_current.set_text(ustr(self.date.strftime('%A %x'), sysencoding))
 
+        self.cal_view.selected = date(*list(t)[:3])
         self._small_calendar.select_month(t[1]-1,t[0])
         self._small_calendar.select_day(t[2])
-
+        
         self.cal_view.refresh()
 
 
@@ -263,7 +263,6 @@ class ViewCalendar(object):
                 if e.color_info:
                     self.add_to_treeview(*e.color_info)
                 events.append(e)
-
         return events
 
     def __convert(self, event):
@@ -353,7 +352,7 @@ class ViewCalendar(object):
             n = (tde - tds) / (60 * 60)
 
             if n > self.day_length:
-                span = math.floor(n / 24)
+                span = math.floor(n / 24.)
         
         if not starts:
             return None
