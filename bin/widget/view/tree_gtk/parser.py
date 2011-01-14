@@ -278,7 +278,7 @@ class GenericDate(Char):
         if not value:
             return ''
         try:
-            date = DT.datetime.strptime(value, self.server_format)
+            date = DT.datetime.strptime(value[:10], self.server_format)
             return date.strftime(self.display_format)
         except:
             return ''
@@ -287,7 +287,7 @@ class GenericDate(Char):
         dt = self.renderer.date_get(self.renderer.editable)
         res = dt and dt.strftime(self.server_format)
         if res:
-            DT.datetime.strptime(res, self.server_format)
+            DT.datetime.strptime(res[:10], self.server_format)
         return res
 
 class Date(GenericDate):
@@ -302,7 +302,7 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        date = DT.datetime.strptime(value, self.server_format)
+        date = DT.datetime.strptime(value[:19], self.server_format)
         
         if rpc.session.context.get('tz'):
             import pytz
@@ -315,7 +315,7 @@ class Datetime(GenericDate):
     def value_from_text(self, model, text):
         if not text:
             return False
-        date = DT.datetime.strptime(text, self.display_format)
+        date = DT.datetime.strptime(text[:19], self.display_format)
         if rpc.session.context.get('tz'):
             import pytz
             lzone = pytz.timezone(str(rpc.session.context['tz']))

@@ -1,4 +1,18 @@
 
+2009-09-22: 5.0.6
+=================
+
+Bugfixes
+--------
+
+ * https://bugs.launchpad.net/bugs/356853
+   * import_csv: encoding problem on import and also fixed problem of many2many,many2one import fields
+ * https://launchpad.net/bugs/434068
+   * Date,DateTime widgets handling of values(user may pass rong date/datetime formats)
+ * https://launchpad.net/bugs/434488
+   * Tree_report_options : unicode error corrected
+
+
 2009-09-17: 5.0.5
 =================
 
