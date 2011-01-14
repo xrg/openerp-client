@@ -1,6 +1,7 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2006 TINY SPRL. (http://tiny.be) All Rights Reserved.
+# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
 #
 # $Id$
 #
@@ -36,90 +37,174 @@ import gtk
 
 import common
 import interface
+import tempfile
+import urllib
+
+NOIMAGE = file(common.terp_path_pixmaps("noimage.png"), 'rb').read()
 
 
 class image_wid(interface.widget_interface):
 
-	def __init__(self, window, parent, model, attrs={}):
-		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
+    def __init__(self, window, parent, model, attrs={}):
+        interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
 
-		self._value = ''
-		self.widget = gtk.EventBox()
-		self.widget.connect("button_press_event", self.load_file)
-		self.widget.connect("button_press_event", self.save_file)
+        self._value = ''
+        self.height = int(attrs.get('img_height', 100))
+        self.width = int(attrs.get('img_width', 300))
 
-		box1 = self.create_image(common.terp_path_pixmaps("noimage.png"))
-		self.widget.add(box1)
-		self.widget.show_all()
+        self.widget = gtk.VBox(spacing=3)
+        self.event = gtk.EventBox()
+        self.event.drag_dest_set(gtk.DEST_DEFAULT_ALL, [
+            ('text/plain', 0, 0),
+            ('text/uri-list', 0, 1),
+            ("image/x-xpixmap", 0, 2)], gtk.gdk.ACTION_MOVE)
+        self.event.connect('drag_motion', self.drag_motion)
+        self.event.connect('drag_data_received', self.drag_data_received)
 
-	def save_file(self, widget, event):
-		if event.button != 3 or not self._value:
-			return False
-		chooser = gtk.FileChooserDialog(title=_('Save As...'), 
-				action=gtk.FILE_CHOOSER_ACTION_SAVE, buttons=(
-					gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-					gtk.STOCK_SAVE, gtk.RESPONSE_OK), parent=self._window)
-		res = chooser.run()
-		if res == gtk.RESPONSE_OK:
-			filename = chooser.get_filename()
-			file(filename, 'wb').write(decodestring(self._value))
-		chooser.destroy()
+        self.tooltips = gtk.Tooltips()
 
-	def load_file(self, widget, event):
-		if event.button != 1:
-			return False
-		chooser = gtk.FileChooserDialog(title=_('Open...'), 
-				action=gtk.FILE_CHOOSER_ACTION_OPEN, buttons=(
-					gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-					gtk.STOCK_OPEN, gtk.RESPONSE_OK), parent=self._window)
-		res = chooser.run()
-		if res == gtk.RESPONSE_OK:
-			filename = chooser.get_filename()
-			self.update_img(filename)
-			self._value = encodestring(file(filename, 'rb').read())
-		chooser.destroy()
+        self.image = gtk.Image()
+        self.event.add(self.image)
+        self.widget.pack_start(self.event, expand=True, fill=True)
 
-	def update_img(self, path):
-		new_box = self.create_image(path)
-		self.widget.remove(self.widget.get_child())
-		self.widget.add(new_box)
-		new_box.show()
+        self.alignment = gtk.Alignment(xalign=0.5, yalign=0.5)
+        self.hbox = gtk.HBox(spacing=3)
+        self.but_add = gtk.Button()
+        img_add = gtk.Image()
+        img_add.set_from_stock('gtk-open', gtk.ICON_SIZE_BUTTON)
+        self.but_add.set_image(img_add)
+        self.but_add.set_relief(gtk.RELIEF_NONE)
+        self.but_add.connect('clicked', self.sig_add)
+        self.tooltips.set_tip(self.but_add, _('Set Image'))
+        self.hbox.pack_start(self.but_add, expand=False, fill=False)
 
-	def display(self, model, model_field):
-		if not model_field:
-			return False
-		self._value = model_field.get(model)
-		super(image_wid, self).display(model, model_field)
-		if self._value:
-			try:
-				fname = file(os.tempnam(), 'wb')
-				fname.write(decodestring(self._value))
-				fname.flush()
-				self.update_img(fname.name)
-			except:
-				self.update_img(common.terp_path_pixmaps('noimage.png'))
-		else:
-			self.update_img(common.terp_path_pixmaps('noimage.png'))
+        self.but_save_as = gtk.Button()
+        img_save_as = gtk.Image()
+        img_save_as.set_from_stock('gtk-save', gtk.ICON_SIZE_BUTTON)
+        self.but_save_as.set_image(img_save_as)
+        self.but_save_as.set_relief(gtk.RELIEF_NONE)
+        self.but_save_as.connect('clicked', self.sig_save_as)
+        self.tooltips.set_tip(self.but_save_as, _('Save As'))
+        self.hbox.pack_start(self.but_save_as, expand=False, fill=False)
 
-	def set_value(self, model, model_field):
-		return model_field.set_client(model, self._value or False)
+        self.but_remove = gtk.Button()
+        img_remove = gtk.Image()
+        img_remove.set_from_stock('gtk-clear', gtk.ICON_SIZE_BUTTON)
+        self.but_remove.set_image(img_remove)
+        self.but_remove.set_relief(gtk.RELIEF_NONE)
+        self.but_remove.connect('clicked', self.sig_remove)
+        self.tooltips.set_tip(self.but_remove, _('Clear'))
+        self.hbox.pack_start(self.but_remove, expand=False, fill=False)
 
-	def create_image(self, img_filename):
-		box1 = gtk.VBox(True)
-		box1.set_border_width(2)
+        self.alignment.add(self.hbox)
+        self.widget.pack_start(self.alignment, expand=False, fill=False)
 
-		# Now on to the image stuff
-		self.image = gtk.Image()
-		pixbuf = gtk.gdk.pixbuf_new_from_file(img_filename)
-		width_widget = max(self.widget.allocation.width, 70) - 16
-		pix_width, pix_height = pixbuf.get_width(), pixbuf.get_height()
-		height = int(pix_height / (pix_width / float(width_widget)))
-		if height > 100:
-			height = 100
-			width_widget = int(pix_width / (pix_height / 100.0))
-		scaled = pixbuf.scale_simple(width_widget, height, gtk.gdk.INTERP_BILINEAR)
-		self.image.set_from_pixbuf(scaled)
+        self.tooltips.enable()
 
-		box1.pack_start(self.image, True, True, 3)
-		self.image.show()
-		return box1
+        self.update_img()
+
+    def sig_add(self, widget):
+        filter_all = gtk.FileFilter()
+        filter_all.set_name(_('All files'))
+        filter_all.add_pattern("*")
+
+        filter_image = gtk.FileFilter()
+        filter_image.set_name(_('Images'))
+        for mime in ("image/png", "image/jpeg", "image/gif"):
+            filter_image.add_mime_type(mime)
+        for pat in ("*.png", "*.jpg", "*.gif", "*.tif", "*.xpm"):
+            filter_image.add_pattern(pat)
+
+        filename = common.file_selection(_('Open...'), parent=self._window, preview=True,
+                filters=[filter_image, filter_all])
+        if filename:
+            self._value = encodestring(file(filename, 'rb').read())
+            self.update_img()
+
+    def sig_save_as(self, widget):
+        filename = common.file_selection(_('Save As...'), parent=self._window,
+                action=gtk.FILE_CHOOSER_ACTION_SAVE)
+        if filename:
+            file(filename, 'wb').write(decodestring(self._value))
+    
+    def sig_remove(self, widget):
+        self._value = ''
+        self.update_img()
+
+    def drag_motion(self, widget, context, x, y, timestamp):
+        context.drag_status(gtk.gdk.ACTION_COPY, timestamp)
+        return True
+
+    def drag_data_received(self, widget, context, x, y, selection,
+            info, timestamp):
+        if info == 0:
+            uri = selection.get_text().split('\n')[0]
+            if uri:
+                self._value = encodestring(urllib.urlopen(uri).read())
+            self.update_img()
+        elif info == 1:
+            uri = selection.data.split('\r\n')[0]
+            if uri:
+                self._value = encodestring(urllib.urlopen(uri).read())
+            self.update_img()
+        elif info == 2:
+            data = selection.get_pixbuf()
+            if data:
+                self._value = encodestring(data)
+                self.update_img()
+
+    def update_img(self):
+        if not self._value:
+            data = NOIMAGE
+        else:
+            data = decodestring(self._value)
+
+        pixbuf = None
+        for type in ('jpeg', 'gif', 'png', 'bmp'):
+            loader = gtk.gdk.PixbufLoader(type)
+            try:
+                loader.write(data, len(data))
+            except:
+                continue
+            pixbuf = loader.get_pixbuf()
+            if pixbuf:
+                break
+        if not pixbuf:
+            loader = gtk.gdk.PixbufLoader('png')
+            loader.write(NOIMAGE, len(NOIMAGE))
+            pixbuf = loader.get_pixbuf()
+
+        loader.close()
+
+        img_height = pixbuf.get_height()
+        if img_height > self.height:
+            height = self.height
+        else:
+            height = img_height
+
+        img_width = pixbuf.get_width()
+        if img_width > self.width:
+            width = self.width
+        else:
+            width = img_width
+
+        if (img_width / width) < (img_height / height):
+            width = float(img_width) / float(img_height) * float(height)
+        else:
+            height = float(img_height) / float(img_width) * float(width)
+
+        scaled = pixbuf.scale_simple(int(width), int(height), gtk.gdk.INTERP_BILINEAR)
+        self.image.set_from_pixbuf(scaled)
+
+    def display(self, model, model_field):
+        if not model_field:
+            return False
+        self._value = model_field.get(model)
+        super(image_wid, self).display(model, model_field)
+        self.update_img()
+
+    def set_value(self, model, model_field):
+        return model_field.set_client(model, self._value or False)
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

@@ -1,7 +1,9 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004 TINY SPRL. (http://tiny.be) All Rights Reserved.
-#					Fabien Pinckaers <fp@tiny.Be>
+# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#
+# $Id$
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -26,11 +28,27 @@
 #
 ##############################################################################
 
+import service
+
 class parser_interface(object):
-	def __init__(self, window=None, parent=None, attrs={}, screen=None):
-		self.window = window
-		self.parent = parent
-		self.attrs = attrs
-		self.title = None
-		self.buttons = {}
-		self.screen = screen
+    def __init__(self, window=None, parent=None, attrs={}, screen=None):
+        if window is None:
+            window = service.LocalService('gui.main').window
+        self.window = window
+        self.parent = parent
+        self.attrs = attrs
+        self.title = None
+        self.buttons = {}
+        self.screen = screen
+
+class parser_view(object):
+    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None):
+        if window is None:
+            window = service.LocalService('gui.main').window
+        self.window = window
+        self.screen = screen
+        self.widget = widget
+        self.state_aware_widgets = state_aware_widgets or []
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

@@ -1,6 +1,7 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2006 TINY SPRL. (http://tiny.be) All Rights Reserved.
+# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
 #
 # $Id$
 #
@@ -28,39 +29,50 @@
 ##############################################################################
 
 import gtk
-import gettext
-
+import base64
 import interface
-import os
-
-import common
 
 class wid_picture(interface.widget_interface):
-	def __init__(self, window, parent, model, attrs={}):
-		interface.widget_interface.__init__(self, window, parent, model, attrs)
+    def __init__(self, window, parent, model, attrs={}):
+        interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-		self.widget = gtk.VBox(homogeneous=False)
-		self.wid_picture = gtk.Image()
-		self.widget.pack_start(self.wid_picture, expand=True, fill=True)
+        self.widget = gtk.VBox(homogeneous=False)
+        self.wid_picture = gtk.Image()
+        self.widget.pack_start(self.wid_picture, expand=True, fill=True)
 
-		self.value=False
+        self._value=False
 
-	def value_set(self, model, model_field):
-		self.model_field.set( model, self._value )
+    def set_value(self, model, model_field):
+        model_field.set( model, self._value )
 
-	def display(self, model, model_field):
-		if not model_field:
-			return False
-		super(wid_picture, self).display(model_field)
-		value = model_field.get(model)
-		import base64
-		self._value = value
-		if self._value:
-			value = base64.decodestring(self._value)
-			loader = gtk.gdk.PixbufLoader('jpeg')
-			loader.write (value, len(value))
-			pixbuf = loader.get_pixbuf()
-			loader.close()
-			self.wid_picture.set_from_pixbuf(pixbuf)
-		else:
-			self.wid_picture.set_from_pixbuf(None)
+    def display(self, model, model_field):
+        if not model_field:
+            return False
+        super(wid_picture, self).display(model, model_field)
+        value = model_field.get(model)
+        self._value = value
+        if (isinstance(value, tuple) or isinstance(value,list)) and len(value)==2:
+            type, data = value
+        else:
+            type, data = 'jpeg', value
+
+        self.wid_picture.set_from_pixbuf(None)
+        self.wid_picture.set_from_stock('', gtk.ICON_SIZE_MENU)
+        if data:
+            if type == 'stock':
+                stock, size = data
+                if stock.startswith('STOCK_'):
+                    stock = getattr(gtk, stock) or ''
+                size = getattr(gtk, size)
+                self.wid_picture.set_from_stock(stock, size)
+            else:
+                value = base64.decodestring(data)
+                loader = gtk.gdk.PixbufLoader(type)
+                loader.write (value, len(value))
+                pixbuf = loader.get_pixbuf()
+                loader.close()
+                self.wid_picture.set_from_pixbuf(pixbuf)
+
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

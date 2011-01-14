@@ -1,7 +1,9 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004 TINY SPRL. (http://tiny.be) All Rights Reserved.
-#                    Fabien Pinckaers <fp@tiny.Be>
+# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#
+# $Id$
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -29,10 +31,13 @@
 service_dict = {}
 
 class Service(object):
-	def __init__(self, name, audience="*"):
-		service_dict[name] = (name, audience, self)
-	def exportMethod(self, method):
-		pass
+    def __init__(self, name, audience="*"):
+        service_dict[name] = (name, audience, self)
+    def exportMethod(self, method):
+        pass
 
 def LocalService(name):
-	return service_dict[name][2]
+    return service_dict[name][2]
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

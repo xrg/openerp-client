@@ -3,505 +3,455 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: OpenERP V4.3.99\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-13 17:21+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2007-12-12 15:46+0100\n"
+"PO-Revision-Date: 2007-11-19 14:05+0800\n"
+"Last-Translator: Tony Gu <digisatori@gmail.com>\n"
+"Language-Team: www.shine-it.net <digisatori@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
-#: terp.glade:10
-msgid "Tiny ERP - Login"
-msgstr "Tiny ERp - 登录"
+#: openerp.glade:9
+msgid "OpenERP - Login"
+msgstr "OpenERP - Login"
 
-#: terp.glade:107
+#: openerp.glade:106
 msgid "User:"
 msgstr "用户："
 
-#: terp.glade:135 terp.glade:14459 terp.glade:14774
+#: openerp.glade:134 openerp.glade:14673 openerp.glade:14988
 msgid "Password:"
 msgstr "密码："
 
-#: terp.glade:164 terp.glade:14286 terp.glade:14712 terp.glade:15278
-#: terp.glade:15922
+#: openerp.glade:163 openerp.glade:14500 openerp.glade:14926 openerp.glade:15491
+#: openerp.glade:16135
 msgid "Change"
-msgstr ""
+msgstr "改变"
 
-#: terp.glade:187 terp.glade:13982
-msgid "localhost"
-msgstr "localhost"
-
-#: terp.glade:205
-#, fuzzy
+#: openerp.glade:204 openerp.glade:14645
 msgid "Database:"
-msgstr "选择日期"
+msgstr "帐套："
 
-#: terp.glade:234 terp.glade:14051 terp.glade:14326 terp.glade:14619
-#: terp.glade:15829
+#: openerp.glade:233 openerp.glade:14266 openerp.glade:14540 openerp.glade:14833
+#: openerp.glade:16042
 msgid "Server:"
 msgstr "服务器"
 
-#: terp.glade:266
-msgid "admin"
-msgstr ""
-
-#: terp.glade:378 terp.glade:13689
-#, fuzzy
-msgid "Tiny ERP"
-msgstr "关于Tiny ERP"
-
-#: terp.glade:422
+#: openerp.glade:420
 msgid "_File"
 msgstr "文件(_F)"
 
-#: terp.glade:431
-#, fuzzy
+#: openerp.glade:429
 msgid "_Connect..."
-msgstr "连接..."
+msgstr "连接...(_C)"
 
-#: terp.glade:453
-#, fuzzy
+#: openerp.glade:451
 msgid "_Disconnect"
-msgstr "取消连接"
+msgstr "断线（_D)"
 
-#: terp.glade:480
-#, fuzzy
+#: openerp.glade:478
 msgid "Databases"
-msgstr "选择日期"
+msgstr "帐套"
 
-#: terp.glade:501
-#, fuzzy
+#: openerp.glade:499
 msgid "_New database"
-msgstr "选择日期"
+msgstr "新帐套(_N)"
 
-#: terp.glade:523
-#, fuzzy
+#: openerp.glade:520
 msgid "_Restore database"
-msgstr "选择日期"
+msgstr "恢复帐套(_R)"
 
-#: terp.glade:544
-#, fuzzy
+#: openerp.glade:541
 msgid "_Backup database"
-msgstr "选择日期"
+msgstr "备份帐套(_B)"
 
-#: terp.glade:565
-#, fuzzy
+#: openerp.glade:562
 msgid "Dro_p database"
-msgstr "选择日期"
+msgstr "删除帐套(_p)"
 
-#: terp.glade:592
+#: openerp.glade:589
 msgid "Administrator Password"
-msgstr ""
+msgstr "管理员密码"
 
-#: terp.glade:636
+#: openerp.glade:633
 msgid "_User"
 msgstr "用户(_U)"
 
-#: terp.glade:646
-#, fuzzy
+#: openerp.glade:644
 msgid "_Preferences"
-msgstr "参数选择"
+msgstr "偏好设定(_P)"
 
-#: terp.glade:673
-#, fuzzy
+#: openerp.glade:671
 msgid "_Send a request"
-msgstr "发送一个请求"
+msgstr "发送请求(_S)"
 
-#: terp.glade:694
-#, fuzzy
+#: openerp.glade:692
 msgid "_Read my requests"
-msgstr "读取我的请求"
+msgstr "阅读我的请求(_R)"
 
-#: terp.glade:721
-#, fuzzy
+#: openerp.glade:719
 msgid "_Waiting Requests"
-msgstr "等待请求"
+msgstr "等待回复的请求(_W)"
 
-#: terp.glade:734
-#, fuzzy
+#: openerp.glade:732
 msgid "For_m"
-msgstr "窗体(_F)"
+msgstr "表单(_m)"
 
-#: terp.glade:744
-#, fuzzy
+#: openerp.glade:743
 msgid "_New"
-msgstr "新建"
+msgstr "新增(_N)"
 
-#: terp.glade:766
-#, fuzzy
+#: openerp.glade:765
 msgid "_Save"
-msgstr "保存"
+msgstr "保存(_S)"
 
-#: terp.glade:788
-#, fuzzy
+#: openerp.glade:787
 msgid "Copy this resource"
-msgstr "复制这条资源"
+msgstr "复制该对象"
 
-#: terp.glade:789
+#: openerp.glade:788
 msgid "_Duplicate"
-msgstr ""
+msgstr "复制(_D)"
 
-#: terp.glade:811
-#, fuzzy
+#: openerp.glade:810
 msgid "_Delete"
-msgstr "删除"
+msgstr "刪除(_D)"
 
-#: terp.glade:839
+#: openerp.glade:838
 msgid "Find"
-msgstr ""
+msgstr "查询(_F)："
 
-#: terp.glade:861
-#, fuzzy
+#: openerp.glade:860
 msgid "Ne_xt"
-msgstr "下一条"
+msgstr "下一项(_x)"
 
-#: terp.glade:883
-#, fuzzy
+#: openerp.glade:882
 msgid "Pre_vious"
-msgstr "上一条"
+msgstr "上一项(_v)"
 
-#: terp.glade:905
+#: openerp.glade:904
 msgid "Switch to list/form"
-msgstr ""
+msgstr "切换 列表/表单"
 
-#: terp.glade:933
-msgid "_New Menu Tab"
-msgstr ""
+#: openerp.glade:926
+msgid "_Menu"
+msgstr "菜单(_M)"
 
-#: terp.glade:955
+#: openerp.glade:954
 msgid "_New Home Tab"
-msgstr ""
+msgstr "新增首页项(_N)"
 
-#: terp.glade:977 terp.glade:11926
-#, fuzzy
+#: openerp.glade:976 openerp.glade:12029
 msgid "Close Tab"
 msgstr "关闭"
 
-#: terp.glade:999
-#, fuzzy
+#: openerp.glade:998
 msgid "Previous Tab"
-msgstr "上一提示"
+msgstr "上一页"
 
-#: terp.glade:1009 terp.glade:11814
-#, fuzzy
+#: openerp.glade:1008 openerp.glade:11917
 msgid "Next Tab"
-msgstr "下一提示"
+msgstr "下一页"
 
-#: terp.glade:1025
-#, fuzzy
+#: openerp.glade:1024
 msgid "View _logs"
-msgstr "显示日志"
+msgstr "查看日志(_l)"
 
-#: terp.glade:1034
-#, fuzzy
+#: openerp.glade:1033
 msgid "_Go to resource ID..."
-msgstr "跳转到资源ID..."
+msgstr "至...(_G)"
 
-#: terp.glade:1050
-#, fuzzy
+#: openerp.glade:1049
 msgid "_Open"
-msgstr "打开"
+msgstr "打开(_O)"
 
-#: terp.glade:1071
-#, fuzzy
+#: openerp.glade:1070
 msgid "Reloa_d / Undo"
-msgstr "重装"
+msgstr "重作/取消(_d)"
 
-#: terp.glade:1099
-#, fuzzy
+#: openerp.glade:1098
 msgid "Repeat latest _action"
-msgstr "重复最后一条操作"
+msgstr "重复最近一项操作(_a)"
 
-#: terp.glade:1115
+#: openerp.glade:1114
 msgid "_Preview in PDF"
 msgstr "预览PDF(_P)"
 
-#: terp.glade:1137
-#, fuzzy
+#: openerp.glade:1136
 msgid "Previe_w in editor"
-msgstr "预览Word(_w)"
+msgstr "编辑器中预览(_w)"
 
-#: terp.glade:1164
-#, fuzzy
+#: openerp.glade:1163
 msgid "Expor_t data..."
-msgstr "导出数据..."
+msgstr "导出数据(_t)..."
 
-#: terp.glade:1185
-#, fuzzy
+#: openerp.glade:1184
 msgid "I_mport data..."
-msgstr "导入数据..."
+msgstr "导入数据(_I)..."
 
-#: terp.glade:1198
+#: openerp.glade:1197
 msgid "_Options"
 msgstr "选项(_O)"
 
-#: terp.glade:1207
-#, fuzzy
+#: openerp.glade:1206
 msgid "_Menubar"
-msgstr "菜单条"
+msgstr "菜单条(_M)"
 
-#: terp.glade:1217
-#, fuzzy
+#: openerp.glade:1216
 msgid "Text _and Icons"
-msgstr "文本和图标"
+msgstr "文字及图标(_a)"
 
-#: terp.glade:1227
-#, fuzzy
+#: openerp.glade:1226
 msgid "_Icons only"
-msgstr "只有图标"
+msgstr "仅图标(_I)"
 
-#: terp.glade:1238
-#, fuzzy
+#: openerp.glade:1237
 msgid "_Text only"
-msgstr "只有文本"
+msgstr "仅文字(_T)"
 
-#: terp.glade:1253
+#: openerp.glade:1252
 msgid "Client Mode"
-msgstr ""
+msgstr "客户端模式"
 
-#: terp.glade:1275
+#: openerp.glade:1274
 msgid "Normal"
-msgstr ""
+msgstr "一般"
 
-#: terp.glade:1285
+#: openerp.glade:1284
 msgid "Mode PDA"
-msgstr ""
+msgstr "PDA模式"
 
-#: terp.glade:1300
-#, fuzzy
+#: openerp.glade:1299
 msgid "_Theme"
-msgstr "树"
+msgstr "主题(_T)"
 
-#: terp.glade:1322
-#, fuzzy
-msgid "Tiny ERP Theme"
-msgstr "Tiny ERP 许可证"
+#: openerp.glade:1321
+msgid "OpenERP Theme"
+msgstr "OpenERP 主题"
 
-#: terp.glade:1331
-msgid "Aqua OS X"
-msgstr ""
-
-#: terp.glade:1346
-#, fuzzy
+#: openerp.glade:1345
 msgid "Default Theme"
-msgstr "默认值："
+msgstr "默认主题"
 
-#: terp.glade:1359
-#, fuzzy
+#: openerp.glade:1358
 msgid "_Forms"
-msgstr "窗体(_F)"
+msgstr "表单(_F)"
 
-#: terp.glade:1369
+#: openerp.glade:1368
 msgid "Right Toolbar"
-msgstr ""
+msgstr "右边工具栏"
 
-#: terp.glade:1379
+#: openerp.glade:1378
 msgid "Tabs default position"
-msgstr ""
+msgstr "标签页默认位置"
 
-#: terp.glade:1389
+#: openerp.glade:1388
 msgid "Top"
-msgstr ""
+msgstr "至顶部"
 
-#: terp.glade:1399
+#: openerp.glade:1398
 msgid "Left"
-msgstr ""
+msgstr "左边"
 
-#: terp.glade:1410
+#: openerp.glade:1409
 msgid "Right"
-msgstr ""
+msgstr "右边"
 
-#: terp.glade:1421
+#: openerp.glade:1420
 msgid "Bottom"
-msgstr ""
+msgstr "至底端"
 
-#: terp.glade:1436
+#: openerp.glade:1435
 msgid "Tabs default orientation"
-msgstr ""
+msgstr "标签页默认方向"
 
-#: terp.glade:1446
+#: openerp.glade:1445
 msgid "Horizontal"
-msgstr ""
+msgstr "横向"
 
-#: terp.glade:1456
+#: openerp.glade:1455
 msgid "Vertical"
-msgstr ""
+msgstr "纵向"
 
-#: terp.glade:1475
-#, fuzzy
+#: openerp.glade:1474
 msgid "_Print"
-msgstr "打印"
+msgstr "打印(_P)"
 
-#: terp.glade:1496
-#, fuzzy
+#: openerp.glade:1495
 msgid "Previe_w before print"
-msgstr "打印之前预览"
+msgstr "打印前预览(_w)"
 
-#: terp.glade:1516
-#, fuzzy
+#: openerp.glade:1515
 msgid "_Save options"
-msgstr "保存选项"
+msgstr "保存选项(_S)"
 
-#: terp.glade:1541
-#, fuzzy
+#: openerp.glade:1540
 msgid "_Plugins"
-msgstr "插件"
+msgstr "插件(_P)"
 
-#: terp.glade:1551
-#, fuzzy
+#: openerp.glade:1551
 msgid "_Execute a plugin"
-msgstr "运行插件"
+msgstr "运行插件(_E)"
 
-#: terp.glade:1576
-#, fuzzy
+#: openerp.glade:1577
+msgid "_Shortcuts"
+msgstr "快捷方式(_S)"
+
+#: openerp.glade:1586
 msgid "_Help"
-msgstr "帮助"
+msgstr "帮助(_H)"
 
-#: terp.glade:1585 terp.glade:10716
-#, fuzzy
+#: openerp.glade:1595 openerp.glade:10821
 msgid "Support Request"
-msgstr "发送支持请求"
+msgstr "支持请求"
 
-#: terp.glade:1612
-#, fuzzy
+#: openerp.glade:1622
 msgid "User _Manual"
-msgstr "用户手册"
+msgstr "用户手册(_M)"
 
-#: terp.glade:1633
-#, fuzzy
+#: openerp.glade:1643
 msgid "_Contextual Help"
-msgstr "上下文帮助"
+msgstr "在线帮助(_C)"
 
-#: terp.glade:1655
-#, fuzzy
+#: openerp.glade:1665
 msgid "_Tips"
-msgstr "提示"
+msgstr "提示(_T)"
 
-#: terp.glade:1676
-#, fuzzy
+#: openerp.glade:1686
 msgid "Keyboard Shortcuts"
 msgstr "快捷方式"
 
-#: terp.glade:1691
+#: openerp.glade:1701
 #, fuzzy
-msgid "_Licence"
-msgstr "许可证"
+msgid "_License"
+msgstr "许可证(_L)"
 
-#: terp.glade:1712
-#, fuzzy
+#: openerp.glade:1722
 msgid "_About..."
-msgstr "关于..."
+msgstr "关于(_A)"
 
-#: terp.glade:1754 terp.glade:2986
+#: openerp.glade:1764 openerp.glade:3032
 msgid "Create a new resource"
-msgstr "建立一个新的资源"
+msgstr "新建对象"
 
-#: terp.glade:1770
+#: openerp.glade:1780
 msgid "Edit / Save this resource"
-msgstr "编辑/保存资源"
+msgstr "编辑/保存"
 
-#: terp.glade:1799
+#: openerp.glade:1809
 msgid "Delete this resource"
-msgstr "删除资源"
+msgstr "删除"
 
-#: terp.glade:1828
-#, fuzzy
+#: openerp.glade:1838
 msgid "Find a resource"
-msgstr "选择一个资源！"
+msgstr "查找"
 
-#: terp.glade:1844
+#: openerp.glade:1854
 msgid "Go to previous matched search"
 msgstr "查找上一条"
 
-#: terp.glade:1860
+#: openerp.glade:1870
 msgid "Go to next matched resource"
 msgstr "查找下一条"
 
-#: terp.glade:1876
-msgid "Switch current view: form / list"
+#: openerp.glade:1886
+#, fuzzy
+msgid "Switch current view: form / list / graph"
+msgstr "切换（列表/表单）"
+
+#: openerp.glade:1887
+msgid "View"
 msgstr ""
 
-#: terp.glade:1877
-msgid "Other View"
-msgstr "其他视图"
+#: openerp.glade:1904
+msgid "Reload / Undo Form"
+msgstr "重作/取消"
 
-#: terp.glade:1907
+#: openerp.glade:1905
+msgid "Reload"
+msgstr "重新载入"
+
+#: openerp.glade:1923 openerp.glade:1924
+msgid "Menu"
+msgstr "菜单"
+
+#: openerp.glade:1954
 msgid "Launch actions about this resource"
-msgstr "运行这个资源相关的操作"
+msgstr "运行相关的操作"
 
-#: terp.glade:1908
+#: openerp.glade:1955
 msgid "Action"
 msgstr "操作"
 
-#: terp.glade:1925
+#: openerp.glade:1972
 msgid "Print documents"
 msgstr "打印文档"
 
-#: terp.glade:1954
-#, fuzzy
+#: openerp.glade:2001
 msgid "Add an attachment to this resource"
-msgstr "运行这个资源相关的操作"
+msgstr "添加附件"
 
-#: terp.glade:1955
-#, fuzzy
+#: openerp.glade:2002
 msgid "Attachment"
 msgstr "附件"
 
-#: terp.glade:1985
+#: openerp.glade:2032
 msgid "Close this window"
 msgstr "关闭窗口"
 
-#: terp.glade:2046
+#: openerp.glade:2089
 msgid "Requests:"
 msgstr "请求："
 
-#: terp.glade:2085
+#: openerp.glade:2128
 msgid "Read my Requests"
-msgstr "读取我得请求"
+msgstr "读取我的请求"
 
-#: terp.glade:2113
+#: openerp.glade:2156
 msgid "Send a new request"
 msgstr "发送新的请求"
 
-#: terp.glade:2168
-msgid "Tiny ERP - Tree Resources"
-msgstr "Tiny ERP - 树资源"
+#: openerp.glade:2215
+msgid "OpenERP - Tree Resources"
+msgstr "OpenERP－资源树"
 
-#: terp.glade:2303
+#: openerp.glade:2350
 msgid "Shortcuts"
 msgstr "快捷方式"
 
-#: terp.glade:2407
-msgid "Tiny ERP - Forms"
-msgstr "Tiny ERP - 窗体"
+#: openerp.glade:2454
+msgid "OpenERP - Forms"
+msgstr "OpenERP - 窗体"
 
-#: terp.glade:2455
-#, fuzzy
+#: openerp.glade:2502
 msgid "State:"
 msgstr "状态："
 
-#: terp.glade:2505
-msgid "Tiny ERP - About"
-msgstr "Tiny ERP - 关于"
+#: openerp.glade:2551
+msgid "OpenERP - About"
+msgstr "OpenERP - 关于"
 
-#: terp.glade:2562
+#: openerp.glade:2608
 msgid ""
-"<b>About Tiny ERP</b>\n"
+"<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
+"<b>关于 OpenERP</b>\n"
+"<i>性能卓越的开源 ERP &amp; CRM !</i>"
 
-#: terp.glade:2631
+#: openerp.glade:2677
 msgid ""
 "\n"
-"Tiny ERP - GTK Client - v%s\n"
+"OpenERP - GTK Client - v%s\n"
 "\n"
-"Tiny ERP is an Open Source ERP+CRM\n"
+"OpenERP is an Open Source ERP+CRM\n"
 "for small to medium businesses.\n"
 "\n"
 "The whole source code is distributed under\n"
@@ -509,19 +459,28 @@ msgid ""
 "\n"
 "(c) 2003-TODAY, Tiny sprl\n"
 "\n"
-"More Info on www.TinyERP.com !"
+"More Info on www.openerp.com !"
 msgstr ""
+"\n"
+"OpenERP - 客户端 - v%s\n"
+"\n"
+"OpenERP 是中小企业的开源ERP+CRM\n"
+"\n"
+"源代码以GPL协议发布\n"
+"\n"
+"(c) 2003-TODAY, Tiny sprl\n"
+"\n"
+"官方网站： www.openerp.com !中文支持：http://www.shine-it.net"
 
-#: terp.glade:2678
-#, fuzzy
-msgid "_Tiny ERP"
-msgstr "关于Tiny ERP"
+#: openerp.glade:2724
+msgid "_OpenERP"
+msgstr "OpenERP(_T)"
 
-#: terp.glade:2730
+#: openerp.glade:2776
 msgid ""
 "\n"
 "(c) 2003-TODAY - Tiny sprl\n"
-"Tiny ERP is a product of Tiny sprl:\n"
+"OpenERP is a product of Tiny sprl:\n"
 "\n"
 "Tiny sprl\n"
 "40 Chaussée de Namur\n"
@@ -532,236 +491,210 @@ msgid ""
 "Mail: sales@tiny.be\n"
 "Web: http://tiny.be"
 msgstr ""
+"\n"
+"(c) 2003-TODAY - Tiny sprl\n"
+"OpenERP 是Tiny sprl的产品:\n"
+"\n"
+"Tiny sprl\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
+"Belgium\n"
+"\n"
+"Tel : (+32)81.81.37.00\n"
+"Mail: sales@tiny.be\n"
+"Web: http://tiny.be"
 
-#: terp.glade:2777
-#, fuzzy
+#: openerp.glade:2823
 msgid "_Contact"
-msgstr "联系"
+msgstr "联系(_C)"
 
-#: terp.glade:2823
-#, fuzzy
-msgid "Tiny ERP - forms widget"
-msgstr "Tiny ERP - 窗体"
+#: openerp.glade:2869
+msgid "OpenERP - forms widget"
+msgstr "窗体"
 
-#: terp.glade:2890
+#: openerp.glade:2936
 msgid "Open the calendar widget"
-msgstr "打开日历部件"
+msgstr "打开日历"
 
-#: terp.glade:3013
-#, fuzzy
+#: openerp.glade:3059
 msgid "Search / Open a resource"
-msgstr "查找资源"
+msgstr "搜索/打开对象"
 
-#: terp.glade:3123
-#, fuzzy
+#: openerp.glade:3169
 msgid "Titre"
-msgstr "树"
+msgstr "Titre"
 
-#: terp.glade:3144
+#: openerp.glade:3190
 msgid "Set to default value"
 msgstr "设置为默认值"
 
-#: terp.glade:3153
-#, fuzzy
+#: openerp.glade:3199
 msgid "Set Default"
-msgstr "设置为默认值(_D)"
+msgstr "设置为默认"
 
-#: terp.glade:3173 terp.glade:3459
+#: openerp.glade:3219 openerp.glade:3505
 msgid "Create a new entry"
-msgstr "建立一个新的条目"
+msgstr "新建"
 
-#: terp.glade:3200
-#, fuzzy
+#: openerp.glade:3246
 msgid "Edit this entry"
-msgstr "删除这个条目"
+msgstr "编辑"
 
-#: terp.glade:3227
+#: openerp.glade:3273
 msgid "Remove this entry"
-msgstr "删除这个条目"
+msgstr "删除此项"
 
-#: terp.glade:3265
+#: openerp.glade:3311
 msgid "Previous"
 msgstr "上一条"
 
-#: terp.glade:3292
-msgid "(0/0)"
-msgstr ""
-
-#: terp.glade:3317
+#: openerp.glade:3363
 msgid "Next"
 msgstr "下一条"
 
-#: terp.glade:3477
+#: openerp.glade:3523
 msgid "Remove selected entry"
-msgstr "删除选择的条目"
+msgstr "删除所选项"
 
-#: terp.glade:3542
-msgid "label74"
-msgstr ""
+#: openerp.glade:4301
+msgid "OpenERP - Date selection"
+msgstr "OpenERP - 日期选择"
 
-#: terp.glade:3722 terp.glade:6440 terp.glade:6545 terp.glade:6749
-msgid "-"
-msgstr "－"
+#: openerp.glade:4383 openerp.glade:11404
+msgid "OpenERP - Confirmation"
+msgstr "OpenERP - 批准"
 
-#: terp.glade:4177
-msgid "label46559"
-msgstr ""
-
-#: terp.glade:4302
-msgid "Tiny ERP - Date selection"
-msgstr "Tiny ERP - 日期选择"
-
-#: terp.glade:4385 terp.glade:11300
-msgid "Tiny ERP - Confirmation"
-msgstr "Tiny ERP - 批准"
-
-#: terp.glade:4473 terp.glade:11401 terp.glade:13781
+#: openerp.glade:4471 openerp.glade:11505 openerp.glade:13997
 msgid "Hello World!"
 msgstr "你好"
 
-#: terp.glade:4507
-msgid "Tiny ERP - selection"
-msgstr "Tiny ERP - 选择"
+#: openerp.glade:4504
+#, fuzzy
+msgid "OpenERP - Selection"
+msgstr "OpenERP - 选择"
 
-#: terp.glade:4580
+#: openerp.glade:4577
 msgid "Your selection:"
 msgstr "你的选择："
 
-#: terp.glade:4655
-msgid "Tiny ERP - Filter"
-msgstr "Tiny ERP - 过滤器"
+#: openerp.glade:4652
+msgid "OpenERP - Filter"
+msgstr "OpenERP - 过滤器"
 
-#: terp.glade:4727
-#, fuzzy
+#: openerp.glade:4724
 msgid "S_earch:"
-msgstr "查找："
+msgstr "查找(_S)："
 
-#: terp.glade:4773
-#, fuzzy
+#: openerp.glade:4770
 msgid "on _field:"
-msgstr "在字段："
+msgstr "字段(_f)："
 
-#: terp.glade:4798
+#: openerp.glade:4795
 msgid "test"
-msgstr ""
+msgstr "test"
 
-#: terp.glade:4813
-#, fuzzy
+#: openerp.glade:4810
 msgid "_Select"
-msgstr "选择"
+msgstr "选择(_S)"
 
-#: terp.glade:4830
-#, fuzzy
+#: openerp.glade:4827
 msgid "_Unselect"
-msgstr "取消选择"
+msgstr "取消选择(_U)"
 
-#: terp.glade:4857
+#: openerp.glade:4854
 #, fuzzy
-msgid "Filter: "
-msgstr "过滤器："
+msgid "Filter:"
+msgstr "过滤："
 
-#: terp.glade:4883
-#, fuzzy
+#: openerp.glade:4880
 msgid "AL_L"
-msgstr "全部"
+msgstr "全部(_L)"
 
-#: terp.glade:4900
-#, fuzzy
+#: openerp.glade:4897
 msgid "N_ONE"
-msgstr "没有"
+msgstr "无(_O)"
 
-#: terp.glade:4972
+#: openerp.glade:4969
 msgid "<b><u>Actions</u></b>"
 msgstr "<b><u>操作</u></b>"
 
-#: terp.glade:5012
-msgid "Tiny ERP - Dialog"
-msgstr "Tiny ERP - 对话框"
+#: openerp.glade:5009
+msgid "OpenERP - Dialog"
+msgstr "OpenERP - 对话框"
 
-#: terp.glade:5058
+#: openerp.glade:5055
 msgid "Set to _Default"
 msgstr "设置为默认值(_D)"
 
-#: terp.glade:5085
+#: openerp.glade:5082
 msgid "Value _Preference"
 msgstr "偏好值(_P)"
 
-#: terp.glade:5108
-#, fuzzy
-msgid "Tiny ERP, Field Preference target"
-msgstr "Tiny ERP - 偏好"
+#: openerp.glade:5104
+msgid "OpenERP, Field Preference target"
+msgstr "OpenERP - 栏位偏好"
 
-#: terp.glade:5181
-#, fuzzy
+#: openerp.glade:5177
 msgid "Default _value:"
-msgstr "默认值："
+msgstr "默认值(_v)："
 
-#: terp.glade:5276
-#, fuzzy
+#: openerp.glade:5272
 msgid "_Domain:"
-msgstr "域："
+msgstr "域(_D)："
 
-#: terp.glade:5305
-#, fuzzy
+#: openerp.glade:5301
 msgid "Field _Name:"
-msgstr "字段名称："
+msgstr "字段名(_N)："
 
-#: terp.glade:5367
+#: openerp.glade:5363
 msgid "<b>Value applicable if:</b>"
-msgstr "如果值可用："
+msgstr "<b>值可用如果：</b>"
 
-#: terp.glade:5426
-#, fuzzy
+#: openerp.glade:5422
 msgid "_only for you"
-msgstr "只有你"
+msgstr "你自己(_o)"
 
-#: terp.glade:5445
-#, fuzzy
+#: openerp.glade:5441
 msgid "for _all users"
-msgstr "全部用户"
+msgstr "所有用户(_a)"
 
-#: terp.glade:5468
+#: openerp.glade:5464
 msgid "<b>Value applicable for:</b>"
-msgstr "可用值给："
+msgstr "<b>可用值给：</b>"
 
-#: terp.glade:5512
-msgid "Tiny ERP - Export to CSV"
-msgstr "Tiny ERP - 导出数据到CSV"
+#: openerp.glade:5507
+msgid "OpenERP - Export to CSV"
+msgstr "OpenERP - 导出数据到CSV"
 
-#: terp.glade:5627
-#, fuzzy
+#: openerp.glade:5622
 msgid "<b>Predefined exports</b>"
-msgstr "字段导出"
+msgstr "<b>预定义导出</b>"
 
-#: terp.glade:5706 terp.glade:12888
+#: openerp.glade:5701 openerp.glade:13105
 msgid "<b>All fields</b>"
-msgstr "全部字段"
+msgstr "<b>全部字段<b>"
 
-#: terp.glade:5786 terp.glade:12968
-#, fuzzy
+#: openerp.glade:5781 openerp.glade:13185
 msgid "_Add"
-msgstr "添加"
+msgstr "新增(_A)"
 
-#: terp.glade:5865 terp.glade:13047
-#, fuzzy
+#: openerp.glade:5860 openerp.glade:13264
 msgid "_Remove"
-msgstr "删除"
+msgstr "移除(_R)"
 
-#: terp.glade:5944
-#, fuzzy
+#: openerp.glade:5939
 msgid "_Nothing"
-msgstr "没有"
+msgstr "移除全部(_N)"
 
-#: terp.glade:6034
-#, fuzzy
+#: openerp.glade:6029
 msgid "Save List"
-msgstr "保存选项"
+msgstr "保存列表"
 
-#: terp.glade:6120
+#: openerp.glade:6115
 msgid "<b>Fields to export</b>"
-msgstr "字段导出"
+msgstr "<b>字段导出<／b>"
 
-#: terp.glade:6172
+#: openerp.glade:6167
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
@@ -769,45 +702,47 @@ msgstr ""
 "在Excel打开\n"
 "另存为CSV"
 
-#: terp.glade:6199
-#, fuzzy
+#: openerp.glade:6194
 msgid "Add _field names"
-msgstr "添加字段名称"
+msgstr "添加字段名(_f)"
 
-#: terp.glade:6219
-#, fuzzy
+#: openerp.glade:6214
 msgid "<b>Opti_ons</b>"
-msgstr "选项"
+msgstr "<b>选项(_o)</b>"
 
-#: terp.glade:6260
-msgid "Tiny ERP - Search"
-msgstr "Tiny ERP - 查找"
+#: openerp.glade:6254
+msgid "OpenERP - Search"
+msgstr "OpenERP - 查找"
 
-#: terp.glade:6391
-msgid "Tiny ERP - Search Widgets"
-msgstr "Tiny ERP - 查找部件"
+#: openerp.glade:6384
+msgid "OpenERP - Search Widgets"
+msgstr "OpenERP - 查找部件"
 
-#: terp.glade:6498
+#: openerp.glade:6433 openerp.glade:6538 openerp.glade:6742
+msgid "-"
+msgstr "-"
+
+#: openerp.glade:6491
 msgid "Date de début"
-msgstr ""
+msgstr "Date de début"
 
-#: terp.glade:6671
+#: openerp.glade:6664
 msgid "Search with this name"
 msgstr "用名称查找"
 
-#: terp.glade:6698
+#: openerp.glade:6691
 msgid "Clear the field"
-msgstr "清除字段"
+msgstr "清除栏位内容"
 
-#: terp.glade:6763
+#: openerp.glade:6756
 msgid "Yes"
 msgstr "是"
 
-#: terp.glade:6783
+#: openerp.glade:6776
 msgid "No"
 msgstr "否"
 
-#: terp.glade:6826
+#: openerp.glade:6819
 msgid ""
 "\n"
 "Yes\n"
@@ -817,40 +752,40 @@ msgstr ""
 "是\n"
 "否"
 
-#: terp.glade:6852
-msgid "Tiny ERP - Attachment"
-msgstr "Tiny ERP - 附件"
+#: openerp.glade:6844
+msgid "OpenERP - Attachment"
+msgstr "OpenERP - 附件"
 
-#: terp.glade:6922
+#: openerp.glade:6914
 msgid "Filename:"
-msgstr "字段名称"
+msgstr "文件名称："
 
-#: terp.glade:6994
+#: openerp.glade:6986
 msgid "Description:"
 msgstr "说明："
 
-#: terp.glade:7098
-#, fuzzy
+#: openerp.glade:7090
 msgid "Save text"
-msgstr "保存"
+msgstr "保存文字"
 
-#: terp.glade:7354
-msgid "Tiny ERP - Error"
-msgstr "Tiny ERP - 出错"
+#: openerp.glade:7345
+msgid "OpenERP - Error"
+msgstr "OpenERP - 出错"
 
-#: terp.glade:7413
-msgid "Application Error !"
+#: openerp.glade:7404
+#, fuzzy
+msgid "Application Error!"
 msgstr "应用程序出错！"
 
-#: terp.glade:7488
-msgid "Error 404"
-msgstr "错误404"
+#: openerp.glade:7499
+msgid "<b>Error 404</b>"
+msgstr "<b>Error 404</b>"
 
-#: terp.glade:7513
+#: openerp.glade:7524
 msgid "<b>Error code:</b>"
-msgstr "出错代码："
+msgstr "<b>出错代码：</b>"
 
-#: terp.glade:7538
+#: openerp.glade:7551
 msgid ""
 "This Page does not exist !\n"
 "Please retry"
@@ -858,69 +793,70 @@ msgstr ""
 "这个页面不存在！\n"
 "请重试"
 
-#: terp.glade:7564
+#: openerp.glade:7588
 msgid "<i>Click on the Support Request tab if you need more help !</i>"
 msgstr "<i>如果你需要帮助，请单击支持请求标签！</i>"
 
-#: terp.glade:7602
-#, fuzzy
+#: openerp.glade:7626
 msgid "De_scription"
-msgstr "说明"
+msgstr "描述(_s)"
 
-#: terp.glade:7652
-msgid ""
-"Error details\n"
-"dqsdsqdqsdsd"
-msgstr ""
-"错误明细\n"
-"dqsdsqdqsdsd"
+#: openerp.glade:7676
+msgid "Error details"
+msgstr "错误详情"
 
-#: terp.glade:7669
-#, fuzzy
+#: openerp.glade:7692
 msgid "_Details"
-msgstr "明细"
+msgstr "详情(_D)"
 
-#: terp.glade:7712
+#: openerp.glade:7735
 msgid ""
 "<b>Complete this form to submit your bug and/or request a support.</b>\n"
 "<i>\n"
-"Your request will be send to Tiny ERP and we will reply you shortly.\n"
-"Note that we may not reply you if your Service Company is not a Tiny ERP "
+"Your request will be send to OpenERP and we will reply you shortly.\n"
+"Note that we may not reply you if your Service Company is not a OpenERP "
 "partner.\n"
 "</i>"
 msgstr ""
+"<b>如需提交软件错误或请求技术支持，请填写本表。</b>\n"
+"<i>\n"
+"您的请求将发送到OpenERP， 我们将很快回复您。\n"
+"请理解如果您未与我们或我们的合作伙伴签署服务协议，您的请求可能得不到回复\n"
+"</i>"
 
-#: terp.glade:7762
-msgid "<b>Your name: </b>"
-msgstr "你的姓名："
+#: openerp.glade:7785 openerp.glade:10955
+msgid "<b>Your name:</b>"
+msgstr "<b>您的名字:</b>"
 
-#: terp.glade:7790
-msgid "<b>Your Company: </b>"
-msgstr "你的公司："
+#: openerp.glade:7813 openerp.glade:10983
+msgid "<b>Your Company:</b>"
+msgstr "<b>您所在公司：</b>"
 
-#: terp.glade:7818
-msgid "<b>Your Email: </b>"
-msgstr "你的Email："
-
-#: terp.glade:7888
-msgid "Explain what you did: "
-msgstr "说明你的要求："
-
-#: terp.glade:7916
+#: openerp.glade:7841
 #, fuzzy
-msgid "Others Comments: "
-msgstr "其他备注："
+msgid "<b>Your Email:</b>"
+msgstr "<b>Email：</b>"
 
-#: terp.glade:8071
+#: openerp.glade:7911
+#, fuzzy
+msgid "Explain what you did:"
+msgstr "说明您的要求："
+
+#: openerp.glade:7939
+#, fuzzy
+msgid "Others Comments:"
+msgstr "其他评论："
+
+#: openerp.glade:8094
 msgid "Send Support Request"
 msgstr "发送支持请求"
 
-#: terp.glade:8118
+#: openerp.glade:8141
 #, fuzzy
-msgid "<b>support contract id  </b>"
-msgstr "<b>支持请求</b>"
+msgid "<b>support contract id</b>"
+msgstr "<b>服务合同号</b>"
 
-#: terp.glade:8167 terp.glade:11159
+#: openerp.glade:8190 openerp.glade:11264
 msgid ""
 "Not Urgent\n"
 "Medium\n"
@@ -928,1149 +864,650 @@ msgid ""
 "Very Urgent"
 msgstr ""
 "不紧急\n"
-"中\n"
+"中等\n"
 "紧急\n"
 "非常紧急"
 
-#: terp.glade:8188 terp.glade:11180
+#: openerp.glade:8211 openerp.glade:11285
 #, fuzzy
-msgid "Emergency: "
-msgstr "紧急："
+msgid "Emergency:"
+msgstr "紧急度："
 
-#: terp.glade:8216
-msgid "Phone Number: "
+#: openerp.glade:8239
+#, fuzzy
+msgid "Phone Number:"
 msgstr "电话号码："
 
-#: terp.glade:8304
-#, fuzzy
+#: openerp.glade:8327
 msgid "<b>_Support Request</b>"
-msgstr "<b>支持请求</b>"
+msgstr "<b>支持请求(_S)</b>"
 
-#: terp.glade:8343
-msgid "Tiny ERP - Ressource Edit"
-msgstr "Tiny ERP - 资源编辑"
+#: openerp.glade:8366
+msgid "OpenERP - Ressource Edit"
+msgstr "OpenERP - 资源编辑"
 
-#: terp.glade:8414
-msgid "Tiny ERP - Link"
-msgstr "Tiny ERP - 连接"
+#: openerp.glade:8437
+msgid "OpenERP - Link"
+msgstr "OpenERP - 链接"
 
-#: terp.glade:8512
-msgid "Tiny ERP - List"
-msgstr "Tiny ERP - 列表"
+#: openerp.glade:8535
+msgid "OpenERP - List"
+msgstr "OpenERP - 列表"
 
-#: terp.glade:8582
-msgid "Tiny ERP - Preferences"
-msgstr "Tiny ERP - 偏好"
+#: openerp.glade:8604
+msgid "OpenERP - Preferences"
+msgstr "OpenERP - 偏好"
 
-#: terp.glade:8651
+#: openerp.glade:8674
 msgid "<b>Edit resource preferences</b>"
-msgstr ""
+msgstr "<b>偏好设定</b>"
 
-#: terp.glade:8700
+#: openerp.glade:8722
 msgid "Tip of the Day"
 msgstr "每日提示"
 
-#: terp.glade:8774
-#, fuzzy
+#: openerp.glade:8796
 msgid "Pre_vious Tip"
-msgstr "上一提示"
+msgstr "上一个提示(_v)"
 
-#: terp.glade:8850
-#, fuzzy
+#: openerp.glade:8872
 msgid "Ne_xt Tip"
-msgstr "下一提示"
+msgstr "下一个提示(_x)"
 
-#: terp.glade:8954
+#: openerp.glade:8977
 #, fuzzy
-msgid "_Display a new tip next time ?"
-msgstr "显示新的提示吗？"
+msgid "_Display a new tip next time?"
+msgstr "下次显示新提示吗？(_D)"
 
-#: terp.glade:8995
-msgid "Tiny ERP - Licence"
-msgstr "Tiny ERP - 许可证"
-
-#: terp.glade:9054
-msgid "Tiny ERP license"
-msgstr "Tiny ERP 许可证"
-
-#: terp.glade:9228
-msgid "Tiny ERP - Date & Time selection"
-msgstr "Tiny ERP - 日期和时间选择"
-
-#: terp.glade:9306
+#: openerp.glade:9017
 #, fuzzy
-msgid "Hour :"
+msgid "OpenERP - License"
+msgstr "OpenERP - 许可证"
+
+#: openerp.glade:9076
+msgid "OpenERP license"
+msgstr "OpenERP 许可证"
+
+#: openerp.glade:9250
+msgid "OpenERP - Date & Time selection"
+msgstr "OpenERP - 日期和时间选择"
+
+#: openerp.glade:9328
+msgid "Hour:"
 msgstr "小时："
 
-#: terp.glade:9350
-#, fuzzy
-msgid "Minute :"
+#: openerp.glade:9372
+msgid "Minute:"
 msgstr "分钟："
 
-#: terp.glade:9425
+#: openerp.glade:9446
 #, fuzzy
-msgid "GO to ressource ID"
-msgstr "跳转到资源ID..."
+msgid "Go to resource ID"
+msgstr "至"
 
-#: terp.glade:9499
+#: openerp.glade:9520
 msgid "Search ID:"
 msgstr "查找ID："
 
-#: terp.glade:9582
-#, fuzzy
-msgid "Tiny ERP Survey"
-msgstr "Tiny ERP - 查找"
+#: openerp.glade:9602
+msgid "OpenERP Survey"
+msgstr "OpenERP 调查"
 
-#: terp.glade:9654
-#, fuzzy
-msgid "<b>Tiny ERP Survey</b>"
-msgstr "Tiny ERP - 查找"
+#: openerp.glade:9674
+msgid "<b>OpenERP Survey</b>"
+msgstr "<b>OpenERP调查</b>"
 
-#: terp.glade:9679
+#: openerp.glade:9699
 msgid ""
-"<i>Please fill in the following form in order to help us to improve Tiny ERP "
+"<i>Please fill in the following form in order to help us to improve OpenERP "
 "and better target new developments.</i>"
-msgstr ""
+msgstr "<i>请填写以下表格以协助我们提高OpenERP 的开发水平。</i>"
 
-#: terp.glade:9732
+#: openerp.glade:9752
 msgid "Industry:"
-msgstr ""
+msgstr "行业："
 
-#: terp.glade:9761
+#: openerp.glade:9781
 msgid "# Employees:"
-msgstr ""
+msgstr "员工数量："
 
-#: terp.glade:9862
-#, fuzzy
+#: openerp.glade:9882
 msgid "Country:"
-msgstr "小时："
+msgstr "国家:"
 
-#: terp.glade:9890
-#, fuzzy
+#: openerp.glade:9910
 msgid "Your Role:"
-msgstr "你的选择："
+msgstr "角色："
 
-#: terp.glade:9954
-#, fuzzy
+#: openerp.glade:9974
 msgid "System:"
-msgstr "状态："
+msgstr "系统："
 
-#: terp.glade:10024
+#: openerp.glade:10044
 msgid "How did you hear about us:"
-msgstr ""
+msgstr "你如何知道我们："
 
-#: terp.glade:10077
-msgid "Open Source: "
-msgstr ""
-
-#: terp.glade:10403
+#: openerp.glade:10097
 #, fuzzy
-msgid "<b>Your company</b>"
-msgstr "你的公司："
+msgid "Open Source:"
+msgstr "开源："
 
-#: terp.glade:10459
-msgid "We plan to use Tiny ERP"
-msgstr ""
-
-#: terp.glade:10478
-msgid "We plan to offer services on Tiny ERP"
-msgstr ""
-
-#: terp.glade:10518
-msgid ""
-"Write here any comment, note or suggestion you have concerning Tiny ERP. \n"
-"Tell us which ERP systems you used before, and what you plan to do with Tiny "
-"ERP..."
-msgstr ""
-
-#: terp.glade:10537
+#: openerp.glade:10423
 #, fuzzy
-msgid "<b>Your interrest</b>"
-msgstr "你的姓名："
+msgid "<b>Your company:</b>"
+msgstr "<b>您所在公司</b>"
 
-#: terp.glade:10596
+#: openerp.glade:10485
+msgid "We plan to use OpenERP"
+msgstr "我们准备使用OpenERP"
+
+#: openerp.glade:10504
+msgid "We plan to offer services on OpenERP"
+msgstr "我们打算与OpenERP合作"
+
+#: openerp.glade:10529
+msgid "Tell us why you try OpenERP and what are your current softwares:"
+msgstr "请告诉我们为什么您要试用OpenERP,您目前使用的软件是什么："
+
+#: openerp.glade:10594
+#, fuzzy
+msgid "<b>Your interrest:</b>"
+msgstr "<b>您的兴趣</b>"
+
+#: openerp.glade:10652
+msgid "(Get OpenERP announces, docs and new releases by email)"
+msgstr "（获取有关OpenERP 的新产品，文档发布的有件列表）"
+
+#: openerp.glade:10680
+msgid "Company:"
+msgstr "公司："
+
+#: openerp.glade:10709
 msgid "E-Mail:"
-msgstr ""
+msgstr "Email:"
 
-#: terp.glade:10645
-msgid ""
-"(Get Tiny ERP announces, documentation and new releases by email, maximum 6 "
-"mails a year.)"
-msgstr ""
-
-#: terp.glade:10677
+#: openerp.glade:10783
 msgid "<b>Keep Informed</b>"
-msgstr ""
+msgstr "<b>保持联系</b>"
 
-#: terp.glade:10801
+#: openerp.glade:10906
 msgid ""
-"<b>Complete this form to submit your bug and/or make a request for support.</"
-"b>\n"
+"<b>Complete this form to submit your bug and/or send a support request.</b>\n"
 "<i>\n"
-"Your request will be sent to the Tiny ERP team and we will reply shortly.\n"
+"Your request will be sent to the OpenERP team and we will reply shortly.\n"
 "Note that we may not reply if you do not have a support contract with Tiny "
 "or an official partner.</i>"
 msgstr ""
+"<b>如需提交软件错误或请求技术支持，请填写本表。</b>\n"
+"<i>\n"
+"您的请求将发送到OpenERP， 我们将很快回复您。\n"
+"请理解如果您未与我们或我们的合作伙伴签署服务协议，您的请求可能得不到回复\n"
+"</i>"
 
-#: terp.glade:10850
-#, fuzzy
-msgid "<b>Your name:</b>"
-msgstr "你的姓名："
-
-#: terp.glade:10878
-#, fuzzy
-msgid "<b>Your Company:</b>"
-msgstr "你的公司："
-
-#: terp.glade:10906
-#, fuzzy
+#: openerp.glade:11011
 msgid "<b>Your email:</b>"
-msgstr "你的Email："
+msgstr "<b>您的email：</b>"
 
-#: terp.glade:10976
-#, fuzzy
+#: openerp.glade:11081
 msgid "Explain your problem:"
-msgstr "说明你的要求："
+msgstr "请解释您遇到的问题："
 
-#: terp.glade:11004
-#, fuzzy
+#: openerp.glade:11109
 msgid "Other comments:"
-msgstr "其他备注："
+msgstr "其他评论："
 
-#: terp.glade:11110
-#, fuzzy
+#: openerp.glade:11215
 msgid "<b>Support contract id:</b>"
-msgstr "<b>支持请求</b>"
+msgstr "<b>服务合同号：</b>"
 
-#: terp.glade:11208
-#, fuzzy
+#: openerp.glade:11313
 msgid "Phone number:"
-msgstr "电话号码："
+msgstr "电话："
 
-#: terp.glade:11435
-#, fuzzy
+#: openerp.glade:11538
 msgid "Keyboard shortcuts"
 msgstr "快捷方式"
 
-#: terp.glade:11506
+#: openerp.glade:11609
 msgid "<Ctrl> + O"
-msgstr ""
+msgstr "<Ctrl> + O"
 
-#: terp.glade:11534
-#, fuzzy
+#: openerp.glade:11637
 msgid "Connect"
-msgstr "连接..."
+msgstr "连接"
 
-#: terp.glade:11562
+#: openerp.glade:11665
 msgid "<Ctrl> + F"
-msgstr ""
+msgstr "<Ctrl> + F"
 
-#: terp.glade:11590
-#, fuzzy
+#: openerp.glade:11693
 msgid "Find / Search"
-msgstr "查找结束"
+msgstr "搜索"
 
-#: terp.glade:11618
+#: openerp.glade:11721
 msgid "<Ctrl> + D"
-msgstr ""
+msgstr "<Ctrl> + D"
 
-#: terp.glade:11646
+#: openerp.glade:11749
 msgid "Delete"
 msgstr "删除"
 
-#: terp.glade:11674
+#: openerp.glade:11777
 msgid "<Ctrl> + N"
-msgstr ""
+msgstr "<Ctrl> + N"
 
-#: terp.glade:11702
+#: openerp.glade:11805
 msgid "New"
 msgstr "新建"
 
-#: terp.glade:11730
+#: openerp.glade:11833
 msgid "<Ctrl> + <PgUp>"
-msgstr ""
+msgstr "<Ctrl> + <PgUp>"
 
-#: terp.glade:11758
-#, fuzzy
+#: openerp.glade:11861
 msgid "Previous tab"
-msgstr "上一条"
+msgstr "上一页"
 
-#: terp.glade:11786
+#: openerp.glade:11889
 msgid "<Ctrl> + <PgDn>"
-msgstr ""
+msgstr "<Ctrl> + <PgDn>"
 
-#: terp.glade:11842
+#: openerp.glade:11945
 msgid "<Ctrl> + S"
-msgstr ""
+msgstr "<Ctrl> + S"
 
-#: terp.glade:11870
+#: openerp.glade:11973
 msgid "<Ctrl> + W"
-msgstr ""
+msgstr "<Ctrl> + W"
 
-#: terp.glade:11898
+#: openerp.glade:12001
 msgid "Save"
 msgstr "保存"
 
-#: terp.glade:11954
+#: openerp.glade:12057
 msgid "<PgUp>"
-msgstr ""
+msgstr "<PgUp>"
 
-#: terp.glade:11982
+#: openerp.glade:12085
 msgid "<PgDn>"
-msgstr ""
+msgstr "<PgDn>"
 
-#: terp.glade:12010
-#, fuzzy
+#: openerp.glade:12113
 msgid "Previous record"
-msgstr "上一条"
+msgstr "上一记录"
 
-#: terp.glade:12038
-#, fuzzy
+#: openerp.glade:12141
 msgid "Next record"
-msgstr "下一步：没有选择记录！"
+msgstr "下一记录"
 
-#: terp.glade:12066
+#: openerp.glade:12169
 msgid "<Ctrl> + L"
-msgstr ""
+msgstr "<Ctrl> + L"
 
-#: terp.glade:12094
-#, fuzzy
+#: openerp.glade:12197
 msgid "Switch view mode"
-msgstr "其他视图"
+msgstr "切换查看模式"
 
-#: terp.glade:12122
-msgid "<b>Shortcuts for TinyERP</b>"
-msgstr ""
-
-#: terp.glade:12177
+#: openerp.glade:12225
 msgid "<Ctrl> + <Enter>"
-msgstr ""
+msgstr "<Ctrl> + <Enter>"
 
-#: terp.glade:12205
-#, fuzzy
+#: openerp.glade:12253
 msgid "Save and Close window"
-msgstr "关闭窗口"
+msgstr "保存并关闭窗口"
 
-#: terp.glade:12233
+#: openerp.glade:12281
 msgid "<i>When editing a resource in a popup window</i>"
-msgstr ""
+msgstr "<i>当在窗口中编辑</i>"
 
-#: terp.glade:12261
+#: openerp.glade:12309
 msgid "<Ctrl> + <Esc>"
-msgstr ""
+msgstr "<Ctrl> + <Esc>"
 
-#: terp.glade:12289
+#: openerp.glade:12337
 msgid "Close window without saving"
-msgstr ""
+msgstr "不保存关闭窗口"
 
-#: terp.glade:12323
-#, fuzzy
+#: openerp.glade:12365
+msgid "<b>Shortcuts for OpenERP</b>"
+msgstr "<b>快捷方式</b>"
+
+#: openerp.glade:12399
 msgid "Main Shortcuts"
-msgstr "快捷方式"
+msgstr "主快捷方式"
 
-#: terp.glade:12355
-#, fuzzy
-msgid "<b>Shortcuts in text entries</b>"
-msgstr "你的姓名："
+#: openerp.glade:12432
+msgid "<Ctrl> + X"
+msgstr "<Ctrl> + X"
 
-#: terp.glade:12383
-msgid "<CTRL> + X"
-msgstr ""
+#: openerp.glade:12460
+msgid "<Ctrl> + C"
+msgstr "<Ctrl> + C"
 
-#: terp.glade:12411
-msgid "<CTRL> + C"
-msgstr ""
+#: openerp.glade:12488
+msgid "<Ctrl> + V"
+msgstr "<Ctrl> + V"
 
-#: terp.glade:12439
-msgid "<CTRL> + V"
-msgstr ""
-
-#: terp.glade:12467
-#, fuzzy
+#: openerp.glade:12516
 msgid "Cut selected text"
-msgstr "删除选择的条目"
+msgstr "剪切所选文字"
 
-#: terp.glade:12495
-#, fuzzy
+#: openerp.glade:12544
 msgid "Copy selected text"
-msgstr "删除选择的条目"
+msgstr "复制所选文字"
 
-#: terp.glade:12523
-#, fuzzy
+#: openerp.glade:12572
 msgid "Paste selected text"
-msgstr "删除选择的条目"
+msgstr "年铁所选文字"
 
-#: terp.glade:12551
-msgid "<TAB>"
-msgstr ""
+#: openerp.glade:12600
+msgid "<Tab>"
+msgstr "<Tab>"
 
-#: terp.glade:12579
+#: openerp.glade:12628
 msgid "Next editable widget"
-msgstr ""
+msgstr "下一可编辑窗口"
 
-#: terp.glade:12607
-msgid "<SHIFT> + <TAB>"
-msgstr ""
+#: openerp.glade:12656
+msgid "<Shist> + <Tab>"
+msgstr "<Shist> + <Tab>"
 
-#: terp.glade:12635
-#, fuzzy
+#: openerp.glade:12684
 msgid "Previous editable widget"
-msgstr "上一条"
+msgstr "上一可编辑窗口"
 
-#: terp.glade:12663
-msgid "<ENTER>"
-msgstr ""
+#: openerp.glade:12712
+msgid "<Enter>"
+msgstr "<Enter>"
 
-#: terp.glade:12691
-#, fuzzy
+#: openerp.glade:12740
 msgid "Auto-Complete text field"
-msgstr "清除字段"
+msgstr "自动完成文本栏位"
 
-#: terp.glade:12725
-#, fuzzy
+#: openerp.glade:12768
+msgid "F1"
+msgstr "F1"
+
+#: openerp.glade:12796
+msgid "Add a new line/field"
+msgstr "新增行或字段"
+
+#: openerp.glade:12824
+msgid "Open current field"
+msgstr "打开当前字段"
+
+#: openerp.glade:12852
+msgid "<b>Shortcuts in text entries</b>"
+msgstr "<b>文本录入时的快捷方式</b>"
+
+#: openerp.glade:12880
+msgid "<b>Shortcuts in relation fields</b>"
+msgstr "<b>相关栏位的快捷方式</b>"
+
+#: openerp.glade:12909
+msgid "F2"
+msgstr "F2"
+
+#: openerp.glade:12943
 msgid "Edition Widgets"
-msgstr "编辑文档"
+msgstr "编辑窗口"
 
-#: terp.glade:12757
-#, fuzzy
+#: openerp.glade:12974
 msgid "Import from CSV"
-msgstr "导入CSV文件"
+msgstr "从CSV导入"
 
-#: terp.glade:13126
-#, fuzzy
+#: openerp.glade:13343
 msgid "N_othing"
-msgstr "没有"
+msgstr "无(_o)"
 
-#: terp.glade:13216
+#: openerp.glade:13433
 msgid "Auto-Detect"
-msgstr ""
+msgstr "自动检测"
 
-#: terp.glade:13302
+#: openerp.glade:13519
 msgid "<b>Fields to import</b>"
 msgstr "<b>导入字段</b>"
 
-#: terp.glade:13370
+#: openerp.glade:13587
 #, fuzzy
-msgid "File to Import: "
-msgstr "<b>导入字段</b>"
+msgid "File to Import:"
+msgstr "要导入的文件："
 
-#: terp.glade:13395
-msgid "Sélectionner un fichier"
-msgstr ""
+#: openerp.glade:13612
+msgid "Open..."
+msgstr "打开..."
 
-#: terp.glade:13436
-#, fuzzy
+#: openerp.glade:13653
 msgid "Field Separater:"
-msgstr "字段名称："
+msgstr "栏位分割符："
 
-#: terp.glade:13464
+#: openerp.glade:13681
 msgid "Encoding:"
-msgstr ""
+msgstr "编码："
 
-#: terp.glade:13496
-msgid ","
-msgstr ""
-
-#: terp.glade:13515
+#: openerp.glade:13732
 msgid "Text Delimiter:"
-msgstr ""
+msgstr "文字分割符："
 
-#: terp.glade:13547
-msgid "\""
-msgstr ""
-
-#: terp.glade:13566
+#: openerp.glade:13783
 msgid "Lines to Skip:"
-msgstr ""
+msgstr "跳过项："
 
-#: terp.glade:13616
-msgid ""
-"UTF-8\n"
-"Latin1"
-msgstr ""
-
-#: terp.glade:13637
+#: openerp.glade:13854
 msgid "CSV Parameters"
-msgstr ""
+msgstr "CSV参数"
 
-#: terp.glade:13841
-#, fuzzy
+#: openerp.glade:13905
+msgid "OpenERP"
+msgstr "OpenERP"
+
+#: openerp.glade:14056
 msgid "Server"
 msgstr "服务器"
 
-#: terp.glade:13904
-msgid "<b>Connect to a Tiny ERP server</b>"
-msgstr ""
+#: openerp.glade:14119
+msgid "<b>Connect to a OpenERP server</b>"
+msgstr "<b>连接至OpenERP 服务器</b>"
 
-#: terp.glade:13950
+#: openerp.glade:14165
 msgid "Port:"
 msgstr "端口："
 
-#: terp.glade:14004
-msgid "8069"
-msgstr "8069"
-
-#: terp.glade:14022
-#, fuzzy
+#: openerp.glade:14237
 msgid "Protocol connection:"
-msgstr "选择你的活动"
+msgstr "连接协议："
 
-#: terp.glade:14105
-#, fuzzy
+#: openerp.glade:14319
 msgid "Choose a database..."
-msgstr "选择日期"
+msgstr "选择帐套..."
 
-#: terp.glade:14175
-#, fuzzy
+#: openerp.glade:14389
 msgid "<b>Backup a database</b>"
-msgstr "建立一个新的资源"
+msgstr "<b> 备份帐套</b>"
 
-#: terp.glade:14225 terp.glade:14651 terp.glade:15217 terp.glade:15861
-#, fuzzy
-msgid "http://localhost:8069"
-msgstr "localhost"
-
-#: terp.glade:14431
-msgid "Database: "
-msgstr ""
-
-#: terp.glade:14503
-#, fuzzy
+#: openerp.glade:14716
 msgid "Restore a database"
-msgstr "选择日期"
+msgstr "帐套恢复"
 
-#: terp.glade:14572
-#, fuzzy
+#: openerp.glade:14786
 msgid "<b>Restore a database</b>"
-msgstr "建立一个新的资源"
+msgstr "<b>帐套数据恢复</b>"
 
-#: terp.glade:14802 terp.glade:15424
-msgid "New database name: "
-msgstr ""
+#: openerp.glade:14865 openerp.glade:15430 openerp.glade:16074
+msgid "http://localhost:8069"
+msgstr "http://localhost:8069"
 
-#: terp.glade:14852
+#: openerp.glade:15016 openerp.glade:15637
+#, fuzzy
+msgid "New database name:"
+msgstr "新建帐套名称："
+
+#: openerp.glade:15066
 msgid "(must not contain any special char)"
-msgstr ""
+msgstr "（请不要包含特殊字符）"
 
-#: terp.glade:14909
-#, fuzzy
+#: openerp.glade:15123
 msgid "Operation in progress"
-msgstr ""
-"操作失败\n"
-"I/O出错"
+msgstr "操作进行中"
 
-#: terp.glade:14968
-#, fuzzy
+#: openerp.glade:15182
 msgid "<b>Operation in progress</b>"
-msgstr ""
-"操作失败\n"
-"I/O出错"
+msgstr "<b>操作进行中</b>"
 
-#: terp.glade:15004
+#: openerp.glade:15218
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
+"请稍等，\n"
+"该操作可能需要一些时间..."
 
-#: terp.glade:15068
-#, fuzzy
+#: openerp.glade:15281
 msgid "Create a new database"
-msgstr "建立一个新的条目"
+msgstr "创建新帐套"
 
-#: terp.glade:15131
-#, fuzzy
+#: openerp.glade:15344
 msgid "<b>Create a new database</b>"
-msgstr "建立一个新的资源"
+msgstr "<b>创建新帐套</b>"
 
-#: terp.glade:15184
+#: openerp.glade:15397
+msgid "OpenERP server:"
+msgstr "OpenERP 服务器："
+
+#: openerp.glade:15426
 #, fuzzy
-msgid "Tiny ERP server:"
-msgstr "Tiny ERP - 查找"
-
-#: terp.glade:15213
 msgid ""
-"This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
-"installed on this computer. Click on change to change the address."
+"This is the URL of the OpenERP server. Use 'localhost' if the server is "
+"installed on this computer. Click on 'Change' to change the address."
 msgstr ""
+"此为OpenERP 服务器的URL。 如果服务器安装在本机，请使用\"localhost\"。点击变"
+"更用以改变服务器地址。"
 
-#: terp.glade:15317
-#, fuzzy
+#: openerp.glade:15530
 msgid "Super admin password:"
-msgstr "密码："
+msgstr "超级管理员密码："
 
-#: terp.glade:15345
-#, fuzzy
+#: openerp.glade:15558
 msgid "Default language:"
-msgstr "默认值："
+msgstr "默认语言："
 
-#: terp.glade:15373
-msgid "Load demonstration data: "
-msgstr ""
+#: openerp.glade:15586
+#, fuzzy
+msgid "Load demonstration data:"
+msgstr "载入演示数据："
 
-#: terp.glade:15401
+#: openerp.glade:15614
 msgid ""
 "Check this box if you want demo data to be installed on your new database."
-msgstr ""
+msgstr "如果要安装演示数据请勾选这里。"
 
-#: terp.glade:15452
+#: openerp.glade:15665
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
-msgstr ""
+msgstr "输入要创建的帐套名称，名称不能包含特殊字符。"
 
-#: terp.glade:15489
+#: openerp.glade:15702
 msgid "(use 'admin', if you did not changed it)"
-msgstr ""
+msgstr "（使用'admin'，如果你还没有修改过）"
 
-#: terp.glade:15517
+#: openerp.glade:15730
 msgid ""
 "This is the password of the user that have the rights to administer "
-"databases. This is not a Tiny ERP user, just a super administrator. If you "
+"databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
+"此为帐套管理员密码。请注意它不是OpenERP 用户，而是一个超级管理员。如果没有修"
+"改过，安装后的密码是'admin'。"
 
-#: terp.glade:15541
-#, fuzzy
+#: openerp.glade:15754
 msgid "Hello World"
 msgstr "你好"
 
-#: terp.glade:15562
+#: openerp.glade:15775
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
 "administration menu."
-msgstr ""
+msgstr "选择默认语言。你也可以在安装完成后通过管理菜单安装新语言。"
 
-#: terp.glade:15587
+#: openerp.glade:15800
 msgid "(must not contain any special character)"
-msgstr ""
+msgstr "（请不要包含任何特殊字符）"
 
-#: terp.glade:15626
-#, fuzzy
+#: openerp.glade:15838
 msgid "Change password"
-msgstr "密码："
+msgstr "改变密码"
 
-#: terp.glade:15698
-msgid "<b>Change your DB administration password</b>"
-msgstr ""
-
-#: terp.glade:15744
+#: openerp.glade:15911
 #, fuzzy
+msgid "<b>Change your super admin password</b>"
+msgstr "<b>修改帐套管理员密码</b>"
+
+#: openerp.glade:15957
 msgid "New password confirmation:"
-msgstr "密码："
+msgstr "新密码确认："
 
-#: terp.glade:15772
-#, fuzzy
+#: openerp.glade:15985
 msgid "New password:"
-msgstr "密码："
+msgstr "新密码："
 
-#: terp.glade:15800
-#, fuzzy
+#: openerp.glade:16013
 msgid "Old password:"
-msgstr "密码："
+msgstr "旧密码："
 
-#: terp.glade:16042
-#, fuzzy
-msgid "Tiny ERP Message"
-msgstr "Tiny ERP 许可证"
+#: openerp.glade:16254
+msgid "OpenERP Message"
+msgstr "OpenERP 消息"
 
-#: terp.glade:16098
-msgid "msg_title"
-msgstr ""
-
-#: terp.glade:16181
+#: openerp.glade:16392
 msgid "Database creation"
-msgstr ""
+msgstr "创建帐套"
 
-#: terp.glade:16401
-msgid "<b>Database created successfully !</b>"
-msgstr ""
+#: openerp.glade:16612
+#, fuzzy
+msgid "<b>Database created successfully!</b>"
+msgstr "<b>帐套创建成功！</b>"
 
-#: terp.glade:16459
+#: openerp.glade:16670
 msgid ""
 "You can connect to the new database using one of the following account:\n"
 "\n"
 "    Administrator: admin / admin "
 msgstr ""
+"使用下列帐号连接新帐套:\n"
+"\n"
+"    管理员： admin / admin "
 
-#: terp.glade:16491
+#: openerp.glade:16701
 msgid "Concurrency exception"
-msgstr ""
+msgstr "一致性错误"
 
-#: terp.glade:16578
+#: openerp.glade:16788
 msgid "Compare"
-msgstr ""
+msgstr "比较"
 
-#: terp.glade:16653
+#: openerp.glade:16863
 msgid "Write anyway"
-msgstr ""
+msgstr "强迫写入"
 
-#: terp.glade:16718
+#: openerp.glade:16928
+#, fuzzy
 msgid ""
 "<b>\n"
-"Write concurrency warning :\n"
+"Write concurrency warning:\n"
 "</b>\n"
 "This document has been modified while you were editing it.\n"
-"  Choose :\n"
+"  Choose:\n"
 "   - \"Cancel\" to cancel saving.\n"
 "   - \"Compare\" to see the modified version.\n"
-"   - \"write anyway\" save your current version.\n"
+"   - \"Write anyway\" to save your current version.\n"
 msgstr ""
-
-#~ msgid "Tiny ERP Client %s"
-#~ msgstr "Tiny ERP 客户端 %s"
-
-#~ msgid "specify alternate config file"
-#~ msgstr "指定交换配置文件"
-
-#~ msgid "enable basic debugging"
-#~ msgstr "打开基本调试"
-
-#~ msgid "specify channels to log"
-#~ msgstr "为日志制定通道"
-
-#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-#~ msgstr "指定日志级别：信息、调试、警告、出错、危险"
-
-#~ msgid "specify the user login"
-#~ msgstr "指定用户注册"
-
-#~ msgid "specify the server port"
-#~ msgstr "指定服务器端口"
-
-#~ msgid "specify the server ip/name"
-#~ msgstr "指定服务器IP或名称"
-
-#~ msgid "Unable to launch this file !"
-#~ msgstr "不能运行这个文件"
-
-#~ msgid "Unable to launch the application associated to this content !"
-#~ msgstr "Unable to launch the application associated to this content !"
-
-#, fuzzy
-#~ msgid "Support request sent !"
-#~ msgstr "发送支持请求"
-
-#, fuzzy
-#~ msgid "Could not connect to server !"
-#~ msgstr ""
-#~ "连接出错 !\n"
-#~ "不能连接到服务器 !"
-
-#, fuzzy
-#~ msgid "%s request(s)"
-#~ msgstr "请求"
-
-#~ msgid "No request"
-#~ msgstr "无请求"
-
-#, fuzzy
-#~ msgid " - %s pending request(s)"
-#~ msgstr "待处理请求"
-
-#~ msgid ""
-#~ "Connection error !\n"
-#~ "Unable to connect to the server !"
-#~ msgstr ""
-#~ "连接出错 !\n"
-#~ "不能连接到服务器 !"
-
-#~ msgid ""
-#~ "Connection error !\n"
-#~ "Bad username or password !"
-#~ msgstr ""
-#~ "连接出错 !\n"
-#~ "用户名或密码错误 !"
-
-#~ msgid "Connection Error !"
-#~ msgstr "连接出错！"
-
-#~ msgid "Not logged !"
-#~ msgstr "没有登录！"
-
-#~ msgid "Do you really want to quit ?"
-#~ msgstr "你真的要退出吗？"
-
-#, fuzzy
-#~ msgid "Validation Error."
-#~ msgstr "应用程序出错"
-
-#~ msgid " record(s) saved !"
-#~ msgstr "记录保存了"
-
-#~ msgid ""
-#~ "Operation failed !\n"
-#~ "I/O error"
-#~ msgstr ""
-#~ "操作失败\n"
-#~ "I/O出错"
-
-#~ msgid "Error Opening Excel !"
-#~ msgstr "打开Excel出错"
-
-#~ msgid ""
-#~ "Function only available for MS Office !\n"
-#~ "Sorry, OOo users :("
-#~ msgstr ""
-#~ "本功能只用于MS Office!\n"
-#~ "对不起, OOo 用户 :("
-
-#~ msgid "Export Data"
-#~ msgstr "导出数据"
-
-#~ msgid "Preferences"
-#~ msgstr "参数选择"
-
-#~ msgid "Preference"
-#~ msgstr "偏好"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Description"
-#~ msgstr "说明"
-
-#~ msgid "Reload"
-#~ msgstr "重装"
-
-#~ msgid "No resource selected !"
-#~ msgstr "没有选择资源"
-
-#, fuzzy
-#~ msgid "You have to select one resource!"
-#~ msgstr "选择一个资源！"
-
-#, fuzzy
-#~ msgid "Are you sure to remove this record ?"
-#~ msgstr ""
-#~ "你真的想要\n"
-#~ "删除这条记录吗？"
-
-#, fuzzy
-#~ msgid "Are you sure to remove those records ?"
-#~ msgstr ""
-#~ "你真的想要\n"
-#~ "删除这条记录吗？"
-
-#, fuzzy
-#~ msgid "Resources not removed !"
-#~ msgstr "记录已经删除。"
-
-#, fuzzy
-#~ msgid "Resources removed."
-#~ msgstr "记录已经删除。"
-
-#, fuzzy
-#~ msgid "Document saved !"
-#~ msgstr "保存选项！"
-
-#~ msgid "No record selected!"
-#~ msgstr "没有选择记录！"
-
-#, fuzzy
-#~ msgid "No record selected"
-#~ msgstr "没有选择记录！"
-
-#~ msgid "New document"
-#~ msgstr "新文档"
-
-#, fuzzy
-#~ msgid "Editing document (id: "
-#~ msgstr "编辑文档"
-
-#~ msgid "Record: "
-#~ msgstr "记录："
-
-#~ msgid "No preference available for this resource !"
-#~ msgstr "这个资源没有可用的偏好设置！"
-
-#, fuzzy
-#~ msgid "Tiny ERP Search: %s"
-#~ msgstr "Tiny ERP - 查找"
-
-#, fuzzy
-#~ msgid "Tiny ERP Search: %s (%%d result(s))"
-#~ msgstr "Tiny ERP - 查找部件"
-
-#~ msgid "Name"
-#~ msgstr "名称"
-
-#~ msgid "Ressource Name"
-#~ msgstr "资源名称"
-
-#~ msgid "Names"
-#~ msgstr "名称"
-
-#~ msgid "Changt root"
-#~ msgstr "更改根"
-
-#~ msgid "Open"
-#~ msgstr "打开"
-
-#~ msgid "Print"
-#~ msgstr "打印"
-
-#~ msgid "Close"
-#~ msgstr "关闭"
-
-#~ msgid "No resource selected!"
-#~ msgstr "没有资源被选择！"
-
-#~ msgid ""
-#~ "Are you sure you want\n"
-#~ "to remove this record?"
-#~ msgstr ""
-#~ "你真的想要\n"
-#~ "删除这条记录吗？"
-
-#~ msgid "Error removing resource!"
-#~ msgstr "删除资源出错！"
-
-#~ msgid "Unable to chroot: no tree resource selected"
-#~ msgstr "不能到子项：没有树资源被选择"
-
-#~ msgid "Field name"
-#~ msgstr "字段名称"
-
-#~ msgid "Are you sure you want to remove this attachment ?"
-#~ msgstr "你真的要删除这个附件吗？"
-
-#~ msgid "Select the destination file"
-#~ msgstr "选择目标文件"
-
-#~ msgid "Can not open file !"
-#~ msgstr "不能打开文件！"
-
-#~ msgid "Can not write file !"
-#~ msgstr "不能写入文件！"
-
-#~ msgid ""
-#~ "Unable to preview image file !\n"
-#~ "Verify the format."
-#~ msgstr ""
-#~ "不能预览图片文件！\n"
-#~ "请校验文件格式。"
-
-#~ msgid "Unknown Window"
-#~ msgstr "Unknown Window"
-
-#~ msgid "Printing aborted, too long delay !"
-#~ msgstr "延期太长，打印中断！"
-
-#~ msgid "Error: "
-#~ msgstr "出错"
-
-#~ msgid "Select your action"
-#~ msgstr "选择你的活动"
-
-#~ msgid "No action defined!"
-#~ msgstr "没有定义活动！"
-
-#~ msgid "Connection refused !"
-#~ msgstr "连接被拒绝！"
-
-#~ msgid "Connection refused!"
-#~ msgstr "连接被拒绝！"
-
-#~ msgid "Application Error"
-#~ msgstr "应用程序出错"
-
-#~ msgid "View details"
-#~ msgstr "显示明细"
-
-#~ msgid "Select the file to attach"
-#~ msgstr "选择文件作为附件"
-
-#~ msgid "Error reading the file"
-#~ msgstr "读取文件出错"
-
-#~ msgid "Save attachment as..."
-#~ msgstr "另存附件为..."
-
-#~ msgid "Error writing the file!"
-#~ msgstr "写入文件出错！"
-
-#, fuzzy
-#~ msgid "Report"
-#~ msgstr "报表/打印"
-
-#, fuzzy
-#~ msgid "Invalid Form, correct red fields !"
-#~ msgstr "验证出错，请纠正红色的字段！"
-
-#~ msgid "This widget is readonly !"
-#~ msgstr "这个部件只读！"
-
-#, fuzzy
-#~ msgid "Set as default"
-#~ msgstr "设置为默认值(_D)"
-
-#, fuzzy
-#~ msgid "Switch"
-#~ msgstr "其他视图"
-
-#, fuzzy
-#~ msgid "You have to select a resource !"
-#~ msgstr "选择一个资源！"
-
-#, fuzzy
-#~ msgid "Select a file"
-#~ msgstr "选择日期"
-
-#, fuzzy
-#~ msgid "Save as ..."
-#~ msgstr "另存附件为..."
-
-#~ msgid "Always applicable !"
-#~ msgstr "永久可用！"
-
-#, fuzzy
-#~ msgid "Can not generate graph !"
-#~ msgstr "不能写入文件！"
-
-#~ msgid "No available plugin for this resource !"
-#~ msgstr "不可用的插件！"
-
-#~ msgid "Choose a Plugin"
-#~ msgstr "选择一个插件"
-
-#, fuzzy
-#~ msgid "Limit :"
-#~ msgstr "限制："
-
-#, fuzzy
-#~ msgid "Error no report"
-#~ msgstr "删除资源出错！"
-
-#~ msgid "Write Report to File"
-#~ msgstr "将报表写入文件"
-
-#~ msgid "version"
-#~ msgstr "版本"
-
-#~ msgid "Welcome to Tiny Enterprise Resource Planing !"
-#~ msgstr "欢迎使用Tiny企业资源计划！"
-
-#~ msgid "You are already logged!"
-#~ msgstr "你已经登录了！"
-
-#~ msgid "you are logged out. ^l to login"
-#~ msgstr "你已经注销了。^l 重新连接"
-
-#~ msgid ""
-#~ "^N New   ^S Save   ^D Delete   ^F Search   ^X Next   ^W Previous   ^R "
-#~ "Repeat"
-#~ msgstr ""
-#~ "^N 新建   ^S 保存   ^D 删除   ^F 查找   ^X 下一条   ^W 上一条   ^R 重复"
-
-#~ msgid "^L to login"
-#~ msgstr "^l 重新连接"
-
-#~ msgid "select field value:"
-#~ msgstr "选择字段值"
-
-#~ msgid "Search error!"
-#~ msgstr "查找出错！"
-
-#~ msgid "Edit"
-#~ msgstr "编辑"
-
-#~ msgid "New root"
-#~ msgstr "新的根"
-
-#~ msgid ""
-#~ "Import Error !\n"
-#~ "Fields: \"%s\" does not exists !"
-#~ msgstr ""
-#~ "导入数据出错！\n"
-#~ "字段： \"%s\"不存在！"
-
-#~ msgid "Import Done"
-#~ msgstr "导入数据完成"
-
-#~ msgid "View Create Error:"
-#~ msgstr "视图创建错误："
-
-#~ msgid "Attachement: "
-#~ msgstr "附件："
-
-#~ msgid "Value preference"
-#~ msgstr "偏好值"
-
-#~ msgid "Action Wizard"
-#~ msgstr "动作向导"
-
-#~ msgid "Unable to read resource"
-#~ msgstr "不能读取资源"
-
-#~ msgid "This record did not exist !"
-#~ msgstr "这条记录不存在！"
-
-#~ msgid "unknown tag: "
-#~ msgstr "不明标签："
-
-#~ msgid "New Window"
-#~ msgstr "新窗口"
-
-#~ msgid "Copy"
-#~ msgstr "复制"
-
-#~ msgid "Search"
-#~ msgstr "查找"
-
-#~ msgid "Previous Window"
-#~ msgstr "上一窗口"
-
-#~ msgid "Next Window"
-#~ msgstr "下一窗口"
-
-#~ msgid "Filter"
-#~ msgstr "过滤器"
-
-#~ msgid "Plugin Manager"
-#~ msgstr "插件管理"
-
-#~ msgid "Processus Map"
-#~ msgstr "处理地图"
-
-#~ msgid "Remove this resource"
-#~ msgstr "删除这个资源"
-
-#~ msgid "Modify/Open this resource"
-#~ msgstr "修改/打开这个资源"
-
-#~ msgid "Set sequence"
-#~ msgstr "设置顺序"
-
-#~ msgid "All"
-#~ msgstr "全部"
-
-#~ msgid "Preferred Langage: "
-#~ msgstr "偏好的语言："
-
-#~ msgid "All Tiny ERP users"
-#~ msgstr "全部用户"
-
-#~ msgid "Only for you"
-#~ msgstr "只有你"
-
-#~ msgid "<b>Preference active for:</b>"
-#~ msgstr "偏好操作："
-
-#~ msgid "Tiny ERP - Import a CSV"
-#~ msgstr "Tiny ERP - 导入CSV文件"
-
-#~ msgid "The CSV file must be encoded in UTF-8 !"
-#~ msgstr "CSV文件必须采用UTF-8编码！"
-
-#~ msgid "<b>Notes</b>"
-#~ msgstr "<b>备注</b>"
-
-#~ msgid "Number: "
-#~ msgstr "编号："
-
-#~ msgid "Description : "
-#~ msgstr "说明："
-
-#~ msgid "Next: left click - Previous : right click on the image"
-#~ msgstr "下一：右键单击 － 上一：左键单击"
+"<b>\n"
+"一致性警告 :\n"
+"</b>\n"
+"该文档在您编辑时已改变。\n"
+"  选择：\n"
+"   - \"取消\" 取消保存。\n"
+"   - \"比较\" 查看修改后的版本。\n"
+"   - \"强制写入\" 保存当前的版本。\n"

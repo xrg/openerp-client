@@ -1,6 +1,7 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2006 TINY SPRL. (http://tiny.be) All Rights Reserved.
+# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
 #
 # $Id$
 #
@@ -27,90 +28,177 @@
 #
 ##############################################################################
 
-import base64
-import gtk
+import os
+import sys
+import tempfile
+import time
 
+import base64
+
+import gtk
 import gettext
 
+import rpc
 import interface
-import os
-
 import common
+import options
+import printer
+
 
 class wid_binary(interface.widget_interface):
-	def __init__(self, window, parent, model, attrs={}):
-		interface.widget_interface.__init__(self, window, parent, model, attrs)
+    def __init__(self, window, parent, model, attrs={}):
+        interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-		self.widget = gtk.HBox(spacing=5)
-		self.wid_text = gtk.Entry()
-		self.wid_text.set_property('activates_default', True)
-		self.widget.pack_start(self.wid_text, expand=True, fill=True)
+        self.widget = gtk.HBox(spacing=5)
+        self.wid_text = gtk.Entry()
+        self.wid_text.set_property('activates_default', True)
+        self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
-		self.but_new = gtk.Button(stock='gtk-open')
-		self.but_new.connect('clicked', self.sig_new)
-		self.widget.pack_start(self.but_new, expand=False, fill=False)
+        self.filters=attrs.get('filters',None)
+        self.but_new = gtk.Button()
+        img = gtk.Image()
+        img.set_from_stock( 'gtk-execute', gtk.ICON_SIZE_BUTTON )
+        label = gtk.Label( ('_Open' ))
+        label.set_use_underline( True )
+        hbox = gtk.HBox()
+        hbox.set_spacing( 2 )
+        hbox.pack_start( img, expand=False, fill=False )
+        hbox.pack_end( label, expand=False, fill=False )
 
-		self.but_save_as = gtk.Button(stock='gtk-save-as')
-		self.but_save_as.connect('clicked', self.sig_save_as)
-		self.widget.pack_start(self.but_save_as, expand=False, fill=False)
+        self.but_new.add( hbox )
+        self.but_new.connect('clicked', self.sig_execute)
+        self.widget.pack_start(self.but_new, expand=False, fill=False)
 
-		self.but_remove = gtk.Button(stock='gtk-clear')
-		self.but_remove.connect('clicked', self.sig_remove)
-		self.widget.pack_start(self.but_remove, expand=False, fill=False)
+        self.but_new = gtk.Button()
+        img = gtk.Image()
+        img.set_from_stock( 'gtk-open', gtk.ICON_SIZE_BUTTON )
+        label = gtk.Label( _('_Select') )
+        label.set_use_underline( True )
+        hbox = gtk.HBox()
+        hbox.set_spacing( 2 )
+        hbox.pack_start( img, expand=False, fill=False )
+        hbox.pack_end( label, expand=False, fill=False )
 
-		self.model_field = False
+        self.but_new.add( hbox )
+        self.but_new.connect('clicked', self.sig_select)
+        self.widget.pack_start(self.but_new, expand=False, fill=False)
 
-	def _readonly_set(self, value):
-		if value:
-			self.but_new.hide()
-			self.but_remove.hide()
-		else:
-			self.but_new.show()
-			self.but_remove.show()
+        self.but_save_as = gtk.Button(stock='gtk-save-as')
+        self.but_save_as.connect('clicked', self.sig_save_as)
+        self.widget.pack_start(self.but_save_as, expand=False, fill=False)
 
-	def sig_new(self, widget=None):
-		try:
-			filename = common.file_selection(_('Select the file to attach'), parent=self._window)
-			if filename:
-				self.model_field.set_client(self._view.model, base64.encodestring(file(filename).read()))
-				fname = self.attrs.get('fname_widget', False)
-				if fname:
-					self.parent.value = {fname:os.path.basename(filename)}
-				self.display(self._view.model, self.model_field)
-		except:
-			common.message(_('Error reading the file'))
+        self.but_remove = gtk.Button(stock='gtk-clear')
+        self.but_remove.connect('clicked', self.sig_remove)
+        self.widget.pack_start(self.but_remove, expand=False, fill=False)
 
-	def sig_save_as(self, widget=None):
-		try:
-			filename = common.file_selection(_('Save attachment as...'), parent=self._window)
-			if filename:
-				fp = file(filename,'wb+')
-				fp.write(base64.decodestring(self.model_field.get(self._view.model)))
-				fp.close()
-		except:
-			common.message(_('Error writing the file!'))
+        self.model_field = False
+        self.has_filename = attrs.get('filename')
+        self.data_field_name = attrs.get('name')
 
-	def sig_remove(self, widget=None):
-		self.model_field.set_client(self._view.model, False)
-		fname = self.attrs.get('fname_widget', False)
-		if fname:
-			self.parent.value = {fname:False}
-		self.display(self._view.model, self.model_field)
+    def _readonly_set(self, value):
+        if value:
+            self.but_new.hide()
+            self.but_remove.hide()
+        else:
+            self.but_new.show()
+            self.but_remove.show()
 
-	def display(self, model, model_field):
-		if not model_field:
-			self.wid_text.set_text('')
-			return False
-		super(wid_binary, self).display(model, model_field)
-		self.model_field = model_field
-		self.wid_text.set_text(self._size_get(model_field.get(model)))
-		return True
+    def _get_filename(self):
+        return self._view.model.value.get(self.has_filename) or self._view.model.value.get('name', self.data_field_name)
 
-	def _size_get(self, l):
-		return l and _('%d bytes') % len(l) or ''
+    def sig_execute(self,widget=None):
+        try:
+            filename = self._get_filename()
+            if filename:
+                data = self._view.model.value.get(self.data_field_name)
+                if not data:
+                    data = self._view.model.get(self.data_field_name)[self.data_field_name]
+                    if not data:
+                        raise Exception(_("Unable to read the file data"))
 
-	def set_value(self, model, model_field):
-		return
+                ext = os.path.splitext(filename)[1][1:]
+                (fileno, fp_name) = tempfile.mkstemp('.'+ext, 'openerp_')
 
-	def _color_widget(self):
-		return self.wid_text
+                os.write(fileno, base64.decodestring(data))
+                os.close(fileno)
+
+                printer.printer.print_file(fp_name, ext, preview=True)
+        except Exception, ex:
+            common.message(_('Error reading the file: %s') % str(ex))
+
+    def sig_select(self, widget=None):
+        try:
+            # Add the filename from the field with the filename attribute in the view
+            filters=None
+            filter_file = gtk.FileFilter()
+            if self.filters:
+                filter_file.set_name(_(str(','.join(self.filters))))
+                for pat in self.filters:
+                    filter_file.add_pattern(pat)
+                filters=[filter_file]
+            else:
+                 key=self.wid_text.get_text()
+                 if not key:
+                     filter_file.set_name('All Files')
+                     filter_file.add_pattern('*')
+                 else:
+                     filter_file.set_name(key)
+                     filter_file.add_pattern('*'+str(key)+'*')
+                 filters=[filter_file]
+
+            filename = common.file_selection(_('Select a file...'), parent=self._window,filters=filters)
+            if filename:
+                self.model_field.set_client(self._view.model, base64.encodestring(file(filename, 'rb').read()))
+                if self.has_filename:
+                    self._view.model.set({self.has_filename: os.path.basename(filename)})
+                self._view.display(self._view.model)
+        except Exception, ex:
+            common.message(_('Error reading the file: %s') % str(ex))
+
+    def sig_save_as(self, widget=None):
+        try:
+            data = self._view.model.value.get(self.data_field_name)
+            if not data:
+                data = self._view.model.get(self.data_field_name)[self.data_field_name]
+                if not data:
+                    raise Exception(_("Unable to read the file data"))
+
+            # Add the filename from the field with the filename attribute in the view
+            filename = common.file_selection(
+                _('Save As...'),
+                parent=self._window,
+                action=gtk.FILE_CHOOSER_ACTION_SAVE,
+                filename=self._get_filename()
+            )
+            if filename:
+                fp = file(filename,'wb+')
+                fp.write(base64.decodestring(data))
+                fp.close()
+        except Exception, ex:
+            common.message(_('Error writing the file: %s') % str(ex))
+
+    def sig_remove(self, widget=None):
+        self.model_field.set_client(self._view.model, False)
+        if self.has_filename:
+            self._view.model.set({self.has_filename: False})
+        self.display(self._view.model,False)
+
+    def display(self, model, model_field):
+        if not model_field:
+            self.wid_text.set_text('')
+            return False
+        super(wid_binary, self).display(model, model_field)
+        self.model_field = model_field
+        disp_text=model_field.get_client(model)
+        
+        self.wid_text.set_text(disp_text and str(disp_text) or '')
+        return True
+
+    def set_value(self, model, model_field):
+        return
+
+    def _color_widget(self):
+        return self.wid_text
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

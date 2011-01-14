@@ -1,7 +1,9 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004 TINY SPRL. (http://tiny.be) All Rights Reserved.
-#                    Fabien Pinckaers <fp@tiny.Be>
+# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#
+# $Id$
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -36,63 +38,54 @@ import rpc
 import common
 import win_search
 import copy
-
+import service
 from widget.screen import Screen
 
+import form
+
+import options
+import translate
+
+
 class win_preference(object):
-	def __init__(self, model, id, preferences, parent=None):
-		self.glade = glade.XML(common.terp_path("terp.glade"),'win_preference', gettext.textdomain())
-		self.win = self.glade.get_widget('win_preference')
-		self.win.set_transient_for(parent)
-		self.win.show_all()
-		self.id = id
-		self.model = model
+    def __init__(self, parent=None):
+        self.glade = glade.XML(common.terp_path("openerp.glade"),'win_preference', gettext.textdomain())
+        self.win = self.glade.get_widget('win_preference')
+        self.win.set_icon(common.OPENERP_ICON)
+        if not parent:
+            parent = service.LocalService('gui.main').window
+        self.win.set_transient_for(parent)
+        self.parent = parent
 
-		fields = {}
-		arch = '<?xml version="1.0"?><form string="%s">\n' % (_('Preferences'),)
-		for p in preferences:
-			arch+='<field name="%s" colspan="4"/>' % (p[1],)
-			fields[p[1]] = p[3]
-		arch+= '</form>'
+        action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'action_get', {})
+        action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', [action_id], False, rpc.session.context)[0]
 
-		self.screen = Screen(model, view_type=[])
-		self.screen.new(default=False)
-		self.screen.add_view_custom(arch, fields, display=True)
+        view_ids=[]
+        if action.get('views', []):
+            view_ids=[x[0] for x in action['views']]
+        elif action.get('view_id', False):
+            view_ids=[action['view_id'][0]]
 
-		default = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'meta', False, [(self.model,self.id)], False, rpc.session.context, True, True, False)
-		default2 = {}
-		self.default = {}
-		for d in default:
-			default2[d[1]] = d[2]
-			self.default[d[1]] = d[0]
-		self.screen.current_model.set(default2)
+        self.screen = Screen('res.users', view_type=[], window=parent)
+        self.screen.add_view_id(view_ids[0], 'form', display=True)
+        self.screen.load([rpc.session.uid])
+        self.screen.display(rpc.session.uid)
 
-		x,y = self.screen.screen_container.size_get()
-		self.screen.widget.set_size_request(x,y)
+        vbox = self.glade.get_widget('preference_vbox')
+        vbox.pack_start(self.screen.widget)
 
-		vbox = self.glade.get_widget('preference_vbox')
-		vbox.pack_start(self.screen.widget)
+        self.win.set_title(_('Preference'))
+        self.win.show_all()
 
-		self.win.set_title(_('Preference')+' '+model)
-		self.win.show_all()
+    def run(self, datas={}):
+        res = self.win.run()
+        if res==gtk.RESPONSE_OK:
+            rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write', [rpc.session.uid], self.screen.get())
+            rpc.session.context_reload()
+        self.parent.present()
+        self.win.destroy()
+        return True
 
-	def run(self, datas={}):
-		final = False
-		while True:
-			res = self.win.run()
-			if self.screen.current_model.validate() or (self.states[res]=='end'):
-				break
-		if res==gtk.RESPONSE_OK:
-			final = True
 
-			val = copy.copy(self.screen.get())
-
-			for key in val:
-				if val[key]:
-					rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'set', 'meta', key, key, [(self.model,self.id)], val[key])
-				elif self.default.get(key, False):
-					rpc.session.rpc_exec_auth('/common', 'ir_del', self.default[key])
-
-		self.win.destroy()
-		return final
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

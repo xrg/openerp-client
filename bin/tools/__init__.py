@@ -1,7 +1,9 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2006 TINY SPRL. (http://tiny.be) All Rights Reserved.
-#					Fabien Pinckaers <fp@tiny.Be>
+# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#
+# $Id$
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -26,39 +28,118 @@
 #
 ##############################################################################
 
-import rpc
-import webbrowser
 import os
-import sys
+if os.name == 'nt':
+    import win32
 
 def expr_eval(string, context={}):
-	context['uid'] = rpc.session.uid
-	if isinstance(string, basestring):
-		return eval(string, context)
-	else:
-		return string
+    import rpc
+    context['uid'] = rpc.session.uid
+    if isinstance(string, basestring):
+        return eval(string, context)
+    else:
+        return string
 
 def launch_browser(url):
-	if sys.platform == 'win32':
-		webbrowser.open(url)
-	else:
-		pid = os.fork()
-		if not pid:
-			pid = os.fork()
-			if not pid:
-				webbrowser.open(url)
-			sys.exit(0)
-		os.wait()
+    import webbrowser
+    import sys
+    if sys.platform == 'win32':
+        webbrowser.open(url)
+    else:
+        import os
+        pid = os.fork()
+        if not pid:
+            pid = os.fork()
+            if not pid:
+                webbrowser.open(url)
+            sys.exit(0)
+        os.wait()
 
 def node_attributes(node):
-	result = {}
-	attrs = node.attributes
-	if attrs is None:
-		return {}
-	for i in range(attrs.length):
-		result[attrs.item(i).localName] = str(attrs.item(i).nodeValue)
-		if attrs.item(i).localName == "digits" and isinstance(attrs.item(i).nodeValue, (str, unicode)):
-			result[attrs.item(i).localName] = eval(attrs.item(i).nodeValue)
-	return result
+    result = {}
+    attrs = node.attributes
+    if attrs is None:
+        return {}
+    for i in range(attrs.length):
+        result[attrs.item(i).localName] = str(attrs.item(i).nodeValue)
+        if attrs.item(i).localName == "digits" and isinstance(attrs.item(i).nodeValue, (str, unicode)):
+            result[attrs.item(i).localName] = eval(attrs.item(i).nodeValue)
+    return result
 
+#FIXME use spaces
+def calc_condition(self,model,con):
+	if model and (con[0] in model.mgroup.fields):
+		val = model[con[0]].get(model)
+		if con[1]=="=":
+			if val==con[2]:
+				return True
+		elif con[1]=="!=":
+			if val!=con[2]:
+				return True
+		elif con[1]=="<":
+			if val<con[2]:
+				return True
+		elif con[1]==">":
+			if val>con[2]:
+				return True
+		elif con[1]=="<=":
+			if val<=con[2]:
+				return True
+		elif con[1]==">=":
+			if val>=con[2]:
+				return True
+		return False
 
+def call_log(fun):
+    """Debug decorator
+       TODO: Add optionnal execution time
+    """
+    def f(*args, **kwargs):
+        print "call %s with %r, %r:" % (getattr(fun, '__name__', str(fun)), args, kwargs),
+        try:
+            r = fun(*args, **kwargs)
+            print repr(r)
+            return r
+        except Exception, ex:
+            print "Exception: %r" % (ex,)
+            raise
+    return f
+
+def to_xml(s):
+    return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
+
+def human_size(sz):
+    """
+    Return the size in a human readable format
+    """
+    if not sz:
+        return False
+    units = ('bytes', 'Kb', 'Mb', 'Gb')
+    s, i = float(sz), 0
+    while s >= 1024 and i < len(units)-1:
+        s = s / 1024
+        i = i + 1
+    return "%0.2f %s" % (s, units[i])
+
+def ustr(value):
+    """This method is similar to the builtin `str` method, except
+    it will return Unicode string.
+
+    @param value: the value to convert
+
+    @rtype: unicode
+    @return: unicode string
+    """
+
+    if isinstance(value, unicode):
+        return value
+
+    if hasattr(value, '__unicode__'):
+        return unicode(value)
+
+    if not isinstance(value, str):
+        value = str(value)
+
+    return unicode(value, 'utf-8')
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

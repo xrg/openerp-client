@@ -1,8 +1,9 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2006 TINY SPRL. (http://tiny.be) All Rights Reserved.
+# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
 #
-# $Id: list.py 4411 2006-11-02 23:59:17Z pinky $
+# $Id$
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -29,52 +30,58 @@
 
 import gobject
 import gtk
+from interface import parser_view
 
-class ViewGraph(object):
+class ViewGraph(parser_view):
 
-	def __init__(self, screen, view, children=None, buttons=None, toolbar=None):
-		self.screen = screen
-		self.view_type = 'graph'
-		self.model_add_new = False
-		self.view = view
-		self.widget = view.widget
-		self.widget.screen = screen
+    def __init__(self, window, screen, widget, children=None, buttons=None,
+            toolbar=None):
+        super(ViewGraph, self).__init__(window, screen, widget, children,
+                buttons, toolbar)
+        self.view_type = 'graph'
+        self.model_add_new = False
+        self.view = widget
+        self.widget = widget.widget
+        self.widget.screen = screen
 
-	def cancel(self):
-		pass
+    def cancel(self):
+        pass
 
-	def __str__(self):
-		return 'ViewGraph (%s)' % self.screen.resource
+    def __str__(self):
+        return 'ViewGraph (%s)' % self.screen.resource
 
-	def __getitem__(self, name):
-		return None
+    def __getitem__(self, name):
+        return None
 
-	def destroy(self):
-		self.widget.destroy()
-		del self.screen
-		del self.widget
+    def destroy(self):
+        self.widget.destroy()
+        del self.screen
+        del self.widget
 
-	def set_value(self):
-		pass
+    def set_value(self):
+        pass
 
-	def reset(self):
-		pass
+    def reset(self):
+        pass
 
-	def display(self):
-		self.view.display(self.screen.models)
-		return None
+    def display(self):
+        self.view.display(self.screen.models)
+        return None
 
-	def signal_record_changed(self, *args):
-		pass
+    def signal_record_changed(self, *args):
+        pass
 
-	def sel_ids_get(self):
-		return []
+    def sel_ids_get(self):
+        return []
 
-	def on_change(self, callback):
-		pass
+    def on_change(self, callback):
+        pass
 
-	def unset_editable(self):
-		pass
+    def unset_editable(self):
+        pass
 
-	def set_cursor(self):
-		pass
+    def set_cursor(self, new=False):
+        pass
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
