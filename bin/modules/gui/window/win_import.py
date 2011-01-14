@@ -130,14 +130,12 @@ class win_import(object):
                     self.fields_invert[st_name] = prefix_node+field
                     if fields[field].get('type','') == 'one2many' and level>0:
                         fields2 = rpc.session.rpc_exec_auth('/object', 'execute', fields[field]['relation'], 'fields_get', False, rpc.session.context)
-                        fields2.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}})
                         model_populate(fields2, prefix_node+field+'/', node, st_name+'/', level-1)
                     if fields[field].get('type','') in ('many2one' , 'many2many' ) and level>0:
                         self.fields[field+':id'] = fields[field]['string']
-                        fields2 = rpc.session.rpc_exec_auth('/object', 'execute', fields[field]['relation'], 'fields_get', False, rpc.session.context)
-                        fields2.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}})
                         self.fields_invert[fields[field]['string']] = field+':id'
-                        model_populate(fields2, prefix_node+field+'/', node, st_name+'/', level-1)
+                        model_populate({'id':{'string':'ID'},'db_id':{'string':'Database ID'}}, \
+                                       prefix_node+field+':', node, st_name+'/', level-1)
         fields.update({'id':{'string':'ID'},'db_id':{'string':'Database ID'}})
         model_populate(fields)
 

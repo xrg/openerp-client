@@ -1,3 +1,15 @@
+2009-08-28: 5.0.4
+=================
+
+Bugfixes
+--------
+
+ * Not linked to a bug report:
+   * win_import: remove ID and Database ID from one2many field population and for many2one & many2many field , only add Database ID,ID
+
+ * https://launchpad.net/bugs/416861
+
+
 2009-08-21: 5.0.3
 =================
 
