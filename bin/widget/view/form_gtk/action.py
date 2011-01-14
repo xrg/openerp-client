@@ -101,11 +101,10 @@ class action(interface.widget_interface):
     def display(self, model, model_field):
         res_id = rpc.session.rpc_exec_auth('/object', 'execute',
                 self.action['res_model'], 'search', self.domain, 0,
-                self.action.get('limit', 80))
+                self.action.get('limit', 80),False,self.context)
         self.screen.clear()
         self.screen.load(res_id)
         return True
-
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

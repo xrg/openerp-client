@@ -66,11 +66,17 @@ class CharField(object):
     def context_get(self, model, check_load=True, eval=True):
         context = {}
         context.update(self.parent.context)
+        # removing default keys of the parent context
+        context_own = context.copy()
+        for c in context.items():
+            if c[0].startswith('default_'):
+                del context_own[c[0]]
+        
         field_context_str = self.attrs.get('context', '{}') or '{}'
         if eval:
             field_context = model.expr_eval('dict(%s)' % field_context_str, check_load=check_load)
-            context.update(field_context)
-        return context
+            context_own.update(field_context)
+        return context_own
 
     def validate(self, model):
         ok = True
@@ -204,7 +210,7 @@ class BinaryField(CharField):
 
 class SelectionField(CharField):
     def set(self, model, value, test_state=True, modified=False):
-        value = isinstance(value,(list,tuple)) and value[0] or value
+        value = isinstance(value,(list,tuple)) and len(value) and value[0] or value
         
         if not self.get_state_attrs(model).get('required', False) and value is None:
             super(SelectionField, self).set(model, value, test_state, modified)
@@ -263,7 +269,7 @@ class M2OField(CharField):
         if value and isinstance(value, (int, str, unicode, long)):
             rpc2 = RPCProxy(self.attrs['relation'])
             result = rpc2.name_get([value], rpc.session.context)
-            model.value[self.name] = result[0]
+            model.value[self.name] = result and result[0] or ''
         else:
             model.value[self.name] = value
         if modified:

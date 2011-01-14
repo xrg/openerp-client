@@ -22,7 +22,7 @@
 ##############################################################################
 
 name = 'openerp-client'
-version = '5.0.1'
+version = '5.0.2'
 release = '0'
 description = 'OpenERP Client'
 long_desc = '''\

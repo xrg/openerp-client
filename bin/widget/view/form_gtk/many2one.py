@@ -101,14 +101,18 @@ class dialog(object):
 
     def run(self, datas={}):
         while True:
-            res = self.dia.run()
-            if res==gtk.RESPONSE_OK:
-                if self.screen.current_model.validate() and self.screen.save_current():
-                    return (True, self.screen.current_model.name_get())
+            try:
+                res = self.dia.run()
+                if res==gtk.RESPONSE_OK:
+                    if self.screen.current_model.validate() and self.screen.save_current():
+                        return (True, self.screen.current_model.name_get())
+                    else:
+                        self.screen.display()
                 else:
-                    self.screen.display()
-            else:
-                break
+                    break
+            except Exception,e:
+                # Passing all exceptions, most preferably the one of sql_constraint
+                pass
         return (False, False)
 
     def destroy(self):
@@ -235,7 +239,7 @@ class many2one(interface.widget_interface):
             context = self._view.modelfield.context_get(self._view.model)
             self.wid_text.grab_focus()
 
-            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', leave and self.wid_text.get_text() or '', domain, 'ilike', context)
+            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text() or '', domain, 'ilike', context)
             if (len(ids)==1) and leave:
                 self._view.modelfield.set_client(self._view.model, ids[0],
                         force_change=True)

@@ -127,7 +127,7 @@ class form(object):
         if 'calendar' in view_type:
             self.handlers['radio_calendar'] =  self.sig_switch_calendar
         if res_id:
-            if isinstance(res_id, int):
+            if isinstance(res_id, (int, long,)):
                 res_id = [res_id]
             self.screen.load(res_id)
         else:

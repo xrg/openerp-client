@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -244,6 +244,12 @@ class rpc_session(object):
 
     def about(self, url):
         return self.exec_no_except(url, 'common', 'about')
+
+    def login_message(self, url):
+        try:
+            return self.exec_no_except(url, 'common', 'login_message')
+        except:
+            return False
 
     def list_db(self, url):
         try:

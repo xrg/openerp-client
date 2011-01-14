@@ -298,6 +298,7 @@ class textbox_tag(interface.widget_interface):
         cut_indices.sort()
         for c in cut_indices:
             if not last_pos==c:
+                txt = unicode(txt)
                 outbuff += txt[last_pos:c]
                 last_pos = c
             for tag in cuts[c]:
@@ -405,9 +406,35 @@ class textbox_tag(interface.widget_interface):
         buf = self.tv.get_buffer()
 #        txt = re.sub('<p align[^>]*>', '<p>', txt)
         try:
-            parsed, txt, separator = pango.parse_markup(txt, u'0')
+            txt = txt.replace('strike','s')
+
+            alignres = txt.find("LEFT")
+            if alignres != -1:
+                self.tv.set_justification(gtk.JUSTIFY_LEFT)
+                txt = txt.replace('<pre><p align="LEFT" leading="21">','')
+
+            alignres = txt.find("RIGHT")
+            if alignres != -1:
+                self.tv.set_justification(gtk.JUSTIFY_RIGHT)
+                txt = txt.replace('<pre><p align="RIGHT" leading="21">','')
+
+            alignres = txt.find("CENTER")
+            if alignres != -1:
+                self.tv.set_justification(gtk.JUSTIFY_CENTER)
+                txt = txt.replace('<pre><p align="CENTER" leading="21">','')
+
+            alignres = txt.find("JUSTIFY")
+            if alignres != -1:
+                self.tv.set_justification(gtk.JUSTIFY_FILL)
+                txt = txt.replace('<pre><p align="JUSTIFY" leading="21">','')
+
+            alignres = txt.find("LEFT")
+
+            txt = txt.replace('</p></pre>','')
+            parsed, txt, separator = pango.parse_markup(txt)
         except Exception ,e:
             pass
+        
         try:
             attrIter = parsed.get_iterator()
         except Exception ,e:

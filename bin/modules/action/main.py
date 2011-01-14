@@ -146,14 +146,13 @@ class main(service.Service):
                 win=datas['window']
                 del datas['window']
             datas['report_id'] = action['report_id']
-            self.exec_report('custom', datas)
+            self.exec_report('custom', datas, context)
 
         elif action['type']=='ir.actions.report.xml':
             if 'window' in datas:
                 win=datas['window']
                 del datas['window']
-
-            self.exec_report(action['report_name'], datas)
+            self.exec_report(action['report_name'], datas, context)
 
         elif action['type']=='ir.actions.act_url':
             tools.launch_browser(action.get('url',''))
@@ -170,7 +169,6 @@ class main(service.Service):
             except rpc.rpc_exception, e:
 #               common.error(_('Error: ')+str(e.type), e.message, e.data)
                 return False
-
         keyact = {}
         for action in actions:
             keyact[action['name']] = action

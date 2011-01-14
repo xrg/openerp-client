@@ -48,6 +48,7 @@ class Printer(object):
             'xls': self._findHTMLOpener,
             'sxw': self._findSXWOpener,
             'odt': self._findSXWOpener,
+            'tiff': self._findPDFOpener,
         }
 
     def _findInPath(self, progs):
