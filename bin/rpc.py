@@ -31,26 +31,42 @@ import xmlrpclib
 import logging
 import socket
 
+import tiny_socket
+
+import service
 import common
 import options
+import os
+
+import re
 
 class rpc_int_exception(Exception):
 	pass
 
 
 class rpc_exception(Exception):
-	def __init__(self, code, msg):
-		log = logging.getLogger('rpc.exception')
-		log.warning('CODE %s: %s' % (str(code),msg))
+	def __init__(self, code, backtrace):
 
 		self.code = code
-		lines = msg.split('\n')
-		self.data = '\n'.join(lines[2:])
-		self.type = lines[0].split(' -- ')[0]
-		self.message = ''
-		if len(lines[0].split(' -- ')) > 1:
-			self.message = lines[0].split(' -- ')[1]
-		
+		self.args = backtrace
+		if hasattr(code, 'split'):
+			lines = code.split('\n')
+	
+			self.type = lines[0].split(' -- ')[0]
+			self.message = ''
+			if len(lines[0].split(' -- ')) > 1:
+				self.message = lines[0].split(' -- ')[1]
+	
+			self.data = '\n'.join(lines[2:])
+		else:
+			self.type = 'error'
+			self.message = backtrace
+			self.data = backtrace
+
+		self.backtrace = backtrace
+
+		log = logging.getLogger('rpc.exception')
+		log.warning('CODE %s: %s' % (str(code), self.message))
 
 class gw_inter(object):
 	__slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
@@ -93,8 +109,26 @@ class xmlrpc_gw(gw_inter):
 		result = getattr(self._sock,method)(self._db, *args)
 		return self.__convert(result)
 
+class tinySocket_gw(gw_inter):
+	__slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
+	def __init__(self, url, db, uid, passwd, obj='/object'):
+		gw_inter.__init__(self, url, db, uid, passwd, obj)
+		self._sock = tiny_socket.mysocket()
+		self._obj = obj[1:]
+	def exec_auth(self, method, *args):
+		logging.getLogger('rpc.request').info(str((method, self._db, self._uid, self._passwd, args)))
+		res = self.execute(method, self._uid, self._passwd, *args)
+		logging.getLogger('rpc.result').debug(str(res))
+		return res
+	def execute(self, method, *args):
+		self._sock.connect(self._url)
+		self._sock.mysend((self._obj, method, self._db)+args)
+		res = self._sock.myreceive()
+		self._sock.disconnect()
+		return res
+
 class rpc_session(object):
-	__slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_gw', 'db', 'context')
+	__slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_gw', 'db', 'context', 'timezone')
 	def __init__(self):
 		self._open = False
 		self._url = None
@@ -104,13 +138,14 @@ class rpc_session(object):
 		self.uname = None
 		self._gw = xmlrpc_gw
 		self.db = None
+		self.timezone = 'utc'
 
 	def rpc_exec(self, obj, method, *args):
 		try:
 			sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
 			return sock.execute(method, *args)
-		except socket.error, (e1,e2):
-			common.error(_('Connection refused !'), e1, e2)
+		except socket.error, e:
+			common.error(_('Connection refused !'), str(e), str(e))
 			raise rpc_exception(69, _('Connection refused!'))
 		except xmlrpclib.Fault, err:
 			raise rpc_exception(err.faultCode, err.faultString)
@@ -126,45 +161,77 @@ class rpc_session(object):
 		try:
 			sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
 			return sock.exec_auth(method, *args)
-		except:
-			raise rpc_exception(1, 'not logged')
+		except xmlrpclib.Fault, err:
+			a = rpc_exception(err.faultCode, err.faultString)
+		except tiny_socket.Myexception, err:
+			a = rpc_exception(err.faultCode, err.faultString)
+		if a.code in ('warning', 'UserError'):
+			common.warning(a.data, a.message)
+			return None
+		raise a
 
 	def rpc_exec_auth(self, obj, method, *args):
 		if self._open:
 			try:
 				sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
 				return sock.exec_auth(method, *args)
-			except socket.error, (e1,e2):
-				common.error(_('Connection refused !'), e1, e2)
+			except socket.error, e:
+				common.error(_('Connection refused !'), str(e), str(e))
 				raise rpc_exception(69, 'Connection refused!')
 			except xmlrpclib.Fault, err:
 				a = rpc_exception(err.faultCode, err.faultString)
 				if a.type in ('warning','UserError'):
-					common.warning(a.data, a.message)
 #TODO: faudrait propager l'exception
 #					raise a
-					pass
+					if a.message in ('ConcurrencyException') and len(args) > 4:
+						if common.concurrency(args[0], args[2][0], args[4]):
+							if 'read_delta' in args[4]:
+								del args[4]['read_delta']
+							return self.rpc_exec_auth(obj, method, *args)
+					else:
+						common.warning(a.data, a.message)
 				else:
-					pass
-					common.error(_('Application Error'), _('View details'), err.faultString)
+					common.error(_('Application Error'), err.faultCode, err.faultString)
+			except tiny_socket.Myexception, err:
+				a = rpc_exception(err.faultCode, err.faultString)
+				if a.type in ('warning', 'UserError'):
+					common.warning(a.data, a.message)
+				else:
+					common.error(_('Application Error'), err.faultCode, err.faultString)
+			except Exception, e:
+				common.error(_('Application Error'), _('View details'), str(e))
 		else:
 			raise rpc_exception(1, 'not logged')
 
-	def login(self, uname, passwd, url, port, secure, db):
-		if secure:
-			_protocol = "https://"
+	def login(self, uname, passwd, url, port, protocol, db):
+		_protocol = protocol
+		if _protocol == 'http://' or _protocol == 'https://':
+			_url = _protocol + url+':'+str(port)+'/xmlrpc'
+			_sock = xmlrpclib.ServerProxy(_url+'/common')
+			self._gw = xmlrpc_gw
+			try:
+				res = _sock.login(db or '', uname or '', passwd or '')
+			except socket.error,e:
+				return -1
+			if not res:
+				self._open=False
+				self.uid=False
+				return -2
 		else:
-			_protocol = "http://"
-		_url = _protocol + url+':'+str(port)+'/xmlrpc'
-		_sock = xmlrpclib.ServerProxy(_url+'/common')
-		try:
-			res = _sock.login(db or '', uname or '', passwd or '')
-		except socket.error,e:
-			return -1
-		if not res:
-			self._open=False
-			self.uid=False
-			return -2
+			_url = _protocol+url+':'+str(port)
+			_sock = tiny_socket.mysocket()
+			self._gw = tinySocket_gw
+			try:
+				_sock.connect(url, int(port))
+				_sock.mysend(('common', 'login', db or '', uname or '', passwd or ''))
+				res = _sock.myreceive()
+				_sock.disconnect()
+			except socket.error,e:
+				return -1
+			if not res:
+				self._open=False
+				self.uid=False
+				return -2
 		self._url = _url
 		self._open = True
 		self.uid = res
@@ -179,33 +246,75 @@ class rpc_session(object):
 		return 1
 		
 	def list_db(self, url):
-		sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
-		try:
-			return sock.list()
-		except:
+		m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
+		if not m:
 			return -1
+		if m.group(1) == 'http://' or m.group(1) == 'https://':
+			sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
+			try:
+				return sock.list()
+			except:
+				return -1
+		else:
+			sock = tiny_socket.mysocket()
+			try:
+				sock.connect(m.group(2), int(m.group(3)))
+				sock.mysend(('db', 'list'))
+				res = sock.myreceive()
+				sock.disconnect()
+				return res
+			except Exception, e:
+				return -1
 	
 	def db_exec_no_except(self, url, method, *args):
-		sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
-		return getattr(sock, method)(*args)
+		m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
+		if m.group(1) == 'http://' or m.group(1) == 'https://':
+			sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
+			return getattr(sock, method)(*args)
+		else:
+			sock = tiny_socket.mysocket()
+			sock.connect(m.group(2), int(m.group(3)))
+			sock.mysend(('db', method)+args)
+			res = sock.myreceive()
+			sock.disconnect()
+			return res
 
 	def db_exec(self, url, method, *args):
 		res = False
 		try:
 			res = self.db_exec_no_except(url, method, *args)
 		except socket.error, msg:
-			print '-'*50
-			print msg
 			common.warning('Could not contact server!')
 		return res
 
 	def context_reload(self):
 		self.context = {}
+		self.timezone = 'utc'
 		# self.uid
 		context = self.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'meta', False, [('res.users', self.uid or False)], False, {}, True, True, False)
 		for c in context:
 			if c[2]:
 				self.context[c[1]] = c[2]
+			if c[1] == 'lang':
+				import translate
+				translate.setlang(c[2])
+				options.options['client.lang']=c[2]
+				ids = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('code', '=', c[2])])
+				if ids:
+					l = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', ids, ['direction'])
+					if l and 'direction' in l[0]:
+						common.DIRECTION = l[0]['direction']
+						import gtk
+						if common.DIRECTION == 'rtl':
+							gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
+						else:
+							gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
+			elif c[1] == 'tz':
+				self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
+				try:
+					import pytz
+				except:
+					common.warning('You select a timezone but tinyERP could not find pytz library !\nThe timezone functionality will be disable.')
 
 	def logged(self):
 		return self._open

@@ -34,22 +34,26 @@ import xml.dom.minidom
 import form_gtk
 import tree_gtk
 import graph_gtk
+import calendar_gtk
 
 from form import ViewForm
 from list import ViewList
 from graph import ViewGraph
+from calendar import ViewCalendar
 
 parsers = {
 	'form': form_gtk.parser_form,
 	'tree': tree_gtk.parser_tree,
 	'graph': graph_gtk.parser_graph,
+	'calendar': calendar_gtk.parser_calendar,
 }
 
 
 parsers2 = {
 	'form': ViewForm,
 	'tree': ViewList,
-	'graph': ViewGraph
+	'graph': ViewGraph,
+	'calendar': ViewCalendar,
 }
 
 class widget_parse(interface.parser_interface):

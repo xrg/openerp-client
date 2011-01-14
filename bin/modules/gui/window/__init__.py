@@ -40,27 +40,27 @@ class window_int(object):
 class window(service.Service):
 	def __init__(self, name='gui.window'):
 		service.Service.__init__(self, name)
-	def create(self, view_id, model, res_id=False, domain=None, view_type='form', window=None, context={}, mode=None):
+	def create(self, view_ids, model, res_id=False, domain=None, view_type='form', window=None, context={}, mode=None, name=False):
 		context.update(rpc.session.context)
 		if view_type=='form':
 			mode = (mode or 'form,tree').split(',')
-			win = form.form(model, res_id, domain, view_type=mode, view_ids = (view_id and [view_id]) or [], window=window, context=context)
+			win = form.form(model, res_id, domain, view_type=mode, view_ids = (view_ids or []), window=window, context=context, name=name)
 			spool = service.LocalService('spool')
 			spool.publish('gui.window', win, {})
 		elif view_type=='tree':
-			if view_id:
-				view_base =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'read', [view_id], ['model', 'type'], context)[0]
+			if view_ids and view_ids[0]:
+				view_base =  rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'read', [view_ids[0]], ['model', 'type'], context)[0]
 				model = view_base['model']
-				view = rpc.session.rpc_exec_auth('/object', 'execute', view_base['model'], 'fields_view_get', view_id, view_base['type'],context)
+				view = rpc.session.rpc_exec_auth('/object', 'execute', view_base['model'], 'fields_view_get', view_ids[0], view_base['type'],context)
 			else:
 				view = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_view_get', False, view_type, context)
 
-			win = tree.tree(view, model, res_id, domain, context, window=window)
+			win = tree.tree(view, model, res_id, domain, context, window=window, name=name)
 			spool = service.LocalService('spool')
 			spool.publish('gui.window', win, {})
 		else:
 			import logging
 			log = logging.getLogger('view')
-			log.error('unknown view type: '+str(view['type']))
+			log.error('unknown view type: '+view_type)
 			del log
 window()

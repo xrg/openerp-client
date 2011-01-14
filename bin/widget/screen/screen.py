@@ -32,18 +32,21 @@ from rpc import RPCProxy
 import rpc
 
 from widget.model.group import ModelRecordGroup
-from widget.model.record import ModelRecord
 
 from widget.view.screen_container import screen_container
+import widget_search
 
 import signal_event
 import tools
 
 class Screen(signal_event.signal_event):
-	def __init__(self, model_name, view_ids=[], view_type=['form','tree'], parent=None, context={}, views_preload={}, tree_saves=True, domain=[], create_new=False, row_activate=None, hastoolbar=False):
+	def __init__(self, model_name, view_ids=[], view_type=['tree','form'], parent=None, context={}, views_preload={}, tree_saves=True, domain=[], create_new=False, row_activate=None, hastoolbar=False, default_get={}, show_search=False, window=None):
 		super(Screen, self).__init__()
+		self.show_search = show_search
 		self.hastoolbar = hastoolbar
+		self.default_get=default_get
 		if not row_activate:
+			# TODO change for a function that switch to form view
 			self.row_activate = self.switch_view
 		else:
 			self.row_activate = row_activate
@@ -59,13 +62,17 @@ class Screen(signal_event.signal_event):
 		self.fields = {}
 		self.view_ids = view_ids
 		self.models = None
-		models = ModelRecordGroup(model_name, self.fields, parent=parent, context=self.context)
+		self.parent=parent
+		self.window=window
+		models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context)
 		self.models_set(models)
 		self.current_model = None
 		self.screen_container = screen_container()
+		self.filter_widget = None
 		self.widget = self.screen_container.widget_get()
 		self.__current_view = 0
 		self.tree_saves = tree_saves
+
 		if view_type:
 			self.view_to_load = view_type[1:]
 			view_id = False
@@ -73,8 +80,39 @@ class Screen(signal_event.signal_event):
 				view_id = view_ids.pop(0)
 			view = self.add_view_id(view_id, view_type[0])
 			self.screen_container.set(view.widget)
+		self.display()
+
+	def search_active(self, active=True):
+		if active and self.show_search:
+			if not self.filter_widget:
+				view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'fields_view_get', False, 'form', self.context)
+				self.filter_widget = widget_search.form(view_form['arch'], view_form['fields'], self.name, self.window, self.domain, (self, self.search_filter))
+				self.screen_container.add_filter(self.filter_widget.widget, self.search_filter, self.search_clear)
+			self.screen_container.show_filter()
+		else:
+			self.screen_container.hide_filter()
+
+	def search_clear(self, *args):
+		self.filter_widget.clear()
+		self.clear()
+
+	def search_filter(self, *args):
+		limit=self.filter_widget.get_limit()
+		offset=self.filter_widget.get_offset()
+		v = self.filter_widget.value
+		v += self.domain
+		try:
+			ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search', v, offset,limit, 0, self.context)
+		except:
+			# Try if it is not an older server
+			ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0)
+		self.clear()
+		self.load(ids)
+		return True
 
 	def models_set(self, models):
+		import time
+		c = time.time()
 		if self.models:
 			self.models.signal_unconnect(self.models)
 		self.models = models
@@ -83,10 +121,15 @@ class Screen(signal_event.signal_event):
 			self.current_model = models.models[0]
 		else:
 			self.current_model = None
+		self.models.signal_connect(self, 'record-cleared', self._record_cleared)
 		self.models.signal_connect(self, 'record-changed', self._record_changed)
 		self.models.signal_connect(self, 'model-changed', self._model_changed)
-		models.add_fields(self.fields, models.models)
+		models.add_fields(self.fields, models)
 		self.fields.update(models.fields)
+
+	def _record_cleared(self, model_group, signal, *args):
+		for view in self.views:
+			view.reload = True
 
 	def _record_changed(self, model_group, signal, *args):
 		for view in self.views:
@@ -126,20 +169,26 @@ class Screen(signal_event.signal_event):
 		if self.current_model and self.current_model not in self.models.models:
 			self.current_model = None
 		if len(self.view_to_load):
-			if self.view_ids:
-				view_id = self.view_ids.pop(0)
-				view_type = False
-			else:
-				view_id = False
-				view_type = self.view_to_load.pop(0)
-			self.add_view_id(view_id, view_type)
+			self.load_view_to_load()
 			self.__current_view = len(self.views) - 1
 		else:
 			self.__current_view = (self.__current_view + 1) % len(self.views)
+		widget = self.current_view.widget
 		self.screen_container.set(self.current_view.widget)
 		if self.current_model:
 			self.current_model.validate_set()
 		self.display()
+		# TODO: set True or False accoring to the type
+
+	def load_view_to_load(self):
+		if len(self.view_to_load):
+			if self.view_ids:
+				view_id = self.view_ids.pop(0)
+				view_type = self.view_to_load.pop(0)
+			else:
+				view_id = False
+				view_type = self.view_to_load.pop(0)
+			self.add_view_id(view_id, view_type)
 
 	def add_view_custom(self, arch, fields, display=False, toolbar={}):
 		return self.add_view(arch, fields, display, True, toolbar=toolbar)
@@ -150,7 +199,7 @@ class Screen(signal_event.signal_event):
 		else:
 			view = self.rpc.fields_view_get(view_id, view_type, self.context, self.hastoolbar)
 			return self.add_view(view['arch'], view['fields'], display, toolbar=view.get('toolbar', False))
-		
+
 	def add_view(self, arch, fields, display=False, custom=False, toolbar={}):
 		def _parse_fields(node, fields):
 			if node.nodeType == node.ELEMENT_NODE:
@@ -161,11 +210,9 @@ class Screen(signal_event.signal_event):
 							attrs['widget']='one2many'
 						attrs['type'] = attrs['widget']
 					try:
-						fields[attrs['name']].update(attrs)
+						fields[str(attrs['name'])].update(attrs)
 					except:
-						print "-"*30,"\n malformed tag for :", attrs
-						print "-"*30
-						raise						
+						raise
 			for node2 in node.childNodes:
 				_parse_fields(node2, fields)
 		dom = xml.dom.minidom.parseString(arch)
@@ -176,12 +223,12 @@ class Screen(signal_event.signal_event):
 		if self.current_model and (self.current_model not in models):
 			models = models + [self.current_model]
 		if custom:
-			self.models.add_fields_custom(fields, models)
+			self.models.add_fields_custom(fields, self.models)
 		else:
-			self.models.add_fields(fields, models)
+			self.models.add_fields(fields, self.models)
 		self.fields = self.models.fields
 
-		parser = widget_parse(parent=self.parent)
+		parser = widget_parse(parent=self.parent, window=self.window)
 		dom = xml.dom.minidom.parseString(arch)
 		view = parser.parse(self, dom, self.fields, toolbar=toolbar)
 
@@ -194,24 +241,31 @@ class Screen(signal_event.signal_event):
 		return view
 
 	def editable_get(self):
-		return self.current_view.widget.editable
+		if hasattr(self.current_view, 'widget_tree'):
+			return self.current_view.widget_tree.editable
+		else:
+			return False
 
-	def new(self, default=True):
+	def new(self, default=True, context={}):
 		if self.current_view and self.current_view.view_type == 'tree' \
-				and not self.current_view.widget.editable:
+				and not self.current_view.widget_tree.editable:
 			self.switch_view()
-		model = self.models.model_new(default, self.domain, self.context)
+		ctx = self.context.copy()
+		ctx.update(context)
+		model = self.models.model_new(default, self.domain, ctx)
 		if (not self.current_view) or self.current_view.model_add_new or self.create_new:
 			self.models.model_add(model, self.new_model_position())
 		self.current_model = model
 		self.current_model.validate_set()
 		self.display()
+		if self.current_view:
+			self.current_view.set_cursor()
 		return self.current_model
 
 	def new_model_position(self):
 		position = -1
 		if self.current_view and self.current_view.view_type =='tree' \
-				and self.current_view.widget.editable == 'top':
+				and self.current_view.widget_tree.editable == 'top':
 			position = 0
 		return position
 
@@ -219,8 +273,10 @@ class Screen(signal_event.signal_event):
 		self.models.on_write = func_name
 
 	def cancel_current(self):
-		self.current_model.cancel()
-		self.current_view.cancel()
+		if self.current_model:
+			self.current_model.cancel()
+		if self.current_view:
+			self.current_view.cancel()
 
 	def save_current(self):
 		if not self.current_model:
@@ -231,6 +287,20 @@ class Screen(signal_event.signal_event):
 			id = self.current_model.save(reload=True)
 		else:
 			self.current_view.display()
+			self.current_view.set_cursor()
+			return False
+		if self.current_view.view_type == 'tree':
+			for model in self.models.models:
+				if model.is_modified():
+					if model.validate():
+						id = model.save(reload=True)
+					else:
+						self.current_model = model
+						self.display()
+						self.current_view.set_cursor()
+						return False
+			self.display()
+			self.current_view.set_cursor()
 		if self.current_model not in self.models:
 			self.models.model_add(self.current_model)
 		return id
@@ -251,11 +321,15 @@ class Screen(signal_event.signal_event):
 		if not self.current_model:
 			return False
 		self.current_view.set_value()
-		return self.current_model.is_modified()
+		res = False
+		if self.current_view.view_type != 'tree':
+			res = self.current_model.is_modified()
+		else:
+			for model in self.models.models:
+				if model.is_modified():
+					res = True
+		return res
 
-	#
-	# To write
-	#
 	def reload(self):
 		self.current_model.reload()
 		if self.parent:
@@ -264,8 +338,11 @@ class Screen(signal_event.signal_event):
 
 	def remove(self, unlink = False):
 		id = False
-		if self.current_model:
+		if self.current_view.view_type == 'form' and self.current_model:
 			id = self.current_model.id
+			if unlink and id:
+				if not self.rpc.unlink([id]):
+					return False
 			idx = self.models.models.index(self.current_model)
 			self.models.remove(self.current_model)
 			if self.models.models:
@@ -273,9 +350,19 @@ class Screen(signal_event.signal_event):
 				self.current_model = self.models.models[idx]
 			else:
 				self.current_model = None
-			if unlink and id:
-				self.rpc.unlink([id])
 			self.display()
+			self.current_view.set_cursor()
+		if self.current_view.view_type == 'tree':
+			ids = self.current_view.sel_ids_get()
+			if unlink and ids:
+				if not self.rpc.unlink(ids):
+					return False
+			for model in self.current_view.sel_models_get():
+				self.models.remove(model)
+			self.current_model = None
+			self.display()
+			self.current_view.set_cursor()
+			id = ids
 		return id
 
 	def load(self, ids):
@@ -293,6 +380,7 @@ class Screen(signal_event.signal_event):
 		if self.views:
 			self.current_view.display()
 			self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
+			self.search_active(self.current_view.view_type in ('tree', 'graph', 'calendar'))
 
 	def display_next(self):
 		self.current_view.set_value()
@@ -305,6 +393,7 @@ class Screen(signal_event.signal_event):
 		if self.current_model:
 			self.current_model.validate_set()
 		self.display()
+		self.current_view.set_cursor()
 
 	def display_prev(self):
 		self.current_view.set_value()
@@ -319,11 +408,14 @@ class Screen(signal_event.signal_event):
 		if self.current_model:
 			self.current_model.validate_set()
 		self.display()
+		self.current_view.set_cursor()
 
 	def sel_ids_get(self):
 		return self.current_view.sel_ids_get()
 
 	def id_get(self):
+		if not self.current_model:
+			return False
 		return self.current_model.id
 
 	def ids_get(self):

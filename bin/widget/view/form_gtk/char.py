@@ -29,16 +29,16 @@
 
 import gettext
 import gtk
-from gtk import glade
 
 import common
 import interface
 
 class char(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
-		self.win_gl = glade.XML(common.terp_path("terp.glade"), "widget_char", 
-								gettext.textdomain())
-		self.widget = self.win_gl.get_widget('widget_char')
+		interface.widget_interface.__init__(self, window, parent, attrs=attrs)
+
+		self.widget = gtk.Entry()
+		self.widget.set_property('activates_default', True)
 		self.widget.set_max_length(int(attrs.get('size',16)))
 		self.widget.set_visibility(not attrs.get('invisible', False))
 		self.widget.set_width_chars(5)
@@ -47,17 +47,16 @@ class char(interface.widget_interface):
 		self.widget.connect('activate', self.sig_activate)
 		self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
 		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
-		interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
 
-	def set_value(self, model_field):
-		return model_field.set_client(self.widget.get_text() or False)
+	def set_value(self, model, model_field):
+		return model_field.set_client(model, self.widget.get_text() or False)
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.widget.set_text('')
 			return False
-		super(char, self).display(model_field)
-		self.widget.set_text(model_field.get() or '')
+		super(char, self).display(model, model_field)
+		self.widget.set_text(model_field.get(model) or '')
 
 	def _readonly_set(self, value):
 		self.widget.set_editable(not value)

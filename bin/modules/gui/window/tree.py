@@ -38,7 +38,7 @@ import rpc
 import options
 
 class tree(object):
-	def __init__(self, view, model, res_id=False, domain=[], context={}, window=None):
+	def __init__(self, view, model, res_id=False, domain=[], context={}, window=None, name=False):
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_tree_container',gettext.textdomain())
 		self.widget = self.glade.get_widget('win_tree_container')
 		self.widget.show_all()
@@ -51,7 +51,6 @@ class tree(object):
 		self.view = view
 		self.window=window
 
-		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', self.domain2)
 		self.context=context
 
 		self.tree_res = view_tree.view_tree(view, [], res_id, True, context=context)
@@ -60,11 +59,14 @@ class tree(object):
 		sel = self.tree_res.view.get_selection()
 		sel.connect('changed', self.expand_one)
 
-		self.name = self.tree_res.name
+		if not name:
+			self.name = self.tree_res.name
+		else:
+			self.name = name
 		self.vp = self.glade.get_widget('main_tree_sw')
 		
 		wid = self.glade.get_widget('widget_vbox')
-		if options.options['client.modepda']:
+		if options.options['client.modepda'] and not self.tree_res.toolbar:
 			wid.hide()
 		else:
 			wid.show()
@@ -91,10 +93,19 @@ class tree(object):
 		}
 
 		self.vp.add(self.tree_res.widget_get())
+		self.sig_reload()
+
+		for signal in dict:
+			self.glade.signal_connect(signal, dict[signal])
+
+	def sig_reload(self, widget=None):
+		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', self.domain2)
 		if self.tree_res.toolbar:
 			
 			icon_name = 'icon'
 			wid = self.glade.get_widget('tree_toolbar')
+			for w in wid.get_children():
+				wid.remove(w)
 			c = {}
 			c.update(rpc.session.context)
 			res_ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.view['model'], 'read', ids, ['name',icon_name], c)
@@ -105,10 +116,13 @@ class tree(object):
 				rb.set_label_widget(l)
 
 				icon = gtk.Image() 
-				if r[icon_name].startswith('STOCK_'):
+				if hasattr(r[icon_name], 'startswith') and r[icon_name].startswith('STOCK_'):
 					icon.set_from_stock(getattr(gtk, r[icon_name]), gtk.ICON_SIZE_BUTTON)
 				else:
-					icon.set_from_stock(r[icon_name], gtk.ICON_SIZE_BUTTON)
+					try:
+						icon.set_from_stock(r[icon_name], gtk.ICON_SIZE_BUTTON)
+					except:
+						pass
 
 				hb = gtk.HBox(spacing=6)
 				hb.pack_start(icon)
@@ -117,7 +131,6 @@ class tree(object):
 				rb.show_all()
 				rb.set_data('id', r['id'])
 				rb.connect('clicked', self.menu_main_clicked)
-				#rb.set_active(False)
 				self.menu_main_clicked(rb)
 				wid.insert(rb, -1)
 		else:
@@ -127,10 +140,6 @@ class tree(object):
 			wid.hide()
 			wid = self.glade.get_widget('tree_vpaned')
 			wid.set_position(-1)
-
-
-		for signal in dict:
-			self.glade.signal_connect(signal, dict[signal])
 
 	def menu_main_clicked(self, widget):
 		if widget.get_active():
@@ -174,14 +183,16 @@ class tree(object):
 		if not id and ids and len(ids):
 			id = ids[0]
 		if id:
+			ctx = self.context.copy()
+			if 'active_ids' in ctx:
+				del ctx['active_ids']
+			if 'active_id' in ctx:
+				del ctx['active_id']
 			obj = service.LocalService('action.main')
 			obj.exec_keyword(keyword, {'model':self.model, 'id':id,
-				'ids':ids, 'report_type':report_type, 'window': self.window})
+				'ids':ids, 'report_type':report_type, 'window': self.window}, context=ctx)
 		else:
 			common.message(_('No resource selected!'))
-
-	def sig_reload(self, widget=None):
-		self.tree_res.reload()
 
 	def sig_open(self, widget=None, *args):
 		self.sig_action(widget, 'tree_but_open' )
@@ -218,10 +229,18 @@ class tree(object):
 		obj.create(None, self.model, None, self.domain)
 
 	def sig_edit(self, widget=None):
+		id = False
 		ids = self.ids_get()
-		if len(ids):
+		if ids:
+			id = ids[0]
+		elif self.tree_res.toolbar:
+			wid = self.glade.get_widget('tree_toolbar')
+			for w in wid.get_children():
+				if w.get_active():
+					id = w.get_data('id')
+		if id:
 			obj = service.LocalService('gui.window')
-			obj.create(None, self.model, ids[0], self.domain)
+			obj.create(None, self.model, id, self.domain)
 		else:
 			common.message(_('No resource selected!'))
 
@@ -263,7 +282,10 @@ class tree(object):
 
 	def id_get(self):
 		try:
-			return self.search[self.search_pos]
+			if hasattr(self, 'search'):
+				return self.search[self.search_pos]
+			else:
+				return None
 		except IndexError:
 			return None
 

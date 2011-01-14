@@ -67,6 +67,8 @@ class build_conf(Command):
 
     description = 'update conf file'
 
+    user_options = []
+
     def initialize_options(self):
         self.prefix = None
 
@@ -148,8 +150,8 @@ class L10nAppDistribution(Distribution):
         self.modules_check = 0
         self.gconf = 1
         self.msg_sources = None
-        self.pot_file = None
         self.translations = []
+        self.name = attrs.get('name')
         Distribution.__init__(self, attrs)
         self.cmdclass = {
             'install' : l10napp_install,
@@ -157,7 +159,8 @@ class L10nAppDistribution(Distribution):
             'build' : l10napp_build,
             'build_mo' : build_mo,
             'build_conf' : build_conf,
-            'build_ext': BuildExt}
+            'build_ext': BuildExt,
+            }
 
     def has_po_files(self):
         return len(self.translations) > 0
@@ -167,3 +170,4 @@ def setup(**kwds):
     kwds['distclass'] = L10nAppDistribution
     setup(**kwds)
 
+# vim:expandtab:tw=80

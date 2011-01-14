@@ -32,6 +32,8 @@ import gtk
 
 import rpc
 import service
+import locale
+
 
 class AdaptModelGroup(gtk.GenericTreeModel):
 
@@ -75,9 +77,9 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 		self.sort_asc = not (self.sort_asc and (self.last_sort == name))
 		self.last_sort = name
 		if self.sort_asc:
-			f = lambda x,y: cmp(x[name].get_client(), y[name].get_client())
+			f = lambda x,y: cmp(x[name].get_client(x), y[name].get_client(y))
 		else:
-			f = lambda x,y: -1 * cmp(x[name].get_client(), y[name].get_client())
+			f = lambda x,y: -1 * cmp(x[name].get_client(x), y[name].get_client(y))
 		self.models.sort(f)
 		for idx, row in enumerate(self.models):
 			iter = self.get_iter(idx)
@@ -143,55 +145,82 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 	
 class ViewList(object):
 
-	def __init__(self, screen, widget, children={}, buttons={}, toolbar=None):
+	def __init__(self, screen, widget, children=None, buttons=None, toolbar=None):
 		self.store = None
 		self.screen = screen
 		self.view_type = 'tree'
 		self.model_add_new = True
-		self.widget = widget
-		self.widget.screen = screen
+		self.widget = gtk.VBox()
+		self.widget_tree = widget
+		scroll = gtk.ScrolledWindow()
+		scroll.add(self.widget_tree)
+		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+		self.widget.pack_start(scroll, expand=True, fill=True)
+		self.widget_tree.screen = screen
+		self.reload = False
+		self.children = children
+
+		if children:
+			hbox = gtk.HBox()
+			self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
+			for c in children:
+				hbox2 = gtk.HBox()
+				hbox2.pack_start(children[c][1], expand=True, fill=False)
+				hbox2.pack_start(children[c][2], expand=True, fill=False)
+				hbox.pack_start(hbox2, expand=False, fill=False, padding=12)
+			hbox.show_all()
 
 		self.display()
 
-		self.widget.connect('button-press-event', self.__hello)
-		self.widget.connect_after('row-activated', self.__sig_switch)
-		selection = self.widget.get_selection()
+		self.widget_tree.connect('button-press-event', self.__hello)
+		self.widget_tree.connect_after('row-activated', self.__sig_switch)
+		selection = self.widget_tree.get_selection()
+		selection.set_mode(gtk.SELECTION_MULTIPLE)
 		selection.connect('changed', self.__select_changed)
 
 	def __hello(self, treeview, event, *args):
 		if event.button==3:
 			path = treeview.get_path_at_pos(int(event.x),int(event.y))
 			selection = treeview.get_selection()
-			model, iter = selection.get_selected()
+			if selection.get_mode() == gtk.SELECTION_SINGLE:
+				model, iter = selection.get_selected()
+			elif selection.get_mode() == gtk.SELECTION_MULTIPLE:
+				model, paths = selection.get_selected_rows()
 			if (not path) or not path[0]:
 				return False
 			m = model.models[path[0][0]]
+
+			# TODO: add menu cache
 			if path[1]._type=='many2one':
-				value = m[path[1].name].get()
+				value = m[path[1].name].get(m)
+				resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.screen.fields[path[1].name]['relation'], False)], False, rpc.session.context)
+				resrelate = map(lambda x:x[2], resrelate)
 				menu = gtk.Menu()
-				finfo = self.screen.fields[path[1].name]
-				fields_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search',[('relation','=',finfo['relation']),('ttype','=','many2one'),('relate','=',True)])
-				fields = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'read', fields_id, ['name','model_id'], rpc.session.context)
-				models_id = [x['model_id'][0] for x in fields if x['model_id']]
-				fields = dict(map(lambda x: (x['model_id'][0], x['name']), fields))
-				models = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model', 'read', models_id, ['name','model'], rpc.session.context)
-				for model in models:
-					field = fields[model['id']]
-					model_name = model['model']
-					item = gtk.ImageMenuItem('... '+model['name'])
-					f = lambda model_name,field,value: lambda x: self._click_and_relate(model_name,field,value)
-					item.connect('activate', f(model_name,field,value) )
+				for x in resrelate:
+					x['string'] = x['name']
+					item = gtk.ImageMenuItem('... '+x['name'])
+					f = lambda action, value, model: lambda x: self._click_and_relate(action, value, model)
+					item.connect('activate', f(x, value, self.screen.fields[path[1].name]['relation']))
 					item.set_sensitive(bool(value))
 					item.show()
 					menu.append(item)
 				menu.popup(None,None,None,event.button,event.time)
 
-	def _click_and_relate(self, model, field, value):
-		ids = rpc.session.rpc_exec_auth('/object', 'execute', model, 'search',[(field,'=',value)])
-		obj = service.LocalService('gui.window')
-		#view_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'search', [('model','=',model),('type','=','form')])
-		obj.create(False, model, ids, [(field,'=',value)], 'form', None, mode='tree,form')
-		return True
+	def _click_and_relate(self, action, value, model):
+		data={}
+		context={}
+		act=action.copy()
+		if not(value):
+			common.message(_('You must select a record to use the relation !'))
+			return False
+		from widget.screen import Screen
+		screen = Screen(model)
+		screen.load([value])
+		act['domain'] = screen.current_model.expr_eval(act['domain'], check_load=False)
+		act['context'] = str(screen.current_model.expr_eval(act['context'], check_load=False))
+		obj = service.LocalService('action.main')
+		value = obj._exec_action(act, data, context)
+		return value
 
 
 	def signal_record_changed(self, signal, *args):
@@ -202,7 +231,8 @@ class ViewList(object):
 		elif signal=='record-removed':
 			self.store.removed(*args)
 		else:
-			assert False, 'Unknown Signal !'
+			pass
+		self.update_children()
 
 	def cancel(self):
 		pass
@@ -214,8 +244,9 @@ class ViewList(object):
 		return None
 
 	def destroy(self):
-		self.widget.destroy()
+		self.widget_tree.destroy()
 		del self.screen
+		del self.widget_tree
 		del self.widget
 
 	def __sig_switch(self, treeview, *args):
@@ -227,10 +258,16 @@ class ViewList(object):
 			if iter:
 				path = model.get_path(iter)[0]
 				self.screen.current_model = model.models[path]
+		elif tree_sel.get_mode() == gtk.SELECTION_MULTIPLE:
+			model, paths = tree_sel.get_selected_rows()
+			if paths:
+				self.screen.current_model = model.models[paths[0][0]]
+		self.update_children()
+
 
 	def set_value(self):
-		if self.widget.editable:
-			self.widget.set_value()
+		if self.widget_tree.editable:
+			self.widget_tree.set_value()
 
 	def reset(self):
 		pass
@@ -239,19 +276,32 @@ class ViewList(object):
 	# has not changed -> better ergonomy. To test
 	#
 	def display(self):
-		if (not self.widget.get_model()) or self.screen.models<>self.widget.get_model().model_group:
+		if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
 			self.store = AdaptModelGroup(self.screen.models)
-			self.widget.set_model(self.store)
-		if self.screen.current_model:
-			path = self.store.on_get_path(self.screen.current_model)
-			self.widget.set_cursor(path, self.widget.get_columns()[0], bool(self.widget.editable))
-		else:
+			self.widget_tree.set_model(self.store)
+		self.reload = False
+		if not self.screen.current_model:
 			#
 			# Should find a simpler solution to do something like
 			#self.widget.set_cursor(None,None,False)
 			#
 			if self.store:
-				self.widget.set_model(self.store)
+				self.widget_tree.set_model(self.store)
+		self.update_children()
+
+	def update_children(self):
+		ids = self.sel_ids_get()
+		for c in self.children:
+			value = 0.0
+			for model in self.screen.models.models:
+				if model.id in ids or not ids:
+					value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
+			self.children[c][2].set_label(locale.format('%.'+str(self.children[c][3])+'f', value))
+
+	def set_cursor(self):
+		if self.screen.current_model:
+			path = self.store.on_get_path(self.screen.current_model)
+			self.widget_tree.set_cursor(path, self.widget_tree.get_columns()[0], bool(self.widget_tree.editable))
 
 	def sel_ids_get(self):
 		def _func_sel_get(store, path, iter, ids):
@@ -259,17 +309,28 @@ class ViewList(object):
 			if model.id:
 				ids.append(model.id)
 		ids = []
-		sel = self.widget.get_selection()
+		sel = self.widget_tree.get_selection()
 		sel.selected_foreach(_func_sel_get, ids)
 		return ids
+
+	def sel_models_get(self):
+		def _func_sel_get(store, path, iter, models):
+			models.append(store.on_get_iter(path))
+		models = []
+		sel = self.widget_tree.get_selection()
+		sel.selected_foreach(_func_sel_get, models)
+		return models
 
 	def on_change(self, callback):
 		self.set_value()
 		self.screen.on_change(callback)
 
 	def unset_editable(self):
-		self.widget.editable = False
-		for col in self.widget.get_columns():
+		self.widget_tree.editable = False
+		for col in self.widget_tree.get_columns():
 			for renderer in col.get_cell_renderers():
-				renderer.set_property('editable', False)
+				if isinstance(renderer, gtk.CellRendererToggle):
+					renderer.set_property('activatable', False)
+				else:
+					renderer.set_property('editable', False)
 

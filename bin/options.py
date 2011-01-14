@@ -27,7 +27,7 @@
 ##############################################################################
 
 import ConfigParser,optparse
-import os
+import os, sys
 import gtk
 
 def get_home_dir():
@@ -61,13 +61,13 @@ class configmanager(object):
 			'login.login': 'demo',
 			'login.server': 'localhost',
 			'login.port': '8069',
-			'login.secure': False,
+			'login.protocol': 'http://',
 			'login.db': 'terp',
 			'client.modepda': False,
 			'client.toolbar': 'both',
 			'client.theme': 'none',
-			'path.share': os.path.dirname(__file__),
-			'path.pixmaps': os.path.dirname(__file__),
+			'path.share': os.path.join(sys.prefix, '/share/tinyerp-client/'),
+			'path.pixmaps': os.path.join(sys.prefix, '/share/pixmaps/tinyerp-client/'),
 			'tip.autostart': False,
 			'tip.position': 0,
 			'survey.position': 0,
@@ -84,6 +84,9 @@ class configmanager(object):
 			'support.recipient': 'support@tiny.be',
 			'support.support_id' : '',
 			'form.toolbar': True,
+			'client.form_tab': 'left',
+			'client.form_tab_orientation': 0,
+			'client.lang': False,
 		}
 		parser = optparse.OptionParser(version=_("Tiny ERP Client %s" % tinyerp_version))
 		parser.add_option("-c", "--config", dest="config",help=_("specify alternate config file"))

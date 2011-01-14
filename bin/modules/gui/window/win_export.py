@@ -127,9 +127,11 @@ def datas_read(ids, model, fields, fields_view, prefix=''):
 	return datas
 
 class win_export(object):
-	def __init__(self, model, ids, fields, preload = []):
+	def __init__(self, model, ids, fields, preload = [], parent=None):
 		self.glade = glade.XML(common.terp_path("terp.glade"), 'win_save_as', gettext.textdomain())
 		self.win = self.glade.get_widget('win_save_as')
+		if parent:
+			self.win.set_transient_for(parent)
 		self.ids = ids
 		self.model = model
 		self.fields_data = {}

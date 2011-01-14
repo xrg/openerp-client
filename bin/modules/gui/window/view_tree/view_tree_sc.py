@@ -31,13 +31,13 @@ import gobject
 import gtk
 
 import gettext
+import service
 
 class view_tree_sc(object):
 	def __init__(self, tree, model):
 		self.model = model
 		self.tree = tree
 		self.tree.get_selection().set_mode('single')
-		#self.tree.get_selection().connect('changed', self.go)
 		column = gtk.TreeViewColumn (_('ID'), gtk.CellRendererText(), text=0)
 		self.tree.append_column(column)
 		column.set_visible(False)
@@ -45,19 +45,25 @@ class view_tree_sc(object):
 
 		column = gtk.TreeViewColumn (_('Description'), cell, text=1)
 		self.tree.append_column(column)
-		#column = gtk.TreeViewColumn ('ID Pref', gtk.CellRendererText(), text=2)
-		#self.tree.append_column(column)
 		self.update()
+
 	def update(self):
 		store = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
 		uid =  rpc.session.uid
-		sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'search', [('user_id','=',rpc.session.uid), ('resource','=',self.model)])
-		if len(sc):
-			sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'read', sc, ['res_id', 'name'])
-			for s in sc:
-				num = store.append()
-				store.set(num, 0, s['res_id'], 1, s['name'], 2, s['id'])
+		try:
+			sc = rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, self.model, rpc.session.context)
+		except:
+			sc_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'search', [('user_id', '=', uid), ('resource', '=', self.model)])
+			if sc_ids:
+				sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'read', sc_ids, ['res_id', 'name'])
+			else:
+				sc = []
+		for s in sc:
+			num = store.append()
+			store.set(num, 0, s['res_id'], 1, s['name'], 2, s['id'])
 		self.tree.set_model(store)
+		if self.model == 'ir.ui.menu':
+			service.LocalService('gui.main').shortcut_set()
 
 	def remove(self, id):
 		self.update()

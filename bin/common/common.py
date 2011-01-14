@@ -33,9 +33,11 @@ import gobject
 import gettext
 
 import os
+import sys
 import common
 import logging
 from options import options
+import service
 
 import ConfigParser
 
@@ -45,63 +47,40 @@ import time
 #
 # Upgrade this number to force the client to ask the survey
 #
-SURVEY_VERSION = '2'
+SURVEY_VERSION = '3'
 
-def _search_file(x, dir='path.share'):
+def _search_file(file, dir='path.share'):
 	tests = [
 		lambda x: os.path.join(options.options[dir],x),
-		lambda x: os.path.join(os.getcwd(),x),
+		lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), x),
+		lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'pixmaps', x),
 	]
 	for func in tests:
+		x = func(file)
 		if os.path.exists(x):
-			break
-		x = func(x)
-	return x
+			return x
+	return False
 
 terp_path = _search_file
 terp_path_pixmaps = lambda x: _search_file(x, 'path.pixmaps')
 
-
-def start_file(fname):
-	try:
-		if os.name == 'nt':
-			os.startfile(fname)
-		else:
-			os.spawnv(os.P_NOWAIT, '/usr/bin/launcher',  ('launcher',fname))
-	except Exception, e:
-		common.error('Execution Error', _('Unable to launch this file !'), str(e))
-
-def start_content(content, fname=None):
-	try:
-		if not fname:
-			fname='terp.tmp'
-		ext = fname.split('.')[-1]
-
-		import tempfile
-		fp_name = tempfile.mktemp ("."+ext)
-
-		fp = file(fp_name, 'wb')
-		fp.write(content)
-		fp.close()
-	except:
-		common.message(_('Unable to launch the application associated to this content !'))
-		
-	start_file(fp_name)
-
-#
-# TODO: this code sucks
-#
-def selection(title, values, alwaysask=False):
-	if len(values)==0:
+def selection(title, values, alwaysask=False, parent=None):
+	if not values or len(values)==0:
 		return None
 	elif len(values)==1 and (not alwaysask):
 		key = values.keys()[0]
 		return (key, values[key])
+
 	xml = glade.XML(terp_path("terp.glade"), "win_selection", gettext.textdomain())
 	win = xml.get_widget('win_selection')
+	if not parent:
+		parent = service.LocalService('gui.main').window
+	win.set_transient_for(parent)
+
 	label = xml.get_widget('win_sel_title')
 	if title:
 		label.set_text(title)
+
 	list = xml.get_widget('win_sel_tree')
 	list.get_selection().set_mode('single')
 	cell = gtk.CellRendererText()
@@ -138,9 +117,9 @@ def selection(title, values, alwaysask=False):
 	win.destroy()
 	return res
 
-def tipoftheday():
+def tipoftheday(parent=None):
 	class tip(object):
-		def __init__(self):
+		def __init__(self, parent=None):
 			try:
 				self.number = int(options.options['tip.position'])
 			except:
@@ -149,6 +128,9 @@ def tipoftheday():
 				log.error('Invalid value for option tip.position ! See ~/.terprc !')
 			winglade=glade.XML(common.terp_path("terp.glade"), "win_tips", gettext.textdomain())
 			self.win = winglade.get_widget('win_tips')
+			if parent:
+				self.win.set_transient_for(parent)
+			self.win.show_all()
 			self.label = winglade.get_widget('tip_label')
 			self.check = winglade.get_widget('tip_checkbutton')
 			dict = {
@@ -162,7 +144,13 @@ def tipoftheday():
 			self.win.show_all()
 
 		def tip_set(self):
-			tips = file(terp_path('tipoftheday.txt')).read().split('---')
+			lang = options['client.lang']
+			f = False
+			if lang:
+				f = terp_path('tipoftheday.'+lang+'.txt')
+			if not f:
+				f = terp_path('tipoftheday.txt')
+			tips = file(f).read().split('---')
 			tip = tips[self.number % len(tips)]
 			del tips
 			self.label.set_text(tip)
@@ -183,18 +171,7 @@ def tipoftheday():
 			options.options['tip.position'] = self.number+1
 			options.save()
 			self.win.destroy()
-	tip2 = tip()
-	return True
-
-def upload_email(email):
-	try:
-		import urllib
-		args = urllib.urlencode([('mail_subscribe',email),('subscribe','Subscribe')])
-		fp = urllib.urlopen('http://tinyerp.com/index.html', args)
-		fp.read()
-		fp.close()
-	except:
-		pass
+	tip2 = tip(parent)
 	return True
 
 class upload_data_thread(threading.Thread):
@@ -205,25 +182,16 @@ class upload_data_thread(threading.Thread):
 		try:
 			import urllib
 			args = urllib.urlencode(self.args)
-			fp = urllib.urlopen('http://tinyerp.com/scripts/survey.php', args)
+			fp = urllib.urlopen('http://www.tinyerp.com/scripts/survey.php', args)
 			fp.read()
 			fp.close()
 		except:
 			pass
 
-
-def upload_data(email, data, type='survey2', supportid=''):
+def upload_data(email, data, type='SURVEY', supportid=''):
 	a = upload_data_thread(email, data, type, supportid)
 	a.start()
-	#try:
-	#	import urllib
-	#	args = urllib.urlencode([('email',email),('type',type),('supportid',supportid),('data',data)])
-	#	fp = urllib.urlopen('http://tinyerp.com/scripts/survey.php', args)
-	#	fp.read()
-	#	fp.close()
-	#	return True
-	#except:
-	#	return False
+	return True
 
 def terp_survey():
 	if options.options['survey.position']==SURVEY_VERSION:
@@ -231,9 +199,8 @@ def terp_survey():
 	import pickle
 	widnames = ('country','role','industry','employee','hear','system','opensource')
 	winglade = glade.XML(common.terp_path("terp.glade"), "dia_survey", gettext.textdomain())
-	options.options['survey.position']=SURVEY_VERSION
-	options.save()
 	win = winglade.get_widget('dia_survey')
+	win.set_transient_for(service.LocalService('gui.main').window)
 	for widname in widnames:
 		wid = winglade.get_widget('combo_'+widname)
 		wid.child.set_text('(choose one)')
@@ -241,31 +208,26 @@ def terp_survey():
 	res = win.run()
 	if res==gtk.RESPONSE_OK:
 		email =  winglade.get_widget('entry_email').get_text()
-		if '@' in email:
-			upload_email(email)
-		result = {}
+		company =  winglade.get_widget('entry_company').get_text()
+		result = "\ncompany: "+str(company)
 		for widname in widnames:
 			wid = winglade.get_widget('combo_'+widname)
-			result[widname] = wid.child.get_text()
-		result['plan_use']=winglade.get_widget('check_use').get_active()
-		result['plan_sell']=winglade.get_widget('check_sell').get_active()
+			result += "\n"+widname+": "+wid.child.get_text()
+		result += "\nplan_use: "+str(winglade.get_widget('check_use').get_active())
+		result += "\nplan_sell: "+str(winglade.get_widget('check_sell').get_active())
 
 		buffer = winglade.get_widget('textview_comment').get_buffer()
 		iter_start = buffer.get_start_iter()
 		iter_end = buffer.get_end_iter()
-		result['note'] = buffer.get_text(iter_start,iter_end,False)
-		result_pick = pickle.dumps(result)
+		result += "\nnote: "+buffer.get_text(iter_start,iter_end,False)
 		win.destroy()
-		upload_data(email, result_pick, type='SURVEY '+str(SURVEY_VERSION))
+		upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
+		options.options['survey.position']=SURVEY_VERSION
+		options.save()
+		common.message(_('Thank you for the feedback !\nYour comments have been sent to Tiny ERP.\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
 	else:
 		win.destroy()
-	return True
-
-def test():
-	gl = glade.XML(terp_path("terp.glade"), "dialog_test",gettext.textdomain())
-	widget = gl.get_widget('dialog_test')
-	widget.run()
-	widget.destroy()
+		common.message(_('Thank you for testing Tiny ERP !\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
 	return True
 
 def file_selection(title, filename='', parent=None):
@@ -299,6 +261,8 @@ def support(*args):
 
 	sur = glade.XML(terp_path("terp.glade"), "dia_support",gettext.textdomain())
 	win = sur.get_widget('dia_support')
+	win.set_transient_for(service.LocalService('gui.main').window)
+	win.show_all()
 	sur.get_widget('id_entry').set_text(support_id)
 
 	response = win.run()
@@ -317,19 +281,15 @@ def support(*args):
 		buffer = sur.get_widget('remark_textview').get_buffer()
 		remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
-		content = name +'(%s, %s, %s)'%(id_contract, company, phone) +' has reported the following bug : \n'+ explanation + '\nremarks : ' + remarks
+		content = name +"(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug:\n"+ explanation + "\nremarks:\n" + remarks
 
-		msg = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s\r\n" % (fromaddr, recipient, 'customer support', content))
-		msg_pick = pickle.dumps(msg)
-
-		if upload_data(fromaddr, msg_pick, 'support', id_contract):
+		if upload_data(fromaddr, content, 'support', id_contract):
 			common.message(_('Support request sent !'))
 
 	win.destroy()
 	return True
 
-def error(title, message, details=''):
-
+def error(title, message, details='', parent=None):
 	log = logging.getLogger('common.message')
 	log.error('MSG %s: %s' % (str(message),details))
 
@@ -342,6 +302,9 @@ def error(title, message, details=''):
 
 	sur = glade.XML(terp_path("terp.glade"), "win_error",gettext.textdomain())
 	win = sur.get_widget('win_error')
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 	sur.get_widget('error_title').set_text(str(title))
 	sur.get_widget('error_info').set_text(str(message))
 	buf = gtk.TextBuffer()
@@ -370,13 +333,9 @@ def error(title, message, details=''):
 		buffer = sur.get_widget('remarks_textview').get_buffer()
 		remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
-		content = name +'(%s, %s, %s)'%(id_contract, company, phone) +' has reported the following bug : \n'+ explanation + '\nremarks : ' + remarks
-		content += '\nThe traceback is : \n' + traceback
+		content = "(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug:\n"+ explanation + "\nremarks: " + remarks + "\nThe traceback is:\n" + traceback
 
-		msg = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s\r\n" % (fromaddr, recipient, 'customer support', content))
-		msg_pick = pickle.dumps(msg)
-
-		if upload_data(fromaddr, msg_pick, 'error', id_contract):
+		if upload_data(fromaddr, content, 'error', id_contract):
 			common.message(_('Support request sent !'))
 		return
 
@@ -388,6 +347,8 @@ def error(title, message, details=''):
 	return True
 
 def message(msg, type=gtk.MESSAGE_INFO, parent=None):
+	if not parent:
+		parent=service.LocalService('gui.main').window
 	dialog = gtk.MessageDialog(parent,
 	  gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
 	  type, gtk.BUTTONS_OK,
@@ -409,8 +370,9 @@ def message_box(title, msg, parent=None):
 	iter_start = buffer.get_start_iter()
 	buffer.insert(iter_start, msg)
 
-	if parent:
-		win.set_transient_for(parent)
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 
 	response = win.run()
 	win.destroy()
@@ -418,7 +380,10 @@ def message_box(title, msg, parent=None):
 
 
 def warning(msg, title='', parent=None):
-	dialog = gtk.MessageDialog(parent, gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK)
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	dialog = gtk.MessageDialog(parent, gtk.DIALOG_DESTROY_WITH_PARENT,
+			gtk.MESSAGE_WARNING, gtk.BUTTONS_OK)
 	dialog.set_markup('<b>%s</b>\n\n%s' % (to_xml(title),to_xml(msg)))
 	dialog.show_all()
 	dialog.run()
@@ -426,13 +391,18 @@ def warning(msg, title='', parent=None):
 	return True
 
 def sur(msg, parent=None):
+	if not parent:
+		parent=service.LocalService('gui.main').window
 	sur = glade.XML(terp_path("terp.glade"), "win_sur",gettext.textdomain())
 	win = sur.get_widget('win_sur')
+	win.set_transient_for(parent)
+	win.show_all()
 	l = sur.get_widget('lab_question')
 	l.set_text(msg)
 
-	if parent:
-		win.set_transient_for(parent)
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 
 	response = win.run()
 	win.destroy()
@@ -444,12 +414,20 @@ def sur_3b(msg, parent=None):
 	l = sur.get_widget('label')
 	l.set_text(msg)
 
-	if parent:
-		win.set_transient_for(parent)
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 
 	response = win.run()
 	win.destroy()
-	return {gtk.RESPONSE_NO : 'ko', gtk.RESPONSE_CANCEL : 'cancel', gtk.RESPONSE_YES : 'ok'}[response]
+	if response == gtk.RESPONSE_YES:
+		return 'ok'
+	elif response == gtk.RESPONSE_NO:
+		return 'ko'
+	elif response == gtk.RESPONSE_CANCEL:
+		return 'cancel'
+	else:
+		return 'cancel'
 
 def theme_set():
 	theme = options['client.theme']
@@ -468,8 +446,9 @@ def ask(question, parent=None):
 	label.set_text(question)
 	entry = dia.get_widget('entry')
 
-	if parent:
-		win.set_transient_for(parent)
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 
 	response = win.run()
 	win.destroy()
@@ -478,46 +457,30 @@ def ask(question, parent=None):
 	else:
 		return entry.get_text()
 
-def dec_trunc(nbr, prec=2):
-	return round(nbr * (10 ** prec)) / 10**prec
+def concurrency(resource, id, context, parent=None):
+	dia = glade.XML(common.terp_path("terp.glade"),'dialog_concurrency_exception',gettext.textdomain())
+	win = dia.get_widget('dialog_concurrency_exception')
+	
+	if not parent:
+		parent=service.LocalService('gui.main').window
+	win.set_transient_for(parent)
 
-class progress(object):
-	class _progress_thread(threading.Thread):
-		def __init__(self, win, pb_widget):
-			self.running=True
-			self.waiting = True
-			self.win=win
-			self.pb_widget=pb_widget
-			super(progress._progress_thread, self).__init__()
-		
-		def run(self):
-			time.sleep(2)
-			if not self.running:
-				self.waiting = False
-				return
-			self.win.show()
-			self.pb_widget.set_pulse_step(0.005)
-			while self.running:
-				self.pb_widget.pulse()
-				gtk.main_iteration()
-				time.sleep(0.01)
-			self.waiting = False
+	res= win.run()
+	win.destroy()
 
-		def stop(self):
-			self.running=False
-			while not self.waiting:
-				time.sleep(0.01)
+	if res == gtk.RESPONSE_OK:
+		return True
+	if res == gtk.RESPONSE_APPLY:
+		obj = service.LocalService('gui.window')
+		obj.create(False, resource, id, [], 'form', None, context,'form,tree')
+	return False
 
-	def __init__(self):
-		self.dialog = glade.XML(common.terp_path("terp.glade"), "win_progress", gettext.textdomain())
-		self.win = self.dialog.get_widget('win_progress')
-		self.pb_widget = self.dialog.get_widget('progressbar')
-		self.thread=self._progress_thread(self.win, self.pb_widget)
-		
-	def start(self):
-		self.thread.start()
+# Color set
 
-	def stop(self):
-		self.thread.stop()
-		self.win.destroy()
-		gtk.main_iteration()
+colors = {
+	'invalid':'#ff6969',
+	'readonly':'grey',
+	'required':'#d2d2ff',
+	'normal':'white'
+}
+

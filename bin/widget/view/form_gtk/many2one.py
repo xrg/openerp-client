@@ -29,7 +29,6 @@
 
 import gobject
 import gtk
-from gtk import glade
 import copy
 
 import gettext
@@ -48,28 +47,41 @@ import service
 
 
 class dialog(object):
-	def __init__(self, model, id=None, attrs={}):
-		self.win_gl = glade.XML(common.terp_path("terp.glade"), "dia_form_win_many2one", gettext.textdomain())
-		self.dia = self.win_gl.get_widget('dia_form_win_many2one')
+	def __init__(self, model, id=None, attrs={} ,domain=[], context={}, window=None):
+
+		self.dia = gtk.Dialog(_('Tiny ERP - Link'), window,
+				gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT,
+				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+					gtk.STOCK_OK, gtk.RESPONSE_OK))
 		if ('string' in attrs) and attrs['string']:
 			self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
-		self.sw = self.win_gl.get_widget('many2one_vp')
+		self.dia.set_property('default-width', 760)
+		self.dia.set_property('default-height', 500)
 
-		self.screen = Screen(model)
+		scroll = gtk.ScrolledWindow()
+		scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+		scroll.set_placement(gtk.CORNER_TOP_LEFT)
+		scroll.set_shadow_type(gtk.SHADOW_NONE)
+		self.dia.vbox.pack_start(scroll, expand=True, fill=True)
+
+		vp = gtk.Viewport()
+		vp.set_shadow_type(gtk.SHADOW_NONE)
+		scroll.add(vp)
+
+		self.screen = Screen(model, domain=domain, context=context, window=self.dia, view_type=['form'])
 		if id:
 			self.screen.load([id])
 		else:
 			self.screen.new()
+		vp.add(self.screen.widget)
+		self.dia.show_all()
 		self.screen.display()
-		self.sw.add(self.screen.widget)
-		#self.sw.show_all()
 
 	def run(self, datas={}):
 		while True:
 			res = self.dia.run()
 			if res==gtk.RESPONSE_OK:
-				if self.screen.current_model.validate():
-					self.screen.save_current()
+				if self.screen.current_model.validate() and self.screen.save_current():
 					return (True, self.screen.current_model.name_get())
 				else:
 					self.screen.display()
@@ -82,36 +94,57 @@ class dialog(object):
 
 class many2one(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
-		self._readonly = False
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_reference")
-		self.win_gl.signal_connect('on_reference_new_button_press', self.sig_new )
-		self.win_gl.signal_connect('on_reference_edit_button_press', self.sig_edit )
-		self.widget = self.win_gl.get_widget('widget_reference')
+
+		self.widget = gtk.HBox(spacing=3)
+		self.widget.set_property('sensitive', True)
+		self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
+		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
+
+		self.wid_text = gtk.Entry()
+		self.wid_text.set_property('width-chars', 13)
+		self.wid_text.connect('key_press_event', self.sig_key_press)
+		self.wid_text.connect('button_press_event', self._menu_open)
+		self.wid_text.connect_after('changed', self.sig_changed)
+		self.wid_text.connect_after('activate', self.sig_activate)
+		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+		self.widget.pack_start(self.wid_text, expand=True, fill=True)
+
+		self.but_new = gtk.Button()
+		img_new = gtk.Image()
+		img_new.set_from_stock('gtk-new',gtk.ICON_SIZE_BUTTON)
+		self.but_new.set_image(img_new)
+		self.but_new.set_relief(gtk.RELIEF_NONE)
+		self.but_new.connect('clicked', self.sig_new)
+		self.but_new.set_alignment(0.5, 0.5)
+		self.but_new.set_property('can-focus', False)
+		self.widget.pack_start(self.but_new, expand=False, fill=False)
+
+		self.but_open = gtk.Button()
+		img_find = gtk.Image()
+		img_find.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
+		img_open = gtk.Image()
+		img_open.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
+		self.but_open.set_image(img_find)
+		self.but_open.set_relief(gtk.RELIEF_NONE)
+		self.but_open.connect('clicked', self.sig_edit)
+		self.but_open.set_alignment(0.5, 0.5)
+		self.but_open.set_property('can-focus', False)
+		self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
+
+		tooltips = gtk.Tooltips()
+		tooltips.set_tip(self.but_new, _('Create a new resource'))
+		tooltips.set_tip(self.but_open, _('Search / Open a resource'))
+		tooltips.enable()
+
+		self.ok = True
+		self._readonly = False
 		self.model_type = attrs['relation']
-		
 		self._menu_loaded = False
 		self._menu_entries.append((None, None, None))
 		self._menu_entries.append((_('Action'), lambda x: self.click_and_action('client_action_multi'),0))
 		self._menu_entries.append((_('Report'), lambda x: self.click_and_action('client_print_multi'),0))
 
-		self.parent = parent
-		#self.widget.set_property('can-focus', True)
-		#self.widget.set_property('can-default', True)
-
-		#self.widget.set_property('sensitive', False)
-		self.widget.set_property('sensitive', True)
-
-		self.win_gl.get_widget('but_many2one_new').set_property('can-focus', False)
-		self.win_gl.get_widget('but_many2one_open').set_property('can-focus', False)
-
-		self.wid_text = self.win_gl.get_widget('ent_reference')
-		self.ok = True
-		self.wid_text.connect_after('changed', self.sig_changed)
-		self.wid_text.connect('key_press_event', self.sig_key_press)
-		self.wid_text.connect_after('activate', self.sig_activate)
-		self.wid_text.connect('button_press_event', self._menu_open)
-		self.image_search = self.win_gl.get_widget('but_m2o_image')
 
 		if attrs.get('completion',False):
 			ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', '', [], 'ilike', {})
@@ -148,16 +181,15 @@ class many2one(interface.widget_interface):
 		context = self._view.modelfield.context_get()
 		ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', name, domain, 'ilike', context)
 		if len(ids)==1:
-			self._view.modelfield.set_client(ids[0])
-			self.display(self._view.modelfield)
+			self._view.modelfield.set_client(self._view.model, ids[0])
+			self.display(self._view.model, self._view.modelfield)
 			self.ok = True
-			# return True
 		else:
-			win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain)
+			win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, window=self._window)
 			ids = win.go()
 			if ids:
 				name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
-				self._view.modelfield.set_client(name)
+				self._view.modelfield.set_client(self._view.model, name)
 		return True
 
 
@@ -166,7 +198,7 @@ class many2one(interface.widget_interface):
 		self._readonly = value
 		self.wid_text.set_editable(not value)
 		self.wid_text.set_sensitive(not value)
-		self.win_gl.get_widget('but_many2one_new').set_sensitive(not value)
+		self.but_new.set_sensitive(not value)
 
 	def _color_widget(self):
 		return self.wid_text
@@ -178,96 +210,98 @@ class many2one(interface.widget_interface):
 		res = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['model'], 'default_get', [self.attrs['name']])
 		self.value = res.get(self.attrs['name'], False)
 
-	def sig_activate(self, *args):
+	def sig_activate(self, widget, event=None, leave=False):
 		self.ok = False
-		value = self._view.modelfield.get()
+		value = self._view.modelfield.get(self._view.model)
 
+		self.wid_text.disconnect(self.wid_text_focus_out_id)
 		if value:
-			dia = dialog(self.attrs['relation'], self._view.modelfield.get(), attrs=self.attrs)
-			ok, value = dia.run()
-			if ok:
-				self._view.modelfield.set_client(value)
-				self.value = value
-			dia.destroy()
+			if not leave:
+				dia = dialog(self.attrs['relation'], self._view.modelfield.get(self._view.model), attrs=self.attrs, window=self._window)
+				ok, value = dia.run()
+				if ok:
+					self._view.modelfield.set_client(self._view.model, value)
+					self.value = value
+				dia.destroy()
 		else:
-			if not self._readonly:
-				domain = self._view.modelfield.domain_get()
-				context = self._view.modelfield.context_get()
+			if not self._readonly and ( self.wid_text.get_text() or not leave):
+				domain = self._view.modelfield.domain_get(self._view.model)
+				context = self._view.modelfield.context_get(self._view.model)
 
 				ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', self.wid_text.get_text(), domain, 'ilike', context)
 				if len(ids)==1:
-					self._view.modelfield.set_client(ids[0])
-					self.display(self._view.modelfield)
+					self._view.modelfield.set_client(self._view.model, ids[0])
+					self.display(self._view.model, self._view.modelfield)
 					self.ok = True
+					self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 					return True
 
-				win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain)
+				win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self._window)
 				ids = win.go()
 				if ids:
 					name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
-					self._view.modelfield.set_client(name)
-		self.display(self._view.modelfield)
+					self._view.modelfield.set_client(self._view.model, name)
+		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
+		self.display(self._view.model, self._view.modelfield)
 		self.ok=True
 
 	def sig_new(self, *args):
-		dia = dialog(self.attrs['relation'], attrs=self.attrs)
+		self.wid_text.disconnect(self.wid_text_focus_out_id)
+		dia = dialog(self.attrs['relation'], attrs=self.attrs, window=self._window)
 		ok, value = dia.run()
 		if ok:
-			self._view.modelfield.set_client(value)
-			self.display(self._view.modelfield)
+			self._view.modelfield.set_client(self._view.model, value)
+			self.display(self._view.model, self._view.modelfield)
 		dia.destroy()
+		self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_activate, True)
 	sig_edit = sig_activate
 
 	def sig_key_press(self, widget, event, *args):
 		if event.keyval==gtk.keysyms.F1:
-			self.sig_new()
+			self.sig_new(widget, event)
 		elif event.keyval==gtk.keysyms.F2:
-			self.sig_activate()
+			self.sig_activate(widget, event)
 		return False
 
 	def sig_changed(self, *args):
 		if self.ok:
-			if self._view.modelfield.get():
-				self._view.modelfield.set_client(False)
-				self.display(self._view.modelfield)
+			if self._view.modelfield.get(self._view.model):
+				self._view.modelfield.set_client(self._view.model, False)
+				self.display(self._view.model, self._view.modelfield)
 		return False
 
-	#
-	# No update of the model, the model is updated in real time !
-	#
-	def set_value(self, model_field):
-		pass
+	def set_value(self, model, model_field):
+		pass # No update of the model, the model is updated in real time !
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.ok = False
 			self.wid_text.set_text('')
 			return False
-		super(many2one, self).display(model_field)
+		super(many2one, self).display(model, model_field)
 		self.ok=False
-		res = model_field.get_client()
-		self.wid_text.set_text(res or '')
+		res = model_field.get_client(model)
+		self.wid_text.set_text((res and str(res)) or '')
+		img = gtk.Image()
 		if res:
-			self.image_search.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
+			img.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
+			self.but_open.set_image(img)
 		else:
-			self.image_search.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
+			img.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
+			self.but_open.set_image(img)
 		self.ok=True
 
 	def _menu_open(self, obj, event):
 		if event.button == 3:
-			value = self._view.modelfield.get()
+			value = self._view.modelfield.get(self._view.model)
 			if not self._menu_loaded:
-				fields_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search',[('relation','=',self.model_type),('ttype','=','many2one'),('relate','=',True)])
-				fields = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'read', fields_id, ['name','model_id'], rpc.session.context)
-				models_id = [x['model_id'][0] for x in fields if x['model_id']]
-				fields = dict(map(lambda x: (x['model_id'][0], x['name']), fields))
-				models = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model', 'read', models_id, ['name','model'], rpc.session.context)
+				resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.model_type, False)], False, rpc.session.context)
+				resrelate = map(lambda x:x[2], resrelate)
 				self._menu_entries.append((None, None, None))
-				for model in models:
-					field = fields[model['id']]
-					model_name = model['model']
-					f = lambda model_name,field: lambda x: self.click_and_relate(model_name,field)
-					self._menu_entries.append(('... '+model['name'], f(model_name,field), 0))
+				for x in resrelate:
+					x['string'] = x['name']
+					f = lambda action: lambda x: self.click_and_relate(action)
+					self._menu_entries.append(('... '+x['name'], f(x), 0))
 			self._menu_loaded = True
 
 			menu = gtk.Menu()
@@ -285,19 +319,24 @@ class many2one(interface.widget_interface):
 			return True
 		return False
 
-	#
-	# Open a view with ids: [(field,'=',value)]
-	#
-	def click_and_relate(self, model, field):
-		value = self._view.modelfield.get()
-		ids = rpc.session.rpc_exec_auth('/object', 'execute', model, 'search',[(field,'=',value)])
-		obj = service.LocalService('gui.window')
-		#view_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'search', [('model','=',model),('type','=','form')])
-		obj.create(False, model, ids, [(field,'=',value)], 'form', None, mode='tree,form')
-		return True
+	def click_and_relate(self, action):
+		data={}
+		context={}
+		act=action.copy()
+		id = self._view.modelfield.get(self._view.model)
+		if not(id):
+			common.message(_('You must select a record to use the relation !'))
+			return False
+		screen = Screen(self.attrs['relation'])
+		screen.load([id])
+		act['domain'] = screen.current_model.expr_eval(act['domain'], check_load=False)
+		act['context'] = str(screen.current_model.expr_eval(act['context'], check_load=False))
+		obj = service.LocalService('action.main')
+		value = obj._exec_action(act, data, context)
+		return value
 
 	def click_and_action(self, type):
-		id = self._view.modelfield.get()
+		id = self._view.modelfield.get(self._view.model)
 		obj = service.LocalService('action.main')
 		res = obj.exec_keyword(type, {'model':self.model_type, 'id': id or False, 'ids':[id], 'report_type': 'pdf'})
 		return True

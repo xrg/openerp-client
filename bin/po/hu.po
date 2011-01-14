@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tiny ERP V2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-28 13:16+0200\n"
+"POT-Creation-Date: 2007-06-13 17:21+0200\n"
 "PO-Revision-Date: 2005-04-17 20:27+0200\n"
 "Last-Translator: Szilard Novaki <novaki@agmen-software.com>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
@@ -16,1010 +16,487 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: bin/plugins/__init__.py:20
-#, fuzzy
-msgid "No available plugin for this resource !"
-msgstr "Nincs betölthető modul a megadott elemhez!"
-
-#: bin/plugins/__init__.py:22
-msgid "Choose a Plugin"
-msgstr "Válasszon egy modult"
-
-#: bin/printer/printer.py:136
-msgid "Write Report to File"
-msgstr "Jelentés készítése"
-
-#: bin/printer/printer.py:142 bin/widget/view/form_gtk/binary.py:70
-msgid "Error writing the file!"
-msgstr "Fájlírási hiba!"
-
-#: bin/widget/view/tree_gtk/editabletree.py:105
-msgid "Relation Field: F1 New   F2 Open/Search"
-msgstr ""
-
-#: bin/widget/view/tree_gtk/editabletree.py:152
-#, python-format
-msgid "Warning; field \"%s\" is required !"
-msgstr ""
-
-#: bin/widget/view/form_gtk/many2one.py:93 bin/terp.glade:1704
-msgid "Action"
-msgstr "Művelet"
-
-#: bin/widget/view/form_gtk/many2one.py:94
-msgid "Report"
-msgstr ""
-
-#: bin/widget/view/form_gtk/wid_common.py:54
-msgid "Always applicable !"
-msgstr ""
-
-#: bin/widget/view/form_gtk/interface.py:52 bin/terp.glade:2889
-msgid "Set to default value"
-msgstr "Alapértelmezett értékek betöltése"
-
-#: bin/widget/view/form_gtk/interface.py:53
-#, fuzzy
-msgid "Set default"
-msgstr "_Alapértelmezett"
-
-#: bin/widget/view/form_gtk/form.py:86
-#, fuzzy
-msgid "Invalid Form, correct red fields !"
-msgstr "Hibás űrlap! Javítsa a pirossal jelölt mezőket!"
-
-#: bin/widget/view/form_gtk/calendar.py:95
-#: bin/widget/view/form_gtk/calendar.py:173
-msgid "This widget is readonly !"
-msgstr ""
-
-#: bin/widget/view/form_gtk/image.py:43
-#, fuzzy
-msgid "Select a file"
-msgstr "Adja meg a dátumot"
-
-#: bin/widget/view/form_gtk/image.py:89
-#, fuzzy
-msgid "Save as ..."
-msgstr "Melléklet mentése másként"
-
-#: bin/widget/view/form_gtk/image.py:95
-msgid "Open file ..."
-msgstr ""
-
-#: bin/widget/view/form_gtk/one2many_list.py:139
-#, fuzzy
-msgid "You have to select a resource !"
-msgstr "Válasszon ki egy elemet!"
-
-#: bin/widget/view/form_gtk/binary.py:54
-msgid "Select the file to attach"
-msgstr "Adja meg a csatolandó fájlt"
-
-#: bin/widget/view/form_gtk/binary.py:61
-msgid "Error reading the file"
-msgstr "Hiba a fájl olvasása közben"
-
-#: bin/widget/view/form_gtk/binary.py:65
-msgid "Save attachment as..."
-msgstr "Melléklet mentése másként"
-
-#: bin/widget/view/form_gtk/binary.py:93
-#, python-format
-msgid "%d bytes"
-msgstr ""
-
-#: bin/widget/view/form.py:98 bin/widget/view/form.py:106
-msgid "You must select a record to use the relate button !"
-msgstr ""
-
-#: bin/common/common.py:69
-#, fuzzy
-msgid "Unable to launch this file !"
-msgstr "Nem lehet elindítani a következő programot !"
-
-#: bin/common/common.py:84
-msgid "Unable to launch the application associated to this content !"
-msgstr "Nem indítható el a tartalmat megjelenítő alkalmazás"
-
-#: bin/common/common.py:302 bin/common/common.py:356
-#, fuzzy
-msgid "Support request sent !"
-msgstr "<b>Támogatási kérelem</b>"
-
-#: bin/modules/gui/window/view_tree/view_tree_sc.py:41
-#: bin/modules/gui/window/form.py:203
-msgid "ID"
-msgstr "Azonosító"
-
-#: bin/modules/gui/window/view_tree/view_tree_sc.py:46
-msgid "Description"
-msgstr "Leírás"
-
-#: bin/modules/gui/window/view_tree/parse.py:42
-msgid "Tree"
-msgstr "Fa"
-
-#: bin/modules/gui/window/win_export.py:58
-msgid " record(s) saved !"
-msgstr " rekord elmentve !"
-
-#: bin/modules/gui/window/win_export.py:61
-msgid ""
-"Operation failed !\n"
-"I/O error"
-msgstr ""
-"Művelet sikertelen !\n"
-"Be-/Kimeneti hiba"
-
-#: bin/modules/gui/window/win_export.py:85
-msgid "Error Opening Excel !"
-msgstr "Hiba az Excel adatok megnyitásánál !"
-
-#: bin/modules/gui/window/win_export.py:87
-#, fuzzy
-msgid ""
-"Function only available for MS Office !\n"
-"Sorry, OOo users :("
-msgstr ""
-"A funkció csak MS Office felhasználók számára elérhető !\n"
-"Elnézést kérünk az OOo felhasználóktól :("
-
-#: bin/modules/gui/window/win_export.py:273
-#, fuzzy
-msgid "Export Data"
-msgstr "Adatok exportálása"
-
-#: bin/modules/gui/window/win_preference.py:49
-msgid "Preferences"
-msgstr "Beállítások"
-
-#: bin/modules/gui/window/win_preference.py:73
-msgid "Preference"
-msgstr "Beállítás"
-
-#: bin/modules/gui/window/__init__.py:38
-msgid "Unknown Window"
-msgstr "Ismeretlen ablak"
-
-#: bin/modules/gui/window/tree.py:78 bin/modules/gui/window/form.py:105
-msgid "Reload"
-msgstr "Újratölt"
-
-#: bin/modules/gui/window/tree.py:79
-msgid "Switch View"
-msgstr ""
-
-#: bin/modules/gui/window/tree.py:80
-msgid "Changt root"
-msgstr "Gyökér megváltoztatás"
-
-#: bin/modules/gui/window/tree.py:81 bin/modules/gui/window/tree.py:82
-msgid "Open"
-msgstr "Megnyitás"
-
-#: bin/modules/gui/window/tree.py:83 bin/modules/gui/window/tree.py:84
-msgid "Print"
-msgstr "Nyomtatás"
-
-#: bin/modules/gui/window/tree.py:85
-msgid "Close"
-msgstr "Bezárás"
-
-#: bin/modules/gui/window/tree.py:179 bin/modules/gui/window/tree.py:224
-msgid "No resource selected!"
-msgstr "Nincs elem kiválasztva!"
-
-#: bin/modules/gui/window/tree.py:190
-msgid ""
-"Are you sure you want\n"
-"to remove this record?"
-msgstr "Biztos hogy törölni szeretné a rekordot?"
-
-#: bin/modules/gui/window/tree.py:195
-msgid "Error removing resource!"
-msgstr "Hiba az elem törlése során!"
-
-#: bin/modules/gui/window/tree.py:206
-msgid "Unable to chroot: no tree resource selected"
-msgstr "Nem lehet megváltoztatni a gyökeret: nincs faelem kiválasztva"
-
-#: bin/modules/gui/window/win_attach.py:108
-#, fuzzy
-msgid "Are you sure you want to remove this attachment ?"
-msgstr "Biztos hogy törölni szeretné a rekordot?"
-
-#: bin/modules/gui/window/win_attach.py:113
-#: bin/modules/gui/window/win_attach.py:135
-msgid "Select the destination file"
-msgstr "Adja meg a célfájlt"
-
-#: bin/modules/gui/window/win_attach.py:124
-msgid "Can not open file !"
-msgstr "Nem lehet megnyitni a fájlt !"
-
-#: bin/modules/gui/window/win_attach.py:144
-#: bin/modules/gui/window/win_attach.py:255
-msgid "Can not write file !"
-msgstr "Nem lehet írni a fájlt!"
-
-#: bin/modules/gui/window/win_attach.py:242
-msgid ""
-"Unable to preview image file !\n"
-"Verify the format."
-msgstr ""
-
-#: bin/modules/gui/window/win_search.py:74
-#, fuzzy, python-format
-msgid "Tiny ERP Search: %s"
-msgstr "Tiny ERP - Keresés"
-
-#: bin/modules/gui/window/win_search.py:75
-#, fuzzy, python-format
-msgid "Tiny ERP Search: %s (%%d result(s))"
-msgstr "Tiny ERP - Felületelemek keresése"
-
-#: bin/modules/gui/window/win_selection.py:55
-msgid "Name"
-msgstr "Név"
-
-#: bin/modules/gui/window/win_selection.py:59
-msgid "Ressource Name"
-msgstr "Elemnév"
-
-#: bin/modules/gui/window/win_selection.py:59
-msgid "Names"
-msgstr "Nevek"
-
-#: bin/modules/gui/window/form.py:177 bin/modules/gui/window/form.py:367
-#, fuzzy
-msgid "No resource selected !"
-msgstr "Nincs kiválasztott elem !"
-
-#: bin/modules/gui/window/form.py:197
-#, fuzzy
-msgid "You have to select one resource!"
-msgstr "Válasszon ki egy elemet!"
-
-#: bin/modules/gui/window/form.py:204
-msgid "Creation User"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:205
-msgid "Creation Date"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:206
-msgid "Latest Modification by"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:207
-msgid "Latest Modification Date"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:208
-msgid "Owner"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:209
-msgid "Group Owner"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:210
-msgid "Access Level"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:220
-#, fuzzy
-msgid "Are you sure to remove this record ?"
-msgstr "Biztos hogy törölni szeretné a rekordot?"
-
-#: bin/modules/gui/window/form.py:223
-#, fuzzy
-msgid "Resource not removed !"
-msgstr "Elem törölve."
-
-#: bin/modules/gui/window/form.py:225
-msgid "Resource removed."
-msgstr "Elem törölve."
-
-#: bin/modules/gui/window/form.py:249
-msgid "Working now on the duplicated document !"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:258
-#, fuzzy
-msgid "Document saved !"
-msgstr "Beállítások elmentve!"
-
-#: bin/modules/gui/window/form.py:262
-msgid "Invalid form !"
-msgstr ""
-
-#: bin/modules/gui/window/form.py:314
-msgid "No record selected!"
-msgstr "Nincs kiválasztott rekord!"
-
-#: bin/modules/gui/window/form.py:342
-#, fuzzy
-msgid "No record selected"
-msgstr "Nincs kiválasztott rekord!"
-
-#: bin/modules/gui/window/form.py:347
-msgid "New document"
-msgstr "Új dokumentum"
-
-#: bin/modules/gui/window/form.py:349
-#, fuzzy
-msgid "Editing document (id: "
-msgstr "Dokumentum szerkesztés alatt"
-
-#: bin/modules/gui/window/form.py:350
-msgid "Record: "
-msgstr "Rekord: "
-
-#: bin/modules/gui/window/form.py:365
-#, fuzzy
-msgid "No preference available for this resource !"
-msgstr "Az elemnek nincs beállítási lehetősége !"
-
-#: bin/modules/gui/window/form.py:371
-msgid ""
-"This record has been modified\n"
-"do you want to save it ?"
-msgstr ""
-
-#: bin/modules/gui/window/win_import.py:53
-#, python-format
-msgid "Imported %d objects !"
-msgstr ""
-
-#: bin/modules/gui/window/win_import.py:79
-#: bin/modules/gui/window/win_import.py:83
-msgid "Field name"
-msgstr "Mező neve"
-
-#: bin/modules/gui/main.py:173 bin/modules/gui/main.py:435
-msgid "Press Ctrl+O to login"
-msgstr ""
-
-#: bin/modules/gui/main.py:214 bin/terp.glade:1234
-#, fuzzy
-msgid "Default Theme"
-msgstr "Alapértelmezett érték:"
-
-#: bin/modules/gui/main.py:383
-#, fuzzy, python-format
-msgid "%s request(s)"
-msgstr " kérések"
-
-#: bin/modules/gui/main.py:385
-msgid "No request"
-msgstr "Nincs kérés"
-
-#: bin/modules/gui/main.py:387
-#, fuzzy, python-format
-msgid " - %s pending request(s)"
-msgstr " függő kérések"
-
-#: bin/modules/gui/main.py:418
-#, fuzzy
-msgid ""
-"Connection error !\n"
-"Unable to connect to the server !"
-msgstr ""
-"Kapcsolatfelvételi hiba !\n"
-"Rossz felhasználói név vagy jelszó !"
-
-#: bin/modules/gui/main.py:420
-msgid ""
-"Connection error !\n"
-"Bad username or password !"
-msgstr ""
-"Kapcsolatfelvételi hiba !\n"
-"Rossz felhasználói név vagy jelszó !"
-
-#: bin/modules/gui/main.py:424
-msgid "Connection Error !"
-msgstr "Kapcsolatfelvételi hiba !"
-
-#: bin/modules/gui/main.py:433
-msgid "Not logged !"
-msgstr ""
-
-#: bin/modules/gui/main.py:494 bin/modules/gui/main.py:498
-msgid "Do you really want to quit ?"
-msgstr ""
-
-#: bin/modules/gui/main.py:592
-msgid "The database name must contain only normal characters or \"_\""
-msgstr ""
-
-#: bin/modules/gui/main.py:592
-msgid "Bad database name !"
-msgstr ""
-
-#: bin/modules/gui/main.py:605 bin/modules/gui/main.py:620
-#: bin/modules/gui/main.py:650
-msgid "Bad database administrator password !"
-msgstr ""
-
-#: bin/modules/gui/main.py:605 bin/modules/gui/main.py:607
-msgid "Could not create database."
-msgstr ""
-
-#: bin/modules/gui/main.py:607 bin/modules/gui/main.py:780
-msgid "Error during database creation !"
-msgstr ""
-
-#: bin/modules/gui/main.py:611
-#, fuzzy
-msgid "Delete a database"
-msgstr "Adja meg a dátumot"
-
-#: bin/modules/gui/main.py:617
-msgid "Database dropped successfully !"
-msgstr ""
-
-#: bin/modules/gui/main.py:620
-msgid "Could not drop database."
-msgstr ""
-
-#: bin/modules/gui/main.py:622
-msgid "Couldn't drop database"
-msgstr ""
-
-#: bin/modules/gui/main.py:647
-msgid "Database restored successfully !"
-msgstr ""
-
-#: bin/modules/gui/main.py:650
-msgid "Could not restore database."
-msgstr ""
-
-#: bin/modules/gui/main.py:652
-msgid "Couldn't restore database"
-msgstr ""
-
-#: bin/modules/gui/main.py:670
-msgid "Confirmation password do not match new password, operation cancelled!"
-msgstr ""
-
-#: bin/modules/gui/main.py:670
-#, fuzzy
-msgid "Validation Error."
-msgstr "Alkalmazás hiba"
-
-#: bin/modules/gui/main.py:676
-msgid "Could not change password database."
-msgstr ""
-
-#: bin/modules/gui/main.py:676
-msgid "Bas password provided !"
-msgstr ""
-
-#: bin/modules/gui/main.py:678
-msgid "Error, password not changed."
-msgstr ""
-
-#: bin/modules/gui/main.py:683 bin/modules/gui/main.py:708
-msgid "Backup a database"
-msgstr ""
-
-#: bin/modules/gui/main.py:704
-msgid "Database backuped successfully !"
-msgstr ""
-
-#: bin/modules/gui/main.py:706
-msgid "Couldn't backup database."
-msgstr ""
-
-#: bin/modules/gui/main.py:773
-msgid "Database created successfully !"
-msgstr ""
-
-#: bin/modules/gui/main.py:780
-msgid ""
-"The server crashed during installation.\n"
-"We suggest you to drop this database."
-msgstr ""
-
-#: bin/modules/action/main.py:51
-msgid "Nothing to print!"
-msgstr ""
-
-#: bin/modules/action/main.py:65
-msgid "Printing aborted, too long delay !"
-msgstr "Nyomtatás megszakítva időtúllépés miatt!"
-
-#: bin/modules/action/main.py:69 bin/modules/action/main.py:122
-msgid "Error: "
-msgstr "Hiba: "
-
-#: bin/modules/action/main.py:129
-msgid "Select your action"
-msgstr "Válasszon feladatot"
-
-#: bin/modules/action/main.py:135
-msgid "No action defined!"
-msgstr "Nincs művelet megadva a kiválasztott ponthoz!"
-
-#: bin/options.py:88
-#, fuzzy, python-format
-msgid "Tiny ERP Client %s"
-msgstr "Tiny ERP Kliens v2.0"
-
-#: bin/options.py:89
-msgid "specify alternate config file"
-msgstr "adjon meg másik konfigurációs fájlt"
-
-#: bin/options.py:90
-msgid "enable basic debugging"
-msgstr "csökkentett nyomkövetés engedélyezése"
-
-#: bin/options.py:91
-msgid "specify channels to log"
-msgstr "Adja meg a naplózandó csatornákat"
-
-#: bin/options.py:92
-msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-msgstr "adja meg a naplózási szintet (INFO, DEBUG, WARNING, ERROR, CRITICAL)"
-
-#: bin/options.py:93
-#, fuzzy
-msgid "specify the user login"
-msgstr "Adja meg a naplózandó csatornákat"
-
-#: bin/options.py:94
-msgid "specify the server port"
-msgstr ""
-
-#: bin/options.py:95
-msgid "specify the server ip/name"
-msgstr ""
-
-#: bin/tinyerp-client.py:143
-msgid "Closing Tiny ERP, KeyboardInterrupt"
-msgstr "Kilépek a Tiny ERP programból, billentyűzet megszakítás"
-
-#: bin/rpc.py:113 bin/rpc.py:138
-msgid "Connection refused !"
-msgstr "Kapcsolatfelvétel visszautasítva !"
-
-#: bin/rpc.py:114
-msgid "Connection refused!"
-msgstr "Kapcsolatfelvétel visszautasítva!"
-
-#: bin/rpc.py:149
-msgid "Application Error"
-msgstr "Alkalmazás hiba"
-
-#: bin/rpc.py:149
-msgid "View details"
-msgstr "Részletek megtekintése"
-
-#: bin/terp.glade:10
+#: terp.glade:10
 msgid "Tiny ERP - Login"
 msgstr "Tiny ERP - Belépés"
 
-#: bin/terp.glade:106
+#: terp.glade:107
 msgid "User:"
 msgstr "Felhasználó:"
 
-#: bin/terp.glade:130 bin/terp.glade:13101 bin/terp.glade:13286
-#: bin/terp.glade:13914
+#: terp.glade:135 terp.glade:14459 terp.glade:14774
 msgid "Password:"
 msgstr "Jelszó:"
 
-#: bin/terp.glade:155 bin/terp.glade:13041 bin/terp.glade:13424
-#: bin/terp.glade:13832 bin/terp.glade:14341
+#: terp.glade:164 terp.glade:14286 terp.glade:14712 terp.glade:15278
+#: terp.glade:15922
 msgid "Change"
 msgstr ""
 
-#: bin/terp.glade:178 bin/terp.glade:12718
+#: terp.glade:187 terp.glade:13982
 msgid "localhost"
 msgstr "localhost"
 
-#: bin/terp.glade:196
+#: terp.glade:205
+#, fuzzy
 msgid "Database:"
-msgstr ""
+msgstr "Adja meg a dátumot"
 
-#: bin/terp.glade:221 bin/terp.glade:12807 bin/terp.glade:13077
-#: bin/terp.glade:13335 bin/terp.glade:13743 bin/terp.glade:14252
+#: terp.glade:234 terp.glade:14051 terp.glade:14326 terp.glade:14619
+#: terp.glade:15829
 msgid "Server:"
 msgstr "Szerver:"
 
-#: bin/terp.glade:249
-msgid "demo"
-msgstr "demo"
+#: terp.glade:266
+msgid "admin"
+msgstr ""
 
-#: bin/terp.glade:321
+#: terp.glade:378 terp.glade:13689
 msgid "Tiny ERP"
 msgstr "Tiny ERP"
 
-#: bin/terp.glade:359
+#: terp.glade:422
 msgid "_File"
 msgstr "_Fájl"
 
-#: bin/terp.glade:368
+#: terp.glade:431
 #, fuzzy
 msgid "_Connect..."
 msgstr "Kapcsolódás..."
 
-#: bin/terp.glade:390
+#: terp.glade:453
 #, fuzzy
 msgid "_Disconnect"
 msgstr "Szétkapcsolás"
 
-#: bin/terp.glade:417
+#: terp.glade:480
+#, fuzzy
+msgid "Databases"
+msgstr "Adja meg a dátumot"
+
+#: terp.glade:501
+#, fuzzy
 msgid "_New database"
-msgstr ""
+msgstr "Adja meg a dátumot"
 
-#: bin/terp.glade:438
+#: terp.glade:523
+#, fuzzy
 msgid "_Restore database"
-msgstr ""
+msgstr "Adja meg a dátumot"
 
-#: bin/terp.glade:459
+#: terp.glade:544
+#, fuzzy
 msgid "_Backup database"
-msgstr ""
+msgstr "Adja meg a dátumot"
 
-#: bin/terp.glade:480
+#: terp.glade:565
+#, fuzzy
 msgid "Dro_p database"
-msgstr ""
+msgstr "Adja meg a dátumot"
 
-#: bin/terp.glade:507
+#: terp.glade:592
 msgid "Administrator Password"
 msgstr ""
 
-#: bin/terp.glade:547
+#: terp.glade:636
 msgid "_User"
 msgstr "_Felhasználó"
 
-#: bin/terp.glade:557
+#: terp.glade:646
 #, fuzzy
 msgid "_Preferences"
 msgstr "Beállítások"
 
-#: bin/terp.glade:584
+#: terp.glade:673
 #, fuzzy
 msgid "_Send a request"
 msgstr "Kérés küldése"
 
-#: bin/terp.glade:605
+#: terp.glade:694
 #, fuzzy
 msgid "_Read my requests"
 msgstr "Kéréseim"
 
-#: bin/terp.glade:632
+#: terp.glade:721
 #, fuzzy
 msgid "_Waiting Requests"
 msgstr "Kérések"
 
-#: bin/terp.glade:645
+#: terp.glade:734
 #, fuzzy
 msgid "For_m"
 msgstr "_Űrlap"
 
-#: bin/terp.glade:655
+#: terp.glade:744
 #, fuzzy
 msgid "_New"
 msgstr "Új"
 
-#: bin/terp.glade:677
+#: terp.glade:766
 #, fuzzy
 msgid "_Save"
 msgstr "Mentés"
 
-#: bin/terp.glade:699
+#: terp.glade:788
 #, fuzzy
 msgid "Copy this resource"
 msgstr "Elem törlése"
 
-#: bin/terp.glade:700
-msgid "Duplicate"
+#: terp.glade:789
+msgid "_Duplicate"
 msgstr ""
 
-#: bin/terp.glade:721
+#: terp.glade:811
 #, fuzzy
 msgid "_Delete"
 msgstr "Törlés"
 
-#: bin/terp.glade:749
+#: terp.glade:839
 #, fuzzy
 msgid "Find"
 msgstr "Mező:"
 
-#: bin/terp.glade:771
+#: terp.glade:861
 #, fuzzy
 msgid "Ne_xt"
 msgstr "Következő"
 
-#: bin/terp.glade:793
+#: terp.glade:883
 #, fuzzy
 msgid "Pre_vious"
 msgstr "Előző"
 
-#: bin/terp.glade:815
+#: terp.glade:905
 msgid "Switch to list/form"
 msgstr ""
 
-#: bin/terp.glade:843
+#: terp.glade:933
 msgid "_New Menu Tab"
 msgstr ""
 
-#: bin/terp.glade:865 bin/terp.glade:11161
+#: terp.glade:955
+msgid "_New Home Tab"
+msgstr ""
+
+#: terp.glade:977 terp.glade:11926
 #, fuzzy
 msgid "Close Tab"
 msgstr "Bezárás"
 
-#: bin/terp.glade:887
+#: terp.glade:999
 #, fuzzy
 msgid "Previous Tab"
 msgstr "Előző tipp"
 
-#: bin/terp.glade:897 bin/terp.glade:11065
+#: terp.glade:1009 terp.glade:11814
 #, fuzzy
 msgid "Next Tab"
 msgstr "Következő tipp"
 
-#: bin/terp.glade:913
+#: terp.glade:1025
 #, fuzzy
 msgid "View _logs"
 msgstr "Részletek megtekintése"
 
-#: bin/terp.glade:922
+#: terp.glade:1034
+#, fuzzy
 msgid "_Go to resource ID..."
-msgstr ""
+msgstr "Elem törlése"
 
-#: bin/terp.glade:938
+#: terp.glade:1050
 #, fuzzy
 msgid "_Open"
 msgstr "Megnyitás"
 
-#: bin/terp.glade:959
+#: terp.glade:1071
 #, fuzzy
 msgid "Reloa_d / Undo"
 msgstr "Újratölt"
 
-#: bin/terp.glade:987
+#: terp.glade:1099
 #, fuzzy
 msgid "Repeat latest _action"
 msgstr "Utolsó művelet megismétlése"
 
-#: bin/terp.glade:1003
+#: terp.glade:1115
 msgid "_Preview in PDF"
 msgstr ""
 
-#: bin/terp.glade:1025
+#: terp.glade:1137
+#, fuzzy
 msgid "Previe_w in editor"
-msgstr ""
+msgstr "Előnézet nyomtatás előtt"
 
-#: bin/terp.glade:1052
+#: terp.glade:1164
 #, fuzzy
 msgid "Expor_t data..."
 msgstr "Adatok exportálása"
 
-#: bin/terp.glade:1073
+#: terp.glade:1185
 #, fuzzy
 msgid "I_mport data..."
 msgstr "Adatok importálása"
 
-#: bin/terp.glade:1086
+#: terp.glade:1198
 msgid "_Options"
 msgstr "_Opciók"
 
-#: bin/terp.glade:1095
+#: terp.glade:1207
 #, fuzzy
 msgid "_Menubar"
 msgstr "Menüsor"
 
-#: bin/terp.glade:1105
+#: terp.glade:1217
 #, fuzzy
 msgid "Text _and Icons"
 msgstr "Szöveg és ikonok"
 
-#: bin/terp.glade:1115
+#: terp.glade:1227
 #, fuzzy
 msgid "_Icons only"
 msgstr "Csak ikonok"
 
-#: bin/terp.glade:1126
+#: terp.glade:1238
 #, fuzzy
 msgid "_Text only"
 msgstr "Csak szöveg"
 
-#: bin/terp.glade:1141
+#: terp.glade:1253
 msgid "Client Mode"
 msgstr ""
 
-#: bin/terp.glade:1163
+#: terp.glade:1275
 msgid "Normal"
 msgstr ""
 
-#: bin/terp.glade:1173
+#: terp.glade:1285
 msgid "Mode PDA"
 msgstr ""
 
-#: bin/terp.glade:1188
+#: terp.glade:1300
 #, fuzzy
 msgid "_Theme"
 msgstr "Fa"
 
-#: bin/terp.glade:1210
+#: terp.glade:1322
 #, fuzzy
 msgid "Tiny ERP Theme"
 msgstr "Tiny ERP licensz"
 
-#: bin/terp.glade:1219
+#: terp.glade:1331
 msgid "Aqua OS X"
 msgstr ""
 
-#: bin/terp.glade:1247
+#: terp.glade:1346
+#, fuzzy
+msgid "Default Theme"
+msgstr "Alapértelmezett érték:"
+
+#: terp.glade:1359
 #, fuzzy
 msgid "_Forms"
 msgstr "_Űrlap"
 
-#: bin/terp.glade:1257
+#: terp.glade:1369
 msgid "Right Toolbar"
 msgstr ""
 
-#: bin/terp.glade:1271
+#: terp.glade:1379
+msgid "Tabs default position"
+msgstr ""
+
+#: terp.glade:1389
+msgid "Top"
+msgstr ""
+
+#: terp.glade:1399
+msgid "Left"
+msgstr ""
+
+#: terp.glade:1410
+msgid "Right"
+msgstr ""
+
+#: terp.glade:1421
+msgid "Bottom"
+msgstr ""
+
+#: terp.glade:1436
+msgid "Tabs default orientation"
+msgstr ""
+
+#: terp.glade:1446
+msgid "Horizontal"
+msgstr ""
+
+#: terp.glade:1456
+msgid "Vertical"
+msgstr ""
+
+#: terp.glade:1475
 #, fuzzy
 msgid "_Print"
 msgstr "Nyomtatás"
 
-#: bin/terp.glade:1292
+#: terp.glade:1496
 #, fuzzy
 msgid "Previe_w before print"
 msgstr "Előnézet nyomtatás előtt"
 
-#: bin/terp.glade:1312
+#: terp.glade:1516
 #, fuzzy
 msgid "_Save options"
 msgstr "Opciók mentése"
 
-#: bin/terp.glade:1337
+#: terp.glade:1541
 #, fuzzy
 msgid "_Plugins"
 msgstr "Modulok"
 
-#: bin/terp.glade:1347
+#: terp.glade:1551
 #, fuzzy
 msgid "_Execute a plugin"
 msgstr "Modul futtatása"
 
-#: bin/terp.glade:1372
+#: terp.glade:1576
 #, fuzzy
 msgid "_Help"
 msgstr "Súgó"
 
-#: bin/terp.glade:1381 bin/terp.glade:10060
+#: terp.glade:1585 terp.glade:10716
 #, fuzzy
 msgid "Support Request"
 msgstr "<b>Támogatási kérelem</b>"
 
-#: bin/terp.glade:1408
+#: terp.glade:1612
 msgid "User _Manual"
 msgstr ""
 
-#: bin/terp.glade:1429
+#: terp.glade:1633
 msgid "_Contextual Help"
 msgstr ""
 
-#: bin/terp.glade:1451
+#: terp.glade:1655
 #, fuzzy
 msgid "_Tips"
 msgstr "Tippek"
 
-#: bin/terp.glade:1472
+#: terp.glade:1676
 #, fuzzy
 msgid "Keyboard Shortcuts"
 msgstr "Billentyűparancsok"
 
-#: bin/terp.glade:1487
+#: terp.glade:1691
 #, fuzzy
 msgid "_Licence"
 msgstr "Licensz"
 
-#: bin/terp.glade:1508
+#: terp.glade:1712
 #, fuzzy
 msgid "_About..."
 msgstr "Névjegy"
 
-#: bin/terp.glade:1550 bin/terp.glade:2733
+#: terp.glade:1754 terp.glade:2986
 msgid "Create a new resource"
 msgstr "Új elem létrehozása"
 
-#: bin/terp.glade:1566
+#: terp.glade:1770
 msgid "Edit / Save this resource"
 msgstr "Elem szerkesztése/mentése"
 
-#: bin/terp.glade:1595
+#: terp.glade:1799
 msgid "Delete this resource"
 msgstr "Elem törlése"
 
-#: bin/terp.glade:1624
+#: terp.glade:1828
 #, fuzzy
 msgid "Find a resource"
 msgstr "Elemek keresése"
 
-#: bin/terp.glade:1640
+#: terp.glade:1844
 msgid "Go to previous matched search"
 msgstr ""
 
-#: bin/terp.glade:1656
+#: terp.glade:1860
+#, fuzzy
 msgid "Go to next matched resource"
-msgstr ""
+msgstr "Nem lehet olvasni az elemet"
 
-#: bin/terp.glade:1672
+#: terp.glade:1876
 msgid "Switch current view: form / list"
 msgstr ""
 
-#: bin/terp.glade:1673
+#: terp.glade:1877
 msgid "Other View"
 msgstr ""
 
-#: bin/terp.glade:1703
+#: terp.glade:1907
 msgid "Launch actions about this resource"
 msgstr "Elemmel kapcsolatos műveletek indítása"
 
-#: bin/terp.glade:1721
+#: terp.glade:1908
+msgid "Action"
+msgstr "Művelet"
+
+#: terp.glade:1925
 msgid "Print documents"
 msgstr "Dokumentumok nyomtatása"
 
-#: bin/terp.glade:1750
+#: terp.glade:1954
 #, fuzzy
 msgid "Add an attachment to this resource"
 msgstr "Elemmel kapcsolatos műveletek indítása"
 
-#: bin/terp.glade:1751
-msgid "Attachement"
+#: terp.glade:1955
+#, fuzzy
+msgid "Attachment"
 msgstr "Melléklet"
 
-#: bin/terp.glade:1781
+#: terp.glade:1985
 msgid "Close this window"
 msgstr "Ablak bezárása"
 
-#: bin/terp.glade:1842
+#: terp.glade:2046
 msgid "Requests:"
 msgstr "Kérések"
 
-#: bin/terp.glade:1877
+#: terp.glade:2085
 #, fuzzy
 msgid "Read my Requests"
 msgstr "Saját kéréseim elolvasása"
 
-#: bin/terp.glade:1905
+#: terp.glade:2113
 msgid "Send a new request"
 msgstr "Új kérés küldése"
 
-#: bin/terp.glade:1960
+#: terp.glade:2168
 msgid "Tiny ERP - Tree Resources"
 msgstr "Tiny ERP - Fa elemek"
 
-#: bin/terp.glade:2093
+#: terp.glade:2303
 msgid "Shortcuts"
 msgstr "Billentyűparancsok"
 
-#: bin/terp.glade:2190
+#: terp.glade:2407
 msgid "Tiny ERP - Forms"
 msgstr "Tiny ERP - Űrlapok"
 
-#: bin/terp.glade:2236
+#: terp.glade:2455
+#, fuzzy
 msgid "State:"
 msgstr "Állapot:"
 
-#: bin/terp.glade:2282
+#: terp.glade:2505
 msgid "Tiny ERP - About"
 msgstr "Tiny ERP - Névjegy"
 
-#: bin/terp.glade:2337
+#: terp.glade:2562
 msgid ""
 "<b>About Tiny ERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
 
-#: bin/terp.glade:2402
+#: terp.glade:2631
 #, fuzzy
 msgid ""
 "\n"
@@ -1048,12 +525,12 @@ msgstr ""
 "\n"
 "More Info on www.TinyERP.com !"
 
-#: bin/terp.glade:2449
+#: terp.glade:2678
 #, fuzzy
 msgid "_Tiny ERP"
 msgstr "Tiny ERP"
 
-#: bin/terp.glade:2497
+#: terp.glade:2730
 #, fuzzy
 msgid ""
 "\n"
@@ -1061,11 +538,11 @@ msgid ""
 "Tiny ERP is a product of Tiny sprl:\n"
 "\n"
 "Tiny sprl\n"
-"21 Rue du Vieux Chateau\n"
-"BE-1457 Walhain\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
 "Belgium\n"
 "\n"
-"Tel/Fax: +32.10.68.94.39\n"
+"Tel : (+32)81.81.37.00\n"
 "Mail: sales@tiny.be\n"
 "Web: http://tiny.be"
 msgstr ""
@@ -1082,287 +559,283 @@ msgstr ""
 "Mail: fp@tiny.be\n"
 "Web: http://tiny.be"
 
-#: bin/terp.glade:2544
+#: terp.glade:2777
 #, fuzzy
 msgid "_Contact"
 msgstr "Névjegy"
 
-#: bin/terp.glade:2586
+#: terp.glade:2823
 msgid "Tiny ERP - forms widget"
 msgstr "Tiny ERP - űrlap kezelőfelület"
 
-#: bin/terp.glade:2637
+#: terp.glade:2890
 msgid "Open the calendar widget"
 msgstr "Naptár felület megnyitása"
 
-#: bin/terp.glade:2760
+#: terp.glade:3013
 #, fuzzy
 msgid "Search / Open a resource"
 msgstr "Elemek keresése"
 
-#: bin/terp.glade:2868
+#: terp.glade:3123
+#, fuzzy
 msgid "Titre"
-msgstr ""
+msgstr "Fa"
 
-#: bin/terp.glade:2898
+#: terp.glade:3144
+msgid "Set to default value"
+msgstr "Alapértelmezett értékek betöltése"
+
+#: terp.glade:3153
 #, fuzzy
 msgid "Set Default"
 msgstr "_Alapértelmezett"
 
-#: bin/terp.glade:2918 bin/terp.glade:3200
+#: terp.glade:3173 terp.glade:3459
 msgid "Create a new entry"
 msgstr "Új bejegyzés létrehozása"
 
-#: bin/terp.glade:2945
+#: terp.glade:3200
 #, fuzzy
 msgid "Edit this entry"
 msgstr "Bejegyzés törlése"
 
-#: bin/terp.glade:2972
+#: terp.glade:3227
 msgid "Remove this entry"
 msgstr "Bejegyzés törlése"
 
-#: bin/terp.glade:3010
+#: terp.glade:3265
 msgid "Previous"
 msgstr "Előző"
 
-#: bin/terp.glade:3037
+#: terp.glade:3292
 #, fuzzy
 msgid "(0/0)"
 msgstr "(1/1)"
 
-#: bin/terp.glade:3058
+#: terp.glade:3317
 msgid "Next"
 msgstr "Következő"
 
-#: bin/terp.glade:3218
+#: terp.glade:3477
 msgid "Remove selected entry"
 msgstr "Kiválasztott bejegyzés törlése"
 
-#: bin/terp.glade:3283
+#: terp.glade:3542
 msgid "label74"
 msgstr "label74"
 
-#: bin/terp.glade:3470 bin/terp.glade:6027 bin/terp.glade:6128
-#: bin/terp.glade:6328
+#: terp.glade:3722 terp.glade:6440 terp.glade:6545 terp.glade:6749
 msgid "-"
 msgstr "-"
 
-#: bin/terp.glade:3867
+#: terp.glade:4177
+#, fuzzy
+msgid "label46559"
+msgstr "label74"
+
+#: terp.glade:4302
 msgid "Tiny ERP - Date selection"
 msgstr "Tiny ERP - Dátum kiválasztás"
 
-#: bin/terp.glade:3948 bin/terp.glade:10603
+#: terp.glade:4385 terp.glade:11300
 msgid "Tiny ERP - Confirmation"
 msgstr "Tiny ERP - Jóváhagyás"
 
-#: bin/terp.glade:4034 bin/terp.glade:10702
+#: terp.glade:4473 terp.glade:11401 terp.glade:13781
 msgid "Hello World!"
 msgstr "Helló világ!"
 
-#: bin/terp.glade:4064
+#: terp.glade:4507
 msgid "Tiny ERP - selection"
 msgstr "Tiny ERP - kiválasztás"
 
-#: bin/terp.glade:4135
+#: terp.glade:4580
 msgid "Your selection:"
 msgstr "Az ön választásai:"
 
-#: bin/terp.glade:4203
+#: terp.glade:4655
 msgid "Tiny ERP - Filter"
 msgstr "Tiny ERP - Szűrés"
 
-#: bin/terp.glade:4273
+#: terp.glade:4727
 #, fuzzy
 msgid "S_earch:"
 msgstr "Keresés:"
 
-#: bin/terp.glade:4315
+#: terp.glade:4773
 #, fuzzy
 msgid "on _field:"
 msgstr "mező alapján:"
 
-#: bin/terp.glade:4336
+#: terp.glade:4798
 msgid "test"
 msgstr ""
 
-#: bin/terp.glade:4349
+#: terp.glade:4813
 #, fuzzy
 msgid "_Select"
 msgstr "Kiválaszt"
 
-#: bin/terp.glade:4366
+#: terp.glade:4830
 #, fuzzy
 msgid "_Unselect"
 msgstr "Választást visszavon"
 
-#: bin/terp.glade:4393
+#: terp.glade:4857
 #, fuzzy
 msgid "Filter: "
 msgstr "Szűrés:"
 
-#: bin/terp.glade:4415
+#: terp.glade:4883
 #, fuzzy
 msgid "AL_L"
 msgstr "MIND"
 
-#: bin/terp.glade:4432
+#: terp.glade:4900
 #, fuzzy
 msgid "N_ONE"
 msgstr "EGYIK SEM"
 
-#: bin/terp.glade:4504
+#: terp.glade:4972
 msgid "<b><u>Actions</u></b>"
 msgstr "<b><u>Műveletek</u></b>"
 
-#: bin/terp.glade:4540
+#: terp.glade:5012
 msgid "Tiny ERP - Dialog"
 msgstr "Tiny ERP - Dialógusablak"
 
-#: bin/terp.glade:4584
+#: terp.glade:5058
 msgid "Set to _Default"
 msgstr "_Alapértelmezett"
 
-#: bin/terp.glade:4611
+#: terp.glade:5085
 #, fuzzy
 msgid "Value _Preference"
 msgstr "Érték preferencia"
 
-#: bin/terp.glade:4634
+#: terp.glade:5108
+#, fuzzy
 msgid "Tiny ERP, Field Preference target"
-msgstr ""
+msgstr "Tiny ERP - Beállítások"
 
-#: bin/terp.glade:4705
+#: terp.glade:5181
 #, fuzzy
 msgid "Default _value:"
 msgstr "Alapértelmezett érték:"
 
-#: bin/terp.glade:4796
+#: terp.glade:5276
 #, fuzzy
 msgid "_Domain:"
 msgstr "Tartomány:"
 
-#: bin/terp.glade:4821
+#: terp.glade:5305
 #, fuzzy
 msgid "Field _Name:"
 msgstr "Mezőnév:"
 
-#: bin/terp.glade:4879
+#: terp.glade:5367
 #, fuzzy
 msgid "<b>Value applicable if:</b>"
 msgstr "<b>Érték alkalmazható ha:</b>"
 
-#: bin/terp.glade:4934
+#: terp.glade:5426
 #, fuzzy
 msgid "_only for you"
 msgstr "csak a felhasználó számára"
 
-#: bin/terp.glade:4953
+#: terp.glade:5445
 #, fuzzy
 msgid "for _all users"
 msgstr "minden felhasználó számára"
 
-#: bin/terp.glade:4976
+#: terp.glade:5468
 msgid "<b>Value applicable for:</b>"
 msgstr "<b>Alkalmazandó:</b>"
 
-#: bin/terp.glade:5016
+#: terp.glade:5512
 msgid "Tiny ERP - Export to CSV"
 msgstr "Tiny REP - Exportálás CSV-be"
 
-#: bin/terp.glade:5129
+#: terp.glade:5627
 #, fuzzy
 msgid "<b>Predefined exports</b>"
 msgstr "<b>Exportálandó mezők</b>"
 
-#: bin/terp.glade:5204 bin/terp.glade:12005
+#: terp.glade:5706 terp.glade:12888
 msgid "<b>All fields</b>"
 msgstr "<b>Minden mező</b>"
 
-#: bin/terp.glade:5280 bin/terp.glade:12081
+#: terp.glade:5786 terp.glade:12968
 #, fuzzy
 msgid "_Add"
 msgstr "Hozzáadás"
 
-#: bin/terp.glade:5355 bin/terp.glade:12156
+#: terp.glade:5865 terp.glade:13047
 #, fuzzy
 msgid "_Remove"
 msgstr "Törlés"
 
-#: bin/terp.glade:5430
+#: terp.glade:5944
 #, fuzzy
 msgid "_Nothing"
 msgstr "Semmi"
 
-#: bin/terp.glade:5516
+#: terp.glade:6034
 #, fuzzy
 msgid "Save List"
 msgstr "Opciók mentése"
 
-#: bin/terp.glade:5598
+#: terp.glade:6120
 msgid "<b>Fields to export</b>"
 msgstr "<b>Exportálandó mezők</b>"
 
-#: bin/terp.glade:5646
+#: terp.glade:6172
 #, fuzzy
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
 msgstr "Megnyitás Excelben"
 
-#: bin/terp.glade:5671
+#: terp.glade:6199
 #, fuzzy
 msgid "Add _field names"
 msgstr "Mezőnevek hozzáadása"
 
-#: bin/terp.glade:5691
+#: terp.glade:6219
 #, fuzzy
 msgid "<b>Opti_ons</b>"
 msgstr "<b>Opciók</b>"
 
-#: bin/terp.glade:5728
+#: terp.glade:6260
 msgid "Tiny ERP - Search"
 msgstr "Tiny ERP - Keresés"
 
-#: bin/terp.glade:5868
-#, fuzzy
-msgid "_Limit:"
-msgstr "Korlát:"
-
-#: bin/terp.glade:5909
-#, fuzzy
-msgid "Off_set:"
-msgstr "Eltolás:"
-
-#: bin/terp.glade:5952
-msgid "Advanced search parameters"
-msgstr ""
-
-#: bin/terp.glade:5980
+#: terp.glade:6391
 msgid "Tiny ERP - Search Widgets"
 msgstr "Tiny ERP - Felületelemek keresése"
 
-#: bin/terp.glade:6081
+#: terp.glade:6498
 msgid "Date de début"
 msgstr ""
 
-#: bin/terp.glade:6250
+#: terp.glade:6671
 msgid "Search with this name"
 msgstr ""
 
-#: bin/terp.glade:6277
+#: terp.glade:6698
 msgid "Clear the field"
 msgstr "Mező törlése"
 
-#: bin/terp.glade:6342
+#: terp.glade:6763
 msgid "Yes"
 msgstr "Igen"
 
-#: bin/terp.glade:6362
+#: terp.glade:6783
 msgid "No"
 msgstr "Nem"
 
-#: bin/terp.glade:6405
+#: terp.glade:6826
 msgid ""
 "\n"
 "Yes\n"
@@ -1372,40 +845,40 @@ msgstr ""
 "Igen\n"
 "Nem"
 
-#: bin/terp.glade:6428
+#: terp.glade:6852
 msgid "Tiny ERP - Attachment"
 msgstr "Tiny ERP - Melléklet"
 
-#: bin/terp.glade:6496
+#: terp.glade:6922
 msgid "Filename:"
 msgstr "Fájlnév:"
 
-#: bin/terp.glade:6564
+#: terp.glade:6994
 msgid "Description:"
 msgstr "Leírás:"
 
-#: bin/terp.glade:6664
+#: terp.glade:7098
 #, fuzzy
 msgid "Save text"
 msgstr "Mentés"
 
-#: bin/terp.glade:6911
+#: terp.glade:7354
 msgid "Tiny ERP - Error"
 msgstr "Tiny ERP - Hiba"
 
-#: bin/terp.glade:6968
+#: terp.glade:7413
 msgid "Application Error !"
 msgstr "Alkalmazás hiba !"
 
-#: bin/terp.glade:7039
+#: terp.glade:7488
 msgid "Error 404"
 msgstr "Hiba 404"
 
-#: bin/terp.glade:7060
+#: terp.glade:7513
 msgid "<b>Error code:</b>"
 msgstr "<b>Hibakód:</b>"
 
-#: bin/terp.glade:7081
+#: terp.glade:7538
 msgid ""
 "This Page does not exist !\n"
 "Please retry"
@@ -1413,28 +886,28 @@ msgstr ""
 "Ez az oldal nem létezik !\n"
 "Próbálja újra"
 
-#: bin/terp.glade:7103
+#: terp.glade:7564
 msgid "<i>Click on the Support Request tab if you need more help !</i>"
 msgstr ""
 "<i>Kattintson a Támogatás kérése fülre ha segítséget szeretne kérni !</i>"
 
-#: bin/terp.glade:7137
+#: terp.glade:7602
 #, fuzzy
 msgid "De_scription"
 msgstr "Leírás"
 
-#: bin/terp.glade:7183
+#: terp.glade:7652
 msgid ""
 "Error details\n"
 "dqsdsqdqsdsd"
 msgstr ""
 
-#: bin/terp.glade:7200
+#: terp.glade:7669
 #, fuzzy
 msgid "_Details"
 msgstr "Jellemzők"
 
-#: bin/terp.glade:7239
+#: terp.glade:7712
 msgid ""
 "<b>Complete this form to submit your bug and/or request a support.</b>\n"
 "<i>\n"
@@ -1444,37 +917,38 @@ msgid ""
 "</i>"
 msgstr ""
 
-#: bin/terp.glade:7285
+#: terp.glade:7762
 msgid "<b>Your name: </b>"
 msgstr "<b>Neve: </b>"
 
-#: bin/terp.glade:7309
+#: terp.glade:7790
 msgid "<b>Your Company: </b>"
 msgstr "<b>Cég: </b>"
 
-#: bin/terp.glade:7333
+#: terp.glade:7818
 msgid "<b>Your Email: </b>"
 msgstr "<b>Email cím: </b>"
 
-#: bin/terp.glade:7399
+#: terp.glade:7888
 msgid "Explain what you did: "
 msgstr ""
 
-#: bin/terp.glade:7423
+#: terp.glade:7916
 #, fuzzy
 msgid "Others Comments: "
 msgstr "Mellékletek: "
 
-#: bin/terp.glade:7574
+#: terp.glade:8071
+#, fuzzy
 msgid "Send Support Request"
-msgstr ""
+msgstr "<b>Támogatási kérelem</b>"
 
-#: bin/terp.glade:7617
+#: terp.glade:8118
 #, fuzzy
 msgid "<b>support contract id  </b>"
 msgstr "<b>Támogatási kérelem</b>"
 
-#: bin/terp.glade:7662 bin/terp.glade:10473
+#: terp.glade:8167 terp.glade:11159
 msgid ""
 "Not Urgent\n"
 "Medium\n"
@@ -1482,174 +956,178 @@ msgid ""
 "Very Urgent"
 msgstr ""
 
-#: bin/terp.glade:7680 bin/terp.glade:10491
+#: terp.glade:8188 terp.glade:11180
 msgid "Emergency: "
 msgstr ""
 
-#: bin/terp.glade:7704
+#: terp.glade:8216
 msgid "Phone Number: "
 msgstr "Telefonszám: "
 
-#: bin/terp.glade:7788
+#: terp.glade:8304
 #, fuzzy
 msgid "<b>_Support Request</b>"
 msgstr "<b>Támogatási kérelem</b>"
 
-#: bin/terp.glade:7823
+#: terp.glade:8343
 msgid "Tiny ERP - Ressource Edit"
 msgstr "Tiny ERP - Elem szerkesztő"
 
-#: bin/terp.glade:7892
+#: terp.glade:8414
 msgid "Tiny ERP - Link"
 msgstr "Tiny ERP - Hivatkozás"
 
-#: bin/terp.glade:7988
+#: terp.glade:8512
 msgid "Tiny ERP - List"
 msgstr "Tiny ERP - Lista"
 
-#: bin/terp.glade:8056
+#: terp.glade:8582
 msgid "Tiny ERP - Preferences"
 msgstr "Tiny ERP - Beállítások"
 
-#: bin/terp.glade:8123
+#: terp.glade:8651
 #, fuzzy
 msgid "<b>Edit resource preferences</b>"
 msgstr "<b>Elem beállítások szerkesztése</b>"
 
-#: bin/terp.glade:8170
+#: terp.glade:8700
 msgid "Tip of the Day"
 msgstr "A nap tippje"
 
-#: bin/terp.glade:8244
+#: terp.glade:8774
 #, fuzzy
 msgid "Pre_vious Tip"
 msgstr "Előző tipp"
 
-#: bin/terp.glade:8316
+#: terp.glade:8850
 #, fuzzy
 msgid "Ne_xt Tip"
 msgstr "Következő tipp"
 
-#: bin/terp.glade:8412
+#: terp.glade:8954
 #, fuzzy
 msgid "_Display a new tip next time ?"
 msgstr "Szeretné hogy megjelenjenek a tippek a következő indításkor?"
 
-#: bin/terp.glade:8453
+#: terp.glade:8995
 msgid "Tiny ERP - Licence"
 msgstr "Tiny ERP - Licensz"
 
-#: bin/terp.glade:8510
+#: terp.glade:9054
 msgid "Tiny ERP license"
 msgstr "Tiny ERP licensz"
 
-#: bin/terp.glade:8680
+#: terp.glade:9228
 #, fuzzy
 msgid "Tiny ERP - Date & Time selection"
 msgstr "Tiny ERP - Dátum kiválasztás"
 
-#: bin/terp.glade:8756
+#: terp.glade:9306
+#, fuzzy
 msgid "Hour :"
-msgstr ""
+msgstr "Port:"
 
-#: bin/terp.glade:8796
+#: terp.glade:9350
 msgid "Minute :"
 msgstr ""
 
-#: bin/terp.glade:8867 bin/terp.glade:11876
-msgid "dialog1"
-msgstr "dialog1"
+#: terp.glade:9425
+#, fuzzy
+msgid "GO to ressource ID"
+msgstr "Nem lehet olvasni az elemet"
 
-#: bin/terp.glade:8939
+#: terp.glade:9499
 #, fuzzy
 msgid "Search ID:"
 msgstr "Keresés:"
 
-#: bin/terp.glade:9018
+#: terp.glade:9582
 #, fuzzy
 msgid "Tiny ERP Survey"
 msgstr "Tiny ERP"
 
-#: bin/terp.glade:9075
+#: terp.glade:9654
+#, fuzzy
 msgid "<b>Tiny ERP Survey</b>"
-msgstr ""
+msgstr "Tiny ERP"
 
-#: bin/terp.glade:9096
+#: terp.glade:9679
 msgid ""
 "<i>Please fill in the following form in order to help us to improve Tiny ERP "
 "and better target new developments.</i>"
 msgstr ""
 
-#: bin/terp.glade:9145
+#: terp.glade:9732
 msgid "Industry:"
 msgstr ""
 
-#: bin/terp.glade:9170
+#: terp.glade:9761
 msgid "# Employees:"
 msgstr ""
 
-#: bin/terp.glade:9261
+#: terp.glade:9862
+#, fuzzy
 msgid "Country:"
-msgstr ""
+msgstr "Port:"
 
-#: bin/terp.glade:9285
+#: terp.glade:9890
 #, fuzzy
 msgid "Your Role:"
 msgstr "Az ön választásai:"
 
-#: bin/terp.glade:9342
+#: terp.glade:9954
 #, fuzzy
 msgid "System:"
 msgstr "Állapot:"
 
-#: bin/terp.glade:9402
+#: terp.glade:10024
 msgid "How did you hear about us:"
 msgstr ""
 
-#: bin/terp.glade:9448
+#: terp.glade:10077
 msgid "Open Source: "
 msgstr ""
 
-#: bin/terp.glade:9767
+#: terp.glade:10403
 #, fuzzy
 msgid "<b>Your company</b>"
 msgstr "<b>Cég: </b>"
 
-#: bin/terp.glade:9819
+#: terp.glade:10459
 msgid "We plan to use Tiny ERP"
 msgstr ""
 
-#: bin/terp.glade:9838
+#: terp.glade:10478
 msgid "We plan to offer services on Tiny ERP"
 msgstr ""
 
-#: bin/terp.glade:9878
+#: terp.glade:10518
 msgid ""
 "Write here any comment, note or suggestion you have concerning Tiny ERP. \n"
 "Tell us which ERP systems you used before, and what you plan to do with Tiny "
 "ERP..."
 msgstr ""
 
-#: bin/terp.glade:9897
+#: terp.glade:10537
 #, fuzzy
 msgid "<b>Your interrest</b>"
 msgstr "<b>Neve: </b>"
 
-#: bin/terp.glade:9952
+#: terp.glade:10596
 msgid "E-Mail:"
 msgstr ""
 
-#: bin/terp.glade:9997
+#: terp.glade:10645
 msgid ""
 "(Get Tiny ERP announces, documentation and new releases by email, maximum 6 "
 "mails a year.)"
 msgstr ""
 
-#: bin/terp.glade:10025
+#: terp.glade:10677
 msgid "<b>Keep Informed</b>"
 msgstr ""
 
-#: bin/terp.glade:10143
+#: terp.glade:10801
 msgid ""
 "<b>Complete this form to submit your bug and/or make a request for support.</"
 "b>\n"
@@ -1659,344 +1137,819 @@ msgid ""
 "or an official partner.</i>"
 msgstr ""
 
-#: bin/terp.glade:10188
+#: terp.glade:10850
 #, fuzzy
 msgid "<b>Your name:</b>"
 msgstr "<b>Neve: </b>"
 
-#: bin/terp.glade:10212
+#: terp.glade:10878
 #, fuzzy
 msgid "<b>Your Company:</b>"
 msgstr "<b>Cég: </b>"
 
-#: bin/terp.glade:10236
+#: terp.glade:10906
 #, fuzzy
 msgid "<b>Your email:</b>"
 msgstr "<b>Email cím: </b>"
 
-#: bin/terp.glade:10302
+#: terp.glade:10976
 msgid "Explain your problem:"
 msgstr ""
 
-#: bin/terp.glade:10326
+#: terp.glade:11004
+#, fuzzy
 msgid "Other comments:"
-msgstr ""
+msgstr "Mellékletek: "
 
-#: bin/terp.glade:10428
+#: terp.glade:11110
 #, fuzzy
 msgid "<b>Support contract id:</b>"
 msgstr "<b>Támogatási kérelem</b>"
 
-#: bin/terp.glade:10515
+#: terp.glade:11208
 #, fuzzy
 msgid "Phone number:"
 msgstr "Telefonszám: "
 
-#: bin/terp.glade:10732
+#: terp.glade:11435
+#, fuzzy
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Billentyűparancsok"
 
-#: bin/terp.glade:10801
+#: terp.glade:11506
 msgid "<Ctrl> + O"
 msgstr ""
 
-#: bin/terp.glade:10825
+#: terp.glade:11534
 #, fuzzy
 msgid "Connect"
 msgstr "Kapcsolódás..."
 
-#: bin/terp.glade:10849
+#: terp.glade:11562
 msgid "<Ctrl> + F"
 msgstr ""
 
-#: bin/terp.glade:10873
+#: terp.glade:11590
 #, fuzzy
 msgid "Find / Search"
 msgstr "Keresés vége"
 
-#: bin/terp.glade:10897
+#: terp.glade:11618
 msgid "<Ctrl> + D"
 msgstr ""
 
-#: bin/terp.glade:10921
+#: terp.glade:11646
 msgid "Delete"
 msgstr "Törlés"
 
-#: bin/terp.glade:10945
+#: terp.glade:11674
 msgid "<Ctrl> + N"
 msgstr ""
 
-#: bin/terp.glade:10969
+#: terp.glade:11702
 msgid "New"
 msgstr "Új"
 
-#: bin/terp.glade:10993
+#: terp.glade:11730
 msgid "<Ctrl> + <PgUp>"
 msgstr ""
 
-#: bin/terp.glade:11017
+#: terp.glade:11758
 #, fuzzy
 msgid "Previous tab"
 msgstr "Előző"
 
-#: bin/terp.glade:11041
+#: terp.glade:11786
 msgid "<Ctrl> + <PgDn>"
 msgstr ""
 
-#: bin/terp.glade:11089
+#: terp.glade:11842
 msgid "<Ctrl> + S"
 msgstr ""
 
-#: bin/terp.glade:11113
+#: terp.glade:11870
 msgid "<Ctrl> + W"
 msgstr ""
 
-#: bin/terp.glade:11137
+#: terp.glade:11898
 msgid "Save"
 msgstr "Mentés"
 
-#: bin/terp.glade:11185
+#: terp.glade:11954
 msgid "<PgUp>"
 msgstr ""
 
-#: bin/terp.glade:11209
+#: terp.glade:11982
 msgid "<PgDn>"
 msgstr ""
 
-#: bin/terp.glade:11233
+#: terp.glade:12010
 #, fuzzy
 msgid "Previous record"
 msgstr "Előző"
 
-#: bin/terp.glade:11257
+#: terp.glade:12038
 #, fuzzy
 msgid "Next record"
 msgstr "Következő: Nincs rekord!"
 
-#: bin/terp.glade:11281
+#: terp.glade:12066
 msgid "<Ctrl> + L"
 msgstr ""
 
-#: bin/terp.glade:11305
+#: terp.glade:12094
 msgid "Switch view mode"
 msgstr ""
 
-#: bin/terp.glade:11329
+#: terp.glade:12122
 msgid "<b>Shortcuts for TinyERP</b>"
 msgstr ""
 
-#: bin/terp.glade:11376
+#: terp.glade:12177
 msgid "<Ctrl> + <Enter>"
 msgstr ""
 
-#: bin/terp.glade:11400
+#: terp.glade:12205
 #, fuzzy
 msgid "Save and Close window"
 msgstr "Ablak bezárása"
 
-#: bin/terp.glade:11424
+#: terp.glade:12233
 msgid "<i>When editing a resource in a popup window</i>"
 msgstr ""
 
-#: bin/terp.glade:11448
-msgid "<Esc>"
+#: terp.glade:12261
+msgid "<Ctrl> + <Esc>"
 msgstr ""
 
-#: bin/terp.glade:11472
+#: terp.glade:12289
 msgid "Close window without saving"
 msgstr ""
 
-#: bin/terp.glade:11502
+#: terp.glade:12323
 #, fuzzy
 msgid "Main Shortcuts"
 msgstr "Billentyűparancsok"
 
-#: bin/terp.glade:11530
+#: terp.glade:12355
+#, fuzzy
 msgid "<b>Shortcuts in text entries</b>"
-msgstr ""
+msgstr "<b>Neve: </b>"
 
-#: bin/terp.glade:11554
+#: terp.glade:12383
 msgid "<CTRL> + X"
 msgstr ""
 
-#: bin/terp.glade:11578
+#: terp.glade:12411
 msgid "<CTRL> + C"
 msgstr ""
 
-#: bin/terp.glade:11602
+#: terp.glade:12439
 msgid "<CTRL> + V"
 msgstr ""
 
-#: bin/terp.glade:11626
+#: terp.glade:12467
 #, fuzzy
 msgid "Cut selected text"
 msgstr "Kiválasztott bejegyzés törlése"
 
-#: bin/terp.glade:11650
+#: terp.glade:12495
 #, fuzzy
 msgid "Copy selected text"
 msgstr "Kiválasztott bejegyzés törlése"
 
-#: bin/terp.glade:11674
+#: terp.glade:12523
 #, fuzzy
 msgid "Paste selected text"
 msgstr "Kiválasztott bejegyzés törlése"
 
-#: bin/terp.glade:11698
+#: terp.glade:12551
 msgid "<TAB>"
 msgstr ""
 
-#: bin/terp.glade:11722
+#: terp.glade:12579
 msgid "Next editable widget"
 msgstr ""
 
-#: bin/terp.glade:11746
+#: terp.glade:12607
 msgid "<SHIFT> + <TAB>"
 msgstr ""
 
-#: bin/terp.glade:11770
+#: terp.glade:12635
+#, fuzzy
 msgid "Previous editable widget"
-msgstr ""
+msgstr "Előző"
 
-#: bin/terp.glade:11794
+#: terp.glade:12663
 msgid "<ENTER>"
 msgstr ""
 
-#: bin/terp.glade:11818
+#: terp.glade:12691
 #, fuzzy
 msgid "Auto-Complete text field"
 msgstr "Mező törlése"
 
-#: bin/terp.glade:11848
+#: terp.glade:12725
 #, fuzzy
 msgid "Edition Widgets"
 msgstr "Dokumentum szerkesztés alatt"
 
-#: bin/terp.glade:12231
+#: terp.glade:12757
+#, fuzzy
+msgid "Import from CSV"
+msgstr "CSV fájl importálása"
+
+#: terp.glade:13126
 #, fuzzy
 msgid "N_othing"
 msgstr "Semmi"
 
-#: bin/terp.glade:12317
+#: terp.glade:13216
 msgid "Auto-Detect"
 msgstr ""
 
-#: bin/terp.glade:12399
+#: terp.glade:13302
 msgid "<b>Fields to import</b>"
 msgstr "<b>Importálandó mezők</b>"
 
-#: bin/terp.glade:12463
+#: terp.glade:13370
 #, fuzzy
 msgid "File to Import: "
 msgstr "<b>Importálandó mezők</b>"
 
-#: bin/terp.glade:12587
+#: terp.glade:13395
+msgid "Sélectionner un fichier"
+msgstr ""
+
+#: terp.glade:13436
+#, fuzzy
+msgid "Field Separater:"
+msgstr "Mezőnév:"
+
+#: terp.glade:13464
+msgid "Encoding:"
+msgstr ""
+
+#: terp.glade:13496
+msgid ","
+msgstr ""
+
+#: terp.glade:13515
+msgid "Text Delimiter:"
+msgstr ""
+
+#: terp.glade:13547
+msgid "\""
+msgstr ""
+
+#: terp.glade:13566
+msgid "Lines to Skip:"
+msgstr ""
+
+#: terp.glade:13616
+msgid ""
+"UTF-8\n"
+"Latin1"
+msgstr ""
+
+#: terp.glade:13637
+msgid "CSV Parameters"
+msgstr ""
+
+#: terp.glade:13841
 #, fuzzy
 msgid "Server"
 msgstr "Szerver:"
 
-#: bin/terp.glade:12648
+#: terp.glade:13904
 msgid "<b>Connect to a Tiny ERP server</b>"
 msgstr ""
 
-#: bin/terp.glade:12690
+#: terp.glade:13950
+#, fuzzy
 msgid "Port:"
-msgstr "Port:"
+msgstr "Nyomtatás"
 
-#: bin/terp.glade:12740
+#: terp.glade:14004
 msgid "8069"
 msgstr "8069"
 
-#: bin/terp.glade:12758
+#: terp.glade:14022
 #, fuzzy
-msgid "Secure connection:"
+msgid "Protocol connection:"
 msgstr "Válasszon feladatot"
 
-#: bin/terp.glade:12842
+#: terp.glade:14105
+#, fuzzy
 msgid "Choose a database..."
-msgstr ""
+msgstr "Adja meg a dátumot"
 
-#: bin/terp.glade:12910
+#: terp.glade:14175
+#, fuzzy
 msgid "<b>Backup a database</b>"
-msgstr ""
+msgstr "Új elem létrehozása"
 
-#: bin/terp.glade:12952
-msgid "Database: "
-msgstr ""
-
-#: bin/terp.glade:12980 bin/terp.glade:13363 bin/terp.glade:13771
-#: bin/terp.glade:14280
+#: terp.glade:14225 terp.glade:14651 terp.glade:15217 terp.glade:15861
 #, fuzzy
 msgid "http://localhost:8069"
 msgstr "localhost"
 
-#: bin/terp.glade:13177
+#: terp.glade:14431
+msgid "Database: "
+msgstr ""
+
+#: terp.glade:14503
+#, fuzzy
 msgid "Restore a database"
-msgstr ""
+msgstr "Adja meg a dátumot"
 
-#: bin/terp.glade:13244
+#: terp.glade:14572
+#, fuzzy
 msgid "<b>Restore a database</b>"
-msgstr ""
+msgstr "Új elem létrehozása"
 
-#: bin/terp.glade:13310 bin/terp.glade:13718
+#: terp.glade:14802 terp.glade:15424
 msgid "New database name: "
 msgstr ""
 
-#: bin/terp.glade:13481 bin/terp.glade:13890
+#: terp.glade:14852
 msgid "(must not contain any special char)"
 msgstr ""
 
-#: bin/terp.glade:13544
+#: terp.glade:14909
 #, fuzzy
 msgid "Operation in progress"
 msgstr ""
 "Művelet sikertelen !\n"
 "Be-/Kimeneti hiba"
 
-#: bin/terp.glade:13571
-msgid "Please wait, this operation may take a while..."
+#: terp.glade:14968
+#, fuzzy
+msgid "<b>Operation in progress</b>"
+msgstr ""
+"Művelet sikertelen !\n"
+"Be-/Kimeneti hiba"
+
+#: terp.glade:15004
+msgid ""
+"Please wait,\n"
+"this operation may take a while..."
 msgstr ""
 
-#: bin/terp.glade:13615
+#: terp.glade:15068
 #, fuzzy
 msgid "Create a new database"
 msgstr "Új bejegyzés létrehozása"
 
-#: bin/terp.glade:13676
+#: terp.glade:15131
 #, fuzzy
 msgid "<b>Create a new database</b>"
 msgstr "Új elem létrehozása"
 
-#: bin/terp.glade:13974
+#: terp.glade:15184
+#, fuzzy
+msgid "Tiny ERP server:"
+msgstr "Tiny ERP"
+
+#: terp.glade:15213
+msgid ""
+"This is the URL of the Tiny ERP server. Use 'localhost' if the server is "
+"installed on this computer. Click on change to change the address."
+msgstr ""
+
+#: terp.glade:15317
+#, fuzzy
+msgid "Super admin password:"
+msgstr "Jelszó:"
+
+#: terp.glade:15345
 #, fuzzy
 msgid "Default language:"
 msgstr "Alapértelmezett érték:"
 
-#: bin/terp.glade:13998
+#: terp.glade:15373
 msgid "Load demonstration data: "
 msgstr ""
 
-#: bin/terp.glade:14067
-msgid "Change password"
+#: terp.glade:15401
+msgid ""
+"Check this box if you want demo data to be installed on your new database."
 msgstr ""
 
-#: bin/terp.glade:14137
+#: terp.glade:15452
+msgid ""
+"Choose the name of the database that will be created. The name must not "
+"contain any special character. Exemple: 'terp'."
+msgstr ""
+
+#: terp.glade:15489
+msgid "(use 'admin', if you did not changed it)"
+msgstr ""
+
+#: terp.glade:15517
+msgid ""
+"This is the password of the user that have the rights to administer "
+"databases. This is not a Tiny ERP user, just a super administrator. If you "
+"did not changed it, the password is 'admin' after installation."
+msgstr ""
+
+#: terp.glade:15541
+#, fuzzy
+msgid "Hello World"
+msgstr "Helló világ!"
+
+#: terp.glade:15562
+msgid ""
+"Choose the default language that will be installed for this database. You "
+"will be able to install new languages after installation through the "
+"administration menu."
+msgstr ""
+
+#: terp.glade:15587
+msgid "(must not contain any special character)"
+msgstr ""
+
+#: terp.glade:15626
+#, fuzzy
+msgid "Change password"
+msgstr "Jelszó:"
+
+#: terp.glade:15698
 msgid "<b>Change your DB administration password</b>"
 msgstr ""
 
-#: bin/terp.glade:14179
+#: terp.glade:15744
+#, fuzzy
 msgid "New password confirmation:"
-msgstr ""
+msgstr "Jelszó:"
 
-#: bin/terp.glade:14203
+#: terp.glade:15772
 #, fuzzy
 msgid "New password:"
 msgstr "Jelszó:"
 
-#: bin/terp.glade:14227
+#: terp.glade:15800
 #, fuzzy
 msgid "Old password:"
 msgstr "Jelszó:"
+
+#: terp.glade:16042
+#, fuzzy
+msgid "Tiny ERP Message"
+msgstr "Tiny ERP licensz"
+
+#: terp.glade:16098
+msgid "msg_title"
+msgstr ""
+
+#: terp.glade:16181
+msgid "Database creation"
+msgstr ""
+
+#: terp.glade:16401
+msgid "<b>Database created successfully !</b>"
+msgstr ""
+
+#: terp.glade:16459
+msgid ""
+"You can connect to the new database using one of the following account:\n"
+"\n"
+"    Administrator: admin / admin "
+msgstr ""
+
+#: terp.glade:16491
+msgid "Concurrency exception"
+msgstr ""
+
+#: terp.glade:16578
+msgid "Compare"
+msgstr ""
+
+#: terp.glade:16653
+msgid "Write anyway"
+msgstr ""
+
+#: terp.glade:16718
+msgid ""
+"<b>\n"
+"Write concurrency warning :\n"
+"</b>\n"
+"This document has been modified while you were editing it.\n"
+"  Choose :\n"
+"   - \"Cancel\" to cancel saving.\n"
+"   - \"Compare\" to see the modified version.\n"
+"   - \"write anyway\" save your current version.\n"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Tiny ERP Client %s"
+#~ msgstr "Tiny ERP Kliens v2.0"
+
+#~ msgid "specify alternate config file"
+#~ msgstr "adjon meg másik konfigurációs fájlt"
+
+#~ msgid "enable basic debugging"
+#~ msgstr "csökkentett nyomkövetés engedélyezése"
+
+#~ msgid "specify channels to log"
+#~ msgstr "Adja meg a naplózandó csatornákat"
+
+#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+#~ msgstr ""
+#~ "adja meg a naplózási szintet (INFO, DEBUG, WARNING, ERROR, CRITICAL)"
+
+#, fuzzy
+#~ msgid "specify the user login"
+#~ msgstr "Adja meg a naplózandó csatornákat"
+
+#, fuzzy
+#~ msgid "Unable to launch this file !"
+#~ msgstr "Nem lehet elindítani a következő programot !"
+
+#~ msgid "Unable to launch the application associated to this content !"
+#~ msgstr "Nem indítható el a tartalmat megjelenítő alkalmazás"
+
+#, fuzzy
+#~ msgid "Support request sent !"
+#~ msgstr "<b>Támogatási kérelem</b>"
+
+#, fuzzy
+#~ msgid "Could not connect to server !"
+#~ msgstr ""
+#~ "Kapcsolatfelvételi hiba !\n"
+#~ "Rossz felhasználói név vagy jelszó !"
+
+#, fuzzy
+#~ msgid "%s request(s)"
+#~ msgstr " kérések"
+
+#~ msgid "No request"
+#~ msgstr "Nincs kérés"
+
+#, fuzzy
+#~ msgid " - %s pending request(s)"
+#~ msgstr " függő kérések"
+
+#, fuzzy
+#~ msgid ""
+#~ "Connection error !\n"
+#~ "Unable to connect to the server !"
+#~ msgstr ""
+#~ "Kapcsolatfelvételi hiba !\n"
+#~ "Rossz felhasználói név vagy jelszó !"
+
+#~ msgid ""
+#~ "Connection error !\n"
+#~ "Bad username or password !"
+#~ msgstr ""
+#~ "Kapcsolatfelvételi hiba !\n"
+#~ "Rossz felhasználói név vagy jelszó !"
+
+#~ msgid "Connection Error !"
+#~ msgstr "Kapcsolatfelvételi hiba !"
+
+#, fuzzy
+#~ msgid "Validation Error."
+#~ msgstr "Alkalmazás hiba"
+
+#~ msgid " record(s) saved !"
+#~ msgstr " rekord elmentve !"
+
+#~ msgid ""
+#~ "Operation failed !\n"
+#~ "I/O error"
+#~ msgstr ""
+#~ "Művelet sikertelen !\n"
+#~ "Be-/Kimeneti hiba"
+
+#~ msgid "Error Opening Excel !"
+#~ msgstr "Hiba az Excel adatok megnyitásánál !"
+
+#, fuzzy
+#~ msgid ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+#~ msgstr ""
+#~ "A funkció csak MS Office felhasználók számára elérhető !\n"
+#~ "Elnézést kérünk az OOo felhasználóktól :("
+
+#, fuzzy
+#~ msgid "Export Data"
+#~ msgstr "Adatok exportálása"
+
+#~ msgid "Preferences"
+#~ msgstr "Beállítások"
+
+#~ msgid "Preference"
+#~ msgstr "Beállítás"
+
+#~ msgid "ID"
+#~ msgstr "Azonosító"
+
+#~ msgid "Description"
+#~ msgstr "Leírás"
+
+#~ msgid "Reload"
+#~ msgstr "Újratölt"
+
+#, fuzzy
+#~ msgid "No resource selected !"
+#~ msgstr "Nincs kiválasztott elem !"
+
+#, fuzzy
+#~ msgid "You have to select one resource!"
+#~ msgstr "Válasszon ki egy elemet!"
+
+#, fuzzy
+#~ msgid "Are you sure to remove this record ?"
+#~ msgstr "Biztos hogy törölni szeretné a rekordot?"
+
+#, fuzzy
+#~ msgid "Are you sure to remove those records ?"
+#~ msgstr "Biztos hogy törölni szeretné a rekordot?"
+
+#, fuzzy
+#~ msgid "Resources not removed !"
+#~ msgstr "Elem törölve."
+
+#, fuzzy
+#~ msgid "Resources removed."
+#~ msgstr "Elem törölve."
+
+#, fuzzy
+#~ msgid "Document saved !"
+#~ msgstr "Beállítások elmentve!"
+
+#~ msgid "No record selected!"
+#~ msgstr "Nincs kiválasztott rekord!"
+
+#, fuzzy
+#~ msgid "No record selected"
+#~ msgstr "Nincs kiválasztott rekord!"
+
+#~ msgid "New document"
+#~ msgstr "Új dokumentum"
+
+#, fuzzy
+#~ msgid "Editing document (id: "
+#~ msgstr "Dokumentum szerkesztés alatt"
+
+#~ msgid "Record: "
+#~ msgstr "Rekord: "
+
+#, fuzzy
+#~ msgid "No preference available for this resource !"
+#~ msgstr "Az elemnek nincs beállítási lehetősége !"
+
+#, fuzzy
+#~ msgid "Tiny ERP Search: %s"
+#~ msgstr "Tiny ERP - Keresés"
+
+#, fuzzy
+#~ msgid "Tiny ERP Search: %s (%%d result(s))"
+#~ msgstr "Tiny ERP - Felületelemek keresése"
+
+#~ msgid "Name"
+#~ msgstr "Név"
+
+#~ msgid "Ressource Name"
+#~ msgstr "Elemnév"
+
+#~ msgid "Names"
+#~ msgstr "Nevek"
+
+#~ msgid "Changt root"
+#~ msgstr "Gyökér megváltoztatás"
+
+#~ msgid "Open"
+#~ msgstr "Megnyitás"
+
+#~ msgid "Close"
+#~ msgstr "Bezárás"
+
+#~ msgid "No resource selected!"
+#~ msgstr "Nincs elem kiválasztva!"
+
+#~ msgid ""
+#~ "Are you sure you want\n"
+#~ "to remove this record?"
+#~ msgstr "Biztos hogy törölni szeretné a rekordot?"
+
+#~ msgid "Error removing resource!"
+#~ msgstr "Hiba az elem törlése során!"
+
+#~ msgid "Unable to chroot: no tree resource selected"
+#~ msgstr "Nem lehet megváltoztatni a gyökeret: nincs faelem kiválasztva"
+
+#~ msgid "Field name"
+#~ msgstr "Mező neve"
+
+#, fuzzy
+#~ msgid "Are you sure you want to remove this attachment ?"
+#~ msgstr "Biztos hogy törölni szeretné a rekordot?"
+
+#~ msgid "Select the destination file"
+#~ msgstr "Adja meg a célfájlt"
+
+#~ msgid "Can not open file !"
+#~ msgstr "Nem lehet megnyitni a fájlt !"
+
+#~ msgid "Can not write file !"
+#~ msgstr "Nem lehet írni a fájlt!"
+
+#~ msgid "Unknown Window"
+#~ msgstr "Ismeretlen ablak"
+
+#~ msgid "Printing aborted, too long delay !"
+#~ msgstr "Nyomtatás megszakítva időtúllépés miatt!"
+
+#~ msgid "Error: "
+#~ msgstr "Hiba: "
+
+#~ msgid "Select your action"
+#~ msgstr "Válasszon feladatot"
+
+#~ msgid "No action defined!"
+#~ msgstr "Nincs művelet megadva a kiválasztott ponthoz!"
+
+#~ msgid "Connection refused !"
+#~ msgstr "Kapcsolatfelvétel visszautasítva !"
+
+#~ msgid "Connection refused!"
+#~ msgstr "Kapcsolatfelvétel visszautasítva!"
+
+#~ msgid "Application Error"
+#~ msgstr "Alkalmazás hiba"
+
+#~ msgid "View details"
+#~ msgstr "Részletek megtekintése"
+
+#~ msgid "Select the file to attach"
+#~ msgstr "Adja meg a csatolandó fájlt"
+
+#~ msgid "Error reading the file"
+#~ msgstr "Hiba a fájl olvasása közben"
+
+#~ msgid "Save attachment as..."
+#~ msgstr "Melléklet mentése másként"
+
+#~ msgid "Error writing the file!"
+#~ msgstr "Fájlírási hiba!"
+
+#, fuzzy
+#~ msgid "Invalid Form, correct red fields !"
+#~ msgstr "Hibás űrlap! Javítsa a pirossal jelölt mezőket!"
+
+#, fuzzy
+#~ msgid "Set as default"
+#~ msgstr "_Alapértelmezett"
+
+#, fuzzy
+#~ msgid "You have to select a resource !"
+#~ msgstr "Válasszon ki egy elemet!"
+
+#, fuzzy
+#~ msgid "Select a file"
+#~ msgstr "Adja meg a dátumot"
+
+#, fuzzy
+#~ msgid "Save as ..."
+#~ msgstr "Melléklet mentése másként"
+
+#, fuzzy
+#~ msgid "Can not generate graph !"
+#~ msgstr "Nem lehet írni a fájlt!"
+
+#~ msgid "Closing Tiny ERP, KeyboardInterrupt"
+#~ msgstr "Kilépek a Tiny ERP programból, billentyűzet megszakítás"
+
+#, fuzzy
+#~ msgid "No available plugin for this resource !"
+#~ msgstr "Nincs betölthető modul a megadott elemhez!"
+
+#~ msgid "Choose a Plugin"
+#~ msgstr "Válasszon egy modult"
+
+#, fuzzy
+#~ msgid "Limit :"
+#~ msgstr "Korlát:"
+
+#, fuzzy
+#~ msgid "Offset :"
+#~ msgstr "Eltolás:"
+
+#, fuzzy
+#~ msgid "Error no report"
+#~ msgstr "Hiba az elem törlése során!"
+
+#~ msgid "Write Report to File"
+#~ msgstr "Jelentés készítése"
+
+#~ msgid "demo"
+#~ msgstr "demo"
+
+#~ msgid "dialog1"
+#~ msgstr "dialog1"
 
 #~ msgid "Welcome to Tiny Entreprise Resource Planing !"
 #~ msgstr "Köszöntjük a Tiny ERP programban!"
@@ -2035,19 +1988,12 @@ msgstr "Jelszó:"
 #~ msgid "Import Done"
 #~ msgstr "Importálás sikeresen befejezve"
 
-#~ msgid "Import CSV File"
-#~ msgstr "CSV fájl importálása"
-
 #~ msgid "View Create Error:"
 #~ msgstr "Nézetlétrehozási hiba:"
 
 #, fuzzy
 #~ msgid "Value preference"
 #~ msgstr "Érték preferencia"
-
-#, fuzzy
-#~ msgid "Unable to read ressource"
-#~ msgstr "Nem lehet olvasni az elemet"
 
 #~ msgid "This record did not exist !"
 #~ msgstr "A rekord nem lézetik !"

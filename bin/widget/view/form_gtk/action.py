@@ -50,7 +50,7 @@ class action(interface.widget_interface):
 		self.act_id=attrs['name']
 		res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [self.act_id], ['type'], rpc.session.context)
 		if not res:
-			raise 'ActionNotFound'
+			raise Exception, 'ActionNotFound'
 		type=res[0]['type']
 		self.action = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [self.act_id], False, rpc.session.context)[0]
 		if 'view_mode' in attrs:
@@ -81,9 +81,9 @@ class action(interface.widget_interface):
 				vbox=self.win_gl.get_widget('widget_paned_vbox')
 				vbox.add(self.screen.widget)
 				self.widget=self.win_gl.get_widget('widget_paned')
-				self.widget.set_size_request(int(attrs.get('width', -1)), int(attrs.get('haight', -1)))
-#			elif self.action['view_type']=='tree':
-				#TODO
+				self.widget.set_size_request(int(attrs.get('width', -1)), int(attrs.get('height', -1)))
+			elif self.action['view_type']=='tree':
+				pass #TODO
 
 	def _sig_switch(self, *args):
 		self.screen.switch_view()
@@ -99,11 +99,11 @@ class action(interface.widget_interface):
 		obj = service.LocalService('action.main')
 		obj.execute(self.act_id, {})
 
-	def set_value(self, model_field):
+	def set_value(self, mode, model_field):
 		self.screen.current_view.set_value()
 		return True
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		res_id = rpc.session.rpc_exec_auth('/object', 'execute', self.action['res_model'], 'search', self.domain)
 		self.screen.clear()
 		self.screen.load(res_id)

@@ -36,29 +36,26 @@ GNU Public Licence.
 
 (c) 2003-TODAY, Fabien Pinckaers - Tiny sprl
 """
-__author__ = 'Fabien Pinckaers, <fp@tiny.be>'
-__version__ = "4.1.1"
+import sys, os
+import release
+__author__ = release.author
+__version__ = release.version
 
 import __builtin__
 __builtin__.__dict__['tinyerp_version'] = __version__
 
-import sys, os
 import logging
 logging.basicConfig()
 
-#log = logging.getLogger('rpc')
-#log.setLevel(logging.DEBUG)
+from distutils.sysconfig import get_python_lib
+terp_path = os.path.join(get_python_lib(), 'tinyerp-client')
+sys.path.append(terp_path)
 
 if os.name == 'nt':
-	sys.path.insert(0,'.\\GTK-2.0\\lib')
-	sys.path.insert(0,'.\\GTK-2.0\\bin')
-	sys.path.insert(0,'.\\gs8.54\\bin')
-	sys.path.insert(0,'.')
-	os.environ['PATH']=".;gs8.54\\bin;GTK-2.0\\lib;GTK-2.0\\bin;" + os.environ['PATH']
-
-from distutils.sysconfig import get_python_lib
-terp_path = "/".join([get_python_lib(), 'tinyerp-client'])
-sys.path.append(terp_path)
+	sys.path.insert(0, os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'GTK\\bin'))
+	sys.path.insert(0, os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'GTK\\lib'))
+	os.environ['PATH'] = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'GTK\\lib') + ";" + os.environ['PATH']
+	os.environ['PATH'] = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'GTK\\bin') + ";" + os.environ['PATH']
 
 import pygtk
 pygtk.require('2.0')
@@ -67,23 +64,20 @@ import gtk.glade
 
 import locale, gettext
 
-# for testing cx_Freeze
-
 import atk
 import gtk._gtk
 import pango
 
-# end testing
-APP = 'terp'
-DIR = 'po'
+if os.name == 'nt':
+	sys.path.insert(0, os.path.join(os.getcwd(), os.path.dirname(sys.argv[0])))
+	os.environ['PATH'] = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0])) + ";" + os.environ['PATH']
 
-locale.setlocale(locale.LC_ALL, '')
-gettext.bindtextdomain(APP, DIR)
-gettext.textdomain(APP)
-gettext.install(APP, DIR, unicode=1)
-gtk.glade.bindtextdomain(APP, DIR)
+import translate
+translate.setlang()
 
 import options
+
+translate.setlang(options.options['client.lang'])
 
 for logger in options.options['logging.logger'].split(','):
 	if len(logger):
@@ -105,22 +99,9 @@ gtk.stock_add (items)
 factory = gtk.IconFactory ()
 factory.add_default ()
 
-#pix_file = os.path.join(os.getcwd(),'flag.png')
-#if not os.path.isfile(pix_file):
-#	pix_file = os.path.join(options.options['path.pixmaps'],'flag.png')
-#if not os.path.isfile(pix_file):
-#	pix_file = '/usr/share/pixmaps/tinyerp-client/flag.png'
-#pixbuf = gtk.gdk.pixbuf_new_from_file(pix_file)
-#
-#if pixbuf:
-#	icon_set = gtk.IconSet (pixbuf)
-#	factory.add ('terp-translate', icon_set)
-
-pix_file = os.path.join(os.getcwd(),'icons')
+pix_file = os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'icons')
 if not os.path.isdir(pix_file):
 	pix_file = os.path.join(options.options['path.pixmaps'],'icons')
-if not os.path.isdir(pix_file):
-	pix_file = '/usr/share/pixmaps/tinyerp-client/icons'
 
 for fname in os.listdir(pix_file):
 	ffname = os.path.join(pix_file,fname)
@@ -143,7 +124,7 @@ try:
 	if not common.terp_survey():
 		if options.options.rcexist:
 			if options.options['tip.autostart']:
-				common.tipoftheday()
+				common.tipoftheday(win.window)
 			else:
 				win.sig_login()
 	gtk.main()

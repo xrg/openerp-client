@@ -28,6 +28,7 @@
 
 import gtk
 from gtk import glade
+import gettext
 
 import common
 import wid_int
@@ -36,41 +37,47 @@ import rpc
 class reference(wid_int.wid_int):
 	def __init__(self, name, parent, attrs={}):
 		wid_int.wid_int.__init__(self, name, parent, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_reference")
-		self.win_gl.signal_connect('on_but_clear_clicked', self.clear)
-		self.widget = self.win_gl.get_widget('widget_reference')
 
-		self.model = attrs['args']
+		self.widget = gtk.combo_box_entry_new_text()
+		self.widget.child.set_editable(False)
 
-		self.wid_id = self.win_gl.get_widget('ent_id')
-		self.wid_text = self.win_gl.get_widget('ent_reference')
-		self.wid_text.connect('activate', self.sig_activate)
-		self.wid_text.connect('changed', self.sig_changed)
-		self._value=None
+		self.set_popdown(attrs.get('selection', []))
 
-	def sig_activate(self, *args):
-		self.wid_id.set_text(str(self._value[0]))
+	def get_model(self):
+		res = self.widget.child.get_text()
+		return self._selection.get(res, False)
 
-	def sig_changed(self, *args):
-		self.wid_id.set_text('-')
-	
+	def set_popdown(self, selection):
+		model = self.widget.get_model()
+		model.clear()
+		self._selection={}
+		lst = []
+		for (i,j) in selection:
+			name = str(j)
+			if type(i)==type(1):
+				name+=' ('+str(i)+')'
+			lst.append(name)
+			self._selection[name]=i
+		self.widget.append_text('')
+		for l in lst:
+			self.widget.append_text(l)
+		return lst
+
 	def _value_get(self):
-		if self._value:
-			return self._value[0]
+		if self.get_model():
+			return [(self.name, 'like', self.get_model()+',')]
 		else:
-			return False
+			return []
 
 	def _value_set(self, value):
-		self._value = value
-		if self.value!=False:
-			self.wid_text.set_text( value[1] )
-			self.wid_id.set_text( str(value[0]) )
-		else:
-			self.wid_text.set_text( '' )
-			self.wid_id.set_text( '' )
+		if value==False:
+			value=''
+		for s in self._selection:
+			if self._selection[s]==value:
+				self.widget.child.set_text(s)
 
-	value = property(_value_get, _value_set, None,
-	  'The content of the widget or ValueError if not valid')
+
+	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 
 	def clear(self, widget=None):
-		self.value = False
+		self.value = ''

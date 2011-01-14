@@ -28,7 +28,6 @@
 
 import copy
 import gtk
-from gtk import glade
 import wid_common
 
 import rpc
@@ -50,7 +49,7 @@ class widget_interface(object):
 		self.default_readonly = self.attrs.get('readonly', False)
 		self._menu_entries = [
 			(_('Set to default value'), lambda x: self._menu_sig_default_get(), 1),
-			(_('Set default'), lambda x: self._menu_sig_default_set(), 1),
+			(_('Set as default'), lambda x: self._menu_sig_default_set(), 1),
 		]
 
 	def destroy(self):
@@ -60,25 +59,15 @@ class widget_interface(object):
 		try:
 			model = self._view.modelfield.parent.resource
 			res = rpc.session.rpc_exec_auth_try('/object', 'execute', model, 'default_get', [self.attrs['name']])
-			model = self._view.modelfield.set(res.get(self.attrs['name'], False))
-			self.display(self._view.modelfield)
+			model = self._view.modelfield.set(self._view.model, res.get(self.attrs['name'], False))
+			self.display(self._view.model, self._view.modelfield)
 		except:
 			common.warning('You can not set to the default value here !', 'Operation not permited')
 			return False
-		print 'LA'
 
 	def sig_activate(self, widget=None):
 		# emulate a focus_out so that the onchange is called if needed
 		self._focus_out()
-
-	def refresh(self):
-		self._readonly_set(self.attrs.get('readonly', False))
-		if not self.attrs.get('valid', True):
-			self.color_set('invalid')
-		elif self.attrs.get('required', False):
-			self.color_set('required')
-		else:
-			self.color_set('normal')
 
 	def _readonly_set(self, ro):
 		pass
@@ -87,31 +76,23 @@ class widget_interface(object):
 		return self.widget
 
 	def color_set(self, name):
-		colors = {'invalid':'#ffdddd', 'readonly':'grey', 'required':'#ddddff', 'normal':'white'}
 		widget = self._color_widget()
 		map = widget.get_colormap()
-		colour = map.alloc_color(colors.get(name,'white'))
+		colour = map.alloc_color(common.colors.get(name,'white'))
 		widget.modify_bg(gtk.STATE_ACTIVE, colour)
 		widget.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
 		widget.modify_base(gtk.STATE_NORMAL, colour)
 		widget.modify_text(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
-
-	def state_set(self, state):
-		state_changes = dict(self.attrs.get('states',{}).get(state,[]))
-		for key, value in state_changes.items():
-			self.attrs[key] = value
-		else:
-			if 'readonly' not in state_changes:
-				self.attrs['readonly'] = self.default_readonly
+		widget.modify_text(gtk.STATE_INSENSITIVE, gtk.gdk.color_parse("black"))
 
 	def _menu_sig_default_set(self):
 		deps = []
 		wid = self._view.view_form.widgets
 		for wname, wview in self._view.view_form.widgets.items():
 			if wview.modelfield.attrs.get('change_default', False):
-				value = wview.modelfield.get()
+				value = wview.modelfield.get(self._view.model)
 				deps.append((wname, wname, value, value))
-		value = self._view.modelfield.get_default()
+		value = self._view.modelfield.get_default(self._view.model)
 		model = self._view.modelfield.parent.resource
 		wid_common.field_pref_set(self._view.widget_name, self.attrs.get('string', self._view.widget_name), model, value, deps)
 
@@ -137,10 +118,19 @@ class widget_interface(object):
 	def _focus_out(self):
 		if not self._view.modelfield:
 			return False
-		self.set_value(self._view.modelfield)
+		self.set_value(self._view.model, self._view.modelfield)
 
-	def display(self, modelfield):
-		self.refresh()
+	def display(self, model, modelfield):
+		if not modelfield:
+			self._readonly_set(self.attrs.get('readonly', False))
+			return
+		self._readonly_set(modelfield.get_state_attrs(model).get('readonly', False))
+		if not modelfield.get_state_attrs(model).get('valid', True):
+			self.color_set('invalid')
+		elif modelfield.get_state_attrs(model).get('required', False):
+			self.color_set('required')
+		else:
+			self.color_set('normal')
 
 	def sig_changed(self):
 		if self.attrs.get('on_change',False):

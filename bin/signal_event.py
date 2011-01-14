@@ -38,7 +38,8 @@ class signal_event(object):
 
 	def signal_connect(self, key, signal, fnct, *data):
 		self.__connects.setdefault(signal, [])
-		self.__connects[signal].append((fnct, data, key))
+		if (fnct, data, key) not in self.__connects[signal]:
+			self.__connects[signal].append((fnct, data, key))
 		return True
 
 	def signal_unconnect(self, key, signal=None):
@@ -54,6 +55,3 @@ class signal_event(object):
 				else:
 					i+=1
 		return True
-
-
-

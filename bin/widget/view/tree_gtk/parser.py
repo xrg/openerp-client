@@ -27,9 +27,11 @@
 #
 ##############################################################################
 
+import re
 import locale
 import gtk
 from gtk import glade
+import math
 
 import tools
 from rpc import RPCProxy
@@ -41,10 +43,13 @@ import time
 from widget.view.form_gtk.many2one import dialog as M2ODialog
 from modules.gui.window.win_search import win_search
 
+import common
+import rpc
+import datetime as DT
 
 def send_keys(renderer, editable, position, treeview):
 	editable.connect('key_press_event', treeview.on_keypressed)
-	editable.connect('editing_done', treeview.on_editing_done)
+	editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
 
 def sort_model(column, treeview):
 	model = treeview.get_model()
@@ -52,6 +57,7 @@ def sort_model(column, treeview):
 
 class parser_tree(interface.parser_interface):
 	def parse(self, model, root_node, fields):
+		dict_widget = {}
 		attrs = tools.node_attributes(root_node)
 		on_write = attrs.get('on_write', '')
 		editable = attrs.get('editable', False)
@@ -59,7 +65,8 @@ class parser_tree(interface.parser_interface):
 			treeview = EditableTreeView(editable)
 		else:
 			treeview = gtk.TreeView()
-		treeview.editable = editable
+			treeview.editable = editable
+			treeview.cells = {}
 		treeview.colors = dict()
 		self.treeview = treeview
 		for color_spec in attrs.get('colors', '').split(';'):
@@ -73,18 +80,25 @@ class parser_tree(interface.parser_interface):
 		for node in root_node.childNodes:
 			node_attrs = tools.node_attributes(node)
 			if node.localName == 'field':
-				fname = node_attrs['name']
+				fname = str(node_attrs['name'])
 				for boolean_fields in ('readonly', 'required'):
 					if boolean_fields in node_attrs:
 						node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
 				fields[fname].update(node_attrs)
 				node_attrs.update(fields[fname])
 				cell = Cell(fields[fname]['type'])(fname, treeview, node_attrs)
+				treeview.cells[fname] = cell
 				renderer = cell.renderer
-				if editable:
-					renderer.set_property('editable', True)
+				if editable and not node_attrs.get('readonly', False):
+					if isinstance(renderer, gtk.CellRendererToggle):
+						renderer.set_property('activatable', True)
+					else:
+						renderer.set_property('editable', True)
 					renderer.connect_after('editing-started', send_keys, treeview)
 #					renderer.connect_after('editing-canceled', self.editing_canceled)
+				else:
+					if isinstance(renderer, gtk.CellRendererToggle):
+						renderer.set_property('activatable', False)
 
 				col = gtk.TreeViewColumn(fields[fname]['string'], renderer)
 				col.name = fname
@@ -94,11 +108,14 @@ class parser_tree(interface.parser_interface):
 				twidth = {
 					'integer': 60,
 					'float': 80,
+					'float_time': 80,
 					'date': 70,
 					'datetime': 120,
 					'selection': 90,
 					'char': 100,
 					'one2many': 50,
+					'many2many': 50,
+					'boolean': 20,
 				}
 				if 'width' in fields[fname]:
 					width = int(fields[fname]['width'])
@@ -107,8 +124,12 @@ class parser_tree(interface.parser_interface):
 				col.set_min_width(width)
 				col.connect('clicked', sort_model, treeview)
 				col.set_resizable(True)
-				treeview.append_column(col)
-		return treeview, {}, [], on_write
+				#col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
+				col.set_visible(not fields[fname].get('invisible', False))
+				n = treeview.append_column(col)
+				if 'sum' in fields[fname] and fields[fname]['type'] in ('integer', 'float', 'float_time'):
+					dict_widget[n] = (fname, gtk.Label(fields[fname]['sum']+': '), gtk.Label(0), fields.get('digits', (16,2))[1])
+		return treeview, dict_widget, [], on_write
 
 class UnsettableColumn(Exception):
 	pass
@@ -120,9 +141,9 @@ class Cell(object):
 
 
 class Char(object):
-	def __init__(self, field_name, treeview=None, attrs={}):
+	def __init__(self, field_name, treeview=None, attrs=None):
 		self.field_name = field_name
-		self.attrs = attrs
+		self.attrs = attrs or {}
 		self.renderer = gtk.CellRendererText()
 		self.treeview = treeview
 
@@ -132,27 +153,31 @@ class Char(object):
 		cell.set_property('text', text)
 		color = self.get_color(model)
 		cell.set_property('foreground', str(color))
-		if self.attrs['type'] in ('float', 'int'):
+		if self.attrs['type'] in ('float', 'integer', 'boolean'):
 			align = 1
 		else:
 			align = 0
+		if self.treeview.editable:
+			field = model[self.field_name]
+			if not field.get_state_attrs(model).get('valid', True):
+				cell.set_property('background', common.colors.get('invalid', 'white'))
+			elif bool(int(field.get_state_attrs(model).get('required', 0))):
+				cell.set_property('background', common.colors.get('required', 'white'))
 		cell.set_property('xalign', align)
 
 	def get_color(self, model):
-		if (model.id is None) and self.treeview.editable:
-			return 'red'
 		to_display = ''
 		for color, expr in self.treeview.colors.items():
-			if model.expr_eval(expr):
+			if model.expr_eval(expr, check_load=False):
 				to_display = color
 				break
 		return to_display or 'black'
 
-	def open_remote(self, model, create):
+	def open_remote(self, model, create, changed=False, text=None):
 		raise NotImplementedError
 
 	def get_textual_value(self, model):
-		return model[self.field_name].get_client() or ''
+		return model[self.field_name].get_client(model) or ''
 
 	def value_from_text(self, model, text):
 		return text
@@ -162,10 +187,36 @@ class Int(Char):
 	def value_from_text(self, model, text):
 		return int(text)
 
+	def get_textual_value(self, model):
+		return model[self.field_name].get_client(model) or 0
+
+class Boolean(Int):
+
+	def __init__(self, *args):
+		super(Boolean, self).__init__(*args)
+		self.renderer = gtk.CellRendererToggle()
+		self.renderer.connect('toggled', self._sig_toggled)
+
+	def setter(self, column, cell, store, iter):
+		model = store.get_value(iter, 0)
+		value = self.get_textual_value(model)
+		cell.set_active(bool(value))
+
+	def _sig_toggled(self, renderer, path):
+		store = self.treeview.get_model()
+		model = store.get_value(store.get_iter(path), 0)
+		field = model[self.field_name]
+		if not field.get_state_attrs(model).get('readonly', False):
+			value = model[self.field_name].get_client(model)
+			model[self.field_name].set_client(model, int(not value))
+			self.treeview.set_cursor(path)
+		return True
+
+
 class GenericDate(Char):
 
 	def get_textual_value(self, model):
-		value = model[self.field_name].get_client()
+		value = model[self.field_name].get_client(model)
 		if not value:
 			return ''
 		date = time.strptime(value, self.server_format)
@@ -185,21 +236,93 @@ class GenericDate(Char):
 				return False
 		return time.strftime(self.server_format, dt)
 
+if not hasattr(locale, 'nl_langinfo'):
+	locale.nl_langinfo = lambda *a: '%x'
+
+if not hasattr(locale, 'D_FMT'):
+	locale.D_FMT = None
+
 class Date(GenericDate):
 	server_format = '%Y-%m-%d'
-	display_format = '%x'
+	display_format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')
 
 class Datetime(GenericDate):
 	server_format = '%Y-%m-%d %H:%M:%S'
-	display_format = '%x %H:%M:%S'
+	display_format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S'
+
+	def get_textual_value(self, model):
+		value = model[self.field_name].get_client(model)
+		if not value:
+			return ''
+		date = time.strptime(value, self.server_format)
+		if 'tz' in rpc.session.context:
+			try:
+				import pytz
+				lzone = pytz.timezone(rpc.session.context['tz'])
+				szone = pytz.timezone(rpc.session.timezone)
+				dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+				sdt = szone.localize(dt, is_dst=True)
+				ldt = sdt.astimezone(lzone)
+				date = ldt.timetuple()
+			except:
+				pass
+		return time.strftime(self.display_format, date)
+
+	def value_from_text(self, model, text):
+		if not text:
+			return False
+		try:
+			date = time.strptime(text, self.display_format)
+		except:
+			try:
+				dt = list(time.localtime())
+				dt[2] = int(text)
+				date = tuple(dt)
+			except:
+				return False
+		if 'tz' in rpc.session.context:
+			try:
+				import pytz
+				lzone = pytz.timezone(rpc.session.context['tz'])
+				szone = pytz.timezone(rpc.session.timezone)
+				dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+				ldt = lzone.localize(dt, is_dst=True)
+				sdt = ldt.astimezone(szone)
+				date = sdt.timetuple()
+			except:
+				pass
+		return time.strftime(self.server_format, date)
 
 class Float(Char):
 	def get_textual_value(self, model):
-		_, digit = self.attrs.get('digits', (16,2) )
-		return locale.format('%.'+str(digit)+'f', model[self.field_name].get_client() or 0.0)
+		interger, digit = self.attrs.get('digits', (16,2) )
+		return locale.format('%.'+str(digit)+'f', model[self.field_name].get_client(model) or 0.0)
 
 	def value_from_text(self, model, text):
-		return locale.atof(text)
+		try:
+			return locale.atof(text)
+		except:
+			return 0.0
+
+from mx.DateTime import DateTimeDelta
+
+class FloatTime(Char):
+	def get_textual_value(self, model):
+		val = model[self.field_name].get_client(model)
+		t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,2) * 60)
+		if val<0:
+			t = '-'+t
+		return t
+
+	def value_from_text(self, model, text):
+		try:
+			if text and ':' in text:
+				return round(int(text.split(':')[0]) + int(text.split(':')[1]) / 60.0,2)
+			else:
+				return locale.atof(text)
+		except:
+			pass
+		return 0.0
 
 class M2O(Char):
 
@@ -210,29 +333,27 @@ class M2O(Char):
 		relation = model[self.field_name].attrs['relation']
 		rpc = RPCProxy(relation)
 
-		domain = model[self.field_name].domain_get()
-		context = model[self.field_name].context_get()
+		domain = model[self.field_name].domain_get(model)
+		context = model[self.field_name].context_get(model)
 
 		names = rpc.name_search(text, domain, 'ilike', context)
 		if len(names) != 1:
 			return self.search_remote(relation, [x[0] for x in names],
-							 domain=domain, context=context)
+							 domain=domain, context=context)[0]
 		return names[0]
 
 	def open_remote(self, model, create=True, changed=False, text=None):
-		modelfield = model[self.field_name]
-		print modelfield.modified
+		modelfield = model.mgroup.mfields[self.field_name]
 		relation = modelfield.attrs['relation']
 		
+		domain=modelfield.domain_get(model)
+		context=modelfield.context_get(model)
 		if create:
 			id = None
-		elif modelfield.internal and not modelfield.modified and not changed:
-			id = modelfield.internal[0]
+		elif not changed:
+			id = modelfield.get(model)
 		else:
 			rpc = RPCProxy(relation)
-
-			domain=modelfield.domain_get()
-			context=modelfield.context_get()
 
 			names = rpc.name_search(text, domain, 'ilike', context)
 			if len(names) == 1:
@@ -241,18 +362,18 @@ class M2O(Char):
 			if searched[0]:
 				return True, searched
 			return False, False
-		dia = M2ODialog(relation, id)
-		new_value = dia.run()
+		dia = M2ODialog(relation, id, domain=domain,context=context)
+		ok, value = dia.run()
 		dia.destroy()
-		if new_value[0]:
-			return True, new_value[1]
+		if ok:
+			return True, value
 		else:
 			return False, False
 	
 	def search_remote(self, relation, ids=[], domain=[], context={}):
 		rpc = RPCProxy(relation)
 
-		win = win_search(relation, sel_multi=False, ids=ids)
+		win = win_search(relation, sel_multi=False, ids=ids, context=context, domain=domain)
 		found = win.go()
 		if found:
 			return rpc.name_get([found[0]], context)[0]
@@ -262,7 +383,7 @@ class M2O(Char):
 
 class O2M(Char):
 	def get_textual_value(self, model):
-		return '( '+str(len(model[self.field_name].internal.models or [])) + ' )'
+		return '( '+str(len(model[self.field_name].get_client(model).models)) + ' )'
 
 	def value_from_text(self, model, text):
 		raise UnsettableColumn('Can not set column of type o2m')
@@ -270,15 +391,48 @@ class O2M(Char):
 
 class M2M(Char):
 	def get_textual_value(self, model):
-		value = model[self.field_name].internal
+		value = model[self.field_name].get_client(model)
 		if value:
 			return '(%s)' % len(value)
 		else:
 			return '(0)'
 
 	def value_from_text(self, model, text):
-		raise UnsettableColumn('Can not set column of type m2m')
+		if not text:
+			return []
+		if not (text[0]<>'('):
+			return model[self.field_name].get(model)
+		relation = model[self.field_name].attrs['relation']
+		rpc = RPCProxy(relation)
+		domain = model[self.field_name].domain_get(model)
+		context = model[self.field_name].context_get(model)
+		names = rpc.name_search(text, domain, 'ilike', context)
+		ids = [x[0] for x in names]
+		win = win_search(relation, sel_multi=True, ids=ids, context=context, domain=domain)
+		found = win.go()
+		return found or []
 
+	def open_remote(self, model, create=True, changed=False, text=None):
+		modelfield = model[self.field_name]
+		relation = modelfield.attrs['relation']
+
+		rpc = RPCProxy(relation)
+		context = model[self.field_name].context_get(model)
+		domain = model[self.field_name].domain_get(model)
+		if create:
+			if text and len(text) and text[0]<>'(':
+				domain.append(('name','=',text))
+			ids = rpc.search(domain)
+			if ids and len(ids)==1:
+				return True, ids
+		else:
+			ids = model[self.field_name].get_client(model)
+		win = win_search(relation, sel_multi=True, ids=ids, context=context, domain=domain)
+		found = win.go()
+		if found:
+			return True, found
+		else:
+			return False, None
 
 class Selection(Char):
 
@@ -293,7 +447,7 @@ class Selection(Char):
 
 	def get_textual_value(self, model):
 		selection = dict(model[self.field_name].attrs['selection'])
-		return selection.get(model[self.field_name].internal, '')
+		return selection.get(model[self.field_name].get(model), '')
 
 	def value_from_text(self, model, text):
 		selection = model[self.field_name].attrs['selection']
@@ -302,14 +456,18 @@ class Selection(Char):
 				return val
 		return False
 
-CELLTYPES = dict(char=Char,
-				 many2one=M2O,
-				 date=Date,
-				 one2many=O2M,
-				 many2many=M2M,
-				 selection=Selection,
-				 float=Float,
-				 int=Int,
-				 datetime=Datetime)
+CELLTYPES = {
+	'char': Char,
+	'many2one': M2O,
+	'date': Date,
+	'one2many': O2M,
+	'many2many': M2M,
+	'selection': Selection,
+	'float': Float,
+	'float_time': FloatTime,
+	'integer': Int,
+	'datetime': Datetime,
+	'boolean': Boolean,
+}
 
 # vim:noexpandtab:

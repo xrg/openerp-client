@@ -4,8 +4,8 @@ import re
 import workflow_print
 
 plugins_repository = {
-	'workflow_print_simple': {'model':'.*', 'string':'Print Workflow', 'action': workflow_print.wkf_print_simple },
-	'workflow_print': {'model':'.*', 'string':'Print Workflow (Complex)', 'action': workflow_print.wkf_print },
+	'workflow_print_simple': {'model':'.*', 'string':_('Print Workflow'), 'action': workflow_print.wkf_print_simple },
+	'workflow_print': {'model':'.*', 'string':_('Print Workflow (Complex)'), 'action': workflow_print.wkf_print },
 }
 
 def execute(datas):

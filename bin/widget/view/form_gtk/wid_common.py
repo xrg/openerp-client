@@ -48,11 +48,14 @@ def field_pref_set(field, name, model, value, dependance=[]):
 
 	vbox = win_gl.get_widget('pref_vbox')
 	widgets = {}
+	addwidget = False
 	for (fname,fvalue,rname,rvalue) in dependance:
-		widget = gtk.CheckButton(fname+' = '+str(rname))
-		widgets[(fvalue,rvalue)] = widget
-		vbox.pack_start(widget)
-	if not len(dependance):
+		if rvalue:
+			addwidget = True
+			widget = gtk.CheckButton(fname+' = '+str(rname))
+			widgets[(fvalue,rvalue)] = widget
+			vbox.pack_start(widget)
+	if not len(dependance) or not addwidget:
 		vbox.pack_start(gtk.Label(_('Always applicable !')))
 	vbox.show_all()
 
@@ -66,7 +69,7 @@ def field_pref_set(field, name, model, value, dependance=[]):
 
 	win.destroy()
 	if res==gtk.RESPONSE_OK:
-		rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'set', 'default', deps, field, [(model,False)], value, True, False, False, radio.get_active())
+		rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'set', 'default', deps, field, [(model,False)], value, True, False, False, radio.get_active(), True)
 		return True
 	return False
 

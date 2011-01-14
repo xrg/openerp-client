@@ -29,13 +29,17 @@
 
 import locale
 import gtk
-from gtk import glade
-
 import tools
-import graph
 
 from rpc import RPCProxy
 from widget.view import interface
+
+class EmptyGraph(object):
+	def __init__(self, model, axis, fields, axis_data={}, attrs={}):
+		self.widget = gtk.Image()
+
+	def display(self, models):
+		pass
 
 class parser_graph(interface.parser_interface):
 	def parse(self, model, root_node, fields):
@@ -44,24 +48,25 @@ class parser_graph(interface.parser_interface):
 
 		on_write = '' #attrs.get('on_write', '')
 
-		img = gtk.Image()
-		img.set_from_stock('gtk-cancel', gtk.ICON_SIZE_BUTTON)
-		img.show()
-
-
 		axis = []
 		axis_data = {}
 		for node in root_node.childNodes:
 			node_attrs = tools.node_attributes(node)
 			if node.localName == 'field':
-				axis.append(node_attrs['name'])
-				axis_data[node_attrs['name']] = node_attrs
+				axis.append(str(node_attrs['name']))
+				axis_data[str(node_attrs['name'])] = node_attrs
 
 		#
 		# TODO: parse root_node to fill in axis
 		#
 
-		view = graph.ViewGraph(img, model, axis, fields, axis_data, attrs)
+		try:
+			import graph
+			view = graph.ViewGraph(model, axis, fields, axis_data, attrs)
+		except Exception, e:
+			import common
+			common.error('Graph', _('Can not generate graph !'), details=str(e), parent=self.window)
+			view = EmptyGraph(model, axis, fields, axis_data, attrs)
 		return view, {}, [], on_write
 
 

@@ -33,6 +33,7 @@ import gettext
 import xmlrpclib
 import win_list
 import common
+import service
 
 import rpc
 
@@ -44,27 +45,35 @@ fields_list_type = {
 }
 
 class win_search(object):
-	def __init__(self, model, sel_multi=True, ids=[], context={}, domain = []):
+	def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None):
 		self.domain =domain
 		self.context = context
 		self.context.update(rpc.session.context)
 		self.sel_multi = sel_multi
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_search',gettext.textdomain())
 		self.win = self.glade.get_widget('win_search')
-		#self.glade.signal_connect('on_sea_but_find_clicked', self.find)
+		self.win.set_icon_from_file(common.terp_path_pixmaps('tinyerp_icon.png'))
+		if not parent:
+			parent = service.LocalService('gui.main').window
+		self.win.set_transient_for(parent)
 
-		self.screen = Screen(model, view_type=['tree'], context=context)
+		self.screen = Screen(model, view_type=['tree'], context=context, parent=self.win)
 		self.view = self.screen.current_view
 		self.view.unset_editable()
-		sel = self.view.widget.get_selection()
+		sel = self.view.widget_tree.get_selection()
 
 		if not sel_multi:
 			sel.set_mode('single')
 		else:
 			sel.set_mode(gtk.SELECTION_MULTIPLE)
+		vp = gtk.Viewport()
+		vp.set_shadow_type(gtk.SHADOW_NONE)
+		vp.add(self.screen.widget)
 		sw = self.glade.get_widget('search_sw')
-		sw.add_with_viewport(self.screen.widget)
-		self.view.widget.connect('row_activated', self.sig_activate)
+		sw.add(vp)
+		sw.show_all()
+		self.view.widget_tree.connect('row_activated', self.sig_activate)
+		self.view.widget_tree.connect('button_press_event', self.sig_button)
 
 		self.model_name = model
 
@@ -75,7 +84,6 @@ class win_search(object):
 		self.title_results = _('Tiny ERP Search: %s (%%d result(s))') % self.form.name
 		self.win.set_title(self.title)
 		x, y = self.form.widget.size_request()
-		#self.form.value = start_values
 
 		hbox = self.glade.get_widget('search_hbox')
 		hbox.pack_start(self.form.widget)
@@ -86,21 +94,27 @@ class win_search(object):
 		self.old_offset = self.old_limit = None
 		if self.ids:
 			self.old_search = []
-			self.old_limit = self.glade.get_widget('search_spin_limit').get_value_as_int()
-			self.old_offset = self.glade.get_widget('search_spin_offset').get_value_as_int()
+			self.old_limit = self.form.get_limit()
+			self.old_offset = self.form.get_offset()
 
 		self.view.widget.show_all()
 		if self.form.focusable:
 			self.form.focusable.grab_focus()
 
 	def sig_activate(self, treeview, path, column, *args):
-		self.view.widget.emit_stop_by_name('row_activated')
-		self.win.response(gtk.RESPONSE_OK)
-		return True
+		self.view.widget_tree.emit_stop_by_name('row_activated')
+		if not self.sel_multi:
+			self.win.response(gtk.RESPONSE_OK)
+		return False
+
+	def sig_button(self, view, event):
+		if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+			self.win.response(gtk.RESPONSE_OK)
+		return False
 
 	def find(self, widget=None, *args):
-		limit = self.glade.get_widget('search_spin_limit').get_value_as_int()
-		offset = self.glade.get_widget('search_spin_offset').get_value_as_int()
+		limit = self.form.get_limit()
+		offset = self.form.get_offset()
 		if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset):
 			self.win.response(gtk.RESPONSE_OK)
 			return False
@@ -108,10 +122,12 @@ class win_search(object):
 		self.old_limit = limit
 		v = self.form.value
 		v_keys = map(lambda x: x[0], v)
-		for f in self.domain:
-			if f[0] not in v_keys:
-				v.append(f)
-		self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
+		v += self.domain
+		try:
+			self.ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, rpc.session.context)
+		except:
+			# Try if it is not an old server
+			self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
 		self.reload()
 		self.old_search = self.form.value
 		self.win.set_title(self.title_results % len(self.ids))
@@ -120,7 +136,7 @@ class win_search(object):
 	def reload(self):
 		self.screen.clear()
 		self.screen.load(self.ids)
-		sel = self.view.widget.get_selection()
+		sel = self.view.widget_tree.get_selection()
 		if sel.get_mode() == gtk.SELECTION_MULTIPLE:
 			sel.select_all()
 
@@ -141,7 +157,7 @@ class win_search(object):
 				end = not self.find()
 				if end:
 					res = self.sel_ids_get() or self.ids
-			else: # button == gtk.RESPONSE_CANCEL:
+			else:
 				res = None
 				end = True
 		self.destroy()

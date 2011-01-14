@@ -28,7 +28,6 @@
 ##############################################################################
 
 import gtk
-from gtk import glade
 
 import interface
 
@@ -39,29 +38,24 @@ class spinint(interface.widget_interface):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
 		self.widget.set_numeric(True)
 		self.widget.set_width_chars(5)
+		self.widget.set_activates_default(True)
 		self.widget.connect('button_press_event', self._menu_open)
 		if self.attrs['readonly']:
 			self._readonly_set(True)
-		self.state_set('valid')
 		self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
 		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
 		self.widget.connect('activate', self.sig_activate)
 
-	def set_value(self, model_field):
-		try:
-			# we must use get_text and not get_value because get_value
-			# is only updated when the widget loose focus. This is a problem 
-			# if we save a form just after we modified the value of a field
-			model_field.set_client(int(self.widget.get_text()))
-		except:
-			model_field.set_client(0)
+	def set_value(self, model, model_field):
+		self.widget.update()
+		model_field.set_client(model, self.widget.get_value_as_int())
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.widget.set_value(0)
 			return False
-		super(spinint, self).display(model_field)
-		value = model_field.get()
+		super(spinint, self).display(model, model_field)
+		value = model_field.get(model)
 		if isinstance(value, int):
 			self.widget.set_value(value)
 		elif isinstance(value, float):

@@ -44,8 +44,11 @@ def launch_browser(url):
 	else:
 		pid = os.fork()
 		if not pid:
-			webbrowser.open(url)
-			sys.exit()
+			pid = os.fork()
+			if not pid:
+				webbrowser.open(url)
+			sys.exit(0)
+		os.wait()
 
 def node_attributes(node):
 	result = {}
@@ -53,7 +56,9 @@ def node_attributes(node):
 	if attrs is None:
 		return {}
 	for i in range(attrs.length):
-		result[attrs.item(i).localName] = attrs.item(i).nodeValue
+		result[attrs.item(i).localName] = str(attrs.item(i).nodeValue)
 		if attrs.item(i).localName == "digits" and isinstance(attrs.item(i).nodeValue, (str, unicode)):
 			result[attrs.item(i).localName] = eval(attrs.item(i).nodeValue)
 	return result
+
+

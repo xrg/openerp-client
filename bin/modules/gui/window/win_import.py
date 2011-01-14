@@ -64,10 +64,12 @@ def import_csv(csv_data, f, model, fields):
 	return True
 
 class win_import(object):
-	def __init__(self, model, fields, preload = []):
+	def __init__(self, model, fields, preload = [], parent=None):
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_import',gettext.textdomain())
 		self.glade.get_widget('import_csv_combo').set_active(0)
 		self.win = self.glade.get_widget('win_import')
+		if parent:
+			self.win.set_transient_for(parent)
 		self.model = model
 		self.fields_data = {}
 

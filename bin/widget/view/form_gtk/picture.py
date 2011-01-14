@@ -28,7 +28,7 @@
 ##############################################################################
 
 import gtk
-from gtk import glade
+import gettext
 
 import interface
 import os
@@ -38,20 +38,21 @@ import common
 class wid_picture(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_picture")
-		self.widget = self.win_gl.get_widget('widget_picture')
 
-		self.wid_picture = self.win_gl.get_widget('widget_picture_view')
+		self.widget = gtk.VBox(homogeneous=False)
+		self.wid_picture = gtk.Image()
+		self.widget.pack_start(self.wid_picture, expand=True, fill=True)
+
 		self.value=False
 
-	def value_set(self, model_field):
-		self.model_field.set( self._value )
+	def value_set(self, model, model_field):
+		self.model_field.set( model, self._value )
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			return False
 		super(wid_picture, self).display(model_field)
-		value = model_field.get()
+		value = model_field.get(model)
 		import base64
 		self._value = value
 		if self._value:

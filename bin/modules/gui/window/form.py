@@ -53,12 +53,9 @@ from observator import oregistry
 from widget.screen import Screen
 
 class form(object):
-	def __init__(self, model, res_id=False, domain=[], view_type=None, view_ids=[], window=None, context={}):
+	def __init__(self, model, res_id=False, domain=[], view_type=None, view_ids=[], window=None, context={}, name=False):
 		if not view_type:
 			view_type = ['form','tree']
-		else:
-			if view_type[0] in ('tree','graph') and not res_id:
-				res_id = rpc.session.rpc_exec_auth('/object', 'execute', model, 'search', domain)
 
 		fields = {}
 		self.model = model
@@ -71,19 +68,24 @@ class form(object):
 		self.domain = domain
 		self.context = context
 
-		self.screen = Screen(self.model, view_type=view_type, context=self.context, view_ids=view_ids, domain=domain, hastoolbar=options.options['form.toolbar'])
+		self.screen = Screen(self.model, view_type=view_type, context=self.context, view_ids=view_ids, domain=domain, hastoolbar=options.options['form.toolbar'], show_search=True, window=self.window)
 		self.screen.signal_connect(self, 'record-message', self._record_message)
+		self.screen.widget.show()
 		oregistry.add_receiver('misc-message', self._misc_message)
 
-		self.name = self.screen.current_view.title
+		if not name:
+			self.name = self.screen.current_view.title
+		else:
+			self.name = name
 		vp = gtk.Viewport()
 		vp.set_shadow_type(gtk.SHADOW_NONE)
 		vp.add(self.screen.widget)
+		vp.show()
 		self.sw = gtk.ScrolledWindow()
 		self.sw.set_shadow_type(gtk.SHADOW_NONE)
 		self.sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
 		self.sw.add(vp)
-		self.sw.show_all()
+		self.sw.show()
 		
 		self.has_backup = False
 		self.backup = {}
@@ -116,8 +118,10 @@ class form(object):
 				res_id = [res_id]
 			self.screen.load(res_id)
 		else:
-			if len(view_type) and view_type[0]=='form':
+			if self.screen.current_view.view_type == 'form':
 				self.sig_new(autosave=False)
+			if self.screen.current_view.view_type in ('tree', 'graph', 'calendar'):
+				self.screen.search_filter()
 
 	def sig_goto(self, *args):
 		if not self.modified_save():
@@ -180,12 +184,6 @@ class form(object):
 		return True
 
 	def sig_switch(self, widget=None, mode=None):
-		#
-		# Verifier pourquoi:
-		#	1. Modif
-		#	2. Switch & Cancel
-		#	3. Re-Switch -> Question car modified
-		#
 		if not self.modified_save():
 			return
 		self.screen.switch_view()
@@ -219,21 +217,29 @@ class form(object):
 		return True
 
 	def sig_remove(self, widget=None):
-		if common.sur(_('Are you sure to remove this record ?')):
+		if self.screen.current_view.view_type == 'form':
+			msg = _('Are you sure to remove this record ?')
+		else:
+			msg = _('Are you sure to remove those records ?')
+		if common.sur(msg):
 			id = self.screen.remove(unlink=True)
 			if not id:
-				self.message_state(_('Resource not removed !'))
+				self.message_state(_('Resources not removed !'))
 			else:
-				self.message_state(_('Resource removed.'))
+				self.message_state(_('Resources removed.'))
 
 	def sig_import(self, widget=None):
 		fields = []
-		win = win_import.win_import(self.model, self.screen.fields, fields)
+		while(self.screen.view_to_load):
+			self.screen.load_view_to_load()
+		win = win_import.win_import(self.model, self.screen.fields, fields, parent=self.window)
 		res = win.go()
 
 	def sig_save_as(self, widget=None):
 		fields = []
-		win = win_export.win_export(self.model, self.screen.ids_get(), self.screen.fields, fields)
+		while(self.screen.view_to_load):
+			self.screen.load_view_to_load()
+		win = win_export.win_export(self.model, self.screen.ids_get(), self.screen.fields, fields, parent=self.window)
 		res = win.go()
 
 	def sig_new(self, widget=None, autosave=True):
@@ -241,25 +247,24 @@ class form(object):
 			if not self.modified_save():
 				return
 		self.screen.new()
+		self.message_state('')
 	
 	def sig_copy(self, *args):
 		if not self.modified_save():
 			return
 		res_id = self._id_get()
 		new_id = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'copy', res_id, {}, rpc.session.context)
-		self.screen.load([new_id])
-		self.message_state(_('Working now on the duplicated document !'))
+		if new_id:
+			self.screen.load([new_id])
+			self.message_state(_('Working now on the duplicated document !'))
 
 	def _form_save(self, auto_continue=True):
 		pass
 
 	def sig_save(self, widget=None, sig_new=True, auto_continue=True):
-		modification = self.screen.current_model.id
 		id = self.screen.save_current()
 		if id:
 			self.message_state(_('Document saved !'))
-			if not modification:
-				self.screen.new()
 		else:
 			self.message_state(_('Invalid form !'))
 		return bool(id)
@@ -282,9 +287,7 @@ class form(object):
 			self.screen.display()
 		else:
 			id = self.screen.id_get()
-			ids = self.screen.ids_get()
-			self.screen.clear()
-			self.screen.load(ids)
+			self.screen.search_filter()
 			for model in self.screen.models:
 				if model.id == id:
 					self.screen.current_model = model
@@ -303,6 +306,10 @@ class form(object):
 			if not id:
 				return False
 			ids = [id]
+		if self.screen.current_view.view_type == 'tree':
+			sel_ids = self.screen.current_view.sel_ids_get()
+			if sel_ids:
+				ids = sel_ids
 		if len(ids):
 			obj = service.LocalService('action.main')
 			if previous and self.previous_action:
@@ -322,13 +329,13 @@ class form(object):
 		self.sig_action('client_print_multi', report_type='html')
 
 	def sig_print(self):
-		self.sig_action('client_print_multi', adds={'Print Screen': {'report_name':'printscreen.list', 'name':'Print Screen', 'type':'ir.actions.report.xml'}})
+		self.sig_action('client_print_multi', adds={_('Print Screen'): {'report_name':'printscreen.list', 'name':_('Print Screen'), 'type':'ir.actions.report.xml'}})
 
 	def sig_search(self, widget=None):
 		if not self.modified_save():
 			return
 		dom = self.domain
-		win = win_search.win_search(self.model, domain=self.domain, context=self.context)
+		win = win_search.win_search(self.model, domain=self.domain, context=self.context, parent=self.window)
 		res = win.go()
 		if res:
 			self.screen.clear()
@@ -368,17 +375,18 @@ class form(object):
 		else:
 			self.message_state(_('No resource selected !'))
 
-	def modified_save(self):
+	def modified_save(self, reload=True):
 		if self.screen.is_modified():
 			value = common.sur_3b(_('This record has been modified\ndo you want to save it ?'))
 			if value == 'ok':
 				return self.sig_save()
 			elif value == 'ko':
-				self.sig_reload()
+				if reload:
+					self.sig_reload()
 				return True
 			else:
 				return False
 		return True
 
 	def sig_close(self, urgent=False):
-		return self.modified_save()
+		return self.modified_save(reload=False)

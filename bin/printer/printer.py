@@ -35,8 +35,9 @@
 # Print or open a previewer
 #
 
-import os, base64, options
+import os, base64, options, sys
 import gc
+import common
 
 class Printer(object):
 
@@ -45,6 +46,7 @@ class Printer(object):
 			'pdf': self._findPDFOpener,
 			'html': self._findHTMLOpener,
 			'doc': self._findHTMLOpener,
+			'xls': self._findHTMLOpener,
 		}
 
 	def _findInPath(self, progs):
@@ -69,16 +71,27 @@ class Printer(object):
 		if os.name == 'nt':
 			return lambda fn: os.startfile(fn)
 		else:
-			if options.options['printer.preview']:
-				if options.options['printer.softpath_html'] == 'none':
-					prog = self._findInPath(['ooffice2', 'openoffice', 'firefox', 'mozilla', 'galeon'])
-					def opener(fn):
-						os.spawnv(os.P_NOWAIT, prog, (os.path.basename(prog),fn))
-					return opener
-				else:
-					def opener(fn):
-						os.system(options.options['printer.softpath_html'] + ' ' + fn)
-					return opener
+			if options.options['printer.softpath_html'] == 'none':
+				prog = self._findInPath(['ooffice2', 'openoffice', 'firefox', 'mozilla', 'galeon'])
+				def opener(fn):
+					pid = os.fork()
+					if not pid:
+						pid = os.fork()
+						if not pid:
+							os.execv(prog, (os.path.basename(prog),fn))
+						sys.exit(0)
+					os.wait()
+				return opener
+			else:
+				def opener(fn):
+					pid = os.fork()
+					if not pid:
+						pid = os.fork()
+						if not pid:
+							os.system(options.options['printer.softpath_html'] + ' ' + fn)
+						sys.exit(0)
+					os.wait()
+				return opener
 
 	def _findPDFOpener(self):
 		if os.name == 'nt':
@@ -92,14 +105,28 @@ class Printer(object):
 		else:
 			if options.options['printer.preview']:
 				if options.options['printer.softpath'] == 'none':
-					prog = self._findInPath(['evince', 'xpdf', 'gpdf', 'kpdf'])
+					prog = self._findInPath(['evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview'])
 					def opener(fn):
-						os.spawnv(os.P_NOWAIT, prog, (os.path.basename(prog),fn))
+						pid = os.fork()
+						if not pid:
+							pid = os.fork()
+							if not pid:
+								os.execv(prog, (os.path.basename(prog), fn))
+							sys.exit(0)
+						os.wait()
 					return opener
 				else:
 					def opener(fn):
-						os.spawnv(os.P_NOWAIT, options.options['printer.softpath'], (os.path.basename(options.options['printer.softpath']),fn))
+						pid = os.fork()
+						if not pid:
+							pid = os.fork()
+							if not pid:
+								os.execv(options.options['printer.softpath'], (os.path.basename(options.options['printer.softpath']),fn))
+							sys.exit(0)
+						os.wait()
 					return opener
+			else:
+				return lambda fn: print_linux_filename(fn)
 
 	def print_file(self, fname, ftype):
 		finderfunc = self.openers[ftype]
@@ -110,13 +137,15 @@ class Printer(object):
 printer = Printer()
 
 def print_linux_filename(filename):
-	print 'Linux Automatic Printing not implemented. Use XPDF !'
+	common.message(_('Linux Automatic Printing not implemented.\nUse preview option !'))
 
 def print_w32_filename(filename):
 	import win32api
 	win32api.ShellExecute (0, "print", filename, None, ".", 0)
 
 def print_data(data):
+	if 'result' not in data:
+		common.message(_('Error no report'))
 	if data.get('code','normal')=='zlib':
 		import zlib
 		content = zlib.decompress(base64.decodestring(data['result']))
@@ -134,10 +163,11 @@ def print_data(data):
 		printer.print_file(fp_name, data['format'])
 	else:
 		fname = common.file_selection(_('Write Report to File'), data['format'])
-		try:
-			fp = file(filename,'wb+')
-			fp.write(content)
-			fp.close()
-		except:
-			common.message(_('Error writing the file!'))
+		if fname:
+			try:
+				fp = file(fname,'wb+')
+				fp.write(content)
+				fp.close()
+			except:
+				common.message(_('Error writing the file!'))
 

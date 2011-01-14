@@ -28,37 +28,34 @@
 ##############################################################################
 
 import gtk
-from gtk import glade
 
 import interface
 
 class spinbutton(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
+		interface.widget_interface.__init__(self, window, parent, model, attrs)
+
 		adj = gtk.Adjustment(0.0, -1000000000.0, 1000000000, 1.0, 5.0, 5.0)
 		self.widget = gtk.SpinButton(adj, 1.0, digits=int( attrs.get('digits',(14,2))[1] ) )
-		interface.widget_interface.__init__(self, window, parent, model, attrs)
 		self.widget.set_numeric(True)
+		self.widget.set_activates_default(True)
 		self.widget.connect('button_press_event', self._menu_open)
 		if self.attrs['readonly']:
 			self._readonly_set(True)
-		self.state_set('valid')
 		self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
 		self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
 		self.widget.connect('activate', self.sig_activate)
 
-	def set_value(self, model_field):
-		try:
-			res = float(self.widget.get_text())
-		except:
-			res = 0.0
-		model_field.set_client(res)
+	def set_value(self, model, model_field):
+		self.widget.update()
+		model_field.set_client(model, self.widget.get_value())
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
 			self.widget.set_value( 0.0 )
 			return False
-		super(spinbutton, self).display(model_field)
-		value = model_field.get() or 0.0
+		super(spinbutton, self).display(model, model_field)
+		value = model_field.get(model) or 0.0
 		self.widget.set_value( float(value) )
 
 	def _readonly_set(self, value):

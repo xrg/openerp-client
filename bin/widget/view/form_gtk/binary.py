@@ -29,7 +29,8 @@
 
 import base64
 import gtk
-from gtk import glade
+
+import gettext
 
 import interface
 import os
@@ -39,69 +40,77 @@ import common
 class wid_binary(interface.widget_interface):
 	def __init__(self, window, parent, model, attrs={}):
 		interface.widget_interface.__init__(self, window, parent, model, attrs)
-		self.win_gl = glade.XML(common.terp_path("terp.glade"),"widget_binary")
-		self.win_gl.signal_connect('on_but_new_clicked', self.sig_new)
-#		self.win_gl.signal_connect('on_but_open_clicked', self.sig_open)
-		self.win_gl.signal_connect('on_but_remove_clicked', self.sig_remove)
-		self.win_gl.signal_connect('on_but_save_as_clicked', self.sig_save_as)
-		self.widget = self.win_gl.get_widget('widget_binary')
 
-		self.wid_text = self.win_gl.get_widget('ent_binary')
+		self.widget = gtk.HBox(spacing=5)
+		self.wid_text = gtk.Entry()
+		self.wid_text.set_property('activates_default', True)
+		self.widget.pack_start(self.wid_text, expand=True, fill=True)
+
+		self.but_new = gtk.Button(stock='gtk-open')
+		self.but_new.connect('clicked', self.sig_new)
+		self.widget.pack_start(self.but_new, expand=False, fill=False)
+
+		self.but_save_as = gtk.Button(stock='gtk-save-as')
+		self.but_save_as.connect('clicked', self.sig_save_as)
+		self.widget.pack_start(self.but_save_as, expand=False, fill=False)
+
+		self.but_remove = gtk.Button(stock='gtk-clear')
+		self.but_remove.connect('clicked', self.sig_remove)
+		self.widget.pack_start(self.but_remove, expand=False, fill=False)
+
 		self.model_field = False
-		
+
 	def _readonly_set(self, value):
 		if value:
-			self.win_gl.get_widget('but_new').hide()
-#			self.win_gl.get_widget('but_open').hide()
-			self.win_gl.get_widget('but_remove').hide()
+			self.but_new.hide()
+			self.but_remove.hide()
 		else:
-			self.win_gl.get_widget('but_new').show()
-#			self.win_gl.get_widget('but_open').show()
-			self.win_gl.get_widget('but_remove').show()
+			self.but_new.show()
+			self.but_remove.show()
 
 	def sig_new(self, widget=None):
 		try:
-			filename = common.file_selection(_('Select the file to attach'))
-			self.model_field.set_client(base64.encodestring(file(filename).read()))
-			fname = self.attrs.get('fname_widget', False)
-			if fname:
-				self.parent.value = {fname:os.path.basename(filename)}
-			self.display(self.model_field)
+			filename = common.file_selection(_('Select the file to attach'), parent=self._window)
+			if filename:
+				self.model_field.set_client(self._view.model, base64.encodestring(file(filename).read()))
+				fname = self.attrs.get('fname_widget', False)
+				if fname:
+					self.parent.value = {fname:os.path.basename(filename)}
+				self.display(self._view.model, self.model_field)
 		except:
 			common.message(_('Error reading the file'))
 
 	def sig_save_as(self, widget=None):
 		try:
-			filename = common.file_selection(_('Save attachment as...'))
+			filename = common.file_selection(_('Save attachment as...'), parent=self._window)
 			if filename:
 				fp = file(filename,'wb+')
-				fp.write(base64.decodestring(self.model_field.get()))
+				fp.write(base64.decodestring(self.model_field.get(self._view.model)))
 				fp.close()
 		except:
 			common.message(_('Error writing the file!'))
 
-#	def sig_open(self, widget=None):
-#		fname = self.attrs.get('fname_widget', False)
-#		common.start_content(base64.decodestring(self.model_field.get()), fname)
-
 	def sig_remove(self, widget=None):
-		self.model_field.set_client(False)
+		self.model_field.set_client(self._view.model, False)
 		fname = self.attrs.get('fname_widget', False)
 		if fname:
 			self.parent.value = {fname:False}
-		self.display(self.model_field)
+		self.display(self._view.model, self.model_field)
 
-	def display(self, model_field):
+	def display(self, model, model_field):
 		if not model_field:
-			self.widget.set_text('')
+			self.wid_text.set_text('')
 			return False
-		super(wid_binary, self).display(model_field)
+		super(wid_binary, self).display(model, model_field)
 		self.model_field = model_field
-		self.wid_text.set_text(self._size_get(model_field.get()))
+		self.wid_text.set_text(self._size_get(model_field.get(model)))
 		return True
 
 	def _size_get(self, l):
 		return l and _('%d bytes') % len(l) or ''
 
-	def set_value(self, model_field):
+	def set_value(self, model, model_field):
 		return
+
+	def _color_widget(self):
+		return self.wid_text

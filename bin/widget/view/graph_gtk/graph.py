@@ -33,135 +33,100 @@ import gtk
 from gtk import glade
 
 import tools
-from rpc import RPCProxy
+import rpc
 from widget.view import interface
 
-from pychart import *
+import tinygraph
+
+import matplotlib
+matplotlib.use('GTKCairo')
+
+matplotlib.rcParams['xtick.labelsize'] = 10
+matplotlib.rcParams['ytick.labelsize'] = 10
+
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
+from matplotlib.backends.backend_gtk import NavigationToolbar2GTK as NavigationToolbar
+
 
 import StringIO
 
-theme.use_color = 1
+import datetime as DT
+import time
+
+DT_FORMAT = '%Y-%m-%d'
+DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
+HM_FORMAT = '%H:%M:%S'
+
+if not hasattr(locale, 'nl_langinfo'):
+	locale.nl_langinfo = lambda *a: '%x'
+
+if not hasattr(locale, 'D_FMT'):
+	locale.D_FMT = None
+
 
 class ViewGraph(object):
-	def __init__(self, widget, model, axis, fields, axis_data={}, attrs={}):
-		self.widget = widget
+	def __init__(self, model, axis, fields, axis_data={}, attrs={}):
+		self.widget = gtk.HBox()
+		self._figure = Figure(figsize=(800,600), dpi=100, facecolor='w')
+		self._subplot = self._figure.add_subplot(111,axisbg='#eeeeee')
+		self._canvas = FigureCanvas(self._figure)
+		self.widget.pack_start(self._canvas, expand=True, fill=True)
+
+		if attrs.get('type', 'pie')=='bar':
+			if attrs.get('orientation', 'vertical')=='vertical':
+				self._figure.subplots_adjust(left=0.08,right=0.98,bottom=0.25,top=0.98)
+			else:
+				self._figure.subplots_adjust(left=0.20,right=0.97,bottom=0.07,top=0.98)
+		else:
+			self._figure.subplots_adjust(left=0.03,right=0.97,bottom=0.03,top=0.97)
+
 		self.fields = fields
 		self.model = model
 		self.axis = axis
 		self.editable = False
 		self.widget.editable = False
 		self.axis_data = axis_data
+		self.axis_group = {}
+		for i in self.axis_data:
+			self.axis_data[i]['string'] = self.fields[i]['string']
+			if self.axis_data[i].get('group', False):
+				self.axis_group[i]=1
+				self.axis.remove(i)
 		self.attrs = attrs
 
 	def display(self, models):
-		import os
 		datas = []
-		theme.reinitialize()
 		for m in models:
 			res = {}
-			for x in self.axis:
-				if self.fields[x]['type'] in ('many2one', 'char', 'date','datetime','time','text','selection'):
-					res[x] = str(m[x].get_client())
+			for x in self.axis_data.keys():
+				if self.fields[x]['type'] in ('many2one', 'char','time','text','selection'):
+					res[x] = str(m[x].get_client(m))
+				elif self.fields[x]['type'] == 'date':
+					date = time.strptime(m[x].get_client(m), DT_FORMAT)
+					res[x] = time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'), date)
+				elif self.fields[x]['type'] == 'datetime':
+					date = time.strptime(m[x].get_client(m), DHM_FORMAT)
+					if 'tz' in rpc.session.context:
+						try:
+							import pytz
+							lzone = pytz.timezone(rpc.session.context['tz'])
+							szone = pytz.timezone(rpc.session.timezone)
+							dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+							sdt = szone.localize(dt, is_dst=True)
+							ldt = sdt.astimezone(lzone)
+							date = ldt.timetuple()
+						except:
+							pass
+					res[x] = time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S', date)
 				else:
-					res[x] = float(m[x].get_client())
+					res[x] = float(m[x].get_client(m))
 			datas.append(res)
-
-
-		operators = {
-			'+': lambda x,y: x+y,
-			'*': lambda x,y: x*y,
-			'min': lambda x,y: min(x,y),
-			'max': lambda x,y: max(x,y),
-			'**': lambda x,y: x**y
-		}
-		for field in self.axis_data:
-			group = self.axis_data[field].get('group', False)
-			if group:
-				keys = {}
-				for d in datas:
-					if d[field] in keys:
-						for a in self.axis:
-							if a<>field:
-								oper = operators[self.axis_data[a].get('operator', '+')]
-								keys[d[field]][a] = oper(keys[d[field]][a], d[a])
-					else:
-						keys[d[field]] = d
-				datas = keys.values()
-
-		data = []
-		for d in datas:
-			res = []
-			for x in self.axis:
-				if hasattr(d[x], 'replace'):
-					res.append(d[x].replace('/', '//'))
-				else:
-					res.append(d[x])
-			data.append(res)
-
-		if not data:
-			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)
-			return False
-
-#		try:
-		png_string = StringIO.StringIO()
-		can = canvas.init(fname=png_string, format='png')
-
-		area_args = {
-			'size': (200,150)
-		}
-		if self.attrs.get('type','pie')=='pie':
-			ar = area.T(
-				x_grid_style= None,
-				y_grid_style= None,
-				legend= legend.T(),
-				**area_args
-			)
-			plot = pie_plot.T(
-				data=data,
-				arc_offsets=[0,10,0,10],
-				shadow = (2, -2, fill_style.gray50),
-				label_offset = 25,
-				arrow_style = arrow.a3
-			)
-			ar.add_plot(plot)
-		elif self.attrs['type']=='bar':
-			valmin = valmax = 0
-			for i in range(1,len(self.axis)):
-				for d in data:
-					valmin = min(valmin,d[i])
-					valmax = max(valmax,d[i])
-			ar = area.T(
-				x_coord = category_coord.T(data, 0),
-				x_axis = axis.X(label=self.fields[self.axis[0]]['string'].replace('/','//'), format="/a90 %s"),
-				y_axis = axis.Y(label=None, minor_tic_interval=(valmax - valmin)/10),
-				y_range = (valmin, valmax),
-				y_grid_interval = (valmax - valmin)/10,
-				**area_args
-			)
-			for i in range(1,len(self.axis)):
-				plot = bar_plot.T(
-					data=data,
-					label = self.fields[self.axis[i]]['string'],
-					cluster = (i-1, len(self.axis)-1),
-					hcol = i
-				)
-				ar.add_plot(plot)
-		else:
-			raise 'Graph type '+self.attrs['type']+' does not exist !'
-
-		ar.draw(can)
-		can.close()
-
-		data = png_string.getvalue()
-		loader = gtk.gdk.PixbufLoader ('png')
-
-		loader.write (data, len(data))
-		pixbuf = loader.get_pixbuf()
-		loader.close()
-		npixbuf = pixbuf.add_alpha(True, chr(0xff), chr(0xff), chr(0xff))
-		self.widget.set_from_pixbuf(npixbuf)
-#		except Exception,e:
-#			print e
-#			self.widget.set_from_stock('gtk-no', gtk.ICON_SIZE_BUTTON)
-#			return False
-
+		tinygraph.tinygraph(self._subplot, self.attrs.get('type', 'pie'), self.axis, self.axis_data, datas, axis_group_field=self.axis_group, orientation=self.attrs.get('orientation', 'vertical'))
+		# the draw function may generate exception but it is not a problem as it will be redraw latter
+		try:
+			self._subplot.draw()
+			#XXX it must have some better way to force the redraw but this one works
+			self._canvas.queue_resize()
+		except:
+			pass

@@ -13,12 +13,18 @@ import glob
 from stat import ST_MODE
 
 from distutils.file_util import copy_file
-from mydistutils import setup
+from distutils.core import setup
+from mydistutils import L10nAppDistribution
+
+if os.name == 'nt':
+    import py2exe
+
+sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "bin"))
 
 opj = os.path.join
 
-name = 'tinyerp-client'
-version = '4.1.1'
+execfile(opj('bin', 'release.py'))
+
 
 # get python short version
 py_short_version = '%s.%s' % sys.version_info[:2]
@@ -40,15 +46,36 @@ def check_modules():
 
 def data_files():
     '''Build list of data files to be installed'''
-    files = [(opj('share','man','man1',''),['man/tinyerp-client.1']),
-             (opj('share','doc', 'tinyerp-client-%s' % version), 
-              [f for f in glob.glob('doc/*') if os.path.isfile(f)]),
-             (opj('share', 'pixmaps', 'tinyerp-client'),
-              glob.glob('pixmaps/*.png') + glob.glob('bin/*.png')),
-             (opj('share', 'pixmaps', 'tinyerp-client', 'icons'),
-                     glob.glob('bin/icons/*.png')),
-             (opj('share', 'tinyerp-client'),
-              ['bin/terp.glade', 'bin/tipoftheday.txt'] + glob.glob('bin/*.png'))]
+    files = []
+    if os.name == 'nt':
+        import matplotlib
+        files.append(matplotlib.get_py2exe_datafiles())
+        os.chdir('bin')
+        for (dp,dn,names) in os.walk('themes'):
+            if '.svn' in dn:
+                dn.remove('.svn')
+            files.append((dp, map(lambda x: opj('bin', dp,x), names)))
+        for (dp, dn, names) in os.walk('share\\locale'):
+            if '.svn' in dn:
+                dn.remove('.svn')
+            files.append((dp, map(lambda x: opj('bin', dp, x), names)))
+        os.chdir('..')
+        files.append((".",["bin\\terp.glade", "bin\\pixmaps\\tinyerp_icon.png",
+            "bin\\pixmaps\\tinyerp.png", "bin\\pixmaps\\flag.png",
+            "bin\\pixmaps\\tinyerp-icon-32x32.png", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
+        files.append(("po",glob.glob("bin\\po\\*.*")))
+        files.append(("icons",glob.glob("bin\\icons\\*.png")))
+        files.append(("share\\locale", glob.glob("bin\\share\\locale\\*.*")))
+    else:
+        files.append((opj('share','man','man1',''),['man/tinyerp-client.1']))
+        files.append((opj('share','doc', 'tinyerp-client-%s' % version), [f for
+            f in glob.glob('doc/*') if os.path.isfile(f)]))
+        files.append((opj('share', 'pixmaps', 'tinyerp-client'),
+            glob.glob('bin/pixmaps/*.png')))
+        files.append((opj('share', 'pixmaps', 'tinyerp-client', 'icons'),
+            glob.glob('bin/icons/*.png')))
+        files.append((opj('share', 'tinyerp-client'), ['bin/terp.glade',
+            'bin/tipoftheday.txt']))
     return files
 
 included_plugins = ['workflow_print']
@@ -69,20 +96,6 @@ def translations():
         trans.append((dest % (lang, name), po))
     return trans
 
-long_desc = '''\
-Tiny ERP is a complete ERP and CRM. The main features are accounting (analytic
-and financial), stock management, sales and purchases management, tasks
-automation, marketing campaigns, help desk, POS, etc. Technical features include
-a distributed server, flexible workflows, an object database, a dynamic GUI,
-customizable reports, and SOAP and XML-RPC interfaces.
-'''
-
-classifiers = """\
-Development Status :: 5 - Production/Stable
-License :: OSI Approved :: GNU General Public License (GPL)
-Programming Language :: Python
-"""
-
 check_modules()
 
 # create startup script
@@ -95,21 +108,40 @@ f = open('tinyerp-client', 'w')
 f.write(start_script)
 f.close()
 
-# todo: use 
-command = sys.argv[1]
+if os.name <> 'nt' and sys.argv[1] == 'build_po':
+    os.system('(cd bin ; find . -name \*.py && find . -name \*.glade | xargs xgettext -o po/%s.pot)' % name)
+    for file in ([ os.path.join('bin', 'po', fname) for fname in os.listdir('bin/po') ]):
+        if os.path.isfile(file):
+            os.system('msgmerge --update --backup=off %s bin/po/%s.pot' % (file, name))
+    sys.exit()
+
+options = {"py2exe": {"compressed": 1,
+                      "optimize": 2,
+                      "packages": ["encodings","gtk", "matplotlib", "pytz"],
+                      "includes": "pango,atk,gobject,cairo,atk,pangocairo",
+                      "excludes": ["Tkinter", "tcl", "TKconstants"],
+                      "dll_excludes": [
+                          "iconv.dll","intl.dll","libatk-1.0-0.dll",
+                          "libgdk_pixbuf-2.0-0.dll","libgdk-win32-2.0-0.dll",
+                          "libglib-2.0-0.dll","libgmodule-2.0-0.dll",
+                          "libgobject-2.0-0.dll","libgthread-2.0-0.dll",
+                          "libgtk-win32-2.0-0.dll","libpango-1.0-0.dll",
+                          "libpangowin32-1.0-0.dll",
+                          "wxmsw26uh_vc.dll",],
+                      }
+           }
 
 setup(name             = name,
       version          = version,
-      description      = "Tiny's ERP Client",
+      description      = description,
       long_description = long_desc,
-      url              = 'http://tinyerp.com',
-      author           = 'Tiny.be',
-      author_email     = 'info@tiny.be',
+      url              = url,
+      author           = author,
+      author_email     = author_email,
       classifiers      = filter(None, classifiers.splitlines()),
-      license          = 'GPL',
+      license          = license,
       data_files       = data_files(),
       translations     = translations(),
-      pot_file         = 'bin/po/terp-msg.pot',
       scripts          = ['tinyerp-client'],
       packages         = ['tinyerp-client', 'tinyerp-client.common', 
                           'tinyerp-client.modules', 'tinyerp-client.modules.action',
@@ -128,6 +160,9 @@ setup(name             = name,
                           'tinyerp-client.widget_search',
                           'tinyerp-client.plugins'] + list(find_plugins()),
       package_dir      = {'tinyerp-client': 'bin'},
+      distclass = os.name <> 'nt' and L10nAppDistribution or None,
+      windows=[{"script":"bin\\tinyerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\tinyerp.ico")]}],
+      options = options,
       )
 
 
