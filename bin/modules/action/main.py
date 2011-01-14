@@ -30,6 +30,7 @@ import wizard
 import printer
 import common
 import tools
+import options
 from widget.view.form_gtk.many2one import dialog
 
 class main(service.Service):
@@ -51,6 +52,7 @@ class main(service.Service):
         report_id = rpc.session.rpc_exec_auth('/report', 'report', name, ids, datas, ctx)
         state = False
         attempt = 0
+        max_attemps = int(options.options.get('client.timeout') or 0)
         while not state:
             val = rpc.session.rpc_exec_auth('/report', 'report_get', report_id)
             if not val:
@@ -59,7 +61,7 @@ class main(service.Service):
             if not state:
                 time.sleep(1)
                 attempt += 1
-            if attempt>200:
+            if attempt>max_attemps:
                 common.message(_('Printing aborted, too long delay !'))
                 return False
         printer.print_data(val)

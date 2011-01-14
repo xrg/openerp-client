@@ -53,7 +53,6 @@ class image_wid(interface.widget_interface):
         self.event.connect('drag_motion', self.drag_motion)
         self.event.connect('drag_data_received', self.drag_data_received)
 
-        self.tooltips = gtk.Tooltips()
         self.is_readonly = False
 
         self.image = gtk.Image()
@@ -68,7 +67,7 @@ class image_wid(interface.widget_interface):
         self.but_add.set_image(img_add)
         self.but_add.set_relief(gtk.RELIEF_NONE)
         self.but_add.connect('clicked', self.sig_add)
-        self.tooltips.set_tip(self.but_add, _('Set Image'))
+        self.but_add.set_tooltip_text(_('Set Image'))
         self.hbox.pack_start(self.but_add, expand=False, fill=False)
 
         self.but_save_as = gtk.Button()
@@ -77,7 +76,7 @@ class image_wid(interface.widget_interface):
         self.but_save_as.set_image(img_save_as)
         self.but_save_as.set_relief(gtk.RELIEF_NONE)
         self.but_save_as.connect('clicked', self.sig_save_as)
-        self.tooltips.set_tip(self.but_save_as, _('Save As'))
+        self.but_save_as.set_tooltip_text(_('Save As'))
         self.hbox.pack_start(self.but_save_as, expand=False, fill=False)
 
         self.but_remove = gtk.Button()
@@ -86,13 +85,11 @@ class image_wid(interface.widget_interface):
         self.but_remove.set_image(img_remove)
         self.but_remove.set_relief(gtk.RELIEF_NONE)
         self.but_remove.connect('clicked', self.sig_remove)
-        self.tooltips.set_tip(self.but_remove, _('Clear'))
+        self.but_remove.set_tooltip_text(_('Clear'))
         self.hbox.pack_start(self.but_remove, expand=False, fill=False)
 
         self.alignment.add(self.hbox)
         self.widget.pack_start(self.alignment, expand=False, fill=False)
-
-        self.tooltips.enable()
 
         self.update_img()
         self._old_model = False

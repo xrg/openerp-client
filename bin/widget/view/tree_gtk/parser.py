@@ -24,6 +24,7 @@ import re
 import locale
 import gtk
 import math
+import cgi
 
 import tools
 import tools.datetime_util
@@ -46,6 +47,7 @@ import datetime as DT
 import service
 import gobject
 import pango
+import pytz
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed)
@@ -104,7 +106,10 @@ class parser_tree(interface.parser_interface):
                     treeview.sequence = True
                 for boolean_fields in ('readonly', 'required'):
                     if boolean_fields in node_attrs:
-                        node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
+                        if node_attrs[boolean_fields] in ('True', 'False'):
+                            node_attrs[boolean_fields] = eval(node_attrs[boolean_fields])
+                        else:    
+                            node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
                 fields[fname].update(node_attrs)
                 node_attrs.update(fields[fname])
                 cell = Cell(fields[fname]['type'])(fname, treeview, node_attrs,
@@ -123,7 +128,7 @@ class parser_tree(interface.parser_interface):
                 col = gtk.TreeViewColumn(None, renderer)
                 col_label = gtk.Label('')
                 if fields[fname].get('required', False):
-                    col_label.set_markup('<b>%s</b>' % fields[fname]['string'])
+                    col_label.set_markup('<b>%s</b>' % cgi.escape(fields[fname]['string']))
                 else:
                     col_label.set_text(fields[fname]['string'])
                 col_label.show()
@@ -193,11 +198,38 @@ class Char(object):
         if not window:
             window = service.LocalService('gui.main').window
         self.window = window
+    
+    def attrs_set(self, model, cell):
+        if self.attrs.get('attrs',False):
+            attrs_changes = eval(self.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
+            for k,v in attrs_changes.items():
+                result = False
+                for condition in v:
+                    result = tools.calc_condition(self,model,condition)
+                model[self.field_name].get_state_attrs(model)[k] = result
 
+    def state_set(self, model, state='draft'):
+        ro = model.mgroup._readonly
+        field = model[self.field_name]
+        state_changes = dict(field.attrs.get('states',{}).get(state,[]))
+        if 'readonly' in state_changes:
+            field.get_state_attrs(model)['readonly'] = state_changes['readonly'] or ro
+        else:
+            field.get_state_attrs(model)['readonly'] = field.attrs.get('readonly',False) or ro
+        if 'required' in state_changes:
+            field.get_state_attrs(model)['required'] = state_changes['required']
+        else:
+            field.get_state_attrs(model)['required'] = field.attrs.get('required',False)
+        if 'value' in state_changes:
+            field.set(model, state_changes['value'], test_state=False, modified=True)
+                            
     def setter(self, column, cell, store, iter):
         model = store.get_value(iter, 0)
         text = self.get_textual_value(model)
         cell.set_property('text', text)
+        if model.value.get('state',False):
+            self.state_set(model, model.value.get('state','draft'))
+        self.attrs_set(model, cell)
         color = self.get_color(model)
         cell.set_property('foreground', str(color))
         if self.attrs['type'] in ('float', 'integer', 'boolean'):
@@ -206,10 +238,17 @@ class Char(object):
             align = 0
         if self.treeview.editable:
             field = model[self.field_name]
+            
+            #setting the cell property editable or not
+            cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
+                
             if not field.get_state_attrs(model).get('valid', True):
                 cell.set_property('background', common.colors.get('invalid', 'white'))
             elif bool(int(field.get_state_attrs(model).get('required', 0))):
                 cell.set_property('background', common.colors.get('required', 'white'))
+            else:
+                cell.set_property('background', None)
+                  
         cell.set_property('xalign', align)
 
     def get_color(self, model):
@@ -251,6 +290,18 @@ class Boolean(Int):
         model = store.get_value(iter, 0)
         value = self.get_textual_value(model)
         cell.set_active(bool(value))
+        if model.value.get('state',False):
+            self.state_set(model, model.value.get('state','draft'))
+        self.attrs_set(model, cell)
+        if self.treeview.editable:
+            field = model[self.field_name]
+
+            cell.set_property('sensitive',not field.get_state_attrs(model).get('readonly', False))
+            
+            if field.get_state_attrs(model).get('required', True): 
+                cell.set_property('cell-background',common.colors.get('required', 'white'))
+            else:
+                cell.set_property('cell-background',None)   
 
     def _sig_toggled(self, renderer, path):
         store = self.treeview.get_model()
@@ -306,27 +357,53 @@ class Datetime(GenericDate):
         if not value:
             return ''
         date = DT.datetime.strptime(value[:19], self.server_format)
-        
+
         if rpc.session.context.get('tz'):
-            import pytz
-            lzone = pytz.timezone(str(rpc.session.context['tz']))
-            szone = pytz.timezone(rpc.session.timezone)
-            sdt = szone.localize(date, is_dst=True)
-            date = sdt.astimezone(lzone)
-        return date.strftime(self.display_format)
+            try:
+                lzone = pytz.timezone(rpc.session.context['tz'])
+                szone = pytz.timezone(rpc.session.timezone)
+                sdt = szone.localize(date, is_dst=True)
+                date = sdt.astimezone(lzone)
+            except pytz.UnknownTimeZoneError:
+                # Timezones are sometimes invalid under Windows
+                # and hard to figure out, so as a low-risk fix
+                # in stable branch we will simply ignore the
+                # exception and consider client in server TZ
+                # (and sorry about the code duplication as well,
+                # this is fixed properly in trunk)
+                pass
+        if isinstance(date, DT.datetime):
+            return date.strftime(self.display_format)
+        return time.strftime(self.display_format, date)
 
     def value_from_text(self, model, text):
         if not text:
             return False
-        date = DT.datetime.strptime(text[:19], self.display_format)
+        try:
+            date = DT.datetime.strptime(text[:19], self.display_format)
+        except ValueError, ex:
+            #ValueError: time data '__/__/____ __:__:__' does not match format '%m/%d/%Y %H:%M:%S'
+            return False
+
         if rpc.session.context.get('tz'):
-            import pytz
-            lzone = pytz.timezone(str(rpc.session.context['tz']))
-            szone = pytz.timezone(rpc.session.timezone)
-            ldt = lzone.localize(date, is_dst=True)
-            sdt = ldt.astimezone(szone)
-            date = sdt.timetuple()
-        return date.strftime(self.server_format)
+            try:
+                lzone = pytz.timezone(rpc.session.context['tz'])
+                szone = pytz.timezone(rpc.session.timezone)
+                ldt = lzone.localize(date, is_dst=True)
+                sdt = ldt.astimezone(szone)
+                date = sdt.timetuple()
+            except pytz.UnknownTimeZoneError:
+                # Timezones are sometimes invalid under Windows
+                # and hard to figure out, so as a low-risk fix
+                # in stable branch we will simply ignore the
+                # exception and consider client in server TZ
+                # (and sorry about the code duplication as well,
+                # this is fixed properly in trunk)
+                pass
+
+        if isinstance(date, DT.datetime):
+            return date.strftime(self.server_format)
+        return time.strftime(self.server_format, date)
 
 class Float(Char):
     def get_textual_value(self, model):
@@ -342,7 +419,14 @@ class Float(Char):
 class FloatTime(Char):
     def get_textual_value(self, model):
         val = model[self.field_name].get_client(model)
-        t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,4) * 60)
+        hours = math.floor(abs(val))
+        mins = round(abs(val)%1+0.01,2)
+        if mins >= 1.0:
+            hours = hours + 1
+            mins = 0.0
+        else:
+            mins = mins * 60
+        t = '%02d:%02d' % (hours,mins)
         if val<0:
             t = '-'+t
         return t
@@ -485,6 +569,7 @@ class Selection(Char):
 
     def value_from_text(self, model, text):
         selection = model[self.field_name].attrs['selection']
+        text = tools.ustr(text)
         res = False
         for val, txt in selection:
             if txt[:len(text)].lower() == text.lower():

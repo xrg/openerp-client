@@ -74,6 +74,7 @@ class reference(interface.widget_interface):
         self.but_new.connect('clicked', self.sig_new)
         self.but_new.set_alignment(0.5, 0.5)
         self.but_new.set_property('can-focus', False)
+        self.but_new.set_tooltip_text(_('Create a new resource'))
         self.widget.pack_start(self.but_new, expand=False, fill=False)
 
         self.but_open = gtk.Button()
@@ -86,12 +87,8 @@ class reference(interface.widget_interface):
         self.but_open.connect('clicked', self.sig_edit)
         self.but_open.set_alignment(0.5, 0.5)
         self.but_open.set_property('can-focus', False)
+        self.but_open.set_tooltip_text(_('Search / Open a resource'))
         self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
-
-        tooltips = gtk.Tooltips()
-        tooltips.set_tip(self.but_new, _('Create a new resource'))
-        tooltips.set_tip(self.but_open, _('Search / Open a resource'))
-        tooltips.enable()
 
         self.ok = True
         self._readonly = False

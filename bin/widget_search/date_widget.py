@@ -61,13 +61,11 @@ class DateEntry(gtk.Entry):
         self._interactive_input = True
         self.mode_cmd = False
         gobject.idle_add(self.set_position, 0)
-        tooltips = gtk.Tooltips()
-        tooltips.set_tip(self, _('''You can use special operation by pressing +, - or =.  Plus/minus adds/decrease the variable to the current selected date. Equals set part of selected date. Available variables: 12h = 12 hours, 8d = 8 days, 4w = 4 weeks, 1m = 1 month, 2y = 2 years. Some examples:
+        self.set_tooltip_text(_('''You can use special operation by pressing +, - or =.  Plus/minus adds/decrease the variable to the current selected date. Equals set part of selected date. Available variables: 12h = 12 hours, 8d = 8 days, 4w = 4 weeks, 1m = 1 month, 2y = 2 years. Some examples:
 * +21d : adds 21 days to selected year
 * =23w : set date to the 23th week of the year
 * -4m : decrease 4 months to the current date
 You can also use "=" to set the date to the current date/time and '-' to clear the field.'''))
-        tooltips.enable()
 
     def _on_insert_text(self, editable, value, length, position):
         if not self._interactive_input:
@@ -79,7 +77,8 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             return
 
         text = self.get_text()
-        pos = text != self.initial_value and self.get_position() or 0
+        current_pos = self.get_position()
+        pos = (current_pos < 10  or text != self.initial_value) and current_pos or 0
 
         if length != 1:
             # TODO: Implement paste

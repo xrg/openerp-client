@@ -173,6 +173,7 @@ class ModelRecord(signal_event.signal_event):
             field.get_state_attrs(self)['valid'] = True
         if change:
             self.signal('record-changed')
+        self.reload()
         return change
 
     def validate(self):

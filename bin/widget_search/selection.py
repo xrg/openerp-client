@@ -47,8 +47,12 @@ class selection(wid_int.wid_int):
             lst.append(name)
             self._selection[name]=i
         self.widget.append_text('')
+        ind = 1
+        self.indexes = {}
         for l in lst:
             self.widget.append_text(l)
+            self.indexes[l] = ind
+            ind += 1
         return lst
 
     def sig_key_press(self, widget, event):
@@ -63,6 +67,10 @@ class selection(wid_int.wid_int):
             widget.set_completion(completion)
             completion.set_text_column(0)
 
+        # Setting the selected  value active on the entry widget while selection is made by keypress
+        if self._selection.get(widget.get_text(),''):
+            # to let this value count into domain calculation
+            self.widget.set_active(self.indexes[widget.get_text()])
     def _value_get(self):
         model = self.widget.get_model()
         index = self.widget.get_active()

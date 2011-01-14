@@ -152,7 +152,7 @@ class CharField(object):
         else:
             self.get_state_attrs(model)['required'] = self.attrs['required']
         if 'value' in state_changes:
-            self.set(model, value, test_state=False, modified=True)
+            self.set(model, state_changes['value'], test_state=False, modified=True)
 
     def get_state_attrs(self, model):
         if self.name not in model.state_attrs:
@@ -421,7 +421,10 @@ class ReferenceField(CharField):
 
     def get(self, model, check_load=True, readonly=True, modified=False):
         if model.value[self.name]:
-            return '%s,%d' % (model.value[self.name][0], model.value[self.name][1][0])
+            val = model.value[self.name]
+            if not isinstance(val, (tuple, list)):
+                val = eval(val)
+            return '%s,%d' % (val[0], val[1][0])
         return False
 
     def set_client(self, model, value, test_state=False, force_change=False):

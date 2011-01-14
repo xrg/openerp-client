@@ -349,12 +349,11 @@ def _get_db_name_from_url(url):
     return ''
 
 def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
-    print _get_db_name_from_url(url)
     if not dbtoload:
         dbtoload = options.options['login.db'] or ''
         if not dbtoload:
             dbtoload = _get_db_name_from_url(url)
-    
+
     label.hide()
 
     liststore = db_widget.get_model()
@@ -375,9 +374,11 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
         entry_db.set_text(dbtoload)
         entry_db.grab_focus()
         db_widget.hide()
+        if butconnect:
+            butconnect.set_sensitive(True)
     else:
         entry_db.hide()
-        
+
         if not result:
             label.set_label('<b>'+_('No database found, you must create one !')+'</b>')
             label.show()
@@ -386,7 +387,7 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
                 butconnect.set_sensitive(False)
         else:
             db_widget.show()
-            index = 0    
+            index = 0
             for db_num, db_name in enumerate(result):
                 liststore.append([db_name])
                 if db_name == dbtoload:
@@ -513,7 +514,7 @@ class db_login(object):
         passwd = self.win_gl.get_widget('ent_passwd')
         server_widget = self.win_gl.get_widget('ent_server')
         but_connect = self.win_gl.get_widget('button_connect')
-        db_widget = self.win_gl.get_widget('combo_db')
+        combo_db = self.win_gl.get_widget('combo_db')
         entry_db = self.win_gl.get_widget('ent_db')
         change_button = self.win_gl.get_widget('but_server')
         label = self.win_gl.get_widget('combo_label')
@@ -529,31 +530,36 @@ class db_login(object):
 
         # construct the list of available db and select the last one used
         liststore = gtk.ListStore(str)
-        db_widget.set_model(liststore)
+        combo_db.set_model(liststore)
         cell = gtk.CellRendererText()
-        db_widget.pack_start(cell, True)
-        db_widget.add_attribute(cell, 'text', 0)
+        combo_db.pack_start(cell, True)
+        combo_db.add_attribute(cell, 'text', 0)
 
-        res = self.refreshlist(None, db_widget, entry_db, label, url, but_connect)
-        change_button.connect_after('clicked', self.refreshlist_ask, server_widget, db_widget, entry_db, label, but_connect, url, win)
+        res = self.refreshlist(None, combo_db, entry_db, label, url, but_connect)
+        change_button.connect_after('clicked', self.refreshlist_ask, server_widget, combo_db, entry_db, label, but_connect, url, win)
 
         if dbname:
             iter = liststore.get_iter_root()
             while iter:
                 if liststore.get_value(iter, 0)==dbname:
-                    db_widget.set_active_iter(iter)
+                    combo_db.set_active_iter(iter)
                     break
                 iter = liststore.iter_next(iter)
 
         res = win.run()
         m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', server_widget.get_text() or '')
         if m:
+            if combo_db.flags() & gtk.VISIBLE:
+                dbname = combo_db.get_active_text()
+            else:
+                dbname = entry_db.get_text()
+
             options.options['login.server'] = m.group(2)
             options.options['login.login'] = login.get_text()
             options.options['login.port'] = m.group(3)
             options.options['login.protocol'] = m.group(1)
-            options.options['login.db'] = db_widget.get_active_text()
-            result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), db_widget.get_active_text())
+            options.options['login.db'] = dbname
+            result = (login.get_text(), passwd.get_text(), m.group(2), m.group(3), m.group(1), dbname)
         else:
             parent.present()
             win.destroy()
@@ -1298,8 +1304,8 @@ class terp_main(service.Service):
             self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
 
-            page.destroy()
-            del page
+            #page.destroy()
+            #del page
         return self.notebook.get_current_page() != -1
 
     def _wid_get(self,page_num=None):
@@ -1487,7 +1493,7 @@ class terp_main(service.Service):
         pass_widget = dialog.get_widget('ent_passwd_select')
         server_widget = dialog.get_widget('ent_server_select')
         db_widget = dialog.get_widget('combo_db_select')
-        entry_db = dialog.get_widget('ent_db_select')
+        entry_db = dialog.get_widget('entry_db_select')
         label = dialog.get_widget('label_db_select')
 
 

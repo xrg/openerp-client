@@ -35,6 +35,7 @@ import locale
 import rpc
 import service
 import tools
+import pytz
 
 import date_widget
 
@@ -57,10 +58,8 @@ class calendar(interface.widget_interface):
         self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
         self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
 
-        tooltips = gtk.Tooltips()
         self.eb = gtk.EventBox()
-        tooltips.set_tip(self.eb, _('Open the calendar widget'))
-        tooltips.enable()
+        self.eb.set_tooltip_text(_('Open the calendar widget'))
         self.eb.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb.connect('button_press_event', self.cal_open, model, self._window)
         img = gtk.Image()
@@ -182,10 +181,8 @@ class datetime(interface.widget_interface):
         self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
         self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
 
-        tooltips = gtk.Tooltips()
         eb = gtk.EventBox()
-        tooltips.set_tip(eb, _('Open the calendar widget'))
-        tooltips.enable()
+        eb.set_tooltip_text(_('Open the calendar widget'))
         eb.set_events(gtk.gdk.BUTTON_PRESS)
         eb.connect('button_press_event', self.cal_open, model, self._window)
         img = gtk.Image()
@@ -220,13 +217,20 @@ class datetime(interface.widget_interface):
         except:
             return False
         if rpc.session.context.get('tz',False) and timezone:
-            import pytz
-            lzone = pytz.timezone(rpc.session.context['tz'])
-            szone = pytz.timezone(rpc.session.timezone)
-            ldt = lzone.localize(date, is_dst=True)
-            sdt = ldt.astimezone(szone)
-            date = sdt
-
+            try:
+                lzone = pytz.timezone(rpc.session.context['tz'])
+                szone = pytz.timezone(rpc.session.timezone)
+                ldt = lzone.localize(date, is_dst=True)
+                sdt = ldt.astimezone(szone)
+                date = sdt
+            except pytz.UnknownTimeZoneError:
+                # Timezones are sometimes invalid under Windows
+                # and hard to figure out, so as a low-risk fix
+                # in stable branch we will simply ignore the
+                # exception and consider client in server TZ
+                # (and sorry about the code duplication as well,
+                # this is fixed properly in trunk)
+                pass
         try:
             return date.strftime(DHM_FORMAT)
         except ValueError:
@@ -252,12 +256,20 @@ class datetime(interface.widget_interface):
         else:
             date = DT.strptime(dt_val[:19], DHM_FORMAT)
             if rpc.session.context.get('tz',False) and timezone:
-                import pytz
-                lzone = pytz.timezone(rpc.session.context['tz'])
-                szone = pytz.timezone(rpc.session.timezone)
-                sdt = szone.localize(date, is_dst=True)
-                ldt = sdt.astimezone(lzone)
-                date = ldt
+                try:
+                    lzone = pytz.timezone(rpc.session.context['tz'])
+                    szone = pytz.timezone(rpc.session.timezone)
+                    sdt = szone.localize(date, is_dst=True)
+                    ldt = sdt.astimezone(lzone)
+                    date = ldt
+                except pytz.UnknownTimeZoneError:
+                    # Timezones are sometimes invalid under Windows
+                    # and hard to figure out, so as a low-risk fix
+                    # in stable branch we will simply ignore the
+                    # exception and consider client in server TZ
+                    # (and sorry about the code duplication as well,
+                    # this is fixed properly in trunk)
+                    pass
             t=date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
@@ -368,13 +380,22 @@ class stime(interface.widget_interface):
         else:
             date = time.strptime(dt_val[:8], HM_FORMAT)
             if rpc.session.context.get('tz',False) and timezone:
-                import pytz
-                lzone = pytz.timezone(rpc.session.context['tz'])
-                szone = pytz.timezone(rpc.session.timezone)
-                dt = DT(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                sdt = szone.localize(dt, is_dst=True)
-                ldt = sdt.astimezone(lzone)
-                date = ldt.timetuple()
+                try:
+                    lzone = pytz.timezone(rpc.session.context['tz'])
+                    szone = pytz.timezone(rpc.session.timezone)
+                    dt = DT(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+                    sdt = szone.localize(dt, is_dst=True)
+                    ldt = sdt.astimezone(lzone)
+                    date = ldt.timetuple()
+                except pytz.UnknownTimeZoneError:
+                    # Timezones are sometimes invalid under Windows
+                    # and hard to figure out, so as a low-risk fix
+                    # in stable branch we will simply ignore the
+                    # exception and consider client in server TZ
+                    # (and sorry about the code duplication as well,
+                    # this is fixed properly in trunk)
+                    pass
+
             t=time.strftime(self.format, date)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))

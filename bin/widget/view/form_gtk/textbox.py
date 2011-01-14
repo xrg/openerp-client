@@ -51,7 +51,8 @@ class textbox(interface.widget_interface):
     def _readonly_set(self, value):
         interface.widget_interface._readonly_set(self, value)
         self.tv.set_editable(not value)
-        self.tv.set_sensitive(not value)
+        #Commenting following line in order to make text field lines selectable
+#        self.tv.set_sensitive(not value)
 
     def _color_widget(self):
         return self.tv

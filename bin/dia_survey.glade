@@ -4,7 +4,9 @@
 <glade-interface>
   <widget class="GtkDialog" id="dia_survey">
     <property name="border_width">3</property>
+    <property name="title" translatable="yes">OpenERP Survey</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
+    <property name="destroy_with_parent">True</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox1">

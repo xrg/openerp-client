@@ -33,6 +33,7 @@ import options
 import os
 
 import re
+import pytz
 
 CONCURRENCY_CHECK_FIELD = '__last_update'
 
@@ -302,11 +303,16 @@ class rpc_session(object):
                     else:
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
         if self.context.get('tz'):
+            # FIXME: Timezone handling
+            #   rpc_session.timezone contains the server's idea of its timezone (from time.tzname[0]),
+            #   which is quite quite unreliable in some cases. We'll fix this in trunk.
             self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
             try:
-                import pytz
-            except:
-                common.warning('You select a timezone but OpenERP could not find pytz library !\nThe timezone functionality will be disabled.')
+                pytz.timezone(self.timezone)
+            except pytz.UnknownTimeZoneError:
+                # Server timezone is not recognized!
+                # Time values will be displayed as if located in the server timezone. (nothing we can do)
+                pass
 
     def logged(self):
         return self._open

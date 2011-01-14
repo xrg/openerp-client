@@ -43,7 +43,6 @@ class calendar(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}):
         super(calendar, self).__init__(name, parent, attrs)
 
-        tooltips = gtk.Tooltips()
         self.widget = gtk.HBox(spacing=3)
         self.format = LDFMT
         
@@ -52,11 +51,11 @@ class calendar(wid_int.wid_int):
         self.entry1.set_property('width-chars', 10)
         self.entry1.set_property('activates_default', True)
         self.entry1.connect('key_press_event', self.sig_key_press, self.entry1, parent)
-        tooltips.set_tip(self.entry1, _('Start date'))
+        self.entry1.set_tooltip_text(_('Start date'))
         self.widget.pack_start(self.widget1, expand=False, fill=True)
 
         self.eb1 = gtk.EventBox()
-        tooltips.set_tip(self.eb1, _('Open the calendar widget'))
+        self.eb1.set_tooltip_text('Open the calendar widget')
         self.eb1.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb1.connect('button_press_event', self.cal_open, self.entry1, parent)
         img = gtk.Image()
@@ -72,11 +71,11 @@ class calendar(wid_int.wid_int):
         self.entry2.set_property('width-chars', 10)
         self.entry2.set_property('activates_default', True)
         self.entry2.connect('key_press_event', self.sig_key_press, self.entry2, parent)
-        tooltips.set_tip(self.entry2, _('End date'))
+        self.entry2.set_tooltip_text(_('End date'))
         self.widget.pack_start(self.widget2, expand=False, fill=True)
 
         self.eb2 = gtk.EventBox()
-        tooltips.set_tip(self.eb2, _('Open the calendar widget'))
+        self.eb2.set_tooltip_text(_('Open the calendar widget'))
         self.eb2.set_events(gtk.gdk.BUTTON_PRESS)
         self.eb2.connect('button_press_event', self.cal_open, self.entry2, parent)
         img = gtk.Image()
@@ -84,8 +83,6 @@ class calendar(wid_int.wid_int):
         img.set_alignment(0.5, 0.5)
         self.eb2.add(img)
         self.widget.pack_start(self.eb2, expand=False, fill=False)
-
-        tooltips.enable()
 
     def _date_get(self, str):
         try:

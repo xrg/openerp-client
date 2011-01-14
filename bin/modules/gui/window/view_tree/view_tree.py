@@ -35,6 +35,7 @@ from xml.parsers import expat
 import options
 import rpc
 import parse
+import pytz
 
 import tools
 import tools.datetime_util
@@ -98,7 +99,6 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                         date = time.strptime(x[field], DHM_FORMAT)
                         if rpc.session.context.get('tz'):
                             try:
-                                import pytz
                                 lzone = pytz.timezone(rpc.session.context['tz'])
                                 szone = pytz.timezone(rpc.session.timezone)
                                 dt = DT.datetime(date[0], date[1], date[2],
@@ -106,13 +106,21 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                                 sdt = szone.localize(dt, is_dst=True)
                                 ldt = sdt.astimezone(lzone)
                                 date = ldt.timetuple()
-                            except:
+                            except pytz.UnknownTimeZoneError:
+                                # Timezones are sometimes invalid under Windows
+                                # and hard to figure out, so as a low-risk fix
+                                # in stable branch we will simply ignore the
+                                # exception and consider client in server TZ
+                                # (and sorry about the code duplication as well,
+                                # this is fixed properly in trunk)
                                 pass
                         x[field] = time.strftime(display_format, date)
+
             if self.fields_type[field]['type'] in ('one2one','many2one'):
                 for x in res_ids:
                     if x[field]:
                         x[field] = x[field][1]
+
             if self.fields_type[field]['type'] in ('selection'):
                 for x in res_ids:
                     if x[field]:
@@ -124,8 +132,14 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                     x[field] = tools.locale_format('%.' + str(digit) + 'f', x[field] or 0.0)
             if self.fields_type[field]['type'] in ('float_time',):
                 for x in res_ids:
-                    val = '%02d:%02d' % (math.floor(abs(x[field])),
-                            round(abs(x[field]) % 1 + 0.01, 2) * 60)
+                    hours = math.floor(abs(x[field]))
+                    mins = round(abs(x[field]) % 1 + 0.01, 2)
+                    if mins >= 1.0:
+                        hours = hours + 1
+                        mins = 0.0
+                    else:
+                        mins = mins * 60
+                    val = '%02d:%02d' % (hours,mins)
                     if x[field] < 0:
                         val = '-' + val
                     x[field] = val
