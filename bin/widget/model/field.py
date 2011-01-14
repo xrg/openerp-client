@@ -121,6 +121,7 @@ class CharField(object):
         return False
 
     def attrs_set(self, model):
+        uid = rpc.session.uid
         try:
             attrs_changes = eval(self.attrs.get('attrs',"{}"))
         except:

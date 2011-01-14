@@ -169,6 +169,8 @@ class configmanager(object):
                         value = True
                     if value=='False' or value=='false':
                         value = False
+                    if value=='None' or value=='none':
+                        value = None
                     self.options[section+'.'+name] = value
         except Exception, e:
             import logging

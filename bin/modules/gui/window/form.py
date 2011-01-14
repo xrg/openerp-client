@@ -226,6 +226,7 @@ class form(object):
             return
         if mode<>self.screen.current_view.view_type:
             self.screen.switch_view(mode=mode)
+            self.sig_reload()
 
     def sig_logs(self, widget=None):
         id = self.id_get()
@@ -263,12 +264,13 @@ class form(object):
                 self.message_state(_('Resources cleared.'), color='darkgreen')
             else:
                 self.message_state(_('Resources successfully removed.'), color='darkgreen')
-
+        self.sig_reload()
+        
     def sig_import(self, widget=None):
         fields = []
         while(self.screen.view_to_load):
             self.screen.load_view_to_load()
-        win = win_import.win_import(self.model, self.screen.fields, fields, parent=self.window)
+        win = win_import.win_import(self.model, self.screen.fields, fields, parent=self.window,local_context= self.screen.context)
         res = win.go()
 
     def sig_save_as(self, widget=None):
@@ -296,7 +298,8 @@ class form(object):
             self.screen.load([new_id])
             self.screen.current_view.set_cursor()
             self.message_state(_('Working now on the duplicated document !'))
-
+        self.sig_reload()
+        
     def _form_save(self, auto_continue=True):
         pass
 
@@ -409,8 +412,10 @@ class form(object):
             name2 = _('New document')
             if signal_data[3]:
                 name2 = _('Editing document (id: ')+str(signal_data[3])+')'
+            # Total Records should never change    
+            tot_count = signal_data[2] < signal_data[1] and  str(signal_data[1]) or str(signal_data[2])
             msg = _('Record: ') + name + ' / ' + str(signal_data[1]) + \
-                    _(' of ') + str(signal_data[2]) + ' - ' + name2
+                    _(' of ') + str(tot_count) + ' - ' + name2
         sb = self.glade.get_widget('stat_form')
         cid = sb.get_context_id('message')
         sb.push(cid, msg)

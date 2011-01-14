@@ -132,7 +132,10 @@ class main(service.Service):
             ctx.update({'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[])})
             res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.server', 'run', [action['id']], ctx)
             if res:
-                self._exec_action(res, datas, context)
+                if not isinstance(res, list):
+                    res = [res]
+                for r in res:
+                    self._exec_action(r, datas, context)
 
         elif action['type']=='ir.actions.wizard':
             win=None

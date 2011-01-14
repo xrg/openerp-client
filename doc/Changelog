@@ -1,3 +1,50 @@
+2009-12-03: 5.0.7
+=================
+
+Bugfixes
+--------
+
+ * Not linked to a bug report:
+   * xml view parser: first argument to eval function should always be a string
+   * Buttons behavior corrected in editable tree view
+   * do not crop confirmation messages
+   * Import : Context of the action/screen passed while importing
+   * security
+   * actions.server can return a list of actions to execute...
+ * https://launchpad.net/bugs/467392
+   * Sum of listed records should behave acc. to field specification of Digits(digits=(16,3)))
+ * https://launchpad.net/bugs/421474
+   * Date Widgets got nonfunctional when something raised an exception
+ * https://launchpad.net/bugs/479302
+   * Editable List view malfunctioned when its nested O2M
+ * https://launchpad.net/bugs/479168
+   * Records count was showing wrong value when traversing through last records set  of list view
+ * https://launchpad.net/bugs/479593
+   * Attrs now supports uid
+ * https://launchpad.net/bugs/471226
+   * Corrected translation of About Menu content.
+ * https://launchpad.net/bugs/481350
+   * Calendar : Caption with hours and minutes
+ * https://launchpad.net/bugs/487836
+   * If field_name contains accented characters,we need to encode/decode.
+ * https://launchpad.net/bugs/478996
+   * Button with special='cancel' and type='something' can work in parallel
+ * https://launchpad.net/bugs/435365
+   * Calendar view : New record for a click on any day
+ * https://launchpad.net/bugs/373699
+   * Terms made translatable for DB Creation
+ * https://launchpad.net/bugs/446415
+   * No. of records should be updated after copy/removal of records
+ * https://launchpad.net/bugs/490758
+   * Restore DB : Corrected the misguiding message to the user
+
+
+Improvements
+------------
+
+ * handle the case of the server can't give the database list
+ * Add the support of the context for the button tag (type: action & object)
+
 
 2009-09-22: 5.0.6
 =================

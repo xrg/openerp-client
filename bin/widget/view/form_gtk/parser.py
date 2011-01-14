@@ -78,16 +78,34 @@ class Button(Observable):
         model = self.form.screen.current_model
         self.form.set_value()
         button_type = self.attrs.get('special', '')
+
         if button_type=='cancel':
             self.form.screen.window.destroy()
             if 'name' in self.attrs.keys():
-                result = rpc.session.rpc_exec_auth(
-                            '/object', 'execute',
-                            self.form.screen.name,
-                            self.attrs['name'],[], model.context_get())
-                datas = {}
-                obj = service.LocalService('action.main')
-                obj._exec_action(result,datas,context=self.form.screen.context)
+                type_button = self.attrs.get('type','object')
+
+                if type_button == 'action':
+                    obj = service.LocalService('action.main')
+                    action_id = int(self.attrs['name'])
+
+                    context_action = self.form.screen.context.copy()
+                    
+                    if 'context' in self.attrs:
+                        context_action.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
+
+                    obj.execute(action_id, {'model':self.form.screen.name, 'id': False, 'ids': [], 'report_type': 'pdf'}, context=context_action)
+
+                elif type_button == 'object':
+                    result = rpc.session.rpc_exec_auth(
+                                '/object', 'execute',
+                                self.form.screen.name,
+                                self.attrs['name'],[], model.context_get())
+                    datas = {}
+                    obj = service.LocalService('action.main')
+                    obj._exec_action(result,datas,context=self.form.screen.context)
+                else:
+                    raise Exception, 'Unallowed button type'
+                
         elif model.validate():
             id = self.form.screen.save_current()
             if not self.attrs.get('confirm',False) or \
@@ -109,15 +127,19 @@ class Button(Observable):
                         obj = service.LocalService('action.main')
                         for rs in result:
                             obj._exec_action(rs, datas)
-                            
+
                 elif button_type == 'object':
                     if not id:
                         return
+                    context = model.context_get()
+                    if 'context' in self.attrs:
+                        context.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
+
                     result = rpc.session.rpc_exec_auth(
                         '/object', 'execute',
                         self.form.screen.name,
                         self.attrs['name'],
-                        [id], model.context_get()
+                        [id], context
                     )
                     if type(result)==type({}):
                         self.form.screen.window.destroy()
@@ -128,8 +150,14 @@ class Button(Observable):
                 elif button_type == 'action':
                     obj = service.LocalService('action.main')
                     action_id = int(self.attrs['name'])
-                    obj.execute(action_id, {'model':self.form.screen.name, 'id': id or False,
-                        'ids': id and [id] or [], 'report_type': 'pdf'}, context=self.form.screen.context)
+
+                    context = self.form.screen.context.copy()
+
+                    if 'context' in self.attrs:
+                        context.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
+
+                    obj.execute(action_id, {'model':self.form.screen.name, 'id': id or False, 'ids': id and [id] or [], 'report_type': 'pdf'}, context=context)
+
                 else:
                     raise Exception, 'Unallowed button type'
                 self.form.screen.reload()
@@ -209,7 +237,7 @@ class _container(object):
         table.resize(y+1,self.col[-1])
 
     def wid_add(self, widget, name=None, expand=False, ypadding=2, rowspan=1,
-            colspan=1, translate=False, fname=None, help=False, fill=False):
+            colspan=1, translate=False, fname=None, help=False, fill=False, invisible=False):
         (table, x, y) = self.cont[-1]
         if colspan>self.col[-1]:
             colspan=self.col[-1]
@@ -263,6 +291,8 @@ class _container(object):
         wid_list = table.get_children()
         wid_list.reverse()
         table.set_focus_chain(wid_list)
+        if invisible:
+            hbox.hide()
 
 class parser_form(widget.view.interface.parser_interface):
     def parse(self, model, root_node, fields, notebook=None, paned=None, tooltips=None):
@@ -394,15 +424,12 @@ class parser_form(widget.view.interface.parser_interface):
             elif node.localName=='field':
                 name = str(attrs['name'])
                 del attrs['name']
+                name = unicode(name)
                 type = attrs.get('widget', fields[name]['type'])
                 fields[name].update(attrs)
                 fields[name]['model']=model
                 if not type in widgets_type:
                     continue
-                if attrs.get('invisible', False):
-                    visval = eval(attrs['invisible'], {'context':self.screen.context})
-                    if visval:
-                        continue
 
                 fields[name]['name'] = name
                 if 'saves' in attrs:
@@ -427,6 +454,10 @@ class parser_form(widget.view.interface.parser_interface):
                 if attrs.get('height', False) or attrs.get('width', False):
                     widget_act.widget.set_size_request(
                             int(attrs.get('width', -1)), int(attrs.get('height', -1)))
+                if attrs.get('invisible', False):
+                    visval = eval(attrs['invisible'], {'context':self.screen.context})
+                    if visval:
+                        continue
                 container.wid_add(widget_act.widget, label, expand, translate=fields[name].get('translate',False), colspan=size, fname=name, help=hlp, fill=fill)
 
             elif node.localName=='group':

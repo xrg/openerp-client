@@ -174,6 +174,16 @@
                         <property name="position">1</property>
                       </packing>
                     </child>
+                    <child>
+                        <widget class="GtkEntry" id="ent_db">
+                            <property name="visible">True</property>
+                        </widget>
+                        <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                        </packing>
+                    </child>
                   </widget>
                   <packing>
                     <property name="left_attach">1</property>
@@ -2165,8 +2175,8 @@ Web: http://tiny.be</property>
     </child>
   </widget>
   <widget class="GtkDialog" id="win_sur">
-    <property name="width_request">350</property>
-    <property name="height_request">143</property>
+    <property name="width_request">450</property>
+    <property name="height_request">150</property>
     <property name="title" translatable="yes">OpenERP - Confirmation</property>
     <property name="modal">True</property>
     <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
@@ -2192,13 +2202,15 @@ Web: http://tiny.be</property>
             </child>
             <child>
               <widget class="GtkLabel" id="lab_question">
-                <property name="width_request">200</property>
-                <property name="height_request">60</property>
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Hello World!</property>
+                <property name="label">Are you sure?</property>
+                <property name="wrap">True</property>
+                <property name="single_line_mode">False</property>
               </widget>
               <packing>
                 <property name="position">1</property>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
               </packing>
             </child>
           </widget>
@@ -6457,6 +6469,16 @@ Latin1</property>
                       </widget>
                     </child>
                     <child>
+                        <widget class="GtkEntry" id="entry_db_select">
+                            <property name="visible">True</property>
+                        </widget>
+                        <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                        </packing>
+                    </child>
+                    <child>
                       <widget class="GtkLabel" id="label_db_select">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
@@ -7763,7 +7785,7 @@ Latin1</property>
                         <child>
                           <widget class="GtkLabel" id="label46558">
                             <property name="visible">True</property>
-                            <property name="label">Connect Later</property>
+                            <property name="label" translatable="yes" >Connect Later</property>
                             <property name="use_underline">True</property>
                           </widget>
                           <packing>
@@ -7807,7 +7829,7 @@ Latin1</property>
                         <child>
                           <widget class="GtkLabel" id="label46557">
                             <property name="visible">True</property>
-                            <property name="label">Connect now</property>
+                            <property name="label" translatable="yes">Connect now</property>
                             <property name="use_underline">True</property>
                           </widget>
                           <packing>
