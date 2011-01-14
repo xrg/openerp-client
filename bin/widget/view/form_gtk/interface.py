@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -37,6 +36,7 @@ class widget_interface(object):
         if attrs is None:
             attrs = {}
         self.parent = parent
+        self.position = 0
         self._window = window
         self._view = None
         self.attrs = attrs
@@ -60,7 +60,7 @@ class widget_interface(object):
             self._view.modelfield.set(self._view.model, res.get(self.attrs['name'], False), modified=True)
             self.display(self._view.model, self._view.modelfield)
         except:
-            common.warning('You can not set to the default value here !', 'Operation not permited')
+            common.warning(_('You can not set to the default value here !'), _('Operation not permited'))
             return False
 
     def sig_activate(self, widget=None):
@@ -96,21 +96,29 @@ class widget_interface(object):
                 self.attrs.get('string', self._view.widget_name), model,
                 value, deps, window=self._window)
 
-    def _menu_open(self, obj, event):
-        if event.button == 3:
-            menu = gtk.Menu()
-            for stock_id,callback,sensitivity in self._menu_entries:
-                if stock_id:
-                    item = gtk.ImageMenuItem(stock_id)
-                    if callback:
-                        item.connect("activate",callback)
-                    item.set_sensitive(sensitivity)
-                else:
-                    item=gtk.SeparatorMenuItem()
-                item.show()
-                menu.append(item)
-            menu.popup(None,None,None,event.button,event.time)
-            return True
+    def _menu_open(self, obj, menu):
+        item = gtk.SeparatorMenuItem()
+        item.show()
+        if isinstance(obj, gtk.TextView):
+            menu.insert(item, -1)
+        else:
+            menu.attach(item, 0, 1, 4, 5)
+        i = 5
+        for stock_id, callback, sensitivity in self._menu_entries:
+            if stock_id:
+                item = gtk.ImageMenuItem(stock_id)
+                if callback:
+                    item.connect("activate",callback)
+                item.set_sensitive(sensitivity)
+            else:
+                item = gtk.SeparatorMenuItem()
+            item.show()
+            if isinstance(obj, gtk.TextView):
+                menu.insert(item, -1)
+            else:
+                menu.attach(item, 0, 1, i, i+1)
+            i= i+1
+        return True
 
     def _focus_in(self):
         pass
@@ -137,6 +145,18 @@ class widget_interface(object):
     def sig_changed(self):
         if self.attrs.get('on_change',False):
             self._view.view_form.screen.on_change(self.attrs['on_change'])
+
+    def grab_focus(self):
+        return self.widget.grab_focus()
+
+    def hide(self):
+        return self.widget.hide()
+
+    def show(self):
+        return self.widget.show()
+
+    def set_sensitive(self, value):
+        return self.widget.set_sensitive(value)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

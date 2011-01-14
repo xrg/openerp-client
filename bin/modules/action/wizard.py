@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -91,6 +90,7 @@ class dialog(object):
             return (self.states[res], datas)
         else:
             self.dia.destroy()
+            self.screen.destroy()
             return False
 
 def execute(action, datas, state='init', parent=None, context=None):
@@ -133,32 +133,7 @@ def execute(action, datas, state='init', parent=None, context=None):
                     i += 1
                     if i > 10:
                         if not win or not pb:
-                            win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
-                            win.set_title(_('OpenERP Computing'))
-                            win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                            vbox = gtk.VBox(False, 0)
-                            hbox = gtk.HBox(False, 13)
-                            hbox.set_border_width(10)
-                            img = gtk.Image()
-                            img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
-                            hbox.pack_start(img, expand=True, fill=False)
-                            vbox2 = gtk.VBox(False, 0)
-                            label = gtk.Label()
-                            label.set_markup('<b>'+_('Operation in progress')+'</b>')
-                            label.set_alignment(0.0, 0.5)
-                            vbox2.pack_start(label, expand=True, fill=False)
-                            vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
-                            vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
-                            hbox.pack_start(vbox2, expand=True, fill=True)
-                            vbox.pack_start(hbox)
-                            pb = gtk.ProgressBar()
-                            pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
-                            vbox.pack_start(pb, expand=True, fill=False)
-                            win.add(vbox)
-                            if not self.parent:
-                                self.parent = service.LocalService('gui.main').window
-                            win.set_transient_for(self.parent)
-                            win.show_all()
+                            win, pb = common.OpenERP_Progressbar(self.parent)
                         pb.pulse()
                         gtk.main_iteration()
                 if win:
@@ -172,7 +147,7 @@ def execute(action, datas, state='init', parent=None, context=None):
                     try:
                         raise self.exception
                     except socket.error, e:
-                        common.message(str(e), title=_('Connection refused !'), type=gtk.MESSAGE_ERROR)
+                        common.message(str(e), title=_('Connection refused !'), type=gtk.MESSAGE_ERROR, parent=self.parent)
                     except xmlrpclib.Fault, err:
                         a = rpc_exception(err.faultCode, err.faultString)
                         if a.type in ('warning', 'UserError'):
@@ -182,13 +157,13 @@ def execute(action, datas, state='init', parent=None, context=None):
                                         del args[4][CONCURRENCY_CHECK_FIELD]
                                     return self.rpc_exec_auth(obj, method, *args)
                             else:
-                                common.warning(a.data, a.message)
+                                common.warning(a.data, a.message, parent=self.parent)
                         else:
                             common.error(_('Application Error'), err.faultCode, err.faultString)
                     except tiny_socket.Myexception, err:
                         a = rpc_exception(err.faultCode, err.faultString)
                         if a.type in ('warning', 'UserError'):
-                            common.warning(a.data, a.message)
+                            common.warning(a.data, a.message, parent=self.parent)
                         else:
                             common.error(_('Application Error'), err.faultCode, err.faultString)
                     except Exception, e:

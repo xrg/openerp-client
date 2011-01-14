@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -26,6 +25,7 @@ from base64 import encodestring, decodestring
 import pygtk
 pygtk.require('2.0')
 import gtk
+from datetime import datetime
 
 import common
 import interface
@@ -33,6 +33,7 @@ import tempfile
 import urllib
 
 NOIMAGE = file(common.terp_path_pixmaps("noimage.png"), 'rb').read()
+REQUIRED_IMG = file(common.terp_path_pixmaps("image_required.png"), 'rb').read()
 
 
 class image_wid(interface.widget_interface):
@@ -41,6 +42,8 @@ class image_wid(interface.widget_interface):
         interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
 
         self._value = ''
+        self._set_required_img = False
+        self.attrs = attrs
         self.height = int(attrs.get('img_height', 100))
         self.width = int(attrs.get('img_width', 300))
 
@@ -77,6 +80,8 @@ class image_wid(interface.widget_interface):
         self.but_save_as.set_relief(gtk.RELIEF_NONE)
         self.but_save_as.connect('clicked', self.sig_save_as)
         self.but_save_as.set_tooltip_text(_('Save As'))
+        self.has_filename = attrs.get('filename')
+        self.data_field_name = attrs.get('name')
         self.hbox.pack_start(self.but_save_as, expand=False, fill=False)
 
         self.but_remove = gtk.Button()
@@ -111,15 +116,28 @@ class image_wid(interface.widget_interface):
         if filename:
             self._value = encodestring(file(filename, 'rb').read())
             self.update_img()
+            if self.has_filename:
+                self._view.model.set({self.has_filename: os.path.basename(filename)}, modified=True)
+
+    def _get_filename(self):
+        return self._view.model.value.get(self.has_filename) \
+               or self._view.model.value.get('name', self.data_field_name) \
+               or datetime.now().strftime('%c')
 
     def sig_save_as(self, widget):
-        filename = common.file_selection(_('Save As...'), parent=self._window,
-                action=gtk.FILE_CHOOSER_ACTION_SAVE)
-        if filename:
-            file(filename, 'wb').write(decodestring(self._value))
-    
+        if not self._value:
+            common.warning(_('There is no image to save as !'),_('Warning'))
+        else:
+            filename = common.file_selection(_('Save As...'), filename=self._get_filename(), parent=self._window,
+                    action=gtk.FILE_CHOOSER_ACTION_SAVE)
+            if filename:
+                fp = file(filename,'wb+')
+                fp.write(decodestring(self._value))
+                fp.close()
+
     def sig_remove(self, widget):
         self._value = ''
+        self.set_value(self._view.model, self._view.model.mgroup.mfields[self.attrs['name']])
         self.update_img()
 
     def drag_motion(self, widget, context, x, y, timestamp):
@@ -148,10 +166,20 @@ class image_wid(interface.widget_interface):
                 self.update_img()
 
     def update_img(self):
+        data = NOIMAGE
         if not self._value:
-            data = NOIMAGE
+            if self._set_required_img:
+                data = REQUIRED_IMG                
         else:
-            data = decodestring(self._value)
+            try:
+                data = decodestring(self._value)
+            except: 
+                import logging
+                log = logging.getLogger('common')
+                log.warning(_('Image corrupted'))
+
+                
+                
 
         pixbuf = None
         for type in ('jpeg', 'gif', 'png', 'bmp'):
@@ -203,9 +231,20 @@ class image_wid(interface.widget_interface):
         return model_field.set_client(model, self._value or False)
 
     def _readonly_set(self, value):
-        self.but_add.set_sensitive(not value)
-        self.but_save_as.set_sensitive(not value)
-        self.but_remove.set_sensitive(not value)
+        if value:
+            self.but_add.hide()
+            self.but_save_as.hide()
+            self.but_remove.hide()
+        else:
+            self.but_add.show()
+            self.but_save_as.show()
+            self.but_remove.show()
         self.is_readonly = value
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
+    def grab_focus(self):
+        self._set_required_img = True
+        self.update_img()
+        self._set_required_img = False
+        return self.image.grab_focus()
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

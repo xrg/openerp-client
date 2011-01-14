@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -41,25 +40,23 @@ class action(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-        self.act_id=attrs['name']
+        self.act_id = int(attrs['name'])
         res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', [self.act_id], ['type'], rpc.session.context)
         if not res:
             raise Exception, 'ActionNotFound'
-        type=res[0]['type']
+        type = res[0]['type']
         self.action = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [self.act_id], False, rpc.session.context)[0]
         if 'view_mode' in attrs:
             self.action['view_mode'] = attrs['view_mode']
 
-        if self.action['type']=='ir.actions.act_window':
+        if self.action['type'] == 'ir.actions.act_window':
             if not self.action.get('domain', False):
-                self.action['domain']='[]'
+                self.action['domain'] = '[]'
+            if attrs.get('domain',False):
+                self.action['domain'] = attrs.get('domain')
             self.context = {'active_id': False, 'active_ids': []}
-            self.context.update(eval(self.action.get('context', '{}'), self.context.copy()))
-            a = self.context.copy()
-            a['time'] = time
-            a['datetime'] = datetime
-            self.domain = tools.expr_eval(self.action['domain'], a)
-
+            self.context.update(tools.expr_eval(self.action.get('context', '{}'), self.context.copy()))
+            self.domain = tools.expr_eval(self.action['domain'], self.context.copy())
             view_id = []
             if self.action['view_id']:
                 view_id = [self.action['view_id'][0]]
@@ -92,7 +89,7 @@ class action(interface.widget_interface):
 
     def _sig_open(self, *args):
         obj = service.LocalService('action.main')
-        obj.execute(self.act_id, {})
+        obj.execute(self.act_id, datas={}, type=None, context={})
 
     def set_value(self, mode, model_field):
         self.screen.current_view.set_value()
@@ -101,10 +98,13 @@ class action(interface.widget_interface):
     def display(self, model, model_field):
         res_id = rpc.session.rpc_exec_auth('/object', 'execute',
                 self.action['res_model'], 'search', self.domain, 0,
-                self.action.get('limit', 80),False,self.context)
+                self.action.get('limit', 100),False,self.context)
         self.screen.clear()
         self.screen.load(res_id)
         return True
+
+
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

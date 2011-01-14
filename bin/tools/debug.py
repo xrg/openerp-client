@@ -1,25 +1,24 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
+import logging
 def logged(showtime):
     def log(f, res, *args, **kwargs):
         vector = ['Call -> function: %s' % f]
@@ -28,7 +27,7 @@ def logged(showtime):
         for key, value in kwargs.items():
             vector.append( '  kwarg %10s: %r' % ( key, value ) )
         vector.append( '  result: %r' % res )
-        print "\n".join(vector)
+        logging.getLogger('debug').info("\n".join(vector))
 
     def outerwrapper(f):
         def wrapper(*args, **kwargs):
@@ -42,7 +41,7 @@ def logged(showtime):
             finally:
                 log(f, res, *args, **kwargs)
                 if showtime:
-                    print "  time delta: %s" % (time.time() - now)
+                    logging.getLogger('wrapper').info("  time delta: %s" % (time.time() - now))
         return wrapper
     return outerwrapper
 
@@ -60,7 +59,7 @@ def debug(what):
         >>> func_foo(42)
 
         This will output on the logger:
-        
+
             [Wed Dec 25 00:00:00 2008] DEBUG:func_foo:baz = 42
             [Wed Dec 25 00:00:00 2008] DEBUG:func_foo:qnx = (42, 42)
 
@@ -68,7 +67,6 @@ def debug(what):
             --log-level=debug
 
     """
-    import logging
     from inspect import stack
     import re
     from pprint import pformat

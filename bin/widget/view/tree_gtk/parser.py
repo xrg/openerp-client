@@ -1,24 +1,24 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 
 import re
 import locale
@@ -27,13 +27,12 @@ import math
 import cgi
 
 import tools
-import tools.datetime_util
+from tools import user_locale_format, datetime_util
 
 from rpc import RPCProxy
 from editabletree import EditableTreeView
-from decoratedtree import DecoratedTreeView
 from widget.view import interface
-
+from widget.view.list import group_record
 import time
 import date_renderer
 
@@ -47,58 +46,96 @@ import datetime as DT
 import service
 import gobject
 import pango
-import pytz
 
-def send_keys(renderer, editable, position, treeview):
-    editable.connect('key_press_event', treeview.on_keypressed)
-    editable.editing_done_id = editable.connect('editing_done', treeview.on_editing_done)
-    if isinstance(editable, gtk.ComboBoxEntry):
-        editable.connect('changed', treeview.on_editing_done)
+def send_keys(renderer, entry, position, treeview):
+    if entry:
+        entry.connect('key_press_event', treeview.on_keypressed, renderer.get_property('text'))
+        entry.set_data('renderer', renderer)
+        entry.editing_done_id = entry.connect('editing_done', treeview.on_editing_done)
+        if isinstance(entry, gtk.ComboBoxEntry):
+            entry.connect('changed', treeview.on_editing_done)
 
-def sort_model(column, treeview):
-    model = treeview.get_model()
-    model.sort(column.name)
+def sort_model(column, screen):
+    unsaved_model =  [x for x in screen.models if x.id == None or x.modified]
+    if unsaved_model:
+        res =  common.message(_('You have unsaved record(s) !  \n\nPlease Save them before sorting !'))
+        return res
+    group_by = screen.context.get('group_by',[])
+    group_by_no_leaf = screen.context.get('group_by_no_leaf')
+    screen.current_view.set_drag_and_drop(column.name == 'sequence')
+
+    screen.current_view.expandedRows = []
+    screen.current_view.widget_tree.map_expanded_rows(screen.current_view.get_expanded_rows)
+    expanded = []
+    for path in screen.current_view.expandedRows:
+        expanded.append(screen.current_view.get_id(path))
+
+    if screen.sort == column.name:
+        screen.sort = column.name+' desc'
+    else:
+        screen.sort = column.name
+    screen.offset = 0
+    if screen.type in ('many2many','one2many'):
+        screen.sort_domain = [('id','in',screen.ids_get())]
+    screen.search_filter()
+
+    if len(expanded) > 0:
+        paths = screen.current_view.get_path(expanded)
+        for path in paths:
+            #path = screen.current_view.get_path(value)
+            screen.current_view.expand_row(path)
 
 class parser_tree(interface.parser_interface):
+
     def parse(self, model, root_node, fields):
         dict_widget = {}
-        btn_list=[]
         attrs = tools.node_attributes(root_node)
         on_write = attrs.get('on_write', '')
         editable = attrs.get('editable', False)
-        if editable:
-            treeview = EditableTreeView(editable)
-        else:
-            treeview = DecoratedTreeView(editable)
+        treeview = EditableTreeView(editable)
         treeview.colors = dict()
         self.treeview = treeview
+
         for color_spec in attrs.get('colors', '').split(';'):
             if color_spec:
                 colour, test = color_spec.split(':')
-                treeview.colors[colour] = test
-        treeview.set_property('rules-hint', True)
+                treeview.colors.setdefault(colour,[])
+                treeview.colors[colour].append(test)
         if not self.title:
             self.title = attrs.get('string', 'Unknown')
-
-
+        treeview.set_property('rules-hint', True)
         treeview.sequence = False
-        for node in root_node.childNodes:
+        treeview.connect("motion-notify-event", treeview.set_tooltip)
+        treeview.connect('key-press-event', treeview.on_tree_key_press)
+
+        for node in root_node:
             node_attrs = tools.node_attributes(node)
-            if node.localName == 'button':
-                cell = Cell('button')(node_attrs['string'])
-                cell.attrs=node_attrs
-                cell.name=node_attrs['name']
-                cell.type=node_attrs.get('type','object')
-                cell.context=node_attrs.get('context',{})
-                cell.model=model
+
+            if node.tag == 'button':
+                cell = Cell('button')(node_attrs['string'], treeview, node_attrs)
+                cell.name = node_attrs['name']
+                cell.attrs = node_attrs
+                cell.type = node_attrs.get('type','object')
+                cell.context = node_attrs.get('context',{})
+                cell.model = model
                 treeview.cells[node_attrs['name']] = cell
-                col = gtk.TreeViewColumn(None, cell)
-                btn_list.append(col)
-                cell.set_property('editable',False)
-                col._type = 'Button'
+                col = gtk.TreeViewColumn(None, cell.renderer)
+                col.set_clickable(True)
+                col.set_cell_data_func(cell.renderer, cell.setter)
                 col.name = node_attrs['name']
-                
-            if node.localName == 'field':
+                col.attrs = node_attrs
+                col._type = 'Button'
+                col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
+                col.tooltip = node_attrs['string']
+                if node_attrs.get('help',False):
+                    col.tooltip = node_attrs['string'] +':\n' + node_attrs['help']
+                col.set_fixed_width(20)
+                visval = eval(str(node_attrs.get('invisible', 'False')), {'context':self.screen.context})
+                col.set_visible(not visval)
+                treeview.append_column(col)
+
+            if node.tag == 'field':
+                handler_id = False
                 fname = str(node_attrs['name'])
                 if fields[fname]['type'] in ('image', 'binary'):
                     continue    # not showed types
@@ -108,24 +145,30 @@ class parser_tree(interface.parser_interface):
                     if boolean_fields in node_attrs:
                         if node_attrs[boolean_fields] in ('True', 'False'):
                             node_attrs[boolean_fields] = eval(node_attrs[boolean_fields])
-                        else:    
+                        else:
                             node_attrs[boolean_fields] = bool(int(node_attrs[boolean_fields]))
+
+                if fields[fname]['type'] == 'selection':
+                    if fields[fname].get('selection',[]):
+                        node_attrs['selection'] = fields[fname]['selection']
                 fields[fname].update(node_attrs)
                 node_attrs.update(fields[fname])
+                node_attrs['editable'] = editable
                 cell = Cell(fields[fname]['type'])(fname, treeview, node_attrs,
                         self.window)
                 treeview.cells[fname] = cell
                 renderer = cell.renderer
-                
+
                 write_enable = editable and not node_attrs.get('readonly', False)
                 if isinstance(renderer, gtk.CellRendererToggle):
                     renderer.set_property('activatable', write_enable)
                 elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo, date_renderer.DecoratorRenderer)):
                     renderer.set_property('editable', write_enable)
                 if write_enable:
-                    renderer.connect_after('editing-started', send_keys, treeview)
+                    handler_id = renderer.connect_after('editing-started', send_keys, treeview)
 
                 col = gtk.TreeViewColumn(None, renderer)
+                treeview.handlers[col] = handler_id
                 col_label = gtk.Label('')
                 if fields[fname].get('required', False):
                     col_label.set_markup('<b>%s</b>' % cgi.escape(fields[fname]['string']))
@@ -133,41 +176,54 @@ class parser_tree(interface.parser_interface):
                     col_label.set_text(fields[fname]['string'])
                 col_label.show()
                 col.set_widget(col_label)
-
                 col.name = fname
                 col._type = fields[fname]['type']
                 col.set_cell_data_func(renderer, cell.setter)
                 col.set_clickable(True)
                 twidth = {
-                    'integer': 60,
-                    'float': 80,
-                    'float_time': 80,
-                    'date': 70,
-                    'datetime': 120,
-                    'selection': 90,
-                    'char': 100,
-                    'one2many': 50,
-                    'many2many': 50,
-                    'boolean': 20,
+                    'integer': (60, 170),
+                    'float': (80, 300),
+                    'float_time': (80,150),
+                    'date': (70, False),
+                    'datetime': (145, 145),
+                    'selection': (90, 250),
+                    'char': (100, False),
+                    'one2many': (50, False),
+                    'many2many': (50, False),
+                    'boolean': (20, 80),
+                    'progressbar':(150, 200)
                 }
-                if 'width' in fields[fname]:
-                    width = int(fields[fname]['width'])
+
+                if col._type not in twidth:
+                    col.set_expand(True)
                 else:
-                    width = twidth.get(fields[fname]['type'], 100)
-                col.set_min_width(width)
-                if not treeview.sequence:
-                    col.connect('clicked', sort_model, treeview)
+                    if 'width' in fields[fname]:
+                        min_width = max_width = int(fields[fname]['width'])
+                    else:
+                        min_width, max_width = twidth[col._type]
+
+                    col.set_min_width(min_width)
+                    if max_width:
+                        col.set_max_width(max_width)
+
+                col.connect('clicked', sort_model, self.screen)
                 col.set_resizable(True)
                 #col.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
                 visval = eval(str(fields[fname].get('invisible', 'False')), {'context':self.screen.context})
                 col.set_visible(not visval)
                 n = treeview.append_column(col)
-                if 'sum' in fields[fname] and fields[fname]['type'] \
+                calculate = ''
+                if 'sum' in node_attrs.keys():
+                    calculate = 'sum'
+                elif 'avg' in node_attrs.keys():
+                    calculate = 'avg'
+
+                if calculate and fields[fname]['type'] \
                         in ('integer', 'float', 'float_time'):
                     label = gtk.Label()
                     label.set_use_markup(True)
-                    label_str = fields[fname]['sum'] + ': '
-                    label_bold = bool(int(fields[fname].get('sum_bold', 0)))
+                    label_str = fields[fname][calculate] + ': '
+                    label_bold = bool(int(fields[fname].get('bold', 0)))
                     if label_bold:
                         label.set_markup('<b>%s</b>' % label_str)
                     else:
@@ -175,9 +231,7 @@ class parser_tree(interface.parser_interface):
                     label_sum = gtk.Label()
                     label_sum.set_use_markup(True)
                     dict_widget[n] = (fname, label, label_sum,
-                            fields[fname].get('digits', (16,2))[1], label_bold)
-        for btn in btn_list:
-            treeview.append_column(btn)
+                            fields[fname].get('digits', (16,2))[1], label_bold, calculate)
         return treeview, dict_widget, [], on_write
 
 class UnsettableColumn(Exception):
@@ -198,17 +252,18 @@ class Char(object):
         if not window:
             window = service.LocalService('gui.main').window
         self.window = window
-    
+
     def attrs_set(self, model, cell):
         if self.attrs.get('attrs',False):
             attrs_changes = eval(self.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
             for k,v in attrs_changes.items():
                 result = False
-                for condition in v:
-                    result = tools.calc_condition(self,model,condition)
+                result = tools.calc_condition(self,model,v)
                 model[self.field_name].get_state_attrs(model)[k] = result
 
     def state_set(self, model, state='draft'):
+        if isinstance(model,group_record):
+            return
         ro = model.mgroup._readonly
         field = model[self.field_name]
         state_changes = dict(field.attrs.get('states',{}).get(state,[]))
@@ -222,7 +277,7 @@ class Char(object):
             field.get_state_attrs(model)['required'] = field.attrs.get('required',False)
         if 'value' in state_changes:
             field.set(model, state_changes['value'], test_state=False, modified=True)
-                            
+
     def setter(self, column, cell, store, iter):
         model = store.get_value(iter, 0)
         text = self.get_textual_value(model)
@@ -232,31 +287,48 @@ class Char(object):
         self.attrs_set(model, cell)
         color = self.get_color(model)
         cell.set_property('foreground', str(color))
-        if self.attrs['type'] in ('float', 'integer', 'boolean'):
+        align = 0
+        if self.attrs['type'] in ('float', 'integer', 'boolean', 'float_time'):
             align = 1
-        else:
-            align = 0
-        if self.treeview.editable:
-            field = model[self.field_name]
-            
-            #setting the cell property editable or not
-            cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
-                
-            if not field.get_state_attrs(model).get('valid', True):
-                cell.set_property('background', common.colors.get('invalid', 'white'))
-            elif bool(int(field.get_state_attrs(model).get('required', 0))):
-                cell.set_property('background', common.colors.get('required', 'white'))
-            else:
-                cell.set_property('background', None)
-                  
+        gb = self.treeview.screen.context.get('group_by')
+        cell.set_property('font-desc', None)
+        cell.set_property('background', None)
         cell.set_property('xalign', align)
+        if isinstance(model, group_record) and gb:
+            cell.set_property('foreground', 'black')
+            font = pango.FontDescription('Times New Roman bold 10')
+            if self.field_name in model.field_with_empty_labels:
+                cell.set_property('foreground', '#AAAAAA')
+                font = pango.FontDescription('italic 10')
+            cell.set_property('font-desc', font)
+        elif self.treeview.editable:
+            field = model[self.field_name]
+            cell.set_property('editable',not field.get_state_attrs(model).get('readonly', False))
+            self.set_color(cell, model)
+
+    def set_color(self, cell, model, group_by = False):
+        field = model[self.field_name]
+        cell.set_property('background', None)
+        if not field.get_state_attrs(model).get('valid', True):
+            cell.set_property('background', common.colors.get('invalid', 'white'))
+        elif bool(int(field.get_state_attrs(model).get('required', 0))):
+            cell.set_property('background', common.colors.get('required', 'white'))
+
 
     def get_color(self, model):
-        to_display = ''
-        for color, expr in self.treeview.colors.items():
-            if model.expr_eval(expr, check_load=False):
-                to_display = color
-                break
+        to_display = False
+        try:
+            for color, expr in self.treeview.colors.iteritems():
+                to_display = False
+                for cond in expr:
+                    if model.expr_eval(cond, check_load=False):
+                        to_display = color
+                        break
+                if to_display:
+                    break
+        except Exception:
+            # we can still continue if we can't get the color..
+            pass
         return to_display or 'black'
 
     def open_remote(self, model, create, changed=False, text=None):
@@ -271,10 +343,19 @@ class Char(object):
 class Int(Char):
 
     def value_from_text(self, model, text):
-        return int(text)
+        return tools.str2int(text)
 
     def get_textual_value(self, model):
-        return tools.locale_format('%d', model[self.field_name].get_client(model) or 0)
+        count = False
+        if isinstance(model, group_record):
+            val = int(model.value.get(self.field_name, 0))
+            count = model.value.get('%s_count' % self.field_name, '')
+        else:
+            val = int(model[self.field_name].get_client(model) or 0)
+        converted_val = user_locale_format.format('%d', val)
+        if count:
+            converted_val = str(converted_val) +  ' (' + str(count) + ')'
+        return converted_val
 
 class Boolean(Int):
 
@@ -297,11 +378,11 @@ class Boolean(Int):
             field = model[self.field_name]
 
             cell.set_property('sensitive',not field.get_state_attrs(model).get('readonly', False))
-            
-            if field.get_state_attrs(model).get('required', True): 
+
+            if field.get_state_attrs(model).get('required', True):
                 cell.set_property('cell-background',common.colors.get('required', 'white'))
             else:
-                cell.set_property('cell-background',None)   
+                cell.set_property('cell-background',None)
 
     def _sig_toggled(self, renderer, path):
         store = self.treeview.get_model()
@@ -331,104 +412,70 @@ class GenericDate(Char):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        try:
-            date = DT.datetime.strptime(value[:10], self.server_format)
+        elif isinstance(model, group_record):
+            return value
+        else:
+            date = DT.datetime.strptime(value[:len(self.server_format) + 2], self.server_format)
             return date.strftime(self.display_format)
-        except:
-            return ''
 
     def value_from_text(self, model, text):
         dt = self.renderer.date_get(self.renderer.editable)
         res = dt and dt.strftime(self.server_format)
         if res:
-            DT.datetime.strptime(res[:10], self.server_format)
+            DT.datetime.strptime(res[:len(self.server_format) + 2], self.server_format)
         return res
 
 class Date(GenericDate):
     server_format = '%Y-%m-%d'
-    display_format = tools.datetime_util.get_date_format()
+    display_format = user_locale_format.get_date_format()
+    fmt_length = len((DT.datetime.now()).strftime(display_format))
 
 class Datetime(GenericDate):
     server_format = '%Y-%m-%d %H:%M:%S'
-    display_format = tools.datetime_util.get_date_format() + ' %H:%M:%S'
+    display_format = user_locale_format.get_datetime_format(True)
+    fmt_length = len((DT.datetime.now()).strftime(display_format))
 
     def get_textual_value(self, model):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        date = DT.datetime.strptime(value[:19], self.server_format)
-
-        if rpc.session.context.get('tz'):
-            try:
-                lzone = pytz.timezone(rpc.session.context['tz'])
-                szone = pytz.timezone(rpc.session.timezone)
-                sdt = szone.localize(date, is_dst=True)
-                date = sdt.astimezone(lzone)
-            except pytz.UnknownTimeZoneError:
-                # Timezones are sometimes invalid under Windows
-                # and hard to figure out, so as a low-risk fix
-                # in stable branch we will simply ignore the
-                # exception and consider client in server TZ
-                # (and sorry about the code duplication as well,
-                # this is fixed properly in trunk)
-                pass
-        if isinstance(date, DT.datetime):
-            return date.strftime(self.display_format)
-        return time.strftime(self.display_format, date)
+        elif isinstance(model, group_record):
+            return value
+        else:
+            return tools.datetime_util.server_to_local_timestamp(value[:len(self.server_format) + 2],
+                                                                 self.server_format, self.display_format)
 
     def value_from_text(self, model, text):
         if not text:
             return False
-        try:
-            date = DT.datetime.strptime(text[:19], self.display_format)
-        except ValueError, ex:
-            #ValueError: time data '__/__/____ __:__:__' does not match format '%m/%d/%Y %H:%M:%S'
-            return False
-
-        if rpc.session.context.get('tz'):
-            try:
-                lzone = pytz.timezone(rpc.session.context['tz'])
-                szone = pytz.timezone(rpc.session.timezone)
-                ldt = lzone.localize(date, is_dst=True)
-                sdt = ldt.astimezone(szone)
-                date = sdt.timetuple()
-            except pytz.UnknownTimeZoneError:
-                # Timezones are sometimes invalid under Windows
-                # and hard to figure out, so as a low-risk fix
-                # in stable branch we will simply ignore the
-                # exception and consider client in server TZ
-                # (and sorry about the code duplication as well,
-                # this is fixed properly in trunk)
-                pass
-
-        if isinstance(date, DT.datetime):
-            return date.strftime(self.server_format)
-        return time.strftime(self.server_format, date)
+        return tools.datetime_util.local_to_server_timestamp(text[:self.fmt_length],
+                self.display_format, self.server_format)
 
 class Float(Char):
+
     def get_textual_value(self, model):
         interger, digit = self.attrs.get('digits', (16,2) )
-        return tools.locale_format('%.' + str(digit) + 'f', model[self.field_name].get_client(model) or 0.0)
+        count = False
+        if isinstance(model, group_record):
+            val = model.value.get(self.field_name, 0.0)
+            count = model.value.get('%s_count' % self.field_name,'')
+        else:
+            val = model[self.field_name].get_client(model) or 0.0
+        converted_val = user_locale_format.format('%.' + str(digit) + 'f', val)
+        if count:
+            converted_val = str(converted_val) +  ' (' + str(count) + ')'
+        return converted_val
 
     def value_from_text(self, model, text):
-        try:
-            return locale.atof(text)
-        except:
-            return 0.0
+        return tools.str2float(text)
 
 class FloatTime(Char):
+
     def get_textual_value(self, model):
-        val = model[self.field_name].get_client(model)
-        hours = math.floor(abs(val))
-        mins = round(abs(val)%1+0.01,2)
-        if mins >= 1.0:
-            hours = hours + 1
-            mins = 0.0
-        else:
-            mins = mins * 60
-        t = '%02d:%02d' % (hours,mins)
-        if val<0:
-            t = '-'+t
+        val = model[self.field_name].get_client(model) or 0
+        t = tools.datetime_util.float_time_convert(val)
+        if val < 0:
+            t = '-' + t
         return t
 
     def value_from_text(self, model, text):
@@ -564,11 +611,14 @@ class Selection(Char):
         self.renderer.set_property('text-column', 1)
 
     def get_textual_value(self, model):
-        selection = dict(model[self.field_name].attrs['selection'])
-        return selection.get(model[self.field_name].get(model), '')
+        selection = dict(self.attrs['selection'])
+        selection_value = selection.get(model[self.field_name].get(model), '')
+        if isinstance(model, group_record):
+            return selection_value +  model[self.field_name].count
+        return selection_value
 
     def value_from_text(self, model, text):
-        selection = model[self.field_name].attrs['selection']
+        selection = self.attrs['selection']
         text = tools.ustr(text)
         res = False
         for val, txt in selection:
@@ -584,6 +634,7 @@ class ProgressBar(object):
         self.field_name = field_name
         self.attrs = attrs or {}
         self.renderer = gtk.CellRendererProgress()
+        self.editable = attrs.get('editable',False)
         self.treeview = treeview
         if not window:
             window = service.LocalService('gui.main').window
@@ -606,34 +657,22 @@ class ProgressBar(object):
     def value_from_text(self, model, text):
         return text
 
-
-class CellRendererButton(gtk.GenericCellRenderer):
-    __gproperties__ = {
-            "text": (gobject.TYPE_STRING, None, "Text",
-                "Displayed text", gobject.PARAM_READWRITE),
-            "editable" : (gobject.TYPE_BOOLEAN, None, None,
-                True, gobject.PARAM_READWRITE),
-    }
-    __gsignals__ = {
-            'clicked': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE,
-                (gobject.TYPE_STRING, )),
-    }
-    def __init__(self, text=""):
-        self.__gobject_init__()
-        self.text = text
-        self.border = gtk.Button().border_width
-        self.set_property('mode', gtk.CELL_RENDERER_MODE_EDITABLE)
-        self.clicking = False
-        self.xalign = 0.0
-        self.yalign = 0.5
-        self.textborder = 4
-#        self.set_property('editable',False)
+class CellRendererButton(object):
+    def __init__(self, field_name, treeview=None, attrs=None, window=None):
+        self.field_name = field_name
+        self.attrs = attrs or {}
+        self.treeview = treeview
+        self.renderer = gtk.CellRendererPixbuf()
+        self.window = window or service.LocalService('gui.main').window
+#        self.renderer.set_property('stock-id', self.attrs.get('icon','gtk-help'))
 
     def __get_states(self):
         return [e for e in self.attrs.get('states','').split(',') if e]
 
     def __get_model_state(self, widget, cell_area):
         path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
+        if not path:
+            return False
         modelgrp = widget.get_model()
         model = modelgrp.models[path[0][0]]
 
@@ -642,121 +681,56 @@ class CellRendererButton(gtk.GenericCellRenderer):
         else:
             state = 'draft'
         return state
-    
+
     def __is_visible(self, widget, cell_area):
         states = self.__get_states()
         model_state = self.__get_model_state(widget, cell_area)
         return (not states) or (model_state in states)
 
-    def do_set_property(self, pspec, value):
-        setattr(self, pspec.name, value)
+    def attrs_set(self, model):
+        if self.attrs.get('attrs',False):
+            attrs_changes = eval(self.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
+            for k,v in attrs_changes.items():
+                result = False
+                result = tools.calc_condition(self,model,v)
+                if result:
+                    if k == 'invisible':
+                        return 'hide'
+                    elif k == 'readonly':
+                        return True
+        return False
 
-    def do_get_property(self, pspec):
-        return getattr(self, pspec.name)
-
-    def on_render(self, window, widget, background_area, cell_area,
-            expose_area, flags):
-
-        if not self.__is_visible(widget, cell_area):
-            return True
-
-        state = gtk.STATE_NORMAL
-        shadow = gtk.SHADOW_OUT
-        if self.clicking and flags & gtk.CELL_RENDERER_SELECTED:
-            state = gtk.STATE_ACTIVE
-            shadow = gtk.SHADOW_IN
-        widget.style.paint_box(window, state, shadow,
-                None, widget, "button",
-                cell_area.x, cell_area.y,
-                cell_area.width, cell_area.height)
-        
-        #layout = widget.create_pango_layout('')
-        #layout.set_font_description(widget.style.font_desc)
-        #w, h = layout.get_size()
-        #x = cell_area.x
-        #y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
-        #window.draw_layout(widget.style.text_gc[0], x, y, layout)
-
-        layout = widget.create_pango_layout(self.text)
-        layout.set_font_description(widget.style.font_desc)
-        w, h = layout.get_size()
-        x = int(cell_area.x + (cell_area.width - w / pango.SCALE) / 2)
-        y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
-        window.draw_layout(widget.style.text_gc[0], x, y, layout)
-
-    def on_get_size(self, widget, cell_area=None):
-        width,height=90,18
-        if cell_area:
-            width = max(width + self.textborder * 2, cell_area.width)
+    def setter(self, column, cell, store, iter):
+        #TODO
+        model = store.get_value(iter, 0)
+        if not isinstance(model, group_record) \
+               and model.parent and not model.id:
+            cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+            cell.set_property("sensitive", False)
         else:
-            width += self.textborder * 2
-            height += self.textborder * 2
-        if cell_area:
-            x = max(int(self.xalign * (cell_area.width - width)), 0)
-            y = max(int(self.yalign * (cell_area.height - height)), 0)
-        else:
-            x, y = 0, 0
-        return (x, y, width, height)
-
-    def on_start_editing(self, event, widget, path, background_area,
-            cell_area, flags):
-        
-        if not self.__is_visible(widget, cell_area):
-            return
-        
-        if (event is None) or ((event.type == gtk.gdk.BUTTON_PRESS) \
-                or (event.type == gtk.gdk.KEY_PRESS \
-                    and event.keyval == gtk.keysyms.space)):
-            self.clicking = True
-            widget.queue_draw()
-            gtk.main_iteration()
-            model=widget.screen.current_model
-            if widget.screen.current_model.validate():
-                id = widget.screen.save_current()
-                if not self.attrs.get('confirm',False) or \
-                        common.sur(self.attrs['confirm']):
-                    button_type = self.attrs.get('type', 'workflow')
-                    if button_type == 'workflow':
-                        result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
-                                                widget.screen.name,
-                                                self.attrs['name'], id)
-                        if type(result)==type({}):
-                            if result['type']== 'ir.actions.act_window_close':
-                                widget.screen.window.destroy()
-                            else:
-                                datas = {}
-                                obj = service.LocalService('action.main')
-                                obj._exec_action(result,datas)
-                    elif button_type == 'object':
-                        if not id:
-                            return
-                        result = rpc.session.rpc_exec_auth(
-                            '/object', 'execute',
-                            widget.screen.name,
-                            self.attrs['name'],
-                            [id], model.context_get()
-                        )
-                        datas = {}
-                        obj = service.LocalService('action.main')
-                        obj._exec_action(result,datas,context=widget.screen.context)
-
-                    elif button_type == 'action':
-                        obj = service.LocalService('action.main')
-                        action_id = int(self.attrs['name'])
-                        obj.execute(action_id, {'model':widget.screen.name, 'id': id or False,
-                            'ids': id and [id] or [], 'report_type': 'pdf'}, context=widget.screen.context)
-                    else:
-                        raise Exception, 'Unallowed button type'
-                    widget.screen.reload()
+            current_state = self.get_textual_value(model, 'draft')
+            tv = column.get_tree_view()
+            valid_states = self.__get_states() or []
+            ## This changes the icon according to states or attrs: to not show /hide the icon
+            attrs_check = self.attrs_set(model)
+            if valid_states and current_state not in valid_states \
+                                or isinstance(model, group_record) or attrs_check == 'hide':
+                cell.set_property('stock-id', None)
             else:
-                widget.screen.display()
-            self.emit("clicked", path)
-            def timeout(self, widget):
-                self.clicking = False
-                widget.queue_draw()
-            gobject.timeout_add(60, timeout, self, widget)
-gobject.type_register(CellRendererButton)
+                cell.set_property('stock-id', self.attrs.get('icon','gtk-help'))
+                cell.set_property("sensitive", not attrs_check)
 
+    def open_remote(self, model, create, changed=False, text=None):
+        raise NotImplementedError
+
+    def get_textual_value(self, model, default=False):
+        if model['state']:
+            return model['state'].get_client(model)
+        return default
+
+    def value_from_text(self, model, text):
+        return 0
+#gobject.type_register(CellRendererButton)
 
 CELLTYPES = {
     'char': Char,

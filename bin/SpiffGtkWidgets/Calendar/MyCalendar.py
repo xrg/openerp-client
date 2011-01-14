@@ -1,19 +1,24 @@
-# Copyright (C) 2008 Samuel Abels <http://debain.org>
+# -*- coding: utf-8 -*-
+##############################################################################
+# Copyright (C) 2008-2011 Samuel Abels
 #
 # This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License version 2, as
-# published by the Free Software Foundation.
+# it under the terms of the GNU Affero General Public License
+# version 3 as published by the Free Software Foundation.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# along with this program. If not, see <http://www.gnu.org/licenses/>
+#
+##############################################################################
+
 import datetime
 import calendar
+import locale
 
 
 class MyCalendar(object):
@@ -24,16 +29,16 @@ class MyCalendar(object):
     def __init__(self, week_start = calendar.SUNDAY):
         """
         Constructor.
-        
+
         week_start -- the first day of the week, e.g. calendar.SUNDAY
         """
         assert week_start is not None
         self.calendar = calendar.Calendar(week_start)
-        
+
 
     def get_week(self, date):
         """
-        Returns a tuple (start, end), where "start" points to the first day 
+        Returns a tuple (start, end), where "start" points to the first day
         of the given week, and "end" points to the last day of given week.
         """
         month_tuple = date.timetuple()[:2]
@@ -48,8 +53,8 @@ class MyCalendar(object):
 
     def get_month(self, date):
         """
-        Returns a tuple (start, end), where "start points to the first day 
-        of the given month and "end" points to the last day of the given 
+        Returns a tuple (start, end), where "start points to the first day
+        of the given month and "end" points to the last day of the given
         month.
         """
         date_tuple = date.timetuple()
@@ -63,11 +68,11 @@ class MyCalendar(object):
 
     def get_month_weeks(self, date, fill = True):
         """
-        Returns a tuple (start, end), where "start" points to the first day 
-        of the first week of given month, and "end" points to the last day of 
+        Returns a tuple (start, end), where "start" points to the first day
+        of the first week of given month, and "end" points to the last day of
         the last week of the same month.
 
-        If "fill" is True, this function always returns 6 weeks per month by 
+        If "fill" is True, this function always returns 6 weeks per month by
         appending another week if the time span is shorter.
         """
         weeks = self.calendar.monthdatescalendar(*date.timetuple()[:2])
@@ -80,7 +85,8 @@ class MyCalendar(object):
 
     def get_day_name(self, date):
         day = calendar.weekday(*date.timetuple()[:3])
-        return calendar.day_name[day]
+        lang, encoding =  locale.getlocale()
+        return calendar.day_name[day].decode(encoding)
 
 
     def get_month_name(self, date):

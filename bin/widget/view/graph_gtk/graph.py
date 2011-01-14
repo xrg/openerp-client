@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -24,21 +23,22 @@
 import gtk
 from gtk import glade
 
+import copy
 import time
 import datetime as DT
 import StringIO
 import locale
-
 import rpc
 import tools
-import tools.datetime_util
-import pytz
+from tools import user_locale_format, datetime_util
+
 from widget.view import interface
+from widget.view.list import group_record
+
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 HM_FORMAT = '%H:%M:%S'
-LDFMT = tools.datetime_util.get_date_format()
 
 import tinygraph
 import matplotlib
@@ -68,12 +68,15 @@ class ViewGraph(object):
         self.fields = fields
         self.model = model
         self.axis = axis
+        self.old_axis = axis
         self.editable = False
+        self.key = False
         self.widget.editable = False
         self.axis_data = axis_data
         self.axis_group = {}
         for i in self.axis_data:
             self.axis_data[i]['string'] = self.fields[i]['string']
+            self.axis_data[i]['type'] = self.fields[i]['type']
             if self.axis_data[i].get('group', False):
                 self.axis_group[i]=1
                 self.axis.remove(i)
@@ -81,54 +84,65 @@ class ViewGraph(object):
 
     def display(self, models):
         datas = []
+        self.axis = copy.copy(self.old_axis)
+        group_by = self.widget.screen.context.get('group_by', False)
+        if group_by:
+            if not self.key:
+                del self.widget.screen.context['group_by']
+                self.key = True
+                self.widget.screen.search_filter()
+                models = self.widget.screen.models
+                self.widget.screen.context['group_by'] = group_by
+            self.axis[0] = group_by[0]
+            self.axis_data[group_by[0]] = {}
+            # This is to get the missing field. if the field is not available in the graph view
+            # for use case :graph view loaded directly from a dashboard and user executes groupby
+            if self.axis[0] not in models.mfields:
+                missing_gb_field = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'fields_get', [self.axis[0]], {})
+                if missing_gb_field:
+                    models.add_fields(missing_gb_field, models)
+
         for m in models:
             res = {}
             for x in self.axis_data.keys():
+                if not self.axis_data[x]:
+                    self.axis_data[x] = self.fields[x]
+                field_val = m[x].get_client(m)
                 if self.fields[x]['type'] in ('many2one', 'char','time','text'):
-                    res[x] = str(m[x].get_client(m))
+                    res[x] = field_val and str(field_val) or 'Undefined'
                 elif self.fields[x]['type'] == 'selection':
                     selection = dict(m[x].attrs['selection'])
-                    val = str(m[x].get_client(m))
-                    res[x] = selection.get(val, val)
+                    if field_val:
+                        val = str(field_val)
+                        res[x] = selection.get(val, val)
+                    else:
+                        res[x] = 'Undefined'
                 elif self.fields[x]['type'] == 'date':
-                    if m[x].get_client(m):
-                        date = time.strptime(m[x].get_client(m), DT_FORMAT)
-                        res[x] = time.strftime(LDFMT, date)
+                    if field_val:
+                        res[x] = datetime_util.server_to_local_timestamp(field_val,
+                                    DT_FORMAT, user_locale_format.get_date_format(), tz_offset=False)
                     else:
-                        res[x]=''
+                        res[x] = 'Undefined'
                 elif self.fields[x]['type'] == 'datetime':
-                    if m[x].get_client(m):
-                        date = time.strptime(m[x].get_client(m), DHM_FORMAT)
-                        if rpc.session.context.get('tz'):
-                            try:
-                                lzone = pytz.timezone(rpc.session.context['tz'])
-                                szone = pytz.timezone(rpc.session.timezone)
-                                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                                sdt = szone.localize(dt, is_dst=True)
-                                ldt = sdt.astimezone(lzone)
-                                date = ldt.timetuple()
-                            except pytz.UnknownTimeZoneError:
-                                # Timezones are sometimes invalid under Windows
-                                # and hard to figure out, so as a low-risk fix
-                                # in stable branch we will simply ignore the
-                                # exception and consider client in server TZ
-                                # (and sorry about the code duplication as well,
-                                # this is fixed properly in trunk)
-                                pass
-                        res[x] = time.strftime(LDFMT + ' %H:%M:%S', date)
+                    if field_val:
+                        res[x] = datetime_util.server_to_local_timestamp(field_val,
+                                    DHM_FORMAT, user_locale_format.get_datetime_format(True))
                     else:
-                        res[x] = ''
+                        res[x] = 'Undefined'
                 else:
-                    res[x] = float(m[x].get_client(m))
+                    res[x] = field_val and float(field_val) or 0.0
             datas.append(res)
         tinygraph.tinygraph(self._subplot, self.attrs.get('type', 'pie'), self.axis, self.axis_data, datas, axis_group_field=self.axis_group, orientation=self.attrs.get('orientation', 'vertical'))
         # the draw function may generate exception but it is not a problem as it will be redraw latter
         try:
-            self._subplot.draw()
+            self._subplot.draw(None)
             #XXX it must have some better way to force the redraw but this one works
             self._canvas.queue_resize()
         except:
             pass
+
+    def destroy(self):
+        pass
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

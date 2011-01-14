@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -35,43 +34,78 @@ from xml.parsers import expat
 import options
 import rpc
 import parse
-import pytz
 
 import tools
-import tools.datetime_util
+from tools import user_locale_format, datetime_util
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
-LDFMT = tools.datetime_util.get_date_format()
 
 # BUG: ids = []
 #
-# Tree struct:  [ id, values, childs, childs_id ]
+# Tree struct:  [ id, values, children, children_id ]
 #
 #    values: [...]
-#    childs: [ tree_struct ]
-#            [] for no childs
-#            None for undevelopped (with childs!)
-#        assert: no childs => []
+#    children: [ tree_struct ]
+#            [] for no children
+#            None for undevelopped (with children!)
+#        assert: no children => []
 #
 # Node struct: [list of (pos, list) ]
 #
 class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
-    def __init__(self, ids, view, fields, fields_type, context={}, pixbufs={}, treeview=None):
+    def __init__(self, ids, view, fields, fields_type, invisible_fields=[], context={}, pixbufs={}, treeview=None, colors='black'):
         gtk.GenericTreeModel.__init__(self)
         self.fields = fields
         self.fields_type = fields_type
+        self.invisible_fields = invisible_fields
         self.view = view
         self.roots = ids
+        self.colors = colors
+        self.color_ids = {}
         self.context = context
         self.tree = self._node_process(self.roots)
         self.pixbufs = pixbufs
         self.treeview = treeview
 
+    def get_color(self,result):
+        color_ids = {}
+        for res in result:
+            color_ids[res['id']] = 'black'
+            res_lower = {}
+            for key, vals in res.iteritems():
+                if self.fields_type.get(key, False) and vals != 'False':
+                    type = self.fields_type[key]['type']
+                    if type == 'date':
+                        res_lower[key] = datetime_util.local_to_server_timestamp(vals,
+                                         user_locale_format.get_date_format(), DT_FORMAT, tz_offset=False)
+                        continue
+                    elif type == 'datetime':
+                        res_lower[key] = datetime_util.local_to_server_timestamp(vals,
+                                         user_locale_format.get_datetime_format(True), DT_FORMAT)
+                        continue
+                if isinstance(vals, (str, unicode)):
+                    res_lower[key]= vals.lower()
+                else:
+                    res_lower[key] = vals
+            for color, expt in self.colors.iteritems():
+                val = False
+                for cond in expt:
+                    if isinstance(cond, basestring):
+                        val = tools.expr_eval(cond, res_lower)
+                    if val:
+                        color_ids[res_lower['id']] = color
+                        break
+                if val:
+                    break
+        return color_ids
+
     def _read(self, ids, fields):
         c = {}
         c.update(rpc.session.context)
         c.update(self.context)
+        if self.invisible_fields:
+            fields += self.invisible_fields
         try:
             res_ids = rpc.session.rpc_exec_auth_try('/object', 'execute',
                     self.view['model'], 'read', ids, fields, c)
@@ -85,61 +119,35 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                     else:
                         val[f] = ''
                 res_ids.append(val)
-        for field in self.fields:
-            if self.fields_type[field]['type'] in ('date',):
-                display_format = LDFMT
-                for x in res_ids:
+        for field in self.fields + self.invisible_fields:
+            for x in res_ids:
+                if self.fields_type[field]['type'] in ('date',):
+                    display_format = user_locale_format.get_date_format()
                     if x[field]:
-                        date = time.strptime(x[field], DT_FORMAT)
-                        x[field] = time.strftime(display_format, date)
-            if self.fields_type[field]['type'] in ('datetime',):
-                display_format = LDFMT + ' %H:%M:%S'
-                for x in res_ids:
+                        x[field] = datetime_util.server_to_local_timestamp(x[field],
+                                    DT_FORMAT, display_format, tz_offset=False)
+                    else:
+                        x[field] = str(x[field])
+                elif self.fields_type[field]['type'] in ('datetime',):
+                    display_format = user_locale_format.get_datetime_format(True)
                     if x[field]:
-                        date = time.strptime(x[field], DHM_FORMAT)
-                        if rpc.session.context.get('tz'):
-                            try:
-                                lzone = pytz.timezone(rpc.session.context['tz'])
-                                szone = pytz.timezone(rpc.session.timezone)
-                                dt = DT.datetime(date[0], date[1], date[2],
-                                        date[3], date[4], date[5], date[6])
-                                sdt = szone.localize(dt, is_dst=True)
-                                ldt = sdt.astimezone(lzone)
-                                date = ldt.timetuple()
-                            except pytz.UnknownTimeZoneError:
-                                # Timezones are sometimes invalid under Windows
-                                # and hard to figure out, so as a low-risk fix
-                                # in stable branch we will simply ignore the
-                                # exception and consider client in server TZ
-                                # (and sorry about the code duplication as well,
-                                # this is fixed properly in trunk)
-                                pass
-                        x[field] = time.strftime(display_format, date)
-
-            if self.fields_type[field]['type'] in ('one2one','many2one'):
-                for x in res_ids:
+                        x[field] = datetime_util.server_to_local_timestamp(x[field],
+                                    DHM_FORMAT, display_format)
+                    else:
+                        x[field] = str(x[field])
+                elif self.fields_type[field]['type'] in ('one2one','many2one'):
                     if x[field]:
                         x[field] = x[field][1]
-
-            if self.fields_type[field]['type'] in ('selection'):
-                for x in res_ids:
+                elif self.fields_type[field]['type'] in ('selection'):
                     if x[field]:
-                        x[field] = dict(self.fields_type[field]['selection']
-                                ).get(x[field],'')
-            if self.fields_type[field]['type'] in ('float',):
-                interger, digit = self.fields_type[field].get('digits', (16,2))
-                for x in res_ids:
-                    x[field] = tools.locale_format('%.' + str(digit) + 'f', x[field] or 0.0)
-            if self.fields_type[field]['type'] in ('float_time',):
-                for x in res_ids:
-                    hours = math.floor(abs(x[field]))
-                    mins = round(abs(x[field]) % 1 + 0.01, 2)
-                    if mins >= 1.0:
-                        hours = hours + 1
-                        mins = 0.0
-                    else:
-                        mins = mins * 60
-                    val = '%02d:%02d' % (hours,mins)
+                        x[field] = dict(self.fields_type[field]['selection']).get(x[field],'')
+                elif self.fields_type[field]['type'] in ('float',):
+                    interger, digit = self.fields_type[field].get('digits', (16,2))
+                    x[field] = user_locale_format.format('%.' + str(digit) + 'f', x[field] or 0.0)
+                elif self.fields_type[field]['type'] in ('integer',):
+                    x[field] = int(user_locale_format.format('%d', int(x[field]) or 0))
+                elif self.fields_type[field]['type'] in ('float_time',):
+                    val = datetime_util.float_time_convert(x[field])
                     if x[field] < 0:
                         val = '-' + val
                     x[field] = val
@@ -149,6 +157,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         tree = []
         if self.view.get('field_parent', False):
             res = self._read(ids, self.fields+[self.view['field_parent']])
+            self.color_ids.update(self.get_color(res))
             for x in res:
                 tree.append( [ x['id'], None, [], x[self.view['field_parent']] ] )
                 tree[-1][1] = [ x[ y ] for y in self.fields]
@@ -188,7 +197,8 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
             return None
         for x in path:
             node.append( (x, tree) )
-            tree = tree[x][2]
+            if x <= (len(tree)-1):
+                tree = tree[x] and tree[x][2] or None
         return node
 
     def on_get_value(self, node, column):
@@ -197,7 +207,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
             value = list[n][1][column-1]
         else:
             value = list[n][0]
-            
+
         if value==None or (value==False and type(value)==bool):
             res = ''
         else:
@@ -222,7 +232,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         if node==None:                    # added
             return [ (0, self.tree) ]     # added
         node = node[:]
-        (n, list) = node[-1]                 
+        (n, list) = node[-1]
         if list[n][2]==None:
             self._node_expand(list[n])
         if list[n][2]==[]:
@@ -308,6 +318,7 @@ class view_tree(object):
         p.parse(view_info['arch'], self.view)
         self.toolbar = p.toolbar
         self.pixbufs = p.pixbufs
+        self.colors = p.colors
         self.name = p.title
         self.sel_multi = sel_multi
 
@@ -322,6 +333,7 @@ class view_tree(object):
         self.ids=ids
         self.view_info = view_info
         self.fields_order = p.fields_order
+        self.invisible_fields = p.invisible_fields
         self.model = None
         self.reload()
 
@@ -332,8 +344,23 @@ class view_tree(object):
     def reload(self):
         del self.model
         self.context.update(rpc.session.context)
-        self.model = view_tree_model(self.ids, self.view_info, self.fields_order, self.fields, context=self.context, pixbufs=self.pixbufs, treeview=self.view)
+        self.model = view_tree_model(self.ids, self.view_info, self.fields_order, self.fields, self.invisible_fields, context=self.context, pixbufs=self.pixbufs, treeview=self.view , colors=self.colors)
         self.view.set_model(self.model)
+        local ={}
+        def render_column(column, cell, model, iter):
+            if not isinstance(cell, gtk.CellRendererPixbuf):
+                    list = zip(self.model.color_ids.keys(),self.model.color_ids.values())
+                    color_by ={}
+                    for k,v in list:
+                        color_by.setdefault(v,[]).append(str(k))
+                    for k ,v in color_by.items():
+                        if model.get_value(iter,0) in v and not isinstance(cell,gtk.CellRendererToggle):
+                            cell.set_property('foreground',k)
+
+        for column in self.view.get_columns():
+            renderers  = column.get_cell_renderers()
+            for ren in renderers:
+                column.set_cell_data_func(ren, render_column)
 
     def widget_get(self):
         return self.view
@@ -347,7 +374,7 @@ class view_tree(object):
             return []
         (model, iters) = sel
         return map(lambda x: int(model.get_value(model.get_iter(x), 0)), iters)
-        
+
     def sel_id_get(self):
         sel = self.view.get_selection().get_selected()
         if sel==None:
@@ -386,7 +413,7 @@ class view_tree(object):
             while ids!=[]:
                 val = ids.pop()
                 while True:
-                    if int(model.get_value(iter,0))==val:
+                    if int(model.get_value(iter,0)) == val:
                         self.view.expand_row( model.get_path(iter), False)
                         break
                     if not model.iter_next(iter):
@@ -396,8 +423,8 @@ class view_tree(object):
             self.view.get_selection().select_iter(iter)
 
 fields_list_type = {
-    'checkbox': gobject.TYPE_BOOLEAN,
-    'integer': gobject.TYPE_INT,
+    'boolean': gobject.TYPE_BOOLEAN,
+#    'integer': gobject.TYPE_INT,
 }
 
 

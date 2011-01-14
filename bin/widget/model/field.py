@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -23,12 +22,16 @@
 from rpc import RPCProxy
 import rpc
 
+
+
 try:
     set
 except NameError:
     from sets import Set as set
 
 import tools
+
+DEFAULT_PAGER_LIMIT = 100
 
 class ModelField(object):
     '''
@@ -51,6 +54,9 @@ class CharField(object):
         self.internal = False
         self.default_attrs = {}
 
+    def destroy(self):
+        del self.parent
+
     def sig_changed(self, model):
         if self.get_state_attrs(model).get('readonly', False):
             return
@@ -61,17 +67,18 @@ class CharField(object):
 
     def domain_get(self, model):
         dom = self.attrs.get('domain', '[]')
-        return model.expr_eval(dom)
+        return model.expr_eval(dom) or []
 
     def context_get(self, model, check_load=True, eval=True):
         context = {}
         context.update(self.parent.context)
-        # removing default keys of the parent context
+        # removing default keys,group_by,search_default of the parent context
         context_own = context.copy()
         for c in context.items():
-            if c[0].startswith('default_'):
+            if c[0].startswith('default_') or c[0] in ('set_editable','set_visible')\
+             or c[0] == 'group_by' or c[0].startswith('search_default_'):
                 del context_own[c[0]]
-        
+
         field_context_str = self.attrs.get('context', '{}') or '{}'
         if eval:
             field_context = model.expr_eval('dict(%s)' % field_context_str, check_load=check_load)
@@ -87,6 +94,8 @@ class CharField(object):
         return ok
 
     def set(self, model, value, test_state=True, modified=False):
+        if isinstance(value, basestring):
+            value = value.strip()
         model.value[self.name] = value
         if modified:
             model.modified = True
@@ -110,6 +119,7 @@ class CharField(object):
 
     def set_default(self, model, value):
         res = self.set(model, value)
+        model.cond_default(self.attrs['name'], self.get(model))
         if self.attrs.get('on_change',False):
             model.on_change(self.attrs['on_change'])
         return res
@@ -135,8 +145,7 @@ class CharField(object):
                             attrs_changes[k][i]=cond
         for k,v in attrs_changes.items():
             result = True
-            for condition in v:
-                result = result and tools.calc_condition(self,model,condition)
+            result = tools.calc_condition(self, model, v)
             if result:
                self.get_state_attrs(model)[k]=True
 
@@ -144,13 +153,13 @@ class CharField(object):
         ro = model.mgroup._readonly
         state_changes = dict(self.attrs.get('states',{}).get(state,[]))
         if 'readonly' in state_changes:
-            self.get_state_attrs(model)['readonly'] = state_changes['readonly'] or ro
+            self.get_state_attrs(model)['readonly'] = state_changes.get('readonly', False) or ro
         else:
-            self.get_state_attrs(model)['readonly'] = self.attrs['readonly'] or ro
+            self.get_state_attrs(model)['readonly'] = self.attrs.get('readonly', False) or ro
         if 'required' in state_changes:
-            self.get_state_attrs(model)['required'] = state_changes['required']
+            self.get_state_attrs(model)['required'] = state_changes.get('required', False)
         else:
-            self.get_state_attrs(model)['required'] = self.attrs['required']
+            self.get_state_attrs(model)['required'] = self.attrs.get('required', False)
         if 'value' in state_changes:
             self.set(model, state_changes['value'], test_state=False, modified=True)
 
@@ -162,17 +171,28 @@ class CharField(object):
 class BinaryField(CharField):
     def __check_model(self, model):
         assert self.name in model.mgroup.mfields
-    
+
     def __check_load(self, model, modified, bin_size):
         if model.id and (self.name not in model.value or (model.value[self.name] is None)):
             c = rpc.session.context.copy()
             c.update(model.context_get())
             c['bin_size'] = bin_size
-            value = model.rpc.read([model.id], [self.name], c)[0][self.name]
-            self.set(model, value, modified=modified, get_binary_size=bin_size)
+            data = model.rpc.read([model.id], [self.name], c)
+            if data:
+                value = data[0][self.name]
+                self.set(model, value, modified=modified, get_binary_size=bin_size)
 
     def get_size_name(self):
         return "%s.size" % self.name
+
+    def validate(self, model):
+        ok = True
+        if bool(self.get_state_attrs(model).get('required', 0)):
+            name = "%s.size" % self.name
+            if not model.value.get(name, False):
+                ok=False
+        self.get_state_attrs(model)['valid'] = ok
+        return ok
 
     def set(self, model, value, test_state=True, modified=False, get_binary_size=True):
         self.__check_model(model)
@@ -183,6 +203,8 @@ class BinaryField(CharField):
         model.value[name] = value
         if (not get_binary_size) and value:
             model.value[self.get_size_name()] = tools.human_size(len(value))
+        if not value:
+            model.value[self.get_size_name()] = ""
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
@@ -190,8 +212,12 @@ class BinaryField(CharField):
 
     def get(self, model, check_load=True, readonly=True, modified=False):
         self.__check_model(model)
-        self.__check_load(model, modified, False)
-        return model.value.get(self.name, False) or False
+        if check_load:
+            self.__check_load(model, modified, False)
+        res = model.value.get(self.name, False)
+        if not res:
+            return model.value.get(self.get_size_name(), False) or False
+        return res
 
     def get_client(self, model):
         self.__check_model(model)
@@ -212,7 +238,7 @@ class BinaryField(CharField):
 class SelectionField(CharField):
     def set(self, model, value, test_state=True, modified=False):
         value = isinstance(value,(list,tuple)) and len(value) and value[0] or value
-        
+
         if not self.get_state_attrs(model).get('required', False) and value is None:
             super(SelectionField, self).set(model, value, test_state, modified)
 
@@ -235,7 +261,6 @@ class FloatField(CharField):
                 model.signal('record-changed', model)
 
 class IntegerField(CharField):
-
     def get(self, model, check_load=True, readonly=True, modified=False):
         return model.value.get(self.name, 0) or 0
 
@@ -245,6 +270,15 @@ class IntegerField(CharField):
     def validate(self, model):
         self.get_state_attrs(model)['valid'] = True
         return True
+
+    def set_client(self, model, value, test_state=True, force_change=False):
+        internal = model.value.get(self.name, False)
+        self.set(model, value, test_state)
+        if int(internal or False) != (model.value.get(self.name,False) or False):
+            model.modified = True
+            model.modified_fields.setdefault(self.name)
+            self.sig_changed(model)
+            model.signal('record-changed', model)
 
 
 class M2OField(CharField):
@@ -295,26 +329,34 @@ class M2MField(CharField):
 
     def __init__(self, parent, attrs):
         super(M2MField, self).__init__(parent, attrs)
+        self.limit = DEFAULT_PAGER_LIMIT
 
     def create(self, model):
         return []
 
     def get(self, model, check_load=True, readonly=True, modified=False):
-        return [(6, 0, model.value[self.name] or [])]
+        if self.name in model.pager_cache:
+            return [(6, 0, model.pager_cache[self.name] or [])]
+        return []
 
     def get_client(self, model):
-        return model.value[self.name] or []
+        res = []
+        if self.name in model.pager_cache:
+            res = model.pager_cache[self.name]
+        return res or model.value[self.name] or []
 
     def set(self, model, value, test_state=False, modified=False):
-        model.value[self.name] = value or []
+        model.value[self.name] = value and value[:self.limit] or []
+        model.pager_cache[self.name] = value and value[:self.limit] or []
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
 
     def set_client(self, model, value, test_state=False, force_change=False):
-        internal = model.value[self.name]
+        internal = model.pager_cache[self.name]
         self.set(model, value, test_state, modified=False)
-        if set(internal) != set(value):
+        if model.is_m2m_modified or set(internal) != set(value):
+            model.is_m2m_modified = False
             model.modified = True
             model.modified_fields.setdefault(self.name)
             self.sig_changed(model)
@@ -332,6 +374,7 @@ class O2MField(CharField):
     def __init__(self, parent, attrs):
         super(O2MField, self).__init__(parent, attrs)
         self.context={}
+        self.limit = DEFAULT_PAGER_LIMIT
 
     def create(self, model):
         from widget.model.group import ModelRecordGroup
@@ -365,11 +408,16 @@ class O2MField(CharField):
         return result
 
     def set(self, model, value, test_state=False, modified=False):
+        if value and not isinstance(value[0], int):
+            model = self.set_default(model, value)
+            return
         from widget.model.group import ModelRecordGroup
         mod =  ModelRecordGroup(resource=self.attrs['relation'], fields={}, parent=model)
         mod.signal_connect(mod, 'model-changed', self._model_changed)
-        model.value[self.name] =mod
+        model.value[self.name] = mod
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
+        if value:
+            value = value[:self.limit]
         model.value[self.name].pre_load(value, display=False)
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 
@@ -392,9 +440,10 @@ class O2MField(CharField):
             mod = model.value[self.name].model_new(default=False)
             mod.set_default(record)
             model.value[self.name].model_add(mod)
+            mod.modified = True
         model.value[self.name].current_model = mod
         #mod.signal('record-changed')
-        return True
+        return model
 
     def get_default(self, model):
         res = map(lambda x: x.get_default(), model.value[self.name].models or [])
@@ -414,6 +463,16 @@ class O2MField(CharField):
         return ok
 
 class ReferenceField(CharField):
+
+    def validate(self, model):
+        ok = True
+        if bool(self.get_state_attrs(model).get('required', 0)):
+            model_name, (id, name) = value = model.value[self.name]
+            if not value or int(id) < 1:
+                ok = False
+        self.get_state_attrs(model)['valid'] = ok
+        return ok
+
     def get_client(self, model):
         if model.value[self.name]:
             return model.value[self.name]

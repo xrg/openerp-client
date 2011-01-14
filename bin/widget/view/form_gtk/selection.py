@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -36,7 +35,7 @@ class selection(interface.widget_interface):
         self.child = self.entry.get_child()
         self.child.set_property('activates_default', True)
         self.child.connect('changed', self.sig_changed)
-        self.child.connect('button_press_event', self._menu_open)
+        self.child.connect('populate-popup', self._menu_open)
         self.child.connect('key_press_event', self.sig_key_press)
         self.child.connect('activate', self.sig_activate)
         self.child.connect_after('focus-out-event', self.sig_activate)
@@ -45,10 +44,9 @@ class selection(interface.widget_interface):
 
         # the dropdown button is not focusable by a tab
         self.widget.set_focus_chain([self.child])
-
         self.ok = True
         self._selection={}
-        
+
         self.set_popdown(attrs.get('selection', []))
 
     def set_popdown(self, selection):
@@ -83,10 +81,15 @@ class selection(interface.widget_interface):
             and (event.keyval == gtk.keysyms.space):
             self.entry.popup()
         elif not (event.keyval == gtk.keysyms.Up or event.keyval == gtk.keysyms.Down):
+            completion.set_match_func(self.match_func,widget)
             completion.set_model(self.model)
             widget.set_completion(completion)
             completion.set_text_column(0)
-
+    
+    def match_func(self, completion, key, iter, widget):
+         model = completion.get_model()
+         return model[iter][0].lower().find(widget.get_text().lower()) >= 0 and True or False
+     
     def sig_activate(self, *args):
         text = self.child.get_text()
         value = False
@@ -135,5 +138,7 @@ class selection(interface.widget_interface):
     def _color_widget(self):
         return self.child
 
+    def grab_focus(self):
+        return self.entry.grab_focus()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

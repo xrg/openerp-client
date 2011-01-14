@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -45,6 +44,7 @@ class Button(Observable):
             'label': attrs.get('string', 'unknown')
         }
         self.widget = gtk.Button(**args)
+        self.widget.set_flags(gtk.CAN_DEFAULT)
 
         readonly = bool(int(attrs.get('readonly', '0')))
         self.set_sensitive(not readonly)
@@ -59,11 +59,23 @@ class Button(Observable):
                 import logging
                 log = logging.getLogger('common')
                 log.warning(_('Wrong icon for the button !'))
+
 #           self.widget.set_use_stock(True)
 #       self.widget.set_label(args['label'])
-
+        tooltip = attrs.get('help')
+        if tooltip:
+            self.widget.set_tooltip_markup(tooltip)
         self.widget.show()
         self.widget.connect('clicked', self.button_clicked)
+
+        default_width = self.widget.size_request()[0]
+        default_height = self.widget.size_request()[1]
+        max_width = self.widget.get_screen().get_width()/5
+        if default_width > max_width:
+            self.widget.set_size_request(max_width, default_height)
+
+    def grab_focus(self):
+        self.widget.grab_focus()
 
     def hide(self):
         return self.widget.hide()
@@ -89,7 +101,7 @@ class Button(Observable):
                     action_id = int(self.attrs['name'])
 
                     context_action = self.form.screen.context.copy()
-                    
+
                     if 'context' in self.attrs:
                         context_action.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
 
@@ -105,74 +117,25 @@ class Button(Observable):
                     obj._exec_action(result,datas,context=self.form.screen.context)
                 else:
                     raise Exception, 'Unallowed button type'
-                
+
         elif model.validate():
             id = self.form.screen.save_current()
-            if not self.attrs.get('confirm',False) or \
-                    common.sur(self.attrs['confirm']):
-                button_type = self.attrs.get('type', 'workflow')
-                if button_type == 'workflow':
-                    result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
-                                            self.form.screen.name,
-                                            self.attrs['name'], id)
-                    if type(result)==type({}):
-                        if result['type']== 'ir.actions.act_window_close':
-                            self.form.screen.window.destroy()
-                        else:
-                            datas = {'ids':[id]}
-                            obj = service.LocalService('action.main')
-                            obj._exec_action(result, datas)
-                    elif type([]) == type(result):
-                        datas = {'ids' : [id], 'model' : self.form.screen.name, }
-                        obj = service.LocalService('action.main')
-                        for rs in result:
-                            obj._exec_action(rs, datas)
-
-                elif button_type == 'object':
-                    if not id:
-                        return
-                    context = model.context_get()
-                    if 'context' in self.attrs:
-                        context.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
-
-                    result = rpc.session.rpc_exec_auth(
-                        '/object', 'execute',
-                        self.form.screen.name,
-                        self.attrs['name'],
-                        [id], context
-                    )
-                    if type(result)==type({}):
-                        self.form.screen.window.destroy()
-                        datas = {'ids' : [id], 'model' : self.form.screen.name, }
-                        obj = service.LocalService('action.main')
-                        obj._exec_action(result,datas,context=self.form.screen.context)
-
-                elif button_type == 'action':
-                    obj = service.LocalService('action.main')
-                    action_id = int(self.attrs['name'])
-
-                    context = self.form.screen.context.copy()
-
-                    if 'context' in self.attrs:
-                        context.update(self.form.screen.current_model.expr_eval(self.attrs['context'], check_load=False))
-
-                    obj.execute(action_id, {'model':self.form.screen.name, 'id': id or False, 'ids': id and [id] or [], 'report_type': 'pdf'}, context=context)
-
-                else:
-                    raise Exception, 'Unallowed button type'
-                self.form.screen.reload()
-                self.warn('misc-message', '')
+            model.get_button_action(self.form.screen, id, self.attrs)
+            self.warn('misc-message', '')
         else:
-            common.warning(_('Invalid form, correct red fields !'), _('Error !') )
+            common.warning(_('Invalid form, correct red fields !'), _('Error !'),parent=self.form.screen.current_view.window)
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
             self.form.screen.display()
+            self.form.screen.current_view.set_cursor()
 
 
 
 class StateAwareWidget(object):
-    def __init__(self, widget, states=None):
+    def __init__(self, widget, label=None, states=None):
         self.widget = widget
+        self.label = label
         self.states = states or []
+        self.frame_child = {}
 
     def __getattr__(self, a):
         return self.widget.__getattribute__(a)
@@ -184,26 +147,37 @@ class StateAwareWidget(object):
             self.widget.hide()
 
     def attrs_set(self, model):
-        sa = hasattr(self.widget, 'attrs') and self.widget.attrs or {}
-        attrs_changes = eval(sa.get('attrs',"{}"))
+        sa = getattr(self.widget, 'attrs') or {}
+
+        attrs_changes = eval(sa.get('attrs',"{}"),{'uid':rpc.session.uid})
         for k,v in attrs_changes.items():
             result = True
-            for condition in v:
-                result = result and tools.calc_condition(self,model,condition)
-                    
-            if result:
-                if k=='invisible':
-                    self.widget.hide()
-                elif k=='readonly':
-                    self.widget.set_sensitive(False)
+            result = result and tools.calc_condition(self, model, v)
+            if k == 'invisible':
+                func = ['show', 'hide'][bool(result)]
+                getattr(self.widget, func)()
+                if self.label:
+                    getattr(self.label, func)()
+            elif k == 'readonly':
+                if isinstance(self.widget, gtk.Frame):
+                    for name, wid in self.frame_child.iteritems():
+                        self.set_sensitive(wid, result)
                 else:
-                    self.widget.set_sensitive(False and sa.get('readonly',False))
+                    self.set_sensitive(self.widget, result)
+    ## This method is hacked here because field labels that are readonly
+    ## should not change their looks to readonly GTK widgets as it makes
+    ## the label text very difficult to read in some themes.
+    def set_sensitive(self, widget, value):
+        if hasattr(widget, "get_children") and not \
+            isinstance(widget, gtk.ComboBoxEntry):
+            for wid in widget.get_children():
+               self.set_sensitive(wid, value)
+        if not isinstance(widget, gtk.Label):
+            if hasattr(widget,'_readonly_set'):
+                widget._readonly_set(value)
             else:
-                if k=='readonly':
-                    self.widget.set_sensitive(True)
-                if k=='invisible':
-                    self.widget.show()        
-
+                widget.set_sensitive(not value)
+        return True
 
 class _container(object):
     def __init__(self):
@@ -236,13 +210,47 @@ class _container(object):
             self.cont[-1] = (table, 0, y+1)
         table.resize(y+1,self.col[-1])
 
-    def wid_add(self, widget, name=None, expand=False, ypadding=2, rowspan=1,
-            colspan=1, translate=False, fname=None, help=False, fill=False, invisible=False):
+    def create_label(self, name, markup=False, align=1.0, wrap=False,
+                     angle=None, width=None, fname=None, help=None, detail_tooltip=False):
+        
+        label = gtk.Label(name)
+        eb = gtk.EventBox()
+        eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
+        if markup:
+            label.set_use_markup(True)
+        self.trans_box_label.append((eb, name, fname))
+        eb.add(label)
+        
+        def size_allocate(label, allocation):
+            label.set_size_request( allocation.width - 2, -1 )
+        if fname is None and name and len(name) > 50:
+            label.connect( "size-allocate", size_allocate )
+        uid = rpc.session.uid
+        tooltip = ''
+        if help:
+            tooltip = '<span foreground="darkred"><b>%s</b></span>\n%s' % \
+                        (tools.to_xml(name), tools.to_xml(help))
+            label.set_markup('<sup><span foreground="darkgreen">?</span></sup>' + tools.to_xml(name))
+        if detail_tooltip:
+            tooltip += (help and '\n' or '') + detail_tooltip
+        if tooltip:
+            eb.set_tooltip_markup(tooltip)
+        label.set_alignment(align, 0.5)
+        if width:
+            label.set_size_request(width, -1)
+        label.set_line_wrap(bool(int(wrap)))
+        if angle:
+            label.set_angle(int(angle))
+        return eb
+
+    def wid_add(self, widget, label=None, xoptions=False, expand=False, ypadding=2, rowspan=1,
+            colspan=1, translate=False, fname=None, fill=False, invisible=False):
         (table, x, y) = self.cont[-1]
         if colspan>self.col[-1]:
             colspan=self.col[-1]
-        a = name and 1 or 0
-        if colspan+x+a>self.col[-1]:
+        #Commented the following line in order to use colspan=4 and colspan=4 in same row
+#        if colspan+x+a>self.col[-1]:
+        if colspan+x>self.col[-1]:
             self.newline()
             (table, x, y) = self.cont[-1]
         yopt = False
@@ -250,27 +258,23 @@ class _container(object):
             yopt = yopt | gtk.EXPAND
         if fill:
             yopt = yopt | gtk.FILL
-        if colspan == 1 and a == 1:
+        if not xoptions:
+            xoptions = gtk.FILL|gtk.EXPAND
+
+        if colspan == 1 and label:
             colspan = 2
-        if name:
-            label = gtk.Label(name)
-            eb = gtk.EventBox()
-            eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
-            self.trans_box_label.append((eb, name, fname))
-            eb.add(label)
-            if help:
-                try:
-                    eb.set_tooltip_markup('<span foreground=\"darkred\"><b>'+tools.to_xml(name)+'</b></span>\n'+tools.to_xml(help))
-                except:
-                    pass
-                label.set_markup("<sup><span foreground=\"darkgreen\">?</span></sup>"+tools.to_xml(name))
-                eb.show()
-            if '_' in name:
-                label.set_text_with_mnemonic(name)
-                label.set_mnemonic_widget(widget)
-            label.set_alignment(1.0, 0.5)
-            table.attach(eb, x, x+1, y, y+rowspan, yoptions=yopt,
+        if label:
+            table.attach(label, x, x+1, y, y+rowspan, yoptions=yopt,
                     xoptions=gtk.FILL, ypadding=ypadding, xpadding=2)
+
+            real_label = label
+            if isinstance(label, gtk.EventBox):
+                real_label = label.child
+            txt = real_label.get_text()
+            if '_' in txt:
+                real_label.set_text_with_mnemonic(txt)
+                real_label.set_mnemonic_widget(widget)
+
         hbox = widget
         hbox.show_all()
         if translate:
@@ -280,13 +284,13 @@ class _container(object):
             img.set_from_stock('terp-translate', gtk.ICON_SIZE_MENU)
             ebox = gtk.EventBox()
             ebox.set_events(gtk.gdk.BUTTON_PRESS_MASK)
-            self.trans_box.append((ebox, name, fname, widget))
+            self.trans_box.append((ebox, translate, fname, widget))
 
             ebox.add(img)
             hbox.pack_start(ebox, fill=False, expand=False)
             hbox.show_all()
-        table.attach(hbox, x+a, x+colspan, y, y+rowspan, yoptions=yopt,
-                ypadding=ypadding, xpadding=2)
+        table.attach(hbox, x+int(bool(label)), x+colspan, y, y+rowspan,xoptions=xoptions, yoptions=yopt,
+            ypadding=ypadding, xpadding=2)
         self.cont[-1] = (table, x+colspan, y)
         wid_list = table.get_children()
         wid_list.reverse()
@@ -295,6 +299,27 @@ class _container(object):
             hbox.hide()
 
 class parser_form(widget.view.interface.parser_interface):
+    def __init__(self, window, parent=None, attrs=None, screen=None):
+           super(parser_form, self).__init__(window, parent=parent, attrs=attrs,
+                    screen=screen)
+           self.widget_id = 0
+           self.default_focus_field = False
+           self.default_focus_button = False
+           self.accepted_attr_list = ['type','domain','context','relation', 'widget','attrs',
+                                      'digits','function','store','fnct_search','fnct_inv','fnct_inv_arg',
+                                      'func_obj','func_method','related_columns','third_table','states',
+                                      'translate','change_default','size','selection']
+
+    def create_detail_tooltip(self, name='', field_attr={}):
+        tooltip = '<span foreground="#009900"><b>%s:</b> %s - <b>%s:</b> %s' % \
+                (_('Field'), tools.to_xml(name), _('Object'), tools.to_xml(field_attr.get('model','')))
+        attributes = field_attr.keys()
+        attributes.sort()
+        for attr in attributes:
+            if attr in self.accepted_attr_list:
+                tooltip += '\n<b>%s:</b> %s' %(tools.to_xml(str(attr).capitalize()),tools.to_xml(str(field_attr[attr])))
+        return tooltip + '</span>'
+
     def parse(self, model, root_node, fields, notebook=None, paned=None):
         dict_widget = {}
         saw_list = []   # state aware widget list
@@ -308,16 +333,18 @@ class parser_form(widget.view.interface.parser_interface):
             attrs = tools.node_attributes(root_node)
             self.title = attrs.get('string', 'Unknown')
 
-        for node in root_node.childNodes:
-            if not node.nodeType==node.ELEMENT_NODE:
-                continue
+        for node in root_node:
             attrs = tools.node_attributes(node)
-            if node.localName=='image':
+            if node.tag=='image':
                 icon = gtk.Image()
                 icon.set_from_stock(attrs['name'], gtk.ICON_SIZE_DIALOG)
-                container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
-            elif node.localName=='separator':
-                vbox = gtk.VBox()
+                container.wid_add(icon,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, fill=int(attrs.get('fill', 0)))
+            elif node.tag=='separator':
+                orientation = attrs.get('orientation', 'horizontal')
+                if orientation == 'vertical':
+                    vbox = gtk.HBox(homogeneous=False, spacing=0)
+                else:
+                    vbox = gtk.VBox()
                 if 'string' in attrs:
                     text = attrs.get('string', 'No String Attr.')
                     l = gtk.Label('<b>'+(text.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;'))+'</b>')
@@ -328,51 +355,59 @@ class parser_form(widget.view.interface.parser_interface):
                     eb.add(l)
                     container.trans_box_label.append((eb, text, None))
                     vbox.pack_start(eb)
-                vbox.pack_start(gtk.HSeparator())
-                container.wid_add(vbox,colspan=int(attrs.get('colspan',1)),expand=int(attrs.get('expand',0)), ypadding=10, help=attrs.get('help', False), fill=int(attrs.get('fill', 0)))
-            elif node.localName=='label':
+                if orientation == 'vertical':
+                    vsep = gtk.VSeparator()
+                    rowspan = int(attrs.get('rowspan', '1'))
+                    vsep.set_size_request(1, 20*rowspan)
+                    vbox.pack_start(vsep, False, False, 5)
+                    xoptions = gtk.SHRINK
+                else:
+                    xoptions = False
+                    vbox.pack_start(gtk.HSeparator())
+                container.wid_add(vbox,colspan=int(attrs.get('colspan',1)), xoptions=xoptions,expand=int(attrs.get('expand',0)), ypadding=10, fill=int(attrs.get('fill', 0)))
+            elif node.tag=='label':
                 text = attrs.get('string', '')
                 if not text:
-                    for node in node.childNodes:
-                        if node.nodeType == node.TEXT_NODE:
-                            text += node.data
-                        else:
-                            text += node.toxml()
-                label = gtk.Label(text)
-                label.set_use_markup(True)
-                if 'align' in attrs:
-                    label.set_alignment(float(attrs['align'] or 0.0), 0.5)
-                eb = gtk.EventBox()
-                eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
-                eb.add(label)
-                container.trans_box_label.append((eb, text, None))
+                    for node in node:
+                        text += node.text
+                align = float(attrs.get('align', 0))
 
-                if 'angle' not in attrs:
-                    label.set_line_wrap(True)
-                    label.set_angle(int(attrs.get('angle', 0)))
+                eb = container.create_label(text, markup=True, align=align,
+                                            width=int(attrs.get('width', -1)),
+                                            angle=attrs.get('angle'),
+                                            wrap=attrs.get('wrap', True),
+                                            help=attrs.get('help'))
+
+
+                container.trans_box_label.append((eb, text, None))
 
                 container.wid_add(
                     eb,
                     colspan=int(attrs.get('colspan', 1)),
                     expand=False,
-                    help=attrs.get('help', False),
                     fill=int(attrs.get('fill', 0))
                 )
 
-            elif node.localName=='newline':
+            elif node.tag=='newline':
                 container.newline()
 
-            elif node.localName=='button':
+            elif node.tag=='button':
                 if attrs.get('invisible', False):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
+                    
+                if 'default_focus' in attrs and not self.default_focus_button:
+                    attrs['focus_button'] = attrs['default_focus']
+                    self.default_focus_button = True
+              
                 button = Button(attrs)
+                
                 states = [e for e in attrs.get('states','').split(',') if e]
-                saw_list.append(StateAwareWidget(button, states))
-                container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)), help=attrs.get('help', False))
+                saw_list.append(StateAwareWidget(button, states=states))
+                container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)))
 
-            elif node.localName=='notebook':
+            elif node.tag=='notebook':
                 if attrs.get('invisible', False):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
@@ -400,7 +435,7 @@ class parser_form(widget.view.interface.parser_interface):
                 saw_list += saws
                 dict_widget.update(widgets)
 
-            elif node.localName=='page':
+            elif node.tag=='page':
                 if attrs.get('invisible', False):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
@@ -417,13 +452,15 @@ class parser_form(widget.view.interface.parser_interface):
                 dict_widget.update(widgets)
                 notebook.append_page(widget, l)
 
-            elif node.localName=='field':
+            elif node.tag =='field':
                 name = str(attrs['name'])
                 del attrs['name']
                 name = unicode(name)
                 type = attrs.get('widget', fields[name]['type'])
+                if 'selection' in attrs:
+                    attrs['selection'] = fields[name]['selection']
                 fields[name].update(attrs)
-                fields[name]['model']=model
+                fields[name]['model'] = model
                 if not type in widgets_type:
                     continue
 
@@ -434,7 +471,14 @@ class parser_form(widget.view.interface.parser_interface):
                 if 'filename' in attrs:
                     fields[name]['filename'] = attrs['filename']
 
+                if 'default_focus' in attrs and not self.default_focus_field:
+                    fields[name]['focus_field'] = attrs['default_focus']
+                    self.default_focus_field = True
+
                 widget_act = widgets_type[type][0](self.window, self.parent, model, fields[name])
+                self.widget_id += 1
+                widget_act.position = self.widget_id
+
                 label = None
                 if not int(attrs.get('nolabel', 0)):
                     # TODO space before ':' depends of lang (ex: english no space)
@@ -454,9 +498,19 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
-                container.wid_add(widget_act.widget, label, expand, translate=fields[name].get('translate',False), colspan=size, fname=name, help=hlp, fill=fill)
 
-            elif node.localName=='group':
+                translate = fields[name]['string'] if fields[name].get('translate') else None
+                detail_tooltip = False
+                if options.options['debug_mode_tooltips']:
+                    detail_tooltip = self.create_detail_tooltip(name, fields[name])
+
+                widget_label = container.create_label(label, help=hlp, fname=name, detail_tooltip=detail_tooltip) if label else None
+                if attrs.get('attrs'):
+                    saw_list.append(StateAwareWidget(widget_act, widget_label))
+
+                container.wid_add(widget=widget_act.widget, label=widget_label, expand=expand, translate=translate, colspan=size, fname=name, fill=fill)
+
+            elif node.tag =='group':
                 frame = gtk.Frame(attrs.get('string', None))
                 frame.attrs=attrs
                 frame.set_border_width(0)
@@ -465,12 +519,20 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
-                saw_list.append(StateAwareWidget(frame, states))
+                state_aware = StateAwareWidget(frame, states=states)
+                saw_list.append(state_aware)
 
-                container.wid_add(frame, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
+                if attrs.get("width",False) or attrs.get("height"):
+                    frame.set_size_request(int(attrs.get('width', -1)) ,int(attrs.get('height', -1)))
+                    hbox = gtk.HBox(homogeneous=False, spacing=0)
+                    hbox.pack_start(frame, expand=False, fill=False, padding=0)
+                    group_wid = hbox
+                else:
+                    group_wid = frame
+                container.wid_add(group_wid, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
                 container.new(int(attrs.get('col',4)))
-
                 widget, widgets, saws, on_write = self.parse(model, node, fields)
+                state_aware.frame_child.update(widgets)
                 dict_widget.update(widgets)
                 saw_list += saws
                 frame.add(widget)
@@ -478,7 +540,7 @@ class parser_form(widget.view.interface.parser_interface):
                     frame.set_shadow_type(gtk.SHADOW_NONE)
                     container.get().set_border_width(0)
                 container.pop()
-            elif node.localName=='hpaned':
+            elif node.tag =='hpaned':
                 hp = gtk.HPaned()
                 container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True, fill=True)
                 _, widgets, saws, on_write = self.parse(model, node, fields, paned=hp)
@@ -486,7 +548,7 @@ class parser_form(widget.view.interface.parser_interface):
                 dict_widget.update(widgets)
                 #if 'position' in attrs:
                 #   hp.set_position(int(attrs['position']))
-            elif node.localName=='vpaned':
+            elif node.tag =='vpaned':
                 hp = gtk.VPaned()
                 container.wid_add(hp, colspan=int(attrs.get('colspan', 4)), expand=True, fill=True)
                 _, widgets, saws, on_write = self.parse(model, node, fields, paned=hp)
@@ -494,30 +556,30 @@ class parser_form(widget.view.interface.parser_interface):
                 dict_widget.update(widgets)
                 if 'position' in attrs:
                     hp.set_position(int(attrs['position']))
-            elif node.localName=='child1':
+            elif node.tag =='child1':
                 widget, widgets, saws, on_write = self.parse(model, node, fields, paned=paned)
                 saw_list += saws
                 dict_widget.update(widgets)
                 paned.pack1(widget, resize=True, shrink=True)
-            elif node.localName=='child2':
+            elif node.tag =='child2':
                 widget, widgets, saws, on_write = self.parse(model, node, fields, paned=paned)
                 saw_list += saws
                 dict_widget.update(widgets)
                 paned.pack2(widget, resize=True, shrink=True)
-            elif node.localName=='action':
+            elif node.tag =='action':
                 from action import action
                 name = str(attrs['name'])
                 widget_act = action(self.window, self.parent, model, attrs)
                 dict_widget[name] = widget_act
                 container.wid_add(widget_act.widget, colspan=int(attrs.get('colspan', 3)), expand=True, fill=True)
         for (ebox,src,name,widget) in container.trans_box:
-            ebox.connect('button_press_event',self.translate, model, name, src, widget)
+            ebox.connect('button_press_event',self.translate, model, name, src, widget, self.screen, self.window)
         for (ebox,src,name) in container.trans_box_label:
-            ebox.connect('button_press_event', self.translate_label, model, name, src)
+            ebox.connect('button_press_event', self.translate_label, model, name, src, self.window)
         return container.pop(), dict_widget, saw_list, on_write
 
-    def translate(self, widget, event, model, name, src, widget_entry):
-        
+    def translate(self, widget, event, model, name, src, widget_entry, screen, window):
+        """Translation window for object data strings"""
         #widget accessor functions
         def value_get(widget):
             if type(widget) == type(gtk.Entry()):
@@ -560,62 +622,57 @@ class parser_form(widget.view.interface.parser_interface):
                 return sw, gtk.FILL | gtk.EXPAND
             else:
                 return None, False
-            
+
         if not value_get(widget_entry):
             common.message(
                     _('Enter some text to the related field before adding translations!'),
                     parent=self.window)
             return False
-        
-        id = self.screen.current_model.id
+
+        id = screen.current_model.id
         if not id:
             common.message(
                     _('You need to save resource before adding translations!'),
                     parent=self.window)
             return False
-        id = self.screen.current_model.save(reload=False)
+        id = screen.current_model.save(reload=False)
         uid = rpc.session.uid
-
+        # Find the translatable languages
         lang_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
                 'search', [('translatable','=','1')])
-
         if not lang_ids:
             common.message(_('No other language available!'),
-                    parent=self.window)
+                    parent=window)
             return False
         langs = rpc.session.rpc_exec_auth('/object', 'execute', 'res.lang',
                 'read', lang_ids, ['code', 'name'])
+        # get the code of the current language
+        current_lang = rpc.session.context.get('lang', 'en_US')
 
-        code = rpc.session.context.get('lang', 'en_US')
+        # There used to be a adapt_context() function here, to make sure we sent
+        # False instead of 'en_US'. But why do that at all ?
 
-        #change 'en' to false for context
-        def adapt_context(val):
-            if val == 'en_US':
-                return False
-            else:
-                return val
-
-
-        win = gtk.Dialog(_('Add Translation'), self.window,
+        # Window
+        win = gtk.Dialog(_('Add Translation'), window,
                 gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
         win.vbox.set_spacing(5)
         win.set_property('default-width', 600)
         win.set_property('default-height', 400)
         win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
         win.set_icon(common.OPENERP_ICON)
-
+        # Accelerators
         accel_group = gtk.AccelGroup()
         win.add_accel_group(accel_group)
-
+        # Buttons
         but_cancel = win.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
         but_cancel.add_accelerator('clicked', accel_group, gtk.keysyms.Escape,
                 gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
         but_ok = win.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
         but_ok.add_accelerator('clicked', accel_group, gtk.keysyms.Return,
                 gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-
+        # Vertical box
         vbox = gtk.VBox(spacing=5)
-
+        # Grid with all the translations
         entries_list = []
         table = gtk.Table(len(langs), 2)
         table.set_homogeneous(False)
@@ -624,11 +681,14 @@ class parser_form(widget.view.interface.parser_interface):
         table.set_border_width(1)
         i = 0
         for lang in langs:
+            # Make sure the context won't mutate
             context = copy.copy(rpc.session.context)
-            context['lang'] = adapt_context(lang['code'])
+            context['lang'] = lang['code']
+            # Read the string in this language 
             val = rpc.session.rpc_exec_auth('/object', 'execute', model,
                     'read', [id], [name], context)
             val = val[0]
+            # Label
             #TODO space before ':' depends of lang (ex: english no space)
             if gtk.widget_get_default_direction() == gtk.TEXT_DIR_RTL:
                 label = gtk.Label(': ' + lang['name'])
@@ -637,19 +697,27 @@ class parser_form(widget.view.interface.parser_interface):
             label.set_alignment(1.0, 0.5)
             (entry, yoptions) = widget_duplicate(widget_entry)
 
+             # Setting the writable property according to main widget
+            if isinstance(entry,gtk.Entry):
+                entry.set_sensitive(widget_entry.get_editable())
+            elif isinstance(entry,gtk.ScrolledWindow):
+                entry.child.set_sensitive(widget_entry.child.get_editable())
+
+            # Label and text box side by side
             hbox = gtk.HBox(homogeneous=False)
-            if code == lang['code']:
+            # Take the latest text in the user's language
+            if lang['code'] == current_lang:
                 value_set(entry,value_get(widget_entry))
             else:
                 value_set(entry,val[name])
-
-            entries_list.append((val['id'], lang['code'], entry))
+            
+            entries_list.append((lang['code'], entry))
             table.attach(label, 0, 1, i, i+1, yoptions=False, xoptions=gtk.FILL,
                     ypadding=2, xpadding=5)
             table.attach(entry, 1, 2, i, i+1, yoptions=yoptions,
                     ypadding=2, xpadding=5)
             i += 1
-
+        # Open the window
         vbox.pack_start(table)
         vp = gtk.Viewport()
         vp.set_shadow_type(gtk.SHADOW_NONE)
@@ -660,36 +728,36 @@ class parser_form(widget.view.interface.parser_interface):
         sv.add(vp)
         win.vbox.add(sv)
         win.show_all()
-
+        
+        # process the response
         ok = False
         data = []
         while not ok:
             response = win.run()
             ok = True
             if response == gtk.RESPONSE_OK:
-                to_save = map(lambda x : (x[0], x[1], value_get(x[2])),
-                        entries_list)
-                while to_save != []:
-                    new_val = {}
-                    new_val['id'],new_val['code'], new_val['value'] = to_save.pop()
-                    #update form field
-                    if new_val['code'] == code:
-                        value_set(widget_entry, new_val['value'])
+                # Get the values of all the text boxes
+                for code, entry in entries_list:
+                    value=value_get(entry)
+                    # update the previous form if the string in the user's language was just changed
+                    if code == current_lang:
+                        value_set(widget_entry, value)
+                    # write the new translation
                     context = copy.copy(rpc.session.context)
-                    context['lang'] = adapt_context(new_val['code'])
+                    context['lang'] = code
                     rpc.session.rpc_exec_auth('/object', 'execute', model,
-                            'write', [id], {str(name):  new_val['value']},
+                            'write', [id], {str(name):  value},
                             context)
             if response == gtk.RESPONSE_CANCEL:
-                self.window.present()
+                window.present()
                 win.destroy()
                 return
-        self.screen.current_model.reload()
-        self.window.present()
+        screen.current_model.reload()
+        window.present()
         win.destroy()
         return True
 
-    def translate_label(self, widget, event, model, name, src):
+    def translate_label(self, widget, event, model, name, src, window):
         def callback_label(self, widget, event, model, name, src, window=None):
             lang_ids = rpc.session.rpc_exec_auth('/object', 'execute',
                     'res.lang', 'search', [('translatable', '=', '1')])
@@ -814,14 +882,12 @@ class parser_form(widget.view.interface.parser_interface):
         menu = gtk.Menu()
         if name:
             item = gtk.ImageMenuItem(_('Translate label'))
-            item.connect("activate", callback_label, widget, event, model,
-                    name, src, self.window)
+            item.connect("activate", callback_label, widget, event, model, name, src, window)
             item.set_sensitive(1)
             item.show()
             menu.append(item)
         item = gtk.ImageMenuItem(_('Translate view'))
-        item.connect("activate", callback_view, widget, event, model, src,
-                self.window)
+        item.connect("activate", callback_view, widget, event, model, src, window)
         item.set_sensitive(1)
         item.show()
         menu.append(item)

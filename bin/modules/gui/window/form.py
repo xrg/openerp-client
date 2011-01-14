@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -41,16 +40,14 @@ import service
 import options
 import copy
 
-import gc
 
 from observator import oregistry
 from widget.screen import Screen
 
-
 class form(object):
     def __init__(self, model, res_id=False, domain=None, view_type=None,
-            view_ids=None, window=None, context=None, name=False, limit=80,
-            auto_refresh=False):
+            view_ids=None, window=None, context=None, name=False, help={}, limit=100,
+            auto_refresh=False, auto_search=True, search_view=None):
         if not view_type:
             view_type = ['form','tree']
         if domain is None:
@@ -70,11 +67,10 @@ class form(object):
         self.fields = fields
         self.domain = domain
         self.context = context
-
         self.screen = Screen(self.model, view_type=view_type,
-                context=self.context, view_ids=view_ids, domain=domain,
-                hastoolbar=options.options['form.toolbar'], show_search=True,
-                window=self.window, limit=limit, readonly=bool(auto_refresh))
+                context=self.context, view_ids=view_ids, domain=domain,help=help,
+                hastoolbar=options.options['form.toolbar'], hassubmenu=options.options['form.submenu'],
+                show_search=True, window=self.window, limit=limit, readonly=bool(auto_refresh), auto_search=auto_search, search_view=search_view)
         self.screen.signal_connect(self, 'record-message', self._record_message)
         self.screen.widget.show()
         oregistry.add_receiver('misc-message', self._misc_message)
@@ -126,6 +122,8 @@ class form(object):
             self.handlers['radio_graph'] =  self.sig_switch_graph
         if 'calendar' in view_type:
             self.handlers['radio_calendar'] =  self.sig_switch_calendar
+        if 'diagram' in view_type:
+            self.handlers['radio_diagram'] =  self.sig_switch_diagram
         if res_id:
             if isinstance(res_id, (int, long,)):
                 res_id = [res_id]
@@ -139,6 +137,9 @@ class form(object):
         if auto_refresh and int(auto_refresh):
             gobject.timeout_add(int(auto_refresh) * 1000, self.sig_reload)
 
+    def sig_switch_diagram(self, widget=None):
+        return self.sig_switch(widget, 'diagram')
+
     def sig_switch_form(self, widget=None):
         return self.sig_switch(widget, 'form')
 
@@ -150,55 +151,63 @@ class form(object):
 
     def sig_switch_graph(self, widget=None):
         return self.sig_switch(widget, 'graph')
-    
-    def get_resource(self,widget):
+
+    def get_resource(self, widget=None, get_id=None):
+        ## This has been done due to virtual ids coming from
+        ## crm meeting. like '3-20101012155505' which are not in existence
+        ## and needed to be converted to real ids
+        if isinstance(get_id, str):
+            get_id = int(get_id.split('-')[0])
         all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])
-        get_id = int(widget.get_value())
+        if widget:
+            get_id = int(widget.get_value())
         if get_id in all_ids:
             current_ids = self.screen.ids_get()
             if get_id in current_ids:
                 self.screen.display(get_id)
             else:
-                self.screen.load([get_id])    
+                self.screen.load([get_id])
             self.screen.current_view.set_cursor()
         else:
-            common.message(_('Resource ID does not exist for this object!'))    
-    
+            if widget:
+                common.message(_('Resource ID does not exist for this object!'))
+
     def get_event(self, widget, event, win):
         if event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):
             win.destroy()
             self.get_resource(widget)
-        
-        
+
     def sig_goto(self, *args):
         if not self.modified_save():
             return
-        
+
         glade2 = glade.XML(common.terp_path("openerp.glade"),'dia_goto_id',gettext.textdomain())
         widget = glade2.get_widget('goto_spinbutton')
         win = glade2.get_widget('dia_goto_id')
         widget.connect('key_press_event',self.get_event,win)
-        
+
         win.set_transient_for(self.window)
         win.show_all()
 
         response = win.run()
         win.destroy()
-        
+
         if response == gtk.RESPONSE_OK:
             self.get_resource(widget)
-            
 
     def destroy(self):
+
+        """
+            Destroy the page object and all the child
+            (or at least should do this)
+        """
         oregistry.remove_receiver('misc-message', self._misc_message)
         self.screen.signal_unconnect(self)
         self.screen.destroy()
-        del self.screen
-        del self.glade
-        del self.widget
+        self.widget.destroy()
         self.sw.destroy()
-        del self.sw
-        gc.collect()
+        del self.screen
+        del self.handlers
 
     def ids_get(self):
         return self.screen.ids_get()
@@ -224,10 +233,12 @@ class form(object):
     def sig_switch(self, widget=None, mode=None):
         if not self.modified_save():
             return
+        id = self.screen.id_get()
         if mode<>self.screen.current_view.view_type:
             self.screen.switch_view(mode=mode)
-            self.sig_reload()
-            self.screen.current_view.set_cursor()
+            if id:
+                self.sig_reload()
+                self.get_resource(get_id=id)
 
     def sig_logs(self, widget=None):
         id = self.id_get()
@@ -242,7 +253,8 @@ class form(object):
                 ('create_uid', _('Creation User')),
                 ('create_date', _('Creation Date')),
                 ('write_uid', _('Latest Modification by')),
-                ('write_date', _('Latest Modification Date'))
+                ('write_date', _('Latest Modification Date')),
+                ('xmlid', _('Internal Module Data ID'))
             ]
             for (key,val) in todo:
                 if line[key] and key in ('create_uid','write_uid','uid'):
@@ -253,7 +265,7 @@ class form(object):
 
     def sig_remove(self, widget=None):
         if not self.id_get():
-            msg = _('Record is not saved ! \n Do You want to Clear Current Record ?')
+            msg = _('Record is not saved ! \n Do you want to clear current record ?')
         else:
             if self.screen.current_view.view_type == 'form':
                 msg = _('Are you sure to remove this record ?')
@@ -266,25 +278,28 @@ class form(object):
             else:
                 self.message_state(_('Resources successfully removed.'), color='darkgreen')
         self.sig_reload()
-        
+
     def sig_import(self, widget=None):
         fields = []
         while(self.screen.view_to_load):
             self.screen.load_view_to_load()
-        win = win_import.win_import(self.model, self.screen.fields, fields, parent=self.window,local_context= self.screen.context)
+        screen_fields = copy.deepcopy(self.screen.fields)
+        win = win_import.win_import(self.model, screen_fields, fields, parent=self.window,local_context= self.screen.context)
         res = win.go()
 
     def sig_save_as(self, widget=None):
         fields = []
         while(self.screen.view_to_load):
             self.screen.load_view_to_load()
-        win = win_export.win_export(self.model, self.screen.ids_get(), self.screen.fields, fields, parent=self.window, context=self.context)
+        screen_fields = copy.deepcopy(self.screen.fields)
+        win = win_export.win_export(self.model, self.screen.ids_get(), screen_fields, fields, parent=self.window, context=self.context)
         res = win.go()
 
     def sig_new(self, widget=None, autosave=True):
         if autosave:
             if not self.modified_save():
                 return
+        self.screen.create_new = True
         self.screen.new()
         self.message_state('')
 
@@ -300,17 +315,25 @@ class form(object):
             self.screen.current_view.set_cursor()
             self.message_state(_('Working now on the duplicated document !'))
         self.sig_reload()
-        
+
     def _form_save(self, auto_continue=True):
         pass
 
     def sig_save(self, widget=None, sig_new=True, auto_continue=True):
-        id = self.screen.save_current()
+        res = self.screen.save_current()
+        warning = False
+        if isinstance(res,dict):
+            id = res.get('id',False)
+            warning = res.get('warning',False)
+        else:
+            id = res
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
-        else:
-            common.warning(_('Invalid form, correct red fields !'),_('Error !'))
+        elif len(self.screen.models.models) and res != None:
+            common.warning(_('Invalid form, correct red fields !'),_('Error !'), parent=self.screen.current_view.window)
             self.message_state(_('Invalid form, correct red fields !'), color="red")
+        if warning:
+            common.warning(warning,_('Warning !'), parent=self.screen.current_view.window)
         return bool(id)
 
     def sig_previous(self, widget=None):
@@ -353,6 +376,7 @@ class form(object):
 
     def sig_action(self, keyword='client_action_multi', previous=False, report_type='pdf', adds={}):
         ids = self.screen.ids_get()
+        group_by = self.screen.context.get('group_by')
         if self.screen.current_model:
             id = self.screen.current_model.id
         else:
@@ -363,15 +387,25 @@ class form(object):
                 return False
             ids = [id]
         if self.screen.current_view.view_type == 'tree':
-            sel_ids = self.screen.current_view.sel_ids_get()
+            self.modified_save()
+            sel_ids = self.screen.sel_ids_get()
             if sel_ids:
                 ids = sel_ids
-        if len(ids):
+        if len(ids) or group_by:
             obj = service.LocalService('action.main')
+            data = {'model':self.screen.resource,
+                    'id': id or False,
+                    'ids':ids,
+                    'report_type': report_type,
+                    '_domain':self.screen.domain
+                   }
+            # When group by header is selected add it's children as a active_ids
+            if group_by:
+                self.screen.context.update({'active_id':id, 'active_ids':ids})
             if previous and self.previous_action:
-                obj._exec_action(self.previous_action[1], {'model':self.screen.resource, 'id': id or False, 'ids':ids, 'report_type': report_type}, self.screen.context)
+                obj._exec_action(self.previous_action[1], data, self.screen.context)
             else:
-                res = obj.exec_keyword(keyword, {'model':self.screen.resource, 'id': id or False, 'ids':ids, 'report_type': report_type}, adds, self.screen.context)
+                res = obj.exec_keyword(keyword, data, adds, self.screen.context)
                 if res:
                     self.previous_action = res
             self.sig_reload(test_modified=False)
@@ -413,7 +447,7 @@ class form(object):
             name2 = _('New document')
             if signal_data[3]:
                 name2 = _('Editing document (id: ')+str(signal_data[3])+')'
-            # Total Records should never change    
+            # Total Records should never change
             tot_count = signal_data[2] < signal_data[1] and  str(signal_data[1]) or str(signal_data[2])
             msg = _('Record: ') + name + ' / ' + str(signal_data[1]) + \
                     _(' of ') + str(tot_count) + ' - ' + name2
@@ -438,7 +472,8 @@ class form(object):
         return True
 
     def sig_close(self, urgent=False):
-        return self.modified_save(reload=False)
+        res = self.modified_save(reload=False)
+        return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

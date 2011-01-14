@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -24,7 +23,7 @@ import os
 import sys
 import tempfile
 import time
-
+from datetime import datetime
 import base64
 
 import gtk
@@ -50,15 +49,15 @@ class wid_binary(interface.widget_interface):
         self.filters = attrs.get('filters', None)
         if self.filters:
             self.filters = self.filters.split(',')
-        
+
         class binButton(gtk.Button):
             def __init__(self, stock, title, long=True):
                 assert stock is not None
                 super(binButton, self).__init__()
-                
+
                 box = gtk.HBox()
                 box.set_spacing(2)
-                
+
                 img = gtk.Image()
                 img.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
                 box.pack_start(img, expand=False, fill=False)
@@ -74,19 +73,19 @@ class wid_binary(interface.widget_interface):
 
                 self.add(box)
 
-        self.but_select = binButton('gtk-open', _('Select'), True)
+        self.but_select = binButton('terp-folder-orange', _('Select'), True)
         self.but_select.connect('clicked', self.sig_select)
         self.widget.pack_start(self.but_select, expand=False, fill=False)
 
-        self.but_exec = binButton('gtk-execute', _('Open'), True)
+        self.but_exec = binButton('terp-folder-blue', _('Open'), True)
         self.but_exec.connect('clicked', self.sig_execute)
         self.widget.pack_start(self.but_exec, expand=False, fill=False)
 
-        self.but_save_as = binButton('gtk-save-as', _('Save As'), False)
+        self.but_save_as = binButton('gtk-save-as', _('Save As'), True)
         self.but_save_as.connect('clicked', self.sig_save_as)
         self.widget.pack_start(self.but_save_as, expand=False, fill=False)
 
-        self.but_remove = binButton('gtk-clear', _('Clear'), False)
+        self.but_remove = binButton('gtk-clear', _('Clear'), True)
         self.but_remove.connect('clicked', self.sig_remove)
         self.widget.pack_start(self.but_remove, expand=False, fill=False)
 
@@ -97,11 +96,17 @@ class wid_binary(interface.widget_interface):
 
     def _readonly_set(self, value):
         self.__ro = value
-        self.but_select.set_sensitive(not value)
-        self.but_remove.set_sensitive(not value)
-    
+        if value:
+            self.but_select.hide()
+            self.but_remove.hide()
+        else:
+            self.but_select.show()
+            self.but_remove.show()
+
     def _get_filename(self):
-        return self._view.model.value.get(self.has_filename) or self._view.model.value.get('name', self.data_field_name)
+        return self._view.model.value.get(self.has_filename) \
+               or self._view.model.value.get('name', self.data_field_name) \
+               or datetime.now().strftime('%c')
 
     def sig_execute(self,widget=None):
         try:
@@ -190,7 +195,7 @@ class wid_binary(interface.widget_interface):
         super(wid_binary, self).display(model, model_field)
         self.model_field = model_field
         disp_text = model_field.get_client(model)
-        
+
         self.wid_text.set_text(disp_text and str(disp_text) or '')
         btn_activate(bool(disp_text))
         return True
@@ -200,6 +205,9 @@ class wid_binary(interface.widget_interface):
 
     def _color_widget(self):
         return self.wid_text
+
+    def grab_focus(self):
+        return self.wid_text.grab_focus()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

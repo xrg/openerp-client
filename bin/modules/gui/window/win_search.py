@@ -1,30 +1,29 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
 import gtk
 from gtk import glade
+from copy import deepcopy
 import gobject
 import gettext
-import xmlrpclib
 import common
 import service
 
@@ -88,31 +87,30 @@ class dialog(object):
         while True:
             try:
                 res = self.dia.run()
-                if res==gtk.RESPONSE_OK:
+                if res == gtk.RESPONSE_OK:
                     if self.screen.current_model.validate() and self.screen.save_current():
                         return self.screen.current_model.id
                     else:
                         self.screen.display()
+                        self.screen.current_view.set_cursor()
                 else:
                     break
-            except Exception,e:
+            except Exception:
                 # Passing all exceptions, most preferably the one of sql_constraint
-                pass    
+                pass
         return False
 
     def destroy(self):
         self.window.present()
         self.dia.destroy()
+        self.screen.destroy()
 
 
 class win_search(object):
     def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None):
         self.model = model
-        self.first = True
-        self.domain =domain
-        self.context = context
-        self.context.update(rpc.session.context)
         self.sel_multi = sel_multi
+        self.ids = ids
         self.glade = glade.XML(common.terp_path("openerp.glade"),'win_search',gettext.textdomain())
         self.win = self.glade.get_widget('win_search')
         self.win.set_icon(common.OPENERP_ICON)
@@ -120,50 +118,35 @@ class win_search(object):
             parent = service.LocalService('gui.main').window
         self.parent = parent
         self.win.set_transient_for(parent)
-
-        self.screen = Screen(model, view_type=['tree'], context=self.context, parent=self.win)
+        self.screen = Screen(model, view_type=['tree'], show_search=True, domain=domain,
+                             context=context, parent=self.win, win_search=True)
         self.view = self.screen.current_view
+        if self.screen.filter_widget.focusable:
+            self.screen.filter_widget.focusable.grab_focus()
+        self.title = _('OpenERP Search: %s') % self.screen.name
+        self.title_results = _('OpenERP Search: %s (%%d result(s))') % (self.screen.name,)
+        self.win.set_title(self.title)
         self.view.unset_editable()
         sel = self.view.widget_tree.get_selection()
-
         if not sel_multi:
             sel.set_mode('single')
         else:
             sel.set_mode(gtk.SELECTION_MULTIPLE)
+        self.view.widget_tree.connect('row_activated', self.sig_activate)
+        self.view.widget_tree.connect('button_press_event', self.sig_button)
+        self.screen.win_search_callback = self.update_title
         vp = gtk.Viewport()
         vp.set_shadow_type(gtk.SHADOW_NONE)
         vp.add(self.screen.widget)
-        sw = self.glade.get_widget('search_sw')
-        sw.add(vp)
-        sw.show_all()
-        self.view.widget_tree.connect('row_activated', self.sig_activate)
-        self.view.widget_tree.connect('button_press_event', self.sig_button)
-
-        self.model_name = model
-
-        view_form = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'fields_view_get', False, 'form', self.context)
-        self.form = widget_search.form(view_form['arch'], view_form['fields'], model, parent=self.win)
-
-        self.title = _('OpenERP Search: %s') % self.form.name
-        self.title_results = _('OpenERP Search: %s (%%d result(s))') % self.form.name
-        self.win.set_title(self.title)
-        x, y = self.form.widget.size_request()
-
-        hbox = self.glade.get_widget('search_hbox')
-        hbox.pack_start(self.form.widget)
-        self.ids = ids
-        if self.ids:
-            self.reload()
-        self.old_search = None
-        self.old_offset = self.old_limit = None
-        if self.ids:
-            self.old_search = []
-            self.old_limit = self.form.get_limit()
-            self.old_offset = self.form.get_offset()
-
-        self.view.widget.show_all()
-        if self.form.focusable:
-            self.form.focusable.grab_focus()
+        vp.show()
+        self.sw = gtk.ScrolledWindow()
+        self.sw.set_shadow_type(gtk.SHADOW_NONE)
+        self.sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        self.sw.add(vp)
+        self.sw.show()
+        self.wid = self.glade.get_widget('win_search_vbox')
+        self.wid.pack_start(self.sw)
+        self.wid.show_all()
 
     def sig_activate(self, treeview, path, column, *args):
         self.view.widget_tree.emit_stop_by_name('row_activated')
@@ -177,33 +160,19 @@ class win_search(object):
         return False
 
     def find(self, widget=None, *args):
-        limit = self.form.get_limit()
-        offset = self.form.get_offset()
-        if (self.old_search == self.form.value) and (self.old_limit==limit) and (self.old_offset==offset) and not self.first:
-            self.win.response(gtk.RESPONSE_OK)
-            return False
-        self.first = False
-        self.old_offset = offset
-        self.old_limit = limit
-        v = self.form.value
-        v_keys = map(lambda x: x[0], v)
-        v += self.domain
-        try:
-            self.ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, self.context)
-        except:
-            # Try if it is not an old server
-            self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)
+        self.screen.search_filter()
+        self.update_title()
+
+    def update_title(self):
+        self.ids = self.screen.win_search_ids
         self.reload()
-        self.old_search = self.form.value
         self.win.set_title(self.title_results % len(self.ids))
-        return True
 
     def reload(self):
-        self.screen.clear()
-        self.screen.load(self.ids)
         sel = self.view.widget_tree.get_selection()
         if sel.get_mode() == gtk.SELECTION_MULTIPLE:
             sel.select_all()
+
 
     def sel_ids_get(self):
         return self.screen.sel_ids_get()
@@ -213,6 +182,12 @@ class win_search(object):
         self.win.destroy()
 
     def go(self):
+        ## This is if the user has set some filters by default with search_default_XXX
+        if self.ids:
+            self.screen.win_search_domain += [('id','in', self.ids)]
+            self.find()
+        else:
+            self.screen.update_scroll()
         end = False
         while not end:
             button = self.win.run()
@@ -220,16 +195,13 @@ class win_search(object):
                 res = self.sel_ids_get() or self.ids
                 end = True
             elif button== gtk.RESPONSE_APPLY:
-                end = not self.find()
-                if end:
-                    res = self.sel_ids_get() or self.ids
+                self.find()
             else:
                 res = None
                 end = True
         self.destroy()
-
-        if button== gtk.RESPONSE_ACCEPT:
-            dia = dialog(self.model, window=self.parent, domain=self.domain ,context=self.context)
+        if button == gtk.RESPONSE_ACCEPT:
+            dia = dialog(self.model, window=self.parent, domain=self.screen.domain_init ,context=self.screen.context)
             id = dia.run()
             res = id and [id] or None
             dia.destroy()

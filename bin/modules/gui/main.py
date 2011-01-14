@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -43,6 +42,9 @@ import re
 import xmlrpclib
 import base64
 
+import thread
+import gc
+
 RESERVED_KEYWORDS=['absolute', 'action', 'all', 'alter', 'analyse', 'analyze', 'and', 'any', 'as', 'asc', 'authorization', 'between', 'binary', 'both',
             'case', 'cast', 'check', 'collate', 'column','constraint', 'create', 'cross', 'current_date', 'current_time', 'current_timestamp',
             'current_user','default', 'deferrable', 'desc', 'distinct', 'do', 'else', 'end', 'except', 'false', 'for', 'foreign', 'freeze',
@@ -64,7 +66,7 @@ class StockButton(gtk.Button):
     def __init__(self, label, stock):
         gtk.Button.__init__(self, label)
         self.icon = gtk.Image()
-        self.icon.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
+        self.icon.set_from_stock(stock, gtk.ICON_SIZE_MENU)
         self.set_image(self.icon)
 
 class DatabaseDialog(gtk.Dialog):
@@ -111,6 +113,7 @@ class DatabaseDialog(gtk.Dialog):
         self.table.attach(lbl, 0, 1, 2, 3)
         self.adminPwdEntry = gtk.Entry()
         self.adminPwdEntry.set_visibility(False)
+        self.adminPwdEntry.set_activates_default(True)
         self.table.attach(self.adminPwdEntry, 1, 2, 2, 3)
 
         self.vbox.add(self.table)
@@ -119,7 +122,6 @@ class DatabaseDialog(gtk.Dialog):
         self.show_all()
         self.messageLabel.hide()
         res = super(DatabaseDialog, self).run()
-
         if res == gtk.RESPONSE_ACCEPT:
             self.run_thread()
 
@@ -147,7 +149,6 @@ class DatabaseDialog(gtk.Dialog):
         self.result = None
         self.error = False
         self.exception = None
-
         def go():
             try:
                 self.on_response_accept()
@@ -168,31 +169,7 @@ class DatabaseDialog(gtk.Dialog):
 
             if i > 10:
                 if not win or not pb:
-                    win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
-                    win.set_title(_('OpenERP Computing'))
-                    win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                    win.set_modal(True) 
-                    vbox = gtk.VBox(False, 0)
-                    hbox = gtk.HBox(False, 13)
-                    hbox.set_border_width(10)
-                    img = gtk.Image()
-                    img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
-                    hbox.pack_start(img, expand=True, fill=False)
-                    vbox2 = gtk.VBox(False, 0)
-                    label = gtk.Label()
-                    label.set_markup('<b>'+_('Operation in progress')+'</b>')
-                    label.set_alignment(0.0, 0.5)
-                    vbox2.pack_start(label, expand=True, fill=False)
-                    vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
-                    vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
-                    hbox.pack_start(vbox2, expand=True, fill=True)
-                    vbox.pack_start(hbox)
-                    pb = gtk.ProgressBar()
-                    pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
-                    vbox.pack_start(pb, expand=True, fill=False)
-                    win.add(vbox)
-                    win.set_transient_for(self)
-                    win.show_all()
+                    win, pb = common.OpenERP_Progressbar(self)
                 pb.pulse()
                 gtk.main_iteration()
         if win:
@@ -211,9 +188,9 @@ class DatabaseDialog(gtk.Dialog):
             except (tiny_socket.Myexception, xmlrpclib.Fault), err:
                 a = rpc_exception(err.faultCode, err.faultString)
                 if a.type in ('warning', 'UserError'):
-                    common.warning(a.data, a.message)
+                    common.warning(a.data, a.message, parent=self)
                 elif a.type == 'AccessDenied':
-                    common.warning('Bad Super Administrator Password', self.get_title())
+                    common.warning(_('Bad Super Administrator Password'), self.get_title(), parent=self)
                 else:
                     common.error(_('Application Error'), err.faultCode, err.faultString, disconnected_mode=True)
             except Exception, e:
@@ -300,7 +277,7 @@ class MigrationDatabaseDialog(DatabaseDialog):
 
         # Add the text column (database name)
         renderer = gtk.CellRendererText()
-        col = gtk.TreeViewColumn("Database", renderer, text=1)
+        col = gtk.TreeViewColumn(_("Database"), renderer, text=1)
         treeview.append_column(col)
         sw.add(treeview)
         self.table.attach(sw, 0, 2, 3, 4)
@@ -308,15 +285,15 @@ class MigrationDatabaseDialog(DatabaseDialog):
     def on_response_accept(self):
         databases = [ item[1] for item in self.model if bool(item[0]) ]
         if databases:
-            rpc.session.migrate_databases(self.serverEntry.get_text(), 
-                                          self.adminPwdEntry.get_text(), 
+            rpc.session.migrate_databases(self.serverEntry.get_text(),
+                                          self.adminPwdEntry.get_text(),
                                           databases)
             if len(databases) == 1:
                 self.message = _("Your database has been upgraded.")
             else:
                 self.message = _("Your databases have been upgraded.")
         else:
-            self.message = "You have not selected a database"
+            self.message = _("You have not selected a database")
 
     def _on_toggle_renderer__toggled(self, renderer, path, col_index):
         row = self.model[path]
@@ -408,20 +385,18 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
 
     return True
 
-
 def _refresh_langlist(lang_widget, url):
     liststore = lang_widget.get_model()
     liststore.clear()
     lang_list = rpc.session.db_exec_no_except(url, 'list_lang')
-    lang_list.append( ('en_US','English') )
-    for key,val in lang_list:
-        liststore.insert(0, (val,key))
     lang = rpc.session.context.get('lang', options.options.get('client.lang', 'en_US'))
-    lang_widget.set_active(0)
-    for idx, item in enumerate(lang_widget.get_model()):
-        if item[1] == lang:
-            lang_widget.set_active(idx)
-            break
+    active_idx = -1
+    for index, (key,val) in enumerate(lang_list):
+        if key == lang:
+            active_idx = index
+        liststore.append((val,key))
+    if active_idx != -1:
+        lang_widget.set_active(active_idx)
     return lang_list
 
 def _server_ask(server_widget, parent=None):
@@ -439,8 +414,8 @@ def _server_ask(server_widget, parent=None):
     protocol_widget = win_gl.get_widget('protocol')
 
     protocol = {
-        'XML-RPC': 'http://',
-        'NET-RPC (faster)': 'socket://',
+        'XML-RPC (port : 8069)': 'http://',
+        'NET-RPC (faster)(port : 8070)': 'socket://',
     }
 
     if check_ssl():
@@ -466,7 +441,7 @@ def _server_ask(server_widget, parent=None):
     res = win.run()
     if res == gtk.RESPONSE_OK:
         protocol = protocol[protocol_widget.get_active_text()]
-        url = '%s%s:%s' % (protocol, host_widget.get_text(), port_widget.get_text())
+        url = '%s%s:%s' % ((protocol).strip(), (host_widget.get_text()).strip(), (port_widget.get_text()).strip())
         server_widget.set_text(url)
         result = url
     parent.present()
@@ -477,6 +452,7 @@ def _server_ask(server_widget, parent=None):
 class db_login(object):
     def __init__(self):
         self.win_gl = glade.XML(common.terp_path("openerp.glade"),"win_login",gettext.textdomain())
+        self.win = self.win_gl.get_widget('win_login')
 
     def refreshlist(self, widget, db_widget, entry_db, label, url, butconnect=False):
 
@@ -494,7 +470,7 @@ class db_login(object):
         if _refresh_dblist(db_widget, entry_db, label, butconnect, url):
             is_same_version, server_version, client_version = check_server_version(url)
             if not is_same_version:
-                common.warning(_('The versions of the server (%s) and the client (%s) missmatch. The client may not work properly. Use it at your own risks.') % (server_version, client_version,))
+                common.warning(_('The versions of the server (%s) and the client (%s) missmatch. The client may not work properly. Use it at your own risks.') % (server_version, client_version,),parent=self.win)
 
     def refreshlist_ask(self,widget, server_widget, db_widget, entry_db, label, butconnect = False, url=False, parent=None):
         url = _server_ask(server_widget, parent) or url
@@ -507,6 +483,7 @@ class db_login(object):
             parent = service.LocalService('gui.main').window
         win.set_transient_for(parent)
         win.set_icon(common.OPENERP_ICON)
+        win.set_resizable(False)
         win.show_all()
         img = self.win_gl.get_widget('image_tinyerp')
         img.set_from_file(common.terp_path_pixmaps('openerp.png'))
@@ -518,7 +495,9 @@ class db_login(object):
         entry_db = self.win_gl.get_widget('ent_db')
         change_button = self.win_gl.get_widget('but_server')
         label = self.win_gl.get_widget('combo_label')
+#        db_entry = self.win_gl.get_widget('ent_db')
         label.hide()
+        entry_db.hide()
 
         host = options.options['login.server']
         port = options.options['login.port']
@@ -627,10 +606,10 @@ class db_create(object):
             res = win.run()
             db_name = self.db_widget.get_text().lower()
             if (res==gtk.RESPONSE_OK) and (db_name in RESERVED_KEYWORDS):
-                common.warning(_("Sorry,'" +db_name + "' cannot be the name of the database,it's a Reserved Keyword."), _('Bad database name !'), parent=parent)
+                common.warning(_("Sorry,'" +db_name + "' cannot be the name of the database,it's a Reserved Keyword."), _('Bad database name !'), parent=win)
                 continue
             if (res==gtk.RESPONSE_OK) and ((not db_name) or (not re.match('^[a-zA-Z0-9][a-zA-Z0-9_]+$', db_name))):
-                common.warning(_('The database name must contain only normal characters or "_".\nYou must avoid all accents, space or special characters.'), _('Bad database name !'), parent=parent)
+                common.warning(_('The database name must contain only normal characters or "_".\nYou must avoid all accents, space or special characters.'), _('Bad database name !'), parent=win)
 
             else:
                 break
@@ -652,49 +631,23 @@ class db_create(object):
 
         if res == gtk.RESPONSE_OK:
             try:
-                id=rpc.session.db_exec(url, 'list')
+                id = rpc.session.db_exec(url, 'list')
                 if db_name in id:
                     raise Exception('DbExist')
                 id = rpc.session.db_exec(url, 'create', passwd, db_name, demo_data, langreal, user_pass)
-                win = gtk.Window(type=gtk.WINDOW_TOPLEVEL)
-                win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-                win.set_title(_('OpenERP Database Installation'))
-                vbox = gtk.VBox(False, 0)
-                hbox = gtk.HBox(False, 13)
-                hbox.set_border_width(10)
-                img = gtk.Image()
-                img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
-                hbox.pack_start(img, expand=True, fill=False)
-                vbox2 = gtk.VBox(False, 0)
-                label = gtk.Label()
-                label.set_markup(_('<b>Operation in progress</b>'))
-                label.set_alignment(0.0, 0.5)
-                vbox2.pack_start(label, expand=True, fill=False)
-                vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
-                vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
-                hbox.pack_start(vbox2, expand=True, fill=True)
-                vbox.pack_start(hbox)
-                pb = gtk.ProgressBar()
-                pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
-                vbox.pack_start(pb, expand=True, fill=False)
-                win.add(vbox)
-                if not parent:
-                    parent = service.LocalService('gui.main').window
-                win.set_transient_for(parent)
-                win.show_all()
+                win, pb = common.OpenERP_Progressbar(parent, title='OpenERP Database Installation')
                 self.timer = gobject.timeout_add(1000, self.progress_timeout, pb, url, passwd, id, win, db_name, parent)
                 self.terp_main.glade.get_widget('but_menu').set_sensitive(True)
                 self.terp_main.glade.get_widget('user').set_sensitive(True)
                 self.terp_main.glade.get_widget('form').set_sensitive(True)
                 self.terp_main.glade.get_widget('plugins').set_sensitive(True)
-
             except Exception, e:
                 if e.args == ('DbExist',):
-                    common.warning(_("Could not create database."),_('Database already exists !'))
+                    common.warning(_("Could not create database."),_('Database already exists !'), parent=parent)
                 elif (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
-                    common.warning(_('Bad database administrator password !'), _("Could not create database."))
+                    common.warning(_('Bad database administrator password !'), _("Could not create database."), parent=parent)
                 else:
-                    common.warning(_("Could not create database."),_('Error during database creation !'))
+                    common.warning(_("Could not create database."),_('Error during database creation !'), parent=parent)
 
     def progress_timeout(self, pbar, url, passwd, id, win, dbname, parent=None):
         try:
@@ -707,41 +660,23 @@ class db_create(object):
         pbar.pulse()
         if progress == 1.0:
             win.destroy()
-
-            pwdlst = '\n'.join(map(lambda x: '    - %s: %s / %s' % (x['name'],x['login'],x['password']), users))
-            dialog = glade.XML(common.terp_path("openerp.glade"), "dia_dbcreate_ok", gettext.textdomain())
-            win = dialog.get_widget('dia_dbcreate_ok')
-            if not parent:
-                parent = service.LocalService('gui.main').window
-            win.set_transient_for(parent)
-            win.show_all()
-            buffer = dialog.get_widget('dia_tv').get_buffer()
-
-            buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-            iter_start = buffer.get_start_iter()
-            buffer.insert(iter_start, _('The following users have been installed on your database:')+'\n\n'+ pwdlst + '\n\n'+_('You can now connect to the database as an administrator.'))
-            res = win.run()
-            parent.present()
-            win.destroy()
-
-            if res == gtk.RESPONSE_OK:
-                m = re.match('^(http[s]?://|socket://)([\w.]+):(\d{1,5})$', url)
-                ok = False
-                for x in users:
-                    if x['login']=='admin' and m:
-                        res = [x['login'], x['password']]
-                        res.append( m.group(2) )
-                        res.append( m.group(3) )
-                        res.append( m.group(1) )
-                        res.append( dbname )
-                        log_response = rpc.session.login(*res)
-                        if log_response == 1:
-                            options.options['login.login'] = x['login']
-                            id = self.terp_main.sig_win_menu(quiet=False)
-                            ok = True
-                            break
-                if not ok:
-                    self.sig_login(dbname=dbname)
+            m = re.match('^(http[s]?://|socket://)([\w.]+):(\d{1,5})$', url)
+            ok = False
+            for x in users:
+                if x['login']=='admin' and m:
+                    res = [x['login'], x['password']]
+                    res.append( m.group(2) )
+                    res.append( m.group(3) )
+                    res.append( m.group(1) )
+                    res.append( dbname )
+                    log_response = rpc.session.login(*res)
+                    if log_response == 1:
+                        options.options['login.login'] = x['login']
+                        id = self.terp_main.sig_win_menu(quiet=False)
+                        ok = True
+                        break
+            if not ok:
+                self.sig_login(dbname=dbname)
             return False
         return True
 
@@ -751,6 +686,7 @@ class db_create(object):
 
 class terp_main(service.Service):
     def __init__(self, name='gui.main', audience='gui.*'):
+
         service.Service.__init__(self, name, audience)
         self.exportMethod(self.win_add)
 
@@ -759,6 +695,7 @@ class terp_main(service.Service):
         self.status_bar_main = self.glade.get_widget('hbox_status_main')
         self.status_bar_main.show()
         self.toolbar = self.glade.get_widget('main_toolbar')
+        self.sb_company = self.glade.get_widget('sb_company')
         self.sb_requests = self.glade.get_widget('sb_requests')
         self.sb_username = self.glade.get_widget('sb_user_name')
         self.sb_servername = self.glade.get_widget('sb_user_server')
@@ -805,6 +742,7 @@ class terp_main(service.Service):
             'on_win_close_activate': self.sig_win_close,
             'on_support_activate': common.support,
             'on_preference_activate': self.sig_user_preferences,
+            'on_change_passwd_activate':lambda x:self.sig_db_password('user'),
             'on_read_requests_activate': self.sig_request_open,
             'on_send_request_activate': self.sig_request_new,
             'on_request_wait_activate': self.sig_request_wait,
@@ -818,6 +756,7 @@ class terp_main(service.Service):
             'on_opt_form_tab_bottom_activate': lambda x: self.sig_form_tab('bottom'),
             'on_opt_form_tab_orientation_horizontal_activate': lambda x: self.sig_form_tab_orientation(0),
             'on_opt_form_tab_orientation_vertical_activate': lambda x: self.sig_form_tab_orientation(90),
+            'on_opt_debug_mode_activate':self.sig_debug_mode_tooltip,
             'on_help_index_activate': self.sig_help_index,
             'on_help_contextual_activate': self.sig_help_context,
             'on_help_licence_activate': self.sig_licence,
@@ -827,7 +766,7 @@ class terp_main(service.Service):
             'on_db_restore_activate': self.sig_db_restore,
             'on_db_backup_activate': self.sig_db_dump,
             'on_db_drop_activate': self.sig_db_drop,
-            'on_admin_password_activate': self.sig_db_password,
+            'on_admin_password_activate': lambda x:self.sig_db_password('admin'),
             'on_extension_manager_activate': self.sig_extension_manager,
             'on_db_migrate_retrieve_script_activate': self.sig_db_migrate_retrieve_script,
             'on_db_migrate_activate' : self.sig_db_migrate,
@@ -837,7 +776,7 @@ class terp_main(service.Service):
 
         self.buttons = {}
         for button in ('but_new', 'but_save', 'but_remove', 'but_search', 'but_previous', 'but_next', 'but_action', 'but_open', 'but_print', 'but_close', 'but_reload', 'but_switch','but_attach',
-                       'radio_tree','radio_form','radio_graph','radio_calendar', 'radio_gantt'):
+                       'radio_tree','radio_form','radio_graph','radio_calendar','radio_diagram', 'radio_gantt'):
             self.glade.signal_connect('on_'+button+'_clicked', self._sig_child_call, button)
             self.buttons[button]=self.glade.get_widget(button)
 
@@ -906,6 +845,7 @@ class terp_main(service.Service):
         self.sig_form_tab(options.options['client.form_tab'] or 'left')
         self.glade.get_widget('opt_form_tab_orientation_'+(str(options.options['client.form_tab_orientation']) or '0')).set_active(True)
         self.sig_form_tab_orientation(options.options['client.form_tab_orientation'] or 0)
+        self.sig_debug_mode_tooltip()
         for signal in dict:
             self.glade.signal_connect(signal, dict[signal][0], dict[signal][1])
             self.glade.get_widget(dict[signal][2]).set_active(int(bool(options.options[dict[signal][1]])))
@@ -978,15 +918,25 @@ class terp_main(service.Service):
         self.notebook.set_current_page(pn-1)
 
     def sig_user_preferences(self, *args):
-        win =win_preference.win_preference(parent=self.window)
+        win = win_preference.win_preference(parent=self.window)
         win.run()
+        id = self.sb_company.get_context_id('message')
+        comp = self.company_set()
+        if comp:
+            self.sb_company.push(id, comp)
+        else:
+            self.sb_company.push(id, '')
         return True
 
     def sig_win_close(self, *args):
-        page_num = None
         if len(args) >= 2:
-            page_num = self.notebook.page_num(args[1])
-        self._sig_child_call(args[0], 'but_close', page_num)
+            button = args[1].button
+            if (isinstance(args[0], gtk.Button) and button in [1,2]) \
+                    or (isinstance(args[0], gtk.EventBox) and button == 2):
+                page_num = self.notebook.page_num(args[2])
+                self._sig_child_call(args[0], 'but_close', page_num)
+        elif len(args) and isinstance(args[0], gtk.ImageMenuItem):
+            self._sig_child_call(args[0], 'but_close', None)
 
     def sig_request_new(self, args=None):
         obj = service.LocalService('gui.window')
@@ -1021,6 +971,21 @@ class terp_main(service.Service):
         except:
             return False
 
+    def company_set(self):
+        try:
+            uid = rpc.session.uid
+            ids = rpc.session.rpc_exec_auth_try('/object', 'execute',
+                    'res.users', 'get_current_company')
+            if len(ids):
+                message = _('%s') % ids[0][1]
+            else:
+                message = _('No Company')
+            id = self.sb_company.get_context_id('message')
+            self.sb_company.push(id, message)
+            return ids[0][1]
+        except:
+            return []
+
     def request_set(self):
         try:
             uid = rpc.session.uid
@@ -1031,7 +996,7 @@ class terp_main(service.Service):
             else:
                 message = _('No request')
             if len(ids2):
-                message += _(' - %s request(s) sended') % len(ids2)
+                message += _(' - %s request(s) sent') % len(ids2)
             id = self.sb_requests.get_context_id('message')
             self.sb_requests.push(id, message)
             return (ids,ids2)
@@ -1042,6 +1007,7 @@ class terp_main(service.Service):
         RES_OK = 1
         RES_BAD_PASSWORD = -2
         RES_CNX_ERROR = -1
+        RES_NO_DATABASE = 0
         try:
             log_response = RES_BAD_PASSWORD
             res = None
@@ -1066,10 +1032,16 @@ class terp_main(service.Service):
                     else:
                         self.secure_img.hide()
                     self.request_set()
+                    self.company_set()
+                elif log_response == RES_NO_DATABASE:
+                    common.warning( _('Please double-check the database name or contact your administrator to verify the database status.'), _('Database cannot be accessed or does not exist'))
+                    self.sig_login(dbname=dbname)
+                    return True
                 elif log_response == RES_CNX_ERROR:
                     common.message(_('Connection error !\nUnable to connect to the server !'))
                 elif log_response == RES_BAD_PASSWORD:
                     common.message(_('Authentication error !\nBad Username or Password !'))
+
         except rpc.rpc_exception:
             rpc.session.logout()
             raise
@@ -1077,6 +1049,11 @@ class terp_main(service.Service):
         self.glade.get_widget('user').set_sensitive(True)
         self.glade.get_widget('form').set_sensitive(True)
         self.glade.get_widget('plugins').set_sensitive(True)
+
+        title = tools.format_connection_string(*res)
+        sbid = self.sb_servername.get_context_id('message')
+        self.sb_servername.push(sbid, title)
+        self.window.set_title(_('OpenERP - %s') % title )
         return True
 
     def sig_logout(self, widget):
@@ -1093,6 +1070,8 @@ class terp_main(service.Service):
                 res = False
         id = self.sb_requests.get_context_id('message')
         self.sb_requests.push(id, '')
+        id = self.sb_company.get_context_id('message')
+        self.sb_company.push(id, '')
         id = self.sb_username.get_context_id('message')
         self.sb_username.push(id, _('Not logged !'))
         id = self.sb_servername.get_context_id('message')
@@ -1103,8 +1082,19 @@ class terp_main(service.Service):
         self.glade.get_widget('user').set_sensitive(False)
         self.glade.get_widget('form').set_sensitive(False)
         self.glade.get_widget('plugins').set_sensitive(False)
+        self.window.set_title(_('OpenERP') )
         rpc.session.logout()
         return True
+
+    def sig_debug_mode_tooltip(self, widget=None):
+        if widget:
+            options.options['debug_mode_tooltips'] = widget.get_active()
+        else:
+            mode = options.options['logging.level']
+            if mode in ('debug', 'debug_rpc','debug_rpc_answer'):
+                options.options['debug_mode_tooltips'] = True
+                self.glade.get_widget('opt_debug_mode_tooltip').set_active(True)
+
 
     def sig_help_index(self, widget):
         tools.launch_browser(options.options['help.index'])
@@ -1163,10 +1153,6 @@ class terp_main(service.Service):
             return False
         id = self.sb_username.get_context_id('message')
         self.sb_username.push(id, act_id[0]['name'] or '')
-        id = self.sb_servername.get_context_id('message')
-        data = urlparse.urlsplit(rpc.session._url)
-        self.sb_servername.push(id, data[0]+':'+(data[1] and '//'+data[1] \
-                or data[2])+' ['+options.options['login.db']+']')
         if not act_id[0][type]:
             if quiet:
                 return False
@@ -1177,7 +1163,7 @@ class terp_main(service.Service):
         if except_id and act_id == except_id:
             return act_id
         obj = service.LocalService('action.main')
-        win = obj.execute(act_id, {'window':self.window})
+        obj.execute(act_id, {'window':self.window})
         try:
             user = rpc.session.rpc_exec_auth_wo('/object', 'execute', 'res.users',
                     'read', [rpc.session.uid], [type,'name'], rpc.session.context)
@@ -1188,8 +1174,10 @@ class terp_main(service.Service):
         return act_id
 
     def sig_home_new(self, widget=None, quiet=True, except_id=False):
-        return self.sig_win_new(widget, type='action_id', quiet=quiet,
+        open_menu = self.sig_win_new(widget, type='action_id', quiet=quiet,
                 except_id=except_id)
+        if not open_menu and widget:
+            self.sig_win_menu()
 
     def sig_plugin_execute(self, widget):
         import plugins
@@ -1216,10 +1204,13 @@ class terp_main(service.Service):
         return True
 
     def win_add(self, win, datas):
+        """
+            Add a tab in client
+        """
         self.pages.append(win)
         box = gtk.HBox(False, 0)
 
-        # Draw the close button on the right 
+        # Draw the close button on the right
         closebtn = gtk.Button()
         image = gtk.Image()
         image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
@@ -1230,7 +1221,12 @@ class terp_main(service.Service):
         closebtn.set_size_request(w + 8, h + 4)
         closebtn.unset_flags(gtk.CAN_FOCUS)
 
-        box.pack_start(gtk.Label(win.name), True, True)
+        box_label = gtk.Label(win.name)
+        event_box = gtk.EventBox()
+        event_box.add(box_label)
+        event_box.set_visible_window(False)
+        event_box.set_events(gtk.gdk.BUTTON_PRESS_MASK)
+        box.pack_start(event_box, True, True)
         box.pack_end(closebtn, False, False)
 
         self.notebook.append_page(win.widget, box)
@@ -1238,7 +1234,8 @@ class terp_main(service.Service):
             # since pygtk 2.10
             self.notebook.set_tab_reorderable(win.widget, True)
 
-        closebtn.connect("clicked", self.sig_win_close,win.widget)
+        event_box.connect("button_press_event", self.sig_win_close, win.widget)
+        closebtn.connect("button-press-event", self.sig_win_close, win.widget)
         pagenum = self.notebook.page_num(win.widget)
         pagenum = self.notebook.page_num(image)
 
@@ -1285,7 +1282,10 @@ class terp_main(service.Service):
             view = self._wid_get()
         if view and hasattr(view, 'screen'):
             self._handler_ok = False
-            self.glade.get_widget('radio_'+view.screen.current_view.view_type).set_active(True)
+            type = view.screen.current_view.view_type
+            if type == 'dummycalendar':
+                type = 'calendar'
+            self.glade.get_widget('radio_'+type).set_active(True)
             self._handler_ok = True
         self._update_attachment_button(view)
         for x in self.buttons:
@@ -1293,19 +1293,26 @@ class terp_main(service.Service):
                 self.buttons[x].set_sensitive(view and (x in view.handlers))
 
     def _win_del(self,page_num=None):
+        """
+            Del tab in Client
+        """
         if page_num is not None:
             pn = page_num
         else:
             pn = self.notebook.get_current_page()
         if pn != -1:
+
             self.notebook.disconnect(self.sig_id)
             page = self.pages.pop(pn)
+
             self.notebook.remove_page(pn)
             self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
 
-            #page.destroy()
-            #del page
+            page.destroy()
+            del page
+            gc.collect()
+
         return self.notebook.get_current_page() != -1
 
     def _wid_get(self,page_num=None):
@@ -1341,6 +1348,7 @@ class terp_main(service.Service):
                     self._update_attachment_button(wid)
             if button_name=='but_close' and res:
                 self._win_del(page_num)
+
 
     def _sig_page_changed(self, widget=None, *args):
         self.last_page = self.current_page
@@ -1408,7 +1416,7 @@ class terp_main(service.Service):
         win = win_extension.win_extension(self.window)
         win.run()
 
-    def sig_db_password(self, widget):
+    def sig_db_password(self, type):
         dialog = glade.XML(common.terp_path("openerp.glade"), "dia_passwd_change",
                 gettext.textdomain())
         win = dialog.get_widget('dia_passwd_change')
@@ -1416,40 +1424,66 @@ class terp_main(service.Service):
         win.set_transient_for(self.window)
         win.show_all()
         server_widget = dialog.get_widget('ent_server2')
+        ser_label = dialog.get_widget('label298')
         old_pass_widget = dialog.get_widget('old_passwd')
         new_pass_widget = dialog.get_widget('new_passwd')
         new_pass2_widget = dialog.get_widget('new_passwd2')
+        dia_label = dialog.get_widget('label294')
         change_button = dialog.get_widget('but_server_change1')
-        change_button.connect_after('clicked', lambda a,b: _server_ask(b, win), server_widget)
+        old_pass_widget.grab_focus()
 
-        host = options.options['login.server']
-        port = options.options['login.port']
-        protocol = options.options['login.protocol']
-        url = '%s%s:%s' % (protocol, host, port)
-        server_widget.set_text(url)
+        if type == 'admin':
+            host = options.options['login.server']
+            port = options.options['login.port']
+            protocol = options.options['login.protocol']
+            url = '%s%s:%s' % (protocol, host, port)
+            server_widget.set_text(url)
+            change_button.connect_after('clicked', lambda a,b: _server_ask(b, win), server_widget)
+        else:
+            dia_label.set_label(_('<b>Change your password</b>'))
+            server_widget.hide()
+            ser_label.hide()
+            change_button.hide()
+        end = False
+        while not end:
+            res = win.run()
+            if res == gtk.RESPONSE_OK:
+                old_passwd = old_pass_widget.get_text()
+                new_passwd = new_pass_widget.get_text()
+                new_passwd2 = new_pass2_widget.get_text()
+                if new_passwd != new_passwd2:
+                    new_pass_widget.set_text('')
+                    new_pass_widget.grab_focus()
+                    new_pass2_widget.set_text('')
+                    common.warning(_("Confirmation password does not match " \
+                            "new password, operation cancelled!"),
+                            _("Validation Error."), parent=win)
+                else:
+                    try:
+                        if type == 'user':
+                            rpc.session.rpc_exec_auth_wo('/object', 'execute', 'res.users', 'change_password',
+                                    old_passwd, new_passwd)
+                            rpc.session._passwd = new_passwd
+                        else:
+                            url = server_widget.get_text()
+                            rpc.session.db_exec(url, 'change_admin_password',
+                                    old_passwd, new_passwd)
+                        end = True
+                    except Exception, e:
 
-        res = win.run()
-        if res == gtk.RESPONSE_OK:
-            url = server_widget.get_text()
-            old_passwd = old_pass_widget.get_text()
-            new_passwd = new_pass_widget.get_text()
-            new_passwd2 = new_pass2_widget.get_text()
-            if new_passwd != new_passwd2:
-                common.warning(_("Confirmation password does not match " \
-                        "new password, operation cancelled!"),
-                        _("Validation Error."), parent=win)
+                        if type == 'admin':
+                            if ('faultCode' in dir(e) and e.faultCode=="AccessDenied") \
+                                    or 'AccessDenied' in str(e):
+                                    common.warning(_("Could not change the Super Admin password."),
+                                                   _('Bad password provided !'), parent=win)
+                        else:
+                            if e.type == 'warning':
+                                 common.warning(e.data, e.message, parent=win)
+                            elif e.type == 'AccessDenied':
+                                common.warning(_("Changing password failed, please verify old password."),
+                                               _('Bad password provided !'), parent=win)
             else:
-                try:
-                    rpc.session.db_exec(url, 'change_admin_password',
-                            old_passwd, new_passwd)
-                except Exception,e:
-                    if ('faultCode' in dir(e) and e.faultCode=="AccessDenied") \
-                            or str(e)=='AccessDenied':
-                        common.warning(_("Could not change the Super Admin password."),
-                                _('Bad password provided !'), parent=win)
-                    else:
-                        common.warning(_("Error, password not changed."),
-                                parent=win)
+                end = True
         self.window.present()
         win.destroy()
 
@@ -1458,7 +1492,10 @@ class terp_main(service.Service):
         if not db_name:
             return
         filename = common.file_selection(_('Save As...'),
-                action=gtk.FILE_CHOOSER_ACTION_SAVE, parent=self.window, preview=False)
+                action=gtk.FILE_CHOOSER_ACTION_SAVE,
+                parent=self.window,
+                preview=False,
+                filename=('%s_%s.sql' % (db_name, time.strftime('%Y%m%d_%H:%M'),)).replace(':','_'))
 
         if filename:
             try:
@@ -1495,7 +1532,7 @@ class terp_main(service.Service):
         db_widget = dialog.get_widget('combo_db_select')
         entry_db = dialog.get_widget('entry_db_select')
         label = dialog.get_widget('label_db_select')
-
+        entry_db.hide()
 
         dialog.get_widget('db_select_label').set_markup('<b>'+title+'</b>')
 
@@ -1520,7 +1557,10 @@ class terp_main(service.Service):
         url = False
         passwd = False
         if res == gtk.RESPONSE_OK:
-            db = db_widget.get_active_text()
+            if (not db_widget.get_property('visible')) and entry_db.get_property('visible'):
+                db = entry_db.get_text()
+            else:
+                db = db_widget.get_active_text()
             url = server_widget.get_text()
             passwd = pass_widget.get_text()
         self.window.present()
@@ -1528,8 +1568,7 @@ class terp_main(service.Service):
         return (url,db,passwd)
 
     def _choose_db_ent(self):
-        dialog = glade.XML(common.terp_path("openerp.glade"), "win_db_ent",
-                gettext.textdomain())
+        dialog = glade.XML(common.terp_path("openerp.glade"), "win_db_ent", gettext.textdomain())
         win = dialog.get_widget('win_db_ent')
         win.set_icon(common.OPENERP_ICON)
         win.set_transient_for(self.window)

@@ -1,44 +1,39 @@
 #!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
-# setup from TinyERP
+# setup for OpenERP GTK client
 #   taken from straw http://www.nongnu.org/straw/index.html
 #   taken from gnomolicious http://www.nongnu.org/gnomolicious/
 #   adapted by Nicolas Évrard <nicoe@altern.org>
 
-import imp
 import sys
 import os
 import glob
 
-from stat import ST_MODE
-
-from distutils.file_util import copy_file
-from distutils.core import setup
-from mydistutils import L10nAppDistribution
+from setuptools import setup
+from distutils.sysconfig import get_python_lib
 
 has_py2exe = False
-if os.name == 'nt':
+if sys.platform == 'win32':
     import py2exe
     has_py2exe = True
 
@@ -58,30 +53,13 @@ execfile(opj('bin', 'release.py'))
 if sys.argv[1] == 'bdist_rpm':
     version = version.split('-')[0]
 
-
 # get python short version
 py_short_version = '%s.%s' % sys.version_info[:2]
-
-required_modules = [('gtk', 'gtk python bindings'),
-                    ('gtk.glade', 'glade python bindings'),
-                    ('mx.DateTime', 'date and time handling routines for Python')]
-
-def check_modules():
-    ok = True
-    for modname, desc in required_modules:
-        try:
-            exec('import %s' % modname)
-        except ImportError:
-            ok = False
-            print 'Error: python module %s (%s) is required' % (modname, desc)
-
-    if not ok:
-        sys.exit(1)
 
 def data_files():
     '''Build list of data files to be installed'''
     files = []
-    if os.name == 'nt':
+    if sys.platform == 'win32':
         import matplotlib
         datafiles = matplotlib.get_py2exe_datafiles()
         if isinstance(datafiles, list):
@@ -92,7 +70,7 @@ def data_files():
         for (dp, dn, names) in os.walk('share\\locale'):
             files.append((dp, map(lambda x: opj('bin', dp, x), names)))
         os.chdir('..')
-        files.append((".",["bin\\openerp.glade", 'bin\\dia_survey.glade', "bin\\win_error.glade", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
+        files.append((".",["bin\\openerp.glade", "bin\\win_error.glade", 'bin\\tipoftheday.txt', 'doc\\README.txt']))
         files.append(("pixmaps", glob.glob("bin\\pixmaps\\*.*")))
         files.append(("po", glob.glob("bin\\po\\*.*")))
         files.append(("icons", glob.glob("bin\\icons\\*.png")))
@@ -106,7 +84,7 @@ def data_files():
         files.append((opj('share', 'pixmaps', 'openerp-client', 'icons'),
             glob.glob('bin/icons/*.png')))
         files.append((opj('share', 'openerp-client'), ['bin/openerp.glade', 'bin/tipoftheday.txt',
-                                                       'bin/win_error.glade', 'bin/dia_survey.glade']))
+                                                       'bin/win_error.glade']))
     return files
 
 included_plugins = ['workflow_print']
@@ -132,9 +110,7 @@ def translations():
         trans.append((dest % (lang, name), po))
     return trans
 
-check_modules()
-
-if os.name <> 'nt' and sys.argv[1] == 'build_po':
+if sys.platform != 'win32' and 'build_po' in sys.argv:
     os.system('(cd bin ; find . -name \*.py && find . -name \*.glade | xargs xgettext -o po/%s.pot)' % name)
     for file in ([ os.path.join('bin', 'po', fname) for fname in os.listdir('bin/po') ]):
         if os.path.isfile(file):
@@ -146,7 +122,11 @@ options = {
         "compressed": 1,
         "optimize": 1,
         "dist_dir": 'dist',
-        "packages": ["encodings","gtk", "matplotlib", "pytz", "OpenSSL"],
+        "packages": [
+            "encodings","gtk", "matplotlib", "pytz", "OpenSSL",
+            "lxml", "lxml.builder", "lxml._elementpath", "lxml.etree",
+            "lxml.objectify", "decimal"
+        ],
         "includes": "pango,atk,gobject,cairo,atk,pangocairo,matplotlib._path",
         "excludes": ["Tkinter", "tcl", "TKconstants"],
         "dll_excludes": [
@@ -161,6 +141,16 @@ options = {
     }
 }
 
+complementary_arguments = dict()
+
+if sys.platform == 'win32':
+    complementary_arguments['windows'] = [
+        {
+            'script' : os.path.join('bin', 'openerp-client.py'),
+            'icon_resources' : [(1, os.path.join('bin', 'pixmaps', 'openerp-icon.ico'))],
+        }
+    ]
+
 setup(name             = name,
       version          = version,
       description      = description,
@@ -173,16 +163,16 @@ setup(name             = name,
       data_files       = data_files(),
       translations     = translations(),
       scripts          = ['openerp-client'],
-      packages         = ['openerp-client', 
-                          'openerp-client.common', 
-                          'openerp-client.modules', 
+      packages         = ['openerp-client',
+                          'openerp-client.common',
+                          'openerp-client.modules',
                           'openerp-client.modules.action',
                           'openerp-client.modules.gui',
                           'openerp-client.modules.gui.window',
                           'openerp-client.modules.gui.window.view_sel',
                           'openerp-client.modules.gui.window.view_tree',
                           'openerp-client.modules.spool',
-                          'openerp-client.printer', 
+                          'openerp-client.printer',
                           'openerp-client.tools',
                           'openerp-client.tinygraph',
                           'openerp-client.widget',
@@ -194,73 +184,17 @@ setup(name             = name,
                           'openerp-client.widget.view.graph_gtk',
                           'openerp-client.widget.view.calendar_gtk',
                           'openerp-client.widget.view.gantt_gtk',
+                          'openerp-client.widget.view.diagram_gtk',
                           'openerp-client.widget_search',
                           'openerp-client.SpiffGtkWidgets',
                           'openerp-client.SpiffGtkWidgets.Calendar',
                           'openerp-client.plugins'] + list(find_plugins()),
       package_dir      = {'openerp-client': 'bin'},
-      distclass = os.name <> 'nt' and L10nAppDistribution or None,
-      windows=[{"script":"bin\\openerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\openerp-icon.ico")]}],
-      extras_required={
-          'timezone' : ['pytz'],
-      },
       options = options,
-      )
-
-if has_py2exe:
-    # Sometime between pytz-2008a and pytz-2008i common_timezones started to
-    # include only names of zones with a corresponding data file in zoneinfo.
-    # pytz installs the zoneinfo directory tree in the same directory
-    # as the pytz/__init__.py file. These data files are loaded using
-    # pkg_resources.resource_stream. py2exe does not copy this to library.zip so
-    # resource_stream can't find the files and common_timezones is empty when
-    # read in the py2exe executable.
-    # This manually copies zoneinfo into the zip. See also
-    # http://code.google.com/p/googletransitdatafeed/issues/detail?id=121
-    import pytz
-    import zipfile
-    import tempfile
-    import shutil
-    # Make sure the layout of pytz hasn't changed
-    assert (pytz.__file__.endswith('__init__.pyc') or
-          pytz.__file__.endswith('__init__.py')), pytz.__file__
-
-    temp_dir = None
-    pytz_dir = os.path.dirname(pytz.__file__)
-    zoneinfo_dir = os.path.join(pytz_dir, 'zoneinfo')
-    if not os.path.exists(zoneinfo_dir):
-        egg = os.path.dirname(pytz_dir)
-
-        if zipfile.is_zipfile(egg):
-            temp_dir = tempfile.mkdtemp()
-            zoneinfo_dir = os.path.join(temp_dir, 'pytz', 'zoneinfo')
-            os.makedirs(zoneinfo_dir)
-
-            archive = zipfile.ZipFile(egg)
-            for filename in archive.namelist():
-                if filename.startswith('pytz/zoneinfo/'):
-                    file_path = os.path.join(temp_dir, filename)
-                    destination = file_path.replace('/', os.sep)
-                    if not file_path.endswith('/'):
-                        try:
-                            os.makedirs(os.path.dirname(destination))
-                        except os.error:
-                            pass
-                        fp = file(destination, 'w')
-                        fp.write(archive.read(filename))
-                        fp.close()
-            archive.close()
-
-    # '..\\Lib\\pytz\\__init__.py' -> '..\\Lib'
-    disk_basedir = os.path.dirname(os.path.dirname(zoneinfo_dir))
-    zipfile_path = os.path.join(options['py2exe']['dist_dir'], 'library.zip')
-    z = zipfile.ZipFile(zipfile_path, 'a')
-    for absdir, directories, filenames in os.walk(zoneinfo_dir):
-        zip_dir = absdir[len(disk_basedir):]
-        for f in filenames:
-            z.write(os.path.join(absdir, f), os.path.join(zip_dir, f))
-    z.close()
-
-    if temp_dir is not None:
-        shutil.rmtree(temp_dir)
-
+      install_requires = [
+          'lxml',
+          'pytz',
+          'python-dateutil',
+      ],
+      **complementary_arguments
+)

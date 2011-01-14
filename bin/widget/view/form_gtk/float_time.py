@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -29,7 +28,7 @@ import locale
 
 import common
 import interface
-from mx.DateTime import DateTimeDelta
+from tools import datetime_util
 
 class float_time(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
@@ -41,7 +40,7 @@ class float_time(interface.widget_interface):
         self.widget.set_width_chars(5)
         self.widget.set_property('activates_default', True)
 
-        self.widget.connect('button_press_event', self._menu_open)
+        self.widget.connect('populate-popup', self._menu_open)
         self.widget.connect('activate', self.sig_activate)
         self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
         self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
@@ -68,14 +67,7 @@ class float_time(interface.widget_interface):
             return False
         super(float_time, self).display(model, model_field)
         val = model_field.get(model)
-        hours = math.floor(abs(val))
-        mins = round(abs(val)%1+0.01,2)
-        if mins >= 1.0:
-            hours = hours + 1
-            mins = 0.0
-        else:
-            mins = mins * 60
-        t = '%02d:%02d' % (hours,mins)
+        t= datetime_util.float_time_convert(val)
         if val<0:
             t = '-'+t
         self.widget.set_text(t)
@@ -84,6 +76,8 @@ class float_time(interface.widget_interface):
         self.widget.set_editable(not value)
         self.widget.set_sensitive(not value)
 
+    def grab_focus(self):
+        return self.widget.grab_focus()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

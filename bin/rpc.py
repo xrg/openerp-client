@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -26,14 +25,13 @@ import logging
 import socket
 
 import tiny_socket
-
 import service
 import common
 import options
 import os
-
+import tools
+from tools import user_locale_format
 import re
-import pytz
 
 CONCURRENCY_CHECK_FIELD = '__last_update'
 
@@ -61,6 +59,15 @@ class rpc_exception(Exception):
         log = logging.getLogger('rpc.exception')
         log.warning('CODE %s: %s' % (str(code), self.message))
 
+    def _get_message(self):
+        return self._message
+
+    def _set_message(self, message):
+        self._message = message
+
+    message = property(_get_message, _set_message)
+
+
 class gw_inter(object):
     __slots__ = ('_url', '_db', '_uid', '_passwd', '_sock', '_obj')
     def __init__(self, url, db, uid, passwd, obj='/object'):
@@ -80,7 +87,7 @@ class xmlrpc_gw(gw_inter):
         gw_inter.__init__(self, url, db, uid, passwd, obj)
         self._sock = xmlrpclib.ServerProxy(url+obj)
     def exec_auth(self, method, *args):
-        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
+        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, '*', args)))
         res = self.execute(method, self._uid, self._passwd, *args)
         logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
@@ -109,16 +116,25 @@ class tinySocket_gw(gw_inter):
         self._sock = tiny_socket.mysocket()
         self._obj = obj[1:]
     def exec_auth(self, method, *args):
-        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
+        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, '*', args)))
         res = self.execute(method, self._uid, self._passwd, *args)
         logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
     def execute(self, method, *args):
         self._sock.connect(self._url)
-        self._sock.mysend((self._obj, method, self._db)+args)
-        res = self._sock.myreceive()
-        self._sock.disconnect()
-        return res
+        try:
+            self._sock.mysend((self._obj, method, self._db)+args)
+            res = self._sock.myreceive()
+            self._sock.disconnect()
+            return res
+        except Exception,e:
+            try:
+                self._sock.disconnect()
+            except Exception:
+                pass
+            # make sure we keep the exception context, even
+            # if disconnect() raised above.
+            raise e
 
 class rpc_session(object):
     __slots__ = ('_open', '_url', 'uid', 'uname', '_passwd', '_gw', 'db', 'context', 'timezone')
@@ -202,6 +218,8 @@ class rpc_session(object):
                 res = _sock.login(db or '', uname or '', passwd or '')
             except socket.error,e:
                 return -1
+            except Exception, e:
+                return 0
             if not res:
                 self._open=False
                 self.uid=False
@@ -217,6 +235,8 @@ class rpc_session(object):
                 _sock.disconnect()
             except socket.error,e:
                 return -1
+            except Exception:
+                return 0
             if not res:
                 self._open=False
                 self.uid=False
@@ -291,23 +311,26 @@ class rpc_session(object):
         if 'lang' in self.context:
             import translate
             translate.setlang(self.context['lang'])
-            options.options['client.lang']=self.context['lang']
-            ids = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('code', '=', self.context['lang'])])
-            if ids:
-                l = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', ids, ['direction'])
-                if l and 'direction' in l[0]:
-                    common.DIRECTION = l[0]['direction']
+            options.options['client.lang'] = self.context['lang']
+            lang_ids = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'search', [('code', '=', self.context['lang'])])
+            if lang_ids:
+                lang_data = self.rpc_exec_auth('/object', 'execute', 'res.lang', 'read', lang_ids, ['date_format', 'time_format', 'grouping', 'decimal_point', 'thousands_sep','direction'])
+                if lang_data and 'direction' in lang_data[0]:
+                    common.DIRECTION = lang_data[0]['direction']
                     import gtk
                     if common.DIRECTION == 'rtl':
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
                     else:
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
+                tools.user_locale_format.set_locale_cache(lang_data and lang_data[0] or {})
+
         if self.context.get('tz'):
             # FIXME: Timezone handling
             #   rpc_session.timezone contains the server's idea of its timezone (from time.tzname[0]),
             #   which is quite quite unreliable in some cases. We'll fix this in trunk.
             self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
             try:
+                import pytz
                 pytz.timezone(self.timezone)
             except pytz.UnknownTimeZoneError:
                 # Server timezone is not recognized!
@@ -318,7 +341,7 @@ class rpc_session(object):
         return self._open
 
     def logout(self):
-        if self._open :
+        if self._open:
             self._open = False
             self.uname = None
             self.uid = None

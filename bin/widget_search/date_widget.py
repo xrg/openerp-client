@@ -1,25 +1,23 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 
 import gobject
 import pango
@@ -29,7 +27,6 @@ import re
 import tools
 import tools.datetime_util
 import time
-from mx.DateTime import DateTime
 
 
 class DateEntry(gtk.Entry):
@@ -173,8 +170,8 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
                 if self.callback_process: self.callback_process(False, self, event)
                 self.stop_emission("key-press-event")
                 return True
-        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus, 
-                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus, 
+        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus,
+                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus,
                               gtk.keysyms.KP_Equal, gtk.keysyms.equal):
                 self.mode_cmd = True
                 self.date_get()

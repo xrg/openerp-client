@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -38,6 +37,7 @@ class url(interface.widget_interface):
         self.entry.set_visibility(not attrs.get('password', False))
         self.entry.set_width_chars(5)
         self.entry.set_property('activates_default', True)
+        self.entry.connect('populate-popup', self._menu_open)
         self.entry.connect('activate', self.sig_activate)
         self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
         self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
@@ -45,9 +45,14 @@ class url(interface.widget_interface):
 
         self.button = gtk.Button()
         img = gtk.Image()
-        img.set_from_stock('gtk-jump-to', gtk.ICON_SIZE_BUTTON)
+        if attrs.get('widget',False) == 'email':
+            img.set_from_stock('terp-mail-message-new', gtk.ICON_SIZE_BUTTON)
+        else:
+            img.set_from_stock('gtk-jump-to', gtk.ICON_SIZE_BUTTON)
         self.button.set_image(img)
+        self.button.set_size_request(30,30)
         self.button.set_relief(gtk.RELIEF_NONE)
+        self.button.set_tooltip_text(_('Open this resource'))
         self.button.connect('clicked', self.button_clicked)
         self.button.set_alignment(0.5, 0.5)
         self.button.set_property('can-focus', False)

@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -59,7 +58,7 @@ class reference(interface.widget_interface):
         self.wid_text = gtk.Entry()
         self.wid_text.set_property('width-chars', 13)
         self.wid_text.connect('key_press_event', self.sig_key_press)
-        self.wid_text.connect('button_press_event', self._menu_open)
+        self.wid_text.connect('populate-popup', self._menu_open)
         self.wid_text.connect_after('changed', self.sig_changed)
         self.wid_text.connect_after('activate', self.sig_activate)
         self.wid_text_focus_out_id = self.wid_text.connect_after(
@@ -131,6 +130,9 @@ class reference(interface.widget_interface):
     def _color_widget(self):
         return self.wid_text
 
+    def grab_focus(self):
+        return self.widget_combo.grab_focus()
+
     def set_value(self, model, model_field):
         return
 
@@ -153,7 +155,6 @@ class reference(interface.widget_interface):
             model, (id, name) = value
         if id:
             if not leave:
-                #print self._window
                 dia = dialog(model, id, attrs=self.attrs, window=self._window)
                 ok, id = dia.run()
                 if ok:
@@ -259,7 +260,7 @@ class reference(interface.widget_interface):
             self.last_key[1] += 1
         else:
             self.last_key = [ key, 1 ]
-        if not self.key_catalog.has_key(key):
+        if not key in self.key_catalog:
             return
         self.entry.set_active_iter(self.key_catalog[key][self.last_key[1] \
                 % len(self.key_catalog[key])])

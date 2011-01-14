@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -66,7 +65,7 @@ class ModelList(list):
         super(ModelList, self).remove(obj)
         if not self.lock_signal:
             self.__screen.signal('record-changed', ('record-removed', idx))
-    
+
     def clear(self):
         for obj in range(len(self)):
             self.pop()
@@ -79,7 +78,7 @@ class ModelList(list):
             self.__screen.signal('record-changed', ('record-changed', key))
 
 class ModelRecordGroup(signal_event.signal_event):
-    def __init__(self, resource, fields, ids=[], parent=None, context={}, is_wizard=False):
+    def __init__(self, resource, fields, ids=[], parent=None, context={}, is_wizard=False, screen=None):
         super(ModelRecordGroup, self).__init__()
         self._readonly = False
         self.parent = parent
@@ -90,6 +89,7 @@ class ModelRecordGroup(signal_event.signal_event):
         self.fields = fields
         self.mfields = {}
         self.mfields_load(fields.keys(), self)
+        self.screen = screen
 
         self.models = ModelList(self)
         self.current_idx = None
@@ -98,6 +98,22 @@ class ModelRecordGroup(signal_event.signal_event):
         self.models_removed = []
         self.on_write = ''
         self.is_wizard = is_wizard
+
+        self.list_parent = False
+        self.list_group = False
+
+    def destroy(self):
+        for field in self.mfields.values():
+            field.destroy()
+        if self.list_group:
+            self.list_group.destroy()
+        del self.mfields
+        del self.fields
+        del self.list_group
+        del self.models
+
+    def index(self, model):
+        return self.models.index(model)
 
     def mfields_load(self, fkeys, models):
         for fname in fkeys:
@@ -109,17 +125,49 @@ class ModelRecordGroup(signal_event.signal_event):
     def model_move(self, model, position=0):
         self.models.move(model, position)
 
-    def set_sequence(self, field='sequence'):
+    def set_sequence(self, get_id, rec_id, field='sequence'):
+        seq_ids = []
         index = 0
-        for model in self.models:
-            if model[field]:
-                if index >= model[field].get(model):
-                    index += 1
-                    model[field].set(model, index, modified=True)
-                else:
-                    index = model[field].get(model)
-                if model.id:
-                    model.save()
+        for module in self.models:
+             seq_ids += [module[field].get(module)]
+             index = index +1
+
+        set_list = list(set(seq_ids))
+        if len(seq_ids) != len(set_list):
+            set_list.sort()
+            repeat = set_list[-1]
+            mod_list = seq_ids[len(set_list):]
+            for e in range(len(mod_list)):
+                repeat = repeat + 1
+                mod_list[e]= repeat
+            final_list = set_list + mod_list
+
+            index = 0
+            for module in self.models:
+                module[field].set(module, final_list[index], modified=True)
+                module.save()
+                index = index +1
+        else:
+            seq_id = []
+            if get_id < rec_id:
+                for x in range(get_id, rec_id):
+                        seq_id += [self.models[x][field].get(self.models[x])]
+                sort_seq = [seq_id[-1]] + seq_id[:-1]
+                index = 0
+                for x in range(get_id, rec_id):
+                    self.models[x][field].set(self.models[x], sort_seq[index], modified=True)
+                    self.models[x].save()
+                    index = index +1
+            else:
+                for x in range(rec_id,get_id+1):
+                    seq_id  += [self.models[x][field].get(self.models[x])]
+                sort_seq = seq_id[1:] + [seq_id[0]]
+                index = 0
+                for x in range(rec_id,get_id+1):
+                    self.models[x][field].set(self.models[x], sort_seq[index], modified=True)
+                    self.models[x].save()
+                    index = index +1
+
 
     def save(self):
         for model in self.models:
@@ -147,56 +195,58 @@ class ModelRecordGroup(signal_event.signal_event):
             new_index = min(model_idx, len(self.models)-1)
             self.model_add(newmod, new_index)
         return result
-    
+
     def pre_load(self, ids, display=True):
         if not ids:
             return True
-        if len(ids)>10:
-            self.models.lock_signal = True
+        self.models.lock_signal = True
         for id in ids:
             newmod = ModelRecord(self.resource, id, parent=self.parent, group=self)
             self.model_add(newmod)
-            if display:
-                self.signal('model-changed', newmod)
-        if len(ids)>10:
-            self.models.lock_signal = False
-            self.signal('record-cleared')
+            #if display:
+            #    self.signal('model-changed', newmod)
+        self.models.lock_signal = False
+        self.signal('record-cleared')
         return True
 
     def load_for(self, values):
-        if len(values)>10:
-            self.models.lock_signal = True
+        self.models.lock_signal = True
         for value in values:
             newmod = ModelRecord(self.resource, value['id'], parent=self.parent, group=self)
             newmod.set(value)
             self.models.append(newmod)
             newmod.signal_connect(self, 'record-changed', self._record_changed)
-        if len(values)>10:
-            self.models.lock_signal = False
-            self.signal('record-cleared')
+        self.models.lock_signal = False
+        self.signal('record-cleared')
 
-    def load(self, ids, display=True):
+    def load(self, ids, display=True, context={}):
         if not ids:
             return True
         if not self.fields:
             return self.pre_load(ids, display)
         c = rpc.session.context.copy()
         c.update(self.context)
+        c.update(context)
         c['bin_size'] = True
         values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
         if not values:
             return False
-        newmod = False
-        self.load_for(values)
-        if newmod and display:
-            self.signal('model-changed', newmod)
+        vdict = dict(map(lambda x: (x['id'], x), values))
+        v2 = []
+        for id in ids:
+            if id in vdict:
+                v2.append(vdict[id])
+        self.load_for(v2)
         self.current_idx = 0
         return True
-    
+
     def clear(self):
         self.models.clear()
         self.models_removed = []
-    
+
+    def setContext(self, ctx):
+        self._context.update(ctx)
+
     def getContext(self):
         ctx = {}
         ctx.update(self._context)
@@ -206,7 +256,7 @@ class ModelRecordGroup(signal_event.signal_event):
         #else:
         #   ctx['active_id'] = False
         return ctx
-    context = property(getContext)
+    context = property(getContext, setContext)
 
     def model_add(self, model, position=-1):
         #
@@ -238,8 +288,10 @@ class ModelRecordGroup(signal_event.signal_event):
             ctx.update(self.context)
             newmod.default_get(domain, ctx)
         self.signal('model-changed', newmod)
+        newmod.list_parent = self.list_parent
+        newmod.list_group = self.list_group
         return newmod
-    
+
     def model_remove(self, model):
         idx = self.models.index(model)
         self.models.remove(model)
@@ -261,7 +313,7 @@ class ModelRecordGroup(signal_event.signal_event):
         else:
             return None
         return self.models[self.current_idx]
-    
+
     def next(self):
         if self.models and self.current_idx is not None:
             self.current_idx = (self.current_idx + 1) % len(self.models)
@@ -286,12 +338,18 @@ class ModelRecordGroup(signal_event.signal_event):
     def add_fields_custom(self, fields, models):
         to_add = []
         for f in fields.keys():
-            if not f in models.fields:
+            add_field = True
+            if f in models.fields:
+                if fields[f].get('widget','') == models.fields[f].get('widget',''):
+                    models.fields[f].update(fields[f])
+                    add_field = False
+                if f in models.mfields and fields[f].get('type','') == 'one2many':
+                    add_field = False
+            if add_field:
                 models.fields[f] = fields[f]
                 models.fields[f]['name'] = f
                 to_add.append(f)
-            else:
-                models.fields[f].update(fields[f])
+
         self.mfields_load(to_add, models)
         for fname in to_add:
             for m in models.models:

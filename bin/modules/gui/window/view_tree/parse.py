@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -32,22 +31,30 @@ class parse(object):
         self.pixbufs = {}
 
     def _psr_start(self, name, attrs):
-        if name=='tree':
+        if name == 'tree':
             self.title = attrs.get('string',_('Tree'))
             self.toolbar = bool(attrs.get('toolbar',False))
-        elif name=='field':
+            self.colors = {}
+            for color_spec in attrs.get('colors', '').split(';'):
+                if color_spec:
+                    colour, test = color_spec.split(':')
+                    self.colors.setdefault(colour,[])
+                    self.colors[colour].append(test)
+        elif name == 'field':
+            if attrs.get('invisible', False):
+                self.invisible_fields.append(str(attrs['name']))
+                return True
             type = self.fields[attrs['name']]['type']
             field_name = attrs.get('string', self.fields[attrs['name']]['string'])
-            if type!='checkbox':
-                column = gtk.TreeViewColumn(field_name) #, cell, text=self.pos)
+            if type!='boolean':
+                column = gtk.TreeViewColumn(field_name)
                 if 'icon' in attrs:
                     render_pixbuf = gtk.CellRendererPixbuf()
                     column.pack_start(render_pixbuf, expand=False)
                     column.add_attribute(render_pixbuf, 'pixbuf', self.pos)
                     self.fields_order.append(str(attrs['icon']))
-                    self.pixbufs[self.pos]=True
-                    self.pos+=1
-
+                    self.pixbufs[self.pos] = True
+                    self.pos += 1
                 cell = gtk.CellRendererText()
                 cell.set_fixed_height_from_font(1)
                 if type=='float':
@@ -57,7 +64,7 @@ class parse(object):
             else:
                 cell = gtk.CellRendererToggle()
                 column = gtk.TreeViewColumn (field_name, cell, active=self.pos)
-            self.pos+=1
+            self.pos += 1
             column.set_resizable(1)
             self.fields_order.append(str(attrs['name']))
             self.tree.append_column(column)
@@ -81,7 +88,8 @@ class parse(object):
         self.tree = tree
         self.pos = 1
 
-        self.fields_order=[]
+        self.fields_order = []
+        self.invisible_fields = []
 
         psr = expat.ParserCreate()
         psr.StartElementHandler = self._psr_start

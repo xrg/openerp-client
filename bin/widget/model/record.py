@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -50,11 +49,12 @@ class EvalEnvironment(object):
 
 
 class ModelRecord(signal_event.signal_event):
-    def __init__(self, resource, id, group=None, parent=None, new=False ):
+    def __init__(self, resource, id, group=None, parent=None, new=False, list_parent=None):
         super(ModelRecord, self).__init__()
         self.resource = str(resource)
         self.rpc = RPCProxy(self.resource)
         self.id = id
+        self.list_parent = list_parent
         self._loaded = False
         self.parent = parent
         self.mgroup = group
@@ -62,12 +62,15 @@ class ModelRecord(signal_event.signal_event):
         self.state_attrs = {}
         self.modified = False
         self.modified_fields = {}
+        self.pager_cache = {}
+        self.is_m2m_modified = False
         self._concurrency_check_data = False
-        for key,val in self.mgroup.mfields.items():
+        for key, val in self.mgroup.mfields.items():
             self.value[key] = val.create(self)
-            if (new and val.attrs['type']=='one2many') and (val.attrs.get('mode','tree,form').startswith('form')):
+            if (new and val.attrs['type']=='one2many') and (val.attrs.get('mode', 'tree,form').startswith('form')):
                 mod = self.value[key].model_new()
                 self.value[key].model_add(mod)
+
 
     def __getitem__(self, name):
         return self.mgroup.mfields.get(name, False)
@@ -89,16 +92,16 @@ class ModelRecord(signal_event.signal_event):
             self.reload()
             return True
         return False
-    
-    def update_context_with_concurrency_check_data(self, context):
+
+    def update_context_with_concurrency(self, context):
         if self.id and self.is_modified():
-            context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%d" % (self.resource, self.id)] = self._concurrency_check_data
+            context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%s" % (self.resource, self.id)] = self._concurrency_check_data
         for name, field in self.mgroup.mfields.items():
             if isinstance(field, O2MField):
                 v = self.value[field.name]
                 from itertools import chain
                 for m in chain(v.models, v.models_removed):
-                    m.update_context_with_concurrency_check_data(context)
+                    m.update_context_with_concurrency(context)
 
     def get(self, get_readonly=True, includeid=False, check_load=True, get_modifiedonly=False):
         if check_load:
@@ -126,22 +129,26 @@ class ModelRecord(signal_event.signal_event):
 
     def save(self, reload=True):
         self._check_load()
-
-        if not self.id:
-            value = self.get(get_readonly=False)
-            self.id = self.rpc.create(value, self.context_get())
+        try:
             if not self.id:
-                self.failed_validation()
-
-        else:
-            if not self.is_modified():
-                return self.id
-            value = self.get(get_readonly=False, get_modifiedonly=True)
-            context = self.context_get().copy()
-            self.update_context_with_concurrency_check_data(context)
-            if not self.rpc.write([self.id], value, context):
+                value = self.get(get_readonly=False)
+                self.id = self.rpc.create(value, self.context_get())
+            else:
+                if not self.is_modified():
+                    return self.id
+                value = self.get(get_readonly=False, get_modifiedonly=True)
+                context = self.context_get().copy()
+                self.update_context_with_concurrency(context)
+                res = self.rpc.write([self.id], value, context)
+                if type(res)==type({}):
+                    obj = service.LocalService('action.main')
+                    obj._exec_action(res,{}, context)
+        except Exception, e:
+            if hasattr(e, 'faultCode') and e.faultCode.find('ValidateError')>-1:
                 self.failed_validation()
                 return False
+            pass
+
         self._loaded = False
         if reload:
             self.reload()
@@ -154,9 +161,15 @@ class ModelRecord(signal_event.signal_event):
         if len(self.mgroup.fields):
             val = self.rpc.default_get(self.mgroup.fields.keys(), context)
             for d in domain:
-                if d[0] in self.mgroup.fields:
+                if d[0] in self.mgroup.fields and not self.mgroup.fields.get(d[0], {}).get('readonly',False):
                     if d[1] == '=':
-                        val[d[0]] = d[2]
+                        if d[2]:
+                            value = d[2]
+                            # domain containing fields like M2M/O2M should return values as list
+                            if self.mgroup.fields[d[0]].get('type', '') in ('many2many','one2many'):
+                                if not isinstance(d[2], (bool,list)):
+                                    value = [d[2]]
+                            val[d[0]] = value
                     if d[1] == 'in' and len(d[2]) == 1:
                         val[d[0]] = d[2][0]
             self.set_default(val)
@@ -202,24 +215,42 @@ class ModelRecord(signal_event.signal_event):
         return value
 
     def set_default(self, val):
+        fields_with_on_change = {}
         for fieldname, value in val.items():
             if fieldname not in self.mgroup.mfields:
                 continue
-            self.mgroup.mfields[fieldname].set_default(self, value)
+            # Fields with on_change should be processed last otherwise
+            # we might override the values the on_change() sets with
+            # the next defaults. There's still a possible issue with
+            # the order in which we process the defaults of the fields
+            # with on_change() in case they cascade, but that's fixable
+            # normally in the view a single clean on_change on the first
+            # field.
+            if self.mgroup.mfields[fieldname].attrs.get('on_change',False):
+                fields_with_on_change[fieldname] = value
+            else:
+                self.mgroup.mfields[fieldname].set_default(self, value)
+        for field, value in fields_with_on_change.items():
+            self.mgroup.mfields[field].set_default(self, value)
         self._loaded = True
         self.signal('record-changed')
 
     def set(self, val, modified=False, signal=True):
-        later={}
+        later = {}
         for fieldname, value in val.items():
             if fieldname == CONCURRENCY_CHECK_FIELD:
                 self._concurrency_check_data = value
             if fieldname not in self.mgroup.mfields:
                 continue
             if isinstance(self.mgroup.mfields[fieldname], field.O2MField):
-                later[fieldname]=value
-                continue
+                 self.pager_cache[fieldname] = value
+                 later[fieldname] = value
+                 continue
+            if isinstance(self.mgroup.mfields[fieldname], field.M2MField):
+                self.pager_cache[fieldname] = value
+
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
+
         for fieldname, value in later.items():
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
         self._loaded = True
@@ -228,7 +259,7 @@ class ModelRecord(signal_event.signal_event):
             self.modified_fields = {}
         if signal:
             self.signal('record-changed')
-    
+
     def reload(self):
         return self._reload(self.mgroup.mfields.keys() + [CONCURRENCY_CHECK_FIELD])
 
@@ -241,7 +272,11 @@ class ModelRecord(signal_event.signal_event):
         res = self.rpc.read([self.id], fields, c)
         if res:
             value = res[0]
-            self.set(value)
+            if self.parent:
+                self.set(value,signal=False)
+            else:
+                self.set(value)
+
 
     def expr_eval(self, dom, check_load=True):
         if not isinstance(dom, basestring):
@@ -267,7 +302,7 @@ class ModelRecord(signal_event.signal_event):
         if not match:
             raise Exception, 'ERROR: Wrong on_change trigger: %s' % callback
         func_name = match.group(1)
-        arg_names = [n.strip() for n in match.group(2).split(',')]
+        arg_names = [n.strip() for n in match.group(2).split(',') if n.strip()]
         args = [self.expr_eval(arg) for arg in arg_names]
         ids = self.id and [self.id] or []
         response = getattr(self.rpc, func_name)(ids, *args)
@@ -278,22 +313,88 @@ class ModelRecord(signal_event.signal_event):
                     if fieldname not in self.mgroup.mfields:
                         continue
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
-            warning=response.get('warning',{})
+            if 'context' in response:
+                value = response.get('context', {})
+                self.mgroup.context = value
+
+            warning = response.get('warning', {})
             if warning:
-                common.warning(warning['message'], warning['title'])
+                common.warning(warning['message'], warning['title'], parent=self.mgroup.screen.current_view.window)
         self.signal('record-changed')
 
     def on_change_attrs(self, callback):
         self.signal('attrs-changed')
 
     def cond_default(self, field, value):
-        ir = RPCProxy('ir.values')
-        values = ir.get('default', '%s=%s' % (field, value),
-                        [(self.resource, False)], False, {})
-        data = {}
-        for index, fname, value in values:
-            data[fname] = value
-        self.set_default(data)
+        if field in self.mgroup.mfields:
+            if self.mgroup.mfields[field].attrs.get('change_default', False):
+                ir = RPCProxy('ir.values')
+                values = ir.get('default', '%s=%s' % (field, value),
+                                [(self.resource, False)], False, {})
+                data = {}
+                for index, fname, value in values:
+                    data[fname] = value
+                self.set_default(data)
+
+    # Performing button clicks on both forms of view: list and form.
+    def get_button_action(self, screen, id=None, attrs={}):
+
+        """Arguments:
+        screen : Screen to be worked upon
+        id     : Id of the record for which the button is clicked
+        attrs  : Button Attributes
+        """
+        if not id:
+            id = self.id
+        if not attrs.get('confirm', False) or common.sur(attrs['confirm']):
+            button_type = attrs.get('type', 'workflow')
+            obj = service.LocalService('action.main')
+
+            if button_type == 'workflow':
+                result = rpc.session.rpc_exec_auth('/object', 'exec_workflow',
+                                                   self.resource, attrs['name'], self.id)
+                if type(result)==type({}):
+                    if result['type']== 'ir.actions.act_window_close':
+                        screen.window.destroy()
+                    else:
+                        datas = {'ids':[id], 'id':id}
+                        obj._exec_action(result, datas)
+                elif type([]) == type(result):
+                    datas = {'ids':[id]}
+                    for rs in result:
+                        obj._exec_action(rs, datas)
+
+            elif button_type == 'object':
+                if not self.id:
+                    return
+                context = self.context_get()
+                if 'context' in attrs:
+                    context.update(self.expr_eval(attrs['context'], check_load=False))
+                result = rpc.session.rpc_exec_auth('/object', 'execute',
+                                                   self.resource,attrs['name'], [id], context)
+                if isinstance(result, dict):
+                    if not result.get('nodestroy', False):
+                        screen.window.destroy()
+                    obj._exec_action(result, {}, context=context)
+
+            elif button_type == 'action':
+                action_id = int(attrs['name'])
+                context = screen.context.copy()
+                if 'context' in attrs:
+                    context.update(self.expr_eval(attrs['context'], check_load=False))
+                datas = {'model':self.resource,
+                         'id': id or False,
+                         'ids': id and [id] or [],
+                         'report_type': 'pdf'
+                         }
+                obj.execute(action_id, datas, context=context)
+            else:
+                raise Exception, 'Unallowed button type'
+            if screen.current_model and screen.current_view.view_type != 'tree':
+                screen.reload()
+
+            del screen
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

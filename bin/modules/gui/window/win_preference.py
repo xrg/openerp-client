@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -52,11 +51,11 @@ class win_preference(object):
         action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'action_get', {})
         action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', [action_id], False, rpc.session.context)[0]
 
-        view_ids=[]
+        view_ids = []
         if action.get('views', []):
-            view_ids=[x[0] for x in action['views']]
+            view_ids = [x[0] for x in action['views']]
         elif action.get('view_id', False):
-            view_ids=[action['view_id'][0]]
+            view_ids = [action['view_id'][0]]
 
         self.screen = Screen('res.users', view_type=[], window=parent)
         self.screen.add_view_id(view_ids[0], 'form', display=True)
@@ -66,14 +65,21 @@ class win_preference(object):
         vbox = self.glade.get_widget('preference_vbox')
         vbox.pack_start(self.screen.widget)
 
-        self.win.set_title(_('Preference'))
+        self.win.set_title(_('Preferences'))
         self.win.show_all()
 
     def run(self, datas={}):
         lang = rpc.session.context.get('lang', 'en_US')
-        res = self.win.run()
-        if res==gtk.RESPONSE_OK:
-            rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write', [rpc.session.uid], self.screen.get())
+        end = False
+        while not end:
+            res = self.win.run()
+            end = (res != gtk.RESPONSE_OK) or self.screen.current_model.validate()
+            if not end:
+                self.screen.display()
+                self.screen.current_view.set_cursor()
+        if res == gtk.RESPONSE_OK:
+            values = self.screen.get()
+            rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write', [rpc.session.uid], values)
             rpc.session.context_reload()
             new_lang = rpc.session.context.get('lang', 'en_US')
             if lang != new_lang:

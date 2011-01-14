@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -54,21 +53,21 @@ def get_home_dir():
         return '.'
 
 class configmanager(object):
-    
+
     def __get_prefix(self):
         if self.__prefix is None:
             f = os.path.normpath(__file__)
             sitepackages_prefix = os.path.join('lib', 'python%s' % sys.version[:3], 'site-packages', release.name, os.path.basename(f))
             home_prefix = os.path.join('lib', 'python', release.name, os.path.basename(f))
-            
+
             for p in [sitepackages_prefix, home_prefix]:
                 if f.endswith(p):
                     self.__prefix = f[:-len(p)]
                     break
             if self.__prefix is None:
-                self.__prefix = sys.prefix 
+                self.__prefix = sys.prefix
 
-        return self.__prefix            
+        return self.__prefix
 
     def __init__(self,fname=None):
         self.__prefix = None
@@ -84,7 +83,6 @@ class configmanager(object):
             'path.pixmaps': os.path.join(self.__get_prefix(), 'share', 'pixmaps', release.name),
             'tip.autostart': False,
             'tip.position': 0,
-            'survey.position': 0,
             'form.autosave': False,
             'printer.preview': True,
             'printer.softpath': 'none',
@@ -92,17 +90,20 @@ class configmanager(object):
             'printer.path': 'none',
             'logging.level': 'INFO',
             'logging.output': 'stdout',
+            'debug_mode_tooltips':False,
             'client.default_path': os.path.expanduser('~'),
             'support.recipient': 'support@openerp.com',
             'support.support_id' : '',
             'form.toolbar': True,
+            'form.submenu': True,
             'client.form_tab': 'top',
             'client.form_tab_orientation': 0,
             'client.lang': False,
             'client.filetype': {},
             'help.index': 'http://doc.openerp.com/',
             'help.context': 'http://doc.openerp.com/index.php?model=%(model)s&lang=%(lang)s',
-            'client.timeout': 300,
+            'client.timeout': 3600,
+            'client.form_text_spellcheck': True,
         }
         loglevels = ('critical', 'error', 'warning', 'info', 'debug', 'debug_rpc', 'debug_rpc_answer', 'notset')
         parser = optparse.OptionParser(version=_("OpenERP Client %s" % openerp_version))

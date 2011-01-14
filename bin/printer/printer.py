@@ -1,22 +1,21 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
 #
 ##############################################################################
 
@@ -28,15 +27,18 @@
 #
 # Print or open a previewer
 #
-
-import os
 import base64
-import options 
-import sys
 import gc
-import common
+import platform
+import sys
 import time
+import os
+
 import gtk
+
+import common
+import options 
+
 
 class Printer(object):
 
@@ -75,42 +77,39 @@ class Printer(object):
             webbrowser.open('file://'+fn)
         return opener
 
-    def __opener(self, fnct):
-        pid = os.fork()
-        if not pid:
+    def _opener(self, fnct):
+        def opener(fn):
             pid = os.fork()
             if not pid:
-                fnct()
-            time.sleep(0.1)
-            sys.exit(0)
-        os.waitpid(pid, 0)
+                pid = os.fork()
+                if not pid:
+                    fnct(fn)
+                time.sleep(0.1)
+                sys.exit(0)
+            os.waitpid(pid, 0)
+        return opener
 
     def _findPDFOpener(self):
-        if os.name != 'nt' and os.uname()[0] == 'Darwin' :
-            def opener(fn):
-                self.__opener( lambda: os.system('/usr/bin/open -a Preview ' + fn) )
-            return opener
-        if os.name == 'nt':
+        if platform.system() == 'Darwin':
+            return self._opener(lambda fn: os.system('open ' + fn))
+        softpath = options.options['printer.softpath']
+        if platform.system() == 'Windows':
             if options.options['printer.preview']:
-                if options.options['printer.softpath'] is None:
-                    return lambda fn: os.startfile(fn)
+                if not softpath or (softpath and softpath in ['None','none']):
+                    return os.startfile
                 else:
-                    return lambda fn: os.system(options.options['printer.softpath'] + ' ' + fn)
+                    return lambda fn: os.system(softpath + ' ' + fn)
             else:
-                return lambda fn: print_w32_filename(fn)
+                return print_w32_filename
         else:
             if options.options['printer.preview']:
-                if options.options['printer.softpath'] is None:
-                    prog = self._findInPath(['xdg-open', 'evince', 'xpdf', 'gpdf', 'kpdf', 'epdfview', 'acroread', 'open'])
-                    def opener(fn):
-                        self.__opener( lambda: os.execv(prog, (os.path.basename(prog), fn) ))
-                    return opener
+                if not softpath or (softpath and softpath in ['None','none']):
+                    prog = self._findInPath(['xdg-open', 'gnome-open', 'see'])
+                    return self._opener(lambda fn: os.execv(prog, (os.path.basename(prog), fn)))
                 else:
-                    def opener(fn):
-                        self.__opener( lambda: os.execv(options.options['printer.softpath'], (os.path.basename(options.options['printer.softpath']), fn)) )
-                    return opener
+                    return self._opener(lambda fn: os.execv(softpath, (os.path.basename(softpath), fn)))
             else:
-                return lambda fn: print_linux_filename(fn)
+                return print_linux_filename
     
     def _findSXWOpener(self):
         if os.name == 'nt':
@@ -187,7 +186,22 @@ class Printer(object):
 printer = Printer()
 
 def print_linux_filename(filename):
-    common.message(_('Linux Automatic Printing not implemented.\nUse preview option !'))
+    import gtkunixprint
+
+    def print_cb(printjob, data, errormsg):
+        if errormsg:
+            common.message(_('Error occurred while printing:\n%s') % errormsg)
+
+    pud = gtkunixprint.PrintUnixDialog(title=_('Print Report'))
+    response = pud.run()
+    if response == gtk.RESPONSE_OK:
+        printer = pud.get_selected_printer()
+        settings = pud.get_settings()
+        setup = pud.get_page_setup()
+        printjob = gtkunixprint.PrintJob('Printing %s' % filename, printer, settings, setup)
+        printjob.set_source_file(filename)
+        printjob.send(print_cb)
+    pud.destroy()
 
 def print_w32_filename(filename):
     import win32api
@@ -195,7 +209,7 @@ def print_w32_filename(filename):
 
 def print_data(data):
     if 'result' not in data:
-        common.message(_('Error no report'))
+        common.message(_('Error! No Data found. Make sure you have enough data to print!'))
         return 
     if data.get('code','normal')=='zlib':
         import zlib

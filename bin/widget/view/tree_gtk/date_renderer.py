@@ -1,26 +1,23 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-#!/usr/bin/env python
 
 import pygtk
 pygtk.require('2.0')
@@ -32,8 +29,6 @@ import re
 import tools
 import tools.datetime_util
 import time
-from mx.DateTime import DateTime
-
 
 class DecoratorRenderer(gtk.GenericCellRenderer):
     def __init__(self, renderer1, callback, format):
@@ -49,8 +44,8 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
         self.regex = '^'+self.regex+'$'
 
     def _is_not_generic_property(self, name):
-        return name in ('editable', 'text', 'foreground', 'background')
-    
+        return name in ('editable', 'text', 'foreground', 'background','font-desc')
+
     def set_property(self, name, value):
         if not self._is_not_generic_property(name):
             return super(DecoratorRenderer, self).set_property(name, value)
@@ -67,9 +62,9 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
         return self.renderer1.get_size(widget, cell_area)
 
     def on_render(self, window, widget, background_area, cell_area, expose_area, flags):
-        if isinstance(window,gtk.gdk.Window):
-            return self.renderer1.render(window, widget, background_area, cell_area, expose_area, flags)
-        return None
+        if not isinstance(window, gtk.gdk.Window):
+            return self.renderer1.render(widget.window, widget, background_area, cell_area, expose_area, flags)
+        return self.renderer1.render(window, widget, background_area, cell_area, expose_area, flags)
 
     def on_activate(self, event, widget, path, background_area, cell_area, flags):
         return self.renderer1.activate(event, widget, path, background_area, cell_area, flags)
@@ -134,8 +129,8 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
                 return True
             else:
                 return False
-        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus, 
-                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus, 
+        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus,
+                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus,
                               gtk.keysyms.KP_Equal, gtk.keysyms.equal):
                 self.mode_cmd = True
                 self.date_get(editable)
@@ -189,7 +184,7 @@ class date_callback(object):
     def event(self, widget, event):
         if event.keyval in (gtk.keysyms.BackSpace,):
             self.value = self.value[:-1]
-        
+
         self.value += event.string
         self.display(widget)
         return True

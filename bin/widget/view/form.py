@@ -1,25 +1,24 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
+import os
 import gtk
 from gtk import glade
 
@@ -48,6 +47,8 @@ class ViewWidget(object):
             modelfield.state_set(model, state)
             if modelfield.attrs.get('attrs',False):
                 modelfield.attrs_set(model)
+            if hasattr(self.widget,'screen') and self.widget.screen.type in ('one2many','many2many'):
+                self.widget.pager.reset_pager()
             self.widget.display(model, modelfield)
         elif isinstance(self.widget, action):
             self.widget.display(model, False)
@@ -76,71 +77,102 @@ class ViewWidget(object):
     modelfield = property(_get_modelfield)
 
 class ViewForm(parser_view):
-    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None):
-        super(ViewForm, self).__init__(window, screen, widget, children, state_aware_widgets, toolbar)
+    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None, submenu=None, help={}):
+        super(ViewForm, self).__init__(window, screen, widget, children, state_aware_widgets, toolbar, submenu)
         self.view_type = 'form'
         self.model_add_new = False
         self.prev = 0
-        self.flag=False
+        self.window = window
+        self.flag = False
         self.current = 0
-
         for w in self.state_aware_widgets:
             if isinstance(w.widget, Button):
                 w.widget.form = self
-
         self.widgets = dict([(name, ViewWidget(self, widget, name)) for name, widget in children.items()])
+        sm_vbox = False
+        self.help = help
+        self.help_frame = False
+        if self.help:
+            action_tips = common.action_tips(self.help)
+            self.help_frame = action_tips.help_frame
+            if self.help_frame:
+                vbox = gtk.VBox()
+                vbox.pack_start(self.help_frame, expand=False, fill=False, padding=2)
+                vbox.pack_end(self.widget)
+                vbox.show_all()
+                self.widget = vbox
+        if submenu:
+            expander = gtk.Expander("Submenus")
+            sm_vbox = gtk.VBox()
+            sm_hbox = gtk.HBox()
+            sm_eb = gtk.EventBox()
+            sm_eb.add(sm_hbox)
+            sm_eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("gray"))
+            expander.add(sm_eb)
+            for sub in eval(submenu):
+                sbutton = gtk.Button()
+                icon = gtk.Image()
+                file_path = os.path.realpath("icons")
+                iname = sub.get('icon', 'terp-marketing').split('-')[1]
+                pixbuf = gtk.gdk.pixbuf_new_from_file(file_path + '/' + iname + '.png')
+                icon_set = gtk.IconSet(pixbuf)
+                icon.set_from_icon_set(icon_set, gtk.ICON_SIZE_BUTTON)
+                lbl = gtk.Label(sub.get('name', 'Undefined'))
+                lbl.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
+                hb = gtk.HBox(False, 5)
+                hb.pack_start(icon, False, False)
+                hb.pack_start(lbl, False, False)
+                sbutton.add(hb)
+                sm_hbox.pack_start(sbutton, False, False, 0)
+                def _action_submenu(but, action):
+                    act_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.data', 'search', [('name','=',action['action_id'])])
+                    res_model = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.data', 'read', act_id, ['res_id'])
+                    data = {}
+                    context = self.screen.context
+                    act = action.copy()
+                    self.screen.save_current()
+                    id = self.screen.current_model and self.screen.current_model.id
+                    if not (id):
+                        common.message(_('You must save this record to use the relate button !'))
+                        return False
+                    self.screen.display()
+                    obj = service.LocalService('action.main')
+                    if not res_model:
+                        common.message(_('Action not defined !'))
+                        return None
+                    res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.act_window', 'read', res_model[0]['res_id'], False)
+                    res['domain'] = self.screen.current_model.expr_eval(res['domain'], check_load=False)
+                    res['context'] = str(self.screen.current_model.expr_eval(res['context'], check_load=False))
+                    value = obj._exec_action(res, data, context)
+                    self.screen.reload()
+                    return value
+                sbutton.connect('clicked', _action_submenu, sub)
+            sm_vbox.pack_start(expander, False, False, 1)
+            sm_vbox.pack_end(self.widget, True, True, 0)
 
         if toolbar:
             hb = gtk.HBox()
-            hb.pack_start(self.widget)
-#            self.hpaned = gtk.HPaned()
-#            self.hpaned.pack1(self.widget,True,False)
-
-            #tb = gtk.Toolbar()
-            #tb.set_orientation(gtk.ORIENTATION_VERTICAL)
-            #tb.set_style(gtk.TOOLBAR_BOTH_HORIZ)
-            #tb.set_icon_size(gtk.ICON_SIZE_MENU)
+            if sm_vbox:
+                hb.pack_start(sm_vbox)
+            else:
+                hb.pack_start(self.widget)
             tb = gtk.VBox()
-
             eb = gtk.EventBox()
+            hb.pack_start(eb, False, False)
             eb.add(tb)
             eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("lightgrey"))
-
-
-            hb.pack_start(eb, False, False)
             self.widget = hb
-#            self.hpaned.pack2(eb,False,True)
-#            self.hpaned.connect("button-press-event",self.move_paned_press)
-#            self.hpaned.connect("button-release-event",self.move_paned_release,window)
-#            window.connect("window-state-event",self.move_paned_window,window)
-#            self.widget = self.hpaned
-
-
             sep = False
-            #setLabel={'print':'Reports','action':'Wizards','relate':'Direct Links'}
-            
             for icontype in ('print', 'action', 'relate'):
-                    
                 if icontype in ('action','relate') and sep:
-                    #tb.insert(gtk.SeparatorToolItem(), -1)
                     tb.pack_start(gtk.HSeparator(), False, False, 2)
                     sep = False
-                     
-                #list_done = []     
                 for tool in toolbar[icontype]:
-                    #if icontype not in list_done:
-                    #    l = gtk.Label('<b>' + setLabel[icontype] + '</b>')
-                    #    l.set_use_markup(True)
-#                   #     l.set_alignment(0.0, 0.5) # If Labels want to be Left-aligned
-                    #    tb.pack_start(l, False, False, 3)
-                    #    tb.pack_start(gtk.HSeparator(), False, False, 2)
-                    #    list_done.append(icontype)
                     iconstock = {
                         'print': gtk.STOCK_PRINT,
                         'action': gtk.STOCK_EXECUTE,
                         'relate': gtk.STOCK_JUMP_TO,
                     }.get(icontype, gtk.STOCK_ABOUT)
-
                     icon = gtk.Image()
                     icon.set_from_stock(iconstock, gtk.ICON_SIZE_BUTTON)
                     lbl = gtk.Label(tool['string'])
@@ -154,20 +186,17 @@ class ViewForm(parser_view):
                     tbutton.set_relief(gtk.RELIEF_NONE)
                     tb.pack_start(tbutton, False, False, 2)
 
-                    #tbutton = gtk.ToolButton()
-                    #tbutton.set_label_widget(hb) #tool['string'])
-                    #tbutton.set_stock_id(iconstock)
-                    #tb.insert(tbutton,-1)
-
                     def _action(button, action, type):
-                        data={}
-                        context=self.screen.context
-                        act=action.copy()
+                        data = {}
+                        context = self.screen.context
+                        if 'group_by' in context:
+                            del context['group_by']
+                        act = action.copy()
                         if type in ('print', 'action'):
                             self.screen.save_current()
                             id = self.screen.current_model and self.screen.current_model.id
                             if not (id):
-                                common.message(_('You must save this record to use the relate button !'))
+                                common.message(_('You must save this record to use the action button !'))
                                 return False
                             self.screen.display()
                             data = {
@@ -181,11 +210,18 @@ class ViewForm(parser_view):
                             if not (id):
                                 common.message(_('You must select a record to use the relate button !'))
                                 return False
-                            act['domain'] = self.screen.current_model.expr_eval(act['domain'], check_load=False)
-                            act['context'] = str(self.screen.current_model.expr_eval(act['context'], check_load=False))
+                            if act.get('domain',False):
+                                act['domain'] = self.screen.current_model.expr_eval(act['domain'], check_load=False)
+                            if act.get('context',False):
+                                act['context'] = str(self.screen.current_model.expr_eval(act['context'], check_load=False))
+                            data = {
+                                'model': self.screen.name,
+                                'id': id,
+                                'ids': [id],
+                            }
                         obj = service.LocalService('action.main')
                         value = obj._exec_action(act, data, context)
-                        if type in ('print', 'action'):
+                        if type in ('print', 'action') or type == 'relate' and act.get('target') == 'new':
                             self.screen.reload()
                         return value
 
@@ -218,7 +254,6 @@ class ViewForm(parser_view):
                                         'execute', tool['type'], 'read',
                                         [tool['id']], ['name'], {'lang': code})
                                 val = val[0]
-
                                 label = gtk.Label(lang['name'])
                                 entry = gtk.Entry()
                                 entry.set_text(val['name'])
@@ -227,7 +262,6 @@ class ViewForm(parser_view):
                                 hbox.pack_start(label, expand=False, fill=False)
                                 hbox.pack_start(entry, expand=True, fill=True)
                                 vbox.pack_start(hbox, expand=False, fill=True)
-
                             vp = gtk.Viewport()
                             vp.set_shadow_type(gtk.SHADOW_NONE)
                             vp.add(vbox)
@@ -253,7 +287,6 @@ class ViewForm(parser_view):
                             window.present()
                             win.destroy()
                             return res
-
                         menu = gtk.Menu()
                         item = gtk.ImageMenuItem(_('Translate label'))
                         item.connect("activate", callback, tool, window)
@@ -262,53 +295,9 @@ class ViewForm(parser_view):
                         menu.append(item)
                         menu.popup(None,None,None,event.button,event.time)
                         return True
-
                     tbutton.connect('clicked', _action, tool, icontype)
-
-                    tbutton.connect('button_press_event', _translate_label,
-                            tool, self.window)
-
+                    tbutton.connect('button_press_event', _translate_label, tool, self.window)
                     sep = True
-                    
-#    def move_paned_press(self, widget, event):
-#        if not self.prev:
-#            self.prev = self.hpaned.get_position()
-#            return False
-#        if self.prev and not self.flag:
-#            self.prev = self.hpaned.get_position()
-#            return False
-#
-#    def move_paned_release(self, widget, event, w):
-#        if self.hpaned.get_position()<self.current and self.hpaned.get_position()!=self.prev:
-#            self.prev = self.hpaned.get_position()
-#        else:
-#            self.current= self.hpaned.get_position()
-#        if not self.flag and self.current == self.prev:
-#            self.flag=True
-#            self.hpaned.set_position(w.get_size()[0])
-#        elif not self.flag and self.current>self.prev:
-#            if self.hpaned.get_position()<self.current:
-#                self.hpaned.set_position(self.prev)
-#            else:
-#                self.hpaned.set_position(self.current)
-#        elif self.flag:
-#            if self.current<self.prev:
-#                self.hpaned.set_position(self.current)
-#            elif self.current>self.prev:
-#                self.hpaned.set_position(self.prev)
-#            self.flag=False
-#        self.current = self.hpaned.get_position() - 7
-#        return False
-#
-#    def move_paned_window(self, widget, event, w):
-#        if not self.prev:
-#            self.prev=self.hpaned.get_position()
-#        self.hpaned.set_position(self.prev)
-#        self.prev = 0
-#        self.current = 0
-#        self.flag = False
-#        return False                    
-
 
     def __getitem__(self, name):
         return self.widgets[name]
@@ -350,10 +339,11 @@ class ViewForm(parser_view):
     def signal_record_changed(self, *args):
         pass
 
-    def attrs_set(self, model, obj, att_obj):
+    def attrs_set(self, model, obj, att_obj, notebook, rank):
         try:
             attrs_changes = eval(att_obj.attrs.get('attrs',"{}"))
         except:
+             model.value.update({'uid':rpc.session.uid})
              attrs_changes = eval(att_obj.attrs.get('attrs',"{}"),model.value)
              for k,v in attrs_changes.items():
                 for i in range(0,len(v)):
@@ -363,12 +353,12 @@ class ViewForm(parser_view):
                             cond=v[i][0],v[i][1],v[i][2][0]
                             attrs_changes[k][i]=cond
         for k,v in attrs_changes.items():
-            result = True
-            for condition in v:
-                result = result and tools.calc_condition(self,model,condition)
+            result = tools.calc_condition(self, model, v)
             if result:
                 if k=='invisible':
                     obj.hide()
+                if k=='focus':
+                    notebook.set_current_page(rank)
                 elif k=='readonly':
                     obj.set_sensitive(False)
             else:
@@ -377,15 +367,19 @@ class ViewForm(parser_view):
                 if k=='readonly':
                     obj.set_sensitive(True)
 
-    def set_notebook(self,model,nb):
+    def set_notebook(self,model,nb,focus_widget=None):
         for i in range(0,nb.get_n_pages()):
             page = nb.get_nth_page(i)
+            if focus_widget:
+                if focus_widget.widget.widget.is_ancestor(page):
+                    nb.set_current_page(i)
+                focus_widget.widget.grab_focus()
             children_notebooks = page.get_children()
             for child in children_notebooks:
                 if isinstance(child,gtk.Notebook):
                     self.set_notebook(model,child)
             if nb.get_tab_label(page).attrs.get('attrs',False):
-                self.attrs_set(model, page, nb.get_tab_label(page))
+                self.attrs_set(model, page, nb.get_tab_label(page), nb, i)
 
     def display(self):
         model = self.screen.current_model
@@ -400,15 +394,49 @@ class ViewForm(parser_view):
             state = model['state'].get(model)
         else:
             state = 'draft'
+        button_focus = field_focus = None
         for widget in self.widgets.values():
             widget.display(model, state)
+            if widget.widget.attrs.get('focus_field'):
+                field_focus =  widget.widget
+
         for widget in self.state_aware_widgets:
             widget.state_set(state)
             widget.attrs_set(model)
+            if widget.widget.attrs.get('focus_button'):
+                button_focus =  widget.widget
+
+        if field_focus:
+            field_focus.grab_focus()
+
+        if button_focus:
+            self.window.set_default(button_focus.widget)
+            if not field_focus:
+                button_focus.grab_focus()
         return True
 
     def set_cursor(self, new=False):
-        pass
-
+        focus_widget = None
+        model = self.screen.current_model
+        position = 0
+        position = len(self.widgets)
+        if model:
+            for widgets in self.widgets.values():
+                modelfield = model.mgroup.mfields.get(widgets.widget_name, None)
+                if not modelfield:
+                    continue
+                if not modelfield.get_state_attrs(model).get('valid', True):
+                     if widgets.widget.position > position:
+                          continue
+                     position = widgets.widget.position
+                     focus_widget = widgets
+            for x in self.widget.get_children():
+                if (type(x)==gtk.Table):
+                    for y in x.get_children():
+                        if type(y)==gtk.Notebook:
+                            self.set_notebook(model,y,focus_widget)
+                elif type(x)==gtk.Notebook:
+                    self.set_notebook(model,x,focus_widget)
+        return True
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

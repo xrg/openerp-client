@@ -1,19 +1,23 @@
-#! /usr/bin/env python
-# -*- coding: iso-8859-1 -*-
-
-# This file is part of Gnomolicious and is distributed under the Python
-# Software License (http://www.python.org/2.3/license.html).
+# -*- coding: utf-8 -*-
+##############################################################################
+#    
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
-# Permission to use, copy, modify, and distribute this software and its
-# documentation for any purpose and without fee is hereby granted,
-# provided that the above copyright notice appear in all copies and that
-# both that copyright notice and this permission notice appear in
-# supporting documentation, and that the name of Stichting Mathematisch
-# Centrum or CWI not be used in advertising or publicity pertaining to
-# distribution of the software without specific, written prior
-# permission.
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
-# Written by Martin v. Löwis <loewis@informatik.hu-berlin.de>
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#
+##############################################################################
 
 """Generate binary message catalog from textual translation description.
 

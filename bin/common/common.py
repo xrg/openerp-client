@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -40,12 +39,133 @@ import ConfigParser
 
 import threading
 import time
-
+import pango
 import rpc
-#
-# Upgrade this number to force the client to ask the survey
-#
-SURVEY_VERSION = '3'
+
+class action_tips(object):
+    def __init__(self, help):
+        self.help = help
+        self.help_frame = False
+        self.create_action_tip()
+
+    def close_or_disable_tips(self, button, disable_all=False):
+        if self.help_frame:
+            if disable_all:
+                rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write',
+                                          [rpc.session.uid], {'menu_tips':False})
+            self.help_frame.destroy()
+            self.help_frame = False
+        return True
+
+    def create_action_tip(self):
+        if self.help.get('msg', False):
+            msg = self.help.get('msg', '')
+            msg = msg.replace('\n',' ').replace('\t',' ')
+            if len(msg) < 80:
+                msg = '\t\t \t \t' + msg
+            title = self.help.get('title', '')
+
+            help_label = gtk.Label()
+            help_label.set_use_markup(True)
+            def size_allocate(label, allocation):
+                label.set_size_request( allocation.width - 2, -1 )
+            help_label.connect( "size-allocate", size_allocate )
+            help_label.set_label('<span font_desc="italic" foreground="black">%s</span>'% (msg))
+
+            help_label.set_alignment(0.3, 1)
+            help_label.set_line_wrap(True)
+            help_label.set_justify(gtk.JUSTIFY_FILL)
+            layout = help_label.get_layout()
+            layout.set_wrap(pango.WRAP_WORD_CHAR)
+
+            table = gtk.Table(1, 8)
+            table.set_homogeneous(False)
+            table.set_col_spacings(40)
+            table.attach(help_label, 3, 6, 0, 1, ypadding=10)
+            label_box = gtk.EventBox()
+            label_box.add(table)
+
+            # Close current tip button
+            closebtn = gtk.Button(_('Close current tip'))
+            closebtn.set_tooltip_markup(_('''<span foreground="darkred"><b>Close Current Tip:</b></span>
+This will hide the current tip. It will be displayed again next time you open this menu item, unless you disable all tips using the <b>'Menu Tips'</b> option in the user preferences.'''))
+            image = gtk.Image()
+            image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+            closebtn.set_image(image)
+            closebtn.set_relief(gtk.RELIEF_NONE)
+            closebtn.unset_flags(gtk.CAN_FOCUS)
+            closebtn.connect('clicked', self.close_or_disable_tips)
+
+             # Disable button
+            disablebtn = gtk.Button(_('Disable all tips'))
+            disablebtn.set_tooltip_markup(_('''<span foreground="darkred"><b>Disable all tips:</b></span>
+This will disable the display of tips on all menu items.
+To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user preferences.'''))
+            image1 = gtk.Image()
+            image1.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+            disablebtn.set_image(image1)
+            disablebtn.set_relief(gtk.RELIEF_NONE)
+            disablebtn.unset_flags(gtk.CAN_FOCUS)
+            disablebtn.connect('clicked', self.close_or_disable_tips, True)
+
+            # frame Title with the two above created buttons
+            box = gtk.HBox()
+            box_label = gtk.Label()
+            box_label.set_use_markup(True)
+            tip_title = '<b>' + _('Tips') + '</b>'
+            if title:
+                tip_title = '<b> %s - %s</b>' % ( to_xml(title),  _('Tips') )
+            box_label.set_label(tip_title)
+            box.pack_start(box_label, True, True)
+            box.pack_end(disablebtn, False, False)
+            box.pack_end(closebtn, False, False)
+            box.show_all()
+            # finally the frame
+            self.help_frame = gtk.Frame()
+            self.help_frame.set_label_widget(box)
+            self.help_frame.set_label_align(0.5,0.5)
+            self.help_frame.add(label_box)
+            self.help_frame.show_all()
+            return True
+        return False
+
+
+def OpenERP_Progressbar(parent=None, title=_('OpenERP Computing')):
+    if not parent:
+        parent = service.LocalService('gui.main').window
+
+    win = gtk.Dialog('OpenERP', parent, gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
+    win.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+    win.set_title(_(title))
+    win.set_resizable(False)
+    vbox = gtk.VBox(False, 0)
+
+    hbox = gtk.HBox(False, 13)
+    hbox.set_border_width(10)
+
+    img = gtk.Image()
+    img.set_from_stock('gtk-dialog-info', gtk.ICON_SIZE_DIALOG)
+    hbox.pack_start(img, expand=True, fill=False)
+
+    vbox2 = gtk.VBox(False, 0)
+    label = gtk.Label()
+    label.set_markup('<b>'+_('Operation in progress')+'</b>')
+    label.set_alignment(0.0, 0.5)
+    vbox2.pack_start(label, expand=True, fill=False)
+    vbox2.pack_start(gtk.HSeparator(), expand=True, fill=True)
+    vbox2.pack_start(gtk.Label(_("Please wait,\nthis operation may take a while...")), expand=True, fill=False)
+    hbox.pack_start(vbox2, expand=True, fill=True)
+    vbox.pack_start(hbox)
+
+    pb = gtk.ProgressBar()
+    pb.set_orientation(gtk.PROGRESS_LEFT_TO_RIGHT)
+    vbox.pack_start(pb, expand=True, fill=False)
+
+    win.vbox.pack_start(vbox, expand=True, fill=True)
+    win.set_has_separator(False)
+    win.set_transient_for(parent)
+    win.show_all()
+    return win, pb
 
 def _search_file(file, dir='path.share'):
     tests = [
@@ -67,7 +187,7 @@ try:
 except gobject.GError, e:
     log = logging.getLogger('init')
     log.fatal(str(e))
-    log.fatal('Ensure that the file %s is correct' % options.rcfile)
+    log.fatal(_('Ensure that the file %s is correct') % options.rcfile)
     exit(1)
 
 def selection(title, values, alwaysask=False, parent=None):
@@ -97,7 +217,7 @@ def selection(title, values, alwaysask=False, parent=None):
     model = gtk.ListStore(gobject.TYPE_STRING)
     keys = values.keys()
     keys.sort()
-    
+
     for val in keys:
         model.append([val])
 
@@ -118,7 +238,7 @@ def selection(title, values, alwaysask=False, parent=None):
                     try:
                         res = (res, values[res.decode('utf8')])
                     except:
-                        res = (res, values[res])    
+                        res = (res, values[res])
                 else:
                     ok = False
             else:
@@ -146,84 +266,6 @@ class upload_data_thread(threading.Thread):
 def upload_data(email, data, type='SURVEY', supportid=''):
     a = upload_data_thread(email, data, type, supportid)
     a.start()
-    return True
-
-def terp_survey():
-    if options['survey.position']==SURVEY_VERSION:
-        return False
-
-    def color_set(widget, name):
-        colour = widget.get_colormap().alloc_color(common.colors.get(name,'white'))
-        widget.modify_bg(gtk.STATE_ACTIVE, colour)
-        widget.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
-        widget.modify_base(gtk.STATE_NORMAL, colour)
-        widget.modify_text(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
-        widget.modify_text(gtk.STATE_INSENSITIVE, gtk.gdk.color_parse("black"))
-
-    widnames = ('country','role','industry','employee','hear','system','opensource')
-    winglade = glade.XML(common.terp_path("dia_survey.glade"), "dia_survey", gettext.textdomain())
-    win = winglade.get_widget('dia_survey')
-    parent = service.LocalService('gui.main').window
-    win.set_transient_for(parent)
-    win.set_icon(OPENERP_ICON)
-    for widname in widnames:
-        wid = winglade.get_widget('combo_'+widname)
-        wid.child.set_editable(False)
-
-    email_widget = winglade.get_widget('entry_email')
-    want_ebook_widget = winglade.get_widget('check_button_ebook')
-
-    def toggled_cb(togglebutton, *args):
-        value = togglebutton.get_active()
-        color_set(email_widget, ('normal', 'required')[value])
-
-    want_ebook_widget.connect('toggled', toggled_cb)
-
-    while True:
-        res = win.run()
-        if res == gtk.RESPONSE_OK:
-            email = email_widget.get_text()
-            want_ebook = want_ebook_widget.get_active()
-            if want_ebook and not len(email):
-                color_set(email_widget, 'invalid')
-            else:
-                company =  winglade.get_widget('entry_company').get_text()
-                phone = winglade.get_widget('entry_phone').get_text()
-                name = winglade.get_widget('entry_name').get_text()
-                city = winglade.get_widget('entry_city').get_text()
-                result = "\ncompany: "+str(company)
-                result += "\nname: " + str(name)
-                result += "\nphone: " + str(phone)
-                result += "\ncity: " + str(city)
-                for widname in widnames:
-                    wid = winglade.get_widget('combo_'+widname)
-                    result += "\n" + widname + ": " + wid.child.get_text()
-                result += "\nplan_use: " + str(winglade.get_widget('check_use').get_active())
-                result += "\nplan_sell: " + str(winglade.get_widget('check_sell').get_active())
-                result += "\nwant_ebook: " + str(want_ebook)
-
-                buffer = winglade.get_widget('textview_comment').get_buffer()
-                iter_start = buffer.get_start_iter()
-                iter_end = buffer.get_end_iter()
-                result += "\nnote: " + buffer.get_text(iter_start, iter_end, False)
-                upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
-                options['survey.position']=SURVEY_VERSION
-                options.save()
-                parent.present()
-                win.destroy()
-                common.message(_('Thank you for the feedback !\n\
-Your comments have been sent to OpenERP.\n\
-You should now start by creating a new database or\n\
-connecting to an existing server through the "File" menu.'))
-                break
-        elif res == gtk.RESPONSE_CANCEL or gtk.RESPONSE_DELETE_EVENT:
-            parent.present()
-            win.destroy()
-            common.message(_('Thank you for testing OpenERP !\n\
-You should now start by creating a new database or\n\
-connecting to an existing server through the "File" menu.'))
-            break
-
     return True
 
 def file_selection(title, filename='', parent=None, action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True, multi=False, filters=None):
@@ -319,10 +361,10 @@ def support(*args):
         buffer = sur.get_widget('remark_textview').get_buffer()
         remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
 
-        content = name +"(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug:\n"+ explanation + "\nremarks:\n" + remarks
+        content = name +"(%s, %s, %s)"%(id_contract, company, phone) + _(" has reported the following bug:\n") + explanation + "\n" + _("remarks") + ":\n" + remarks
 
         if upload_data(fromaddr, content, 'support', id_contract):
-            common.message(_('Support request sent !'))
+            common.message(_('Support request sent !'), parent=win)
 
     parent.present()
     win.destroy()
@@ -339,22 +381,25 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
     show_message = True
 
     if not disconnected_mode:
-        maintenance = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'status')
-
-        if maintenance['status'] == 'none':
-            maintenance_contract_message=_("""
+        try:
+            maintenance = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'status')
+        except:
+            maintenance = False
+        if maintenance:
+            if maintenance['status'] == 'none':
+                maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
-<b>You do not have a valid Open ERP maintenance contract !</b>
-If you are using Open ERP in production, it is highly suggested to subscribe
-a maintenance program.
+<b>You do not have a valid OpenERP publisher warranty contract !</b>
+If you are using OpenERP in production, it is highly suggested to subscribe
+a publisher warranty program.
 
-The Open ERP maintenance contract provides you a bugfix guarantee and an
+The OpenERP publisher warranty contract provides you a bugfix guarantee and an
 automatic migration system so that we can fix your problems within a few
-hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the Open ERP editor.
+hours. If you had a publisher warranty contract, this error would have been sent
+to the quality team of the OpenERP editor.
 
-The maintenance program offers you:
+The publisher warranty program offers you:
 * Automatic migrations on new versions,
 * A bugfix guarantee,
 * Monthly announces of potential bugs and their fixes,
@@ -364,40 +409,41 @@ The maintenance program offers you:
 You can use the link bellow for more information. The detail of the error
 is displayed on the second tab.
 """)
-        elif maintenance['status'] == 'partial':
-            maintenance_contract_message=_("""
+            elif maintenance['status'] == 'partial':
+                maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
-Your maintenance contract does not cover all modules installed in your system !
-If you are using Open ERP in production, it is highly suggested to upgrade your
+Your publisher warranty contract does not cover all modules installed in your system !
+If you are using OpenERP in production, it is highly suggested to upgrade your
 contract.
 
 If you have developed your own modules or installed third party module, we
-can provide you an additional maintenance contract for these modules. After
+can provide you an additional publisher warranty contract for these modules. After
 having reviewed your modules, our quality team will ensure they will migrate
-automatically for all future stable versions of Open ERP at no extra cost.
+automatically for all future stable versions of OpenERP at no extra cost.
 
-Here is the list of modules not covered by your maintenance contract:
+Here is the list of modules not covered by your publisher warranty contract:
 %s
 
 You can use the link bellow for more information. The detail of the error
 is displayed on the second tab.""") % (", ".join(maintenance['uncovered_modules']), )
+            else:
+                show_message = False
+
         else:
-            show_message = False
-    else:
-        maintenance_contract_message=_("""
+            maintenance_contract_message=_("""
 <b>An unknown error has been reported.</b>
 
-<b>You do not have a valid Open ERP maintenance contract !</b>
-If you are using Open ERP in production, it is highly suggested to subscribe
-a maintenance program.
+<b>You do not have a valid OpenERP publisher warranty contract !</b>
+If you are using OpenERP in production, it is highly suggested to subscribe
+a publisher warranty program.
 
-The Open ERP maintenance contract provides you a bugfix guarantee and an
+The OpenERP publisher warranty contract provides you a bugfix guarantee and an
 automatic migration system so that we can fix your problems within a few
-hours. If you had a maintenance contract, this error would have been sent
-to the quality team of the Open ERP editor.
+hours. If you had a publisher warranty contract, this error would have been sent
+to the quality team of the OpenERP editor.
 
-The maintenance program offers you:
+The publisher warranty program offers you:
 * Automatic migrations on new versions,
 * A bugfix guarantee,
 * Monthly announces of potential bugs and their fixes,
@@ -414,19 +460,19 @@ is displayed on the second tab.
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
     win.set_icon(OPENERP_ICON)
-    win.set_title("Open ERP - %s" % title)
+    win.set_title("OpenERP - %s" % title)
 
+    if not isinstance(message, basestring):
+        message = str(message)
     xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % escape(message))
 
     details_buffer = gtk.TextBuffer()
     details_buffer.set_text(details)
     xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
-
     if show_message:
         xmlGlade.get_widget('maintenance_explanation').set_markup(maintenance_contract_message)
 
     xmlGlade.get_widget('notebook').remove_page(int(show_message))
-
     if not show_message:
         def send(widget):
             def get_text_from_text_view(textView):
@@ -438,8 +484,9 @@ is displayed on the second tab.
             tb = get_text_from_text_view(xmlGlade.get_widget('details_explanation'))
             explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
             remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
+            summary = xmlGlade.get_widget('summary_entry').get_text()
 
-            if rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'send', tb, explanation, remarks):
+            if rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'send', tb, explanation, remarks, summary):
                 common.message(_('Your problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'), parent=win)
                 win.destroy()
             else:
@@ -447,7 +494,6 @@ is displayed on the second tab.
 
         xmlGlade.signal_connect('on_button_send_clicked', send)
         xmlGlade.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
-
     response = win.run()
     parent.present()
     win.destroy()
@@ -462,7 +508,6 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     msg = to_xml(msg)
     if title is not None:
         msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
-
     dialog.set_icon(OPENERP_ICON)
     dialog.set_markup(msg)
     dialog.show_all()
@@ -558,11 +603,14 @@ def ask(question, parent=None):
 
     response = win.run()
     parent.present()
+    # grab a safe copy of the entered text before destroy()
+    #to avoid GTK bug https://bugzilla.gnome.org/show_bug.cgi?id=613241
+    value = entry.get_text()
     win.destroy()
     if response == gtk.RESPONSE_CANCEL:
         return None
     else:
-        return entry.get_text()
+        return value
 
 def concurrency(resource, id, context, parent=None):
     dia = glade.XML(common.terp_path("openerp.glade"),'dialog_concurrency_exception',gettext.textdomain())

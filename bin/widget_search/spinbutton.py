@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -24,10 +23,11 @@ import gtk
 import common
 import wid_int
 import sys
+import tools
 
 class spinbutton(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}):
-        wid_int.wid_int.__init__(self, name, parent, attrs)
+    def __init__(self, name, parent, attrs={},screen=None):
+        wid_int.wid_int.__init__(self, name, parent, attrs, screen)
 
         self.widget = gtk.HBox(spacing=3)
 
@@ -45,6 +45,9 @@ class spinbutton(wid_int.wid_int):
         self.spin2.set_activates_default(True)
         self.widget.pack_start(self.spin2, expand=False, fill=True)
 
+        if self.default_search:
+            self.spin1.set_value(self.default_search)
+
     def _value_get(self):
         res = []
         self.spin1.update()
@@ -60,7 +63,7 @@ class spinbutton(wid_int.wid_int):
             res.append((self.name, '>=', self.spin1.get_value()))
         elif (self.spin2.get_value() == self.spin1.get_value()) and (self.spin1.get_value() != 0.0):
             res.append((self.name, '=', self.spin1.get_value()))
-        return res
+        return {'domain':res}
 
     def _value_set(self, value):
         self.spin1.set_value(value)
@@ -70,6 +73,11 @@ class spinbutton(wid_int.wid_int):
 
     def clear(self):
         self.value = 0.00
+    
+     
+    def grab_focus(self):
+        self.spin1.grab_focus()
+
 
     def sig_activate(self, fct):
         self.spin1.connect_after('activate', fct)

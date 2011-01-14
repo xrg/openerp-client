@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -34,13 +33,14 @@ class win_extension(object):
     def __init__(self, parent=None):
         glade = gtk.glade.XML(common.terp_path('openerp.glade'), 'win_extension', gettext.textdomain())
         self.win = glade.get_widget('win_extension')
+        self.win.set_transient_for(parent)
         self.win.set_icon(common.OPENERP_ICON)
         model = gtk.ListStore( str, str, str )
 
         self.treeview = glade.get_widget('treeview_extension')
         self.treeview.set_model(model)
 
-        for index, text in enumerate(['Extension', 'Application', 'Print Processor']):
+        for index, text in enumerate([_('Extension'), _('Application'), _('Print Processor')]):
             renderer = gtk.CellRendererText()
             renderer.set_property( 'editable', True )
             renderer.connect( 'edited', self._on_cell_renderer_edited )
@@ -108,11 +108,10 @@ class win_extension(object):
         if column_id == 0:
             old_text = old_text.lower()
             new_text = new_text.lower()
-
         if old_text <> new_text:
             if column_id == 0:
                 if new_text in [ ext for ext, app, app_print in model ]:
-                    common.warning(_('This extension is already defined'), 'Extension Manager')
+                    common.warning(_('This extension is already defined'), _('Extension Manager'), parent=self.win)
                     return
                 else:
                     model.set(iter, column_id, new_text)

@@ -1,8 +1,8 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    Copyright (c) 2008-2009 B2CK, Bertrand Chenal, Cedric Krier (D&D in lists)
 #    $Id$
 #
@@ -24,35 +24,214 @@
 import gobject
 import gtk
 import tools
-
+import itertools
+import copy
 import rpc
+from rpc import RPCProxy
 import service
 import locale
+import common
+import Queue
 from interface import parser_view
+from tools import user_locale_format
+from widget.model.record import ModelRecord
 
+class field_record(object):
+    def __init__(self, name, count):
+        self.name = name
+        if count:
+            count = ' (' + count +')'
+        self.count = count
+
+    def get_client(self, *args):
+        if isinstance(self.name, (list,tuple)):
+            return self.name[1] + self.count
+        if self.count:
+            return str(self.name) + self.count
+        return self.name
+
+    def get(self, *args):
+        if isinstance(self.name, (list,tuple)):
+            return self.name[0]
+        return self.name
+
+    def get_state_attrs(self, *args, **argv):
+        return {}
+
+    def set_client(self,*args):
+        pass
+
+    def set(self,*args):
+        pass
+
+class group_record(object):
+
+    def __init__(self, value={}, ctx={}, domain=[], mgroup=None, child = True, sort_order=False):
+        self.list_parent = None
+        self._children = None
+        self.domain = domain
+        self.ctx = ctx
+        self.value = value
+        self.id = False
+        self.has_children = child
+        self.mgroup = mgroup
+        self.field_with_empty_labels = []
+        self.sort_order = sort_order
+
+    def getChildren(self):
+        if self._children is None:
+            self._children = list_record(self.mgroup, parent=self, context=self.ctx, domain=self.domain,sort_order=self.sort_order)
+        #self._children.load()
+        return self._children
+
+    def setChildren(self, c):
+        self._children = c
+        return c
+
+    children = property(getChildren, setChildren)
+
+    def expr_eval(self, *args, **argv):
+        return True
+
+    def __setitem__(self, attr, val):
+        pass
+
+    def __getitem__(self, attr):
+        count = str(self.value.get('%s_count' % attr,''))
+        return field_record(self.value.get(attr, ''), count)
+
+def echo(fn):
+    def wrapped(self, *v, **k):
+        name = fn.__name__
+        res = fn(self, *v, **k)
+        return res
+    return wrapped
+
+
+class list_record(object):
+    def __init__(self, mgroup, parent=None, context=None, domain=None, sort_order=False):
+        self.mgroup = mgroup
+        self.mgroup.list_parent = parent
+        self.mgroup.list_group = self
+        self.parent = parent
+        self.context = context or {}
+        self.domain = domain
+        self.loaded = False
+        self.sort_order = sort_order
+        self.lst = []
+        self.load()
+
+    def destroy(self):
+        del self.context
+        del self.domain
+        del self.loaded
+        del self.mgroup
+        del self.lst
+
+    def add_dummny_record(self, group_field):
+        record = { group_field:'This group is now empty ! Please refresh the list.'}
+        rec = group_record(record, ctx=self.context, domain=self.domain, mgroup=self.mgroup, child = False)
+        self.add(rec)
+
+    def get_order(self, gb, sort_order):
+        """
+            @param gb : grouby parameter for read_group call
+            @param sort_order : order of sorting for the same read_group call
+            @return : sort_order if sort_order start with the same field as gb else None
+        """
+        if sort_order:
+            if(isinstance(gb, (tuple, list))):
+                gb = gb[0]
+
+            if not sort_order.startswith(gb):
+                return None
+
+        return sort_order
+
+    def load(self):
+        if self.loaded:
+            return
+        self.loaded = True
+        gb = self.context.get('group_by', [])
+        no_leaf = self.context.get('group_by_no_leaf', False)
+        if gb or no_leaf:
+            records = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'read_group',
+                self.context.get('__domain', []) + (self.domain or []), self.mgroup.fields.keys(), gb, 0, False, self.context, self.get_order(gb, self.sort_order))
+            if not records and self.parent:
+                self.add_dummny_record(gb[0])
+            else:
+                for r in records:
+                    child = True
+                    __ctx = r.get('__context', {})
+                    inner_gb = __ctx.get('group_by', [])
+                    if no_leaf and not len(inner_gb):
+                        child = False
+                    ctx = {'__domain': r.get('__domain', []),'group_by_no_leaf':no_leaf}
+                    if not no_leaf:
+                        ctx.update({'__field':gb[-1]})
+                    ctx.update(__ctx)
+                    rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child, sort_order=self.sort_order)
+                    for field in gb:
+                        if not rec.value.get(field, False):
+                            field_type = self.mgroup.fields.get(field, {}).get('type', False)
+                            if field in inner_gb or field_type in ('integer', 'float', 'boolean'):
+                                continue
+                            rec.value[field] = 'Undefined'
+                            rec.field_with_empty_labels.append(field)
+                    self.add(rec)
+        else:
+            if self.context.get('__domain') and not no_leaf:
+                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, False, self.sort_order)
+                if not ids:
+                     self.add_dummny_record(self.context['__field'])
+                else:
+                    self.mgroup.load(ids)
+                    res= []
+                    for id in ids:
+                        res.append(self.mgroup.get_by_id(id))
+                    self.add_list(res)
+            else:
+                if not no_leaf:
+                    self.lst = self.mgroup.models
+                    for m in self.mgroup.models:
+                        m.list_group = self
+                        m.list_parent = self.parent
+                #self.add_list(self.mgroup.models)
+
+    def add(self, lst):
+        lst.list_parent = self.parent
+        lst.list_group = self
+        self.lst.append(lst)
+
+
+    def add_list(self, lst):
+        for l in lst:
+            self.add(l)
+
+    def __getitem__(self, i):
+        self.load()
+        return self.lst[i]
+
+    def __len__(self):
+        self.load()
+        return len(self.lst)
 
 class AdaptModelGroup(gtk.GenericTreeModel):
-
-    def __init__(self, model_group):
+    def __init__(self, model_group, context={}, domain=[], sort_order=False):
         super(AdaptModelGroup, self).__init__()
         self.model_group = model_group
-        self.models = model_group.models
-        self.last_sort = None
-        self.sort_asc = True
+        self.context = context or {}
+        self.domain = domain
+        self.models = list_record(model_group, context=context, domain=self.domain, sort_order=sort_order)
         self.set_property('leak_references', False)
 
     def added(self, modellist, position):
-        if modellist is self.models:
-            model = self.models[position]
-            self.emit('row_inserted', self.on_get_path(model),
-                      self.get_iter(self.on_get_path(model)))
+        self.models.loaded = False
+        path = len(modellist) - 1
+        self.emit('row_inserted',path,self.get_iter(path))
 
     def cancel(self):
         pass
-
-    def changed_all(self, *args):
-        self.emit('row_deleted', position)
-        self.invalidate_iters()
 
     def move(self, path, position):
         idx = path[0]
@@ -73,18 +252,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.model_group.model_remove(self.models[idx])
         self.invalidate_iters()
 
-    def sort(self, name):
-        self.sort_asc = not (self.sort_asc and (self.last_sort == name))
-        self.last_sort = name
-        if self.sort_asc:
-            f = lambda x,y: cmp(x[name].get_client(x), y[name].get_client(y))
-        else:
-            f = lambda x,y: -1 * cmp(x[name].get_client(x), y[name].get_client(y))
-        self.models.sort(f)
-        for idx, row in enumerate(self.models):
-            iter = self.get_iter(idx)
-            self.row_changed(self.get_path(iter), iter)
-
     def saved(self, id):
         return self.model_group.writen(id)
 
@@ -94,6 +261,8 @@ class AdaptModelGroup(gtk.GenericTreeModel):
     ## Mandatory GenericTreeModel methods
 
     def on_get_flags(self):
+        if self.context.get('group_by'):
+            return gtk.TREE_MODEL_ITERS_PERSIST
         return gtk.TREE_MODEL_LIST_ONLY
 
     def on_get_n_columns(self):
@@ -103,18 +272,24 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         return gobject.TYPE_PYOBJECT
 
     def on_get_path(self, iter):
-        return self.models.index(iter)
+        result = []
+        while iter:
+            try:
+                result.insert(0,iter.list_group.lst.index(iter))
+                iter = iter.list_parent
+            except:
+                return (0,0)
+        return tuple(result)
 
     def on_get_iter(self, path):
-        if isinstance(path, tuple):
-            path = path[0]
-        if self.models:
-            if path<len(self.models):
-                return self.models[path]
-            else:
-                return None
-        else:
-            return None
+        if not isinstance(path,(list, tuple)):
+            path = (path,)
+        mods = self.models
+        for p in path[:-1]:
+            mods = mods[p].children
+        if path[-1]<len(mods):
+            return mods[path[-1]]
+        return None
 
     def on_get_value(self, node, column):
         assert column == 0
@@ -122,34 +297,39 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_iter_next(self, node):
         try:
-            return self.on_get_iter(self.on_get_path(node) + 1)
+            i = node.list_group.lst.index(node) + 1
+            return node.list_group[i]
         except IndexError:
             return None
 
     def on_iter_has_child(self, node):
-        return False
+        res = getattr(node,'has_children', False)
+        return res
 
     def on_iter_children(self, node):
-        return None
+        res = getattr(node, 'children', [])
+        return res and res[0] or []
 
     def on_iter_n_children(self, node):
-        return 0
+        return len(getattr(node, 'children', []))
 
     def on_iter_nth_child(self, node, n):
-        if node is None and self.models:
-            return self.on_get_iter(0)
+        if node is None:
+            return self.on_get_iter([n])
+        if n<len(getattr(node,'children',[])):
+            return getattr(node,'children',[])[n]
         return None
 
     def on_iter_parent(self, node):
-        return None
+        return node.list_parent
 
 class ViewList(parser_view):
-
     def __init__(self, window, screen, widget, children=None, buttons=None,
-            toolbar=None):
+            toolbar=None, submenu=None, help={}):
         super(ViewList, self).__init__(window, screen, widget, children,
-                buttons, toolbar)
+                buttons, toolbar, submenu=submenu)
         self.store = None
+        self.window = window
         self.view_type = 'tree'
         self.model_add_new = True
         self.widget = gtk.VBox()
@@ -160,8 +340,15 @@ class ViewList(parser_view):
         self.widget.pack_start(scroll, expand=True, fill=True)
         self.widget_tree.screen = screen
         self.reload = False
+        children = dict(sorted(children.items(), lambda x, y: cmp(x[0], y[0])))
         self.children = children
-
+        self.changed_col = []
+        self.expandedRows = []
+        self.tree_editable = False
+        self.is_editable = widget.editable
+        self.columns = self.widget_tree.get_columns()
+        if self.widget_tree.sequence:
+            self.set_drag_and_drop(True)
         if children:
             hbox = gtk.HBox()
             self.widget.pack_start(hbox, expand=False, fill=False, padding=2)
@@ -173,14 +360,14 @@ class ViewList(parser_view):
             hbox.show_all()
 
         self.display()
-
-        self.widget_tree.connect('button-press-event', self.__hello)
+        self.widget_tree.connect('button_press_event', self.__contextual_menu)
         self.widget_tree.connect_after('row-activated', self.__sig_switch)
         selection = self.widget_tree.get_selection()
         selection.set_mode(gtk.SELECTION_MULTIPLE)
         selection.connect('changed', self.__select_changed)
 
-        if self.widget_tree.sequence:
+    def set_drag_and_drop(self,dnd=False):
+        if dnd or self.screen.context.get('group_by'):
             self.widget_tree.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
                     [('MY_TREE_MODEL_ROW', gtk.TARGET_SAME_WIDGET, 0),],
                     gtk.gdk.ACTION_MOVE)
@@ -195,12 +382,15 @@ class ViewList(parser_view):
             self.widget_tree.connect("drag-data-get", self.drag_data_get)
             self.widget_tree.connect('drag-data-received', self.drag_data_received)
             self.widget_tree.connect('drag-data-delete', self.drag_data_delete)
+        else:
+            self.widget_tree.unset_rows_drag_source()
+            self.widget_tree.unset_rows_drag_dest()
 
     def drag_drop(self, treeview, context, x, y, time):
         treeview.emit_stop_by_name('drag-drop')
         treeview.drag_get_data(context, context.targets[-1], time)
         return True
-        
+
     def drag_data_get(self, treeview, context, selection, target_id,
             etime):
         treeview.emit_stop_by_name('drag-data-get')
@@ -211,7 +401,31 @@ class ViewList(parser_view):
         treeselection.selected_foreach(_func_sel_get, data)
         data = str(data[0])
         selection.set(selection.target, 8, data)
-        
+
+    def group_by_move(self, model_list, get_id, rec_id, field='sequence'):
+        seq_ids = map(lambda x: x[field].get(x), model_list.children.lst)
+        set_list = list(set(seq_ids))
+        l = model_list.children.lst
+        if len(seq_ids) != len(set_list):
+            set_list.sort()
+            repeat = set_list[-1]
+            mod_list = seq_ids[len(set_list):]
+            for e in range(len(mod_list)):
+                repeat = repeat + 1
+                mod_list[e]= repeat
+            seq_ids = set_list + mod_list
+        else:
+            l.insert(rec_id,l[get_id])
+            if get_id < rec_id:
+                del l[get_id]
+            else:
+                del l[get_id +1]
+        for x in range(len(l)):
+            mod = l[x]
+            mod[field].set(mod, seq_ids[x], modified=True)
+            mod.save()
+
+
     def drag_data_received(self, treeview, context, x, y, selection,
             info, etime):
         treeview.emit_stop_by_name('drag-data-received')
@@ -222,24 +436,106 @@ class ViewList(parser_view):
                     return
         model = treeview.get_model()
         data = eval(selection.data)
+        get_id = data[0]
         drop_info = treeview.get_dest_row_at_pos(x, y)
+
         if drop_info:
             path, position = drop_info
-            idx = path[0]
-            if position in (gtk.TREE_VIEW_DROP_BEFORE,
-                    gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
-                model.move(data, idx)
+            self.source_group_child = []
+            rec_id = model.on_iter_has_child(model.on_get_iter(path)) and path or path[:-1]
+            group_by = self.screen.context.get('group_by')
+            if group_by:
+                if data and path and data[:-1] == path[:-1] \
+                            and isinstance(model.on_get_iter(data), ModelRecord):
+                    if position in (gtk.TREE_VIEW_DROP_BEFORE,
+                        gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
+                        m_path = path[-1]
+                    else:
+                        m_path = path[-1] + 1
+                    source_models_list = model.on_get_iter(path[:-1])
+                    self.group_by_move(source_models_list, data[-1], m_path)
+                else:
+                    source_group = model.on_get_iter(data)
+                    target_group = model.on_get_iter(rec_id)
+                    if model.on_iter_has_child(source_group):
+                        def process(parent):
+                            for child in parent.getChildren().lst:
+                                if model.on_iter_has_child(child):
+                                    process(child)
+                                else:
+                                    self.source_group_child.append(child)
+                        process(source_group)
+                    else:
+                        self.source_group_child = [source_group]
+                    if self.source_group_child:
+                        self.screen.current_model = self.source_group_child[0]
+                        target_domain = filter(lambda x: x[0] in group_by, target_group.children.context.get('__domain',[]))
+                        val = {}
+                        map(lambda x:val.update({x[0]:x[2]}),target_domain)
+                        rpc = RPCProxy(self.source_group_child[0].resource)
+                        rpc.write(map(lambda x:x.id,self.source_group_child),val)
+                        self.reload = True
+                        self.screen.reload()
+                for expand_path in (data, path):
+                    treeview.expand_to_path(expand_path)
             else:
-                model.move(data, idx + 1)
+                idx = path[0]
+                if position in (gtk.TREE_VIEW_DROP_BEFORE,
+                        gtk.TREE_VIEW_DROP_INTO_OR_BEFORE):
+                    model.move(data, idx)
+                    rec_id = idx
+                else:
+                    model.move(data, idx + 1)
+                    rec_id = idx+1
         context.drop_finish(False, etime)
-        if treeview.sequence:
-            self.screen.models.set_sequence(field='sequence')
+        if treeview.sequence and drop_info and not group_by:
+            self.screen.models.set_sequence(get_id, rec_id, field='sequence')
 
     def drag_data_delete(self, treeview, context):
         treeview.emit_stop_by_name('drag-data-delete')
 
-    def __hello(self, treeview, event, *args):
-        if event.button==3:
+    def attrs_set(self, model,path):
+        if path.attrs.get('attrs',False):
+            attrs_changes = eval(path.attrs.get('attrs',"{}"),{'uid':rpc.session.uid})
+            for k,v in attrs_changes.items():
+                result = True
+                result = tools.calc_condition(self,model,v)
+                if result:
+                    if k=='invisible':
+                        return False
+                    elif k=='readonly':
+                        return False
+        return True
+
+
+    def copy_by_row(self, model, path, iter, tree_view):
+        columns = tree_view.get_columns()
+        model = model.get(iter,0)
+        copy_row = ""
+        title = ""
+        for col in columns:
+            if col._type != 'Button' and col.name in model[0].value :
+                if col._type == 'many2one':
+                   copy_row += unicode(model[0].value[col.name] and model[0].value[col.name][1])
+                else:
+                   copy_row += unicode(model[0].value[col.name])
+                copy_row += '\t'
+                if not tree_view.copy_table:
+                    title += col.get_widget().get_text() + '\t'
+        if title:
+            tree_view.copy_table += title  + '\n'
+        tree_view.copy_table += copy_row + '\n'
+
+    def copy_selection(self, menu, tree_view, tree_selection):
+        tree_view.copy_table = ""
+        tree_selection.selected_foreach(self.copy_by_row, tree_view)
+        tree_view.copy_table
+        clipboard = gtk.clipboard_get()
+        clipboard.set_text(unicode(tree_view.copy_table))
+        clipboard.store()
+
+    def __contextual_menu(self, treeview, event, *args):
+        if event.button in [1,3]:
             path = treeview.get_path_at_pos(int(event.x),int(event.y))
             selection = treeview.get_selection()
             if selection.get_mode() == gtk.SELECTION_SINGLE:
@@ -248,22 +544,71 @@ class ViewList(parser_view):
                 model, paths = selection.get_selected_rows()
             if (not path) or not path[0]:
                 return False
-            m = model.models[path[0][0]]
-
+            current_active_model = model.models[path[0][0]]
+            groupby = self.screen.context.get('group_by')
+            if groupby:
+                current_active_model = self.store.on_get_iter(path[0])
             # TODO: add menu cache
-            if path[1]._type=='many2one':
-                value = m[path[1].name].get(m)
-                resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.screen.fields[path[1].name]['relation'], False)], False, rpc.session.context)
-                resrelate = map(lambda x:x[2], resrelate)
+
+            if event.button == 1:
+                # first click on button
+                if path[1]._type == 'Button':
+                    cell_button = path[1].get_cells()[0]
+                    if not cell_button.get_property('sensitive'):
+                        return
+                    # Calling actions
+                    attrs_check = self.attrs_set(current_active_model, path[1])
+                    states = [e for e in path[1].attrs.get('states','').split(',') if e]
+                    if (attrs_check and not states) or \
+                            (attrs_check and \
+                             current_active_model['state'].get(current_active_model) in states):
+                        if self.widget_tree.editable:
+                            if current_active_model.validate():
+                                id = self.screen.save_current()
+                            else:
+                               common.warning(_('Invalid form, correct red fields !'), _('Error !'),parent=self.window)
+                               self.widget_tree.warn('misc-message', _('Invalid form, correct red fields !'), "red")
+                               self.screen.display()
+                               return False
+                        else:
+                            id = current_active_model.id
+                        current_active_model.get_button_action(self.screen, id, path[1].attrs)
+                        self.screen.current_model = None
+                        if self.screen.parent and isinstance(self.screen.parent, ModelRecord):
+                            self.screen.parent.reload()
+                        current_active_model.reload()
+
+            else:
+                # Here it goes for right click
+                selected_rows = selection.get_selected_rows()
+                if len(selected_rows[1])>1:
+                    event.state =  gtk.gdk.CONTROL_MASK
+                    for row in selected_rows[1]:
+                        selection.select_path(row)
+                    selection.unselect_path(path[0])
+
                 menu = gtk.Menu()
-                for x in resrelate:
-                    x['string'] = x['name']
-                    item = gtk.ImageMenuItem('... '+x['name'])
-                    f = lambda action, value, model: lambda x: self._click_and_relate(action, value, model)
-                    item.connect('activate', f(x, value, self.screen.fields[path[1].name]['relation']))
-                    item.set_sensitive(bool(value))
-                    item.show()
-                    menu.append(item)
+                item = gtk.ImageMenuItem(_(gtk.STOCK_COPY))
+                item.connect('activate',self.copy_selection, treeview, selection)
+                item.show()
+                menu.append(item)
+
+                if path[1]._type=='many2one':
+                    value = current_active_model[path[1].name].get(current_active_model)
+                    resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.screen.fields[path[1].name]['relation'], False)], False, rpc.session.context)
+                    resrelate = map(lambda x:x[2], resrelate)
+                    if resrelate:
+                        item = gtk.SeparatorMenuItem()
+                        item.show()
+                        menu.append(item)
+                    for x in resrelate:
+                        x['string'] = x['name']
+                        item = gtk.ImageMenuItem('... '+x['name'])
+                        f = lambda action, value, model: lambda x: self._click_and_relate(action, value, model)
+                        item.connect('activate', f(x, value, self.screen.fields[path[1].name]['relation']))
+                        item.set_sensitive(bool(value))
+                        item.show()
+                        menu.append(item)
                 menu.popup(None,None,None,event.button,event.time)
 
     def _click_and_relate(self, action, value, model):
@@ -281,7 +626,6 @@ class ViewList(parser_view):
         obj = service.LocalService('action.main')
         value = obj._exec_action(act, data, context)
         return value
-
 
     def signal_record_changed(self, signal, *args):
         if not self.store:
@@ -304,26 +648,30 @@ class ViewList(parser_view):
         return None
 
     def destroy(self):
+        """
+        Destroy the listmodel
+        """
         self.widget_tree.destroy()
         del self.screen
         del self.widget_tree
         del self.widget
 
     def __sig_switch(self, treeview, *args):
-        self.screen.row_activate(self.screen)
+        if not isinstance(self.screen.current_model, group_record):
+            self.screen.row_activate(self.screen)
 
     def __select_changed(self, tree_sel):
         if tree_sel.get_mode() == gtk.SELECTION_SINGLE:
             model, iter = tree_sel.get_selected()
             if iter:
                 path = model.get_path(iter)[0]
-                self.screen.current_model = model.models[path]
+                self.screen.current_model = model.on_get_iter(path)
         elif tree_sel.get_mode() == gtk.SELECTION_MULTIPLE:
             model, paths = tree_sel.get_selected_rows()
             if paths:
-                self.screen.current_model = model.models[paths[0][0]]
+                iter = model.on_get_iter(paths[0])
+                self.screen.current_model = iter
         self.update_children()
-
 
     def set_value(self):
         if self.widget_tree.editable:
@@ -331,15 +679,60 @@ class ViewList(parser_view):
 
     def reset(self):
         pass
-    #
-    # self.widget.set_model(self.store) could be removed if the store
-    # has not changed -> better ergonomy. To test
-    #
+
+    def set_column_to_default_pos(self, move_col = False, last_grouped_col = False):
+        if last_grouped_col:
+            prev_col = filter(lambda col: col.name == last_grouped_col, \
+                             self.widget_tree.get_columns())[0]
+            self.widget_tree.move_column_after(move_col and move_col[0], prev_col)
+        else:
+            for col in self.columns:
+                if col == self.columns[0]:prev_col = None
+                self.widget_tree.move_column_after(col, prev_col)
+                prev_col = col
+        for col in move_col:
+            self.changed_col.remove(col)
+
+    def move_colums(self):
+        if self.screen.context.get('group_by'):
+            groupby = self.screen.context['group_by']
+            # This is done to take the order of the columns
+            #as order in groupby list
+            group_col = []
+            for x in groupby:
+                group_col += [col for col in self.columns if col.name == x]
+                group_col = group_col + filter(lambda x:x.name not in groupby, self.columns)
+            for col in group_col:
+                if col.name in groupby:
+                    if not col in self.changed_col:
+                        if not len(self.changed_col):
+                            base_col = None
+                        else:
+                            base_col = self.changed_col[-1]
+                        self.changed_col.append(col)
+                        self.widget_tree.move_column_after(col, base_col)
+                else:
+                    if col in self.changed_col:
+                        self.set_column_to_default_pos([col], groupby[-1])
+        else:
+            if self.changed_col:
+                remove_col = copy.copy(self.changed_col)
+                self.set_column_to_default_pos(remove_col)
+
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
-            self.store = AdaptModelGroup(self.screen.models)
+            if self.screen.context.get('group_by'):
+                if self.screen.type == 'one2many':
+                    self.screen.domain = [('id','in',self.screen.ids_get())]
+                self.screen.models.models.clear()
+            self.move_colums()
+            self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain, self.screen.sort)
             if self.store:
                 self.widget_tree.set_model(self.store)
+        else:
+            self.store.invalidate_iters()
+        self.set_invisible_attr()
+        self.check_editable()
         self.reload = False
         if not self.screen.current_model:
             #
@@ -354,10 +747,21 @@ class ViewList(parser_view):
         ids = self.sel_ids_get()
         for c in self.children:
             value = 0.0
-            for model in self.screen.models.models:
-                if model.id in ids or not ids:
-                    value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
-            label_str = tools.locale_format('%.' + str(self.children[c][3]) + 'f', value)
+            cal_model = self.screen.models.models
+            if not cal_model:
+                cal_model = self.store.models.lst
+            length = len(cal_model)
+            if ids:
+                length = len(ids)
+            for model in cal_model:
+                if model.id in ids or model in ids or not ids:
+                    if isinstance(model, group_record):
+                        value += float(model[self.children[c][0]].get() or 0.0)
+                    else:
+                        value += float(model.fields_get()[self.children[c][0]].get(model, check_load=False) or 0.0)
+            if self.children[c][5] == 'avg' and length:
+                value = value/length
+            label_str = user_locale_format.format('%.' + str(self.children[c][3]) + 'f', value)
             if self.children[c][4]:
                 self.children[c][2].set_markup('<b>%s</b>' % label_str)
             else:
@@ -373,8 +777,18 @@ class ViewList(parser_view):
     def sel_ids_get(self):
         def _func_sel_get(store, path, iter, ids):
             model = store.on_get_iter(path)
-            if model.id:
-                ids.append(model.id)
+            if isinstance(model, group_record):
+                def process(parent):
+                    for child in parent.children.lst:
+                        if store.on_iter_has_child(child):
+                            process(child)
+                        else:
+                            if child.id:
+                                ids.append(child.id)
+                process(model)
+            else:
+                if model.id:
+                    ids.append(model.id)
         ids = []
         sel = self.widget_tree.get_selection()
         if sel:
@@ -393,15 +807,122 @@ class ViewList(parser_view):
         self.set_value()
         self.screen.on_change(callback)
 
+    def expand_row(self, path, open_all = False):
+        self.widget_tree.expand_row(path, open_all)
+
+    def collapse_row(self, path):
+        self.widget_tree.collapse_row(path)
+
+    def get_expanded_rows(self, treeview, path):
+        if self.widget_tree.row_expanded(path):
+            self.expandedRows.append(path)
+
     def unset_editable(self):
-        self.widget_tree.editable = False
+        self.set_editable(False)
+
+    def check_editable(self):
+        if self.screen.context.get('group_by'):
+            if self.widget_tree.editable: # Treeview is editable in groupby unset editable
+                self.set_editable(False)
+        elif self.is_editable or self.screen.context.get('set_editable',False):#Treeview editable by default or set_editable in context
+            self.set_editable(self.is_editable or "bottom")
+        else:
+            self.set_editable(False)
+
+    def set_editable(self, value=True):
+        from tree_gtk.parser import send_keys
+        from tree_gtk import date_renderer
+        self.widget_tree.editable = value
         for col in self.widget_tree.get_columns():
             for renderer in col.get_cell_renderers():
                 if isinstance(renderer, gtk.CellRendererToggle):
-                    renderer.set_property('activatable', False)
-                elif not isinstance(renderer, gtk.CellRendererProgress):
-                    renderer.set_property('editable', False)
+                    renderer.set_property('activatable', value)
+                elif not isinstance(renderer, gtk.CellRendererProgress) and not isinstance(renderer, gtk.CellRendererPixbuf):
+                    old_value = renderer.get_property('editable')
+                    renderer.set_property('editable', value and old_value)
+                if value in ('top','bottom'):
+                    if col in self.widget_tree.handlers:
+                        if self.widget_tree.handlers[col]:
+                            renderer.disconnect(self.widget_tree.handlers[col])
+                    self.widget_tree.handlers[col] = renderer.connect_after('editing-started', send_keys, self.widget_tree)
 
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    def set_invisible_attr(self):
+        for col in self.widget_tree.get_columns():
+            if col._type == 'datetime':
+                col.set_max_width(145)
+                if self.screen.context.get('group_by'):
+                    col.set_max_width(180)
+            value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
+                           {'context':self.screen.context})
+            if col.name in self.screen.context.get('group_by',[]):
+                value = False
+            col.set_visible(not value)
+
+    def get_id(self, path):
+        return self.store.on_get_iter(path).value
+
+    def get_path(self, values):
+        self.num_op = 0
+        model = self.store
+        root = model.on_get_iter((0,))
+        return self.compute_level([root],values,[[0]], [])
+
+    def compute_level(self, first_nodes, values, path_list, final_path):
+        """
+            @param first_nodes : List of first child of every parent node
+            @param path_list : list of path of first child
+
+        """
+        assert len(path_list) == len(first_nodes)
+        visited_node = Queue.Queue()
+        q = Queue.Queue()
+        for i in xrange(0, len(first_nodes)):
+            path = path_list[i]
+            node = first_nodes[i]
+            self.add_next(node, q, path)
+
+        res = self.process_queue(q, values, visited_node, final_path)
+        if(res):
+            return res
+
+
+        (nodes_list, new_path_list) = self.add_first_child(visited_node)
+        return self.compute_level(nodes_list, values, new_path_list, final_path)
+
+    def add_first_child(self, visited_node):
+        nodes_list = []
+        paths_list = []
+        while(not visited_node.empty()):
+            (node, path) = visited_node.get()
+            if self.store.on_iter_has_child(node):
+                path.append(0)
+                nodes_list.append(self.store.on_iter_children(node))
+                paths_list.append(list(path))
+
+        return (nodes_list, paths_list)
+
+    def add_next(self, node, q, path):
+        q.put((node, list(path)))
+        next = self.store.on_iter_next(node)
+        if(next):
+            path.append(path.pop() + 1) #We add 1 to the last level of the path
+            self.add_next(next, q, list(path))
+
+    def process_queue(self, q, value, visited_nodes, final_path):
+        while(not q.empty()):
+            (node, path) = q.get()
+            res = self.compute_node(node, value, path, final_path)
+            if(res):
+                return res
+            visited_nodes.put((node, list(path)))
+
+    def compute_node(self, node, values, path, final_path):
+        for v in values:
+            if(node.value == v):
+                values.remove(v)
+                final_path.append(tuple(path))
+
+        if len(values) < 1:
+            return final_path
 

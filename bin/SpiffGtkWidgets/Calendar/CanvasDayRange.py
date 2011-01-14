@@ -1,17 +1,21 @@
-# Copyright (C) 2008 Samuel Abels <http://debain.org>
+# -*- coding: utf-8 -*-
+##############################################################################
+# Copyright (C) 2008-2011 Samuel Abels
 #
 # This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License version 2, as
-# published by the Free Software Foundation.
+# it under the terms of the GNU Affero General Public License
+# version 3 as published by the Free Software Foundation.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# along with this program. If not, see <http://www.gnu.org/licenses/>
+#
+##############################################################################
+
 import hippo
 import gobject
 import math
@@ -108,14 +112,14 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
     def _get_event_view(self, row, start, end, horizontal):
         if horizontal:
-            if self.hevent_views.has_key(row):
+            if row in self.hevent_views:
                 view = self.hevent_views[row]
                 view.set_range(start, end)
                 return view
             view = CanvasHEventView(self.cal, start, end)
             self.hevent_views[row] = view
         else:
-            if self.vevent_views.has_key(row):
+            if row in self.vevent_views:
                 view = self.vevent_views[row]
                 view.set_range(start, end)
                 return view
@@ -129,7 +133,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
 
     def _remove_vevent_view(self, cell):
-        if not self.vevent_views.has_key(cell):
+        if not cell in self.vevent_views:
             return
         view = self.vevent_views[cell]
         self.gridbox.remove(view)
@@ -138,7 +142,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
 
     def _remove_hevent_view(self, cell):
-        if not self.hevent_views.has_key(cell):
+        if not cell in self.hevent_views:
             return
         view = self.hevent_views[cell]
         self.gridbox.remove(view)
@@ -252,7 +256,10 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
             # the 18 number is for the size of the scrollbar on the right
             # (don't know how to get it)
-            cell_x_off = math.ceil((float(cell_x_off)) * (width - grid_x - 18) / grid_w)
+            try:
+                cell_x_off = math.ceil((float(cell_x_off)) * (width - grid_x - 18) / grid_w)
+            except:
+                pass
 
             cell_w,      cell_h      = cell.get_allocation()
             x                        = int(grid_x + cell_x_off)
@@ -304,7 +311,7 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
                                 box_height = alloc[3])
 
 
-    def do_allocate(self, width, height, origin_changed): 
+    def do_allocate(self, width, height, origin_changed):
         days           = (self.range[1] - self.range[0]).days + 1
         rows           = int(math.ceil(float(days) / 7.0))
         cols           = days
@@ -337,8 +344,8 @@ class CanvasDayRange(CanvasTable, hippo.CanvasItem):
 
 
     def on_grid_paint(self, grid, ptr, rect):
-        # catching this signal is ugly, but trying to do this  
-        # in do_allocate() will result in painful to avoid event 
+        # catching this signal is ugly, but trying to do this
+        # in do_allocate() will result in painful to avoid event
         # loops.
         days = (self.range[1] - self.range[0]).days + 1
         rows = int(math.ceil(float(days) / 7.0))

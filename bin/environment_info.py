@@ -1,3 +1,24 @@
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+
 import os
 import sys
 import platform
@@ -6,6 +27,8 @@ import optparse
 import xmlrpclib
 import release
 import tools
+import logging
+
 class environment(object):
     def __init__(self, login, password, dbname, host='localhost', port=8069):
         self.login = login
@@ -13,18 +36,19 @@ class environment(object):
         self.db = dbname
         self.host = host
         self.port = port
+        self.log = logging.getLogger('environment')
 
     def get_with_server_info(self):
         try:
             login_socket = xmlrpclib.ServerProxy('http://%s:%s/xmlrpc/common' % (self.host, self.port))
             self.uid = login_socket.login(self.db, self.login, self.passwd)
             if self.uid:
-                print login_socket.get_server_environment() + self.get_client_info()
+                self.log.info(login_socket.get_server_environment() + self.get_client_info())
                 login_socket.logout(self.db, self.login, self.passwd)
             else:
-                print "bad login or password from "+self.login+" using database "+self.db
-        except Exception,e:
-                print e
+                self.log.info("bad login or password from "+self.login+" using database "+self.db)
+        except Exception, e:
+                self.log.exception(e)
         return True
 
     def get_client_info(self):
@@ -52,9 +76,8 @@ Examples:
 """
 
     parser = optparse.OptionParser(uses)
-
-    parser.add_option("-l", "--login", dest="login", help="Login of the user in Open ERP")
-    parser.add_option("-p", "--password", dest="password", help="Password of the user in Open ERP")
+    parser.add_option("-l", "--login", dest="login", help="Login of the user in OpenERP")
+    parser.add_option("-p", "--password", dest="password", help="Password of the user in OpenERP")
     parser.add_option("-d", "--database", dest="dbname", help="Database name")
     parser.add_option("-P", "--port", dest="port", help="Port",default=8069)
     parser.add_option("-H", "--host", dest="host", help="Host",default='localhost')
@@ -86,9 +109,8 @@ Examples:
                     %(platform.release(), platform.version(), platform.architecture()[0],
                       os_lang, platform.python_version())
 
-        print environment + client_info
-        print '\nFor server Information you need to pass database(-d), login(-l),password(-p)'
+        parser.log.info(environment + client_info)
+        parser.log.info('\nFor server Information you need to pass database(-d), login(-l),password(-p)')
         sys.exit(1)
-
     else:
         parser.get_with_server_info()

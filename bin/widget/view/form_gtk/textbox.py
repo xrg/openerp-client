@@ -1,22 +1,21 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
 #
 ##############################################################################
 
@@ -24,6 +23,9 @@ import gtk
 
 import interface
 import locale
+import options
+
+
 class textbox(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
@@ -35,16 +37,17 @@ class textbox(interface.widget_interface):
 
         self.tv = gtk.TextView()
         self.tv.set_wrap_mode(gtk.WRAP_WORD)
-        self.tv.connect('button_press_event', self._menu_open)
+        self.tv.connect('populate-popup', self._menu_open)
         self.tv.set_accepts_tab(False)
         self.tv.connect('focus-out-event', lambda x,y: self._focus_out())
         if not attrs.get('readonly'):
-            try:
-                import gtkspell
-                gtkspell.Spell(self.tv).set_language(locale.getlocale()[0])
-            except:
-                # No word list may not be found for the language
-                pass
+            if options.options['client.form_text_spellcheck']:
+                try:
+                    import gtkspell
+                    gtkspell.Spell(self.tv).set_language(locale.getlocale()[0])
+                except:
+                    # No word list may not be found for the language
+                    pass
         self.widget.add(self.tv)
         self.widget.show_all()
 
@@ -56,6 +59,9 @@ class textbox(interface.widget_interface):
 
     def _color_widget(self):
         return self.tv
+    
+    def grab_focus(self):
+        return self.tv.grab_focus()    
 
     def set_value(self, model, model_field):
         buffer = self.tv.get_buffer()

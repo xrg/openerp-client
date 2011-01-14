@@ -1,21 +1,20 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -40,14 +39,13 @@ import service
 
 
 class dialog(object):
-    def __init__(self, model, id=None, attrs=None ,domain=None, context=None, window=None, view_ids=None,target=False,view_type=['form']):
+    def __init__(self, model, id=None, attrs=None ,domain=None, context=None, window=None, view_ids=None, target=False,view_type=['form'], help={}):
         if attrs is None:
             attrs = {}
         if domain is None:
             domain = []
         if context is None:
             context = {}
-
         if not window:
             window = service.LocalService('gui.main').window
 
@@ -78,7 +76,7 @@ class dialog(object):
         vp = gtk.Viewport()
         vp.set_shadow_type(gtk.SHADOW_NONE)
         scroll.add(vp)
-        self.screen = Screen(model, view_ids=view_ids, domain=domain, context=context, window=self.dia, view_type=view_type)
+        self.screen = Screen(model, view_ids=view_ids, domain=domain, context=context, window=self.dia, view_type=view_type, help=help)
         if id:
             self.screen.load([id])
         else:
@@ -90,12 +88,16 @@ class dialog(object):
             self.dia.set_title(self.dia.get_title() + ' - ' + self.screen.current_view.title)
         vp.add(self.screen.widget)
 
-        x,y = self.screen.screen_container.size_get()
-        width, height = window.get_size()
-        if not target:
-            vp.set_size_request(min(width - 20, x + 20),min(height - 60, y + 25))
+        width, height = self.screen.screen_container.size_get()
+        window_width, window_height = window.get_size()
+        dia_width, dia_height = self.dia.get_size()
+
+        widget_width = min(window_width - 20, max(dia_width, width + 30))
+        if target:
+            widget_height = min(window_height - 60, height + 10)
         else:
-            vp.set_size_request(x,y)
+            widget_height = min(window_height - 60, height + 20)
+        vp.set_size_request(widget_width, widget_height)
         self.dia.show_all()
         self.screen.display()
 
@@ -103,11 +105,12 @@ class dialog(object):
         while True:
             try:
                 res = self.dia.run()
-                if res==gtk.RESPONSE_OK:
+                if res == gtk.RESPONSE_OK:
                     if self.screen.current_model.validate() and self.screen.save_current():
                         return (True, self.screen.current_model.name_get())
                     else:
                         self.screen.display()
+                        self.screen.current_view.set_cursor()
                 else:
                     break
             except Exception,e:
@@ -118,6 +121,7 @@ class dialog(object):
     def destroy(self):
         self.window.present()
         self.dia.destroy()
+        self.screen.destroy()
 
 class Button(gtk.Button):
     def __init__(self, stock_id, callback, tooltips_string):
@@ -130,6 +134,7 @@ class Button(gtk.Button):
         self.connect('clicked', callback)
         self.set_alignment(0.5, 0.5)
         self.set_property('can-focus', False)
+
         self.set_tooltip_text(tooltips_string)
 
 class many2one(interface.widget_interface):
@@ -144,16 +149,20 @@ class many2one(interface.widget_interface):
         self.wid_text = gtk.Entry()
         self.wid_text.set_property('width-chars', 13)
         self.wid_text.connect('key_press_event', self.sig_key_press)
-        self.wid_text.connect('button_press_event', self._menu_open)
+        self.wid_text.connect('populate-popup', self._menu_open)
         self.wid_text.connect_after('changed', self.sig_changed)
         self.wid_text.connect_after('activate', self.sig_activate)
         self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
         self.but_open = Button('gtk-open', self.sig_edit, _('Open this resource'))
+        self.but_open.set_size_request(30,30)
+        self.but_open.set_relief(gtk.RELIEF_NONE)
         self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
 
         self.but_find = Button('gtk-find', self.sig_find, _('Search a resource'))
+        self.but_find.set_size_request(30,30)
+        self.but_find.set_relief(gtk.RELIEF_NONE)
         self.widget.pack_start(self.but_find, padding=2, expand=False, fill=False)
 
         self.value_on_field = ''
@@ -164,11 +173,14 @@ class many2one(interface.widget_interface):
         self._menu_entries.append((None, None, None))
         self._menu_entries.append((_('Action'), lambda x: self.click_and_action('client_action_multi'),0))
         self._menu_entries.append((_('Report'), lambda x: self.click_and_action('client_print_multi'),0))
-
+        self.enter_pressed = False
         if attrs.get('completion',False):
             ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', '', [], 'ilike', {})
             if ids:
                 self.load_completion(ids,attrs)
+
+    def grab_focus(self):
+        return self.wid_text.grab_focus()
 
     def load_completion(self,ids,attrs):
         self.completion = gtk.EntryCompletion()
@@ -218,7 +230,8 @@ class many2one(interface.widget_interface):
     def _readonly_set(self, value):
         self._readonly = value
         self.wid_text.set_editable(not value)
-        #self.but_new.set_sensitive(not value)
+        self.wid_text.set_sensitive(not value)
+        self.but_find.set_sensitive(not value)
 
     def _color_widget(self):
         return self.wid_text
@@ -236,13 +249,11 @@ class many2one(interface.widget_interface):
             domain = self._view.modelfield.domain_get(self._view.model)
             context = self._view.modelfield.context_get(self._view.model)
             self.wid_text.grab_focus()
-
             name_search = self.wid_text.get_text() or ''
             if name_search == self.value_on_field:
                 name_search = ''
-                
             ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', name_search, domain, 'ilike', context)
-            if (len(ids)==1) and leave:
+            if (len(ids)==1) and leave and event:
                 self._view.modelfield.set_client(self._view.model, ids[0],
                         force_change=True)
                 self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
@@ -282,7 +293,8 @@ class many2one(interface.widget_interface):
             self.sig_find(widget, event, leave=True)
 
     def sig_activate(self, widget, event=None, leave=False):
-        self.sig_find(widget, event, leave=True)
+        event = self.enter_pressed and True or event
+        return self.sig_find(widget, event, leave=True)
 
     def sig_new(self, *args):
         self.wid_text.disconnect(self.wid_text_focus_out_id)
@@ -297,6 +309,7 @@ class many2one(interface.widget_interface):
         self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
 
     def sig_key_press(self, widget, event, *args):
+        self.enter_pressed = False
         if event.keyval==gtk.keysyms.F1:
             self.sig_new(widget, event)
         elif event.keyval==gtk.keysyms.F2:
@@ -307,8 +320,10 @@ class many2one(interface.widget_interface):
             if self._view.modelfield.get(self._view.model) or \
                     not self.wid_text.get_text():
                 return False
-            self.sig_activate(widget, event, leave=True)
-            return True
+            return not self.sig_activate(widget, event, leave=True)
+        elif event.keyval in (gtk.keysyms.KP_Enter,gtk.keysyms.Return):
+            if self.wid_text.get_text():
+                self.enter_pressed = True
         return False
 
     def sig_changed(self, *args):
@@ -335,32 +350,33 @@ class many2one(interface.widget_interface):
         self.but_open.set_sensitive(bool(res))
         self.ok=True
 
-    def _menu_open(self, obj, event):
-        if event.button == 3:
-            value = self._view.modelfield.get(self._view.model)
-            if not self._menu_loaded:
-                resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.model_type, False)], False, rpc.session.context)
-                resrelate = map(lambda x:x[2], resrelate)
+    def _menu_open(self, obj, menu):
+        value = self._view.modelfield.get(self._view.model)
+        if not self._menu_loaded:
+            resrelate = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.values', 'get', 'action', 'client_action_relate', [(self.model_type, False)], False, rpc.session.context)
+            resrelate = map(lambda x:x[2], resrelate)
+            if resrelate:
                 self._menu_entries.append((None, None, None))
-                for x in resrelate:
-                    x['string'] = x['name']
-                    f = lambda action: lambda x: self.click_and_relate(action)
-                    self._menu_entries.append(('... '+x['name'], f(x), 0))
-            self._menu_loaded = True
-
-            menu = gtk.Menu()
-            for stock_id,callback,sensitivity in self._menu_entries:
-                if stock_id:
-                    item = gtk.ImageMenuItem(stock_id)
-                    if callback:
-                        item.connect("activate",callback)
-                    item.set_sensitive(bool(sensitivity or value))
-                else:
-                    item=gtk.SeparatorMenuItem()
-                item.show()
-                menu.append(item)
-            menu.popup(None,None,None,event.button,event.time)
-            return True
+            for x in resrelate:
+                x['string'] = x['name']
+                f = lambda action: lambda x: self.click_and_relate(action)
+                self._menu_entries.append(('... '+x['name'], f(x), 0))
+        self._menu_loaded = True
+        item=gtk.SeparatorMenuItem()
+        item.show()
+        menu.attach(item,0,1,4,5)
+        i=5
+        for stock_id,callback,sensitivity in self._menu_entries:
+            if stock_id:
+                item = gtk.ImageMenuItem(stock_id)
+                if callback:
+                    item.connect("activate",callback)
+                item.set_sensitive(bool(sensitivity or value))
+            else:
+                item=gtk.SeparatorMenuItem()
+            item.show()
+            menu.attach(item,0,1,i,i+1)
+            i= i+1
         return False
 
     def click_and_relate(self, action):
