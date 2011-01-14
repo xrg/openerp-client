@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -200,7 +200,7 @@ class ViewCalendar(object):
 
                 if isinstance(key, (tuple, list)):
                     value, name = key
-                    key = value
+                    key = tuple(key)
 
                 self.colors[key] = (name, value, None)
 
@@ -225,12 +225,15 @@ class ViewCalendar(object):
 
     def refresh(self):
         t = self.date.tuple()
+        from tools import ustr
+        from locale import getlocale
+        sysencoding = getlocale()[1]
         if self.mode=='month':
             self._radio_month.set_active(True)
             d1 = datetime(*list(t)[:6])
             self.cal_view.range = self.cal_view.RANGE_MONTH
             self.cal_view.selected = date(*list(t)[:3])
-            self._label_current.set_text(self.date.strftime('%B %Y'))
+            self._label_current.set_text(ustr(self.date.strftime('%B %Y'), sysencoding))
         elif self.mode=='week':
             self._radio_week.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_WEEK
@@ -244,7 +247,7 @@ class ViewCalendar(object):
             d2 = datetime(*(list(t)[:3] + [23, 59, 59]))
             self.cal_view.visible_range = d1, d2
             self.cal_view.active_range = d1, d2
-            self._label_current.set_text(self.date.strftime('%A %x'))
+            self._label_current.set_text(ustr(self.date.strftime('%A %x'), sysencoding))
 
         self._small_calendar.select_month(t[1]-1,t[0])
         self._small_calendar.select_day(t[2])
@@ -318,7 +321,7 @@ class ViewCalendar(object):
         if starts and ends:
 
             n = 0
-            h = ends
+            h = ends or 1
 
             if ends == self.day_length: span = 1
 
@@ -354,17 +357,16 @@ class ViewCalendar(object):
         
         if not starts:
             return None
-
-        color_key = event.get(self.color_field)[0]
+        
+        color_key = event.get(self.color_field)
+        if isinstance(color_key, list):
+            color_key = tuple(color_key)
         color_info = self.colors.get(color_key)
 
-        color = None
-        if color_info:
-            color = color_info[2]
+        color = color_info and color_info[2] or 'black'
 
         description = ', '.join(description).strip()
         all_day = span > 0
-        
         return TinyEvent(model=model,
                          caption=caption.strip(),
                          start=datetime(*starts[:7]), 

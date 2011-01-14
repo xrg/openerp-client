@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -54,7 +54,6 @@ class wid_binary(interface.widget_interface):
         class binButton(gtk.Button):
             def __init__(self, stock, title, long=True):
                 assert stock is not None
-                assert stock is not None
                 super(binButton, self).__init__()
                 
                 box = gtk.HBox()
@@ -70,7 +69,8 @@ class wid_binary(interface.widget_interface):
                     box.pack_end(label, expand=False, fill=False)
                 else:
                     self.set_relief(gtk.RELIEF_NONE)
-                    self.set_property('tooltip-text', title)
+                    if gtk.pygtk_version >= (2, 12, 0):
+                        self.set_property('tooltip-text', title)
 
                 self.add(box)
 

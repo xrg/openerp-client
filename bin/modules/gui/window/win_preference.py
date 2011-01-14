@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -70,10 +70,16 @@ class win_preference(object):
         self.win.show_all()
 
     def run(self, datas={}):
+        lang = rpc.session.context.get('lang', 'en_US')
         res = self.win.run()
         if res==gtk.RESPONSE_OK:
             rpc.session.rpc_exec_auth('/object', 'execute', 'res.users', 'write', [rpc.session.uid], self.screen.get())
             rpc.session.context_reload()
+            new_lang = rpc.session.context.get('lang', 'en_US')
+            if lang != new_lang:
+                common.message(_("The default language of the interface has been modified, do not forget to restart " \
+                                 "the client to have the interface in your language"),
+                               _("Default language modified !"), parent=self.win)
         self.parent.present()
         self.win.destroy()
         return True

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@
 import gtk
 from gtk import glade
 import gobject
+from cgi import escape
 
 import gettext
 
@@ -147,63 +148,87 @@ def upload_data(email, data, type='SURVEY', supportid=''):
 def terp_survey():
     if options['survey.position']==SURVEY_VERSION:
         return False
-    import pickle
+
+    def color_set(widget, name):
+        colour = widget.get_colormap().alloc_color(common.colors.get(name,'white'))
+        widget.modify_bg(gtk.STATE_ACTIVE, colour)
+        widget.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
+        widget.modify_base(gtk.STATE_NORMAL, colour)
+        widget.modify_text(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
+        widget.modify_text(gtk.STATE_INSENSITIVE, gtk.gdk.color_parse("black"))
+
     widnames = ('country','role','industry','employee','hear','system','opensource')
-    winglade = glade.XML(common.terp_path("openerp.glade"), "dia_survey", gettext.textdomain())
+    winglade = glade.XML(common.terp_path("dia_survey.glade"), "dia_survey", gettext.textdomain())
     win = winglade.get_widget('dia_survey')
     parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
     win.set_icon(OPENERP_ICON)
     for widname in widnames:
         wid = winglade.get_widget('combo_'+widname)
-        wid.child.set_text('(choose one)')
         wid.child.set_editable(False)
-    res = win.run()
-    if res==gtk.RESPONSE_OK:
-        email =  winglade.get_widget('entry_email').get_text()
-        company =  winglade.get_widget('entry_company').get_text()
-        phone = winglade.get_widget('entry_phone').get_text()
-        name = winglade.get_widget('entry_name').get_text()
-        result = "\ncompany: "+str(company)
-        result += "\nname: " + str(name)
-        result += "\nphone: " + str(phone)
-        for widname in widnames:
-            wid = winglade.get_widget('combo_'+widname)
-            result += "\n"+widname+": "+wid.child.get_text()
-        result += "\nplan_use: "+str(winglade.get_widget('check_use').get_active())
-        result += "\nplan_sell: "+str(winglade.get_widget('check_sell').get_active())
-        result += "\nwant_demo: " + str(winglade.get_widget('check_button_demo').get_active())
 
-        buffer = winglade.get_widget('textview_comment').get_buffer()
-        iter_start = buffer.get_start_iter()
-        iter_end = buffer.get_end_iter()
-        result += "\nnote: "+buffer.get_text(iter_start,iter_end,False)
-        parent.present()
-        win.destroy()
-        upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
-        options['survey.position']=SURVEY_VERSION
-        options.save()
-        common.message(_('Thank you for the feedback !\n\
+    email_widget = winglade.get_widget('entry_email')
+    want_ebook_widget = winglade.get_widget('check_button_ebook')
+    
+    def toggled_cb(togglebutton, *args):
+        value = togglebutton.get_active()
+        color_set(email_widget, ('normal', 'required')[value])
+
+    want_ebook_widget.connect('toggled', toggled_cb)
+
+    while True:
+        res = win.run()
+        if res == gtk.RESPONSE_OK:
+            email = email_widget.get_text()
+            want_ebook = want_ebook_widget.get_active()
+            if want_ebook and not len(email):
+                color_set(email_widget, 'invalid')
+            else:
+                company =  winglade.get_widget('entry_company').get_text()
+                phone = winglade.get_widget('entry_phone').get_text()
+                name = winglade.get_widget('entry_name').get_text()
+                city = winglade.get_widget('entry_city').get_text()
+                result = "\ncompany: "+str(company)
+                result += "\nname: " + str(name)
+                result += "\nphone: " + str(phone)
+                result += "\ncity: " + str(city)
+                for widname in widnames:
+                    wid = winglade.get_widget('combo_'+widname)
+                    result += "\n" + widname + ": " + wid.child.get_text()
+                result += "\nplan_use: " + str(winglade.get_widget('check_use').get_active())
+                result += "\nplan_sell: " + str(winglade.get_widget('check_sell').get_active())
+                result += "\nwant_ebook: " + str(want_ebook)
+
+                buffer = winglade.get_widget('textview_comment').get_buffer()
+                iter_start = buffer.get_start_iter()
+                iter_end = buffer.get_end_iter()
+                result += "\nnote: " + buffer.get_text(iter_start, iter_end, False)
+                upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
+                options['survey.position']=SURVEY_VERSION
+                options.save()
+                common.message(_('Thank you for the feedback !\n\
 Your comments have been sent to OpenERP.\n\
 You should now start by creating a new database or\n\
 connecting to an existing server through the "File" menu.'))
-    else:
-        parent.present()
-        win.destroy()
-        common.message(_('Thank you for testing OpenERP !\n\
+                parent.present()
+                win.destroy()
+                break
+        elif res == gtk.RESPONSE_CANCEL:
+            parent.present()
+            win.destroy()
+            common.message(_('Thank you for testing OpenERP !\n\
 You should now start by creating a new database or\n\
 connecting to an existing server through the "File" menu.'))
+            break
+
     return True
 
-
-def file_selection(title, filename='', parent=None,
-        action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True, multi=False, filters=None):
+def file_selection(title, filename='', parent=None, action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True, multi=False, filters=None):
     if action == gtk.FILE_CHOOSER_ACTION_OPEN:
-        buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-            gtk.STOCK_OPEN,gtk.RESPONSE_OK)
+        buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK)
     else:
-        buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-            gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+        buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+
     win = gtk.FileChooserDialog(title, None, action, buttons)
     if not parent:
         parent = service.LocalService('gui.main').window
@@ -262,7 +287,6 @@ def file_selection(title, filename='', parent=None,
         return filenames
 
 def support(*args):
-    import pickle
     wid_list = ['email_entry','id_entry','name_entry','phone_entry','company_entry','error_details','explanation_textview','remark_textview']
     required_wid = ['email_entry', 'name_entry', 'company_name', 'id_entry']
     support_id = options['support.support_id']
@@ -388,10 +412,10 @@ is displayed on the second tab.
     win.set_icon(OPENERP_ICON)
     win.set_title("Open ERP - %s" % title)
 
-    xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % message)
+    xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % escape(message))
 
     details_buffer = gtk.TextBuffer()
-    details_buffer.set_text(unicode(details,'latin1').encode('utf-8'))
+    details_buffer.set_text(details)
     xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
 
     if show_message:

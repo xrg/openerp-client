@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -42,7 +42,6 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
         if hasattr(modelfield, 'editabletree_entry'):
             del modelfield.editabletree_entry
         cell = self.cells[fieldname]
-
         # The value has not changed ... do nothing.
         if value == cell.get_textual_value(current_model):
             return
@@ -232,7 +231,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
                 entry.set_active_text(newval)
             entry.editing_done_id = entry.connect('editing_done', self.on_editing_done)
             self.set_cursor(path, column, True)
-            return False
+            return True
         else:
             modelfield = model[column.name]
             if isinstance(entry, gtk.Entry):

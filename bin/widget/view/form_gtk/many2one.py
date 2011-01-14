@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -95,7 +95,7 @@ class dialog(object):
         if not target:
             vp.set_size_request(min(width - 20, x + 20),min(height - 60, y + 25))
         else:
-            vp.set_size_request(x + 20,y + 25)
+            vp.set_size_request(x,y)
         self.dia.show_all()
         self.screen.display()
 
@@ -115,11 +115,27 @@ class dialog(object):
         self.window.present()
         self.dia.destroy()
 
+class Button(gtk.Button):
+    def __init__(self, stock_id, callback, tooltips_string):
+        super(Button, self).__init__()
+        img = gtk.Image()
+        img.set_from_stock(stock_id, gtk.ICON_SIZE_BUTTON)
+
+        self.set_image(img)
+        self.set_relief(gtk.RELIEF_NONE)
+        self.connect('clicked', callback)
+        self.set_alignment(0.5, 0.5)
+        self.set_property('can-focus', False)
+
+        tooltips = gtk.Tooltips()
+        tooltips.set_tip(self, tooltips_string)
+        tooltips.enable()
+
 class many2one(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-        self.widget = gtk.HBox(spacing=3)
+        self.widget = gtk.HBox(spacing=0)
         self.widget.set_property('sensitive', True)
         self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
         self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
@@ -133,34 +149,10 @@ class many2one(interface.widget_interface):
         self.wid_text_focus_out_id = self.wid_text.connect_after('focus-out-event', self.sig_focus_out, True)
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
-        self.but_find = gtk.Button()
-        img_find = gtk.Image()
-        img_find.set_from_stock('gtk-find',gtk.ICON_SIZE_BUTTON)
-        self.but_find.set_image(img_find)
-        self.but_find.set_relief(gtk.RELIEF_NONE)
-        self.but_find.connect('clicked', self.sig_find)
-        self.but_find.set_alignment(0.5, 0.5)
-        self.but_find.set_property('can-focus', False)
-
-        self.tooltips = gtk.Tooltips()
-        self.tooltips.set_tip(self.but_find, _('Open this resource'))
-        self.tooltips.enable()
-
-
-        self.but_open = gtk.Button()
-        img_open = gtk.Image()
-        img_open.set_from_stock('gtk-open',gtk.ICON_SIZE_BUTTON)
-        self.but_open.set_image(img_open)
-        self.but_open.set_relief(gtk.RELIEF_NONE)
-        self.but_open.connect('clicked', self.sig_edit)
-        self.but_open.set_alignment(0.5, 0.5)
-        self.but_open.set_property('can-focus', False)
-
-        self.tooltips = gtk.Tooltips()
-        self.tooltips.set_tip(self.but_find, _('Search a resource'))
-        self.tooltips.enable()
-
+        self.but_open = Button('gtk-open', self.sig_edit, _('Open this resource'))
         self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)
+
+        self.but_find = Button('gtk-find', self.sig_find, _('Search a resource'))
         self.widget.pack_start(self.but_find, padding=2, expand=False, fill=False)
 
         self.ok = True

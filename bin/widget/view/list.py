@@ -2,8 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    Copyright (c) 2004-2008 B2CK, Bertrand Chenal, Cedric Krier (D&D in lists)
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (c) 2004-2009 B2CK, Bertrand Chenal, Cedric Krier (D&D in lists)
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@
 
 import gobject
 import gtk
+import tools
 
 import rpc
 import service
@@ -357,7 +358,7 @@ class ViewList(parser_view):
             for model in self.screen.models.models:
                 if model.id in ids or not ids:
                     value += model.fields_get()[self.children[c][0]].get(model, check_load=False)
-            label_str = locale.format('%.' + str(self.children[c][3]) + 'f', value, True)
+            label_str = tools.locale_format('%.' + str(self.children[c][3]) + 'f', value)
             if self.children[c][4]:
                 self.children[c][2].set_markup('<b>%s</b>' % label_str)
             else:

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -78,13 +78,13 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             self.stop_emission('insert-text')
             return
 
-        pos = self.get_position()
+        text = self.get_text()
+        pos = text != self.initial_value and self.get_position() or 0
+
         if length != 1:
             # TODO: Implement paste
             self.stop_emission('insert-text')
             return
-
-        text = self.get_text()
 
         text = text[:pos] + value + text[pos + 1:]
         if self.regex.match(text):
@@ -173,9 +173,6 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
                 self.mode_cmd = False
                 if self.callback_process: self.callback_process(False, self, event)
                 self.stop_emission("key-press-event")
-                # The following code is written to forcefully lose the focus(for onchange effect on this widget)
-                self.set_sensitive(False)
-                self.set_sensitive(True)                
                 return True
         elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus, 
                               gtk.keysyms.KP_Subtract, gtk.keysyms.minus, 

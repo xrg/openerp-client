@@ -3,7 +3,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,8 @@
 ##############################################################################
 
 name = 'openerp-client'
-version = '5.0.0_rc3'
+version = '5.0.0'
+release = '1'
 description = 'OpenERP Client'
 long_desc = '''\
 OpenERP is a complete ERP and CRM. The main features are accounting (analytic

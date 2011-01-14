@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -349,8 +349,8 @@ class O2MField(CharField):
                 result.append((1,model2.id, model2.get(check_load=check_load, get_readonly=readonly)))
             else:
                 result.append((0,0, model2.get(check_load=check_load, get_readonly=readonly)))
-        for id in model.value[self.name].model_removed:
-            result.append((2,id, False))
+        for model2 in model.value[self.name].models_removed:
+            result.append((2, model2.id, False))
         return result
 
     def set(self, model, value, test_state=False, modified=False):

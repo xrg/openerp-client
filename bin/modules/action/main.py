@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,14 +20,14 @@
 #
 ##############################################################################
 
-import os, time, base64, datetime
-
+import os
+import time
+import base64
+import datetime
 import service
 import rpc
-
 import wizard
 import printer
-
 import common
 import tools
 from widget.view.form_gtk.many2one import dialog

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -28,7 +28,8 @@ import common
 
 import rpc
 
-import csv, StringIO
+import csv
+import cStringIO
 
 import options
 import service
@@ -39,28 +40,37 @@ import service
 def import_csv(csv_data, f, model, fields):
     fname = csv_data['fname']
     content = file(fname,'rb').read()
-    input=StringIO.StringIO(content)
-    data = list(csv.reader(input, quotechar=csv_data['del'],
-        delimiter=csv_data['sep']))[int(csv_data['skip']):]
+    input=cStringIO.StringIO(content)
+    input.seek(0)
+    data = list(csv.reader(input, quotechar=csv_data['del'], delimiter=csv_data['sep']))[int(csv_data['skip']):]
     datas = []
 
     for line in data:
         if not line:
             continue
         datas.append(map(lambda x:x.decode(csv_data['combo']).encode('utf-8'), line))
+
+    if not datas:
+        common.warning(_('The file is empty !'), _('Importation !'))
+        return False
+
     try:
         res = rpc.session.rpc_exec_auth('/object', 'execute', model, 'import_data', f, datas)
     except Exception, e:
         common.warning(str(e), _('XML-RPC error !'))
         return False
-    if res[0]>=0:
-        common.message(_('Imported %d objects !') % (res[0],))
+    result = res[0]
+    if result>=0:
+        if result == 1:
+            common.message(_('Imported one object !'))
+        else:
+            common.message(_('Imported %d objects !') % (result,))
     else:
         d = ''
         for key,val in res[1].items():
             d+= ('\t%s: %s\n' % (str(key),str(val)))
         error = u'Error trying to import this record:\n%s\nError Message:\n%s\n\n%s' % (d,res[2],res[3])
-        common.message_box('Importation Error !', unicode(error))
+        common.message_box(_('Importation Error !'), unicode(error))
     return True
 
 class win_import(object):
@@ -158,9 +168,14 @@ class win_import(object):
         try:
             for line in data:
                 for word in line:
-                    word=word.decode(csvcode).encode('utf-8')
-                    num = self.model2.append()
-                    self.model2.set(num, 0, word, 1, self.fields_invert[word])
+                    word = word.decode(csvcode)
+                    if not csvcode.lower() == 'utf-8':
+                        word = word.encode('utf-8')
+                    if word in self.fields_invert:
+                        num = self.model2.append()
+                        self.model2.set(num, 0, word, 1, self.fields_invert[word])
+                    else:
+                        raise Exception(_("You cannot import this field %s, because we cannot auto-detect it"))
                 break
         except:
             common.warning('Error processing your first line of the file.\nField %s is unknown !' % (word,), 'Import Error.')
@@ -190,32 +205,37 @@ class win_import(object):
         self.model2.clear()
 
     def go(self):
-        button = self.win.run()
-        if button==gtk.RESPONSE_OK:
-            fields = []
-            fields2 = []
-            iter = self.model2.get_iter_root()
-            while iter:
-                fields.append(self.model2.get_value(iter, 1))
-                fields2.append(self.model2.get_value(iter, 0))
-                iter = self.model2.iter_next(iter)
+        while True:
+            button = self.win.run()
+            if button == gtk.RESPONSE_OK:
+                if not len(self.model2):
+                    common.warning(_("You have not selected any fields to import"))
+                    continue
 
-            csv = {
-                'fname': self.glade.get_widget('import_csv_file').get_filename(),
-                'sep': self.glade.get_widget('import_csv_sep').get_text(),
-                'del': self.glade.get_widget('import_csv_del').get_text(),
-                'skip': self.glade.get_widget('import_csv_skip').get_value(),
-                'combo': self.glade.get_widget('import_csv_combo').get_active_text() or 'UTF-8'
-            }
-            self.parent.present()
-            self.win.destroy()
-            if csv['fname']:
-                return import_csv(csv, fields, self.model, self.fields)
-            return False
-        else:
-            self.parent.present()
-            self.win.destroy()
-            return False
+                fields = []
+                fields2 = []
+                iter = self.model2.get_iter_root()
+                while iter:
+                    fields.append(self.model2.get_value(iter, 1))
+                    fields2.append(self.model2.get_value(iter, 0))
+                    iter = self.model2.iter_next(iter)
+
+                csv = {
+                    'fname': self.glade.get_widget('import_csv_file').get_filename(),
+                    'sep': self.glade.get_widget('import_csv_sep').get_text(),
+                    'del': self.glade.get_widget('import_csv_del').get_text(),
+                    'skip': self.glade.get_widget('import_csv_skip').get_value(),
+                    'combo': self.glade.get_widget('import_csv_combo').get_active_text() or 'UTF-8'
+                }
+                self.parent.present()
+                self.win.destroy()
+                if csv['fname']:
+                    return import_csv(csv, fields, self.model, self.fields)
+                return False
+            else:
+                self.parent.present()
+                self.win.destroy()
+                return False
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

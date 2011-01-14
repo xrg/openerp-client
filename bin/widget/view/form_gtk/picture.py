@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -23,6 +23,9 @@
 import gtk
 import base64
 import interface
+import common
+
+NOIMAGE = file(common.terp_path_pixmaps("noimage.png"), 'rb').read()
 
 class wid_picture(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
@@ -43,10 +46,11 @@ class wid_picture(interface.widget_interface):
         super(wid_picture, self).display(model, model_field)
         value = model_field.get(model)
         self._value = value
+
         if (isinstance(value, tuple) or isinstance(value,list)) and len(value)==2:
             type, data = value
         else:
-            type, data = 'jpeg', value
+            type, data = None, value
 
         self.wid_picture.set_from_pixbuf(None)
         self.wid_picture.set_from_stock('', gtk.ICON_SIZE_MENU)
@@ -58,13 +62,30 @@ class wid_picture(interface.widget_interface):
                 size = getattr(gtk, size)
                 self.wid_picture.set_from_stock(stock, size)
             else:
-                value = base64.decodestring(data)
-                loader = gtk.gdk.PixbufLoader(type)
-                loader.write (value, len(value))
-                pixbuf = loader.get_pixbuf()
-                loader.close()
-                self.wid_picture.set_from_pixbuf(pixbuf)
+                pixbuf = None
+                if value:
+                    data = base64.decodestring(data)
+                    for ext in [type, 'jpeg', 'gif', 'png', 'bmp']:
+                        loader = None
+                        try:
+                            loader = gtk.gdk.PixbufLoader(ext)
+                            loader.write(data, len(data))
+                        except:
+                            if loader is not None:
+                                loader.close()
+                            continue
+                        pixbuf = loader.get_pixbuf()
+                        if pixbuf:
+                            break
 
+                if not pixbuf:
+                    loader = gtk.gdk.PixbufLoader('png')
+                    loader.write(NOIMAGE, len(NOIMAGE))
+                    pixbuf = loader.get_pixbuf()
+
+                loader.close()
+
+                self.wid_picture.set_from_pixbuf(pixbuf)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

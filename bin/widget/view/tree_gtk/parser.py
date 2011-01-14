@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -234,8 +234,7 @@ class Int(Char):
         return int(text)
 
     def get_textual_value(self, model):
-        return locale.format('%d',
-                model[self.field_name].get_client(model) or 0, True)
+        return tools.locale_format('%d', model[self.field_name].get_client(model) or 0)
 
 class Boolean(Int):
 
@@ -307,8 +306,12 @@ class Datetime(GenericDate):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        #date = mx.DateTime.strptime(value, self.server_format).timetuple()
-        date = tools.datetime_util.strptime(value, self.server_format).timetuple()
+#        date = mx.DateTime.strptime(value, self.server_format).timetuple()
+        t = tools.datetime_util.strptime(value, self.server_format)
+        if isinstance(t, type(mx.DateTime.now())) and not hasattr(t, 'timetuple'):
+            date = tuple(map(lambda x: int(x), t.tuple()))
+        else:
+            date = tools.datetime_util.strptime(value, self.server_format).timetuple()
         dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
         
         if 'tz' in rpc.session.context and  rpc.session.context['tz']:
@@ -349,13 +352,12 @@ class Datetime(GenericDate):
                 date = sdt.timetuple()
             except:
                 pass
-        return date.strftime(self.display_format)
+        return date.strftime(self.server_format)
 
 class Float(Char):
     def get_textual_value(self, model):
         interger, digit = self.attrs.get('digits', (16,2) )
-        return locale.format('%.'+str(digit)+'f',
-                model[self.field_name].get_client(model) or 0.0, True)
+        return tools.locale_format('%.' + str(digit) + 'f', model[self.field_name].get_client(model) or 0.0)
 
     def value_from_text(self, model, text):
         try:

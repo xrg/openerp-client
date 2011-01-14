@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -76,7 +76,8 @@ class selection(interface.widget_interface):
     def sig_key_press(self, widget, event):
         # allow showing available entries by hitting "ctrl+space"
         completion=gtk.EntryCompletion()
-        completion.set_inline_selection(True)
+        if hasattr(completion, 'set_inline_selection'):
+            completion.set_inline_selection(True)
         if (event.type == gtk.gdk.KEY_PRESS) \
             and ((event.state & gtk.gdk.CONTROL_MASK) != 0) \
             and (event.keyval == gtk.keysyms.space):

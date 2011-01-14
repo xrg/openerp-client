@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -117,7 +117,7 @@ class win_search(object):
         self.parent = parent
         self.win.set_transient_for(parent)
 
-        self.screen = Screen(model, view_type=['tree'], context=context, parent=self.win)
+        self.screen = Screen(model, view_type=['tree'], context=self.context, parent=self.win)
         self.view = self.screen.current_view
         self.view.unset_editable()
         sel = self.view.widget_tree.get_selection()
@@ -185,7 +185,7 @@ class win_search(object):
         v_keys = map(lambda x: x[0], v)
         v += self.domain
         try:
-            self.ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, rpc.session.context)
+            self.ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.model_name, 'search', v, offset, limit, 0, self.context)
         except:
             # Try if it is not an old server
             self.ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model_name, 'search', v, offset, limit)

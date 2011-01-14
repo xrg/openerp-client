@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -109,6 +109,7 @@ class DatabaseDialog(gtk.Dialog):
         lbl.set_alignment(1.0, 0.5)
         self.table.attach(lbl, 0, 1, 2, 3)
         self.adminPwdEntry = gtk.Entry()
+        self.adminPwdEntry.set_visibility(False)
         self.table.attach(self.adminPwdEntry, 1, 2, 2, 3)
 
         self.vbox.add(self.table)
@@ -247,6 +248,7 @@ class RetrieveMigrationScriptDialog(DatabaseDialog):
         lbl.set_alignment(1.0, 0.5)
         self.table.attach(lbl, 0, 1, 4, 5)
         self.contractPwdEntry = gtk.Entry()
+        self.contractPwdEntry.set_visibility(False)
         self.table.attach(self.contractPwdEntry, 1, 2, 4, 5)
 
     def on_response_accept(self):
@@ -294,7 +296,6 @@ class MigrationDatabaseDialog(DatabaseDialog):
                 self.message = _("Your database has been upgraded.")
             else:
                 self.message = _("Your databases have been upgraded.")
-            self.message += "\n" + _("Could you restart your server")
         else:
             self.message = "You have not selected a database"
 
@@ -336,7 +337,12 @@ def _refresh_langlist(lang_widget, url):
     lang_list.append( ('en_US','English') )
     for key,val in lang_list:
         liststore.insert(0, (val,key))
+    lang = rpc.session.context.get('lang', options.options.get('client.lang', 'en_US'))
     lang_widget.set_active(0)
+    for idx, item in enumerate(lang_widget.get_model()):
+        if item[1] == lang:
+            lang_widget.set_active(idx)
+            break
     return lang_list
 
 def _server_ask(server_widget, parent=None):
@@ -508,11 +514,8 @@ class db_create(object):
 
     def server_change(self, widget=None, parent=None):
         url = _server_ask(self.server_widget)
-        try:
-            if self.lang_widget and url:
-                _refresh_langlist(self.lang_widget, url)
-        except:
-            return False
+        if self.lang_widget and url:
+            _refresh_langlist(self.lang_widget, url)
         return url
 
     def __init__(self, sig_login, terp_main):
@@ -561,7 +564,7 @@ class db_create(object):
             if (res==gtk.RESPONSE_OK) and (db_name in RESERVED_KEYWORDS):
                 common.warning(_("Sorry,'" +db_name + "' cannot be the name of the database,it's a Reserved Keyword."), _('Bad database name !'), parent=parent)
                 continue
-            if (res==gtk.RESPONSE_OK) and ((not db_name) or (not re.match('^[a-zA-Z][a-zA-Z0-9_]+$', db_name))):
+            if (res==gtk.RESPONSE_OK) and ((not db_name) or (not re.match('^[a-zA-Z0-9][a-zA-Z0-9_]+$', db_name))):
                 common.warning(_('The database name must contain only normal characters or "_".\nYou must avoid all accents, space or special characters.'), _('Bad database name !'), parent=parent)
 
             else:
@@ -1271,13 +1274,6 @@ class terp_main(service.Service):
                                     'but_previous', 'but_next', 'but_open', \
                                     'but_close', 'but_reload', 'but_attach', 'but_goto_id'):
                     self._update_attachment_button(wid)
-            if button_name.startswith('radio_'):
-                pass
-                #mode = wid.screen.current_view.view_type
-                #print 'RADIO CALLED', button_name, args, self.glade.get_widget(button_name).get_active(), button_name[6:]
-                #if self.glade.get_widget(button_name).get_active() and (mode<>button_name[6:]):
-                #    print 'SWITCH', button_name
-                #    wid.sig_switch()
             if button_name=='but_close' and res:
                 self._win_del(page_num)
 

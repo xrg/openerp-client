@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -25,6 +25,7 @@ import time
 import common
 import rpc
 from rpc import RPCProxy
+from rpc import CONCURRENCY_CHECK_FIELD
 import field
 import signal_event
 import gtk
@@ -61,7 +62,7 @@ class ModelRecord(signal_event.signal_event):
         self.state_attrs = {}
         self.modified = False
         self.modified_fields = {}
-        self.read_time = time.time()
+        self._concurrency_check_data = False
         for key,val in self.mgroup.mfields.items():
             self.value[key] = val.create(self)
             if (new and val.attrs['type']=='one2many') and (val.attrs.get('mode','tree,form').startswith('form')):
@@ -88,6 +89,16 @@ class ModelRecord(signal_event.signal_event):
             self.reload()
             return True
         return False
+    
+    def update_context_with_concurrency_check_data(self, context):
+        if self.id and self.is_modified():
+            context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%d" % (self.resource, self.id)] = self._concurrency_check_data
+        for name, field in self.mgroup.mfields.items():
+            if isinstance(field, O2MField):
+                v = self.value[field.name]
+                from itertools import chain
+                for m in chain(v.models, v.models_removed):
+                    m.update_context_with_concurrency_check_data(context)
 
     def get(self, get_readonly=True, includeid=False, check_load=True, get_modifiedonly=False):
         if check_load:
@@ -126,15 +137,17 @@ class ModelRecord(signal_event.signal_event):
             if not self.is_modified():
                 return self.id
             value = self.get(get_readonly=False, get_modifiedonly=True)
-            context= self.context_get()
-            context= context.copy()
-            context['read_delta']= time.time()-self.read_time
+            context = self.context_get().copy()
+            self.update_context_with_concurrency_check_data(context)
             if not self.rpc.write([self.id], value, context):
                 self.failed_validation()
                 return False
         self._loaded = False
         if reload:
             self.reload()
+        else:
+            # just reload the CONCURRENCY_CHECK_FIELD
+            self._reload([CONCURRENCY_CHECK_FIELD])
         return self.id
 
     def default_get(self, domain=[], context={}):
@@ -198,6 +211,8 @@ class ModelRecord(signal_event.signal_event):
     def set(self, val, modified=False, signal=True):
         later={}
         for fieldname, value in val.items():
+            if fieldname == CONCURRENCY_CHECK_FIELD:
+                self._concurrency_check_data = value
             if fieldname not in self.mgroup.mfields:
                 continue
             if isinstance(self.mgroup.mfields[fieldname], field.O2MField):
@@ -212,17 +227,19 @@ class ModelRecord(signal_event.signal_event):
             self.modified_fields = {}
         if signal:
             self.signal('record-changed')
-
+    
     def reload(self):
+        return self._reload(self.mgroup.mfields.keys() + [CONCURRENCY_CHECK_FIELD])
+
+    def _reload(self, fields):
         if not self.id:
             return
         c = rpc.session.context.copy()
         c.update(self.context_get())
         c['bin_size'] = True
-        res = self.rpc.read([self.id], self.mgroup.mfields.keys(), c)
+        res = self.rpc.read([self.id], fields, c)
         if res:
             value = res[0]
-            self.read_time= time.time()
             self.set(value)
 
     def expr_eval(self, dom, check_load=True):

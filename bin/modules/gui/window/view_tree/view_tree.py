@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -121,8 +121,7 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
             if self.fields_type[field]['type'] in ('float',):
                 interger, digit = self.fields_type[field].get('digits', (16,2))
                 for x in res_ids:
-                    x[field] = locale.format('%.' + str(digit) + 'f',
-                            x[field] or 0.0, True)
+                    x[field] = tools.locale_format('%.' + str(digit) + 'f', x[field] or 0.0)
             if self.fields_type[field]['type'] in ('float_time',):
                 for x in res_ids:
                     val = '%02d:%02d' % (math.floor(abs(x[field])),
@@ -318,6 +317,7 @@ class view_tree(object):
 
     def reload(self):
         del self.model
+        self.context.update(rpc.session.context)
         self.model = view_tree_model(self.ids, self.view_info, self.fields_order, self.fields, context=self.context, pixbufs=self.pixbufs, treeview=self.view)
         self.view.set_model(self.model)
 

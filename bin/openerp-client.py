@@ -3,7 +3,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -30,7 +30,8 @@ GNU Public Licence.
 
 (c) 2003-TODAY, Fabien Pinckaers - Tiny sprl
 """
-import sys, os
+import sys
+import os
 import release
 __author__ = release.author
 __version__ = release.version
@@ -39,7 +40,11 @@ import __builtin__
 __builtin__.__dict__['openerp_version'] = __version__
 
 import logging
-logging.basicConfig()
+arguments = {}
+if sys.platform == 'win32':
+    arguments['filename'] = os.path.join(os.environ['USERPROFILE'], 'openerp-client.log')
+
+logging.basicConfig(**arguments)
 
 from distutils.sysconfig import get_python_lib
 terp_path = os.path.join(get_python_lib(), 'openerp-client')
@@ -58,7 +63,8 @@ import gtk.glade
 
 #gtk.gdk.threads_init() # causes the GTK client to block everything.
 
-import locale, gettext
+import locale
+import gettext
 
 import atk
 import gtk._gtk
@@ -81,15 +87,18 @@ if not client_lang:
 
 translate.setlang(client_lang)
 
-for logger in options.options['logging.logger'].split(','):
-    if len(logger):
-        loglevel = {'DEBUG':logging.DEBUG, 'INFO':logging.INFO, 'WARNING':logging.WARNING, 'ERROR':logging.ERROR, 'CRITICAL':logging.CRITICAL}
-        log = logging.getLogger(logger)
-        log.setLevel(loglevel[options.options['logging.level'].upper()])
-if options.options['logging.verbose']:
-    logging.getLogger().setLevel(logging.INFO)
-else:
-    logging.getLogger().setLevel(logging.ERROR)
+
+# add new log levels below DEBUG
+logging.DEBUG_RPC = logging.DEBUG - 1
+logging.addLevelName(logging.DEBUG_RPC, 'DEBUG_RPC')
+logging.Logger.debug_rpc = lambda self, msg, *args, **kwargs: self.log(logging.DEBUG_RPC, msg, *args, **kwargs)
+
+logging.DEBUG_RPC_ANSWER = logging.DEBUG - 2
+logging.addLevelName(logging.DEBUG_RPC_ANSWER, 'DEBUG_RPC_ANSWER')
+logging.Logger.debug_rpc_answer = lambda self, msg, *args, **kwargs: self.log(logging.DEBUG_RPC_ANSWER, msg, *args, **kwargs)
+
+logging.getLogger().setLevel(getattr(logging, options.options['logging.level'].upper()))
+
 
 
 import modules

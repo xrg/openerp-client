@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -32,7 +32,8 @@ import interface
 import common
 import re
 import service
-import xml.sax,xml.sax.handler
+import xml.sax
+import xml.sax.handler
 from cStringIO import StringIO
 
 class textbox_tag(interface.widget_interface):

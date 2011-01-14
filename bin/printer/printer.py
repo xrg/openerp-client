@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -29,7 +29,10 @@
 # Print or open a previewer
 #
 
-import os, base64, options, sys
+import os
+import base64
+import options 
+import sys
 import gc
 import common
 import time
@@ -187,6 +190,7 @@ def print_w32_filename(filename):
 def print_data(data):
     if 'result' not in data:
         common.message(_('Error no report'))
+        return 
     if data.get('code','normal')=='zlib':
         import zlib
         content = zlib.decompress(base64.decodestring(data['result']))

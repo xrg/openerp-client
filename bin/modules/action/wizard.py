@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -28,7 +28,8 @@ import copy
 import service
 import rpc
 import common
-import thread, time
+import thread
+import time
 
 from widget.screen import Screen
 
@@ -92,10 +93,13 @@ class dialog(object):
             self.dia.destroy()
             return False
 
-def execute(action, datas, state='init', parent=None, context={}):
+def execute(action, datas, state='init', parent=None, context=None):
+    if context is None:
+        context = {}
     if not 'form' in datas:
         datas['form'] = {}
     wiz_id = rpc.session.rpc_exec_auth('/wizard', 'create', action)
+
     while state!='end':
         class wizard_progress(object):
             def __init__(self, parent=None):
@@ -106,8 +110,8 @@ def execute(action, datas, state='init', parent=None, context={}):
 
             def run(self):
                 def go(wiz_id, datas, state):
-                    ctx = rpc.session.context.copy()
-                    ctx.update(context)
+                    ctx = context.copy()
+                    ctx.update(rpc.session.context)
                     try:
                         self.res = rpc.session.rpc_exec_auth_try('/wizard', 'execute', wiz_id, datas, state, ctx)
                     except Exception, e:
@@ -163,7 +167,7 @@ def execute(action, datas, state='init', parent=None, context={}):
                 if self.exception:
                     import xmlrpclib
                     import socket
-                    from rpc import rpc_exception
+                    from rpc import rpc_exception, CONCURRENCY_CHECK_FIELD
                     import tiny_socket
                     try:
                         raise self.exception
@@ -174,8 +178,8 @@ def execute(action, datas, state='init', parent=None, context={}):
                         if a.type in ('warning', 'UserError'):
                             if a.message in ('ConcurrencyException') and len(args) > 4:
                                 if common.concurrency(args[0], args[2][0], args[4]):
-                                    if 'read_delta' in args[4]:
-                                        del args[4]['read_delta']
+                                    if CONCURRENCY_CHECK_FIELD in args[4]:
+                                        del args[4][CONCURRENCY_CHECK_FIELD]
                                     return self.rpc_exec_auth(obj, method, *args)
                             else:
                                 common.warning(a.data, a.message)

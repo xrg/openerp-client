@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -54,6 +54,7 @@ class image_wid(interface.widget_interface):
         self.event.connect('drag_data_received', self.drag_data_received)
 
         self.tooltips = gtk.Tooltips()
+        self.is_readonly = False
 
         self.image = gtk.Image()
         self.event.add(self.image)
@@ -124,11 +125,14 @@ class image_wid(interface.widget_interface):
         self.update_img()
 
     def drag_motion(self, widget, context, x, y, timestamp):
+        if self.is_readonly:
+            return False
         context.drag_status(gtk.gdk.ACTION_COPY, timestamp)
         return True
 
-    def drag_data_received(self, widget, context, x, y, selection,
-            info, timestamp):
+    def drag_data_received(self, widget, context, x, y, selection, info, timestamp):
+        if self.is_readonly:
+            return
         if info == 0:
             uri = selection.get_text().split('\n')[0]
             if uri:
@@ -198,5 +202,10 @@ class image_wid(interface.widget_interface):
     def set_value(self, model, model_field):
         return model_field.set_client(model, self._value or False)
 
+    def _readonly_set(self, value):
+        self.but_add.set_sensitive(not value)
+        self.but_save_as.set_sensitive(not value)
+        self.but_remove.set_sensitive(not value)
+        self.is_readonly = value
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

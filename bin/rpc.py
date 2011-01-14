@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -34,9 +34,7 @@ import os
 
 import re
 
-class rpc_int_exception(Exception):
-    pass
-
+CONCURRENCY_CHECK_FIELD = '__last_update'
 
 class rpc_exception(Exception):
     def __init__(self, code, backtrace):
@@ -81,9 +79,9 @@ class xmlrpc_gw(gw_inter):
         gw_inter.__init__(self, url, db, uid, passwd, obj)
         self._sock = xmlrpclib.ServerProxy(url+obj)
     def exec_auth(self, method, *args):
-        logging.getLogger('rpc.request').info(str((method, self._db, self._uid, self._passwd, args)))
+        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
         res = self.execute(method, self._uid, self._passwd, *args)
-        logging.getLogger('rpc.result').debug(str(res))
+        logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
 
     def __convert(self, result):
@@ -110,9 +108,9 @@ class tinySocket_gw(gw_inter):
         self._sock = tiny_socket.mysocket()
         self._obj = obj[1:]
     def exec_auth(self, method, *args):
-        logging.getLogger('rpc.request').info(str((method, self._db, self._uid, self._passwd, args)))
+        logging.getLogger('rpc.request').debug_rpc(str((method, self._db, self._uid, self._passwd, args)))
         res = self.execute(method, self._uid, self._passwd, *args)
-        logging.getLogger('rpc.result').debug(str(res))
+        logging.getLogger('rpc.result').debug_rpc_answer(str(res))
         return res
     def execute(self, method, *args):
         self._sock.connect(self._url)
@@ -179,8 +177,8 @@ class rpc_session(object):
                     if a.type in ('warning','UserError'):
                         if a.message in ('ConcurrencyException') and len(args) > 4:
                             if common.concurrency(args[0], args[2][0], args[4]):
-                                if 'read_delta' in args[4]:
-                                    del args[4]['read_delta']
+                                if CONCURRENCY_CHECK_FIELD in args[4]:
+                                    del args[4][CONCURRENCY_CHECK_FIELD]
                                 return self.rpc_exec_auth(obj, method, *args)
                         else:
                             common.warning(a.data, a.message)
@@ -352,17 +350,10 @@ class rpc_session(object):
 
     def logout(self):
         if self._open :
-            #try:
-            #    res = self.rpc_exec_auth_wo('/common', 'logout')
-            #except:
-            #    pass
-            self._open = False
             self._open = False
             self.uname = None
             self.uid = None
             self._passwd = None
-        else :
-            pass
 
 session = rpc_session()
 

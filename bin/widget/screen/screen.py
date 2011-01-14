@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -173,24 +173,18 @@ class Screen(signal_event.signal_event):
 
     def search_filter(self, *args):
         v = self.filter_widget.value
-        if self.latest_search and self.latest_search<>v:
+        filter_keys = [ key for key, _, _ in v]
+        v.extend((key, op, value) for key, op, value in self.domain if key not in filter_keys and not (key=='active' and self.context.get('active_test', False)))
+        if self.latest_search and self.latest_search != v:
             self.filter_widget.set_offset(0)
         limit=self.filter_widget.get_limit()
         offset=self.filter_widget.get_offset()
         self.latest_search = v
-        filter_keys = []
-        for key, op, value in v:
-            filter_keys.append(key)
-        for key, op, value in self.domain:
-            if key not in filter_keys and \
-                    not (key == 'active' and self.context.get('active_test', False)):
-                v.append((key, op, value))
-        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0,self.context)
+        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, 0, self.context)
         if len(ids) < limit:
             self.search_count = len(ids)
         else:
-            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute',
-                    self.name, 'search_count', v, self.context)
+            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', v, self.context)
 
         self.update_scroll()
 
@@ -478,7 +472,7 @@ class Screen(signal_event.signal_event):
         id = False
         if self.current_view.view_type == 'form' and self.current_model:
             id = self.current_model.id
-
+            
             idx = self.models.models.index(self.current_model)
             if not id:
                 lst=[]
@@ -490,8 +484,11 @@ class Screen(signal_event.signal_event):
                 self.display()
                 self.current_view.set_cursor()
                 return False
+
+            ctx = self.current_model.context_get().copy()
+            self.current_model.update_context_with_concurrency_check_data(ctx)
             if unlink and id:
-                if not self.rpc.unlink([id]):
+                if not self.rpc.unlink([id], ctx):
                     return False
 
             self.models.remove(self.current_model)
@@ -504,8 +501,14 @@ class Screen(signal_event.signal_event):
             self.current_view.set_cursor()
         if self.current_view.view_type == 'tree':
             ids = self.current_view.sel_ids_get()
+            
+            ctx = self.models.context.copy()
+            for m in self.models:
+                if m.id in ids:
+                    m.update_context_with_concurrency_check_data(ctx)
+
             if unlink and ids:
-                if not self.rpc.unlink(ids):
+                if not self.rpc.unlink(ids, ctx):
                     return False
             for model in self.current_view.sel_models_get():
                 self.models.remove(model)
