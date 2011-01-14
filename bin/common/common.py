@@ -1,30 +1,22 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#    OpenERP, Open Source Management Solution	
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# $Id$
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -67,7 +59,7 @@ terp_path = _search_file
 terp_path_pixmaps = lambda x: _search_file(x, 'path.pixmaps')
 
 OPENERP_ICON = gtk.gdk.pixbuf_new_from_file(
-            terp_path_pixmaps('tinyerp-icon-32x32.png'))
+            terp_path_pixmaps('openerp-icon.png'))
 
 def selection(title, values, alwaysask=False, parent=None):
     if not values or len(values)==0:
@@ -161,12 +153,17 @@ def terp_survey():
     if res==gtk.RESPONSE_OK:
         email =  winglade.get_widget('entry_email').get_text()
         company =  winglade.get_widget('entry_company').get_text()
+        phone = winglade.get_widget('entry_phone').get_text()
+        name = winglade.get_widget('entry_name').get_text()
         result = "\ncompany: "+str(company)
+        result += "\nname: " + str(name)
+        result += "\nphone: " + str(phone)
         for widname in widnames:
             wid = winglade.get_widget('combo_'+widname)
             result += "\n"+widname+": "+wid.child.get_text()
         result += "\nplan_use: "+str(winglade.get_widget('check_use').get_active())
         result += "\nplan_sell: "+str(winglade.get_widget('check_sell').get_active())
+        result += "\nwant_demo: " + str(winglade.get_widget('check_button_demo').get_active())
 
         buffer = winglade.get_widget('textview_comment').get_buffer()
         iter_start = buffer.get_start_iter()
@@ -177,11 +174,16 @@ def terp_survey():
         upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
         options.options['survey.position']=SURVEY_VERSION
         options.save()
-        common.message(_('Thank you for the feedback !\nYour comments have been sent to OpenERP.\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
+        common.message(_('Thank you for the feedback !\n\
+Your comments have been sent to OpenERP.\n\
+You should now start by creating a new database or\n\
+connecting to an existing server through the "File" menu.'))
     else:
         parent.present()
         win.destroy()
-        common.message(_('Thank you for testing OpenERP !\nYou should now start by creating a new database or\nconnecting to an existing server through the "File" menu.'))
+        common.message(_('Thank you for testing OpenERP !\n\
+You should now start by creating a new database or\n\
+connecting to an existing server through the "File" menu.'))
     return True
 
 
@@ -441,16 +443,6 @@ def sur_3b(msg, parent=None):
         return 'cancel'
     else:
         return 'cancel'
-
-def theme_set():
-    theme = options['client.theme']
-    if theme and (theme <> 'none'):
-        fname = os.path.join("themes", theme, "gtkrc")
-        if not os.path.isfile(fname):
-            common.warning('File not found: '+fname+'\nSet theme to none in ~/.openerprc', 'Error setting theme')
-            return False
-        gtk.rc_parse("themes/"+theme+"/gtkrc")
-    return True
 
 def ask(question, parent=None):
     dia = glade.XML(terp_path('openerp.glade'), 'win_quest', gettext.textdomain())

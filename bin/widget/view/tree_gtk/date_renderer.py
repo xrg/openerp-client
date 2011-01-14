@@ -1,30 +1,22 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#    OpenERP, Open Source Management Solution	
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# $Id$
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -132,7 +124,7 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
         return tools.datetime_util.strptime(tc, self.format)
 
     def _on_key_press(self, editable, event):
-        if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return):
+        if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return, gtk.keysyms.KP_Enter):
             if self.mode_cmd:
                 self.mode_cmd = False
                 if self.callback: self.callback.process(self, event)
@@ -140,7 +132,9 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
                 return True
             else:
                 return False
-        elif event.keyval in (ord('+'),ord('-'),ord('=')):
+        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus, 
+                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus, 
+                              gtk.keysyms.KP_Equal, gtk.keysyms.equal):
                 self.mode_cmd = True
                 self.date_get(editable)
                 if self.callback: self.callback.event(self, event)
@@ -159,7 +153,7 @@ class DecoratorRenderer(gtk.GenericCellRenderer):
             self._on_delete_text(editable, pos, len(text))
             return True
 
-        if event.keyval>=ord('0') and event.keyval<=ord('9'):
+        if event.keyval in [getattr(gtk.keysyms, '_%d' % x) for x in range(0,10)]:  # key between 0 and 9
             pos = editable.get_position()
             text = editable.get_text()
             text = text[:pos] + chr(event.keyval) + text[pos + 1:]
@@ -190,8 +184,8 @@ class date_callback(object):
     def event(self, widget, event):
         if event.keyval in (gtk.keysyms.BackSpace,):
             self.value = self.value[:-1]
-        if event.keyval<250:
-            self.value = self.value+chr(event.keyval)
+        
+        self.value += event.string
         self.display(widget)
         return True
 

@@ -1,25 +1,24 @@
+# -*- encoding: utf-8 -*-
+##############################################################################
 #
-# Copyright (C) Tiny 2008
+#    OpenERP, Open Source Management Solution	
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# This library is free software; you can redistribute it and/or
-# modify it under the terms of the GNU Lesser General Public
-# License as published by the Free Software Foundation; either
-# version 2.1 of the License, or (at your option) any later version.
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# This library is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Lesser General Public License for more details.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
-# USA
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Author(s): Johan Dahlin (Async Open Source)
-# Tiny sprl
-#
-#
+##############################################################################
 
 
 import gobject
@@ -152,7 +151,6 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         return tools.datetime_util.strptime(tc, self.format)
 
     def delete_text(self, start, end):
-        print 'DELETE TEXT'
         self._interactive_input = False
         try:
             gtk.Entry.delete_text(self, start, end)
@@ -170,13 +168,16 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         self.set_text(self.initial_value)
 
     def _on_key_press(self, editable, event):
-        if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return):
+        if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return, gtk.keysyms.KP_Enter):
             if self.mode_cmd:
                 self.mode_cmd = False
                 if self.callback_process: self.callback_process(False, self, event)
                 self.stop_emission("key-press-event")
+                self.set_sensitive(False)
                 return True
-        elif event.keyval in (ord('+'),ord('-'),ord('=')):
+        elif event.keyval in (gtk.keysyms.KP_Add, gtk.keysyms.plus, 
+                              gtk.keysyms.KP_Subtract, gtk.keysyms.minus, 
+                              gtk.keysyms.KP_Equal, gtk.keysyms.equal):
                 self.mode_cmd = True
                 self.date_get()
                 if self.callback_process: self.callback_process(True, self, event)
@@ -210,10 +211,8 @@ class ComplexEntry(gtk.HBox):
             text = self.widget_cmd.get_text()[:-1]
             self.widget_cmd.set_text(text)
             return True
-        if event.keyval<250:
-            value = chr(event.keyval)
-            text = self.widget_cmd.get_text()
-            self.widget_cmd.set_text(text+value)
+        text = self.widget_cmd.get_text()
+        self.widget_cmd.set_text(text + event.string)
         return True
 
     def _process_cb(self, ok, widget, event=None):

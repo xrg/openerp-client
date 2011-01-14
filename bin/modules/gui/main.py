@@ -1,30 +1,22 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#    OpenERP, Open Source Management Solution	
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# $Id$
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -450,7 +442,8 @@ class terp_main(service.Service):
         self.notebook = gtk.Notebook()
         self.notebook.popup_enable()
         self.notebook.set_scrollable(True)
-        self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changt)
+        self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
+        self.notebook.connect('page-reordered', self._sig_page_reordered)
         vbox = self.glade.get_widget('vbox_main')
         vbox.pack_start(self.notebook, expand=True, fill=True)
 
@@ -507,7 +500,8 @@ class terp_main(service.Service):
             self.glade.signal_connect(signal, dict[signal])
 
         self.buttons = {}
-        for button in ('but_new', 'but_save', 'but_remove', 'but_search', 'but_previous', 'but_next', 'but_action', 'but_open', 'but_print', 'but_close', 'but_reload', 'but_switch','but_attach', 'radio_tree','radio_form','radio_graph','radio_calendar'):
+        for button in ('but_new', 'but_save', 'but_remove', 'but_search', 'but_previous', 'but_next', 'but_action', 'but_open', 'but_print', 'but_close', 'but_reload', 'but_switch','but_attach',
+                       'radio_tree','radio_form','radio_graph','radio_calendar', 'radio_gantt'):
             self.glade.signal_connect('on_'+button+'_clicked', self._sig_child_call, button)
             self.buttons[button]=self.glade.get_widget(button)
 
@@ -583,6 +577,7 @@ class terp_main(service.Service):
         # Adding a timer the check to requests
         gobject.timeout_add(5 * 60 * 1000, self.request_set)
 
+
     def shortcut_edit(self, widget, model='ir.ui.menu'):
         obj = service.LocalService('gui.window')
         domain = [('user_id', '=', rpc.session.uid), ('resource', '=', model)]
@@ -620,12 +615,6 @@ class terp_main(service.Service):
         menu.show_all()
         self.shortcut_menu.set_submenu(menu)
         self.shortcut_menu.set_sensitive(False)
-
-    def theme_select(self, widget, theme):
-        options.options['client.theme'] = theme
-        common.theme_set()
-        self.window.show_all()
-        return True
 
     def sig_menubar(self, option):
         options.options['client.toolbar'] = option
@@ -889,6 +878,8 @@ class terp_main(service.Service):
     def win_add(self, win, datas):
         self.pages.append(win)
         box = gtk.HBox(False, 0)
+
+        # Draw the close button on the right 
         closebtn = gtk.Button()
         image = gtk.Image()
         image.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
@@ -901,6 +892,7 @@ class terp_main(service.Service):
 
         box.pack_start(gtk.Label(win.name), True, True)
         box.pack_end(closebtn, False, False)
+
         self.notebook.append_page(win.widget, box)
         if hasattr(self.notebook, 'set_tab_reorderable' ):
             # since pygtk 2.10
@@ -969,7 +961,7 @@ class terp_main(service.Service):
             self.notebook.disconnect(self.sig_id)
             page = self.pages.pop(pn)
             self.notebook.remove_page(pn)
-            self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changt)
+            self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
             self.sb_set()
 
             page.destroy()
@@ -1017,10 +1009,16 @@ class terp_main(service.Service):
             if button_name=='but_close' and res:
                 self._win_del(page_num)
 
-    def _sig_page_changt(self, widget=None, *args):
+    def _sig_page_changed(self, widget=None, *args):
         self.last_page = self.current_page
         self.current_page = self.notebook.get_current_page()
         self.sb_set()
+
+    def _sig_page_reordered(self, notebook, child, page_num, user_param=None):
+        widget = self.pages[self.current_page]
+        self.pages.remove(widget)
+        self.pages.insert(page_num, widget)
+        self.current_page = page_num
 
     def sig_db_new(self, widget):
         if not self.sig_logout(widget):

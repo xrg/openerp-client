@@ -1,30 +1,22 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#    OpenERP, Open Source Management Solution	
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# $Id$
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -190,6 +182,7 @@ class ModelRecordGroup(signal_event.signal_event):
             return self.pre_load(ids, display)
         c = rpc.session.context.copy()
         c.update(self.context)
+        c['bin_size'] = True
         values = self.rpc.read(ids, self.fields.keys(), c)
         if not values:
             return False
@@ -329,7 +322,7 @@ class ModelRecordGroup(signal_event.signal_event):
             to_add_normal = []
             to_add_binary = []
             for f in to_add:
-                if fields[f]['type'] in ('image','binary'):
+                if fields[f]['type'] in ('image', 'binary'):
                     to_add_binary.append(f)
                 else:
                     to_add_normal.append(f)
@@ -342,19 +335,10 @@ class ModelRecordGroup(signal_event.signal_event):
                             del v['id']
                         self[id].set(v, signal=False)
             if to_add_binary:
-                data = {}
-                for b in to_add_binary:
-                    data[b] = None
+                data = {}.fromkeys(to_add_binary, None)
                 for m in self.models:
-                    m.set(data)
+                    m.set(data, signal=False)
 
-#            values = self.rpc.read(old, to_add, ctx)
-#            if values:
-#                for v in values:
-#                    id = v['id']
-#                    if 'id' not in to_add:
-#                        del v['id']
-#                    self[id].set(v, signal=False)
         if len(new) and len(to_add):
             ctx.update(self.context)
             values = self.rpc.default_get(to_add, ctx)

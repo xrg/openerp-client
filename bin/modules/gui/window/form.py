@@ -1,30 +1,22 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#    OpenERP, Open Source Management Solution	
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# $Id$
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -141,7 +133,7 @@ class form(object):
         else:
             if self.screen.current_view.view_type == 'form':
                 self.sig_new(autosave=False)
-            if self.screen.current_view.view_type in ('tree', 'graph'):
+            if self.screen.current_view.view_type in ('tree', 'graph', 'calendar'):
                 self.screen.search_filter()
 
         if auto_refresh and int(auto_refresh):
@@ -191,11 +183,16 @@ class form(object):
         return self.screen.id_get()
 
     def sig_attach(self, widget=None):
-        id = self.screen.id_get()
+        id = self.id_get()
         if id:
-            import win_attach
-            win = win_attach.win_attach(self.model, id, parent=self.window)
-            win.go()
+            ctx = self.context.copy()
+            ctx.update(rpc.session.context)
+            action = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'action_get', ctx)
+            action['domain'] = [('res_model', '=', self.model), ('res_id', '=', id)]
+            ctx['default_res_model'] = self.model
+            ctx['default_res_id'] = id
+            obj = service.LocalService('action.main')
+            obj._exec_action(action, {}, ctx)
         else:
             self.message_state(_('No record selected ! You can only attach to existing record.'), color='red')
         return True
@@ -206,11 +203,8 @@ class form(object):
         if mode<>self.screen.current_view.view_type:
             self.screen.switch_view(mode=mode)
 
-    def _id_get(self):
-        return self.screen.id_get()
-
     def sig_logs(self, widget=None):
-        id = self._id_get()
+        id = self.id_get()
         if not id:
             self.message_state(_('You have to select a record !'), color='red')
             return False
@@ -232,7 +226,7 @@ class form(object):
         return True
 
     def sig_remove(self, widget=None):
-        if not self._id_get():
+        if not self.id_get():
             msg = _('Record is not saved ! \n Do You want to Clear Current Record ?')
         else:
             if self.screen.current_view.view_type == 'form':
@@ -270,7 +264,7 @@ class form(object):
     def sig_copy(self, *args):
         if not self.modified_save():
             return
-        res_id = self._id_get()
+        res_id = self.id_get()
         ctx = self.context.copy()
         ctx.update(rpc.session.context)
         new_id = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'copy', res_id, {}, ctx)

@@ -1,30 +1,22 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# $Id$
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 import xml.dom.minidom
@@ -117,9 +109,9 @@ class Screen(signal_event.signal_event):
 
     readonly = property(readonly_get, readonly_set)
 
-    def search_active(self, active=True):
+    def search_active(self, active=True, show_search=True):
 
-        if active and self.show_search:
+        if active:
             if not self.filter_widget:
                 view_form = rpc.session.rpc_exec_auth('/object', 'execute',
                         self.name, 'fields_view_get', False, 'form',
@@ -141,6 +133,8 @@ class Screen(signal_event.signal_event):
                 self.screen_container.add_filter(self.filter_widget.widget,
                         self.search_filter, self.search_clear)
                 self.filter_widget.set_limit(self.limit)
+
+        if active and show_search:
             self.screen_container.show_filter()
         else:
             self.screen_container.hide_filter()
@@ -317,10 +311,7 @@ class Screen(signal_event.signal_event):
                         if attrs['widget']=='one2many_list':
                             attrs['widget']='one2many'
                         attrs['type'] = attrs['widget']
-                    try:
-                        fields[str(attrs['name'])].update(attrs)
-                    except:
-                        raise
+                    fields[str(attrs['name'])].update(attrs)
             for node2 in node.childNodes:
                 _parse_fields(node2, fields)
         dom = xml.dom.minidom.parseString(arch)
@@ -399,6 +390,8 @@ class Screen(signal_event.signal_event):
         id = False
         if self.current_model.validate():
             id = self.current_model.save(reload=True)
+            if not id:
+                self.current_view.display()
         else:
             self.current_view.display()
             self.current_view.set_cursor()
@@ -435,14 +428,13 @@ class Screen(signal_event.signal_event):
         if not self.current_model:
             return False
         self.current_view.set_value()
-        res = False
         if self.current_view.view_type != 'tree':
-            res = self.current_model.is_modified()
+            return self.current_model.is_modified()
         else:
             for model in self.models.models:
                 if model.is_modified():
-                    res = True
-        return res
+                    return True
+        return False
 
     def reload(self):
         self.current_model.reload()
@@ -506,7 +498,11 @@ class Screen(signal_event.signal_event):
         if self.views:
             self.current_view.display()
             self.current_view.widget.set_sensitive(bool(self.models.models or (self.current_view.view_type!='form') or self.current_model))
-            self.search_active(self.current_view.view_type in ('tree', 'graph'))
+            vt = self.current_view.view_type
+            self.search_active(
+                    active=self.show_search and vt in ('tree', 'graph', 'calendar'),
+                    show_search=self.show_search and vt in ('tree', 'graph'),
+            )
 
     def display_next(self):
         self.current_view.set_value()

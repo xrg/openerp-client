@@ -1,31 +1,22 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# $Id$
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
-#
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -35,7 +26,7 @@ import gtk
 import gtk.glade
 import gettext
 import common
-from datetime import datetime
+from datetime import datetime, date
 
 from SpiffGtkWidgets import Calendar
 from mx import DateTime
@@ -55,10 +46,12 @@ def choice_colors(n):
         return COLOR_PALETTE[:n]
     return []
 
-class TinyEvent(object):
+class TinyEvent(Calendar.Event):
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
+        
+        super(TinyEvent, self).__init__(**kwargs)        
 
     def __repr__(self):
         r = []
@@ -77,8 +70,12 @@ class TinyCalModel(Calendar.Model):
 
 
 class ViewCalendar(object):
+    TV_COL_ID = 0
+    TV_COL_COLOR = 1
+    TV_COL_LABEL = 2
+
     def __init__(self, model, axis, fields, attrs):
-        self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_calendar',gettext.textdomain())
+        self.glade = gtk.glade.XML(common.terp_path("openerp.glade"),'widget_view_calendar', gettext.textdomain())
         self.widget = self.glade.get_widget('widget_view_calendar')
 
         self._label_current = self.glade.get_widget('label_current')
@@ -86,13 +83,18 @@ class ViewCalendar(object):
         self._radio_week = self.glade.get_widget('radio_week')
         self._radio_day = self.glade.get_widget('radio_day')
         self._small_calendar = self.glade.get_widget('calendar_small')
+        self._calendar_treeview = self.glade.get_widget('calendar_treeview')
 
         self.fields = fields
         self.attrs = attrs
         self.axis = axis
+        self.screen = None
 
         self.cal_model = Calendar.Model()
         self.cal_view = Calendar.Calendar(self.cal_model)
+        self.cal_view.connect('event-clicked', self._on_event_clicked)
+        self.cal_view.connect('do_month_back_forward', self._back_forward)
+        self.cal_view.connect('day-selected', self._change_small)
 
         vbox = self.glade.get_widget('cal_vbox')
         vbox.pack_start(self.cal_view)
@@ -101,7 +103,7 @@ class ViewCalendar(object):
         self.process = False
         self.glade.signal_connect('on_but_forward_clicked', self._back_forward, 1)
         self.glade.signal_connect('on_but_back_clicked', self._back_forward, -1)
-        self.glade.signal_connect('on_but_today_clicked', self._today, -1)
+        self.glade.signal_connect('on_but_today_clicked', self._today)
         self.glade.signal_connect('on_calendar_small_day_selected_double_click', self._change_small)
         self.glade.signal_connect('on_button_day_clicked', self._change_view, 'day')
         self.glade.signal_connect('on_button_week_clicked', self._change_view, 'week')
@@ -118,14 +120,49 @@ class ViewCalendar(object):
         self.colors = {}
         self.models = None
 
+        if self.color_field:
+            model = gtk.ListStore(str, str, str)
+            self._calendar_treeview.set_model(model)
+            self._calendar_treeview.get_selection().set_mode(gtk.SELECTION_NONE)
+
+            for c in (self.TV_COL_ID, self.TV_COL_COLOR):
+                column = gtk.TreeViewColumn(None, gtk.CellRendererText(), text=c)
+                self._calendar_treeview.append_column(column)
+                column.set_visible(False) 
+
+            renderer = gtk.CellRendererText()
+            column = gtk.TreeViewColumn(None, renderer, text=self.TV_COL_LABEL)
+            col_label = gtk.Label('')
+            col_label.set_markup('<b>%s</b>' % self.fields[self.color_field]['string'])
+            col_label.show()
+            column.set_widget(col_label)
+            column.set_cell_data_func(renderer, self._treeview_setter)
+            self._calendar_treeview.append_column(column)
+            
+
+    def _treeview_setter(self, column, cell, store, iter):
+        color = store.get_value(iter, self.TV_COL_COLOR)
+        cell.set_property('background', str(color))
+
+    def add_to_treeview(self, name, value, color):
+        value = str(value)
+        model = self._calendar_treeview.get_model()
+        for row in model:
+            if row[self.TV_COL_ID] == value:
+                return  # id already in the treeview
+        iter = model.append()
+        model.set(iter, self.TV_COL_ID, value, self.TV_COL_COLOR, color, self.TV_COL_LABEL, name)
 
     def _change_small(self, widget, *args, **argv):
-        t = list(widget.get_date() )
-        t[1] += 1
+        if isinstance(widget, gtk.Calendar):
+            t = list(widget.get_date())
+            t[1] += 1
+        else:
+            t = list(args[0].timetuple()[:3])
         self.date = DateTime.DateTime(*t)
         self.display(None)
 
-    def _today(self, widget, type, *args, **argv):
+    def _today(self, widget, *args, **argv):
         self.date = DateTime.now()
         self.display(None)
 
@@ -147,25 +184,29 @@ class ViewCalendar(object):
         self.process = False
         return True
 
-
+    def _on_event_clicked(self, calendar, calendar_event, hippo_event):
+        if hippo_event.button == 1 and hippo_event.count == 1:   # simple-left-click
+            self.screen.current_model = calendar_event.model
+            self.screen.switch_view(mode='form')
+            
     def __update_colors(self):
         self.colors = {}
         if self.color_field:
             for model in self.models:
-                evt = model.get()
-                key = evt[self.color_field]
+                
+                key = model.value[self.color_field]
                 name = key
                 value = key
 
                 if isinstance(key, (tuple, list)):
                     value, name = key
+                    key = value
 
                 self.colors[key] = (name, value, None)
 
             colors = choice_colors(len(self.colors))
             for i, (key, value) in enumerate(self.colors.items()):
                 self.colors[key] = (value[0], value[1], colors[i])
-
 
     def display(self, models):
 
@@ -183,7 +224,8 @@ class ViewCalendar(object):
             self.cal_view.model = self.cal_model
 
             self.cal_model.add_events(self.__get_events())
-
+        #else:
+        #    print "no models :("
         self.refresh()
 
     def refresh(self):
@@ -192,13 +234,13 @@ class ViewCalendar(object):
             self._radio_month.set_active(True)
             d1 = datetime(*list(t)[:6])
             self.cal_view.range = self.cal_view.RANGE_MONTH
-            self.cal_view.selected = d1
+            self.cal_view.selected = date(*list(t)[:3])
             self._label_current.set_text(self.date.strftime('%B %Y'))
         elif self.mode=='week':
             self._radio_week.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_WEEK
             d1 = datetime(*list(t)[:6])
-            self.cal_view.selected = d1
+            self.cal_view.selected = date(*list(t)[:3])
             self._label_current.set_text(_('Week') + ' ' + self.date.strftime('%W, %Y'))
         elif self.mode=='day':
             self._radio_day.set_active(True)
@@ -217,23 +259,13 @@ class ViewCalendar(object):
 
     def __get_events(self):
         events = []
-        #day = self.date.tuple()[2]
         for model in self.models:
-            evt = model.get()
-            self.__convert(evt)
-            e = self.__get_event(evt)
+            e = self.__get_event(model)
+            if e:
+                if e.color_info:
+                    self.add_to_treeview(*e.color_info)
+                events.append(e)
 
-            #print "event:", repr(e)
-            #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
-            #    continue
-            #print " -> shown"
-
-            event = Calendar.Event(
-                    e.title,
-                    datetime(*e.starts[:7]),
-                    datetime(*e.ends[:7]),
-                    bg_color = e.color)
-            events.append(event)
         return events
 
     def __convert(self, event):
@@ -258,12 +290,15 @@ class ViewCalendar(object):
                 ds[3] = 9
                 event[fld] = tuple(ds)
 
-    def __get_event(self, event):
+    def __get_event(self, model):
+        
+        event = model.value.copy()
+        self.__convert(event)
 
-        title = ''       # the title
-        description = [] # the description
-        starts = None    # the starting time (datetime)
-        ends = None      # the end time (datetime)
+        caption = ''     
+        description = [] 
+        starts = None   
+        ends = None      
 
         if self.axis:
 
@@ -272,7 +307,7 @@ class ViewCalendar(object):
 
             if isinstance(s, (tuple, list)): s = s[-1]
 
-            title = ustr(s)
+            caption = ustr(s)
 
             for f in self.axis[1:]:
                 s = event[f]
@@ -321,15 +356,35 @@ class ViewCalendar(object):
 
         #starts = format.format_datetime(starts, "datetime", True)
         #ends = format.format_datetime(ends, "datetime", True)
+        
+        if not starts:
+            return None
 
-        color_key = event.get(self.color_field)
-        color = self.colors.get(color_key)
+        #day = self.date.tuple()[2]
+        #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
+        #    return None
 
-        title = title.strip()
+        color_key = event.get(self.color_field)[0]
+        color_info = self.colors.get(color_key)
+
+        color = None
+        if color_info:
+            color = color_info[2]
+
         description = ', '.join(description).strip()
-
-        return TinyEvent(event=event, starts=starts, ends=ends, title=title, description=description, dayspan=span, color=(color or None) and color[-1])
-
+        all_day = span > 0
+        
+        return TinyEvent(model=model,
+                         caption=caption.strip(),
+                         start=datetime(*starts[:7]), 
+                         end=datetime(*ends[:7]), 
+                         description=description, 
+                         dayspan=span,
+                         all_day=all_day,
+                         color_info=color_info,
+                         bg_color = (all_day or self.mode != 'month') and color or 'white',
+                         text_color = (all_day or self.mode != 'month') and 'black' or color,
+        )
 
 
 class parser_calendar(interface.parser_interface):

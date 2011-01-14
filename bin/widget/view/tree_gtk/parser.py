@@ -1,30 +1,22 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#    OpenERP, Open Source Management Solution	
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# $Id$
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -97,9 +89,11 @@ class parser_tree(interface.parser_interface):
                 treeview.cells[node_attrs['name']] = cell
                 col = gtk.TreeViewColumn(None, cell)
                 btn_list.append(col)
-#                n = treeview.append_column(col)
+
             if node.localName == 'field':
                 fname = str(node_attrs['name'])
+                if fields[fname]['type'] in ('image', 'binary'):
+                    continue    # not showed types
                 if fname == 'sequence':
                     treeview.sequence = True
                 for boolean_fields in ('readonly', 'required'):
@@ -112,12 +106,12 @@ class parser_tree(interface.parser_interface):
                 treeview.cells[fname] = cell
                 renderer = cell.renderer
                 
-                ro = editable and not node_attrs.get('readonly', False)
+                write_enable = editable and not node_attrs.get('readonly', False)
                 if isinstance(renderer, gtk.CellRendererToggle):
-                    renderer.set_property('activatable', ro)
+                    renderer.set_property('activatable', write_enable)
                 elif isinstance(renderer, (gtk.CellRendererText, gtk.CellRendererCombo, date_renderer.DecoratorRenderer)):
-                    renderer.set_property('editable', ro)
-                if ro:
+                    renderer.set_property('editable', write_enable)
+                if write_enable:
                     renderer.connect_after('editing-started', send_keys, treeview)
 #                   renderer.connect_after('editing-canceled', self.editing_canceled)
 
@@ -562,6 +556,25 @@ class CellRendererButton(gtk.GenericCellRenderer):
         self.yalign = 0.5
         self.textborder = 4
 
+    def __get_states(self):
+        return [e for e in self.attrs.get('states','').split(',') if e]
+
+    def __get_model_state(self, widget, cell_area):
+        path = widget.get_path_at_pos(int(cell_area.x),int(cell_area.y))
+        modelgrp = widget.get_model()
+        model = modelgrp.models[path[0][0]]
+
+        if model and ('state' in model.mgroup.fields):
+            state = model['state'].get(model)
+        else:
+            state = 'draft'
+        return state
+    
+    def __is_visible(self, widget, cell_area):
+        states = self.__get_states()
+        model_state = self.__get_model_state(widget, cell_area)
+        return (not states) or (model_state in states)
+
     def do_set_property(self, pspec, value):
         setattr(self, pspec.name, value)
 
@@ -570,6 +583,10 @@ class CellRendererButton(gtk.GenericCellRenderer):
 
     def on_render(self, window, widget, background_area, cell_area,
             expose_area, flags):
+
+        if not self.__is_visible(widget, cell_area):
+            return True
+
         state = gtk.STATE_NORMAL
         shadow = gtk.SHADOW_OUT
         if self.clicking and flags & gtk.CELL_RENDERER_SELECTED:
@@ -579,12 +596,14 @@ class CellRendererButton(gtk.GenericCellRenderer):
                 None, widget, "button",
                 cell_area.x, cell_area.y,
                 cell_area.width, cell_area.height)
-        layout = widget.create_pango_layout('')
-        layout.set_font_description(widget.style.font_desc)
-        w, h = layout.get_size()
-        x = cell_area.x
-        y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
-        window.draw_layout(widget.style.text_gc[0], x, y, layout)
+        
+        #layout = widget.create_pango_layout('')
+        #layout.set_font_description(widget.style.font_desc)
+        #w, h = layout.get_size()
+        #x = cell_area.x
+        #y = int(cell_area.y + (cell_area.height - h / pango.SCALE) / 2)
+        #window.draw_layout(widget.style.text_gc[0], x, y, layout)
+
         layout = widget.create_pango_layout(self.text)
         layout.set_font_description(widget.style.font_desc)
         w, h = layout.get_size()
@@ -608,6 +627,10 @@ class CellRendererButton(gtk.GenericCellRenderer):
 
     def on_start_editing(self, event, widget, path, background_area,
             cell_area, flags):
+        
+        if not self.__is_visible(widget, cell_area):
+            return
+        
         if (event is None) or ((event.type == gtk.gdk.BUTTON_PRESS) \
                 or (event.type == gtk.gdk.KEY_PRESS \
                     and event.keyval == gtk.keysyms.space)):
@@ -653,7 +676,6 @@ class CellRendererButton(gtk.GenericCellRenderer):
                         raise Exception, 'Unallowed button type'
                     widget.screen.reload()
             else:
-                self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
                 widget.screen.display()
             self.emit("clicked", path)
             def timeout(self, widget):

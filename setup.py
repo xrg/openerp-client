@@ -1,33 +1,26 @@
-# -*- coding: utf-8 -*-
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2008 Tiny SPRL (http://tiny.be) All Rights Reserved.
+#    OpenERP, Open Source Management Solution	
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# $Id$
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-###############################################################################
+##############################################################################
+
 # setup from TinERP
 #   taken from straw http://www.nongnu.org/straw/index.html
 #   taken from gnomolicious http://www.nongnu.org/gnomolicious/
@@ -113,6 +106,8 @@ def data_files():
 
 included_plugins = ['workflow_print']
 
+file('openerp-client','w').close()
+
 def find_plugins():
     for plugin in included_plugins:
         path=opj('bin', 'plugins', plugin)
@@ -131,16 +126,6 @@ def translations():
 
 check_modules()
 
-# create startup script
-start_script = \
-"#!/bin/sh\n\
-cd %s/lib/python%s/site-packages/openerp-client\n\
-exec %s ./openerp-client.py $@" % (sys.prefix, py_short_version, sys.executable)
-# write script
-f = open('openerp-client', 'w')
-f.write(start_script)
-f.close()
-
 if os.name <> 'nt' and sys.argv[1] == 'build_po':
     os.system('(cd bin ; find . -name \*.py && find . -name \*.glade | xargs xgettext -o po/%s.pot)' % name)
     for file in ([ os.path.join('bin', 'po', fname) for fname in os.listdir('bin/po') ]):
@@ -148,21 +133,24 @@ if os.name <> 'nt' and sys.argv[1] == 'build_po':
             os.system('msgmerge --update --backup=off %s bin/po/%s.pot' % (file, name))
     sys.exit()
 
-options = {"py2exe": {"compressed": 1,
-                      "optimize": 2,
-                      "packages": ["encodings","gtk", "matplotlib", "pytz"],
-                      "includes": "pango,atk,gobject,cairo,atk,pangocairo,matplotlib._path",
-                      "excludes": ["Tkinter", "tcl", "TKconstants"],
-                      "dll_excludes": [
-                          "iconv.dll","intl.dll","libatk-1.0-0.dll",
-                          "libgdk_pixbuf-2.0-0.dll","libgdk-win32-2.0-0.dll",
-                          "libglib-2.0-0.dll","libgmodule-2.0-0.dll",
-                          "libgobject-2.0-0.dll","libgthread-2.0-0.dll",
-                          "libgtk-win32-2.0-0.dll","libpango-1.0-0.dll",
-                          "libpangowin32-1.0-0.dll",
-                          "wxmsw26uh_vc.dll",],
-                      }
-           }
+options = {
+    "py2exe": {
+        "compressed": 1,
+        "optimize": 2,
+        "packages": ["encodings","gtk", "matplotlib", "pytz"],
+        "includes": "pango,atk,gobject,cairo,atk,pangocairo,matplotlib._path",
+        "excludes": ["Tkinter", "tcl", "TKconstants"],
+        "dll_excludes": [
+            "iconv.dll","intl.dll","libatk-1.0-0.dll",
+            "libgdk_pixbuf-2.0-0.dll","libgdk-win32-2.0-0.dll",
+            "libglib-2.0-0.dll","libgmodule-2.0-0.dll",
+            "libgobject-2.0-0.dll","libgthread-2.0-0.dll",
+            "libgtk-win32-2.0-0.dll","libpango-1.0-0.dll",
+            "libpangowin32-1.0-0.dll",
+            "wxmsw26uh_vc.dll",
+        ],
+    }
+}
 
 setup(name             = name,
       version          = version,
@@ -176,14 +164,17 @@ setup(name             = name,
       data_files       = data_files(),
       translations     = translations(),
       scripts          = ['openerp-client'],
-      packages         = ['openerp-client', 'openerp-client.common', 
-                          'openerp-client.modules', 'openerp-client.modules.action',
+      packages         = ['openerp-client', 
+                          'openerp-client.common', 
+                          'openerp-client.modules', 
+                          'openerp-client.modules.action',
                           'openerp-client.modules.gui',
                           'openerp-client.modules.gui.window',
                           'openerp-client.modules.gui.window.view_sel',
                           'openerp-client.modules.gui.window.view_tree',
                           'openerp-client.modules.spool',
-                          'openerp-client.printer', 'openerp-client.tools',
+                          'openerp-client.printer', 
+                          'openerp-client.tools',
                           'openerp-client.tinygraph',
                           'openerp-client.widget',
                           'openerp-client.widget.model',
@@ -197,7 +188,7 @@ setup(name             = name,
                           'openerp-client.plugins'] + list(find_plugins()),
       package_dir      = {'openerp-client': 'bin'},
       distclass = os.name <> 'nt' and L10nAppDistribution or None,
-      windows=[{"script":"bin\\openerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\openerp.ico")]}],
+      windows=[{"script":"bin\\openerp-client.py", "icon_resources":[(1,"bin\\pixmaps\\openerp-icon.ico")]}],
       options = options,
       )
 

@@ -1,6 +1,31 @@
-;NSIS Modern User Interface
-;Start Menu Folder Selection Example Script
-;Written by Joost Verburg
+##############################################################################
+#
+# Copyright (c) 2004-2008 Tiny SPRL (http://tiny.be) All Rights Reserved.
+#
+# WARNING: This program as such is intended to be used by professional
+# programmers who take the whole responsability of assessing all potential
+# consequences resulting from its eventual inadequacies and bugs
+# End users who are looking for a ready-to-use solution with commercial
+# garantees and support are strongly adviced to contract a Free Software
+# Service Company
+#
+# This program is Free Software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 3
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+###############################################################################
+!ifndef VERSION
+    !error "Do not forget to specify the version of OpenERP - /DVERSION=<VERSION>"
+!endif 
 
 ;--------------------------------
 ;Include Modern UI
@@ -12,7 +37,9 @@
 
 ;Name and file
 Name "OpenERP Client"
-OutFile "openerp-client-setup.exe"
+OutFile "openerp-client-setup-${VERSION}.exe"
+SetCompressor lzma
+SetCompress auto
 
 ;Default installation folder
 InstallDir "$PROGRAMFILES\OpenERP Client"
@@ -20,7 +47,7 @@ InstallDir "$PROGRAMFILES\OpenERP Client"
 ;Get installation folder from registry if available
 InstallDirRegKey HKCU "Software\OpenERP Client" ""
 
-BrandingText "OpenERP Client v5.0-Alpha"
+BrandingText "OpenERP Client ${VERSION}"
 
 ;Vista redirects $SMPROGRAMS to all users without this
 RequestExecutionLevel admin
@@ -39,20 +66,17 @@ Var STARTMENU_FOLDER
 ;--------------------------------
 ;Pages
 
-!define MUI_ICON ".\bin\pixmaps\openerp.ico"
-;--!define MUI_UNICON ".\bin\pixmaps\openerp.ico"
+!define MUI_ICON ".\bin\pixmaps\openerp-icon.ico"
 !define MUI_WELCOMEFINISHPAGE_BITMAP ".\bin\pixmaps\openerp-intro.bmp"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP ".\bin\pixmaps\openerp-intro.bmp"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_BITMAP_NOSTRETCH
 !define MUI_HEADER_TRANSPARENT_TEXT ""
 !define MUI_HEADERIMAGE_BITMAP ".\bin\pixmaps\openerp-slogan.bmp"
-;-- !define MUI_WELCOMEPAGE_TITLE "OpenERP grrrr"
-;-- !define MUI_WELCOMEPAGE_TEXT "Superman"
+!define MUI_LICENSEPAGE_TEXT_BOTTOM "Usually, a proprietary license provides with the software: limited number of users, limited in time usage, etc. This Open Source license is the opposite: it garantees you the right to use, copy, study, distribute and modify Open ERP for free."
 
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "doc\License.rtf"
-# !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_DIRECTORY
 
 ;Start Menu Folder Page Configuration
@@ -89,15 +113,17 @@ Var STARTMENU_FOLDER
 
 ;--------------------------------
 ;Installer Sections
+;
+Function .onInit 
+    ClearErrors
+    ReadRegStr $0 HKCU "Software\OpenERP Client" ""
+    IfErrors DoInstall 0
+        MessageBox MB_OK "Can not install the Open ERP Client because a previous installation already exists on this system. Please uninstall your current installation and relaunch this setup wizard."
+        Quit
+    DoInstall:
+FunctionEnd
 
 Section "OpenERP Client" SecOpenERPClient
-        ClearErrors
-        ReadRegStr $0 HKCU "Software\OpenERP Client" ""
-        IfErrors DoInstall 0
-            MessageBox MB_OK "Can't install this version of OpenERP Client because there is a previous installation on this system !"
-            Quit
-
-        DoInstall:
 	SetOutPath "$INSTDIR"
   
 	;ADD YOUR OWN FILES HERE...
@@ -113,7 +139,7 @@ Section "OpenERP Client" SecOpenERPClient
 	WriteRegStr HKCU "Software\OpenERP Client" "" $INSTDIR
 
 	;Create uninstaller
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client" "DisplayName" "OpenERP Client 5.0"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client" "DisplayName" "OpenERP Client ${VERSION}"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenERP Client" "UninstallString" "$INSTDIR\Uninstall.exe"
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
 

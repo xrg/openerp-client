@@ -55,12 +55,12 @@ class CanvasGrid(CanvasTable):
         old_rows, old_cols = self.get_size()
 
         # Create new cells if the new size is bigger.
-        if rows > old_rows:
-            for rownum in range(old_rows, rows):
-                self._add_line(cols)
         if cols > old_cols:
             for x in range(old_cols, cols):
                 self._add_column()
+        if rows > old_rows:
+            for rownum in range(old_rows, rows):
+                self._add_line(cols)
 
         # Remove cells if the new size is smaller.
         self.shrink(rows, cols)

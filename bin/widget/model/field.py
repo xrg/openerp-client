@@ -1,30 +1,22 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#    OpenERP, Open Source Management Solution	
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# $Id$
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -159,10 +151,22 @@ class CharField(object):
         return model.state_attrs[self.name]
 
 class BinaryField(CharField):
+    def __check_model(self, model):
+        assert self.name in model.mgroup.mfields
+    
+    def __check_load(self, model, modified, bin_size):
+        if model.id and (self.name not in model.value or (model.value[self.name] is None)):
+            c = rpc.session.context.copy()
+            c.update(model.context_get())
+            c['bin_size'] = bin_size
+            value = model.rpc.read([model.id], [self.name], c)[0][self.name]
+            self.set(model, value, modified=modified, get_binary_size=bin_size)
+
     def get_size_name(self):
         return "%s.size" % self.name
 
     def set(self, model, value, test_state=True, modified=False, get_binary_size=True):
+        self.__check_model(model)
         if model.is_wizard():
             get_binary_size = False
         model.value[self.name] = None
@@ -176,19 +180,17 @@ class BinaryField(CharField):
         return True
 
     def get(self, model, check_load=True, readonly=True, modified=False):
-        if self.name in model.value:
-            if (model.value[self.name] is None) and (model.id):
-                c = rpc.session.context.copy()
-                c.update(model.context_get())
-                c['bin_size'] = False
-                value = model.rpc.read([model.id], [self.name], c)[0][self.name]
-                self.set(model, value, modified=modified, get_binary_size=False)
+        self.__check_model(model)
+        self.__check_load(model, modified, False)
         return model.value.get(self.name, False) or False
 
     def get_client(self, model):
-        return model.value.get(self.get_size_name(), False)
+        self.__check_model(model)
+        self.__check_load(model, False, True)
+        return model.value.get(self.get_size_name(), False) or False
 
     def set_client(self, model, value, test_state=True, force_change=False):
+        self.__check_model(model)
         before = self.get(model)
         self.set(model, value, test_state, get_binary_size=False)
         if before != self.get(model):

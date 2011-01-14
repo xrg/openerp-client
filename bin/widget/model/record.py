@@ -1,30 +1,22 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2004-2008 TINY SPRL. (http://tiny.be) All Rights Reserved.
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
-# $Id$
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -78,13 +70,13 @@ class ModelRecord(signal_event.signal_event):
 
     def __getitem__(self, name):
         return self.mgroup.mfields.get(name, False)
-    
+
     def __repr__(self):
         return '<ModelRecord %s@%s>' % (self.id, self.resource)
 
     def is_modified(self):
         return self.modified
-    
+
     def is_wizard(self):
         return self.mgroup.is_wizard
 
@@ -115,11 +107,21 @@ class ModelRecord(signal_event.signal_event):
         self._loaded = False
         self.reload()
 
+    def failed_validation(self):
+        invalid_fields = self.rpc.get_invalid_fields()
+        for item in invalid_fields:
+           if item in self.mgroup.mfields:
+               self.mgroup.mfields[item].get_state_attrs(self)['valid'] = False
+
     def save(self, reload=True):
         self._check_load()
+
         if not self.id:
             value = self.get(get_readonly=False)
             self.id = self.rpc.create(value, self.context_get())
+            if not self.id:
+                self.failed_validation()
+
         else:
             if not self.is_modified():
                 return self.id
@@ -127,7 +129,8 @@ class ModelRecord(signal_event.signal_event):
             context= self.context_get()
             context= context.copy()
             context['read_delta']= time.time()-self.read_time
-            if not rpc.session.rpc_exec_auth('/object', 'execute', self.resource, 'write', [self.id], value, context):
+            if not self.rpc.write([self.id], value, context):
+                self.failed_validation()
                 return False
         self._loaded = False
         if reload:
@@ -209,11 +212,11 @@ class ModelRecord(signal_event.signal_event):
             self.modified_fields = {}
         if signal:
             self.signal('record-changed')
-        
+
     def reload(self):
         if not self.id:
             return
-        c= rpc.session.context.copy()
+        c = rpc.session.context.copy()
         c.update(self.context_get())
         c['bin_size'] = True
         res = self.rpc.read([self.id], self.mgroup.mfields.keys(), c)
@@ -257,11 +260,11 @@ class ModelRecord(signal_event.signal_event):
                     if fieldname not in self.mgroup.mfields:
                         continue
                     self.mgroup.mfields[fieldname].attrs['domain'] = value
-            warning=response.get('warning',{})			
+            warning=response.get('warning',{})
             if warning:
                 common.warning(warning['message'], warning['title'])
         self.signal('record-changed')
-    
+
     def on_change_attrs(self, callback):
         self.signal('attrs-changed')
 
