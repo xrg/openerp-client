@@ -62,6 +62,7 @@ class form(object):
 
 		fields = {}
 		self.model = model
+		self.window = window
 		self.previous_action = None
 		self.glade = glade.XML(common.terp_path("terp.glade"),'win_form_container',gettext.textdomain())
 		self.widget = self.glade.get_widget('win_form_container')
@@ -75,12 +76,13 @@ class form(object):
 		oregistry.add_receiver('misc-message', self._misc_message)
 
 		self.name = self.screen.current_view.title
+		vp = gtk.Viewport()
+		vp.set_shadow_type(gtk.SHADOW_NONE)
+		vp.add(self.screen.widget)
 		self.sw = gtk.ScrolledWindow()
 		self.sw.set_shadow_type(gtk.SHADOW_NONE)
 		self.sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-		self.sw.add_with_viewport(self.screen.widget)
-		vp = self.sw.get_child()
-		vp.set_shadow_type(gtk.SHADOW_NONE)
+		self.sw.add(vp)
 		self.sw.show_all()
 		
 		self.has_backup = False
@@ -171,7 +173,7 @@ class form(object):
 		id = self.screen.id_get()
 		if id:
 			import win_attach
-			win = win_attach.win_attach(self.model, id)
+			win = win_attach.win_attach(self.model, id, parent=self.window)
 			win.go()
 		else:
 			self.message_state(_('No resource selected !'))

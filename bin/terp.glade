@@ -6873,7 +6873,7 @@ No</property>
   <property name="title" translatable="yes">Tiny ERP - Attachment</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
-  <property name="modal">False</property>
+  <property name="modal">True</property>
   <property name="default_width">740</property>
   <property name="default_height">590</property>
   <property name="resizable">True</property>
