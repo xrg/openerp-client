@@ -22,8 +22,8 @@
 ##############################################################################
 
 name = 'openerp-client'
-version = '5.0.0'
-release = '3'
+version = '5.0.1'
+release = '0'
 description = 'OpenERP Client'
 long_desc = '''\
 OpenERP is a complete ERP and CRM. The main features are accounting (analytic
@@ -34,7 +34,7 @@ customizable reports, and SOAP and XML-RPC interfaces.
 '''
 classifiers = """\
 Development Status :: 5 - Production/Stable
-License :: OSI Approved :: GNU General Public License Version 3 (GPL-3)
+License :: OSI Approved :: GNU General Public License (GPL)
 Programming Language :: Python
 """
 url = 'http://www.openerp.com'

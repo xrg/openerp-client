@@ -150,20 +150,44 @@ class form(object):
 
     def sig_switch_graph(self, widget=None):
         return self.sig_switch(widget, 'graph')
-
+    
+    def get_resource(self,widget):
+        all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])
+        get_id = int(widget.get_value())
+        if get_id in all_ids:
+            current_ids = self.screen.ids_get()
+            if get_id in current_ids:
+                self.screen.display(get_id)
+            else:
+                self.screen.load([get_id])    
+            self.screen.current_view.set_cursor()
+        else:
+            common.message(_('Resource ID does not exist for this object!'))    
+    
+    def get_event(self, widget, event, win):
+        if event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):
+            win.destroy()
+            self.get_resource(widget)
+        
+        
     def sig_goto(self, *args):
         if not self.modified_save():
             return
+        
         glade2 = glade.XML(common.terp_path("openerp.glade"),'dia_goto_id',gettext.textdomain())
         widget = glade2.get_widget('goto_spinbutton')
         win = glade2.get_widget('dia_goto_id')
+        widget.connect('key_press_event',self.get_event,win)
+        
         win.set_transient_for(self.window)
         win.show_all()
 
         response = win.run()
         win.destroy()
+        
         if response == gtk.RESPONSE_OK:
-            self.screen.load( [int(widget.get_value())] )
+            self.get_resource(widget)
+            
 
     def destroy(self):
         oregistry.remove_receiver('misc-message', self._misc_message)
@@ -270,6 +294,7 @@ class form(object):
         new_id = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'copy', res_id, {}, ctx)
         if new_id:
             self.screen.load([new_id])
+            self.screen.current_view.set_cursor()
             self.message_state(_('Working now on the duplicated document !'))
 
     def _form_save(self, auto_continue=True):
@@ -280,6 +305,7 @@ class form(object):
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
         else:
+            common.warning(_('Invalid form, correct red fields !'),_('Error !'))
             self.message_state(_('Invalid form, correct red fields !'), color="red")
         return bool(id)
 

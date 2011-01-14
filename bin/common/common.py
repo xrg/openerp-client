@@ -436,9 +436,10 @@ is displayed on the second tab.
             remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
 
             if rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'send', tb, explanation, remarks):
-                common.message(_('Your problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'))
+                common.message(_('Your problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'), parent=win)
+                win.destroy()
             else:
-                message(_('Your problem could <u>NOT</u> be sent to the quality team !\nPlease report this error manually at %s') % ('http://openerp.com/report_bug.html'))
+                common.message(_('Your problem could *NOT* be sent to the quality team !\nPlease report this error manually at:\n\t%s') % ('http://openerp.com/report_bug.html',), title=_('Error'), type=gtk.MESSAGE_ERROR, parent=win)
 
         xmlGlade.signal_connect('on_button_send_clicked', send)
         xmlGlade.signal_connect('on_closebutton_clicked', lambda x : win.destroy())

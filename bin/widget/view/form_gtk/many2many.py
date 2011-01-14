@@ -125,6 +125,7 @@ class many2many(interface.widget_interface):
             self.avail_ids.add(i)
         self.screen.display()
         self.wid_text.set_text('')
+        self._focus_out()
 
     def _sig_remove(self, *args):
         rem_id=[]
@@ -134,6 +135,7 @@ class many2many(interface.widget_interface):
             self.avail_ids.remove(i)
         self.screen.remove()
         self.screen.display()
+        self._focus_out()
 
     def _sig_activate(self, *args):
         self._sig_add()

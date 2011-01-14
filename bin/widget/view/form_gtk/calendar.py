@@ -21,9 +21,9 @@
 ##############################################################################
 
 import time
-#import datetime as DT
-import mx
-from mx import DateTime as DT
+from datetime import datetime as DT
+#import mx
+#from mx import DateTime as DT
 
 import gtk
 
@@ -35,7 +35,6 @@ import locale
 import rpc
 import service
 import tools
-import tools.datetime_util
 
 import date_widget
 
@@ -94,7 +93,7 @@ class calendar(interface.widget_interface):
             return False
         try:
             #date1=mx.DateTime.strptime(str, self.format)
-            date1=tools.datetime_util.strptime(str, self.format)
+            date1=DT.strptime(str, self.format)
         except:
             return False
         return date1.strftime(DT_FORMAT)
@@ -115,7 +114,7 @@ class calendar(interface.widget_interface):
             if len(value)>10:
                 value=value[:10]
             #date=mx.DateTime.strptime(value, DT_FORMAT)
-            date=tools.datetime_util.strptime(value, DT_FORMAT)
+            date=DT.strptime(value, DT_FORMAT)
             t=date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
@@ -153,7 +152,7 @@ class calendar(interface.widget_interface):
         response = win.run()
         if response == gtk.RESPONSE_OK:
             year, month, day = cal.get_date()
-            dt = DT.Date(year, month+1, day)
+            dt = DT(year, month+1, day)
             self.entry.set_text(dt.strftime(LDFMT))
         self._focus_out()
         window.present()
@@ -205,21 +204,16 @@ class datetime(interface.widget_interface):
         if str=='':
             return False
         try:
-            #date = mx.DateTime.strptime(str, self.format)
-            date = tools.datetime_util.strptime(str, self.format)
+            date = DT.strptime(str, self.format)
         except:
             return False
-        if 'tz' in rpc.session.context and timezone:
-            try:
-                import pytz
-                lzone = pytz.timezone(rpc.session.context['tz'])
-                szone = pytz.timezone(rpc.session.timezone)
-                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                ldt = lzone.localize(dt, is_dst=True)
-                sdt = ldt.astimezone(szone)
-                date = sdt
-            except:
-                pass
+        if rpc.session.context.get('tz',False) and timezone:
+            import pytz
+            lzone = pytz.timezone(rpc.session.context['tz'])
+            szone = pytz.timezone(rpc.session.timezone)
+            ldt = lzone.localize(date, is_dst=True)
+            sdt = ldt.astimezone(szone)
+            date = sdt
         return date.strftime(DHM_FORMAT)
 
     def set_value(self, model, model_field):
@@ -236,19 +230,14 @@ class datetime(interface.widget_interface):
         if not dt_val:
             self.entry.clear()
         else:
-            #date = mx.DateTime.strptime(dt_val, DHM_FORMAT)
-            date = tools.datetime_util.strptime(dt_val, DHM_FORMAT)
-            if 'tz' in rpc.session.context and timezone:
-                try:
-                    import pytz
-                    lzone = pytz.timezone(rpc.session.context['tz'])
-                    szone = pytz.timezone(rpc.session.timezone)
-                    dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                    sdt = szone.localize(dt, is_dst=True)
-                    ldt = sdt.astimezone(lzone)
-                    date = ldt
-                except:
-                    pass
+            date = DT.strptime(dt_val, DHM_FORMAT)
+            if rpc.session.context.get('tz',False) and timezone:
+                import pytz
+                lzone = pytz.timezone(rpc.session.context['tz'])
+                szone = pytz.timezone(rpc.session.timezone)
+                sdt = szone.localize(date, is_dst=True)
+                ldt = sdt.astimezone(lzone)
+                date = ldt
             t=date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
@@ -299,7 +288,7 @@ class datetime(interface.widget_interface):
             dt = cal.get_date()
             month = int(dt[1])+1
             day = int(dt[2])
-            date = DT.DateTime(dt[0], month, day, hr, mi)
+            date = DT(dt[0], month, day, hr, mi)
             value = date.strftime(DHM_FORMAT)
 
             self.show(value, timezone=False)
@@ -351,17 +340,14 @@ class stime(interface.widget_interface):
             self.entry.clear()
         else:
             date = time.strptime(dt_val, HM_FORMAT)
-            if 'tz' in rpc.session.context and timezone:
-                try:
-                    import pytz
-                    lzone = pytz.timezone(rpc.session.context['tz'])
-                    szone = pytz.timezone(rpc.session.timezone)
-                    dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                    sdt = szone.localize(dt, is_dst=True)
-                    ldt = sdt.astimezone(lzone)
-                    date = ldt.timetuple()
-                except:
-                    pass
+            if rpc.session.context.get('tz',False) and timezone:
+                import pytz
+                lzone = pytz.timezone(rpc.session.context['tz'])
+                szone = pytz.timezone(rpc.session.timezone)
+                dt = DT(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+                sdt = szone.localize(dt, is_dst=True)
+                ldt = sdt.astimezone(lzone)
+                date = ldt.timetuple()
             t=time.strftime(self.format, date)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
