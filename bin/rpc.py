@@ -20,6 +20,7 @@
 #
 ##############################################################################
 
+import gtk
 import xmlrpclib
 import logging
 import socket
@@ -138,7 +139,7 @@ class rpc_session(object):
             sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
             return sock.execute(method, *args)
         except socket.error, e:
-            common.error(_('Connection refused !'), str(e), str(e))
+            common.message(str(e), title=_('Connection refused !'), type=gtk.MESSAGE_ERROR)
             raise rpc_exception(69, _('Connection refused!'))
         except xmlrpclib.Fault, err:
             raise rpc_exception(err.faultCode, err.faultString)
@@ -169,7 +170,7 @@ class rpc_session(object):
                 sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
                 return sock.exec_auth(method, *args)
             except socket.error, e:
-                common.warning(_('Unable to reach to OpenERP server !\nYou should check your connection to the network and the OpenERP server.'), _('Connection Error'))
+                common.message(_('Unable to reach to OpenERP server !\nYou should check your connection to the network and the OpenERP server.'), _('Connection Error'), type=gtk.MESSAGE_ERROR)
                 raise rpc_exception(69, 'Connection refused!')
             except Exception, e:
                 if isinstance(e, xmlrpclib.Fault) \
@@ -188,7 +189,7 @@ class rpc_session(object):
                 else:
                     common.error(_('Application Error'), _('View details'), str(e))
                 #TODO Must propagate the exception?
-                #raise
+                raise
         else:
             raise rpc_exception(1, 'not logged')
 
@@ -239,8 +240,8 @@ class rpc_session(object):
         if not m:
             return -1
         if m.group(1) == 'http://' or m.group(1) == 'https://':
-            sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
             try:
+                sock = xmlrpclib.ServerProxy(url + '/xmlrpc/db')
                 return sock.list()
             except:
                 return -1
@@ -294,23 +295,28 @@ class rpc_session(object):
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
                     else:
                         gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
-        if 'tz' in self.context:
+        if 'tz' in self.context and self.context['tz']:
             self.timezone = self.rpc_exec_auth('/common', 'timezone_get')
             try:
                 import pytz
             except:
-                common.warning('You select a timezone but OpenERP could not find pytz library !\nThe timezone functionality will be disable.')
+                common.warning('You select a timezone but OpenERP could not find pytz library !\nThe timezone functionality will be disabled.')
 
     def logged(self):
         return self._open
 
     def logout(self):
-        if self._open:
+        if self._open :
+            #try:
+            #    res = self.rpc_exec_auth_wo('/common', 'logout')
+            #except:
+            #    pass
+            self._open = False
             self._open = False
             self.uname = None
             self.uid = None
             self._passwd = None
-        else:
+        else :
             pass
 
 session = rpc_session()

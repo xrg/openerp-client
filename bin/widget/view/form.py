@@ -76,23 +76,25 @@ class ViewWidget(object):
     modelfield = property(_get_modelfield)
 
 class ViewForm(parser_view):
-    def __init__(self, window, screen, widget, children=None,
-            state_aware_widgets=None, toolbar=None):
-        super(ViewForm, self).__init__(window, screen, widget, children,
-                state_aware_widgets, toolbar)
+    def __init__(self, window, screen, widget, children=None, state_aware_widgets=None, toolbar=None):
+        super(ViewForm, self).__init__(window, screen, widget, children, state_aware_widgets, toolbar)
         self.view_type = 'form'
         self.model_add_new = False
+        self.prev = 0
+        self.flag=False
+        self.current = 0
 
         for w in self.state_aware_widgets:
             if isinstance(w.widget, Button):
                 w.widget.form = self
 
-        self.widgets = dict([(name, ViewWidget(self, widget, name))
-                             for name, widget in children.items()])
+        self.widgets = dict([(name, ViewWidget(self, widget, name)) for name, widget in children.items()])
 
         if toolbar:
             hb = gtk.HBox()
             hb.pack_start(self.widget)
+#            self.hpaned = gtk.HPaned()
+#            self.hpaned.pack1(self.widget,True,False)
 
             #tb = gtk.Toolbar()
             #tb.set_orientation(gtk.ORIENTATION_VERTICAL)
@@ -108,23 +110,37 @@ class ViewForm(parser_view):
 
             hb.pack_start(eb, False, False)
             self.widget = hb
-
+#            self.hpaned.pack2(eb,False,True)
+#            self.hpaned.connect("button-press-event",self.move_paned_press)
+#            self.hpaned.connect("button-release-event",self.move_paned_release,window)
+#            window.connect("window-state-event",self.move_paned_window,window)
+#            self.widget = self.hpaned
 
 
             sep = False
+            #setLabel={'print':'Reports','action':'Wizards','relate':'Direct Links'}
+            
             for icontype in ('print', 'action', 'relate'):
+                    
                 if icontype in ('action','relate') and sep:
                     #tb.insert(gtk.SeparatorToolItem(), -1)
                     tb.pack_start(gtk.HSeparator(), False, False, 2)
                     sep = False
+                     
+                #list_done = []     
                 for tool in toolbar[icontype]:
+                    #if icontype not in list_done:
+                    #    l = gtk.Label('<b>' + setLabel[icontype] + '</b>')
+                    #    l.set_use_markup(True)
+#                   #     l.set_alignment(0.0, 0.5) # If Labels want to be Left-aligned
+                    #    tb.pack_start(l, False, False, 3)
+                    #    tb.pack_start(gtk.HSeparator(), False, False, 2)
+                    #    list_done.append(icontype)
                     iconstock = {
                         'print': gtk.STOCK_PRINT,
                         'action': gtk.STOCK_EXECUTE,
                         'relate': gtk.STOCK_JUMP_TO,
                     }.get(icontype, gtk.STOCK_ABOUT)
-
-
 
                     icon = gtk.Image()
                     icon.set_from_stock(iconstock, gtk.ICON_SIZE_BUTTON)
@@ -252,6 +268,45 @@ class ViewForm(parser_view):
                             tool, self.window)
 
                     sep = True
+                    
+#    def move_paned_press(self, widget, event):
+#        if not self.prev:
+#            self.prev = self.hpaned.get_position()
+#            return False
+#        if self.prev and not self.flag:
+#            self.prev = self.hpaned.get_position()
+#            return False
+#
+#    def move_paned_release(self, widget, event, w):
+#        if self.hpaned.get_position()<self.current and self.hpaned.get_position()!=self.prev:
+#            self.prev = self.hpaned.get_position()
+#        else:
+#            self.current= self.hpaned.get_position()
+#        if not self.flag and self.current == self.prev:
+#            self.flag=True
+#            self.hpaned.set_position(w.get_size()[0])
+#        elif not self.flag and self.current>self.prev:
+#            if self.hpaned.get_position()<self.current:
+#                self.hpaned.set_position(self.prev)
+#            else:
+#                self.hpaned.set_position(self.current)
+#        elif self.flag:
+#            if self.current<self.prev:
+#                self.hpaned.set_position(self.current)
+#            elif self.current>self.prev:
+#                self.hpaned.set_position(self.prev)
+#            self.flag=False
+#        self.current = self.hpaned.get_position() - 7
+#        return False
+#
+#    def move_paned_window(self, widget, event, w):
+#        if not self.prev:
+#            self.prev=self.hpaned.get_position()
+#        self.hpaned.set_position(self.prev)
+#        self.prev = 0
+#        self.current = 0
+#        self.flag = False
+#        return False                    
 
 
     def __getitem__(self, name):
@@ -307,23 +362,25 @@ class ViewForm(parser_view):
                             cond=v[i][0],v[i][1],v[i][2][0]
                             attrs_changes[k][i]=cond
         for k,v in attrs_changes.items():
+            result = True
             for condition in v:
-                result = tools.calc_condition(self,model,condition)
-                if result:
-                    if k=='invisible':
-                        obj.hide()
-                    elif k=='readonly':
-                        obj.set_sensitive(False)
-                else:
-                    if k=='invisible':
-                        obj.show()
-                    if k=='readonly':
-                        obj.set_sensitive(True)
+                result = result and tools.calc_condition(self,model,condition)
+            if result:
+                if k=='invisible':
+                    obj.hide()
+                elif k=='readonly':
+                    obj.set_sensitive(False)
+            else:
+                if k=='invisible':
+                    obj.show()
+                if k=='readonly':
+                    obj.set_sensitive(True)
 
     def set_notebook(self,model,nb):
         for i in range(0,nb.get_n_pages()):
-            if nb.get_tab_label(nb.get_nth_page(i)).attrs.get('attrs',False):
-                self.attrs_set(model,nb.get_nth_page(i),nb.get_tab_label(nb.get_nth_page(i)))
+            page = nb.get_nth_page(i)
+            if nb.get_tab_label(page).attrs.get('attrs',False):
+                self.attrs_set(model, page, nb.get_tab_label(page))
 
     def display(self):
         model = self.screen.current_model

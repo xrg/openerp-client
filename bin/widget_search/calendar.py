@@ -20,20 +20,23 @@
 #
 ##############################################################################
 
-import tools
+import gtk
 import time
 import datetime as DT
-import gtk
-import common
 import gettext
 import locale
+
+import mx.DateTime
+from mx.DateTime import *
+
+import tools
+import tools.datetime_util
+import common
+
 import wid_int
 import date_widget
 
-LDFMT = locale.nl_langinfo(locale.D_FMT)
-for x,y in [('%y','%Y'),('%B',''),('%A','')]:
-    LDFMT = LDFMT.replace(x, y)
-
+LDFMT = tools.datetime_util.get_date_format()
 DT_FORMAT = '%Y-%m-%d'
 
 class calendar(wid_int.wid_int):
@@ -48,6 +51,7 @@ class calendar(wid_int.wid_int):
         self.entry1 = self.widget1.widget
         self.entry1.set_property('width-chars', 10)
         self.entry1.set_property('activates_default', True)
+        self.entry1.connect('key_press_event', self.sig_key_press, self.entry1, parent)
         tooltips.set_tip(self.entry1, _('Start date'))
         self.widget.pack_start(self.widget1, expand=False, fill=True)
 
@@ -67,6 +71,7 @@ class calendar(wid_int.wid_int):
         self.entry2 = self.widget2.widget
         self.entry2.set_property('width-chars', 10)
         self.entry2.set_property('activates_default', True)
+        self.entry2.connect('key_press_event', self.sig_key_press, self.entry2, parent)
         tooltips.set_tip(self.entry2, _('End date'))
         self.widget.pack_start(self.widget2, expand=False, fill=True)
 
@@ -84,11 +89,17 @@ class calendar(wid_int.wid_int):
 
     def _date_get(self, str):
         try:
-            date = time.strptime(str, locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'))
+            #date = mx.DateTime.strptime(str, LDFMT)
+            date = tools.datetime_util.strptime(str, LDFMT)
         except:
             return False
-        return time.strftime(DT_FORMAT, date)
-
+        return date.strftime(DT_FORMAT)
+    
+    def sig_key_press(self, widget, event, dest, parent):
+        if event.keyval == gtk.keysyms.F2:
+            self.cal_open(widget, event, dest, parent)
+            return True
+        
     def _value_get(self):
         res = []
         val = self._date_get(self.entry1.get_text())
@@ -129,7 +140,7 @@ class calendar(wid_int.wid_int):
         if response == gtk.RESPONSE_OK:
             year, month, day = cal.get_date()
             dt = DT.date(year, month+1, day)
-            dest.set_text(dt.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')))
+            dest.set_text(dt.strftime(LDFMT))
         win.destroy()
 
     def clear(self):

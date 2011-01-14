@@ -217,15 +217,10 @@ class ViewCalendar(object):
         if self.models:
             self.__update_colors()
 
-            #print "models:", len(self.models)
-            # If doesn't work, remove events
-            #self.cal_model = Calendar.Model()
             self.cal_model = TinyCalModel()
             self.cal_view.model = self.cal_model
 
             self.cal_model.add_events(self.__get_events())
-        #else:
-        #    print "no models :("
         self.refresh()
 
     def refresh(self):
@@ -286,9 +281,10 @@ class ViewCalendar(object):
 
             # default start time is 9:00 AM
             if typ == 'date' and fld == self.date_start:
-                ds = list(event[fld])
-                ds[3] = 9
-                event[fld] = tuple(ds)
+                if event[fld]:
+                    ds = list(event[fld])
+                    ds[3] = 9
+                    event[fld] = tuple(ds)
 
     def __get_event(self, model):
         
@@ -334,7 +330,9 @@ class ViewCalendar(object):
 
                 if n > 0: span = n + 1
 
-            ends = time.localtime(time.mktime(starts) + (h * 60 * 60) + (n * 24 * 60 * 60))
+            t=DateTime.mktime(starts)
+            ends = time.localtime(t.ticks() + (h * 60 * 60) + (n * 24 * 60 * 60))
+
 
         if starts and self.date_stop:
 
@@ -353,16 +351,9 @@ class ViewCalendar(object):
 
             if n > self.day_length:
                 span = math.floor(n / 24)
-
-        #starts = format.format_datetime(starts, "datetime", True)
-        #ends = format.format_datetime(ends, "datetime", True)
         
         if not starts:
             return None
-
-        #day = self.date.tuple()[2]
-        #if not (e.dayspan > 0 and day - e.dayspan < e.starts) or (e.dayspan == 0 and day <= e.starts):
-        #    return None
 
         color_key = event.get(self.color_field)[0]
         color_info = self.colors.get(color_key)

@@ -67,6 +67,7 @@ class Screen(signal_event.signal_event):
         self.create_new = create_new
         self.name = model_name
         self.domain = domain
+        self.latest_search = []
         self.views_preload = views_preload
         self.resource = model_name
         self.rpc = RPCProxy(model_name)
@@ -131,7 +132,9 @@ class Screen(signal_event.signal_event):
                         view_form['fields'], self.name, self.window,
                         self.domain, (self, self.search_filter))
                 self.screen_container.add_filter(self.filter_widget.widget,
-                        self.search_filter, self.search_clear)
+                        self.search_filter, self.search_clear,
+                        self.search_offset_next,
+                        self.search_offset_previous)
                 self.filter_widget.set_limit(self.limit)
 
         if active and show_search:
@@ -139,14 +142,42 @@ class Screen(signal_event.signal_event):
         else:
             self.screen_container.hide_filter()
 
+    def update_scroll(self, *args):
+        offset=self.filter_widget.get_offset()
+        limit=self.filter_widget.get_limit()
+        if offset<=0:
+            self.screen_container.but_previous.set_sensitive(False)
+        else:
+            self.screen_container.but_previous.set_sensitive(True)
+
+        if offset+limit>=self.search_count:
+            self.screen_container.but_next.set_sensitive(False)
+        else:
+            self.screen_container.but_next.set_sensitive(True)
+
+    def search_offset_next(self, *args):
+        offset=self.filter_widget.get_offset()
+        limit=self.filter_widget.get_limit()
+        self.filter_widget.set_offset(offset+limit)
+        self.search_filter()
+
+    def search_offset_previous(self, *args):
+        offset=self.filter_widget.get_offset()
+        limit=self.filter_widget.get_limit()
+        self.filter_widget.set_offset(max(offset-limit,0))
+        self.search_filter()
+
     def search_clear(self, *args):
         self.filter_widget.clear()
         self.clear()
 
     def search_filter(self, *args):
+        v = self.filter_widget.value
+        if self.latest_search and self.latest_search<>v:
+            self.filter_widget.set_offset(0)
         limit=self.filter_widget.get_limit()
         offset=self.filter_widget.get_offset()
-        v = self.filter_widget.value
+        self.latest_search = v
         filter_keys = []
         for key, op, value in v:
             filter_keys.append(key)
@@ -154,16 +185,15 @@ class Screen(signal_event.signal_event):
             if key not in filter_keys and \
                     not (key == 'active' and self.context.get('active_test', False)):
                 v.append((key, op, value))
-        try:
-            ids = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search', v, offset,limit, 0, self.context)
-        except:
-            # Try if it is not an older server
-            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0)
-        try:
+        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset,limit, 0,self.context)
+        if len(ids) < limit:
+            self.search_count = len(ids)
+        else:
             self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute',
                     self.name, 'search_count', v, self.context)
-        except:
-            pass
+
+        self.update_scroll()
+
         self.clear()
         self.load(ids)
         return True
@@ -390,6 +420,7 @@ class Screen(signal_event.signal_event):
         id = False
         if self.current_model.validate():
             id = self.current_model.save(reload=True)
+            self.models.writen(id)
             if not id:
                 self.current_view.display()
         else:
@@ -401,6 +432,7 @@ class Screen(signal_event.signal_event):
                 if model.is_modified():
                     if model.validate():
                         id = model.save(reload=True)
+                        self.models.writen(id)
                     else:
                         self.current_model = model
                         self.display()

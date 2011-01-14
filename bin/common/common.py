@@ -38,6 +38,7 @@ import ConfigParser
 import threading
 import time
 
+import rpc
 #
 # Upgrade this number to force the client to ask the survey
 #
@@ -47,19 +48,24 @@ def _search_file(file, dir='path.share'):
     tests = [
         lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), x),
         lambda x: os.path.join(os.getcwd(), os.path.dirname(sys.argv[0]), 'pixmaps', x),
-        lambda x: os.path.join(options.options[dir],x),
+        lambda x: os.path.join(options[dir], x),
     ]
     for func in tests:
         x = func(file)
         if os.path.exists(x):
             return x
-    return False
+    return file 
 
 terp_path = _search_file
 terp_path_pixmaps = lambda x: _search_file(x, 'path.pixmaps')
 
-OPENERP_ICON = gtk.gdk.pixbuf_new_from_file(
-            terp_path_pixmaps('openerp-icon.png'))
+try:
+    OPENERP_ICON = gtk.gdk.pixbuf_new_from_file(terp_path_pixmaps('openerp-icon.png'))
+except gobject.GError, e:
+    log = logging.getLogger('init')
+    log.fatal(str(e))
+    log.fatal('Ensure that the file %s is correct' % options.rcfile)
+    exit(1)
 
 def selection(title, values, alwaysask=False, parent=None):
     if not values or len(values)==0:
@@ -89,7 +95,7 @@ def selection(title, values, alwaysask=False, parent=None):
     keys = values.keys()
     keys.sort()
     for val in keys:
-        model.append([val])
+        model.append([val and val.encode('utf8') or ''])
 
     list.set_model(model)
     list.connect('row-activated', lambda x,y,z: win.response(gtk.RESPONSE_OK) or True)
@@ -105,7 +111,10 @@ def selection(title, values, alwaysask=False, parent=None):
                 (model, iter) = sel
                 if iter:
                     res = model.get_value(iter, 0)
-                    res = (res, values[res])
+                    if res:
+                        res = (res, values[res.decode('utf8')])
+                    else:
+                        res = (res, values[res])
                 else:
                     ok = False
             else:
@@ -136,7 +145,7 @@ def upload_data(email, data, type='SURVEY', supportid=''):
     return True
 
 def terp_survey():
-    if options.options['survey.position']==SURVEY_VERSION:
+    if options['survey.position']==SURVEY_VERSION:
         return False
     import pickle
     widnames = ('country','role','industry','employee','hear','system','opensource')
@@ -172,7 +181,7 @@ def terp_survey():
         parent.present()
         win.destroy()
         upload_data(email, result, type='SURVEY '+str(SURVEY_VERSION))
-        options.options['survey.position']=SURVEY_VERSION
+        options['survey.position']=SURVEY_VERSION
         options.save()
         common.message(_('Thank you for the feedback !\n\
 Your comments have been sent to OpenERP.\n\
@@ -200,7 +209,7 @@ def file_selection(title, filename='', parent=None,
         parent = service.LocalService('gui.main').window
     win.set_transient_for(parent)
     win.set_icon(OPENERP_ICON)
-    win.set_current_folder(options.options['client.default_path'])
+    win.set_current_folder(options['client.default_path'])
     win.set_select_multiple(multi)
     win.set_default_response(gtk.RESPONSE_OK)
     if filters is not None:
@@ -234,7 +243,7 @@ def file_selection(title, filename='', parent=None,
         if filepath:
             filepath = filepath.decode('utf-8')
             try:
-                options.options['client.default_path'] = os.path.dirname(filepath)
+                options['client.default_path'] = os.path.dirname(filepath)
             except:
                 pass
         parent.present()
@@ -245,7 +254,7 @@ def file_selection(title, filename='', parent=None,
         if filenames:
             filenames = [x.decode('utf-8') for x in filenames]
             try:
-                options.options['client.default_path'] = os.path.dirname(filenames[0])
+                options['client.default_path'] = os.path.dirname(filenames[0])
             except:
                 pass
         parent.present()
@@ -293,79 +302,133 @@ def support(*args):
     return True
 
 def error(title, message, details='', parent=None):
+    """
+    Show an error dialog with the support request or the maintenance
+    """
     log = logging.getLogger('common.message')
-    log.error('MSG %s: %s' % (str(message),details))
+    log.error('Message %s: %s' % (str(message),details))
 
-    wid_list = ['email_entry','id_entry','name_entry','phone_entry','company_entry','error_details','explanation_textview','remarks_textview']
-    required_wid = ['email_entry', 'name_entry', 'company_name', 'id_entry']
-    colors = {'invalid':'#ffdddd', 'readonly':'grey', 'required':'#ddddff', 'normal':'white'}
+    show_message = True
 
-    support_id = options['support.support_id']
-    recipient = options['support.recipient']
+    try:
+        contract_ids = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'search', [])
+    except:
+        contract_ids = []
+    if not contract_ids:
+        maintenance_contract_message=_("""
+<i>Open ERP crashed for an unknown reason.</i>
 
-    sur = glade.XML(terp_path("openerp.glade"), "win_error",gettext.textdomain())
-    win = sur.get_widget('win_error')
+<b>You do not have a valid Open ERP maintenance contract !</b>
+If you are using Open ERP in production, it is highly suggested to subscribe
+a maintenance program.
+
+The Open ERP maintenance contract provides you a bugfix guarantee and an
+automatic migration system so that we can fix your problems within a few
+hours. If you had a maintenance contract, this error would have been sent
+to the quality team of the Open ERP editor.
+
+The maintenance program offers you:
+* Automatic migrations on new versions,
+* A bugfix guarantee,
+* Monthly announces of potential bugs and their fixes,
+* Security alerts by email and automatic migration,
+* Access to the customer portal.
+
+You can use the link bellow for more information. The detail of the error
+is displayed on the second tab.
+""")
+    else:
+        contract = rpc.session.rpc_exec_auth_try('/object', 'execute', 'maintenance.contract', 'read', contract_ids, [])[0]
+        show_message = (contract['kind'] <> 'full')
+        if show_message:
+            maintenance_contract_message=_("""
+<b>Open ERP crashed for an unknown reason.</b>
+
+Your maintenance contract does not cover all modules installed in your system !
+If you are using Open ERP in production, it is highly suggested to upgrade your
+contract.
+
+If you have developped your own modules or installed third party module, we
+can provide you an additional maintenance contract for these modules. After
+having reviewed your modules, our quality team will ensure they will migrate
+automatically for all futur stable versions of Open ERP at no extra cost.
+
+Here is the list of modules not covered by your maintenance contract:
+%s
+
+You can use the link bellow for more information. The detail of the error
+is displayed on the second tab.""") % (",".join(result['modules']), )
+
+    xmlGlade = glade.XML(terp_path('win_error.glade'), 'dialog_error', gettext.textdomain())
+    win = xmlGlade.get_widget('dialog_error')
     if not parent:
         parent=service.LocalService('gui.main').window
     win.set_transient_for(parent)
     win.set_icon(OPENERP_ICON)
-    sur.get_widget('error_title').set_text(str(title))
-    sur.get_widget('error_info').set_text(str(message))
-    buf = gtk.TextBuffer()
-    buf.set_text(unicode(details,'latin1').encode('utf-8'))
-    sur.get_widget('error_details').set_buffer(buf)
+    win.set_title("Open ERP - %s" % title)
 
-    sur.get_widget('id_entry').set_text(support_id)
+    xmlGlade.get_widget('title_error').set_markup("<i>%s</i>" % message)
+
+    details_buffer = gtk.TextBuffer()
+    details_buffer.set_text(unicode(details,'latin1').encode('utf-8'))
+    xmlGlade.get_widget('details_explanation').set_buffer(details_buffer)
+
+    if show_message:
+        xmlGlade.get_widget('maintenance_explanation').set_markup(maintenance_contract_message)
+
+    xmlGlade.get_widget('notebook').remove_page(int(show_message))
 
     def send(widget):
-        import pickle
+        def get_text_from_text_view(textView):
+            """Retrieve the buffer from a text view and return the content of this buffer"""
+            buffer = textView.get_buffer()
+            return buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
+            
+        # Use details_buffer
+        id_contract = contract['name']
+        traceback = get_text_from_text_view(xmlGlade.get_widget('details_explanation'))
+        explanation = get_text_from_text_view(xmlGlade.get_widget('explanation_textview'))
+        remarks = get_text_from_text_view(xmlGlade.get_widget('remarks_textview'))
 
-        fromaddr = sur.get_widget('email_entry').get_text()
-        id_contract = sur.get_widget('id_entry').get_text()
-        name =  sur.get_widget('name_entry').get_text()
-        phone =  sur.get_widget('phone_entry').get_text()
-        company =  sur.get_widget('company_entry').get_text()
+        content = "(%s) has reported the following bug:\n%s\nremarks: %s\nThe traceback is:\n%s" % (
+            id_contract, explanation, remarks, traceback
+        )
 
-        urgency = sur.get_widget('urgency_combo').get_active_text()
-
-        buffer = sur.get_widget('error_details').get_buffer()
-        traceback = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-
-        buffer = sur.get_widget('explanation_textview').get_buffer()
-        explanation = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-
-        buffer = sur.get_widget('remarks_textview').get_buffer()
-        remarks = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())
-
-        content = "(%s, %s, %s)"%(id_contract, company, phone) +" has reported the following bug:\n"+ explanation + "\nremarks: " + remarks + "\nThe traceback is:\n" + traceback
-
-        if upload_data(fromaddr, content, 'error', id_contract):
-            common.message(_('Support request sent !'))
+        if upload_data('', content, 'error', id_contract):
+            common.message(_('You problem has been sent to the quality team !\nWe will recontact you after analysing the problem.'))
         return
 
-    sur.signal_connect('on_button_send_clicked', send)
-    sur.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
+    if not show_message:
+        xmlGlade.signal_connect('on_button_send_clicked', send)
+        xmlGlade.signal_connect('on_closebutton_clicked', lambda x : win.destroy())
 
     response = win.run()
     parent.present()
     win.destroy()
     return True
 
-def message(msg, type=gtk.MESSAGE_INFO, parent=None):
+def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     if not parent:
         parent=service.LocalService('gui.main').window
     dialog = gtk.MessageDialog(parent,
       gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-      type, gtk.BUTTONS_OK,
-      msg)
+      type, gtk.BUTTONS_OK)
+    
+    msg = to_xml(msg)
+    if title is not None:
+        msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
+    
     dialog.set_icon(OPENERP_ICON)
+    dialog.set_markup(msg)
+    dialog.show_all()
     dialog.run()
     parent.present()
     dialog.destroy()
     return True
 
 def to_xml(s):
-    return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
+    from cgi import escape
+    return escape(s)
 
 def message_box(title, msg, parent=None):
     dia = glade.XML(terp_path("openerp.glade"), "dia_message_box",gettext.textdomain())
@@ -388,18 +451,8 @@ def message_box(title, msg, parent=None):
     return True
 
 
-def warning(msg, title='', parent=None):
-    if not parent:
-        parent=service.LocalService('gui.main').window
-    dialog = gtk.MessageDialog(parent, gtk.DIALOG_DESTROY_WITH_PARENT,
-            gtk.MESSAGE_WARNING, gtk.BUTTONS_OK)
-    dialog.set_icon(OPENERP_ICON)
-    dialog.set_markup('<b>%s</b>\n\n%s' % (to_xml(title),to_xml(msg)))
-    dialog.show_all()
-    dialog.run()
-    parent.present()
-    dialog.destroy()
-    return True
+def warning(msg, title=None, parent=None):
+    return message(msg=msg, title=title, type=gtk.MESSAGE_WARNING, parent=parent)
 
 def sur(msg, parent=None):
     if not parent:

@@ -56,6 +56,8 @@ pygtk.require('2.0')
 import gtk
 import gtk.glade
 
+#gtk.gdk.threads_init() # causes the GTK client to block everything.
+
 import locale, gettext
 
 import atk
@@ -74,8 +76,8 @@ import options
 # On first run, client won't have a language option,
 # so try with the LANG environ, or fallback to english
 client_lang = options.options['client.lang']
-if client_lang is False:
-    client_lang = os.environ.get('LANG', '')
+if not client_lang:
+    client_lang = os.environ.get('LANG', '').split('.')[0]
 
 translate.setlang(client_lang)
 

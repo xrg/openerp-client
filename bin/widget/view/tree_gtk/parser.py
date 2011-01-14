@@ -26,6 +26,8 @@ import gtk
 import math
 
 import tools
+import tools.datetime_util
+
 from rpc import RPCProxy
 from editabletree import EditableTreeView
 from decoratedtree import DecoratedTreeView
@@ -37,12 +39,15 @@ import date_renderer
 from widget.view.form_gtk.many2one import dialog as M2ODialog
 from modules.gui.window.win_search import win_search
 from widget.view.form_gtk.parser import Button
+
 import common
 import rpc
 import datetime as DT
 import service
 import gobject
 import pango
+import mx.DateTime
+from mx.DateTime import *
 
 def send_keys(renderer, editable, position, treeview):
     editable.connect('key_press_event', treeview.on_keypressed)
@@ -113,7 +118,6 @@ class parser_tree(interface.parser_interface):
                     renderer.set_property('editable', write_enable)
                 if write_enable:
                     renderer.connect_after('editing-started', send_keys, treeview)
-#                   renderer.connect_after('editing-canceled', self.editing_canceled)
 
                 col = gtk.TreeViewColumn(None, renderer)
                 col_label = gtk.Label('')
@@ -277,8 +281,9 @@ class GenericDate(Char):
         if not value:
             return ''
         try:
-            date = time.strptime(value, self.server_format)
-            return time.strftime(self.display_format, date)
+            #date = mx.DateTime.strptime(value, self.server_format)
+            date = tools.datetime_util.strptime(value, self.server_format)
+            return date.strftime(self.display_format)
         except:
             return ''
 
@@ -286,40 +291,46 @@ class GenericDate(Char):
         dt = self.renderer.date_get(self.renderer.editable)
         res = dt and dt.strftime(self.server_format)
         if res:
-            time.strptime(res, self.server_format)
+            #mx.DateTime.strptime(res, self.server_format)
+            tools.datetime_util.strptime(res, self.server_format)
         return res
 
 class Date(GenericDate):
     server_format = '%Y-%m-%d'
-    display_format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')
+    display_format = tools.datetime_util.get_date_format()
 
 class Datetime(GenericDate):
     server_format = '%Y-%m-%d %H:%M:%S'
-    display_format = locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S'
+    display_format = tools.datetime_util.get_date_format() + ' %H:%M:%S'
 
     def get_textual_value(self, model):
         value = model[self.field_name].get_client(model)
         if not value:
             return ''
-        date = time.strptime(value, self.server_format)
-        if 'tz' in rpc.session.context:
+        #date = mx.DateTime.strptime(value, self.server_format).timetuple()
+        date = tools.datetime_util.strptime(value, self.server_format).timetuple()
+        dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+        
+        if 'tz' in rpc.session.context and  rpc.session.context['tz']:
             try:
                 import pytz
                 lzone = pytz.timezone(rpc.session.context['tz'])
                 szone = pytz.timezone(rpc.session.timezone)
-                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
-                sdt = szone.localize(dt, is_dst=True)
+                sdt = lzone.localize(dt, is_dst=True)
                 ldt = sdt.astimezone(lzone)
                 date = ldt.timetuple()
-            except:
+                dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
+            except Exception, e:
                 pass
-        return time.strftime(self.display_format, date)
+          
+        return dt.strftime(self.display_format)
 
     def value_from_text(self, model, text):
         if not text:
             return False
         try:
-            date = time.strptime(text, self.display_format)
+            #date = mx.DateTime.strptime(text, self.display_format)
+            date = tools.datetime_util.strptime(text, self.display_format)
         except:
             try:
                 dt = list(time.localtime())
@@ -338,7 +349,7 @@ class Datetime(GenericDate):
                 date = sdt.timetuple()
             except:
                 pass
-        return time.strftime(self.server_format, date)
+        return date.strftime(self.display_format)
 
 class Float(Char):
     def get_textual_value(self, model):

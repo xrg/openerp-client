@@ -61,7 +61,7 @@ class dialog(object):
         self.accel_group = gtk.AccelGroup()
         self.dia.add_accel_group(self.accel_group)
 
-        self.but_cancel = self.dia.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+        self.but_cancel = self.dia.add_button(gtk.STOCK_CLOSE, gtk.RESPONSE_CANCEL)
         self.but_cancel.add_accelerator('clicked', self.accel_group, gtk.keysyms.Escape, gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
         self.but_ok = self.dia.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)

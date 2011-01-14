@@ -46,25 +46,21 @@ parsers = {
 
 class widget_parse(interface.parser_interface):
     def parse(self, screen, root_node, fields, toolbar={}):
-        widget = None
         for node in root_node.childNodes:
             if not node.nodeType == node.ELEMENT_NODE:
                 continue
-            if node.localName in parsers:
-                widget_parser, view_parser = parsers[node.localName]
-                # Select the parser for the view (form, tree, graph, calendar or gantt)
-                widget = widget_parser(self.window, self.parent, self.attrs, screen)
-                wid, child, buttons, on_write = widget.parse(screen.resource, node, fields)
-                screen.set_on_write(on_write)
+            if node.localName not in parsers:
+                raise Exception(_("This type (%s) is not supported by the GTK client !") % node.localName)
+            widget_parser, view_parser = parsers[node.localName]
+            # Select the parser for the view (form, tree, graph, calendar or gantt)
+            widget = widget_parser(self.window, self.parent, self.attrs, screen)
+            wid, child, buttons, on_write = widget.parse(screen.resource, node, fields)
+            screen.set_on_write(on_write)
 
-                res = view_parser(self.window, screen, wid, child, buttons, toolbar)
-                res.title = widget.title
-                widget = res
-                break
-            else:
-                pass
-        return widget
-
+            res = view_parser(self.window, screen, wid, child, buttons, toolbar)
+            res.title = widget.title
+            return res
+        raise Exception(_("No valid view found for this object!"))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

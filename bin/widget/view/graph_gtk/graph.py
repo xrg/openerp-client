@@ -20,28 +20,32 @@
 #
 ##############################################################################
 
-import locale
+
 import gtk
 from gtk import glade
 
-import tools
-import rpc
-from widget.view import interface
-
-import StringIO
-
-import datetime as DT
 import time
+import datetime as DT
+import StringIO
+import locale
+
+import rpc
+import tools
+import tools.datetime_util
+
+from widget.view import interface
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 HM_FORMAT = '%H:%M:%S'
+LDFMT = tools.datetime_util.get_date_format()
 
 import tinygraph
 import matplotlib
 
 matplotlib.rcParams['xtick.labelsize'] = 10
 matplotlib.rcParams['ytick.labelsize'] = 10
+
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
 
@@ -88,7 +92,7 @@ class ViewGraph(object):
                     res[x] = selection.get(val, val)
                 elif self.fields[x]['type'] == 'date':
                     date = time.strptime(m[x].get_client(m), DT_FORMAT)
-                    res[x] = time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'), date)
+                    res[x] = time.strftime(LDFMT, date)
                 elif self.fields[x]['type'] == 'datetime':
                     date = time.strptime(m[x].get_client(m), DHM_FORMAT)
                     if 'tz' in rpc.session.context:
@@ -102,7 +106,7 @@ class ViewGraph(object):
                             date = ldt.timetuple()
                         except:
                             pass
-                    res[x] = time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S', date)
+                    res[x] = time.strftime(LDFMT + ' %H:%M:%S', date)
                 else:
                     res[x] = float(m[x].get_client(m))
             datas.append(res)

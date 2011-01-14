@@ -51,11 +51,9 @@ class dialog(object):
         if not window:
             window = service.LocalService('gui.main').window
 
-        self.dia = gtk.Dialog(_('OpenERP - Link'), window,
+        self.dia = gtk.Dialog('OpenERP', window,
                 gtk.DIALOG_MODAL|gtk.DIALOG_DESTROY_WITH_PARENT)
         self.window = window
-        if ('string' in attrs) and attrs['string']:
-            self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
         if not target:
             self.dia.set_property('default-width', 760)
             self.dia.set_property('default-height', 500)
@@ -85,6 +83,11 @@ class dialog(object):
             self.screen.load([id])
         else:
             self.screen.new()
+
+        if ('string' in attrs) and attrs['string']:
+            self.dia.set_title(self.dia.get_title() + ' - ' + attrs['string'])
+        elif self.screen.current_view:
+            self.dia.set_title(self.dia.get_title() + ' - ' + self.screen.current_view.title)
         vp.add(self.screen.widget)
 
         x,y = self.screen.screen_container.size_get()
@@ -92,7 +95,7 @@ class dialog(object):
         if not target:
             vp.set_size_request(min(width - 20, x + 20),min(height - 60, y + 25))
         else:
-            vp.set_size_request(x,y)
+            vp.set_size_request(x + 20,y + 25)
         self.dia.show_all()
         self.screen.display()
 
@@ -140,7 +143,7 @@ class many2one(interface.widget_interface):
         self.but_find.set_property('can-focus', False)
 
         self.tooltips = gtk.Tooltips()
-        self.tooltips.set_tip(self.but_find, _('Select a record'))
+        self.tooltips.set_tip(self.but_find, _('Open this resource'))
         self.tooltips.enable()
 
 
@@ -154,7 +157,7 @@ class many2one(interface.widget_interface):
         self.but_open.set_property('can-focus', False)
 
         self.tooltips = gtk.Tooltips()
-        self.tooltips.set_tip(self.but_find, _('Open this record'))
+        self.tooltips.set_tip(self.but_find, _('Search a resource'))
         self.tooltips.enable()
 
         self.widget.pack_start(self.but_open, padding=2, expand=False, fill=False)

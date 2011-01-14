@@ -98,9 +98,15 @@ class Button(Observable):
                         if result['type']== 'ir.actions.act_window_close':
                             self.form.screen.window.destroy()
                         else:
-                            datas = {}
+                            datas = {'ids':[id]}
                             obj = service.LocalService('action.main')
-                            obj._exec_action(result,datas)
+                            obj._exec_action(result, datas)
+                    elif type([]) == type(result):
+                        datas = {'ids':[id]}
+                        obj = service.LocalService('action.main')
+                        for rs in result:
+                            obj._exec_action(rs, datas)
+                            
                 elif button_type == 'object':
                     if not id:
                         return
@@ -148,15 +154,16 @@ class StateAwareWidget(object):
         sa = hasattr(self.widget, 'attrs') and self.widget.attrs or {}
         attrs_changes = eval(sa.get('attrs',"{}"))
         for k,v in attrs_changes.items():
+            result = True
             for condition in v:
-                result = tools.calc_condition(self,model,condition)
-                if result:
-                    if k=='invisible':
-                        self.widget.hide()
-                    elif k=='readonly':
-                        self.widget.set_sensitive(False)
-                    else:
-                        self.widget.set_sensitive(False and sa.get('readonly',False))
+                result = result and tools.calc_condition(self,model,condition)
+            if result:
+                if k=='invisible':
+                    self.widget.hide()
+                elif k=='readonly':
+                    self.widget.set_sensitive(False)
+                else:
+                    self.widget.set_sensitive(False and sa.get('readonly',False))
 
 
 class _container(object):

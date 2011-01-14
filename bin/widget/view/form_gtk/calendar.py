@@ -21,7 +21,10 @@
 ##############################################################################
 
 import time
-import datetime as DT
+#import datetime as DT
+import mx
+from mx import DateTime as DT
+
 import gtk
 
 import gettext
@@ -32,6 +35,7 @@ import locale
 import rpc
 import service
 import tools
+import tools.datetime_util
 
 import date_widget
 
@@ -39,9 +43,7 @@ DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 HM_FORMAT = '%H:%M:%S'
 
-LDFMT = locale.nl_langinfo(locale.D_FMT)
-for x,y in [('%y','%Y'),('%B',''),('%A','')]:
-    LDFMT = LDFMT.replace(x, y)
+LDFMT = tools.datetime_util.get_date_format();
 
 class calendar(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
@@ -50,6 +52,7 @@ class calendar(interface.widget_interface):
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
         self.entry.set_property('activates_default', True)
+        self.entry.connect('key_press_event', self.sig_key_press)        
         self.entry.connect('button_press_event', self._menu_open)
         self.entry.connect('activate', self.sig_activate)
         self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
@@ -78,15 +81,23 @@ class calendar(interface.widget_interface):
         self.entry.set_sensitive(not value)
         self.eb.set_sensitive(not value)
 
+    def sig_key_press(self, widget, event):
+        if not self.entry.get_editable():
+            return False
+        if event.keyval == gtk.keysyms.F2:
+            self.cal_open(widget, event)
+            return True
+        
     def get_value(self, model):
         str = self.entry.get_text()
         if str=='':
             return False
         try:
-            date = time.strptime(str, self.format)
+            #date1=mx.DateTime.strptime(str, self.format)
+            date1=tools.datetime_util.strptime(str, self.format)
         except:
             return False
-        return time.strftime(DT_FORMAT, date)
+        return date1.strftime(DT_FORMAT)
 
     def set_value(self, model, model_field):
         model_field.set_client(model, self.get_value(model))
@@ -103,8 +114,9 @@ class calendar(interface.widget_interface):
         else:
             if len(value)>10:
                 value=value[:10]
-            date = time.strptime(value, DT_FORMAT)
-            t=time.strftime(self.format, date)
+            #date=mx.DateTime.strptime(value, DT_FORMAT)
+            date=tools.datetime_util.strptime(value, DT_FORMAT)
+            t=date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
             self.entry.set_text(t)
@@ -141,7 +153,7 @@ class calendar(interface.widget_interface):
         response = win.run()
         if response == gtk.RESPONSE_OK:
             year, month, day = cal.get_date()
-            dt = DT.date(year, month+1, day)
+            dt = DT.Date(year, month+1, day)
             self.entry.set_text(dt.strftime(LDFMT))
         self._focus_out()
         window.present()
@@ -154,6 +166,7 @@ class datetime(interface.widget_interface):
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry = self.widget.widget
         self.entry.set_property('activates_default', True)
+        self.entry.connect('key_press_event', self.sig_key_press)
         self.entry.connect('button_press_event', self._menu_open)
         self.entry.connect('focus-in-event', lambda x,y: self._focus_in())
         self.entry.connect('focus-out-event', lambda x,y: self._focus_out())
@@ -180,12 +193,20 @@ class datetime(interface.widget_interface):
         self.entry.set_editable(not value)
         self.entry.set_sensitive(not value)
 
+    def sig_key_press(self, widget, event):
+        if not self.entry.get_editable():
+            return False
+        if event.keyval == gtk.keysyms.F2:
+            self.cal_open(widget,event)
+            return True
+        
     def get_value(self, model, timezone=True):
         str = self.entry.get_text()
         if str=='':
             return False
         try:
-            date = time.strptime(str, self.format)
+            #date = mx.DateTime.strptime(str, self.format)
+            date = tools.datetime_util.strptime(str, self.format)
         except:
             return False
         if 'tz' in rpc.session.context and timezone:
@@ -196,10 +217,10 @@ class datetime(interface.widget_interface):
                 dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
                 ldt = lzone.localize(dt, is_dst=True)
                 sdt = ldt.astimezone(szone)
-                date = sdt.timetuple()
+                date = sdt
             except:
                 pass
-        return time.strftime(DHM_FORMAT, date)
+        return date.strftime(DHM_FORMAT)
 
     def set_value(self, model, model_field):
         model_field.set_client(model, self.get_value(model))
@@ -215,7 +236,8 @@ class datetime(interface.widget_interface):
         if not dt_val:
             self.entry.clear()
         else:
-            date = time.strptime(dt_val, DHM_FORMAT)
+            #date = mx.DateTime.strptime(dt_val, DHM_FORMAT)
+            date = tools.datetime_util.strptime(dt_val, DHM_FORMAT)
             if 'tz' in rpc.session.context and timezone:
                 try:
                     import pytz
@@ -224,10 +246,10 @@ class datetime(interface.widget_interface):
                     dt = DT.datetime(date[0], date[1], date[2], date[3], date[4], date[5], date[6])
                     sdt = szone.localize(dt, is_dst=True)
                     ldt = sdt.astimezone(lzone)
-                    date = ldt.timetuple()
+                    date = ldt
                 except:
                     pass
-            t=time.strftime(self.format, date)
+            t=date.strftime(self.format)
             if len(t) > self.entry.get_width_chars():
                 self.entry.set_width_chars(len(t))
             self.entry.set_text(t)
@@ -277,8 +299,9 @@ class datetime(interface.widget_interface):
             dt = cal.get_date()
             month = int(dt[1])+1
             day = int(dt[2])
-            date = DT.datetime(dt[0], month, day, hr, mi)
-            value = time.strftime(DHM_FORMAT, date.timetuple())
+            date = DT.DateTime(dt[0], month, day, hr, mi)
+            value = date.strftime(DHM_FORMAT)
+
             self.show(value, timezone=False)
         self._focus_out()
         win.destroy()

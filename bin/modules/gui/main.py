@@ -50,6 +50,14 @@ RESERVED_KEYWORDS=['absolute', 'action', 'all', 'alter', 'analyse', 'analyze', '
              'on', 'only', 'or', 'order', 'outer', 'overlaps', 'placing', 'primary', 'references', 'right','select', 'session_user', 'similar',
              'some', 'sysid', 'table', 'then', 'to', 'trailing', 'true', 'union', 'unique', 'user', 'using', 'verbose', 'when', 'where']
 
+def check_ssl():
+    try:
+        from OpenSSL import SSL
+        import socket
+
+        return hasattr(socket, 'ssl')
+    except:
+        return False
 
 def _refresh_dblist(db_widget, url, dbtoload=None):
     if not dbtoload:
@@ -91,9 +99,14 @@ def _server_ask(server_widget, parent=None):
     port_widget = win_gl.get_widget('ent_port')
     protocol_widget = win_gl.get_widget('protocol')
 
-    protocol={'XML-RPC': 'http://',
-            'XML-RPC secure': 'https://',
-            'NET-RPC (faster)': 'socket://',}
+    protocol = {
+        'XML-RPC': 'http://',
+        'NET-RPC (faster)': 'socket://',
+    }
+
+    if check_ssl():
+        protocol['XML-RPC secure'] ='https://'
+
     listprotocol = gtk.ListStore(str)
     protocol_widget.set_model(listprotocol)
 
@@ -357,7 +370,7 @@ class db_create(object):
             except Exception, e:
                 if e.args == ('DbExist',):
                     common.warning(_("Could not create database."),_('Database already exists !'))
-                elif ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
+                elif (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
                     common.warning(_('Bad database administrator password !'), _("Could not create database."))
                 else:
                     common.warning(_("Could not create database."),_('Error during database creation !'))
@@ -440,7 +453,6 @@ class terp_main(service.Service):
         self.window.set_icon(common.OPENERP_ICON)
 
         self.notebook = gtk.Notebook()
-        self.notebook.popup_enable()
         self.notebook.set_scrollable(True)
         self.sig_id = self.notebook.connect_after('switch-page', self._sig_page_changed)
         self.notebook.connect('page-reordered', self._sig_page_reordered)
@@ -556,7 +568,7 @@ class terp_main(service.Service):
         self.sb_set()
 
         settings = gtk.settings_get_default()
-        settings.set_long_property('gtk-button-images', 1, 'TinyERP:gui.main')
+        settings.set_long_property('gtk-button-images', 1, 'OpenERP:gui.main')
 
         def fnc_menuitem(menuitem, opt_name):
             options.options[opt_name] = menuitem.get_active()
@@ -575,7 +587,7 @@ class terp_main(service.Service):
             self.glade.get_widget(dict[signal][2]).set_active(int(bool(options.options[dict[signal][1]])))
 
         # Adding a timer the check to requests
-        gobject.timeout_add(5 * 60 * 1000, self.request_set)
+        gobject.timeout_add(15 * 60 * 1000, self.request_set)
 
 
     def shortcut_edit(self, widget, model='ir.ui.menu'):
@@ -776,7 +788,11 @@ class terp_main(service.Service):
     def sig_help_context(self, widget):
         model = self._wid_get().model
         l = rpc.session.context.get('lang','en_US')
-        tools.launch_browser(options.options['help.context']+'?model=%s&lang=%s' % (model,l))
+        getvar = {
+            'model': model,
+            'lang': l,
+        }
+        tools.launch_browser(options.options['help.context'] % getvar)
 
     def sig_licence(self, widget):
         dialog = glade.XML(common.terp_path("openerp.glade"), "win_licence", gettext.textdomain())
@@ -1040,7 +1056,7 @@ class terp_main(service.Service):
             rpc.session.db_exec(url, 'drop', passwd, db_name)
             common.message(_("Database dropped successfully !"), parent=self.window)
         except Exception, e:
-            if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
+            if (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
                 common.warning(_('Bad database administrator password !'),_("Could not drop database."), parent=self.window)
             else:
                 common.warning(_("Couldn't drop database"), parent=self.window)
@@ -1059,7 +1075,7 @@ class terp_main(service.Service):
                 rpc.session.db_exec(url, 'restore', passwd, db_name, data_b64)
                 common.message(_("Database restored successfully !"), parent=self.window)
             except Exception,e:
-                if ('faultString' in e and e.faultString=='AccessDenied:None') or str(e)=='AccessDenied':
+                if (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
                     common.warning(_('Bad database administrator password !'),_("Could not restore database."), parent=self.window)
                 else:
                     common.warning(_("Couldn't restore database"), parent=self.window)
@@ -1095,7 +1111,7 @@ class terp_main(service.Service):
             new_passwd = new_pass_widget.get_text()
             new_passwd2 = new_pass2_widget.get_text()
             if new_passwd != new_passwd2:
-                common.warning(_("Confirmation password do not match " \
+                common.warning(_("Confirmation password does not match " \
                         "new password, operation cancelled!"),
                         _("Validation Error."), parent=win)
             else:
@@ -1103,10 +1119,10 @@ class terp_main(service.Service):
                     rpc.session.db_exec(url, 'change_admin_password',
                             old_passwd, new_passwd)
                 except Exception,e:
-                    if ('faultString' in e and e.faultString=='AccessDenied:None') \
+                    if ('faultCode' in dir(e) and e.faultCode=="AccessDenied") \
                             or str(e)=='AccessDenied':
-                        common.warning(_("Could not change password database."),
-                                _('Bas password provided !'), parent=win)
+                        common.warning(_("Could not change the Super Admin password."),
+                                _('Bad password provided !'), parent=win)
                     else:
                         common.warning(_("Error, password not changed."),
                                 parent=win)
@@ -1127,9 +1143,12 @@ class terp_main(service.Service):
                 f = file(filename, 'wb')
                 f.write(dump)
                 f.close()
-                common.message(_("Database backuped successfully !"), parent=self.window)
-            except:
-                common.warning(_("Couldn't backup database."), parent=self.window)
+                common.message(_("Database backed up successfully !"), parent=self.window)
+            except Exception,e:
+                if getattr(e,'faultCode',False)=='AccessDenied':
+                    common.warning(_('Bad database administrator password !'), _("Could not backup the database."),parent=self.window)
+                else:
+                    common.warning(_("Couldn't backup database."), parent=self.window)
 
     def _choose_db_select(self, title=_("Backup a database")):
         def refreshlist(widget, db_widget, label, url):
