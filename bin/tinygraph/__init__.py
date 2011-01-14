@@ -22,7 +22,6 @@
 import matplotlib
 matplotlib.use('GTKCairo')
 
-from pylab import arange
 from matplotlib.font_manager import FontProperties
 
 colorline = ['#%02x%02x%02x' % (25+((r+10)%11)*23,5+((g+1)%11)*20,25+((b+4)%11)*23) for r in range(11) for g in range(11) for b in range(11) ]
@@ -85,7 +84,7 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
             width =  0.9 / (float(n))
         else:
             width = 0.9
-        ind = map(lambda x: x+width*n/2, arange(len(keys)))
+        ind = map(lambda x: x+width*n/2, xrange(len(keys)))
         if orientation=='horizontal':
             subplot.set_yticks(ind)
             subplot.set_yticklabels(tuple(keys), visible=True, ha='right', size=8)
@@ -98,8 +97,8 @@ def tinygraph(subplot, type='pie', axis={}, axis_data={}, datas=[], axis_group_f
         colors = choice_colors(max(n,len(axis_group)))
         for i in range(n):
             datas = data_axis[i]
-            ind = map(lambda x: x+width*i*overlap+((1.0-overlap)*n*width)/4, arange(len(keys)))
-            #ind = map(lambda x: x, arange(len(keys)))
+            ind = map(lambda x: x+width*i*overlap+((1.0-overlap)*n*width)/4, xrange(len(keys)))
+            #ind = map(lambda x: x, xrange(len(keys)))
             yoff = map(lambda x:0.0, keys)
 
             for y in range(len(axis_group)):

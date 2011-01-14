@@ -97,8 +97,9 @@ def selection(title, values, alwaysask=False, parent=None):
     model = gtk.ListStore(gobject.TYPE_STRING)
     keys = values.keys()
     keys.sort()
+    
     for val in keys:
-        model.append([val and val.encode('utf8') or ''])
+        model.append([val])
 
     list.set_model(model)
     list.connect('row-activated', lambda x,y,z: win.response(gtk.RESPONSE_OK) or True)
@@ -114,10 +115,7 @@ def selection(title, values, alwaysask=False, parent=None):
                 (model, iter) = sel
                 if iter:
                     res = model.get_value(iter, 0)
-                    if res:
-                        res = (res, values[res.decode('utf8')])
-                    else:
-                        res = (res, values[res])
+                    res = (res, values[res])
                 else:
                     ok = False
             else:

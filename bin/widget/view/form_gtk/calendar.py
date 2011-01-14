@@ -89,14 +89,18 @@ class calendar(interface.widget_interface):
         
     def get_value(self, model):
         str = self.entry.get_text()
-        if str=='':
+        if str == '':
             return False
         try:
-            #date1=mx.DateTime.strptime(str, self.format)
-            date1=DT.strptime(str, self.format)
+            date1 = DT.strptime(str, self.format)
         except:
             return False
-        return date1.strftime(DT_FORMAT)
+        
+        try:
+            return date1.strftime(DT_FORMAT)
+        except ValueError:
+            common.message(_('Invalid date value! Year must be greater than 1899 !'))
+            return time.strftime(DT_FORMAT)
 
     def set_value(self, model, model_field):
         model_field.set_client(model, self.get_value(model))
@@ -153,7 +157,12 @@ class calendar(interface.widget_interface):
         if response == gtk.RESPONSE_OK:
             year, month, day = cal.get_date()
             dt = DT(year, month+1, day)
-            self.entry.set_text(dt.strftime(LDFMT))
+            try:
+                value = dt.strftime(LDFMT)
+            except ValueError:
+                common.message(_('Invalid date value! Year must be greater than 1899 !'))
+            else:
+                self.entry.set_text(value)
         self._focus_out()
         window.present()
         win.destroy()
@@ -214,7 +223,12 @@ class datetime(interface.widget_interface):
             ldt = lzone.localize(date, is_dst=True)
             sdt = ldt.astimezone(szone)
             date = sdt
-        return date.strftime(DHM_FORMAT)
+
+        try:
+            return date.strftime(DHM_FORMAT)
+        except ValueError:
+            common.message(_('Invalid datetime value! Year must be greater than 1899 !'))
+            return time.strftime(DHM_FORMAT)
 
     def set_value(self, model, model_field):
         model_field.set_client(model, self.get_value(model))
@@ -289,9 +303,13 @@ class datetime(interface.widget_interface):
             month = int(dt[1])+1
             day = int(dt[2])
             date = DT(dt[0], month, day, hr, mi)
-            value = date.strftime(DHM_FORMAT)
+            try:
+                value = date.strftime(DHM_FORMAT)
+            except ValueError:
+                common.message(_('Invalid datetime value! Year must be greater than 1899 !'))        
+            else:
+                self.show(value, timezone=False)
 
-            self.show(value, timezone=False)
         self._focus_out()
         win.destroy()
 

@@ -168,16 +168,21 @@ class Printer(object):
             open_file(app_to_run, fname)
 
         else:
-            finderfunc = self.openers.get(ftype)
-            if not finderfunc:
-                if sys.platform in ['win32', 'nt']:
-                    os.startfile(fname)
+            try:
+                finderfunc = self.openers.get(ftype,False)
+                if not finderfunc:
+                    if sys.platform in ['win32', 'nt']:
+                        os.startfile(fname)
+                    else:
+                        finderfunc = self.openers['html']
+                        opener = finderfunc()
+                        opener(fname)
                 else:
-                    raise Exception(_('Unable to handle %s filetype') % ftype)
-            else:
-                opener = finderfunc()
-                opener(fname)
-                gc.collect()
+                    opener = finderfunc()
+                    opener(fname)
+                    gc.collect()
+            except Exception,e:
+                raise Exception(_('Unable to handle %s filetype') % ftype)
 
 printer = Printer()
 

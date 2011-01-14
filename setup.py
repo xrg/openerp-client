@@ -55,8 +55,8 @@ opj = os.path.join
 
 execfile(opj('bin', 'release.py'))
 
-if sys.argv[1] != 'bdist_rpm':
-    version = version + '-' + release
+if sys.argv[1] == 'bdist_rpm':
+    version = version.split('-')[0]
 
 
 # get python short version
@@ -144,7 +144,7 @@ if os.name <> 'nt' and sys.argv[1] == 'build_po':
 options = {
     "py2exe": {
         "compressed": 1,
-        "optimize": 2,
+        "optimize": 1,
         "dist_dir": 'dist',
         "packages": ["encodings","gtk", "matplotlib", "pytz", "OpenSSL"],
         "includes": "pango,atk,gobject,cairo,atk,pangocairo,matplotlib._path",
