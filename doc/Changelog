@@ -1,3 +1,25 @@
+
+2009-09-17: 5.0.5
+=================
+
+Bugfixes
+--------
+
+ * Not linked to a bug report:
+   * Many2One : When value is set, Search button should display full list.
+ * https://launchpad.net/bugs/427447
+ * https://launchpad.net/bugs/415811
+   * Calendar problem for days stripline
+ * https://launchpad.net/bugs/424177
+   * Rounding value problem in float_time widget
+
+
+Improvements
+------------
+
+ * Survey form : Countries display Corrected
+
+
 2009-08-28: 5.0.4
 =================
 

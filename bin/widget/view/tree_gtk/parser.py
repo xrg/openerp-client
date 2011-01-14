@@ -339,7 +339,7 @@ class Float(Char):
 class FloatTime(Char):
     def get_textual_value(self, model):
         val = model[self.field_name].get_client(model)
-        t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,2) * 60)
+        t = '%02d:%02d' % (math.floor(abs(val)),round(abs(val)%1+0.01,4) * 60)
         if val<0:
             t = '-'+t
         return t
@@ -347,7 +347,7 @@ class FloatTime(Char):
     def value_from_text(self, model, text):
         try:
             if text and ':' in text:
-                return round(int(text.split(':')[0]) + int(text.split(':')[1]) / 60.0,2)
+                return round(int(text.split(':')[0]) + int(text.split(':')[1]) / 60.0,4)
             else:
                 return locale.atof(text)
         except:

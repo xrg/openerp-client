@@ -330,8 +330,11 @@ class ViewCalendar(object):
 
                 n = int(math.floor(n))
 
-                if n > 0: span = n + 1
-
+                if n > 0:
+                    if not h:
+                        n = n - 1
+                    span = n + 1
+                    
             t=DateTime.mktime(starts)
             ends = time.localtime(t.ticks() + (h * 60 * 60) + (n * 24 * 60 * 60))
 
