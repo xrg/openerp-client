@@ -30,6 +30,9 @@
 import gobject
 import gtk
 
+import rpc
+import service
+
 class AdaptModelGroup(gtk.GenericTreeModel):
 
 	def __init__(self, model_group):
@@ -150,9 +153,46 @@ class ViewList(object):
 
 		self.display()
 
+		self.widget.connect('button-press-event', self.__hello)
 		self.widget.connect_after('row-activated', self.__sig_switch)
 		selection = self.widget.get_selection()
 		selection.connect('changed', self.__select_changed)
+
+	def __hello(self, treeview, event, *args):
+		if event.button==3:
+			path = treeview.get_path_at_pos(int(event.x),int(event.y))
+			selection = treeview.get_selection()
+			model, iter = selection.get_selected()
+			if (not path) or not path[0]:
+				return False
+			m = model.models[path[0][0]]
+			if path[1]._type=='many2one':
+				value = m[path[1].name].get()
+				menu = gtk.Menu()
+				finfo = self.screen.fields[path[1].name]
+				fields_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'search',[('relation','=',finfo['relation']),('ttype','=','many2one'),('relate','=',True)])
+				fields = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model.fields', 'read', fields_id, ['name','model_id'], rpc.session.context)
+				models_id = [x['model_id'][0] for x in fields if x['model_id']]
+				fields = dict(map(lambda x: (x['model_id'][0], x['name']), fields))
+				models = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.model', 'read', models_id, ['name','model'], rpc.session.context)
+				for model in models:
+					field = fields[model['id']]
+					model_name = model['model']
+					item = gtk.ImageMenuItem('... '+model['name'])
+					f = lambda model_name,field,value: lambda x: self._click_and_relate(model_name,field,value)
+					item.connect('activate', f(model_name,field,value) )
+					item.set_sensitive(bool(value))
+					item.show()
+					menu.append(item)
+				menu.popup(None,None,None,event.button,event.time)
+
+	def _click_and_relate(self, model, field, value):
+		ids = rpc.session.rpc_exec_auth('/object', 'execute', model, 'search',[(field,'=',value)])
+		obj = service.LocalService('gui.window')
+		#view_ids = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view', 'search', [('model','=',model),('type','=','form')])
+		obj.create(False, model, ids, [(field,'=',value)], 'form', None, mode='tree,form')
+		return True
+
 
 	def signal_record_changed(self, signal, *args):
 		if not self.store:

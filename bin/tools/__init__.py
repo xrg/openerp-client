@@ -48,10 +48,12 @@ def launch_browser(url):
 			sys.exit()
 
 def node_attributes(node):
-   result = {}
-   attrs = node.attributes
-   if attrs is None:
-	   return {}
-   for i in range(attrs.length):
-		   result[attrs.item(i).localName] = attrs.item(i).nodeValue
-   return result
+	result = {}
+	attrs = node.attributes
+	if attrs is None:
+		return {}
+	for i in range(attrs.length):
+		result[attrs.item(i).localName] = attrs.item(i).nodeValue
+		if attrs.item(i).localName == "digits" and isinstance(attrs.item(i).nodeValue, (str, unicode)):
+			result[attrs.item(i).localName] = eval(attrs.item(i).nodeValue)
+	return result

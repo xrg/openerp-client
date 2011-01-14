@@ -221,6 +221,7 @@ class M2O(Char):
 
 	def open_remote(self, model, create=True, changed=False, text=None):
 		modelfield = model[self.field_name]
+		print modelfield.modified
 		relation = modelfield.attrs['relation']
 		
 		if create:

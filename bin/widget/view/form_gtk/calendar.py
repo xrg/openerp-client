@@ -66,7 +66,7 @@ class calendar(interface.widget_interface):
 		if str=='':
 			return False
 		try:
-			date = time.strptime(str, '%x')
+			date = time.strptime(str, locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'))
 		except:
 			return False
 		return time.strftime(DT_FORMAT, date)
@@ -87,7 +87,7 @@ class calendar(interface.widget_interface):
 			if len(value)>10:
 				value=value[:10]
 			date = time.strptime(value, DT_FORMAT)
-			self.entry.set_text(time.strftime('%x', date))
+			self.entry.set_text(time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'), date))
 		return True
 
 	def cal_open(self, widget=None, val=None):
@@ -109,7 +109,7 @@ class calendar(interface.widget_interface):
 		if response == gtk.RESPONSE_OK:
 			year, month, day = cal.get_date()
 			dt = DT.date(year, month+1, day)
-			self.entry.set_text(dt.strftime('%x'))
+			self.entry.set_text(dt.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')))
 		self._focus_out()
 		win.destroy()
 
@@ -144,7 +144,7 @@ class datetime(interface.widget_interface):
 		if str=='':
 			return False
 		try:
-			date = time.strptime(str, '%x %H:%M:%S')
+			date = time.strptime(str, locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S')
 		except:
 			return False
 		return time.strftime(DHM_FORMAT, date)
@@ -165,7 +165,7 @@ class datetime(interface.widget_interface):
 			self.entry.set_text('')
 		else:
 			date = time.strptime(dt_val, DHM_FORMAT)
-			self.entry.set_text(time.strftime('%x %H:%M:%S', date))
+			self.entry.set_text(time.strftime(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')+' %H:%M:%S', date))
 		return True
 
 	def cal_open(self, widget=None, val=None):

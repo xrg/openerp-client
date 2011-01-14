@@ -70,7 +70,7 @@ class ModelRecord(signal_event.signal_event):
 				self.fields[fname].internal.model_add(mod)
 
 	def __getitem__(self, name):
-		return self.fields[name]
+		return self.fields.get(name, False)
 	
 	def __repr__(self):
 		return '<ModelRecord %s@%s>' % (self.id, self.resource)

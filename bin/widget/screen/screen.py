@@ -126,7 +126,7 @@ class Screen(signal_event.signal_event):
 		if self.current_model and self.current_model not in self.models.models:
 			self.current_model = None
 		if len(self.view_to_load):
-			if len(self.view_ids):
+			if self.view_ids:
 				view_id = self.view_ids.pop(0)
 				view_type = False
 			else:

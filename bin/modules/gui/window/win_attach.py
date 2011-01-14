@@ -105,12 +105,12 @@ class win_attach(object):
 			return None
 		id = model.get_value(iter, 0)
 		if id:
-			if common.sur(_('Are you sure you want to remove this attachment ?')):
+			if common.sur(_('Are you sure you want to remove this attachment ?'), parent=self.win):
 				rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'unlink', [int(id)])
 		self.reload()
 
 	def _sig_link(self, widget):
-		filename = common.file_selection(_('Select the destination file'))
+		filename = common.file_selection(_('Select the destination file'), parent=self.win)
 		
 		if not filename:
 			return
@@ -132,7 +132,7 @@ class win_attach(object):
 			data = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.attachment', 'read', [id])
 			if not len(data):
 				return None
-			filename = common.file_selection(_('Select the destination file'), filename=data[0]['datas_fname'])
+			filename = common.file_selection(_('Select the destination file'), filename=data[0]['datas_fname'], parent=self.win)
 			if not filename:
 				return None
 			try:
@@ -145,7 +145,7 @@ class win_attach(object):
 
 	def _sig_add(self, *args):
 		dialog = gtk.FileChooserDialog("Open..",
-			None,
+			self.win,
 			gtk.FILE_CHOOSER_ACTION_OPEN,
 			(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
 			gtk.STOCK_OPEN, gtk.RESPONSE_OK))

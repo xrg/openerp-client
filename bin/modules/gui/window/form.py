@@ -57,7 +57,7 @@ class form(object):
 		if not view_type:
 			view_type = ['form','tree']
 		else:
-			if view_type[0]=='tree' and not res_id:
+			if view_type[0] in ('tree','graph') and not res_id:
 				res_id = rpc.session.rpc_exec_auth('/object', 'execute', model, 'search', domain)
 
 		fields = {}

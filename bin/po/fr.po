@@ -243,14 +243,12 @@ msgstr ""
 "Verifiez le format."
 
 #: bin/modules/gui/window/win_search.py:74
-#, fuzzy, python-format
 msgid "Tiny ERP Search: %s"
-msgstr "Tiny ERP - Chercher"
+msgstr "Tiny ERP Chercher : %s"
 
 #: bin/modules/gui/window/win_search.py:75
-#, fuzzy, python-format
 msgid "Tiny ERP Search: %s (%%d result(s))"
-msgstr "Tiny ERP - Widgets de recherche"
+msgstr "Tiny ERP recherche : %s (%%d resultat(s))"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Name"
@@ -435,18 +433,16 @@ msgid "Default Theme"
 msgstr "_Thème par défaut"
 
 #: bin/modules/gui/main.py:510
-#, fuzzy, python-format
 msgid "%s request(s)"
-msgstr " requête(s)"
+msgstr "%s requête(s)"
 
 #: bin/modules/gui/main.py:512
 msgid "No request"
 msgstr "Pas de requête"
 
 #: bin/modules/gui/main.py:514
-#, fuzzy, python-format
 msgid " - %s pending request(s)"
-msgstr "requête(s) en attente"
+msgstr " - %s requête(s) en attente"
 
 #: bin/modules/gui/main.py:544
 msgid ""

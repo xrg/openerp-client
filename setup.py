@@ -18,7 +18,7 @@ from mydistutils import setup
 opj = os.path.join
 
 name = 'tinyerp-client'
-version = '4.0.0'
+version = '4.1.0'
 
 # get python short version
 py_short_version = '%s.%s' % sys.version_info[:2]
@@ -48,7 +48,7 @@ def data_files():
              (opj('share', 'pixmaps', 'tinyerp-client', 'icons'),
                      glob.glob('bin/icons/*.png')),
              (opj('share', 'tinyerp-client'),
-              ['bin/terp.glade', 'bin/tipoftheday.txt'])]
+              ['bin/terp.glade', 'bin/tipoftheday.txt'] + glob.glob('bin/*.png'))]
     return files
 
 included_plugins = ['workflow_print']

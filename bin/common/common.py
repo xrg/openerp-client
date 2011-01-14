@@ -268,8 +268,10 @@ def test():
 	widget.destroy()
 	return True
 
-def file_selection(title, filename=''):
+def file_selection(title, filename='', parent=None):
 	win = gtk.FileSelection(title)
+	if parent:
+		win.set_transient_for(parent)
 	if filename:
 		win.set_filename(os.path.join(options.options['client.default_path'], filename))
 	win.set_select_multiple(False)
@@ -278,8 +280,7 @@ def file_selection(title, filename=''):
 	if button!=gtk.RESPONSE_OK:
 		win.destroy()
 		return False
-	res = win.get_selections()
-	filepath = res[0]
+	filepath = win.get_filename()
 	if filepath:
 		filepath = filepath.decode('utf8')
 		try:
@@ -386,8 +387,8 @@ def error(title, message, details=''):
 	win.destroy()
 	return True
 
-def message(msg, type=gtk.MESSAGE_INFO):
-	dialog = gtk.MessageDialog(None,
+def message(msg, type=gtk.MESSAGE_INFO, parent=None):
+	dialog = gtk.MessageDialog(parent,
 	  gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
 	  type, gtk.BUTTONS_OK,
 	  msg)
@@ -408,6 +409,9 @@ def message_box(title, msg, parent=None):
 	iter_start = buffer.get_start_iter()
 	buffer.insert(iter_start, msg)
 
+	if parent:
+		win.set_transient_for(parent)
+
 	response = win.run()
 	win.destroy()
 	return True
@@ -421,20 +425,28 @@ def warning(msg, title='', parent=None):
 	dialog.destroy()
 	return True
 
-def sur(msg):
+def sur(msg, parent=None):
 	sur = glade.XML(terp_path("terp.glade"), "win_sur",gettext.textdomain())
 	win = sur.get_widget('win_sur')
 	l = sur.get_widget('lab_question')
 	l.set_text(msg)
+
+	if parent:
+		win.set_transient_for(parent)
+
 	response = win.run()
 	win.destroy()
 	return response == gtk.RESPONSE_OK
 
-def sur_3b(msg):
+def sur_3b(msg, parent=None):
 	sur = glade.XML(terp_path("terp.glade"), "win_quest_3b",gettext.textdomain())
 	win = sur.get_widget('win_quest_3b')
 	l = sur.get_widget('label')
 	l.set_text(msg)
+
+	if parent:
+		win.set_transient_for(parent)
+
 	response = win.run()
 	win.destroy()
 	return {gtk.RESPONSE_NO : 'ko', gtk.RESPONSE_CANCEL : 'cancel', gtk.RESPONSE_YES : 'ok'}[response]
@@ -449,12 +461,16 @@ def theme_set():
 		gtk.rc_parse("themes/"+theme+"/gtkrc")
 	return True
 
-def ask(question):
+def ask(question, parent=None):
 	dia = glade.XML(terp_path('terp.glade'), 'win_quest', gettext.textdomain())
 	win = dia.get_widget('win_quest')
 	label = dia.get_widget('label')
 	label.set_text(question)
 	entry = dia.get_widget('entry')
+
+	if parent:
+		win.set_transient_for(parent)
+
 	response = win.run()
 	win.destroy()
 	if response == gtk.RESPONSE_CANCEL:
