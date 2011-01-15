@@ -54,20 +54,29 @@ def get_home_dir():
 
 class configmanager(object):
 
-    def __get_prefix(self):
-        if self.__prefix is None:
+    def __find_path(self, *paths):
+        """Locate paths under the system's prefix or home installation
+        """
+        if True:
             f = os.path.normpath(__file__)
+            possible = []
+            home_dir = get_home_dir()
+            if f.startswith(sys.prefix):
+                possible.append(sys.prefix)
+            elif f.startswith(home_dir):
+                possible.append(os.path.join(home_dir,'.local'))
             sitepackages_prefix = os.path.join('lib', 'python%s' % sys.version[:3], 'site-packages', release.name, os.path.basename(f))
             home_prefix = os.path.join('lib', 'python', release.name, os.path.basename(f))
 
             for p in [sitepackages_prefix, home_prefix]:
                 if f.endswith(p):
-                    self.__prefix = f[:-len(p)]
-                    break
-            if self.__prefix is None:
-                self.__prefix = sys.prefix
+                    possible.append(f[:-len(p)])
+            for p in possible:
+                final_paths = (p,)+paths
+                if os.path.isdir(os.path.join(*final_paths)):
+                    return os.path.join(*final_paths)
 
-        return self.__prefix
+        return os.path.join(*((sys.prefix,) + paths))
 
     def __init__(self,fname=None):
         self.__prefix = None
@@ -79,8 +88,8 @@ class configmanager(object):
             'login.db': 'terp',
             'client.toolbar': 'both',
             'client.theme': 'none',
-            'path.share': os.path.join(self.__get_prefix(), 'share', release.name),
-            'path.pixmaps': os.path.join(self.__get_prefix(), 'share', 'pixmaps', release.name),
+            'path.share': self.__find_path('share', release.name),
+            'path.pixmaps': self.__find_path('share', 'pixmaps', release.name),
             'tip.autostart': False,
             'tip.position': 0,
             'form.autosave': False,
