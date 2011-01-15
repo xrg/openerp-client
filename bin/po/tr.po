@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-10-25 19:30+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2011-01-14 16:30+0000\n"
+"Last-Translator: Arif Aydogmus <arifaydogmus@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:55+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-15 05:00+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "Language: tr\n"
 
 #: bin/plugins/__init__.py:27
@@ -80,7 +80,7 @@ msgstr "Üst Yönetici Parolası:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "Üst yönetici parolası hatalı !"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -112,7 +112,7 @@ msgstr "Veritabanı Taşı"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Veritabanı"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -124,7 +124,7 @@ msgstr "Veritabanlarınız güncellendi."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Herhangi bir veritabanı seçilmedi."
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
@@ -196,11 +196,11 @@ msgstr "Düzenle"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Şirket yok"
 
 #: bin/modules/gui/main.py:995
 #, python-format
@@ -214,17 +214,20 @@ msgstr "İstek yok"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s istek gönderildi."
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"Lütfen veritabanı adını kontrol ediniz sorun devam ediyorsa sistem "
+"yöneticinizle iletişime geçip veritabanının kullanılabilir olduğunu "
+"doğrulayınız."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "Veritabanına ulaşılamadı ya da böyle bir veritabanı yok"
 
 #: bin/modules/gui/main.py:1041
 msgid ""
@@ -245,7 +248,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #: bin/modules/gui/main.py:1076
 msgid "Not logged !"
@@ -390,7 +393,7 @@ msgstr "Enson Değiştirilme Tarihi"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "İç modül veri kimliği"
 
 #: bin/modules/gui/window/form.py:269
 msgid ""
@@ -440,7 +443,7 @@ msgstr "Hata !"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "Uyarı !"
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
@@ -509,6 +512,12 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"İçe aktarım sırasında hata oluştu:\n"
+"%s\n"
+"Hata mesajı:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -521,11 +530,11 @@ msgstr "Alan adı"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr ".CSV dosyası açılırken hata oluştu"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "Giriş Hatalı"
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -538,10 +547,12 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"Dosyanın ilk satırı işlenirken hata oluştu.\n"
+"Bilinmeyen alan ! ( %s )"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "İçe ajtarımda hata"
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -549,15 +560,15 @@ msgstr "İçe aktarılacak alan seçmediniz."
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "Uzantı"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "Uygulama"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "Yazdırma İşlemcisi"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
@@ -585,7 +596,7 @@ msgstr "Bilinmeyen Pencere"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "Seçenekler"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -644,7 +655,7 @@ msgstr "Excel'i açarken hata oluştu !"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "Bu dışa aktarımın adını belirtin."
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
@@ -698,7 +709,7 @@ msgstr "sunucu ip/adını belirle"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "İpucunu Kapat"
 
 #: bin/common/common.py:90
 msgid ""
@@ -2646,6 +2657,57 @@ msgstr "<i>_Detaylar</i>"
 #~ "Artık yeni bir veritabanı oluşturarak başlamalısınız yada\n"
 #~ "varolan bir sunucuya  \"Dosya\" menüsünden bağlanın."
 
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b> Bilinmeyen bir hata bildirilmiştir. </ b>\n"
+#~ "\n"
+#~ "<b> geçerli OpenERP bakım sözleşmesi yok! </ b>\n"
+#~ "Eğer gerçek işlerinizde OpenERP kullanıyorsanız, bakım programına abone "
+#~ "olmanız önerilir.\n"
+#~ "\n"
+#~ "OpenERP bakım sözleşmesi, hata düzeltme garantisi sağlayan ve\n"
+#~ "otomatik bilgi taşıma yada güncellemesi sağlayarak, sorunlarınızı birkaç "
+#~ "saatte çözer.\n"
+#~ "\n"
+#~ "Eğer bakım sözleşmesi varsa, bu hata OpenERP editöründeki kalite kontrol "
+#~ "takımına gönderilebilir.\n"
+#~ "\n"
+#~ "Bakım programı sunar:\n"
+#~ "* Yeni sürümlerinde otomatik yükseltme,\n"
+#~ "* Hata düzeltme garantisi,\n"
+#~ "* Aylık potansiyel hata ve düzeltmelerin duyurusu,\n"
+#~ "* E-posta ile güvenlik uyarıları ve otomatik güncelleme,\n"
+#~ "* Müşteri portala erişim.\n"
+#~ "\n"
+#~ "Daha fazla bilgi için aşağıdaki bağlantıyı kullanabilirsiniz. Hatanı detayı "
+#~ "ikinci tab'da yer almaktadır.\n"
+
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "İş Akışı'nı (Karmaşık) Yazdır"
+
 #, python-format
 #~ msgid ""
 #~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
@@ -2653,6 +2715,10 @@ msgstr "<i>_Detaylar</i>"
 #~ msgstr ""
 #~ "Probleminiz kalite ekibine <u>GÖNDERİLEMİYOR</u>  !\n"
 #~ "Lütfen bu hatayı kendiniz %s 'e bildiriniz."
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Yereli %s 'ye ayarlanamıyor"
 
 #~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 #~ msgstr "log seviyesini belirle: BILGI, HATA AYIKLA, UYARI, HATA, KRİTİK"
@@ -2668,6 +2734,10 @@ msgstr "<i>_Detaylar</i>"
 
 #~ msgid "OpenERP Database Installation"
 #~ msgstr "OpenERP Veritabanı Kurulumu"
+
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s istek(ler) gönderildi"
 
 #~ msgid "The following users have been installed on your database:"
 #~ msgstr "Bu kullanıcılar veritabanınıza yüklendi:"
@@ -2697,6 +2767,24 @@ msgstr "<i>_Detaylar</i>"
 
 #~ msgid "<i>_Maintenance</i>"
 #~ msgstr "<i>_Bakım</i>"
+
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Bakım Ekibine Gönder"
+
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Bakım Sözleşmesi.</b\n"
+#~ "<i>İletiniz OpenErp ulaştırılacak en kıssa zamanda bakım ekibi size "
+#~ "dönecektir.\n"
+#~ "</i>"
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Bakım Önerileri Detayları İçin Buraya Tıkla"
 
 #, python-format
 #~ msgid ""
@@ -2736,6 +2824,9 @@ msgstr "<i>_Detaylar</i>"
 
 #~ msgid "Error no report"
 #~ msgstr "Hata ! Rapor Yok"
+
+#~ msgid "_Tips"
+#~ msgstr "_İpuçları"
 
 #~ msgid "OpenERP Survey"
 #~ msgstr "OpenERP Anket"
@@ -2800,6 +2891,9 @@ msgstr "<i>_Detaylar</i>"
 #~ msgid "E-Mail:"
 #~ msgstr "E-Mailiniz:"
 
+#~ msgid "Your Company:"
+#~ msgstr "Firmanız:"
+
 #~ msgid "<b>Keep Informed</b>"
 #~ msgstr "<b>Devamlı Bilgilendir</b>"
 
@@ -2814,6 +2908,13 @@ msgstr "<i>_Detaylar</i>"
 
 #~ msgid "Default Language:"
 #~ msgstr "Varsayılan Dil:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Bu yeni veritabanınızın yönetici şifresidir. Üstte girdiğiniz şifrenin "
+#~ "aynısı olmak zorundadır."
 
 #~ msgid "<b>Database created successfully!</b>"
 #~ msgstr "<b>Veritabanı Başarıyla Oluşturuldu!</b>"
@@ -2835,6 +2936,9 @@ msgstr "<i>_Detaylar</i>"
 #~ msgid "Employees:"
 #~ msgstr "Çalışanlar:"
 
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
+
 #~ msgid "gtk-ok"
 #~ msgstr "gtk-ok"
 
@@ -2843,6 +2947,13 @@ msgstr "<i>_Detaylar</i>"
 
 #~ msgid "E-mail:"
 #~ msgstr "E-Posta:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Bu yeni veritabanınızda oluşturulacak '<i>yönetici</i>' kullanıcının "
+#~ "parolasıdır."
 
 #~ msgid "Administrator Password:"
 #~ msgstr "Yönetici Parolası:"
@@ -2887,3 +2998,52 @@ msgstr "<i>_Detaylar</i>"
 
 #~ msgid "I want to receive the Open ERP ebook (PDF) by email"
 #~ msgstr "Open ERP E-kitabını (PDF) E-Posta ile almak istiyorum."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "Bu pencere size OpenERP bakım sözleşmeleri ile ilgili bilgi vermek için "
+#~ "programda bir hata oluştuğunda görüntülenmektedir. Hatanın sebebi bir bakım "
+#~ "sözleşmeniz olmaması değildir. Bu sadece \"Eğer sözleşmeniz olsaydı bu "
+#~ "hatayı tamir ederdik\" anlamında bir hatırlatmadır.\n"
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."

@@ -144,7 +144,7 @@ class list_record(object):
                 gb = gb[0]
 
             if not sort_order.startswith(gb):
-                return None
+                return False
 
         return sort_order
 
