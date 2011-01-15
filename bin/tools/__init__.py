@@ -51,7 +51,15 @@ def expr_eval(string, context=None):
         try:
             temp = eval(string, context)
         except Exception, e:
-            logging.getLogger('tools.expr_eval').exception(string)
+            log = logging.getLogger('tools.expr_eval')
+            log.error(string)
+            # Note that an exception traceback won't help here, because the problem
+            # will most propably lie in the single-liner string. However, the caller
+            # stack of this function might be interesting for debugging.
+            if log.isEnabledFor(logging.DEBUG):
+                import traceback
+                for snum, stack_line in enumerate(traceback.format_stack(limit=10)[:-1]):
+                    log.debug("Traceback %d: %s", snum, stack_line.strip())
             return {}
         return temp
     else:
