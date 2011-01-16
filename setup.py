@@ -145,8 +145,15 @@ if sys.platform == 'win32':
         {
             'script' : os.path.join('bin', 'openerp-client.py'),
             'icon_resources' : [(1, os.path.join('bin', 'pixmaps', 'openerp-icon.ico'))],
+            'install_requires': [ 'PyGTK', ],
         }
     ]
+else:
+    complementary_arguments['scripts'] = ['openerp-client']
+    complementary_arguments['distclass'] = ClientDistribution
+
+
+suc_install.sub_commands.append(('install_mo',  None))
 
 setup(name             = name,
       version          = version,
@@ -159,7 +166,6 @@ setup(name             = name,
       license          = license,
       data_files       = data_files(),
       translations     = translations(),
-      scripts          = ['openerp-client'],
       packages         = ['openerp-client',
                           'openerp-client.common',
                           'openerp-client.modules',
