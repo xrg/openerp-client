@@ -1,24 +1,25 @@
-LANG=fr
-PYTHON_FILES=$(shell find -name "*py")
-PYTHONC_FILES=$(shell find -name "*pyc")
-APP=openerp-client
-LANGS=$(shell for i in `find bin/po -name "*.po"`; do basename $$i | cut -d'.' -f1; done;)
+PREFIX = /usr/local
+PYTHON = python2.6
 
-all:
+all: build
+
+build:
+	python setup.py build 
+
+install: build
+	python setup.py install --prefix=$(PREFIX)  --root=/ 
+    
+
+uninstall:
+	rm $(PREFIX)/bin/openerp-client
+	rm -rf $(PREFIX)/share/openerp-client
+	rm -rf $(PREFIX)/share/pixmaps/openerp-client
+	rm -rf $(PREFIX)/lib/$(PYTHON)/dist-packages/openerp*
 
 clean:
-	rm -f bin/*bak $(PYTHONC_FILES)
-	rm -f bin/openerp.gladep
-
-translate_get:
-	xgettext -k_ -kN_ -o bin/po/$(APP).pot $(PYTHON_FILES) bin/openerp.glade bin/win_error.glade 
-
-translate_set:
-	for i in $(LANGS); do msgfmt bin/po/$$i.po -o bin/share/locale/$$i/LC_MESSAGES/$(APP).mo; done;
-
-merge:
-	for i in $(LANGS); do msgmerge bin/po/$$i.po bin/po/$(APP).pot -o bin/po/$$i.po --strict; done;
-
-test:
-	echo $(LANGS)
-
+	rm -rf build
+	rm -rf dist
+	rm -rf openerp_client.egg*
+	rm openerp-client
+	rm Makefile
+	
