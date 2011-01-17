@@ -1,5 +1,5 @@
-PREFIX = /usr/local
-PYTHON = python2.6
+PREFIX = %s
+PYTHON = %s
 
 all: build
 
