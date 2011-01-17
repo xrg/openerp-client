@@ -78,7 +78,7 @@ class build_scripts_app(build_scripts):
                     if iroot.endswith('/'):
                         iroot = iroot[:-1]
                     openerp_site_packages = openerp_site_packages[len(iroot):]
-		   
+           
             else:
                 # Hard-code the Linux /usr/lib/pythonX.Y/... path
                 openerp_site_packages = opj('/usr', 'lib', 'python%s' % py_short_version, 'site-packages', 'openerp-client')
@@ -169,5 +169,6 @@ class ClientDistribution(Distribution):
             'build_scripts': build_scripts_app,
             }
         self.command_obj['build_scripts'] = None
+
 
 #eof

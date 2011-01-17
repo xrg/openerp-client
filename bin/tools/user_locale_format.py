@@ -22,7 +22,6 @@ import rpc
 import locale
 from locale import localeconv
 
-
 """ When ever the user will connect to the server through client the client will
     read all the userful values of the user's locale settings from the server and will update the
     LOCALE_CACHE dictionary. Then when the client needs the values it will be just returned
@@ -78,7 +77,7 @@ def get_date_format():
 
         @return: The date format of the user's set/ modified locale from the LOCALE_CACHE. """
 
-    return LOCALE_CACHE.get('date_format','%m/%d/%Y')
+    return str(LOCALE_CACHE.get('date_format','%m/%d/%Y'))
 
 def get_datetime_format(with_date = False):
 
@@ -89,10 +88,10 @@ def get_datetime_format(with_date = False):
 
         @return: The date/datetime format of the user's set/ modified locale from the LOCALE_CACHE. """
 
-    fmt = LOCALE_CACHE.get('time_format', '%H:%M:%S')
+    fmt = str(LOCALE_CACHE.get('time_format', '%H:%M:%S'))
     if with_date:
-        return str(get_date_format() + ' ' + fmt)
-    return str(fmt)
+        return get_date_format() + ' ' + fmt
+    return fmt
 
 
 def get_lang_int_float_format(monetary=False):
