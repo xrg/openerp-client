@@ -1,0 +1,15 @@
+Author: Chris Lamb <lamby@debian.org>
+Description: Fixes startup problem (Closes: #481895).
+
+diff -Naurp openerp-client.orig/bin/openerp-client.py openerp-client/bin/openerp-client.py
+--- openerp-client.orig/bin/openerp-client.py	2009-02-06 20:32:33.000000000 +0000
++++ openerp-client/bin/openerp-client.py	2009-02-07 11:12:33.000000000 +0000
+@@ -61,7 +61,7 @@ pygtk.require('2.0')
+ import gtk
+ import gtk.glade
+ 
+-#gtk.gdk.threads_init() # causes the GTK client to block everything.
++gtk.gdk.threads_init()
+ 
+ import locale
+ import gettext
