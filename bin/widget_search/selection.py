@@ -34,9 +34,9 @@ class selection(wid_int.wid_int):
         self.attrs = attrs
         self._selection = {}
         self.name = name
+        self.val_id = False
         if 'selection' in attrs:
             self.set_popdown(attrs.get('selection',[]))
-
         if self.default_search:
             if self.attrs['type'] == 'many2one':
                 self._value_set(int(self.default_search))
@@ -83,13 +83,11 @@ class selection(wid_int.wid_int):
             self.widget.set_active(self.indexes[widget.get_text()])
 
     def _value_get(self):
-        model = self.widget.get_model()
-        index = self.widget.get_active()
         res = self.widget.child.get_text()
         context = {}
         operator = 'ilike'
-        if index>=0:
-            res = self._selection.get(model[index][0], False)
+        if self._selection.get(res, False):
+            res = self._selection.get(res, False)
             operator = self.attrs.get('operator','=')
             context = tools.expr_eval(self.attrs.get('context',"{}"), {'self':res})
         if res:
