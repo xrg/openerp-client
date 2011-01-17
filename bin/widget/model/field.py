@@ -442,7 +442,7 @@ class O2MField(CharField):
             model.value[self.name].model_add(mod)
             mod.modified = True
         model.value[self.name].current_model = mod
-        #mod.signal('record-changed')
+        mod.signal('record-changed')
         return model
 
     def get_default(self, model):
