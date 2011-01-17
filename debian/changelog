@@ -1,3 +1,9 @@
+openerp-client (6.0.0~rc2-0) experimental; urgency=low
+
+  * Using upstream 6.0.0 branch, almost in 6.0.0 release
+
+ -- P. Christeas <xrg@openerp.com>  Mon, 17 Jan 2011 13:44:00 +0100
+
 openerp-client (5.0.15-1) experimental; urgency=low
 
   * Merging upstream version 5.0.15.

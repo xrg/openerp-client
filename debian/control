@@ -1,7 +1,7 @@
 Source: openerp-client
 Section: x11
 Priority: optional
-Maintainer: Debian QA Group <packages@qa.debian.org>
+Maintainer: OpenERP SA. <xrg@openerp.com>
 Build-Depends: debhelper (>= 7.0.50~), python
 Build-Depends-Indep: python-glade2, python-gtk2
 Standards-Version: 3.9.1
@@ -10,10 +10,10 @@ Homepage: http://www.openerp.com/
 Package: openerp-client
 Architecture: all
 Depends:
- ${misc:Depends}, python, python-egenix-mxdatetime, python-glade2, python-gtk2
+ ${misc:Depends}, python, python-glade2, python-gtk2, python-pydot, python-tz,
+ python-hippocanvas, python-matplotlib
 Recommends:
- python-hippocanvas, python-matplotlib, python-openssl, python-tz,
- openoffice.org-writer, evince | pdf-viewer
+ python-openssl, openoffice.org-writer, evince | pdf-viewer
 Suggests: openerp-server
 Description: Enterprise Resource Management (client)
  Open ERP, previously known as TinyERP, is a complete ERP and CRM. The main
