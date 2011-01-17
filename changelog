@@ -1,0 +1,670 @@
+Mon Dec 26 10:45:36 CET 2005
+	NEW MODULES:
+		Accounting: completly rewritten from scratch (based on SAGE L100)
+		Audtittrail
+		Deliveries
+		Plugin Management
+		Automatic Migration System (still in beta)
+		Scrum (agile: http://www.controlchaos.com/)
+
+	CLIENT:
+		BIG IMPROVEMENT: Editable lists
+		readonly checkboxes are now really read only.
+		fixed a small bug in the picture widget (Thanks to Justin Petermann)
+		Multiple level notebooks weren't displayed correctly (Thanks to Justin Petermann)
+		Files added using the binary widget weren't encoded in base64 as they should to be able to transit through XML-RPC (Thanks to Justin Petermann)
+
+	MENUS:
+		Structure completly reviewed
+		You can now duplicate menu entries (and auto childs)
+
+	PURCHASE:
+		added date of approval of the supplier
+
+	AUDITTAIL:
+		New module to log specific entries on specific users/methods
+		See menu: Administration > audittrail
+
+	DELIVERIES:
+		manage carriers
+		manage grids (by country, state, zip range)
+			Grid lines on (weight, volume, weight*volume, price)
+		wizard on a sale order to add deliveries
+
+	ACCOUNT:
+		Completly rewritten from scratch:
+			- general acounting
+			- analytical accounting (costs acc.)
+			- budgets
+		Lots of new features:
+			payment terms, litigation, periods, journals, ...
+		8 new reports
+
+	MIGATION SYSTEM:
+		Detect automatically changes in module or customer specifics upgrades
+
+	BASE:
+		Added padding to the sequence number, eg: INV0001
+
+	MODULE MANAGEMENT:
+		modules may be installed/downloaded from repositories
+		modules are categorized
+		auto-install, update, upgrade of modules
+		distribution of modules on the web
+		transaltions may be per module
+
+	SCRUM: (Agile Development Method: http://www.controlchaos.com/)
+		Scrum Projects
+		Product Backlog / Releae Backlog
+		Sprints
+		Sprint Backlog
+		Daily Meeting
+		Scrum Teams
+		Burndown Chart
+
+	STOCK:
+		better ergonomy in picking lists
+		Add tracking number to the partial picking wizard
+		big bugfix in orderpoint (moves were automaticaly asigned/reserved)
+
+	KERNEL:
+		speed improvement due to a new caching system
+		translations per module (no more globals)
+		bugfix: one2many may be used instead on many2may
+		allow to export translations of only selected modules
+		when adding a field to an object, use the default value for the field (if any) to initialize existing records
+		support for the nextPage tag (in addition to the pageBreak tag), which is the official RML syntax for forcing the next page
+		OpenOffice Integration:
+			Lots of bugfixes and improvements in the new OOo reporting method
+			support for translation in OpenOffice reports
+
+	PROJECT:
+		allow to close a task which is not tied to a project
+		bugfix when close tasks, progress=100
+
+	HR:
+		HR : possibility to ask for a time span
+		HR : In the week view sundays are not forgotten anymore
+
+	PARTNER:
+		choose your event type you want to log in the partner form
+		domains for contact title and partner title
+		use the tools method to send emails in the "spam" wizard
+		created a generic method to send SMSes in tools and use it in the send SMS wizard
+		partner labels improved:
+			if there are several addresses for a partner, use (one of) the address(es) with the 'default' type.
+			if there is none, use the one with an empty type, otherwise use any
+
+	SALE:
+		POS form bugfix
+		added ordonned sequence in sale.order.line
+		shortcut create so from partners:
+			multiple and single so from partner selection
+
+	MRP SCHEDULER:
+		Better exception and bugfixes
+		new menu: all scheduler
+		added automatic bom in production orders
+		inventory bugfix, +ergonomy on_change, po egonomy
+
+	WINDOWS:
+		bugfix: remove debug for linux that didn't work under windows
+
+	OTHERS:
+		removed debian directory (request of debian maintainer)
+
+------------------------------------------------------------------------
+
+Mon Oct 31 12:43:47 CET 2005
+    New modules:
+    	eCommerce for integration with ezPublish
+	See: http://en.tinyerp.com/demo02_6.html
+    
+    Improvements:
+	KERNEL: very big speed improvement
+    	MRP, stock bugfixes and improvements
+
+------------------------------------------------------------------------
+
+Tue Oct 11 01:02:42 CEST 2005
+Server 3.1.0
+    New Features:
+        KERNEL: implemented inheritance for objects to create. This enables
+                customize existing objects by using the _inherit attribute.
+        ACCOUNT: analytical features. It is now possible to view the
+                 account chart for a given profit or cost center only.
+                 Cost center are in trees. Different methods of ventilation.
+        STOCK: Added a partial picking wizard
+
+    Improvements:
+        KERNEL: init/update/demo on a module init/updates/demo its childs
+                (modules depending on this module)
+        KERNEL: corporate defaults now use an xml file to fetch data from the
+                server (as for reports). The format of corporate_defautls.xsl
+                has changed slightly.
+        KERNEL: load modules in deterministic order
+        KERNEL: Added an UpdatableStr object that allows you to dynamically change the
+                architecture used in a wizard
+        KERNEL: rml2pdf support section tab in flowables
+        KERNEL: auto subscribe SXW reports
+        KERNEL: added context property in act_window, so that it's possible to add a
+                context tag in xml action.
+        BASE: renamed 'state' to 'state_id' in res.partner for coherence with
+              the usual naming convention
+        ACCOUNT: updated several views to show both taxed and untaxed amounts
+        ACCOUNT: quantities in invoice lines are now floats (instead integers)
+        LETTER: use the new OOo report engine, support for paragraph indentation
+        PURCHASE: Purchase Order sequence is now correctly set to ref
+        SALE: new menu: sales in progress
+        SALE: added ordering address in SO
+        STOCK: completed picking list is now automtically set in the 'done' state
+        STOCK: future stock rendered if there is no future
+
+    Bugfixes:
+        KERNEL: copy of inherited tables (products)
+        KERNEL: fixed problem with role testing in workflows
+        KERNEL/RML2PDF: bugfix for choosing colors
+        KERNEL/RML2HTML: bugfix using colors
+        BASE: printing a list of workflow prints the one of the currently
+              selected resource
+        BASE: bugfix in partner events (could not manually add/edit one)
+        ACCOUNT: fixed reconciling a transfer with an invoice with adjustment
+        MARKETING: bugfix in campaign load partners
+        MARKETING: bugfix all wizard of campaigns
+        MRP: bugfix when product without bom or suppplier
+        MRP: bugfix for BoM without dependencies
+        MRP: bugfix in production workflows
+        MRP: orderpoint bugfix when lots of OP to compute
+        MRP: domain restricted to stockable product for all forms
+        PRODUCT: removed buggy report: product label
+        PURCHASE: bugfix for approbation, request created where over limit
+        STOCK: cancel picking list (or sale order)
+        SUBSCRIPTION: bugfix when confirmation
+
+Client 3.1.0
+    New Features:
+        Confirm closing of tabs when the ressource is modified and not saved
+
+    Improvements:
+        Shortcuts:
+            Connect shortcut changed to Ctrl+O,
+            Ctrl+L switches between form mode and list mode
+        Renamed 'cancel' button to 'close' in many2one edition screens
+        Display the correct number of decimal digits in the fractional part
+            in list/tree views (use the 'digits' attribute of float fields)
+        When opening a new search window, the search button get the focus,
+            allowing to start a new search by just pressing enter
+        Tree/List view always display header, even when scrolled down
+        Improved feel in letter interface (textbox_tag)
+        Added the possibility to pass context in action
+
+    Bugfixes:
+        More logical cycle order between fields when using the tab key
+        Fixed when press on button and form not valid
+
+    Packaging:
+        Removed old (specific) plugins
+
+------------------------------------------------------------------------
+
+Mon Sep 26 12:17:54 CEST 2005
+Server 3.0.3
+    New features:
+        KERNEL: Reports can now be designed using OpenOffice !!!
+        HR: Make the timesheet by week working
+        PURCHASE: Warn product manager for purchases above a predefined amount
+        STOCK: Added the possibility to create an UPS xml file suitable
+               for the WSI application of UPS
+    Improvements:
+        KERNEL: added automatic truncation of char fields which are too long
+                on data import (it will add '...' at the end of truncated 
+                strings).
+        LETTER: Highly improved module:
+                - Letters can now be printed.
+                - Added support for color, size, bold, underline and 
+                  italic font attributes
+    Bugfixes:
+        KERNEL: fix problem when trying to create a table before it has been 
+                initialized
+        BASE: import res before importing ir
+        HR: merge fixes from trunk
+
+Client 3.0.3
+    Improvements:
+        Improved our textbox widget to add support for font size, color, ...
+
+------------------------------------------------------------------------
+
+Fri Sep 18 17:39:03 CEST 2005
+Server 3.0.2
+    Bugfixes:
+        PURCHASE: small bugfix when taxes are used
+        SALE: small bugfix when taxes are used
+    Packaging:
+        install script bugfixes
+        Readded pychart
+
+Client 3.0.2
+    Bugfixes:
+        install script bugfixes
+
+------------------------------------------------------------------------
+
+Fri Sep 16 11:41:33 CEST 2005
+Server 3.0.1
+    Big change: new stock management method, completly rewritten
+        Better tracking method
+        Only stock moves are recorded
+        Stock may be negatives
+        Better double-entry reporting (Procurement/inventory/production)
+
+    New features:
+        KERNEL: new --without-demo command line option
+        LETTER: bugfixes + wizard add paragraphs
+        MRP: Added report (Splitted bom)
+        PRODUCTS: new report: labels
+        SALE: Added fields in the sale.order.pos: untaxed amount, total, ...
+    Improvements:
+        KERNEL: better log message when loading/writing translations files
+        KERNEL: changed exception type in custom report, so that exception are
+                forwarded to the client
+        LETTER: new modifications, wizard
+        PRODUCT: added attributes to products.
+        PRODUCT: manufacturer are now res.partner
+        MRP: bom revision indices can now be set automatically
+        MRP: added the possibility to send request at the end of the
+             procurment calculation
+        PRODUCT: added a product manager in product_template.
+        PRODUCT: category of UOM
+        PROJECT: email customer support (id task etc)
+        PURCHASE: added a new step to the workflow to confirm the purchase
+                  when its amount is greater than 150.
+        STOCK: implemented automatic lot numbering when splitting(wizard)
+    Bugfixes:
+        KERNEL: role in workflow works now
+        BASE: ir_values bugfix
+        BASE: fixed typo (closes bug #107)
+        MRP: wrong number of param passed to onchange_partner_id
+        MRP: onchange_product_id raised an error since the wrong number of
+             parameters was given there was also an error with the uom.
+        PRODUCT: forgot one field in the new attributes.
+        PURCHASE: workflow did not work.
+        STOCK: rewritten lot splitting in wizard instead of stock.py
+        STOCK: fixed split move
+
+Client 3.0.1
+    Improvements:
+        Changed support request window
+        Support requests are now sent to support@tiny.be
+        Improved textbox_tag widget (underline, bold, ...)
+    Bugfixes:
+        Support request are now correctly sent by mail
+        When clicking on a form button, if another form as been previously
+          loaded, and if you're working on a new form the previous form was
+          reloaded if all the fields (of the new form) are not correclty filled.
+
+------------------------------------------------------------------------
+
+Thu Sep  1 18:38:46 CEST 2005
+Server 3.0
+    New Module: (more details follow)
+        MRP (Production; MRP, MRPII, JIT, TRACABILITY)
+
+    Modules recoded from scratch: (more details follow)
+        Products, Purchases, Sales, Stocks
+
+    GENERAL:
+        Added a lot of demo data
+        All english terms reviewed
+        New install/setup script
+        Added lots of new reports/graphs/...
+
+    KERNEL:
+        Highly improved 'custom' reports creator
+            - create new reports easily (from within the program)
+            - choose your fields, descriptions and make 
+                table, pie chart or bar reports
+            - group some fields, compute the average, sum, or maximum of fields
+            - uses libxslt instead of sablotron (as for other reports)
+        Added sequence setting
+        Better version management
+        The server now binds itself to all (network) interfaces
+        Copy function for all ressources
+        Improved the migration system (auto-detection of changes in one field)
+
+    BASE:
+        Simplified a lot the request system
+        Preferences (account/stock) at the product or category level
+        Partner categories are in trees (pricelist/promo/report at any level)
+        Added payment term for partners
+        The name and code of each product can be different for each partner
+            (if needed)
+        Added all countries and their code in the default data
+
+    ACCOUNT:
+        Added intracom report
+        New concept: Income/cost center
+        Fixed the matching of transfers in some circumstances
+
+    CRM:
+        Added reference field for sale order
+        Move BO -> Sale wizard wizard to sale module
+
+    MARKETING: 
+        Importing partner in campaign works
+
+    MRP:
+        Workcenters
+        Production orders
+        BoM
+            Explosition, Trees, Revisions, Copy, ...
+            Multi-Level / Phantoms
+        Customizable products via properties
+        Complete tracability
+        Scheduler:
+            MRP
+            MRP II
+            OrderPoint
+            Manual
+        Procurement Orders
+        OrderPoint procurement
+
+    PRODUCTS:
+        UOM (purchase/sale)
+        Different references by partner + sale + purchase
+        Distinction between manufacter and supplier (one2many)
+        Preferences (account/stock) at the product or category level
+        Weight / Volume
+        Descriptions automatically added to Sale Order/Purchase Order
+        Lots of new reports; future stock
+
+    PROJECT:
+        Warranties support
+        Added button to toggle activity status
+        Reopen a canceled task
+        Bugfixes in Gantt representation
+        Fixed the order of tasks depending on their priority
+
+    PURCHASE:
+        You can now purchase and ship directly from the supplier to the cust.
+        Added notes for bundle
+
+    SALES:
+        Create a sale from crm.case (wizard)
+        All incoterms added
+        Make to stock / Make to order
+        Added salesman for commissions
+        Eth (date_planned/make_to_order...) at the line level
+        Added notes for bundle
+
+    STOCK:
+        Units of Measure supported
+        New feautre: serialize/create lot at any level
+        Origin in all documents (PO create from a SO/OP/...)
+        New concept: Reservations
+        Bar code support: with tag <codeBar code="">value</codeBar>
+            Codabar, Code 11, Code 128, Code 39, Code 93, I2of5
+            Extended Code 39, Extended Code 93, MSI, USPS FIM, USPS POSTNET
+        Orderpoint automatic reordering method
+
+Client 3.0
+    New features:
+        New icons in the menu
+        Colors in tree/list views
+        New right click functions:
+            Print any report or launch any wizard concerning the ressource
+                which the current field points to
+            Open the ressources which relate to the ressource pointed by the
+                current field
+        Added a new button next to one2many fields to duplicate one entry
+            (for example for partner adresses)
+        Multi-lang fields (marked by a flag) can be clicked for quick edition
+        Added the possibility (for Windows systems) to open attachments directly
+            with the correct document handler (ex: Word for .doc, ...)
+        Added support for "remote" attachments (ftp, smb, http, ...)
+        One can specify the user login, port and server on the command line
+    Improvements:
+        Added/changed some shortcuts (browsing tabs, ...)
+    Miscellaneous:
+        Tiny ERP has been tested and works on PDA Zaurus
+    Bug fixes:
+        Some bugfixes for Windows
+
+------------------------------------------------------------------------
+
+Mon Jul 18 17:03:50 CEST 2005
+Server 2.1.3
+    Bugfixes:
+        KERNEL: (re)made the server runnable from anywhere
+        KERNEL: fixed search using non ascii characters ! 
+        KERNEL: fixed custom reports when the user wasn't working in english (context not null)
+        ACCOUNT: fixed invoices with a sequence number with a (non-number) prefix/suffix
+        MARKETING: added necessary initialisation file and imports to make the wizards work
+        PROJECT: added the missing effective hours data to report
+    Translations:
+        Added Czech (cz)
+        Added Portuguese (pt)
+        Added Italian (it)
+        Added Chinese (zh)
+
+Client 2.1.3
+    Improvements:
+        Onchange methods activated on enter key press for spinbuttons, char, spinint
+    Bugfixes:
+        Show zero values in trees
+        Fix setup.py (patch from Harmut Goebel)
+    Miscellaneous:
+        Added CREDITS file
+    Translations:
+        Added Ukrainian (uk)
+        Added Chinese (zh)
+
+------------------------------------------------------------------------
+
+Thu Jul  7 10:41:41 CEST 2005
+Server 2.1.2
+    New features:
+        KERNEL: int_to_text in dutch
+        PROJECT: new wizard to deactivate projects
+    Improvements:
+        KERNEL: reworked command line options
+        KERNEL: better error messages on database problems on startup
+        KERNEL: cleaner config parsing
+        KERNEL: support for "ref" in views,
+                use '%(id_string)d' to get the id of a record defined in
+                the same module with an attribute id="id_string"
+        ACCOUNT: prevent deletion of invoices in the proforma, open or paid
+                 states
+        PROJECT: added a 'customer' field to tasks
+        PROJECT: display full name of projects (include their parents name)
+        PROJECT: added the 'priority' field to the view 'task with project'
+        PROJECT: added the 'project' field to the search criterions of tasks
+        PROJECT: precomplete 'date' field in task comments with current date
+    Bugfixes:
+        KERNEL: fixed crash when using login/password containing non ASCII
+                characters
+        KERNEL: fixed some problems with win32
+        ALL: fix addons loading under win32
+        ACCOUNT: fix the bug which suggested an incorrect amount for a
+                 customer payment if the invoices it paid had already been
+                 matched
+        ACCOUNT: fix recalls and journal reports
+        BASE: spelling fix in menu (closes bug #58)
+        BASE: partner title form view fixed
+        BASE: correct request priorities ('urgent' should be above 'medium')
+        PROJECT: billing works now
+    Packaging:
+        Win32 server (HIGHLY EXPERIMENTAL!)
+        Added debian packaging directory
+        Fixed buggy setup.py
+
+Client 2.1.2
+    New features:
+        Added menu items to access the online help (index and contextual help)
+        Buttons in views can now launch an action (type = action)
+        Added a menu item (and shortcut) to switch between list view and form view
+        Ask confirmation on quit (through Ctrl-Q, the menu item or closing the window)
+    Improvements:
+        'On change' now works for spinint and spinbutton widgets too
+        Use /usr/bin/python instead of /usr/bin/python2.3 explicitely
+        Allows setting default values on datetime widgets
+    Bug fixes:
+        Show buttons in views if their 'states' attribute is not defined
+        Use 'softpath_html' instead of 'softpath' for preview in html
+
+------------------------------------------------------------------------
+
+Thu Jun 16 17:54:40 CEST 2005
+Client + Server 2.1.1:
+    Bug fixes:
+        Fixed a critical bug that prevented the client to log in on a newly created database
+
+------------------------------------------------------------------------
+
+Thu Jun 16 12:15:50 CEST 2005
+Server 2.1.0
+    New features:
+        ACCOUNT: ability to protect accounts from transfers
+        PROJECT: sequence, report detail, copy of project
+        STOCK: virtual and real quantity
+        STOCK: complete tracking of a lot (move + picking list)
+    Improvements:
+        BASE: Grant access to menu updated
+        PROJECT: Gantt graphs with timesheets
+    Bug fixes:
+        Lots of bugfixes in the stock, projects, and network modules
+        Fixes for the server on windows
+
+Clent 2.1.0
+    Bug fixes:
+        Fixed request creation
+
+------------------------------------------------------------------------
+
+Thu Jun  9 17:11:59 CEST 2005
+Server 2.0.11
+    New features:
+        KERNEL: automatically update column definition if a varchar column has changed size
+        ALL: record logs of latest create/write (see form menu)
+        ALL: new 'wizard' tag to simplify wizards declaration
+        ALL: new 'report' tag to simplify reports declaration
+        ACCOUNT: new wizard to check (verified/unverified) transactions
+        PROJECT: lots of new features
+        PROJECT: copy of project templates
+        SUBSCRIPTION: new module for recurring tasks and contracts
+    Improvements:
+        ALL: use the new 'wizard' tag and the 'delete' tag to greatly shorten wizards declaration
+        ALL: use the new 'report' tag and the 'delete' tag to greatly shorten reports declaration
+        BASE: small changes to comply with Debian policy (local dir independant)
+        BASE: Partner search on ZIP or NAME
+        BASE: mail sent in utf-8 now. This allow the support of unicode
+        CRM: case search on title or description
+        CRM: events - current datetime by default
+        NETWORK: big ergonomy improvement
+        PROJECT: better menu structure
+        PROJECT: better gantt charts
+        PROJECT: generation of sale order with or without products
+    Bug fixes:
+        KERNEL: fixed problem with data containing special chars (&,<,>)
+        KERNEL: fix message when no DB (closes bug #47)
+        BASE: requests, links to others ressources
+        BASE: fixed export with relations fields (one2many, many2many)
+        BASE: fixed import with relations fields (one2many, many2many)
+        BASE: remove partner -> remove contacts of this partner
+        BASE: fixed export translation of fields
+        PRODUCT: fixed alignement bug
+
+Client 2.0.11
+    New features:
+        View logs of latest create/write (see form menu)
+        New dialog to jump to a ressource with a specific id
+        New widget for links which can point to several different ressources
+            (see requests & subscription)
+    Improvements:
+        Spinbutton - when clicking on arrows, increment by integer
+        Confirm remove attachment
+        Can now select day by double clicking on it in the calendar widget
+        Removed the 'id' column from the shortcuts panel of the menu
+    Bug fixes:
+        Bugfixes for the windows client
+        Prevent opening the calendar/datetime if readonly
+        Bugfix when corrupted image file in attachment
+        Export translation of fields
+    Translations:
+        New langage: Spanish
+
+------------------------------------------------------------------------
+
+Wed june 01 17:01:28 CEST 2005
+Server 2.0.10
+    Fix the regressions introduced in 2.0.9
+
+------------------------------------------------------------------------
+
+Tue may 31 10:02:28 CEST 2005
+Server 2.0.9
+    New features:
+        KERNEL: added a new wizard node type: 'choice'
+        BASE: added interface for editing states and countries
+        PROJECT: new module (draft)
+    Improvements:
+        KERNEL: report generator completely rewritten (huge speed improvement
+                in some cases)
+        KERNEL: speed improvement on relations many2one
+        KERNEL: added role testing to workflows
+        ACCOUNT: prevent deletion of transfers in the posted state
+        ACCOUNT: swapped credit/debit order in account tree
+        BASE: labels sorted by sort Country, Zip, Name
+        HR: ask the user when he forgot to sign in/out
+        HR: take care of people working at night
+        HR: added workgroups for timesheets
+    Bug fixes:
+        BASE: fix & cleanup email send
+        HR: fixed a small bug in the holiday computation
+        HR: fixed a bug in the workhour computation
+        HR: other small fixes
+    Translations:
+        New language: Romanian (ro)
+
+Client 2.0.9
+    Improvements:
+        Speed improvement (only one name_get query for all ids of a one2many)
+        Better import system for fields many2one
+    Bug fixes:
+        Search on one2many widget
+    Translations:
+        New language: Romanian (ro)
+
+------------------------------------------------------------------------
+
+Wed may 11 11:41:42 CEST 2005
+Server 2.0.8
+    New features:
+        KERNEL: Added cronjobs
+        KERNEL: All reports can be opened in MS Word and OOo for editing
+                (see Form > Preview in Word)
+        KERNEL: Support for masked fields (passwords marked with *)
+        CUSTOM: New 'special' module for customer specific modifications
+        HR: New module:
+                Manages employees, timesheets, expenses notes,
+                Sign in/sign out, holidays
+                2 Timesheets Reports
+    Improvements:
+        KERNEL: Huge speed improvement in some parts of the kernel
+                 - Issue fewer queries to the database
+                 - Cache System
+        BASE: Display the address of partners in their tree/list view and search form
+    Bug fixes:
+        BASE: Small bugfix if a contact has no partner
+    Translations:
+        New Language: Hungarian
+
+Client 2.0.8:
+    New features:
+        Added datetime widget
+    Improvements:
+        Displays the name of the current user in the status line
+        Search the path for a list of openers (acrobat reader, word, lpr, ...)
+
+------------------------------------------------------------------------
+

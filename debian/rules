@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	dh_auto_clean
+
+	rm -rf build
+
+override_dh_auto_install:
+	python setup.py install --install-layout=deb --no-compile --root=$(CURDIR)/debian/openerp-client
+
+	# Adjusting program location
+	sed -i -e 's|cd .*|cd /usr/share/pyshared/openerp-client|' debian/openerp-client/usr/bin/openerp-client
+
+	# Adjusting localization names
+	mv debian/openerp-client/usr/share/locale/al debian/openerp-client/usr/share/locale/sq
+	mv debian/openerp-client/usr/share/locale/ua debian/openerp-client/usr/share/locale/uk
+
+	# Removing useless files
+	rm -rf debian/openerp-client/usr/share/doc/openerp-client-*
+
+override_dh_installchangelogs:
+	dh_installchangelogs doc/Changelog

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=OpenERP Client
+Comment=Enterprise Resource Management (client)
+Exec=openerp-client
+Icon=openerp-client
+Terminal=false
+Type=Application
+Categories=Application;Network;
