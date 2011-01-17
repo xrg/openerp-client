@@ -783,7 +783,7 @@ class Screen(signal_event.signal_event):
             id = ids
         return id
 
-    def load(self, ids):''
+    def load(self, ids):
         limit = self.screen_container.get_limit()
         self.models.load(ids, display=False, context=self.context)
         self.current_view.reset()
