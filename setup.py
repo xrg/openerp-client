@@ -30,7 +30,9 @@ import os
 import glob
 
 from setuptools import setup
+from setuptools.command.install import install as suc_install
 from distutils.sysconfig import get_python_lib
+from mydistutils import ClientDistribution
 
 has_py2exe = False
 if sys.platform == 'win32':
@@ -50,7 +52,7 @@ opj = os.path.join
 
 execfile(opj('bin', 'release.py'))
 
-if sys.argv[1] == 'bdist_rpm':
+if len(sys.argv) > 1 and sys.argv[1] == 'bdist_rpm':
     version = version.split('-')[0]
 
 # get python short version
@@ -88,11 +90,6 @@ def data_files():
     return files
 
 included_plugins = ['workflow_print']
-
-f = file('openerp-client','w')
-start_script = """#!/bin/sh\necho "OpenERP Setup - The content of this file is generated at the install stage" """
-f.write(start_script)
-f.close()
 
 def find_plugins():
     for plugin in included_plugins:
@@ -148,8 +145,15 @@ if sys.platform == 'win32':
         {
             'script' : os.path.join('bin', 'openerp-client.py'),
             'icon_resources' : [(1, os.path.join('bin', 'pixmaps', 'openerp-icon.ico'))],
+            'install_requires': [ 'PyGTK', ],
         }
     ]
+else:
+    complementary_arguments['scripts'] = ['openerp-client']
+    complementary_arguments['distclass'] = ClientDistribution
+
+
+suc_install.sub_commands.append(('install_mo',  None))
 
 setup(name             = name,
       version          = version,
@@ -162,7 +166,6 @@ setup(name             = name,
       license          = license,
       data_files       = data_files(),
       translations     = translations(),
-      scripts          = ['openerp-client'],
       packages         = ['openerp-client',
                           'openerp-client.common',
                           'openerp-client.modules',
