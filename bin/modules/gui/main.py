@@ -864,8 +864,10 @@ class terp_main(service.Service):
             if action:
                 ctx = rpc.session.context.copy()
                 obj = service.LocalService('action.main')
-                obj.exec_keyword('tree_but_open', {'model': 'ir.ui.menu', 'id': action[0],
-                    'ids': [action[0]], 'report_type': 'pdf', 'window': self.window}, context=ctx)
+                if not isinstance(action, int):
+                    action = action[0]
+                obj.exec_keyword('tree_but_open', {'model': 'ir.ui.menu', 'id': action,
+                    'ids': [action], 'report_type': 'pdf', 'window': self.window}, context=ctx)
 
         if sc is None:
             uid = rpc.session.uid
