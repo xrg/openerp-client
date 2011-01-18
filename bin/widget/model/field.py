@@ -435,14 +435,15 @@ class O2MField(CharField):
 
         model.value[self.name] = ModelRecordGroup(resource=self.attrs['relation'], fields=fields, parent=model)
         model.value[self.name].signal_connect(model.value[self.name], 'model-changed', self._model_changed)
-        mod=None
+        mod = None
         for record in (value or []):
             mod = model.value[self.name].model_new(default=False)
             mod.set_default(record)
             model.value[self.name].model_add(mod)
             mod.modified = True
         model.value[self.name].current_model = mod
-        mod.signal('record-changed')
+        if mod:
+            mod.signal('record-changed')
         return model
 
     def get_default(self, model):
