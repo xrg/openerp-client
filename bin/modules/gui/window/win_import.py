@@ -84,9 +84,11 @@ class win_import(object):
         self.win.set_transient_for(parent)
         self.win.set_icon(common.OPENERP_ICON)
         self.parent = parent
-
-        self.glade.get_widget('import_csv_file').set_current_folder(
+        self.autodetect_btn = self.glade.get_widget('button_autodetect')
+        self.filechooser = self.glade.get_widget('import_csv_file')
+        self.filechooser.set_current_folder(
                 options.options['client.default_path'])
+        self.filechooser.connect('selection-changed',self.file_changed)
         self.view1 = gtk.TreeView()
         self.view1.get_selection().set_mode(gtk.SELECTION_MULTIPLE)
         self.glade.get_widget('import_vp_left').add(self.view1)
@@ -152,9 +154,16 @@ class win_import(object):
         self.glade.signal_connect('on_but_select_clicked', self.sig_sel)
         self.glade.signal_connect('on_but_unselect_clicked', self.sig_unsel)
         self.glade.signal_connect('on_but_autodetect_clicked', self.sig_autodetect)
-
+        
+    def file_changed(self, widget=None):
+        fname= self.filechooser.get_filename()
+        if not fname:
+            self.autodetect_btn.set_sensitive(False)
+        else:
+            self.autodetect_btn.set_sensitive(True)
+          
     def sig_autodetect(self, widget=None):
-        fname= self.glade.get_widget('import_csv_file').get_filename()
+        fname= self.filechooser.get_filename()
         if not fname:
             common.message('You must select an import file first !')
             return True

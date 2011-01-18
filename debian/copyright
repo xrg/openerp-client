@@ -1,8 +1,5 @@
-Author: Tiny.be <info@tiny.be>
-Download: http://www.openerp.com/
-
 Files: *
-Copyright: (C) 2004-2009 Tiny.be <info@tiny.be>
+Copyright: (C) 2004-2010 Tiny.be <info@tiny.be>
 License: GPL-3+
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -79,7 +76,7 @@ License: GPL-2
  can be found in /usr/share/common-licenses/GPL-2 file.
 
 Files: debian/*
-Copyright: (C) 2005-2009 Daniel Baumann <daniel@debian.org>
+Copyright: (C) 2005-2011 Daniel Baumann <daniel@debian.org>
 License: GPL-3+
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License

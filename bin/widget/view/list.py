@@ -66,7 +66,7 @@ class field_record(object):
 
 class group_record(object):
 
-    def __init__(self, value={}, ctx={}, domain=[], mgroup=None, child = True, sort_order=False):
+    def __init__(self, value={}, ctx={}, domain=[], mgroup=None, child = True, sort_order=False, screen=None):
         self.list_parent = None
         self._children = None
         self.domain = domain
@@ -77,10 +77,11 @@ class group_record(object):
         self.mgroup = mgroup
         self.field_with_empty_labels = []
         self.sort_order = sort_order
+        self.screen = screen
 
     def getChildren(self):
         if self._children is None:
-            self._children = list_record(self.mgroup, parent=self, context=self.ctx, domain=self.domain,sort_order=self.sort_order)
+            self._children = list_record(self.mgroup, parent=self, context=self.ctx, domain=self.domain,sort_order=self.sort_order, screen=self.screen)
         #self._children.load()
         return self._children
 
@@ -109,7 +110,7 @@ def echo(fn):
 
 
 class list_record(object):
-    def __init__(self, mgroup, parent=None, context=None, domain=None, sort_order=False):
+    def __init__(self, mgroup, parent=None, context=None, domain=None, sort_order=False, screen=None):
         self.mgroup = mgroup
         self.mgroup.list_parent = parent
         self.mgroup.list_group = self
@@ -119,7 +120,10 @@ class list_record(object):
         self.loaded = False
         self.sort_order = sort_order
         self.lst = []
+        self.screen = screen
         self.load()
+        
+        
 
     def destroy(self):
         del self.context
@@ -127,10 +131,11 @@ class list_record(object):
         del self.loaded
         del self.mgroup
         del self.lst
+        del self.screen
 
     def add_dummny_record(self, group_field):
         record = { group_field:'This group is now empty ! Please refresh the list.'}
-        rec = group_record(record, ctx=self.context, domain=self.domain, mgroup=self.mgroup, child = False)
+        rec = group_record(record, ctx=self.context, domain=self.domain, mgroup=self.mgroup, child = False, screen=self.screen)
         self.add(rec)
 
     def get_order(self, gb, sort_order):
@@ -170,7 +175,7 @@ class list_record(object):
                     if not no_leaf:
                         ctx.update({'__field':gb[-1]})
                     ctx.update(__ctx)
-                    rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child, sort_order=self.sort_order)
+                    rec = group_record(r, ctx=ctx, domain=self.domain, mgroup=self.mgroup, child = child, sort_order=self.sort_order,screen=self.screen)
                     for field in gb:
                         if not rec.value.get(field, False):
                             field_type = self.mgroup.fields.get(field, {}).get('type', False)
@@ -181,7 +186,8 @@ class list_record(object):
                     self.add(rec)
         else:
             if self.context.get('__domain') and not no_leaf:
-                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, False, self.sort_order)
+                limit = self.screen.screen_container.get_limit()               
+                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, limit, self.sort_order)
                 if not ids:
                      self.add_dummny_record(self.context['__field'])
                 else:
@@ -217,13 +223,14 @@ class list_record(object):
         return len(self.lst)
 
 class AdaptModelGroup(gtk.GenericTreeModel):
-    def __init__(self, model_group, context={}, domain=[], sort_order=False):
+    def __init__(self, model_group, context={}, domain=[], sort_order=False, screen=None):
         super(AdaptModelGroup, self).__init__()
         self.model_group = model_group
         self.context = context or {}
         self.domain = domain
-        self.models = list_record(model_group, context=context, domain=self.domain, sort_order=sort_order)
+        self.models = list_record(model_group, context=context, domain=self.domain, sort_order=sort_order, screen=screen)
         self.set_property('leak_references', False)
+     
 
     def added(self, modellist, position):
         self.models.loaded = False
@@ -726,7 +733,7 @@ class ViewList(parser_view):
                     self.screen.domain = [('id','in',self.screen.ids_get())]
                 self.screen.models.models.clear()
             self.move_colums()
-            self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain, self.screen.sort)
+            self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain, self.screen.sort, self.screen)
             if self.store:
                 self.widget_tree.set_model(self.store)
         else:

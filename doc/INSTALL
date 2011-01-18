@@ -17,7 +17,7 @@ You need the following software installed:
 For Debian-based distributions you may install the required packages using the
 following command:
 
-    apt-get install python2.5 python2.5-gtk2 python2.5-glade2 xpdf
+    apt-get install python2.5 python2.5-gtk2 python2.5-glade2 xpdf python-pydot
 
 For RedHat-based distributions you need to install the followong packages:
 

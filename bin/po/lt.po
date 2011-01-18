@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-12 21:27+0000\n"
+"PO-Revision-Date: 2011-01-16 11:21+0000\n"
 "Last-Translator: Paulius Sladkevičius - http://www.inovera.lt <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-13 04:41+0000\n"
+"X-Launchpad-Export-Date: 2011-01-18 04:36+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "Language: lt\n"
 
@@ -72,14 +72,9 @@ msgstr "Prisijungimas atmestas!"
 msgid "Application Error"
 msgstr "Programos klaida"
 
-#
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
 #: bin/modules/action/wizard.py:170 bin/rpc.py:204
 msgid "View details"
-msgstr "Peržiūrėti detaliau"
+msgstr "Peržiūrėti plačiau"
 
 #
 # File: bin/modules/action/main.py, line: 46
@@ -597,7 +592,7 @@ msgstr "Paskutinio redagavimo data"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "Vidinio modulio duomenų ID"
 
 #
 # File: bin/modules/gui/window/form.py, line: 230
@@ -1178,15 +1173,12 @@ msgstr "Negalima nustatyti jūsų lokalės %s: %s"
 msgid "Unable to handle %s filetype"
 msgstr "Nepalaikomas %s failo tipas"
 
-#
-# File: bin/printer/printer.py, line: 181
-# File: bin/printer/printer.py, line: 181
 #: bin/printer/printer.py:189
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
-"Linux Automatinis Spausdinimas nerealizuotas.\n"
+"Linux automatinis spausdinimas nerealizuotas.\n"
 "Naudokite peržiūros parinktį!"
 
 #: bin/printer/printer.py:197
@@ -1402,7 +1394,7 @@ msgstr "Savaitė"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
-msgstr "Kalendoriaus peržiūros klaida!"
+msgstr "Kalendoriaus rodonio klaida!"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "You must intall the library python-hippocanvas to use calendars."
@@ -1464,7 +1456,7 @@ msgstr "Šis tipas (%s) nėra palaikomas GTK kliento!"
 
 #: bin/widget/view/widget_parse.py:64
 msgid "No valid view found for this object!"
-msgstr "Nerastas peržiūros režimas šiam objektui!"
+msgstr "Nerastas rodinys šiam objektui!"
 
 #
 # File: bin/widget/view/graph_gtk/parser.py, line: 65
@@ -1566,12 +1558,9 @@ msgstr "Įveskite tekstą į susijusį lauką prieš pridedant vertimus!"
 msgid "You need to save resource before adding translations!"
 msgstr "Jums reikia išsaugoti resursą prieš pridedant vertimus!"
 
-#
-# File: bin/widget/view/form_gtk/parser.py, line: 772
-# File: bin/widget/view/form_gtk/parser.py, line: 772
 #: bin/widget/view/form_gtk/parser.py:891
 msgid "Translate view"
-msgstr "Vertimo peržiūrą"
+msgstr "Versti rodinį"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
@@ -1805,15 +1794,15 @@ msgstr "Klaidinga datos ir laiko reikšmė! Metai turi būti didesni negu 1899!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:30
 msgid "Gantt view not yet implemented !"
-msgstr "Nerealizuota Gantt grafiko peržiūra!"
+msgstr "Neįgyvendintas Gantt grafiko rodinys!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid ""
 "The gantt view is not available in this GTK Client, you should use the web "
 "interface or switch to the calendar view."
 msgstr ""
-"Gantt grafiko peržiūra negalima šiame GTK kliente, jūs turėtumėte "
-"pasinaudoti web sąsaja arba persijungti į kalendoriaus peržiūrą."
+"Gantt grafiko rodinio nėra šiame GTK kliente, jūs turėtumėte pasinaudoti web "
+"sąsaja arba persijungti į kalendoriaus rodinį."
 
 #: bin/widget/screen/screen.py:354
 msgid ""
@@ -2080,12 +2069,9 @@ msgstr "Ankstesnė kortelė"
 msgid "Next Tab"
 msgstr "Tolesnė kortelė"
 
-#
-# File: bin/openerp.glade, line: 711
-# File: bin/openerp.glade, line: 711
 #: bin/openerp.glade:754
 msgid "View _logs"
-msgstr "Žiūrėti  _žurnalus"
+msgstr "Peržiūrėti  _žurnalus"
 
 #: bin/openerp.glade:762
 msgid "_Go to resource ID..."
@@ -2112,12 +2098,9 @@ msgstr "Įkelti iš naujo / Atšaukti"
 msgid "Repeat latest _action"
 msgstr "Pakartoti paskutinį _veiksmą"
 
-#
-# File: bin/openerp.glade, line: 783
-# File: bin/openerp.glade, line: 783
 #: bin/openerp.glade:826
 msgid "_Preview in PDF"
-msgstr "_Peržiūrėti kaip PDF"
+msgstr "_Peržiūrėti PDF formatu"
 
 #
 # File: bin/openerp.glade, line: 799
@@ -2951,12 +2934,9 @@ msgstr "Išsaugoti ir uždaryti langą"
 msgid "<Ctrl> + <Enter>"
 msgstr "<Ctrl> + <Enter>"
 
-#
-# File: bin/openerp.glade, line: 6917
-# File: bin/openerp.glade, line: 6917
 #: bin/openerp.glade:4940
 msgid "Switch view mode"
-msgstr "Perjungti peržiūros režimą"
+msgstr "Perjungti rodinio režimą"
 
 #
 # File: bin/openerp.glade, line: 6932
@@ -3703,11 +3683,11 @@ msgstr "<i>_Priežūros užklausa</i>"
 
 #: bin/win_error.glade:387
 msgid "Details"
-msgstr "Detalės"
+msgstr "Plačiau"
 
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
-msgstr "<i>_Detalės</i>"
+msgstr "<i>_Informacija</i>"
 
 #
 # File: bin/modules/gui/main.py, line: 388

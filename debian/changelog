@@ -1,3 +1,110 @@
+openerp-client (6.0.0~rc2-0) experimental; urgency=low
+
+  * Using upstream 6.0.0 branch, almost in 6.0.0 release
+
+ -- P. Christeas <xrg@openerp.com>  Mon, 17 Jan 2011 13:44:00 +0100
+
+openerp-client (5.0.15-1) experimental; urgency=low
+
+  * Merging upstream version 5.0.15.
+  * Updating to debhelper version 8.
+  * Switching to source format 3.0 (quilt).
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 21 Nov 2010 18:56:47 +0100
+
+openerp-client (5.0.14-1) experimental; urgency=low
+
+  * Merging upstream version 5.0.14.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 14 Sep 2010 22:56:02 +0200
+
+openerp-client (5.0.13-1) experimental; urgency=low
+
+  * Merging upstream version 5.0.13.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 13 Sep 2010 09:06:23 +0200
+
+openerp-client (5.0.12-2) unstable; urgency=low
+
+  * Removing debhelper auto install overrides.
+  * Updating standards version to 3.9.1.
+  * Reverting to manual setup.py call, updated for version 5.0.12.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 14 Aug 2010 16:52:10 +0200
+
+openerp-client (5.0.12-1) unstable; urgency=low
+
+  * Updating standards version to 3.9.0.
+  * Merging upstream version 5.0.12.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 18 Jul 2010 19:36:38 +0200
+
+openerp-client (5.0.11-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.11.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 08 Jun 2010 11:35:34 +0200
+
+openerp-client (5.0.10-1) unstable; urgency=low
+
+  * Adding python-tz to recommends.
+  * Merging upstream version 5.0.10.
+
+ -- Daniel Baumann <daniel@debian.org>  Fri, 07 May 2010 14:27:48 +0200
+
+openerp-client (5.0.9-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.9.
+
+ -- Daniel Baumann <daniel@debian.org>  Fri, 16 Apr 2010 06:41:02 +0200
+
+openerp-client (5.0.8-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.8.
+  * Rediffing survey.patch.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 14 Apr 2010 20:13:04 +0200
+
+openerp-client (5.0.7-2) unstable; urgency=low
+
+  * Updating python build-depends.
+  * Adjusting upstreams wrong localization names.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 06 Apr 2010 23:59:30 +0200
+
+openerp-client (5.0.7-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.7.
+  * Adding python-openssl to recommends (Closes: #570976).
+  * Updating copyright file.
+  * Updating README.source.
+  * Resorting the dh call to more common order.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 13 Mar 2010 13:08:19 +0100
+
+openerp-client (5.0.6-3) unstable; urgency=low
+
+  * Adding explicit debian source version 1.0 until switch to 3.0.
+  * Updating year in copyright file.
+  * Updating to standards 3.8.4.
+  * Adding patch to completely disable the annoying survey on startup
+    (Closes: #560688).
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 06 Feb 2010 10:13:25 +0100
+
+openerp-client (5.0.6-2) unstable; urgency=low
+
+  * Manually removing build directory in clean target (Closes: #549215).
+  * Making quilt build-depends versioned (Closes: #549212).
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 03 Oct 2009 08:41:01 +0200
+
+openerp-client (5.0.6-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.6.
+
+ -- Daniel Baumann <daniel@debian.org>  Fri, 25 Sep 2009 08:10:20 +0200
+
 openerp-client (5.0.6-0-1test1) unstable; urgency=low
 
   [ Christophe Simonis ]
@@ -114,7 +221,46 @@ openerp-client (5.0.6-0-1test1) unstable; urgency=low
   [ panos ]
 
  -- panos <panos@debian.pefnos2>  Mon, 02 Nov 2009 19:24:07 -0500
+ 
+ openerp-client (5.0.5-1) unstable; urgency=low
 
+  * Merging upstream version 5.0.5.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 21 Sep 2009 20:35:31 +0200
+
+ openerp-client (5.0.4-1) unstable; urgency=low
+
+  * Adding README.source.
+  * Bumping versioned build-depends on debhelper.
+  * Moving maintainer homepage from control to copyright.
+  * Updating README.source.
+  * Merging upstream version 5.0.4.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 21 Sep 2009 00:15:05 +0200
+
+openerp-client (5.0.3-0-1) unstable; urgency=low
+
+  * Updating package to standards version 3.8.3.
+  * Adding maintainer homepage field to control.
+  * Marking maintainer homepage field to be also included in binary
+    packages and changelog.
+  * Merging upstream version 5.0.3-0.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 24 Aug 2009 20:13:33 +0200
+
+openerp-client (5.0.2-0-2) unstable; urgency=low
+
+  * Updating maintainer field.
+  * Updating vcs fields.
+  * Sorting and wrapping depends.
+  * Correcting spelling of Open ERP.
+  * Tidy debhelper install file.
+  * Minimizing rules file.
+  * Correcting icon entry in desktop file, according to specification
+    the entry should not have a file extension.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 15 Aug 2009 19:01:36 +0200
+ 
 openerp-client (5.0.2-0-1ubuntu1) intrepid; urgency=low
 
   [ Christophe Simonis ]
@@ -233,6 +379,12 @@ openerp-client (5.0.1-0-1ubuntu1) jaunty; urgency=low
 
  -- Jimmy Angelakos <vyruss@blob>  Fri, 19 Jun 2009 16:35:43 +0300
 
+ openerp-client (5.0.2-0-1) unstable; urgency=low
+
+  * Merging upstream version 5.0.2-0.
+
+ -- Daniel Baumann <daniel@debian.org>  Thu, 13 Aug 2009 10:59:33 +0200
+
 openerp-client (5.0.1-0-1) unstable; urgency=low
 
   * Merging upstream version 5.0.1-0.
@@ -241,6 +393,21 @@ openerp-client (5.0.1-0-1) unstable; urgency=low
   * Using correct rfc-2822 date formats in changelog.
 
  -- Daniel Baumann <daniel@debian.org>  Sat, 30 May 2009 11:19:51 +0200
+
+openerp-client (5.0.1-0-2) unstable; urgency=low
+
+  * Updating package to standards version 3.8.2.
+  * Rediffing autobuild.patch (Closes: #538626).
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 26 Jul 2009 12:23:37 +0200
+
+ 
+openerp-client (5.0.1-0-2) unstable; urgency=low
+
+  * Updating package to standards version 3.8.2.
+  * Rediffing autobuild.patch (Closes: #538626).
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 26 Jul 2009 12:23:37 +0200
 
 openerp-client (5.0.0-3-1) unstable; urgency=low
 
