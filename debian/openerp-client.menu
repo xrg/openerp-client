@@ -1,0 +1,4 @@
+?package(openerp-client):needs="X11" section="Applications/Office"\
+  title="Open ERP client" longtitle="Enterprise Resource Management (client)"\
+  description="Open ERP is a complete ERP and CRM. It features accounting (analytic and financial), stock management, sales and purchases management, tasks automation, marketing campaigns, help desk, POS, etc."\
+  command="/usr/bin/openerp-client" icon="/usr/share/pixmaps/openerp-client.xpm"
