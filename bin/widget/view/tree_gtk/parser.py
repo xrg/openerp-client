@@ -562,7 +562,11 @@ class M2O(Char):
 
 class O2M(Char):
     def get_textual_value(self, model):
-        return '( '+str(len(model[self.field_name].get_client(model).models)) + ' )'
+        val = model[self.field_name].get_client(model) # .models?
+        if val:
+            return '( '+str(len(val.models)) + ' )'
+        else:
+            return ''
 
     def value_from_text(self, model, text):
         raise UnsettableColumn('Can not set column of type o2m')
