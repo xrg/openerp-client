@@ -426,14 +426,19 @@ class GenericDate(Char):
         return res
 
 class Date(GenericDate):
-    server_format = '%Y-%m-%d'
-    display_format = user_locale_format.get_date_format()
-    fmt_length = len((DT.datetime.now()).strftime(display_format))
+     def __init__(self, *args):
+        self.server_format = '%Y-%m-%d'
+        self.display_format = user_locale_format.get_date_format()
+        self.fmt_length = len((DT.datetime.now()).strftime(self.display_format))
+        super(Date, self).__init__(*args)
+
 
 class Datetime(GenericDate):
-    server_format = '%Y-%m-%d %H:%M:%S'
-    display_format = user_locale_format.get_datetime_format(True)
-    fmt_length = len((DT.datetime.now()).strftime(display_format))
+    def __init__(self, *args):
+        self.server_format = '%Y-%m-%d %H:%M:%S'
+        self.display_format = user_locale_format.get_datetime_format(True)
+        self.fmt_length = len((DT.datetime.now()).strftime(self.display_format))
+        super(Datetime, self).__init__(*args)
 
     def get_textual_value(self, model):
         value = model[self.field_name].get_client(model)
