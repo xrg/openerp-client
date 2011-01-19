@@ -20,6 +20,8 @@
 ##############################################################################
 
 from interface import parser_view
+import common
+import gtk
 
 class ViewCalendar(parser_view):
 
@@ -31,6 +33,16 @@ class ViewCalendar(parser_view):
         self.view = widget
         self.model_add_new = False
         self.widget = widget.widget
+        self.help = help
+        if self.help:
+            action_tips = common.action_tips(self.help)
+            self.help_frame = action_tips.help_frame
+            if self.help_frame:
+                vbox = gtk.VBox()
+                vbox.pack_start(self.help_frame, expand=False, fill=False, padding=2)
+                vbox.pack_end(self.widget)
+                vbox.show_all()
+                self.widget = vbox
         self.view.screen = screen
         self.reload = False
 
