@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2009-11-25 13:18+0000\n"
+"PO-Revision-Date: 2011-01-19 13:30+0000\n"
 "Last-Translator: Lisa <Lisenok_8888@mail.ru>\n"
 "Language-Team: Belarusian <be@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:53+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-20 06:03+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "Language: be\n"
 
 #: bin/plugins/__init__.py:27
@@ -2526,33 +2526,3 @@ msgstr ""
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr ""
-
-#~ msgid "Parameters :"
-#~ msgstr "Парамэтры :"
-
-#~ msgid "System:"
-#~ msgstr "Сыстэма:"
-
-#~ msgid "Country:"
-#~ msgstr "Краіна:"
-
-#~ msgid "How did you hear about us:"
-#~ msgstr "Як вы пра нас пачулі:"
-
-#~ msgid "Your Name:"
-#~ msgstr "Вашае імя:"
-
-#~ msgid "E-Mail:"
-#~ msgstr "E-Mail:"
-
-#~ msgid "<Shist> + <Tab>"
-#~ msgstr "<Shist> + <Tab>"
-
-#~ msgid "Error no report"
-#~ msgstr "Ошибка никакое сообщение"
-
-#~ msgid "The content of the widget or excpetion if not valid"
-#~ msgstr "Содержание виджета или excpetion, если не действительный"
-
-#~ msgid "Limit :"
-#~ msgstr "Предел:"
