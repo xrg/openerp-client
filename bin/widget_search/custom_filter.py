@@ -133,8 +133,9 @@ class custom_filter(wid_int.wid_int):
             if operator in ['in','not in']:
                 right_text = right_text.split(',')
 
-            condition = self.condition_next.get_active_text()
-            condition = eval(condition,{'AND':'&','OR':'|'})
+            # Cannot use the active_text as it will be translated!
+            # So as a workaround we use the index: 0 == AND, 1 == OR
+            condition = self.condition_next.get_active() == 0 and '&' or '|'
 
             if field_type == 'selection' and right_text:
                 right_text_se =  self.right_text.get_text()
