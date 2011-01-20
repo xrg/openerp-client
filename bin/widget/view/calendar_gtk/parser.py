@@ -328,9 +328,9 @@ class ViewCalendar(object):
             model_lst = [model for model in self.models if not isinstance(model.id, int)]
             if model_lst:
                 self.models = model_lst
+            self.cal_model.remove_events()
             if self.models:
                 self.__update_colors()
-                self.cal_model.remove_events()
                 self.cal_model.add_events(self.__get_events())
                 self.modex = self.mode
                 self.mode = self.mode == 'month' and 'week' or 'month'
