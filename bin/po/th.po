@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-10-25 18:21+0000\n"
+"PO-Revision-Date: 2011-01-19 13:30+0000\n"
 "Last-Translator: SPP (Almacom) <p.songpon@gmail.com>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:55+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-20 06:05+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "Language: th\n"
 
 #: bin/plugins/__init__.py:27
@@ -2515,81 +2515,3 @@ msgstr ""
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr ""
-
-#~ msgid "Offset :"
-#~ msgstr "จำลองค่า"
-
-#~ msgid "Limit :"
-#~ msgstr "จำกัด"
-
-#~ msgid "Parameters :"
-#~ msgstr "ค่าชี้วัด"
-
-#~ msgid "The content of the widget or excpetion if not valid"
-#~ msgstr "เนื้อหาของวิดเจ็ด หรือ ข้อยกเว้น ถ้าไม่ถูกต้อง"
-
-#~ msgid "Error no report"
-#~ msgstr "ผิดพลาดแบบไม่ทราบสาเหตุ"
-
-#~ msgid ""
-#~ "Thank you for the feedback !\n"
-#~ "Your comments have been sent to OpenERP.\n"
-#~ "You should now start by creating a new database or\n"
-#~ "connecting to an existing server through the \"File\" menu."
-#~ msgstr ""
-#~ "ขอบคุณมากครับที่ให้การตอบรับ\n"
-#~ "คำแนะนำจะส่งกลับมาหาเรา\n"
-#~ "คุณควรจะสร้างฐานข้อมูลใหม่\n"
-#~ "ไปที่เมนู \"แฟ้ม\" เพื่อทำการเชื่อมต่อ"
-
-#~ msgid ""
-#~ "Thank you for testing OpenERP !\n"
-#~ "You should now start by creating a new database or\n"
-#~ "connecting to an existing server through the \"File\" menu."
-#~ msgstr ""
-#~ "ขอบคุณมากๆครับที่ทำการทดลอง OpenERP\n"
-#~ "คุณควรจะสร้างฐานข้อมูลใหม่\n"
-#~ "ไปที่เมนู \"แฟ้ม\" เพื่อทำการเชื่อมต่อ"
-
-#~ msgid "gtk-ok"
-#~ msgstr "gtk-ok"
-
-#~ msgid "E-mail:"
-#~ msgstr "อีเมล์:"
-
-#~ msgid "Your Name:"
-#~ msgstr "ชื่อของคุณ:"
-
-#~ msgid "Phone / Mobile:"
-#~ msgstr "โทรศัทพ์ / มือถือ"
-
-#~ msgid "How did you hear about us:"
-#~ msgstr "คุณรุ้จักเรามาก่อนไหม"
-
-#~ msgid "System:"
-#~ msgstr "ระบบ:"
-
-#~ msgid "<b>Keep Informed</b>"
-#~ msgstr "<b> แนะนำ</b>"
-
-#~ msgid "We plan to use Open ERP"
-#~ msgstr "เราจะใช้ OpenERP"
-
-#~ msgid "We plan to offer services on Open ERP"
-#~ msgstr "เรามีแผนที่จะให้การบริการ OpenERP"
-
-#~ msgid "City:"
-#~ msgstr "อำเภอ"
-
-#~ msgid "<b>Your interrest</b>"
-#~ msgstr "<b>ความสนใจของคุณ</b>"
-
-#~ msgid "Tell us why you try Open ERP and what are your current softwares:"
-#~ msgstr ""
-#~ "เล่าเราได้ไหมครับว่า ทำไมถึงลองใช้ OpenERP และปัจจุบันคุณใช้ซอร์ฟแวร์อะไรอยู่"
-
-#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
-#~ msgstr "ฉันต้องการรับหนังสืออีเลกทรอนิค OpenERP (PDF) ทางอีเมล์"
-
-#~ msgid "gtk-close"
-#~ msgstr "gtk-close"
