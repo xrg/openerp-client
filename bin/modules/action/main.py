@@ -87,7 +87,9 @@ class main(service.Service):
         # Updating the context : Adding the context of action in order to use it on Views called from buttons
         if datas.get('id',False):
             context.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[]), 'active_model': datas.get('model',False)})
-        context.update(tools.expr_eval(action.get('context','{}'), context.copy()))
+        eval_ctx = context.copy()
+        eval_ctx.update({'context':context.copy()})
+        context.update(tools.expr_eval(action.get('context','{}'), eval_ctx))
         if action['type'] in ['ir.actions.act_window', 'ir.actions.submenu']:
             for key in ('res_id', 'res_model', 'view_type', 'view_mode',
                     'limit', 'auto_refresh', 'search_view', 'auto_search', 'search_view_id'):
