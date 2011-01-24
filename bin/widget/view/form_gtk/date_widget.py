@@ -37,7 +37,7 @@ class DateEntry(gtk.Entry):
         self.modify_font(pango.FontDescription("monospace"))
 
         self.format = format
-        self.regex = self.initial_value = format
+        self.regex = self.initial_value = self.convert_fmt(format)
         for key,val in tools.datetime_util.date_mapping.items():
             self.regex = self.regex.replace(key, val[1])
             self.initial_value = self.initial_value.replace(key, val[0])
@@ -65,6 +65,18 @@ class DateEntry(gtk.Entry):
 * =23w : set date to the 23th week of the year
 * -4m : decrease 4 months to the current date
 You can also use "=" to set the date to the current date/time and '-' to clear the field.'''))
+
+    def convert_fmt(self, fmt=''):
+        """If format string doesn't contain
+        any of the `%Y, %m or %d` then returns default datetime format `%Y/%m/%d`
+        """
+        for x,y in [('%y','%Y'),('%B',''),('%A','')]:
+            fmt = fmt.replace(x, y)
+
+        if not (fmt.count('%Y') == 1 and fmt.count('%m') == 1 and fmt.count('%d') == 1):
+            return '%Y/%m/%d'
+
+        return fmt
 
     def _on_insert_text(self, editable, value, length, position):
         if not self._interactive_input:
