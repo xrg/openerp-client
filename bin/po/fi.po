@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-10-25 18:12+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2011-01-23 18:40+0000\n"
+"Last-Translator: Montasir <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:53+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-24 04:53+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "Language: fi\n"
 
 #: bin/plugins/__init__.py:27
@@ -80,7 +80,7 @@ msgstr "Pääkäyttäjän salasana:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "Väärä pääkäyttäjän salasana"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -112,7 +112,7 @@ msgstr "Päivitä tietokanta"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Tietokanta"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -124,7 +124,7 @@ msgstr "Tietokannat on päivitetty."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Valitse tietokanta"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
@@ -196,7 +196,7 @@ msgstr "Muokkaa"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
@@ -224,7 +224,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "Tietokanta ei ole käytettävissä tai ei löydy"
 
 #: bin/modules/gui/main.py:1041
 msgid ""
@@ -376,11 +376,11 @@ msgstr "ID"
 
 #: bin/modules/gui/window/form.py:254
 msgid "Creation User"
-msgstr "Luontikäyttäjä"
+msgstr "Käyttäjän luonti"
 
 #: bin/modules/gui/window/form.py:255
 msgid "Creation Date"
-msgstr "Luontipäiväys"
+msgstr "Tekopäivä"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
@@ -410,7 +410,7 @@ msgstr "Oletko varma, että haluat poistaa tämän tietueen?"
 #: bin/modules/gui/window/form.py:274
 #: bin/widget/view/form_gtk/one2many_list.py:382
 msgid "Are you sure to remove those records ?"
-msgstr "Oletko varma, että haluat poistaa nuo tietueet?"
+msgstr "Haluatko varmasti poistaa nuo tietueet ?"
 
 #: bin/modules/gui/window/form.py:278
 msgid "Resources cleared."
@@ -442,7 +442,7 @@ msgstr "Virhe!"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "Varoitus !"
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
@@ -523,7 +523,7 @@ msgstr "Kentän nimi"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "Virhe .CSV tiedostoa avattaessa"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
@@ -541,6 +541,8 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"Virhe tiedoston ensimmäisellä rivillä.\n"
+"Kenttä %s tuntematon !"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
@@ -556,7 +558,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "Sovellus"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
@@ -588,7 +590,7 @@ msgstr "Tuntematon ikkuna"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "Asetukset"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -726,7 +728,7 @@ msgstr ""
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "Vinkit"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
@@ -914,7 +916,7 @@ msgstr "Sisältö jos widget tai poikkeus ei ole voimassa"
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "Virhe: "
 
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
@@ -939,7 +941,7 @@ msgstr "OpenERP - Päiväyksen valinta"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "sisältää"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
@@ -947,7 +949,7 @@ msgstr ""
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "on yhtäsuuri kuin"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
@@ -955,11 +957,11 @@ msgstr ""
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "suurempi kuin"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "pienempi kuin"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
@@ -1035,7 +1037,7 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Tallenna suotimena"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
@@ -2646,6 +2648,9 @@ msgstr "<i>_Yksityiskohdat</i>"
 #~ "Aloita tekemällä uusi tietokanta tai\n"
 #~ "ota yhteys olemassaolevaan palvelimeen \"Tiedosto\" valikosta."
 
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Tulosta työnkulku (Monimutkainen)"
+
 #~ msgid ""
 #~ "Thank you for testing OpenERP !\n"
 #~ "You should now start by creating a new database or\n"
@@ -2654,6 +2659,54 @@ msgstr "<i>_Yksityiskohdat</i>"
 #~ "Kiitos kun testasit OpenERP:iä!\n"
 #~ "Aloita tekemällä uusi tietokanta tai\n"
 #~ "ota yhteys olemassaolevaan palvelimeen \"Tiedosto\" valikosta."
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Tuntematon virhe on raportoitu.</b>\n"
+#~ "\n"
+#~ "<b>Sinulle ei ole voimassaolevaa Open ERP huoltosopimusta!</b>\n"
+#~ "Jos käytät Open ERP -ohjelmistoa tuotantokäytössä, on hyvin suositeltavaa "
+#~ "ostaa\n"
+#~ "huoltosopimus.\n"
+#~ "\n"
+#~ "Open ERP -huoltosopimus sisältää bugikorjaustakuun ja automatisoidun "
+#~ "siirtymäjärjestelmän siten,\n"
+#~ "että voimme korjata ongelman muutamassa tunnissa. Jos teillä on "
+#~ "huoltosopimus, tämä virhe olisi\n"
+#~ "lähetetty laadunvalvontaryhmälle.\n"
+#~ "\n"
+#~ "Huoltosopimus tarjoaa sinulle:\n"
+#~ "* automaattisen siirtymisen uusiin versioihin\n"
+#~ "* bugikorjaustakuun\n"
+#~ "* kuukausittainen ilmoitus mahdollisista bugeista ja niiden korjauksista\n"
+#~ "* tietoturvahälytykset sähköpostilla ja automaattisen siirtymisen\n"
+#~ "* pääsyn asiakasportaaliin\n"
+#~ "\n"
+#~ "Käytä alla olevaa linkkiä saadaksesi lisätietoja. Virheen lisätiedot\n"
+#~ "löytyvät seuraavasta välilehdestä.\n"
 
 #, python-format
 #~ msgid ""
@@ -2710,6 +2763,10 @@ msgstr "<i>_Yksityiskohdat</i>"
 #~ "Ongelmaasi <u>EI</u> voitu lähettää laadunvalvonta ryhmälle!\n"
 #~ "Raportoi tämä virhe manuaalisesti %s"
 
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Lokalisointia %s ei voitu valita"
+
 #~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 #~ msgstr "määritä lokin taso: INFO, DEBUG, WARNING, ERROR, CRITICAL"
 
@@ -2724,6 +2781,10 @@ msgstr "<i>_Yksityiskohdat</i>"
 
 #~ msgid "OpenERP Database Installation"
 #~ msgstr "OpenERP tietokannan asennus"
+
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s pyyntö(ä) lähetetty"
 
 #~ msgid "The following users have been installed on your database:"
 #~ msgstr "Seuraavat käyttäjät on lisätty tietokantaan:"
@@ -2750,6 +2811,9 @@ msgstr "<i>_Yksityiskohdat</i>"
 
 #~ msgid "Error no report"
 #~ msgstr "Virhe, ei raporttia"
+
+#~ msgid "_Tips"
+#~ msgstr "V_inkit"
 
 #~ msgid "Country:"
 #~ msgstr "Maa:"
@@ -2806,6 +2870,9 @@ msgstr "<i>_Yksityiskohdat</i>"
 #~ msgid "Your Name:"
 #~ msgstr "Nimesi:"
 
+#~ msgid "Your Company:"
+#~ msgstr "Yrityksesi:"
+
 #~ msgid "OpenERP Server:"
 #~ msgstr "OpenERP serveri:"
 
@@ -2837,17 +2904,49 @@ msgstr "<i>_Yksityiskohdat</i>"
 #~ msgid "Load Demonstration Data:"
 #~ msgstr "Lataa esittely materiaali:"
 
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Lähetä huoltoryhmälle"
+
 #~ msgid "<b>Your company:</b>"
 #~ msgstr "<b>Yrityksesi:</b>"
 
 #~ msgid "<Shist> + <Tab>"
 #~ msgstr "<Shift> + <Tab>"
 
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Tämä on salasana käyttäjälle '<i>admin</i>', joka luodaan uuteen "
+#~ "tietokantaan."
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Tämä on käyttäjän '<i>admin</i>' salasana. Käyttäjä luodaan uuteen "
+#~ "tietokantaan. Sen on oltava sama, kuin ylläoleva kenttä."
+
 #~ msgid "<b>Keep Informed</b>"
 #~ msgstr "<b>Pidä ajantasalla</b>"
 
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Klikkaa tästä saadaksesi lisätietoa ylläpitoehdotuksista"
+
 #~ msgid "<i>_Maintenance</i>"
 #~ msgstr "<i>_Ylläpito</i>"
+
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Ylläpitosopimus.</b>\n"
+#~ "<i>\n"
+#~ "Sinun pyyntösi lähetetään OpenERP:lle ja ylläpitotiimi vastaa piakkoin.\n"
+#~ "</i>"
 
 #~ msgid ""
 #~ "You can connect to the new database using one of the following account:\n"
@@ -2856,6 +2955,48 @@ msgstr "<i>_Yksityiskohdat</i>"
 #~ msgstr ""
 #~ "Voit aina yhdistää uuteen tietokantaan käyttäen seuraavaa tunnusta:\n"
 #~ "Pääkäyttäjä: admin / admin "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>On havaittu tuntematon virhe.</b>\n"
+#~ "\n"
+#~ "Ylläpitosopimuksesi ei kata kaikkia järjestelmääsi asennettuja moduuleja! "
+#~ "Jos käytät OpenERP:iä tuotantoympäristössä, suosittelemme että päivität "
+#~ "sopimuksen.\n"
+#~ "\n"
+#~ "Jos olet kehittänyt omia tai asentanut kolmansien osapuolten moduuleja, "
+#~ "voimme tarjota sinulle ylläpidon lisäsopimusta näille moduuleille. Kun "
+#~ "olemme tarkastaneet moduulisi, laadusta vastaava tiimimme varmistaa että ne "
+#~ "liitetään automaattisesti OpenERP:in uusiin vakaisiin versioihin ilman "
+#~ "lisäkustannuksia.\n"
+#~ "\n"
+#~ "Tässä on lista moduuleista joita ylläpitosopimuksesi ei kata:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Voit käyttää alla olevaa linkkiä saadaksesi lisätietoja. Virheen "
+#~ "yksityiskohdat ovat näkyvillä toisessa välilehdessä."
 
 #~ msgid "Connect Later"
 #~ msgstr "Yhdistä myöhemmin"
@@ -2880,6 +3021,9 @@ msgstr "<i>_Yksityiskohdat</i>"
 
 #~ msgid "gtk-ok"
 #~ msgstr "gtk-ok"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
 
 #~ msgid "We plan to use Open ERP"
 #~ msgstr "Aiomme käyttää Open ERP:iä"

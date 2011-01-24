@@ -304,7 +304,7 @@ class Screen(signal_event.signal_event):
         flag = combo.get_active_text()
         combo_model = combo.get_model()
         active_id = combo.get_active()
-        action_name = active_id != -1 and flag not in ['mf','blk','sh', 'sf'] and combo_model[active_id][2]
+        action_name = active_id != -1 and flag not in ['mf','blk', 'sf'] and combo_model[active_id][2]
         # 'mf' Section manages Filters
         def clear_domain_ctx():
             for key in self.old_ctx.keys():
@@ -378,15 +378,6 @@ class Screen(signal_event.signal_event):
                                    })
                     action_id = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.filters', 'create_or_replace', values, self.context)
                     self.screen_container.fill_filter_combo(self.name, action_name)
-                if flag == 'sh':
-                    filter_domain += self.domain_init
-                    filter_context.update(self.context_init)
-                    values.update({'res_model':self.name,
-                                   'domain':str(filter_domain),
-                                   'context':str(filter_context),
-                                   'search_view_id':self.search_view['view_id'],
-                                   'default_user_ids': [[6, 0, [rpc.session.uid]]]})
-                    rpc.session.rpc_exec_auth_try('/object', 'execute', 'ir.ui.menu', 'create_shortcut', values, self.context)
         else:
             try:
                 self.screen_container.last_active_filter = action_name
@@ -750,7 +741,6 @@ class Screen(signal_event.signal_event):
 
             idx = self.models.models.index(self.current_model)
             if not id:
-                lst=[]
                 self.models.models.remove(self.models.models[idx])
                 self.current_model=None
                 if self.models.models:

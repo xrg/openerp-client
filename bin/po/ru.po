@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-08 10:17+0000\n"
-"Last-Translator: Nkolay Parukhin <parukhin@gmail.com>\n"
+"PO-Revision-Date: 2011-01-22 10:43+0000\n"
+"Last-Translator: Nikolay Chesnokov <chesnokov_n@msn.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-09 04:51+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-23 04:56+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "Language: \n"
 
 #: bin/plugins/__init__.py:27
@@ -744,7 +744,7 @@ msgstr "Неверная форма, скорректируйте поля, вы
 #: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/list.py:568
 msgid "Error !"
-msgstr ""
+msgstr "Ошибка !"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
@@ -1031,7 +1031,7 @@ msgstr ""
 
 #: bin/modules/gui/window/tree.py:223
 msgid "Error removing resource!"
-msgstr ""
+msgstr "Ошибка удаления ресурса"
 
 #: bin/modules/gui/window/tree.py:234
 msgid "Unable to chroot: no tree resource selected"
@@ -1095,7 +1095,7 @@ msgstr "Поиск OpenERP: %s (%%d результат(-ов))"
 #: bin/options.py:109
 #, python-format
 msgid "OpenERP Client %s"
-msgstr ""
+msgstr "OpenERP клиент %s"
 
 #
 # File: bin/options.py, line: 89
@@ -1215,6 +1215,10 @@ msgstr "Убедитесь что файл %s корректный"
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
 msgstr ""
+" сообщение о следующем баге:\n"
+"\n"
+"представляет строки. Начать новую строку в аналогичную позицию перевода. "
+"представляет пробел. Введите пробел в аналогичную позицию перевода\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
@@ -4009,6 +4013,7 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Server:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Сервер:"
 
 #: bin/openerp.glade:7025
 msgid ""
@@ -4026,6 +4031,8 @@ msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Пароль "
+"суперадминистратора:"
 
 #: bin/openerp.glade:7048
 msgid "admin"
@@ -4052,6 +4059,8 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>New Database Name:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Имя новой базы "
+"данных:"
 
 #
 # File: bin/openerp.glade, line: 9117
@@ -4071,18 +4080,23 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Язык по умолчанию:"
 
 #: bin/openerp.glade:7169
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
+"Это пароль пользователя 'admin', который будет создан в Вашей новой базе "
+"данных."
 
 #: bin/openerp.glade:7171
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Administrator "
 "Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Пароль "
+"администратора:"
 
 #: bin/openerp.glade:7184
 msgid ""
@@ -4096,6 +4110,7 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Подтвердите пароль:"
 
 #: bin/openerp.glade:7279
 msgid ""
@@ -4112,6 +4127,8 @@ msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
 "Data:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Загрузить "
+"демонстрационные данные:"
 
 #
 # File: bin/openerp.glade, line: 9299
@@ -4244,13 +4261,16 @@ msgstr "Операторы условий"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
-msgstr ""
+msgstr "Выбор будет применяться со следующего фильтр, если любой"
 
 #: bin/openerp.glade:8317
 msgid ""
 "AND\n"
 "OR"
 msgstr ""
+"И\n"
+"ИЛИ\n"
+"представляет строки. Начать новую линию в аналогичной позиции перевода."
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
@@ -4271,10 +4291,12 @@ msgstr "ярлык"
 #: bin/win_error.glade:100
 msgid "Click here for details about the publisher warranty proposition"
 msgstr ""
+"Нажмите здесь для получения подробной информации предложения гарантии "
+"издателя"
 
 #: bin/win_error.glade:120
 msgid "<i>_Publisher Warranty</i>"
-msgstr ""
+msgstr "<i>Гарантия издателя</I>"
 
 #: bin/win_error.glade:151
 msgid ""
@@ -4284,6 +4306,12 @@ msgid ""
 "you shortly.\n"
 "</i>"
 msgstr ""
+"<b>Контракт гарантии издателя</b>\n"
+"<i>\n"
+"Ваш запрос будет отправлен в OpenERP и по гарантии издателя команда ответит "
+"вам  в ближайшее время.\n"
+"</i>\n"
+"представляет строки. Начните новую линию в аналогичной позиции перевода"
 
 #
 # File: bin/openerp.glade, line: 3362
@@ -4315,7 +4343,7 @@ msgstr "Отправить гарантию каманде издателя"
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
-msgstr ""
+msgstr "Резюме проблемы:"
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"

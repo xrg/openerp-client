@@ -91,7 +91,7 @@ class reference(interface.widget_interface):
 
         self.ok = True
         self._readonly = False
-        self.set_popdown(attrs.get('selection',[]))
+        self.set_popdown(attrs.get('selection',[]) + [[False,'']])
 
         self.last_key = (None, 0)
         self.key_catalog = {}

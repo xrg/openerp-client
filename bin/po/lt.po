@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-05 20:27+0000\n"
-"Last-Translator: Paulius Sladkevičius <Unknown>\n"
+"PO-Revision-Date: 2011-01-16 11:21+0000\n"
+"Last-Translator: Paulius Sladkevičius - http://www.inovera.lt <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-06 04:35+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-18 04:36+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "Language: lt\n"
 
 #
@@ -72,14 +72,9 @@ msgstr "Prisijungimas atmestas!"
 msgid "Application Error"
 msgstr "Programos klaida"
 
-#
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
 #: bin/modules/action/wizard.py:170 bin/rpc.py:204
 msgid "View details"
-msgstr "Peržiūrėti detaliau"
+msgstr "Peržiūrėti plačiau"
 
 #
 # File: bin/modules/action/main.py, line: 46
@@ -193,7 +188,7 @@ msgstr "Jūsų duomenų bazės buvo atnaujintos."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr "Jūs nepažymėjote duomenų bazės"
+msgstr "Jūs nepasirinkote duomenų bazės"
 
 #
 # File: bin/modules/gui/main.py, line: 152
@@ -228,7 +223,7 @@ msgstr "Atsiprašome,'"
 # File: bin/modules/gui/main.py, line: 299
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
-msgstr "Neteisingas duomenų bazės pavadinimas!"
+msgstr "Blogas duomenų bazės pavadinimas!"
 
 #: bin/modules/gui/main.py:613
 msgid ""
@@ -270,7 +265,7 @@ msgstr "Blogas duomenų bazių administratoriaus slaptažodis!"
 # File: bin/modules/gui/main.py, line: 370
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr "Klaida, kuriant duomenų bazę!"
+msgstr "Klaida kuriant duomenų bazę!"
 
 #
 # File: bin/modules/gui/main.py, line: 370
@@ -314,7 +309,7 @@ msgstr "Nėra kompanijos"
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr "%s užklausa(os)"
+msgstr "%s užklausa (-os)"
 
 #
 # File: bin/modules/gui/main.py, line: 696
@@ -326,7 +321,7 @@ msgstr "Nėra užklausų"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr " - %s užklausa išsiųsta"
+msgstr " - %s užklausa (-os) išsiųsta (-os)"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
@@ -357,7 +352,7 @@ msgid ""
 "Bad Username or Password !"
 msgstr ""
 "Tapatybės nustatymo klaida!\n"
-"Neteisingai įvestas naudotojo vardas arba slaptažodis!"
+"Klaidingai įvestas naudotojo vardas arba slaptažodis!"
 
 #: bin/modules/gui/main.py:1056
 #, python-format
@@ -492,7 +487,7 @@ msgstr "Patvirtinimo klaida."
 
 #: bin/modules/gui/main.py:1454
 msgid "Could not change the Super Admin password."
-msgstr "Nepavyko pakeisti Super Administratoriaus slaptažodžio."
+msgstr "Nepavyko pakeisti super administratoriaus slaptažodžio."
 
 #: bin/modules/gui/main.py:1455
 msgid "Bad password provided !"
@@ -553,7 +548,7 @@ msgstr "Resurso ID neegzistuoja šiam objektui!"
 #: bin/modules/gui/window/form.py:231
 msgid "No record selected ! You can only attach to existing record."
 msgstr ""
-"Nepasirinktas įrašas! Prisėgti priedus jūs galite tik prie egzistuojančių "
+"Nepasirinktas įrašas! Prisegti priedus jūs galite tik prie egzistuojančių "
 "įrašų."
 
 #: bin/modules/gui/window/form.py:247
@@ -572,7 +567,7 @@ msgstr "ID"
 
 #: bin/modules/gui/window/form.py:254
 msgid "Creation User"
-msgstr "Sukurė naudotojas"
+msgstr "Sukūrė naudotojas"
 
 #
 # File: bin/modules/gui/window/form.py, line: 217
@@ -597,7 +592,7 @@ msgstr "Paskutinio redagavimo data"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "Vidinio modulio duomenų ID"
 
 #
 # File: bin/modules/gui/window/form.py, line: 230
@@ -683,7 +678,7 @@ msgstr "Jūs turite pasirinkti vieną ar kelis įrašus!"
 # File: bin/modules/gui/window/form.py, line: 358
 #: bin/modules/gui/window/form.py:416
 msgid "Print Screen"
-msgstr "Spausdinti ekraną"
+msgstr "Spausdinti rodomus duomenis"
 
 #
 # File: bin/modules/gui/window/form.py, line: 378
@@ -810,7 +805,7 @@ msgstr "Jūs nepasirinkote jokio lauko, kurį importuoti"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "Plėtinys"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
@@ -822,11 +817,11 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
-msgstr "Šis pletinys jau nustatytas"
+msgstr "Šis plėtinys jau nustatytas"
 
 #: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7684
 msgid "Extension Manager"
-msgstr "Plėtinių derintuvė"
+msgstr "Plėtinių tvarkyklė"
 
 #
 # File: bin/modules/gui/window/win_selection.py, line: 52
@@ -922,7 +917,7 @@ msgstr "Nepavyko aktyvuoti chroot režimo: nepasirinktas medžio resursas"
 # File: bin/modules/gui/window/win_export.py, line: 52
 #: bin/modules/gui/window/win_export.py:50
 msgid " record(s) saved !"
-msgstr " įrašas(ai) išsaugoti!"
+msgstr " įrašas (-ai) išsaugotas (-i)!"
 
 #
 # File: bin/modules/gui/window/win_export.py, line: 55
@@ -959,17 +954,17 @@ msgstr "OpenERP - Nuoroda"
 #: bin/modules/gui/window/win_search.py:126
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr "OpenERP Paieška: %s"
+msgstr "OpenERP paieška: %s"
 
 #: bin/modules/gui/window/win_search.py:127
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr "OpenERP paieška: %s (%%d rezultatai(ų))"
+msgstr "OpenERP paieška: %s (%%d rezultatai (-ų))"
 
 #: bin/options.py:109
 #, python-format
 msgid "OpenERP Client %s"
-msgstr "OpenERP Klientas %s"
+msgstr "OpenERP klientas %s"
 
 #
 # File: bin/options.py, line: 89
@@ -1019,7 +1014,7 @@ msgstr ""
 "<span foreground=\"darkred\"><b>Uždaryti šį patarimą:</b></span>\n"
 "Tai paslėps šį patarimą. Jis bus rodomas kitą kartą vėl, kai atversite šį "
 "meniu punktą, nebent išjungsite visus patarimus <b>'Meniu patarimai'</b> "
-"parinktį naudotojo nustatymuose."
+"parinktį naudotojo parinktyse."
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
@@ -1035,7 +1030,7 @@ msgstr ""
 "<span foreground=\"darkred\"><b>Išjungti visus patarimus:</b></span>\n"
 "Tai išjungs visus patarimus visuose meniu punktuose.\n"
 "Norint vėl įjungti patarimus jūs turite pažymėti <b>'Meniu patarimai'</b> "
-"parinktį naudotojo nustatymuose."
+"parinktį naudotojo parinktyse."
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
@@ -1085,7 +1080,7 @@ msgstr "pastabos"
 # File: bin/common/common.py, line: 343
 #: bin/common/common.py:367
 msgid "Support request sent !"
-msgstr "Priežiūros užklausa išsiūsta!"
+msgstr "Priežiūros užklausa išsiųsta!"
 
 #: bin/common/common.py:387 bin/common/common.py:430
 msgid ""
@@ -1146,7 +1141,7 @@ msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
-"Jūsų užklausa sėkmingai išsiūsta priežiūros komandai!\n"
+"Jūsų problema sėkmingai išsiųsta priežiūros komandai!\n"
 "Išnagrinėję problemą mes su jumis susisieksime."
 
 #: bin/common/common.py:491
@@ -1178,16 +1173,13 @@ msgstr "Negalima nustatyti jūsų lokalės %s: %s"
 msgid "Unable to handle %s filetype"
 msgstr "Nepalaikomas %s failo tipas"
 
-#
-# File: bin/printer/printer.py, line: 181
-# File: bin/printer/printer.py, line: 181
 #: bin/printer/printer.py:189
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
-"Linux Automatinis Spausdinimas nerealizuotas.\n"
-"Naudokite peržiūros funkciją!"
+"Linux automatinis spausdinimas nerealizuotas.\n"
+"Naudokite peržiūros parinktį!"
 
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
@@ -1402,7 +1394,7 @@ msgstr "Savaitė"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
-msgstr "Kalendoriaus peržiūros klaida!"
+msgstr "Kalendoriaus rodonio klaida!"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "You must intall the library python-hippocanvas to use calendars."
@@ -1432,7 +1424,7 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
-"Jūs turite neišsaugotus įrašus!  \n"
+"Jūs turite neišsaugotus įrašą (-us)!  \n"
 "\n"
 "Išsaugokite juos prieš rūšiavimą!"
 
@@ -1448,7 +1440,7 @@ msgstr "F1 Naujas - F2 Atidaryti/Ieškoti"
 #: bin/widget/view/tree_gtk/editabletree.py:214
 #, python-format
 msgid "Warning; field %s is required!"
-msgstr "Įspejimas: laukas %s yra būtinas!"
+msgstr "Įspėjimas: laukas %s yra būtinas!"
 
 #: bin/widget/view/tree_gtk/date_renderer.py:197
 msgid ""
@@ -1464,7 +1456,7 @@ msgstr "Šis tipas (%s) nėra palaikomas GTK kliento!"
 
 #: bin/widget/view/widget_parse.py:64
 msgid "No valid view found for this object!"
-msgstr "Nerastas peržiūros režimas šiam objektui!"
+msgstr "Nerastas rodinys šiam objektui!"
 
 #
 # File: bin/widget/view/graph_gtk/parser.py, line: 65
@@ -1566,12 +1558,9 @@ msgstr "Įveskite tekstą į susijusį lauką prieš pridedant vertimus!"
 msgid "You need to save resource before adding translations!"
 msgstr "Jums reikia išsaugoti resursą prieš pridedant vertimus!"
 
-#
-# File: bin/widget/view/form_gtk/parser.py, line: 772
-# File: bin/widget/view/form_gtk/parser.py, line: 772
 #: bin/widget/view/form_gtk/parser.py:891
 msgid "Translate view"
-msgstr "Vertimo peržiūrą"
+msgstr "Versti rodinį"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
@@ -1588,7 +1577,7 @@ msgstr "Išsaugoti ir sukurti naują"
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
 msgid "Set to default value"
-msgstr "Nustatyti numatytąją reikšmę"
+msgstr "Nustatyti į numatytąją reikšmę"
 
 #: bin/widget/view/form_gtk/one2many_list.py:178
 msgid "Set Default"
@@ -1659,7 +1648,7 @@ msgstr "Jūs turite pasirinkti resursą!"
 # File: bin/widget/view/form_gtk/image.py, line: 70
 #: bin/widget/view/form_gtk/image.py:73
 msgid "Set Image"
-msgstr "Nustatyti paveiksliuką"
+msgstr "Nustatyti paveikslą"
 
 #
 # File: bin/widget/view/form_gtk/binary.py, line: 85
@@ -1691,7 +1680,7 @@ msgstr "Visi failai"
 # File: bin/widget/view/form_gtk/image.py, line: 104
 #: bin/widget/view/form_gtk/image.py:108
 msgid "Images"
-msgstr "Paveiksliukai"
+msgstr "Paveikslai"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
@@ -1783,7 +1772,7 @@ msgstr "Taikyti visada!"
 #: bin/widget/view/form_gtk/calendar.py:100
 #: bin/widget/view/form_gtk/calendar.py:162
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr "Neteisinga datos reikšmė! Metai turi būti didesni negu 1899!"
+msgstr "Klaidinga datos reikšmė! Metai turi būti didesni negu 1899!"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
@@ -1801,20 +1790,19 @@ msgstr "Minutė:"
 
 #: bin/widget/view/form_gtk/calendar.py:289
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
-"Neteisinga datos ir laiko reikšmė! Metai turi būti didesni negu 1899!"
+msgstr "Klaidinga datos ir laiko reikšmė! Metai turi būti didesni negu 1899!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:30
 msgid "Gantt view not yet implemented !"
-msgstr "Nerealizuota Gantt grafiko peržiūra!"
+msgstr "Neįgyvendintas Gantt grafiko rodinys!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid ""
 "The gantt view is not available in this GTK Client, you should use the web "
 "interface or switch to the calendar view."
 msgstr ""
-"Gantt grafiko peržiūra negalima šiame GTK kliente, jūs turėtumėte "
-"pasinaudoti web sąsaja arba persijungti į kalendoriaus peržiūrą."
+"Gantt grafiko rodinio nėra šiame GTK kliente, jūs turėtumėte pasinaudoti web "
+"sąsaja arba persijungti į kalendoriaus rodinį."
 
 #: bin/widget/screen/screen.py:354
 msgid ""
@@ -1898,7 +1886,7 @@ msgstr "_Atsijungti"
 # File: bin/openerp.glade, line: 300
 #: bin/openerp.glade:308
 msgid "Databases"
-msgstr "Duomenų bazė"
+msgstr "Duomenų bazės"
 
 #
 # File: bin/openerp.glade, line: 307
@@ -1934,7 +1922,7 @@ msgstr "_Parsisiųsti migracijos kodą"
 
 #: bin/openerp.glade:395
 msgid "_Migrate Database(s)"
-msgstr "_Migruoti duomenų bazę(-es)"
+msgstr "_Migruoti duomenų bazę (-es)"
 
 #
 # File: bin/openerp.glade, line: 372
@@ -1956,7 +1944,7 @@ msgstr "_Nustatymai"
 # File: bin/openerp.glade, line: 445
 #: bin/openerp.glade:488
 msgid "_Send a request"
-msgstr "_Siūsti užklausą"
+msgstr "_Siųsti užklausą"
 
 #
 # File: bin/openerp.glade, line: 460
@@ -2081,12 +2069,9 @@ msgstr "Ankstesnė kortelė"
 msgid "Next Tab"
 msgstr "Tolesnė kortelė"
 
-#
-# File: bin/openerp.glade, line: 711
-# File: bin/openerp.glade, line: 711
 #: bin/openerp.glade:754
 msgid "View _logs"
-msgstr "Žiūrėti \"log\" _žurnalus"
+msgstr "Peržiūrėti  _žurnalus"
 
 #: bin/openerp.glade:762
 msgid "_Go to resource ID..."
@@ -2104,7 +2089,7 @@ msgstr "_Atidaryti"
 # File: bin/openerp.glade, line: 748
 #: bin/openerp.glade:791
 msgid "Reloa_d / Undo"
-msgstr "Perkr_auti / Atšaukti"
+msgstr "Įkelti iš naujo / Atšaukti"
 
 #
 # File: bin/openerp.glade, line: 769
@@ -2113,12 +2098,9 @@ msgstr "Perkr_auti / Atšaukti"
 msgid "Repeat latest _action"
 msgstr "Pakartoti paskutinį _veiksmą"
 
-#
-# File: bin/openerp.glade, line: 783
-# File: bin/openerp.glade, line: 783
 #: bin/openerp.glade:826
 msgid "_Preview in PDF"
-msgstr "_Peržiūrėti kaip PDF"
+msgstr "_Peržiūrėti PDF formatu"
 
 #
 # File: bin/openerp.glade, line: 799
@@ -2146,7 +2128,7 @@ msgstr "I_mportuoti duomenis..."
 # File: bin/openerp.glade, line: 846
 #: bin/openerp.glade:889
 msgid "_Options"
-msgstr "_Nustatymai"
+msgstr "_Parinktys"
 
 #: bin/openerp.glade:896
 msgid "_Extension Manager"
@@ -2269,7 +2251,7 @@ msgstr "Peržiū_rėti prieš spausdinant"
 # File: bin/openerp.glade, line: 1026
 #: bin/openerp.glade:1069
 msgid "_Save options"
-msgstr "_Išsaugoti nuostatas"
+msgstr "_Išsaugoti parinktis"
 
 #
 # File: bin/openerp.glade, line: 1046
@@ -2405,9 +2387,7 @@ msgstr "Grafikas"
 
 #: bin/openerp.glade:1374
 msgid "Gantt"
-msgstr ""
-"Ganto\n"
-"diagrama"
+msgstr "Ganto diagrama"
 
 #
 # File: bin/openerp.glade, line: 1344
@@ -2515,7 +2495,7 @@ msgid ""
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
 "<b>Apie OpenERP</b>\n"
-"<i>Labiausiai pažengęs Atviro Kodo ERP &amp; CRM!</i>"
+"<i>Labiausiai pažengęs atviro kodo ERP &amp; CRM!</i>"
 
 #: bin/openerp.glade:1890
 msgid ""
@@ -2686,7 +2666,7 @@ msgstr "Pritaikyti importavimui"
 
 #: bin/openerp.glade:2862
 msgid "<b>Select an Option to Export</b>"
-msgstr "<b>Pasirinkite nustatymus eksportavimui</b>"
+msgstr "<b>Pasirinkite parinktį eksportavimui</b>"
 
 #: bin/openerp.glade:2909
 msgid "Available Fields"
@@ -2954,12 +2934,9 @@ msgstr "Išsaugoti ir uždaryti langą"
 msgid "<Ctrl> + <Enter>"
 msgstr "<Ctrl> + <Enter>"
 
-#
-# File: bin/openerp.glade, line: 6917
-# File: bin/openerp.glade, line: 6917
 #: bin/openerp.glade:4940
 msgid "Switch view mode"
-msgstr "Perjungti peržiūros režimą"
+msgstr "Perjungti rodinio režimą"
 
 #
 # File: bin/openerp.glade, line: 6932
@@ -2980,7 +2957,7 @@ msgstr "Tolesnis įrašas"
 # File: bin/openerp.glade, line: 6960
 #: bin/openerp.glade:4983
 msgid "Previous record"
-msgstr "Ankstensis įrašas"
+msgstr "Ankstesnis įrašas"
 
 #
 # File: bin/openerp.glade, line: 6975
@@ -3257,7 +3234,7 @@ msgstr "N_ieko"
 # File: bin/openerp.glade, line: 7778
 #: bin/openerp.glade:5801
 msgid "Auto-Detect"
-msgstr "Automatinis nustatymas"
+msgstr "Automatiškai aptikti"
 
 #
 # File: bin/openerp.glade, line: 7833
@@ -3420,7 +3397,7 @@ msgid ""
 msgstr ""
 "Tai yra slaptažodis naudotojo kuris turi duomenų bazės administravimo "
 "teises. Tai nėra OpenERP naudotojas, tai super administratorius. Jeigu jūs "
-"nepakeitėte jo po įdiegimo slaptažodis yra 'admin'."
+"nepakeitėte jo po įdiegimo, tai slaptažodis yra 'admin'."
 
 #: bin/openerp.glade:7029
 msgid ""
@@ -3444,7 +3421,7 @@ msgid ""
 "contain any special character. Exemple: 'terp'."
 msgstr ""
 "Pasirinkite kuriamos duomenų bazės pavadinimą. Pavadinimas negali būti "
-"sudarytas iš specialų simbolių, Pvz: 'openerp'."
+"sudarytas iš specialų simbolių. Pvz: 'openerp'."
 
 #: bin/openerp.glade:7129
 msgid ""
@@ -3507,7 +3484,7 @@ msgid ""
 msgstr ""
 "Pažymėkite šį langelį jeigu norite, kad demonstraciniai duomenys būtų "
 "įdiegti į naują duomenų bazę. Šie duomenys padės jums perprasti OpenERP, su "
-"įdiegtais produktais, kontrahentais ir t.t."
+"įdiegtais produktais, partneriais ir t.t."
 
 #: bin/openerp.glade:7282
 msgid ""
@@ -3580,11 +3557,12 @@ msgstr ""
 "<b>\n"
 "Perspėjimas dėl lygiagretaus duomenų rašymo:\n"
 "</b>\n"
-"Šis dokumentas buvo pakeistas kol jūs dirbote su juo.\n"
+"Šis dokumentas buvo pakeistas, kol jį redagavote.\n"
+".\n"
 "  Pasirinkite:\n"
-"   -\"Atšaukti\" nesaugoti pakeitimų.\n"
-"   -\"Palyginti\" peržiūrėti pakeistą versiją.\n"
-"   -\"Rašyti bet kuriuo atveju\" išsaugoti jūsų pakeitimus.\n"
+"   -\"Atšaukti\" - nesaugoti pakeitimų.\n"
+"   -\"Palyginti\" - peržiūrėti pakeistą versiją.\n"
+"   -\"Rašyti bet kuriuo atveju\" - išsaugoti jūsų pakeitimus.\n"
 
 #
 # File: bin/openerp.glade, line: 10018
@@ -3705,11 +3683,11 @@ msgstr "<i>_Priežūros užklausa</i>"
 
 #: bin/win_error.glade:387
 msgid "Details"
-msgstr "Detalės"
+msgstr "Plačiau"
 
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
-msgstr "<i>_Detalės</i>"
+msgstr "<i>_Informacija</i>"
 
 #
 # File: bin/modules/gui/main.py, line: 388

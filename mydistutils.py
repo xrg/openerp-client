@@ -25,77 +25,69 @@
 import sys
 import os
 import os.path
-import re
-import glob
-import commands
-import types
 import msgfmt
 
-from distutils.core import Command
-from distutils.command.build import build
-from distutils.command.install import install
+from setuptools import Command, Distribution
+from distutils.command.build_scripts import build_scripts
+from setuptools.command.install import install
 from distutils.command.install_data import install_data
 from distutils.dep_util import newer
-from distutils.dist import Distribution
-from distutils.core import setup
+import distutils.core
+
+from distutils.errors import DistutilsSetupError
 
 try:
     from dsextras import BuildExt
+    _pyflakes_hush = [ BuildExt, ]
 except ImportError:
     try:
         from gtk.dsextras import BuildExt
+        _pyflakes_hush = [ BuildExt, ]
     except ImportError:
         sys.exit('Error: Can not find dsextras or gtk.dsextras')
 
 # get python short version
 py_short_version = '%s.%s' % sys.version_info[:2]
 
+class build_scripts_app(build_scripts):
+    """ Create the shortcut to the application
+    """
 
-class l10napp_build(build):
+    description = 'build the OpenERP Client Linux script'
 
-    def has_po_files(self):
-        return self.distribution.has_po_files()
-
-    sub_commands = []
-    sub_commands.append(('build_conf', None))
-    sub_commands.extend(build.sub_commands)
-    sub_commands.append(('build_mo', has_po_files))
-
-class l10napp_install(install):
-
-    def has_po_files(self):
-        return self.distribution.has_po_files()
+    def get_source_files(self):
+        return [ x for x in self.scripts if x != 'openerp-client']
 
     def run(self):
-        # create startup script
-        # start_script = "#!/bin/sh\ncd %s\nexec %s ./openerp-client.py $@\n" % (opj(self.install_libbase, "openerp-client"), sys.executable)
-        opj = os.path.join
-        openerp_site_packages = opj('/usr', 'lib', 'python%s' % py_short_version, 'site-packages', 'openerp-client')
-        start_script = "#!/bin/sh\ncd %s\nexec %s ./openerp-client.py $@\n" % (openerp_site_packages, sys.executable)
-        # write script
-        f = open('openerp-client', 'w')
-        f.write(start_script)
-        f.close()
-        install.run(self)
-
-    sub_commands = []
-    sub_commands.extend(install.sub_commands)
-    sub_commands.append(('install_mo', has_po_files))
-
-class build_conf(Command):
-
-    description = 'update conf file'
-
-    user_options = []
-
-    def initialize_options(self):
-        self.prefix = None
-
-    def finalize_options(self):
-        self.set_undefined_options('install', ('prefix', 'prefix'))
-
-    def run(self):
-        self.announce('Building files from templates')
+        if sys.platform != 'win32':
+            self.announce("create startup script")
+            opj = os.path.join
+            # Peek into "install" command to find out where it is going to install to
+            inst_cmd = self.get_finalized_command('install')
+            if inst_cmd:
+                # Note: we user the "purelib" because we don't ship binary
+                # executables. If we ever compile things into execs, we shall 
+                # use "platlib"
+                openerp_site_packages = opj(inst_cmd.install_purelib,'openerp-client')
+                if inst_cmd.root and openerp_site_packages.startswith(inst_cmd.root):
+                    # trick: when we install relative to root, we mostly mean to
+                    # temporary put the files there, and then move back to the
+                    # stripped prefix dir. So we don't write the full root into
+                    # the script
+                    iroot = inst_cmd.root
+                    if iroot.endswith('/'):
+                        iroot = iroot[:-1]
+                    openerp_site_packages = openerp_site_packages[len(iroot):]
+           
+            else:
+                # Hard-code the Linux /usr/lib/pythonX.Y/... path
+                openerp_site_packages = opj('/usr', 'lib', 'python%s' % py_short_version, 'site-packages', 'openerp-client')
+            start_script = "#!/bin/sh\ncd %s\nexec %s ./openerp-client.py $@\n" % (openerp_site_packages, sys.executable)
+            # write script
+            f = open('openerp-client', 'w')
+            f.write(start_script)
+            f.close()
+        build_scripts.run(self)
 
 class build_mo(Command):
 
@@ -108,20 +100,22 @@ class build_mo(Command):
         self.build_base = None
         self.translations = self.distribution.translations
         self.force = None
+
     def finalize_options(self):
         self.set_undefined_options('build',
                                    ('build_base', 'build_base'),
                                    ('force', 'force'))
     def run(self):
+        if not self.translations:
+            return
         self.announce('Building binary message catalog')
-        if self.distribution.has_po_files():
-            for mo, po in self.translations:
-                dest = os.path.normpath(self.build_base + '/' + mo)
-                self.mkpath(os.path.dirname(dest))
-                if not self.force and not newer(po, dest):
-                    self.announce("not building %s (up-to-date)" % dest)
-                else:
-                    msgfmt.make(po, dest)
+        for mo, po in self.translations:
+            dest = os.path.normpath( os.path.join(self.build_base, mo))
+            self.mkpath(os.path.dirname(dest))
+            if not self.force and not newer(po, dest):
+                self.announce("not building %s (up-to-date)" % dest)
+            else:
+                msgfmt.make(po, dest)
 
 class install_mo(install_data):
 
@@ -130,7 +124,6 @@ class install_mo(install_data):
     def initialize_options(self):
         install_data.initialize_options(self)
         self.translations = self.distribution.translations
-        self.has_po_files = self.distribution.has_po_files
         self.install_dir = None
         self.build_dir = None
         self.skip_build = None
@@ -145,7 +138,7 @@ class install_mo(install_data):
     def run(self):
         if not self.skip_build:
             self.run_command('build_mo')
-        if self.has_po_files():
+        if self.translations:
             for mo, po in self.translations:
                 src = os.path.normpath(self.build_dir + '/' + mo)
                 if not os.path.isabs(mo):
@@ -164,29 +157,18 @@ class install_mo(install_data):
     def get_inputs (self):
         return [ po for mo, po in self.translations ]
 
-class L10nAppDistribution(Distribution):
-    def __init__(self, attrs = None):
-        self.modules_check = 0
-        self.gconf = 1
-        self.msg_sources = None
+class ClientDistribution(Distribution):
+    def __init__(self, attrs=None):
         self.translations = []
-        self.name = attrs.get('name')
         Distribution.__init__(self, attrs)
         self.cmdclass = {
-            'install' : l10napp_install,
             'install_mo' : install_mo,
-            'build' : l10napp_build,
             'build_mo' : build_mo,
-            'build_conf' : build_conf,
+            # 'build_conf' : build_conf,
             'build_ext': BuildExt,
+            'build_scripts': build_scripts_app,
             }
+        self.command_obj['build_scripts'] = None
 
-    def has_po_files(self):
-        return len(self.translations) > 0
-    
-def setup(**kwds):
-    from distutils.core import setup
-    kwds['distclass'] = L10nAppDistribution
-    setup(**kwds)
 
-# vim:expandtab:tw=80
+#eof
