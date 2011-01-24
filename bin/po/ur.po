@@ -8,60 +8,60 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-21 19:57+0000\n"
+"PO-Revision-Date: 2011-01-23 15:57+0000\n"
 "Last-Translator: Aamir Riaz <Unknown>\n"
 "Language-Team: Urdu <ur@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-22 04:51+0000\n"
+"X-Launchpad-Export-Date: 2011-01-24 04:53+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
-msgstr ""
+msgstr "پرنٹ ورکفلو"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
-msgstr ""
+msgstr "ورکفلوپرنٹ کریں سبفلوکےساتھ"
 
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
-msgstr ""
+msgstr "اِس ریسورس کا پلگ اِن دستیاب نھیں ھے"
 
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr ""
+msgstr "ایک پلگ ان منتخب کرین"
 
 #: bin/modules/action/wizard.py:150 bin/modules/gui/main.py:188 bin/rpc.py:156
 msgid "Connection refused !"
-msgstr ""
+msgstr "کنیکٹ ھونے سےانکار کردیا"
 
 #: bin/modules/action/wizard.py:162 bin/modules/action/wizard.py:168
 #: bin/modules/action/wizard.py:170 bin/modules/gui/main.py:196
 #: bin/modules/gui/main.py:202 bin/rpc.py:202 bin/rpc.py:204
 msgid "Application Error"
-msgstr ""
+msgstr "ایپلیکیشن کی خرابی"
 
 #: bin/modules/action/wizard.py:170 bin/rpc.py:204
 msgid "View details"
-msgstr ""
+msgstr "تفصِل دیکھین"
 
 #: bin/modules/action/main.py:48
 msgid "Nothing to print!"
-msgstr ""
+msgstr "پرنٹ کرنےکیلیئےکُچھ نھیں ھے"
 
 #: bin/modules/action/main.py:66
 msgid "Printing aborted, too long delay !"
-msgstr ""
+msgstr "زیادھ تاخیرکی وجھ سے پرنٹ روکدیا گیا"
 
 #: bin/modules/action/main.py:195
 msgid "Select your action"
-msgstr ""
+msgstr "اپناعمل منتخب کریں"
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr ""
+msgstr "سرورسےتعلق نھین ھوسکتا"
 
 #: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6278
 #: bin/openerp.glade:6524 bin/openerp.glade:6847 bin/openerp.glade:7508
@@ -75,31 +75,31 @@ msgstr "تبدیل"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "منتظم اعلیٰ کاپاسورڈ"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "بُرامنتظم اعلیٰ کاپاسورڈ"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
-msgstr ""
+msgstr "نقل مکانی کاسکرپٹ"
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
-msgstr ""
+msgstr "مُعادھ کی شناخت"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr ""
+msgstr "مُعادھ کی پاسورڈ"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr ""
+msgstr "آپکے پاس پھلےسےتازھ ترین ورژن ھے"
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
-msgstr ""
+msgstr "مندرجھذیل اپڈیٹس دستیاب ھیں"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
@@ -107,11 +107,11 @@ msgstr "آپ اپنے ڈیٹا بیس اب منتقل کر سکتے ہیں"
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr ""
+msgstr "ڈیٹابیس کی نقل مکانی"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "ڈیٹا بیس"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -142,17 +142,19 @@ msgstr ""
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
-msgstr ""
+msgstr "معاف کیجیےگا"
 
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
-msgstr ""
+msgstr "ڈیٹا بیسس کانام بُرا ھے"
 
 #: bin/modules/gui/main.py:613
 msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
+"ڈیٹابیس کانام صرف عام حروف یا \"_\" پر مشتمل ھونا چاھیے،\n"
+" آپ تلفظ، خالی یا خاص حروف استعمال کرنے سے احترازکریں"
 
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
@@ -161,7 +163,7 @@ msgstr "ڈیٹا بیسس کی تشکیل نھیں ھو سکتی"
 
 #: bin/modules/gui/main.py:647
 msgid "Database already exists !"
-msgstr ""
+msgstr "ڈیٹابیس پھلےسےموجودھے"
 
 #: bin/modules/gui/main.py:649 bin/modules/gui/main.py:1383
 #: bin/modules/gui/main.py:1403 bin/modules/gui/main.py:1482
@@ -177,23 +179,25 @@ msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
+"انسٹالیشن کےدوران سرور تباھ ھوگیا،\n"
+" ھماری تجویزھےاس ڈیٹابیس کو نکال دیں"
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"
-msgstr ""
+msgstr "اندرجانےکیلیئے \"Ctrl+O\" دبایئں"
 
 #: bin/modules/gui/main.py:881
 msgid "Edit"
-msgstr ""
+msgstr "ترمیم"
 
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "کوئ کمپنی نھیں ھے"
 
 #: bin/modules/gui/main.py:995
 #, python-format
@@ -202,48 +206,54 @@ msgstr ""
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr ""
+msgstr "کوئ درخواست نھیں ھے"
 
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " درخواست بھیج دیں %s"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"ڈیٹابیس کانام صحیح سے دیکھیں یا اپنے منتظم سے رابطہ کرکےڈیٹابیس اسٹیٹس کی "
+"توثیق کریں"
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "ڈیٹابیس کی رسائ مُمکن نھیں یا ڈیٹابیس موجود نھیں ھے"
 
 #: bin/modules/gui/main.py:1041
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
+"رابطے کی خرابی،\n"
+" سرور سے رابطہ نھیں ھو رھا۔"
 
 #: bin/modules/gui/main.py:1043
 msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"توثیق کی خرابی!\n"
+" بُراصارف کا نام یا پاس ورڈ۔"
 
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #: bin/modules/gui/main.py:1076
 msgid "Not logged !"
-msgstr ""
+msgstr "اندر رسائ نھیں ھے۔"
 
 #: bin/modules/gui/main.py:1085 bin/widget/view/form_gtk/one2many_list.py:52
 #: bin/openerp.glade:6126
 msgid "OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #: bin/modules/gui/main.py:1159
 msgid ""
@@ -251,6 +261,9 @@ msgid ""
 "Ask the administrator to verify\n"
 "you have an action defined for your user."
 msgstr ""
+"آپکی اندر رسائ مُمکن نھیں ھے،\n"
+"مُنتظم سے توثیق کریں،\n"
+"آپ اپنے صارف کیلیے عمل مقرر کریں۔"
 
 #: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
 msgid "Do you really want to quit ?"
@@ -284,7 +297,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
 msgid "Open..."
-msgstr ""
+msgstr "کھولیں"
 
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
@@ -296,50 +309,50 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1405
 msgid "Couldn't restore database"
-msgstr ""
+msgstr "ڈیٹابیس بحال نھیں ھوسکتی"
 
 #: bin/modules/gui/main.py:1444
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr ""
+msgstr "تصدیق شدھ پاس ورڈ نئےپاس ورڈ سے نھیں مل رھا، آپریشن منسوخ کردیا۔"
 
 #: bin/modules/gui/main.py:1446
 msgid "Validation Error."
-msgstr ""
+msgstr "تصدیق کی خرابی"
 
 #: bin/modules/gui/main.py:1454
 msgid "Could not change the Super Admin password."
-msgstr ""
+msgstr "سُپرایڈمن کا پاس ورڈ تبدیل نھیں کیا جا سکا"
 
 #: bin/modules/gui/main.py:1455
 msgid "Bad password provided !"
-msgstr ""
+msgstr "بُرا پاس ورڈ فراھم کیا"
 
 #: bin/modules/gui/main.py:1457
 msgid "Error, password not changed."
-msgstr ""
+msgstr "خرابی، پاس ورڈ تبدیل نھیں ھُوا۔"
 
 #: bin/modules/gui/main.py:1463 bin/modules/gui/main.py:1486
 msgid "Backup a database"
-msgstr ""
+msgstr "ڈیٹابیس کا بیک اپ"
 
 #: bin/modules/gui/main.py:1466 bin/modules/gui/window/win_export.py:328
 #: bin/printer/printer.py:216 bin/widget/view/form_gtk/image.py:129
 #: bin/widget/view/form_gtk/binary.py:167
 msgid "Save As..."
-msgstr ""
+msgstr "یوں محفوظ کرو۔۔۔"
 
 #: bin/modules/gui/main.py:1479
 msgid "Database backed up successfully !"
-msgstr ""
+msgstr "ڈیٹابیس کا بیک اپ کامیابی سے ھوگیا۔"
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
-msgstr ""
+msgstr "ڈیٹابیس کا بیک اپ نھیں ھوسکا۔"
 
 #: bin/modules/gui/main.py:1484
 msgid "Couldn't backup database."
-msgstr ""
+msgstr "ڈیٹابیس کابیک اپ نھیں ھو سکا"
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
@@ -347,16 +360,16 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:231
 msgid "No record selected ! You can only attach to existing record."
-msgstr ""
+msgstr "ریکارڈ مُنتخب نھیں ھوا، آپ صرف موجودھ ریکارڈ سےمُنسلک ھوسکتےھیں۔"
 
 #: bin/modules/gui/window/form.py:247
 msgid "You have to select a record !"
-msgstr ""
+msgstr "آپ کوایک ریکارڈ مُنتخب کرناھے۔"
 
 #: bin/modules/gui/window/form.py:253
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:42
 msgid "ID"
-msgstr ""
+msgstr "شناخت"
 
 #: bin/modules/gui/window/form.py:254
 msgid "Creation User"
@@ -364,109 +377,113 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:255
 msgid "Creation Date"
-msgstr ""
+msgstr "تخلیق صارف"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
-msgstr ""
+msgstr "کیطرف سےتازھ ترمیم"
 
 #: bin/modules/gui/window/form.py:257
 msgid "Latest Modification Date"
-msgstr ""
+msgstr "تازھ ترمیم کی تاریخ"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "اندرونی ماڈیول یاجُزکےاعداد و شمارکی شناخت"
 
 #: bin/modules/gui/window/form.py:269
 msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
 msgstr ""
+"ریکارڈمحفوظ نھیں ھُوا،\n"
+"  کیاآپ موجودھ ریکارڈکوصاف کرناچاھتےھیں؟"
 
 #: bin/modules/gui/window/form.py:272
 #: bin/widget/view/form_gtk/one2many_list.py:380
 msgid "Are you sure to remove this record ?"
-msgstr ""
+msgstr "کیاآپکویقین ھے، موجودھ ریکارڈکوخارج کرناھے؟"
 
 #: bin/modules/gui/window/form.py:274
 #: bin/widget/view/form_gtk/one2many_list.py:382
 msgid "Are you sure to remove those records ?"
-msgstr ""
+msgstr "کیاآپکویقین ھے، اُن ریکارڈزکوخارج کرناھے؟"
 
 #: bin/modules/gui/window/form.py:278
 msgid "Resources cleared."
-msgstr ""
+msgstr "وسائل صاف ھوگئے"
 
 #: bin/modules/gui/window/form.py:280
 msgid "Resources successfully removed."
-msgstr ""
+msgstr "وسائل کامیابی سے خارج ھوگئے"
 
 #: bin/modules/gui/window/form.py:314
 msgid "Working now on the duplicated document !"
-msgstr ""
+msgstr "اب دستاویزکی نقل پر کام ھورھاھے"
 
 #: bin/modules/gui/window/form.py:329
 msgid "Document Saved."
-msgstr ""
+msgstr "دستاویزمحفوظ ھوگئ"
 
 #: bin/modules/gui/window/form.py:331 bin/modules/gui/window/form.py:332
 #: bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/form_gtk/parser.py:127 bin/widget/view/list.py:568
 #: bin/widget/view/list.py:569
 msgid "Invalid form, correct red fields !"
-msgstr ""
+msgstr "فارم کی تصدیق نھیں ھوسکتی، لال فیلڈزکوصحیح کریں۔"
 
 #: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/list.py:568
 msgid "Error !"
-msgstr ""
+msgstr "خرابی۔"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "انتباھ۔"
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
 msgstr ""
+"اس ریکارڈمیں ترمیم ھوچکی ھے،\n"
+" کیاآپ اسکومحفوظ کرناچاھتےھیں؟"
 
 #: bin/modules/gui/window/form.py:407
 msgid "You must select one or several records !"
-msgstr ""
+msgstr "آپکولازمی ایک یاایک سےزیادھ ریکارڈزمنتخب کرناھے۔"
 
 #: bin/modules/gui/window/form.py:416
 msgid "Print Screen"
-msgstr ""
+msgstr "پرنٹ اسکرین"
 
 #: bin/modules/gui/window/form.py:436
 msgid "No record selected"
-msgstr ""
+msgstr "ریکارڈمُنتخب نھیں ھے"
 
 #: bin/modules/gui/window/form.py:441
 msgid "New document"
-msgstr ""
+msgstr "نئ دستاویز"
 
 #: bin/modules/gui/window/form.py:443
 msgid "Editing document (id: "
-msgstr ""
+msgstr "دستاویزمیں ترمیم ھورھی ھے، شناخت: "
 
 #: bin/modules/gui/window/form.py:446
 msgid "Record: "
-msgstr ""
+msgstr "ریکارڈ: "
 
 #: bin/modules/gui/window/form.py:447
 msgid " of "
-msgstr ""
+msgstr " کا "
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "The file is empty !"
-msgstr ""
+msgstr "فائل خالی ھے۔"
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "Importation !"
-msgstr ""
+msgstr "درآمد۔"
 
 #: bin/modules/gui/window/win_import.py:56
 msgid "XML-RPC error !"
