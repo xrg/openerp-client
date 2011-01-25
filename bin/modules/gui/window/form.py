@@ -242,7 +242,7 @@ class form(object):
             elif mode == 'tree' and not id:
                 self.sig_reload()
                 self.screen.current_view.set_cursor()
-
+            
     def sig_logs(self, widget=None):
         id = self.id_get()
         if not id:
