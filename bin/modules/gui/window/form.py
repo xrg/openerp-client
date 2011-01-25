@@ -236,9 +236,10 @@ class form(object):
         id = self.screen.id_get()
         if mode<>self.screen.current_view.view_type:
             self.screen.switch_view(mode=mode)
-            if id:
+            if mode == 'tree':
                 self.sig_reload()
                 self.get_resource(get_id=id)
+                self.screen.current_view.set_cursor()
 
     def sig_logs(self, widget=None):
         id = self.id_get()
@@ -361,6 +362,8 @@ class form(object):
             else:
                 return False
         if self.screen.current_view.view_type == 'form':
+            if not self.screen.current_model.id:
+                self.screen.search_filter()
             self.screen.cancel_current()
             self.screen.display()
         else:
