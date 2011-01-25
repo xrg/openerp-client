@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-10-25 18:57+0000\n"
+"PO-Revision-Date: 2011-01-19 13:30+0000\n"
 "Last-Translator: suwidi@dev.web.id <Unknown>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:54+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-20 06:04+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "Language: id\n"
 
 #: bin/plugins/__init__.py:27
@@ -2552,107 +2552,3 @@ msgstr "Rincian"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr "<i>_Rincian</i>"
-
-#~ msgid "Parameters :"
-#~ msgstr "Parameter :"
-
-#~ msgid "Limit :"
-#~ msgstr "Batas :"
-
-#~ msgid "Offset :"
-#~ msgstr "ofset"
-
-#~ msgid "The content of the widget or excpetion if not valid"
-#~ msgstr "Isi dari widget atau exception jika tidak valid"
-
-#~ msgid "This widget is readonly !"
-#~ msgstr "Widget ini redonly"
-
-#~ msgid ""
-#~ "Thank you for the feedback !\n"
-#~ "Your comments have been sent to OpenERP.\n"
-#~ "You should now start by creating a new database or\n"
-#~ "connecting to an existing server through the \"File\" menu."
-#~ msgstr ""
-#~ "Terimakasih atas umpan baliknya\n"
-#~ "Komentarmu telah di kirim ke OpenERP\n"
-#~ "Kamu seharusnya mulai membuat database baru sekarang atau\n"
-#~ "terhubung ke server yang ada melalui menu \"File\""
-
-#~ msgid "gtk-close"
-#~ msgstr "gtk-close"
-
-#~ msgid "specify channels to log"
-#~ msgstr "tentukan saluran untuk log"
-
-#~ msgid "<b>Operation in progress</b>"
-#~ msgstr "<b>proses sedang dijalankan</b>"
-
-#~ msgid "OpenERP Database Installation"
-#~ msgstr "instalasi basis data OpenERP"
-
-#~ msgid ""
-#~ "You can connect to the new database using one of the following account:\n"
-#~ "\n"
-#~ "    Administrator: admin / admin "
-#~ msgstr ""
-#~ "Anda dapat melakukan koneksi dengan database yang baru dengan menggunakan "
-#~ "account berikut:\n"
-#~ "\n"
-#~ "    Administrator: admin / admin "
-
-#~ msgid "<b>Database created successfully!</b>"
-#~ msgstr "<b>Database sukses terbuat!</b>"
-
-#~ msgid "Database creation"
-#~ msgstr "Pembuatan Database"
-
-#~ msgid "Load Demonstration Data:"
-#~ msgstr "Isi Data Demonstrasi"
-
-#~ msgid "Confirm Password:"
-#~ msgstr "Konfirmasi Password:"
-
-#~ msgid "New Database Name:"
-#~ msgstr "Nama Database Baru:"
-
-#~ msgid "OpenERP Server:"
-#~ msgstr "Server OpenERP"
-
-#~ msgid "Administrator Password:"
-#~ msgstr "Password Administrator:"
-
-#~ msgid "Default Language:"
-#~ msgstr "Bahasa Default:"
-
-#~ msgid ""
-#~ "Thank you for testing OpenERP !\n"
-#~ "You should now start by creating a new database or\n"
-#~ "connecting to an existing server through the \"File\" menu."
-#~ msgstr ""
-#~ "Terimakasih telah mencoba OpenERP!\n"
-#~ "Anda dapat memulai dengan membuat database baru sekarang atau\n"
-#~ "menggunakan server yang ada melalui menu \"File\""
-
-#~ msgid "Error no report"
-#~ msgstr "Kesalahan tanpa laporan"
-
-#~ msgid "gtk-ok"
-#~ msgstr "gtk-oke"
-
-#~ msgid "Your Name:"
-#~ msgstr "Nama Anda:"
-
-#~ msgid ""
-#~ "Function only available for MS Office !\n"
-#~ "Sorry, OOo users :("
-#~ msgstr "Fungsi hanya tersedia didalam aplikasi MS Excel !"
-
-#~ msgid "Preference"
-#~ msgstr "Tampilan"
-
-#~ msgid "The following users have been installed on your database:"
-#~ msgstr "Pengguna ini sudah ada dalam database:"
-
-#~ msgid "You can now connect to the database as an administrator."
-#~ msgstr "Silakan mencoba database sebagai administrator."
