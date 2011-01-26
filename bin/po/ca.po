@@ -8,14 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
-"<jesteve@zikzakmedia.com>\n"
+"PO-Revision-Date: 2011-01-25 20:07+0000\n"
+"Last-Translator: Esther Xaus (Zikzakmedia) <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:03+0000\n"
+"X-Launchpad-Export-Date: 2011-01-26 05:49+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "Language: ca\n"
 
@@ -132,7 +131,7 @@ msgstr "Contrasenya del super-administrador:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "Contrasenya del super administrador errònia"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -164,7 +163,7 @@ msgstr "Migra base de dades"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Base de dades"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -176,7 +175,7 @@ msgstr "Les vostres bases de dades han estat actualitzades."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "No heu seleccionat una base de dades"
 
 #
 # File: bin/modules/gui/main.py, line: 152
@@ -288,11 +287,11 @@ msgstr "Edita"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Sense companyia"
 
 #: bin/modules/gui/main.py:995
 #, python-format
@@ -306,17 +305,19 @@ msgstr "No hi ha sol·licituds"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s sol·licitud(s) enviat(s)"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"Comproveu el nom de la base de dades o poseu-vos en contacte amb el vostre "
+"administrador per comprovar l'estat de la base de dades."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "La base de datos no puede ser accedida o no existe"
 
 #
 # File: bin/modules/gui/main.py, line: 734
@@ -340,7 +341,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #
 # File: bin/modules/gui/main.py, line: 761
@@ -563,7 +564,7 @@ msgstr "Data de l'última modificació"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "ID de dades del mòdul intern"
 
 #
 # File: bin/modules/gui/window/form.py, line: 230
@@ -737,6 +738,12 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Error al importar aquest registre:\n"
+"%s\n"
+"Missatge d'error:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -754,11 +761,11 @@ msgstr "Nom del camp"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "Error obrint fitxer .CSV"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "Error d'entrada."
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -772,10 +779,12 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"Error al processar la primera línia del fitxer.\n"
+"Camp %s desconegut!"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "Error d'importació."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -783,15 +792,15 @@ msgstr "No heu seleccionat cap camp per importar"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "Extensió"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "Aplicació"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "Procesador de impresión"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
@@ -834,7 +843,7 @@ msgstr "Finestra desconeguda"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "Preferències"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -918,7 +927,7 @@ msgstr "Error a l'obrir el fitxer Excel!"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "Quin és el nom d'aquesta exportació?"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
@@ -1023,7 +1032,7 @@ msgstr ""
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "Pistes"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
@@ -1153,7 +1162,7 @@ msgstr "Obre amb..."
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "No es pot establir la configuració regional %s: %s"
 
 #: bin/printer/printer.py:184
 #, python-format
@@ -1174,6 +1183,8 @@ msgstr ""
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
+"Error! No s'han trobat dades. Assegureu-vos de tenir suficients dades per "
+"imprimir!"
 
 #
 # File: bin/printer/printer.py, line: 215
@@ -1294,15 +1305,15 @@ msgstr "OpenERP - Selecció de data"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "conté"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "no conté"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "és igual a"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
@@ -1310,7 +1321,7 @@ msgstr ""
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "més gran que"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
@@ -1356,7 +1367,7 @@ msgstr "Heu de desar el registre per utilitzar aquest botó!"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "Acció no definida!"
 
 #
 # File: bin/widget/view/form.py, line: 165
@@ -1427,19 +1438,19 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--Accions--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "Desa com accés directe"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Desa com filtre"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Gestiona filtres"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1447,6 +1458,9 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"Teniu registre(s) sense desar!  \n"
+"\n"
+"Deseu-los abans de l'ordenació!"
 
 #
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 125
@@ -1496,7 +1510,7 @@ msgstr "No s'ha pogut generar un gràfic!"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1422
 msgid "Dot Viewer"
-msgstr ""
+msgstr "Visor de punto"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
