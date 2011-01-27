@@ -631,9 +631,11 @@ class db_create(object):
 
         if res == gtk.RESPONSE_OK:
             try:
-                id = rpc.session.db_exec(url, 'list')
-                if db_name in id:
-                    raise Exception('DbExist')
+                if rpc.session.db_exec(url, 'db_exist', db_name):
+                    common.warning(_("Could not create database."),
+                                    _('Database already exists !'), parent=parent)
+                    return
+                
                 id = rpc.session.db_exec(url, 'create', passwd, db_name, demo_data, langreal, user_pass)
                 win, pb = common.OpenERP_Progressbar(parent, title='OpenERP Database Installation')
                 self.timer = gobject.timeout_add(1000, self.progress_timeout, pb, url, passwd, id, win, db_name, parent)
