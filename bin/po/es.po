@@ -8,14 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-18 00:31+0000\n"
-"Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
-"<jesteve@zikzakmedia.com>\n"
+"PO-Revision-Date: 2011-01-24 10:22+0000\n"
+"Last-Translator: Alberto Luengo Cabanillas (Pexego) <alberto@pexego.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-18 04:36+0000\n"
+"X-Launchpad-Export-Date: 2011-01-25 04:53+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "Language: es\n"
 
@@ -43,13 +42,9 @@ msgstr "Imprimir Flujo de Trabajo (Completo)"
 msgid "No available plugin for this resource !"
 msgstr "¡No hay conectores disponibles para este recurso!"
 
-#
-# File: bin/plugins/__init__.py, line: 43
-# File: bin/plugins/__init__.py, line: 43
-# File: bin/plugins/__init__.py, line: 43
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr "Escoge un Conector"
+msgstr "Seleccione un Conector"
 
 #
 # File: bin/modules/action/wizard.py, line: 171
@@ -2635,13 +2630,9 @@ msgstr "Expor_tar datos..."
 msgid "I_mport data..."
 msgstr "I_mportar datos..."
 
-#
-# File: bin/openerp.glade, line: 846
-# File: bin/openerp.glade, line: 846
-# File: bin/openerp.glade, line: 846
 #: bin/openerp.glade:889
 msgid "_Options"
-msgstr "Opciones"
+msgstr "_Opciones"
 
 #
 # File: bin/openerp.glade, line: 853

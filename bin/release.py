@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution   
 #    Copyright (C) 2004-TODAY Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    Copyright (C) 2004-TODAY OpenERP S.A. (<http://www.openerp.com>). All Rights Reserved
 #    $Id$
@@ -21,7 +21,7 @@
 #
 
 name = 'openerp-client'
-version = '6.0.0-rc2'
+version = '6.0.1'
 major_version = '6.0'
 description = 'OpenERP Client'
 long_desc = '''OpenERP is a complete ERP and CRM. The main features are accounting (analytic

@@ -1,6 +1,8 @@
 include MANIFEST.in
 include setup.cfg
-include Makefile
+include Makefile.translation
+include configure
+include configure.makefile
 include rpminstall_sh.txt
 include mydistutils.py
 include msgfmt.py
