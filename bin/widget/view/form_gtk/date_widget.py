@@ -100,10 +100,14 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         self.stop_emission('insert-text')
         if self.mode_cmd:
             if self.callback: self.callback(value)
-            return
-
-        text = self.get_text()
+            return 
+        
+        text = self.get_text()  
         current_pos = self.get_position()
+        
+        if(length + current_pos > len(text)):
+            return
+        
         pos = (current_pos < 10  or text != self.initial_value) and current_pos or 0
 
         if length != 1:
@@ -144,7 +148,9 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         date = self.isvalid_date(self.small_text)
         if(date):
             self.valid = True;
-            self.set_text(date.strftime(self.format))
+            large_text = date.strftime(self.format)
+            self.set_max_length(len(large_text))
+            self.set_text(large_text)
         else:
             self.set_text(self.small_text)
         if self.mode_cmd:
@@ -153,6 +159,7 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             
     def _focus_in(self, args, args2):
         self.valid = True
+        self.set_max_length(len(self.initial_value))
         self.set_text(self.small_text)
         if self.mode_cmd:
             self.mode_cmd = False
@@ -165,6 +172,7 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             date = self.isvalid_date(text);
             if(date):
                 self.small_text = date.strftime(self.small_format)
+            
         finally:
             self._interactive_input = True
             
