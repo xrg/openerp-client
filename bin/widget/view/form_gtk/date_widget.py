@@ -35,7 +35,7 @@ class DateEntry(gtk.Entry):
     def __init__(self, format, callback=None, callback_process=None):
         super(DateEntry, self).__init__()
         self.modify_font(pango.FontDescription("monospace"))
-
+        self.valid = True
         self.format = format
         self.small_format = self.regex = self.initial_value = self.convert_fmt(format)
         for key,val in tools.datetime_util.date_mapping.items():
@@ -140,8 +140,10 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         return
 
     def _focus_out(self, args, args2):
+        self.valid = False;
         date = self.isvalid_date(self.small_text)
         if(date):
+            self.valid = True;
             self.set_text(date.strftime(self.format))
         else:
             self.set_text(self.small_text)
@@ -150,6 +152,7 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             if self.callback_process: self.callback_process(False, self, False)
             
     def _focus_in(self, args, args2):
+        self.valid = True
         self.set_text(self.small_text)
         if self.mode_cmd:
             self.mode_cmd = False
@@ -202,7 +205,8 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             self._interactive_input = True
 
     def clear(self):
-        self.set_text(self.initial_value)
+        if(self.valid):
+            self.set_text(self.initial_value)
 
     def _on_key_press(self, editable, event):
         if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return, gtk.keysyms.KP_Enter):
