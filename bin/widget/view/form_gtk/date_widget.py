@@ -37,11 +37,12 @@ class DateEntry(gtk.Entry):
         self.modify_font(pango.FontDescription("monospace"))
 
         self.format = format
-        self.regex = self.initial_value = self.convert_fmt(format)
+        self.small_format = self.regex = self.initial_value = self.convert_fmt(format)
         for key,val in tools.datetime_util.date_mapping.items():
             self.regex = self.regex.replace(key, val[1])
             self.initial_value = self.initial_value.replace(key, val[0])
-
+            
+        self.small_text = self.initial_value 
         self.set_text(self.initial_value)
         self.regex = re.compile(self.regex)
 
@@ -54,6 +55,7 @@ class DateEntry(gtk.Entry):
         self.connect('delete-text', self._on_delete_text)
 
         self.connect('focus-out-event', self._focus_out)
+        self.connect('focus-in-event', self._focus_in)
         self.callback = callback
         self.callback_process = callback_process
 
@@ -70,7 +72,8 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         """If format string doesn't contain
         any of the `%Y, %m or %d` then returns default datetime format `%Y/%m/%d`
         """
-        for x,y in [('%y','%Y'),('%B',''),('%A','')]:
+        for x,y in [('%y','%Y'),('%B',''),('%A',''), ('%I',''), ('%p',''), ('%j',''), ('%a',''), ('%b',''),
+                    ('%U',''), ('%W','')]:
             fmt = fmt.replace(x, y)
 
         if not (fmt.count('%Y') == 1 and fmt.count('%m') == 1 and fmt.count('%d') == 1):
@@ -78,13 +81,25 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
 
         return fmt
 
+    def isvalid_date(self, text):
+        try:
+            return datetime.strptime(text, self.format)
+        except:
+            pass
+            
+        try:
+            return datetime.strptime(text, self.small_format)
+        except:
+            return False
+        
+        
     def _on_insert_text(self, editable, value, length, position):
         if not self._interactive_input:
             return
 
+        self.stop_emission('insert-text')
         if self.mode_cmd:
             if self.callback: self.callback(value)
-            self.stop_emission('insert-text')
             return
 
         text = self.get_text()
@@ -92,8 +107,6 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         pos = (current_pos < 10  or text != self.initial_value) and current_pos or 0
 
         if length != 1:
-            # TODO: Implement paste
-            self.stop_emission('insert-text')
             return
 
         text = text[:pos] + value + text[pos + 1:]
@@ -102,8 +115,8 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             while (pos<len(self.initial_value)) and (self.initial_value[pos] not in ['_','0','X']):
                 pos += 1
             self.set_text(text)
+            self.small_text = text
             gobject.idle_add(self.set_position, pos)
-        self.stop_emission('insert-text')
         self.show()
         return
 
@@ -121,12 +134,23 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         text = self.get_text()
         text = text[:start] + self.initial_value[start:end] + text[end:]
         self.set_text(text)
+        self.small_text = text
         gobject.idle_add(self.set_position, start)
         self.stop_emission('delete-text')
         return
 
     def _focus_out(self, args, args2):
-        self.date_get()
+        date = self.isvalid_date(self.small_text)
+        if(date):
+            self.set_text(date.strftime(self.format))
+        else:
+            self.set_text(self.small_text)
+        if self.mode_cmd:
+            self.mode_cmd = False
+            if self.callback_process: self.callback_process(False, self, False)
+            
+    def _focus_in(self, args, args2):
+        self.set_text(self.small_text)
         if self.mode_cmd:
             self.mode_cmd = False
             if self.callback_process: self.callback_process(False, self, False)
@@ -135,9 +159,12 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         self._interactive_input = False
         try:
             gtk.Entry.set_text(self, text)
+            date = self.isvalid_date(text);
+            if(date):
+                self.small_text = date.strftime(self.small_format)
         finally:
             self._interactive_input = True
-
+            
     def date_set(self, dt):
         if dt:
             self.set_text( dt.strftime(self.format) )
