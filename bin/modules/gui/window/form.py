@@ -239,10 +239,7 @@ class form(object):
             if id:
                 self.sig_reload()
                 self.get_resource(get_id=id)
-            elif mode == 'tree' and not id:
-                self.sig_reload()
-                self.screen.current_view.set_cursor()
-            
+
     def sig_logs(self, widget=None):
         id = self.id_get()
         if not id:
@@ -304,7 +301,6 @@ class form(object):
                 return
         if self.screen.current_view.view_type in ['calendar','graph']:
             return
-        self.screen.create_new = True
         self.screen.new()
         self.message_state('')
 
@@ -366,8 +362,6 @@ class form(object):
             else:
                 return False
         if self.screen.current_view.view_type == 'form':
-            if not self.screen.current_model.id:
-                self.screen.search_filter()
             self.screen.cancel_current()
             self.screen.display()
         else:
