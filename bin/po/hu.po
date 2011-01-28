@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Tiny ERP V2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: NOVOTRADE SYSTEMHOUSE <openerp@novotrade.hu>\n"
+"PO-Revision-Date: 2011-01-27 10:19+0000\n"
+"Last-Translator: Attila Tatár <Unknown>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:04+0000\n"
+"X-Launchpad-Export-Date: 2011-01-28 05:36+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "Language: hu\n"
 
@@ -63,7 +63,7 @@ msgstr "Válasszon műveletet"
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr "Nem lehet csatlakozni a szerverhez !"
+msgstr "Nem sikerült csatlakozni a szerverhez !"
 
 #
 # File: bin/openerp.glade, line: 74
@@ -165,7 +165,7 @@ msgid ""
 msgstr ""
 "Az adatbázis neve csak a normál karaktereket vagy az \"_\" karaktert "
 "tartalmazhatja.\n"
-"Kelülje az ékezeteket, a space-t vagy a speciális karakterek használatát."
+"Kerülje az ékezeteket, a space-t vagy a speciális karakterek használatát."
 
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
@@ -208,7 +208,7 @@ msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Nincs vállalat"
 
 #: bin/modules/gui/main.py:995
 #, python-format
@@ -229,6 +229,8 @@ msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"Kérjük ellenőrizze még egyszer az adatbázis nevét vagy forduljon a "
+"rendszergazdához, hogy ellenőrizze az adatbázis állapotát."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
@@ -248,7 +250,7 @@ msgid ""
 "Bad Username or Password !"
 msgstr ""
 "Autentikáció hiba !\n"
-"Hibás Felhasználónév vagy Jelszó !"
+"Hibás felhasználónév vagy jelszó !"
 
 #: bin/modules/gui/main.py:1056
 #, python-format
@@ -293,15 +295,15 @@ msgstr "Adatbázis törlése"
 
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr "Adatbázis sikeresen elvetve!"
+msgstr "Adatbázis sikeresen törölve!"
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr "Nem lehet elvetni az adatbázist."
+msgstr "Nem lehetett az adatbázist törölni."
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr "Nem tudtam elvetni az adatbázist"
+msgstr "Nem lehetett az adatbázist törölni."
 
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
@@ -310,7 +312,7 @@ msgstr "Megnyitás..."
 
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
-msgstr "Adatbázis sikeresen helyreállítva !"
+msgstr "Adatbázis sikeresen visszaállítva !"
 
 #: bin/modules/gui/main.py:1403
 msgid "Could not restore database."
@@ -344,7 +346,7 @@ msgstr "Hiba, a jelszó nem változott."
 
 #: bin/modules/gui/main.py:1463 bin/modules/gui/main.py:1486
 msgid "Backup a database"
-msgstr "Adatbázis visszaállítása"
+msgstr "Adatbázis mentése"
 
 #: bin/modules/gui/main.py:1466 bin/modules/gui/window/win_export.py:328
 #: bin/printer/printer.py:216 bin/widget/view/form_gtk/image.py:129
@@ -354,15 +356,15 @@ msgstr "Mentés másként..."
 
 #: bin/modules/gui/main.py:1479
 msgid "Database backed up successfully !"
-msgstr "Az adatbázis visszaállítása sikerült!"
+msgstr "Az adatbázis mentése sikerült!"
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
-msgstr "Az adatbázis visszaállítása nem lehetséges."
+msgstr "Nem sikerült az adatbázist menteni."
 
 #: bin/modules/gui/main.py:1484
 msgid "Couldn't backup database."
-msgstr "Az adatbázist nem lehetett visszaállítani."
+msgstr "Nem sikerült az adatbázist menteni."
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
@@ -384,7 +386,7 @@ msgstr "ID"
 
 #: bin/modules/gui/window/form.py:254
 msgid "Creation User"
-msgstr "Létrehozta"
+msgstr "Felhasználó létrehozása"
 
 #: bin/modules/gui/window/form.py:255
 msgid "Creation Date"
@@ -400,7 +402,7 @@ msgstr "Utolsó módosítás dátuma"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "Belső modul adat ID"
 
 #: bin/modules/gui/window/form.py:269
 msgid ""
@@ -519,10 +521,16 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Hiba, próbálja importálni ezt a rekordot:\n"
+"%s\n"
+"Hibaüzenet:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
-msgstr "Importálási Hiba !"
+msgstr "Importálási hiba !"
 
 #: bin/modules/gui/window/win_import.py:100
 #: bin/modules/gui/window/win_import.py:104
@@ -531,11 +539,11 @@ msgstr "Mezőnév"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "Nem sikerült megnyitni a .CSV fájlt"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "Bemeneti hiba."
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -551,7 +559,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr "Import Hiba."
+msgstr "Import hiba."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -559,11 +567,11 @@ msgstr "Nem választotta ki az importálandó mezőket"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "Kiterjesztés"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "Alkalmazás"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
@@ -595,7 +603,7 @@ msgstr "Ismeretlen Ablak"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "Beállítások"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -656,7 +664,7 @@ msgstr "Hiba az Excel megnyitása közben !"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "Mi a neve ennek az exportálásnak ?"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
@@ -709,7 +717,7 @@ msgstr "adja meg a szerver IP címét/nevét"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "Jelenlegi tipp bezárása"
 
 #: bin/common/common.py:90
 msgid ""
@@ -718,10 +726,14 @@ msgid ""
 "open this menu item, unless you disable all tips using the <b>'Menu "
 "Tips'</b> option in the user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Jelenlegi tipp bezárása:</b></span>\n"
+"Ez elrejti a jelenlegi tippet. Ha legközelebb megnyitja ezt a menüt, akkor "
+"megjelenik újra, ha az összes tippet le szeretné tiltani, ezt a felhasználó "
+"beállításoknál a <b>'Menü tippek'</b> opciónál tudja megtenni"
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "Minden tipp tiltása"
 
 #: bin/common/common.py:101
 msgid ""
@@ -758,7 +770,7 @@ msgstr ""
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " jelentette a következő hibát:\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
@@ -1107,23 +1119,23 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "Diagram nagyítása"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "Diagram kicsinyítése"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "Diagram ablakhoz igazítása"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "Diagram normál méretben"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "Diagram nyomtatás"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
@@ -1219,22 +1231,22 @@ msgstr "Bejegyzés törlése"
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "Előző oldal"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr ""
+msgstr "Előző rekord"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "Következő rekord"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "Következő oldal"
 
 #: bin/widget/view/form_gtk/one2many_list.py:245
 msgid "Switch"
@@ -1431,11 +1443,11 @@ msgstr "_Fájl"
 
 #: bin/openerp.glade:272
 msgid "_Connect..."
-msgstr "_Csatlakozás…"
+msgstr "_Kapcsolódás…"
 
 #: bin/openerp.glade:288
 msgid "_Disconnect"
-msgstr "_Megszakítás"
+msgstr "Kapcsolat _bontása"
 
 #: bin/openerp.glade:308
 msgid "Databases"
@@ -1447,15 +1459,15 @@ msgstr "_Új adatbázis"
 
 #: bin/openerp.glade:330
 msgid "_Restore database"
-msgstr "Adatbázis _helyreállítás"
+msgstr "Adatbázis _visszaállítás"
 
 #: bin/openerp.glade:345
 msgid "_Backup database"
-msgstr "Adatbázis _visszaállítás"
+msgstr "Adatbázis _mentés"
 
 #: bin/openerp.glade:360
 msgid "Dro_p database"
-msgstr "Adatbázis _elvetése"
+msgstr "Adatbázis _törlése"
 
 #: bin/openerp.glade:380
 msgid "_Download Migrations Code"
@@ -1479,15 +1491,15 @@ msgstr "_Testreszabás"
 
 #: bin/openerp.glade:488
 msgid "_Send a request"
-msgstr "Kérés _küldése"
+msgstr "Üzenet _küldése"
 
 #: bin/openerp.glade:503
 msgid "_Read my requests"
-msgstr "Kéréseim _olvasása"
+msgstr "Üzenetek _olvasása"
 
 #: bin/openerp.glade:523
 msgid "_Waiting Requests"
-msgstr "_Várakozó kéréseim"
+msgstr "_Várakozó üzenetek"
 
 #: bin/openerp.glade:536
 msgid "For_m"
@@ -1519,11 +1531,11 @@ msgstr "Keresés"
 
 #: bin/openerp.glade:630
 msgid "Ne_xt"
-msgstr "Tová_bb"
+msgstr "Kö_vetkező"
 
 #: bin/openerp.glade:646
 msgid "Pre_vious"
-msgstr "_Vissza"
+msgstr "_Előző"
 
 #: bin/openerp.glade:662
 msgid "Switch to list/form"
@@ -1691,7 +1703,7 @@ msgstr "_Felhasználói kézikönyv"
 
 #: bin/openerp.glade:1175
 msgid "_Contextual Help"
-msgstr "_Kontextuális Segítség"
+msgstr "_Helyzetérzékeny Segítség"
 
 #: bin/openerp.glade:1191
 msgid "Keyboard Shortcuts"
@@ -1717,17 +1729,21 @@ msgstr "Rekord törlése"
 msgid "Go to previous matched search"
 msgstr "Előző találathoz lép"
 
+#
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 194
 #: bin/openerp.glade:1291
 msgid "Previous"
-msgstr "Vissza"
+msgstr "Előző"
 
 #: bin/openerp.glade:1302
 msgid "Go to next matched resource"
 msgstr "Következő találathoz lép"
 
+#
+# File: bin/widget/view/form_gtk/one2many_list.py, line: 207
 #: bin/openerp.glade:1303
 msgid "Next"
-msgstr "Tovább"
+msgstr "Következő"
 
 #: bin/openerp.glade:1316
 msgid "List"
@@ -1747,11 +1763,11 @@ msgstr ""
 
 #: bin/openerp.glade:1361
 msgid "Graph"
-msgstr "Diagram"
+msgstr "Grafikon"
 
 #: bin/openerp.glade:1374
 msgid "Gantt"
-msgstr "Gantt diagramm"
+msgstr "Gantt"
 
 #: bin/openerp.glade:1392
 msgid "Print documents"
@@ -1787,21 +1803,19 @@ msgstr "Ablak bezárása"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
-msgstr ""
+msgstr "Vállalat:"
 
 #: bin/openerp.glade:1535
 msgid "Requests:"
-msgstr "Kérések:"
+msgstr "Üzenetek:"
 
 #: bin/openerp.glade:1558
 msgid "Read my Requests"
-msgstr "Kéréseim olvasása"
+msgstr "Üzenetek olvasása"
 
-#
-# File: bin/openerp.glade, line: 1508
 #: bin/openerp.glade:1579
 msgid "Send a new request"
-msgstr "Új kérés küldése"
+msgstr "Üzenet küldés"
 
 #: bin/openerp.glade:1619
 msgid "OpenERP - Tree Resources"
@@ -2236,7 +2250,7 @@ msgstr "<Ctrl> + F"
 
 #: bin/openerp.glade:5220
 msgid "Connect"
-msgstr "Csatlakozás"
+msgstr "Kapcsolódás"
 
 #: bin/openerp.glade:5235
 msgid "<Ctrl> + O"
@@ -2376,7 +2390,7 @@ msgstr "Szerver"
 
 #: bin/openerp.glade:6232
 msgid "<b>Connect to a OpenERP server</b>"
-msgstr "<b>Csatlakozás OpenERP szerverhez</b>"
+msgstr "<b>Kapcsolódás OpenERP szerverhez</b>"
 
 #: bin/openerp.glade:6291
 msgid "Protocol connection:"
@@ -2392,15 +2406,15 @@ msgstr "Válasszon adatbázist..."
 
 #: bin/openerp.glade:6404
 msgid "<b>Backup a database</b>"
-msgstr "<b>Adatbázis visszaállítása</b>"
+msgstr "<b>Adatbázis mentés</b>"
 
 #: bin/openerp.glade:6645
 msgid "Restore a database"
-msgstr "Adatbázis helyreállítása"
+msgstr "Adatbázis visszaállítás"
 
 #: bin/openerp.glade:6658
 msgid "<b>Restore a database</b>"
-msgstr "<b>Adatbázis helyreállítása</b>"
+msgstr "<b>Adatbázis visszaállítás</b>"
 
 #: bin/openerp.glade:6702
 msgid "(must not contain any special char)"
