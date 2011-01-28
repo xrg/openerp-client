@@ -82,6 +82,7 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         return fmt
 
     def isvalid_date(self, text):
+        self.valid = True
         try:
             return datetime.strptime(text, self.format)
         except:
@@ -90,6 +91,7 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         try:
             return datetime.strptime(text, self.small_format)
         except:
+            self.valid = False
             return False
         
         
@@ -132,7 +134,6 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         #    #TODO: cut/delete several
         #    self.stop_emission('delete-text')
         #    return
-
         while (start>0) and (self.initial_value[start] not in ['_','0','X']):
             start -= 1
         text = self.get_text()
@@ -144,10 +145,8 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         return
 
     def _focus_out(self, args, args2):
-        self.valid = False;
         date = self.isvalid_date(self.small_text)
         if(date):
-            self.valid = True;
             large_text = date.strftime(self.format)
             self.set_max_length(len(large_text))
             self.set_text(large_text)
@@ -158,7 +157,6 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             if self.callback_process: self.callback_process(False, self, False)
             
     def _focus_in(self, args, args2):
-        self.valid = True
         self.set_max_length(len(self.initial_value))
         self.set_text(self.small_text)
         if self.mode_cmd:
