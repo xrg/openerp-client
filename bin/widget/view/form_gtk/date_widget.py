@@ -72,12 +72,17 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         """If format string doesn't contain
         any of the `%Y, %m or %d` then returns default datetime format `%Y/%m/%d`
         """
-        for x,y in [('%y','%Y'),('%B',''),('%A',''), ('%I',''), ('%p',''), ('%j',''), ('%a',''), ('%b',''),
+        for x,y in [('%y','%Y'),('%B','%m'),('%A',''), ('%I','%H'), ('%p',''), ('%j',''), ('%a',''), ('%b',''),
                     ('%U',''), ('%W','')]:
             fmt = fmt.replace(x, y)
 
-        if not (fmt.count('%Y') == 1 and fmt.count('%m') == 1 and fmt.count('%d') == 1):
+        if (not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) or fmt.count('%x') >= 1) and (fmt.count('%H') == 0 and fmt.count('%M') == 0 and fmt.count('%S') == 0 and fmt.count('%X') == 0): 
+                
             return '%Y/%m/%d'
+        elif not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) \
+                or (fmt.count('%x') >=1 or fmt.count('%c') >= 1):
+            return '%Y/%m/%d %H:%M:%S'
+            
 
         return fmt
 
@@ -148,7 +153,6 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         date = self.isvalid_date(self.small_text)
         if(date):
             large_text = date.strftime(self.format)
-            self.set_max_length(len(large_text))
             self.set_text(large_text)
         else:
             self.set_text(self.small_text)
@@ -157,7 +161,6 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             if self.callback_process: self.callback_process(False, self, False)
             
     def _focus_in(self, args, args2):
-        self.set_max_length(len(self.initial_value))
         self.set_text(self.small_text)
         if self.mode_cmd:
             self.mode_cmd = False
