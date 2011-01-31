@@ -35,7 +35,7 @@ def export_csv(fname, fields, result, write_title=False):
     import csv
     try:
         fp = file(fname, 'wb+')
-        writer = csv.writer(fp)
+        writer = csv.writer(fp, quoting=csv.QUOTE_ALL)
         if write_title:
             writer.writerow(fields)
         for data in result:

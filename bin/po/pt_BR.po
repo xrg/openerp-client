@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2010-12-23 08:30+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2011-01-24 22:48+0000\n"
+"Last-Translator: Adriano Prado <adrianojprado@hotmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-25 04:50+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-25 04:53+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "Language: pt_BR\n"
 
 #: bin/plugins/__init__.py:27
@@ -141,7 +141,7 @@ msgstr "Migrar base de dados"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Banco de Dados"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -153,7 +153,7 @@ msgstr "suas bases de dados já foram atualizadas."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Você não selecionou um Banco de Dados"
 
 #
 # File: bin/modules/gui/main.py, line: 165
@@ -260,11 +260,11 @@ msgstr "Editar"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Sem Empresa"
 
 #: bin/modules/gui/main.py:995
 #, python-format
@@ -278,17 +278,19 @@ msgstr "Não há mensagens"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - solicitação %s enviada"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"Por favor, verifique o nome do banco ou entre em contato com o administrador "
+"para verificar o status de banco de dados."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "Banco de dados não pode ser acessado ou não existe"
 
 #
 # File: bin/modules/gui/main.py, line: 746
@@ -311,7 +313,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #
 # File: bin/modules/gui/main.py, line: 773
@@ -579,7 +581,7 @@ msgstr "Erro!"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "Aviso !"
 
 #
 # File: bin/modules/gui/window/form.py, line: 302
@@ -681,11 +683,11 @@ msgstr "Nome do campo"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "Erro abrindo arquivos .CSV"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "Erro de Entrada."
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -702,7 +704,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "Erro de Importação."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -714,7 +716,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "Aplicação"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
@@ -758,7 +760,7 @@ msgstr "Janela Desconhecida"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "Preferências"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""

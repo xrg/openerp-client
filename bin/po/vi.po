@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:28+0000\n"
-"Last-Translator: Phong Nguyen <Unknown>\n"
+"PO-Revision-Date: 2011-01-27 09:59+0000\n"
+"Last-Translator: Nguyen Anh TUAN <tuan@esc.vn>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 04:50+0000\n"
+"X-Launchpad-Export-Date: 2011-01-28 04:45+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "Language: vi\n"
 
@@ -96,7 +96,7 @@ msgstr "Mật khẩu Hợp đồng:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Bạn đang sử dụng phiên bản mới nhất"
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
@@ -215,6 +215,8 @@ msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"Hãy kiểm tra lại tên cơ sở dữ liệu hoặc liên hệ với quản trị viên của bạn để "
+"xác minh tình trạng cơ sở dữ liệu."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
@@ -728,7 +730,7 @@ msgstr ""
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "Hãy đảm bảo rằng tập tin %s là chính xác"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
@@ -840,7 +842,7 @@ msgstr ""
 
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
-msgstr ""
+msgstr "Lỗi! không tìm thấy dữ liệu. Hãy cập nhật đủ dữ liệu để in!"
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
@@ -920,7 +922,7 @@ msgstr ""
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "không bằng"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
@@ -932,7 +934,7 @@ msgstr "nhỏ hơn"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "trong"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
@@ -1003,11 +1005,11 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Lưu thành Bộ lọc"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Quản lý các bộ lọc"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1078,7 +1080,7 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "In sơ đồ"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
@@ -1141,7 +1143,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "Lưu & Tạo mới"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
