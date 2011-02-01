@@ -280,10 +280,11 @@ class ViewCalendar(object):
 
         for model in models:
             name = value = key = model.value[color_field]
+
             if isinstance(key, (tuple, list)):
                 value, name = key
                 key = tuple(key)
-                
+
             if key in colors:
                 # already present skip
                 continue
@@ -292,7 +293,7 @@ class ViewCalendar(object):
             # 'color' field
             field_color = None
             field_widget = model.mgroup.mfields.get(color_field, False)
-            if value and field_widget and field_widget.attrs['type'] == 'many2one':
+            if field_widget and field_widget.attrs['type'] == 'many2one':
                 fproxy = RPCProxy(field_widget.attrs['relation'])
                 try:
                     fdata = fproxy.read(value, [color_field_custom])

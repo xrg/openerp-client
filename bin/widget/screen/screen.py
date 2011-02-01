@@ -738,9 +738,7 @@ class Screen(signal_event.signal_event):
         id = False
         if self.current_view.view_type == 'form' and self.current_model:
             id = self.current_model.id
-            if not id and unlink:
-                self.new()
-                return False
+
             idx = self.models.models.index(self.current_model)
             if not id:
                 self.models.models.remove(self.models.models[idx])
