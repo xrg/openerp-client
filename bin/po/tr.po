@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: Arif Aydogmus <arifaydogmus@gmail.com>\n"
+"PO-Revision-Date: 2011-01-22 15:31+0000\n"
+"Last-Translator: Ahmet Altınışık <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:05+0000\n"
+"X-Launchpad-Export-Date: 2011-01-23 04:56+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "Language: tr\n"
 
@@ -718,10 +718,14 @@ msgid ""
 "open this menu item, unless you disable all tips using the <b>'Menu "
 "Tips'</b> option in the user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>İpucunu kapat::</b></span>\n"
+"Bu ipucunu kapatacaktır. Bu menüyü tekrar açtığınızda ipucu yine "
+"gösterilecek.  Bütün ipuçlarını sürekli olarak kapatmak için kullanıcı "
+"seçeneklerinden <b>'Menu İpucları'</b> seçeneğini kullanın."
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "Tüm İpuçlarını Kapat"
 
 #: bin/common/common.py:101
 msgid ""
@@ -730,10 +734,14 @@ msgid ""
 "To re-enable tips you need to check the <b>'Menu Tips'</b> option in the "
 "user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Tüm İpuçlarını kapat:</b></span>\n"
+"Bu seçenek menülerdeki tüm ipuçlarını kapatır.\n"
+"tekrar açmak için kullanıcı seçeneklerinden <b>'Menu İpuçları'</b> "
+"opsiyonunun kullanın."
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "İpuçları"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
@@ -754,15 +762,15 @@ msgstr ""
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "%s Dosyasının doğru olduğundan emin olun"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " ın rapor ettiği hata:\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
-msgstr ""
+msgstr "düşünceler"
 
 #: bin/common/common.py:367
 msgid "Support request sent !"
@@ -852,7 +860,7 @@ msgstr "Birlikte aç..."
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "Yerel %s ayarı yapılamadı: %s"
 
 #: bin/printer/printer.py:184
 #, python-format
@@ -870,6 +878,7 @@ msgstr ""
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
+"Hata ! Veri bulunamadı. Yazmaya yetecek kadar veri olduğundan emin olun !"
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
@@ -919,7 +928,7 @@ msgstr "(Bu ifadenin İngilizce aslı bozuk olduğundan çevrilememiştir)"
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "Hata: "
 
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
@@ -944,35 +953,35 @@ msgstr "OpenERP - Tarih seçimi"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "şunu içeriyor"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "içermiyor"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "eşittir"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "eşit değildir"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "'den daha büyük"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "'den daja küçük"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "->"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "içinde değil"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -980,6 +989,10 @@ msgid ""
 "For Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d "
 "%H:%M:%S' formats respectively."
 msgstr ""
+"Eğer operatör olarak 'içinde' yada 'içinde geçmeyen' seçilmişse değerleri "
+"',' kullanarak ayırın.\n"
+"Tarih ve TarihSaat biçimleri için girdileri '%Y-%m-%d' ve '%Y-%m-%d "
+"%H:%M:%S'  biçiminde girin."
 
 #: bin/widget_search/checkbox.py:35 bin/widget_search/checkbox.py:54
 msgid "Yes"
@@ -996,7 +1009,7 @@ msgstr ""
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "Eylem tanımlanamış !"
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
@@ -1034,19 +1047,19 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--Eylemler--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "Kısayol olarak kaydet"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Filtre olarak kaydet"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Filtreleri Yönet:"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1054,6 +1067,9 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"Kaydedilmemiş kayıtlarınız var !  \n"
+"\n"
+"Sıralamadan önce lütfen onları kaydedin!"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 #, python-format
@@ -1091,54 +1107,54 @@ msgstr "Grafik oluşturulamıyor !"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1422
 msgid "Dot Viewer"
-msgstr ""
+msgstr "Nokta gösterici"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
-msgstr ""
+msgstr "Yeni düğüm ekle"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
-msgstr ""
+msgstr "Yeni Köşe ekle"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "Diyagramı Büyüt"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "Diyagramı Küçült"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "Diyagramı ekrana sığdır"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "Diyagramı normal boyunda göster"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "Diyagramı Yazdır"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "Şu anki %s kapat"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "Güncel %s Sil"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "Güncel %s Düzenle"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
-msgstr ""
+msgstr " - Nokta Gösterici"
 
 #: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1250
 msgid "Create a new resource"
@@ -1154,11 +1170,11 @@ msgstr "Düğme için Yanlış simge !"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "Alan"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "Nesne"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
@@ -1174,15 +1190,15 @@ msgstr "Görünümü çevir"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "İptal"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "Kaydet & Kapat"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "Kaydet & Yeni"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
@@ -1208,22 +1224,22 @@ msgstr "Girişi sil"
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "Önceki Sayfa"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr ""
+msgstr "Önceki Kayıt"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "Sonraki Kayıt"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "Sonraki Sayfa"
 
 #: bin/widget/view/form_gtk/one2many_list.py:245
 msgid "Switch"
@@ -1232,7 +1248,7 @@ msgstr "Anahtar"
 #: bin/widget/view/form_gtk/one2many_list.py:251
 #: bin/widget/view/form_gtk/many2many.py:106
 msgid "Choose Limit"
-msgstr ""
+msgstr "Limit Seç"
 
 #: bin/widget/view/form_gtk/one2many_list.py:292
 msgid "You have to select a resource !"
@@ -1260,11 +1276,11 @@ msgstr "Resimler"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "Farklı kaydedecek resim yok !"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "Uyarı"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
@@ -1292,11 +1308,11 @@ msgstr "Varsayılan Olarak Ata"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "You can not set to the default value here !"
-msgstr ""
+msgstr "Buradan öntanımlı değere ayarlayamazsınız !"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "Operation not permited"
-msgstr ""
+msgstr "İşleme izin verilmemis"
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
@@ -1368,6 +1384,8 @@ msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
 msgstr ""
+"(Aynı isimli bütün filtreler \n"
+"değiştirilecektir)"
 
 #: bin/rpc.py:157
 msgid "Connection refused!"
@@ -1655,7 +1673,7 @@ msgstr "_Yardım"
 
 #: bin/openerp.glade:1132
 msgid "Enable Debug Mode Tooltips"
-msgstr ""
+msgstr "Hata ayıklama kipi İpuçlarını Aç"
 
 #: bin/openerp.glade:1140 bin/openerp.glade:4395
 msgid "Support Request"
@@ -1719,7 +1737,7 @@ msgstr "Takvim"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
-msgstr ""
+msgstr "Diyagram"
 
 #: bin/openerp.glade:1361
 msgid "Graph"
@@ -1759,7 +1777,7 @@ msgstr "Pencereyi Kapat"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
-msgstr ""
+msgstr "Firma:"
 
 #: bin/openerp.glade:1535
 msgid "Requests:"
@@ -2380,6 +2398,8 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Server:"
 msgstr ""
+"Copy text \t\r\n"
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Sunucusu:"
 
 #: bin/openerp.glade:7025
 msgid ""
@@ -2396,10 +2416,12 @@ msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Süper Yönetici "
+"Şifresi:"
 
 #: bin/openerp.glade:7048
 msgid "admin"
-msgstr ""
+msgstr "yönetici"
 
 #: bin/openerp.glade:7062
 msgid "(<i>admin</i>, by default)"
@@ -2417,6 +2439,8 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>New Database Name:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Yeni Veritabanı "
+"Adı:"
 
 #: bin/openerp.glade:7154
 msgid ""
@@ -2431,29 +2455,34 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Öntanımlı Dil:"
 
 #: bin/openerp.glade:7169
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
-msgstr ""
+msgstr "Yeni oluşturulacak veritabanındaki 'admin' kullanıcısının şifresi."
 
 #: bin/openerp.glade:7171
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Administrator "
 "Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Yönetici Şifresi:"
 
 #: bin/openerp.glade:7184
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
+"Yeni oluşturulacak veritabanındaki 'admin' kullanıcısının şifresi. "
+"Yukarıdaki alanın tekrarı"
 
 #: bin/openerp.glade:7186
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Şifreyi Tekrarla:"
 
 #: bin/openerp.glade:7279
 msgid ""
@@ -2472,6 +2501,8 @@ msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
 "Data:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Örnek Verileri "
+"Yükle:"
 
 #: bin/openerp.glade:7349
 msgid "Change password"
@@ -2548,33 +2579,35 @@ msgstr "Ay"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
-msgstr ""
+msgstr "Arama kriterlerinin uygulanacağı alanlar"
 
 #: bin/openerp.glade:8289
 msgid "Conditional Operators"
-msgstr ""
+msgstr "Koşullu operatörler"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
-msgstr ""
+msgstr "Tercihleriniz (eğer varsa) bir sonraki filtre ile uygulanacak"
 
 #: bin/openerp.glade:8317
 msgid ""
 "AND\n"
 "OR"
 msgstr ""
+"VE\n"
+"VEYA"
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "Filtreyi Kaldır"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
-msgstr ""
+msgstr "Girdiyi Filtrele"
 
 #: bin/openerp.glade:8395
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "Filtre Adını Girin:"
 
 #: bin/win_error.glade:40
 msgid "label"
@@ -2583,10 +2616,11 @@ msgstr "Etiket"
 #: bin/win_error.glade:100
 msgid "Click here for details about the publisher warranty proposition"
 msgstr ""
+"Yayıncı garanti teklifi hakkındaki detaylar için tıklayın (İngilizce)"
 
 #: bin/win_error.glade:120
 msgid "<i>_Publisher Warranty</i>"
-msgstr ""
+msgstr "<i>_Yayıncı Garantisi</i>"
 
 #: bin/win_error.glade:151
 msgid ""
@@ -2596,6 +2630,10 @@ msgid ""
 "you shortly.\n"
 "</i>"
 msgstr ""
+"<b>Yayıncı Garanti Sözleşmesi.</b>\n"
+"<i>\n"
+"İsteğiniz OpenERP yayıncı garanti ekibine gönderilecek. Size kısa süre "
+"içinde cevap verilecektir.</i>"
 
 #: bin/win_error.glade:186
 msgid "Explain what you did:"
@@ -2607,11 +2645,11 @@ msgstr "Diğer Notlar:"
 
 #: bin/win_error.glade:285
 msgid "Send to Publisher Warranty Team"
-msgstr ""
+msgstr "Yayıncı Garanti Ekibine gönder"
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
-msgstr ""
+msgstr "Problemin Özeti:"
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"
@@ -2624,3 +2662,426 @@ msgstr "Detaylar"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr "<i>_Detaylar</i>"
+
+#~ msgid "Offset :"
+#~ msgstr "Ofset:"
+
+#~ msgid "Parameters :"
+#~ msgstr "Parametreler:"
+
+#~ msgid "Limit :"
+#~ msgstr "Sınır:"
+
+#~ msgid "This widget is readonly !"
+#~ msgstr "Bu widget sadece okunabilir !"
+
+#~ msgid ""
+#~ "Thank you for the feedback !\n"
+#~ "Your comments have been sent to OpenERP.\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Geribildirim için teşekkür ederiz!\n"
+#~ "Yorumlarınız OpenERP'ye gönderildi.\n"
+#~ "Artık yeni bir veritabanı oluşturarak başlamalısınız yada\n"
+#~ "varolan bir sunucuya  \"Dosya\" menüsünden bağlanın."
+
+#~ msgid ""
+#~ "Thank you for testing OpenERP !\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "OpenERP denediğiniz için teşekkür ederiz! \n"
+#~ "Artık yeni bir veritabanı oluşturarak başlamalısınız yada\n"
+#~ "varolan bir sunucuya  \"Dosya\" menüsünden bağlanın."
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b> Bilinmeyen bir hata bildirilmiştir. </ b>\n"
+#~ "\n"
+#~ "<b> geçerli OpenERP bakım sözleşmesi yok! </ b>\n"
+#~ "Eğer gerçek işlerinizde OpenERP kullanıyorsanız, bakım programına abone "
+#~ "olmanız önerilir.\n"
+#~ "\n"
+#~ "OpenERP bakım sözleşmesi, hata düzeltme garantisi sağlayan ve\n"
+#~ "otomatik bilgi taşıma yada güncellemesi sağlayarak, sorunlarınızı birkaç "
+#~ "saatte çözer.\n"
+#~ "\n"
+#~ "Eğer bakım sözleşmesi varsa, bu hata OpenERP editöründeki kalite kontrol "
+#~ "takımına gönderilebilir.\n"
+#~ "\n"
+#~ "Bakım programı sunar:\n"
+#~ "* Yeni sürümlerinde otomatik yükseltme,\n"
+#~ "* Hata düzeltme garantisi,\n"
+#~ "* Aylık potansiyel hata ve düzeltmelerin duyurusu,\n"
+#~ "* E-posta ile güvenlik uyarıları ve otomatik güncelleme,\n"
+#~ "* Müşteri portala erişim.\n"
+#~ "\n"
+#~ "Daha fazla bilgi için aşağıdaki bağlantıyı kullanabilirsiniz. Hatanı detayı "
+#~ "ikinci tab'da yer almaktadır.\n"
+
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "İş Akışı'nı (Karmaşık) Yazdır"
+
+#, python-format
+#~ msgid ""
+#~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
+#~ "Please report this error manually at %s"
+#~ msgstr ""
+#~ "Probleminiz kalite ekibine <u>GÖNDERİLEMİYOR</u>  !\n"
+#~ "Lütfen bu hatayı kendiniz %s 'e bildiriniz."
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Yereli %s 'ye ayarlanamıyor"
+
+#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+#~ msgstr "log seviyesini belirle: BILGI, HATA AYIKLA, UYARI, HATA, KRİTİK"
+
+#~ msgid "specify channels to log"
+#~ msgstr "log tutmak için kanal belirle"
+
+#~ msgid "enable basic debugging"
+#~ msgstr "basit hata ayıkla"
+
+#~ msgid "<b>Operation in progress</b>"
+#~ msgstr "<b>Uygulama İşlemde</b>"
+
+#~ msgid "OpenERP Database Installation"
+#~ msgstr "OpenERP Veritabanı Kurulumu"
+
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s istek(ler) gönderildi"
+
+#~ msgid "The following users have been installed on your database:"
+#~ msgstr "Bu kullanıcılar veritabanınıza yüklendi:"
+
+#~ msgid "You can now connect to the database as an administrator."
+#~ msgstr "Şimdi veritabanına yönetici olarak bağlanabilirsiniz."
+
+#~ msgid ""
+#~ "Connection error !\n"
+#~ "Bad username or password !"
+#~ msgstr ""
+#~ "Bağlantı hatası !\n"
+#~ "Yanlış kullanıcı adı yada şifresi !"
+
+#~ msgid "Preference"
+#~ msgstr "Tercihler"
+
+#~ msgid ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+#~ msgstr ""
+#~ "Bu fonksiyon sadece MS Office'de var !\n"
+#~ "OOo kullanıcıları, kusura bakmayın :("
+
+#~ msgid "The content of the widget or excpetion if not valid"
+#~ msgstr "Widget Nesnesinin içeriği ya da uygulaması geçersiz"
+
+#~ msgid "<i>_Maintenance</i>"
+#~ msgstr "<i>_Bakım</i>"
+
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Bakım Ekibine Gönder"
+
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Bakım Sözleşmesi.</b\n"
+#~ "<i>İletiniz OpenErp ulaştırılacak en kıssa zamanda bakım ekibi size "
+#~ "dönecektir.\n"
+#~ "</i>"
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Bakım Önerileri Detayları İçin Buraya Tıkla"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developped your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all futur stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<Bilinmeyen Bir Hata Oluştu.</b>\n"
+#~ "Open ERP' i üretim de kullanıyorsanız sözleşmenizi güncellemenizi tavsiye\n"
+#~ "ederiz.\n"
+#~ "\n"
+#~ "Eğer kendi modüllerinizi tasarladıysanız veya 3cü şahısların modüllerini\n"
+#~ "kullanmaktaysanız bu modüller için ek bir sözleşme yapabiliriz.\n"
+#~ "Modüllerinizi inceledikten sonra, kalite ekibimiz bu modülleri gelecekteki\n"
+#~ "tüm Open ERP sürümlerine ücretsiz dahil edecektir.\n"
+#~ "%s\n"
+#~ "Aşağıda ki linkten daha fazla bilgi edinebilirsiniz. Hatanın detayları\n"
+#~ "ikinci sayfada gösterilmektedir."
+
+#~ msgid "Error no report"
+#~ msgstr "Hata ! Rapor Yok"
+
+#~ msgid "_Tips"
+#~ msgstr "_İpuçları"
+
+#~ msgid "OpenERP Survey"
+#~ msgstr "OpenERP Anket"
+
+#~ msgid ""
+#~ "<i>Please fill in the following form in order to help us to improve OpenERP "
+#~ "and better target new developments.</i>"
+#~ msgstr ""
+#~ "<i>Lütfen OpenERP geliştirilmesinde bize yardımcı olmak için formu "
+#~ "doldurun.</i>"
+
+#~ msgid "<b>OpenERP Survey</b>"
+#~ msgstr "<b>OpenERP Anket</b>"
+
+#~ msgid "Country:"
+#~ msgstr "Ülke"
+
+#~ msgid "Your Role:"
+#~ msgstr "Sizin Kuralınız:"
+
+#~ msgid "# Employees:"
+#~ msgstr "#Çalışan Sayısı:"
+
+#~ msgid "<b>Your company:</b>"
+#~ msgstr "<b>Firmanız:</b>"
+
+#~ msgid "We plan to use OpenERP"
+#~ msgstr "OpenERP Kullanmayı düşünüyoruz"
+
+#~ msgid "We plan to offer services on OpenERP"
+#~ msgstr "OpenERP Hizmetlerinden yararlanmayı düşünüyoruz"
+
+#~ msgid "Industry:"
+#~ msgstr "Branş:"
+
+#~ msgid "Open Source:"
+#~ msgstr "Açık Kaynak:"
+
+#~ msgid "How did you hear about us:"
+#~ msgstr "Bizden nasıl haberdar oldunuz:"
+
+#~ msgid "System:"
+#~ msgstr "Sistem:"
+
+#~ msgid "Tell us why you try OpenERP and what are your current softwares:"
+#~ msgstr ""
+#~ "Bize neden OpenERP kullanmak istediğinizi ve diğer kullandığınız yazılımları "
+#~ "anlatınız::"
+
+#~ msgid "I want to be contacted for a demonstration"
+#~ msgstr "Bir demo gözterisi için benimle iletişime geçilmesini istiyorum"
+
+#~ msgid "<b>Your interrest:</b>"
+#~ msgstr "<b>İlgi Alanınız:</b>"
+
+#~ msgid "Phone / Mobile:"
+#~ msgstr "Telefon / Cep:"
+
+#~ msgid "Your Name:"
+#~ msgstr "İsminiz:"
+
+#~ msgid "E-Mail:"
+#~ msgstr "E-Mailiniz:"
+
+#~ msgid "Your Company:"
+#~ msgstr "Firmanız:"
+
+#~ msgid "<b>Keep Informed</b>"
+#~ msgstr "<b>Devamlı Bilgilendir</b>"
+
+#~ msgid "<Shist> + <Tab>"
+#~ msgstr "<Shist> + <Tab>"
+
+#~ msgid "New Database Name:"
+#~ msgstr "Yeni Veritaban Adı:"
+
+#~ msgid "OpenERP Server:"
+#~ msgstr "OpenERP Sunucusu:"
+
+#~ msgid "Default Language:"
+#~ msgstr "Varsayılan Dil:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Bu yeni veritabanınızın yönetici şifresidir. Üstte girdiğiniz şifrenin "
+#~ "aynısı olmak zorundadır."
+
+#~ msgid "<b>Database created successfully!</b>"
+#~ msgstr "<b>Veritabanı Başarıyla Oluşturuldu!</b>"
+
+#~ msgid "Database creation"
+#~ msgstr "Veritabanı Üretim"
+
+#~ msgid ""
+#~ "You can connect to the new database using one of the following account:\n"
+#~ "\n"
+#~ "    Administrator: admin / admin "
+#~ msgstr ""
+#~ "Yeni veritabanına şu kullanıcıyla bağlanabilirsiniz: \n"
+#~ "Yönetici: admin / admin "
+
+#~ msgid "Load Demonstration Data:"
+#~ msgstr "Demo Data Aç:"
+
+#~ msgid "Employees:"
+#~ msgstr "Çalışanlar:"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
+
+#~ msgid "gtk-ok"
+#~ msgstr "gtk-ok"
+
+#~ msgid "City:"
+#~ msgstr "Şehir:"
+
+#~ msgid "E-mail:"
+#~ msgstr "E-Posta:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Bu yeni veritabanınızda oluşturulacak '<i>yönetici</i>' kullanıcının "
+#~ "parolasıdır."
+
+#~ msgid "Administrator Password:"
+#~ msgstr "Yönetici Parolası:"
+
+#~ msgid "Confirm Password:"
+#~ msgstr "Parolayı Doğrula:"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
+
+#~ msgid ""
+#~ "Please fill in the following form in order to help us to improve <b><span "
+#~ "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
+#~ "developments."
+#~ msgstr ""
+#~ "Lütfen aşağıdaki formu doldurarak <b><span "
+#~ "foreground=\"red\"><i>Open</i></span> ERP</b>'yi iyileştirmemize ve sonraki "
+#~ "sürümlerin geliştirilmesinde daha iyi hedefler oluşturmamıza yardımcı olunuz."
+
+#~ msgid "Connect now"
+#~ msgstr "Şimdi Bağlan"
+
+#~ msgid "Connect Later"
+#~ msgstr "Daha Sonra Bağlan"
+
+#~ msgid "<b>Your company</b>"
+#~ msgstr "<b>Şirket Adı</b>"
+
+#~ msgid "We plan to use Open ERP"
+#~ msgstr "Open ERP kullanmayı düşünüyoruz."
+
+#~ msgid "We plan to offer services on Open ERP"
+#~ msgstr "Open ERP'ye bağlı hizmetler sunmayı düşünüyoruz."
+
+#~ msgid "<b>Your interrest</b>"
+#~ msgstr "<b>İlgi Alanınız></b>"
+
+#~ msgid "Tell us why you try Open ERP and what are your current softwares:"
+#~ msgstr ""
+#~ "Neden Open ERP'yi denediğinizi ve şu anda kullandığınız diğer yazılımları "
+#~ "söyleyiniz:"
+
+#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
+#~ msgstr "Open ERP E-kitabını (PDF) E-Posta ile almak istiyorum."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "Bu pencere size OpenERP bakım sözleşmeleri ile ilgili bilgi vermek için "
+#~ "programda bir hata oluştuğunda görüntülenmektedir. Hatanın sebebi bir bakım "
+#~ "sözleşmeniz olmaması değildir. Bu sadece \"Eğer sözleşmeniz olsaydı bu "
+#~ "hatayı tamir ederdik\" anlamında bir hatırlatmadır.\n"
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."

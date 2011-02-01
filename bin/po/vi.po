@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
+"PO-Revision-Date: 2011-01-19 13:28+0000\n"
 "Last-Translator: Phong Nguyen <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:05+0000\n"
+"X-Launchpad-Export-Date: 2011-01-20 04:50+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "Language: vi\n"
 
@@ -2528,3 +2528,145 @@ msgstr "Chi tiết"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr ""
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
+
+#~ msgid "The content of the widget or excpetion if not valid"
+#~ msgstr "lưa"
+
+#~ msgid "Parameters :"
+#~ msgstr "Các them số:"
+
+#~ msgid "Limit :"
+#~ msgstr "Giới hạn:"
+
+#~ msgid "Error no report"
+#~ msgstr "Lỗi không có báo cáo"
+
+#~ msgid ""
+#~ "Thank you for the feedback !\n"
+#~ "Your comments have been sent to OpenERP.\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Cám ơn bạn đã phản hồi\n"
+#~ "Thông điệp của bạn đã được gửi tới OpenERP\n"
+#~ "Bây giờ bạn nên bắt đầu khởi tạo một cơ sở dữ liệu mới hoặc kết nôi đến một "
+#~ "server qua trình đơn Menu"
+
+#~ msgid ""
+#~ "Thank you for testing OpenERP !\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Cám ơn về sự kiểm tra OpenERP\n"
+#~ "Bây giờ bạn nên bắt đầu khởi tạo một cơ sở dữ liệu mới hoặc kết nôi đến một "
+#~ "server qua trình đơn Menu"
+
+#~ msgid "gtk-ok"
+#~ msgstr "GTK - Chấp Nhận"
+
+#~ msgid "E-mail:"
+#~ msgstr "Email :"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "GTK- hủy"
+
+#~ msgid "Your Name:"
+#~ msgstr "Tên Bạn :"
+
+#~ msgid "System:"
+#~ msgstr "hệ thống"
+
+#~ msgid "City:"
+#~ msgstr "Thành phố"
+
+#~ msgid "<b>Keep Informed</b>"
+#~ msgstr "<b>gữi lệnh đã thực hiện</b>"
+
+#~ msgid "We plan to use Open ERP"
+#~ msgstr "kế hoạch dùng openerp của chúng tôi."
+
+#~ msgid "We plan to offer services on Open ERP"
+#~ msgstr "kế hoạch dùng openERP sau khi phục vụ"
+
+#~ msgid "Tell us why you try Open ERP and what are your current softwares:"
+#~ msgstr ""
+#~ "nói cho tôi biết tại sao bạn dùng openerp và phần mền hiện nay của bạn."
+
+#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
+#~ msgstr "tôi muốn nhận sách về openerp (pdf) qua email"
+
+#~ msgid "How did you hear about us:"
+#~ msgstr "hãy nói ý kiến của bạn về chúng tôi"
+
+#~ msgid "Phone / Mobile:"
+#~ msgstr "Điện thoại / Di động"
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Không thể cài đặt thông tin bản địa %s"
+
+#~ msgid "OpenERP Database Installation"
+#~ msgstr "Cài đặt Cơ sở dữ liệu OpenERP"
+
+#~ msgid "<b>Operation in progress</b>"
+#~ msgstr "<b>Tác vụ đang thực hiện</b>"
+
+#~ msgid "The following users have been installed on your database:"
+#~ msgstr ""
+#~ "Những người sử dụng sau đây đã được cài đặt trên cơ sở dữ liệu của bạn:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Đây là mật khẩu của người dùng '<i> admin </ i> được tạo ra trong cơ sở dữ "
+#~ "liệu mới của bạn."
+
+#~ msgid "Administrator Password:"
+#~ msgstr "Mật khẩu của Quản trị viên:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Đây là mật khẩu của người dùng '<i> admin </ i> được tạo ra trong cơ sở dữ "
+#~ "liệu mới của bạn. Nó phải giống với trường bên trên."
+
+#~ msgid "Load Demonstration Data:"
+#~ msgstr "Nạp dữ liệu mẫu:"
+
+#~ msgid "Database creation"
+#~ msgstr "Tạo Cơ sở dữ liệu"
+
+#~ msgid "<b>Database created successfully!</b>"
+#~ msgstr "<b> Cơ sở dữ liệu được tạo thành công! </b>"
+
+#~ msgid "Connect Later"
+#~ msgstr "Kết nối sau"
+
+#~ msgid "Connect now"
+#~ msgstr "Kết nối bây giờ"
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Nhấn vào đây để biết chi tiết về các đề xuất bảo trì"
+
+#~ msgid "<b>Your company</b>"
+#~ msgstr "<b>Công ty của bạn</b>"
+
+#~ msgid "Open Source:"
+#~ msgstr "Mã nguồn mở:"
+
+#~ msgid "Your Company:"
+#~ msgstr "Công ty của bạn:"
+
+#~ msgid "Industry:"
+#~ msgstr "Ngành:"
+
+#~ msgid "Your Role:"
+#~ msgstr "Vai trò của bạn:"
+
+#~ msgid "Country:"
+#~ msgstr "Quốc gia:"
