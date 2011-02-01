@@ -29,21 +29,23 @@ class char(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}, screen=None):
         wid_int.wid_int.__init__(self, name, parent, attrs, screen)
         self.attrs = attrs
+        self.screen = screen
         self.widget = gtk.Entry()
         if attrs.get('type') == 'char':
             self.widget.set_max_length(int(attrs.get('size',16)))
         self.widget.set_width_chars(15)
         self.widget.set_property('activates_default', True)
+        self.default_value = False
         if self.default_search:
             model = self.attrs.get('relation', '')
             if attrs.get('type','') == 'many2one' and model:
                 try:
-                    value = rpc.session.rpc_exec_auth('/object', 'execute', model, 'name_get', self.default_search)
+                    value = rpc.session.rpc_exec_auth('/object', 'execute', model, 'name_get', self.default_search, self.screen.context)
                 except rpc.rpc_exception, e:
                     common.error(_('Error: ')+str(e.type), e.message, e.data)
-                    value = []
-                self.default_search = value and value[0] and value[0][1] or ''
-            self.widget.set_text(self.default_search or '')
+                    value = [(0,'')]
+                self.default_value, self.default_search = value and value[0]
+            self.widget.set_text(self.default_search  or '')
 
     def _value_get(self):
         s = self.widget.get_text()
@@ -53,7 +55,11 @@ class char(wid_int.wid_int):
             if self.attrs.get('filter_domain'):
                 domain = tools.expr_eval(self.attrs['filter_domain'], {'self': s})
             else:
-                domain = [(self.name,self.attrs.get('comparator','ilike'),s)]
+                if self.default_value:
+                    domain = [(self.name,'=', self.default_value)]
+                    self.default_value = False
+                else:
+                    domain = [(self.name,self.attrs.get('comparator','ilike'),s)]
             context = tools.expr_eval(self.attrs.get('context',"{}"), {'self': s})
         return {
             'domain':domain,
