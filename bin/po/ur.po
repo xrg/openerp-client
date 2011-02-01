@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-23 15:57+0000\n"
+"PO-Revision-Date: 2011-01-30 17:00+0000\n"
 "Last-Translator: Aamir Riaz <Unknown>\n"
 "Language-Team: Urdu <ur@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-24 04:53+0000\n"
+"X-Launchpad-Export-Date: 2011-01-31 04:55+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #: bin/plugins/__init__.py:27
@@ -202,7 +202,7 @@ msgstr "کوئ کمپنی نھیں ھے"
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr ""
+msgstr "%s درخواست"
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
@@ -267,32 +267,32 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
 msgid "Do you really want to quit ?"
-msgstr ""
+msgstr "کیا تم واقعی چُھوڑنا چاہتے ہو؟"
 
 #: bin/modules/gui/main.py:1262
 #, python-format
 msgid "Attachments (%d)"
-msgstr ""
+msgstr "(%d) مُنسلک"
 
 #: bin/modules/gui/main.py:1275
 msgid "Attachments"
-msgstr ""
+msgstr "مُنسلک"
 
 #: bin/modules/gui/main.py:1374
 msgid "Delete a database"
-msgstr ""
+msgstr "ایک ڈیٹابیس کو حذف کریں"
 
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr ""
+msgstr "ڈیٹابیس کامیابی سےگرادی گئ"
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr ""
+msgstr "ڈیٹابیس گرائ نھیں جاسکی"
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr ""
+msgstr "ڈیٹابیس گرائ نھیں جاسکی"
 
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
@@ -301,11 +301,11 @@ msgstr "کھولیں"
 
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
-msgstr ""
+msgstr "ڈیٹابیس کامیابی سے بحال ھوگئ۔"
 
 #: bin/modules/gui/main.py:1403
 msgid "Could not restore database."
-msgstr ""
+msgstr "ڈیٹابیس بحال نھیں ھوسکی۔"
 
 #: bin/modules/gui/main.py:1405
 msgid "Couldn't restore database"
@@ -356,7 +356,7 @@ msgstr "ڈیٹابیس کابیک اپ نھیں ھو سکا"
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "وسائل کی شناخت اس مقصد کیلیےموجود نھیں ھے۔"
 
 #: bin/modules/gui/window/form.py:231
 msgid "No record selected ! You can only attach to existing record."
@@ -373,11 +373,11 @@ msgstr "شناخت"
 
 #: bin/modules/gui/window/form.py:254
 msgid "Creation User"
-msgstr ""
+msgstr "تخلیق صارف"
 
 #: bin/modules/gui/window/form.py:255
 msgid "Creation Date"
-msgstr "تخلیق صارف"
+msgstr "تخلیق کی تاریخ"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
@@ -487,16 +487,16 @@ msgstr "درآمد۔"
 
 #: bin/modules/gui/window/win_import.py:56
 msgid "XML-RPC error !"
-msgstr ""
+msgstr "ایکس ایم ایل - آرپی سی کی خرابی-"
 
 #: bin/modules/gui/window/win_import.py:61
 msgid "Imported one object !"
-msgstr ""
+msgstr "ایک شے کی درآمد۔"
 
 #: bin/modules/gui/window/win_import.py:63
 #, python-format
 msgid "Imported %d objects !"
-msgstr ""
+msgstr "%d اشیاء کی درآمد۔"
 
 #: bin/modules/gui/window/win_import.py:68
 #, python-format
@@ -508,28 +508,35 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"اس ریکارڈ کو درآمد کرنے کی کوشش میں خرابی:\n"
+"%s\n"
+"خرابی کا پیغام:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
-msgstr ""
+msgstr "درآمد کی خرابی۔"
 
 #: bin/modules/gui/window/win_import.py:100
 #: bin/modules/gui/window/win_import.py:104
 msgid "Field name"
-msgstr ""
+msgstr "فیلڈکانام"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "سی ایس وی فائل کھولنے میں خرابی"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "اندراج کی خرابی۔"
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
+"آپ اس فیلڈکودرآمدنھیں کرسکتے, کیونکہ ھم خودکار طریقےسےاسکاپتانھیں لگاسکتے%s"
 
 #: bin/modules/gui/window/win_import.py:190
 #, python-format
@@ -572,11 +579,11 @@ msgstr ""
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Ressource Name"
-msgstr ""
+msgstr "وسائل کانام"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Names"
-msgstr ""
+msgstr "نام"
 
 #: bin/modules/gui/window/__init__.py:31
 msgid "Unknown Window"
