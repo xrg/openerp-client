@@ -299,7 +299,8 @@ class form(object):
         if autosave:
             if not self.modified_save():
                 return
-        self.screen.create_new = True
+        if self.screen.current_view.view_type in ['calendar','graph']:
+            return
         self.screen.new()
         self.message_state('')
 

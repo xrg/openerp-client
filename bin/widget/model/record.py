@@ -98,10 +98,11 @@ class ModelRecord(signal_event.signal_event):
             context.setdefault(CONCURRENCY_CHECK_FIELD, {})["%s,%s" % (self.resource, self.id)] = self._concurrency_check_data
         for name, field in self.mgroup.mfields.items():
             if isinstance(field, O2MField):
-                v = self.value[field.name]
-                from itertools import chain
-                for m in chain(v.models, v.models_removed):
-                    m.update_context_with_concurrency(context)
+                if field.name in self.value:
+                    v = self.value[field.name]
+                    from itertools import chain
+                    for m in chain(v.models, v.models_removed):
+                        m.update_context_with_concurrency(context)
 
     def get(self, get_readonly=True, includeid=False, check_load=True, get_modifiedonly=False):
         if check_load:

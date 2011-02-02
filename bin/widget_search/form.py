@@ -396,8 +396,9 @@ class form(wid_int.wid_int):
         context = {}
 
         for x in self.widgets.values() + self.custom_widgets.values():
-            domain += x[0].value.get('domain',[])
-            ctx = x[0].value.get('context',{})
+            filters = x[0].value
+            domain += filters.get('domain',[])
+            ctx = filters.get('context',{})
             ctx_groupby = ctx.pop('group_by', False)
             ctx_remove_group = ctx.pop('remove_group',False)
             if ctx_groupby:
