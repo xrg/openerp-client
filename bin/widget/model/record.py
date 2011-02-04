@@ -291,7 +291,7 @@ class ModelRecord(signal_event.signal_event):
         d['current_date'] = time.strftime('%Y-%m-%d')
         d['time'] = time
         d['context'] = self.context_get()
-        d['active_id'] = self.id
+        d['active_id'] = self.id or False
         if self.parent:
             d['parent'] = EvalEnvironment(self.parent)
         val = tools.expr_eval(dom, d)
