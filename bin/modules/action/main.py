@@ -95,7 +95,19 @@ class main(service.Service):
 
             datas['auto_search'] = action.get('auto_search', True)
             if not datas['search_view'] and datas['search_view_id']:
-                 datas['search_view'] = str(rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'], 'fields_view_get', isinstance(datas['search_view_id'], (tuple, list)) and datas['search_view_id'][0] or datas['search_view_id'], 'search', context))
+                 datas['search_view'] = rpc.session.rpc_exec_auth('/object', 'execute', datas['res_model'],
+                        'fields_view_get', isinstance(datas['search_view_id'], (tuple, list)) and datas['search_view_id'][0] or datas['search_view_id'],
+                            'search', context)
+            if isinstance(datas['search_view'], basestring):
+                try:
+                    datas['search_view'] = eval(datas['search_view'])
+                except Exception:
+                    log = logging.getLogger("action")
+                    log.warning("Cannot parse search view %d for %s",
+                                    datas['search_view_id'], datas.get('model',datas.get('res_model','?')), 
+                                    exc_info=True)
+                    log.debug("Search view string: %r", datas['search_view'])
+                    datas['search_view'] = None
 
             if datas['limit'] is None or datas['limit'] == 0:
                 datas['limit'] = 100

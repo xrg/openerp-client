@@ -62,7 +62,7 @@ class Screen(signal_event.signal_event):
         if default_get is None:
             default_get = {}
         if search_view is None:
-            search_view = "{}"
+            search_view = {}
 
         super(Screen, self).__init__()
         self.win_search = win_search
@@ -100,7 +100,7 @@ class Screen(signal_event.signal_event):
         self.parent=parent
         self.window=window
         self.is_wizard = is_wizard
-        self.search_view = eval(search_view)
+        self.search_view = search_view
         models = ModelRecordGroup(model_name, self.fields, parent=self.parent, context=self.context, is_wizard=is_wizard, screen=self)
         self.models_set(models)
         self.current_model = None
@@ -158,6 +158,8 @@ class Screen(signal_event.signal_event):
                     self.search_view = rpc.session.rpc_exec_auth('/object', 'execute',
                             self.name, 'fields_view_get', False, svt,
                             self.context)
+                else:
+                    assert isinstance(self.search_view, dict), self.search_view
                 self.filter_widget = widget_search.form(self.search_view['arch'],
                         self.search_view['fields'], self.name, self.window,
                         self.domain, (self, self.search_filter))
