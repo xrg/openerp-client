@@ -38,6 +38,8 @@ CONCURRENCY_CHECK_FIELD = '__last_update'
 
 session_counter = 0
 
+re_url = re.compile('^(http[s]?://|socket://)((?:[\w.\-]+)|(?:.+)):(\d{1,5})$')
+
 class rpc_exception(Exception):
     def __init__(self, code, backtrace):
 
@@ -350,7 +352,7 @@ class rpc_session(object):
         return self.exec_no_except(url, 'db', method, *args)
 
     def exec_no_except(self, url, resource, method, *args):
-        m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
+        m = re_url.match(url or '')
         if m.group(1) == 'http://' or m.group(1) == 'https://':
             sock = xmlrpclib.ServerProxy(url + '/xmlrpc/' + resource)
             return getattr(sock, method)(*args)

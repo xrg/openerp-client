@@ -430,7 +430,7 @@ def _server_ask(server_widget, parent=None):
     listprotocol = gtk.ListStore(str)
     protocol_widget.set_model(listprotocol)
 
-    m = re.match('^(http[s]?://|socket://)([\w.-]+):(\d{1,5})$', server_widget.get_text())
+    m = rpc.re_url.match(server_widget.get_text())
     if m:
         host_widget.set_text(m.group(2))
         port_widget.set_text(m.group(3))
@@ -532,7 +532,7 @@ class db_login(object):
                 iter = liststore.iter_next(iter)
 
         res = win.run()
-        m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', server_widget.get_text() or '')
+        m = rpc.re_url.match(server_widget.get_text() or '')
         if m:
             if combo_db.flags() & gtk.VISIBLE:
                 dbname = combo_db.get_active_text()
@@ -626,7 +626,7 @@ class db_create(object):
         passwd = pass_widget.get_text()
         user_pass = self.dialog.get_widget('ent_user_pass1').get_text()
         url = self.server_widget.get_text()
-        m = re.match('^(http[s]?://|socket://)([\w.\-]+):(\d{1,5})$', url or '')
+        m = rpc.re_url.match(url or '')
         if m:
             options.options['login.server'] = m.group(2)
             options.options['login.port'] = m.group(3)
@@ -668,7 +668,7 @@ class db_create(object):
         pbar.pulse()
         if progress == 1.0:
             win.destroy()
-            m = re.match('^(http[s]?://|socket://)([\w.]+):(\d{1,5})$', url)
+            m = rpc.re_url.match(url)
             ok = False
             for x in users:
                 if x['login']=='admin' and m:
