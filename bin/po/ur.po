@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-30 17:00+0000\n"
+"PO-Revision-Date: 2011-02-05 16:48+0000\n"
 "Last-Translator: Aamir Riaz <Unknown>\n"
 "Language-Team: Urdu <ur@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-31 04:55+0000\n"
+"X-Launchpad-Export-Date: 2011-02-06 04:53+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #: bin/plugins/__init__.py:27
@@ -139,6 +139,9 @@ msgid ""
 "The versions of the server (%s) and the client (%s) missmatch. The client "
 "may not work properly. Use it at your own risks."
 msgstr ""
+"سرورکاورژن (%s) اورکلائنٹ کاورژن (%s) \r\n"
+"مختلف ھیں، کلائنٹ صحیح کام نھیں کرسکتا،\r\n"
+" اپنی ذمھداری پر استعمال کریں"
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
@@ -544,38 +547,40 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"آپ کی فائل کی پہلی سطر پر کاروائی کی خرابی.\n"
+"فیلڈ %s نامعلوم ہے!"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "درآمدکی خرابی۔"
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "آپ نےکسی فیلڈکا انتخاب نہیں کیا درآمد کرنےکیلیے-"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "توسیع"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "ایپلیکیشن"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "پرنٹ پروسیسر"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
-msgstr ""
+msgstr "اس توسیع کی پھلےسےوظاحت ھو چُکی ھے-"
 
 #: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7684
 msgid "Extension Manager"
-msgstr ""
+msgstr "توسیع کامینیجر"
 
 #: bin/modules/gui/window/win_selection.py:51
 msgid "Name"
-msgstr ""
+msgstr "نام"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Ressource Name"
@@ -627,11 +632,11 @@ msgstr ""
 
 #: bin/modules/gui/window/tree.py:234
 msgid "Unable to chroot: no tree resource selected"
-msgstr ""
+msgstr "وسائل کا انتخاب نھیں ھُوا tree : chroot میں ناکام"
 
 #: bin/modules/gui/window/win_export.py:50
 msgid " record(s) saved !"
-msgstr ""
+msgstr " ريکارڈز بچا لیا!"
 
 #: bin/modules/gui/window/win_export.py:53
 msgid ""
@@ -674,32 +679,32 @@ msgstr ""
 
 #: bin/options.py:110
 msgid "specify alternate config file"
-msgstr ""
+msgstr "متبادل وضعی فائل کی وضاحت کریں۔"
 
 #: bin/options.py:111
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "بنیادی ٹھیک کرنا فعال کریں. عرفیت کے لئے '--log-level=debug'"
 
 #: bin/options.py:112
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "لاگ کے درجہ کے وضاحت کریں: %s"
 
 #: bin/options.py:113
 msgid "specify the user login"
-msgstr ""
+msgstr "صارف لاگ ان کی وضاحت کریں"
 
 #: bin/options.py:114
 msgid "specify the server port"
-msgstr ""
+msgstr "سرور پورٹ کی وضاحت کریں"
 
 #: bin/options.py:115
 msgid "specify the server ip/name"
-msgstr ""
+msgstr "سرور آئپی/نام کی وضاحت کریں"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "موجودھ اشاروں کوبندکریں"
 
 #: bin/common/common.py:90
 msgid ""
@@ -711,7 +716,7 @@ msgstr ""
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "تمام اشاروں کوغیرفعال کریں"
 
 #: bin/common/common.py:101
 msgid ""
@@ -754,7 +759,7 @@ msgstr ""
 
 #: bin/common/common.py:367
 msgid "Support request sent !"
-msgstr ""
+msgstr "مدد کی درخواست بھیج کو دیا گیا!"
 
 #: bin/common/common.py:387 bin/common/common.py:430
 msgid ""
@@ -826,39 +831,43 @@ msgstr ""
 
 #: bin/common/common.py:491
 msgid "Error"
-msgstr ""
+msgstr "خرابی"
 
 #: bin/common/common.py:646
 msgid "Open with..."
-msgstr ""
+msgstr "کےساتھ کھولیں۔۔۔"
 
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "مقامی قائم کرنے میں ناکامی %s: %s"
 
 #: bin/printer/printer.py:184
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr ""
+msgstr "فائل ٹائپ کوسنبھالنےکےقابل نھیں %s"
 
 #: bin/printer/printer.py:189
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
+"لینکس خودکار پرنٹنگ لاگو نہیں ھے۔\n"
+"جائزھ کاآپشن استعمال کریں!"
 
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
+"خرابی! پرنٹ کرنےکیلیےکوئ دیٹانھیں ھے. پرنٹ کرنے کے لئے کافی ڈیٹا یقینی "
+"بنائیں!"
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
-msgstr ""
+msgstr "فائل لکھنے میں خرابی!"
 
 #: bin/openerp-client.py:140
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "اوپن ای آر پی بند ھورھی ھے، KeyboardInterrupt"
 
 #: bin/widget_search/reference.py:78 bin/widget_search/filter.py:74
 #: bin/widget_search/selection.py:116 bin/widget_search/spinbutton.py:72
@@ -893,11 +902,11 @@ msgstr ""
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "خرابی: "
 
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
-msgstr ""
+msgstr "شروع کرنے کی تاریخ"
 
 #: bin/widget_search/calendar.py:54 bin/widget_search/calendar.py:74
 #: bin/widget_search/calendar.py:181 bin/widget_search/calendar.py:201
@@ -908,7 +917,7 @@ msgstr ""
 
 #: bin/widget_search/calendar.py:70 bin/widget_search/calendar.py:197
 msgid "End date"
-msgstr ""
+msgstr "آخری تاریخ"
 
 #: bin/widget_search/calendar.py:129 bin/widget_search/calendar.py:249
 #: bin/widget/view/form_gtk/calendar.py:135
@@ -918,35 +927,35 @@ msgstr ""
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "مُشتمل ھوتاھے"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "مُشتمل نھیں ھوتاھے"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "کےبرابرھے"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "کےبرابرنھیں ھے"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "سےبڑھکر"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "سےکمتر"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "اندر"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "اندر نھیں"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
