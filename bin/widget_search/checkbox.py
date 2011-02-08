@@ -40,7 +40,7 @@ class checkbox(wid_int.wid_int):
         self.entry.set_editable(False)
         if self.default_search:
             if self.default_search == 1:
-                self.default_search = 'Yes'
+                self.default_search = _('Yes')
             self.widget.child.set_text(self.default_search.capitalize())
 
     def clear(self):
@@ -57,7 +57,7 @@ class checkbox(wid_int.wid_int):
             'domain':domain,
             'context': context
         }
-        
+
     def grab_focus(self):
         self.widget.child.grab_focus()
 
