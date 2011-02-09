@@ -136,8 +136,10 @@ class parse(object):
 
     def destroy(self):
         self.container.destroy()
-        self.focusable.destroy()
-        self.widget.destroy()
+        if self.focusable:
+            self.focusable.destroy()
+        if self.widget:
+            self.widget.destroy()
         del self.container
         del self.focusable
         del self.name_lst
