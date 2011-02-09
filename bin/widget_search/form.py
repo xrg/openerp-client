@@ -452,7 +452,7 @@ import char
 import checkbox
 import reference
 import filter
-import custom_filter
+import custom_filter_widgets
 
 widgets_type = {
     'date': (calendar.calendar, 2),
@@ -477,7 +477,7 @@ widgets_type = {
     'callto': (char.char, 2),
     'sip': (char.char, 2),
     'filter' : (filter.filter,1),
-    'custom_filter' : (custom_filter.custom_filter,6)
+    'custom_filter' : (custom_filter_widgets.custom_filter,6)
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
