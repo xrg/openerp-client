@@ -438,6 +438,8 @@ class form(object):
 
     def message_state(self, message, context='message', color=None):
         sb = self.glade.get_widget('stat_state')
+        if not sb:
+            return
         if color is not None:
             message = '<span foreground="%s">%s</span>' % (color, message)
         sb.set_label(message)
