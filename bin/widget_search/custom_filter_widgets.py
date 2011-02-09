@@ -94,20 +94,22 @@ class custom_filter(wid_int.wid_int):
 		for operator in self.widget_obj.operators:
 			self.op_selection[operator[1]] = operator[0]
 			self.combo_op.append_text(operator[1])
-		self.combo_op.set_active(0)
 		self.widget.pack_start(self.right_text)
 		self.widget.reorder_child(self.right_text, 2)
 		self.widget.show_all()
+		self.combo_op.set_active(0)
 		self.condition_next.hide()
 		return True
 
 	def _value_get(self):
-		field_left = self.field_selection[self.combo_fields.get_active_text()][0]
+		self.widget_obj.field_left = self.field_selection[self.combo_fields.get_active_text()][0]
 		self.widget_obj.selected_oper_text = self.combo_op.get_active_text()
 		self.widget_obj.selected_oper = self.op_selection[self.widget_obj.selected_oper_text]
-		operator, right_text = self.widget_obj._value_get()
+		wid_domain = self.widget_obj._value_get()
 		condition = self.condition_next.get_active() == 0 and '&' or '|'
-		domain = [condition, (field_left, operator, right_text)]
+		domain = [condition]
+		for dom in wid_domain:
+			domain.append(dom)
 		return {'domain':domain}
 
 	def sig_exec(self, widget):
@@ -140,13 +142,14 @@ class char(char.char):
 						  ['not ilike', _('doesn\'t contain')])
 		self.selected_oper = False
 		self.selected_oper_text = False
+		self.field_left = False
 
 	def _value_get(self):
 		if self.selected_oper_text in ['is Empty', 'is not Empty']:
 			text = False
 		else:
 			text = self.widget.get_text()
-		return (self.selected_oper, text)
+		return [(self.field_left, self.selected_oper, text)]
 
 	def set_visibility(self):
 		if self.selected_oper_text in ['is Empty', 'is not Empty']:
@@ -154,7 +157,6 @@ class char(char.char):
 		else:
 			self.widget.show()
 
-	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
 
 class checkbox(wid_int.wid_int):
 	def __init__(self, name, parent, attrs={}, screen=None):
@@ -163,21 +165,54 @@ class checkbox(wid_int.wid_int):
 		self.widget.set_active(False)
 		self.operators = (['=', _('Equals')],)
 		self.selected_oper = False
-		self.selected_oper_text = False
+		self.field_left = False
 
 	def _value_get(self):
-		return (self.selected_oper, int(self.widget.get_active()))
+		return [(self.field_left, self.selected_oper, int(self.widget.get_active()))]
 
-	value = property(_value_get, _value_set, None, _('The content of the widget or ValueError if not valid'))
-#
+	def set_visibility(self):
+		pass
+
 class calendar(calendar):
 	def __init__(self, name, parent, attrs={}, screen=None):
 		super(calendar,self).__init__(name, parent, attrs, screen)
 		self.operators =  (['=', _('is')],
 						  ['<>',_('is not')],
-						  ['', _('between')],
+						  ['*', _('between')],
+						  ['=', _('is Empty')],
 						  ['<>',_('is not Empty')],
-						  ['ilike', _(' exclude range')])
+						  ['**', _('exclude range')])
+
+		self.selected_oper = False
+		self.selected_oper_text = False
+		self.field_left = False
+
+	def _value_get(self):
+		val1 = self._date_get(self.entry1.get_text())
+		val2 = self._date_get(self.entry2.get_text())
+		if self.selected_oper_text == 'between':
+			domain = ('&', (self.field_left, '>=', val1),(self.field_left, '<=', val2))
+			return domain
+		elif self.selected_oper_text == 'exclude range':
+			domain = ('|',(self.field_left, '<', val1),(self.field_left, '>', val2))
+			return domain
+		elif self.selected_oper_text in ['is Empty', 'is not Empty']:
+			val1 = False
+		domain = [(self.field_left, self.selected_oper, val1)]
+		return domain
+
+	def set_visibility(self):
+		if self.selected_oper_text in ['is Empty', 'is not Empty']:
+			self.widget.hide_all()
+		elif self.selected_oper_text in ['is', 'is not']:
+			self.widget.show_all()
+			self.entry1.show()
+			self.entry2.hide()
+			self.label.hide()
+			self.eb1.show()
+			self.eb2.hide()
+		else:
+			self.widget.show_all()
 
 class datetime(datetime):
 	def __init__(self, name, parent, attrs={}, screen=None):
@@ -185,8 +220,40 @@ class datetime(datetime):
 		self.operators =  (['=', _('is')],
 						  ['<>',_('is not')],
 						  ['*', _('between')],
+						  ['=', _('is Empty')],
 						  ['<>',_('is not Empty')],
 						  ['**', _('exclude range')])
+		self.selected_oper = False
+		self.selected_oper_text = False
+		self.field_left = False
+
+	def _value_get(self):
+		val1 = self._date_get(self.entry1.get_text())
+		val2 = self._date_get(self.entry2.get_text())
+		if self.selected_oper_text == 'between':
+			domain = ('&', (self.field_left, '>=', val1),(self.field_left, '<=', val2))
+			return domain
+		elif self.selected_oper_text == 'exclude range':
+			domain = ('|',(self.field_left, '<', val1),(self.field_left, '>', val2))
+			return domain
+		elif self.selected_oper_text in ['is Empty', 'is not Empty']:
+			val1 = False
+		domain = [(self.field_left, self.selected_oper, val1)]
+		return domain
+
+	def set_visibility(self):
+		if self.selected_oper_text in ['is Empty', 'is not Empty']:
+			self.widget.hide_all()
+		elif self.selected_oper_text in ['is', 'is not']:
+			self.widget.show_all()
+			self.entry1.show()
+			self.entry2.hide()
+			self.label.hide()
+			self.eb1.show()
+			self.eb2.hide()
+		else:
+			self.widget.show_all()
+
 
 class reference(reference):
 	def __init__(self, name, parent, attrs={},screen=None):
