@@ -51,7 +51,7 @@ class custom_filter(wid_int.wid_int):
 
         # Processing operator combo
         self.combo_op = win_gl.get_widget('combo_operator')
-        self.op_selection = {}
+        self.op_active = []
 
         for item in (['ilike', _('contains')],
                 ['not ilike', _('doesn\'t contain')],
@@ -62,8 +62,8 @@ class custom_filter(wid_int.wid_int):
                 ['in',_('in')],
                 ['not in',_('not in')],
                 ):
-            self.op_selection[item[1]] = item[0]
             self.combo_op.append_text(item[1])
+            self.op_active.append(item[0])
 
         self.combo_op.set_active(0)
 
@@ -96,7 +96,7 @@ class custom_filter(wid_int.wid_int):
                         }
             field_left = self.field_selection[self.combo_fields.get_active_text()][0]
             field_type = self.field_selection[self.combo_fields.get_active_text()][1]
-            operator = self.op_selection[self.combo_op.get_active_text()]
+            operator = self.op_active[self.combo_op.get_active()]
             right_text =  self.right_text.get_text() or False
 
             if operator in ['not ilike','<>', 'not in'] and field_type != 'boolean':
