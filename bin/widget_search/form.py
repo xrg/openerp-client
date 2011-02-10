@@ -413,12 +413,16 @@ class form(wid_int.wid_int):
         if self.groupby:
             context.update({'group_by':self.groupby})
         if domain:
-            if len(domain)>1 and domain[-2] in ['&','|']:
+            if len(domain)>1:
+                if domain[-2] in ['&','|']:
+                    pos = 2
+                elif domain[-3] in ['&','|']:
+                    pos = 3
                 if len(domain) == 2:
                     domain = [domain[1]]
                 else:
-                    res1 = domain[:-2]
-                    res2 = domain[-1:]
+                    res1 = domain[:-pos]
+                    res2 = domain[-(pos-1):]
                     domain = res1 + res2
         return {'domain':domain, 'context':context}
 
