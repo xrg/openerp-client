@@ -125,7 +125,10 @@ class custom_filter(wid_int.wid_int):
         return True
 
     def sig_activate(self, fct):
-        self.right_text.connect_after('activate', fct)
+        try:
+            self.right_text.connect_after('activate', fct)
+        except:
+            pass
 
     value = property(_value_get, _value_set, None,
      _('The content of the widget or ValueError if not valid'))
@@ -156,6 +159,59 @@ class char(char.char):
         else:
             self.widget.show()
 
+class many2one(wid_int.wid_int):
+    def __init__(self, name, parent, attrs={}, screen=None):
+        wid_int.wid_int.__init__(self, name, parent, attrs, screen)
+        self.operators = (['=', _('is')],
+                          ['<>',_('is not')],
+                          ['=', _('is Empty')],
+                          ['<>',_('is not Empty')],
+                          ['ilike', _('contains')],
+                          ['like', _('like')],
+                          ['not ilike', _('doesn\'t contain')])
+
+        self.widget = gtk.HBox(spacing=0)
+        self.widget.set_property('sensitive', True)
+
+        self.wid_text = gtk.Entry()
+        self.wid_text.set_property('width-chars', 13)
+        self.wid_text.connect('key_press_event', self.sig_key_press)
+        self.widget.pack_start(self.wid_text, expand=True, fill=True)
+
+        self.but_find = gtk.Button()
+        img = gtk.Image()
+        img.set_from_stock('gtk-find', gtk.ICON_SIZE_BUTTON)
+        self.but_find.set_image(img)
+        self.but_find.set_relief(gtk.RELIEF_NONE)
+        self.but_find.connect('clicked', self.sig_find)
+        self.but_find.set_alignment(0.5, 0.5)
+        self.but_find.set_property('can-focus', False)
+        self.but_find.set_tooltip_text(_('Search a resource'))
+        self.but_find.set_size_request(30,30)
+        self.widget.pack_start(self.but_find, padding=2, expand=False, fill=False)
+
+        self.selected_oper = False
+        self.selected_oper_text = False
+        self.field_left = False
+
+    def sig_find(self, widget, event=None, leave=True):
+        return
+
+    def sig_key_press(self, widget, event, *args):
+        return
+
+    def _value_get(self):
+        if self.selected_oper_text in ['is Empty', 'is not Empty']:
+            text = False
+        else:
+            text = self.widget.get_text()
+        return [(self.field_left, self.selected_oper, text)]
+
+    def set_visibility(self):
+        if self.selected_oper_text in ['is Empty', 'is not Empty']:
+            self.widget.hide()
+        else:
+            self.widget.show()
 
 class checkbox(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}, screen=None):
@@ -355,7 +411,7 @@ widgets_type = {
     'char': char,
     'boolean': checkbox,
     'text': char,
-    'many2one':char,
+    'many2one':many2one,
     'one2many':char,
     'many2many':char,
     }
