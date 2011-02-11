@@ -19,143 +19,88 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 import gtk
-from datetime import datetime
-import gettext
-from gtk import glade
-
-import tools
 import wid_int
-import common
+import custom_filter_widgets
 
-DT_FORMAT = '%Y-%m-%d'
-DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 class custom_filter(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}, call=None):
         wid_int.wid_int.__init__(self, name, parent, attrs)
-        win_gl = glade.XML(common.terp_path("openerp.glade"),"hbox_custom_filter",gettext.textdomain())
-        self.widget = win_gl.get_widget('hbox_custom_filter')
 
-        # Processing fields
-        self.combo_fields = win_gl.get_widget('combo_fields')
         self.field_selection = {}
+        self.op_selection = {}
+
+        self.widget = gtk.HBox()
+
+        self.combo_fields =  gtk.combo_box_new_text()
+        self.combo_fields.connect('changed', self.on_fields_combo_changed)
+
+        self.combo_op = gtk.combo_box_new_text()
+        self.combo_op.connect('changed', self.on_operator_combo_changed)
+
+        self.condition_next = gtk.combo_box_new_text()
+        self.condition_next.append_text(_('AND'))
+        self.condition_next.append_text(_('OR'))
+        self.condition_next.set_active(0)
+        self.condition_next.hide()
+
+        self.remove_filter = gtk.Button()
+        img = gtk.Image()
+        img.set_from_stock(gtk.STOCK_REMOVE, gtk.ICON_SIZE_BUTTON)
+        self.remove_filter.add(img)
+        self.remove_filter.set_relief(gtk.RELIEF_NONE)
+        self.remove_filter.connect('clicked', call, self)
+
+        self.right_text = gtk.Entry()
+
+        self.widget.pack_start(self.combo_fields)
+        self.widget.pack_start(self.combo_op)
+        self.widget.pack_start(self.right_text)
+        self.widget.pack_start(self.condition_next)
+        self.widget.pack_start(self.remove_filter)
+        self.widget.show_all()
 
         fields = attrs.get('fields',None)
         for item in fields:
             self.field_selection[item[1]] = (item[0], item[2], item[3])
             self.combo_fields.append_text(item[1])
-
         self.combo_fields.set_active(0)
 
-        # Processing operator combo
-        self.combo_op = win_gl.get_widget('combo_operator')
+    def on_operator_combo_changed(self, combo):
+        self.widget_obj.selected_oper_text = self.combo_op.get_active_text()
+        self.widget_obj.set_visibility()
+        return True
+
+    def on_fields_combo_changed(self, combo):
+        field_string = self.combo_fields.get_active_text()
+        field_dbname, type, default_val = self.field_selection[field_string]
+        if self.right_text:
+            self.widget.remove(self.right_text)
+        self.widget_obj = custom_filter_widgets.widgets_type[type](field_string, self.parent, default_val or {})
+        self.right_text = self.widget_obj.widget
         self.op_selection = {}
-
-        for item in (['ilike', _('contains')],
-                ['not ilike', _('doesn\'t contain')],
-                ['=', _('is equal to')],
-                ['<>',_('is not equal to')],
-                ['>',_('greater than')],
-                ['<',_('less than')],
-                ['in',_('in')],
-                ['not in',_('not in')],
-                ):
-            self.op_selection[item[1]] = item[0]
-            self.combo_op.append_text(item[1])
-
+        self.combo_op.get_model().clear()
+        for operator in self.widget_obj.operators:
+            self.op_selection[operator[1]] = operator[0]
+            self.combo_op.append_text(operator[1])
+        self.widget.pack_start(self.right_text)
+        self.widget.reorder_child(self.right_text, 2)
+        self.widget.show_all()
         self.combo_op.set_active(0)
-
-        # Processing text value
-        self.right_text = win_gl.get_widget('right_compare')
-        # Processing Custom conditions
-        self.condition_next = win_gl.get_widget('cond_custom')
-        self.condition_next.set_active(0)
-
         self.condition_next.hide()
-        # Processing Removal of panel
-        self.remove_filter = win_gl.get_widget('remove_custom')
-        self.remove_filter.set_relief(gtk.RELIEF_NONE)
-
-        try:
-            self.right_text.set_tooltip_markup(tools.to_xml(_("Enter Values separated by ',' if operator 'in' or 'not in' is chosen.\nFor Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d %H:%M:%S' formats respectively.")))
-        except:
-            pass
-
-        self.remove_filter.connect('clicked',call,self)
+        return True
 
     def _value_get(self):
-        try:
-            false_value_domain = []
-            type_cast = {'integer':lambda x:int(x),
-                         'float':lambda x:float(x),
-                         'boolean':lambda x:bool(eval(x)),
-                         'date':lambda x:(datetime.strptime(x, DT_FORMAT)).strftime(DT_FORMAT),
-                         'datetime':lambda x:(datetime.strptime(x, DHM_FORMAT)).strftime(DHM_FORMAT)
-                        }
-            field_left = self.field_selection[self.combo_fields.get_active_text()][0]
-            field_type = self.field_selection[self.combo_fields.get_active_text()][1]
-            operator = self.op_selection[self.combo_op.get_active_text()]
-            right_text =  self.right_text.get_text() or False
-
-            if operator in ['not ilike','<>', 'not in'] and field_type != 'boolean':
-                false_value_domain = ['|', (field_left,'=', False)]
-            try:
-                cast_type = True
-                if field_type in type_cast:
-                    if field_type in ('date','datetime'):
-                        if right_text:
-                            if field_type == 'datetime':
-                                right_text = len(right_text)==10 and (right_text + ' 00:00:00') or right_text
-                        else:
-                            cast_type = False
-                    if cast_type:
-                        right_text = type_cast[field_type](right_text)
-                self.right_text.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("white"))
-                self.right_text.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("white"))
-
-            except Exception,e:
-                right_text = ''
-                self.right_text.set_text('Invalid Value')
-                self.right_text.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("#ff6969"))
-                self.right_text.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ff6969"))
-                return {}
-            if operator in ['ilike','not ilike']:
-                if field_type in ['integer','float','date','datetime','boolean']:
-                    operator = (operator == 'ilike') and '=' or '!='
-                else:
-                    right_text = '%' + right_text + '%'
-
-            if operator in ['<','>'] and field_type not in ['integer','float','date','datetime','boolean']:
-                    operator = '='
-
-            if operator in ['in','not in']:
-                right_text = right_text.split(',')
-
-            # Cannot use the active_text as it will be translated!
-            # So as a workaround we use the index: 0 == AND, 1 == OR
-            condition = self.condition_next.get_active() == 0 and '&' or '|'
-
-            if field_type == 'selection' and right_text:
-                right_text_se =  self.right_text.get_text()
-                keys = []
-                for selection in self.field_selection[self.combo_fields.get_active_text()][2]:
-                    if selection[1].lower().find(right_text_se.lower()) != -1:
-                        keys.append(selection[0])
-                right_text = keys
-                if operator in ['ilike','=','in']:
-                    operator = 'in'
-                else:
-                    operator = 'not in'
-
-            domain = [condition, (field_left, operator, right_text)]
-            if false_value_domain:
-                domain = false_value_domain + domain
-            return {'domain':domain}
-
-        except Exception,e:
-            return {}
+        self.widget_obj.field_left  = self.field_selection[self.combo_fields.get_active_text()][0]
+        self.widget_obj.selected_oper_text = self.combo_op.get_active_text()
+        self.widget_obj.selected_oper = self.op_selection[self.widget_obj.selected_oper_text]
+        wid_domain = self.widget_obj._value_get()
+        condition = self.condition_next.get_active() == 0 and '&' or '|'
+        domain = [condition]
+        for dom in wid_domain:
+            domain.append(dom)
+        return {'domain':domain}
 
     def sig_exec(self, widget):
         pass
@@ -171,7 +116,10 @@ class custom_filter(wid_int.wid_int):
         return True
 
     def sig_activate(self, fct):
-        self.right_text.connect_after('activate', fct)
+        try:
+            self.right_text.connect_after('activate', fct)
+        except:
+            pass
 
     value = property(_value_get, _value_set, None,
      _('The content of the widget or ValueError if not valid'))

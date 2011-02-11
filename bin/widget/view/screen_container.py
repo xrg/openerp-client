@@ -26,7 +26,6 @@ import common
 from rpc import RPCProxy
 import rpc
 
-
 class screen_container(object):
     def __init__(self, win_search=False):
         self.old_widget = False
@@ -48,6 +47,7 @@ class screen_container(object):
         self.domain = []
         self.context = {}
         self.handler_id = None
+        self.custom_panels = []
 
     def __del__(self):
         for (ref, value) in self.__dict__.items():
@@ -100,7 +100,22 @@ class screen_container(object):
         self.action_list.foreach(fnct, filter_name)
         return str(self.domain),str(self.context)
 
-    def add_filter(self, widget, fnct, clear_fnct, next_fnct, prev_fnct, execute_action=None, add_custom=None, model=None, limit=100):
+    def add_custom_filter(self, button, screen):
+        fields_list = []
+        for k,v in screen.search_view['fields'].items():
+            if v['type'] in ('many2one','text','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
+                selection = v.get('selection', False)
+                fields_list.append([k,v['string'], v['type'], selection])
+        if fields_list:
+            fields_list.sort(lambda x, y: cmp(x[1], y[1]))
+        panel = screen.filter_widget.add_custom(screen.filter_widget, screen.filter_widget.widget, fields_list)
+        self.custom_panels.append(panel)
+
+        if len(self.custom_panels)>1:
+            self.custom_panels[-1].condition_next.hide()
+            self.custom_panels[-2].condition_next.show()
+
+    def add_filter(self, screen):
         self.filter_vbox = gtk.VBox(spacing=1)
         self.filter_vbox.set_border_width(1)
         if self.help and not self.win_search:
@@ -108,14 +123,14 @@ class screen_container(object):
             self.help_frame = action_tips.help_frame
             if self.help_frame:
                 self.filter_vbox.pack_start(self.help_frame, expand=False, fill=False, padding=3)
-        self.filter_vbox.pack_start(widget, expand=True, fill=True)
+        self.filter_vbox.pack_start(screen.filter_widget.widget, expand=True, fill=True)
 
         hs = gtk.HBox(homogeneous=False, spacing=0)
         hb1 = gtk.HButtonBox()
         hb1.set_layout(gtk.BUTTONBOX_START)
 
         button_clear = gtk.Button(stock=gtk.STOCK_CLEAR)
-        button_clear.connect('clicked', clear_fnct)
+        button_clear.connect('clicked', screen.search_clear)
         if self.win_search:
             hb3 = hb1
             hs.pack_start(hb3, expand=False, fill=False)
@@ -130,7 +145,7 @@ class screen_container(object):
 
     #Find Clear Buttons
             self.button = gtk.Button(stock=gtk.STOCK_FIND)
-            self.button.connect('clicked', fnct)
+            self.button.connect('clicked', screen.search_filter)
             self.button.set_property('can_default', True)
             hb1.pack_start(self.button, expand=False, fill=False)
             hb1.pack_start(button_clear, expand=False, fill=False)
@@ -143,9 +158,9 @@ class screen_container(object):
             self.action_combo.pack_start(cell, True)
             self.action_combo.add_attribute(cell, 'text', 2)
 
-            self.fill_filter_combo(model)
+            self.fill_filter_combo(screen.name)
             self.action_combo.set_active(0)
-            self.handler_id = self.action_combo.connect('changed', execute_action)
+            self.handler_id = self.action_combo.connect('changed', screen.execute_action)
 
     #Custom Filter Button
             img2 = gtk.Image()
@@ -154,7 +169,7 @@ class screen_container(object):
             self.button_dynamic.set_image(img2)
             self.button_dynamic.set_relief(gtk.RELIEF_NONE)
             self.button_dynamic.set_alignment(0.3,0.3)
-            self.button_dynamic.connect('clicked', add_custom)
+            self.button_dynamic.connect('clicked', self.add_custom_filter, screen)
 
             hb2.pack_start(gtk.Label(''), expand=True, fill=True)
             hb2.pack_start(self.action_combo, expand=False, fill=False)
@@ -170,7 +185,7 @@ class screen_container(object):
 
         self.selection = []
         hb3.pack_start(self.combo, expand=False, fill=False)
-        self.fill_limit_combo(limit)
+        self.fill_limit_combo(screen.limit)
 
 #Back Forward Buttons
 
@@ -179,14 +194,14 @@ class screen_container(object):
         icon.set_from_stock('gtk-go-back', gtk.ICON_SIZE_SMALL_TOOLBAR)
         self.but_previous.set_image(icon)
         self.but_previous.set_relief(gtk.RELIEF_NONE)
-        self.but_previous.connect('clicked', prev_fnct)
+        self.but_previous.connect('clicked', screen.search_offset_previous)
 
         icon2 = gtk.Image()
         icon2.set_from_stock('gtk-go-forward', gtk.ICON_SIZE_SMALL_TOOLBAR)
         self.but_next = gtk.Button()
         self.but_next.set_image(icon2)
         self.but_next.set_relief(gtk.RELIEF_NONE)
-        self.but_next.connect('clicked', next_fnct)
+        self.but_next.connect('clicked', screen.search_offset_next)
         next_prev_box = hb3
         if self.win_search:
             next_prev_box = gtk.HBox(homogeneous=False, spacing=0)
