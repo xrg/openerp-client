@@ -2,20 +2,19 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -29,11 +28,13 @@ from selection import selection
 import char
 import checkbox
 from reference import reference
+import rpc
+
 
 
 class char(char.char):
-    def __init__(self, name, parent, attrs={}, screen=None):
-        super(char,self).__init__(name, parent, attrs, screen)
+    def __init__(self, name, parent, attrs={}):
+        super(char,self).__init__(name, parent)
         self.operators = (['=', _('is')],
                           ['<>',_('is not')],
                           ['=', _('is Empty')],
@@ -58,8 +59,9 @@ class char(char.char):
             self.widget.show()
 
 class many2one(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}, screen=None):
-        wid_int.wid_int.__init__(self, name, parent, attrs, screen)
+    def __init__(self, name, parent, attrs={}):
+        wid_int.wid_int.__init__(self, name, parent)
+        self.attrs = attrs
         self.operators = (['=', _('is')],
                           ['<>',_('is not')],
                           ['=', _('is Empty')],
@@ -72,8 +74,9 @@ class many2one(wid_int.wid_int):
         self.widget.set_property('sensitive', True)
 
         self.wid_text = gtk.Entry()
-        self.wid_text.set_property('width-chars', 13)
+        self.wid_text.set_property('width-chars', 20)
         self.wid_text.connect('key_press_event', self.sig_key_press)
+        self.wid_text.connect_after('activate', self.sig_activate)
         self.widget.pack_start(self.wid_text, expand=True, fill=True)
 
         self.but_find = gtk.Button()
@@ -91,12 +94,36 @@ class many2one(wid_int.wid_int):
         self.selected_oper = False
         self.selected_oper_text = False
         self.field_left = False
+        self.enter_pressed = False
+
+    def sig_activate(self, widget, event=None, leave=False):
+        event = self.enter_pressed and True or event
+        return self.sig_find(widget, event, leave=True)
 
     def sig_find(self, widget, event=None, leave=True):
+        from modules.gui.window.win_search import win_search
+        name_search = self.wid_text.get_text() or ''
+        ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', name_search, [], 'ilike', rpc.session.context)
+        win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=rpc.session.context, parent=self.parent)
+        win.glade.get_widget('newbutton').hide()
+        ids = win.go()
+        if ids:
+            name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
+            self.wid_text.set_text(name[1])
         return
 
     def sig_key_press(self, widget, event, *args):
-        return
+        self.enter_pressed = False
+        if event.keyval==gtk.keysyms.F2:
+            self.sig_activate(widget, event)
+        elif event.keyval  == gtk.keysyms.Tab:
+            if not self.wid_text.get_text():
+                return False
+            return not self.sig_activate(widget, event, leave=True)
+        elif event.keyval in (gtk.keysyms.KP_Enter,gtk.keysyms.Return):
+            if self.wid_text.get_text():
+                self.enter_pressed = True
+        return False
 
     def _value_get(self):
         if self.selected_oper_text in ['is Empty', 'is not Empty']:
@@ -112,8 +139,8 @@ class many2one(wid_int.wid_int):
             self.widget.show()
 
 class checkbox(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}, screen=None):
-        wid_int.wid_int.__init__(self, name, parent, attrs, screen)
+    def __init__(self, name, parent, attrs={}):
+        wid_int.wid_int.__init__(self, name, parent)
         self.widget = gtk.CheckButton()
         self.widget.set_active(False)
         self.operators = (['=', _('Equals')],)
@@ -127,8 +154,8 @@ class checkbox(wid_int.wid_int):
         pass
 
 class calendar(calendar):
-    def __init__(self, name, parent, attrs={}, screen=None):
-        super(calendar,self).__init__(name, parent, attrs, screen)
+    def __init__(self, name, parent, attrs={}):
+        super(calendar,self).__init__(name, parent)
         self.operators =  (['=', _('is')],
                           ['<>',_('is not')],
                           ['*', _('between')],
@@ -168,8 +195,8 @@ class calendar(calendar):
             self.widget.show_all()
 
 class datetime(datetime):
-    def __init__(self, name, parent, attrs={}, screen=None):
-        super(datetime,self).__init__(name, parent, attrs, screen)
+    def __init__(self, name, parent, attrs={}):
+        super(datetime,self).__init__(name, parent)
         self.operators =  (['=', _('is')],
                           ['<>',_('is not')],
                           ['*', _('between')],
@@ -209,11 +236,9 @@ class datetime(datetime):
 
 
 class selection(selection):
-    def __init__(self, name, parent, attrs={}, model=None, screen=None):
-        new_attrs = {}
-        if attrs:
-            new_attrs.update({'selection':attrs})
-        super(selection,self).__init__(name, parent, new_attrs, screen)
+    def __init__(self, name, parent, attrs={}):
+        selection_dict = {'selection':attrs.get('selection', {})}
+        super(selection,self).__init__(name, parent, selection_dict)
         self.operators =  (['=', _('is')],
                           ['<>',_('is not')])
         self.selected_oper = False
@@ -229,8 +254,8 @@ class selection(selection):
 
 #
 class spinbutton(spinbutton):
-    def __init__(self, name, parent, attrs={},screen=None):
-        super(spinbutton,self).__init__(name, parent, attrs, screen)
+    def __init__(self, name, parent, attrs={}):
+        super(spinbutton,self).__init__(name, parent)
         self.operators = (['=', _('is equal to')],
                           ['<>',_('is not equal to')],
                           ['>',_('greater than')],
@@ -265,8 +290,8 @@ class spinbutton(spinbutton):
             self.label.hide()
 
 class spinint(spinint):
-    def __init__(self, name, parent, attrs={},screen=None):
-        super(spinint,self).__init__(name, parent, attrs, screen)
+    def __init__(self, name, parent, attrs={}):
+        super(spinint,self).__init__(name, parent)
         self.operators = (['=', _('is equal to')],
                           ['<>',_('is not equal to')],
                           ['>',_('greater than')],
@@ -309,7 +334,7 @@ widgets_type = {
     'char': char,
     'boolean': checkbox,
     'text': char,
-    'many2one':char,
+    'many2one':many2one,
     'one2many':char,
     'many2many':char,
     }

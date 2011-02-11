@@ -25,14 +25,16 @@ import custom_filter_widgets
 
 
 class custom_filter(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}, call=None):
-        wid_int.wid_int.__init__(self, name, parent, attrs)
+    def __init__(self, name, parent, fields={}, callback=None):
+        wid_int.wid_int.__init__(self, name, parent)
+
+        self.fields = fields
 
         self.field_selection = {}
         self.op_selection = {}
 
         self.widget = gtk.HBox()
-
+        # fields_list combo
         self.combo_fields =  gtk.combo_box_new_text()
         self.combo_fields.connect('changed', self.on_fields_combo_changed)
 
@@ -50,7 +52,7 @@ class custom_filter(wid_int.wid_int):
         img.set_from_stock(gtk.STOCK_REMOVE, gtk.ICON_SIZE_BUTTON)
         self.remove_filter.add(img)
         self.remove_filter.set_relief(gtk.RELIEF_NONE)
-        self.remove_filter.connect('clicked', call, self)
+        self.remove_filter.connect('clicked', callback, self)
 
         self.right_text = gtk.Entry()
 
@@ -60,10 +62,12 @@ class custom_filter(wid_int.wid_int):
         self.widget.pack_start(self.condition_next)
         self.widget.pack_start(self.remove_filter)
         self.widget.show_all()
-
-        fields = attrs.get('fields',None)
-        for item in fields:
-            self.field_selection[item[1]] = (item[0], item[2], item[3])
+        sorted_names = []
+        for key, attr in self.fields.iteritems():
+            sorted_names.append([key,attr['string'], attr['type']])
+        sorted_names.sort(lambda x, y:cmp(x[1], y[1]))
+        for item in sorted_names:
+            self.field_selection[item[1]] = (item[0], item[2])
             self.combo_fields.append_text(item[1])
         self.combo_fields.set_active(0)
 
@@ -74,10 +78,10 @@ class custom_filter(wid_int.wid_int):
 
     def on_fields_combo_changed(self, combo):
         field_string = self.combo_fields.get_active_text()
-        field_dbname, type, default_val = self.field_selection[field_string]
+        field_dbname, type = self.field_selection[field_string]
         if self.right_text:
             self.widget.remove(self.right_text)
-        self.widget_obj = custom_filter_widgets.widgets_type[type](field_string, self.parent, default_val or {})
+        self.widget_obj = custom_filter_widgets.widgets_type[type](field_string, self.parent, self.fields.get(field_dbname, {}))
         self.right_text = self.widget_obj.widget
         self.op_selection = {}
         self.combo_op.get_model().clear()

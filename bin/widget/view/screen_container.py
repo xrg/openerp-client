@@ -101,16 +101,9 @@ class screen_container(object):
         return str(self.domain),str(self.context)
 
     def add_custom_filter(self, button, screen):
-        fields_list = []
-        for k,v in screen.search_view['fields'].items():
-            if v['type'] in ('many2one','text','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
-                selection = v.get('selection', False)
-                fields_list.append([k,v['string'], v['type'], selection])
-        if fields_list:
-            fields_list.sort(lambda x, y: cmp(x[1], y[1]))
-        panel = screen.filter_widget.add_custom(screen.filter_widget, screen.filter_widget.widget, fields_list)
+        fields = screen.search_view.get('fields', {})
+        panel = screen.filter_widget.add_custom(screen.filter_widget, screen.filter_widget.widget, fields)
         self.custom_panels.append(panel)
-
         if len(self.custom_panels)>1:
             self.custom_panels[-1].condition_next.hide()
             self.custom_panels[-2].condition_next.show()
