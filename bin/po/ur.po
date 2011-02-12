@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-02-05 16:48+0000\n"
+"PO-Revision-Date: 2011-02-11 17:44+0000\n"
 "Last-Translator: Aamir Riaz <Unknown>\n"
 "Language-Team: Urdu <ur@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-06 04:53+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-12 05:00+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
@@ -592,43 +592,47 @@ msgstr "نام"
 
 #: bin/modules/gui/window/__init__.py:31
 msgid "Unknown Window"
-msgstr ""
+msgstr "نامعلوم دریچہ"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "ترجیحات"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"انٹرفیس کی طےشُدھ زبان تبدیل ھوچُکی ھے، انٹرفیسں کواپنی زبان میں "
+"لانےکیلیئےکلائنٹ کودوبارھ شروع کرنانھیں بُھولنا"
 
 #: bin/modules/gui/window/win_preference.py:87
 msgid "Default language modified !"
-msgstr ""
+msgstr "طےشُدھ زبان تبدیل ھوچُکی ھے !"
 
 #: bin/modules/gui/window/view_tree/parse.py:35
 msgid "Tree"
-msgstr ""
+msgstr "درخت"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:48
 msgid "Description"
-msgstr ""
+msgstr "وضاحت"
 
 #: bin/modules/gui/window/tree.py:204 bin/modules/gui/window/tree.py:260
 msgid "No resource selected!"
-msgstr ""
+msgstr "کوئی وسائل منتخب نھیں!"
 
 #: bin/modules/gui/window/tree.py:218
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
 msgstr ""
+"کیا آپ واقعی چاہتے ہیں\n"
+"اس ریکارڈ کو خارج کرنا؟"
 
 #: bin/modules/gui/window/tree.py:223
 msgid "Error removing resource!"
-msgstr ""
+msgstr "وسائل کو ختم کرنےمیں خرابی!"
 
 #: bin/modules/gui/window/tree.py:234
 msgid "Unable to chroot: no tree resource selected"
@@ -643,39 +647,41 @@ msgid ""
 "Operation failed !\n"
 "I/O error"
 msgstr ""
+"آپریشن ناکام!\n"
+"ان پٹ / آؤٹ پٹ نقص"
 
 #: bin/modules/gui/window/win_export.py:79
 #: bin/modules/gui/window/win_export.py:105
 msgid "Error Opening Excel !"
-msgstr ""
+msgstr "ایکسل کھولنےمیں خرابی!"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "اس برآمد کا نام کیا ہے؟"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
-msgstr ""
+msgstr "برآمد کی خرابی!"
 
 #: bin/modules/gui/window/win_search.py:49
 #: bin/widget/view/diagram_gtk/xdot.py:1772
 msgid "OpenERP - Link"
-msgstr ""
+msgstr "OpenERP -- لنک"
 
 #: bin/modules/gui/window/win_search.py:126
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr ""
+msgstr "OpenERP -- %s :تلاش"
 
 #: bin/modules/gui/window/win_search.py:127
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr ""
+msgstr "OpenERP -- %s (%%d result(s)) :تلاش"
 
 #: bin/options.py:109
 #, python-format
 msgid "OpenERP Client %s"
-msgstr ""
+msgstr "OpenERP کلائنٹ %s"
 
 #: bin/options.py:110
 msgid "specify alternate config file"
@@ -728,34 +734,41 @@ msgstr ""
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "مشورے"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
-msgstr ""
+msgstr "OpenERP کمپیوٹنگ"
 
 #: bin/common/common.py:152
 msgid "Operation in progress"
-msgstr ""
+msgstr "آپریشن جاری ھے"
 
 #: bin/common/common.py:156
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
+"براہ مہربانی انتظار کریں،\n"
+"اس آپریشن میں کچھ وقت لگ سکتا ہے..."
 
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "%s اس بات کا یقین کریں کہ فائل درست ہے"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
 msgstr ""
+" مندرجہ ذیل نقص کی اطلاع :\n"
+"لائن بریکس یہاں ہیں. ہر ایک کوئ ایک لائن کو توڑنے کی نمائندگی کرتا ہے. ترجمہ "
+"میں مساوی حیثیت میں ایک نئی سطر کا آغاز کریں.\n"
+"آگے/پیچھےخالی جگھیں ہیں. ہر ایک کوئ ایک خالی جگہ  کی نمائندگی کرتا ہے. ترجمہ "
+"میں مساوی حیثیت میں ایک خالی جگہ داخل کریں.\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
-msgstr ""
+msgstr "تبصرے"
 
 #: bin/common/common.py:367
 msgid "Support request sent !"
@@ -820,6 +833,8 @@ msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
+"آپکامسئلہ معیاری ٹیم کو بھیجدیاگیاھے۔\n"
+"مسئلےکاتجزیہ کرنےکےبعدھم آپ سےدوبارھ رابطہ کریں گے۔"
 
 #: bin/common/common.py:491
 #, python-format
@@ -876,11 +891,11 @@ msgstr "اوپن ای آر پی بند ھورھی ھے، KeyboardInterrupt"
 #: bin/widget_search/custom_filter.py:176 bin/widget_search/checkbox.py:67
 #: bin/widget/view/form_gtk/button.py:47
 msgid "The content of the widget or ValueError if not valid"
-msgstr ""
+msgstr "ویجیٹ یا ValueError کا مواد اگر صحيح نھیں"
 
 #: bin/widget_search/form.py:445
 msgid "The content of the form or exception if not valid"
-msgstr ""
+msgstr "فارم یا رعایت کا مواد اگر صحيح نھیں"
 
 #: bin/widget_search/date_widget.py:61
 #: bin/widget/view/form_gtk/date_widget.py:63
@@ -898,7 +913,7 @@ msgstr ""
 
 #: bin/widget_search/wid_int.py:52
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "ویجٹ یا رعایت کا مواد اگر صحيح نھیں"
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
@@ -913,7 +928,7 @@ msgstr "شروع کرنے کی تاریخ"
 #: bin/widget/view/form_gtk/calendar.py:58
 #: bin/widget/view/form_gtk/calendar.py:182
 msgid "Open the calendar widget"
-msgstr ""
+msgstr "کیلینڈرویجٹ کھولیں"
 
 #: bin/widget_search/calendar.py:70 bin/widget_search/calendar.py:197
 msgid "End date"
@@ -923,7 +938,7 @@ msgstr "آخری تاریخ"
 #: bin/widget/view/form_gtk/calendar.py:135
 #: bin/widget/view/form_gtk/calendar.py:246
 msgid "OpenERP - Date selection"
-msgstr ""
+msgstr "تاریخ کا انتخاب - OpenERP"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
@@ -966,67 +981,69 @@ msgstr ""
 
 #: bin/widget_search/checkbox.py:35 bin/widget_search/checkbox.py:54
 msgid "Yes"
-msgstr ""
+msgstr "ھاں"
 
 #: bin/widget_search/checkbox.py:36
 msgid "No"
-msgstr ""
+msgstr "نھیں"
 
 #: bin/widget/view/form.py:136 bin/widget/view/form.py:199
 msgid "You must save this record to use the relate button !"
-msgstr ""
+msgstr "اس ریکارڈکومحفوظ کرنےکیلیےآپکولازمی ریلیٹ بٹن استعمال کرناھوگا۔"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "عمل کی وضاحت نھیں ھے۔"
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
-msgstr ""
+msgstr "ریلیٹ بٹن استعمال کرنےکیلیئےآپکولازمی ایک ریکارڈمنتخب کرنا ھوگا۔"
 
 #: bin/widget/view/form.py:236 bin/widget/view/form_gtk/parser.py:647
 #: bin/widget/view/form_gtk/parser.py:767
 #: bin/widget/view/form_gtk/parser.py:824
 msgid "No other language available!"
-msgstr ""
+msgstr "کوئ دوسری زبان دستیاب نھیں۔"
 
 #: bin/widget/view/form.py:243 bin/widget/view/form_gtk/parser.py:663
 #: bin/widget/view/form_gtk/parser.py:773
 #: bin/widget/view/form_gtk/parser.py:830
 msgid "Add Translation"
-msgstr ""
+msgstr "ترجُمہ شامل کریں"
 
 #: bin/widget/view/form.py:291 bin/widget/view/form_gtk/parser.py:886
 msgid "Translate label"
-msgstr ""
+msgstr "ترجُمہ کریں لیبل کا"
 
 #: bin/widget/view/calendar_gtk/parser.py:356 bin/openerp.glade:8106
 msgid "Week"
-msgstr ""
+msgstr "ھفتہ"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
-msgstr ""
+msgstr "کیلینڈردیکھنےکی خرابی۔"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "You must intall the library python-hippocanvas to use calendars."
 msgstr ""
+"کیلینڈراستعمال کرنےکیلیئےآپکولازمی python-hippocanvas لائبریری انسٹال کرنی "
+"ھوگی۔"
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--اعمال--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "ایک شارٹ کٹ کے طور پر محفوظ کریں"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "ایک فلٹر کے طور پر محفوظ کریں"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "فلٹر کاانتظام کریں"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1038,16 +1055,16 @@ msgstr ""
 #: bin/widget/view/tree_gtk/editabletree.py:139
 #, python-format
 msgid "Shortcut: %s"
-msgstr ""
+msgstr "شارٹ کٹ: %s"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 msgid "F1 New - F2 Open/Search"
-msgstr ""
+msgstr "F1 نیا - F2 کھولیں/تلاش کریں"
 
 #: bin/widget/view/tree_gtk/editabletree.py:214
 #, python-format
 msgid "Warning; field %s is required!"
-msgstr ""
+msgstr "انتباھ: فیلڈ %s کی ضرورت ھے۔"
 
 #: bin/widget/view/tree_gtk/date_renderer.py:197
 msgid ""
@@ -1085,19 +1102,19 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "تصویرکوسُکیڑیں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "تصویرکودریچے میں فٹ کریں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "تصویرکواسکےنارمل سائزمیں دکھائیں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "تصویرکوپرنٹ کریں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
@@ -1107,52 +1124,52 @@ msgstr ""
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "بندموجودھ %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "ترمیم موجودھ %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
-msgstr ""
+msgstr " - ڈاٹ ناظر"
 
 #: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1250
 msgid "Create a new resource"
-msgstr ""
+msgstr "ایک نیا وسائل تخلیق کریں"
 
 #: bin/widget/view/form_gtk/reference.py:89
 msgid "Search / Open a resource"
-msgstr ""
+msgstr "تلاش / ایک وسائل کھولیں"
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
-msgstr ""
+msgstr "بٹن کیلیئےغلط شبیھہ۔"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "فیلڈ"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "آبجیکٹ"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "ترجمہ شامل کرنے سے پہلے متعلقہ فیلڈ کے لئے کچھ متن درج کریں۔"
 
 #: bin/widget/view/form_gtk/parser.py:637
 msgid "You need to save resource before adding translations!"
-msgstr ""
+msgstr "ترجمہ شامل کرنے سے پہلے وسائل کو محفوظ کرنےکی ضرورت ھے۔"
 
 #: bin/widget/view/form_gtk/parser.py:891
 msgid "Translate view"
-msgstr ""
+msgstr "ترجمہ نظارھ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "منسوخ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
@@ -1160,7 +1177,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "محفوظ کریں اور بند کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
