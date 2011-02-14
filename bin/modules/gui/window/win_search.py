@@ -190,6 +190,9 @@ class win_search(object):
             self.screen.update_scroll()
         end = False
         while not end:
+            sel = self.view.widget_tree.get_selection()
+            if sel.get_mode() == gtk.SELECTION_MULTIPLE:
+                sel.unselect_all()
             button = self.win.run()
             if button == gtk.RESPONSE_OK:
                 res = self.sel_ids_get() or self.ids
