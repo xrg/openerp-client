@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-02-11 17:44+0000\n"
+"PO-Revision-Date: 2011-02-13 16:56+0000\n"
 "Last-Translator: Aamir Riaz <Unknown>\n"
 "Language-Team: Urdu <ur@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-12 05:00+0000\n"
+"X-Launchpad-Export-Date: 2011-02-14 04:51+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: bin/plugins/__init__.py:27
@@ -1082,15 +1082,15 @@ msgstr ""
 
 #: bin/widget/view/graph_gtk/parser.py:64
 msgid "Can not generate graph !"
-msgstr ""
+msgstr "گراف تخلیق نھیں ھوسکتا۔"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1422
 msgid "Dot Viewer"
-msgstr ""
+msgstr "ڈاٹ کاناظر"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
-msgstr ""
+msgstr "نئ نوڈ کا اضافہ کریں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
@@ -1098,7 +1098,7 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "تصویرکوکُشادھ کریں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
@@ -1119,7 +1119,7 @@ msgstr "تصویرکوپرنٹ کریں"
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "بندکریں موجودھ %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
@@ -1173,7 +1173,7 @@ msgstr "منسوخ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "محفوظ کریں اور بندکریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
@@ -1182,100 +1182,100 @@ msgstr "محفوظ کریں اور بند کریں"
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
 msgid "Set to default value"
-msgstr ""
+msgstr "طےشُدھ قیمت لگائیں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:178
 msgid "Set Default"
-msgstr ""
+msgstr "طےشُدھ لگائیں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:209
 msgid "Create a new entry"
-msgstr ""
+msgstr "ایک نیا اندراج کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:213
 msgid "Edit this entry"
-msgstr ""
+msgstr "اس اندراج کی ترمیم کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:217
 msgid "Remove this entry"
-msgstr ""
+msgstr "اس اندراج کو خارج کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "گُزشتہ صفحہ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr ""
+msgstr "گُزشتہ ریکارڈ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "اگلا ریکارڈ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "اگلا صفحہ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:245
 msgid "Switch"
-msgstr ""
+msgstr "تبدیل کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:251
 #: bin/widget/view/form_gtk/many2many.py:106
 msgid "Choose Limit"
-msgstr ""
+msgstr "حدکاانتخاب کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:292
 msgid "You have to select a resource !"
-msgstr ""
+msgstr "آپ کو ایک وسائل کا انتخاب کرنا ہے۔"
 
 #: bin/widget/view/form_gtk/image.py:73
 msgid "Set Image"
-msgstr ""
+msgstr "تصویرلگائیں"
 
 #: bin/widget/view/form_gtk/image.py:82 bin/widget/view/form_gtk/binary.py:84
 msgid "Save As"
-msgstr ""
+msgstr "محفوظ کریں بطور"
 
 #: bin/widget/view/form_gtk/image.py:93 bin/widget/view/form_gtk/binary.py:88
 msgid "Clear"
-msgstr ""
+msgstr "صاف"
 
 #: bin/widget/view/form_gtk/image.py:104
 msgid "All files"
-msgstr ""
+msgstr "تمام فائلیں"
 
 #: bin/widget/view/form_gtk/image.py:108
 msgid "Images"
-msgstr ""
+msgstr "تصاویر"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "کوئ تصویرنھیں ھےاسطرح محفوظ کرنےکیلیئے"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "انتباہ"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
-msgstr ""
+msgstr "اس وسائل کوکھولیں"
 
 #: bin/widget/view/form_gtk/many2one.py:163
 msgid "Search a resource"
-msgstr ""
+msgstr "ایک وسائل کوتلاش کریں"
 
 #: bin/widget/view/form_gtk/many2one.py:174 bin/openerp.glade:1404
 msgid "Action"
-msgstr ""
+msgstr "عمل"
 
 #: bin/widget/view/form_gtk/many2one.py:175
 msgid "Report"
-msgstr ""
+msgstr "رپورٹ"
 
 #: bin/widget/view/form_gtk/many2one.py:388 bin/widget/view/list.py:618
 msgid "You must select a record to use the relation !"
@@ -1374,7 +1374,7 @@ msgstr ""
 
 #: bin/rpc.py:187
 msgid "Connection Error"
-msgstr ""
+msgstr "رابطےکی خرابی"
 
 #: bin/openerp.glade:6
 msgid "OpenERP - Login"
@@ -1390,11 +1390,11 @@ msgstr ""
 
 #: bin/openerp.glade:146 bin/openerp.glade:6436 bin/openerp.glade:6747
 msgid "Password:"
-msgstr ""
+msgstr "پاسورڈ:"
 
 #: bin/openerp.glade:265
 msgid "_File"
-msgstr ""
+msgstr "_فائل"
 
 #: bin/openerp.glade:272
 msgid "_Connect..."
@@ -1442,7 +1442,7 @@ msgstr ""
 
 #: bin/openerp.glade:468
 msgid "_Preferences"
-msgstr ""
+msgstr "_ترجیحات"
 
 #: bin/openerp.glade:488
 msgid "_Send a request"
@@ -1478,11 +1478,11 @@ msgstr ""
 
 #: bin/openerp.glade:593
 msgid "_Delete"
-msgstr ""
+msgstr "_حذف"
 
 #: bin/openerp.glade:614
 msgid "Find"
-msgstr ""
+msgstr "تلاش کریں"
 
 #: bin/openerp.glade:630
 msgid "Ne_xt"
@@ -1506,7 +1506,7 @@ msgstr ""
 
 #: bin/openerp.glade:715 bin/openerp.glade:5024
 msgid "Close Tab"
-msgstr ""
+msgstr "ٹیب بند کریں"
 
 #: bin/openerp.glade:731
 msgid "Previous Tab"
@@ -1526,7 +1526,7 @@ msgstr ""
 
 #: bin/openerp.glade:776
 msgid "_Open"
-msgstr ""
+msgstr "_کھولیں"
 
 #: bin/openerp.glade:791
 msgid "Reloa_d / Undo"
@@ -1590,19 +1590,19 @@ msgstr ""
 
 #: bin/openerp.glade:966
 msgid "Top"
-msgstr ""
+msgstr "اُوپر"
 
 #: bin/openerp.glade:974
 msgid "Left"
-msgstr ""
+msgstr "بایاں"
 
 #: bin/openerp.glade:983
 msgid "Right"
-msgstr ""
+msgstr "دایاں"
 
 #: bin/openerp.glade:992
 msgid "Bottom"
-msgstr ""
+msgstr "نیچے"
 
 #: bin/openerp.glade:1005
 msgid "Tabs default orientation"
@@ -1610,11 +1610,11 @@ msgstr ""
 
 #: bin/openerp.glade:1013
 msgid "Horizontal"
-msgstr ""
+msgstr "اُفقی"
 
 #: bin/openerp.glade:1021
 msgid "Vertical"
-msgstr ""
+msgstr "عمودی"
 
 #: bin/openerp.glade:1038
 msgid "_Print"
@@ -1638,11 +1638,11 @@ msgstr ""
 
 #: bin/openerp.glade:1117
 msgid "_Shortcuts"
-msgstr ""
+msgstr "_شارٹ کٹس"
 
 #: bin/openerp.glade:1125
 msgid "_Help"
-msgstr ""
+msgstr "_مدد"
 
 #: bin/openerp.glade:1132
 msgid "Enable Debug Mode Tooltips"
@@ -1686,7 +1686,7 @@ msgstr ""
 
 #: bin/openerp.glade:1291
 msgid "Previous"
-msgstr ""
+msgstr "گُزشتہ"
 
 #: bin/openerp.glade:1302
 msgid "Go to next matched resource"
@@ -1694,11 +1694,11 @@ msgstr ""
 
 #: bin/openerp.glade:1303
 msgid "Next"
-msgstr ""
+msgstr "اگلا"
 
 #: bin/openerp.glade:1316
 msgid "List"
-msgstr ""
+msgstr "فھرست"
 
 #: bin/openerp.glade:1328
 msgid "Form"
@@ -1706,7 +1706,7 @@ msgstr ""
 
 #: bin/openerp.glade:1341
 msgid "Calendar"
-msgstr ""
+msgstr "کیلینڈر"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
@@ -1738,15 +1738,15 @@ msgstr ""
 
 #: bin/openerp.glade:1432 bin/openerp.glade:1433
 msgid "Menu"
-msgstr ""
+msgstr "فہرست"
 
 #: bin/openerp.glade:1450 bin/openerp.glade:1451
 msgid "Reload"
-msgstr ""
+msgstr "دوبارہ لوڈ کریں"
 
 #: bin/openerp.glade:1468
 msgid "Close this window"
-msgstr ""
+msgstr "اس ونڈو کو بند کریں"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
@@ -1876,7 +1876,7 @@ msgstr ""
 
 #: bin/openerp.glade:2538
 msgid "_Domain:"
-msgstr ""
+msgstr "_ڈومین:"
 
 #: bin/openerp.glade:2597
 msgid "Default _value:"
@@ -1916,11 +1916,11 @@ msgstr ""
 
 #: bin/openerp.glade:2952 bin/openerp.glade:5647
 msgid "_Add"
-msgstr ""
+msgstr "_شامل کریں"
 
 #: bin/openerp.glade:2999 bin/openerp.glade:5694
 msgid "_Remove"
-msgstr ""
+msgstr "_خارج کریں"
 
 #: bin/openerp.glade:3047
 msgid "_Nothing"
@@ -1999,7 +1999,7 @@ msgstr ""
 
 #: bin/openerp.glade:4480
 msgid "Phone number:"
-msgstr ""
+msgstr "فون نمبر:"
 
 #: bin/openerp.glade:4493
 msgid "Emergency:"
@@ -2087,27 +2087,27 @@ msgstr ""
 
 #: bin/openerp.glade:4998
 msgid "<PgDn>"
-msgstr ""
+msgstr "<PgDn>"
 
 #: bin/openerp.glade:5011
 msgid "<PgUp>"
-msgstr ""
+msgstr "<PgUp>"
 
 #: bin/openerp.glade:5039
 msgid "Save"
-msgstr ""
+msgstr "محفوظ کریں"
 
 #: bin/openerp.glade:5054
 msgid "<Ctrl> + W"
-msgstr ""
+msgstr "<Ctrl> + W"
 
 #: bin/openerp.glade:5067
 msgid "<Ctrl> + S"
-msgstr ""
+msgstr "<Ctrl> + S"
 
 #: bin/openerp.glade:5095
 msgid "<Ctrl> + <PgDn>"
-msgstr ""
+msgstr "<Ctrl> + <PgDn>"
 
 #: bin/openerp.glade:5108
 msgid "Previous tab"
@@ -2115,23 +2115,23 @@ msgstr ""
 
 #: bin/openerp.glade:5123
 msgid "<Ctrl> + <PgUp>"
-msgstr ""
+msgstr "<Ctrl> + <PgUp>"
 
 #: bin/openerp.glade:5136
 msgid "New"
-msgstr ""
+msgstr "نیا"
 
 #: bin/openerp.glade:5151
 msgid "<Ctrl> + N"
-msgstr ""
+msgstr "<Ctrl> + N"
 
 #: bin/openerp.glade:5164
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 #: bin/openerp.glade:5179
 msgid "<Ctrl> + D"
-msgstr ""
+msgstr "<Ctrl> + D"
 
 #: bin/openerp.glade:5192
 msgid "Find / Search"
@@ -2143,11 +2143,11 @@ msgstr ""
 
 #: bin/openerp.glade:5220
 msgid "Connect"
-msgstr ""
+msgstr "رابطہ کریں"
 
 #: bin/openerp.glade:5235
 msgid "<Ctrl> + O"
-msgstr ""
+msgstr "<Ctrl> + O"
 
 #: bin/openerp.glade:5249
 msgid "Main Shortcuts"
@@ -2155,7 +2155,7 @@ msgstr ""
 
 #: bin/openerp.glade:5266
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
 #: bin/openerp.glade:5279
 msgid "<b>Shortcuts in relation fields</b>"
@@ -2175,7 +2175,7 @@ msgstr ""
 
 #: bin/openerp.glade:5337
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: bin/openerp.glade:5350
 msgid "Auto-Complete text field"
@@ -2183,7 +2183,7 @@ msgstr ""
 
 #: bin/openerp.glade:5365
 msgid "<Enter>"
-msgstr ""
+msgstr "<Enter>"
 
 #: bin/openerp.glade:5378
 msgid "Previous editable widget"
@@ -2191,7 +2191,7 @@ msgstr ""
 
 #: bin/openerp.glade:5393
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.glade:5406
 msgid "Next editable widget"
@@ -2199,7 +2199,7 @@ msgstr ""
 
 #: bin/openerp.glade:5421
 msgid "<Tab>"
-msgstr ""
+msgstr "<Tab>"
 
 #: bin/openerp.glade:5434
 msgid "Paste selected text"
@@ -2215,15 +2215,15 @@ msgstr ""
 
 #: bin/openerp.glade:5479
 msgid "<Ctrl> + V"
-msgstr ""
+msgstr "<Ctrl> + V"
 
 #: bin/openerp.glade:5492
 msgid "<Ctrl> + C"
-msgstr ""
+msgstr "<Ctrl> + C"
 
 #: bin/openerp.glade:5505
 msgid "<Ctrl> + X"
-msgstr ""
+msgstr "<Ctrl> + X"
 
 #: bin/openerp.glade:5522
 msgid "Edition Widgets"
@@ -2275,7 +2275,7 @@ msgstr ""
 
 #: bin/openerp.glade:6222
 msgid "Server"
-msgstr ""
+msgstr "سرور"
 
 #: bin/openerp.glade:6232
 msgid "<b>Connect to a OpenERP server</b>"
@@ -2315,7 +2315,7 @@ msgstr ""
 
 #: bin/openerp.glade:6832 bin/openerp.glade:6978 bin/openerp.glade:7493
 msgid "http://localhost:8069"
-msgstr ""
+msgstr "http://localhost:8069"
 
 #: bin/openerp.glade:6906
 msgid "Create a new database"
