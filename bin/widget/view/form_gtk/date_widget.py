@@ -75,11 +75,9 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         for x,y in [('%y','%Y'),('%B','%m'),('%A',''), ('%I','%H'), ('%p',''), ('%j',''), ('%a',''), ('%b',''),
                     ('%U',''), ('%W','')]:
             fmt = fmt.replace(x, y)
-        print "Format", fmt
 
         if (not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) or fmt.count('%x') >= 1) \
                 and (fmt.count('%H') == 0 and fmt.count('%M') == 0 and fmt.count('%S') == 0 and fmt.count('%X') == 0): 
-            print "True"
             return '%Y/%m/%d'
         
         elif not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) \
@@ -181,8 +179,6 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             self._interactive_input = True
             
     def get_text(self):
-        import traceback
-        traceback.print_stack()
         date = self.isvalid_date(self.small_text)
         if(date and not self.is_focus()):
             return date.strftime(self.format)
