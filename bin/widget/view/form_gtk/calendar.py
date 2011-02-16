@@ -85,7 +85,7 @@ class calendar(interface.widget_interface):
             return True
 
     def get_value(self, model):
-        str = self.entry.get_text()
+        str = self.entry.get_value()
         if str == '':
             return False
         try:
@@ -112,9 +112,7 @@ class calendar(interface.widget_interface):
             return False
         super(calendar, self).display(model, model_field)
         value = model_field.get(model)
-        if not value:
-            self.entry.clear()
-        else:
+        if value:
             if len(value) >= (len(DT_FORMAT) + 2):
                 value=value[:len(DT_FORMAT) + 2]
             date = DT.strptime(value[:len(DT_FORMAT) + 2], DT_FORMAT)
@@ -211,7 +209,7 @@ class datetime(interface.widget_interface):
             return True
 
     def get_value(self, model, timezone=True):
-        str = self.entry.get_text()
+        str = self.entry.get_value()
         if str=='':
             return False
         return tools.datetime_util.local_to_server_timestamp(str[:self.fmt_length], self.format, DHM_FORMAT,
@@ -231,9 +229,7 @@ class datetime(interface.widget_interface):
         self.set_datetime(model_field.get(model))
 
     def set_datetime(self, dt_val, timezone=True):
-        if not dt_val:
-            self.entry.clear()
-        else:
+        if dt_val:
             t = tools.datetime_util.server_to_local_timestamp(dt_val[:len(DHM_FORMAT) + 2],
                     DHM_FORMAT, self.format, tz_offset=timezone)
             if len(t) > self.entry.get_width_chars():
@@ -319,7 +315,7 @@ class stime(interface.widget_interface):
         return self.entry.grab_focus()
 
     def get_value(self, model):
-        str = self.entry.get_text()
+        str = self.entry.get_value()
         if str=='':
             res = False
         try:
