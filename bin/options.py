@@ -113,7 +113,7 @@ class configmanager(object):
             'client.lang': False,
             'client.filetype': {},
             'help.index': 'http://doc.openerp.com/',
-            'help.context': 'http://doc.openerp.com/index.php?model=%(model)s&lang=%(lang)s',
+            'help.context': 'http://doc.openerp.com/v6.0/index.php?model=%(model)s&lang=%(lang)s',
             'client.timeout': 3600,
             'client.form_text_spellcheck': True,
         }
