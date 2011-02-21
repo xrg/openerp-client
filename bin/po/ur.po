@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-02-13 16:56+0000\n"
+"PO-Revision-Date: 2011-02-21 04:17+0000\n"
 "Last-Translator: Aamir Riaz <Unknown>\n"
 "Language-Team: Urdu <ur@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-14 04:51+0000\n"
+"X-Launchpad-Export-Date: 2011-02-21 04:50+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
 #: bin/plugins/__init__.py:27
@@ -1299,7 +1299,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:80
 msgid "Open"
-msgstr ""
+msgstr "کهولیں"
 
 #: bin/widget/view/form_gtk/binary.py:119
 #: bin/widget/view/form_gtk/binary.py:163
@@ -1314,7 +1314,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:138
 msgid "All Files"
-msgstr ""
+msgstr "تمام فائلیں"
 
 #: bin/widget/view/form_gtk/binary.py:148
 msgid "Select a file..."
@@ -2067,7 +2067,7 @@ msgstr ""
 
 #: bin/openerp.glade:4927
 msgid "<Ctrl> + <Enter>"
-msgstr ""
+msgstr "<Ctrl> + <Enter>"
 
 #: bin/openerp.glade:4940
 msgid "Switch view mode"
@@ -2075,7 +2075,7 @@ msgstr ""
 
 #: bin/openerp.glade:4955
 msgid "<Ctrl> + L"
-msgstr ""
+msgstr "<Ctrl> + L"
 
 #: bin/openerp.glade:4968
 msgid "Next record"
@@ -2139,7 +2139,7 @@ msgstr ""
 
 #: bin/openerp.glade:5207
 msgid "<Ctrl> + F"
-msgstr ""
+msgstr "<Ctrl> + F"
 
 #: bin/openerp.glade:5220
 msgid "Connect"
@@ -2470,7 +2470,7 @@ msgstr ""
 
 #: bin/openerp.glade:8034
 msgid "Today"
-msgstr ""
+msgstr "آج"
 
 #: bin/openerp.glade:8080
 msgid "September 2008"
@@ -2478,11 +2478,11 @@ msgstr ""
 
 #: bin/openerp.glade:8094
 msgid "Day"
-msgstr ""
+msgstr "دن"
 
 #: bin/openerp.glade:8118
 msgid "Month"
-msgstr ""
+msgstr "مھینہ"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
@@ -2501,6 +2501,8 @@ msgid ""
 "AND\n"
 "OR"
 msgstr ""
+"اُور\n"
+"یا"
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
@@ -2516,7 +2518,7 @@ msgstr ""
 
 #: bin/win_error.glade:40
 msgid "label"
-msgstr ""
+msgstr "لیبل"
 
 #: bin/win_error.glade:100
 msgid "Click here for details about the publisher warranty proposition"
@@ -2557,7 +2559,7 @@ msgstr ""
 
 #: bin/win_error.glade:387
 msgid "Details"
-msgstr ""
+msgstr "تفصیلات"
 
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
