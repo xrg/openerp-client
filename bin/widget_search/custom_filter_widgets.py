@@ -142,6 +142,22 @@ class many2one(wid_int.wid_int):
         elif not self.selected_oper_text in ['is', 'is not']:
             self.but_find.hide()
 
+class one2many(many2one):
+     def __init__(self, name, parent, attrs={}):
+         many2one.__init__(self, name, parent, attrs)
+         self.operators = (['=', _('is')],
+                           ['<>',_('is not')],
+                           ['=', _('is Empty')],
+                           ['<>',_('is not Empty')])
+class many2many(many2one):
+     def __init__(self, name, parent, attrs={}):
+         many2one.__init__(self, name, parent, attrs)
+         self.operators = (['=', _('is')],
+                           ['<>',_('is not')],
+                           ['=', _('is Empty')],
+                           ['<>',_('is not Empty')])
+
+
 class checkbox(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}):
         wid_int.wid_int.__init__(self, name, parent)
@@ -339,8 +355,8 @@ widgets_type = {
     'boolean': checkbox,
     'text': char,
     'many2one':many2one,
-    'one2many':char,
-    'many2many':char,
+    'one2many':one2many,
+    'many2many':many2many,
     }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

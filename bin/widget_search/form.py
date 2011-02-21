@@ -413,14 +413,15 @@ class form(wid_int.wid_int):
         if self.groupby:
             context.update({'group_by':self.groupby})
         if domain:
+            pos = False
             if '&' in domain or '|' in domain:
                 if domain[-2] in ['&','|']:
                     pos = 2
                 elif domain[-3] in ['&','|']:
                     pos = 3
-                if len(domain) == 2:
+                if len(domain) == 2 and pos:
                     domain = [domain[1]]
-                elif len(domain) == 4:
+                elif len(domain) == 4 and pos != 2:
                     domain = domain[1:]
                 else:
                     res1 = domain[:-pos]
