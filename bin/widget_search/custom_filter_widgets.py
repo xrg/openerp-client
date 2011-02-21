@@ -30,8 +30,6 @@ import checkbox
 from reference import reference
 import rpc
 
-
-
 class char(char.char):
     def __init__(self, name, parent, attrs={}):
         super(char,self).__init__(name, parent)
@@ -67,7 +65,6 @@ class many2one(wid_int.wid_int):
                           ['=', _('is Empty')],
                           ['<>',_('is not Empty')],
                           ['ilike', _('contains')],
-                          ['like', _('like')],
                           ['not ilike', _('doesn\'t contain')])
 
         self.widget = gtk.HBox(spacing=0)
@@ -95,10 +92,12 @@ class many2one(wid_int.wid_int):
         self.selected_oper_text = False
         self.field_left = False
         self.enter_pressed = False
+        self.selected_value = False
 
     def sig_activate(self, widget, event=None, leave=False):
-        event = self.enter_pressed and True or event
-        return self.sig_find(widget, event, leave=True)
+        if not self.selected_oper_text in  ['contains', 'doesn\'t contain']:
+            event = self.enter_pressed and True or event
+            return self.sig_find(widget, event, leave=True)
 
     def sig_find(self, widget, event=None, leave=True):
         from modules.gui.window.win_search import win_search
@@ -108,15 +107,15 @@ class many2one(wid_int.wid_int):
         win.glade.get_widget('newbutton').hide()
         ids = win.go()
         if ids:
-            name = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
-            self.wid_text.set_text(name[1])
+            self.selected_value = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_get', [ids[0]], rpc.session.context)[0]
+            self.wid_text.set_text(self.selected_value[1])
         return
 
     def sig_key_press(self, widget, event, *args):
         self.enter_pressed = False
-        if event.keyval==gtk.keysyms.F2:
+        if event.keyval == gtk.keysyms.F2:
             self.sig_activate(widget, event)
-        elif event.keyval  == gtk.keysyms.Tab:
+        elif event.keyval == gtk.keysyms.Tab:
             if not self.wid_text.get_text():
                 return False
             return not self.sig_activate(widget, event, leave=True)
@@ -126,17 +125,22 @@ class many2one(wid_int.wid_int):
         return False
 
     def _value_get(self):
-        if self.selected_oper_text in ['is Empty', 'is not Empty']:
+        if self.selected_oper_text in ['is', 'is not']:
+            text = self.selected_value and self.selected_value[0] or False
+        elif self.selected_oper_text in ['is Empty', 'is not Empty']:
             text = False
         else:
-            text = self.widget.get_text()
+            text = self.wid_text.get_text()
         return [(self.field_left, self.selected_oper, text)]
 
     def set_visibility(self):
+        self.widget.show()
+        self.wid_text.set_text('')
+        self.selected_value = False
         if self.selected_oper_text in ['is Empty', 'is not Empty']:
             self.widget.hide()
-        else:
-            self.widget.show()
+        elif not self.selected_oper_text in ['is', 'is not']:
+            self.but_find.hide()
 
 class checkbox(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}):
