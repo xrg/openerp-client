@@ -30,6 +30,7 @@ import signal_event
 import gtk
 import gettext
 import service
+import logging
 from gtk import glade
 import tools
 from field import O2MField
@@ -396,6 +397,7 @@ class ModelRecord(signal_event.signal_event):
                                                    self.resource,attrs['name'], [id], context)
                 if isinstance(result, dict):
                     if not result.get('nodestroy', False):
+                        logging.getLogger('model').debug("Destroying window for %s, after object button", self.resource)
                         screen.window.destroy()
                     obj._exec_action(result, {}, context=context)
 
