@@ -101,9 +101,7 @@ class custom_filter(wid_int.wid_int):
         self.widget_obj.selected_oper = self.op_selection[self.widget_obj.selected_oper_text]
         wid_domain = self.widget_obj._value_get()
         condition = self.condition_next.get_active() == 0 and '&' or '|'
-        domain = [condition]
-        for dom in wid_domain:
-            domain.append(dom)
+        domain = [condition] + wid_domain
         return {'domain':domain}
 
     def sig_exec(self, widget):

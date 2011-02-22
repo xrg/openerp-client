@@ -51,6 +51,7 @@ class char(char.char):
         return [(self.field_left, self.selected_oper, text)]
 
     def set_visibility(self):
+        self.widget.set_text('')
         if self.selected_oper_text in ['is Empty', 'is not Empty']:
             self.widget.hide()
         else:
@@ -191,10 +192,10 @@ class calendar(calendar):
         val1 = self._date_get(self.entry1.get_text())
         val2 = self._date_get(self.entry2.get_text())
         if self.selected_oper_text == 'between':
-            domain = ('&', (self.field_left, '>=', val1),(self.field_left, '<=', val2))
+            domain = ['&', (self.field_left, '>=', val1),(self.field_left, '<=', val2)]
             return domain
         elif self.selected_oper_text == 'exclude range':
-            domain = ('|',(self.field_left, '<', val1),(self.field_left, '>', val2))
+            domain = ['|',(self.field_left, '<', val1),(self.field_left, '>', val2)]
             return domain
         elif self.selected_oper_text in ['is Empty', 'is not Empty']:
             val1 = False
