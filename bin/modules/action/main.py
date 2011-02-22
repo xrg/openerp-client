@@ -31,6 +31,7 @@ import printer
 import common
 import tools
 import options
+import logging
 from widget.view.form_gtk.many2one import dialog
 from lxml import etree
 
@@ -38,7 +39,7 @@ class main(service.Service):
     def __init__(self, name='action.main'):
         service.Service.__init__(self, name)
 
-    def exec_report(self, name, data, context={}):
+    def exec_report(self, name, data, context=None):
         datas = data.copy()
         ids = datas['ids']
         del datas['ids']
@@ -68,10 +69,11 @@ class main(service.Service):
         printer.print_data(val)
         return True
 
-    def execute(self, act_id, datas, type=None, context={}):
+    def execute(self, act_id, datas, type=None, context=None):
         act_id = int(act_id)
         ctx = rpc.session.context.copy()
-        ctx.update(context)
+        if context:
+            ctx.update(context)
         if type is None:
             res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', int(act_id), ['type'], ctx)
             if not (res and len(res)):
@@ -81,9 +83,11 @@ class main(service.Service):
         res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', act_id, False, ctx)
         self._exec_action(res,datas,context)
 
-    def _exec_action(self, action, datas, context={}):
+    def _exec_action(self, action, datas, context=None):
         if isinstance(action, bool) or 'type' not in action:
             return
+        if context is None:
+            context = {}
         # Updating the context : Adding the context of action in order to use it on Views called from buttons
         if datas.get('id',False):
             context.update( {'active_id': datas.get('id',False), 'active_ids': datas.get('ids',[]), 'active_model': datas.get('model',False)})
@@ -193,8 +197,10 @@ class main(service.Service):
         elif action['type']=='ir.actions.act_url':
             tools.launch_browser(action.get('url',''))
 
-    def exec_keyword(self, keyword, data={}, adds={}, context={}, warning=True):
+    def exec_keyword(self, keyword, data=None, adds=None, context=None, warning=True):
         actions = None
+        if context is None:
+            context = {}
         if 'id' in data:
             try:
                 id = data.get('id', False)
@@ -209,7 +215,8 @@ class main(service.Service):
         for action in actions:
             action_name = action.get('name') or ''
             keyact[action_name.encode('utf8')] = action
-        keyact.update(adds)
+        if adds:
+            keyact.update(adds)
         res = common.selection(_('Select your action'), keyact)
         if res:
             (name,action) = res
