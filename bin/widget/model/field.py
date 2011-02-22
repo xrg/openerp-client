@@ -347,13 +347,13 @@ class M2MField(CharField):
 
     def set(self, model, value, test_state=False, modified=False):
         model.value[self.name] = value and value[:self.limit] or []
-        model.pager_cache[self.name] = value and value[:self.limit] or []
+        model.pager_cache[self.name] = value or []
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
 
     def set_client(self, model, value, test_state=False, force_change=False):
-        internal = model.pager_cache[self.name]
+        internal = model.pager_cache.get(self.name,False)
         self.set(model, value, test_state, modified=False)
         if model.is_m2m_modified or set(internal) != set(value):
             model.is_m2m_modified = False
