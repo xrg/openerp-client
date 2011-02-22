@@ -39,6 +39,10 @@ class wid_int(object):
                default_context = call.context
             context_str = 'search_default_' + str(self.attrs['name'])
             self.default_search = default_context.get(context_str,False)
+            if attrs.get('type') == 'boolean':
+                if not default_context.has_key(context_str):
+                    self.default_search = ''
+
 
     def clear(self):
         self.value = ''

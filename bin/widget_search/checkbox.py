@@ -38,10 +38,11 @@ class checkbox(wid_int.wid_int):
         self.entry = self.widget.child
         self.entry.set_property('activates_default', True)
         self.entry.set_editable(False)
-        if self.default_search:
-            if self.default_search == 1:
-                self.default_search = 'Yes'
-            self.widget.child.set_text(self.default_search.capitalize())
+        if bool(self.default_search):
+            self.default_search = _('Yes')
+        elif not self.default_search == '':
+            self.default_search = _('No')
+        self.widget.child.set_text(self.default_search.capitalize())
 
     def clear(self):
         self.widget.child.set_text('')
@@ -57,7 +58,7 @@ class checkbox(wid_int.wid_int):
             'domain':domain,
             'context': context
         }
-        
+
     def grab_focus(self):
         self.widget.child.grab_focus()
 
