@@ -416,7 +416,7 @@ class form(wid_int.wid_int):
             if '&' in domain or '|' in domain:
                 if domain[-2] in ['&','|']:
                     pos = 2
-                elif domain[-4] in ['&','|']:
+                elif len(domain) >= 4 and domain[-4] in ['&','|']:
                     pos = 4
                 if len(domain) == 2 or len(domain) == 4:
                     domain = domain[1:]
