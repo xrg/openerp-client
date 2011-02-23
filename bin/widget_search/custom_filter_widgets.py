@@ -51,11 +51,10 @@ class char(char.char):
         return [(self.field_left, self.selected_oper, text)]
 
     def set_visibility(self):
+        self.widget.show_all()
         self.widget.set_text('')
         if self.selected_oper_text in ['is Empty', 'is not Empty']:
             self.widget.hide()
-        else:
-            self.widget.show()
 
 class many2one(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}):
@@ -135,7 +134,7 @@ class many2one(wid_int.wid_int):
         return [(self.field_left, self.selected_oper, text)]
 
     def set_visibility(self):
-        self.widget.show()
+        self.widget.show_all()
         self.wid_text.set_text('')
         self.selected_value = False
         if self.selected_oper_text in ['is Empty', 'is not Empty']:

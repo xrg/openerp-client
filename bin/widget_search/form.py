@@ -370,15 +370,21 @@ class form(wid_int.wid_int):
         ## so that they dont reappear and as the childs are deleted for the panel
         ## that has to be deleted we need to do a reverse process for removing the
         ## the invisible fields from the list of invisible fields.
+        def process(widget):
+            if isinstance(widget, gtk.HBox):
+                for child in widget.get_children():
+                    process(child)
+            inv_childs = self.invisible_widgets
+            for inv_child in inv_childs:
+                if inv_child != widget:
+                    self.invisible_widgets.remove(inv_child)
+            return True
+
         custom_panel = copy.copy(self.custom_widgets)
         for key, wid in custom_panel.iteritems():
             for child in wid[0].widget.get_children():
-                if isinstance(child, gtk.HBox):
-                    sub_childs = child.get_children()
-                    inv_childs = self.invisible_widgets
-                    for inv_child in inv_childs:
-                        if inv_child not in sub_childs:
-                            self.invisible_widgets.remove(inv_child)
+                if not isinstance(child, (gtk.ComboBox, gtk.Button)):
+                    process(child)
             if wid[0] == panel:
                del self.custom_widgets[key]
         return True
@@ -397,13 +403,22 @@ class form(wid_int.wid_int):
         ## attached to the table as a child widgets and the table.show_all() will
         ## set all child widgets to visible inspite of their visibility is set to FALSE
         ## so make them invisible again after the table.show_all()
+        def process(widget):
+            if isinstance(widget, gtk.HBox):
+                for sub_child in widget.get_children():
+                    process(sub_child)
+            if widget.get_visible():
+                if widget in self.invisible_widgets:
+                    self.invisible_widgets.remove(widget)
+            else:
+                if not widget in self.invisible_widgets:
+                    self.invisible_widgets.append(widget)
+            return True
+
         for key, wid in self.custom_widgets.iteritems():
             for child in wid[0].widget.get_children():
-                if isinstance(child, gtk.HBox):
-                    for sub_child in child.get_children():
-                        if not sub_child.get_visible():
-                            if not sub_child in self.invisible_widgets:
-                                self.invisible_widgets.append(sub_child)
+                if not isinstance(child, (gtk.ComboBox, gtk.Button)):
+                    process(child)
         table.show_all()
         for wid in self.invisible_widgets:
             wid.set_visible(False)
