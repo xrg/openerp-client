@@ -28,6 +28,7 @@ import wid_int
 import tools
 from lxml import etree
 import uuid
+import copy
 
 class _container(object):
     def __init__(self, max_width):
@@ -316,6 +317,7 @@ class form(wid_int.wid_int):
         self.show()
         for x in self.widgets.values():
             x[0].sig_activate(self.sig_activate)
+        self.invisible_widgets = []
 
     def xml_process(self,xml_arch):
         root = etree.fromstring(xml_arch)
@@ -364,10 +366,21 @@ class form(wid_int.wid_int):
     def remove_custom(self, button, panel):
         button.parent.destroy()
         # Removing the Destroyed widget from Domain calculation
-        for element in self.custom_widgets.keys():
-            if self.custom_widgets[element][0] == panel:
-                del self.custom_widgets[element]
-                break
+        ## also removing the field from the list of invisible fields
+        ## so that they dont reappear and as the childs are deleted for the panel
+        ## that has to be deleted we need to do a reverse process for removing the
+        ## the invisible fields from the list of invisible fields.
+        custom_panel = copy.copy(self.custom_widgets)
+        for key, wid in custom_panel.iteritems():
+            for child in wid[0].widget.get_children():
+                if isinstance(child, gtk.HBox):
+                    sub_childs = child.get_children()
+                    inv_childs = self.invisible_widgets
+                    for inv_child in inv_childs:
+                        if inv_child not in sub_childs:
+                            self.invisible_widgets.remove(inv_child)
+            if wid[0] == panel:
+               del self.custom_widgets[key]
         return True
 
     def add_custom(self, widget, table, fields):
@@ -380,7 +393,20 @@ class form(wid_int.wid_int):
         self.custom_widgets[panelx] = (panel, new_table, 1)
         table.attach(new_table, 1, 9, x, x+1)
         self.rows += 1
+        ## Store the  widgets original visible attribute becuase as they are
+        ## attached to the table as a child widgets and the table.show_all() will
+        ## set all child widgets to visible inspite of their visibility is set to FALSE
+        ## so make them invisible again after the table.show_all()
+        for key, wid in self.custom_widgets.iteritems():
+            for child in wid[0].widget.get_children():
+                if isinstance(child, gtk.HBox):
+                    for sub_child in child.get_children():
+                        if not sub_child.get_visible():
+                            if not sub_child in self.invisible_widgets:
+                                self.invisible_widgets.append(sub_child)
         table.show_all()
+        for wid in self.invisible_widgets:
+            wid.set_visible(False)
         return panel
 
     def toggle(self, widget, event=None):

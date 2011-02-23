@@ -139,7 +139,8 @@ class many2one(wid_int.wid_int):
         self.wid_text.set_text('')
         self.selected_value = False
         if self.selected_oper_text in ['is Empty', 'is not Empty']:
-            self.widget.hide()
+            self.wid_text.hide()
+            self.but_find.hide()
         elif not self.selected_oper_text in ['is', 'is not']:
             self.but_find.hide()
 
