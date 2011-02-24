@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-02-16 12:37+0000\n"
+"PO-Revision-Date: 2011-02-23 15:40+0000\n"
 "Last-Translator: Milan Milosevic <Unknown>\n"
 "Language-Team: Serbian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-17 04:36+0000\n"
+"X-Launchpad-Export-Date: 2011-02-24 04:36+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 "Language: \n"
 
@@ -1070,30 +1070,14 @@ msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
 "Greška! Podaci nisu nađeni. Uverite sa da ima dovoljno podataka za štampu!"
 
-#
-# File: bin/printer/printer.py, line: 215
-# File: bin/printer/printer.py, line: 215
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
-msgstr "Greška tokom zapisivanja datoteke!"
+msgstr "Greška pri zapisivanju datoteke!"
 
 #: bin/openerp-client.py:140
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr "Zatvaram openERP, greška sa tastaturom"
+msgstr "Zatvaranje OpenERP-a, greška sa tastaturom"
 
-#
-# File: bin/widget_search/checkbox.py, line: 55
-# File: bin/widget_search/spinbutton.py, line: 69
-# File: bin/widget_search/spinint.py, line: 73
-# File: bin/widget_search/calendar.py, line: 106
-# File: bin/widget_search/char.py, line: 47
-# File: bin/widget_search/reference.py, line: 74
-# File: bin/widget_search/checkbox.py, line: 55
-# File: bin/widget_search/spinbutton.py, line: 69
-# File: bin/widget_search/spinint.py, line: 73
-# File: bin/widget_search/calendar.py, line: 106
-# File: bin/widget_search/char.py, line: 47
-# File: bin/widget_search/reference.py, line: 74
 #: bin/widget_search/reference.py:78 bin/widget_search/filter.py:74
 #: bin/widget_search/selection.py:116 bin/widget_search/spinbutton.py:72
 #: bin/widget_search/spinint.py:75 bin/widget_search/char.py:66
@@ -1101,11 +1085,11 @@ msgstr "Zatvaram openERP, greška sa tastaturom"
 #: bin/widget_search/custom_filter.py:176 bin/widget_search/checkbox.py:67
 #: bin/widget/view/form_gtk/button.py:47
 msgid "The content of the widget or ValueError if not valid"
-msgstr "Sadržaj widget-a ili GreškaVrijednosti ako je neispravan"
+msgstr "Sadržaj dodatka ili GreškaVrednosti ako nije važeći"
 
 #: bin/widget_search/form.py:445
 msgid "The content of the form or exception if not valid"
-msgstr "Sadržaj forme ili prigovora nije validan."
+msgstr "Sadržaj obrasca ili izuzetka ako nije važeći"
 
 #: bin/widget_search/date_widget.py:61
 #: bin/widget/view/form_gtk/date_widget.py:63
@@ -1120,30 +1104,27 @@ msgid ""
 "You can also use \"=\" to set the date to the current date/time and '-' to "
 "clear the field."
 msgstr ""
-"Možeš koristiti specijalnu operaciju pritiskom na +, - ili =. Plus/minus "
-"uvećava/umanjuje promenljivu tekuće izabranog datuma. Jednako podešava deo "
-"odabranog datuma. Moguće su promenljive: 12h = 12 sati, 8d = 8 dana, 4w = 4 "
-"nedelje, 1m = 1 mesec, 2y = 2 godine. Neki primeri su:\n"
+"Možete koristiti specijalnu operaciju pritiskom na +, - ili =. Plus/minus "
+"uvećava/umanjuje promenljivu trenutno izabranog datuma. Jednako podešava deo "
+"odabranog datuma. Dostupne promenljive: 12h = 12 sati, 8d = 8 dana, 4w = 4 "
+"nedelje, 1m = 1 mesec, 2y = 2 godine. Neki primeri:\n"
 "* +21d : dodaje 21 dan na izabranu godinu\n"
 "* =23w : podešava datum na 23. nedelju godine\n"
 "* -4m : smanjuje za 4 meseca tekući datum.\n"
-"Takođe možete koristit \"=\" da podesite na tekući datum/vreme i \"-\" da "
+"Takođe možete koristiti \"=\" da podesite na trenutni datum/vreme i \"-\" da "
 "očistite polje."
 
 #: bin/widget_search/wid_int.py:52
 msgid "The content of the widget or exception if not valid"
-msgstr "Sadržaj Vidžeta ili eksepcije nije isprtavan"
+msgstr "Sadržaj dodatka ili izuzetka nije važeći"
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "Greška: "
 
-#
-# File: bin/widget_search/calendar.py, line: 51
-# File: bin/widget_search/calendar.py, line: 51
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
-msgstr "Početni datum"
+msgstr "Datum početka"
 
 #
 # File: bin/widget_search/calendar.py, line: 55
@@ -1161,12 +1142,9 @@ msgstr "Početni datum"
 msgid "Open the calendar widget"
 msgstr "Otvorite kalendarski dodatak"
 
-#
-# File: bin/widget_search/calendar.py, line: 70
-# File: bin/widget_search/calendar.py, line: 70
 #: bin/widget_search/calendar.py:70 bin/widget_search/calendar.py:197
 msgid "End date"
-msgstr "Krajnji datum"
+msgstr "Datum završetka"
 
 #: bin/widget_search/calendar.py:129 bin/widget_search/calendar.py:249
 #: bin/widget/view/form_gtk/calendar.py:135
@@ -1176,35 +1154,35 @@ msgstr "OepnERP - Izbor datuma"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "sadrži"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "ne sadrži"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "jednako je sa"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "nije jednako sa"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "Veće od"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "manje od"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "u"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "nije u"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -1212,6 +1190,10 @@ msgid ""
 "For Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d "
 "%H:%M:%S' formats respectively."
 msgstr ""
+"Unesite Vrednosti razdvajajući ih sa ',', ako je parametar 'u' ili 'nije u' "
+"izabran.\n"
+"Za oblike Datuma i Vremena, unesite tekst u obliku '%Y-%m-%d' i '%Y-%m-%d "
+"%H:%M:%S'"
 
 #
 # File: bin/widget_search/checkbox.py, line: 36
@@ -1229,23 +1211,18 @@ msgstr "Da"
 msgid "No"
 msgstr "Ne"
 
-#
-# File: bin/widget/view/form.py, line: 153
-# File: bin/widget/view/form.py, line: 153
 #: bin/widget/view/form.py:136 bin/widget/view/form.py:199
 msgid "You must save this record to use the relate button !"
-msgstr "Morate snimiti ovaj zapis da bi ste koristili povezane tastere !"
+msgstr ""
+"Morate prvo sačuvati ovaj zapis da biste koristili dugme za povezivanje !"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "Postupak nije definisan"
 
-#
-# File: bin/widget/view/form.py, line: 165
-# File: bin/widget/view/form.py, line: 165
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
-msgstr "Morate izabrati zapis da biste koristili povezane tastere !"
+msgstr "Morate izabrati zapis da biste koristili dugme za povezivanje !"
 
 #
 # File: bin/widget/view/form.py, line: 183
@@ -1288,33 +1265,33 @@ msgstr "Prevedi natpis"
 
 #: bin/widget/view/calendar_gtk/parser.py:356 bin/openerp.glade:8106
 msgid "Week"
-msgstr "Nedelja"
+msgstr "Sedmica"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
-msgstr "Grepka u Pregledu kalendara !"
+msgstr "Greška u Pregledu kalendara !"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "You must intall the library python-hippocanvas to use calendars."
 msgstr ""
-"Morate da instalirate biblioteku python-hippocanvas da bi mogli da koristtte "
-"kalendare."
+"Morate da instalirate biblioteku python-hippocanvas da biste mogli da "
+"koristite kalendare."
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--Postupci--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "Saćuvaj kao Prečicu"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Sačuvaj kao Filter"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Upravljanje filterima"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1322,6 +1299,9 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"Imate nesačuvan(e) zapis(e)!  \n"
+"\n"
+"Molimo Sačuvajte pre nego što ih sredite !"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 #, python-format
@@ -1347,104 +1327,90 @@ msgstr ""
 #: bin/widget/view/widget_parse.py:53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
-msgstr "Ovaj tim (%s) nije podržan u GTK klijentu !"
+msgstr "Ovaj tip (%s) nije podržan od strane GTK klijenta !"
 
 #: bin/widget/view/widget_parse.py:64
 msgid "No valid view found for this object!"
-msgstr "Niej proneđe npogled za ovaj objekat!"
+msgstr "Nije pronađen važeći pregled za ovu stavku!"
 
-#
-# File: bin/widget/view/graph_gtk/parser.py, line: 65
-# File: bin/widget/view/graph_gtk/parser.py, line: 65
 #: bin/widget/view/graph_gtk/parser.py:64
 msgid "Can not generate graph !"
-msgstr "Ne možete kreirati grafikon !"
+msgstr "Ne može se napraviti grafikon !"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1422
 msgid "Dot Viewer"
-msgstr ""
+msgstr "Dot pregledač"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
-msgstr ""
+msgstr "Dodaj Novi Čvor"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
-msgstr ""
+msgstr "Dodaj Novu Ivicu"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "Proširi Dijagram"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "Umanji Dijagram"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "Podesi dijagram prema prozoru"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "Prikaži dijagram u normalnoj veličini"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "Štampaj Dijagram"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "Zatvori Trenutni %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "Izbriši Trenutni %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "Izmeni Trenutni %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
-msgstr ""
+msgstr " - Dot Pregledač"
 
-#
-# File: bin/widget/view/form_gtk/reference.py, line: 92
-# File: bin/openerp.glade, line: 1214
-# File: bin/widget/view/form_gtk/reference.py, line: 92
-# File: bin/openerp.glade, line: 1214
 #: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1250
 msgid "Create a new resource"
-msgstr "Kreirajte novi resurs"
+msgstr "Napravi novi izvor"
 
-#
-# File: bin/widget/view/form_gtk/reference.py, line: 93
-# File: bin/widget/view/form_gtk/reference.py, line: 93
 #: bin/widget/view/form_gtk/reference.py:89
 msgid "Search / Open a resource"
-msgstr "Pretraži / Otvori resurs"
+msgstr "Pretraži / Otvori izvor"
 
-#
-# File: bin/widget/view/form_gtk/parser.py, line: 61
-# File: bin/widget/view/form_gtk/parser.py, line: 61
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
-msgstr "Pogrešna sličica za dugme !"
+msgstr "Pogrešna ikona za dugme !"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "Polje"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "Stavka"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
-msgstr "Ubaci neki tekst u vezano polje pre dodavanja prevoda !"
+msgstr "Unesite neki tekst u povezano polje pre nego što dosate prevode!"
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 480
