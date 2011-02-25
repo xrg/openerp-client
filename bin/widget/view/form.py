@@ -21,6 +21,7 @@
 import os
 import gtk
 from gtk import glade
+import copy
 
 import common
 import rpc
@@ -188,9 +189,10 @@ class ViewForm(parser_view):
 
                     def _action(button, action, type):
                         data = {}
-                        context = self.screen.context
-                        if 'group_by' in context:
-                            del context['group_by']
+                        context = copy.copy(self.screen.context)
+                        for key in self.screen.context.keys():
+                            if key.startswith('default_') or key == 'group_by':
+                                del context[key]
                         act = action.copy()
                         if type in ('print', 'action'):
                             self.screen.save_current()
