@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-26 22:50+0000\n"
-"Last-Translator: Esther Xaus (Zikzakmedia) <Unknown>\n"
+"PO-Revision-Date: 2011-02-24 16:57+0000\n"
+"Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
+"<jesteve@zikzakmedia.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-27 05:44+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-25 06:04+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "Language: ca\n"
 
 #
@@ -1106,6 +1107,31 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>S'ha informat d'un error desconegut.</b>\n"
+"\n"
+"<b>No teniu un contracte de garantia de l'editor d'OpenERP vàlid</b>\n"
+"Si esteu utilitzant OpenERP en producció, es recomanable subscriure's a\n"
+"un programa de garantia de l'editor.\n"
+"\n"
+"El contracte de garantia de l'editor d'OpenERP us ofereix una garantia de "
+"correcció d'errors i un\n"
+"sistema de migració automàtic de manera que podem solucionar els vostres "
+"problemes en poques\n"
+"hores. Si tinguéssiu un contracte de garantia de l'editor, aquest error "
+"s'hagués enviat\n"
+"a l'equip de qualitat de l'editor d'OpenERP.\n"
+"\n"
+"El programa de garantia de l'editor us ofereix:\n"
+"* Les migracions automàtiques a les noves versions,\n"
+"* Una garantia de correcció d'errors,\n"
+"* Anuncis mensuals de possibles errors i les seves solucions,\n"
+"* Alertes de seguretat per correu electrònic i migració automàtica,\n"
+"* L'accés al portal de clients.\n"
+"\n"
+"Podeu utilitzar l'enllaç inferior per obtenir més informació. El detall de "
+"l'error\n"
+"es mostra a la segona pestanya.\n"
 
 #: bin/common/common.py:410
 #, python-format
@@ -1346,7 +1372,7 @@ msgstr "és igual a"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "és diferent a"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
@@ -1354,15 +1380,15 @@ msgstr "més gran que"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "menor que"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "és dins de"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "no és dins de"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -1576,7 +1602,7 @@ msgstr "Imprimeix el diagrama"
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "Tanca actual %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
@@ -1775,7 +1801,7 @@ msgstr "No hi ha imatgee per desar!"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "Avís"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
@@ -3869,7 +3895,7 @@ msgstr ""
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "Suprimeix filtre"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
@@ -3890,7 +3916,7 @@ msgstr ""
 
 #: bin/win_error.glade:120
 msgid "<i>_Publisher Warranty</i>"
-msgstr ""
+msgstr "<i>_Garantia de l'editor</i>"
 
 #: bin/win_error.glade:151
 msgid ""
@@ -3900,6 +3926,11 @@ msgid ""
 "you shortly.\n"
 "</i>"
 msgstr ""
+"<b>Contracte de garantia de l'editor.</b>\n"
+"<i>\n"
+"S'enviarà la vostra sol·licitud a OpenERP i l'equip de garantia de l'editor "
+"us respondrà en el menor temps possible.\n"
+"</i>"
 
 #
 # File: bin/openerp.glade, line: 3362
