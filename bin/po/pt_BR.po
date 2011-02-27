@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-24 22:48+0000\n"
-"Last-Translator: Adriano Prado <adrianojprado@hotmail.com>\n"
+"PO-Revision-Date: 2011-02-26 20:14+0000\n"
+"Last-Translator: Emerson <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-25 04:53+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-02-27 06:21+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "Language: pt_BR\n"
 
 #: bin/plugins/__init__.py:27
@@ -109,7 +109,7 @@ msgstr "Senha de Super Administrador"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "Senha do Super Administrador Errada"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -137,11 +137,11 @@ msgstr "Voce já pode migrar sua base de dados."
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr "Migrar base de dados"
+msgstr "Migrar Base de Dados"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr "Banco de Dados"
+msgstr "Base de Dados"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -149,18 +149,15 @@ msgstr "Sua base de dados foi atualizada."
 
 #: bin/modules/gui/main.py:295
 msgid "Your databases have been upgraded."
-msgstr "suas bases de dados já foram atualizadas."
+msgstr "Suas bases de dados já foram atualizadas."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr "Você não selecionou um Banco de Dados"
+msgstr "Você não selecionou uma base de dados"
 
-#
-# File: bin/modules/gui/main.py, line: 165
-# File: bin/modules/gui/main.py, line: 1161
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr "Banco de dados não encontrado, você deve criar um !"
+msgstr "Base de dados não encontrada, você deve criar uma !"
 
 #
 # File: bin/modules/gui/main.py, line: 154
@@ -185,64 +182,43 @@ msgstr ""
 msgid "Sorry,'"
 msgstr "Desculpe,'"
 
-#
-# File: bin/modules/gui/main.py, line: 309
-# File: bin/modules/gui/main.py, line: 312
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
-msgstr "Nome do banco de dados inválido !"
+msgstr "Nome da base de dados inválida !"
 
-#
-# File: bin/modules/gui/main.py, line: 312
 #: bin/modules/gui/main.py:613
 msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
-"O nome do banco de dados deve conter apenas caracteres normais ou \"_\".\n"
+"O nome da base de dados deve conter apenas caracteres normais ou \"_\".\n"
 "Você deve evitar acentos, espaços e caracteres especiais."
 
-#
-# File: bin/modules/gui/main.py, line: 372
-# File: bin/modules/gui/main.py, line: 374
-# File: bin/modules/gui/main.py, line: 376
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
 msgid "Could not create database."
-msgstr "Não foi possível criar banco de dados."
+msgstr "Não foi possível criar a base de dados."
 
-#
-# File: bin/modules/gui/main.py, line: 372
 #: bin/modules/gui/main.py:647
 msgid "Database already exists !"
-msgstr "Banco de dados já existe !"
+msgstr "Base de dados já existe !"
 
-#
-# File: bin/modules/gui/main.py, line: 374
-# File: bin/modules/gui/main.py, line: 1060
-# File: bin/modules/gui/main.py, line: 1079
-# File: bin/modules/gui/main.py, line: 1149
 #: bin/modules/gui/main.py:649 bin/modules/gui/main.py:1383
 #: bin/modules/gui/main.py:1403 bin/modules/gui/main.py:1482
 msgid "Bad database administrator password !"
-msgstr "Senha do administrador do banco de dados inválida !"
+msgstr "Senha do administrador da base de dados inválida !"
 
-#
-# File: bin/modules/gui/main.py, line: 376
-# File: bin/modules/gui/main.py, line: 383
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr "Erro durante a criação do banco de dados !"
+msgstr "Erro durante a criação da base de dados !"
 
-#
-# File: bin/modules/gui/main.py, line: 383
 #: bin/modules/gui/main.py:658
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
 "O servidor falhou durante a instalação.\n"
-"Sugerimos que você apague este banco de dados."
+"Sugerimos que você apague esta base de dados."
 
 #
 # File: bin/modules/gui/main.py, line: 445
@@ -285,12 +261,12 @@ msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
-"Por favor, verifique o nome do banco ou entre em contato com o administrador "
-"para verificar o status de banco de dados."
+"Por favor, verifique o nome da base ou entre em contato com o administrador "
+"para verificar o status da base de dados."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr "Banco de dados não pode ser acessado ou não existe"
+msgstr "Base de dados não pode ser acessada ou não existe"
 
 #
 # File: bin/modules/gui/main.py, line: 746
@@ -360,29 +336,21 @@ msgstr "Anexos (%d)"
 msgid "Attachments"
 msgstr "Anexos"
 
-#
-# File: bin/modules/gui/main.py, line: 1051
 #: bin/modules/gui/main.py:1374
 msgid "Delete a database"
-msgstr "Apagar um banco de dados"
+msgstr "Apagar uma base de dados"
 
-#
-# File: bin/modules/gui/main.py, line: 1057
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr "Banco de dados apagado com sucesso !"
+msgstr "Base de dados apagada com sucesso !"
 
-#
-# File: bin/modules/gui/main.py, line: 1060
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr "Não foi possível apagar o banco de dados."
+msgstr "Não foi possível apagar a base de dados."
 
-#
-# File: bin/modules/gui/main.py, line: 1062
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr "Não foi possível apagar o banco de dados."
+msgstr "Não foi possível apagar a base de dados."
 
 #
 # File: bin/widget/view/form_gtk/image.py, line: 110
@@ -394,23 +362,17 @@ msgstr "Não foi possível apagar o banco de dados."
 msgid "Open..."
 msgstr "Abrir..."
 
-#
-# File: bin/modules/gui/main.py, line: 1076
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
-msgstr "Banco de dados restaurado com sucesso !"
+msgstr "Base de dados restaurada com sucesso !"
 
-#
-# File: bin/modules/gui/main.py, line: 1079
 #: bin/modules/gui/main.py:1403
 msgid "Could not restore database."
-msgstr "Não foi possível restaurar o banco de dados."
+msgstr "Não foi possível restaurar a base de dados."
 
-#
-# File: bin/modules/gui/main.py, line: 1081
 #: bin/modules/gui/main.py:1405
 msgid "Couldn't restore database"
-msgstr "Não foi possível restaurar o banco de dados."
+msgstr "Não foi possível restaurar a base de dados."
 
 #: bin/modules/gui/main.py:1444
 msgid ""
@@ -438,12 +400,9 @@ msgstr "palavra-passe incorreta!"
 msgid "Error, password not changed."
 msgstr "Erro, senha não alterada."
 
-#
-# File: bin/modules/gui/main.py, line: 1133
-# File: bin/modules/gui/main.py, line: 1153
 #: bin/modules/gui/main.py:1463 bin/modules/gui/main.py:1486
 msgid "Backup a database"
-msgstr "Fazer backup de um banco de dados"
+msgstr "Fazer backup de uma base de dados"
 
 #: bin/modules/gui/main.py:1466 bin/modules/gui/window/win_export.py:328
 #: bin/printer/printer.py:216 bin/widget/view/form_gtk/image.py:129
@@ -453,17 +412,15 @@ msgstr "Salvar Como..."
 
 #: bin/modules/gui/main.py:1479
 msgid "Database backed up successfully !"
-msgstr "Base de dados salvaguardada com sucesso."
+msgstr "Backup da base de dados criado com sucesso !"
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
-msgstr "Não pôde salvaguardar a base de dados"
+msgstr "O backup da base de dados não pode ser criado."
 
-#
-# File: bin/modules/gui/main.py, line: 1151
 #: bin/modules/gui/main.py:1484
 msgid "Couldn't backup database."
-msgstr "Não foi possível fazer backup do banco de dados."
+msgstr "O backup da base de dados não pode ser criado."
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
@@ -517,7 +474,7 @@ msgstr "Data da Última Modificação"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "Data ID Interna do Módulo"
 
 #
 # File: bin/modules/gui/window/form.py, line: 230
@@ -671,6 +628,12 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Erro na importação deste registro:\n"
+"%s\n"
+"Mensagem:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -701,6 +664,8 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"Erro no processamento da primeira linha do arquivo.\n"
+"Campo %s desconhecido !"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
@@ -712,7 +677,7 @@ msgstr "Boce não selecionou nenhum campo para importar"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "Extensão"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
@@ -720,7 +685,7 @@ msgstr "Aplicação"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "Processador de Impressão"
 
 #
 # File: bin/modules/gui/window/win_extension.py, line: 115
@@ -840,7 +805,7 @@ msgstr "Erro ao abrir Excel !"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "Qual o nome desta exportação ?"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
@@ -908,7 +873,7 @@ msgstr "informe o ip/nome do servidor"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "Fechar a dica atual"
 
 #: bin/common/common.py:90
 msgid ""
@@ -917,10 +882,14 @@ msgid ""
 "open this menu item, unless you disable all tips using the <b>'Menu "
 "Tips'</b> option in the user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Fechar Dica Atual:</b></span>\n"
+"Isto irá esconder a dica atual. Ela será exibida novamente na próxima vez "
+"que você abrir este menu, a menos que você desative todas as dicas usando a "
+"opção <b>'Menu Dicas'</b> nas preferências de usuário."
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "Desligar todas as dicas"
 
 #: bin/common/common.py:101
 msgid ""
@@ -929,10 +898,14 @@ msgid ""
 "To re-enable tips you need to check the <b>'Menu Tips'</b> option in the "
 "user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Desligar todas as dicas:</b></span>\n"
+"Isto vai desligar a apresentação das dicas em todos os itens de menu.\n"
+"Para ligar novamente marque a opção <b>'Dicas de Menu'</b> nas preferências "
+"de usuário."
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "Dicas"
 
 #
 # File: bin/modules/action/wizard.py, line: 133
@@ -958,15 +931,15 @@ msgstr ""
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "Certifique-se que o arquivo %s está correto"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " notificou o seguinte erro:\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
-msgstr ""
+msgstr "comentários"
 
 #
 # File: bin/common/common.py, line: 298
@@ -1000,6 +973,32 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>Um erro desconhecido ocorreu.</b>\n"
+"\n"
+"<b>Você não possui um contrato de garantia do distribuidor do OpenERP "
+"válido!</b>\n"
+"Se você estiver usando o OpenERP em produção, recomendamos que você faça a\n"
+"assinatura do programa de garantia do distribuidor.\n"
+"\n"
+"O contrato de garantia do distribuidor do OpenERP fornece garantia de "
+"correção de\n"
+"erros e um sistema de migração automática, assim podemos corrigir os "
+"problemas\n"
+"dentro de poucas horas. Se você tivesse um contrato de garantia do "
+"distribuidor,\n"
+"este erro poderia ser enviado para a equipe de qualidade da matriz do "
+"OpenERP.\n"
+"\n"
+"O programa de garantia do distribuidor oferece:\n"
+"* Migrações automáticas nas novas versões,\n"
+"* Garantia de correção de erro,\n"
+"* Aviso mensal de erros potenciais e suas correções,\n"
+"* Alertas de segurança por email e migração automática,\n"
+"* Acesso ao portal de cliente.\n"
+"\n"
+"Você pode usar o link abaixo para mais informações. O detalhamento do erro\n"
+"é exibido na segunda aba.\n"
 
 #: bin/common/common.py:410
 #, python-format
@@ -1027,6 +1026,26 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Um erro desconhecido ocorreu.</b>\n"
+"\n"
+"Seu contrato de garantia do distribuidor não cobre todos os módulos "
+"instalados no sistema!\n"
+"Se você está usando o OpenERP em produção, recomendamos aumentar o nível do "
+"seu contrato.\n"
+"\n"
+"Se você desenvolveu o seu próprio módulo ou instalou um módulos de "
+"terceiros, podemos fornecer um contrato adicional de garantia do "
+"distribuidor para estes módulos. Após revisar seus módulos, nossa equipe de "
+"qualidade vai certificar que eles serão migrados automaticamente para todas "
+"as versões futuras estáveis do OpenERP sem nenhum custo extra.\n"
+"\n"
+"Aqui está a lista de módulos não cobertos pelo seu contrato de garantida do "
+"distribuidor:\n"
+"%s\n"
+"\n"
+"Você pode usar o link abaixo para mais informações. O detalhamento do erro é "
+"exibido na segunda aba."
 
 #: bin/common/common.py:488
 msgid ""
@@ -1060,7 +1079,7 @@ msgstr "Abrir com..."
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "Impossível definir local %s: %s"
 
 #
 # File: bin/printer/printer.py, line: 172
@@ -1082,6 +1101,8 @@ msgstr ""
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
+"Erro! Nenhuma informação encontrada. Certifique-se que você tem informações "
+"para imprimir!"
 
 #
 # File: bin/printer/printer.py, line: 215
@@ -1149,7 +1170,7 @@ msgstr "O conteúdo do campo ou exceção se não válido"
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "Erro: "
 
 #
 # File: bin/widget_search/calendar.py, line: 55
@@ -1182,35 +1203,35 @@ msgstr "OpenERP - Seleção da data"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "contém"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "não contém"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "é igual a"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "não é igual a"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "maior que"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "menor que"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "em"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "não em"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -1218,6 +1239,10 @@ msgid ""
 "For Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d "
 "%H:%M:%S' formats respectively."
 msgstr ""
+"Entre com valores separados por ',' se o operador 'em' ou 'não em' for "
+"escolhido.\n"
+"Para Formatos Data e Data e Hora, especifique o texto no formato '%Y-%m-%d' "
+"e '%Y-%m-%d %H:%M:%S' respectivamente."
 
 #
 # File: bin/widget_search/checkbox.py, line: 36
@@ -1240,7 +1265,7 @@ msgstr "Você deve salvar este registro para usar o botão 'relatar' !"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "Ação não definida !"
 
 #
 # File: bin/widget/view/form.py, line: 182
@@ -1296,19 +1321,19 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--Ações--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "Gravar como Atalho"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Gravar como Filtro"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Gerenciar Filtros"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1316,6 +1341,9 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"Você tem registros sem gravar !  \n"
+"\n"
+"Favor Gravar antes de ordenar !"
 
 #
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 125
@@ -1363,54 +1391,54 @@ msgstr "Não é possível gerar gráfico !"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1422
 msgid "Dot Viewer"
-msgstr ""
+msgstr "Visualização de Ponto"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
-msgstr ""
+msgstr "Adicionar Novo Nó"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
-msgstr ""
+msgstr "Adicionar Nova Borda"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "Ampliar o Diagrama"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "Diminuir o Diagrama"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "Ajustar o diagrama na janela"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "Mostrar o diagrama com tamanho normal"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "Imprimir o Diagrama"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "Fechar %s Atual"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "Excluir %s Atual"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "Editar %s Atual"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
-msgstr ""
+msgstr " - Visualização de Ponto"
 
 #
 # File: bin/widget/view/form_gtk/reference.py, line: 92
@@ -1433,11 +1461,11 @@ msgstr "Ícone errado para o botão !"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "Campo"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "Objeto"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
@@ -1458,15 +1486,15 @@ msgstr "Traduzir visão"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "Gravar & Fechar"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "Gravar & Novo"
 
 #
 # File: bin/widget/view/form_gtk/interface.py, line: 47
@@ -1503,22 +1531,22 @@ msgstr "Remover esta entrada"
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "Página Anterior"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr ""
+msgstr "Registro Anterior"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "Próximo Registro"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "Próxima Página"
 
 #: bin/widget/view/form_gtk/one2many_list.py:245
 msgid "Switch"
@@ -1527,7 +1555,7 @@ msgstr "Alterar"
 #: bin/widget/view/form_gtk/one2many_list.py:251
 #: bin/widget/view/form_gtk/many2many.py:106
 msgid "Choose Limit"
-msgstr ""
+msgstr "Escolher Limite"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
@@ -1569,11 +1597,11 @@ msgstr "Imagens"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "Não há imagem para gravar como !"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "Atenção"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
@@ -1613,11 +1641,11 @@ msgstr "Definir como padrão"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "You can not set to the default value here !"
-msgstr ""
+msgstr "Você não pode definir um valor padão aqui !"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "Operation not permited"
-msgstr ""
+msgstr "Operação não permitida"
 
 #
 # File: bin/widget/view/form_gtk/binary.py, line: 77
@@ -1711,6 +1739,8 @@ msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
 msgstr ""
+"(Qualquer filtro existente com \n"
+"o mesmo nome será trocado)"
 
 #
 # File: bin/rpc.py, line: 143
@@ -1740,12 +1770,9 @@ msgstr "Erro de Conexão"
 msgid "OpenERP - Login"
 msgstr "OpenERP - Login"
 
-#
-# File: bin/openerp.glade, line: 118
-# File: bin/openerp.glade, line: 7298
 #: bin/openerp.glade:116 bin/openerp.glade:6450
 msgid "Database:"
-msgstr "Banco de dados:"
+msgstr "Base de dados:"
 
 #
 # File: bin/openerp.glade, line: 133
@@ -1779,35 +1806,25 @@ msgstr "_Conectar..."
 msgid "_Disconnect"
 msgstr "_Desconectar"
 
-#
-# File: bin/openerp.glade, line: 300
 #: bin/openerp.glade:308
 msgid "Databases"
-msgstr "Bancos de Dados"
+msgstr "Bases de Dados"
 
-#
-# File: bin/openerp.glade, line: 307
 #: bin/openerp.glade:315
 msgid "_New database"
-msgstr "Novo banco de _dados"
+msgstr "_Nova base de dados"
 
-#
-# File: bin/openerp.glade, line: 322
 #: bin/openerp.glade:330
 msgid "_Restore database"
-msgstr "_Restaurar banco de dados"
+msgstr "_Restaurar base de dados"
 
-#
-# File: bin/openerp.glade, line: 337
 #: bin/openerp.glade:345
 msgid "_Backup database"
-msgstr "Fazer _backup do banco de dados"
+msgstr "Fazer _backup da base de dados"
 
-#
-# File: bin/openerp.glade, line: 352
 #: bin/openerp.glade:360
 msgid "Dro_p database"
-msgstr "Apagar banco de dados"
+msgstr "_Apagar base de dados"
 
 #: bin/openerp.glade:380
 msgid "_Download Migrations Code"
@@ -1815,7 +1832,7 @@ msgstr "_Download de código de migração"
 
 #: bin/openerp.glade:395
 msgid "_Migrate Database(s)"
-msgstr "_Migrar base de dados"
+msgstr "_Migrar base(s) de dados"
 
 #
 # File: bin/openerp.glade, line: 372
@@ -2131,7 +2148,7 @@ msgstr "Ajuda"
 
 #: bin/openerp.glade:1132
 msgid "Enable Debug Mode Tooltips"
-msgstr ""
+msgstr "Ativa a Ferramenta de Dicas do Modo Debug"
 
 #
 # File: bin/openerp.glade, line: 1089
@@ -2226,7 +2243,7 @@ msgstr "Calendário"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
-msgstr ""
+msgstr "Diagrama"
 
 #
 # File: bin/openerp.glade, line: 1313
@@ -2286,7 +2303,7 @@ msgstr "Fechar esta janela"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
-msgstr ""
+msgstr "Empresa:"
 
 #: bin/openerp.glade:1535
 msgid "Requests:"
@@ -3103,29 +3120,21 @@ msgstr "Protocolo de conexão"
 msgid "Port:"
 msgstr "Porta:"
 
-#
-# File: bin/openerp.glade, line: 7237
 #: bin/openerp.glade:6389
 msgid "Choose a database..."
-msgstr "Escolha um banco de dados..."
+msgstr "Escolha uma base de dados..."
 
-#
-# File: bin/openerp.glade, line: 7252
 #: bin/openerp.glade:6404
 msgid "<b>Backup a database</b>"
-msgstr "<b>Fazer Backup de um Banco de Dados</b>"
+msgstr "<b>Fazer backup de uma base de dados</b>"
 
-#
-# File: bin/openerp.glade, line: 7483
 #: bin/openerp.glade:6645
 msgid "Restore a database"
-msgstr "Restaurar um banco de dados"
+msgstr "Restaurar uma base de dados"
 
-#
-# File: bin/openerp.glade, line: 7496
 #: bin/openerp.glade:6658
 msgid "<b>Restore a database</b>"
-msgstr "<b>Restaurar um banco de dados</b>"
+msgstr "<b>Restaurar uma base de dados</b>"
 
 #
 # File: bin/openerp.glade, line: 7540
@@ -3133,11 +3142,9 @@ msgstr "<b>Restaurar um banco de dados</b>"
 msgid "(must not contain any special char)"
 msgstr "(não deve conter caracteres especiais)"
 
-#
-# File: bin/openerp.glade, line: 7569
 #: bin/openerp.glade:6732
 msgid "New database name:"
-msgstr "Novo nome do banco de dados:"
+msgstr "Nome da nova base de dados:"
 
 #
 # File: bin/openerp.glade, line: 7669
@@ -3147,17 +3154,13 @@ msgstr "Novo nome do banco de dados:"
 msgid "http://localhost:8069"
 msgstr "http://localhost:8069"
 
-#
-# File: bin/openerp.glade, line: 7743
 #: bin/openerp.glade:6906
 msgid "Create a new database"
-msgstr "Criar um novo banco de dados"
+msgstr "Criar uma nova base de dados"
 
-#
-# File: bin/openerp.glade, line: 7756
 #: bin/openerp.glade:6919
 msgid "<b>Create a new database</b>"
-msgstr "<b>Criar um novo banco de dados</b>"
+msgstr "<b>Criar uma nova base de dados</b>"
 
 #
 # File: bin/openerp.glade, line: 7827
@@ -3173,16 +3176,15 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Server:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Servidor OpenERP:"
 
-#
-# File: bin/openerp.glade, line: 7861
 #: bin/openerp.glade:7025
 msgid ""
 "This is the password of the user that have the rights to administer "
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
-"Esta é a senha do usuário que tem direitos para administrar bancos de dados. "
+"Esta é a senha do usuário que tem direitos para administrar bases de dados. "
 "Este não é um usuário OpenERP, mas sim um super administrador. Se você não "
 "alterou, a senha padrão é 'admin' após a instalação."
 
@@ -3191,10 +3193,12 @@ msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Senha de Super "
+"Administrador:"
 
 #: bin/openerp.glade:7048
 msgid "admin"
-msgstr ""
+msgstr "admin"
 
 #
 # File: bin/openerp.glade, line: 7897
@@ -3202,30 +3206,28 @@ msgstr ""
 msgid "(<i>admin</i>, by default)"
 msgstr "(<i>admin</i>, por padrão)"
 
-#
-# File: bin/openerp.glade, line: 7962
 #: bin/openerp.glade:7127
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
-"Escolha o nome do banco de dados que será criado. O nome não deve conter "
+"Escolha o nome da base de dados que será criada. O nome não deve conter "
 "caracteres especiais. Exemplo: 'terp'."
 
 #: bin/openerp.glade:7129
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>New Database Name:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Nome da Nova Base "
+"de Dados:"
 
-#
-# File: bin/openerp.glade, line: 7988
 #: bin/openerp.glade:7154
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
-"Escolha o idioma padrão que será instalado para este banco de dados. Você "
+"Escolha o idioma padrão que será instalado para esta base de dados. Você "
 "poderá instalar novos idiomas depois da instalação, através do menu de "
 "administração."
 
@@ -3233,32 +3235,38 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Idioma Padrão:"
 
 #: bin/openerp.glade:7169
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
+"Esta é a senha para o usuário 'admin' que será criada em sua nova base de "
+"dados."
 
 #: bin/openerp.glade:7171
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Administrator "
 "Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Senha de "
+"Administrador:"
 
 #: bin/openerp.glade:7184
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
+"Esta é a senha do usuário 'admin' que será criado em sua base de dados. "
+"Precisa ser a mesma informada no campo acima."
 
 #: bin/openerp.glade:7186
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirme a Senha:"
 
-#
-# File: bin/openerp.glade, line: 8110
 #: bin/openerp.glade:7279
 msgid ""
 "Check this box if you want demonstration data to be installed on your new "
@@ -3266,14 +3274,16 @@ msgid ""
 "products, partners, etc."
 msgstr ""
 "Marque esta caixa se você deseja que os dados de demonstração sejam "
-"instalados no seu novo banco de dados. Estes dados vão ajudar você a "
-"entender o OpenERP, com produtos pré-definidos, parceiros, etc."
+"instalados no sua nova base de dados. Estes dados vão ajudar você a entender "
+"o OpenERP, com produtos pré-definidos, parceiros, etc."
 
 #: bin/openerp.glade:7282
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
 "Data:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Carregar Dados de "
+"Demonstração:"
 
 #
 # File: bin/openerp.glade, line: 8170
@@ -3383,33 +3393,35 @@ msgstr "Mês"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
-msgstr ""
+msgstr "Campos nos quais o critério de Pesquisa será aplicado"
 
 #: bin/openerp.glade:8289
 msgid "Conditional Operators"
-msgstr ""
+msgstr "Operadores Condicionais"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
-msgstr ""
+msgstr "A Escolha será aplicada com o próximo filtro, se existir"
 
 #: bin/openerp.glade:8317
 msgid ""
 "AND\n"
 "OR"
 msgstr ""
+"E\n"
+"OU"
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "Remover Filtro"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
-msgstr ""
+msgstr "Lançamento de Filtro"
 
 #: bin/openerp.glade:8395
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "Nome do Filtro:"
 
 #: bin/win_error.glade:40
 msgid "label"
@@ -3418,10 +3430,11 @@ msgstr "Rótulo"
 #: bin/win_error.glade:100
 msgid "Click here for details about the publisher warranty proposition"
 msgstr ""
+"Clique aqui para detalhes sobre a proposta de garantia do distribuidor"
 
 #: bin/win_error.glade:120
 msgid "<i>_Publisher Warranty</i>"
-msgstr ""
+msgstr "<i>_Garantia do Distribuidor</i>"
 
 #: bin/win_error.glade:151
 msgid ""
@@ -3431,6 +3444,11 @@ msgid ""
 "you shortly.\n"
 "</i>"
 msgstr ""
+"<b>Contrato de Garantia do Distribuidor.</b>\n"
+"<i>\n"
+"Sua requisição será envidada para o OpenERP e a equipe de garantia do "
+"distribuidor responderá rapidamente.\n"
+"</i>"
 
 #
 # File: bin/win_error.glade, line: 184
@@ -3446,11 +3464,11 @@ msgstr "Outros Comentários:"
 
 #: bin/win_error.glade:285
 msgid "Send to Publisher Warranty Team"
-msgstr ""
+msgstr "Enviar para a Equipe de Garantia do Distribuidor"
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
-msgstr ""
+msgstr "Resumo do problema:"
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"
@@ -3463,543 +3481,3 @@ msgstr "Detalhes"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr "<i>_Detalhes</i>"
-
-#
-# File: bin/modules/gui/main.py, line: 349
-#~ msgid "<b>Operation in progress</b>"
-#~ msgstr "<b>Operação em andamento</b>"
-
-#
-# File: bin/modules/gui/main.py, line: 340
-#~ msgid "OpenERP Database Installation"
-#~ msgstr "Instalação do Banco de Dados do OpenERP"
-
-#
-# File: bin/modules/gui/main.py, line: 401
-#~ msgid "The following users have been installed on your database:"
-#~ msgstr "Os seguintes usuários foram instalados no seu banco de dados:"
-
-#
-# File: bin/modules/gui/main.py, line: 401
-#~ msgid "You can now connect to the database as an administrator."
-#~ msgstr "Agora você pode se conectar ao banco de dados como administrador."
-
-#
-# File: bin/modules/gui/main.py, line: 748
-#~ msgid ""
-#~ "Connection error !\n"
-#~ "Bad username or password !"
-#~ msgstr ""
-#~ "Erro de conexão !\n"
-#~ "Usuário ou senha inválidos !"
-
-#
-# File: bin/openerp.glade, line: 7964
-#~ msgid "New Database Name:"
-#~ msgstr "Novo nome para o banco de dados:"
-
-#
-# File: bin/openerp.glade, line: 8003
-#~ msgid ""
-#~ "This is the password of the '<i>admin</i>' user that will be created in your "
-#~ "new database."
-#~ msgstr ""
-#~ "Esta é a senha do usuário '<i>admin</i>' que será criado no seu banco de "
-#~ "dados."
-
-#
-# File: bin/openerp.glade, line: 8005
-#~ msgid "Administrator Password:"
-#~ msgstr "Senha de Administrador:"
-
-#
-# File: bin/openerp.glade, line: 7990
-#~ msgid "Default Language:"
-#~ msgstr "Idioma Padrão:"
-
-#
-# File: bin/openerp.glade, line: 8113
-#~ msgid "Load Demonstration Data:"
-#~ msgstr "Carregar dados de demonstração:"
-
-#
-# File: bin/openerp.glade, line: 8017
-#~ msgid ""
-#~ "This is the password of the '<i>admin</i>' user that will be created in your "
-#~ "new database. It has to be the same than the above field."
-#~ msgstr ""
-#~ "Esta é a senha do usuário '<i>admin</i>' que será criado no seu banco de "
-#~ "dados. Ela deve ser a mesma do campo acima."
-
-#
-# File: bin/openerp.glade, line: 8019
-#~ msgid "Confirm Password:"
-#~ msgstr "Confirme a senha:"
-
-#
-# File: bin/openerp.glade, line: 8569
-#~ msgid ""
-#~ "You can connect to the new database using one of the following account:\n"
-#~ "\n"
-#~ "    Administrator: admin / admin "
-#~ msgstr ""
-#~ "Você pode conectar ao novo banco de dados usando uma das seguintes contas:\n"
-#~ "\n"
-#~ "    Administrador: admin / admin "
-
-#
-# File: bin/openerp.glade, line: 8504
-#~ msgid "Database creation"
-#~ msgstr "Criação do banco de dados"
-
-#
-# File: bin/openerp.glade, line: 8537
-#~ msgid "<b>Database created successfully!</b>"
-#~ msgstr "<b>Banco de dados criado com sucesso!</b>"
-
-#
-# File: bin/modules/gui/window/win_preference.py, line: 69
-#~ msgid "Preference"
-#~ msgstr "Preferência"
-
-#
-# File: bin/common/common.py, line: 186
-#~ msgid ""
-#~ "Thank you for the feedback !\n"
-#~ "Your comments have been sent to OpenERP.\n"
-#~ "You should now start by creating a new database or\n"
-#~ "connecting to an existing server through the \"File\" menu."
-#~ msgstr ""
-#~ "Obrigado por sua opinião !\n"
-#~ "Seus comentários foram enviados para a equipe do OpenERP.\n"
-#~ "Você pode iniciar agora criando um novo banco de dados ou\n"
-#~ "conectando a um servidor existente através do menu \"Arquivo\"."
-
-#
-# File: bin/plugins/__init__.py, line: 29
-#~ msgid "Print Workflow (Complex)"
-#~ msgstr "Imprimir Workflow (Complexo)"
-
-#
-# File: bin/common/common.py, line: 193
-#~ msgid ""
-#~ "Thank you for testing OpenERP !\n"
-#~ "You should now start by creating a new database or\n"
-#~ "connecting to an existing server through the \"File\" menu."
-#~ msgstr ""
-#~ "Obrigado por testar o OpenERP !\n"
-#~ "Você pode iniciar agora criando um novo banco de dados ou\n"
-#~ "conectando a um servidor existente através do menu \"Arquivo\"."
-
-#
-# File: bin/options.py, line: 111
-#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-#~ msgstr "informe o nível de log: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-
-#
-# File: bin/options.py, line: 110
-#~ msgid "specify channels to log"
-#~ msgstr "informe os canais para logar"
-
-#
-# File: bin/options.py, line: 109
-#~ msgid "enable basic debugging"
-#~ msgstr "ligar debugador básico"
-
-#
-# File: bin/widget_search/form.py, line: 193
-#~ msgid "Parameters :"
-#~ msgstr "Parâmetros:"
-
-#
-# File: bin/widget_search/form.py, line: 145
-#~ msgid "Limit :"
-#~ msgstr "Limite:"
-
-#
-# File: bin/translate.py, line: 183
-#, python-format
-#~ msgid "Unable to set locale %s"
-#~ msgstr "Não foi possível definir a localidade %s"
-
-#
-# File: bin/openerp.glade, line: 1140
-#~ msgid "_Tips"
-#~ msgstr "Dicas"
-
-#
-# File: bin/win_error.glade, line: 278
-#~ msgid "Send to Maintenance Team"
-#~ msgstr "Enviar para equipe de manutenção"
-
-#
-# File: bin/openerp.glade, line: 4311
-#~ msgid "OpenERP Survey"
-#~ msgstr "Pesquisa de opinião OpenERP"
-
-#
-# File: bin/openerp.glade, line: 4327
-#~ msgid "<b>OpenERP Survey</b>"
-#~ msgstr "<b>Pesquisa de opinião OpenERP</b>"
-
-#
-# File: bin/openerp.glade, line: 4340
-#~ msgid ""
-#~ "<i>Please fill in the following form in order to help us to improve OpenERP "
-#~ "and better target new developments.</i>"
-#~ msgstr ""
-#~ "<i>Please fill in the following form in order to help us to improve OpenERP "
-#~ "and better target new developments.</i>"
-
-#
-# File: bin/openerp.glade, line: 4662
-#~ msgid "Open Source:"
-#~ msgstr "Open Source:"
-
-#
-# File: bin/openerp.glade, line: 4702
-#~ msgid "How did you hear about us:"
-#~ msgstr "How did you hear about us:"
-
-#
-# File: bin/openerp.glade, line: 4922
-#~ msgid "Industry:"
-#~ msgstr "Indústria:"
-
-#
-# File: bin/openerp.glade, line: 4758
-#~ msgid "System:"
-#~ msgstr "Sistema:"
-
-#
-# File: bin/openerp.glade, line: 4824
-#~ msgid "Country:"
-#~ msgstr "País:"
-
-#
-# File: bin/openerp.glade, line: 4909
-#~ msgid "# Employees:"
-#~ msgstr "# de empregados:"
-
-#
-# File: bin/openerp.glade, line: 5124
-#~ msgid "Your Name:"
-#~ msgstr "Seu nome:"
-
-#
-# File: bin/openerp.glade, line: 5162
-#~ msgid "E-Mail:"
-#~ msgstr "E-Mail:"
-
-#
-# File: bin/openerp.glade, line: 5175
-#~ msgid "Your Company:"
-#~ msgstr "Sua Empresa:"
-
-#
-# File: bin/openerp.glade, line: 6241
-#~ msgid "<Shist> + <Tab>"
-#~ msgstr "<Shift> + <Tab>"
-
-#
-# File: bin/openerp.glade, line: 7831
-#~ msgid "OpenERP Server:"
-#~ msgstr "Servidor OpenERP:"
-
-#
-# File: bin/modules/gui/window/win_export.py, line: 81
-#~ msgid ""
-#~ "Function only available for MS Office !\n"
-#~ "Sorry, OOo users :("
-#~ msgstr ""
-#~ "Função disponível apenas para MS Office !\n"
-#~ " :("
-
-#
-# File: bin/widget_search/form.py, line: 154
-#~ msgid "Offset :"
-#~ msgstr "Offset:"
-
-#
-# File: bin/openerp.glade, line: 4808
-#~ msgid "Your Role:"
-#~ msgstr "Seu Cargo:"
-
-#
-# File: bin/openerp.glade, line: 4936
-#~ msgid "<b>Your company:</b>"
-#~ msgstr "<b>Sua empresa:</b>"
-
-#
-# File: bin/openerp.glade, line: 5003
-#~ msgid "Tell us why you try OpenERP and what are your current softwares:"
-#~ msgstr "Tell us why you try OpenERP and what are your current softwares:"
-
-#
-# File: bin/openerp.glade, line: 5094
-#~ msgid "I want to be contacted for a demonstration"
-#~ msgstr "I want to be contacted for a demonstration"
-
-#
-# File: bin/openerp.glade, line: 4968
-#~ msgid "We plan to use OpenERP"
-#~ msgstr "We plan to use OpenERP"
-
-#
-# File: bin/openerp.glade, line: 4982
-#~ msgid "We plan to offer services on OpenERP"
-#~ msgstr "We plan to offer services on OpenERP"
-
-#
-# File: bin/openerp.glade, line: 5037
-#~ msgid "<b>Your interrest:</b>"
-#~ msgstr "<b>Seu interesse:</b>"
-
-#
-# File: bin/openerp.glade, line: 5189
-#~ msgid "<b>Keep Informed</b>"
-#~ msgstr "<b>Manter Informado</b>"
-
-#
-# File: bin/openerp.glade, line: 5109
-#~ msgid "Phone / Mobile:"
-#~ msgstr "Telefone / Celular:"
-
-#
-# File: bin/widget/view/form_gtk/calendar.py, line: 127
-# File: bin/widget/view/form_gtk/calendar.py, line: 260
-#~ msgid "This widget is readonly !"
-#~ msgstr "O campo é somente para leitura!"
-
-#
-# File: bin/widget_search/wid_int.py, line: 44
-#~ msgid "The content of the widget or excpetion if not valid"
-#~ msgstr "O conteúdo da widget ou excpetion não é válido"
-
-#, python-format
-#~ msgid ""
-#~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
-#~ "Please report this error manually at %s"
-#~ msgstr ""
-#~ "O seu problema <u>NÂO</u> pôde ser transmitido à equipa da qualidade!\n"
-#~ "Por favor reporte o erro manualmente em %s"
-
-#~ msgid "<i>_Maintenance</i>"
-#~ msgstr "<i>_Manutenção</i>"
-
-#~ msgid "gtk-close"
-#~ msgstr "Fechar"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "<b>An unknown error has been reported.</b>\n"
-#~ "\n"
-#~ "Your maintenance contract does not cover all modules installed in your "
-#~ "system !\n"
-#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
-#~ "your\n"
-#~ "contract.\n"
-#~ "\n"
-#~ "If you have developped your own modules or installed third party module, we\n"
-#~ "can provide you an additional maintenance contract for these modules. After\n"
-#~ "having reviewed your modules, our quality team will ensure they will "
-#~ "migrate\n"
-#~ "automatically for all futur stable versions of Open ERP at no extra cost.\n"
-#~ "\n"
-#~ "Here is the list of modules not covered by your maintenance contract:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "You can use the link bellow for more information. The detail of the error\n"
-#~ "is displayed on the second tab."
-#~ msgstr ""
-#~ "\n"
-#~ "<b>Um erro desconhecido foi encontrado.</b>\n"
-#~ "\n"
-#~ "seu contrato de manutenção não abrange todos os módulos instalados em seu "
-#~ "sistema!\n"
-#~ "Se voce está usando o OpenERP em produção, sugerimos que voce atualize seu "
-#~ "contrato.\n"
-#~ "\n"
-#~ "Se voce tem desenvolvido seus próprios módulos ou instalado módulos de "
-#~ "terceiros, nós\n"
-#~ "podemos providenciar um contrato de manutenção adicional para estes módulos. "
-#~ "Depois\n"
-#~ "tendo revisto seus módulos, ou qualificando seu time podemos garantir que "
-#~ "eles vão migrar\n"
-#~ "automaticamente para todas as versões estáveis do OpenERP sem custo extra.\n"
-#~ "\n"
-#~ "Aqui temos uma lista dos módulos nao acobertados por seu contrato de "
-#~ "manutenção:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Voce pode usar o link abaixo para mais informações. O detalhamento dos "
-#~ "erros\n"
-#~ "é exibido na segunda aba."
-
-#~ msgid ""
-#~ "\n"
-#~ "<b>An unknown error has been reported.</b>\n"
-#~ "\n"
-#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
-#~ "If you are using Open ERP in production, it is highly suggested to "
-#~ "subscribe\n"
-#~ "a maintenance program.\n"
-#~ "\n"
-#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
-#~ "automatic migration system so that we can fix your problems within a few\n"
-#~ "hours. If you had a maintenance contract, this error would have been sent\n"
-#~ "to the quality team of the Open ERP editor.\n"
-#~ "\n"
-#~ "The maintenance program offers you:\n"
-#~ "* Automatic migrations on new versions,\n"
-#~ "* A bugfix guarantee,\n"
-#~ "* Monthly announces of potential bugs and their fixes,\n"
-#~ "* Security alerts by email and automatic migration,\n"
-#~ "* Access to the customer portal.\n"
-#~ "\n"
-#~ "You can use the link bellow for more information. The detail of the error\n"
-#~ "is displayed on the second tab.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "<b>Um erro desconhecido foi encontrado.</b>\n"
-#~ "\n"
-#~ "<b>Voce não tem um contrato de manuteção do OpenERP !</b>\n"
-#~ "Se voce está usando o OpenERP em produção, sugerimos que voce assine \n"
-#~ "um contrato de manutenção do programa.\n"
-#~ "\n"
-#~ "O contrato de manutenção do OpenERP oferece a voce uma garantia de correção "
-#~ "de erros e uma\n"
-#~ "migração de sistema automática assim que corrigir-mos seus problemas.\n"
-#~ "Se voce tem um contrato de manutenção, este erro deverá ser enviado para\n"
-#~ "nossa equipe de qualidade.\n"
-#~ "\n"
-#~ "O programa de manutenção oferece:\n"
-#~ "* Migração automática nas novas versões,\n"
-#~ "* Garantia de correção de erros,\n"
-#~ "* Mensalmente anunciamos os erros e suas correções,\n"
-#~ "* Alerta de segurança por email e migrações automáticas,\n"
-#~ "* Acesso ao portal do cliente.\n"
-#~ "\n"
-#~ "\n"
-#~ "Voce pode usar o link abaixo para mais informações. O detalhamento do erro\n"
-#~ "é exibido na segunda aba.\n"
-
-#~ msgid "Click here for details about the maintenance proposition"
-#~ msgstr "Clique aqui para detalhes sobre a proposta de manutenção"
-
-#~ msgid ""
-#~ "<b>Maintenance Contract.</b>\n"
-#~ "<i>\n"
-#~ "Your request will be send to OpenERP and maintenance team will reply you "
-#~ "shortly.\n"
-#~ "</i>"
-#~ msgstr ""
-#~ "<b>Contrato de Manutenção.</b>\n"
-#~ "<i>\n"
-#~ "Seu pedido será enviado ao OpenERP e sua equipe de manutenção irá responder-"
-#~ "lhe o mais breve possível.\n"
-#~ "</i>"
-
-#, python-format
-#~ msgid " - %s request(s) sended"
-#~ msgstr " - %s mensagem(ns) envidadas"
-
-#~ msgid "Connect now"
-#~ msgstr "Conectar agora"
-
-#~ msgid "Connect Later"
-#~ msgstr "Conectar mais tarde"
-
-#~ msgid "Employees:"
-#~ msgstr "Empregados:"
-
-#~ msgid "<b>Your company</b>"
-#~ msgstr "Sua empresa"
-
-#~ msgid "gtk-cancel"
-#~ msgstr "gtk-cancel"
-
-#~ msgid "gtk-ok"
-#~ msgstr "gtk-ok"
-
-#~ msgid "We plan to use Open ERP"
-#~ msgstr "Nós planejamos usar o OpenERP"
-
-#~ msgid "We plan to offer services on Open ERP"
-#~ msgstr "Nós planejamos oferecer serviços para o OpenERP"
-
-#~ msgid "City:"
-#~ msgstr "Cidade"
-
-#~ msgid "<b>Your interrest</b>"
-#~ msgstr "<b>Seu interesse</b>"
-
-#~ msgid "E-mail:"
-#~ msgstr "E-mail:"
-
-#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
-#~ msgstr "Desejo receber o ebook OpenERP por email"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "<b>An unknown error has been reported.</b>\n"
-#~ "\n"
-#~ "Your maintenance contract does not cover all modules installed in your "
-#~ "system !\n"
-#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
-#~ "your\n"
-#~ "contract.\n"
-#~ "\n"
-#~ "If you have developed your own modules or installed third party module, we\n"
-#~ "can provide you an additional maintenance contract for these modules. After\n"
-#~ "having reviewed your modules, our quality team will ensure they will "
-#~ "migrate\n"
-#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
-#~ "\n"
-#~ "Here is the list of modules not covered by your maintenance contract:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "You can use the link bellow for more information. The detail of the error\n"
-#~ "is displayed on the second tab."
-#~ msgstr ""
-#~ "\n"
-#~ "<b>Um erro desconhecido foi informado.</b>\n"
-#~ "\n"
-#~ "Seu contrato de manutenção não acoberta todos os módulos instalados em seu "
-#~ "sistema !\n"
-#~ "Se voce está usando o OpenERP em produção, nós sugerimos que voce atualize "
-#~ "seu \n"
-#~ "contrato.\n"
-#~ "\n"
-#~ "Se voce desenvolveu seus próprios módulos ou instalou módulos de terceiros, "
-#~ "nós\n"
-#~ "podemos fornecer contrato adicional para estes módulos. Depois\n"
-#~ "de rever seus módulos, nossa equipe de qualidade poderar garantir sua "
-#~ "migração\n"
-#~ "automaticamente para todas as versões estáveis futuras do OpenERP, sem custo "
-#~ "extra.\n"
-#~ "\n"
-#~ "Aqui está a lista de módulos não acobertados pelo seu contrato de "
-#~ "manutenção:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Voce pode usar o link abaixo para mais informações. O detalhe do erro\n"
-#~ "será exibido na segunda aba."
-
-#~ msgid ""
-#~ "Please fill in the following form in order to help us to improve <b><span "
-#~ "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
-#~ "developments."
-#~ msgstr ""
-#~ "Por favor preencha o seguinte form na ordem para ajudar-nos para melhorar "
-#~ "<b><span foreground=\"red\"><i>Abrir</i></span> ERP</b>  e melhorar os novos "
-#~ "desenvolvimentos."
-
-#~ msgid "Tell us why you try Open ERP and what are your current softwares:"
-#~ msgstr ""
-#~ "Fale-nos sobre porque voce usa o OpenERP e quais seus softwares atuais:"
-
-#~ msgid "Error no report"
-#~ msgstr "Erro não informado"
