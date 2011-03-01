@@ -44,10 +44,9 @@ class char(char.char):
         self.field_left = False
 
     def _value_get(self):
+        text = self.widget.get_text() or False
         if self.selected_oper_text in ['is Empty', 'is not Empty']:
             text = False
-        else:
-            text = self.widget.get_text()
         return [(self.field_left, self.selected_oper, text)]
 
     def set_visibility(self):
