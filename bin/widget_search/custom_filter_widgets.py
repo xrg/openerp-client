@@ -233,10 +233,10 @@ class datetime(datetime):
         val1 = self._date_get(self.entry1.get_text())
         val2 = self._date_get(self.entry2.get_text())
         if self.selected_oper_text == 'between':
-            domain = ('&', (self.field_left, '>=', val1),(self.field_left, '<=', val2))
+            domain = ['&', (self.field_left, '>=', val1),(self.field_left, '<=', val2)]
             return domain
         elif self.selected_oper_text == 'exclude range':
-            domain = ('|',(self.field_left, '<', val1),(self.field_left, '>', val2))
+            domain = ['|',(self.field_left, '<', val1),(self.field_left, '>', val2)]
             return domain
         elif self.selected_oper_text in ['is Empty', 'is not Empty']:
             val1 = False
@@ -299,10 +299,10 @@ class spinbutton(spinbutton):
         val1 = self.spin1.get_value()
         val2 = self.spin2.get_value()
         if self.selected_oper_text == 'between':
-            domain = ('&', (self.field_left, '>=', val1),(self.field_left, '<=', val2))
+            domain = ['&', (self.field_left, '>=', val1),(self.field_left, '<=', val2)]
             return domain
         elif self.selected_oper_text == 'exclude range':
-            domain = ('|',(self.field_left, '<', val1),(self.field_left, '>', val2))
+            domain = ['|',(self.field_left, '<', val1),(self.field_left, '>', val2)]
             return domain
         domain = [(self.field_left, self.selected_oper, val1)]
         return domain
@@ -337,10 +337,10 @@ class spinint(spinint):
         val1 = self.spin1.get_value()
         val2 = self.spin2.get_value()
         if self.selected_oper_text == 'between':
-            domain = ('&', (self.field_left, '>=', val1),(self.field_left, '<=', val2))
+            domain = ['&', (self.field_left, '>=', val1),(self.field_left, '<=', val2)]
             return domain
         elif self.selected_oper_text == 'exclude range':
-            domain = ('|',(self.field_left, '<', val1),(self.field_left, '>', val2))
+            domain = ['|',(self.field_left, '<', val1),(self.field_left, '>', val2)]
             return domain
         domain = [(self.field_left, self.selected_oper, val1)]
         return domain
