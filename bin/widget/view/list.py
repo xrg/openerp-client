@@ -25,6 +25,7 @@ import gobject
 import gtk
 import tools
 import itertools
+import logging
 import copy
 import rpc
 from rpc import RPCProxy
@@ -210,6 +211,14 @@ class list_record(object):
 
     def add_list(self, lst):
         for l in lst:
+            if l in self.lst:
+                # If this check ever hits, it may be that the model has non-unique ids
+                # returned through its search() method. It happened before with "report.membership".
+                # Go and fix your models (or data)! Gtk can not do much here.
+                # OTOH, we must do sth about it, as duplicate records would lead to OOM
+                # due to on_iter_next endlessly providing the same record.
+                logging.getLogger('view.list').warning("Model %r is already inserted in list! Please fix your %s.search() at the server!", l, l.resource)
+                continue
             self.add(l)
 
     def __getitem__(self, i):
@@ -302,6 +311,7 @@ class AdaptModelGroup(gtk.GenericTreeModel):
 
     def on_iter_next(self, node):
         try:
+            # See note at add_list() about possible race here.
             i = node.list_group.lst.index(node) + 1
             return node.list_group[i]
         except IndexError:
