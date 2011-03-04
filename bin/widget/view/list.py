@@ -122,8 +122,6 @@ class list_record(object):
         self.lst = []
         self.screen = screen
         self.load()
-        
-        
 
     def destroy(self):
         del self.context
@@ -186,7 +184,7 @@ class list_record(object):
                     self.add(rec)
         else:
             if self.context.get('__domain') and not no_leaf:
-                limit = self.screen.screen_container.get_limit()               
+                limit = self.screen.screen_container.get_limit()
                 ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, limit, self.sort_order)
                 if not ids:
                      self.add_dummny_record(self.context['__field'])
@@ -230,7 +228,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.domain = domain
         self.models = list_record(model_group, context=context, domain=self.domain, sort_order=sort_order, screen=screen)
         self.set_property('leak_references', False)
-     
 
     def added(self, modellist, position):
         self.models.loaded = False
@@ -856,10 +853,6 @@ class ViewList(parser_view):
 
     def set_invisible_attr(self):
         for col in self.widget_tree.get_columns():
-            if col._type == 'datetime':
-                col.set_max_width(145)
-                if self.screen.context.get('group_by'):
-                    col.set_max_width(180)
             value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
                            {'context':self.screen.context})
             if col.name in self.screen.context.get('group_by',[]):

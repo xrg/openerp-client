@@ -185,12 +185,12 @@ class parser_tree(interface.parser_interface):
                     'float': (80, 300),
                     'float_time': (80,150),
                     'date': (70, False),
-                    'datetime': (145, 145),
+                    'datetime': (145, False),
                     'selection': (90, 250),
                     'char': (100, False),
                     'one2many': (50, False),
                     'many2many': (50, False),
-                    'boolean': (20, 80),
+                    'boolean': (20, False),
                     'progressbar':(150, 200)
                 }
 
