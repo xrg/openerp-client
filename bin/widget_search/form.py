@@ -399,7 +399,7 @@ class form(wid_int.wid_int):
         self.custom_widgets[panelx] = (panel, new_table, 1)
         table.attach(new_table, 1, 9, x, x+1)
         self.rows += 1
-        ## Store the  widgets original visible attribute becuase as they are
+        ## Store the  widgets original visible attribute because as they are
         ## attached to the table as a child widgets and the table.show_all() will
         ## set all child widgets to visible inspite of their visibility is set to FALSE
         ## so make them invisible again after the table.show_all()

@@ -90,9 +90,11 @@ class custom_filter(wid_int.wid_int):
             self.combo_op.append_text(operator[1])
         self.widget.pack_start(self.right_text)
         self.widget.reorder_child(self.right_text, 2)
+        vis = self.condition_next.get_visible()
         self.widget.show_all()
         self.combo_op.set_active(0)
-        self.condition_next.hide()
+        if not vis:
+            self.condition_next.hide()
         return True
 
     def _value_get(self):
