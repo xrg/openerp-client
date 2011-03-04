@@ -31,7 +31,7 @@ from reference import reference
 import rpc
 
 class char(char.char):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={}, search_callback=None):
         super(char,self).__init__(name, parent)
         self.operators = (['=', _('is')],
                           ['<>',_('is not')],
@@ -42,6 +42,7 @@ class char(char.char):
         self.selected_oper = False
         self.selected_oper_text = False
         self.field_left = False
+        self.widget.connect('activate', search_callback)
 
     def _value_get(self):
         text = self.widget.get_text() or False
@@ -56,7 +57,7 @@ class char(char.char):
             self.widget.hide()
 
 class many2one(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={}, search_callback=None):
         wid_int.wid_int.__init__(self, name, parent)
         self.attrs = attrs
         self.operators = (['=', _('is')],
@@ -143,15 +144,15 @@ class many2one(wid_int.wid_int):
             self.but_find.hide()
 
 class one2many(many2one):
-     def __init__(self, name, parent, attrs={}):
-         many2one.__init__(self, name, parent, attrs)
+     def __init__(self, name, parent, attrs={}, search_callback=None):
+         many2one.__init__(self, name, parent, attrs, search_callback=None)
          self.operators = (['=', _('is')],
                            ['<>',_('is not')],
                            ['=', _('is Empty')],
                            ['<>',_('is not Empty')])
 class many2many(many2one):
-     def __init__(self, name, parent, attrs={}):
-         many2one.__init__(self, name, parent, attrs)
+     def __init__(self, name, parent, attrs={}, search_callback=None):
+         many2one.__init__(self, name, parent, attrs, search_callback=None)
          self.operators = (['=', _('is')],
                            ['<>',_('is not')],
                            ['=', _('is Empty')],
@@ -159,7 +160,7 @@ class many2many(many2one):
 
 
 class checkbox(wid_int.wid_int):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={}, search_callback=None):
         wid_int.wid_int.__init__(self, name, parent)
         self.widget = gtk.CheckButton()
         self.widget.set_active(False)
@@ -174,7 +175,7 @@ class checkbox(wid_int.wid_int):
         pass
 
 class calendar(calendar):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={}, search_callback=None):
         super(calendar,self).__init__(name, parent)
         self.operators =  (['=', _('is')],
                           ['<>',_('is not')],
@@ -186,6 +187,8 @@ class calendar(calendar):
         self.selected_oper = False
         self.selected_oper_text = False
         self.field_left = False
+        self.entry1.connect('activate', search_callback)
+        self.entry2.connect('activate', search_callback)
 
     def _value_get(self):
         val1 = self._date_get(self.entry1.get_text())
@@ -217,7 +220,7 @@ class calendar(calendar):
             self.widget.show_all()
 
 class datetime(datetime):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={}, search_callback=None):
         super(datetime,self).__init__(name, parent)
         self.operators =  (['=', _('is')],
                           ['<>',_('is not')],
@@ -228,6 +231,9 @@ class datetime(datetime):
         self.selected_oper = False
         self.selected_oper_text = False
         self.field_left = False
+        self.entry1.connect('activate', search_callback)
+        self.entry2.connect('activate', search_callback)
+
 
     def _value_get(self):
         val1 = self._date_get(self.entry1.get_text())
@@ -260,7 +266,7 @@ class datetime(datetime):
 
 
 class selection(selection):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={}, search_callback=None):
         selection_dict = {'selection':attrs.get('selection', {})}
         super(selection,self).__init__(name, parent, selection_dict)
         self.operators =  (['=', _('is')],
@@ -279,7 +285,7 @@ class selection(selection):
 
 #
 class spinbutton(spinbutton):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={}, search_callback=None):
         super(spinbutton,self).__init__(name, parent)
         self.operators = (['=', _('is equal to')],
                           ['<>',_('is not equal to')],
@@ -292,6 +298,9 @@ class spinbutton(spinbutton):
         self.selected_oper = False
         self.selected_oper_text = False
         self.field_left = False
+        self.spin1.connect('activate', search_callback)
+        self.spin2.connect('activate', search_callback)
+
 
     def _value_get(self):
         self.spin1.update()
@@ -317,7 +326,7 @@ class spinbutton(spinbutton):
             self.label.hide()
 
 class spinint(spinint):
-    def __init__(self, name, parent, attrs={}):
+    def __init__(self, name, parent, attrs={}, search_callback=None):
         super(spinint,self).__init__(name, parent)
         self.operators = (['=', _('is equal to')],
                           ['<>',_('is not equal to')],
@@ -330,6 +339,8 @@ class spinint(spinint):
         self.selected_oper = False
         self.selected_oper_text = False
         self.field_left = False
+        self.spin1.connect('activate', search_callback)
+        self.spin2.connect('activate', search_callback)
 
     def _value_get(self):
         self.spin1.update()

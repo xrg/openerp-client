@@ -391,7 +391,7 @@ class form(wid_int.wid_int):
 
     def add_custom(self, widget, table, fields):
         new_table = gtk.Table(1,1,False)
-        panel = widgets_type['custom_filter'][0]('', self.parent, fields, callback=self.remove_custom)
+        panel = widgets_type['custom_filter'][0]('', self.parent, fields, callback=self.remove_custom, search_callback=self.call[1])
         x =  self.rows
         new_table.attach(panel.widget,0, 1, x, x+1, xoptions=gtk.FILL, yoptions=gtk.FILL , ypadding=2, xpadding=0)
         panelx = 'panel' + str(x)
