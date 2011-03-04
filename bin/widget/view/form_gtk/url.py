@@ -47,12 +47,13 @@ class url(interface.widget_interface):
         img = gtk.Image()
         if attrs.get('widget',False) == 'email':
             img.set_from_stock('terp-mail-message-new', gtk.ICON_SIZE_BUTTON)
+            self.button.set_tooltip_text(_('Send an e-mail with your default e-mail client'))
         else:
             img.set_from_stock('gtk-jump-to', gtk.ICON_SIZE_BUTTON)
+            self.button.set_tooltip_text(_('Open this resource'))
         self.button.set_image(img)
         self.button.set_size_request(30,30)
         self.button.set_relief(gtk.RELIEF_NONE)
-        self.button.set_tooltip_text(_('Open this resource'))
         self.button.connect('clicked', self.button_clicked)
         self.button.set_alignment(0.5, 0.5)
         self.button.set_property('can-focus', False)
