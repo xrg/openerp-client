@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
+"PO-Revision-Date: 2011-01-16 11:21+0000\n"
 "Last-Translator: Paulius Sladkevičius - http://www.inovera.lt <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-05 04:53+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "Language: lt\n"
 
 #
@@ -3688,3 +3688,475 @@ msgstr "Plačiau"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr "<i>_Informacija</i>"
+
+#
+# File: bin/modules/gui/main.py, line: 388
+# File: bin/modules/gui/main.py, line: 388
+#~ msgid "You can now connect to the database as an administrator."
+#~ msgstr ""
+#~ "Dabar jūs galite prisijungti prie duomenų bazės kaip administratorius."
+
+#
+# File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 698
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s užklausa(os) išsiūsta(os)"
+
+#
+# File: bin/modules/gui/window/win_preference.py, line: 69
+# File: bin/modules/gui/window/win_preference.py, line: 69
+#~ msgid "Preference"
+#~ msgstr "Parinktys"
+
+#
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Spausdinti darbų srautą (Sudėtingas)"
+
+#
+# File: bin/options.py, line: 90
+# File: bin/options.py, line: 90
+#~ msgid "enable basic debugging"
+#~ msgstr "įjunkti paprastą derintuvę"
+
+#
+# File: bin/options.py, line: 91
+# File: bin/options.py, line: 91
+#~ msgid "specify channels to log"
+#~ msgstr "nustatyti žurnalo kanalus"
+
+#
+# File: bin/options.py, line: 92
+# File: bin/options.py, line: 92
+#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+#~ msgstr "nustatyti žurnalo lygį: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+
+#
+# File: bin/printer/printer.py, line: 189
+# File: bin/printer/printer.py, line: 189
+#~ msgid "Error no report"
+#~ msgstr "Klaida nėra ataskaitos"
+
+#
+# File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1140
+#~ msgid "_Tips"
+#~ msgstr "_Patarimai"
+
+#
+# File: bin/openerp.glade, line: 5791
+# File: bin/openerp.glade, line: 5791
+#~ msgid "Open Source:"
+#~ msgstr "Atviras Kodas:"
+
+#
+# File: bin/openerp.glade, line: 5831
+# File: bin/openerp.glade, line: 5831
+#~ msgid "How did you hear about us:"
+#~ msgstr "Kaip jūs apie mus sužinojote:"
+
+#
+# File: bin/openerp.glade, line: 5887
+# File: bin/openerp.glade, line: 5887
+#~ msgid "System:"
+#~ msgstr "Sistema:"
+
+#
+# File: bin/openerp.glade, line: 5937
+# File: bin/openerp.glade, line: 5937
+#~ msgid "Your Role:"
+#~ msgstr "Jūsų pareigos:"
+
+#
+# File: bin/openerp.glade, line: 5953
+# File: bin/openerp.glade, line: 5953
+#~ msgid "Country:"
+#~ msgstr "Šalis:"
+
+#
+# File: bin/openerp.glade, line: 6038
+# File: bin/openerp.glade, line: 6038
+#~ msgid "# Employees:"
+#~ msgstr "# Darbuotojai:"
+
+#
+# File: bin/openerp.glade, line: 6051
+# File: bin/openerp.glade, line: 6051
+#~ msgid "Industry:"
+#~ msgstr "Pramonė:"
+
+#
+# File: bin/openerp.glade, line: 6065
+# File: bin/openerp.glade, line: 6065
+#~ msgid "<b>Your company:</b>"
+#~ msgstr "<b>Jūsų organizacija:</b>"
+
+#
+# File: bin/openerp.glade, line: 6166
+# File: bin/openerp.glade, line: 6166
+#~ msgid "<b>Your interrest:</b>"
+#~ msgstr "<b>Jūsų interesai:</b>"
+
+#
+# File: bin/openerp.glade, line: 6291
+# File: bin/openerp.glade, line: 6291
+#~ msgid "E-Mail:"
+#~ msgstr "El. paštas:"
+
+#
+# File: bin/openerp.glade, line: 6318
+# File: bin/openerp.glade, line: 6318
+#~ msgid "<b>Keep Informed</b>"
+#~ msgstr "<b>Būkite informuoti</b>"
+
+#
+# File: bin/openerp.glade, line: 7370
+# File: bin/openerp.glade, line: 7370
+#~ msgid "<Shist> + <Tab>"
+#~ msgstr "<Shift> + <Tab>"
+
+#
+# File: bin/openerp.glade, line: 9633
+# File: bin/openerp.glade, line: 9633
+#~ msgid "Database creation"
+#~ msgstr "Duomenų bazės kūrimas"
+
+#
+# File: bin/openerp.glade, line: 9666
+# File: bin/openerp.glade, line: 9666
+#~ msgid "<b>Database created successfully!</b>"
+#~ msgstr "<b>Duomenų bazė sėkmingai sukurta!</b>"
+
+#
+# File: bin/openerp.glade, line: 9698
+# File: bin/openerp.glade, line: 9698
+#~ msgid ""
+#~ "You can connect to the new database using one of the following account:\n"
+#~ "\n"
+#~ "    Administrator: admin / admin "
+#~ msgstr ""
+#~ "Jūs galite prisijungti prie naujos duomenų bazės pasinaudoję viena iš "
+#~ "paskyrų:\n"
+#~ "\n"
+#~ "    Administratorius: admin / admin "
+
+#~ msgid "OpenERP Database Installation"
+#~ msgstr "OpenERP Duomenų bazės įdiegimas"
+
+#~ msgid "We plan to use OpenERP"
+#~ msgstr "Mes planuojame naudoti OpenERP"
+
+#~ msgid "Your Name:"
+#~ msgstr "Jūsų vardas:"
+
+#~ msgid "New Database Name:"
+#~ msgstr "Naujos duomenų bazės pavadinimas:"
+
+#~ msgid "OpenERP Server:"
+#~ msgstr "OpenERP Serveris:"
+
+#~ msgid "Confirm Password:"
+#~ msgstr "Patvirtinkite slaptažodį:"
+
+#~ msgid "gtk-close"
+#~ msgstr "Užverti"
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Nepavyko nustatyti lokalės %s"
+
+#~ msgid "The following users have been installed on your database:"
+#~ msgstr "Jūsų duomenų bazėje buvo sukurti šie naudotojai:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Tai '<i>admin</i>' naudotojo, kuris bus sukurtas naujoje duomenų bazėje, "
+#~ "slaptažodis."
+
+#~ msgid "OpenERP Survey"
+#~ msgstr "OpenERP Apklausa"
+
+#~ msgid ""
+#~ "<i>Please fill in the following form in order to help us to improve OpenERP "
+#~ "and better target new developments.</i>"
+#~ msgstr ""
+#~ "<i>Prašome užpildykite šią formą nordėdami mums padėti tobulinti ir geriau "
+#~ "planuoti OpenERP plėtojimą.<i>"
+
+#~ msgid "<b>OpenERP Survey</b>"
+#~ msgstr "<b>OpenERP Apklausa</b>"
+
+#~ msgid "Tell us why you try OpenERP and what are your current softwares:"
+#~ msgstr ""
+#~ "Pasakykite mums, kodėl jūs norite išbandyti OpenERP ir kokią programinę "
+#~ "įrangą šiuo metu naudojate:"
+
+#~ msgid "We plan to offer services on OpenERP"
+#~ msgstr "Mes planuojame teikti OpenERP paslaugas"
+
+#~ msgid "I want to be contacted for a demonstration"
+#~ msgstr "Norėčiau, kad su manimi susisiektų demonstracijos tikslais"
+
+#~ msgid "Phone / Mobile:"
+#~ msgstr "Telefonas / Mobilus tel:"
+
+#~ msgid "Your Company:"
+#~ msgstr "Jūsų Organizacija:"
+
+#~ msgid "Administrator Password:"
+#~ msgstr "Administratoriaus slaptažodis:"
+
+#~ msgid "Default Language:"
+#~ msgstr "Numatytoji kalba:"
+
+#~ msgid "Load Demonstration Data:"
+#~ msgstr "Įkelti demonstracinius duomenis:"
+
+#~ msgid "<i>_Maintenance</i>"
+#~ msgstr "<i>_Priežiūra</i>"
+
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Siūsti priežiūros komandai"
+
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Priežiūros sutartis.</b>\n"
+#~ "<i>\n"
+#~ "Jūsų užklausa bus išsiūsta OpenERP ir priežiūros komanda su jumis netrukus "
+#~ "susisieks.\n"
+#~ "</i>"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Tai '<i>admin</i>' naudotojo, kuris bus sukurtas naujoje duomenų bazėje, "
+#~ "slaptažodis. Jis turi būti identiškas aukščiau pateiktam slaptažodžiui."
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr ""
+#~ "Paspauskite čia norėdami gauti detalesnę informaciją apie priežiūros "
+#~ "pasiūlymus"
+
+#~ msgid "The content of the widget or excpetion if not valid"
+#~ msgstr "Klaidingas valdiklio turinys ar išimtys"
+
+#
+# File: bin/widget_search/form.py, line: 145
+# File: bin/widget_search/form.py, line: 145
+#~ msgid "Limit :"
+#~ msgstr "Įrašų skaičius:"
+
+#
+# File: bin/widget_search/form.py, line: 154
+# File: bin/widget_search/form.py, line: 154
+#~ msgid "Offset :"
+#~ msgstr "Poslinkis:"
+
+#
+# File: bin/widget_search/form.py, line: 193
+# File: bin/widget_search/form.py, line: 193
+#~ msgid "Parameters :"
+#~ msgstr "Parametrai:"
+
+#
+# File: bin/widget/view/form_gtk/calendar.py, line: 115
+# File: bin/widget/view/form_gtk/calendar.py, line: 238
+# File: bin/widget/view/form_gtk/calendar.py, line: 115
+# File: bin/widget/view/form_gtk/calendar.py, line: 238
+#~ msgid "This widget is readonly !"
+#~ msgstr "Šis valdiklis tik skaitymui!"
+
+#~ msgid ""
+#~ "Thank you for the feedback !\n"
+#~ "Your comments have been sent to OpenERP.\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Dėkojame už atsiliepimus!\n"
+#~ "Jūsų komentarai nusiųsti OpenERP komandai.\n"
+#~ "Dabar pradėkite darbą sukurdami naują duomenų bazę arba\n"
+#~ "prisijunkdami prie jau veikiančio serverio - žr. meniu \"Failas\"."
+
+#~ msgid ""
+#~ "Thank you for testing OpenERP !\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Dėkojame už OpenERP testavimą!\n"
+#~ "Dabar pradėkite darbą sukurdami naują duomenų bazę arba\n"
+#~ "prisijunkdami prie jau veikiančio serverio - žr. meniu \"Failas\"."
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Pranešta apie nežinomą klaidą.</b>\n"
+#~ "\n"
+#~ "<b>Jūs neturite galiojančios OpenERP priežiūros sutarties!</b>\n"
+#~ "Jeigu OpenERP naudojate ne testavimui, rekomenduojame pasirašyti\n"
+#~ "priežiūros sutartį.\n"
+#~ "\n"
+#~ "OpenERP priežiūros sutartis jums garantuoja klaidų pataisymus ir\n"
+#~ "automatinę atnaujinimo sistemą. Tokiu būdų mes galėsime išspręsti jūsų\n"
+#~ "problemas keletos valandų bėgyje. Jeigu jūs turėtumėte priežiūros sutartį\n"
+#~ "ši klaida būtų išsiūsta OpenERP priežiūros komandai.\n"
+#~ "\n"
+#~ "Priežiūros programa jums siūlo:\n"
+#~ "*Automatinius atnaujinimus į naujesnes OpenERP versijas.\n"
+#~ "*Klaidų ištaisymo garantiją.\n"
+#~ "*Mėnesinius pranešimus apie klaidas ir jų ištaisymus.\n"
+#~ "*Saugumo įspėjimus el. paštu ir automatinius atnaujinimus.\n"
+#~ "*Prieigą prie naudotojų portalo.\n"
+#~ "\n"
+#~ "Daugiau informacijos galite gauti žemiau pateiktoje nuorodoje. Informacija "
+#~ "apie klaidą \n"
+#~ "rasite antroje kortelėje.\n"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developped your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all futur stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Pranešta apie nežinomą klaidą.</b>\n"
+#~ "\n"
+#~ "Jūsų priežiūros sutartis neapima visų jdiegtų modulių jūsų sistemoje!\n"
+#~ "Jeigu OpenERP naudojate ne testavimui, rekomenduojame atnaujinti jūsų "
+#~ "priežiūros\n"
+#~ "sutartį.\n"
+#~ "\n"
+#~ "Jeigu jūs naudojate jūsų pačių sukurtus modulius ar trečiųjų šalių modulius, "
+#~ "mes\n"
+#~ "galime jums suteikti papildomą priežiūrą šiems moduliams. Poto kai "
+#~ "peržiūrėsime jūsų\n"
+#~ "modulius, mūsų priežiūros komanda užtikrins, kad jūs galėsite automatiškai "
+#~ "atsinaujinti\n"
+#~ "į naujesnes OpenERP versijas be papildomų išlaidų.\n"
+#~ "\n"
+#~ "Čia yra modulių sąrašas kurių neapima esama priežiūros sutartis:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Daugiau informacijos galite gauti žemiau pateiktoje nuorodoje. Informaciją "
+#~ "apie \n"
+#~ "klaidą rasite antroje kortelėje."
+
+#, python-format
+#~ msgid ""
+#~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
+#~ "Please report this error manually at %s"
+#~ msgstr ""
+#~ "<u>Nepavyko</u> išsiūsti užklausos priežiūros komandai!\n"
+#~ "Prašome pranešti apie klaidą savarankiškai %s"
+
+#~ msgid ""
+#~ "Connection error !\n"
+#~ "Bad username or password !"
+#~ msgstr ""
+#~ "Prisijungimo klaida!\n"
+#~ "Klaidingas naudotojo vardas arba slaptažodis!"
+
+#~ msgid ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+#~ msgstr ""
+#~ "Funkcija galima tik MS Office!\n"
+#~ "Atsiprašome, OpenOffice.org naudotojų ;("
+
+#~ msgid "<b>Operation in progress</b>"
+#~ msgstr "<b>Vykdomas veiksmas</b>"
+
+#~ msgid "Connect now"
+#~ msgstr "Prisijungti dabar"
+
+#~ msgid "Connect Later"
+#~ msgstr "Prisijungti vėliau"
+
+#~ msgid "<b>Your company</b>"
+#~ msgstr "Jūsų įmonė"
+
+#~ msgid "Employees:"
+#~ msgstr "Darbuotojų:"
+
+#~ msgid "We plan to use Open ERP"
+#~ msgstr "Planuojame naudoti Open ERP"
+
+#~ msgid "We plan to offer services on Open ERP"
+#~ msgstr "Planuojame teikti Open ERP paslaugas"
+
+#~ msgid "City:"
+#~ msgstr "Miestas:"
+
+#~ msgid "E-mail:"
+#~ msgstr "El. pašto adresas:"
+
+#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
+#~ msgstr "Noriu gauti elektroninę Open ERP knygą (PDF) paštu"
+
+#~ msgid "Tell us why you try Open ERP and what are your current softwares:"
+#~ msgstr ""
+#~ "Papasakokite mums, kodėl išbandėte Open ERP bei kokią programinę įrangą šiuo "
+#~ "metu naudojate:"
+
+#~ msgid ""
+#~ "Please fill in the following form in order to help us to improve <b><span "
+#~ "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
+#~ "developments."
+#~ msgstr ""
+#~ "Prašome užpildyti šią formą. Taip mums padėsite pagerinti <b><span "
+#~ "foreground=\"red\"><i>Open</i></span> ERP</b> bei planuoti naujus "
+#~ "patobulinimus."
+
+#~ msgid "<b>Your interrest</b>"
+#~ msgstr "<b>Jūsų susidomėjimas</b>"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gt-cancel"

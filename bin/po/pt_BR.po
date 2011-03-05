@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-06 04:53+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-05 04:55+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "Language: pt_BR\n"
 
 #: bin/plugins/__init__.py:27
@@ -882,6 +882,10 @@ msgid ""
 "open this menu item, unless you disable all tips using the <b>'Menu "
 "Tips'</b> option in the user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Fechar Dica Atual:</b></span>\n"
+"Isto irá esconder a dica atual. Ela será exibida novamente na próxima vez "
+"que você abrir este menu, a menos que você desative todas as dicas usando a "
+"opção <b>'Menu Dicas'</b> nas preferências de usuário."
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
@@ -969,6 +973,32 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>Um erro desconhecido ocorreu.</b>\n"
+"\n"
+"<b>Você não possui um contrato de garantia do distribuidor do OpenERP "
+"válido!</b>\n"
+"Se você estiver usando o OpenERP em produção, recomendamos que você faça a\n"
+"assinatura do programa de garantia do distribuidor.\n"
+"\n"
+"O contrato de garantia do distribuidor do OpenERP fornece garantia de "
+"correção de\n"
+"erros e um sistema de migração automática, assim podemos corrigir os "
+"problemas\n"
+"dentro de poucas horas. Se você tivesse um contrato de garantia do "
+"distribuidor,\n"
+"este erro poderia ser enviado para a equipe de qualidade da matriz do "
+"OpenERP.\n"
+"\n"
+"O programa de garantia do distribuidor oferece:\n"
+"* Migrações automáticas nas novas versões,\n"
+"* Garantia de correção de erro,\n"
+"* Aviso mensal de erros potenciais e suas correções,\n"
+"* Alertas de segurança por email e migração automática,\n"
+"* Acesso ao portal de cliente.\n"
+"\n"
+"Você pode usar o link abaixo para mais informações. O detalhamento do erro\n"
+"é exibido na segunda aba.\n"
 
 #: bin/common/common.py:410
 #, python-format
@@ -996,6 +1026,26 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Um erro desconhecido ocorreu.</b>\n"
+"\n"
+"Seu contrato de garantia do distribuidor não cobre todos os módulos "
+"instalados no sistema!\n"
+"Se você está usando o OpenERP em produção, recomendamos aumentar o nível do "
+"seu contrato.\n"
+"\n"
+"Se você desenvolveu o seu próprio módulo ou instalou um módulos de "
+"terceiros, podemos fornecer um contrato adicional de garantia do "
+"distribuidor para estes módulos. Após revisar seus módulos, nossa equipe de "
+"qualidade vai certificar que eles serão migrados automaticamente para todas "
+"as versões futuras estáveis do OpenERP sem nenhum custo extra.\n"
+"\n"
+"Aqui está a lista de módulos não cobertos pelo seu contrato de garantida do "
+"distribuidor:\n"
+"%s\n"
+"\n"
+"Você pode usar o link abaixo para mais informações. O detalhamento do erro é "
+"exibido na segunda aba."
 
 #: bin/common/common.py:488
 msgid ""
@@ -1029,7 +1079,7 @@ msgstr "Abrir com..."
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "Impossível definir local %s: %s"
 
 #
 # File: bin/printer/printer.py, line: 172
@@ -1341,7 +1391,7 @@ msgstr "Não é possível gerar gráfico !"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1422
 msgid "Dot Viewer"
-msgstr ""
+msgstr "Visualização de Ponto"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
@@ -1388,7 +1438,7 @@ msgstr "Editar %s Atual"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
-msgstr ""
+msgstr " - Visualização de Ponto"
 
 #
 # File: bin/widget/view/form_gtk/reference.py, line: 92
@@ -2098,7 +2148,7 @@ msgstr "Ajuda"
 
 #: bin/openerp.glade:1132
 msgid "Enable Debug Mode Tooltips"
-msgstr ""
+msgstr "Ativa a Ferramenta de Dicas do Modo Debug"
 
 #
 # File: bin/openerp.glade, line: 1089
@@ -3343,7 +3393,7 @@ msgstr "Mês"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
-msgstr ""
+msgstr "Campos nos quais o critério de Pesquisa será aplicado"
 
 #: bin/openerp.glade:8289
 msgid "Conditional Operators"
@@ -3351,7 +3401,7 @@ msgstr "Operadores Condicionais"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
-msgstr ""
+msgstr "A Escolha será aplicada com o próximo filtro, se existir"
 
 #: bin/openerp.glade:8317
 msgid ""
@@ -3367,11 +3417,11 @@ msgstr "Remover Filtro"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
-msgstr ""
+msgstr "Lançamento de Filtro"
 
 #: bin/openerp.glade:8395
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "Nome do Filtro:"
 
 #: bin/win_error.glade:40
 msgid "label"

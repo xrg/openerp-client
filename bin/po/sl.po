@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
+"PO-Revision-Date: 2010-10-25 19:06+0000\n"
 "Last-Translator: Oto Brglez <oto_brglez_ml@hotmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:05+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-05 04:54+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "Language: sl\n"
 
 #: bin/plugins/__init__.py:27
@@ -2869,3 +2869,189 @@ msgstr "Podrobnosti"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr "<i>_Podrobnosti</i>"
+
+#
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Izpis delovnega procesa (obsežni)"
+
+#
+# File: bin/options.py, line: 90
+# File: bin/options.py, line: 90
+#~ msgid "enable basic debugging"
+#~ msgstr "omogoči osnovno razhroščevanje"
+
+#~ msgid "Parameters :"
+#~ msgstr "Parametri:"
+
+#~ msgid "Limit :"
+#~ msgstr "Limit:"
+
+#~ msgid "Offset :"
+#~ msgstr "Zamik:"
+
+#~ msgid ""
+#~ "Thank you for the feedback !\n"
+#~ "Your comments have been sent to OpenERP.\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Hvala za vaš odziv!\n"
+#~ "Vaši komentarji so poslani na OpenERP!\n"
+#~ "Sedaj morate ustvariti novo podatkovno bazo\n"
+#~ "ali se povezati na obstoječo!"
+
+#~ msgid ""
+#~ "Thank you for testing OpenERP !\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Hvala za testiranje OpenERP-ja!\n"
+#~ "Sedaj morate ustvariti novo podatkovno bazo\n"
+#~ "ali se povezati na obstoječo!"
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Ne morem nastaviti %s"
+
+#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+#~ msgstr ""
+#~ "specificiraj stopnje v dnevniku: INFO, RAZHROŠČEVANJE, OPOZORILO, NAPAKA, "
+#~ "KRITIČNO"
+
+#~ msgid "specify channels to log"
+#~ msgstr "specificiraj kanal za dnevnik"
+
+#~ msgid "<b>Operation in progress</b>"
+#~ msgstr "<b>Operacija se izvaja</b>"
+
+#~ msgid "OpenERP Database Installation"
+#~ msgstr "Inštalacija OpenERP  baze"
+
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " %s zahtev poslanih"
+
+#~ msgid "The following users have been installed on your database:"
+#~ msgstr "Naslednji uporabniki so bili ustvarjeni na vaši podatkovni bazi:"
+
+#~ msgid "You can now connect to the database as an administrator."
+#~ msgstr "Sedaj se lahko povežete na bazo kot administrator."
+
+#~ msgid ""
+#~ "Connection error !\n"
+#~ "Bad username or password !"
+#~ msgstr ""
+#~ "Napak v pobezavi!\n"
+#~ "Napačno uporabniško ime ali geslo"
+
+#~ msgid "Preference"
+#~ msgstr "Lastnosti"
+
+#~ msgid ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+#~ msgstr "Funkcija deluje samo v MS Office! Žal!"
+
+#~ msgid "This widget is readonly !"
+#~ msgstr "Gradnik je samo za branje!"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-zapri"
+
+#~ msgid "Error no report"
+#~ msgstr "Napaka: ni poročila"
+
+#~ msgid "System:"
+#~ msgstr "Sistem:"
+
+#~ msgid "Country:"
+#~ msgstr "Država:"
+
+#~ msgid "E-Mail:"
+#~ msgstr "E-pošta:"
+
+#~ msgid "<Shist> + <Tab>"
+#~ msgstr "<Shist> + <Tab>"
+
+#~ msgid "OpenERP Server:"
+#~ msgstr "Strežnik OpenERP:"
+
+#~ msgid "Default Language:"
+#~ msgstr "Privzeti jezik:"
+
+#~ msgid "Confirm Password:"
+#~ msgstr "Potrdite geslo:"
+
+#~ msgid "_Tips"
+#~ msgstr "_Nasveti"
+
+#~ msgid "New Database Name:"
+#~ msgstr "Novo ime podatkovne baze:"
+
+#~ msgid "OpenERP Survey"
+#~ msgstr "Anketa OpenERP"
+
+#~ msgid "Industry:"
+#~ msgstr "Panoga:"
+
+#~ msgid "# Employees:"
+#~ msgstr "# zaposlencev:"
+
+#~ msgid "We plan to use OpenERP"
+#~ msgstr "Načrtujemo uporabo OpenERP"
+
+#~ msgid "<b>Your company:</b>"
+#~ msgstr "<b>Vaše podjetje:</b>"
+
+#~ msgid "We plan to offer services on OpenERP"
+#~ msgstr "Radi bi ponujali storitve za OpenERP"
+
+#~ msgid "Open Source:"
+#~ msgstr "Odprta koda:"
+
+#~ msgid "<b>OpenERP Survey</b>"
+#~ msgstr "<b>Anketa OpenERP</b>"
+
+#~ msgid "How did you hear about us:"
+#~ msgstr "Kako ste izvedeli za nas:"
+
+#~ msgid "Your Role:"
+#~ msgstr "Vaša funkcija:"
+
+#~ msgid "I want to be contacted for a demonstration"
+#~ msgstr "SMo kandidati za demonstracijo"
+
+#~ msgid "<b>Your interrest:</b>"
+#~ msgstr "<b>Vaše želje:</b>"
+
+#~ msgid "Phone / Mobile:"
+#~ msgstr "Telefon / prenosni telefon"
+
+#~ msgid "Your Name:"
+#~ msgstr "Vaše ime:"
+
+#~ msgid "Your Company:"
+#~ msgstr "Vaše podjetje:"
+
+#~ msgid "<b>Keep Informed</b>"
+#~ msgstr "<b>Obveščajte me</b>"
+
+#~ msgid "Load Demonstration Data:"
+#~ msgstr "Naloži demonstracijske podatke:"
+
+#~ msgid "Administrator Password:"
+#~ msgstr "Geslo administratorja:"
+
+#~ msgid "<i>_Maintenance</i>"
+#~ msgstr "<i>_Vzdrževanje</i>"
+
+#~ msgid "<b>Database created successfully!</b>"
+#~ msgstr "<b>Podatkovna baza uspešno izdelana!</b>"
+
+#~ msgid "Database creation"
+#~ msgstr "Izdelava podatkovne baze"
+
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Pošljite ekipi vzdrževalcev"

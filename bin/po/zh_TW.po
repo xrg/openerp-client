@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
+"PO-Revision-Date: 2010-12-14 08:23+0000\n"
 "Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:05+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-05 04:55+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "Language: \n"
 
 #
@@ -3493,3 +3493,743 @@ msgstr "細節"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr ""
+
+#~ msgid "Limit :"
+#~ msgstr "限制："
+
+#
+# File: bin/widget_search/wid_int.py, line: 44
+# File: bin/widget_search/wid_int.py, line: 44
+#~ msgid "The content of the widget or excpetion if not valid"
+#~ msgstr "如果無效時表單的內容或出錯信息"
+
+#
+# File: bin/widget_search/form.py, line: 154
+# File: bin/widget_search/form.py, line: 154
+#~ msgid "Offset :"
+#~ msgstr "Offset :"
+
+#
+# File: bin/widget_search/form.py, line: 193
+# File: bin/widget_search/form.py, line: 193
+#~ msgid "Parameters :"
+#~ msgstr "參數："
+
+#~ msgid ""
+#~ "Thank you for the feedback !\n"
+#~ "Your comments have been sent to OpenERP.\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr "謝謝您的反饋！你的建議已被發送到OpenERP.現在請通過「檔案」選單新建資料庫或者連線到一台存在的伺服器。"
+
+#~ msgid ""
+#~ "Thank you for testing OpenERP !\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "謝謝您測試OpenERP !\n"
+#~ "請通過「檔案」選單新建資料庫或者連線到已配置完成的伺服器。"
+
+#, python-format
+#~ msgid ""
+#~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
+#~ "Please report this error manually at %s"
+#~ msgstr ""
+#~ "您的問題<u>NOT</u> 提交到質量小組！\n"
+#~ "請在%s人工報告這個錯誤給"
+
+#
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "列印工作流程（高級）"
+
+#
+# File: bin/options.py, line: 90
+# File: bin/options.py, line: 90
+#~ msgid "enable basic debugging"
+#~ msgstr "啟動基本的程式調試"
+
+#
+# File: bin/options.py, line: 91
+# File: bin/options.py, line: 91
+#~ msgid "specify channels to log"
+#~ msgstr "設定log日誌對象"
+
+#
+# File: bin/options.py, line: 92
+# File: bin/options.py, line: 92
+#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+#~ msgstr "設定log級別：INFO, DEBUG, WARNING, ERROR, CRITICAL"
+
+#~ msgid "OpenERP Database Installation"
+#~ msgstr "安裝OpenERP資料庫"
+
+#
+# File: bin/modules/gui/main.py, line: 336
+# File: bin/modules/gui/main.py, line: 336
+#~ msgid "<b>Operation in progress</b>"
+#~ msgstr "<b>操作進行中</b>"
+
+#
+# File: bin/modules/gui/main.py, line: 388
+# File: bin/modules/gui/main.py, line: 388
+#~ msgid "The following users have been installed on your database:"
+#~ msgstr "在您的帳套中已設定了以下成員："
+
+#
+# File: bin/modules/gui/main.py, line: 388
+# File: bin/modules/gui/main.py, line: 388
+#~ msgid "You can now connect to the database as an administrator."
+#~ msgstr "現在可以以管理員的身份連線到資料庫了。"
+
+#
+# File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 698
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s 條請求已發送。"
+
+#
+# File: bin/modules/gui/main.py, line: 736
+# File: bin/modules/gui/main.py, line: 736
+#~ msgid ""
+#~ "Connection error !\n"
+#~ "Bad username or password !"
+#~ msgstr ""
+#~ "連線錯誤！\n"
+#~ "成員名或密碼錯誤！"
+
+#
+# File: bin/modules/gui/window/win_preference.py, line: 69
+# File: bin/modules/gui/window/win_preference.py, line: 69
+#~ msgid "Preference"
+#~ msgstr "偏好設定"
+
+#
+# File: bin/printer/printer.py, line: 189
+# File: bin/printer/printer.py, line: 189
+#~ msgid "Error no report"
+#~ msgstr "出錯：沒有報表"
+
+#
+# File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1140
+#~ msgid "_Tips"
+#~ msgstr "提示(_T)"
+
+#~ msgid "OpenERP Survey"
+#~ msgstr "OpenERP 調查"
+
+#~ msgid "<b>OpenERP Survey</b>"
+#~ msgstr "<b>OpenERP 調查</b>"
+
+#~ msgid ""
+#~ "<i>Please fill in the following form in order to help us to improve OpenERP "
+#~ "and better target new developments.</i>"
+#~ msgstr "<i>為了改進OpenERP並使新開發具有更好的針對性，請填寫以下表格。</i>"
+
+#
+# File: bin/openerp.glade, line: 5791
+# File: bin/openerp.glade, line: 5791
+#~ msgid "Open Source:"
+#~ msgstr "開源："
+
+#
+# File: bin/openerp.glade, line: 5831
+# File: bin/openerp.glade, line: 5831
+#~ msgid "How did you hear about us:"
+#~ msgstr "你如何知道我們："
+
+#
+# File: bin/openerp.glade, line: 5887
+# File: bin/openerp.glade, line: 5887
+#~ msgid "System:"
+#~ msgstr "系統："
+
+#
+# File: bin/openerp.glade, line: 5937
+# File: bin/openerp.glade, line: 5937
+#~ msgid "Your Role:"
+#~ msgstr "角色："
+
+#
+# File: bin/openerp.glade, line: 6038
+# File: bin/openerp.glade, line: 6038
+#~ msgid "# Employees:"
+#~ msgstr "員工數量："
+
+#
+# File: bin/openerp.glade, line: 6051
+# File: bin/openerp.glade, line: 6051
+#~ msgid "Industry:"
+#~ msgstr "行業："
+
+#
+# File: bin/openerp.glade, line: 6065
+# File: bin/openerp.glade, line: 6065
+#~ msgid "<b>Your company:</b>"
+#~ msgstr "<b>您所在公司</b>"
+
+#~ msgid "We plan to use OpenERP"
+#~ msgstr "我們計劃使用OpenERP"
+
+#~ msgid "We plan to offer services on OpenERP"
+#~ msgstr "我們計劃購買OpenERP相關服務"
+
+#~ msgid "Tell us why you try OpenERP and what are your current softwares:"
+#~ msgstr "請告知目前使用的是什麼軟件，為什麼要試用OpenERP:"
+
+#
+# File: bin/openerp.glade, line: 6166
+# File: bin/openerp.glade, line: 6166
+#~ msgid "<b>Your interrest:</b>"
+#~ msgstr "<b>您的興趣</b>"
+
+#~ msgid "I want to be contacted for a demonstration"
+#~ msgstr "我想聯繫一次展示"
+
+#~ msgid "Phone / Mobile:"
+#~ msgstr "電話/ 手機:"
+
+#~ msgid "Your Name:"
+#~ msgstr "您的姓名:"
+
+#
+# File: bin/openerp.glade, line: 6291
+# File: bin/openerp.glade, line: 6291
+#~ msgid "E-Mail:"
+#~ msgstr "Email:"
+
+#~ msgid "Your Company:"
+#~ msgstr "您就職的公司:"
+
+#
+# File: bin/openerp.glade, line: 6318
+# File: bin/openerp.glade, line: 6318
+#~ msgid "<b>Keep Informed</b>"
+#~ msgstr "<b>保持聯繫</b>"
+
+#
+# File: bin/openerp.glade, line: 7370
+# File: bin/openerp.glade, line: 7370
+#~ msgid "<Shist> + <Tab>"
+#~ msgstr "<Shist> + <Tab>"
+
+#~ msgid "OpenERP Server:"
+#~ msgstr "OpenERP 伺服器:"
+
+#~ msgid "New Database Name:"
+#~ msgstr "新資料庫的名稱:"
+
+#~ msgid "Default Language:"
+#~ msgstr "預設語系："
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr "這是將在新資料庫建立的'<i>admin</i>'帳號的密碼。"
+
+#~ msgid "Administrator Password:"
+#~ msgstr "管理員密碼:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr "這是將在新資料庫建立的'<i>admin</i>'帳號的密碼，此密碼應和上一個輸入框的一樣。"
+
+#~ msgid "Load Demonstration Data:"
+#~ msgstr "載入展示資料"
+
+#
+# File: bin/openerp.glade, line: 9633
+# File: bin/openerp.glade, line: 9633
+#~ msgid "Database creation"
+#~ msgstr "建立帳套"
+
+#
+# File: bin/openerp.glade, line: 9666
+# File: bin/openerp.glade, line: 9666
+#~ msgid "<b>Database created successfully!</b>"
+#~ msgstr "<b>帳套建立成功！</b>"
+
+#
+# File: bin/openerp.glade, line: 9698
+# File: bin/openerp.glade, line: 9698
+#~ msgid ""
+#~ "You can connect to the new database using one of the following account:\n"
+#~ "\n"
+#~ "    Administrator: admin / admin "
+#~ msgstr ""
+#~ "使用下列帳號連線新帳套:\n"
+#~ "\n"
+#~ "    管理員： admin / admin "
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "點擊此處獲取具體的維護建議"
+
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>維護契約。</b>\n"
+#~ "<i>\n"
+#~ "您的要求將提交到OpenERP，維護小組將很快回答您的問題。\n"
+#~ "</i>"
+
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "提交給維護小組"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-關閉"
+
+#
+# File: bin/openerp.glade, line: 3220
+# File: bin/openerp.glade, line: 3595
+# File: bin/openerp.glade, line: 3754
+# File: bin/openerp.glade, line: 3220
+# File: bin/openerp.glade, line: 3595
+# File: bin/openerp.glade, line: 3754
+#~ msgid "Application Error!"
+#~ msgstr "應用程式出錯！"
+
+#
+# File: bin/openerp.glade, line: 3259
+# File: bin/openerp.glade, line: 3634
+# File: bin/openerp.glade, line: 3676
+# File: bin/openerp.glade, line: 3912
+# File: bin/openerp.glade, line: 3259
+# File: bin/openerp.glade, line: 3634
+# File: bin/openerp.glade, line: 3676
+# File: bin/openerp.glade, line: 3912
+#~ msgid "Error details"
+#~ msgstr "錯誤詳情"
+
+#
+# File: bin/openerp.glade, line: 3813
+# File: bin/openerp.glade, line: 3813
+#~ msgid "<b>Error 404</b>"
+#~ msgstr "<b>Error 404</b>"
+
+#
+# File: bin/openerp.glade, line: 3827
+# File: bin/openerp.glade, line: 3827
+#~ msgid "<b>Error code:</b>"
+#~ msgstr "<b>出錯代碼：</b>"
+
+#
+# File: bin/openerp.glade, line: 3844
+# File: bin/openerp.glade, line: 3844
+#~ msgid ""
+#~ "This Page does not exist !\n"
+#~ "Please retry"
+#~ msgstr ""
+#~ "這個頁面不存在！\n"
+#~ "請重試"
+
+#
+# File: bin/openerp.glade, line: 3867
+# File: bin/openerp.glade, line: 3867
+#~ msgid "<i>Click on the Support Request tab if you need more help !</i>"
+#~ msgstr "<i>如果你需要幫助，請單擊支持請求標籤！</i>"
+
+#
+# File: bin/openerp.glade, line: 3886
+# File: bin/openerp.glade, line: 3886
+#~ msgid "De_scription"
+#~ msgstr "描述(_s)"
+
+#
+# File: bin/openerp.glade, line: 4014
+# File: bin/openerp.glade, line: 4014
+#~ msgid "Phone Number:"
+#~ msgstr "電話號碼："
+
+#
+# File: bin/openerp.glade, line: 4074
+# File: bin/openerp.glade, line: 4074
+#~ msgid "<b>support contract id</b>"
+#~ msgstr "<b>服務契約號</b>"
+
+#
+# File: bin/openerp.glade, line: 4113
+# File: bin/openerp.glade, line: 4113
+#~ msgid "Send Support Request"
+#~ msgstr "發送支持請求"
+
+#
+# File: bin/openerp.glade, line: 4244
+# File: bin/openerp.glade, line: 4244
+#~ msgid "<b>Your Email:</b>"
+#~ msgstr "<b>您的Email：</b>"
+
+#
+#
+#~ msgid "You can use this feature in the web client"
+#~ msgstr "可以在web客戶端使用該功能"
+
+#
+#
+#~ msgid "%d bytes"
+#~ msgstr "%d bytes"
+
+#
+#
+#~ msgid "No resource selected !"
+#~ msgstr "未選擇資源！"
+
+#
+#
+#~ msgid "You have to select one resource!"
+#~ msgstr "您必須選擇一個資源！"
+
+#
+#
+#~ msgid "Invalid form !"
+#~ msgstr "表單資料無效！"
+
+#
+#
+#~ msgid "No record selected!"
+#~ msgstr "未選擇記錄！"
+
+#
+#
+#~ msgid "Are you sure you want to remove this attachment ?"
+#~ msgstr "您確定要移除此附件？"
+
+#
+#
+#~ msgid "Can not open file !"
+#~ msgstr "無法打開檔案！"
+
+#
+#
+#~ msgid "Can not write file !"
+#~ msgstr "無法寫入檔案！"
+
+#
+#
+#~ msgid ""
+#~ "Unable to preview image file !\n"
+#~ "Verify the format."
+#~ msgstr ""
+#~ "無法預覽圖片！\n"
+#~ "請檢查檔案格式。"
+
+#
+#
+#~ msgid "Do not use special characters !"
+#~ msgstr "請不要包含任何特殊字元！"
+
+#
+#
+#~ msgid "Can not connect to server, please change it !"
+#~ msgstr "無法連線到伺服器，請改變連線設定！"
+
+#
+#
+#~ msgid "Default Theme"
+#~ msgstr "預設主題"
+
+#
+#
+#~ msgid "_Theme"
+#~ msgstr "主題(_T)"
+
+#
+#
+#~ msgid "Tiny ERP Theme"
+#~ msgstr "Tiny ERP 主題"
+
+#
+#
+#~ msgid "Find a resource"
+#~ msgstr "查找"
+
+#
+#
+#~ msgid "Switch current view: form / list / graph"
+#~ msgstr "切換視圖（表單/列表/圖表）"
+
+#
+#
+#~ msgid "View"
+#~ msgstr "查看"
+
+#
+#
+#~ msgid "_Tiny ERP"
+#~ msgstr "Tiny ERP(_T)"
+
+#
+#
+#~ msgid "Remove selected entry"
+#~ msgstr "刪除所選項"
+
+#
+#
+#~ msgid "Tiny ERP - Filter"
+#~ msgstr "Tiny ERP - 過濾器"
+
+#
+#
+#~ msgid "test"
+#~ msgstr "test"
+
+#
+#
+#~ msgid "Filter:"
+#~ msgstr "過濾："
+
+#
+#
+#~ msgid "<b><u>Actions</u></b>"
+#~ msgstr "<b><u>操作</u></b>"
+
+#
+#
+#~ msgid "-"
+#~ msgstr "-"
+
+#
+#
+#~ msgid "Date de début"
+#~ msgstr "Date de début"
+
+#
+#
+#~ msgid "Search with this name"
+#~ msgstr "用名稱查找"
+
+#
+#
+#~ msgid "Clear the field"
+#~ msgstr "清除欄位內容"
+
+#
+#
+#~ msgid ""
+#~ "\n"
+#~ "Yes\n"
+#~ "No"
+#~ msgstr ""
+#~ "\n"
+#~ "是\n"
+#~ "否"
+
+#
+#
+#~ msgid "Tiny ERP - Attachment"
+#~ msgstr "Tiny ERP - 附件"
+
+#
+#
+#~ msgid "Filename:"
+#~ msgstr "檔案名稱："
+
+#
+#
+#~ msgid "Description:"
+#~ msgstr "說明："
+
+#
+#
+#~ msgid "Save text"
+#~ msgstr "儲存文字"
+
+#
+#
+#~ msgid "Tiny ERP - Ressource Edit"
+#~ msgstr "Tiny ERP - 資源編輯"
+
+#
+#
+#~ msgid "Tiny ERP - List"
+#~ msgstr "Tiny ERP - 列表"
+
+#
+#
+#~ msgid "Tiny ERP - Date & Time selection"
+#~ msgstr "Tiny ERP - 日期和時間選擇"
+
+#
+#
+#~ msgid "(Get Tiny ERP announces, docs and new releases by email)"
+#~ msgstr "（獲取有關Tiny ERP 的新產品，文件發佈的有件列表）"
+
+#
+#
+#~ msgid "Tiny ERP"
+#~ msgstr "Tiny ERP"
+
+#
+#
+#~ msgid "Super admin password:"
+#~ msgstr "超級管理員密碼："
+
+#
+#
+#~ msgid "(use 'admin', if you did not changed it)"
+#~ msgstr "（使用'admin'，如果你還沒有修改過）"
+
+#
+#
+#~ msgid "Hello World"
+#~ msgstr "你好"
+
+#
+#
+#~ msgid "(must not contain any special character)"
+#~ msgstr "（請不要包含任何特殊字元）"
+
+#
+#
+#~ msgid "Client Mode"
+#~ msgstr "客戶端模式"
+
+#
+#
+#~ msgid "Normal"
+#~ msgstr "一般"
+
+#
+#
+#~ msgid "Mode PDA"
+#~ msgstr "PDA模式"
+
+#
+#
+#~ msgid "Reload / Undo Form"
+#~ msgstr "重作/取消"
+
+#
+#
+#~ msgid "Titre"
+#~ msgstr "Titre"
+
+#
+#
+#~ msgid "S_earch:"
+#~ msgstr "查找(_S)："
+
+#
+#
+#~ msgid "on _field:"
+#~ msgstr "欄位(_f)："
+
+#
+#
+#~ msgid "_Unselect"
+#~ msgstr "取消選擇(_U)"
+
+#
+#
+#~ msgid "AL_L"
+#~ msgstr "全部(_L)"
+
+#
+#
+#~ msgid "N_ONE"
+#~ msgstr "無(_O)"
+
+#
+#
+#~ msgid "Set to _Default"
+#~ msgstr "設定為預設值(_D)"
+
+#
+#
+#~ msgid "Value _Preference"
+#~ msgstr "偏好值(_P)"
+
+#
+#
+#~ msgid "Tiny ERP - Search Widgets"
+#~ msgstr "Tiny ERP - 查找部件"
+
+#
+#~ msgid "Tiny ERP - Error"
+#~ msgstr "Tiny ERP - 出錯"
+
+#
+#~ msgid ""
+#~ "<b>Complete this form to submit your bug and/or request a support.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to Tiny ERP and we will reply you shortly.\n"
+#~ "Note that we may not reply you if your Service Company is not a Tiny ERP "
+#~ "partner.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>如需提交軟件錯誤或請求技術支持，請填寫本表。</b>\n"
+#~ "<i>\n"
+#~ "您的請求將發送到Tiny ERP， 我們將很快回覆您。\n"
+#~ "請理解如果您未與我們或我們的合作夥伴簽署服務協議，您的請求可能得不到回覆\n"
+#~ "</i>"
+
+#~ msgid "This widget is readonly !"
+#~ msgstr "該部件為唯讀"
+
+#~ msgid ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+#~ msgstr ""
+#~ "該功能只提供給MS Office！\n"
+#~ "抱歉，OpenOffice的使用者 :("
+
+#~ msgid "Confirm Password:"
+#~ msgstr "確認密碼:"
+
+#~ msgid "Connect Later"
+#~ msgstr "稍候連線"
+
+#~ msgid "Connect now"
+#~ msgstr "現在連線"
+
+#~ msgid "Country:"
+#~ msgstr "國家/地區:"
+
+#~ msgid ""
+#~ "Please fill in the following form in order to help us to improve <b><span "
+#~ "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
+#~ "developments."
+#~ msgstr ""
+#~ "請填寫下列表格以協助我們改善<b><span foreground=\"red\"><i>Open</i></span> ERP</b> "
+#~ "並且邁向更好的發展目標"
+
+#~ msgid "Employees:"
+#~ msgstr "員工"
+
+#~ msgid "<b>Your company</b>"
+#~ msgstr "您就職的公司:"
+
+#~ msgid "We plan to use Open ERP"
+#~ msgstr "我們計畫使用 Open ERP"
+
+#~ msgid "We plan to offer services on Open ERP"
+#~ msgstr "我們計畫在 Open ERP 上提供服務"
+
+#~ msgid "City:"
+#~ msgstr "城市："
+
+#~ msgid "Tell us why you try Open ERP and what are your current softwares:"
+#~ msgstr "告訴我們為何你們試用 Open ERP 以及你們目前使用的軟體:"
+
+#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
+#~ msgstr "我想收到 Open ERP 電子書(PDF), 請以電子郵件寄給我"
+
+#~ msgid "E-mail:"
+#~ msgstr "電子郵件："
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-取消"
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "無法將語言設為 %s"
+
+#~ msgid "gtk-ok"
+#~ msgstr "gtk-ok"
