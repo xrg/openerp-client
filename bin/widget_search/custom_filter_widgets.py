@@ -46,14 +46,14 @@ class char(char.char):
 
     def _value_get(self):
         text = self.widget.get_text() or False
-        if self.selected_oper_text in ['is Empty', 'is not Empty']:
+        if self.selected_oper_text in [_('is Empty'), _('is not Empty')]:
             text = False
         return [(self.field_left, self.selected_oper, text)]
 
     def set_visibility(self):
         self.widget.show_all()
         self.widget.set_text('')
-        if self.selected_oper_text in ['is Empty', 'is not Empty']:
+        if self.selected_oper_text in [_('is Empty'), _('is not Empty')]:
             self.widget.hide()
 
 class many2one(wid_int.wid_int):
@@ -95,7 +95,7 @@ class many2one(wid_int.wid_int):
         self.selected_value = False
 
     def sig_activate(self, widget, event=None, leave=False):
-        if not self.selected_oper_text in  ['contains', 'doesn\'t contain']:
+        if not self.selected_oper_text in  [_('contains'), _('doesn\'t contain')]:
             event = self.enter_pressed and True or event
             return self.sig_find(widget, event, leave=True)
 
@@ -125,7 +125,7 @@ class many2one(wid_int.wid_int):
         return False
 
     def _value_get(self):
-        if self.selected_oper_text in ['is', 'is not']:
+        if self.selected_oper_text in [_('is'), _('is not')]:
             text = self.selected_value and self.selected_value[0] or False
         elif self.selected_oper_text in ['is Empty', 'is not Empty']:
             text = False
@@ -137,7 +137,7 @@ class many2one(wid_int.wid_int):
         self.widget.show_all()
         self.wid_text.set_text('')
         self.selected_value = False
-        if self.selected_oper_text in ['is Empty', 'is not Empty']:
+        if self.selected_oper_text in [_('is Empty'), _('is not Empty')]:
             self.wid_text.hide()
             self.but_find.hide()
         elif not self.selected_oper_text in ['is', 'is not']:
@@ -193,13 +193,13 @@ class calendar(calendar):
     def _value_get(self):
         val1 = self._date_get(self.entry1.get_text())
         val2 = self._date_get(self.entry2.get_text())
-        if self.selected_oper_text == 'between':
+        if self.selected_oper_text == _('between'):
             domain = ['&', (self.field_left, '>=', val1),(self.field_left, '<=', val2)]
             return domain
-        elif self.selected_oper_text == 'exclude range':
+        elif self.selected_oper_text == _('exclude range'):
             domain = ['|',(self.field_left, '<', val1),(self.field_left, '>', val2)]
             return domain
-        elif self.selected_oper_text in ['is Empty', 'is not Empty']:
+        elif self.selected_oper_text in [_('is Empty'), _('is not Empty')]:
             val1 = False
         domain = [(self.field_left, self.selected_oper, val1)]
         return domain
@@ -207,9 +207,9 @@ class calendar(calendar):
     def set_visibility(self):
         self.entry1.set_text(self.widget1.widget.initial_value)
         self.entry2.set_text(self.widget2.widget.initial_value)
-        if self.selected_oper_text in ['is Empty', 'is not Empty']:
+        if self.selected_oper_text in [_('is Empty'), _('is not Empty')]:
             self.widget.hide_all()
-        elif self.selected_oper_text in ['is', 'is not']:
+        elif self.selected_oper_text in [_('is'), _('is not')]:
             self.widget.show_all()
             self.entry1.show()
             self.entry2.hide()
@@ -238,13 +238,13 @@ class datetime(datetime):
     def _value_get(self):
         val1 = self._date_get(self.entry1.get_text())
         val2 = self._date_get(self.entry2.get_text())
-        if self.selected_oper_text == 'between':
+        if self.selected_oper_text == _('between'):
             domain = ['&', (self.field_left, '>=', val1),(self.field_left, '<=', val2)]
             return domain
-        elif self.selected_oper_text == 'exclude range':
+        elif self.selected_oper_text == _('exclude range'):
             domain = ['|',(self.field_left, '<', val1),(self.field_left, '>', val2)]
             return domain
-        elif self.selected_oper_text in ['is Empty', 'is not Empty']:
+        elif self.selected_oper_text in [_('is Empty'), _('is not Empty')]:
             val1 = False
         domain = [(self.field_left, self.selected_oper, val1)]
         return domain
@@ -252,9 +252,9 @@ class datetime(datetime):
     def set_visibility(self):
         self.entry1.set_text(self.widget1.widget.initial_value)
         self.entry2.set_text(self.widget2.widget.initial_value)
-        if self.selected_oper_text in ['is Empty', 'is not Empty']:
+        if self.selected_oper_text in [_('is Empty'), _('is not Empty')]:
             self.widget.hide_all()
-        elif self.selected_oper_text in ['is', 'is not']:
+        elif self.selected_oper_text in [_('is'), _('is not')]:
             self.widget.show_all()
             self.entry1.show()
             self.entry2.hide()
@@ -307,10 +307,10 @@ class spinbutton(spinbutton):
         self.spin2.update()
         val1 = self.spin1.get_value()
         val2 = self.spin2.get_value()
-        if self.selected_oper_text == 'between':
+        if self.selected_oper_text == _('between'):
             domain = ['&', (self.field_left, '>=', val1),(self.field_left, '<=', val2)]
             return domain
-        elif self.selected_oper_text == 'exclude range':
+        elif self.selected_oper_text == _('exclude range'):
             domain = ['|',(self.field_left, '<', val1),(self.field_left, '>', val2)]
             return domain
         domain = [(self.field_left, self.selected_oper, val1)]
@@ -319,7 +319,7 @@ class spinbutton(spinbutton):
     def set_visibility(self):
         self.spin1.set_value(0.0)
         self.spin2.set_value(0.0)
-        if self.selected_oper_text in ['between', 'exclude range']:
+        if self.selected_oper_text in [_('between'), _('exclude range')]:
             self.widget.show_all()
         else:
             self.spin2.hide()
@@ -347,10 +347,10 @@ class spinint(spinint):
         self.spin2.update()
         val1 = self.spin1.get_value()
         val2 = self.spin2.get_value()
-        if self.selected_oper_text == 'between':
+        if self.selected_oper_text == _('between'):
             domain = ['&', (self.field_left, '>=', val1),(self.field_left, '<=', val2)]
             return domain
-        elif self.selected_oper_text == 'exclude range':
+        elif self.selected_oper_text == _('exclude range'):
             domain = ['|',(self.field_left, '<', val1),(self.field_left, '>', val2)]
             return domain
         domain = [(self.field_left, self.selected_oper, val1)]
@@ -359,7 +359,7 @@ class spinint(spinint):
     def set_visibility(self):
         val1 = self.spin1.set_value(0)
         val2 = self.spin2.set_value(0)
-        if self.selected_oper_text in ['between', 'exclude range']:
+        if self.selected_oper_text in [_('between'), _('exclude range')]:
             self.widget.show_all()
         else:
             self.spin2.hide()

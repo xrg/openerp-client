@@ -32,6 +32,12 @@ class custom_filter(wid_int.wid_int):
 
         self.field_selection = {}
         self.op_selection = {}
+        # This list will store the fields,operators to map with the index of the active_text()
+        # because when translation is used the active_text get translated and fails to search
+
+        self.field_lst = []
+        self.operators_lst = []
+
         self.search_callback = search_callback
         self.widget = gtk.HBox()
         # fields_list combo
@@ -68,25 +74,29 @@ class custom_filter(wid_int.wid_int):
         sorted_names.sort(lambda x, y:cmp(x[1], y[1]))
         for item in sorted_names:
             self.field_selection[item[1]] = (item[0], item[2])
+            self.field_lst.append(item[1])
             self.combo_fields.append_text(item[1])
         self.combo_fields.set_active(0)
 
     def on_operator_combo_changed(self, combo):
-        self.widget_obj.selected_oper_text = self.combo_op.get_active_text()
+        if self.operators_lst:
+            self.widget_obj.selected_oper_text = self.operators_lst[self.combo_op.get_active()]
         self.widget_obj.set_visibility()
         return True
 
     def on_fields_combo_changed(self, combo):
-        field_string = self.combo_fields.get_active_text()
+        field_string = self.field_lst[self.combo_fields.get_active()]
         field_dbname, type = self.field_selection[field_string]
         if self.right_text:
             self.widget.remove(self.right_text)
         self.widget_obj = custom_filter_widgets.widgets_type[type](field_string, self.parent, self.fields.get(field_dbname, {}), self.search_callback)
         self.right_text = self.widget_obj.widget
         self.op_selection = {}
+        self.operators_lst = []
         self.combo_op.get_model().clear()
         for operator in self.widget_obj.operators:
             self.op_selection[operator[1]] = operator[0]
+            self.operators_lst.append(operator[1])
             self.combo_op.append_text(operator[1])
         self.widget.pack_start(self.right_text)
         self.widget.reorder_child(self.right_text, 2)
@@ -98,7 +108,9 @@ class custom_filter(wid_int.wid_int):
         return True
 
     def _value_get(self):
-        self.widget_obj.field_left  = self.field_selection[self.combo_fields.get_active_text()][0]
+        field_string = self.field_lst[self.combo_fields.get_active()]
+        self.widget_obj.field_left  = self.field_selection[field_string][0]
+        self.widget_obj.selected_oper_text = self.operators_lst[self.combo_op.get_active()]
         self.widget_obj.selected_oper_text = self.combo_op.get_active_text()
         self.widget_obj.selected_oper = self.op_selection[self.widget_obj.selected_oper_text]
         wid_domain = self.widget_obj._value_get()
