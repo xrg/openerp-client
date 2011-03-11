@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:28+0000\n"
-"Last-Translator: Phong Nguyen <Unknown>\n"
+"PO-Revision-Date: 2011-03-08 15:41+0000\n"
+"Last-Translator: Nguyen Anh TUAN <tuan@esc.vn>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 04:50+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-09 06:12+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "Language: vi\n"
 
 #: bin/plugins/__init__.py:27
@@ -58,7 +58,7 @@ msgstr "Lệnh in bị hủy bỏ do trì hoãn quá lâu!"
 
 #: bin/modules/action/main.py:195
 msgid "Select your action"
-msgstr ""
+msgstr "Chọn hành động của bạn"
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
@@ -96,11 +96,11 @@ msgstr "Mật khẩu Hợp đồng:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Bạn đang sử dụng phiên bản mới nhất"
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Các bản cập nhật sau đang sẵn sàng"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
@@ -124,7 +124,7 @@ msgstr "Các cơ sở dữ liệu của bạn đã được nâng cấp."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Bạn chưa chọn một cơ sở dữ liệu"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
@@ -140,6 +140,8 @@ msgid ""
 "The versions of the server (%s) and the client (%s) missmatch. The client "
 "may not work properly. Use it at your own risks."
 msgstr ""
+"Các phiên bản của máy chủ (%s) và máy trạm (%s) không tương thích. Máy trạm "
+"có thể hoạt động không chính xác. Bạn phải tự quản lý rủi ro liên quan."
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
@@ -154,6 +156,8 @@ msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
+"Tên cơ sở dữ liệu chỉ có thể bao gồm các ký tự thông thường hay \"_\".\n"
+"Bạn phải tránh các các dấu trọng âm, dấu cách hay các ký tự đặc biệt."
 
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
@@ -178,6 +182,8 @@ msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
+"Máy chủ bị sự cố trong quá trình cài đặt.\n"
+"Chúng tôi gợi ý bạn nên hủy bỏ cơ sở dữ liệu này."
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"
@@ -208,13 +214,15 @@ msgstr "Không có yêu cầu"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s yêu cầu được gửi"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"Hãy kiểm tra lại tên cơ sở dữ liệu hoặc liên hệ với quản trị viên của bạn để "
+"xác minh tình trạng cơ sở dữ liệu."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
@@ -256,6 +264,9 @@ msgid ""
 "Ask the administrator to verify\n"
 "you have an action defined for your user."
 msgstr ""
+"Bạn không thể truy cập vào hệ thống !\n"
+"Hãy hỏi quản trị viên để thẩm tra lại\n"
+"bạn có một hành động được định nghĩa cho người dùng của bạn."
 
 #: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
 msgid "Do you really want to quit ?"
@@ -264,7 +275,7 @@ msgstr "Bạn có thật sự muốn thoát ?"
 #: bin/modules/gui/main.py:1262
 #, python-format
 msgid "Attachments (%d)"
-msgstr ""
+msgstr "Các đính kèm (%d)"
 
 #: bin/modules/gui/main.py:1275
 msgid "Attachments"
@@ -306,11 +317,11 @@ msgstr "Không thể khôi phục lại cơ sở dữ liệu."
 #: bin/modules/gui/main.py:1444
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr ""
+msgstr "Xác nhận mật khẩu không khớp với mật khẩu mới, tác vụ bị hủy bỏ!"
 
 #: bin/modules/gui/main.py:1446
 msgid "Validation Error."
-msgstr ""
+msgstr "Lỗi Phê duyệt."
 
 #: bin/modules/gui/main.py:1454
 msgid "Could not change the Super Admin password."
@@ -348,7 +359,7 @@ msgstr "Không thể sao lưu cơ sở dữ liệu."
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "Mã số tài nguyên không tồn tại cho đối tượng này!"
 
 #: bin/modules/gui/window/form.py:231
 msgid "No record selected ! You can only attach to existing record."
@@ -374,11 +385,11 @@ msgstr "Ngày tạo"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
-msgstr ""
+msgstr "Chỉnh sửa lần gần nhất bởi"
 
 #: bin/modules/gui/window/form.py:257
 msgid "Latest Modification Date"
-msgstr ""
+msgstr "Ngày chỉnh sửa gần nhất"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
@@ -389,6 +400,8 @@ msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
 msgstr ""
+"Bản ghi không được lưu lại!\n"
+" Bạn có muốn làm sạch bản ghi hiện tại?"
 
 #: bin/modules/gui/window/form.py:272
 #: bin/widget/view/form_gtk/one2many_list.py:380
@@ -402,7 +415,7 @@ msgstr "Bạn có chắc chắn muốn xóa các mẩu tin này ?"
 
 #: bin/modules/gui/window/form.py:278
 msgid "Resources cleared."
-msgstr ""
+msgstr "Xóa tài nguyên xong"
 
 #: bin/modules/gui/window/form.py:280
 msgid "Resources successfully removed."
@@ -410,7 +423,7 @@ msgstr "Tài nguyên đã được xóa thành công."
 
 #: bin/modules/gui/window/form.py:314
 msgid "Working now on the duplicated document !"
-msgstr ""
+msgstr "Đang làm việc trên tài liệu được nhân bản !"
 
 #: bin/modules/gui/window/form.py:329
 msgid "Document Saved."
@@ -528,6 +541,8 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"Lỗi xử lý dòng đầu tiên của bạn trong tệp tin.\n"
+"Trường %s không xác định !"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
@@ -547,11 +562,11 @@ msgstr "Ứng dụng"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "Bộ xử lý in"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
-msgstr ""
+msgstr "Tiện ích mở rộng này đã được định nghĩa"
 
 #: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7684
 msgid "Extension Manager"
@@ -582,6 +597,8 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"Ngôn ngữ mặc định của giao diện đã được sửa đổi, đừng quên khởi động lại máy "
+"trạm để có giao diện theo ngôn ngữ của bạn"
 
 #: bin/modules/gui/window/win_preference.py:87
 msgid "Default language modified !"
@@ -624,6 +641,8 @@ msgid ""
 "Operation failed !\n"
 "I/O error"
 msgstr ""
+"Tác vụ thất bại !\n"
+"Lỗi I/O"
 
 #: bin/modules/gui/window/win_export.py:79
 #: bin/modules/gui/window/win_export.py:105
@@ -632,11 +651,11 @@ msgstr "Lỗi mở Excel !"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "Tên của chiết xuất là gì?"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Lỗi Chiết xuất !"
 
 #: bin/modules/gui/window/win_search.py:49
 #: bin/widget/view/diagram_gtk/xdot.py:1772
@@ -724,19 +743,21 @@ msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
+"Xin vui lòng đợi,\n"
+"tác vụ này có thể mất một lúc..."
 
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "Hãy đảm bảo rằng tập tin %s là chính xác"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " đã báo cáo lỗi sau:\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
-msgstr ""
+msgstr "Nhận xét"
 
 #: bin/common/common.py:367
 msgid "Support request sent !"
@@ -840,7 +861,7 @@ msgstr ""
 
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
-msgstr ""
+msgstr "Lỗi! không tìm thấy dữ liệu. Hãy cập nhật đủ dữ liệu để in!"
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
@@ -920,7 +941,7 @@ msgstr ""
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "không bằng"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
@@ -932,7 +953,7 @@ msgstr "nhỏ hơn"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "trong"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
@@ -999,15 +1020,15 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "Lưu thành Phím tắt"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Lưu thành Bộ lọc"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Quản lý các bộ lọc"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1078,7 +1099,7 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "In sơ đồ"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
@@ -1141,7 +1162,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "Lưu & Tạo mới"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
@@ -1207,7 +1228,7 @@ msgstr "Lưu thành"
 
 #: bin/widget/view/form_gtk/image.py:93 bin/widget/view/form_gtk/binary.py:88
 msgid "Clear"
-msgstr ""
+msgstr "Xóa"
 
 #: bin/widget/view/form_gtk/image.py:104
 msgid "All files"
@@ -2528,145 +2549,3 @@ msgstr "Chi tiết"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr ""
-
-#~ msgid "gtk-close"
-#~ msgstr "gtk-close"
-
-#~ msgid "The content of the widget or excpetion if not valid"
-#~ msgstr "lưa"
-
-#~ msgid "Parameters :"
-#~ msgstr "Các them số:"
-
-#~ msgid "Limit :"
-#~ msgstr "Giới hạn:"
-
-#~ msgid "Error no report"
-#~ msgstr "Lỗi không có báo cáo"
-
-#~ msgid ""
-#~ "Thank you for the feedback !\n"
-#~ "Your comments have been sent to OpenERP.\n"
-#~ "You should now start by creating a new database or\n"
-#~ "connecting to an existing server through the \"File\" menu."
-#~ msgstr ""
-#~ "Cám ơn bạn đã phản hồi\n"
-#~ "Thông điệp của bạn đã được gửi tới OpenERP\n"
-#~ "Bây giờ bạn nên bắt đầu khởi tạo một cơ sở dữ liệu mới hoặc kết nôi đến một "
-#~ "server qua trình đơn Menu"
-
-#~ msgid ""
-#~ "Thank you for testing OpenERP !\n"
-#~ "You should now start by creating a new database or\n"
-#~ "connecting to an existing server through the \"File\" menu."
-#~ msgstr ""
-#~ "Cám ơn về sự kiểm tra OpenERP\n"
-#~ "Bây giờ bạn nên bắt đầu khởi tạo một cơ sở dữ liệu mới hoặc kết nôi đến một "
-#~ "server qua trình đơn Menu"
-
-#~ msgid "gtk-ok"
-#~ msgstr "GTK - Chấp Nhận"
-
-#~ msgid "E-mail:"
-#~ msgstr "Email :"
-
-#~ msgid "gtk-cancel"
-#~ msgstr "GTK- hủy"
-
-#~ msgid "Your Name:"
-#~ msgstr "Tên Bạn :"
-
-#~ msgid "System:"
-#~ msgstr "hệ thống"
-
-#~ msgid "City:"
-#~ msgstr "Thành phố"
-
-#~ msgid "<b>Keep Informed</b>"
-#~ msgstr "<b>gữi lệnh đã thực hiện</b>"
-
-#~ msgid "We plan to use Open ERP"
-#~ msgstr "kế hoạch dùng openerp của chúng tôi."
-
-#~ msgid "We plan to offer services on Open ERP"
-#~ msgstr "kế hoạch dùng openERP sau khi phục vụ"
-
-#~ msgid "Tell us why you try Open ERP and what are your current softwares:"
-#~ msgstr ""
-#~ "nói cho tôi biết tại sao bạn dùng openerp và phần mền hiện nay của bạn."
-
-#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
-#~ msgstr "tôi muốn nhận sách về openerp (pdf) qua email"
-
-#~ msgid "How did you hear about us:"
-#~ msgstr "hãy nói ý kiến của bạn về chúng tôi"
-
-#~ msgid "Phone / Mobile:"
-#~ msgstr "Điện thoại / Di động"
-
-#, python-format
-#~ msgid "Unable to set locale %s"
-#~ msgstr "Không thể cài đặt thông tin bản địa %s"
-
-#~ msgid "OpenERP Database Installation"
-#~ msgstr "Cài đặt Cơ sở dữ liệu OpenERP"
-
-#~ msgid "<b>Operation in progress</b>"
-#~ msgstr "<b>Tác vụ đang thực hiện</b>"
-
-#~ msgid "The following users have been installed on your database:"
-#~ msgstr ""
-#~ "Những người sử dụng sau đây đã được cài đặt trên cơ sở dữ liệu của bạn:"
-
-#~ msgid ""
-#~ "This is the password of the '<i>admin</i>' user that will be created in your "
-#~ "new database."
-#~ msgstr ""
-#~ "Đây là mật khẩu của người dùng '<i> admin </ i> được tạo ra trong cơ sở dữ "
-#~ "liệu mới của bạn."
-
-#~ msgid "Administrator Password:"
-#~ msgstr "Mật khẩu của Quản trị viên:"
-
-#~ msgid ""
-#~ "This is the password of the '<i>admin</i>' user that will be created in your "
-#~ "new database. It has to be the same than the above field."
-#~ msgstr ""
-#~ "Đây là mật khẩu của người dùng '<i> admin </ i> được tạo ra trong cơ sở dữ "
-#~ "liệu mới của bạn. Nó phải giống với trường bên trên."
-
-#~ msgid "Load Demonstration Data:"
-#~ msgstr "Nạp dữ liệu mẫu:"
-
-#~ msgid "Database creation"
-#~ msgstr "Tạo Cơ sở dữ liệu"
-
-#~ msgid "<b>Database created successfully!</b>"
-#~ msgstr "<b> Cơ sở dữ liệu được tạo thành công! </b>"
-
-#~ msgid "Connect Later"
-#~ msgstr "Kết nối sau"
-
-#~ msgid "Connect now"
-#~ msgstr "Kết nối bây giờ"
-
-#~ msgid "Click here for details about the maintenance proposition"
-#~ msgstr "Nhấn vào đây để biết chi tiết về các đề xuất bảo trì"
-
-#~ msgid "<b>Your company</b>"
-#~ msgstr "<b>Công ty của bạn</b>"
-
-#~ msgid "Open Source:"
-#~ msgstr "Mã nguồn mở:"
-
-#~ msgid "Your Company:"
-#~ msgstr "Công ty của bạn:"
-
-#~ msgid "Industry:"
-#~ msgstr "Ngành:"
-
-#~ msgid "Your Role:"
-#~ msgstr "Vai trò của bạn:"
-
-#~ msgid "Country:"
-#~ msgstr "Quốc gia:"

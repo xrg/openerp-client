@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2011-03-01 16:51+0000\n"
+"Last-Translator: shige <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-02 14:14+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "Language: ja\n"
 
 #: bin/plugins/__init__.py:27
@@ -80,11 +80,11 @@ msgstr "スーパー管理者パスワード:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "システム管理者パスワードが違います"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
-msgstr ""
+msgstr "移行用スクリプト"
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
@@ -92,7 +92,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr ""
+msgstr "契約パスワード："
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
@@ -124,7 +124,7 @@ msgstr "あなたのデータベースは更新されました。"
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "データベースが選択されていません"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
@@ -194,11 +194,11 @@ msgstr "編集"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "会社がありません"
 
 #: bin/modules/gui/main.py:995
 #, python-format
@@ -212,17 +212,17 @@ msgstr "ノーリクエスト"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s のリクエストが送信されました"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
-msgstr ""
+msgstr "データベース名をダブルクリックするか、データベースの状態をシステム管理者に問い合せて下さい"
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "データベースにアクセスできないか、存在しません"
 
 #: bin/modules/gui/main.py:1041
 msgid ""
@@ -243,7 +243,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #: bin/modules/gui/main.py:1076
 msgid "Not logged !"
@@ -388,7 +388,7 @@ msgstr "最新の修正日付"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "内部モジュールデータID"
 
 #: bin/modules/gui/window/form.py:269
 msgid ""
@@ -438,7 +438,7 @@ msgstr "エラー！"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "警告!"
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
@@ -507,6 +507,12 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"このレコードのインポートでエラー:\n"
+"%s\n"
+"エラーメッセージ:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -519,11 +525,11 @@ msgstr "フィールド名"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr ".CSVファイルのオープン時にエラー"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "入力エラー"
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -536,10 +542,12 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"ファイルの先頭で処理エラー\n"
+"フィールド %s が不明です"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "入力エラー"
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -547,15 +555,15 @@ msgstr "あなたは、インポートするフィールドをまだ選んでい
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "エクステンション"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "アプリケーション"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "印刷処理"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
@@ -583,17 +591,19 @@ msgstr "不明なウィンドウです"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "プリファレンス"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"インタフェースのデフォルト言語が変更されました,\\n\r\n"
+"インターフェース言語を変更するには、クライアントを再起動して下さい"
 
 #: bin/modules/gui/window/win_preference.py:87
 msgid "Default language modified !"
-msgstr ""
+msgstr "デフォルトの言語が変更されました"
 
 #: bin/modules/gui/window/view_tree/parse.py:35
 msgid "Tree"
@@ -640,7 +650,7 @@ msgstr "エラー。エクセルを開く!"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "エクスポート名？"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
@@ -672,7 +682,7 @@ msgstr "選択すべき構成ファイル明細"
 
 #: bin/options.py:111
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "基本デバッギングを有効化して下さい。 '--log-level=debug' のエイリアス"
 
 #: bin/options.py:112
 #, python-format
@@ -693,7 +703,7 @@ msgstr "サーバーIP/サーバー名を明記"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "現在のティップを閉じる"
 
 #: bin/common/common.py:90
 msgid ""
@@ -702,10 +712,13 @@ msgid ""
 "open this menu item, unless you disable all tips using the <b>'Menu "
 "Tips'</b> option in the user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>現在のティップを閉じる:</b></span>\n"
+"これは現在のティップを閉じます。ユーザープリファレンスの <b>'メニュー・ティップ'</b> "
+"オプションを使って、全てのティップスを無効化しない限り、次回またこのメニューアイテムを開けば再表示されます。"
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "全ティップスの無効化"
 
 #: bin/common/common.py:101
 msgid ""
@@ -714,10 +727,13 @@ msgid ""
 "To re-enable tips you need to check the <b>'Menu Tips'</b> option in the "
 "user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>全ティップスの無効化:</b></span>\n"
+"これは、全てのメニューアイテムのティップスの表示を無効化します。\n"
+"ティップスを再度有効化するには、ユーザープリファレンスの<b>'メニュー・ティップ'</b> オプションをチェックする必要があります。"
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "ヒント"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
@@ -736,15 +752,18 @@ msgstr "しばらくお待ちください。この操作にはしばらく時間
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "ファイル %s が正しいことを確認して下さい"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
 msgstr ""
+" 次のバグが報告されました:\n"
+"リンク切れを意味します。翻訳で同等の位置に新しいラインを開始して下さい。\n"
+"スペース（空白）を意味します。翻訳で同等の位置にスペースを入力して下さい。\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
-msgstr ""
+msgstr "備考"
 
 #: bin/common/common.py:367
 msgid "Support request sent !"
@@ -776,6 +795,30 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>不明なエラーが報告されました。</b>\n"
+"\n"
+"<b>有効なOpenERPパブリッシャーのワランティ契約が無いようです。</b>\n"
+"OpenERP を実業務本番で使用する際には、パブリッシャーのワランティ\n"
+"プログラムを購読することをオススメします。\n"
+"\n"
+"OpenERPパブリッシャーのワランティ契約により、バグフィックスの保証や\n"
+"自動マイグレーションシステムが提供され、数時間以内での問題の解消を行う\n"
+"ことが可能になります。\n"
+"もし、パブリッシャーのワランティ契約をお持ちであるにもかかわらず、この\n"
+"エラーが表示されているとしたら、このエラーはOpenERPエディターの品質\n"
+"チームに送信されています。\n"
+"\n"
+"パブリッシャーのワランティプログラムが提供するのは次の通り:\n"
+"* 自動的な新バージョンへのマイグレーション、\n"
+"* バグフィクスの保証、\n"
+"* バグとそのフィクスの月次アナウンス\n"
+"* メールでのセキュリティ警告と自動的なマイグレーション、\n"
+"* カスタマーポータルへのアクセス\n"
+"です。\n"
+"\n"
+"より詳しい情報は下記のリンクをご利用下さい。エラーの詳細は、２つ目の\n"
+"タブに表示されます。\n"
 
 #: bin/common/common.py:410
 #, python-format
@@ -895,7 +938,7 @@ msgstr "ウィジェットのコンテント。無効な場合は、例外。"
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "エラー: "
 
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
@@ -920,35 +963,35 @@ msgstr "OpenERP - 選択日"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "含む"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "含まない"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "等しい"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "等しくない"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "より大きい"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "より小さい"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "含まれる"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "含まれない"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -971,7 +1014,7 @@ msgstr "関連ボタンを使うには保存してください!"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "アクションが定義されていません！"
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
@@ -1007,19 +1050,19 @@ msgstr "カレンダーを使うにはpython-hippocanvasをインストールし
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--アクション--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "ショートカットとして保存"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "フィルターとして保zん"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "フィルター管理"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1062,19 +1105,19 @@ msgstr "グラフ生成できません!"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1422
 msgid "Dot Viewer"
-msgstr ""
+msgstr "ドット表示"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
-msgstr ""
+msgstr "新しいノードの追加"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
-msgstr ""
+msgstr "新しいエッジの追加"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "ダイヤグラムの拡大"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
