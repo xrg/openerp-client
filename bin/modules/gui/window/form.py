@@ -141,7 +141,8 @@ class form(object):
     def set_tooltips(fn):
         def _decorate(self, *args, **kws):
             result = fn(self, *args, **kws)
-            self.page_label.set_tooltip_text(self.screen.current_model.value.get('name', self.name))
+            tooltips = self.screen.current_model and self.screen.current_model.value.get('name') or self.name
+            self.page_label.set_tooltip_text(tooltips)
             return result
         return _decorate
     

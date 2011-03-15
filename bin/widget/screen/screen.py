@@ -503,7 +503,8 @@ class Screen(signal_event.signal_event):
         terp_main = service.LocalService('gui.main')
         page_id= terp_main.notebook.get_current_page()
         form_ojb = terp_main.pages[page_id]
-        form_ojb.page_label.set_tooltip_text(self.current_model.value.get('name', form_ojb.name))
+        tooltips = self.current_model and self.current_model.value.get('name') or form_ojb.name
+        form_ojb.page_label.set_tooltip_text(tooltips)
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
