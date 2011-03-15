@@ -48,8 +48,8 @@ class window(service.Service):
                     auto_refresh=auto_refresh, auto_search=auto_search, search_view=search_view)
             spool = service.LocalService('spool')
             spool.publish('gui.window', win, {})
-            lable= win.widget.get_data('page_lbl')
-            lable.set_tooltip_text(win.screen.current_model.value.get('name',''))
+            if win.screen.current_model:
+                win.page_label.set_tooltip_text(win.screen.current_model.value.get('name',''))
         elif view_type=='tree':
             if view_ids and view_ids[0]:
                 view_base =  rpc.session.rpc_exec_auth('/object', 'execute',

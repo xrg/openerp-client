@@ -67,6 +67,7 @@ class form(object):
         self.fields = fields
         self.domain = domain
         self.context = context
+        self.page_label = None
         self.screen = Screen(self.model, view_type=view_type,
                 context=self.context, view_ids=view_ids, domain=domain,help=help,
                 hastoolbar=options.options['form.toolbar'], hassubmenu=options.options['form.submenu'],
@@ -138,10 +139,10 @@ class form(object):
             gobject.timeout_add(int(auto_refresh) * 1000, self.sig_reload)
     
     def set_tooltips(fn):
-        def _decorate(widget):
-            fn(widget)
-            lable= widget.widget.get_data('page_lbl')
-            lable.set_tooltip_text(widget.screen.current_model.value.get('name',''))
+        def _decorate(self, *args, **kws):
+            result = fn(self, *args, **kws)
+            self.page_label.set_tooltip_text(self.screen.current_model.value.get('name', self.name))
+            return result
         return _decorate
     
     def sig_switch_diagram(self, widget=None):
@@ -269,7 +270,8 @@ class form(object):
                 message+=val+': '+str(line[key] or '/')+'\n'
         common.message(message)
         return True
-
+    
+    @set_tooltips
     def sig_remove(self, widget=None):
         if not self.id_get():
             msg = _('Record is not saved ! \n Do you want to clear current record ?')
@@ -293,7 +295,7 @@ class form(object):
         screen_fields = copy.deepcopy(self.screen.fields)
         win = win_import.win_import(self.model, screen_fields, fields, parent=self.window,local_context= self.screen.context)
         res = win.go()
-
+        
     def sig_save_as(self, widget=None):
         fields = []
         while(self.screen.view_to_load):
@@ -301,7 +303,7 @@ class form(object):
         screen_fields = copy.deepcopy(self.screen.fields)
         win = win_export.win_export(self.model, self.screen.ids_get(), screen_fields, fields, parent=self.window, context=self.context)
         res = win.go()
-
+    
     def sig_new(self, widget=None, autosave=True):
         if autosave:
             if not self.modified_save():
@@ -310,6 +312,8 @@ class form(object):
             return
         self.screen.new()
         self.message_state('')
+        self.page_label and self.page_label.set_tooltip_text(self.name)
+
 
     def sig_copy(self, *args):
         if not self.modified_save():

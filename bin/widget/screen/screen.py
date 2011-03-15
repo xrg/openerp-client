@@ -498,6 +498,12 @@ class Screen(signal_event.signal_event):
         del self.win_search
         del self.win_search_callback
         del self.window
+        
+    def set_tooltips(self):
+        terp_main = service.LocalService('gui.main')
+        page_id= terp_main.notebook.get_current_page()
+        form_ojb = terp_main.pages[page_id]
+        form_ojb.page_label.set_tooltip_text(self.current_model.value.get('name', form_ojb.name))
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
@@ -546,6 +552,8 @@ class Screen(signal_event.signal_event):
         self.current_view.set_cursor()
 
         main = service.LocalService('gui.main')
+        if mode:
+            self.set_tooltips()
         if main:
             main.sb_set()
 
