@@ -41,10 +41,16 @@ class custom_filter(wid_int.wid_int):
         # Processing fields
         self.combo_fields = win_gl.get_widget('combo_fields')
         self.field_selection = {}
+        # this stores the db fields to map with the index of the active_text()
+        # becuase when traslation is used the active_text get translated and fails to
+        # search.
+        self.field_lst = []
+        self.operators_lst = []
 
         fields = attrs.get('fields',None)
         for item in fields:
             self.field_selection[item[1]] = (item[0], item[2], item[3])
+            self.field_lst.append(item[1])
             self.combo_fields.append_text(item[1])
 
         self.combo_fields.set_active(0)
@@ -63,6 +69,7 @@ class custom_filter(wid_int.wid_int):
                 ['not in',_('not in')],
                 ):
             self.op_selection[item[1]] = item[0]
+            self.operators_lst.append(item[1])
             self.combo_op.append_text(item[1])
 
         self.combo_op.set_active(0)
@@ -94,9 +101,10 @@ class custom_filter(wid_int.wid_int):
                          'date':lambda x:(datetime.strptime(x, DT_FORMAT)).strftime(DT_FORMAT),
                          'datetime':lambda x:(datetime.strptime(x, DHM_FORMAT)).strftime(DHM_FORMAT)
                         }
-            field_left = self.field_selection[self.combo_fields.get_active_text()][0]
-            field_type = self.field_selection[self.combo_fields.get_active_text()][1]
-            operator = self.op_selection[self.combo_op.get_active_text()]
+            match = self.field_lst[self.combo_fields.get_active()]
+            field_left, field_type, selection = self.field_selection[match]
+            op = self.operators_lst[self.combo_op.get_active()]
+            operator = self.op_selection[op]
             right_text =  self.right_text.get_text() or False
 
             if operator in ['not ilike','<>', 'not in'] and field_type != 'boolean':
@@ -136,13 +144,12 @@ class custom_filter(wid_int.wid_int):
             # Cannot use the active_text as it will be translated!
             # So as a workaround we use the index: 0 == AND, 1 == OR
             condition = self.condition_next.get_active() == 0 and '&' or '|'
-
             if field_type == 'selection' and right_text:
                 right_text_se =  self.right_text.get_text()
                 keys = []
-                for selection in self.field_selection[self.combo_fields.get_active_text()][2]:
-                    if selection[1].lower().find(right_text_se.lower()) != -1:
-                        keys.append(selection[0])
+                for select in selection:
+                    if select[1].lower().find(right_text_se.lower()) != -1:
+                        keys.append(select[0])
                 right_text = keys
                 if operator in ['ilike','=','in']:
                     operator = 'in'
