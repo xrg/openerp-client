@@ -1226,6 +1226,9 @@ class terp_main(service.Service):
         closebtn.unset_flags(gtk.CAN_FOCUS)
 
         box_label = gtk.Label(win.name)
+        win.widget.set_data('page_lbl',box_label)
+        box_label.set_tooltip_text(win.name)
+        
         event_box = gtk.EventBox()
         event_box.add(box_label)
         event_box.set_visible_window(False)

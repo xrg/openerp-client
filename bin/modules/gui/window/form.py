@@ -136,7 +136,14 @@ class form(object):
 
         if auto_refresh and int(auto_refresh):
             gobject.timeout_add(int(auto_refresh) * 1000, self.sig_reload)
-
+    
+    def set_tooltips(fn):
+        def _decorate(widget):
+            fn(widget)
+            lable= widget.widget.get_data('page_lbl')
+            lable.set_tooltip_text(widget.screen.current_model.value.get('name',''))
+        return _decorate
+    
     def sig_switch_diagram(self, widget=None):
         return self.sig_switch(widget, 'diagram')
 
@@ -229,7 +236,7 @@ class form(object):
         else:
             self.message_state(_('No record selected ! You can only attach to existing record.'), color='red')
         return True
-
+    
     def sig_switch(self, widget=None, mode=None):
         if not self.modified_save():
             return
@@ -319,7 +326,8 @@ class form(object):
 
     def _form_save(self, auto_continue=True):
         pass
-
+    
+    @set_tooltips
     def sig_save(self, widget=None, sig_new=True, auto_continue=True):
         res = self.screen.save_current()
         warning = False
@@ -337,12 +345,14 @@ class form(object):
             common.warning(warning,_('Warning !'), parent=self.screen.current_view.window)
         return bool(id)
 
+    @set_tooltips
     def sig_previous(self, widget=None):
         if not self.modified_save():
             return
         self.screen.display_prev()
         self.message_state('')
-
+        
+    @set_tooltips
     def sig_next(self, widget=None):
         if not self.modified_save():
             return
