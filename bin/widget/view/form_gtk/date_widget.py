@@ -72,7 +72,7 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         """If format string doesn't contain
         any of the `%Y, %m or %d` then returns default datetime format `%Y/%m/%d`
         """
-        for x,y in [('%y','%Y'),('%B','%m'),('%A',''), ('%I','%H'), ('%p',''), ('%j',''), ('%a',''), ('%b',''),
+        for x,y in [('%y','%Y'),('%B','%m'),('%A',''), ('%I','%H'), ('%p',''), ('%j',''), ('%a',''), ('%b','%m'),
                     ('%U',''), ('%W','')]:
             fmt = fmt.replace(x, y)
 
