@@ -11,7 +11,7 @@ Package: openerp-client
 Architecture: all
 Depends:
  ${misc:Depends}, python, python-glade2, python-gtk2, python-pydot, python-tz,
- python-lxml,
+ python-lxml, python-egenix-mxdatetime,
  python-hippocanvas, python-matplotlib
 Recommends:
  python-openssl, openoffice.org-writer, evince | pdf-viewer
