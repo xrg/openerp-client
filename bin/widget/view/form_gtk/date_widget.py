@@ -174,6 +174,8 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             date = self.isvalid_date(text);
             if(date):
                 self.small_text = date.strftime(self.small_format)
+            elif(text==self.initial_value):
+                self.small_text = self.initial_value
             
         finally:
             self._interactive_input = True

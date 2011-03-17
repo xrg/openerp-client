@@ -174,6 +174,8 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             date = self.isvalid_date(text);
             if(date):
                 self.small_text = date.strftime(self.small_format)
+            elif(text==self.initial_value):
+                self.small_text = self.initial_value
             
         finally:
             self._interactive_input = True
@@ -228,8 +230,14 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             self._interactive_input = True
 
     def clear(self):
+        print "clear"
+        print self.valid
         if(self.valid):
             self.set_text(self.initial_value)
+            print self.small_text
+            print self.get_text()
+            print self.initial_value
+        
 
     def _on_key_press(self, editable, event):
         if event.keyval in (gtk.keysyms.Tab, gtk.keysyms.Escape, gtk.keysyms.Return, gtk.keysyms.KP_Enter):
