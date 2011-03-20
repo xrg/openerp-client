@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2011-03-20 01:33+0000\n"
+"Last-Translator: Dr.Dran <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-20 06:31+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "Language: it\n"
 
 #
@@ -216,7 +216,7 @@ msgstr "Password di Super Amministratore"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "Password di Super Administrator Sbagliata"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -260,7 +260,7 @@ msgstr "I vostri database sono stati aggiornati."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Non è stato selezionato un database"
 
 # #-#-#-#-#  openerp-client-it.po (openobject-client)  #-#-#-#-#
 #
@@ -429,11 +429,11 @@ msgstr "Modifica"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Nessuna Compagnia"
 
 #
 # File: bin/modules/gui/main.py, line: 694
@@ -457,7 +457,7 @@ msgstr "Nessuna richiesta"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " %s richiesta/e inviata/e"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
@@ -467,7 +467,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "Il Database non è accessibile o non esiste"
 
 #
 # File: bin/modules/gui/main.py, line: 734
@@ -493,7 +493,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #
 # File: bin/modules/gui/main.py, line: 761
@@ -797,7 +797,7 @@ msgstr "Data ultima modifica"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "ID Data Modulo Interno"
 
 #
 # File: bin/modules/gui/window/form.py, line: 230
@@ -867,7 +867,7 @@ msgstr "Errore !"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "Attenzione !"
 
 #
 # File: bin/modules/gui/window/form.py, line: 302
@@ -1010,7 +1010,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "Errore Input."
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -1028,7 +1028,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "Errore Importazione."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -1036,15 +1036,15 @@ msgstr "Non hai selezionato nessun campo da importare"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "Estensione"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "Applicazione"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "Processo di Stampa"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
@@ -1092,7 +1092,7 @@ msgstr "Finestra sconosciuta"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "Preferenze"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -1202,7 +1202,7 @@ msgstr "Errore in apertura di Excel !"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "Quale è il nome di questa esportazione?"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
