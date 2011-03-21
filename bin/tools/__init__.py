@@ -152,14 +152,14 @@ class ConditionExpr(object):
                     res.append(not res.pop())
             return all(res)
 
-def get_required_field(screen):
+def get_invalid_field(screen):
     """
-    Return {'reuired_field_string':'is_invisible'}
+    Return [('field_name','is_visible'), .. ]
     """
-    fields ={}
+    fields = []
     for field, attribute in screen.current_model.state_attrs.items():
         if not attribute.get('valid', False):
-            fields.update({attribute['string']:attribute.get('invisible',False)})
+            fields.append((attribute['string'], attribute.get('invisible',False)))
     return fields
 
 def call_log(fun):

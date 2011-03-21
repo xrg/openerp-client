@@ -332,9 +332,9 @@ class form(object):
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
         elif len(self.screen.models.models) and res != None:
-            fields  = tools.get_required_field(self.screen)
+            fields  = tools.get_invalid_field(self.screen)
             msg = ''
-            for req, inv in fields.items():
+            for req, inv in fields:
                 if inv:
                     msg += req + ' (<b>invisible</b>) '
                 else:

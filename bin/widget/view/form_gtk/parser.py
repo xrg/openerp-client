@@ -123,7 +123,15 @@ class Button(Observable):
             model.get_button_action(self.form.screen, id, self.attrs)
             self.warn('misc-message', '')
         else:
-            common.warning(_('Invalid form, correct red fields !'), _('Error !'),parent=self.form.screen.current_view.window)
+            fields  = tools.get_invalid_field(self.form.screen)
+            msg = ''
+            for req, inv in fields:
+                if inv:
+                    msg += req + ' (<b>invisible</b>) '
+                else:
+                    msg += req
+                msg += '\n'
+            common.warning(_('Correct following red fields !\n\n%s')  % ( msg ),_('Input Error !'), parent=self.form.screen.current_view.window, to_xml=False)
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
             self.form.screen.display()
             self.form.screen.current_view.set_cursor()
@@ -154,7 +162,7 @@ class StateAwareWidget(object):
             result = True
             result = result and tools.calc_condition(self, model, v)
             if k == 'invisible':
-                if model.state_attrs.get(sa['name']): 
+                if model and  model.state_attrs.get(sa['name']): 
                     model.state_attrs.get(sa['name'])['invisible'] = result
                 func = ['show', 'hide'][bool(result)]
                 getattr(self.widget, func)()
