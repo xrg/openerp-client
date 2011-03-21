@@ -499,13 +499,14 @@ is displayed on the second tab.
     win.destroy()
     return True
 
-def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
+def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None, msg_to_xml=True):
     if not parent:
         parent=service.LocalService('gui.main').window
     dialog = gtk.MessageDialog(parent,
       gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
       type, gtk.BUTTONS_OK)
-    msg = to_xml(msg)
+    if msg_to_xml:
+        msg = to_xml(msg)
     if title is not None:
         msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
     dialog.set_icon(OPENERP_ICON)
@@ -517,7 +518,6 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     return True
 
 def to_xml(s):
-    from cgi import escape
     return escape(s)
 
 def message_box(title, msg, parent=None):
@@ -543,8 +543,8 @@ def message_box(title, msg, parent=None):
     return True
 
 
-def warning(msg, title=None, parent=None):
-    return message(msg=msg, title=title, type=gtk.MESSAGE_WARNING, parent=parent)
+def warning(msg, title=None, parent=None, to_xml=True):
+    return message(msg=msg, title=title, type=gtk.MESSAGE_WARNING, parent=parent, msg_to_xml=to_xml)
 
 def sur(msg, parent=None):
     if not parent:

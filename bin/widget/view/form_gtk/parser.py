@@ -154,6 +154,8 @@ class StateAwareWidget(object):
             result = True
             result = result and tools.calc_condition(self, model, v)
             if k == 'invisible':
+                if model.state_attrs.get(sa['name']): 
+                    model.state_attrs.get(sa['name'])['invisible'] = result
                 func = ['show', 'hide'][bool(result)]
                 getattr(self.widget, func)()
                 if self.label:
