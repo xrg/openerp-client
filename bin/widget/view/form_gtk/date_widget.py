@@ -170,6 +170,7 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
     def set_text(self, text):
         self._interactive_input = False
         try:
+            self.set_max_length(len(text))
             gtk.Entry.set_text(self, text)
             date = self.isvalid_date(text);
             if(date):
