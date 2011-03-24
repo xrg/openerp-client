@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
+"PO-Revision-Date: 2010-10-25 18:03+0000\n"
 "Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:03+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-17 04:37+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "Language: bs\n"
 
 #
@@ -3915,3 +3915,580 @@ msgstr "Detalji"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr "<i>_Detalji</i>"
+
+#
+# File: bin/modules/gui/main.py, line: 336
+# File: bin/modules/gui/main.py, line: 336
+#~ msgid "<b>Operation in progress</b>"
+#~ msgstr "<b>Aktivnost u toku</b>"
+
+#
+# File: bin/modules/gui/main.py, line: 388
+# File: bin/modules/gui/main.py, line: 388
+#~ msgid "The following users have been installed on your database:"
+#~ msgstr "Za vašu bazu podataka postavljeni su slijedeći korisnici:"
+
+#
+# File: bin/modules/gui/main.py, line: 388
+# File: bin/modules/gui/main.py, line: 388
+#~ msgid "You can now connect to the database as an administrator."
+#~ msgstr "Sada se možete spojiti na bazu podataka kao administrator."
+
+#
+# File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 698
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s zahtjev(a) poslano"
+
+#
+# File: bin/modules/gui/main.py, line: 736
+# File: bin/modules/gui/main.py, line: 736
+#~ msgid ""
+#~ "Connection error !\n"
+#~ "Bad username or password !"
+#~ msgstr ""
+#~ "Greška spajanja !\n"
+#~ "Neispravno korisničko ime ili šifra !"
+
+#
+# File: bin/modules/gui/window/win_preference.py, line: 69
+# File: bin/modules/gui/window/win_preference.py, line: 69
+#~ msgid "Preference"
+#~ msgstr "Podešavanja"
+
+#
+# File: bin/modules/gui/window/win_export.py, line: 81
+# File: bin/modules/gui/window/win_export.py, line: 81
+#~ msgid ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+#~ msgstr ""
+#~ "Funkcijua je dostupna samo za MS Office !\n"
+#~ "Žalim, OOo korisnici :("
+
+#
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Ispiši tok rada (Složeni)"
+
+#
+# File: bin/options.py, line: 90
+# File: bin/options.py, line: 90
+#~ msgid "enable basic debugging"
+#~ msgstr "omogučite osnovno traženje pogrešaka"
+
+#
+# File: bin/options.py, line: 91
+# File: bin/options.py, line: 91
+#~ msgid "specify channels to log"
+#~ msgstr "navedite kanale za prijavu"
+
+#
+# File: bin/options.py, line: 92
+# File: bin/options.py, line: 92
+#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+#~ msgstr "navedite nivoe prijave: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+
+#
+# File: bin/printer/printer.py, line: 189
+# File: bin/printer/printer.py, line: 189
+#~ msgid "Error no report"
+#~ msgstr "Greška, izvještaj ne postoji"
+
+#
+# File: bin/widget_search/form.py, line: 145
+# File: bin/widget_search/form.py, line: 145
+#~ msgid "Limit :"
+#~ msgstr "Ograničenje:"
+
+#
+# File: bin/widget_search/form.py, line: 154
+# File: bin/widget_search/form.py, line: 154
+#~ msgid "Offset :"
+#~ msgstr "Razmak:"
+
+#
+# File: bin/widget_search/form.py, line: 193
+# File: bin/widget_search/form.py, line: 193
+#~ msgid "Parameters :"
+#~ msgstr "Parametri:"
+
+#
+# File: bin/widget_search/wid_int.py, line: 44
+# File: bin/widget_search/wid_int.py, line: 44
+#~ msgid "The content of the widget or excpetion if not valid"
+#~ msgstr "Sadržaj widget-a ili izuzetak ako je neispravan"
+
+#
+# File: bin/widget/view/form_gtk/calendar.py, line: 115
+# File: bin/widget/view/form_gtk/calendar.py, line: 238
+# File: bin/widget/view/form_gtk/calendar.py, line: 115
+# File: bin/widget/view/form_gtk/calendar.py, line: 238
+#~ msgid "This widget is readonly !"
+#~ msgstr "Ovaj dodatak je samo za čitanje !"
+
+#
+# File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1140
+#~ msgid "_Tips"
+#~ msgstr "_Savjeti"
+
+#
+# File: bin/openerp.glade, line: 5791
+# File: bin/openerp.glade, line: 5791
+#~ msgid "Open Source:"
+#~ msgstr "Otvoreni kod:"
+
+#
+# File: bin/openerp.glade, line: 5831
+# File: bin/openerp.glade, line: 5831
+#~ msgid "How did you hear about us:"
+#~ msgstr "Kako ste čuli za nas:"
+
+#
+# File: bin/openerp.glade, line: 5887
+# File: bin/openerp.glade, line: 5887
+#~ msgid "System:"
+#~ msgstr "Sistem:"
+
+#
+# File: bin/openerp.glade, line: 5937
+# File: bin/openerp.glade, line: 5937
+#~ msgid "Your Role:"
+#~ msgstr "Vaša uloga:"
+
+#
+# File: bin/openerp.glade, line: 5953
+# File: bin/openerp.glade, line: 5953
+#~ msgid "Country:"
+#~ msgstr "Država:"
+
+#
+# File: bin/openerp.glade, line: 6038
+# File: bin/openerp.glade, line: 6038
+#~ msgid "# Employees:"
+#~ msgstr "Broj zaposlenih:"
+
+#
+# File: bin/openerp.glade, line: 6051
+# File: bin/openerp.glade, line: 6051
+#~ msgid "Industry:"
+#~ msgstr "Grana djelatnosti:"
+
+#
+# File: bin/openerp.glade, line: 6065
+# File: bin/openerp.glade, line: 6065
+#~ msgid "<b>Your company:</b>"
+#~ msgstr "<b>Vaše preduzeće:</b>"
+
+#
+# File: bin/openerp.glade, line: 6166
+# File: bin/openerp.glade, line: 6166
+#~ msgid "<b>Your interrest:</b>"
+#~ msgstr "<b>Vaša interesovanja:</b>"
+
+#
+# File: bin/openerp.glade, line: 6291
+# File: bin/openerp.glade, line: 6291
+#~ msgid "E-Mail:"
+#~ msgstr "E-Mail:"
+
+#
+# File: bin/openerp.glade, line: 6318
+# File: bin/openerp.glade, line: 6318
+#~ msgid "<b>Keep Informed</b>"
+#~ msgstr "<b>Ostanite informisani</b>"
+
+#
+# File: bin/openerp.glade, line: 7370
+# File: bin/openerp.glade, line: 7370
+#~ msgid "<Shist> + <Tab>"
+#~ msgstr "<Shift> + <Tab>"
+
+#
+# File: bin/openerp.glade, line: 9633
+# File: bin/openerp.glade, line: 9633
+#~ msgid "Database creation"
+#~ msgstr "Kreiranje baze podataka"
+
+#
+# File: bin/openerp.glade, line: 9666
+# File: bin/openerp.glade, line: 9666
+#~ msgid "<b>Database created successfully!</b>"
+#~ msgstr "<b>Baza podataka je uspješno kreirana!</b>"
+
+#
+# File: bin/openerp.glade, line: 9698
+# File: bin/openerp.glade, line: 9698
+#~ msgid ""
+#~ "You can connect to the new database using one of the following account:\n"
+#~ "\n"
+#~ "    Administrator: admin / admin "
+#~ msgstr ""
+#~ "Na novu bazu podataka možete se spojiti korištenjem slijedećih korisničkih "
+#~ "računa:\n"
+#~ "    Administrator: admin/admin "
+
+#
+# File: bin/modules/gui/main.py, line: 340
+#~ msgid "OpenERP Database Installation"
+#~ msgstr "Instalacija baze podataka za OpenERP"
+
+#
+# File: bin/common/common.py, line: 186
+#~ msgid ""
+#~ "Thank you for the feedback !\n"
+#~ "Your comments have been sent to OpenERP.\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Hvala vam na povratnim informacijama !\n"
+#~ "Vaši komentari su poslati u OpenERP.\n"
+#~ "Sada bi trebali početi kreiranjem nove baze podataka ili\n"
+#~ "spajanjem na postojeći server preko menija \"Datoteka\"."
+
+#
+# File: bin/common/common.py, line: 193
+#~ msgid ""
+#~ "Thank you for testing OpenERP !\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Hvala vam na testiranju OpenERP-a !\n"
+#~ "Sada bi trebali početi kreiranjem nove baze podataka ili\n"
+#~ "spajanjem na postojeći server preko menija \"Datoteka\"."
+
+#
+# File: bin/win_error.glade, line: 278
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Pošalji timu za održavanje"
+
+#
+# File: bin/win_error.glade, line: 150
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Ugovor o održavanju.</b>\n"
+#~ "<i>\n"
+#~ "Vaš zahtjev bit će poslan u OpenERP i tim za održavanje će vam ubrzo "
+#~ "odgovoriti.\n"
+#~ "</i>"
+
+#
+# File: bin/openerp.glade, line: 4311
+#~ msgid "OpenERP Survey"
+#~ msgstr "OpenERP anketa"
+
+#
+# File: bin/openerp.glade, line: 4340
+#~ msgid ""
+#~ "<i>Please fill in the following form in order to help us to improve OpenERP "
+#~ "and better target new developments.</i>"
+#~ msgstr ""
+#~ "<i>Molimo ispunite slijedeći obrazac da biste nam pomogli da unaprijedimo "
+#~ "OpenERP i bolje usmjerimo novi razvoj.</i>"
+
+#
+# File: bin/openerp.glade, line: 4327
+#~ msgid "<b>OpenERP Survey</b>"
+#~ msgstr "<b>OpenERP anketa</b>"
+
+#
+# File: bin/openerp.glade, line: 4968
+#~ msgid "We plan to use OpenERP"
+#~ msgstr "Planiramo da koristimo OpenERP"
+
+#
+# File: bin/openerp.glade, line: 5003
+#~ msgid "Tell us why you try OpenERP and what are your current softwares:"
+#~ msgstr ""
+#~ "Recite nam zašto isprobavate OpenERP i koji su programi koje trenutno "
+#~ "koristite:"
+
+#
+# File: bin/openerp.glade, line: 4982
+#~ msgid "We plan to offer services on OpenERP"
+#~ msgstr "Planiramo da nudimo usluge na OpenERP-u"
+
+#
+# File: bin/openerp.glade, line: 5094
+#~ msgid "I want to be contacted for a demonstration"
+#~ msgstr "Želim da budem kontaktiran za demonstraciju"
+
+#
+# File: bin/openerp.glade, line: 5109
+#~ msgid "Phone / Mobile:"
+#~ msgstr "Telefon / Mobilni:"
+
+#
+# File: bin/openerp.glade, line: 5124
+#~ msgid "Your Name:"
+#~ msgstr "Vaše ime:"
+
+#
+# File: bin/openerp.glade, line: 5175
+#~ msgid "Your Company:"
+#~ msgstr "Vaša preduzeće:"
+
+#
+# File: bin/openerp.glade, line: 7964
+#~ msgid "New Database Name:"
+#~ msgstr "Naziv nove baze podataka:"
+
+#
+# File: bin/openerp.glade, line: 7831
+#~ msgid "OpenERP Server:"
+#~ msgstr "OpenERP Server:"
+
+#
+# File: bin/openerp.glade, line: 8003
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Ovo je šifra za '<i>admin</i>' krisnika koji će biti kreiran u vašoj novoj "
+#~ "bazi podataka."
+
+#
+# File: bin/openerp.glade, line: 8005
+#~ msgid "Administrator Password:"
+#~ msgstr "Administratorska šifra:"
+
+#
+# File: bin/openerp.glade, line: 7990
+#~ msgid "Default Language:"
+#~ msgstr "Zadani jezik:"
+
+#
+# File: bin/openerp.glade, line: 8113
+#~ msgid "Load Demonstration Data:"
+#~ msgstr "Učitaj demonstracijske podatke:"
+
+#
+# File: bin/openerp.glade, line: 8017
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Ovo je šifra za '<i>admin</i>' krisnika koji će biti kreiran u vašoj novoj "
+#~ "bazi podataka. Mora biti ista kao i u polju iznad."
+
+#
+# File: bin/openerp.glade, line: 8019
+#~ msgid "Confirm Password:"
+#~ msgstr "Potvrdite šifru:"
+
+#
+# File: bin/translate.py, line: 183
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Nemogu da postavim lokalizaciju na %s"
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Nepoznata greška je prijavljena.</b>\n"
+#~ "\n"
+#~ "<b>Nemate validan Open ERP ugovor o održavanju !</b>\n"
+#~ "Ako koristite Open ERP u proizvodnji, preporučljivo je da se prijavite\n"
+#~ "za program održavanja.\n"
+#~ "\n"
+#~ "Open ERP ugovor o održavanju vam pruža garanciju o ispravljanju greški i\n"
+#~ "automatski sistem prelaska tako da možemo popraviti vaš problem u roku od "
+#~ "nekoliko\n"
+#~ "sati. Da ste imali ugovor o održavanju, ova greška bi bila poslana\n"
+#~ "timu za kvalitet Open ERP uređivača.\n"
+#~ "\n"
+#~ "Program održavanja vam nudi:\n"
+#~ "* Automatski prijelaz na nove verzije,\n"
+#~ "* Garanciju ispravljanja greški,\n"
+#~ "* Mjesečnu objavu mogućih greški i njihovih ispravki,\n"
+#~ "* Sigurnosna upozorenja putem emaila i automatski prelazak,\n"
+#~ "* Pristup korisničkom portalu.\n"
+#~ "\n"
+#~ "Više informacija možete naći na linku datom ispod. Detalji greške\n"
+#~ "su prikazani na drugoj kartici.\n"
+
+#, python-format
+#~ msgid ""
+#~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
+#~ "Please report this error manually at %s"
+#~ msgstr ""
+#~ "Vaš problem <u>NEMOŽE</u> biti poslat timu za kvalitet !\n"
+#~ "Molmo prijavite ovu grešku ručno na %s"
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Kliknite ovdje za detalje o prijedlogu održavanja"
+
+#~ msgid "<i>_Maintenance</i>"
+#~ msgstr "<i>_Održavanje</i>"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-zatvori"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developped your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all futur stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Nepoznata greška je prijavljena.</b>\n"
+#~ "\n"
+#~ "Vaš ugovor o održavanju ne pokriva sve module instalirane na vaš sistem !\n"
+#~ "Ako koristite Open ERP u proizvodnji, preporučljivo je da nadogradite vaš\n"
+#~ "ugovor.\n"
+#~ "\n"
+#~ "Ako ste razvili vaš sopstveni modul ili instalirali module treće strane, mi\n"
+#~ "možemo pružiti dodatni ugovor o održavanju za te module. Poslije\n"
+#~ "pregleda vaših modula, naš tim za kvalitet će osigurati da njihov prelazak "
+#~ "bude\n"
+#~ "automatski za sve buduće stabilne verzije Open ERP-a bez dodatnih plaćanja.\n"
+#~ "\n"
+#~ "Ovo je lista modula koji nisu pokriveni vašim ugovorom o održavanju:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Više informacija možete naći na linku datom ispod. Detalji o grešci\n"
+#~ "su prikazani na drugoj kartici."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Javljena je nepoznata greška.</b>\n"
+#~ "\n"
+#~ "Vaš ugovor o održavanje ne pokriva sve module instalirane na Vašem sistemu!\n"
+#~ "Ukoliko koristite Open ERP u poslovnom okruženju, savjetujemo da svoj "
+#~ "Ugovor\n"
+#~ "o održavanju nadogradite.\n"
+#~ "\n"
+#~ "Ukoliko ste razvili vlastiti ili instalirali modul neke treće strane, možemo "
+#~ "Vam\n"
+#~ "pružiti dodatni ugovor o održavanju za ove module. Nakon što pregledamo "
+#~ "Vaše\n"
+#~ "module, naš tim kontrole kvaliteta će osigurati da moduli automatski "
+#~ "migriraju\n"
+#~ "u buduće stabilne verzije Open ERP-a bez dodatnih troškova.\n"
+#~ "\n"
+#~ "Spisak modula koji nisu pokriveni Vašim Ugovorom o održavanju je kako "
+#~ "slijedi:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Možete koristiti link ispod za više informacija. Detalj greške prikazan je "
+#~ "na \n"
+#~ "slijedećem tabu."
+
+#~ msgid ""
+#~ "Please fill in the following form in order to help us to improve <b><span "
+#~ "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
+#~ "developments."
+#~ msgstr ""
+#~ "Molimo popunite slijedeću formu da nam pomognete da poboljšamo <b><span "
+#~ "foreground=\"red\"><i>Open</i></span> ERP</b> i da bolje odredimo budući "
+#~ "razvoj."
+
+#~ msgid "Connect now"
+#~ msgstr "Spajanje odmah"
+
+#~ msgid "Connect Later"
+#~ msgstr "Spajanje kasnije"
+
+#~ msgid "Employees:"
+#~ msgstr "Uposlenika:"
+
+#~ msgid "<b>Your company</b>"
+#~ msgstr "<b>Vaše poduzeće</b>"
+
+#~ msgid "We plan to use Open ERP"
+#~ msgstr "Planiramo koristiti Open ERP"
+
+#~ msgid "We plan to offer services on Open ERP"
+#~ msgstr "Planiramo nuditi usluge bazirane na Open ERP-u"
+
+#~ msgid "City:"
+#~ msgstr "Grad:"
+
+#~ msgid "Tell us why you try Open ERP and what are your current softwares:"
+#~ msgstr ""
+#~ "Recite nam zašto ste se odlučili probati Open ERP i koji software trenutno "
+#~ "koristite:"
+
+#~ msgid "E-mail:"
+#~ msgstr "E-mail:"
+
+#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
+#~ msgstr "Želim primiti Open ERP knjigu (PDF) putem email-a"
+
+#~ msgid "gtk-ok"
+#~ msgstr "gtk-ok"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
+
+#~ msgid "<b>Your interrest</b>"
+#~ msgstr "<b>Razlog vaše zainteresiranosti</b>"

@@ -102,6 +102,18 @@ class custom_filter(wid_int.wid_int):
         self.widget.reorder_child(self.right_text, 2)
         vis = self.condition_next.get_visible()
         self.widget.show_all()
+        for item in (['ilike', _('contains')],
+                ['not ilike', _('doesn\'t contain')],
+                ['=', _('is equal to')],
+                ['<>',_('is not equal to')],
+                ['>',_('greater than')],
+                ['<',_('less than')],
+                ['in',_('in')],
+                ['not in',_('not in')],
+                ):
+            self.op_selection[item[1]] = item[0]
+            self.operators_lst.append(item[1])
+            self.combo_op.append_text(item[1])
         self.combo_op.set_active(0)
         if not vis:
             self.condition_next.hide()

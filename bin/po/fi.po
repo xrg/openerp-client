@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-24 04:53+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-17 04:38+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "Language: fi\n"
 
 #: bin/plugins/__init__.py:27
@@ -527,7 +527,7 @@ msgstr "Virhe .CSV tiedostoa avattaessa"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "Syöttö virhe."
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -546,7 +546,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "Tuonti virhe."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -945,7 +945,7 @@ msgstr "sisältää"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "ei sisällä"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
@@ -953,7 +953,7 @@ msgstr "on yhtäsuuri kuin"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "ei ole yhtäsuuri kuin"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
@@ -1041,7 +1041,7 @@ msgstr "Tallenna suotimena"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Hallitse Suotimia"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1149,11 +1149,11 @@ msgstr "Väärä ikoni napille!"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "Kenttä"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "Objekti"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
@@ -1169,15 +1169,15 @@ msgstr "Käännä näkymä"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "Tallenna & Sulje"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "Tallenna & Uusi"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
@@ -1203,22 +1203,22 @@ msgstr "Poista tämä merkintä"
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "Edellinen sivu"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr ""
+msgstr "Edellinen Tietue"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "Seuraava Tietue"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "Seuraava sivu"
 
 #: bin/widget/view/form_gtk/one2many_list.py:245
 msgid "Switch"
@@ -1259,7 +1259,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "Varoitus"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
@@ -1287,11 +1287,11 @@ msgstr "Aseta oletusarvoksi"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "You can not set to the default value here !"
-msgstr ""
+msgstr "Et voi  asettaa oletusarvoa tähän"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "Operation not permited"
-msgstr ""
+msgstr "Toiminto ei ole sallittu"
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
@@ -1714,7 +1714,7 @@ msgstr "Kalenteri"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
-msgstr ""
+msgstr "Kaavio"
 
 #: bin/openerp.glade:1361
 msgid "Graph"
@@ -1754,7 +1754,7 @@ msgstr "Sulje ikkuna"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
-msgstr ""
+msgstr "Yritys:"
 
 #: bin/openerp.glade:1535
 msgid "Requests:"
@@ -2563,7 +2563,7 @@ msgstr ""
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "Poista Suodin"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
@@ -2571,7 +2571,7 @@ msgstr ""
 
 #: bin/openerp.glade:8395
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "Suotä Suotimen Nimi:"
 
 #: bin/win_error.glade:40
 msgid "label"

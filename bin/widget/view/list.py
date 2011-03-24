@@ -122,8 +122,6 @@ class list_record(object):
         self.lst = []
         self.screen = screen
         self.load()
-        
-        
 
     def destroy(self):
         del self.context
@@ -186,8 +184,8 @@ class list_record(object):
                     self.add(rec)
         else:
             if self.context.get('__domain') and not no_leaf:
-                limit = self.screen.screen_container.get_limit()               
-                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, limit, self.sort_order)
+                limit = self.screen.screen_container.get_limit()
+                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, limit, self.sort_order, self.context)
                 if not ids:
                      self.add_dummny_record(self.context['__field'])
                 else:
@@ -230,7 +228,6 @@ class AdaptModelGroup(gtk.GenericTreeModel):
         self.domain = domain
         self.models = list_record(model_group, context=context, domain=self.domain, sort_order=sort_order, screen=screen)
         self.set_property('leak_references', False)
-     
 
     def added(self, modellist, position):
         self.models.loaded = False
@@ -408,6 +405,14 @@ class ViewList(parser_view):
         treeselection.selected_foreach(_func_sel_get, data)
         data = str(data[0])
         selection.set(selection.target, 8, data)
+
+    def unselect_row(self, all=False):
+        selection = self.widget_tree.get_selection()
+        if all:
+            return selection.unselect_all()
+        path, column = self.widget_tree.get_cursor()
+        selection.unselect_range(path, path)
+        return True
 
     def group_by_move(self, model_list, get_id, rec_id, field='sequence'):
         seq_ids = map(lambda x: x[field].get(x), model_list.children.lst)
@@ -856,10 +861,6 @@ class ViewList(parser_view):
 
     def set_invisible_attr(self):
         for col in self.widget_tree.get_columns():
-            if col._type == 'datetime':
-                col.set_max_width(145)
-                if self.screen.context.get('group_by'):
-                    col.set_max_width(180)
             value = eval(str(self.widget_tree.cells[col.name].attrs.get('invisible', 'False')),\
                            {'context':self.screen.context})
             if col.name in self.screen.context.get('group_by',[]):

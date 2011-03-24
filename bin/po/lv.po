@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
+"PO-Revision-Date: 2010-12-19 08:07+0000\n"
 "Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-17 04:38+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "Language: lv\n"
 
 #: bin/plugins/__init__.py:27
@@ -2619,3 +2619,348 @@ msgstr "Sīkāka informācija"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr "<i>Sīkāka informācija</i>"
+
+#~ msgid "New Database Name:"
+#~ msgstr "Jaunās datubāzes nosaukums"
+
+#~ msgid ""
+#~ "Connection error !\n"
+#~ "Bad username or password !"
+#~ msgstr ""
+#~ "Savienojuma kļūda\n"
+#~ "Nepareizs lietotājs un/vai parole!"
+
+#~ msgid "How did you hear about us:"
+#~ msgstr "Kā uzzināji par mums:"
+
+#~ msgid "Offset :"
+#~ msgstr "Atkāpe:"
+
+#~ msgid "Parameters :"
+#~ msgstr "Parametri:"
+
+#~ msgid "Limit :"
+#~ msgstr "Ierobežojums:"
+
+#~ msgid "OpenERP Server:"
+#~ msgstr "OpenERP serveris:"
+
+#~ msgid "The following users have been installed on your database:"
+#~ msgstr "Tavai datubāzei ir uzstādīti sekojoši lietotāji:"
+
+#~ msgid "You can now connect to the database as an administrator."
+#~ msgstr "Tagad tu vari pieslēgties datubāzei kā administrators."
+
+#~ msgid "<b>Database created successfully!</b>"
+#~ msgstr "<b>Datubāze izveidota veiksmīgi!</b>"
+
+#~ msgid "Database creation"
+#~ msgstr "Datubāzes izveide"
+
+#~ msgid "Administrator Password:"
+#~ msgstr "Administrātora parole:"
+
+#~ msgid "Confirm Password:"
+#~ msgstr "Apstiprināt paroli:"
+
+#~ msgid "OpenERP Database Installation"
+#~ msgstr "OpenERP datubāzes uzstādīšana"
+
+#~ msgid "<b>OpenERP Survey</b>"
+#~ msgstr "<b>OpenERP pētījums</b>"
+
+#~ msgid "We plan to use OpenERP"
+#~ msgstr "Mēs plānojam lietot OpenERP"
+
+#~ msgid "We plan to offer services on OpenERP"
+#~ msgstr "Mēs plānojam sniegt ar OpenERP saistītus pakalpojumus"
+
+#~ msgid "Open Source:"
+#~ msgstr "Atvērtais pirmkods"
+
+#~ msgid "OpenERP Survey"
+#~ msgstr "OpenERP pētījums"
+
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " nosūtīts(i) %s pieprasījums(i)"
+
+#~ msgid "Preference"
+#~ msgstr "Izvēle"
+
+#~ msgid "_Tips"
+#~ msgstr "Padomi"
+
+#~ msgid "Country:"
+#~ msgstr "Valsts:"
+
+#~ msgid "Industry:"
+#~ msgstr "Nozare:"
+
+#~ msgid "# Employees:"
+#~ msgstr "Darbinieku skaits:"
+
+#~ msgid "System:"
+#~ msgstr "Sistēma:"
+
+#~ msgid "Your Role:"
+#~ msgstr "Tava loma:"
+
+#~ msgid "<b>Your company:</b>"
+#~ msgstr "<b>Uzņēmuma nosaukums:</b>"
+
+#~ msgid "I want to be contacted for a demonstration"
+#~ msgstr "Vēlos lai ar mani sazinās par demonstrāciju"
+
+#~ msgid "<b>Your interrest:</b>"
+#~ msgstr "<b>Interesējošās tēmas:</b>"
+
+#~ msgid "Phone / Mobile:"
+#~ msgstr "Tālrunis / Mobilais:"
+
+#~ msgid "Your Name:"
+#~ msgstr "Tavs vārds:"
+
+#~ msgid "E-Mail:"
+#~ msgstr "E-pasts:"
+
+#~ msgid "Your Company:"
+#~ msgstr "Tavs uzņēmums:"
+
+#~ msgid "<b>Keep Informed</b>"
+#~ msgstr "<b>Informējiet mani par jaunumiem</b>"
+
+#~ msgid "<Shist> + <Tab>"
+#~ msgstr "<Shift> + <Tab>"
+
+#~ msgid "Default Language:"
+#~ msgstr "Valoda pēc noklusējuma:"
+
+#~ msgid "Load Demonstration Data:"
+#~ msgstr "Ielādēt demonstrācijas datus:"
+
+#~ msgid "<i>_Maintenance</i>"
+#~ msgstr "<i>_Apkalpošana</i>"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
+
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Sūtīt apkalpojošajam dienestam"
+
+#~ msgid "<b>Operation in progress</b>"
+#~ msgstr "<b>Notiek darbība</b>"
+
+#~ msgid ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+#~ msgstr "Šī funkcionalitāte pieejama tikai MS Office !"
+
+#~ msgid "This widget is readonly !"
+#~ msgstr "Ievades lauka saturs nav labojams!"
+
+#~ msgid ""
+#~ "Thank you for the feedback !\n"
+#~ "Your comments have been sent to OpenERP.\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Paldies par atsaucību!\n"
+#~ "Tavi komentāri ir nosūtīti uz OpenERP.\n"
+#~ "Turpini izveidojot jaunu datubāzi vai pieslēdzoties jau esošai."
+
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Drukāt procesu (izvērsti)"
+
+#~ msgid ""
+#~ "Thank you for testing OpenERP !\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Paldies par OpenERP imēģinājumu!\n"
+#~ "Tavi komentāri ir nosūtīti uz OpenERP.\n"
+#~ "Turpini izveidojot jaunu datubāzi vai pieslēdzoties jau esošai."
+
+#, python-format
+#~ msgid ""
+#~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
+#~ "Please report this error manually at %s"
+#~ msgstr ""
+#~ "Problēmas pieteikums <u>NETIKA</u> nosūtīts kvalitātes kontroles komandai!\n"
+#~ "Lūdzu nosūti kļūdas paziņojumu uz %s"
+
+#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+#~ msgstr "norādi protokolēšanas līmeni: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+
+#~ msgid "specify channels to log"
+#~ msgstr "izvēlies kanālus, kurus protokolēt"
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Nevar uzstādīt lokalizāciju %s"
+
+#~ msgid "Error no report"
+#~ msgstr "Kļūda - nav atskaites"
+
+#~ msgid "Tell us why you try OpenERP and what are your current softwares:"
+#~ msgstr ""
+#~ "Pastāsti, kādēļ izmēģini OpenERP un kādu programmatūru lieto pašlaik:"
+
+#~ msgid ""
+#~ "<i>Please fill in the following form in order to help us to improve OpenERP "
+#~ "and better target new developments.</i>"
+#~ msgstr ""
+#~ "<i>Lūdzu aizpildi sekojošos laukus, lai varam uzlabot OpenERP un labāk "
+#~ "plānot turpmāko izstrādes procesu.</i>"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Šī ir '<i>admin</i>' lietotāja parole, kas tiks izveidots jaunajā datubāzē."
+
+#~ msgid ""
+#~ "You can connect to the new database using one of the following account:\n"
+#~ "\n"
+#~ "    Administrator: admin / admin "
+#~ msgstr ""
+#~ "Vari pieslēgties jaunajai datubāzei kā:\n"
+#~ "\n"
+#~ "    Administrātors: admin / admin "
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Šī ir '<i>admin</i>' lietotāja parole, kas tiks izveidots jaunajā datubāzē. "
+#~ "Tai jāsakrīt ar paroli, kas norādīta iepriekšējā laukā."
+
+#~ msgid "enable basic debugging"
+#~ msgstr "Iespējot vienkāršo atkļūdošanu"
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Spiediet šeit, lai apskatītu uzturēšanas piedāvājuma detaļas"
+
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Uzturēšanas līgums.</b>\n"
+#~ "<i>\n"
+#~ "Jūsu pieprasījums tiks nosūtīts uz OpenERP un uzturēšanas komanda jums "
+#~ "atbildēs tuvākajā laikā.\n"
+#~ "</i>"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developped your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all futur stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b> Notikusi nezināma kļūda. </b> \n"
+#~ "\n"
+#~ "Jūsu servisa līgums neaptver visus moduļus, kas uzstādīti jūsu sistēmā! \n"
+#~ "\n"
+#~ "Ja jūs izmantojat Open ERP ražošanā, ir ļoti ieteicams uzlabot savu servisa\n"
+#~ "līgumu. \n"
+#~ "\n"
+#~ "Ja jūs esat izstrādājuši savus moduļus vai uzstādījuši trešo personu "
+#~ "moduļus, mēs \n"
+#~ "varam sniegt jums papildus servisa līgumu par šiem moduļiem. Pēc jūsu \n"
+#~ "moduļu pārskatīšanas, mūsu kvalitātes komanda nodrošinās to automātisku "
+#~ "migrāciju \n"
+#~ "uz visām nākotnes stabilajām versijām, bez papildus izmaksām.\n"
+#~ "\n"
+#~ "Šeit ir saraksts ar moduļiem, uz kuriem neattiecas jūsu uzturēšanas līgums: "
+#~ "\n"
+#~ "%s \n"
+#~ "\n"
+#~ "Varat izmantot zemāk esošās saites, lai iegūtu vairāk informācijas. Sīkāka "
+#~ "informācija par šo kļūdu \n"
+#~ "izlasāma otrā lapā."
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b> Notikusi nezināma kļūda. </b> \n"
+#~ "\n"
+#~ "<b> Jums nav derīga Open ERP servisa līguma! </b> \n"
+#~ "Ja jūs izmantojat Open ERP ražošanā, ir ļoti ieteicams abonēt \n"
+#~ "servisa programmu. \n"
+#~ "\n"
+#~ "Open ERP servisa līgums paredz jums kļūdu labošanas garantijas, un \n"
+#~ "automātiskās migrācijas sistēmas, kas ļauj novērst Jūsu problēmas dažās \n"
+#~ "stundās. Ja jums bija uzturēšanas līgums, šī kļūda būtu nosūtīta Open ERP "
+#~ "kvalitātes komandai. \n"
+#~ "\n"
+#~ "Apkopes programma Jums piedāvā: \n"
+#~ "* automātiska migrācija uz jaunu versiju, \n"
+#~ "* kļūdu labošanas garantiju, \n"
+#~ "* Ikmēneša ziņojumus par iespējamām kļūdām un to labojumus, \n"
+#~ "* Drošības brīdinājumus uz e-pastu un automātisko migrāciju, \n"
+#~ "* Piekļuvi klientu portālā. \n"
+#~ "\n"
+#~ "Varat izmantot zemāk esošās saites, lai iegūtu vairāk informācijas. Sīkāka "
+#~ "informācija par šo kļūdu \n"
+#~ "izlasāma otrā lapā.\n"
+
+#~ msgid "The content of the widget or excpetion if not valid"
+#~ msgstr "Miniprogrammas vai izņēmuma saturs, kad rezultāts nav derīgs"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "Atcelt"
+
+#~ msgid "gtk-ok"
+#~ msgstr "OK"
+
+#~ msgid "City:"
+#~ msgstr "Pilsēta:"
+
+#~ msgid "E-mail:"
+#~ msgstr "E-pasts:"
+
+#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
+#~ msgstr "Vēlos saņemt Open ERP e-grāmatu (PDF) pa e-pastu"

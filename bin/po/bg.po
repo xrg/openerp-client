@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
+"PO-Revision-Date: 2010-12-01 09:52+0000\n"
 "Last-Translator: Valentin Dimitrov <Unknown>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:03+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-17 04:37+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "Language: bg\n"
 
 #: bin/plugins/__init__.py:27
@@ -42,7 +42,7 @@ msgstr "Свързването е отхвърлено !"
 #: bin/modules/action/wizard.py:170 bin/modules/gui/main.py:196
 #: bin/modules/gui/main.py:202 bin/rpc.py:202 bin/rpc.py:204
 msgid "Application Error"
-msgstr "Грешка във приложението"
+msgstr "Грешка в приложението"
 
 #: bin/modules/action/wizard.py:170 bin/rpc.py:204
 msgid "View details"
@@ -50,7 +50,7 @@ msgstr "Подробен изглед"
 
 #: bin/modules/action/main.py:48
 msgid "Nothing to print!"
-msgstr ""
+msgstr "Няма нищо за печат!"
 
 #: bin/modules/action/main.py:66
 msgid "Printing aborted, too long delay !"
@@ -62,21 +62,21 @@ msgstr ""
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr ""
+msgstr "Не може да се свърже със сървър!"
 
 #: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6278
 #: bin/openerp.glade:6524 bin/openerp.glade:6847 bin/openerp.glade:7508
 msgid "Server:"
-msgstr ""
+msgstr "Сървър:"
 
 #: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6560
 #: bin/openerp.glade:6804 bin/openerp.glade:7103 bin/openerp.glade:7465
 msgid "Change"
-msgstr ""
+msgstr "Промяна"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "Парола на Супер администратор:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
@@ -104,15 +104,15 @@ msgstr ""
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Сега можете да мигрирате базите данни."
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr ""
+msgstr "Мигрирай база данни"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "База данни"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -128,11 +128,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr ""
+msgstr "Не е открита база данни! Трябва да създадете такава."
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
-msgstr ""
+msgstr "Непознат"
 
 #: bin/modules/gui/main.py:474
 #, python-format
@@ -147,7 +147,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
-msgstr ""
+msgstr "Грешно име на база данни!"
 
 #: bin/modules/gui/main.py:613
 msgid ""
@@ -158,11 +158,11 @@ msgstr ""
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
 msgid "Could not create database."
-msgstr ""
+msgstr "Не може да се създаде база данни."
 
 #: bin/modules/gui/main.py:647
 msgid "Database already exists !"
-msgstr ""
+msgstr "Базата данни вече съществува!"
 
 #: bin/modules/gui/main.py:649 bin/modules/gui/main.py:1383
 #: bin/modules/gui/main.py:1403 bin/modules/gui/main.py:1482
@@ -185,16 +185,16 @@ msgstr ""
 
 #: bin/modules/gui/main.py:881
 msgid "Edit"
-msgstr ""
+msgstr "Редактирай"
 
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s сек."
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Няма фирма"
 
 #: bin/modules/gui/main.py:995
 #, python-format
@@ -2518,3 +2518,49 @@ msgstr ""
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr ""
+
+#~ msgid "Limit :"
+#~ msgstr "Лимит :"
+
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Отпечатай Работният поток (комплексно)"
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Няма възможност за местна настройка %s"
+
+#~ msgid "Error no report"
+#~ msgstr "Грешка! не е изготвен доклад"
+
+#~ msgid "Offset :"
+#~ msgstr "Изместване"
+
+#~ msgid "Parameters :"
+#~ msgstr "Стойности"
+
+#~ msgid ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+#~ msgstr ""
+#~ "Функцията е достъпна само за MS Office !\n"
+#~ "Съжалявам, OOo потребители :("
+
+#~ msgid ""
+#~ "Thank you for the feedback !\n"
+#~ "Your comments have been sent to OpenERP.\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Благодаря за обратната връзка.\n"
+#~ "Вашите коментари бяха изпратени на OpenERP.\n"
+#~ "Сега трябва да продължите като създадете нова база данни или\n"
+#~ "се свържете с наличен сървър през менюто \"File\"."
+
+#~ msgid ""
+#~ "Thank you for testing OpenERP !\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Благодаря за тестването на OpenERP!\n"
+#~ "Сега трябва да продължите като създадете нова база данни или\n"
+#~ "се свържете с наличен сървър през менюто \"File\"."

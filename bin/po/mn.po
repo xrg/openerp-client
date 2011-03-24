@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
+"PO-Revision-Date: 2010-11-14 07:39+0000\n"
 "Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-17 04:39+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "Language: mn\n"
 
 #: bin/plugins/__init__.py:27
@@ -1032,11 +1032,11 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Шүүлтүүр хадгалах"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Шүүлтийг тохируулах"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1177,7 +1177,7 @@ msgstr ""
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
 msgid "Set to default value"
-msgstr "Үндсэн утга болгох"
+msgstr "Үндсэн утгыг хэрэглэх"
 
 #: bin/widget/view/form_gtk/one2many_list.py:178
 msgid "Set Default"
@@ -1357,7 +1357,7 @@ msgstr ""
 msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
-msgstr ""
+msgstr "(Ижил нэртэй шүүлтүүрүүд бүгд устах болно)"
 
 #: bin/rpc.py:157
 msgid "Connection refused!"
@@ -2561,15 +2561,15 @@ msgstr ""
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "Шүүлтүүр хасах"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
-msgstr ""
+msgstr "Шүүлтүүр оруулах"
 
 #: bin/openerp.glade:8395
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "Шүүлтүүрийн нэр"
 
 #: bin/win_error.glade:40
 msgid "label"
@@ -2619,3 +2619,320 @@ msgstr "Дэлгэрэнгүй"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr "<i>_Details</i>"
+
+#~ msgid "Parameters :"
+#~ msgstr "Параметрүүд :"
+
+#~ msgid "Limit :"
+#~ msgstr "Хязгаар :"
+
+#~ msgid "Offset :"
+#~ msgstr "Эхлэл"
+
+#~ msgid "Preference"
+#~ msgstr "Тохиргоо"
+
+#~ msgid "<b>Operation in progress</b>"
+#~ msgstr "<b>Үйлдэл хийгдэж байна</b>"
+
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s хүсэлт илгээв"
+
+#~ msgid ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+#~ msgstr ""
+#~ "Зөвхөн MS Office-ийн функц ашиглах боломжтой! Уучлаарай хэрэглэгчээ :("
+
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "%s локалчлалыг тохируулах боломжгүй"
+
+#~ msgid "Your Name:"
+#~ msgstr "Таны нэр:"
+
+#~ msgid "OpenERP Database Installation"
+#~ msgstr "OpenERP өгөгдлийн бааз суулгалт"
+
+#~ msgid "Your Role:"
+#~ msgstr "Таны ажил үүрэг:"
+
+#~ msgid "Your Company:"
+#~ msgstr "Танай байгууллага:"
+
+#~ msgid "Employees:"
+#~ msgstr "Ажилтнууд:"
+
+#~ msgid "<b>Your company</b>"
+#~ msgstr "<b>Танай байгууллага</b>"
+
+#~ msgid "Open Source:"
+#~ msgstr "Нээлттэй эх:"
+
+#~ msgid "How did you hear about us:"
+#~ msgstr "Бидний тухай хаанаас сонссон бэ:"
+
+#~ msgid "We plan to use Open ERP"
+#~ msgstr "Бид Open ERP системийг хэрэглэхээр төлөвлөж байна"
+
+#~ msgid "<b>Your interrest</b>"
+#~ msgstr "<b>Таны сонирхол</b>"
+
+#~ msgid "Tell us why you try Open ERP and what are your current softwares:"
+#~ msgstr ""
+#~ "Та яагаад Open ERP системийг туршиж үзэж байгаа болон та одоогоор ямар "
+#~ "програм хангамж хэрэглэдэг талаараа бидэнд хэлнэ үү:"
+
+#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
+#~ msgstr ""
+#~ "Би Open ERP-гийн цахим ном (PDF)-г имэйл хаягаараа авахыг хүсэж байна"
+
+#~ msgid "Connect now"
+#~ msgstr "Одоо холбогдох"
+
+#~ msgid "New Database Name:"
+#~ msgstr "Шинэ Өгөгдлийн сангийн Нэр:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "Энд шинэ өгөгдлийн сангийн '<i>admin</i>' хэрэглэгчийн нууц үгийг "
+#~ "тодорхойлно."
+
+#~ msgid "Load Demonstration Data:"
+#~ msgstr "Жишээ өгөгдлийг Ачаалах:"
+
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "Энд шинэ өгөгдлийн сангийн '<i>admin</i>' хэрэглэгчийн нууц үгийг "
+#~ "тодорхойлно. Энэ нууц үг нь дээрх талбарт оруулсантай ижил байх ёстой."
+
+#~ msgid "Confirm Password:"
+#~ msgstr "Нууц үгээ баталгаажуулах:"
+
+#~ msgid ""
+#~ "You can connect to the new database using one of the following account:\n"
+#~ "\n"
+#~ "    Administrator: admin / admin "
+#~ msgstr ""
+#~ "Та дараах хэрэглэгчээр шинэ өгөгдлийн сан руугаа холбогдох боломжтой:\n"
+#~ "Administrator: admin / admin "
+
+#~ msgid "<b>Database created successfully!</b>"
+#~ msgstr "<b>Өгөгдлийн сан амжилттай үүслээ!</b>"
+
+#~ msgid "Database creation"
+#~ msgstr "Өгөгдлийн сан үүсгэлт"
+
+#~ msgid "Connect Later"
+#~ msgstr "Дараа холбогдох"
+
+#~ msgid "The following users have been installed on your database:"
+#~ msgstr "Дараах хэрэглэгчид таны өгөгдлийн санд нэмэгдсэн:"
+
+#~ msgid "You can now connect to the database as an administrator."
+#~ msgstr "Та одоо өгөгдлийн санд админаар хандах боломжтой."
+
+#~ msgid "OpenERP Server:"
+#~ msgstr "OpenERP сервер:"
+
+#~ msgid "Administrator Password:"
+#~ msgstr "Админы нууц үг:"
+
+#~ msgid "Industry:"
+#~ msgstr "Үйлдвэрлэл:"
+
+#~ msgid "Country:"
+#~ msgstr "Улс:"
+
+#~ msgid "City:"
+#~ msgstr "Хот:"
+
+#~ msgid "System:"
+#~ msgstr "Систем:"
+
+#~ msgid "<b>Keep Informed</b>"
+#~ msgstr "<b>Мэдээлэл хадгалах</b>"
+
+#~ msgid "Phone / Mobile:"
+#~ msgstr "Утас/Гар утас:"
+
+#~ msgid "E-mail:"
+#~ msgstr "Имэйл:"
+
+#~ msgid "This widget is readonly !"
+#~ msgstr "Энэ виджетийг зөвхөн унших боломжтой !"
+
+#~ msgid "_Tips"
+#~ msgstr "Тусламж"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-г хаах"
+
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Засварын баг илгээх"
+
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Засварын гэрээ.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Баталгаат засварын тухай энд дарж дэлгэрэнгүй харна"
+
+#~ msgid "<i>_Maintenance</i>"
+#~ msgstr "<i>Засвар</i>"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-г цуцлах"
+
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Ажлын урсгал хэвлэх (Нүсэр)"
+
+#~ msgid "Error no report"
+#~ msgstr "Тайлан байхгүй алдаа"
+
+#~ msgid ""
+#~ "Thank you for the feedback !\n"
+#~ "Your comments have been sent to OpenERP.\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Санал хүсэлт илгээсэнд баярлалаа !\n"
+#~ "Таны сэтгэгдэл OpenERP -д илгээгдсэн.\n"
+#~ "Та одоо шинэ өгөгдлийн бааз үүсгэж эхлэх эсвэл\n"
+#~ "одоо байгаа өгөгдлийн бааз руу \"Файл\" цэсийн тусламжтайгаар\n"
+#~ "холбогдох боломжтой."
+
+#~ msgid ""
+#~ "Thank you for testing OpenERP !\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "OpenERP-г туршсанд баярлалаа !\n"
+#~ "Та одоо шинэ өгөгдлийн бааз үүсгэж эхлэх эсвэл\n"
+#~ "одоо байгаа өгөгдлийн бааз руу \"Файл\" цэсийн тусламжтайгаар\n"
+#~ "холбогдох боломжтой."
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developed your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all future stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Үл танигдах алдаа мэдээлэгдлээ.</b>\n"
+#~ "\n"
+#~ "Таны засвар үйлчилгээний гэрээ таны системд суусан бүх \n"
+#~ "модулид хамаарч чадархгүй байна ! Хэрэв та Open ERP-г \n"
+#~ "бодит хэрэгцээндээ ашиглаж байгаа бол гэрээгээ шинэчлэхийг \n"
+#~ "санал болгож байна.\n"
+#~ "\n"
+#~ "Хэрэв та өөрөө модуль хөгжүүлсэн, гуравдагч этгээдийн модулийг\n"
+#~ "суулгасан бол бид танд тэдгээр модулид зориулсан нэмэлт гэрээг \n"
+#~ "санал болгоно. Таны модулиуд бидэнд шалгагдсны дараа \n"
+#~ "манай чанарын баг тэдгээр модуль ирээдүйн бүх шинэчлэлт рүү нэмэлт\n"
+#~ "үнэ хөлсгүйгээр нийцүүлэх шилжин орж байх баталгаатай болно.\n"
+#~ "\n"
+#~ "Таны засвар үйлчилгээний гэрээнд хамрагдаагүй модулийн жагсаалт:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Та илүү их мэдээллийг дараах линкээр авах боломжтой. Алдааны дэлгэрэнгүй "
+#~ "мэдээлэл\n"
+#~ "хоёрдох ТАБ-д тусгагдсан болно."
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Үл танигдах алдаа мэдээлэгдлээ.</b>\n"
+#~ "\n"
+#~ "<b>Танд Open ERP засвар үйлчилгээний хүчинтэй гэрээ алга !</b>\n"
+#~ "Хэрэв та Open ERP-г бодит хэрэгцээндээ ашиглаж байгаа бол засвар \n"
+#~ "үйлчилгээний хөтөлбөрт бүртгүүлэхийг чухал шаардлагатай.\n"
+#~ "\n"
+#~ "Open ERP засвар үйлчилгээний гэрээ нь танд алдааны засварын баталгаа болон "
+#~ "автомат \n"
+#~ "шилжилт сайжруулалтыг үзүүлэх баталгааг өгдөг тул таны асуудлыг бид хэдхэн "
+#~ "цагийн дотор шийдвэрлэнэ. \n"
+#~ "Хэрэв засвар үйлчилгээний гэрээтэй байсан бол Open ERP чанарын багт энэ "
+#~ "алдаа нь илгээгдэх юм.\n"
+#~ "\n"
+#~ "Засвар үйлчилгээний хөтөлбөр нь дараах боломжийг олгоно:\n"
+#~ "* Шинэ хувилбар руу автомат шилжих,\n"
+#~ "* Алдаа засах баталгаа,\n"
+#~ "* Сар бүр алдаа болон тэднийг зассан тухай мэдээллээр хангана,\n"
+#~ "* Нууцлалын асуудал болон автомат шилжилтийн талаар имэйл\n"
+#~ "* Үйлчлүүлэгчдийн порталд хандах боломжтой.\n"
+#~ "\n"
+#~ "Та илүү их мэдээллийг дараах линкээр авах боломжтой. Алдааны дэлгэрэнгүй "
+#~ "мэдээлэл\n"
+#~ "хоёрдох ТАБ-д тусгагдсан болно.\n"
+
+#~ msgid ""
+#~ "Please fill in the following form in order to help us to improve <b><span "
+#~ "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
+#~ "developments."
+#~ msgstr ""
+#~ "<b><span foreground=\"red\"><i>Open</i></span> ERP</b> -г сайжруулах, шинэ "
+#~ "хөгжүүлэлтийн зорилгыг зөв тодорхойлоход бидэнд туслаж дараах маягтыг "
+#~ "бөглөнө үү."
+
+#~ msgid "We plan to offer services on Open ERP"
+#~ msgstr "Open ERP-д бид үйлчилгээнүүдийг санал болгохоор төлөвлөж байна."
+
+#~ msgid "Default Language:"
+#~ msgstr "Үндсэн хэл"
+
+#~ msgid "gtk-ok"
+#~ msgstr "GTK-тийм"

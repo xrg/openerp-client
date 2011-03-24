@@ -422,6 +422,8 @@ class one2many_list(interface.widget_interface):
         self.pager.search_count()
         self.pager.set_sensitivity()
         self.screen.display()
+        if not self.model_field.get_state_attrs(model).get('valid', True):
+            self.screen.current_view.unselect_row(True)
         return True
 
     def set_value(self, model, model_field):

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
+"PO-Revision-Date: 2010-11-30 09:51+0000\n"
 "Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:03+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-03-17 04:38+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "Language: et\n"
 
 #
@@ -3858,3 +3858,504 @@ msgstr "Üksikasjad"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr "<i>_Üksikasjad</i>"
+
+#
+# File: bin/modules/gui/main.py, line: 336
+# File: bin/modules/gui/main.py, line: 336
+#~ msgid "<b>Operation in progress</b>"
+#~ msgstr "<b>Operatsioon teoksil</b>"
+
+#
+# File: bin/modules/gui/main.py, line: 388
+# File: bin/modules/gui/main.py, line: 388
+#~ msgid "The following users have been installed on your database:"
+#~ msgstr "Järgnevad kasutajad on paigaldatud sinu andmebaasi:"
+
+#
+# File: bin/modules/gui/main.py, line: 388
+# File: bin/modules/gui/main.py, line: 388
+#~ msgid "You can now connect to the database as an administrator."
+#~ msgstr "Sa saad nüüd ühenduda andmebaasi administraatorina."
+
+#
+# File: bin/modules/gui/main.py, line: 698
+# File: bin/modules/gui/main.py, line: 698
+#, python-format
+#~ msgid " - %s request(s) sended"
+#~ msgstr " - %s päring(ut) saadetud"
+
+#
+# File: bin/modules/gui/main.py, line: 736
+# File: bin/modules/gui/main.py, line: 736
+#~ msgid ""
+#~ "Connection error !\n"
+#~ "Bad username or password !"
+#~ msgstr ""
+#~ "Ühendumise viga !\n"
+#~ "Vale kasutajanimi või parool !"
+
+#
+# File: bin/modules/gui/window/win_preference.py, line: 69
+# File: bin/modules/gui/window/win_preference.py, line: 69
+#~ msgid "Preference"
+#~ msgstr "Eelistus"
+
+#
+# File: bin/modules/gui/window/win_export.py, line: 81
+# File: bin/modules/gui/window/win_export.py, line: 81
+#~ msgid ""
+#~ "Function only available for MS Office !\n"
+#~ "Sorry, OOo users :("
+#~ msgstr ""
+#~ "Funktsioon on saadaval ainult MS Office jaoks !\n"
+#~ "Vabandame. OOo kasutajad :("
+
+#
+# File: bin/plugins/__init__.py, line: 29
+# File: bin/plugins/__init__.py, line: 29
+#~ msgid "Print Workflow (Complex)"
+#~ msgstr "Trüki Töövoog (Kompleksne)"
+
+#
+# File: bin/options.py, line: 90
+# File: bin/options.py, line: 90
+#~ msgid "enable basic debugging"
+#~ msgstr "luba põhisilumine"
+
+#
+# File: bin/options.py, line: 91
+# File: bin/options.py, line: 91
+#~ msgid "specify channels to log"
+#~ msgstr "määratle logitavad kanalid"
+
+#
+# File: bin/options.py, line: 92
+# File: bin/options.py, line: 92
+#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
+#~ msgstr "määratle logimise tase: INFO, DEBUG, WARNIG, ERROR, CRITICAL"
+
+#
+# File: bin/printer/printer.py, line: 189
+# File: bin/printer/printer.py, line: 189
+#~ msgid "Error no report"
+#~ msgstr "Viga, puudub raport"
+
+#
+# File: bin/widget_search/form.py, line: 145
+# File: bin/widget_search/form.py, line: 145
+#~ msgid "Limit :"
+#~ msgstr "Limiit:"
+
+#
+# File: bin/widget_search/form.py, line: 154
+# File: bin/widget_search/form.py, line: 154
+#~ msgid "Offset :"
+#~ msgstr "Tolerants:"
+
+#
+# File: bin/widget_search/form.py, line: 193
+# File: bin/widget_search/form.py, line: 193
+#~ msgid "Parameters :"
+#~ msgstr "Parameetrid:"
+
+#
+# File: bin/widget/view/form_gtk/calendar.py, line: 115
+# File: bin/widget/view/form_gtk/calendar.py, line: 238
+# File: bin/widget/view/form_gtk/calendar.py, line: 115
+# File: bin/widget/view/form_gtk/calendar.py, line: 238
+#~ msgid "This widget is readonly !"
+#~ msgstr "See vidin on kirjutuskaitsutud !"
+
+#
+# File: bin/openerp.glade, line: 1140
+# File: bin/openerp.glade, line: 1140
+#~ msgid "_Tips"
+#~ msgstr "Nõuanded"
+
+#
+# File: bin/openerp.glade, line: 5791
+# File: bin/openerp.glade, line: 5791
+#~ msgid "Open Source:"
+#~ msgstr "Avalik Lähetkood:"
+
+#
+# File: bin/openerp.glade, line: 5831
+# File: bin/openerp.glade, line: 5831
+#~ msgid "How did you hear about us:"
+#~ msgstr "Kuidas sa meist kuulsid:"
+
+#
+# File: bin/openerp.glade, line: 5887
+# File: bin/openerp.glade, line: 5887
+#~ msgid "System:"
+#~ msgstr "Süsteem:"
+
+#
+# File: bin/openerp.glade, line: 5937
+# File: bin/openerp.glade, line: 5937
+#~ msgid "Your Role:"
+#~ msgstr "Sinu Roll:"
+
+#
+# File: bin/openerp.glade, line: 5953
+# File: bin/openerp.glade, line: 5953
+#~ msgid "Country:"
+#~ msgstr "Riik:"
+
+#
+# File: bin/openerp.glade, line: 6038
+# File: bin/openerp.glade, line: 6038
+#~ msgid "# Employees:"
+#~ msgstr "#Töötajad:"
+
+#
+# File: bin/openerp.glade, line: 6051
+# File: bin/openerp.glade, line: 6051
+#~ msgid "Industry:"
+#~ msgstr "Tööstus:"
+
+#
+# File: bin/openerp.glade, line: 6166
+# File: bin/openerp.glade, line: 6166
+#~ msgid "<b>Your interrest:</b>"
+#~ msgstr "<b>Sinu huvid:</b>"
+
+#
+# File: bin/openerp.glade, line: 6291
+# File: bin/openerp.glade, line: 6291
+#~ msgid "E-Mail:"
+#~ msgstr "E-Post:"
+
+#
+# File: bin/openerp.glade, line: 6318
+# File: bin/openerp.glade, line: 6318
+#~ msgid "<b>Keep Informed</b>"
+#~ msgstr "<b>Hoia Informeeritud</b>"
+
+#
+# File: bin/openerp.glade, line: 7370
+# File: bin/openerp.glade, line: 7370
+#~ msgid "<Shist> + <Tab>"
+#~ msgstr "<Shift> + <Tab>"
+
+#
+# File: bin/openerp.glade, line: 9633
+# File: bin/openerp.glade, line: 9633
+#~ msgid "Database creation"
+#~ msgstr "Andembaasi loomine"
+
+#
+# File: bin/openerp.glade, line: 9666
+# File: bin/openerp.glade, line: 9666
+#~ msgid "<b>Database created successfully!</b>"
+#~ msgstr "<b>Andmebaas loodud edukalt!</b>"
+
+#
+# File: bin/openerp.glade, line: 9698
+# File: bin/openerp.glade, line: 9698
+#~ msgid ""
+#~ "You can connect to the new database using one of the following account:\n"
+#~ "\n"
+#~ "    Administrator: admin / admin "
+#~ msgstr ""
+#~ "Sa võid nüüd ühenduda uude andmebaasi kasutades üht alljärgnevat kontot:\n"
+#~ "\n"
+#~ "    Administraator: admin/admin "
+
+#
+# File: bin/modules/gui/main.py, line: 340
+#~ msgid "OpenERP Database Installation"
+#~ msgstr "OpenERP Andmebaasi Paigaldamine"
+
+#
+# File: bin/translate.py, line: 183
+#, python-format
+#~ msgid "Unable to set locale %s"
+#~ msgstr "Viga lokaali %s seadmisel"
+
+#
+# File: bin/common/common.py, line: 186
+#~ msgid ""
+#~ "Thank you for the feedback !\n"
+#~ "Your comments have been sent to OpenERP.\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Täname teid tagasiside eest !\n"
+#~ "Teie kommentaarid on saadetud OpenERP-i.\n"
+#~ "Te peaksite alustama uue andmebaasi loomisega või\n"
+#~ "ühenduma olemasolevasse serverisse läbi \"Fail\" menüü."
+
+#
+# File: bin/common/common.py, line: 193
+#~ msgid ""
+#~ "Thank you for testing OpenERP !\n"
+#~ "You should now start by creating a new database or\n"
+#~ "connecting to an existing server through the \"File\" menu."
+#~ msgstr ""
+#~ "Täname teid OpenERP-i testimise eest !\n"
+#~ "Te peaksite alustama uue andmebaasi loomisega või\n"
+#~ "ühenduma olemasolevasse serverisse läbi \"Fail\" menüü."
+
+#
+# File: bin/win_error.glade, line: 278
+#~ msgid "Send to Maintenance Team"
+#~ msgstr "Saada hooldusmeeskonnale"
+
+#
+# File: bin/openerp.glade, line: 5003
+#~ msgid "Tell us why you try OpenERP and what are your current softwares:"
+#~ msgstr ""
+#~ "Kirjutage miks te proovite OpenERP-i ja mis on teie praegused tarkvarad:"
+
+#
+# File: bin/openerp.glade, line: 4982
+#~ msgid "We plan to offer services on OpenERP"
+#~ msgstr "Me plaanime pakkuda teenuseid OpenERP-il"
+
+#
+# File: bin/openerp.glade, line: 4311
+#~ msgid "OpenERP Survey"
+#~ msgstr "OpenERP uuring"
+
+#
+# File: bin/openerp.glade, line: 4327
+#~ msgid "<b>OpenERP Survey</b>"
+#~ msgstr "<b>OpenERP Uuring</b>"
+
+#
+# File: bin/openerp.glade, line: 4968
+#~ msgid "We plan to use OpenERP"
+#~ msgstr "Me plaanime kasutada OpenERP-i"
+
+#
+# File: bin/openerp.glade, line: 5094
+#~ msgid "I want to be contacted for a demonstration"
+#~ msgstr "Ma soovin, et minuga võetakse ühendust esitluse asjus"
+
+#
+# File: bin/openerp.glade, line: 7831
+#~ msgid "OpenERP Server:"
+#~ msgstr "OpenERP Server:"
+
+#
+# File: bin/openerp.glade, line: 5109
+#~ msgid "Phone / Mobile:"
+#~ msgstr "Telefon / Mobiil:"
+
+#
+# File: bin/openerp.glade, line: 5124
+#~ msgid "Your Name:"
+#~ msgstr "Teie nimi:"
+
+#
+# File: bin/openerp.glade, line: 7964
+#~ msgid "New Database Name:"
+#~ msgstr "Uue andmebaasi nimi:"
+
+#
+# File: bin/openerp.glade, line: 8005
+#~ msgid "Administrator Password:"
+#~ msgstr "Administraatori Parool:"
+
+#
+# File: bin/openerp.glade, line: 7990
+#~ msgid "Default Language:"
+#~ msgstr "Vaikekeel:"
+
+#
+# File: bin/openerp.glade, line: 8113
+#~ msgid "Load Demonstration Data:"
+#~ msgstr "Lae esitlusandmed"
+
+#
+# File: bin/openerp.glade, line: 8019
+#~ msgid "Confirm Password:"
+#~ msgstr "Parool uuesti:"
+
+#
+# File: bin/win_error.glade, line: 150
+#~ msgid ""
+#~ "<b>Maintenance Contract.</b>\n"
+#~ "<i>\n"
+#~ "Your request will be send to OpenERP and maintenance team will reply you "
+#~ "shortly.\n"
+#~ "</i>"
+#~ msgstr ""
+#~ "<b>Hooldusleping.</b>\n"
+#~ "<i>\n"
+#~ "Teie päring saadetakse OpenERP-i ning hooldusmeeskond vastab teile õige "
+#~ "pea.\n"
+#~ "</i>"
+
+#
+# File: bin/openerp.glade, line: 4340
+#~ msgid ""
+#~ "<i>Please fill in the following form in order to help us to improve OpenERP "
+#~ "and better target new developments.</i>"
+#~ msgstr ""
+#~ "<i>Palun täida järgnev vorm, et aidata meil arendada Tiny ERP-i ning "
+#~ "paremini suunata arendustegevust.</i>"
+
+#
+# File: bin/openerp.glade, line: 8003
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database."
+#~ msgstr ""
+#~ "See on '<i>admin</i>' kasutaja parool mis luuakse teie uude andmebaasi."
+
+#
+# File: bin/openerp.glade, line: 8017
+#~ msgid ""
+#~ "This is the password of the '<i>admin</i>' user that will be created in your "
+#~ "new database. It has to be the same than the above field."
+#~ msgstr ""
+#~ "See on '<i>admin</i>' kasutaja parool mis luuakse teie uude andmebaasi. See "
+#~ "peab olema sama, mis ülemisel väljal."
+
+#~ msgid "<i>_Maintenance</i>"
+#~ msgstr "<i>_Hooldus</i>"
+
+#, python-format
+#~ msgid ""
+#~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
+#~ "Please report this error manually at %s"
+#~ msgstr ""
+#~ "Sinu probleemi <u>EI</u> suudetud saata kvaliteeditiimile!\n"
+#~ "Palun teata see viga käsitsi: %s"
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
+#~ "If you are using Open ERP in production, it is highly suggested to "
+#~ "subscribe\n"
+#~ "a maintenance program.\n"
+#~ "\n"
+#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
+#~ "automatic migration system so that we can fix your problems within a few\n"
+#~ "hours. If you had a maintenance contract, this error would have been sent\n"
+#~ "to the quality team of the Open ERP editor.\n"
+#~ "\n"
+#~ "The maintenance program offers you:\n"
+#~ "* Automatic migrations on new versions,\n"
+#~ "* A bugfix guarantee,\n"
+#~ "* Monthly announces of potential bugs and their fixes,\n"
+#~ "* Security alerts by email and automatic migration,\n"
+#~ "* Access to the customer portal.\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Tundmatu viga on teatatud.</b>\n"
+#~ "\n"
+#~ "<b>Sul pole kehtivat Open ERP hoolduslepingut!</b>\n"
+#~ "Kui sa kasutad Open ERP-i tootmises siis on eriti soovituslik \n"
+#~ "tellida hooldusprogramm.\n"
+#~ "\n"
+#~ "Open ERP hooldusleping tagab sulle vigade parandamise ja \n"
+#~ "automaatse migreerumissüsteemi, mis võimaldab meil \n"
+#~ "parandada su probleemid mõne tunniga. Kui sul oleks \n"
+#~ "hooldusleping siis oleks see viga saadetud Open ERP kvaliteeditiimile.\n"
+#~ "\n"
+#~ "See hooldusprogramm pakub sulle:\n"
+#~ "* Automaatse migreerumise uutele versioonidele,\n"
+#~ "* Vigade parandamise garantii,\n"
+#~ "* Igakuised teated võimalike vigade ja nende parandamise kohta,\n"
+#~ "* Turvalisust puudutavad hoiatused e-posti ja automaatse migreerumise "
+#~ "kaudu,\n"
+#~ "* Ligipääsu kliendiportaali.\n"
+#~ "\n"
+#~ "Sa saad kasutada allolevat viita, et saada rohkem informatsiooni. \n"
+#~ "Üksikasjad vea kohta on kuvatud teisel kaardil.\n"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
+
+#~ msgid "Click here for details about the maintenance proposition"
+#~ msgstr "Klõpsa siia, et näha detaile hooldusplaani kohta"
+
+#~ msgid "The content of the widget or excpetion if not valid"
+#~ msgstr "Vidina või if erandi sisu on kehtetu"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "<b>An unknown error has been reported.</b>\n"
+#~ "\n"
+#~ "Your maintenance contract does not cover all modules installed in your "
+#~ "system !\n"
+#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
+#~ "your\n"
+#~ "contract.\n"
+#~ "\n"
+#~ "If you have developped your own modules or installed third party module, we\n"
+#~ "can provide you an additional maintenance contract for these modules. After\n"
+#~ "having reviewed your modules, our quality team will ensure they will "
+#~ "migrate\n"
+#~ "automatically for all futur stable versions of Open ERP at no extra cost.\n"
+#~ "\n"
+#~ "Here is the list of modules not covered by your maintenance contract:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "You can use the link bellow for more information. The detail of the error\n"
+#~ "is displayed on the second tab."
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Tundmatu viga on teatatud-</b>\n"
+#~ "\n"
+#~ "Sinu hooldusleping ei kata kõiki paigaldatud mooduleid!\n"
+#~ "Kui sa kasutad Open ERP-i tootmises siis on eriti soovituslik\n"
+#~ "täiendada oma lepingut.\n"
+#~ "\n"
+#~ "Kui sa oled arendanud oma enda mooduleid või paigaldanud kolmanda osapoole\n"
+#~ "mooduleid saame me pakkuda lisa hoolduslepingule nende moodulite jaoks.\n"
+#~ "Pärast moodulite üle vaatamist kinnitab meie kvaliteeditiim, et need "
+#~ "migreeruvad \n"
+#~ "automaatselt uute stabiilsete Open ERP versioonidega lisakuluta.\n"
+#~ "\n"
+#~ "Siin on nimekiri moodulitest, mis pole sinu hoolduslepinguga kaetud:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Sa saad kasutada all olevat viita lisainfoks. Vea detailid\n"
+#~ "kuvatakse teisel kaardil."
+
+#~ msgid "<b>Your company:</b>"
+#~ msgstr "<b>Sinu ettevõte.</b>"
+
+#~ msgid "Your Company:"
+#~ msgstr "Sinu ettevõte:"
+
+#~ msgid "Connect Later"
+#~ msgstr "Ühenda hiljem"
+
+#~ msgid "Employees:"
+#~ msgstr "Töötajad:"
+
+#~ msgid "<b>Your company</b>"
+#~ msgstr "<b>Sinu firma</b>"
+
+#~ msgid "Connect now"
+#~ msgstr "Ühenda nüüd"
+
+#~ msgid "Tell us why you try Open ERP and what are your current softwares:"
+#~ msgstr ""
+#~ "Ütle meile miks sa proovid Open ERP-i ja millised on su praegused tarkvarad:"
+
+#~ msgid "We plan to use Open ERP"
+#~ msgstr "Me plaanime kasutada Open ERP-i"
+
+#~ msgid "City:"
+#~ msgstr "Linn:"
+
+#~ msgid "E-mail:"
+#~ msgstr "E-post:"
+
+#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
+#~ msgstr "Soovin saada Open ERP e-raamatut (PDF) emaili teel"
+
+#~ msgid "We plan to offer services on Open ERP"
+#~ msgstr "Me plaanime pakkuda teenuseid Open ERP-le"
