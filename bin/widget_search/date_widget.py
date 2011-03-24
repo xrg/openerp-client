@@ -23,7 +23,7 @@ import gobject
 import pango
 import gtk
 import re
-
+from datetime import datetime
 import tools
 import tools.datetime_util
 import time
@@ -38,8 +38,8 @@ class DateEntry(gtk.Entry):
         for key,val in tools.datetime_util.date_mapping.items():
             self.regex = self.regex.replace(key, val[1])
             self.initial_value = self.initial_value.replace(key, val[0])
-            
-        self.small_text = self.initial_value 
+
+        self.small_text = self.initial_value
         self.set_text(self.initial_value)
         self.regex = re.compile(self.regex)
 
@@ -73,13 +73,13 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
                     ('%U',''), ('%W','')]:
             fmt = fmt.replace(x, y)
 
-        if (not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) or fmt.count('%x') >= 1) and (fmt.count('%H') == 0 and fmt.count('%M') == 0 and fmt.count('%S') == 0 and fmt.count('%X') == 0): 
-                
+        if (not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) or fmt.count('%x') >= 1) and (fmt.count('%H') == 0 and fmt.count('%M') == 0 and fmt.count('%S') == 0 and fmt.count('%X') == 0):
+
             return '%Y/%m/%d'
         elif not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) \
                 or (fmt.count('%x') >=1 or fmt.count('%c') >= 1):
             return '%Y/%m/%d %H:%M:%S'
-            
+
 
         return fmt
 
@@ -89,14 +89,14 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             return datetime.strptime(text, self.format)
         except:
             pass
-            
+
         try:
             return datetime.strptime(text, self.small_format)
         except:
             self.valid = False
             return False
-        
-        
+
+
     def _on_insert_text(self, editable, value, length, position):
         if not self._interactive_input:
             return
@@ -104,14 +104,14 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         self.stop_emission('insert-text')
         if self.mode_cmd:
             if self.callback: self.callback(value)
-            return 
-        
-        text = self.get_text()  
+            return
+
+        text = self.get_text()
         current_pos = self.get_position()
-        
+
         if(length + current_pos > len(text)):
             return
-        
+
         pos = (current_pos < 10  or text != self.initial_value) and current_pos or 0
 
         if length != 1:
@@ -156,7 +156,7 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         if self.mode_cmd:
             self.mode_cmd = False
             if self.callback_process: self.callback_process(False, self, False)
-            
+
     def _focus_in(self, args, args2):
         self.set_text(self.small_text)
         if self.mode_cmd:
@@ -170,10 +170,10 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             date = self.isvalid_date(text);
             if(date):
                 self.small_text = date.strftime(self.small_format)
-            
+
         finally:
             self._interactive_input = True
-            
+
     def date_set(self, dt):
         if dt:
             self.set_text( dt.strftime(self.format) )
