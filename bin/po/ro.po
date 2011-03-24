@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-03-22 13:43+0000\n"
+"PO-Revision-Date: 2011-03-23 17:11+0000\n"
 "Last-Translator: Dorin <dhongu@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-23 04:35+0000\n"
+"X-Launchpad-Export-Date: 2011-03-24 04:49+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 "Language: ro\n"
 
@@ -1769,7 +1769,7 @@ msgstr "Lanseaza actiuni legate la acesta resursa"
 
 #: bin/openerp.glade:1416
 msgid "Add an attachment to this resource"
-msgstr "Adauga un atasament la aceasta resursa"
+msgstr "Adaugă un atașament la această resursă"
 
 #: bin/openerp.glade:1417
 msgid "Attachment"
@@ -2425,7 +2425,7 @@ msgid ""
 msgstr ""
 "Aceasta este parola utilizatorului care are drepturile de administrare ale "
 "bazelor de date. Acesta nu este un utilizator OpenERP, doar un super "
-"administrator. Daca  nu o schimbati, parola dupa instalare este 'admin'."
+"administrator. Dacă  nu o schimbați, parola după instalare este 'admin'."
 
 #: bin/openerp.glade:7029
 msgid ""
