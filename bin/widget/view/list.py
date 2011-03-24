@@ -185,7 +185,7 @@ class list_record(object):
         else:
             if self.context.get('__domain') and not no_leaf:
                 limit = self.screen.screen_container.get_limit()
-                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, limit, self.sort_order)
+                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, limit, self.sort_order, self.context)
                 if not ids:
                      self.add_dummny_record(self.context['__field'])
                 else:

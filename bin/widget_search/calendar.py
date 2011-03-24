@@ -58,8 +58,8 @@ class calendar(wid_int.wid_int):
         img.set_alignment(0.5, 0.5)
         self.eb1.add(img)
         self.widget.pack_start(self.eb1, expand=False, fill=False)
-
-        self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
+        self.label = gtk.Label('-')
+        self.widget.pack_start(self.label, expand=False, fill=False)
 
         self.widget2 = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry2 = self.widget2.widget
@@ -186,8 +186,8 @@ class datetime(wid_int.wid_int):
         img.set_alignment(0.5, 0.5)
         self.eb1.add(img)
         self.widget.pack_start(self.eb1, expand=False, fill=False)
-
-        self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
+        self.label = gtk.Label('-')
+        self.widget.pack_start(self.label, expand=False, fill=False)
 
         self.widget2 = date_widget.ComplexEntry(self.format, spacing=3)
         self.entry2 = self.widget2.widget

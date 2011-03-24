@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-03-18 08:31+0000\n"
+"PO-Revision-Date: 2011-03-23 17:11+0000\n"
 "Last-Translator: Dorin <dhongu@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-19 05:17+0000\n"
+"X-Launchpad-Export-Date: 2011-03-24 04:49+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 "Language: ro\n"
 
@@ -1769,7 +1769,7 @@ msgstr "Lanseaza actiuni legate la acesta resursa"
 
 #: bin/openerp.glade:1416
 msgid "Add an attachment to this resource"
-msgstr "Adauga un atasament la aceasta resursa"
+msgstr "Adaugă un atașament la această resursă"
 
 #: bin/openerp.glade:1417
 msgid "Attachment"
@@ -2415,6 +2415,7 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Server:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Server OpenERP:"
 
 #: bin/openerp.glade:7025
 msgid ""
@@ -2424,13 +2425,15 @@ msgid ""
 msgstr ""
 "Aceasta este parola utilizatorului care are drepturile de administrare ale "
 "bazelor de date. Acesta nu este un utilizator OpenERP, doar un super "
-"administrator. Daca  nu o schimbati, parola dupa instalare este 'admin'."
+"administrator. Dacă  nu o schimbați, parola după instalare este 'admin'."
 
 #: bin/openerp.glade:7029
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Parolă Super "
+"Administrator:"
 
 #: bin/openerp.glade:7048
 msgid "admin"
@@ -2445,7 +2448,7 @@ msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
-"Alegeti numele bazei de date ce va fi creata. Numele nu trebuie sa contina "
+"Alegeți numele bazei de date ce va fi creată. Numele nu trebuie să conțină "
 "nici un caracter special. Exemplu: 'terp'."
 
 #: bin/openerp.glade:7129
@@ -2461,7 +2464,7 @@ msgid ""
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
-"Alegeti limba implicita ce va fi instalata pentru aceasta baza de date. Veti "
+"Alegeți limba implicită ce va fi instalată pentru această baza de date. Veți "
 "avea posibilitatea de a instala alte limbi ulterior din meniul administrare."
 
 #: bin/openerp.glade:7156
@@ -2492,7 +2495,7 @@ msgid ""
 "database. It has to be the same than the above field."
 msgstr ""
 "Aceasta este parola utilizatorului 'admin' care va fi creat în noua bază de "
-"date. Trebuie să fie identică cu cea introdusă în cîmpul precedent."
+"date. Trebuie să fie identică cu cea introdusă în câmpul precedent."
 
 #: bin/openerp.glade:7186
 msgid ""
