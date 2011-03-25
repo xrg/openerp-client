@@ -123,7 +123,7 @@ class Button(Observable):
             model.get_button_action(self.form.screen, id, self.attrs)
             self.warn('misc-message', '')
         else:
-            fields  = tools.get_invalid_field(self.form.screen)
+            fields  = common.get_invalid_field(self.form.screen.current_model, self.form.screen.context)
             msg = ''
             for req, inv in fields:
                 if inv:

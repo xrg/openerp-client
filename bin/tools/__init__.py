@@ -152,16 +152,6 @@ class ConditionExpr(object):
                     res.append(not res.pop())
             return all(res)
 
-def get_invalid_field(screen):
-    """
-    Return [('field_name','is_visible'), .. ]
-    """
-    fields = []
-    for field, attribute in screen.current_model.state_attrs.items():
-        if not attribute.get('valid', False):
-            fields.append((attribute['string'], attribute.get('invisible',False)))
-    return fields
-
 def call_log(fun):
     """Debug decorator
        TODO: Add optionnal execution time

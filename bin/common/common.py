@@ -128,6 +128,27 @@ To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user pr
             self.help_frame.show_all()
             return True
         return False
+    
+def get_invalid_field(model, context={}):
+    """
+    Return [('field_string','is_visible'), .. ]    
+    """
+    fields = []
+    for field, attribute in model.state_attrs.items():
+        if not attribute.get('valid', False):
+            if attribute.get('invisible',False): 
+                fields.append((attribute['string'], tools.expr_eval(attribute['invisible'], {'context':context})))
+                continue
+            fields.append((attribute['string'], attribute.get('invisible',False)))
+            
+            if attribute['type'] == 'one2many':
+                child_field =[]
+                for child_model in model.value[attribute['name']].models:
+                    child_field = get_invalid_field(child_model, context)
+                for req, inv in child_field:
+                    req = '-- ' + req
+                    fields.append((req , inv))
+    return fields
 
 
 def OpenERP_Progressbar(parent=None, title=_('OpenERP Computing')):

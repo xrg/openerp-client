@@ -332,7 +332,7 @@ class form(object):
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
         elif len(self.screen.models.models) and res != None:
-            fields  = tools.get_invalid_field(self.screen)
+            fields  = common.get_invalid_field(self.screen.current_model, self.screen.context)
             msg = ''
             for req, inv in fields:
                 if inv:
