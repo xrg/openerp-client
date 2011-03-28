@@ -422,8 +422,7 @@ class one2many_list(interface.widget_interface):
         self.pager.search_count()
         self.pager.set_sensitivity()
         self.screen.display()
-        if self.screen.current_view.view_type == 'tree' and \
-            not self.model_field.get_state_attrs(model).get('valid', True):
+        if not self.model_field.get_state_attrs(model).get('valid', True):
             self.screen.current_view.unselect_row(True)
         return True
 
