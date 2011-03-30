@@ -32,8 +32,40 @@ import os
 import tools
 from tools import user_locale_format
 import re
+import sys
 
 CONCURRENCY_CHECK_FIELD = '__last_update'
+
+
+"""Modified version of xmlrcpclib.Transport.request (same in Python 2.4, 2.5, 2.6)
+   to workaround Python bug http://bugs.python.org/issue1223
+   for Python versions before 2.6
+   This patch is inspired by http://www.cherrypy.org/ticket/743.
+   See LP bug https://bugs.launchpad.net/openobject-client/+bug/673775
+"""
+def fixed_request(self, host, handler, request_body, verbose=0):
+    h = self.make_connection(host)
+    if verbose:
+        h.set_debuglevel(1)
+    self.send_request(h, handler, request_body)
+    self.send_host(h, host)
+    self.send_user_agent(h)
+    self.send_content(h, request_body)
+    errcode, errmsg, headers = h.getreply()
+    if errcode != 200:
+        raise xmlrpclib.ProtocolError(host + handler, errcode, errmsg,
+                    headers)
+    self.verbose = verbose
+    # below we make sure to call parse_response() and
+    # not _parse_response(), and don't pass the socket,
+    # so it will have to use the file instead, and avoid
+    # the problem of the original code.
+    return self.parse_response(h.getfile())
+
+# Rude monkey-patch to fix the SSL connection error in Python 2.5-,
+# as last resort solution to fix it all at once.
+if sys.version_info < (2,6):
+    xmlrpclib.SafeTransport.request = fixed_request
 
 class rpc_exception(Exception):
     def __init__(self, code, backtrace):
