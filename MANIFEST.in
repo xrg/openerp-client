@@ -10,4 +10,5 @@ include setup.nsi
 graft bin
 graft man
 graft doc
+graft debian
 global-exclude *pyc *~
