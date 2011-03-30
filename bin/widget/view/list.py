@@ -318,12 +318,13 @@ class AdaptModelGroup(gtk.GenericTreeModel):
             return None
 
     def on_iter_has_child(self, node):
-        res = getattr(node,'has_children', False)
-        return res
+        if not getattr(node,'has_children', False):
+            return False
+        return len(node.children) > 0
 
     def on_iter_children(self, node):
         res = getattr(node, 'children', [])
-        return res and res[0] or []
+        return res and res[0] or None
 
     def on_iter_n_children(self, node):
         return len(getattr(node, 'children', []))
