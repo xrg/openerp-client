@@ -411,10 +411,11 @@ class rpc_session(object):
             url = url[:-7]
         try:
             sv = self.db_exec_no_except(url, 'server_version')
-            for suff in ('dev', '-bzr', '-rc1', '-rc2'):
-                if sv.endswith(suff):
-                    sv = sv[:-len(suff)]
-            self.server_version = tuple(map(int, sv.split('.')))
+            version_re = re.compile(r'([0-9]{1,2}(?:[\.0-9]+))')
+            vm = version_re.match(sv)
+            if not vm:
+                raise ValueError("Invalid format of server's version: %s" %  sv)
+            self.server_version = tuple(map(int, vm.group(1).split('.')))
             print "Connected to a server ver: %s" % (self.server_version,)
         except Exception, e:
             import traceback
