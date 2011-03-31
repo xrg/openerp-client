@@ -487,8 +487,11 @@ class Screen(signal_event.signal_event):
         if self.current_view.view_type == 'form':
             tips = self.current_model and self.current_model.value.get('name') or action_name
             tooltips = tips == action_name and action_name or  action_name + ': ' + tips[:64] 
+            label = tips == action_name and action_name or  action_name + ': ' + tips[:6] 
         else:
             tooltips = action_name
+            label = action_name
+        form_obj.page_label.set_text(label)
         form_obj.page_label.set_tooltip_text(tooltips)
 
     # mode: False = next view, value = open this view

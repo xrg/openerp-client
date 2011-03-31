@@ -144,8 +144,11 @@ class form(object):
             if self.screen.current_view.view_type == 'form':
                 tips= self.screen.current_model and self.screen.current_model.value.get('name') or self.name
                 tooltips = tips == self.name and self.name or  self.name + ': ' + tips[:64]
+                lable = tips == self.name and self.name or  self.name + ': ' + tips[:6]
+                self.page_label.set_text(lable)
                 self.page_label.set_tooltip_text(tooltips)
             else:
+                self.page_label.set_text(self.name)
                 self.page_label.set_tooltip_text(self.name)
             return result
         return _decorate
@@ -317,6 +320,7 @@ class form(object):
             return
         self.screen.new()
         self.message_state('')
+        self.page_label and self.page_label.set_text(self.name)
         self.page_label and self.page_label.set_tooltip_text(self.name)
 
 
