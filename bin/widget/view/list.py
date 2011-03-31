@@ -695,8 +695,9 @@ class ViewList(parser_view):
     def set_column_to_default_pos(self, move_col = False, last_grouped_col = False):
         if last_grouped_col:
             prev_col = filter(lambda col: col.name == last_grouped_col, \
-                             self.widget_tree.get_columns())[0]
-            self.widget_tree.move_column_after(move_col and move_col[0], prev_col)
+                             self.widget_tree.get_columns())
+            if prev_col:
+                self.widget_tree.move_column_after(move_col and move_col[0], prev_col[0])
         else:
             for col in self.columns:
                 if col == self.columns[0]:prev_col = None
