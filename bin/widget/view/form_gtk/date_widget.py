@@ -72,13 +72,14 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         """If format string doesn't contain
         any of the `%Y, %m or %d` then returns default datetime format `%Y/%m/%d`
         """
-        for x,y in [('%y','%Y'),('%B','%m'),('%A',''), ('%I','%H'), ('%p',''), ('%j',''), ('%a',''), ('%b',''),
+        for x,y in [('%y','%Y'),('%B','%m'),('%A',''), ('%I','%H'), ('%p',''), ('%j',''), ('%a',''), ('%b','%m'),
                     ('%U',''), ('%W','')]:
             fmt = fmt.replace(x, y)
 
-        if (not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) or fmt.count('%x') >= 1) and (fmt.count('%H') == 0 and fmt.count('%M') == 0 and fmt.count('%S') == 0 and fmt.count('%X') == 0): 
-                
+        if (not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) or fmt.count('%x') >= 1) \
+                and (fmt.count('%H') == 0 and fmt.count('%M') == 0 and fmt.count('%S') == 0 and fmt.count('%X') == 0): 
             return '%Y/%m/%d'
+        
         elif not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) \
                 or (fmt.count('%x') >=1 or fmt.count('%c') >= 1):
             return '%Y/%m/%d %H:%M:%S'
@@ -169,14 +170,30 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
     def set_text(self, text):
         self._interactive_input = False
         try:
+            self.set_max_length(len(text))
             gtk.Entry.set_text(self, text)
             date = self.isvalid_date(text);
             if(date):
                 self.small_text = date.strftime(self.small_format)
+            elif(text==self.initial_value):
+                self.small_text = self.initial_value
             
         finally:
             self._interactive_input = True
             
+    def get_text(self):
+        date = self.isvalid_date(self.small_text)
+        if(date and not self.is_focus()):
+            return date.strftime(self.format)
+        return gtk.Entry.get_text(self)
+            
+        
+    def get_value(self):
+        date = self.isvalid_date(self.small_text)
+        if(date):
+            return date.strftime(self.format)
+        return gtk.Entry.get_text(self)
+        
     def date_set(self, dt):
         if dt:
             self.set_text( dt.strftime(self.format) )

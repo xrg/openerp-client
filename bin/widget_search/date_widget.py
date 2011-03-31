@@ -19,14 +19,17 @@
 #
 ##############################################################################
 
+
 import gobject
 import pango
 import gtk
 import re
-
+from datetime import datetime
 import tools
+from datetime import datetime
 import tools.datetime_util
 import time
+
 
 class DateEntry(gtk.Entry):
     def __init__(self, format, callback=None, callback_process=None):
@@ -38,8 +41,8 @@ class DateEntry(gtk.Entry):
         for key,val in tools.datetime_util.date_mapping.items():
             self.regex = self.regex.replace(key, val[1])
             self.initial_value = self.initial_value.replace(key, val[0])
-            
-        self.small_text = self.initial_value 
+
+        self.small_text = self.initial_value
         self.set_text(self.initial_value)
         self.regex = re.compile(self.regex)
 
@@ -69,17 +72,18 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         """If format string doesn't contain
         any of the `%Y, %m or %d` then returns default datetime format `%Y/%m/%d`
         """
-        for x,y in [('%y','%Y'),('%B','%m'),('%A',''), ('%I','%H'), ('%p',''), ('%j',''), ('%a',''), ('%b',''),
+        for x,y in [('%y','%Y'),('%B','%m'),('%A',''), ('%I','%H'), ('%p',''), ('%j',''), ('%a',''), ('%b','%m'),
                     ('%U',''), ('%W','')]:
             fmt = fmt.replace(x, y)
 
-        if (not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) or fmt.count('%x') >= 1) and (fmt.count('%H') == 0 and fmt.count('%M') == 0 and fmt.count('%S') == 0 and fmt.count('%X') == 0): 
-                
+        if (not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) or fmt.count('%x') >= 1) \
+                and (fmt.count('%H') == 0 and fmt.count('%M') == 0 and fmt.count('%S') == 0 and fmt.count('%X') == 0):
             return '%Y/%m/%d'
+
         elif not (fmt.count('%Y') >= 1 and fmt.count('%m') >= 1 and fmt.count('%d') >= 1) \
                 or (fmt.count('%x') >=1 or fmt.count('%c') >= 1):
             return '%Y/%m/%d %H:%M:%S'
-            
+
 
         return fmt
 
@@ -89,14 +93,14 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
             return datetime.strptime(text, self.format)
         except:
             pass
-            
+
         try:
             return datetime.strptime(text, self.small_format)
         except:
             self.valid = False
             return False
-        
-        
+
+
     def _on_insert_text(self, editable, value, length, position):
         if not self._interactive_input:
             return
@@ -104,14 +108,14 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         self.stop_emission('insert-text')
         if self.mode_cmd:
             if self.callback: self.callback(value)
-            return 
-        
-        text = self.get_text()  
+            return
+
+        text = self.get_text()
         current_pos = self.get_position()
-        
+
         if(length + current_pos > len(text)):
             return
-        
+
         pos = (current_pos < 10  or text != self.initial_value) and current_pos or 0
 
         if length != 1:
@@ -156,7 +160,7 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
         if self.mode_cmd:
             self.mode_cmd = False
             if self.callback_process: self.callback_process(False, self, False)
-            
+
     def _focus_in(self, args, args2):
         self.set_text(self.small_text)
         if self.mode_cmd:
@@ -166,14 +170,30 @@ You can also use "=" to set the date to the current date/time and '-' to clear t
     def set_text(self, text):
         self._interactive_input = False
         try:
+            self.set_max_length(len(text))
             gtk.Entry.set_text(self, text)
             date = self.isvalid_date(text);
             if(date):
                 self.small_text = date.strftime(self.small_format)
-            
+            elif(text==self.initial_value):
+                self.small_text = self.initial_value
+
         finally:
             self._interactive_input = True
-            
+
+    def get_text(self):
+        date = self.isvalid_date(self.small_text)
+        if(date and not self.is_focus()):
+            return date.strftime(self.format)
+        return gtk.Entry.get_text(self)
+
+
+    def get_value(self):
+        date = self.isvalid_date(self.small_text)
+        if(date):
+            return date.strftime(self.format)
+        return gtk.Entry.get_text(self)
+
     def date_set(self, dt):
         if dt:
             self.set_text( dt.strftime(self.format) )
@@ -252,9 +272,6 @@ class ComplexEntry(gtk.HBox):
         self.pack_start(self.widget, expand=True, fill=True)
         self.pack_start(self.widget_cmd, expand=False, fill=True)
 
-    def clear(self):
-        self.widget.clear()
-
     def _date_cb(self, event):
         if event.keyval in (gtk.keysyms.BackSpace,):
             text = self.widget_cmd.get_text()[:-1]
@@ -286,6 +303,9 @@ class ComplexEntry(gtk.HBox):
                 pass
             self.widget_cmd.set_text('')
             self.widget_cmd.hide()
+
+    def clear(self):
+        self.widget.clear()
 
 if __name__ == '__main__':
     import sys

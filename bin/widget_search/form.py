@@ -28,6 +28,7 @@ import wid_int
 import tools
 from lxml import etree
 import uuid
+import copy
 
 class _container(object):
     def __init__(self, max_width):
@@ -316,6 +317,7 @@ class form(wid_int.wid_int):
         self.show()
         for x in self.widgets.values():
             x[0].sig_activate(self.sig_activate)
+        self.invisible_widgets = []
 
     def xml_process(self,xml_arch):
         root = etree.fromstring(xml_arch)
@@ -364,15 +366,32 @@ class form(wid_int.wid_int):
     def remove_custom(self, button, panel):
         button.parent.destroy()
         # Removing the Destroyed widget from Domain calculation
-        for element in self.custom_widgets.keys():
-            if self.custom_widgets[element][0] == panel:
-                del self.custom_widgets[element]
-                break
+        ## also removing the field from the list of invisible fields
+        ## so that they dont reappear and as the childs are deleted for the panel
+        ## that has to be deleted we need to do a reverse process for removing the
+        ## the invisible fields from the list of invisible fields.
+        def process(widget):
+            if isinstance(widget, gtk.HBox):
+                for child in widget.get_children():
+                    process(child)
+            inv_childs = self.invisible_widgets
+            for inv_child in inv_childs:
+                if inv_child != widget:
+                    self.invisible_widgets.remove(inv_child)
+            return True
+
+        custom_panel = copy.copy(self.custom_widgets)
+        for key, wid in custom_panel.iteritems():
+            for child in wid[0].widget.get_children():
+                if not isinstance(child, (gtk.ComboBox, gtk.Button)):
+                    process(child)
+            if wid[0] == panel:
+               del self.custom_widgets[key]
         return True
 
     def add_custom(self, widget, table, fields):
         new_table = gtk.Table(1,1,False)
-        panel = widgets_type['custom_filter'][0]('', self.parent,{'fields':fields},call=self.remove_custom)
+        panel = widgets_type['custom_filter'][0]('', self.parent, fields, callback=self.remove_custom, search_callback=self.call[1])
         x =  self.rows
         new_table.attach(panel.widget,0, 1, x, x+1, xoptions=gtk.FILL, yoptions=gtk.FILL , ypadding=2, xpadding=0)
         panelx = 'panel' + str(x)
@@ -380,7 +399,29 @@ class form(wid_int.wid_int):
         self.custom_widgets[panelx] = (panel, new_table, 1)
         table.attach(new_table, 1, 9, x, x+1)
         self.rows += 1
+        ## Store the  widgets original visible attribute because as they are
+        ## attached to the table as a child widgets and the table.show_all() will
+        ## set all child widgets to visible inspite of their visibility is set to FALSE
+        ## so make them invisible again after the table.show_all()
+        def process(widget):
+            if isinstance(widget, gtk.HBox):
+                for sub_child in widget.get_children():
+                    process(sub_child)
+            if widget.get_visible():
+                if widget in self.invisible_widgets:
+                    self.invisible_widgets.remove(widget)
+            else:
+                if not widget in self.invisible_widgets:
+                    self.invisible_widgets.append(widget)
+            return True
+
+        for key, wid in self.custom_widgets.iteritems():
+            for child in wid[0].widget.get_children():
+                if not isinstance(child, (gtk.ComboBox, gtk.Button)):
+                    process(child)
         table.show_all()
+        for wid in self.invisible_widgets:
+            wid.set_visible(False)
         return panel
 
     def toggle(self, widget, event=None):
@@ -413,12 +454,16 @@ class form(wid_int.wid_int):
         if self.groupby:
             context.update({'group_by':self.groupby})
         if domain:
-            if len(domain)>1 and domain[-2] in ['&','|']:
-                if len(domain) == 2:
-                    domain = [domain[1]]
+            if '&' in domain or '|' in domain:
+                if domain[-2] in ['&','|']:
+                    pos = 2
+                elif len(domain) >= 4 and domain[-4] in ['&','|']:
+                    pos = 4
+                if len(domain) == 4 and domain[1] in ['&','|']:
+                    domain = domain[1:]
                 else:
-                    res1 = domain[:-2]
-                    res2 = domain[-1:]
+                    res1 = domain[:-pos]
+                    res2 = domain[-(pos-1):]
                     domain = res1 + res2
         return {'domain':domain, 'context':context}
 

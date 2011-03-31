@@ -185,7 +185,7 @@ class list_record(object):
         else:
             if self.context.get('__domain') and not no_leaf:
                 limit = self.screen.screen_container.get_limit()
-                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, limit, self.sort_order)
+                ids = rpc.session.rpc_exec_auth('/object', 'execute', self.mgroup.resource, 'search', self.context.get('__domain'), 0, limit, self.sort_order, self.context)
                 if not ids:
                      self.add_dummny_record(self.context['__field'])
                 else:
@@ -405,6 +405,14 @@ class ViewList(parser_view):
         treeselection.selected_foreach(_func_sel_get, data)
         data = str(data[0])
         selection.set(selection.target, 8, data)
+
+    def unselect_row(self, all=False):
+        selection = self.widget_tree.get_selection()
+        if all:
+            return selection.unselect_all()
+        path, column = self.widget_tree.get_cursor()
+        selection.unselect_range(path, path)
+        return True
 
     def group_by_move(self, model_list, get_id, rec_id, field='sequence'):
         seq_ids = map(lambda x: x[field].get(x), model_list.children.lst)
@@ -687,8 +695,9 @@ class ViewList(parser_view):
     def set_column_to_default_pos(self, move_col = False, last_grouped_col = False):
         if last_grouped_col:
             prev_col = filter(lambda col: col.name == last_grouped_col, \
-                             self.widget_tree.get_columns())[0]
-            self.widget_tree.move_column_after(move_col and move_col[0], prev_col)
+                             self.widget_tree.get_columns())
+            if prev_col:
+                self.widget_tree.move_column_after(move_col and move_col[0], prev_col[0])
         else:
             for col in self.columns:
                 if col == self.columns[0]:prev_col = None

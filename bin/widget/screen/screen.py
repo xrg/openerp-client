@@ -113,7 +113,6 @@ class Screen(signal_event.signal_event):
         self.old_limit = limit
         self.offset = 0
         self.readonly= readonly
-        self.custom_panels = []
         self.view_fields = {} # Used to switch self.fields when the view switchs
         self.sort_domain = []
         self.old_ctx = {}
@@ -157,11 +156,7 @@ class Screen(signal_event.signal_event):
                 self.filter_widget = widget_search.form(self.search_view['arch'],
                         self.search_view['fields'], self.name, self.window,
                         self.domain, (self, self.search_filter))
-                self.screen_container.add_filter(self.filter_widget.widget,
-                        self.search_filter, self.search_clear,
-                        self.search_offset_next,
-                        self.search_offset_previous,
-                        self.execute_action, self.add_custom, self.name, self.limit)
+                self.screen_container.add_filter(self)
 
         if active and show_search:
             self.screen_container.show_filter()
@@ -284,21 +279,6 @@ class Screen(signal_event.signal_event):
         self.sort_domain = []
         self.load(ids)
         return True
-
-    def add_custom(self, dynamic_button):
-        fields_list = []
-        for k,v in self.search_view['fields'].items():
-            if v['type'] in ('many2one','text','char','float','integer','date','datetime','selection','many2many','boolean','one2many') and v.get('selectable', False):
-                selection = v.get('selection', False)
-                fields_list.append([k,v['string'], v['type'], selection])
-        if fields_list:
-            fields_list.sort(lambda x, y: cmp(x[1], y[1]))
-        panel = self.filter_widget.add_custom(self.filter_widget, self.filter_widget.widget, fields_list)
-        self.custom_panels.append(panel)
-
-        if len(self.custom_panels)>1:
-            self.custom_panels[-1].condition_next.hide()
-            self.custom_panels[-2].condition_next.show()
 
     def execute_action(self, combo):
         flag = combo.get_active_text()

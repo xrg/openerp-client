@@ -41,13 +41,12 @@ class Viewdiagram(object):
         self.node = node_attr
         self.arrow = arrow_attr
         self.id = None
-        if self.screen.current_model:
-            self.id = screen.current_model.id
         self.window = xdot.DotWindow(window,self.widget, self.screen, node_attr, arrow_attr, attrs)
-        self.draw_diagram()
 
     def draw_diagram(self):
         if self.screen.current_model:
+            if self.id == self.screen.current_model.id:
+                return False
             self.id = self.screen.current_model.id
         label = self.arrow.get('label',False)
         graph = pydot.Dot(graph_type='digraph')

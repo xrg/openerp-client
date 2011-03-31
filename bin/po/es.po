@@ -14,25 +14,17 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-05 04:54+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-17 04:39+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "Language: es\n"
 
-#
-# File: bin/plugins/__init__.py, line: 28
-# File: bin/plugins/__init__.py, line: 28
-# File: bin/plugins/__init__.py, line: 28
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
-msgstr "Imprimir Flujo de Trabajo"
+msgstr "Imprimir flujo de trabajo"
 
-#
-# File: bin/plugins/__init__.py, line: 29
-# File: bin/plugins/__init__.py, line: 29
-# File: bin/plugins/__init__.py, line: 29
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
-msgstr "Imprimir Flujo de Trabajo (Completo)"
+msgstr "Imprimir flujo de trabajo (completo)"
 
 #
 # File: bin/plugins/__init__.py, line: 41
@@ -44,7 +36,7 @@ msgstr "¡No hay conectores disponibles para este recurso!"
 
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr "Seleccione un Conector"
+msgstr "Seleccione un conector"
 
 #
 # File: bin/modules/action/wizard.py, line: 171
@@ -57,27 +49,11 @@ msgstr "Seleccione un Conector"
 msgid "Connection refused !"
 msgstr "¡Conexión rechazada!"
 
-#
-# File: bin/modules/action/wizard.py, line: 183
-# File: bin/modules/action/wizard.py, line: 189
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 187
-# File: bin/rpc.py, line: 189
-# File: bin/modules/action/wizard.py, line: 183
-# File: bin/modules/action/wizard.py, line: 189
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 187
-# File: bin/rpc.py, line: 189
-# File: bin/modules/action/wizard.py, line: 183
-# File: bin/modules/action/wizard.py, line: 189
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 187
-# File: bin/rpc.py, line: 189
 #: bin/modules/action/wizard.py:162 bin/modules/action/wizard.py:168
 #: bin/modules/action/wizard.py:170 bin/modules/gui/main.py:196
 #: bin/modules/gui/main.py:202 bin/rpc.py:202 bin/rpc.py:204
 msgid "Application Error"
-msgstr "Error de Aplicación"
+msgstr "Error de aplicación"
 
 #
 # File: bin/modules/action/wizard.py, line: 191

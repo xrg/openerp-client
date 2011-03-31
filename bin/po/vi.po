@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-05 04:55+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-17 04:40+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "Language: vi\n"
 
 #: bin/plugins/__init__.py:27
@@ -415,7 +415,7 @@ msgstr "Bạn có chắc chắn muốn xóa các mẩu tin này ?"
 
 #: bin/modules/gui/window/form.py:278
 msgid "Resources cleared."
-msgstr ""
+msgstr "Xóa tài nguyên xong"
 
 #: bin/modules/gui/window/form.py:280
 msgid "Resources successfully removed."
@@ -1228,7 +1228,7 @@ msgstr "Lưu thành"
 
 #: bin/widget/view/form_gtk/image.py:93 bin/widget/view/form_gtk/binary.py:88
 msgid "Clear"
-msgstr ""
+msgstr "Xóa"
 
 #: bin/widget/view/form_gtk/image.py:104
 msgid "All files"

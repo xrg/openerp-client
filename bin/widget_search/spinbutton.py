@@ -39,8 +39,8 @@ class spinbutton(wid_int.wid_int):
         self.spin1.connect('input', self.format_input)
         self.spin1.connect('output', self.format_output)
         self.widget.pack_start(self.spin1, expand=False, fill=True)
-
-        self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
+        self.label = gtk.Label('-')
+        self.widget.pack_start(self.label, expand=False, fill=False)
 
         adj2 = gtk.Adjustment(0.0, -sys.maxint, sys.maxint, 1.0, 5.0)
         self.spin2 = gtk.SpinButton(adj2, 1.0, digits=int(attrs.get('digits', (14, 2))[1]))

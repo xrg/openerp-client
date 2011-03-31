@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -37,7 +37,7 @@ import os
 import gtk
 
 import common
-import options 
+import options
 
 
 class Printer(object):
@@ -63,7 +63,7 @@ class Printer(object):
             for prog in progs[:]:
                 if prog in content:
                     return os.path.join(dir, prog)#prog
-                    
+
                     progs.remove(prog)
                     found[prog] = os.path.join(dir, prog)
         for prog in lstprogs:
@@ -110,7 +110,7 @@ class Printer(object):
                     return self._opener(lambda fn: os.execv(softpath, (os.path.basename(softpath), fn)))
             else:
                 return print_linux_filename
-    
+
     def _findSXWOpener(self):
         if os.name == 'nt':
             return lambda fn: os.startfile(fn)
@@ -210,14 +210,14 @@ def print_w32_filename(filename):
 def print_data(data):
     if 'result' not in data:
         common.message(_('Error! No Data found. Make sure you have enough data to print!'))
-        return 
+        return
     if data.get('code','normal')=='zlib':
         import zlib
         content = zlib.decompress(base64.decodestring(data['result']))
     else:
         content = base64.decodestring(data['result'])
 
-    if data['format'] in printer.openers.keys():
+    if data['format'] in printer.openers.keys() or data['format'] in eval(options.options['extensions.filetype']).keys():
         import tempfile
         if data['format']=='html' and os.name=='nt':
             data['format']='doc'
