@@ -128,6 +128,41 @@ To re-enable tips you need to check the <b>'Menu Tips'</b> option in the user pr
             self.help_frame.show_all()
             return True
         return False
+    
+def get_invalid_field(model, screen):
+    """
+    Return [('field_string','is_visible'), .. ]    
+    """
+    view_type = screen.current_view.view_type
+    if view_type == 'form':
+        fieldlist = {}
+        for widget in  screen.current_view.widgets.values():
+                fieldlist[widget.widget_name]= widget.widget.widget  
+    else:
+        columnlist = {}
+        for column in screen.current_view.columns:
+            columnlist[column.name] = column.get_property('visible')
+    fields = []
+    for field, attribute in model.state_attrs.items():
+        if not attribute.get('valid', False):
+            name = attribute.get('name', False)
+            visible = False
+            if view_type == 'form':
+                fname = fieldlist.get(name)
+                if name and fname:
+                    visible= fieldlist[name].flags() &  gtk.VISIBLE
+            else:
+                visible = columnlist[name]
+            fields.append((attribute['string'], bool(visible)))
+            if attribute['type'] == 'one2many' and view_type == 'form':
+                child_field =[]
+                screen = screen.current_view.widgets[name].widget.screen
+                for child_model in model.value[attribute['name']].models:
+                    child_field = get_invalid_field(child_model, screen)
+                for req, inv in child_field:
+                        req = '-- ' + req
+                        fields.append((req , inv))
+    return fields
 
 
 def OpenERP_Progressbar(parent=None, title=_('OpenERP Computing')):
@@ -499,13 +534,14 @@ is displayed on the second tab.
     win.destroy()
     return True
 
-def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
+def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None, msg_to_xml=True):
     if not parent:
         parent=service.LocalService('gui.main').window
     dialog = gtk.MessageDialog(parent,
       gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
       type, gtk.BUTTONS_OK)
-    msg = to_xml(msg)
+    if msg_to_xml:
+        msg = to_xml(msg)
     if title is not None:
         msg = '<b>%s</b>\n\n%s' % (to_xml(title), msg)
     dialog.set_icon(OPENERP_ICON)
@@ -517,7 +553,6 @@ def message(msg, title=None, type=gtk.MESSAGE_INFO, parent=None):
     return True
 
 def to_xml(s):
-    from cgi import escape
     return escape(s)
 
 def message_box(title, msg, parent=None):
@@ -543,8 +578,8 @@ def message_box(title, msg, parent=None):
     return True
 
 
-def warning(msg, title=None, parent=None):
-    return message(msg=msg, title=title, type=gtk.MESSAGE_WARNING, parent=parent)
+def warning(msg, title=None, parent=None, to_xml=True):
+    return message(msg=msg, title=title, type=gtk.MESSAGE_WARNING, parent=parent, msg_to_xml=to_xml)
 
 def sur(msg, parent=None):
     if not parent:

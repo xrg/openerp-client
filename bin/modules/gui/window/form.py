@@ -39,6 +39,7 @@ import common
 import service
 import options
 import copy
+import tools
 
 
 from observator import oregistry
@@ -331,7 +332,15 @@ class form(object):
         if id:
             self.message_state(_('Document Saved.'), color="darkgreen")
         elif len(self.screen.models.models) and res != None:
-            common.warning(_('Invalid form, correct red fields !'),_('Error !'), parent=self.screen.current_view.window)
+            fields  = common.get_invalid_field(self.screen.current_model, self.screen)
+            msg = ''
+            for req, inv in fields:
+                if not inv:
+                    msg += req + ' (<b>invisible</b>) '
+                else:
+                    msg += req
+                msg += '\n'
+            common.warning(_('Correct following red fields !\n\n%s')  % ( msg ),_('Input Error !'), parent=self.screen.current_view.window, to_xml=False)
             self.message_state(_('Invalid form, correct red fields !'), color="red")
         if warning:
             common.warning(warning,_('Warning !'), parent=self.screen.current_view.window)

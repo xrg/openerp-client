@@ -77,11 +77,11 @@ class Button(Observable):
     def grab_focus(self):
         self.widget.grab_focus()
 
-    def hide(self):
-        return self.widget.hide()
-
-    def show(self):
-        return self.widget.show()
+    def hide_all(self):
+        return self.widget.hide_all()
+    
+    def show_all(self):
+        return self.widget.show_all()
 
     def set_sensitive(self, value):
         return self.widget.set_sensitive(value)
@@ -123,7 +123,15 @@ class Button(Observable):
             model.get_button_action(self.form.screen, id, self.attrs)
             self.warn('misc-message', '')
         else:
-            common.warning(_('Invalid form, correct red fields !'), _('Error !'),parent=self.form.screen.current_view.window)
+            fields  = common.get_invalid_field(self.form.screen.current_model, self.form.screen)
+            msg = ''
+            for req, inv in fields:
+                if not inv:
+                    msg += req + ' (<b>invisible</b>) '
+                else:
+                    msg += req
+                msg += '\n'
+            common.warning(_('Correct following red fields !\n\n%s')  % ( msg ),_('Input Error !'), parent=self.form.screen.current_view.window, to_xml=False)
             self.warn('misc-message', _('Invalid form, correct red fields !'), "red")
             self.form.screen.display()
             self.form.screen.current_view.set_cursor()
@@ -142,9 +150,9 @@ class StateAwareWidget(object):
 
     def state_set(self, state):
         if (not len(self.states)) or (state in self.states):
-            self.widget.show()
+            self.widget.show_all()
         else:
-            self.widget.hide()
+            self.widget.hide_all()
 
     def attrs_set(self, model):
         sa = getattr(self.widget, 'attrs') or {}
@@ -154,7 +162,7 @@ class StateAwareWidget(object):
             result = True
             result = result and tools.calc_condition(self, model, v)
             if k == 'invisible':
-                func = ['show', 'hide'][bool(result)]
+                func = ['show_all', 'hide_all'][bool(result)]
                 getattr(self.widget, func)()
                 if self.label:
                     getattr(self.label, func)()

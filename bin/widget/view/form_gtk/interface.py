@@ -149,11 +149,12 @@ class widget_interface(object):
     def grab_focus(self):
         return self.widget.grab_focus()
 
-    def hide(self):
-        return self.widget.hide()
+    def hide_all(self):
+        return self.widget.hide_all()
 
-    def show(self):
-        return self.widget.show()
+    def show_all(self):
+        return self.widget.show_all()
+
 
     def set_sensitive(self, value):
         return self.widget.set_sensitive(value)
