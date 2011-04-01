@@ -1,94 +1,93 @@
-# Bulgarian translation for openobject-client
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# English (Australia) translation for openobject-client
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the openobject-client package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: openobject-client\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-03-20 15:33+0000\n"
-"Last-Translator: Dimitar Markov <dimitar.markov@gmail.com>\n"
-"Language-Team: Bulgarian <bg@li.org>\n"
+"PO-Revision-Date: 2011-03-28 14:27+0000\n"
+"Last-Translator: Harmel Delphine (OpenERP) <Unknown>\n"
+"Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-21 06:21+0000\n"
+"X-Launchpad-Export-Date: 2011-03-29 06:20+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
-"Language: bg\n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
-msgstr "Отпечатване на Работният поток"
+msgstr "Print Workflow"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
-msgstr "Отпечатване Работният поток (комплексно)"
+msgstr ""
 
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
-msgstr "Няма достъпна добавка за този ресурс !"
+msgstr ""
 
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr "Изберете Добавка"
+msgstr "Choose a Plug-in"
 
 #: bin/modules/action/wizard.py:150 bin/modules/gui/main.py:188 bin/rpc.py:156
 msgid "Connection refused !"
-msgstr "Свързването е отхвърлено!"
+msgstr "Connection refused !"
 
 #: bin/modules/action/wizard.py:162 bin/modules/action/wizard.py:168
 #: bin/modules/action/wizard.py:170 bin/modules/gui/main.py:196
 #: bin/modules/gui/main.py:202 bin/rpc.py:202 bin/rpc.py:204
 msgid "Application Error"
-msgstr "Грешка в приложението"
+msgstr ""
 
 #: bin/modules/action/wizard.py:170 bin/rpc.py:204
 msgid "View details"
-msgstr "Подробен изглед"
+msgstr ""
 
 #: bin/modules/action/main.py:48
 msgid "Nothing to print!"
-msgstr "Няма нищо за печат!"
+msgstr ""
 
 #: bin/modules/action/main.py:66
 msgid "Printing aborted, too long delay !"
-msgstr "Печатът е отхжърлен, отнема прекалено много време!"
+msgstr ""
 
 #: bin/modules/action/main.py:195
 msgid "Select your action"
-msgstr "Изберете вашето действие"
+msgstr ""
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr "Не може да се свърже със сървър!"
+msgstr ""
 
 #: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6278
 #: bin/openerp.glade:6524 bin/openerp.glade:6847 bin/openerp.glade:7508
 msgid "Server:"
-msgstr "Сървър:"
+msgstr "Server:"
 
 #: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6560
 #: bin/openerp.glade:6804 bin/openerp.glade:7103 bin/openerp.glade:7465
 msgid "Change"
-msgstr "Промяна"
+msgstr "Change"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr "Парола на Супер администратор:"
+msgstr ""
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr "Грешна парола на Супер администратор"
+msgstr ""
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
-msgstr "Скриптове за мигриране"
+msgstr ""
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
-msgstr "ID на договор:"
+msgstr ""
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
@@ -96,43 +95,43 @@ msgstr ""
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr "Вече имате последната версия"
+msgstr ""
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
-msgstr "Следните ъпдейти са налични:"
+msgstr ""
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr "Сега можете да мигрирате базите данни."
+msgstr ""
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr "Мигрирай база данни"
+msgstr ""
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr "База данни"
+msgstr "Database"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
-msgstr "Вашата база данни беше ъпгрейдната."
+msgstr ""
 
 #: bin/modules/gui/main.py:295
 msgid "Your databases have been upgraded."
-msgstr "Вашата база данни беше ъпгрейдната."
+msgstr ""
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr "Не сте избрали база данни"
+msgstr ""
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr "Не е открита база данни! Трябва да създадете такава."
+msgstr ""
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
-msgstr "Непознат"
+msgstr "Unknown"
 
 #: bin/modules/gui/main.py:474
 #, python-format
@@ -140,16 +139,14 @@ msgid ""
 "The versions of the server (%s) and the client (%s) missmatch. The client "
 "may not work properly. Use it at your own risks."
 msgstr ""
-"Версията на сървъра (%s) и на клиента (%s) не съвпадат. Клинтът може да на "
-"работи правилно. Използвайте го на собствен риск."
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
-msgstr "Извинете,'"
+msgstr ""
 
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
-msgstr "Грешно име на база данни!"
+msgstr ""
 
 #: bin/modules/gui/main.py:613
 msgid ""
@@ -160,34 +157,34 @@ msgstr ""
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
 msgid "Could not create database."
-msgstr "Не може да се създаде база данни."
+msgstr ""
 
 #: bin/modules/gui/main.py:647
 msgid "Database already exists !"
-msgstr "Базата данни вече съществува!"
+msgstr ""
 
 #: bin/modules/gui/main.py:649 bin/modules/gui/main.py:1383
 #: bin/modules/gui/main.py:1403 bin/modules/gui/main.py:1482
 msgid "Bad database administrator password !"
-msgstr "Грешна адмнистраторска парола за базата данни!"
+msgstr ""
 
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr "Грешка при създаване на базата данни!"
+msgstr ""
 
 #: bin/modules/gui/main.py:658
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
-msgstr "Сървърът се счупи софтуерно по време на инсталацията."
+msgstr ""
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"
-msgstr "Натиснете Ctrl+O за вход"
+msgstr ""
 
 #: bin/modules/gui/main.py:881
 msgid "Edit"
-msgstr "Редакция"
+msgstr "Edit"
 
 #: bin/modules/gui/main.py:980
 #, python-format
@@ -196,63 +193,57 @@ msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr "Няма фирма"
+msgstr ""
 
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr "%s заявка(и)"
+msgstr ""
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr "Няма заявка"
+msgstr ""
 
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr " - %s заявка/и изпратена/и"
+msgstr ""
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
-"Надлежно проверете името на базата данни или се свържете с вашия "
-"администратор за да провери състоянието на базата."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr "Базата данни не може да бъде достъпена или не съществува"
+msgstr ""
 
 #: bin/modules/gui/main.py:1041
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
-"Грешка във връзката!\n"
-"Не може да се осъществи връзка със сървъра!"
 
 #: bin/modules/gui/main.py:1043
 msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
-"Грешка при автентикация!\n"
-"Грешен потребител или парола!"
 
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr "OpenERP - %s"
+msgstr ""
 
 #: bin/modules/gui/main.py:1076
 msgid "Not logged !"
-msgstr "Не сте влезли в системата!"
+msgstr ""
 
 #: bin/modules/gui/main.py:1085 bin/widget/view/form_gtk/one2many_list.py:52
 #: bin/openerp.glade:6126
 msgid "OpenERP"
-msgstr "OpenERP"
+msgstr ""
 
 #: bin/modules/gui/main.py:1159
 msgid ""
@@ -263,92 +254,92 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
 msgid "Do you really want to quit ?"
-msgstr "Наистина ли искате да излезете?"
+msgstr ""
 
 #: bin/modules/gui/main.py:1262
 #, python-format
 msgid "Attachments (%d)"
-msgstr "Прикачени файлове (%d)"
+msgstr ""
 
 #: bin/modules/gui/main.py:1275
 msgid "Attachments"
-msgstr "Прикачени файлове"
+msgstr "Attachments"
 
 #: bin/modules/gui/main.py:1374
 msgid "Delete a database"
-msgstr "Изтриване на база данни"
+msgstr ""
 
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr "Успешно бе изтрита базата данни!"
+msgstr ""
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr "Не може да бъде изтрита базата данни."
+msgstr ""
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr "Не може да бъде изтрита базата данни."
+msgstr ""
 
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
 msgid "Open..."
-msgstr "Отваряне..."
+msgstr "Open…"
 
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
-msgstr "Базата данни бе успешно възстановена!"
+msgstr ""
 
 #: bin/modules/gui/main.py:1403
 msgid "Could not restore database."
-msgstr "Не може да бъде възстановена базата данни."
+msgstr ""
 
 #: bin/modules/gui/main.py:1405
 msgid "Couldn't restore database"
-msgstr "Не може да бъде възстановена базата данни."
+msgstr ""
 
 #: bin/modules/gui/main.py:1444
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr "Потвърждението на паролата не съответства, действието е отхвърлено!"
+msgstr ""
 
 #: bin/modules/gui/main.py:1446
 msgid "Validation Error."
-msgstr "Грешка при валидиране."
+msgstr ""
 
 #: bin/modules/gui/main.py:1454
 msgid "Could not change the Super Admin password."
-msgstr "Не може да бъде променена паролата на Супер администратора."
+msgstr ""
 
 #: bin/modules/gui/main.py:1455
 msgid "Bad password provided !"
-msgstr "Въведената парола е грешна!"
+msgstr ""
 
 #: bin/modules/gui/main.py:1457
 msgid "Error, password not changed."
-msgstr "Грешка, паролата не е променена"
+msgstr ""
 
 #: bin/modules/gui/main.py:1463 bin/modules/gui/main.py:1486
 msgid "Backup a database"
-msgstr "Резервно копие на базата данни"
+msgstr ""
 
 #: bin/modules/gui/main.py:1466 bin/modules/gui/window/win_export.py:328
 #: bin/printer/printer.py:216 bin/widget/view/form_gtk/image.py:129
 #: bin/widget/view/form_gtk/binary.py:167
 msgid "Save As..."
-msgstr "Запазване като…"
+msgstr "Save As..."
 
 #: bin/modules/gui/main.py:1479
 msgid "Database backed up successfully !"
-msgstr "Успешно бе създадено резервно копие на базата данни!"
+msgstr ""
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
-msgstr "Не може да бъде създадено резервно копие на базата данни!"
+msgstr ""
 
 #: bin/modules/gui/main.py:1484
 msgid "Couldn't backup database."
-msgstr "Не може да бъде създадено резервно копие на базата данни!"
+msgstr ""
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
@@ -356,7 +347,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:231
 msgid "No record selected ! You can only attach to existing record."
-msgstr "Няма запис избрани! Можете да прикачите към съществуващ запис."
+msgstr ""
 
 #: bin/modules/gui/window/form.py:247
 msgid "You have to select a record !"
@@ -369,19 +360,19 @@ msgstr "ID"
 
 #: bin/modules/gui/window/form.py:254
 msgid "Creation User"
-msgstr "Създаване на потребител"
+msgstr "Creation User"
 
 #: bin/modules/gui/window/form.py:255
 msgid "Creation Date"
-msgstr "Дата на създаване"
+msgstr "Creation Date"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
-msgstr "Последна промяна от"
+msgstr ""
 
 #: bin/modules/gui/window/form.py:257
 msgid "Latest Modification Date"
-msgstr "Последна дата на промяна"
+msgstr ""
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
@@ -424,16 +415,16 @@ msgstr ""
 #: bin/widget/view/form_gtk/parser.py:127 bin/widget/view/list.py:568
 #: bin/widget/view/list.py:569
 msgid "Invalid form, correct red fields !"
-msgstr "Невалидна форма, поправете червените полета!"
+msgstr ""
 
 #: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/list.py:568
 msgid "Error !"
-msgstr "Грешка!"
+msgstr ""
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr "Предупреждение!"
+msgstr ""
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
@@ -443,19 +434,19 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:407
 msgid "You must select one or several records !"
-msgstr "Вие трябва да изберете един или няколко записа!"
+msgstr ""
 
 #: bin/modules/gui/window/form.py:416
 msgid "Print Screen"
-msgstr "Отпечатване на екрана"
+msgstr "Print Screen"
 
 #: bin/modules/gui/window/form.py:436
 msgid "No record selected"
-msgstr "Не е избран запис"
+msgstr ""
 
 #: bin/modules/gui/window/form.py:441
 msgid "New document"
-msgstr "Нов документ"
+msgstr ""
 
 #: bin/modules/gui/window/form.py:443
 msgid "Editing document (id: "
@@ -463,32 +454,32 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:446
 msgid "Record: "
-msgstr "Запис: "
+msgstr ""
 
 #: bin/modules/gui/window/form.py:447
 msgid " of "
-msgstr " на "
+msgstr ""
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "The file is empty !"
-msgstr "Файлът е празен !"
+msgstr ""
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "Importation !"
-msgstr "Внасяне !"
+msgstr ""
 
 #: bin/modules/gui/window/win_import.py:56
 msgid "XML-RPC error !"
-msgstr "XML-RPC грешка !"
+msgstr ""
 
 #: bin/modules/gui/window/win_import.py:61
 msgid "Imported one object !"
-msgstr "Внесен е един обект !"
+msgstr ""
 
 #: bin/modules/gui/window/win_import.py:63
 #, python-format
 msgid "Imported %d objects !"
-msgstr "Внесени са %d са обекти !"
+msgstr ""
 
 #: bin/modules/gui/window/win_import.py:68
 #, python-format
@@ -503,27 +494,25 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
-msgstr "Грешка при внасяне !"
+msgstr ""
 
 #: bin/modules/gui/window/win_import.py:100
 #: bin/modules/gui/window/win_import.py:104
 msgid "Field name"
-msgstr "Име на поле"
+msgstr "Field name"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr "Грешка при отваряне на .CSV файл"
+msgstr ""
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr "Грешка при въвеждане."
+msgstr ""
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
-"Не може да внесете това поле %s, защото не може да бъде автоматично "
-"разпознато"
 
 #: bin/modules/gui/window/win_import.py:190
 #, python-format
@@ -534,19 +523,19 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr "Грешка при импорт"
+msgstr ""
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
-msgstr "Не сте избрали нито едно избрано поле за внасяне"
+msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr "Разширение"
+msgstr "Extension"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr "Приложение"
+msgstr "Application"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
@@ -558,27 +547,27 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7684
 msgid "Extension Manager"
-msgstr "Управление на разширенията"
+msgstr ""
 
 #: bin/modules/gui/window/win_selection.py:51
 msgid "Name"
-msgstr "Име"
+msgstr "Name"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Ressource Name"
-msgstr "Име на източник"
+msgstr ""
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Names"
-msgstr "Имена"
+msgstr "Names"
 
 #: bin/modules/gui/window/__init__.py:31
 msgid "Unknown Window"
-msgstr "Непознат прозорец"
+msgstr ""
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr "Предпочитания"
+msgstr "Preferences"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -592,15 +581,15 @@ msgstr ""
 
 #: bin/modules/gui/window/view_tree/parse.py:35
 msgid "Tree"
-msgstr "Дърво"
+msgstr ""
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:48
 msgid "Description"
-msgstr "Описание"
+msgstr "Description"
 
 #: bin/modules/gui/window/tree.py:204 bin/modules/gui/window/tree.py:260
 msgid "No resource selected!"
-msgstr ""
+msgstr "No resource selected!"
 
 #: bin/modules/gui/window/tree.py:218
 msgid ""
@@ -618,7 +607,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:50
 msgid " record(s) saved !"
-msgstr " Записът(ите) е(са) съхранен(и) !"
+msgstr ""
 
 #: bin/modules/gui/window/win_export.py:53
 msgid ""
@@ -642,26 +631,26 @@ msgstr ""
 #: bin/modules/gui/window/win_search.py:49
 #: bin/widget/view/diagram_gtk/xdot.py:1772
 msgid "OpenERP - Link"
-msgstr "OpenERP - връзка"
+msgstr ""
 
 #: bin/modules/gui/window/win_search.py:126
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr "OpenERP Търсене: %s"
+msgstr ""
 
 #: bin/modules/gui/window/win_search.py:127
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr "OpenERP Търсене: %s (%%d result(s))"
+msgstr ""
 
 #: bin/options.py:109
 #, python-format
 msgid "OpenERP Client %s"
-msgstr "OpenERP Клиент %s"
+msgstr ""
 
 #: bin/options.py:110
 msgid "specify alternate config file"
-msgstr "Определете промяната в конфигурационният файл"
+msgstr ""
 
 #: bin/options.py:111
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
@@ -670,19 +659,19 @@ msgstr ""
 #: bin/options.py:112
 #, python-format
 msgid "specify the log level: %s"
-msgstr "Определете ниво на вписване: %s"
+msgstr ""
 
 #: bin/options.py:113
 msgid "specify the user login"
-msgstr "Определете вписването на потребител"
+msgstr ""
 
 #: bin/options.py:114
 msgid "specify the server port"
-msgstr "Определете порт за сървъра"
+msgstr ""
 
 #: bin/options.py:115
 msgid "specify the server ip/name"
-msgstr "Задайте на сървъра ip/име"
+msgstr ""
 
 #: bin/common/common.py:89
 msgid "Close current tip"
@@ -710,7 +699,7 @@ msgstr ""
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "Tips"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
@@ -718,7 +707,7 @@ msgstr ""
 
 #: bin/common/common.py:152
 msgid "Operation in progress"
-msgstr "Операцията се изпълнява"
+msgstr "Operation in progress"
 
 #: bin/common/common.py:156
 msgid ""
@@ -741,7 +730,7 @@ msgstr ""
 
 #: bin/common/common.py:367
 msgid "Support request sent !"
-msgstr "Заявката за подръжка е изпратена !"
+msgstr ""
 
 #: bin/common/common.py:387 bin/common/common.py:430
 msgid ""
@@ -813,11 +802,11 @@ msgstr ""
 
 #: bin/common/common.py:491
 msgid "Error"
-msgstr "Грешка"
+msgstr "Error"
 
 #: bin/common/common.py:646
 msgid "Open with..."
-msgstr "Отваряне с ..."
+msgstr ""
 
 #: bin/translate.py:183
 #, python-format
@@ -827,15 +816,13 @@ msgstr ""
 #: bin/printer/printer.py:184
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr "Невъзможна е обработката %s"
+msgstr ""
 
 #: bin/printer/printer.py:189
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
-"Автоматичният печат за Linux все още не е реализиран.\n"
-"Използвайте функцията за предварителен преглед!"
 
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
@@ -843,11 +830,11 @@ msgstr ""
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
-msgstr "Грешка при четенето на файла!"
+msgstr ""
 
 #: bin/openerp-client.py:140
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr "OpenERP се изключва, грешка на клавиатурата"
+msgstr ""
 
 #: bin/widget_search/reference.py:78 bin/widget_search/filter.py:74
 #: bin/widget_search/selection.py:116 bin/widget_search/spinbutton.py:72
@@ -882,11 +869,11 @@ msgstr ""
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr "Грешка: "
+msgstr ""
 
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
-msgstr "Начална дата"
+msgstr "Start date"
 
 #: bin/widget_search/calendar.py:54 bin/widget_search/calendar.py:74
 #: bin/widget_search/calendar.py:181 bin/widget_search/calendar.py:201
@@ -897,45 +884,45 @@ msgstr ""
 
 #: bin/widget_search/calendar.py:70 bin/widget_search/calendar.py:197
 msgid "End date"
-msgstr "Крайна дата"
+msgstr "End date"
 
 #: bin/widget_search/calendar.py:129 bin/widget_search/calendar.py:249
 #: bin/widget/view/form_gtk/calendar.py:135
 #: bin/widget/view/form_gtk/calendar.py:246
 msgid "OpenERP - Date selection"
-msgstr "OpenERP - Избор на дата"
+msgstr ""
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr "съдържа"
+msgstr "contains"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr "не съдържа"
+msgstr ""
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "is equal to"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr "е равно на"
+msgstr "is not equal to"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr "е по-голямо от"
+msgstr "greater than"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr "по-малко от"
+msgstr "less than"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr "в"
+msgstr "in"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr "извън"
+msgstr "not in"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -946,11 +933,11 @@ msgstr ""
 
 #: bin/widget_search/checkbox.py:35 bin/widget_search/checkbox.py:54
 msgid "Yes"
-msgstr "Да"
+msgstr "Yes"
 
 #: bin/widget_search/checkbox.py:36
 msgid "No"
-msgstr "Не"
+msgstr "No"
 
 #: bin/widget/view/form.py:136 bin/widget/view/form.py:199
 msgid "You must save this record to use the relate button !"
@@ -958,7 +945,7 @@ msgstr ""
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr "Действието не е дефинирано"
+msgstr ""
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
@@ -968,21 +955,21 @@ msgstr ""
 #: bin/widget/view/form_gtk/parser.py:767
 #: bin/widget/view/form_gtk/parser.py:824
 msgid "No other language available!"
-msgstr "Друг език не е наличен!"
+msgstr ""
 
 #: bin/widget/view/form.py:243 bin/widget/view/form_gtk/parser.py:663
 #: bin/widget/view/form_gtk/parser.py:773
 #: bin/widget/view/form_gtk/parser.py:830
 msgid "Add Translation"
-msgstr "Добави превод"
+msgstr ""
 
 #: bin/widget/view/form.py:291 bin/widget/view/form_gtk/parser.py:886
 msgid "Translate label"
-msgstr "Преведи етикета"
+msgstr ""
 
 #: bin/widget/view/calendar_gtk/parser.py:356 bin/openerp.glade:8106
 msgid "Week"
-msgstr "Седмица"
+msgstr "Week"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
@@ -994,7 +981,7 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr "--Действия--"
+msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
@@ -1002,11 +989,11 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr "Запзи като филтър"
+msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr "Управление на филтри"
+msgstr "Manage Filters"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1027,13 +1014,12 @@ msgstr ""
 #: bin/widget/view/tree_gtk/editabletree.py:214
 #, python-format
 msgid "Warning; field %s is required!"
-msgstr "Предопреждение; изисва се поле %s!"
+msgstr ""
 
 #: bin/widget/view/tree_gtk/date_renderer.py:197
 msgid ""
 "Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."
 msgstr ""
-"Натиснете <i>'+'</i>, <i>'-'</i> or <i>'='</i> за специални операции с дати."
 
 #: bin/widget/view/widget_parse.py:53
 #, python-format
@@ -1046,7 +1032,7 @@ msgstr ""
 
 #: bin/widget/view/graph_gtk/parser.py:64
 msgid "Can not generate graph !"
-msgstr "Графиката не може да бъде генерирана!"
+msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1422
 msgid "Dot Viewer"
@@ -1101,11 +1087,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1250
 msgid "Create a new resource"
-msgstr "Създай нов ресурс"
+msgstr ""
 
 #: bin/widget/view/form_gtk/reference.py:89
 msgid "Search / Open a resource"
-msgstr "Търси/Отвори ресурс"
+msgstr ""
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
@@ -1113,11 +1099,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "Field"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "Object"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
@@ -1129,11 +1115,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/parser.py:891
 msgid "Translate view"
-msgstr "Преведи изгледа"
+msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
@@ -1150,43 +1136,43 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:178
 msgid "Set Default"
-msgstr ""
+msgstr "Set Default"
 
 #: bin/widget/view/form_gtk/one2many_list.py:209
 msgid "Create a new entry"
-msgstr "Създай нов запис"
+msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:213
 msgid "Edit this entry"
-msgstr "Редатирай този запис"
+msgstr "Edit this entry"
 
 #: bin/widget/view/form_gtk/one2many_list.py:217
 msgid "Remove this entry"
-msgstr "Премахни този запис"
+msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr "Предишна страница"
+msgstr "Previous Page"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr "Предишен запис"
+msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr "Следващ запис"
+msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr "Следваща страница"
+msgstr "Next Page"
 
 #: bin/widget/view/form_gtk/one2many_list.py:245
 msgid "Switch"
-msgstr ""
+msgstr "Switch"
 
 #: bin/widget/view/form_gtk/one2many_list.py:251
 #: bin/widget/view/form_gtk/many2many.py:106
@@ -1199,23 +1185,23 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:73
 msgid "Set Image"
-msgstr ""
+msgstr "Set Image"
 
 #: bin/widget/view/form_gtk/image.py:82 bin/widget/view/form_gtk/binary.py:84
 msgid "Save As"
-msgstr "Запази като"
+msgstr "Save As"
 
 #: bin/widget/view/form_gtk/image.py:93 bin/widget/view/form_gtk/binary.py:88
 msgid "Clear"
-msgstr ""
+msgstr "Clear"
 
 #: bin/widget/view/form_gtk/image.py:104
 msgid "All files"
-msgstr "Всички файлове"
+msgstr "All files"
 
 #: bin/widget/view/form_gtk/image.py:108
 msgid "Images"
-msgstr "Изображения"
+msgstr "Images"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
@@ -1223,23 +1209,23 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "Warning"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
-msgstr "Отвори този ресурс"
+msgstr ""
 
 #: bin/widget/view/form_gtk/many2one.py:163
 msgid "Search a resource"
-msgstr "Търси ресурс"
+msgstr ""
 
 #: bin/widget/view/form_gtk/many2one.py:174 bin/openerp.glade:1404
 msgid "Action"
-msgstr "Действие"
+msgstr "Action"
 
 #: bin/widget/view/form_gtk/many2one.py:175
 msgid "Report"
-msgstr "Справка"
+msgstr "Report"
 
 #: bin/widget/view/form_gtk/many2one.py:388 bin/widget/view/list.py:618
 msgid "You must select a record to use the relation !"
@@ -1247,7 +1233,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/interface.py:48
 msgid "Set as default"
-msgstr ""
+msgstr "Set as default"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "You can not set to the default value here !"
@@ -1259,11 +1245,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
-msgstr "Изберете"
+msgstr "Select"
 
 #: bin/widget/view/form_gtk/binary.py:80
 msgid "Open"
-msgstr "Отвори"
+msgstr "Open"
 
 #: bin/widget/view/form_gtk/binary.py:119
 #: bin/widget/view/form_gtk/binary.py:163
@@ -1278,20 +1264,20 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:138
 msgid "All Files"
-msgstr "Всички файлове"
+msgstr "All Files"
 
 #: bin/widget/view/form_gtk/binary.py:148
 msgid "Select a file..."
-msgstr "Избор на файл..."
+msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:177
 #, python-format
 msgid "Error writing the file: %s"
-msgstr "Грешка при записване на файл: %s"
+msgstr ""
 
 #: bin/widget/view/form_gtk/wid_common.py:59
 msgid "Always applicable !"
-msgstr "Винаги приложимо!"
+msgstr ""
 
 #: bin/widget/view/form_gtk/calendar.py:100
 #: bin/widget/view/form_gtk/calendar.py:162
@@ -1300,11 +1286,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/calendar.py:252
 msgid "Hour:"
-msgstr "Час:"
+msgstr ""
 
 #: bin/widget/view/form_gtk/calendar.py:255
 msgid "Minute:"
-msgstr "Минута:"
+msgstr ""
 
 #: bin/widget/view/form_gtk/calendar.py:289
 msgid "Invalid datetime value! Year must be greater than 1899 !"
@@ -1328,7 +1314,7 @@ msgstr ""
 
 #: bin/rpc.py:157
 msgid "Connection refused!"
-msgstr ""
+msgstr "Connection refused!"
 
 #: bin/rpc.py:187
 msgid ""
@@ -1338,7 +1324,7 @@ msgstr ""
 
 #: bin/rpc.py:187
 msgid "Connection Error"
-msgstr ""
+msgstr "Connection Error"
 
 #: bin/openerp.glade:6
 msgid "OpenERP - Login"
@@ -1346,35 +1332,35 @@ msgstr ""
 
 #: bin/openerp.glade:116 bin/openerp.glade:6450
 msgid "Database:"
-msgstr ""
+msgstr "Database:"
 
 #: bin/openerp.glade:131
 msgid "User:"
-msgstr ""
+msgstr "User:"
 
 #: bin/openerp.glade:146 bin/openerp.glade:6436 bin/openerp.glade:6747
 msgid "Password:"
-msgstr ""
+msgstr "Password:"
 
 #: bin/openerp.glade:265
 msgid "_File"
-msgstr "_Файл"
+msgstr "_File"
 
 #: bin/openerp.glade:272
 msgid "_Connect..."
-msgstr "_Свързване..."
+msgstr "_Connect..."
 
 #: bin/openerp.glade:288
 msgid "_Disconnect"
-msgstr "_Прекъсване на връзка"
+msgstr "_Disconnect"
 
 #: bin/openerp.glade:308
 msgid "Databases"
-msgstr "Бази данни"
+msgstr "Databases"
 
 #: bin/openerp.glade:315
 msgid "_New database"
-msgstr "_Нова база данни"
+msgstr ""
 
 #: bin/openerp.glade:330
 msgid "_Restore database"
@@ -1402,11 +1388,11 @@ msgstr ""
 
 #: bin/openerp.glade:460
 msgid "_User"
-msgstr "_Потребител"
+msgstr "_User"
 
 #: bin/openerp.glade:468
 msgid "_Preferences"
-msgstr "_Предпочитания"
+msgstr "_Preferences"
 
 #: bin/openerp.glade:488
 msgid "_Send a request"
@@ -1426,11 +1412,11 @@ msgstr ""
 
 #: bin/openerp.glade:544
 msgid "_New"
-msgstr "_Нов"
+msgstr "_New"
 
 #: bin/openerp.glade:560
 msgid "_Save"
-msgstr "_Запазване"
+msgstr "_Save"
 
 #: bin/openerp.glade:576
 msgid "Copy this resource"
@@ -1438,23 +1424,23 @@ msgstr ""
 
 #: bin/openerp.glade:577
 msgid "_Duplicate"
-msgstr "_Дублиране"
+msgstr "_Duplicate"
 
 #: bin/openerp.glade:593
 msgid "_Delete"
-msgstr "_Изтриване"
+msgstr "_Delete"
 
 #: bin/openerp.glade:614
 msgid "Find"
-msgstr "Търсене"
+msgstr "Find"
 
 #: bin/openerp.glade:630
 msgid "Ne_xt"
-msgstr ""
+msgstr "Ne_xt"
 
 #: bin/openerp.glade:646
 msgid "Pre_vious"
-msgstr ""
+msgstr "Pre_vious"
 
 #: bin/openerp.glade:662
 msgid "Switch to list/form"
@@ -1462,7 +1448,7 @@ msgstr ""
 
 #: bin/openerp.glade:678
 msgid "_Menu"
-msgstr "_Меню"
+msgstr ""
 
 #: bin/openerp.glade:699
 msgid "_New Home Tab"
@@ -1470,15 +1456,15 @@ msgstr ""
 
 #: bin/openerp.glade:715 bin/openerp.glade:5024
 msgid "Close Tab"
-msgstr ""
+msgstr "Close Tab"
 
 #: bin/openerp.glade:731
 msgid "Previous Tab"
-msgstr "Предишен таб"
+msgstr ""
 
 #: bin/openerp.glade:740 bin/openerp.glade:5080
 msgid "Next Tab"
-msgstr "Следващ таб"
+msgstr ""
 
 #: bin/openerp.glade:754
 msgid "View _logs"
@@ -1490,7 +1476,7 @@ msgstr ""
 
 #: bin/openerp.glade:776
 msgid "_Open"
-msgstr ""
+msgstr "_Open"
 
 #: bin/openerp.glade:791
 msgid "Reloa_d / Undo"
@@ -1502,7 +1488,7 @@ msgstr ""
 
 #: bin/openerp.glade:826
 msgid "_Preview in PDF"
-msgstr "_Преглед в PDF"
+msgstr ""
 
 #: bin/openerp.glade:842
 msgid "Previe_w in editor"
@@ -1518,7 +1504,7 @@ msgstr ""
 
 #: bin/openerp.glade:889
 msgid "_Options"
-msgstr "_Опции"
+msgstr "_Options"
 
 #: bin/openerp.glade:896
 msgid "_Extension Manager"
@@ -1526,7 +1512,7 @@ msgstr ""
 
 #: bin/openerp.glade:904
 msgid "_Menubar"
-msgstr "Лента с _менюта"
+msgstr ""
 
 #: bin/openerp.glade:912
 msgid "Text _and Icons"
@@ -1534,15 +1520,15 @@ msgstr ""
 
 #: bin/openerp.glade:920
 msgid "_Icons only"
-msgstr ""
+msgstr "_Icons only"
 
 #: bin/openerp.glade:929
 msgid "_Text only"
-msgstr ""
+msgstr "_Text only"
 
 #: bin/openerp.glade:942
 msgid "_Forms"
-msgstr "_Форми"
+msgstr ""
 
 #: bin/openerp.glade:950
 msgid "Right Toolbar"
@@ -1554,19 +1540,19 @@ msgstr ""
 
 #: bin/openerp.glade:966
 msgid "Top"
-msgstr ""
+msgstr "Top"
 
 #: bin/openerp.glade:974
 msgid "Left"
-msgstr ""
+msgstr "Left"
 
 #: bin/openerp.glade:983
 msgid "Right"
-msgstr ""
+msgstr "Right"
 
 #: bin/openerp.glade:992
 msgid "Bottom"
-msgstr ""
+msgstr "Bottom"
 
 #: bin/openerp.glade:1005
 msgid "Tabs default orientation"
@@ -1574,15 +1560,15 @@ msgstr ""
 
 #: bin/openerp.glade:1013
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 #: bin/openerp.glade:1021
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 #: bin/openerp.glade:1038
 msgid "_Print"
-msgstr "_Печат"
+msgstr "_Print"
 
 #: bin/openerp.glade:1045
 msgid "Previe_w before print"
@@ -1590,11 +1576,11 @@ msgstr ""
 
 #: bin/openerp.glade:1069
 msgid "_Save options"
-msgstr "_Запазване на опции"
+msgstr "_Save options"
 
 #: bin/openerp.glade:1089
 msgid "_Plugins"
-msgstr "_Приставки"
+msgstr "_Plugins"
 
 #: bin/openerp.glade:1097
 msgid "_Execute a plugin"
@@ -1606,7 +1592,7 @@ msgstr ""
 
 #: bin/openerp.glade:1125
 msgid "_Help"
-msgstr "_Помощ"
+msgstr "_Help"
 
 #: bin/openerp.glade:1132
 msgid "Enable Debug Mode Tooltips"
@@ -1626,15 +1612,15 @@ msgstr ""
 
 #: bin/openerp.glade:1191
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Keyboard Shortcuts"
 
 #: bin/openerp.glade:1204
 msgid "_License"
-msgstr ""
+msgstr "_License"
 
 #: bin/openerp.glade:1219
 msgid "_About..."
-msgstr ""
+msgstr "_About..."
 
 #: bin/openerp.glade:1261
 msgid "Edit / Save this resource"
@@ -1650,7 +1636,7 @@ msgstr ""
 
 #: bin/openerp.glade:1291
 msgid "Previous"
-msgstr "Предишен"
+msgstr "Previous"
 
 #: bin/openerp.glade:1302
 msgid "Go to next matched resource"
@@ -1658,19 +1644,19 @@ msgstr ""
 
 #: bin/openerp.glade:1303
 msgid "Next"
-msgstr "Следващ"
+msgstr "Next"
 
 #: bin/openerp.glade:1316
 msgid "List"
-msgstr ""
+msgstr "List"
 
 #: bin/openerp.glade:1328
 msgid "Form"
-msgstr ""
+msgstr "Form"
 
 #: bin/openerp.glade:1341
 msgid "Calendar"
-msgstr ""
+msgstr "Calendar"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
@@ -1678,7 +1664,7 @@ msgstr ""
 
 #: bin/openerp.glade:1361
 msgid "Graph"
-msgstr ""
+msgstr "Graph"
 
 #: bin/openerp.glade:1374
 msgid "Gantt"
@@ -1698,19 +1684,19 @@ msgstr ""
 
 #: bin/openerp.glade:1417
 msgid "Attachment"
-msgstr ""
+msgstr "Attachment"
 
 #: bin/openerp.glade:1432 bin/openerp.glade:1433
 msgid "Menu"
-msgstr "Меню"
+msgstr "Menu"
 
 #: bin/openerp.glade:1450 bin/openerp.glade:1451
 msgid "Reload"
-msgstr "Презареждане"
+msgstr "Reload"
 
 #: bin/openerp.glade:1468
 msgid "Close this window"
-msgstr ""
+msgstr "Close this window"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
@@ -1734,15 +1720,15 @@ msgstr ""
 
 #: bin/openerp.glade:1672
 msgid "Shortcuts"
-msgstr ""
+msgstr "Shortcuts"
 
 #: bin/openerp.glade:1781
 msgid "OpenERP - Forms"
-msgstr ""
+msgstr "OpenERP - Forms"
 
 #: bin/openerp.glade:1805
 msgid "State:"
-msgstr ""
+msgstr "State:"
 
 #: bin/openerp.glade:1837
 msgid "OpenERP - About"
@@ -1792,7 +1778,7 @@ msgstr ""
 
 #: bin/openerp.glade:1977
 msgid "_Contact"
-msgstr ""
+msgstr "_Contact"
 
 #: bin/openerp.glade:2029
 msgid "Open ERP - Forms widget"
@@ -1840,7 +1826,7 @@ msgstr ""
 
 #: bin/openerp.glade:2538
 msgid "_Domain:"
-msgstr ""
+msgstr "_Domain:"
 
 #: bin/openerp.glade:2597
 msgid "Default _value:"
@@ -1852,11 +1838,11 @@ msgstr ""
 
 #: bin/openerp.glade:2700
 msgid "Save List"
-msgstr ""
+msgstr "Save List"
 
 #: bin/openerp.glade:2748
 msgid "Remove List"
-msgstr ""
+msgstr "Remove List"
 
 #: bin/openerp.glade:2803
 msgid "<b>Exports List</b>"
@@ -1876,15 +1862,15 @@ msgstr ""
 
 #: bin/openerp.glade:2909
 msgid "Available Fields"
-msgstr ""
+msgstr "Available Fields"
 
 #: bin/openerp.glade:2952 bin/openerp.glade:5647
 msgid "_Add"
-msgstr ""
+msgstr "_Add"
 
 #: bin/openerp.glade:2999 bin/openerp.glade:5694
 msgid "_Remove"
-msgstr ""
+msgstr "_Remove"
 
 #: bin/openerp.glade:3047
 msgid "_Nothing"
@@ -1922,7 +1908,7 @@ msgstr ""
 
 #: bin/openerp.glade:3387
 msgid "Tip of the Day"
-msgstr ""
+msgstr "Tip of the Day"
 
 #: bin/openerp.glade:3434
 msgid "_Display a new tip next time?"
@@ -1963,7 +1949,7 @@ msgstr ""
 
 #: bin/openerp.glade:4480
 msgid "Phone number:"
-msgstr ""
+msgstr "Phone number:"
 
 #: bin/openerp.glade:4493
 msgid "Emergency:"
@@ -2007,7 +1993,7 @@ msgstr ""
 
 #: bin/openerp.glade:4831
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Keyboard shortcuts"
 
 #: bin/openerp.glade:4853
 msgid "<b>Shortcuts for OpenERP</b>"
@@ -2043,11 +2029,11 @@ msgstr ""
 
 #: bin/openerp.glade:4968
 msgid "Next record"
-msgstr "Следващ запис"
+msgstr ""
 
 #: bin/openerp.glade:4983
 msgid "Previous record"
-msgstr "Предишен запис"
+msgstr ""
 
 #: bin/openerp.glade:4998
 msgid "<PgDn>"
@@ -2059,7 +2045,7 @@ msgstr ""
 
 #: bin/openerp.glade:5039
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
 #: bin/openerp.glade:5054
 msgid "<Ctrl> + W"
@@ -2075,7 +2061,7 @@ msgstr ""
 
 #: bin/openerp.glade:5108
 msgid "Previous tab"
-msgstr "Предишен таб"
+msgstr ""
 
 #: bin/openerp.glade:5123
 msgid "<Ctrl> + <PgUp>"
@@ -2083,7 +2069,7 @@ msgstr ""
 
 #: bin/openerp.glade:5136
 msgid "New"
-msgstr ""
+msgstr "New"
 
 #: bin/openerp.glade:5151
 msgid "<Ctrl> + N"
@@ -2091,7 +2077,7 @@ msgstr ""
 
 #: bin/openerp.glade:5164
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: bin/openerp.glade:5179
 msgid "<Ctrl> + D"
@@ -2099,7 +2085,7 @@ msgstr ""
 
 #: bin/openerp.glade:5192
 msgid "Find / Search"
-msgstr "Намиране / Търсене"
+msgstr ""
 
 #: bin/openerp.glade:5207
 msgid "<Ctrl> + F"
@@ -2107,7 +2093,7 @@ msgstr ""
 
 #: bin/openerp.glade:5220
 msgid "Connect"
-msgstr ""
+msgstr "Connect"
 
 #: bin/openerp.glade:5235
 msgid "<Ctrl> + O"
@@ -2119,7 +2105,7 @@ msgstr ""
 
 #: bin/openerp.glade:5266
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
 #: bin/openerp.glade:5279
 msgid "<b>Shortcuts in relation fields</b>"
@@ -2139,7 +2125,7 @@ msgstr ""
 
 #: bin/openerp.glade:5337
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: bin/openerp.glade:5350
 msgid "Auto-Complete text field"
@@ -2207,7 +2193,7 @@ msgstr ""
 
 #: bin/openerp.glade:5801
 msgid "Auto-Detect"
-msgstr ""
+msgstr "Auto-Detect"
 
 #: bin/openerp.glade:5856
 msgid "<b>Fields to import</b>"
@@ -2227,7 +2213,7 @@ msgstr ""
 
 #: bin/openerp.glade:6022
 msgid "Encoding:"
-msgstr ""
+msgstr "Encoding:"
 
 #: bin/openerp.glade:6035
 msgid "Field Separater:"
@@ -2239,7 +2225,7 @@ msgstr ""
 
 #: bin/openerp.glade:6222
 msgid "Server"
-msgstr ""
+msgstr "Server"
 
 #: bin/openerp.glade:6232
 msgid "<b>Connect to a OpenERP server</b>"
@@ -2251,7 +2237,7 @@ msgstr ""
 
 #: bin/openerp.glade:6337
 msgid "Port:"
-msgstr ""
+msgstr "Port:"
 
 #: bin/openerp.glade:6389
 msgid "Choose a database..."
@@ -2283,7 +2269,7 @@ msgstr ""
 
 #: bin/openerp.glade:6906
 msgid "Create a new database"
-msgstr ""
+msgstr "Create a new database"
 
 #: bin/openerp.glade:6919
 msgid "<b>Create a new database</b>"
@@ -2306,9 +2292,6 @@ msgid ""
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
-"Това е паролата на потребителя, който има правото да администрира базата "
-"данни. Това не е  OpenERP потребител, а СУПЕР администратор. Ако не я "
-"промените паролата е 'admin' след инсталация."
 
 #: bin/openerp.glade:7029
 msgid ""
@@ -2341,8 +2324,6 @@ msgid ""
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
-"Изберете език по подразбиране, който да бъде инсталиран за тази база данни. "
-"Ще можете да инсталирате и нови езици след инсталацията от меню АДМИНИСТРАЦИЯ"
 
 #: bin/openerp.glade:7156
 msgid ""
@@ -2387,7 +2368,7 @@ msgstr ""
 
 #: bin/openerp.glade:7349
 msgid "Change password"
-msgstr ""
+msgstr "Change password"
 
 #: bin/openerp.glade:7366
 msgid "<b>Change your super admin password</b>"
@@ -2399,7 +2380,7 @@ msgstr ""
 
 #: bin/openerp.glade:7532
 msgid "New password:"
-msgstr ""
+msgstr "New password:"
 
 #: bin/openerp.glade:7545
 msgid "New password confirmation:"
@@ -2427,7 +2408,7 @@ msgstr ""
 
 #: bin/openerp.glade:7876
 msgid "Compare"
-msgstr ""
+msgstr "Compare"
 
 #: bin/openerp.glade:7922
 msgid "Write anyway"
@@ -2439,19 +2420,19 @@ msgstr ""
 
 #: bin/openerp.glade:8034
 msgid "Today"
-msgstr ""
+msgstr "Today"
 
 #: bin/openerp.glade:8080
 msgid "September 2008"
-msgstr ""
+msgstr "September 2008"
 
 #: bin/openerp.glade:8094
 msgid "Day"
-msgstr ""
+msgstr "Day"
 
 #: bin/openerp.glade:8118
 msgid "Month"
-msgstr ""
+msgstr "Month"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
@@ -2473,7 +2454,7 @@ msgstr ""
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "Remove Filter"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
@@ -2485,7 +2466,7 @@ msgstr ""
 
 #: bin/win_error.glade:40
 msgid "label"
-msgstr ""
+msgstr "label"
 
 #: bin/win_error.glade:100
 msgid "Click here for details about the publisher warranty proposition"
@@ -2526,7 +2507,7 @@ msgstr ""
 
 #: bin/win_error.glade:387
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
