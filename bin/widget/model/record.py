@@ -227,6 +227,8 @@ class ModelRecord(signal_event.signal_event):
             # with on_change() in case they cascade, but that's fixable
             # normally in the view a single clean on_change on the first
             # field.
+            if isinstance(self.mgroup.mfields[fieldname], O2MField):
+                 self.pager_cache[fieldname] = value
             if self.mgroup.mfields[fieldname].attrs.get('on_change',False):
                 fields_with_on_change[fieldname] = value
             else:
