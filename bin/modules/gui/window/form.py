@@ -142,7 +142,7 @@ class form(object):
         def _decorate(self, *args, **kws):
             result = fn(self, *args, **kws)
             if self.screen.current_view.view_type == 'form':
-                tips= self.screen.current_model and self.screen.current_model.value.get('name') or self.name
+                tips= unicode(self.screen.current_model and self.screen.current_model.value.get('name') or self.name)
                 tooltips = tips == self.name and self.name or  self.name + ': ' + tips[:64]
                 lable = tips == self.name and self.name or  self.name + ': ' + tips[:6]
                 self.page_label.set_text(lable)

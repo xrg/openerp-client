@@ -485,7 +485,7 @@ class Screen(signal_event.signal_event):
         form_obj = terp_main.pages[page_id]
         action_name = form_obj.name or ''
         if self.current_view.view_type == 'form':
-            tips = self.current_model and self.current_model.value.get('name') or action_name
+            tips = unicode(self.current_model and self.current_model.value.get('name') or action_name)
             tooltips = tips == action_name and action_name or  action_name + ': ' + tips[:64] 
             label = tips == action_name and action_name or  action_name + ': ' + tips[:6] 
         else:
