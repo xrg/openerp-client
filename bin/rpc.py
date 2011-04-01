@@ -225,7 +225,7 @@ class rpc_session(object):
     def rpc_exec_auth_wo(self, obj, method, *args):
         try:
             #sock = self._gw(self._url, self.db, self.uid, self._passwd, obj)
-            return self_gw(obj).exec_auth(method, *args)
+            return self.gw(obj).exec_auth(method, *args)
         except xmlrpclib.Fault, err:
             a = rpc_exception(err.faultCode, err.faultString)
         except tiny_socket.Myexception, err:
