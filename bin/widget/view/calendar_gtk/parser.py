@@ -26,19 +26,15 @@ import gtk.glade
 import gettext
 import common
 import gobject
-from mx import DateTime
 from datetime import datetime, date
 
 from SpiffGtkWidgets import Calendar
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import time
 import math
 
-import rpc
 from rpc import RPCProxy
 import logging
-import widget.model.field as wmodel_fields
 
 COLOR_PALETTE = ['#f57900', '#cc0000', '#d400a8', '#75507b', '#3465a4', '#73d216', '#c17d11', '#edd400',
                  '#fcaf3e', '#ef2929', '#ff00c9', '#ad7fa8', '#729fcf', '#8ae234', '#e9b96e', '#fce94f',
@@ -245,7 +241,6 @@ class ViewCalendar(object):
         self.display(None)
 
     def _back_forward(self, widget, type, *args, **argv):
-        relatime = DateTime.RelativeDateTime
         if self.mode == 'day':
             self.date = self.date + relativedelta(days=type)
         if self.mode == 'week':
@@ -343,7 +338,6 @@ class ViewCalendar(object):
 
     def refresh(self):
         t = self.date.timetuple()
-        from tools import ustr
         from locale import getlocale
         sysencoding = getlocale()[1]
 
