@@ -35,7 +35,10 @@ class filter(wid_int.wid_int):
             self.butt = gtk.ToggleButton()
             self.butt.set_relief(gtk.RELIEF_NONE)
         icon = gtk.Image()
-        icon.set_from_stock(attrs.get('icon','gtk-home'), 1)
+        icon_to_set = attrs.get('icon','gtk-home')
+        if icon_to_set.startswith('STOCK'):
+            icon_to_set = eval('gtk.'+ icon_to_set)
+        icon.set_from_stock(icon_to_set, 1)
         self.butt.set_image(icon)
         self.butt.set_image_position(gtk.POS_TOP)
         self.butt.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("grey"))
