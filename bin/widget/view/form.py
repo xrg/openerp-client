@@ -358,14 +358,14 @@ class ViewForm(parser_view):
             result = tools.calc_condition(self, model, v)
             if result:
                 if k=='invisible':
-                    obj.hide()
+                    obj.hide_all()
                 if k=='focus':
                     notebook.set_current_page(rank)
                 elif k=='readonly':
                     obj.set_sensitive(False)
             else:
                 if k=='invisible':
-                    obj.show()
+                    obj.show_all()
                 if k=='readonly':
                     obj.set_sensitive(True)
 
