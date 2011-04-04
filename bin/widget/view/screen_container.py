@@ -170,7 +170,7 @@ class screen_container(object):
             hb2.pack_start(gtk.Label(''), expand=True, fill=True)
 
 # Limit combo
-        self.limit_combo = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
+        self.limit_combo = gtk.ListStore(object, str)
         self.combo = gtk.ComboBox(self.limit_combo)
         cell = gtk.CellRendererText()
         self.combo.pack_start(cell, True)
@@ -236,7 +236,7 @@ class screen_container(object):
     def get_limit(self):
         if hasattr(self,'limit_combo'):
             try:
-                return int(self.limit_combo.get_value(self.combo.get_active_iter(), 0))
+                return self.limit_combo.get_value(self.combo.get_active_iter(), 0)
             except:
                 return False
         else:

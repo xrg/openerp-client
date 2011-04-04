@@ -609,7 +609,7 @@ class Selection(Char):
     def __init__(self, *args):
         super(Selection, self).__init__(*args)
         self.renderer = gtk.CellRendererCombo()
-        selection_data = gtk.ListStore(str, str)
+        selection_data = gtk.ListStore(object, str)
         for x in self.attrs.get('selection', []):
             selection_data.append(x)
         self.renderer.set_property('model', selection_data)

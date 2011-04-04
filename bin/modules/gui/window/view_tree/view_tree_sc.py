@@ -50,7 +50,7 @@ class view_tree_sc(object):
 #        self.update()
 
     def update(self):
-        store = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_STRING)
+        store = gtk.ListStore(int, str, int)
         uid =  rpc.session.uid
         sc = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'get_sc', uid, self.model, rpc.session.context) or []
         for s in sc:

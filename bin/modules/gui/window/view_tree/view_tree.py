@@ -180,7 +180,9 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         return len(self.fields)+1
 
     def on_get_column_type(self, index):
-        if index in self.pixbufs:
+        if index == 0:
+            return int
+        elif index in self.pixbufs:
             return gtk.gdk.Pixbuf
         return fields_list_type.get(self.fields_type[self.fields[index-1]]['type'],
                 gobject.TYPE_STRING)
@@ -373,7 +375,7 @@ class view_tree(object):
         if not sel:
             return []
         (model, iters) = sel
-        return map(lambda x: int(model.get_value(model.get_iter(x), 0)), iters)
+        return [model.get_value(model.get_iter(x), 0) for x in iters]
 
     def sel_id_get(self):
         sel = self.view.get_selection().get_selected()
