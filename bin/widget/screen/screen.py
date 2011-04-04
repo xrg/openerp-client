@@ -916,7 +916,7 @@ class Screen(signal_event.signal_event):
                 if isinstance(wid, gtk.Button) and \
                     not isinstance(wid.parent, (gtk.HBox,gtk.VBox)):
                     wid.set_sensitive(val)
-        if value and not self.current_model.id:
+        if value and self.current_model and not self.current_model.id:
             return True
         process(self.widget, value)
 
