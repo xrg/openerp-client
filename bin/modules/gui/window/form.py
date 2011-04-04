@@ -303,7 +303,7 @@ class form(object):
             return
         self.screen.new()
         self.message_state('')
-
+        
     def sig_copy(self, *args):
         if not self.modified_save():
             return

@@ -174,7 +174,7 @@ class ModelRecord(signal_event.signal_event):
                     if d[1] == 'in' and len(d[2]) == 1:
                         val[d[0]] = d[2][0]
             self.set_default(val)
-
+            
     def name_get(self):
         name = self.rpc.name_get([self.id], rpc.session.context)[0]
         return name
