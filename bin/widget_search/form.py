@@ -454,6 +454,7 @@ class form(wid_int.wid_int):
         if self.groupby:
             context.update({'group_by':self.groupby})
         if domain:
+            pos = False
             if '&' in domain or '|' in domain:
                 if domain[-2] in ['&','|']:
                     pos = 2
@@ -462,9 +463,10 @@ class form(wid_int.wid_int):
                 if len(domain) == 4 and domain[1] in ['&','|']:
                     domain = domain[1:]
                 else:
-                    res1 = domain[:-pos]
-                    res2 = domain[-(pos-1):]
-                    domain = res1 + res2
+                    if pos:
+                        res1 = domain[:-pos]
+                        res2 = domain[-(pos-1):]
+                        domain = res1 + res2
         return {'domain':domain, 'context':context}
 
     def destroy(self):
