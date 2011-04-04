@@ -38,6 +38,8 @@ class selection(wid_int.wid_int):
         if 'selection' in attrs:
             self.set_popdown(attrs.get('selection',[]))
         if self.default_search:
+            if isinstance(self.default_search,list):
+                self.default_search = self.default_search[0]
             if self.attrs['type'] == 'many2one':
                 self._value_set(int(self.default_search))
             else:
