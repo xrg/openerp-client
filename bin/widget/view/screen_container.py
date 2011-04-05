@@ -101,8 +101,14 @@ class screen_container(object):
         return str(self.domain),str(self.context)
 
     def add_custom_filter(self, button, screen):
+        fields_to_add = {}
         fields = screen.search_view.get('fields', {})
-        panel = screen.filter_widget.add_custom(screen.filter_widget, screen.filter_widget.widget, fields)
+        supported_types = ['many2one','text','char','float','integer','date',\
+                           'datetime','selection','many2many','boolean','one2many']
+        for string, attr in fields.iteritems():
+            if attr['type'] in supported_types and attr.get('selectable', False):
+                fields_to_add.update({string:attr})
+        panel = screen.filter_widget.add_custom(screen.filter_widget, screen.filter_widget.widget, fields_to_add)
         self.custom_panels.append(panel)
         if len(self.custom_panels)>1:
             self.custom_panels[-1].condition_next.hide()
