@@ -121,6 +121,8 @@ class calendar(interface.widget_interface):
                 self.entry.set_width_chars(len(t))
                 self.entry.set_max_length(len(t))
             self.entry.set_text(t)
+        else:
+            self.entry.clear()
         return True
 
     def cal_open(self, widget, event, model=None, window=None):
@@ -236,6 +238,8 @@ class datetime(interface.widget_interface):
                 self.entry.set_width_chars(len(t))
                 self.entry.set_max_length(len(t))
             self.entry.set_text(t)
+        else:
+            self.entry.clear()
         return True
 
     def cal_open(self, widget, event, model=None, window=None):
