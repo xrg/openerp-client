@@ -37,7 +37,7 @@ class filter(wid_int.wid_int):
         icon = gtk.Image()
         icon_to_set = attrs.get('icon','gtk-home')
         if icon_to_set.startswith('STOCK'):
-            icon_to_set = eval('gtk.'+ icon_to_set)
+            icon_to_set = getattr(gtk, icon_to_set)
         icon.set_from_stock(icon_to_set, 1)
         self.butt.set_image(icon)
         self.butt.set_image_position(gtk.POS_TOP)
