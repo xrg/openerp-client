@@ -399,7 +399,7 @@ class ModelRecordGroup(signal_event.signal_event):
                     m.set(data, signal=False)
 
         if len(new) and len(to_add):
-            if self.parent:
+            if self.parent and self.screen:
                 ctx.update(self.parent.expr_eval(self.screen.default_get))
             ctx.update(self.context)
             values = self.rpc.default_get(to_add, ctx)
