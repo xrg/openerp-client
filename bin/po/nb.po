@@ -1,26 +1,26 @@
 # Norwegian Bokmal translation for openobject-client
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the openobject-client package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# Rolv Råen<rora@adego.no>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: Harry (Open ERP) <hmo@tinyerp.com>\n"
+"PO-Revision-Date: 2011-04-05 22:43+0000\n"
+"Last-Translator: Rolv Råen <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-04-06 06:01+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "Language: nb\n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
-msgstr ""
+msgstr "Skriv ut arbeidsflyt"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
@@ -28,111 +28,111 @@ msgstr "Skriv ut Workflow(Avansert)"
 
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
-msgstr ""
+msgstr "Ingen tilgjengelige tillegg for denne ressursen !"
 
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr ""
+msgstr "Velg et tillegg"
 
 #: bin/modules/action/wizard.py:150 bin/modules/gui/main.py:188 bin/rpc.py:156
 msgid "Connection refused !"
-msgstr ""
+msgstr "Oppkobling avvist !"
 
 #: bin/modules/action/wizard.py:162 bin/modules/action/wizard.py:168
 #: bin/modules/action/wizard.py:170 bin/modules/gui/main.py:196
 #: bin/modules/gui/main.py:202 bin/rpc.py:202 bin/rpc.py:204
 msgid "Application Error"
-msgstr ""
+msgstr "Applikasjonsfeil"
 
 #: bin/modules/action/wizard.py:170 bin/rpc.py:204
 msgid "View details"
-msgstr ""
+msgstr "Vis detaljer"
 
 #: bin/modules/action/main.py:48
 msgid "Nothing to print!"
-msgstr ""
+msgstr "Ingenting å skrive ut!"
 
 #: bin/modules/action/main.py:66
 msgid "Printing aborted, too long delay !"
-msgstr ""
+msgstr "Utskrift avbrutt. Tidsavbrudd."
 
 #: bin/modules/action/main.py:195
 msgid "Select your action"
-msgstr ""
+msgstr "Velg aksjon"
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr ""
+msgstr "Kunne ikke koble til tjeneren !"
 
 #: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6278
 #: bin/openerp.glade:6524 bin/openerp.glade:6847 bin/openerp.glade:7508
 msgid "Server:"
-msgstr ""
+msgstr "Tjener:"
 
 #: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6560
 #: bin/openerp.glade:6804 bin/openerp.glade:7103 bin/openerp.glade:7465
 msgid "Change"
-msgstr ""
+msgstr "Endre"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "Super Administrator passord:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "Galt superadministrator passord"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Migreringsskript"
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
-msgstr ""
+msgstr "Kontrakt ID:"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr ""
+msgstr "Kontraktpassord:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Du har allerede nyeste versjon"
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Følgende oppdateringer er tilgjengelige:"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Du kan nå migrere dine databaser."
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr ""
+msgstr "Migrere database"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Din database har blitt oppgradert."
 
 #: bin/modules/gui/main.py:295
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Dine databaser har blitt oppgradert."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Du har ikke valgt noen database"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr ""
+msgstr "Ingen database funnet. Du må opprette en !"
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
-msgstr ""
+msgstr "Ukjent"
 
 #: bin/modules/gui/main.py:474
 #, python-format
@@ -140,75 +140,81 @@ msgid ""
 "The versions of the server (%s) and the client (%s) missmatch. The client "
 "may not work properly. Use it at your own risks."
 msgstr ""
+"Det er ikke samsvar mellom versjonen på tjeneren(%s) og klienten (%s). "
+"Klienten vil muligens ikke fungere ordentlig. Brukes på eget anvar."
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
-msgstr ""
+msgstr "Beklager,'"
 
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
-msgstr ""
+msgstr "Ugyldig databasenavn !"
 
 #: bin/modules/gui/main.py:613
 msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
+"Databasenavnet kan bare inneholde normale tegn eller \"_\"\n"
+"Du må unngå alle aksenttegn, mellomrom og spesialtegn."
 
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
 msgid "Could not create database."
-msgstr ""
+msgstr "Kunne ikke opprette database."
 
 #: bin/modules/gui/main.py:647
 msgid "Database already exists !"
-msgstr ""
+msgstr "Databasen finnes allerede !"
 
 #: bin/modules/gui/main.py:649 bin/modules/gui/main.py:1383
 #: bin/modules/gui/main.py:1403 bin/modules/gui/main.py:1482
 msgid "Bad database administrator password !"
-msgstr ""
+msgstr "Ugyldig passord for databaseadministrator"
 
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr ""
+msgstr "Feil ved opprettelse av database !"
 
 #: bin/modules/gui/main.py:658
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
+"Tjeneren kræsjet under installasjonen.\n"
+"Vi anbefaler at du sletter denne databasen."
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"
-msgstr ""
+msgstr "Trykk Ctrl+O for å logge inn"
 
 #: bin/modules/gui/main.py:881
 msgid "Edit"
-msgstr ""
+msgstr "Editer"
 
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Intet firma"
 
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr ""
+msgstr "%s forspørsler"
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr ""
+msgstr "Ingen forespørsler"
 
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s forespørsler sent"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
@@ -225,26 +231,30 @@ msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
+"Feil med tilkobling !\n"
+"Kunne ikke koble til tjeneren !"
 
 #: bin/modules/gui/main.py:1043
 msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Autentisering feilet !\n"
+" Galt brukernavn eller passord !"
 
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #: bin/modules/gui/main.py:1076
 msgid "Not logged !"
-msgstr ""
+msgstr "Ikke logget !"
 
 #: bin/modules/gui/main.py:1085 bin/widget/view/form_gtk/one2many_list.py:52
 #: bin/openerp.glade:6126
 msgid "OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #: bin/modules/gui/main.py:1159
 msgid ""
@@ -252,35 +262,38 @@ msgid ""
 "Ask the administrator to verify\n"
 "you have an action defined for your user."
 msgstr ""
+"Du kan ikke logge inn i systemet !\n"
+"Kontakt din administrator for å verifisere\n"
+"at du har en handling definert for din bruker."
 
 #: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
 msgid "Do you really want to quit ?"
-msgstr ""
+msgstr "Er du sikker på at du vil avslutte ?"
 
 #: bin/modules/gui/main.py:1262
 #, python-format
 msgid "Attachments (%d)"
-msgstr ""
+msgstr "Vedlegg (%d)"
 
 #: bin/modules/gui/main.py:1275
 msgid "Attachments"
-msgstr ""
+msgstr "Vedlegg"
 
 #: bin/modules/gui/main.py:1374
 msgid "Delete a database"
-msgstr ""
+msgstr "Slette en database"
 
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr ""
+msgstr "Databasen er slettet !"
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr ""
+msgstr "Kunne ikke slette database"
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr ""
+msgstr "Kunne ikke slette database"
 
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
@@ -289,40 +302,40 @@ msgstr "Åpne …"
 
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
-msgstr ""
+msgstr "Databasen er gjenopprettet !"
 
 #: bin/modules/gui/main.py:1403
 msgid "Could not restore database."
-msgstr ""
+msgstr "Kunne ikke gjenopprette database."
 
 #: bin/modules/gui/main.py:1405
 msgid "Couldn't restore database"
-msgstr ""
+msgstr "Kunne ikke gjenopprette database"
 
 #: bin/modules/gui/main.py:1444
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr ""
+msgstr "Gjentatt passord er ikke likt nytt passord. Operasjon avbrutt!"
 
 #: bin/modules/gui/main.py:1446
 msgid "Validation Error."
-msgstr ""
+msgstr "Valideringsfeil."
 
 #: bin/modules/gui/main.py:1454
 msgid "Could not change the Super Admin password."
-msgstr ""
+msgstr "Kunne ikke endre passordet til Super Admin brukeren."
 
 #: bin/modules/gui/main.py:1455
 msgid "Bad password provided !"
-msgstr ""
+msgstr "Feil passord angitt !"
 
 #: bin/modules/gui/main.py:1457
 msgid "Error, password not changed."
-msgstr ""
+msgstr "Feil, passord ble ikke endret"
 
 #: bin/modules/gui/main.py:1463 bin/modules/gui/main.py:1486
 msgid "Backup a database"
-msgstr ""
+msgstr "Ta backup av en database"
 
 #: bin/modules/gui/main.py:1466 bin/modules/gui/window/win_export.py:328
 #: bin/printer/printer.py:216 bin/widget/view/form_gtk/image.py:129
@@ -332,15 +345,15 @@ msgstr "Lagre som...."
 
 #: bin/modules/gui/main.py:1479
 msgid "Database backed up successfully !"
-msgstr ""
+msgstr "Sikkerhetskopi av database fullført !"
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
-msgstr ""
+msgstr "Kunne ikke ta sikkerhetskopi av database."
 
 #: bin/modules/gui/main.py:1484
 msgid "Couldn't backup database."
-msgstr ""
+msgstr "Kunne ikke ta sikkerhetskopi av database."
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
@@ -349,31 +362,33 @@ msgstr ""
 #: bin/modules/gui/window/form.py:231
 msgid "No record selected ! You can only attach to existing record."
 msgstr ""
+"Ingen post er valgt! Du kan bare legge ved dokumenter til en eksisterende "
+"post."
 
 #: bin/modules/gui/window/form.py:247
 msgid "You have to select a record !"
-msgstr ""
+msgstr "Du må velge en post !"
 
 #: bin/modules/gui/window/form.py:253
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:42
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: bin/modules/gui/window/form.py:254
 msgid "Creation User"
-msgstr ""
+msgstr "Opprettet av"
 
 #: bin/modules/gui/window/form.py:255
 msgid "Creation Date"
-msgstr ""
+msgstr "Dato for opprettelse"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
-msgstr ""
+msgstr "Sist endret av"
 
 #: bin/modules/gui/window/form.py:257
 msgid "Latest Modification Date"
-msgstr ""
+msgstr "Dato for siste endring"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
@@ -384,16 +399,18 @@ msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
 msgstr ""
+"Posten er ikke lagret ! \n"
+" Vil du blanke ut den aktuelle posten ?"
 
 #: bin/modules/gui/window/form.py:272
 #: bin/widget/view/form_gtk/one2many_list.py:380
 msgid "Are you sure to remove this record ?"
-msgstr ""
+msgstr "Er du sikker på at du vil fjerne denne posten?"
 
 #: bin/modules/gui/window/form.py:274
 #: bin/widget/view/form_gtk/one2many_list.py:382
 msgid "Are you sure to remove those records ?"
-msgstr ""
+msgstr "Er du sikker på at du vil fjerne disse postene?"
 
 #: bin/modules/gui/window/form.py:278
 msgid "Resources cleared."
@@ -409,7 +426,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:329
 msgid "Document Saved."
-msgstr ""
+msgstr "Dokument lagret."
 
 #: bin/modules/gui/window/form.py:331 bin/modules/gui/window/form.py:332
 #: bin/widget/view/form_gtk/parser.py:126
@@ -421,7 +438,7 @@ msgstr "Ugyldig skjema, korriger røde felt !"
 #: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/list.py:568
 msgid "Error !"
-msgstr ""
+msgstr "Feil !"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
@@ -432,55 +449,57 @@ msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
 msgstr ""
+"Denne posten er endret.\n"
+"Vil du lagre den ?"
 
 #: bin/modules/gui/window/form.py:407
 msgid "You must select one or several records !"
-msgstr ""
+msgstr "Du må velge en eller flere poster!"
 
 #: bin/modules/gui/window/form.py:416
 msgid "Print Screen"
-msgstr ""
+msgstr "Skriv ut skjermkopi"
 
 #: bin/modules/gui/window/form.py:436
 msgid "No record selected"
-msgstr ""
+msgstr "Ingen poster er valgt"
 
 #: bin/modules/gui/window/form.py:441
 msgid "New document"
-msgstr ""
+msgstr "Nytt dokument"
 
 #: bin/modules/gui/window/form.py:443
 msgid "Editing document (id: "
-msgstr ""
+msgstr "Editerer dokument (id: "
 
 #: bin/modules/gui/window/form.py:446
 msgid "Record: "
-msgstr ""
+msgstr "Post: "
 
 #: bin/modules/gui/window/form.py:447
 msgid " of "
-msgstr ""
+msgstr " av "
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "The file is empty !"
-msgstr ""
+msgstr "Filen er tom !"
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "Importation !"
-msgstr ""
+msgstr "Import !"
 
 #: bin/modules/gui/window/win_import.py:56
 msgid "XML-RPC error !"
-msgstr ""
+msgstr "XML-RPC feil !"
 
 #: bin/modules/gui/window/win_import.py:61
 msgid "Imported one object !"
-msgstr ""
+msgstr "Et objekt importert !"
 
 #: bin/modules/gui/window/win_import.py:63
 #, python-format
 msgid "Imported %d objects !"
-msgstr ""
+msgstr "%d objekter importert !"
 
 #: bin/modules/gui/window/win_import.py:68
 #, python-format
@@ -495,16 +514,16 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
-msgstr ""
+msgstr "Importfeil !"
 
 #: bin/modules/gui/window/win_import.py:100
 #: bin/modules/gui/window/win_import.py:104
 msgid "Field name"
-msgstr ""
+msgstr "Feltnavn"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "Feil under lesing av .CSV fil"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
@@ -524,51 +543,51 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "Importfeil."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "Du har ikke valgt noen felter for import"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "Utvidelse"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "Applikasjon"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "Utskriftsbehandler"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
-msgstr ""
+msgstr "Denne utvidelsen er allerede definert"
 
 #: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7684
 msgid "Extension Manager"
-msgstr ""
+msgstr "Utvidelsesstyring"
 
 #: bin/modules/gui/window/win_selection.py:51
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Ressource Name"
-msgstr ""
+msgstr "Ressursnavn"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Names"
-msgstr ""
+msgstr "Navn"
 
 #: bin/modules/gui/window/__init__.py:31
 msgid "Unknown Window"
-msgstr ""
+msgstr "Ukjent vindu"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "Innstillinger"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -578,29 +597,31 @@ msgstr ""
 
 #: bin/modules/gui/window/win_preference.py:87
 msgid "Default language modified !"
-msgstr ""
+msgstr "Standard språk endret !"
 
 #: bin/modules/gui/window/view_tree/parse.py:35
 msgid "Tree"
-msgstr ""
+msgstr "Tre"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:48
 msgid "Description"
-msgstr ""
+msgstr "Beskrivelse"
 
 #: bin/modules/gui/window/tree.py:204 bin/modules/gui/window/tree.py:260
 msgid "No resource selected!"
-msgstr ""
+msgstr "Ingen ressurs er valgt!"
 
 #: bin/modules/gui/window/tree.py:218
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
 msgstr ""
+"Er du sikker på at du\n"
+"vi fjerne denne posten?"
 
 #: bin/modules/gui/window/tree.py:223
 msgid "Error removing resource!"
-msgstr ""
+msgstr "Feil ved fjerning av ressurs!"
 
 #: bin/modules/gui/window/tree.py:234
 msgid "Unable to chroot: no tree resource selected"
@@ -608,18 +629,20 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:50
 msgid " record(s) saved !"
-msgstr ""
+msgstr " post(er) lagret!"
 
 #: bin/modules/gui/window/win_export.py:53
 msgid ""
 "Operation failed !\n"
 "I/O error"
 msgstr ""
+"Operasjon feilet !\n"
+"Input/ouput error"
 
 #: bin/modules/gui/window/win_export.py:79
 #: bin/modules/gui/window/win_export.py:105
 msgid "Error Opening Excel !"
-msgstr ""
+msgstr "Feil ved åpning av Excel !"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
@@ -627,7 +650,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Eksportfeil !"
 
 #: bin/modules/gui/window/win_search.py:49
 #: bin/widget/view/diagram_gtk/xdot.py:1772
@@ -637,42 +660,42 @@ msgstr "OpenERP - Link"
 #: bin/modules/gui/window/win_search.py:126
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr ""
+msgstr "OpenERP søk: %s"
 
 #: bin/modules/gui/window/win_search.py:127
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr ""
+msgstr "OpenERP søk: %s (%%d treff)"
 
 #: bin/options.py:109
 #, python-format
 msgid "OpenERP Client %s"
-msgstr ""
+msgstr "OpenERP Klient %s"
 
 #: bin/options.py:110
 msgid "specify alternate config file"
-msgstr ""
+msgstr "spesifiser alternativ loggfil"
 
 #: bin/options.py:111
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "Slå på grunnleggende debugging. Alias for '--log-level=debug'"
 
 #: bin/options.py:112
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "angi loggingsnivå: %s"
 
 #: bin/options.py:113
 msgid "specify the user login"
-msgstr ""
+msgstr "angi brukerlogin"
 
 #: bin/options.py:114
 msgid "specify the server port"
-msgstr ""
+msgstr "angi tjener port"
 
 #: bin/options.py:115
 msgid "specify the server ip/name"
-msgstr ""
+msgstr "angi tjeners ip/navn"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
@@ -700,7 +723,7 @@ msgstr ""
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "Tips"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
@@ -708,13 +731,15 @@ msgstr ""
 
 #: bin/common/common.py:152
 msgid "Operation in progress"
-msgstr ""
+msgstr "Operasjon pågår"
 
 #: bin/common/common.py:156
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
+"Vennligst vent,\n"
+"denne operasjonen kan ta noe tid..."
 
 #: bin/common/common.py:190
 #, python-format
@@ -759,6 +784,31 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>En ukjent feil har blitt rapportert.</b>\n"
+"\n"
+"<b>Du har ikke en gyldig Open ERP vedlikeholdskontrakt !</b>\n"
+"Dersom du benytter OpenERP i produksjon, er det sterkt anbefalt at du tegner "
+"en vedlikeholdskontrakt.\n"
+"\n"
+"En Open ERP vedlikeholdskontrakt gir deg en garanti på retting av feil og "
+"tilgang til \n"
+"et automatisk migreringssystem som gjør at vi kan fikse problemene dine "
+"innen få timer.\n"
+"Dersom du hadde hatt en vedlikeholdskontrakt ville denne feilen blitt sent "
+"direkte\n"
+"til kvalitetskontroll teamet til Open ERP.\n"
+"\n"
+"En vedlikeholdskontrakt gir deg:\n"
+"* Automtatisk oppgradering til siste versjon,\n"
+"* Garanti for feilretting,\n"
+"* Månedling rapport om potenielle feil og rettelser på disse,\n"
+"* Sikkerhetsadvarsler på e-post og automatisk oppdatering,\n"
+"* Tilgang til kundeportal.\n"
+"\n"
+"Du kan benytte lenken under for mer informasjon. Detaljer om feilmeldingen "
+"kan du se på \n"
+"det andre fanebladet.\n"
 
 #: bin/common/common.py:410
 #, python-format
@@ -802,10 +852,13 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Ditt problem kunne IKKE sendes til kvalitetskontrollteamet !\n"
+"Vær vennlig å rapportere denne feilen manuelt til:\n"
+"\t%s"
 
 #: bin/common/common.py:491
 msgid "Error"
-msgstr ""
+msgstr "Feil"
 
 #: bin/common/common.py:646
 msgid "Open with..."
@@ -814,18 +867,20 @@ msgstr "Åpne med"
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "Kunne ikke sette regionale innstillinger %s: %s"
 
 #: bin/printer/printer.py:184
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr ""
+msgstr "Kan ikke håndtere filtype %s"
 
 #: bin/printer/printer.py:189
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
+"Linux Automatisk Utskrift ikke implementert.\n"
+" Bruk forhåndsvisning !"
 
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
@@ -833,11 +888,11 @@ msgstr ""
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
-msgstr ""
+msgstr "Feil ved skriving til fil!"
 
 #: bin/openerp-client.py:140
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "Lukker OpenERP, tastaturavbrudd"
 
 #: bin/widget_search/reference.py:78 bin/widget_search/filter.py:74
 #: bin/widget_search/selection.py:116 bin/widget_search/spinbutton.py:72
@@ -872,7 +927,7 @@ msgstr ""
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "Feil: "
 
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
@@ -897,31 +952,31 @@ msgstr "OpenERP - Velg dato"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "inneholder"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "inneholder ikke"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "er lik"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "er ikke lik"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "større enn"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "mindre enn"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "i"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
@@ -944,7 +999,7 @@ msgstr "Nei"
 
 #: bin/widget/view/form.py:136 bin/widget/view/form.py:199
 msgid "You must save this record to use the relate button !"
-msgstr ""
+msgstr "Du må lagre denne raden for å bruke relasjonsknappen !"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
@@ -952,7 +1007,7 @@ msgstr ""
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
-msgstr ""
+msgstr "Du må velge en rad for å bruke relasjonsknappen !"
 
 #: bin/widget/view/form.py:236 bin/widget/view/form_gtk/parser.py:647
 #: bin/widget/view/form_gtk/parser.py:767
@@ -981,6 +1036,7 @@ msgstr "Feil i kalender visning"
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "You must intall the library python-hippocanvas to use calendars."
 msgstr ""
+"Du må installere biblioteket python-hippocanvas for å bruke kalendere."
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
@@ -988,11 +1044,11 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "Lagre som snarvei"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Lagre som filter"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
@@ -1032,7 +1088,7 @@ msgstr "Denne data typen (%s) er ikke støttet av GTK klienten !"
 
 #: bin/widget/view/widget_parse.py:64
 msgid "No valid view found for this object!"
-msgstr ""
+msgstr "Ingen gyldig visning funnet for dette objektet!"
 
 #: bin/widget/view/graph_gtk/parser.py:64
 msgid "Can not generate graph !"
@@ -1103,11 +1159,11 @@ msgstr "Feil ikon for knappen"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "Felt"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "Objekt"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
@@ -1119,19 +1175,19 @@ msgstr "Du må lagre ressursen før du legger til oversettelser!"
 
 #: bin/widget/view/form_gtk/parser.py:891
 msgid "Translate view"
-msgstr ""
+msgstr "Oversett visning"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "Lagre og lukk"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "Lagre & Ny"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
@@ -1140,7 +1196,7 @@ msgstr "Bruk standard verdi"
 
 #: bin/widget/view/form_gtk/one2many_list.py:178
 msgid "Set Default"
-msgstr "Sett som Standard"
+msgstr "Sett som standard"
 
 #: bin/widget/view/form_gtk/one2many_list.py:209
 msgid "Create a new entry"
@@ -1157,22 +1213,22 @@ msgstr "Fjern denne oppføringen"
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "Forrige side"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr ""
+msgstr "Forrige post"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "Neste post"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "Neste side"
 
 #: bin/widget/view/form_gtk/one2many_list.py:245
 msgid "Switch"
@@ -1213,7 +1269,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "Advarsel"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
@@ -1233,7 +1289,7 @@ msgstr "Rapporter"
 
 #: bin/widget/view/form_gtk/many2one.py:388 bin/widget/view/list.py:618
 msgid "You must select a record to use the relation !"
-msgstr ""
+msgstr "Du må velge en rad for å bruke relasjonen !"
 
 #: bin/widget/view/form_gtk/interface.py:48
 msgid "Set as default"
@@ -1245,7 +1301,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "Operation not permited"
-msgstr ""
+msgstr "Operasjon er ikke tillatt"
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
@@ -1258,7 +1314,7 @@ msgstr "Åpne"
 #: bin/widget/view/form_gtk/binary.py:119
 #: bin/widget/view/form_gtk/binary.py:163
 msgid "Unable to read the file data"
-msgstr ""
+msgstr "Kunne ikke lese data fra filen"
 
 #: bin/widget/view/form_gtk/binary.py:129
 #: bin/widget/view/form_gtk/binary.py:155
@@ -1281,12 +1337,12 @@ msgstr "Feil under skriving til fil: %s"
 
 #: bin/widget/view/form_gtk/wid_common.py:59
 msgid "Always applicable !"
-msgstr ""
+msgstr "Alltid gjeldene !"
 
 #: bin/widget/view/form_gtk/calendar.py:100
 #: bin/widget/view/form_gtk/calendar.py:162
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Feil datoformat ! År må være større enn 1899 !"
 
 #: bin/widget/view/form_gtk/calendar.py:252
 msgid "Hour:"
@@ -1298,7 +1354,7 @@ msgstr "Minutt:"
 
 #: bin/widget/view/form_gtk/calendar.py:289
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Ugyldig dato/tid ! År må være større enn 1899 !"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:30
 msgid "Gantt view not yet implemented !"
@@ -1320,97 +1376,99 @@ msgstr ""
 
 #: bin/rpc.py:157
 msgid "Connection refused!"
-msgstr ""
+msgstr "Oppkobling avvist!"
 
 #: bin/rpc.py:187
 msgid ""
 "Unable to reach to OpenERP server !\n"
 "You should check your connection to the network and the OpenERP server."
 msgstr ""
+"Kunne ikke nå OpenERP tjeneren !\n"
+"Du bør sjekke din nettverkstilkobling og OpenERP tjeneren."
 
 #: bin/rpc.py:187
 msgid "Connection Error"
-msgstr ""
+msgstr "Oppkoblingsfeil"
 
 #: bin/openerp.glade:6
 msgid "OpenERP - Login"
-msgstr ""
+msgstr "OpenERP - Login"
 
 #: bin/openerp.glade:116 bin/openerp.glade:6450
 msgid "Database:"
-msgstr ""
+msgstr "Database:"
 
 #: bin/openerp.glade:131
 msgid "User:"
-msgstr ""
+msgstr "Bruker:"
 
 #: bin/openerp.glade:146 bin/openerp.glade:6436 bin/openerp.glade:6747
 msgid "Password:"
-msgstr ""
+msgstr "Passord:"
 
 #: bin/openerp.glade:265
 msgid "_File"
-msgstr ""
+msgstr "_Fil"
 
 #: bin/openerp.glade:272
 msgid "_Connect..."
-msgstr ""
+msgstr "_Koble til..."
 
 #: bin/openerp.glade:288
 msgid "_Disconnect"
-msgstr ""
+msgstr "Koble fra"
 
 #: bin/openerp.glade:308
 msgid "Databases"
-msgstr ""
+msgstr "Databaser"
 
 #: bin/openerp.glade:315
 msgid "_New database"
-msgstr ""
+msgstr "_Ny database"
 
 #: bin/openerp.glade:330
 msgid "_Restore database"
-msgstr ""
+msgstr "_Gjenopprett database"
 
 #: bin/openerp.glade:345
 msgid "_Backup database"
-msgstr ""
+msgstr "_Sikkerhetskopi av database"
 
 #: bin/openerp.glade:360
 msgid "Dro_p database"
-msgstr ""
+msgstr "Slett database"
 
 #: bin/openerp.glade:380
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "Last ned migreringskode"
 
 #: bin/openerp.glade:395
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "Migrere databaser"
 
 #: bin/openerp.glade:415
 msgid "Administrator Password"
-msgstr ""
+msgstr "Administratorpassord"
 
 #: bin/openerp.glade:460
 msgid "_User"
-msgstr ""
+msgstr "_Bruker"
 
 #: bin/openerp.glade:468
 msgid "_Preferences"
-msgstr ""
+msgstr "_Preferanser"
 
 #: bin/openerp.glade:488
 msgid "_Send a request"
-msgstr ""
+msgstr "_Send en forespørsel"
 
 #: bin/openerp.glade:503
 msgid "_Read my requests"
-msgstr ""
+msgstr "_Les mine forespørsler"
 
 #: bin/openerp.glade:523
 msgid "_Waiting Requests"
-msgstr ""
+msgstr "Forespørsler på vent"
 
 #: bin/openerp.glade:536
 msgid "For_m"
@@ -1418,43 +1476,43 @@ msgstr ""
 
 #: bin/openerp.glade:544
 msgid "_New"
-msgstr ""
+msgstr "_Ny"
 
 #: bin/openerp.glade:560
 msgid "_Save"
-msgstr ""
+msgstr "_Lagre"
 
 #: bin/openerp.glade:576
 msgid "Copy this resource"
-msgstr ""
+msgstr "Kopiere ressurs"
 
 #: bin/openerp.glade:577
 msgid "_Duplicate"
-msgstr ""
+msgstr "_Dupliser"
 
 #: bin/openerp.glade:593
 msgid "_Delete"
-msgstr ""
+msgstr "_Slett"
 
 #: bin/openerp.glade:614
 msgid "Find"
-msgstr ""
+msgstr "Finn"
 
 #: bin/openerp.glade:630
 msgid "Ne_xt"
-msgstr ""
+msgstr "Neste"
 
 #: bin/openerp.glade:646
 msgid "Pre_vious"
-msgstr ""
+msgstr "Forrige"
 
 #: bin/openerp.glade:662
 msgid "Switch to list/form"
-msgstr ""
+msgstr "Bytt til liste/skjema"
 
 #: bin/openerp.glade:678
 msgid "_Menu"
-msgstr ""
+msgstr "_Meny"
 
 #: bin/openerp.glade:699
 msgid "_New Home Tab"
@@ -1462,19 +1520,19 @@ msgstr ""
 
 #: bin/openerp.glade:715 bin/openerp.glade:5024
 msgid "Close Tab"
-msgstr ""
+msgstr "Lukk fane"
 
 #: bin/openerp.glade:731
 msgid "Previous Tab"
-msgstr ""
+msgstr "Forrige fane"
 
 #: bin/openerp.glade:740 bin/openerp.glade:5080
 msgid "Next Tab"
-msgstr ""
+msgstr "Neste fane"
 
 #: bin/openerp.glade:754
 msgid "View _logs"
-msgstr ""
+msgstr "Vis _logger"
 
 #: bin/openerp.glade:762
 msgid "_Go to resource ID..."
@@ -1482,11 +1540,11 @@ msgstr ""
 
 #: bin/openerp.glade:776
 msgid "_Open"
-msgstr ""
+msgstr "_Åpne"
 
 #: bin/openerp.glade:791
 msgid "Reloa_d / Undo"
-msgstr ""
+msgstr "Last på nytt / angre"
 
 #: bin/openerp.glade:812
 msgid "Repeat latest _action"
@@ -1494,23 +1552,23 @@ msgstr ""
 
 #: bin/openerp.glade:826
 msgid "_Preview in PDF"
-msgstr ""
+msgstr "_Forhåndsvis i PDF"
 
 #: bin/openerp.glade:842
 msgid "Previe_w in editor"
-msgstr ""
+msgstr "Forhåndsvis i editor"
 
 #: bin/openerp.glade:862
 msgid "Expor_t data..."
-msgstr ""
+msgstr "Ekspor_ter data..."
 
 #: bin/openerp.glade:877
 msgid "I_mport data..."
-msgstr ""
+msgstr "I_mporter data"
 
 #: bin/openerp.glade:889
 msgid "_Options"
-msgstr ""
+msgstr "_Valg"
 
 #: bin/openerp.glade:896
 msgid "_Extension Manager"
@@ -1518,75 +1576,75 @@ msgstr ""
 
 #: bin/openerp.glade:904
 msgid "_Menubar"
-msgstr ""
+msgstr "_Menylinje"
 
 #: bin/openerp.glade:912
 msgid "Text _and Icons"
-msgstr ""
+msgstr "Tekst og ikoner"
 
 #: bin/openerp.glade:920
 msgid "_Icons only"
-msgstr ""
+msgstr "Kun ikoner"
 
 #: bin/openerp.glade:929
 msgid "_Text only"
-msgstr ""
+msgstr "Kun tekst"
 
 #: bin/openerp.glade:942
 msgid "_Forms"
-msgstr ""
+msgstr "_Skjemaer"
 
 #: bin/openerp.glade:950
 msgid "Right Toolbar"
-msgstr ""
+msgstr "Høyre verktøylinje"
 
 #: bin/openerp.glade:958
 msgid "Tabs default position"
-msgstr ""
+msgstr "Standard posisjon for faner"
 
 #: bin/openerp.glade:966
 msgid "Top"
-msgstr ""
+msgstr "Topp"
 
 #: bin/openerp.glade:974
 msgid "Left"
-msgstr ""
+msgstr "Venstre"
 
 #: bin/openerp.glade:983
 msgid "Right"
-msgstr ""
+msgstr "Høyre"
 
 #: bin/openerp.glade:992
 msgid "Bottom"
-msgstr ""
+msgstr "Bunn"
 
 #: bin/openerp.glade:1005
 msgid "Tabs default orientation"
-msgstr ""
+msgstr "Standardorientering for faner"
 
 #: bin/openerp.glade:1013
 msgid "Horizontal"
-msgstr ""
+msgstr "Horisontal"
 
 #: bin/openerp.glade:1021
 msgid "Vertical"
-msgstr ""
+msgstr "Vertikal"
 
 #: bin/openerp.glade:1038
 msgid "_Print"
-msgstr ""
+msgstr "_Skriv ut"
 
 #: bin/openerp.glade:1045
 msgid "Previe_w before print"
-msgstr ""
+msgstr "Forhåndsvis før utskrift"
 
 #: bin/openerp.glade:1069
 msgid "_Save options"
-msgstr ""
+msgstr "_Lagre valg"
 
 #: bin/openerp.glade:1089
 msgid "_Plugins"
-msgstr ""
+msgstr "_Plugins"
 
 #: bin/openerp.glade:1097
 msgid "_Execute a plugin"
@@ -1594,11 +1652,11 @@ msgstr ""
 
 #: bin/openerp.glade:1117
 msgid "_Shortcuts"
-msgstr ""
+msgstr "_Snarveier"
 
 #: bin/openerp.glade:1125
 msgid "_Help"
-msgstr ""
+msgstr "_Hjelp"
 
 #: bin/openerp.glade:1132
 msgid "Enable Debug Mode Tooltips"
@@ -1606,39 +1664,39 @@ msgstr ""
 
 #: bin/openerp.glade:1140 bin/openerp.glade:4395
 msgid "Support Request"
-msgstr ""
+msgstr "Support forespørsel"
 
 #: bin/openerp.glade:1160
 msgid "User _Manual"
-msgstr ""
+msgstr "_Brukermanual"
 
 #: bin/openerp.glade:1175
 msgid "_Contextual Help"
-msgstr ""
+msgstr "_Kontekstavhengig hjelp"
 
 #: bin/openerp.glade:1191
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Hurtigtaster"
 
 #: bin/openerp.glade:1204
 msgid "_License"
-msgstr ""
+msgstr "_Lisens"
 
 #: bin/openerp.glade:1219
 msgid "_About..."
-msgstr ""
+msgstr "_Om..."
 
 #: bin/openerp.glade:1261
 msgid "Edit / Save this resource"
-msgstr ""
+msgstr "Redigere / Lagre denne ressursen"
 
 #: bin/openerp.glade:1277
 msgid "Delete this resource"
-msgstr ""
+msgstr "Slett denne ressursen"
 
 #: bin/openerp.glade:1290
 msgid "Go to previous matched search"
-msgstr ""
+msgstr "Gå til forrige treff"
 
 #: bin/openerp.glade:1291
 msgid "Previous"
@@ -1646,7 +1704,7 @@ msgstr "Tidligere"
 
 #: bin/openerp.glade:1302
 msgid "Go to next matched resource"
-msgstr ""
+msgstr "Gå til neste treff"
 
 #: bin/openerp.glade:1303
 msgid "Next"
@@ -1654,15 +1712,15 @@ msgstr "Neste"
 
 #: bin/openerp.glade:1316
 msgid "List"
-msgstr ""
+msgstr "Liste"
 
 #: bin/openerp.glade:1328
 msgid "Form"
-msgstr ""
+msgstr "Skjema"
 
 #: bin/openerp.glade:1341
 msgid "Calendar"
-msgstr ""
+msgstr "Kalender"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
@@ -1670,55 +1728,55 @@ msgstr ""
 
 #: bin/openerp.glade:1361
 msgid "Graph"
-msgstr ""
+msgstr "Diagram"
 
 #: bin/openerp.glade:1374
 msgid "Gantt"
-msgstr ""
+msgstr "Gantt"
 
 #: bin/openerp.glade:1392
 msgid "Print documents"
-msgstr ""
+msgstr "Skriv ut dokumenter"
 
 #: bin/openerp.glade:1403
 msgid "Launch actions about this resource"
-msgstr ""
+msgstr "Utfør aksjoner knyttet til denne ressursen"
 
 #: bin/openerp.glade:1416
 msgid "Add an attachment to this resource"
-msgstr ""
+msgstr "Legg til et vedlegg til denne ressursen"
 
 #: bin/openerp.glade:1417
 msgid "Attachment"
-msgstr ""
+msgstr "Vedlegg"
 
 #: bin/openerp.glade:1432 bin/openerp.glade:1433
 msgid "Menu"
-msgstr ""
+msgstr "Meny"
 
 #: bin/openerp.glade:1450 bin/openerp.glade:1451
 msgid "Reload"
-msgstr ""
+msgstr "Last på nytt"
 
 #: bin/openerp.glade:1468
 msgid "Close this window"
-msgstr ""
+msgstr "Lukk dette vinduet"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
-msgstr ""
+msgstr "Firma:"
 
 #: bin/openerp.glade:1535
 msgid "Requests:"
-msgstr ""
+msgstr "Forespørsler:"
 
 #: bin/openerp.glade:1558
 msgid "Read my Requests"
-msgstr ""
+msgstr "Les mine forespørsler"
 
 #: bin/openerp.glade:1579
 msgid "Send a new request"
-msgstr ""
+msgstr "Send en ny forespørsel"
 
 #: bin/openerp.glade:1619
 msgid "OpenERP - Tree Resources"
@@ -1726,7 +1784,7 @@ msgstr ""
 
 #: bin/openerp.glade:1672
 msgid "Shortcuts"
-msgstr ""
+msgstr "Snarveier"
 
 #: bin/openerp.glade:1781
 msgid "OpenERP - Forms"
@@ -1734,17 +1792,19 @@ msgstr ""
 
 #: bin/openerp.glade:1805
 msgid "State:"
-msgstr ""
+msgstr "Status:"
 
 #: bin/openerp.glade:1837
 msgid "OpenERP - About"
-msgstr ""
+msgstr "OpenERP - Om"
 
 #: bin/openerp.glade:1851
 msgid ""
 "<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
+"<b>Om OpenERP</b>\n"
+"<i>Det mest avanserte Open Source ERP &amp; CRM systemet !</i>"
 
 #: bin/openerp.glade:1890
 msgid ""
@@ -1764,7 +1824,7 @@ msgstr ""
 
 #: bin/openerp.glade:1918
 msgid "_OpenERP"
-msgstr ""
+msgstr "_OpenERP"
 
 #: bin/openerp.glade:1946
 msgid ""
@@ -1784,7 +1844,7 @@ msgstr ""
 
 #: bin/openerp.glade:1977
 msgid "_Contact"
-msgstr ""
+msgstr "_Kontakt"
 
 #: bin/openerp.glade:2029
 msgid "Open ERP - Forms widget"
@@ -1792,7 +1852,7 @@ msgstr ""
 
 #: bin/openerp.glade:2208 bin/openerp.glade:4741
 msgid "OpenERP - Confirmation"
-msgstr ""
+msgstr "OpenERP - Bekreftelse"
 
 #: bin/openerp.glade:2287
 msgid "OpenERP - Selection"
@@ -1800,7 +1860,7 @@ msgstr ""
 
 #: bin/openerp.glade:2301
 msgid "Your selection:"
-msgstr ""
+msgstr "Ditt valg:"
 
 #: bin/openerp.glade:2381
 msgid "OpenERP - Dialog"
@@ -1812,11 +1872,11 @@ msgstr ""
 
 #: bin/openerp.glade:2436
 msgid "_only for you"
-msgstr ""
+msgstr "_bare for deg"
 
 #: bin/openerp.glade:2450
 msgid "for _all users"
-msgstr ""
+msgstr "for _alle brukere"
 
 #: bin/openerp.glade:2470
 msgid "<b>Value applicable for:</b>"
@@ -1828,31 +1888,31 @@ msgstr ""
 
 #: bin/openerp.glade:2524
 msgid "Field _Name:"
-msgstr ""
+msgstr "Felt_navn"
 
 #: bin/openerp.glade:2538
 msgid "_Domain:"
-msgstr ""
+msgstr "_Domene:"
 
 #: bin/openerp.glade:2597
 msgid "Default _value:"
-msgstr ""
+msgstr "Standard _verdi:"
 
 #: bin/openerp.glade:2652
 msgid "OpenERP - Export to CSV"
-msgstr ""
+msgstr "OpenERP - Eksporter til CSV"
 
 #: bin/openerp.glade:2700
 msgid "Save List"
-msgstr ""
+msgstr "Lagre liste"
 
 #: bin/openerp.glade:2748
 msgid "Remove List"
-msgstr ""
+msgstr "Fjerne liste"
 
 #: bin/openerp.glade:2803
 msgid "<b>Exports List</b>"
-msgstr ""
+msgstr "<b>Eksporter liste</b>"
 
 #: bin/openerp.glade:2820
 msgid "<b>Predefined Exports</b>"
@@ -1868,73 +1928,75 @@ msgstr ""
 
 #: bin/openerp.glade:2909
 msgid "Available Fields"
-msgstr ""
+msgstr "Tilgjengelige felter"
 
 #: bin/openerp.glade:2952 bin/openerp.glade:5647
 msgid "_Add"
-msgstr ""
+msgstr "_Legg til"
 
 #: bin/openerp.glade:2999 bin/openerp.glade:5694
 msgid "_Remove"
-msgstr ""
+msgstr "_Fjern"
 
 #: bin/openerp.glade:3047
 msgid "_Nothing"
-msgstr ""
+msgstr "I_ngenting"
 
 #: bin/openerp.glade:3102
 msgid "Fields to Export"
-msgstr ""
+msgstr "Felter å eksportere"
 
 #: bin/openerp.glade:3132
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
 msgstr ""
+"Åpne i Excel\n"
+"Lagre som CSV"
 
 #: bin/openerp.glade:3151
 msgid "Add _field names"
-msgstr ""
+msgstr "Legg til _feltnavn"
 
 #: bin/openerp.glade:3168
 msgid "<b>Opti_ons</b>"
-msgstr ""
+msgstr "<b>Valg</b>"
 
 #: bin/openerp.glade:3227
 msgid "OpenERP - Search"
-msgstr ""
+msgstr "OpenERP - Søk"
 
 #: bin/openerp.glade:3307
 msgid "OpenERP - Preferences"
-msgstr ""
+msgstr "OpenERP - Preferanser"
 
 #: bin/openerp.glade:3321
 msgid "<b>User preferences</b>"
-msgstr ""
+msgstr "<b>Bruker preferanser</b>"
 
 #: bin/openerp.glade:3387
 msgid "Tip of the Day"
-msgstr ""
+msgstr "Dagens tips"
 
 #: bin/openerp.glade:3434
 msgid "_Display a new tip next time?"
-msgstr ""
+msgstr "_Vis et nytt tips neste gang?"
 
 #: bin/openerp.glade:3487
 msgid "Pre_vious Tip"
-msgstr ""
+msgstr "Forrige tips"
 
 #: bin/openerp.glade:3533
 msgid "Ne_xt Tip"
-msgstr ""
+msgstr "Neste tips"
 
 #: bin/openerp.glade:3579
 msgid "OpenERP - License"
-msgstr ""
+msgstr "OpenERP - Lisens"
 
 #: bin/openerp.glade:3594
 msgid "OpenERP license"
-msgstr ""
+msgstr "OpenERP lisens"
 
 #: bin/openerp.glade:4292
 msgid "Go to resource ID"
@@ -1942,7 +2004,7 @@ msgstr ""
 
 #: bin/openerp.glade:4342
 msgid "Search ID:"
-msgstr ""
+msgstr "Søke ID:"
 
 #: bin/openerp.glade:4421
 msgid ""
@@ -1955,11 +2017,11 @@ msgstr ""
 
 #: bin/openerp.glade:4480
 msgid "Phone number:"
-msgstr ""
+msgstr "Telefonnummer:"
 
 #: bin/openerp.glade:4493
 msgid "Emergency:"
-msgstr ""
+msgstr "Krisesituasjon:"
 
 #: bin/openerp.glade:4507
 msgid ""
@@ -1968,150 +2030,154 @@ msgid ""
 "Urgent\n"
 "Very Urgent"
 msgstr ""
+"Haster ikke\n"
+"Medium\n"
+"Haster\n"
+"Haster veldig"
 
 #: bin/openerp.glade:4540
 msgid "<b>Support contract id:</b>"
-msgstr ""
+msgstr "<b>Vedlikeholdskontrakt ID:</b>"
 
 #: bin/openerp.glade:4597
 msgid "Other comments:"
-msgstr ""
+msgstr "Andre kommentarer:"
 
 #: bin/openerp.glade:4611
 msgid "Explain your problem:"
-msgstr ""
+msgstr "Forklar problemet:"
 
 #: bin/openerp.glade:4650
 msgid "<b>Your email:</b>"
-msgstr ""
+msgstr "<b>Din e-post:</b>"
 
 #: bin/openerp.glade:4664
 msgid "<b>Your Company:</b>"
-msgstr ""
+msgstr "<b>Ditt firma:</b>"
 
 #: bin/openerp.glade:4678
 msgid "<b>Your name:</b>"
-msgstr ""
+msgstr "<b>Ditt navn:</b>"
 
 #: bin/openerp.glade:4769 bin/openerp.glade:6155
 msgid "Hello World!"
-msgstr ""
+msgstr "Hello World!"
 
 #: bin/openerp.glade:4831
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Hurtigtaster"
 
 #: bin/openerp.glade:4853
 msgid "<b>Shortcuts for OpenERP</b>"
-msgstr ""
+msgstr "<b>Snarveier til OpenERP</b>"
 
 #: bin/openerp.glade:4867
 msgid "Close window without saving"
-msgstr ""
+msgstr "Lukk vindu unten å lagre"
 
 #: bin/openerp.glade:4882
 msgid "<Ctrl> + <Esc>"
-msgstr ""
+msgstr "<Ctrl> + <Esc>"
 
 #: bin/openerp.glade:4896
 msgid "<i>When editing a resource in a popup window</i>"
-msgstr ""
+msgstr "<i>Ved redigering av en ressurs i et popup-vindu</i>"
 
 #: bin/openerp.glade:4912
 msgid "Save and Close window"
-msgstr ""
+msgstr "Lagre og lukk vindu"
 
 #: bin/openerp.glade:4927
 msgid "<Ctrl> + <Enter>"
-msgstr ""
+msgstr "<Ctrl> + <Enter>"
 
 #: bin/openerp.glade:4940
 msgid "Switch view mode"
-msgstr ""
+msgstr "Bytt visningsmodus"
 
 #: bin/openerp.glade:4955
 msgid "<Ctrl> + L"
-msgstr ""
+msgstr "<Ctrl> + L"
 
 #: bin/openerp.glade:4968
 msgid "Next record"
-msgstr ""
+msgstr "Neste post"
 
 #: bin/openerp.glade:4983
 msgid "Previous record"
-msgstr ""
+msgstr "Forrige post"
 
 #: bin/openerp.glade:4998
 msgid "<PgDn>"
-msgstr ""
+msgstr "<PgDn>"
 
 #: bin/openerp.glade:5011
 msgid "<PgUp>"
-msgstr ""
+msgstr "<PgUp>"
 
 #: bin/openerp.glade:5039
 msgid "Save"
-msgstr ""
+msgstr "Lagre"
 
 #: bin/openerp.glade:5054
 msgid "<Ctrl> + W"
-msgstr ""
+msgstr "<Ctrl> + W"
 
 #: bin/openerp.glade:5067
 msgid "<Ctrl> + S"
-msgstr ""
+msgstr "<Ctrl> + S"
 
 #: bin/openerp.glade:5095
 msgid "<Ctrl> + <PgDn>"
-msgstr ""
+msgstr "<Ctrl> + <PgDn>"
 
 #: bin/openerp.glade:5108
 msgid "Previous tab"
-msgstr ""
+msgstr "Forrige fane"
 
 #: bin/openerp.glade:5123
 msgid "<Ctrl> + <PgUp>"
-msgstr ""
+msgstr "<Ctrl> + <PgUp>"
 
 #: bin/openerp.glade:5136
 msgid "New"
-msgstr ""
+msgstr "Ny"
 
 #: bin/openerp.glade:5151
 msgid "<Ctrl> + N"
-msgstr ""
+msgstr "<Ctrl> + N"
 
 #: bin/openerp.glade:5164
 msgid "Delete"
-msgstr ""
+msgstr "Slett"
 
 #: bin/openerp.glade:5179
 msgid "<Ctrl> + D"
-msgstr ""
+msgstr "<Ctrl> + D"
 
 #: bin/openerp.glade:5192
 msgid "Find / Search"
-msgstr ""
+msgstr "Søk"
 
 #: bin/openerp.glade:5207
 msgid "<Ctrl> + F"
-msgstr ""
+msgstr "<Ctrl> + F"
 
 #: bin/openerp.glade:5220
 msgid "Connect"
-msgstr ""
+msgstr "Koble til"
 
 #: bin/openerp.glade:5235
 msgid "<Ctrl> + O"
-msgstr ""
+msgstr "<Ctrl> + O"
 
 #: bin/openerp.glade:5249
 msgid "Main Shortcuts"
-msgstr ""
+msgstr "Hovedsnarveier"
 
 #: bin/openerp.glade:5266
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
 #: bin/openerp.glade:5279
 msgid "<b>Shortcuts in relation fields</b>"
@@ -2119,67 +2185,67 @@ msgstr ""
 
 #: bin/openerp.glade:5294
 msgid "<b>Shortcuts in text entries</b>"
-msgstr ""
+msgstr "<b>Snarveier i tekstoppføringer</b>"
 
 #: bin/openerp.glade:5307
 msgid "Open current field"
-msgstr ""
+msgstr "Åpne gjeldene felt"
 
 #: bin/openerp.glade:5322
 msgid "Add a new line/field"
-msgstr ""
+msgstr "Legg til en ny linje/felt"
 
 #: bin/openerp.glade:5337
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: bin/openerp.glade:5350
 msgid "Auto-Complete text field"
-msgstr ""
+msgstr "Auto-fullfør tekstfelt"
 
 #: bin/openerp.glade:5365
 msgid "<Enter>"
-msgstr ""
+msgstr "<Enter>"
 
 #: bin/openerp.glade:5378
 msgid "Previous editable widget"
-msgstr ""
+msgstr "Forrige editerbare widget"
 
 #: bin/openerp.glade:5393
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.glade:5406
 msgid "Next editable widget"
-msgstr ""
+msgstr "Neste editerbare widget"
 
 #: bin/openerp.glade:5421
 msgid "<Tab>"
-msgstr ""
+msgstr "<Tab>"
 
 #: bin/openerp.glade:5434
 msgid "Paste selected text"
-msgstr ""
+msgstr "Lim inn valgt tekst"
 
 #: bin/openerp.glade:5449
 msgid "Copy selected text"
-msgstr ""
+msgstr "Kopier valgt tekst"
 
 #: bin/openerp.glade:5464
 msgid "Cut selected text"
-msgstr ""
+msgstr "Klipp ut valgt tekst"
 
 #: bin/openerp.glade:5479
 msgid "<Ctrl> + V"
-msgstr ""
+msgstr "<Ctrl> + V"
 
 #: bin/openerp.glade:5492
 msgid "<Ctrl> + C"
-msgstr ""
+msgstr "<Ctrl> + C"
 
 #: bin/openerp.glade:5505
 msgid "<Ctrl> + X"
-msgstr ""
+msgstr "<Ctrl> + X"
 
 #: bin/openerp.glade:5522
 msgid "Edition Widgets"
@@ -2187,11 +2253,11 @@ msgstr ""
 
 #: bin/openerp.glade:5560
 msgid "Import from CSV"
-msgstr ""
+msgstr "Importere fra CSV"
 
 #: bin/openerp.glade:5605
 msgid "<b>All fields</b>"
-msgstr ""
+msgstr "<b>Alle felter</b>"
 
 #: bin/openerp.glade:5742
 msgid "N_othing"
@@ -2203,89 +2269,91 @@ msgstr ""
 
 #: bin/openerp.glade:5856
 msgid "<b>Fields to import</b>"
-msgstr ""
+msgstr "<b>Felter å importere</b>"
 
 #: bin/openerp.glade:5891
 msgid "File to Import:"
-msgstr ""
+msgstr "Fil å importere:"
 
 #: bin/openerp.glade:5965
 msgid "Lines to Skip:"
-msgstr ""
+msgstr "Linjer å hoppe over:"
 
 #: bin/openerp.glade:5994
 msgid "Text Delimiter:"
-msgstr ""
+msgstr "Tekstskilletegn"
 
 #: bin/openerp.glade:6022
 msgid "Encoding:"
-msgstr ""
+msgstr "Koding:"
 
 #: bin/openerp.glade:6035
 msgid "Field Separater:"
-msgstr ""
+msgstr "Feltseparator:"
 
 #: bin/openerp.glade:6047
 msgid "CSV Parameters"
-msgstr ""
+msgstr "CSV parameter"
 
 #: bin/openerp.glade:6222
 msgid "Server"
-msgstr ""
+msgstr "Tjener"
 
 #: bin/openerp.glade:6232
 msgid "<b>Connect to a OpenERP server</b>"
-msgstr ""
+msgstr "<b>Koble til en OpenERP tjener</b>"
 
 #: bin/openerp.glade:6291
 msgid "Protocol connection:"
-msgstr ""
+msgstr "Protokoll for oppkobling:"
 
 #: bin/openerp.glade:6337
 msgid "Port:"
-msgstr ""
+msgstr "Port:"
 
 #: bin/openerp.glade:6389
 msgid "Choose a database..."
-msgstr ""
+msgstr "Velg en database..."
 
 #: bin/openerp.glade:6404
 msgid "<b>Backup a database</b>"
-msgstr ""
+msgstr "<b>Backup en database</b>"
 
 #: bin/openerp.glade:6645
 msgid "Restore a database"
-msgstr ""
+msgstr "Gjenopprett en database"
 
 #: bin/openerp.glade:6658
 msgid "<b>Restore a database</b>"
-msgstr ""
+msgstr "<b>Gjenopprett en database</b>"
 
 #: bin/openerp.glade:6702
 msgid "(must not contain any special char)"
-msgstr ""
+msgstr "(kan ikke inneholde spesialtegn)"
 
 #: bin/openerp.glade:6732
 msgid "New database name:"
-msgstr ""
+msgstr "Navn på ny database:"
 
 #: bin/openerp.glade:6832 bin/openerp.glade:6978 bin/openerp.glade:7493
 msgid "http://localhost:8069"
-msgstr ""
+msgstr "http://localhost:8069"
 
 #: bin/openerp.glade:6906
 msgid "Create a new database"
-msgstr ""
+msgstr "Opprett en ny database"
 
 #: bin/openerp.glade:6919
 msgid "<b>Create a new database</b>"
-msgstr ""
+msgstr "<b>Opprett en ny database</b>"
 
 #: bin/openerp.glade:6990
 msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
+"Dette er URL'en til OpenERP tjeneren. Bruk 'localhost' dersom tjeneren er "
+"installert på denne datamaskinen. Trykk på 'Endre' for å endre adressen."
 
 #: bin/openerp.glade:6994
 msgid ""
@@ -2298,6 +2366,9 @@ msgid ""
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
+"Dette er passordet til brukeren som har tilgang til å administrere databaer. "
+"Dette er ikke en OpenERP-bruker, men en super-administrator. Hvis du ikke "
+"har endret det er passordet 'admin' etter installasjon."
 
 #: bin/openerp.glade:7029
 msgid ""
@@ -2307,17 +2378,19 @@ msgstr ""
 
 #: bin/openerp.glade:7048
 msgid "admin"
-msgstr ""
+msgstr "admin"
 
 #: bin/openerp.glade:7062
 msgid "(<i>admin</i>, by default)"
-msgstr ""
+msgstr "(<i>admin</i>, som standard)"
 
 #: bin/openerp.glade:7127
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
+"Angi navn på databasen som skal opprettes. Navnet må ikke inneholde "
+"spesialtegn."
 
 #: bin/openerp.glade:7129
 msgid ""
@@ -2330,6 +2403,8 @@ msgid ""
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
+"Velg standardspråk for denne databasen. Du vil kunne legge til nye språk "
+"etter installasjon gjennom administrasjonsmenyen."
 
 #: bin/openerp.glade:7156
 msgid ""
@@ -2341,6 +2416,7 @@ msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
+"Dette er passordet for 'admin' brukeren som opprettes i din nye database."
 
 #: bin/openerp.glade:7171
 msgid ""
@@ -2353,6 +2429,8 @@ msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
+"Dette er passordet for  'admin' brukeren som opprettes i din nye database. "
+"Passordet må være det samme som i feltet over."
 
 #: bin/openerp.glade:7186
 msgid ""
@@ -2365,6 +2443,9 @@ msgid ""
 "database. These data will help you to understand OpenERP, with predefined "
 "products, partners, etc."
 msgstr ""
+"Kryss av her hvis du vil laste demonstrasjonsdata inn i din nye database. "
+"Dette datasettet vil hjelpe deg å forstå OpenERP, med forhåndsdefinerte "
+"produkter, partnere etc."
 
 #: bin/openerp.glade:7282
 msgid ""
@@ -2374,31 +2455,31 @@ msgstr ""
 
 #: bin/openerp.glade:7349
 msgid "Change password"
-msgstr ""
+msgstr "Bytt passord"
 
 #: bin/openerp.glade:7366
 msgid "<b>Change your super admin password</b>"
-msgstr ""
+msgstr "<b>Bytt sitt 'super admin'-passord</b>"
 
 #: bin/openerp.glade:7519
 msgid "Old password:"
-msgstr ""
+msgstr "Gammelt passord"
 
 #: bin/openerp.glade:7532
 msgid "New password:"
-msgstr ""
+msgstr "Nytt passord"
 
 #: bin/openerp.glade:7545
 msgid "New password confirmation:"
-msgstr ""
+msgstr "Gjenta nytt passord"
 
 #: bin/openerp.glade:7604
 msgid "OpenERP Message"
-msgstr ""
+msgstr "OpenERP Melding"
 
 #: bin/openerp.glade:7788
 msgid "Concurrency exception"
-msgstr ""
+msgstr "Samtidighetsunntak"
 
 #: bin/openerp.glade:7813
 msgid ""
@@ -2411,34 +2492,42 @@ msgid ""
 "   - \"Compare\" to see the modified version.\n"
 "   - \"Write anyway\" to save your current version.\n"
 msgstr ""
+"<b>\n"
+"Advarsel om samtidig skriving:\n"
+"</b>\n"
+"Dokumentet ble endret samtidig som du redigerte det.\n"
+"  Velg:\n"
+"   - \"Avbryt\" for å avbryte lagring.\n"
+"   - \"Sammenlikn\" for å se endret versjon.\n"
+"   - \"Skriv likevel\" for å lagre din nåvæernde versjon.\n"
 
 #: bin/openerp.glade:7876
 msgid "Compare"
-msgstr ""
+msgstr "Sammenlikn"
 
 #: bin/openerp.glade:7922
 msgid "Write anyway"
-msgstr ""
+msgstr "Skriv likevel"
 
 #: bin/openerp.glade:7952 bin/openerp.glade:7962
 msgid "window1"
-msgstr ""
+msgstr "window1"
 
 #: bin/openerp.glade:8034
 msgid "Today"
-msgstr ""
+msgstr "I dag"
 
 #: bin/openerp.glade:8080
 msgid "September 2008"
-msgstr ""
+msgstr "september 2008"
 
 #: bin/openerp.glade:8094
 msgid "Day"
-msgstr ""
+msgstr "Dag"
 
 #: bin/openerp.glade:8118
 msgid "Month"
-msgstr ""
+msgstr "Måned"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
@@ -2460,7 +2549,7 @@ msgstr ""
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "Fjern filter"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
@@ -2468,15 +2557,15 @@ msgstr ""
 
 #: bin/openerp.glade:8395
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "Skriv inn filternavn:"
 
 #: bin/win_error.glade:40
 msgid "label"
-msgstr ""
+msgstr "label"
 
 #: bin/win_error.glade:100
 msgid "Click here for details about the publisher warranty proposition"
-msgstr ""
+msgstr "Klikk her for detaljer om vedlikeholdsforslaget"
 
 #: bin/win_error.glade:120
 msgid "<i>_Publisher Warranty</i>"
@@ -2490,18 +2579,23 @@ msgid ""
 "you shortly.\n"
 "</i>"
 msgstr ""
+"<b>Vedlikeholskontrakt.</b>\n"
+"<i>\n"
+"Din forespørsel vil sendes til OpenERP og vedlikeholdsteamet vil svare deg "
+"så raskt som mulig.\n"
+"</i>"
 
 #: bin/win_error.glade:186
 msgid "Explain what you did:"
-msgstr ""
+msgstr "Forklar hva du gjorde:"
 
 #: bin/win_error.glade:200
 msgid "Others Comments:"
-msgstr ""
+msgstr "Andre kommentarer:"
 
 #: bin/win_error.glade:285
 msgid "Send to Publisher Warranty Team"
-msgstr ""
+msgstr "Send til vedlikeholdsteamet"
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
@@ -2509,12 +2603,12 @@ msgstr ""
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"
-msgstr ""
+msgstr "<i>_Forespørsel om kundestøtte</i>"
 
 #: bin/win_error.glade:387
 msgid "Details"
-msgstr ""
+msgstr "Detaljer"
 
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
-msgstr ""
+msgstr "<i>_Detaljer</i>"
