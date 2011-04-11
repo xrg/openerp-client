@@ -131,7 +131,7 @@ class custom_filter(wid_int.wid_int):
                     operator = '='
 
             if operator in ['in','not in']:
-                right_text = right_text.split(',')
+                right_text = map(str.strip, right_text.split(','))
 
             # Cannot use the active_text as it will be translated!
             # So as a workaround we use the index: 0 == AND, 1 == OR
