@@ -53,7 +53,7 @@ def import_csv(csv_data, f, model, fields, context=None, parent=None):
     try:
         res = rpc.session.rpc_exec_auth('/object', 'execute', model, 'import_data', f, datas, 'init', '', False, context)
     except Exception, e:
-        common.warning(str(e), _('XML-RPC error !'), parent=parent)
+        # common.warning(str(e), _('XML-RPC error !'), parent=parent)
         return False
     result = res[0]
     if result>=0:
@@ -254,9 +254,9 @@ class win_import(object):
                             for key, value in self.fields_invert.items():
                                 if key.encode('utf8') == f:
                                     inverted.append(value)
-                        return import_csv(csv, inverted, self.model, self.fields_invert, context=self.context, parent=self.win)
+                        return import_csv(csv, inverted, self.model, self.fields_invert, context=self.context, parent=self.parent)
                     else:
-                        return import_csv(csv, fields, self.model, self.fields, context=self.context, parent=self.win)
+                        return import_csv(csv, fields, self.model, self.fields, context=self.context, parent=self.parent)
                 return False
             else:
                 self.parent.present()
