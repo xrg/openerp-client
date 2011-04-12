@@ -120,7 +120,6 @@ class pager(object):
             ids = self.object.model.pager_cache[self.object.name][offset:offset + limit]
 
         self.object.model_field.limit = limit or len(ids)
-
         if self.type == 'one2many':
             self.object.model_field.set(self.object.model, ids)
             self.object.display(self.object.model, self.object.model_field)
@@ -128,8 +127,8 @@ class pager(object):
             self.screen.models.clear()
             self.screen.load(ids)
             self.screen.display()
+            self.set_sensitivity()
         self.screen.current_view.set_cursor()
-        self.set_sensitivity()
 
     def next_record(self):
         self.screen.display_next()
@@ -155,6 +154,6 @@ class pager(object):
         self.screen.offset = 0
         self.screen.limit = self.get_active_text()
         self.set_sensitivity()
-        
 
-        
+
+

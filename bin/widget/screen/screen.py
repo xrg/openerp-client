@@ -259,6 +259,7 @@ class Screen(signal_event.signal_event):
                self.context.get('group_by_no_leaf')) \
                and not self.current_view.view_type == 'graph':
             self.current_view.reload = True
+            self.search_count = rpc.session.rpc_exec_auth_try('/object', 'execute', self.name, 'search_count', v, self.context)
             self.display()
             return True
         ids = rpc.session.rpc_exec_auth('/object', 'execute', self.name, 'search', v, offset, limit, self.sort, self.context)
