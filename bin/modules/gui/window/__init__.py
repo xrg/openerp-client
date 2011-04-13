@@ -40,7 +40,6 @@ class window(service.Service):
         if context is None:
             context = {}
         context.update(rpc.session.context)
-
         if view_type=='form':
             mode = (mode or 'form,tree').split(',')
             win = form.form(model, res_id, domain, view_type=mode,

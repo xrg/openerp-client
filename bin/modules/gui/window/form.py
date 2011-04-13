@@ -68,6 +68,7 @@ class form(object):
         self.fields = fields
         self.domain = domain
         self.context = context
+        self.page_label = None
         self.screen = Screen(self.model, view_type=view_type,
                 context=self.context, view_ids=view_ids, domain=domain,help=help,
                 hastoolbar=options.options['form.toolbar'], hassubmenu=options.options['form.submenu'],
@@ -137,7 +138,22 @@ class form(object):
 
         if auto_refresh and int(auto_refresh):
             gobject.timeout_add(int(auto_refresh) * 1000, self.sig_reload)
-
+    
+    def set_tooltips(fn):
+        def _decorate(self, *args, **kws):
+            result = fn(self, *args, **kws)
+            if self.screen.current_view.view_type == 'form':
+                tips= unicode(self.screen.current_model and self.screen.current_model.value.get('name') or self.name)
+                tooltips = tips == self.name and self.name or  self.name + ': ' + tips[:64]
+                lable = tips == self.name and self.name or  self.name + ': ' + tips[:6]
+                self.page_label.set_text(lable)
+                self.page_label.set_tooltip_text(tooltips)
+            else:
+                self.page_label.set_text(self.name)
+                self.page_label.set_tooltip_text(self.name)
+            return result
+        return _decorate
+    
     def sig_switch_diagram(self, widget=None):
         return self.sig_switch(widget, 'diagram')
 
@@ -230,7 +246,7 @@ class form(object):
         else:
             self.message_state(_('No record selected ! You can only attach to existing record.'), color='red')
         return True
-
+    
     def sig_switch(self, widget=None, mode=None):
         if not self.modified_save():
             return
@@ -263,7 +279,8 @@ class form(object):
                 message+=val+': '+str(line[key] or '/')+'\n'
         common.message(message)
         return True
-
+    
+    @set_tooltips
     def sig_remove(self, widget=None):
         if not self.id_get():
             msg = _('Record is not saved ! \n Do you want to clear current record ?')
@@ -287,7 +304,7 @@ class form(object):
         screen_fields = copy.deepcopy(self.screen.fields)
         win = win_import.win_import(self.model, screen_fields, fields, parent=self.window,local_context= self.screen.context)
         res = win.go()
-
+        
     def sig_save_as(self, widget=None):
         fields = []
         while(self.screen.view_to_load):
@@ -295,7 +312,7 @@ class form(object):
         screen_fields = copy.deepcopy(self.screen.fields)
         win = win_export.win_export(self.model, self.screen.ids_get(), screen_fields, fields, parent=self.window, context=self.context)
         res = win.go()
-
+    
     def sig_new(self, widget=None, autosave=True):
         if autosave:
             if not self.modified_save():
@@ -304,6 +321,9 @@ class form(object):
             return
         self.screen.new()
         self.message_state('')
+        self.page_label and self.page_label.set_text(self.name)
+        self.page_label and self.page_label.set_tooltip_text(self.name)
+
 
     def sig_copy(self, *args):
         if not self.modified_save():
@@ -320,7 +340,8 @@ class form(object):
 
     def _form_save(self, auto_continue=True):
         pass
-
+    
+    @set_tooltips
     def sig_save(self, widget=None, sig_new=True, auto_continue=True):
         res = self.screen.save_current()
         warning = False
@@ -346,12 +367,14 @@ class form(object):
             common.warning(warning,_('Warning !'), parent=self.screen.current_view.window)
         return bool(id)
 
+    @set_tooltips
     def sig_previous(self, widget=None):
         if not self.modified_save():
             return
         self.screen.display_prev()
         self.message_state('')
-
+        
+    @set_tooltips
     def sig_next(self, widget=None):
         if not self.modified_save():
             return

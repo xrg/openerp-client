@@ -479,6 +479,21 @@ class Screen(signal_event.signal_event):
         del self.win_search
         del self.win_search_callback
         del self.window
+        
+    def set_tooltips(self):
+        terp_main = service.LocalService('gui.main')
+        page_id= terp_main.notebook.get_current_page()
+        form_obj = terp_main.pages[page_id]
+        action_name = form_obj.name or ''
+        if self.current_view.view_type == 'form':
+            tips = unicode(self.current_model and self.current_model.value.get('name') or action_name)
+            tooltips = tips == action_name and action_name or  action_name + ': ' + tips[:64] 
+            label = tips == action_name and action_name or  action_name + ': ' + tips[:6] 
+        else:
+            tooltips = action_name
+            label = action_name
+        form_obj.page_label.set_text(label)
+        form_obj.page_label.set_tooltip_text(tooltips)
 
     # mode: False = next view, value = open this view
     def switch_view(self, screen=None, mode=False):
@@ -527,6 +542,8 @@ class Screen(signal_event.signal_event):
         self.current_view.set_cursor()
 
         main = service.LocalService('gui.main')
+        if mode:
+            self.set_tooltips()
         if main:
             main.sb_set()
 
