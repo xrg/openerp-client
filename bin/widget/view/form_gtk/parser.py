@@ -156,7 +156,6 @@ class StateAwareWidget(object):
 
     def attrs_set(self, model):
         sa = getattr(self.widget, 'attrs') or {}
-
         attrs_changes = eval(sa.get('attrs',"{}"),{'uid':rpc.session.uid})
         for k,v in attrs_changes.items():
             result = True
@@ -166,13 +165,12 @@ class StateAwareWidget(object):
                 getattr(self.widget, func)()
                 if self.label:
                     getattr(self.label, func)()
-            elif k == 'readonly':
+            elif k in ['readonly', 'required'] and model:
                 if isinstance(self.widget, gtk.Frame):
                     for name, wid in self.group_child.iteritems():
-                        wid.set_sensitive(not result)
-                else:
+                        model.mgroup.mfields[name].get_state_attrs(model)[k] = result
+                elif k == 'readonly':
                     self.widget.set_sensitive(not result)
-
 
 class _container(object):
     def __init__(self):
@@ -500,9 +498,6 @@ class parser_form(widget.view.interface.parser_interface):
                     detail_tooltip = self.create_detail_tooltip(name, fields[name])
 
                 widget_label = container.create_label(label, help=hlp, fname=name, detail_tooltip=detail_tooltip) if label else None
-                if attrs.get('attrs'):
-                    saw_list.append(StateAwareWidget(widget_act, widget_label))
-
                 container.wid_add(widget=widget_act.widget, label=widget_label, expand=expand, translate=translate, colspan=size, fname=name, fill=fill)
 
             elif node.tag =='group':

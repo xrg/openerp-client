@@ -47,7 +47,7 @@ class ViewWidget(object):
         if modelfield:
             modelfield.state_set(model, state)
             if modelfield.attrs.get('attrs',False):
-                modelfield.attrs_set(model)
+                modelfield.attrs_set(model, self.widget)
             if hasattr(self.widget,'screen') and self.widget.screen.type in ('one2many','many2many'):
                 self.widget.pager.reset_pager()
             self.widget.display(model, modelfield)
