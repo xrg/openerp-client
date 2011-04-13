@@ -143,7 +143,7 @@ class StateAwareWidget(object):
         self.widget = widget
         self.label = label
         self.states = states or []
-        self.frame_child = {}
+        self.group_child = {}
 
     def __getattr__(self, a):
         return self.widget.__getattribute__(a)
@@ -168,24 +168,11 @@ class StateAwareWidget(object):
                     getattr(self.label, func)()
             elif k == 'readonly':
                 if isinstance(self.widget, gtk.Frame):
-                    for name, wid in self.frame_child.iteritems():
-                        self.set_sensitive(wid, result)
+                    for name, wid in self.group_child.iteritems():
+                        wid.set_sensitive(not result)
                 else:
-                    self.set_sensitive(self.widget, result)
-    ## This method is hacked here because field labels that are readonly
-    ## should not change their looks to readonly GTK widgets as it makes
-    ## the label text very difficult to read in some themes.
-    def set_sensitive(self, widget, value):
-        if hasattr(widget, "get_children") and not \
-            isinstance(widget, gtk.ComboBoxEntry):
-            for wid in widget.get_children():
-               self.set_sensitive(wid, value)
-        if not isinstance(widget, gtk.Label):
-            if hasattr(widget,'_readonly_set'):
-                widget._readonly_set(value)
-            else:
-                widget.set_sensitive(not value)
-        return True
+                    self.widget.set_sensitive(not result)
+
 
 class _container(object):
     def __init__(self):
@@ -220,7 +207,7 @@ class _container(object):
 
     def create_label(self, name, markup=False, align=1.0, wrap=False,
                      angle=None, width=None, fname=None, help=None, detail_tooltip=False):
-        
+
         label = gtk.Label(name)
         eb = gtk.EventBox()
         eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
@@ -228,7 +215,7 @@ class _container(object):
             label.set_use_markup(True)
         self.trans_box_label.append((eb, name, fname))
         eb.add(label)
-        
+
         def size_allocate(label, allocation):
             label.set_size_request( allocation.width - 2, -1 )
         if fname is None and name and len(name) > 50:
@@ -404,13 +391,13 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
-                    
+
                 if 'default_focus' in attrs and not self.default_focus_button:
                     attrs['focus_button'] = attrs['default_focus']
                     self.default_focus_button = True
-              
+
                 button = Button(attrs)
-                
+
                 states = [e for e in attrs.get('states','').split(',') if e]
                 saw_list.append(StateAwareWidget(button, states=states))
                 container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)))
@@ -540,7 +527,7 @@ class parser_form(widget.view.interface.parser_interface):
                 container.wid_add(group_wid, colspan=int(attrs.get('colspan', 1)), expand=int(attrs.get('expand',0)), rowspan=int(attrs.get('rowspan', 1)), ypadding=0, fill=int(attrs.get('fill', 1)))
                 container.new(int(attrs.get('col',4)))
                 widget, widgets, saws, on_write = self.parse(model, node, fields)
-                state_aware.frame_child.update(widgets)
+                state_aware.group_child.update(widgets)
                 dict_widget.update(widgets)
                 saw_list += saws
                 frame.add(widget)
@@ -692,7 +679,7 @@ class parser_form(widget.view.interface.parser_interface):
             # Make sure the context won't mutate
             context = copy.copy(rpc.session.context)
             context['lang'] = lang['code']
-            # Read the string in this language 
+            # Read the string in this language
             val = rpc.session.rpc_exec_auth('/object', 'execute', model,
                     'read', [id], [name], context)
             val = val[0]
@@ -718,7 +705,7 @@ class parser_form(widget.view.interface.parser_interface):
                 value_set(entry,value_get(widget_entry))
             else:
                 value_set(entry,val[name])
-            
+
             entries_list.append((lang['code'], entry))
             table.attach(label, 0, 1, i, i+1, yoptions=False, xoptions=gtk.FILL,
                     ypadding=2, xpadding=5)
@@ -736,7 +723,7 @@ class parser_form(widget.view.interface.parser_interface):
         sv.add(vp)
         win.vbox.add(sv)
         win.show_all()
-        
+
         # process the response
         ok = False
         data = []
