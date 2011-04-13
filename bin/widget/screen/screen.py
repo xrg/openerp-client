@@ -596,6 +596,7 @@ class Screen(signal_event.signal_event):
         if custom:
             self.models.add_fields_custom(fields, self.models)
         else:
+            self.models.screen = self
             self.models.add_fields(fields, self.models, context=context)
         self.fields = self.models.fields
 
