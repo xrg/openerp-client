@@ -347,6 +347,15 @@ class M2MField(CharField):
         return res or model.value[self.name] or []
 
     def set(self, model, value, test_state=False, modified=False):
+        ## The case where M2M may appear in a domain as string
+        ## eg: if I have a domain on partner list view as
+        ## [('categ_id','=','supplier')]
+        if value and isinstance(value[0], (str, unicode)):
+            rpc2 = RPCProxy(self.attrs['relation'])
+            result = []
+            for val in value:
+                    result += rpc2.name_search(val, [], '=', rpc.session.context)
+            value = map(lambda x:x[0], result)
         model.value[self.name] = value and value[:self.limit] or []
         model.pager_cache[self.name] = value or []
         if modified:
