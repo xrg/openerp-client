@@ -734,7 +734,10 @@ class ViewList(parser_view):
 
     def display(self):
         if self.reload or (not self.widget_tree.get_model()) or self.screen.models<>self.widget_tree.get_model().model_group:
-            if self.screen.context.get('group_by'):
+            group_by = self.screen.context.get('group_by')
+            if group_by:
+                if not isinstance(group_by, list):
+                    self.screen.context['group_by'] = [group_by]
                 if self.screen.type == 'one2many':
                     self.screen.domain = [('id','in',self.screen.ids_get())]
                 self.screen.models.models.clear()
