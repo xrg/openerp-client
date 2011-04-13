@@ -53,7 +53,7 @@ class pager(object):
         return event_box
 
     def search_count(self):
-        self.screen.search_count = len(self.object.model.pager_cache.get(self.object.name,[]))
+        self.screen.search_count = len(self.object.model.pager_cache.get(self.object.name, []) or [])
         try:
             pos = self.screen.models.models.index(self.screen.current_model)
         except:
