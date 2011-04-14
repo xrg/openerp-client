@@ -397,16 +397,16 @@ class ViewForm(parser_view):
         else:
             state = 'draft'
         button_focus = field_focus = None
-        for widget in self.widgets.values():
-            widget.display(model, state)
-            if widget.widget.attrs.get('focus_field'):
-                field_focus =  widget.widget
-
         for widget in self.state_aware_widgets:
             widget.state_set(state)
             widget.attrs_set(model)
             if widget.widget.attrs.get('focus_button'):
                 button_focus =  widget.widget
+        
+        for widget in self.widgets.values():
+            widget.display(model, state)
+            if widget.widget.attrs.get('focus_field'):
+                field_focus =  widget.widget
 
         if field_focus:
             field_focus.grab_focus()
