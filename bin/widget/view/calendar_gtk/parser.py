@@ -493,11 +493,9 @@ class ViewCalendar(object):
         if isinstance(color_key, list):
             color_key = tuple(color_key)
         color_info = self.colors.get(color_key)
-
         color = color_info and color_info[2] or 'black'
-
         description = ', '.join(description).strip()
-        all_day = span > 0
+        all_day = self.mode == 'month' and True or span > 0
         return TinyEvent(model=model,
                          caption=caption.strip(),
                          start=datetime(*starts[:7]),
