@@ -131,7 +131,7 @@ class CharField(object):
     def create(self, model):
         return False
 
-    def attrs_set(self, model):
+    def attrs_set(self, model, widget=None):
         uid = rpc.session.uid
         try:
             attrs_changes = eval(self.attrs.get('attrs',"{}"))
@@ -147,23 +147,28 @@ class CharField(object):
         for k,v in attrs_changes.items():
             result = True
             result = tools.calc_condition(self, model, v)
-            if result:
-               self.get_state_attrs(model)[k]=True
+            if k == 'invisible' and widget:
+                func = ['show_all', 'hide_all'][bool(result)]
+                getattr(widget, func)()
+            elif k in ['readonly', 'required'] :
+                self.get_state_attrs(model)[k] = result
 
     def state_set(self, model, state='draft'):
         ro = model.mgroup._readonly
         state_changes = dict(self.attrs.get('states',{}).get(state,[]))
         if 'readonly' in state_changes:
-            self.get_state_attrs(model)['readonly'] = state_changes.get('readonly', False) or ro
+            self.get_state_attrs(model)['readonly'] = state_changes.get('readonly', False) 
         else:
-            self.get_state_attrs(model)['readonly'] = self.attrs.get('readonly', False) or ro
+            if (self.attrs.get('readonly', False) or  ro) and  ro  or self.attrs['readonly']:
+                self.get_state_attrs(model)['readonly'] = True
         if 'required' in state_changes:
             self.get_state_attrs(model)['required'] = state_changes.get('required', False)
         else:
-            self.get_state_attrs(model)['required'] = self.attrs.get('required', False)
+            if self.attrs.get('required', False):
+                self.get_state_attrs(model)['required'] = self.attrs['required']
         if 'value' in state_changes:
             self.set(model, state_changes['value'], test_state=False, modified=True)
-
+    
     def get_state_attrs(self, model):
         if self.name not in model.state_attrs:
             model.state_attrs[self.name] = self.attrs.copy()
