@@ -94,8 +94,8 @@ class textbox_tag(interface.widget_interface):
                  'face':{'face':True},
                  }
 
-    def __init__(self,window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent, model, attrs)
+    def __init__(self,window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent, model, attrs, label_ebox=label)
         self.win_gl = glade.XML(common.terp_path("openerp.glade"),"widget_textbox_tag", gettext.textdomain())
         self.widget = self.win_gl.get_widget('widget_textbox_tag')
         self.tv = self.win_gl.get_widget('widget_textbox_tag_tv')

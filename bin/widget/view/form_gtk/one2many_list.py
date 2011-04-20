@@ -146,8 +146,8 @@ class dialog(object):
         self.dia.destroy()
 
 class one2many_list(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent, model, attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent, model, attrs, label_ebox=label)
         self.context = {}
         self._readonly = self.default_readonly
         self.widget = gtk.VBox(homogeneous=False, spacing=5)

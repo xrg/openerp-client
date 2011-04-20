@@ -32,11 +32,12 @@ _attrs_boolean = {
 }
 
 class widget_interface(object):
-    def __init__(self, window, parent=None, view=None, attrs=None):
+    def __init__(self, window, parent=None, view=None, attrs=None, label_ebox= None):
         if attrs is None:
             attrs = {}
         self.parent = parent
         self.position = 0
+        self.label_ebox = label_ebox
         self._window = window
         self._view = None
         self.attrs = attrs

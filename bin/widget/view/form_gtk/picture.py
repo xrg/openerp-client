@@ -27,8 +27,8 @@ import common
 NOIMAGE = file(common.terp_path_pixmaps("noimage.png"), 'rb').read()
 
 class wid_picture(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent, model, attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent, model, attrs, label_ebox=label)
 
         self.widget = gtk.VBox(homogeneous=False)
         self.wid_picture = gtk.Image()

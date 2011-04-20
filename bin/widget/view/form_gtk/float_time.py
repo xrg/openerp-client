@@ -31,8 +31,8 @@ import interface
 from tools import datetime_util
 
 class float_time(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs, label_ebox=label)
 
         self.widget = gtk.Entry()
         self.widget.set_max_length(int(attrs.get('size',11)))

@@ -23,8 +23,8 @@ import gtk
 import interface
 
 class progressbar(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent, model, attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent, model, attrs, label_ebox=label)
         self.widget = gtk.ProgressBar()
 
     def display(self, model, model_field):
