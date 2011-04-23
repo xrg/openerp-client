@@ -8,23 +8,23 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-04-20 16:01+0000\n"
-"Last-Translator: Belugin Alexandr <Unknown>\n"
+"PO-Revision-Date: 2011-04-22 10:38+0000\n"
+"Last-Translator: Stanislav Hanzhin <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-21 06:00+0000\n"
+"X-Launchpad-Export-Date: 2011-04-23 06:01+0000\n"
 "X-Generator: Launchpad (build 12758)\n"
 "Language: \n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
-msgstr "Процесс печати"
+msgstr "Печать рабочего процесса"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
-msgstr "Процесс печати (подробн.)"
+msgstr "Печать рабочего процесса (с подпроцессами)"
 
 #
 # File: bin/plugins/__init__.py, line: 41
@@ -35,14 +35,9 @@ msgstr "Процесс печати (подробн.)"
 msgid "No available plugin for this resource !"
 msgstr "Для данного ресурса нет доступного дополнения!"
 
-#
-# File: bin/plugins/__init__.py, line: 43
-# File: bin/plugins/__init__.py, line: 43
-# File: bin/plugins/__init__.py, line: 43
-# File: bin/plugins/__init__.py, line: 43
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr "Выберите Дополнение"
+msgstr "Выбрать дополнение"
 
 #
 # File: bin/modules/action/wizard.py, line: 171
@@ -84,18 +79,9 @@ msgstr "В соединении отказано!"
 msgid "Application Error"
 msgstr "Ошибка приложения"
 
-#
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
-# File: bin/rpc.py, line: 190
-# File: bin/modules/action/wizard.py, line: 191
 #: bin/modules/action/wizard.py:170 bin/rpc.py:204
 msgid "View details"
-msgstr "Просмотреть детали"
+msgstr "Подробнее"
 
 #
 # File: bin/modules/action/main.py, line: 46
@@ -124,18 +110,9 @@ msgstr "Слишком длинная задержка, печать отмен�
 msgid "Select your action"
 msgstr "Выберите действие"
 
-#
-# File: bin/modules/gui/main.py, line: 145
-# File: bin/modules/gui/main.py, line: 1138
-# File: bin/modules/gui/main.py, line: 145
-# File: bin/modules/gui/main.py, line: 1138
-# File: bin/modules/gui/main.py, line: 145
-# File: bin/modules/gui/main.py, line: 1138
-# File: bin/modules/gui/main.py, line: 158
-# File: bin/modules/gui/main.py, line: 1157
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr "Невозможно соединиться с сервером !"
+msgstr "Невозможно соединиться с сервером!"
 
 #
 # File: bin/openerp.glade, line: 74
@@ -155,7 +132,7 @@ msgstr "Изменить"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr "Пароль главного Администратора:"
+msgstr "Пароль главного администратора:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
@@ -163,27 +140,27 @@ msgstr "Неверный пароль главного администрато�
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
-msgstr "Скрипт миграции"
+msgstr "Сценарии миграции"
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
-msgstr "Идентификатор контракта"
+msgstr "Идентификатор договора:"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr "Пароль контракта"
+msgstr "Пароль договора:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr "Вы уже имеете последнюю версию"
+msgstr "Версия является последней"
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
-msgstr "Доступны следующие обновления"
+msgstr "Доступны следующие обновления:"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr "Теперь вы можете перенести ваши базы данных"
+msgstr "Теперь можно перенести базы данных."
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
@@ -199,11 +176,11 @@ msgstr "Ваша база данных была обновлена."
 
 #: bin/modules/gui/main.py:295
 msgid "Your databases have been upgraded."
-msgstr "Ваши базы данных были обновлены"
+msgstr "Ваши базы данных были обновлены."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr "Вы не выбрали базу данных"
+msgstr "База данных не выбрана"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
