@@ -8,23 +8,23 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-22 10:43+0000\n"
-"Last-Translator: Nikolay Chesnokov <chesnokov_n@msn.com>\n"
+"PO-Revision-Date: 2011-04-22 10:38+0000\n"
+"Last-Translator: Stanislav Hanzhin <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-23 04:56+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-04-23 06:01+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 "Language: \n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
-msgstr "Процесс печати"
+msgstr "Печать рабочего процесса"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
-msgstr "Процесс печати (подробн.)"
+msgstr "Печать рабочего процесса (с подпроцессами)"
 
 #
 # File: bin/plugins/__init__.py, line: 41
@@ -35,14 +35,9 @@ msgstr "Процесс печати (подробн.)"
 msgid "No available plugin for this resource !"
 msgstr "Для данного ресурса нет доступного дополнения!"
 
-#
-# File: bin/plugins/__init__.py, line: 43
-# File: bin/plugins/__init__.py, line: 43
-# File: bin/plugins/__init__.py, line: 43
-# File: bin/plugins/__init__.py, line: 43
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr "Выберите Дополнение"
+msgstr "Выбрать дополнение"
 
 #
 # File: bin/modules/action/wizard.py, line: 171
@@ -84,18 +79,9 @@ msgstr "В соединении отказано!"
 msgid "Application Error"
 msgstr "Ошибка приложения"
 
-#
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
-# File: bin/modules/action/wizard.py, line: 191
-# File: bin/rpc.py, line: 189
-# File: bin/rpc.py, line: 190
-# File: bin/modules/action/wizard.py, line: 191
 #: bin/modules/action/wizard.py:170 bin/rpc.py:204
 msgid "View details"
-msgstr "Просмотреть детали"
+msgstr "Подробнее"
 
 #
 # File: bin/modules/action/main.py, line: 46
@@ -124,18 +110,9 @@ msgstr "Слишком длинная задержка, печать отмен�
 msgid "Select your action"
 msgstr "Выберите действие"
 
-#
-# File: bin/modules/gui/main.py, line: 145
-# File: bin/modules/gui/main.py, line: 1138
-# File: bin/modules/gui/main.py, line: 145
-# File: bin/modules/gui/main.py, line: 1138
-# File: bin/modules/gui/main.py, line: 145
-# File: bin/modules/gui/main.py, line: 1138
-# File: bin/modules/gui/main.py, line: 158
-# File: bin/modules/gui/main.py, line: 1157
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr "Невозможно соединиться с сервером !"
+msgstr "Невозможно соединиться с сервером!"
 
 #
 # File: bin/openerp.glade, line: 74
@@ -155,7 +132,7 @@ msgstr "Изменить"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr "Пароль главного Администратора:"
+msgstr "Пароль главного администратора:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
@@ -163,27 +140,27 @@ msgstr "Неверный пароль главного администрато�
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
-msgstr "Скрипт миграции"
+msgstr "Сценарии миграции"
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
-msgstr "Идентификатор контракта"
+msgstr "Идентификатор договора:"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr "Пароль контракта"
+msgstr "Пароль договора:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr "Вы уже имеете последнюю версию"
+msgstr "Версия является последней"
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
-msgstr "Доступны следующие обновления"
+msgstr "Доступны следующие обновления:"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr "Теперь вы можете перенести ваши базы данных"
+msgstr "Теперь можно перенести базы данных."
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
@@ -199,11 +176,11 @@ msgstr "Ваша база данных была обновлена."
 
 #: bin/modules/gui/main.py:295
 msgid "Your databases have been upgraded."
-msgstr "Ваши базы данных были обновлены"
+msgstr "Ваши базы данных были обновлены."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr "Вы не выбрали базу данных"
+msgstr "База данных не выбрана"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
@@ -244,8 +221,8 @@ msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
-"Название базы данных должно содержать только обычные символы или \"_\".\n"
-"Нельзя использовать ударения, пробелы и специальные символы."
+"Название базы данных должно содержать только латинские буквы, цифры \n"
+"или знак \"_\". Нельзя использовать пробел или специальные символы."
 
 #
 # File: bin/modules/gui/main.py, line: 359
@@ -4040,7 +4017,7 @@ msgstr "Администратор"
 
 #: bin/openerp.glade:7062
 msgid "(<i>admin</i>, by default)"
-msgstr "(<i>Администратор (admin)</i>, по умолчанию)"
+msgstr "(по умолчанию - <i>admin</i>)"
 
 #
 # File: bin/openerp.glade, line: 9091
@@ -4356,529 +4333,3 @@ msgstr "Подробно"
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
 msgstr "<i>_Деталиs</i>"
-
-#
-# File: bin/widget_search/wid_int.py, line: 44
-# File: bin/widget_search/wid_int.py, line: 44
-# File: bin/widget_search/wid_int.py, line: 44
-# File: bin/widget_search/wid_int.py, line: 44
-#~ msgid "The content of the widget or excpetion if not valid"
-#~ msgstr "Содержимое виджета или Исключение при ошибке"
-
-#
-# File: bin/widget_search/form.py, line: 145
-# File: bin/widget_search/form.py, line: 145
-# File: bin/widget_search/form.py, line: 145
-# File: bin/widget_search/form.py, line: 145
-#~ msgid "Limit :"
-#~ msgstr "Лимит :"
-
-#
-# File: bin/widget_search/form.py, line: 154
-# File: bin/widget_search/form.py, line: 154
-# File: bin/widget_search/form.py, line: 154
-# File: bin/widget_search/form.py, line: 154
-#~ msgid "Offset :"
-#~ msgstr "Смещение :"
-
-#
-# File: bin/widget/view/form_gtk/calendar.py, line: 115
-# File: bin/widget/view/form_gtk/calendar.py, line: 238
-# File: bin/widget/view/form_gtk/calendar.py, line: 115
-# File: bin/widget/view/form_gtk/calendar.py, line: 238
-# File: bin/widget/view/form_gtk/calendar.py, line: 115
-# File: bin/widget/view/form_gtk/calendar.py, line: 238
-# File: bin/widget/view/form_gtk/calendar.py, line: 127
-# File: bin/widget/view/form_gtk/calendar.py, line: 260
-#~ msgid "This widget is readonly !"
-#~ msgstr "Этот виджет доступен только для чтения!"
-
-#
-# File: bin/options.py, line: 90
-# File: bin/options.py, line: 90
-# File: bin/options.py, line: 90
-# File: bin/options.py, line: 109
-#~ msgid "enable basic debugging"
-#~ msgstr "включить минимальную отладку"
-
-#
-# File: bin/options.py, line: 91
-# File: bin/options.py, line: 91
-# File: bin/options.py, line: 91
-# File: bin/options.py, line: 110
-#~ msgid "specify channels to log"
-#~ msgstr "укажите, какие каналы протоколировать"
-
-#
-# File: bin/options.py, line: 92
-# File: bin/options.py, line: 92
-# File: bin/options.py, line: 92
-# File: bin/options.py, line: 111
-#~ msgid "specify the log level: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-#~ msgstr ""
-#~ "укажите уровень протоколирования: INFO, DEBUG, WARNING, ERROR, CRITICAL"
-
-#
-# File: bin/modules/gui/main.py, line: 336
-# File: bin/modules/gui/main.py, line: 336
-# File: bin/modules/gui/main.py, line: 336
-# File: bin/modules/gui/main.py, line: 349
-#~ msgid "<b>Operation in progress</b>"
-#~ msgstr "<b>Действие выполняется</b>"
-
-#
-# File: bin/modules/gui/main.py, line: 388
-# File: bin/modules/gui/main.py, line: 388
-# File: bin/modules/gui/main.py, line: 388
-# File: bin/modules/gui/main.py, line: 401
-#~ msgid "The following users have been installed on your database:"
-#~ msgstr "Следующие учетные записи были созданы для вашей базы данных:"
-
-#
-# File: bin/modules/gui/main.py, line: 388
-# File: bin/modules/gui/main.py, line: 388
-# File: bin/modules/gui/main.py, line: 388
-# File: bin/modules/gui/main.py, line: 401
-#~ msgid "You can now connect to the database as an administrator."
-#~ msgstr "Теперь вы можете подключиться к базе данных как администратор."
-
-#
-# File: bin/modules/gui/main.py, line: 698
-# File: bin/modules/gui/main.py, line: 698
-# File: bin/modules/gui/main.py, line: 698
-# File: bin/modules/gui/main.py, line: 710
-#, python-format
-#~ msgid " - %s request(s) sended"
-#~ msgstr " Отправлено   - %s запросов"
-
-#
-# File: bin/modules/gui/main.py, line: 736
-# File: bin/modules/gui/main.py, line: 736
-# File: bin/modules/gui/main.py, line: 736
-# File: bin/modules/gui/main.py, line: 748
-#~ msgid ""
-#~ "Connection error !\n"
-#~ "Bad username or password !"
-#~ msgstr ""
-#~ "Ошибка соединения !\n"
-#~ "Неправильная учетная запись или пароль !"
-
-#
-# File: bin/modules/gui/window/win_preference.py, line: 69
-# File: bin/modules/gui/window/win_preference.py, line: 69
-# File: bin/modules/gui/window/win_preference.py, line: 69
-# File: bin/modules/gui/window/win_preference.py, line: 69
-#~ msgid "Preference"
-#~ msgstr "Предпочтения"
-
-#
-# File: bin/modules/gui/window/win_export.py, line: 81
-# File: bin/modules/gui/window/win_export.py, line: 81
-# File: bin/modules/gui/window/win_export.py, line: 81
-# File: bin/modules/gui/window/win_export.py, line: 81
-#~ msgid ""
-#~ "Function only available for MS Office !\n"
-#~ "Sorry, OOo users :("
-#~ msgstr ""
-#~ "Функция доступна только для MS Office!\n"
-#~ "Приносим извинения пользователям OOo :("
-
-#
-# File: bin/printer/printer.py, line: 189
-# File: bin/printer/printer.py, line: 189
-# File: bin/printer/printer.py, line: 189
-# File: bin/printer/printer.py, line: 189
-#~ msgid "Error no report"
-#~ msgstr "Ошибка в отчете"
-
-#
-# File: bin/openerp.glade, line: 1140
-# File: bin/openerp.glade, line: 1140
-# File: bin/openerp.glade, line: 1140
-# File: bin/openerp.glade, line: 1140
-#~ msgid "_Tips"
-#~ msgstr "Советы"
-
-#
-# File: bin/openerp.glade, line: 5791
-# File: bin/openerp.glade, line: 5791
-# File: bin/openerp.glade, line: 5791
-# File: bin/openerp.glade, line: 4662
-#~ msgid "Open Source:"
-#~ msgstr "Open Source:"
-
-#
-# File: bin/openerp.glade, line: 5831
-# File: bin/openerp.glade, line: 5831
-# File: bin/openerp.glade, line: 5831
-# File: bin/openerp.glade, line: 4702
-#~ msgid "How did you hear about us:"
-#~ msgstr "Как вы узнали о нас:"
-
-#
-# File: bin/openerp.glade, line: 5887
-# File: bin/openerp.glade, line: 5887
-# File: bin/openerp.glade, line: 5887
-# File: bin/openerp.glade, line: 4758
-#~ msgid "System:"
-#~ msgstr "Система:"
-
-#
-# File: bin/openerp.glade, line: 5937
-# File: bin/openerp.glade, line: 5937
-# File: bin/openerp.glade, line: 5937
-# File: bin/openerp.glade, line: 4808
-#~ msgid "Your Role:"
-#~ msgstr "Ваша роль:"
-
-#
-# File: bin/openerp.glade, line: 5953
-# File: bin/openerp.glade, line: 5953
-# File: bin/openerp.glade, line: 5953
-# File: bin/openerp.glade, line: 4824
-#~ msgid "Country:"
-#~ msgstr "Страна:"
-
-#
-# File: bin/openerp.glade, line: 6038
-# File: bin/openerp.glade, line: 6038
-# File: bin/openerp.glade, line: 6038
-# File: bin/openerp.glade, line: 4909
-#~ msgid "# Employees:"
-#~ msgstr "Кол-во сотрудников:"
-
-#
-# File: bin/openerp.glade, line: 6051
-# File: bin/openerp.glade, line: 6051
-# File: bin/openerp.glade, line: 6051
-# File: bin/openerp.glade, line: 4922
-#~ msgid "Industry:"
-#~ msgstr "Отрасль:"
-
-#
-# File: bin/openerp.glade, line: 6065
-# File: bin/openerp.glade, line: 6065
-# File: bin/openerp.glade, line: 6065
-# File: bin/openerp.glade, line: 4936
-#~ msgid "<b>Your company:</b>"
-#~ msgstr "<b>Ваша компания:</b>"
-
-#
-# File: bin/openerp.glade, line: 6166
-# File: bin/openerp.glade, line: 6166
-# File: bin/openerp.glade, line: 6166
-# File: bin/openerp.glade, line: 5037
-#~ msgid "<b>Your interrest:</b>"
-#~ msgstr "<b>Ваши интересы:</b>"
-
-#
-# File: bin/openerp.glade, line: 6291
-# File: bin/openerp.glade, line: 6291
-# File: bin/openerp.glade, line: 6291
-# File: bin/openerp.glade, line: 5162
-#~ msgid "E-Mail:"
-#~ msgstr "Эл. почта:"
-
-#
-# File: bin/openerp.glade, line: 6318
-# File: bin/openerp.glade, line: 6318
-# File: bin/openerp.glade, line: 6318
-# File: bin/openerp.glade, line: 5189
-#~ msgid "<b>Keep Informed</b>"
-#~ msgstr "<b>Получать информацию</b>"
-
-#
-# File: bin/openerp.glade, line: 7370
-# File: bin/openerp.glade, line: 7370
-# File: bin/openerp.glade, line: 7370
-# File: bin/openerp.glade, line: 6241
-#~ msgid "<Shist> + <Tab>"
-#~ msgstr "<Shift+Tab>"
-
-#
-# File: bin/openerp.glade, line: 9633
-# File: bin/openerp.glade, line: 9633
-# File: bin/openerp.glade, line: 9633
-# File: bin/openerp.glade, line: 8504
-#~ msgid "Database creation"
-#~ msgstr "Создание базы данных"
-
-#
-# File: bin/openerp.glade, line: 9666
-# File: bin/openerp.glade, line: 9666
-# File: bin/openerp.glade, line: 9666
-# File: bin/openerp.glade, line: 8537
-#~ msgid "<b>Database created successfully!</b>"
-#~ msgstr "<b>База данных успешно создана!</b>"
-
-#
-# File: bin/openerp.glade, line: 9698
-# File: bin/openerp.glade, line: 9698
-# File: bin/openerp.glade, line: 9698
-# File: bin/openerp.glade, line: 8569
-#~ msgid ""
-#~ "You can connect to the new database using one of the following account:\n"
-#~ "\n"
-#~ "    Administrator: admin / admin "
-#~ msgstr ""
-#~ "Вы можете соединиться с новой базой данных, используя следующую учетную "
-#~ "запись:\n"
-#~ "\n"
-#~ "    Администратор: admin / admin "
-
-#~ msgid ""
-#~ "Thank you for the feedback !\n"
-#~ "Your comments have been sent to OpenERP.\n"
-#~ "You should now start by creating a new database or\n"
-#~ "connecting to an existing server through the \"File\" menu."
-#~ msgstr ""
-#~ "Спасибо за отзыв!\n"
-#~ "Ваши комментарии будут отправлены в OpenERP.\n"
-#~ "Сейчас вы можете начать создание новой базы данных,\n"
-#~ "либо подключиться к серверу через меню «Файл»."
-
-#~ msgid ""
-#~ "Thank you for testing OpenERP !\n"
-#~ "You should now start by creating a new database or\n"
-#~ "connecting to an existing server through the \"File\" menu."
-#~ msgstr ""
-#~ "Спасибо за тестирование OpenERP!\n"
-#~ "Сейчас вы можете начать создание новой базы данных,\n"
-#~ "либо подключиться к серверу через меню «Файл»."
-
-#~ msgid "OpenERP Database Installation"
-#~ msgstr "Установка базы данных OpenERP"
-
-#, python-format
-#~ msgid "Unable to set locale %s"
-#~ msgstr "Невозможно установить локаль %s"
-
-#~ msgid "We plan to use OpenERP"
-#~ msgstr "Мы планируем использовать OpenERP"
-
-#~ msgid "Tell us why you try OpenERP and what are your current softwares:"
-#~ msgstr ""
-#~ "Расскажите нам, почему вы попробовали OpenERP и какое программное "
-#~ "обеспечение используете сейчас:"
-
-#~ msgid "We plan to offer services on OpenERP"
-#~ msgstr "Мы планируем предоставлять услуги на базе OpenERP"
-
-#~ msgid "OpenERP Survey"
-#~ msgstr "OpenERP Обзор"
-
-#~ msgid "<b>OpenERP Survey</b>"
-#~ msgstr "<b>OpenERP обзор</b>"
-
-#~ msgid "OpenERP Server:"
-#~ msgstr "Сервер OpenERP:"
-
-#~ msgid "Phone / Mobile:"
-#~ msgstr "Телефон:"
-
-#~ msgid "Your Name:"
-#~ msgstr "Ваше имя:"
-
-#~ msgid "Your Company:"
-#~ msgstr "Ваша компания:"
-
-#, python-format
-#~ msgid ""
-#~ "Your problem could <u>NOT</u> be sent to the quality team !\n"
-#~ "Please report this error manually at %s"
-#~ msgstr ""
-#~ "Ваша проблема <u>не может быть отослана</u> в службу обеспечения качества!\n"
-#~ "Пожалуйста, сообщите об ошибке через %s"
-
-#~ msgid ""
-#~ "\n"
-#~ "<b>An unknown error has been reported.</b>\n"
-#~ "\n"
-#~ "<b>You do not have a valid Open ERP maintenance contract !</b>\n"
-#~ "If you are using Open ERP in production, it is highly suggested to "
-#~ "subscribe\n"
-#~ "a maintenance program.\n"
-#~ "\n"
-#~ "The Open ERP maintenance contract provides you a bugfix guarantee and an\n"
-#~ "automatic migration system so that we can fix your problems within a few\n"
-#~ "hours. If you had a maintenance contract, this error would have been sent\n"
-#~ "to the quality team of the Open ERP editor.\n"
-#~ "\n"
-#~ "The maintenance program offers you:\n"
-#~ "* Automatic migrations on new versions,\n"
-#~ "* A bugfix guarantee,\n"
-#~ "* Monthly announces of potential bugs and their fixes,\n"
-#~ "* Security alerts by email and automatic migration,\n"
-#~ "* Access to the customer portal.\n"
-#~ "\n"
-#~ "You can use the link bellow for more information. The detail of the error\n"
-#~ "is displayed on the second tab.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "<b>An unknown error has been reported.</b>\n"
-
-#~ msgid "Default Language:"
-#~ msgstr "Язык по умолчанию:"
-
-#~ msgid "Confirm Password:"
-#~ msgstr "Подтвердите пароль:"
-
-#~ msgid "Send to Maintenance Team"
-#~ msgstr "Отправить Команде Поддержки"
-
-#~ msgid "New Database Name:"
-#~ msgstr "Имя новой базы:"
-
-#~ msgid "<i>_Maintenance</i>"
-#~ msgstr "<i>_Поддержка</i>"
-
-#~ msgid "Administrator Password:"
-#~ msgstr "Пароль Администратора:"
-
-#~ msgid "gtk-close"
-#~ msgstr "gtk-закрыть"
-
-#~ msgid "Parameters :"
-#~ msgstr "Параметры :"
-
-#~ msgid "I want to be contacted for a demonstration"
-#~ msgstr "Я хочу, чтобы со мной связались для проведения демонстрации"
-
-#~ msgid ""
-#~ "This is the password of the '<i>admin</i>' user that will be created in your "
-#~ "new database."
-#~ msgstr ""
-#~ "Укажите пароль для пользователя '<i>admin</i>', который будет установлен во "
-#~ "вновь создаваемой вами базе данных."
-
-#~ msgid ""
-#~ "This is the password of the '<i>admin</i>' user that will be created in your "
-#~ "new database. It has to be the same than the above field."
-#~ msgstr ""
-#~ "Повторите ввод пароля для пользователя '<i>admin</i>', который будет "
-#~ "установлен во вновь создаваемой вами базе данных, введите его так же, как "
-#~ "указали в поле выше."
-
-#~ msgid "Load Demonstration Data:"
-#~ msgstr "Загрузить демонстрационные данные:"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "<b>An unknown error has been reported.</b>\n"
-#~ "\n"
-#~ "Your maintenance contract does not cover all modules installed in your "
-#~ "system !\n"
-#~ "If you are using Open ERP in production, it is highly suggested to upgrade "
-#~ "your\n"
-#~ "contract.\n"
-#~ "\n"
-#~ "If you have developped your own modules or installed third party module, we\n"
-#~ "can provide you an additional maintenance contract for these modules. After\n"
-#~ "having reviewed your modules, our quality team will ensure they will "
-#~ "migrate\n"
-#~ "automatically for all futur stable versions of Open ERP at no extra cost.\n"
-#~ "\n"
-#~ "Here is the list of modules not covered by your maintenance contract:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "You can use the link bellow for more information. The detail of the error\n"
-#~ "is displayed on the second tab."
-#~ msgstr ""
-#~ "\n"
-#~ "<b>Вы сообщили о неизвестной ошибке.</b>\n"
-#~ "\n"
-#~ "Ваш контракт на обслуживание не покрываетвсе модули которые проинсталированы "
-#~ "у вас в системе!\n"
-#~ "Если вы используете Open ERP в рабочем режиме, настоятельно рекомендуем Вам "
-#~ "расширить контракт.\n"
-#~ "\n"
-#~ "Если вы разработали Ваш собственный модуль или используете модуль стороннего "
-#~ "разработчика,\n"
-#~ "мы можем предоставить дополнительный контракт на обслуживание этих модулей. "
-#~ "После проверки\n"
-#~ "Ваших модулей, наша команда проверки качества убедится в том, что они "
-#~ "автоматически будут обновляться\n"
-#~ "и в последующих стабильных релизах Open ERP без дополнительной оплаты.\n"
-#~ "\n"
-#~ "Вот список модулей, которые не были покрыты Вашим контрактом на "
-#~ "обслуживание:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Вы можете использовать ссылку ниже чтобы получить дополнительную информацию. "
-#~ "Детали ошибки показаны на следующей закладке."
-
-#~ msgid ""
-#~ "<b>Maintenance Contract.</b>\n"
-#~ "<i>\n"
-#~ "Your request will be send to OpenERP and maintenance team will reply you "
-#~ "shortly.\n"
-#~ "</i>"
-#~ msgstr ""
-#~ "<b>Контракт на  обслуживание.</b>\n"
-#~ "<i>\n"
-#~ "Ваш запрос будет отправлен команде OpenERP и мы скоро Вам ответим."
-
-#~ msgid ""
-#~ "<i>Please fill in the following form in order to help us to improve OpenERP "
-#~ "and better target new developments.</i>"
-#~ msgstr ""
-#~ "<i>Пожалуйста, заполните следующую форму, чтобы помочь нам улучшить OpenERP "
-#~ "и лучше определить цели дальнейших разработок.</i>"
-
-#~ msgid "Click here for details about the maintenance proposition"
-#~ msgstr "Нажмите здесь для подробной информации о предлагаемой поддержке"
-
-#~ msgid "Print Workflow (Complex)"
-#~ msgstr "Процесс печати (подробн.)"
-
-#~ msgid "<b>Your interrest</b>"
-#~ msgstr "<b>Ваши интересы</b>"
-
-#~ msgid "Connect now"
-#~ msgstr "Подключитесь сейчас."
-
-#~ msgid "Connect Later"
-#~ msgstr "Подключитесь позже."
-
-#~ msgid "Employees:"
-#~ msgstr "Сотрудники:"
-
-#~ msgid "<b>Your company</b>"
-#~ msgstr "<b>Ваша Компания</b>"
-
-#~ msgid "We plan to use Open ERP"
-#~ msgstr "Вы планируете использовать OpenERP"
-
-#~ msgid "City:"
-#~ msgstr "Город:"
-
-#~ msgid "gtk-cancel"
-#~ msgstr "Отмена"
-
-#~ msgid "gtk-ok"
-#~ msgstr "Ok"
-
-#~ msgid "E-mail:"
-#~ msgstr "Адрес эл. почты:"
-
-#~ msgid "We plan to offer services on Open ERP"
-#~ msgstr "Вы планируете предоставлять услуги по Open ERP"
-
-#~ msgid "Tell us why you try Open ERP and what are your current softwares:"
-#~ msgstr ""
-#~ "Объясните нам, почему вы пробуете Open ERP и какое у вас программное "
-#~ "обеспечение:"
-
-#~ msgid "I want to receive the Open ERP ebook (PDF) by email"
-#~ msgstr ""
-#~ "Я хочу получать электронные книги по  Open ERP (PDF) на электронную почту"
-
-#~ msgid ""
-#~ "Please fill in the following form in order to help us to improve <b><span "
-#~ "foreground=\"red\"><i>Open</i></span> ERP</b> and better target new "
-#~ "developments."
-#~ msgstr ""
-#~ "Пожалуйста, заполните следующую форму для того, чтобы помочь нам улучшить "
-#~ "<b>  <span foreground=\"red\"> <i> Open </ I> </ SPAN> ERP </ B> качество "
-#~ "новых разработок"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-03-26 02:00+0000\n"
+"PO-Revision-Date: 2011-04-12 14:02+0000\n"
 "Last-Translator: Natan Alter <Unknown>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-26 15:06+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-04-13 14:34+0000\n"
+"X-Generator: Launchpad (build 12735)\n"
 "Language: he\n"
 
 #: bin/plugins/__init__.py:27
@@ -185,7 +185,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:881
 msgid "Edit"
-msgstr ""
+msgstr "ערוך"
 
 #: bin/modules/gui/main.py:980
 #, python-format
@@ -244,7 +244,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1085 bin/widget/view/form_gtk/one2many_list.py:52
 #: bin/openerp.glade:6126
 msgid "OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #: bin/modules/gui/main.py:1159
 msgid ""
@@ -276,7 +276,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr ""
+msgstr "השמטת מסד הנתונים נכשלה."
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
@@ -285,7 +285,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
 msgid "Open..."
-msgstr ""
+msgstr "פתח..."
 
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
@@ -293,11 +293,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1403
 msgid "Could not restore database."
-msgstr ""
+msgstr "שיחזור מסד הנתונים נכשל!"
 
 #: bin/modules/gui/main.py:1405
 msgid "Couldn't restore database"
-msgstr ""
+msgstr "שיחזור מסד הנתונים נכשל!"
 
 #: bin/modules/gui/main.py:1444
 msgid ""
@@ -336,7 +336,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
-msgstr ""
+msgstr "גיבוי מסד הנתונים נכשל."
 
 #: bin/modules/gui/main.py:1484
 msgid "Couldn't backup database."
@@ -365,7 +365,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:255
 msgid "Creation Date"
-msgstr ""
+msgstr "תאריך יצירה"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
@@ -393,7 +393,7 @@ msgstr ""
 #: bin/modules/gui/window/form.py:274
 #: bin/widget/view/form_gtk/one2many_list.py:382
 msgid "Are you sure to remove those records ?"
-msgstr ""
+msgstr "את/ה בטוח/ה בהסרת רשומות אלה?"
 
 #: bin/modules/gui/window/form.py:278
 msgid "Resources cleared."
@@ -409,19 +409,19 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:329
 msgid "Document Saved."
-msgstr ""
+msgstr "המסמך נשמר."
 
 #: bin/modules/gui/window/form.py:331 bin/modules/gui/window/form.py:332
 #: bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/form_gtk/parser.py:127 bin/widget/view/list.py:568
 #: bin/widget/view/list.py:569
 msgid "Invalid form, correct red fields !"
-msgstr "טופס לא תקין, אנא תקן שדות המסומנים באדום!"
+msgstr "הטופס שגוי; תקן את השדות המסומנים באדום!"
 
 #: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/list.py:568
 msgid "Error !"
-msgstr ""
+msgstr "שגיאה!"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
@@ -459,7 +459,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:447
 msgid " of "
-msgstr ""
+msgstr " מתוך "
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "The file is empty !"
@@ -500,7 +500,7 @@ msgstr ""
 #: bin/modules/gui/window/win_import.py:100
 #: bin/modules/gui/window/win_import.py:104
 msgid "Field name"
-msgstr ""
+msgstr "שם השדה"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
@@ -536,7 +536,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "יישום"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
@@ -548,11 +548,11 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7684
 msgid "Extension Manager"
-msgstr ""
+msgstr "מנהל הרחבות"
 
 #: bin/modules/gui/window/win_selection.py:51
 msgid "Name"
-msgstr ""
+msgstr "שם"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Ressource Name"
@@ -560,7 +560,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Names"
-msgstr ""
+msgstr "שמות"
 
 #: bin/modules/gui/window/__init__.py:31
 msgid "Unknown Window"
@@ -568,7 +568,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "העדפות"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -582,11 +582,11 @@ msgstr ""
 
 #: bin/modules/gui/window/view_tree/parse.py:35
 msgid "Tree"
-msgstr ""
+msgstr "עץ"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:48
 msgid "Description"
-msgstr ""
+msgstr "תיאור"
 
 #: bin/modules/gui/window/tree.py:204 bin/modules/gui/window/tree.py:260
 msgid "No resource selected!"
@@ -651,7 +651,7 @@ msgstr ""
 
 #: bin/options.py:110
 msgid "specify alternate config file"
-msgstr ""
+msgstr "הגדר קובץ תצורה חלופי"
 
 #: bin/options.py:111
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
@@ -870,7 +870,7 @@ msgstr ""
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "שגיאה: "
 
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
@@ -895,31 +895,31 @@ msgstr ""
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "מכיל"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "לא מכיל"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "שווה ערך ל-"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "אינו שווה ערך ל-"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "גדול מ־"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "פחות מ-"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "ב-"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
@@ -2226,7 +2226,7 @@ msgstr ""
 
 #: bin/openerp.glade:6222
 msgid "Server"
-msgstr ""
+msgstr "שרת"
 
 #: bin/openerp.glade:6232
 msgid "<b>Connect to a OpenERP server</b>"
@@ -2381,7 +2381,7 @@ msgstr ""
 
 #: bin/openerp.glade:7532
 msgid "New password:"
-msgstr ""
+msgstr "סיסמה חדשה:"
 
 #: bin/openerp.glade:7545
 msgid "New password confirmation:"
@@ -2409,7 +2409,7 @@ msgstr ""
 
 #: bin/openerp.glade:7876
 msgid "Compare"
-msgstr ""
+msgstr "השווה"
 
 #: bin/openerp.glade:7922
 msgid "Write anyway"
@@ -2421,19 +2421,19 @@ msgstr ""
 
 #: bin/openerp.glade:8034
 msgid "Today"
-msgstr ""
+msgstr "היום"
 
 #: bin/openerp.glade:8080
 msgid "September 2008"
-msgstr ""
+msgstr "ספטמבר 2008"
 
 #: bin/openerp.glade:8094
 msgid "Day"
-msgstr ""
+msgstr "יום"
 
 #: bin/openerp.glade:8118
 msgid "Month"
-msgstr ""
+msgstr "חודש"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
@@ -2467,7 +2467,7 @@ msgstr ""
 
 #: bin/win_error.glade:40
 msgid "label"
-msgstr ""
+msgstr "תווית"
 
 #: bin/win_error.glade:100
 msgid "Click here for details about the publisher warranty proposition"
@@ -2508,7 +2508,7 @@ msgstr ""
 
 #: bin/win_error.glade:387
 msgid "Details"
-msgstr ""
+msgstr "פרטים"
 
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
