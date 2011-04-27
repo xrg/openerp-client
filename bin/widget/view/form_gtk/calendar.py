@@ -40,8 +40,8 @@ DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
 HM_FORMAT = '%H:%M:%S'
 
 class calendar(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent, attrs=attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent, attrs=attrs, label_ebox=label)
         self.format = user_locale_format.get_date_format()
         self.fmt_length = len((DT.now()).strftime(self.format))
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
@@ -168,8 +168,8 @@ class calendar(interface.widget_interface):
         win.destroy()
 
 class datetime(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent, model, attrs=attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent, model, attrs=attrs, label_ebox=label)
         self.format = user_locale_format.get_datetime_format(True)
         self.fmt_length = len((DT.now()).strftime(self.format))
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)
@@ -297,8 +297,8 @@ class datetime(interface.widget_interface):
 
 
 class stime(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, parent, attrs=attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, parent, attrs=attrs, label_ebox=label)
 
         self.format = '%H:%M:%S'
         self.widget = date_widget.ComplexEntry(self.format, spacing=3)

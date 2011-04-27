@@ -467,11 +467,12 @@ class parser_form(widget.view.interface.parser_interface):
                 if 'default_focus' in attrs and not self.default_focus_field:
                     fields[name]['focus_field'] = attrs['default_focus']
                     self.default_focus_field = True
-
-                widget_act = widgets_type[type][0](self.window, self.parent, model, fields[name])
-                self.widget_id += 1
-                widget_act.position = self.widget_id
-
+                
+                hlp = fields[name].get('help', attrs.get('help', False))
+                detail_tooltip = False
+                if options.options['debug_mode_tooltips']:
+                    detail_tooltip = self.create_detail_tooltip(name, fields[name])
+                
                 label = None
                 if not int(attrs.get('nolabel', 0)):
                     # TODO space before ':' depends of lang (ex: english no space)
@@ -479,25 +480,25 @@ class parser_form(widget.view.interface.parser_interface):
                         label = ': '+fields[name]['string']
                     else:
                         label = fields[name]['string']+' :'
+                                                
+                widget_label = container.create_label(label, help=hlp, fname=name, detail_tooltip=detail_tooltip) if label else None
+                widget_act = widgets_type[type][0](self.window, self.parent, model, fields[name], widget_label)
+                self.widget_id += 1
+                widget_act.position = self.widget_id
                 dict_widget[name] = widget_act
                 size = int(attrs.get('colspan', widgets_type[ type ][1]))
                 expand = widgets_type[ type ][2]
                 fill = widgets_type[ type ][3]
-                hlp = fields[name].get('help', attrs.get('help', False))
                 if attrs.get('height', False) or attrs.get('width', False):
                     widget_act.widget.set_size_request(
                             int(attrs.get('width', -1)), int(attrs.get('height', -1)))
+                
                 if attrs.get('invisible', False):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
 
                 translate = fields[name]['string'] if fields[name].get('translate') else None
-                detail_tooltip = False
-                if options.options['debug_mode_tooltips']:
-                    detail_tooltip = self.create_detail_tooltip(name, fields[name])
-
-                widget_label = container.create_label(label, help=hlp, fname=name, detail_tooltip=detail_tooltip) if label else None
                 container.wid_add(widget=widget_act.widget, label=widget_label, expand=expand, translate=translate, colspan=size, fname=name, fill=fill)
 
             elif node.tag =='group':

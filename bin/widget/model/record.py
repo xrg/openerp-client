@@ -147,7 +147,7 @@ class ModelRecord(signal_event.signal_event):
         except Exception, e:
             if hasattr(e, 'faultCode') and e.faultCode.find('ValidateError')>-1:
                 self.failed_validation()
-                return False
+                return None
             pass
 
         self._loaded = False

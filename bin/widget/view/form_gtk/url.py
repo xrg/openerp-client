@@ -27,8 +27,8 @@ import interface
 import tools
 
 class url(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs, label_ebox=label)
 
         self.widget = gtk.HBox(homogeneous=False)
 
@@ -102,8 +102,8 @@ class sip(url):
 
 class uri(url):
 
-    def __init__(self, window, parent, model, attrs=None):
-        super(uri, self).__init__(window, parent, model, attrs=attrs)
+    def __init__(self, window, parent, model, attrs=None, label=None):
+        super(uri, self).__init__(window, parent, model, attrs=attrs, label_ebox=label)
 
         self.but_new = gtk.Button()
         img_new = gtk.Image()

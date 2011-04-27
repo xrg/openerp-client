@@ -150,6 +150,8 @@ class CharField(object):
             if k == 'invisible' and widget:
                 func = ['show_all', 'hide_all'][bool(result)]
                 getattr(widget, func)()
+                if widget.label_ebox:
+                    getattr(widget.label_ebox, func)()
             elif k in ['readonly', 'required'] :
                 self.get_state_attrs(model)[k] = result
 

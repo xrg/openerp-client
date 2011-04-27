@@ -39,8 +39,8 @@ from modules.gui.window.win_search import win_search
 from widget.view.form_gtk.many2one import dialog
 
 class many2many(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent, model, attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent, model, attrs, label_ebox=label)
 
         self.widget = gtk.VBox(homogeneous=False, spacing=1)
 
