@@ -95,9 +95,7 @@ class image_wid(interface.widget_interface):
 
         self.alignment.add(self.hbox)
         self.widget.pack_start(self.alignment, expand=False, fill=False)
-
         self.update_img()
-        self._old_model = False
 
     def sig_add(self, widget):
         filter_all = gtk.FileFilter()
@@ -178,9 +176,6 @@ class image_wid(interface.widget_interface):
                 log = logging.getLogger('common')
                 log.warning(_('Image corrupted'))
 
-                
-                
-
         pixbuf = None
         for type in ('jpeg', 'gif', 'png', 'bmp'):
             loader = gtk.gdk.PixbufLoader(type)
@@ -221,11 +216,9 @@ class image_wid(interface.widget_interface):
     def display(self, model, model_field):
         if not model_field:
             return False
-        if (self._old_model != model) or not self._value:
-            self._value = model_field.get(model)
+        self._value = model_field.get(model)
         super(image_wid, self).display(model, model_field)
         self.update_img()
-        self._old_model = model
 
     def set_value(self, model, model_field):
         return model_field.set_client(model, self._value or False)

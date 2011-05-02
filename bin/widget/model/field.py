@@ -242,6 +242,25 @@ class BinaryField(CharField):
             self.sig_changed(model)
             model.signal('record-changed', model)
 
+class ImageField(CharField):
+    
+    def validate(self, model):
+        ok = True
+        if bool(self.get_state_attrs(model).get('required', 0)):
+            if not model.value.get(self.name, False):
+                ok=False
+        self.get_state_attrs(model)['valid'] = ok
+        return ok
+
+    def set(self, model, value, test_state=True, modified=False, get_binary_size=True):
+        model.value[self.name] = value
+        if not value:
+            model.value[self.name] = ""
+        if modified:
+            model.modified = True
+            model.modified_fields.setdefault(self.name)
+        return True
+
 
 class SelectionField(CharField):
     def set(self, model, value, test_state=True, modified=False):
@@ -541,7 +560,7 @@ TYPES = {
     'reference' : ReferenceField,
     'selection': SelectionField,
     'boolean': IntegerField,
-    'image': BinaryField,
+    'image': ImageField,
     'binary': BinaryField,
 }
 
