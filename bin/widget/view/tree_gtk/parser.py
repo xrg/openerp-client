@@ -276,7 +276,7 @@ class Char(object):
         else:
             field.get_state_attrs(model)['required'] = field.attrs.get('required',False)
         if 'value' in state_changes:
-            field.set(model, state_changes['value'], test_state=False, modified=True)
+            field.set(model, state_changes['value'], modified=True)
 
     def setter(self, column, cell, store, iter):
         model = store.get_value(iter, 0)
