@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
+import logging
 import re
 import time
 import common
@@ -238,12 +238,14 @@ class ModelRecord(signal_event.signal_event):
         self._loaded = True
         self.signal('record-changed')
 
-    def set(self, val, modified=False, signal=True):
+    def set(self, val, modified=False, signal=True, check_on_change=False):
         later = {}
         for fieldname, value in val.items():
             if fieldname == CONCURRENCY_CHECK_FIELD:
                 self._concurrency_check_data = value
             if fieldname not in self.mgroup.mfields:
+                if check_on_change:
+                    logging.getLogger('on_change').warning('%s object has no field %s' % (self.resource, fieldname))
                 continue
             if isinstance(self.mgroup.mfields[fieldname], field.O2MField):
                  self.pager_cache[fieldname] = value
@@ -253,7 +255,9 @@ class ModelRecord(signal_event.signal_event):
                 self.pager_cache[fieldname] = value
 
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
-
+            if check_on_change:
+                self.mgroup.mfields[fieldname].sig_changed(self)
+            
         for fieldname, value in later.items():
             self.mgroup.mfields[fieldname].set(self, value, modified=modified)
         self._loaded = True
@@ -309,7 +313,7 @@ class ModelRecord(signal_event.signal_event):
         ids = self.id and [self.id] or []
         response = getattr(self.rpc, func_name)(ids, *args)
         if response:
-            self.set(response.get('value', {}), modified=True)
+            self.set(response.get('value', {}), modified=True, check_on_change=True)
             if 'domain' in response:
                 for fieldname, value in response['domain'].items():
                     if fieldname not in self.mgroup.mfields:
