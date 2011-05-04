@@ -50,7 +50,8 @@ class main(service.Service):
                 return False
             datas['id'] = ids[0]
         ctx = rpc.session.context.copy()
-        ctx.update(context)
+        if context:
+            ctx.update(context)
         report_id = rpc.session.rpc_exec_auth('/report', 'report', name, ids, datas, ctx)
         state = False
         attempt = 0
