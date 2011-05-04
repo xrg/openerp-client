@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: Dimitris Andavoglou <dimitrisand@gmail.com>\n"
+"PO-Revision-Date: 2011-05-03 09:34+0000\n"
+"Last-Translator: Andreas Ntakas <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-05-04 05:33+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 "Language: el\n"
 
 #: bin/plugins/__init__.py:27
@@ -80,7 +80,7 @@ msgstr "Κωδικός Super Administrator:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "Λάθος κωδικός Υπερδιαχειριστή"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -124,7 +124,7 @@ msgstr "Οι βάσεις δεδομένων σας αναβαθμίστηκαν
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Δεν έχετε επιλέξει καμία βάση δεδομένων"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
@@ -200,7 +200,7 @@ msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Χωρίς Εταιρεία"
 
 #: bin/modules/gui/main.py:995
 #, python-format
@@ -214,17 +214,19 @@ msgstr "Καμία αίτηση"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s αιτήσεις απεστάλησαν"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"Παρακαλώ ελέξτε ξανά το όνομα της βάσης δεδομένων ή επικοινωνήστε με τον "
+"διαχειριστή σας για να επιβεβαιώσετε την κατάσταση της βάσης δεδομένων."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "Η βάση δεδομένων δεν είναι προσβάσιμη ή δεν υπάρχει"
 
 #: bin/modules/gui/main.py:1041
 msgid ""
@@ -513,6 +515,12 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Σφάλμα κατά την προσπάθεια εισαγωγής της εγγραφής:\n"
+"%s\n"
+"Μήνυμα Λάθους:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -529,7 +537,7 @@ msgstr "Σφάλμα άνοιγμα .CSV αρχείο"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "Σφάλμα πληκτρολόγισης"
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -544,10 +552,12 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"Σφάλμα στην επεξεργασία της πρώτης γραμμής του αρχείου.\n"
+"Άγνωστο πεδίο %s !"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "Σφάλμα Εισαγωγής."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -563,7 +573,7 @@ msgstr "Εφαρμογή"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "Επεξεργαστής Εκτύπωσης"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
@@ -652,7 +662,7 @@ msgstr "Σφάλμα ανοίγματος Excel!"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "Ποιό είναι το όνομα αυτής της εξαγωγής;"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
@@ -705,7 +715,7 @@ msgstr "δηλώστε το όνομα/ip του εξυπηρετητή"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "Κλείσιμο τρέχουσας συμβουλής"
 
 #: bin/common/common.py:90
 msgid ""
@@ -714,10 +724,15 @@ msgid ""
 "open this menu item, unless you disable all tips using the <b>'Menu "
 "Tips'</b> option in the user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Κλείσιμο Τρέχουσας Συμβουλής:</b></span>\n"
+"Αυτή η επιλογή θα αποκλύψει την τρέχουσα συμβουλή. Θα εμφανιστεί ξανά την "
+"επόμενη φορά που θα ανοίξετε αυτή την επιλογή του μενού, εκτός αν "
+"απενεργοποιήσετε όλες τις συμβουλές χρησιμοποίόντας την επιλογή "
+"<b>'Συμβουλές Μενού'</b> στις ρυθμήσεις του χρήστη."
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "Απενεργοποίηση όλων των συμβουλών"
 
 #: bin/common/common.py:101
 msgid ""
@@ -726,10 +741,15 @@ msgid ""
 "To re-enable tips you need to check the <b>'Menu Tips'</b> option in the "
 "user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Απενεργοποίηση όλων των "
+"συμβουλών:</b></span>\n"
+"Αυτή η επιλογή θα απενεργοποιήσει την εμφάνηση των συμβουλών σε όλα τα "
+"μενού. Για να επαναενεργοποιήσετε τις συμβουλές πρέπει να τσεκάρετε την "
+"επιλογή <b>'Συμβουλές Μενού'</b> στις ρυθμίσεις του χρήστη."
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "Συμβουλές"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
@@ -750,11 +770,11 @@ msgstr ""
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "Επιβεβαιώστε ότι το αρχείο %s είναι σωστό"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " ανέφερε το εξής πρόβλημα:\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
@@ -848,7 +868,7 @@ msgstr "Άνοιγμα με..."
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "Αδυναμία ορισμού του locale σε %s: %s"
 
 #: bin/printer/printer.py:184
 #, python-format
@@ -866,6 +886,8 @@ msgstr ""
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
+"Σφάλμα! Δεν βρέθηκαν δεδομένα. Σιγουρευτείτε ότι υπάρχουν δεδομένα για "
+"εκτύπωση!"
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
@@ -918,7 +940,7 @@ msgstr "Το περιεχόμενο του widget ή εξαίρεση αν μη 
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "Σφάλμα: "
 
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
@@ -947,7 +969,7 @@ msgstr "περιέχει"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "δεν περιέχει"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
@@ -967,11 +989,11 @@ msgstr "μικρότερο από"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "στο"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "όχι στο"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -996,7 +1018,7 @@ msgstr ""
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "Δεν ορίστηκε ενέργεια!"
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
@@ -1036,19 +1058,19 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--Ενέργειες--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "Αποθήκευση ως Συντόμευση"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Αποθήκευση ως Φίλτρο"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Διαχείριση Φίλτρων"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1056,6 +1078,9 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"Υπάρχουν μη αποθηκευμένες εγγραφές!\n"
+"\n"
+"Παρακαλώ Αποθηκεύστε τις πριν την ταξινόμηση!"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 #, python-format
@@ -1105,38 +1130,38 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "Μεγένθηση Διαγράμματος"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "Σμίκρυνση Διαγράμματος"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "Προσαρμογή Διαγράμματος στο Παράθυρο"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "Εμφάνιση Διαγράμματος στο Κανονικό του Μέγεθος"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "Εκτύπωση Διαγράμματος"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "Κλείσιμο Τρέχοντος %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "Διαγραφή Τρέχοντος %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "Επεξεργασία Τρέχοντος %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
@@ -1181,11 +1206,11 @@ msgstr "Ακύρωση"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "Αποθήκευση & Κλείσιμο"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "Αποθήκευση  & Δημιουργία Νέου"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
@@ -1216,12 +1241,12 @@ msgstr "Προηγούμενη Σελίδα"
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr ""
+msgstr "Προηγούμενη Εγγραφή"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "Επόμενη Εγγραφή"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
@@ -1235,7 +1260,7 @@ msgstr "Αλλαγή"
 #: bin/widget/view/form_gtk/one2many_list.py:251
 #: bin/widget/view/form_gtk/many2many.py:106
 msgid "Choose Limit"
-msgstr ""
+msgstr "Επιλογή Ορίου"
 
 #: bin/widget/view/form_gtk/one2many_list.py:292
 msgid "You have to select a resource !"
@@ -1263,7 +1288,7 @@ msgstr "Εικόνες"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "Δεν υπάρχει εικόνα για αποθήκευση!"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
@@ -1295,11 +1320,11 @@ msgstr "Ορισμός ως προεπιλογή"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "You can not set to the default value here !"
-msgstr ""
+msgstr "Δεν μπορείτε να ορίσετε την αρχική τιμή από εδώ!"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "Operation not permited"
-msgstr ""
+msgstr "Η ενέργεια δεν επιτρέπεται"
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
@@ -1373,6 +1398,8 @@ msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
 msgstr ""
+"(Κάθε υπάρχον φίλτρο με το \n"
+"ίδιο όνομα θα αντικατασταθεί)"
 
 #: bin/rpc.py:157
 msgid "Connection refused!"
@@ -1660,7 +1687,7 @@ msgstr "_Βοήθεια"
 
 #: bin/openerp.glade:1132
 msgid "Enable Debug Mode Tooltips"
-msgstr ""
+msgstr "Ενεργοποίηση Συμβουλών Κατάστασης Αποσφαλμάτωσης"
 
 #: bin/openerp.glade:1140 bin/openerp.glade:4395
 msgid "Support Request"
@@ -2391,6 +2418,8 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Server:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Διακομιστής "
+"OpenERP:"
 
 #: bin/openerp.glade:7025
 msgid ""
@@ -2407,6 +2436,7 @@ msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Κωδικός Υπερχρήστη:"
 
 #: bin/openerp.glade:7048
 msgid "admin"
@@ -2428,6 +2458,8 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>New Database Name:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Όνομα Νέας Βάσης "
+"Δεδομένων:"
 
 #: bin/openerp.glade:7154
 msgid ""
@@ -2443,29 +2475,39 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Προεπιλεγμένη "
+"Γλώσσα:"
 
 #: bin/openerp.glade:7169
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
+"Αυτός είναι ο κωδικός του χρήστη 'admin' που θα δημιουργηθεί στην νέα σας "
+"βάση δεδομένων."
 
 #: bin/openerp.glade:7171
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Administrator "
 "Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Κωδικός "
+"Διαχειριστή:"
 
 #: bin/openerp.glade:7184
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
+"Αυτός είναι ο ο κωδικός του χρήστη 'admin' που θα δημιουργηθεί στη νέα σας "
+"βάση δεδομένων. Πρέπει να είναι ο ίδιος με αυτόν στο πάνω πεδίο."
 
 #: bin/openerp.glade:7186
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Επιβεβαίωση "
+"Κωδικού:"
 
 #: bin/openerp.glade:7279
 msgid ""
@@ -2482,6 +2524,8 @@ msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
 "Data:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Φόρτωση Δεδομένων "
+"Επίδειξης:"
 
 #: bin/openerp.glade:7349
 msgid "Change password"
@@ -2579,15 +2623,15 @@ msgstr ""
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "Αφαίρεση Φίλτρου"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
-msgstr ""
+msgstr "Φιλτράρισμα Εγγραφής"
 
 #: bin/openerp.glade:8395
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "Δώστε Όνομα Φίλτρου:"
 
 #: bin/win_error.glade:40
 msgid "label"
@@ -2624,7 +2668,7 @@ msgstr ""
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
-msgstr ""
+msgstr "Περιγραφή προβλήματος:"
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"
