@@ -177,22 +177,6 @@ class CharField(object):
         return model.state_attrs[self.name]
 
 class BinaryField(CharField):
-    def __check_model(self, model):
-        assert self.name in model.mgroup.mfields
-
-    def __check_load(self, model, modified, bin_size):
-        if model.id and (self.name not in model.value or (model.value[self.name] is None)):
-            c = rpc.session.context.copy()
-            c.update(model.context_get())
-            c['bin_size'] = bin_size
-            data = model.rpc.read([model.id], [self.name], c)
-            if data:
-                value = data[0][self.name]
-                self.set(model, value, modified=modified, get_binary_size=bin_size)
-
-    def get_size_name(self):
-        return "%s.size" % self.name
-
     def validate(self, model):
         ok = True
         if bool(self.get_state_attrs(model).get('required', 0)):
@@ -202,40 +186,22 @@ class BinaryField(CharField):
         self.get_state_attrs(model)['valid'] = ok
         return ok
 
-    def set(self, model, value, test_state=True, modified=False, get_binary_size=True):
-        self.__check_model(model)
-        if model.is_wizard():
-            get_binary_size = False
-        model.value[self.name] = None
-        name = get_binary_size and self.get_size_name() or self.name
-        model.value[name] = value
-        if (not get_binary_size) and value:
-            model.value[self.get_size_name()] = tools.human_size(len(value))
-        if not value:
-            model.value[self.get_size_name()] = ""
+    def set(self, model, value, test_state=True, modified=False):
+        model.value[self.name] = value
+        if value:
+            value = tools.human_size(len(value))
+        model.value["%s.size" % self.name] = value
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
         return True
 
-    def get(self, model, check_load=True, readonly=True, modified=False):
-        self.__check_model(model)
-        if check_load:
-            self.__check_load(model, modified, False)
-        res = model.value.get(self.name, False)
-        if not res:
-            return model.value.get(self.get_size_name(), False) or False
-        return res
-
     def get_client(self, model):
-        self.__check_model(model)
-        self.__check_load(model, False, True)
-        return model.value.get(self.get_size_name(), False) or False
+        return model.value.get("%s.size" % self.name, False) 
 
     def set_client(self, model, value, test_state=True, force_change=False):
-        self.__check_model(model)
         before = self.get(model)
-        self.set(model, value, test_state, get_binary_size=False)
+        self.set(model, value, test_state)
         if before != self.get(model):
             model.modified = True
             model.modified_fields.setdefault(self.name)
@@ -244,18 +210,10 @@ class BinaryField(CharField):
 
 class ImageField(CharField):
     
-    def validate(self, model):
-        ok = True
-        if bool(self.get_state_attrs(model).get('required', 0)):
-            if not model.value.get(self.name, False):
-                ok=False
-        self.get_state_attrs(model)['valid'] = ok
-        return ok
-
     def set(self, model, value, test_state=True, modified=False, get_binary_size=True):
         model.value[self.name] = value
         if not value:
-            model.value[self.name] = ""
+            model.value[self.name] = ''
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
