@@ -95,7 +95,7 @@ class widget_interface(object):
         model = self._view.modelfield.parent.resource
         wid_common.field_pref_set(self._view.widget_name,
                 self.attrs.get('string', self._view.widget_name), model,
-                value, deps, window=self._window)
+                value, self.attrs.get('password', False), deps, window=self._window)
 
     def _menu_open(self, obj, menu):
         item = gtk.SeparatorMenuItem()
