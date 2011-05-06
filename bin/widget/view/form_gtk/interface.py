@@ -86,16 +86,19 @@ class widget_interface(object):
 
     def _menu_sig_default_set(self):
         deps = []
+        ispwdfield = False
         wid = self._view.view_form.widgets
         for wname, wview in self._view.view_form.widgets.items():
             if wview.modelfield.attrs.get('change_default', False):
                 value = wview.modelfield.get(self._view.model)
                 deps.append((wname, wname, value, value))
+        if self._view.widget_name == "new_password":
+            ispwdfield = True
         value = self._view.modelfield.get_default(self._view.model)
         model = self._view.modelfield.parent.resource
         wid_common.field_pref_set(self._view.widget_name,
                 self.attrs.get('string', self._view.widget_name), model,
-                value, deps, window=self._window)
+                value, ispwdfield, deps, window=self._window)
 
     def _menu_open(self, obj, menu):
         item = gtk.SeparatorMenuItem()
