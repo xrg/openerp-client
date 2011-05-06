@@ -43,8 +43,7 @@ def field_pref_set(field, name, model, value, pwdfield, dependance=None, window=
     ent.set_text(model)
     ent = win_gl.get_widget('ent_value')
     ent.set_text((value and str(value)) or '/')
-    if pwdfield == True:
-        ent.set_visibility(False)
+    ent.set_visibility(not pwdfield)
     radio = win_gl.get_widget('radio_user_pref')
 
     vbox = win_gl.get_widget('pref_vbox')
