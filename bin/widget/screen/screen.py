@@ -938,7 +938,5 @@ class Screen(signal_event.signal_event):
             return True
         process(self.widget, value)
 
-
-
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

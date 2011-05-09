@@ -44,9 +44,8 @@ class custom_filter(wid_int.wid_int):
 
         fields = attrs.get('fields',None)
         for item in fields:
-            self.field_selection[item[1]] = (item[0], item[2], item[3])
+            self.field_selection[item[1].encode('utf-8')] = (item[0], item[2], item[3])
             self.combo_fields.append_text(item[1])
-
         self.combo_fields.set_active(0)
 
         # Processing operator combo
@@ -62,9 +61,8 @@ class custom_filter(wid_int.wid_int):
                 ['in',_('in')],
                 ['not in',_('not in')],
                 ):
-            self.op_selection[item[1]] = item[0]
+            self.op_selection[item[1].encode('utf-8')] = item[0]
             self.combo_op.append_text(item[1])
-
         self.combo_op.set_active(0)
 
         # Processing text value
