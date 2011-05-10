@@ -631,11 +631,12 @@ class db_create(object):
 
         if res == gtk.RESPONSE_OK:
             try:
-                if rpc.session.db_exec(url, 'db_exist', db_name):
+                id = rpc.session.db_exec(url, 'list', True)
+                if db_name in id:
                     common.warning(_("Could not create database."),
                                     _('Database already exists !'), parent=parent)
                     return
-                
+
                 id = rpc.session.db_exec(url, 'create', passwd, db_name, demo_data, langreal, user_pass)
                 win, pb = common.OpenERP_Progressbar(parent, title='OpenERP Database Installation')
                 self.timer = gobject.timeout_add(1000, self.progress_timeout, pb, url, passwd, id, win, db_name, parent)
@@ -1206,7 +1207,7 @@ class terp_main(service.Service):
                 return True
             return False
         return True
-    
+
 
     def win_add(self, win, datas):
         """
@@ -1230,7 +1231,7 @@ class terp_main(service.Service):
         box_label.set_tooltip_text(win.name)
         win.page_label = box_label
 
-        
+
         event_box = gtk.EventBox()
         event_box.add(box_label)
         event_box.set_visible_window(False)
