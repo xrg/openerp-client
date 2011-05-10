@@ -237,6 +237,8 @@ class Screen(signal_event.signal_event):
             if self.current_view.view.key:
                 self.domain = self.domain_init[:]
                 self.domain += val.get('domain',[]) + self.sort_domain
+            else:
+                self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
         else:
             self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
 
