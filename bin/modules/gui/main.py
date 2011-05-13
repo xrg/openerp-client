@@ -392,13 +392,18 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
     return True
 
 def _refresh_langlist(lang_widget, url):
+    import locale
     liststore = lang_widget.get_model()
     liststore.clear()
     lang_list = rpc.session.db_exec_no_except(url, 'list_lang')
-    lang = rpc.session.context.get('lang', options.options.get('client.lang', 'en_US'))
+    lang = rpc.session.context.get('lang', options.options.get('client.lang', None))
     active_idx = -1
+    try:
+        lang2 = locale.getdefaultlocale()[0]
+    except Exception:
+        lang2 = None
     for index, (key,val) in enumerate(lang_list):
-        if key == lang:
+        if (active_idx < 0) and (key == lang or key == lang2):
             active_idx = index
         liststore.append((val,key))
     if active_idx != -1:
