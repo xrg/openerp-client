@@ -180,7 +180,7 @@ def setlang(lang=None):
             locale.setlocale(locale.LC_ALL, lang_enc)
         except Exception, e:
             logging.getLogger('translate').warning(
-                    _('Unable to set locale %s: %s') % (lang_enc, e))
+                    _('Unable to set locale %s: %s'), lang_enc, e)
 
         lang = gettext.translation(APP, DIR, languages=[lang], fallback=True)
         lang.install(unicode=1)
@@ -189,7 +189,7 @@ def setlang(lang=None):
             if os.name == 'nt':
                 os.environ['LANG'] = ''
             locale.setlocale(locale.LC_ALL, '')
-        except:
+        except Exception:
             logging.getLogger('translate').warning('Unable to set locale !')
         gettext.bindtextdomain(APP, DIR)
         gettext.textdomain(APP)
