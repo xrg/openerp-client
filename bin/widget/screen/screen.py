@@ -118,6 +118,7 @@ class Screen(signal_event.signal_event):
         self.sort_domain = []
         self.old_ctx = {}
         self.help_mode = False
+        self.view_to_load = None
         if view_type:
             self.view_to_load = view_type[1:]
             view_id = False
