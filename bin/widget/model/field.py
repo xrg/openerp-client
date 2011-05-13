@@ -260,12 +260,15 @@ class FloatField(CharField):
                 self.sig_changed(model)
                 model.signal('record-changed', model)
 
+    def get(self, model, check_load=True, readonly=True, modified=False):
+        return model.value.get(self.name, False)
+
 class IntegerField(CharField):
     def get(self, model, check_load=True, readonly=True, modified=False):
-        return model.value.get(self.name, 0) or 0
+        return model.value.get(self.name, False)
 
     def get_client(self, model):
-        return model.value[self.name] or 0
+        return model.value[self.name]
 
     def validate(self, model):
         self.get_state_attrs(model)['valid'] = True
@@ -280,6 +283,8 @@ class IntegerField(CharField):
             self.sig_changed(model)
             model.signal('record-changed', model)
 
+    def get(self, model, check_load=True, readonly=True, modified=False):
+        return model.value.get(self.name, False)
 
 class M2OField(CharField):
     '''
