@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-05-04 16:58+0000\n"
+"PO-Revision-Date: 2011-05-13 16:08+0000\n"
 "Last-Translator: Milan Milosevic <Unknown>\n"
 "Language-Team: Serbian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-05 04:39+0000\n"
+"X-Launchpad-Export-Date: 2011-05-14 04:53+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 "Language: \n"
 
@@ -2849,7 +2849,7 @@ msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
-"Ovo je ULR OpenERP-ovog servera. Koristite \"localhost\" ako je server "
+"Ovo je URL OpenERP-ovog servera. Koristite \"localhost\" ako je server "
 "instaliran na ovom računaru. Kliknite na \"Promeni\" da promenite adresu."
 
 #: bin/openerp.glade:6994
@@ -2864,80 +2864,84 @@ msgid ""
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
-"Ovo je lozinka korisnika koji ima prava da administrira baze. Ovo nije "
-"OpenERP korisnik, samoje  super administrator. Ako je niste menjali lozinka "
-"je \"admin\" posle instalacije."
+"Ovo je lozinka korisnika koji ima prava da upravlja bazama podataka. Ovo "
+"nije OpenERP korisnik, već  super-administrator. Ako je niste menjali, "
+"lozinka je 'admin' po instalaciji."
 
 #: bin/openerp.glade:7029
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
+"Administrator Password:"
 
 #: bin/openerp.glade:7048
 msgid "admin"
-msgstr ""
+msgstr "administrator"
 
 #: bin/openerp.glade:7062
 msgid "(<i>admin</i>, by default)"
 msgstr "(<i>admin</i>, po formaciji)"
 
-#
-# File: bin/openerp.glade, line: 9091
-# File: bin/openerp.glade, line: 9091
 #: bin/openerp.glade:7127
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
-"Izaberite ime za bazu podataka koja će biti kreirana. Ime nesme da sadrži ni "
-"jedan specijalni karakter, razmak i sl. Primer: 'terp'."
+"Izaberite ime za bazu podataka koja će biti napravljena. Ime ne sme da "
+"sadrži ni jedan specijalni karakter. Primer: 'terp'."
 
 #: bin/openerp.glade:7129
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>New Database Name:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>New Database Name:"
 
-#
-# File: bin/openerp.glade, line: 9117
-# File: bin/openerp.glade, line: 9117
 #: bin/openerp.glade:7154
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
-"Izaberite jezik koji će biti instaliran za ovu bazu podataka. Nakon "
-"instalacije bićete u mogućnosti da instalirate nove jezike kroz meni "
-"administracija."
+"Izaberite jezik koji će biti instaliran za ovu bazu podataka. Po instalaciji "
+"bićete u mogućnosti da instalirate nove jezike kroz meni administracijâ."
 
 #: bin/openerp.glade:7156
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
 
 #: bin/openerp.glade:7169
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
+"Ovo je lozinka za 'admin' korisnika koja će biti napravljena u Vašoj novoj "
+"bazi podataka."
 
 #: bin/openerp.glade:7171
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Administrator "
 "Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Administrator "
+"Password:"
 
 #: bin/openerp.glade:7184
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
+"Ovo je lozinka za 'admin' korisnika koja će biti napravljena u Vašoj novoj "
+"bazi podataka. Mora biti istovetna kao u gornjem polju."
 
 #: bin/openerp.glade:7186
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
 
 #: bin/openerp.glade:7279
 msgid ""
@@ -2945,15 +2949,17 @@ msgid ""
 "database. These data will help you to understand OpenERP, with predefined "
 "products, partners, etc."
 msgstr ""
-"Čekiraj kućicu ako želiš demo podatke instalirane u novoj bazi podataka. Ovi "
-"podaci će ti pomoči da razumeš OpenERP sa unapred definisanim partnerima, "
-"proizvodima itd."
+"Obeležite ovu kućicu ako želite demo podatke nstalirane u svojoj novoj bazi "
+"podataka. Ovi podaci pomoći će Vam da razumete OpenERP, sa predefinisanim "
+"proizvodima, partnerima itd."
 
 #: bin/openerp.glade:7282
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
 "Data:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
+"Data:"
 
 #
 # File: bin/openerp.glade, line: 9299
@@ -2962,33 +2968,21 @@ msgstr ""
 msgid "Change password"
 msgstr "Promena lozinke"
 
-#
-# File: bin/openerp.glade, line: 9316
-# File: bin/openerp.glade, line: 9316
 #: bin/openerp.glade:7366
 msgid "<b>Change your super admin password</b>"
-msgstr "<b>Promena lozinke super administratora</b>"
+msgstr "<b>Promena lozinke super-administratora</b>"
 
-#
-# File: bin/openerp.glade, line: 9469
-# File: bin/openerp.glade, line: 9469
 #: bin/openerp.glade:7519
 msgid "Old password:"
-msgstr "Stara šifra"
+msgstr "Stara lozinka:"
 
-#
-# File: bin/openerp.glade, line: 9482
-# File: bin/openerp.glade, line: 9482
 #: bin/openerp.glade:7532
 msgid "New password:"
-msgstr "Nova šifra:"
+msgstr "Nova lozinka:"
 
-#
-# File: bin/openerp.glade, line: 9495
-# File: bin/openerp.glade, line: 9495
 #: bin/openerp.glade:7545
 msgid "New password confirmation:"
-msgstr "Potvrda nove šifre:"
+msgstr "Potvrda nove lozinke:"
 
 #: bin/openerp.glade:7604
 msgid "OpenERP Message"
@@ -2996,7 +2990,7 @@ msgstr "OpenERP Poruka"
 
 #: bin/openerp.glade:7788
 msgid "Concurrency exception"
-msgstr "Concurrency exception"
+msgstr "Izuzeće od istovetnosti"
 
 #: bin/openerp.glade:7813
 msgid ""
@@ -3010,13 +3004,13 @@ msgid ""
 "   - \"Write anyway\" to save your current version.\n"
 msgstr ""
 "<b>\n"
-"Napisi konkurentno upozorenje:\n"
+"Napišite upozorenje o istovetnosti:\n"
 "</b>\n"
-"Ovaj dokument je izmenjen za vreme tvog uređenja istog.\n"
-"  Izaberi:\n"
-"   -\"Otkaži\" da otkažeš čuvanje.\n"
-"   -\"Uporedi\" da vidiš izmenjenu verziju.\n"
-"   -\"Upiši sve jedno\" da sačuvaš trenutnu verziju.\n"
+"Ovaj dokument je izmenjen dok ste ga izmenjivali.\n"
+"  Izaberite:\n"
+"   -\"Otkaži\" za otkazivanje sačuvavanja.\n"
+"   -\"Uporedi\" da biste videli izmenjenu verziju.\n"
+"   -\"Upiši sve jedno\" da biste sačuvali trenutnu verziju.\n"
 
 #
 # File: bin/openerp.glade, line: 10018
@@ -3025,16 +3019,13 @@ msgstr ""
 msgid "Compare"
 msgstr "Uporedi"
 
-#
-# File: bin/openerp.glade, line: 10064
-# File: bin/openerp.glade, line: 10064
 #: bin/openerp.glade:7922
 msgid "Write anyway"
-msgstr "Ipak zapiši"
+msgstr "Ipak upiši"
 
 #: bin/openerp.glade:7952 bin/openerp.glade:7962
 msgid "window1"
-msgstr "Prozor1"
+msgstr "prozor1"
 
 #: bin/openerp.glade:8034
 msgid "Today"
@@ -3042,7 +3033,7 @@ msgstr "Danas"
 
 #: bin/openerp.glade:8080
 msgid "September 2008"
-msgstr "Spetenbar 2009"
+msgstr "Septembar 2008."
 
 #: bin/openerp.glade:8094
 msgid "Day"
@@ -3054,45 +3045,47 @@ msgstr "Mesec"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
-msgstr ""
+msgstr "Polja na koje treba primeniti kriterijume retrage"
 
 #: bin/openerp.glade:8289
 msgid "Conditional Operators"
-msgstr ""
+msgstr "Mogući Operateri"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
-msgstr ""
+msgstr "Izbor će biti primenjen sa sledećim filterom, ako takav postoji"
 
 #: bin/openerp.glade:8317
 msgid ""
 "AND\n"
 "OR"
 msgstr ""
+"I\n"
+"ILI"
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "Ukloni filter"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
-msgstr ""
+msgstr "Unos Filterâ"
 
 #: bin/openerp.glade:8395
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "Unesite Naziv Filtera:"
 
 #: bin/win_error.glade:40
 msgid "label"
-msgstr "Oznaka"
+msgstr "oznaka"
 
 #: bin/win_error.glade:100
 msgid "Click here for details about the publisher warranty proposition"
-msgstr ""
+msgstr "Kliknite ovde za detalje o garantnoj ponudi izdavača"
 
 #: bin/win_error.glade:120
 msgid "<i>_Publisher Warranty</i>"
-msgstr ""
+msgstr "<i>_Garancija Izdavača</i>"
 
 #: bin/win_error.glade:151
 msgid ""
@@ -3102,6 +3095,11 @@ msgid ""
 "you shortly.\n"
 "</i>"
 msgstr ""
+"<b>Garantni Ugovor Izdavača.</b>\n"
+" <i>\n"
+" Vaš zahtev biće poslat OpenERP-u i garantni izdavački tim će Vam odgovoriti "
+"uskoro.\n"
+" </i>"
 
 #
 # File: bin/openerp.glade, line: 3362
@@ -3123,7 +3121,7 @@ msgstr "Ostale napomene:"
 
 #: bin/win_error.glade:285
 msgid "Send to Publisher Warranty Team"
-msgstr ""
+msgstr "Pošalji Garantnom Timu Izdavača"
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
@@ -3131,7 +3129,7 @@ msgstr ""
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"
-msgstr "<i>_Support Request</i>"
+msgstr "<i>_Zahtev za podršku</i>"
 
 #: bin/win_error.glade:387
 msgid "Details"
