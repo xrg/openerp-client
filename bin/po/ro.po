@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:04+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-05-14 05:51+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 "Language: ro\n"
 
 #: bin/plugins/__init__.py:27
@@ -54,11 +54,11 @@ msgstr "Nimic de tipărit!"
 
 #: bin/modules/action/main.py:66
 msgid "Printing aborted, too long delay !"
-msgstr "Tiparire intrerupta, intarziere prea lunga !"
+msgstr "Tipărire întreruptă, întârziere prea lungă!"
 
 #: bin/modules/action/main.py:195
 msgid "Select your action"
-msgstr "Selectati actiunea"
+msgstr "Selectați acțiunea"
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
@@ -92,7 +92,7 @@ msgstr "ID contract:"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr "Parola contract:"
+msgstr "Parolă contract:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
@@ -112,7 +112,7 @@ msgstr "Migrare bază de date"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr "Baza de date"
+msgstr "Bază de date"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
@@ -128,7 +128,7 @@ msgstr "Nu ați selectat nici o bază de date"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr "Nu a fost gasita nici o baza de date, trebuie sa creati una !"
+msgstr "Nu a fost găsită nici o baza de date, trebuie să creați una !"
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
@@ -140,8 +140,8 @@ msgid ""
 "The versions of the server (%s) and the client (%s) missmatch. The client "
 "may not work properly. Use it at your own risks."
 msgstr ""
-"Versiunile server (%s) si client (%s) sunt diferite. S-ar putea ca clientul "
-"sa nu ruleze corect. Puteti sa utilizati aceasta versiune pe riscul dvs."
+"Versiunile server (%s) și client (%s) sunt diferite. S-ar putea ca clientul "
+"să nu ruleze corect. Puteți să utilizați aceasta versiune pe riscul dvs."
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
@@ -162,7 +162,7 @@ msgstr ""
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
 msgid "Could not create database."
-msgstr "Baza de date nu poate fi creata."
+msgstr "Baza de date nu poate fi creată."
 
 #: bin/modules/gui/main.py:647
 msgid "Database already exists !"
@@ -265,8 +265,8 @@ msgid ""
 "Ask the administrator to verify\n"
 "you have an action defined for your user."
 msgstr ""
-"Nu va puteti log-a in sistem !\n"
-"Contactati administratorul pentru a\n"
+"Nu vă puteți log-a în sistem !\n"
+"Contactați administratorul pentru a\n"
 "verifica configurarea utilizatorului dvs."
 
 #: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
@@ -292,11 +292,11 @@ msgstr "Bază de date aruncată cu scucces!"
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr "Nu se poate sterge definitiv baza de date."
+msgstr "Nu se poate șterge definitiv baza de date."
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr "Nu se poate sterge definitiv baza de date."
+msgstr "Nu se poate șerge definitiv baza de date."
 
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
@@ -319,7 +319,7 @@ msgstr "Nu se poate restaura baza de date."
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
 msgstr ""
-"Operatie anulata ! Parola confirmata este diferita de noua parola definita."
+"Operație anulată ! Parola confirmată este diferită de noua parola nouă."
 
 #: bin/modules/gui/main.py:1446
 msgid "Validation Error."
@@ -327,11 +327,11 @@ msgstr "Eroare Validare."
 
 #: bin/modules/gui/main.py:1454
 msgid "Could not change the Super Admin password."
-msgstr "Parola Super Admin nu poate fi modificata."
+msgstr "Parola Super Admin nu poate fi modificată."
 
 #: bin/modules/gui/main.py:1455
 msgid "Bad password provided !"
-msgstr "Parola gresita !"
+msgstr "Parolă greșită !"
 
 #: bin/modules/gui/main.py:1457
 msgid "Error, password not changed."
@@ -366,7 +366,7 @@ msgstr "Resource ID-ul nu există pentru acest obiect !"
 #: bin/modules/gui/window/form.py:231
 msgid "No record selected ! You can only attach to existing record."
 msgstr ""
-"Nu ati selectat nici o inregistrare ! Puteti atasa doar unei inregistrari "
+"Nu ați selectat nici o înregistrare ! Puteți atașa doar unei înregistrări "
 "existente."
 
 #: bin/modules/gui/window/form.py:247
@@ -403,8 +403,8 @@ msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
 msgstr ""
-"Inregistrarea nu este salvata ! \n"
-" Doriti sa goliti inregistrarea curenta ?"
+"Înregistrarea nu este salvată ! \n"
+" Doriți să goliți înregistrarea curentă ?"
 
 #: bin/modules/gui/window/form.py:272
 #: bin/widget/view/form_gtk/one2many_list.py:380
@@ -426,7 +426,7 @@ msgstr "Resurse eliminate cu succes."
 
 #: bin/modules/gui/window/form.py:314
 msgid "Working now on the duplicated document !"
-msgstr "Se lucreaza pe documentul duplicat !"
+msgstr "Se lucrează pe documentul duplicat !"
 
 #: bin/modules/gui/window/form.py:329
 msgid "Document Saved."
@@ -453,12 +453,12 @@ msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
 msgstr ""
-"Aceasta inregistrare a fost modificata\n"
-"doriti sa salvati modificarile ?"
+"Această înregistrare a fost modificată\n"
+"doriți să salvați modificările ?"
 
 #: bin/modules/gui/window/form.py:407
 msgid "You must select one or several records !"
-msgstr "Trebuie sa selectati una sau mai multe inregistrari !"
+msgstr "Trebuie să selectați una sau mai multe înregistrări !"
 
 #: bin/modules/gui/window/form.py:416
 msgid "Print Screen"
@@ -466,7 +466,7 @@ msgstr "Tipărire Ecran"
 
 #: bin/modules/gui/window/form.py:436
 msgid "No record selected"
-msgstr "Inregistrare neselectată"
+msgstr "Înregistrare neselectată"
 
 #: bin/modules/gui/window/form.py:441
 msgid "New document"
@@ -543,7 +543,7 @@ msgstr "Input Error."
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
-"Cîmpul %s nu poate fi importat deoarece nu a reuşit autodetecţia acestuia"
+"Câmpul %s nu poate fi importat deoarece nu a reuşit autodetecţia acestuia"
 
 #: bin/modules/gui/window/win_import.py:190
 #, python-format
@@ -631,8 +631,8 @@ msgid ""
 "Are you sure you want\n"
 "to remove this record?"
 msgstr ""
-"Sigur doriti sa stergeti\n"
-"aceasta inregistrare ?"
+"Sigur doriți să ștergeți\n"
+"aceasta înregistrare ?"
 
 #: bin/modules/gui/window/tree.py:223
 msgid "Error removing resource!"
@@ -646,7 +646,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:50
 msgid " record(s) saved !"
-msgstr " inregistrare(i) salvata(e) !"
+msgstr " înregistrare(i) salvată(e) !"
 
 #: bin/modules/gui/window/win_export.py:53
 msgid ""
@@ -705,7 +705,7 @@ msgstr "specificarea nivelului de logging: %s"
 
 #: bin/options.py:113
 msgid "specify the user login"
-msgstr "specificati user-ul si parola"
+msgstr "specificați user-ul și parola"
 
 #: bin/options.py:114
 msgid "specify the server port"
@@ -713,7 +713,7 @@ msgstr "specificati port-ul serverului"
 
 #: bin/options.py:115
 msgid "specify the server ip/name"
-msgstr "specificati numele/ip-ul serverului"
+msgstr "specificați numele/ip-ul serverului"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
@@ -845,8 +845,8 @@ msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
-"Problema dvs. a fost trimisa catre echipa OpenERP !\n"
-"Va vom contacta dupa o ce analizam."
+"Problema dvs. a fost trimisă către echipa OpenERP !\n"
+"Vă vom contacta după o ce analizăm."
 
 #: bin/common/common.py:491
 #, python-format
@@ -892,7 +892,7 @@ msgstr ""
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
-msgstr "Eroare scriere fisier !"
+msgstr "Eroare scriere fișier !"
 
 #: bin/openerp-client.py:140
 msgid "Closing OpenERP, KeyboardInterrupt"
@@ -909,7 +909,7 @@ msgstr "Conținutul controlului sau ValueError dacă nu este valid controlul"
 
 #: bin/widget_search/form.py:445
 msgid "The content of the form or exception if not valid"
-msgstr "Continutul formularului sau exceptie daca nu este valid"
+msgstr "Conținutul formularului sau excepție dacă nu este valid"
 
 #: bin/widget_search/date_widget.py:61
 #: bin/widget/view/form_gtk/date_widget.py:63
@@ -989,11 +989,11 @@ msgstr "mai mic decât"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr "in"
+msgstr "în"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr "not in"
+msgstr "nu în"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -1053,7 +1053,7 @@ msgstr "Eroare in vizualizare tip calendar !"
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "You must intall the library python-hippocanvas to use calendars."
 msgstr ""
-"Pentru a putea utiliza calendare trebuie sa instalati biblioteca python-"
+"Pentru a putea utiliza calendare trebuie să instalați biblioteca python-"
 "hippocanvas."
 
 #: bin/widget/view/screen_container.py:73
@@ -1200,7 +1200,7 @@ msgstr "Traduce view"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr "Anulare"
+msgstr "Renunță"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
@@ -1769,7 +1769,7 @@ msgstr "Lanseaza actiuni legate la acesta resursa"
 
 #: bin/openerp.glade:1416
 msgid "Add an attachment to this resource"
-msgstr "Adauga un atasament la aceasta resursa"
+msgstr "Adaugă un atașament la această resursă"
 
 #: bin/openerp.glade:1417
 msgid "Attachment"
@@ -2415,6 +2415,7 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Server:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Server OpenERP:"
 
 #: bin/openerp.glade:7025
 msgid ""
@@ -2424,13 +2425,15 @@ msgid ""
 msgstr ""
 "Aceasta este parola utilizatorului care are drepturile de administrare ale "
 "bazelor de date. Acesta nu este un utilizator OpenERP, doar un super "
-"administrator. Daca  nu o schimbati, parola dupa instalare este 'admin'."
+"administrator. Dacă  nu o schimbați, parola după instalare este 'admin'."
 
 #: bin/openerp.glade:7029
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Parolă Super "
+"Administrator:"
 
 #: bin/openerp.glade:7048
 msgid "admin"
@@ -2445,7 +2448,7 @@ msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
-"Alegeti numele bazei de date ce va fi creata. Numele nu trebuie sa contina "
+"Alegeți numele bazei de date ce va fi creată. Numele nu trebuie să conțină "
 "nici un caracter special. Exemplu: 'terp'."
 
 #: bin/openerp.glade:7129
@@ -2461,7 +2464,7 @@ msgid ""
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
-"Alegeti limba implicita ce va fi instalata pentru aceasta baza de date. Veti "
+"Alegeți limba implicită ce va fi instalată pentru această baza de date. Veți "
 "avea posibilitatea de a instala alte limbi ulterior din meniul administrare."
 
 #: bin/openerp.glade:7156
@@ -2492,7 +2495,7 @@ msgid ""
 "database. It has to be the same than the above field."
 msgstr ""
 "Aceasta este parola utilizatorului 'admin' care va fi creat în noua bază de "
-"date. Trebuie să fie identică cu cea introdusă în cîmpul precedent."
+"date. Trebuie să fie identică cu cea introdusă în câmpul precedent."
 
 #: bin/openerp.glade:7186
 msgid ""
@@ -2558,13 +2561,13 @@ msgid ""
 "   - \"Write anyway\" to save your current version.\n"
 msgstr ""
 "<b>\n"
-"Afiseaza avertizare concurenta:\n"
+"Afișează avertizare concurentă:\n"
 "</b>\n"
-"Acest document a fost modificat in timp ce l-ati editat.\n"
+"Acest document a fost modificat în timp ce l-ați editat.\n"
 "  Alegeti:\n"
-"   - \"Cancel\" pentru a anula salvarea.\n"
-"   - \"Compara\" pentru a vedea versiunea modificata.\n"
-"   - \"Salveaza oricum\" pentru a salva versiunea curenta.\n"
+"   - \"Renunță\" pentru a renunța la salvare.\n"
+"   - \"Compară\" pentru a vedea versiunea modificată.\n"
+"   - \"Salvează oricum\" pentru a salva versiunea curentă.\n"
 
 #: bin/openerp.glade:7876
 msgid "Compare"

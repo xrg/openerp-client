@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-09 06:12+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-05-14 05:51+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 "Language: vi\n"
 
 #: bin/plugins/__init__.py:27
@@ -104,7 +104,7 @@ msgstr "Các bản cập nhật sau đang sẵn sàng"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Bạn có thể chuyển đổi cơ sở dữ liệu của mình vào lúc này"
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
@@ -455,7 +455,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:407
 msgid "You must select one or several records !"
-msgstr ""
+msgstr "Bạn phải chọn một hoặc một số bản ghi !"
 
 #: bin/modules/gui/window/form.py:416
 msgid "Print Screen"
@@ -471,7 +471,7 @@ msgstr "Tài liệu mới"
 
 #: bin/modules/gui/window/form.py:443
 msgid "Editing document (id: "
-msgstr ""
+msgstr "Chỉnh sửa tài liệu (id: "
 
 #: bin/modules/gui/window/form.py:446
 msgid "Record: "
@@ -515,7 +515,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
-msgstr ""
+msgstr "Lỗi quan trọng !"
 
 #: bin/modules/gui/window/win_import.py:100
 #: bin/modules/gui/window/win_import.py:104
@@ -528,7 +528,7 @@ msgstr "Lỗi mở tập tin .CSV"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "Lỗi nhập liệu."
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -554,7 +554,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "Mở rộng"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
@@ -570,7 +570,7 @@ msgstr "Tiện ích mở rộng này đã được định nghĩa"
 
 #: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7684
 msgid "Extension Manager"
-msgstr ""
+msgstr "Trình quản lý Trình mở rộng"
 
 #: bin/modules/gui/window/win_selection.py:51
 msgid "Name"
@@ -736,7 +736,7 @@ msgstr ""
 
 #: bin/common/common.py:152
 msgid "Operation in progress"
-msgstr ""
+msgstr "Thao tác đang thực hiện"
 
 #: bin/common/common.py:156
 msgid ""
@@ -984,7 +984,7 @@ msgstr ""
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
-msgstr ""
+msgstr "Bạn phải chọn một bản ghi để sử dụng các nút liên quan!"
 
 #: bin/widget/view/form.py:236 bin/widget/view/form_gtk/parser.py:647
 #: bin/widget/view/form_gtk/parser.py:767
@@ -1008,7 +1008,7 @@ msgstr "Tuần"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
-msgstr ""
+msgstr "Lỗi xem Lịch!"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "You must intall the library python-hippocanvas to use calendars."
@@ -2524,11 +2524,11 @@ msgstr ""
 
 #: bin/win_error.glade:186
 msgid "Explain what you did:"
-msgstr ""
+msgstr "Giải thích bạn đã làm gì:"
 
 #: bin/win_error.glade:200
 msgid "Others Comments:"
-msgstr ""
+msgstr "Những bình luận khác"
 
 #: bin/win_error.glade:285
 msgid "Send to Publisher Warranty Team"
@@ -2536,7 +2536,7 @@ msgstr ""
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
-msgstr ""
+msgstr "Tóm tắt nội dung vấn đề:"
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"
@@ -2544,7 +2544,7 @@ msgstr ""
 
 #: bin/win_error.glade:387
 msgid "Details"
-msgstr "Chi tiết"
+msgstr "Thông tin chi tiết"
 
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"
