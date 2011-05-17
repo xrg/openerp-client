@@ -142,7 +142,7 @@ class list_record(object):
             @param sort_order : order of sorting for the same read_group call
             @return : sort_order if sort_order start with the same field as gb else None
         """
-        if sort_order:
+        if gb and sort_order:
             if(isinstance(gb, (tuple, list))):
                 gb = gb[0]
 
