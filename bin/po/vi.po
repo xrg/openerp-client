@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-03-08 15:41+0000\n"
-"Last-Translator: Nguyen Anh TUAN <tuan@esc.vn>\n"
+"PO-Revision-Date: 2011-05-16 13:19+0000\n"
+"Last-Translator: Phong Nguyen-Thanh <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-14 05:51+0000\n"
+"X-Launchpad-Export-Date: 2011-05-17 06:04+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 "Language: vi\n"
 
@@ -279,7 +279,7 @@ msgstr "Các đính kèm (%d)"
 
 #: bin/modules/gui/main.py:1275
 msgid "Attachments"
-msgstr "Các đính kèm"
+msgstr "Các tập tin đính kèm"
 
 #: bin/modules/gui/main.py:1374
 msgid "Delete a database"
