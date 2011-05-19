@@ -1,7 +1,33 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
-#   This file is part of Gnomolicious.
+#
+#   This following code is based on the gnome-distutils module that is
+#   part of Gnomolicious, from http://www.nongnu.org/gnomolicious/
+#   The original licensing terms and copyright are included below.
+#
+#   Subsequent modifications to the original code were done by OpenERP S.A,
+#   and distributed under the GNU AGPL. These licensing terms are also
+#   included below.
+#
+# ---------------- OpenERP Licensing Terms ---------------------------------
+#
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2011 OpenERP S.A. (<http://openerp.com>).
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# ---------------- Original Gnomolicious Licensing terms --------------------
 #
 #   Gnomolicious is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -17,7 +43,7 @@
 #   along with Gnomolicious; if not, write to the Free Software
 #   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
-#   (C) 2003, 2005 Terje RÃžsten <terjeros@phys.ntnu.no>, Nicolas Ãvrard     
+#   (C) 2003, 2005 Terje Rosten <terjeros@phys.ntnu.no>, Nicolas Evrard
 #
 ##############################################################################
 

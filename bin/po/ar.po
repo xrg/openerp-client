@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-17 05:38+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-05-14 05:49+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 "Language: ar\n"
 
 #: bin/plugins/__init__.py:27
@@ -32,11 +32,11 @@ msgstr "لا توجد برامج مساعدة لهذا المصدر!"
 
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr "اختر برنامج مساعد"
+msgstr "اختر برنامج إضافي"
 
 #: bin/modules/action/wizard.py:150 bin/modules/gui/main.py:188 bin/rpc.py:156
 msgid "Connection refused !"
-msgstr "رُفض الإتصال !"
+msgstr "إتصال غير مقبول !"
 
 #: bin/modules/action/wizard.py:162 bin/modules/action/wizard.py:168
 #: bin/modules/action/wizard.py:170 bin/modules/gui/main.py:196
@@ -50,7 +50,7 @@ msgstr "عرض التفاصيل"
 
 #: bin/modules/action/main.py:48
 msgid "Nothing to print!"
-msgstr "لا شئ للطباعة!"
+msgstr "لا يوجد شئ للطباعة!"
 
 #: bin/modules/action/main.py:66
 msgid "Printing aborted, too long delay !"
@@ -62,73 +62,73 @@ msgstr "اختر إجراءك"
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr ""
+msgstr "لم يتم التمكن من الاتصال بالخادم !"
 
 #: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6278
 #: bin/openerp.glade:6524 bin/openerp.glade:6847 bin/openerp.glade:7508
 msgid "Server:"
-msgstr ""
+msgstr "الخادم:"
 
 #: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6560
 #: bin/openerp.glade:6804 bin/openerp.glade:7103 bin/openerp.glade:7465
 msgid "Change"
-msgstr ""
+msgstr "تغيير"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "كلمة مرور المشرف العام الفائق:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "كلمة مرور المشرف العام الفائق خاطئة"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
-msgstr ""
+msgstr "أوامر الترحيل"
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
-msgstr ""
+msgstr "رمز العقد:"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr ""
+msgstr "كلمة مرور العقد:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr ""
+msgstr "انت بالفعل لديك آخر اصدار"
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
-msgstr ""
+msgstr "التحديثات التالية متوفره:"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "يمكنك الأن ترحيل قواعد بياناتك."
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr ""
+msgstr "ترحيل قاعدة البيانات"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "قاعدة البيانات"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "تم تحديث قاعدة البيانات."
 
 #: bin/modules/gui/main.py:295
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "تم تحديث قواعد البيانات."
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "لم يتم إختيار قاعدة بيانات"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr ""
+msgstr "لم يتم العثور على قاعدة بيانات، يجب ان تنشئ واحدة !"
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
@@ -140,48 +140,54 @@ msgid ""
 "The versions of the server (%s) and the client (%s) missmatch. The client "
 "may not work properly. Use it at your own risks."
 msgstr ""
+"الإصدار الموجود علي الخادم (%s) لا يتوافق مع إصدار البرنامج الطرفي (%s). "
+"البرنامج الطرفي قد لا يعمل جيداً. استخدامه علي مسؤوليتك."
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
-msgstr "المعذرة،'"
+msgstr "عفواً، '"
 
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
-msgstr ""
+msgstr "اسم قاعدة البيانات غير صالح !"
 
 #: bin/modules/gui/main.py:613
 msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
+"اسم قاعدة البيانات يجب ان يتكون فقط من الحروف العاديه او \"_\".\n"
+"يجب ان تتجنب استعمال العلامات الخاصه، المسافات أو الفواصل."
 
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
 msgid "Could not create database."
-msgstr ""
+msgstr "لا يمكن إنشاء قاعدة البيانات."
 
 #: bin/modules/gui/main.py:647
 msgid "Database already exists !"
-msgstr ""
+msgstr "قاعدة البيانات موجوده مسبقاً !"
 
 #: bin/modules/gui/main.py:649 bin/modules/gui/main.py:1383
 #: bin/modules/gui/main.py:1403 bin/modules/gui/main.py:1482
 msgid "Bad database administrator password !"
-msgstr ""
+msgstr "كلمة مرور عير صالحة لمشرف قاعدة البيانات !"
 
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr ""
+msgstr "خطأ اثناء إنشاء قاعدة البيانات !"
 
 #: bin/modules/gui/main.py:658
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
+"تعطل الخادم أثناء التنصيب.\n"
+"يبدو انه عليك إسقاط قاعة البيانات هذه."
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"
-msgstr ""
+msgstr "إضغط علي مفتاحي Ctrl+O للدخول"
 
 #: bin/modules/gui/main.py:881
 msgid "Edit"
@@ -190,61 +196,67 @@ msgstr "تحرير"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "لا توجد شركة"
 
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr ""
+msgstr "%s طلب/طلبات"
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr ""
+msgstr "لا يوجد طلب"
 
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s تم إرسال طلب/طلبات"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"رجاءاً تأكد من اسم قاعدة البيانات او اتصل بمديرك المشرف علي النظام لمراجعة "
+"حالة قاعدة البيانات."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "لايمكن الدخول لقاعدة البيانات او انها غير موجوده"
 
 #: bin/modules/gui/main.py:1041
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
+"خطأ في الاتصال !\n"
+"لم يتمكن الاتصال بالخادم !"
 
 #: bin/modules/gui/main.py:1043
 msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"خطأ في التوثيق !\n"
+"كلمة المرور او اسم المستخدم غير صالح !"
 
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #: bin/modules/gui/main.py:1076
 msgid "Not logged !"
-msgstr ""
+msgstr "غير متصل !"
 
 #: bin/modules/gui/main.py:1085 bin/widget/view/form_gtk/one2many_list.py:52
 #: bin/openerp.glade:6126
 msgid "OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #: bin/modules/gui/main.py:1159
 msgid ""

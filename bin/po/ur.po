@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-23 15:57+0000\n"
+"PO-Revision-Date: 2011-01-21 16:02+0000\n"
 "Last-Translator: Aamir Riaz <Unknown>\n"
 "Language-Team: Urdu <ur@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-24 04:53+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-05-14 05:51+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
@@ -139,6 +139,9 @@ msgid ""
 "The versions of the server (%s) and the client (%s) missmatch. The client "
 "may not work properly. Use it at your own risks."
 msgstr ""
+"سرورکاورژن (%s) اورکلائنٹ کاورژن (%s) \r\n"
+"مختلف ھیں، کلائنٹ صحیح کام نھیں کرسکتا،\r\n"
+" اپنی ذمھداری پر استعمال کریں"
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
@@ -202,7 +205,7 @@ msgstr "کوئ کمپنی نھیں ھے"
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr ""
+msgstr "%s درخواست"
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
@@ -267,32 +270,32 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
 msgid "Do you really want to quit ?"
-msgstr ""
+msgstr "کیا تم واقعی چُھوڑنا چاہتے ہو؟"
 
 #: bin/modules/gui/main.py:1262
 #, python-format
 msgid "Attachments (%d)"
-msgstr ""
+msgstr "(%d) مُنسلک"
 
 #: bin/modules/gui/main.py:1275
 msgid "Attachments"
-msgstr ""
+msgstr "مُنسلک"
 
 #: bin/modules/gui/main.py:1374
 msgid "Delete a database"
-msgstr ""
+msgstr "ایک ڈیٹابیس کو حذف کریں"
 
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr ""
+msgstr "ڈیٹابیس کامیابی سےگرادی گئ"
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr ""
+msgstr "ڈیٹابیس گرائ نھیں جاسکی"
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr ""
+msgstr "ڈیٹابیس گرائ نھیں جاسکی"
 
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
@@ -301,11 +304,11 @@ msgstr "کھولیں"
 
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
-msgstr ""
+msgstr "ڈیٹابیس کامیابی سے بحال ھوگئ۔"
 
 #: bin/modules/gui/main.py:1403
 msgid "Could not restore database."
-msgstr ""
+msgstr "ڈیٹابیس بحال نھیں ھوسکی۔"
 
 #: bin/modules/gui/main.py:1405
 msgid "Couldn't restore database"
@@ -356,7 +359,7 @@ msgstr "ڈیٹابیس کابیک اپ نھیں ھو سکا"
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "وسائل کی شناخت اس مقصد کیلیےموجود نھیں ھے۔"
 
 #: bin/modules/gui/window/form.py:231
 msgid "No record selected ! You can only attach to existing record."
@@ -373,11 +376,11 @@ msgstr "شناخت"
 
 #: bin/modules/gui/window/form.py:254
 msgid "Creation User"
-msgstr ""
+msgstr "تخلیق صارف"
 
 #: bin/modules/gui/window/form.py:255
 msgid "Creation Date"
-msgstr "تخلیق صارف"
+msgstr "تخلیق کی تاریخ"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
@@ -487,16 +490,16 @@ msgstr "درآمد۔"
 
 #: bin/modules/gui/window/win_import.py:56
 msgid "XML-RPC error !"
-msgstr ""
+msgstr "ایکس ایم ایل - آرپی سی کی خرابی-"
 
 #: bin/modules/gui/window/win_import.py:61
 msgid "Imported one object !"
-msgstr ""
+msgstr "ایک شے کی درآمد۔"
 
 #: bin/modules/gui/window/win_import.py:63
 #, python-format
 msgid "Imported %d objects !"
-msgstr ""
+msgstr "%d اشیاء کی درآمد۔"
 
 #: bin/modules/gui/window/win_import.py:68
 #, python-format
@@ -508,28 +511,35 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"اس ریکارڈ کو درآمد کرنے کی کوشش میں خرابی:\n"
+"%s\n"
+"خرابی کا پیغام:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
-msgstr ""
+msgstr "درآمد کی خرابی۔"
 
 #: bin/modules/gui/window/win_import.py:100
 #: bin/modules/gui/window/win_import.py:104
 msgid "Field name"
-msgstr ""
+msgstr "فیلڈکانام"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "سی ایس وی فائل کھولنے میں خرابی"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "اندراج کی خرابی۔"
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
+"آپ اس فیلڈکودرآمدنھیں کرسکتے, کیونکہ ھم خودکار طریقےسےاسکاپتانھیں لگاسکتے%s"
 
 #: bin/modules/gui/window/win_import.py:190
 #, python-format
@@ -537,162 +547,170 @@ msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
+"آپ کی فائل کی پہلی سطر پر کاروائی کی خرابی.\n"
+"فیلڈ %s نامعلوم ہے!"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "درآمدکی خرابی۔"
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
-msgstr ""
+msgstr "آپ نےکسی فیلڈکا انتخاب نہیں کیا درآمد کرنےکیلیے-"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "توسیع"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "ایپلیکیشن"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "پرنٹ پروسیسر"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
-msgstr ""
+msgstr "اس توسیع کی پھلےسےوظاحت ھو چُکی ھے-"
 
 #: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7684
 msgid "Extension Manager"
-msgstr ""
+msgstr "توسیع کامینیجر"
 
 #: bin/modules/gui/window/win_selection.py:51
 msgid "Name"
-msgstr ""
+msgstr "نام"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Ressource Name"
-msgstr ""
+msgstr "وسائل کانام"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Names"
-msgstr ""
+msgstr "نام"
 
 #: bin/modules/gui/window/__init__.py:31
 msgid "Unknown Window"
-msgstr ""
+msgstr "نامعلوم دریچہ"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "ترجیحات"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"انٹرفیس کی طےشُدھ زبان تبدیل ھوچُکی ھے، انٹرفیسں کواپنی زبان میں "
+"لانےکیلیئےکلائنٹ کودوبارھ شروع کرنانھیں بُھولنا"
 
 #: bin/modules/gui/window/win_preference.py:87
 msgid "Default language modified !"
-msgstr ""
+msgstr "طےشُدھ زبان تبدیل ھوچُکی ھے !"
 
 #: bin/modules/gui/window/view_tree/parse.py:35
 msgid "Tree"
-msgstr ""
+msgstr "درخت"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:48
 msgid "Description"
-msgstr ""
+msgstr "وضاحت"
 
 #: bin/modules/gui/window/tree.py:204 bin/modules/gui/window/tree.py:260
 msgid "No resource selected!"
-msgstr ""
+msgstr "کوئی وسائل منتخب نھیں!"
 
 #: bin/modules/gui/window/tree.py:218
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
 msgstr ""
+"کیا آپ واقعی چاہتے ہیں\n"
+"اس ریکارڈ کو خارج کرنا؟"
 
 #: bin/modules/gui/window/tree.py:223
 msgid "Error removing resource!"
-msgstr ""
+msgstr "وسائل کو ختم کرنےمیں خرابی!"
 
 #: bin/modules/gui/window/tree.py:234
 msgid "Unable to chroot: no tree resource selected"
-msgstr ""
+msgstr "وسائل کا انتخاب نھیں ھُوا tree : chroot میں ناکام"
 
 #: bin/modules/gui/window/win_export.py:50
 msgid " record(s) saved !"
-msgstr ""
+msgstr " ريکارڈز بچا لیا!"
 
 #: bin/modules/gui/window/win_export.py:53
 msgid ""
 "Operation failed !\n"
 "I/O error"
 msgstr ""
+"آپریشن ناکام!\n"
+"ان پٹ / آؤٹ پٹ نقص"
 
 #: bin/modules/gui/window/win_export.py:79
 #: bin/modules/gui/window/win_export.py:105
 msgid "Error Opening Excel !"
-msgstr ""
+msgstr "ایکسل کھولنےمیں خرابی!"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "اس برآمد کا نام کیا ہے؟"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
-msgstr ""
+msgstr "برآمد کی خرابی!"
 
 #: bin/modules/gui/window/win_search.py:49
 #: bin/widget/view/diagram_gtk/xdot.py:1772
 msgid "OpenERP - Link"
-msgstr ""
+msgstr "OpenERP -- لنک"
 
 #: bin/modules/gui/window/win_search.py:126
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr ""
+msgstr "OpenERP -- %s :تلاش"
 
 #: bin/modules/gui/window/win_search.py:127
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr ""
+msgstr "OpenERP -- %s (%%d result(s)) :تلاش"
 
 #: bin/options.py:109
 #, python-format
 msgid "OpenERP Client %s"
-msgstr ""
+msgstr "OpenERP کلائنٹ %s"
 
 #: bin/options.py:110
 msgid "specify alternate config file"
-msgstr ""
+msgstr "متبادل وضعی فائل کی وضاحت کریں۔"
 
 #: bin/options.py:111
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "بنیادی ٹھیک کرنا فعال کریں. عرفیت کے لئے '--log-level=debug'"
 
 #: bin/options.py:112
 #, python-format
 msgid "specify the log level: %s"
-msgstr ""
+msgstr "لاگ کے درجہ کے وضاحت کریں: %s"
 
 #: bin/options.py:113
 msgid "specify the user login"
-msgstr ""
+msgstr "صارف لاگ ان کی وضاحت کریں"
 
 #: bin/options.py:114
 msgid "specify the server port"
-msgstr ""
+msgstr "سرور پورٹ کی وضاحت کریں"
 
 #: bin/options.py:115
 msgid "specify the server ip/name"
-msgstr ""
+msgstr "سرور آئپی/نام کی وضاحت کریں"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "موجودھ اشاروں کوبندکریں"
 
 #: bin/common/common.py:90
 msgid ""
@@ -704,7 +722,7 @@ msgstr ""
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "تمام اشاروں کوغیرفعال کریں"
 
 #: bin/common/common.py:101
 msgid ""
@@ -716,38 +734,45 @@ msgstr ""
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "مشورے"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
-msgstr ""
+msgstr "OpenERP کمپیوٹنگ"
 
 #: bin/common/common.py:152
 msgid "Operation in progress"
-msgstr ""
+msgstr "آپریشن جاری ھے"
 
 #: bin/common/common.py:156
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
+"براہ مہربانی انتظار کریں،\n"
+"اس آپریشن میں کچھ وقت لگ سکتا ہے..."
 
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "%s اس بات کا یقین کریں کہ فائل درست ہے"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
 msgstr ""
+" مندرجہ ذیل نقص کی اطلاع :\n"
+"لائن بریکس یہاں ہیں. ہر ایک کوئ ایک لائن کو توڑنے کی نمائندگی کرتا ہے. ترجمہ "
+"میں مساوی حیثیت میں ایک نئی سطر کا آغاز کریں.\n"
+"آگے/پیچھےخالی جگھیں ہیں. ہر ایک کوئ ایک خالی جگہ  کی نمائندگی کرتا ہے. ترجمہ "
+"میں مساوی حیثیت میں ایک خالی جگہ داخل کریں.\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
-msgstr ""
+msgstr "تبصرے"
 
 #: bin/common/common.py:367
 msgid "Support request sent !"
-msgstr ""
+msgstr "مدد کی درخواست بھیج کو دیا گیا!"
 
 #: bin/common/common.py:387 bin/common/common.py:430
 msgid ""
@@ -808,6 +833,8 @@ msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
+"آپکامسئلہ معیاری ٹیم کو بھیجدیاگیاھے۔\n"
+"مسئلےکاتجزیہ کرنےکےبعدھم آپ سےدوبارھ رابطہ کریں گے۔"
 
 #: bin/common/common.py:491
 #, python-format
@@ -819,39 +846,43 @@ msgstr ""
 
 #: bin/common/common.py:491
 msgid "Error"
-msgstr ""
+msgstr "خرابی"
 
 #: bin/common/common.py:646
 msgid "Open with..."
-msgstr ""
+msgstr "کےساتھ کھولیں۔۔۔"
 
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "مقامی قائم کرنے میں ناکامی %s: %s"
 
 #: bin/printer/printer.py:184
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr ""
+msgstr "فائل ٹائپ کوسنبھالنےکےقابل نھیں %s"
 
 #: bin/printer/printer.py:189
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
+"لینکس خودکار پرنٹنگ لاگو نہیں ھے۔\n"
+"جائزھ کاآپشن استعمال کریں!"
 
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
+"خرابی! پرنٹ کرنےکیلیےکوئ دیٹانھیں ھے. پرنٹ کرنے کے لئے کافی ڈیٹا یقینی "
+"بنائیں!"
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
-msgstr ""
+msgstr "فائل لکھنے میں خرابی!"
 
 #: bin/openerp-client.py:140
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "اوپن ای آر پی بند ھورھی ھے، KeyboardInterrupt"
 
 #: bin/widget_search/reference.py:78 bin/widget_search/filter.py:74
 #: bin/widget_search/selection.py:116 bin/widget_search/spinbutton.py:72
@@ -860,11 +891,11 @@ msgstr ""
 #: bin/widget_search/custom_filter.py:176 bin/widget_search/checkbox.py:67
 #: bin/widget/view/form_gtk/button.py:47
 msgid "The content of the widget or ValueError if not valid"
-msgstr ""
+msgstr "ویجیٹ یا ValueError کا مواد اگر صحيح نھیں"
 
 #: bin/widget_search/form.py:445
 msgid "The content of the form or exception if not valid"
-msgstr ""
+msgstr "فارم یا رعایت کا مواد اگر صحيح نھیں"
 
 #: bin/widget_search/date_widget.py:61
 #: bin/widget/view/form_gtk/date_widget.py:63
@@ -882,64 +913,64 @@ msgstr ""
 
 #: bin/widget_search/wid_int.py:52
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "ویجٹ یا رعایت کا مواد اگر صحيح نھیں"
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "خرابی: "
 
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
-msgstr ""
+msgstr "شروع کرنے کی تاریخ"
 
 #: bin/widget_search/calendar.py:54 bin/widget_search/calendar.py:74
 #: bin/widget_search/calendar.py:181 bin/widget_search/calendar.py:201
 #: bin/widget/view/form_gtk/calendar.py:58
 #: bin/widget/view/form_gtk/calendar.py:182
 msgid "Open the calendar widget"
-msgstr ""
+msgstr "کیلینڈرویجٹ کھولیں"
 
 #: bin/widget_search/calendar.py:70 bin/widget_search/calendar.py:197
 msgid "End date"
-msgstr ""
+msgstr "آخری تاریخ"
 
 #: bin/widget_search/calendar.py:129 bin/widget_search/calendar.py:249
 #: bin/widget/view/form_gtk/calendar.py:135
 #: bin/widget/view/form_gtk/calendar.py:246
 msgid "OpenERP - Date selection"
-msgstr ""
+msgstr "تاریخ کا انتخاب - OpenERP"
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "مُشتمل ھوتاھے"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "مُشتمل نھیں ھوتاھے"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "کےبرابرھے"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "کےبرابرنھیں ھے"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "سےبڑھکر"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "سےکمتر"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "اندر"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "اندر نھیں"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -950,67 +981,69 @@ msgstr ""
 
 #: bin/widget_search/checkbox.py:35 bin/widget_search/checkbox.py:54
 msgid "Yes"
-msgstr ""
+msgstr "ھاں"
 
 #: bin/widget_search/checkbox.py:36
 msgid "No"
-msgstr ""
+msgstr "نھیں"
 
 #: bin/widget/view/form.py:136 bin/widget/view/form.py:199
 msgid "You must save this record to use the relate button !"
-msgstr ""
+msgstr "اس ریکارڈکومحفوظ کرنےکیلیےآپکولازمی ریلیٹ بٹن استعمال کرناھوگا۔"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "عمل کی وضاحت نھیں ھے۔"
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
-msgstr ""
+msgstr "ریلیٹ بٹن استعمال کرنےکیلیئےآپکولازمی ایک ریکارڈمنتخب کرنا ھوگا۔"
 
 #: bin/widget/view/form.py:236 bin/widget/view/form_gtk/parser.py:647
 #: bin/widget/view/form_gtk/parser.py:767
 #: bin/widget/view/form_gtk/parser.py:824
 msgid "No other language available!"
-msgstr ""
+msgstr "کوئ دوسری زبان دستیاب نھیں۔"
 
 #: bin/widget/view/form.py:243 bin/widget/view/form_gtk/parser.py:663
 #: bin/widget/view/form_gtk/parser.py:773
 #: bin/widget/view/form_gtk/parser.py:830
 msgid "Add Translation"
-msgstr ""
+msgstr "ترجُمہ شامل کریں"
 
 #: bin/widget/view/form.py:291 bin/widget/view/form_gtk/parser.py:886
 msgid "Translate label"
-msgstr ""
+msgstr "ترجُمہ کریں لیبل کا"
 
 #: bin/widget/view/calendar_gtk/parser.py:356 bin/openerp.glade:8106
 msgid "Week"
-msgstr ""
+msgstr "ھفتہ"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
-msgstr ""
+msgstr "کیلینڈردیکھنےکی خرابی۔"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "You must intall the library python-hippocanvas to use calendars."
 msgstr ""
+"کیلینڈراستعمال کرنےکیلیئےآپکولازمی python-hippocanvas لائبریری انسٹال کرنی "
+"ھوگی۔"
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--اعمال--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "ایک شارٹ کٹ کے طور پر محفوظ کریں"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "ایک فلٹر کے طور پر محفوظ کریں"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "فلٹر کاانتظام کریں"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1022,16 +1055,16 @@ msgstr ""
 #: bin/widget/view/tree_gtk/editabletree.py:139
 #, python-format
 msgid "Shortcut: %s"
-msgstr ""
+msgstr "شارٹ کٹ: %s"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 msgid "F1 New - F2 Open/Search"
-msgstr ""
+msgstr "F1 نیا - F2 کھولیں/تلاش کریں"
 
 #: bin/widget/view/tree_gtk/editabletree.py:214
 #, python-format
 msgid "Warning; field %s is required!"
-msgstr ""
+msgstr "انتباھ: فیلڈ %s کی ضرورت ھے۔"
 
 #: bin/widget/view/tree_gtk/date_renderer.py:197
 msgid ""
@@ -1049,15 +1082,15 @@ msgstr ""
 
 #: bin/widget/view/graph_gtk/parser.py:64
 msgid "Can not generate graph !"
-msgstr ""
+msgstr "گراف تخلیق نھیں ھوسکتا۔"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1422
 msgid "Dot Viewer"
-msgstr ""
+msgstr "ڈاٹ کاناظر"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
-msgstr ""
+msgstr "نئ نوڈ کا اضافہ کریں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
@@ -1065,184 +1098,184 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "تصویرکوکُشادھ کریں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "تصویرکوسُکیڑیں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "تصویرکودریچے میں فٹ کریں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "تصویرکواسکےنارمل سائزمیں دکھائیں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "تصویرکوپرنٹ کریں"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "بندکریں موجودھ %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "بندموجودھ %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "ترمیم موجودھ %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
-msgstr ""
+msgstr " - ڈاٹ ناظر"
 
 #: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1250
 msgid "Create a new resource"
-msgstr ""
+msgstr "ایک نیا وسائل تخلیق کریں"
 
 #: bin/widget/view/form_gtk/reference.py:89
 msgid "Search / Open a resource"
-msgstr ""
+msgstr "تلاش / ایک وسائل کھولیں"
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
-msgstr ""
+msgstr "بٹن کیلیئےغلط شبیھہ۔"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "فیلڈ"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "آبجیکٹ"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "ترجمہ شامل کرنے سے پہلے متعلقہ فیلڈ کے لئے کچھ متن درج کریں۔"
 
 #: bin/widget/view/form_gtk/parser.py:637
 msgid "You need to save resource before adding translations!"
-msgstr ""
+msgstr "ترجمہ شامل کرنے سے پہلے وسائل کو محفوظ کرنےکی ضرورت ھے۔"
 
 #: bin/widget/view/form_gtk/parser.py:891
 msgid "Translate view"
-msgstr ""
+msgstr "ترجمہ نظارھ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "منسوخ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "محفوظ کریں اور بندکریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "محفوظ کریں اور بند کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
 msgid "Set to default value"
-msgstr ""
+msgstr "طےشُدھ قیمت لگائیں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:178
 msgid "Set Default"
-msgstr ""
+msgstr "طےشُدھ لگائیں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:209
 msgid "Create a new entry"
-msgstr ""
+msgstr "ایک نیا اندراج کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:213
 msgid "Edit this entry"
-msgstr ""
+msgstr "اس اندراج کی ترمیم کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:217
 msgid "Remove this entry"
-msgstr ""
+msgstr "اس اندراج کو خارج کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "گُزشتہ صفحہ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr ""
+msgstr "گُزشتہ ریکارڈ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "اگلا ریکارڈ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "اگلا صفحہ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:245
 msgid "Switch"
-msgstr ""
+msgstr "تبدیل کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:251
 #: bin/widget/view/form_gtk/many2many.py:106
 msgid "Choose Limit"
-msgstr ""
+msgstr "حدکاانتخاب کریں"
 
 #: bin/widget/view/form_gtk/one2many_list.py:292
 msgid "You have to select a resource !"
-msgstr ""
+msgstr "آپ کو ایک وسائل کا انتخاب کرنا ہے۔"
 
 #: bin/widget/view/form_gtk/image.py:73
 msgid "Set Image"
-msgstr ""
+msgstr "تصویرلگائیں"
 
 #: bin/widget/view/form_gtk/image.py:82 bin/widget/view/form_gtk/binary.py:84
 msgid "Save As"
-msgstr ""
+msgstr "محفوظ کریں بطور"
 
 #: bin/widget/view/form_gtk/image.py:93 bin/widget/view/form_gtk/binary.py:88
 msgid "Clear"
-msgstr ""
+msgstr "صاف"
 
 #: bin/widget/view/form_gtk/image.py:104
 msgid "All files"
-msgstr ""
+msgstr "تمام فائلیں"
 
 #: bin/widget/view/form_gtk/image.py:108
 msgid "Images"
-msgstr ""
+msgstr "تصاویر"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "کوئ تصویرنھیں ھےاسطرح محفوظ کرنےکیلیئے"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "انتباہ"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
-msgstr ""
+msgstr "اس وسائل کوکھولیں"
 
 #: bin/widget/view/form_gtk/many2one.py:163
 msgid "Search a resource"
-msgstr ""
+msgstr "ایک وسائل کوتلاش کریں"
 
 #: bin/widget/view/form_gtk/many2one.py:174 bin/openerp.glade:1404
 msgid "Action"
-msgstr ""
+msgstr "عمل"
 
 #: bin/widget/view/form_gtk/many2one.py:175
 msgid "Report"
-msgstr ""
+msgstr "رپورٹ"
 
 #: bin/widget/view/form_gtk/many2one.py:388 bin/widget/view/list.py:618
 msgid "You must select a record to use the relation !"
@@ -1266,7 +1299,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:80
 msgid "Open"
-msgstr ""
+msgstr "کهولیں"
 
 #: bin/widget/view/form_gtk/binary.py:119
 #: bin/widget/view/form_gtk/binary.py:163
@@ -1281,7 +1314,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:138
 msgid "All Files"
-msgstr ""
+msgstr "تمام فائلیں"
 
 #: bin/widget/view/form_gtk/binary.py:148
 msgid "Select a file..."
@@ -1341,7 +1374,7 @@ msgstr ""
 
 #: bin/rpc.py:187
 msgid "Connection Error"
-msgstr ""
+msgstr "رابطےکی خرابی"
 
 #: bin/openerp.glade:6
 msgid "OpenERP - Login"
@@ -1357,11 +1390,11 @@ msgstr ""
 
 #: bin/openerp.glade:146 bin/openerp.glade:6436 bin/openerp.glade:6747
 msgid "Password:"
-msgstr ""
+msgstr "پاسورڈ:"
 
 #: bin/openerp.glade:265
 msgid "_File"
-msgstr ""
+msgstr "_فائل"
 
 #: bin/openerp.glade:272
 msgid "_Connect..."
@@ -1409,7 +1442,7 @@ msgstr ""
 
 #: bin/openerp.glade:468
 msgid "_Preferences"
-msgstr ""
+msgstr "_ترجیحات"
 
 #: bin/openerp.glade:488
 msgid "_Send a request"
@@ -1445,11 +1478,11 @@ msgstr ""
 
 #: bin/openerp.glade:593
 msgid "_Delete"
-msgstr ""
+msgstr "_حذف"
 
 #: bin/openerp.glade:614
 msgid "Find"
-msgstr ""
+msgstr "تلاش کریں"
 
 #: bin/openerp.glade:630
 msgid "Ne_xt"
@@ -1473,7 +1506,7 @@ msgstr ""
 
 #: bin/openerp.glade:715 bin/openerp.glade:5024
 msgid "Close Tab"
-msgstr ""
+msgstr "ٹیب بند کریں"
 
 #: bin/openerp.glade:731
 msgid "Previous Tab"
@@ -1493,7 +1526,7 @@ msgstr ""
 
 #: bin/openerp.glade:776
 msgid "_Open"
-msgstr ""
+msgstr "_کھولیں"
 
 #: bin/openerp.glade:791
 msgid "Reloa_d / Undo"
@@ -1557,19 +1590,19 @@ msgstr ""
 
 #: bin/openerp.glade:966
 msgid "Top"
-msgstr ""
+msgstr "اُوپر"
 
 #: bin/openerp.glade:974
 msgid "Left"
-msgstr ""
+msgstr "بایاں"
 
 #: bin/openerp.glade:983
 msgid "Right"
-msgstr ""
+msgstr "دایاں"
 
 #: bin/openerp.glade:992
 msgid "Bottom"
-msgstr ""
+msgstr "نیچے"
 
 #: bin/openerp.glade:1005
 msgid "Tabs default orientation"
@@ -1577,11 +1610,11 @@ msgstr ""
 
 #: bin/openerp.glade:1013
 msgid "Horizontal"
-msgstr ""
+msgstr "اُفقی"
 
 #: bin/openerp.glade:1021
 msgid "Vertical"
-msgstr ""
+msgstr "عمودی"
 
 #: bin/openerp.glade:1038
 msgid "_Print"
@@ -1605,11 +1638,11 @@ msgstr ""
 
 #: bin/openerp.glade:1117
 msgid "_Shortcuts"
-msgstr ""
+msgstr "_شارٹ کٹس"
 
 #: bin/openerp.glade:1125
 msgid "_Help"
-msgstr ""
+msgstr "_مدد"
 
 #: bin/openerp.glade:1132
 msgid "Enable Debug Mode Tooltips"
@@ -1653,7 +1686,7 @@ msgstr ""
 
 #: bin/openerp.glade:1291
 msgid "Previous"
-msgstr ""
+msgstr "گُزشتہ"
 
 #: bin/openerp.glade:1302
 msgid "Go to next matched resource"
@@ -1661,11 +1694,11 @@ msgstr ""
 
 #: bin/openerp.glade:1303
 msgid "Next"
-msgstr ""
+msgstr "اگلا"
 
 #: bin/openerp.glade:1316
 msgid "List"
-msgstr ""
+msgstr "فھرست"
 
 #: bin/openerp.glade:1328
 msgid "Form"
@@ -1673,7 +1706,7 @@ msgstr ""
 
 #: bin/openerp.glade:1341
 msgid "Calendar"
-msgstr ""
+msgstr "کیلینڈر"
 
 #: bin/openerp.glade:1351
 msgid "Diagram"
@@ -1705,15 +1738,15 @@ msgstr ""
 
 #: bin/openerp.glade:1432 bin/openerp.glade:1433
 msgid "Menu"
-msgstr ""
+msgstr "فہرست"
 
 #: bin/openerp.glade:1450 bin/openerp.glade:1451
 msgid "Reload"
-msgstr ""
+msgstr "دوبارہ لوڈ کریں"
 
 #: bin/openerp.glade:1468
 msgid "Close this window"
-msgstr ""
+msgstr "اس ونڈو کو بند کریں"
 
 #: bin/openerp.glade:1512
 msgid "Company:"
@@ -1843,7 +1876,7 @@ msgstr ""
 
 #: bin/openerp.glade:2538
 msgid "_Domain:"
-msgstr ""
+msgstr "_ڈومین:"
 
 #: bin/openerp.glade:2597
 msgid "Default _value:"
@@ -1883,11 +1916,11 @@ msgstr ""
 
 #: bin/openerp.glade:2952 bin/openerp.glade:5647
 msgid "_Add"
-msgstr ""
+msgstr "_شامل کریں"
 
 #: bin/openerp.glade:2999 bin/openerp.glade:5694
 msgid "_Remove"
-msgstr ""
+msgstr "_خارج کریں"
 
 #: bin/openerp.glade:3047
 msgid "_Nothing"
@@ -1966,7 +1999,7 @@ msgstr ""
 
 #: bin/openerp.glade:4480
 msgid "Phone number:"
-msgstr ""
+msgstr "فون نمبر:"
 
 #: bin/openerp.glade:4493
 msgid "Emergency:"
@@ -2034,7 +2067,7 @@ msgstr ""
 
 #: bin/openerp.glade:4927
 msgid "<Ctrl> + <Enter>"
-msgstr ""
+msgstr "<Ctrl> + <Enter>"
 
 #: bin/openerp.glade:4940
 msgid "Switch view mode"
@@ -2042,7 +2075,7 @@ msgstr ""
 
 #: bin/openerp.glade:4955
 msgid "<Ctrl> + L"
-msgstr ""
+msgstr "<Ctrl> + L"
 
 #: bin/openerp.glade:4968
 msgid "Next record"
@@ -2054,27 +2087,27 @@ msgstr ""
 
 #: bin/openerp.glade:4998
 msgid "<PgDn>"
-msgstr ""
+msgstr "<PgDn>"
 
 #: bin/openerp.glade:5011
 msgid "<PgUp>"
-msgstr ""
+msgstr "<PgUp>"
 
 #: bin/openerp.glade:5039
 msgid "Save"
-msgstr ""
+msgstr "محفوظ کریں"
 
 #: bin/openerp.glade:5054
 msgid "<Ctrl> + W"
-msgstr ""
+msgstr "<Ctrl> + W"
 
 #: bin/openerp.glade:5067
 msgid "<Ctrl> + S"
-msgstr ""
+msgstr "<Ctrl> + S"
 
 #: bin/openerp.glade:5095
 msgid "<Ctrl> + <PgDn>"
-msgstr ""
+msgstr "<Ctrl> + <PgDn>"
 
 #: bin/openerp.glade:5108
 msgid "Previous tab"
@@ -2082,23 +2115,23 @@ msgstr ""
 
 #: bin/openerp.glade:5123
 msgid "<Ctrl> + <PgUp>"
-msgstr ""
+msgstr "<Ctrl> + <PgUp>"
 
 #: bin/openerp.glade:5136
 msgid "New"
-msgstr ""
+msgstr "نیا"
 
 #: bin/openerp.glade:5151
 msgid "<Ctrl> + N"
-msgstr ""
+msgstr "<Ctrl> + N"
 
 #: bin/openerp.glade:5164
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 #: bin/openerp.glade:5179
 msgid "<Ctrl> + D"
-msgstr ""
+msgstr "<Ctrl> + D"
 
 #: bin/openerp.glade:5192
 msgid "Find / Search"
@@ -2106,15 +2139,15 @@ msgstr ""
 
 #: bin/openerp.glade:5207
 msgid "<Ctrl> + F"
-msgstr ""
+msgstr "<Ctrl> + F"
 
 #: bin/openerp.glade:5220
 msgid "Connect"
-msgstr ""
+msgstr "رابطہ کریں"
 
 #: bin/openerp.glade:5235
 msgid "<Ctrl> + O"
-msgstr ""
+msgstr "<Ctrl> + O"
 
 #: bin/openerp.glade:5249
 msgid "Main Shortcuts"
@@ -2122,7 +2155,7 @@ msgstr ""
 
 #: bin/openerp.glade:5266
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
 #: bin/openerp.glade:5279
 msgid "<b>Shortcuts in relation fields</b>"
@@ -2142,7 +2175,7 @@ msgstr ""
 
 #: bin/openerp.glade:5337
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: bin/openerp.glade:5350
 msgid "Auto-Complete text field"
@@ -2150,7 +2183,7 @@ msgstr ""
 
 #: bin/openerp.glade:5365
 msgid "<Enter>"
-msgstr ""
+msgstr "<Enter>"
 
 #: bin/openerp.glade:5378
 msgid "Previous editable widget"
@@ -2158,7 +2191,7 @@ msgstr ""
 
 #: bin/openerp.glade:5393
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.glade:5406
 msgid "Next editable widget"
@@ -2166,7 +2199,7 @@ msgstr ""
 
 #: bin/openerp.glade:5421
 msgid "<Tab>"
-msgstr ""
+msgstr "<Tab>"
 
 #: bin/openerp.glade:5434
 msgid "Paste selected text"
@@ -2182,15 +2215,15 @@ msgstr ""
 
 #: bin/openerp.glade:5479
 msgid "<Ctrl> + V"
-msgstr ""
+msgstr "<Ctrl> + V"
 
 #: bin/openerp.glade:5492
 msgid "<Ctrl> + C"
-msgstr ""
+msgstr "<Ctrl> + C"
 
 #: bin/openerp.glade:5505
 msgid "<Ctrl> + X"
-msgstr ""
+msgstr "<Ctrl> + X"
 
 #: bin/openerp.glade:5522
 msgid "Edition Widgets"
@@ -2242,7 +2275,7 @@ msgstr ""
 
 #: bin/openerp.glade:6222
 msgid "Server"
-msgstr ""
+msgstr "سرور"
 
 #: bin/openerp.glade:6232
 msgid "<b>Connect to a OpenERP server</b>"
@@ -2282,7 +2315,7 @@ msgstr ""
 
 #: bin/openerp.glade:6832 bin/openerp.glade:6978 bin/openerp.glade:7493
 msgid "http://localhost:8069"
-msgstr ""
+msgstr "http://localhost:8069"
 
 #: bin/openerp.glade:6906
 msgid "Create a new database"
@@ -2437,7 +2470,7 @@ msgstr ""
 
 #: bin/openerp.glade:8034
 msgid "Today"
-msgstr ""
+msgstr "آج"
 
 #: bin/openerp.glade:8080
 msgid "September 2008"
@@ -2445,11 +2478,11 @@ msgstr ""
 
 #: bin/openerp.glade:8094
 msgid "Day"
-msgstr ""
+msgstr "دن"
 
 #: bin/openerp.glade:8118
 msgid "Month"
-msgstr ""
+msgstr "مھینہ"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
@@ -2468,6 +2501,8 @@ msgid ""
 "AND\n"
 "OR"
 msgstr ""
+"اُور\n"
+"یا"
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
@@ -2483,7 +2518,7 @@ msgstr ""
 
 #: bin/win_error.glade:40
 msgid "label"
-msgstr ""
+msgstr "لیبل"
 
 #: bin/win_error.glade:100
 msgid "Click here for details about the publisher warranty proposition"
@@ -2524,7 +2559,7 @@ msgstr ""
 
 #: bin/win_error.glade:387
 msgid "Details"
-msgstr ""
+msgstr "تفصیلات"
 
 #: bin/win_error.glade:404
 msgid "<i>_Details</i>"

@@ -1,22 +1,14 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+# The following code is taken from the i18n tools that are part of the Python
+# distribution from the Python Software Foundation.
+# See http://www.python.org/download/releases/2.3/license/
 #
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
+# This code is published under the PYTHON SOFTWARE FOUNDATION LICENSE,
+# VERSION 2, and is Copyright (c) 2001, 2002, 2003, 2004, 2005, 2006, 2007,
+# 2008, 2009, 2010, the Python Software Foundation; All Rights Reserved.
 #
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
-#
+# Written by Martin v. Löwis <loewis@informatik.hu-berlin.de>
 ##############################################################################
 
 """Generate binary message catalog from textual translation description.
