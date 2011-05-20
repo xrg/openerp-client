@@ -502,6 +502,8 @@ class ViewList(parser_view):
         context.drop_finish(False, etime)
         if treeview.sequence and drop_info and not group_by:
             self.screen.models.set_sequence(get_id, rec_id, field='sequence')
+            self.reload = True
+            self.screen.reload()
 
     def drag_data_delete(self, treeview, context):
         treeview.emit_stop_by_name('drag-data-delete')
