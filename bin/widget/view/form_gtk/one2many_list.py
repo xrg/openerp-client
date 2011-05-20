@@ -391,9 +391,6 @@ class one2many_list(interface.widget_interface):
         pass
 
     def display(self, model, model_field):
-        if model:
-            self.context.update(model.expr_eval(self.attrs.get('context',"{}")))
-            self.screen.context.update(self.context)
         self.model = model
         self.model_field = model_field
         if not model_field:
