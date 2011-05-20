@@ -96,9 +96,10 @@ class action(interface.widget_interface):
         return True
 
     def display(self, model, model_field):
+        limit = self.screen.current_view.view_type != 'graph' and self.action.get('limit', 100)  or False  
         res_id = rpc.session.rpc_exec_auth('/object', 'execute',
                 self.action['res_model'], 'search', self.domain, 0,
-                self.action.get('limit', 100),False,self.context)
+                limit, False, self.context)
         self.screen.clear()
         self.screen.load(res_id)
         return True

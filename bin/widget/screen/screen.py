@@ -228,17 +228,23 @@ class Screen(signal_event.signal_event):
         if not self.auto_search:
             self.auto_search = True
             return
+        limit = self.screen_container.get_limit()
+        self.screen_container.show_limit()
         val = self.filter_widget and self.filter_widget.value or {}
-        if self.current_view.view_type == 'graph' and self.current_view.view.key:
-            self.domain = self.domain_init[:]
-            self.domain += val.get('domain',[]) + self.sort_domain
+        if self.current_view.view_type == 'graph':
+            self.screen_container.hide_limit()
+            limit = False
+            if self.current_view.view.key:
+                self.domain = self.domain_init[:]
+                self.domain += val.get('domain',[]) + self.sort_domain
+            else:
+                self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
         else:
             self.context_update(val.get('context',{}), val.get('domain',[]) + self.sort_domain)
 
         v = self.domain
         if self.win_search:
             v += self.win_search_domain
-        limit = self.screen_container.get_limit()
         if self.current_view.view_type == 'calendar':
             field_name = self.current_view.view.date_start
             old_date = self.current_view.view.date
@@ -538,6 +544,8 @@ class Screen(signal_event.signal_event):
             self.current_model.validate_set()
         elif self.current_view.view_type=='form':
             self.new()
+        if self.current_view.view_type == 'graph':
+             self.current_view.view.key = False
         self.display()
         self.current_view.set_cursor()
 
