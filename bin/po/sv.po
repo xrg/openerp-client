@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
+"PO-Revision-Date: 2011-05-20 16:30+0000\n"
+"Last-Translator: Anders Wallenquist <anders.wallenquist@vertel.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-14 05:51+0000\n"
+"X-Launchpad-Export-Date: 2011-05-21 06:14+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 "Language: sv\n"
 
@@ -111,7 +111,7 @@ msgstr "Välj din handling"
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr ""
+msgstr "Kunde inte ansluta till servern!"
 
 #: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6278
 #: bin/openerp.glade:6524 bin/openerp.glade:6847 bin/openerp.glade:7508
@@ -125,47 +125,47 @@ msgstr "Ändra"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "Överadministratörens lösenord"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "Felaktigt lösenord för överadministratören"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Migreringsskript"
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
-msgstr ""
+msgstr "Avtalsnummer:"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr ""
+msgstr "Avtalets lösenord:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Din version är den senaste"
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Följande uppdateringar är möjliga:"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Du kan nu migrera dina databaser."
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr ""
+msgstr "Migrera databas"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Databas"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Databasen är uppgraderad."
 
 #: bin/modules/gui/main.py:295
 msgid "Your databases have been upgraded."
@@ -173,11 +173,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Välj först en databas"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr ""
+msgstr "Ingen databas funnen, du måste skapa en först!"
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
@@ -195,7 +195,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
-msgstr ""
+msgstr "Ursäkta,'"
 
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
@@ -206,6 +206,9 @@ msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
+"Databasnamnet får inte innehålla annat än vanliga icke nationella bokstäver "
+"eller \"_\".\n"
+"Undvik alla former av accenter, mellanslag eller speciella tecken."
 
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
@@ -223,13 +226,15 @@ msgstr "Fel administrativt lösenord för databas !"
 
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr ""
+msgstr "Fel uppstod under skapandet av databasen!"
 
 #: bin/modules/gui/main.py:658
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
+"Servern kraschade under installationen.\n"
+"Vi föreslår att du makulerar denna databas."
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"
@@ -242,7 +247,7 @@ msgstr "Ändra"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
@@ -1614,7 +1619,7 @@ msgstr ""
 
 #: bin/openerp.glade:904
 msgid "_Menubar"
-msgstr ""
+msgstr "_Menyrad"
 
 #: bin/openerp.glade:912
 msgid "Text _and Icons"
@@ -1790,7 +1795,7 @@ msgstr ""
 
 #: bin/openerp.glade:1432 bin/openerp.glade:1433
 msgid "Menu"
-msgstr ""
+msgstr "Meny"
 
 #: bin/openerp.glade:1450 bin/openerp.glade:1451
 msgid "Reload"
