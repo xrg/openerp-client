@@ -48,7 +48,7 @@ class action(interface.widget_interface):
         self.action = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', [self.act_id], False, rpc.session.context)[0]
         if 'view_mode' in attrs:
             self.action['view_mode'] = attrs['view_mode']
-
+        self.action_view_ids = False
         if self.action['type'] == 'ir.actions.act_window':
             if not self.action.get('domain', False):
                 self.action['domain'] = '[]'
@@ -60,6 +60,8 @@ class action(interface.widget_interface):
             view_id = []
             if self.action['view_id']:
                 view_id = [self.action['view_id'][0]]
+            if self.action.get('views'):
+                self.action_view_ids = map(lambda y:y[0], filter(lambda x:x[1] == 'tree',self.action['views']))
             if self.action['view_type']=='form':
                 mode = (self.action['view_mode'] or 'form,tree').split(',')
                 self.screen = Screen(self.action['res_model'], view_type=mode, context=self.context, view_ids = view_id, domain=self.domain)
@@ -81,7 +83,7 @@ class action(interface.widget_interface):
         self.screen.switch_view()
 
     def _sig_search(self, *args):
-        win = win_search(self.action['res_model'], domain=self.domain, context=self.context)
+        win = win_search(self.action['res_model'], view_ids = self.action_view_ids, domain=self.domain, context=self.context)
         res = win.go()
         if res:
             self.screen.clear()
@@ -96,7 +98,7 @@ class action(interface.widget_interface):
         return True
 
     def display(self, model, model_field):
-        limit = self.screen.current_view.view_type != 'graph' and self.action.get('limit', 100)  or False  
+        limit = self.screen.current_view.view_type != 'graph' and self.action.get('limit', 100)  or False
         res_id = rpc.session.rpc_exec_auth('/object', 'execute',
                 self.action['res_model'], 'search', self.domain, 0,
                 limit, False, self.context)
