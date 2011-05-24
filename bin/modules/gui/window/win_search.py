@@ -107,7 +107,7 @@ class dialog(object):
 
 
 class win_search(object):
-    def __init__(self, model, sel_multi=True, ids=[], context={}, domain = [], parent=None):
+    def __init__(self, model, sel_multi=True, ids=[], view_ids=False, context={}, domain = [], parent=None):
         self.model = model
         self.sel_multi = sel_multi
         self.ids = ids
@@ -118,7 +118,7 @@ class win_search(object):
             parent = service.LocalService('gui.main').window
         self.parent = parent
         self.win.set_transient_for(parent)
-        self.screen = Screen(model, view_type=['tree'], show_search=True, domain=domain,
+        self.screen = Screen(model, view_type=['tree'], view_ids=view_ids, show_search=True, domain=domain,
                              context=context, parent=self.win, win_search=True)
         self.view = self.screen.current_view
         if self.screen.filter_widget.focusable:
