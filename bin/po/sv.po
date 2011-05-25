@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-27 04:40+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-05-25 04:37+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 "Language: sv\n"
 
 #
@@ -111,7 +111,7 @@ msgstr "Välj din handling"
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr ""
+msgstr "Kunde inte ansluta till servern!"
 
 #: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6278
 #: bin/openerp.glade:6524 bin/openerp.glade:6847 bin/openerp.glade:7508
@@ -125,59 +125,59 @@ msgstr "Ändra"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "Överadministratörens lösenord"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "Felaktigt lösenord för överadministratören"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
-msgstr ""
+msgstr "Migreringsskript"
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
-msgstr ""
+msgstr "Avtalsnummer:"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr ""
+msgstr "Avtalets lösenord:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr ""
+msgstr "Din version är den senaste"
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
-msgstr ""
+msgstr "Följande uppdateringar är möjliga:"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "Du kan nu migrera dina databaser."
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr ""
+msgstr "Migrera databas"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "Databas"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "Databasen är uppgraderad."
 
 #: bin/modules/gui/main.py:295
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "Din databas är uppgraderad"
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "Välj först en databas"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr ""
+msgstr "Ingen databas funnen, du måste skapa en först!"
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
@@ -195,7 +195,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
-msgstr ""
+msgstr "Ursäkta,'"
 
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
@@ -206,6 +206,9 @@ msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
+"Databasnamnet får inte innehålla annat än vanliga icke nationella bokstäver "
+"eller \"_\".\n"
+"Undvik alla former av accenter, mellanslag eller speciella tecken."
 
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
@@ -223,13 +226,15 @@ msgstr "Fel administrativt lösenord för databas !"
 
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr ""
+msgstr "Fel uppstod under skapandet av databasen!"
 
 #: bin/modules/gui/main.py:658
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
+"Servern kraschade under installationen.\n"
+"Vi föreslår att du makulerar denna databas."
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"
@@ -242,52 +247,58 @@ msgstr "Ändra"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Företag saknas"
 
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr ""
+msgstr "%s förfrågningar"
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr ""
+msgstr "Ingen förfrågan"
 
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s förfrågningar skickade"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"Vänligen dubbelkontrollera databasnamnet eller kontakta din administratör "
+"för att bekräfta status på databasen."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "Kan inte ansluta till databasen eller så saknas den"
 
 #: bin/modules/gui/main.py:1041
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
+"Anslutningsfel !\n"
+"Kan inte ansluta till servern !"
 
 #: bin/modules/gui/main.py:1043
 msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
 msgstr ""
+"Autenticeringsfel !\n"
+"Felaktigt användarnamn eller lösenord !"
 
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #: bin/modules/gui/main.py:1076
 msgid "Not logged !"
@@ -307,16 +318,16 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
 msgid "Do you really want to quit ?"
-msgstr ""
+msgstr "Vill du verkligen avsluta?"
 
 #: bin/modules/gui/main.py:1262
 #, python-format
 msgid "Attachments (%d)"
-msgstr ""
+msgstr "Bilagor (%d)"
 
 #: bin/modules/gui/main.py:1275
 msgid "Attachments"
-msgstr ""
+msgstr "Bilagor"
 
 #: bin/modules/gui/main.py:1374
 msgid "Delete a database"
@@ -324,15 +335,15 @@ msgstr "Tabort databas"
 
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr ""
+msgstr "Databasen framgångsrikt raderad!"
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr ""
+msgstr "Kunde inte radera databasen."
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr ""
+msgstr "Kunde inte radera databasen"
 
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
@@ -354,7 +365,7 @@ msgstr "Det gick ej att återskapa databasen"
 #: bin/modules/gui/main.py:1444
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr ""
+msgstr "Det bekräftande lösenordet matchar inte, proceduren avbruten!"
 
 #: bin/modules/gui/main.py:1446
 msgid "Validation Error."
@@ -366,7 +377,7 @@ msgstr "Kunde inte ändra Superadministratörens lösenord."
 
 #: bin/modules/gui/main.py:1455
 msgid "Bad password provided !"
-msgstr ""
+msgstr "Dåligt lösenord angivet !"
 
 #: bin/modules/gui/main.py:1457
 msgid "Error, password not changed."
@@ -396,15 +407,15 @@ msgstr "Kunde inte säkerhetskopiera databas."
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "Resursid saknas för detta objekt!"
 
 #: bin/modules/gui/window/form.py:231
 msgid "No record selected ! You can only attach to existing record."
-msgstr ""
+msgstr "Ingen post vald ! Du kan endast bifoga till befintliga poster."
 
 #: bin/modules/gui/window/form.py:247
 msgid "You have to select a record !"
-msgstr ""
+msgstr "Du måste välja en post !"
 
 #: bin/modules/gui/window/form.py:253
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:42
@@ -429,35 +440,37 @@ msgstr "Senaste modifikationsdatum"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "Internt moduldataid"
 
 #: bin/modules/gui/window/form.py:269
 msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
 msgstr ""
+"Posten inte sparad !\n"
+" Önskar du tömma aktuell post?"
 
 #: bin/modules/gui/window/form.py:272
 #: bin/widget/view/form_gtk/one2many_list.py:380
 msgid "Are you sure to remove this record ?"
-msgstr ""
+msgstr "Är du säker på att radera denna post?"
 
 #: bin/modules/gui/window/form.py:274
 #: bin/widget/view/form_gtk/one2many_list.py:382
 msgid "Are you sure to remove those records ?"
-msgstr ""
+msgstr "Är du säker på att du vill radera dessa poster?"
 
 #: bin/modules/gui/window/form.py:278
 msgid "Resources cleared."
-msgstr ""
+msgstr "Resurserna tömda."
 
 #: bin/modules/gui/window/form.py:280
 msgid "Resources successfully removed."
-msgstr ""
+msgstr "Resurserna framgångsrikt raderade."
 
 #: bin/modules/gui/window/form.py:314
 msgid "Working now on the duplicated document !"
-msgstr ""
+msgstr "Arbetar nu med det dubblerade dokumentet !"
 
 #: bin/modules/gui/window/form.py:329
 msgid "Document Saved."
@@ -473,29 +486,31 @@ msgstr "Ogiltigt värde. rätta till röda fält !"
 #: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/list.py:568
 msgid "Error !"
-msgstr ""
+msgstr "Fel !"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "Varning !"
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
 msgstr ""
+"Denna post är ändrad\n"
+"önskar du spara den?"
 
 #: bin/modules/gui/window/form.py:407
 msgid "You must select one or several records !"
-msgstr ""
+msgstr "Du måste välja minst en post !"
 
 #: bin/modules/gui/window/form.py:416
 msgid "Print Screen"
-msgstr ""
+msgstr "Skriv ut skärmen"
 
 #: bin/modules/gui/window/form.py:436
 msgid "No record selected"
-msgstr ""
+msgstr "Ingen post vald"
 
 #: bin/modules/gui/window/form.py:441
 msgid "New document"
@@ -507,7 +522,7 @@ msgstr "Ändrar dokument (id: "
 
 #: bin/modules/gui/window/form.py:446
 msgid "Record: "
-msgstr ""
+msgstr "Post: "
 
 #: bin/modules/gui/window/form.py:447
 msgid " of "
@@ -515,11 +530,11 @@ msgstr " av "
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "The file is empty !"
-msgstr ""
+msgstr "Filen är tom !"
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "Importation !"
-msgstr ""
+msgstr "Importen !"
 
 #: bin/modules/gui/window/win_import.py:56
 msgid "XML-RPC error !"
@@ -527,7 +542,7 @@ msgstr "XML-RPC fel!"
 
 #: bin/modules/gui/window/win_import.py:61
 msgid "Imported one object !"
-msgstr ""
+msgstr "Importerade ett objekt !"
 
 #: bin/modules/gui/window/win_import.py:63
 #, python-format
@@ -750,7 +765,7 @@ msgstr "specifiera värdadress/ip"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "Stäng aktuellt tips"
 
 #: bin/common/common.py:90
 msgid ""
@@ -759,6 +774,10 @@ msgid ""
 "open this menu item, unless you disable all tips using the <b>'Menu "
 "Tips'</b> option in the user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Stäng aktuellt tips:</b></span>\n"
+"Detta gömmer aktuellt tips. Det kommer dock att visas igen nästa gång du "
+"öppnar detta menyval, såvida du inte stänger av alla tips via optionen "
+"<b>'Menytips'</b> i användarinställningarna."
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
@@ -1162,7 +1181,7 @@ msgstr ""
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "Stäng aktuellt %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
@@ -1614,7 +1633,7 @@ msgstr ""
 
 #: bin/openerp.glade:904
 msgid "_Menubar"
-msgstr ""
+msgstr "_Menyrad"
 
 #: bin/openerp.glade:912
 msgid "Text _and Icons"
@@ -1790,7 +1809,7 @@ msgstr ""
 
 #: bin/openerp.glade:1432 bin/openerp.glade:1433
 msgid "Menu"
-msgstr ""
+msgstr "Meny"
 
 #: bin/openerp.glade:1450 bin/openerp.glade:1451
 msgid "Reload"
