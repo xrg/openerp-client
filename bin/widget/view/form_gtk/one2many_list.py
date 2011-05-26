@@ -33,6 +33,7 @@ from widget.screen import Screen
 from pager import pager
 import service
 import tools
+import rpc
 
 
 class dialog(object):
@@ -188,6 +189,9 @@ class one2many_list(interface.widget_interface):
         # 'default_get' attribute for the same effect (pending removal)
         default_get_ctx = (attrs.get('default_get') or attrs.get('context'))
 
+        fields = rpc.session.rpc_exec_auth('/object', 'execute', model, 'fields_get', False, self.context)
+        res = rpc.session.rpc_exec_auth_try('/object', 'execute', model, 'default_get', fields)
+        self.context = tools.expr_eval("dict(%s)" % attrs.get('context',"{}"), res)
         self.screen = Screen(attrs['relation'],
                             view_type=attrs.get('mode','tree,form').split(','),
                             parent=self.parent, views_preload=attrs.get('views', {}),
