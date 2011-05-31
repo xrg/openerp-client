@@ -231,7 +231,7 @@ class parser_tree(interface.parser_interface):
                     label_sum = gtk.Label()
                     label_sum.set_use_markup(True)
                     dict_widget[n] = (fname, label, label_sum,
-                            fields[fname].get('digits', (16,2))[1], label_bold, calculate)
+                            fields[fname].get('digits', (16,2))[1], label_bold, calculate, fields[fname]['type'])
         return treeview, dict_widget, [], on_write
 
 class UnsettableColumn(Exception):
