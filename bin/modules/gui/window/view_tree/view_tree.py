@@ -373,7 +373,7 @@ class view_tree(object):
         if not sel:
             return []
         (model, iters) = sel
-        return [model.get_value(model.get_iter(x), 0) for x in iters]
+        return map(lambda x: int(model.get_value(model.get_iter(x), 0)), iters)
 
     def sel_id_get(self):
         sel = self.view.get_selection().get_selected()
