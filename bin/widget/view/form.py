@@ -210,7 +210,7 @@ class ViewForm(parser_view):
                         if type == 'relate':
                             id = self.screen.current_model and self.screen.current_model.id
                             if not (id):
-                                common.message(_('You must select a record to use the relate button !'))
+                                common.message(_('You must save a record to use the relate button !'))
                                 return False
                             if act.get('domain',False):
                                 act['domain'] = self.screen.current_model.expr_eval(act['domain'], check_load=False)

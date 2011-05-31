@@ -48,6 +48,7 @@ class screen_container(object):
         self.context = {}
         self.handler_id = None
         self.custom_panels = []
+        self.next_prev_box = None
 
     def __del__(self):
         for (ref, value) in self.__dict__.items():
@@ -201,13 +202,13 @@ class screen_container(object):
         self.but_next.set_image(icon2)
         self.but_next.set_relief(gtk.RELIEF_NONE)
         self.but_next.connect('clicked', screen.search_offset_next)
-        next_prev_box = hb3
+        self.next_prev_box = hb3
         if self.win_search:
-            next_prev_box = gtk.HBox(homogeneous=False, spacing=0)
-            hs.pack_start(next_prev_box, expand=False, fill=False)
-        next_prev_box.pack_start(gtk.VSeparator(),padding=3, expand=False, fill=False)
-        next_prev_box.pack_start(self.but_previous, expand=False, fill=False)
-        next_prev_box.pack_start(self.but_next, expand=False, fill=False)
+            self.next_prev_box = gtk.HBox(homogeneous=False, spacing=0)
+            hs.pack_start(self.next_prev_box, expand=False, fill=False)
+        self.next_prev_box.pack_start(gtk.VSeparator(),padding=3, expand=False, fill=False)
+        self.next_prev_box.pack_start(self.but_previous, expand=False, fill=False)
+        self.next_prev_box.pack_start(self.but_next, expand=False, fill=False)
         hs.show_all()
         self.filter_vbox.pack_start(hs, expand=False, fill=False)
         hs = gtk.HSeparator()
@@ -224,6 +225,14 @@ class screen_container(object):
     def hide_filter(self):
         if self.filter_vbox:
             self.filter_vbox.hide()
+            
+    def hide_limit(self):
+        if self.filter_vbox:
+            self.next_prev_box.hide()
+    
+    def show_limit(self):
+        if self.filter_vbox:
+            self.next_prev_box.show()
 
     def set(self, widget):
         if self.vp.get_child():
