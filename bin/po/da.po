@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-05-30 15:43+0000\n"
+"PO-Revision-Date: 2011-05-31 20:42+0000\n"
 "Last-Translator: Henning Dinsen <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-31 05:53+0000\n"
+"X-Launchpad-Export-Date: 2011-06-01 05:41+0000\n"
 "X-Generator: Launchpad (build 12959)\n"
 "Language: da\n"
 
@@ -54,7 +54,7 @@ msgstr "Intet at printe!"
 
 #: bin/modules/action/main.py:66
 msgid "Printing aborted, too long delay !"
-msgstr "Udskrivning afbrydes, for lange forsinkelser!"
+msgstr "Udskrivning afbrydes, for lange pauser!"
 
 #: bin/modules/action/main.py:195
 msgid "Select your action"
@@ -76,11 +76,11 @@ msgstr "Ændre"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr "Super Administrator Password:"
+msgstr "Super Administrator adgangskode:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr "Bad Super Administrator Password"
+msgstr "Dårlig Super Administrator adgangskode"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -92,7 +92,7 @@ msgstr "Kontrakt-id:"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr "Kontrakt Adgangskode:"
+msgstr "Kontrakt adgangskode:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
@@ -108,7 +108,7 @@ msgstr "Du kan nu migrere databaser."
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr "Overflyt Database"
+msgstr "Migrere database"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
@@ -128,7 +128,7 @@ msgstr "Du har ikke valgt en database"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr "Ingen database fundet, skal du oprette en!"
+msgstr "Ingen database fundet, du skal oprette en!"
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
@@ -145,7 +145,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
-msgstr "Beklager, &#39;"
+msgstr "Beklager,'"
 
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
@@ -156,8 +156,8 @@ msgid ""
 "The database name must contain only normal characters or \"_\".\n"
 "You must avoid all accents, space or special characters."
 msgstr ""
-"Databasen navn må kun indeholde normale tegn eller \"_\". Du skal undgå alle "
-"accenter, mellemrum eller specialtegn."
+"Databasen navn må kun indeholde normale tegn eller \"_\". \n"
+"Du skal undgå alle accenter, mellemrum eller specialtegn."
 
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
@@ -171,23 +171,23 @@ msgstr "Database eksisterer allerede!"
 #: bin/modules/gui/main.py:649 bin/modules/gui/main.py:1383
 #: bin/modules/gui/main.py:1403 bin/modules/gui/main.py:1482
 msgid "Bad database administrator password !"
-msgstr "Bad database administrator password!"
+msgstr "Dårlig database administrator adgangskode!"
 
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr "Fejl under database skabelse!"
+msgstr "Fejl under database oprettelse!"
 
 #: bin/modules/gui/main.py:658
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
-"Serveren styrtede ned under installationen. Vi anbefaler dig at tabe denne "
-"database."
+"Serveren fejlede under installationen. \n"
+"Vi anbefaler dig at slette denne database."
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"
-msgstr "Tryk Ctrl + O for at logge ind"
+msgstr "Tryk Ctrl+O for at logge ind"
 
 #: bin/modules/gui/main.py:881
 msgid "Edit"
@@ -205,7 +205,7 @@ msgstr "Ingen virksomhed"
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr ""
+msgstr "%s anmodning(er)"
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
@@ -214,25 +214,27 @@ msgstr "Ingen anmodning"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " -%s anmodning(r) sendt"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
-"Venligst dobbelt-tjek den database navn eller kontakt din administrator for "
-"at kontrollere databasen status."
+"Venligst dobbelt-tjek database navn eller kontakt din administrator for at "
+"kontrollere database status."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr "Databasen kan ikke få adgang til eller ikke eksisterer"
+msgstr "Kan ikke få adgang til databasen eller den eksisterer ikke"
 
 #: bin/modules/gui/main.py:1041
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
-msgstr "Forbindelse fejl! Stand til at forbinde til serveren!"
+msgstr ""
+"Fejl i forbindelse!\n"
+"Kan ikke forbinde til serveren!"
 
 #: bin/modules/gui/main.py:1043
 msgid ""
@@ -270,7 +272,7 @@ msgstr "Vil du virkelig ønsker at holde op?"
 #: bin/modules/gui/main.py:1262
 #, python-format
 msgid "Attachments (%d)"
-msgstr "Vedhæftede filer (% d)"
+msgstr "Vedhæftede filer (%d)"
 
 #: bin/modules/gui/main.py:1275
 msgid "Attachments"
@@ -282,15 +284,15 @@ msgstr "Slet en database"
 
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr "Databasen er faldet med succes!"
+msgstr "Databasen er slette med succes!"
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr "Kunne ikke falde database."
+msgstr "Kunne ikke slette database."
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr "Kunne ikke falde database"
+msgstr "Kunne ikke slette database"
 
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
@@ -325,7 +327,7 @@ msgstr "Kunne ikke ændre Super Admin password."
 
 #: bin/modules/gui/main.py:1455
 msgid "Bad password provided !"
-msgstr "Forkert adgangskode forudsat!"
+msgstr "Forkert adgangskode angivet!"
 
 #: bin/modules/gui/main.py:1457
 msgid "Error, password not changed."
@@ -333,25 +335,25 @@ msgstr "Fejl, adgangskode ikke ændret."
 
 #: bin/modules/gui/main.py:1463 bin/modules/gui/main.py:1486
 msgid "Backup a database"
-msgstr "Backup en database"
+msgstr "Sikkerhedskopier en database"
 
 #: bin/modules/gui/main.py:1466 bin/modules/gui/window/win_export.py:328
 #: bin/printer/printer.py:216 bin/widget/view/form_gtk/image.py:129
 #: bin/widget/view/form_gtk/binary.py:167
 msgid "Save As..."
-msgstr "Gem som ..."
+msgstr "Gem som..."
 
 #: bin/modules/gui/main.py:1479
 msgid "Database backed up successfully !"
-msgstr "Database bakkes op med succes!"
+msgstr "Database er sikkerhedskopieret op med succes!"
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
-msgstr "Kunne ikke backup af databasen."
+msgstr "Kunne ikke  sikkerhedskopiere databasen."
 
 #: bin/modules/gui/main.py:1484
 msgid "Couldn't backup database."
-msgstr "Kunne ikke backup-database."
+msgstr "Kunne ikke sikkerhedskopiere database."
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
@@ -380,7 +382,7 @@ msgstr "Oprettelses dato"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
-msgstr "Seneste Ændring af"
+msgstr "Seneste ændring af"
 
 #: bin/modules/gui/window/form.py:257
 msgid "Latest Modification Date"
@@ -394,7 +396,9 @@ msgstr "Intern Modul ID Data"
 msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
-msgstr "Record er ikke frelst! Vil du vil rydde aktuelle post?"
+msgstr ""
+"Post er ikke gemt!\n"
+"Vil du vil rydde aktuelle post?"
 
 #: bin/modules/gui/window/form.py:272
 #: bin/widget/view/form_gtk/one2many_list.py:380
@@ -420,7 +424,7 @@ msgstr "Arbejder nu på det duplikerede dokument!"
 
 #: bin/modules/gui/window/form.py:329
 msgid "Document Saved."
-msgstr "Dokument Gemte."
+msgstr "Dokument Gemt."
 
 #: bin/modules/gui/window/form.py:331 bin/modules/gui/window/form.py:332
 #: bin/widget/view/form_gtk/parser.py:126
@@ -442,7 +446,9 @@ msgstr "Advarsel!"
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
-msgstr "Denne rekord er blevet ændret Vil du gemme det?"
+msgstr ""
+"Denne post er blevet ændret\n"
+"Vil du gemme den?"
 
 #: bin/modules/gui/window/form.py:407
 msgid "You must select one or several records !"
@@ -454,7 +460,7 @@ msgstr "Udskriv skærm"
 
 #: bin/modules/gui/window/form.py:436
 msgid "No record selected"
-msgstr "Ingen valgt rekord"
+msgstr "Ingen post valgt"
 
 #: bin/modules/gui/window/form.py:441
 msgid "New document"
@@ -466,7 +472,7 @@ msgstr "Redigerer dokument (id: "
 
 #: bin/modules/gui/window/form.py:446
 msgid "Record: "
-msgstr "Optag: "
+msgstr "Post: "
 
 #: bin/modules/gui/window/form.py:447
 msgid " of "
@@ -491,7 +497,7 @@ msgstr "Importeret ét objekt!"
 #: bin/modules/gui/window/win_import.py:63
 #, python-format
 msgid "Imported %d objects !"
-msgstr "Importerede% d objekter!"
+msgstr "Importerede %d objekter!"
 
 #: bin/modules/gui/window/win_import.py:68
 #, python-format
@@ -502,7 +508,13 @@ msgid ""
 "%s\n"
 "\n"
 "%s"
-msgstr "Fejl forsøger at importere denne rekord:%s Fejlmeddelelse:%s%s"
+msgstr ""
+"Fejl ved forsøg på at importere denne post:\n"
+"%s\n"
+"Fejlmeddelelse:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -515,24 +527,26 @@ msgstr "Feltnavn"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr "Fejl ved åbning. CSV-fil"
+msgstr "Fejl ved åbning af .cvs fil"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr "Input Fejl."
+msgstr "Indtastnings fejl."
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr ""
-"Du kan ikke importere dette felt%s, fordi vi ikke kan auto-detektere det"
+"Du kan ikke importere dette felt %s, fordi vi ikke kan auto-detektere det"
 
 #: bin/modules/gui/window/win_import.py:190
 #, python-format
 msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
-msgstr "Fejl under behandling af din første linje i filen. Felt%s er ukendt!"
+msgstr ""
+"Fejl under behandling af din første linje i filen.\n"
+"Felt %s er ukendt!"
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
@@ -540,7 +554,7 @@ msgstr "Import Fejl."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
-msgstr "Du har ikke valgt nogen felter for at importere"
+msgstr "Du har ikke valgt nogen felter til import."
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
@@ -568,7 +582,7 @@ msgstr "Navn"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Ressource Name"
-msgstr "Ressource Navn"
+msgstr "Ressource navn"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Names"
@@ -610,7 +624,9 @@ msgstr "Ingen ressource valgt!"
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
-msgstr "Er du sikker på du vil fjerne denne rekord?"
+msgstr ""
+"Er du sikker på at du\n"
+"vil fjerne denne rekord?"
 
 #: bin/modules/gui/window/tree.py:223
 msgid "Error removing resource!"
@@ -622,13 +638,15 @@ msgstr "I stand til at chroot: ingen træ valgte ressource"
 
 #: bin/modules/gui/window/win_export.py:50
 msgid " record(s) saved !"
-msgstr " record (s) frelst!"
+msgstr " post(er) gemt!"
 
 #: bin/modules/gui/window/win_export.py:53
 msgid ""
 "Operation failed !\n"
 "I/O error"
-msgstr "Operation mislykkedes! I / O-fejl"
+msgstr ""
+"Operation mislykkedes!\n"
+"I/O fejl"
 
 #: bin/modules/gui/window/win_export.py:79
 #: bin/modules/gui/window/win_export.py:105
@@ -651,42 +669,42 @@ msgstr "OpenERP - Link"
 #: bin/modules/gui/window/win_search.py:126
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr "OpenERP Søg:%s"
+msgstr "OpenERP søg: %s"
 
 #: bin/modules/gui/window/win_search.py:127
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr "OpenERP Søg:%s (%% d resultat (er))"
+msgstr "OpenERP søg: %s (%%d resultat(er))"
 
 #: bin/options.py:109
 #, python-format
 msgid "OpenERP Client %s"
-msgstr "OpenERP Client%s"
+msgstr "OpenERP klient %s"
 
 #: bin/options.py:110
 msgid "specify alternate config file"
-msgstr "angive andre config file"
+msgstr "angiv alternativ config fil"
 
 #: bin/options.py:111
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr "Aktivér basal fejlsøgning. Alias ​​for &#39;- log-level = debug&#39;"
+msgstr "Aktivér basal fejlsøgning. Alias ​​for '--log-level=debug'"
 
 #: bin/options.py:112
 #, python-format
 msgid "specify the log level: %s"
-msgstr "angive log-niveau:%s"
+msgstr "angive log niveau: %s"
 
 #: bin/options.py:113
 msgid "specify the user login"
-msgstr "angive bruger login"
+msgstr "angiv bruger login"
 
 #: bin/options.py:114
 msgid "specify the server port"
-msgstr "angive server port"
+msgstr "angiv server port"
 
 #: bin/options.py:115
 msgid "specify the server ip/name"
-msgstr "angive server ip / navn"
+msgstr "angiv server ip / navn"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
@@ -729,18 +747,20 @@ msgstr "OpenERP Computing"
 
 #: bin/common/common.py:152
 msgid "Operation in progress"
-msgstr "Er i gang"
+msgstr "Operation er i gang"
 
 #: bin/common/common.py:156
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
-msgstr "Vent venligst, kan denne operation tage et stykke tid ..."
+msgstr ""
+"Vent venligst,\n"
+"denne operation kan tage et stykke tid ..."
 
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr "Sikre, at filen%s er korrekt"
+msgstr "Sikre, at filen %s er korrekt"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
@@ -837,8 +857,8 @@ msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
-"Dit problem er blevet sendt til kvaliteten team! Vi vil recontact dig efter "
-"en analyse af problemet."
+"Dit problem er blevet sendt til vores kvalitets team!\n"
+"Vi vil kontakte dig efter en analyse af problemet."
 
 #: bin/common/common.py:491
 #, python-format
@@ -847,8 +867,8 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
-"Dit problem kunne * IKKE * skal sendes til kvaliteten team! Rapporter "
-"venligst denne fejl manuelt på:%s"
+"Dit problem kunne IKKE automatisk sendes til vores kvalitets team! Rapporter "
+"venligst denne fejl manuelt på: %s"
 
 #: bin/common/common.py:491
 msgid "Error"
@@ -866,14 +886,15 @@ msgstr "Kunne ikke indstille locale%s:%s"
 #: bin/printer/printer.py:184
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr "Stand til at håndtere%s filetype"
+msgstr "Kunne ikke håndtere %s fil type"
 
 #: bin/printer/printer.py:189
 msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
-"Linux automatisk udskrivning ikke er gennemført. Brug preview mulighed!"
+"Linux automatisk udskrivning er ikke gennemført. \n"
+"Brug vis udskrift mulighed!"
 
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
@@ -895,7 +916,7 @@ msgstr "Lukning OpenERP, KeyboardInterrupt"
 #: bin/widget_search/custom_filter.py:176 bin/widget_search/checkbox.py:67
 #: bin/widget/view/form_gtk/button.py:47
 msgid "The content of the widget or ValueError if not valid"
-msgstr "Indholdet af den widget eller værdi fejl hvis ikke gyldigt"
+msgstr "Indholdet af denne widget eller værdi fejl hvis ikke gyldigt"
 
 #: bin/widget_search/form.py:445
 msgid "The content of the form or exception if not valid"
@@ -1005,7 +1026,7 @@ msgstr "Nej"
 
 #: bin/widget/view/form.py:136 bin/widget/view/form.py:199
 msgid "You must save this record to use the relate button !"
-msgstr "Du skal gemme denne rekord at bruge vedrører knap!"
+msgstr "Du skal gemme denne post, for at bruge tilhørende knap!"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
@@ -1013,7 +1034,7 @@ msgstr "Handling ikke er defineret!"
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
-msgstr "Du skal vælge en rekord at bruge vedrører knap!"
+msgstr "Du skal vælge en post for at bruge tilhørende knap!"
 
 #: bin/widget/view/form.py:236 bin/widget/view/form_gtk/parser.py:647
 #: bin/widget/view/form_gtk/parser.py:767
@@ -1025,7 +1046,7 @@ msgstr "Ingen andre sprog til rådighed!"
 #: bin/widget/view/form_gtk/parser.py:773
 #: bin/widget/view/form_gtk/parser.py:830
 msgid "Add Translation"
-msgstr "Tilføj Oversættelse"
+msgstr "Tilføj oversættelse"
 
 #: bin/widget/view/form.py:291 bin/widget/view/form_gtk/parser.py:886
 msgid "Translate label"
@@ -1037,11 +1058,12 @@ msgstr "Uge"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
-msgstr "Kalender Se Fejl!"
+msgstr "Fejl i kalender visning!"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "You must intall the library python-hippocanvas to use calendars."
-msgstr "Du skal intakt biblioteket python-hippocanvas at bruge kalendere."
+msgstr ""
+"Du skal installere biblioteket python-hippocanvas for at bruge kalendere."
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
@@ -1057,23 +1079,25 @@ msgstr "Gem som et filter"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr "Administrer Filtre"
+msgstr "Administrer filtre"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
 "You have unsaved record(s) !  \n"
 "\n"
 "Please Save them before sorting !"
-msgstr "Du har gemt record (s)! Vær venlig Gem dem før sorteringen!"
+msgstr ""
+"Post(er) er ikke gemt! \n"
+"Vær venlig at gemme  før sorteringen!"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 #, python-format
 msgid "Shortcut: %s"
-msgstr "Genvej:% s"
+msgstr "Genvej: %s"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 msgid "F1 New - F2 Open/Search"
-msgstr "F1 Ny - F2 Åben / Søg"
+msgstr "F1 Ny - F2 Åben/Søg"
 
 #: bin/widget/view/tree_gtk/editabletree.py:214
 #, python-format
@@ -1090,11 +1114,11 @@ msgstr ""
 #: bin/widget/view/widget_parse.py:53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
-msgstr "Denne type (% s) er ikke understøttet af GTK klient!"
+msgstr "Denne type (%s) er ikke understøttet af GTK klienten!"
 
 #: bin/widget/view/widget_parse.py:64
 msgid "No valid view found for this object!"
-msgstr "Ingen gyldig mening fundet for dette objekt!"
+msgstr "Ingen gyldig visning fundet for dette objekt!"
 
 #: bin/widget/view/graph_gtk/parser.py:64
 msgid "Can not generate graph !"
@@ -1106,7 +1130,7 @@ msgstr "Dot Viewer"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
-msgstr "Tilføj ny Knude"
+msgstr "Tilføj ny node"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
@@ -1114,11 +1138,11 @@ msgstr "Tilføj New Edge"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr "Forstør Diagram"
+msgstr "Forstør diagram"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr "Skrumpe Diagram"
+msgstr "Indskrænk diagram"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
@@ -1126,26 +1150,26 @@ msgstr "Monter diagram til vinduet"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
-msgstr "Viser diagrammet på sin normale størrelse"
+msgstr "Vise diagrammet i sin normale størrelse"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr "Udskrive Diagram"
+msgstr "Udskriv diagram"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr "Luk Nuværende%s"
+msgstr "Luk nuværende %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
 msgid "Delete Current %s"
-msgstr "Slet Nuværende%s"
+msgstr "Slet nuværende %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr "Rediger aktuel%s"
+msgstr "Rediger aktuel %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
@@ -1161,11 +1185,11 @@ msgstr "Søg / Åbn en ressource"
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
-msgstr "Forkert ikon for den knap!"
+msgstr "Forkert ikon for denne knap!"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr "Field"
+msgstr "Felt"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
@@ -1194,7 +1218,7 @@ msgstr "Gem og luk"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr "Gem & Ny"
+msgstr "Gem & ny"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
@@ -1225,7 +1249,7 @@ msgstr "Forrige side"
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
 msgid "Previous Record"
-msgstr "Tidligere rekord"
+msgstr "Tidligere post"
 
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
@@ -1252,7 +1276,7 @@ msgstr "Du skal vælge en ressource!"
 
 #: bin/widget/view/form_gtk/image.py:73
 msgid "Set Image"
-msgstr "Set Image"
+msgstr "Placér billede"
 
 #: bin/widget/view/form_gtk/image.py:82 bin/widget/view/form_gtk/binary.py:84
 msgid "Save As"
@@ -1272,7 +1296,7 @@ msgstr "Billeder"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr "Der er intet billede at gemme som!"
+msgstr "Der er intet billede at gemme!"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
@@ -1296,7 +1320,7 @@ msgstr "Rapport"
 
 #: bin/widget/view/form_gtk/many2one.py:388 bin/widget/view/list.py:618
 msgid "You must select a record to use the relation !"
-msgstr "Du skal vælge en rekord at bruge relatioen!"
+msgstr "Du skal vælge en post for at bruge relatioen!"
 
 #: bin/widget/view/form_gtk/interface.py:48
 msgid "Set as default"
@@ -1304,11 +1328,11 @@ msgstr "Vælg som standard"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "You can not set to the default value here !"
-msgstr "Du kan ikke indstille til standardværdien her!"
+msgstr "Du kan ikke indstille standardværdien her!"
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "Operation not permited"
-msgstr "Operation ikke ikke tilladelse"
+msgstr "Operation ikke tilladt"
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
@@ -1327,7 +1351,7 @@ msgstr "kan ikke læse data filen"
 #: bin/widget/view/form_gtk/binary.py:155
 #, python-format
 msgid "Error reading the file: %s"
-msgstr "Fejl ved læsning af filen:% s"
+msgstr "Fejl ved læsning af filen: %s"
 
 #: bin/widget/view/form_gtk/binary.py:138
 msgid "All Files"
@@ -1340,7 +1364,7 @@ msgstr "Vælg en fil ..."
 #: bin/widget/view/form_gtk/binary.py:177
 #, python-format
 msgid "Error writing the file: %s"
-msgstr "Fejl ved skrivning til fil:% s"
+msgstr "Fejl ved skrivning til fil: %s"
 
 #: bin/widget/view/form_gtk/wid_common.py:59
 msgid "Always applicable !"
@@ -1349,7 +1373,7 @@ msgstr "Altid gældende!"
 #: bin/widget/view/form_gtk/calendar.py:100
 #: bin/widget/view/form_gtk/calendar.py:162
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr "Ugyldig dato værdi! År skal være større end 1899!"
+msgstr "Ugyldig dato! År skal være større end 1899!"
 
 #: bin/widget/view/form_gtk/calendar.py:252
 msgid "Hour:"
@@ -1361,37 +1385,39 @@ msgstr "Minut:"
 
 #: bin/widget/view/form_gtk/calendar.py:289
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr "Ugyldig datetime værdi! År skal være større end 1899!"
+msgstr "Ugyldig dato og tid! År skal være større end 1899!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:30
 msgid "Gantt view not yet implemented !"
-msgstr "Gantt-visning endnu ikke er gennemført!"
+msgstr "Gantt-visning findes endnu ikke!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid ""
 "The gantt view is not available in this GTK Client, you should use the web "
 "interface or switch to the calendar view."
 msgstr ""
-"Gantt opfattelse er ikke tilgængelig i denne GTK Client, skal du bruge web-"
+"Gantt visning er ikke tilgængelig i denne GTK Klient, skal du bruge web-"
 "grænseflade eller skifte til kalendervisning."
 
 #: bin/widget/screen/screen.py:354
 msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
-msgstr "(Enhver eksisterende filter med samme navn vil blive erstattet)"
+msgstr ""
+"(Enhver eksisterende filter\n"
+"med samme navn vil blive erstattet)"
 
 #: bin/rpc.py:157
 msgid "Connection refused!"
-msgstr "Connection refused!"
+msgstr "Forbindelse afvist!"
 
 #: bin/rpc.py:187
 msgid ""
 "Unable to reach to OpenERP server !\n"
 "You should check your connection to the network and the OpenERP server."
 msgstr ""
-"Ikke kan nå at OpenERP server! Du bør kontrollere din forbindelse til nettet "
-"og OpenERP serveren."
+"Kan ikke forbinde OpenERP server! Du bør kontrollere din forbindelse til "
+"nettet og OpenERP serveren."
 
 #: bin/rpc.py:187
 msgid "Connection Error"
@@ -1411,15 +1437,15 @@ msgstr "Bruger:"
 
 #: bin/openerp.glade:146 bin/openerp.glade:6436 bin/openerp.glade:6747
 msgid "Password:"
-msgstr "Password:"
+msgstr "Adgangskode:"
 
 #: bin/openerp.glade:265
 msgid "_File"
-msgstr "_file"
+msgstr "_fil"
 
 #: bin/openerp.glade:272
 msgid "_Connect..."
-msgstr "_Connect ..."
+msgstr "_Forbind..."
 
 #: bin/openerp.glade:288
 msgid "_Disconnect"
@@ -1455,7 +1481,7 @@ msgstr "_Migrate Database (r)"
 
 #: bin/openerp.glade:415
 msgid "Administrator Password"
-msgstr "Administrator Password"
+msgstr "Administrator adgangskode"
 
 #: bin/openerp.glade:460
 msgid "_User"
@@ -1467,7 +1493,7 @@ msgstr "_Preferences"
 
 #: bin/openerp.glade:488
 msgid "_Send a request"
-msgstr "_Send En anmodning"
+msgstr "_Send en anmodning"
 
 #: bin/openerp.glade:503
 msgid "_Read my requests"
@@ -1475,7 +1501,7 @@ msgstr "_Read Mine anmodninger"
 
 #: bin/openerp.glade:523
 msgid "_Waiting Requests"
-msgstr "_Waiting Anmodninger"
+msgstr "_Waiting anmodninger"
 
 #: bin/openerp.glade:536
 msgid "For_m"
@@ -1483,7 +1509,7 @@ msgstr "For_m"
 
 #: bin/openerp.glade:544
 msgid "_New"
-msgstr "_NEW"
+msgstr "_New"
 
 #: bin/openerp.glade:560
 msgid "_Save"
@@ -1531,7 +1557,7 @@ msgstr "Luk faneblad"
 
 #: bin/openerp.glade:731
 msgid "Previous Tab"
-msgstr "Forrige Tab"
+msgstr "Forrige fane"
 
 #: bin/openerp.glade:740 bin/openerp.glade:5080
 msgid "Next Tab"
@@ -1603,7 +1629,7 @@ msgstr "_Forms"
 
 #: bin/openerp.glade:950
 msgid "Right Toolbar"
-msgstr "Højre Toolbar"
+msgstr "Højre værktøjslinie"
 
 #: bin/openerp.glade:958
 msgid "Tabs default position"
@@ -1631,11 +1657,11 @@ msgstr "Tabs default orientering"
 
 #: bin/openerp.glade:1013
 msgid "Horizontal"
-msgstr "Vandret"
+msgstr "Horisontal"
 
 #: bin/openerp.glade:1021
 msgid "Vertical"
-msgstr "Lodret"
+msgstr "Vertikal"
 
 #: bin/openerp.glade:1038
 msgid "_Print"
@@ -1743,7 +1769,7 @@ msgstr "Gantt"
 
 #: bin/openerp.glade:1392
 msgid "Print documents"
-msgstr "Udskrive dokumenter"
+msgstr "Udskriv dokumenter"
 
 #: bin/openerp.glade:1403
 msgid "Launch actions about this resource"
@@ -1763,7 +1789,7 @@ msgstr "Menu"
 
 #: bin/openerp.glade:1450 bin/openerp.glade:1451
 msgid "Reload"
-msgstr "Opdater"
+msgstr "Genindlæs"
 
 #: bin/openerp.glade:1468
 msgid "Close this window"
@@ -1779,7 +1805,7 @@ msgstr "Anmodninger:"
 
 #: bin/openerp.glade:1558
 msgid "Read my Requests"
-msgstr "Læs min Anmodning"
+msgstr "Læs min anmodning"
 
 #: bin/openerp.glade:1579
 msgid "Send a new request"
@@ -1795,7 +1821,7 @@ msgstr "Genveje"
 
 #: bin/openerp.glade:1781
 msgid "OpenERP - Forms"
-msgstr "OpenERP - Skemaer"
+msgstr "OpenERP - Forms"
 
 #: bin/openerp.glade:1805
 msgid "State:"
@@ -1922,7 +1948,7 @@ msgstr "Gem liste"
 
 #: bin/openerp.glade:2748
 msgid "Remove List"
-msgstr "Fjern Liste"
+msgstr "Fjern liste"
 
 #: bin/openerp.glade:2803
 msgid "<b>Exports List</b>"
@@ -1964,7 +1990,9 @@ msgstr "Felter til Export"
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
-msgstr "Åbn i Excel Gem som CSV"
+msgstr ""
+"Åbn i Excel\n"
+"Gem som CSV"
 
 #: bin/openerp.glade:3151
 msgid "Add _field names"
@@ -1992,7 +2020,7 @@ msgstr "Dagens tip"
 
 #: bin/openerp.glade:3434
 msgid "_Display a new tip next time?"
-msgstr "_Display En ny spids næste gang?"
+msgstr "_Display et nyt tip næste gang?"
 
 #: bin/openerp.glade:3487
 msgid "Pre_vious Tip"
@@ -2045,7 +2073,11 @@ msgid ""
 "Medium\n"
 "Urgent\n"
 "Very Urgent"
-msgstr "Ikke haster Medium Haster meget presserende"
+msgstr ""
+"Haster ikke\n"
+"Medium\n"
+"Haster \n"
+"Meget presserende"
 
 #: bin/openerp.glade:4540
 msgid "<b>Support contract id:</b>"
@@ -2117,7 +2149,7 @@ msgstr "Næste post"
 
 #: bin/openerp.glade:4983
 msgid "Previous record"
-msgstr "Tidligere rekord"
+msgstr "Tidligere post"
 
 #: bin/openerp.glade:4998
 msgid "<PgDn>"
@@ -2153,7 +2185,7 @@ msgstr "<Ctrl> + <PgUp>"
 
 #: bin/openerp.glade:5136
 msgid "New"
-msgstr "Nye"
+msgstr "Ny"
 
 #: bin/openerp.glade:5151
 msgid "<Ctrl> + N"
@@ -2177,7 +2209,7 @@ msgstr "<Ctrl> + F"
 
 #: bin/openerp.glade:5220
 msgid "Connect"
-msgstr "Connect"
+msgstr "Tilslut"
 
 #: bin/openerp.glade:5235
 msgid "<Ctrl> + O"
@@ -2185,7 +2217,7 @@ msgstr "<Ctrl> + O"
 
 #: bin/openerp.glade:5249
 msgid "Main Shortcuts"
-msgstr "Vigtigste Genveje"
+msgstr "Vigtigste genveje"
 
 #: bin/openerp.glade:5266
 msgid "F2"
@@ -2277,7 +2309,7 @@ msgstr "N_othing"
 
 #: bin/openerp.glade:5801
 msgid "Auto-Detect"
-msgstr "Auto-Detect"
+msgstr "Autodetektér"
 
 #: bin/openerp.glade:5856
 msgid "<b>Fields to import</b>"
@@ -2289,11 +2321,11 @@ msgstr "Fil til import:"
 
 #: bin/openerp.glade:5965
 msgid "Lines to Skip:"
-msgstr "Linjer til Spring:"
+msgstr "Linjer som springes over:"
 
 #: bin/openerp.glade:5994
 msgid "Text Delimiter:"
-msgstr "Tekst Afgrænser:"
+msgstr "Tekst afgrænser:"
 
 #: bin/openerp.glade:6022
 msgid "Encoding:"
@@ -2301,11 +2333,11 @@ msgstr "Kodning:"
 
 #: bin/openerp.glade:6035
 msgid "Field Separater:"
-msgstr "Felt Separater:"
+msgstr "Felt separater:"
 
 #: bin/openerp.glade:6047
 msgid "CSV Parameters"
-msgstr "CSV Parametre"
+msgstr "CSV parametre"
 
 #: bin/openerp.glade:6222
 msgid "Server"
@@ -2321,11 +2353,11 @@ msgstr "Protokol forbindelse:"
 
 #: bin/openerp.glade:6337
 msgid "Port:"
-msgstr "Havn:"
+msgstr "Port:"
 
 #: bin/openerp.glade:6389
 msgid "Choose a database..."
-msgstr "Vælg en database ..."
+msgstr "Vælg en database..."
 
 #: bin/openerp.glade:6404
 msgid "<b>Backup a database</b>"
@@ -2333,7 +2365,7 @@ msgstr "<b>Backup en database</b>"
 
 #: bin/openerp.glade:6645
 msgid "Restore a database"
-msgstr "Genskabe en database"
+msgstr "Genskab en database"
 
 #: bin/openerp.glade:6658
 msgid "<b>Restore a database</b>"
@@ -2341,11 +2373,11 @@ msgstr "<b>Genskabe en database</b>"
 
 #: bin/openerp.glade:6702
 msgid "(must not contain any special char)"
-msgstr "(Må ikke indeholde nogen særlig char)"
+msgstr "(Må ikke indeholde nogen særlig tegn)"
 
 #: bin/openerp.glade:6732
 msgid "New database name:"
-msgstr "Ny database navn:"
+msgstr "Nyt database navn:"
 
 #: bin/openerp.glade:6832 bin/openerp.glade:6978 bin/openerp.glade:7493
 msgid "http://localhost:8069"
