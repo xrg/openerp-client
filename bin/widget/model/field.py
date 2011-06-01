@@ -501,7 +501,7 @@ class ReferenceField(CharField):
             val = model.value[self.name]
             if not isinstance(val, (tuple, list)):
                 val = eval(val)
-            if val and val[0]:
+            if val and val[0] and val[1][0]:
                 return '%s,%d' % (val[0], val[1][0])
         return False
 
