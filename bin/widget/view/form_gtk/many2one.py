@@ -175,7 +175,7 @@ class many2one(interface.widget_interface):
         self._menu_entries.append((_('Report'), lambda x: self.click_and_action('client_print_multi'),0))
         self.enter_pressed = False
         if attrs.get('completion',False):
-            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', '', [], 'ilike', {})
+            ids = rpc.session.rpc_exec_auth('/object', 'execute', self.attrs['relation'], 'name_search', '', [], 'ilike', rpc.session.context)
             if ids:
                 self.load_completion(ids,attrs)
 
