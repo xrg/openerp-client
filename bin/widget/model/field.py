@@ -485,8 +485,12 @@ class ReferenceField(CharField):
     def validate(self, model):
         ok = True
         if bool(self.get_state_attrs(model).get('required', 0)):
-            model_name, (id, name) = value = model.value[self.name]
-            if not value or int(id) < 1:
+            value = model.value[self.name]
+            if value:
+                model_name, (id, name) = value
+                if int(id) < 1:
+                    ok = False
+            else:
                 ok = False
         self.get_state_attrs(model)['valid'] = ok
         return ok
