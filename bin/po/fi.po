@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-30 22:28+0000\n"
-"Last-Translator: Sami Haahtinen <sami@haahtinen.name>\n"
+"PO-Revision-Date: 2011-06-08 09:47+0000\n"
+"Last-Translator: Juha Kotamäki <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-14 05:50+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-06-09 05:43+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "Language: fi\n"
 
 #: bin/plugins/__init__.py:27
@@ -200,7 +200,7 @@ msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "Ei yritystä"
 
 #: bin/modules/gui/main.py:995
 #, python-format
@@ -214,13 +214,15 @@ msgstr "Ei pyyntöjä"
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s pyyntöä lähetetty"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"Tarkista vielä tietokannan nimi tai ota yhteyttä pääkäyttäjään tietokannan "
+"tilan tarkastamiseksi."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
@@ -392,7 +394,7 @@ msgstr "Viimeisen muokkauksen päiväys"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "Sisäisen moduulin tietojen ID"
 
 #: bin/modules/gui/window/form.py:269
 msgid ""
@@ -511,6 +513,12 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Virhe tuotaessa tätä tietuetta\n"
+"%s\n"
+"virheilmoitus:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
@@ -554,7 +562,7 @@ msgstr "Et ole valinnut yhtään tuotavaa kenttää"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "Lisäosa"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
@@ -562,7 +570,7 @@ msgstr "Sovellus"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "Tulostuksenhallinta"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
@@ -651,7 +659,7 @@ msgstr "Virhe avattaessa Exceliä!"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "Mikä on tämän viennin mimi?"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
@@ -704,7 +712,7 @@ msgstr "määritä palvelimen ip-osoite/nimi"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "Sulje nykyinen vihje"
 
 #: bin/common/common.py:90
 msgid ""
@@ -716,7 +724,7 @@ msgstr ""
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "Poista kaikki vihjeet käytöstä"
 
 #: bin/common/common.py:101
 msgid ""
@@ -749,15 +757,15 @@ msgstr ""
 #: bin/common/common.py:190
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "Tarkista että tiedosto %s on oikein"
 
 #: bin/common/common.py:364
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " on raportoinnut seuraavan virheen:\n"
 
 #: bin/common/common.py:364
 msgid "remarks"
-msgstr ""
+msgstr "huomautukset"
 
 #: bin/common/common.py:367
 msgid "Support request sent !"
@@ -847,7 +855,7 @@ msgstr "Avaa sovelluksella..."
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "Ei voi asettaa alueasetuksia %s: %s"
 
 #: bin/printer/printer.py:184
 #, python-format
@@ -865,6 +873,8 @@ msgstr ""
 #: bin/printer/printer.py:197
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
+"Virhe! Tietoja ei löydy. Varmista että sinulla on riittävästi tietoja "
+"tulostaaksesi!"
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
@@ -965,11 +975,11 @@ msgstr "pienempi kuin"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "kohteessa"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "ei joukossa"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -977,6 +987,9 @@ msgid ""
 "For Date and DateTime Formats, specify text in '%Y-%m-%d' and '%Y-%m-%d "
 "%H:%M:%S' formats respectively."
 msgstr ""
+"Syötä arvoja erotettuna ','. Jos operaattori 'in' tai 'not in' on valittu.\n"
+"Päivämäärä ja päivämäärä-kellonaika formaattien osalta käytä %Y-%m-%d' and "
+"'%Y-%m-%d %H:%M:%S' muotoa."
 
 #: bin/widget_search/checkbox.py:35 bin/widget_search/checkbox.py:54
 msgid "Yes"
@@ -992,7 +1005,7 @@ msgstr "Tallenna tietue ennenkuin käytät liitä-nappia!"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "Toimintoa ei määritelty!"
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
@@ -1029,11 +1042,11 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--Toiminnot--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "Tallenna pikalinkkinä"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
@@ -1049,6 +1062,8 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"Sinulla on tallentamattomia tietueita !\n"
+"Tallenna ne ennenkuin lajittelet !"
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 #, python-format
@@ -1094,42 +1109,42 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
-msgstr ""
+msgstr "Lisää uusi reuna"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "Laajenna kaaviota"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "Pienennä kaaviota"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "Sovita kaavio ikkunaan"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "Näytä kaavio normaalikokoisena"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "Tulosta kaavio"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "Sulje nykyinen %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "Poista nykyinen %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "Muokkaa nykyistä %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
@@ -1227,7 +1242,7 @@ msgstr "Vaihda"
 #: bin/widget/view/form_gtk/one2many_list.py:251
 #: bin/widget/view/form_gtk/many2many.py:106
 msgid "Choose Limit"
-msgstr ""
+msgstr "Valitse raja"
 
 #: bin/widget/view/form_gtk/one2many_list.py:292
 msgid "You have to select a resource !"
@@ -1255,7 +1270,7 @@ msgstr "Kuvat"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "Tallennettavaa kuvaa ei ole !"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
@@ -1363,6 +1378,8 @@ msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
 msgstr ""
+"(kaikki nykyiset suodattimet joilla\n"
+"on sama nimi korvataan)"
 
 #: bin/rpc.py:157
 msgid "Connection refused!"
@@ -1650,7 +1667,7 @@ msgstr "_Apua"
 
 #: bin/openerp.glade:1132
 msgid "Enable Debug Mode Tooltips"
-msgstr ""
+msgstr "Laita päälle virheenselvityksen vihjeet"
 
 #: bin/openerp.glade:1140 bin/openerp.glade:4395
 msgid "Support Request"
@@ -2395,7 +2412,7 @@ msgstr ""
 
 #: bin/openerp.glade:7048
 msgid "admin"
-msgstr ""
+msgstr "ylläpitäjä"
 
 #: bin/openerp.glade:7062
 msgid "(<i>admin</i>, by default)"
@@ -2433,6 +2450,8 @@ msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
+"Tämä on pääkäyttäjän ('admin') salasana jota käytetään uudessa "
+"tietokannassasi."
 
 #: bin/openerp.glade:7171
 msgid ""
@@ -2445,6 +2464,8 @@ msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
+"Tämä on pääkäyttäjän ('admin') salasana jota käytetään uudessa "
+"tietokannassasi. Sen täytyy olla sama kuin ylläolevassa kentässä."
 
 #: bin/openerp.glade:7186
 msgid ""
@@ -2545,15 +2566,15 @@ msgstr "kuukausi"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
-msgstr ""
+msgstr "Tietueet joihin hakukriteerit kohdistetaan"
 
 #: bin/openerp.glade:8289
 msgid "Conditional Operators"
-msgstr ""
+msgstr "Ehdolliset operaattorit"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
-msgstr ""
+msgstr "Valinta kohdistetaan uuteen suotimeen (jos on)"
 
 #: bin/openerp.glade:8317
 msgid ""
@@ -2567,7 +2588,7 @@ msgstr "Poista Suodin"
 
 #: bin/openerp.glade:8349
 msgid "Filter Entry"
-msgstr ""
+msgstr "Suodin vaihtoehto"
 
 #: bin/openerp.glade:8395
 msgid "Enter Filter Name:"
@@ -2579,7 +2600,7 @@ msgstr "merkintä"
 
 #: bin/win_error.glade:100
 msgid "Click here for details about the publisher warranty proposition"
-msgstr ""
+msgstr "Klikkaa tästä nähdäksesi yksityskohtia julkaisijan takuuehdotuksesta"
 
 #: bin/win_error.glade:120
 msgid "<i>_Publisher Warranty</i>"
@@ -2604,11 +2625,11 @@ msgstr "Muita kommentteja:"
 
 #: bin/win_error.glade:285
 msgid "Send to Publisher Warranty Team"
-msgstr ""
+msgstr "Lähetä julkaisijan takuutiimille"
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
-msgstr ""
+msgstr "Ongelman yhteenveto"
 
 #: bin/win_error.glade:360
 msgid "<i>_Support Request</i>"
