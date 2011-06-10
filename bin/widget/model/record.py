@@ -319,7 +319,8 @@ class ModelRecord(signal_event.signal_event):
 
             warning = response.get('warning', {})
             if warning:
-                common.warning(warning['message'], warning['title'], parent=self.mgroup.screen.current_view.window)
+                parent = self.mgroup.screen and self.mgroup.screen.current_view and self.mgroup.screen.current_view.window or False
+                common.warning(warning['message'], warning['title'], parent=parent)
         self.signal('record-changed')
 
     def on_change_attrs(self, callback):
