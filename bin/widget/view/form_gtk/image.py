@@ -38,8 +38,8 @@ REQUIRED_IMG = file(common.terp_path_pixmaps("image_required.png"), 'rb').read()
 
 class image_wid(interface.widget_interface):
 
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent=parent, attrs=attrs, label_ebox=label)
 
         self._value = ''
         self._set_required_img = False

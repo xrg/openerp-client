@@ -150,6 +150,8 @@ class CharField(object):
             if k == 'invisible' and widget:
                 func = ['show_all', 'hide_all'][bool(result)]
                 getattr(widget, func)()
+                if widget.label_ebox:
+                    getattr(widget.label_ebox, func)()
             elif k in ['readonly', 'required'] :
                 self.get_state_attrs(model)[k] = result
 
@@ -157,7 +159,7 @@ class CharField(object):
         ro = model.mgroup._readonly
         state_changes = dict(self.attrs.get('states',{}).get(state,[]))
         if 'readonly' in state_changes:
-            self.get_state_attrs(model)['readonly'] = state_changes.get('readonly', False) 
+            self.get_state_attrs(model)['readonly'] = state_changes.get('readonly', False)
         else:
             if (self.attrs.get('readonly', False) or  ro) and  ro  or self.attrs['readonly']:
                 self.get_state_attrs(model)['readonly'] = True
@@ -168,7 +170,7 @@ class CharField(object):
                 self.get_state_attrs(model)['required'] = self.attrs['required']
         if 'value' in state_changes:
             self.set(model, state_changes['value'], test_state=False, modified=True)
-    
+
     def get_state_attrs(self, model):
         if self.name not in model.state_attrs:
             model.state_attrs[self.name] = self.attrs.copy()
@@ -483,8 +485,12 @@ class ReferenceField(CharField):
     def validate(self, model):
         ok = True
         if bool(self.get_state_attrs(model).get('required', 0)):
-            model_name, (id, name) = value = model.value[self.name]
-            if not value or int(id) < 1:
+            value = model.value[self.name]
+            if value:
+                model_name, (id, name) = value
+                if int(id) < 1:
+                    ok = False
+            else:
                 ok = False
         self.get_state_attrs(model)['valid'] = ok
         return ok
@@ -499,7 +505,8 @@ class ReferenceField(CharField):
             val = model.value[self.name]
             if not isinstance(val, (tuple, list)):
                 val = eval(val)
-            return '%s,%d' % (val[0], val[1][0])
+            if val and val[0] and val[1][0]:
+                return '%s,%d' % (val[0], val[1][0])
         return False
 
     def set_client(self, model, value, test_state=False, force_change=False):

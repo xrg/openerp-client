@@ -26,8 +26,8 @@ import common
 import interface
 
 class char(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent, attrs=attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent, attrs=attrs, label_ebox=label)
 
         self.widget = gtk.Entry()
         self.widget.set_property('activates_default', True)

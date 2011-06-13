@@ -135,7 +135,6 @@ class form(object):
                 self.sig_new(autosave=False)
             if self.screen.current_view.view_type in ('tree', 'graph', 'calendar'):
                 self.screen.search_filter()
-
         if auto_refresh and int(auto_refresh):
             gobject.timeout_add(int(auto_refresh) * 1000, self.sig_reload)
     
@@ -193,7 +192,8 @@ class form(object):
         if event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):
             win.destroy()
             self.get_resource(widget)
-
+            
+    @set_tooltips
     def sig_goto(self, *args):
         if not self.modified_save():
             return
@@ -231,7 +231,7 @@ class form(object):
 
     def id_get(self):
         return self.screen.id_get()
-
+    
     def sig_attach(self, widget=None):
         id = self.id_get()
         if id:
@@ -247,6 +247,7 @@ class form(object):
             self.message_state(_('No record selected ! You can only attach to existing record.'), color='red')
         return True
     
+    @set_tooltips
     def sig_switch(self, widget=None, mode=None):
         if not self.modified_save():
             return

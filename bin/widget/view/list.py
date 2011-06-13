@@ -142,7 +142,7 @@ class list_record(object):
             @param sort_order : order of sorting for the same read_group call
             @return : sort_order if sort_order start with the same field as gb else None
         """
-        if sort_order:
+        if gb and sort_order:
             if(isinstance(gb, (tuple, list))):
                 gb = gb[0]
 
@@ -502,6 +502,8 @@ class ViewList(parser_view):
         context.drop_finish(False, etime)
         if treeview.sequence and drop_info and not group_by:
             self.screen.models.set_sequence(get_id, rec_id, field='sequence')
+            self.reload = True
+            self.screen.reload()
 
     def drag_data_delete(self, treeview, context):
         treeview.emit_stop_by_name('drag-data-delete')
@@ -576,14 +578,13 @@ class ViewList(parser_view):
                              current_active_model['state'].get(current_active_model) in states):
                         if self.widget_tree.editable:
                             if current_active_model.validate():
-                                id = self.screen.save_current()
+                                self.screen.save_current()
                             else:
                                common.warning(_('Invalid form, correct red fields !'), _('Error !'),parent=self.window)
                                self.widget_tree.warn('misc-message', _('Invalid form, correct red fields !'), "red")
                                self.screen.display()
                                return False
-                        else:
-                            id = current_active_model.id
+                        id = current_active_model.id
                         current_active_model.get_button_action(self.screen, id, path[1].attrs)
                         self.screen.current_model = None
                         if self.screen.parent and isinstance(self.screen.parent, ModelRecord):

@@ -27,8 +27,8 @@ import tools
 from tools import user_locale_format
 
 class spinbutton(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent, model, attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent, model, attrs, label_ebox=label)
 
         adj = gtk.Adjustment(0.0, -sys.maxint, sys.maxint, 1.0, 5.0)
         self.widget = gtk.SpinButton(adj, 1.0, digits=int( attrs.get('digits',(14,2))[1] ) )

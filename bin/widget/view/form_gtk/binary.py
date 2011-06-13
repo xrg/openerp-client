@@ -37,8 +37,8 @@ import printer
 
 
 class wid_binary(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent, model, attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent, model, attrs, label_ebox=label)
 
         self.widget = gtk.HBox(spacing=3)
         self.wid_text = gtk.Entry()

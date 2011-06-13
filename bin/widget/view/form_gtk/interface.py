@@ -32,11 +32,12 @@ _attrs_boolean = {
 }
 
 class widget_interface(object):
-    def __init__(self, window, parent=None, view=None, attrs=None):
+    def __init__(self, window, parent=None, view=None, attrs=None, label_ebox= None):
         if attrs is None:
             attrs = {}
         self.parent = parent
         self.position = 0
+        self.label_ebox = label_ebox
         self._window = window
         self._view = None
         self.attrs = attrs
@@ -94,7 +95,7 @@ class widget_interface(object):
         model = self._view.modelfield.parent.resource
         wid_common.field_pref_set(self._view.widget_name,
                 self.attrs.get('string', self._view.widget_name), model,
-                value, deps, window=self._window)
+                value, self.attrs.get('password', False), deps, window=self._window)
 
     def _menu_open(self, obj, menu):
         item = gtk.SeparatorMenuItem()

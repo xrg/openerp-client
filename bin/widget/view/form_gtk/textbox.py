@@ -27,8 +27,8 @@ import options
 
 
 class textbox(interface.widget_interface):
-    def __init__(self, window, parent, model, attrs={}):
-        interface.widget_interface.__init__(self, window, parent, model, attrs)
+    def __init__(self, window, parent, model, attrs={}, label=None):
+        interface.widget_interface.__init__(self, window, parent, model, attrs, label_ebox=label)
 
         self.widget = gtk.ScrolledWindow()
         self.widget.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
