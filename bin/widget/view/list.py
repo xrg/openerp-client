@@ -35,6 +35,7 @@ import Queue
 from interface import parser_view
 from tools import user_locale_format
 from widget.model.record import ModelRecord
+from tools.datetime_util import float_time_convert
 
 class field_record(object):
     def __init__(self, name, count):
@@ -778,7 +779,10 @@ class ViewList(parser_view):
                         value += float(model.fields_get()[self.children[c][0]].get(model, check_load=False) or 0.0)
             if self.children[c][5] == 'avg' and length:
                 value = value/length
-            label_str = user_locale_format.format('%.' + str(self.children[c][3]) + 'f', value)
+            if self.children[c][6] == 'float_time':
+                label_str = float_time_convert(value)
+            else:
+                label_str = user_locale_format.format('%.' + str(self.children[c][3]) + 'f', value)
             if self.children[c][4]:
                 self.children[c][2].set_markup('<b>%s</b>' % label_str)
             else:
