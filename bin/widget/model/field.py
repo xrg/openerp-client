@@ -94,7 +94,7 @@ class CharField(object):
         self.get_state_attrs(model)['valid'] = ok
         return ok
 
-    def set(self, model, value, test_state=True, modified=False):
+    def set(self, model, value, modified=False):
         if isinstance(value, basestring):
             value = value.strip()
         model.value[self.name] = value
@@ -106,9 +106,9 @@ class CharField(object):
     def get(self, model, check_load=True, readonly=True, modified=False):
         return model.value.get(self.name, False) or False
 
-    def set_client(self, model, value, test_state=True, force_change=False):
+    def set_client(self, model, value, force_change=False):
         internal = model.value.get(self.name, False)
-        self.set(model, value, test_state)
+        self.set(model, value)
         if (internal or False) != (model.value.get(self.name,False) or False):
             model.modified = True
             model.modified_fields.setdefault(self.name)
@@ -169,7 +169,7 @@ class CharField(object):
             if self.attrs.get('required', False):
                 self.get_state_attrs(model)['required'] = self.attrs['required']
         if 'value' in state_changes:
-            self.set(model, state_changes['value'], test_state=False, modified=True)
+            self.set(model, state_changes['value'], modified=True)
 
     def get_state_attrs(self, model):
         if self.name not in model.state_attrs:
@@ -177,22 +177,6 @@ class CharField(object):
         return model.state_attrs[self.name]
 
 class BinaryField(CharField):
-    def __check_model(self, model):
-        assert self.name in model.mgroup.mfields
-
-    def __check_load(self, model, modified, bin_size):
-        if model.id and (self.name not in model.value or (model.value[self.name] is None)):
-            c = rpc.session.context.copy()
-            c.update(model.context_get())
-            c['bin_size'] = bin_size
-            data = model.rpc.read([model.id], [self.name], c)
-            if data:
-                value = data[0][self.name]
-                self.set(model, value, modified=modified, get_binary_size=bin_size)
-
-    def get_size_name(self):
-        return "%s.size" % self.name
-
     def validate(self, model):
         ok = True
         if bool(self.get_state_attrs(model).get('required', 0)):
@@ -202,65 +186,58 @@ class BinaryField(CharField):
         self.get_state_attrs(model)['valid'] = ok
         return ok
 
-    def set(self, model, value, test_state=True, modified=False, get_binary_size=True):
-        self.__check_model(model)
-        if model.is_wizard():
-            get_binary_size = False
-        model.value[self.name] = None
-        name = get_binary_size and self.get_size_name() or self.name
-        model.value[name] = value
-        if (not get_binary_size) and value:
-            model.value[self.get_size_name()] = tools.human_size(len(value))
-        if not value:
-            model.value[self.get_size_name()] = ""
+    def set(self, model, value, modified=False):
+        model.value[self.name] = value
+        if value:
+            value = tools.human_size(len(value))
+        model.value["%s.size" % self.name] = value
         if modified:
             model.modified = True
             model.modified_fields.setdefault(self.name)
         return True
 
-    def get(self, model, check_load=True, readonly=True, modified=False):
-        self.__check_model(model)
-        if check_load:
-            self.__check_load(model, modified, False)
-        res = model.value.get(self.name, False)
-        if not res:
-            return model.value.get(self.get_size_name(), False) or False
-        return res
-
     def get_client(self, model):
-        self.__check_model(model)
-        self.__check_load(model, False, True)
-        return model.value.get(self.get_size_name(), False) or False
+        return model.value.get("%s.size" % self.name, False) 
 
-    def set_client(self, model, value, test_state=True, force_change=False):
-        self.__check_model(model)
+    def set_client(self, model, value):
         before = self.get(model)
-        self.set(model, value, test_state, get_binary_size=False)
+        self.set(model, value)
         if before != self.get(model):
             model.modified = True
             model.modified_fields.setdefault(self.name)
             self.sig_changed(model)
             model.signal('record-changed', model)
 
+class ImageField(CharField):
+    
+    def set(self, model, value, modified=False):
+        model.value[self.name] = value
+        if not value:
+            model.value[self.name] = ''
+        if modified:
+            model.modified = True
+            model.modified_fields.setdefault(self.name)
+        return True
+
 
 class SelectionField(CharField):
-    def set(self, model, value, test_state=True, modified=False):
+    def set(self, model, value, modified=False):
         value = isinstance(value,(list,tuple)) and len(value) and value[0] or value
 
         if not self.get_state_attrs(model).get('required', False) and value is None:
-            super(SelectionField, self).set(model, value, test_state, modified)
+            super(SelectionField, self).set(model, value, modified)
 
         if value in [sel[0] for sel in self.attrs['selection']]:
-            super(SelectionField, self).set(model, value, test_state, modified)
+            super(SelectionField, self).set(model, value, modified)
 
 class FloatField(CharField):
     def validate(self, model):
         self.get_state_attrs(model)['valid'] = True
         return True
 
-    def set_client(self, model, value, test_state=True, force_change=False):
+    def set_client(self, model, value, force_change=False):
         internal = model.value[self.name]
-        self.set(model, value, test_state)
+        self.set(model, value)
         if abs(float(internal or 0.0) - float(model.value[self.name] or 0.0)) >= (10.0**(-1-int(self.attrs.get('digits', (12,4))[1]))):
             if not self.get_state_attrs(model).get('readonly', False):
                 model.modified = True
@@ -279,9 +256,9 @@ class IntegerField(CharField):
         self.get_state_attrs(model)['valid'] = True
         return True
 
-    def set_client(self, model, value, test_state=True, force_change=False):
+    def set_client(self, model, value, force_change=False):
         internal = model.value.get(self.name, False)
-        self.set(model, value, test_state)
+        self.set(model, value)
         if int(internal or False) != (model.value.get(self.name,False) or False):
             model.modified = True
             model.modified_fields.setdefault(self.name)
@@ -308,7 +285,7 @@ class M2OField(CharField):
             return model.value[self.name][1]
         return False
 
-    def set(self, model, value, test_state=False, modified=False):
+    def set(self, model, value, modified=False):
         if value and isinstance(value, (int, str, unicode, long)):
             rpc2 = RPCProxy(self.attrs['relation'])
             result = rpc2.name_get([value], rpc.session.context)
@@ -319,9 +296,9 @@ class M2OField(CharField):
             model.modified = True
             model.modified_fields.setdefault(self.name)
 
-    def set_client(self, model, value, test_state=False, force_change=False):
+    def set_client(self, model, value, force_change=False):
         internal = model.value[self.name]
-        self.set(model, value, test_state)
+        self.set(model, value)
         if internal != model.value[self.name]:
             model.modified = True
             model.modified_fields.setdefault(self.name)
@@ -353,7 +330,7 @@ class M2MField(CharField):
             res = model.pager_cache[self.name]
         return res or model.value[self.name] or []
 
-    def set(self, model, value, test_state=False, modified=False):
+    def set(self, model, value, modified=False):
         ## The case where M2M may appear in a domain as string
         ## eg: if I have a domain on partner list view as
         ## [('categ_id','=','supplier')]
@@ -369,9 +346,9 @@ class M2MField(CharField):
             model.modified = True
             model.modified_fields.setdefault(self.name)
 
-    def set_client(self, model, value, test_state=False, force_change=False):
+    def set_client(self, model, value, force_change=False):
         internal = model.pager_cache.get(self.name, [])
-        self.set(model, value, test_state, modified=False)
+        self.set(model, value, modified=False)
         if model.is_m2m_modified or set(internal) != set(value):
             model.is_m2m_modified = False
             model.modified = True
@@ -424,7 +401,7 @@ class O2MField(CharField):
             result.append((2, model2.id, False))
         return result
 
-    def set(self, model, value, test_state=False, modified=False):
+    def set(self, model, value, modified=False):
         if value and not isinstance(value[0], int):
             model = self.set_default(model, value)
             return
@@ -438,8 +415,8 @@ class O2MField(CharField):
         model.value[self.name].pre_load(value, display=False)
         #self.internal.signal_connect(self.internal, 'model-changed', self._model_changed)
 
-    def set_client(self, model, value, test_state=False, force_change=False):
-        self.set(model, value, test_state=test_state)
+    def set_client(self, model, value, force_change=False):
+        self.set(model, value)
         model.signal('record-changed', model)
 
     def set_default(self, model, value):
@@ -509,7 +486,7 @@ class ReferenceField(CharField):
                 return '%s,%d' % (val[0], val[1][0])
         return False
 
-    def set_client(self, model, value, test_state=False, force_change=False):
+    def set_client(self, model, value, force_change=False):
         internal = model.value[self.name]
         model.value[self.name] = value
         if (internal or False) != (model.value[self.name] or False):
@@ -518,7 +495,7 @@ class ReferenceField(CharField):
             self.sig_changed(model)
             model.signal('record-changed', model)
 
-    def set(self, model, value, test_state=False, modified=False):
+    def set(self, model, value, modified=False):
         if not value:
             model.value[self.name] = False
             return
@@ -546,7 +523,7 @@ TYPES = {
     'reference' : ReferenceField,
     'selection': SelectionField,
     'boolean': IntegerField,
-    'image': BinaryField,
+    'image': ImageField,
     'binary': BinaryField,
 }
 

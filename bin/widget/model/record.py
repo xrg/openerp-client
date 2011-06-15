@@ -271,7 +271,6 @@ class ModelRecord(signal_event.signal_event):
             return
         c = rpc.session.context.copy()
         c.update(self.context_get())
-        c['bin_size'] = True
         res = self.rpc.read([self.id], fields, c)
         if res:
             value = res[0]
