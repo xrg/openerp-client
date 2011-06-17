@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-05-26 12:03+0000\n"
-"Last-Translator: Natan Alter <Unknown>\n"
+"PO-Revision-Date: 2011-06-16 10:01+0000\n"
+"Last-Translator: Fred Golbarten <Unknown>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-27 06:02+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-06-17 05:36+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "Language: he\n"
 
 #: bin/plugins/__init__.py:27
@@ -28,15 +28,15 @@ msgstr ""
 
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
-msgstr ""
+msgstr "לא נמצא תוסף עזר למשאב זה"
 
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr ""
+msgstr "בחר תוסף עזר"
 
 #: bin/modules/action/wizard.py:150 bin/modules/gui/main.py:188 bin/rpc.py:156
 msgid "Connection refused !"
-msgstr ""
+msgstr "ניסיון התחברות נכשל!"
 
 #: bin/modules/action/wizard.py:162 bin/modules/action/wizard.py:168
 #: bin/modules/action/wizard.py:170 bin/modules/gui/main.py:196
@@ -46,23 +46,23 @@ msgstr "שגיאת יישום"
 
 #: bin/modules/action/wizard.py:170 bin/rpc.py:204
 msgid "View details"
-msgstr ""
+msgstr "מאפיינים"
 
 #: bin/modules/action/main.py:48
 msgid "Nothing to print!"
-msgstr ""
+msgstr "הדפסה לא קיימת!"
 
 #: bin/modules/action/main.py:66
 msgid "Printing aborted, too long delay !"
-msgstr ""
+msgstr "ההדפסה בוטלה עקב השהייה ארוכה מדי"
 
 #: bin/modules/action/main.py:195
 msgid "Select your action"
-msgstr ""
+msgstr "בחר פעולה לביצוע"
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr ""
+msgstr "ניסיון התכברות לשרת נכשל!"
 
 #: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6278
 #: bin/openerp.glade:6524 bin/openerp.glade:6847 bin/openerp.glade:7508
@@ -72,67 +72,67 @@ msgstr "שרת:"
 #: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6560
 #: bin/openerp.glade:6804 bin/openerp.glade:7103 bin/openerp.glade:7465
 msgid "Change"
-msgstr ""
+msgstr "שינוי"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "סיסמה של מנהל מערכת"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "סיסמה של מנהל מערכת שגויה"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
-msgstr ""
+msgstr "תוכנת שידרוג"
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
-msgstr ""
+msgstr "זהוי משתמש"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr ""
+msgstr "סיסמה של משתמש"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr ""
+msgstr "הגרסה מעודכנת"
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
-msgstr ""
+msgstr "העדכונים זמינים:"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "נא להעביר בסיס נתונים עכשיו"
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr ""
+msgstr "עברת בסיס נתונים"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr "מסד נתונים"
+msgstr "בסיס נתונים"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "בסיס הנתונים שודרג"
 
 #: bin/modules/gui/main.py:295
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "בסיס הנתונים  שודרגו"
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "לא בחרת בסיס נתונים"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr ""
+msgstr "לא נמצא בסיס נתונים. חובה ליצור אחד!"
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
-msgstr "בלתי ידוע"
+msgstr "לא ידוע"
 
 #: bin/modules/gui/main.py:474
 #, python-format
@@ -143,11 +143,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
-msgstr ""
+msgstr "אנו מצתיירים"
 
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
-msgstr ""
+msgstr "שם של בסיס הנתונים שגוי!"
 
 #: bin/modules/gui/main.py:613
 msgid ""
