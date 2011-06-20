@@ -8,23 +8,23 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-06-16 10:01+0000\n"
+"PO-Revision-Date: 2011-06-19 07:41+0000\n"
 "Last-Translator: Fred Golbarten <Unknown>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-17 05:36+0000\n"
+"X-Launchpad-Export-Date: 2011-06-20 05:26+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 "Language: he\n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
-msgstr ""
+msgstr "הדפס תזרים של תהליך עבודה"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
-msgstr ""
+msgstr "הדפס תזרים תהליכי עבודה כולל עריכה"
 
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
@@ -158,26 +158,28 @@ msgstr ""
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
 msgid "Could not create database."
-msgstr ""
+msgstr "יצירת מסד הנתונים כשלה."
 
 #: bin/modules/gui/main.py:647
 msgid "Database already exists !"
-msgstr ""
+msgstr "בסיס נתונים כבר קיים!"
 
 #: bin/modules/gui/main.py:649 bin/modules/gui/main.py:1383
 #: bin/modules/gui/main.py:1403 bin/modules/gui/main.py:1482
 msgid "Bad database administrator password !"
-msgstr ""
+msgstr "סיסמת של מנהל מסד הנתונים - אינה נכונה!"
 
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr ""
+msgstr "שגיאה תהליך הקמה של בסיס נתונים!"
 
 #: bin/modules/gui/main.py:658
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
 msgstr ""
+"השרת נכשל במהלך ההתקנה.\n"
+"מומלץ לחסל את הבסיס נתונים הזה."
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"
@@ -215,16 +217,20 @@ msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
+"נא לבדוק את השם של מסד הנתונים או פנה למנהל המערכת לבדיקת מצבו של מסד "
+"הנתונים."
 
 #: bin/modules/gui/main.py:1037
 msgid "Database cannot be accessed or does not exist"
-msgstr ""
+msgstr "מסד הנתונים - לא זמין או אינו קיים."
 
 #: bin/modules/gui/main.py:1041
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
+"שגיאת התחברות!\n"
+"בעיית התחברות לשרת!"
 
 #: bin/modules/gui/main.py:1043
 msgid ""
