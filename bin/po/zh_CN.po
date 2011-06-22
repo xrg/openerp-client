@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
+"PO-Revision-Date: 2011-06-21 17:29+0000\n"
+"Last-Translator: Jeff Wang <wjfonhand@hotmail.com>\n"
 "Language-Team: Simplified Chinese <http://www.shine-it.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-14 05:52+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-06-22 05:25+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "Language: \n"
 
 #
@@ -1767,19 +1767,13 @@ msgstr "密码："
 msgid "_File"
 msgstr "文件(_F)"
 
-#
-# File: bin/openerp.glade, line: 264
-# File: bin/openerp.glade, line: 264
 #: bin/openerp.glade:272
 msgid "_Connect..."
-msgstr "连接...(_C)"
+msgstr "登录"
 
-#
-# File: bin/openerp.glade, line: 280
-# File: bin/openerp.glade, line: 280
 #: bin/openerp.glade:288
 msgid "_Disconnect"
-msgstr "断线（_D)"
+msgstr "断开"
 
 #: bin/openerp.glade:308
 msgid "Databases"
