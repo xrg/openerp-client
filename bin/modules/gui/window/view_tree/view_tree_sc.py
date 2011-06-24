@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -32,7 +32,6 @@ class view_tree_sc(object):
         self.last_iter = None
         self.model = model
         self.tree = tree
-        self.tree.connect( 'key-press-event', self.on_key_press_event )
         self.tree.get_selection().set_mode('single')
 
         self.tree.enable_model_drag_source(gtk.gdk.BUTTON1_MASK, [("shortcuts", 0, 0)], gtk.gdk.ACTION_COPY)
@@ -43,8 +42,6 @@ class view_tree_sc(object):
         self.tree.append_column(column)
         column.set_visible(False)
         cell = gtk.CellRendererText()
-        cell.connect( 'edited', self.on_cell_edited )
-
         column = gtk.TreeViewColumn (_('Description'), cell, text=1)
         self.tree.append_column(column)
 #        self.update()
@@ -91,29 +88,6 @@ class view_tree_sc(object):
     def serv_update(self, ids, action):
         if (action==2):
             self.update()
-
-    def on_cell_edited(self, cell, path_string, new_text):
-        model = self.tree.get_model()
-        iter = model.get_iter_from_string(path_string)
-        old_text = model.get_value( iter, self.COLUMN_NAME )
-        if old_text <> new_text:
-            res_id = int( model.get_value( iter, self.COLUMN_ID ) )
-            rpc.session.rpc_exec_auth('/object', 'execute', 'ir.ui.view_sc', 'write', res_id, { 'name' : new_text }, rpc.session.context )
-            model.set(iter, self.COLUMN_NAME, new_text)
-
-        cell.set_property( 'editable', False )
-
-    def on_key_press_event( self, widget, event ):
-        if event.keyval == gtk.keysyms.F2:
-            column = self.tree.get_column( self.COLUMN_NAME )
-            cell = column.get_cell_renderers()[0]
-            cell.set_property( 'editable', True )
-
-            selected_row = widget.get_selection().get_selected()
-            if selected_row and selected_row[1]:
-                (model, iter) = selected_row
-                path = model.get_path( iter )
-                self.tree.set_cursor_on_cell( path, column, cell, True )
 
     def check_sanity(self, model, iter_to_copy, target_iter):
         path_of_iter_to_copy = model.get_path(iter_to_copy)
