@@ -460,7 +460,7 @@ class form(wid_int.wid_int):
                     pos = 2
                 elif len(domain) >= 4 and domain[-4] in ['&','|']:
                     pos = 4
-                if len(domain) == 4 and domain[1] in ['&','|']:
+                if len(domain) == 4 and domain[0] in ['&','|'] and domain[1] in ['&','|']:
                     domain = domain[1:]
                 else:
                     if pos:
