@@ -170,7 +170,7 @@ class list_record(object):
                     inner_gb = __ctx.get('group_by', [])
                     if no_leaf and not len(inner_gb):
                         child = False
-                    ctx = {'__domain': r.get('__domain', []),'group_by_no_leaf':no_leaf}
+                    ctx = {'__domain': r.get('__domain', []),'group_by_no_leaf':no_leaf,'lang':self.context.get('lang','en_US')}
                     if not no_leaf:
                         ctx.update({'__field':gb[-1]})
                     ctx.update(__ctx)
@@ -744,7 +744,9 @@ class ViewList(parser_view):
                     self.screen.domain = [('id','in',self.screen.ids_get())]
                 self.screen.models.models.clear()
             self.move_colums()
-            self.store = AdaptModelGroup(self.screen.models, self.screen.context, self.screen.domain, self.screen.sort, self.screen)
+            ctx = self.screen.context.copy()
+            ctx.update(rpc.session.context)
+            self.store = AdaptModelGroup(self.screen.models, ctx, self.screen.domain, self.screen.sort, self.screen)
             if self.store:
                 self.widget_tree.set_model(self.store)
         else:
