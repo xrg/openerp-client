@@ -21,6 +21,7 @@
 
 import socket
 import cPickle
+import cStringIO
 import sys
 import options
 
@@ -41,6 +42,16 @@ class Myexception(Exception):
         self.faultCode = faultCode
         self.faultString = faultString
         self.args = (faultCode, faultString)
+
+# Safety class instance loader for unpickling.
+# Inspired by http://nadiana.com/python-pickle-insecure#How_to_Make_Unpickling_Safer
+SAFE_CLASSES = { 'exceptions' : ['Exception'] }
+def find_global(module, name):
+    if module not in SAFE_CLASSES or name not in SAFE_CLASSES[module]:
+        raise cPickle.UnpicklingError('Unsafe pickled data')
+    __import__(module)
+    mod = sys.modules[module]
+    return getattr(mod, name)
 
 class mysocket:
     def __init__(self, sock=None):
@@ -84,7 +95,11 @@ class mysocket:
         size = int(read(self.sock, 8))
         buf = read(self.sock, 1)
         exception = buf != '0' and buf or False
-        res = cPickle.loads(read(self.sock, size))
+        buf = read(self.sock, size)
+        msgio = cStringIO.StringIO(buf)
+        unpickler = cPickle.Unpickler(msgio)
+        unpickler.find_global = find_global
+        res = unpickler.load()
 
         if isinstance(res[0],Exception):
             if exception:
