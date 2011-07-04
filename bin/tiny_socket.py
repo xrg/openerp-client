@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -48,7 +48,7 @@ class Myexception(Exception):
 SAFE_CLASSES = { 'exceptions' : ['Exception'] }
 def find_global(module, name):
     if module not in SAFE_CLASSES or name not in SAFE_CLASSES[module]:
-        raise cPickle.UnpicklingError('Unsafe pickled data')
+        raise cPickle.UnpicklingError('Unsafe pickled class instance: %s.%s' % (module,name))
     __import__(module)
     mod = sys.modules[module]
     return getattr(mod, name)
