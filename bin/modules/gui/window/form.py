@@ -158,19 +158,30 @@ class form(object):
         ## and needed to be converted to real ids
         if isinstance(get_id, str):
             get_id = int(get_id.split('-')[0])
-        all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])
+
         if widget:
             get_id = int(widget.get_value())
-        if get_id in all_ids:
-            current_ids = self.screen.ids_get()
-            if get_id in current_ids:
-                self.screen.display(get_id)
-            else:
+            
+        # We need listed / searched set of IDS when we switch back to a view
+        listed_ids = self.screen.ids_get()
+        
+        ## If the record is already among the previously searched records or inside
+        ## the listed_ids, we do not need to call search
+        record_exists = False
+        if get_id in listed_ids:
+            self.screen.display(get_id)
+            record_exists = True
+        else:
+            # User is trying to see the record with Ctrl + G option! So we search domainless, limitless!
+            all_ids = rpc.session.rpc_exec_auth('/object', 'execute', self.model, 'search', [])
+            if get_id in all_ids:
                 self.screen.load([get_id])
+                record_exists = True
+        
+        if get_id and record_exists:
             self.screen.current_view.set_cursor()
         else:
-            if widget:
-                common.message(_('Resource ID does not exist for this object!'))
+            common.message(_('Resource ID does not exist for this object!'))
 
     def get_event(self, widget, event, win):
         if event.keyval in (gtk.keysyms.Return, gtk.keysyms.KP_Enter):
