@@ -39,6 +39,7 @@ import rpc
 from rpc import RPCProxy
 import logging
 import widget.model.field as wmodel_fields
+import tools
 
 COLOR_PALETTE = ['#f57900', '#cc0000', '#d400a8', '#75507b', '#3465a4', '#73d216', '#c17d11', '#edd400',
                  '#fcaf3e', '#ef2929', '#ff00c9', '#ad7fa8', '#729fcf', '#8ae234', '#e9b96e', '#fce94f',
@@ -135,6 +136,7 @@ class ViewCalendar(object):
         self.glade.signal_connect('on_button_month_clicked', self._change_view, 'month')
 
         self.date = datetime.today()
+        self.server_format = '%Y-%m-%d %H:%M:%S'
 
         self.string = attrs.get('string', '')
         self.date_start = attrs.get('date_start')
@@ -426,6 +428,9 @@ class ViewCalendar(object):
     def __get_event(self, model):
 
         event = model.value.copy()
+        # Converts the dates according to the timezone in calendar view
+        event[self.date_start] = tools.datetime_util.server_to_local_timestamp(event.get(self.date_start), self.server_format, self.server_format, tz_offset=True, ignore_unparsable_time=False)
+        event[self.date_stop] = tools.datetime_util.server_to_local_timestamp(event.get(self.date_stop), self.server_format, self.server_format, tz_offset=True, ignore_unparsable_time=False)
         self.__convert(event)
 
         caption = ''
