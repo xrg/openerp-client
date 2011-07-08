@@ -448,10 +448,7 @@ class O2MField(CharField):
         ok = True
         for model2 in model.value[self.name].models:
             if not model2.validate():
-                if not model2.is_modified():
-                    model.value[self.name].models.remove(model2)
-                else:
-                    ok = False
+                ok = False
         if not super(O2MField, self).validate(model):
             ok = False
         self.get_state_attrs(model)['valid'] = ok
