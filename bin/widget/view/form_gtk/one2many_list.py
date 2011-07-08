@@ -176,7 +176,8 @@ class one2many_list(interface.widget_interface):
         # the context of the one2many field. We also support a legacy
         # 'default_get' attribute for the same effect (pending removal)
         default_get_ctx = (attrs.get('default_get') or attrs.get('context'))
-        self.context = tools.expr_eval(attrs.get('context',"{}"))
+
+        self.context = tools.expr_eval(attrs.get('context',"{}"), {"__builtins__":None})
         self.screen = Screen(attrs['relation'],
                             view_type=attrs.get('mode','tree,form').split(','),
                             parent=self.parent, views_preload=attrs.get('views', {}),

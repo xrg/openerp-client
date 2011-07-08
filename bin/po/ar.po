@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-06-18 11:09+0000\n"
+"PO-Revision-Date: 2011-07-01 18:32+0000\n"
 "Last-Translator: kifcaliph <kifcaliph@hotmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-19 05:27+0000\n"
+"X-Launchpad-Export-Date: 2011-07-02 05:50+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 "Language: ar\n"
 
@@ -275,7 +275,7 @@ msgstr "هل تود الخروج ؟"
 #: bin/modules/gui/main.py:1262
 #, python-format
 msgid "Attachments (%d)"
-msgstr ""
+msgstr "مرفقات (%d)"
 
 #: bin/modules/gui/main.py:1275
 msgid "Attachments"
@@ -317,27 +317,27 @@ msgstr "لم يتم اسنعادة قاعدة البيانات ."
 #: bin/modules/gui/main.py:1444
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
-msgstr ""
+msgstr "تأكيد كلمة المرور لم يتوافق مع كلمة المرور الجديدة، ألغيت العملية!"
 
 #: bin/modules/gui/main.py:1446
 msgid "Validation Error."
-msgstr ""
+msgstr "خطأ في التصحيح."
 
 #: bin/modules/gui/main.py:1454
 msgid "Could not change the Super Admin password."
-msgstr ""
+msgstr "لم يتمكن من تغيير كلمة مرور المشرف العام."
 
 #: bin/modules/gui/main.py:1455
 msgid "Bad password provided !"
-msgstr ""
+msgstr "كلمة مرور غير مقبولة !"
 
 #: bin/modules/gui/main.py:1457
 msgid "Error, password not changed."
-msgstr ""
+msgstr "خطأ، لم تتغير كلمة المرور."
 
 #: bin/modules/gui/main.py:1463 bin/modules/gui/main.py:1486
 msgid "Backup a database"
-msgstr ""
+msgstr "احتفظ بنسخة من قاعدة البيانات"
 
 #: bin/modules/gui/main.py:1466 bin/modules/gui/window/win_export.py:328
 #: bin/printer/printer.py:216 bin/widget/view/form_gtk/image.py:129
@@ -347,15 +347,15 @@ msgstr "احفظ كـ..."
 
 #: bin/modules/gui/main.py:1479
 msgid "Database backed up successfully !"
-msgstr ""
+msgstr "تم الإحتفاظ بنجاح !"
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
-msgstr ""
+msgstr "لم يتمكن من الإحتفاظ بنسخة لقاعدة البيانات."
 
 #: bin/modules/gui/main.py:1484
 msgid "Couldn't backup database."
-msgstr ""
+msgstr "لم يتمكن من الإحتفاظ بنسخة لقاعدة البيانات."
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
@@ -363,7 +363,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:231
 msgid "No record selected ! You can only attach to existing record."
-msgstr ""
+msgstr "لم يتم إختيار سجل ! يمكنك الإرفاق من خلال سجل."
 
 #: bin/modules/gui/window/form.py:247
 msgid "You have to select a record !"
@@ -376,7 +376,7 @@ msgstr "مُعرف"
 
 #: bin/modules/gui/window/form.py:254
 msgid "Creation User"
-msgstr ""
+msgstr "إنشاء مستخدم"
 
 #: bin/modules/gui/window/form.py:255
 msgid "Creation Date"
@@ -384,11 +384,11 @@ msgstr "تاريخ الإنشاء"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
-msgstr ""
+msgstr "آخر تعديل بواسطة"
 
 #: bin/modules/gui/window/form.py:257
 msgid "Latest Modification Date"
-msgstr ""
+msgstr "آخر تعديل بتاريخ"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
@@ -436,11 +436,11 @@ msgstr "قيمة غير صحيحة، صحح الحقول الحمراء !"
 #: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/list.py:568
 msgid "Error !"
-msgstr ""
+msgstr "خطأ !"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "تحذير !"
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
@@ -450,15 +450,15 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:407
 msgid "You must select one or several records !"
-msgstr ""
+msgstr "يجب ان تختار سجل او مجموعة من السجلات !"
 
 #: bin/modules/gui/window/form.py:416
 msgid "Print Screen"
-msgstr ""
+msgstr "اطبع الشاشة"
 
 #: bin/modules/gui/window/form.py:436
 msgid "No record selected"
-msgstr ""
+msgstr "لم يتم إختيار سجل"
 
 #: bin/modules/gui/window/form.py:441
 msgid "New document"
@@ -474,28 +474,28 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:447
 msgid " of "
-msgstr ""
+msgstr " من "
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "The file is empty !"
-msgstr ""
+msgstr "الملف فارغ !"
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "Importation !"
-msgstr ""
+msgstr "إستيراد !"
 
 #: bin/modules/gui/window/win_import.py:56
 msgid "XML-RPC error !"
-msgstr ""
+msgstr "خطأفي بيانات XML-RPC"
 
 #: bin/modules/gui/window/win_import.py:61
 msgid "Imported one object !"
-msgstr ""
+msgstr "إستيراد كائن واحد !"
 
 #: bin/modules/gui/window/win_import.py:63
 #, python-format
 msgid "Imported %d objects !"
-msgstr ""
+msgstr "إستيراد %d  كائنات !"
 
 #: bin/modules/gui/window/win_import.py:68
 #, python-format
@@ -507,10 +507,16 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"خطأ في إستيراد هذه السجلات:\n"
+"%s\n"
+"رسالة الخطأ:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
-msgstr ""
+msgstr "خطأ في الإستيراد !"
 
 #: bin/modules/gui/window/win_import.py:100
 #: bin/modules/gui/window/win_import.py:104
@@ -519,11 +525,11 @@ msgstr "اسم الحقل"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "خطأ في فتح الملف .CSV"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "خطأ في الإدخال"
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
@@ -539,7 +545,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "خطأ في الإستيراد."
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -547,23 +553,23 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "امتداد"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "تطبيق"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "معالج الطباعة"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
-msgstr ""
+msgstr "تم تعريف هذا الإمتداد"
 
 #: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7684
 msgid "Extension Manager"
-msgstr ""
+msgstr "منظم الإمتدادات"
 
 #: bin/modules/gui/window/win_selection.py:51
 msgid "Name"
@@ -571,7 +577,7 @@ msgstr "الاسم"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Ressource Name"
-msgstr ""
+msgstr "اسم المورد"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Names"
@@ -583,7 +589,7 @@ msgstr "نافذة مجهولة"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "تفضيلات"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
@@ -593,11 +599,11 @@ msgstr ""
 
 #: bin/modules/gui/window/win_preference.py:87
 msgid "Default language modified !"
-msgstr ""
+msgstr "تعدلت اللغة الإفتراضية !"
 
 #: bin/modules/gui/window/view_tree/parse.py:35
 msgid "Tree"
-msgstr ""
+msgstr "شجرة"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:48
 msgid "Description"
@@ -605,17 +611,19 @@ msgstr "الوصف"
 
 #: bin/modules/gui/window/tree.py:204 bin/modules/gui/window/tree.py:260
 msgid "No resource selected!"
-msgstr ""
+msgstr "لم يتم إختيار مورد!"
 
 #: bin/modules/gui/window/tree.py:218
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
 msgstr ""
+"هل أنت متأكد\n"
+"من حذف هذا السجل؟"
 
 #: bin/modules/gui/window/tree.py:223
 msgid "Error removing resource!"
-msgstr ""
+msgstr "خطأ في حذف المورد!"
 
 #: bin/modules/gui/window/tree.py:234
 msgid "Unable to chroot: no tree resource selected"
@@ -715,7 +723,7 @@ msgstr ""
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "إرشادات"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
@@ -723,7 +731,7 @@ msgstr ""
 
 #: bin/common/common.py:152
 msgid "Operation in progress"
-msgstr ""
+msgstr "تقدم العملية"
 
 #: bin/common/common.py:156
 msgid ""
@@ -818,7 +826,7 @@ msgstr ""
 
 #: bin/common/common.py:491
 msgid "Error"
-msgstr ""
+msgstr "خطأ"
 
 #: bin/common/common.py:646
 msgid "Open with..."
@@ -846,7 +854,7 @@ msgstr ""
 
 #: bin/printer/printer.py:224
 msgid "Error writing the file!"
-msgstr ""
+msgstr "خطأ في كتابة الملف!"
 
 #: bin/openerp-client.py:140
 msgid "Closing OpenERP, KeyboardInterrupt"
@@ -885,7 +893,7 @@ msgstr ""
 
 #: bin/widget_search/char.py:43
 msgid "Error: "
-msgstr ""
+msgstr "خطأ: "
 
 #: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
 msgid "Start date"
@@ -910,35 +918,35 @@ msgstr ""
 
 #: bin/widget_search/custom_filter.py:56
 msgid "contains"
-msgstr ""
+msgstr "يحتوى على"
 
 #: bin/widget_search/custom_filter.py:57
 msgid "doesn't contain"
-msgstr ""
+msgstr "لا يحتوي علي"
 
 #: bin/widget_search/custom_filter.py:58
 msgid "is equal to"
-msgstr ""
+msgstr "مساوٍ لـ"
 
 #: bin/widget_search/custom_filter.py:59
 msgid "is not equal to"
-msgstr ""
+msgstr "ليس مساويًا لـ"
 
 #: bin/widget_search/custom_filter.py:60
 msgid "greater than"
-msgstr ""
+msgstr "أكبر من"
 
 #: bin/widget_search/custom_filter.py:61
 msgid "less than"
-msgstr ""
+msgstr "أقل من"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
-msgstr ""
+msgstr "في"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "ليس في"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -957,15 +965,15 @@ msgstr "لا"
 
 #: bin/widget/view/form.py:136 bin/widget/view/form.py:199
 msgid "You must save this record to use the relate button !"
-msgstr ""
+msgstr "يجب حفظ هذا السجل لإستخدام الزر المتعلق به !"
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "أمر غير معروف !"
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
-msgstr ""
+msgstr "يجب إختيار سجل لاستعمال زر المتعلق به !"
 
 #: bin/widget/view/form.py:236 bin/widget/view/form_gtk/parser.py:647
 #: bin/widget/view/form_gtk/parser.py:767
@@ -981,7 +989,7 @@ msgstr "إضافة ترجمة"
 
 #: bin/widget/view/form.py:291 bin/widget/view/form_gtk/parser.py:886
 msgid "Translate label"
-msgstr ""
+msgstr "ترجم العنوان"
 
 #: bin/widget/view/calendar_gtk/parser.py:356 bin/openerp.glade:8106
 msgid "Week"
@@ -1009,7 +1017,7 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "إدارة المرشحات"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1103,7 +1111,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1250
 msgid "Create a new resource"
-msgstr ""
+msgstr "إنشاء مصدر جديد"
 
 #: bin/widget/view/form_gtk/reference.py:89
 msgid "Search / Open a resource"
@@ -1115,11 +1123,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Field"
-msgstr ""
+msgstr "حقل"
 
 #: bin/widget/view/form_gtk/parser.py:318
 msgid "Object"
-msgstr ""
+msgstr "كائن"
 
 #: bin/widget/view/form_gtk/parser.py:630
 msgid "Enter some text to the related field before adding translations!"
@@ -1135,15 +1143,15 @@ msgstr "ترجم هذه الصفحة"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "حفظ و إغلاق"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "حفظ و جديد"
 
 #: bin/widget/view/form_gtk/one2many_list.py:175
 #: bin/widget/view/form_gtk/interface.py:47
@@ -1169,7 +1177,7 @@ msgstr "حذف هذه المدخلة"
 #: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
 msgid "Previous Page"
-msgstr ""
+msgstr "صفحة سابقة"
 
 #: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
@@ -1179,12 +1187,12 @@ msgstr ""
 #: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
 msgid "Next Record"
-msgstr ""
+msgstr "سجل تالي"
 
 #: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
 msgid "Next Page"
-msgstr ""
+msgstr "الصفحة التالية"
 
 #: bin/widget/view/form_gtk/one2many_list.py:245
 msgid "Switch"
@@ -1193,7 +1201,7 @@ msgstr "حول"
 #: bin/widget/view/form_gtk/one2many_list.py:251
 #: bin/widget/view/form_gtk/many2many.py:106
 msgid "Choose Limit"
-msgstr ""
+msgstr "اختر حد"
 
 #: bin/widget/view/form_gtk/one2many_list.py:292
 msgid "You have to select a resource !"
@@ -1225,7 +1233,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
-msgstr ""
+msgstr "إنذار"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
 msgid "Open this resource"
@@ -1257,7 +1265,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/interface.py:63
 msgid "Operation not permited"
-msgstr ""
+msgstr "العملية غير مسموحة"
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
@@ -1350,35 +1358,35 @@ msgstr ""
 
 #: bin/openerp.glade:116 bin/openerp.glade:6450
 msgid "Database:"
-msgstr ""
+msgstr "قاعدة البيانات:"
 
 #: bin/openerp.glade:131
 msgid "User:"
-msgstr ""
+msgstr "مستخدم:"
 
 #: bin/openerp.glade:146 bin/openerp.glade:6436 bin/openerp.glade:6747
 msgid "Password:"
-msgstr ""
+msgstr "كلمة المرور :"
 
 #: bin/openerp.glade:265
 msgid "_File"
-msgstr ""
+msgstr "_ملف"
 
 #: bin/openerp.glade:272
 msgid "_Connect..."
-msgstr ""
+msgstr "_إتصال..."
 
 #: bin/openerp.glade:288
 msgid "_Disconnect"
-msgstr ""
+msgstr "_قطع الإتصال"
 
 #: bin/openerp.glade:308
 msgid "Databases"
-msgstr ""
+msgstr "قواعد البيانات"
 
 #: bin/openerp.glade:315
 msgid "_New database"
-msgstr ""
+msgstr "_قاعدة بيانات جديدة"
 
 #: bin/openerp.glade:330
 msgid "_Restore database"
@@ -1406,11 +1414,11 @@ msgstr ""
 
 #: bin/openerp.glade:460
 msgid "_User"
-msgstr ""
+msgstr "_مستخدم"
 
 #: bin/openerp.glade:468
 msgid "_Preferences"
-msgstr ""
+msgstr "_تفضيلات"
 
 #: bin/openerp.glade:488
 msgid "_Send a request"
@@ -1430,35 +1438,35 @@ msgstr ""
 
 #: bin/openerp.glade:544
 msgid "_New"
-msgstr ""
+msgstr "_جديد"
 
 #: bin/openerp.glade:560
 msgid "_Save"
-msgstr ""
+msgstr "_حفظ"
 
 #: bin/openerp.glade:576
 msgid "Copy this resource"
-msgstr ""
+msgstr "انسخ هذا المورد"
 
 #: bin/openerp.glade:577
 msgid "_Duplicate"
-msgstr ""
+msgstr "_مكرر"
 
 #: bin/openerp.glade:593
 msgid "_Delete"
-msgstr ""
+msgstr "_احذف"
 
 #: bin/openerp.glade:614
 msgid "Find"
-msgstr ""
+msgstr "بحث"
 
 #: bin/openerp.glade:630
 msgid "Ne_xt"
-msgstr ""
+msgstr "التالي"
 
 #: bin/openerp.glade:646
 msgid "Pre_vious"
-msgstr ""
+msgstr "السابق"
 
 #: bin/openerp.glade:662
 msgid "Switch to list/form"
@@ -1466,7 +1474,7 @@ msgstr ""
 
 #: bin/openerp.glade:678
 msgid "_Menu"
-msgstr ""
+msgstr "القائمة"
 
 #: bin/openerp.glade:699
 msgid "_New Home Tab"
