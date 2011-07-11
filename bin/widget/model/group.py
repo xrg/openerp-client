@@ -405,12 +405,12 @@ class ModelRecordGroup(signal_event.signal_event):
             if self.parent and self.screen:
                 ctx.update(self.parent.expr_eval(self.screen.default_get))
             ctx.update(self.context)
-            defalut_value = values = self.rpc.default_get(to_add, ctx)
+            values = self.rpc.default_get(to_add, ctx)
             for t in to_add:
-                if t not in defalut_value:
-                    defalut_value[t] = False
+                if t not in values:
+                    values[t] = False
             for mod in new:
-                mod.set_default(defalut_value)
+                mod.set_default(values)
                 if values:
                     mod.modified = True
 
