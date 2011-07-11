@@ -290,6 +290,7 @@ class win_export(object):
         self.model1.clear()
         self.model2.clear()
         self.model_populate(self.fields_original)
+        self.fill_predefwin()
 
     def sig_unsel_all(self, widget=None):
         self.model2.clear()
