@@ -161,7 +161,7 @@ class CharField(object):
         if 'readonly' in state_changes:
             self.get_state_attrs(model)['readonly'] = state_changes.get('readonly', False)
         else:
-            if (self.attrs.get('readonly', False) or  ro) and  ro  or self.attrs['readonly']:
+            if self.attrs.get('readonly', False) or  ro:
                 self.get_state_attrs(model)['readonly'] = True
         if 'required' in state_changes:
             self.get_state_attrs(model)['required'] = state_changes.get('required', False)
