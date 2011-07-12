@@ -380,7 +380,8 @@ class ViewForm(parser_view):
             for child in children_notebooks:
                 if isinstance(child,gtk.Notebook):
                     self.set_notebook(model,child)
-            if nb.get_tab_label(page).attrs.get('attrs',False):
+            # attrs eval only when call from display not at time of set_cursor call
+            if nb.get_tab_label(page).attrs.get('attrs', False) and not focus_widget:
                 self.attrs_set(model, page, nb.get_tab_label(page), nb, i)
 
     def display(self):
@@ -433,12 +434,14 @@ class ViewForm(parser_view):
                      position = widgets.widget.position
                      focus_widget = widgets
             for x in self.widget.get_children():
-                if (type(x)==gtk.Table):
+                if not focus_widget:
+                    continue
+                if isinstance(x, gtk.Table):
                     for y in x.get_children():
-                        if type(y)==gtk.Notebook:
-                            self.set_notebook(model,y,focus_widget)
-                elif type(x)==gtk.Notebook:
-                    self.set_notebook(model,x,focus_widget)
+                        if isinstance(y, gtk.Notebook):
+                            self.set_notebook(model, y, focus_widget)
+                elif isinstance(x, gtk.Notebook):
+                    self.set_notebook(model, x, focus_widget)
         return True
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

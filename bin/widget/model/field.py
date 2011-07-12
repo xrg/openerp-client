@@ -161,7 +161,7 @@ class CharField(object):
         if 'readonly' in state_changes:
             self.get_state_attrs(model)['readonly'] = state_changes.get('readonly', False)
         else:
-            if (self.attrs.get('readonly', False) or  ro) and  ro  or self.attrs['readonly']:
+            if self.attrs.get('readonly', False) or  ro:
                 self.get_state_attrs(model)['readonly'] = True
         if 'required' in state_changes:
             self.get_state_attrs(model)['required'] = state_changes.get('required', False)
@@ -448,10 +448,7 @@ class O2MField(CharField):
         ok = True
         for model2 in model.value[self.name].models:
             if not model2.validate():
-                if not model2.is_modified():
-                    model.value[self.name].models.remove(model2)
-                else:
-                    ok = False
+                ok = False
         if not super(O2MField, self).validate(model):
             ok = False
         self.get_state_attrs(model)['valid'] = ok
