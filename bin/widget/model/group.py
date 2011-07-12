@@ -411,6 +411,8 @@ class ModelRecordGroup(signal_event.signal_event):
                     values[t] = False
             for mod in new:
                 mod.set_default(values)
+                if values:
+                    mod.modified = True
 
     def __iter__(self):
         return iter(self.models)
