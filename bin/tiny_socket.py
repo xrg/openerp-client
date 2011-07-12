@@ -23,6 +23,7 @@ import socket
 import cPickle
 import cStringIO
 import sys
+import exceptions
 import options
 
 DNS_CACHE = {}
@@ -45,10 +46,11 @@ class Myexception(Exception):
 
 # Safety class instance loader for unpickling.
 # Inspired by http://nadiana.com/python-pickle-insecure#How_to_Make_Unpickling_Safer
-SAFE_CLASSES = { 'exceptions' : ['Exception'] }
+EXCEPTION_CLASSES = [x for x in dir(exceptions) if type(getattr(exceptions,x)) == type]
+SAFE_CLASSES = { 'exceptions' : EXCEPTION_CLASSES }
 def find_global(module, name):
     if module not in SAFE_CLASSES or name not in SAFE_CLASSES[module]:
-        raise cPickle.UnpicklingError('Unsafe pickled class instance: %s.%s' % (module,name))
+        raise cPickle.UnpicklingError('Attempting to unpickle unsafe module %s.%s' % (module,name))
     __import__(module)
     mod = sys.modules[module]
     return getattr(mod, name)
