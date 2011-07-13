@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,13 +15,15 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
 import socket
 import cPickle
+import cStringIO
 import sys
+import exceptions
 import options
 
 DNS_CACHE = {}
@@ -41,6 +43,17 @@ class Myexception(Exception):
         self.faultCode = faultCode
         self.faultString = faultString
         self.args = (faultCode, faultString)
+
+# Safety class instance loader for unpickling.
+# Inspired by http://nadiana.com/python-pickle-insecure#How_to_Make_Unpickling_Safer
+EXCEPTION_CLASSES = [x for x in dir(exceptions) if type(getattr(exceptions,x)) == type]
+SAFE_CLASSES = { 'exceptions' : EXCEPTION_CLASSES }
+def find_global(module, name):
+    if module not in SAFE_CLASSES or name not in SAFE_CLASSES[module]:
+        raise cPickle.UnpicklingError('Attempting to unpickle unsafe module %s.%s' % (module,name))
+    __import__(module)
+    mod = sys.modules[module]
+    return getattr(mod, name)
 
 class mysocket:
     def __init__(self, sock=None):
@@ -84,7 +97,11 @@ class mysocket:
         size = int(read(self.sock, 8))
         buf = read(self.sock, 1)
         exception = buf != '0' and buf or False
-        res = cPickle.loads(read(self.sock, size))
+        buf = read(self.sock, size)
+        msgio = cStringIO.StringIO(buf)
+        unpickler = cPickle.Unpickler(msgio)
+        unpickler.find_global = find_global
+        res = unpickler.load()
 
         if isinstance(res[0],Exception):
             if exception:
