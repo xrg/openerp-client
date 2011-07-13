@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-14 05:50+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-07-13 05:11+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "Language: \n"
 
 #: bin/plugins/__init__.py:27
@@ -28,21 +28,13 @@ msgstr "Arbeitsprozess ausdrucken"
 msgid "Print Workflow (with subflows)"
 msgstr "Arbeitsablauf drucken (komplex)"
 
-#
-# File: bin/plugins/__init__.py, line: 41
-# File: bin/plugins/__init__.py, line: 41
-# File: bin/plugins/__init__.py, line: 41
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
-msgstr "Kein verfügbares Zusatzprogramm für diese Resource angeben!"
+msgstr "Kein Plugin für diese Ressource verfügbar!"
 
-#
-# File: bin/plugins/__init__.py, line: 43
-# File: bin/plugins/__init__.py, line: 43
-# File: bin/plugins/__init__.py, line: 43
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr "Zusatzprogramm auswählen"
+msgstr "Plugin auswählen"
 
 #
 # File: bin/modules/action/wizard.py, line: 171
@@ -1098,7 +1090,7 @@ msgstr "Open ERP Suche: %s"
 #: bin/modules/gui/window/win_search.py:127
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr "OPenERP Suche: %s(%%d Resultat(e))"
+msgstr "OpenERP Suche: %s(%%d Resultat(e))"
 
 #: bin/options.py:109
 #, python-format

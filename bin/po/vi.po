@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-17 06:04+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-07-13 05:13+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "Language: vi\n"
 
 #: bin/plugins/__init__.py:27
@@ -32,7 +32,7 @@ msgstr "Không có plugin cho tài nguyên này"
 
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr "Chọn một Plugin"
+msgstr "Chọn một Phần mở rộng"
 
 #: bin/modules/action/wizard.py:150 bin/modules/gui/main.py:188 bin/rpc.py:156
 msgid "Connection refused !"
