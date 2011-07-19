@@ -115,6 +115,7 @@ class win_export(object):
         self.glade = glade.XML(common.terp_path("openerp.glade"), 'win_save_as',
                 gettext.textdomain())
         self.win = self.glade.get_widget('win_save_as')
+        self.toggled_predefined_export = True
         self.ids = ids
         self.model = model
         self.fields_data = {}
@@ -290,11 +291,15 @@ class win_export(object):
         self.model1.clear()
         self.model2.clear()
         self.model_populate(self.fields_original)
+        self.fill_predefwin()
+        self.toggled_predefined_export = False
 
     def sig_unsel_all(self, widget=None):
         self.model2.clear()
     
     def fill_predefwin(self):
+        if not self.toggled_predefined_export:
+            return True
         self.predef_model = gtk.ListStore(gobject.TYPE_PYOBJECT, gobject.TYPE_STRING, gobject.TYPE_STRING)
         ir_export = rpc.RPCProxy('ir.exports')
         ir_export_line = rpc.RPCProxy('ir.exports.line')
