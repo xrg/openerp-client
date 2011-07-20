@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: SPP (Almacom) <p.songpon@gmail.com>\n"
+"PO-Revision-Date: 2011-07-20 04:36+0000\n"
+"Last-Translator: Manop Pornpeanvichanon(darkpower) <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-13 05:13+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-20 05:35+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 "Language: th\n"
 
 #: bin/plugins/__init__.py:27
@@ -36,51 +36,51 @@ msgstr "เลือกส่วนเสริม"
 
 #: bin/modules/action/wizard.py:150 bin/modules/gui/main.py:188 bin/rpc.py:156
 msgid "Connection refused !"
-msgstr ""
+msgstr "การเชื่อมต่อถูกยกเลิกแล้ว !"
 
 #: bin/modules/action/wizard.py:162 bin/modules/action/wizard.py:168
 #: bin/modules/action/wizard.py:170 bin/modules/gui/main.py:196
 #: bin/modules/gui/main.py:202 bin/rpc.py:202 bin/rpc.py:204
 msgid "Application Error"
-msgstr ""
+msgstr "โปรแกรมผิดพลาด"
 
 #: bin/modules/action/wizard.py:170 bin/rpc.py:204
 msgid "View details"
-msgstr ""
+msgstr "ดูรายละเอียด"
 
 #: bin/modules/action/main.py:48
 msgid "Nothing to print!"
-msgstr ""
+msgstr "ไม่มีข้อมูลที่จะใช้พิมพ์"
 
 #: bin/modules/action/main.py:66
 msgid "Printing aborted, too long delay !"
-msgstr ""
+msgstr "การพิมพ์ล้มเหลว เนื่องจากรอนานเกินไป"
 
 #: bin/modules/action/main.py:195
 msgid "Select your action"
-msgstr ""
+msgstr "การขั้นตอน"
 
 #: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
 msgid "Could not connect to server !"
-msgstr ""
+msgstr "เชื่อมต่อเข้าแม่ข่ายไม่ได้ !"
 
 #: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6278
 #: bin/openerp.glade:6524 bin/openerp.glade:6847 bin/openerp.glade:7508
 msgid "Server:"
-msgstr ""
+msgstr "แม่ข่าย:"
 
 #: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6560
 #: bin/openerp.glade:6804 bin/openerp.glade:7103 bin/openerp.glade:7465
 msgid "Change"
-msgstr ""
+msgstr "เปลี่ยน"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
-msgstr ""
+msgstr "รหัสผ่านผู้ดูแลระบบ:"
 
 #: bin/modules/gui/main.py:194
 msgid "Bad Super Administrator Password"
-msgstr ""
+msgstr "รหัสผ่านผู้ดูแลระบบผิดพลาด"
 
 #: bin/modules/gui/main.py:218
 msgid "Migration Scripts"
@@ -88,51 +88,51 @@ msgstr ""
 
 #: bin/modules/gui/main.py:221
 msgid "Contract ID:"
-msgstr ""
+msgstr "ID ผู้ติดต่อ:"
 
 #: bin/modules/gui/main.py:227
 msgid "Contract Password:"
-msgstr ""
+msgstr "รหัสผ่านผู้ติดต่อ:"
 
 #: bin/modules/gui/main.py:242
 msgid "You already have the latest version"
-msgstr ""
+msgstr "คุณใช้รุ่นล่าสุดอยู่แล้ว"
 
 #: bin/modules/gui/main.py:247
 msgid "The following updates are available:"
-msgstr ""
+msgstr "รายการปรับปรุงที่มี:"
 
 #: bin/modules/gui/main.py:259
 msgid "You can now migrate your databases."
-msgstr ""
+msgstr "คุณสามารถโอนย้ายฐานข้อมูลของคุณได้แล้ว"
 
 #: bin/modules/gui/main.py:264
 msgid "Migrate Database"
-msgstr ""
+msgstr "โอนย้ายฐานข้อมูล"
 
 #: bin/modules/gui/main.py:281
 msgid "Database"
-msgstr ""
+msgstr "ฐานข้อมูล"
 
 #: bin/modules/gui/main.py:293
 msgid "Your database has been upgraded."
-msgstr ""
+msgstr "ฐานข้อมูลของคุณมีการปรับรุ่นแล้ว"
 
 #: bin/modules/gui/main.py:295
 msgid "Your databases have been upgraded."
-msgstr ""
+msgstr "ฐานข้อมูลของคุณปรับรุ่นแล้ว"
 
 #: bin/modules/gui/main.py:297
 msgid "You have not selected a database"
-msgstr ""
+msgstr "คุณไม่ได้เลือกฐานข้อมูล"
 
 #: bin/modules/gui/main.py:361
 msgid "No database found, you must create one !"
-msgstr ""
+msgstr "ไม่พบฐานข้อมูล,คุณต้องสร้างฐานข้อมูลใหม่ !"
 
 #: bin/modules/gui/main.py:469
 msgid "Unknown"
-msgstr ""
+msgstr "ไม่รู้"
 
 #: bin/modules/gui/main.py:474
 #, python-format
@@ -143,11 +143,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:610
 msgid "Sorry,'"
-msgstr ""
+msgstr "ขออภัย,'"
 
 #: bin/modules/gui/main.py:610 bin/modules/gui/main.py:613
 msgid "Bad database name !"
-msgstr ""
+msgstr "ชื่อฐานข้อมูลไม่ถูกต้อง"
 
 #: bin/modules/gui/main.py:613
 msgid ""
@@ -158,20 +158,20 @@ msgstr ""
 #: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
 #: bin/modules/gui/main.py:651
 msgid "Could not create database."
-msgstr ""
+msgstr "ไม่สามารถสร้างฐานข้อมูลได้"
 
 #: bin/modules/gui/main.py:647
 msgid "Database already exists !"
-msgstr ""
+msgstr "ฐานข้อมูลมีอยู่แล้ว"
 
 #: bin/modules/gui/main.py:649 bin/modules/gui/main.py:1383
 #: bin/modules/gui/main.py:1403 bin/modules/gui/main.py:1482
 msgid "Bad database administrator password !"
-msgstr ""
+msgstr "รหัสผ่านผู้ดูแลระบบฐานข้อมูลไม่ถูกต้อง"
 
 #: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
 msgid "Error during database creation !"
-msgstr ""
+msgstr "เกิดข้อผิดพลาดในระหว่างการสร้างฐานข้อมูล"
 
 #: bin/modules/gui/main.py:658
 msgid ""
@@ -181,11 +181,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
 msgid "Press Ctrl+O to login"
-msgstr ""
+msgstr "กด Ctrl + O เพื่อเข้าสู่ระบบ"
 
 #: bin/modules/gui/main.py:881
 msgid "Edit"
-msgstr ""
+msgstr "แก้ไข"
 
 #: bin/modules/gui/main.py:980
 #, python-format
@@ -194,21 +194,21 @@ msgstr ""
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
-msgstr ""
+msgstr "ไม่มีบริษัท"
 
 #: bin/modules/gui/main.py:995
 #, python-format
 msgid "%s request(s)"
-msgstr ""
+msgstr "%s การร้องขอ"
 
 #: bin/modules/gui/main.py:997
 msgid "No request"
-msgstr ""
+msgstr "ไม่มีการร้องขอ"
 
 #: bin/modules/gui/main.py:999
 #, python-format
 msgid " - %s request(s) sent"
-msgstr ""
+msgstr " - %s การร้องขอถูกส่งแล้ว"
 
 #: bin/modules/gui/main.py:1037
 msgid ""
@@ -235,7 +235,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1056
 #, python-format
 msgid "OpenERP - %s"
-msgstr ""
+msgstr "OpenERP - %s"
 
 #: bin/modules/gui/main.py:1076
 msgid "Not logged !"
@@ -244,7 +244,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1085 bin/widget/view/form_gtk/one2many_list.py:52
 #: bin/openerp.glade:6126
 msgid "OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #: bin/modules/gui/main.py:1159
 msgid ""
@@ -260,19 +260,19 @@ msgstr ""
 #: bin/modules/gui/main.py:1262
 #, python-format
 msgid "Attachments (%d)"
-msgstr ""
+msgstr "ของแนบ (%d)"
 
 #: bin/modules/gui/main.py:1275
 msgid "Attachments"
-msgstr ""
+msgstr "การแนบ"
 
 #: bin/modules/gui/main.py:1374
 msgid "Delete a database"
-msgstr ""
+msgstr "ลบฐานข้อมูล"
 
 #: bin/modules/gui/main.py:1380
 msgid "Database dropped successfully !"
-msgstr ""
+msgstr "ทิ้งฐานข้อมูลสำเร็จ !"
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
@@ -285,7 +285,7 @@ msgstr ""
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
 msgid "Open..."
-msgstr ""
+msgstr "เปิด..."
 
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
@@ -651,11 +651,11 @@ msgstr "โปรแกรมลูกข่าย %s"
 
 #: bin/options.py:110
 msgid "specify alternate config file"
-msgstr "ลืกไฟล์ตั้งค่าอื่น"
+msgstr "ระบุแฟ้มตั้งค่าอันอื่น"
 
 #: bin/options.py:111
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr "เปิดดีบั๊กเบื้องต้น โดยพิพม์ '--log-level=debug'"
+msgstr "เปิดใช้งานการแก้ไขข้อผิดพลาดเบื้องต้น โดยพิมพ์ '--log-level=debug'"
 
 #: bin/options.py:112
 #, python-format
@@ -1012,7 +1012,7 @@ msgstr ""
 
 #: bin/widget/view/tree_gtk/editabletree.py:139
 msgid "F1 New - F2 Open/Search"
-msgstr ""
+msgstr "F1 ใหม่ - F2 เปิด/ค้นหา"
 
 #: bin/widget/view/tree_gtk/editabletree.py:214
 #, python-format
@@ -1035,7 +1035,7 @@ msgstr ""
 
 #: bin/widget/view/graph_gtk/parser.py:64
 msgid "Can not generate graph !"
-msgstr ""
+msgstr "สร้างแผ่นภูมิไม่ได้ !"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1422
 msgid "Dot Viewer"
@@ -1188,7 +1188,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:73
 msgid "Set Image"
-msgstr ""
+msgstr "ตั้งค่ารูปภาพ"
 
 #: bin/widget/view/form_gtk/image.py:82 bin/widget/view/form_gtk/binary.py:84
 msgid "Save As"
