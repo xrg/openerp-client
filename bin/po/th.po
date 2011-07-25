@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-07-20 04:36+0000\n"
+"PO-Revision-Date: 2011-07-24 11:55+0000\n"
 "Last-Translator: Manop Pornpeanvichanon(darkpower) <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-21 05:15+0000\n"
+"X-Launchpad-Export-Date: 2011-07-25 05:07+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 "Language: th\n"
 
@@ -190,7 +190,7 @@ msgstr "แก้ไข"
 #: bin/modules/gui/main.py:980
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:982
 msgid "No Company"
@@ -255,7 +255,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
 msgid "Do you really want to quit ?"
-msgstr ""
+msgstr "คุณต้องการจะออกหรือไม่"
 
 #: bin/modules/gui/main.py:1262
 #, python-format
@@ -276,11 +276,11 @@ msgstr "ทิ้งฐานข้อมูลสำเร็จ !"
 
 #: bin/modules/gui/main.py:1383
 msgid "Could not drop database."
-msgstr ""
+msgstr "ทิ้งฐานข้อมูลไม่ได้"
 
 #: bin/modules/gui/main.py:1385
 msgid "Couldn't drop database"
-msgstr ""
+msgstr "ไม่สามารถทิ้งฐานข้อมูล"
 
 #: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
 #: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
@@ -289,15 +289,15 @@ msgstr "เปิด..."
 
 #: bin/modules/gui/main.py:1400
 msgid "Database restored successfully !"
-msgstr ""
+msgstr "เรียกฐานข้อมูลกลับมาสำเร็จ !"
 
 #: bin/modules/gui/main.py:1403
 msgid "Could not restore database."
-msgstr ""
+msgstr "ไม่สามารถเรียกฐานข้อมูลกลับมาได้"
 
 #: bin/modules/gui/main.py:1405
 msgid "Couldn't restore database"
-msgstr ""
+msgstr "ไม่สามารถเรียกฐานข้อมูลกลับมาได้"
 
 #: bin/modules/gui/main.py:1444
 msgid ""
@@ -322,7 +322,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1463 bin/modules/gui/main.py:1486
 msgid "Backup a database"
-msgstr ""
+msgstr "สำรองฐานข้อมูล"
 
 #: bin/modules/gui/main.py:1466 bin/modules/gui/window/win_export.py:328
 #: bin/printer/printer.py:216 bin/widget/view/form_gtk/image.py:129
@@ -332,7 +332,7 @@ msgstr "บันทึกเป็น..."
 
 #: bin/modules/gui/main.py:1479
 msgid "Database backed up successfully !"
-msgstr ""
+msgstr "สำรองฐานข้อมูลเสร็จแล้ว !"
 
 #: bin/modules/gui/main.py:1482
 msgid "Could not backup the database."
@@ -340,7 +340,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1484
 msgid "Couldn't backup database."
-msgstr ""
+msgstr "สำรองฐานข้อมูลไม่ได้"
 
 #: bin/modules/gui/window/form.py:173
 msgid "Resource ID does not exist for this object!"
@@ -352,28 +352,28 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:247
 msgid "You have to select a record !"
-msgstr ""
+msgstr "คุณต้องเลือกระเบียน"
 
 #: bin/modules/gui/window/form.py:253
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:42
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: bin/modules/gui/window/form.py:254
 msgid "Creation User"
-msgstr ""
+msgstr "การสร้างผู้ใช้"
 
 #: bin/modules/gui/window/form.py:255
 msgid "Creation Date"
-msgstr ""
+msgstr "วันที่สร้าง"
 
 #: bin/modules/gui/window/form.py:256
 msgid "Latest Modification by"
-msgstr ""
+msgstr "แก้ไขล่าสุดโดย"
 
 #: bin/modules/gui/window/form.py:257
 msgid "Latest Modification Date"
-msgstr ""
+msgstr "แก้ไขล่าสุดวันที่"
 
 #: bin/modules/gui/window/form.py:258
 msgid "Internal Module Data ID"
@@ -388,66 +388,68 @@ msgstr ""
 #: bin/modules/gui/window/form.py:272
 #: bin/widget/view/form_gtk/one2many_list.py:380
 msgid "Are you sure to remove this record ?"
-msgstr ""
+msgstr "คุณแน่ใจว่าต้องการลบระเบียนนี้หรือไม่"
 
 #: bin/modules/gui/window/form.py:274
 #: bin/widget/view/form_gtk/one2many_list.py:382
 msgid "Are you sure to remove those records ?"
-msgstr ""
+msgstr "คุณแน่ใจว่าต้องการลบระเบียนเหล่านี้หรือไม่"
 
 #: bin/modules/gui/window/form.py:278
 msgid "Resources cleared."
-msgstr ""
+msgstr "ทรัพยากรว่างแล้ว"
 
 #: bin/modules/gui/window/form.py:280
 msgid "Resources successfully removed."
-msgstr ""
+msgstr "เอาทรัยยากรออกเรียนร้อยแล้ว"
 
 #: bin/modules/gui/window/form.py:314
 msgid "Working now on the duplicated document !"
-msgstr ""
+msgstr "กำลังทำงานบนเอกสารเดียวกันอยู่ !"
 
 #: bin/modules/gui/window/form.py:329
 msgid "Document Saved."
-msgstr ""
+msgstr "บันทึกเอกสารแล้ว"
 
 #: bin/modules/gui/window/form.py:331 bin/modules/gui/window/form.py:332
 #: bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/form_gtk/parser.py:127 bin/widget/view/list.py:568
 #: bin/widget/view/list.py:569
 msgid "Invalid form, correct red fields !"
-msgstr ""
+msgstr "รูปแบบไม่ถูกต้อง ตรวจช่องสีแดง !"
 
 #: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
 #: bin/widget/view/list.py:568
 msgid "Error !"
-msgstr ""
+msgstr "ผิดพลาด !"
 
 #: bin/modules/gui/window/form.py:334
 msgid "Warning !"
-msgstr ""
+msgstr "ระวัง !"
 
 #: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
 msgstr ""
+"ระเบียนนี้ถูกแก้ไขแล้ว\n"
+"คุณต้องการบันทึกหรือไม่"
 
 #: bin/modules/gui/window/form.py:407
 msgid "You must select one or several records !"
-msgstr ""
+msgstr "คุณต้องเลือกอย่างน้อยหนึ่งระเบียน"
 
 #: bin/modules/gui/window/form.py:416
 msgid "Print Screen"
-msgstr ""
+msgstr "จับภาพหน้าจอ"
 
 #: bin/modules/gui/window/form.py:436
 msgid "No record selected"
-msgstr ""
+msgstr "ไม่ได้เลือกระเบียนไว้"
 
 #: bin/modules/gui/window/form.py:441
 msgid "New document"
-msgstr ""
+msgstr "เอกสารใหม่"
 
 #: bin/modules/gui/window/form.py:443
 msgid "Editing document (id: "
@@ -455,32 +457,32 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:446
 msgid "Record: "
-msgstr ""
+msgstr "ระเบียน: "
 
 #: bin/modules/gui/window/form.py:447
 msgid " of "
-msgstr ""
+msgstr " จาก "
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "The file is empty !"
-msgstr ""
+msgstr "แฟ้มไม่มีข้อมูล !"
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "Importation !"
-msgstr ""
+msgstr "การนำเข้า !"
 
 #: bin/modules/gui/window/win_import.py:56
 msgid "XML-RPC error !"
-msgstr ""
+msgstr "XML-RPC ผิดพลาด !"
 
 #: bin/modules/gui/window/win_import.py:61
 msgid "Imported one object !"
-msgstr ""
+msgstr "นำเข้าหนึ่งอัน !"
 
 #: bin/modules/gui/window/win_import.py:63
 #, python-format
 msgid "Imported %d objects !"
-msgstr ""
+msgstr "นำเข้า %d อัน !"
 
 #: bin/modules/gui/window/win_import.py:68
 #, python-format
@@ -492,28 +494,34 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"ผิดพลาดระหว่างนำระเบียนนี้เข้า:\n"
+"%s\n"
+"ข้อผิดพลาด:\n"
+"%s\n"
+"\n"
+"%s"
 
 #: bin/modules/gui/window/win_import.py:69
 msgid "Importation Error !"
-msgstr ""
+msgstr "นำเข้าผิดพลาด !"
 
 #: bin/modules/gui/window/win_import.py:100
 #: bin/modules/gui/window/win_import.py:104
 msgid "Field name"
-msgstr ""
+msgstr "ชื่อช่อง"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "การเปิดแฟ้ม .CSV ผิดพลาด"
 
 #: bin/modules/gui/window/win_import.py:169
 msgid "Input Error."
-msgstr ""
+msgstr "ข้อมูลเข้าผิดพลาด"
 
 #: bin/modules/gui/window/win_import.py:187
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
-msgstr ""
+msgstr "คุณไม่สามารถนำเข้าช่อง %s นี้ เพราะว่าตรวจสอบอัตโนมัติไม่ได้"
 
 #: bin/modules/gui/window/win_import.py:190
 #, python-format
@@ -524,7 +532,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:190
 msgid "Import Error."
-msgstr ""
+msgstr "นำเข้าผิดพลาด"
 
 #: bin/modules/gui/window/win_import.py:221
 msgid "You have not selected any fields to import"
@@ -532,75 +540,79 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Extension"
-msgstr ""
+msgstr "ส่วนขยาย"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Application"
-msgstr ""
+msgstr "โปรแกรม"
 
 #: bin/modules/gui/window/win_extension.py:42
 msgid "Print Processor"
-msgstr ""
+msgstr "พิมพ์ตัวประมวลผล"
 
 #: bin/modules/gui/window/win_extension.py:114
 msgid "This extension is already defined"
-msgstr ""
+msgstr "ส่วนขยายนี้ถูกระบุแล้ว"
 
 #: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7684
 msgid "Extension Manager"
-msgstr ""
+msgstr "ตัวจัดการส่วนขยาย"
 
 #: bin/modules/gui/window/win_selection.py:51
 msgid "Name"
-msgstr ""
+msgstr "ชื่อ"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Ressource Name"
-msgstr ""
+msgstr "ชื่อทรัพยากร"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Names"
-msgstr ""
+msgstr "ชื่อต่าง ๆ"
 
 #: bin/modules/gui/window/__init__.py:31
 msgid "Unknown Window"
-msgstr ""
+msgstr "หน้าต่างที่ไม่รู้จัก"
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "ค่าปรับแต่ง"
 
 #: bin/modules/gui/window/win_preference.py:85
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"ภาษาปริยายของส่วนติดต่อถูกเปลี่ยนแล้ว "
+"โปรดอย่าลืมเริ่มโปรแกรมใหม่เพื่อให้ภาษาของคุณแสดงผล"
 
 #: bin/modules/gui/window/win_preference.py:87
 msgid "Default language modified !"
-msgstr ""
+msgstr "เปลี่ยนภาษาปริยายแล้ว !"
 
 #: bin/modules/gui/window/view_tree/parse.py:35
 msgid "Tree"
-msgstr ""
+msgstr "ต้นไม้"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:48
 msgid "Description"
-msgstr ""
+msgstr "คำอธิบาย"
 
 #: bin/modules/gui/window/tree.py:204 bin/modules/gui/window/tree.py:260
 msgid "No resource selected!"
-msgstr ""
+msgstr "ไม่มีทรัพยากรที่ถูกเลือกไว้ !"
 
 #: bin/modules/gui/window/tree.py:218
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
 msgstr ""
+"คุณแน่ใจว่าต้องการ\n"
+"ลบระเบียนนี้หรือไม่?"
 
 #: bin/modules/gui/window/tree.py:223
 msgid "Error removing resource!"
-msgstr ""
+msgstr "การเอาทรัพยากรออกผิดพลาด"
 
 #: bin/modules/gui/window/tree.py:234
 msgid "Unable to chroot: no tree resource selected"
@@ -608,41 +620,43 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:50
 msgid " record(s) saved !"
-msgstr ""
+msgstr " บันทึกระเบียน(ต่าง ๆ)แล้ว !"
 
 #: bin/modules/gui/window/win_export.py:53
 msgid ""
 "Operation failed !\n"
 "I/O error"
 msgstr ""
+"การทำงานผิดพลาด !\n"
+"ผิดพลาดที่ I/O"
 
 #: bin/modules/gui/window/win_export.py:79
 #: bin/modules/gui/window/win_export.py:105
 msgid "Error Opening Excel !"
-msgstr ""
+msgstr "เปิด Excel ผิดพลาด !"
 
 #: bin/modules/gui/window/win_export.py:284
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "สิ่งที่นำออกนี้ให้ชื่ออะไร"
 
 #: bin/modules/gui/window/win_export.py:320
 msgid "Exportation Error !"
-msgstr ""
+msgstr "การนำออกผิดพลาด !"
 
 #: bin/modules/gui/window/win_search.py:49
 #: bin/widget/view/diagram_gtk/xdot.py:1772
 msgid "OpenERP - Link"
-msgstr ""
+msgstr "OpenERP - เชื่อมโยง"
 
 #: bin/modules/gui/window/win_search.py:126
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr ""
+msgstr "OpenERP ค้นหา: %s"
 
 #: bin/modules/gui/window/win_search.py:127
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr ""
+msgstr "OpenERP ค้นหา: %s (%%d ผลลัพธ์)"
 
 #: bin/options.py:109
 #, python-format
@@ -676,7 +690,7 @@ msgstr "ระบุ server ip หรือ ชื่อ"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "ปิดทิปปัจจุบัน"
 
 #: bin/common/common.py:90
 msgid ""
@@ -688,7 +702,7 @@ msgstr ""
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "ปิดทิปทั้งหมด"
 
 #: bin/common/common.py:101
 msgid ""
@@ -700,15 +714,15 @@ msgstr ""
 
 #: bin/common/common.py:115 bin/common/common.py:117
 msgid "Tips"
-msgstr ""
+msgstr "ทิป"
 
 #: bin/common/common.py:133
 msgid "OpenERP Computing"
-msgstr ""
+msgstr "การคำนวน OpenERP"
 
 #: bin/common/common.py:152
 msgid "Operation in progress"
-msgstr ""
+msgstr "กำลังดำเนินการ"
 
 #: bin/common/common.py:156
 msgid ""
