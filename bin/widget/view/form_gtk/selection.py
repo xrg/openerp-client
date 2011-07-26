@@ -45,18 +45,18 @@ class selection(interface.widget_interface):
         # the dropdown button is not focusable by a tab
         self.widget.set_focus_chain([self.child])
         self.ok = True
-        self._selection={}
+        self._selection = []
 
         self.set_popdown(attrs.get('selection', []))
 
     def set_popdown(self, selection):
         self.model = gtk.ListStore(gobject.TYPE_STRING)
-        self._selection={}
+        self._selection = []
         lst = []
         for (value, name) in selection:
             name = str(name)
             lst.append(name)
-            self._selection[name] = value
+            self._selection.append((name,value))
             i = self.model.append()
             self.model.set(i, 0, name)
         self.entry.set_model(self.model)
@@ -69,7 +69,8 @@ class selection(interface.widget_interface):
 
     def value_get(self):
         res = self.child.get_text()
-        return self._selection.get(res, False)
+        result = [y for x,y in self._selection if x==res]
+        return result and result[0] or False
 
     def sig_key_press(self, widget, event):
         # allow showing available entries by hitting "ctrl+space"
@@ -94,7 +95,7 @@ class selection(interface.widget_interface):
         text = self.child.get_text()
         value = False
         if text:
-            for txt, val in self._selection.items():
+            for txt, val in self._selection:
                 if not val:
                     continue
                 if txt[:len(text)].lower() == text.lower():
@@ -124,7 +125,7 @@ class selection(interface.widget_interface):
             self.child.set_text('')
         else:
             found = False
-            for long_text, sel_value in self._selection.items():
+            for long_text, sel_value in self._selection:
                 if sel_value == value:
                     self.child.set_text(long_text)
                     found = True

@@ -32,7 +32,7 @@ class selection(wid_int.wid_int):
         self.widget = gtk.combo_box_entry_new_text()
         self.widget.child.set_editable(True)
         self.attrs = attrs
-        self._selection = {}
+        self._selection = []
         self.name = name
         self.val_id = False
         if 'selection' in attrs:
@@ -42,20 +42,20 @@ class selection(wid_int.wid_int):
                 self._value_set(int(self.default_search))
             else:
                 self._value_set(str(self.default_search))
-                if self.widget.child.get_text() in self._selection.keys():
+                if self.widget.child.get_text() in [x for x,y in self._selection]:
                     self.widget.set_active(self.indexes[self.widget.child.get_text()]-1)
 
     def set_popdown(self, selection):
         self.model = self.widget.get_model()
         self.model.clear()
-        self._selection={}
+        self._selection = []
         lst = []
         for (i,j) in selection:
             name = str(j)
             lst.append(name)
-            self._selection[name]=i
+            self._selection.append((name,i))
         ind=1
-        if '' not in self._selection:
+        if '' not in [x for x,y in self._selection]:
             self.widget.append_text('')
             ind += 1
         self.indexes = {}
@@ -78,7 +78,8 @@ class selection(wid_int.wid_int):
             completion.set_text_column(0)
 
         # Setting the selected  value active on the entry widget while selection is made by keypress
-        if self._selection.get(widget.get_text(),''):
+        result = [y for x,y in self._selection if x==widget.get_text()]
+        if result:
             # to let this value count into domain calculation
             self.widget.set_active(self.indexes[widget.get_text()])
 
@@ -86,8 +87,9 @@ class selection(wid_int.wid_int):
         res = self.widget.child.get_text()
         context = {}
         operator = 'ilike'
-        if self._selection.get(res, False):
-            res = self._selection.get(res, False)
+        result = [y for x,y in self._selection if x==res]
+        if result:
+            res = result[0]
             operator = self.attrs.get('operator','=')
             context = tools.expr_eval(self.attrs.get('context',"{}"), {'self':res})
         if res:
@@ -100,9 +102,9 @@ class selection(wid_int.wid_int):
     def _value_set(self, value):
         if value==False:
             value=''
-        for s in self._selection:
-            if self._selection[s]==value:
-                self.widget.child.set_text(s)
+        for text,val in self._selection:
+            if val == value:
+                self.widget.child.set_text(text)
 
     def clear(self):
         self.widget.child.set_text('')
