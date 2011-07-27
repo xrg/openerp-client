@@ -147,6 +147,8 @@ class many2many(interface.widget_interface):
                                         self.attrs['relation'], 'name_search',
                                         self.wid_text.get_text(), domain, 'ilike', context)
         ids = [oid for oid, _ in records]
+        #Updating the context in order to avoid domain of name_search and custom domain of search_context
+        context.update({'name_search':self.wid_text.get_text()})
         self.wid_text.set_text('')
         win = win_search(self.attrs['relation'], sel_multi=True, ids=ids, context=context, domain=domain, parent=self._window)
         ids = win.go()
