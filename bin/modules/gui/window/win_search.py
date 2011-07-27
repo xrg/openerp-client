@@ -184,7 +184,7 @@ class win_search(object):
     def go(self):
         ## This is if the user has set some filters by default with search_default_XXX
         if self.ids:
-            self.screen.win_search_domain += [('id','in', self.ids)]
+            #self.screen.win_search_domain += [('id','in', self.ids)]
             self.find()
         else:
             self.screen.update_scroll()
