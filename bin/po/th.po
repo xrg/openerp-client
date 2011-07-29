@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-07-28 05:09+0000\n"
+"PO-Revision-Date: 2011-07-28 05:13+0000\n"
 "Last-Translator: Manop Pornpeanvichanon(darkpower) <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-28 05:12+0000\n"
+"X-Launchpad-Export-Date: 2011-07-29 05:42+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 "Language: th\n"
 
@@ -310,7 +310,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1459
 msgid "Validation Error."
-msgstr ""
+msgstr "การตรวจสอบผิดพลาด"
 
 #: bin/modules/gui/main.py:1476
 msgid "Could not change the Super Admin password."
