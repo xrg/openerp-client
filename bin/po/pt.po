@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-07-30 13:15+0000\n"
+"PO-Revision-Date: 2011-08-01 22:00+0000\n"
 "Last-Translator: DReis <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-31 05:15+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"X-Launchpad-Export-Date: 2011-08-02 05:19+0000\n"
+"X-Generator: Launchpad (build 13552)\n"
 "Language: pt\n"
 
 #
@@ -51,7 +51,7 @@ msgstr "Escolha um plugin"
 
 #: bin/rpc.py:157 bin/modules/action/wizard.py:150 bin/modules/gui/main.py:187
 msgid "Connection refused !"
-msgstr "Conecção recusada !"
+msgstr "Conexão recusada !"
 
 #: bin/rpc.py:203 bin/rpc.py:205 bin/modules/action/wizard.py:162
 #: bin/modules/action/wizard.py:168 bin/modules/action/wizard.py:170
@@ -439,18 +439,9 @@ msgstr ""
 "Solicite ao Administrador para verificar\n"
 "Não existe qualquer acção definida para o seu utilizador."
 
-#
-# File: bin/modules/gui/main.py, line: 865
-# File: bin/modules/gui/main.py, line: 872
-# File: bin/modules/gui/main.py, line: 865
-# File: bin/modules/gui/main.py, line: 872
-# File: bin/modules/gui/main.py, line: 865
-# File: bin/modules/gui/main.py, line: 872
-# File: bin/modules/gui/main.py, line: 881
-# File: bin/modules/gui/main.py, line: 888
 #: bin/modules/gui/main.py:1187 bin/modules/gui/main.py:1194
 msgid "Do you really want to quit ?"
-msgstr "Pretende mesmo saír?"
+msgstr "Quer mesmo sair?"
 
 #
 # File: bin/modules/gui/main.py, line: 927
@@ -1207,11 +1198,11 @@ msgstr ""
 #: bin/common/common.py:225
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "Verifique se o ficheiro %s está correto"
 
 #: bin/common/common.py:399
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " reportou a seguinte anomalia:\n"
 
 #: bin/common/common.py:399
 msgid "remarks"
@@ -1341,6 +1332,8 @@ msgstr ""
 #: bin/printer/printer.py:212
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
+"Erro! Não foram encontrados dados. Verifique se tem dados suficientes para "
+"poder imprimir!"
 
 #
 # File: bin/printer/printer.py, line: 215
@@ -1600,6 +1593,9 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"Tem registos por guardar !  \n"
+"\n"
+"Pro favor Guarde-os antes de ordenar !"
 
 #: bin/widget/view/tree_gtk/editabletree.py:140
 #, python-format
@@ -1646,11 +1642,11 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1712
 msgid "Add New Node"
-msgstr ""
+msgstr "Acrescentar novo nó"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
-msgstr ""
+msgstr "Adicionar nova aresta"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
@@ -1662,7 +1658,7 @@ msgstr "Reduzir o diagrama"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "Ajustar tamanho do diagrama à janela"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
@@ -1675,17 +1671,17 @@ msgstr "Imprimir o diagrama"
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "Fechar atual %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "Eliminar atual %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "Editar atual %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
@@ -1899,7 +1895,7 @@ msgstr "Imagens"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "Não existe imagem para guardar !"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
@@ -2039,6 +2035,8 @@ msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
 msgstr ""
+"(Substitui filtros existentes \n"
+"que tenham o mesmo nome)"
 
 #
 # File: bin/rpc.py, line: 142
@@ -3476,6 +3474,7 @@ msgstr ""
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirmar senha:"
 
 #: bin/openerp.glade:7234
 msgid ""
@@ -3492,6 +3491,8 @@ msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
 "Data:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>Carregar dados de "
+"demonstração:"
 
 #: bin/openerp.glade:483 bin/openerp.glade:7304
 msgid "Change password"
@@ -3572,11 +3573,11 @@ msgstr "Mês"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
-msgstr ""
+msgstr "Campos sobre os quais serão aplicados critérios de busca"
 
 #: bin/openerp.glade:8289
 msgid "Conditional Operators"
-msgstr ""
+msgstr "Operadores condicionais"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
@@ -3587,6 +3588,8 @@ msgid ""
 "AND\n"
 "OR"
 msgstr ""
+"AND\n"
+"OR"
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
@@ -3598,7 +3601,7 @@ msgstr ""
 
 #: bin/openerp.glade:8276
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "Nome para o filtro:"
 
 #: bin/win_error.glade:40
 msgid "label"
@@ -3606,7 +3609,7 @@ msgstr "rótulo"
 
 #: bin/win_error.glade:100
 msgid "Click here for details about the publisher warranty proposition"
-msgstr ""
+msgstr "Clique aqui para detalhes sobre a proposta de garantia"
 
 #: bin/win_error.glade:120
 msgid "<i>_Publisher Warranty</i>"
