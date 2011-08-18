@@ -111,6 +111,7 @@ class win_search(object):
         self.model = model
         self.sel_multi = sel_multi
         self.ids = ids
+        self.ctx = context
         self.glade = glade.XML(common.terp_path("openerp.glade"),'win_search',gettext.textdomain())
         self.win = self.glade.get_widget('win_search')
         self.win.set_icon(common.OPENERP_ICON)
@@ -184,7 +185,9 @@ class win_search(object):
     def go(self):
         ## This is if the user has set some filters by default with search_default_XXX
         if self.ids:
-            self.screen.win_search_domain += [('id','in', self.ids)]
+            #Add the domain only if there was no name_search performed with name
+            name_search = self.ctx.get('name_search',False)
+            self.screen.win_search_domain += [('id','in', self.ids)] if name_search else []
             self.find()
         else:
             self.screen.update_scroll()
