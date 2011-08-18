@@ -205,12 +205,6 @@ def ustr(value, from_encoding='utf-8'):
 
     return unicode(value, from_encoding)
 
-def locale_format(format, value):
-    label_str = locale.format(format, value, True, True)
-    if not locale.getpreferredencoding().lower().startswith('utf'):
-        label_str = label_str.replace('\xa0', '\xc2\xa0')
-    return label_str
-
 def format_connection_string(login, _passwd, server, port, protocol, dbname):
 #def format_connection_string(*args):
 #    login, _passwd, server, port, protocol, dbname = args
@@ -224,27 +218,6 @@ def format_connection_string(login, _passwd, server, port, protocol, dbname):
         result += ':%s' % (port,)
     result += '/%s' % (dbname,)
     return result
-
-def str2int(string, default=None):
-    assert isinstance(string, basestring)
-    try:
-        integer = locale.atoi(string)
-        return integer
-    except:
-        if default is not None:
-            return default
-    raise ValueError("%r does not represent a valid integer value" % (string,))
-
-
-def str2float(string, default=None):
-    assert isinstance(string, basestring)
-    try:
-        float = locale.atof(string)
-        return float
-    except:
-        if default is not None:
-            return default
-    raise ValueError("%r does not represent a valid float value" % (string,))
 
 def str2bool(string, default=None):
     """Convert a string representing a boolean into the corresponding boolean
