@@ -642,10 +642,13 @@ class db_create(object):
 
         if res == gtk.RESPONSE_OK:
             try:
-                if rpc.session.db_exec(url, 'db_exist', db_name):
-                    common.warning(_("Could not create database."),
-                                    _('Database already exists !'), parent=parent)
-                    return
+                try:
+                    if rpc.session.db_exec(url, 'db_exist', db_name):
+                        common.warning(_("Could not create database."),
+                                        _('Database already exists !'), parent=parent)
+                        return
+                except Exception:
+                    pass
                 
                 id = rpc.session.db_exec(url, 'create', passwd, db_name, demo_data, langreal, user_pass)
                 win, pb = common.OpenERP_Progressbar(parent, title='OpenERP Database Installation')
@@ -660,7 +663,7 @@ class db_create(object):
                 elif (getattr(e,'faultCode',False)=='AccessDenied') or str(e)=='AccessDenied':
                     common.warning(_('Bad database administrator password !'), _("Could not create database."), parent=parent)
                 else:
-                    common.warning(_("Could not create database."),_('Error during database creation !'), parent=parent)
+                    common.warning(_("Could not create database."),_('Error during database creation !\n%s') % e, parent=parent)
 
     def progress_timeout(self, pbar, url, passwd, id, win, dbname, parent=None):
         try:
