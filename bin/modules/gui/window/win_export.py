@@ -289,7 +289,9 @@ class win_export(object):
     def import_toggled(self, widget=None):
         self.model1.clear()
         self.model2.clear()
+        self.fields_data.clear()
         self.model_populate(self.fields_original)
+        self.fill_predefwin()
 
     def sig_unsel_all(self, widget=None):
         self.model2.clear()

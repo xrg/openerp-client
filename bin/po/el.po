@@ -10,16 +10,15 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-05-19 13:23+0300\n"
-"Last-Translator: P. Christeas <p_christ@hol.gr>\n"
+"PO-Revision-Date: 2011-05-03 09:34+0000\n"
+"Last-Translator: Andreas Ntakas <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-14 05:50+0000\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Launchpad-Export-Date: 2011-07-13 05:11+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "Language: el\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #
 # File: bin/modules/gui/main.py, line: 87
@@ -1048,7 +1047,6 @@ msgid "-- Filters --"
 msgstr "-- Φίλτρα --"
 
 #
-#
 # File: bin/widget/view/form_gtk/many2one.py, line: 168
 # File: bin/openerp.glade, line: 1389
 # File: bin/widget/view/screen_container.py, line: 76
@@ -1060,7 +1058,6 @@ msgstr "--Ενέργειες--"
 msgid "Save as a Filter"
 msgstr "Αποθήκευση ως Φίλτρου"
 
-#
 #
 # File: bin/widget/view/screen_container.py, line: 76
 msgid "Manage Filters"
@@ -1674,7 +1671,6 @@ msgid "Cancel"
 msgstr "Ακύρωση"
 
 #
-#
 # File: bin/openerp.glade, line: 4906
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 70
 msgid "Save & Close"
@@ -1740,7 +1736,6 @@ msgid "Enlarge the Diagram"
 msgstr "Μεγέθυνση Διαγράμματος"
 
 #
-#
 # File: bin/widget/view/diagram_gtk/xdot.py, line: 1715
 msgid "Shrink the Diagram"
 msgstr "Σμίκρυνση Διαγράμματος"
@@ -1753,7 +1748,6 @@ msgstr "Ταίριασμα του διαγράμματος στο παράθυρ
 msgid "Show the diagram at its normal size"
 msgstr "Προβολή διαγράμματος στο πραγματικό του μέγεθος"
 
-#
 #
 # File: bin/widget/view/diagram_gtk/xdot.py, line: 1718
 msgid "Print the Diagram"
@@ -1825,7 +1819,6 @@ msgid "contains"
 msgstr "περιέχει"
 
 #
-#
 # File: bin/widget_search/custom_filter.py, line: 57
 msgid "doesn't contain"
 msgstr "δεν περιέχει"
@@ -1881,7 +1874,6 @@ msgstr "Ημερομηνία από"
 msgid "End date"
 msgstr "Ημερομηνία έως"
 
-#
 #
 # File: bin/widget_search/char.py, line: 43
 msgid "Error: "
@@ -2067,7 +2059,6 @@ msgstr ""
 "τις Προτιμήσεις Χρήστη."
 
 #
-#
 # File: bin/openerp.glade, line: 1173
 # File: bin/common/common.py, line: 117
 # File: bin/common/common.py, line: 119
@@ -2100,7 +2091,6 @@ msgstr ""
 "Παρακαλώ περιμένετε,\n"
 "αυτή η λειτουργία θα πάρει λίγο χρόνο..."
 
-#
 #
 # File: bin/common/common.py, line: 192
 #, python-format
@@ -3757,8 +3747,8 @@ msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
-"<sup><b><span foreground=\"dark green\">?</span></b></sup> "
-"Συνθηματικό Υπερ-Διαχειριστή:"
+"<sup><b><span foreground=\"dark green\">?</span></b></sup> Συνθηματικό Υπερ-"
+"Διαχειριστή:"
 
 #
 # File: bin/openerp.glade, line: 7019
@@ -3800,7 +3790,6 @@ msgstr ""
 "της εγκατάστασης μέσω του μενού διαχείρισης"
 
 #
-#
 # File: bin/openerp.glade, line: 7127
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
@@ -3814,8 +3803,8 @@ msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
-"Αυτός είναι ο κωδικός πρόσβασης του χρήστη 'admin' ο οποίος θα "
-"δημιουργηθεί στην νέα βάση δεδομένων σας."
+"Αυτός είναι ο κωδικός πρόσβασης του χρήστη 'admin' ο οποίος θα δημιουργηθεί "
+"στην νέα βάση δεδομένων σας."
 
 # File: bin/openerp.glade, line: 7142
 msgid ""
@@ -3831,9 +3820,8 @@ msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
-"Αυτός είναι ο κωδικός πρόσβασης του χρήστη 'admin' ο οποίος θα "
-"δημιουργηθεί στην βάση δεδομένων σας. Θα πρέπει να είναι ίδιος με το "
-"παραπάνω πεδίο."
+"Αυτός είναι ο κωδικός πρόσβασης του χρήστη 'admin' ο οποίος θα δημιουργηθεί "
+"στην βάση δεδομένων σας. Θα πρέπει να είναι ίδιος με το παραπάνω πεδίο."
 
 # File: bin/openerp.glade, line: 7157
 msgid ""
@@ -3988,7 +3976,6 @@ msgstr ""
 "Ή"
 
 #
-#
 # File: bin/openerp.glade, line: 2710
 # File: bin/openerp.glade, line: 8304
 msgid "Remove Filter"
@@ -4080,7 +4067,6 @@ msgstr "<i>_Λεπτομέρειες</i>"
 #~ msgid "Error, password not changed."
 #~ msgstr "Σφάλμα, ο κωδικός δεν άλλαξε"
 
-#
 #
 # File: bin/openerp.glade, line: 5243
 #, fuzzy

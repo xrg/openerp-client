@@ -1,3 +1,45 @@
+2011-08-18: 6.0.3
+=================
+
+Bugfixes
+--------
+
+* Not linked to a bug report:
+
+  * gtk client: properties are set with selection widget.(case:16402)
+  * Export : Correction for predefined exports for import compatible/uncompatible fields
+  * solved saved export config problem
+  * win_export.py: resolved loading a saved export config problem
+  * one2many_list: prevent crash when evaluating context during init
+  * get_resource() corrected in order to speed up the process by removing extra RPC search call
+  * calendar_gtk : Calendar view now respects the timezone(Case:4721)
+  * improve context in O2M field.
+  * fix problem of if context apply in o2m fiel then context not pass in fields_view_get(). get default value of model and eval with context and then context pass in screen on one2many field.
+
+* https://launchpad.net/bugs/776432
+  * all: fix incorrect copyright/licensing terms
+
+* https://launchpad.net/bugs/751062
+  * debian: corrected version in changelog.
+
+* https://launchpad.net/bugs/711084
+  * setup.py: now copy pytz zoneinfo data to the library.zip.
+
+2011-04-01: 6.0.2
+=================
+
+Missing ChangeLog (see the commits)
+
+2011-01-20: 6.0.1
+=================
+
+Missing ChangeLog (see the commits)
+
+2011-01-19: 6.0.0
+=================
+
+Missing ChangeLog (see the commits)
+
 2010-05-05: 5.0.10
 ==================
 
