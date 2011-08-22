@@ -177,7 +177,7 @@ class one2many_list(interface.widget_interface):
         # 'default_get' attribute for the same effect (pending removal)
         default_get_ctx = (attrs.get('default_get') or attrs.get('context'))
 
-        self.context = tools.expr_eval(attrs.get('context',"{}"), {"__builtins__":None})
+        self.context = tools.expr_eval(attrs.get('context',"{}"), {"__builtins__":None, "parent": parent})
         self.screen = Screen(attrs['relation'],
                             view_type=attrs.get('mode','tree,form').split(','),
                             parent=self.parent, views_preload=attrs.get('views', {}),
