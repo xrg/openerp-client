@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-13 05:11+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-08-26 05:09+0000\n"
+"X-Generator: Launchpad (build 13779)\n"
 "Language: et\n"
 
 #
@@ -51,7 +51,7 @@ msgstr "Vali Plugin"
 # File: bin/rpc.py, line: 141
 # File: bin/modules/action/wizard.py, line: 171
 # File: bin/rpc.py, line: 141
-#: bin/modules/action/wizard.py:150 bin/modules/gui/main.py:188 bin/rpc.py:156
+#: bin/rpc.py:157 bin/modules/action/wizard.py:150 bin/modules/gui/main.py:187
 msgid "Connection refused !"
 msgstr "Ühendusest keelduti !"
 
@@ -66,9 +66,9 @@ msgstr "Ühendusest keelduti !"
 # File: bin/modules/action/wizard.py, line: 191
 # File: bin/rpc.py, line: 187
 # File: bin/rpc.py, line: 189
-#: bin/modules/action/wizard.py:162 bin/modules/action/wizard.py:168
-#: bin/modules/action/wizard.py:170 bin/modules/gui/main.py:196
-#: bin/modules/gui/main.py:202 bin/rpc.py:202 bin/rpc.py:204
+#: bin/rpc.py:203 bin/rpc.py:205 bin/modules/action/wizard.py:162
+#: bin/modules/action/wizard.py:168 bin/modules/action/wizard.py:170
+#: bin/modules/gui/main.py:195 bin/modules/gui/main.py:201
 msgid "Application Error"
 msgstr "Rakenduse Viga"
 
@@ -77,7 +77,7 @@ msgstr "Rakenduse Viga"
 # File: bin/rpc.py, line: 189
 # File: bin/modules/action/wizard.py, line: 191
 # File: bin/rpc.py, line: 189
-#: bin/modules/action/wizard.py:170 bin/rpc.py:204
+#: bin/rpc.py:205 bin/modules/action/wizard.py:170
 msgid "View details"
 msgstr "Vaata detaile"
 
@@ -107,7 +107,7 @@ msgstr "Vali toiming"
 # File: bin/modules/gui/main.py, line: 1138
 # File: bin/modules/gui/main.py, line: 145
 # File: bin/modules/gui/main.py, line: 1138
-#: bin/modules/gui/main.py:89 bin/modules/gui/main.py:342
+#: bin/modules/gui/main.py:89 bin/modules/gui/main.py:341
 msgid "Could not connect to server !"
 msgstr "Ei saa serveriga ühendust !"
 
@@ -122,8 +122,8 @@ msgstr "Ei saa serveriga ühendust !"
 # File: bin/openerp.glade, line: 8491
 # File: bin/openerp.glade, line: 8813
 # File: bin/openerp.glade, line: 9458
-#: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6278
-#: bin/openerp.glade:6524 bin/openerp.glade:6847 bin/openerp.glade:7508
+#: bin/modules/gui/main.py:93 bin/openerp.glade:72 bin/openerp.glade:6233
+#: bin/openerp.glade:6479 bin/openerp.glade:6802 bin/openerp.glade:7466
 msgid "Server:"
 msgstr "Server:"
 
@@ -138,8 +138,8 @@ msgstr "Server:"
 # File: bin/openerp.glade, line: 8770
 # File: bin/openerp.glade, line: 9067
 # File: bin/openerp.glade, line: 9415
-#: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6560
-#: bin/openerp.glade:6804 bin/openerp.glade:7103 bin/openerp.glade:7465
+#: bin/modules/gui/main.py:104 bin/openerp.glade:98 bin/openerp.glade:6515
+#: bin/openerp.glade:6759 bin/openerp.glade:7058 bin/openerp.glade:7423
 msgid "Change"
 msgstr "Muuda"
 
@@ -149,51 +149,51 @@ msgstr "Muuda"
 msgid "Super Administrator Password:"
 msgstr "Superadministraatori parool:"
 
-#: bin/modules/gui/main.py:194
+#: bin/modules/gui/main.py:193
 msgid "Bad Super Administrator Password"
 msgstr ""
 
-#: bin/modules/gui/main.py:218
+#: bin/modules/gui/main.py:217
 msgid "Migration Scripts"
 msgstr "Migratsiooni skriptid"
 
-#: bin/modules/gui/main.py:221
+#: bin/modules/gui/main.py:220
 msgid "Contract ID:"
 msgstr "Kontakti ID:"
 
-#: bin/modules/gui/main.py:227
+#: bin/modules/gui/main.py:226
 msgid "Contract Password:"
 msgstr "Kontakti parool:"
 
-#: bin/modules/gui/main.py:242
+#: bin/modules/gui/main.py:241
 msgid "You already have the latest version"
 msgstr "Sul juba on viimane versioon"
 
-#: bin/modules/gui/main.py:247
+#: bin/modules/gui/main.py:246
 msgid "The following updates are available:"
 msgstr "Järgmised uuendused on saadaval:"
 
-#: bin/modules/gui/main.py:259
+#: bin/modules/gui/main.py:258
 msgid "You can now migrate your databases."
 msgstr "Sa ei saa migreerida oma andmebaase."
 
-#: bin/modules/gui/main.py:264
+#: bin/modules/gui/main.py:263
 msgid "Migrate Database"
 msgstr "Migreeri andmebaas"
 
-#: bin/modules/gui/main.py:281
+#: bin/modules/gui/main.py:280
 msgid "Database"
 msgstr ""
 
-#: bin/modules/gui/main.py:293
+#: bin/modules/gui/main.py:292
 msgid "Your database has been upgraded."
 msgstr "Sinu andmebaas on uuendatud."
 
-#: bin/modules/gui/main.py:295
+#: bin/modules/gui/main.py:294
 msgid "Your databases have been upgraded."
 msgstr "Sinu andmebaasid on uuendatud."
 
-#: bin/modules/gui/main.py:297
+#: bin/modules/gui/main.py:296
 msgid "You have not selected a database"
 msgstr ""
 
@@ -202,13 +202,13 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 1142
 # File: bin/modules/gui/main.py, line: 152
 # File: bin/modules/gui/main.py, line: 1142
-#: bin/modules/gui/main.py:361
+#: bin/modules/gui/main.py:360
 msgid "No database found, you must create one !"
 msgstr "Andmebaasi ei leitud, sa pead looma uue !"
 
 #
 # File: bin/modules/gui/main.py, line: 154
-#: bin/modules/gui/main.py:469
+#: bin/modules/gui/main.py:468
 msgid "Unknown"
 msgstr "Tundmatu"
 
@@ -251,20 +251,20 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 359
 # File: bin/modules/gui/main.py, line: 361
 # File: bin/modules/gui/main.py, line: 363
-#: bin/modules/gui/main.py:647 bin/modules/gui/main.py:649
-#: bin/modules/gui/main.py:651
+#: bin/modules/gui/main.py:637 bin/modules/gui/main.py:650
+#: bin/modules/gui/main.py:652 bin/modules/gui/main.py:654
 msgid "Could not create database."
 msgstr "Ei saanud andmebaasi luua."
 
 #
 # File: bin/modules/gui/main.py, line: 359
 # File: bin/modules/gui/main.py, line: 359
-#: bin/modules/gui/main.py:647
+#: bin/modules/gui/main.py:638 bin/modules/gui/main.py:650
 msgid "Database already exists !"
 msgstr "Andmebaas on juba olemas !"
 
-#: bin/modules/gui/main.py:649 bin/modules/gui/main.py:1383
-#: bin/modules/gui/main.py:1403 bin/modules/gui/main.py:1482
+#: bin/modules/gui/main.py:652 bin/modules/gui/main.py:1384
+#: bin/modules/gui/main.py:1404 bin/modules/gui/main.py:1509
 msgid "Bad database administrator password !"
 msgstr "Vale andmebaasi administraatori parool !"
 
@@ -273,11 +273,11 @@ msgstr "Vale andmebaasi administraatori parool !"
 # File: bin/modules/gui/main.py, line: 370
 # File: bin/modules/gui/main.py, line: 363
 # File: bin/modules/gui/main.py, line: 370
-#: bin/modules/gui/main.py:651 bin/modules/gui/main.py:658
+#: bin/modules/gui/main.py:654 bin/modules/gui/main.py:661
 msgid "Error during database creation !"
 msgstr "Viga andmebaasi loomisel !"
 
-#: bin/modules/gui/main.py:658
+#: bin/modules/gui/main.py:661
 msgid ""
 "The server crashed during installation.\n"
 "We suggest you to drop this database."
@@ -290,7 +290,7 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 763
 # File: bin/modules/gui/main.py, line: 432
 # File: bin/modules/gui/main.py, line: 763
-#: bin/modules/gui/main.py:704 bin/modules/gui/main.py:1078
+#: bin/modules/gui/main.py:707 bin/modules/gui/main.py:1072
 msgid "Press Ctrl+O to login"
 msgstr "Vajuta Ctrl+O, et sisse logida"
 
@@ -301,19 +301,19 @@ msgstr "Vajuta Ctrl+O, et sisse logida"
 msgid "Edit"
 msgstr "Muuda"
 
-#: bin/modules/gui/main.py:980
+#: bin/modules/gui/main.py:974
 #, python-format
 msgid "%s"
 msgstr ""
 
-#: bin/modules/gui/main.py:982
+#: bin/modules/gui/main.py:976
 msgid "No Company"
 msgstr ""
 
 #
 # File: bin/modules/gui/main.py, line: 694
 # File: bin/modules/gui/main.py, line: 694
-#: bin/modules/gui/main.py:995
+#: bin/modules/gui/main.py:989
 #, python-format
 msgid "%s request(s)"
 msgstr "%s päring(ut)"
@@ -321,29 +321,29 @@ msgstr "%s päring(ut)"
 #
 # File: bin/modules/gui/main.py, line: 696
 # File: bin/modules/gui/main.py, line: 696
-#: bin/modules/gui/main.py:997
+#: bin/modules/gui/main.py:991
 msgid "No request"
 msgstr "Päringuid pole"
 
-#: bin/modules/gui/main.py:999
+#: bin/modules/gui/main.py:993
 #, python-format
 msgid " - %s request(s) sent"
 msgstr ""
 
-#: bin/modules/gui/main.py:1037
+#: bin/modules/gui/main.py:1031
 msgid ""
 "Please double-check the database name or contact your administrator to "
 "verify the database status."
 msgstr ""
 
-#: bin/modules/gui/main.py:1037
+#: bin/modules/gui/main.py:1031
 msgid "Database cannot be accessed or does not exist"
 msgstr ""
 
 #
 # File: bin/modules/gui/main.py, line: 734
 # File: bin/modules/gui/main.py, line: 734
-#: bin/modules/gui/main.py:1041
+#: bin/modules/gui/main.py:1035
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
@@ -351,7 +351,7 @@ msgstr ""
 "Ühendumise viga !\n"
 "Ei saa serveriga ühendust !"
 
-#: bin/modules/gui/main.py:1043
+#: bin/modules/gui/main.py:1037
 msgid ""
 "Authentication error !\n"
 "Bad Username or Password !"
@@ -359,7 +359,7 @@ msgstr ""
 "Autoriseerimise viga !\n"
 "Vale kasutajanimi või parool !"
 
-#: bin/modules/gui/main.py:1056
+#: bin/modules/gui/main.py:1050
 #, python-format
 msgid "OpenERP - %s"
 msgstr ""
@@ -367,21 +367,21 @@ msgstr ""
 #
 # File: bin/modules/gui/main.py, line: 761
 # File: bin/modules/gui/main.py, line: 761
-#: bin/modules/gui/main.py:1076
+#: bin/modules/gui/main.py:1070
 msgid "Not logged !"
 msgstr "Ei ole sisenetud !"
 
 #
 # File: bin/openerp.glade, line: 6974
-#: bin/modules/gui/main.py:1085 bin/widget/view/form_gtk/one2many_list.py:52
-#: bin/openerp.glade:6126
+#: bin/widget/view/form_gtk/one2many_list.py:52 bin/modules/gui/main.py:1079
+#: bin/openerp.glade:6081
 msgid "OpenERP"
 msgstr "OpenERP"
 
 #
 # File: bin/modules/gui/main.py, line: 833
 # File: bin/modules/gui/main.py, line: 833
-#: bin/modules/gui/main.py:1159
+#: bin/modules/gui/main.py:1153
 msgid ""
 "You can not log into the system !\n"
 "Ask the administrator to verify\n"
@@ -396,14 +396,14 @@ msgstr ""
 # File: bin/modules/gui/main.py, line: 872
 # File: bin/modules/gui/main.py, line: 865
 # File: bin/modules/gui/main.py, line: 872
-#: bin/modules/gui/main.py:1191 bin/modules/gui/main.py:1198
+#: bin/modules/gui/main.py:1187 bin/modules/gui/main.py:1194
 msgid "Do you really want to quit ?"
 msgstr "Kas sa tõesti tahad lõpetada ?"
 
 #
 # File: bin/modules/gui/main.py, line: 927
 # File: bin/modules/gui/main.py, line: 927
-#: bin/modules/gui/main.py:1262
+#: bin/modules/gui/main.py:1263
 #, python-format
 msgid "Attachments (%d)"
 msgstr "Manuseid (%d)"
@@ -411,26 +411,26 @@ msgstr "Manuseid (%d)"
 #
 # File: bin/modules/gui/main.py, line: 940
 # File: bin/modules/gui/main.py, line: 940
-#: bin/modules/gui/main.py:1275
+#: bin/modules/gui/main.py:1276
 msgid "Attachments"
 msgstr "Manused"
 
 #
 # File: bin/modules/gui/main.py, line: 1035
 # File: bin/modules/gui/main.py, line: 1035
-#: bin/modules/gui/main.py:1374
+#: bin/modules/gui/main.py:1375
 msgid "Delete a database"
 msgstr "Kustuta Andmebaas"
 
-#: bin/modules/gui/main.py:1380
+#: bin/modules/gui/main.py:1381
 msgid "Database dropped successfully !"
 msgstr "Andmebaas hüljatud edukalt!"
 
-#: bin/modules/gui/main.py:1383
+#: bin/modules/gui/main.py:1384
 msgid "Could not drop database."
 msgstr "Ei saanud andmebaasi hüljata."
 
-#: bin/modules/gui/main.py:1385
+#: bin/modules/gui/main.py:1386
 msgid "Couldn't drop database"
 msgstr "Ei saanud andmebaasi hüljata"
 
@@ -443,33 +443,33 @@ msgstr "Ei saanud andmebaasi hüljata"
 # File: bin/widget/view/form_gtk/image.py, line: 110
 # File: bin/widget/view/form_gtk/url.py, line: 112
 # File: bin/openerp.glade, line: 7878
-#: bin/modules/gui/main.py:1388 bin/widget/view/form_gtk/image.py:114
-#: bin/widget/view/form_gtk/url.py:117 bin/openerp.glade:5901
+#: bin/widget/view/form_gtk/image.py:112 bin/widget/view/form_gtk/url.py:118
+#: bin/modules/gui/main.py:1389 bin/openerp.glade:5817
 msgid "Open..."
 msgstr "Ava..."
 
 #
 # File: bin/modules/gui/main.py, line: 1060
 # File: bin/modules/gui/main.py, line: 1060
-#: bin/modules/gui/main.py:1400
+#: bin/modules/gui/main.py:1401
 msgid "Database restored successfully !"
 msgstr "Andmebaas taastatud edukalt !"
 
 #
 # File: bin/modules/gui/main.py, line: 1063
 # File: bin/modules/gui/main.py, line: 1063
-#: bin/modules/gui/main.py:1403
+#: bin/modules/gui/main.py:1404
 msgid "Could not restore database."
 msgstr "Ei saanud andmebaasi taastada."
 
 #
 # File: bin/modules/gui/main.py, line: 1065
 # File: bin/modules/gui/main.py, line: 1065
-#: bin/modules/gui/main.py:1405
+#: bin/modules/gui/main.py:1406
 msgid "Couldn't restore database"
 msgstr "Ei saanud andmebaasi taastada."
 
-#: bin/modules/gui/main.py:1444
+#: bin/modules/gui/main.py:1457
 msgid ""
 "Confirmation password does not match new password, operation cancelled!"
 msgstr "Uus parool ja kordusparool ei ühildu, operatsioon tühistatud!"
@@ -477,15 +477,15 @@ msgstr "Uus parool ja kordusparool ei ühildu, operatsioon tühistatud!"
 #
 # File: bin/modules/gui/main.py, line: 1100
 # File: bin/modules/gui/main.py, line: 1100
-#: bin/modules/gui/main.py:1446
+#: bin/modules/gui/main.py:1459
 msgid "Validation Error."
 msgstr "Kinnitamise Viga."
 
-#: bin/modules/gui/main.py:1454
+#: bin/modules/gui/main.py:1476
 msgid "Could not change the Super Admin password."
 msgstr "Ei saanud muuta Superadministraatori parooli."
 
-#: bin/modules/gui/main.py:1455
+#: bin/modules/gui/main.py:1477 bin/modules/gui/main.py:1483
 msgid "Bad password provided !"
 msgstr "Vale parool !"
 
@@ -501,7 +501,7 @@ msgstr "Viga, parooli ei muudetud."
 # File: bin/modules/gui/main.py, line: 1134
 # File: bin/modules/gui/main.py, line: 1117
 # File: bin/modules/gui/main.py, line: 1134
-#: bin/modules/gui/main.py:1463 bin/modules/gui/main.py:1486
+#: bin/modules/gui/main.py:1490 bin/modules/gui/main.py:1513
 msgid "Backup a database"
 msgstr "Varunda andmebaas"
 
@@ -516,41 +516,41 @@ msgstr "Varunda andmebaas"
 # File: bin/printer/printer.py, line: 207
 # File: bin/widget/view/form_gtk/binary.py, line: 162
 # File: bin/widget/view/form_gtk/image.py, line: 117
-#: bin/modules/gui/main.py:1466 bin/modules/gui/window/win_export.py:328
-#: bin/printer/printer.py:216 bin/widget/view/form_gtk/image.py:129
-#: bin/widget/view/form_gtk/binary.py:167
+#: bin/widget/view/form_gtk/image.py:129
+#: bin/widget/view/form_gtk/binary.py:167 bin/printer/printer.py:231
+#: bin/modules/gui/window/win_export.py:359 bin/modules/gui/main.py:1493
 msgid "Save As..."
 msgstr "Salvestamine kui..."
 
-#: bin/modules/gui/main.py:1479
+#: bin/modules/gui/main.py:1506
 msgid "Database backed up successfully !"
 msgstr "Andmebaas varundatud edukalt!"
 
-#: bin/modules/gui/main.py:1482
+#: bin/modules/gui/main.py:1509
 msgid "Could not backup the database."
 msgstr "Ei saanud varundada andmebaasi."
 
 #
 # File: bin/modules/gui/main.py, line: 1132
 # File: bin/modules/gui/main.py, line: 1132
-#: bin/modules/gui/main.py:1484
+#: bin/modules/gui/main.py:1511
 msgid "Couldn't backup database."
 msgstr "Ei saanud andmebaasi varundada."
 
-#: bin/modules/gui/window/form.py:173
+#: bin/modules/gui/window/form.py:189
 msgid "Resource ID does not exist for this object!"
 msgstr "Ressursi ID ei eksisteeri selle objektijaoks!"
 
 #
 # File: bin/modules/gui/window/form.py, line: 197
-#: bin/modules/gui/window/form.py:231
+#: bin/modules/gui/window/form.py:247
 msgid "No record selected ! You can only attach to existing record."
 msgstr ""
 "Ühtegi kirjet pole valitud ! Sa saad kinnitada ainult olemasolevale kirjele."
 
 #
 # File: bin/modules/gui/window/form.py, line: 209
-#: bin/modules/gui/window/form.py:247
+#: bin/modules/gui/window/form.py:264
 msgid "You have to select a record !"
 msgstr "Sa pead valima kirje !"
 
@@ -559,40 +559,41 @@ msgstr "Sa pead valima kirje !"
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 43
 # File: bin/modules/gui/window/form.py, line: 215
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 43
-#: bin/modules/gui/window/form.py:253
-#: bin/modules/gui/window/view_tree/view_tree_sc.py:42
+#: bin/modules/gui/window/form.py:270
+#: bin/modules/gui/window/view_tree/view_tree_sc.py:41
+#: bin/modules/gui/window/win_export.py:213
 msgid "ID"
 msgstr "ID"
 
 #
 # File: bin/modules/gui/window/form.py, line: 216
 # File: bin/modules/gui/window/form.py, line: 216
-#: bin/modules/gui/window/form.py:254
+#: bin/modules/gui/window/form.py:271
 msgid "Creation User"
 msgstr "Kasutaja Loomine"
 
 #
 # File: bin/modules/gui/window/form.py, line: 217
 # File: bin/modules/gui/window/form.py, line: 217
-#: bin/modules/gui/window/form.py:255
+#: bin/modules/gui/window/form.py:272
 msgid "Creation Date"
 msgstr "Loomise kuupäev"
 
 #
 # File: bin/modules/gui/window/form.py, line: 218
 # File: bin/modules/gui/window/form.py, line: 218
-#: bin/modules/gui/window/form.py:256
+#: bin/modules/gui/window/form.py:273
 msgid "Latest Modification by"
 msgstr "Viimane Muutja:"
 
 #
 # File: bin/modules/gui/window/form.py, line: 219
 # File: bin/modules/gui/window/form.py, line: 219
-#: bin/modules/gui/window/form.py:257
+#: bin/modules/gui/window/form.py:274
 msgid "Latest Modification Date"
 msgstr "Viimane Muutmise Kuupäev"
 
-#: bin/modules/gui/window/form.py:258
+#: bin/modules/gui/window/form.py:275
 msgid "Internal Module Data ID"
 msgstr ""
 
@@ -607,61 +608,58 @@ msgstr ""
 "Kirje ei ole salvestatud ! \n"
 " Kas sa tahad puhastada Käesoleva Kirje?"
 
-#: bin/modules/gui/window/form.py:272
-#: bin/widget/view/form_gtk/one2many_list.py:380
+#: bin/widget/view/form_gtk/one2many_list.py:388
+#: bin/modules/gui/window/form.py:290
 msgid "Are you sure to remove this record ?"
 msgstr "Oled kindel, et tahad eemaldada seda kirjet?"
 
-#: bin/modules/gui/window/form.py:274
-#: bin/widget/view/form_gtk/one2many_list.py:382
+#: bin/widget/view/form_gtk/one2many_list.py:390
+#: bin/modules/gui/window/form.py:292
 msgid "Are you sure to remove those records ?"
 msgstr "Oled kindel, et soovid eemaldada need kirjed?"
 
 #
 # File: bin/modules/gui/window/form.py, line: 239
-#: bin/modules/gui/window/form.py:278
+#: bin/modules/gui/window/form.py:296
 msgid "Resources cleared."
 msgstr "Vahendid puhastatud."
 
 #
 # File: bin/modules/gui/window/form.py, line: 241
-#: bin/modules/gui/window/form.py:280
+#: bin/modules/gui/window/form.py:298
 msgid "Resources successfully removed."
 msgstr "Vahendid edukalt eemaldatud."
 
 #
 # File: bin/modules/gui/window/form.py, line: 273
 # File: bin/modules/gui/window/form.py, line: 273
-#: bin/modules/gui/window/form.py:314
+#: bin/modules/gui/window/form.py:339
 msgid "Working now on the duplicated document !"
 msgstr "Töötan hetkel paljundatud dokumendiga !"
 
 #
 # File: bin/modules/gui/window/form.py, line: 281
-#: bin/modules/gui/window/form.py:329
+#: bin/modules/gui/window/form.py:355
 msgid "Document Saved."
 msgstr "Dokument salvestatud."
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 134
 # File: bin/modules/gui/window/form.py, line: 283
-#: bin/modules/gui/window/form.py:331 bin/modules/gui/window/form.py:332
-#: bin/widget/view/form_gtk/parser.py:126
-#: bin/widget/view/form_gtk/parser.py:127 bin/widget/view/list.py:568
-#: bin/widget/view/list.py:569
+#: bin/widget/view/list.py:584 bin/widget/view/list.py:585
+#: bin/widget/view/form_gtk/parser.py:135 bin/modules/gui/window/form.py:366
 msgid "Invalid form, correct red fields !"
 msgstr "Vigane vorm, korrasta punased väljad !"
 
-#: bin/modules/gui/window/form.py:331 bin/widget/view/form_gtk/parser.py:126
-#: bin/widget/view/list.py:568
+#: bin/widget/view/list.py:584
 msgid "Error !"
 msgstr "Viga !"
 
-#: bin/modules/gui/window/form.py:334
+#: bin/modules/gui/window/form.py:368
 msgid "Warning !"
 msgstr ""
 
-#: bin/modules/gui/window/form.py:353 bin/modules/gui/window/form.py:457
+#: bin/modules/gui/window/form.py:389 bin/modules/gui/window/form.py:497
 msgid ""
 "This record has been modified\n"
 "do you want to save it ?"
@@ -671,49 +669,49 @@ msgstr ""
 
 #
 # File: bin/modules/gui/window/form.py, line: 349
-#: bin/modules/gui/window/form.py:407
+#: bin/modules/gui/window/form.py:447
 msgid "You must select one or several records !"
 msgstr "Sa pead valima ühe või mitu kirjet !"
 
 #
 # File: bin/modules/gui/window/form.py, line: 358
 # File: bin/modules/gui/window/form.py, line: 358
-#: bin/modules/gui/window/form.py:416
+#: bin/modules/gui/window/form.py:456
 msgid "Print Screen"
 msgstr "Printimise Eelvaade"
 
 #
 # File: bin/modules/gui/window/form.py, line: 378
 # File: bin/modules/gui/window/form.py, line: 378
-#: bin/modules/gui/window/form.py:436
+#: bin/modules/gui/window/form.py:476
 msgid "No record selected"
 msgstr "Ühtegi kirjet pole valitud"
 
 #
 # File: bin/modules/gui/window/form.py, line: 383
 # File: bin/modules/gui/window/form.py, line: 383
-#: bin/modules/gui/window/form.py:441
+#: bin/modules/gui/window/form.py:481
 msgid "New document"
 msgstr "Uus dokument"
 
 #
 # File: bin/modules/gui/window/form.py, line: 385
 # File: bin/modules/gui/window/form.py, line: 385
-#: bin/modules/gui/window/form.py:443
+#: bin/modules/gui/window/form.py:483
 msgid "Editing document (id: "
 msgstr "Muudan dokumenti (id: "
 
 #
 # File: bin/modules/gui/window/form.py, line: 386
 # File: bin/modules/gui/window/form.py, line: 386
-#: bin/modules/gui/window/form.py:446
+#: bin/modules/gui/window/form.py:486
 msgid "Record: "
 msgstr "Kirje: "
 
 #
 # File: bin/modules/gui/window/form.py, line: 387
 # File: bin/modules/gui/window/form.py, line: 387
-#: bin/modules/gui/window/form.py:447
+#: bin/modules/gui/window/form.py:487
 msgid " of "
 msgstr " , kokku "
 
@@ -755,7 +753,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: bin/modules/gui/window/win_import.py:69
+#: bin/modules/gui/window/win_import.py:72
 msgid "Importation Error !"
 msgstr "Importimise viga !"
 
@@ -764,48 +762,48 @@ msgstr "Importimise viga !"
 # File: bin/modules/gui/window/win_import.py, line: 97
 # File: bin/modules/gui/window/win_import.py, line: 93
 # File: bin/modules/gui/window/win_import.py, line: 97
-#: bin/modules/gui/window/win_import.py:100
-#: bin/modules/gui/window/win_import.py:104
+#: bin/modules/gui/window/win_import.py:105
+#: bin/modules/gui/window/win_import.py:109
 msgid "Field name"
 msgstr "Välja nimi"
 
-#: bin/modules/gui/window/win_import.py:169
+#: bin/modules/gui/window/win_import.py:181
 msgid "Error opening .CSV file"
 msgstr ""
 
-#: bin/modules/gui/window/win_import.py:169
+#: bin/modules/gui/window/win_import.py:181
 msgid "Input Error."
 msgstr ""
 
-#: bin/modules/gui/window/win_import.py:187
+#: bin/modules/gui/window/win_import.py:199
 #, python-format
 msgid "You cannot import this field %s, because we cannot auto-detect it"
 msgstr "Sa ei saa importida %s välja, sest me ei suuda seda auto-tedektida"
 
-#: bin/modules/gui/window/win_import.py:190
+#: bin/modules/gui/window/win_import.py:202
 #, python-format
 msgid ""
 "Error processing your first line of the file.\n"
 "Field %s is unknown !"
 msgstr ""
 
-#: bin/modules/gui/window/win_import.py:190
+#: bin/modules/gui/window/win_import.py:202
 msgid "Import Error."
 msgstr ""
 
-#: bin/modules/gui/window/win_import.py:221
+#: bin/modules/gui/window/win_import.py:233
 msgid "You have not selected any fields to import"
 msgstr "Sa ei valinud ühtegi välja importimiseks"
 
-#: bin/modules/gui/window/win_extension.py:42
+#: bin/modules/gui/window/win_extension.py:43
 msgid "Extension"
 msgstr ""
 
-#: bin/modules/gui/window/win_extension.py:42
+#: bin/modules/gui/window/win_extension.py:43
 msgid "Application"
 msgstr ""
 
-#: bin/modules/gui/window/win_extension.py:42
+#: bin/modules/gui/window/win_extension.py:43
 msgid "Print Processor"
 msgstr ""
 
@@ -817,7 +815,7 @@ msgstr "See laiend on juba määratletud"
 
 #
 # File: bin/openerp.glade, line: 8697
-#: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7684
+#: bin/modules/gui/window/win_extension.py:114 bin/openerp.glade:7642
 msgid "Extension Manager"
 msgstr "Laienduste haldur"
 
@@ -853,7 +851,7 @@ msgstr "Tundmatu aken"
 msgid "Preferences"
 msgstr ""
 
-#: bin/modules/gui/window/win_preference.py:85
+#: bin/modules/gui/window/win_preference.py:86
 msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
@@ -861,7 +859,7 @@ msgstr ""
 "Vaikimisi keel on muudetud, ära unusta muudatuste nägemiseks klienti "
 "restartida"
 
-#: bin/modules/gui/window/win_preference.py:87
+#: bin/modules/gui/window/win_preference.py:88
 msgid "Default language modified !"
 msgstr "Vaikimisi keel muudetud !"
 
@@ -875,7 +873,7 @@ msgstr "Puu"
 #
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
 # File: bin/modules/gui/window/view_tree/view_tree_sc.py, line: 49
-#: bin/modules/gui/window/view_tree/view_tree_sc.py:48
+#: bin/modules/gui/window/view_tree/view_tree_sc.py:45
 msgid "Description"
 msgstr "Kirjeldus"
 
@@ -884,14 +882,14 @@ msgstr "Kirjeldus"
 # File: bin/modules/gui/window/tree.py, line: 246
 # File: bin/modules/gui/window/tree.py, line: 190
 # File: bin/modules/gui/window/tree.py, line: 246
-#: bin/modules/gui/window/tree.py:204 bin/modules/gui/window/tree.py:260
+#: bin/modules/gui/window/tree.py:205 bin/modules/gui/window/tree.py:261
 msgid "No resource selected!"
 msgstr "Ühtegi vahendit pole valitud!"
 
 #
 # File: bin/modules/gui/window/tree.py, line: 204
 # File: bin/modules/gui/window/tree.py, line: 204
-#: bin/modules/gui/window/tree.py:218
+#: bin/modules/gui/window/tree.py:219
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
@@ -902,14 +900,14 @@ msgstr ""
 #
 # File: bin/modules/gui/window/tree.py, line: 209
 # File: bin/modules/gui/window/tree.py, line: 209
-#: bin/modules/gui/window/tree.py:223
+#: bin/modules/gui/window/tree.py:224
 msgid "Error removing resource!"
 msgstr "Viga vahendi eemaldamisel!"
 
 #
 # File: bin/modules/gui/window/tree.py, line: 220
 # File: bin/modules/gui/window/tree.py, line: 220
-#: bin/modules/gui/window/tree.py:234
+#: bin/modules/gui/window/tree.py:235
 msgid "Unable to chroot: no tree resource selected"
 msgstr "Võimatu chrootida: puu vahendit pole valitud"
 
@@ -939,19 +937,19 @@ msgstr ""
 msgid "Error Opening Excel !"
 msgstr "Viga Exceli avamisel !"
 
-#: bin/modules/gui/window/win_export.py:284
+#: bin/modules/gui/window/win_export.py:317
 msgid "What is the name of this export ?"
 msgstr ""
 
-#: bin/modules/gui/window/win_export.py:320
+#: bin/modules/gui/window/win_export.py:351
 msgid "Exportation Error !"
 msgstr "Eksportimise viga !"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 51
 # File: bin/modules/gui/window/win_search.py, line: 50
-#: bin/modules/gui/window/win_search.py:49
 #: bin/widget/view/diagram_gtk/xdot.py:1772
+#: bin/modules/gui/window/win_search.py:49
 msgid "OpenERP - Link"
 msgstr "OpenERP - Viit"
 
@@ -971,7 +969,7 @@ msgstr "OpenERP Otsing: %s (%%d tulemus(t))"
 
 #
 # File: bin/options.py, line: 107
-#: bin/options.py:109
+#: bin/options.py:121
 #, python-format
 msgid "OpenERP Client %s"
 msgstr "OpenERP klient %s"
@@ -979,15 +977,15 @@ msgstr "OpenERP klient %s"
 #
 # File: bin/options.py, line: 89
 # File: bin/options.py, line: 89
-#: bin/options.py:110
+#: bin/options.py:122
 msgid "specify alternate config file"
 msgstr "määratle alternatiivne seadete fail"
 
-#: bin/options.py:111
+#: bin/options.py:123
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
 msgstr ""
 
-#: bin/options.py:112
+#: bin/options.py:124
 #, python-format
 msgid "specify the log level: %s"
 msgstr ""
@@ -995,21 +993,21 @@ msgstr ""
 #
 # File: bin/options.py, line: 93
 # File: bin/options.py, line: 93
-#: bin/options.py:113
+#: bin/options.py:125
 msgid "specify the user login"
 msgstr "määratle kasutajanimi"
 
 #
 # File: bin/options.py, line: 94
 # File: bin/options.py, line: 94
-#: bin/options.py:114
+#: bin/options.py:126
 msgid "specify the server port"
 msgstr "määratle serveri port"
 
 #
 # File: bin/options.py, line: 95
 # File: bin/options.py, line: 95
-#: bin/options.py:115
+#: bin/options.py:127
 msgid "specify the server ip/name"
 msgstr "määratle serveri ip/nimi"
 
@@ -1041,14 +1039,14 @@ msgstr ""
 msgid "Tips"
 msgstr ""
 
-#: bin/common/common.py:133
+#: bin/common/common.py:168
 msgid "OpenERP Computing"
 msgstr "OpenERP Töötleb"
 
 #
 # File: bin/modules/action/wizard.py, line: 143
 # File: bin/modules/action/wizard.py, line: 143
-#: bin/common/common.py:152
+#: bin/common/common.py:187
 msgid "Operation in progress"
 msgstr "Operatsioon on töös"
 
@@ -1057,7 +1055,7 @@ msgstr "Operatsioon on töös"
 # File: bin/modules/gui/main.py, line: 340
 # File: bin/modules/action/wizard.py, line: 147
 # File: bin/modules/gui/main.py, line: 340
-#: bin/common/common.py:156
+#: bin/common/common.py:191
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
@@ -1065,16 +1063,16 @@ msgstr ""
 "Palun oota.\n"
 "see operatsioon võib aega võtta..."
 
-#: bin/common/common.py:190
+#: bin/common/common.py:225
 #, python-format
 msgid "Ensure that the file %s is correct"
 msgstr ""
 
-#: bin/common/common.py:364
+#: bin/common/common.py:399
 msgid " has reported the following bug:\n"
 msgstr ""
 
-#: bin/common/common.py:364
+#: bin/common/common.py:399
 msgid "remarks"
 msgstr ""
 
@@ -1083,11 +1081,11 @@ msgstr ""
 # File: bin/common/common.py, line: 343
 # File: bin/common/common.py, line: 289
 # File: bin/common/common.py, line: 343
-#: bin/common/common.py:367
+#: bin/common/common.py:402
 msgid "Support request sent !"
 msgstr "Tehnilise toe päring saadetud !"
 
-#: bin/common/common.py:387 bin/common/common.py:430
+#: bin/common/common.py:425 bin/common/common.py:469
 msgid ""
 "\n"
 "<b>An unknown error has been reported.</b>\n"
@@ -1114,7 +1112,7 @@ msgid ""
 "is displayed on the second tab.\n"
 msgstr ""
 
-#: bin/common/common.py:410
+#: bin/common/common.py:448
 #, python-format
 msgid ""
 "\n"
@@ -1141,7 +1139,7 @@ msgid ""
 "is displayed on the second tab."
 msgstr ""
 
-#: bin/common/common.py:488
+#: bin/common/common.py:525
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
@@ -1149,7 +1147,7 @@ msgstr ""
 "Sinu probleem on saadetud kvaliteeditiimile!\n"
 "Me võtame sinuga ühendust pärast probleemi analüüsimist."
 
-#: bin/common/common.py:491
+#: bin/common/common.py:528
 #, python-format
 msgid ""
 "Your problem could *NOT* be sent to the quality team !\n"
@@ -1157,14 +1155,14 @@ msgid ""
 "\t%s"
 msgstr ""
 
-#: bin/common/common.py:491
+#: bin/common/common.py:528
 msgid "Error"
 msgstr "Viga"
 
 #
 # File: bin/common/common.py, line: 499
 # File: bin/common/common.py, line: 499
-#: bin/common/common.py:646
+#: bin/common/common.py:682
 msgid "Open with..."
 msgstr "Ava rakendusega..."
 
@@ -1191,17 +1189,17 @@ msgstr ""
 "Linuxi Automaatne Printimine ei ole teostatud.\n"
 "Kasuta eelvaate valikut !"
 
-#: bin/printer/printer.py:197
+#: bin/printer/printer.py:212
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
 
-#: bin/printer/printer.py:224
+#: bin/printer/printer.py:239
 msgid "Error writing the file!"
 msgstr "Viga faili kirjutamisel!"
 
 #
 # File: bin/openerp-client.py, line: 130
-#: bin/openerp-client.py:140
+#: bin/openerp-client.py:142
 msgid "Closing OpenERP, KeyboardInterrupt"
 msgstr "OpenERP-i sulgemine. Klaviatuuri katkestus"
 
@@ -1218,21 +1216,21 @@ msgstr "OpenERP-i sulgemine. Klaviatuuri katkestus"
 # File: bin/widget_search/calendar.py, line: 106
 # File: bin/widget_search/char.py, line: 47
 # File: bin/widget_search/reference.py, line: 74
-#: bin/widget_search/reference.py:78 bin/widget_search/filter.py:74
-#: bin/widget_search/selection.py:116 bin/widget_search/spinbutton.py:72
-#: bin/widget_search/spinint.py:75 bin/widget_search/char.py:66
-#: bin/widget_search/calendar.py:126 bin/widget_search/calendar.py:243
-#: bin/widget_search/custom_filter.py:176 bin/widget_search/checkbox.py:67
-#: bin/widget/view/form_gtk/button.py:47
+#: bin/widget/view/form_gtk/button.py:47 bin/widget_search/char.py:72
+#: bin/widget_search/calendar.py:125 bin/widget_search/calendar.py:250
+#: bin/widget_search/filter.py:77 bin/widget_search/reference.py:78
+#: bin/widget_search/spinbutton.py:92 bin/widget_search/selection.py:116
+#: bin/widget_search/custom_filter.py:140 bin/widget_search/spinint.py:95
+#: bin/widget_search/checkbox.py:68
 msgid "The content of the widget or ValueError if not valid"
 msgstr "Vidina või Väärtuse Vea sisu on kehtetu"
 
-#: bin/widget_search/form.py:445
+#: bin/widget_search/form.py:492
 msgid "The content of the form or exception if not valid"
 msgstr "Vormi sisu või if erand pole tõene"
 
-#: bin/widget_search/date_widget.py:61
-#: bin/widget/view/form_gtk/date_widget.py:63
+#: bin/widget/view/form_gtk/date_widget.py:65
+#: bin/widget_search/date_widget.py:65
 msgid ""
 "You can use special operation by pressing +, - or =.  Plus/minus "
 "adds/decrease the variable to the current selected date. Equals set part of "
@@ -1254,18 +1252,18 @@ msgstr ""
 "Sa saad kasutada ka \"=\" kuupäeva/aja muutmiseks praeguseks ja \"-\" välja "
 "puhastamiseks,"
 
-#: bin/widget_search/wid_int.py:52
+#: bin/widget_search/wid_int.py:56
 msgid "The content of the widget or exception if not valid"
 msgstr ""
 
-#: bin/widget_search/char.py:43
+#: bin/widget_search/char.py:45
 msgid "Error: "
 msgstr ""
 
 #
 # File: bin/widget_search/calendar.py, line: 51
 # File: bin/widget_search/calendar.py, line: 51
-#: bin/widget_search/calendar.py:50 bin/widget_search/calendar.py:177
+#: bin/widget_search/calendar.py:49 bin/widget_search/calendar.py:177
 msgid "Start date"
 msgstr "Alguskuupäev"
 
@@ -1278,17 +1276,17 @@ msgstr "Alguskuupäev"
 # File: bin/widget_search/calendar.py, line: 74
 # File: bin/widget/view/form_gtk/calendar.py, line: 60
 # File: bin/widget/view/form_gtk/calendar.py, line: 163
-#: bin/widget_search/calendar.py:54 bin/widget_search/calendar.py:74
-#: bin/widget_search/calendar.py:181 bin/widget_search/calendar.py:201
-#: bin/widget/view/form_gtk/calendar.py:58
-#: bin/widget/view/form_gtk/calendar.py:182
+#: bin/widget/view/form_gtk/calendar.py:57
+#: bin/widget/view/form_gtk/calendar.py:184 bin/widget_search/calendar.py:53
+#: bin/widget_search/calendar.py:73 bin/widget_search/calendar.py:181
+#: bin/widget_search/calendar.py:201
 msgid "Open the calendar widget"
 msgstr "Ava kalendri vidin"
 
 #
 # File: bin/widget_search/calendar.py, line: 70
 # File: bin/widget_search/calendar.py, line: 70
-#: bin/widget_search/calendar.py:70 bin/widget_search/calendar.py:197
+#: bin/widget_search/calendar.py:69 bin/widget_search/calendar.py:197
 msgid "End date"
 msgstr "Lõppkuupäev"
 
@@ -1296,33 +1294,41 @@ msgstr "Lõppkuupäev"
 # File: bin/widget_search/calendar.py, line: 120
 # File: bin/widget/view/form_gtk/calendar.py, line: 133
 # File: bin/widget/view/form_gtk/calendar.py, line: 263
-#: bin/widget_search/calendar.py:129 bin/widget_search/calendar.py:249
 #: bin/widget/view/form_gtk/calendar.py:135
-#: bin/widget/view/form_gtk/calendar.py:246
+#: bin/widget/view/form_gtk/calendar.py:249 bin/widget_search/calendar.py:128
+#: bin/widget_search/calendar.py:267
 msgid "OpenERP - Date selection"
 msgstr "OpenERP - Kuupäeva valik"
 
-#: bin/widget_search/custom_filter.py:56
+#: bin/widget_search/custom_filter_widgets.py:40
+#: bin/widget_search/custom_filter_widgets.py:67
+#: bin/widget_search/custom_filter_widgets.py:98
 msgid "contains"
 msgstr ""
 
-#: bin/widget_search/custom_filter.py:57
+#: bin/widget_search/custom_filter_widgets.py:41
+#: bin/widget_search/custom_filter_widgets.py:68
+#: bin/widget_search/custom_filter_widgets.py:98
 msgid "doesn't contain"
 msgstr ""
 
-#: bin/widget_search/custom_filter.py:58
+#: bin/widget_search/custom_filter_widgets.py:290
+#: bin/widget_search/custom_filter_widgets.py:331
 msgid "is equal to"
 msgstr ""
 
-#: bin/widget_search/custom_filter.py:59
+#: bin/widget_search/custom_filter_widgets.py:291
+#: bin/widget_search/custom_filter_widgets.py:332
 msgid "is not equal to"
 msgstr ""
 
-#: bin/widget_search/custom_filter.py:60
+#: bin/widget_search/custom_filter_widgets.py:292
+#: bin/widget_search/custom_filter_widgets.py:333
 msgid "greater than"
 msgstr ""
 
-#: bin/widget_search/custom_filter.py:61
+#: bin/widget_search/custom_filter_widgets.py:293
+#: bin/widget_search/custom_filter_widgets.py:334
 msgid "less than"
 msgstr ""
 
@@ -1346,25 +1352,26 @@ msgstr ""
 # File: bin/widget_search/checkbox.py, line: 49
 # File: bin/widget_search/checkbox.py, line: 36
 # File: bin/widget_search/checkbox.py, line: 49
-#: bin/widget_search/checkbox.py:35 bin/widget_search/checkbox.py:54
+#: bin/widget_search/checkbox.py:35 bin/widget_search/checkbox.py:42
+#: bin/widget_search/checkbox.py:55
 msgid "Yes"
 msgstr "Jah"
 
 #
 # File: bin/widget_search/checkbox.py, line: 37
 # File: bin/widget_search/checkbox.py, line: 37
-#: bin/widget_search/checkbox.py:36
+#: bin/widget_search/checkbox.py:36 bin/widget_search/checkbox.py:44
 msgid "No"
 msgstr "Ei"
 
 #
 # File: bin/widget/view/form.py, line: 153
 # File: bin/widget/view/form.py, line: 153
-#: bin/widget/view/form.py:136 bin/widget/view/form.py:199
+#: bin/widget/view/form.py:137
 msgid "You must save this record to use the relate button !"
 msgstr "Sa pead salvestama selle kirje, et kasutada seose nuppu !"
 
-#: bin/widget/view/form.py:141
+#: bin/widget/view/form.py:142
 msgid "Action not defined !"
 msgstr ""
 
@@ -1384,9 +1391,9 @@ msgstr "Sa pead valima kirje, et kasutada seose nuppu !"
 # File: bin/widget/view/form_gtk/parser.py, line: 490
 # File: bin/widget/view/form_gtk/parser.py, line: 647
 # File: bin/widget/view/form_gtk/parser.py, line: 704
-#: bin/widget/view/form.py:236 bin/widget/view/form_gtk/parser.py:647
-#: bin/widget/view/form_gtk/parser.py:767
-#: bin/widget/view/form_gtk/parser.py:824
+#: bin/widget/view/form.py:238 bin/widget/view/form_gtk/parser.py:635
+#: bin/widget/view/form_gtk/parser.py:756
+#: bin/widget/view/form_gtk/parser.py:813
 msgid "No other language available!"
 msgstr "Teisi keeli pole saadaval!"
 
@@ -1399,9 +1406,9 @@ msgstr "Teisi keeli pole saadaval!"
 # File: bin/widget/view/form_gtk/parser.py, line: 549
 # File: bin/widget/view/form_gtk/parser.py, line: 653
 # File: bin/widget/view/form_gtk/parser.py, line: 710
-#: bin/widget/view/form.py:243 bin/widget/view/form_gtk/parser.py:663
-#: bin/widget/view/form_gtk/parser.py:773
-#: bin/widget/view/form_gtk/parser.py:830
+#: bin/widget/view/form.py:245 bin/widget/view/form_gtk/parser.py:647
+#: bin/widget/view/form_gtk/parser.py:762
+#: bin/widget/view/form_gtk/parser.py:819
 msgid "Add Translation"
 msgstr "Lisa tõlge"
 
@@ -1410,14 +1417,14 @@ msgstr "Lisa tõlge"
 # File: bin/widget/view/form_gtk/parser.py, line: 766
 # File: bin/widget/view/form.py, line: 241
 # File: bin/widget/view/form_gtk/parser.py, line: 766
-#: bin/widget/view/form.py:291 bin/widget/view/form_gtk/parser.py:886
+#: bin/widget/view/form.py:293 bin/widget/view/form_gtk/parser.py:875
 msgid "Translate label"
 msgstr "Tõlgi silt"
 
 #
 # File: bin/widget/view/calendar_gtk/parser.py, line: 239
 # File: bin/openerp.glade, line: 9108
-#: bin/widget/view/calendar_gtk/parser.py:356 bin/openerp.glade:8106
+#: bin/widget/view/calendar_gtk/parser.py:355 bin/openerp.glade:8064
 msgid "Week"
 msgstr "Nädal"
 
@@ -1433,7 +1440,7 @@ msgstr "Kalendri vaate viga !"
 msgid "You must intall the library python-hippocanvas to use calendars."
 msgstr "Sa pead paigaldama python-hippocanvas teeki, et kasutada kalendreid."
 
-#: bin/widget/view/screen_container.py:73
+#: bin/widget/view/screen_container.py:74
 msgid "--Actions--"
 msgstr ""
 
@@ -1441,11 +1448,11 @@ msgstr ""
 msgid "Save as a Shortcut"
 msgstr ""
 
-#: bin/widget/view/screen_container.py:73
+#: bin/widget/view/screen_container.py:74
 msgid "Save as a Filter"
 msgstr ""
 
-#: bin/widget/view/screen_container.py:73
+#: bin/widget/view/screen_container.py:74
 msgid "Manage Filters"
 msgstr ""
 
@@ -1458,20 +1465,20 @@ msgstr ""
 
 #
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 125
-#: bin/widget/view/tree_gtk/editabletree.py:139
+#: bin/widget/view/tree_gtk/editabletree.py:140
 #, python-format
 msgid "Shortcut: %s"
 msgstr "Otsetee: %s"
 
 #
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 125
-#: bin/widget/view/tree_gtk/editabletree.py:139
+#: bin/widget/view/tree_gtk/editabletree.py:140
 msgid "F1 New - F2 Open/Search"
 msgstr "F1 Uus - F2 Ava/Otsi"
 
 #
 # File: bin/widget/view/tree_gtk/editabletree.py, line: 190
-#: bin/widget/view/tree_gtk/editabletree.py:214
+#: bin/widget/view/tree_gtk/editabletree.py:215
 #, python-format
 msgid "Warning; field %s is required!"
 msgstr "Hoiatus; väli %s on nõutud!"
@@ -1557,7 +1564,7 @@ msgstr ""
 # File: bin/openerp.glade, line: 1214
 # File: bin/widget/view/form_gtk/reference.py, line: 92
 # File: bin/openerp.glade, line: 1214
-#: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1250
+#: bin/widget/view/form_gtk/reference.py:76 bin/openerp.glade:1258
 msgid "Create a new resource"
 msgstr "Loo uus vahend"
 
@@ -1575,29 +1582,29 @@ msgstr "Otsi / Ava vahend"
 msgid "Wrong icon for the button !"
 msgstr "Vale ikoon nupu jaoks !"
 
-#: bin/widget/view/form_gtk/parser.py:318
+#: bin/widget/view/form_gtk/parser.py:308
 msgid "Field"
 msgstr ""
 
-#: bin/widget/view/form_gtk/parser.py:318
+#: bin/widget/view/form_gtk/parser.py:308
 msgid "Object"
 msgstr ""
 
-#: bin/widget/view/form_gtk/parser.py:630
+#: bin/widget/view/form_gtk/parser.py:619
 msgid "Enter some text to the related field before adding translations!"
 msgstr "Sisesta tekst seotud väljale enne tõlgete lisamist!"
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 480
 # File: bin/widget/view/form_gtk/parser.py, line: 480
-#: bin/widget/view/form_gtk/parser.py:637
+#: bin/widget/view/form_gtk/parser.py:626
 msgid "You need to save resource before adding translations!"
 msgstr "Sa pead salvestama vahendi enne tõlgete lisamist!"
 
 #
 # File: bin/widget/view/form_gtk/parser.py, line: 772
 # File: bin/widget/view/form_gtk/parser.py, line: 772
-#: bin/widget/view/form_gtk/parser.py:891
+#: bin/widget/view/form_gtk/parser.py:880
 msgid "Translate view"
 msgstr "Tõlke vaade"
 
@@ -1618,72 +1625,72 @@ msgstr ""
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 148
 # File: bin/widget/view/form_gtk/interface.py, line: 47
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 148
-#: bin/widget/view/form_gtk/one2many_list.py:175
-#: bin/widget/view/form_gtk/interface.py:47
+#: bin/widget/view/form_gtk/one2many_list.py:164
+#: bin/widget/view/form_gtk/interface.py:48
 msgid "Set to default value"
 msgstr "Sea vaikeväärtuseks"
 
-#: bin/widget/view/form_gtk/one2many_list.py:178
+#: bin/widget/view/form_gtk/one2many_list.py:167
 msgid "Set Default"
 msgstr "Sea vaikeväärtus"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 162
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 162
-#: bin/widget/view/form_gtk/one2many_list.py:209
+#: bin/widget/view/form_gtk/one2many_list.py:196
 msgid "Create a new entry"
 msgstr "Loo uus kirje"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 172
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 172
-#: bin/widget/view/form_gtk/one2many_list.py:213
+#: bin/widget/view/form_gtk/one2many_list.py:200
 msgid "Edit this entry"
 msgstr "Muuda seda kirjet"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 182
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 182
-#: bin/widget/view/form_gtk/one2many_list.py:217
+#: bin/widget/view/form_gtk/one2many_list.py:204
 msgid "Remove this entry"
 msgstr "Eemalda see kirje"
 
-#: bin/widget/view/form_gtk/one2many_list.py:223
 #: bin/widget/view/form_gtk/many2many.py:84
+#: bin/widget/view/form_gtk/one2many_list.py:210
 msgid "Previous Page"
 msgstr ""
 
-#: bin/widget/view/form_gtk/one2many_list.py:227
 #: bin/widget/view/form_gtk/many2many.py:88
+#: bin/widget/view/form_gtk/one2many_list.py:214
 msgid "Previous Record"
 msgstr ""
 
-#: bin/widget/view/form_gtk/one2many_list.py:235
 #: bin/widget/view/form_gtk/many2many.py:96
+#: bin/widget/view/form_gtk/one2many_list.py:222
 msgid "Next Record"
 msgstr ""
 
-#: bin/widget/view/form_gtk/one2many_list.py:239
 #: bin/widget/view/form_gtk/many2many.py:100
+#: bin/widget/view/form_gtk/one2many_list.py:226
 msgid "Next Page"
 msgstr ""
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 219
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 219
-#: bin/widget/view/form_gtk/one2many_list.py:245
+#: bin/widget/view/form_gtk/one2many_list.py:232
 msgid "Switch"
 msgstr "Lülita"
 
-#: bin/widget/view/form_gtk/one2many_list.py:251
 #: bin/widget/view/form_gtk/many2many.py:106
+#: bin/widget/view/form_gtk/one2many_list.py:238
 msgid "Choose Limit"
 msgstr ""
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 269
-#: bin/widget/view/form_gtk/one2many_list.py:292
+#: bin/widget/view/form_gtk/one2many_list.py:279
 msgid "You have to select a resource !"
 msgstr "Sa pead valima vahendi !"
 
@@ -1715,14 +1722,14 @@ msgstr "Kustuta"
 #
 # File: bin/widget/view/form_gtk/image.py, line: 100
 # File: bin/widget/view/form_gtk/image.py, line: 100
-#: bin/widget/view/form_gtk/image.py:104
+#: bin/widget/view/form_gtk/image.py:102
 msgid "All files"
 msgstr "Kõik failid"
 
 #
 # File: bin/widget/view/form_gtk/image.py, line: 104
 # File: bin/widget/view/form_gtk/image.py, line: 104
-#: bin/widget/view/form_gtk/image.py:108
+#: bin/widget/view/form_gtk/image.py:106
 msgid "Images"
 msgstr "Pildid"
 
@@ -1734,13 +1741,14 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:55
+#: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:53
 msgid "Open this resource"
 msgstr "Ava see vahend"
 
 #
 #
 #: bin/widget/view/form_gtk/many2one.py:163
+#: bin/widget_search/custom_filter_widgets.py:87
 msgid "Search a resource"
 msgstr "Otsi vahend"
 
@@ -1749,7 +1757,7 @@ msgstr "Otsi vahend"
 # File: bin/openerp.glade, line: 1356
 # File: bin/widget/view/form_gtk/many2one.py, line: 168
 # File: bin/openerp.glade, line: 1356
-#: bin/widget/view/form_gtk/many2one.py:174 bin/openerp.glade:1404
+#: bin/widget/view/form_gtk/many2one.py:174 bin/openerp.glade:1412
 msgid "Action"
 msgstr "Toiming"
 
@@ -1765,22 +1773,22 @@ msgstr "Aruanne"
 # File: bin/widget/view/list.py, line: 274
 # File: bin/widget/view/form_gtk/many2one.py, line: 369
 # File: bin/widget/view/list.py, line: 274
-#: bin/widget/view/form_gtk/many2one.py:388 bin/widget/view/list.py:618
+#: bin/widget/view/list.py:633 bin/widget/view/form_gtk/many2one.py:387
 msgid "You must select a record to use the relation !"
 msgstr "Sa pead valima kirje, et kasutada seost !"
 
 #
 # File: bin/widget/view/form_gtk/interface.py, line: 48
 # File: bin/widget/view/form_gtk/interface.py, line: 48
-#: bin/widget/view/form_gtk/interface.py:48
+#: bin/widget/view/form_gtk/interface.py:49
 msgid "Set as default"
 msgstr "Määra vaikimisi"
 
-#: bin/widget/view/form_gtk/interface.py:63
+#: bin/widget/view/form_gtk/interface.py:64
 msgid "You can not set to the default value here !"
 msgstr ""
 
-#: bin/widget/view/form_gtk/interface.py:63
+#: bin/widget/view/form_gtk/interface.py:64
 msgid "Operation not permited"
 msgstr ""
 
@@ -1839,26 +1847,26 @@ msgstr "Viga faili %s kirjutamisel"
 msgid "Always applicable !"
 msgstr "Alati rakendatav !"
 
-#: bin/widget/view/form_gtk/calendar.py:100
-#: bin/widget/view/form_gtk/calendar.py:162
+#: bin/widget/view/form_gtk/calendar.py:99
+#: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
 msgstr "Vigane kuupäeva väärtus! Aasta peab olema suurem kui 1899 !"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
 # File: bin/widget/view/form_gtk/calendar.py, line: 247
-#: bin/widget/view/form_gtk/calendar.py:252
+#: bin/widget/view/form_gtk/calendar.py:255 bin/widget_search/calendar.py:273
 msgid "Hour:"
 msgstr "Tunnid:"
 
 #
 # File: bin/widget/view/form_gtk/calendar.py, line: 250
 # File: bin/widget/view/form_gtk/calendar.py, line: 250
-#: bin/widget/view/form_gtk/calendar.py:255
+#: bin/widget/view/form_gtk/calendar.py:258 bin/widget_search/calendar.py:276
 msgid "Minute:"
 msgstr "Minutid:"
 
-#: bin/widget/view/form_gtk/calendar.py:289
+#: bin/widget/view/form_gtk/calendar.py:291 bin/widget_search/calendar.py:312
 msgid "Invalid datetime value! Year must be greater than 1899 !"
 msgstr ""
 
@@ -1874,7 +1882,7 @@ msgstr ""
 "Gantt vaade pole saadaval selles GTK kliendis, sa peaksid kasutama "
 "veebiliidest või lülituma kalendervaatesse."
 
-#: bin/widget/screen/screen.py:354
+#: bin/widget/screen/screen.py:337
 msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
@@ -1883,13 +1891,13 @@ msgstr ""
 #
 # File: bin/rpc.py, line: 142
 # File: bin/rpc.py, line: 142
-#: bin/rpc.py:157
+#: bin/rpc.py:158
 msgid "Connection refused!"
 msgstr "Ühendusest keelduti!"
 
 #
 # File: bin/rpc.py, line: 173
-#: bin/rpc.py:187
+#: bin/rpc.py:188
 msgid ""
 "Unable to reach to OpenERP server !\n"
 "You should check your connection to the network and the OpenERP server."
@@ -1899,7 +1907,7 @@ msgstr ""
 
 #
 # File: bin/rpc.py, line: 173
-#: bin/rpc.py:187
+#: bin/rpc.py:188
 msgid "Connection Error"
 msgstr "Ühenduse viga"
 
@@ -1914,7 +1922,7 @@ msgstr "OpenERP - Sisene"
 # File: bin/openerp.glade, line: 8427
 # File: bin/openerp.glade, line: 118
 # File: bin/openerp.glade, line: 8427
-#: bin/openerp.glade:116 bin/openerp.glade:6450
+#: bin/openerp.glade:116 bin/openerp.glade:6405
 msgid "Database:"
 msgstr "Andmebaas:"
 
@@ -1932,7 +1940,7 @@ msgstr "Kasutaja:"
 # File: bin/openerp.glade, line: 148
 # File: bin/openerp.glade, line: 8413
 # File: bin/openerp.glade, line: 8713
-#: bin/openerp.glade:146 bin/openerp.glade:6436 bin/openerp.glade:6747
+#: bin/openerp.glade:146 bin/openerp.glade:6391 bin/openerp.glade:6702
 msgid "Password:"
 msgstr "Parool:"
 
@@ -2024,105 +2032,105 @@ msgstr "_Eelistused"
 #
 # File: bin/openerp.glade, line: 445
 # File: bin/openerp.glade, line: 445
-#: bin/openerp.glade:488
+#: bin/openerp.glade:496
 msgid "_Send a request"
 msgstr "Saada _päring"
 
 #
 # File: bin/openerp.glade, line: 460
 # File: bin/openerp.glade, line: 460
-#: bin/openerp.glade:503
+#: bin/openerp.glade:511
 msgid "_Read my requests"
 msgstr "Vaata _minu päringuid"
 
 #
 # File: bin/openerp.glade, line: 480
 # File: bin/openerp.glade, line: 480
-#: bin/openerp.glade:523
+#: bin/openerp.glade:531
 msgid "_Waiting Requests"
 msgstr "_Ootel päringud"
 
 #
 # File: bin/openerp.glade, line: 493
 # File: bin/openerp.glade, line: 493
-#: bin/openerp.glade:536
+#: bin/openerp.glade:544
 msgid "For_m"
 msgstr "_Vorm"
 
 #
 # File: bin/openerp.glade, line: 501
 # File: bin/openerp.glade, line: 501
-#: bin/openerp.glade:544
+#: bin/openerp.glade:552
 msgid "_New"
 msgstr "_Uus"
 
 #
 # File: bin/openerp.glade, line: 517
 # File: bin/openerp.glade, line: 517
-#: bin/openerp.glade:560
+#: bin/openerp.glade:568
 msgid "_Save"
 msgstr "_Salvesta"
 
 #
 # File: bin/openerp.glade, line: 533
 # File: bin/openerp.glade, line: 533
-#: bin/openerp.glade:576
+#: bin/openerp.glade:584
 msgid "Copy this resource"
 msgstr "Kopeeri see vahend"
 
 #
 # File: bin/openerp.glade, line: 534
 # File: bin/openerp.glade, line: 534
-#: bin/openerp.glade:577
+#: bin/openerp.glade:585
 msgid "_Duplicate"
 msgstr "_Paljunda"
 
 #
 # File: bin/openerp.glade, line: 550
 # File: bin/openerp.glade, line: 550
-#: bin/openerp.glade:593
+#: bin/openerp.glade:601
 msgid "_Delete"
 msgstr "_Kustuta"
 
 #
 # File: bin/openerp.glade, line: 571
 # File: bin/openerp.glade, line: 571
-#: bin/openerp.glade:614
+#: bin/openerp.glade:622
 msgid "Find"
 msgstr "Otsi"
 
 #
 # File: bin/openerp.glade, line: 587
 # File: bin/openerp.glade, line: 587
-#: bin/openerp.glade:630
+#: bin/openerp.glade:638
 msgid "Ne_xt"
 msgstr "_Järgmine"
 
 #
 # File: bin/openerp.glade, line: 603
 # File: bin/openerp.glade, line: 603
-#: bin/openerp.glade:646
+#: bin/openerp.glade:654
 msgid "Pre_vious"
 msgstr "_Eelmine"
 
 #
 # File: bin/openerp.glade, line: 619
 # File: bin/openerp.glade, line: 619
-#: bin/openerp.glade:662
+#: bin/openerp.glade:670
 msgid "Switch to list/form"
 msgstr "Lülitu nimekirja/vormi"
 
 #
 # File: bin/openerp.glade, line: 635
 # File: bin/openerp.glade, line: 635
-#: bin/openerp.glade:678
+#: bin/openerp.glade:686
 msgid "_Menu"
 msgstr "_Menüü"
 
 #
 # File: bin/openerp.glade, line: 656
 # File: bin/openerp.glade, line: 656
-#: bin/openerp.glade:699
+#: bin/openerp.glade:707
 msgid "_New Home Tab"
 msgstr "Uus _Pealehe Kaart"
 
@@ -2131,14 +2139,14 @@ msgstr "Uus _Pealehe Kaart"
 # File: bin/openerp.glade, line: 7001
 # File: bin/openerp.glade, line: 672
 # File: bin/openerp.glade, line: 7001
-#: bin/openerp.glade:715 bin/openerp.glade:5024
+#: bin/openerp.glade:723 bin/openerp.glade:4995
 msgid "Close Tab"
 msgstr "Sulge kaart"
 
 #
 # File: bin/openerp.glade, line: 688
 # File: bin/openerp.glade, line: 688
-#: bin/openerp.glade:731
+#: bin/openerp.glade:739
 msgid "Previous Tab"
 msgstr "Eelmine Kaart"
 
@@ -2147,228 +2155,228 @@ msgstr "Eelmine Kaart"
 # File: bin/openerp.glade, line: 7057
 # File: bin/openerp.glade, line: 697
 # File: bin/openerp.glade, line: 7057
-#: bin/openerp.glade:740 bin/openerp.glade:5080
+#: bin/openerp.glade:748 bin/openerp.glade:5051
 msgid "Next Tab"
 msgstr "Järgmine Kaart"
 
 #
 # File: bin/openerp.glade, line: 711
 # File: bin/openerp.glade, line: 711
-#: bin/openerp.glade:754
+#: bin/openerp.glade:762
 msgid "View _logs"
 msgstr "Vaata _logiraamatut"
 
 #
 # File: bin/openerp.glade, line: 719
 # File: bin/openerp.glade, line: 719
-#: bin/openerp.glade:762
+#: bin/openerp.glade:770
 msgid "_Go to resource ID..."
 msgstr "_Mine vahendile ID..."
 
 #
 # File: bin/openerp.glade, line: 733
 # File: bin/openerp.glade, line: 733
-#: bin/openerp.glade:776
+#: bin/openerp.glade:784
 msgid "_Open"
 msgstr "_Ava"
 
 #
 # File: bin/openerp.glade, line: 748
 # File: bin/openerp.glade, line: 748
-#: bin/openerp.glade:791
+#: bin/openerp.glade:799
 msgid "Reloa_d / Undo"
 msgstr "Taaslae/Ennista"
 
 #
 # File: bin/openerp.glade, line: 769
 # File: bin/openerp.glade, line: 769
-#: bin/openerp.glade:812
+#: bin/openerp.glade:820
 msgid "Repeat latest _action"
 msgstr "Korda viimast toimingut"
 
 #
 # File: bin/openerp.glade, line: 783
 # File: bin/openerp.glade, line: 783
-#: bin/openerp.glade:826
+#: bin/openerp.glade:834
 msgid "_Preview in PDF"
 msgstr "_Eelvaade PDF-ina"
 
 #
 # File: bin/openerp.glade, line: 799
 # File: bin/openerp.glade, line: 799
-#: bin/openerp.glade:842
+#: bin/openerp.glade:850
 msgid "Previe_w in editor"
 msgstr "Eelvaade redaktoris"
 
 #
 # File: bin/openerp.glade, line: 819
 # File: bin/openerp.glade, line: 819
-#: bin/openerp.glade:862
+#: bin/openerp.glade:870
 msgid "Expor_t data..."
 msgstr "Ekspordi andmed..."
 
 #
 # File: bin/openerp.glade, line: 834
 # File: bin/openerp.glade, line: 834
-#: bin/openerp.glade:877
+#: bin/openerp.glade:885
 msgid "I_mport data..."
 msgstr "Impordi andmed..."
 
-#: bin/openerp.glade:889
+#: bin/openerp.glade:897
 msgid "_Options"
 msgstr "V_alikud"
 
 #
 # File: bin/openerp.glade, line: 853
-#: bin/openerp.glade:896
+#: bin/openerp.glade:904
 msgid "_Extension Manager"
 msgstr "_Laienduste Haldaja"
 
 #
 # File: bin/openerp.glade, line: 861
 # File: bin/openerp.glade, line: 861
-#: bin/openerp.glade:904
+#: bin/openerp.glade:912
 msgid "_Menubar"
 msgstr "Menüüriba"
 
 #
 # File: bin/openerp.glade, line: 869
 # File: bin/openerp.glade, line: 869
-#: bin/openerp.glade:912
+#: bin/openerp.glade:920
 msgid "Text _and Icons"
 msgstr "Tekst ja Ikoonid"
 
 #
 # File: bin/openerp.glade, line: 877
 # File: bin/openerp.glade, line: 877
-#: bin/openerp.glade:920
+#: bin/openerp.glade:928
 msgid "_Icons only"
 msgstr "Ainult _ikoonid"
 
 #
 # File: bin/openerp.glade, line: 886
 # File: bin/openerp.glade, line: 886
-#: bin/openerp.glade:929
+#: bin/openerp.glade:937
 msgid "_Text only"
 msgstr "Ainult _tekst"
 
 #
 # File: bin/openerp.glade, line: 899
 # File: bin/openerp.glade, line: 899
-#: bin/openerp.glade:942
+#: bin/openerp.glade:950
 msgid "_Forms"
 msgstr "_Blanketid"
 
 #
 # File: bin/openerp.glade, line: 907
 # File: bin/openerp.glade, line: 907
-#: bin/openerp.glade:950
+#: bin/openerp.glade:958
 msgid "Right Toolbar"
 msgstr "Parem Tööriistariba"
 
 #
 # File: bin/openerp.glade, line: 915
 # File: bin/openerp.glade, line: 915
-#: bin/openerp.glade:958
+#: bin/openerp.glade:966
 msgid "Tabs default position"
 msgstr "Kaartide vaikeasukohad"
 
 #
 # File: bin/openerp.glade, line: 923
 # File: bin/openerp.glade, line: 923
-#: bin/openerp.glade:966
+#: bin/openerp.glade:974
 msgid "Top"
 msgstr "Üleval"
 
 #
 # File: bin/openerp.glade, line: 931
 # File: bin/openerp.glade, line: 931
-#: bin/openerp.glade:974
+#: bin/openerp.glade:982
 msgid "Left"
 msgstr "Vasakul"
 
 #
 # File: bin/openerp.glade, line: 940
 # File: bin/openerp.glade, line: 940
-#: bin/openerp.glade:983
+#: bin/openerp.glade:991
 msgid "Right"
 msgstr "Paremal"
 
 #
 # File: bin/openerp.glade, line: 949
 # File: bin/openerp.glade, line: 949
-#: bin/openerp.glade:992
+#: bin/openerp.glade:1000
 msgid "Bottom"
 msgstr "All"
 
 #
 # File: bin/openerp.glade, line: 962
 # File: bin/openerp.glade, line: 962
-#: bin/openerp.glade:1005
+#: bin/openerp.glade:1013
 msgid "Tabs default orientation"
 msgstr "Kaartide vaikeorientatsioon"
 
 #
 # File: bin/openerp.glade, line: 970
 # File: bin/openerp.glade, line: 970
-#: bin/openerp.glade:1013
+#: bin/openerp.glade:1021
 msgid "Horizontal"
 msgstr "Horisontaalne"
 
 #
 # File: bin/openerp.glade, line: 978
 # File: bin/openerp.glade, line: 978
-#: bin/openerp.glade:1021
+#: bin/openerp.glade:1029
 msgid "Vertical"
 msgstr "Vertikaalne"
 
 #
 # File: bin/openerp.glade, line: 995
 # File: bin/openerp.glade, line: 995
-#: bin/openerp.glade:1038
+#: bin/openerp.glade:1046
 msgid "_Print"
 msgstr "_Prindi"
 
 #
 # File: bin/openerp.glade, line: 1002
 # File: bin/openerp.glade, line: 1002
-#: bin/openerp.glade:1045
+#: bin/openerp.glade:1053
 msgid "Previe_w before print"
 msgstr "Eelvaade enne printimist"
 
 #
 # File: bin/openerp.glade, line: 1026
 # File: bin/openerp.glade, line: 1026
-#: bin/openerp.glade:1069
+#: bin/openerp.glade:1077
 msgid "_Save options"
 msgstr "Salvesta valikud"
 
 #
 # File: bin/openerp.glade, line: 1046
 # File: bin/openerp.glade, line: 1046
-#: bin/openerp.glade:1089
+#: bin/openerp.glade:1097
 msgid "_Plugins"
 msgstr "_Pluginad"
 
 #
 # File: bin/openerp.glade, line: 1054
 # File: bin/openerp.glade, line: 1054
-#: bin/openerp.glade:1097
+#: bin/openerp.glade:1105
 msgid "_Execute a plugin"
 msgstr "Käivita plugin"
 
-#: bin/openerp.glade:1117
+#: bin/openerp.glade:1125
 msgid "_Shortcuts"
 msgstr "_Otseteed"
 
 #
 # File: bin/openerp.glade, line: 1082
 # File: bin/openerp.glade, line: 1082
-#: bin/openerp.glade:1125
+#: bin/openerp.glade:1133
 msgid "_Help"
 msgstr "A_bi"
 
-#: bin/openerp.glade:1132
+#: bin/openerp.glade:1140
 msgid "Enable Debug Mode Tooltips"
 msgstr ""
 
@@ -2377,146 +2385,146 @@ msgstr ""
 # File: bin/openerp.glade, line: 6372
 # File: bin/openerp.glade, line: 1089
 # File: bin/openerp.glade, line: 6372
-#: bin/openerp.glade:1140 bin/openerp.glade:4395
+#: bin/openerp.glade:1148 bin/openerp.glade:4366
 msgid "Support Request"
 msgstr "Toe Päring"
 
 #
 # File: bin/openerp.glade, line: 1109
 # File: bin/openerp.glade, line: 1109
-#: bin/openerp.glade:1160
+#: bin/openerp.glade:1168
 msgid "User _Manual"
 msgstr "Kasutajajuhis"
 
 #
 # File: bin/openerp.glade, line: 1124
 # File: bin/openerp.glade, line: 1124
-#: bin/openerp.glade:1175
+#: bin/openerp.glade:1183
 msgid "_Contextual Help"
 msgstr "Kontekstuaalne Abi"
 
 #
 # File: bin/openerp.glade, line: 1155
 # File: bin/openerp.glade, line: 1155
-#: bin/openerp.glade:1191
+#: bin/openerp.glade:1199
 msgid "Keyboard Shortcuts"
 msgstr "Kiirklahvid"
 
 #
 # File: bin/openerp.glade, line: 1168
 # File: bin/openerp.glade, line: 1168
-#: bin/openerp.glade:1204
+#: bin/openerp.glade:1212
 msgid "_License"
 msgstr "_Litsents"
 
 #
 # File: bin/openerp.glade, line: 1183
 # File: bin/openerp.glade, line: 1183
-#: bin/openerp.glade:1219
+#: bin/openerp.glade:1227
 msgid "_About..."
 msgstr "_Programmist..."
 
 #
 # File: bin/openerp.glade, line: 1225
 # File: bin/openerp.glade, line: 1225
-#: bin/openerp.glade:1261
+#: bin/openerp.glade:1269
 msgid "Edit / Save this resource"
 msgstr "Muuda/Salvesta see vahend"
 
 #
 # File: bin/openerp.glade, line: 1241
 # File: bin/openerp.glade, line: 1241
-#: bin/openerp.glade:1277
+#: bin/openerp.glade:1285
 msgid "Delete this resource"
 msgstr "Kustuta see vahend"
 
 #
 # File: bin/openerp.glade, line: 1254
 # File: bin/openerp.glade, line: 1254
-#: bin/openerp.glade:1290
+#: bin/openerp.glade:1298
 msgid "Go to previous matched search"
 msgstr "Mine eelmisele otsinguvastele"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 194
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 194
-#: bin/openerp.glade:1291
+#: bin/openerp.glade:1299
 msgid "Previous"
 msgstr "Eelmine"
 
 #
 # File: bin/openerp.glade, line: 1265
 # File: bin/openerp.glade, line: 1265
-#: bin/openerp.glade:1302
+#: bin/openerp.glade:1310
 msgid "Go to next matched resource"
 msgstr "Mine järgmisele vahendi vastele"
 
 #
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 207
 # File: bin/widget/view/form_gtk/one2many_list.py, line: 207
-#: bin/openerp.glade:1303
+#: bin/openerp.glade:1311
 msgid "Next"
 msgstr "Järgmine"
 
 #
 # File: bin/openerp.glade, line: 1278
-#: bin/openerp.glade:1316
+#: bin/openerp.glade:1324
 msgid "List"
 msgstr "Loend"
 
 #
 # File: bin/openerp.glade, line: 1290
-#: bin/openerp.glade:1328
+#: bin/openerp.glade:1336
 msgid "Form"
 msgstr "Vorm"
 
 #
 # File: bin/openerp.glade, line: 1303
-#: bin/openerp.glade:1341
+#: bin/openerp.glade:1349
 msgid "Calendar"
 msgstr "Kalender"
 
-#: bin/openerp.glade:1351
+#: bin/openerp.glade:1359
 msgid "Diagram"
 msgstr ""
 
 #
 # File: bin/openerp.glade, line: 1313
-#: bin/openerp.glade:1361
+#: bin/openerp.glade:1369
 msgid "Graph"
 msgstr "Graafik"
 
 #
 # File: bin/openerp.glade, line: 1326
-#: bin/openerp.glade:1374
+#: bin/openerp.glade:1382
 msgid "Gantt"
 msgstr "Gantt"
 
 #
 # File: bin/openerp.glade, line: 1344
 # File: bin/openerp.glade, line: 1344
-#: bin/openerp.glade:1392
+#: bin/openerp.glade:1400
 msgid "Print documents"
 msgstr "Prindi dokumendid"
 
 #
 # File: bin/openerp.glade, line: 1355
 # File: bin/openerp.glade, line: 1355
-#: bin/openerp.glade:1403
+#: bin/openerp.glade:1411
 msgid "Launch actions about this resource"
 msgstr "Käivita selle vahendiga seotud toimingud"
 
 #
 # File: bin/openerp.glade, line: 1368
 # File: bin/openerp.glade, line: 1368
-#: bin/openerp.glade:1416
+#: bin/openerp.glade:1424
 msgid "Add an attachment to this resource"
 msgstr "Lisa manus sellele vahendile"
 
 #
 # File: bin/openerp.glade, line: 1369
 # File: bin/openerp.glade, line: 1369
-#: bin/openerp.glade:1417
+#: bin/openerp.glade:1425
 msgid "Attachment"
 msgstr "Manus"
 
@@ -2525,7 +2533,7 @@ msgstr "Manus"
 # File: bin/openerp.glade, line: 1385
 # File: bin/openerp.glade, line: 1384
 # File: bin/openerp.glade, line: 1385
-#: bin/openerp.glade:1432 bin/openerp.glade:1433
+#: bin/openerp.glade:1440 bin/openerp.glade:1441
 msgid "Menu"
 msgstr "Menüü"
 
@@ -2534,76 +2542,76 @@ msgstr "Menüü"
 # File: bin/openerp.glade, line: 1403
 # File: bin/openerp.glade, line: 1402
 # File: bin/openerp.glade, line: 1403
-#: bin/openerp.glade:1450 bin/openerp.glade:1451
+#: bin/openerp.glade:1458 bin/openerp.glade:1459
 msgid "Reload"
 msgstr "Uuenda"
 
 #
 #
-#: bin/openerp.glade:1468
+#: bin/openerp.glade:1476
 msgid "Close this window"
 msgstr "Sulge see aken"
 
-#: bin/openerp.glade:1512
+#: bin/openerp.glade:1520
 msgid "Company:"
 msgstr ""
 
 #
 # File: bin/openerp.glade, line: 1448
 # File: bin/openerp.glade, line: 1448
-#: bin/openerp.glade:1535
+#: bin/openerp.glade:1543
 msgid "Requests:"
 msgstr "Päringud:"
 
 #
 # File: bin/openerp.glade, line: 1471
 # File: bin/openerp.glade, line: 1471
-#: bin/openerp.glade:1558
+#: bin/openerp.glade:1566
 msgid "Read my Requests"
 msgstr "Vaata minu Päringuid"
 
 #
 # File: bin/openerp.glade, line: 1492
 # File: bin/openerp.glade, line: 1492
-#: bin/openerp.glade:1579
+#: bin/openerp.glade:1587
 msgid "Send a new request"
 msgstr "Saada uus päring"
 
 #
 # File: bin/openerp.glade, line: 1548
-#: bin/openerp.glade:1619
+#: bin/openerp.glade:1627
 msgid "OpenERP - Tree Resources"
 msgstr "OpenERP - Puu Vahendid"
 
 #
 # File: bin/openerp.glade, line: 1585
 # File: bin/openerp.glade, line: 1585
-#: bin/openerp.glade:1672
+#: bin/openerp.glade:1680
 msgid "Shortcuts"
 msgstr "Otseteed"
 
 #
 # File: bin/openerp.glade, line: 1710
-#: bin/openerp.glade:1781
+#: bin/openerp.glade:1789
 msgid "OpenERP - Forms"
 msgstr "OpenERP - Vormid"
 
 #
 # File: bin/openerp.glade, line: 1718
 # File: bin/openerp.glade, line: 1718
-#: bin/openerp.glade:1805
+#: bin/openerp.glade:1813
 msgid "State:"
 msgstr "Olek:"
 
 #
 # File: bin/openerp.glade, line: 1766
-#: bin/openerp.glade:1837
+#: bin/openerp.glade:1845
 msgid "OpenERP - About"
 msgstr "OpenERP-ist"
 
 #
 # File: bin/openerp.glade, line: 1780
-#: bin/openerp.glade:1851
+#: bin/openerp.glade:1859
 msgid ""
 "<b>About OpenERP</b>\n"
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
@@ -2641,7 +2649,7 @@ msgstr ""
 
 #
 # File: bin/openerp.glade, line: 1847
-#: bin/openerp.glade:1918
+#: bin/openerp.glade:1931
 msgid "_OpenERP"
 msgstr "_OpenERP"
 
@@ -2677,127 +2685,127 @@ msgstr ""
 #
 # File: bin/openerp.glade, line: 1890
 # File: bin/openerp.glade, line: 1890
-#: bin/openerp.glade:1977
+#: bin/openerp.glade:1991
 msgid "_Contact"
 msgstr "K_ontakt"
 
-#: bin/openerp.glade:2029
+#: bin/openerp.glade:2043
 msgid "Open ERP - Forms widget"
 msgstr "Open ERP - Vormide vidin"
 
 #
 # File: bin/openerp.glade, line: 2137
 # File: bin/openerp.glade, line: 5589
-#: bin/openerp.glade:2208 bin/openerp.glade:4741
+#: bin/openerp.glade:2222 bin/openerp.glade:4712
 msgid "OpenERP - Confirmation"
 msgstr "OpenERP - Kinnitus"
 
 #
 # File: bin/openerp.glade, line: 2214
-#: bin/openerp.glade:2287
+#: bin/openerp.glade:2301
 msgid "OpenERP - Selection"
 msgstr "OpenERP - Valik"
 
 #
 # File: bin/openerp.glade, line: 2212
 # File: bin/openerp.glade, line: 2212
-#: bin/openerp.glade:2301
+#: bin/openerp.glade:2315
 msgid "Your selection:"
 msgstr "Sinu valik:"
 
 #
 # File: bin/openerp.glade, line: 2308
-#: bin/openerp.glade:2381
+#: bin/openerp.glade:2395
 msgid "OpenERP - Dialog"
 msgstr "OpenERP - Dialoog"
 
 #
 # File: bin/openerp.glade, line: 2332
-#: bin/openerp.glade:2405
+#: bin/openerp.glade:2419
 msgid "OpenERP, Field Preference target"
 msgstr "OpenERP, Välja Eelistuse siht"
 
 #
 # File: bin/openerp.glade, line: 2347
 # File: bin/openerp.glade, line: 2347
-#: bin/openerp.glade:2436
+#: bin/openerp.glade:2450
 msgid "_only for you"
 msgstr "ainult sulle"
 
 #
 # File: bin/openerp.glade, line: 2361
 # File: bin/openerp.glade, line: 2361
-#: bin/openerp.glade:2450
+#: bin/openerp.glade:2464
 msgid "for _all users"
 msgstr "kõigile kasutajatele"
 
 #
 # File: bin/openerp.glade, line: 2381
 # File: bin/openerp.glade, line: 2381
-#: bin/openerp.glade:2470
+#: bin/openerp.glade:2484
 msgid "<b>Value applicable for:</b>"
 msgstr "<b>Väärtus rakendatav:</b>"
 
 #
 # File: bin/openerp.glade, line: 2417
 # File: bin/openerp.glade, line: 2417
-#: bin/openerp.glade:2506
+#: bin/openerp.glade:2520
 msgid "<b>Value applicable if:</b>"
 msgstr "<b>Väärtus rakendatav kui:</b>"
 
 #
 # File: bin/openerp.glade, line: 2435
 # File: bin/openerp.glade, line: 2435
-#: bin/openerp.glade:2524
+#: bin/openerp.glade:2538
 msgid "Field _Name:"
 msgstr "Välja Nimi:"
 
 #
 # File: bin/openerp.glade, line: 2449
 # File: bin/openerp.glade, line: 2449
-#: bin/openerp.glade:2538
+#: bin/openerp.glade:2552
 msgid "_Domain:"
 msgstr "_Domeen:"
 
 #
 # File: bin/openerp.glade, line: 2508
 # File: bin/openerp.glade, line: 2508
-#: bin/openerp.glade:2597
+#: bin/openerp.glade:2611
 msgid "Default _value:"
 msgstr "Vaikimisi väärtus:"
 
 #
 # File: bin/openerp.glade, line: 2579
-#: bin/openerp.glade:2652
+#: bin/openerp.glade:2666
 msgid "OpenERP - Export to CSV"
 msgstr "OpenERP - Ekspordi CSV-na"
 
 #
 # File: bin/openerp.glade, line: 2611
 # File: bin/openerp.glade, line: 2611
-#: bin/openerp.glade:2700
+#: bin/openerp.glade:2714
 msgid "Save List"
 msgstr "Salvesta loend"
 
 #
 # File: bin/openerp.glade, line: 2675
-#: bin/openerp.glade:2748
+#: bin/openerp.glade:2762
 msgid "Remove List"
 msgstr "Eemalda loend"
 
 #
 # File: bin/openerp.glade, line: 2730
-#: bin/openerp.glade:2803
+#: bin/openerp.glade:2817
 msgid "<b>Exports List</b>"
 msgstr "<b>Eksportide loend</b>"
 
 #
 # File: bin/openerp.glade, line: 2747
-#: bin/openerp.glade:2820
+#: bin/openerp.glade:2834
 msgid "<b>Predefined Exports</b>"
 msgstr "<b>Eelmääratletud ekspordid</b>"
 
-#: bin/openerp.glade:2846
+#: bin/openerp.glade:3134
 msgid "Import Compatible"
 msgstr "Importimiseks ühilduv"
 
@@ -2807,7 +2815,7 @@ msgstr ""
 
 #
 # File: bin/openerp.glade, line: 2792
-#: bin/openerp.glade:2909
+#: bin/openerp.glade:2880
 msgid "Available Fields"
 msgstr "Saadaolevad väljad"
 
@@ -2816,7 +2824,7 @@ msgstr "Saadaolevad väljad"
 # File: bin/openerp.glade, line: 7624
 # File: bin/openerp.glade, line: 2819
 # File: bin/openerp.glade, line: 7624
-#: bin/openerp.glade:2952 bin/openerp.glade:5647
+#: bin/openerp.glade:2923 bin/openerp.glade:5620
 msgid "_Add"
 msgstr "_Lisa"
 
@@ -2825,20 +2833,20 @@ msgstr "_Lisa"
 # File: bin/openerp.glade, line: 7671
 # File: bin/openerp.glade, line: 2866
 # File: bin/openerp.glade, line: 7671
-#: bin/openerp.glade:2999 bin/openerp.glade:5694
+#: bin/openerp.glade:2970 bin/openerp.glade:5667
 msgid "_Remove"
 msgstr "_Eemalda"
 
 #
 # File: bin/openerp.glade, line: 2914
 # File: bin/openerp.glade, line: 2914
-#: bin/openerp.glade:3047
+#: bin/openerp.glade:3018
 msgid "_Nothing"
 msgstr "Midagi"
 
 #
 # File: bin/openerp.glade, line: 2985
-#: bin/openerp.glade:3102
+#: bin/openerp.glade:3073
 msgid "Fields to Export"
 msgstr "Väljad eksportimiseks"
 
@@ -2863,86 +2871,86 @@ msgstr "Lisa väljade nimed"
 #
 # File: bin/openerp.glade, line: 3035
 # File: bin/openerp.glade, line: 3035
-#: bin/openerp.glade:3168
+#: bin/openerp.glade:3156
 msgid "<b>Opti_ons</b>"
 msgstr "<b>Valikud</b>"
 
 #
 # File: bin/openerp.glade, line: 3110
-#: bin/openerp.glade:3227
+#: bin/openerp.glade:3215
 msgid "OpenERP - Search"
 msgstr "OpenERP - Otsing"
 
 #
 # File: bin/openerp.glade, line: 3222
-#: bin/openerp.glade:3307
+#: bin/openerp.glade:3281
 msgid "OpenERP - Preferences"
 msgstr "OpenERP - Eelistused"
 
 #
 # File: bin/openerp.glade, line: 4365
 # File: bin/openerp.glade, line: 4365
-#: bin/openerp.glade:3321
+#: bin/openerp.glade:3295
 msgid "<b>User preferences</b>"
 msgstr "<b>Kasutaja eelistused</b>"
 
 #
 # File: bin/openerp.glade, line: 4431
 # File: bin/openerp.glade, line: 4431
-#: bin/openerp.glade:3387
+#: bin/openerp.glade:3361
 msgid "Tip of the Day"
 msgstr "Päeva nõuanne"
 
 #
 # File: bin/openerp.glade, line: 4478
 # File: bin/openerp.glade, line: 4478
-#: bin/openerp.glade:3434
+#: bin/openerp.glade:3408
 msgid "_Display a new tip next time?"
 msgstr "Kuvada uus nõuanne järgmine kord?"
 
 #
 # File: bin/openerp.glade, line: 4531
 # File: bin/openerp.glade, line: 4531
-#: bin/openerp.glade:3487
+#: bin/openerp.glade:3461
 msgid "Pre_vious Tip"
 msgstr "Eelmine Nõuanne"
 
 #
 # File: bin/openerp.glade, line: 4577
 # File: bin/openerp.glade, line: 4577
-#: bin/openerp.glade:3533
+#: bin/openerp.glade:3507
 msgid "Ne_xt Tip"
 msgstr "Järgmine Nõuanne"
 
 #
 # File: bin/openerp.glade, line: 3494
-#: bin/openerp.glade:3579
+#: bin/openerp.glade:3553
 msgid "OpenERP - License"
 msgstr "OpenERP - Litsents"
 
 #
 # File: bin/openerp.glade, line: 3509
-#: bin/openerp.glade:3594
+#: bin/openerp.glade:3568
 msgid "OpenERP license"
 msgstr "OpenERP litsents"
 
 #
 # File: bin/openerp.glade, line: 5336
 # File: bin/openerp.glade, line: 5336
-#: bin/openerp.glade:4292
+#: bin/openerp.glade:4263
 msgid "Go to resource ID"
 msgstr "Hangi vahendi ID"
 
 #
 # File: bin/openerp.glade, line: 5386
 # File: bin/openerp.glade, line: 5386
-#: bin/openerp.glade:4342
+#: bin/openerp.glade:4313
 msgid "Search ID:"
 msgstr "Otsi ID:"
 
 #
 # File: bin/openerp.glade, line: 5269
-#: bin/openerp.glade:4421
+#: bin/openerp.glade:4392
 msgid ""
 "<b>Complete this form to submit your bug and/or send a support request.</b>\n"
 "<i>\n"
@@ -2960,7 +2968,7 @@ msgstr ""
 #
 # File: bin/openerp.glade, line: 6457
 # File: bin/openerp.glade, line: 6457
-#: bin/openerp.glade:4480
+#: bin/openerp.glade:4451
 msgid "Phone number:"
 msgstr "Telefoninumber"
 
@@ -2969,7 +2977,7 @@ msgstr "Telefoninumber"
 # File: bin/openerp.glade, line: 6470
 # File: bin/openerp.glade, line: 4027
 # File: bin/openerp.glade, line: 6470
-#: bin/openerp.glade:4493
+#: bin/openerp.glade:4464
 msgid "Emergency:"
 msgstr "Hädaabi:"
 
@@ -2978,7 +2986,7 @@ msgstr "Hädaabi:"
 # File: bin/openerp.glade, line: 6484
 # File: bin/openerp.glade, line: 4041
 # File: bin/openerp.glade, line: 6484
-#: bin/openerp.glade:4507
+#: bin/openerp.glade:4478
 msgid ""
 "Not Urgent\n"
 "Medium\n"
@@ -2993,32 +3001,32 @@ msgstr ""
 #
 # File: bin/openerp.glade, line: 6517
 # File: bin/openerp.glade, line: 6517
-#: bin/openerp.glade:4540
+#: bin/openerp.glade:4511
 msgid "<b>Support contract id:</b>"
 msgstr "<b>Toe lepingu id:</b>"
 
 #
 # File: bin/openerp.glade, line: 6574
 # File: bin/openerp.glade, line: 6574
-#: bin/openerp.glade:4597
+#: bin/openerp.glade:4568 bin/win_error.glade:200
 msgid "Other comments:"
 msgstr "Muud kommentaarid:"
 
 #
 # File: bin/openerp.glade, line: 6588
 # File: bin/openerp.glade, line: 6588
-#: bin/openerp.glade:4611
+#: bin/openerp.glade:4582
 msgid "Explain your problem:"
 msgstr "Selgita oma probleemi:"
 
 #
 # File: bin/openerp.glade, line: 6627
 # File: bin/openerp.glade, line: 6627
-#: bin/openerp.glade:4650
+#: bin/openerp.glade:4621
 msgid "<b>Your email:</b>"
 msgstr "<b>Sinu E-Post:</b>"
 
-#: bin/openerp.glade:4664
+#: bin/openerp.glade:4635
 msgid "<b>Your Company:</b>"
 msgstr "<b>Sinu ettevõte:</b>"
 
@@ -3027,7 +3035,7 @@ msgstr "<b>Sinu ettevõte:</b>"
 # File: bin/openerp.glade, line: 6655
 # File: bin/openerp.glade, line: 4272
 # File: bin/openerp.glade, line: 6655
-#: bin/openerp.glade:4678
+#: bin/openerp.glade:4649
 msgid "<b>Your name:</b>"
 msgstr "<b>Sinu nimi:</b>"
 
@@ -3038,367 +3046,367 @@ msgstr "<b>Sinu nimi:</b>"
 # File: bin/openerp.glade, line: 2149
 # File: bin/openerp.glade, line: 6746
 # File: bin/openerp.glade, line: 8132
-#: bin/openerp.glade:4769 bin/openerp.glade:6155
+#: bin/openerp.glade:4740 bin/openerp.glade:6110
 msgid "Hello World!"
 msgstr "Tere Maailm!"
 
 #
 # File: bin/openerp.glade, line: 6808
 # File: bin/openerp.glade, line: 6808
-#: bin/openerp.glade:4831
+#: bin/openerp.glade:4802
 msgid "Keyboard shortcuts"
 msgstr "Klaviatuuri kiirklahvid"
 
 #
 # File: bin/openerp.glade, line: 5701
-#: bin/openerp.glade:4853
+#: bin/openerp.glade:4824
 msgid "<b>Shortcuts for OpenERP</b>"
 msgstr "<b>Otseteed OpenERP-ile</b>"
 
 #
 # File: bin/openerp.glade, line: 6844
 # File: bin/openerp.glade, line: 6844
-#: bin/openerp.glade:4867
+#: bin/openerp.glade:4838
 msgid "Close window without saving"
 msgstr "Sulge aken salvestamata"
 
 #
 # File: bin/openerp.glade, line: 6859
 # File: bin/openerp.glade, line: 6859
-#: bin/openerp.glade:4882
+#: bin/openerp.glade:4853
 msgid "<Ctrl> + <Esc>"
 msgstr "<Ctrl> + <Esc>"
 
 #
 # File: bin/openerp.glade, line: 6873
 # File: bin/openerp.glade, line: 6873
-#: bin/openerp.glade:4896
+#: bin/openerp.glade:4867
 msgid "<i>When editing a resource in a popup window</i>"
 msgstr "<i>Muutes vahendit hüpikaknas</i>"
 
 #
 # File: bin/openerp.glade, line: 6889
 # File: bin/openerp.glade, line: 6889
-#: bin/openerp.glade:4912
+#: bin/openerp.glade:4883
 msgid "Save and Close window"
 msgstr "Salvesta ja Sulge aken"
 
 #
 # File: bin/openerp.glade, line: 6904
 # File: bin/openerp.glade, line: 6904
-#: bin/openerp.glade:4927
+#: bin/openerp.glade:4898
 msgid "<Ctrl> + <Enter>"
 msgstr "<Ctrl> + <Enter>"
 
 #
 # File: bin/openerp.glade, line: 6917
 # File: bin/openerp.glade, line: 6917
-#: bin/openerp.glade:4940
+#: bin/openerp.glade:4911
 msgid "Switch view mode"
 msgstr "Muuda vaate viisi"
 
 #
 # File: bin/openerp.glade, line: 6932
 # File: bin/openerp.glade, line: 6932
-#: bin/openerp.glade:4955
+#: bin/openerp.glade:4926
 msgid "<Ctrl> + L"
 msgstr "<Ctrl> + L"
 
 #
 # File: bin/openerp.glade, line: 6945
 # File: bin/openerp.glade, line: 6945
-#: bin/openerp.glade:4968
+#: bin/openerp.glade:4939
 msgid "Next record"
 msgstr "Järgmine kirje"
 
 #
 # File: bin/openerp.glade, line: 6960
 # File: bin/openerp.glade, line: 6960
-#: bin/openerp.glade:4983
+#: bin/openerp.glade:4954
 msgid "Previous record"
 msgstr "Eelmine kirje"
 
 #
 # File: bin/openerp.glade, line: 6975
 # File: bin/openerp.glade, line: 6975
-#: bin/openerp.glade:4998
+#: bin/openerp.glade:4969
 msgid "<PgDn>"
 msgstr "<PgDn>"
 
 #
 # File: bin/openerp.glade, line: 6988
 # File: bin/openerp.glade, line: 6988
-#: bin/openerp.glade:5011
+#: bin/openerp.glade:4982
 msgid "<PgUp>"
 msgstr "<PgUp>"
 
 #
 # File: bin/openerp.glade, line: 7016
 # File: bin/openerp.glade, line: 7016
-#: bin/openerp.glade:5039
+#: bin/openerp.glade:5010
 msgid "Save"
 msgstr "Salvesta"
 
 #
 # File: bin/openerp.glade, line: 7031
 # File: bin/openerp.glade, line: 7031
-#: bin/openerp.glade:5054
+#: bin/openerp.glade:5025
 msgid "<Ctrl> + W"
 msgstr "<Ctrl> + W"
 
 #
 # File: bin/openerp.glade, line: 7044
 # File: bin/openerp.glade, line: 7044
-#: bin/openerp.glade:5067
+#: bin/openerp.glade:5038
 msgid "<Ctrl> + S"
 msgstr "<ctrl> + S"
 
 #
 # File: bin/openerp.glade, line: 7072
 # File: bin/openerp.glade, line: 7072
-#: bin/openerp.glade:5095
+#: bin/openerp.glade:5066
 msgid "<Ctrl> + <PgDn>"
 msgstr "<Ctrl> + <PgDn>"
 
 #
 # File: bin/openerp.glade, line: 7085
 # File: bin/openerp.glade, line: 7085
-#: bin/openerp.glade:5108
+#: bin/openerp.glade:5079
 msgid "Previous tab"
 msgstr "Eelmine kaart"
 
 #
 # File: bin/openerp.glade, line: 7100
 # File: bin/openerp.glade, line: 7100
-#: bin/openerp.glade:5123
+#: bin/openerp.glade:5094
 msgid "<Ctrl> + <PgUp>"
 msgstr "<Ctrl> + <PgUp>"
 
 #
 # File: bin/openerp.glade, line: 7113
 # File: bin/openerp.glade, line: 7113
-#: bin/openerp.glade:5136
+#: bin/openerp.glade:5107
 msgid "New"
 msgstr "Uus"
 
 #
 # File: bin/openerp.glade, line: 7128
 # File: bin/openerp.glade, line: 7128
-#: bin/openerp.glade:5151
+#: bin/openerp.glade:5122
 msgid "<Ctrl> + N"
 msgstr "<Ctrl> + N"
 
 #
 # File: bin/openerp.glade, line: 7141
 # File: bin/openerp.glade, line: 7141
-#: bin/openerp.glade:5164
+#: bin/openerp.glade:5135
 msgid "Delete"
 msgstr "Kustuta"
 
 #
 # File: bin/openerp.glade, line: 7156
 # File: bin/openerp.glade, line: 7156
-#: bin/openerp.glade:5179
+#: bin/openerp.glade:5150
 msgid "<Ctrl> + D"
 msgstr "<Ctrl> + D"
 
 #
 # File: bin/openerp.glade, line: 7169
 # File: bin/openerp.glade, line: 7169
-#: bin/openerp.glade:5192
+#: bin/openerp.glade:5163
 msgid "Find / Search"
 msgstr "Leia / Otsi"
 
 #
 # File: bin/openerp.glade, line: 7184
 # File: bin/openerp.glade, line: 7184
-#: bin/openerp.glade:5207
+#: bin/openerp.glade:5178
 msgid "<Ctrl> + F"
 msgstr "<Ctrl> + F"
 
 #
 # File: bin/openerp.glade, line: 7197
 # File: bin/openerp.glade, line: 7197
-#: bin/openerp.glade:5220
+#: bin/openerp.glade:5191
 msgid "Connect"
 msgstr "Ühendu"
 
 #
 # File: bin/openerp.glade, line: 7212
 # File: bin/openerp.glade, line: 7212
-#: bin/openerp.glade:5235
+#: bin/openerp.glade:5206
 msgid "<Ctrl> + O"
 msgstr "<Ctrl> + O"
 
 #
 # File: bin/openerp.glade, line: 7226
 # File: bin/openerp.glade, line: 7226
-#: bin/openerp.glade:5249
+#: bin/openerp.glade:5220
 msgid "Main Shortcuts"
 msgstr "Peamised Otseteed"
 
 #
 # File: bin/openerp.glade, line: 7243
 # File: bin/openerp.glade, line: 7243
-#: bin/openerp.glade:5266
+#: bin/openerp.glade:5237
 msgid "F2"
 msgstr "F2"
 
 #
 # File: bin/openerp.glade, line: 7256
 # File: bin/openerp.glade, line: 7256
-#: bin/openerp.glade:5279
+#: bin/openerp.glade:5250
 msgid "<b>Shortcuts in relation fields</b>"
 msgstr "<b>Otseteed seotud väljadel</b>"
 
 #
 # File: bin/openerp.glade, line: 7271
 # File: bin/openerp.glade, line: 7271
-#: bin/openerp.glade:5294
+#: bin/openerp.glade:5265
 msgid "<b>Shortcuts in text entries</b>"
 msgstr "<b>Otseteed tekstisisestustes</b>"
 
 #
 # File: bin/openerp.glade, line: 7284
 # File: bin/openerp.glade, line: 7284
-#: bin/openerp.glade:5307
+#: bin/openerp.glade:5278
 msgid "Open current field"
 msgstr "Ava praegune väli"
 
 #
 # File: bin/openerp.glade, line: 7299
 # File: bin/openerp.glade, line: 7299
-#: bin/openerp.glade:5322
+#: bin/openerp.glade:5293
 msgid "Add a new line/field"
 msgstr "Lisa uus rida/väli"
 
 #
 # File: bin/openerp.glade, line: 7314
 # File: bin/openerp.glade, line: 7314
-#: bin/openerp.glade:5337
+#: bin/openerp.glade:5308
 msgid "F1"
 msgstr "F1"
 
 #
 # File: bin/openerp.glade, line: 7327
 # File: bin/openerp.glade, line: 7327
-#: bin/openerp.glade:5350
+#: bin/openerp.glade:5321
 msgid "Auto-Complete text field"
 msgstr "Automaattäida tekstiväli"
 
 #
 # File: bin/openerp.glade, line: 7342
 # File: bin/openerp.glade, line: 7342
-#: bin/openerp.glade:5365
+#: bin/openerp.glade:5336
 msgid "<Enter>"
 msgstr "<Enter>"
 
 #
 # File: bin/openerp.glade, line: 7355
 # File: bin/openerp.glade, line: 7355
-#: bin/openerp.glade:5378
+#: bin/openerp.glade:5349
 msgid "Previous editable widget"
 msgstr "Eelmine muudetav vidin"
 
-#: bin/openerp.glade:5393
+#: bin/openerp.glade:5364
 msgid "<Shift> + <Tab>"
 msgstr "<Shift> + <Tab>"
 
 #
 # File: bin/openerp.glade, line: 7383
 # File: bin/openerp.glade, line: 7383
-#: bin/openerp.glade:5406
+#: bin/openerp.glade:5377
 msgid "Next editable widget"
 msgstr "Järgmine muudetav vidin"
 
 #
 # File: bin/openerp.glade, line: 7398
 # File: bin/openerp.glade, line: 7398
-#: bin/openerp.glade:5421
+#: bin/openerp.glade:5392
 msgid "<Tab>"
 msgstr "<Kaart>"
 
 #
 # File: bin/openerp.glade, line: 7411
 # File: bin/openerp.glade, line: 7411
-#: bin/openerp.glade:5434
+#: bin/openerp.glade:5405
 msgid "Paste selected text"
 msgstr "Kleebi valitud tekst"
 
 #
 # File: bin/openerp.glade, line: 7426
 # File: bin/openerp.glade, line: 7426
-#: bin/openerp.glade:5449
+#: bin/openerp.glade:5420
 msgid "Copy selected text"
 msgstr "Kopeeri valitud tekst"
 
 #
 # File: bin/openerp.glade, line: 7441
 # File: bin/openerp.glade, line: 7441
-#: bin/openerp.glade:5464
+#: bin/openerp.glade:5435
 msgid "Cut selected text"
 msgstr "Lõika valitud tekst"
 
 #
 # File: bin/openerp.glade, line: 7456
 # File: bin/openerp.glade, line: 7456
-#: bin/openerp.glade:5479
+#: bin/openerp.glade:5450
 msgid "<Ctrl> + V"
 msgstr "<Ctrl> + V"
 
 #
 # File: bin/openerp.glade, line: 7469
 # File: bin/openerp.glade, line: 7469
-#: bin/openerp.glade:5492
+#: bin/openerp.glade:5463
 msgid "<Ctrl> + C"
 msgstr "<Ctrl> + C"
 
 #
 # File: bin/openerp.glade, line: 7482
 # File: bin/openerp.glade, line: 7482
-#: bin/openerp.glade:5505
+#: bin/openerp.glade:5476
 msgid "<Ctrl> + X"
 msgstr "<Ctrl> + X"
 
 #
 # File: bin/openerp.glade, line: 7499
 # File: bin/openerp.glade, line: 7499
-#: bin/openerp.glade:5522
+#: bin/openerp.glade:5493
 msgid "Edition Widgets"
 msgstr "Vidinate Muutmine"
 
 #
 # File: bin/openerp.glade, line: 7537
 # File: bin/openerp.glade, line: 7537
-#: bin/openerp.glade:5560
+#: bin/openerp.glade:5533
 msgid "Import from CSV"
 msgstr "Impordi CSV failist"
 
 #
 # File: bin/openerp.glade, line: 7582
 # File: bin/openerp.glade, line: 7582
-#: bin/openerp.glade:5605
+#: bin/openerp.glade:5578
 msgid "<b>All fields</b>"
 msgstr "<b>Kõik väljad</b>"
 
 #
 # File: bin/openerp.glade, line: 7719
 # File: bin/openerp.glade, line: 7719
-#: bin/openerp.glade:5742
+#: bin/openerp.glade:5715
 msgid "N_othing"
 msgstr "Midagi"
 
 #
 # File: bin/openerp.glade, line: 7778
 # File: bin/openerp.glade, line: 7778
-#: bin/openerp.glade:5801
+#: bin/openerp.glade:5852
 msgid "Auto-Detect"
 msgstr "Automaattuvastus"
 
 #
 # File: bin/openerp.glade, line: 7833
 # File: bin/openerp.glade, line: 7833
-#: bin/openerp.glade:5856
+#: bin/openerp.glade:5772
 msgid "<b>Fields to import</b>"
 msgstr "<b>Väljad importimiseks</b>"
 
@@ -3412,21 +3420,21 @@ msgstr "Fail Importimiseks:"
 #
 # File: bin/openerp.glade, line: 7942
 # File: bin/openerp.glade, line: 7942
-#: bin/openerp.glade:5965
+#: bin/openerp.glade:5930
 msgid "Lines to Skip:"
 msgstr "Read Vahele Jätmiseks"
 
 #
 # File: bin/openerp.glade, line: 7971
 # File: bin/openerp.glade, line: 7971
-#: bin/openerp.glade:5994
+#: bin/openerp.glade:5959
 msgid "Text Delimiter:"
 msgstr "Teksti Eraldaja:"
 
 #
 # File: bin/openerp.glade, line: 7999
 # File: bin/openerp.glade, line: 7999
-#: bin/openerp.glade:6022
+#: bin/openerp.glade:5987
 msgid "Encoding:"
 msgstr "Kodeering:"
 
@@ -3440,76 +3448,76 @@ msgstr "Välja Eraldaja:"
 #
 # File: bin/openerp.glade, line: 8024
 # File: bin/openerp.glade, line: 8024
-#: bin/openerp.glade:6047
+#: bin/openerp.glade:6012
 msgid "CSV Parameters"
 msgstr "CSV Parameetrid"
 
 #
 # File: bin/openerp.glade, line: 8199
 # File: bin/openerp.glade, line: 8199
-#: bin/openerp.glade:6222
+#: bin/openerp.glade:6177
 msgid "Server"
 msgstr "Server"
 
 #
 # File: bin/openerp.glade, line: 7080
-#: bin/openerp.glade:6232
+#: bin/openerp.glade:6187
 msgid "<b>Connect to a OpenERP server</b>"
 msgstr "<b>Ühendu OpenERP serverisse</b>"
 
 #
 # File: bin/openerp.glade, line: 8268
 # File: bin/openerp.glade, line: 8268
-#: bin/openerp.glade:6291
+#: bin/openerp.glade:6246
 msgid "Protocol connection:"
 msgstr "Ühenduse Protokoll:"
 
 #
 # File: bin/openerp.glade, line: 8314
 # File: bin/openerp.glade, line: 8314
-#: bin/openerp.glade:6337
+#: bin/openerp.glade:6292
 msgid "Port:"
 msgstr "Port:"
 
 #
 # File: bin/openerp.glade, line: 8366
 # File: bin/openerp.glade, line: 8366
-#: bin/openerp.glade:6389
+#: bin/openerp.glade:6344
 msgid "Choose a database..."
 msgstr "Vali andmebaas:"
 
 #
 # File: bin/openerp.glade, line: 8381
 # File: bin/openerp.glade, line: 8381
-#: bin/openerp.glade:6404
+#: bin/openerp.glade:6359
 msgid "<b>Backup a database</b>"
 msgstr "<b>Varunda andmebaas</b>"
 
 #
 # File: bin/openerp.glade, line: 8612
 # File: bin/openerp.glade, line: 8612
-#: bin/openerp.glade:6645
+#: bin/openerp.glade:6600
 msgid "Restore a database"
 msgstr "Taasta andmebaas"
 
 #
 # File: bin/openerp.glade, line: 8625
 # File: bin/openerp.glade, line: 8625
-#: bin/openerp.glade:6658
+#: bin/openerp.glade:6613
 msgid "<b>Restore a database</b>"
 msgstr "<b>Taasta andmebaas</b>"
 
 #
 # File: bin/openerp.glade, line: 8669
 # File: bin/openerp.glade, line: 8669
-#: bin/openerp.glade:6702
+#: bin/openerp.glade:6657
 msgid "(must not contain any special char)"
 msgstr "(ei tohi sisaldada erimärke)"
 
 #
 # File: bin/openerp.glade, line: 8698
 # File: bin/openerp.glade, line: 8698
-#: bin/openerp.glade:6732
+#: bin/openerp.glade:6687
 msgid "New database name:"
 msgstr "Uue andmebaasi nimi:"
 
@@ -3520,27 +3528,27 @@ msgstr "Uue andmebaasi nimi:"
 # File: bin/openerp.glade, line: 8798
 # File: bin/openerp.glade, line: 8944
 # File: bin/openerp.glade, line: 9443
-#: bin/openerp.glade:6832 bin/openerp.glade:6978 bin/openerp.glade:7493
+#: bin/openerp.glade:6787 bin/openerp.glade:6933 bin/openerp.glade:7451
 msgid "http://localhost:8069"
 msgstr "http://localhost:8069"
 
 #
 # File: bin/openerp.glade, line: 8872
 # File: bin/openerp.glade, line: 8872
-#: bin/openerp.glade:6906
+#: bin/openerp.glade:6861
 msgid "Create a new database"
 msgstr "Loo uus andmebaas"
 
 #
 # File: bin/openerp.glade, line: 8885
 # File: bin/openerp.glade, line: 8885
-#: bin/openerp.glade:6919
+#: bin/openerp.glade:6874
 msgid "<b>Create a new database</b>"
 msgstr "<b>Loo uus andmebaas</b>"
 
 #
 # File: bin/openerp.glade, line: 7827
-#: bin/openerp.glade:6990
+#: bin/openerp.glade:6945
 msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
@@ -3548,14 +3556,14 @@ msgstr ""
 "See on Tiny ERP serveri link. Kasuta 'localhost', kui server on paigaldatud "
 "sellesse arvutisse. Klõpsa 'Muuda', et muuta aadressi."
 
-#: bin/openerp.glade:6994
+#: bin/openerp.glade:6949
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Server:"
 msgstr ""
 
 #
 # File: bin/openerp.glade, line: 7861
-#: bin/openerp.glade:7025
+#: bin/openerp.glade:6980
 msgid ""
 "This is the password of the user that have the rights to administer "
 "databases. This is not a OpenERP user, just a super administrator. If you "
@@ -3565,26 +3573,26 @@ msgstr ""
 "kasutaja vaid super administraator. Kui sa seda ei muutnud siis parool "
 "pärast paigaldamist on 'admin'"
 
-#: bin/openerp.glade:7029
+#: bin/openerp.glade:6984
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
 
-#: bin/openerp.glade:7048
+#: bin/openerp.glade:7003
 msgid "admin"
 msgstr ""
 
 #
 # File: bin/openerp.glade, line: 7897
-#: bin/openerp.glade:7062
+#: bin/openerp.glade:7017
 msgid "(<i>admin</i>, by default)"
 msgstr "(<i>admin</i>, vaikimisi)"
 
 #
 # File: bin/openerp.glade, line: 9091
 # File: bin/openerp.glade, line: 9091
-#: bin/openerp.glade:7127
+#: bin/openerp.glade:7082
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
@@ -3592,7 +3600,7 @@ msgstr ""
 "Vali loodava andmebaasi nimi. Nimi ei tohi sisaldada erimärke. Näidis: "
 "'terp'."
 
-#: bin/openerp.glade:7129
+#: bin/openerp.glade:7084
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>New Database Name:"
 msgstr ""
@@ -3600,7 +3608,7 @@ msgstr ""
 #
 # File: bin/openerp.glade, line: 9117
 # File: bin/openerp.glade, line: 9117
-#: bin/openerp.glade:7154
+#: bin/openerp.glade:7109
 msgid ""
 "Choose the default language that will be installed for this database. You "
 "will be able to install new languages after installation through the "
@@ -3609,37 +3617,37 @@ msgstr ""
 "Vali vaikimisi keel, mis paigaldatakse selle andmebaasi jaoks. Sul on pärast "
 "võimalik paigaldada uusi keeli läbi administreerimise menüü."
 
-#: bin/openerp.glade:7156
+#: bin/openerp.glade:7111
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
 msgstr ""
 
-#: bin/openerp.glade:7169
+#: bin/openerp.glade:7124
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
 msgstr ""
 
-#: bin/openerp.glade:7171
+#: bin/openerp.glade:7126
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Administrator "
 "Password:"
 msgstr ""
 
-#: bin/openerp.glade:7184
+#: bin/openerp.glade:7139
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
 
-#: bin/openerp.glade:7186
+#: bin/openerp.glade:7141
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
 msgstr ""
 
 #
 # File: bin/openerp.glade, line: 8110
-#: bin/openerp.glade:7279
+#: bin/openerp.glade:7234
 msgid ""
 "Check this box if you want demonstration data to be installed on your new "
 "database. These data will help you to understand OpenERP, with predefined "
@@ -3649,7 +3657,7 @@ msgstr ""
 "andmebaasi. Need andmed aitavad teil paremini mõista OpenERP-i "
 "(eelmääratletud toodted, partnerid jms)."
 
-#: bin/openerp.glade:7282
+#: bin/openerp.glade:7237
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
 "Data:"
@@ -3658,55 +3666,55 @@ msgstr ""
 #
 # File: bin/openerp.glade, line: 9299
 # File: bin/openerp.glade, line: 9299
-#: bin/openerp.glade:7349
+#: bin/openerp.glade:483 bin/openerp.glade:7304
 msgid "Change password"
 msgstr "Muuda parooli"
 
 #
 # File: bin/openerp.glade, line: 9316
 # File: bin/openerp.glade, line: 9316
-#: bin/openerp.glade:7366
+#: bin/openerp.glade:7321
 msgid "<b>Change your super admin password</b>"
 msgstr "<b>Muuda Superadministraatori parool</b>"
 
 #
 # File: bin/openerp.glade, line: 9469
 # File: bin/openerp.glade, line: 9469
-#: bin/openerp.glade:7519
+#: bin/openerp.glade:7477
 msgid "Old password:"
 msgstr "Vana parool:"
 
 #
 # File: bin/openerp.glade, line: 9482
 # File: bin/openerp.glade, line: 9482
-#: bin/openerp.glade:7532
+#: bin/openerp.glade:7490
 msgid "New password:"
 msgstr "Uus parool:"
 
 #
 # File: bin/openerp.glade, line: 9495
 # File: bin/openerp.glade, line: 9495
-#: bin/openerp.glade:7545
+#: bin/openerp.glade:7503
 msgid "New password confirmation:"
 msgstr "Uue parooli kinnitus:"
 
 #
 # File: bin/openerp.glade, line: 8425
-#: bin/openerp.glade:7604
+#: bin/openerp.glade:7562
 msgid "OpenERP Message"
 msgstr "OpenERP Sõnum"
 
 #
 # File: bin/openerp.glade, line: 9930
 # File: bin/openerp.glade, line: 9930
-#: bin/openerp.glade:7788
+#: bin/openerp.glade:7746
 msgid "Concurrency exception"
 msgstr "Kokkulangevuse erand"
 
 #
 # File: bin/openerp.glade, line: 9955
 # File: bin/openerp.glade, line: 9955
-#: bin/openerp.glade:7813
+#: bin/openerp.glade:7771
 msgid ""
 "<b>\n"
 "Write concurrency warning:\n"
@@ -3729,44 +3737,44 @@ msgstr ""
 #
 # File: bin/openerp.glade, line: 10018
 # File: bin/openerp.glade, line: 10018
-#: bin/openerp.glade:7876
+#: bin/openerp.glade:7834
 msgid "Compare"
 msgstr "Võrdle"
 
 #
 # File: bin/openerp.glade, line: 10064
 # File: bin/openerp.glade, line: 10064
-#: bin/openerp.glade:7922
+#: bin/openerp.glade:7880
 msgid "Write anyway"
 msgstr "Kirjuta siiski"
 
 #
 # File: bin/openerp.glade, line: 8964
-#: bin/openerp.glade:7952 bin/openerp.glade:7962
+#: bin/openerp.glade:7910 bin/openerp.glade:7920
 msgid "window1"
 msgstr "aken1"
 
 #
 # File: bin/openerp.glade, line: 9036
-#: bin/openerp.glade:8034
+#: bin/openerp.glade:7992
 msgid "Today"
 msgstr "Täna"
 
 #
 # File: bin/openerp.glade, line: 9082
-#: bin/openerp.glade:8080
+#: bin/openerp.glade:8038
 msgid "September 2008"
 msgstr "September 2008"
 
 #
 # File: bin/openerp.glade, line: 9096
-#: bin/openerp.glade:8094
+#: bin/openerp.glade:8052
 msgid "Day"
 msgstr "Päev"
 
 #
 # File: bin/openerp.glade, line: 9120
-#: bin/openerp.glade:8118
+#: bin/openerp.glade:8076
 msgid "Month"
 msgstr "Kuu"
 
@@ -3792,11 +3800,11 @@ msgstr ""
 msgid "Remove Filter"
 msgstr ""
 
-#: bin/openerp.glade:8349
+#: bin/openerp.glade:8230
 msgid "Filter Entry"
 msgstr ""
 
-#: bin/openerp.glade:8395
+#: bin/openerp.glade:8276
 msgid "Enter Filter Name:"
 msgstr ""
 
