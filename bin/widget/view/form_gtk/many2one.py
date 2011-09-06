@@ -260,7 +260,8 @@ class many2one(interface.widget_interface):
                 self.display(self._view.model, self._view.modelfield)
                 self.ok = True
                 return True
-
+            #Updating the context in order to avoid domain of name_search and custom domain of search_context
+            context.update({'name_search':name_search})
             win = win_search(self.attrs['relation'], sel_multi=False, ids=map(lambda x: x[0], ids), context=context, domain=domain, parent=self._window)
             ids = win.go()
             if ids:
