@@ -195,3 +195,32 @@ def format(percent, value, grouping=True, monetary=False):
         if grouping:
             formatted = group(formatted, monetary=monetary, grouping=lang_grouping, thousands_sep=thousands_sep)[0]
     return formatted
+
+def str2int(string):
+    ''' Converts a string to an integer according to the locale settings
+        that the user has in Administration/Translations/Languages.
+    '''
+    assert isinstance(string, basestring)
+    return str2float(string, int)
+
+def str2float(string, func=float):
+    ''' Parses a string as a float according to the locale settings
+    that the user has in Administration/Translations/Languages.
+    '''
+    assert isinstance(string, basestring)
+    try:
+        #First, get rid of the thousand separator
+        ts = LOCALE_CACHE.get('thousands_sep')
+        if ts:
+            string = string.replace(ts, '')
+        #next, replace the decimal point with a dot
+        dd = LOCALE_CACHE.get('decimal_point')
+        if dd:
+            string = string.replace(dd, '.')
+        #finally, parse the string
+        return func(string)
+    except:
+        type = 'float'
+        if func == int:
+            type = 'integer'
+        raise ValueError("%r does not represent a valid %s value" % (string,type))

@@ -343,7 +343,7 @@ class Char(object):
 class Int(Char):
 
     def value_from_text(self, model, text):
-        return tools.str2int(text)
+        return user_locale_format.str2int(text)
 
     def get_textual_value(self, model):
         count = False
@@ -472,7 +472,7 @@ class Float(Char):
         return converted_val
 
     def value_from_text(self, model, text):
-        return tools.str2float(text)
+        return user_locale_format.str2float(text)
 
 class FloatTime(Char):
 

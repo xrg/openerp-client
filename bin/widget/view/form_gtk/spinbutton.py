@@ -22,7 +22,8 @@
 import gtk
 import sys
 import interface
-
+import ctypes
+from tools import user_locale_format
 
 class spinbutton(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
@@ -30,7 +31,6 @@ class spinbutton(interface.widget_interface):
 
         adj = gtk.Adjustment(0.0, -sys.maxint, sys.maxint, 1.0, 5.0)
         self.widget = gtk.SpinButton(adj, 1.0, digits=int( attrs.get('digits',(14,2))[1] ) )
-        self.widget.set_numeric(True)
         self.widget.set_activates_default(True)
         self.widget.connect('populate-popup', self._menu_open)
         if self.attrs['readonly']:
@@ -38,6 +38,24 @@ class spinbutton(interface.widget_interface):
         self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
         self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
         self.widget.connect('activate', self.sig_activate)
+        self.widget.connect('input', self.format_input)
+        self.widget.connect('output', self.format_output)
+
+    def format_output(self, spin):
+        digits = spin.get_digits()
+        value = spin.get_value()
+        text = user_locale_format.format('%.' + str(digits) + 'f', value)
+        spin.set_text(text)
+        return True
+ 
+    def format_input(self, spin, new_value_pointer):
+        text = spin.get_text()
+        if text:
+            value = user_locale_format.str2int(text)
+            value_location = ctypes.c_double.from_address(hash(new_value_pointer))
+            value_location.value = float(value)
+            return True
+        return False
 
     def set_value(self, model, model_field):
         self.widget.update()
