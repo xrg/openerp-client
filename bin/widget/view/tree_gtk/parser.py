@@ -504,7 +504,7 @@ class M2O(Char):
 
         domain = model[self.field_name].domain_get(model)
         context = model[self.field_name].context_get(model)
-
+        context.update({'name_search':text or ''})
         names = rpc.name_search(text, domain, 'ilike', context)
         if len(names) != 1:
             return self.search_remote(relation, [x[0] for x in names],
