@@ -523,7 +523,7 @@ class M2O(Char):
             id = modelfield.get(model)
         else:
             rpc = RPCProxy(relation)
-
+            context.update({'name_search':text or ''})
             names = rpc.name_search(text, domain, 'ilike', context)
             if len(names) == 1:
                 return True, names[0]
@@ -576,6 +576,7 @@ class M2M(Char):
         rpc = RPCProxy(relation)
         domain = model[self.field_name].domain_get(model)
         context = model[self.field_name].context_get(model)
+        context.update({'name_search':text or ''})
         names = rpc.name_search(text, domain, 'ilike', context)
         ids = [x[0] for x in names]
         win = win_search(relation, sel_multi=True, ids=ids, context=context, domain=domain)
