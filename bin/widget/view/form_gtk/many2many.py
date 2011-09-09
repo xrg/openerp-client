@@ -142,7 +142,6 @@ class many2many(interface.widget_interface):
     def _sig_add(self, *args):
         domain = self._view.modelfield.domain_get(self._view.model)
         context = self._view.modelfield.context_get(self._view.model)
-
         records = rpc.session.rpc_exec_auth('/object', 'execute',
                                         self.attrs['relation'], 'name_search',
                                         self.wid_text.get_text(), domain, 'ilike', context)

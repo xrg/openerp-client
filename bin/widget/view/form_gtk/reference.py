@@ -165,7 +165,7 @@ class reference(interface.widget_interface):
             if not self._readonly and ( self.wid_text.get_text() or not leave):
                 domain = self._view.modelfield.domain_get(self._view.model)
                 context = self._view.modelfield.context_get(self._view.model)
-
+                context.update({'name_search':self.wid_text.get_text() or ''})
                 ids = rpc.session.rpc_exec_auth('/object', 'execute', model,
                         'name_search', self.wid_text.get_text(), domain,
                         'ilike', context)
