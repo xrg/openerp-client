@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-07-22 22:10+0000\n"
-"Last-Translator: kifcaliph <kifcaliph@hotmail.com>\n"
+"PO-Revision-Date: 2011-09-15 16:07+0000\n"
+"Last-Translator: Majed Majbour <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-15 05:09+0000\n"
-"X-Generator: Launchpad (build 13921)\n"
+"X-Launchpad-Export-Date: 2011-09-16 05:02+0000\n"
+"X-Generator: Launchpad (build 13955)\n"
 "Language: ar\n"
 
 #: bin/plugins/__init__.py:27
@@ -367,7 +367,7 @@ msgstr "لم يتم إختيار سجل ! يمكنك الإرفاق من خلا�
 
 #: bin/modules/gui/window/form.py:264
 msgid "You have to select a record !"
-msgstr ""
+msgstr "يجب أن تحدد سجل"
 
 #: bin/modules/gui/window/form.py:270
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:41
@@ -400,20 +400,22 @@ msgid ""
 "Record is not saved ! \n"
 " Do You want to Clear Current Record ?"
 msgstr ""
+"لم يتم حفظ السجل\n"
+" هل تريد مسح السجل؟"
 
 #: bin/widget/view/form_gtk/one2many_list.py:388
 #: bin/modules/gui/window/form.py:290
 msgid "Are you sure to remove this record ?"
-msgstr ""
+msgstr "هل أنت متأكد بأنك تريد حذف هذا السجل؟"
 
 #: bin/widget/view/form_gtk/one2many_list.py:390
 #: bin/modules/gui/window/form.py:292
 msgid "Are you sure to remove those records ?"
-msgstr ""
+msgstr "هل أنت متأكد بأنك تريد حذف هذه السجلات؟"
 
 #: bin/modules/gui/window/form.py:296
 msgid "Resources cleared."
-msgstr ""
+msgstr "تم مسح السجلات."
 
 #: bin/modules/gui/window/form.py:298
 msgid "Resources successfully removed."
@@ -421,7 +423,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:339
 msgid "Working now on the duplicated document !"
-msgstr ""
+msgstr "العمل على مستند مكرر!"
 
 #: bin/modules/gui/window/form.py:355
 msgid "Document Saved."
@@ -598,6 +600,8 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"تم تعديل اللغة الإفتراضية للواجهات, لا تنس أن تعيد تشغيل البرنامج للحصول على "
+"الواجهات بلغتك"
 
 #: bin/modules/gui/window/win_preference.py:88
 msgid "Default language modified !"
