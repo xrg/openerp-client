@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2011-09-16 17:25+0000\n"
+"Last-Translator: Syraxes <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-15 05:10+0000\n"
-"X-Generator: Launchpad (build 13921)\n"
+"X-Launchpad-Export-Date: 2011-09-17 05:22+0000\n"
+"X-Generator: Launchpad (build 13955)\n"
 "Language: ro\n"
 
 #: bin/plugins/__init__.py:27
@@ -1157,7 +1157,7 @@ msgstr "Tipărirea diagramei"
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "Închide %s curent(ă)"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
@@ -1167,7 +1167,7 @@ msgstr ""
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "Ștergere %s curent"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
@@ -1265,7 +1265,7 @@ msgstr "Schimbă"
 #: bin/widget/view/form_gtk/many2many.py:106
 #: bin/widget/view/form_gtk/one2many_list.py:238
 msgid "Choose Limit"
-msgstr ""
+msgstr "Alegeți limita"
 
 #: bin/widget/view/form_gtk/one2many_list.py:279
 msgid "You have to select a resource !"
@@ -1293,7 +1293,7 @@ msgstr "Imagini"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "Nu există nici o imagine de salvat !"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
@@ -1693,7 +1693,7 @@ msgstr "_Ajutor"
 
 #: bin/openerp.glade:1140
 msgid "Enable Debug Mode Tooltips"
-msgstr ""
+msgstr "Activare Debug Mode Tooltips"
 
 #: bin/openerp.glade:1148 bin/openerp.glade:4366
 msgid "Support Request"
@@ -2615,7 +2615,7 @@ msgstr "Operatori condiționali"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
-msgstr ""
+msgstr "Alegerea va fi aplicată filtrului următor"
 
 #: bin/openerp.glade:8317
 msgid ""
