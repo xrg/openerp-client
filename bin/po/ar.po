@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-09-15 16:07+0000\n"
+"PO-Revision-Date: 2011-09-17 15:18+0000\n"
 "Last-Translator: Majed Majbour <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-16 05:02+0000\n"
+"X-Launchpad-Export-Date: 2011-09-18 05:13+0000\n"
 "X-Generator: Launchpad (build 13955)\n"
 "Language: ar\n"
 
@@ -359,7 +359,7 @@ msgstr "لم يتمكن من الإحتفاظ بنسخة لقاعدة البيا
 
 #: bin/modules/gui/window/form.py:189
 msgid "Resource ID does not exist for this object!"
-msgstr ""
+msgstr "الرقم المعرّف للمورد غير موجود لهذا الكائن!"
 
 #: bin/modules/gui/window/form.py:247
 msgid "No record selected ! You can only attach to existing record."
@@ -393,7 +393,7 @@ msgstr "آخر تعديل بتاريخ"
 
 #: bin/modules/gui/window/form.py:275
 msgid "Internal Module Data ID"
-msgstr ""
+msgstr "رقم البيانات المعرّف للوحدة الداخلية"
 
 #: bin/modules/gui/window/form.py:269
 msgid ""
@@ -419,7 +419,7 @@ msgstr "تم مسح السجلات."
 
 #: bin/modules/gui/window/form.py:298
 msgid "Resources successfully removed."
-msgstr ""
+msgstr "تم حذف الموارد بنجاح."
 
 #: bin/modules/gui/window/form.py:339
 msgid "Working now on the duplicated document !"
@@ -637,31 +637,33 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:50
 msgid " record(s) saved !"
-msgstr ""
+msgstr " تم حفظ السجلات!"
 
 #: bin/modules/gui/window/win_export.py:53
 msgid ""
 "Operation failed !\n"
 "I/O error"
 msgstr ""
+"فشل في العملية\n"
+"خطأ دخل/خرج"
 
 #: bin/modules/gui/window/win_export.py:79
 #: bin/modules/gui/window/win_export.py:105
 msgid "Error Opening Excel !"
-msgstr ""
+msgstr "خطأ في فتح إكسل!"
 
 #: bin/modules/gui/window/win_export.py:317
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "ما هو الاسم لهذا التصدير؟"
 
 #: bin/modules/gui/window/win_export.py:351
 msgid "Exportation Error !"
-msgstr ""
+msgstr "خطأ في التصدير!"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1772
 #: bin/modules/gui/window/win_search.py:49
 msgid "OpenERP - Link"
-msgstr ""
+msgstr "رابط - OpenERP"
 
 #: bin/modules/gui/window/win_search.py:126
 #, python-format
@@ -705,7 +707,7 @@ msgstr ""
 
 #: bin/common/common.py:89
 msgid "Close current tip"
-msgstr ""
+msgstr "إغلاق النصيحة الحالية"
 
 #: bin/common/common.py:90
 msgid ""
@@ -717,7 +719,7 @@ msgstr ""
 
 #: bin/common/common.py:100
 msgid "Disable all tips"
-msgstr ""
+msgstr "تعطيل جميع النصائح"
 
 #: bin/common/common.py:101
 msgid ""
@@ -748,19 +750,19 @@ msgstr "الرجاء الإنتظار،"
 #: bin/common/common.py:225
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "تأكد بأن الملف %s صحيح"
 
 #: bin/common/common.py:399
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " تقرير بالخطأ التالي:\n"
 
 #: bin/common/common.py:399
 msgid "remarks"
-msgstr ""
+msgstr "ملاحظات"
 
 #: bin/common/common.py:402
 msgid "Support request sent !"
-msgstr ""
+msgstr "تم إرسال طلب الدعم!"
 
 #: bin/common/common.py:425 bin/common/common.py:469
 msgid ""
@@ -821,6 +823,8 @@ msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
+"تم إرسال مشكلتك إلى فريق الجودة!\n"
+"سنتعيد الاتصال بك بعد تحليل المشكلة."
 
 #: bin/common/common.py:528
 #, python-format
@@ -829,6 +833,9 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"مشكلتك لا يمكن إرسالها إلى فريق الجودة!\n"
+"يرجى إرسال تقرير هذا الخطأ بشكل يدوي:\n"
+"\t%s"
 
 #: bin/common/common.py:528
 msgid "Error"
@@ -846,7 +853,7 @@ msgstr ""
 #: bin/printer/printer.py:184
 #, python-format
 msgid "Unable to handle %s filetype"
-msgstr ""
+msgstr "لا يمكن التعامل مع %s نوع الملف"
 
 #: bin/printer/printer.py:189
 msgid ""
