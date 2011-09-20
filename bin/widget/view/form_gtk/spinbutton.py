@@ -51,7 +51,7 @@ class spinbutton(interface.widget_interface):
     def format_input(self, spin, new_value_pointer):
         text = spin.get_text()
         if text:
-            value = user_locale_format.str2int(text)
+            value = user_locale_format.str2float(text)
             value_location = ctypes.c_double.from_address(hash(new_value_pointer))
             value_location.value = float(value)
             return True
