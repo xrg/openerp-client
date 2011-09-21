@@ -571,14 +571,13 @@ class ViewList(parser_view):
                              current_active_model['state'].get(current_active_model) in states):
                         if self.widget_tree.editable:
                             if current_active_model.validate():
-                                id = self.screen.save_current()
+                                 self.screen.save_current()
                             else:
                                common.warning(_('Invalid form, correct red fields !'), _('Error !'),parent=self.window)
                                self.widget_tree.warn('misc-message', _('Invalid form, correct red fields !'), "red")
                                self.screen.display()
                                return False
-                        else:
-                            id = current_active_model.id
+                        id = current_active_model.id
                         current_active_model.get_button_action(self.screen, id, path[1].attrs)
                         self.screen.current_model = None
                         if self.screen.parent and isinstance(self.screen.parent, ModelRecord):
