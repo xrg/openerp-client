@@ -344,7 +344,7 @@ class Char(object):
 class Int(Char):
 
     def value_from_text(self, model, text):
-        return tools.str2int(text)
+        return user_locale_format.str2int(text)
 
     def get_textual_value(self, model):
         count = False
@@ -473,7 +473,7 @@ class Float(Char):
         return converted_val
 
     def value_from_text(self, model, text):
-        return tools.str2float(text)
+        return user_locale_format.str2float(text)
 
 class Float_Sci(Char):
     def get_textual_value(self, model):
@@ -518,7 +518,7 @@ class M2O(Char):
 
         domain = model[self.field_name].domain_get(model)
         context = model[self.field_name].context_get(model)
-
+        context.update({'name_search':text or ''})
         names = rpc.name_search(text, domain, 'ilike', context)
         if len(names) != 1:
             return self.search_remote(relation, [x[0] for x in names],
@@ -537,7 +537,7 @@ class M2O(Char):
             id = modelfield.get(model)
         else:
             rpc = RPCProxy(relation)
-
+            context.update({'name_search':text or ''})
             names = rpc.name_search(text, domain, 'ilike', context)
             if len(names) == 1:
                 return True, names[0]
@@ -594,6 +594,7 @@ class M2M(Char):
         rpc = RPCProxy(relation)
         domain = model[self.field_name].domain_get(model)
         context = model[self.field_name].context_get(model)
+        context.update({'name_search':text or ''})
         names = rpc.name_search(text, domain, 'ilike', context)
         ids = [x[0] for x in names]
         win = win_search(relation, sel_multi=True, ids=ids, context=context, domain=domain)

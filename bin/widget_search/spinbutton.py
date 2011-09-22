@@ -23,7 +23,8 @@ import gtk
 import common
 import wid_int
 import sys
-import tools
+from tools import user_locale_format
+import ctypes
 
 class spinbutton(wid_int.wid_int):
     def __init__(self, name, parent, attrs={},screen=None):
@@ -33,20 +34,38 @@ class spinbutton(wid_int.wid_int):
 
         adj1 = gtk.Adjustment(0.0, -sys.maxint, sys.maxint, 1.0, 5.0)
         self.spin1 = gtk.SpinButton(adj1, 1.0, digits=int(attrs.get('digits', (14, 2))[1]))
-        self.spin1.set_numeric(True)
         self.spin1.set_activates_default(True)
+        self.spin1.connect('input', self.format_input)
+        self.spin1.connect('output', self.format_output)
         self.widget.pack_start(self.spin1, expand=False, fill=True)
 
         self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
 
         adj2 = gtk.Adjustment(0.0, -sys.maxint, sys.maxint, 1.0, 5.0)
         self.spin2 = gtk.SpinButton(adj2, 1.0, digits=int(attrs.get('digits', (14, 2))[1]))
-        self.spin2.set_numeric(True)
         self.spin2.set_activates_default(True)
+        self.spin2.connect('input', self.format_input)
+        self.spin2.connect('output', self.format_output)
         self.widget.pack_start(self.spin2, expand=False, fill=True)
 
         if self.default_search:
             self.spin1.set_value(self.default_search)
+
+    def format_output(self, spin):
+        digits = spin.get_digits()
+        value = spin.get_value()
+        text = user_locale_format.format('%.' + str(digits) + 'f', value)
+        spin.set_text(text)
+        return True
+ 
+    def format_input(self, spin, new_value_pointer):
+        text = spin.get_text()
+        if text:
+            value = user_locale_format.str2float(text)
+            value_location = ctypes.c_double.from_address(hash(new_value_pointer))
+            value_location.value = float(value)
+            return True
+        return False
 
     def _value_get(self):
         res = []

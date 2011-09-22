@@ -208,6 +208,7 @@ class many2one(interface.widget_interface):
         name = model[iter][1]
         domain = self._view.modelfield.domain_get(self._view.model)
         context = self._view.modelfield.context_get(self._view.model)
+        context.update({'name_search':name or ''})
         ids = rpc.session.rpc_exec_auth('/object', 'execute',
                 self.attrs['relation'], 'name_search', name, domain, 'ilike',
                 context)
