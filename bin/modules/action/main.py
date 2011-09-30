@@ -38,6 +38,20 @@ from lxml import etree
 class main(service.Service):
     def __init__(self, name='action.main'):
         service.Service.__init__(self, name)
+        kafs = {
+            'ir.actions.act_window_close': ['name', 'type', 'usage'],
+            'ir.actions.act_window': False, # in short, we want /all/
+                                            # the fields of that one
+            'ir.actions.server': ['name', 'type', 'usage'],
+            'ir.actions.wizard': ['name', 'model', 'multi', 'type', 'usage', 'wiz_name'],
+            'ir.actions.report.custom':['name', 'model', 'multi', 'report_id', 'type', 'usage'],
+            'ir.actions.report.xml':['name', 'model', 'multi', 'report_name', 'report_id', 'type', 'usage'],
+            'ir.actions.url': ['name', 'target', 'type', 'url'],
+            'ir.actions.act_url': ['name', 'target', 'type', 'url'],
+            }
+        kafs['ir.actions.submenu'] = kafs['ir.actions.act_window']
+        kafs['ir.actions.report.int'] = kafs['ir.actions.report.xml']
+        self.known_action_fields = kafs
 
     def exec_report(self, name, data, context=None):
         datas = data.copy()
@@ -81,7 +95,8 @@ class main(service.Service):
                 raise Exception, 'ActionNotFound'
             type=res['type']
 
-        res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', act_id, False, ctx)
+        res = rpc.session.rpc_exec_auth('/object', 'execute', type, 
+                'read', act_id, self.known_action_fields.get(type, False), ctx)
         self._exec_action(res,datas,context)
 
     def _exec_action(self, action, datas, context=None):
@@ -195,7 +210,7 @@ class main(service.Service):
                 datas = action.get('datas',[])
             self.exec_report(action['report_name'], datas, context)
 
-        elif action['type']=='ir.actions.act_url':
+        elif action['type'] in ('ir.actions.act_url', 'ir.actions.url'):
             tools.launch_browser(action.get('url',''))
 
     def exec_keyword(self, keyword, data=None, adds=None, context=None, warning=True):
