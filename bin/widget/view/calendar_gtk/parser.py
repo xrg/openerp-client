@@ -47,6 +47,13 @@ COLOR_PALETTE = ['#f57900', '#cc0000', '#d400a8', '#75507b', '#3465a4', '#73d216
                  '#905000', '#9b0000', '#840067', '#510090', '#0000c9', '#009b00', '#9abe00', '#ffc900',]
 
 _colorline = ['#%02x%02x%02x' % (25+((r+10)%11)*23,5+((g+1)%11)*20,25+((b+4)%11)*23) for r in range(11) for g in range(11) for b in range(11) ]
+
+DT_SERVER_FORMATS = {
+          'datetime': '%Y-%m-%d %H:%M:%S',
+          'date': '%Y-%m-%d',
+          'time': '%H:%M:%S'
+        }
+
 def choice_colors(n):
     if n > len(COLOR_PALETTE):
         return _colorline[0:-1:len(_colorline)/(n+1)]
@@ -136,7 +143,6 @@ class ViewCalendar(object):
         self.glade.signal_connect('on_button_month_clicked', self._change_view, 'month')
 
         self.date = datetime.today()
-        self.server_format = '%Y-%m-%d %H:%M:%S'
 
         self.string = attrs.get('string', '')
         self.date_start = attrs.get('date_start')
@@ -400,17 +406,10 @@ class ViewCalendar(object):
 
     def __convert(self, event):
         # method from eTiny
-        DT_SERVER_FORMATS = {
-          'datetime': '%Y-%m-%d %H:%M:%S',
-          'date': '%Y-%m-%d',
-          'time': '%H:%M:%S'
-        }
-
         fields = [x for x in [self.date_start, self.date_stop] if x]
         for fld in fields:
             typ = self.fields[fld]['type']
             fmt = DT_SERVER_FORMATS[typ]
-
             if event[fld] and fmt:
                 event[fld] = time.strptime(event[fld][:19], fmt)
 
@@ -429,8 +428,12 @@ class ViewCalendar(object):
 
         event = model.value.copy()
         # Converts the dates according to the timezone in calendar view
-        event[self.date_start] = tools.datetime_util.server_to_local_timestamp(event.get(self.date_start), self.server_format, self.server_format, tz_offset=True, ignore_unparsable_time=False)
-        event[self.date_stop] = tools.datetime_util.server_to_local_timestamp(event.get(self.date_stop), self.server_format, self.server_format, tz_offset=True, ignore_unparsable_time=False)
+        for dt_field in [self.date_start, self.date_stop]:
+            if not dt_field:
+                continue
+            dt_format = DT_SERVER_FORMATS[self.fields[dt_field]['type']]
+            event[dt_field] = tools.datetime_util.server_to_local_timestamp(event.get(dt_field), dt_format, dt_format, tz_offset=True, ignore_unparsable_time=False)
+        
         self.__convert(event)
 
         caption = ''
