@@ -124,8 +124,6 @@ class custom_filter(wid_int.wid_int):
             if operator in ['ilike','not ilike']:
                 if field_type in ['integer','float','date','datetime','boolean']:
                     operator = (operator == 'ilike') and '=' or '!='
-                else:
-                    right_text = '%' + right_text + '%'
 
             if operator in ['<','>'] and field_type not in ['integer','float','date','datetime','boolean']:
                     operator = '='
