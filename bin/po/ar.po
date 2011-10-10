@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-09-17 15:18+0000\n"
-"Last-Translator: Majed Majbour <Unknown>\n"
+"PO-Revision-Date: 2011-10-01 13:17+0000\n"
+"Last-Translator: kifcaliph <kifcaliph@hotmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-18 05:13+0000\n"
-"X-Generator: Launchpad (build 13955)\n"
+"X-Launchpad-Export-Date: 2011-10-02 05:13+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 "Language: ar\n"
 
 #: bin/plugins/__init__.py:27
@@ -633,7 +633,7 @@ msgstr "خطأ في حذف المورد!"
 
 #: bin/modules/gui/window/tree.py:235
 msgid "Unable to chroot: no tree resource selected"
-msgstr ""
+msgstr "لم يتمكن إحكام المسار: لم يتم إختيار مصدر"
 
 #: bin/modules/gui/window/win_export.py:50
 msgid " record(s) saved !"
@@ -668,17 +668,17 @@ msgstr "رابط - OpenERP"
 #: bin/modules/gui/window/win_search.py:126
 #, python-format
 msgid "OpenERP Search: %s"
-msgstr ""
+msgstr "بحث OpenERP: %s"
 
 #: bin/modules/gui/window/win_search.py:127
 #, python-format
 msgid "OpenERP Search: %s (%%d result(s))"
-msgstr ""
+msgstr "بحث OpenERP: %s (%%d نتائج)"
 
 #: bin/options.py:121
 #, python-format
 msgid "OpenERP Client %s"
-msgstr ""
+msgstr "حاسب طرفي لـ Openerp %s"
 
 #: bin/options.py:122
 msgid "specify alternate config file"
@@ -699,11 +699,11 @@ msgstr "حدد اسم المستخدم للدخول"
 
 #: bin/options.py:126
 msgid "specify the server port"
-msgstr ""
+msgstr "اختر رقم المنفذ للخادم"
 
 #: bin/options.py:127
 msgid "specify the server ip/name"
-msgstr ""
+msgstr "اختر اسم أو عنوان الخادم"
 
 #: bin/common/common.py:89
 msgid "Close current tip"
@@ -860,10 +860,12 @@ msgid ""
 "Linux Automatic Printing not implemented.\n"
 "Use preview option !"
 msgstr ""
+"لم يتم تنصيب مكتبات لينكس للطباعة.\n"
+"إستخدم خيارات العرض!"
 
 #: bin/printer/printer.py:212
 msgid "Error! No Data found. Make sure you have enough data to print!"
-msgstr ""
+msgstr "خطأ! لا توجد بيانات. تأكد من أن لديك بيانات للطباعة!"
 
 #: bin/printer/printer.py:239
 msgid "Error writing the file!"
@@ -871,7 +873,7 @@ msgstr "خطأ في كتابة الملف!"
 
 #: bin/openerp-client.py:142
 msgid "Closing OpenERP, KeyboardInterrupt"
-msgstr ""
+msgstr "خطأ بالنظام، قد تكون لوحة المفاتيح"
 
 #: bin/widget/view/form_gtk/button.py:47 bin/widget_search/char.py:72
 #: bin/widget_search/calendar.py:125 bin/widget_search/calendar.py:250
@@ -927,7 +929,7 @@ msgstr "تاريخ الانتهاء"
 #: bin/widget/view/form_gtk/calendar.py:249 bin/widget_search/calendar.py:128
 #: bin/widget_search/calendar.py:267
 msgid "OpenERP - Date selection"
-msgstr ""
+msgstr "إختيار تاريخ - OpenERP"
 
 #: bin/widget_search/custom_filter_widgets.py:40
 #: bin/widget_search/custom_filter_widgets.py:67
@@ -1019,23 +1021,23 @@ msgstr "أسبوع"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
-msgstr ""
+msgstr "خطأ في عرض النتيجة!"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "You must intall the library python-hippocanvas to use calendars."
-msgstr ""
+msgstr "لابد من تنصيب مكتبة python-hippocanvasمنأجل إستخدام التقويم"
 
 #: bin/widget/view/screen_container.py:74
 msgid "--Actions--"
-msgstr ""
+msgstr "--إجراءات--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
-msgstr ""
+msgstr "حفظ كوصلة سريعة"
 
 #: bin/widget/view/screen_container.py:74
 msgid "Save as a Filter"
-msgstr ""
+msgstr "حفظ كمرشح"
 
 #: bin/widget/view/screen_container.py:74
 msgid "Manage Filters"
@@ -1047,11 +1049,14 @@ msgid ""
 "\n"
 "Please Save them before sorting !"
 msgstr ""
+"لديك سجلات غير محفوظة !  \n"
+"\n"
+"رجاء الحفظ قبل الفرز !"
 
 #: bin/widget/view/tree_gtk/editabletree.py:140
 #, python-format
 msgid "Shortcut: %s"
-msgstr ""
+msgstr "وصلة سريعة: %s"
 
 #: bin/widget/view/tree_gtk/editabletree.py:140
 msgid "F1 New - F2 Open/Search"
@@ -1060,21 +1065,22 @@ msgstr "F1 جديد - F2 فتح/بحث"
 #: bin/widget/view/tree_gtk/editabletree.py:215
 #, python-format
 msgid "Warning; field %s is required!"
-msgstr ""
+msgstr "تحذير، مطلوب الحقل التالي %s !"
 
 #: bin/widget/view/tree_gtk/date_renderer.py:197
 msgid ""
 "Press <i>'+'</i>, <i>'-'</i> or <i>'='</i> for special date operations."
 msgstr ""
+"اضغط <i>'+'</i>, <i>'-'</i> or <i>'='</i> و ذلك لعمليات خاصة علي التاريخ."
 
 #: bin/widget/view/widget_parse.py:53
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
-msgstr ""
+msgstr "هذا النوع (%s) غير مقبول بالواجهة الطرفية GTK !"
 
 #: bin/widget/view/widget_parse.py:64
 msgid "No valid view found for this object!"
-msgstr ""
+msgstr "لا يوجد عرض صحيح لهذا الكائن!"
 
 #: bin/widget/view/graph_gtk/parser.py:64
 msgid "Can not generate graph !"
@@ -1090,15 +1096,15 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1713
 msgid "Add New Edge"
-msgstr ""
+msgstr "إضافة حافة جديدة"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1714
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "توسيع المخطط"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1715
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "تصغير المخطط"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1716
 msgid "Fit the diagram to the window"
@@ -1106,26 +1112,26 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1717
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "مشاهدة المخطط بحجمه الطبيعي"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1718
 msgid "Print the Diagram"
-msgstr ""
+msgstr "طباعة المخطط"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1789
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "أغلاق %s الحالي"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1790
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "حذف %sالحالي"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1791
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "تحرير %s الحالي"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1875
 msgid " - Dot Viewer"
@@ -1137,7 +1143,7 @@ msgstr "إنشاء مصدر جديد"
 
 #: bin/widget/view/form_gtk/reference.py:89
 msgid "Search / Open a resource"
-msgstr ""
+msgstr "بحث/فتح مصدر"
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
@@ -1157,7 +1163,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/parser.py:626
 msgid "You need to save resource before adding translations!"
-msgstr ""
+msgstr "يجب حفظ المصدر قبل إضافة الترجمة!"
 
 #: bin/widget/view/form_gtk/parser.py:880
 msgid "Translate view"
@@ -1204,7 +1210,7 @@ msgstr "صفحة سابقة"
 #: bin/widget/view/form_gtk/many2many.py:88
 #: bin/widget/view/form_gtk/one2many_list.py:214
 msgid "Previous Record"
-msgstr ""
+msgstr "السجل السابق"
 
 #: bin/widget/view/form_gtk/many2many.py:96
 #: bin/widget/view/form_gtk/one2many_list.py:222
@@ -1227,7 +1233,7 @@ msgstr "اختر حد"
 
 #: bin/widget/view/form_gtk/one2many_list.py:279
 msgid "You have to select a resource !"
-msgstr ""
+msgstr "عليك بإختيار مصدر !"
 
 #: bin/widget/view/form_gtk/image.py:73
 msgid "Set Image"
@@ -1251,7 +1257,7 @@ msgstr "صور"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "لا توجد صورة لحفظها !"
 
 #: bin/widget/view/form_gtk/image.py:127
 msgid "Warning"
@@ -1259,12 +1265,12 @@ msgstr "إنذار"
 
 #: bin/widget/view/form_gtk/many2one.py:158 bin/widget/view/form_gtk/url.py:53
 msgid "Open this resource"
-msgstr ""
+msgstr "فتح هذا المصدر"
 
 #: bin/widget/view/form_gtk/many2one.py:163
 #: bin/widget_search/custom_filter_widgets.py:87
 msgid "Search a resource"
-msgstr ""
+msgstr "بحث عن مصدر"
 
 #: bin/widget/view/form_gtk/many2one.py:174 bin/openerp.glade:1412
 msgid "Action"
@@ -1276,7 +1282,7 @@ msgstr "تقرير"
 
 #: bin/widget/view/list.py:633 bin/widget/view/form_gtk/many2one.py:387
 msgid "You must select a record to use the relation !"
-msgstr ""
+msgstr "يجب إختيار سجل و ذلك لإستخدام العلاقة"
 
 #: bin/widget/view/form_gtk/interface.py:49
 msgid "Set as default"
@@ -1284,7 +1290,7 @@ msgstr "اجعلها افتراضية"
 
 #: bin/widget/view/form_gtk/interface.py:64
 msgid "You can not set to the default value here !"
-msgstr ""
+msgstr "لا يمكن إستخدام القيمة الإفتراضية هنا !"
 
 #: bin/widget/view/form_gtk/interface.py:64
 msgid "Operation not permited"
@@ -1301,13 +1307,13 @@ msgstr "فتح"
 #: bin/widget/view/form_gtk/binary.py:119
 #: bin/widget/view/form_gtk/binary.py:163
 msgid "Unable to read the file data"
-msgstr ""
+msgstr "لم يتمكن من قراءة بيانات الملف"
 
 #: bin/widget/view/form_gtk/binary.py:129
 #: bin/widget/view/form_gtk/binary.py:155
 #, python-format
 msgid "Error reading the file: %s"
-msgstr ""
+msgstr "خطأ في قراءة الملف الملف: %s"
 
 #: bin/widget/view/form_gtk/binary.py:138
 msgid "All Files"
@@ -1329,7 +1335,7 @@ msgstr ""
 #: bin/widget/view/form_gtk/calendar.py:99
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "قيمة تاريخية خاطئة! يجب أن تكون السنة أكبر من 1899!"
 
 #: bin/widget/view/form_gtk/calendar.py:255 bin/widget_search/calendar.py:273
 msgid "Hour:"
@@ -1341,11 +1347,11 @@ msgstr "الدقيقة:"
 
 #: bin/widget/view/form_gtk/calendar.py:291 bin/widget_search/calendar.py:312
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "قيمة تاريخية خاطئة! السنة يجب أن تكون أكبر 1899!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:30
 msgid "Gantt view not yet implemented !"
-msgstr ""
+msgstr "خريطة جانت لم يتم تنصيبها بعد!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:31
 msgid ""
@@ -1377,7 +1383,7 @@ msgstr "خطأ في الاتصال"
 
 #: bin/openerp.glade:6
 msgid "OpenERP - Login"
-msgstr ""
+msgstr "الدخول لنظام OpenERP"
 
 #: bin/openerp.glade:116 bin/openerp.glade:6405
 msgid "Database:"
@@ -1413,27 +1419,27 @@ msgstr "_قاعدة بيانات جديدة"
 
 #: bin/openerp.glade:330
 msgid "_Restore database"
-msgstr ""
+msgstr "إستعادة قاعدة البيانات"
 
 #: bin/openerp.glade:345
 msgid "_Backup database"
-msgstr ""
+msgstr "حفظ نسخة حتياطية لقاعدة البيانات"
 
 #: bin/openerp.glade:360
 msgid "Dro_p database"
-msgstr ""
+msgstr "إسقاط قاعدة البيانات"
 
 #: bin/openerp.glade:380
 msgid "_Download Migrations Code"
-msgstr ""
+msgstr "تحميل الأكواد الجديدة"
 
 #: bin/openerp.glade:395
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "ترحل قاعدة البيانات"
 
 #: bin/openerp.glade:415
 msgid "Administrator Password"
-msgstr ""
+msgstr "كلمة مرور المشرف العام"
 
 #: bin/openerp.glade:460
 msgid "_User"
@@ -1445,19 +1451,19 @@ msgstr "_تفضيلات"
 
 #: bin/openerp.glade:496
 msgid "_Send a request"
-msgstr ""
+msgstr "إرسال طلب"
 
 #: bin/openerp.glade:511
 msgid "_Read my requests"
-msgstr ""
+msgstr "قراءة طلباتي"
 
 #: bin/openerp.glade:531
 msgid "_Waiting Requests"
-msgstr ""
+msgstr "الطلبات المنتظرة"
 
 #: bin/openerp.glade:544
 msgid "For_m"
-msgstr ""
+msgstr "نموذج"
 
 #: bin/openerp.glade:552
 msgid "_New"
@@ -1493,7 +1499,7 @@ msgstr "السابق"
 
 #: bin/openerp.glade:670
 msgid "Switch to list/form"
-msgstr ""
+msgstr "تحويل إلي قائمة / نموذج"
 
 #: bin/openerp.glade:686
 msgid "_Menu"
@@ -1501,59 +1507,59 @@ msgstr "القائمة"
 
 #: bin/openerp.glade:707
 msgid "_New Home Tab"
-msgstr ""
+msgstr "مبوبة رئيسية جديدة"
 
 #: bin/openerp.glade:723 bin/openerp.glade:4995
 msgid "Close Tab"
-msgstr ""
+msgstr "إغلاق تبويب"
 
 #: bin/openerp.glade:739
 msgid "Previous Tab"
-msgstr ""
+msgstr "التبويب السابق"
 
 #: bin/openerp.glade:748 bin/openerp.glade:5051
 msgid "Next Tab"
-msgstr ""
+msgstr "التبويب التالي"
 
 #: bin/openerp.glade:762
 msgid "View _logs"
-msgstr ""
+msgstr "عرض سجل الحركات"
 
 #: bin/openerp.glade:770
 msgid "_Go to resource ID..."
-msgstr ""
+msgstr "ذهاب إلي معرف المصدر..."
 
 #: bin/openerp.glade:784
 msgid "_Open"
-msgstr ""
+msgstr "_فتح"
 
 #: bin/openerp.glade:799
 msgid "Reloa_d / Undo"
-msgstr ""
+msgstr "إعادة تحميل/إسترجاع"
 
 #: bin/openerp.glade:820
 msgid "Repeat latest _action"
-msgstr ""
+msgstr "تكرار آخر إجراء"
 
 #: bin/openerp.glade:834
 msgid "_Preview in PDF"
-msgstr ""
+msgstr "عرض في PDF"
 
 #: bin/openerp.glade:850
 msgid "Previe_w in editor"
-msgstr ""
+msgstr "إستعراض في المحرر"
 
 #: bin/openerp.glade:870
 msgid "Expor_t data..."
-msgstr ""
+msgstr "تصدير البيانات"
 
 #: bin/openerp.glade:885
 msgid "I_mport data..."
-msgstr ""
+msgstr "إستيراد البيانات"
 
 #: bin/openerp.glade:897
 msgid "_Options"
-msgstr ""
+msgstr "_خيارات"
 
 #: bin/openerp.glade:904
 msgid "_Extension Manager"
@@ -1561,47 +1567,47 @@ msgstr ""
 
 #: bin/openerp.glade:912
 msgid "_Menubar"
-msgstr ""
+msgstr "_القوائم"
 
 #: bin/openerp.glade:920
 msgid "Text _and Icons"
-msgstr ""
+msgstr "الحروف و الأيقونات"
 
 #: bin/openerp.glade:928
 msgid "_Icons only"
-msgstr ""
+msgstr "الأيقونات فقط"
 
 #: bin/openerp.glade:937
 msgid "_Text only"
-msgstr ""
+msgstr "_نص فقط"
 
 #: bin/openerp.glade:950
 msgid "_Forms"
-msgstr ""
+msgstr "النماذج"
 
 #: bin/openerp.glade:958
 msgid "Right Toolbar"
-msgstr ""
+msgstr "شريط المهام الأيمن"
 
 #: bin/openerp.glade:966
 msgid "Tabs default position"
-msgstr ""
+msgstr "الوضع الإفتراضي للمبوبات"
 
 #: bin/openerp.glade:974
 msgid "Top"
-msgstr ""
+msgstr "أعلى"
 
 #: bin/openerp.glade:982
 msgid "Left"
-msgstr ""
+msgstr "يسار"
 
 #: bin/openerp.glade:991
 msgid "Right"
-msgstr ""
+msgstr "يمين"
 
 #: bin/openerp.glade:1000
 msgid "Bottom"
-msgstr ""
+msgstr "أسفل"
 
 #: bin/openerp.glade:1013
 msgid "Tabs default orientation"
@@ -1609,27 +1615,27 @@ msgstr ""
 
 #: bin/openerp.glade:1021
 msgid "Horizontal"
-msgstr ""
+msgstr "أفقي"
 
 #: bin/openerp.glade:1029
 msgid "Vertical"
-msgstr ""
+msgstr "عمودي"
 
 #: bin/openerp.glade:1046
 msgid "_Print"
-msgstr ""
+msgstr "_طباعة"
 
 #: bin/openerp.glade:1053
 msgid "Previe_w before print"
-msgstr ""
+msgstr "عرض قبل الطباعة"
 
 #: bin/openerp.glade:1077
 msgid "_Save options"
-msgstr ""
+msgstr "حفظ الخيارات"
 
 #: bin/openerp.glade:1097
 msgid "_Plugins"
-msgstr ""
+msgstr "الملحقات"
 
 #: bin/openerp.glade:1105
 msgid "_Execute a plugin"
@@ -1637,11 +1643,11 @@ msgstr ""
 
 #: bin/openerp.glade:1125
 msgid "_Shortcuts"
-msgstr ""
+msgstr "_إختصارات"
 
 #: bin/openerp.glade:1133
 msgid "_Help"
-msgstr ""
+msgstr "_مساعدة"
 
 #: bin/openerp.glade:1140
 msgid "Enable Debug Mode Tooltips"
@@ -1649,11 +1655,11 @@ msgstr ""
 
 #: bin/openerp.glade:1148 bin/openerp.glade:4366
 msgid "Support Request"
-msgstr ""
+msgstr "طلب دعم"
 
 #: bin/openerp.glade:1168
 msgid "User _Manual"
-msgstr ""
+msgstr "دليل_ استخدام"
 
 #: bin/openerp.glade:1183
 msgid "_Contextual Help"
@@ -1661,27 +1667,27 @@ msgstr ""
 
 #: bin/openerp.glade:1199
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "إختصارات لوحة المفاتيح"
 
 #: bin/openerp.glade:1212
 msgid "_License"
-msgstr ""
+msgstr "_رخصة"
 
 #: bin/openerp.glade:1227
 msgid "_About..."
-msgstr ""
+msgstr "_عن..."
 
 #: bin/openerp.glade:1269
 msgid "Edit / Save this resource"
-msgstr ""
+msgstr "تعديل / حفظ هذا المصدر"
 
 #: bin/openerp.glade:1285
 msgid "Delete this resource"
-msgstr ""
+msgstr "حذف هذا المصدر"
 
 #: bin/openerp.glade:1298
 msgid "Go to previous matched search"
-msgstr ""
+msgstr "الذهاب إلى البحث المطابق السابق"
 
 #: bin/openerp.glade:1299
 msgid "Previous"
@@ -1689,7 +1695,7 @@ msgstr "السابق"
 
 #: bin/openerp.glade:1310
 msgid "Go to next matched resource"
-msgstr ""
+msgstr "الذهاب إلى المصدر المطابق التالي"
 
 #: bin/openerp.glade:1311
 msgid "Next"
@@ -1697,31 +1703,31 @@ msgstr "التّالي"
 
 #: bin/openerp.glade:1324
 msgid "List"
-msgstr ""
+msgstr "قائمة"
 
 #: bin/openerp.glade:1336
 msgid "Form"
-msgstr ""
+msgstr "نموذج"
 
 #: bin/openerp.glade:1349
 msgid "Calendar"
-msgstr ""
+msgstr "الأجندة"
 
 #: bin/openerp.glade:1359
 msgid "Diagram"
-msgstr ""
+msgstr "الرسم التخطيطي"
 
 #: bin/openerp.glade:1369
 msgid "Graph"
-msgstr ""
+msgstr "الرسم البياني"
 
 #: bin/openerp.glade:1382
 msgid "Gantt"
-msgstr ""
+msgstr "جانت"
 
 #: bin/openerp.glade:1400
 msgid "Print documents"
-msgstr ""
+msgstr "طباعة المستند"
 
 #: bin/openerp.glade:1411
 msgid "Launch actions about this resource"
@@ -1729,59 +1735,59 @@ msgstr ""
 
 #: bin/openerp.glade:1424
 msgid "Add an attachment to this resource"
-msgstr ""
+msgstr "أضف ملحقات هذا المصدر"
 
 #: bin/openerp.glade:1425
 msgid "Attachment"
-msgstr ""
+msgstr "مرفق"
 
 #: bin/openerp.glade:1440 bin/openerp.glade:1441
 msgid "Menu"
-msgstr ""
+msgstr "قائمة"
 
 #: bin/openerp.glade:1458 bin/openerp.glade:1459
 msgid "Reload"
-msgstr ""
+msgstr "إعادة تحميل"
 
 #: bin/openerp.glade:1476
 msgid "Close this window"
-msgstr ""
+msgstr "اغلق هذه النافذة"
 
 #: bin/openerp.glade:1520
 msgid "Company:"
-msgstr ""
+msgstr "الشركة:"
 
 #: bin/openerp.glade:1543
 msgid "Requests:"
-msgstr ""
+msgstr "طلبات:"
 
 #: bin/openerp.glade:1566
 msgid "Read my Requests"
-msgstr ""
+msgstr "قراءة طلباتي:"
 
 #: bin/openerp.glade:1587
 msgid "Send a new request"
-msgstr ""
+msgstr "إرسال طلب جديد"
 
 #: bin/openerp.glade:1627
 msgid "OpenERP - Tree Resources"
-msgstr ""
+msgstr "OpenERP-شجرة المصادر"
 
 #: bin/openerp.glade:1680
 msgid "Shortcuts"
-msgstr ""
+msgstr "إختصارات"
 
 #: bin/openerp.glade:1789
 msgid "OpenERP - Forms"
-msgstr ""
+msgstr "نماذج - OpenERP"
 
 #: bin/openerp.glade:1813
 msgid "State:"
-msgstr ""
+msgstr "الولاية:"
 
 #: bin/openerp.glade:1845
 msgid "OpenERP - About"
-msgstr ""
+msgstr "عن - OpenERP"
 
 #: bin/openerp.glade:1859
 msgid ""
@@ -1807,7 +1813,7 @@ msgstr ""
 
 #: bin/openerp.glade:1931
 msgid "_OpenERP"
-msgstr ""
+msgstr "_OpenERP"
 
 #: bin/openerp.glade:1946
 msgid ""
@@ -1827,7 +1833,7 @@ msgstr ""
 
 #: bin/openerp.glade:1991
 msgid "_Contact"
-msgstr ""
+msgstr "_جهة إتصال"
 
 #: bin/openerp.glade:2043
 msgid "Open ERP - Forms widget"
@@ -1835,15 +1841,15 @@ msgstr ""
 
 #: bin/openerp.glade:2222 bin/openerp.glade:4712
 msgid "OpenERP - Confirmation"
-msgstr ""
+msgstr "تأكيد - OpenERP"
 
 #: bin/openerp.glade:2301
 msgid "OpenERP - Selection"
-msgstr ""
+msgstr "إختيار - OpenERP"
 
 #: bin/openerp.glade:2315
 msgid "Your selection:"
-msgstr ""
+msgstr "إختيارك:"
 
 #: bin/openerp.glade:2395
 msgid "OpenERP - Dialog"
@@ -1855,47 +1861,47 @@ msgstr ""
 
 #: bin/openerp.glade:2450
 msgid "_only for you"
-msgstr ""
+msgstr "لك أنت"
 
 #: bin/openerp.glade:2464
 msgid "for _all users"
-msgstr ""
+msgstr "لكل المستخدمين"
 
 #: bin/openerp.glade:2484
 msgid "<b>Value applicable for:</b>"
-msgstr ""
+msgstr "<b>القيمة تنطبق لـ:</b>"
 
 #: bin/openerp.glade:2520
 msgid "<b>Value applicable if:</b>"
-msgstr ""
+msgstr "<b>تنطبق القيمة لو:</b>"
 
 #: bin/openerp.glade:2538
 msgid "Field _Name:"
-msgstr ""
+msgstr "اسم الحقل:"
 
 #: bin/openerp.glade:2552
 msgid "_Domain:"
-msgstr ""
+msgstr "الن_طاق:"
 
 #: bin/openerp.glade:2611
 msgid "Default _value:"
-msgstr ""
+msgstr "القيمة الإفتراضية"
 
 #: bin/openerp.glade:2666
 msgid "OpenERP - Export to CSV"
-msgstr ""
+msgstr "Openerp - تصدير لـ CSV"
 
 #: bin/openerp.glade:2714
 msgid "Save List"
-msgstr ""
+msgstr "احفظ القائمة"
 
 #: bin/openerp.glade:2762
 msgid "Remove List"
-msgstr ""
+msgstr "حذف القائمة"
 
 #: bin/openerp.glade:2817
 msgid "<b>Exports List</b>"
-msgstr ""
+msgstr "<b>تصدير القائمة</b>"
 
 #: bin/openerp.glade:2834
 msgid "<b>Predefined Exports</b>"
@@ -1911,53 +1917,55 @@ msgstr ""
 
 #: bin/openerp.glade:2880
 msgid "Available Fields"
-msgstr ""
+msgstr "الحقول المتوفرة"
 
 #: bin/openerp.glade:2923 bin/openerp.glade:5620
 msgid "_Add"
-msgstr ""
+msgstr "إضافة"
 
 #: bin/openerp.glade:2970 bin/openerp.glade:5667
 msgid "_Remove"
-msgstr ""
+msgstr "_حذف"
 
 #: bin/openerp.glade:3018
 msgid "_Nothing"
-msgstr ""
+msgstr "لا شئ"
 
 #: bin/openerp.glade:3073
 msgid "Fields to Export"
-msgstr ""
+msgstr "الحقول للتصدير"
 
 #: bin/openerp.glade:3132
 msgid ""
 "Open in Excel\n"
 "Save as CSV"
 msgstr ""
+"فتح في ملف أكسل\n"
+"حفظ كـ CSV"
 
 #: bin/openerp.glade:3151
 msgid "Add _field names"
-msgstr ""
+msgstr "إضافة اسم للحقل"
 
 #: bin/openerp.glade:3156
 msgid "<b>Opti_ons</b>"
-msgstr ""
+msgstr "<b>خيارات</b>"
 
 #: bin/openerp.glade:3215
 msgid "OpenERP - Search"
-msgstr ""
+msgstr "بحث - OpenERP"
 
 #: bin/openerp.glade:3281
 msgid "OpenERP - Preferences"
-msgstr ""
+msgstr "تفضيلات - OpenERP"
 
 #: bin/openerp.glade:3295
 msgid "<b>User preferences</b>"
-msgstr ""
+msgstr "<b>تفضيلات المستخدم</b>"
 
 #: bin/openerp.glade:3361
 msgid "Tip of the Day"
-msgstr ""
+msgstr "تذكرة اليوم"
 
 #: bin/openerp.glade:3408
 msgid "_Display a new tip next time?"
@@ -1969,23 +1977,23 @@ msgstr ""
 
 #: bin/openerp.glade:3507
 msgid "Ne_xt Tip"
-msgstr ""
+msgstr "النصيحة التالية"
 
 #: bin/openerp.glade:3553
 msgid "OpenERP - License"
-msgstr ""
+msgstr "رخصة - OpenERP"
 
 #: bin/openerp.glade:3568
 msgid "OpenERP license"
-msgstr ""
+msgstr "رخصة نظام OpenERP"
 
 #: bin/openerp.glade:4263
 msgid "Go to resource ID"
-msgstr ""
+msgstr "ذهاب إلي معرف مصدر"
 
 #: bin/openerp.glade:4313
 msgid "Search ID:"
-msgstr ""
+msgstr "بحث عن معرف:"
 
 #: bin/openerp.glade:4392
 msgid ""
@@ -1998,11 +2006,11 @@ msgstr ""
 
 #: bin/openerp.glade:4451
 msgid "Phone number:"
-msgstr ""
+msgstr "رقم الهاتف:"
 
 #: bin/openerp.glade:4464
 msgid "Emergency:"
-msgstr ""
+msgstr "طوارئ:"
 
 #: bin/openerp.glade:4478
 msgid ""
@@ -2011,6 +2019,10 @@ msgid ""
 "Urgent\n"
 "Very Urgent"
 msgstr ""
+"غير مهم\n"
+"متوسط\n"
+"مهم\n"
+"مهم للغاية"
 
 #: bin/openerp.glade:4511
 msgid "<b>Support contract id:</b>"
@@ -2018,43 +2030,43 @@ msgstr ""
 
 #: bin/openerp.glade:4568 bin/win_error.glade:200
 msgid "Other comments:"
-msgstr ""
+msgstr "تعليقات أخري:"
 
 #: bin/openerp.glade:4582
 msgid "Explain your problem:"
-msgstr ""
+msgstr "اشرح مشكلتك:"
 
 #: bin/openerp.glade:4621
 msgid "<b>Your email:</b>"
-msgstr ""
+msgstr "<b>بريدك الإلكتروني:</b>"
 
 #: bin/openerp.glade:4635
 msgid "<b>Your Company:</b>"
-msgstr ""
+msgstr "<b>شركتك:</b>"
 
 #: bin/openerp.glade:4649
 msgid "<b>Your name:</b>"
-msgstr ""
+msgstr "<b>اسمك :</b>"
 
 #: bin/openerp.glade:4740 bin/openerp.glade:6110
 msgid "Hello World!"
-msgstr ""
+msgstr "مرحباً أيها عالم!"
 
 #: bin/openerp.glade:4802
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "اختصارات لوحة المفاتيح"
 
 #: bin/openerp.glade:4824
 msgid "<b>Shortcuts for OpenERP</b>"
-msgstr ""
+msgstr "<b>إختصارات OpenERP</b>"
 
 #: bin/openerp.glade:4838
 msgid "Close window without saving"
-msgstr ""
+msgstr "غلق الشاشة دون الحفظ"
 
 #: bin/openerp.glade:4853
 msgid "<Ctrl> + <Esc>"
-msgstr ""
+msgstr "<Ctrl> + <Esc>"
 
 #: bin/openerp.glade:4867
 msgid "<i>When editing a resource in a popup window</i>"
@@ -2062,278 +2074,281 @@ msgstr ""
 
 #: bin/openerp.glade:4883
 msgid "Save and Close window"
-msgstr ""
+msgstr "حفظ و غلق الشباك"
 
 #: bin/openerp.glade:4898
 msgid "<Ctrl> + <Enter>"
-msgstr ""
+msgstr "<Ctrl> + <Enter>"
 
 #: bin/openerp.glade:4911
 msgid "Switch view mode"
-msgstr ""
+msgstr "تحويل وضع العرض"
 
 #: bin/openerp.glade:4926
 msgid "<Ctrl> + L"
-msgstr ""
+msgstr "<Ctrl> + L"
 
 #: bin/openerp.glade:4939
 msgid "Next record"
-msgstr ""
+msgstr "السجل التالي"
 
 #: bin/openerp.glade:4954
 msgid "Previous record"
-msgstr ""
+msgstr "السجل السابق"
 
 #: bin/openerp.glade:4969
 msgid "<PgDn>"
-msgstr ""
+msgstr "<PgDn>"
 
 #: bin/openerp.glade:4982
 msgid "<PgUp>"
-msgstr ""
+msgstr "<PgUp>"
 
 #: bin/openerp.glade:5010
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
 #: bin/openerp.glade:5025
 msgid "<Ctrl> + W"
-msgstr ""
+msgstr "<Ctrl> + W"
 
 #: bin/openerp.glade:5038
 msgid "<Ctrl> + S"
-msgstr ""
+msgstr "<Ctrl> + S"
 
 #: bin/openerp.glade:5066
 msgid "<Ctrl> + <PgDn>"
-msgstr ""
+msgstr "<Ctrl> + <PgDn>"
 
 #: bin/openerp.glade:5079
 msgid "Previous tab"
-msgstr ""
+msgstr "مبوبة سابقة"
 
 #: bin/openerp.glade:5094
 msgid "<Ctrl> + <PgUp>"
-msgstr ""
+msgstr "<Ctrl> + <PgUp>"
 
 #: bin/openerp.glade:5107
 msgid "New"
-msgstr ""
+msgstr "جديد"
 
 #: bin/openerp.glade:5122
 msgid "<Ctrl> + N"
-msgstr ""
+msgstr "<Ctrl> + N"
 
 #: bin/openerp.glade:5135
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 #: bin/openerp.glade:5150
 msgid "<Ctrl> + D"
-msgstr ""
+msgstr "<Ctrl> + D"
 
 #: bin/openerp.glade:5163
 msgid "Find / Search"
-msgstr ""
+msgstr "إيجاد / بحث"
 
 #: bin/openerp.glade:5178
 msgid "<Ctrl> + F"
-msgstr ""
+msgstr "<Ctrl> + F"
 
 #: bin/openerp.glade:5191
 msgid "Connect"
-msgstr ""
+msgstr "اتصل"
 
 #: bin/openerp.glade:5206
 msgid "<Ctrl> + O"
-msgstr ""
+msgstr "<Ctrl> + O"
 
 #: bin/openerp.glade:5220
 msgid "Main Shortcuts"
-msgstr ""
+msgstr "المختصرات الرئيسية"
 
 #: bin/openerp.glade:5237
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
 #: bin/openerp.glade:5250
 msgid "<b>Shortcuts in relation fields</b>"
-msgstr ""
+msgstr "<b>مختصرات للحقول</b>"
 
 #: bin/openerp.glade:5265
 msgid "<b>Shortcuts in text entries</b>"
-msgstr ""
+msgstr "<b>الإختصارات للمدخلات النصية</b>"
 
 #: bin/openerp.glade:5278
 msgid "Open current field"
-msgstr ""
+msgstr "فتح الحقل الحالي"
 
 #: bin/openerp.glade:5293
 msgid "Add a new line/field"
-msgstr ""
+msgstr "إضافة سطر/خط جديد"
 
 #: bin/openerp.glade:5308
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: bin/openerp.glade:5321
 msgid "Auto-Complete text field"
-msgstr ""
+msgstr "الإكمال التلقائي للحقول النصية"
 
 #: bin/openerp.glade:5336
 msgid "<Enter>"
-msgstr ""
+msgstr "<Enter>"
 
 #: bin/openerp.glade:5349
 msgid "Previous editable widget"
-msgstr ""
+msgstr "تحرير القطعة السابقة"
 
 #: bin/openerp.glade:5364
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.glade:5377
 msgid "Next editable widget"
-msgstr ""
+msgstr "الأيقونة التالية قابلة التحرير"
 
 #: bin/openerp.glade:5392
 msgid "<Tab>"
-msgstr ""
+msgstr "<Tab>"
 
 #: bin/openerp.glade:5405
 msgid "Paste selected text"
-msgstr ""
+msgstr "لصق النص المحدد"
 
 #: bin/openerp.glade:5420
 msgid "Copy selected text"
-msgstr ""
+msgstr "انسخ النص المحدد"
 
 #: bin/openerp.glade:5435
 msgid "Cut selected text"
-msgstr ""
+msgstr "قطع النص المختار"
 
 #: bin/openerp.glade:5450
 msgid "<Ctrl> + V"
-msgstr ""
+msgstr "<Ctrl> + V"
 
 #: bin/openerp.glade:5463
 msgid "<Ctrl> + C"
-msgstr ""
+msgstr "<Ctrl> + C"
 
 #: bin/openerp.glade:5476
 msgid "<Ctrl> + X"
-msgstr ""
+msgstr "<Ctrl> + X"
 
 #: bin/openerp.glade:5493
 msgid "Edition Widgets"
-msgstr ""
+msgstr "تحرير الملحقات"
 
 #: bin/openerp.glade:5533
 msgid "Import from CSV"
-msgstr ""
+msgstr "استيراد ملف CSV"
 
 #: bin/openerp.glade:5578
 msgid "<b>All fields</b>"
-msgstr ""
+msgstr "<b>جميع الحقول</b>"
 
 #: bin/openerp.glade:5715
 msgid "N_othing"
-msgstr ""
+msgstr "لا شئ"
 
 #: bin/openerp.glade:5852
 msgid "Auto-Detect"
-msgstr ""
+msgstr "كشف تلقائي"
 
 #: bin/openerp.glade:5772
 msgid "<b>Fields to import</b>"
-msgstr ""
+msgstr "<b>الحقول للإستيراد</b>"
 
 #: bin/openerp.glade:5891
 msgid "File to Import:"
-msgstr ""
+msgstr "الملفات للإستيراد"
 
 #: bin/openerp.glade:5930
 msgid "Lines to Skip:"
-msgstr ""
+msgstr "خطوط لتفاوتها:"
 
 #: bin/openerp.glade:5959
 msgid "Text Delimiter:"
-msgstr ""
+msgstr "رموز نصية:"
 
 #: bin/openerp.glade:5987
 msgid "Encoding:"
-msgstr ""
+msgstr "ترميز:"
 
 #: bin/openerp.glade:6035
 msgid "Field Separater:"
-msgstr ""
+msgstr "فاصل الحقول:"
 
 #: bin/openerp.glade:6012
 msgid "CSV Parameters"
-msgstr ""
+msgstr "معطيات الـ CSV"
 
 #: bin/openerp.glade:6177
 msgid "Server"
-msgstr ""
+msgstr "خادم"
 
 #: bin/openerp.glade:6187
 msgid "<b>Connect to a OpenERP server</b>"
-msgstr ""
+msgstr "<b>إتصال بخادم OpenERP </b>"
 
 #: bin/openerp.glade:6246
 msgid "Protocol connection:"
-msgstr ""
+msgstr "نوع البروتوكول للإتصال:"
 
 #: bin/openerp.glade:6292
 msgid "Port:"
-msgstr ""
+msgstr "المنفذ:"
 
 #: bin/openerp.glade:6344
 msgid "Choose a database..."
-msgstr ""
+msgstr "اختر قاعدة البيانات..."
 
 #: bin/openerp.glade:6359
 msgid "<b>Backup a database</b>"
-msgstr ""
+msgstr "<b>حفظ نسخة إحتياطية لقاعدة البيانات</b>"
 
 #: bin/openerp.glade:6600
 msgid "Restore a database"
-msgstr ""
+msgstr "إستعادة قاعدة البيانات"
 
 #: bin/openerp.glade:6613
 msgid "<b>Restore a database</b>"
-msgstr ""
+msgstr "<b>إستعادة قاعدة البيانات</b>"
 
 #: bin/openerp.glade:6657
 msgid "(must not contain any special char)"
-msgstr ""
+msgstr "(لا يجب أن تحتوي علي أي رموز خاصة)"
 
 #: bin/openerp.glade:6687
 msgid "New database name:"
-msgstr ""
+msgstr "اسم قاعدة البيانات الجديدة:"
 
 #: bin/openerp.glade:6787 bin/openerp.glade:6933 bin/openerp.glade:7451
 msgid "http://localhost:8069"
-msgstr ""
+msgstr "http://localhost:8069"
 
 #: bin/openerp.glade:6861
 msgid "Create a new database"
-msgstr ""
+msgstr "إنشاء قاعدة بيانات جديدة"
 
 #: bin/openerp.glade:6874
 msgid "<b>Create a new database</b>"
-msgstr ""
+msgstr "<b>إنشاء قاعدة بيانات جديدة</b>"
 
 #: bin/openerp.glade:6945
 msgid ""
 "This is the URL of the OpenERP server. Use 'localhost' if the server is "
 "installed on this computer. Click on 'Change' to change the address."
 msgstr ""
+"هذا هو عنوان الـ URL للخادم، استخدم 'localhost' لو الخادم هو نفس هذا الحاسب، "
+"اضغط علي \"تغيير\" لتغيير العنوان."
 
 #: bin/openerp.glade:6949
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>OpenERP Server:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>خادم OpenERP:"
 
 #: bin/openerp.glade:6980
 msgid ""
@@ -2341,31 +2356,40 @@ msgid ""
 "databases. This is not a OpenERP user, just a super administrator. If you "
 "did not changed it, the password is 'admin' after installation."
 msgstr ""
+"هذه هي كلمة السر للمستخدم الذي لديه حق الإشراف علي قواعد البيانات، و ليس "
+"للمستخدم العادي بل للمشرف العام. إذا لم تقم بتغييرها أثنا تهيئة البرنامج، "
+"فكلمة السر تكون 'admin'"
 
 #: bin/openerp.glade:6984
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Super "
 "Administrator Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>كلمة مرور المشرف "
+"العام:"
 
 #: bin/openerp.glade:7003
 msgid "admin"
-msgstr ""
+msgstr "المشرف العام"
 
 #: bin/openerp.glade:7017
 msgid "(<i>admin</i>, by default)"
-msgstr ""
+msgstr "(<i>admin</i>, القيمة الإفتراضية)"
 
 #: bin/openerp.glade:7082
 msgid ""
 "Choose the name of the database that will be created. The name must not "
 "contain any special character. Exemple: 'terp'."
 msgstr ""
+"اختر اسم لقاعدة البيانات التي سيتم إنشاءها. علي ألا يحتوي الاسم رمز خاص او "
+"كلمة محجوزة. مثل 'terp'."
 
 #: bin/openerp.glade:7084
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>New Database Name:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>اسم قاعدة البيانات "
+"الجديدة:"
 
 #: bin/openerp.glade:7109
 msgid ""
@@ -2373,34 +2397,42 @@ msgid ""
 "will be able to install new languages after installation through the "
 "administration menu."
 msgstr ""
+"اختر اللغة الافتراضية التي ستنزل مع قاعدة البيانات. يمكنك إضافة لغات أخري "
+"لاحقاً من خلال قائمة المشرف او administration"
 
 #: bin/openerp.glade:7111
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Default Language:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>اللغة الإفتراضية:"
 
 #: bin/openerp.glade:7124
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database."
-msgstr ""
+msgstr "هذه كلمة مرور المشرف 'admin' و التي ستستخدم بقاعدة البيانات الجديدة"
 
 #: bin/openerp.glade:7126
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Administrator "
 "Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>كلمة مرور المشرف "
+"العام:"
 
 #: bin/openerp.glade:7139
 msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
+"هذه كلمة المرور لحساب الـ 'admin' و التي ستنشأ بقاعدة البيانات الجديدة، يجب "
+"ان تكون مماثلة كما في الحقل السابق."
 
 #: bin/openerp.glade:7141
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Confirm Password:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>تأكيد كلمة المرور:"
 
 #: bin/openerp.glade:7234
 msgid ""
@@ -2408,40 +2440,44 @@ msgid ""
 "database. These data will help you to understand OpenERP, with predefined "
 "products, partners, etc."
 msgstr ""
+"قم بالتعليم علي هذا المربع إذا أردت تحميل البيانات الوهمية لقاعدة البيانات "
+"الجديدة. تساعدك البيانات الوهمية إلي فهم البرنامج، مثل إضافة منتجات و شركاء."
 
 #: bin/openerp.glade:7237
 msgid ""
 "<sup><b><span foreground=\"dark green\">?</span></b></sup>Load Demonstration "
 "Data:"
 msgstr ""
+"<sup><b><span foreground=\"dark green\">?</span></b></sup>تحميل البيانات "
+"الوهمية:"
 
 #: bin/openerp.glade:483 bin/openerp.glade:7304
 msgid "Change password"
-msgstr ""
+msgstr "تغيير كلمة المرور"
 
 #: bin/openerp.glade:7321
 msgid "<b>Change your super admin password</b>"
-msgstr ""
+msgstr "<b>تغيير كلمة مرور المشرف العام</b>"
 
 #: bin/openerp.glade:7477
 msgid "Old password:"
-msgstr ""
+msgstr "كلمة المرور القديمة:"
 
 #: bin/openerp.glade:7490
 msgid "New password:"
-msgstr ""
+msgstr "كلمة مرور جديدة:"
 
 #: bin/openerp.glade:7503
 msgid "New password confirmation:"
-msgstr ""
+msgstr "تأكيد كلمة المرور الجديدة:"
 
 #: bin/openerp.glade:7562
 msgid "OpenERP Message"
-msgstr ""
+msgstr "رسالة OpenERP"
 
 #: bin/openerp.glade:7746
 msgid "Concurrency exception"
-msgstr ""
+msgstr "خطأ تزامني"
 
 #: bin/openerp.glade:7771
 msgid ""
@@ -2454,56 +2490,66 @@ msgid ""
 "   - \"Compare\" to see the modified version.\n"
 "   - \"Write anyway\" to save your current version.\n"
 msgstr ""
+"<b>\n"
+"تحذير بشأن التحرير المزدوج:\n"
+"</b>\n"
+"هذا المستند قد تم تعديله بينما كنت انت تحرره.\n"
+"  اختر:\n"
+"   - \"إلغاء\" لإلغاء الحفظ.\n"
+"   - \"علي أي حال أكتب\" لحفظ الإصدار الحالي.\n"
+"   - \"Write anyway\" to save your current version.\n"
 
 #: bin/openerp.glade:7834
 msgid "Compare"
-msgstr ""
+msgstr "قارن"
 
 #: bin/openerp.glade:7880
 msgid "Write anyway"
-msgstr ""
+msgstr "علي أي حال أكتب"
 
 #: bin/openerp.glade:7910 bin/openerp.glade:7920
 msgid "window1"
-msgstr ""
+msgstr "شباك 1"
 
 #: bin/openerp.glade:7992
 msgid "Today"
-msgstr ""
+msgstr "اليوم"
 
 #: bin/openerp.glade:8038
 msgid "September 2008"
-msgstr ""
+msgstr "سبتمبر 2008"
 
 #: bin/openerp.glade:8052
 msgid "Day"
-msgstr ""
+msgstr "يوم"
 
 #: bin/openerp.glade:8076
 msgid "Month"
-msgstr ""
+msgstr "شهر"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
-msgstr ""
+msgstr "الحقول التي سيتم تطبيق معايير البحث فيها"
 
 #: bin/openerp.glade:8289
 msgid "Conditional Operators"
-msgstr ""
+msgstr "الرموز الشرطية"
 
 #: bin/openerp.glade:8316
 msgid "The Choice will be applied with next filter if any"
-msgstr ""
+msgstr "سيتم تطبيق الإختيار مع المرشح التالي ﻷي شئ"
 
 #: bin/openerp.glade:8317
 msgid ""
 "AND\n"
 "OR"
 msgstr ""
+"AND\n"
+"OR"
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "إزالة المرشح"
 
 #: bin/openerp.glade:8230
 msgid "Filter Entry"
@@ -2544,7 +2590,7 @@ msgstr "إشرح ما فعلت:"
 
 #: bin/win_error.glade:200
 msgid "Others Comments:"
-msgstr ""
+msgstr "تعليقات أخري"
 
 #: bin/win_error.glade:285
 msgid "Send to Publisher Warranty Team"
