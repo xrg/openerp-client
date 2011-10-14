@@ -99,8 +99,6 @@ class custom_filter(wid_int.wid_int):
             operator = self.op_active[self.combo_op.get_active()]
             right_text =  self.right_text.get_text() or False
 
-            if operator in ['not ilike','<>', 'not in'] and field_type != 'boolean':
-                false_value_domain = ['|', (field_left,'=', False)]
             try:
                 cast_type = True
                 if field_type in type_cast:
@@ -121,6 +119,10 @@ class custom_filter(wid_int.wid_int):
                 self.right_text.modify_bg(gtk.STATE_ACTIVE, gtk.gdk.color_parse("#ff6969"))
                 self.right_text.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("#ff6969"))
                 return {}
+
+            if operator in ['not ilike','<>', 'not in'] and field_type != 'boolean' and right_text:
+                false_value_domain = ['|', (field_left,'=', False)]
+
             if operator in ['ilike','not ilike']:
                 if field_type in ['integer','float','date','datetime','boolean']:
                     operator = (operator == 'ilike') and '=' or '!='
