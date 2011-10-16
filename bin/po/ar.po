@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-10-14 15:39+0000\n"
-"Last-Translator: kifcaliph <kifcaliph@hotmail.com>\n"
+"PO-Revision-Date: 2011-10-15 22:15+0000\n"
+"Last-Translator: almodhesh <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-15 05:17+0000\n"
+"X-Launchpad-Export-Date: 2011-10-16 05:25+0000\n"
 "X-Generator: Launchpad (build 14124)\n"
 "Language: ar\n"
 
@@ -80,7 +80,7 @@ msgstr "كلمة مرور المشرف العام الفائق:"
 
 #: bin/modules/gui/main.py:193
 msgid "Bad Super Administrator Password"
-msgstr "كلمة مرور المشرف العام الفائق خاطئة"
+msgstr "كلمة مرور المشرف الاعلى خاطئة:"
 
 #: bin/modules/gui/main.py:217
 msgid "Migration Scripts"
@@ -904,7 +904,7 @@ msgstr ""
 
 #: bin/widget_search/wid_int.py:56
 msgid "The content of the widget or exception if not valid"
-msgstr ""
+msgstr "المحتويات المستنبطة أو المستناة غير صحيحة"
 
 #: bin/widget_search/char.py:45
 msgid "Error: "
@@ -1655,7 +1655,7 @@ msgstr "_مساعدة"
 
 #: bin/openerp.glade:1140
 msgid "Enable Debug Mode Tooltips"
-msgstr ""
+msgstr "السماح لنمط التصحيح أدوات الإرشادات"
 
 #: bin/openerp.glade:1148 bin/openerp.glade:4366
 msgid "Support Request"
@@ -1975,7 +1975,7 @@ msgstr "تذكرة اليوم"
 
 #: bin/openerp.glade:3408
 msgid "_Display a new tip next time?"
-msgstr ""
+msgstr "_عرض نصيحة جديدة المره القادمة؟"
 
 #: bin/openerp.glade:3461
 msgid "Pre_vious Tip"
