@@ -102,7 +102,10 @@ class custom_filter(wid_int.wid_int):
             right_text =  self.right_text.get_text() or False
 
             if operator in ['not ilike','<>', 'not in'] and field_type != 'boolean':
-                false_value_domain = ['|', (field_left,'=', False)]
+                if field_type in ['char','text']:
+                    false_value_domain = ['|', (field_left,'=', '')]
+                else:
+                    false_value_domain = ['|', (field_left,'=', False)]
             try:
                 cast_type = True
                 if field_type in type_cast:
