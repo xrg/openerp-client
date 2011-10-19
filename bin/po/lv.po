@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-01-19 13:30+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2011-10-18 09:45+0000\n"
+"Last-Translator: sraps (Alistek) <Unknown>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-15 05:10+0000\n"
-"X-Generator: Launchpad (build 13921)\n"
+"X-Launchpad-Export-Date: 2011-10-19 06:11+0000\n"
+"X-Generator: Launchpad (build 14157)\n"
 "Language: lv\n"
 
 #: bin/plugins/__init__.py:27
@@ -438,7 +438,7 @@ msgstr "Kļūda!"
 
 #: bin/modules/gui/window/form.py:368
 msgid "Warning !"
-msgstr ""
+msgstr "Uzmanību!"
 
 #: bin/modules/gui/window/form.py:389 bin/modules/gui/window/form.py:497
 msgid ""
@@ -519,11 +519,11 @@ msgstr "Lauka nosaukums"
 
 #: bin/modules/gui/window/win_import.py:181
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "Kļūda atverot .CSV failu"
 
 #: bin/modules/gui/window/win_import.py:181
 msgid "Input Error."
-msgstr ""
+msgstr "Ievades kļūda."
 
 #: bin/modules/gui/window/win_import.py:199
 #, python-format
@@ -935,33 +935,33 @@ msgstr "OpenERP - datuma izvēlne"
 #: bin/widget_search/custom_filter_widgets.py:67
 #: bin/widget_search/custom_filter_widgets.py:98
 msgid "contains"
-msgstr ""
+msgstr "satur"
 
 #: bin/widget_search/custom_filter_widgets.py:41
 #: bin/widget_search/custom_filter_widgets.py:68
 #: bin/widget_search/custom_filter_widgets.py:98
 msgid "doesn't contain"
-msgstr ""
+msgstr "nesatur"
 
 #: bin/widget_search/custom_filter_widgets.py:290
 #: bin/widget_search/custom_filter_widgets.py:331
 msgid "is equal to"
-msgstr ""
+msgstr "ir vienāds ar"
 
 #: bin/widget_search/custom_filter_widgets.py:291
 #: bin/widget_search/custom_filter_widgets.py:332
 msgid "is not equal to"
-msgstr ""
+msgstr "nav vienāds ar"
 
 #: bin/widget_search/custom_filter_widgets.py:292
 #: bin/widget_search/custom_filter_widgets.py:333
 msgid "greater than"
-msgstr ""
+msgstr "lielāks par"
 
 #: bin/widget_search/custom_filter_widgets.py:293
 #: bin/widget_search/custom_filter_widgets.py:334
 msgid "less than"
-msgstr ""
+msgstr "mazāks par"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
@@ -969,7 +969,7 @@ msgstr ""
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr ""
+msgstr "tajā skaitā nav"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
@@ -1031,7 +1031,7 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:74
 msgid "--Actions--"
-msgstr ""
+msgstr "--Darbības--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
@@ -1039,11 +1039,11 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:74
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Saglabāt Filtru kā"
 
 #: bin/widget/view/screen_container.py:74
 msgid "Manage Filters"
-msgstr ""
+msgstr "Pārvaldīt filtrus"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1205,12 +1205,12 @@ msgstr "Dzēst šo ierakstu"
 #: bin/widget/view/form_gtk/many2many.py:84
 #: bin/widget/view/form_gtk/one2many_list.py:210
 msgid "Previous Page"
-msgstr ""
+msgstr "Iepriekšējā lapa"
 
 #: bin/widget/view/form_gtk/many2many.py:88
 #: bin/widget/view/form_gtk/one2many_list.py:214
 msgid "Previous Record"
-msgstr ""
+msgstr "Iepriekšējais Ieraksts"
 
 #: bin/widget/view/form_gtk/many2many.py:96
 #: bin/widget/view/form_gtk/one2many_list.py:222
@@ -2569,7 +2569,7 @@ msgstr ""
 
 #: bin/openerp.glade:8330
 msgid "Remove Filter"
-msgstr ""
+msgstr "Noņemt filtru"
 
 #: bin/openerp.glade:8230
 msgid "Filter Entry"
