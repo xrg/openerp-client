@@ -371,11 +371,8 @@ class Boolean(Int):
         model = store.get_value(iter, 0)
         value = self.get_textual_value(model)
         # A Fix to manage the groupby on boolean fields
-        # Author : Serpent Consulting Services 
         if not isinstance(value,(bool,int)):
-            value = value.split(' ')
-            mapping = {'False':False,'True':True}
-            value =  eval(value[0],mapping)
+            value =  eval(value.split(' ')[0])
         cell.set_active(bool(value))
         
         if model.value.get('state',False):
