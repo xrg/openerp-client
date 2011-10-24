@@ -42,7 +42,23 @@ class spinint(interface.widget_interface):
         self.widget.connect('activate', self.sig_activate)
         self.widget.connect('input', self.format_input)
         self.widget.connect('output', self.format_output)
-
+        self.widget.connect('insert-text', self._on_insert_text)
+    
+    def _on_insert_text(self, editable, value, length, position):
+        text = self.widget.get_text()
+        if value:
+            current_pos = self.widget.get_position()
+            new_text = text[:current_pos] + value + text[current_pos:]
+            digits = self.widget.get_digits()
+            try:
+                spin_value = user_locale_format.str2float(new_text)
+                new_spin_value = user_locale_format.format('%.' + str(digits) + 'f', spin_value)
+            except:
+                self.widget.set_text(text)
+                self.widget.stop_emission('insert-text')
+                self.widget.show()
+        return
+ 
     def format_output(self, spin):
         digits = spin.get_digits()
         value = spin.get_value()
