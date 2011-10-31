@@ -28,6 +28,7 @@
 import sys
 import os
 import glob
+import shutil
 
 from setuptools import setup
 from setuptools.command.install import install as suc_install
@@ -39,12 +40,12 @@ if sys.platform == 'win32':
     import py2exe
     has_py2exe = True
 
-    origIsSystemDLL = py2exe.build_exe.isSystemDLL
-    def isSystemDLL(pathname):
-        if os.path.basename(pathname).lower() in ("msvcp71.dll", "mfc71.dll"):
-                return 0
-        return origIsSystemDLL(pathname)
-    py2exe.build_exe.isSystemDLL = isSystemDLL
+#    origIsSystemDLL = py2exe.build_exe.isSystemDLL
+#    def isSystemDLL(pathname):
+#        if os.path.basename(pathname).lower() in ("msvcp71.dll", "mfc71.dll"):
+#                return 0
+#        return origIsSystemDLL(pathname)
+#    py2exe.build_exe.isSystemDLL = isSystemDLL
 
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "bin"))
 
@@ -77,6 +78,7 @@ def data_files():
         files.append(("po", glob.glob("bin\\po\\*.*")))
         files.append(("icons", glob.glob("bin\\icons\\*.png")))
         files.append(("share\\locale", glob.glob("bin\\share\\locale\\*.*")))
+
     else:
         files.append((opj('share','man','man1',''),['man/openerp-client.1']))
         files.append((opj('share','doc', 'openerp-client-%s' % version), [f for
@@ -119,22 +121,15 @@ options = {
         "compressed": 1,
         "optimize": 1,
         "dist_dir": 'dist',
+        "bundle_files": 3,
         "packages": [
-            "encodings","gtk", "matplotlib", "pytz", "OpenSSL",
+           "encodings","gtk","gtk.glade","gio", "glib", "matplotlib", "pytz", "OpenSSL",
             "lxml", "lxml.builder", "lxml._elementpath", "lxml.etree",
             "lxml.objectify", "decimal"
         ],
-        "includes": "pango,atk,gobject,cairo,atk,pangocairo,matplotlib._path",
         "excludes": ["Tkinter", "tcl", "TKconstants"],
-        "dll_excludes": [
-            "iconv.dll","intl.dll","libatk-1.0-0.dll",
-            "libgdk_pixbuf-2.0-0.dll","libgdk-win32-2.0-0.dll",
-            "libglib-2.0-0.dll","libgmodule-2.0-0.dll",
-            "libgobject-2.0-0.dll","libgthread-2.0-0.dll",
-            "libgtk-win32-2.0-0.dll","libpango-1.0-0.dll",
-            "libpangowin32-1.0-0.dll",
-            "wxmsw26uh_vc.dll",
-        ],
+        "dll_excludes": ["MSVCP90.dll","tcl85.dll","tk85.dll"],
+
     }
 }
 
@@ -205,6 +200,20 @@ setup(name             = name,
 )
 
 if has_py2exe:
+    if os.getenv('gtk_runtime'):
+        def copy_dir(src,dst):
+            if not os.path.isdir(dst):
+                shutil.copytree(src, dst)
+
+        gtk_runtime=os.getenv('gtk_runtime')
+        # To enable gtk theme we need to add below dir of gtkruntime to dist dir
+        add_dir = ["share\\themes", "lib\\gtk-2.0", "etc"]
+        dist = opj(os.getcwd() , options['py2exe']['dist_dir'])
+        for dir in add_dir:
+            copy_dir(opj(gtk_runtime, dir), opj(dist, dir))
+    else:
+        print >> sys.stderr, 'Error: Environment variable GTK_RUNTIME is not set'
+#
     # Sometime between pytz-2008a and pytz-2008i common_timezones started to
     # include only names of zones with a corresponding data file in zoneinfo.
     # pytz installs the zoneinfo directory tree in the same directory
@@ -214,6 +223,7 @@ if has_py2exe:
     # read in the py2exe executable.
     # This manually copies zoneinfo into the zip. See also
     # http://code.google.com/p/googletransitdatafeed/issues/detail?id=121
+
     import pytz
     import zipfile
     # Make sure the layout of pytz hasn't changed
