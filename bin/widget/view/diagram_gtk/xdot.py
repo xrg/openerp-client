@@ -29,8 +29,8 @@ __version__ = "0.4"
 
 import os
 import sys
-import subprocess
 import math
+import subprocess
 import colorsys
 import time
 import re
@@ -42,6 +42,11 @@ import gtk.keysyms
 import cairo
 import pango
 import pangocairo
+try:
+    import win32process
+    create_flag = win32process.CREATE_NO_WINDOW
+except:
+    create_flag = 0
 from widget.view.form_gtk.many2one import dialog
 import printer
 from tools import node_attributes
@@ -1402,7 +1407,8 @@ class DotWidget(gtk.DrawingArea):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             shell=False,
-            universal_newlines=True
+            universal_newlines=True,
+            creationflags = create_flag
         )
         xdotcode, error = p.communicate(dotcode)
         if p.returncode != 0:
