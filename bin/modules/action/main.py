@@ -72,6 +72,10 @@ class main(service.Service):
         act_id = int(act_id)
         ctx = rpc.session.context.copy()
         ctx.update(context)
+
+        # avoid reading large binary values that we won't even care about
+        ctx['bin_size'] = True
+
         if type is None:
             res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', int(act_id), ['type'], ctx)
             if not (res and len(res)):
