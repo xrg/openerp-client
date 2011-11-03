@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-04-24 22:00+0000\n"
-"Last-Translator: simone.sandri <lexluxsox@hotmail.it>\n"
+"PO-Revision-Date: 2011-11-02 10:03+0000\n"
+"Last-Translator: Lorenzo Battistini - Agile BG - Domsense "
+"<lorenzo.battistini@agilebg.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-15 05:10+0000\n"
-"X-Generator: Launchpad (build 13921)\n"
+"X-Launchpad-Export-Date: 2011-11-03 05:35+0000\n"
+"X-Generator: Launchpad (build 14214)\n"
 "Language: it\n"
 
 #
@@ -886,7 +887,7 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:447
 msgid "You must select one or several records !"
-msgstr "Si deve selezionare una oo più parole !"
+msgstr "Selezionare una o più righe !"
 
 #
 # File: bin/modules/gui/window/form.py, line: 358
