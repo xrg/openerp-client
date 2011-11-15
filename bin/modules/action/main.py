@@ -73,14 +73,16 @@ class main(service.Service):
         ctx = rpc.session.context.copy()
         ctx.update(context)
 
-        # avoid reading large binary values that we won't even care about
-        ctx['bin_size'] = True
 
         if type is None:
             res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.actions', 'read', int(act_id), ['type'], ctx)
             if not (res and len(res)):
                 raise Exception, 'ActionNotFound'
             type=res['type']
+
+        if type == 'ir.actions.report.xml':
+            # avoid reading large binary values that we won't even care about
+            ctx['bin_size'] = True
 
         res = rpc.session.rpc_exec_auth('/object', 'execute', type, 'read', act_id, False, ctx)
         self._exec_action(res,datas,context)
