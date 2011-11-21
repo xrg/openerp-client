@@ -34,6 +34,7 @@ from setuptools import setup
 from setuptools.command.install import install as suc_install
 from distutils.sysconfig import get_python_lib
 from mydistutils import ClientDistribution
+from distutils.dir_util import copy_tree as copy
 
 has_py2exe = False
 if sys.platform == 'win32':
@@ -200,19 +201,20 @@ setup(name             = name,
 )
 
 if has_py2exe:
+    dist = opj(os.getcwd() , options['py2exe']['dist_dir'])
     if os.getenv('gtk_runtime'):
-        def copy_dir(src,dst):
-            if not os.path.isdir(dst):
-                shutil.copytree(src, dst)
-
         gtk_runtime=os.getenv('gtk_runtime')
         # To enable gtk theme we need to add below dir of gtkruntime to dist dir
         add_dir = ["share\\themes", "lib\\gtk-2.0", "etc"]
-        dist = opj(os.getcwd() , options['py2exe']['dist_dir'])
         for dir in add_dir:
-            copy_dir(opj(gtk_runtime, dir), opj(dist, dir))
+            copy(opj(gtk_runtime, dir), opj(dist, dir))
     else:
         print >> sys.stderr, 'Error: Environment variable GTK_RUNTIME is not set'
+    if os.getenv('openerp_dlls'):
+        openerp_dlls = os.getenv('openerp_dlls')
+        copy(opj(openerp_dlls, 'add_to_dist'), dist)
+    else:
+        print >> sys.stderr, 'Error: Environment variable openerp_dlls is not set'
 #
     # Sometime between pytz-2008a and pytz-2008i common_timezones started to
     # include only names of zones with a corresponding data file in zoneinfo.
