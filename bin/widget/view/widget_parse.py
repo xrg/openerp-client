@@ -28,24 +28,32 @@ import form_gtk
 import tree_gtk
 import graph_gtk
 import calendar_gtk
-import gantt_gtk
-import diagram_gtk
 
 from form import ViewForm
 from list import ViewList
 from graph import ViewGraph
 from calendar import ViewCalendar
-from diagram import ViewDiagram
-from gantt import ViewGantt
 
 parsers = {
     'form' : (form_gtk.parser_form, ViewForm),
     'tree' : (tree_gtk.parser_tree, ViewList),
     'graph': (graph_gtk.parser_graph, ViewGraph),
     'calendar' : (calendar_gtk.parser_calendar, ViewCalendar),
-    'gantt' : (gantt_gtk.parser_gantt, ViewGantt),
-    'diagram' : (diagram_gtk.parser_diagram, ViewDiagram),
 }
+
+try:
+    from gantt import ViewGantt
+    import gantt_gtk
+    parsers['gantt'] = (gantt_gtk.parser_gantt, ViewGantt)
+except ImportError:
+    logging.getLogger().exception("Gantt view will not be available!")
+
+try:
+    from diagram import ViewDiagram
+    import diagram_gtk
+    parsers['diagram'] = (diagram_gtk.parser_diagram, ViewDiagram)
+except ImportError:
+    logging.getLogger().exception("Diagram view will not be available!")
 
 class widget_parse(interface.parser_interface):
     def parse(self, screen, node, fields, toolbar={}, submenu={}, help={}):
