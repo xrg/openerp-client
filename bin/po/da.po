@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-15 05:09+0000\n"
-"X-Generator: Launchpad (build 13921)\n"
+"X-Launchpad-Export-Date: 2011-11-11 05:19+0000\n"
+"X-Generator: Launchpad (build 14277)\n"
 "Language: da\n"
 
 #: bin/plugins/__init__.py:27
@@ -1984,7 +1984,7 @@ msgstr "_Add"
 
 #: bin/openerp.glade:2970 bin/openerp.glade:5667
 msgid "_Remove"
-msgstr "_Remove"
+msgstr "_Fjern"
 
 #: bin/openerp.glade:3018
 msgid "_Nothing"
@@ -2577,7 +2577,7 @@ msgstr "window1"
 
 #: bin/openerp.glade:7992
 msgid "Today"
-msgstr "Dag"
+msgstr "I dag"
 
 #: bin/openerp.glade:8038
 msgid "September 2008"

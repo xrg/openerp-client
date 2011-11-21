@@ -38,6 +38,10 @@ class custom_filter(wid_int.wid_int):
         win_gl = glade.XML(common.terp_path("openerp.glade"),"hbox_custom_filter",gettext.textdomain())
         self.widget = win_gl.get_widget('hbox_custom_filter')
 
+        #Changing the date format when using custom filter         
+        self.Dt_Tm_format = tools.user_locale_format.get_datetime_format(True)
+        self.Dt_format = tools.user_locale_format.get_date_format()
+        
         # Processing fields
         self.combo_fields = win_gl.get_widget('combo_fields')
         self.field_selection = {}
@@ -106,6 +110,9 @@ class custom_filter(wid_int.wid_int):
                         if right_text:
                             if field_type == 'datetime':
                                 right_text = len(right_text)==10 and (right_text + ' 00:00:00') or right_text
+                                right_text = tools.datetime_util.local_to_server_timestamp(right_text, self.Dt_Tm_format, DHM_FORMAT)
+                            else:
+                                right_text = tools.datetime_util.local_to_server_timestamp(right_text, self.Dt_format, DT_FORMAT)
                         else:
                             cast_type = False
                     if cast_type:
