@@ -134,7 +134,6 @@ Section OpenERP_GTK_Client SectionOpenERP_GTK_Client
     File /r "dist\*"
 
     SetOutPath "$INSTDIR\GTK"
-    File /r "C:\GTK\*"
 
     SetOutPath "$INSTDIR\doc"
     File "doc\*"
