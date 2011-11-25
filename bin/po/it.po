@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-11-02 10:03+0000\n"
+"PO-Revision-Date: 2011-11-23 08:00+0000\n"
 "Last-Translator: Lorenzo Battistini - Agile BG - Domsense "
 "<lorenzo.battistini@agilebg.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-11 05:19+0000\n"
-"X-Generator: Launchpad (build 14277)\n"
+"X-Launchpad-Export-Date: 2011-11-24 05:39+0000\n"
+"X-Generator: Launchpad (build 14336)\n"
 "Language: it\n"
 
 #
@@ -241,7 +241,7 @@ msgstr "Sono disponibili i seguenti aggiornamenti:"
 
 #: bin/modules/gui/main.py:258
 msgid "You can now migrate your databases."
-msgstr "Ora potete migrare i vostri database."
+msgstr "Ora è possibile migrare i propri database."
 
 #: bin/modules/gui/main.py:263
 msgid "Migrate Database"
@@ -257,7 +257,7 @@ msgstr "Il tuo database è stato aggiornato"
 
 #: bin/modules/gui/main.py:294
 msgid "Your databases have been upgraded."
-msgstr "I vostri database sono stati aggiornati."
+msgstr "I tuoi database sono stati aggiornati."
 
 #: bin/modules/gui/main.py:296
 msgid "You have not selected a database"
