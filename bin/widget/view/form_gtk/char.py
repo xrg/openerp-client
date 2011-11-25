@@ -21,7 +21,7 @@
 
 import gettext
 import gtk
-
+import tools
 import common
 import interface
 
@@ -41,8 +41,13 @@ class char(interface.widget_interface):
         self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
 
     def set_value(self, model, model_field):
-        return model_field.set_client(model, (self.widget.get_text()).strip() or False)
-
+        value = tools.ustr(self.widget.get_text()).strip()
+        ## PyGTK functions always return strings as str objects. In most (all?) cases, 
+        ##the strings are encoded in UTF-8. Ideally,Python programs should use unicode strings internally, 
+        ## so it’s wise to convert the output of PyGTK function calls to unicode. 
+        ## for more info:http://sjohannes.wordpress.com/2009/04/24/unicode-with-python-2-and-pygtk/
+        value = value.decode('utf-8')
+        return model_field.set_client(model, value or False)
 
     def display(self, model, model_field):
         if not model_field:
