@@ -244,3 +244,5 @@ if has_py2exe:
             z.write(os.path.join(absdir, f), os.path.join(zip_dir, f))
 
     z.close()
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

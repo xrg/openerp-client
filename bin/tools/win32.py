@@ -64,3 +64,5 @@ def get_systemfont_style():
         widget_class "*" style "openerp-user-font"
     ''' % (font_name, font_size)
     return font_style
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

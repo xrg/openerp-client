@@ -45,3 +45,5 @@ class progressbar(interface.widget_interface):
     def set_value(self, *args, **argv):
         pass
 
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

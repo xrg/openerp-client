@@ -47,3 +47,5 @@ class button(interface.widget_interface):
       _('The content of the widget or ValueError if not valid'))
 
 
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

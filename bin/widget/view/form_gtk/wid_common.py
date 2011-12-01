@@ -73,5 +73,4 @@ def field_pref_set(field, name, model, value, dependance=None, window=None):
         return True
     return False
 
-
-
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
