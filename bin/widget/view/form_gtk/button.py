@@ -38,7 +38,7 @@ class button(interface.widget_interface):
         return self.widget.get_label()
 
     def sig_exec(self, widget):
-        self.trigger('button_clicked', attrs['name'])
+        self.trigger('button_clicked', self.attrs['name'])
 
     def _value_set(self, value):
         pass
