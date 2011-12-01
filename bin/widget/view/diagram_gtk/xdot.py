@@ -42,11 +42,13 @@ import gtk.keysyms
 import cairo
 import pango
 import pangocairo
-try:
+
+if sys.platform == 'win32':
     import win32process
     create_flag = win32process.CREATE_NO_WINDOW
-except:
+else:
     create_flag = 0
+
 from widget.view.form_gtk.many2one import dialog
 import printer
 from tools import node_attributes
