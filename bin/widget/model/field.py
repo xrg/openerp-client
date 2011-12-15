@@ -94,8 +94,6 @@ class CharField(object):
         return ok
 
     def set(self, model, value, test_state=True, modified=False):
-        if isinstance(value, basestring):
-            value = value.strip()
         model.value[self.name] = value
         if modified:
             model.modified = True
