@@ -2,7 +2,7 @@ Source: openerp-client
 Section: x11
 Priority: optional
 Maintainer: OpenERP SA. <xrg@openerp.com>
-Build-Depends: debhelper (>= 7.0.50~), python
+Build-Depends: debhelper (>= 7.0.50~), python, python-setuptools
 Build-Depends-Indep: python-glade2, python-gtk2
 Standards-Version: 3.9.1
 Homepage: http://www.openerp.com/
@@ -10,7 +10,8 @@ Homepage: http://www.openerp.com/
 Package: openerp-client
 Architecture: all
 Depends:
- ${misc:Depends}, python, python-glade2, python-gtk2, python-pydot, python-tz,
+ ${misc:Depends}, python, python-support (>= 0.90), python-glade2, python-gtk2,
+ python-pydot, python-tz,
  python-lxml, python-egenix-mxdatetime,
  python-hippocanvas, python-matplotlib
 Recommends:

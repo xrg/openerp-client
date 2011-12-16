@@ -1,3 +1,134 @@
+openerp-client (6.0.3~2.gbp19f5e1) UNRELEASED; urgency=low
+
+  ** SNAPSHOT build @19f5e11ef42a58fd8a8975663ac37fecfd9990bf **
+
+  [ P. Christeas ]
+  * Remove first line of setup.py that would break shebang.
+  * Greek language (.po) for the client.
+  * Add .gitignore
+  * l10n: el_GR fixes
+  * tiny_socket: remove DNS cache
+  * rpc.py: make sure we don't cache options when switching servers
+  * Revert "[IMP]:connection protocol renamed choices"
+  * i18n: Greek translations
+  * calendar_gtk: cleanup imports, remove dependency on mx.DateTime
+  * release, licence, readme: convert to Unix eol, permissions
+  * release, licence, readme: convert to Unix eol, permissions
+  * win_import: Don't let exceptions crash the client [Bug 753277]
+  * widget_search: Custom Filter condition "in", "not in" don't remove whitespace
+  * SpiffGtkWidgets: remove
+  * action/main: don't read() unconditionally all fields
+  * widget_search: remove superfluous '%str%' decoration
+  * custom_filter: fix domain filter for non-equal operators
+  * widget_parse: skip Gantt, Diagram views if modules fail to load
+  * [IMP] Added missing vim mode lines
+  * diagram/xdot: improve previous commit, really mean win32
+  * form_gtk/button: fix sig_exec, as noted in lint check
+
+  [ Daniel Baumann ]
+  * Dropping old conflicts/replaces on tinyerp.
+  * Using correct rfc-2822 date formats in changelog.
+  * Releasing debian version 5.0.1-0-1.
+
+  [ Jimmy Angelakos ]
+  * Initial HELLUG version.
+  * Updated Greek translations.
+  * Updated debian/changelog
+
+  [ Stephane Wirtel ]
+  * Set the right allocation size - Thanks to Xavier ALT (AJM)
+  * cast to int
+
+
+  [ Vo Minh Thu ]
+  * [FIX] setup.py: now copy pytz zoneinfo data to the library.zip.
+
+  [ Olivier Dony ]
+  * [FIX] all: fix incorrect copyright/licensing terms
+
+  [ Amit Dodiya (OpenERP) ]
+  * [FIX] widget_search : Accented Characters now working in search
+
+  [ Yogesh (OpenERP) ]
+  * [FIX] fix problem of if context apply in o2m fiel then context not pass in fields_view_get(). get default value of model and eval with context and then context pass in screen on one2many field.
+  * Remove unused code.
+
+  [ Anup (OpenERP) ]
+  * [FIX] calendar_gtk : Calendar view now respects the timezone(Case:4721)
+
+  [ Yogesh (OpenERP) ]
+  * [FIX] improve context in O2M field.
+
+  [ Jay Vora (OpenERP) ]
+  * [MERGE] Merged Anup's branch for the fix of warning made working for editable list views
+  * [FIX] get_resource() corrected in order to speed up the process by removing extra RPC search call
+
+  [ Olivier Dony ]
+  * [FIX] one2many_list: prevent crash when evaluating context during init
+
+  [ Rifakat ]
+  * [FIX]: win_export.py: resolved loading a saved export config problem
+
+  [ Ila Rana ]
+  * [FIX]:gtk client: properties are set with selection widget.(case:16402)
+
+  [ Amit Dodiya (OpenERP) ]
+  * [FIX]: M2O search for partner in purchase_order:case(16409)
+
+  [ Anup (OpenERP) ]
+  * [FIX] thousand_seperator : Thousand seperator now affecting when changed form GTK
+
+  [ Stephane Wirtel ]
+  * [RELEASE] OpenERP 6.0.3
+
+  [ Quentin (OpenERP) ]
+  * [FIX] one2many_list: allow to use 'parent' in context of one2many fields
+
+  [ Ila Rana ]
+  * [FIX]:Put filter on entered text in many2one field of editable_tree_view-case(17255)
+  * [FIX]:Put filter on entered text in many2one field of editable_tree_view-case(17255)
+
+  [ Anup (OpenERP) ]
+  * [FIX] custom_filter : User Locale Date formats now accepted as an input to custom filter(Case:17563)
+
+  [ Amit Dodiya (OpenERP) ]
+  * [FIX]: ValueError: u'0.00' does not represent a valid integer value while save the project issue form
+
+  [ skh ]
+  *  Backporting from the Revision:1899 Incorrect active_id in editable lists in stable
+
+  [ Jay Vora ]
+  * [FIX] Fixed the regression caused by commit revision 1867 (Case 17889)
+
+  [ vro ]
+  * [FIX] custom_filter : Fixed error in custom filter when char/text is evaluated against boolean type (Case:18308)
+
+  [ Olivier Dony ]
+  * [FIX] actions: avoid reading useless large binary values: helps performance and avoids issues with binary values encoding
+  * [FIX] actions: improve previous fix to avoid possible side-effects on non-report actions
+
+  [ rga ]
+  * [IMP] Setup script and calendar view to support py2.6 py2exe build
+  * [IMP] Diagram view: hide console windows on load
+
+  [ Naresh (OpenERP) ]
+  * [IMP]:previous merge for change in setup script
+  * [FIX]:removed the default installation path c:\GTK
+
+  [ Naresh (OpenERP) ]
+  * [FIX]:last char in string Open accented causing problems
+
+  [ P. Christeas ]
+  * debian: update control file, depends on python-support, python-setuptools
+  * debian: remove obsolete patches, we're closer to clean build now
+  * setup.py: don't mention SpiffGtkWidgets. They are unbundled now
+  * debian: add "gbp.conf", we are building through git
+  * icons: remove +x permission from data files
+  * debian: fix patches/series, remove source/*
+  * debian: fix 'python-support' in control, use git-author for changelog
+
+ -- P. Christeas <xrg@linux.gr>  Fri, 16 Dec 2011 19:36:44 +0200
+
 openerp-client (6.0.2-1) testing; urgency=low
 
   * Using upstream version 6.0.2
@@ -239,7 +370,7 @@ openerp-client (5.0.6-0-1test1) unstable; urgency=low
   [ panos ]
 
  -- panos <panos@debian.pefnos2>  Mon, 02 Nov 2009 19:24:07 -0500
- 
+
  openerp-client (5.0.5-1) unstable; urgency=low
 
   * Merging upstream version 5.0.5.
@@ -389,13 +520,13 @@ openerp-client (5.0.1-0-1ubuntu2) jaunty; urgency=low
 
   *  Updated Greek Translations.
 
- -- Jimmy Angelakos <vyruss@blob>  Fri, 19 Jun 2009 16:35:59 +0300
+ -- Jimmy Angelakos <vyruss@hellug.gr>  Fri, 19 Jun 2009 16:35:59 +0300
 
 openerp-client (5.0.1-0-1ubuntu1) jaunty; urgency=low
 
   * Initial HELLUG version
 
- -- Jimmy Angelakos <vyruss@blob>  Fri, 19 Jun 2009 16:35:43 +0300
+ -- Jimmy Angelakos <vyruss@hellug.gr>  Fri, 19 Jun 2009 16:35:43 +0300
 
  openerp-client (5.0.2-0-1) unstable; urgency=low
 
