@@ -1,4 +1,6 @@
-openerp-client (6.0.3) UNRELEASED; urgency=low
+openerp-client (6.0.3~2.gbp19f5e1) UNRELEASED; urgency=low
+
+  ** SNAPSHOT build @19f5e11ef42a58fd8a8975663ac37fecfd9990bf **
 
   [ P. Christeas ]
   * Remove first line of setup.py that would break shebang.
@@ -116,7 +118,16 @@ openerp-client (6.0.3) UNRELEASED; urgency=low
   [ Naresh (OpenERP) ]
   * [FIX]:last char in string Open accented causing problems
 
- -- P. Christeas <xrg@linux.gr>  Fri, 16 Dec 2011 18:39:04 +0200
+  [ P. Christeas ]
+  * debian: update control file, depends on python-support, python-setuptools
+  * debian: remove obsolete patches, we're closer to clean build now
+  * setup.py: don't mention SpiffGtkWidgets. They are unbundled now
+  * debian: add "gbp.conf", we are building through git
+  * icons: remove +x permission from data files
+  * debian: fix patches/series, remove source/*
+  * debian: fix 'python-support' in control, use git-author for changelog
+
+ -- P. Christeas <xrg@linux.gr>  Fri, 16 Dec 2011 19:36:44 +0200
 
 openerp-client (6.0.2-1) testing; urgency=low
 
@@ -359,7 +370,7 @@ openerp-client (5.0.6-0-1test1) unstable; urgency=low
   [ panos ]
 
  -- panos <panos@debian.pefnos2>  Mon, 02 Nov 2009 19:24:07 -0500
- 
+
  openerp-client (5.0.5-1) unstable; urgency=low
 
   * Merging upstream version 5.0.5.
@@ -509,13 +520,13 @@ openerp-client (5.0.1-0-1ubuntu2) jaunty; urgency=low
 
   *  Updated Greek Translations.
 
- -- Jimmy Angelakos <vyruss@blob>  Fri, 19 Jun 2009 16:35:59 +0300
+ -- Jimmy Angelakos <vyruss@hellug.gr>  Fri, 19 Jun 2009 16:35:59 +0300
 
 openerp-client (5.0.1-0-1ubuntu1) jaunty; urgency=low
 
   * Initial HELLUG version
 
- -- Jimmy Angelakos <vyruss@blob>  Fri, 19 Jun 2009 16:35:43 +0300
+ -- Jimmy Angelakos <vyruss@hellug.gr>  Fri, 19 Jun 2009 16:35:43 +0300
 
  openerp-client (5.0.2-0-1) unstable; urgency=low
 
