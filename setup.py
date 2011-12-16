@@ -124,7 +124,8 @@ options = {
         "dist_dir": 'dist',
         "bundle_files": 3,
         "packages": [
-           "encodings","gtk","gtk.glade","gio", "glib", "matplotlib", "pytz", "OpenSSL",
+            "encodings","gtk", "gtk.glade","gio", "glib", "matplotlib",
+            "pytz", "OpenSSL", "SpiffGtkWidgets",
             "lxml", "lxml.builder", "lxml._elementpath", "lxml.etree",
             "lxml.objectify", "decimal"
         ],
@@ -214,7 +215,7 @@ if has_py2exe:
         openerp_dlls = os.getenv('openerp_dlls')
         copy(opj(openerp_dlls, 'add_to_dist'), dist)
     else:
-        print >> sys.stderr, 'Error: Environment variable openerp_dlls is not set'
+        print >> sys.stderr, 'Error: Environment variable OPENERP_DLLS is not set'
 #
     # Sometime between pytz-2008a and pytz-2008i common_timezones started to
     # include only names of zones with a corresponding data file in zoneinfo.

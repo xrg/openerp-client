@@ -29,7 +29,7 @@
 !include 'LogicLib.nsh'
 !include 'Sections.nsh'
 
-!define PUBLISHER 'OpenERP S.A.'
+!define PUBLISHER 'Xrg'
 !ifndef MAJOR_VERSION
     !define MAJOR_VERSION '6'
 !endif
@@ -37,7 +37,7 @@
     !define MINOR_VERSION '0'
 !endif
 !ifndef REVISION_VERSION
-    !define REVISION_VERSION '0'
+    !define REVISION_VERSION '3'
 !endif
 !ifndef BUILD_VERSION
     !define VERSION "${MAJOR_VERSION}.${MINOR_VERSION}.${REVISION_VERSION}"
@@ -132,8 +132,6 @@ Section OpenERP_GTK_Client SectionOpenERP_GTK_Client
     ;
     ;ADD YOUR OWN FILES HERE...
     File /r "dist\*"
-
-    SetOutPath "$INSTDIR\GTK"
 
     SetOutPath "$INSTDIR\doc"
     File "doc\*"
