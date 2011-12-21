@@ -1537,7 +1537,7 @@ msgstr "enthält"
 
 #: bin/widget_search/custom_filter.py:63
 msgid "not in"
-msgstr "enthält nicht"
+msgstr "nicht in"
 
 #: bin/widget_search/custom_filter.py:82
 msgid ""
