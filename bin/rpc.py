@@ -461,6 +461,8 @@ class rpc_session(object):
         except xmlrpclib.Fault, err:
             # TODO diagnose other faults.
             pass
+        except tiny_socket.Myexception:
+            pass
         except Exception, e:
             import traceback
             traceback.print_exc()
