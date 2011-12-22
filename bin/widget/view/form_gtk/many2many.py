@@ -111,6 +111,7 @@ class many2many(interface.widget_interface):
 
         scroll = gtk.ScrolledWindow()
         scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        scroll.set_property('height-request', 200)
         scroll.set_placement(gtk.CORNER_TOP_LEFT)
         scroll.set_shadow_type(gtk.SHADOW_NONE)
 

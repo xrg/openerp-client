@@ -152,25 +152,10 @@ class one2many_list(interface.widget_interface):
         self._readonly = self.default_readonly
         self.widget = gtk.VBox(homogeneous=False, spacing=5)
         hb = gtk.HBox(homogeneous=False, spacing=5)
-        menubar = gtk.MenuBar()
-        if hasattr(menubar, 'set_pack_direction') and \
-                hasattr(menubar, 'set_child_pack_direction'):
-            menubar.set_pack_direction(gtk.PACK_DIRECTION_LTR)
-            menubar.set_child_pack_direction(gtk.PACK_DIRECTION_LTR)
 
-        menuitem_title = gtk.ImageMenuItem(stock_id='gtk-preferences')
-
-        menu_title = gtk.Menu()
-        menuitem_set_to_default = gtk.MenuItem(_('Set to default value'), True)
-        menuitem_set_to_default.connect('activate', lambda *x:self._menu_sig_default_get())
-        menu_title.add(menuitem_set_to_default)
-        menuitem_set_default = gtk.MenuItem(_('Set Default'), True)
-        menuitem_set_default.connect('activate', lambda *x: self._menu_sig_default_set())
-        menu_title.add(menuitem_set_default)
-        menuitem_title.set_submenu(menu_title)
-
-        menubar.add(menuitem_title)
-        hb.pack_start(menubar, expand=True, fill=True)
+        event_box = gtk.EventBox()
+        event_box.set_events(gtk.gdk.BUTTON_PRESS_MASK)
+        hb.pack_start(event_box, expand=True, fill=True)
 
         # the context to pass to default_get can be optionally specified in
         # the context of the one2many field. We also support a legacy
@@ -240,12 +225,33 @@ class one2many_list(interface.widget_interface):
 
         self.widget.pack_start(hb, expand=False, fill=True)
         self.screen.signal_connect(self, 'record-message', self._sig_label)
-        menuitem_title.get_child().set_markup('<b>'+self.screen.current_view.title.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')+'</b>')
+        menu_title = gtk.Label('<b>'+self.screen.current_view.title.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')+'</b>')
+        menu_title.set_use_markup(True)
+        menu_title.set_alignment(0, 0)
+        event_box.add(menu_title)
+        event_box.connect('button_press_event',self.load_menu)
+        self.screen.widget.set_property('height-request', 100)
+
+
         self.widget.pack_start(self.screen.widget, expand=True, fill=True)
         self.screen.widget.connect('key_press_event', self.on_keypress)
         self.model = None
         self.model_field = None
         self.name = attrs['name']
+
+    def load_menu(self, widget, event):
+        if event.button != 3:
+            return
+        menu = gtk.Menu()
+        menuitem_set_to_default = gtk.MenuItem(_('Set to default value'), True)
+        menuitem_set_to_default.connect('activate', lambda *x:self._menu_sig_default_get())
+        menu.add(menuitem_set_to_default)
+        menuitem_set_default = gtk.MenuItem(_('Set Default'), True)
+        menuitem_set_default.connect('activate', lambda *x: self._menu_sig_default_set())
+        menu.add(menuitem_set_default)
+        menu.show_all()
+        menu.popup(None,None,None,event.button,event.time)
+        return True
 
     def on_keypress(self, widget, event):
         if (not self._readonly) and ((event.keyval in (gtk.keysyms.N, gtk.keysyms.n) and event.state & gtk.gdk.CONTROL_MASK\

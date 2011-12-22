@@ -212,7 +212,7 @@ class _container(object):
 
     def create_label(self, name, markup=False, align=1.0, wrap=False,
                      angle=None, width=None, fname=None, help=None, detail_tooltip=False):
-        
+
         label = gtk.Label(name)
         eb = gtk.EventBox()
         eb.set_events(gtk.gdk.BUTTON_PRESS_MASK)
@@ -220,7 +220,7 @@ class _container(object):
             label.set_use_markup(True)
         self.trans_box_label.append((eb, name, fname))
         eb.add(label)
-        
+
         def size_allocate(label, allocation):
             label.set_size_request( allocation.width - 2, -1 )
         if fname is None and name and len(name) > 50:
@@ -300,15 +300,18 @@ class _container(object):
 
 class parser_form(widget.view.interface.parser_interface):
     def __init__(self, window, parent=None, attrs=None, screen=None):
-           super(parser_form, self).__init__(window, parent=parent, attrs=attrs,
-                    screen=screen)
-           self.widget_id = 0
-           self.default_focus_field = False
-           self.default_focus_button = False
-           self.accepted_attr_list = ['type','domain','context','relation', 'widget','attrs',
-                                      'digits','function','store','fnct_search','fnct_inv','fnct_inv_arg',
-                                      'func_obj','func_method','related_columns','third_table','states',
-                                      'translate','change_default','size','selection']
+
+        super(parser_form, self).__init__(window, parent=parent, attrs=attrs,
+                screen=screen)
+        self.widget_id = 0
+        self.default_focus_field = False
+        self.default_focus_button = False
+        self.board_style = False
+        self.column = 1
+        self.accepted_attr_list = ['type','domain','context','relation', 'widget','attrs',
+                                  'digits','function','store','fnct_search','fnct_inv','fnct_inv_arg',
+                                  'func_obj','func_method','related_columns','third_table','states',
+                                  'translate','change_default','size','selection']
 
     def create_detail_tooltip(self, name='', field_attr={}):
         tooltip = '<span foreground="#009900"><b>%s:</b> %s - <b>%s:</b> %s' % \
@@ -396,13 +399,13 @@ class parser_form(widget.view.interface.parser_interface):
                     visval = eval(attrs['invisible'], {'context':self.screen.context})
                     if visval:
                         continue
-                    
+
                 if 'default_focus' in attrs and not self.default_focus_button:
                     attrs['focus_button'] = attrs['default_focus']
                     self.default_focus_button = True
-              
+
                 button = Button(attrs)
-                
+
                 states = [e for e in attrs.get('states','').split(',') if e]
                 saw_list.append(StateAwareWidget(button, states=states))
                 container.wid_add(button.widget, colspan=int(attrs.get('colspan', 1)))
@@ -684,7 +687,7 @@ class parser_form(widget.view.interface.parser_interface):
             # Make sure the context won't mutate
             context = copy.copy(rpc.session.context)
             context['lang'] = lang['code']
-            # Read the string in this language 
+            # Read the string in this language
             val = rpc.session.rpc_exec_auth('/object', 'execute', model,
                     'read', [id], [name], context)
             val = val[0]
@@ -710,7 +713,7 @@ class parser_form(widget.view.interface.parser_interface):
                 value_set(entry,value_get(widget_entry))
             else:
                 value_set(entry,val[name])
-            
+
             entries_list.append((lang['code'], entry))
             table.attach(label, 0, 1, i, i+1, yoptions=False, xoptions=gtk.FILL,
                     ypadding=2, xpadding=5)
@@ -728,7 +731,7 @@ class parser_form(widget.view.interface.parser_interface):
         sv.add(vp)
         win.vbox.add(sv)
         win.show_all()
-        
+
         # process the response
         ok = False
         data = []
