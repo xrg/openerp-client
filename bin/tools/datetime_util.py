@@ -157,13 +157,7 @@ def local_to_server_timestamp(local_tstamp_str, local_format, server_format,
             tz_offset=tz_offset, ignore_unparsable_time=ignore_unparsable_time)
 
 def float_time_convert(float_val):
-    hours = math.floor(abs(float_val))
-    mins = abs(float_val) - hours
-    mins = round(mins * 60)
-    if mins >= 60.0:
-        hours = hours + 1
-        mins = 0.0        
-    float_time = '%02d:%02d' % (hours,mins)
+    float_time = '%02d:%02d' % (math.floor(abs(float_val)),round(abs(float_val)%1,2) * 60)
     return float_time
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
