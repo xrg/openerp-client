@@ -370,7 +370,11 @@ class Boolean(Int):
     def setter(self, column, cell, store, iter):
         model = store.get_value(iter, 0)
         value = self.get_textual_value(model)
+        # A Fix to manage the groupby on boolean fields
+        if not isinstance(value,(bool,int)):
+            value =  eval(value.split(' ')[0])
         cell.set_active(bool(value))
+        
         if model.value.get('state',False):
             self.state_set(model, model.value.get('state','draft'))
         self.attrs_set(model, cell)
