@@ -426,7 +426,7 @@ class Screen(signal_event.signal_event):
             pass
 
     def _model_changed(self, model_group, model):
-        if (not model) or (model==self.current_model):
+        if (not model) or (model==self.current_model) and  self.current_view.view_type != 'calendar':
             self.display()
 
     def _get_current_model(self):

@@ -121,7 +121,6 @@ class ViewCalendar(object):
         else:
             self._radio_month.set_active(True)
         self.mode = mode
-        self.modex = mode
 
         self.cal_model = TinyCalModel()
         self.cal_view = Calendar.Calendar(self.cal_model, mode)
@@ -340,10 +339,7 @@ class ViewCalendar(object):
             if self.models:
                 self.__update_colors()
                 self.cal_model.add_events(self.__get_events())
-                self.modex = self.mode
-                self.mode = self.mode == 'month' and 'week' or 'month'
                 self.refresh()
-                self.mode = self.modex
         elif force == True:
             self.cal_model.remove_events()
             self.cal_model.add_events(self.__get_events())
@@ -356,15 +352,12 @@ class ViewCalendar(object):
         sysencoding = getlocale()[1]
 
         if self.mode == 'month':
-            self._radio_month.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_MONTH
             self._label_current.set_text(ustr(self.date.strftime('%B %Y'), sysencoding))
         elif self.mode == 'week':
-            self._radio_week.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_WEEK
             self._label_current.set_text(_('Week') + ' ' + self.date.strftime('%W, %Y'))
         elif self.mode == 'day':
-            self._radio_day.set_active(True)
             self.cal_view.range = self.cal_view.RANGE_CUSTOM
             d1 = datetime(*t[:3])
             d2 = Calendar.util.end_of_day(d1)
