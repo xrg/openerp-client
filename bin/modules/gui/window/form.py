@@ -302,7 +302,14 @@ class form(object):
         while(self.screen.view_to_load):
             self.screen.load_view_to_load()
         screen_fields = copy.deepcopy(self.screen.models.fields)
-        win = win_export.win_export(self.model, self.screen.ids_get(), screen_fields, fields, parent=self.window, context=self.context)
+        ids = self.screen.ids_get()
+        if not ids:
+            msg = _('No records to export! \n Select at least one record ')
+            if not ids and self.context.get('group_by_no_leaf', False):
+                msg = _('You cannot export these record(s) ! Either use copy and paste')
+            common.warning(msg,_('Warning !'), parent=self.window)
+            return 
+        win = win_export.win_export(self.model, ids, screen_fields, fields, parent=self.window, context=self.context)
         res = win.go()
 
     def sig_new(self, widget=None, autosave=True):
