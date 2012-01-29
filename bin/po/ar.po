@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2012-01-12 07:05+0000\n"
-"Last-Translator: walid <Unknown>\n"
+"PO-Revision-Date: 2012-01-28 10:26+0000\n"
+"Last-Translator: kifcaliph <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-24 05:49+0000\n"
-"X-Generator: Launchpad (build 14713)\n"
+"X-Launchpad-Export-Date: 2012-01-29 05:29+0000\n"
+"X-Generator: Launchpad (build 14727)\n"
 "Language: ar\n"
 
 #: bin/plugins/__init__.py:27
@@ -683,7 +683,7 @@ msgstr "تعيين ملف إعداد بديل"
 
 #: bin/options.py:124
 msgid "Enable basic debugging. Alias for '--log-level=debug'"
-msgstr ""
+msgstr "تشغيل التنقيج الأساسي لـ '--log-level=debug'"
 
 #: bin/options.py:125
 #, python-format
@@ -852,7 +852,7 @@ msgstr "فتح بـ..."
 #: bin/translate.py:183
 #, python-format
 msgid "Unable to set locale %s: %s"
-msgstr ""
+msgstr "لم يتمكن من وضع اللغة %s الخطأ: %s"
 
 #: bin/printer/printer.py:184
 #, python-format
@@ -886,7 +886,7 @@ msgstr "خطأ بالنظام، قد تكون لوحة المفاتيح"
 #: bin/widget_search/checkbox.py:68 bin/widget_search/selection.py:116
 #: bin/widget/view/form_gtk/button.py:47
 msgid "The content of the widget or ValueError if not valid"
-msgstr ""
+msgstr "محتوي الودجة أو قيمة خاطئة لو غير صحيح"
 
 #: bin/widget_search/form.py:500
 msgid "The content of the form or exception if not valid"
@@ -1092,7 +1092,7 @@ msgstr "لا يمكن تكوين الرسم!"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1429
 msgid "Dot Viewer"
-msgstr ""
+msgstr "عرض الدوت"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1719
 msgid "Add New Node"
@@ -1139,7 +1139,7 @@ msgstr "تحرير %s الحالي"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1882
 msgid " - Dot Viewer"
-msgstr ""
+msgstr " - عرض الدوت"
 
 #: bin/widget/view/form_gtk/reference.py:69 bin/openerp.ui.h:740
 msgid "Create a new resource"
@@ -1850,7 +1850,7 @@ msgstr "_جهة إتصال"
 
 #: bin/openerp.ui.h:804
 msgid "Open ERP - Forms widget"
-msgstr ""
+msgstr "أوبنيرب - ودجة النماذج"
 
 #: bin/openerp.ui.h:810
 msgid "OpenERP - Confirmation"
@@ -1870,7 +1870,7 @@ msgstr "مربع - OpenERP"
 
 #: bin/openerp.ui.h:822
 msgid "OpenERP, Field Preference target"
-msgstr ""
+msgstr "تفضيلات الحقول المستهدفة لأوبنيرب"
 
 #: bin/openerp.ui.h:927
 msgid "_only for you"
