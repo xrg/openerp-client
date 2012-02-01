@@ -132,6 +132,7 @@ class parse(object):
         self.col = col
         self.focusable = None
         self.add_widget_end = []
+        self.filter_order = 0
 
     def destroy(self):
         self.container.destroy()
@@ -183,6 +184,7 @@ class parse(object):
         self.container = container
 
         for node in root_node:
+            self.filter_order += 1
             attrs = tools.node_attributes(node)
             if attrs.get('invisible', False):
                 visval = eval(attrs['invisible'], {'context':call[0].context})
@@ -217,7 +219,7 @@ class parse(object):
                         if node_child.tag == 'filter':
                             widget_child = widgets_type['filter'][0]('', self.parent, attrs_child, call)
                             mywidget.pack_start(widget_child.widget)
-                            dict_widget[str(attrs['name']) + str(uuid.uuid1())] = (widget_child, mywidget, 1)
+                            dict_widget[str(attrs['name']) + str(uuid.uuid1())] = (widget_child, mywidget, 1, self.filter_order)
                         elif node_child.tag == 'separator':
                             if attrs_child.get('orientation','vertical') == 'horizontal':
                                 sep = gtk.HSeparator()
@@ -230,14 +232,14 @@ class parse(object):
 #                    mywidget.pack_start(widget_act.widget,expand=False,fill=False)
                 xoptions = gtk.SHRINK
                 wid = container.wid_add(mywidget, 1,label, int(self.fields[str(attrs['name'])].get('expand',0)),xoptions=xoptions)
-                dict_widget[str(attrs['name'])] = (widget_act, wid, 1)
+                dict_widget[str(attrs['name'])] = (widget_act, wid, 1, self.filter_order)
 
             elif node.tag == 'filter':
                 name = str(attrs.get('string','filter'))
                 widget_act = filter.filter(name, self.parent, attrs, call)
                 help = attrs.get('help', False) or name
                 wid = container.wid_add(widget_act.butt, xoptions=gtk.SHRINK, help=help)
-                dict_widget[name + str(uuid.uuid1())] = (widget_act, widget_act, 1)
+                dict_widget[name + str(uuid.uuid1())] = (widget_act, widget_act, 1, self.filter_order)
 
             elif node.tag == 'separator':
                 if attrs.get('orientation','vertical') == 'horizontal':
@@ -348,7 +350,7 @@ class form(wid_int.wid_int):
             x[0].clear()
 
     def show(self):
-        for w, widget, value in  self.widgets.values():
+        for w, widget, value, order in  self.widgets.values():
             if w.attrs.get('default_focus'):
                 w.grab_focus()
             if value >= 2:
@@ -356,7 +358,7 @@ class form(wid_int.wid_int):
         self._hide=False
 
     def hide(self):
-        for w, widget, value in  self.widgets.values():
+        for w, widget, value, order in  self.widgets.values():
             if value >= 2:
                 widget.hide()
         self._hide=True
@@ -394,8 +396,7 @@ class form(wid_int.wid_int):
     def _value_get(self):
         domain = []
         context = {}
-
-        for x in self.widgets.values() + self.custom_widgets.values():
+        for x in sorted([value for value in self.widgets.values()], key=lambda value:value[3]) + self.custom_widgets.values():
             filters = x[0].value
             domain += filters.get('domain',[])
             ctx = filters.get('context',{})
@@ -410,8 +411,7 @@ class form(wid_int.wid_int):
                     ctx_remove_group = [ctx_remove_group]
                 [self.groupby.remove(x) for x in ctx_remove_group if x in self.groupby]
             context.update(ctx)
-        if self.groupby:
-            context.update({'group_by':self.groupby})
+        context.update({'group_by':self.groupby})
         if domain:
             if len(domain)>1 and domain[-2] in ['&','|']:
                 if len(domain) == 2:
