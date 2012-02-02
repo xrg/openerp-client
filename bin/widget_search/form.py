@@ -411,7 +411,8 @@ class form(wid_int.wid_int):
                     ctx_remove_group = [ctx_remove_group]
                 [self.groupby.remove(x) for x in ctx_remove_group if x in self.groupby]
             context.update(ctx)
-        context.update({'group_by':self.groupby})
+        if self.groupby:
+            context.update({'group_by':self.groupby})
         if domain:
             if len(domain)>1 and domain[-2] in ['&','|']:
                 if len(domain) == 2:
