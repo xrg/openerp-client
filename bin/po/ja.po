@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-24 05:50+0000\n"
-"X-Generator: Launchpad (build 14713)\n"
+"X-Launchpad-Export-Date: 2012-02-09 07:33+0000\n"
+"X-Generator: Launchpad (build 14763)\n"
 "Language: ja\n"
 
 #: bin/plugins/__init__.py:27
@@ -94,7 +94,7 @@ msgstr "契約パスワード："
 
 #: bin/modules/gui/main.py:241
 msgid "You already have the latest version"
-msgstr "あなたは既に最新のバージョンを持ってい"
+msgstr "あなたは既に最新のバージョンを持っています。"
 
 #: bin/modules/gui/main.py:246
 msgid "The following updates are available:"
@@ -357,11 +357,11 @@ msgstr "このオブジェクトに対するリソースIDがありません。"
 
 #: bin/modules/gui/window/form.py:247
 msgid "No record selected ! You can only attach to existing record."
-msgstr "レコードを選択できません！あなたは、既存の記録に付随すらｷとしかできません。"
+msgstr "レコードが選択されていません。既存のレコードのみ添付可能です。"
 
 #: bin/modules/gui/window/form.py:264
 msgid "You have to select a record !"
-msgstr "あなたはレコードを選ばなければなりません !"
+msgstr "レコードを選択してください。"
 
 #: bin/modules/gui/window/win_export.py:206 bin/modules/gui/window/form.py:270
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:41
@@ -408,7 +408,7 @@ msgstr "これらのレコードを削除しますか？"
 
 #: bin/modules/gui/window/form.py:296
 msgid "Resources cleared."
-msgstr "リソースを習獅ｵました。"
+msgstr "リソースをクリアしました。"
 
 #: bin/modules/gui/window/form.py:298
 msgid "Resources successfully removed."
@@ -682,19 +682,19 @@ msgstr "基本デバッギングを有効化して下さい。 '--log-level=debu
 #: bin/options.py:125
 #, python-format
 msgid "specify the log level: %s"
-msgstr "ログ・レベル %s を指定する"
+msgstr "ログレベル %s を指定する"
 
 #: bin/options.py:126
 msgid "specify the user login"
-msgstr "ユーザーログインを明記"
+msgstr "ユーザログインを明記"
 
 #: bin/options.py:127
 msgid "specify the server port"
-msgstr "サーバーポートを明記"
+msgstr "サーバポートを明記"
 
 #: bin/options.py:128
 msgid "specify the server ip/name"
-msgstr "サーバーIP/サーバー名を明記"
+msgstr "サーバIP/サーバ名を明記"
 
 #: bin/common/common.py:88
 msgid "Close current tip"
@@ -742,17 +742,17 @@ msgstr "操作が進行中です"
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
-msgstr "しばらくお待ちください。この操作にはしばらく時間がかかる時があります..."
+msgstr "しばらくお待ち下さい。この操作はしばらく時間がかかります。"
 
 #: bin/common/common.py:224
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr "ファイル %s が正しいことを確認して下さい"
+msgstr "ファイル %s が正しいことを確認して下さい。"
 
 #: bin/common/common.py:410
 msgid " has reported the following bug:\n"
 msgstr ""
-" 次のバグが報告されました:\n"
+" 次のバグが報告されました：\n"
 "リンク切れを意味します。翻訳で同等の位置に新しいラインを開始して下さい。\n"
 "スペース（空白）を意味します。翻訳で同等の位置にスペースを入力して下さい。\n"
 
@@ -1062,11 +1062,11 @@ msgstr "ショートカットとして保存"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr "フィルターとして保zん"
+msgstr "フィルタとして保存"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr "フィルター管理"
+msgstr "フィルタの管理"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1105,7 +1105,7 @@ msgstr "このオブジェクトの有効なビューが見当たりません !"
 
 #: bin/widget/view/graph_gtk/parser.py:64
 msgid "Can not generate graph !"
-msgstr "グラフ生成できません!"
+msgstr "グラフを生成できません。"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1429
 msgid "Dot Viewer"
@@ -1164,7 +1164,7 @@ msgstr "新リソースを作成"
 
 #: bin/widget/view/form_gtk/reference.py:82
 msgid "Search / Open a resource"
-msgstr "リソースを検索/開く"
+msgstr "リソースを検索 / 開く"
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
@@ -1226,22 +1226,22 @@ msgstr "このエントリーを削除"
 #: bin/widget/view/form_gtk/many2many.py:84
 #: bin/widget/view/form_gtk/one2many_list.py:210
 msgid "Previous Page"
-msgstr ""
+msgstr "前のページ"
 
 #: bin/widget/view/form_gtk/many2many.py:88
 #: bin/widget/view/form_gtk/one2many_list.py:214
 msgid "Previous Record"
-msgstr ""
+msgstr "前のレコード"
 
 #: bin/widget/view/form_gtk/many2many.py:96
 #: bin/widget/view/form_gtk/one2many_list.py:222
 msgid "Next Record"
-msgstr ""
+msgstr "次のレコード"
 
 #: bin/widget/view/form_gtk/many2many.py:100
 #: bin/widget/view/form_gtk/one2many_list.py:226
 msgid "Next Page"
-msgstr ""
+msgstr "次のページ"
 
 #: bin/widget/view/form_gtk/one2many_list.py:232
 msgid "Switch"
@@ -1395,8 +1395,8 @@ msgid ""
 "Unable to reach to OpenERP server !\n"
 "You should check your connection to the network and the OpenERP server."
 msgstr ""
-"OpenERPサーバーに到達することができない場合、\n"
-"ネットワークとOpenERPサーバの接続を確認して下さい。"
+"OpenERPサーバに接続できません。\n"
+"ネットワークとOpenERPサーバ間の接続を確認して下さい。"
 
 #: bin/rpc.py:188
 msgid "Connection Error"
@@ -1816,7 +1816,7 @@ msgid ""
 "<i>The most advanced Open Source ERP &amp; CRM !</i>"
 msgstr ""
 "<b>OpenERPについて<b>\n"
-"<i>最も進歩したCRMとERPのオープンソースです!</i>"
+"<i>先進のオープンソースのERPとCRMです。</i>"
 
 #: bin/openerp.ui.h:14
 #, no-c-format
@@ -2094,7 +2094,7 @@ msgstr "保存しないで閉じる"
 
 #: bin/openerp.ui.h:651
 msgid "<Ctrl> + <Esc>"
-msgstr "<ctrl> + <Esc>"
+msgstr "<Ctrl> + <Esc>"
 
 #: bin/openerp.ui.h:704
 msgid "<i>When editing a resource in a popup window</i>"
@@ -2106,7 +2106,7 @@ msgstr "保存して閉じる"
 
 #: bin/openerp.ui.h:650
 msgid "<Ctrl> + <Enter>"
-msgstr "<ctrl> + <Enter>"
+msgstr "<Ctrl> + <Enter>"
 
 #: bin/openerp.ui.h:861
 msgid "Switch view mode"
@@ -2114,7 +2114,7 @@ msgstr "ビューモード切替"
 
 #: bin/openerp.ui.h:657
 msgid "<Ctrl> + L"
-msgstr "<ctrl> + L"
+msgstr "<Ctrl> + L"
 
 #: bin/openerp.ui.h:801
 msgid "Next record"
@@ -2138,15 +2138,15 @@ msgstr "保存"
 
 #: bin/openerp.ui.h:662
 msgid "<Ctrl> + W"
-msgstr "<ctrl> + W"
+msgstr "<Ctrl> + W"
 
 #: bin/openerp.ui.h:660
 msgid "<Ctrl> + S"
-msgstr "<ctrl> + S"
+msgstr "<Ctrl> + S"
 
 #: bin/openerp.ui.h:652
 msgid "<Ctrl> + <PgDn>"
-msgstr "<ctrl> + <PgDn>"
+msgstr "<Ctrl> + <PgDn>"
 
 #: bin/openerp.ui.h:836
 msgid "Previous tab"
@@ -2154,7 +2154,7 @@ msgstr "前のタブ"
 
 #: bin/openerp.ui.h:653
 msgid "<Ctrl> + <PgUp>"
-msgstr "<ctrl> + <PgUp>"
+msgstr "<Ctrl> + <PgUp>"
 
 #: bin/openerp.ui.h:794
 msgid "New"
@@ -2162,7 +2162,7 @@ msgstr "新規"
 
 #: bin/openerp.ui.h:658
 msgid "<Ctrl> + N"
-msgstr "<ctrl> + N"
+msgstr "<Ctrl> + N"
 
 #: bin/openerp.ui.h:746
 msgid "Delete"
@@ -2170,7 +2170,7 @@ msgstr "削除"
 
 #: bin/openerp.ui.h:655
 msgid "<Ctrl> + D"
-msgstr "<ctrl> + D"
+msgstr "<Ctrl> + D"
 
 #: bin/openerp.ui.h:767
 msgid "Find / Search"
@@ -2178,7 +2178,7 @@ msgstr "検索"
 
 #: bin/openerp.ui.h:656
 msgid "<Ctrl> + F"
-msgstr "<ctrl> + F"
+msgstr "<Ctrl> + F"
 
 #: bin/openerp.ui.h:736
 msgid "Connect"
@@ -2186,7 +2186,7 @@ msgstr "接続"
 
 #: bin/openerp.ui.h:659
 msgid "<Ctrl> + O"
-msgstr "<ctrl> + O"
+msgstr "<Ctrl> + O"
 
 #: bin/openerp.ui.h:787
 msgid "Main Shortcuts"
@@ -2254,15 +2254,15 @@ msgstr "カット"
 
 #: bin/openerp.ui.h:661
 msgid "<Ctrl> + V"
-msgstr "<ctrl> + V"
+msgstr "<Ctrl> + V"
 
 #: bin/openerp.ui.h:654
 msgid "<Ctrl> + C"
-msgstr "<ctrl> + C"
+msgstr "<Ctrl> + C"
 
 #: bin/openerp.ui.h:663
 msgid "<Ctrl> + X"
-msgstr "<ctrl> + x"
+msgstr "<Ctrl> + X"
 
 #: bin/openerp.ui.h:751
 msgid "Edition Widgets"
@@ -2398,7 +2398,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:648
 msgid "(<i>admin</i>, by default)"
-msgstr "(<i>admin</i>, par defaut)"
+msgstr "(<i>admin</i>, by default)"
 
 #: bin/openerp.ui.h:729
 msgid ""
@@ -2610,7 +2610,7 @@ msgstr ""
 
 #: bin/win_error.ui.h:7
 msgid "<i>_Support Request</i>"
-msgstr "サポート依頼"
+msgstr "サポート要求"
 
 #: bin/win_error.ui.h:9
 msgid "Details"
