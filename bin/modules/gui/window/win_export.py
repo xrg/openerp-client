@@ -349,7 +349,7 @@ class win_export(object):
             result = result.get('datas',[])
             if import_comp:
                 fields2 = fields
-            if self.wid_action.get_active_text() == "Open in Excel":
+            if len(self.wid_action.get_model()) > 1 and self.wid_action.get_active() == 0: 
                 open_excel(fields2, result)
             else:
                 fname = common.file_selection(_('Save As...'),
