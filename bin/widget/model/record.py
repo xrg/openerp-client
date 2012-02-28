@@ -297,13 +297,18 @@ class ModelRecord(signal_event.signal_event):
         return val
 
     #XXX Shoud use changes of attributes (ro, ...)
-    def on_change(self, callback):
+    def on_change(self, callback, field=False):
         match = re.match('^(.*?)\((.*)\)$', callback)
         if not match:
             raise Exception, 'ERROR: Wrong on_change trigger: %s' % callback
         func_name = match.group(1)
         arg_names = [n.strip() for n in match.group(2).split(',') if n.strip()]
+        idx = False
+        if 'context' in arg_names:
+            idx = arg_names.index('context')
         args = [self.expr_eval(arg) for arg in arg_names]
+        if idx and field:
+            args[idx].update(field.context_get(self))
         ids = self.id and [self.id] or []
         response = getattr(self.rpc, func_name)(ids, *args)
         if response:

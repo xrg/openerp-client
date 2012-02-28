@@ -61,7 +61,7 @@ class CharField(object):
         if self.get_state_attrs(model).get('readonly', False):
             return
         if self.attrs.get('on_change',False):
-            model.on_change(self.attrs['on_change'])
+            model.on_change(self.attrs['on_change'], field = self)
         if self.attrs.get('change_default', False):
             model.cond_default(self.attrs['name'], self.get(model))
 
@@ -119,7 +119,7 @@ class CharField(object):
         res = self.set(model, value)
         model.cond_default(self.attrs['name'], self.get(model))
         if self.attrs.get('on_change',False):
-            model.on_change(self.attrs['on_change'])
+            model.on_change(self.attrs['on_change'], field=self)
         return res
 
     def get_default(self, model):
