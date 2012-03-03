@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-09 07:34+0000\n"
-"X-Generator: Launchpad (build 14763)\n"
+"X-Launchpad-Export-Date: 2012-03-03 05:38+0000\n"
+"X-Generator: Launchpad (build 14886)\n"
 "Language: \n"
 
 #: bin/plugins/__init__.py:27
@@ -316,16 +316,13 @@ msgstr ""
 msgid "Database cannot be accessed or does not exist"
 msgstr "Bazi podataka se ne može pristupiti ili ne postoji"
 
-#
-# File: bin/modules/gui/main.py, line: 734
-# File: bin/modules/gui/main.py, line: 734
 #: bin/modules/gui/main.py:1023
 msgid ""
 "Connection error !\n"
 "Unable to connect to the server !"
 msgstr ""
-"Greška spajanja !\n"
-"Nemogu se spojiti na server !"
+"Greška povezivanja !\n"
+"Ne mogu se povezati na server !"
 
 #: bin/modules/gui/main.py:1025
 msgid ""
@@ -352,18 +349,15 @@ msgstr "Niste prijavljeni !"
 msgid "OpenERP"
 msgstr "OpenERP"
 
-#
-# File: bin/modules/gui/main.py, line: 833
-# File: bin/modules/gui/main.py, line: 833
 #: bin/modules/gui/main.py:1147
 msgid ""
 "You can not log into the system !\n"
 "Ask the administrator to verify\n"
 "you have an action defined for your user."
 msgstr ""
-"Nemožete se prijaviti na sistem !\n"
-"Pitajte Administratora da provjeri\n"
-"da imate definisanu akciju za vašeg korisnika."
+"Ne možete se prijaviti na sistem !\n"
+"Proverite kod Administratora imate li\n"
+"definisanu akciju za vašeg korisnika."
 
 #
 # File: bin/modules/gui/main.py, line: 865
