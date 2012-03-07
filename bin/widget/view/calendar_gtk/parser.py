@@ -220,8 +220,10 @@ class ViewCalendar(object):
         value = str(value)
         model = self._calendar_treeview.get_model()
         for row in model:
-            if row[self.TV_COL_ID] == value:
-                return  # id already in the treeview
+            if row[self.TV_COL_ID] == value :# id already in the treeview
+                if row[self.TV_COL_COLOR] != color: # the color assigned is the old one 
+                    row[self.TV_COL_COLOR] = color  #replace it with new one.
+                return  
         iter = model.append()
         model.set(iter, self.TV_COL_ID, value,
                         self.TV_COL_COLOR, color,
