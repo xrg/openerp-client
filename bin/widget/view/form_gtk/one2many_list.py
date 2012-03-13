@@ -374,12 +374,12 @@ class one2many_list(interface.widget_interface):
             else:
                 msg = _('Are you sure to remove those records ?')
             if common.sur(msg):
-                    model = self.screen.current_model
-                    model.signal('record-changed', model.parent)
-                    self.screen.remove()
-                    self.pager.reset_pager()
-                    if not self.screen.models.models:
-                        self.screen.current_view.widget.set_sensitive(False)
+                model = self.screen.current_model
+                model.signal('record-changed', model.parent)
+                self.screen.remove()
+                self.pager.reset_pager()
+                if not self.screen.models.models:
+                    self.screen.current_view.widget.set_sensitive(False)
 
     def _sig_label(self, screen, signal_data):
         name = '_'
