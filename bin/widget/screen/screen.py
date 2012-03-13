@@ -157,6 +157,8 @@ class Screen(signal_event.signal_event):
                 self.filter_widget = widget_search.form(self.search_view['arch'],
                         self.search_view['fields'], self.name, self.window,
                         self.domain, (self, self.search_filter))
+                if self.context.has_key('group_by'):
+                    self.limit = None
                 self.screen_container.add_filter(self.filter_widget.widget,
                         self.search_filter, self.search_clear,
                         self.search_offset_next,
