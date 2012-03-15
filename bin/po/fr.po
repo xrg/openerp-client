@@ -14,17 +14,17 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-03 05:36+0000\n"
-"X-Generator: Launchpad (build 14886)\n"
+"X-Launchpad-Export-Date: 2012-03-15 04:58+0000\n"
+"X-Generator: Launchpad (build 14933)\n"
 "Language: fr\n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
-msgstr "Imprimer le flux de travail"
+msgstr "Imprimer le workflow"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
-msgstr "Imprimer le flux de travail (et ses sous flux)"
+msgstr "Imprimer le workflow (avec sous-workflow)"
 
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
