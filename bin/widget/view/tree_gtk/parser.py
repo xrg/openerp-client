@@ -650,7 +650,7 @@ class Selection(Char):
         text = tools.ustr(text)
         res = False
         for val, txt in selection:
-            if txt[:len(text)].lower() == text.lower():
+            if tools.ustr(txt)[:len(text)].lower() == text.lower():
                 if len(txt) == len(text):
                     return val
                 res = val
