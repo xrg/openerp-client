@@ -195,6 +195,7 @@ class ModelRecord(signal_event.signal_event):
         ok = True
         for fname in self.mgroup.mfields:
             if not self.mgroup.mfields[fname].validate(self):
+                logging.getLogger('model').warning("Field %s failed validation", fname)
                 ok = False
         return ok
 
