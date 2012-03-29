@@ -20,9 +20,9 @@
 #
 
 name = 'openerp-client'
-version = '6.0.3'
-major_version = '6.0'
-description = 'OpenERP Client'
+version = '6.9.0'
+major_version = '6.9'
+description = 'OpenERP-F3 Client'
 long_desc = '''OpenERP is a complete ERP and CRM. The main features are accounting (analytic
 and financial), stock management, sales and purchases management, tasks
 automation, marketing campaigns, help desk, POS, etc. Technical features include
@@ -36,7 +36,7 @@ Programming Language :: Python
 url = 'http://www.openerp.com'
 author = 'OpenERP S.A.'
 author_email = 'info@openerp.com'
-support_email = 'support@openerp.com'
+support_email = 'xrg@hellug.gr'
 license = 'GPL-3'
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
