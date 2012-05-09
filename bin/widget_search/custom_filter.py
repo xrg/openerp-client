@@ -149,8 +149,12 @@ class custom_filter(wid_int.wid_int):
                 right_text_se =  self.right_text.get_text()
                 keys = []
                 for selection in self.field_selection[self.combo_fields.get_active_text()][2]:
-                    if selection[1].lower().find(right_text_se.lower()) != -1:
-                        keys.append(selection[0])
+                    try:
+                        if (selection[1].decode('utf-8')).lower().find((right_text_se.decode('utf-8')).lower()) != -1:
+                            keys.append(selection[0])
+                    except:
+                        if selection[1].lower().find(right_text_se.lower()) != -1:
+                            keys.append(selection[0])
                 right_text = keys
                 if operator in ['ilike','=','in']:
                     operator = 'in'
