@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-28 05:02+0000\n"
-"X-Generator: Launchpad (build 15027)\n"
+"X-Launchpad-Export-Date: 2012-05-17 04:53+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 "Language: is\n"
 
 #: bin/plugins/__init__.py:27
@@ -28,11 +28,11 @@ msgstr "Skýrsluflæði (margbrotið)"
 
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
-msgstr "Engin innstunga tiltæk fyrir þessi aðföng !"
+msgstr "Engin viðbót tiltæk fyrir þessi tilföng !"
 
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr "Veldu innstungu"
+msgstr "Veldu viðbót"
 
 #: bin/rpc.py:157 bin/modules/action/wizard.py:149 bin/modules/gui/main.py:187
 msgid "Connection refused !"
@@ -66,11 +66,11 @@ msgstr ""
 
 #: bin/modules/gui/main.py:93 bin/openerp.ui.h:856
 msgid "Server:"
-msgstr ""
+msgstr "Miðlari:"
 
 #: bin/modules/gui/main.py:104 bin/openerp.ui.h:724
 msgid "Change"
-msgstr ""
+msgstr "Breyta"
 
 #: bin/modules/gui/main.py:111
 msgid "Super Administrator Password:"
@@ -110,7 +110,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:280
 msgid "Database"
-msgstr ""
+msgstr "Gagnagrunnur"
 
 #: bin/modules/gui/main.py:292
 msgid "Your database has been upgraded."
@@ -188,7 +188,7 @@ msgstr ""
 #: bin/modules/gui/main.py:962
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: bin/modules/gui/main.py:964
 msgid "No Company"
@@ -262,7 +262,7 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1270
 msgid "Attachments"
-msgstr ""
+msgstr "Viðhengi"
 
 #: bin/modules/gui/main.py:1369
 msgid "Delete a database"
@@ -283,7 +283,7 @@ msgstr ""
 #: bin/widget/view/form_gtk/url.py:118 bin/widget/view/form_gtk/image.py:112
 #: bin/modules/gui/main.py:1383 bin/openerp.ui.h:807
 msgid "Open..."
-msgstr ""
+msgstr "Opna..."
 
 #: bin/modules/gui/main.py:1395
 msgid "Database restored successfully !"
@@ -320,13 +320,13 @@ msgstr ""
 
 #: bin/modules/gui/main.py:1483 bin/modules/gui/main.py:1506
 msgid "Backup a database"
-msgstr ""
+msgstr "Taka öryggisafrit af gagnagrunni"
 
 #: bin/widget/view/form_gtk/binary.py:171
 #: bin/widget/view/form_gtk/image.py:133 bin/modules/gui/main.py:1486
 #: bin/modules/gui/window/win_export.py:352 bin/printer/printer.py:231
 msgid "Save As..."
-msgstr ""
+msgstr "Vista sem..."
 
 #: bin/modules/gui/main.py:1499
 msgid "Database backed up successfully !"
@@ -355,15 +355,15 @@ msgstr ""
 #: bin/modules/gui/window/win_export.py:206 bin/modules/gui/window/form.py:270
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:41
 msgid "ID"
-msgstr ""
+msgstr "Auðkenni (ID)"
 
 #: bin/modules/gui/window/form.py:271
 msgid "Creation User"
-msgstr ""
+msgstr "Notandi sem bjó til"
 
 #: bin/modules/gui/window/form.py:272
 msgid "Creation Date"
-msgstr ""
+msgstr "Búið til þann"
 
 #: bin/modules/gui/window/form.py:273
 msgid "Latest Modification by"
@@ -416,11 +416,11 @@ msgstr ""
 
 #: bin/widget/view/list.py:585
 msgid "Error !"
-msgstr ""
+msgstr "Villa !"
 
 #: bin/modules/gui/window/form.py:368
 msgid "Warning !"
-msgstr ""
+msgstr "Aðvörun !"
 
 #: bin/modules/gui/window/form.py:389 bin/modules/gui/window/form.py:497
 msgid ""
@@ -434,31 +434,31 @@ msgstr ""
 
 #: bin/modules/gui/window/form.py:456
 msgid "Print Screen"
-msgstr ""
+msgstr "Prenta skjá"
 
 #: bin/modules/gui/window/form.py:476
 msgid "No record selected"
-msgstr ""
+msgstr "Engin færsla valin"
 
 #: bin/modules/gui/window/form.py:481
 msgid "New document"
-msgstr ""
+msgstr "Nýtt skjal"
 
 #: bin/modules/gui/window/form.py:483
 msgid "Editing document (id: "
-msgstr ""
+msgstr "Breyti skjali (id: "
 
 #: bin/modules/gui/window/form.py:486
 msgid "Record: "
-msgstr ""
+msgstr "Færsla: "
 
 #: bin/modules/gui/window/form.py:487
 msgid " of "
-msgstr ""
+msgstr " af "
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "The file is empty !"
-msgstr ""
+msgstr "Skráin er tóm !"
 
 #: bin/modules/gui/window/win_import.py:51
 msgid "Importation !"
@@ -495,11 +495,11 @@ msgstr ""
 #: bin/modules/gui/window/win_import.py:104
 #: bin/modules/gui/window/win_import.py:108
 msgid "Field name"
-msgstr ""
+msgstr "Heiti gagnasviðs"
 
 #: bin/modules/gui/window/win_import.py:182
 msgid "Error opening .CSV file"
-msgstr ""
+msgstr "Villa við að opna .CSV skrá."
 
 #: bin/modules/gui/window/win_import.py:182
 msgid "Input Error."
@@ -519,7 +519,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_import.py:201
 msgid "Import Error."
-msgstr ""
+msgstr "Innflutningsvilla."
 
 #: bin/modules/gui/window/win_import.py:232
 msgid "You have not selected any fields to import"
@@ -527,11 +527,11 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:43
 msgid "Extension"
-msgstr ""
+msgstr "Skráarending"
 
 #: bin/modules/gui/window/win_extension.py:43
 msgid "Application"
-msgstr ""
+msgstr "Forrit"
 
 #: bin/modules/gui/window/win_extension.py:43
 msgid "Print Processor"
@@ -543,19 +543,19 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:111 bin/openerp.ui.h:758
 msgid "Extension Manager"
-msgstr ""
+msgstr "Viðbótastjóri"
 
 #: bin/modules/gui/window/win_selection.py:51
 msgid "Name"
-msgstr ""
+msgstr "Heiti"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Ressource Name"
-msgstr ""
+msgstr "Heiti tilfangs"
 
 #: bin/modules/gui/window/win_selection.py:55
 msgid "Names"
-msgstr ""
+msgstr "Heiti"
 
 #: bin/modules/gui/window/__init__.py:31
 msgid "Unknown Window"
@@ -563,7 +563,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_preference.py:68
 msgid "Preferences"
-msgstr ""
+msgstr "Valkostir"
 
 #: bin/modules/gui/window/win_preference.py:86
 msgid ""
@@ -573,15 +573,15 @@ msgstr ""
 
 #: bin/modules/gui/window/win_preference.py:88
 msgid "Default language modified !"
-msgstr ""
+msgstr "Sjálfgefnu tungumáli breytt !"
 
 #: bin/modules/gui/window/view_tree/parse.py:35
 msgid "Tree"
-msgstr ""
+msgstr "Greinar"
 
 #: bin/modules/gui/window/view_tree/view_tree_sc.py:45
 msgid "Description"
-msgstr ""
+msgstr "Lýsing"
 
 #: bin/modules/gui/window/tree.py:203 bin/modules/gui/window/tree.py:264
 msgid "No resource selected!"
@@ -603,18 +603,20 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:50
 msgid " record(s) saved !"
-msgstr ""
+msgstr " færslur vistaðar !"
 
 #: bin/modules/gui/window/win_export.py:53
 msgid ""
 "Operation failed !\n"
 "I/O error"
 msgstr ""
+"Aðgerð mistókst !\n"
+"I/O villa"
 
 #: bin/modules/gui/window/win_export.py:79
 #: bin/modules/gui/window/win_export.py:105
 msgid "Error Opening Excel !"
-msgstr ""
+msgstr "Villa við að opna Excel !"
 
 #: bin/modules/gui/window/win_export.py:310
 msgid "What is the name of this export ?"
@@ -622,7 +624,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_export.py:344
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Innflutningsvilla !"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1779
 #: bin/modules/gui/window/win_search.py:49
@@ -695,7 +697,7 @@ msgstr ""
 
 #: bin/common/common.py:114 bin/common/common.py:116
 msgid "Tips"
-msgstr ""
+msgstr "Vísbendingar"
 
 #: bin/common/common.py:167
 msgid "OpenERP Computing"
@@ -703,7 +705,7 @@ msgstr ""
 
 #: bin/common/common.py:186
 msgid "Operation in progress"
-msgstr ""
+msgstr "Aðgerð í gangi"
 
 #: bin/common/common.py:190
 msgid ""
@@ -798,7 +800,7 @@ msgstr ""
 
 #: bin/common/common.py:539
 msgid "Error"
-msgstr ""
+msgstr "Villa"
 
 #: bin/common/common.py:695
 msgid "Open with..."
@@ -867,11 +869,11 @@ msgstr ""
 
 #: bin/widget_search/char.py:45
 msgid "Error: "
-msgstr ""
+msgstr "Villa: "
 
 #: bin/widget_search/calendar.py:49 bin/widget_search/calendar.py:177
 msgid "Start date"
-msgstr ""
+msgstr "Upphafsdagur"
 
 #: bin/widget_search/calendar.py:53 bin/widget_search/calendar.py:73
 #: bin/widget_search/calendar.py:181 bin/widget_search/calendar.py:201
@@ -882,7 +884,7 @@ msgstr ""
 
 #: bin/widget_search/calendar.py:69 bin/widget_search/calendar.py:197
 msgid "End date"
-msgstr ""
+msgstr "Lokadagur"
 
 #: bin/widget_search/calendar.py:128 bin/widget_search/calendar.py:267
 #: bin/widget/view/form_gtk/calendar.py:135
@@ -894,33 +896,33 @@ msgstr ""
 #: bin/widget_search/custom_filter_widgets.py:67
 #: bin/widget_search/custom_filter_widgets.py:99
 msgid "contains"
-msgstr ""
+msgstr "inniheldur"
 
 #: bin/widget_search/custom_filter_widgets.py:41
 #: bin/widget_search/custom_filter_widgets.py:68
 #: bin/widget_search/custom_filter_widgets.py:99
 msgid "doesn't contain"
-msgstr ""
+msgstr "inniheldur ekki"
 
 #: bin/widget_search/custom_filter_widgets.py:295
 #: bin/widget_search/custom_filter_widgets.py:336
 msgid "is equal to"
-msgstr ""
+msgstr "er jafnt og"
 
 #: bin/widget_search/custom_filter_widgets.py:296
 #: bin/widget_search/custom_filter_widgets.py:337
 msgid "is not equal to"
-msgstr ""
+msgstr "er ekki jafnt og"
 
 #: bin/widget_search/custom_filter_widgets.py:297
 #: bin/widget_search/custom_filter_widgets.py:338
 msgid "greater than"
-msgstr ""
+msgstr "stærra en"
 
 #: bin/widget_search/custom_filter_widgets.py:298
 #: bin/widget_search/custom_filter_widgets.py:339
 msgid "less than"
-msgstr ""
+msgstr "minna en"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
@@ -976,7 +978,7 @@ msgstr ""
 
 #: bin/widget/view/calendar_gtk/parser.py:358 bin/openerp.ui.h:880
 msgid "Week"
-msgstr ""
+msgstr "Vika"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
@@ -988,7 +990,7 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
-msgstr ""
+msgstr "--Aðgerðir--"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Shortcut"
@@ -1012,11 +1014,11 @@ msgstr ""
 #: bin/widget/view/tree_gtk/editabletree.py:140
 #, python-format
 msgid "Shortcut: %s"
-msgstr ""
+msgstr "Flýtilykill: %s"
 
 #: bin/widget/view/tree_gtk/editabletree.py:140
 msgid "F1 New - F2 Open/Search"
-msgstr ""
+msgstr "F1 Nýtt - F2 Opna/Leita"
 
 #: bin/widget/view/tree_gtk/editabletree.py:215
 #, python-format
@@ -1094,7 +1096,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/reference.py:69 bin/openerp.ui.h:740
 msgid "Create a new resource"
-msgstr ""
+msgstr "Setja inn nýtt tilfang"
 
 #: bin/widget/view/form_gtk/reference.py:82
 msgid "Search / Open a resource"
@@ -1106,11 +1108,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/parser.py:310
 msgid "Field"
-msgstr ""
+msgstr "Gagnasvið"
 
 #: bin/widget/view/form_gtk/parser.py:310
 msgid "Object"
-msgstr ""
+msgstr "Hlutur"
 
 #: bin/widget/view/form_gtk/parser.py:651
 msgid "Enter some text to the related field before adding translations!"
@@ -1126,7 +1128,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "Hætta við"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
@@ -1143,43 +1145,43 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/one2many_list.py:167
 msgid "Set Default"
-msgstr ""
+msgstr "Gera sjálfgefið"
 
 #: bin/widget/view/form_gtk/one2many_list.py:196
 msgid "Create a new entry"
-msgstr ""
+msgstr "Búa til nýja færslu"
 
 #: bin/widget/view/form_gtk/one2many_list.py:200
 msgid "Edit this entry"
-msgstr ""
+msgstr "Breyta þessari færslu"
 
 #: bin/widget/view/form_gtk/one2many_list.py:204
 msgid "Remove this entry"
-msgstr ""
+msgstr "Fjarlægja þessa færslu"
 
 #: bin/widget/view/form_gtk/many2many.py:84
 #: bin/widget/view/form_gtk/one2many_list.py:210
 msgid "Previous Page"
-msgstr ""
+msgstr "Fyrri síða"
 
 #: bin/widget/view/form_gtk/many2many.py:88
 #: bin/widget/view/form_gtk/one2many_list.py:214
 msgid "Previous Record"
-msgstr ""
+msgstr "Fyrri færsla"
 
 #: bin/widget/view/form_gtk/many2many.py:96
 #: bin/widget/view/form_gtk/one2many_list.py:222
 msgid "Next Record"
-msgstr ""
+msgstr "Næsta færsla"
 
 #: bin/widget/view/form_gtk/many2many.py:100
 #: bin/widget/view/form_gtk/one2many_list.py:226
 msgid "Next Page"
-msgstr ""
+msgstr "Næsta síða"
 
 #: bin/widget/view/form_gtk/one2many_list.py:232
 msgid "Switch"
-msgstr ""
+msgstr "Skipta"
 
 #: bin/widget/view/form_gtk/many2many.py:106
 #: bin/widget/view/form_gtk/one2many_list.py:238
@@ -1196,19 +1198,19 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:84 bin/widget/view/form_gtk/image.py:82
 msgid "Save As"
-msgstr ""
+msgstr "Vista sem"
 
 #: bin/widget/view/form_gtk/binary.py:88 bin/widget/view/form_gtk/image.py:93
 msgid "Clear"
-msgstr ""
+msgstr "Hreinsa"
 
 #: bin/widget/view/form_gtk/image.py:102
 msgid "All files"
-msgstr ""
+msgstr "Allar skrár"
 
 #: bin/widget/view/form_gtk/image.py:106
 msgid "Images"
-msgstr ""
+msgstr "Myndir"
 
 #: bin/widget/view/form_gtk/image.py:131
 msgid "There is no image to save as !"
@@ -1216,11 +1218,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/image.py:131
 msgid "Warning"
-msgstr ""
+msgstr "Aðvörun"
 
 #: bin/widget/view/form_gtk/many2one.py:156 bin/widget/view/form_gtk/url.py:53
 msgid "Open this resource"
-msgstr ""
+msgstr "Opna þetta tilfang"
 
 #: bin/widget_search/custom_filter_widgets.py:89
 #: bin/widget/view/form_gtk/many2one.py:161
@@ -1229,11 +1231,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/many2one.py:172 bin/openerp.ui.h:712
 msgid "Action"
-msgstr ""
+msgstr "Aðgerð"
 
 #: bin/widget/view/form_gtk/many2one.py:173
 msgid "Report"
-msgstr ""
+msgstr "Skýrsla"
 
 #: bin/widget/view/list.py:634 bin/widget/view/form_gtk/many2one.py:388
 msgid "You must select a record to use the relation !"
@@ -1241,7 +1243,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/interface.py:49
 msgid "Set as default"
-msgstr ""
+msgstr "Setja sem sjálfgefið"
 
 #: bin/widget/view/form_gtk/interface.py:64
 msgid "You can not set to the default value here !"
@@ -1253,11 +1255,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:76
 msgid "Select"
-msgstr ""
+msgstr "Velja"
 
 #: bin/widget/view/form_gtk/binary.py:80
 msgid "Open"
-msgstr ""
+msgstr "Opna"
 
 #: bin/widget/view/form_gtk/binary.py:123
 #: bin/widget/view/form_gtk/binary.py:167
@@ -1272,7 +1274,7 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/binary.py:142
 msgid "All Files"
-msgstr ""
+msgstr "Allar skrár"
 
 #: bin/widget/view/form_gtk/binary.py:152
 msgid "Select a file..."
@@ -1294,11 +1296,11 @@ msgstr ""
 
 #: bin/widget_search/calendar.py:273 bin/widget/view/form_gtk/calendar.py:255
 msgid "Hour:"
-msgstr ""
+msgstr "Klukkustund:"
 
 #: bin/widget_search/calendar.py:276 bin/widget/view/form_gtk/calendar.py:258
 msgid "Minute:"
-msgstr ""
+msgstr "Mínúta:"
 
 #: bin/widget_search/calendar.py:312 bin/widget/view/form_gtk/calendar.py:291
 msgid "Invalid datetime value! Year must be greater than 1899 !"
@@ -1332,51 +1334,51 @@ msgstr ""
 
 #: bin/rpc.py:188
 msgid "Connection Error"
-msgstr ""
+msgstr "Villa í tengingu"
 
 #: bin/openerp.ui.h:815
 msgid "OpenERP - Login"
-msgstr ""
+msgstr "OpenERP - Innskráning"
 
 #: bin/openerp.ui.h:742
 msgid "Database:"
-msgstr ""
+msgstr "Gagnagrunnur:"
 
 #: bin/openerp.ui.h:876
 msgid "User:"
-msgstr ""
+msgstr "Notandi:"
 
 #: bin/openerp.ui.h:824
 msgid "Password:"
-msgstr ""
+msgstr "Lykilorð:"
 
 #: bin/openerp.ui.h:897
 msgid "_File"
-msgstr ""
+msgstr "_Skrá"
 
 #: bin/openerp.ui.h:886
 msgid "_Connect..."
-msgstr ""
+msgstr "_Tengjast..."
 
 #: bin/openerp.ui.h:890
 msgid "_Disconnect"
-msgstr ""
+msgstr "_Aftengjast"
 
 #: bin/openerp.ui.h:743
 msgid "Databases"
-msgstr ""
+msgstr "Gagnagrunnar"
 
 #: bin/openerp.ui.h:908
 msgid "_New database"
-msgstr ""
+msgstr "_Nýr gagnagrunnur"
 
 #: bin/openerp.ui.h:919
 msgid "_Restore database"
-msgstr ""
+msgstr "Endu_rheimta gagnagrunn"
 
 #: bin/openerp.ui.h:885
 msgid "_Backup database"
-msgstr ""
+msgstr "Taka öryggis_afrit af gagnagrunni"
 
 #: bin/openerp.ui.h:749
 msgid "Dro_p database"
@@ -1388,75 +1390,75 @@ msgstr ""
 
 #: bin/openerp.ui.h:905
 msgid "_Migrate Database(s)"
-msgstr ""
+msgstr "_Yfirfæra gagnagrunna"
 
 #: bin/openerp.ui.h:716
 msgid "Administrator Password"
-msgstr ""
+msgstr "Lykilorð kerfisstjóra"
 
 #: bin/openerp.ui.h:925
 msgid "_User"
-msgstr ""
+msgstr "_Notandi"
 
 #: bin/openerp.ui.h:914
 msgid "_Preferences"
-msgstr ""
+msgstr "_Stillingar"
 
 #: bin/openerp.ui.h:922
 msgid "_Send a request"
-msgstr ""
+msgstr "_Senda beiðni"
 
 #: bin/openerp.ui.h:917
 msgid "_Read my requests"
-msgstr ""
+msgstr "_Lesa beiðnirnar mínar"
 
 #: bin/openerp.ui.h:926
 msgid "_Waiting Requests"
-msgstr ""
+msgstr "_Beiðnir í bið"
 
 #: bin/openerp.ui.h:768
 msgid "For_m"
-msgstr ""
+msgstr "Eyðu_blað"
 
 #: bin/openerp.ui.h:906
 msgid "_New"
-msgstr ""
+msgstr "_Nýtt"
 
 #: bin/openerp.ui.h:920
 msgid "_Save"
-msgstr ""
+msgstr "_Vista"
 
 #: bin/openerp.ui.h:738
 msgid "Copy this resource"
-msgstr ""
+msgstr "Afrita þetta tilfang"
 
 #: bin/openerp.ui.h:894
 msgid "_Duplicate"
-msgstr ""
+msgstr "Fjölfal_da"
 
 #: bin/openerp.ui.h:889
 msgid "_Delete"
-msgstr ""
+msgstr "_Eyða"
 
 #: bin/openerp.ui.h:766
 msgid "Find"
-msgstr ""
+msgstr "Finna"
 
 #: bin/openerp.ui.h:792
 msgid "Ne_xt"
-msgstr ""
+msgstr "Á_fram"
 
 #: bin/openerp.ui.h:828
 msgid "Pre_vious"
-msgstr ""
+msgstr "_Fyrra"
 
 #: bin/openerp.ui.h:860
 msgid "Switch to list/form"
-msgstr ""
+msgstr "Skipta yfir í lista/eyðublað"
 
 #: bin/openerp.ui.h:903
 msgid "_Menu"
-msgstr ""
+msgstr "_Valmynd"
 
 #: bin/openerp.ui.h:907
 msgid "_New Home Tab"
@@ -1464,19 +1466,19 @@ msgstr ""
 
 #: bin/openerp.ui.h:730
 msgid "Close Tab"
-msgstr ""
+msgstr "Loka flipa"
 
 #: bin/openerp.ui.h:833
 msgid "Previous Tab"
-msgstr ""
+msgstr "Fyrri flipi"
 
 #: bin/openerp.ui.h:799
 msgid "Next Tab"
-msgstr ""
+msgstr "Næsti flipi"
 
 #: bin/openerp.ui.h:879
 msgid "View _logs"
-msgstr ""
+msgstr "Skoða anná_la"
 
 #: bin/openerp.ui.h:899
 msgid "_Go to resource ID..."
@@ -1484,23 +1486,23 @@ msgstr ""
 
 #: bin/openerp.ui.h:910
 msgid "_Open"
-msgstr ""
+msgstr "_Opna"
 
 #: bin/openerp.ui.h:840
 msgid "Reloa_d / Undo"
-msgstr ""
+msgstr "En_durlesa / Afturkalla"
 
 #: bin/openerp.ui.h:843
 msgid "Repeat latest _action"
-msgstr ""
+msgstr "Endurtaka síðustu _aðgerð"
 
 #: bin/openerp.ui.h:915
 msgid "_Preview in PDF"
-msgstr ""
+msgstr "Forskoða sem _PDF"
 
 #: bin/openerp.ui.h:831
 msgid "Previe_w in editor"
-msgstr ""
+msgstr "_Forskoða í ritli"
 
 #: bin/openerp.ui.h:757
 msgid "Expor_t data..."
@@ -1508,99 +1510,99 @@ msgstr ""
 
 #: bin/openerp.ui.h:777
 msgid "I_mport data..."
-msgstr ""
+msgstr "Flytja i_nn gögn..."
 
 #: bin/openerp.ui.h:912
 msgid "_Options"
-msgstr ""
+msgstr "_Valkostir"
 
 #: bin/openerp.ui.h:896
 msgid "_Extension Manager"
-msgstr ""
+msgstr "_Viðbótastjórnun"
 
 #: bin/openerp.ui.h:904
 msgid "_Menubar"
-msgstr ""
+msgstr "_Valmyndarslá"
 
 #: bin/openerp.ui.h:865
 msgid "Text _and Icons"
-msgstr ""
+msgstr "Texti _og táknmyndir"
 
 #: bin/openerp.ui.h:901
 msgid "_Icons only"
-msgstr ""
+msgstr "E_inungis táknmyndir"
 
 #: bin/openerp.ui.h:924
 msgid "_Text only"
-msgstr ""
+msgstr "Einungis _texti"
 
 #: bin/openerp.ui.h:898
 msgid "_Forms"
-msgstr ""
+msgstr "_Eyðublöð"
 
 #: bin/openerp.ui.h:847
 msgid "Right Toolbar"
-msgstr ""
+msgstr "Tækjaslá hægra megin"
 
 #: bin/openerp.ui.h:863
 msgid "Tabs default position"
-msgstr ""
+msgstr "Sjálfgefin staðsetning flipa"
 
 #: bin/openerp.ui.h:872
 msgid "Top"
-msgstr ""
+msgstr "Efst"
 
 #: bin/openerp.ui.h:784
 msgid "Left"
-msgstr ""
+msgstr "Vinstri"
 
 #: bin/openerp.ui.h:846
 msgid "Right"
-msgstr ""
+msgstr "Hægri"
 
 #: bin/openerp.ui.h:721
 msgid "Bottom"
-msgstr ""
+msgstr "Neðst"
 
 #: bin/openerp.ui.h:862
 msgid "Tabs default orientation"
-msgstr ""
+msgstr "Sjálfgefin stefna flipa"
 
 #: bin/openerp.ui.h:776
 msgid "Horizontal"
-msgstr ""
+msgstr "Lárétt"
 
 #: bin/openerp.ui.h:877
 msgid "Vertical"
-msgstr ""
+msgstr "Lóðrétt"
 
 #: bin/openerp.ui.h:916
 msgid "_Print"
-msgstr ""
+msgstr "_Prenta"
 
 #: bin/openerp.ui.h:830
 msgid "Previe_w before print"
-msgstr ""
+msgstr "_Forskoða fyrir prentun"
 
 #: bin/openerp.ui.h:921
 msgid "_Save options"
-msgstr ""
+msgstr "_Valkostir vistunar"
 
 #: bin/openerp.ui.h:913
 msgid "_Plugins"
-msgstr ""
+msgstr "_Viðbætur"
 
 #: bin/openerp.ui.h:895
 msgid "_Execute a plugin"
-msgstr ""
+msgstr "_Keyra forritsviðbót"
 
 #: bin/openerp.ui.h:923
 msgid "_Shortcuts"
-msgstr ""
+msgstr "_Flýtilyklar"
 
 #: bin/openerp.ui.h:900
 msgid "_Help"
-msgstr ""
+msgstr "_Hjálp"
 
 #: bin/openerp.ui.h:753
 msgid "Enable Debug Mode Tooltips"
@@ -1608,27 +1610,27 @@ msgstr ""
 
 #: bin/openerp.ui.h:859
 msgid "Support Request"
-msgstr ""
+msgstr "Beiðni um stuðning"
 
 #: bin/openerp.ui.h:875
 msgid "User _Manual"
-msgstr ""
+msgstr "_Notandahandbók"
 
 #: bin/openerp.ui.h:888
 msgid "_Contextual Help"
-msgstr ""
+msgstr "Samhengis_hjálp"
 
 #: bin/openerp.ui.h:780
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Flýtilyklar"
 
 #: bin/openerp.ui.h:902
 msgid "_License"
-msgstr ""
+msgstr "_Notkunarleyfi"
 
 #: bin/openerp.ui.h:883
 msgid "_About..."
-msgstr ""
+msgstr "_Upplýsingar..."
 
 #: bin/openerp.ui.h:750
 msgid "Edit / Save this resource"
@@ -1636,7 +1638,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:747
 msgid "Delete this resource"
-msgstr ""
+msgstr "Eyða þessu tilfangi"
 
 #: bin/openerp.ui.h:772
 msgid "Go to previous matched search"
@@ -1644,7 +1646,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:832
 msgid "Previous"
-msgstr ""
+msgstr "Fyrri"
 
 #: bin/openerp.ui.h:771
 msgid "Go to next matched resource"
@@ -1652,35 +1654,35 @@ msgstr ""
 
 #: bin/openerp.ui.h:798
 msgid "Next"
-msgstr ""
+msgstr "Næst"
 
 #: bin/openerp.ui.h:786
 msgid "List"
-msgstr ""
+msgstr "Listi"
 
 #: bin/openerp.ui.h:769
 msgid "Form"
-msgstr ""
+msgstr "Eyðublað"
 
 #: bin/openerp.ui.h:723
 msgid "Calendar"
-msgstr ""
+msgstr "Dagatal"
 
 #: bin/openerp.ui.h:748
 msgid "Diagram"
-msgstr ""
+msgstr "Skýringamynd"
 
 #: bin/openerp.ui.h:774
 msgid "Graph"
-msgstr ""
+msgstr "Línurit"
 
 #: bin/openerp.ui.h:770
 msgid "Gantt"
-msgstr ""
+msgstr "Gantt"
 
 #: bin/openerp.ui.h:837
 msgid "Print documents"
-msgstr ""
+msgstr "Prenta skjöl"
 
 #: bin/openerp.ui.h:783
 msgid "Launch actions about this resource"
@@ -1692,55 +1694,55 @@ msgstr ""
 
 #: bin/openerp.ui.h:717
 msgid "Attachment"
-msgstr ""
+msgstr "Viðhengi"
 
 #: bin/openerp.ui.h:789
 msgid "Menu"
-msgstr ""
+msgstr "Valmynd"
 
 #: bin/openerp.ui.h:841
 msgid "Reload"
-msgstr ""
+msgstr "Endurlesa"
 
 #: bin/openerp.ui.h:731
 msgid "Close this window"
-msgstr ""
+msgstr "Loka þessum glugga"
 
 #: bin/openerp.ui.h:733
 msgid "Company:"
-msgstr ""
+msgstr "Fyrirtæki:"
 
 #: bin/openerp.ui.h:844
 msgid "Requests:"
-msgstr ""
+msgstr "Beiðnir:"
 
 #: bin/openerp.ui.h:839
 msgid "Read my Requests"
-msgstr ""
+msgstr "Lesa beiðnirnar mínar"
 
 #: bin/openerp.ui.h:853
 msgid "Send a new request"
-msgstr ""
+msgstr "Senda nýja beiðni"
 
 #: bin/openerp.ui.h:819
 msgid "OpenERP - Tree Resources"
-msgstr ""
+msgstr "OpenERP - Greinar tilfanga"
 
 #: bin/openerp.ui.h:857
 msgid "Shortcuts"
-msgstr ""
+msgstr "Flýtilyklar"
 
 #: bin/openerp.ui.h:813
 msgid "OpenERP - Forms"
-msgstr ""
+msgstr "OpenERP - Eyðublöð"
 
 #: bin/openerp.ui.h:858
 msgid "State:"
-msgstr ""
+msgstr "Staða:"
 
 #: bin/openerp.ui.h:809
 msgid "OpenERP - About"
-msgstr ""
+msgstr "OpenERP - Um hugbúnaðinn"
 
 #: bin/openerp.ui.h:678
 msgid ""
@@ -1767,7 +1769,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:911
 msgid "_OpenERP"
-msgstr ""
+msgstr "_OpenERP"
 
 #: bin/openerp.ui.h:1
 msgid ""
@@ -1784,6 +1786,18 @@ msgid ""
 "Mail: sales@tiny.be\n"
 "Web: http://tiny.be"
 msgstr ""
+"\n"
+"(c) 2003-dagsins í dag - Tiny sprl\n"
+"OpenERP er búið til af Tiny sprl:\n"
+"\n"
+"Tiny sprl\n"
+"40 Chaussée de Namur\n"
+"1367 Gérompont\n"
+"Belgium\n"
+"\n"
+"Tel : (+32)81.81.37.00\n"
+"Mail: sales@tiny.be\n"
+"Web: http://tiny.be"
 
 #: bin/openerp.ui.h:887
 msgid "_Contact"
@@ -1795,19 +1809,19 @@ msgstr ""
 
 #: bin/openerp.ui.h:810
 msgid "OpenERP - Confirmation"
-msgstr ""
+msgstr "OpenERP - Staðfesting"
 
 #: bin/openerp.ui.h:818
 msgid "OpenERP - Selection"
-msgstr ""
+msgstr "OpenERP - Valið"
 
 #: bin/openerp.ui.h:882
 msgid "Your selection:"
-msgstr ""
+msgstr "Valið þitt:"
 
 #: bin/openerp.ui.h:811
 msgid "OpenERP - Dialog"
-msgstr ""
+msgstr "OpenERP - Samskiptagluggi"
 
 #: bin/openerp.ui.h:822
 msgid "OpenERP, Field Preference target"
@@ -1815,11 +1829,11 @@ msgstr ""
 
 #: bin/openerp.ui.h:927
 msgid "_only for you"
-msgstr ""
+msgstr "að_eins fyrir þig"
 
 #: bin/openerp.ui.h:929
 msgid "for _all users"
-msgstr ""
+msgstr "fyrir _alla notendur"
 
 #: bin/openerp.ui.h:699
 msgid "<b>Value applicable for:</b>"
@@ -1831,27 +1845,27 @@ msgstr ""
 
 #: bin/openerp.ui.h:762
 msgid "Field _Name:"
-msgstr ""
+msgstr "_Heiti gagnasviðs:"
 
 #: bin/openerp.ui.h:892
 msgid "_Domain:"
-msgstr ""
+msgstr "_Lén:"
 
 #: bin/openerp.ui.h:745
 msgid "Default _value:"
-msgstr ""
+msgstr "Sjálfgefið _gildi:"
 
 #: bin/openerp.ui.h:812
 msgid "OpenERP - Export to CSV"
-msgstr ""
+msgstr "OpenERP - Flytja út í CSV"
 
 #: bin/openerp.ui.h:849
 msgid "Save List"
-msgstr ""
+msgstr "Vista lista"
 
 #: bin/openerp.ui.h:842
 msgid "Remove List"
-msgstr ""
+msgstr "Fjarlægja lista"
 
 #: bin/openerp.ui.h:689
 msgid "<b>Exports List</b>"
@@ -1863,7 +1877,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:778
 msgid "Import Compatible"
-msgstr ""
+msgstr "Flytja inn samhæft"
 
 #: bin/openerp.glade:2862
 msgid "<b>Select an Option to Export</b>"
@@ -1871,23 +1885,23 @@ msgstr ""
 
 #: bin/openerp.ui.h:720
 msgid "Available Fields"
-msgstr ""
+msgstr "Tiltæk gagnasvið"
 
 #: bin/openerp.ui.h:884
 msgid "_Add"
-msgstr ""
+msgstr "Bæt_a við"
 
 #: bin/openerp.ui.h:918
 msgid "_Remove"
-msgstr ""
+msgstr "_Fjarlægja"
 
 #: bin/openerp.ui.h:909
 msgid "_Nothing"
-msgstr ""
+msgstr "_Ekkert"
 
 #: bin/openerp.ui.h:763
 msgid "Fields to Export"
-msgstr ""
+msgstr "Gagnasvið sem á að flytja út"
 
 #: bin/openerp.glade:3132
 msgid ""
@@ -1905,11 +1919,11 @@ msgstr ""
 
 #: bin/openerp.ui.h:817
 msgid "OpenERP - Search"
-msgstr ""
+msgstr "OpenERP - Leit"
 
 #: bin/openerp.ui.h:816
 msgid "OpenERP - Preferences"
-msgstr ""
+msgstr "OpenERP - Valkostir"
 
 #: bin/openerp.ui.h:698
 msgid "<b>User preferences</b>"
@@ -1917,27 +1931,27 @@ msgstr ""
 
 #: bin/openerp.ui.h:870
 msgid "Tip of the Day"
-msgstr ""
+msgstr "Vísbending dagsins"
 
 #: bin/openerp.ui.h:891
 msgid "_Display a new tip next time?"
-msgstr ""
+msgstr "_Birta nýja vísbendingu næst?"
 
 #: bin/openerp.ui.h:829
 msgid "Pre_vious Tip"
-msgstr ""
+msgstr "Fyrri _vísbending"
 
 #: bin/openerp.ui.h:793
 msgid "Ne_xt Tip"
-msgstr ""
+msgstr "Næ_sta vísbending"
 
 #: bin/openerp.ui.h:814
 msgid "OpenERP - License"
-msgstr ""
+msgstr "OpenERP - Notkunarskilmálar"
 
 #: bin/openerp.ui.h:821
 msgid "OpenERP license"
-msgstr ""
+msgstr "OpenERP notkunarleyfi"
 
 #: bin/openerp.ui.h:773
 msgid "Go to resource ID"
@@ -1945,7 +1959,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:852
 msgid "Search ID:"
-msgstr ""
+msgstr "Leitarauðkenni (ID):"
 
 #: bin/openerp.ui.h:683
 msgid ""
@@ -1958,7 +1972,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:826
 msgid "Phone number:"
-msgstr ""
+msgstr "Símanúmer:"
 
 #: bin/openerp.ui.h:752
 msgid "Emergency:"
@@ -1978,7 +1992,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:823 bin/win_error.ui.h:11
 msgid "Other comments:"
-msgstr ""
+msgstr "Aðrar athugasemdir:"
 
 #: bin/openerp.ui.h:756
 msgid "Explain your problem:"
@@ -1986,7 +2000,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:702
 msgid "<b>Your email:</b>"
-msgstr ""
+msgstr "<b>Tölvupóstfangið þitt:</b>"
 
 #: bin/openerp.ui.h:701
 msgid "<b>Your Company:</b>"
@@ -1994,15 +2008,15 @@ msgstr ""
 
 #: bin/openerp.ui.h:703
 msgid "<b>Your name:</b>"
-msgstr ""
+msgstr "<b>Nafnið þitt:</b>"
 
 #: bin/openerp.ui.h:775
 msgid "Hello World!"
-msgstr ""
+msgstr "Halló heimur!"
 
 #: bin/openerp.ui.h:781
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Flýtileiðir á lyklaborði"
 
 #: bin/openerp.ui.h:694
 msgid "<b>Shortcuts for OpenERP</b>"
@@ -2010,11 +2024,11 @@ msgstr ""
 
 #: bin/openerp.ui.h:732
 msgid "Close window without saving"
-msgstr ""
+msgstr "Loka glugga án þess að vista"
 
 #: bin/openerp.ui.h:651
 msgid "<Ctrl> + <Esc>"
-msgstr ""
+msgstr "<Ctrl> + <Esc>"
 
 #: bin/openerp.ui.h:704
 msgid "<i>When editing a resource in a popup window</i>"
@@ -2022,99 +2036,99 @@ msgstr ""
 
 #: bin/openerp.ui.h:850
 msgid "Save and Close window"
-msgstr ""
+msgstr "Vista og loka glugga"
 
 #: bin/openerp.ui.h:650
 msgid "<Ctrl> + <Enter>"
-msgstr ""
+msgstr "<Ctrl> + <Enter>"
 
 #: bin/openerp.ui.h:861
 msgid "Switch view mode"
-msgstr ""
+msgstr "Skipta um skoðunarham"
 
 #: bin/openerp.ui.h:657
 msgid "<Ctrl> + L"
-msgstr ""
+msgstr "<Ctrl> + L"
 
 #: bin/openerp.ui.h:801
 msgid "Next record"
-msgstr ""
+msgstr "Næsta færsla"
 
 #: bin/openerp.ui.h:835
 msgid "Previous record"
-msgstr ""
+msgstr "Fyrri færsla"
 
 #: bin/openerp.ui.h:665
 msgid "<PgDn>"
-msgstr ""
+msgstr "<PgDn>"
 
 #: bin/openerp.ui.h:666
 msgid "<PgUp>"
-msgstr ""
+msgstr "<PgUp>"
 
 #: bin/openerp.ui.h:848
 msgid "Save"
-msgstr ""
+msgstr "Vista"
 
 #: bin/openerp.ui.h:662
 msgid "<Ctrl> + W"
-msgstr ""
+msgstr "<Ctrl> + W"
 
 #: bin/openerp.ui.h:660
 msgid "<Ctrl> + S"
-msgstr ""
+msgstr "<Ctrl> + S"
 
 #: bin/openerp.ui.h:652
 msgid "<Ctrl> + <PgDn>"
-msgstr ""
+msgstr "<Ctrl> + <PgDn>"
 
 #: bin/openerp.ui.h:836
 msgid "Previous tab"
-msgstr ""
+msgstr "Fyrri flipi"
 
 #: bin/openerp.ui.h:653
 msgid "<Ctrl> + <PgUp>"
-msgstr ""
+msgstr "<Ctrl> + <PgUp>"
 
 #: bin/openerp.ui.h:794
 msgid "New"
-msgstr ""
+msgstr "Nýtt"
 
 #: bin/openerp.ui.h:658
 msgid "<Ctrl> + N"
-msgstr ""
+msgstr "<Ctrl> + N"
 
 #: bin/openerp.ui.h:746
 msgid "Delete"
-msgstr ""
+msgstr "Eyða"
 
 #: bin/openerp.ui.h:655
 msgid "<Ctrl> + D"
-msgstr ""
+msgstr "<Ctrl> + D"
 
 #: bin/openerp.ui.h:767
 msgid "Find / Search"
-msgstr ""
+msgstr "Finna / Leita"
 
 #: bin/openerp.ui.h:656
 msgid "<Ctrl> + F"
-msgstr ""
+msgstr "<Ctrl> + F"
 
 #: bin/openerp.ui.h:736
 msgid "Connect"
-msgstr ""
+msgstr "Tengjast"
 
 #: bin/openerp.ui.h:659
 msgid "<Ctrl> + O"
-msgstr ""
+msgstr "<Ctrl> + O"
 
 #: bin/openerp.ui.h:787
 msgid "Main Shortcuts"
-msgstr ""
+msgstr "Aðalflýtilyklar"
 
 #: bin/openerp.ui.h:760
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
 #: bin/openerp.ui.h:695
 msgid "<b>Shortcuts in relation fields</b>"
@@ -2126,23 +2140,23 @@ msgstr ""
 
 #: bin/openerp.ui.h:805
 msgid "Open current field"
-msgstr ""
+msgstr "Opna þetta gagnasvið"
 
 #: bin/openerp.ui.h:714
 msgid "Add a new line/field"
-msgstr ""
+msgstr "Bæta við nýrri línu/gagnasviði"
 
 #: bin/openerp.ui.h:759
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: bin/openerp.ui.h:718
 msgid "Auto-Complete text field"
-msgstr ""
+msgstr "Sjálfvirk klárun í textareit"
 
 #: bin/openerp.ui.h:664
 msgid "<Enter>"
-msgstr ""
+msgstr "<Enter>"
 
 #: bin/openerp.ui.h:834
 msgid "Previous editable widget"
@@ -2150,7 +2164,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:667
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.ui.h:800
 msgid "Next editable widget"
@@ -2158,31 +2172,31 @@ msgstr ""
 
 #: bin/openerp.ui.h:668
 msgid "<Tab>"
-msgstr ""
+msgstr "<Tab>"
 
 #: bin/openerp.ui.h:825
 msgid "Paste selected text"
-msgstr ""
+msgstr "Líma vainn texta"
 
 #: bin/openerp.ui.h:737
 msgid "Copy selected text"
-msgstr ""
+msgstr "Afrita valinn texta"
 
 #: bin/openerp.ui.h:741
 msgid "Cut selected text"
-msgstr ""
+msgstr "Klippa valinn texta"
 
 #: bin/openerp.ui.h:661
 msgid "<Ctrl> + V"
-msgstr ""
+msgstr "<Ctrl> + V"
 
 #: bin/openerp.ui.h:654
 msgid "<Ctrl> + C"
-msgstr ""
+msgstr "<Ctrl> + C"
 
 #: bin/openerp.ui.h:663
 msgid "<Ctrl> + X"
-msgstr ""
+msgstr "<Ctrl> + X"
 
 #: bin/openerp.ui.h:751
 msgid "Edition Widgets"
@@ -2190,7 +2204,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:779
 msgid "Import from CSV"
-msgstr ""
+msgstr "Flytja inn úr CSV"
 
 #: bin/openerp.ui.h:680
 msgid "<b>All fields</b>"
@@ -2198,11 +2212,11 @@ msgstr ""
 
 #: bin/openerp.ui.h:791
 msgid "N_othing"
-msgstr ""
+msgstr "E_kkert"
 
 #: bin/openerp.ui.h:719
 msgid "Auto-Detect"
-msgstr ""
+msgstr "Finna sjálkrafa"
 
 #: bin/openerp.ui.h:690
 msgid "<b>Fields to import</b>"
@@ -2214,15 +2228,15 @@ msgstr ""
 
 #: bin/openerp.ui.h:785
 msgid "Lines to Skip:"
-msgstr ""
+msgstr "Línur sem á að sleppa:"
 
 #: bin/openerp.ui.h:864
 msgid "Text Delimiter:"
-msgstr ""
+msgstr "Afmörkun texta"
 
 #: bin/openerp.ui.h:754
 msgid "Encoding:"
-msgstr ""
+msgstr "Stafatafla:"
 
 #: bin/openerp.glade:6035
 msgid "Field Separater:"
@@ -2230,11 +2244,11 @@ msgstr ""
 
 #: bin/openerp.ui.h:722
 msgid "CSV Parameters"
-msgstr ""
+msgstr "CSV viðföng"
 
 #: bin/openerp.ui.h:855
 msgid "Server"
-msgstr ""
+msgstr "Þjónn"
 
 #: bin/openerp.ui.h:687
 msgid "<b>Connect to a OpenERP server</b>"
@@ -2242,11 +2256,11 @@ msgstr ""
 
 #: bin/openerp.ui.h:838
 msgid "Protocol connection:"
-msgstr ""
+msgstr "Samskiptamáti tengingar:"
 
 #: bin/openerp.ui.h:827
 msgid "Port:"
-msgstr ""
+msgstr "Gátt:"
 
 #: bin/openerp.ui.h:727
 msgid "Choose a database..."
@@ -2258,7 +2272,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:845
 msgid "Restore a database"
-msgstr ""
+msgstr "Endurheimta gagnagrunn"
 
 #: bin/openerp.ui.h:693
 msgid "<b>Restore a database</b>"
@@ -2270,15 +2284,15 @@ msgstr ""
 
 #: bin/openerp.ui.h:795
 msgid "New database name:"
-msgstr ""
+msgstr "Heiti á nýjum gagnagrunni:"
 
 #: bin/openerp.ui.h:930
 msgid "http://localhost:8069"
-msgstr ""
+msgstr "http://localhost:8069"
 
 #: bin/openerp.ui.h:739
 msgid "Create a new database"
-msgstr ""
+msgstr "Búa til nýjan gagnagrunn"
 
 #: bin/openerp.ui.h:688
 msgid "<b>Create a new database</b>"
@@ -2377,7 +2391,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:725
 msgid "Change password"
-msgstr ""
+msgstr "Breyta lykilorði"
 
 #: bin/openerp.ui.h:682
 msgid "<b>Change your super admin password</b>"
@@ -2385,19 +2399,19 @@ msgstr ""
 
 #: bin/openerp.ui.h:803
 msgid "Old password:"
-msgstr ""
+msgstr "Eldra lykilorð"
 
 #: bin/openerp.ui.h:797
 msgid "New password:"
-msgstr ""
+msgstr "Nýtt lykilorð:"
 
 #: bin/openerp.ui.h:796
 msgid "New password confirmation:"
-msgstr ""
+msgstr "Staðfesting á nýju lykilorði:"
 
 #: bin/openerp.ui.h:820
 msgid "OpenERP Message"
-msgstr ""
+msgstr "OpenERP skilaboð"
 
 #: bin/openerp.ui.h:735
 msgid "Concurrency exception"
@@ -2417,11 +2431,11 @@ msgstr ""
 
 #: bin/openerp.ui.h:734
 msgid "Compare"
-msgstr ""
+msgstr "Bera saman"
 
 #: bin/openerp.ui.h:881
 msgid "Write anyway"
-msgstr ""
+msgstr "Skrifa samt"
 
 #: bin/openerp.glade:7910 bin/openerp.glade:7920
 msgid "window1"
@@ -2429,19 +2443,19 @@ msgstr ""
 
 #: bin/openerp.ui.h:871
 msgid "Today"
-msgstr ""
+msgstr "Í dag"
 
 #: bin/openerp.ui.h:854
 msgid "September 2008"
-msgstr ""
+msgstr "September 2008"
 
 #: bin/openerp.ui.h:744
 msgid "Day"
-msgstr ""
+msgstr "Dagur"
 
 #: bin/openerp.ui.h:790
 msgid "Month"
-msgstr ""
+msgstr "Mánuður"
 
 #: bin/openerp.glade:8276
 msgid "Fields on which Search criteria to be applied"
@@ -2475,7 +2489,7 @@ msgstr ""
 
 #: bin/win_error.ui.h:14
 msgid "label"
-msgstr ""
+msgstr "skýring"
 
 #: bin/win_error.ui.h:8
 msgid "Click here for details about the publisher warranty proposition"
@@ -2496,7 +2510,7 @@ msgstr ""
 
 #: bin/win_error.ui.h:10
 msgid "Explain what you did:"
-msgstr ""
+msgstr "Útskýrðu hvað þú gerðir:"
 
 #: bin/win_error.glade:200
 msgid "Others Comments:"
@@ -2516,8 +2530,8 @@ msgstr ""
 
 #: bin/win_error.ui.h:9
 msgid "Details"
-msgstr ""
+msgstr "Nánar"
 
 #: bin/win_error.ui.h:5
 msgid "<i>_Details</i>"
-msgstr ""
+msgstr "<i>_Nánar</i>"
