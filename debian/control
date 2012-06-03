@@ -1,7 +1,7 @@
 Source: openerp-client
 Section: x11
 Priority: optional
-Maintainer: OpenERP SA. <xrg@openerp.com>
+Maintainer: P. Christeas <xrg@hellug.gr>
 Build-Depends: debhelper (>= 7.0.50~), python, python-setuptools
 Build-Depends-Indep: python-glade2, python-gtk2
 Standards-Version: 3.9.1
