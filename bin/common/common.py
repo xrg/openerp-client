@@ -425,7 +425,10 @@ def error(title, message, details='', parent=None, disconnected_mode=False):
         if show_message:
             xmlGlade.get_widget('maintenance_explanation').set_markup(maintenance_contract_message)
 
-        xmlGlade.get_widget('notebook').remove_page(int(show_message))
+        if show_message:
+            xmlGlade.get_widget('notebook').remove_page(2)
+        else:
+            xmlGlade.get_widget('notebook').remove_page(1)
         if not show_message:
             def send(widget):
                 def get_text_from_text_view(textView):
