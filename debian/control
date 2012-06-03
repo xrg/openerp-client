@@ -27,3 +27,7 @@ Description: Enterprise Resource Management (client)
  .
  This package contains the Open ERP client, install openerp-server package for
  the server.
+ 
+ This is the F3 version of the Gtk client, a continuation of the 6.0 series. It
+ delivers faster communication for the XML-RPC protocol (more notably against an
+ F3 server). It remains compatible with all 6.1, 6.0 and 5.0 series of servers.
