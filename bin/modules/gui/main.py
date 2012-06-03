@@ -472,8 +472,8 @@ class db_login(object):
                 import release
                 full_server_version = rpc.session.db_exec_no_except(url, 'server_version')
                 server_version = full_server_version.split('.')
-                client_version = release.version.split('.')
-                return (server_version[:2] == client_version[:2], full_server_version, release.version)
+                client_version = release.major_version.split('.')
+                return (server_version[:2] <= client_version, full_server_version, release.major_version)
             except:
                 # the server doesn't understand the request. It's mean that it's an old version of the server
                 return (False, _('Unknown'), release.version)
