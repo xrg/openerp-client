@@ -3,7 +3,7 @@
 #    OpenERP, Open Source Management Solution   
 #    Copyright (C) 2004-TODAY Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    Copyright (C) 2004-TODAY OpenERP S.A. (<http://www.openerp.com>). All Rights Reserved
-#    $Id$
+#    Copyright (C) 2011-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -28,6 +28,10 @@ and financial), stock management, sales and purchases management, tasks
 automation, marketing campaigns, help desk, POS, etc. Technical features include
 a distributed server, flexible workflows, an object database, a dynamic GUI,
 customizable reports, and SOAP and XML-RPC interfaces.
+
+This is the F3 version of the Gtk client, a continuation of the 6.0 series. It
+delivers faster communication for the XML-RPC protocol (more notably against an
+F3 server). It remains compatible with all 6.1, 6.0 and 5.0 series of servers.
 '''
 classifiers = """Development Status :: 5 - Production/Stable
 License :: OSI Approved :: GNU General Public License (GPL)
