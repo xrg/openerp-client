@@ -1,3 +1,45 @@
+2012-03-07: 6.0.4
+=================
+
+Bugfixes
+--------
+
+* Not linked to a bug report:
+
+  * gtk: fix graphical glitches on o2m/m2m widgets which were reduced on Ubuntu 11.10 (Oneiric) and later (OPW 50847)
+  * tree view: let the name_search work on editable m2o (OPW 17255)
+  * list view: backporting from trunk, fix incorrect active_id in editable lists
+  * search view: fix domain calculation for many2one, many2many fields (OPW 16409)
+  * search view: User Locale Date formats now accepted as an input to custom filter (OPW 17563)
+  * search view: use empty string instead of False for char and text fields (OPW 18308)
+  * search view: group_by from context was not rendering correctly i.e it changes order of display and also clicking clear should remove the group by from context if any provided on action (OPW 344217)
+  * calendar view: speed up the view (18472)
+  * calendar view: color problem in calendar view (OPW 54653)
+  * data export: fix the problem of directly opening excel file for languages other than en_US, it gives option to save instead of opening (OPW 51173)
+  * model field: remove carriage return on field of text type (OPW 18150)
+  * actions: avoid reading useless large binary values: helps performance and avoids issues with binary values encoding
+  * widget one2many_list: allow to specify 'parent' in context of one2many fields
+  * widget spinbutton: fix ValueError: u'0.00' does not represent a valid integer value
+
+* https://launchpad.net/bugs/697625
+  * thousand_seperator: thousand seperator now affected when changed form GTK (OPW 16966)
+
+* https://launchpad.net/bugs/749311
+  * search view: accented characters now working in search
+
+* https://launchpad.net/bugs/879119
+  * widget spinint: add to widget spinint no set letter (OPW 879119)
+
+* https://launchpad.net/bugs/887612
+  * widget float_time: widget incorrect rounding (OPW 57686)
+
+* https://launchpad.net/bugs/876619
+  * fix for groupby boolean field
+
+* https://launchpad.net/bugs/821266
+  * fix missing fields on data export/import
+
+
 2011-08-18: 6.0.3
 =================
 

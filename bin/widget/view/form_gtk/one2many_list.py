@@ -30,6 +30,7 @@ import wid_common
 
 import interface
 from widget.screen import Screen
+from widget.model.group import ModelRecordGroup 
 from pager import pager
 import service
 import tools
@@ -152,25 +153,10 @@ class one2many_list(interface.widget_interface):
         self._readonly = self.default_readonly
         self.widget = gtk.VBox(homogeneous=False, spacing=5)
         hb = gtk.HBox(homogeneous=False, spacing=5)
-        menubar = gtk.MenuBar()
-        if hasattr(menubar, 'set_pack_direction') and \
-                hasattr(menubar, 'set_child_pack_direction'):
-            menubar.set_pack_direction(gtk.PACK_DIRECTION_LTR)
-            menubar.set_child_pack_direction(gtk.PACK_DIRECTION_LTR)
 
-        menuitem_title = gtk.ImageMenuItem(stock_id='gtk-preferences')
-
-        menu_title = gtk.Menu()
-        menuitem_set_to_default = gtk.MenuItem(_('Set to default value'), True)
-        menuitem_set_to_default.connect('activate', lambda *x:self._menu_sig_default_get())
-        menu_title.add(menuitem_set_to_default)
-        menuitem_set_default = gtk.MenuItem(_('Set Default'), True)
-        menuitem_set_default.connect('activate', lambda *x: self._menu_sig_default_set())
-        menu_title.add(menuitem_set_default)
-        menuitem_title.set_submenu(menu_title)
-
-        menubar.add(menuitem_title)
-        hb.pack_start(menubar, expand=True, fill=True)
+        event_box = gtk.EventBox()
+        event_box.set_events(gtk.gdk.BUTTON_PRESS_MASK)
+        hb.pack_start(event_box, expand=True, fill=True)
 
         # the context to pass to default_get can be optionally specified in
         # the context of the one2many field. We also support a legacy
@@ -240,12 +226,33 @@ class one2many_list(interface.widget_interface):
 
         self.widget.pack_start(hb, expand=False, fill=True)
         self.screen.signal_connect(self, 'record-message', self._sig_label)
-        menuitem_title.get_child().set_markup('<b>'+self.screen.current_view.title.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')+'</b>')
+        menu_title = gtk.Label('<b>'+self.screen.current_view.title.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')+'</b>')
+        menu_title.set_use_markup(True)
+        menu_title.set_alignment(0, 0)
+        event_box.add(menu_title)
+        event_box.connect('button_press_event',self.load_menu)
+        self.screen.widget.set_property('height-request', 100)
+
+
         self.widget.pack_start(self.screen.widget, expand=True, fill=True)
         self.screen.widget.connect('key_press_event', self.on_keypress)
         self.model = None
         self.model_field = None
         self.name = attrs['name']
+
+    def load_menu(self, widget, event):
+        if event.button != 3:
+            return
+        menu = gtk.Menu()
+        menuitem_set_to_default = gtk.MenuItem(_('Set to default value'), True)
+        menuitem_set_to_default.connect('activate', lambda *x:self._menu_sig_default_get())
+        menu.add(menuitem_set_to_default)
+        menuitem_set_default = gtk.MenuItem(_('Set Default'), True)
+        menuitem_set_default.connect('activate', lambda *x: self._menu_sig_default_set())
+        menu.add(menuitem_set_default)
+        menu.show_all()
+        menu.popup(None,None,None,event.button,event.time)
+        return True
 
     def on_keypress(self, widget, event):
         if (not self._readonly) and ((event.keyval in (gtk.keysyms.N, gtk.keysyms.n) and event.state & gtk.gdk.CONTROL_MASK\
@@ -327,10 +334,32 @@ class one2many_list(interface.widget_interface):
         ctx.update(self._view.model.expr_eval('dict(%s)' % self.attrs.get('context', '{}')))
         if self.screen.current_model:
             ok = True
+            parent_modified = self.screen.current_model.parent.modified
+            child_modifield = self.screen.current_model.modified
             edited_model = self.screen.current_model
+            model_value = self.screen.current_model.value.copy()
+            
+            group_model ={}
+            for key, val in model_value.items():
+                if isinstance(val, ModelRecordGroup):
+                    group_model[key] = val.models[:]
+                    del model_value[key]
+                    
             dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly, context=ctx)
             while ok:
                 ok, value, res = dia.run()
+                if not any([ok, value, res]) and dia.screen.is_modified(): 
+                    if child_modifield:
+                        edited_model.set(model_value, modified=True)
+                        for f_name, models in group_model.items():
+                            edited_model.value[f_name].clear()
+                            for model in models:
+                                # add model in ModelRecordGroup
+                                edited_model.value[f_name].model_add(model)
+                    else:
+                        edited_model.cancel()
+                        edited_model.modified = False
+                        self.screen.current_model.parent.modified = parent_modified
                 if res == gtk.RESPONSE_OK:
                     dia.new()
                 if value and value != edited_model:
@@ -338,7 +367,6 @@ class one2many_list(interface.widget_interface):
                     value.signal('record-changed', value.parent)
                     self.screen.display()
             self.pager.reset_pager()
-            edited_model.modified = True
             dia.destroy()
 
     def limit_changed(self,*args):
@@ -368,12 +396,12 @@ class one2many_list(interface.widget_interface):
             else:
                 msg = _('Are you sure to remove those records ?')
             if common.sur(msg):
-                    model = self.screen.current_model
-                    model.signal('record-changed', model.parent)
-                    self.screen.remove()
-                    self.pager.reset_pager()
-                    if not self.screen.models.models:
-                        self.screen.current_view.widget.set_sensitive(False)
+                model = self.screen.current_model
+                model.signal('record-changed', model.parent)
+                self.screen.remove()
+                self.pager.reset_pager()
+                if not self.screen.models.models:
+                    self.screen.current_view.widget.set_sensitive(False)
 
     def _sig_label(self, screen, signal_data):
         name = '_'

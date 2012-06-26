@@ -144,7 +144,7 @@ class widget_interface(object):
 
     def sig_changed(self):
         if self.attrs.get('on_change',False):
-            self._view.view_form.screen.on_change(self.attrs['on_change'])
+            self._view.view_form.screen.on_change(self.attrs['on_change'], field=self._view.modelfield)
 
     def grab_focus(self):
         return self.widget.grab_focus()
