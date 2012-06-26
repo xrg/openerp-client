@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-28 05:04+0000\n"
-"X-Generator: Launchpad (build 15027)\n"
+"X-Launchpad-Export-Date: 2012-05-17 04:54+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 "Language: sv\n"
 
 #
@@ -740,7 +740,7 @@ msgstr ""
 
 #: bin/common/common.py:99
 msgid "Disable all tips"
-msgstr ""
+msgstr "Göm alla tips"
 
 #: bin/common/common.py:100
 msgid ""
@@ -749,10 +749,14 @@ msgid ""
 "To re-enable tips you need to check the <b>'Menu Tips'</b> option in the "
 "user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Göm alla tips:</b></span>\n"
+"Detta stänger av visning av tips knutna till alla menyval.\n"
+"För att åter igen aktivera tips, kryssar du <b>'Menytips'</b> rutan i "
+"användarinställningarna."
 
 #: bin/common/common.py:114 bin/common/common.py:116
 msgid "Tips"
-msgstr ""
+msgstr "Tips"
 
 #: bin/common/common.py:167
 msgid "OpenERP Computing"
@@ -767,11 +771,13 @@ msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
+"Vänligen vänta,\n"
+"denna åtgärd kan ta tid..."
 
 #: bin/common/common.py:224
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "Verifiera att filen %s är korrekt"
 
 #: bin/common/common.py:410
 msgid " has reported the following bug:\n"
@@ -857,7 +863,7 @@ msgstr ""
 
 #: bin/common/common.py:539
 msgid "Error"
-msgstr ""
+msgstr "Fel"
 
 #: bin/common/common.py:695
 msgid "Open with..."
@@ -933,7 +939,7 @@ msgstr ""
 
 #: bin/widget_search/char.py:45
 msgid "Error: "
-msgstr ""
+msgstr "Fel: "
 
 #: bin/widget_search/calendar.py:49 bin/widget_search/calendar.py:177
 msgid "Start date"
@@ -960,33 +966,33 @@ msgstr "OpenERP - Datumval"
 #: bin/widget_search/custom_filter_widgets.py:67
 #: bin/widget_search/custom_filter_widgets.py:99
 msgid "contains"
-msgstr ""
+msgstr "innehåller"
 
 #: bin/widget_search/custom_filter_widgets.py:41
 #: bin/widget_search/custom_filter_widgets.py:68
 #: bin/widget_search/custom_filter_widgets.py:99
 msgid "doesn't contain"
-msgstr ""
+msgstr "innehåller inte"
 
 #: bin/widget_search/custom_filter_widgets.py:295
 #: bin/widget_search/custom_filter_widgets.py:336
 msgid "is equal to"
-msgstr ""
+msgstr "är lika med"
 
 #: bin/widget_search/custom_filter_widgets.py:296
 #: bin/widget_search/custom_filter_widgets.py:337
 msgid "is not equal to"
-msgstr ""
+msgstr "är inte lika med"
 
 #: bin/widget_search/custom_filter_widgets.py:297
 #: bin/widget_search/custom_filter_widgets.py:338
 msgid "greater than"
-msgstr ""
+msgstr "större än"
 
 #: bin/widget_search/custom_filter_widgets.py:298
 #: bin/widget_search/custom_filter_widgets.py:339
 msgid "less than"
-msgstr ""
+msgstr "mindre än"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"

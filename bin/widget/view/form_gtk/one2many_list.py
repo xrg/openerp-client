@@ -30,6 +30,7 @@ import wid_common
 
 import interface
 from widget.screen import Screen
+from widget.model.group import ModelRecordGroup 
 from pager import pager
 import service
 import tools
@@ -333,10 +334,32 @@ class one2many_list(interface.widget_interface):
         ctx.update(self._view.model.expr_eval('dict(%s)' % self.attrs.get('context', '{}')))
         if self.screen.current_model:
             ok = True
+            parent_modified = self.screen.current_model.parent.modified
+            child_modifield = self.screen.current_model.modified
             edited_model = self.screen.current_model
+            model_value = self.screen.current_model.value.copy()
+            
+            group_model ={}
+            for key, val in model_value.items():
+                if isinstance(val, ModelRecordGroup):
+                    group_model[key] = val.models[:]
+                    del model_value[key]
+                    
             dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly, context=ctx)
             while ok:
                 ok, value, res = dia.run()
+                if not any([ok, value, res]) and dia.screen.is_modified(): 
+                    if child_modifield:
+                        edited_model.set(model_value, modified=True)
+                        for f_name, models in group_model.items():
+                            edited_model.value[f_name].clear()
+                            for model in models:
+                                # add model in ModelRecordGroup
+                                edited_model.value[f_name].model_add(model)
+                    else:
+                        edited_model.cancel()
+                        edited_model.modified = False
+                        self.screen.current_model.parent.modified = parent_modified
                 if res == gtk.RESPONSE_OK:
                     dia.new()
                 if value and value != edited_model:
@@ -344,7 +367,6 @@ class one2many_list(interface.widget_interface):
                     value.signal('record-changed', value.parent)
                     self.screen.display()
             self.pager.reset_pager()
-            edited_model.modified = True
             dia.destroy()
 
     def limit_changed(self,*args):
