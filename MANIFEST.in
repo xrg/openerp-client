@@ -1,14 +1,8 @@
 include MANIFEST.in
 include setup.cfg
-include Makefile.translation
-include configure
-include configure.makefile
-include rpminstall_sh.txt
 include mydistutils.py
 include msgfmt.py
 include setup.nsi
 graft bin
 graft man
 graft doc
-graft debian
-global-exclude *pyc *~
