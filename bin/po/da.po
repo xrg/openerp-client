@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-client\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
-"PO-Revision-Date: 2011-05-31 20:42+0000\n"
+"PO-Revision-Date: 2012-06-27 18:51+0000\n"
 "Last-Translator: Henning Dinsen - idata <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-17 04:53+0000\n"
-"X-Generator: Launchpad (build 15259)\n"
+"X-Launchpad-Export-Date: 2012-06-28 04:55+0000\n"
+"X-Generator: Launchpad (build 15505)\n"
 "Language: da\n"
 
 #: bin/plugins/__init__.py:27
@@ -260,8 +260,9 @@ msgid ""
 "Ask the administrator to verify\n"
 "you have an action defined for your user."
 msgstr ""
-"Du kan ikke logge ind i systemet! Bede administratoren om at kontrollere at "
-"du har en handling er defineret for din bruger."
+"Du kan ikke logge ind i systemet! \n"
+"Bed administratoren om at kontrollere \n"
+"at du har en handling defineret for din bruger."
 
 #: bin/modules/gui/main.py:1181 bin/modules/gui/main.py:1188
 msgid "Do you really want to quit ?"
@@ -321,7 +322,7 @@ msgstr "Valideringsfejl."
 
 #: bin/modules/gui/main.py:1469
 msgid "Could not change the Super Admin password."
-msgstr "Kunne ikke ændre Super Admin password."
+msgstr "Kunne ikke ændre adgangskoden for super-admininistrator."
 
 #: bin/modules/gui/main.py:1470 bin/modules/gui/main.py:1476
 msgid "Bad password provided !"
