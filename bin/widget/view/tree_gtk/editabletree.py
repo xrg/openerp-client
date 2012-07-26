@@ -311,7 +311,7 @@ class EditableTreeView(gtk.TreeView, observator.Observable):
             model = store.get_value(store.get_iter(path), 0)
         if isinstance(entry, gtk.Entry):
             self.on_quit_cell(model, column.name, entry.get_text())
-        elif isinstance(entry, gtk.ComboBoxEntry):
+        elif isinstance(entry, gtk.ComboBox):
             self.on_quit_cell(model, column.name, entry.get_active_text())
 
 
