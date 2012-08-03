@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-17 04:53+0000\n"
-"X-Generator: Launchpad (build 15259)\n"
+"X-Launchpad-Export-Date: 2012-08-03 06:06+0000\n"
+"X-Generator: Launchpad (build 15734)\n"
 "Language: is\n"
 
 #: bin/plugins/__init__.py:27
@@ -36,17 +36,17 @@ msgstr "Veldu viðbót"
 
 #: bin/rpc.py:157 bin/modules/action/wizard.py:149 bin/modules/gui/main.py:187
 msgid "Connection refused !"
-msgstr ""
+msgstr "Tengingu hafnað!"
 
 #: bin/rpc.py:203 bin/rpc.py:205 bin/modules/action/wizard.py:161
 #: bin/modules/action/wizard.py:167 bin/modules/action/wizard.py:169
 #: bin/modules/gui/main.py:195 bin/modules/gui/main.py:201
 msgid "Application Error"
-msgstr ""
+msgstr "Villa í forriti"
 
 #: bin/rpc.py:205 bin/modules/action/wizard.py:169
 msgid "View details"
-msgstr ""
+msgstr "Sjá nánar"
 
 #: bin/modules/action/main.py:48
 msgid "Nothing to print!"
@@ -673,7 +673,7 @@ msgstr "tilgreindu ip tölu/nafn miðlara"
 
 #: bin/common/common.py:88
 msgid "Close current tip"
-msgstr ""
+msgstr "Loka þessari vísbendingu"
 
 #: bin/common/common.py:89
 msgid ""
@@ -685,7 +685,7 @@ msgstr ""
 
 #: bin/common/common.py:99
 msgid "Disable all tips"
-msgstr ""
+msgstr "Gera allar vísbendingar óvirkar"
 
 #: bin/common/common.py:100
 msgid ""
@@ -701,7 +701,7 @@ msgstr "Vísbendingar"
 
 #: bin/common/common.py:167
 msgid "OpenERP Computing"
-msgstr ""
+msgstr "OpenERP Computing"
 
 #: bin/common/common.py:186
 msgid "Operation in progress"
@@ -712,6 +712,8 @@ msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
+"Bíddu aðeinst,\n"
+"þessi aðgerð gæti tekið svolítinn tíma..."
 
 #: bin/common/common.py:224
 #, python-format
@@ -724,7 +726,7 @@ msgstr ""
 
 #: bin/common/common.py:410
 msgid "remarks"
-msgstr ""
+msgstr "athugasemdir"
 
 #: bin/common/common.py:413
 msgid "Support request sent !"
@@ -804,7 +806,7 @@ msgstr "Villa"
 
 #: bin/common/common.py:695
 msgid "Open with..."
-msgstr ""
+msgstr "Opna með..."
 
 #: bin/translate.py:183
 #, python-format
@@ -1324,7 +1326,7 @@ msgstr ""
 
 #: bin/rpc.py:158
 msgid "Connection refused!"
-msgstr ""
+msgstr "Tengingu hafnað!"
 
 #: bin/rpc.py:188
 msgid ""
