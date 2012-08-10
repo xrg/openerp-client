@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-17 04:53+0000\n"
-"X-Generator: Launchpad (build 15259)\n"
+"X-Launchpad-Export-Date: 2012-08-03 06:05+0000\n"
+"X-Generator: Launchpad (build 15734)\n"
 "Language: \n"
 
 #: bin/plugins/__init__.py:27
@@ -1181,20 +1181,13 @@ msgstr "OpenERP Berechnen"
 msgid "Operation in progress"
 msgstr "Vorgang läuft .."
 
-#
-# File: bin/modules/action/wizard.py, line: 147
-# File: bin/modules/gui/main.py, line: 340
-# File: bin/modules/action/wizard.py, line: 147
-# File: bin/modules/gui/main.py, line: 340
-# File: bin/modules/action/wizard.py, line: 147
-# File: bin/modules/gui/main.py, line: 340
 #: bin/common/common.py:190
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
 "Bitte warten,\n"
-"diese Operation kann eine Weile in Anspruch nehmen..."
+"dieser Vorgang kann eine Weile in Anspruch nehmen..."
 
 #: bin/common/common.py:224
 #, python-format
@@ -1203,7 +1196,7 @@ msgstr "Überprüfen Sie bitte ob %s korrekt ist."
 
 #: bin/common/common.py:410
 msgid " has reported the following bug:\n"
-msgstr " hat folgenden Fehler berichtet:\n"
+msgstr " hat folgenden Fehler gemeldet:\n"
 
 #: bin/common/common.py:410
 msgid "remarks"
@@ -1251,7 +1244,7 @@ msgstr ""
 "\n"
 "<b>Sie haben keinen gültigen Wartungsvertrag !</b>\n"
 "\n"
-"Wenn Sie OpenERP in einer Produktionsumgebung verwenden raten wir Ihnen "
+"Wenn Sie OpenERP in einer Produktionsumgebung verwenden, empfehlen wir Ihnen "
 "dringend einen Wartungsvertrag abzuschliesen.\n"
 "\n"
 "Der OpenERP Wartungsvertrag bieten Ihnen Fehlerbehebung in wenigen Stunden "
@@ -1260,14 +1253,14 @@ msgstr ""
 "\n"
 "Der Wartungsvertrag des Editors bietet:\n"
 "* Automatische Migration zu neuen Versionen\n"
-"* Fehebehebung\n"
+"* Fehlerbehebung\n"
 "* monatliche Meldung von Fehlern und deren Behebung\n"
 "* automatische Sicherheitsmeldungen\n"
 "* Zugang zum Kundenportal.\n"
 "\n"
 "Mehr information erhalten Sie im Link weiter unten.\n"
 "\n"
-"Fehlerdetails finden Sie am 2. Reiter.\n"
+"Fehlerdetails finden Sie unter dem 2. Reiter.\n"
 
 #: bin/common/common.py:459
 #, python-format
@@ -1302,7 +1295,7 @@ msgstr ""
 "OpenERP in einem Produktionssystem verwenden sollten Sie Ihren "
 "Wartungsvertrag erweitern.\n"
 "\n"
-"Wenn Sie eigene oder fremde Module verwenden können wir dafür "
+"Wenn Sie eigene oder fremde Module verwenden, können wir dafür "
 "kostenpflichtig zusätzliche Wartungsverpflichtungen für diese Module "
 "übernehmen. Unser Qualitätssicherungsteam wird diese Module prüfen und "
 "sicherstellen, dass diese Module zukünftig für alle stabilen Versionen von "
@@ -1312,16 +1305,16 @@ msgstr ""
 "gedeckt sind.\n"
 "%s\n"
 "\n"
-"Mehr Information erhalten Sie im Link unterhalb.\n"
+"Mehr Information erhalten Sie über den Link weiter unten.\n"
 "\n"
-"Details zu dem fehler sind auf dem 2. Reiter zu finden."
+"Details zu dem Fehler sind unter dem 2. Reiter zu finden."
 
 #: bin/common/common.py:536
 msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
-"Ihr Problem wurde an das Qualitätssciherungs Team geschickt!\n"
+"Ihr Problem wurde an das Team für Qualitätssicherung geschickt!\n"
 "Wir werden Sie nach der Analyse kontaktieren."
 
 #: bin/common/common.py:539
@@ -1341,13 +1334,9 @@ msgstr ""
 msgid "Error"
 msgstr "Fehler"
 
-#
-# File: bin/common/common.py, line: 499
-# File: bin/common/common.py, line: 499
-# File: bin/common/common.py, line: 499
 #: bin/common/common.py:695
 msgid "Open with..."
-msgstr "Öffnen mit"
+msgstr "Öffnen mit..."
 
 #: bin/translate.py:183
 #, python-format
@@ -1389,25 +1378,6 @@ msgstr "Fehler beim Schreiben der Datei!"
 msgid "Closing OpenERP, KeyboardInterrupt"
 msgstr "Schließe OpenERP, Unterbrechung von der Tastatur"
 
-#
-# File: bin/widget_search/checkbox.py, line: 55
-# File: bin/widget_search/spinbutton.py, line: 69
-# File: bin/widget_search/spinint.py, line: 73
-# File: bin/widget_search/calendar.py, line: 106
-# File: bin/widget_search/char.py, line: 47
-# File: bin/widget_search/reference.py, line: 74
-# File: bin/widget_search/checkbox.py, line: 55
-# File: bin/widget_search/spinbutton.py, line: 69
-# File: bin/widget_search/spinint.py, line: 73
-# File: bin/widget_search/calendar.py, line: 106
-# File: bin/widget_search/char.py, line: 47
-# File: bin/widget_search/reference.py, line: 74
-# File: bin/widget_search/checkbox.py, line: 55
-# File: bin/widget_search/spinbutton.py, line: 69
-# File: bin/widget_search/spinint.py, line: 73
-# File: bin/widget_search/calendar.py, line: 106
-# File: bin/widget_search/char.py, line: 47
-# File: bin/widget_search/reference.py, line: 74
 #: bin/widget_search/reference.py:77 bin/widget_search/spinbutton.py:92
 #: bin/widget_search/custom_filter.py:141 bin/widget_search/filter.py:79
 #: bin/widget_search/char.py:72 bin/widget_search/spinint.py:94
@@ -1415,11 +1385,11 @@ msgstr "Schließe OpenERP, Unterbrechung von der Tastatur"
 #: bin/widget_search/checkbox.py:68 bin/widget_search/selection.py:116
 #: bin/widget/view/form_gtk/button.py:47
 msgid "The content of the widget or ValueError if not valid"
-msgstr "Der Inhalt des Miniprogramms oder Wertfehler, wenn nicht gültig"
+msgstr "Der Inhalt des Miniprogramms oder Fehler-Wert, wenn nicht gültig"
 
 #: bin/widget_search/form.py:500
 msgid "The content of the form or exception if not valid"
-msgstr "Der Inhalt der Form oder die Ausnahme ist ungültig"
+msgstr "Der Inhalt der Sicht oder Ausnahmebehandlung im Fehlerfall"
 
 #: bin/widget_search/date_widget.py:65
 #: bin/widget/view/form_gtk/date_widget.py:65
@@ -1435,20 +1405,20 @@ msgid ""
 "clear the field."
 msgstr ""
 "Spezielle Funktionen sind verfügbar: +, - or =.\n"
-"Plus/minus erhöht/verringert das ausgewählte Datum. \n"
-"Ist Gleich setzt einen Teil des ausgewählten Datums\n"
+"'+'/'-' erhöht/vermindert das ausgewählte Datum. \n"
+"'=' setzt einen Teil des ausgewählten Datums\n"
 "Verfügbare Variablen: 12h = 12 Stunden, 8d = 8 Tage, 4w = 4 Wochen, 1m = 1 "
 "Monat, 2y = 2 Jahre. \n"
 "Einige Beispiele:\n"
-"* +21d : addiert 21 Tage zum ausgewählten Jahr\n"
-"* =23w : setzt das Datum auf die 23. Woche des Jahres\n"
-"* -4m : vermindert das laufende Datum um 4 Monate\n"
-"\"=\" setzt das aktuelle Datum/Zeit \n"
-"'-' löscht das Feld."
+"* +21d : 21 Tage zum ausgewählten Datum hinzufügen\n"
+"* =23w : Setzt das Datum auf den ersten Tag der 23. Kalenderwoche\n"
+"* -4m : Vermindert das laufende Datum um 4 Monate\n"
+"'=' setzt das aktuelle Datum/Zeit \n"
+"'-' löscht den Feldinhalt."
 
 #: bin/widget_search/wid_int.py:56
 msgid "The content of the widget or exception if not valid"
-msgstr "Der Inhalt eines Anzeigeelements oder einer Ausnahme im Fehlerfall"
+msgstr "Der Inhalt des Miniprogramms oder Ausnahmebehandlung im Fehlerfall"
 
 #: bin/widget_search/char.py:45
 msgid "Error: "
@@ -1719,7 +1689,7 @@ msgstr "Kann keinen Graph erzeugen"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1429
 msgid "Dot Viewer"
-msgstr ""
+msgstr "Betrachter für Dot-Graphen"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1719
 msgid "Add New Node"
@@ -1727,7 +1697,7 @@ msgstr "Neuen Knoten hinzufügen"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1720
 msgid "Add New Edge"
-msgstr ""
+msgstr "Neue Kante hinzufügen"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1721
 msgid "Enlarge the Diagram"
@@ -1766,7 +1736,7 @@ msgstr "aktuelle %s bearbeiten"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1882
 msgid " - Dot Viewer"
-msgstr ""
+msgstr " - Betrachter für Dot-Graphen"
 
 #
 # File: bin/widget/view/form_gtk/reference.py, line: 92
@@ -2099,7 +2069,7 @@ msgstr "Minute:"
 
 #: bin/widget_search/calendar.py:312 bin/widget/view/form_gtk/calendar.py:291
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr "Ungültiger Datums- oder Zeitwert. Das Jahr muß größer als 1899 sein!"
+msgstr "Ungültiger Datums-/Zeitwert. Das Jahr muß nach 1899 liegen!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:30
 msgid "Gantt view not yet implemented !"
@@ -2137,13 +2107,9 @@ msgstr ""
 "Kann den OpenERP Server nicht erreichen!\n"
 "Bitte prüfen Sie Ihre Netzwerkverbindung und den OpenERP Server"
 
-#
-# File: bin/rpc.py, line: 142
-# File: bin/rpc.py, line: 142
-# File: bin/rpc.py, line: 142
 #: bin/rpc.py:188
 msgid "Connection Error"
-msgstr "Verbindung abgelehnt!"
+msgstr "Verbindungsfehler"
 
 #: bin/openerp.ui.h:815
 msgid "OpenERP - Login"
