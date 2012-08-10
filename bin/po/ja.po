@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-17 04:53+0000\n"
-"X-Generator: Launchpad (build 15259)\n"
+"X-Launchpad-Export-Date: 2012-08-03 06:06+0000\n"
+"X-Generator: Launchpad (build 15734)\n"
 "Language: ja\n"
 
 #: bin/plugins/__init__.py:27
@@ -751,10 +751,7 @@ msgstr "ファイル %s が正しいことを確認して下さい。"
 
 #: bin/common/common.py:410
 msgid " has reported the following bug:\n"
-msgstr ""
-" 次のバグが報告されました：\n"
-"リンク切れを意味します。翻訳で同等の位置に新しいラインを開始して下さい。\n"
-"スペース（空白）を意味します。翻訳で同等の位置にスペースを入力して下さい。\n"
+msgstr " 次のバグが報告されました：\n"
 
 #: bin/common/common.py:410
 msgid "remarks"
@@ -2294,7 +2291,7 @@ msgstr "<Ctrl> + X"
 
 #: bin/openerp.ui.h:751
 msgid "Edition Widgets"
-msgstr "ウィッジット編集"
+msgstr "ウィジェット編集"
 
 #: bin/openerp.ui.h:779
 msgid "Import from CSV"
