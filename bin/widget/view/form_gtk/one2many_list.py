@@ -366,6 +366,8 @@ class one2many_list(interface.widget_interface):
                     self.screen.models.model_add(value)
                     value.signal('record-changed', value.parent)
                     self.screen.display()
+                else:
+                    edited_model.save(reload=False)
             self.pager.reset_pager()
             dia.destroy()
 
