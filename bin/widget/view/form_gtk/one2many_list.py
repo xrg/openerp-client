@@ -329,8 +329,8 @@ class one2many_list(interface.widget_interface):
         _, event = args
         ctx = dict(self._view.model.expr_eval(self.screen.default_get), **self.context)
         ctx.update(self._view.model.expr_eval('dict(%s)' % self.attrs.get('context', '{}')))
+        edited_model = False
         if self.screen.current_model:
-            child_modified = self.screen.current_model.modified
             edited_model = self.screen.current_model
         
         if event.type in (gtk.gdk.BUTTON_PRESS, gtk.gdk.KEY_PRESS):
@@ -346,11 +346,13 @@ class one2many_list(interface.widget_interface):
                 while ok:
                     ok, value, res = dia.run()
                     if ok or res == gtk.RESPONSE_APPLY:
-                        old_rec_modified = edited_model.is_modified()
-                        model_value, group_model = self._get_old_values(edited_model.value.copy()) 
+                        if edited_model:
+                            old_rec_modified = edited_model.is_modified()
+                            model_value, group_model = self._get_old_values(edited_model.value.copy()) 
                         self.screen.models.model_add(value)
                         value.signal('record-changed', value.parent)
-                        self._restore_values(edited_model, model_value, group_model, old_rec_modified)
+                        if edited_model:
+                            self._restore_values(edited_model, model_value, group_model, old_rec_modified)
                         self.screen.display()
                         dia.new()
                         self.set_disable(True)
