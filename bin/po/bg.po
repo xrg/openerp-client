@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-03 06:05+0000\n"
-"X-Generator: Launchpad (build 15734)\n"
+"X-Launchpad-Export-Date: 2012-09-19 04:52+0000\n"
+"X-Generator: Launchpad (build 15966)\n"
 "Language: bg\n"
 
 #: bin/plugins/__init__.py:27
@@ -90,7 +90,7 @@ msgstr "ID на договор:"
 
 #: bin/modules/gui/main.py:226
 msgid "Contract Password:"
-msgstr ""
+msgstr "Парола на Договора:"
 
 #: bin/modules/gui/main.py:241
 msgid "You already have the latest version"
@@ -454,7 +454,7 @@ msgstr "Нов документ"
 
 #: bin/modules/gui/window/form.py:483
 msgid "Editing document (id: "
-msgstr ""
+msgstr "Редактиране на документ: (id: "
 
 #: bin/modules/gui/window/form.py:486
 msgid "Record: "
@@ -549,7 +549,7 @@ msgstr ""
 
 #: bin/modules/gui/window/win_extension.py:111
 msgid "This extension is already defined"
-msgstr ""
+msgstr "Това разширение е вече дефинирано."
 
 #: bin/modules/gui/window/win_extension.py:111 bin/openerp.ui.h:758
 msgid "Extension Manager"
@@ -580,10 +580,12 @@ msgid ""
 "The default language of the interface has been modified, do not forget to "
 "restart the client to have the interface in your language"
 msgstr ""
+"Основния език на този интерфейс беше променен, не забравяйте да рестарирате "
+"клиента за да се отрази промяната в езика"
 
 #: bin/modules/gui/window/win_preference.py:88
 msgid "Default language modified !"
-msgstr ""
+msgstr "Основния език е променен!"
 
 #: bin/modules/gui/window/view_tree/parse.py:35
 msgid "Tree"
@@ -595,17 +597,19 @@ msgstr "Описание"
 
 #: bin/modules/gui/window/tree.py:203 bin/modules/gui/window/tree.py:264
 msgid "No resource selected!"
-msgstr ""
+msgstr "Няма избран ресурс"
 
 #: bin/modules/gui/window/tree.py:222
 msgid ""
 "Are you sure you want\n"
 "to remove this record?"
 msgstr ""
+"Сигурни ли сте че искате да\n"
+"изтриете това досие?"
 
 #: bin/modules/gui/window/tree.py:227
 msgid "Error removing resource!"
-msgstr ""
+msgstr "Грешка при изтриването на ресурса!"
 
 #: bin/modules/gui/window/tree.py:238
 msgid "Unable to chroot: no tree resource selected"
@@ -624,15 +628,15 @@ msgstr ""
 #: bin/modules/gui/window/win_export.py:79
 #: bin/modules/gui/window/win_export.py:105
 msgid "Error Opening Excel !"
-msgstr ""
+msgstr "Грешка при тварянето на Excel!"
 
 #: bin/modules/gui/window/win_export.py:310
 msgid "What is the name of this export ?"
-msgstr ""
+msgstr "Какво името на вашия експортен файл ?"
 
 #: bin/modules/gui/window/win_export.py:344
 msgid "Exportation Error !"
-msgstr ""
+msgstr "Грешка при експортирането !"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1779
 #: bin/modules/gui/window/win_search.py:49
@@ -681,7 +685,7 @@ msgstr "Задайте на сървъра ip/име"
 
 #: bin/common/common.py:88
 msgid "Close current tip"
-msgstr ""
+msgstr "Затвори информацията"
 
 #: bin/common/common.py:89
 msgid ""
@@ -690,6 +694,10 @@ msgid ""
 "open this menu item, unless you disable all tips using the <b>'Menu "
 "Tips'</b> option in the user preferences."
 msgstr ""
+"<span foreground=\"darkred\"><b>Затвори инфото:</b></span>\n"
+"Това ще скрие подсказката. Ще бъде показа отново следващия път когато "
+"отворите тази секция, освен ако не изключите всички подсказки от опцията "
+"<b>'Меню Инфо'</b> в потребителските настройки."
 
 #: bin/common/common.py:99
 msgid "Disable all tips"
@@ -797,6 +805,8 @@ msgid ""
 "Your problem has been sent to the quality team !\n"
 "We will recontact you after analysing the problem."
 msgstr ""
+"Порблема беше изпрати на Екипа отговарящ за качеството!\n"
+"Ние ще се свържем с вас след като анализираме проблема."
 
 #: bin/common/common.py:539
 #, python-format
@@ -805,6 +815,9 @@ msgid ""
 "Please report this error manually at:\n"
 "\t%s"
 msgstr ""
+"Вашия пороблем *НЕ БЕШЕ* изпратен на екипа!\n"
+"Моля изпратете тази грешка на:\n"
+"\t%s"
 
 #: bin/common/common.py:539
 msgid "Error"
@@ -835,6 +848,8 @@ msgstr ""
 #: bin/printer/printer.py:212
 msgid "Error! No Data found. Make sure you have enough data to print!"
 msgstr ""
+"Грешка! Няма информация. Проверете, че има достатъчно информация за "
+"приниране."
 
 #: bin/printer/printer.py:239
 msgid "Error writing the file!"
@@ -888,7 +903,7 @@ msgstr "Начална дата"
 #: bin/widget/view/form_gtk/calendar.py:57
 #: bin/widget/view/form_gtk/calendar.py:184
 msgid "Open the calendar widget"
-msgstr ""
+msgstr "Отвори Календара"
 
 #: bin/widget_search/calendar.py:69 bin/widget_search/calendar.py:197
 msgid "End date"
@@ -915,7 +930,7 @@ msgstr "не съдържа"
 #: bin/widget_search/custom_filter_widgets.py:295
 #: bin/widget_search/custom_filter_widgets.py:336
 msgid "is equal to"
-msgstr ""
+msgstr "е равно на"
 
 #: bin/widget_search/custom_filter_widgets.py:296
 #: bin/widget_search/custom_filter_widgets.py:337
@@ -990,11 +1005,13 @@ msgstr "Седмица"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:30
 msgid "Calendar View Error !"
-msgstr ""
+msgstr "Грешка при зареждане на календарния изглед"
 
 #: bin/widget/view/calendar_gtk/parser_dummy.py:31
 msgid "You must intall the library python-hippocanvas to use calendars."
 msgstr ""
+"Трябва да инсталирате library python-hippocanvas за да използвате "
+"календарите."
 
 #: bin/widget/view/screen_container.py:73
 msgid "--Actions--"
@@ -1022,11 +1039,11 @@ msgstr ""
 #: bin/widget/view/tree_gtk/editabletree.py:140
 #, python-format
 msgid "Shortcut: %s"
-msgstr ""
+msgstr "Shortcut: %s"
 
 #: bin/widget/view/tree_gtk/editabletree.py:140
 msgid "F1 New - F2 Open/Search"
-msgstr ""
+msgstr "F1 Нов - F2 Отвори/Търси"
 
 #: bin/widget/view/tree_gtk/editabletree.py:215
 #, python-format
@@ -1042,7 +1059,7 @@ msgstr ""
 #: bin/widget/view/widget_parse.py:52
 #, python-format
 msgid "This type (%s) is not supported by the GTK client !"
-msgstr ""
+msgstr "Този вид (%s) не се поддържа от  GTK клиента !"
 
 #: bin/widget/view/widget_parse.py:76
 msgid "No valid view found for this object!"
@@ -1058,46 +1075,46 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1719
 msgid "Add New Node"
-msgstr ""
+msgstr "Добави ново разклонение"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1720
 msgid "Add New Edge"
-msgstr ""
+msgstr "Добави нов край"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1721
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "Уголеми Диаграмата"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1722
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "Намали Диаграмата"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1723
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "Вмести диаграмат в рамките на прозореца"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1724
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "Покажи диаграмата в реални размери"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1725
 msgid "Print the Diagram"
-msgstr ""
+msgstr "Разпоечатай Диаграмата"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1796
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "Затвори Тази %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1797
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "Изтрий Тази %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1798
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "Редактирай Тази %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1882
 msgid " - Dot Viewer"
@@ -1113,19 +1130,19 @@ msgstr "Търси/Отвори ресурс"
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
-msgstr ""
+msgstr "Грешна икона за бутона!"
 
 #: bin/widget/view/form_gtk/parser.py:310
 msgid "Field"
-msgstr ""
+msgstr "Поле"
 
 #: bin/widget/view/form_gtk/parser.py:310
 msgid "Object"
-msgstr ""
+msgstr "Обект"
 
 #: bin/widget/view/form_gtk/parser.py:651
 msgid "Enter some text to the related field before adding translations!"
-msgstr ""
+msgstr "Въведете текст в полето преди да добавите превод!"
 
 #: bin/widget/view/form_gtk/parser.py:658
 msgid "You need to save resource before adding translations!"
@@ -1137,24 +1154,24 @@ msgstr "Преведи изгледа"
 
 #: bin/widget/view/form_gtk/one2many_list.py:64
 msgid "Cancel"
-msgstr ""
+msgstr "Откажи"
 
 #: bin/widget/view/form_gtk/one2many_list.py:70
 msgid "Save & Close"
-msgstr ""
+msgstr "Запази и Затвори"
 
 #: bin/widget/view/form_gtk/one2many_list.py:75
 msgid "Save & New"
-msgstr ""
+msgstr "Запази и Нов"
 
 #: bin/widget/view/form_gtk/one2many_list.py:164
 #: bin/widget/view/form_gtk/interface.py:48
 msgid "Set to default value"
-msgstr ""
+msgstr "Сложи стойност по подразбиране"
 
 #: bin/widget/view/form_gtk/one2many_list.py:167
 msgid "Set Default"
-msgstr ""
+msgstr "Настройки по подразбиране"
 
 #: bin/widget/view/form_gtk/one2many_list.py:196
 msgid "Create a new entry"
@@ -1190,20 +1207,20 @@ msgstr "Следваща страница"
 
 #: bin/widget/view/form_gtk/one2many_list.py:232
 msgid "Switch"
-msgstr ""
+msgstr "Превключване"
 
 #: bin/widget/view/form_gtk/many2many.py:106
 #: bin/widget/view/form_gtk/one2many_list.py:238
 msgid "Choose Limit"
-msgstr ""
+msgstr "Избери Лимит"
 
 #: bin/widget/view/form_gtk/one2many_list.py:279
 msgid "You have to select a resource !"
-msgstr ""
+msgstr "Трябва да изберете ресурс!"
 
 #: bin/widget/view/form_gtk/image.py:73
 msgid "Set Image"
-msgstr ""
+msgstr "Задай изображение"
 
 #: bin/widget/view/form_gtk/binary.py:84 bin/widget/view/form_gtk/image.py:82
 msgid "Save As"
@@ -1211,7 +1228,7 @@ msgstr "Запази като"
 
 #: bin/widget/view/form_gtk/binary.py:88 bin/widget/view/form_gtk/image.py:93
 msgid "Clear"
-msgstr ""
+msgstr "Изчисти"
 
 #: bin/widget/view/form_gtk/image.py:102
 msgid "All files"
@@ -1223,11 +1240,11 @@ msgstr "Изображения"
 
 #: bin/widget/view/form_gtk/image.py:131
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "Няма избрано изображение!"
 
 #: bin/widget/view/form_gtk/image.py:131
 msgid "Warning"
-msgstr ""
+msgstr "Внимание"
 
 #: bin/widget/view/form_gtk/many2one.py:156 bin/widget/view/form_gtk/url.py:53
 msgid "Open this resource"
@@ -1252,11 +1269,11 @@ msgstr ""
 
 #: bin/widget/view/form_gtk/interface.py:49
 msgid "Set as default"
-msgstr ""
+msgstr "Задай по подразбиране"
 
 #: bin/widget/view/form_gtk/interface.py:64
 msgid "You can not set to the default value here !"
-msgstr ""
+msgstr "Не можете да запишете Стойноста за подразбиране тук!"
 
 #: bin/widget/view/form_gtk/interface.py:64
 msgid "Operation not permited"
@@ -1273,13 +1290,13 @@ msgstr "Отвори"
 #: bin/widget/view/form_gtk/binary.py:123
 #: bin/widget/view/form_gtk/binary.py:167
 msgid "Unable to read the file data"
-msgstr ""
+msgstr "Грешка при четенето на файла"
 
 #: bin/widget/view/form_gtk/binary.py:133
 #: bin/widget/view/form_gtk/binary.py:159
 #, python-format
 msgid "Error reading the file: %s"
-msgstr ""
+msgstr "Грешка при четенето на файл: %s"
 
 #: bin/widget/view/form_gtk/binary.py:142
 msgid "All Files"
@@ -1301,7 +1318,7 @@ msgstr "Винаги приложимо!"
 #: bin/widget/view/form_gtk/calendar.py:99
 #: bin/widget/view/form_gtk/calendar.py:163
 msgid "Invalid date value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Грешка стойност за дата! Годинара трябва да е след 1899!"
 
 #: bin/widget_search/calendar.py:273 bin/widget/view/form_gtk/calendar.py:255
 msgid "Hour:"
@@ -1313,7 +1330,7 @@ msgstr "Минута:"
 
 #: bin/widget_search/calendar.py:312 bin/widget/view/form_gtk/calendar.py:291
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr ""
+msgstr "Невалидна стойност за дата! Годината трябва да е след 1899!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:30
 msgid "Gantt view not yet implemented !"
@@ -1333,17 +1350,19 @@ msgstr ""
 
 #: bin/rpc.py:158
 msgid "Connection refused!"
-msgstr ""
+msgstr "Отказан достъп!"
 
 #: bin/rpc.py:188
 msgid ""
 "Unable to reach to OpenERP server !\n"
 "You should check your connection to the network and the OpenERP server."
 msgstr ""
+"Връзката със сървъра на OpenERP не се осъществи!\n"
+"Проверете връзката си към мрежата и OpenERP сървъра."
 
 #: bin/rpc.py:188
 msgid "Connection Error"
-msgstr ""
+msgstr "Грешка при свързването"
 
 #: bin/openerp.ui.h:815
 msgid "OpenERP - Login"
@@ -1866,7 +1885,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:689
 msgid "<b>Exports List</b>"
-msgstr ""
+msgstr "<b>Експортирай Лист</b>"
 
 #: bin/openerp.ui.h:692
 msgid "<b>Predefined Exports</b>"
@@ -2025,7 +2044,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:651
 msgid "<Ctrl> + <Esc>"
-msgstr ""
+msgstr "<Ctrl> + <Esc>"
 
 #: bin/openerp.ui.h:704
 msgid "<i>When editing a resource in a popup window</i>"
@@ -2037,7 +2056,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:650
 msgid "<Ctrl> + <Enter>"
-msgstr ""
+msgstr "<Ctrl> + <Enter>"
 
 #: bin/openerp.ui.h:861
 msgid "Switch view mode"
@@ -2045,7 +2064,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:657
 msgid "<Ctrl> + L"
-msgstr ""
+msgstr "<Ctrl> + L"
 
 #: bin/openerp.ui.h:801
 msgid "Next record"
@@ -2057,11 +2076,11 @@ msgstr "Предишен запис"
 
 #: bin/openerp.ui.h:665
 msgid "<PgDn>"
-msgstr ""
+msgstr "<PgDn>"
 
 #: bin/openerp.ui.h:666
 msgid "<PgUp>"
-msgstr ""
+msgstr "<PgUp>"
 
 #: bin/openerp.ui.h:848
 msgid "Save"
@@ -2069,15 +2088,15 @@ msgstr ""
 
 #: bin/openerp.ui.h:662
 msgid "<Ctrl> + W"
-msgstr ""
+msgstr "<Ctrl> + W"
 
 #: bin/openerp.ui.h:660
 msgid "<Ctrl> + S"
-msgstr ""
+msgstr "<Ctrl> + S"
 
 #: bin/openerp.ui.h:652
 msgid "<Ctrl> + <PgDn>"
-msgstr ""
+msgstr "<Ctrl> + <PgDn>"
 
 #: bin/openerp.ui.h:836
 msgid "Previous tab"
@@ -2085,7 +2104,7 @@ msgstr "Предишен таб"
 
 #: bin/openerp.ui.h:653
 msgid "<Ctrl> + <PgUp>"
-msgstr ""
+msgstr "<Ctrl> + <PgUp>"
 
 #: bin/openerp.ui.h:794
 msgid "New"
@@ -2093,7 +2112,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:658
 msgid "<Ctrl> + N"
-msgstr ""
+msgstr "<Ctrl> + N"
 
 #: bin/openerp.ui.h:746
 msgid "Delete"
@@ -2101,7 +2120,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:655
 msgid "<Ctrl> + D"
-msgstr ""
+msgstr "<Ctrl> + D"
 
 #: bin/openerp.ui.h:767
 msgid "Find / Search"
@@ -2109,7 +2128,7 @@ msgstr "Намиране / Търсене"
 
 #: bin/openerp.ui.h:656
 msgid "<Ctrl> + F"
-msgstr ""
+msgstr "<Ctrl> + F"
 
 #: bin/openerp.ui.h:736
 msgid "Connect"
@@ -2117,7 +2136,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:659
 msgid "<Ctrl> + O"
-msgstr ""
+msgstr "<Ctrl> + O"
 
 #: bin/openerp.ui.h:787
 msgid "Main Shortcuts"
@@ -2153,7 +2172,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:664
 msgid "<Enter>"
-msgstr ""
+msgstr "<Enter>"
 
 #: bin/openerp.ui.h:834
 msgid "Previous editable widget"
@@ -2161,7 +2180,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:667
 msgid "<Shift> + <Tab>"
-msgstr ""
+msgstr "<Shift> + <Tab>"
 
 #: bin/openerp.ui.h:800
 msgid "Next editable widget"
@@ -2169,7 +2188,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:668
 msgid "<Tab>"
-msgstr ""
+msgstr "<Tab>"
 
 #: bin/openerp.ui.h:825
 msgid "Paste selected text"
@@ -2185,15 +2204,15 @@ msgstr ""
 
 #: bin/openerp.ui.h:661
 msgid "<Ctrl> + V"
-msgstr ""
+msgstr "<Ctrl> + V"
 
 #: bin/openerp.ui.h:654
 msgid "<Ctrl> + C"
-msgstr ""
+msgstr "<Ctrl> + C"
 
 #: bin/openerp.ui.h:663
 msgid "<Ctrl> + X"
-msgstr ""
+msgstr "<Ctrl> + X"
 
 #: bin/openerp.ui.h:751
 msgid "Edition Widgets"
@@ -2205,7 +2224,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:680
 msgid "<b>All fields</b>"
-msgstr ""
+msgstr "<b>Всички Полета</b>"
 
 #: bin/openerp.ui.h:791
 msgid "N_othing"
@@ -2217,7 +2236,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:690
 msgid "<b>Fields to import</b>"
-msgstr ""
+msgstr "<b>Полета за импортиране</b>"
 
 #: bin/openerp.glade:5891
 msgid "File to Import:"
@@ -2249,7 +2268,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:687
 msgid "<b>Connect to a OpenERP server</b>"
-msgstr ""
+msgstr "<b>Свържи се с OpenERP сървър</b>"
 
 #: bin/openerp.ui.h:838
 msgid "Protocol connection:"
@@ -2265,7 +2284,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:681
 msgid "<b>Backup a database</b>"
-msgstr ""
+msgstr "<b>Архивиране на Базата Данни</b>"
 
 #: bin/openerp.ui.h:845
 msgid "Restore a database"
@@ -2277,7 +2296,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:649
 msgid "(must not contain any special char)"
-msgstr ""
+msgstr "(не трябва да съдържа специални символи)"
 
 #: bin/openerp.ui.h:795
 msgid "New database name:"
@@ -2293,7 +2312,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:688
 msgid "<b>Create a new database</b>"
-msgstr ""
+msgstr "<b>Създай нова база данни</b>"
 
 #: bin/openerp.ui.h:866
 msgid ""
@@ -2328,7 +2347,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:648
 msgid "(<i>admin</i>, by default)"
-msgstr ""
+msgstr "(<i>admin</i>, по подразбиране)"
 
 #: bin/openerp.ui.h:729
 msgid ""
@@ -2397,7 +2416,7 @@ msgstr ""
 
 #: bin/openerp.ui.h:682
 msgid "<b>Change your super admin password</b>"
-msgstr ""
+msgstr "<b>Промяна на супер администраторската парола</b>"
 
 #: bin/openerp.ui.h:803
 msgid "Old password:"

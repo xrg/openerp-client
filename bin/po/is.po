@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-03 06:06+0000\n"
-"X-Generator: Launchpad (build 15734)\n"
+"X-Launchpad-Export-Date: 2012-09-19 04:53+0000\n"
+"X-Generator: Launchpad (build 15966)\n"
 "Language: is\n"
 
 #: bin/plugins/__init__.py:27
@@ -242,7 +242,7 @@ msgstr ""
 #: bin/widget/view/form_gtk/one2many_list.py:52 bin/modules/gui/main.py:1067
 #: bin/openerp.ui.h:808
 msgid "OpenERP"
-msgstr ""
+msgstr "OpenERP"
 
 #: bin/modules/gui/main.py:1147
 msgid ""
@@ -722,7 +722,7 @@ msgstr ""
 
 #: bin/common/common.py:410
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " tilkynnti um eftirfarandi villu:\n"
 
 #: bin/common/common.py:410
 msgid "remarks"
@@ -966,13 +966,13 @@ msgstr ""
 #: bin/widget/view/form_gtk/parser.py:788
 #: bin/widget/view/form_gtk/parser.py:845
 msgid "No other language available!"
-msgstr ""
+msgstr "Ekkert annað tungumál tiltækt!"
 
 #: bin/widget/view/form.py:244 bin/widget/view/form_gtk/parser.py:679
 #: bin/widget/view/form_gtk/parser.py:794
 #: bin/widget/view/form_gtk/parser.py:851
 msgid "Add Translation"
-msgstr ""
+msgstr "Bæta við þýðingu"
 
 #: bin/widget/view/form.py:292 bin/widget/view/form_gtk/parser.py:907
 msgid "Translate label"
@@ -1000,11 +1000,11 @@ msgstr ""
 
 #: bin/widget/view/screen_container.py:73
 msgid "Save as a Filter"
-msgstr ""
+msgstr "Vista sem síu"
 
 #: bin/widget/view/screen_container.py:73
 msgid "Manage Filters"
-msgstr ""
+msgstr "Sýsla með síur"
 
 #: bin/widget/view/tree_gtk/parser.py:61
 msgid ""
@@ -1102,11 +1102,11 @@ msgstr "Setja inn nýtt tilfang"
 
 #: bin/widget/view/form_gtk/reference.py:82
 msgid "Search / Open a resource"
-msgstr ""
+msgstr "Leita / Opna aðfang"
 
 #: bin/widget/view/form_gtk/parser.py:61
 msgid "Wrong icon for the button !"
-msgstr ""
+msgstr "Röng táknmynd á hnappnum !"
 
 #: bin/widget/view/form_gtk/parser.py:310
 msgid "Field"
@@ -1266,7 +1266,7 @@ msgstr "Opna"
 #: bin/widget/view/form_gtk/binary.py:123
 #: bin/widget/view/form_gtk/binary.py:167
 msgid "Unable to read the file data"
-msgstr ""
+msgstr "Tekst ekki að lesa skráargögnin"
 
 #: bin/widget/view/form_gtk/binary.py:133
 #: bin/widget/view/form_gtk/binary.py:159
@@ -1280,7 +1280,7 @@ msgstr "Allar skrár"
 
 #: bin/widget/view/form_gtk/binary.py:152
 msgid "Select a file..."
-msgstr ""
+msgstr "Veldu skrá..."
 
 #: bin/widget/view/form_gtk/binary.py:181
 #, python-format
