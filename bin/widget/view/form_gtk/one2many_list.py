@@ -306,33 +306,37 @@ class one2many_list(interface.widget_interface):
         
     ## This method is specially developed to store old values of 
     ## the modified records.
-    def _get_old_values(self, model_value={}):
-        group_model ={}
-        for key, val in model_value.iteritems():
-            if isinstance(val, ModelRecordGroup):
-                group_model[key] = val.models[:]
-                del model_value[key]
+    def _get_old_values(self, models=None):
+
+        group_model = {}
+        model_value = {}
+        if models is None:
+            models = []
+        for o2m_model in models:
+            values = o2m_model.value.copy()
+            model_value.setdefault(o2m_model, values)
+            group_model.setdefault(o2m_model, {})
+            for key, val in values.iteritems():
+                if isinstance(val, ModelRecordGroup):
+                    group_model[o2m_model][key] = val.models[:]
+                    del model_value[o2m_model][key]
         return model_value,group_model
     
-    ## This method is specially developed to restored old values 
-    def _restore_values(self, edited_model, model_value, group_model, modified):
-        if modified:
-            edited_model.set(model_value, modified=True)
-            for f_name, models in group_model.items():
-                edited_model.value[f_name].clear()
-                for model in models:
-                # add model in ModelRecordGroup
-                    edited_model.value[f_name].model_add(model)
+    ## This method is specially developed to restore old values 
+    def _restore_values(self, modified_model_values, group_model):
+        for model, value in modified_model_values.iteritems():
+            model.set(value, modified=True)
+            for f_name, models in group_model.get(model, {}):
+                model.value[f_name].clear()
+                for sub_model in models:
+                    # add model in ModelRecordGroup
+                    model.value[f_name].model_add(sub_model)
         return True
-                    
+    
     def _sig_new(self, *args):
         _, event = args
         ctx = dict(self._view.model.expr_eval(self.screen.default_get), **self.context)
         ctx.update(self._view.model.expr_eval('dict(%s)' % self.attrs.get('context', '{}')))
-        edited_model = False
-        if self.screen.current_model:
-            edited_model = self.screen.current_model
-        
         if event.type in (gtk.gdk.BUTTON_PRESS, gtk.gdk.KEY_PRESS):
             if (self.screen.current_view.view_type=='form') or self.screen.editable_get():
                 self.screen.new(context=ctx)
@@ -346,13 +350,10 @@ class one2many_list(interface.widget_interface):
                 while ok:
                     ok, value, res = dia.run()
                     if ok or res == gtk.RESPONSE_APPLY:
-                        if edited_model:
-                            old_rec_modified = edited_model.is_modified()
-                            model_value, group_model = self._get_old_values(edited_model.value.copy()) 
+                        modified_model_values, group_model = self._get_old_values(self.screen.models.models)
                         self.screen.models.model_add(value)
                         value.signal('record-changed', value.parent)
-                        if edited_model:
-                            self._restore_values(edited_model, model_value, group_model, old_rec_modified)
+                        self._restore_values(modified_model_values, group_model)
                         self.screen.display()
                         dia.new()
                         self.set_disable(True)
@@ -362,27 +363,26 @@ class one2many_list(interface.widget_interface):
     def _sig_edit(self, *args):
         ctx = dict(self._view.model.expr_eval(self.screen.default_get), **self.context)
         ctx.update(self._view.model.expr_eval('dict(%s)' % self.attrs.get('context', '{}')))
-        if self.screen.current_model:
-            ok = True
-            child_modified = self.screen.current_model.modified
-            edited_model = self.screen.current_model
-            model_value, group_model = self._get_old_values(edited_model.value.copy())
-            dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly, context=ctx)
-            while ok:
-                ok, value, res = dia.run()
-                if not any([ok, value, res]) and dia.screen.is_modified():  
-                    self._restore_values(edited_model, model_value, group_model, child_modified)
-                if res == gtk.RESPONSE_OK:
-                    dia.new()
-                if value and value != edited_model:
-                    old_rec_modified = edited_model.is_modified()
-                    model_value, group_model = self._get_old_values(edited_model.value.copy()) 
+        ok = True
+        modified_model_values, group_model = self._get_old_values(self.screen.models.models)
+        dia = dialog(self.attrs['relation'], parent=self._view.model,  model=self.screen.current_model, attrs=self.attrs, window=self._window, readonly=self._readonly, context=ctx)
+        while ok:
+            ok, value, res = dia.run()
+            if not any([ok, value, res]) and dia.screen.is_modified():
+                if modified_model_values:
+                    self._restore_values(modified_model_values, group_model)
+            if res == gtk.RESPONSE_OK:
+                dia.new()
+            if value and value.id is None:
+                modified_model_values, group_model = self._get_old_values(self.screen.models.models)
+                if value not in modified_model_values:
                     self.screen.models.model_add(value)
                     value.signal('record-changed', value.parent)
-                    self._restore_values(edited_model, model_value, group_model, old_rec_modified)
-                    self.screen.display()
-            self.pager.reset_pager()
-            dia.destroy()
+                if modified_model_values:
+                    self._restore_values(modified_model_values, group_model)
+                self.screen.display()
+        self.pager.reset_pager()
+        dia.destroy()
 
     def limit_changed(self,*args):
         self.pager.limit_changed()
