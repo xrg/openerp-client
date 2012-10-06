@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-09-19 04:54+0000\n"
-"X-Generator: Launchpad (build 15966)\n"
+"X-Launchpad-Export-Date: 2012-10-06 05:14+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 "Language: es\n"
 
 #: bin/plugins/__init__.py:27
@@ -2624,13 +2624,9 @@ msgstr "_Opciones"
 msgid "_Extension Manager"
 msgstr "Gestor de _extensiones"
 
-#
-# File: bin/openerp.glade, line: 861
-# File: bin/openerp.glade, line: 861
-# File: bin/openerp.glade, line: 861
 #: bin/openerp.ui.h:904
 msgid "_Menubar"
-msgstr "Barra de _Menú"
+msgstr "Barra de _menú"
 
 #
 # File: bin/openerp.glade, line: 869
