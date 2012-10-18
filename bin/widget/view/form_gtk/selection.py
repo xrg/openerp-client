@@ -69,8 +69,12 @@ class selection(interface.widget_interface):
 
     def value_get(self):
         res = self.child.get_text()
-        result = [y for x,y in self._selection if x==res]
-        return result and result[0] or False
+        idx = self.entry.get_active()
+        if idx >= 0:
+            assert self._selection[idx][0] == res
+            result = self._selection[idx][1]
+            return result
+        return False
 
     def sig_key_press(self, widget, event):
         # allow showing available entries by hitting "ctrl+space"
