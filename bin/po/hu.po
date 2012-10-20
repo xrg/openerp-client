@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-06 05:14+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-10-20 05:22+0000\n"
+"X-Generator: Launchpad (build 16165)\n"
 "Language: hu\n"
 
 #: bin/plugins/__init__.py:27
@@ -861,7 +861,7 @@ msgstr "Hiba"
 
 #: bin/common/common.py:695
 msgid "Open with..."
-msgstr ""
+msgstr "Megnyitás ezzel..."
 
 #: bin/translate.py:183
 #, python-format
@@ -937,7 +937,7 @@ msgstr "A minialkalmazás tartalma vagy a kivétel, ha nem érvényes"
 
 #: bin/widget_search/char.py:45
 msgid "Error: "
-msgstr ""
+msgstr "Hiba: "
 
 #: bin/widget_search/calendar.py:49 bin/widget_search/calendar.py:177
 msgid "Start date"
@@ -1299,7 +1299,7 @@ msgstr "Képek"
 
 #: bin/widget/view/form_gtk/image.py:131
 msgid "There is no image to save as !"
-msgstr ""
+msgstr "Nem létező kép a mentéshez !"
 
 #: bin/widget/view/form_gtk/image.py:131
 msgid "Warning"
@@ -1413,6 +1413,8 @@ msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
 msgstr ""
+"(Bármely létező szűrő ugyanezen\n"
+"névvel felülíródik)"
 
 #: bin/rpc.py:158
 msgid "Connection refused!"
@@ -2546,6 +2548,8 @@ msgid ""
 "This is the password of the 'admin' user that will be created in your new "
 "database. It has to be the same than the above field."
 msgstr ""
+"Ez az 'admin' felhasználó jelszava, amelyet az új adatbázisban létrehozunk. "
+"A fenti mezővel meg kell egyeznie."
 
 #: bin/openerp.ui.h:706
 msgid ""
@@ -2677,7 +2681,7 @@ msgstr "Szűrő bejegyzés"
 
 #: bin/openerp.ui.h:755
 msgid "Enter Filter Name:"
-msgstr ""
+msgstr "Szűrő nevének megadása:"
 
 #: bin/win_error.ui.h:14
 msgid "label"
@@ -2685,11 +2689,11 @@ msgstr "címke"
 
 #: bin/win_error.ui.h:8
 msgid "Click here for details about the publisher warranty proposition"
-msgstr ""
+msgstr "Kattintson ide a kiadói garancia javaslat részleteiért"
 
 #: bin/win_error.ui.h:6
 msgid "<i>_Publisher Warranty</i>"
-msgstr ""
+msgstr "<i>_Kiadóigarancia</i>"
 
 #: bin/win_error.glade:151
 msgid ""
@@ -2710,7 +2714,7 @@ msgstr "Egyéb megjegyzések:"
 
 #: bin/win_error.ui.h:13
 msgid "Send to Publisher Warranty Team"
-msgstr ""
+msgstr "Küldés a kiadói/terjesztői garancia csapatnak"
 
 #: bin/win_error.glade:318
 msgid "Summary of the problem:"
