@@ -314,8 +314,10 @@ class one2many_list(interface.widget_interface):
             models = []
         for o2m_model in models:
             values = o2m_model.value.copy()
-            model_value.setdefault(o2m_model, values)
-            group_model.setdefault(o2m_model, {})
+            model_value = {}
+            model_value[o2m_model] = values.copy()
+            group_model = {}
+            group_model[o2m_model] = {}
             for key, val in values.iteritems():
                 if isinstance(val, ModelRecordGroup):
                     group_model[o2m_model][key] = val.models[:]
