@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2012-2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -28,19 +29,30 @@ import time
 from dateutil.relativedelta import relativedelta
 
 import rpc
+from date_eval import date_eval as libcli_date_eval
 
 if os.name == 'nt':
     import win32
+
+def _date_eval(rstr):
+    return libcli_date_eval(rstr).strftime('%Y-%m-%d')
+
+def _datetime_eval(rstr):
+    return libcli_date_eval(rstr).strftime('%Y-%m-%d %H:%M:%S')
+
+def _time_eval(rstr):
+    return libcli_date_eval(rstr).strftime('%H:%M:%S')
 
 def expr_eval(string, context=None):
     if context is None:
         context = {}
     context.update(
         uid = rpc.session.uid,
-        current_date = time.strftime('%Y-%m-%d'),
+        current_date = time.strftime('%Y-%m-%d'), # a little expensive, isn't it?
         time = time,
         datetime = datetime,
         relativedelta = relativedelta,
+        date_eval=_date_eval, time_eval=_time_eval, datetime_eval=_datetime_eval,
     )
     if isinstance(string, basestring):
         string = string.strip()
