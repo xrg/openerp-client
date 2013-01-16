@@ -344,7 +344,6 @@ msgstr ""
 "Λάθος πιστοποίησης!\n"
 "Λάθος όνομα χρήστη ή κωδικός!"
 
-# #-#-#-#-#  .merge_file_6kQSsW (openobject-client)  #-#-#-#-#
 #
 # File: bin/openerp.glade, line: 1743
 # File: bin/modules/gui/main.py, line: 1064
@@ -1722,7 +1721,6 @@ msgstr "Πρέπει να επιλέξετε έναν πόρο!"
 msgid "Dot Viewer"
 msgstr "Προβολέας Dot"
 
-# #-#-#-#-#  .merge_file_6kQSsW (openobject-client)  #-#-#-#-#
 #
 # File: bin/widget/view/diagram_gtk/xdot.py, line: 1712
 #, fuzzy
@@ -1732,7 +1730,6 @@ msgstr ""
 "#-#-#-#-#  .merge_file_V9Huqq (openobject-client)  #-#-#-#-#\n"
 "Πρόσθεσε νέο κόμβο"
 
-# #-#-#-#-#  .merge_file_6kQSsW (openobject-client)  #-#-#-#-#
 #
 # File: bin/widget/view/diagram_gtk/xdot.py, line: 1713
 #, fuzzy
@@ -2112,7 +2109,6 @@ msgstr "Επιβεβαιώστε ότι το αρχείο %s είναι σωστ
 msgid " has reported the following bug:\n"
 msgstr " ανέφερε το ακόλουθο σφάλμα:\n"
 
-# #-#-#-#-#  .merge_file_6kQSsW (openobject-client)  #-#-#-#-#
 #
 # File: bin/common/common.py, line: 366
 #, fuzzy

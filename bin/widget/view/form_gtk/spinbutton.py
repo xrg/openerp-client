@@ -20,7 +20,6 @@
 ##############################################################################
 
 import gtk
-import sys
 import interface
 import ctypes
 from tools import user_locale_format
@@ -29,7 +28,7 @@ class spinbutton(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
         interface.widget_interface.__init__(self, window, parent, model, attrs)
 
-        adj = gtk.Adjustment(0.0, -sys.maxint, sys.maxint, 1.0, 5.0)
+        adj = gtk.Adjustment(0.0, -2**100, 2**100, 1.0, 5.0)
         self.widget = gtk.SpinButton(adj, 1.0, digits=int( attrs.get('digits',(14,2))[1] ) )
         self.widget.set_activates_default(True)
         self.widget.connect('populate-popup', self._menu_open)
