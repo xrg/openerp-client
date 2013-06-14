@@ -314,8 +314,8 @@ class one2many_list(interface.widget_interface):
             models = []
         for o2m_model in models:
             values = o2m_model.value.copy()
-            model_value.setdefault(o2m_model, values)
-            group_model.setdefault(o2m_model, {})
+            model_value[o2m_model] = values.copy()
+            group_model[o2m_model] = {}
             for key, val in values.iteritems():
                 if isinstance(val, ModelRecordGroup):
                     group_model[o2m_model][key] = val.models[:]
@@ -326,7 +326,7 @@ class one2many_list(interface.widget_interface):
     def _restore_values(self, modified_model_values, group_model):
         for model, value in modified_model_values.iteritems():
             model.set(value, modified=True)
-            for f_name, models in group_model.get(model, {}):
+            for f_name, models in group_model.get(model, {}).iteritems():
                 model.value[f_name].clear()
                 for sub_model in models:
                     # add model in ModelRecordGroup
