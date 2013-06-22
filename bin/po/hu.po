@@ -10,14 +10,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-13 18:11+0100\n"
 "PO-Revision-Date: 2011-02-02 11:14+0000\n"
-"Last-Translator: NOVOTRADE RENDSZERHÁZ ( novotrade.hu ) "
-"<openerp@novotrade.hu>\n"
+"Last-Translator: Krisztian Eyssen <krisz@eyssen.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-02 05:27+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2013-06-22 05:53+0000\n"
+"X-Generator: Launchpad (build 16677)\n"
 "Language: hu\n"
 
 #: bin/plugins/__init__.py:27
@@ -30,7 +29,7 @@ msgstr "Folyamatlista nyomtatása (Komplex)"
 
 #: bin/plugins/__init__.py:40
 msgid "No available plugin for this resource !"
-msgstr "Nincs elérhető plugin ehhez az erőforráshoz !"
+msgstr "Nincs elérhető bővítmény ehhez az erőforráshoz !"
 
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
@@ -808,6 +807,28 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab.\n"
 msgstr ""
+"\n"
+"<b>Ismeretlen hiba történt.</b>\n"
+"\n"
+"<b>nincs érvényes OpenERP kiadói garancia szerződése !</b>\n"
+"Ha termeléshez használja az OpenERP rendszert, akkor kifejezetten\n"
+"javasoljuk feliratkozását a kiadói garancia programba.\n"
+"\n"
+"Az OpenERP kiadói garancia program ellátja Önöket hibajavítási\n"
+"garanciával és automatikus rendszer költöztetéssel, így\n"
+"lehetőség van órákon belüli hiba javításra. Ha van kiadói garancia\n"
+"szerződése, akkor ez az üzenet el lesz küldve az OpenERP minőségi\n"
+"szerkesztő csapatához.\n"
+"\n"
+"A kiadói garancia program ezeket nyújtja Önöknek:\n"
+"* Automatikus új rendszer verziókba költöztetés.\n"
+"* Hibajavítás garancia,\n"
+"* Havi kiadású potenciális hibajavítások és azok megoldásai,\n"
+"* Biztonsági email riasztások és automatikus beillesztések,\n"
+"* Felhasználói portál elérhetősége.\n"
+"\n"
+"Használja az alábbi linket további információkhoz. A hiba részleteit\n"
+"megtalálja a következő fülön.\n"
 
 #: bin/common/common.py:459
 #, python-format
@@ -835,6 +856,24 @@ msgid ""
 "You can use the link bellow for more information. The detail of the error\n"
 "is displayed on the second tab."
 msgstr ""
+"\n"
+"<b>Ismeretlen hiba történt.</b>\n"
+"\n"
+"<b>nincs érvényes OpenERP kiadói garancia szerződése !</b>\n"
+"Ha termeléshez használja az OpenERP rendszert, akkor kifejezetten\n"
+"javasoljuk feliratkozását a kiadói garancia programba.\n"
+"\n"
+"Ha saját modult fejleszt vagy harmadik féltől származót telepít, \n"
+"akkor azokra a modulokra egy kiegészítő kiadói garancia szerződést\n"
+"ajánlunk. Miután átvizsgáltuk a modulokat, a minőségi csapatunk\n"
+"biztosítja arról, hogy minden jövőbeni stabil kiadásba automatikusan\n"
+"bele lesz integrálva minden egyéb többlet költség nélkül.\n"
+"\n"
+"Itt a modullista amit nem támogat a kiadói garancia szerződése:\n"
+"%s\n"
+"\n"
+"Használja az alábbi linket további információkhoz. A hiba részleteit\n"
+" megtalálja a következő fülön."
 
 #: bin/common/common.py:536
 msgid ""
@@ -1123,7 +1162,7 @@ msgstr "Nem lehet grafikont előállítani!"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1429
 msgid "Dot Viewer"
-msgstr ""
+msgstr "Pont nézet"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1719
 msgid "Add New Node"
@@ -1131,7 +1170,7 @@ msgstr "Új csomópont hozzáadása"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1720
 msgid "Add New Edge"
-msgstr ""
+msgstr "Új él hozááadása"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1721
 msgid "Enlarge the Diagram"
@@ -1170,7 +1209,7 @@ msgstr "Jelenlegi szerkesztése %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1882
 msgid " - Dot Viewer"
-msgstr ""
+msgstr " - Pont nézet"
 
 #: bin/widget/view/form_gtk/reference.py:69 bin/openerp.ui.h:740
 msgid "Create a new resource"
@@ -1710,7 +1749,7 @@ msgstr "_Súgó"
 
 #: bin/openerp.ui.h:753
 msgid "Enable Debug Mode Tooltips"
-msgstr ""
+msgstr "Nyomkövető mód eszköz tippek bekapcsolása"
 
 #: bin/openerp.ui.h:859
 msgid "Support Request"
@@ -1953,7 +1992,7 @@ msgstr "OpenERP - Párbeszéd"
 
 #: bin/openerp.ui.h:822
 msgid "OpenERP, Field Preference target"
-msgstr ""
+msgstr "OpenERP, mező cél  hivatkozás"
 
 #: bin/openerp.ui.h:927
 msgid "_only for you"

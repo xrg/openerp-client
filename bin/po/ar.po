@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-02 05:26+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2013-06-22 05:53+0000\n"
+"X-Generator: Launchpad (build 16677)\n"
 "Language: ar\n"
 
 #: bin/plugins/__init__.py:27
@@ -704,7 +704,7 @@ msgstr "اختر اسم أو عنوان الخادم"
 
 #: bin/common/common.py:88
 msgid "Close current tip"
-msgstr "أغلاق الارشاد الحالي"
+msgstr "إغلاق الإرشاد الحالي"
 
 #: bin/common/common.py:89
 msgid ""
@@ -720,7 +720,7 @@ msgstr ""
 
 #: bin/common/common.py:99
 msgid "Disable all tips"
-msgstr "تعطيل جميع النصائح"
+msgstr "تعطيل جميع الإرشادات"
 
 #: bin/common/common.py:100
 msgid ""
