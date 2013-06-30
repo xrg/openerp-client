@@ -129,9 +129,11 @@ class selection(interface.widget_interface):
             self.child.set_text('')
         else:
             found = False
-            for long_text, sel_value in self._selection:
+            for i, vs  in enumerate(self._selection):
+                long_text, sel_value = vs
                 if sel_value == value:
                     self.child.set_text(long_text)
+                    self.entry.set_active(i)
                     found = True
                     break
         self.ok = True
