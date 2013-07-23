@@ -128,8 +128,8 @@ class ModelRecordGroup(signal_event.signal_event):
     def set_sequence(self, get_id, rec_id, field='sequence'):
         seq_ids = []
         index = 0
-        for module in self.models:
-             seq_ids += [module[field].get(module)]
+        for model in self.models:
+             seq_ids += [model[field].get(model)]
              index = index +1
 
         set_list = list(set(seq_ids))
@@ -143,9 +143,10 @@ class ModelRecordGroup(signal_event.signal_event):
             final_list = set_list + mod_list
 
             index = 0
-            for module in self.models:
-                module[field].set(module, final_list[index], modified=True)
-                module.save()
+            for model in self.models:
+                model[field].set(model, final_list[index], modified=True)
+                if model.id:
+                    model.save()
                 index = index +1
         else:
             seq_id = []
@@ -156,7 +157,8 @@ class ModelRecordGroup(signal_event.signal_event):
                 index = 0
                 for x in range(get_id, rec_id):
                     self.models[x][field].set(self.models[x], sort_seq[index], modified=True)
-                    self.models[x].save()
+                    if self.models[x].id:
+                        self.models[x].save()
                     index = index +1
             else:
                 for x in range(rec_id,get_id+1):
@@ -165,7 +167,8 @@ class ModelRecordGroup(signal_event.signal_event):
                 index = 0
                 for x in range(rec_id,get_id+1):
                     self.models[x][field].set(self.models[x], sort_seq[index], modified=True)
-                    self.models[x].save()
+                    if self.models[x].id:
+                        self.models[x].save()
                     index = index +1
 
 
