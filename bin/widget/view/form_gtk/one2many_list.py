@@ -316,7 +316,7 @@ class one2many_list(interface.widget_interface):
             values = o2m_model.value.copy()
             model_value.setdefault(o2m_model, values)
             group_model.setdefault(o2m_model, {})
-            for key, val in values.iteritems():
+            for key, val in values.items():
                 if isinstance(val, ModelRecordGroup):
                     group_model[o2m_model][key] = val.models[:]
                     del model_value[o2m_model][key]
