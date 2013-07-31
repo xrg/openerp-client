@@ -14,13 +14,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-22 05:54+0000\n"
-"X-Generator: Launchpad (build 16677)\n"
+"X-Launchpad-Export-Date: 2013-07-31 05:40+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 "Language: fa\n"
 
 #: bin/plugins/__init__.py:27
 msgid "Print Workflow"
-msgstr "چاپ کارگردش"
+msgstr "چاپ گردش کار"
 
 #: bin/plugins/__init__.py:28
 msgid "Print Workflow (with subflows)"
@@ -32,21 +32,21 @@ msgstr "برای این منبع پلاگین وجود ندارد!"
 
 #: bin/plugins/__init__.py:42
 msgid "Choose a Plugin"
-msgstr "یک پلاگین را برگزینید"
+msgstr "یک پلاگین را انتخاب کنبد"
 
 #: bin/rpc.py:157 bin/modules/action/wizard.py:149 bin/modules/gui/main.py:187
 msgid "Connection refused !"
-msgstr "اتصال قطع شد!"
+msgstr "اتصال رد شد !"
 
 #: bin/rpc.py:203 bin/rpc.py:205 bin/modules/action/wizard.py:161
 #: bin/modules/action/wizard.py:167 bin/modules/action/wizard.py:169
 #: bin/modules/gui/main.py:195 bin/modules/gui/main.py:201
 msgid "Application Error"
-msgstr "خطای برنامه"
+msgstr "خطای برنامه کاربردی"
 
 #: bin/rpc.py:205 bin/modules/action/wizard.py:169
 msgid "View details"
-msgstr "دیدن جزییات"
+msgstr "نمایش جزئیات"
 
 #: bin/modules/action/main.py:48
 msgid "Nothing to print!"
@@ -428,7 +428,7 @@ msgstr "سند ذخیره‌شد"
 #: bin/widget/view/list.py:585 bin/widget/view/list.py:586
 #: bin/widget/view/form_gtk/parser.py:135 bin/modules/gui/window/form.py:366
 msgid "Invalid form, correct red fields !"
-msgstr "فرم نامعتبر، فیلدهای قرمز را تدرست کنید!"
+msgstr "فرم نامعتبر است، فیلدهای قرمز را درست کنید!"
 
 #: bin/widget/view/list.py:585
 msgid "Error !"
@@ -679,7 +679,7 @@ msgstr "فعال‌سازی دیباگ عادی. استعاره‌ای برای 
 #: bin/options.py:125
 #, python-format
 msgid "specify the log level: %s"
-msgstr "سطح لاگ را تعیین کنید: %s"
+msgstr "سطح گزارش را تعیین کنید: %s"
 
 #: bin/options.py:126
 msgid "specify the user login"
@@ -687,15 +687,15 @@ msgstr "نام کاربری را تعیین کنید"
 
 #: bin/options.py:127
 msgid "specify the server port"
-msgstr "درگاه کارپذیر را تعیین کنید"
+msgstr "درگاه سرور را تعیین کنید"
 
 #: bin/options.py:128
 msgid "specify the server ip/name"
-msgstr "آی‌پی/نام کارپذیر را تعیین کنید"
+msgstr "آی‌پی/نام سرورر را تعیین کنید"
 
 #: bin/common/common.py:88
 msgid "Close current tip"
-msgstr ""
+msgstr "این نکته را ببند"
 
 #: bin/common/common.py:89
 msgid ""
@@ -707,7 +707,7 @@ msgstr ""
 
 #: bin/common/common.py:99
 msgid "Disable all tips"
-msgstr ""
+msgstr "غیر فعالسازی تمام نکات"
 
 #: bin/common/common.py:100
 msgid ""
@@ -719,7 +719,7 @@ msgstr ""
 
 #: bin/common/common.py:114 bin/common/common.py:116
 msgid "Tips"
-msgstr ""
+msgstr "نکات"
 
 #: bin/common/common.py:167
 msgid "OpenERP Computing"
@@ -727,24 +727,24 @@ msgstr "محاسبه اپن ای‌آر‌پی"
 
 #: bin/common/common.py:186
 msgid "Operation in progress"
-msgstr "گردانش در حال پیش‌روی است"
+msgstr "عملیات در حال پیش‌روی است"
 
 #: bin/common/common.py:190
 msgid ""
 "Please wait,\n"
 "this operation may take a while..."
 msgstr ""
-"لطفا منتظر بمانید،\n"
-"این گردانش ممکن است مدتی به درازا بیانجامد..."
+"لطفا منتظر بمانبد،\n"
+"این عملیات ممکن است مدتی طول بکشد ..."
 
 #: bin/common/common.py:224
 #, python-format
 msgid "Ensure that the file %s is correct"
-msgstr ""
+msgstr "اطمینان حاصل کنید که فایل %s درست است"
 
 #: bin/common/common.py:410
 msgid " has reported the following bug:\n"
-msgstr ""
+msgstr " خطای زیر گزارش شده است:\n"
 
 #: bin/common/common.py:410
 msgid "remarks"
@@ -906,18 +906,18 @@ msgstr "محتوای ابزارک یا استثنا در صورت معتبر ن�
 
 #: bin/widget_search/char.py:45
 msgid "Error: "
-msgstr ""
+msgstr "خطا: "
 
 #: bin/widget_search/calendar.py:49 bin/widget_search/calendar.py:177
 msgid "Start date"
-msgstr "تاریخ آغاز"
+msgstr "تاریخ شروع"
 
 #: bin/widget_search/calendar.py:53 bin/widget_search/calendar.py:73
 #: bin/widget_search/calendar.py:181 bin/widget_search/calendar.py:201
 #: bin/widget/view/form_gtk/calendar.py:57
 #: bin/widget/view/form_gtk/calendar.py:184
 msgid "Open the calendar widget"
-msgstr "باز کردن ابزارک گاهشمار"
+msgstr "باز کردن ابزارک تقویم"
 
 #: bin/widget_search/calendar.py:69 bin/widget_search/calendar.py:197
 msgid "End date"
@@ -933,33 +933,33 @@ msgstr "اپن ای‌آر‌پی - گزینش تاریخ"
 #: bin/widget_search/custom_filter_widgets.py:67
 #: bin/widget_search/custom_filter_widgets.py:99
 msgid "contains"
-msgstr ""
+msgstr "شامل باشد"
 
 #: bin/widget_search/custom_filter_widgets.py:41
 #: bin/widget_search/custom_filter_widgets.py:68
 #: bin/widget_search/custom_filter_widgets.py:99
 msgid "doesn't contain"
-msgstr ""
+msgstr "شامل نشود"
 
 #: bin/widget_search/custom_filter_widgets.py:295
 #: bin/widget_search/custom_filter_widgets.py:336
 msgid "is equal to"
-msgstr ""
+msgstr "برابر است با"
 
 #: bin/widget_search/custom_filter_widgets.py:296
 #: bin/widget_search/custom_filter_widgets.py:337
 msgid "is not equal to"
-msgstr ""
+msgstr "برابر نیست با"
 
 #: bin/widget_search/custom_filter_widgets.py:297
 #: bin/widget_search/custom_filter_widgets.py:338
 msgid "greater than"
-msgstr ""
+msgstr "بزرگتر است از"
 
 #: bin/widget_search/custom_filter_widgets.py:298
 #: bin/widget_search/custom_filter_widgets.py:339
 msgid "less than"
-msgstr ""
+msgstr "کمتر است از"
 
 #: bin/widget_search/custom_filter.py:62
 msgid "in"
@@ -979,7 +979,7 @@ msgstr ""
 #: bin/widget_search/checkbox.py:35 bin/widget_search/checkbox.py:42
 #: bin/widget_search/checkbox.py:55
 msgid "Yes"
-msgstr "بله"
+msgstr "بلی"
 
 #: bin/widget_search/checkbox.py:36 bin/widget_search/checkbox.py:44
 msgid "No"
@@ -991,7 +991,7 @@ msgstr "شما باید این رکورد را برای بکارگیری از د
 
 #: bin/widget/view/form.py:141
 msgid "Action not defined !"
-msgstr ""
+msgstr "عملیات تعریف نشده است!"
 
 #: bin/widget/view/form.py:211
 msgid "You must select a record to use the relate button !"
@@ -1007,11 +1007,11 @@ msgstr "زبان دیگری موجود نیست!"
 #: bin/widget/view/form_gtk/parser.py:794
 #: bin/widget/view/form_gtk/parser.py:851
 msgid "Add Translation"
-msgstr "افزودن برگردان"
+msgstr "افزودن ترجمه"
 
 #: bin/widget/view/form.py:292 bin/widget/view/form_gtk/parser.py:907
 msgid "Translate label"
-msgstr "برگردانی برچسب"
+msgstr "ترجمه برچسب"
 
 #: bin/widget/view/calendar_gtk/parser.py:358 bin/openerp.ui.h:880
 msgid "Week"
@@ -1089,50 +1089,50 @@ msgstr ""
 
 #: bin/widget/view/diagram_gtk/xdot.py:1719
 msgid "Add New Node"
-msgstr ""
+msgstr "ایجاد گره جدید"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1720
 msgid "Add New Edge"
-msgstr ""
+msgstr "ایجاد مرز جدید"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1721
 msgid "Enlarge the Diagram"
-msgstr ""
+msgstr "بزرگنمایی نمودار"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1722
 msgid "Shrink the Diagram"
-msgstr ""
+msgstr "کوچکنمایی نمودار"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1723
 msgid "Fit the diagram to the window"
-msgstr ""
+msgstr "نمودار به اندازه پنجره شود"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1724
 msgid "Show the diagram at its normal size"
-msgstr ""
+msgstr "نمایش نمودار در اندازه نرمال"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1725
 msgid "Print the Diagram"
-msgstr ""
+msgstr "چاپ نمودار"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1796
 #, python-format
 msgid "Close Current %s"
-msgstr ""
+msgstr "بستن جاری %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1797
 #, python-format
 msgid "Delete Current %s"
-msgstr ""
+msgstr "حذف جاری %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1798
 #, python-format
 msgid "Edit Current %s"
-msgstr ""
+msgstr "ویرایش جاری %s"
 
 #: bin/widget/view/diagram_gtk/xdot.py:1882
 msgid " - Dot Viewer"
-msgstr ""
+msgstr " - نمایش نقطه‌ای"
 
 #: bin/widget/view/form_gtk/reference.py:69 bin/openerp.ui.h:740
 msgid "Create a new resource"
@@ -1344,7 +1344,7 @@ msgstr "دقیقه:"
 
 #: bin/widget_search/calendar.py:312 bin/widget/view/form_gtk/calendar.py:291
 msgid "Invalid datetime value! Year must be greater than 1899 !"
-msgstr "مقدار نادرست تاریخ-ساعت! سال باید از ۱۸۹۹ بزرگتر باشد!"
+msgstr "مقدار نادرست تاریخ-ساعت! سال باید از ۱۸۹۹ میلادی بزرگتر باشد!"
 
 #: bin/widget/view/gantt_gtk/parser_dummy.py:30
 msgid "Gantt view not yet implemented !"
@@ -1356,29 +1356,31 @@ msgid ""
 "interface or switch to the calendar view."
 msgstr ""
 "نمای گَنت در این مشتری GTK موجود نیست، شما باید رابط کاربری وب را بکار گیرید "
-"یابه نمای گاهشمار سویچ کنید."
+"یابه نمای تقویم سویچ کنید."
 
 #: bin/widget/screen/screen.py:343
 msgid ""
 "(Any existing filter with the \n"
 "same name will be replaced)"
 msgstr ""
+"(تمام فیلترهای موجود با  \n"
+"نام یکسان جایگزین خواهد شد)"
 
 #: bin/rpc.py:158
 msgid "Connection refused!"
-msgstr "اتصال قطع شد!"
+msgstr "اتصال رد شد!"
 
 #: bin/rpc.py:188
 msgid ""
 "Unable to reach to OpenERP server !\n"
 "You should check your connection to the network and the OpenERP server."
 msgstr ""
-"اتصال به کارپذیر اپن ای‌آر‌پی انجام نشد!\n"
-"شما باید اتصال خود را با شبکه و کارپذیر اپن ای‌آر‌پی بررسی کنید."
+"اتصال به سرور اپن ای‌آر‌پی انجام نشد!\n"
+"شما باید اتصال خود را با شبکه و سرور اپن ای‌آر‌پی بررسی کنید."
 
 #: bin/rpc.py:188
 msgid "Connection Error"
-msgstr "خطای اتصال"
+msgstr "خطای ارتباط"
 
 #: bin/openerp.ui.h:815
 msgid "OpenERP - Login"
