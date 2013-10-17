@@ -172,7 +172,8 @@ class main(service.Service):
                 obj.create(view_ids, datas['res_model'], datas['res_id'], domain,
                         action['view_type'], datas.get('window',None), context,
                         datas['view_mode'], name=action.get('name', False), help=help,
-                        limit=datas['limit'], auto_refresh=datas['auto_refresh'], auto_search = datas['auto_search'], search_view = datas['search_view'])
+                        limit=datas['limit'], auto_refresh=datas['auto_refresh'],
+                        auto_search = datas['auto_search'], search_view = datas['search_view'])
 
         elif action['type']=='ir.actions.server':
             res = rpc.session.rpc_exec_auth('/object', 'execute', 'ir.actions.server', 'run', [action['id']], context)
