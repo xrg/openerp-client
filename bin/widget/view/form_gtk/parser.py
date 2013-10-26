@@ -21,6 +21,7 @@
 
 import tools
 import interface
+import logging
 
 import widget.view.interface
 from observator import oregistry, Observable
@@ -56,7 +57,6 @@ class Button(Observable):
                 icon.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
                 self.widget.set_image(icon)
             except Exception,e:
-                import logging
                 log = logging.getLogger('common')
                 log.warning(_('Wrong icon for the button !'))
 
@@ -333,6 +333,7 @@ class parser_form(widget.view.interface.parser_interface):
         container = _container()
         container.new(col=int(attrs.get('col', 4)))
         self.container = container
+        log = logging.getLogger('widget.form.parser')
 
         if not self.title:
             attrs = tools.node_attributes(root_node)
@@ -461,13 +462,19 @@ class parser_form(widget.view.interface.parser_interface):
                 name = str(attrs['name'])
                 del attrs['name']
                 name = unicode(name)
-                type = attrs.get('widget', fields[name]['type'])
+                widget_def = None
+                if attrs.get('widget', False):
+                    widget_def = widgets_type.get(attrs.get('widget'), None)
+                if not widget_def:
+                    widget_def = widgets_type.get(fields[name]['type'], None)
+                if not widget_def:
+                    log.warning("Unknown widget type: %s %s, field %s will not be rendered",
+                            attrs.get('widget', ''), fields[name]['type'], name)
+                    continue
                 if 'selection' in attrs:
                     attrs['selection'] = fields[name]['selection']
                 fields[name].update(attrs)
                 fields[name]['model'] = model
-                if not type in widgets_type:
-                    continue
 
                 fields[name]['name'] = name
                 if 'saves' in attrs:
@@ -480,7 +487,7 @@ class parser_form(widget.view.interface.parser_interface):
                     fields[name]['focus_field'] = attrs['default_focus']
                     self.default_focus_field = True
 
-                widget_act = widgets_type[type][0](self.window, self.parent, model, fields[name])
+                widget_act = widget_def[0](self.window, self.parent, model, fields[name])
                 self.widget_id += 1
                 widget_act.position = self.widget_id
 
@@ -492,9 +499,9 @@ class parser_form(widget.view.interface.parser_interface):
                     else:
                         label = fields[name]['string']+' :'
                 dict_widget[name] = widget_act
-                size = int(attrs.get('colspan', widgets_type[ type ][1]))
-                expand = widgets_type[ type ][2]
-                fill = widgets_type[ type ][3]
+                size = int(attrs.get('colspan', widget_def[1]))
+                expand = widget_def[2]
+                fill = widget_def[3]
                 hlp = fields[name].get('help', attrs.get('help', False))
                 if attrs.get('height', False) or attrs.get('width', False):
                     widget_act.widget.set_size_request(
