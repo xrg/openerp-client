@@ -432,12 +432,13 @@ class textbox_tag(interface.widget_interface):
             txt = txt.replace('</p></pre>','')
             parsed, txt, separator = pango.parse_markup(txt)
         except Exception ,e:
-            pass
+            common.warning("Cannot parse text: %s" % e, 'User Error')
+            return False
 
         try:
             attrIter = parsed.get_iterator()
         except Exception ,e:
-#            common.warning("Either the Message contains HTML tags or the selected Fonts are not supported!",'User Error')
+            common.warning("Either the Message contains HTML tags or the selected Fonts are not supported!",'User Error')
 #            self._focus_out()
             return False
         buf.delete(buf.get_start_iter(), buf.get_end_iter())
