@@ -415,8 +415,9 @@ class ViewList(parser_view):
         data = []
         treeselection = treeview.get_selection()
         treeselection.selected_foreach(_func_sel_get, data)
-        data = str(data[0])
-        selection.set(selection.target, 8, data)
+        if data:
+            data = str(data[0])
+            selection.set(selection.target, 8, data)
 
     def group_by_move(self, model_list, get_id, rec_id, field='sequence'):
         seq_ids = map(lambda x: x[field].get(x), model_list.children.lst)
