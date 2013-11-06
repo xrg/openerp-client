@@ -41,8 +41,12 @@ class ModelField(object):
     set_client: save the value from the widget
     '''
 
-    def __new__(cls, type):
-        klass = TYPES.get(type, CharField)
+    def __new__(cls, type, type2=None):
+        klass = None
+        if type2:
+            klass = TYPES.get(type2, None)
+        if klass is None:
+            klass = TYPES.get(type, CharField)
         return klass
 
 

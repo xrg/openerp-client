@@ -118,7 +118,7 @@ class ModelRecordGroup(signal_event.signal_event):
     def mfields_load(self, fkeys, models):
         for fname in fkeys:
             fvalue = models.fields[fname]
-            modelfield = field.ModelField(fvalue['type'])
+            modelfield = field.ModelField(fvalue['type'], fvalue.get('widget', None))
             fvalue['name'] = fname
             models.mfields[fname] = modelfield(models, fvalue)
 
@@ -231,6 +231,8 @@ class ModelRecordGroup(signal_event.signal_event):
         if context:
             c.update(context)
         c['bin_size'] = True
+        if not isinstance(ids, list):
+            raise RuntimeError("incorrect ids: %r" % ids)
         values = self.rpc.read(ids, self.fields.keys() + [rpc.CONCURRENCY_CHECK_FIELD], c)
         if not values:
             return False
