@@ -44,6 +44,10 @@ import base64
 
 import thread
 import gc
+import socket
+import tiny_socket
+from rpc import rpc_exception
+
 
 RESERVED_KEYWORDS=['absolute', 'action', 'all', 'alter', 'analyse', 'analyze', 'and', 'any', 'as', 'asc', 'authorization', 'between', 'binary', 'both',
             'case', 'cast', 'check', 'collate', 'column','constraint', 'create', 'cross', 'current_date', 'current_time', 'current_timestamp',
@@ -56,10 +60,9 @@ RESERVED_KEYWORDS=['absolute', 'action', 'all', 'alter', 'analyse', 'analyze', '
 def check_ssl():
     try:
         from OpenSSL import SSL
-        import socket
 
         return hasattr(socket, 'ssl')
-    except:
+    except Exception:
         return False
 
 class StockButton(gtk.Button):
@@ -177,10 +180,6 @@ class DatabaseDialog(gtk.Dialog):
             gtk.main_iteration()
 
         if self.exception:
-            import xmlrpclib
-            import socket
-            import tiny_socket
-            from rpc import rpc_exception
             try:
                 raise self.exception
             except socket.error, e:
@@ -307,7 +306,7 @@ class MigrationDatabaseDialog(DatabaseDialog):
         self.clear_screen()
         try:
             result = rpc.session.list_db(entry.get_text())
-        except:
+        except Exception:
             return
         if result:
             for db_num, db_name in enumerate(result):
@@ -318,7 +317,6 @@ def _get_db_name_from_url(url):
         return ''
     url = url.split('://', 1)[1].rsplit(':', 1)[0]
     if '.' in url:
-        import socket
         try:
             socket.inet_aton(url)
         except socket.error:
@@ -337,7 +335,7 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
     liststore.clear()
     try:
         result = rpc.session.list_db(url)
-    except:
+    except Exception:
         label.set_label('<b>'+_('Could not connect to server !')+'</b>')
         db_widget.hide()
         entry_db.hide()
@@ -383,7 +381,7 @@ def _refresh_dblist(db_widget, entry_db, label, butconnect, url, dbtoload=None):
     if lm:
         try:
             parse_markup(lm)
-        except:
+        except Exception:
             pass
         else:
             label.set_label(lm)
@@ -468,20 +466,21 @@ class db_login(object):
     def refreshlist(self, widget, db_widget, entry_db, label, url, butconnect=False):
 
         def check_server_version(url):
-            try:
                 import release
                 full_server_version = rpc.session.db_exec_no_except(url, 'server_version')
                 server_version = full_server_version.split('.')
                 client_version = release.major_version.split('.')
                 return (server_version[:2] <= client_version, full_server_version, release.major_version)
-            except:
-                # the server doesn't understand the request. It's mean that it's an old version of the server
-                return (False, _('Unknown'), release.version)
 
         if _refresh_dblist(db_widget, entry_db, label, butconnect, url):
-            is_same_version, server_version, client_version = check_server_version(url)
-            if not is_same_version:
-                common.warning(_('The versions of the server (%s) and the client (%s) mismatch. The client may not work properly. Use it at your own risk.') % (server_version, client_version,),parent=self.win)
+            try:
+                is_same_version, server_version, client_version = check_server_version(url)
+                if not is_same_version:
+                    common.warning(_('The versions of the server (%s) and the client (%s) mismatch. The client may not work properly. Use it at your own risk.') % (server_version, client_version,),parent=self.win)
+            except Exception:
+                # the server doesn't understand the request.
+                # Either an older version, or problem during the request
+                pass
 
     def refreshlist_ask(self,widget, server_widget, db_widget, entry_db, label, butconnect = False, url=False, parent=None):
         url = _server_ask(server_widget, parent) or url
@@ -610,7 +609,7 @@ class db_create(object):
         self.lang_widget.set_model(liststore)
         try:
             _refresh_langlist(self.lang_widget, url)
-        except:
+        except Exception:
             self.set_sensitive(False)
 
         while True:
@@ -668,7 +667,7 @@ class db_create(object):
     def progress_timeout(self, pbar, url, passwd, id, win, dbname, parent=None):
         try:
             progress,users = rpc.session.db_exec_no_except(url, 'get_progress', passwd, id)
-        except:
+        except Exception:
             win.destroy()
             common.warning(_("The server crashed during installation.\nWe suggest you to drop this database."),_("Error during database creation !"))
             return False
@@ -963,7 +962,7 @@ class terp_main(service.Service):
                     [('act_from', '=', rpc.session.uid)], 'form',
                     mode='form,tree', window=self.window,
                     context={'active_test': False})
-        except:
+        except Exception:
             return False
 
     def sig_request_open(self, args=None):
@@ -974,7 +973,7 @@ class terp_main(service.Service):
                     [('act_to', '=', rpc.session.uid), ('active', '=', True)],
                     'form', mode='tree,form', window=self.window,
                     context={'active_test': False})
-        except:
+        except Exception:
             return False
 
     def sig_request_wait(self, args=None):
@@ -986,7 +985,7 @@ class terp_main(service.Service):
                         ('state', '=', 'waiting'), ('active', '=', True)],
                     'form', mode='tree,form', window=self.window,
                     context={'active_test': False})
-        except:
+        except Exception:
             return False
 
     def company_set(self):
@@ -1001,7 +1000,7 @@ class terp_main(service.Service):
             id = self.sb_company.get_context_id('message')
             self.sb_company.push(id, message)
             return ids[0][1]
-        except:
+        except Exception:
             return []
 
     def request_set(self):
@@ -1018,7 +1017,7 @@ class terp_main(service.Service):
             id = self.sb_requests.get_context_id('message')
             self.sb_requests.push(id, message)
             return (ids,ids2)
-        except:
+        except Exception:
             return ([],[])
 
     def sig_login(self, widget=None, dbname=False):
@@ -1169,7 +1168,7 @@ class terp_main(service.Service):
         try:
             act_id = rpc.session.rpc_exec_auth('/object', 'execute', 'res.users',
                     'read', [rpc.session.uid], [type,'name'], rpc.session.context)
-        except:
+        except Exception:
             return False
         id = self.sb_username.get_context_id('message')
         self.sb_username.push(id, act_id[0]['name'] or '')
@@ -1189,7 +1188,7 @@ class terp_main(service.Service):
                     'read', [rpc.session.uid], [type,'name'], rpc.session.context)
             if user[0][type]:
                 act_id = user[0][type][0]
-        except:
+        except Exception:
             pass
         return act_id
 
@@ -1489,19 +1488,25 @@ class terp_main(service.Service):
                             rpc.session.db_exec(url, 'change_admin_password',
                                     old_passwd, new_passwd)
                         end = True
-                    except Exception, e:
-
-                        if type == 'admin':
-                            if ('faultCode' in dir(e) and e.faultCode=="AccessDenied") \
-                                    or 'AccessDenied' in str(e):
-                                    common.warning(_("Could not change the Super Admin password."),
+                    except socket.error, e:
+                        common.warning(str(e), title=_('Connection problem!'), parent=win)
+                    except (tiny_socket.Myexception, xmlrpclib.Fault), e:
+                        if type == 'admin' and e.faultCode =="AccessDenied":
+                            common.warning(_("Could not change the Super Admin password."),
                                                    _('Bad password provided !'), parent=win)
                         else:
-                            if e.type == 'warning':
-                                 common.warning(e.data, e.message, parent=win)
-                            elif e.type == 'AccessDenied':
-                                common.warning(_("Changing password failed, please verify old password."),
-                                               _('Bad password provided !'), parent=win)
+                            common.warning(e.message,
+                                                   _('Bad password provided !'), parent=win)
+                    except rpc_exception, e:
+                        if e.type == 'warning':
+                            common.warning(e.args[1], e.args[0], parent=win)
+                        elif e.type == 'AccessDenied':
+                            common.warning(_("Changing password failed, please verify old password."),
+                                            _('Bad password provided !'), parent=win)
+                        else:
+                            common.error(e.args[1], e.args[0], parent=win)
+                    except Exception, e:
+                        common.warning(unicode(e), _("Cannot change password"), parent=win)
             else:
                 end = True
         self.window.present()
