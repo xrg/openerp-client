@@ -96,7 +96,7 @@ class rpc_exception(Exception):
         log.warning('CODE %s: %s' % (str(code), self.args[0]))
 
     def _get_message(self):
-        return self._message
+        return getattr(self, '_message', self.args[0])
 
     def _set_message(self, message):
         self._message = message
