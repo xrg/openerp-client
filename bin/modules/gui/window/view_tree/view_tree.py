@@ -64,9 +64,10 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         self.colors = colors
         self.color_ids = {}
         self.context = context
-        self.tree = self._node_process(self.roots)
         self.pixbufs = pixbufs
         self.treeview = treeview
+        # Process AFTER all attributes are set!
+        self.tree = self._node_process(self.roots)
 
     def get_color(self,result):
         color_ids = {}
@@ -102,6 +103,10 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
 
     def _read(self, ids, fields):
         c = {}
+        pixbuf_fields = set()
+        for k, v in self.pixbufs.items():
+            if v:
+                pixbuf_fields.add(self.fields[k-1])
         c.update(rpc.session.context)
         c.update(self.context)
         if self.invisible_fields:
@@ -138,6 +143,9 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
                 elif self.fields_type[field]['type'] in ('one2one','many2one'):
                     if x[field]:
                         x[field] = x[field][1]
+                elif field in pixbuf_fields:
+                    # don't convert the selection!
+                    pass
                 elif self.fields_type[field]['type'] in ('selection'):
                     if x[field]:
                         x[field] = dict(self.fields_type[field]['selection']).get(x[field],'')
@@ -202,11 +210,11 @@ class view_tree_model(gtk.GenericTreeModel, gtk.TreeSortable):
         return node
 
     def on_get_value(self, node, column):
-        (n, list) = node[-1]
+        (n, nlist) = node[-1]
         if column:
-            value = list[n][1][column-1]
+            value = nlist[n][1][column-1]
         else:
-            value = list[n][0]
+            value = nlist[n][0]
 
         if value==None or (value==False and type(value)==bool):
             res = ''
@@ -398,7 +406,7 @@ class view_tree(object):
 
     def go(self, id):
         return
-        ids = com_rpc.xrpc.exec_auth('res_path_get', id, self.root)
+        ids = rpc.session.rpc_exec_auth('res_path_get', id, self.root)
         if not len(ids):
             raise Exception, 'IdNotFound'
         self.view.collapse_all()
