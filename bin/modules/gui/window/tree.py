@@ -132,7 +132,7 @@ class tree(object):
                     else:
                         try:
                             icon.set_from_stock(r[icon_name], gtk.ICON_SIZE_BUTTON)
-                        except:
+                        except Exception,e:
                             pass
 
                 hb = gtk.HBox(spacing=6)
