@@ -3,6 +3,7 @@
 #    
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -40,7 +41,8 @@ class spinbutton(interface.widget_interface):
         self.widget.connect('input', self.format_input)
         self.widget.connect('output', self.format_output)
         self.widget.connect('insert-text', self._on_insert_text)
-    
+        self.widget.connect('scroll-event', self._on_scroll)
+
     def _on_insert_text(self, editable, value, length, position):
         text = self.widget.get_text()
         if value:
@@ -88,6 +90,9 @@ class spinbutton(interface.widget_interface):
         self.widget.set_editable(not value)
         self.widget.set_sensitive(not value)
 
+
+    def _on_scroll(self, event, *args):
+        return True
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
