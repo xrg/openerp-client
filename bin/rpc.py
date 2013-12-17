@@ -302,11 +302,19 @@ class rpc_session(object):
             try:
                 res = _sock.login(db or '', uname or '', passwd or '')
             except socket.error,e:
-                common.error(_('Login error:'), str(e))
+                common.error(_('Login error:'), str(e), disconnected_mode=True)
                 return -1
-            except:
+            except xmlrpclib.Fault, e:
+                message = e.faultCode
+                if '\n' in message:
+                    message = message.split('\n', 1)[1]
+                common.error(_('Login error:'), message, e.faultString, disconnected_mode=True)
+                self._open = False
+                self.uid = False
+                return -2
+            except Exception:
                 import sys
-                common.error(_('Login error:'),str(sys.exc_info()))
+                common.error(_('Login error:'),str(sys.exc_info()), disconnected_mode=True)
                 return 0
             if not res:
                 self._open=False
