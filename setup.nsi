@@ -1,6 +1,7 @@
 #####################################################################################
 #
-# Copyright (c) 2004-TODAY OpenERP S.A. (http://www.openerp.com) All Rights Reserved.
+# Copyright (c) 2004-2011 OpenERP S.A. (http://www.openerp.com)
+# Copyright (c) 2011-2014 P. Christeas <xrg@hellug.gr>
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -34,17 +35,17 @@
     !define MAJOR_VERSION '6'
 !endif
 !ifndef MINOR_VERSION
-    !define MINOR_VERSION '0'
+    !define MINOR_VERSION '9'
 !endif
 !ifndef REVISION_VERSION
-    !define REVISION_VERSION '3'
+    !define REVISION_VERSION '2'
 !endif
 !ifndef BUILD_VERSION
     !define VERSION "${MAJOR_VERSION}.${MINOR_VERSION}.${REVISION_VERSION}"
 !else
     !define VERSION "${MAJOR_VERSION}.${MINOR_VERSION}.${REVISION_VERSION}-${BUILD_VERSION}"
 !endif
-!define PRODUCT_NAME "OpenERP GTK Client"
+!define PRODUCT_NAME "OpenERP-F3 GTK Client"
 !define DISPLAY_NAME "${PRODUCT_NAME} ${MAJOR_VERSION}.${MINOR_VERSION}"
 
 !define UNINSTALL_REGISTRY_ROOT HKLM
@@ -72,7 +73,7 @@ RequestExecutionLevel admin
 #VIAddVersionKey "CompanyName" "${PUBLISHER}"
 #VIAddVersionKey "FileDescription" "Installer of ${DISPLAY_NAME}" 
 #VIAddVersionKey "LegalCopyright" "${PUBLISHER}"
-#VIAddVersionKey "LegalTrademark" "OpenERP is a trademark of ${PUBLISHER}"
+#VIAddVersionKey "LegalTrademark" "OpenERP is a trademark of OpenERP SA."
 #VIAddVersionKey "FileVersion" "${MAJOR_VERSION}.${MINOR_VERSION}.${REVISION_VERSION}"
 #VIProductVersion "${MAJOR_VERSION}.${MINOR_VERSION}.${REVISION_VERSION}"
 
@@ -106,7 +107,7 @@ Var STARTMENU_FOLDER
 
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_FINISHPAGE_LINK $(DESC_FinishPage_Link) 
-!define MUI_FINISHPAGE_LINK_LOCATION "http://www.openerp.com/contact"
+!define MUI_FINISHPAGE_LINK_LOCATION "http://openerp.hellug.gr"
 !insertmacro MUI_PAGE_FINISH
 
 !insertmacro MUI_UNPAGE_WELCOME
@@ -115,17 +116,17 @@ Var STARTMENU_FOLDER
 !insertmacro MUI_UNPAGE_FINISH
 
 !insertmacro MUI_LANGUAGE "English"
-!insertmacro MUI_LANGUAGE "French"
+; !insertmacro MUI_LANGUAGE "French"
 !insertmacro MUI_RESERVEFILE_LANGDLL
 
 !macro CreateInternetShortcut FILENAME URL
 	WriteINIStr "${FILENAME}.url" "InternetShortcut" "URL" "${URL}"
 !macroend
 ; English
-LangString DESC_FinishPage_Link ${LANG_ENGLISH} "Contact OpenERP for Partnership and/or Support"
+LangString DESC_FinishPage_Link ${LANG_ENGLISH} "Thank you for using open source software!"
 
 ; French
-LangString DESC_FinishPage_Link ${LANG_FRENCH} "Contactez OpenERP pour un Partenariat et/ou du Support"
+; LangString DESC_FinishPage_Link ${LANG_FRENCH} "Contactez OpenERP pour un Partenariat et/ou du Support"
 
 Section OpenERP_GTK_Client SectionOpenERP_GTK_Client
     SetOutPath '$INSTDIR'
@@ -156,10 +157,9 @@ Section -Post
     WriteRegDWORD HKLM     "${UNINSTALL_REGISTRY_KEY}" "Version" "${VERSION}"
     WriteRegDWORD HKLM     "${UNINSTALL_REGISTRY_KEY}" "VersionMajor" "${MAJOR_VERSION}.${MINOR_VERSION}"
     WriteRegDWORD HKLM     "${UNINSTALL_REGISTRY_KEY}" "VersionMinor" "${REVISION_VERSION}"
-    WriteRegStr HKLM       "${UNINSTALL_REGISTRY_KEY}" "HelpLink" "support@openerp.com"
-    WriteRegStr HKLM       "${UNINSTALL_REGISTRY_KEY}" "HelpTelephone" "+32.81.81.37.00"
-    WriteRegStr HKLM       "${UNINSTALL_REGISTRY_KEY}" "URLInfoAbout" "http://www.openerp.com"
-    WriteRegStr HKLM       "${UNINSTALL_REGISTRY_KEY}" "Contact" "sales@openerp.com"
+    WriteRegStr HKLM       "${UNINSTALL_REGISTRY_KEY}" "HelpLink" "xrg@hellug.gr"
+    WriteRegStr HKLM       "${UNINSTALL_REGISTRY_KEY}" "URLInfoAbout" "http://openerp.hellug.gr"
+    WriteRegStr HKLM       "${UNINSTALL_REGISTRY_KEY}" "Contact" "xrg@hellug.gr"
     WriteRegDWORD HKLM     "${UNINSTALL_REGISTRY_KEY}" "NoModify" "1"
     WriteRegDWORD HKLM     "${UNINSTALL_REGISTRY_KEY}" "NoRepair" "1"
     WriteUninstaller "$INSTDIR\Uninstall.exe"
