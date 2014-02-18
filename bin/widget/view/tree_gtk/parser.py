@@ -283,8 +283,8 @@ class Char(object):
         model = store.get_value(iter, 0)
         text = self.get_textual_value(model)
         cell.set_property('text', text)
-        if model.value.get('state',False):
-            self.state_set(model, model.value.get('state','draft'))
+        if model.value.get('state', False) and isinstance(model.value['state'], basestring):
+            self.state_set(model, model.value['state'])
         self.attrs_set(model, cell)
         color = self.get_color(model)
         cell.set_property('foreground', str(color))
@@ -376,7 +376,7 @@ class Boolean(Int):
             value =  eval(value.split(' ')[0])
         cell.set_active(bool(value))
         
-        if model.value.get('state',False):
+        if model.value.get('state',False) and isinstance(model.value['state'], basestring):
             self.state_set(model, model.value.get('state','draft'))
         self.attrs_set(model, cell)
         if self.treeview.editable:
