@@ -326,7 +326,7 @@ class one2many_list(interface.widget_interface):
     def _restore_values(self, modified_model_values, group_model):
         for model, value in modified_model_values.iteritems():
             model.set(value, modified=True)
-            for f_name, models in group_model.get(model, {}):
+            for f_name, models in group_model.get(model, {}).items():
                 model.value[f_name].clear()
                 for sub_model in models:
                     # add model in ModelRecordGroup
