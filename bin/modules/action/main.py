@@ -100,6 +100,8 @@ class main(service.Service):
         self._exec_action(res,datas,context)
 
     def _exec_action(self, action, datas, context=None):
+        if isinstance(action, dict) and action.get('warning'):
+            common.warning(action['warning']['message'], action['warning']['title'])
         if isinstance(action, bool) or 'type' not in action:
             return
         if context is None:
