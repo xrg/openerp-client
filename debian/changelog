@@ -1,6 +1,17 @@
-openerp-client (6.0.3~2.gbp19f5e1) UNRELEASED; urgency=low
+openerp-client (6.9.2) testing; urgency=low
 
-  ** SNAPSHOT build @19f5e11ef42a58fd8a8975663ac37fecfd9990bf **
+  * action/main: display warnings, after object methods or actions
+  * model/record: cleanup of type checks
+
+ -- P. Christeas <xrg@linux.gr>  Fri, 28 Nov 2014 21:19:26 +0200
+
+openerp-client (6.0.4) testing; urgency=low
+
+  * model/record: cleanup of type checks
+
+ -- P. Christeas <xrg@linux.gr>  Fri, 28 Nov 2014 21:19:15 +0200
+
+openerp-client (6.0.3) testing; urgency=low
 
   [ P. Christeas ]
   * Remove first line of setup.py that would break shebang.
@@ -127,7 +138,15 @@ openerp-client (6.0.3~2.gbp19f5e1) UNRELEASED; urgency=low
   * debian: fix patches/series, remove source/*
   * debian: fix 'python-support' in control, use git-author for changelog
 
- -- P. Christeas <xrg@linux.gr>  Fri, 16 Dec 2011 19:36:44 +0200
+  [ Vasilis Tsiligiannis ]
+  * debian: Add missing '.' from description
+
+  [ P. Christeas ]
+  * form_gtk/one2many: fix restoring old o2m values
+  * action/main: display warnings, after object methods or actions
+  * model/record: cleanup of type checks
+
+ -- P. Christeas <xrg@linux.gr>  Fri, 28 Nov 2014 21:18:22 +0200
 
 openerp-client (6.0.2-1) testing; urgency=low
 
