@@ -97,33 +97,53 @@ class mysocket:
 from xmlrpclib import Transport,ProtocolError
 
 import httplib
-class HTTP11(httplib.HTTP):
+class HTTPConnection2(httplib.HTTPConnection):
+    _http_vsn = 11
+    _http_vsn_str = 'HTTP/1.1'
+
+    def is_idle(self):
+        return self._HTTPConnection__state == httplib._CS_IDLE
+    
+    def connect(self):
+        httplib.HTTPConnection.connect(self)
+        self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, True)
+
+try:
+    if sys.version_info[0:2] < (2,6):
+        # print "No https for python %d.%d" % sys.version_info[0:2]
+        raise AttributeError()
+
+    import ssl
+    class HTTPSConnection2(httplib.HTTPSConnection):
         _http_vsn = 11
         _http_vsn_str = 'HTTP/1.1'
-        
-        def is_idle(self):
-            return self._conn and self._conn._HTTPConnection__state == httplib._CS_IDLE
-        
-try:
-        if sys.version_info[0:2] < (2,6):
-            # print "No https for python %d.%d" % sys.version_info[0:2]
-            raise AttributeError()
 
-        class HTTPS(httplib.HTTPS):
-            _http_vsn = 11
-            _http_vsn_str = 'HTTP/1.1'
-                
-            def is_idle(self):
-                return self._conn and self._conn._HTTPConnection__state == httplib._CS_IDLE
-                # Still, we have a problem here, because we cannot tell if the connection is
-                # closed.
+        def __init__(self, *args, **kwargs):
+            if sys.version_info[0:3] >= (2,7,9) and kwargs.get('context', None) is None:
+                kwargs['context'] = ssl._create_unverified_context()
+            httplib.HTTPSConnection.__init__(self, *args, **kwargs)
+
+        def is_idle(self):
+            return self._HTTPConnection__state == httplib._CS_IDLE
+            # Still, we have a problem here, because we cannot tell if the connection is
+            # closed.
+
+        def connect(self):
+            try:
+                ret = httplib.HTTPSConnection.connect(self)
+                self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, True)
+                return ret
+            except socket.error, e:
+                if isinstance(e.strerror, str):
+                   e.strerror = ustr(e.strerror)
+                   e.args = map(ustr, e.args)
+                raise
 
 except AttributeError:
     # if not in httplib, define a class that will always fail.
-    class HTTPS():
+    class HTTPSConnection2():
         def __init__(self,*args):
             raise NotImplementedError( "your version of httplib doesn't support HTTPS" )
-        
 
 
 class PersistentTransport(Transport):
@@ -140,7 +160,7 @@ class PersistentTransport(Transport):
         # create a HTTP connection object from a host descriptor
         if not self._http.has_key(host):
             host, extra_headers, x509 = self.get_host_info(host)
-            self._http[host] = HTTP11(host)
+            self._http[host] = HTTPConnection2(host)
             # print "New connection to",host
         if not self._http[host].is_idle():
             # Here, we need to discard a busy or broken connection.
@@ -149,7 +169,7 @@ class PersistentTransport(Transport):
             # collector clear it.
             self._http[host] = None
             host, extra_headers, x509 = self.get_host_info(host)
-            self._http[host] = HTTP11(host)
+            self._http[host] = HTTPConnection2(host)
             # print "New connection to",host
         
         return self._http[host]
@@ -223,7 +243,7 @@ class PersistentTransport(Transport):
 
         resp = None
         try:
-            resp = h._conn.getresponse()
+            resp = h.getresponse()
             # TODO: except BadStatusLine, e:
                 
             errcode, errmsg, headers = resp.status, resp.reason, resp.msg
@@ -233,7 +253,7 @@ class PersistentTransport(Transport):
             self.verbose = verbose
 
             try:
-                sock = h._conn.sock
+                sock = h.sock
             except AttributeError:
                 sock = None
 
@@ -272,9 +292,8 @@ class SafePersistentTransport(PersistentTransport):
         # create a HTTPS connection object from a host descriptor
         # host may be a string, or a (host, x509-dict) tuple
         if not self._http.has_key(host):
-            import httplib
             host, extra_headers, x509 = self.get_host_info(host)
-            self._http[host] = HTTPS(host, None, **(x509 or {}))
+            self._http[host] = HTTPSConnection2(host, None, **(x509 or {}))
         return self._http[host]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

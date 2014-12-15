@@ -298,7 +298,11 @@ class rpc_session(object):
         if _protocol == 'http://' or _protocol == 'https://':
             self.rpcproto = 'xmlrpc'
             _url = _protocol + url+':'+str(port)+'/xmlrpc'
-            _sock = xmlrpclib.ServerProxy(_url+'/common')
+            if _protocol == "https://":
+                transport = tiny_socket.SafePersistentTransport()
+            else:
+                transport = tiny_socket.PersistentTransport()
+            _sock = xmlrpclib.ServerProxy(_url+'/common', transport=transport)
             try:
                 res = _sock.login(db or '', uname or '', passwd or '')
             except socket.error,e:
@@ -394,7 +398,11 @@ class rpc_session(object):
     def exec_no_except(self, url, resource, method, *args):
         m = re_url.match(url or '')
         if m.group(1) == 'http://' or m.group(1) == 'https://':
-            sock = xmlrpclib.ServerProxy(url + '/xmlrpc/' + resource)
+            if m.group(1) == "https://":
+                transport = tiny_socket.SafePersistentTransport()
+            else:
+                transport = tiny_socket.PersistentTransport()
+            sock = xmlrpclib.ServerProxy(url + '/xmlrpc/' + resource, transport=transport)
             return getattr(sock, method)(*args)
         else:
             sock = tiny_socket.mysocket()
