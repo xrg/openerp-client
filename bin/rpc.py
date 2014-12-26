@@ -383,14 +383,14 @@ class rpc_session(object):
             common.warning(err[1].decode(in_encoding),_('Socket error'))
             return -1
         except RuntimeError, err:
-                import locale
-                language, in_encoding = locale.getdefaultlocale()
-                try:
-                        err_string = err[1].decode(in_encoding)
-                except:
-                        err_string = str(err)
-                common.warning(err_string,_('Cannot list db:'))
-                return -1
+            import locale
+            language, in_encoding = locale.getdefaultlocale()
+            try:
+                    err_string = err[1].decode(in_encoding)
+            except:
+                    err_string = str(err)
+            common.warning(err_string,_('Cannot list db:'))
+            return -1
 
     def db_exec_no_except(self, url, method, *args):
         return self.exec_no_except(url, 'db', method, *args)
