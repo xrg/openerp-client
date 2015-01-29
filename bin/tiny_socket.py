@@ -129,6 +129,7 @@ try:
             # closed.
 
         def connect(self):
+            from tools import ustr # must be lazy
             try:
                 ret = httplib.HTTPSConnection.connect(self)
                 self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, True)
