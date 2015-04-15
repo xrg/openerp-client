@@ -21,7 +21,7 @@
 
 from rpc import RPCProxy
 import rpc
-
+from xmlrpclib import Binary
 
 
 try:
@@ -202,6 +202,8 @@ class BinaryField(CharField):
             get_binary_size = False
         model.value[self.name] = None
         name = get_binary_size and self.get_size_name() or self.name
+        if isinstance(value, Binary):
+            value = value.data
         model.value[name] = value
         if (not get_binary_size) and value:
             model.value[self.get_size_name()] = tools.human_size(len(value))
