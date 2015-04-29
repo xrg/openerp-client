@@ -32,10 +32,14 @@ import common
 import tools
 import options
 import logging
+import re
 from widget.view.form_gtk.many2one import dialog
 from lxml import etree
 
+url_re_re = re.compile(r'<(\w+)>')
+
 class main(service.Service):
+
     def __init__(self, name='action.main'):
         service.Service.__init__(self, name)
         kafs = {
@@ -210,11 +214,14 @@ class main(service.Service):
                 win=datas['window']
                 del datas['window']
             if not datas:
-                datas = action.get('datas',[])
+                datas = action.get('datas', {})
             self.exec_report(action['report_name'], datas, context)
 
         elif action['type'] in ('ir.actions.act_url', 'ir.actions.url'):
-            tools.launch_browser(action.get('url',''))
+            if not datas:
+                datas = action.get('datas', {})
+            url = url_re_re.sub(lambda m: str(datas.get(m.group(1), m.group(0))), action.get('url',''))
+            tools.launch_browser(url)
 
     def exec_keyword(self, keyword, data=None, adds=None, context=None, warning=True):
         actions = None
