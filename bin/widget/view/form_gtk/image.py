@@ -178,15 +178,12 @@ class image_wid(interface.widget_interface):
                 log = logging.getLogger('common')
                 log.warning(_('Image corrupted'))
 
-                
-                
-
         pixbuf = None
         for type in ('jpeg', 'gif', 'png', 'bmp'):
             loader = gtk.gdk.PixbufLoader(type)
             try:
                 loader.write(data, len(data))
-            except:
+            except Exception:
                 continue
             pixbuf = loader.get_pixbuf()
             if pixbuf:

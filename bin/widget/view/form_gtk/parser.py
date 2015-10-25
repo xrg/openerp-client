@@ -129,7 +129,6 @@ class Button(Observable):
             self.form.screen.current_view.set_cursor()
 
 
-
 class StateAwareWidget(object):
     def __init__(self, widget, label=None, states=None):
         self.widget = widget
